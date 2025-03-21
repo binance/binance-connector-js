@@ -14,7 +14,7 @@ const Market = superclass => class extends superclass {
    * GET /api/v3/ping<br>
    *
    * Test connectivity to the Rest API.<br>
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#test-connectivity}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#test-connectivity}
    */
   ping () {
     return this.publicRequest('GET', '/api/v3/ping')
@@ -26,11 +26,14 @@ const Market = superclass => class extends superclass {
    * GET /api/v3/time<br>
    *
    * Test connectivity to the Rest API and get the current server time.<br>
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#check-server-time}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#check-server-time}
+   *
+   * @param {object} [options]
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    *
    */
-  time () {
-    return this.publicRequest('GET', '/api/v3/time')
+  time (options = {}) {
+    return this.publicRequest('GET', '/api/v3/time', options)
   }
 
   /**
@@ -39,11 +42,12 @@ const Market = superclass => class extends superclass {
    * GET /api/v3/exchangeInfo<br>
    *
    * Current exchange trading rules and symbol information<br>
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#exchange-information}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#exchange-information}
    *
    * @param {object} [options]
    * @param {string} [options.symbol] - symbol
    * @param {Array} [options.symbols] - an array of symbols
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    *
    */
   exchangeInfo (options = {}) {
@@ -65,7 +69,7 @@ const Market = superclass => class extends superclass {
    *
    * GET /api/v3/depth<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#order-book}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#order-book}
    *
    * @param {string} symbol
    * @param {object} [options]
@@ -90,11 +94,12 @@ const Market = superclass => class extends superclass {
    * GET /api/v3/trades<br>
    *
    * Get recent trades.<br>
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#recent-trades-list}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#recent-trades-list}
    *
    * @param {string} symbol
    * @param {object} [options]
    * @param {number} [options.limit] - Default 500; max 1000.
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
   trades (symbol, options = {}) {
     validateRequiredParameters({ symbol })
@@ -114,12 +119,13 @@ const Market = superclass => class extends superclass {
    * GET /api/v3/historicalTrades<br>
    *
    * Get older market trades.<br>
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#old-trade-lookup}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#old-trade-lookup}
    *
    * @param {string} symbol
    * @param {object} [options]
    * @param {number} [options.limit] - Default 500; max 1000.
    * @param {number} [options.fromId] - Trade id to fetch from. Default gets most recent trades.
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
   historicalTrades (symbol, options = {}) {
     validateRequiredParameters({ symbol })
@@ -138,7 +144,7 @@ const Market = superclass => class extends superclass {
    *
    * GET /api/v3/aggTrades<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#compressed-aggregate-trades-list}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#compressedaggregate-trades-list}
    *
    * @param {string} symbol
    * @param {object} [options]
@@ -146,6 +152,7 @@ const Market = superclass => class extends superclass {
    * @param {number} [options.startTime]
    * @param {number} [options.endTime]
    * @param {number} [options.limit] - Default 500; max 1000.
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
   aggTrades (symbol, options = {}) {
     validateRequiredParameters({ symbol })
@@ -164,7 +171,7 @@ const Market = superclass => class extends superclass {
    *
    * GET /api/v3/klines<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#kline-candlestick-data}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#klinecandlestick-data}
    *
    * @param {string} symbol
    * @param {string} interval
@@ -172,6 +179,7 @@ const Market = superclass => class extends superclass {
    * @param {number} [options.startTime]
    * @param {number} [options.endTime]
    * @param {number} [options.limit] - Default 500; max 1000.
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
   klines (symbol, interval, options = {}) {
     validateRequiredParameters({ symbol, interval })
@@ -190,7 +198,7 @@ const Market = superclass => class extends superclass {
    *
    * GET /api/v3/uiKlines<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#uiklines}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#uiklines}
    *
    * @param {string} symbol
    * @param {string} interval
@@ -198,6 +206,7 @@ const Market = superclass => class extends superclass {
    * @param {number} [options.startTime]
    * @param {number} [options.endTime]
    * @param {number} [options.limit] - Default 500; max 1000.
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
   uiklines (symbol, interval, options = {}) {
     validateRequiredParameters({ symbol, interval })
@@ -217,16 +226,21 @@ const Market = superclass => class extends superclass {
    * GET /api/v3/avgPrice<br>
    *
    * Current average price for a symbol.<br>
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#current-average-price}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#current-average-price}
    *
    * @param {string} symbol
+   * @param {object} [options]
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
-  avgPrice (symbol) {
+  avgPrice (symbol, options = {}) {
     validateRequiredParameters({ symbol })
 
     return this.publicRequest(
       'GET',
-      '/api/v3/avgPrice', { symbol: symbol.toUpperCase() }
+      '/api/v3/avgPrice',
+      Object.assign(options, {
+        symbol: symbol.toUpperCase()
+      })
     )
   }
 
@@ -235,18 +249,25 @@ const Market = superclass => class extends superclass {
    *
    * GET /api/v3/ticker/24hr<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#24hr-ticker-price-change-statistics}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#24hr-ticker-price-change-statistics}
    *
    * @param {string} [symbol]
    * @param {Array} [symbols] - an array of symbols
    * @param {string} [type] - "MINI" or "FULL"
+   * @param {object} [options]
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
-  ticker24hr (symbol = '', symbols = [], type = 'FULL') {
+  ticker24hr (symbol = '', symbols = [], type = 'FULL', options = {}) {
     symbols = symbols.map(symbol => symbol.toUpperCase())
 
     return this.publicRequest(
       'GET',
-      '/api/v3/ticker/24hr', { symbol: symbol.toUpperCase(), symbols, type }
+      '/api/v3/ticker/24hr',
+      Object.assign(options, {
+        symbol: symbol.toUpperCase(),
+        symbols,
+        type
+      })
     )
   }
 
@@ -255,17 +276,21 @@ const Market = superclass => class extends superclass {
    *
    * GET /api/v3/ticker/price<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#symbol-price-ticker}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-price-ticker}
    *
    * @param {string} [symbol]
    * @param {Array} [symbols] - an array of symbols
   */
-  tickerPrice (symbol = '', symbols = []) {
+  tickerPrice (symbol = '', symbols = [], options = {}) {
     symbols = symbols.map(symbol => symbol.toUpperCase())
 
     return this.publicRequest(
       'GET',
-      '/api/v3/ticker/price', { symbol: symbol.toUpperCase(), symbols }
+      '/api/v3/ticker/price',
+      Object.assign(options, {
+        symbol: symbol.toUpperCase(),
+        symbols
+      })
     )
   }
 
@@ -275,7 +300,7 @@ const Market = superclass => class extends superclass {
    * GET /api/v3/ticker/bookTicker<br>
    *
    * Best price/qty on the order book for a symbol or symbols.<br>
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#symbol-order-book-ticker}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-order-book-ticker}
    *
    * @param {string} [symbol]
    * @param {Array} [symbols] - an array of symbols
@@ -285,7 +310,11 @@ const Market = superclass => class extends superclass {
 
     return this.publicRequest(
       'GET',
-      '/api/v3/ticker/bookTicker', { symbol: symbol.toUpperCase(), symbols }
+      '/api/v3/ticker/bookTicker',
+      {
+        symbol: symbol.toUpperCase(),
+        symbols
+      }
     )
   }
 
@@ -304,13 +333,14 @@ const Market = superclass => class extends superclass {
    *
    * The weight for this request will cap at 100 once the number of symbols in the request is more than 50.<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#rolling-window-price-change-statistics}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#rolling-window-price-change-statistics}
    *
    * @param {string} [symbol]
    * @param {Array} [symbols] - an array of symbols
    * @param {object} [options]
    * @param {string} [options.type] Supported values: FULL or MINI.
    * @param {number} [options.windowSize] - Defaults to 1d if no parameter provided.
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
   */
   rollingWindowTicker (symbol = '', symbols = [], options = {}) {
     symbols = symbols.map(symbol => symbol.toUpperCase())

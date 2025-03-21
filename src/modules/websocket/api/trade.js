@@ -11,7 +11,7 @@ const Trade = superclass => class extends superclass {
    *
    * Send in a new order.<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/websocket_api/en/#place-new-order-trade}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#place-new-order-trade}
    *
    * @param {string} symbol
    * @param {string} side
@@ -46,7 +46,7 @@ const Trade = superclass => class extends superclass {
    *
    * Test a new order.<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/websocket_api/en/#test-new-order-trade}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#test-new-order-trade}
    *
    * @param {string} symbol
    * @param {string} side
@@ -81,7 +81,7 @@ const Trade = superclass => class extends superclass {
    *
    * Check execution status of an order.<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/websocket_api/en/#query-order-user_data}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#query-order-user_data}
    *
    * @param {string} symbol
    * @param {object} [options]
@@ -102,7 +102,7 @@ const Trade = superclass => class extends superclass {
    *
    * Cancel an active order.<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/websocket_api/en/#cancel-order-trade}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#cancel-order-trade}
    *
    * @param {string} symbol
    * @param {object} [options]
@@ -124,7 +124,7 @@ const Trade = superclass => class extends superclass {
    *
    * Cancel an existing order and immediately place a new order instead of the canceled one.<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/websocket_api/en/#cancel-and-replace-order-trade}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#cancel-and-replace-order-trade}
    *
    * @param {string} symbol
    * @param {string} cancelReplaceMode
@@ -165,7 +165,7 @@ const Trade = superclass => class extends superclass {
    *
    * Query execution status of all open orders.<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/websocket_api/en/#current-open-orders-user_data}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#current-open-orders-user_data}
    *
    * @param {string} symbol
    * @param {object} [options]
@@ -184,7 +184,7 @@ const Trade = superclass => class extends superclass {
    *
    * Cancel all open orders on a symbol, including OCO orders.<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/websocket_api/en/#cancel-open-orders-trade}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#cancel-open-orders-trade}
    *
    * @param {string} symbol
    * @param {object} [options]
@@ -199,41 +199,47 @@ const Trade = superclass => class extends superclass {
   }
 
   /**
-   * Place new OCO< br>
+   * Place new Order list< br>
    *
    * Send in a new OCO order.<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/websocket_api/en/#place-new-oco-trade}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#place-new-order-list---oco-trade}
    *
    * @param {string} symbol
    * @param {string} side
-   * @param {number} price
    * @param {number} quantity
+   * @param {string} aboveType
+   * @param {string} belowType
    * @param {object} [options]
    * @param {string} [options.listClientOrderId]
-   * @param {string} [options.limitClientOrderId]
-   * @param {number} [options.limitIcebergQty]
-   * @param {number} [options.limitStrategyId]
-   * @param {number} [options.limitStrategyType]
-   * @param {number} [options.stopPrice]
-   * @param {number} [options.trailingDelta]
-   * @param {number} [options.stopClientOrderId]
-   * @param {number} [options.stopLimitPrice]
-   * @param {string} [options.stopLimitTimeInForce]
-   * @param {number} [options.stopIcebergQty]
-   * @param {number} [options.stopStrategyId]
-   * @param {string} [options.stopStrategyType]
-   * @param {number} [options.newOrderRespType]
-   * @param {number} [options.selfTradePreventionMode]
-   * @param {number} [options.recvWindow]
+   * @param {string} [options.aboveClientOrderId]
+   * @param {number} [options.aboveIcebergQty]
+   * @param {number} [options.abovePrice]
+   * @param {number} [options.aboveStopPrice]
+   * @param {number} [options.aboveTrailingDelta]
+   * @param {number} [options.aboveTimeInForce]
+   * @param {number} [options.aboveStrategyId]
+   * @param {number} [options.aboveStrategyType]
+   * @param {string} [options.belowClientOrderId]
+   * @param {number} [options.belowIcebergQty]
+   * @param {number} [options.belowPrice]
+   * @param {number} [options.belowStopPrice]
+   * @param {number} [options.belowTrailingDelta]
+   * @param {string} [options.belowTimeInForce]
+   * @param {number} [options.belowStrategyId]
+   * @param {number} [options.belowStrategyType]
+   * @param {string} [options.newOrderRespType]
+   * @param {string} [options.selfTradePreventionMode]
+   * @param {number} [options.recvWindow] - The value cannot be greater than 60000
    *
    */
-  newOCOOrder (symbol, side, price, quantity, options = {}) {
-    this.sendSignatureMessage('orderList.place', {
+  newOCOOrder (symbol, side, quantity, aboveType, belowType, options = {}) {
+    this.sendSignatureMessage('orderList.place.oco', {
       symbol,
       side,
-      price,
       quantity,
+      aboveType,
+      belowType,
       ...options
     })
   }
@@ -243,7 +249,7 @@ const Trade = superclass => class extends superclass {
    *
    * Check execution status of an OCO.<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/websocket_api/en/#query-oco-user_data}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#query-order-list-user_data}
    *
    * @param {object} [options]
    * @param {string} [options.origClientOrderId]
@@ -260,7 +266,7 @@ const Trade = superclass => class extends superclass {
    *
    * Check execution status of an OCO.<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/websocket_api/en/#cancel-oco-trade}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#cancel-order-list-trade}
    *
    * @param {string} symbol
    * @param {object} [options]
@@ -282,7 +288,7 @@ const Trade = superclass => class extends superclass {
    *
    * Query execution status of all open OCOs.<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/websocket_api/en/#current-open-ocos-user_data}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#current-open-order-lists-user_data}
    *
    * @param {object} [options]
    * @param {number} [options.recvWindow]

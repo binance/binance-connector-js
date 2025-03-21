@@ -13,7 +13,7 @@ const Trade = superclass => class extends superclass {
    *
    * POST /api/v3/order/test<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#test-new-order-trade}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#test-new-order-trade}
    *
    * @param {string} symbol
    * @param {string} side
@@ -32,6 +32,7 @@ const Trade = superclass => class extends superclass {
    * @param {string} [options.newOrderRespType] - Set the response JSON. ACK, RESULT, or FULL;
    *    MARKET and LIMIT order types default to FULL, all other orders default to ACK.
    * @param {number} [options.recvWindow] - The value cannot be greater than 60000
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
   newOrderTest (symbol, side, type, options = {}) {
     validateRequiredParameters({ symbol, side, type })
@@ -52,7 +53,7 @@ const Trade = superclass => class extends superclass {
    *
    * POST /api/v3/order<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#new-order-trade}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-order-trade}
    *
    * @param {string} symbol
    * @param {string} side
@@ -70,6 +71,7 @@ const Trade = superclass => class extends superclass {
    * @param {number} [options.icebergQty]
    * @param {string} [options.newOrderRespType]
    * @param {number} [options.recvWindow] - The value cannot be greater than 60000
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
   newOrder (symbol, side, type, options = {}) {
     validateRequiredParameters({ symbol, side, type })
@@ -90,7 +92,7 @@ const Trade = superclass => class extends superclass {
    *
    * DELETE /api/v3/order<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#cancel-order-trade}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#cancel-order-trade}
    *
    * @param {string} symbol
    * @param {object} [options]
@@ -98,6 +100,7 @@ const Trade = superclass => class extends superclass {
    * @param {string} [options.origClientOrderId]
    * @param {string} [options.newClientOrderId]
    * @param {number} [options.recvWindow] - The value cannot be greater than 60000
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
   cancelOrder (symbol, options = {}) {
     validateRequiredParameters({ symbol })
@@ -116,10 +119,11 @@ const Trade = superclass => class extends superclass {
    *
    * DELETE /api/v3/openOrders<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#cancel-all-open-orders-on-a-symbol-trade}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#cancel-all-open-orders-on-a-symbol-trade}
    * @param {string} symbol
    * @param {object} [options]
    * @param {number} [options.recvWindow] - The value cannot be greater than 60000
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
   cancelOpenOrders (symbol, options = {}) {
     validateRequiredParameters({ symbol })
@@ -138,13 +142,14 @@ const Trade = superclass => class extends superclass {
    *
    * GET /api/v3/order<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#query-order-user_data}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#query-order-user_data}
    *
    * @param {string} symbol
    * @param {object} [options]
    * @param {number} [options.orderId]
    * @param {string} [options.origClientOrderId]
    * @param {number} [options.recvWindow] - The value cannot be greater than 60000
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
   getOrder (symbol, options = {}) {
     validateRequiredParameters({ symbol })
@@ -168,7 +173,7 @@ const Trade = superclass => class extends superclass {
    *
    * POST /api/v3/order/cancelReplace<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#cancel-an-existing-order-and-send-a-new-order-trade}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#cancel-an-existing-order-and-send-a-new-order-trade}
    *
    * @param {string} symbol
    * @param {string} side
@@ -190,6 +195,7 @@ const Trade = superclass => class extends superclass {
    * @param {number} [options.icebergQty]
    * @param {string} [options.newOrderRespType]
    * @param {number} [options.recvWindow] - The value cannot be greater than 60000
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
   cancelAndReplace (symbol, side, type, cancelReplaceMode, options = {}) {
     validateRequiredParameters({ symbol, side, type, cancelReplaceMode })
@@ -211,11 +217,12 @@ const Trade = superclass => class extends superclass {
    *
    * GET /api/v3/openOrders<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#current-open-orders-user_data}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#current-open-orders-user_data}
    *
    * @param {object} [options]
    * @param {string} [options.symbol]
    * @param {number} [options.recvWindow] - The value cannot be greater than 60000
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
   openOrders (options = {}) {
     return this.signRequest(
@@ -230,7 +237,7 @@ const Trade = superclass => class extends superclass {
    *
    * GET /api/v3/allOrders<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#all-orders-user_data}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#all-orders-user_data}
    *
    * @param {string} symbol
    * @param {object} [options]
@@ -239,6 +246,7 @@ const Trade = superclass => class extends superclass {
    * @param {number} [options.endTime]
    * @param {number} [options.limit]
    * @param {string} [options.recvWindow] - The value cannot be greater than 60000
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
   allOrders (symbol, options = {}) {
     validateRequiredParameters({ symbol })
@@ -252,45 +260,52 @@ const Trade = superclass => class extends superclass {
   }
 
   /**
-   * New OCO (TRADE)<br>
+   * New Order List - OCO (TRADE)<br>
    *
-   * POST /api/v3/order/oco<br>
+   * POST /api/v3/orderList/oco<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#new-oco-trade}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-order-list---oco-trade}
    *
    * @param {string} symbol
    * @param {string} side
    * @param {number} quantity
-   * @param {number} price
-   * @param {number} stopPrice
+   * @param {string} aboveType
+   * @param {string} belowType
    * @param {object} [options]
    * @param {string} [options.listClientOrderId]
-   * @param {string} [options.limitClientOrderId]
-   * @param {number} [options.limitStrategyId]
-   * @param {number} [options.limitStrategytype] - The value cannot be less than 1000000.
-   * @param {number} [options.limitIcebergQty]
-   * @param {number} [options.trailingDelta]
-   * @param {string} [options.stopClientOrderId]
-   * @param {number} [options.stopStrategyId]
-   * @param {number} [options.stopStrategytype] - The value cannot be less than 1000000.
-   * @param {number} [options.stopLimitPrice]
-   * @param {number} [options.stopIcebergQty]
-   * @param {string} [options.stopLimitTimeInForce]
+   * @param {string} [options.aboveClientOrderId]
+   * @param {number} [options.aboveIcebergQty]
+   * @param {number} [options.abovePrice]
+   * @param {number} [options.aboveStopPrice]
+   * @param {number} [options.aboveTrailingDelta]
+   * @param {number} [options.aboveTimeInForce]
+   * @param {number} [options.aboveStrategyId]
+   * @param {number} [options.aboveStrategyType]
+   * @param {string} [options.belowClientOrderId]
+   * @param {number} [options.belowIcebergQty]
+   * @param {number} [options.belowPrice]
+   * @param {number} [options.belowStopPrice]
+   * @param {number} [options.belowTrailingDelta]
+   * @param {string} [options.belowTimeInForce]
+   * @param {number} [options.belowStrategyId]
+   * @param {number} [options.belowStrategyType]
    * @param {string} [options.newOrderRespType]
+   * @param {string} [options.selfTradePreventionMode]
    * @param {number} [options.recvWindow] - The value cannot be greater than 60000
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
-  newOCOOrder (symbol, side, quantity, price, stopPrice, options = {}) {
-    validateRequiredParameters({ symbol, side, quantity, price, stopPrice })
+  newOCOOrder (symbol, side, quantity, aboveType, belowType, options = {}) {
+    validateRequiredParameters({ symbol, side, quantity, aboveType, belowType })
 
     return this.signRequest(
       'POST',
-      '/api/v3/order/oco',
+      '/api/v3/orderList/oco',
       Object.assign(options, {
         symbol: symbol.toUpperCase(),
         side: side.toUpperCase(),
         quantity,
-        price,
-        stopPrice
+        aboveType,
+        belowType
       })
     )
   }
@@ -300,7 +315,7 @@ const Trade = superclass => class extends superclass {
    *
    * DELETE /api/v3/orderList<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#cancel-oco-trade}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#cancel-order-list-trade}
    *
    * @param {string} symbol
    * @param {object} [options]
@@ -308,6 +323,7 @@ const Trade = superclass => class extends superclass {
    * @param {string} [options.listClientOrderId]
    * @param {string} [options.newClientOrderId]
    * @param {number} [options.recvWindow] - The value cannot be greater than 60000
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
   cancelOCOOrder (symbol, options = {}) {
     validateRequiredParameters({ symbol })
@@ -326,12 +342,13 @@ const Trade = superclass => class extends superclass {
    *
    * GET /api/v3/orderList<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#query-oco-user_data}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#query-order-list-user_data}
    *
    * @param {object} [options]
    * @param {number} [options.orderListId]
    * @param {string} [options.origClientOrderId]
    * @param {number} [options.recvWindow] - The value cannot be greater than 60000
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
   getOCOOrder (options = {}) {
     return this.signRequest(
@@ -346,7 +363,7 @@ const Trade = superclass => class extends superclass {
    *
    * GET /api/v3/allOrderList<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#query-all-oco-user_data}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#query-all-order-lists-user_data}
    *
    * @param {object} [options]
    * @param {number} [options.fromId]
@@ -354,6 +371,7 @@ const Trade = superclass => class extends superclass {
    * @param {number} [options.endTime]
    * @param {number} [options.limit]
    * @param {number} [options.recvWindow] - The value cannot be greater than 60000
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
   getOCOOrders (options = {}) {
     return this.signRequest(
@@ -368,10 +386,11 @@ const Trade = superclass => class extends superclass {
    *
    * GET /api/v3/openOrderList<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#query-open-oco-user_data}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#query-open-order-lists-user_data}
    *
    * @param {object} [options]
    * @param {number} [options.recvWindow] - The value cannot be greater than 60000
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
   getOpenOCOOrders (options = {}) {
     return this.signRequest(
@@ -386,10 +405,11 @@ const Trade = superclass => class extends superclass {
    *
    * GET /api/v3/account<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#account-information-user_data}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#account-information-user_data}
    *
    * @param {object} [options]
    * @param {number} [options.recvWindow] - The value cannot be greater than 60000
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
   account (options = {}) {
     return this.signRequest(
@@ -404,7 +424,7 @@ const Trade = superclass => class extends superclass {
    *
    * GET /api/v3/myTrades<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#account-trade-list-user_data}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#account-trade-list-user_data}
    *
    * @param {string} symbol
    * @param {object} [options]
@@ -414,6 +434,7 @@ const Trade = superclass => class extends superclass {
    * @param {number} [options.fromId]
    * @param {number} [options.limit]
    * @param {number} [options.recvWindow] - The value cannot be greater than 60000
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
   myTrades (symbol, options = {}) {
     validateRequiredParameters({ symbol })
@@ -432,10 +453,11 @@ const Trade = superclass => class extends superclass {
    *
    * GET /api/v3/rateLimit/order<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#query-current-order-count-usage-trade}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-unfilled-order-count-user_data}
    *
    * @param {object} [options]
    * @param {number} [options.recvWindow] - The value cannot be greater than 60000
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
   orderCount (options = {}) {
     return this.signRequest(

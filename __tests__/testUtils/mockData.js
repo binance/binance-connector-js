@@ -1,11 +1,15 @@
+const TimeUnit = require('../../src/helpers/timeUnit')
+
 const mockResponse = {
   key: 'value', foo: 'bar'
 }
 
 module.exports = {
   mockResponse,
+  aboveType: 'LIMIT_MAKER',
   amount: 10,
   asset: 'BNB',
+  belowType: 'STOP_LOSS_LIMIT',
   coin: 'BNB',
   collateralCoin: 'BUSD',
   email: 'alice@test.com',
@@ -26,5 +30,6 @@ module.exports = {
   status: 'enabled',
   stopPrice: 1001.02,
   symbol: 'BNBUSDT',
+  timeUnit: TimeUnit.MICROSECOND,
   type: 'LIMIT'
 }

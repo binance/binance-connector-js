@@ -1,5 +1,72 @@
 # Changelog
 
+## 3.6.1 - 2025-01-08
+
+### Changed
+- Updated documentation links.
+
+## 3.6.0 - 2024-12-19
+
+### Added
+- A new optional parameter `timeUnit` can be used to select the time unit. Available options are `MILLISECOND`, `MICROSECOND`, `millisecond` and `microsecond`.
+
+### Changed
+- Use signed requests for the following endpoints:
+  - `POST /sapi/v1/lending/auto-invest/plan/edit-status`
+  - `GET /sapi/v1/lending/auto-invest/plan/list`
+  - `GET /sapi/v1/lending/auto-invest/plan/id`
+  - `GET /sapi/v1/lending/auto-invest/history/list`
+
+## 3.5.0 - 2024-10-02
+### Added
+- Add GiftCard endpoint:
+  - `POST /sapi/v1/giftcard/buyCode` to create a dual-token gift card
+
+### Changed
+- Updated dependencies
+- Updated endpoint `/sapi/v1/sub-account/subAccountApi/ipRestriction` to `/sapi/v2/sub-account/subAccountApi/ipRestriction`
+
+### Removed
+- Deprecated Margin endpoints:
+  - `POST /sapi/v1/margin/transfer`
+  - `POST /sapi/v1/margin/isolated/transfer`
+  - `POST /sapi/v1/margin/loan`
+  - `POST /sapi/v1/margin/repay`
+  - `GET /sapi/v1/margin/isolated/transfer`
+  - `GET /sapi/v1/margin/asset`
+  - `GET /sapi/v1/margin/pair`
+  - `GET /sapi/v1/margin/isolated/pair`
+  - `GET /sapi/v1/margin/loan`
+  - `GET /sapi/v1/margin/repay`
+  - `GET /sapi/v1/margin/dribblet`
+  - `GET /sapi/v1/margin/dust`
+  - `POST /sapi/v1/margin/dust`
+
+- Deprecated Sub-Account endpoints:
+  - `POST /sapi/v1/sub-account/subAccountApi/ipRestriction/ipList`
+
+- Deprecated Futures endpoints:
+  - `POST /sapi/v1/futures/transfer`
+  - `GET /sapi/v1/futures/transfer`
+
+- BLVT endpoints:
+  - `GET /sapi/v1/blvt/tokenInfo`
+  - `POST /sapi/v1/blvt/subscribe`
+  - `GET /sapi/v1/blvt/subscribe/record`
+  - `POST /sapi/v1/blvt/redeem`
+  - `GET /sapi/v1/blvt/redeem/record`
+
+## 3.4.1 - 2024-08-19
+### Updated
+- Updated dependencies
+- Upgraded deprecated spot endpoint `POST /api/v3/order/oco` to `POST /api/v3/orderList/oco`
+- Upgraded deprecated Websocket API endpoint `orderList.place` to `orderList.place.oco`
+
+## 3.4.0 - 2024-06-19
+### Changed
+- Updated dependencies
+- Resolved multiple websocket stream request issue
+
 ## 3.3.0 - 2024-04-04
 
 ### Added

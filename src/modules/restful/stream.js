@@ -13,12 +13,16 @@ const Stream = superclass => class extends superclass {
    *
    * POST /api/v3/userDataStream<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#listen-key-spot}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/user-data-stream#create-a-listenkey-user_stream}
+   *
+   * @param {object} [options]
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
-  createListenKey () {
+  createListenKey (options = {}) {
     return this.publicRequest(
       'POST',
-      '/api/v3/userDataStream'
+      '/api/v3/userDataStream',
+      options
     )
   }
 
@@ -27,16 +31,20 @@ const Stream = superclass => class extends superclass {
    *
    * PUT /api/v3/userDataStream<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#listen-key-spot}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/user-data-stream#pingkeep-alive-a-listenkey-user_stream}
    *
    * @param {string} listenKey
+   * @param {object} [options]
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
-  renewListenKey (listenKey) {
+  renewListenKey (listenKey, options = {}) {
     validateRequiredParameters({ listenKey })
     return this.publicRequest(
       'PUT',
       '/api/v3/userDataStream',
-      { listenKey }
+      Object.assign(options, {
+        listenKey
+      })
     )
   }
 
@@ -45,16 +53,20 @@ const Stream = superclass => class extends superclass {
    *
    * DELETE /api/v3/userDataStream<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#listen-key-spot}
+   * {@link https://developers.binance.com/docs/binance-spot-api-docs/user-data-stream#close-a-listenkey-user_stream}
    *
    * @param {string} listenKey
+   * @param {object} [options]
+   * @param {string} [options.timeUnit] - The preferred time unit for time and timestamp fields. It can be either 'MILLISECOND' or 'MICROSECOND'
    */
-  closeListenKey (listenKey) {
+  closeListenKey (listenKey, options = {}) {
     validateRequiredParameters({ listenKey })
     return this.publicRequest(
       'DELETE',
       '/api/v3/userDataStream',
-      { listenKey }
+      Object.assign(options, {
+        listenKey
+      })
     )
   }
 
@@ -63,7 +75,7 @@ const Stream = superclass => class extends superclass {
    *
    * POST /sapi/v1/userDataStream<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#listen-key-margin}
+   * {@link https://developers.binance.com/docs/margin_trading/trade-data-stream/Start-Margin-User-Data-Stream}
    *
    */
   createMarginListenKey () {
@@ -78,7 +90,7 @@ const Stream = superclass => class extends superclass {
    *
    * PUT /sapi/v1/userDataStream<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#listen-key-margin}
+   * {@link https://developers.binance.com/docs/margin_trading/trade-data-stream/Keepalive-Margin-User-Data-Stream}
    *
    * @param {string} listenKey
    */
@@ -96,7 +108,7 @@ const Stream = superclass => class extends superclass {
    *
    * DELETE /sapi/v1/userDataStream<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#listen-key-margin}
+   * {@link https://developers.binance.com/docs/margin_trading/trade-data-stream/Close-Margin-User-Data-Stream}
    *
    * @param {string} listenKey
    */
@@ -114,7 +126,7 @@ const Stream = superclass => class extends superclass {
    *
    * POST /sapi/v1/userDataStream/isolated<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#listen-key-isolated-margin}
+   * {@link https://developers.binance.com/docs/margin_trading/trade-data-stream/Start-Isolated-Margin-User-Data-Stream}
    *
    * @param {string} symbol
    */
@@ -132,7 +144,7 @@ const Stream = superclass => class extends superclass {
    *
    * PUT /sapi/v1/userDataStream/isolated<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#listen-key-isolated-margin}
+   * {@link https://developers.binance.com/docs/margin_trading/trade-data-stream/Keepalive-Isolated-Margin-User-Data-Stream}
    *
    * @param {string} symbol
    * @param {string} listenKey
@@ -151,7 +163,7 @@ const Stream = superclass => class extends superclass {
    *
    * DELETE /sapi/v1/userDataStream/isolated<br>
    *
-   * {@link https://binance-docs.github.io/apidocs/spot/en/#listen-key-isolated-margin}
+   * {@link https://developers.binance.com/docs/margin_trading/trade-data-stream/Close-Isolated-Margin-User-Data-Stream}
    *
    * @param {string} symbol
    * @param {string} listenKey
