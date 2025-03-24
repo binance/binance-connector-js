@@ -1,0 +1,32 @@
+{
+    "name": "@binance/types",
+    "description": "Shared types for Binance connectors",
+    "version": "1.0.0",
+    "types": "./dist/index.d.ts",
+    "scripts": {
+        "prepublishOnly": "npm run build",
+        "build": "tsup",
+        "clean": "rm -rf dist"
+    },
+    "keywords": [
+        "Binance",
+        "API",
+        "Connector",
+        "REST",
+        "Trading"
+    ],
+    "author": "Binance",
+    "license": "MIT",
+    "files": [
+        "dist"
+    ],
+    "devDependencies": {
+        "@types/node": "^20.17.24",
+        "ts-node": "^10.9.1",
+        "tsup": "^7.2.0",
+        "typescript": "^5.7.2"
+    },
+    "dependencies": {
+        "@binance/common": "file:../binance-common-1.0.0.tgz"
+    }
+}

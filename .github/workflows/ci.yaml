@@ -1,0 +1,99 @@
+name: Connectors CI/CD
+
+on:
+  pull_request:
+
+jobs:
+  detect-targets:
+    runs-on: ubuntu-latest
+    outputs:
+      modified_targets: ${{ steps.filter.outputs.modified_targets }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2 
+
+      - name: Detect changed clients and common
+        id: filter
+        run: |
+          MODIFIED_TARGETS=()
+
+          # Ensure HEAD^ exists
+          if git rev-parse --verify HEAD^ >/dev/null 2>&1; then
+            BASE_COMMIT="HEAD^"
+          else
+            BASE_COMMIT=$(git rev-list --max-parents=0 HEAD) # First commit
+          fi
+
+          # Check common directory
+          if ! git diff --quiet "$BASE_COMMIT" HEAD -- "common"; then
+            echo "Changes detected in common"
+            MODIFIED_TARGETS+=("common")
+          fi
+
+          # Check each client dynamically
+          for client in clients/*; do
+            CLIENT_NAME=$(basename "$client")
+            if ! git diff --quiet "$BASE_COMMIT" HEAD -- "$client"; then
+              echo "Changes detected in $CLIENT_NAME"
+              MODIFIED_TARGETS+=("$CLIENT_NAME")
+            fi
+          done
+
+          # Convert to JSON array format
+          MODIFIED_TARGETS_JSON=$(printf '%s\n' "${MODIFIED_TARGETS[@]}" | jq -R -s -c 'split("\n") | map(select(. != ""))')
+
+          echo "Detected modified targets: $MODIFIED_TARGETS_JSON"
+          echo "modified_targets=$MODIFIED_TARGETS_JSON" >> $GITHUB_ENV
+          echo "::set-output name=modified_targets::$MODIFIED_TARGETS_JSON"
+
+  build-target:
+    needs: detect-targets
+    if: ${{ needs.detect-targets.outputs.modified_targets != '[]' }}
+    strategy:
+      matrix:
+        target: ${{ fromJson(needs.detect-targets.outputs.modified_targets) }}
+        node-version: [22.x]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Check if this target was modified
+        id: check-target
+        run: |
+          if echo "${{ needs.detect-targets.outputs.modified_targets }}" | grep -q "${{ matrix.target }}"; then
+            echo "SHOULD_RUN=true" >> $GITHUB_ENV
+          else
+            echo "SHOULD_RUN=false" >> $GITHUB_ENV
+          fi
+
+      - name: Build target
+        if: env.SHOULD_RUN == 'true'
+        run: |
+          if [ "${{ matrix.target }}" == "common" ]; then
+            cd common
+          else
+            cd clients/${{ matrix.target }}
+          fi
+
+          # Install dependencies
+          npm install
+
+          # Format
+          npm run format
+
+          # Lint
+          npm run lint
+
+          # Test
+          npm run test
+
+          # Build
+          npm run build
