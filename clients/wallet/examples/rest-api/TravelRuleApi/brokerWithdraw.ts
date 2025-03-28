@@ -7,24 +7,27 @@ const configurationRestAPI = {
 };
 const client = new Wallet({ configurationRestAPI });
 
-async function submitDepositQuestionnaire() {
+async function brokerWithdraw() {
     try {
-        const response = await client.restAPI.submitDepositQuestionnaire({
+        const response = await client.restAPI.brokerWithdraw({
             subAccountId: '1',
-            depositId: '1',
+            address: 'address_example',
+            coin: 'coin_example',
+            amount: 1,
+            withdrawOrderId: '1',
             questionnaire: 'questionnaire_example',
-            beneficiaryPii: 'beneficiaryPii_example',
+            originatorPii: 'originatorPii_example',
             signature: 'signature_example',
         });
 
         const rateLimits = response.rateLimits!;
-        console.log('submitDepositQuestionnaire() rate limits:', rateLimits);
+        console.log('brokerWithdraw() rate limits:', rateLimits);
 
         const data = await response.data();
-        console.log('submitDepositQuestionnaire() response:', data);
+        console.log('brokerWithdraw() response:', data);
     } catch (error) {
-        console.error('submitDepositQuestionnaire() error:', error);
+        console.error('brokerWithdraw() error:', error);
     }
 }
 
-submitDepositQuestionnaire();
+brokerWithdraw();

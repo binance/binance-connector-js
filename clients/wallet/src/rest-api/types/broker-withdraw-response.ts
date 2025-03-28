@@ -16,25 +16,25 @@
 /**
  *
  * @export
- * @interface WithdrawTravelRuleResponse
+ * @interface BrokerWithdrawResponse
  */
-export interface WithdrawTravelRuleResponse {
+export interface BrokerWithdrawResponse {
     /**
      *
      * @type {number}
-     * @memberof WithdrawTravelRuleResponse
+     * @memberof BrokerWithdrawResponse
      */
     trId?: number;
     /**
      *
      * @type {boolean}
-     * @memberof WithdrawTravelRuleResponse
+     * @memberof BrokerWithdrawResponse
      */
     accpted?: boolean;
     /**
      *
      * @type {string}
-     * @memberof WithdrawTravelRuleResponse
+     * @memberof BrokerWithdrawResponse
      */
     info?: string;
 }

@@ -1,7 +1,7 @@
 /**
- * Binance Public Wallet REST API
+ * Binance Wallet REST API
  *
- * OpenAPI Specification for the Binance Public Wallet REST API
+ * OpenAPI Specification for the Binance Wallet REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -16,16 +16,20 @@ import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { TravelRuleApi } from '../../../src/rest-api';
 import {
+    BrokerWithdrawRequest,
     DepositHistoryTravelRuleRequest,
     SubmitDepositQuestionnaireRequest,
+    SubmitDepositQuestionnaireTravelRuleRequest,
     WithdrawHistoryV1Request,
     WithdrawHistoryV2Request,
     WithdrawTravelRuleRequest,
 } from '../../../src/rest-api';
 import type {
+    BrokerWithdrawResponse,
     DepositHistoryTravelRuleResponse,
     OnboardedVaspListResponse,
     SubmitDepositQuestionnaireResponse,
+    SubmitDepositQuestionnaireTravelRuleResponse,
     WithdrawHistoryV1Response,
     WithdrawHistoryV2Response,
     WithdrawTravelRuleResponse,
@@ -43,6 +47,247 @@ describe('TravelRuleApi', () => {
             basePath: '',
         });
         client = new TravelRuleApi(config);
+    });
+
+    describe('brokerWithdraw()', () => {
+        it('should execute brokerWithdraw() successfully with required parameters only', async () => {
+            const params: BrokerWithdrawRequest = {
+                subAccountId: '1',
+                address: 'address_example',
+                coin: 'coin_example',
+                amount: 1,
+                withdrawOrderId: '1',
+                questionnaire: 'questionnaire_example',
+                originatorPii: 'originatorPii_example',
+                signature: 'signature_example',
+            };
+
+            mockResponse = { trId: 123456, accpted: true, info: 'Withdraw request accepted' };
+
+            const spy = jest.spyOn(client, 'brokerWithdraw').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<BrokerWithdrawResponse>)
+            );
+            const response = await client.brokerWithdraw(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute brokerWithdraw() successfully with optional parameters', async () => {
+            const params: BrokerWithdrawRequest = {
+                subAccountId: '1',
+                address: 'address_example',
+                coin: 'coin_example',
+                amount: 1,
+                withdrawOrderId: '1',
+                questionnaire: 'questionnaire_example',
+                originatorPii: 'originatorPii_example',
+                signature: 'signature_example',
+                addressTag: 'addressTag_example',
+                network: 'network_example',
+                addressName: 'addressName_example',
+                transactionFeeFlag: false,
+                walletType: 0,
+            };
+
+            mockResponse = { trId: 123456, accpted: true, info: 'Withdraw request accepted' };
+
+            const spy = jest.spyOn(client, 'brokerWithdraw').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<BrokerWithdrawResponse>)
+            );
+            const response = await client.brokerWithdraw(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when subAccountId is missing', async () => {
+            const _params: BrokerWithdrawRequest = {
+                subAccountId: '1',
+                address: 'address_example',
+                coin: 'coin_example',
+                amount: 1,
+                withdrawOrderId: '1',
+                questionnaire: 'questionnaire_example',
+                originatorPii: 'originatorPii_example',
+                signature: 'signature_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.subAccountId;
+
+            await expect(client.brokerWithdraw(params)).rejects.toThrow(
+                'Required parameter subAccountId was null or undefined when calling brokerWithdraw.'
+            );
+        });
+
+        it('should throw RequiredError when address is missing', async () => {
+            const _params: BrokerWithdrawRequest = {
+                subAccountId: '1',
+                address: 'address_example',
+                coin: 'coin_example',
+                amount: 1,
+                withdrawOrderId: '1',
+                questionnaire: 'questionnaire_example',
+                originatorPii: 'originatorPii_example',
+                signature: 'signature_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.address;
+
+            await expect(client.brokerWithdraw(params)).rejects.toThrow(
+                'Required parameter address was null or undefined when calling brokerWithdraw.'
+            );
+        });
+
+        it('should throw RequiredError when coin is missing', async () => {
+            const _params: BrokerWithdrawRequest = {
+                subAccountId: '1',
+                address: 'address_example',
+                coin: 'coin_example',
+                amount: 1,
+                withdrawOrderId: '1',
+                questionnaire: 'questionnaire_example',
+                originatorPii: 'originatorPii_example',
+                signature: 'signature_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.coin;
+
+            await expect(client.brokerWithdraw(params)).rejects.toThrow(
+                'Required parameter coin was null or undefined when calling brokerWithdraw.'
+            );
+        });
+
+        it('should throw RequiredError when amount is missing', async () => {
+            const _params: BrokerWithdrawRequest = {
+                subAccountId: '1',
+                address: 'address_example',
+                coin: 'coin_example',
+                amount: 1,
+                withdrawOrderId: '1',
+                questionnaire: 'questionnaire_example',
+                originatorPii: 'originatorPii_example',
+                signature: 'signature_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.amount;
+
+            await expect(client.brokerWithdraw(params)).rejects.toThrow(
+                'Required parameter amount was null or undefined when calling brokerWithdraw.'
+            );
+        });
+
+        it('should throw RequiredError when withdrawOrderId is missing', async () => {
+            const _params: BrokerWithdrawRequest = {
+                subAccountId: '1',
+                address: 'address_example',
+                coin: 'coin_example',
+                amount: 1,
+                withdrawOrderId: '1',
+                questionnaire: 'questionnaire_example',
+                originatorPii: 'originatorPii_example',
+                signature: 'signature_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.withdrawOrderId;
+
+            await expect(client.brokerWithdraw(params)).rejects.toThrow(
+                'Required parameter withdrawOrderId was null or undefined when calling brokerWithdraw.'
+            );
+        });
+
+        it('should throw RequiredError when questionnaire is missing', async () => {
+            const _params: BrokerWithdrawRequest = {
+                subAccountId: '1',
+                address: 'address_example',
+                coin: 'coin_example',
+                amount: 1,
+                withdrawOrderId: '1',
+                questionnaire: 'questionnaire_example',
+                originatorPii: 'originatorPii_example',
+                signature: 'signature_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.questionnaire;
+
+            await expect(client.brokerWithdraw(params)).rejects.toThrow(
+                'Required parameter questionnaire was null or undefined when calling brokerWithdraw.'
+            );
+        });
+
+        it('should throw RequiredError when originatorPii is missing', async () => {
+            const _params: BrokerWithdrawRequest = {
+                subAccountId: '1',
+                address: 'address_example',
+                coin: 'coin_example',
+                amount: 1,
+                withdrawOrderId: '1',
+                questionnaire: 'questionnaire_example',
+                originatorPii: 'originatorPii_example',
+                signature: 'signature_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.originatorPii;
+
+            await expect(client.brokerWithdraw(params)).rejects.toThrow(
+                'Required parameter originatorPii was null or undefined when calling brokerWithdraw.'
+            );
+        });
+
+        it('should throw RequiredError when signature is missing', async () => {
+            const _params: BrokerWithdrawRequest = {
+                subAccountId: '1',
+                address: 'address_example',
+                coin: 'coin_example',
+                amount: 1,
+                withdrawOrderId: '1',
+                questionnaire: 'questionnaire_example',
+                originatorPii: 'originatorPii_example',
+                signature: 'signature_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.signature;
+
+            await expect(client.brokerWithdraw(params)).rejects.toThrow(
+                'Required parameter signature was null or undefined when calling brokerWithdraw.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: BrokerWithdrawRequest = {
+                subAccountId: '1',
+                address: 'address_example',
+                coin: 'coin_example',
+                amount: 1,
+                withdrawOrderId: '1',
+                questionnaire: 'questionnaire_example',
+                originatorPii: 'originatorPii_example',
+                signature: 'signature_example',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'brokerWithdraw').mockRejectedValueOnce(mockError);
+            await expect(client.brokerWithdraw(params)).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
     });
 
     describe('depositHistoryTravelRule()', () => {
@@ -232,8 +477,11 @@ describe('TravelRuleApi', () => {
     describe('submitDepositQuestionnaire()', () => {
         it('should execute submitDepositQuestionnaire() successfully with required parameters only', async () => {
             const params: SubmitDepositQuestionnaireRequest = {
-                tranId: 1,
+                subAccountId: '1',
+                depositId: '1',
                 questionnaire: 'questionnaire_example',
+                beneficiaryPii: 'beneficiaryPii_example',
+                signature: 'signature_example',
             };
 
             mockResponse = {
@@ -258,8 +506,16 @@ describe('TravelRuleApi', () => {
 
         it('should execute submitDepositQuestionnaire() successfully with optional parameters', async () => {
             const params: SubmitDepositQuestionnaireRequest = {
-                tranId: 1,
+                subAccountId: '1',
+                depositId: '1',
                 questionnaire: 'questionnaire_example',
+                beneficiaryPii: 'beneficiaryPii_example',
+                signature: 'signature_example',
+                network: 'network_example',
+                coin: 'coin_example',
+                amount: 1,
+                address: 'address_example',
+                addressTag: 'addressTag_example',
             };
 
             mockResponse = {
@@ -282,23 +538,45 @@ describe('TravelRuleApi', () => {
             spy.mockRestore();
         });
 
-        it('should throw RequiredError when tranId is missing', async () => {
+        it('should throw RequiredError when subAccountId is missing', async () => {
             const _params: SubmitDepositQuestionnaireRequest = {
-                tranId: 1,
+                subAccountId: '1',
+                depositId: '1',
                 questionnaire: 'questionnaire_example',
+                beneficiaryPii: 'beneficiaryPii_example',
+                signature: 'signature_example',
             };
             const params = Object.assign({ ..._params });
-            delete params?.tranId;
+            delete params?.subAccountId;
 
             await expect(client.submitDepositQuestionnaire(params)).rejects.toThrow(
-                'Required parameter tranId was null or undefined when calling submitDepositQuestionnaire.'
+                'Required parameter subAccountId was null or undefined when calling submitDepositQuestionnaire.'
+            );
+        });
+
+        it('should throw RequiredError when depositId is missing', async () => {
+            const _params: SubmitDepositQuestionnaireRequest = {
+                subAccountId: '1',
+                depositId: '1',
+                questionnaire: 'questionnaire_example',
+                beneficiaryPii: 'beneficiaryPii_example',
+                signature: 'signature_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.depositId;
+
+            await expect(client.submitDepositQuestionnaire(params)).rejects.toThrow(
+                'Required parameter depositId was null or undefined when calling submitDepositQuestionnaire.'
             );
         });
 
         it('should throw RequiredError when questionnaire is missing', async () => {
             const _params: SubmitDepositQuestionnaireRequest = {
-                tranId: 1,
+                subAccountId: '1',
+                depositId: '1',
                 questionnaire: 'questionnaire_example',
+                beneficiaryPii: 'beneficiaryPii_example',
+                signature: 'signature_example',
             };
             const params = Object.assign({ ..._params });
             delete params?.questionnaire;
@@ -308,10 +586,45 @@ describe('TravelRuleApi', () => {
             );
         });
 
+        it('should throw RequiredError when beneficiaryPii is missing', async () => {
+            const _params: SubmitDepositQuestionnaireRequest = {
+                subAccountId: '1',
+                depositId: '1',
+                questionnaire: 'questionnaire_example',
+                beneficiaryPii: 'beneficiaryPii_example',
+                signature: 'signature_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.beneficiaryPii;
+
+            await expect(client.submitDepositQuestionnaire(params)).rejects.toThrow(
+                'Required parameter beneficiaryPii was null or undefined when calling submitDepositQuestionnaire.'
+            );
+        });
+
+        it('should throw RequiredError when signature is missing', async () => {
+            const _params: SubmitDepositQuestionnaireRequest = {
+                subAccountId: '1',
+                depositId: '1',
+                questionnaire: 'questionnaire_example',
+                beneficiaryPii: 'beneficiaryPii_example',
+                signature: 'signature_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.signature;
+
+            await expect(client.submitDepositQuestionnaire(params)).rejects.toThrow(
+                'Required parameter signature was null or undefined when calling submitDepositQuestionnaire.'
+            );
+        });
+
         it('should throw an error when server is returning an error', async () => {
             const params: SubmitDepositQuestionnaireRequest = {
-                tranId: 1,
+                subAccountId: '1',
+                depositId: '1',
                 questionnaire: 'questionnaire_example',
+                beneficiaryPii: 'beneficiaryPii_example',
+                signature: 'signature_example',
             };
 
             const errorResponse = {
@@ -327,6 +640,110 @@ describe('TravelRuleApi', () => {
                 .spyOn(client, 'submitDepositQuestionnaire')
                 .mockRejectedValueOnce(mockError);
             await expect(client.submitDepositQuestionnaire(params)).rejects.toThrow(
+                'ResponseError'
+            );
+            spy.mockRestore();
+        });
+    });
+
+    describe('submitDepositQuestionnaireTravelRule()', () => {
+        it('should execute submitDepositQuestionnaireTravelRule() successfully with required parameters only', async () => {
+            const params: SubmitDepositQuestionnaireTravelRuleRequest = {
+                tranId: 1,
+                questionnaire: 'questionnaire_example',
+            };
+
+            mockResponse = {
+                trId: 765127651,
+                accepted: true,
+                info: 'Deposit questionnaire accepted.',
+            };
+
+            const spy = jest.spyOn(client, 'submitDepositQuestionnaireTravelRule').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<SubmitDepositQuestionnaireTravelRuleResponse>)
+            );
+            const response = await client.submitDepositQuestionnaireTravelRule(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute submitDepositQuestionnaireTravelRule() successfully with optional parameters', async () => {
+            const params: SubmitDepositQuestionnaireTravelRuleRequest = {
+                tranId: 1,
+                questionnaire: 'questionnaire_example',
+            };
+
+            mockResponse = {
+                trId: 765127651,
+                accepted: true,
+                info: 'Deposit questionnaire accepted.',
+            };
+
+            const spy = jest.spyOn(client, 'submitDepositQuestionnaireTravelRule').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<SubmitDepositQuestionnaireTravelRuleResponse>)
+            );
+            const response = await client.submitDepositQuestionnaireTravelRule(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when tranId is missing', async () => {
+            const _params: SubmitDepositQuestionnaireTravelRuleRequest = {
+                tranId: 1,
+                questionnaire: 'questionnaire_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.tranId;
+
+            await expect(client.submitDepositQuestionnaireTravelRule(params)).rejects.toThrow(
+                'Required parameter tranId was null or undefined when calling submitDepositQuestionnaireTravelRule.'
+            );
+        });
+
+        it('should throw RequiredError when questionnaire is missing', async () => {
+            const _params: SubmitDepositQuestionnaireTravelRuleRequest = {
+                tranId: 1,
+                questionnaire: 'questionnaire_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.questionnaire;
+
+            await expect(client.submitDepositQuestionnaireTravelRule(params)).rejects.toThrow(
+                'Required parameter questionnaire was null or undefined when calling submitDepositQuestionnaireTravelRule.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: SubmitDepositQuestionnaireTravelRuleRequest = {
+                tranId: 1,
+                questionnaire: 'questionnaire_example',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'submitDepositQuestionnaireTravelRule')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.submitDepositQuestionnaireTravelRule(params)).rejects.toThrow(
                 'ResponseError'
             );
             spy.mockRestore();

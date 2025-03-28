@@ -3,9 +3,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
- * Binance Public Wallet REST API
+ * Binance Wallet REST API
  *
- * OpenAPI Specification for the Binance Public Wallet REST API
+ * OpenAPI Specification for the Binance Wallet REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *

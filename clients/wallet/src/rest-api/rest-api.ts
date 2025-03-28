@@ -1,7 +1,7 @@
 /**
- * Binance Public Wallet REST API
+ * Binance Wallet REST API
  *
- * OpenAPI Specification for the Binance Public Wallet REST API
+ * OpenAPI Specification for the Binance Wallet REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -54,8 +54,10 @@ import type {
 } from './modules/capital-api';
 import type { GetSymbolsDelistScheduleForSpotRequest } from './modules/others-api';
 import type {
+    BrokerWithdrawRequest,
     DepositHistoryTravelRuleRequest,
     SubmitDepositQuestionnaireRequest,
+    SubmitDepositQuestionnaireTravelRuleRequest,
     WithdrawHistoryV1Request,
     WithdrawHistoryV2Request,
     WithdrawTravelRuleRequest,
@@ -97,9 +99,11 @@ import type {
 } from './types';
 import type { GetSymbolsDelistScheduleForSpotResponse, SystemStatusResponse } from './types';
 import type {
+    BrokerWithdrawResponse,
     DepositHistoryTravelRuleResponse,
     OnboardedVaspListResponse,
     SubmitDepositQuestionnaireResponse,
+    SubmitDepositQuestionnaireTravelRuleResponse,
     WithdrawHistoryV1Response,
     WithdrawHistoryV2Response,
     WithdrawTravelRuleResponse,
@@ -786,6 +790,28 @@ export class RestAPI {
     }
 
     /**
+     * Submit a withdrawal request for brokers of local entities that required travel rule.
+     *
+     * If `network` not send, return with default network of the coin, but if the address could not match default network, the withdraw will be rejected.
+     * You can get `network` in `networkList` of a coin in the response
+     * Questionnaire is different for each local entity, please refer to
+     * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+     *
+     * Weight: 600
+     *
+     * @summary Broker Withdraw (for brokers of local entities that require travel rule) (USER_DATA)
+     * @param {BrokerWithdrawRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<BrokerWithdrawResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/Broker-Withdraw Binance API Documentation}
+     */
+    brokerWithdraw(
+        requestParameters: BrokerWithdrawRequest
+    ): Promise<RestApiResponse<BrokerWithdrawResponse>> {
+        return this.travelRuleApi.brokerWithdraw(requestParameters);
+    }
+
+    /**
      * Fetch deposit history for local entities that required travel rule.
      *
      * Please notice the default `startTime` and `endTime` to make sure that time interval is within
@@ -826,8 +852,8 @@ export class RestAPI {
     }
 
     /**
-     * Submit questionnaire for local entities that require travel rule.
-     * The questionnaire is only applies to transactions from unhosted wallets or VASPs that are not
+     * Submit questionnaire for brokers of local entities that require travel rule.
+     * The questionnaire is only applies to transactions from un-hosted wallets or VASPs that are not
      * yet onboarded with GTR.
      *
      * Questionnaire is different for each local entity, please refer
@@ -845,6 +871,28 @@ export class RestAPI {
         requestParameters: SubmitDepositQuestionnaireRequest
     ): Promise<RestApiResponse<SubmitDepositQuestionnaireResponse>> {
         return this.travelRuleApi.submitDepositQuestionnaire(requestParameters);
+    }
+
+    /**
+     * Submit questionnaire for local entities that require travel rule.
+     * The questionnaire is only applies to transactions from unhosted wallets or VASPs that are not
+     * yet onboarded with GTR.
+     *
+     * Questionnaire is different for each local entity, please refer
+     * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+     *
+     * Weight: 600
+     *
+     * @summary Submit Deposit Questionnaire (For local entities that require travel rule) (supporting network) (USER_DATA)
+     * @param {SubmitDepositQuestionnaireTravelRuleRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<SubmitDepositQuestionnaireTravelRuleResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/deposit-provide-info Binance API Documentation}
+     */
+    submitDepositQuestionnaireTravelRule(
+        requestParameters: SubmitDepositQuestionnaireTravelRuleRequest
+    ): Promise<RestApiResponse<SubmitDepositQuestionnaireTravelRuleResponse>> {
+        return this.travelRuleApi.submitDepositQuestionnaireTravelRule(requestParameters);
     }
 
     /**
@@ -893,11 +941,11 @@ export class RestAPI {
      * limit is 180000/second. Response from the endpoint contains header
      * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
      *
-     * @summary Withdraw History (for local entities that require travel rule) (supporting network) (USER_DATA)
+     * @summary Withdraw History V2 (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {WithdrawHistoryV2Request} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<WithdrawHistoryV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/Withdraw-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/Withdraw-History-V2 Binance API Documentation}
      */
     withdrawHistoryV2(
         requestParameters: WithdrawHistoryV2Request = {}

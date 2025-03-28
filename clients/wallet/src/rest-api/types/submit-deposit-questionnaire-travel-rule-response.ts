@@ -16,25 +16,25 @@
 /**
  *
  * @export
- * @interface WithdrawTravelRuleResponse
+ * @interface SubmitDepositQuestionnaireTravelRuleResponse
  */
-export interface WithdrawTravelRuleResponse {
+export interface SubmitDepositQuestionnaireTravelRuleResponse {
     /**
      *
      * @type {number}
-     * @memberof WithdrawTravelRuleResponse
+     * @memberof SubmitDepositQuestionnaireTravelRuleResponse
      */
     trId?: number;
     /**
      *
      * @type {boolean}
-     * @memberof WithdrawTravelRuleResponse
+     * @memberof SubmitDepositQuestionnaireTravelRuleResponse
      */
-    accpted?: boolean;
+    accepted?: boolean;
     /**
      *
      * @type {string}
-     * @memberof WithdrawTravelRuleResponse
+     * @memberof SubmitDepositQuestionnaireTravelRuleResponse
      */
     info?: string;
 }
