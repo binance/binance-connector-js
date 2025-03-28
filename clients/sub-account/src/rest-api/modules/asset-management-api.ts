@@ -1,7 +1,7 @@
 /**
- * Binance Public Sub Account REST API
+ * Binance Sub Account REST API
  *
- * OpenAPI Specification for the Binance Public Sub Account REST API
+ * OpenAPI Specification for the Binance Sub Account REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -24,12 +24,14 @@ import type {
     GetDetailOnSubAccountsFuturesAccountResponse,
     GetDetailOnSubAccountsFuturesAccountV2Response,
     GetDetailOnSubAccountsMarginAccountResponse,
+    GetMovePositionHistoryForSubAccountResponse,
     GetSubAccountDepositAddressResponse,
     GetSubAccountDepositHistoryResponse,
     GetSummaryOfSubAccountsFuturesAccountResponse,
     GetSummaryOfSubAccountsFuturesAccountV2Response,
     GetSummaryOfSubAccountsMarginAccountResponse,
     MarginTransferForSubAccountResponse,
+    MovePositionForSubAccountResponse,
     QuerySubAccountAssetsAssetManagementResponse,
     QuerySubAccountAssetsResponse,
     QuerySubAccountFuturesAssetTransferHistoryResponse,
@@ -229,6 +231,76 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
 
             return {
                 endpoint: '/sapi/v1/sub-account/margin/account',
+                method: 'GET',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Query move position history
+         *
+         * If `startTime` and `endTime` not sent, return records of the last 90 days by default with 1000 maximum limits
+         * If `startTime` is sent and `endTime` is not sent, return records of [max(startTime, now-90d), now].
+         * If `startTime` is not sent and `endTime` is sent, return records of [max(now,endTime-90d), endTime].
+         *
+         * Weight: 150
+         *
+         * @summary Get Move Position History for Sub-account (For Master Account)
+         * @param {string} symbol
+         * @param {number} page Page
+         * @param {number} row
+         * @param {number} [startTime]
+         * @param {number} [endTime]
+         * @param {number} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        getMovePositionHistoryForSubAccount: async (
+            symbol: string,
+            page: number,
+            row: number,
+            startTime?: number,
+            endTime?: number,
+            recvWindow?: number
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'symbol' is not null or undefined
+            assertParamExists('getMovePositionHistoryForSubAccount', 'symbol', symbol);
+            // verify required parameter 'page' is not null or undefined
+            assertParamExists('getMovePositionHistoryForSubAccount', 'page', page);
+            // verify required parameter 'row' is not null or undefined
+            assertParamExists('getMovePositionHistoryForSubAccount', 'row', row);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (symbol !== undefined && symbol !== null) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+
+            if (startTime !== undefined && startTime !== null) {
+                localVarQueryParameter['startTime'] = startTime;
+            }
+
+            if (endTime !== undefined && endTime !== null) {
+                localVarQueryParameter['endTime'] = endTime;
+            }
+
+            if (page !== undefined && page !== null) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (row !== undefined && row !== null) {
+                localVarQueryParameter['row'] = row;
+            }
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/sub-account/futures/move-position',
                 method: 'GET',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
@@ -543,6 +615,80 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
 
             return {
                 endpoint: '/sapi/v1/sub-account/margin/transfer',
+                method: 'POST',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Move position between sub-master, master-sub, or sub-sub accounts when necessary
+         *
+         * You need to Enable Trading permission for the API Key which requests this endpoint.
+         * This function only support VIP level 7-9.
+         * Only master account can use the function
+         * Quantity should be positive number only
+         * The function support normal account, PM PRO and PM PRO SPAN.
+         * Only support for from account has positions
+         * For all orders in the same orderArgs request, if any symbol’s total close position quantity is bigger than the symbol’s current position quantity, all batch orders in the same list will fail simultaneously.
+         * Only support cross margin mode
+         * The price for move position is MarkPrice only.
+         * Not support for MSA.
+         * Not support for the symbol under Reduce-Only.
+         *
+         * Weight: 150
+         *
+         * @summary Move Position for Sub-account (For Master Account)
+         * @param {string} fromUserEmail
+         * @param {string} toUserEmail
+         * @param {string} productType Only support UM
+         * @param {Array<object>} orderArgs Max 10 positions supported. When input request parameter,orderArgs.symbol should be STRING, orderArgs.quantity should be BIGDECIMAL, and orderArgs.positionSide should be STRING, positionSide support BOTH,LONG and SHORT. Each entry should be like orderArgs[0].symbol=BTCUSDT,orderArgs[0].quantity=0.001,orderArgs[0].positionSide=BOTH. Example of the request parameter array: orderArgs[0].symbol=BTCUSDT orderArgs[0].quantity=0.001 orderArgs[0].positionSide=BOTH orderArgs[1].symbol=ETHUSDT orderArgs[1].quantity=0.01 orderArgs[1].positionSide=BOTH
+         * @param {number} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        movePositionForSubAccount: async (
+            fromUserEmail: string,
+            toUserEmail: string,
+            productType: string,
+            orderArgs: Array<object>,
+            recvWindow?: number
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'fromUserEmail' is not null or undefined
+            assertParamExists('movePositionForSubAccount', 'fromUserEmail', fromUserEmail);
+            // verify required parameter 'toUserEmail' is not null or undefined
+            assertParamExists('movePositionForSubAccount', 'toUserEmail', toUserEmail);
+            // verify required parameter 'productType' is not null or undefined
+            assertParamExists('movePositionForSubAccount', 'productType', productType);
+            // verify required parameter 'orderArgs' is not null or undefined
+            assertParamExists('movePositionForSubAccount', 'orderArgs', orderArgs);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (fromUserEmail !== undefined && fromUserEmail !== null) {
+                localVarQueryParameter['fromUserEmail'] = fromUserEmail;
+            }
+
+            if (toUserEmail !== undefined && toUserEmail !== null) {
+                localVarQueryParameter['toUserEmail'] = toUserEmail;
+            }
+
+            if (productType !== undefined && productType !== null) {
+                localVarQueryParameter['productType'] = productType;
+            }
+
+            if (orderArgs) {
+                localVarQueryParameter['orderArgs'] = orderArgs;
+            }
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/sub-account/futures/move-position',
                 method: 'POST',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
@@ -1296,6 +1442,24 @@ export interface AssetManagementApiInterface {
         requestParameters: GetDetailOnSubAccountsMarginAccountRequest
     ): Promise<RestApiResponse<GetDetailOnSubAccountsMarginAccountResponse>>;
     /**
+     * Query move position history
+     *
+     * If `startTime` and `endTime` not sent, return records of the last 90 days by default with 1000 maximum limits
+     * If `startTime` is sent and `endTime` is not sent, return records of [max(startTime, now-90d), now].
+     * If `startTime` is not sent and `endTime` is sent, return records of [max(now,endTime-90d), endTime].
+     *
+     * Weight: 150
+     *
+     * @summary Get Move Position History for Sub-account (For Master Account)
+     * @param {GetMovePositionHistoryForSubAccountRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AssetManagementApiInterface
+     */
+    getMovePositionHistoryForSubAccount(
+        requestParameters: GetMovePositionHistoryForSubAccountRequest
+    ): Promise<RestApiResponse<GetMovePositionHistoryForSubAccountResponse>>;
+    /**
      * Fetch sub-account deposit address
      *
      * `amount` needs to be sent if using LIGHTNING network
@@ -1383,6 +1547,32 @@ export interface AssetManagementApiInterface {
     marginTransferForSubAccount(
         requestParameters: MarginTransferForSubAccountRequest
     ): Promise<RestApiResponse<MarginTransferForSubAccountResponse>>;
+    /**
+     * Move position between sub-master, master-sub, or sub-sub accounts when necessary
+     *
+     * You need to Enable Trading permission for the API Key which requests this endpoint.
+     * This function only support VIP level 7-9.
+     * Only master account can use the function
+     * Quantity should be positive number only
+     * The function support normal account, PM PRO and PM PRO SPAN.
+     * Only support for from account has positions
+     * For all orders in the same orderArgs request, if any symbol’s total close position quantity is bigger than the symbol’s current position quantity, all batch orders in the same list will fail simultaneously.
+     * Only support cross margin mode
+     * The price for move position is MarkPrice only.
+     * Not support for MSA.
+     * Not support for the symbol under Reduce-Only.
+     *
+     * Weight: 150
+     *
+     * @summary Move Position for Sub-account (For Master Account)
+     * @param {MovePositionForSubAccountRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AssetManagementApiInterface
+     */
+    movePositionForSubAccount(
+        requestParameters: MovePositionForSubAccountRequest
+    ): Promise<RestApiResponse<MovePositionForSubAccountResponse>>;
     /**
      * Fetch sub-account assets
      *
@@ -1678,6 +1868,54 @@ export interface GetDetailOnSubAccountsMarginAccountRequest {
 }
 
 /**
+ * Request parameters for getMovePositionHistoryForSubAccount operation in AssetManagementApi.
+ * @interface GetMovePositionHistoryForSubAccountRequest
+ */
+export interface GetMovePositionHistoryForSubAccountRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof AssetManagementApiGetMovePositionHistoryForSubAccount
+     */
+    readonly symbol: string;
+
+    /**
+     * Page
+     * @type {number}
+     * @memberof AssetManagementApiGetMovePositionHistoryForSubAccount
+     */
+    readonly page: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof AssetManagementApiGetMovePositionHistoryForSubAccount
+     */
+    readonly row: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof AssetManagementApiGetMovePositionHistoryForSubAccount
+     */
+    readonly startTime?: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof AssetManagementApiGetMovePositionHistoryForSubAccount
+     */
+    readonly endTime?: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof AssetManagementApiGetMovePositionHistoryForSubAccount
+     */
+    readonly recvWindow?: number;
+}
+
+/**
  * Request parameters for getSubAccountDepositAddress operation in AssetManagementApi.
  * @interface GetSubAccountDepositAddressRequest
  */
@@ -1884,6 +2122,47 @@ export interface MarginTransferForSubAccountRequest {
      *
      * @type {number}
      * @memberof AssetManagementApiMarginTransferForSubAccount
+     */
+    readonly recvWindow?: number;
+}
+
+/**
+ * Request parameters for movePositionForSubAccount operation in AssetManagementApi.
+ * @interface MovePositionForSubAccountRequest
+ */
+export interface MovePositionForSubAccountRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof AssetManagementApiMovePositionForSubAccount
+     */
+    readonly fromUserEmail: string;
+
+    /**
+     *
+     * @type {string}
+     * @memberof AssetManagementApiMovePositionForSubAccount
+     */
+    readonly toUserEmail: string;
+
+    /**
+     * Only support UM
+     * @type {string}
+     * @memberof AssetManagementApiMovePositionForSubAccount
+     */
+    readonly productType: string;
+
+    /**
+     * Max 10 positions supported. When input request parameter,orderArgs.symbol should be STRING, orderArgs.quantity should be BIGDECIMAL, and orderArgs.positionSide should be STRING, positionSide support BOTH,LONG and SHORT. Each entry should be like orderArgs[0].symbol=BTCUSDT,orderArgs[0].quantity=0.001,orderArgs[0].positionSide=BOTH. Example of the request parameter array: orderArgs[0].symbol=BTCUSDT orderArgs[0].quantity=0.001 orderArgs[0].positionSide=BOTH orderArgs[1].symbol=ETHUSDT orderArgs[1].quantity=0.01 orderArgs[1].positionSide=BOTH
+     * @type {Array<object>}
+     * @memberof AssetManagementApiMovePositionForSubAccount
+     */
+    readonly orderArgs: Array<object>;
+
+    /**
+     *
+     * @type {number}
+     * @memberof AssetManagementApiMovePositionForSubAccount
      */
     readonly recvWindow?: number;
 }
@@ -2506,6 +2785,44 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     }
 
     /**
+     * Query move position history
+     *
+     * If `startTime` and `endTime` not sent, return records of the last 90 days by default with 1000 maximum limits
+     * If `startTime` is sent and `endTime` is not sent, return records of [max(startTime, now-90d), now].
+     * If `startTime` is not sent and `endTime` is sent, return records of [max(now,endTime-90d), endTime].
+     *
+     * Weight: 150
+     *
+     * @summary Get Move Position History for Sub-account (For Master Account)
+     * @param {GetMovePositionHistoryForSubAccountRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetMovePositionHistoryForSubAccountResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AssetManagementApi
+     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Get-Move-Position-History-for-Sub-account Binance API Documentation}
+     */
+    public async getMovePositionHistoryForSubAccount(
+        requestParameters: GetMovePositionHistoryForSubAccountRequest
+    ): Promise<RestApiResponse<GetMovePositionHistoryForSubAccountResponse>> {
+        const localVarAxiosArgs =
+            await this.localVarAxiosParamCreator.getMovePositionHistoryForSubAccount(
+                requestParameters?.symbol,
+                requestParameters?.page,
+                requestParameters?.row,
+                requestParameters?.startTime,
+                requestParameters?.endTime,
+                requestParameters?.recvWindow
+            );
+        return sendRequest<GetMovePositionHistoryForSubAccountResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: false }
+        );
+    }
+
+    /**
      * Fetch sub-account deposit address
      *
      * `amount` needs to be sent if using LIGHTNING network
@@ -2690,6 +3007,50 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             requestParameters?.recvWindow
         );
         return sendRequest<MarginTransferForSubAccountResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: false }
+        );
+    }
+
+    /**
+     * Move position between sub-master, master-sub, or sub-sub accounts when necessary
+     *
+     * You need to Enable Trading permission for the API Key which requests this endpoint.
+     * This function only support VIP level 7-9.
+     * Only master account can use the function
+     * Quantity should be positive number only
+     * The function support normal account, PM PRO and PM PRO SPAN.
+     * Only support for from account has positions
+     * For all orders in the same orderArgs request, if any symbol’s total close position quantity is bigger than the symbol’s current position quantity, all batch orders in the same list will fail simultaneously.
+     * Only support cross margin mode
+     * The price for move position is MarkPrice only.
+     * Not support for MSA.
+     * Not support for the symbol under Reduce-Only.
+     *
+     * Weight: 150
+     *
+     * @summary Move Position for Sub-account (For Master Account)
+     * @param {MovePositionForSubAccountRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<MovePositionForSubAccountResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AssetManagementApi
+     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Move-Position-for-Sub-account Binance API Documentation}
+     */
+    public async movePositionForSubAccount(
+        requestParameters: MovePositionForSubAccountRequest
+    ): Promise<RestApiResponse<MovePositionForSubAccountResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.movePositionForSubAccount(
+            requestParameters?.fromUserEmail,
+            requestParameters?.toUserEmail,
+            requestParameters?.productType,
+            requestParameters?.orderArgs,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<MovePositionForSubAccountResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

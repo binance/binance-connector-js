@@ -1,7 +1,7 @@
 /**
- * Binance Public Sub Account REST API
+ * Binance Sub Account REST API
  *
- * OpenAPI Specification for the Binance Public Sub Account REST API
+ * OpenAPI Specification for the Binance Sub Account REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *

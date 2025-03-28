@@ -16,18 +16,18 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { QuerySubAccountAssetsResponseBalancesInner } from './query-sub-account-assets-response-balances-inner';
+import type { MovePositionForSubAccountResponseMovePositionOrdersInner } from './move-position-for-sub-account-response-move-position-orders-inner';
 
 /**
  *
  * @export
- * @interface QuerySubAccountAssetsResponse
+ * @interface MovePositionForSubAccountResponse
  */
-export interface QuerySubAccountAssetsResponse {
+export interface MovePositionForSubAccountResponse {
     /**
      *
-     * @type {Array<QuerySubAccountAssetsResponseBalancesInner>}
-     * @memberof QuerySubAccountAssetsResponse
+     * @type {Array<MovePositionForSubAccountResponseMovePositionOrdersInner>}
+     * @memberof MovePositionForSubAccountResponse
      */
-    balances?: Array<QuerySubAccountAssetsResponseBalancesInner>;
+    movePositionOrders?: Array<MovePositionForSubAccountResponseMovePositionOrdersInner>;
 }

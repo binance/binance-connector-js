@@ -1,7 +1,7 @@
 /**
- * Binance Public Sub Account REST API
+ * Binance Sub Account REST API
  *
- * OpenAPI Specification for the Binance Public Sub Account REST API
+ * OpenAPI Specification for the Binance Sub Account REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -39,12 +39,14 @@ import type {
     GetDetailOnSubAccountsFuturesAccountRequest,
     GetDetailOnSubAccountsFuturesAccountV2Request,
     GetDetailOnSubAccountsMarginAccountRequest,
+    GetMovePositionHistoryForSubAccountRequest,
     GetSubAccountDepositAddressRequest,
     GetSubAccountDepositHistoryRequest,
     GetSummaryOfSubAccountsFuturesAccountRequest,
     GetSummaryOfSubAccountsFuturesAccountV2Request,
     GetSummaryOfSubAccountsMarginAccountRequest,
     MarginTransferForSubAccountRequest,
+    MovePositionForSubAccountRequest,
     QuerySubAccountAssetsRequest,
     QuerySubAccountAssetsAssetManagementRequest,
     QuerySubAccountFuturesAssetTransferHistoryRequest,
@@ -93,12 +95,14 @@ import type {
     GetDetailOnSubAccountsFuturesAccountResponse,
     GetDetailOnSubAccountsFuturesAccountV2Response,
     GetDetailOnSubAccountsMarginAccountResponse,
+    GetMovePositionHistoryForSubAccountResponse,
     GetSubAccountDepositAddressResponse,
     GetSubAccountDepositHistoryResponse,
     GetSummaryOfSubAccountsFuturesAccountResponse,
     GetSummaryOfSubAccountsFuturesAccountV2Response,
     GetSummaryOfSubAccountsMarginAccountResponse,
     MarginTransferForSubAccountResponse,
+    MovePositionForSubAccountResponse,
     QuerySubAccountAssetsResponse,
     QuerySubAccountAssetsAssetManagementResponse,
     QuerySubAccountFuturesAssetTransferHistoryResponse,
@@ -475,6 +479,27 @@ export class RestAPI {
     }
 
     /**
+     * Query move position history
+     *
+     * If `startTime` and `endTime` not sent, return records of the last 90 days by default with 1000 maximum limits
+     * If `startTime` is sent and `endTime` is not sent, return records of [max(startTime, now-90d), now].
+     * If `startTime` is not sent and `endTime` is sent, return records of [max(now,endTime-90d), endTime].
+     *
+     * Weight: 150
+     *
+     * @summary Get Move Position History for Sub-account (For Master Account)
+     * @param {GetMovePositionHistoryForSubAccountRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetMovePositionHistoryForSubAccountResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Get-Move-Position-History-for-Sub-account Binance API Documentation}
+     */
+    getMovePositionHistoryForSubAccount(
+        requestParameters: GetMovePositionHistoryForSubAccountRequest
+    ): Promise<RestApiResponse<GetMovePositionHistoryForSubAccountResponse>> {
+        return this.assetManagementApi.getMovePositionHistoryForSubAccount(requestParameters);
+    }
+
+    /**
      * Fetch sub-account deposit address
      *
      * `amount` needs to be sent if using LIGHTNING network
@@ -578,6 +603,35 @@ export class RestAPI {
         requestParameters: MarginTransferForSubAccountRequest
     ): Promise<RestApiResponse<MarginTransferForSubAccountResponse>> {
         return this.assetManagementApi.marginTransferForSubAccount(requestParameters);
+    }
+
+    /**
+     * Move position between sub-master, master-sub, or sub-sub accounts when necessary
+     *
+     * You need to Enable Trading permission for the API Key which requests this endpoint.
+     * This function only support VIP level 7-9.
+     * Only master account can use the function
+     * Quantity should be positive number only
+     * The function support normal account, PM PRO and PM PRO SPAN.
+     * Only support for from account has positions
+     * For all orders in the same orderArgs request, if any symbol’s total close position quantity is bigger than the symbol’s current position quantity, all batch orders in the same list will fail simultaneously.
+     * Only support cross margin mode
+     * The price for move position is MarkPrice only.
+     * Not support for MSA.
+     * Not support for the symbol under Reduce-Only.
+     *
+     * Weight: 150
+     *
+     * @summary Move Position for Sub-account (For Master Account)
+     * @param {MovePositionForSubAccountRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<MovePositionForSubAccountResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Move-Position-for-Sub-account Binance API Documentation}
+     */
+    movePositionForSubAccount(
+        requestParameters: MovePositionForSubAccountRequest
+    ): Promise<RestApiResponse<MovePositionForSubAccountResponse>> {
+        return this.assetManagementApi.movePositionForSubAccount(requestParameters);
     }
 
     /**

@@ -27,6 +27,8 @@ export * from './get-futures-position-risk-of-sub-account-v2-response2';
 export * from './get-futures-position-risk-of-sub-account-v2-response2-delivery-position-risk-vos-inner';
 export * from './get-ip-restriction-for-asub-account-api-key-response';
 export * from './get-managed-sub-account-deposit-address-response';
+export * from './get-move-position-history-for-sub-account-response';
+export * from './get-move-position-history-for-sub-account-response-future-move-position-order-vo-list-inner';
 export * from './get-sub-account-deposit-address-response';
 export * from './get-sub-account-deposit-history-response';
 export * from './get-sub-account-deposit-history-response-inner';
@@ -43,6 +45,8 @@ export * from './get-summary-of-sub-accounts-futures-account-v2-response2-delive
 export * from './get-summary-of-sub-accounts-margin-account-response';
 export * from './get-summary-of-sub-accounts-margin-account-response-sub-account-list-inner';
 export * from './margin-transfer-for-sub-account-response';
+export * from './move-position-for-sub-account-response';
+export * from './move-position-for-sub-account-response-move-position-orders-inner';
 export * from './query-managed-sub-account-asset-details-response';
 export * from './query-managed-sub-account-asset-details-response-inner';
 export * from './query-managed-sub-account-futures-asset-details-response';

@@ -1,7 +1,7 @@
 /**
- * Binance Public Sub Account REST API
+ * Binance Sub Account REST API
  *
- * OpenAPI Specification for the Binance Public Sub Account REST API
+ * OpenAPI Specification for the Binance Sub Account REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,12 +20,14 @@ import {
     GetDetailOnSubAccountsFuturesAccountRequest,
     GetDetailOnSubAccountsFuturesAccountV2Request,
     GetDetailOnSubAccountsMarginAccountRequest,
+    GetMovePositionHistoryForSubAccountRequest,
     GetSubAccountDepositAddressRequest,
     GetSubAccountDepositHistoryRequest,
     GetSummaryOfSubAccountsFuturesAccountRequest,
     GetSummaryOfSubAccountsFuturesAccountV2Request,
     GetSummaryOfSubAccountsMarginAccountRequest,
     MarginTransferForSubAccountRequest,
+    MovePositionForSubAccountRequest,
     QuerySubAccountAssetsRequest,
     QuerySubAccountAssetsAssetManagementRequest,
     QuerySubAccountFuturesAssetTransferHistoryRequest,
@@ -43,12 +45,14 @@ import type {
     GetDetailOnSubAccountsFuturesAccountResponse,
     GetDetailOnSubAccountsFuturesAccountV2Response,
     GetDetailOnSubAccountsMarginAccountResponse,
+    GetMovePositionHistoryForSubAccountResponse,
     GetSubAccountDepositAddressResponse,
     GetSubAccountDepositHistoryResponse,
     GetSummaryOfSubAccountsFuturesAccountResponse,
     GetSummaryOfSubAccountsFuturesAccountV2Response,
     GetSummaryOfSubAccountsMarginAccountResponse,
     MarginTransferForSubAccountResponse,
+    MovePositionForSubAccountResponse,
     QuerySubAccountAssetsAssetManagementResponse,
     QuerySubAccountAssetsResponse,
     QuerySubAccountFuturesAssetTransferHistoryResponse,
@@ -676,6 +680,198 @@ describe('AssetManagementApi', () => {
                 .spyOn(client, 'getDetailOnSubAccountsMarginAccount')
                 .mockRejectedValueOnce(mockError);
             await expect(client.getDetailOnSubAccountsMarginAccount(params)).rejects.toThrow(
+                'ResponseError'
+            );
+            spy.mockRestore();
+        });
+    });
+
+    describe('getMovePositionHistoryForSubAccount()', () => {
+        it('should execute getMovePositionHistoryForSubAccount() successfully with required parameters only', async () => {
+            const params: GetMovePositionHistoryForSubAccountRequest = {
+                symbol: 'symbol_example',
+                page: 789,
+                row: 789,
+            };
+
+            mockResponse = {
+                total: 3,
+                futureMovePositionOrderVoList: [
+                    {
+                        fromUserEmail: 'testFrom@google.com',
+                        toUserEmail: 'testTo@google.com',
+                        productType: 'UM',
+                        symbol: 'BTCUSDT',
+                        price: '105025.50981609',
+                        quantity: '0.00100000',
+                        positionSide: 'BOTH',
+                        side: 'SELL',
+                        timeStamp: 1737544712000,
+                    },
+                    {
+                        fromUserEmail: 'testFrom1@google.com',
+                        toUserEmail: 'testTo1@google.com',
+                        productType: 'UM',
+                        symbol: 'BTCUSDT',
+                        price: '97100.00000000',
+                        quantity: '0.00100000',
+                        positionSide: 'BOTH',
+                        side: 'SELL',
+                        timeStamp: 1740041627000,
+                    },
+                    {
+                        fromUserEmail: 'testFrom2@google.com',
+                        toUserEmail: 'testTo2@google.com',
+                        productType: 'UM',
+                        symbol: 'BTCUSDT',
+                        price: '97108.62068889',
+                        quantity: '0.00100000',
+                        positionSide: 'BOTH',
+                        side: 'SELL',
+                        timeStamp: 1740041959000,
+                    },
+                ],
+            };
+
+            const spy = jest.spyOn(client, 'getMovePositionHistoryForSubAccount').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetMovePositionHistoryForSubAccountResponse>)
+            );
+            const response = await client.getMovePositionHistoryForSubAccount(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute getMovePositionHistoryForSubAccount() successfully with optional parameters', async () => {
+            const params: GetMovePositionHistoryForSubAccountRequest = {
+                symbol: 'symbol_example',
+                page: 789,
+                row: 789,
+                startTime: 1623319461670,
+                endTime: 1641782889000,
+                recvWindow: 5000,
+            };
+
+            mockResponse = {
+                total: 3,
+                futureMovePositionOrderVoList: [
+                    {
+                        fromUserEmail: 'testFrom@google.com',
+                        toUserEmail: 'testTo@google.com',
+                        productType: 'UM',
+                        symbol: 'BTCUSDT',
+                        price: '105025.50981609',
+                        quantity: '0.00100000',
+                        positionSide: 'BOTH',
+                        side: 'SELL',
+                        timeStamp: 1737544712000,
+                    },
+                    {
+                        fromUserEmail: 'testFrom1@google.com',
+                        toUserEmail: 'testTo1@google.com',
+                        productType: 'UM',
+                        symbol: 'BTCUSDT',
+                        price: '97100.00000000',
+                        quantity: '0.00100000',
+                        positionSide: 'BOTH',
+                        side: 'SELL',
+                        timeStamp: 1740041627000,
+                    },
+                    {
+                        fromUserEmail: 'testFrom2@google.com',
+                        toUserEmail: 'testTo2@google.com',
+                        productType: 'UM',
+                        symbol: 'BTCUSDT',
+                        price: '97108.62068889',
+                        quantity: '0.00100000',
+                        positionSide: 'BOTH',
+                        side: 'SELL',
+                        timeStamp: 1740041959000,
+                    },
+                ],
+            };
+
+            const spy = jest.spyOn(client, 'getMovePositionHistoryForSubAccount').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetMovePositionHistoryForSubAccountResponse>)
+            );
+            const response = await client.getMovePositionHistoryForSubAccount(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when symbol is missing', async () => {
+            const _params: GetMovePositionHistoryForSubAccountRequest = {
+                symbol: 'symbol_example',
+                page: 789,
+                row: 789,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.symbol;
+
+            await expect(client.getMovePositionHistoryForSubAccount(params)).rejects.toThrow(
+                'Required parameter symbol was null or undefined when calling getMovePositionHistoryForSubAccount.'
+            );
+        });
+
+        it('should throw RequiredError when page is missing', async () => {
+            const _params: GetMovePositionHistoryForSubAccountRequest = {
+                symbol: 'symbol_example',
+                page: 789,
+                row: 789,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.page;
+
+            await expect(client.getMovePositionHistoryForSubAccount(params)).rejects.toThrow(
+                'Required parameter page was null or undefined when calling getMovePositionHistoryForSubAccount.'
+            );
+        });
+
+        it('should throw RequiredError when row is missing', async () => {
+            const _params: GetMovePositionHistoryForSubAccountRequest = {
+                symbol: 'symbol_example',
+                page: 789,
+                row: 789,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.row;
+
+            await expect(client.getMovePositionHistoryForSubAccount(params)).rejects.toThrow(
+                'Required parameter row was null or undefined when calling getMovePositionHistoryForSubAccount.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: GetMovePositionHistoryForSubAccountRequest = {
+                symbol: 'symbol_example',
+                page: 789,
+                row: 789,
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'getMovePositionHistoryForSubAccount')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.getMovePositionHistoryForSubAccount(params)).rejects.toThrow(
                 'ResponseError'
             );
             spy.mockRestore();
@@ -1451,6 +1647,195 @@ describe('AssetManagementApi', () => {
             await expect(client.marginTransferForSubAccount(params)).rejects.toThrow(
                 'ResponseError'
             );
+            spy.mockRestore();
+        });
+    });
+
+    describe('movePositionForSubAccount()', () => {
+        it('should execute movePositionForSubAccount() successfully with required parameters only', async () => {
+            const params: MovePositionForSubAccountRequest = {
+                fromUserEmail: 'fromUserEmail_example',
+                toUserEmail: 'toUserEmail_example',
+                productType: 'productType_example',
+                orderArgs: [],
+            };
+
+            mockResponse = {
+                movePositionOrders: [
+                    {
+                        fromUserEmail: 'testFrom@google.com',
+                        toUserEmail: 'testTo@google.com',
+                        productType: 'UM',
+                        symbol: 'BTCUSDT',
+                        priceType: 'MARK_PRICE',
+                        price: '97139.00000000',
+                        quantity: '0.001',
+                        positionSide: 'BOTH',
+                        side: 'BUY',
+                        success: true,
+                    },
+                    {
+                        fromUserEmail: 'testFrom1@google.com',
+                        toUserEmail: '1testTo@google.com',
+                        productType: 'UM',
+                        symbol: 'BTCUSDT',
+                        priceType: 'MARK_PRICE',
+                        price: '97139.00000000',
+                        quantity: '0.0011',
+                        positionSide: 'BOTH',
+                        side: 'BUY',
+                        success: true,
+                    },
+                ],
+            };
+
+            const spy = jest.spyOn(client, 'movePositionForSubAccount').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<MovePositionForSubAccountResponse>)
+            );
+            const response = await client.movePositionForSubAccount(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute movePositionForSubAccount() successfully with optional parameters', async () => {
+            const params: MovePositionForSubAccountRequest = {
+                fromUserEmail: 'fromUserEmail_example',
+                toUserEmail: 'toUserEmail_example',
+                productType: 'productType_example',
+                orderArgs: [],
+                recvWindow: 5000,
+            };
+
+            mockResponse = {
+                movePositionOrders: [
+                    {
+                        fromUserEmail: 'testFrom@google.com',
+                        toUserEmail: 'testTo@google.com',
+                        productType: 'UM',
+                        symbol: 'BTCUSDT',
+                        priceType: 'MARK_PRICE',
+                        price: '97139.00000000',
+                        quantity: '0.001',
+                        positionSide: 'BOTH',
+                        side: 'BUY',
+                        success: true,
+                    },
+                    {
+                        fromUserEmail: 'testFrom1@google.com',
+                        toUserEmail: '1testTo@google.com',
+                        productType: 'UM',
+                        symbol: 'BTCUSDT',
+                        priceType: 'MARK_PRICE',
+                        price: '97139.00000000',
+                        quantity: '0.0011',
+                        positionSide: 'BOTH',
+                        side: 'BUY',
+                        success: true,
+                    },
+                ],
+            };
+
+            const spy = jest.spyOn(client, 'movePositionForSubAccount').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<MovePositionForSubAccountResponse>)
+            );
+            const response = await client.movePositionForSubAccount(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when fromUserEmail is missing', async () => {
+            const _params: MovePositionForSubAccountRequest = {
+                fromUserEmail: 'fromUserEmail_example',
+                toUserEmail: 'toUserEmail_example',
+                productType: 'productType_example',
+                orderArgs: [],
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.fromUserEmail;
+
+            await expect(client.movePositionForSubAccount(params)).rejects.toThrow(
+                'Required parameter fromUserEmail was null or undefined when calling movePositionForSubAccount.'
+            );
+        });
+
+        it('should throw RequiredError when toUserEmail is missing', async () => {
+            const _params: MovePositionForSubAccountRequest = {
+                fromUserEmail: 'fromUserEmail_example',
+                toUserEmail: 'toUserEmail_example',
+                productType: 'productType_example',
+                orderArgs: [],
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.toUserEmail;
+
+            await expect(client.movePositionForSubAccount(params)).rejects.toThrow(
+                'Required parameter toUserEmail was null or undefined when calling movePositionForSubAccount.'
+            );
+        });
+
+        it('should throw RequiredError when productType is missing', async () => {
+            const _params: MovePositionForSubAccountRequest = {
+                fromUserEmail: 'fromUserEmail_example',
+                toUserEmail: 'toUserEmail_example',
+                productType: 'productType_example',
+                orderArgs: [],
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.productType;
+
+            await expect(client.movePositionForSubAccount(params)).rejects.toThrow(
+                'Required parameter productType was null or undefined when calling movePositionForSubAccount.'
+            );
+        });
+
+        it('should throw RequiredError when orderArgs is missing', async () => {
+            const _params: MovePositionForSubAccountRequest = {
+                fromUserEmail: 'fromUserEmail_example',
+                toUserEmail: 'toUserEmail_example',
+                productType: 'productType_example',
+                orderArgs: [],
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.orderArgs;
+
+            await expect(client.movePositionForSubAccount(params)).rejects.toThrow(
+                'Required parameter orderArgs was null or undefined when calling movePositionForSubAccount.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: MovePositionForSubAccountRequest = {
+                fromUserEmail: 'fromUserEmail_example',
+                toUserEmail: 'toUserEmail_example',
+                productType: 'productType_example',
+                orderArgs: [],
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'movePositionForSubAccount')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.movePositionForSubAccount(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
