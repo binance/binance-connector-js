@@ -326,20 +326,27 @@ export const httpRequestFunction = async function <T>(
             };
         } catch (error) {
             attempt++;
-
+            const axiosError = error as AxiosError
             if (
                 shouldRetryRequest(
-                    error as AxiosError,
+                    axiosError,
                     axiosRequestArgs?.method?.toUpperCase(),
                     retries - attempt
                 )
             ) {
                 await delay(backoff * attempt);
             } else {
-                if ((error as AxiosError).response) {
-                    const status = (error as AxiosError).response?.status as number;
+                if (axiosError.response) {
+                    const status = axiosError.response?.status as number;
+                    const responseData?: string = axiosError.response?.data
+                    let data
+                    if (responseData === undefined || responseData === '') {
+                        data = {}
+                    } else {
+                        data = JSON.parse(responseData)
+                    }
                     const data = JSON.parse(
-                        ((error as AxiosError).response?.data as string) ?? '{}'
+                        (axiosError.response?.data as string) ?? '{}'
                     );
 
                     switch (status) {
