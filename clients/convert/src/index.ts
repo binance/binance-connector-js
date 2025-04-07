@@ -3,7 +3,6 @@ export * as ConvertRestAPI from './rest-api';
 
 export {
     CONVERT_REST_API_PROD_URL,
-    CONVERT_REST_API_TESTNET_URL,
     ConnectorClientError,
     RequiredError,
     UnauthorizedError,

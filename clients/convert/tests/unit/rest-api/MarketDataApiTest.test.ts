@@ -1,7 +1,7 @@
 /**
- * Binance Public Convert REST API
+ * Binance Convert REST API
  *
- * OpenAPI Specification for the Binance Public Convert REST API
+ * OpenAPI Specification for the Binance Convert REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *
