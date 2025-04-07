@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Public Fiat REST API
+ * Binance Fiat REST API
  *
- * OpenAPI Specification for the Binance Public Fiat REST API
+ * OpenAPI Specification for the Binance Fiat REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *
