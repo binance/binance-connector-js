@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Public Copy Trading REST API
+ * Binance Copy Trading REST API
  *
- * OpenAPI Specification for the Binance Public Copy Trading REST API
+ * OpenAPI Specification for the Binance Copy Trading REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *
