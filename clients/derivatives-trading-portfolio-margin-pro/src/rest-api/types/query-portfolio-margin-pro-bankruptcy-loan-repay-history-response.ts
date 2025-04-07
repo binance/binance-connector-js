@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Public Derivatives Trading Portfolio Margin Pro REST API
+ * Binance Derivatives Trading Portfolio Margin Pro REST API
  *
- * OpenAPI Specification for the Binance Public Derivatives Trading Portfolio Margin Pro REST API
+ * OpenAPI Specification for the Binance Derivatives Trading Portfolio Margin Pro REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *
