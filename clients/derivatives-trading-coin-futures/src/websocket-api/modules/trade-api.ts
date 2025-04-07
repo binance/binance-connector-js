@@ -1,7 +1,7 @@
 /**
- * Binance Public Derivatives Trading COIN Futures WebSocket API
+ * Binance Derivatives Trading COIN Futures WebSocket API
  *
- * OpenAPI Specification for the Binance Public Derivatives Trading COIN Futures WebSocket API
+ * OpenAPI Specification for the Binance Derivatives Trading COIN Futures WebSocket API
  *
  * The version of the OpenAPI document: 1.0.0
  *
