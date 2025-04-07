@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Public Gift Card REST API
+ * Binance Gift Card REST API
  *
- * OpenAPI Specification for the Binance Public Gift Card REST API
+ * OpenAPI Specification for the Binance Gift Card REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *
