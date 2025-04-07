@@ -3,9 +3,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
- * Binance Public Auto Invest REST API
+ * Binance Auto Invest REST API
  *
- * OpenAPI Specification for the Binance Public Auto Invest REST API
+ * OpenAPI Specification for the Binance Auto Invest REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *
