@@ -1,7 +1,7 @@
 /**
- * Binance Public Algo REST API
+ * Binance Algo REST API
  *
- * OpenAPI Specification for the Binance Public Algo REST API
+ * OpenAPI Specification for the Binance Algo REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *

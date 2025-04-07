@@ -139,21 +139,6 @@ The REST API provides detailed error types to help you handle issues effectively
 
 See the [Error Handling example](./docs/rest-api/error-handling.md) for detailed usage.
 
-#### Testnet
-
-For testing purposes, `/sapi/v1/algo/*` endpoints can be used in the [Testnet](https://testnet.binance.vision/). Update the `basePath` in your configuration:
-
-```typescript
-import { Algo, AlgoRestAPI, ALGO_REST_API_TESTNET_URL } from '@binance/algo';
-
-const configurationRestAPI = {
-    apiKey: 'your-api-key',
-    apiSecret: 'your-api-secret',
-    basePath: ALGO_REST_API_TESTNET_URL,
-};
-const client = new Algo({ configurationRestAPI });
-```
-
 If `basePath` is not provided, it defaults to `https://api.binance.com`.
 
 ## Testing
