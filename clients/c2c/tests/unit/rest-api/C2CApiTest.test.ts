@@ -1,7 +1,7 @@
 /**
- * Binance Public C2C REST API
+ * Binance C2C REST API
  *
- * OpenAPI Specification for the Binance Public C2C REST API
+ * OpenAPI Specification for the Binance C2C REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,12 +14,12 @@
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { C2cApi } from '../../../src/rest-api';
+import { C2CApi } from '../../../src/rest-api';
 import { GetC2CTradeHistoryRequest } from '../../../src/rest-api';
 import type { GetC2CTradeHistoryResponse } from '../../../src/rest-api/types';
 
-describe('C2cApi', () => {
-    let client: C2cApi;
+describe('C2CApi', () => {
+    let client: C2CApi;
     let config: ConfigurationRestAPI;
     let mockResponse: object = {};
 
@@ -29,7 +29,7 @@ describe('C2cApi', () => {
             apiSecret: 'test-api-secret',
             basePath: '',
         });
-        client = new C2cApi(config);
+        client = new C2CApi(config);
     });
 
     describe('getC2CTradeHistory()', () => {

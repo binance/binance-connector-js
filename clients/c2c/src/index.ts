@@ -3,7 +3,6 @@ export * as C2CRestAPI from './rest-api';
 
 export {
     C2C_REST_API_PROD_URL,
-    C2C_REST_API_TESTNET_URL,
     ConnectorClientError,
     RequiredError,
     UnauthorizedError,

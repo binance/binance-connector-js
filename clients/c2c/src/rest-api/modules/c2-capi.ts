@@ -1,7 +1,7 @@
 /**
- * Binance Public C2C REST API
+ * Binance C2C REST API
  *
- * OpenAPI Specification for the Binance Public C2C REST API
+ * OpenAPI Specification for the Binance C2C REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -21,9 +21,9 @@ import {
 import type { GetC2CTradeHistoryResponse } from '../types';
 
 /**
- * C2cApi - axios parameter creator
+ * C2CApi - axios parameter creator
  */
-const C2cApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
+const C2CApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
     return {
         /**
          * Get C2C Trade History
@@ -81,10 +81,10 @@ const C2cApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
 };
 
 /**
- * C2cApi - interface
- * @interface C2cApi
+ * C2CApi - interface
+ * @interface C2CApi
  */
-export interface C2cApiInterface {
+export interface C2CApiInterface {
     /**
      * Get C2C Trade History
      *
@@ -99,7 +99,7 @@ export interface C2cApiInterface {
      * @param {GetC2CTradeHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof C2cApiInterface
+     * @memberof C2CApiInterface
      */
     getC2CTradeHistory(
         requestParameters?: GetC2CTradeHistoryRequest
@@ -107,50 +107,50 @@ export interface C2cApiInterface {
 }
 
 /**
- * Request parameters for getC2CTradeHistory operation in C2cApi.
+ * Request parameters for getC2CTradeHistory operation in C2CApi.
  * @interface GetC2CTradeHistoryRequest
  */
 export interface GetC2CTradeHistoryRequest {
     /**
      *
      * @type {number}
-     * @memberof C2cApiGetC2CTradeHistory
+     * @memberof C2CApiGetC2CTradeHistory
      */
     readonly startTime?: number;
 
     /**
      *
      * @type {number}
-     * @memberof C2cApiGetC2CTradeHistory
+     * @memberof C2CApiGetC2CTradeHistory
      */
     readonly endTime?: number;
 
     /**
      * Default 1
      * @type {number}
-     * @memberof C2cApiGetC2CTradeHistory
+     * @memberof C2CApiGetC2CTradeHistory
      */
     readonly page?: number;
 
     /**
      *
      * @type {number}
-     * @memberof C2cApiGetC2CTradeHistory
+     * @memberof C2CApiGetC2CTradeHistory
      */
     readonly recvWindow?: number;
 }
 
 /**
- * C2cApi - object-oriented interface
- * @class C2cApi
+ * C2CApi - object-oriented interface
+ * @class C2CApi
  */
-export class C2cApi implements C2cApiInterface {
+export class C2CApi implements C2CApiInterface {
     private readonly configuration: ConfigurationRestAPI;
     private localVarAxiosParamCreator;
 
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
-        this.localVarAxiosParamCreator = C2cApiAxiosParamCreator(configuration);
+        this.localVarAxiosParamCreator = C2CApiAxiosParamCreator(configuration);
     }
 
     /**
@@ -167,7 +167,7 @@ export class C2cApi implements C2cApiInterface {
      * @param {GetC2CTradeHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetC2CTradeHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof C2cApi
+     * @memberof C2CApi
      * @see {@link https://developers.binance.com/docs/c2c/rest-api/Get-C2C-Trade-History Binance API Documentation}
      */
     public async getC2CTradeHistory(

@@ -1,7 +1,7 @@
 /**
- * Binance Public C2C REST API
+ * Binance C2C REST API
  *
- * OpenAPI Specification for the Binance Public C2C REST API
+ * OpenAPI Specification for the Binance C2C REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *

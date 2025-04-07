@@ -1,7 +1,7 @@
 /**
- * Binance Public C2C REST API
+ * Binance C2C REST API
  *
- * OpenAPI Specification for the Binance Public C2C REST API
+ * OpenAPI Specification for the Binance C2C REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -12,19 +12,19 @@
  */
 
 import { ConfigurationRestAPI, RestApiResponse, sendRequest } from '@binance/common';
-import { C2cApi } from './modules/c2c-api';
+import { C2CApi } from './modules/c2-capi';
 
-import type { GetC2CTradeHistoryRequest } from './modules/c2c-api';
+import type { GetC2CTradeHistoryRequest } from './modules/c2-capi';
 
 import type { GetC2CTradeHistoryResponse } from './types';
 
 export class RestAPI {
     private configuration: ConfigurationRestAPI;
-    private c2cApi: C2cApi;
+    private c2CApi: C2CApi;
 
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
-        this.c2cApi = new C2cApi(configuration);
+        this.c2CApi = new C2CApi(configuration);
     }
 
     /**
@@ -80,6 +80,6 @@ export class RestAPI {
     getC2CTradeHistory(
         requestParameters: GetC2CTradeHistoryRequest = {}
     ): Promise<RestApiResponse<GetC2CTradeHistoryResponse>> {
-        return this.c2cApi.getC2CTradeHistory(requestParameters);
+        return this.c2CApi.getC2CTradeHistory(requestParameters);
     }
 }
