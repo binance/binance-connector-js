@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Public Mining REST API
+ * Binance Mining REST API
  *
- * OpenAPI Specification for the Binance Public Mining REST API
+ * OpenAPI Specification for the Binance Mining REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *
