@@ -1,7 +1,7 @@
 /**
- * Binance Public Crypto Loan REST API
+ * Binance Crypto Loan REST API
  *
- * OpenAPI Specification for the Binance Public Crypto Loan REST API
+ * OpenAPI Specification for the Binance Crypto Loan REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *

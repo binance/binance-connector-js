@@ -3,7 +3,6 @@ export * as CryptoLoanRestAPI from './rest-api';
 
 export {
     CRYPTO_LOAN_REST_API_PROD_URL,
-    CRYPTO_LOAN_REST_API_TESTNET_URL,
     ConnectorClientError,
     RequiredError,
     UnauthorizedError,

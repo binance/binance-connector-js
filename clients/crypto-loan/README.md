@@ -140,25 +140,6 @@ The REST API provides detailed error types to help you handle issues effectively
 
 See the [Error Handling example](./docs/rest-api/error-handling.md) for detailed usage.
 
-#### Testnet
-
-For testing purposes, `/sapi/v1/loan/*` and `/sapi/v2/loan/*` endpoints can be used in the [Testnet](https://testnet.binance.vision/). Update the `basePath` in your configuration:
-
-```typescript
-import {
-    CryptoLoan,
-    CryptoLoanRestAPI,
-    CRYPTO_LOAN_REST_API_TESTNET_URL,
-} from '@binance/crypto-loan';
-
-const configurationRestAPI = {
-    apiKey: 'your-api-key',
-    apiSecret: 'your-api-secret',
-    basePath: CRYPTO_LOAN_REST_API_TESTNET_URL,
-};
-const client = new CryptoLoan({ configurationRestAPI });
-```
-
 If `basePath` is not provided, it defaults to `https://api.binance.com`.
 
 ## Testing
