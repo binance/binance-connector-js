@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Public Derivatives Trading USDS Futures REST API
+ * Binance Derivatives Trading USDS Futures REST API
  *
- * OpenAPI Specification for the Binance Public Derivatives Trading USDS Futures REST API
+ * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *

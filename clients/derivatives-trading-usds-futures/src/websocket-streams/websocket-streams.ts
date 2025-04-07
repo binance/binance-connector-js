@@ -1,7 +1,7 @@
 /**
- * Binance Public Derivatives Trading USDS Futures WebSocket Market Streams
+ * Binance Derivatives Trading USDS Futures WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Public Derivatives Trading USDS Futures WebSocket Market Streams
+ * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
  *
  * The version of the OpenAPI document: 1.0.0
  *
