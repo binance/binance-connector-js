@@ -3,7 +3,6 @@ export * as DualInvestmentRestAPI from './rest-api';
 
 export {
     DUAL_INVESTMENT_REST_API_PROD_URL,
-    DUAL_INVESTMENT_REST_API_TESTNET_URL,
     ConnectorClientError,
     RequiredError,
     UnauthorizedError,

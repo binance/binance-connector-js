@@ -1,7 +1,7 @@
 /**
- * Binance Public Dual Investment REST API
+ * Binance Dual Investment REST API
  *
- * OpenAPI Specification for the Binance Public Dual Investment REST API
+ * OpenAPI Specification for the Binance Dual Investment REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *
