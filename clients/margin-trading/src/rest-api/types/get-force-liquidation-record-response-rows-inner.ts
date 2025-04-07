@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Public Margin Trading REST API
+ * Binance Margin Trading REST API
  *
- * OpenAPI Specification for the Binance Public Margin Trading REST API
+ * OpenAPI Specification for the Binance Margin Trading REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *
