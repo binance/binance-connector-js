@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Public Pay REST API
+ * Binance Pay REST API
  *
- * OpenAPI Specification for the Binance Public Pay REST API
+ * OpenAPI Specification for the Binance Pay REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *

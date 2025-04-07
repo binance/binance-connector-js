@@ -3,7 +3,6 @@ export * as PayRestAPI from './rest-api';
 
 export {
     PAY_REST_API_PROD_URL,
-    PAY_REST_API_TESTNET_URL,
     ConnectorClientError,
     RequiredError,
     UnauthorizedError,
