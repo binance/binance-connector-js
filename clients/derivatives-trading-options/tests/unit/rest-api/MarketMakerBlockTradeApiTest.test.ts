@@ -1,7 +1,7 @@
 /**
- * Binance Public Derivatives Trading Options REST API
+ * Binance Derivatives Trading Options REST API
  *
- * OpenAPI Specification for the Binance Public Derivatives Trading Options REST API
+ * OpenAPI Specification for the Binance Derivatives Trading Options REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *
