@@ -3,7 +3,6 @@ export * as NFTRestAPI from './rest-api';
 
 export {
     NFT_REST_API_PROD_URL,
-    NFT_REST_API_TESTNET_URL,
     ConnectorClientError,
     RequiredError,
     UnauthorizedError,

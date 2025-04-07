@@ -1,7 +1,7 @@
 /**
- * Binance Public NFT REST API
+ * Binance NFT REST API
  *
- * OpenAPI Specification for the Binance Public NFT REST API
+ * OpenAPI Specification for the Binance NFT REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,7 +14,7 @@
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { NftApi } from '../../../src/rest-api';
+import { NFTApi } from '../../../src/rest-api';
 import {
     GetNFTAssetRequest,
     GetNFTDepositHistoryRequest,
@@ -28,8 +28,8 @@ import type {
     GetNFTWithdrawHistoryResponse,
 } from '../../../src/rest-api/types';
 
-describe('NftApi', () => {
-    let client: NftApi;
+describe('NFTApi', () => {
+    let client: NFTApi;
     let config: ConfigurationRestAPI;
     let mockResponse: object = {};
 
@@ -39,7 +39,7 @@ describe('NftApi', () => {
             apiSecret: 'test-api-secret',
             basePath: '',
         });
-        client = new NftApi(config);
+        client = new NFTApi(config);
     });
 
     describe('getNFTAsset()', () => {

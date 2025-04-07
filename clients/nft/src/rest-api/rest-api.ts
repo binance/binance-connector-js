@@ -1,7 +1,7 @@
 /**
- * Binance Public NFT REST API
+ * Binance NFT REST API
  *
- * OpenAPI Specification for the Binance Public NFT REST API
+ * OpenAPI Specification for the Binance NFT REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -12,14 +12,14 @@
  */
 
 import { ConfigurationRestAPI, RestApiResponse, sendRequest } from '@binance/common';
-import { NftApi } from './modules/nft-api';
+import { NFTApi } from './modules/nftapi';
 
 import type {
     GetNFTAssetRequest,
     GetNFTDepositHistoryRequest,
     GetNFTTransactionHistoryRequest,
     GetNFTWithdrawHistoryRequest,
-} from './modules/nft-api';
+} from './modules/nftapi';
 
 import type {
     GetNFTAssetResponse,
@@ -30,11 +30,11 @@ import type {
 
 export class RestAPI {
     private configuration: ConfigurationRestAPI;
-    private nftApi: NftApi;
+    private nFTApi: NFTApi;
 
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
-        this.nftApi = new NftApi(configuration);
+        this.nFTApi = new NFTApi(configuration);
     }
 
     /**
@@ -85,7 +85,7 @@ export class RestAPI {
     getNFTAsset(
         requestParameters: GetNFTAssetRequest = {}
     ): Promise<RestApiResponse<GetNFTAssetResponse>> {
-        return this.nftApi.getNFTAsset(requestParameters);
+        return this.nFTApi.getNFTAsset(requestParameters);
     }
 
     /**
@@ -106,7 +106,7 @@ export class RestAPI {
     getNFTDepositHistory(
         requestParameters: GetNFTDepositHistoryRequest = {}
     ): Promise<RestApiResponse<GetNFTDepositHistoryResponse>> {
-        return this.nftApi.getNFTDepositHistory(requestParameters);
+        return this.nFTApi.getNFTDepositHistory(requestParameters);
     }
 
     /**
@@ -126,7 +126,7 @@ export class RestAPI {
     getNFTTransactionHistory(
         requestParameters: GetNFTTransactionHistoryRequest
     ): Promise<RestApiResponse<GetNFTTransactionHistoryResponse>> {
-        return this.nftApi.getNFTTransactionHistory(requestParameters);
+        return this.nFTApi.getNFTTransactionHistory(requestParameters);
     }
 
     /**
@@ -146,6 +146,6 @@ export class RestAPI {
     getNFTWithdrawHistory(
         requestParameters: GetNFTWithdrawHistoryRequest = {}
     ): Promise<RestApiResponse<GetNFTWithdrawHistoryResponse>> {
-        return this.nftApi.getNFTWithdrawHistory(requestParameters);
+        return this.nFTApi.getNFTWithdrawHistory(requestParameters);
     }
 }

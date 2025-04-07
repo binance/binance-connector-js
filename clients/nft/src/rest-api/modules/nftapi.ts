@@ -1,7 +1,7 @@
 /**
- * Binance Public NFT REST API
+ * Binance NFT REST API
  *
- * OpenAPI Specification for the Binance Public NFT REST API
+ * OpenAPI Specification for the Binance NFT REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -27,9 +27,9 @@ import type {
 } from '../types';
 
 /**
- * NftApi - axios parameter creator
+ * NFTApi - axios parameter creator
  */
-const NftApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
+const NFTApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
     return {
         /**
          * Get NFT Asset
@@ -254,10 +254,10 @@ const NftApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
 };
 
 /**
- * NftApi - interface
- * @interface NftApi
+ * NFTApi - interface
+ * @interface NFTApi
  */
-export interface NftApiInterface {
+export interface NFTApiInterface {
     /**
      * Get NFT Asset
      *
@@ -267,7 +267,7 @@ export interface NftApiInterface {
      * @param {GetNFTAssetRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof NftApiInterface
+     * @memberof NFTApiInterface
      */
     getNFTAsset(
         requestParameters?: GetNFTAssetRequest
@@ -285,7 +285,7 @@ export interface NftApiInterface {
      * @param {GetNFTDepositHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof NftApiInterface
+     * @memberof NFTApiInterface
      */
     getNFTDepositHistory(
         requestParameters?: GetNFTDepositHistoryRequest
@@ -302,7 +302,7 @@ export interface NftApiInterface {
      * @param {GetNFTTransactionHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof NftApiInterface
+     * @memberof NFTApiInterface
      */
     getNFTTransactionHistory(
         requestParameters: GetNFTTransactionHistoryRequest
@@ -319,7 +319,7 @@ export interface NftApiInterface {
      * @param {GetNFTWithdrawHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof NftApiInterface
+     * @memberof NFTApiInterface
      */
     getNFTWithdrawHistory(
         requestParameters?: GetNFTWithdrawHistoryRequest
@@ -327,173 +327,173 @@ export interface NftApiInterface {
 }
 
 /**
- * Request parameters for getNFTAsset operation in NftApi.
+ * Request parameters for getNFTAsset operation in NFTApi.
  * @interface GetNFTAssetRequest
  */
 export interface GetNFTAssetRequest {
     /**
      * Default 50, Max 50
      * @type {number}
-     * @memberof NftApiGetNFTAsset
+     * @memberof NFTApiGetNFTAsset
      */
     readonly limit?: number;
 
     /**
      * Default 1
      * @type {number}
-     * @memberof NftApiGetNFTAsset
+     * @memberof NFTApiGetNFTAsset
      */
     readonly page?: number;
 
     /**
      *
      * @type {number}
-     * @memberof NftApiGetNFTAsset
+     * @memberof NFTApiGetNFTAsset
      */
     readonly recvWindow?: number;
 }
 
 /**
- * Request parameters for getNFTDepositHistory operation in NftApi.
+ * Request parameters for getNFTDepositHistory operation in NFTApi.
  * @interface GetNFTDepositHistoryRequest
  */
 export interface GetNFTDepositHistoryRequest {
     /**
      *
      * @type {number}
-     * @memberof NftApiGetNFTDepositHistory
+     * @memberof NFTApiGetNFTDepositHistory
      */
     readonly startTime?: number;
 
     /**
      *
      * @type {number}
-     * @memberof NftApiGetNFTDepositHistory
+     * @memberof NFTApiGetNFTDepositHistory
      */
     readonly endTime?: number;
 
     /**
      * Default 50, Max 50
      * @type {number}
-     * @memberof NftApiGetNFTDepositHistory
+     * @memberof NFTApiGetNFTDepositHistory
      */
     readonly limit?: number;
 
     /**
      * Default 1
      * @type {number}
-     * @memberof NftApiGetNFTDepositHistory
+     * @memberof NFTApiGetNFTDepositHistory
      */
     readonly page?: number;
 
     /**
      *
      * @type {number}
-     * @memberof NftApiGetNFTDepositHistory
+     * @memberof NFTApiGetNFTDepositHistory
      */
     readonly recvWindow?: number;
 }
 
 /**
- * Request parameters for getNFTTransactionHistory operation in NftApi.
+ * Request parameters for getNFTTransactionHistory operation in NFTApi.
  * @interface GetNFTTransactionHistoryRequest
  */
 export interface GetNFTTransactionHistoryRequest {
     /**
      * 0: purchase order, 1: sell order, 2: royalty income, 3: primary market order, 4: mint fee
      * @type {number}
-     * @memberof NftApiGetNFTTransactionHistory
+     * @memberof NFTApiGetNFTTransactionHistory
      */
     readonly orderType: number;
 
     /**
      *
      * @type {number}
-     * @memberof NftApiGetNFTTransactionHistory
+     * @memberof NFTApiGetNFTTransactionHistory
      */
     readonly startTime?: number;
 
     /**
      *
      * @type {number}
-     * @memberof NftApiGetNFTTransactionHistory
+     * @memberof NFTApiGetNFTTransactionHistory
      */
     readonly endTime?: number;
 
     /**
      * Default 50, Max 50
      * @type {number}
-     * @memberof NftApiGetNFTTransactionHistory
+     * @memberof NFTApiGetNFTTransactionHistory
      */
     readonly limit?: number;
 
     /**
      * Default 1
      * @type {number}
-     * @memberof NftApiGetNFTTransactionHistory
+     * @memberof NFTApiGetNFTTransactionHistory
      */
     readonly page?: number;
 
     /**
      *
      * @type {number}
-     * @memberof NftApiGetNFTTransactionHistory
+     * @memberof NFTApiGetNFTTransactionHistory
      */
     readonly recvWindow?: number;
 }
 
 /**
- * Request parameters for getNFTWithdrawHistory operation in NftApi.
+ * Request parameters for getNFTWithdrawHistory operation in NFTApi.
  * @interface GetNFTWithdrawHistoryRequest
  */
 export interface GetNFTWithdrawHistoryRequest {
     /**
      *
      * @type {number}
-     * @memberof NftApiGetNFTWithdrawHistory
+     * @memberof NFTApiGetNFTWithdrawHistory
      */
     readonly startTime?: number;
 
     /**
      *
      * @type {number}
-     * @memberof NftApiGetNFTWithdrawHistory
+     * @memberof NFTApiGetNFTWithdrawHistory
      */
     readonly endTime?: number;
 
     /**
      * Default 50, Max 50
      * @type {number}
-     * @memberof NftApiGetNFTWithdrawHistory
+     * @memberof NFTApiGetNFTWithdrawHistory
      */
     readonly limit?: number;
 
     /**
      * Default 1
      * @type {number}
-     * @memberof NftApiGetNFTWithdrawHistory
+     * @memberof NFTApiGetNFTWithdrawHistory
      */
     readonly page?: number;
 
     /**
      *
      * @type {number}
-     * @memberof NftApiGetNFTWithdrawHistory
+     * @memberof NFTApiGetNFTWithdrawHistory
      */
     readonly recvWindow?: number;
 }
 
 /**
- * NftApi - object-oriented interface
- * @class NftApi
+ * NFTApi - object-oriented interface
+ * @class NFTApi
  */
-export class NftApi implements NftApiInterface {
+export class NFTApi implements NFTApiInterface {
     private readonly configuration: ConfigurationRestAPI;
     private localVarAxiosParamCreator;
 
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
-        this.localVarAxiosParamCreator = NftApiAxiosParamCreator(configuration);
+        this.localVarAxiosParamCreator = NFTApiAxiosParamCreator(configuration);
     }
 
     /**
@@ -505,7 +505,7 @@ export class NftApi implements NftApiInterface {
      * @param {GetNFTAssetRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetNFTAssetResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof NftApi
+     * @memberof NFTApi
      * @see {@link https://developers.binance.com/docs/nft/rest-api/Get-NFT-Asset Binance API Documentation}
      */
     public async getNFTAsset(
@@ -539,7 +539,7 @@ export class NftApi implements NftApiInterface {
      * @param {GetNFTDepositHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetNFTDepositHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof NftApi
+     * @memberof NFTApi
      * @see {@link https://developers.binance.com/docs/nft/rest-api/Get-NFT-Deposit-History Binance API Documentation}
      */
     public async getNFTDepositHistory(
@@ -574,7 +574,7 @@ export class NftApi implements NftApiInterface {
      * @param {GetNFTTransactionHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetNFTTransactionHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof NftApi
+     * @memberof NFTApi
      * @see {@link https://developers.binance.com/docs/nft/rest-api/Get-NFT-Transaction-History Binance API Documentation}
      */
     public async getNFTTransactionHistory(
@@ -610,7 +610,7 @@ export class NftApi implements NftApiInterface {
      * @param {GetNFTWithdrawHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetNFTWithdrawHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof NftApi
+     * @memberof NFTApi
      * @see {@link https://developers.binance.com/docs/nft/rest-api/Get-NFT-Withdraw-History Binance API Documentation}
      */
     public async getNFTWithdrawHistory(

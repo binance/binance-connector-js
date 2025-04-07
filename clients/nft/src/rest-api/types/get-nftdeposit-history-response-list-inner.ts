@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Public NFT REST API
+ * Binance NFT REST API
  *
- * OpenAPI Specification for the Binance Public NFT REST API
+ * OpenAPI Specification for the Binance NFT REST API
  *
  * The version of the OpenAPI document: 1.0.0
  *
