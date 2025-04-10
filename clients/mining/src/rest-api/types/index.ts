@@ -5,7 +5,6 @@ export * from './acquiring-algorithm-response';
 export * from './acquiring-algorithm-response-data-inner';
 export * from './acquiring-coinname-response';
 export * from './acquiring-coinname-response-data-inner';
-export * from './bad-request';
 export * from './cancel-hashrate-resale-configuration-response';
 export * from './earnings-list-response';
 export * from './earnings-list-response-data';
