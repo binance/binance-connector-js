@@ -1,4 +1,3 @@
-export * from './bad-request';
 export * from './change-auto-compound-status-response';
 export * from './check-dual-investment-accounts-response';
 export * from './get-dual-investment-positions-response';
