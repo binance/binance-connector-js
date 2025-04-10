@@ -1,4 +1,3 @@
-export * from './bad-request';
 export * from './claim-boost-rewards-response';
 export * from './eth-staking-account-response';
 export * from './eth-staking-account-response-holdings';
