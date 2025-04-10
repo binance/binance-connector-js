@@ -3,7 +3,6 @@ export * from './account-balance-response1';
 export * from './account-balance-response1-inner';
 export * from './account-balance-response2';
 export * from './account-information-response';
-export * from './bad-request';
 export * from './bnb-transfer-response';
 export * from './cancel-all-cm-open-conditional-orders-response';
 export * from './cancel-all-cm-open-orders-response';

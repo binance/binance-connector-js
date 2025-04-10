@@ -18,6 +18,7 @@ import {
     sendRequest,
     type RequestArgs,
 } from '@binance/common';
+import type {} from '../types';
 
 /**
  * MarketDataApi - axios parameter creator

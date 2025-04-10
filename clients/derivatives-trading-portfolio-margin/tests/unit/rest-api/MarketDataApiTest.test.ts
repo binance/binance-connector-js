@@ -18,6 +18,7 @@ import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { MarketDataApi } from '../../../src/rest-api';
 import {} from '../../../src/rest-api';
+import type {} from '../../../src/rest-api/types';
 
 describe('MarketDataApi', () => {
     let client: MarketDataApi;
