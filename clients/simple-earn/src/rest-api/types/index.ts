@@ -1,4 +1,3 @@
-export * from './bad-request';
 export * from './get-collateral-record-response';
 export * from './get-collateral-record-response-rows-inner';
 export * from './get-flexible-personal-left-quota-response';
