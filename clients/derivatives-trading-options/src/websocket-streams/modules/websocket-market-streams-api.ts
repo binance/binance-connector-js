@@ -154,7 +154,7 @@ const WebsocketMarketStreamsApiParamCreator = function () {
             assertParamExists('partialBookDepthStreams', 'levels', levels);
 
             return replaceWebsocketStreamsPlaceholders(
-                '/<symbol>@depth<levels><updateSpeed>'.slice(1),
+                '/<symbol>@depth<levels>@<updateSpeed>'.slice(1),
                 { symbol, levels, id, updateSpeed }
             );
         },

@@ -15,7 +15,7 @@ async function tradeStreams() {
         connection = await client.websocketStreams.connect();
 
         const stream = connection.tradeStreams({
-            symbol: 'BTCUSDT',
+            symbol: 'btcusdt',
         });
 
         stream.on('message', (data) => {

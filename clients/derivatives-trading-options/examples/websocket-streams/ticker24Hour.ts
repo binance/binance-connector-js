@@ -15,7 +15,7 @@ async function ticker24Hour() {
         connection = await client.websocketStreams.connect();
 
         const stream = connection.ticker24Hour({
-            symbol: 'BTCUSDT',
+            symbol: 'btcusdt',
         });
 
         stream.on('message', (data) => {

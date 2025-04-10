@@ -8,7 +8,6 @@ export * from './account-funding-flow-response-inner';
 export * from './account-trade-list-response';
 export * from './account-trade-list-response-inner';
 export * from './auto-cancel-all-open-orders-response';
-export * from './bad-request';
 export * from './cancel-all-option-orders-by-underlying-response';
 export * from './cancel-all-option-orders-on-specific-symbol-response';
 export * from './cancel-multiple-option-orders-response';
