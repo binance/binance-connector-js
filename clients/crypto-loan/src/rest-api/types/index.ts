@@ -1,4 +1,3 @@
-export * from './bad-request';
 export * from './check-collateral-repay-rate-response';
 export * from './check-collateral-repay-rate-stable-rate-response';
 export * from './crypto-loan-adjust-ltv-response';
