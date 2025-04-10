@@ -1,4 +1,3 @@
-export * from './bad-request';
 export * from './cancel-algo-order-future-algo-response';
 export * from './cancel-algo-order-spot-algo-response';
 export * from './query-current-algo-open-orders-future-algo-response';
