@@ -1,5 +1,4 @@
 export * from './accept-quote-response';
-export * from './bad-request';
 export * from './cancel-limit-order-response';
 export * from './get-convert-trade-history-response';
 export * from './get-convert-trade-history-response-list-inner';
