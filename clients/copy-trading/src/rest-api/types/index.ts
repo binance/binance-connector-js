@@ -1,4 +1,3 @@
-export * from './bad-request';
 export * from './get-futures-lead-trader-status-response';
 export * from './get-futures-lead-trader-status-response-data';
 export * from './get-futures-lead-trading-symbol-whitelist-response';
