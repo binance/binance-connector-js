@@ -1,4 +1,3 @@
-export * from './bad-request';
 export * from './check-viploan-collateral-account-response';
 export * from './check-viploan-collateral-account-response-rows-inner';
 export * from './get-borrow-interest-rate-response';
