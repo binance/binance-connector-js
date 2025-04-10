@@ -1,4 +1,3 @@
-export * from './bad-request';
 export * from './create-adual-token-gift-card-response';
 export * from './create-adual-token-gift-card-response-data';
 export * from './create-asingle-token-gift-card-response';
