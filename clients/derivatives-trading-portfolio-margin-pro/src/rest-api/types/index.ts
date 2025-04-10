@@ -1,4 +1,3 @@
-export * from './bad-request';
 export * from './bnb-transfer-response';
 export * from './change-auto-repay-futures-status-response';
 export * from './fund-auto-collection-response';
