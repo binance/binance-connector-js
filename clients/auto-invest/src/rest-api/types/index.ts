@@ -1,4 +1,3 @@
-export * from './bad-request';
 export * from './change-plan-status-response';
 export * from './get-list-of-plans-response';
 export * from './get-list-of-plans-response1';
