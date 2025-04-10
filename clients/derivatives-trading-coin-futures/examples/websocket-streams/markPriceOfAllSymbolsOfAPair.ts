@@ -15,7 +15,7 @@ async function markPriceOfAllSymbolsOfAPair() {
         connection = await client.websocketStreams.connect();
 
         const stream = connection.markPriceOfAllSymbolsOfAPair({
-            pair: 'BTCUSDT',
+            pair: 'btcusdt',
         });
 
         stream.on('message', (data) => {

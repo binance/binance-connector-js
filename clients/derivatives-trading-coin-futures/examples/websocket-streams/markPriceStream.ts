@@ -15,7 +15,7 @@ async function markPriceStream() {
         connection = await client.websocketStreams.connect();
 
         const stream = connection.markPriceStream({
-            symbol: 'BTCUSDT',
+            symbol: 'btcusdt',
         });
 
         stream.on('message', (data) => {

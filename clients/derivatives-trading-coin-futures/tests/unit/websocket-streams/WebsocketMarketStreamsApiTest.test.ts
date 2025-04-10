@@ -45,7 +45,7 @@ describe('WebsocketMarketStreamsApi', () => {
     describe('aggregateTradeStreams()', () => {
         it('should execute aggregateTradeStreams() successfully', async () => {
             const params: AggregateTradeStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -74,7 +74,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const params: AggregateTradeStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -115,7 +115,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const _params: AggregateTradeStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -431,7 +431,7 @@ describe('WebsocketMarketStreamsApi', () => {
     describe('continuousContractKlineCandlestickStreams()', () => {
         it('should execute continuousContractKlineCandlestickStreams() successfully', async () => {
             const params: ContinuousContractKlineCandlestickStreamsRequest = {
-                pair: 'BTCUSDT',
+                pair: 'btcusdt',
                 contractType: 'next_quarter',
                 interval: '1m',
                 id: 'e9d6b4349871b40611412680b3445fac',
@@ -474,7 +474,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const params: ContinuousContractKlineCandlestickStreamsRequest = {
-                pair: 'BTCUSDT',
+                pair: 'btcusdt',
                 contractType: 'next_quarter',
                 interval: '1m',
                 id: 'e9d6b4349871b40611412680b3445fac',
@@ -532,7 +532,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const _params: ContinuousContractKlineCandlestickStreamsRequest = {
-                pair: 'BTCUSDT',
+                pair: 'btcusdt',
                 contractType: 'next_quarter',
                 interval: '1m',
             };
@@ -552,7 +552,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const _params: ContinuousContractKlineCandlestickStreamsRequest = {
-                pair: 'BTCUSDT',
+                pair: 'btcusdt',
                 contractType: 'next_quarter',
                 interval: '1m',
             };
@@ -572,7 +572,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const _params: ContinuousContractKlineCandlestickStreamsRequest = {
-                pair: 'BTCUSDT',
+                pair: 'btcusdt',
                 contractType: 'next_quarter',
                 interval: '1m',
             };
@@ -660,7 +660,7 @@ describe('WebsocketMarketStreamsApi', () => {
     describe('diffBookDepthStreams()', () => {
         it('should execute diffBookDepthStreams() successfully', async () => {
             const params: DiffBookDepthStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
                 updateSpeed: 'updateSpeed_example',
             };
@@ -679,7 +679,7 @@ describe('WebsocketMarketStreamsApi', () => {
             };
 
             mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@depth<updateSpeed>'.slice(1), params as unknown as Record<string, DiffBookDepthStreamsRequest>)}`,
+                `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@depth@<updateSpeed>'.slice(1), params as unknown as Record<string, DiffBookDepthStreamsRequest>)}`,
                 mockResponse
             );
         });
@@ -690,7 +690,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const params: DiffBookDepthStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
                 updateSpeed: 'updateSpeed_example',
             };
@@ -715,7 +715,7 @@ describe('WebsocketMarketStreamsApi', () => {
             websocketStreamClient['onMessage'](
                 JSON.stringify({
                     stream: replaceWebsocketStreamsPlaceholders(
-                        '/<symbol>@depth<updateSpeed>'.slice(1),
+                        '/<symbol>@depth@<updateSpeed>'.slice(1),
                         params as unknown as Record<string, DiffBookDepthStreamsRequest>
                     ),
                     data: mockResponse,
@@ -732,7 +732,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const _params: DiffBookDepthStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -746,7 +746,7 @@ describe('WebsocketMarketStreamsApi', () => {
     describe('indexKlineCandlestickStreams()', () => {
         it('should execute indexKlineCandlestickStreams() successfully', async () => {
             const params: IndexKlineCandlestickStreamsRequest = {
-                pair: 'BTCUSDT',
+                pair: 'btcusdt',
                 interval: '1m',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
@@ -788,7 +788,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const params: IndexKlineCandlestickStreamsRequest = {
-                pair: 'BTCUSDT',
+                pair: 'btcusdt',
                 interval: '1m',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
@@ -842,7 +842,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const _params: IndexKlineCandlestickStreamsRequest = {
-                pair: 'BTCUSDT',
+                pair: 'btcusdt',
                 interval: '1m',
             };
             const params = Object.assign({ ..._params });
@@ -859,7 +859,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const _params: IndexKlineCandlestickStreamsRequest = {
-                pair: 'BTCUSDT',
+                pair: 'btcusdt',
                 interval: '1m',
             };
             const params = Object.assign({ ..._params });
@@ -874,7 +874,7 @@ describe('WebsocketMarketStreamsApi', () => {
     describe('indexPriceStream()', () => {
         it('should execute indexPriceStream() successfully', async () => {
             const params: IndexPriceStreamRequest = {
-                pair: 'BTCUSDT',
+                pair: 'btcusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
                 updateSpeed: 'updateSpeed_example',
             };
@@ -887,7 +887,7 @@ describe('WebsocketMarketStreamsApi', () => {
             };
 
             mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/<pair>@indexPrice<updateSpeed>'.slice(1), params as unknown as Record<string, IndexPriceStreamRequest>)}`,
+                `ws/${replaceWebsocketStreamsPlaceholders('/<pair>@indexPrice@<updateSpeed>'.slice(1), params as unknown as Record<string, IndexPriceStreamRequest>)}`,
                 mockResponse
             );
         });
@@ -898,7 +898,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const params: IndexPriceStreamRequest = {
-                pair: 'BTCUSDT',
+                pair: 'btcusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
                 updateSpeed: 'updateSpeed_example',
             };
@@ -917,7 +917,7 @@ describe('WebsocketMarketStreamsApi', () => {
             websocketStreamClient['onMessage'](
                 JSON.stringify({
                     stream: replaceWebsocketStreamsPlaceholders(
-                        '/<pair>@indexPrice<updateSpeed>'.slice(1),
+                        '/<pair>@indexPrice@<updateSpeed>'.slice(1),
                         params as unknown as Record<string, IndexPriceStreamRequest>
                     ),
                     data: mockResponse,
@@ -934,7 +934,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const _params: IndexPriceStreamRequest = {
-                pair: 'BTCUSDT',
+                pair: 'btcusdt',
             };
             const params = Object.assign({ ..._params });
             delete params?.pair;
@@ -948,7 +948,7 @@ describe('WebsocketMarketStreamsApi', () => {
     describe('individualSymbolBookTickerStreams()', () => {
         it('should execute individualSymbolBookTickerStreams() successfully', async () => {
             const params: IndividualSymbolBookTickerStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -977,7 +977,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const params: IndividualSymbolBookTickerStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -1021,7 +1021,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const _params: IndividualSymbolBookTickerStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1035,7 +1035,7 @@ describe('WebsocketMarketStreamsApi', () => {
     describe('individualSymbolMiniTickerStream()', () => {
         it('should execute individualSymbolMiniTickerStream() successfully', async () => {
             const params: IndividualSymbolMiniTickerStreamRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -1064,7 +1064,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const params: IndividualSymbolMiniTickerStreamRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -1105,7 +1105,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const _params: IndividualSymbolMiniTickerStreamRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1119,7 +1119,7 @@ describe('WebsocketMarketStreamsApi', () => {
     describe('individualSymbolTickerStreams()', () => {
         it('should execute individualSymbolTickerStreams() successfully', async () => {
             const params: IndividualSymbolTickerStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -1157,7 +1157,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const params: IndividualSymbolTickerStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -1207,7 +1207,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const _params: IndividualSymbolTickerStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1221,7 +1221,7 @@ describe('WebsocketMarketStreamsApi', () => {
     describe('klineCandlestickStreams()', () => {
         it('should execute klineCandlestickStreams() successfully', async () => {
             const params: KlineCandlestickStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 interval: '1m',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
@@ -1263,7 +1263,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const params: KlineCandlestickStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 interval: '1m',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
@@ -1317,7 +1317,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const _params: KlineCandlestickStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 interval: '1m',
             };
             const params = Object.assign({ ..._params });
@@ -1334,7 +1334,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const _params: KlineCandlestickStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 interval: '1m',
             };
             const params = Object.assign({ ..._params });
@@ -1349,7 +1349,7 @@ describe('WebsocketMarketStreamsApi', () => {
     describe('liquidationOrderStreams()', () => {
         it('should execute liquidationOrderStreams() successfully', async () => {
             const params: LiquidationOrderStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -1384,7 +1384,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const params: LiquidationOrderStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -1431,7 +1431,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const _params: LiquidationOrderStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1445,7 +1445,7 @@ describe('WebsocketMarketStreamsApi', () => {
     describe('markPriceKlineCandlestickStreams()', () => {
         it('should execute markPriceKlineCandlestickStreams() successfully', async () => {
             const params: MarkPriceKlineCandlestickStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 interval: '1m',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
@@ -1487,7 +1487,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const params: MarkPriceKlineCandlestickStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 interval: '1m',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
@@ -1541,7 +1541,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const _params: MarkPriceKlineCandlestickStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 interval: '1m',
             };
             const params = Object.assign({ ..._params });
@@ -1558,7 +1558,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const _params: MarkPriceKlineCandlestickStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 interval: '1m',
             };
             const params = Object.assign({ ..._params });
@@ -1573,7 +1573,7 @@ describe('WebsocketMarketStreamsApi', () => {
     describe('markPriceOfAllSymbolsOfAPair()', () => {
         it('should execute markPriceOfAllSymbolsOfAPair() successfully', async () => {
             const params: MarkPriceOfAllSymbolsOfAPairRequest = {
-                pair: 'BTCUSDT',
+                pair: 'btcusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
                 updateSpeed: 'updateSpeed_example',
             };
@@ -1602,7 +1602,7 @@ describe('WebsocketMarketStreamsApi', () => {
             ];
 
             mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/<pair>@markPrice<updateSpeed>'.slice(1), params as unknown as Record<string, MarkPriceOfAllSymbolsOfAPairRequest>)}`,
+                `ws/${replaceWebsocketStreamsPlaceholders('/<pair>@markPrice@<updateSpeed>'.slice(1), params as unknown as Record<string, MarkPriceOfAllSymbolsOfAPairRequest>)}`,
                 mockResponse
             );
         });
@@ -1613,7 +1613,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const params: MarkPriceOfAllSymbolsOfAPairRequest = {
-                pair: 'BTCUSDT',
+                pair: 'btcusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
                 updateSpeed: 'updateSpeed_example',
             };
@@ -1648,7 +1648,7 @@ describe('WebsocketMarketStreamsApi', () => {
             websocketStreamClient['onMessage'](
                 JSON.stringify({
                     stream: replaceWebsocketStreamsPlaceholders(
-                        '/<pair>@markPrice<updateSpeed>'.slice(1),
+                        '/<pair>@markPrice@<updateSpeed>'.slice(1),
                         params as unknown as Record<string, MarkPriceOfAllSymbolsOfAPairRequest>
                     ),
                     data: mockResponse,
@@ -1665,7 +1665,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const _params: MarkPriceOfAllSymbolsOfAPairRequest = {
-                pair: 'BTCUSDT',
+                pair: 'btcusdt',
             };
             const params = Object.assign({ ..._params });
             delete params?.pair;
@@ -1679,7 +1679,7 @@ describe('WebsocketMarketStreamsApi', () => {
     describe('markPriceStream()', () => {
         it('should execute markPriceStream() successfully', async () => {
             const params: MarkPriceStreamRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
                 updateSpeed: 'updateSpeed_example',
             };
@@ -1696,7 +1696,7 @@ describe('WebsocketMarketStreamsApi', () => {
             };
 
             mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@markPrice<updateSpeed>'.slice(1), params as unknown as Record<string, MarkPriceStreamRequest>)}`,
+                `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@markPrice@<updateSpeed>'.slice(1), params as unknown as Record<string, MarkPriceStreamRequest>)}`,
                 mockResponse
             );
         });
@@ -1707,7 +1707,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const params: MarkPriceStreamRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
                 updateSpeed: 'updateSpeed_example',
             };
@@ -1730,7 +1730,7 @@ describe('WebsocketMarketStreamsApi', () => {
             websocketStreamClient['onMessage'](
                 JSON.stringify({
                     stream: replaceWebsocketStreamsPlaceholders(
-                        '/<symbol>@markPrice<updateSpeed>'.slice(1),
+                        '/<symbol>@markPrice@<updateSpeed>'.slice(1),
                         params as unknown as Record<string, MarkPriceStreamRequest>
                     ),
                     data: mockResponse,
@@ -1747,7 +1747,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const _params: MarkPriceStreamRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1761,7 +1761,7 @@ describe('WebsocketMarketStreamsApi', () => {
     describe('partialBookDepthStreams()', () => {
         it('should execute partialBookDepthStreams() successfully', async () => {
             const params: PartialBookDepthStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 levels: 10,
                 id: 'e9d6b4349871b40611412680b3445fac',
                 updateSpeed: 'updateSpeed_example',
@@ -1793,7 +1793,7 @@ describe('WebsocketMarketStreamsApi', () => {
             };
 
             mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@depth<levels><updateSpeed>'.slice(1), params as unknown as Record<string, PartialBookDepthStreamsRequest>)}`,
+                `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@depth<levels>@<updateSpeed>'.slice(1), params as unknown as Record<string, PartialBookDepthStreamsRequest>)}`,
                 mockResponse
             );
         });
@@ -1804,7 +1804,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const params: PartialBookDepthStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 levels: 10,
                 id: 'e9d6b4349871b40611412680b3445fac',
                 updateSpeed: 'updateSpeed_example',
@@ -1842,7 +1842,7 @@ describe('WebsocketMarketStreamsApi', () => {
             websocketStreamClient['onMessage'](
                 JSON.stringify({
                     stream: replaceWebsocketStreamsPlaceholders(
-                        '/<symbol>@depth<levels><updateSpeed>'.slice(1),
+                        '/<symbol>@depth<levels>@<updateSpeed>'.slice(1),
                         params as unknown as Record<string, PartialBookDepthStreamsRequest>
                     ),
                     data: mockResponse,
@@ -1859,7 +1859,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const _params: PartialBookDepthStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 levels: 10,
             };
             const params = Object.assign({ ..._params });
@@ -1876,7 +1876,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const _params: PartialBookDepthStreamsRequest = {
-                symbol: 'BTCUSDT',
+                symbol: 'btcusdt',
                 levels: 10,
             };
             const params = Object.assign({ ..._params });

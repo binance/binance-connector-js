@@ -179,7 +179,7 @@ const WebsocketMarketStreamsApiParamCreator = function () {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('diffBookDepthStreams', 'symbol', symbol);
 
-            return replaceWebsocketStreamsPlaceholders('/<symbol>@depth<updateSpeed>'.slice(1), {
+            return replaceWebsocketStreamsPlaceholders('/<symbol>@depth@<updateSpeed>'.slice(1), {
                 symbol,
                 id,
                 updateSpeed,
@@ -224,11 +224,10 @@ const WebsocketMarketStreamsApiParamCreator = function () {
             // verify required parameter 'pair' is not null or undefined
             assertParamExists('indexPriceStream', 'pair', pair);
 
-            return replaceWebsocketStreamsPlaceholders('/<pair>@indexPrice<updateSpeed>'.slice(1), {
-                pair,
-                id,
-                updateSpeed,
-            });
+            return replaceWebsocketStreamsPlaceholders(
+                '/<pair>@indexPrice@<updateSpeed>'.slice(1),
+                { pair, id, updateSpeed }
+            );
         },
         /**
          * Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
@@ -376,7 +375,7 @@ const WebsocketMarketStreamsApiParamCreator = function () {
             // verify required parameter 'pair' is not null or undefined
             assertParamExists('markPriceOfAllSymbolsOfAPair', 'pair', pair);
 
-            return replaceWebsocketStreamsPlaceholders('/<pair>@markPrice<updateSpeed>'.slice(1), {
+            return replaceWebsocketStreamsPlaceholders('/<pair>@markPrice@<updateSpeed>'.slice(1), {
                 pair,
                 id,
                 updateSpeed,
@@ -399,7 +398,7 @@ const WebsocketMarketStreamsApiParamCreator = function () {
             assertParamExists('markPriceStream', 'symbol', symbol);
 
             return replaceWebsocketStreamsPlaceholders(
-                '/<symbol>@markPrice<updateSpeed>'.slice(1),
+                '/<symbol>@markPrice@<updateSpeed>'.slice(1),
                 { symbol, id, updateSpeed }
             );
         },
@@ -428,7 +427,7 @@ const WebsocketMarketStreamsApiParamCreator = function () {
             assertParamExists('partialBookDepthStreams', 'levels', levels);
 
             return replaceWebsocketStreamsPlaceholders(
-                '/<symbol>@depth<levels><updateSpeed>'.slice(1),
+                '/<symbol>@depth<levels>@<updateSpeed>'.slice(1),
                 { symbol, levels, id, updateSpeed }
             );
         },

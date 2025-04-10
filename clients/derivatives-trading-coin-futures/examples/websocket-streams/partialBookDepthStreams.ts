@@ -15,7 +15,7 @@ async function partialBookDepthStreams() {
         connection = await client.websocketStreams.connect();
 
         const stream = connection.partialBookDepthStreams({
-            symbol: 'BTCUSDT',
+            symbol: 'btcusdt',
             levels: 10,
         });
 

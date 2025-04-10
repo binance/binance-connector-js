@@ -15,7 +15,7 @@ async function indexKlineCandlestickStreams() {
         connection = await client.websocketStreams.connect();
 
         const stream = connection.indexKlineCandlestickStreams({
-            pair: 'BTCUSDT',
+            pair: 'btcusdt',
             interval: '1m',
         });
 

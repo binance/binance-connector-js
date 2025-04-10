@@ -15,7 +15,7 @@ async function liquidationOrderStreams() {
         connection = await client.websocketStreams.connect();
 
         const stream = connection.liquidationOrderStreams({
-            symbol: 'BTCUSDT',
+            symbol: 'btcusdt',
         });
 
         stream.on('message', (data) => {

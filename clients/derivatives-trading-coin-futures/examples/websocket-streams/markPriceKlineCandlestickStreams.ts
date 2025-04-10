@@ -15,7 +15,7 @@ async function markPriceKlineCandlestickStreams() {
         connection = await client.websocketStreams.connect();
 
         const stream = connection.markPriceKlineCandlestickStreams({
-            symbol: 'BTCUSDT',
+            symbol: 'btcusdt',
             interval: '1m',
         });
 

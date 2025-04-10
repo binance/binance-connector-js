@@ -15,7 +15,7 @@ async function individualSymbolMiniTickerStream() {
         connection = await client.websocketStreams.connect();
 
         const stream = connection.individualSymbolMiniTickerStream({
-            symbol: 'BTCUSDT',
+            symbol: 'btcusdt',
         });
 
         stream.on('message', (data) => {
