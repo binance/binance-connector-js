@@ -88,7 +88,7 @@ describe('AuthApi', () => {
                     connectedSince: 1649729873021,
                     returnRateLimits: false,
                     serverTime: 1649729878630,
-                    userDataStream: true,
+                    userDataStream: false,
                 },
             };
             mockResponse.id = randomString();
@@ -244,7 +244,7 @@ describe('AuthApi', () => {
                     connectedSince: 1649729873021,
                     returnRateLimits: false,
                     serverTime: 1649730611671,
-                    userDataStream: true,
+                    userDataStream: false,
                 },
             };
             mockResponse.id = randomString();

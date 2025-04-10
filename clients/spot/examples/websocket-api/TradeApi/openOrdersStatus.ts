@@ -13,9 +13,7 @@ async function openOrdersStatus() {
     try {
         connection = await client.websocketAPI.connect();
 
-        const response = await connection.openOrdersStatus({
-            symbol: 'BNBUSDT',
-        });
+        const response = await connection.openOrdersStatus();
 
         const rateLimits = response.rateLimits!;
         console.log('openOrdersStatus() rate limits:', rateLimits);

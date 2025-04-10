@@ -30,6 +30,7 @@ import type {
     MyAllocationsResponse,
     MyPreventedMatchesResponse,
     MyTradesResponse,
+    OrderAmendmentsResponse,
     RateLimitOrderResponse,
 } from '../types';
 
@@ -107,11 +108,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Query Allocations
          * @param {string} symbol
-         * @param {number} [startTime]
-         * @param {number} [endTime]
+         * @param {number} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
+         * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
          * @param {number} [fromAllocationId]
-         * @param {number} [limit] Default 500; max 1000.
-         * @param {number} [orderId] This can only be used in combination with `symbol`.
+         * @param {number} [limit] Default: 500; Maximum: 1000.
+         * @param {number} [orderId]
          * @param {number} [recvWindow] The value cannot be greater than ```60000```
          *
          * @throws {RequiredError}
@@ -186,9 +187,9 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @summary Query Prevented Matches
          * @param {string} symbol
          * @param {number} [preventedMatchId]
-         * @param {number} [orderId] This can only be used in combination with `symbol`.
+         * @param {number} [orderId]
          * @param {number} [fromPreventedMatchId]
-         * @param {number} [limit] Default 500; max 1000.
+         * @param {number} [limit] Default: 500; Maximum: 1000.
          * @param {number} [recvWindow] The value cannot be greater than ```60000```
          *
          * @throws {RequiredError}
@@ -242,15 +243,18 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         },
         /**
          * Get trades for a specific account and symbol.
-         * Weight: 20
+         * Weight: Condition| Weight|
+         * ---| ---
+         * |Without orderId|20|
+         * |With orderId|5|
          *
          * @summary Account trade list
          * @param {string} symbol
-         * @param {number} [orderId] This can only be used in combination with `symbol`.
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [fromId] TradeId to fetch from. Default gets most recent trades.
-         * @param {number} [limit] Default 500; max 1000.
+         * @param {number} [orderId]
+         * @param {number} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
+         * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
+         * @param {number} [fromId] ID to get aggregate trades from INCLUSIVE.
+         * @param {number} [limit] Default: 500; Maximum: 1000.
          * @param {number} [recvWindow] The value cannot be greater than ```60000```
          *
          * @throws {RequiredError}
@@ -302,6 +306,63 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
 
             return {
                 endpoint: '/api/v3/myTrades',
+                method: 'GET',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Queries all amendments of a single order.
+         * Weight: 4
+         *
+         * @summary Query Order Amendments
+         * @param {string} symbol
+         * @param {number} orderId
+         * @param {number} [fromExecutionId]
+         * @param {number} [limit] Default:500; Maximum: 1000
+         * @param {number} [recvWindow] The value cannot be greater than ```60000```
+         *
+         * @throws {RequiredError}
+         */
+        orderAmendments: async (
+            symbol: string,
+            orderId: number,
+            fromExecutionId?: number,
+            limit?: number,
+            recvWindow?: number
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'symbol' is not null or undefined
+            assertParamExists('orderAmendments', 'symbol', symbol);
+            // verify required parameter 'orderId' is not null or undefined
+            assertParamExists('orderAmendments', 'orderId', orderId);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (symbol !== undefined && symbol !== null) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+
+            if (orderId !== undefined && orderId !== null) {
+                localVarQueryParameter['orderId'] = orderId;
+            }
+
+            if (fromExecutionId !== undefined && fromExecutionId !== null) {
+                localVarQueryParameter['fromExecutionId'] = fromExecutionId;
+            }
+
+            if (limit !== undefined && limit !== null) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/api/v3/order/amendments',
                 method: 'GET',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
@@ -404,7 +465,10 @@ export interface AccountApiInterface {
     ): Promise<RestApiResponse<MyPreventedMatchesResponse>>;
     /**
      * Get trades for a specific account and symbol.
-     * Weight: 20
+     * Weight: Condition| Weight|
+     * ---| ---
+     * |Without orderId|20|
+     * |With orderId|5|
      *
      * @summary Account trade list
      * @param {MyTradesRequest} requestParameters Request parameters.
@@ -413,6 +477,19 @@ export interface AccountApiInterface {
      * @memberof AccountApiInterface
      */
     myTrades(requestParameters: MyTradesRequest): Promise<RestApiResponse<MyTradesResponse>>;
+    /**
+     * Queries all amendments of a single order.
+     * Weight: 4
+     *
+     * @summary Query Order Amendments
+     * @param {OrderAmendmentsRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApiInterface
+     */
+    orderAmendments(
+        requestParameters: OrderAmendmentsRequest
+    ): Promise<RestApiResponse<OrderAmendmentsResponse>>;
     /**
      * Displays the user's unfilled order count for all intervals.
      * Weight: 40
@@ -474,14 +551,14 @@ export interface MyAllocationsRequest {
     readonly symbol: string;
 
     /**
-     *
+     * Timestamp in ms to get aggregate trades from INCLUSIVE.
      * @type {number}
      * @memberof AccountApiMyAllocations
      */
     readonly startTime?: number;
 
     /**
-     *
+     * Timestamp in ms to get aggregate trades until INCLUSIVE.
      * @type {number}
      * @memberof AccountApiMyAllocations
      */
@@ -495,14 +572,14 @@ export interface MyAllocationsRequest {
     readonly fromAllocationId?: number;
 
     /**
-     * Default 500; max 1000.
+     * Default: 500; Maximum: 1000.
      * @type {number}
      * @memberof AccountApiMyAllocations
      */
     readonly limit?: number;
 
     /**
-     * This can only be used in combination with `symbol`.
+     *
      * @type {number}
      * @memberof AccountApiMyAllocations
      */
@@ -536,7 +613,7 @@ export interface MyPreventedMatchesRequest {
     readonly preventedMatchId?: number;
 
     /**
-     * This can only be used in combination with `symbol`.
+     *
      * @type {number}
      * @memberof AccountApiMyPreventedMatches
      */
@@ -550,7 +627,7 @@ export interface MyPreventedMatchesRequest {
     readonly fromPreventedMatchId?: number;
 
     /**
-     * Default 500; max 1000.
+     * Default: 500; Maximum: 1000.
      * @type {number}
      * @memberof AccountApiMyPreventedMatches
      */
@@ -577,35 +654,35 @@ export interface MyTradesRequest {
     readonly symbol: string;
 
     /**
-     * This can only be used in combination with `symbol`.
+     *
      * @type {number}
      * @memberof AccountApiMyTrades
      */
     readonly orderId?: number;
 
     /**
-     *
+     * Timestamp in ms to get aggregate trades from INCLUSIVE.
      * @type {number}
      * @memberof AccountApiMyTrades
      */
     readonly startTime?: number;
 
     /**
-     *
+     * Timestamp in ms to get aggregate trades until INCLUSIVE.
      * @type {number}
      * @memberof AccountApiMyTrades
      */
     readonly endTime?: number;
 
     /**
-     * TradeId to fetch from. Default gets most recent trades.
+     * ID to get aggregate trades from INCLUSIVE.
      * @type {number}
      * @memberof AccountApiMyTrades
      */
     readonly fromId?: number;
 
     /**
-     * Default 500; max 1000.
+     * Default: 500; Maximum: 1000.
      * @type {number}
      * @memberof AccountApiMyTrades
      */
@@ -615,6 +692,47 @@ export interface MyTradesRequest {
      * The value cannot be greater than ```60000```
      * @type {number}
      * @memberof AccountApiMyTrades
+     */
+    readonly recvWindow?: number;
+}
+
+/**
+ * Request parameters for orderAmendments operation in AccountApi.
+ * @interface OrderAmendmentsRequest
+ */
+export interface OrderAmendmentsRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof AccountApiOrderAmendments
+     */
+    readonly symbol: string;
+
+    /**
+     *
+     * @type {number}
+     * @memberof AccountApiOrderAmendments
+     */
+    readonly orderId: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof AccountApiOrderAmendments
+     */
+    readonly fromExecutionId?: number;
+
+    /**
+     * Default:500; Maximum: 1000
+     * @type {number}
+     * @memberof AccountApiOrderAmendments
+     */
+    readonly limit?: number;
+
+    /**
+     * The value cannot be greater than ```60000```
+     * @type {number}
+     * @memberof AccountApiOrderAmendments
      */
     readonly recvWindow?: number;
 }
@@ -778,7 +896,10 @@ export class AccountApi implements AccountApiInterface {
 
     /**
      * Get trades for a specific account and symbol.
-     * Weight: 20
+     * Weight: Condition| Weight|
+     * ---| ---
+     * |Without orderId|20|
+     * |With orderId|5|
      *
      * @summary Account trade list
      * @param {MyTradesRequest} requestParameters Request parameters.
@@ -800,6 +921,37 @@ export class AccountApi implements AccountApiInterface {
             requestParameters?.recvWindow
         );
         return sendRequest<MyTradesResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Queries all amendments of a single order.
+     * Weight: 4
+     *
+     * @summary Query Order Amendments
+     * @param {OrderAmendmentsRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<OrderAmendmentsResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-order-amendments-user_data Binance API Documentation}
+     */
+    public async orderAmendments(
+        requestParameters: OrderAmendmentsRequest
+    ): Promise<RestApiResponse<OrderAmendmentsResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.orderAmendments(
+            requestParameters?.symbol,
+            requestParameters?.orderId,
+            requestParameters?.fromExecutionId,
+            requestParameters?.limit,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<OrderAmendmentsResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

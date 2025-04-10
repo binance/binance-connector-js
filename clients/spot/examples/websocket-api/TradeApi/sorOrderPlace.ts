@@ -15,7 +15,7 @@ async function sorOrderPlace() {
 
         const response = await connection.sorOrderPlace({
             symbol: 'BNBUSDT',
-            quantity: 1,
+            quantity: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

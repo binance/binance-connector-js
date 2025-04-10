@@ -13,9 +13,7 @@ async function exchangeInfo() {
     try {
         connection = await client.websocketAPI.connect();
 
-        const response = await connection.exchangeInfo({
-            symbol: 'BNBUSDT',
-        });
+        const response = await connection.exchangeInfo();
 
         const rateLimits = response.rateLimits!;
         console.log('exchangeInfo() rate limits:', rateLimits);

@@ -9,9 +9,7 @@ const client = new Spot({ configurationRestAPI });
 
 async function exchangeInfo() {
     try {
-        const response = await client.restAPI.exchangeInfo({
-            symbol: 'BNBUSDT',
-        });
+        const response = await client.restAPI.exchangeInfo();
 
         const rateLimits = response.rateLimits!;
         console.log('exchangeInfo() rate limits:', rateLimits);

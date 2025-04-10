@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 
 /**
  * Binance Spot REST API
@@ -18,82 +19,15 @@
  * Do not edit the class manually.
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { TickerTradingDayResponse1 } from './ticker-trading-day-response1';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { TickerTradingDayResponse2 } from './ticker-trading-day-response2';
+
 /**
- *
+ * @type TickerTradingDayResponse
  * @export
- * @interface TickerTradingDayResponse
  */
-export interface TickerTradingDayResponse {
-    /**
-     *
-     * @type {string}
-     * @memberof TickerTradingDayResponse
-     */
-    symbol?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof TickerTradingDayResponse
-     */
-    openPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof TickerTradingDayResponse
-     */
-    highPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof TickerTradingDayResponse
-     */
-    lowPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof TickerTradingDayResponse
-     */
-    lastPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof TickerTradingDayResponse
-     */
-    volume?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof TickerTradingDayResponse
-     */
-    quoteVolume?: string;
-    /**
-     *
-     * @type {number}
-     * @memberof TickerTradingDayResponse
-     */
-    openTime?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof TickerTradingDayResponse
-     */
-    closeTime?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof TickerTradingDayResponse
-     */
-    firstId?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof TickerTradingDayResponse
-     */
-    lastId?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof TickerTradingDayResponse
-     */
-    count?: number;
-}
+export type TickerTradingDayResponse = TickerTradingDayResponse1 | TickerTradingDayResponse2;

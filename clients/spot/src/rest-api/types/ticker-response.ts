@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 
 /**
  * Binance Spot REST API
@@ -18,82 +19,15 @@
  * Do not edit the class manually.
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { TickerResponse1 } from './ticker-response1';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { TickerResponse2 } from './ticker-response2';
+
 /**
- *
+ * @type TickerResponse
  * @export
- * @interface TickerResponse
  */
-export interface TickerResponse {
-    /**
-     *
-     * @type {string}
-     * @memberof TickerResponse
-     */
-    symbol?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof TickerResponse
-     */
-    openPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof TickerResponse
-     */
-    highPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof TickerResponse
-     */
-    lowPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof TickerResponse
-     */
-    lastPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof TickerResponse
-     */
-    volume?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof TickerResponse
-     */
-    quoteVolume?: string;
-    /**
-     *
-     * @type {number}
-     * @memberof TickerResponse
-     */
-    openTime?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof TickerResponse
-     */
-    closeTime?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof TickerResponse
-     */
-    firstId?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof TickerResponse
-     */
-    lastId?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof TickerResponse
-     */
-    count?: number;
-}
+export type TickerResponse = TickerResponse1 | TickerResponse2;

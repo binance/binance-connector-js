@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
  * Binance Spot WebSocket API
@@ -21,39 +22,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AvgPriceResponseRateLimitsInner } from './avg-price-response-rate-limits-inner';
+import type { TickerBookResponse1 } from './ticker-book-response1';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TickerBookResponseResult } from './ticker-book-response-result';
+import type { TickerBookResponse1Result } from './ticker-book-response1-result';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { TickerBookResponse2 } from './ticker-book-response2';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { TickerResponse1RateLimitsInner } from './ticker-response1-rate-limits-inner';
 
 /**
- *
+ * @type TickerBookResponse
  * @export
- * @interface TickerBookResponse
  */
-export interface TickerBookResponse {
-    /**
-     *
-     * @type {string}
-     * @memberof TickerBookResponse
-     */
-    id?: string;
-    /**
-     *
-     * @type {number}
-     * @memberof TickerBookResponse
-     */
-    status?: number;
-    /**
-     *
-     * @type {TickerBookResponseResult}
-     * @memberof TickerBookResponse
-     */
-    result?: TickerBookResponseResult;
-    /**
-     *
-     * @type {Array<AvgPriceResponseRateLimitsInner>}
-     * @memberof TickerBookResponse
-     */
-    rateLimits?: Array<AvgPriceResponseRateLimitsInner>;
-}
+export type TickerBookResponse = TickerBookResponse1 | TickerBookResponse2;

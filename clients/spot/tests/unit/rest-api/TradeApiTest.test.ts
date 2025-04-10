@@ -80,6 +80,7 @@ import {
     GetOrderListRequest,
     NewOrderRequest,
     OpenOrderListRequest,
+    OrderAmendKeepPriorityRequest,
     OrderCancelReplaceRequest,
     OrderListOcoRequest,
     OrderListOtoRequest,
@@ -100,11 +101,13 @@ import type {
     GetOrderResponse,
     NewOrderResponse,
     OpenOrderListResponse,
+    OrderAmendKeepPriorityResponse,
     OrderCancelReplaceResponse,
     OrderListOcoResponse,
     OrderListOtoResponse,
     OrderListOtocoResponse,
     OrderOcoResponse,
+    OrderTestResponse,
     SorOrderResponse,
     SorOrderTestResponse,
 } from '../../../src/rest-api/types';
@@ -907,10 +910,6 @@ describe('TradeApi', () => {
 
     describe('getOpenOrders()', () => {
         it('should execute getOpenOrders() successfully with required parameters only', async () => {
-            const params: GetOpenOrdersRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             mockResponse = [
                 {
                     symbol: 'LTCBTC',
@@ -944,7 +943,7 @@ describe('TradeApi', () => {
                     rateLimits: [],
                 } as RestApiResponse<GetOpenOrdersResponse>)
             );
-            const response = await client.getOpenOrders(params);
+            const response = await client.getOpenOrders();
             expect(response).toBeDefined();
             await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
@@ -995,23 +994,7 @@ describe('TradeApi', () => {
             spy.mockRestore();
         });
 
-        it('should throw RequiredError when symbol is missing', async () => {
-            const _params: GetOpenOrdersRequest = {
-                symbol: 'BNBUSDT',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.symbol;
-
-            await expect(client.getOpenOrders(params)).rejects.toThrow(
-                'Required parameter symbol was null or undefined when calling getOpenOrders.'
-            );
-        });
-
         it('should throw an error when server is returning an error', async () => {
-            const params: GetOpenOrdersRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             const errorResponse = {
                 code: -1111,
                 msg: 'Server Error',
@@ -1022,7 +1005,7 @@ describe('TradeApi', () => {
             };
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'getOpenOrders').mockRejectedValueOnce(mockError);
-            await expect(client.getOpenOrders(params)).rejects.toThrow('ResponseError');
+            await expect(client.getOpenOrders()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
@@ -1232,8 +1215,6 @@ describe('TradeApi', () => {
         it('should execute newOrder() successfully with required parameters only', async () => {
             const params: NewOrderRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
-                stopPrice: 1,
             };
 
             mockResponse = {
@@ -1309,16 +1290,16 @@ describe('TradeApi', () => {
         it('should execute newOrder() successfully with optional parameters', async () => {
             const params: NewOrderRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
-                stopPrice: 1,
                 side: NewOrderSideEnum.BUY,
                 type: NewOrderTypeEnum.MARKET,
                 timeInForce: NewOrderTimeInForceEnum.GTC,
+                quantity: 1.0,
                 quoteOrderQty: 1.0,
-                price: 400,
+                price: 400.0,
                 newClientOrderId: 'newClientOrderId_example',
                 strategyId: 1,
                 strategyType: 1,
+                stopPrice: 1.0,
                 trailingDelta: 1,
                 icebergQty: 1.0,
                 newOrderRespType: NewOrderNewOrderRespTypeEnum.ACK,
@@ -1399,8 +1380,6 @@ describe('TradeApi', () => {
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: NewOrderRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
-                stopPrice: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1410,39 +1389,9 @@ describe('TradeApi', () => {
             );
         });
 
-        it('should throw RequiredError when quantity is missing', async () => {
-            const _params: NewOrderRequest = {
-                symbol: 'BNBUSDT',
-                quantity: 1,
-                stopPrice: 1,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.quantity;
-
-            await expect(client.newOrder(params)).rejects.toThrow(
-                'Required parameter quantity was null or undefined when calling newOrder.'
-            );
-        });
-
-        it('should throw RequiredError when stopPrice is missing', async () => {
-            const _params: NewOrderRequest = {
-                symbol: 'BNBUSDT',
-                quantity: 1,
-                stopPrice: 1,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.stopPrice;
-
-            await expect(client.newOrder(params)).rejects.toThrow(
-                'Required parameter stopPrice was null or undefined when calling newOrder.'
-            );
-        });
-
         it('should throw an error when server is returning an error', async () => {
             const params: NewOrderRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
-                stopPrice: 1,
             };
 
             const errorResponse = {
@@ -1543,12 +1492,152 @@ describe('TradeApi', () => {
         });
     });
 
+    describe('orderAmendKeepPriority()', () => {
+        it('should execute orderAmendKeepPriority() successfully with required parameters only', async () => {
+            const params: OrderAmendKeepPriorityRequest = {
+                symbol: 'BNBUSDT',
+                newQty: 1.0,
+            };
+
+            mockResponse = {
+                transactTime: 1741926410255,
+                executionId: 75,
+                amendedOrder: {
+                    symbol: 'BTCUSDT',
+                    orderId: 33,
+                    orderListId: -1,
+                    origClientOrderId: '5xrgbMyg6z36NzBn2pbT8H',
+                    clientOrderId: 'PFaq6hIHxqFENGfdtn4J6Q',
+                    price: '6.00000000',
+                    qty: '5.00000000',
+                    executedQty: '0.00000000',
+                    preventedQty: '0.00000000',
+                    quoteOrderQty: '0.00000000',
+                    cumulativeQuoteQty: '0.00000000',
+                    status: 'NEW',
+                    timeInForce: 'GTC',
+                    type: 'LIMIT',
+                    side: 'SELL',
+                    workingTime: 1741926410242,
+                    selfTradePreventionMode: 'NONE',
+                },
+            };
+
+            const spy = jest.spyOn(client, 'orderAmendKeepPriority').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<OrderAmendKeepPriorityResponse>)
+            );
+            const response = await client.orderAmendKeepPriority(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute orderAmendKeepPriority() successfully with optional parameters', async () => {
+            const params: OrderAmendKeepPriorityRequest = {
+                symbol: 'BNBUSDT',
+                newQty: 1.0,
+                orderId: 1,
+                origClientOrderId: 'origClientOrderId_example',
+                newClientOrderId: 'newClientOrderId_example',
+                recvWindow: 5000,
+            };
+
+            mockResponse = {
+                transactTime: 1741926410255,
+                executionId: 75,
+                amendedOrder: {
+                    symbol: 'BTCUSDT',
+                    orderId: 33,
+                    orderListId: -1,
+                    origClientOrderId: '5xrgbMyg6z36NzBn2pbT8H',
+                    clientOrderId: 'PFaq6hIHxqFENGfdtn4J6Q',
+                    price: '6.00000000',
+                    qty: '5.00000000',
+                    executedQty: '0.00000000',
+                    preventedQty: '0.00000000',
+                    quoteOrderQty: '0.00000000',
+                    cumulativeQuoteQty: '0.00000000',
+                    status: 'NEW',
+                    timeInForce: 'GTC',
+                    type: 'LIMIT',
+                    side: 'SELL',
+                    workingTime: 1741926410242,
+                    selfTradePreventionMode: 'NONE',
+                },
+            };
+
+            const spy = jest.spyOn(client, 'orderAmendKeepPriority').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<OrderAmendKeepPriorityResponse>)
+            );
+            const response = await client.orderAmendKeepPriority(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when symbol is missing', async () => {
+            const _params: OrderAmendKeepPriorityRequest = {
+                symbol: 'BNBUSDT',
+                newQty: 1.0,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.symbol;
+
+            await expect(client.orderAmendKeepPriority(params)).rejects.toThrow(
+                'Required parameter symbol was null or undefined when calling orderAmendKeepPriority.'
+            );
+        });
+
+        it('should throw RequiredError when newQty is missing', async () => {
+            const _params: OrderAmendKeepPriorityRequest = {
+                symbol: 'BNBUSDT',
+                newQty: 1.0,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.newQty;
+
+            await expect(client.orderAmendKeepPriority(params)).rejects.toThrow(
+                'Required parameter newQty was null or undefined when calling orderAmendKeepPriority.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: OrderAmendKeepPriorityRequest = {
+                symbol: 'BNBUSDT',
+                newQty: 1.0,
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'orderAmendKeepPriority')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.orderAmendKeepPriority(params)).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
     describe('orderCancelReplace()', () => {
         it('should execute orderCancelReplace() successfully with required parameters only', async () => {
             const params: OrderCancelReplaceRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
-                stopPrice: 1,
             };
 
             mockResponse = {
@@ -1599,20 +1688,20 @@ describe('TradeApi', () => {
         it('should execute orderCancelReplace() successfully with optional parameters', async () => {
             const params: OrderCancelReplaceRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
-                stopPrice: 1,
                 side: OrderCancelReplaceSideEnum.BUY,
                 type: OrderCancelReplaceTypeEnum.MARKET,
                 cancelReplaceMode: OrderCancelReplaceCancelReplaceModeEnum.STOP_ON_FAILURE,
                 timeInForce: OrderCancelReplaceTimeInForceEnum.GTC,
+                quantity: 1.0,
                 quoteOrderQty: 1.0,
-                price: 400,
+                price: 400.0,
                 cancelNewClientOrderId: 'cancelNewClientOrderId_example',
                 cancelOrigClientOrderId: 'cancelOrigClientOrderId_example',
                 cancelOrderId: 1,
                 newClientOrderId: 'newClientOrderId_example',
                 strategyId: 1,
                 strategyType: 1,
+                stopPrice: 1.0,
                 trailingDelta: 1,
                 icebergQty: 1.0,
                 newOrderRespType: OrderCancelReplaceNewOrderRespTypeEnum.ACK,
@@ -1671,8 +1760,6 @@ describe('TradeApi', () => {
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: OrderCancelReplaceRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
-                stopPrice: 1,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1682,39 +1769,9 @@ describe('TradeApi', () => {
             );
         });
 
-        it('should throw RequiredError when quantity is missing', async () => {
-            const _params: OrderCancelReplaceRequest = {
-                symbol: 'BNBUSDT',
-                quantity: 1,
-                stopPrice: 1,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.quantity;
-
-            await expect(client.orderCancelReplace(params)).rejects.toThrow(
-                'Required parameter quantity was null or undefined when calling orderCancelReplace.'
-            );
-        });
-
-        it('should throw RequiredError when stopPrice is missing', async () => {
-            const _params: OrderCancelReplaceRequest = {
-                symbol: 'BNBUSDT',
-                quantity: 1,
-                stopPrice: 1,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.stopPrice;
-
-            await expect(client.orderCancelReplace(params)).rejects.toThrow(
-                'Required parameter stopPrice was null or undefined when calling orderCancelReplace.'
-            );
-        });
-
         it('should throw an error when server is returning an error', async () => {
             const params: OrderCancelReplaceRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
-                stopPrice: 1,
             };
 
             const errorResponse = {
@@ -1736,7 +1793,7 @@ describe('TradeApi', () => {
         it('should execute orderListOco() successfully with required parameters only', async () => {
             const params: OrderListOcoRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
+                quantity: 1.0,
             };
 
             mockResponse = {
@@ -1810,7 +1867,7 @@ describe('TradeApi', () => {
         it('should execute orderListOco() successfully with optional parameters', async () => {
             const params: OrderListOcoRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
+                quantity: 1.0,
                 listClientOrderId: 'listClientOrderId_example',
                 side: OrderListOcoSideEnum.BUY,
                 aboveType: OrderListOcoAboveTypeEnum.STOP_LOSS_LIMIT,
@@ -1907,7 +1964,7 @@ describe('TradeApi', () => {
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: OrderListOcoRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
+                quantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1920,7 +1977,7 @@ describe('TradeApi', () => {
         it('should throw RequiredError when quantity is missing', async () => {
             const _params: OrderListOcoRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
+                quantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.quantity;
@@ -1933,7 +1990,7 @@ describe('TradeApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: OrderListOcoRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
+                quantity: 1.0,
             };
 
             const errorResponse = {
@@ -1955,9 +2012,9 @@ describe('TradeApi', () => {
         it('should execute orderListOto() successfully with required parameters only', async () => {
             const params: OrderListOtoRequest = {
                 symbol: 'BNBUSDT',
-                workingPrice: 1,
-                workingQuantity: 1,
-                pendingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingQuantity: 1.0,
             };
 
             mockResponse = {
@@ -2029,9 +2086,9 @@ describe('TradeApi', () => {
         it('should execute orderListOto() successfully with optional parameters', async () => {
             const params: OrderListOtoRequest = {
                 symbol: 'BNBUSDT',
-                workingPrice: 1,
-                workingQuantity: 1,
-                pendingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingQuantity: 1.0,
                 listClientOrderId: 'listClientOrderId_example',
                 newOrderRespType: OrderListOtoNewOrderRespTypeEnum.ACK,
                 selfTradePreventionMode: OrderListOtoSelfTradePreventionModeEnum.NONE,
@@ -2124,9 +2181,9 @@ describe('TradeApi', () => {
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: OrderListOtoRequest = {
                 symbol: 'BNBUSDT',
-                workingPrice: 1,
-                workingQuantity: 1,
-                pendingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -2139,9 +2196,9 @@ describe('TradeApi', () => {
         it('should throw RequiredError when workingPrice is missing', async () => {
             const _params: OrderListOtoRequest = {
                 symbol: 'BNBUSDT',
-                workingPrice: 1,
-                workingQuantity: 1,
-                pendingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.workingPrice;
@@ -2154,9 +2211,9 @@ describe('TradeApi', () => {
         it('should throw RequiredError when workingQuantity is missing', async () => {
             const _params: OrderListOtoRequest = {
                 symbol: 'BNBUSDT',
-                workingPrice: 1,
-                workingQuantity: 1,
-                pendingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.workingQuantity;
@@ -2169,9 +2226,9 @@ describe('TradeApi', () => {
         it('should throw RequiredError when pendingQuantity is missing', async () => {
             const _params: OrderListOtoRequest = {
                 symbol: 'BNBUSDT',
-                workingPrice: 1,
-                workingQuantity: 1,
-                pendingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.pendingQuantity;
@@ -2184,9 +2241,9 @@ describe('TradeApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: OrderListOtoRequest = {
                 symbol: 'BNBUSDT',
-                workingPrice: 1,
-                workingQuantity: 1,
-                pendingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingQuantity: 1.0,
             };
 
             const errorResponse = {
@@ -2208,9 +2265,9 @@ describe('TradeApi', () => {
         it('should execute orderListOtoco() successfully with required parameters only', async () => {
             const params: OrderListOtocoRequest = {
                 symbol: 'BNBUSDT',
-                workingPrice: 1,
-                workingQuantity: 1,
-                pendingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingQuantity: 1.0,
             };
 
             mockResponse = {
@@ -2302,9 +2359,9 @@ describe('TradeApi', () => {
         it('should execute orderListOtoco() successfully with optional parameters', async () => {
             const params: OrderListOtocoRequest = {
                 symbol: 'BNBUSDT',
-                workingPrice: 1,
-                workingQuantity: 1,
-                pendingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingQuantity: 1.0,
                 listClientOrderId: 'listClientOrderId_example',
                 newOrderRespType: OrderListOtocoNewOrderRespTypeEnum.ACK,
                 selfTradePreventionMode: OrderListOtocoSelfTradePreventionModeEnum.NONE,
@@ -2426,9 +2483,9 @@ describe('TradeApi', () => {
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: OrderListOtocoRequest = {
                 symbol: 'BNBUSDT',
-                workingPrice: 1,
-                workingQuantity: 1,
-                pendingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -2441,9 +2498,9 @@ describe('TradeApi', () => {
         it('should throw RequiredError when workingPrice is missing', async () => {
             const _params: OrderListOtocoRequest = {
                 symbol: 'BNBUSDT',
-                workingPrice: 1,
-                workingQuantity: 1,
-                pendingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.workingPrice;
@@ -2456,9 +2513,9 @@ describe('TradeApi', () => {
         it('should throw RequiredError when workingQuantity is missing', async () => {
             const _params: OrderListOtocoRequest = {
                 symbol: 'BNBUSDT',
-                workingPrice: 1,
-                workingQuantity: 1,
-                pendingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.workingQuantity;
@@ -2471,9 +2528,9 @@ describe('TradeApi', () => {
         it('should throw RequiredError when pendingQuantity is missing', async () => {
             const _params: OrderListOtocoRequest = {
                 symbol: 'BNBUSDT',
-                workingPrice: 1,
-                workingQuantity: 1,
-                pendingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.pendingQuantity;
@@ -2486,9 +2543,9 @@ describe('TradeApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: OrderListOtocoRequest = {
                 symbol: 'BNBUSDT',
-                workingPrice: 1,
-                workingQuantity: 1,
-                pendingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingQuantity: 1.0,
             };
 
             const errorResponse = {
@@ -2510,8 +2567,9 @@ describe('TradeApi', () => {
         it('should execute orderOco() successfully with required parameters only', async () => {
             const params: OrderOcoRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
-                stopPrice: 1,
+                quantity: 1.0,
+                price: 1.0,
+                stopPrice: 1.0,
             };
 
             mockResponse = {
@@ -2584,12 +2642,12 @@ describe('TradeApi', () => {
         it('should execute orderOco() successfully with optional parameters', async () => {
             const params: OrderOcoRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
-                stopPrice: 1,
+                quantity: 1.0,
+                price: 1.0,
+                stopPrice: 1.0,
                 listClientOrderId: 'listClientOrderId_example',
                 side: OrderOcoSideEnum.BUY,
                 limitClientOrderId: 'limitClientOrderId_example',
-                price: 400,
                 limitStrategyId: 1,
                 limitStrategyType: 1,
                 limitIcebergQty: 1.0,
@@ -2675,8 +2733,9 @@ describe('TradeApi', () => {
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: OrderOcoRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
-                stopPrice: 1,
+                quantity: 1.0,
+                price: 1.0,
+                stopPrice: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -2689,8 +2748,9 @@ describe('TradeApi', () => {
         it('should throw RequiredError when quantity is missing', async () => {
             const _params: OrderOcoRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
-                stopPrice: 1,
+                quantity: 1.0,
+                price: 1.0,
+                stopPrice: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.quantity;
@@ -2700,11 +2760,27 @@ describe('TradeApi', () => {
             );
         });
 
+        it('should throw RequiredError when price is missing', async () => {
+            const _params: OrderOcoRequest = {
+                symbol: 'BNBUSDT',
+                quantity: 1.0,
+                price: 1.0,
+                stopPrice: 1.0,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.price;
+
+            await expect(client.orderOco(params)).rejects.toThrow(
+                'Required parameter price was null or undefined when calling orderOco.'
+            );
+        });
+
         it('should throw RequiredError when stopPrice is missing', async () => {
             const _params: OrderOcoRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
-                stopPrice: 1,
+                quantity: 1.0,
+                price: 1.0,
+                stopPrice: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.stopPrice;
@@ -2717,8 +2793,9 @@ describe('TradeApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: OrderOcoRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
-                stopPrice: 1,
+                quantity: 1.0,
+                price: 1.0,
+                stopPrice: 1.0,
             };
 
             const errorResponse = {
@@ -2738,17 +2815,28 @@ describe('TradeApi', () => {
 
     describe('orderTest()', () => {
         it('should execute orderTest() successfully with required parameters only', async () => {
+            mockResponse = {
+                standardCommissionForOrder: { maker: '0.00000112', taker: '0.00000114' },
+                taxCommissionForOrder: { maker: '0.00000112', taker: '0.00000114' },
+                discount: {
+                    enabledForAccount: true,
+                    enabledForSymbol: true,
+                    discountAsset: 'BNB',
+                    discount: '0.25000000',
+                },
+            };
+
             const spy = jest.spyOn(client, 'orderTest').mockReturnValue(
                 Promise.resolve({
-                    data: () => Promise.resolve(),
+                    data: () => Promise.resolve(mockResponse),
                     status: 200,
                     headers: {},
                     rateLimits: [],
-                } as RestApiResponse<void>)
+                } as RestApiResponse<OrderTestResponse>)
             );
             const response = await client.orderTest();
-
-            await expect(response.data()).resolves.toBeUndefined();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
         });
 
@@ -2757,17 +2845,28 @@ describe('TradeApi', () => {
                 computeCommissionRates: false,
             };
 
+            mockResponse = {
+                standardCommissionForOrder: { maker: '0.00000112', taker: '0.00000114' },
+                taxCommissionForOrder: { maker: '0.00000112', taker: '0.00000114' },
+                discount: {
+                    enabledForAccount: true,
+                    enabledForSymbol: true,
+                    discountAsset: 'BNB',
+                    discount: '0.25000000',
+                },
+            };
+
             const spy = jest.spyOn(client, 'orderTest').mockReturnValue(
                 Promise.resolve({
-                    data: () => Promise.resolve(),
+                    data: () => Promise.resolve(mockResponse),
                     status: 200,
                     headers: {},
                     rateLimits: [],
-                } as RestApiResponse<void>)
+                } as RestApiResponse<OrderTestResponse>)
             );
             const response = await client.orderTest(params);
-
-            await expect(response.data()).resolves.toBeUndefined();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
         });
 
@@ -2791,7 +2890,7 @@ describe('TradeApi', () => {
         it('should execute sorOrder() successfully with required parameters only', async () => {
             const params: SorOrderRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
+                quantity: 1.0,
             };
 
             mockResponse = {
@@ -2843,11 +2942,11 @@ describe('TradeApi', () => {
         it('should execute sorOrder() successfully with optional parameters', async () => {
             const params: SorOrderRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
+                quantity: 1.0,
                 side: SorOrderSideEnum.BUY,
                 type: SorOrderTypeEnum.MARKET,
                 timeInForce: SorOrderTimeInForceEnum.GTC,
-                price: 400,
+                price: 400.0,
                 newClientOrderId: 'newClientOrderId_example',
                 strategyId: 1,
                 strategyType: 1,
@@ -2906,7 +3005,7 @@ describe('TradeApi', () => {
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: SorOrderRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
+                quantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -2919,7 +3018,7 @@ describe('TradeApi', () => {
         it('should throw RequiredError when quantity is missing', async () => {
             const _params: SorOrderRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
+                quantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.quantity;
@@ -2932,7 +3031,7 @@ describe('TradeApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: SorOrderRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
+                quantity: 1.0,
             };
 
             const errorResponse = {

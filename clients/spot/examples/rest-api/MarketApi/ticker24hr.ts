@@ -9,9 +9,7 @@ const client = new Spot({ configurationRestAPI });
 
 async function ticker24hr() {
     try {
-        const response = await client.restAPI.ticker24hr({
-            symbol: 'BNBUSDT',
-        });
+        const response = await client.restAPI.ticker24hr();
 
         const rateLimits = response.rateLimits!;
         console.log('ticker24hr() rate limits:', rateLimits);

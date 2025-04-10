@@ -130,6 +130,12 @@ export interface ExchangeInfoResponseResultSymbolsInner {
      * @type {boolean}
      * @memberof ExchangeInfoResponseResultSymbolsInner
      */
+    allowAmend?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof ExchangeInfoResponseResultSymbolsInner
+     */
     isSpotTradingAllowed?: boolean;
     /**
      *

@@ -21,7 +21,7 @@ import { AccountApi } from './modules/account-api';
 import { GeneralApi } from './modules/general-api';
 import { MarketApi } from './modules/market-api';
 import { TradeApi } from './modules/trade-api';
-import { UserdatastreamApi } from './modules/userdatastream-api';
+import { UserDataStreamApi } from './modules/user-data-stream-api';
 
 import type {
     AccountCommissionRequest,
@@ -29,6 +29,7 @@ import type {
     MyAllocationsRequest,
     MyPreventedMatchesRequest,
     MyTradesRequest,
+    OrderAmendmentsRequest,
     RateLimitOrderRequest,
 } from './modules/account-api';
 import type { ExchangeInfoRequest } from './modules/general-api';
@@ -57,6 +58,7 @@ import type {
     GetOrderListRequest,
     NewOrderRequest,
     OpenOrderListRequest,
+    OrderAmendKeepPriorityRequest,
     OrderCancelReplaceRequest,
     OrderListOcoRequest,
     OrderListOtoRequest,
@@ -69,7 +71,7 @@ import type {
 import type {
     DeleteUserDataStreamRequest,
     PutUserDataStreamRequest,
-} from './modules/userdatastream-api';
+} from './modules/user-data-stream-api';
 
 import type {
     AccountCommissionResponse,
@@ -77,6 +79,7 @@ import type {
     MyAllocationsResponse,
     MyPreventedMatchesResponse,
     MyTradesResponse,
+    OrderAmendmentsResponse,
     RateLimitOrderResponse,
 } from './types';
 import type { ExchangeInfoResponse, TimeResponse } from './types';
@@ -105,11 +108,13 @@ import type {
     GetOrderListResponse,
     NewOrderResponse,
     OpenOrderListResponse,
+    OrderAmendKeepPriorityResponse,
     OrderCancelReplaceResponse,
     OrderListOcoResponse,
     OrderListOtoResponse,
     OrderListOtocoResponse,
     OrderOcoResponse,
+    OrderTestResponse,
     SorOrderResponse,
     SorOrderTestResponse,
 } from './types';
@@ -121,7 +126,7 @@ export class RestAPI {
     private generalApi: GeneralApi;
     private marketApi: MarketApi;
     private tradeApi: TradeApi;
-    private userdatastreamApi: UserdatastreamApi;
+    private userDataStreamApi: UserDataStreamApi;
 
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
@@ -129,7 +134,7 @@ export class RestAPI {
         this.generalApi = new GeneralApi(configuration);
         this.marketApi = new MarketApi(configuration);
         this.tradeApi = new TradeApi(configuration);
-        this.userdatastreamApi = new UserdatastreamApi(configuration);
+        this.userDataStreamApi = new UserDataStreamApi(configuration);
     }
 
     /**
@@ -245,7 +250,10 @@ export class RestAPI {
 
     /**
      * Get trades for a specific account and symbol.
-     * Weight: 20
+     * Weight: Condition| Weight|
+     * ---| ---
+     * |Without orderId|20|
+     * |With orderId|5|
      *
      * @summary Account trade list
      * @param {MyTradesRequest} requestParameters Request parameters.
@@ -255,6 +263,22 @@ export class RestAPI {
      */
     myTrades(requestParameters: MyTradesRequest): Promise<RestApiResponse<MyTradesResponse>> {
         return this.accountApi.myTrades(requestParameters);
+    }
+
+    /**
+     * Queries all amendments of a single order.
+     * Weight: 4
+     *
+     * @summary Query Order Amendments
+     * @param {OrderAmendmentsRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<OrderAmendmentsResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-order-amendments-user_data Binance API Documentation}
+     */
+    orderAmendments(
+        requestParameters: OrderAmendmentsRequest
+    ): Promise<RestApiResponse<OrderAmendmentsResponse>> {
+        return this.accountApi.orderAmendments(requestParameters);
     }
 
     /**
@@ -284,7 +308,7 @@ export class RestAPI {
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#exchange-information Binance API Documentation}
      */
     exchangeInfo(
-        requestParameters: ExchangeInfoRequest
+        requestParameters: ExchangeInfoRequest = {}
     ): Promise<RestApiResponse<ExchangeInfoResponse>> {
         return this.generalApi.exchangeInfo(requestParameters);
     }
@@ -419,7 +443,7 @@ export class RestAPI {
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#rolling-window-price-change-statistics Binance API Documentation}
      */
-    ticker(requestParameters: TickerRequest): Promise<RestApiResponse<TickerResponse>> {
+    ticker(requestParameters: TickerRequest = {}): Promise<RestApiResponse<TickerResponse>> {
         return this.marketApi.ticker(requestParameters);
     }
 
@@ -469,7 +493,9 @@ export class RestAPI {
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#24hr-ticker-price-change-statistics Binance API Documentation}
      */
-    ticker24hr(requestParameters: Ticker24hrRequest): Promise<RestApiResponse<Ticker24hrResponse>> {
+    ticker24hr(
+        requestParameters: Ticker24hrRequest = {}
+    ): Promise<RestApiResponse<Ticker24hrResponse>> {
         return this.marketApi.ticker24hr(requestParameters);
     }
 
@@ -508,7 +534,7 @@ export class RestAPI {
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-order-book-ticker Binance API Documentation}
      */
     tickerBookTicker(
-        requestParameters: TickerBookTickerRequest
+        requestParameters: TickerBookTickerRequest = {}
     ): Promise<RestApiResponse<TickerBookTickerResponse>> {
         return this.marketApi.tickerBookTicker(requestParameters);
     }
@@ -548,7 +574,7 @@ export class RestAPI {
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-price-ticker Binance API Documentation}
      */
     tickerPrice(
-        requestParameters: TickerPriceRequest
+        requestParameters: TickerPriceRequest = {}
     ): Promise<RestApiResponse<TickerPriceResponse>> {
         return this.marketApi.tickerPrice(requestParameters);
     }
@@ -564,7 +590,7 @@ export class RestAPI {
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#trading-day-ticker Binance API Documentation}
      */
     tickerTradingDay(
-        requestParameters: TickerTradingDayRequest
+        requestParameters: TickerTradingDayRequest = {}
     ): Promise<RestApiResponse<TickerTradingDayResponse>> {
         return this.marketApi.tickerTradingDay(requestParameters);
     }
@@ -677,7 +703,7 @@ export class RestAPI {
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#current-open-orders-user_data Binance API Documentation}
      */
     getOpenOrders(
-        requestParameters: GetOpenOrdersRequest
+        requestParameters: GetOpenOrdersRequest = {}
     ): Promise<RestApiResponse<GetOpenOrdersResponse>> {
         return this.tradeApi.getOpenOrders(requestParameters);
     }
@@ -740,6 +766,22 @@ export class RestAPI {
         requestParameters: OpenOrderListRequest = {}
     ): Promise<RestApiResponse<OpenOrderListResponse>> {
         return this.tradeApi.openOrderList(requestParameters);
+    }
+
+    /**
+     * Reduce the quantity of an existing open order.
+     * Weight: 1
+     *
+     * @summary Order Amend Keep Priority
+     * @param {OrderAmendKeepPriorityRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<OrderAmendKeepPriorityResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#order-amend-keep-priority-trade Binance API Documentation}
+     */
+    orderAmendKeepPriority(
+        requestParameters: OrderAmendKeepPriorityRequest
+    ): Promise<RestApiResponse<OrderAmendKeepPriorityResponse>> {
+        return this.tradeApi.orderAmendKeepPriority(requestParameters);
     }
 
     /**
@@ -868,11 +910,13 @@ export class RestAPI {
      *
      * @summary Test new order
      * @param {OrderTestRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<void>>}
+     * @returns {Promise<RestApiResponse<OrderTestResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#test-new-order-trade Binance API Documentation}
      */
-    orderTest(requestParameters: OrderTestRequest = {}): Promise<RestApiResponse<void>> {
+    orderTest(
+        requestParameters: OrderTestRequest = {}
+    ): Promise<RestApiResponse<OrderTestResponse>> {
         return this.tradeApi.orderTest(requestParameters);
     }
 
@@ -918,12 +962,12 @@ export class RestAPI {
      * @param {DeleteUserDataStreamRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/user-data-stream-endpoints#close-user-data-stream-user_stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/user-data-stream-endpoints---deprecated#close-user-data-stream-user_stream Binance API Documentation}
      */
     deleteUserDataStream(
         requestParameters: DeleteUserDataStreamRequest
     ): Promise<RestApiResponse<void>> {
-        return this.userdatastreamApi.deleteUserDataStream(requestParameters);
+        return this.userDataStreamApi.deleteUserDataStream(requestParameters);
     }
 
     /**
@@ -933,10 +977,10 @@ export class RestAPI {
      * @summary Start user data stream
      * @returns {Promise<RestApiResponse<NewUserDataStreamResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/user-data-stream-endpoints#start-user-data-stream-user_stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/user-data-stream-endpoints---deprecated#start-user-data-stream-user_stream Binance API Documentation}
      */
     newUserDataStream(): Promise<RestApiResponse<NewUserDataStreamResponse>> {
-        return this.userdatastreamApi.newUserDataStream();
+        return this.userDataStreamApi.newUserDataStream();
     }
 
     /**
@@ -947,9 +991,9 @@ export class RestAPI {
      * @param {PutUserDataStreamRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/user-data-stream-endpoints#keepalive-user-data-stream-user_stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/user-data-stream-endpoints---deprecated#keepalive-user-data-stream-user_stream Binance API Documentation}
      */
     putUserDataStream(requestParameters: PutUserDataStreamRequest): Promise<RestApiResponse<void>> {
-        return this.userdatastreamApi.putUserDataStream(requestParameters);
+        return this.userDataStreamApi.putUserDataStream(requestParameters);
     }
 }

@@ -13,9 +13,7 @@ async function ticker24hr() {
     try {
         connection = await client.websocketAPI.connect();
 
-        const response = await connection.ticker24hr({
-            symbol: 'BNBUSDT',
-        });
+        const response = await connection.ticker24hr();
 
         const rateLimits = response.rateLimits!;
         console.log('ticker24hr() rate limits:', rateLimits);

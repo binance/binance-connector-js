@@ -11,8 +11,6 @@ async function orderCancelReplace() {
     try {
         const response = await client.restAPI.orderCancelReplace({
             symbol: 'BNBUSDT',
-            quantity: 1,
-            stopPrice: 1,
         });
 
         const rateLimits = response.rateLimits!;

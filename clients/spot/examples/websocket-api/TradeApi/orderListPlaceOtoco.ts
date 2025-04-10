@@ -15,9 +15,9 @@ async function orderListPlaceOtoco() {
 
         const response = await connection.orderListPlaceOtoco({
             symbol: 'BNBUSDT',
-            workingPrice: 1,
-            workingQuantity: 1,
-            pendingQuantity: 1,
+            workingPrice: 1.0,
+            workingQuantity: 1.0,
+            pendingQuantity: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

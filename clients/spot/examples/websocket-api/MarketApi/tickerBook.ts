@@ -13,9 +13,7 @@ async function tickerBook() {
     try {
         connection = await client.websocketAPI.connect();
 
-        const response = await connection.tickerBook({
-            symbol: 'BNBUSDT',
-        });
+        const response = await connection.tickerBook();
 
         const rateLimits = response.rateLimits!;
         console.log('tickerBook() rate limits:', rateLimits);

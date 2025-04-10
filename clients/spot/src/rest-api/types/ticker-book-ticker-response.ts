@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 
 /**
  * Binance Spot REST API
@@ -18,40 +19,15 @@
  * Do not edit the class manually.
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { TickerBookTickerResponse1 } from './ticker-book-ticker-response1';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { TickerBookTickerResponse2 } from './ticker-book-ticker-response2';
+
 /**
- *
+ * @type TickerBookTickerResponse
  * @export
- * @interface TickerBookTickerResponse
  */
-export interface TickerBookTickerResponse {
-    /**
-     *
-     * @type {string}
-     * @memberof TickerBookTickerResponse
-     */
-    symbol?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof TickerBookTickerResponse
-     */
-    bidPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof TickerBookTickerResponse
-     */
-    bidQty?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof TickerBookTickerResponse
-     */
-    askPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof TickerBookTickerResponse
-     */
-    askQty?: string;
-}
+export type TickerBookTickerResponse = TickerBookTickerResponse1 | TickerBookTickerResponse2;

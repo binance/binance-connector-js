@@ -12,7 +12,7 @@ async function avgPrice() {
         connection = await client.websocketStreams.connect();
 
         const stream = connection.avgPrice({
-            symbol: 'BNBUSDT',
+            symbol: 'bnbusdt',
         });
 
         stream.on('message', (data) => {

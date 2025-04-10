@@ -26,6 +26,7 @@ import {
     MyAllocationsRequest,
     MyPreventedMatchesRequest,
     MyTradesRequest,
+    OrderAmendmentsRequest,
     RateLimitOrderRequest,
 } from '../../../src/rest-api';
 import type {
@@ -34,6 +35,7 @@ import type {
     MyAllocationsResponse,
     MyPreventedMatchesResponse,
     MyTradesResponse,
+    OrderAmendmentsResponse,
     RateLimitOrderResponse,
 } from '../../../src/rest-api/types';
 
@@ -602,6 +604,143 @@ describe('AccountApi', () => {
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'myTrades').mockRejectedValueOnce(mockError);
             await expect(client.myTrades(params)).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('orderAmendments()', () => {
+        it('should execute orderAmendments() successfully with required parameters only', async () => {
+            const params: OrderAmendmentsRequest = {
+                symbol: 'BNBUSDT',
+                orderId: 1,
+            };
+
+            mockResponse = [
+                {
+                    symbol: 'BTCUSDT',
+                    orderId: 9,
+                    executionId: 22,
+                    origClientOrderId: 'W0fJ9fiLKHOJutovPK3oJp',
+                    newClientOrderId: 'UQ1Np3bmQ71jJzsSDW9Vpi',
+                    origQty: '5.00000000',
+                    newQty: '4.00000000',
+                    time: 1741669661670,
+                },
+                {
+                    symbol: 'BTCUDST',
+                    orderId: 9,
+                    executionId: 25,
+                    origClientOrderId: 'UQ1Np3bmQ71jJzsSDW9Vpi',
+                    newClientOrderId: '5uS0r35ohuQyDlCzZuYXq2',
+                    origQty: '4.00000000',
+                    newQty: '3.00000000',
+                    time: 1741672924895,
+                },
+            ];
+
+            const spy = jest.spyOn(client, 'orderAmendments').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<OrderAmendmentsResponse>)
+            );
+            const response = await client.orderAmendments(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute orderAmendments() successfully with optional parameters', async () => {
+            const params: OrderAmendmentsRequest = {
+                symbol: 'BNBUSDT',
+                orderId: 1,
+                fromExecutionId: 1,
+                limit: 500,
+                recvWindow: 5000,
+            };
+
+            mockResponse = [
+                {
+                    symbol: 'BTCUSDT',
+                    orderId: 9,
+                    executionId: 22,
+                    origClientOrderId: 'W0fJ9fiLKHOJutovPK3oJp',
+                    newClientOrderId: 'UQ1Np3bmQ71jJzsSDW9Vpi',
+                    origQty: '5.00000000',
+                    newQty: '4.00000000',
+                    time: 1741669661670,
+                },
+                {
+                    symbol: 'BTCUDST',
+                    orderId: 9,
+                    executionId: 25,
+                    origClientOrderId: 'UQ1Np3bmQ71jJzsSDW9Vpi',
+                    newClientOrderId: '5uS0r35ohuQyDlCzZuYXq2',
+                    origQty: '4.00000000',
+                    newQty: '3.00000000',
+                    time: 1741672924895,
+                },
+            ];
+
+            const spy = jest.spyOn(client, 'orderAmendments').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<OrderAmendmentsResponse>)
+            );
+            const response = await client.orderAmendments(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when symbol is missing', async () => {
+            const _params: OrderAmendmentsRequest = {
+                symbol: 'BNBUSDT',
+                orderId: 1,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.symbol;
+
+            await expect(client.orderAmendments(params)).rejects.toThrow(
+                'Required parameter symbol was null or undefined when calling orderAmendments.'
+            );
+        });
+
+        it('should throw RequiredError when orderId is missing', async () => {
+            const _params: OrderAmendmentsRequest = {
+                symbol: 'BNBUSDT',
+                orderId: 1,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.orderId;
+
+            await expect(client.orderAmendments(params)).rejects.toThrow(
+                'Required parameter orderId was null or undefined when calling orderAmendments.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: OrderAmendmentsRequest = {
+                symbol: 'BNBUSDT',
+                orderId: 1,
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'orderAmendments').mockRejectedValueOnce(mockError);
+            await expect(client.orderAmendments(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

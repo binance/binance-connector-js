@@ -15,7 +15,8 @@ async function orderListPlace() {
 
         const response = await connection.orderListPlace({
             symbol: 'BNBUSDT',
-            quantity: 1,
+            price: 1.0,
+            quantity: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

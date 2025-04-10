@@ -13,9 +13,7 @@ async function tickerTradingDay() {
     try {
         connection = await client.websocketAPI.connect();
 
-        const response = await connection.tickerTradingDay({
-            symbol: 'BNBUSDT',
-        });
+        const response = await connection.tickerTradingDay();
 
         const rateLimits = response.rateLimits!;
         console.log('tickerTradingDay() rate limits:', rateLimits);

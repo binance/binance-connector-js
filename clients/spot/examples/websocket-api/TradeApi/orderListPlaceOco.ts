@@ -15,7 +15,7 @@ async function orderListPlaceOco() {
 
         const response = await connection.orderListPlaceOco({
             symbol: 'BNBUSDT',
-            quantity: 1,
+            quantity: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

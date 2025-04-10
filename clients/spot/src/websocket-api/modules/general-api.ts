@@ -36,7 +36,7 @@ export interface GeneralApiInterface {
      * @memberof GeneralApiInterface
      */
     exchangeInfo(
-        requestParameters: ExchangeInfoRequest
+        requestParameters?: ExchangeInfoRequest
     ): Promise<WebsocketApiResponse<ExchangeInfoResponse>>;
 
     /**
@@ -70,18 +70,18 @@ export interface GeneralApiInterface {
  */
 export interface ExchangeInfoRequest {
     /**
-     *
-     * @type {string}
-     * @memberof GeneralApiExchangeInfo
-     */
-    readonly symbol: string;
-
-    /**
      * Unique WebSocket request ID.
      * @type {string}
      * @memberof GeneralApiExchangeInfo
      */
     readonly id?: string;
+
+    /**
+     * Describe a single symbol
+     * @type {string}
+     * @memberof GeneralApiExchangeInfo
+     */
+    readonly symbol?: string;
 
     /**
      * List of symbols to query
@@ -158,10 +158,10 @@ export class GeneralApi implements GeneralApiInterface {
      * @param {ExchangeInfoRequest} requestParameters Request parameters.
      * @returns {Promise<ExchangeInfoResponse>}
      * @memberof GeneralApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-requests#exchange-information Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-requests#exchange-information Binance API Documentation}
      */
     public exchangeInfo(
-        requestParameters: ExchangeInfoRequest
+        requestParameters: ExchangeInfoRequest = {}
     ): Promise<WebsocketApiResponse<ExchangeInfoResponse>> {
         return this.websocketBase.sendMessage<ExchangeInfoResponse>(
             '/exchangeInfo'.slice(1),
@@ -178,7 +178,7 @@ export class GeneralApi implements GeneralApiInterface {
      * @param {PingRequest} requestParameters Request parameters.
      * @returns {Promise<void>}
      * @memberof GeneralApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-requests#test-connectivity Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-requests#test-connectivity Binance API Documentation}
      */
     public ping(requestParameters: PingRequest = {}): Promise<WebsocketApiResponse<void>> {
         return this.websocketBase.sendMessage<void>(
@@ -196,7 +196,7 @@ export class GeneralApi implements GeneralApiInterface {
      * @param {TimeRequest} requestParameters Request parameters.
      * @returns {Promise<TimeResponse>}
      * @memberof GeneralApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-requests#check-server-time Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-requests#check-server-time Binance API Documentation}
      */
     public time(requestParameters: TimeRequest = {}): Promise<WebsocketApiResponse<TimeResponse>> {
         return this.websocketBase.sendMessage<TimeResponse>(

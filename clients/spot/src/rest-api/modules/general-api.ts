@@ -20,7 +20,6 @@ import {
     ConfigurationRestAPI,
     TimeUnit,
     RestApiResponse,
-    assertParamExists,
     sendRequest,
     type RequestArgs,
 } from '@binance/common';
@@ -36,24 +35,21 @@ const GeneralApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 20
          *
          * @summary Exchange information
-         * @param {string} symbol
+         * @param {string} [symbol] Symbol to query
          * @param {Array<string>} [symbols] List of symbols to query
-         * @param {Array<string>} [permissions] Examples: curl -X GET "https://api.binance.com/api/v3/exchangeInfo?permissions=SPOT" <br/> or <br/> curl -X GET "https://api.binance.com/api/v3/exchangeInfo?permissions=%5B%22MARGIN%22%2C%22LEVERAGED%22%5D" <br/> or <br/> curl -g -X GET 'https://api.binance.com/api/v3/exchangeInfo?permissions=["MARGIN","LEVERAGED"]'
+         * @param {Array<string>} [permissions] List of permissions to query
          * @param {boolean} [showPermissionSets] Controls whether the content of the `permissionSets` field is populated or not. Defaults to `true`
          * @param {ExchangeInfoSymbolStatusEnum} [symbolStatus]
          *
          * @throws {RequiredError}
          */
         exchangeInfo: async (
-            symbol: string,
+            symbol?: string,
             symbols?: Array<string>,
             permissions?: Array<string>,
             showPermissionSets?: boolean,
             symbolStatus?: ExchangeInfoSymbolStatusEnum
         ): Promise<RequestArgs> => {
-            // verify required parameter 'symbol' is not null or undefined
-            assertParamExists('exchangeInfo', 'symbol', symbol);
-
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
@@ -147,7 +143,7 @@ export interface GeneralApiInterface {
      * @memberof GeneralApiInterface
      */
     exchangeInfo(
-        requestParameters: ExchangeInfoRequest
+        requestParameters?: ExchangeInfoRequest
     ): Promise<RestApiResponse<ExchangeInfoResponse>>;
     /**
      * Test connectivity to the Rest API.
@@ -177,11 +173,11 @@ export interface GeneralApiInterface {
  */
 export interface ExchangeInfoRequest {
     /**
-     *
+     * Symbol to query
      * @type {string}
      * @memberof GeneralApiExchangeInfo
      */
-    readonly symbol: string;
+    readonly symbol?: string;
 
     /**
      * List of symbols to query
@@ -191,7 +187,7 @@ export interface ExchangeInfoRequest {
     readonly symbols?: Array<string>;
 
     /**
-     * Examples: curl -X GET "https://api.binance.com/api/v3/exchangeInfo?permissions=SPOT" <br/> or <br/> curl -X GET "https://api.binance.com/api/v3/exchangeInfo?permissions=%5B%22MARGIN%22%2C%22LEVERAGED%22%5D" <br/> or <br/> curl -g -X GET 'https://api.binance.com/api/v3/exchangeInfo?permissions=["MARGIN","LEVERAGED"]'
+     * List of permissions to query
      * @type {Array<string>}
      * @memberof GeneralApiExchangeInfo
      */
@@ -237,7 +233,7 @@ export class GeneralApi implements GeneralApiInterface {
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#exchange-information Binance API Documentation}
      */
     public async exchangeInfo(
-        requestParameters: ExchangeInfoRequest
+        requestParameters: ExchangeInfoRequest = {}
     ): Promise<RestApiResponse<ExchangeInfoResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.exchangeInfo(
             requestParameters?.symbol,

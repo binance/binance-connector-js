@@ -12,7 +12,7 @@ async function kline() {
         connection = await client.websocketStreams.connect();
 
         const stream = connection.kline({
-            symbol: 'BNBUSDT',
+            symbol: 'bnbusdt',
             interval: SpotWebsocketStreams.KlineIntervalEnum.INTERVAL_1s,
         });
 

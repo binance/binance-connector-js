@@ -28,11 +28,6 @@ import {
     AvgPriceRequest,
     DepthRequest,
     KlinesRequest,
-    TickerRequest,
-    Ticker24hrRequest,
-    TickerBookRequest,
-    TickerPriceRequest,
-    TickerTradingDayRequest,
     TradesAggregateRequest,
     TradesHistoricalRequest,
     TradesRecentRequest,
@@ -669,10 +664,6 @@ describe('MarketApi', () => {
             };
             mockResponse.id = randomString();
 
-            const params: TickerRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             let resolveTest: (value: unknown) => void;
             const testComplete = new Promise((resolve) => {
                 resolveTest = resolve;
@@ -682,18 +673,16 @@ describe('MarketApi', () => {
                 try {
                     websocketAPIClient = new MarketApi(conn);
                     const sendMsgSpy = jest.spyOn(conn, 'sendMessage');
-                    const responsePromise = websocketAPIClient.ticker({
-                        id: mockResponse?.id,
-                        ...params,
-                    });
+                    const responsePromise = websocketAPIClient.ticker({ id: mockResponse?.id });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
-                    expect(sendMsgSpy).toHaveBeenCalledWith('/ticker'.slice(1), params, {
-                        isSigned: false,
-                        withApiKey: false,
-                    });
+                    expect(sendMsgSpy).toHaveBeenCalledWith(
+                        '/ticker'.slice(1),
+                        expect.any(Object),
+                        { isSigned: false, withApiKey: false }
+                    );
                     resolveTest(true);
                 } catch (error) {
                     resolveTest(error);
@@ -726,10 +715,6 @@ describe('MarketApi', () => {
                 ],
             };
 
-            const params: TickerRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             let resolveTest: (value: unknown) => void;
             const testComplete = new Promise((resolve) => {
                 resolveTest = resolve;
@@ -738,10 +723,7 @@ describe('MarketApi', () => {
             websocketBase.on('open', async (conn: WebsocketAPIBase) => {
                 try {
                     websocketAPIClient = new MarketApi(conn);
-                    const responsePromise = websocketAPIClient.ticker({
-                        id: mockResponse?.id,
-                        ...params,
-                    });
+                    const responsePromise = websocketAPIClient.ticker({ id: mockResponse?.id });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
@@ -760,10 +742,6 @@ describe('MarketApi', () => {
         it('should handle request timeout gracefully', async () => {
             jest.useRealTimers();
 
-            const params: TickerRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             let resolveTest: (value: unknown) => void;
             const testComplete = new Promise((resolve) => {
                 resolveTest = resolve;
@@ -772,7 +750,7 @@ describe('MarketApi', () => {
             websocketBase.on('open', async (conn: WebsocketAPIBase) => {
                 try {
                     websocketAPIClient = new MarketApi(websocketBase);
-                    const responsePromise = websocketAPIClient.ticker(params);
+                    const responsePromise = websocketAPIClient.ticker();
                     await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
                     resolveTest(true);
                 } catch (error) {
@@ -862,10 +840,6 @@ describe('MarketApi', () => {
             };
             mockResponse.id = randomString();
 
-            const params: Ticker24hrRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             let resolveTest: (value: unknown) => void;
             const testComplete = new Promise((resolve) => {
                 resolveTest = resolve;
@@ -875,18 +849,16 @@ describe('MarketApi', () => {
                 try {
                     websocketAPIClient = new MarketApi(conn);
                     const sendMsgSpy = jest.spyOn(conn, 'sendMessage');
-                    const responsePromise = websocketAPIClient.ticker24hr({
-                        id: mockResponse?.id,
-                        ...params,
-                    });
+                    const responsePromise = websocketAPIClient.ticker24hr({ id: mockResponse?.id });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
-                    expect(sendMsgSpy).toHaveBeenCalledWith('/ticker.24hr'.slice(1), params, {
-                        isSigned: false,
-                        withApiKey: false,
-                    });
+                    expect(sendMsgSpy).toHaveBeenCalledWith(
+                        '/ticker.24hr'.slice(1),
+                        expect.any(Object),
+                        { isSigned: false, withApiKey: false }
+                    );
                     resolveTest(true);
                 } catch (error) {
                     resolveTest(error);
@@ -919,10 +891,6 @@ describe('MarketApi', () => {
                 ],
             };
 
-            const params: Ticker24hrRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             let resolveTest: (value: unknown) => void;
             const testComplete = new Promise((resolve) => {
                 resolveTest = resolve;
@@ -931,10 +899,7 @@ describe('MarketApi', () => {
             websocketBase.on('open', async (conn: WebsocketAPIBase) => {
                 try {
                     websocketAPIClient = new MarketApi(conn);
-                    const responsePromise = websocketAPIClient.ticker24hr({
-                        id: mockResponse?.id,
-                        ...params,
-                    });
+                    const responsePromise = websocketAPIClient.ticker24hr({ id: mockResponse?.id });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
@@ -953,10 +918,6 @@ describe('MarketApi', () => {
         it('should handle request timeout gracefully', async () => {
             jest.useRealTimers();
 
-            const params: Ticker24hrRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             let resolveTest: (value: unknown) => void;
             const testComplete = new Promise((resolve) => {
                 resolveTest = resolve;
@@ -965,7 +926,7 @@ describe('MarketApi', () => {
             websocketBase.on('open', async (conn: WebsocketAPIBase) => {
                 try {
                     websocketAPIClient = new MarketApi(websocketBase);
-                    const responsePromise = websocketAPIClient.ticker24hr(params);
+                    const responsePromise = websocketAPIClient.ticker24hr();
                     await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
                     resolveTest(true);
                 } catch (error) {
@@ -1039,10 +1000,6 @@ describe('MarketApi', () => {
             };
             mockResponse.id = randomString();
 
-            const params: TickerBookRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             let resolveTest: (value: unknown) => void;
             const testComplete = new Promise((resolve) => {
                 resolveTest = resolve;
@@ -1052,18 +1009,16 @@ describe('MarketApi', () => {
                 try {
                     websocketAPIClient = new MarketApi(conn);
                     const sendMsgSpy = jest.spyOn(conn, 'sendMessage');
-                    const responsePromise = websocketAPIClient.tickerBook({
-                        id: mockResponse?.id,
-                        ...params,
-                    });
+                    const responsePromise = websocketAPIClient.tickerBook({ id: mockResponse?.id });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
-                    expect(sendMsgSpy).toHaveBeenCalledWith('/ticker.book'.slice(1), params, {
-                        isSigned: false,
-                        withApiKey: false,
-                    });
+                    expect(sendMsgSpy).toHaveBeenCalledWith(
+                        '/ticker.book'.slice(1),
+                        expect.any(Object),
+                        { isSigned: false, withApiKey: false }
+                    );
                     resolveTest(true);
                 } catch (error) {
                     resolveTest(error);
@@ -1096,10 +1051,6 @@ describe('MarketApi', () => {
                 ],
             };
 
-            const params: TickerBookRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             let resolveTest: (value: unknown) => void;
             const testComplete = new Promise((resolve) => {
                 resolveTest = resolve;
@@ -1108,10 +1059,7 @@ describe('MarketApi', () => {
             websocketBase.on('open', async (conn: WebsocketAPIBase) => {
                 try {
                     websocketAPIClient = new MarketApi(conn);
-                    const responsePromise = websocketAPIClient.tickerBook({
-                        id: mockResponse?.id,
-                        ...params,
-                    });
+                    const responsePromise = websocketAPIClient.tickerBook({ id: mockResponse?.id });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
@@ -1130,10 +1078,6 @@ describe('MarketApi', () => {
         it('should handle request timeout gracefully', async () => {
             jest.useRealTimers();
 
-            const params: TickerBookRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             let resolveTest: (value: unknown) => void;
             const testComplete = new Promise((resolve) => {
                 resolveTest = resolve;
@@ -1142,7 +1086,7 @@ describe('MarketApi', () => {
             websocketBase.on('open', async (conn: WebsocketAPIBase) => {
                 try {
                     websocketAPIClient = new MarketApi(websocketBase);
-                    const responsePromise = websocketAPIClient.tickerBook(params);
+                    const responsePromise = websocketAPIClient.tickerBook();
                     await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
                     resolveTest(true);
                 } catch (error) {
@@ -1210,10 +1154,6 @@ describe('MarketApi', () => {
             };
             mockResponse.id = randomString();
 
-            const params: TickerPriceRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             let resolveTest: (value: unknown) => void;
             const testComplete = new Promise((resolve) => {
                 resolveTest = resolve;
@@ -1225,16 +1165,16 @@ describe('MarketApi', () => {
                     const sendMsgSpy = jest.spyOn(conn, 'sendMessage');
                     const responsePromise = websocketAPIClient.tickerPrice({
                         id: mockResponse?.id,
-                        ...params,
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
-                    expect(sendMsgSpy).toHaveBeenCalledWith('/ticker.price'.slice(1), params, {
-                        isSigned: false,
-                        withApiKey: false,
-                    });
+                    expect(sendMsgSpy).toHaveBeenCalledWith(
+                        '/ticker.price'.slice(1),
+                        expect.any(Object),
+                        { isSigned: false, withApiKey: false }
+                    );
                     resolveTest(true);
                 } catch (error) {
                     resolveTest(error);
@@ -1267,10 +1207,6 @@ describe('MarketApi', () => {
                 ],
             };
 
-            const params: TickerPriceRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             let resolveTest: (value: unknown) => void;
             const testComplete = new Promise((resolve) => {
                 resolveTest = resolve;
@@ -1281,7 +1217,6 @@ describe('MarketApi', () => {
                     websocketAPIClient = new MarketApi(conn);
                     const responsePromise = websocketAPIClient.tickerPrice({
                         id: mockResponse?.id,
-                        ...params,
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
@@ -1301,10 +1236,6 @@ describe('MarketApi', () => {
         it('should handle request timeout gracefully', async () => {
             jest.useRealTimers();
 
-            const params: TickerPriceRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             let resolveTest: (value: unknown) => void;
             const testComplete = new Promise((resolve) => {
                 resolveTest = resolve;
@@ -1313,7 +1244,7 @@ describe('MarketApi', () => {
             websocketBase.on('open', async (conn: WebsocketAPIBase) => {
                 try {
                     websocketAPIClient = new MarketApi(websocketBase);
-                    const responsePromise = websocketAPIClient.tickerPrice(params);
+                    const responsePromise = websocketAPIClient.tickerPrice();
                     await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
                     resolveTest(true);
                 } catch (error) {
@@ -1416,10 +1347,6 @@ describe('MarketApi', () => {
             };
             mockResponse.id = randomString();
 
-            const params: TickerTradingDayRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             let resolveTest: (value: unknown) => void;
             const testComplete = new Promise((resolve) => {
                 resolveTest = resolve;
@@ -1431,16 +1358,16 @@ describe('MarketApi', () => {
                     const sendMsgSpy = jest.spyOn(conn, 'sendMessage');
                     const responsePromise = websocketAPIClient.tickerTradingDay({
                         id: mockResponse?.id,
-                        ...params,
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
-                    expect(sendMsgSpy).toHaveBeenCalledWith('/ticker.tradingDay'.slice(1), params, {
-                        isSigned: false,
-                        withApiKey: false,
-                    });
+                    expect(sendMsgSpy).toHaveBeenCalledWith(
+                        '/ticker.tradingDay'.slice(1),
+                        expect.any(Object),
+                        { isSigned: false, withApiKey: false }
+                    );
                     resolveTest(true);
                 } catch (error) {
                     resolveTest(error);
@@ -1473,10 +1400,6 @@ describe('MarketApi', () => {
                 ],
             };
 
-            const params: TickerTradingDayRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             let resolveTest: (value: unknown) => void;
             const testComplete = new Promise((resolve) => {
                 resolveTest = resolve;
@@ -1487,7 +1410,6 @@ describe('MarketApi', () => {
                     websocketAPIClient = new MarketApi(conn);
                     const responsePromise = websocketAPIClient.tickerTradingDay({
                         id: mockResponse?.id,
-                        ...params,
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
@@ -1507,10 +1429,6 @@ describe('MarketApi', () => {
         it('should handle request timeout gracefully', async () => {
             jest.useRealTimers();
 
-            const params: TickerTradingDayRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             let resolveTest: (value: unknown) => void;
             const testComplete = new Promise((resolve) => {
                 resolveTest = resolve;
@@ -1519,7 +1437,7 @@ describe('MarketApi', () => {
             websocketBase.on('open', async (conn: WebsocketAPIBase) => {
                 try {
                     websocketAPIClient = new MarketApi(websocketBase);
-                    const responsePromise = websocketAPIClient.tickerTradingDay(params);
+                    const responsePromise = websocketAPIClient.tickerTradingDay();
                     await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
                     resolveTest(true);
                 } catch (error) {

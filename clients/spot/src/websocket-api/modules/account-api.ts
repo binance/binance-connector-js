@@ -26,6 +26,7 @@ import type {
     MyAllocationsResponse,
     MyPreventedMatchesResponse,
     MyTradesResponse,
+    OrderAmendmentsResponse,
 } from '../types';
 
 /**
@@ -145,7 +146,10 @@ export interface AccountApiInterface {
 
     /**
      * Query information about all your trades, filtered by time range.
-     * Weight: 20
+     * Weight: Condition| Weight|
+     * ---| ---
+     * |Without orderId|20|
+     * |With orderId|5|
      *
      * @summary WebSocket Account trade history
      * @param {MyTradesRequest} requestParameters Request parameters.
@@ -154,6 +158,20 @@ export interface AccountApiInterface {
      * @memberof AccountApiInterface
      */
     myTrades(requestParameters: MyTradesRequest): Promise<WebsocketApiResponse<MyTradesResponse>>;
+
+    /**
+     * Queries all amendments of a single order.
+     * Weight: 4
+     *
+     * @summary WebSocket Query Order Amendments
+     * @param {OrderAmendmentsRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<OrderAmendmentsResponse>}
+     * @memberof AccountApiInterface
+     */
+    orderAmendments(
+        requestParameters: OrderAmendmentsRequest
+    ): Promise<WebsocketApiResponse<OrderAmendmentsResponse>>;
 }
 
 /**
@@ -236,7 +254,7 @@ export interface AllOrderListsRequest {
     readonly id?: string;
 
     /**
-     * First trade ID to query
+     * Aggregate trade ID to begin at
      * @type {number}
      * @memberof AccountApiAllOrderLists
      */
@@ -257,7 +275,7 @@ export interface AllOrderListsRequest {
     readonly endTime?: number;
 
     /**
-     * Default 500; max 1000
+     * Default: 100; Maximum: 5000
      * @type {number}
      * @memberof AccountApiAllOrderLists
      */
@@ -291,7 +309,7 @@ export interface AllOrdersRequest {
     readonly id?: string;
 
     /**
-     *
+     * Cancel order by orderId
      * @type {number}
      * @memberof AccountApiAllOrders
      */
@@ -312,7 +330,7 @@ export interface AllOrdersRequest {
     readonly endTime?: number;
 
     /**
-     * Default 500; max 1000
+     * Default: 100; Maximum: 5000
      * @type {number}
      * @memberof AccountApiAllOrders
      */
@@ -367,14 +385,14 @@ export interface MyAllocationsRequest {
     readonly fromAllocationId?: number;
 
     /**
-     * Default 500; max 1000
+     * Default: 100; Maximum: 5000
      * @type {number}
      * @memberof AccountApiMyAllocations
      */
     readonly limit?: number;
 
     /**
-     *
+     * `orderId`or`origClientOrderId`mustbesent
      * @type {number}
      * @memberof AccountApiMyAllocations
      */
@@ -415,7 +433,7 @@ export interface MyPreventedMatchesRequest {
     readonly preventedMatchId?: number;
 
     /**
-     *
+     * `orderId`or`origClientOrderId`mustbesent
      * @type {number}
      * @memberof AccountApiMyPreventedMatches
      */
@@ -429,7 +447,7 @@ export interface MyPreventedMatchesRequest {
     readonly fromPreventedMatchId?: number;
 
     /**
-     * Default 500; max 1000
+     * Default: 100; Maximum: 5000
      * @type {number}
      * @memberof AccountApiMyPreventedMatches
      */
@@ -463,7 +481,7 @@ export interface MyTradesRequest {
     readonly id?: string;
 
     /**
-     *
+     * Cancel order by orderId
      * @type {number}
      * @memberof AccountApiMyTrades
      */
@@ -484,14 +502,14 @@ export interface MyTradesRequest {
     readonly endTime?: number;
 
     /**
-     * First trade ID to query
+     * Aggregate trade ID to begin at
      * @type {number}
      * @memberof AccountApiMyTrades
      */
     readonly fromId?: number;
 
     /**
-     * Default 500; max 1000
+     * Default: 100; Maximum: 5000
      * @type {number}
      * @memberof AccountApiMyTrades
      */
@@ -501,6 +519,54 @@ export interface MyTradesRequest {
      * The value cannot be greater than `60000`
      * @type {number}
      * @memberof AccountApiMyTrades
+     */
+    readonly recvWindow?: number;
+}
+
+/**
+ * Request parameters for orderAmendments operation in AccountApi.
+ * @interface OrderAmendmentsRequest
+ */
+export interface OrderAmendmentsRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof AccountApiOrderAmendments
+     */
+    readonly symbol: string;
+
+    /**
+     *
+     * @type {number}
+     * @memberof AccountApiOrderAmendments
+     */
+    readonly orderId: number;
+
+    /**
+     * Unique WebSocket request ID.
+     * @type {string}
+     * @memberof AccountApiOrderAmendments
+     */
+    readonly id?: string;
+
+    /**
+     *
+     * @type {number}
+     * @memberof AccountApiOrderAmendments
+     */
+    readonly fromExecutionId?: number;
+
+    /**
+     * Default: 100; Maximum: 5000
+     * @type {number}
+     * @memberof AccountApiOrderAmendments
+     */
+    readonly limit?: number;
+
+    /**
+     * The value cannot be greater than `60000`
+     * @type {number}
+     * @memberof AccountApiOrderAmendments
      */
     readonly recvWindow?: number;
 }
@@ -525,7 +591,7 @@ export class AccountApi implements AccountApiInterface {
      * @param {AccountCommissionRequest} requestParameters Request parameters.
      * @returns {Promise<AccountCommissionResponse>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/account-requests#account-commission-rates-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-commission-rates-user_data Binance API Documentation}
      */
     public accountCommission(
         requestParameters: AccountCommissionRequest
@@ -545,7 +611,7 @@ export class AccountApi implements AccountApiInterface {
      * @param {AccountRateLimitsOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<AccountRateLimitsOrdersResponse>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/account-requests#unfilled-order-count-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#unfilled-order-count-user_data Binance API Documentation}
      */
     public accountRateLimitsOrders(
         requestParameters: AccountRateLimitsOrdersRequest = {}
@@ -565,7 +631,7 @@ export class AccountApi implements AccountApiInterface {
      * @param {AccountStatusRequest} requestParameters Request parameters.
      * @returns {Promise<AccountStatusResponse>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/account-requests#account-information-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-information-user_data Binance API Documentation}
      */
     public accountStatus(
         requestParameters: AccountStatusRequest = {}
@@ -585,7 +651,7 @@ export class AccountApi implements AccountApiInterface {
      * @param {AllOrderListsRequest} requestParameters Request parameters.
      * @returns {Promise<AllOrderListsResponse>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/account-requests#account-order-list-history-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-order-list-history-user_data Binance API Documentation}
      */
     public allOrderLists(
         requestParameters: AllOrderListsRequest = {}
@@ -605,7 +671,7 @@ export class AccountApi implements AccountApiInterface {
      * @param {AllOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<AllOrdersResponse>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/account-requests#account-order-history-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-order-history-user_data Binance API Documentation}
      */
     public allOrders(
         requestParameters: AllOrdersRequest
@@ -625,7 +691,7 @@ export class AccountApi implements AccountApiInterface {
      * @param {MyAllocationsRequest} requestParameters Request parameters.
      * @returns {Promise<MyAllocationsResponse>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/account-requests#account-allocations-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-allocations-user_data Binance API Documentation}
      */
     public myAllocations(
         requestParameters: MyAllocationsRequest
@@ -656,7 +722,7 @@ export class AccountApi implements AccountApiInterface {
      * @param {MyPreventedMatchesRequest} requestParameters Request parameters.
      * @returns {Promise<MyPreventedMatchesResponse>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/account-requests#account-prevented-matches-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-prevented-matches-user_data Binance API Documentation}
      */
     public myPreventedMatches(
         requestParameters: MyPreventedMatchesRequest
@@ -670,19 +736,42 @@ export class AccountApi implements AccountApiInterface {
 
     /**
      * Query information about all your trades, filtered by time range.
-     * Weight: 20
+     * Weight: Condition| Weight|
+     * ---| ---
+     * |Without orderId|20|
+     * |With orderId|5|
      *
      * @summary WebSocket Account trade history
      * @param {MyTradesRequest} requestParameters Request parameters.
      * @returns {Promise<MyTradesResponse>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/account-requests#account-trade-history-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-trade-history-user_data Binance API Documentation}
      */
     public myTrades(
         requestParameters: MyTradesRequest
     ): Promise<WebsocketApiResponse<MyTradesResponse>> {
         return this.websocketBase.sendMessage<MyTradesResponse>(
             '/myTrades'.slice(1),
+            requestParameters as unknown as WebsocketSendMsgOptions,
+            { isSigned: true, withApiKey: false }
+        );
+    }
+
+    /**
+     * Queries all amendments of a single order.
+     * Weight: 4
+     *
+     * @summary WebSocket Query Order Amendments
+     * @param {OrderAmendmentsRequest} requestParameters Request parameters.
+     * @returns {Promise<OrderAmendmentsResponse>}
+     * @memberof AccountApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#query-order-amendments-user_data Binance API Documentation}
+     */
+    public orderAmendments(
+        requestParameters: OrderAmendmentsRequest
+    ): Promise<WebsocketApiResponse<OrderAmendmentsResponse>> {
+        return this.websocketBase.sendMessage<OrderAmendmentsResponse>(
+            '/order.amendments'.slice(1),
             requestParameters as unknown as WebsocketSendMsgOptions,
             { isSigned: true, withApiKey: false }
         );

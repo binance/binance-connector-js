@@ -9,9 +9,7 @@ const client = new Spot({ configurationRestAPI });
 
 async function tickerTradingDay() {
     try {
-        const response = await client.restAPI.tickerTradingDay({
-            symbol: 'BNBUSDT',
-        });
+        const response = await client.restAPI.tickerTradingDay();
 
         const rateLimits = response.rateLimits!;
         console.log('tickerTradingDay() rate limits:', rateLimits);

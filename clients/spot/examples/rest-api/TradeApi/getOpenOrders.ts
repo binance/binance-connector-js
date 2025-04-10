@@ -9,9 +9,7 @@ const client = new Spot({ configurationRestAPI });
 
 async function getOpenOrders() {
     try {
-        const response = await client.restAPI.getOpenOrders({
-            symbol: 'BNBUSDT',
-        });
+        const response = await client.restAPI.getOpenOrders();
 
         const rateLimits = response.rateLimits!;
         console.log('getOpenOrders() rate limits:', rateLimits);

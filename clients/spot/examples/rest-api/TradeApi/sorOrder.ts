@@ -11,7 +11,7 @@ async function sorOrder() {
     try {
         const response = await client.restAPI.sorOrder({
             symbol: 'BNBUSDT',
-            quantity: 1,
+            quantity: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

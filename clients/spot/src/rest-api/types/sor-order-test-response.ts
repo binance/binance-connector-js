@@ -21,10 +21,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { SorOrderTestResponseDiscount } from './sor-order-test-response-discount';
+import type { OrderTestResponse2Discount } from './order-test-response2-discount';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { SorOrderTestResponseStandardCommissionForOrder } from './sor-order-test-response-standard-commission-for-order';
+import type { OrderTestResponse2StandardCommissionForOrder } from './order-test-response2-standard-commission-for-order';
 
 /**
  *
@@ -34,20 +34,20 @@ import type { SorOrderTestResponseStandardCommissionForOrder } from './sor-order
 export interface SorOrderTestResponse {
     /**
      *
-     * @type {SorOrderTestResponseStandardCommissionForOrder}
+     * @type {OrderTestResponse2StandardCommissionForOrder}
      * @memberof SorOrderTestResponse
      */
-    standardCommissionForOrder?: SorOrderTestResponseStandardCommissionForOrder;
+    standardCommissionForOrder?: OrderTestResponse2StandardCommissionForOrder;
     /**
      *
-     * @type {SorOrderTestResponseStandardCommissionForOrder}
+     * @type {OrderTestResponse2StandardCommissionForOrder}
      * @memberof SorOrderTestResponse
      */
-    taxCommissionForOrder?: SorOrderTestResponseStandardCommissionForOrder;
+    taxCommissionForOrder?: OrderTestResponse2StandardCommissionForOrder;
     /**
      *
-     * @type {SorOrderTestResponseDiscount}
+     * @type {OrderTestResponse2Discount}
      * @memberof SorOrderTestResponse
      */
-    discount?: SorOrderTestResponseDiscount;
+    discount?: OrderTestResponse2Discount;
 }

@@ -150,7 +150,7 @@ export class AuthApi implements AuthApiInterface {
      * @param {SessionLogonRequest} requestParameters Request parameters.
      * @returns {Promise<SessionLogonResponse>}
      * @memberof AuthApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/authentication-requests#log-in-with-api-key-signed Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/authentication-requests#log-in-with-api-key-signed Binance API Documentation}
      */
     public sessionLogon(
         requestParameters: SessionLogonRequest = {}
@@ -175,7 +175,7 @@ export class AuthApi implements AuthApiInterface {
      * @param {SessionLogoutRequest} requestParameters Request parameters.
      * @returns {Promise<SessionLogoutResponse>}
      * @memberof AuthApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/authentication-requests#log-out-of-the-session Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/authentication-requests#log-out-of-the-session Binance API Documentation}
      */
     public sessionLogout(
         requestParameters: SessionLogoutRequest = {}
@@ -196,7 +196,7 @@ export class AuthApi implements AuthApiInterface {
      * @param {SessionStatusRequest} requestParameters Request parameters.
      * @returns {Promise<SessionStatusResponse>}
      * @memberof AuthApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/authentication-requests#query-session-status Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/authentication-requests#query-session-status Binance API Documentation}
      */
     public sessionStatus(
         requestParameters: SessionStatusRequest = {}

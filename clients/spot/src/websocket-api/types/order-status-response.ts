@@ -24,7 +24,7 @@
 import type { OrderStatusResponseResult } from './order-status-response-result';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TickerResponseRateLimitsInner } from './ticker-response-rate-limits-inner';
+import type { TickerResponse1RateLimitsInner } from './ticker-response1-rate-limits-inner';
 
 /**
  *
@@ -52,8 +52,8 @@ export interface OrderStatusResponse {
     result?: OrderStatusResponseResult;
     /**
      *
-     * @type {Array<TickerResponseRateLimitsInner>}
+     * @type {Array<TickerResponse1RateLimitsInner>}
      * @memberof OrderStatusResponse
      */
-    rateLimits?: Array<TickerResponseRateLimitsInner>;
+    rateLimits?: Array<TickerResponse1RateLimitsInner>;
 }

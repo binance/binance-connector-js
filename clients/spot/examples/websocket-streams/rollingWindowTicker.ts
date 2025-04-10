@@ -12,7 +12,7 @@ async function rollingWindowTicker() {
         connection = await client.websocketStreams.connect();
 
         const stream = connection.rollingWindowTicker({
-            symbol: 'BNBUSDT',
+            symbol: 'bnbusdt',
             windowSize: SpotWebsocketStreams.RollingWindowTickerWindowSizeEnum.WINDOW_SIZE_1h,
         });
 

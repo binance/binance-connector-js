@@ -117,7 +117,7 @@ export interface MarketApiInterface {
      * @returns {Promise<TickerResponse>}
      * @memberof MarketApiInterface
      */
-    ticker(requestParameters: TickerRequest): Promise<WebsocketApiResponse<TickerResponse>>;
+    ticker(requestParameters?: TickerRequest): Promise<WebsocketApiResponse<TickerResponse>>;
 
     /**
      * Get 24-hour rolling window price change statistics.
@@ -145,7 +145,7 @@ export interface MarketApiInterface {
      * @memberof MarketApiInterface
      */
     ticker24hr(
-        requestParameters: Ticker24hrRequest
+        requestParameters?: Ticker24hrRequest
     ): Promise<WebsocketApiResponse<Ticker24hrResponse>>;
 
     /**
@@ -169,7 +169,7 @@ export interface MarketApiInterface {
      * @memberof MarketApiInterface
      */
     tickerBook(
-        requestParameters: TickerBookRequest
+        requestParameters?: TickerBookRequest
     ): Promise<WebsocketApiResponse<TickerBookResponse>>;
 
     /**
@@ -194,7 +194,7 @@ export interface MarketApiInterface {
      * @memberof MarketApiInterface
      */
     tickerPrice(
-        requestParameters: TickerPriceRequest
+        requestParameters?: TickerPriceRequest
     ): Promise<WebsocketApiResponse<TickerPriceResponse>>;
 
     /**
@@ -208,7 +208,7 @@ export interface MarketApiInterface {
      * @memberof MarketApiInterface
      */
     tickerTradingDay(
-        requestParameters: TickerTradingDayRequest
+        requestParameters?: TickerTradingDayRequest
     ): Promise<WebsocketApiResponse<TickerTradingDayResponse>>;
 
     /**
@@ -324,7 +324,7 @@ export interface DepthRequest {
     readonly id?: string;
 
     /**
-     * Default 500; max 1000
+     * Default: 100; Maximum: 5000
      * @type {number}
      * @memberof MarketApiDepth
      */
@@ -379,7 +379,7 @@ export interface KlinesRequest {
     readonly timeZone?: string;
 
     /**
-     * Default 500; max 1000
+     * Default: 100; Maximum: 5000
      * @type {number}
      * @memberof MarketApiKlines
      */
@@ -392,18 +392,18 @@ export interface KlinesRequest {
  */
 export interface TickerRequest {
     /**
-     *
-     * @type {string}
-     * @memberof MarketApiTicker
-     */
-    readonly symbol: string;
-
-    /**
      * Unique WebSocket request ID.
      * @type {string}
      * @memberof MarketApiTicker
      */
     readonly id?: string;
+
+    /**
+     * Describe a single symbol
+     * @type {string}
+     * @memberof MarketApiTicker
+     */
+    readonly symbol?: string;
 
     /**
      * List of symbols to query
@@ -433,18 +433,18 @@ export interface TickerRequest {
  */
 export interface Ticker24hrRequest {
     /**
-     *
-     * @type {string}
-     * @memberof MarketApiTicker24hr
-     */
-    readonly symbol: string;
-
-    /**
      * Unique WebSocket request ID.
      * @type {string}
      * @memberof MarketApiTicker24hr
      */
     readonly id?: string;
+
+    /**
+     * Describe a single symbol
+     * @type {string}
+     * @memberof MarketApiTicker24hr
+     */
+    readonly symbol?: string;
 
     /**
      * List of symbols to query
@@ -467,18 +467,18 @@ export interface Ticker24hrRequest {
  */
 export interface TickerBookRequest {
     /**
-     *
-     * @type {string}
-     * @memberof MarketApiTickerBook
-     */
-    readonly symbol: string;
-
-    /**
      * Unique WebSocket request ID.
      * @type {string}
      * @memberof MarketApiTickerBook
      */
     readonly id?: string;
+
+    /**
+     * Describe a single symbol
+     * @type {string}
+     * @memberof MarketApiTickerBook
+     */
+    readonly symbol?: string;
 
     /**
      * List of symbols to query
@@ -494,18 +494,18 @@ export interface TickerBookRequest {
  */
 export interface TickerPriceRequest {
     /**
-     *
-     * @type {string}
-     * @memberof MarketApiTickerPrice
-     */
-    readonly symbol: string;
-
-    /**
      * Unique WebSocket request ID.
      * @type {string}
      * @memberof MarketApiTickerPrice
      */
     readonly id?: string;
+
+    /**
+     * Describe a single symbol
+     * @type {string}
+     * @memberof MarketApiTickerPrice
+     */
+    readonly symbol?: string;
 
     /**
      * List of symbols to query
@@ -521,18 +521,18 @@ export interface TickerPriceRequest {
  */
 export interface TickerTradingDayRequest {
     /**
-     *
-     * @type {string}
-     * @memberof MarketApiTickerTradingDay
-     */
-    readonly symbol: string;
-
-    /**
      * Unique WebSocket request ID.
      * @type {string}
      * @memberof MarketApiTickerTradingDay
      */
     readonly id?: string;
+
+    /**
+     * Describe a single symbol
+     * @type {string}
+     * @memberof MarketApiTickerTradingDay
+     */
+    readonly symbol?: string;
 
     /**
      * List of symbols to query
@@ -576,7 +576,7 @@ export interface TradesAggregateRequest {
     readonly id?: string;
 
     /**
-     * First trade ID to query
+     * Aggregate trade ID to begin at
      * @type {number}
      * @memberof MarketApiTradesAggregate
      */
@@ -597,7 +597,7 @@ export interface TradesAggregateRequest {
     readonly endTime?: number;
 
     /**
-     * Default 500; max 1000
+     * Default: 100; Maximum: 5000
      * @type {number}
      * @memberof MarketApiTradesAggregate
      */
@@ -624,14 +624,14 @@ export interface TradesHistoricalRequest {
     readonly id?: string;
 
     /**
-     * First trade ID to query
+     * Aggregate trade ID to begin at
      * @type {number}
      * @memberof MarketApiTradesHistorical
      */
     readonly fromId?: number;
 
     /**
-     * Default 500; max 1000
+     * Default: 100; Maximum: 5000
      * @type {number}
      * @memberof MarketApiTradesHistorical
      */
@@ -658,7 +658,7 @@ export interface TradesRecentRequest {
     readonly id?: string;
 
     /**
-     * Default 500; max 1000
+     * Default: 100; Maximum: 5000
      * @type {number}
      * @memberof MarketApiTradesRecent
      */
@@ -713,7 +713,7 @@ export interface UiKlinesRequest {
     readonly timeZone?: string;
 
     /**
-     * Default 500; max 1000
+     * Default: 100; Maximum: 5000
      * @type {number}
      * @memberof MarketApiUiKlines
      */
@@ -740,7 +740,7 @@ export class MarketApi implements MarketApiInterface {
      * @param {AvgPriceRequest} requestParameters Request parameters.
      * @returns {Promise<AvgPriceResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#current-average-price Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#current-average-price Binance API Documentation}
      */
     public avgPrice(
         requestParameters: AvgPriceRequest
@@ -776,7 +776,7 @@ export class MarketApi implements MarketApiInterface {
      * @param {DepthRequest} requestParameters Request parameters.
      * @returns {Promise<DepthResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#order-book Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#order-book Binance API Documentation}
      */
     public depth(requestParameters: DepthRequest): Promise<WebsocketApiResponse<DepthResponse>> {
         return this.websocketBase.sendMessage<DepthResponse>(
@@ -803,7 +803,7 @@ export class MarketApi implements MarketApiInterface {
      * @param {KlinesRequest} requestParameters Request parameters.
      * @returns {Promise<KlinesResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#klines Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#klines Binance API Documentation}
      */
     public klines(requestParameters: KlinesRequest): Promise<WebsocketApiResponse<KlinesResponse>> {
         return this.websocketBase.sendMessage<KlinesResponse>(
@@ -829,9 +829,11 @@ export class MarketApi implements MarketApiInterface {
      * @param {TickerRequest} requestParameters Request parameters.
      * @returns {Promise<TickerResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#rolling-window-price-change-statistics Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#rolling-window-price-change-statistics Binance API Documentation}
      */
-    public ticker(requestParameters: TickerRequest): Promise<WebsocketApiResponse<TickerResponse>> {
+    public ticker(
+        requestParameters: TickerRequest = {}
+    ): Promise<WebsocketApiResponse<TickerResponse>> {
         return this.websocketBase.sendMessage<TickerResponse>(
             '/ticker'.slice(1),
             requestParameters as unknown as WebsocketSendMsgOptions,
@@ -862,10 +864,10 @@ export class MarketApi implements MarketApiInterface {
      * @param {Ticker24hrRequest} requestParameters Request parameters.
      * @returns {Promise<Ticker24hrResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#24hr-ticker-price-change-statistics Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#24hr-ticker-price-change-statistics Binance API Documentation}
      */
     public ticker24hr(
-        requestParameters: Ticker24hrRequest
+        requestParameters: Ticker24hrRequest = {}
     ): Promise<WebsocketApiResponse<Ticker24hrResponse>> {
         return this.websocketBase.sendMessage<Ticker24hrResponse>(
             '/ticker.24hr'.slice(1),
@@ -892,10 +894,10 @@ export class MarketApi implements MarketApiInterface {
      * @param {TickerBookRequest} requestParameters Request parameters.
      * @returns {Promise<TickerBookResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#symbol-order-book-ticker Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#symbol-order-book-ticker Binance API Documentation}
      */
     public tickerBook(
-        requestParameters: TickerBookRequest
+        requestParameters: TickerBookRequest = {}
     ): Promise<WebsocketApiResponse<TickerBookResponse>> {
         return this.websocketBase.sendMessage<TickerBookResponse>(
             '/ticker.book'.slice(1),
@@ -923,10 +925,10 @@ export class MarketApi implements MarketApiInterface {
      * @param {TickerPriceRequest} requestParameters Request parameters.
      * @returns {Promise<TickerPriceResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#symbol-price-ticker Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#symbol-price-ticker Binance API Documentation}
      */
     public tickerPrice(
-        requestParameters: TickerPriceRequest
+        requestParameters: TickerPriceRequest = {}
     ): Promise<WebsocketApiResponse<TickerPriceResponse>> {
         return this.websocketBase.sendMessage<TickerPriceResponse>(
             '/ticker.price'.slice(1),
@@ -943,10 +945,10 @@ export class MarketApi implements MarketApiInterface {
      * @param {TickerTradingDayRequest} requestParameters Request parameters.
      * @returns {Promise<TickerTradingDayResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#trading-day-ticker Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#trading-day-ticker Binance API Documentation}
      */
     public tickerTradingDay(
-        requestParameters: TickerTradingDayRequest
+        requestParameters: TickerTradingDayRequest = {}
     ): Promise<WebsocketApiResponse<TickerTradingDayResponse>> {
         return this.websocketBase.sendMessage<TickerTradingDayResponse>(
             '/ticker.tradingDay'.slice(1),
@@ -974,7 +976,7 @@ export class MarketApi implements MarketApiInterface {
      * @param {TradesAggregateRequest} requestParameters Request parameters.
      * @returns {Promise<TradesAggregateResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#aggregate-trades Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#aggregate-trades Binance API Documentation}
      */
     public tradesAggregate(
         requestParameters: TradesAggregateRequest
@@ -994,7 +996,7 @@ export class MarketApi implements MarketApiInterface {
      * @param {TradesHistoricalRequest} requestParameters Request parameters.
      * @returns {Promise<TradesHistoricalResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#historical-trades Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#historical-trades Binance API Documentation}
      */
     public tradesHistorical(
         requestParameters: TradesHistoricalRequest
@@ -1018,7 +1020,7 @@ export class MarketApi implements MarketApiInterface {
      * @param {TradesRecentRequest} requestParameters Request parameters.
      * @returns {Promise<TradesRecentResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#recent-trades Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#recent-trades Binance API Documentation}
      */
     public tradesRecent(
         requestParameters: TradesRecentRequest
@@ -1041,7 +1043,7 @@ export class MarketApi implements MarketApiInterface {
      * @param {UiKlinesRequest} requestParameters Request parameters.
      * @returns {Promise<UiKlinesResponse>}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#ui-klines Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#ui-klines Binance API Documentation}
      */
     public uiKlines(
         requestParameters: UiKlinesRequest

@@ -77,7 +77,7 @@ const WebSocketStreamsApiParamCreator = function () {
             // verify required parameter 'windowSize' is not null or undefined
             assertParamExists('allMarketRollingWindowTicker', 'windowSize', windowSize);
 
-            return replaceWebsocketStreamsPlaceholders('/!ticker_<window-size>@arr'.slice(1), {
+            return replaceWebsocketStreamsPlaceholders('/!ticker_<windowSize>@arr'.slice(1), {
                 windowSize,
                 id,
             });
@@ -155,7 +155,7 @@ const WebSocketStreamsApiParamCreator = function () {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('diffBookDepth', 'symbol', symbol);
 
-            return replaceWebsocketStreamsPlaceholders('/<symbol>@depth<updateSpeed>'.slice(1), {
+            return replaceWebsocketStreamsPlaceholders('/<symbol>@depth@<updateSpeed>'.slice(1), {
                 symbol,
                 id,
                 updateSpeed,
@@ -247,7 +247,7 @@ const WebSocketStreamsApiParamCreator = function () {
             assertParamExists('partialBookDepth', 'levels', levels);
 
             return replaceWebsocketStreamsPlaceholders(
-                '/<symbol>@depth<levels><updateSpeed>'.slice(1),
+                '/<symbol>@depth<levels>@<updateSpeed>'.slice(1),
                 { symbol, levels, id, updateSpeed }
             );
         },
@@ -271,7 +271,7 @@ const WebSocketStreamsApiParamCreator = function () {
             // verify required parameter 'windowSize' is not null or undefined
             assertParamExists('rollingWindowTicker', 'windowSize', windowSize);
 
-            return replaceWebsocketStreamsPlaceholders('/<symbol>@ticker_<window_size>'.slice(1), {
+            return replaceWebsocketStreamsPlaceholders('/<symbol>@ticker_<windowSize>'.slice(1), {
                 symbol,
                 windowSize,
                 id,

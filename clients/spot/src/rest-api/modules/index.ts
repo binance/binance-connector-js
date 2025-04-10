@@ -20,4 +20,4 @@ export * from './account-api';
 export * from './general-api';
 export * from './market-api';
 export * from './trade-api';
-export * from './userdatastream-api';
+export * from './user-data-stream-api';

@@ -21,6 +21,7 @@ import type {
     OpenOrderListsStatusResponse,
     OpenOrdersCancelAllResponse,
     OpenOrdersStatusResponse,
+    OrderAmendKeepPriorityResponse,
     OrderCancelReplaceResponse,
     OrderCancelResponse,
     OrderListCancelResponse,
@@ -97,8 +98,22 @@ export interface TradeApiInterface {
      * @memberof TradeApiInterface
      */
     openOrdersStatus(
-        requestParameters: OpenOrdersStatusRequest
+        requestParameters?: OpenOrdersStatusRequest
     ): Promise<WebsocketApiResponse<OpenOrdersStatusResponse>>;
+
+    /**
+     * Reduce the quantity of an existing open order.
+     * Weight: 1
+     *
+     * @summary WebSocket Order Amend Keep Priority
+     * @param {OrderAmendKeepPriorityRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<OrderAmendKeepPriorityResponse>}
+     * @memberof TradeApiInterface
+     */
+    orderAmendKeepPriority(
+        requestParameters: OrderAmendKeepPriorityRequest
+    ): Promise<WebsocketApiResponse<OrderAmendKeepPriorityResponse>>;
 
     /**
      * Cancel an active order.
@@ -375,13 +390,6 @@ export interface OpenOrdersCancelAllRequest {
  */
 export interface OpenOrdersStatusRequest {
     /**
-     *
-     * @type {string}
-     * @memberof TradeApiOpenOrdersStatus
-     */
-    readonly symbol: string;
-
-    /**
      * Unique WebSocket request ID.
      * @type {string}
      * @memberof TradeApiOpenOrdersStatus
@@ -389,9 +397,71 @@ export interface OpenOrdersStatusRequest {
     readonly id?: string;
 
     /**
+     * Describe a single symbol
+     * @type {string}
+     * @memberof TradeApiOpenOrdersStatus
+     */
+    readonly symbol?: string;
+
+    /**
      * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiOpenOrdersStatus
+     */
+    readonly recvWindow?: number;
+}
+
+/**
+ * Request parameters for orderAmendKeepPriority operation in TradeApi.
+ * @interface OrderAmendKeepPriorityRequest
+ */
+export interface OrderAmendKeepPriorityRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof TradeApiOrderAmendKeepPriority
+     */
+    readonly symbol: string;
+
+    /**
+     * `newQty` must be greater than 0 and less than the order's quantity.
+     * @type {number}
+     * @memberof TradeApiOrderAmendKeepPriority
+     */
+    readonly newQty: number;
+
+    /**
+     * Unique WebSocket request ID.
+     * @type {string}
+     * @memberof TradeApiOrderAmendKeepPriority
+     */
+    readonly id?: string;
+
+    /**
+     * `orderId`or`origClientOrderId`mustbesent
+     * @type {number}
+     * @memberof TradeApiOrderAmendKeepPriority
+     */
+    readonly orderId?: number;
+
+    /**
+     * `orderId`or`origClientOrderId`mustbesent
+     * @type {string}
+     * @memberof TradeApiOrderAmendKeepPriority
+     */
+    readonly origClientOrderId?: string;
+
+    /**
+     * The new client order ID for the order after being amended. <br> If not sent, one will be randomly generated. <br> It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`.
+     * @type {string}
+     * @memberof TradeApiOrderAmendKeepPriority
+     */
+    readonly newClientOrderId?: string;
+
+    /**
+     * The value cannot be greater than `60000`
+     * @type {number}
+     * @memberof TradeApiOrderAmendKeepPriority
      */
     readonly recvWindow?: number;
 }
@@ -416,21 +486,21 @@ export interface OrderCancelRequest {
     readonly id?: string;
 
     /**
-     *
+     * Cancel order by orderId
      * @type {number}
      * @memberof TradeApiOrderCancel
      */
     readonly orderId?: number;
 
     /**
-     * Query order list by listClientOrderId
+     * `orderId`or`origClientOrderId`mustbesent
      * @type {string}
      * @memberof TradeApiOrderCancel
      */
     readonly origClientOrderId?: string;
 
     /**
-     * Arbitrary unique ID among open orders. Automatically generated if not sent
+     * The new client order ID for the order after being amended. <br> If not sent, one will be randomly generated. <br> It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`.
      * @type {string}
      * @memberof TradeApiOrderCancel
      */
@@ -462,13 +532,6 @@ export interface OrderCancelReplaceRequest {
      * @memberof TradeApiOrderCancelReplace
      */
     readonly symbol: string;
-
-    /**
-     *
-     * @type {number}
-     * @memberof TradeApiOrderCancelReplace
-     */
-    readonly quantity: number;
 
     /**
      * Unique WebSocket request ID.
@@ -527,7 +590,7 @@ export interface OrderCancelReplaceRequest {
     readonly timeInForce?: OrderCancelReplaceTimeInForceEnum;
 
     /**
-     * Applicable only to `LIMIT` order type
+     *
      * @type {number}
      * @memberof TradeApiOrderCancelReplace
      */
@@ -538,10 +601,17 @@ export interface OrderCancelReplaceRequest {
      * @type {number}
      * @memberof TradeApiOrderCancelReplace
      */
+    readonly quantity?: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderCancelReplace
+     */
     readonly quoteOrderQty?: number;
 
     /**
-     * Arbitrary unique ID among open orders. Automatically generated if not sent
+     * The new client order ID for the order after being amended. <br> If not sent, one will be randomly generated. <br> It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`.
      * @type {string}
      * @memberof TradeApiOrderCancelReplace
      */
@@ -555,14 +625,14 @@ export interface OrderCancelReplaceRequest {
     readonly newOrderRespType?: OrderCancelReplaceNewOrderRespTypeEnum;
 
     /**
-     * Either `stopPrice` or `trailingDelta`, or both must be specified
+     *
      * @type {number}
      * @memberof TradeApiOrderCancelReplace
      */
     readonly stopPrice?: number;
 
     /**
-     * See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md)
+     * See Trailing Stop order FAQ
      * @type {number}
      * @memberof TradeApiOrderCancelReplace
      */
@@ -583,7 +653,8 @@ export interface OrderCancelReplaceRequest {
     readonly strategyId?: number;
 
     /**
-     * <p>Arbitrary numeric value identifying the order strategy.</p><p>Values smaller than `1000000` are reserved and cannot be used.</p>
+     * Arbitrary numeric value identifying the order strategy.
+     * Values smaller than 1000000 are reserved and cannot be used.
      * @type {number}
      * @memberof TradeApiOrderCancelReplace
      */
@@ -638,21 +709,21 @@ export interface OrderListCancelRequest {
     readonly id?: string;
 
     /**
-     *
+     * Cancel order list by orderListId
      * @type {number}
      * @memberof TradeApiOrderListCancel
      */
     readonly orderListId?: number;
 
     /**
-     * Arbitrary unique ID among open order lists. Automatically generated if not sent. <br>A new order list with the same listClientOrderId is accepted only when the previous one is filled or completely expired. <br> `listClientOrderId` is distinct from the `workingClientOrderId`, `pendingAboveClientOrderId`, and the `pendingBelowClientOrderId`.
+     *
      * @type {string}
      * @memberof TradeApiOrderListCancel
      */
     readonly listClientOrderId?: string;
 
     /**
-     * Arbitrary unique ID among open orders. Automatically generated if not sent
+     * The new client order ID for the order after being amended. <br> If not sent, one will be randomly generated. <br> It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`.
      * @type {string}
      * @memberof TradeApiOrderListCancel
      */
@@ -679,6 +750,13 @@ export interface OrderListPlaceRequest {
     readonly symbol: string;
 
     /**
+     * Price for the limit order
+     * @type {number}
+     * @memberof TradeApiOrderListPlace
+     */
+    readonly price: number;
+
+    /**
      *
      * @type {number}
      * @memberof TradeApiOrderListPlace
@@ -700,14 +778,7 @@ export interface OrderListPlaceRequest {
     readonly side?: OrderListPlaceSideEnum;
 
     /**
-     * Applicable only to `LIMIT` order type
-     * @type {number}
-     * @memberof TradeApiOrderListPlace
-     */
-    readonly price?: number;
-
-    /**
-     * Arbitrary unique ID among open order lists. Automatically generated if not sent. <br>A new order list with the same listClientOrderId is accepted only when the previous one is filled or completely expired. <br> `listClientOrderId` is distinct from the `workingClientOrderId`, `pendingAboveClientOrderId`, and the `pendingBelowClientOrderId`.
+     *
      * @type {string}
      * @memberof TradeApiOrderListPlace
      */
@@ -742,7 +813,7 @@ export interface OrderListPlaceRequest {
     readonly limitStrategyType?: number;
 
     /**
-     * Either `stopPrice` or `trailingDelta`, or both must be specified
+     *
      * @type {number}
      * @memberof TradeApiOrderListPlace
      */
@@ -846,7 +917,7 @@ export interface OrderListPlaceOcoRequest {
     readonly id?: string;
 
     /**
-     * Arbitrary unique ID among open order lists. Automatically generated if not sent. <br>A new order list with the same listClientOrderId is accepted only when the previous one is filled or completely expired. <br> `listClientOrderId` is distinct from the `workingClientOrderId`, `pendingAboveClientOrderId`, and the `pendingBelowClientOrderId`.
+     *
      * @type {string}
      * @memberof TradeApiOrderListPlaceOco
      */
@@ -1027,14 +1098,14 @@ export interface OrderListPlaceOtoRequest {
     readonly workingPrice: number;
 
     /**
-     *
+     * Sets the quantity for the working order.
      * @type {number}
      * @memberof TradeApiOrderListPlaceOto
      */
     readonly workingQuantity: number;
 
     /**
-     *
+     * Sets the quantity for the pending order.
      * @type {number}
      * @memberof TradeApiOrderListPlaceOto
      */
@@ -1048,7 +1119,7 @@ export interface OrderListPlaceOtoRequest {
     readonly id?: string;
 
     /**
-     * Arbitrary unique ID among open order lists. Automatically generated if not sent. <br>A new order list with the same listClientOrderId is accepted only when the previous one is filled or completely expired. <br> `listClientOrderId` is distinct from the `workingClientOrderId`, `pendingAboveClientOrderId`, and the `pendingBelowClientOrderId`.
+     *
      * @type {string}
      * @memberof TradeApiOrderListPlaceOto
      */
@@ -1090,7 +1161,7 @@ export interface OrderListPlaceOtoRequest {
     readonly workingClientOrderId?: string;
 
     /**
-     * This can only be used if `workingTimeInForce` is `GTC`.
+     * This can only be used if `workingTimeInForce` is `GTC`, or if `workingType` is `LIMIT_MAKER`.
      * @type {number}
      * @memberof TradeApiOrderListPlaceOto
      */
@@ -1215,14 +1286,14 @@ export interface OrderListPlaceOtocoRequest {
     readonly workingPrice: number;
 
     /**
-     *
+     * Sets the quantity for the working order.
      * @type {number}
      * @memberof TradeApiOrderListPlaceOtoco
      */
     readonly workingQuantity: number;
 
     /**
-     *
+     * Sets the quantity for the pending order.
      * @type {number}
      * @memberof TradeApiOrderListPlaceOtoco
      */
@@ -1236,7 +1307,7 @@ export interface OrderListPlaceOtocoRequest {
     readonly id?: string;
 
     /**
-     * Arbitrary unique ID among open order lists. Automatically generated if not sent. <br>A new order list with the same listClientOrderId is accepted only when the previous one is filled or completely expired. <br> `listClientOrderId` is distinct from the `workingClientOrderId`, `pendingAboveClientOrderId`, and the `pendingBelowClientOrderId`.
+     *
      * @type {string}
      * @memberof TradeApiOrderListPlaceOtoco
      */
@@ -1278,7 +1349,7 @@ export interface OrderListPlaceOtocoRequest {
     readonly workingClientOrderId?: string;
 
     /**
-     * This can only be used if `workingTimeInForce` is `GTC`.
+     * This can only be used if `workingTimeInForce` is `GTC`, or if `workingType` is `LIMIT_MAKER`.
      * @type {number}
      * @memberof TradeApiOrderListPlaceOtoco
      */
@@ -1459,14 +1530,14 @@ export interface OrderListStatusRequest {
     readonly id?: string;
 
     /**
-     * Query order list by listClientOrderId
+     * `orderId`or`origClientOrderId`mustbesent
      * @type {string}
      * @memberof TradeApiOrderListStatus
      */
     readonly origClientOrderId?: string;
 
     /**
-     *
+     * Cancel order list by orderListId
      * @type {number}
      * @memberof TradeApiOrderListStatus
      */
@@ -1491,13 +1562,6 @@ export interface OrderPlaceRequest {
      * @memberof TradeApiOrderPlace
      */
     readonly symbol: string;
-
-    /**
-     *
-     * @type {number}
-     * @memberof TradeApiOrderPlace
-     */
-    readonly quantity: number;
 
     /**
      * Unique WebSocket request ID.
@@ -1528,7 +1592,7 @@ export interface OrderPlaceRequest {
     readonly timeInForce?: OrderPlaceTimeInForceEnum;
 
     /**
-     * Applicable only to `LIMIT` order type
+     *
      * @type {number}
      * @memberof TradeApiOrderPlace
      */
@@ -1539,10 +1603,17 @@ export interface OrderPlaceRequest {
      * @type {number}
      * @memberof TradeApiOrderPlace
      */
+    readonly quantity?: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderPlace
+     */
     readonly quoteOrderQty?: number;
 
     /**
-     * Arbitrary unique ID among open orders. Automatically generated if not sent
+     * The new client order ID for the order after being amended. <br> If not sent, one will be randomly generated. <br> It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`.
      * @type {string}
      * @memberof TradeApiOrderPlace
      */
@@ -1556,7 +1627,7 @@ export interface OrderPlaceRequest {
     readonly newOrderRespType?: OrderPlaceNewOrderRespTypeEnum;
 
     /**
-     * Either `stopPrice` or `trailingDelta`, or both must be specified
+     *
      * @type {number}
      * @memberof TradeApiOrderPlace
      */
@@ -1584,7 +1655,8 @@ export interface OrderPlaceRequest {
     readonly strategyId?: number;
 
     /**
-     * <p>Arbitrary numeric value identifying the order strategy.</p><p>Values smaller than `1000000` are reserved and cannot be used.</p>
+     * Arbitrary numeric value identifying the order strategy.
+     * Values smaller than 1000000 are reserved and cannot be used.
      * @type {number}
      * @memberof TradeApiOrderPlace
      */
@@ -1625,14 +1697,14 @@ export interface OrderStatusRequest {
     readonly id?: string;
 
     /**
-     *
+     * Cancel order by orderId
      * @type {number}
      * @memberof TradeApiOrderStatus
      */
     readonly orderId?: number;
 
     /**
-     * Query order list by listClientOrderId
+     * `orderId`or`origClientOrderId`mustbesent
      * @type {string}
      * @memberof TradeApiOrderStatus
      */
@@ -1714,14 +1786,14 @@ export interface SorOrderPlaceRequest {
     readonly timeInForce?: SorOrderPlaceTimeInForceEnum;
 
     /**
-     * Applicable only to `LIMIT` order type
+     *
      * @type {number}
      * @memberof TradeApiSorOrderPlace
      */
     readonly price?: number;
 
     /**
-     * Arbitrary unique ID among open orders. Automatically generated if not sent
+     * The new client order ID for the order after being amended. <br> If not sent, one will be randomly generated. <br> It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`.
      * @type {string}
      * @memberof TradeApiSorOrderPlace
      */
@@ -1749,7 +1821,8 @@ export interface SorOrderPlaceRequest {
     readonly strategyId?: number;
 
     /**
-     * <p>Arbitrary numeric value identifying the order strategy.</p><p>Values smaller than `1000000` are reserved and cannot be used.</p>
+     * Arbitrary numeric value identifying the order strategy.
+     * Values smaller than 1000000 are reserved and cannot be used.
      * @type {number}
      * @memberof TradeApiSorOrderPlace
      */
@@ -1815,7 +1888,7 @@ export class TradeApi implements TradeApiInterface {
      * @param {OpenOrderListsStatusRequest} requestParameters Request parameters.
      * @returns {Promise<OpenOrderListsStatusResponse>}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#current-open-order-lists-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#current-open-order-lists-user_data Binance API Documentation}
      */
     public openOrderListsStatus(
         requestParameters: OpenOrderListsStatusRequest = {}
@@ -1836,7 +1909,7 @@ export class TradeApi implements TradeApiInterface {
      * @param {OpenOrdersCancelAllRequest} requestParameters Request parameters.
      * @returns {Promise<OpenOrdersCancelAllResponse>}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#cancel-open-orders-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#cancel-open-orders-trade Binance API Documentation}
      */
     public openOrdersCancelAll(
         requestParameters: OpenOrdersCancelAllRequest
@@ -1866,13 +1939,33 @@ export class TradeApi implements TradeApiInterface {
      * @param {OpenOrdersStatusRequest} requestParameters Request parameters.
      * @returns {Promise<OpenOrdersStatusResponse>}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#current-open-orders-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#current-open-orders-user_data Binance API Documentation}
      */
     public openOrdersStatus(
-        requestParameters: OpenOrdersStatusRequest
+        requestParameters: OpenOrdersStatusRequest = {}
     ): Promise<WebsocketApiResponse<OpenOrdersStatusResponse>> {
         return this.websocketBase.sendMessage<OpenOrdersStatusResponse>(
             '/openOrders.status'.slice(1),
+            requestParameters as unknown as WebsocketSendMsgOptions,
+            { isSigned: true, withApiKey: false }
+        );
+    }
+
+    /**
+     * Reduce the quantity of an existing open order.
+     * Weight: 1
+     *
+     * @summary WebSocket Order Amend Keep Priority
+     * @param {OrderAmendKeepPriorityRequest} requestParameters Request parameters.
+     * @returns {Promise<OrderAmendKeepPriorityResponse>}
+     * @memberof TradeApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#order-amend-keep-priority-trade Binance API Documentation}
+     */
+    public orderAmendKeepPriority(
+        requestParameters: OrderAmendKeepPriorityRequest
+    ): Promise<WebsocketApiResponse<OrderAmendKeepPriorityResponse>> {
+        return this.websocketBase.sendMessage<OrderAmendKeepPriorityResponse>(
+            '/order.amend.keepPriority'.slice(1),
             requestParameters as unknown as WebsocketSendMsgOptions,
             { isSigned: true, withApiKey: false }
         );
@@ -1886,7 +1979,7 @@ export class TradeApi implements TradeApiInterface {
      * @param {OrderCancelRequest} requestParameters Request parameters.
      * @returns {Promise<OrderCancelResponse>}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#cancel-order-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#cancel-order-trade Binance API Documentation}
      */
     public orderCancel(
         requestParameters: OrderCancelRequest
@@ -1906,7 +1999,7 @@ export class TradeApi implements TradeApiInterface {
      * @param {OrderCancelReplaceRequest} requestParameters Request parameters.
      * @returns {Promise<OrderCancelReplaceResponse>}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#cancel-and-replace-order-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#cancel-and-replace-order-trade Binance API Documentation}
      */
     public orderCancelReplace(
         requestParameters: OrderCancelReplaceRequest
@@ -1926,7 +2019,7 @@ export class TradeApi implements TradeApiInterface {
      * @param {OrderListCancelRequest} requestParameters Request parameters.
      * @returns {Promise<OrderListCancelResponse>}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#cancel-order-list-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#cancel-order-list-trade Binance API Documentation}
      */
     public orderListCancel(
         requestParameters: OrderListCancelRequest
@@ -1948,7 +2041,7 @@ export class TradeApi implements TradeApiInterface {
      * @param {OrderListPlaceRequest} requestParameters Request parameters.
      * @returns {Promise<OrderListPlaceResponse>}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#place-new-oco---deprecated-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#place-new-oco---deprecated-trade Binance API Documentation}
      */
     public orderListPlace(
         requestParameters: OrderListPlaceRequest
@@ -1981,7 +2074,7 @@ export class TradeApi implements TradeApiInterface {
      * @param {OrderListPlaceOcoRequest} requestParameters Request parameters.
      * @returns {Promise<OrderListPlaceOcoResponse>}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#place-new-order-list---oco-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#place-new-order-list---oco-trade Binance API Documentation}
      */
     public orderListPlaceOco(
         requestParameters: OrderListPlaceOcoRequest
@@ -2007,7 +2100,7 @@ export class TradeApi implements TradeApiInterface {
      * @param {OrderListPlaceOtoRequest} requestParameters Request parameters.
      * @returns {Promise<OrderListPlaceOtoResponse>}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#place-new-order-list---oto-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#place-new-order-list---oto-trade Binance API Documentation}
      */
     public orderListPlaceOto(
         requestParameters: OrderListPlaceOtoRequest
@@ -2033,7 +2126,7 @@ export class TradeApi implements TradeApiInterface {
      * @param {OrderListPlaceOtocoRequest} requestParameters Request parameters.
      * @returns {Promise<OrderListPlaceOtocoResponse>}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#place-new-order-list---otoco-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#place-new-order-list---otoco-trade Binance API Documentation}
      */
     public orderListPlaceOtoco(
         requestParameters: OrderListPlaceOtocoRequest
@@ -2055,7 +2148,7 @@ export class TradeApi implements TradeApiInterface {
      * @param {OrderListStatusRequest} requestParameters Request parameters.
      * @returns {Promise<OrderListStatusResponse>}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#query-order-list-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#query-order-list-user_data Binance API Documentation}
      */
     public orderListStatus(
         requestParameters: OrderListStatusRequest = {}
@@ -2075,7 +2168,7 @@ export class TradeApi implements TradeApiInterface {
      * @param {OrderPlaceRequest} requestParameters Request parameters.
      * @returns {Promise<OrderPlaceResponse>}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#place-new-order-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#place-new-order-trade Binance API Documentation}
      */
     public orderPlace(
         requestParameters: OrderPlaceRequest
@@ -2095,7 +2188,7 @@ export class TradeApi implements TradeApiInterface {
      * @param {OrderStatusRequest} requestParameters Request parameters.
      * @returns {Promise<OrderStatusResponse>}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#query-order-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#query-order-user_data Binance API Documentation}
      */
     public orderStatus(
         requestParameters: OrderStatusRequest
@@ -2121,7 +2214,7 @@ export class TradeApi implements TradeApiInterface {
      * @param {OrderTestRequest} requestParameters Request parameters.
      * @returns {Promise<OrderTestResponse>}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#test-new-order-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#test-new-order-trade Binance API Documentation}
      */
     public orderTest(
         requestParameters: OrderTestRequest = {}
@@ -2141,7 +2234,7 @@ export class TradeApi implements TradeApiInterface {
      * @param {SorOrderPlaceRequest} requestParameters Request parameters.
      * @returns {Promise<SorOrderPlaceResponse>}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#place-new-order-using-sor-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#place-new-order-using-sor-trade Binance API Documentation}
      */
     public sorOrderPlace(
         requestParameters: SorOrderPlaceRequest
@@ -2165,7 +2258,7 @@ export class TradeApi implements TradeApiInterface {
      * @param {SorOrderTestRequest} requestParameters Request parameters.
      * @returns {Promise<SorOrderTestResponse>}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#test-new-order-using-sor-trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#test-new-order-using-sor-trade Binance API Documentation}
      */
     public sorOrderTest(
         requestParameters: SorOrderTestRequest = {}

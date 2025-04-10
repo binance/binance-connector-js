@@ -35,11 +35,13 @@ import type {
     GetOrderResponse,
     NewOrderResponse,
     OpenOrderListResponse,
+    OrderAmendKeepPriorityResponse,
     OrderCancelReplaceResponse,
     OrderListOcoResponse,
     OrderListOtoResponse,
     OrderListOtocoResponse,
     OrderOcoResponse,
+    OrderTestResponse,
     SorOrderResponse,
     SorOrderTestResponse,
 } from '../types';
@@ -56,10 +58,10 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 20
          *
          * @summary Query all Order lists
-         * @param {number} [fromId] TradeId to fetch from. Default gets most recent trades.
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [limit] Default 500; max 1000.
+         * @param {number} [fromId] ID to get aggregate trades from INCLUSIVE.
+         * @param {number} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
+         * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
+         * @param {number} [limit] Default: 500; Maximum: 1000.
          * @param {number} [recvWindow] The value cannot be greater than ```60000```
          *
          * @throws {RequiredError}
@@ -109,10 +111,10 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary All orders
          * @param {string} symbol
-         * @param {number} [orderId] This can only be used in combination with `symbol`.
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [limit] Default 500; max 1000.
+         * @param {number} [orderId]
+         * @param {number} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
+         * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
+         * @param {number} [limit] Default: 500; Maximum: 1000.
          * @param {number} [recvWindow] The value cannot be greater than ```60000```
          *
          * @throws {RequiredError}
@@ -205,8 +207,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Cancel order
          * @param {string} symbol
-         * @param {number} [orderId] This can only be used in combination with `symbol`.
-         * @param {string} [origClientOrderId] Either ```orderListId``` or ```listClientOrderId``` must be provided
+         * @param {number} [orderId]
+         * @param {string} [origClientOrderId]
          * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
          * @param {DeleteOrderCancelRestrictionsEnum} [cancelRestrictions]
          * @param {number} [recvWindow] The value cannot be greater than ```60000```
@@ -266,8 +268,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Cancel Order list
          * @param {string} symbol
-         * @param {number} [orderListId] Either```orderListId```or```listClientOrderId```mustbeprovided
-         * @param {string} [listClientOrderId] Arbitrary unique ID among open order lists. Automatically generated if not sent. <br>A new order list with the same listClientOrderId is accepted only when the previous one is filled or completely expired. <br> `listClientOrderId` is distinct from the `workingClientOrderId`, `pendingAboveClientOrderId`, and the `pendingBelowClientOrderId`.
+         * @param {number} [orderListId] Either ```orderListId``` or ```listClientOrderId``` must be provided
+         * @param {string} [listClientOrderId] A unique Id for the entire orderList
          * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
          * @param {number} [recvWindow] The value cannot be greater than ```60000```
          *
@@ -320,15 +322,12 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 6 for a single symbol; **80** when the symbol parameter is omitted
          *
          * @summary Current open orders
-         * @param {string} symbol
+         * @param {string} [symbol] Symbol to query
          * @param {number} [recvWindow] The value cannot be greater than ```60000```
          *
          * @throws {RequiredError}
          */
-        getOpenOrders: async (symbol: string, recvWindow?: number): Promise<RequestArgs> => {
-            // verify required parameter 'symbol' is not null or undefined
-            assertParamExists('getOpenOrders', 'symbol', symbol);
-
+        getOpenOrders: async (symbol?: string, recvWindow?: number): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
@@ -355,8 +354,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query order
          * @param {string} symbol
-         * @param {number} [orderId] This can only be used in combination with `symbol`.
-         * @param {string} [origClientOrderId] Either ```orderListId``` or ```listClientOrderId``` must be provided
+         * @param {number} [orderId]
+         * @param {string} [origClientOrderId]
          * @param {number} [recvWindow] The value cannot be greater than ```60000```
          *
          * @throws {RequiredError}
@@ -403,8 +402,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 4
          *
          * @summary Query Order list
-         * @param {number} [orderListId] Either```orderListId```or```listClientOrderId```mustbeprovided
-         * @param {string} [origClientOrderId] Either ```orderListId``` or ```listClientOrderId``` must be provided
+         * @param {number} [orderListId] Either ```orderListId``` or ```listClientOrderId``` must be provided
+         * @param {string} [origClientOrderId]
          * @param {number} [recvWindow] The value cannot be greater than ```60000```
          *
          * @throws {RequiredError}
@@ -444,18 +443,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary New order
          * @param {string} symbol
-         * @param {number} quantity
-         * @param {number} stopPrice
          * @param {NewOrderSideEnum} [side]
          * @param {NewOrderTypeEnum} [type]
          * @param {NewOrderTimeInForceEnum} [timeInForce]
+         * @param {number} [quantity]
          * @param {number} [quoteOrderQty]
          * @param {number} [price]
          * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
          * @param {number} [strategyId]
          * @param {number} [strategyType] The value cannot be less than `1000000`.
-         * @param {number} [trailingDelta]
-         * @param {number} [icebergQty] Used with `LIMIT` to create an iceberg order.
+         * @param {number} [stopPrice] Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
+         * @param {number} [trailingDelta] Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
+         * @param {number} [icebergQty] Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
          * @param {NewOrderNewOrderRespTypeEnum} [newOrderRespType]
          * @param {NewOrderSelfTradePreventionModeEnum} [selfTradePreventionMode]
          * @param {number} [recvWindow] The value cannot be greater than ```60000```
@@ -464,16 +463,16 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          */
         newOrder: async (
             symbol: string,
-            quantity: number,
-            stopPrice: number,
             side?: NewOrderSideEnum,
             type?: NewOrderTypeEnum,
             timeInForce?: NewOrderTimeInForceEnum,
+            quantity?: number,
             quoteOrderQty?: number,
             price?: number,
             newClientOrderId?: string,
             strategyId?: number,
             strategyType?: number,
+            stopPrice?: number,
             trailingDelta?: number,
             icebergQty?: number,
             newOrderRespType?: NewOrderNewOrderRespTypeEnum,
@@ -482,10 +481,6 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('newOrder', 'symbol', symbol);
-            // verify required parameter 'quantity' is not null or undefined
-            assertParamExists('newOrder', 'quantity', quantity);
-            // verify required parameter 'stopPrice' is not null or undefined
-            assertParamExists('newOrder', 'stopPrice', stopPrice);
 
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -590,6 +585,69 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
+         * Reduce the quantity of an existing open order.
+         * Weight: 1
+         *
+         * @summary Order Amend Keep Priority
+         * @param {string} symbol
+         * @param {number} newQty `newQty` must be greater than 0 and less than the order's quantity.
+         * @param {number} [orderId]
+         * @param {string} [origClientOrderId]
+         * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
+         * @param {number} [recvWindow] The value cannot be greater than ```60000```
+         *
+         * @throws {RequiredError}
+         */
+        orderAmendKeepPriority: async (
+            symbol: string,
+            newQty: number,
+            orderId?: number,
+            origClientOrderId?: string,
+            newClientOrderId?: string,
+            recvWindow?: number
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'symbol' is not null or undefined
+            assertParamExists('orderAmendKeepPriority', 'symbol', symbol);
+            // verify required parameter 'newQty' is not null or undefined
+            assertParamExists('orderAmendKeepPriority', 'newQty', newQty);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (symbol !== undefined && symbol !== null) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+
+            if (orderId !== undefined && orderId !== null) {
+                localVarQueryParameter['orderId'] = orderId;
+            }
+
+            if (origClientOrderId !== undefined && origClientOrderId !== null) {
+                localVarQueryParameter['origClientOrderId'] = origClientOrderId;
+            }
+
+            if (newClientOrderId !== undefined && newClientOrderId !== null) {
+                localVarQueryParameter['newClientOrderId'] = newClientOrderId;
+            }
+
+            if (newQty !== undefined && newQty !== null) {
+                localVarQueryParameter['newQty'] = newQty;
+            }
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/api/v3/order/amend/keepPriority',
+                method: 'PUT',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Cancels an existing order and places a new order on the same symbol.
          *
          * Filters and Order Count are evaluated before the processing of the cancellation and order placement occurs.
@@ -599,22 +657,22 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Cancel an Existing Order and Send a New Order
          * @param {string} symbol
-         * @param {number} quantity
-         * @param {number} stopPrice
          * @param {OrderCancelReplaceSideEnum} [side]
          * @param {OrderCancelReplaceTypeEnum} [type]
          * @param {OrderCancelReplaceCancelReplaceModeEnum} [cancelReplaceMode]
          * @param {OrderCancelReplaceTimeInForceEnum} [timeInForce]
+         * @param {number} [quantity]
          * @param {number} [quoteOrderQty]
          * @param {number} [price]
          * @param {string} [cancelNewClientOrderId] Used to uniquely identify this cancel. Automatically generated by default.
-         * @param {string} [cancelOrigClientOrderId] Either the `cancelOrigClientOrderId` or `cancelOrderId` must be provided. If both are provided, `cancelOrderId` takes precedence.
-         * @param {number} [cancelOrderId] Either the `cancelOrigClientOrderId` or `cancelOrderId` must be provided. If both are provided, `cancelOrderId` takes precedence.
+         * @param {string} [cancelOrigClientOrderId] Either `cancelOrderId` or `cancelOrigClientOrderId` must be sent. <br></br> If both `cancelOrderId` and `cancelOrigClientOrderId` parameters are provided, the `cancelOrderId` is searched first, then the `cancelOrigClientOrderId` from that result is checked against that order. <br></br> If both conditions are not met the request will be rejected.
+         * @param {number} [cancelOrderId] Either `cancelOrderId` or `cancelOrigClientOrderId` must be sent. <br></br>If both `cancelOrderId` and `cancelOrigClientOrderId` parameters are provided, the `cancelOrderId` is searched first, then the `cancelOrigClientOrderId` from that result is checked against that order. <br></br>If both conditions are not met the request will be rejected.
          * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
          * @param {number} [strategyId]
          * @param {number} [strategyType] The value cannot be less than `1000000`.
-         * @param {number} [trailingDelta]
-         * @param {number} [icebergQty] Used with `LIMIT` to create an iceberg order.
+         * @param {number} [stopPrice] Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
+         * @param {number} [trailingDelta] Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
+         * @param {number} [icebergQty] Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
          * @param {OrderCancelReplaceNewOrderRespTypeEnum} [newOrderRespType]
          * @param {OrderCancelReplaceSelfTradePreventionModeEnum} [selfTradePreventionMode]
          * @param {OrderCancelReplaceCancelRestrictionsEnum} [cancelRestrictions]
@@ -625,12 +683,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          */
         orderCancelReplace: async (
             symbol: string,
-            quantity: number,
-            stopPrice: number,
             side?: OrderCancelReplaceSideEnum,
             type?: OrderCancelReplaceTypeEnum,
             cancelReplaceMode?: OrderCancelReplaceCancelReplaceModeEnum,
             timeInForce?: OrderCancelReplaceTimeInForceEnum,
+            quantity?: number,
             quoteOrderQty?: number,
             price?: number,
             cancelNewClientOrderId?: string,
@@ -639,6 +696,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             newClientOrderId?: string,
             strategyId?: number,
             strategyType?: number,
+            stopPrice?: number,
             trailingDelta?: number,
             icebergQty?: number,
             newOrderRespType?: OrderCancelReplaceNewOrderRespTypeEnum,
@@ -649,10 +707,6 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('orderCancelReplace', 'symbol', symbol);
-            // verify required parameter 'quantity' is not null or undefined
-            assertParamExists('orderCancelReplace', 'quantity', quantity);
-            // verify required parameter 'stopPrice' is not null or undefined
-            assertParamExists('orderCancelReplace', 'stopPrice', stopPrice);
 
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -772,7 +826,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary New Order list - OCO
          * @param {string} symbol
          * @param {number} quantity
-         * @param {string} [listClientOrderId] Arbitrary unique ID among open order lists. Automatically generated if not sent. <br>A new order list with the same listClientOrderId is accepted only when the previous one is filled or completely expired. <br> `listClientOrderId` is distinct from the `workingClientOrderId`, `pendingAboveClientOrderId`, and the `pendingBelowClientOrderId`.
+         * @param {string} [listClientOrderId] A unique Id for the entire orderList
          * @param {OrderListOcoSideEnum} [side]
          * @param {OrderListOcoAboveTypeEnum} [aboveType]
          * @param {string} [aboveClientOrderId] Arbitrary unique ID among open orders for the above order. Automatically generated if not sent
@@ -956,15 +1010,15 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary New Order list - OTO
          * @param {string} symbol
          * @param {number} workingPrice
-         * @param {number} workingQuantity
-         * @param {number} pendingQuantity
-         * @param {string} [listClientOrderId] Arbitrary unique ID among open order lists. Automatically generated if not sent. <br>A new order list with the same listClientOrderId is accepted only when the previous one is filled or completely expired. <br> `listClientOrderId` is distinct from the `workingClientOrderId`, `pendingAboveClientOrderId`, and the `pendingBelowClientOrderId`.
+         * @param {number} workingQuantity Sets the quantity for the working order.
+         * @param {number} pendingQuantity Sets the quantity for the pending order.
+         * @param {string} [listClientOrderId] A unique Id for the entire orderList
          * @param {OrderListOtoNewOrderRespTypeEnum} [newOrderRespType]
          * @param {OrderListOtoSelfTradePreventionModeEnum} [selfTradePreventionMode]
          * @param {OrderListOtoWorkingTypeEnum} [workingType]
          * @param {OrderListOtoWorkingSideEnum} [workingSide]
          * @param {string} [workingClientOrderId] Arbitrary unique ID among open orders for the working order.<br> Automatically generated if not sent.
-         * @param {number} [workingIcebergQty] This can only be used if `workingTimeInForce` is `GTC`.
+         * @param {number} [workingIcebergQty] This can only be used if `workingTimeInForce` is `GTC`, or if `workingType` is `LIMIT_MAKER`.
          * @param {OrderListOtoWorkingTimeInForceEnum} [workingTimeInForce]
          * @param {number} [workingStrategyId] Arbitrary numeric value identifying the working order within an order strategy.
          * @param {number} [workingStrategyType] Arbitrary numeric value identifying the working order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
@@ -1145,15 +1199,15 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary New Order list - OTOCO
          * @param {string} symbol
          * @param {number} workingPrice
-         * @param {number} workingQuantity
-         * @param {number} pendingQuantity
-         * @param {string} [listClientOrderId] Arbitrary unique ID among open order lists. Automatically generated if not sent. <br>A new order list with the same listClientOrderId is accepted only when the previous one is filled or completely expired. <br> `listClientOrderId` is distinct from the `workingClientOrderId`, `pendingAboveClientOrderId`, and the `pendingBelowClientOrderId`.
+         * @param {number} workingQuantity Sets the quantity for the working order.
+         * @param {number} pendingQuantity Sets the quantity for the pending order.
+         * @param {string} [listClientOrderId] A unique Id for the entire orderList
          * @param {OrderListOtocoNewOrderRespTypeEnum} [newOrderRespType]
          * @param {OrderListOtocoSelfTradePreventionModeEnum} [selfTradePreventionMode]
          * @param {OrderListOtocoWorkingTypeEnum} [workingType]
          * @param {OrderListOtocoWorkingSideEnum} [workingSide]
          * @param {string} [workingClientOrderId] Arbitrary unique ID among open orders for the working order.<br> Automatically generated if not sent.
-         * @param {number} [workingIcebergQty] This can only be used if `workingTimeInForce` is `GTC`.
+         * @param {number} [workingIcebergQty] This can only be used if `workingTimeInForce` is `GTC`, or if `workingType` is `LIMIT_MAKER`.
          * @param {OrderListOtocoWorkingTimeInForceEnum} [workingTimeInForce]
          * @param {number} [workingStrategyId] Arbitrary numeric value identifying the working order within an order strategy.
          * @param {number} [workingStrategyType] Arbitrary numeric value identifying the working order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
@@ -1388,15 +1442,15 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary New OCO - Deprecated
          * @param {string} symbol
          * @param {number} quantity
+         * @param {number} price
          * @param {number} stopPrice
-         * @param {string} [listClientOrderId] Arbitrary unique ID among open order lists. Automatically generated if not sent. <br>A new order list with the same listClientOrderId is accepted only when the previous one is filled or completely expired. <br> `listClientOrderId` is distinct from the `workingClientOrderId`, `pendingAboveClientOrderId`, and the `pendingBelowClientOrderId`.
+         * @param {string} [listClientOrderId] A unique Id for the entire orderList
          * @param {OrderOcoSideEnum} [side]
          * @param {string} [limitClientOrderId] A unique Id for the limit order
-         * @param {number} [price]
          * @param {number} [limitStrategyId]
          * @param {number} [limitStrategyType] The value cannot be less than `1000000`.
          * @param {number} [limitIcebergQty] Used to make the `LIMIT_MAKER` leg an iceberg order.
-         * @param {number} [trailingDelta]
+         * @param {number} [trailingDelta] Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
          * @param {string} [stopClientOrderId] A unique Id for the stop loss/stop loss limit leg
          * @param {number} [stopStrategyId]
          * @param {number} [stopStrategyType] The value cannot be less than `1000000`.
@@ -1412,11 +1466,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         orderOco: async (
             symbol: string,
             quantity: number,
+            price: number,
             stopPrice: number,
             listClientOrderId?: string,
             side?: OrderOcoSideEnum,
             limitClientOrderId?: string,
-            price?: number,
             limitStrategyId?: number,
             limitStrategyType?: number,
             limitIcebergQty?: number,
@@ -1435,6 +1489,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('orderOco', 'symbol', symbol);
             // verify required parameter 'quantity' is not null or undefined
             assertParamExists('orderOco', 'quantity', quantity);
+            // verify required parameter 'price' is not null or undefined
+            assertParamExists('orderOco', 'price', price);
             // verify required parameter 'stopPrice' is not null or undefined
             assertParamExists('orderOco', 'stopPrice', stopPrice);
 
@@ -1574,7 +1630,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
          * @param {number} [strategyId]
          * @param {number} [strategyType] The value cannot be less than `1000000`.
-         * @param {number} [icebergQty] Used with `LIMIT` to create an iceberg order.
+         * @param {number} [icebergQty] Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
          * @param {SorOrderNewOrderRespTypeEnum} [newOrderRespType]
          * @param {SorOrderSelfTradePreventionModeEnum} [selfTradePreventionMode]
          * @param {number} [recvWindow] The value cannot be greater than ```60000```
@@ -1780,7 +1836,7 @@ export interface TradeApiInterface {
      * @memberof TradeApiInterface
      */
     getOpenOrders(
-        requestParameters: GetOpenOrdersRequest
+        requestParameters?: GetOpenOrdersRequest
     ): Promise<RestApiResponse<GetOpenOrdersResponse>>;
     /**
      * Check an order's status.
@@ -1830,6 +1886,19 @@ export interface TradeApiInterface {
     openOrderList(
         requestParameters?: OpenOrderListRequest
     ): Promise<RestApiResponse<OpenOrderListResponse>>;
+    /**
+     * Reduce the quantity of an existing open order.
+     * Weight: 1
+     *
+     * @summary Order Amend Keep Priority
+     * @param {OrderAmendKeepPriorityRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApiInterface
+     */
+    orderAmendKeepPriority(
+        requestParameters: OrderAmendKeepPriorityRequest
+    ): Promise<RestApiResponse<OrderAmendKeepPriorityResponse>>;
     /**
      * Cancels an existing order and places a new order on the same symbol.
      *
@@ -1945,7 +2014,7 @@ export interface TradeApiInterface {
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApiInterface
      */
-    orderTest(requestParameters?: OrderTestRequest): Promise<RestApiResponse<void>>;
+    orderTest(requestParameters?: OrderTestRequest): Promise<RestApiResponse<OrderTestResponse>>;
     /**
      * Places an order using smart order routing (SOR).
      * Weight: 1
@@ -1982,28 +2051,28 @@ export interface TradeApiInterface {
  */
 export interface AllOrderListRequest {
     /**
-     * TradeId to fetch from. Default gets most recent trades.
+     * ID to get aggregate trades from INCLUSIVE.
      * @type {number}
      * @memberof TradeApiAllOrderList
      */
     readonly fromId?: number;
 
     /**
-     *
+     * Timestamp in ms to get aggregate trades from INCLUSIVE.
      * @type {number}
      * @memberof TradeApiAllOrderList
      */
     readonly startTime?: number;
 
     /**
-     *
+     * Timestamp in ms to get aggregate trades until INCLUSIVE.
      * @type {number}
      * @memberof TradeApiAllOrderList
      */
     readonly endTime?: number;
 
     /**
-     * Default 500; max 1000.
+     * Default: 500; Maximum: 1000.
      * @type {number}
      * @memberof TradeApiAllOrderList
      */
@@ -2030,28 +2099,28 @@ export interface AllOrdersRequest {
     readonly symbol: string;
 
     /**
-     * This can only be used in combination with `symbol`.
+     *
      * @type {number}
      * @memberof TradeApiAllOrders
      */
     readonly orderId?: number;
 
     /**
-     *
+     * Timestamp in ms to get aggregate trades from INCLUSIVE.
      * @type {number}
      * @memberof TradeApiAllOrders
      */
     readonly startTime?: number;
 
     /**
-     *
+     * Timestamp in ms to get aggregate trades until INCLUSIVE.
      * @type {number}
      * @memberof TradeApiAllOrders
      */
     readonly endTime?: number;
 
     /**
-     * Default 500; max 1000.
+     * Default: 500; Maximum: 1000.
      * @type {number}
      * @memberof TradeApiAllOrders
      */
@@ -2098,14 +2167,14 @@ export interface DeleteOrderRequest {
     readonly symbol: string;
 
     /**
-     * This can only be used in combination with `symbol`.
+     *
      * @type {number}
      * @memberof TradeApiDeleteOrder
      */
     readonly orderId?: number;
 
     /**
-     * Either ```orderListId``` or ```listClientOrderId``` must be provided
+     *
      * @type {string}
      * @memberof TradeApiDeleteOrder
      */
@@ -2146,14 +2215,14 @@ export interface DeleteOrderListRequest {
     readonly symbol: string;
 
     /**
-     * Either```orderListId```or```listClientOrderId```mustbeprovided
+     * Either ```orderListId``` or ```listClientOrderId``` must be provided
      * @type {number}
      * @memberof TradeApiDeleteOrderList
      */
     readonly orderListId?: number;
 
     /**
-     * Arbitrary unique ID among open order lists. Automatically generated if not sent. <br>A new order list with the same listClientOrderId is accepted only when the previous one is filled or completely expired. <br> `listClientOrderId` is distinct from the `workingClientOrderId`, `pendingAboveClientOrderId`, and the `pendingBelowClientOrderId`.
+     * A unique Id for the entire orderList
      * @type {string}
      * @memberof TradeApiDeleteOrderList
      */
@@ -2180,11 +2249,11 @@ export interface DeleteOrderListRequest {
  */
 export interface GetOpenOrdersRequest {
     /**
-     *
+     * Symbol to query
      * @type {string}
      * @memberof TradeApiGetOpenOrders
      */
-    readonly symbol: string;
+    readonly symbol?: string;
 
     /**
      * The value cannot be greater than ```60000```
@@ -2207,14 +2276,14 @@ export interface GetOrderRequest {
     readonly symbol: string;
 
     /**
-     * This can only be used in combination with `symbol`.
+     *
      * @type {number}
      * @memberof TradeApiGetOrder
      */
     readonly orderId?: number;
 
     /**
-     * Either ```orderListId``` or ```listClientOrderId``` must be provided
+     *
      * @type {string}
      * @memberof TradeApiGetOrder
      */
@@ -2234,14 +2303,14 @@ export interface GetOrderRequest {
  */
 export interface GetOrderListRequest {
     /**
-     * Either```orderListId```or```listClientOrderId```mustbeprovided
+     * Either ```orderListId``` or ```listClientOrderId``` must be provided
      * @type {number}
      * @memberof TradeApiGetOrderList
      */
     readonly orderListId?: number;
 
     /**
-     * Either ```orderListId``` or ```listClientOrderId``` must be provided
+     *
      * @type {string}
      * @memberof TradeApiGetOrderList
      */
@@ -2269,20 +2338,6 @@ export interface NewOrderRequest {
 
     /**
      *
-     * @type {number}
-     * @memberof TradeApiNewOrder
-     */
-    readonly quantity: number;
-
-    /**
-     *
-     * @type {number}
-     * @memberof TradeApiNewOrder
-     */
-    readonly stopPrice: number;
-
-    /**
-     *
      * @type {'BUY' | 'SELL'}
      * @memberof TradeApiNewOrder
      */
@@ -2301,6 +2356,13 @@ export interface NewOrderRequest {
      * @memberof TradeApiNewOrder
      */
     readonly timeInForce?: NewOrderTimeInForceEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiNewOrder
+     */
+    readonly quantity?: number;
 
     /**
      *
@@ -2338,14 +2400,21 @@ export interface NewOrderRequest {
     readonly strategyType?: number;
 
     /**
-     *
+     * Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
+     * @type {number}
+     * @memberof TradeApiNewOrder
+     */
+    readonly stopPrice?: number;
+
+    /**
+     * Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
      * @type {number}
      * @memberof TradeApiNewOrder
      */
     readonly trailingDelta?: number;
 
     /**
-     * Used with `LIMIT` to create an iceberg order.
+     * Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
      * @type {number}
      * @memberof TradeApiNewOrder
      */
@@ -2387,6 +2456,54 @@ export interface OpenOrderListRequest {
 }
 
 /**
+ * Request parameters for orderAmendKeepPriority operation in TradeApi.
+ * @interface OrderAmendKeepPriorityRequest
+ */
+export interface OrderAmendKeepPriorityRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof TradeApiOrderAmendKeepPriority
+     */
+    readonly symbol: string;
+
+    /**
+     * `newQty` must be greater than 0 and less than the order's quantity.
+     * @type {number}
+     * @memberof TradeApiOrderAmendKeepPriority
+     */
+    readonly newQty: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderAmendKeepPriority
+     */
+    readonly orderId?: number;
+
+    /**
+     *
+     * @type {string}
+     * @memberof TradeApiOrderAmendKeepPriority
+     */
+    readonly origClientOrderId?: string;
+
+    /**
+     * A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
+     * @type {string}
+     * @memberof TradeApiOrderAmendKeepPriority
+     */
+    readonly newClientOrderId?: string;
+
+    /**
+     * The value cannot be greater than ```60000```
+     * @type {number}
+     * @memberof TradeApiOrderAmendKeepPriority
+     */
+    readonly recvWindow?: number;
+}
+
+/**
  * Request parameters for orderCancelReplace operation in TradeApi.
  * @interface OrderCancelReplaceRequest
  */
@@ -2397,20 +2514,6 @@ export interface OrderCancelReplaceRequest {
      * @memberof TradeApiOrderCancelReplace
      */
     readonly symbol: string;
-
-    /**
-     *
-     * @type {number}
-     * @memberof TradeApiOrderCancelReplace
-     */
-    readonly quantity: number;
-
-    /**
-     *
-     * @type {number}
-     * @memberof TradeApiOrderCancelReplace
-     */
-    readonly stopPrice: number;
 
     /**
      *
@@ -2445,6 +2548,13 @@ export interface OrderCancelReplaceRequest {
      * @type {number}
      * @memberof TradeApiOrderCancelReplace
      */
+    readonly quantity?: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderCancelReplace
+     */
     readonly quoteOrderQty?: number;
 
     /**
@@ -2462,14 +2572,14 @@ export interface OrderCancelReplaceRequest {
     readonly cancelNewClientOrderId?: string;
 
     /**
-     * Either the `cancelOrigClientOrderId` or `cancelOrderId` must be provided. If both are provided, `cancelOrderId` takes precedence.
+     * Either `cancelOrderId` or `cancelOrigClientOrderId` must be sent. <br></br> If both `cancelOrderId` and `cancelOrigClientOrderId` parameters are provided, the `cancelOrderId` is searched first, then the `cancelOrigClientOrderId` from that result is checked against that order. <br></br> If both conditions are not met the request will be rejected.
      * @type {string}
      * @memberof TradeApiOrderCancelReplace
      */
     readonly cancelOrigClientOrderId?: string;
 
     /**
-     * Either the `cancelOrigClientOrderId` or `cancelOrderId` must be provided. If both are provided, `cancelOrderId` takes precedence.
+     * Either `cancelOrderId` or `cancelOrigClientOrderId` must be sent. <br></br>If both `cancelOrderId` and `cancelOrigClientOrderId` parameters are provided, the `cancelOrderId` is searched first, then the `cancelOrigClientOrderId` from that result is checked against that order. <br></br>If both conditions are not met the request will be rejected.
      * @type {number}
      * @memberof TradeApiOrderCancelReplace
      */
@@ -2497,14 +2607,21 @@ export interface OrderCancelReplaceRequest {
     readonly strategyType?: number;
 
     /**
-     *
+     * Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
+     * @type {number}
+     * @memberof TradeApiOrderCancelReplace
+     */
+    readonly stopPrice?: number;
+
+    /**
+     * Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
      * @type {number}
      * @memberof TradeApiOrderCancelReplace
      */
     readonly trailingDelta?: number;
 
     /**
-     * Used with `LIMIT` to create an iceberg order.
+     * Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
      * @type {number}
      * @memberof TradeApiOrderCancelReplace
      */
@@ -2566,7 +2683,7 @@ export interface OrderListOcoRequest {
     readonly quantity: number;
 
     /**
-     * Arbitrary unique ID among open order lists. Automatically generated if not sent. <br>A new order list with the same listClientOrderId is accepted only when the previous one is filled or completely expired. <br> `listClientOrderId` is distinct from the `workingClientOrderId`, `pendingAboveClientOrderId`, and the `pendingBelowClientOrderId`.
+     * A unique Id for the entire orderList
      * @type {string}
      * @memberof TradeApiOrderListOco
      */
@@ -2747,21 +2864,21 @@ export interface OrderListOtoRequest {
     readonly workingPrice: number;
 
     /**
-     *
+     * Sets the quantity for the working order.
      * @type {number}
      * @memberof TradeApiOrderListOto
      */
     readonly workingQuantity: number;
 
     /**
-     *
+     * Sets the quantity for the pending order.
      * @type {number}
      * @memberof TradeApiOrderListOto
      */
     readonly pendingQuantity: number;
 
     /**
-     * Arbitrary unique ID among open order lists. Automatically generated if not sent. <br>A new order list with the same listClientOrderId is accepted only when the previous one is filled or completely expired. <br> `listClientOrderId` is distinct from the `workingClientOrderId`, `pendingAboveClientOrderId`, and the `pendingBelowClientOrderId`.
+     * A unique Id for the entire orderList
      * @type {string}
      * @memberof TradeApiOrderListOto
      */
@@ -2803,7 +2920,7 @@ export interface OrderListOtoRequest {
     readonly workingClientOrderId?: string;
 
     /**
-     * This can only be used if `workingTimeInForce` is `GTC`.
+     * This can only be used if `workingTimeInForce` is `GTC`, or if `workingType` is `LIMIT_MAKER`.
      * @type {number}
      * @memberof TradeApiOrderListOto
      */
@@ -2928,21 +3045,21 @@ export interface OrderListOtocoRequest {
     readonly workingPrice: number;
 
     /**
-     *
+     * Sets the quantity for the working order.
      * @type {number}
      * @memberof TradeApiOrderListOtoco
      */
     readonly workingQuantity: number;
 
     /**
-     *
+     * Sets the quantity for the pending order.
      * @type {number}
      * @memberof TradeApiOrderListOtoco
      */
     readonly pendingQuantity: number;
 
     /**
-     * Arbitrary unique ID among open order lists. Automatically generated if not sent. <br>A new order list with the same listClientOrderId is accepted only when the previous one is filled or completely expired. <br> `listClientOrderId` is distinct from the `workingClientOrderId`, `pendingAboveClientOrderId`, and the `pendingBelowClientOrderId`.
+     * A unique Id for the entire orderList
      * @type {string}
      * @memberof TradeApiOrderListOtoco
      */
@@ -2984,7 +3101,7 @@ export interface OrderListOtocoRequest {
     readonly workingClientOrderId?: string;
 
     /**
-     * This can only be used if `workingTimeInForce` is `GTC`.
+     * This can only be used if `workingTimeInForce` is `GTC`, or if `workingType` is `LIMIT_MAKER`.
      * @type {number}
      * @memberof TradeApiOrderListOtoco
      */
@@ -3176,10 +3293,17 @@ export interface OrderOcoRequest {
      * @type {number}
      * @memberof TradeApiOrderOco
      */
+    readonly price: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderOco
+     */
     readonly stopPrice: number;
 
     /**
-     * Arbitrary unique ID among open order lists. Automatically generated if not sent. <br>A new order list with the same listClientOrderId is accepted only when the previous one is filled or completely expired. <br> `listClientOrderId` is distinct from the `workingClientOrderId`, `pendingAboveClientOrderId`, and the `pendingBelowClientOrderId`.
+     * A unique Id for the entire orderList
      * @type {string}
      * @memberof TradeApiOrderOco
      */
@@ -3204,13 +3328,6 @@ export interface OrderOcoRequest {
      * @type {number}
      * @memberof TradeApiOrderOco
      */
-    readonly price?: number;
-
-    /**
-     *
-     * @type {number}
-     * @memberof TradeApiOrderOco
-     */
     readonly limitStrategyId?: number;
 
     /**
@@ -3228,7 +3345,7 @@ export interface OrderOcoRequest {
     readonly limitIcebergQty?: number;
 
     /**
-     *
+     * Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
      * @type {number}
      * @memberof TradeApiOrderOco
      */
@@ -3380,7 +3497,7 @@ export interface SorOrderRequest {
     readonly strategyType?: number;
 
     /**
-     * Used with `LIMIT` to create an iceberg order.
+     * Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
      * @type {number}
      * @memberof TradeApiSorOrder
      */
@@ -3603,7 +3720,7 @@ export class TradeApi implements TradeApiInterface {
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#current-open-orders-user_data Binance API Documentation}
      */
     public async getOpenOrders(
-        requestParameters: GetOpenOrdersRequest
+        requestParameters: GetOpenOrdersRequest = {}
     ): Promise<RestApiResponse<GetOpenOrdersResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.getOpenOrders(
             requestParameters?.symbol,
@@ -3694,16 +3811,16 @@ export class TradeApi implements TradeApiInterface {
     ): Promise<RestApiResponse<NewOrderResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.newOrder(
             requestParameters?.symbol,
-            requestParameters?.quantity,
-            requestParameters?.stopPrice,
             requestParameters?.side,
             requestParameters?.type,
             requestParameters?.timeInForce,
+            requestParameters?.quantity,
             requestParameters?.quoteOrderQty,
             requestParameters?.price,
             requestParameters?.newClientOrderId,
             requestParameters?.strategyId,
             requestParameters?.strategyType,
+            requestParameters?.stopPrice,
             requestParameters?.trailingDelta,
             requestParameters?.icebergQty,
             requestParameters?.newOrderRespType,
@@ -3748,6 +3865,38 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
+     * Reduce the quantity of an existing open order.
+     * Weight: 1
+     *
+     * @summary Order Amend Keep Priority
+     * @param {OrderAmendKeepPriorityRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<OrderAmendKeepPriorityResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#order-amend-keep-priority-trade Binance API Documentation}
+     */
+    public async orderAmendKeepPriority(
+        requestParameters: OrderAmendKeepPriorityRequest
+    ): Promise<RestApiResponse<OrderAmendKeepPriorityResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.orderAmendKeepPriority(
+            requestParameters?.symbol,
+            requestParameters?.newQty,
+            requestParameters?.orderId,
+            requestParameters?.origClientOrderId,
+            requestParameters?.newClientOrderId,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<OrderAmendKeepPriorityResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
      * Cancels an existing order and places a new order on the same symbol.
      *
      * Filters and Order Count are evaluated before the processing of the cancellation and order placement occurs.
@@ -3767,12 +3916,11 @@ export class TradeApi implements TradeApiInterface {
     ): Promise<RestApiResponse<OrderCancelReplaceResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.orderCancelReplace(
             requestParameters?.symbol,
-            requestParameters?.quantity,
-            requestParameters?.stopPrice,
             requestParameters?.side,
             requestParameters?.type,
             requestParameters?.cancelReplaceMode,
             requestParameters?.timeInForce,
+            requestParameters?.quantity,
             requestParameters?.quoteOrderQty,
             requestParameters?.price,
             requestParameters?.cancelNewClientOrderId,
@@ -3781,6 +3929,7 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.newClientOrderId,
             requestParameters?.strategyId,
             requestParameters?.strategyType,
+            requestParameters?.stopPrice,
             requestParameters?.trailingDelta,
             requestParameters?.icebergQty,
             requestParameters?.newOrderRespType,
@@ -4012,11 +4161,11 @@ export class TradeApi implements TradeApiInterface {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.orderOco(
             requestParameters?.symbol,
             requestParameters?.quantity,
+            requestParameters?.price,
             requestParameters?.stopPrice,
             requestParameters?.listClientOrderId,
             requestParameters?.side,
             requestParameters?.limitClientOrderId,
-            requestParameters?.price,
             requestParameters?.limitStrategyId,
             requestParameters?.limitStrategyType,
             requestParameters?.limitIcebergQty,
@@ -4051,18 +4200,18 @@ export class TradeApi implements TradeApiInterface {
      *
      * @summary Test new order
      * @param {OrderTestRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<void>>}
+     * @returns {Promise<RestApiResponse<OrderTestResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#test-new-order-trade Binance API Documentation}
      */
     public async orderTest(
         requestParameters: OrderTestRequest = {}
-    ): Promise<RestApiResponse<void>> {
+    ): Promise<RestApiResponse<OrderTestResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.orderTest(
             requestParameters?.computeCommissionRates
         );
-        return sendRequest<void>(
+        return sendRequest<OrderTestResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

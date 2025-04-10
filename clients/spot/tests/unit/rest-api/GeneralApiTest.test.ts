@@ -39,10 +39,6 @@ describe('GeneralApi', () => {
 
     describe('exchangeInfo()', () => {
         it('should execute exchangeInfo() successfully with required parameters only', async () => {
-            const params: ExchangeInfoRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             mockResponse = {
                 timezone: 'UTC',
                 serverTime: 1565246363776,
@@ -82,6 +78,7 @@ describe('GeneralApi', () => {
                         quoteOrderQtyMarketAllowed: true,
                         allowTrailingStop: false,
                         cancelReplaceAllowed: false,
+                        allowAmend: false,
                         isSpotTradingAllowed: true,
                         isMarginTradingAllowed: true,
                         filters: [
@@ -114,7 +111,7 @@ describe('GeneralApi', () => {
                     rateLimits: [],
                 } as RestApiResponse<ExchangeInfoResponse>)
             );
-            const response = await client.exchangeInfo(params);
+            const response = await client.exchangeInfo();
             expect(response).toBeDefined();
             await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
@@ -168,6 +165,7 @@ describe('GeneralApi', () => {
                         quoteOrderQtyMarketAllowed: true,
                         allowTrailingStop: false,
                         cancelReplaceAllowed: false,
+                        allowAmend: false,
                         isSpotTradingAllowed: true,
                         isMarginTradingAllowed: true,
                         filters: [
@@ -206,23 +204,7 @@ describe('GeneralApi', () => {
             spy.mockRestore();
         });
 
-        it('should throw RequiredError when symbol is missing', async () => {
-            const _params: ExchangeInfoRequest = {
-                symbol: 'BNBUSDT',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.symbol;
-
-            await expect(client.exchangeInfo(params)).rejects.toThrow(
-                'Required parameter symbol was null or undefined when calling exchangeInfo.'
-            );
-        });
-
         it('should throw an error when server is returning an error', async () => {
-            const params: ExchangeInfoRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             const errorResponse = {
                 code: -1111,
                 msg: 'Server Error',
@@ -233,7 +215,7 @@ describe('GeneralApi', () => {
             };
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'exchangeInfo').mockRejectedValueOnce(mockError);
-            await expect(client.exchangeInfo(params)).rejects.toThrow('ResponseError');
+            await expect(client.exchangeInfo()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

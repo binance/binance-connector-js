@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
  * Binance Spot WebSocket API
@@ -21,36 +22,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TimeResponseRateLimitsInner } from './time-response-rate-limits-inner';
+import type { ExchangeInfoResponseRateLimitsInner } from './exchange-info-response-rate-limits-inner';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { OrderTestResponse1 } from './order-test-response1';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { OrderTestResponse2 } from './order-test-response2';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { OrderTestResponse2Result } from './order-test-response2-result';
 
 /**
- *
+ * @type OrderTestResponse
  * @export
- * @interface OrderTestResponse
  */
-export interface OrderTestResponse {
-    /**
-     *
-     * @type {string}
-     * @memberof OrderTestResponse
-     */
-    id?: string;
-    /**
-     *
-     * @type {number}
-     * @memberof OrderTestResponse
-     */
-    status?: number;
-    /**
-     *
-     * @type {object}
-     * @memberof OrderTestResponse
-     */
-    result?: object;
-    /**
-     *
-     * @type {Array<TimeResponseRateLimitsInner>}
-     * @memberof OrderTestResponse
-     */
-    rateLimits?: Array<TimeResponseRateLimitsInner>;
-}
+export type OrderTestResponse = OrderTestResponse1 | OrderTestResponse2;

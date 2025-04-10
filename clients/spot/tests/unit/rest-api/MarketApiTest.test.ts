@@ -636,10 +636,6 @@ describe('MarketApi', () => {
 
     describe('ticker()', () => {
         it('should execute ticker() successfully with required parameters only', async () => {
-            const params: TickerRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             mockResponse = {
                 symbol: 'LTCBTC',
                 openPrice: '0.10000000',
@@ -663,7 +659,7 @@ describe('MarketApi', () => {
                     rateLimits: [],
                 } as RestApiResponse<TickerResponse>)
             );
-            const response = await client.ticker(params);
+            const response = await client.ticker();
             expect(response).toBeDefined();
             await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
@@ -706,23 +702,7 @@ describe('MarketApi', () => {
             spy.mockRestore();
         });
 
-        it('should throw RequiredError when symbol is missing', async () => {
-            const _params: TickerRequest = {
-                symbol: 'BNBUSDT',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.symbol;
-
-            await expect(client.ticker(params)).rejects.toThrow(
-                'Required parameter symbol was null or undefined when calling ticker.'
-            );
-        });
-
         it('should throw an error when server is returning an error', async () => {
-            const params: TickerRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             const errorResponse = {
                 code: -1111,
                 msg: 'Server Error',
@@ -733,17 +713,13 @@ describe('MarketApi', () => {
             };
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'ticker').mockRejectedValueOnce(mockError);
-            await expect(client.ticker(params)).rejects.toThrow('ResponseError');
+            await expect(client.ticker()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
 
     describe('ticker24hr()', () => {
         it('should execute ticker24hr() successfully with required parameters only', async () => {
-            const params: Ticker24hrRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             mockResponse = {
                 symbol: 'BNBBTC',
                 openPrice: '99.00000000',
@@ -767,7 +743,7 @@ describe('MarketApi', () => {
                     rateLimits: [],
                 } as RestApiResponse<Ticker24hrResponse>)
             );
-            const response = await client.ticker24hr(params);
+            const response = await client.ticker24hr();
             expect(response).toBeDefined();
             await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
@@ -809,23 +785,7 @@ describe('MarketApi', () => {
             spy.mockRestore();
         });
 
-        it('should throw RequiredError when symbol is missing', async () => {
-            const _params: Ticker24hrRequest = {
-                symbol: 'BNBUSDT',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.symbol;
-
-            await expect(client.ticker24hr(params)).rejects.toThrow(
-                'Required parameter symbol was null or undefined when calling ticker24hr.'
-            );
-        });
-
         it('should throw an error when server is returning an error', async () => {
-            const params: Ticker24hrRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             const errorResponse = {
                 code: -1111,
                 msg: 'Server Error',
@@ -836,17 +796,13 @@ describe('MarketApi', () => {
             };
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'ticker24hr').mockRejectedValueOnce(mockError);
-            await expect(client.ticker24hr(params)).rejects.toThrow('ResponseError');
+            await expect(client.ticker24hr()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
 
     describe('tickerBookTicker()', () => {
         it('should execute tickerBookTicker() successfully with required parameters only', async () => {
-            const params: TickerBookTickerRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             mockResponse = {
                 symbol: 'LTCBTC',
                 bidPrice: '4.00000000',
@@ -863,7 +819,7 @@ describe('MarketApi', () => {
                     rateLimits: [],
                 } as RestApiResponse<TickerBookTickerResponse>)
             );
-            const response = await client.tickerBookTicker(params);
+            const response = await client.tickerBookTicker();
             expect(response).toBeDefined();
             await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
@@ -897,23 +853,7 @@ describe('MarketApi', () => {
             spy.mockRestore();
         });
 
-        it('should throw RequiredError when symbol is missing', async () => {
-            const _params: TickerBookTickerRequest = {
-                symbol: 'BNBUSDT',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.symbol;
-
-            await expect(client.tickerBookTicker(params)).rejects.toThrow(
-                'Required parameter symbol was null or undefined when calling tickerBookTicker.'
-            );
-        });
-
         it('should throw an error when server is returning an error', async () => {
-            const params: TickerBookTickerRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             const errorResponse = {
                 code: -1111,
                 msg: 'Server Error',
@@ -924,17 +864,13 @@ describe('MarketApi', () => {
             };
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'tickerBookTicker').mockRejectedValueOnce(mockError);
-            await expect(client.tickerBookTicker(params)).rejects.toThrow('ResponseError');
+            await expect(client.tickerBookTicker()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
 
     describe('tickerPrice()', () => {
         it('should execute tickerPrice() successfully with required parameters only', async () => {
-            const params: TickerPriceRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             mockResponse = { symbol: 'LTCBTC', price: '4.00000200' };
 
             const spy = jest.spyOn(client, 'tickerPrice').mockReturnValue(
@@ -945,7 +881,7 @@ describe('MarketApi', () => {
                     rateLimits: [],
                 } as RestApiResponse<TickerPriceResponse>)
             );
-            const response = await client.tickerPrice(params);
+            const response = await client.tickerPrice();
             expect(response).toBeDefined();
             await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
@@ -973,23 +909,7 @@ describe('MarketApi', () => {
             spy.mockRestore();
         });
 
-        it('should throw RequiredError when symbol is missing', async () => {
-            const _params: TickerPriceRequest = {
-                symbol: 'BNBUSDT',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.symbol;
-
-            await expect(client.tickerPrice(params)).rejects.toThrow(
-                'Required parameter symbol was null or undefined when calling tickerPrice.'
-            );
-        });
-
         it('should throw an error when server is returning an error', async () => {
-            const params: TickerPriceRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             const errorResponse = {
                 code: -1111,
                 msg: 'Server Error',
@@ -1000,17 +920,13 @@ describe('MarketApi', () => {
             };
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'tickerPrice').mockRejectedValueOnce(mockError);
-            await expect(client.tickerPrice(params)).rejects.toThrow('ResponseError');
+            await expect(client.tickerPrice()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
 
     describe('tickerTradingDay()', () => {
         it('should execute tickerTradingDay() successfully with required parameters only', async () => {
-            const params: TickerTradingDayRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             mockResponse = {
                 symbol: 'BTCUSDT',
                 openPrice: '26304.80000000',
@@ -1034,7 +950,7 @@ describe('MarketApi', () => {
                     rateLimits: [],
                 } as RestApiResponse<TickerTradingDayResponse>)
             );
-            const response = await client.tickerTradingDay(params);
+            const response = await client.tickerTradingDay();
             expect(response).toBeDefined();
             await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
@@ -1077,23 +993,7 @@ describe('MarketApi', () => {
             spy.mockRestore();
         });
 
-        it('should throw RequiredError when symbol is missing', async () => {
-            const _params: TickerTradingDayRequest = {
-                symbol: 'BNBUSDT',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.symbol;
-
-            await expect(client.tickerTradingDay(params)).rejects.toThrow(
-                'Required parameter symbol was null or undefined when calling tickerTradingDay.'
-            );
-        });
-
         it('should throw an error when server is returning an error', async () => {
-            const params: TickerTradingDayRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             const errorResponse = {
                 code: -1111,
                 msg: 'Server Error',
@@ -1104,7 +1004,7 @@ describe('MarketApi', () => {
             };
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'tickerTradingDay').mockRejectedValueOnce(mockError);
-            await expect(client.tickerTradingDay(params)).rejects.toThrow('ResponseError');
+            await expect(client.tickerTradingDay()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

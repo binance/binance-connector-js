@@ -11,8 +11,9 @@ async function orderOco() {
     try {
         const response = await client.restAPI.orderOco({
             symbol: 'BNBUSDT',
-            quantity: 1,
-            stopPrice: 1,
+            quantity: 1.0,
+            price: 1.0,
+            stopPrice: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

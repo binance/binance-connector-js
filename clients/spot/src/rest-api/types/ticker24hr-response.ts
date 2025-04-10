@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 
 /**
  * Binance Spot REST API
@@ -18,82 +19,15 @@
  * Do not edit the class manually.
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { Ticker24hrResponse1 } from './ticker24hr-response1';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { Ticker24hrResponse2 } from './ticker24hr-response2';
+
 /**
- *
+ * @type Ticker24hrResponse
  * @export
- * @interface Ticker24hrResponse
  */
-export interface Ticker24hrResponse {
-    /**
-     *
-     * @type {string}
-     * @memberof Ticker24hrResponse
-     */
-    symbol?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof Ticker24hrResponse
-     */
-    openPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof Ticker24hrResponse
-     */
-    highPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof Ticker24hrResponse
-     */
-    lowPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof Ticker24hrResponse
-     */
-    lastPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof Ticker24hrResponse
-     */
-    volume?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof Ticker24hrResponse
-     */
-    quoteVolume?: string;
-    /**
-     *
-     * @type {number}
-     * @memberof Ticker24hrResponse
-     */
-    openTime?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof Ticker24hrResponse
-     */
-    closeTime?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof Ticker24hrResponse
-     */
-    firstId?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof Ticker24hrResponse
-     */
-    lastId?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof Ticker24hrResponse
-     */
-    count?: number;
-}
+export type Ticker24hrResponse = Ticker24hrResponse1 | Ticker24hrResponse2;

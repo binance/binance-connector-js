@@ -12,7 +12,7 @@ async function diffBookDepth() {
         connection = await client.websocketStreams.connect();
 
         const stream = connection.diffBookDepth({
-            symbol: 'BNBUSDT',
+            symbol: 'bnbusdt',
         });
 
         stream.on('message', (data) => {

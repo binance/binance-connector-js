@@ -12,7 +12,7 @@ async function partialBookDepth() {
         connection = await client.websocketStreams.connect();
 
         const stream = connection.partialBookDepth({
-            symbol: 'BNBUSDT',
+            symbol: 'bnbusdt',
             levels: SpotWebsocketStreams.PartialBookDepthLevelsEnum.LEVELS_5,
         });
 

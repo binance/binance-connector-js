@@ -12,7 +12,7 @@ async function trade() {
         connection = await client.websocketStreams.connect();
 
         const stream = connection.trade({
-            symbol: 'BNBUSDT',
+            symbol: 'bnbusdt',
         });
 
         stream.on('message', (data) => {

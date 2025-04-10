@@ -13,7 +13,6 @@ export * from './kline-response';
 export * from './kline-response-k';
 export * from './mini-ticker-response';
 export * from './partial-book-depth-response';
-export * from './response-error';
 export * from './rolling-window-ticker-response';
 export * from './ticker-response';
 export * from './trade-response';

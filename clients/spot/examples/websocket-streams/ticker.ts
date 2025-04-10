@@ -12,7 +12,7 @@ async function ticker() {
         connection = await client.websocketStreams.connect();
 
         const stream = connection.ticker({
-            symbol: 'BNBUSDT',
+            symbol: 'bnbusdt',
         });
 
         stream.on('message', (data) => {

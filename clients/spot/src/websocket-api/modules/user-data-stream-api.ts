@@ -213,7 +213,7 @@ export class UserDataStreamApi implements UserDataStreamApiInterface {
      * @param {UserDataStreamPingRequest} requestParameters Request parameters.
      * @returns {Promise<UserDataStreamPingResponse>}
      * @memberof UserDataStreamApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/user-Data-Stream-requests#ping-user-data-stream-user_stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#ping-user-data-stream-user_stream Binance API Documentation}
      */
     public userDataStreamPing(
         requestParameters: UserDataStreamPingRequest
@@ -233,7 +233,7 @@ export class UserDataStreamApi implements UserDataStreamApiInterface {
      * @param {UserDataStreamStartRequest} requestParameters Request parameters.
      * @returns {Promise<UserDataStreamStartResponse>}
      * @memberof UserDataStreamApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/user-Data-Stream-requests#start-user-data-stream-user_stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#start-user-data-stream-user_stream Binance API Documentation}
      */
     public userDataStreamStart(
         requestParameters: UserDataStreamStartRequest = {}
@@ -253,7 +253,7 @@ export class UserDataStreamApi implements UserDataStreamApiInterface {
      * @param {UserDataStreamStopRequest} requestParameters Request parameters.
      * @returns {Promise<UserDataStreamStopResponse>}
      * @memberof UserDataStreamApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/user-Data-Stream-requests#stop-user-data-stream-user_stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#stop-user-data-stream-user_stream Binance API Documentation}
      */
     public userDataStreamStop(
         requestParameters: UserDataStreamStopRequest
@@ -273,7 +273,7 @@ export class UserDataStreamApi implements UserDataStreamApiInterface {
      * @param {UserDataStreamSubscribeRequest} requestParameters Request parameters.
      * @returns {Promise<UserDataStreamSubscribeResponse>}
      * @memberof UserDataStreamApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/user-Data-Stream-requests#subscribe-to-user-data-stream-user_stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#subscribe-to-user-data-stream-user_stream Binance API Documentation}
      */
     public userDataStreamSubscribe(
         requestParameters: UserDataStreamSubscribeRequest = {}
@@ -293,7 +293,7 @@ export class UserDataStreamApi implements UserDataStreamApiInterface {
      * @param {UserDataStreamUnsubscribeRequest} requestParameters Request parameters.
      * @returns {Promise<UserDataStreamUnsubscribeResponse>}
      * @memberof UserDataStreamApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/user-Data-Stream-requests#unsubscribe-from-user-data-stream-user_stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#unsubscribe-from-user-data-stream-user_stream Binance API Documentation}
      */
     public userDataStreamUnsubscribe(
         requestParameters: UserDataStreamUnsubscribeRequest = {}

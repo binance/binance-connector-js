@@ -24,7 +24,6 @@ import { jest, expect, beforeEach, afterEach, describe, it } from '@jest/globals
 import { ConfigurationWebsocketAPI, WebsocketAPIBase, randomString } from '@binance/common';
 
 import { GeneralApi } from '../../../src/websocket-api';
-import { ExchangeInfoRequest } from '../../../src/websocket-api';
 
 jest.mock('ws');
 
@@ -123,6 +122,7 @@ describe('GeneralApi', () => {
                             quoteOrderQtyMarketAllowed: true,
                             allowTrailingStop: true,
                             cancelReplaceAllowed: true,
+                            allowAmend: false,
                             isSpotTradingAllowed: true,
                             isMarginTradingAllowed: true,
                             filters: [
@@ -159,10 +159,6 @@ describe('GeneralApi', () => {
             };
             mockResponse.id = randomString();
 
-            const params: ExchangeInfoRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             let resolveTest: (value: unknown) => void;
             const testComplete = new Promise((resolve) => {
                 resolveTest = resolve;
@@ -174,16 +170,16 @@ describe('GeneralApi', () => {
                     const sendMsgSpy = jest.spyOn(conn, 'sendMessage');
                     const responsePromise = websocketAPIClient.exchangeInfo({
                         id: mockResponse?.id,
-                        ...params,
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
-                    expect(sendMsgSpy).toHaveBeenCalledWith('/exchangeInfo'.slice(1), params, {
-                        isSigned: false,
-                        withApiKey: false,
-                    });
+                    expect(sendMsgSpy).toHaveBeenCalledWith(
+                        '/exchangeInfo'.slice(1),
+                        expect.any(Object),
+                        { isSigned: false, withApiKey: false }
+                    );
                     resolveTest(true);
                 } catch (error) {
                     resolveTest(error);
@@ -216,10 +212,6 @@ describe('GeneralApi', () => {
                 ],
             };
 
-            const params: ExchangeInfoRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             let resolveTest: (value: unknown) => void;
             const testComplete = new Promise((resolve) => {
                 resolveTest = resolve;
@@ -230,7 +222,6 @@ describe('GeneralApi', () => {
                     websocketAPIClient = new GeneralApi(conn);
                     const responsePromise = websocketAPIClient.exchangeInfo({
                         id: mockResponse?.id,
-                        ...params,
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
@@ -250,10 +241,6 @@ describe('GeneralApi', () => {
         it('should handle request timeout gracefully', async () => {
             jest.useRealTimers();
 
-            const params: ExchangeInfoRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             let resolveTest: (value: unknown) => void;
             const testComplete = new Promise((resolve) => {
                 resolveTest = resolve;
@@ -262,7 +249,7 @@ describe('GeneralApi', () => {
             websocketBase.on('open', async (conn: WebsocketAPIBase) => {
                 try {
                     websocketAPIClient = new GeneralApi(websocketBase);
-                    const responsePromise = websocketAPIClient.exchangeInfo(params);
+                    const responsePromise = websocketAPIClient.exchangeInfo();
                     await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
                     resolveTest(true);
                 } catch (error) {

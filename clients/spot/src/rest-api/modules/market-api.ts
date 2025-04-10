@@ -50,10 +50,10 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          *
          * @summary Compressed/Aggregate trades list
          * @param {string} symbol
-         * @param {number} [fromId] TradeId to fetch from. Default gets most recent trades.
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [limit] Default 500; max 1000.
+         * @param {number} [fromId] ID to get aggregate trades from INCLUSIVE.
+         * @param {number} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
+         * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
+         * @param {number} [limit] Default: 500; Maximum: 1000.
          *
          * @throws {RequiredError}
          */
@@ -141,7 +141,7 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          *
          * @summary Order book
          * @param {string} symbol
-         * @param {number} [limit] Default 500; max 1000.
+         * @param {number} [limit] Default: 500; Maximum: 1000.
          *
          * @throws {RequiredError}
          */
@@ -175,7 +175,7 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          *
          * @summary Recent trades list
          * @param {string} symbol
-         * @param {number} [limit] Default 500; max 1000.
+         * @param {number} [limit] Default: 500; Maximum: 1000.
          *
          * @throws {RequiredError}
          */
@@ -209,8 +209,8 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          *
          * @summary Old trade lookup
          * @param {string} symbol
-         * @param {number} [limit] Default 500; max 1000.
-         * @param {number} [fromId] TradeId to fetch from. Default gets most recent trades.
+         * @param {number} [limit] Default: 500; Maximum: 1000.
+         * @param {number} [fromId] ID to get aggregate trades from INCLUSIVE.
          *
          * @throws {RequiredError}
          */
@@ -254,10 +254,10 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * @summary Kline/Candlestick data
          * @param {string} symbol
          * @param {KlinesIntervalEnum} [interval]
-         * @param {number} [startTime]
-         * @param {number} [endTime]
+         * @param {number} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
+         * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
          * @param {string} [timeZone] Default: 0 (UTC)
-         * @param {number} [limit] Default 500; max 1000.
+         * @param {number} [limit] Default: 500; Maximum: 1000.
          *
          * @throws {RequiredError}
          */
@@ -313,7 +313,7 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * Weight: 4 for each requested <tt>symbol</tt> regardless of <tt>windowSize</tt>. <br/><br/> The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
          *
          * @summary Rolling window price change statistics
-         * @param {string} symbol
+         * @param {string} [symbol] Symbol to query
          * @param {Array<string>} [symbols] List of symbols to query
          * @param {TickerWindowSizeEnum} [windowSize]
          * @param {TickerTypeEnum} [type]
@@ -321,14 +321,11 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * @throws {RequiredError}
          */
         ticker: async (
-            symbol: string,
+            symbol?: string,
             symbols?: Array<string>,
             windowSize?: TickerWindowSizeEnum,
             type?: TickerTypeEnum
         ): Promise<RequestArgs> => {
-            // verify required parameter 'symbol' is not null or undefined
-            assertParamExists('ticker', 'symbol', symbol);
-
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
@@ -398,20 +395,17 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * </table>
          *
          * @summary 24hr ticker price change statistics
-         * @param {string} symbol
+         * @param {string} [symbol] Symbol to query
          * @param {Array<string>} [symbols] List of symbols to query
          * @param {Ticker24hrTypeEnum} [type]
          *
          * @throws {RequiredError}
          */
         ticker24hr: async (
-            symbol: string,
+            symbol?: string,
             symbols?: Array<string>,
             type?: Ticker24hrTypeEnum
         ): Promise<RequestArgs> => {
-            // verify required parameter 'symbol' is not null or undefined
-            assertParamExists('ticker24hr', 'symbol', symbol);
-
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
@@ -465,15 +459,15 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * </table>
          *
          * @summary Symbol order book ticker
-         * @param {string} symbol
+         * @param {string} [symbol] Symbol to query
          * @param {Array<string>} [symbols] List of symbols to query
          *
          * @throws {RequiredError}
          */
-        tickerBookTicker: async (symbol: string, symbols?: Array<string>): Promise<RequestArgs> => {
-            // verify required parameter 'symbol' is not null or undefined
-            assertParamExists('tickerBookTicker', 'symbol', symbol);
-
+        tickerBookTicker: async (
+            symbol?: string,
+            symbols?: Array<string>
+        ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
@@ -523,15 +517,12 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * </table>
          *
          * @summary Symbol price ticker
-         * @param {string} symbol
+         * @param {string} [symbol] Symbol to query
          * @param {Array<string>} [symbols] List of symbols to query
          *
          * @throws {RequiredError}
          */
-        tickerPrice: async (symbol: string, symbols?: Array<string>): Promise<RequestArgs> => {
-            // verify required parameter 'symbol' is not null or undefined
-            assertParamExists('tickerPrice', 'symbol', symbol);
-
+        tickerPrice: async (symbol?: string, symbols?: Array<string>): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
@@ -557,7 +548,7 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * Weight: 4 for each requested <tt>symbol</tt>. <br/><br/> The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
          *
          * @summary Trading Day Ticker
-         * @param {string} symbol
+         * @param {string} [symbol] Symbol to query
          * @param {Array<string>} [symbols] List of symbols to query
          * @param {string} [timeZone] Default: 0 (UTC)
          * @param {TickerTradingDayTypeEnum} [type]
@@ -565,14 +556,11 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * @throws {RequiredError}
          */
         tickerTradingDay: async (
-            symbol: string,
+            symbol?: string,
             symbols?: Array<string>,
             timeZone?: string,
             type?: TickerTradingDayTypeEnum
         ): Promise<RequestArgs> => {
-            // verify required parameter 'symbol' is not null or undefined
-            assertParamExists('tickerTradingDay', 'symbol', symbol);
-
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
@@ -610,10 +598,10 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * @summary UIKlines
          * @param {string} symbol
          * @param {UiKlinesIntervalEnum} [interval]
-         * @param {number} [startTime]
-         * @param {number} [endTime]
+         * @param {number} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
+         * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
          * @param {string} [timeZone] Default: 0 (UTC)
-         * @param {number} [limit] Default 500; max 1000.
+         * @param {number} [limit] Default: 500; Maximum: 1000.
          *
          * @throws {RequiredError}
          */
@@ -758,7 +746,7 @@ export interface MarketApiInterface {
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketApiInterface
      */
-    ticker(requestParameters: TickerRequest): Promise<RestApiResponse<TickerResponse>>;
+    ticker(requestParameters?: TickerRequest): Promise<RestApiResponse<TickerResponse>>;
     /**
      * 24 hour rolling window price change statistics. **Careful** when accessing this with no symbol.
      * Weight: <table>
@@ -805,7 +793,7 @@ export interface MarketApiInterface {
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketApiInterface
      */
-    ticker24hr(requestParameters: Ticker24hrRequest): Promise<RestApiResponse<Ticker24hrResponse>>;
+    ticker24hr(requestParameters?: Ticker24hrRequest): Promise<RestApiResponse<Ticker24hrResponse>>;
     /**
      * Best price/qty on the order book for a symbol or symbols.
      * Weight: <table>
@@ -841,7 +829,7 @@ export interface MarketApiInterface {
      * @memberof MarketApiInterface
      */
     tickerBookTicker(
-        requestParameters: TickerBookTickerRequest
+        requestParameters?: TickerBookTickerRequest
     ): Promise<RestApiResponse<TickerBookTickerResponse>>;
     /**
      * Latest price for a symbol or symbols.
@@ -878,7 +866,7 @@ export interface MarketApiInterface {
      * @memberof MarketApiInterface
      */
     tickerPrice(
-        requestParameters: TickerPriceRequest
+        requestParameters?: TickerPriceRequest
     ): Promise<RestApiResponse<TickerPriceResponse>>;
     /**
      * Price change statistics for a trading day.
@@ -891,7 +879,7 @@ export interface MarketApiInterface {
      * @memberof MarketApiInterface
      */
     tickerTradingDay(
-        requestParameters: TickerTradingDayRequest
+        requestParameters?: TickerTradingDayRequest
     ): Promise<RestApiResponse<TickerTradingDayResponse>>;
     /**
      * The request is similar to klines having the same parameters and response.
@@ -921,28 +909,28 @@ export interface AggTradesRequest {
     readonly symbol: string;
 
     /**
-     * TradeId to fetch from. Default gets most recent trades.
+     * ID to get aggregate trades from INCLUSIVE.
      * @type {number}
      * @memberof MarketApiAggTrades
      */
     readonly fromId?: number;
 
     /**
-     *
+     * Timestamp in ms to get aggregate trades from INCLUSIVE.
      * @type {number}
      * @memberof MarketApiAggTrades
      */
     readonly startTime?: number;
 
     /**
-     *
+     * Timestamp in ms to get aggregate trades until INCLUSIVE.
      * @type {number}
      * @memberof MarketApiAggTrades
      */
     readonly endTime?: number;
 
     /**
-     * Default 500; max 1000.
+     * Default: 500; Maximum: 1000.
      * @type {number}
      * @memberof MarketApiAggTrades
      */
@@ -975,7 +963,7 @@ export interface DepthRequest {
     readonly symbol: string;
 
     /**
-     * Default 500; max 1000.
+     * Default: 500; Maximum: 1000.
      * @type {number}
      * @memberof MarketApiDepth
      */
@@ -995,7 +983,7 @@ export interface GetTradesRequest {
     readonly symbol: string;
 
     /**
-     * Default 500; max 1000.
+     * Default: 500; Maximum: 1000.
      * @type {number}
      * @memberof MarketApiGetTrades
      */
@@ -1015,14 +1003,14 @@ export interface HistoricalTradesRequest {
     readonly symbol: string;
 
     /**
-     * Default 500; max 1000.
+     * Default: 500; Maximum: 1000.
      * @type {number}
      * @memberof MarketApiHistoricalTrades
      */
     readonly limit?: number;
 
     /**
-     * TradeId to fetch from. Default gets most recent trades.
+     * ID to get aggregate trades from INCLUSIVE.
      * @type {number}
      * @memberof MarketApiHistoricalTrades
      */
@@ -1049,14 +1037,14 @@ export interface KlinesRequest {
     readonly interval?: KlinesIntervalEnum;
 
     /**
-     *
+     * Timestamp in ms to get aggregate trades from INCLUSIVE.
      * @type {number}
      * @memberof MarketApiKlines
      */
     readonly startTime?: number;
 
     /**
-     *
+     * Timestamp in ms to get aggregate trades until INCLUSIVE.
      * @type {number}
      * @memberof MarketApiKlines
      */
@@ -1070,7 +1058,7 @@ export interface KlinesRequest {
     readonly timeZone?: string;
 
     /**
-     * Default 500; max 1000.
+     * Default: 500; Maximum: 1000.
      * @type {number}
      * @memberof MarketApiKlines
      */
@@ -1083,11 +1071,11 @@ export interface KlinesRequest {
  */
 export interface TickerRequest {
     /**
-     *
+     * Symbol to query
      * @type {string}
      * @memberof MarketApiTicker
      */
-    readonly symbol: string;
+    readonly symbol?: string;
 
     /**
      * List of symbols to query
@@ -1117,11 +1105,11 @@ export interface TickerRequest {
  */
 export interface Ticker24hrRequest {
     /**
-     *
+     * Symbol to query
      * @type {string}
      * @memberof MarketApiTicker24hr
      */
-    readonly symbol: string;
+    readonly symbol?: string;
 
     /**
      * List of symbols to query
@@ -1144,11 +1132,11 @@ export interface Ticker24hrRequest {
  */
 export interface TickerBookTickerRequest {
     /**
-     *
+     * Symbol to query
      * @type {string}
      * @memberof MarketApiTickerBookTicker
      */
-    readonly symbol: string;
+    readonly symbol?: string;
 
     /**
      * List of symbols to query
@@ -1164,11 +1152,11 @@ export interface TickerBookTickerRequest {
  */
 export interface TickerPriceRequest {
     /**
-     *
+     * Symbol to query
      * @type {string}
      * @memberof MarketApiTickerPrice
      */
-    readonly symbol: string;
+    readonly symbol?: string;
 
     /**
      * List of symbols to query
@@ -1184,11 +1172,11 @@ export interface TickerPriceRequest {
  */
 export interface TickerTradingDayRequest {
     /**
-     *
+     * Symbol to query
      * @type {string}
      * @memberof MarketApiTickerTradingDay
      */
-    readonly symbol: string;
+    readonly symbol?: string;
 
     /**
      * List of symbols to query
@@ -1232,14 +1220,14 @@ export interface UiKlinesRequest {
     readonly interval?: UiKlinesIntervalEnum;
 
     /**
-     *
+     * Timestamp in ms to get aggregate trades from INCLUSIVE.
      * @type {number}
      * @memberof MarketApiUiKlines
      */
     readonly startTime?: number;
 
     /**
-     *
+     * Timestamp in ms to get aggregate trades until INCLUSIVE.
      * @type {number}
      * @memberof MarketApiUiKlines
      */
@@ -1253,7 +1241,7 @@ export interface UiKlinesRequest {
     readonly timeZone?: string;
 
     /**
-     * Default 500; max 1000.
+     * Default: 500; Maximum: 1000.
      * @type {number}
      * @memberof MarketApiUiKlines
      */
@@ -1466,7 +1454,7 @@ export class MarketApi implements MarketApiInterface {
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#rolling-window-price-change-statistics Binance API Documentation}
      */
     public async ticker(
-        requestParameters: TickerRequest
+        requestParameters: TickerRequest = {}
     ): Promise<RestApiResponse<TickerResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.ticker(
             requestParameters?.symbol,
@@ -1532,7 +1520,7 @@ export class MarketApi implements MarketApiInterface {
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#24hr-ticker-price-change-statistics Binance API Documentation}
      */
     public async ticker24hr(
-        requestParameters: Ticker24hrRequest
+        requestParameters: Ticker24hrRequest = {}
     ): Promise<RestApiResponse<Ticker24hrResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.ticker24hr(
             requestParameters?.symbol,
@@ -1585,7 +1573,7 @@ export class MarketApi implements MarketApiInterface {
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-order-book-ticker Binance API Documentation}
      */
     public async tickerBookTicker(
-        requestParameters: TickerBookTickerRequest
+        requestParameters: TickerBookTickerRequest = {}
     ): Promise<RestApiResponse<TickerBookTickerResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.tickerBookTicker(
             requestParameters?.symbol,
@@ -1637,7 +1625,7 @@ export class MarketApi implements MarketApiInterface {
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-price-ticker Binance API Documentation}
      */
     public async tickerPrice(
-        requestParameters: TickerPriceRequest
+        requestParameters: TickerPriceRequest = {}
     ): Promise<RestApiResponse<TickerPriceResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.tickerPrice(
             requestParameters?.symbol,
@@ -1665,7 +1653,7 @@ export class MarketApi implements MarketApiInterface {
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#trading-day-ticker Binance API Documentation}
      */
     public async tickerTradingDay(
-        requestParameters: TickerTradingDayRequest
+        requestParameters: TickerTradingDayRequest = {}
     ): Promise<RestApiResponse<TickerTradingDayResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.tickerTradingDay(
             requestParameters?.symbol,

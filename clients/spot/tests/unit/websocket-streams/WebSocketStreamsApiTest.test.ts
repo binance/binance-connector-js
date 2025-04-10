@@ -52,7 +52,7 @@ describe('WebSocketStreamsApi', () => {
     describe('aggTrade()', () => {
         it('should execute aggTrade() successfully', async () => {
             const params: AggTradeRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -82,7 +82,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const params: AggTradeRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -124,7 +124,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const _params: AggTradeRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -165,7 +165,7 @@ describe('WebSocketStreamsApi', () => {
             ];
 
             mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/!ticker_<window-size>@arr'.slice(1), params as unknown as Record<string, AllMarketRollingWindowTickerRequest>)}`,
+                `ws/${replaceWebsocketStreamsPlaceholders('/!ticker_<windowSize>@arr'.slice(1), params as unknown as Record<string, AllMarketRollingWindowTickerRequest>)}`,
                 mockResponse
             );
         });
@@ -209,7 +209,7 @@ describe('WebSocketStreamsApi', () => {
             websocketStreamClient['onMessage'](
                 JSON.stringify({
                     stream: replaceWebsocketStreamsPlaceholders(
-                        '/!ticker_<window-size>@arr'.slice(1),
+                        '/!ticker_<windowSize>@arr'.slice(1),
                         params as unknown as Record<string, AllMarketRollingWindowTickerRequest>
                     ),
                     data: mockResponse,
@@ -404,7 +404,7 @@ describe('WebSocketStreamsApi', () => {
     describe('avgPrice()', () => {
         it('should execute avgPrice() successfully', async () => {
             const params: AvgPriceRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -429,7 +429,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const params: AvgPriceRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -466,7 +466,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const _params: AvgPriceRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -480,7 +480,7 @@ describe('WebSocketStreamsApi', () => {
     describe('bookTicker()', () => {
         it('should execute bookTicker() successfully', async () => {
             const params: BookTickerRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -505,7 +505,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const params: BookTickerRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -542,7 +542,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const _params: BookTickerRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -556,7 +556,7 @@ describe('WebSocketStreamsApi', () => {
     describe('diffBookDepth()', () => {
         it('should execute diffBookDepth() successfully', async () => {
             const params: DiffBookDepthRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
                 updateSpeed: '100ms',
             };
@@ -572,7 +572,7 @@ describe('WebSocketStreamsApi', () => {
             };
 
             mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@depth<updateSpeed>'.slice(1), params as unknown as Record<string, DiffBookDepthRequest>)}`,
+                `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@depth@<updateSpeed>'.slice(1), params as unknown as Record<string, DiffBookDepthRequest>)}`,
                 mockResponse
             );
         });
@@ -583,7 +583,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const params: DiffBookDepthRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
                 updateSpeed: '100ms',
             };
@@ -605,7 +605,7 @@ describe('WebSocketStreamsApi', () => {
             websocketStreamClient['onMessage'](
                 JSON.stringify({
                     stream: replaceWebsocketStreamsPlaceholders(
-                        '/<symbol>@depth<updateSpeed>'.slice(1),
+                        '/<symbol>@depth@<updateSpeed>'.slice(1),
                         params as unknown as Record<string, DiffBookDepthRequest>
                     ),
                     data: mockResponse,
@@ -622,7 +622,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const _params: DiffBookDepthRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -636,7 +636,7 @@ describe('WebSocketStreamsApi', () => {
     describe('kline()', () => {
         it('should execute kline() successfully', async () => {
             const params: KlineRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 interval: KlineIntervalEnum.INTERVAL_1s,
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
@@ -678,7 +678,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const params: KlineRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 interval: KlineIntervalEnum.INTERVAL_1s,
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
@@ -732,7 +732,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const _params: KlineRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 interval: KlineIntervalEnum.INTERVAL_1s,
             };
             const params = Object.assign({ ..._params });
@@ -749,7 +749,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const _params: KlineRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 interval: KlineIntervalEnum.INTERVAL_1s,
             };
             const params = Object.assign({ ..._params });
@@ -764,7 +764,7 @@ describe('WebSocketStreamsApi', () => {
     describe('klineOffset()', () => {
         it('should execute klineOffset() successfully', async () => {
             const params: KlineOffsetRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 interval: KlineOffsetIntervalEnum.INTERVAL_1s,
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
@@ -806,7 +806,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const params: KlineOffsetRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 interval: KlineOffsetIntervalEnum.INTERVAL_1s,
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
@@ -860,7 +860,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const _params: KlineOffsetRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 interval: KlineOffsetIntervalEnum.INTERVAL_1s,
             };
             const params = Object.assign({ ..._params });
@@ -877,7 +877,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const _params: KlineOffsetRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 interval: KlineOffsetIntervalEnum.INTERVAL_1s,
             };
             const params = Object.assign({ ..._params });
@@ -892,7 +892,7 @@ describe('WebSocketStreamsApi', () => {
     describe('miniTicker()', () => {
         it('should execute miniTicker() successfully', async () => {
             const params: MiniTickerRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -920,7 +920,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const params: MiniTickerRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -960,7 +960,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const _params: MiniTickerRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -974,7 +974,7 @@ describe('WebSocketStreamsApi', () => {
     describe('partialBookDepth()', () => {
         it('should execute partialBookDepth() successfully', async () => {
             const params: PartialBookDepthRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 levels: PartialBookDepthLevelsEnum.LEVELS_5,
                 id: 'e9d6b4349871b40611412680b3445fac',
                 updateSpeed: '100ms',
@@ -987,7 +987,7 @@ describe('WebSocketStreamsApi', () => {
             };
 
             mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@depth<levels><updateSpeed>'.slice(1), params as unknown as Record<string, PartialBookDepthRequest>)}`,
+                `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@depth<levels>@<updateSpeed>'.slice(1), params as unknown as Record<string, PartialBookDepthRequest>)}`,
                 mockResponse
             );
         });
@@ -998,7 +998,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const params: PartialBookDepthRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 levels: PartialBookDepthLevelsEnum.LEVELS_5,
                 id: 'e9d6b4349871b40611412680b3445fac',
                 updateSpeed: '100ms',
@@ -1017,7 +1017,7 @@ describe('WebSocketStreamsApi', () => {
             websocketStreamClient['onMessage'](
                 JSON.stringify({
                     stream: replaceWebsocketStreamsPlaceholders(
-                        '/<symbol>@depth<levels><updateSpeed>'.slice(1),
+                        '/<symbol>@depth<levels>@<updateSpeed>'.slice(1),
                         params as unknown as Record<string, PartialBookDepthRequest>
                     ),
                     data: mockResponse,
@@ -1034,7 +1034,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const _params: PartialBookDepthRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 levels: PartialBookDepthLevelsEnum.LEVELS_5,
             };
             const params = Object.assign({ ..._params });
@@ -1051,7 +1051,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const _params: PartialBookDepthRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 levels: PartialBookDepthLevelsEnum.LEVELS_5,
             };
             const params = Object.assign({ ..._params });
@@ -1066,7 +1066,7 @@ describe('WebSocketStreamsApi', () => {
     describe('rollingWindowTicker()', () => {
         it('should execute rollingWindowTicker() successfully', async () => {
             const params: RollingWindowTickerRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 windowSize: RollingWindowTickerWindowSizeEnum.WINDOW_SIZE_1h,
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
@@ -1092,7 +1092,7 @@ describe('WebSocketStreamsApi', () => {
             };
 
             mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@ticker_<window_size>'.slice(1), params as unknown as Record<string, RollingWindowTickerRequest>)}`,
+                `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@ticker_<windowSize>'.slice(1), params as unknown as Record<string, RollingWindowTickerRequest>)}`,
                 mockResponse
             );
         });
@@ -1103,7 +1103,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const params: RollingWindowTickerRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 windowSize: RollingWindowTickerWindowSizeEnum.WINDOW_SIZE_1h,
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
@@ -1135,7 +1135,7 @@ describe('WebSocketStreamsApi', () => {
             websocketStreamClient['onMessage'](
                 JSON.stringify({
                     stream: replaceWebsocketStreamsPlaceholders(
-                        '/<symbol>@ticker_<window_size>'.slice(1),
+                        '/<symbol>@ticker_<windowSize>'.slice(1),
                         params as unknown as Record<string, RollingWindowTickerRequest>
                     ),
                     data: mockResponse,
@@ -1152,7 +1152,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const _params: RollingWindowTickerRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 windowSize: RollingWindowTickerWindowSizeEnum.WINDOW_SIZE_1h,
             };
             const params = Object.assign({ ..._params });
@@ -1169,7 +1169,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const _params: RollingWindowTickerRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 windowSize: RollingWindowTickerWindowSizeEnum.WINDOW_SIZE_1h,
             };
             const params = Object.assign({ ..._params });
@@ -1184,7 +1184,7 @@ describe('WebSocketStreamsApi', () => {
     describe('ticker()', () => {
         it('should execute ticker() successfully', async () => {
             const params: TickerRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -1226,7 +1226,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const params: TickerRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -1280,7 +1280,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const _params: TickerRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1294,7 +1294,7 @@ describe('WebSocketStreamsApi', () => {
     describe('trade()', () => {
         it('should execute trade() successfully', async () => {
             const params: TradeRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -1322,7 +1322,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const params: TradeRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -1362,7 +1362,7 @@ describe('WebSocketStreamsApi', () => {
             const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
 
             const _params: TradeRequest = {
-                symbol: 'BNBUSDT',
+                symbol: 'bnbusdt',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;

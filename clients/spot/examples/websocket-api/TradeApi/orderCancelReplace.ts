@@ -15,7 +15,6 @@ async function orderCancelReplace() {
 
         const response = await connection.orderCancelReplace({
             symbol: 'BNBUSDT',
-            quantity: 1,
         });
 
         const rateLimits = response.rateLimits!;

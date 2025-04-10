@@ -26,7 +26,7 @@ import { ConfigurationWebsocketAPI, WebsocketAPIBase, randomString } from '@bina
 import { TradeApi } from '../../../src/websocket-api';
 import {
     OpenOrdersCancelAllRequest,
-    OpenOrdersStatusRequest,
+    OrderAmendKeepPriorityRequest,
     OrderCancelRequest,
     OrderCancelReplaceRequest,
     OrderListCancelRequest,
@@ -569,10 +569,6 @@ describe('TradeApi', () => {
             };
             mockResponse.id = randomString();
 
-            const params: OpenOrdersStatusRequest = {
-                symbol: 'BNBUSDT',
-            };
-
             let resolveTest: (value: unknown) => void;
             const testComplete = new Promise((resolve) => {
                 resolveTest = resolve;
@@ -584,16 +580,16 @@ describe('TradeApi', () => {
                     const sendMsgSpy = jest.spyOn(conn, 'sendMessage');
                     const responsePromise = websocketAPIClient.openOrdersStatus({
                         id: mockResponse?.id,
-                        ...params,
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
-                    expect(sendMsgSpy).toHaveBeenCalledWith('/openOrders.status'.slice(1), params, {
-                        isSigned: true,
-                        withApiKey: false,
-                    });
+                    expect(sendMsgSpy).toHaveBeenCalledWith(
+                        '/openOrders.status'.slice(1),
+                        expect.any(Object),
+                        { isSigned: true, withApiKey: false }
+                    );
                     resolveTest(true);
                 } catch (error) {
                     resolveTest(error);
@@ -626,8 +622,136 @@ describe('TradeApi', () => {
                 ],
             };
 
-            const params: OpenOrdersStatusRequest = {
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new TradeApi(conn);
+                    const responsePromise = websocketAPIClient.openOrdersStatus({
+                        id: mockResponse?.id,
+                    });
+                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        });
+
+        it('should handle request timeout gracefully', async () => {
+            jest.useRealTimers();
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new TradeApi(websocketBase);
+                    const responsePromise = websocketAPIClient.openOrdersStatus();
+                    await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        }, 10000);
+    });
+
+    describe('orderAmendKeepPriority()', () => {
+        beforeEach(async () => {
+            mockWs = Object.assign(new EventEmitter(), {
+                close: jest.fn(),
+                ping: jest.fn(),
+                pong: jest.fn(),
+                send: jest.fn(),
+                readyState: WebSocketClient.OPEN,
+                OPEN: WebSocket.OPEN,
+                CLOSED: WebSocket.CLOSED,
+            }) as unknown as jest.Mocked<WebSocketClient> & EventEmitter;
+
+            (WebSocketClient as jest.MockedClass<typeof WebSocketClient>).mockImplementation(
+                () => mockWs
+            );
+
+            const config = new ConfigurationWebsocketAPI({
+                apiKey: 'test-api-key',
+                apiSecret: 'test-api-secret',
+                wsURL: 'ws://localhost:3000',
+                timeout: 1000,
+            });
+
+            websocketBase = new WebsocketAPIBase(config);
+            websocketBase.connect();
+        });
+
+        afterEach(async () => {
+            if (websocketBase) {
+                await websocketBase.disconnect();
+            }
+            jest.clearAllMocks();
+            jest.clearAllTimers();
+        });
+
+        it('should execute orderAmendKeepPriority() successfully', async () => {
+            mockResponse = {
+                id: '56374a46-3061-486b-a311-89ee972eb648',
+                status: 200,
+                result: {
+                    transactTime: 1741923284382,
+                    executionId: 16,
+                    amendedOrder: {
+                        symbol: 'BTCUSDT',
+                        orderId: 12,
+                        orderListId: -1,
+                        origClientOrderId: 'my_test_order1',
+                        clientOrderId: '4zR9HFcEq8gM1tWUqPEUHc',
+                        price: '5.00000000',
+                        qty: '5.00000000',
+                        executedQty: '0.00000000',
+                        preventedQty: '0.00000000',
+                        quoteOrderQty: '0.00000000',
+                        cumulativeQuoteQty: '0.00000000',
+                        status: 'NEW',
+                        timeInForce: 'GTC',
+                        type: 'LIMIT',
+                        side: 'BUY',
+                        workingTime: 1741923284364,
+                        selfTradePreventionMode: 'NONE',
+                    },
+                },
+                rateLimits: [
+                    {
+                        rateLimitType: 'REQUEST_WEIGHT',
+                        interval: 'MINUTE',
+                        intervalNum: 1,
+                        limit: 6000,
+                        count: 1,
+                    },
+                ],
+            };
+            mockResponse.id = randomString();
+
+            const params: OrderAmendKeepPriorityRequest = {
                 symbol: 'BNBUSDT',
+                newQty: 1.0,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -638,7 +762,66 @@ describe('TradeApi', () => {
             websocketBase.on('open', async (conn: WebsocketAPIBase) => {
                 try {
                     websocketAPIClient = new TradeApi(conn);
-                    const responsePromise = websocketAPIClient.openOrdersStatus({
+                    const sendMsgSpy = jest.spyOn(conn, 'sendMessage');
+                    const responsePromise = websocketAPIClient.orderAmendKeepPriority({
+                        id: mockResponse?.id,
+                        ...params,
+                    });
+                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    const response = await responsePromise;
+                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.rateLimits).toEqual(mockResponse.rateLimits);
+                    expect(sendMsgSpy).toHaveBeenCalledWith(
+                        '/order.amend.keepPriority'.slice(1),
+                        params,
+                        { isSigned: true, withApiKey: false }
+                    );
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        });
+
+        it('should handle server error responses gracefully', async () => {
+            mockResponse = {
+                id: randomString(),
+                status: 400,
+                error: {
+                    code: -2010,
+                    msg: 'Account has insufficient balance for requested action.',
+                },
+                rateLimits: [
+                    {
+                        rateLimitType: 'ORDERS',
+                        interval: 'SECOND',
+                        intervalNum: 10,
+                        limit: 50,
+                        count: 13,
+                    },
+                ],
+            };
+
+            const params: OrderAmendKeepPriorityRequest = {
+                symbol: 'BNBUSDT',
+                newQty: 1.0,
+            };
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new TradeApi(conn);
+                    const responsePromise = websocketAPIClient.orderAmendKeepPriority({
                         id: mockResponse?.id,
                         ...params,
                     });
@@ -660,8 +843,9 @@ describe('TradeApi', () => {
         it('should handle request timeout gracefully', async () => {
             jest.useRealTimers();
 
-            const params: OpenOrdersStatusRequest = {
+            const params: OrderAmendKeepPriorityRequest = {
                 symbol: 'BNBUSDT',
+                newQty: 1.0,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -672,7 +856,7 @@ describe('TradeApi', () => {
             websocketBase.on('open', async (conn: WebsocketAPIBase) => {
                 try {
                     websocketAPIClient = new TradeApi(websocketBase);
-                    const responsePromise = websocketAPIClient.openOrdersStatus(params);
+                    const responsePromise = websocketAPIClient.orderAmendKeepPriority(params);
                     await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
                     resolveTest(true);
                 } catch (error) {
@@ -987,7 +1171,6 @@ describe('TradeApi', () => {
 
             const params: OrderCancelReplaceRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -1046,7 +1229,6 @@ describe('TradeApi', () => {
 
             const params: OrderCancelReplaceRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -1081,7 +1263,6 @@ describe('TradeApi', () => {
 
             const params: OrderCancelReplaceRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -1463,7 +1644,8 @@ describe('TradeApi', () => {
 
             const params: OrderListPlaceRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
+                price: 1.0,
+                quantity: 1.0,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -1521,7 +1703,8 @@ describe('TradeApi', () => {
 
             const params: OrderListPlaceRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
+                price: 1.0,
+                quantity: 1.0,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -1556,7 +1739,8 @@ describe('TradeApi', () => {
 
             const params: OrderListPlaceRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
+                price: 1.0,
+                quantity: 1.0,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -1702,7 +1886,7 @@ describe('TradeApi', () => {
 
             const params: OrderListPlaceOcoRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
+                quantity: 1.0,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -1761,7 +1945,7 @@ describe('TradeApi', () => {
 
             const params: OrderListPlaceOcoRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
+                quantity: 1.0,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -1796,7 +1980,7 @@ describe('TradeApi', () => {
 
             const params: OrderListPlaceOcoRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
+                quantity: 1.0,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -1934,9 +2118,9 @@ describe('TradeApi', () => {
 
             const params: OrderListPlaceOtoRequest = {
                 symbol: 'BNBUSDT',
-                workingPrice: 1,
-                workingQuantity: 1,
-                pendingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingQuantity: 1.0,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -1995,9 +2179,9 @@ describe('TradeApi', () => {
 
             const params: OrderListPlaceOtoRequest = {
                 symbol: 'BNBUSDT',
-                workingPrice: 1,
-                workingQuantity: 1,
-                pendingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingQuantity: 1.0,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -2032,9 +2216,9 @@ describe('TradeApi', () => {
 
             const params: OrderListPlaceOtoRequest = {
                 symbol: 'BNBUSDT',
-                workingPrice: 1,
-                workingQuantity: 1,
-                pendingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingQuantity: 1.0,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -2204,9 +2388,9 @@ describe('TradeApi', () => {
 
             const params: OrderListPlaceOtocoRequest = {
                 symbol: 'BNBUSDT',
-                workingPrice: 1,
-                workingQuantity: 1,
-                pendingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingQuantity: 1.0,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -2265,9 +2449,9 @@ describe('TradeApi', () => {
 
             const params: OrderListPlaceOtocoRequest = {
                 symbol: 'BNBUSDT',
-                workingPrice: 1,
-                workingQuantity: 1,
-                pendingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingQuantity: 1.0,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -2302,9 +2486,9 @@ describe('TradeApi', () => {
 
             const params: OrderListPlaceOtocoRequest = {
                 symbol: 'BNBUSDT',
-                workingPrice: 1,
-                workingQuantity: 1,
-                pendingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingQuantity: 1.0,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -2583,7 +2767,6 @@ describe('TradeApi', () => {
 
             const params: OrderPlaceRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -2641,7 +2824,6 @@ describe('TradeApi', () => {
 
             const params: OrderPlaceRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -2676,7 +2858,6 @@ describe('TradeApi', () => {
 
             const params: OrderPlaceRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -3141,7 +3322,7 @@ describe('TradeApi', () => {
 
             const params: SorOrderPlaceRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
+                quantity: 1.0,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -3199,7 +3380,7 @@ describe('TradeApi', () => {
 
             const params: SorOrderPlaceRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
+                quantity: 1.0,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -3234,7 +3415,7 @@ describe('TradeApi', () => {
 
             const params: SorOrderPlaceRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1,
+                quantity: 1.0,
             };
 
             let resolveTest: (value: unknown) => void;
