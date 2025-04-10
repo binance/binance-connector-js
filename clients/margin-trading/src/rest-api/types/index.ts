@@ -1,5 +1,4 @@
 export * from './adjust-cross-margin-max-leverage-response';
-export * from './bad-request';
 export * from './create-special-key-response';
 export * from './cross-margin-collateral-ratio-response';
 export * from './cross-margin-collateral-ratio-response-inner';
