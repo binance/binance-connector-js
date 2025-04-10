@@ -1,4 +1,3 @@
-export * from './bad-request';
 export * from './get-pay-trade-history-response';
 export * from './get-pay-trade-history-response-data-inner';
 export * from './get-pay-trade-history-response-data-inner-funds-detail-inner';
