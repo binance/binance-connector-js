@@ -1,5 +1,4 @@
 export * from './add-ip-restriction-for-sub-account-api-key-response';
-export * from './bad-request';
 export * from './create-avirtual-sub-account-response';
 export * from './delete-ip-list-for-asub-account-api-key-response';
 export * from './deposit-assets-into-the-managed-sub-account-response';

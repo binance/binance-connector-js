@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.0.0 - 2025-04-10
+
+### Changed
+
+- Update `@binance/common` library to version `1.0.2`.
+- Update examples.
+
+### Removed
+
+- Remove unused error reponses.
+
 ## 2.0.1 - 2025-04-07
 
 - Update `@binance/common` library to version `1.0.1`.

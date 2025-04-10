@@ -1292,7 +1292,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * Sub-account `MARGIN(Cross)`, `ISOLATED_MARGIN` transfer to master account `SPOT`
          * Sub-account `MARGIN(Cross)` transfer to Sub-account `MARGIN(Cross)`
          *
-         * Weight: 1
+         * Weight: 360
          *
          * @summary Universal Transfer(For Master Account)
          * @param {string} fromAccountType "SPOT","USDT_FUTURE","COIN_FUTURE","MARGIN"(Cross),"ISOLATED_MARGIN"
@@ -1746,7 +1746,7 @@ export interface AssetManagementApiInterface {
      * Sub-account `MARGIN(Cross)`, `ISOLATED_MARGIN` transfer to master account `SPOT`
      * Sub-account `MARGIN(Cross)` transfer to Sub-account `MARGIN(Cross)`
      *
-     * Weight: 1
+     * Weight: 360
      *
      * @summary Universal Transfer(For Master Account)
      * @param {UniversalTransferRequest} requestParameters Request parameters.
@@ -3420,7 +3420,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      * Sub-account `MARGIN(Cross)`, `ISOLATED_MARGIN` transfer to master account `SPOT`
      * Sub-account `MARGIN(Cross)` transfer to Sub-account `MARGIN(Cross)`
      *
-     * Weight: 1
+     * Weight: 360
      *
      * @summary Universal Transfer(For Master Account)
      * @param {UniversalTransferRequest} requestParameters Request parameters.

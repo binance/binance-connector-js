@@ -839,7 +839,7 @@ export class RestAPI {
      * Sub-account `MARGIN(Cross)`, `ISOLATED_MARGIN` transfer to master account `SPOT`
      * Sub-account `MARGIN(Cross)` transfer to Sub-account `MARGIN(Cross)`
      *
-     * Weight: 1
+     * Weight: 360
      *
      * @summary Universal Transfer(For Master Account)
      * @param {UniversalTransferRequest} requestParameters Request parameters.
