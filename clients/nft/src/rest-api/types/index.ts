@@ -1,4 +1,3 @@
-export * from './bad-request';
 export * from './get-nftasset-response';
 export * from './get-nftasset-response-list-inner';
 export * from './get-nftdeposit-history-response';
