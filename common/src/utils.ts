@@ -169,6 +169,7 @@ export const getSignature = function (
 
     return signature;
 };
+
 /**
  * Asserts that a function parameter exists and is not null or undefined.
  *
@@ -383,6 +384,7 @@ export const httpRequestFunction = async function <T>(
 
     throw lastError;
 };
+
 /**
  * Parses the rate limit headers from the Axios response headers and returns an array of `RestApiRateLimit` objects.
  *
@@ -556,13 +558,14 @@ export function replaceWebsocketStreamsPlaceholders(
 ): string {
     const normalizedVariables = Object.keys(variables).reduce(
         (acc, key) => {
-            acc[key.toLowerCase().replace(/[-_]/g, '')] = variables[key];
+            const normalizedKey = key.toLowerCase().replace(/[-_]/g, '');
+            acc[normalizedKey] = variables[key];
             return acc;
         },
         {} as Record<string, unknown>
     );
 
-    return str.replace(/<([^>]+)>/g, (match, fieldName) => {
+    return str.replace(/(@)?<([^>]+)>/g, (match, precedingAt, fieldName) => {
         const normalizedFieldName = fieldName.toLowerCase().replace(/[-_]/g, '');
 
         if (
@@ -578,7 +581,7 @@ export function replaceWebsocketStreamsPlaceholders(
             case 'updatespeed':
                 return `@${value}`;
             default:
-                return value as string;
+                return (precedingAt || '') + (value as string);
             }
         }
 
