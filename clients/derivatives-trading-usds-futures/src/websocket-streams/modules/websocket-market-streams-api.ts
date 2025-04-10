@@ -197,7 +197,7 @@ const WebsocketMarketStreamsApiParamCreator = function () {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('diffBookDepthStreams', 'symbol', symbol);
 
-            return replaceWebsocketStreamsPlaceholders('/<symbol>@depth<updateSpeed>'.slice(1), {
+            return replaceWebsocketStreamsPlaceholders('/<symbol>@depth@<updateSpeed>'.slice(1), {
                 symbol,
                 id,
                 updateSpeed,
@@ -322,7 +322,7 @@ const WebsocketMarketStreamsApiParamCreator = function () {
             assertParamExists('markPriceStream', 'symbol', symbol);
 
             return replaceWebsocketStreamsPlaceholders(
-                '/<symbol>@markPrice<updateSpeed>'.slice(1),
+                '/<symbol>@markPrice@<updateSpeed>'.slice(1),
                 { symbol, id, updateSpeed }
             );
         },
@@ -338,7 +338,7 @@ const WebsocketMarketStreamsApiParamCreator = function () {
          * @throws {RequiredError}
          */
         markPriceStreamForAllMarket: (id?: string, updateSpeed?: string): string => {
-            return replaceWebsocketStreamsPlaceholders('/!markPrice@arr<updateSpeed>'.slice(1), {
+            return replaceWebsocketStreamsPlaceholders('/!markPrice@arr@<updateSpeed>'.slice(1), {
                 id,
                 updateSpeed,
             });
@@ -381,7 +381,7 @@ const WebsocketMarketStreamsApiParamCreator = function () {
             assertParamExists('partialBookDepthStreams', 'levels', levels);
 
             return replaceWebsocketStreamsPlaceholders(
-                '/<symbol>@depth<levels><updateSpeed>'.slice(1),
+                '/<symbol>@depth<levels>@<updateSpeed>'.slice(1),
                 { symbol, levels, id, updateSpeed }
             );
         },

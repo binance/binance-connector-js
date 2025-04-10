@@ -15,7 +15,7 @@ async function compositeIndexSymbolInformationStreams() {
         connection = await client.websocketStreams.connect();
 
         const stream = connection.compositeIndexSymbolInformationStreams({
-            symbol: 'BTCUSDT',
+            symbol: 'btcusdt',
         });
 
         stream.on('message', (data) => {

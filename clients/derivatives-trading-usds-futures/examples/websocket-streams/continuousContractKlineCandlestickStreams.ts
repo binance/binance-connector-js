@@ -15,7 +15,7 @@ async function continuousContractKlineCandlestickStreams() {
         connection = await client.websocketStreams.connect();
 
         const stream = connection.continuousContractKlineCandlestickStreams({
-            pair: 'BTCUSDT',
+            pair: 'btcusdt',
             contractType: 'next_quarter',
             interval: '1m',
         });

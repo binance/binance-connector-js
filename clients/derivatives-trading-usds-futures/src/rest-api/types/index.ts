@@ -15,7 +15,6 @@ export * from './account-trade-list-response-inner';
 export * from './all-orders-response';
 export * from './all-orders-response-inner';
 export * from './auto-cancel-all-open-orders-response';
-export * from './bad-request';
 export * from './basis-response';
 export * from './basis-response-inner';
 export * from './cancel-all-open-orders-response';

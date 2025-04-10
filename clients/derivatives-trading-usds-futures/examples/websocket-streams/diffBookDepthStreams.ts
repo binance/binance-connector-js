@@ -15,7 +15,7 @@ async function diffBookDepthStreams() {
         connection = await client.websocketStreams.connect();
 
         const stream = connection.diffBookDepthStreams({
-            symbol: 'BTCUSDT',
+            symbol: 'btcusdt',
         });
 
         stream.on('message', (data) => {
