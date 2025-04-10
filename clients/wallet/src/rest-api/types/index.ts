@@ -12,7 +12,6 @@ export * from './asset-detail-response-ctr';
 export * from './asset-detail-response-sky';
 export * from './asset-dividend-record-response';
 export * from './asset-dividend-record-response-rows-inner';
-export * from './bad-request';
 export * from './broker-withdraw-response';
 export * from './daily-account-snapshot-response';
 export * from './daily-account-snapshot-response1';
