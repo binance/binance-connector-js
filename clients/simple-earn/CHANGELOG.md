@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.0 - 2025-04-15
+
+### Changed
+
+- Added `current`, `size` and `recvWindow` parameters to `/sapi/v1/simple-earn/flexible/history/rewardsRecord`.
+
 ## 2.0.0 - 2025-04-10
 
 ### Changed

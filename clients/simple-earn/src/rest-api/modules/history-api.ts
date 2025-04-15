@@ -185,6 +185,9 @@ const HistoryApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {string} [asset]
          * @param {number} [startTime]
          * @param {number} [endTime]
+         * @param {number} [current] Currently querying the page. Start from 1. Default:1
+         * @param {number} [size] Default:10, Max:100
+         * @param {number} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -193,7 +196,10 @@ const HistoryApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             productId?: string,
             asset?: string,
             startTime?: number,
-            endTime?: number
+            endTime?: number,
+            current?: number,
+            size?: number,
+            recvWindow?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'type' is not null or undefined
             assertParamExists('getFlexibleRewardsHistory', 'type', type);
@@ -218,6 +224,18 @@ const HistoryApiAxiosParamCreator = function (configuration: ConfigurationRestAP
 
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
+            }
+
+            if (current !== undefined && current !== null) {
+                localVarQueryParameter['current'] = current;
+            }
+
+            if (size !== undefined && size !== null) {
+                localVarQueryParameter['size'] = size;
+            }
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
             }
 
             let _timeUnit: TimeUnit | undefined;
@@ -899,6 +917,27 @@ export interface GetFlexibleRewardsHistoryRequest {
      * @memberof HistoryApiGetFlexibleRewardsHistory
      */
     readonly endTime?: number;
+
+    /**
+     * Currently querying the page. Start from 1. Default:1
+     * @type {number}
+     * @memberof HistoryApiGetFlexibleRewardsHistory
+     */
+    readonly current?: number;
+
+    /**
+     * Default:10, Max:100
+     * @type {number}
+     * @memberof HistoryApiGetFlexibleRewardsHistory
+     */
+    readonly size?: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof HistoryApiGetFlexibleRewardsHistory
+     */
+    readonly recvWindow?: number;
 }
 
 /**
@@ -1305,7 +1344,10 @@ export class HistoryApi implements HistoryApiInterface {
             requestParameters?.productId,
             requestParameters?.asset,
             requestParameters?.startTime,
-            requestParameters?.endTime
+            requestParameters?.endTime,
+            requestParameters?.current,
+            requestParameters?.size,
+            requestParameters?.recvWindow
         );
         return sendRequest<GetFlexibleRewardsHistoryResponse>(
             this.configuration,

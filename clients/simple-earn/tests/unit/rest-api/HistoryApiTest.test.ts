@@ -272,6 +272,9 @@ describe('HistoryApi', () => {
                 asset: 'asset_example',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
+                current: 1,
+                size: 10,
+                recvWindow: 5000,
             };
 
             mockResponse = {
