@@ -2689,7 +2689,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -2719,7 +2719,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -2750,7 +2750,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -2780,7 +2780,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -2818,7 +2818,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -2852,7 +2852,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -2888,7 +2888,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -2917,7 +2917,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -2949,7 +2949,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -2978,7 +2978,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -3012,7 +3012,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -3056,7 +3056,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -3085,7 +3085,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -3150,7 +3150,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -3188,7 +3188,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -3220,7 +3220,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -3261,7 +3261,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -3299,7 +3299,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -3449,7 +3449,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 }

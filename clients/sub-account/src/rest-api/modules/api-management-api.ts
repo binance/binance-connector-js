@@ -406,7 +406,7 @@ export class ApiManagementApi implements ApiManagementApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -440,7 +440,7 @@ export class ApiManagementApi implements ApiManagementApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -471,7 +471,7 @@ export class ApiManagementApi implements ApiManagementApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 }
