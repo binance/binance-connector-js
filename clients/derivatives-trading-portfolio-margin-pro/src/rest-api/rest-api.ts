@@ -24,6 +24,7 @@ import type {
     GetPortfolioMarginProAccountBalanceRequest,
     GetPortfolioMarginProAccountInfoRequest,
     GetPortfolioMarginProSpanAccountInfoRequest,
+    GetTransferableEarnAssetBalanceForPortfolioMarginRequest,
     MintBfusdForPortfolioMarginRequest,
     PortfolioMarginProBankruptcyLoanRepayRequest,
     QueryPortfolioMarginProBankruptcyLoanAmountRequest,
@@ -31,6 +32,7 @@ import type {
     QueryPortfolioMarginProNegativeBalanceInterestHistoryRequest,
     RedeemBfusdForPortfolioMarginRequest,
     RepayFuturesNegativeBalanceRequest,
+    TransferLdusdtForPortfolioMarginRequest,
 } from './modules/account-api';
 import type {
     PortfolioMarginProTieredCollateralRateRequest,
@@ -46,6 +48,7 @@ import type {
     GetPortfolioMarginProAccountBalanceResponse,
     GetPortfolioMarginProAccountInfoResponse,
     GetPortfolioMarginProSpanAccountInfoResponse,
+    GetTransferableEarnAssetBalanceForPortfolioMarginResponse,
     MintBfusdForPortfolioMarginResponse,
     PortfolioMarginProBankruptcyLoanRepayResponse,
     QueryPortfolioMarginProBankruptcyLoanAmountResponse,
@@ -53,6 +56,7 @@ import type {
     QueryPortfolioMarginProNegativeBalanceInterestHistoryResponse,
     RedeemBfusdForPortfolioMarginResponse,
     RepayFuturesNegativeBalanceResponse,
+    TransferLdusdtForPortfolioMarginResponse,
 } from './types';
 import type {
     GetPortfolioMarginAssetLeverageResponse,
@@ -251,6 +255,23 @@ export class RestAPI {
     }
 
     /**
+     * Get transferable earn asset balance for all types of Portfolio Margin account
+     *
+     * Weight: 1500
+     *
+     * @summary Get Transferable Earn Asset Balance for Portfolio Margin (USER_DATA)
+     * @param {GetTransferableEarnAssetBalanceForPortfolioMarginRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetTransferableEarnAssetBalanceForPortfolioMarginResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Get-Transferable-Earn-Asset-Balance-for-Portfolio-Margin Binance API Documentation}
+     */
+    getTransferableEarnAssetBalanceForPortfolioMargin(
+        requestParameters: GetTransferableEarnAssetBalanceForPortfolioMarginRequest
+    ): Promise<RestApiResponse<GetTransferableEarnAssetBalanceForPortfolioMarginResponse>> {
+        return this.accountApi.getTransferableEarnAssetBalanceForPortfolioMargin(requestParameters);
+    }
+
+    /**
      * Mint BFUSD for all types of Portfolio Margin account
      *
      * Weight: 1500
@@ -376,6 +397,23 @@ export class RestAPI {
         requestParameters: RepayFuturesNegativeBalanceRequest = {}
     ): Promise<RestApiResponse<RepayFuturesNegativeBalanceResponse>> {
         return this.accountApi.repayFuturesNegativeBalance(requestParameters);
+    }
+
+    /**
+     * Transfer LDUSDT as collateral for all types of Portfolio Margin account
+     *
+     * Weight: 1500
+     *
+     * @summary Transfer LDUSDT for Portfolio Margin(TRADE)
+     * @param {TransferLdusdtForPortfolioMarginRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<TransferLdusdtForPortfolioMarginResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Transfer-LDUSDT-for-Portfolio-Margin Binance API Documentation}
+     */
+    transferLdusdtForPortfolioMargin(
+        requestParameters: TransferLdusdtForPortfolioMarginRequest
+    ): Promise<RestApiResponse<TransferLdusdtForPortfolioMarginResponse>> {
+        return this.accountApi.transferLdusdtForPortfolioMargin(requestParameters);
     }
 
     /**

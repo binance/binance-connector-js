@@ -28,6 +28,7 @@ import type {
     GetPortfolioMarginProAccountBalanceResponse,
     GetPortfolioMarginProAccountInfoResponse,
     GetPortfolioMarginProSpanAccountInfoResponse,
+    GetTransferableEarnAssetBalanceForPortfolioMarginResponse,
     MintBfusdForPortfolioMarginResponse,
     PortfolioMarginProBankruptcyLoanRepayResponse,
     QueryPortfolioMarginProBankruptcyLoanAmountResponse,
@@ -35,6 +36,7 @@ import type {
     QueryPortfolioMarginProNegativeBalanceInterestHistoryResponse,
     RedeemBfusdForPortfolioMarginResponse,
     RepayFuturesNegativeBalanceResponse,
+    TransferLdusdtForPortfolioMarginResponse,
 } from '../types';
 
 /**
@@ -167,7 +169,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 60
          *
          * @summary Fund Collection by Asset(USER_DATA)
-         * @param {string} asset
+         * @param {string} asset `LDUSDT` only
          * @param {number} [recvWindow]
          *
          * @throws {RequiredError}
@@ -307,6 +309,56 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
 
             return {
                 endpoint: '/sapi/v2/portfolio/account',
+                method: 'GET',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Get transferable earn asset balance for all types of Portfolio Margin account
+         *
+         * Weight: 1500
+         *
+         * @summary Get Transferable Earn Asset Balance for Portfolio Margin (USER_DATA)
+         * @param {string} asset `LDUSDT` only
+         * @param {string} transferType `EARN_TO_FUTURE` /`FUTURE_TO_EARN`
+         * @param {number} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        getTransferableEarnAssetBalanceForPortfolioMargin: async (
+            asset: string,
+            transferType: string,
+            recvWindow?: number
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'asset' is not null or undefined
+            assertParamExists('getTransferableEarnAssetBalanceForPortfolioMargin', 'asset', asset);
+            // verify required parameter 'transferType' is not null or undefined
+            assertParamExists(
+                'getTransferableEarnAssetBalanceForPortfolioMargin',
+                'transferType',
+                transferType
+            );
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (asset !== undefined && asset !== null) {
+                localVarQueryParameter['asset'] = asset;
+            }
+
+            if (transferType !== undefined && transferType !== null) {
+                localVarQueryParameter['transferType'] = transferType;
+            }
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/portfolio/earn-asset-balance',
                 method: 'GET',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
@@ -632,6 +684,60 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
                 timeUnit: _timeUnit,
             };
         },
+        /**
+         * Transfer LDUSDT as collateral for all types of Portfolio Margin account
+         *
+         * Weight: 1500
+         *
+         * @summary Transfer LDUSDT for Portfolio Margin(TRADE)
+         * @param {string} asset `LDUSDT` only
+         * @param {string} transferType `EARN_TO_FUTURE` /`FUTURE_TO_EARN`
+         * @param {number} amount
+         * @param {number} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        transferLdusdtForPortfolioMargin: async (
+            asset: string,
+            transferType: string,
+            amount: number,
+            recvWindow?: number
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'asset' is not null or undefined
+            assertParamExists('transferLdusdtForPortfolioMargin', 'asset', asset);
+            // verify required parameter 'transferType' is not null or undefined
+            assertParamExists('transferLdusdtForPortfolioMargin', 'transferType', transferType);
+            // verify required parameter 'amount' is not null or undefined
+            assertParamExists('transferLdusdtForPortfolioMargin', 'amount', amount);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (asset !== undefined && asset !== null) {
+                localVarQueryParameter['asset'] = asset;
+            }
+
+            if (transferType !== undefined && transferType !== null) {
+                localVarQueryParameter['transferType'] = transferType;
+            }
+
+            if (amount !== undefined && amount !== null) {
+                localVarQueryParameter['amount'] = amount;
+            }
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/portfolio/earn-asset-balance',
+                method: 'POST',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
     };
 };
 
@@ -761,6 +867,20 @@ export interface AccountApiInterface {
         requestParameters?: GetPortfolioMarginProSpanAccountInfoRequest
     ): Promise<RestApiResponse<GetPortfolioMarginProSpanAccountInfoResponse>>;
     /**
+     * Get transferable earn asset balance for all types of Portfolio Margin account
+     *
+     * Weight: 1500
+     *
+     * @summary Get Transferable Earn Asset Balance for Portfolio Margin (USER_DATA)
+     * @param {GetTransferableEarnAssetBalanceForPortfolioMarginRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApiInterface
+     */
+    getTransferableEarnAssetBalanceForPortfolioMargin(
+        requestParameters: GetTransferableEarnAssetBalanceForPortfolioMarginRequest
+    ): Promise<RestApiResponse<GetTransferableEarnAssetBalanceForPortfolioMarginResponse>>;
+    /**
      * Mint BFUSD for all types of Portfolio Margin account
      *
      * Weight: 1500
@@ -865,6 +985,20 @@ export interface AccountApiInterface {
     repayFuturesNegativeBalance(
         requestParameters?: RepayFuturesNegativeBalanceRequest
     ): Promise<RestApiResponse<RepayFuturesNegativeBalanceResponse>>;
+    /**
+     * Transfer LDUSDT as collateral for all types of Portfolio Margin account
+     *
+     * Weight: 1500
+     *
+     * @summary Transfer LDUSDT for Portfolio Margin(TRADE)
+     * @param {TransferLdusdtForPortfolioMarginRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApiInterface
+     */
+    transferLdusdtForPortfolioMargin(
+        requestParameters: TransferLdusdtForPortfolioMarginRequest
+    ): Promise<RestApiResponse<TransferLdusdtForPortfolioMarginResponse>>;
 }
 
 /**
@@ -933,7 +1067,7 @@ export interface FundAutoCollectionRequest {
  */
 export interface FundCollectionByAssetRequest {
     /**
-     *
+     * `LDUSDT` only
      * @type {string}
      * @memberof AccountApiFundCollectionByAsset
      */
@@ -1002,6 +1136,33 @@ export interface GetPortfolioMarginProSpanAccountInfoRequest {
      *
      * @type {number}
      * @memberof AccountApiGetPortfolioMarginProSpanAccountInfo
+     */
+    readonly recvWindow?: number;
+}
+
+/**
+ * Request parameters for getTransferableEarnAssetBalanceForPortfolioMargin operation in AccountApi.
+ * @interface GetTransferableEarnAssetBalanceForPortfolioMarginRequest
+ */
+export interface GetTransferableEarnAssetBalanceForPortfolioMarginRequest {
+    /**
+     * `LDUSDT` only
+     * @type {string}
+     * @memberof AccountApiGetTransferableEarnAssetBalanceForPortfolioMargin
+     */
+    readonly asset: string;
+
+    /**
+     * `EARN_TO_FUTURE` /`FUTURE_TO_EARN`
+     * @type {string}
+     * @memberof AccountApiGetTransferableEarnAssetBalanceForPortfolioMargin
+     */
+    readonly transferType: string;
+
+    /**
+     *
+     * @type {number}
+     * @memberof AccountApiGetTransferableEarnAssetBalanceForPortfolioMargin
      */
     readonly recvWindow?: number;
 }
@@ -1205,6 +1366,40 @@ export interface RepayFuturesNegativeBalanceRequest {
      *
      * @type {number}
      * @memberof AccountApiRepayFuturesNegativeBalance
+     */
+    readonly recvWindow?: number;
+}
+
+/**
+ * Request parameters for transferLdusdtForPortfolioMargin operation in AccountApi.
+ * @interface TransferLdusdtForPortfolioMarginRequest
+ */
+export interface TransferLdusdtForPortfolioMarginRequest {
+    /**
+     * `LDUSDT` only
+     * @type {string}
+     * @memberof AccountApiTransferLdusdtForPortfolioMargin
+     */
+    readonly asset: string;
+
+    /**
+     * `EARN_TO_FUTURE` /`FUTURE_TO_EARN`
+     * @type {string}
+     * @memberof AccountApiTransferLdusdtForPortfolioMargin
+     */
+    readonly transferType: string;
+
+    /**
+     *
+     * @type {number}
+     * @memberof AccountApiTransferLdusdtForPortfolioMargin
+     */
+    readonly amount: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof AccountApiTransferLdusdtForPortfolioMargin
      */
     readonly recvWindow?: number;
 }
@@ -1463,6 +1658,37 @@ export class AccountApi implements AccountApiInterface {
     }
 
     /**
+     * Get transferable earn asset balance for all types of Portfolio Margin account
+     *
+     * Weight: 1500
+     *
+     * @summary Get Transferable Earn Asset Balance for Portfolio Margin (USER_DATA)
+     * @param {GetTransferableEarnAssetBalanceForPortfolioMarginRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetTransferableEarnAssetBalanceForPortfolioMarginResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApi
+     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Get-Transferable-Earn-Asset-Balance-for-Portfolio-Margin Binance API Documentation}
+     */
+    public async getTransferableEarnAssetBalanceForPortfolioMargin(
+        requestParameters: GetTransferableEarnAssetBalanceForPortfolioMarginRequest
+    ): Promise<RestApiResponse<GetTransferableEarnAssetBalanceForPortfolioMarginResponse>> {
+        const localVarAxiosArgs =
+            await this.localVarAxiosParamCreator.getTransferableEarnAssetBalanceForPortfolioMargin(
+                requestParameters?.asset,
+                requestParameters?.transferType,
+                requestParameters?.recvWindow
+            );
+        return sendRequest<GetTransferableEarnAssetBalanceForPortfolioMarginResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
      * Mint BFUSD for all types of Portfolio Margin account
      *
      * Weight: 1500
@@ -1677,6 +1903,38 @@ export class AccountApi implements AccountApiInterface {
             requestParameters?.recvWindow
         );
         return sendRequest<RepayFuturesNegativeBalanceResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Transfer LDUSDT as collateral for all types of Portfolio Margin account
+     *
+     * Weight: 1500
+     *
+     * @summary Transfer LDUSDT for Portfolio Margin(TRADE)
+     * @param {TransferLdusdtForPortfolioMarginRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<TransferLdusdtForPortfolioMarginResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApi
+     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Transfer-LDUSDT-for-Portfolio-Margin Binance API Documentation}
+     */
+    public async transferLdusdtForPortfolioMargin(
+        requestParameters: TransferLdusdtForPortfolioMarginRequest
+    ): Promise<RestApiResponse<TransferLdusdtForPortfolioMarginResponse>> {
+        const localVarAxiosArgs =
+            await this.localVarAxiosParamCreator.transferLdusdtForPortfolioMargin(
+                requestParameters?.asset,
+                requestParameters?.transferType,
+                requestParameters?.amount,
+                requestParameters?.recvWindow
+            );
+        return sendRequest<TransferLdusdtForPortfolioMarginResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

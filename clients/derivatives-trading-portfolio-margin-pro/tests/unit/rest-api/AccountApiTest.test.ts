@@ -24,6 +24,7 @@ import {
     GetPortfolioMarginProAccountBalanceRequest,
     GetPortfolioMarginProAccountInfoRequest,
     GetPortfolioMarginProSpanAccountInfoRequest,
+    GetTransferableEarnAssetBalanceForPortfolioMarginRequest,
     MintBfusdForPortfolioMarginRequest,
     PortfolioMarginProBankruptcyLoanRepayRequest,
     QueryPortfolioMarginProBankruptcyLoanAmountRequest,
@@ -31,6 +32,7 @@ import {
     QueryPortfolioMarginProNegativeBalanceInterestHistoryRequest,
     RedeemBfusdForPortfolioMarginRequest,
     RepayFuturesNegativeBalanceRequest,
+    TransferLdusdtForPortfolioMarginRequest,
 } from '../../../src/rest-api';
 import type {
     BnbTransferResponse,
@@ -41,6 +43,7 @@ import type {
     GetPortfolioMarginProAccountBalanceResponse,
     GetPortfolioMarginProAccountInfoResponse,
     GetPortfolioMarginProSpanAccountInfoResponse,
+    GetTransferableEarnAssetBalanceForPortfolioMarginResponse,
     MintBfusdForPortfolioMarginResponse,
     PortfolioMarginProBankruptcyLoanRepayResponse,
     QueryPortfolioMarginProBankruptcyLoanAmountResponse,
@@ -48,6 +51,7 @@ import type {
     QueryPortfolioMarginProNegativeBalanceInterestHistoryResponse,
     RedeemBfusdForPortfolioMarginResponse,
     RepayFuturesNegativeBalanceResponse,
+    TransferLdusdtForPortfolioMarginResponse,
 } from '../../../src/rest-api/types';
 
 describe('AccountApi', () => {
@@ -679,6 +683,111 @@ describe('AccountApi', () => {
         });
     });
 
+    describe('getTransferableEarnAssetBalanceForPortfolioMargin()', () => {
+        it('should execute getTransferableEarnAssetBalanceForPortfolioMargin() successfully with required parameters only', async () => {
+            const params: GetTransferableEarnAssetBalanceForPortfolioMarginRequest = {
+                asset: 'asset_example',
+                transferType: 'transferType_example',
+            };
+
+            mockResponse = { asset: 'LDUSDT', amount: '0.55' };
+
+            const spy = jest
+                .spyOn(client, 'getTransferableEarnAssetBalanceForPortfolioMargin')
+                .mockReturnValue(
+                    Promise.resolve({
+                        data: () => Promise.resolve(mockResponse),
+                        status: 200,
+                        headers: {},
+                        rateLimits: [],
+                    } as RestApiResponse<GetTransferableEarnAssetBalanceForPortfolioMarginResponse>)
+                );
+            const response = await client.getTransferableEarnAssetBalanceForPortfolioMargin(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute getTransferableEarnAssetBalanceForPortfolioMargin() successfully with optional parameters', async () => {
+            const params: GetTransferableEarnAssetBalanceForPortfolioMarginRequest = {
+                asset: 'asset_example',
+                transferType: 'transferType_example',
+                recvWindow: 5000,
+            };
+
+            mockResponse = { asset: 'LDUSDT', amount: '0.55' };
+
+            const spy = jest
+                .spyOn(client, 'getTransferableEarnAssetBalanceForPortfolioMargin')
+                .mockReturnValue(
+                    Promise.resolve({
+                        data: () => Promise.resolve(mockResponse),
+                        status: 200,
+                        headers: {},
+                        rateLimits: [],
+                    } as RestApiResponse<GetTransferableEarnAssetBalanceForPortfolioMarginResponse>)
+                );
+            const response = await client.getTransferableEarnAssetBalanceForPortfolioMargin(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when asset is missing', async () => {
+            const _params: GetTransferableEarnAssetBalanceForPortfolioMarginRequest = {
+                asset: 'asset_example',
+                transferType: 'transferType_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.asset;
+
+            await expect(
+                client.getTransferableEarnAssetBalanceForPortfolioMargin(params)
+            ).rejects.toThrow(
+                'Required parameter asset was null or undefined when calling getTransferableEarnAssetBalanceForPortfolioMargin.'
+            );
+        });
+
+        it('should throw RequiredError when transferType is missing', async () => {
+            const _params: GetTransferableEarnAssetBalanceForPortfolioMarginRequest = {
+                asset: 'asset_example',
+                transferType: 'transferType_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.transferType;
+
+            await expect(
+                client.getTransferableEarnAssetBalanceForPortfolioMargin(params)
+            ).rejects.toThrow(
+                'Required parameter transferType was null or undefined when calling getTransferableEarnAssetBalanceForPortfolioMargin.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: GetTransferableEarnAssetBalanceForPortfolioMarginRequest = {
+                asset: 'asset_example',
+                transferType: 'transferType_example',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'getTransferableEarnAssetBalanceForPortfolioMargin')
+                .mockRejectedValueOnce(mockError);
+            await expect(
+                client.getTransferableEarnAssetBalanceForPortfolioMargin(params)
+            ).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
     describe('mintBfusdForPortfolioMargin()', () => {
         it('should execute mintBfusdForPortfolioMargin() successfully with required parameters only', async () => {
             const params: MintBfusdForPortfolioMarginRequest = {
@@ -1275,6 +1384,122 @@ describe('AccountApi', () => {
                 .spyOn(client, 'repayFuturesNegativeBalance')
                 .mockRejectedValueOnce(mockError);
             await expect(client.repayFuturesNegativeBalance()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('transferLdusdtForPortfolioMargin()', () => {
+        it('should execute transferLdusdtForPortfolioMargin() successfully with required parameters only', async () => {
+            const params: TransferLdusdtForPortfolioMarginRequest = {
+                asset: 'asset_example',
+                transferType: 'transferType_example',
+                amount: 1,
+            };
+
+            mockResponse = { msg: 'success' };
+
+            const spy = jest.spyOn(client, 'transferLdusdtForPortfolioMargin').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<TransferLdusdtForPortfolioMarginResponse>)
+            );
+            const response = await client.transferLdusdtForPortfolioMargin(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute transferLdusdtForPortfolioMargin() successfully with optional parameters', async () => {
+            const params: TransferLdusdtForPortfolioMarginRequest = {
+                asset: 'asset_example',
+                transferType: 'transferType_example',
+                amount: 1,
+                recvWindow: 5000,
+            };
+
+            mockResponse = { msg: 'success' };
+
+            const spy = jest.spyOn(client, 'transferLdusdtForPortfolioMargin').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<TransferLdusdtForPortfolioMarginResponse>)
+            );
+            const response = await client.transferLdusdtForPortfolioMargin(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when asset is missing', async () => {
+            const _params: TransferLdusdtForPortfolioMarginRequest = {
+                asset: 'asset_example',
+                transferType: 'transferType_example',
+                amount: 1,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.asset;
+
+            await expect(client.transferLdusdtForPortfolioMargin(params)).rejects.toThrow(
+                'Required parameter asset was null or undefined when calling transferLdusdtForPortfolioMargin.'
+            );
+        });
+
+        it('should throw RequiredError when transferType is missing', async () => {
+            const _params: TransferLdusdtForPortfolioMarginRequest = {
+                asset: 'asset_example',
+                transferType: 'transferType_example',
+                amount: 1,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.transferType;
+
+            await expect(client.transferLdusdtForPortfolioMargin(params)).rejects.toThrow(
+                'Required parameter transferType was null or undefined when calling transferLdusdtForPortfolioMargin.'
+            );
+        });
+
+        it('should throw RequiredError when amount is missing', async () => {
+            const _params: TransferLdusdtForPortfolioMarginRequest = {
+                asset: 'asset_example',
+                transferType: 'transferType_example',
+                amount: 1,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.amount;
+
+            await expect(client.transferLdusdtForPortfolioMargin(params)).rejects.toThrow(
+                'Required parameter amount was null or undefined when calling transferLdusdtForPortfolioMargin.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: TransferLdusdtForPortfolioMarginRequest = {
+                asset: 'asset_example',
+                transferType: 'transferType_example',
+                amount: 1,
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'transferLdusdtForPortfolioMargin')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.transferLdusdtForPortfolioMargin(params)).rejects.toThrow(
+                'ResponseError'
+            );
             spy.mockRestore();
         });
     });

@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.0.0 - 2025-04-15
+
+### Added
+
+- `GET /sapi/v1/portfolio/earn-asset-balance`
+- `POST /sapi/v1/portfolio/earn-asset-balance`
+
 ## 2.0.0 - 2025-04-10
 
 ### Changed
