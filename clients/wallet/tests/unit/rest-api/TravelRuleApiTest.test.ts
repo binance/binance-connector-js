@@ -52,7 +52,6 @@ describe('TravelRuleApi', () => {
     describe('brokerWithdraw()', () => {
         it('should execute brokerWithdraw() successfully with required parameters only', async () => {
             const params: BrokerWithdrawRequest = {
-                subAccountId: '1',
                 address: 'address_example',
                 coin: 'coin_example',
                 amount: 1,
@@ -80,7 +79,6 @@ describe('TravelRuleApi', () => {
 
         it('should execute brokerWithdraw() successfully with optional parameters', async () => {
             const params: BrokerWithdrawRequest = {
-                subAccountId: '1',
                 address: 'address_example',
                 coin: 'coin_example',
                 amount: 1,
@@ -111,28 +109,8 @@ describe('TravelRuleApi', () => {
             spy.mockRestore();
         });
 
-        it('should throw RequiredError when subAccountId is missing', async () => {
-            const _params: BrokerWithdrawRequest = {
-                subAccountId: '1',
-                address: 'address_example',
-                coin: 'coin_example',
-                amount: 1,
-                withdrawOrderId: '1',
-                questionnaire: 'questionnaire_example',
-                originatorPii: 'originatorPii_example',
-                signature: 'signature_example',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.subAccountId;
-
-            await expect(client.brokerWithdraw(params)).rejects.toThrow(
-                'Required parameter subAccountId was null or undefined when calling brokerWithdraw.'
-            );
-        });
-
         it('should throw RequiredError when address is missing', async () => {
             const _params: BrokerWithdrawRequest = {
-                subAccountId: '1',
                 address: 'address_example',
                 coin: 'coin_example',
                 amount: 1,
@@ -151,7 +129,6 @@ describe('TravelRuleApi', () => {
 
         it('should throw RequiredError when coin is missing', async () => {
             const _params: BrokerWithdrawRequest = {
-                subAccountId: '1',
                 address: 'address_example',
                 coin: 'coin_example',
                 amount: 1,
@@ -170,7 +147,6 @@ describe('TravelRuleApi', () => {
 
         it('should throw RequiredError when amount is missing', async () => {
             const _params: BrokerWithdrawRequest = {
-                subAccountId: '1',
                 address: 'address_example',
                 coin: 'coin_example',
                 amount: 1,
@@ -189,7 +165,6 @@ describe('TravelRuleApi', () => {
 
         it('should throw RequiredError when withdrawOrderId is missing', async () => {
             const _params: BrokerWithdrawRequest = {
-                subAccountId: '1',
                 address: 'address_example',
                 coin: 'coin_example',
                 amount: 1,
@@ -208,7 +183,6 @@ describe('TravelRuleApi', () => {
 
         it('should throw RequiredError when questionnaire is missing', async () => {
             const _params: BrokerWithdrawRequest = {
-                subAccountId: '1',
                 address: 'address_example',
                 coin: 'coin_example',
                 amount: 1,
@@ -227,7 +201,6 @@ describe('TravelRuleApi', () => {
 
         it('should throw RequiredError when originatorPii is missing', async () => {
             const _params: BrokerWithdrawRequest = {
-                subAccountId: '1',
                 address: 'address_example',
                 coin: 'coin_example',
                 amount: 1,
@@ -246,7 +219,6 @@ describe('TravelRuleApi', () => {
 
         it('should throw RequiredError when signature is missing', async () => {
             const _params: BrokerWithdrawRequest = {
-                subAccountId: '1',
                 address: 'address_example',
                 coin: 'coin_example',
                 amount: 1,
@@ -265,7 +237,6 @@ describe('TravelRuleApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: BrokerWithdrawRequest = {
-                subAccountId: '1',
                 address: 'address_example',
                 coin: 'coin_example',
                 amount: 1,

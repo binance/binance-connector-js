@@ -10,7 +10,6 @@ const client = new Wallet({ configurationRestAPI });
 async function brokerWithdraw() {
     try {
         const response = await client.restAPI.brokerWithdraw({
-            subAccountId: '1',
             address: 'address_example',
             coin: 'coin_example',
             amount: 1,

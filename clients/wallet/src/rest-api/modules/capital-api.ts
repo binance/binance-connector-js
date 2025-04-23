@@ -25,6 +25,7 @@ import type {
     DepositHistoryResponse,
     FetchDepositAddressListWithNetworkResponse,
     FetchWithdrawAddressListResponse,
+    FetchWithdrawQuotaResponse,
     OneClickArrivalDepositApplyResponse,
     WithdrawHistoryResponse,
     WithdrawResponse,
@@ -256,6 +257,28 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
 
             return {
                 endpoint: '/sapi/v1/capital/withdraw/address/list',
+                method: 'GET',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Fetch withdraw quota
+         *
+         * Weight: 10
+         *
+         * @summary Fetch withdraw quota (USER_DATA)
+         *
+         * @throws {RequiredError}
+         */
+        fetchWithdrawQuota: async (): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/capital/withdraw/quota',
                 method: 'GET',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
@@ -576,6 +599,17 @@ export interface CapitalApiInterface {
      * @memberof CapitalApiInterface
      */
     fetchWithdrawAddressList(): Promise<RestApiResponse<FetchWithdrawAddressListResponse>>;
+    /**
+     * Fetch withdraw quota
+     *
+     * Weight: 10
+     *
+     * @summary Fetch withdraw quota (USER_DATA)
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof CapitalApiInterface
+     */
+    fetchWithdrawQuota(): Promise<RestApiResponse<FetchWithdrawQuotaResponse>>;
     /**
      * Apply deposit credit for expired address (One click arrival)
      *
@@ -1113,6 +1147,29 @@ export class CapitalApi implements CapitalApiInterface {
         > {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.fetchWithdrawAddressList();
         return sendRequest<FetchWithdrawAddressListResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Fetch withdraw quota
+     *
+     * Weight: 10
+     *
+     * @summary Fetch withdraw quota (USER_DATA)
+     * @returns {Promise<RestApiResponse<FetchWithdrawQuotaResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof CapitalApi
+     * @see {@link https://developers.binance.com/docs/wallet/capital/Fetch-withdraw-quota Binance API Documentation}
+     */
+    public async fetchWithdrawQuota(): Promise<RestApiResponse<FetchWithdrawQuotaResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.fetchWithdrawQuota();
+        return sendRequest<FetchWithdrawQuotaResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

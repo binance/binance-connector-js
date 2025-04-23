@@ -93,6 +93,7 @@ import type {
     DepositHistoryResponse,
     FetchDepositAddressListWithNetworkResponse,
     FetchWithdrawAddressListResponse,
+    FetchWithdrawQuotaResponse,
     OneClickArrivalDepositApplyResponse,
     WithdrawResponse,
     WithdrawHistoryResponse,
@@ -693,6 +694,20 @@ export class RestAPI {
      */
     fetchWithdrawAddressList(): Promise<RestApiResponse<FetchWithdrawAddressListResponse>> {
         return this.capitalApi.fetchWithdrawAddressList();
+    }
+
+    /**
+     * Fetch withdraw quota
+     *
+     * Weight: 10
+     *
+     * @summary Fetch withdraw quota (USER_DATA)
+     * @returns {Promise<RestApiResponse<FetchWithdrawQuotaResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/wallet/capital/Fetch-withdraw-quota Binance API Documentation}
+     */
+    fetchWithdrawQuota(): Promise<RestApiResponse<FetchWithdrawQuotaResponse>> {
+        return this.capitalApi.fetchWithdrawQuota();
     }
 
     /**

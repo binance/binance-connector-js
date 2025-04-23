@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.0.0 - 2025-04-23
+
+### Added
+
+- `GET /sapi/v1/capital/withdraw/quota`.
+
+### Removed
+
+- Removed `subAccountIdRequired` parameter from `POST /sapi/v1/localentity/broker/withdraw/apply`.
+
 ## 3.0.0 - 2025-04-10
 
 ### Changed

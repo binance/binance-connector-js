@@ -41,6 +41,7 @@ export * from './fetch-deposit-address-list-with-network-response';
 export * from './fetch-deposit-address-list-with-network-response-inner';
 export * from './fetch-withdraw-address-list-response';
 export * from './fetch-withdraw-address-list-response-inner';
+export * from './fetch-withdraw-quota-response';
 export * from './funding-wallet-response';
 export * from './funding-wallet-response-inner';
 export * from './get-api-key-permission-response';

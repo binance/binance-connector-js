@@ -30,6 +30,7 @@ import type {
     DepositHistoryResponse,
     FetchDepositAddressListWithNetworkResponse,
     FetchWithdrawAddressListResponse,
+    FetchWithdrawQuotaResponse,
     OneClickArrivalDepositApplyResponse,
     WithdrawHistoryResponse,
     WithdrawResponse,
@@ -770,6 +771,40 @@ describe('CapitalApi', () => {
                 .spyOn(client, 'fetchWithdrawAddressList')
                 .mockRejectedValueOnce(mockError);
             await expect(client.fetchWithdrawAddressList()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('fetchWithdrawQuota()', () => {
+        it('should execute fetchWithdrawQuota() successfully with required parameters only', async () => {
+            mockResponse = { wdQuota: '10000', usedWdQuota: '1000' };
+
+            const spy = jest.spyOn(client, 'fetchWithdrawQuota').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<FetchWithdrawQuotaResponse>)
+            );
+            const response = await client.fetchWithdrawQuota();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'fetchWithdrawQuota').mockRejectedValueOnce(mockError);
+            await expect(client.fetchWithdrawQuota()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

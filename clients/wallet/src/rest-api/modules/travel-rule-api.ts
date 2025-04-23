@@ -46,7 +46,6 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 600
          *
          * @summary Broker Withdraw (for brokers of local entities that require travel rule) (USER_DATA)
-         * @param {string} subAccountId External user ID.
          * @param {string} address
          * @param {string} coin
          * @param {number} amount
@@ -63,7 +62,6 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @throws {RequiredError}
          */
         brokerWithdraw: async (
-            subAccountId: string,
             address: string,
             coin: string,
             amount: number,
@@ -77,8 +75,6 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             transactionFeeFlag?: boolean,
             walletType?: number
         ): Promise<RequestArgs> => {
-            // verify required parameter 'subAccountId' is not null or undefined
-            assertParamExists('brokerWithdraw', 'subAccountId', subAccountId);
             // verify required parameter 'address' is not null or undefined
             assertParamExists('brokerWithdraw', 'address', address);
             // verify required parameter 'coin' is not null or undefined
@@ -95,10 +91,6 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             assertParamExists('brokerWithdraw', 'signature', signature);
 
             const localVarQueryParameter: Record<string, unknown> = {};
-
-            if (subAccountId !== undefined && subAccountId !== null) {
-                localVarQueryParameter['subAccountId'] = subAccountId;
-            }
 
             if (address !== undefined && address !== null) {
                 localVarQueryParameter['address'] = address;
@@ -909,13 +901,6 @@ export interface TravelRuleApiInterface {
  */
 export interface BrokerWithdrawRequest {
     /**
-     * External user ID.
-     * @type {string}
-     * @memberof TravelRuleApiBrokerWithdraw
-     */
-    readonly subAccountId: string;
-
-    /**
      *
      * @type {string}
      * @memberof TravelRuleApiBrokerWithdraw
@@ -1462,7 +1447,6 @@ export class TravelRuleApi implements TravelRuleApiInterface {
         requestParameters: BrokerWithdrawRequest
     ): Promise<RestApiResponse<BrokerWithdrawResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.brokerWithdraw(
-            requestParameters?.subAccountId,
             requestParameters?.address,
             requestParameters?.coin,
             requestParameters?.amount,
