@@ -57,7 +57,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * Weight: 1
          *
-         * @summary Futures Transfer for Sub-account(For Master Account)
+         * @summary Futures Transfer for Sub-account (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {string} asset
          * @param {number} amount
@@ -119,7 +119,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * Weight: 10
          *
-         * @summary Get Detail on Sub-account\'s Futures Account(For Master Account)
+         * @summary Get Detail on Sub-account\'s Futures Account (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {number} [recvWindow]
          *
@@ -157,7 +157,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * Weight: 1
          *
-         * @summary Get Detail on Sub-account\'s Futures Account V2(For Master Account)
+         * @summary Get Detail on Sub-account\'s Futures Account V2 (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {number} futuresType 1:USDT-margined Futures，2: Coin-margined Futures
          * @param {number} [recvWindow]
@@ -203,7 +203,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * Weight: 10
          *
-         * @summary Get Detail on Sub-account\'s Margin Account(For Master Account)
+         * @summary Get Detail on Sub-account\'s Margin Account (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {number} [recvWindow]
          *
@@ -245,7 +245,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * Weight: 150
          *
-         * @summary Get Move Position History for Sub-account (For Master Account)
+         * @summary Get Move Position History for Sub-account (For Master Account) (USER_DATA)
          * @param {string} symbol
          * @param {number} page Page
          * @param {number} row
@@ -313,7 +313,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * Weight: 1
          *
-         * @summary Get Sub-account Deposit Address(For Master Account)
+         * @summary Get Sub-account Deposit Address (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {string} coin
          * @param {string} [network] networks can be found in `GET /sapi/v1/capital/deposit/address`
@@ -371,7 +371,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * Weight: 1
          *
-         * @summary Get Sub-account Deposit History(For Master Account)
+         * @summary Get Sub-account Deposit History (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {string} [coin]
          * @param {number} [status] 0(0:pending,6: credited but cannot withdraw,7:Wrong Deposit,8:Waiting User confirm,1:success)
@@ -451,7 +451,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * Weight: 1
          *
-         * @summary Get Summary of Sub-account\'s Futures Account(For Master Account)
+         * @summary Get Summary of Sub-account\'s Futures Account (For Master Account) (USER_DATA)
          * @param {number} [recvWindow]
          *
          * @throws {RequiredError}
@@ -480,7 +480,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * Weight: 10
          *
-         * @summary Get Summary of Sub-account\'s Futures Account V2(For Master Account)
+         * @summary Get Summary of Sub-account\'s Futures Account V2 (For Master Account) (USER_DATA)
          * @param {number} futuresType 1:USDT-margined Futures，2: Coin-margined Futures
          * @param {number} [page] Default value: 1
          * @param {number} [limit] Default value: 1, Max value: 200
@@ -534,7 +534,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * Weight: 10
          *
-         * @summary Get Summary of Sub-account\'s Margin Account(For Master Account)
+         * @summary Get Summary of Sub-account\'s Margin Account (For Master Account) (USER_DATA)
          * @param {number} [recvWindow]
          *
          * @throws {RequiredError}
@@ -563,7 +563,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * Weight: 1
          *
-         * @summary Margin Transfer for Sub-account(For Master Account)
+         * @summary Margin Transfer for Sub-account (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {string} asset
          * @param {number} amount
@@ -637,7 +637,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * Weight: 150
          *
-         * @summary Move Position for Sub-account (For Master Account)
+         * @summary Move Position for Sub-account (For Master Account) (USER_DATA)
          * @param {string} fromUserEmail
          * @param {string} toUserEmail
          * @param {string} productType Only support UM
@@ -699,7 +699,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * Weight: 60
          *
-         * @summary Query Sub-account Assets(For Master Account)
+         * @summary Query Sub-account Assets (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {number} [recvWindow]
          *
@@ -734,7 +734,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * Weight: 60
          *
-         * @summary Query Sub-account Assets (For Master Account)(USER_DATA)
+         * @summary Query Sub-account Assets (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {number} [recvWindow]
          *
@@ -772,7 +772,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * Weight: 1
          *
-         * @summary Query Sub-account Futures Asset Transfer History(For Master Account)
+         * @summary Query Sub-account Futures Asset Transfer History (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {number} futuresType 1:USDT-margined Futures，2: Coin-margined Futures
          * @param {number} [startTime]
@@ -849,7 +849,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * Weight: 1
          *
-         * @summary Query Sub-account Spot Asset Transfer History(For Master Account)
+         * @summary Query Sub-account Spot Asset Transfer History (For Master Account) (USER_DATA)
          * @param {string} [fromEmail]
          * @param {string} [toEmail]
          * @param {number} [startTime]
@@ -914,7 +914,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * Weight: 1
          *
-         * @summary Query Sub-account Spot Assets Summary(For Master Account)
+         * @summary Query Sub-account Spot Assets Summary (For Master Account) (USER_DATA)
          * @param {string} [email] Managed sub-account email
          * @param {number} [page] Default value: 1
          * @param {number} [size] default 10, max 20
@@ -966,7 +966,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * Weight: 1
          *
-         * @summary Query Universal Transfer History(For Master Account)
+         * @summary Query Universal Transfer History (For Master Account) (USER_DATA)
          * @param {string} [fromEmail]
          * @param {string} [toEmail]
          * @param {string} [clientTranId]
@@ -1041,7 +1041,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * Weight: 1
          *
-         * @summary Sub-account Futures Asset Transfer(For Master Account)
+         * @summary Sub-account Futures Asset Transfer (For Master Account) (USER_DATA)
          * @param {string} fromEmail
          * @param {string} toEmail
          * @param {number} futuresType 1:USDT-margined Futures，2: Coin-margined Futures
@@ -1114,7 +1114,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * Weight: 1
          *
-         * @summary Sub-account Transfer History(For Sub-account)
+         * @summary Sub-account Transfer History (For Sub-account) (USER_DATA)
          * @param {string} [asset] If not sent, result of all assets will be returned
          * @param {number} [type] 1: transfer in, 2: transfer out
          * @param {number} [startTime]
@@ -1181,7 +1181,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * Weight: 1
          *
-         * @summary Transfer to Master(For Sub-account)
+         * @summary Transfer to Master (For Sub-account) (USER_DATA)
          * @param {string} asset
          * @param {number} amount
          * @param {number} [recvWindow]
@@ -1229,7 +1229,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * Weight: 1
          *
-         * @summary Transfer to Sub-account of Same Master(For Sub-account)
+         * @summary Transfer to Sub-account of Same Master (For Sub-account) (USER_DATA)
          * @param {string} toEmail
          * @param {string} asset
          * @param {number} amount
@@ -1294,7 +1294,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * Weight: 360
          *
-         * @summary Universal Transfer(For Master Account)
+         * @summary Universal Transfer (For Master Account) (USER_DATA)
          * @param {string} fromAccountType "SPOT","USDT_FUTURE","COIN_FUTURE","MARGIN"(Cross),"ISOLATED_MARGIN"
          * @param {string} toAccountType "SPOT","USDT_FUTURE","COIN_FUTURE","MARGIN"(Cross),"ISOLATED_MARGIN"
          * @param {string} asset
@@ -1390,7 +1390,7 @@ export interface AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Futures Transfer for Sub-account(For Master Account)
+     * @summary Futures Transfer for Sub-account (For Master Account) (USER_DATA)
      * @param {FuturesTransferForSubAccountRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1404,7 +1404,7 @@ export interface AssetManagementApiInterface {
      *
      * Weight: 10
      *
-     * @summary Get Detail on Sub-account\'s Futures Account(For Master Account)
+     * @summary Get Detail on Sub-account\'s Futures Account (For Master Account) (USER_DATA)
      * @param {GetDetailOnSubAccountsFuturesAccountRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1418,7 +1418,7 @@ export interface AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Get Detail on Sub-account\'s Futures Account V2(For Master Account)
+     * @summary Get Detail on Sub-account\'s Futures Account V2 (For Master Account) (USER_DATA)
      * @param {GetDetailOnSubAccountsFuturesAccountV2Request} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1432,7 +1432,7 @@ export interface AssetManagementApiInterface {
      *
      * Weight: 10
      *
-     * @summary Get Detail on Sub-account\'s Margin Account(For Master Account)
+     * @summary Get Detail on Sub-account\'s Margin Account (For Master Account) (USER_DATA)
      * @param {GetDetailOnSubAccountsMarginAccountRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1450,7 +1450,7 @@ export interface AssetManagementApiInterface {
      *
      * Weight: 150
      *
-     * @summary Get Move Position History for Sub-account (For Master Account)
+     * @summary Get Move Position History for Sub-account (For Master Account) (USER_DATA)
      * @param {GetMovePositionHistoryForSubAccountRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1466,7 +1466,7 @@ export interface AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Get Sub-account Deposit Address(For Master Account)
+     * @summary Get Sub-account Deposit Address (For Master Account) (USER_DATA)
      * @param {GetSubAccountDepositAddressRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1480,7 +1480,7 @@ export interface AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Get Sub-account Deposit History(For Master Account)
+     * @summary Get Sub-account Deposit History (For Master Account) (USER_DATA)
      * @param {GetSubAccountDepositHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1494,7 +1494,7 @@ export interface AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Get Summary of Sub-account\'s Futures Account(For Master Account)
+     * @summary Get Summary of Sub-account\'s Futures Account (For Master Account) (USER_DATA)
      * @param {GetSummaryOfSubAccountsFuturesAccountRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1508,7 +1508,7 @@ export interface AssetManagementApiInterface {
      *
      * Weight: 10
      *
-     * @summary Get Summary of Sub-account\'s Futures Account V2(For Master Account)
+     * @summary Get Summary of Sub-account\'s Futures Account V2 (For Master Account) (USER_DATA)
      * @param {GetSummaryOfSubAccountsFuturesAccountV2Request} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1522,7 +1522,7 @@ export interface AssetManagementApiInterface {
      *
      * Weight: 10
      *
-     * @summary Get Summary of Sub-account\'s Margin Account(For Master Account)
+     * @summary Get Summary of Sub-account\'s Margin Account (For Master Account) (USER_DATA)
      * @param {GetSummaryOfSubAccountsMarginAccountRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1538,7 +1538,7 @@ export interface AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Margin Transfer for Sub-account(For Master Account)
+     * @summary Margin Transfer for Sub-account (For Master Account) (USER_DATA)
      * @param {MarginTransferForSubAccountRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1564,7 +1564,7 @@ export interface AssetManagementApiInterface {
      *
      * Weight: 150
      *
-     * @summary Move Position for Sub-account (For Master Account)
+     * @summary Move Position for Sub-account (For Master Account) (USER_DATA)
      * @param {MovePositionForSubAccountRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1578,7 +1578,7 @@ export interface AssetManagementApiInterface {
      *
      * Weight: 60
      *
-     * @summary Query Sub-account Assets(For Master Account)
+     * @summary Query Sub-account Assets (For Master Account) (USER_DATA)
      * @param {QuerySubAccountAssetsRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1592,7 +1592,7 @@ export interface AssetManagementApiInterface {
      *
      * Weight: 60
      *
-     * @summary Query Sub-account Assets (For Master Account)(USER_DATA)
+     * @summary Query Sub-account Assets (For Master Account) (USER_DATA)
      * @param {QuerySubAccountAssetsAssetManagementRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1606,7 +1606,7 @@ export interface AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Query Sub-account Futures Asset Transfer History(For Master Account)
+     * @summary Query Sub-account Futures Asset Transfer History (For Master Account) (USER_DATA)
      * @param {QuerySubAccountFuturesAssetTransferHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1623,7 +1623,7 @@ export interface AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Query Sub-account Spot Asset Transfer History(For Master Account)
+     * @summary Query Sub-account Spot Asset Transfer History (For Master Account) (USER_DATA)
      * @param {QuerySubAccountSpotAssetTransferHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1637,7 +1637,7 @@ export interface AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Query Sub-account Spot Assets Summary(For Master Account)
+     * @summary Query Sub-account Spot Assets Summary (For Master Account) (USER_DATA)
      * @param {QuerySubAccountSpotAssetsSummaryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1656,7 +1656,7 @@ export interface AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Query Universal Transfer History(For Master Account)
+     * @summary Query Universal Transfer History (For Master Account) (USER_DATA)
      * @param {QueryUniversalTransferHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1674,7 +1674,7 @@ export interface AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Sub-account Futures Asset Transfer(For Master Account)
+     * @summary Sub-account Futures Asset Transfer (For Master Account) (USER_DATA)
      * @param {SubAccountFuturesAssetTransferRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1691,7 +1691,7 @@ export interface AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Sub-account Transfer History(For Sub-account)
+     * @summary Sub-account Transfer History (For Sub-account) (USER_DATA)
      * @param {SubAccountTransferHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1707,7 +1707,7 @@ export interface AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Transfer to Master(For Sub-account)
+     * @summary Transfer to Master (For Sub-account) (USER_DATA)
      * @param {TransferToMasterRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1723,7 +1723,7 @@ export interface AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Transfer to Sub-account of Same Master(For Sub-account)
+     * @summary Transfer to Sub-account of Same Master (For Sub-account) (USER_DATA)
      * @param {TransferToSubAccountOfSameMasterRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1748,7 +1748,7 @@ export interface AssetManagementApiInterface {
      *
      * Weight: 360
      *
-     * @summary Universal Transfer(For Master Account)
+     * @summary Universal Transfer (For Master Account) (USER_DATA)
      * @param {UniversalTransferRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2666,7 +2666,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Futures Transfer for Sub-account(For Master Account)
+     * @summary Futures Transfer for Sub-account (For Master Account) (USER_DATA)
      * @param {FuturesTransferForSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<FuturesTransferForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2698,7 +2698,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      *
      * Weight: 10
      *
-     * @summary Get Detail on Sub-account\'s Futures Account(For Master Account)
+     * @summary Get Detail on Sub-account\'s Futures Account (For Master Account) (USER_DATA)
      * @param {GetDetailOnSubAccountsFuturesAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetDetailOnSubAccountsFuturesAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2728,7 +2728,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Get Detail on Sub-account\'s Futures Account V2(For Master Account)
+     * @summary Get Detail on Sub-account\'s Futures Account V2 (For Master Account) (USER_DATA)
      * @param {GetDetailOnSubAccountsFuturesAccountV2Request} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetDetailOnSubAccountsFuturesAccountV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2759,7 +2759,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      *
      * Weight: 10
      *
-     * @summary Get Detail on Sub-account\'s Margin Account(For Master Account)
+     * @summary Get Detail on Sub-account\'s Margin Account (For Master Account) (USER_DATA)
      * @param {GetDetailOnSubAccountsMarginAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetDetailOnSubAccountsMarginAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2793,7 +2793,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      *
      * Weight: 150
      *
-     * @summary Get Move Position History for Sub-account (For Master Account)
+     * @summary Get Move Position History for Sub-account (For Master Account) (USER_DATA)
      * @param {GetMovePositionHistoryForSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetMovePositionHistoryForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2829,7 +2829,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Get Sub-account Deposit Address(For Master Account)
+     * @summary Get Sub-account Deposit Address (For Master Account) (USER_DATA)
      * @param {GetSubAccountDepositAddressRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSubAccountDepositAddressResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2861,7 +2861,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Get Sub-account Deposit History(For Master Account)
+     * @summary Get Sub-account Deposit History (For Master Account) (USER_DATA)
      * @param {GetSubAccountDepositHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSubAccountDepositHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2897,7 +2897,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Get Summary of Sub-account\'s Futures Account(For Master Account)
+     * @summary Get Summary of Sub-account\'s Futures Account (For Master Account) (USER_DATA)
      * @param {GetSummaryOfSubAccountsFuturesAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSummaryOfSubAccountsFuturesAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2926,7 +2926,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      *
      * Weight: 10
      *
-     * @summary Get Summary of Sub-account\'s Futures Account V2(For Master Account)
+     * @summary Get Summary of Sub-account\'s Futures Account V2 (For Master Account) (USER_DATA)
      * @param {GetSummaryOfSubAccountsFuturesAccountV2Request} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSummaryOfSubAccountsFuturesAccountV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2958,7 +2958,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      *
      * Weight: 10
      *
-     * @summary Get Summary of Sub-account\'s Margin Account(For Master Account)
+     * @summary Get Summary of Sub-account\'s Margin Account (For Master Account) (USER_DATA)
      * @param {GetSummaryOfSubAccountsMarginAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSummaryOfSubAccountsMarginAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -2989,7 +2989,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Margin Transfer for Sub-account(For Master Account)
+     * @summary Margin Transfer for Sub-account (For Master Account) (USER_DATA)
      * @param {MarginTransferForSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MarginTransferForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -3033,7 +3033,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      *
      * Weight: 150
      *
-     * @summary Move Position for Sub-account (For Master Account)
+     * @summary Move Position for Sub-account (For Master Account) (USER_DATA)
      * @param {MovePositionForSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MovePositionForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -3065,12 +3065,12 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      *
      * Weight: 60
      *
-     * @summary Query Sub-account Assets(For Master Account)
+     * @summary Query Sub-account Assets (For Master Account) (USER_DATA)
      * @param {QuerySubAccountAssetsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySubAccountAssetsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AssetManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Query-Sub-account-Assets-V3 Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Query-Sub-account-Assets-V4 Binance API Documentation}
      */
     public async querySubAccountAssets(
         requestParameters: QuerySubAccountAssetsRequest
@@ -3094,7 +3094,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      *
      * Weight: 60
      *
-     * @summary Query Sub-account Assets (For Master Account)(USER_DATA)
+     * @summary Query Sub-account Assets (For Master Account) (USER_DATA)
      * @param {QuerySubAccountAssetsAssetManagementRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySubAccountAssetsAssetManagementResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -3124,7 +3124,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Query Sub-account Futures Asset Transfer History(For Master Account)
+     * @summary Query Sub-account Futures Asset Transfer History (For Master Account) (USER_DATA)
      * @param {QuerySubAccountFuturesAssetTransferHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySubAccountFuturesAssetTransferHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -3162,7 +3162,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Query Sub-account Spot Asset Transfer History(For Master Account)
+     * @summary Query Sub-account Spot Asset Transfer History (For Master Account) (USER_DATA)
      * @param {QuerySubAccountSpotAssetTransferHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySubAccountSpotAssetTransferHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -3197,7 +3197,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Query Sub-account Spot Assets Summary(For Master Account)
+     * @summary Query Sub-account Spot Assets Summary (For Master Account) (USER_DATA)
      * @param {QuerySubAccountSpotAssetsSummaryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySubAccountSpotAssetsSummaryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -3234,7 +3234,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Query Universal Transfer History(For Master Account)
+     * @summary Query Universal Transfer History (For Master Account) (USER_DATA)
      * @param {QueryUniversalTransferHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryUniversalTransferHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -3274,7 +3274,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Sub-account Futures Asset Transfer(For Master Account)
+     * @summary Sub-account Futures Asset Transfer (For Master Account) (USER_DATA)
      * @param {SubAccountFuturesAssetTransferRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SubAccountFuturesAssetTransferResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -3311,7 +3311,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Sub-account Transfer History(For Sub-account)
+     * @summary Sub-account Transfer History (For Sub-account) (USER_DATA)
      * @param {SubAccountTransferHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SubAccountTransferHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -3336,7 +3336,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -3347,7 +3347,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Transfer to Master(For Sub-account)
+     * @summary Transfer to Master (For Sub-account) (USER_DATA)
      * @param {TransferToMasterRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<TransferToMasterResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -3368,7 +3368,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -3379,7 +3379,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Transfer to Sub-account of Same Master(For Sub-account)
+     * @summary Transfer to Sub-account of Same Master (For Sub-account) (USER_DATA)
      * @param {TransferToSubAccountOfSameMasterRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<TransferToSubAccountOfSameMasterResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -3402,7 +3402,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -3422,7 +3422,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      *
      * Weight: 360
      *
-     * @summary Universal Transfer(For Master Account)
+     * @summary Universal Transfer (For Master Account) (USER_DATA)
      * @param {UniversalTransferRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<UniversalTransferResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}

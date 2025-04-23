@@ -45,7 +45,7 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
          *
          * Weight: 1
          *
-         * @summary Create a Virtual Sub-account(For Master Account)
+         * @summary Create a Virtual Sub-account (For Master Account) (USER_DATA)
          * @param {string} subAccountString Please input a string. We will create a virtual email using that string for you to register
          * @param {number} [recvWindow]
          *
@@ -83,7 +83,7 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
          *
          * Weight: 1
          *
-         * @summary Enable Futures for Sub-account(For Master Account)
+         * @summary Enable Futures for Sub-account (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {number} [recvWindow]
          *
@@ -121,7 +121,7 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
          *
          * Weight: 1
          *
-         * @summary Enable Leverage Token for Sub-account(For Master Account)
+         * @summary Enable Leverage Token for Sub-account (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {boolean} enableBlvt Only true for now
          * @param {number} [recvWindow]
@@ -167,7 +167,7 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
          *
          * Weight: 1
          *
-         * @summary Enable Margin for Sub-account(For Master Account)
+         * @summary Enable Margin for Sub-account (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {number} [recvWindow]
          *
@@ -205,7 +205,7 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
          *
          * Weight: 1
          *
-         * @summary Enable Options for Sub-account(For Master Account)(USER_DATA)
+         * @summary Enable Options for Sub-account (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {number} [recvWindow]
          *
@@ -243,7 +243,7 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
          *
          * Weight: 10
          *
-         * @summary Get Futures Position-Risk of Sub-account(For Master Account)
+         * @summary Get Futures Position-Risk of Sub-account (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {number} [recvWindow]
          *
@@ -281,7 +281,7 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
          *
          * Weight: 1
          *
-         * @summary Get Futures Position-Risk of Sub-account V2(For Master Account)
+         * @summary Get Futures Position-Risk of Sub-account V2 (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {number} futuresType 1:USDT-margined Futures，2: Coin-margined Futures
          * @param {number} [recvWindow]
@@ -329,7 +329,7 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
          *
          * Weight: 10
          *
-         * @summary Get Sub-account\'s Status on Margin Or Futures(For Master Account)
+         * @summary Get Sub-account\'s Status on Margin Or Futures (For Master Account) (USER_DATA)
          * @param {string} [email] Managed sub-account email
          * @param {number} [recvWindow]
          *
@@ -364,7 +364,7 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
          *
          * Weight: 1
          *
-         * @summary Query Sub-account List(For Master Account)
+         * @summary Query Sub-account List (For Master Account) (USER_DATA)
          * @param {string} [email] Managed sub-account email
          * @param {string} [isFreeze] true or false
          * @param {number} [page] Default value: 1
@@ -417,7 +417,7 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
          *
          * Weight: 60
          *
-         * @summary Query Sub-account Transaction Statistics(For Master Account)(USER_DATA)
+         * @summary Query Sub-account Transaction Statistics (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {number} [recvWindow]
          *
@@ -466,7 +466,7 @@ export interface AccountManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Create a Virtual Sub-account(For Master Account)
+     * @summary Create a Virtual Sub-account (For Master Account) (USER_DATA)
      * @param {CreateAVirtualSubAccountRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -480,7 +480,7 @@ export interface AccountManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Enable Futures for Sub-account(For Master Account)
+     * @summary Enable Futures for Sub-account (For Master Account) (USER_DATA)
      * @param {EnableFuturesForSubAccountRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -494,7 +494,7 @@ export interface AccountManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Enable Leverage Token for Sub-account(For Master Account)
+     * @summary Enable Leverage Token for Sub-account (For Master Account) (USER_DATA)
      * @param {EnableLeverageTokenForSubAccountRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -508,7 +508,7 @@ export interface AccountManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Enable Margin for Sub-account(For Master Account)
+     * @summary Enable Margin for Sub-account (For Master Account) (USER_DATA)
      * @param {EnableMarginForSubAccountRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -522,7 +522,7 @@ export interface AccountManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Enable Options for Sub-account(For Master Account)(USER_DATA)
+     * @summary Enable Options for Sub-account (For Master Account) (USER_DATA)
      * @param {EnableOptionsForSubAccountRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -536,7 +536,7 @@ export interface AccountManagementApiInterface {
      *
      * Weight: 10
      *
-     * @summary Get Futures Position-Risk of Sub-account(For Master Account)
+     * @summary Get Futures Position-Risk of Sub-account (For Master Account) (USER_DATA)
      * @param {GetFuturesPositionRiskOfSubAccountRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -550,7 +550,7 @@ export interface AccountManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Get Futures Position-Risk of Sub-account V2(For Master Account)
+     * @summary Get Futures Position-Risk of Sub-account V2 (For Master Account) (USER_DATA)
      * @param {GetFuturesPositionRiskOfSubAccountV2Request} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -566,7 +566,7 @@ export interface AccountManagementApiInterface {
      *
      * Weight: 10
      *
-     * @summary Get Sub-account\'s Status on Margin Or Futures(For Master Account)
+     * @summary Get Sub-account\'s Status on Margin Or Futures (For Master Account) (USER_DATA)
      * @param {GetSubAccountsStatusOnMarginOrFuturesRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -580,7 +580,7 @@ export interface AccountManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Query Sub-account List(For Master Account)
+     * @summary Query Sub-account List (For Master Account) (USER_DATA)
      * @param {QuerySubAccountListRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -594,7 +594,7 @@ export interface AccountManagementApiInterface {
      *
      * Weight: 60
      *
-     * @summary Query Sub-account Transaction Statistics(For Master Account)(USER_DATA)
+     * @summary Query Sub-account Transaction Statistics (For Master Account) (USER_DATA)
      * @param {QuerySubAccountTransactionStatisticsRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -861,7 +861,7 @@ export class AccountManagementApi implements AccountManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Create a Virtual Sub-account(For Master Account)
+     * @summary Create a Virtual Sub-account (For Master Account) (USER_DATA)
      * @param {CreateAVirtualSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CreateAVirtualSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -890,7 +890,7 @@ export class AccountManagementApi implements AccountManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Enable Futures for Sub-account(For Master Account)
+     * @summary Enable Futures for Sub-account (For Master Account) (USER_DATA)
      * @param {EnableFuturesForSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<EnableFuturesForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -919,7 +919,7 @@ export class AccountManagementApi implements AccountManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Enable Leverage Token for Sub-account(For Master Account)
+     * @summary Enable Leverage Token for Sub-account (For Master Account) (USER_DATA)
      * @param {EnableLeverageTokenForSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<EnableLeverageTokenForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -950,7 +950,7 @@ export class AccountManagementApi implements AccountManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Enable Margin for Sub-account(For Master Account)
+     * @summary Enable Margin for Sub-account (For Master Account) (USER_DATA)
      * @param {EnableMarginForSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<EnableMarginForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -979,7 +979,7 @@ export class AccountManagementApi implements AccountManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Enable Options for Sub-account(For Master Account)(USER_DATA)
+     * @summary Enable Options for Sub-account (For Master Account) (USER_DATA)
      * @param {EnableOptionsForSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<EnableOptionsForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1008,7 +1008,7 @@ export class AccountManagementApi implements AccountManagementApiInterface {
      *
      * Weight: 10
      *
-     * @summary Get Futures Position-Risk of Sub-account(For Master Account)
+     * @summary Get Futures Position-Risk of Sub-account (For Master Account) (USER_DATA)
      * @param {GetFuturesPositionRiskOfSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFuturesPositionRiskOfSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1038,7 +1038,7 @@ export class AccountManagementApi implements AccountManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Get Futures Position-Risk of Sub-account V2(For Master Account)
+     * @summary Get Futures Position-Risk of Sub-account V2 (For Master Account) (USER_DATA)
      * @param {GetFuturesPositionRiskOfSubAccountV2Request} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFuturesPositionRiskOfSubAccountV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1071,7 +1071,7 @@ export class AccountManagementApi implements AccountManagementApiInterface {
      *
      * Weight: 10
      *
-     * @summary Get Sub-account\'s Status on Margin Or Futures(For Master Account)
+     * @summary Get Sub-account\'s Status on Margin Or Futures (For Master Account) (USER_DATA)
      * @param {GetSubAccountsStatusOnMarginOrFuturesRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSubAccountsStatusOnMarginOrFuturesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1101,7 +1101,7 @@ export class AccountManagementApi implements AccountManagementApiInterface {
      *
      * Weight: 1
      *
-     * @summary Query Sub-account List(For Master Account)
+     * @summary Query Sub-account List (For Master Account) (USER_DATA)
      * @param {QuerySubAccountListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySubAccountListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1133,7 +1133,7 @@ export class AccountManagementApi implements AccountManagementApiInterface {
      *
      * Weight: 60
      *
-     * @summary Query Sub-account Transaction Statistics(For Master Account)(USER_DATA)
+     * @summary Query Sub-account Transaction Statistics (For Master Account) (USER_DATA)
      * @param {QuerySubAccountTransactionStatisticsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySubAccountTransactionStatisticsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}

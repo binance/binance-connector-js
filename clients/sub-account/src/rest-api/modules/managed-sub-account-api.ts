@@ -45,7 +45,7 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          *
          * Weight: 1
          *
-         * @summary Deposit Assets Into The Managed Sub-account(For Investor Master Account)
+         * @summary Deposit Assets Into The Managed Sub-account (For Investor Master Account) (USER_DATA)
          * @param {string} toEmail
          * @param {string} asset
          * @param {number} amount
@@ -102,7 +102,7 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          *
          * Weight: 1
          *
-         * @summary Get Managed Sub-account Deposit Address (For Investor Master Account)(USER_DATA)
+         * @summary Get Managed Sub-account Deposit Address (For Investor Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {string} coin
          * @param {string} [network] networks can be found in `GET /sapi/v1/capital/deposit/address`
@@ -160,7 +160,7 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          *
          * Weight: 1
          *
-         * @summary Query Managed Sub-account Asset Details(For Investor Master Account)
+         * @summary Query Managed Sub-account Asset Details (For Investor Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {number} [recvWindow]
          *
@@ -198,7 +198,7 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          *
          * Weight: 60
          *
-         * @summary Query Managed Sub-account Futures Asset Details(For Investor Master Account)(USER_DATA)
+         * @summary Query Managed Sub-account Futures Asset Details (For Investor Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {string} [accountType] No input or input "MARGIN" to get Cross Margin account details. Input "ISOLATED_MARGIN" to get Isolated Margin account details.
          *
@@ -236,7 +236,7 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          *
          * Weight: 60
          *
-         * @summary Query Managed Sub-account List(For Investor)(USER_DATA)
+         * @summary Query Managed Sub-account List (For Investor) (USER_DATA)
          * @param {string} [email] Managed sub-account email
          * @param {number} [page] Default value: 1
          * @param {number} [limit] Default value: 1, Max value: 200
@@ -283,7 +283,7 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          *
          * Weight: 1
          *
-         * @summary Query Managed Sub-account Margin Asset Details(For Investor Master Account)(USER_DATA)
+         * @summary Query Managed Sub-account Margin Asset Details (For Investor Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {string} [accountType] No input or input "MARGIN" to get Cross Margin account details. Input "ISOLATED_MARGIN" to get Isolated Margin account details.
          *
@@ -325,7 +325,7 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          *
          * Weight: 2400
          *
-         * @summary Query Managed Sub-account Snapshot(For Investor Master Account)
+         * @summary Query Managed Sub-account Snapshot (For Investor Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {string} type "SPOT", "MARGIN"（cross）, "FUTURES"（UM）
          * @param {number} [startTime]
@@ -390,7 +390,7 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          *
          * Weight: 1
          *
-         * @summary Query Managed Sub Account Transfer Log(For Investor Master Account)(USER_DATA)
+         * @summary Query Managed Sub Account Transfer Log (For Investor Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {number} startTime Start Time
          * @param {number} endTime End Time (The start time and end time interval cannot exceed half a year)
@@ -487,7 +487,7 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          *
          * Weight: 60
          *
-         * @summary Query Managed Sub Account Transfer Log(For Trading Team Master Account)(USER_DATA)
+         * @summary Query Managed Sub Account Transfer Log (For Trading Team Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {number} startTime Start Time
          * @param {number} endTime End Time (The start time and end time interval cannot exceed half a year)
@@ -583,7 +583,7 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          *
          * Weight: 60
          *
-         * @summary Query Managed Sub Account Transfer Log (For Trading Team Sub Account)(USER_DATA)
+         * @summary Query Managed Sub Account Transfer Log (For Trading Team Sub Account) (USER_DATA)
          * @param {number} startTime Start Time
          * @param {number} endTime End Time (The start time and end time interval cannot exceed half a year)
          * @param {number} page Page
@@ -667,7 +667,7 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          *
          * Weight: 1
          *
-         * @summary Withdrawl Assets From The Managed Sub-account(For Investor Master Account)
+         * @summary Withdrawl Assets From The Managed Sub-account (For Investor Master Account) (USER_DATA)
          * @param {string} fromEmail
          * @param {string} asset
          * @param {number} amount
@@ -737,7 +737,7 @@ export interface ManagedSubAccountApiInterface {
      *
      * Weight: 1
      *
-     * @summary Deposit Assets Into The Managed Sub-account(For Investor Master Account)
+     * @summary Deposit Assets Into The Managed Sub-account (For Investor Master Account) (USER_DATA)
      * @param {DepositAssetsIntoTheManagedSubAccountRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -754,7 +754,7 @@ export interface ManagedSubAccountApiInterface {
      *
      * Weight: 1
      *
-     * @summary Get Managed Sub-account Deposit Address (For Investor Master Account)(USER_DATA)
+     * @summary Get Managed Sub-account Deposit Address (For Investor Master Account) (USER_DATA)
      * @param {GetManagedSubAccountDepositAddressRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -768,7 +768,7 @@ export interface ManagedSubAccountApiInterface {
      *
      * Weight: 1
      *
-     * @summary Query Managed Sub-account Asset Details(For Investor Master Account)
+     * @summary Query Managed Sub-account Asset Details (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountAssetDetailsRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -782,7 +782,7 @@ export interface ManagedSubAccountApiInterface {
      *
      * Weight: 60
      *
-     * @summary Query Managed Sub-account Futures Asset Details(For Investor Master Account)(USER_DATA)
+     * @summary Query Managed Sub-account Futures Asset Details (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountFuturesAssetDetailsRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -796,7 +796,7 @@ export interface ManagedSubAccountApiInterface {
      *
      * Weight: 60
      *
-     * @summary Query Managed Sub-account List(For Investor)(USER_DATA)
+     * @summary Query Managed Sub-account List (For Investor) (USER_DATA)
      * @param {QueryManagedSubAccountListRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -810,7 +810,7 @@ export interface ManagedSubAccountApiInterface {
      *
      * Weight: 1
      *
-     * @summary Query Managed Sub-account Margin Asset Details(For Investor Master Account)(USER_DATA)
+     * @summary Query Managed Sub-account Margin Asset Details (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountMarginAssetDetailsRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -828,7 +828,7 @@ export interface ManagedSubAccountApiInterface {
      *
      * Weight: 2400
      *
-     * @summary Query Managed Sub-account Snapshot(For Investor Master Account)
+     * @summary Query Managed Sub-account Snapshot (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountSnapshotRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -843,7 +843,7 @@ export interface ManagedSubAccountApiInterface {
      *
      * Weight: 1
      *
-     * @summary Query Managed Sub Account Transfer Log(For Investor Master Account)(USER_DATA)
+     * @summary Query Managed Sub Account Transfer Log (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountTransferLogMasterAccountInvestorRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -858,7 +858,7 @@ export interface ManagedSubAccountApiInterface {
      *
      * Weight: 60
      *
-     * @summary Query Managed Sub Account Transfer Log(For Trading Team Master Account)(USER_DATA)
+     * @summary Query Managed Sub Account Transfer Log (For Trading Team Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountTransferLogMasterAccountTradingRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -872,7 +872,7 @@ export interface ManagedSubAccountApiInterface {
      *
      * Weight: 60
      *
-     * @summary Query Managed Sub Account Transfer Log (For Trading Team Sub Account)(USER_DATA)
+     * @summary Query Managed Sub Account Transfer Log (For Trading Team Sub Account) (USER_DATA)
      * @param {QueryManagedSubAccountTransferLogSubAccountTradingRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -888,7 +888,7 @@ export interface ManagedSubAccountApiInterface {
      *
      * Weight: 1
      *
-     * @summary Withdrawl Assets From The Managed Sub-account(For Investor Master Account)
+     * @summary Withdrawl Assets From The Managed Sub-account (For Investor Master Account) (USER_DATA)
      * @param {WithdrawlAssetsFromTheManagedSubAccountRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1342,7 +1342,7 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
      *
      * Weight: 1
      *
-     * @summary Deposit Assets Into The Managed Sub-account(For Investor Master Account)
+     * @summary Deposit Assets Into The Managed Sub-account (For Investor Master Account) (USER_DATA)
      * @param {DepositAssetsIntoTheManagedSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<DepositAssetsIntoTheManagedSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1365,7 +1365,7 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -1377,7 +1377,7 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
      *
      * Weight: 1
      *
-     * @summary Get Managed Sub-account Deposit Address (For Investor Master Account)(USER_DATA)
+     * @summary Get Managed Sub-account Deposit Address (For Investor Master Account) (USER_DATA)
      * @param {GetManagedSubAccountDepositAddressRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetManagedSubAccountDepositAddressResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1410,7 +1410,7 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
      *
      * Weight: 1
      *
-     * @summary Query Managed Sub-account Asset Details(For Investor Master Account)
+     * @summary Query Managed Sub-account Asset Details (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountAssetDetailsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountAssetDetailsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1431,7 +1431,7 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -1440,7 +1440,7 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
      *
      * Weight: 60
      *
-     * @summary Query Managed Sub-account Futures Asset Details(For Investor Master Account)(USER_DATA)
+     * @summary Query Managed Sub-account Futures Asset Details (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountFuturesAssetDetailsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountFuturesAssetDetailsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1470,7 +1470,7 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
      *
      * Weight: 60
      *
-     * @summary Query Managed Sub-account List(For Investor)(USER_DATA)
+     * @summary Query Managed Sub-account List (For Investor) (USER_DATA)
      * @param {QueryManagedSubAccountListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1501,7 +1501,7 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
      *
      * Weight: 1
      *
-     * @summary Query Managed Sub-account Margin Asset Details(For Investor Master Account)(USER_DATA)
+     * @summary Query Managed Sub-account Margin Asset Details (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountMarginAssetDetailsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountMarginAssetDetailsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1535,7 +1535,7 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
      *
      * Weight: 2400
      *
-     * @summary Query Managed Sub-account Snapshot(For Investor Master Account)
+     * @summary Query Managed Sub-account Snapshot (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountSnapshotRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountSnapshotResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1560,7 +1560,7 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
@@ -1570,7 +1570,7 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
      *
      * Weight: 1
      *
-     * @summary Query Managed Sub Account Transfer Log(For Investor Master Account)(USER_DATA)
+     * @summary Query Managed Sub Account Transfer Log (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountTransferLogMasterAccountInvestorRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountTransferLogMasterAccountInvestorResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1606,7 +1606,7 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
      *
      * Weight: 60
      *
-     * @summary Query Managed Sub Account Transfer Log(For Trading Team Master Account)(USER_DATA)
+     * @summary Query Managed Sub Account Transfer Log (For Trading Team Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountTransferLogMasterAccountTradingRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountTransferLogMasterAccountTradingResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1641,7 +1641,7 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
      *
      * Weight: 60
      *
-     * @summary Query Managed Sub Account Transfer Log (For Trading Team Sub Account)(USER_DATA)
+     * @summary Query Managed Sub Account Transfer Log (For Trading Team Sub Account) (USER_DATA)
      * @param {QueryManagedSubAccountTransferLogSubAccountTradingRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountTransferLogSubAccountTradingResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1678,7 +1678,7 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
      *
      * Weight: 1
      *
-     * @summary Withdrawl Assets From The Managed Sub-account(For Investor Master Account)
+     * @summary Withdrawl Assets From The Managed Sub-account (For Investor Master Account) (USER_DATA)
      * @param {WithdrawlAssetsFromTheManagedSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<WithdrawlAssetsFromTheManagedSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1702,7 +1702,7 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 }

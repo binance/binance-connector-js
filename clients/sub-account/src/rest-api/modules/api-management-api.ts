@@ -37,7 +37,7 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
          *
          * Weight: 3000
          *
-         * @summary Add IP Restriction for Sub-Account API key(For Master Account)
+         * @summary Add IP Restriction for Sub-Account API key (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {string} subAccountApiKey
          * @param {string} status IP Restriction status. 1 = IP Unrestricted. 2 = Restrict access to trusted IPs only.
@@ -103,7 +103,7 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
          *
          * Weight: 3000
          *
-         * @summary Delete IP List For a Sub-account API Key(For Master Account)
+         * @summary Delete IP List For a Sub-account API Key (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {string} subAccountApiKey
          * @param {string} [ipAddress] Can be added in batches, separated by commas
@@ -159,7 +159,7 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
          *
          * Weight: 3000
          *
-         * @summary Get IP Restriction for a Sub-account API Key(For Master Account)
+         * @summary Get IP Restriction for a Sub-account API Key (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {string} subAccountApiKey
          * @param {number} [recvWindow]
@@ -219,7 +219,7 @@ export interface ApiManagementApiInterface {
      *
      * Weight: 3000
      *
-     * @summary Add IP Restriction for Sub-Account API key(For Master Account)
+     * @summary Add IP Restriction for Sub-Account API key (For Master Account) (USER_DATA)
      * @param {AddIpRestrictionForSubAccountApiKeyRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -235,7 +235,7 @@ export interface ApiManagementApiInterface {
      *
      * Weight: 3000
      *
-     * @summary Delete IP List For a Sub-account API Key(For Master Account)
+     * @summary Delete IP List For a Sub-account API Key (For Master Account) (USER_DATA)
      * @param {DeleteIpListForASubAccountApiKeyRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -249,7 +249,7 @@ export interface ApiManagementApiInterface {
      *
      * Weight: 3000
      *
-     * @summary Get IP Restriction for a Sub-account API Key(For Master Account)
+     * @summary Get IP Restriction for a Sub-account API Key (For Master Account) (USER_DATA)
      * @param {GetIpRestrictionForASubAccountApiKeyRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -382,7 +382,7 @@ export class ApiManagementApi implements ApiManagementApiInterface {
      *
      * Weight: 3000
      *
-     * @summary Add IP Restriction for Sub-Account API key(For Master Account)
+     * @summary Add IP Restriction for Sub-Account API key (For Master Account) (USER_DATA)
      * @param {AddIpRestrictionForSubAccountApiKeyRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AddIpRestrictionForSubAccountApiKeyResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -417,7 +417,7 @@ export class ApiManagementApi implements ApiManagementApiInterface {
      *
      * Weight: 3000
      *
-     * @summary Delete IP List For a Sub-account API Key(For Master Account)
+     * @summary Delete IP List For a Sub-account API Key (For Master Account) (USER_DATA)
      * @param {DeleteIpListForASubAccountApiKeyRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<DeleteIpListForASubAccountApiKeyResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -449,7 +449,7 @@ export class ApiManagementApi implements ApiManagementApiInterface {
      *
      * Weight: 3000
      *
-     * @summary Get IP Restriction for a Sub-account API Key(For Master Account)
+     * @summary Get IP Restriction for a Sub-account API Key (For Master Account) (USER_DATA)
      * @param {GetIpRestrictionForASubAccountApiKeyRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetIpRestrictionForASubAccountApiKeyResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}

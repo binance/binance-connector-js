@@ -186,7 +186,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Create a Virtual Sub-account(For Master Account)
+     * @summary Create a Virtual Sub-account (For Master Account) (USER_DATA)
      * @param {CreateAVirtualSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CreateAVirtualSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -203,7 +203,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Enable Futures for Sub-account(For Master Account)
+     * @summary Enable Futures for Sub-account (For Master Account) (USER_DATA)
      * @param {EnableFuturesForSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<EnableFuturesForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -220,7 +220,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Enable Leverage Token for Sub-account(For Master Account)
+     * @summary Enable Leverage Token for Sub-account (For Master Account) (USER_DATA)
      * @param {EnableLeverageTokenForSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<EnableLeverageTokenForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -237,7 +237,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Enable Margin for Sub-account(For Master Account)
+     * @summary Enable Margin for Sub-account (For Master Account) (USER_DATA)
      * @param {EnableMarginForSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<EnableMarginForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -254,7 +254,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Enable Options for Sub-account(For Master Account)(USER_DATA)
+     * @summary Enable Options for Sub-account (For Master Account) (USER_DATA)
      * @param {EnableOptionsForSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<EnableOptionsForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -271,7 +271,7 @@ export class RestAPI {
      *
      * Weight: 10
      *
-     * @summary Get Futures Position-Risk of Sub-account(For Master Account)
+     * @summary Get Futures Position-Risk of Sub-account (For Master Account) (USER_DATA)
      * @param {GetFuturesPositionRiskOfSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFuturesPositionRiskOfSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -288,7 +288,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Get Futures Position-Risk of Sub-account V2(For Master Account)
+     * @summary Get Futures Position-Risk of Sub-account V2 (For Master Account) (USER_DATA)
      * @param {GetFuturesPositionRiskOfSubAccountV2Request} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFuturesPositionRiskOfSubAccountV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -307,7 +307,7 @@ export class RestAPI {
      *
      * Weight: 10
      *
-     * @summary Get Sub-account\'s Status on Margin Or Futures(For Master Account)
+     * @summary Get Sub-account\'s Status on Margin Or Futures (For Master Account) (USER_DATA)
      * @param {GetSubAccountsStatusOnMarginOrFuturesRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSubAccountsStatusOnMarginOrFuturesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -324,7 +324,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Query Sub-account List(For Master Account)
+     * @summary Query Sub-account List (For Master Account) (USER_DATA)
      * @param {QuerySubAccountListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySubAccountListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -341,7 +341,7 @@ export class RestAPI {
      *
      * Weight: 60
      *
-     * @summary Query Sub-account Transaction Statistics(For Master Account)(USER_DATA)
+     * @summary Query Sub-account Transaction Statistics (For Master Account) (USER_DATA)
      * @param {QuerySubAccountTransactionStatisticsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySubAccountTransactionStatisticsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -360,7 +360,7 @@ export class RestAPI {
      *
      * Weight: 3000
      *
-     * @summary Add IP Restriction for Sub-Account API key(For Master Account)
+     * @summary Add IP Restriction for Sub-Account API key (For Master Account) (USER_DATA)
      * @param {AddIpRestrictionForSubAccountApiKeyRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AddIpRestrictionForSubAccountApiKeyResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -379,7 +379,7 @@ export class RestAPI {
      *
      * Weight: 3000
      *
-     * @summary Delete IP List For a Sub-account API Key(For Master Account)
+     * @summary Delete IP List For a Sub-account API Key (For Master Account) (USER_DATA)
      * @param {DeleteIpListForASubAccountApiKeyRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<DeleteIpListForASubAccountApiKeyResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -396,7 +396,7 @@ export class RestAPI {
      *
      * Weight: 3000
      *
-     * @summary Get IP Restriction for a Sub-account API Key(For Master Account)
+     * @summary Get IP Restriction for a Sub-account API Key (For Master Account) (USER_DATA)
      * @param {GetIpRestrictionForASubAccountApiKeyRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetIpRestrictionForASubAccountApiKeyResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -415,7 +415,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Futures Transfer for Sub-account(For Master Account)
+     * @summary Futures Transfer for Sub-account (For Master Account) (USER_DATA)
      * @param {FuturesTransferForSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<FuturesTransferForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -432,7 +432,7 @@ export class RestAPI {
      *
      * Weight: 10
      *
-     * @summary Get Detail on Sub-account\'s Futures Account(For Master Account)
+     * @summary Get Detail on Sub-account\'s Futures Account (For Master Account) (USER_DATA)
      * @param {GetDetailOnSubAccountsFuturesAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetDetailOnSubAccountsFuturesAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -449,7 +449,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Get Detail on Sub-account\'s Futures Account V2(For Master Account)
+     * @summary Get Detail on Sub-account\'s Futures Account V2 (For Master Account) (USER_DATA)
      * @param {GetDetailOnSubAccountsFuturesAccountV2Request} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetDetailOnSubAccountsFuturesAccountV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -466,7 +466,7 @@ export class RestAPI {
      *
      * Weight: 10
      *
-     * @summary Get Detail on Sub-account\'s Margin Account(For Master Account)
+     * @summary Get Detail on Sub-account\'s Margin Account (For Master Account) (USER_DATA)
      * @param {GetDetailOnSubAccountsMarginAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetDetailOnSubAccountsMarginAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -487,7 +487,7 @@ export class RestAPI {
      *
      * Weight: 150
      *
-     * @summary Get Move Position History for Sub-account (For Master Account)
+     * @summary Get Move Position History for Sub-account (For Master Account) (USER_DATA)
      * @param {GetMovePositionHistoryForSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetMovePositionHistoryForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -506,7 +506,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Get Sub-account Deposit Address(For Master Account)
+     * @summary Get Sub-account Deposit Address (For Master Account) (USER_DATA)
      * @param {GetSubAccountDepositAddressRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSubAccountDepositAddressResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -523,7 +523,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Get Sub-account Deposit History(For Master Account)
+     * @summary Get Sub-account Deposit History (For Master Account) (USER_DATA)
      * @param {GetSubAccountDepositHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSubAccountDepositHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -540,7 +540,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Get Summary of Sub-account\'s Futures Account(For Master Account)
+     * @summary Get Summary of Sub-account\'s Futures Account (For Master Account) (USER_DATA)
      * @param {GetSummaryOfSubAccountsFuturesAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSummaryOfSubAccountsFuturesAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -557,7 +557,7 @@ export class RestAPI {
      *
      * Weight: 10
      *
-     * @summary Get Summary of Sub-account\'s Futures Account V2(For Master Account)
+     * @summary Get Summary of Sub-account\'s Futures Account V2 (For Master Account) (USER_DATA)
      * @param {GetSummaryOfSubAccountsFuturesAccountV2Request} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSummaryOfSubAccountsFuturesAccountV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -574,7 +574,7 @@ export class RestAPI {
      *
      * Weight: 10
      *
-     * @summary Get Summary of Sub-account\'s Margin Account(For Master Account)
+     * @summary Get Summary of Sub-account\'s Margin Account (For Master Account) (USER_DATA)
      * @param {GetSummaryOfSubAccountsMarginAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSummaryOfSubAccountsMarginAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -593,7 +593,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Margin Transfer for Sub-account(For Master Account)
+     * @summary Margin Transfer for Sub-account (For Master Account) (USER_DATA)
      * @param {MarginTransferForSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MarginTransferForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -622,7 +622,7 @@ export class RestAPI {
      *
      * Weight: 150
      *
-     * @summary Move Position for Sub-account (For Master Account)
+     * @summary Move Position for Sub-account (For Master Account) (USER_DATA)
      * @param {MovePositionForSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<MovePositionForSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -639,11 +639,11 @@ export class RestAPI {
      *
      * Weight: 60
      *
-     * @summary Query Sub-account Assets(For Master Account)
+     * @summary Query Sub-account Assets (For Master Account) (USER_DATA)
      * @param {QuerySubAccountAssetsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySubAccountAssetsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Query-Sub-account-Assets-V3 Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Query-Sub-account-Assets-V4 Binance API Documentation}
      */
     querySubAccountAssets(
         requestParameters: QuerySubAccountAssetsRequest
@@ -656,7 +656,7 @@ export class RestAPI {
      *
      * Weight: 60
      *
-     * @summary Query Sub-account Assets (For Master Account)(USER_DATA)
+     * @summary Query Sub-account Assets (For Master Account) (USER_DATA)
      * @param {QuerySubAccountAssetsAssetManagementRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySubAccountAssetsAssetManagementResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -673,7 +673,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Query Sub-account Futures Asset Transfer History(For Master Account)
+     * @summary Query Sub-account Futures Asset Transfer History (For Master Account) (USER_DATA)
      * @param {QuerySubAccountFuturesAssetTransferHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySubAccountFuturesAssetTransferHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -695,7 +695,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Query Sub-account Spot Asset Transfer History(For Master Account)
+     * @summary Query Sub-account Spot Asset Transfer History (For Master Account) (USER_DATA)
      * @param {QuerySubAccountSpotAssetTransferHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySubAccountSpotAssetTransferHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -712,7 +712,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Query Sub-account Spot Assets Summary(For Master Account)
+     * @summary Query Sub-account Spot Assets Summary (For Master Account) (USER_DATA)
      * @param {QuerySubAccountSpotAssetsSummaryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySubAccountSpotAssetsSummaryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -734,7 +734,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Query Universal Transfer History(For Master Account)
+     * @summary Query Universal Transfer History (For Master Account) (USER_DATA)
      * @param {QueryUniversalTransferHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryUniversalTransferHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -755,7 +755,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Sub-account Futures Asset Transfer(For Master Account)
+     * @summary Sub-account Futures Asset Transfer (For Master Account) (USER_DATA)
      * @param {SubAccountFuturesAssetTransferRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SubAccountFuturesAssetTransferResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -775,7 +775,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Sub-account Transfer History(For Sub-account)
+     * @summary Sub-account Transfer History (For Sub-account) (USER_DATA)
      * @param {SubAccountTransferHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SubAccountTransferHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -794,7 +794,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Transfer to Master(For Sub-account)
+     * @summary Transfer to Master (For Sub-account) (USER_DATA)
      * @param {TransferToMasterRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<TransferToMasterResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -813,7 +813,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Transfer to Sub-account of Same Master(For Sub-account)
+     * @summary Transfer to Sub-account of Same Master (For Sub-account) (USER_DATA)
      * @param {TransferToSubAccountOfSameMasterRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<TransferToSubAccountOfSameMasterResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -841,7 +841,7 @@ export class RestAPI {
      *
      * Weight: 360
      *
-     * @summary Universal Transfer(For Master Account)
+     * @summary Universal Transfer (For Master Account) (USER_DATA)
      * @param {UniversalTransferRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<UniversalTransferResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -860,7 +860,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Deposit Assets Into The Managed Sub-account(For Investor Master Account)
+     * @summary Deposit Assets Into The Managed Sub-account (For Investor Master Account) (USER_DATA)
      * @param {DepositAssetsIntoTheManagedSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<DepositAssetsIntoTheManagedSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -880,7 +880,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Get Managed Sub-account Deposit Address (For Investor Master Account)(USER_DATA)
+     * @summary Get Managed Sub-account Deposit Address (For Investor Master Account) (USER_DATA)
      * @param {GetManagedSubAccountDepositAddressRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetManagedSubAccountDepositAddressResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -897,7 +897,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Query Managed Sub-account Asset Details(For Investor Master Account)
+     * @summary Query Managed Sub-account Asset Details (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountAssetDetailsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountAssetDetailsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -914,7 +914,7 @@ export class RestAPI {
      *
      * Weight: 60
      *
-     * @summary Query Managed Sub-account Futures Asset Details(For Investor Master Account)(USER_DATA)
+     * @summary Query Managed Sub-account Futures Asset Details (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountFuturesAssetDetailsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountFuturesAssetDetailsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -933,7 +933,7 @@ export class RestAPI {
      *
      * Weight: 60
      *
-     * @summary Query Managed Sub-account List(For Investor)(USER_DATA)
+     * @summary Query Managed Sub-account List (For Investor) (USER_DATA)
      * @param {QueryManagedSubAccountListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -950,7 +950,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Query Managed Sub-account Margin Asset Details(For Investor Master Account)(USER_DATA)
+     * @summary Query Managed Sub-account Margin Asset Details (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountMarginAssetDetailsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountMarginAssetDetailsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -973,7 +973,7 @@ export class RestAPI {
      *
      * Weight: 2400
      *
-     * @summary Query Managed Sub-account Snapshot(For Investor Master Account)
+     * @summary Query Managed Sub-account Snapshot (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountSnapshotRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountSnapshotResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -991,7 +991,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Query Managed Sub Account Transfer Log(For Investor Master Account)(USER_DATA)
+     * @summary Query Managed Sub Account Transfer Log (For Investor Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountTransferLogMasterAccountInvestorRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountTransferLogMasterAccountInvestorResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1011,7 +1011,7 @@ export class RestAPI {
      *
      * Weight: 60
      *
-     * @summary Query Managed Sub Account Transfer Log(For Trading Team Master Account)(USER_DATA)
+     * @summary Query Managed Sub Account Transfer Log (For Trading Team Master Account) (USER_DATA)
      * @param {QueryManagedSubAccountTransferLogMasterAccountTradingRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountTransferLogMasterAccountTradingResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1030,7 +1030,7 @@ export class RestAPI {
      *
      * Weight: 60
      *
-     * @summary Query Managed Sub Account Transfer Log (For Trading Team Sub Account)(USER_DATA)
+     * @summary Query Managed Sub Account Transfer Log (For Trading Team Sub Account) (USER_DATA)
      * @param {QueryManagedSubAccountTransferLogSubAccountTradingRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryManagedSubAccountTransferLogSubAccountTradingResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1051,7 +1051,7 @@ export class RestAPI {
      *
      * Weight: 1
      *
-     * @summary Withdrawl Assets From The Managed Sub-account(For Investor Master Account)
+     * @summary Withdrawl Assets From The Managed Sub-account (For Investor Master Account) (USER_DATA)
      * @param {WithdrawlAssetsFromTheManagedSubAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<WithdrawlAssetsFromTheManagedSubAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}

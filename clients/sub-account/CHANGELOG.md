@@ -1,5 +1,18 @@
 # Changelog
 
+## 4.0.0 - 2025-04-23
+
+### Changed
+
+- Marked as signed the following endpoints:
+  - `GET /sapi/v1/sub-account/transfer/subUserHistory`
+  - `POST /sapi/v1/sub-account/transfer/subToMaster`
+  - `POST /sapi/v1/sub-account/transfer/subToSub`
+  - `POST /sapi/v1/managed-subaccount/deposit`
+  - `GET /sapi/v1/managed-subaccount/asset`
+  - `GET /sapi/v1/managed-subaccount/accountSnapshot`
+  - `POST /sapi/v1/managed-subaccount/withdraw`
+
 ## 3.0.1 - 2025-04-15
 
 ### Changed
