@@ -787,6 +787,8 @@ export class WebsocketAPIConnection {
 
     /**
      * Reduce the quantity of an existing open order.
+     *
+     * Read [Order Amend Keep Priority FAQ](faqs/order_amend_keep_priority.md) to learn more.
      * Weight: 1
      *
      * @summary WebSocket Order Amend Keep Priority

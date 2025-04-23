@@ -770,6 +770,8 @@ export class RestAPI {
 
     /**
      * Reduce the quantity of an existing open order.
+     *
+     * Read [Order Amend Keep Priority FAQ](faqs/order_amend_keep_priority.md) to learn more.
      * Weight: 1
      *
      * @summary Order Amend Keep Priority
@@ -922,6 +924,8 @@ export class RestAPI {
 
     /**
      * Places an order using smart order routing (SOR).
+     *
+     * Read [SOR FAQ](faqs/sor_faq.md) to learn more.
      * Weight: 1
      *
      * @summary New order using SOR

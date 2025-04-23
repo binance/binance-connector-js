@@ -74,7 +74,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Account information
          * @param {boolean} [omitZeroBalances] When set to `true`, emits only the non-zero balances of an account. <br>Default value: `false`
-         * @param {number} [recvWindow] The value cannot be greater than ```60000```
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -113,7 +113,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {number} [fromAllocationId]
          * @param {number} [limit] Default: 500; Maximum: 1000.
          * @param {number} [orderId]
-         * @param {number} [recvWindow] The value cannot be greater than ```60000```
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -190,7 +190,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {number} [orderId]
          * @param {number} [fromPreventedMatchId]
          * @param {number} [limit] Default: 500; Maximum: 1000.
-         * @param {number} [recvWindow] The value cannot be greater than ```60000```
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -255,7 +255,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
          * @param {number} [fromId] ID to get aggregate trades from INCLUSIVE.
          * @param {number} [limit] Default: 500; Maximum: 1000.
-         * @param {number} [recvWindow] The value cannot be greater than ```60000```
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -320,7 +320,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {number} orderId
          * @param {number} [fromExecutionId]
          * @param {number} [limit] Default:500; Maximum: 1000
-         * @param {number} [recvWindow] The value cannot be greater than ```60000```
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -373,7 +373,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 40
          *
          * @summary Query Unfilled Order Count
-         * @param {number} [recvWindow] The value cannot be greater than ```60000```
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -531,7 +531,7 @@ export interface GetAccountRequest {
     readonly omitZeroBalances?: boolean;
 
     /**
-     * The value cannot be greater than ```60000```
+     * The value cannot be greater than `60000`
      * @type {number}
      * @memberof AccountApiGetAccount
      */
@@ -586,7 +586,7 @@ export interface MyAllocationsRequest {
     readonly orderId?: number;
 
     /**
-     * The value cannot be greater than ```60000```
+     * The value cannot be greater than `60000`
      * @type {number}
      * @memberof AccountApiMyAllocations
      */
@@ -634,7 +634,7 @@ export interface MyPreventedMatchesRequest {
     readonly limit?: number;
 
     /**
-     * The value cannot be greater than ```60000```
+     * The value cannot be greater than `60000`
      * @type {number}
      * @memberof AccountApiMyPreventedMatches
      */
@@ -689,7 +689,7 @@ export interface MyTradesRequest {
     readonly limit?: number;
 
     /**
-     * The value cannot be greater than ```60000```
+     * The value cannot be greater than `60000`
      * @type {number}
      * @memberof AccountApiMyTrades
      */
@@ -730,7 +730,7 @@ export interface OrderAmendmentsRequest {
     readonly limit?: number;
 
     /**
-     * The value cannot be greater than ```60000```
+     * The value cannot be greater than `60000`
      * @type {number}
      * @memberof AccountApiOrderAmendments
      */
@@ -743,7 +743,7 @@ export interface OrderAmendmentsRequest {
  */
 export interface RateLimitOrderRequest {
     /**
-     * The value cannot be greater than ```60000```
+     * The value cannot be greater than `60000`
      * @type {number}
      * @memberof AccountApiRateLimitOrder
      */

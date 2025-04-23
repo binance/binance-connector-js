@@ -62,7 +62,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
          * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
          * @param {number} [limit] Default: 500; Maximum: 1000.
-         * @param {number} [recvWindow] The value cannot be greater than ```60000```
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -115,7 +115,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
          * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
          * @param {number} [limit] Default: 500; Maximum: 1000.
-         * @param {number} [recvWindow] The value cannot be greater than ```60000```
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -173,7 +173,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Cancel All Open Orders on a Symbol
          * @param {string} symbol
-         * @param {number} [recvWindow] The value cannot be greater than ```60000```
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -211,7 +211,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} [origClientOrderId]
          * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
          * @param {DeleteOrderCancelRestrictionsEnum} [cancelRestrictions]
-         * @param {number} [recvWindow] The value cannot be greater than ```60000```
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -268,10 +268,10 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Cancel Order list
          * @param {string} symbol
-         * @param {number} [orderListId] Either ```orderListId``` or ```listClientOrderId``` must be provided
+         * @param {number} [orderListId] Either `orderListId` or `listClientOrderId` must be provided
          * @param {string} [listClientOrderId] A unique Id for the entire orderList
          * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
-         * @param {number} [recvWindow] The value cannot be greater than ```60000```
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -323,7 +323,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Current open orders
          * @param {string} [symbol] Symbol to query
-         * @param {number} [recvWindow] The value cannot be greater than ```60000```
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -356,7 +356,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} symbol
          * @param {number} [orderId]
          * @param {string} [origClientOrderId]
-         * @param {number} [recvWindow] The value cannot be greater than ```60000```
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -402,9 +402,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 4
          *
          * @summary Query Order list
-         * @param {number} [orderListId] Either ```orderListId``` or ```listClientOrderId``` must be provided
+         * @param {number} [orderListId] Either `orderListId` or `listClientOrderId` must be provided
          * @param {string} [origClientOrderId]
-         * @param {number} [recvWindow] The value cannot be greater than ```60000```
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -457,7 +457,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [icebergQty] Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
          * @param {NewOrderNewOrderRespTypeEnum} [newOrderRespType]
          * @param {NewOrderSelfTradePreventionModeEnum} [selfTradePreventionMode]
-         * @param {number} [recvWindow] The value cannot be greater than ```60000```
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -563,7 +563,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 6
          *
          * @summary Query Open Order lists
-         * @param {number} [recvWindow] The value cannot be greater than ```60000```
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -586,6 +586,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         },
         /**
          * Reduce the quantity of an existing open order.
+         *
+         * Read [Order Amend Keep Priority FAQ](faqs/order_amend_keep_priority.md) to learn more.
          * Weight: 1
          *
          * @summary Order Amend Keep Priority
@@ -594,7 +596,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [orderId]
          * @param {string} [origClientOrderId]
          * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
-         * @param {number} [recvWindow] The value cannot be greater than ```60000```
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -677,7 +679,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderCancelReplaceSelfTradePreventionModeEnum} [selfTradePreventionMode]
          * @param {OrderCancelReplaceCancelRestrictionsEnum} [cancelRestrictions]
          * @param {OrderCancelReplaceOrderRateLimitExceededModeEnum} [orderRateLimitExceededMode]
-         * @param {number} [recvWindow] The value cannot be greater than ```60000```
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -848,7 +850,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [belowStrategyType] Arbitrary numeric value identifying the below order strategy. <br>Values smaller than 1000000 are reserved and cannot be used.
          * @param {OrderListOcoNewOrderRespTypeEnum} [newOrderRespType]
          * @param {OrderListOcoSelfTradePreventionModeEnum} [selfTradePreventionMode]
-         * @param {number} [recvWindow] The value cannot be greater than ```60000```
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -1032,7 +1034,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderListOtoPendingTimeInForceEnum} [pendingTimeInForce]
          * @param {number} [pendingStrategyId] Arbitrary numeric value identifying the pending order within an order strategy.
          * @param {number} [pendingStrategyType] Arbitrary numeric value identifying the pending order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
-         * @param {number} [recvWindow] The value cannot be greater than ```60000```
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -1230,7 +1232,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderListOtocoPendingBelowTimeInForceEnum} [pendingBelowTimeInForce]
          * @param {number} [pendingBelowStrategyId] Arbitrary numeric value identifying the pending below order within an order strategy.
          * @param {number} [pendingBelowStrategyType] Arbitrary numeric value identifying the pending below order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
-         * @param {number} [recvWindow] The value cannot be greater than ```60000```
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -1459,7 +1461,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderOcoStopLimitTimeInForceEnum} [stopLimitTimeInForce]
          * @param {OrderOcoNewOrderRespTypeEnum} [newOrderRespType]
          * @param {OrderOcoSelfTradePreventionModeEnum} [selfTradePreventionMode]
-         * @param {number} [recvWindow] The value cannot be greater than ```60000```
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -1618,6 +1620,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         },
         /**
          * Places an order using smart order routing (SOR).
+         *
+         * Read [SOR FAQ](faqs/sor_faq.md) to learn more.
          * Weight: 1
          *
          * @summary New order using SOR
@@ -1633,7 +1637,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [icebergQty] Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
          * @param {SorOrderNewOrderRespTypeEnum} [newOrderRespType]
          * @param {SorOrderSelfTradePreventionModeEnum} [selfTradePreventionMode]
-         * @param {number} [recvWindow] The value cannot be greater than ```60000```
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -1888,6 +1892,8 @@ export interface TradeApiInterface {
     ): Promise<RestApiResponse<OpenOrderListResponse>>;
     /**
      * Reduce the quantity of an existing open order.
+     *
+     * Read [Order Amend Keep Priority FAQ](faqs/order_amend_keep_priority.md) to learn more.
      * Weight: 1
      *
      * @summary Order Amend Keep Priority
@@ -2017,6 +2023,8 @@ export interface TradeApiInterface {
     orderTest(requestParameters?: OrderTestRequest): Promise<RestApiResponse<OrderTestResponse>>;
     /**
      * Places an order using smart order routing (SOR).
+     *
+     * Read [SOR FAQ](faqs/sor_faq.md) to learn more.
      * Weight: 1
      *
      * @summary New order using SOR
@@ -2079,7 +2087,7 @@ export interface AllOrderListRequest {
     readonly limit?: number;
 
     /**
-     * The value cannot be greater than ```60000```
+     * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiAllOrderList
      */
@@ -2127,7 +2135,7 @@ export interface AllOrdersRequest {
     readonly limit?: number;
 
     /**
-     * The value cannot be greater than ```60000```
+     * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiAllOrders
      */
@@ -2147,7 +2155,7 @@ export interface DeleteOpenOrdersRequest {
     readonly symbol: string;
 
     /**
-     * The value cannot be greater than ```60000```
+     * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiDeleteOpenOrders
      */
@@ -2195,7 +2203,7 @@ export interface DeleteOrderRequest {
     readonly cancelRestrictions?: DeleteOrderCancelRestrictionsEnum;
 
     /**
-     * The value cannot be greater than ```60000```
+     * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiDeleteOrder
      */
@@ -2215,7 +2223,7 @@ export interface DeleteOrderListRequest {
     readonly symbol: string;
 
     /**
-     * Either ```orderListId``` or ```listClientOrderId``` must be provided
+     * Either `orderListId` or `listClientOrderId` must be provided
      * @type {number}
      * @memberof TradeApiDeleteOrderList
      */
@@ -2236,7 +2244,7 @@ export interface DeleteOrderListRequest {
     readonly newClientOrderId?: string;
 
     /**
-     * The value cannot be greater than ```60000```
+     * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiDeleteOrderList
      */
@@ -2256,7 +2264,7 @@ export interface GetOpenOrdersRequest {
     readonly symbol?: string;
 
     /**
-     * The value cannot be greater than ```60000```
+     * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiGetOpenOrders
      */
@@ -2290,7 +2298,7 @@ export interface GetOrderRequest {
     readonly origClientOrderId?: string;
 
     /**
-     * The value cannot be greater than ```60000```
+     * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiGetOrder
      */
@@ -2303,7 +2311,7 @@ export interface GetOrderRequest {
  */
 export interface GetOrderListRequest {
     /**
-     * Either ```orderListId``` or ```listClientOrderId``` must be provided
+     * Either `orderListId` or `listClientOrderId` must be provided
      * @type {number}
      * @memberof TradeApiGetOrderList
      */
@@ -2317,7 +2325,7 @@ export interface GetOrderListRequest {
     readonly origClientOrderId?: string;
 
     /**
-     * The value cannot be greater than ```60000```
+     * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiGetOrderList
      */
@@ -2435,7 +2443,7 @@ export interface NewOrderRequest {
     readonly selfTradePreventionMode?: NewOrderSelfTradePreventionModeEnum;
 
     /**
-     * The value cannot be greater than ```60000```
+     * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiNewOrder
      */
@@ -2448,7 +2456,7 @@ export interface NewOrderRequest {
  */
 export interface OpenOrderListRequest {
     /**
-     * The value cannot be greater than ```60000```
+     * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiOpenOrderList
      */
@@ -2496,7 +2504,7 @@ export interface OrderAmendKeepPriorityRequest {
     readonly newClientOrderId?: string;
 
     /**
-     * The value cannot be greater than ```60000```
+     * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiOrderAmendKeepPriority
      */
@@ -2656,7 +2664,7 @@ export interface OrderCancelReplaceRequest {
     readonly orderRateLimitExceededMode?: OrderCancelReplaceOrderRateLimitExceededModeEnum;
 
     /**
-     * The value cannot be greater than ```60000```
+     * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiOrderCancelReplace
      */
@@ -2837,7 +2845,7 @@ export interface OrderListOcoRequest {
     readonly selfTradePreventionMode?: OrderListOcoSelfTradePreventionModeEnum;
 
     /**
-     * The value cannot be greater than ```60000```
+     * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiOrderListOco
      */
@@ -3018,7 +3026,7 @@ export interface OrderListOtoRequest {
     readonly pendingStrategyType?: number;
 
     /**
-     * The value cannot be greater than ```60000```
+     * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiOrderListOto
      */
@@ -3262,7 +3270,7 @@ export interface OrderListOtocoRequest {
     readonly pendingBelowStrategyType?: number;
 
     /**
-     * The value cannot be greater than ```60000```
+     * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiOrderListOtoco
      */
@@ -3408,7 +3416,7 @@ export interface OrderOcoRequest {
     readonly selfTradePreventionMode?: OrderOcoSelfTradePreventionModeEnum;
 
     /**
-     * The value cannot be greater than ```60000```
+     * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiOrderOco
      */
@@ -3518,7 +3526,7 @@ export interface SorOrderRequest {
     readonly selfTradePreventionMode?: SorOrderSelfTradePreventionModeEnum;
 
     /**
-     * The value cannot be greater than ```60000```
+     * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiSorOrder
      */
@@ -3866,6 +3874,8 @@ export class TradeApi implements TradeApiInterface {
 
     /**
      * Reduce the quantity of an existing open order.
+     *
+     * Read [Order Amend Keep Priority FAQ](faqs/order_amend_keep_priority.md) to learn more.
      * Weight: 1
      *
      * @summary Order Amend Keep Priority
@@ -4223,6 +4233,8 @@ export class TradeApi implements TradeApiInterface {
 
     /**
      * Places an order using smart order routing (SOR).
+     *
+     * Read [SOR FAQ](faqs/sor_faq.md) to learn more.
      * Weight: 1
      *
      * @summary New order using SOR
