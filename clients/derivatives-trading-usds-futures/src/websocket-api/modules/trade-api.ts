@@ -381,7 +381,7 @@ export interface NewOrderRequest {
     readonly activationPrice?: number;
 
     /**
-     * Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1%
+     * Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 10 where 1 for 1%
      * @type {number}
      * @memberof TradeApiNewOrder
      */

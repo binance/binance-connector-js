@@ -987,7 +987,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [stopPrice] Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
          * @param {string} [closePosition] `true`, `false`；Close-All，used with `STOP_MARKET` or `TAKE_PROFIT_MARKET`.
          * @param {number} [activationPrice] Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`)
-         * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1%
+         * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 10 where 1 for 1%
          * @param {NewOrderWorkingTypeEnum} [workingType] stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE". Default "CONTRACT_PRICE"
          * @param {string} [priceProtect] "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
          * @param {NewOrderNewOrderRespTypeEnum} [newOrderRespType] "ACK", "RESULT", default "ACK"
@@ -1445,7 +1445,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [stopPrice] Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
          * @param {string} [closePosition] `true`, `false`；Close-All，used with `STOP_MARKET` or `TAKE_PROFIT_MARKET`.
          * @param {number} [activationPrice] Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`)
-         * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1%
+         * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 10 where 1 for 1%
          * @param {TestOrderWorkingTypeEnum} [workingType] stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE". Default "CONTRACT_PRICE"
          * @param {string} [priceProtect] "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
          * @param {TestOrderNewOrderRespTypeEnum} [newOrderRespType] "ACK", "RESULT", default "ACK"
@@ -2801,7 +2801,7 @@ export interface NewOrderRequest {
     readonly activationPrice?: number;
 
     /**
-     * Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1%
+     * Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 10 where 1 for 1%
      * @type {number}
      * @memberof TradeApiNewOrder
      */
@@ -3095,7 +3095,7 @@ export interface TestOrderRequest {
     readonly activationPrice?: number;
 
     /**
-     * Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1%
+     * Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 10 where 1 for 1%
      * @type {number}
      * @memberof TradeApiTestOrder
      */
