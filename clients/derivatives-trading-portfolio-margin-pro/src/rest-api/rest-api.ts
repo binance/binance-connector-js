@@ -408,7 +408,7 @@ export class RestAPI {
      * @param {TransferLdusdtForPortfolioMarginRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<TransferLdusdtForPortfolioMarginResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Transfer-LDUSDT-for-Portfolio-Margin Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Transfer-LDUSDT-Portfolio-Margin Binance API Documentation}
      */
     transferLdusdtForPortfolioMargin(
         requestParameters: TransferLdusdtForPortfolioMarginRequest

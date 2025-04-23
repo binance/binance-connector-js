@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.0 - 2025-04-23
+
+### Changed
+
+- `POST /sapi/v1/portfolio/earn-asset-transfer`
+
 ## 3.0.0 - 2025-04-15
 
 ### Added

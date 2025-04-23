@@ -732,7 +732,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
 
             return {
-                endpoint: '/sapi/v1/portfolio/earn-asset-balance',
+                endpoint: '/sapi/v1/portfolio/earn-asset-transfer',
                 method: 'POST',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
@@ -1922,7 +1922,7 @@ export class AccountApi implements AccountApiInterface {
      * @returns {Promise<RestApiResponse<TransferLdusdtForPortfolioMarginResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Transfer-LDUSDT-for-Portfolio-Margin Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Transfer-LDUSDT-Portfolio-Margin Binance API Documentation}
      */
     public async transferLdusdtForPortfolioMargin(
         requestParameters: TransferLdusdtForPortfolioMarginRequest
