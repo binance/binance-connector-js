@@ -31,4 +31,16 @@ export interface QueryIndexPriceConstituentsResponseConstituentsInner {
      * @memberof QueryIndexPriceConstituentsResponseConstituentsInner
      */
     symbol?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof QueryIndexPriceConstituentsResponseConstituentsInner
+     */
+    price?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof QueryIndexPriceConstituentsResponseConstituentsInner
+     */
+    weight?: string;
 }

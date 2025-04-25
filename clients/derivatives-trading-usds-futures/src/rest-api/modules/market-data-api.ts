@@ -42,6 +42,7 @@ import type {
     PremiumIndexKlineDataResponse,
     QuarterlyContractSettlementPriceResponse,
     QueryIndexPriceConstituentsResponse,
+    QueryInsuranceFundBalanceSnapshotResponse,
     RecentTradesListResponse,
     SymbolOrderBookTickerResponse,
     SymbolPriceTickerResponse,
@@ -1106,6 +1107,33 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
+         * Query Insurance Fund Balance Snapshot
+         *
+         * Weight: 1
+         *
+         * @summary Query Insurance Fund Balance Snapshot
+         * @param {string} [symbol]
+         *
+         * @throws {RequiredError}
+         */
+        queryInsuranceFundBalanceSnapshot: async (symbol?: string): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (symbol !== undefined && symbol !== null) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/fapi/v1/insuranceBalance',
+                method: 'GET',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Get recent market trades
          *
          * Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
@@ -1866,6 +1894,20 @@ export interface MarketDataApiInterface {
         requestParameters: QueryIndexPriceConstituentsRequest
     ): Promise<RestApiResponse<QueryIndexPriceConstituentsResponse>>;
     /**
+     * Query Insurance Fund Balance Snapshot
+     *
+     * Weight: 1
+     *
+     * @summary Query Insurance Fund Balance Snapshot
+     * @param {QueryInsuranceFundBalanceSnapshotRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApiInterface
+     */
+    queryInsuranceFundBalanceSnapshot(
+        requestParameters?: QueryInsuranceFundBalanceSnapshotRequest
+    ): Promise<RestApiResponse<QueryInsuranceFundBalanceSnapshotResponse>>;
+    /**
      * Get recent market trades
      *
      * Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
@@ -2606,6 +2648,19 @@ export interface QueryIndexPriceConstituentsRequest {
      * @memberof MarketDataApiQueryIndexPriceConstituents
      */
     readonly symbol: string;
+}
+
+/**
+ * Request parameters for queryInsuranceFundBalanceSnapshot operation in MarketDataApi.
+ * @interface QueryInsuranceFundBalanceSnapshotRequest
+ */
+export interface QueryInsuranceFundBalanceSnapshotRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof MarketDataApiQueryInsuranceFundBalanceSnapshot
+     */
+    readonly symbol?: string;
 }
 
 /**
@@ -3546,6 +3601,35 @@ export class MarketDataApi implements MarketDataApiInterface {
             requestParameters?.symbol
         );
         return sendRequest<QueryIndexPriceConstituentsResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: false }
+        );
+    }
+
+    /**
+     * Query Insurance Fund Balance Snapshot
+     *
+     * Weight: 1
+     *
+     * @summary Query Insurance Fund Balance Snapshot
+     * @param {QueryInsuranceFundBalanceSnapshotRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<QueryInsuranceFundBalanceSnapshotResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApi
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Query-Insurance-Fund-Balance-Snapshot Binance API Documentation}
+     */
+    public async queryInsuranceFundBalanceSnapshot(
+        requestParameters: QueryInsuranceFundBalanceSnapshotRequest = {}
+    ): Promise<RestApiResponse<QueryInsuranceFundBalanceSnapshotResponse>> {
+        const localVarAxiosArgs =
+            await this.localVarAxiosParamCreator.queryInsuranceFundBalanceSnapshot(
+                requestParameters?.symbol
+            );
+        return sendRequest<QueryInsuranceFundBalanceSnapshotResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

@@ -68,6 +68,7 @@ import type {
     PremiumIndexKlineDataRequest,
     QuarterlyContractSettlementPriceRequest,
     QueryIndexPriceConstituentsRequest,
+    QueryInsuranceFundBalanceSnapshotRequest,
     RecentTradesListRequest,
     SymbolOrderBookTickerRequest,
     SymbolPriceTickerRequest,
@@ -159,6 +160,7 @@ import type {
     PremiumIndexKlineDataResponse,
     QuarterlyContractSettlementPriceResponse,
     QueryIndexPriceConstituentsResponse,
+    QueryInsuranceFundBalanceSnapshotResponse,
     RecentTradesListResponse,
     SymbolOrderBookTickerResponse,
     SymbolPriceTickerResponse,
@@ -1148,6 +1150,23 @@ export class RestAPI {
         requestParameters: QueryIndexPriceConstituentsRequest
     ): Promise<RestApiResponse<QueryIndexPriceConstituentsResponse>> {
         return this.marketDataApi.queryIndexPriceConstituents(requestParameters);
+    }
+
+    /**
+     * Query Insurance Fund Balance Snapshot
+     *
+     * Weight: 1
+     *
+     * @summary Query Insurance Fund Balance Snapshot
+     * @param {QueryInsuranceFundBalanceSnapshotRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<QueryInsuranceFundBalanceSnapshotResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Query-Insurance-Fund-Balance-Snapshot Binance API Documentation}
+     */
+    queryInsuranceFundBalanceSnapshot(
+        requestParameters: QueryInsuranceFundBalanceSnapshotRequest = {}
+    ): Promise<RestApiResponse<QueryInsuranceFundBalanceSnapshotResponse>> {
+        return this.marketDataApi.queryInsuranceFundBalanceSnapshot(requestParameters);
     }
 
     /**

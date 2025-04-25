@@ -51,6 +51,7 @@ import {
     PremiumIndexKlineDataRequest,
     QuarterlyContractSettlementPriceRequest,
     QueryIndexPriceConstituentsRequest,
+    QueryInsuranceFundBalanceSnapshotRequest,
     RecentTradesListRequest,
     SymbolOrderBookTickerRequest,
     SymbolPriceTickerRequest,
@@ -83,6 +84,7 @@ import type {
     PremiumIndexKlineDataResponse,
     QuarterlyContractSettlementPriceResponse,
     QueryIndexPriceConstituentsResponse,
+    QueryInsuranceFundBalanceSnapshotResponse,
     RecentTradesListResponse,
     SymbolOrderBookTickerResponse,
     SymbolPriceTickerResponse,
@@ -2289,12 +2291,50 @@ describe('MarketDataApi', () => {
 
             mockResponse = {
                 symbol: 'BTCUSDT',
-                time: 1697421272043,
+                time: 1745401553408,
                 constituents: [
-                    { exchange: 'binance', symbol: 'BTCUSDT' },
-                    { exchange: 'okex', symbol: 'BTC-USDT' },
-                    { exchange: 'huobi', symbol: 'btcusdt' },
-                    { exchange: 'coinbase', symbol: 'BTC-USDT' },
+                    {
+                        exchange: 'binance',
+                        symbol: 'BTCUSDT',
+                        price: '94057.03000000',
+                        weight: '0.51282051',
+                    },
+                    {
+                        exchange: 'coinbase',
+                        symbol: 'BTC-USDT',
+                        price: '94140.58000000',
+                        weight: '0.15384615',
+                    },
+                    {
+                        exchange: 'gateio',
+                        symbol: 'BTC_USDT',
+                        price: '94060.10000000',
+                        weight: '0.02564103',
+                    },
+                    {
+                        exchange: 'kucoin',
+                        symbol: 'BTC-USDT',
+                        price: '94096.70000000',
+                        weight: '0.07692308',
+                    },
+                    {
+                        exchange: 'mxc',
+                        symbol: 'BTCUSDT',
+                        price: '94057.02000000',
+                        weight: '0.07692308',
+                    },
+                    {
+                        exchange: 'bitget',
+                        symbol: 'BTCUSDT',
+                        price: '94064.03000000',
+                        weight: '0.07692308',
+                    },
+                    {
+                        exchange: 'bybit',
+                        symbol: 'BTCUSDT',
+                        price: '94067.90000000',
+                        weight: '0.07692308',
+                    },
                 ],
             };
 
@@ -2319,12 +2359,50 @@ describe('MarketDataApi', () => {
 
             mockResponse = {
                 symbol: 'BTCUSDT',
-                time: 1697421272043,
+                time: 1745401553408,
                 constituents: [
-                    { exchange: 'binance', symbol: 'BTCUSDT' },
-                    { exchange: 'okex', symbol: 'BTC-USDT' },
-                    { exchange: 'huobi', symbol: 'btcusdt' },
-                    { exchange: 'coinbase', symbol: 'BTC-USDT' },
+                    {
+                        exchange: 'binance',
+                        symbol: 'BTCUSDT',
+                        price: '94057.03000000',
+                        weight: '0.51282051',
+                    },
+                    {
+                        exchange: 'coinbase',
+                        symbol: 'BTC-USDT',
+                        price: '94140.58000000',
+                        weight: '0.15384615',
+                    },
+                    {
+                        exchange: 'gateio',
+                        symbol: 'BTC_USDT',
+                        price: '94060.10000000',
+                        weight: '0.02564103',
+                    },
+                    {
+                        exchange: 'kucoin',
+                        symbol: 'BTC-USDT',
+                        price: '94096.70000000',
+                        weight: '0.07692308',
+                    },
+                    {
+                        exchange: 'mxc',
+                        symbol: 'BTCUSDT',
+                        price: '94057.02000000',
+                        weight: '0.07692308',
+                    },
+                    {
+                        exchange: 'bitget',
+                        symbol: 'BTCUSDT',
+                        price: '94064.03000000',
+                        weight: '0.07692308',
+                    },
+                    {
+                        exchange: 'bybit',
+                        symbol: 'BTCUSDT',
+                        price: '94067.90000000',
+                        weight: '0.07692308',
+                    },
                 ],
             };
 
@@ -2372,6 +2450,107 @@ describe('MarketDataApi', () => {
                 .spyOn(client, 'queryIndexPriceConstituents')
                 .mockRejectedValueOnce(mockError);
             await expect(client.queryIndexPriceConstituents(params)).rejects.toThrow(
+                'ResponseError'
+            );
+            spy.mockRestore();
+        });
+    });
+
+    describe('queryInsuranceFundBalanceSnapshot()', () => {
+        it('should execute queryInsuranceFundBalanceSnapshot() successfully with required parameters only', async () => {
+            mockResponse = {
+                symbols: [
+                    'BNBUSDT',
+                    'BTCUSDT',
+                    'BTCUSDT_250627',
+                    'BTCUSDT_250926',
+                    'ETHBTC',
+                    'ETHUSDT',
+                    'ETHUSDT_250627',
+                    'ETHUSDT_250926',
+                ],
+                assets: [
+                    {
+                        asset: 'USDC',
+                        marginBalance: '299999998.6497832',
+                        updateTime: 1745366402000,
+                    },
+                    { asset: 'USDT', marginBalance: '793930579.315848', updateTime: 1745366402000 },
+                    { asset: 'BTC', marginBalance: '61.73143554', updateTime: 1745366402000 },
+                    { asset: 'BNFCR', marginBalance: '633223.99396922', updateTime: 1745366402000 },
+                ],
+            };
+
+            const spy = jest.spyOn(client, 'queryInsuranceFundBalanceSnapshot').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<QueryInsuranceFundBalanceSnapshotResponse>)
+            );
+            const response = await client.queryInsuranceFundBalanceSnapshot();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute queryInsuranceFundBalanceSnapshot() successfully with optional parameters', async () => {
+            const params: QueryInsuranceFundBalanceSnapshotRequest = {
+                symbol: 'symbol_example',
+            };
+
+            mockResponse = {
+                symbols: [
+                    'BNBUSDT',
+                    'BTCUSDT',
+                    'BTCUSDT_250627',
+                    'BTCUSDT_250926',
+                    'ETHBTC',
+                    'ETHUSDT',
+                    'ETHUSDT_250627',
+                    'ETHUSDT_250926',
+                ],
+                assets: [
+                    {
+                        asset: 'USDC',
+                        marginBalance: '299999998.6497832',
+                        updateTime: 1745366402000,
+                    },
+                    { asset: 'USDT', marginBalance: '793930579.315848', updateTime: 1745366402000 },
+                    { asset: 'BTC', marginBalance: '61.73143554', updateTime: 1745366402000 },
+                    { asset: 'BNFCR', marginBalance: '633223.99396922', updateTime: 1745366402000 },
+                ],
+            };
+
+            const spy = jest.spyOn(client, 'queryInsuranceFundBalanceSnapshot').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<QueryInsuranceFundBalanceSnapshotResponse>)
+            );
+            const response = await client.queryInsuranceFundBalanceSnapshot(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'queryInsuranceFundBalanceSnapshot')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.queryInsuranceFundBalanceSnapshot()).rejects.toThrow(
                 'ResponseError'
             );
             spy.mockRestore();

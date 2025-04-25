@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.0 - 2025-04-25
+
+### Added
+
+- `GET /fapi/v1/insuranceBalance`
+
 ## 2.0.0 - 2025-04-10
 
 ### Changed
