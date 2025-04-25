@@ -123,7 +123,7 @@ describe('GeneralApi', () => {
                 symbols: ['null'],
                 permissions: ['null'],
                 showPermissionSets: true,
-                symbolStatus: ExchangeInfoSymbolStatusEnum.PRE_TRADING,
+                symbolStatus: ExchangeInfoSymbolStatusEnum.TRADING,
             };
 
             mockResponse = {

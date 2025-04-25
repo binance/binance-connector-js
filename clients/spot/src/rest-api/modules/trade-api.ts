@@ -588,7 +588,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Reduce the quantity of an existing open order.
          *
          * Read [Order Amend Keep Priority FAQ](faqs/order_amend_keep_priority.md) to learn more.
-         * Weight: 1
+         * Weight: 4
          *
          * @summary Order Amend Keep Priority
          * @param {string} symbol
@@ -1894,7 +1894,7 @@ export interface TradeApiInterface {
      * Reduce the quantity of an existing open order.
      *
      * Read [Order Amend Keep Priority FAQ](faqs/order_amend_keep_priority.md) to learn more.
-     * Weight: 1
+     * Weight: 4
      *
      * @summary Order Amend Keep Priority
      * @param {OrderAmendKeepPriorityRequest} requestParameters Request parameters.
@@ -2353,14 +2353,14 @@ export interface NewOrderRequest {
 
     /**
      *
-     * @type {'MARKET' | 'LIMIT' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER'}
+     * @type {'MARKET' | 'LIMIT' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER' | 'NON_REPRESENTABLE'}
      * @memberof TradeApiNewOrder
      */
     readonly type?: NewOrderTypeEnum;
 
     /**
      *
-     * @type {'GTC' | 'IOC' | 'FOK'}
+     * @type {'GTC' | 'IOC' | 'FOK' | 'NON_REPRESENTABLE'}
      * @memberof TradeApiNewOrder
      */
     readonly timeInForce?: NewOrderTimeInForceEnum;
@@ -2437,7 +2437,7 @@ export interface NewOrderRequest {
 
     /**
      *
-     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH'}
+     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'DECREMENT' | 'NON_REPRESENTABLE'}
      * @memberof TradeApiNewOrder
      */
     readonly selfTradePreventionMode?: NewOrderSelfTradePreventionModeEnum;
@@ -2532,7 +2532,7 @@ export interface OrderCancelReplaceRequest {
 
     /**
      *
-     * @type {'MARKET' | 'LIMIT' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER'}
+     * @type {'MARKET' | 'LIMIT' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER' | 'NON_REPRESENTABLE'}
      * @memberof TradeApiOrderCancelReplace
      */
     readonly type?: OrderCancelReplaceTypeEnum;
@@ -2546,7 +2546,7 @@ export interface OrderCancelReplaceRequest {
 
     /**
      *
-     * @type {'GTC' | 'IOC' | 'FOK'}
+     * @type {'GTC' | 'IOC' | 'FOK' | 'NON_REPRESENTABLE'}
      * @memberof TradeApiOrderCancelReplace
      */
     readonly timeInForce?: OrderCancelReplaceTimeInForceEnum;
@@ -2644,7 +2644,7 @@ export interface OrderCancelReplaceRequest {
 
     /**
      *
-     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH'}
+     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'DECREMENT' | 'NON_REPRESENTABLE'}
      * @memberof TradeApiOrderCancelReplace
      */
     readonly selfTradePreventionMode?: OrderCancelReplaceSelfTradePreventionModeEnum;
@@ -2839,7 +2839,7 @@ export interface OrderListOcoRequest {
 
     /**
      *
-     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH'}
+     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'DECREMENT' | 'NON_REPRESENTABLE'}
      * @memberof TradeApiOrderListOco
      */
     readonly selfTradePreventionMode?: OrderListOcoSelfTradePreventionModeEnum;
@@ -2901,7 +2901,7 @@ export interface OrderListOtoRequest {
 
     /**
      *
-     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH'}
+     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'DECREMENT' | 'NON_REPRESENTABLE'}
      * @memberof TradeApiOrderListOto
      */
     readonly selfTradePreventionMode?: OrderListOtoSelfTradePreventionModeEnum;
@@ -3082,7 +3082,7 @@ export interface OrderListOtocoRequest {
 
     /**
      *
-     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH'}
+     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'DECREMENT' | 'NON_REPRESENTABLE'}
      * @memberof TradeApiOrderListOtoco
      */
     readonly selfTradePreventionMode?: OrderListOtocoSelfTradePreventionModeEnum;
@@ -3410,7 +3410,7 @@ export interface OrderOcoRequest {
 
     /**
      *
-     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH'}
+     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'DECREMENT' | 'NON_REPRESENTABLE'}
      * @memberof TradeApiOrderOco
      */
     readonly selfTradePreventionMode?: OrderOcoSelfTradePreventionModeEnum;
@@ -3464,14 +3464,14 @@ export interface SorOrderRequest {
 
     /**
      *
-     * @type {'MARKET' | 'LIMIT' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER'}
+     * @type {'MARKET' | 'LIMIT' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER' | 'NON_REPRESENTABLE'}
      * @memberof TradeApiSorOrder
      */
     readonly type?: SorOrderTypeEnum;
 
     /**
      *
-     * @type {'GTC' | 'IOC' | 'FOK'}
+     * @type {'GTC' | 'IOC' | 'FOK' | 'NON_REPRESENTABLE'}
      * @memberof TradeApiSorOrder
      */
     readonly timeInForce?: SorOrderTimeInForceEnum;
@@ -3520,7 +3520,7 @@ export interface SorOrderRequest {
 
     /**
      *
-     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH'}
+     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'DECREMENT' | 'NON_REPRESENTABLE'}
      * @memberof TradeApiSorOrder
      */
     readonly selfTradePreventionMode?: SorOrderSelfTradePreventionModeEnum;
@@ -3876,7 +3876,7 @@ export class TradeApi implements TradeApiInterface {
      * Reduce the quantity of an existing open order.
      *
      * Read [Order Amend Keep Priority FAQ](faqs/order_amend_keep_priority.md) to learn more.
-     * Weight: 1
+     * Weight: 4
      *
      * @summary Order Amend Keep Priority
      * @param {OrderAmendKeepPriorityRequest} requestParameters Request parameters.
@@ -4327,6 +4327,7 @@ export const NewOrderTypeEnum = {
     TAKE_PROFIT: 'TAKE_PROFIT',
     TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
     LIMIT_MAKER: 'LIMIT_MAKER',
+    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
 } as const;
 export type NewOrderTypeEnum = (typeof NewOrderTypeEnum)[keyof typeof NewOrderTypeEnum];
 
@@ -4334,6 +4335,7 @@ export const NewOrderTimeInForceEnum = {
     GTC: 'GTC',
     IOC: 'IOC',
     FOK: 'FOK',
+    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
 } as const;
 export type NewOrderTimeInForceEnum =
     (typeof NewOrderTimeInForceEnum)[keyof typeof NewOrderTimeInForceEnum];
@@ -4353,6 +4355,8 @@ export const NewOrderSelfTradePreventionModeEnum = {
     EXPIRE_TAKER: 'EXPIRE_TAKER',
     EXPIRE_MAKER: 'EXPIRE_MAKER',
     EXPIRE_BOTH: 'EXPIRE_BOTH',
+    DECREMENT: 'DECREMENT',
+    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
 } as const;
 export type NewOrderSelfTradePreventionModeEnum =
     (typeof NewOrderSelfTradePreventionModeEnum)[keyof typeof NewOrderSelfTradePreventionModeEnum];
@@ -4372,6 +4376,7 @@ export const OrderCancelReplaceTypeEnum = {
     TAKE_PROFIT: 'TAKE_PROFIT',
     TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
     LIMIT_MAKER: 'LIMIT_MAKER',
+    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
 } as const;
 export type OrderCancelReplaceTypeEnum =
     (typeof OrderCancelReplaceTypeEnum)[keyof typeof OrderCancelReplaceTypeEnum];
@@ -4387,6 +4392,7 @@ export const OrderCancelReplaceTimeInForceEnum = {
     GTC: 'GTC',
     IOC: 'IOC',
     FOK: 'FOK',
+    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
 } as const;
 export type OrderCancelReplaceTimeInForceEnum =
     (typeof OrderCancelReplaceTimeInForceEnum)[keyof typeof OrderCancelReplaceTimeInForceEnum];
@@ -4406,6 +4412,8 @@ export const OrderCancelReplaceSelfTradePreventionModeEnum = {
     EXPIRE_TAKER: 'EXPIRE_TAKER',
     EXPIRE_MAKER: 'EXPIRE_MAKER',
     EXPIRE_BOTH: 'EXPIRE_BOTH',
+    DECREMENT: 'DECREMENT',
+    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
 } as const;
 export type OrderCancelReplaceSelfTradePreventionModeEnum =
     (typeof OrderCancelReplaceSelfTradePreventionModeEnum)[keyof typeof OrderCancelReplaceSelfTradePreventionModeEnum];
@@ -4474,6 +4482,8 @@ export const OrderListOcoSelfTradePreventionModeEnum = {
     EXPIRE_TAKER: 'EXPIRE_TAKER',
     EXPIRE_MAKER: 'EXPIRE_MAKER',
     EXPIRE_BOTH: 'EXPIRE_BOTH',
+    DECREMENT: 'DECREMENT',
+    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
 } as const;
 export type OrderListOcoSelfTradePreventionModeEnum =
     (typeof OrderListOcoSelfTradePreventionModeEnum)[keyof typeof OrderListOcoSelfTradePreventionModeEnum];
@@ -4493,6 +4503,8 @@ export const OrderListOtoSelfTradePreventionModeEnum = {
     EXPIRE_TAKER: 'EXPIRE_TAKER',
     EXPIRE_MAKER: 'EXPIRE_MAKER',
     EXPIRE_BOTH: 'EXPIRE_BOTH',
+    DECREMENT: 'DECREMENT',
+    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
 } as const;
 export type OrderListOtoSelfTradePreventionModeEnum =
     (typeof OrderListOtoSelfTradePreventionModeEnum)[keyof typeof OrderListOtoSelfTradePreventionModeEnum];
@@ -4561,6 +4573,8 @@ export const OrderListOtocoSelfTradePreventionModeEnum = {
     EXPIRE_TAKER: 'EXPIRE_TAKER',
     EXPIRE_MAKER: 'EXPIRE_MAKER',
     EXPIRE_BOTH: 'EXPIRE_BOTH',
+    DECREMENT: 'DECREMENT',
+    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
 } as const;
 export type OrderListOtocoSelfTradePreventionModeEnum =
     (typeof OrderListOtocoSelfTradePreventionModeEnum)[keyof typeof OrderListOtocoSelfTradePreventionModeEnum];
@@ -4658,6 +4672,8 @@ export const OrderOcoSelfTradePreventionModeEnum = {
     EXPIRE_TAKER: 'EXPIRE_TAKER',
     EXPIRE_MAKER: 'EXPIRE_MAKER',
     EXPIRE_BOTH: 'EXPIRE_BOTH',
+    DECREMENT: 'DECREMENT',
+    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
 } as const;
 export type OrderOcoSelfTradePreventionModeEnum =
     (typeof OrderOcoSelfTradePreventionModeEnum)[keyof typeof OrderOcoSelfTradePreventionModeEnum];
@@ -4676,6 +4692,7 @@ export const SorOrderTypeEnum = {
     TAKE_PROFIT: 'TAKE_PROFIT',
     TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
     LIMIT_MAKER: 'LIMIT_MAKER',
+    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
 } as const;
 export type SorOrderTypeEnum = (typeof SorOrderTypeEnum)[keyof typeof SorOrderTypeEnum];
 
@@ -4683,6 +4700,7 @@ export const SorOrderTimeInForceEnum = {
     GTC: 'GTC',
     IOC: 'IOC',
     FOK: 'FOK',
+    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
 } as const;
 export type SorOrderTimeInForceEnum =
     (typeof SorOrderTimeInForceEnum)[keyof typeof SorOrderTimeInForceEnum];
@@ -4702,6 +4720,8 @@ export const SorOrderSelfTradePreventionModeEnum = {
     EXPIRE_TAKER: 'EXPIRE_TAKER',
     EXPIRE_MAKER: 'EXPIRE_MAKER',
     EXPIRE_BOTH: 'EXPIRE_BOTH',
+    DECREMENT: 'DECREMENT',
+    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
 } as const;
 export type SorOrderSelfTradePreventionModeEnum =
     (typeof SorOrderSelfTradePreventionModeEnum)[keyof typeof SorOrderSelfTradePreventionModeEnum];

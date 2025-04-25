@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.0 - 2025-04-25
+
+### Changed
+
+- Updated enums for General and Trade APIs.
+
 ## 2.0.0 - 2025-04-10
 
 ### Added

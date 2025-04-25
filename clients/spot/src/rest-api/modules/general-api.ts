@@ -202,7 +202,7 @@ export interface ExchangeInfoRequest {
 
     /**
      *
-     * @type {'PRE_TRADING' | 'TRADING' | 'POST_TRADING' | 'END_OF_DAY' | 'HALT' | 'AUCTION_MATCH' | 'BREAK'}
+     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
      * @memberof GeneralApiExchangeInfo
      */
     readonly symbolStatus?: ExchangeInfoSymbolStatusEnum;
@@ -298,13 +298,11 @@ export class GeneralApi implements GeneralApiInterface {
 }
 
 export const ExchangeInfoSymbolStatusEnum = {
-    PRE_TRADING: 'PRE_TRADING',
     TRADING: 'TRADING',
-    POST_TRADING: 'POST_TRADING',
     END_OF_DAY: 'END_OF_DAY',
     HALT: 'HALT',
-    AUCTION_MATCH: 'AUCTION_MATCH',
     BREAK: 'BREAK',
+    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
 } as const;
 export type ExchangeInfoSymbolStatusEnum =
     (typeof ExchangeInfoSymbolStatusEnum)[keyof typeof ExchangeInfoSymbolStatusEnum];
