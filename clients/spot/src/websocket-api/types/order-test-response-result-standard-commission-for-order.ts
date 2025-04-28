@@ -21,37 +21,19 @@
 /**
  *
  * @export
- * @interface TickerResponse3RateLimitsInner
+ * @interface OrderTestResponseResultStandardCommissionForOrder
  */
-export interface TickerResponse3RateLimitsInner {
+export interface OrderTestResponseResultStandardCommissionForOrder {
     /**
      *
      * @type {string}
-     * @memberof TickerResponse3RateLimitsInner
+     * @memberof OrderTestResponseResultStandardCommissionForOrder
      */
-    rateLimitType?: string;
+    maker?: string;
     /**
      *
      * @type {string}
-     * @memberof TickerResponse3RateLimitsInner
+     * @memberof OrderTestResponseResultStandardCommissionForOrder
      */
-    interval?: string;
-    /**
-     *
-     * @type {number}
-     * @memberof TickerResponse3RateLimitsInner
-     */
-    intervalNum?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof TickerResponse3RateLimitsInner
-     */
-    limit?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof TickerResponse3RateLimitsInner
-     */
-    count?: number;
+    taker?: string;
 }

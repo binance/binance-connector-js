@@ -21,10 +21,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TickerResponse1RateLimitsInner } from './ticker-response1-rate-limits-inner';
+import type { TickerResponse2RateLimitsInner } from './ticker-response2-rate-limits-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TickerResponse2Result } from './ticker-response2-result';
+import type { TickerResponse2ResultInner } from './ticker-response2-result-inner';
 
 /**
  *
@@ -46,14 +46,14 @@ export interface TickerResponse2 {
     status?: number;
     /**
      *
-     * @type {TickerResponse2Result}
+     * @type {Array<TickerResponse2ResultInner>}
      * @memberof TickerResponse2
      */
-    result?: TickerResponse2Result;
+    result?: Array<TickerResponse2ResultInner>;
     /**
      *
-     * @type {Array<TickerResponse1RateLimitsInner>}
+     * @type {Array<TickerResponse2RateLimitsInner>}
      * @memberof TickerResponse2
      */
-    rateLimits?: Array<TickerResponse1RateLimitsInner>;
+    rateLimits?: Array<TickerResponse2RateLimitsInner>;
 }

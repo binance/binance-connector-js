@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
  * Binance Spot REST API
@@ -22,16 +21,33 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderTestResponse2 } from './order-test-response2';
+import type { OrderTestResponseDiscount } from './order-test-response-discount';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderTestResponse2Discount } from './order-test-response2-discount';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { OrderTestResponse2StandardCommissionForOrder } from './order-test-response2-standard-commission-for-order';
+import type { OrderTestResponseStandardCommissionForOrder } from './order-test-response-standard-commission-for-order';
 
 /**
- * @type OrderTestResponse
+ *
  * @export
+ * @interface OrderTestResponse
  */
-export type OrderTestResponse = OrderTestResponse2 | object;
+export interface OrderTestResponse {
+    /**
+     *
+     * @type {OrderTestResponseStandardCommissionForOrder}
+     * @memberof OrderTestResponse
+     */
+    standardCommissionForOrder?: OrderTestResponseStandardCommissionForOrder;
+    /**
+     *
+     * @type {OrderTestResponseStandardCommissionForOrder}
+     * @memberof OrderTestResponse
+     */
+    taxCommissionForOrder?: OrderTestResponseStandardCommissionForOrder;
+    /**
+     *
+     * @type {OrderTestResponseDiscount}
+     * @memberof OrderTestResponse
+     */
+    discount?: OrderTestResponseDiscount;
+}

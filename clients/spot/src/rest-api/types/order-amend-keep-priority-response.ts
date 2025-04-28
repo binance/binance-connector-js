@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
  * Binance Spot REST API
@@ -22,21 +21,39 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderAmendKeepPriorityResponse1 } from './order-amend-keep-priority-response1';
+import type { OrderAmendKeepPriorityResponseAmendedOrder } from './order-amend-keep-priority-response-amended-order';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderAmendKeepPriorityResponse2 } from './order-amend-keep-priority-response2';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { OrderAmendKeepPriorityResponse2AmendedOrder } from './order-amend-keep-priority-response2-amended-order';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { OrderAmendKeepPriorityResponse2ListStatus } from './order-amend-keep-priority-response2-list-status';
+import type { OrderAmendKeepPriorityResponseListStatus } from './order-amend-keep-priority-response-list-status';
 
 /**
- * @type OrderAmendKeepPriorityResponse
+ *
  * @export
+ * @interface OrderAmendKeepPriorityResponse
  */
-export type OrderAmendKeepPriorityResponse =
-    | OrderAmendKeepPriorityResponse1
-    | OrderAmendKeepPriorityResponse2;
+export interface OrderAmendKeepPriorityResponse {
+    /**
+     *
+     * @type {number}
+     * @memberof OrderAmendKeepPriorityResponse
+     */
+    transactTime?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof OrderAmendKeepPriorityResponse
+     */
+    executionId?: number;
+    /**
+     *
+     * @type {OrderAmendKeepPriorityResponseAmendedOrder}
+     * @memberof OrderAmendKeepPriorityResponse
+     */
+    amendedOrder?: OrderAmendKeepPriorityResponseAmendedOrder;
+    /**
+     *
+     * @type {OrderAmendKeepPriorityResponseListStatus}
+     * @memberof OrderAmendKeepPriorityResponse
+     */
+    listStatus?: OrderAmendKeepPriorityResponseListStatus;
+}

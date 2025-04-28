@@ -1,5 +1,4 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
  * Binance Spot WebSocket API
@@ -19,41 +18,40 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { ExchangeInfoResponseRateLimitsInner } from './exchange-info-response-rate-limits-inner';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { OrderTestResponse2Result } from './order-test-response2-result';
-
 /**
  *
  * @export
- * @interface SorOrderTestResponse2
+ * @interface TickerResponse2RateLimitsInner
  */
-export interface SorOrderTestResponse2 {
+export interface TickerResponse2RateLimitsInner {
     /**
      *
      * @type {string}
-     * @memberof SorOrderTestResponse2
+     * @memberof TickerResponse2RateLimitsInner
      */
-    id?: string;
+    rateLimitType?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof TickerResponse2RateLimitsInner
+     */
+    interval?: string;
     /**
      *
      * @type {number}
-     * @memberof SorOrderTestResponse2
+     * @memberof TickerResponse2RateLimitsInner
      */
-    status?: number;
+    intervalNum?: number;
     /**
      *
-     * @type {OrderTestResponse2Result}
-     * @memberof SorOrderTestResponse2
+     * @type {number}
+     * @memberof TickerResponse2RateLimitsInner
      */
-    result?: OrderTestResponse2Result;
+    limit?: number;
     /**
      *
-     * @type {Array<ExchangeInfoResponseRateLimitsInner>}
-     * @memberof SorOrderTestResponse2
+     * @type {number}
+     * @memberof TickerResponse2RateLimitsInner
      */
-    rateLimits?: Array<ExchangeInfoResponseRateLimitsInner>;
+    count?: number;
 }

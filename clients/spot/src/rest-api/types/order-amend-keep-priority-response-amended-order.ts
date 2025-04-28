@@ -21,103 +21,109 @@
 /**
  *
  * @export
- * @interface OrderAmendKeepPriorityResponse2AmendedOrder
+ * @interface OrderAmendKeepPriorityResponseAmendedOrder
  */
-export interface OrderAmendKeepPriorityResponse2AmendedOrder {
+export interface OrderAmendKeepPriorityResponseAmendedOrder {
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponse2AmendedOrder
+     * @memberof OrderAmendKeepPriorityResponseAmendedOrder
      */
     symbol?: string;
     /**
      *
      * @type {number}
-     * @memberof OrderAmendKeepPriorityResponse2AmendedOrder
+     * @memberof OrderAmendKeepPriorityResponseAmendedOrder
      */
     orderId?: number;
     /**
      *
      * @type {number}
-     * @memberof OrderAmendKeepPriorityResponse2AmendedOrder
+     * @memberof OrderAmendKeepPriorityResponseAmendedOrder
      */
     orderListId?: number;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponse2AmendedOrder
+     * @memberof OrderAmendKeepPriorityResponseAmendedOrder
      */
     origClientOrderId?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponse2AmendedOrder
+     * @memberof OrderAmendKeepPriorityResponseAmendedOrder
      */
     clientOrderId?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponse2AmendedOrder
+     * @memberof OrderAmendKeepPriorityResponseAmendedOrder
      */
     price?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponse2AmendedOrder
+     * @memberof OrderAmendKeepPriorityResponseAmendedOrder
      */
     qty?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponse2AmendedOrder
+     * @memberof OrderAmendKeepPriorityResponseAmendedOrder
      */
     executedQty?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponse2AmendedOrder
+     * @memberof OrderAmendKeepPriorityResponseAmendedOrder
      */
     preventedQty?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponse2AmendedOrder
+     * @memberof OrderAmendKeepPriorityResponseAmendedOrder
      */
     quoteOrderQty?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponse2AmendedOrder
+     * @memberof OrderAmendKeepPriorityResponseAmendedOrder
      */
     cumulativeQuoteQty?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponse2AmendedOrder
+     * @memberof OrderAmendKeepPriorityResponseAmendedOrder
      */
     status?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponse2AmendedOrder
+     * @memberof OrderAmendKeepPriorityResponseAmendedOrder
      */
     timeInForce?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponse2AmendedOrder
+     * @memberof OrderAmendKeepPriorityResponseAmendedOrder
      */
     type?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponse2AmendedOrder
+     * @memberof OrderAmendKeepPriorityResponseAmendedOrder
      */
     side?: string;
     /**
      *
+     * @type {number}
+     * @memberof OrderAmendKeepPriorityResponseAmendedOrder
+     */
+    workingTime?: number;
+    /**
+     *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponse2AmendedOrder
+     * @memberof OrderAmendKeepPriorityResponseAmendedOrder
      */
     selfTradePreventionMode?: string;
 }

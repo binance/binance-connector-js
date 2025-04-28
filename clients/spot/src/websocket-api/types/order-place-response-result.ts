@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 
 /**
  * Binance Spot WebSocket API
@@ -18,106 +19,116 @@
  * Do not edit the class manually.
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { OrderPlaceResponseResultFillsInner } from './order-place-response-result-fills-inner';
+
 /**
  *
  * @export
- * @interface OrderPlaceResponse2Result
+ * @interface OrderPlaceResponseResult
  */
-export interface OrderPlaceResponse2Result {
+export interface OrderPlaceResponseResult {
     /**
      *
      * @type {string}
-     * @memberof OrderPlaceResponse2Result
+     * @memberof OrderPlaceResponseResult
      */
     symbol?: string;
     /**
      *
      * @type {number}
-     * @memberof OrderPlaceResponse2Result
+     * @memberof OrderPlaceResponseResult
      */
     orderId?: number;
     /**
      *
      * @type {number}
-     * @memberof OrderPlaceResponse2Result
+     * @memberof OrderPlaceResponseResult
      */
     orderListId?: number;
     /**
      *
      * @type {string}
-     * @memberof OrderPlaceResponse2Result
+     * @memberof OrderPlaceResponseResult
      */
     clientOrderId?: string;
     /**
      *
      * @type {number}
-     * @memberof OrderPlaceResponse2Result
+     * @memberof OrderPlaceResponseResult
      */
     transactTime?: number;
     /**
      *
      * @type {string}
-     * @memberof OrderPlaceResponse2Result
+     * @memberof OrderPlaceResponseResult
      */
     price?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderPlaceResponse2Result
+     * @memberof OrderPlaceResponseResult
      */
     origQty?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderPlaceResponse2Result
+     * @memberof OrderPlaceResponseResult
      */
     executedQty?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderPlaceResponse2Result
+     * @memberof OrderPlaceResponseResult
      */
     origQuoteOrderQty?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderPlaceResponse2Result
+     * @memberof OrderPlaceResponseResult
      */
     cummulativeQuoteQty?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderPlaceResponse2Result
+     * @memberof OrderPlaceResponseResult
      */
     status?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderPlaceResponse2Result
+     * @memberof OrderPlaceResponseResult
      */
     timeInForce?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderPlaceResponse2Result
+     * @memberof OrderPlaceResponseResult
      */
     type?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderPlaceResponse2Result
+     * @memberof OrderPlaceResponseResult
      */
     side?: string;
     /**
      *
      * @type {number}
-     * @memberof OrderPlaceResponse2Result
+     * @memberof OrderPlaceResponseResult
      */
     workingTime?: number;
     /**
      *
      * @type {string}
-     * @memberof OrderPlaceResponse2Result
+     * @memberof OrderPlaceResponseResult
      */
     selfTradePreventionMode?: string;
+    /**
+     *
+     * @type {Array<OrderPlaceResponseResultFillsInner>}
+     * @memberof OrderPlaceResponseResult
+     */
+    fills?: Array<OrderPlaceResponseResultFillsInner>;
 }

@@ -21,39 +21,39 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderCancelResponse2Result } from './order-cancel-response2-result';
+import type { OrderAmendKeepPriorityResponseResultAmendedOrder } from './order-amend-keep-priority-response-result-amended-order';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TimeResponseRateLimitsInner } from './time-response-rate-limits-inner';
+import type { OrderAmendKeepPriorityResponseResultListStatus } from './order-amend-keep-priority-response-result-list-status';
 
 /**
  *
  * @export
- * @interface OrderCancelResponse2
+ * @interface OrderAmendKeepPriorityResponseResult
  */
-export interface OrderCancelResponse2 {
-    /**
-     *
-     * @type {string}
-     * @memberof OrderCancelResponse2
-     */
-    id?: string;
+export interface OrderAmendKeepPriorityResponseResult {
     /**
      *
      * @type {number}
-     * @memberof OrderCancelResponse2
+     * @memberof OrderAmendKeepPriorityResponseResult
      */
-    status?: number;
+    transactTime?: number;
     /**
      *
-     * @type {OrderCancelResponse2Result}
-     * @memberof OrderCancelResponse2
+     * @type {number}
+     * @memberof OrderAmendKeepPriorityResponseResult
      */
-    result?: OrderCancelResponse2Result;
+    executionId?: number;
     /**
      *
-     * @type {Array<TimeResponseRateLimitsInner>}
-     * @memberof OrderCancelResponse2
+     * @type {OrderAmendKeepPriorityResponseResultAmendedOrder}
+     * @memberof OrderAmendKeepPriorityResponseResult
      */
-    rateLimits?: Array<TimeResponseRateLimitsInner>;
+    amendedOrder?: OrderAmendKeepPriorityResponseResultAmendedOrder;
+    /**
+     *
+     * @type {OrderAmendKeepPriorityResponseResultListStatus}
+     * @memberof OrderAmendKeepPriorityResponseResult
+     */
+    listStatus?: OrderAmendKeepPriorityResponseResultListStatus;
 }

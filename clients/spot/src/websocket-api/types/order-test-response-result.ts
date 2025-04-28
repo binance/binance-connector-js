@@ -21,39 +21,33 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderAmendKeepPriorityResponse1Result } from './order-amend-keep-priority-response1-result';
+import type { OrderTestResponseResultDiscount } from './order-test-response-result-discount';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TimeResponseRateLimitsInner } from './time-response-rate-limits-inner';
+import type { OrderTestResponseResultStandardCommissionForOrder } from './order-test-response-result-standard-commission-for-order';
 
 /**
  *
  * @export
- * @interface OrderAmendKeepPriorityResponse1
+ * @interface OrderTestResponseResult
  */
-export interface OrderAmendKeepPriorityResponse1 {
+export interface OrderTestResponseResult {
     /**
      *
-     * @type {string}
-     * @memberof OrderAmendKeepPriorityResponse1
+     * @type {OrderTestResponseResultStandardCommissionForOrder}
+     * @memberof OrderTestResponseResult
      */
-    id?: string;
+    standardCommissionForOrder?: OrderTestResponseResultStandardCommissionForOrder;
     /**
      *
-     * @type {number}
-     * @memberof OrderAmendKeepPriorityResponse1
+     * @type {OrderTestResponseResultStandardCommissionForOrder}
+     * @memberof OrderTestResponseResult
      */
-    status?: number;
+    taxCommissionForOrder?: OrderTestResponseResultStandardCommissionForOrder;
     /**
      *
-     * @type {OrderAmendKeepPriorityResponse1Result}
-     * @memberof OrderAmendKeepPriorityResponse1
+     * @type {OrderTestResponseResultDiscount}
+     * @memberof OrderTestResponseResult
      */
-    result?: OrderAmendKeepPriorityResponse1Result;
-    /**
-     *
-     * @type {Array<TimeResponseRateLimitsInner>}
-     * @memberof OrderAmendKeepPriorityResponse1
-     */
-    rateLimits?: Array<TimeResponseRateLimitsInner>;
+    discount?: OrderTestResponseResultDiscount;
 }

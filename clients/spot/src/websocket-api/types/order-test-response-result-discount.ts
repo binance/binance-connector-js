@@ -21,25 +21,31 @@
 /**
  *
  * @export
- * @interface OrderAmendKeepPriorityResponse2ResultListStatusOrdersInner
+ * @interface OrderTestResponseResultDiscount
  */
-export interface OrderAmendKeepPriorityResponse2ResultListStatusOrdersInner {
+export interface OrderTestResponseResultDiscount {
+    /**
+     *
+     * @type {boolean}
+     * @memberof OrderTestResponseResultDiscount
+     */
+    enabledForAccount?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof OrderTestResponseResultDiscount
+     */
+    enabledForSymbol?: boolean;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponse2ResultListStatusOrdersInner
+     * @memberof OrderTestResponseResultDiscount
      */
-    symbol?: string;
-    /**
-     *
-     * @type {number}
-     * @memberof OrderAmendKeepPriorityResponse2ResultListStatusOrdersInner
-     */
-    orderId?: number;
+    discountAsset?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponse2ResultListStatusOrdersInner
+     * @memberof OrderTestResponseResultDiscount
      */
-    clientOrderId?: string;
+    discount?: string;
 }

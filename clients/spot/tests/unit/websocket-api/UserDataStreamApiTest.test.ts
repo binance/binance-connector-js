@@ -606,7 +606,7 @@ describe('UserDataStreamApi', () => {
                     expect(sendMsgSpy).toHaveBeenCalledWith(
                         '/userDataStream.subscribe'.slice(1),
                         expect.any(Object),
-                        { isSigned: false, withApiKey: true }
+                        { isSigned: false, withApiKey: false }
                     );
                     resolveTest(true);
                 } catch (error) {
@@ -751,7 +751,7 @@ describe('UserDataStreamApi', () => {
                     expect(sendMsgSpy).toHaveBeenCalledWith(
                         '/userDataStream.unsubscribe'.slice(1),
                         expect.any(Object),
-                        { isSigned: false, withApiKey: true }
+                        { isSigned: false, withApiKey: false }
                     );
                     resolveTest(true);
                 } catch (error) {

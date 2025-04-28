@@ -1,5 +1,4 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
  * Binance Spot WebSocket API
@@ -19,38 +18,40 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { TimeResponseRateLimitsInner } from './time-response-rate-limits-inner';
-
 /**
  *
  * @export
- * @interface OrderTestResponse1
+ * @interface OrderPlaceResponseResultFillsInner
  */
-export interface OrderTestResponse1 {
+export interface OrderPlaceResponseResultFillsInner {
     /**
      *
      * @type {string}
-     * @memberof OrderTestResponse1
+     * @memberof OrderPlaceResponseResultFillsInner
      */
-    id?: string;
+    price?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof OrderPlaceResponseResultFillsInner
+     */
+    qty?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof OrderPlaceResponseResultFillsInner
+     */
+    commission?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof OrderPlaceResponseResultFillsInner
+     */
+    commissionAsset?: string;
     /**
      *
      * @type {number}
-     * @memberof OrderTestResponse1
+     * @memberof OrderPlaceResponseResultFillsInner
      */
-    status?: number;
-    /**
-     *
-     * @type {object}
-     * @memberof OrderTestResponse1
-     */
-    result?: object;
-    /**
-     *
-     * @type {Array<TimeResponseRateLimitsInner>}
-     * @memberof OrderTestResponse1
-     */
-    rateLimits?: Array<TimeResponseRateLimitsInner>;
+    tradeId?: number;
 }

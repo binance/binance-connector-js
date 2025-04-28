@@ -28,16 +28,13 @@ import type { TickerResponse1 } from './ticker-response1';
 import type { TickerResponse2 } from './ticker-response2';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TickerResponse3 } from './ticker-response3';
+import type { TickerResponse2RateLimitsInner } from './ticker-response2-rate-limits-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TickerResponse3RateLimitsInner } from './ticker-response3-rate-limits-inner';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { TickerResponse3ResultInner } from './ticker-response3-result-inner';
+import type { TickerResponse2ResultInner } from './ticker-response2-result-inner';
 
 /**
  * @type TickerResponse
  * @export
  */
-export type TickerResponse = TickerResponse1 | TickerResponse2 | TickerResponse3;
+export type TickerResponse = TickerResponse1 | TickerResponse2;

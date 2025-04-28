@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
  * Binance Spot WebSocket API
@@ -22,19 +21,39 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ExchangeInfoResponseRateLimitsInner } from './exchange-info-response-rate-limits-inner';
+import type { OrderTestResponseResult } from './order-test-response-result';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderTestResponse2Result } from './order-test-response2-result';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { SorOrderTestResponse1 } from './sor-order-test-response1';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { SorOrderTestResponse2 } from './sor-order-test-response2';
+import type { TimeResponseRateLimitsInner } from './time-response-rate-limits-inner';
 
 /**
- * @type SorOrderTestResponse
+ *
  * @export
+ * @interface SorOrderTestResponse
  */
-export type SorOrderTestResponse = SorOrderTestResponse1 | SorOrderTestResponse2;
+export interface SorOrderTestResponse {
+    /**
+     *
+     * @type {string}
+     * @memberof SorOrderTestResponse
+     */
+    id?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof SorOrderTestResponse
+     */
+    status?: number;
+    /**
+     *
+     * @type {OrderTestResponseResult}
+     * @memberof SorOrderTestResponse
+     */
+    result?: OrderTestResponseResult;
+    /**
+     *
+     * @type {Array<TimeResponseRateLimitsInner>}
+     * @memberof SorOrderTestResponse
+     */
+    rateLimits?: Array<TimeResponseRateLimitsInner>;
+}

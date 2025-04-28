@@ -281,7 +281,7 @@ export class UserDataStreamApi implements UserDataStreamApiInterface {
         return this.websocketBase.sendMessage<UserDataStreamSubscribeResponse>(
             '/userDataStream.subscribe'.slice(1),
             requestParameters as unknown as WebsocketSendMsgOptions,
-            { isSigned: false, withApiKey: true }
+            { isSigned: false, withApiKey: false }
         );
     }
 
@@ -301,7 +301,7 @@ export class UserDataStreamApi implements UserDataStreamApiInterface {
         return this.websocketBase.sendMessage<UserDataStreamUnsubscribeResponse>(
             '/userDataStream.unsubscribe'.slice(1),
             requestParameters as unknown as WebsocketSendMsgOptions,
-            { isSigned: false, withApiKey: true }
+            { isSigned: false, withApiKey: false }
         );
     }
 }

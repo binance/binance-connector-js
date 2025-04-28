@@ -1,5 +1,4 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
  * Binance Spot WebSocket API
@@ -19,110 +18,112 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { OrderPlaceResponse3ResultFillsInner } from './order-place-response3-result-fills-inner';
-
 /**
  *
  * @export
- * @interface OrderPlaceResponse3Result
+ * @interface OrderAmendKeepPriorityResponseResultAmendedOrder
  */
-export interface OrderPlaceResponse3Result {
+export interface OrderAmendKeepPriorityResponseResultAmendedOrder {
     /**
      *
      * @type {string}
-     * @memberof OrderPlaceResponse3Result
+     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
      */
     symbol?: string;
     /**
      *
      * @type {number}
-     * @memberof OrderPlaceResponse3Result
+     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
      */
     orderId?: number;
     /**
      *
      * @type {number}
-     * @memberof OrderPlaceResponse3Result
+     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
      */
     orderListId?: number;
     /**
      *
      * @type {string}
-     * @memberof OrderPlaceResponse3Result
+     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
+     */
+    origClientOrderId?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
      */
     clientOrderId?: string;
     /**
      *
-     * @type {number}
-     * @memberof OrderPlaceResponse3Result
-     */
-    transactTime?: number;
-    /**
-     *
      * @type {string}
-     * @memberof OrderPlaceResponse3Result
+     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
      */
     price?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderPlaceResponse3Result
+     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
      */
-    origQty?: string;
+    qty?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderPlaceResponse3Result
+     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
      */
     executedQty?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderPlaceResponse3Result
+     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
      */
-    origQuoteOrderQty?: string;
+    preventedQty?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderPlaceResponse3Result
+     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
      */
-    cummulativeQuoteQty?: string;
+    quoteOrderQty?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderPlaceResponse3Result
+     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
+     */
+    cumulativeQuoteQty?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
      */
     status?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderPlaceResponse3Result
+     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
      */
     timeInForce?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderPlaceResponse3Result
+     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
      */
     type?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderPlaceResponse3Result
+     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
      */
     side?: string;
     /**
      *
      * @type {number}
-     * @memberof OrderPlaceResponse3Result
+     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
      */
     workingTime?: number;
     /**
      *
-     * @type {Array<OrderPlaceResponse3ResultFillsInner>}
-     * @memberof OrderPlaceResponse3Result
+     * @type {string}
+     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
      */
-    fills?: Array<OrderPlaceResponse3ResultFillsInner>;
+    selfTradePreventionMode?: string;
 }

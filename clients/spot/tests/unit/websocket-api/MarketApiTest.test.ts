@@ -633,7 +633,7 @@ describe('MarketApi', () => {
 
         it('should execute ticker() successfully', async () => {
             mockResponse = {
-                id: 'f4b3b507-c8f2-442a-81a6-b2f12daa030f',
+                id: 'bdb7c503-542c-495c-b797-4d2ee2e91173',
                 status: 200,
                 result: {
                     symbol: 'BNBBTC',
@@ -803,7 +803,7 @@ describe('MarketApi', () => {
 
         it('should execute ticker24hr() successfully', async () => {
             mockResponse = {
-                id: '93fb61ef-89f8-4d6e-b022-4f035a3fadad',
+                id: '9fa2a91b-3fca-4ed7-a9ad-58e3b67483de',
                 status: 200,
                 result: {
                     symbol: 'BNBBTC',

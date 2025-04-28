@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.0.0 - 2025-04-28
+
+### Changed
+
+- Removed `apiKey` from `userDataStream.subscribe` and `userDataStream.unsubscribe` Websocket endpoints.
+- Updated response types.
+
 ## 3.0.0 - 2025-04-25
 
 ### Changed

@@ -19,13 +19,9 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { KlinesItemInner } from './klines-item-inner';
-
 /**
  *
  * @export
  * @interface UiKlinesItem
  */
-export interface UiKlinesItem extends Array<KlinesItemInner> {}
+export interface UiKlinesItem extends Array<string> {}

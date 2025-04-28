@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
  * Binance Spot WebSocket API
@@ -22,21 +21,39 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderAmendKeepPriorityResponse1 } from './order-amend-keep-priority-response1';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { OrderAmendKeepPriorityResponse2 } from './order-amend-keep-priority-response2';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { OrderAmendKeepPriorityResponse2Result } from './order-amend-keep-priority-response2-result';
+import type { OrderAmendKeepPriorityResponseResult } from './order-amend-keep-priority-response-result';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { TimeResponseRateLimitsInner } from './time-response-rate-limits-inner';
 
 /**
- * @type OrderAmendKeepPriorityResponse
+ *
  * @export
+ * @interface OrderAmendKeepPriorityResponse
  */
-export type OrderAmendKeepPriorityResponse =
-    | OrderAmendKeepPriorityResponse1
-    | OrderAmendKeepPriorityResponse2;
+export interface OrderAmendKeepPriorityResponse {
+    /**
+     *
+     * @type {string}
+     * @memberof OrderAmendKeepPriorityResponse
+     */
+    id?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof OrderAmendKeepPriorityResponse
+     */
+    status?: number;
+    /**
+     *
+     * @type {OrderAmendKeepPriorityResponseResult}
+     * @memberof OrderAmendKeepPriorityResponse
+     */
+    result?: OrderAmendKeepPriorityResponseResult;
+    /**
+     *
+     * @type {Array<TimeResponseRateLimitsInner>}
+     * @memberof OrderAmendKeepPriorityResponse
+     */
+    rateLimits?: Array<TimeResponseRateLimitsInner>;
+}

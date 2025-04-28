@@ -31,13 +31,10 @@ import type { Ticker24hrResponse1 } from './ticker24hr-response1';
 import type { Ticker24hrResponse2 } from './ticker24hr-response2';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Ticker24hrResponse3 } from './ticker24hr-response3';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { Ticker24hrResponse3ResultInner } from './ticker24hr-response3-result-inner';
+import type { Ticker24hrResponse2ResultInner } from './ticker24hr-response2-result-inner';
 
 /**
  * @type Ticker24hrResponse
  * @export
  */
-export type Ticker24hrResponse = Ticker24hrResponse1 | Ticker24hrResponse2 | Ticker24hrResponse3;
+export type Ticker24hrResponse = Ticker24hrResponse1 | Ticker24hrResponse2;

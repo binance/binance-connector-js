@@ -1,5 +1,4 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
  * Binance Spot REST API
@@ -19,32 +18,28 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { OrderAmendKeepPriorityResponse1AmendedOrder } from './order-amend-keep-priority-response1-amended-order';
-
 /**
  *
  * @export
- * @interface OrderAmendKeepPriorityResponse1
+ * @interface OrderAmendKeepPriorityResponseListStatusOrdersInner
  */
-export interface OrderAmendKeepPriorityResponse1 {
+export interface OrderAmendKeepPriorityResponseListStatusOrdersInner {
+    /**
+     *
+     * @type {string}
+     * @memberof OrderAmendKeepPriorityResponseListStatusOrdersInner
+     */
+    symbol?: string;
     /**
      *
      * @type {number}
-     * @memberof OrderAmendKeepPriorityResponse1
+     * @memberof OrderAmendKeepPriorityResponseListStatusOrdersInner
      */
-    transactTime?: number;
+    orderId?: number;
     /**
      *
-     * @type {number}
-     * @memberof OrderAmendKeepPriorityResponse1
+     * @type {string}
+     * @memberof OrderAmendKeepPriorityResponseListStatusOrdersInner
      */
-    executionId?: number;
-    /**
-     *
-     * @type {OrderAmendKeepPriorityResponse1AmendedOrder}
-     * @memberof OrderAmendKeepPriorityResponse1
-     */
-    amendedOrder?: OrderAmendKeepPriorityResponse1AmendedOrder;
+    clientOrderId?: string;
 }

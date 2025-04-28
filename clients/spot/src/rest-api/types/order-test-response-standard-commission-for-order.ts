@@ -21,19 +21,19 @@
 /**
  *
  * @export
- * @interface OrderTestResponse2StandardCommissionForOrder
+ * @interface OrderTestResponseStandardCommissionForOrder
  */
-export interface OrderTestResponse2StandardCommissionForOrder {
+export interface OrderTestResponseStandardCommissionForOrder {
     /**
      *
      * @type {string}
-     * @memberof OrderTestResponse2StandardCommissionForOrder
+     * @memberof OrderTestResponseStandardCommissionForOrder
      */
     maker?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderTestResponse2StandardCommissionForOrder
+     * @memberof OrderTestResponseStandardCommissionForOrder
      */
     taker?: string;
 }

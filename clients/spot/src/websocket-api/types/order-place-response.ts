@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
  * Binance Spot WebSocket API
@@ -25,19 +24,36 @@
 import type { OrderCancelReplaceResponseRateLimitsInner } from './order-cancel-replace-response-rate-limits-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderPlaceResponse1 } from './order-place-response1';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { OrderPlaceResponse2 } from './order-place-response2';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { OrderPlaceResponse3 } from './order-place-response3';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { OrderPlaceResponse3Result } from './order-place-response3-result';
+import type { OrderPlaceResponseResult } from './order-place-response-result';
 
 /**
- * @type OrderPlaceResponse
+ *
  * @export
+ * @interface OrderPlaceResponse
  */
-export type OrderPlaceResponse = OrderPlaceResponse1 | OrderPlaceResponse2 | OrderPlaceResponse3;
+export interface OrderPlaceResponse {
+    /**
+     *
+     * @type {string}
+     * @memberof OrderPlaceResponse
+     */
+    id?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof OrderPlaceResponse
+     */
+    status?: number;
+    /**
+     *
+     * @type {OrderPlaceResponseResult}
+     * @memberof OrderPlaceResponse
+     */
+    result?: OrderPlaceResponseResult;
+    /**
+     *
+     * @type {Array<OrderCancelReplaceResponseRateLimitsInner>}
+     * @memberof OrderPlaceResponse
+     */
+    rateLimits?: Array<OrderCancelReplaceResponseRateLimitsInner>;
+}

@@ -21,133 +21,133 @@
 /**
  *
  * @export
- * @interface Ticker24hrResponse3ResultInner
+ * @interface Ticker24hrResponse2ResultInner
  */
-export interface Ticker24hrResponse3ResultInner {
+export interface Ticker24hrResponse2ResultInner {
     /**
      *
      * @type {string}
-     * @memberof Ticker24hrResponse3ResultInner
+     * @memberof Ticker24hrResponse2ResultInner
      */
     symbol?: string;
     /**
      *
      * @type {string}
-     * @memberof Ticker24hrResponse3ResultInner
+     * @memberof Ticker24hrResponse2ResultInner
      */
     priceChange?: string;
     /**
      *
      * @type {string}
-     * @memberof Ticker24hrResponse3ResultInner
+     * @memberof Ticker24hrResponse2ResultInner
      */
     priceChangePercent?: string;
     /**
      *
      * @type {string}
-     * @memberof Ticker24hrResponse3ResultInner
+     * @memberof Ticker24hrResponse2ResultInner
      */
     weightedAvgPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof Ticker24hrResponse3ResultInner
+     * @memberof Ticker24hrResponse2ResultInner
      */
     prevClosePrice?: string;
     /**
      *
      * @type {string}
-     * @memberof Ticker24hrResponse3ResultInner
+     * @memberof Ticker24hrResponse2ResultInner
      */
     lastPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof Ticker24hrResponse3ResultInner
+     * @memberof Ticker24hrResponse2ResultInner
      */
     lastQty?: string;
     /**
      *
      * @type {string}
-     * @memberof Ticker24hrResponse3ResultInner
+     * @memberof Ticker24hrResponse2ResultInner
      */
     bidPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof Ticker24hrResponse3ResultInner
+     * @memberof Ticker24hrResponse2ResultInner
      */
     bidQty?: string;
     /**
      *
      * @type {string}
-     * @memberof Ticker24hrResponse3ResultInner
+     * @memberof Ticker24hrResponse2ResultInner
      */
     askPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof Ticker24hrResponse3ResultInner
+     * @memberof Ticker24hrResponse2ResultInner
      */
     askQty?: string;
     /**
      *
      * @type {string}
-     * @memberof Ticker24hrResponse3ResultInner
+     * @memberof Ticker24hrResponse2ResultInner
      */
     openPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof Ticker24hrResponse3ResultInner
+     * @memberof Ticker24hrResponse2ResultInner
      */
     highPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof Ticker24hrResponse3ResultInner
+     * @memberof Ticker24hrResponse2ResultInner
      */
     lowPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof Ticker24hrResponse3ResultInner
+     * @memberof Ticker24hrResponse2ResultInner
      */
     volume?: string;
     /**
      *
      * @type {string}
-     * @memberof Ticker24hrResponse3ResultInner
+     * @memberof Ticker24hrResponse2ResultInner
      */
     quoteVolume?: string;
     /**
      *
      * @type {number}
-     * @memberof Ticker24hrResponse3ResultInner
+     * @memberof Ticker24hrResponse2ResultInner
      */
     openTime?: number;
     /**
      *
      * @type {number}
-     * @memberof Ticker24hrResponse3ResultInner
+     * @memberof Ticker24hrResponse2ResultInner
      */
     closeTime?: number;
     /**
      *
      * @type {number}
-     * @memberof Ticker24hrResponse3ResultInner
+     * @memberof Ticker24hrResponse2ResultInner
      */
     firstId?: number;
     /**
      *
      * @type {number}
-     * @memberof Ticker24hrResponse3ResultInner
+     * @memberof Ticker24hrResponse2ResultInner
      */
     lastId?: number;
     /**
      *
      * @type {number}
-     * @memberof Ticker24hrResponse3ResultInner
+     * @memberof Ticker24hrResponse2ResultInner
      */
     count?: number;
 }

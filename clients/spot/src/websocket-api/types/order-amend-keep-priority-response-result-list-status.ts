@@ -21,48 +21,48 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderAmendKeepPriorityResponse2ResultListStatusOrdersInner } from './order-amend-keep-priority-response2-result-list-status-orders-inner';
+import type { OrderAmendKeepPriorityResponseResultListStatusOrdersInner } from './order-amend-keep-priority-response-result-list-status-orders-inner';
 
 /**
  *
  * @export
- * @interface OrderAmendKeepPriorityResponse2ResultListStatus
+ * @interface OrderAmendKeepPriorityResponseResultListStatus
  */
-export interface OrderAmendKeepPriorityResponse2ResultListStatus {
+export interface OrderAmendKeepPriorityResponseResultListStatus {
     /**
      *
      * @type {number}
-     * @memberof OrderAmendKeepPriorityResponse2ResultListStatus
+     * @memberof OrderAmendKeepPriorityResponseResultListStatus
      */
     orderListId?: number;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponse2ResultListStatus
+     * @memberof OrderAmendKeepPriorityResponseResultListStatus
      */
     contingencyType?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponse2ResultListStatus
+     * @memberof OrderAmendKeepPriorityResponseResultListStatus
      */
     listOrderStatus?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponse2ResultListStatus
+     * @memberof OrderAmendKeepPriorityResponseResultListStatus
      */
     listClientOrderId?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponse2ResultListStatus
+     * @memberof OrderAmendKeepPriorityResponseResultListStatus
      */
     symbol?: string;
     /**
      *
-     * @type {Array<OrderAmendKeepPriorityResponse2ResultListStatusOrdersInner>}
-     * @memberof OrderAmendKeepPriorityResponse2ResultListStatus
+     * @type {Array<OrderAmendKeepPriorityResponseResultListStatusOrdersInner>}
+     * @memberof OrderAmendKeepPriorityResponseResultListStatus
      */
-    orders?: Array<OrderAmendKeepPriorityResponse2ResultListStatusOrdersInner>;
+    orders?: Array<OrderAmendKeepPriorityResponseResultListStatusOrdersInner>;
 }

@@ -21,79 +21,97 @@
 /**
  *
  * @export
- * @interface TickerResponse2Result
+ * @interface TickerResponse2ResultInner
  */
-export interface TickerResponse2Result {
+export interface TickerResponse2ResultInner {
     /**
      *
      * @type {string}
-     * @memberof TickerResponse2Result
+     * @memberof TickerResponse2ResultInner
      */
     symbol?: string;
     /**
      *
      * @type {string}
-     * @memberof TickerResponse2Result
+     * @memberof TickerResponse2ResultInner
+     */
+    priceChange?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof TickerResponse2ResultInner
+     */
+    priceChangePercent?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof TickerResponse2ResultInner
+     */
+    weightedAvgPrice?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof TickerResponse2ResultInner
      */
     openPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof TickerResponse2Result
+     * @memberof TickerResponse2ResultInner
      */
     highPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof TickerResponse2Result
+     * @memberof TickerResponse2ResultInner
      */
     lowPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof TickerResponse2Result
+     * @memberof TickerResponse2ResultInner
      */
     lastPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof TickerResponse2Result
+     * @memberof TickerResponse2ResultInner
      */
     volume?: string;
     /**
      *
      * @type {string}
-     * @memberof TickerResponse2Result
+     * @memberof TickerResponse2ResultInner
      */
     quoteVolume?: string;
     /**
      *
      * @type {number}
-     * @memberof TickerResponse2Result
+     * @memberof TickerResponse2ResultInner
      */
     openTime?: number;
     /**
      *
      * @type {number}
-     * @memberof TickerResponse2Result
+     * @memberof TickerResponse2ResultInner
      */
     closeTime?: number;
     /**
      *
      * @type {number}
-     * @memberof TickerResponse2Result
+     * @memberof TickerResponse2ResultInner
      */
     firstId?: number;
     /**
      *
      * @type {number}
-     * @memberof TickerResponse2Result
+     * @memberof TickerResponse2ResultInner
      */
     lastId?: number;
     /**
      *
      * @type {number}
-     * @memberof TickerResponse2Result
+     * @memberof TickerResponse2ResultInner
      */
     count?: number;
 }

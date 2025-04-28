@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
  * Binance Spot WebSocket API
@@ -22,19 +21,39 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderCancelResponse1 } from './order-cancel-response1';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { OrderCancelResponse2 } from './order-cancel-response2';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { OrderCancelResponse2Result } from './order-cancel-response2-result';
+import type { OrderCancelResponseResult } from './order-cancel-response-result';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { TimeResponseRateLimitsInner } from './time-response-rate-limits-inner';
 
 /**
- * @type OrderCancelResponse
+ *
  * @export
+ * @interface OrderCancelResponse
  */
-export type OrderCancelResponse = OrderCancelResponse1 | OrderCancelResponse2;
+export interface OrderCancelResponse {
+    /**
+     *
+     * @type {string}
+     * @memberof OrderCancelResponse
+     */
+    id?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof OrderCancelResponse
+     */
+    status?: number;
+    /**
+     *
+     * @type {OrderCancelResponseResult}
+     * @memberof OrderCancelResponse
+     */
+    result?: OrderCancelResponseResult;
+    /**
+     *
+     * @type {Array<TimeResponseRateLimitsInner>}
+     * @memberof OrderCancelResponse
+     */
+    rateLimits?: Array<TimeResponseRateLimitsInner>;
+}

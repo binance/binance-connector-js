@@ -19,7 +19,27 @@
  */
 
 /**
- * @type KlinesItemInner
+ *
  * @export
+ * @interface OrderCancelResponseResultOrdersInner
  */
-export type KlinesItemInner = number | string;
+export interface OrderCancelResponseResultOrdersInner {
+    /**
+     *
+     * @type {string}
+     * @memberof OrderCancelResponseResultOrdersInner
+     */
+    symbol?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof OrderCancelResponseResultOrdersInner
+     */
+    orderId?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof OrderCancelResponseResultOrdersInner
+     */
+    clientOrderId?: string;
+}
