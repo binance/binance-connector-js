@@ -1,4 +1,6 @@
-# Binance JavaScript Auto Invest Connector
+# **DEPRECATED** - Binance JavaScript Auto Invest Connector
+
+## **This module is deprecated and will be removed, please do not use it.**
 
 [![Open Issues](https://img.shields.io/github/issues/binance/binance-connector-js)](https://github.com/binance/binance-connector-js/issues)
 [![Code Style: Prettier](https://img.shields.io/badge/code%20style-prettier-ff69b4)](https://prettier.io/)
