@@ -49,13 +49,25 @@ export interface WebsocketApiRateLimit {
 }
 
 /**
- * Represents the response from a WebSocket API request.
- * @template T - The type of the data returned in the response.
- * @property {T} data - The data from the API response.
+ * Extracts the result or response from a WebSocket API response type.
+ * @template T - The type of the WebSocket API response.
+ * @returns {T['result'] | T['response'] | never} The extracted result or response, or never if neither exists.
+ * @description Checks if the type T has a 'result' or 'response' key and returns its value, otherwise returns never.
+ */
+type ExtractWebsocketApiResponse<T> = 'result' extends keyof T
+    ? T['result']
+    : 'response' extends keyof T
+      ? T['response']
+      : unknown;
+
+/**
+ * Represents the response from a WebSocket API.
+ * @template T - The type of the WebSocket API response.
+ * @property {NonNullable<ExtractWebsocketApiResponse<T>>} data - The extracted, non-null data from the WebSocket API response.
  * @property {WebsocketApiRateLimit[]} [rateLimits] - An optional array of rate limit information for the response.
  */
 export type WebsocketApiResponse<T> = {
-    data: T;
+    data: NonNullable<ExtractWebsocketApiResponse<T>>;
     rateLimits?: WebsocketApiRateLimit[];
 };
 

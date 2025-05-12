@@ -696,22 +696,26 @@ describe('Utility Functions', () => {
             const result = replaceWebsocketStreamsPlaceholders('/<symbol>', { symbol: 'BTCUSDT' });
             expect(result).toBe('/btcusdt');
         });
-    
+
         it('should normalize keys by removing dashes/underscores and lowercasing', () => {
-            const result = replaceWebsocketStreamsPlaceholders('/<window_size>', { 'window-size': '15m' });
+            const result = replaceWebsocketStreamsPlaceholders('/<window_size>', {
+                'window-size': '15m',
+            });
             expect(result).toBe('/15m');
         });
-    
+
         it('should replace @<updateSpeed> with an "@" prefix when updateSpeed is provided', () => {
-            const result = replaceWebsocketStreamsPlaceholders('/stream@<updateSpeed>', { updateSpeed: '200' });
+            const result = replaceWebsocketStreamsPlaceholders('/stream@<updateSpeed>', {
+                updateSpeed: '200',
+            });
             expect(result).toBe('/stream@200');
         });
-    
+
         it('should remove the "@" preceding <updateSpeed> when updateSpeed is missing', () => {
             const result = replaceWebsocketStreamsPlaceholders('/stream@<updateSpeed>', {});
             expect(result).toBe('/stream');
         });
-    
+
         it('should handle multiple placeholders correctly', () => {
             const input = '/<symbol>@depth<levels>@<updateSpeed>';
             const variables = {
@@ -722,17 +726,17 @@ describe('Utility Functions', () => {
             const result = replaceWebsocketStreamsPlaceholders(input, variables);
             expect(result).toBe('/btcusdt@depth10@100');
         });
-    
+
         it('should return an empty string for missing variable placeholders', () => {
             const result = replaceWebsocketStreamsPlaceholders('/<symbol>', {});
             expect(result).toBe('/');
         });
-    
+
         it('should return an empty string when the variable is null', () => {
             const result = replaceWebsocketStreamsPlaceholders('/<symbol>', { symbol: null });
             expect(result).toBe('/');
         });
-    
+
         it('should preserve a preceding "@" for non-updateSpeed placeholders', () => {
             const result = replaceWebsocketStreamsPlaceholders('/prefix@<data>', { data: 'value' });
             expect(result).toBe('/prefix@value');

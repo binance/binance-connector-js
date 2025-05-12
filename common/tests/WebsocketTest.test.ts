@@ -1457,6 +1457,68 @@ describe('WebsocketAPIBase', () => {
             expect(pendingRequest).toBeUndefined();
         });
 
+        it('should resolve with data from `result` when present', () => {
+            const connection = connectionPool[0];
+            const mockResolve = jest.fn();
+            const mockReject = jest.fn();
+            connection.pendingRequests.set('test-id', { resolve: mockResolve, reject: mockReject });
+
+            const testResult = { foo: 'bar' };
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (wsAPI as any).onMessage(
+                JSON.stringify({ id: 'test-id', status: 200, result: testResult }),
+                connection
+            );
+
+            expect(mockResolve).toHaveBeenCalledTimes(1);
+            expect(mockResolve).toHaveBeenCalledWith({ data: testResult });
+
+            expect(mockReject).not.toHaveBeenCalled();
+        });
+
+        it('should resolve with data from `response` when `result` is missing', () => {
+            const connection = connectionPool[0];
+            const mockResolve = jest.fn();
+            const mockReject = jest.fn();
+            connection.pendingRequests.set('test-id', { resolve: mockResolve, reject: mockReject });
+
+            const testResponse = [1, 2, 3];
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (wsAPI as any).onMessage(
+                JSON.stringify({ id: 'test-id', status: 200, response: testResponse }),
+                connection
+            );
+
+            expect(mockResolve).toHaveBeenCalledTimes(1);
+            expect(mockResolve).toHaveBeenCalledWith({ data: testResponse });
+            expect(mockReject).not.toHaveBeenCalled();
+        });
+
+        it('should include `rateLimits` in the resolved value when provided', () => {
+            const connection = connectionPool[0];
+            const mockResolve = jest.fn();
+            connection.pendingRequests.set('test-id', { resolve: mockResolve, reject: jest.fn() });
+
+            const rl = [
+                {
+                    rateLimitType: 'REQUEST_WEIGHT',
+                    interval: 'MINUTE',
+                    intervalNum: 1,
+                    limit: 1200,
+                },
+            ];
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (wsAPI as any).onMessage(
+                JSON.stringify({ id: 'test-id', status: 200, result: 'ok', rateLimits: rl }),
+                connection
+            );
+
+            expect(mockResolve).toHaveBeenCalledWith({
+                data: 'ok',
+                rateLimits: rl,
+            });
+        });
+
         it('should reject pending requests with an error response', () => {
             const connection = connectionPool[0];
             connection.pendingRequests.set('test-id', {

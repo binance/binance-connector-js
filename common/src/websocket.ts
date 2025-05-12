@@ -644,7 +644,7 @@ export class WebsocketAPIBase extends WebsocketCommon {
      * Processes incoming WebSocket messages
      * @param data The raw message data received
      */
-    protected onMessage(data: string, connection: WebsocketConnection): void {
+    protected onMessage<T>(data: string, connection: WebsocketConnection): void {
         try {
             const message = JSON.parse(data);
             const { id, status } = message;
@@ -656,8 +656,10 @@ export class WebsocketAPIBase extends WebsocketCommon {
                 if (status && status >= 400) {
                     request?.reject(message.error);
                 } else {
-                    const response: WebsocketApiResponse<unknown> = { data: message.result };
-                    if (message?.rateLimits) response.rateLimits = message.rateLimits;
+                    const response: WebsocketApiResponse<T> = {
+                        data: message.result ?? message.response,
+                        ...(message.rateLimits && { rateLimits: message.rateLimits }),
+                    };
                     request?.resolve(response);
                 }
             } else {

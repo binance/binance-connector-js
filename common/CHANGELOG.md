@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.3 - 2025-05-12
+
+### Changed
+
+- Fixed bug on `WebsocketApiResponse` data parsing.
+
 ## 1.0.2 - 2025-04-10
 
 ### Changed
