@@ -1519,6 +1519,28 @@ describe('WebsocketAPIBase', () => {
             });
         });
 
+        it('should call all stream callbacks for user data event messages', () => {
+            const callback1 = jest.fn();
+
+            wsAPI.streamCallbackMap.set('random-id-1', new Set([callback1]));
+
+            const eventMessage = {
+                event: {
+                    e: 'accountUpdate',
+                    E: 123456789,
+                    a: {
+                        B: [{ a: 'BTC', f: '0.001', l: '0.000' }],
+                    },
+                },
+            };
+
+            // @ts-expect-error: access private member for testing
+            wsAPI.onMessage(JSON.stringify(eventMessage), connectionPool[0]);
+
+            expect(callback1).toHaveBeenCalledTimes(1);
+            expect(callback1).toHaveBeenCalledWith(eventMessage.event);
+        });
+
         it('should reject pending requests with an error response', () => {
             const connection = connectionPool[0];
             connection.pendingRequests.set('test-id', {

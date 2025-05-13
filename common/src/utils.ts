@@ -24,8 +24,6 @@ import {
     ServerError,
     TooManyRequestsError,
     UnauthorizedError,
-    WebsocketStream,
-    WebsocketStreamsBase,
     AxiosRequestArgs,
     SendMessageOptions,
     ObjectType,
@@ -587,37 +585,4 @@ export function replaceWebsocketStreamsPlaceholders(
 
         return '';
     });
-}
-
-/**
- * Creates a WebsocketStream instance that subscribes to the specified stream and provides a callback for handling incoming messages.
- *
- * @param websocketBase - The WebsocketStreamsBase instance to use for subscribing and unsubscribing from the stream.
- * @param stream - The name of the stream to subscribe to.
- * @param id - An optional identifier for the stream.
- * @returns A WebsocketStream instance that can be used to handle incoming messages and unsubscribe from the stream.
- */
-export function createStreamHandler<T>(
-    websocketBase: WebsocketStreamsBase,
-    stream: string,
-    id?: string
-): WebsocketStream<T> {
-    websocketBase.subscribe(stream, id);
-
-    let registeredCallback: (data: unknown) => void;
-    return {
-        on: (event: 'message', callback: (data: T) => void) => {
-            if (event === 'message') {
-                registeredCallback = (data: unknown) => callback(data as T);
-                const callbackSet = websocketBase.streamCallbackMap.get(stream) ?? new Set();
-                callbackSet.add(registeredCallback);
-                websocketBase.streamCallbackMap.set(stream, callbackSet);
-            }
-        },
-        unsubscribe: () => {
-            if (registeredCallback)
-                websocketBase.streamCallbackMap.get(stream)?.delete(registeredCallback);
-            websocketBase.unsubscribe(stream, id);
-        },
-    };
 }

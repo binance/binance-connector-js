@@ -611,6 +611,7 @@ export interface WebsocketSendMsgOptions {
 
 export class WebsocketAPIBase extends WebsocketCommon {
     private isConnecting: boolean = false;
+    streamCallbackMap: Map<string, Set<(data: unknown) => void>> = new Map();
     configuration: ConfigurationWebsocketAPI;
     logger: Logger = Logger.getInstance();
 
@@ -662,6 +663,15 @@ export class WebsocketAPIBase extends WebsocketCommon {
                     };
                     request?.resolve(response);
                 }
+            } else if (
+                'event' in message &&
+                'e' in message['event'] &&
+                this.streamCallbackMap.size > 0
+            ) {
+                // Handle user data stream messages (currently with no ID we send the message to all registered callbacks)
+                this.streamCallbackMap.forEach((callbacks) =>
+                    callbacks.forEach((callback) => callback(message['event']))
+                );
             } else {
                 this.logger.warn('Received response for unknown or timed-out request:', message);
             }
@@ -751,20 +761,6 @@ export class WebsocketAPIBase extends WebsocketCommon {
             WebsocketApiResponse<T>
         >;
     }
-}
-
-export interface WebsocketStream<T> {
-    /**
-     * Attach a listener for the stream.
-     * @param event - Event name (currently supports "message").
-     * @param callback - Callback function to handle incoming data.
-     */
-    on(event: 'message', callback: (data: T) => void): void;
-
-    /**
-     * Unsubscribe from the stream and clean up resources.
-     */
-    unsubscribe(): void;
 }
 
 export class WebsocketStreamsBase extends WebsocketCommon {
@@ -1023,4 +1019,53 @@ export class WebsocketStreamsBase extends WebsocketCommon {
     isSubscribed(stream: string): boolean {
         return this.streamConnectionMap.has(stream);
     }
+}
+
+export interface WebsocketStream<T> {
+    /**
+     * Attach a listener for the stream.
+     * @param event - Event name (currently supports "message").
+     * @param callback - Callback function to handle incoming data.
+     */
+    on(event: 'message', callback: (data: T) => void): void;
+
+    /**
+     * Unsubscribe from the stream and clean up resources.
+     */
+    unsubscribe(): void;
+}
+
+/**
+ * Creates a WebSocket stream handler for managing stream subscriptions and callbacks.
+ *
+ * @template T The type of data expected in the stream messages
+ * @param {WebsocketAPIBase | WebsocketStreamsBase} websocketBase The WebSocket base instance
+ * @param {string} streamOrId The stream identifier
+ * @param {string} [id] Optional additional identifier
+ * @returns {WebsocketStream<T>} A stream handler with methods to register callbacks and unsubscribe
+ */
+export function createStreamHandler<T>(
+    websocketBase: WebsocketAPIBase | WebsocketStreamsBase,
+    streamOrId: string,
+    id?: string
+): WebsocketStream<T> {
+    if (websocketBase instanceof WebsocketStreamsBase) websocketBase.subscribe(streamOrId, id);
+
+    let registeredCallback: (data: unknown) => void;
+    return {
+        on: (event: 'message', callback: (data: T) => void) => {
+            if (event === 'message') {
+                registeredCallback = (data: unknown) => callback(data as T);
+                const callbackSet = websocketBase.streamCallbackMap.get(streamOrId) ?? new Set();
+                callbackSet.add(registeredCallback);
+                websocketBase.streamCallbackMap.set(streamOrId, callbackSet);
+            }
+        },
+        unsubscribe: () => {
+            if (registeredCallback)
+                websocketBase.streamCallbackMap.get(streamOrId)?.delete(registeredCallback);
+            if (websocketBase instanceof WebsocketStreamsBase)
+                websocketBase.unsubscribe(streamOrId, id);
+        },
+    };
 }

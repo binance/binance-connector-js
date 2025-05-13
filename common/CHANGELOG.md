@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.4 - 2025-05-13
+
+### Added
+
+- Support streams on Websocket APIs.
+
 ## 1.0.3 - 2025-05-12
 
 ### Changed
