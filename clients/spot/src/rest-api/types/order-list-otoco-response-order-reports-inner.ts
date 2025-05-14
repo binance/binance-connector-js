@@ -120,4 +120,10 @@ export interface OrderListOtocoResponseOrderReportsInner {
      * @memberof OrderListOtocoResponseOrderReportsInner
      */
     selfTradePreventionMode?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof OrderListOtocoResponseOrderReportsInner
+     */
+    stopPrice?: string;
 }

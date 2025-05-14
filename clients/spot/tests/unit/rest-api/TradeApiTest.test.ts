@@ -41,21 +41,21 @@ import {
     OrderListOcoBelowTimeInForceEnum,
     OrderListOcoNewOrderRespTypeEnum,
     OrderListOcoSelfTradePreventionModeEnum,
-    OrderListOtoNewOrderRespTypeEnum,
-    OrderListOtoSelfTradePreventionModeEnum,
     OrderListOtoWorkingTypeEnum,
     OrderListOtoWorkingSideEnum,
-    OrderListOtoWorkingTimeInForceEnum,
     OrderListOtoPendingTypeEnum,
     OrderListOtoPendingSideEnum,
+    OrderListOtoNewOrderRespTypeEnum,
+    OrderListOtoSelfTradePreventionModeEnum,
+    OrderListOtoWorkingTimeInForceEnum,
     OrderListOtoPendingTimeInForceEnum,
-    OrderListOtocoNewOrderRespTypeEnum,
-    OrderListOtocoSelfTradePreventionModeEnum,
     OrderListOtocoWorkingTypeEnum,
     OrderListOtocoWorkingSideEnum,
-    OrderListOtocoWorkingTimeInForceEnum,
     OrderListOtocoPendingSideEnum,
     OrderListOtocoPendingAboveTypeEnum,
+    OrderListOtocoNewOrderRespTypeEnum,
+    OrderListOtocoSelfTradePreventionModeEnum,
+    OrderListOtocoWorkingTimeInForceEnum,
     OrderListOtocoPendingAboveTimeInForceEnum,
     OrderListOtocoPendingBelowTypeEnum,
     OrderListOtocoPendingBelowTimeInForceEnum,
@@ -138,8 +138,8 @@ describe('TradeApi', () => {
                     transactionTime: 1565245913483,
                     symbol: 'LTCBTC',
                     orders: [
-                        { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'oD7aesZqjEGlZrbtRpy5zB' },
                         { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'Jr1h6xirOxgeJOUuYQS7V3' },
+                        { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'oD7aesZqjEGlZrbtRpy5zB' },
                     ],
                 },
                 {
@@ -190,8 +190,8 @@ describe('TradeApi', () => {
                     transactionTime: 1565245913483,
                     symbol: 'LTCBTC',
                     orders: [
-                        { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'oD7aesZqjEGlZrbtRpy5zB' },
                         { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'Jr1h6xirOxgeJOUuYQS7V3' },
+                        { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'oD7aesZqjEGlZrbtRpy5zB' },
                     ],
                 },
                 {
@@ -742,10 +742,28 @@ describe('TradeApi', () => {
                 transactionTime: 1574040868128,
                 symbol: 'LTCBTC',
                 orders: [
-                    { symbol: 'LTCBTC', orderId: 2, clientOrderId: 'pO9ufTiFGg3nw2fOdgeOXa' },
                     { symbol: 'LTCBTC', orderId: 3, clientOrderId: 'TXOvglzXuaubXAaENpaRCB' },
+                    { symbol: 'LTCBTC', orderId: 2, clientOrderId: 'pO9ufTiFGg3nw2fOdgeOXa' },
                 ],
                 orderReports: [
+                    {
+                        symbol: 'LTCBTC',
+                        origClientOrderId: 'TXOvglzXuaubXAaENpaRCB',
+                        orderId: 3,
+                        orderListId: 0,
+                        clientOrderId: 'unfWT8ig8i0uj6lPuYLez6',
+                        transactTime: 1688005070874,
+                        price: '3.00000000',
+                        origQty: '10.00000000',
+                        executedQty: '0.00000000',
+                        origQuoteOrderQty: '0.000000',
+                        cummulativeQuoteQty: '0.00000000',
+                        status: 'CANCELED',
+                        timeInForce: 'GTC',
+                        type: 'LIMIT_MAKER',
+                        side: 'SELL',
+                        selfTradePreventionMode: 'NONE',
+                    },
                     {
                         symbol: 'LTCBTC',
                         origClientOrderId: 'pO9ufTiFGg3nw2fOdgeOXa',
@@ -763,24 +781,6 @@ describe('TradeApi', () => {
                         type: 'STOP_LOSS_LIMIT',
                         side: 'SELL',
                         stopPrice: '1.00000000',
-                        selfTradePreventionMode: 'NONE',
-                    },
-                    {
-                        symbol: 'LTCBTC',
-                        origClientOrderId: 'TXOvglzXuaubXAaENpaRCB',
-                        orderId: 3,
-                        orderListId: 0,
-                        clientOrderId: 'unfWT8ig8i0uj6lPuYLez6',
-                        transactTime: 1688005070874,
-                        price: '3.00000000',
-                        origQty: '10.00000000',
-                        executedQty: '0.00000000',
-                        origQuoteOrderQty: '0.000000',
-                        cummulativeQuoteQty: '0.00000000',
-                        status: 'CANCELED',
-                        timeInForce: 'GTC',
-                        type: 'LIMIT_MAKER',
-                        side: 'SELL',
                         selfTradePreventionMode: 'NONE',
                     },
                 ],
@@ -818,10 +818,28 @@ describe('TradeApi', () => {
                 transactionTime: 1574040868128,
                 symbol: 'LTCBTC',
                 orders: [
-                    { symbol: 'LTCBTC', orderId: 2, clientOrderId: 'pO9ufTiFGg3nw2fOdgeOXa' },
                     { symbol: 'LTCBTC', orderId: 3, clientOrderId: 'TXOvglzXuaubXAaENpaRCB' },
+                    { symbol: 'LTCBTC', orderId: 2, clientOrderId: 'pO9ufTiFGg3nw2fOdgeOXa' },
                 ],
                 orderReports: [
+                    {
+                        symbol: 'LTCBTC',
+                        origClientOrderId: 'TXOvglzXuaubXAaENpaRCB',
+                        orderId: 3,
+                        orderListId: 0,
+                        clientOrderId: 'unfWT8ig8i0uj6lPuYLez6',
+                        transactTime: 1688005070874,
+                        price: '3.00000000',
+                        origQty: '10.00000000',
+                        executedQty: '0.00000000',
+                        origQuoteOrderQty: '0.000000',
+                        cummulativeQuoteQty: '0.00000000',
+                        status: 'CANCELED',
+                        timeInForce: 'GTC',
+                        type: 'LIMIT_MAKER',
+                        side: 'SELL',
+                        selfTradePreventionMode: 'NONE',
+                    },
                     {
                         symbol: 'LTCBTC',
                         origClientOrderId: 'pO9ufTiFGg3nw2fOdgeOXa',
@@ -839,24 +857,6 @@ describe('TradeApi', () => {
                         type: 'STOP_LOSS_LIMIT',
                         side: 'SELL',
                         stopPrice: '1.00000000',
-                        selfTradePreventionMode: 'NONE',
-                    },
-                    {
-                        symbol: 'LTCBTC',
-                        origClientOrderId: 'TXOvglzXuaubXAaENpaRCB',
-                        orderId: 3,
-                        orderListId: 0,
-                        clientOrderId: 'unfWT8ig8i0uj6lPuYLez6',
-                        transactTime: 1688005070874,
-                        price: '3.00000000',
-                        origQty: '10.00000000',
-                        executedQty: '0.00000000',
-                        origQuoteOrderQty: '0.000000',
-                        cummulativeQuoteQty: '0.00000000',
-                        status: 'CANCELED',
-                        timeInForce: 'GTC',
-                        type: 'LIMIT_MAKER',
-                        side: 'SELL',
                         selfTradePreventionMode: 'NONE',
                     },
                 ],
@@ -1141,8 +1141,8 @@ describe('TradeApi', () => {
                 transactionTime: 1565245656253,
                 symbol: 'LTCBTC',
                 orders: [
-                    { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'qD1gy3kc3Gx0rihm9Y3xwS' },
                     { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'ARzZ9I00CPM8i3NhmU9Ega' },
+                    { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'qD1gy3kc3Gx0rihm9Y3xwS' },
                 ],
             };
 
@@ -1176,8 +1176,8 @@ describe('TradeApi', () => {
                 transactionTime: 1565245656253,
                 symbol: 'LTCBTC',
                 orders: [
-                    { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'qD1gy3kc3Gx0rihm9Y3xwS' },
                     { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'ARzZ9I00CPM8i3NhmU9Ega' },
+                    { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'qD1gy3kc3Gx0rihm9Y3xwS' },
                 ],
             };
 
@@ -1215,6 +1215,8 @@ describe('TradeApi', () => {
         it('should execute newOrder() successfully with required parameters only', async () => {
             const params: NewOrderRequest = {
                 symbol: 'BNBUSDT',
+                side: NewOrderSideEnum.BUY,
+                type: NewOrderTypeEnum.MARKET,
             };
 
             mockResponse = {
@@ -1236,25 +1238,11 @@ describe('TradeApi', () => {
                 selfTradePreventionMode: 'NONE',
                 fills: [
                     {
-                        price: '4000.00000000',
+                        price: '3995.00000000',
                         qty: '1.00000000',
-                        commission: '4.00000000',
+                        commission: '3.99500000',
                         commissionAsset: 'USDT',
-                        tradeId: 56,
-                    },
-                    {
-                        price: '3999.00000000',
-                        qty: '5.00000000',
-                        commission: '19.99500000',
-                        commissionAsset: 'USDT',
-                        tradeId: 57,
-                    },
-                    {
-                        price: '3998.00000000',
-                        qty: '2.00000000',
-                        commission: '7.99600000',
-                        commissionAsset: 'USDT',
-                        tradeId: 58,
+                        tradeId: 60,
                     },
                     {
                         price: '3997.00000000',
@@ -1264,11 +1252,25 @@ describe('TradeApi', () => {
                         tradeId: 59,
                     },
                     {
-                        price: '3995.00000000',
-                        qty: '1.00000000',
-                        commission: '3.99500000',
+                        price: '3998.00000000',
+                        qty: '2.00000000',
+                        commission: '7.99600000',
                         commissionAsset: 'USDT',
-                        tradeId: 60,
+                        tradeId: 58,
+                    },
+                    {
+                        price: '3999.00000000',
+                        qty: '5.00000000',
+                        commission: '19.99500000',
+                        commissionAsset: 'USDT',
+                        tradeId: 57,
+                    },
+                    {
+                        price: '4000.00000000',
+                        qty: '1.00000000',
+                        commission: '4.00000000',
+                        commissionAsset: 'USDT',
+                        tradeId: 56,
                     },
                 ],
             };
@@ -1326,25 +1328,11 @@ describe('TradeApi', () => {
                 selfTradePreventionMode: 'NONE',
                 fills: [
                     {
-                        price: '4000.00000000',
+                        price: '3995.00000000',
                         qty: '1.00000000',
-                        commission: '4.00000000',
+                        commission: '3.99500000',
                         commissionAsset: 'USDT',
-                        tradeId: 56,
-                    },
-                    {
-                        price: '3999.00000000',
-                        qty: '5.00000000',
-                        commission: '19.99500000',
-                        commissionAsset: 'USDT',
-                        tradeId: 57,
-                    },
-                    {
-                        price: '3998.00000000',
-                        qty: '2.00000000',
-                        commission: '7.99600000',
-                        commissionAsset: 'USDT',
-                        tradeId: 58,
+                        tradeId: 60,
                     },
                     {
                         price: '3997.00000000',
@@ -1354,11 +1342,25 @@ describe('TradeApi', () => {
                         tradeId: 59,
                     },
                     {
-                        price: '3995.00000000',
-                        qty: '1.00000000',
-                        commission: '3.99500000',
+                        price: '3998.00000000',
+                        qty: '2.00000000',
+                        commission: '7.99600000',
                         commissionAsset: 'USDT',
-                        tradeId: 60,
+                        tradeId: 58,
+                    },
+                    {
+                        price: '3999.00000000',
+                        qty: '5.00000000',
+                        commission: '19.99500000',
+                        commissionAsset: 'USDT',
+                        tradeId: 57,
+                    },
+                    {
+                        price: '4000.00000000',
+                        qty: '1.00000000',
+                        commission: '4.00000000',
+                        commissionAsset: 'USDT',
+                        tradeId: 56,
                     },
                 ],
             };
@@ -1380,6 +1382,8 @@ describe('TradeApi', () => {
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: NewOrderRequest = {
                 symbol: 'BNBUSDT',
+                side: NewOrderSideEnum.BUY,
+                type: NewOrderTypeEnum.MARKET,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1389,9 +1393,39 @@ describe('TradeApi', () => {
             );
         });
 
+        it('should throw RequiredError when side is missing', async () => {
+            const _params: NewOrderRequest = {
+                symbol: 'BNBUSDT',
+                side: NewOrderSideEnum.BUY,
+                type: NewOrderTypeEnum.MARKET,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.side;
+
+            await expect(client.newOrder(params)).rejects.toThrow(
+                'Required parameter side was null or undefined when calling newOrder.'
+            );
+        });
+
+        it('should throw RequiredError when type is missing', async () => {
+            const _params: NewOrderRequest = {
+                symbol: 'BNBUSDT',
+                side: NewOrderSideEnum.BUY,
+                type: NewOrderTypeEnum.MARKET,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.type;
+
+            await expect(client.newOrder(params)).rejects.toThrow(
+                'Required parameter type was null or undefined when calling newOrder.'
+            );
+        });
+
         it('should throw an error when server is returning an error', async () => {
             const params: NewOrderRequest = {
                 symbol: 'BNBUSDT',
+                side: NewOrderSideEnum.BUY,
+                type: NewOrderTypeEnum.MARKET,
             };
 
             const errorResponse = {
@@ -1421,8 +1455,8 @@ describe('TradeApi', () => {
                     transactionTime: 1565246080644,
                     symbol: 'LTCBTC',
                     orders: [
-                        { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'r3EH2N76dHfLoSZWIUw1bT' },
                         { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'Cv1SnyPD3qhqpbjpYEHbd2' },
+                        { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'r3EH2N76dHfLoSZWIUw1bT' },
                     ],
                 },
             ];
@@ -1456,8 +1490,8 @@ describe('TradeApi', () => {
                     transactionTime: 1565246080644,
                     symbol: 'LTCBTC',
                     orders: [
-                        { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'r3EH2N76dHfLoSZWIUw1bT' },
                         { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'Cv1SnyPD3qhqpbjpYEHbd2' },
+                        { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'r3EH2N76dHfLoSZWIUw1bT' },
                     ],
                 },
             ];
@@ -1528,10 +1562,10 @@ describe('TradeApi', () => {
                     listClientOrderId: 'AT7FTxZXylVSwRoZs52mt3',
                     symbol: 'BTCUSDT',
                     orders: [
-                        { symbol: 'BTCUSDT', orderId: 8, clientOrderId: 'GkwwHZUUbFtZOoH1YsZk9Q' },
                         { symbol: 'BTCUSDT', orderId: 9, clientOrderId: 'UQ1Np3bmQ71jJzsSDW9Vpi' },
                         { symbol: 'BTCUSDT', orderId: 8, clientOrderId: 'GkwwHZUUbFtZOoH1YsZk9Q' },
                         { symbol: 'BTCUSDT', orderId: 9, clientOrderId: 'UQ1Np3bmQ71jJzsSDW9Vpi' },
+                        { symbol: 'BTCUSDT', orderId: 8, clientOrderId: 'GkwwHZUUbFtZOoH1YsZk9Q' },
                     ],
                 },
             };
@@ -1589,10 +1623,10 @@ describe('TradeApi', () => {
                     listClientOrderId: 'AT7FTxZXylVSwRoZs52mt3',
                     symbol: 'BTCUSDT',
                     orders: [
-                        { symbol: 'BTCUSDT', orderId: 8, clientOrderId: 'GkwwHZUUbFtZOoH1YsZk9Q' },
                         { symbol: 'BTCUSDT', orderId: 9, clientOrderId: 'UQ1Np3bmQ71jJzsSDW9Vpi' },
                         { symbol: 'BTCUSDT', orderId: 8, clientOrderId: 'GkwwHZUUbFtZOoH1YsZk9Q' },
                         { symbol: 'BTCUSDT', orderId: 9, clientOrderId: 'UQ1Np3bmQ71jJzsSDW9Vpi' },
+                        { symbol: 'BTCUSDT', orderId: 8, clientOrderId: 'GkwwHZUUbFtZOoH1YsZk9Q' },
                     ],
                 },
             };
@@ -1664,6 +1698,9 @@ describe('TradeApi', () => {
         it('should execute orderCancelReplace() successfully with required parameters only', async () => {
             const params: OrderCancelReplaceRequest = {
                 symbol: 'BNBUSDT',
+                side: OrderCancelReplaceSideEnum.BUY,
+                type: OrderCancelReplaceTypeEnum.MARKET,
+                cancelReplaceMode: OrderCancelReplaceCancelReplaceModeEnum.STOP_ON_FAILURE,
             };
 
             mockResponse = {
@@ -1786,6 +1823,9 @@ describe('TradeApi', () => {
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: OrderCancelReplaceRequest = {
                 symbol: 'BNBUSDT',
+                side: OrderCancelReplaceSideEnum.BUY,
+                type: OrderCancelReplaceTypeEnum.MARKET,
+                cancelReplaceMode: OrderCancelReplaceCancelReplaceModeEnum.STOP_ON_FAILURE,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1795,9 +1835,57 @@ describe('TradeApi', () => {
             );
         });
 
+        it('should throw RequiredError when side is missing', async () => {
+            const _params: OrderCancelReplaceRequest = {
+                symbol: 'BNBUSDT',
+                side: OrderCancelReplaceSideEnum.BUY,
+                type: OrderCancelReplaceTypeEnum.MARKET,
+                cancelReplaceMode: OrderCancelReplaceCancelReplaceModeEnum.STOP_ON_FAILURE,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.side;
+
+            await expect(client.orderCancelReplace(params)).rejects.toThrow(
+                'Required parameter side was null or undefined when calling orderCancelReplace.'
+            );
+        });
+
+        it('should throw RequiredError when type is missing', async () => {
+            const _params: OrderCancelReplaceRequest = {
+                symbol: 'BNBUSDT',
+                side: OrderCancelReplaceSideEnum.BUY,
+                type: OrderCancelReplaceTypeEnum.MARKET,
+                cancelReplaceMode: OrderCancelReplaceCancelReplaceModeEnum.STOP_ON_FAILURE,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.type;
+
+            await expect(client.orderCancelReplace(params)).rejects.toThrow(
+                'Required parameter type was null or undefined when calling orderCancelReplace.'
+            );
+        });
+
+        it('should throw RequiredError when cancelReplaceMode is missing', async () => {
+            const _params: OrderCancelReplaceRequest = {
+                symbol: 'BNBUSDT',
+                side: OrderCancelReplaceSideEnum.BUY,
+                type: OrderCancelReplaceTypeEnum.MARKET,
+                cancelReplaceMode: OrderCancelReplaceCancelReplaceModeEnum.STOP_ON_FAILURE,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.cancelReplaceMode;
+
+            await expect(client.orderCancelReplace(params)).rejects.toThrow(
+                'Required parameter cancelReplaceMode was null or undefined when calling orderCancelReplace.'
+            );
+        });
+
         it('should throw an error when server is returning an error', async () => {
             const params: OrderCancelReplaceRequest = {
                 symbol: 'BNBUSDT',
+                side: OrderCancelReplaceSideEnum.BUY,
+                type: OrderCancelReplaceTypeEnum.MARKET,
+                cancelReplaceMode: OrderCancelReplaceCancelReplaceModeEnum.STOP_ON_FAILURE,
             };
 
             const errorResponse = {
@@ -1819,7 +1907,10 @@ describe('TradeApi', () => {
         it('should execute orderListOco() successfully with required parameters only', async () => {
             const params: OrderListOcoRequest = {
                 symbol: 'BNBUSDT',
+                side: OrderListOcoSideEnum.BUY,
                 quantity: 1.0,
+                aboveType: OrderListOcoAboveTypeEnum.STOP_LOSS_LIMIT,
+                belowType: OrderListOcoBelowTypeEnum.STOP_LOSS,
             };
 
             mockResponse = {
@@ -1831,10 +1922,28 @@ describe('TradeApi', () => {
                 transactionTime: 1710485608839,
                 symbol: 'LTCBTC',
                 orders: [
-                    { symbol: 'LTCBTC', orderId: 10, clientOrderId: '44nZvqpemY7sVYgPYbvPih' },
                     { symbol: 'LTCBTC', orderId: 11, clientOrderId: 'NuMp0nVYnciDiFmVqfpBqK' },
+                    { symbol: 'LTCBTC', orderId: 10, clientOrderId: '44nZvqpemY7sVYgPYbvPih' },
                 ],
                 orderReports: [
+                    {
+                        symbol: 'LTCBTC',
+                        orderId: 11,
+                        orderListId: 1,
+                        clientOrderId: 'NuMp0nVYnciDiFmVqfpBqK',
+                        transactTime: 1710485608839,
+                        price: '3.00000000',
+                        origQty: '5.00000000',
+                        executedQty: '0.00000000',
+                        origQuoteOrderQty: '0.000000',
+                        cummulativeQuoteQty: '0.00000000',
+                        status: 'NEW',
+                        timeInForce: 'GTC',
+                        type: 'LIMIT_MAKER',
+                        side: 'SELL',
+                        workingTime: 1710485608839,
+                        selfTradePreventionMode: 'NONE',
+                    },
                     {
                         symbol: 'LTCBTC',
                         orderId: 10,
@@ -1853,24 +1962,6 @@ describe('TradeApi', () => {
                         stopPrice: '1.00000000',
                         workingTime: -1,
                         icebergQty: '1.00000000',
-                        selfTradePreventionMode: 'NONE',
-                    },
-                    {
-                        symbol: 'LTCBTC',
-                        orderId: 11,
-                        orderListId: 1,
-                        clientOrderId: 'NuMp0nVYnciDiFmVqfpBqK',
-                        transactTime: 1710485608839,
-                        price: '3.00000000',
-                        origQty: '5.00000000',
-                        executedQty: '0.00000000',
-                        origQuoteOrderQty: '0.000000',
-                        cummulativeQuoteQty: '0.00000000',
-                        status: 'NEW',
-                        timeInForce: 'GTC',
-                        type: 'LIMIT_MAKER',
-                        side: 'SELL',
-                        workingTime: 1710485608839,
                         selfTradePreventionMode: 'NONE',
                     },
                 ],
@@ -1893,10 +1984,11 @@ describe('TradeApi', () => {
         it('should execute orderListOco() successfully with optional parameters', async () => {
             const params: OrderListOcoRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1.0,
-                listClientOrderId: 'listClientOrderId_example',
                 side: OrderListOcoSideEnum.BUY,
+                quantity: 1.0,
                 aboveType: OrderListOcoAboveTypeEnum.STOP_LOSS_LIMIT,
+                belowType: OrderListOcoBelowTypeEnum.STOP_LOSS,
+                listClientOrderId: 'listClientOrderId_example',
                 aboveClientOrderId: 'aboveClientOrderId_example',
                 aboveIcebergQty: 1,
                 abovePrice: 1.0,
@@ -1905,7 +1997,6 @@ describe('TradeApi', () => {
                 aboveTimeInForce: 1.0,
                 aboveStrategyId: 1,
                 aboveStrategyType: 1,
-                belowType: OrderListOcoBelowTypeEnum.STOP_LOSS,
                 belowClientOrderId: 'belowClientOrderId_example',
                 belowIcebergQty: 1,
                 belowPrice: 1.0,
@@ -1928,10 +2019,28 @@ describe('TradeApi', () => {
                 transactionTime: 1710485608839,
                 symbol: 'LTCBTC',
                 orders: [
-                    { symbol: 'LTCBTC', orderId: 10, clientOrderId: '44nZvqpemY7sVYgPYbvPih' },
                     { symbol: 'LTCBTC', orderId: 11, clientOrderId: 'NuMp0nVYnciDiFmVqfpBqK' },
+                    { symbol: 'LTCBTC', orderId: 10, clientOrderId: '44nZvqpemY7sVYgPYbvPih' },
                 ],
                 orderReports: [
+                    {
+                        symbol: 'LTCBTC',
+                        orderId: 11,
+                        orderListId: 1,
+                        clientOrderId: 'NuMp0nVYnciDiFmVqfpBqK',
+                        transactTime: 1710485608839,
+                        price: '3.00000000',
+                        origQty: '5.00000000',
+                        executedQty: '0.00000000',
+                        origQuoteOrderQty: '0.000000',
+                        cummulativeQuoteQty: '0.00000000',
+                        status: 'NEW',
+                        timeInForce: 'GTC',
+                        type: 'LIMIT_MAKER',
+                        side: 'SELL',
+                        workingTime: 1710485608839,
+                        selfTradePreventionMode: 'NONE',
+                    },
                     {
                         symbol: 'LTCBTC',
                         orderId: 10,
@@ -1950,24 +2059,6 @@ describe('TradeApi', () => {
                         stopPrice: '1.00000000',
                         workingTime: -1,
                         icebergQty: '1.00000000',
-                        selfTradePreventionMode: 'NONE',
-                    },
-                    {
-                        symbol: 'LTCBTC',
-                        orderId: 11,
-                        orderListId: 1,
-                        clientOrderId: 'NuMp0nVYnciDiFmVqfpBqK',
-                        transactTime: 1710485608839,
-                        price: '3.00000000',
-                        origQty: '5.00000000',
-                        executedQty: '0.00000000',
-                        origQuoteOrderQty: '0.000000',
-                        cummulativeQuoteQty: '0.00000000',
-                        status: 'NEW',
-                        timeInForce: 'GTC',
-                        type: 'LIMIT_MAKER',
-                        side: 'SELL',
-                        workingTime: 1710485608839,
                         selfTradePreventionMode: 'NONE',
                     },
                 ],
@@ -1990,7 +2081,10 @@ describe('TradeApi', () => {
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: OrderListOcoRequest = {
                 symbol: 'BNBUSDT',
+                side: OrderListOcoSideEnum.BUY,
                 quantity: 1.0,
+                aboveType: OrderListOcoAboveTypeEnum.STOP_LOSS_LIMIT,
+                belowType: OrderListOcoBelowTypeEnum.STOP_LOSS,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -2000,10 +2094,29 @@ describe('TradeApi', () => {
             );
         });
 
+        it('should throw RequiredError when side is missing', async () => {
+            const _params: OrderListOcoRequest = {
+                symbol: 'BNBUSDT',
+                side: OrderListOcoSideEnum.BUY,
+                quantity: 1.0,
+                aboveType: OrderListOcoAboveTypeEnum.STOP_LOSS_LIMIT,
+                belowType: OrderListOcoBelowTypeEnum.STOP_LOSS,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.side;
+
+            await expect(client.orderListOco(params)).rejects.toThrow(
+                'Required parameter side was null or undefined when calling orderListOco.'
+            );
+        });
+
         it('should throw RequiredError when quantity is missing', async () => {
             const _params: OrderListOcoRequest = {
                 symbol: 'BNBUSDT',
+                side: OrderListOcoSideEnum.BUY,
                 quantity: 1.0,
+                aboveType: OrderListOcoAboveTypeEnum.STOP_LOSS_LIMIT,
+                belowType: OrderListOcoBelowTypeEnum.STOP_LOSS,
             };
             const params = Object.assign({ ..._params });
             delete params?.quantity;
@@ -2013,10 +2126,45 @@ describe('TradeApi', () => {
             );
         });
 
+        it('should throw RequiredError when aboveType is missing', async () => {
+            const _params: OrderListOcoRequest = {
+                symbol: 'BNBUSDT',
+                side: OrderListOcoSideEnum.BUY,
+                quantity: 1.0,
+                aboveType: OrderListOcoAboveTypeEnum.STOP_LOSS_LIMIT,
+                belowType: OrderListOcoBelowTypeEnum.STOP_LOSS,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.aboveType;
+
+            await expect(client.orderListOco(params)).rejects.toThrow(
+                'Required parameter aboveType was null or undefined when calling orderListOco.'
+            );
+        });
+
+        it('should throw RequiredError when belowType is missing', async () => {
+            const _params: OrderListOcoRequest = {
+                symbol: 'BNBUSDT',
+                side: OrderListOcoSideEnum.BUY,
+                quantity: 1.0,
+                aboveType: OrderListOcoAboveTypeEnum.STOP_LOSS_LIMIT,
+                belowType: OrderListOcoBelowTypeEnum.STOP_LOSS,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.belowType;
+
+            await expect(client.orderListOco(params)).rejects.toThrow(
+                'Required parameter belowType was null or undefined when calling orderListOco.'
+            );
+        });
+
         it('should throw an error when server is returning an error', async () => {
             const params: OrderListOcoRequest = {
                 symbol: 'BNBUSDT',
+                side: OrderListOcoSideEnum.BUY,
                 quantity: 1.0,
+                aboveType: OrderListOcoAboveTypeEnum.STOP_LOSS_LIMIT,
+                belowType: OrderListOcoBelowTypeEnum.STOP_LOSS,
             };
 
             const errorResponse = {
@@ -2038,8 +2186,12 @@ describe('TradeApi', () => {
         it('should execute orderListOto() successfully with required parameters only', async () => {
             const params: OrderListOtoRequest = {
                 symbol: 'BNBUSDT',
+                workingType: OrderListOtoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOtoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
+                pendingType: OrderListOtoPendingTypeEnum.LIMIT,
+                pendingSide: OrderListOtoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
             };
 
@@ -2052,28 +2204,10 @@ describe('TradeApi', () => {
                 transactionTime: 1712289389158,
                 symbol: 'ABCDEF',
                 orders: [
-                    { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'Bq17mn9fP6vyCn75Jw1xya' },
                     { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'arLFo0zGJVDE69cvGBaU0d' },
+                    { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'Bq17mn9fP6vyCn75Jw1xya' },
                 ],
                 orderReports: [
-                    {
-                        symbol: 'LTCBTC',
-                        orderId: 4,
-                        orderListId: 0,
-                        clientOrderId: 'Bq17mn9fP6vyCn75Jw1xya',
-                        transactTime: 1712289389158,
-                        price: '1.00000000',
-                        origQty: '1.00000000',
-                        executedQty: '0.00000000',
-                        origQuoteOrderQty: '0.000000',
-                        cummulativeQuoteQty: '0.00000000',
-                        status: 'NEW',
-                        timeInForce: 'GTC',
-                        type: 'LIMIT',
-                        side: 'SELL',
-                        workingTime: 1712289389158,
-                        selfTradePreventionMode: 'NONE',
-                    },
                     {
                         symbol: 'LTCBTC',
                         orderId: 5,
@@ -2090,6 +2224,24 @@ describe('TradeApi', () => {
                         type: 'MARKET',
                         side: 'BUY',
                         workingTime: -1,
+                        selfTradePreventionMode: 'NONE',
+                    },
+                    {
+                        symbol: 'LTCBTC',
+                        orderId: 4,
+                        orderListId: 0,
+                        clientOrderId: 'Bq17mn9fP6vyCn75Jw1xya',
+                        transactTime: 1712289389158,
+                        price: '1.00000000',
+                        origQty: '1.00000000',
+                        executedQty: '0.00000000',
+                        origQuoteOrderQty: '0.000000',
+                        cummulativeQuoteQty: '0.00000000',
+                        status: 'NEW',
+                        timeInForce: 'GTC',
+                        type: 'LIMIT',
+                        side: 'SELL',
+                        workingTime: 1712289389158,
                         selfTradePreventionMode: 'NONE',
                     },
                 ],
@@ -2112,21 +2264,21 @@ describe('TradeApi', () => {
         it('should execute orderListOto() successfully with optional parameters', async () => {
             const params: OrderListOtoRequest = {
                 symbol: 'BNBUSDT',
+                workingType: OrderListOtoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOtoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
+                pendingType: OrderListOtoPendingTypeEnum.LIMIT,
+                pendingSide: OrderListOtoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
                 listClientOrderId: 'listClientOrderId_example',
                 newOrderRespType: OrderListOtoNewOrderRespTypeEnum.ACK,
                 selfTradePreventionMode: OrderListOtoSelfTradePreventionModeEnum.NONE,
-                workingType: OrderListOtoWorkingTypeEnum.LIMIT,
-                workingSide: OrderListOtoWorkingSideEnum.BUY,
                 workingClientOrderId: 'workingClientOrderId_example',
                 workingIcebergQty: 1.0,
                 workingTimeInForce: OrderListOtoWorkingTimeInForceEnum.GTC,
                 workingStrategyId: 1,
                 workingStrategyType: 1,
-                pendingType: OrderListOtoPendingTypeEnum.LIMIT,
-                pendingSide: OrderListOtoPendingSideEnum.BUY,
                 pendingClientOrderId: 'pendingClientOrderId_example',
                 pendingPrice: 1.0,
                 pendingStopPrice: 1.0,
@@ -2147,28 +2299,10 @@ describe('TradeApi', () => {
                 transactionTime: 1712289389158,
                 symbol: 'ABCDEF',
                 orders: [
-                    { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'Bq17mn9fP6vyCn75Jw1xya' },
                     { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'arLFo0zGJVDE69cvGBaU0d' },
+                    { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'Bq17mn9fP6vyCn75Jw1xya' },
                 ],
                 orderReports: [
-                    {
-                        symbol: 'LTCBTC',
-                        orderId: 4,
-                        orderListId: 0,
-                        clientOrderId: 'Bq17mn9fP6vyCn75Jw1xya',
-                        transactTime: 1712289389158,
-                        price: '1.00000000',
-                        origQty: '1.00000000',
-                        executedQty: '0.00000000',
-                        origQuoteOrderQty: '0.000000',
-                        cummulativeQuoteQty: '0.00000000',
-                        status: 'NEW',
-                        timeInForce: 'GTC',
-                        type: 'LIMIT',
-                        side: 'SELL',
-                        workingTime: 1712289389158,
-                        selfTradePreventionMode: 'NONE',
-                    },
                     {
                         symbol: 'LTCBTC',
                         orderId: 5,
@@ -2185,6 +2319,24 @@ describe('TradeApi', () => {
                         type: 'MARKET',
                         side: 'BUY',
                         workingTime: -1,
+                        selfTradePreventionMode: 'NONE',
+                    },
+                    {
+                        symbol: 'LTCBTC',
+                        orderId: 4,
+                        orderListId: 0,
+                        clientOrderId: 'Bq17mn9fP6vyCn75Jw1xya',
+                        transactTime: 1712289389158,
+                        price: '1.00000000',
+                        origQty: '1.00000000',
+                        executedQty: '0.00000000',
+                        origQuoteOrderQty: '0.000000',
+                        cummulativeQuoteQty: '0.00000000',
+                        status: 'NEW',
+                        timeInForce: 'GTC',
+                        type: 'LIMIT',
+                        side: 'SELL',
+                        workingTime: 1712289389158,
                         selfTradePreventionMode: 'NONE',
                     },
                 ],
@@ -2207,8 +2359,12 @@ describe('TradeApi', () => {
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: OrderListOtoRequest = {
                 symbol: 'BNBUSDT',
+                workingType: OrderListOtoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOtoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
+                pendingType: OrderListOtoPendingTypeEnum.LIMIT,
+                pendingSide: OrderListOtoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -2219,11 +2375,53 @@ describe('TradeApi', () => {
             );
         });
 
+        it('should throw RequiredError when workingType is missing', async () => {
+            const _params: OrderListOtoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOtoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOtoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingType: OrderListOtoPendingTypeEnum.LIMIT,
+                pendingSide: OrderListOtoPendingSideEnum.BUY,
+                pendingQuantity: 1.0,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.workingType;
+
+            await expect(client.orderListOto(params)).rejects.toThrow(
+                'Required parameter workingType was null or undefined when calling orderListOto.'
+            );
+        });
+
+        it('should throw RequiredError when workingSide is missing', async () => {
+            const _params: OrderListOtoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOtoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOtoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingType: OrderListOtoPendingTypeEnum.LIMIT,
+                pendingSide: OrderListOtoPendingSideEnum.BUY,
+                pendingQuantity: 1.0,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.workingSide;
+
+            await expect(client.orderListOto(params)).rejects.toThrow(
+                'Required parameter workingSide was null or undefined when calling orderListOto.'
+            );
+        });
+
         it('should throw RequiredError when workingPrice is missing', async () => {
             const _params: OrderListOtoRequest = {
                 symbol: 'BNBUSDT',
+                workingType: OrderListOtoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOtoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
+                pendingType: OrderListOtoPendingTypeEnum.LIMIT,
+                pendingSide: OrderListOtoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -2237,8 +2435,12 @@ describe('TradeApi', () => {
         it('should throw RequiredError when workingQuantity is missing', async () => {
             const _params: OrderListOtoRequest = {
                 symbol: 'BNBUSDT',
+                workingType: OrderListOtoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOtoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
+                pendingType: OrderListOtoPendingTypeEnum.LIMIT,
+                pendingSide: OrderListOtoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -2249,11 +2451,53 @@ describe('TradeApi', () => {
             );
         });
 
+        it('should throw RequiredError when pendingType is missing', async () => {
+            const _params: OrderListOtoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOtoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOtoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingType: OrderListOtoPendingTypeEnum.LIMIT,
+                pendingSide: OrderListOtoPendingSideEnum.BUY,
+                pendingQuantity: 1.0,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.pendingType;
+
+            await expect(client.orderListOto(params)).rejects.toThrow(
+                'Required parameter pendingType was null or undefined when calling orderListOto.'
+            );
+        });
+
+        it('should throw RequiredError when pendingSide is missing', async () => {
+            const _params: OrderListOtoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOtoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOtoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingType: OrderListOtoPendingTypeEnum.LIMIT,
+                pendingSide: OrderListOtoPendingSideEnum.BUY,
+                pendingQuantity: 1.0,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.pendingSide;
+
+            await expect(client.orderListOto(params)).rejects.toThrow(
+                'Required parameter pendingSide was null or undefined when calling orderListOto.'
+            );
+        });
+
         it('should throw RequiredError when pendingQuantity is missing', async () => {
             const _params: OrderListOtoRequest = {
                 symbol: 'BNBUSDT',
+                workingType: OrderListOtoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOtoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
+                pendingType: OrderListOtoPendingTypeEnum.LIMIT,
+                pendingSide: OrderListOtoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -2267,8 +2511,12 @@ describe('TradeApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: OrderListOtoRequest = {
                 symbol: 'BNBUSDT',
+                workingType: OrderListOtoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOtoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
+                pendingType: OrderListOtoPendingTypeEnum.LIMIT,
+                pendingSide: OrderListOtoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
             };
 
@@ -2291,9 +2539,13 @@ describe('TradeApi', () => {
         it('should execute orderListOtoco() successfully with required parameters only', async () => {
             const params: OrderListOtocoRequest = {
                 symbol: 'BNBUSDT',
+                workingType: OrderListOtocoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOtocoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
+                pendingSide: OrderListOtocoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
+                pendingAboveType: OrderListOtocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,
             };
 
             mockResponse = {
@@ -2305,27 +2557,27 @@ describe('TradeApi', () => {
                 transactionTime: 1712291372842,
                 symbol: 'ABCDEF',
                 orders: [
-                    { symbol: 'LTCBTC', orderId: 6, clientOrderId: 'fM9Y4m23IFJVCQmIrlUmMK' },
-                    { symbol: 'LTCBTC', orderId: 7, clientOrderId: '6pcQbFIzTXGZQ1e2MkGDq4' },
                     { symbol: 'LTCBTC', orderId: 8, clientOrderId: 'r4JMv9cwAYYUwwBZfbussx' },
+                    { symbol: 'LTCBTC', orderId: 7, clientOrderId: '6pcQbFIzTXGZQ1e2MkGDq4' },
+                    { symbol: 'LTCBTC', orderId: 6, clientOrderId: 'fM9Y4m23IFJVCQmIrlUmMK' },
                 ],
                 orderReports: [
                     {
                         symbol: 'LTCBTC',
-                        orderId: 6,
+                        orderId: 8,
                         orderListId: 1,
-                        clientOrderId: 'fM9Y4m23IFJVCQmIrlUmMK',
+                        clientOrderId: 'r4JMv9cwAYYUwwBZfbussx',
                         transactTime: 1712291372842,
-                        price: '1.00000000',
-                        origQty: '1.00000000',
+                        price: '3.00000000',
+                        origQty: '5.00000000',
                         executedQty: '0.00000000',
                         origQuoteOrderQty: '0.000000',
                         cummulativeQuoteQty: '0.00000000',
-                        status: 'NEW',
+                        status: 'PENDING_NEW',
                         timeInForce: 'GTC',
-                        type: 'LIMIT',
-                        side: 'SELL',
-                        workingTime: 1712291372842,
+                        type: 'LIMIT_MAKER',
+                        side: 'BUY',
+                        workingTime: -1,
                         selfTradePreventionMode: 'NONE',
                     },
                     {
@@ -2349,20 +2601,20 @@ describe('TradeApi', () => {
                     },
                     {
                         symbol: 'LTCBTC',
-                        orderId: 8,
+                        orderId: 6,
                         orderListId: 1,
-                        clientOrderId: 'r4JMv9cwAYYUwwBZfbussx',
+                        clientOrderId: 'fM9Y4m23IFJVCQmIrlUmMK',
                         transactTime: 1712291372842,
-                        price: '3.00000000',
-                        origQty: '5.00000000',
+                        price: '1.00000000',
+                        origQty: '1.00000000',
                         executedQty: '0.00000000',
                         origQuoteOrderQty: '0.000000',
                         cummulativeQuoteQty: '0.00000000',
-                        status: 'PENDING_NEW',
+                        status: 'NEW',
                         timeInForce: 'GTC',
-                        type: 'LIMIT_MAKER',
-                        side: 'BUY',
-                        workingTime: -1,
+                        type: 'LIMIT',
+                        side: 'SELL',
+                        workingTime: 1712291372842,
                         selfTradePreventionMode: 'NONE',
                     },
                 ],
@@ -2385,21 +2637,21 @@ describe('TradeApi', () => {
         it('should execute orderListOtoco() successfully with optional parameters', async () => {
             const params: OrderListOtocoRequest = {
                 symbol: 'BNBUSDT',
+                workingType: OrderListOtocoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOtocoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
+                pendingSide: OrderListOtocoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
+                pendingAboveType: OrderListOtocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,
                 listClientOrderId: 'listClientOrderId_example',
                 newOrderRespType: OrderListOtocoNewOrderRespTypeEnum.ACK,
                 selfTradePreventionMode: OrderListOtocoSelfTradePreventionModeEnum.NONE,
-                workingType: OrderListOtocoWorkingTypeEnum.LIMIT,
-                workingSide: OrderListOtocoWorkingSideEnum.BUY,
                 workingClientOrderId: 'workingClientOrderId_example',
                 workingIcebergQty: 1.0,
                 workingTimeInForce: OrderListOtocoWorkingTimeInForceEnum.GTC,
                 workingStrategyId: 1,
                 workingStrategyType: 1,
-                pendingSide: OrderListOtocoPendingSideEnum.BUY,
-                pendingAboveType: OrderListOtocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,
                 pendingAboveClientOrderId: 'pendingAboveClientOrderId_example',
                 pendingAbovePrice: 1.0,
                 pendingAboveStopPrice: 1.0,
@@ -2429,27 +2681,27 @@ describe('TradeApi', () => {
                 transactionTime: 1712291372842,
                 symbol: 'ABCDEF',
                 orders: [
-                    { symbol: 'LTCBTC', orderId: 6, clientOrderId: 'fM9Y4m23IFJVCQmIrlUmMK' },
-                    { symbol: 'LTCBTC', orderId: 7, clientOrderId: '6pcQbFIzTXGZQ1e2MkGDq4' },
                     { symbol: 'LTCBTC', orderId: 8, clientOrderId: 'r4JMv9cwAYYUwwBZfbussx' },
+                    { symbol: 'LTCBTC', orderId: 7, clientOrderId: '6pcQbFIzTXGZQ1e2MkGDq4' },
+                    { symbol: 'LTCBTC', orderId: 6, clientOrderId: 'fM9Y4m23IFJVCQmIrlUmMK' },
                 ],
                 orderReports: [
                     {
                         symbol: 'LTCBTC',
-                        orderId: 6,
+                        orderId: 8,
                         orderListId: 1,
-                        clientOrderId: 'fM9Y4m23IFJVCQmIrlUmMK',
+                        clientOrderId: 'r4JMv9cwAYYUwwBZfbussx',
                         transactTime: 1712291372842,
-                        price: '1.00000000',
-                        origQty: '1.00000000',
+                        price: '3.00000000',
+                        origQty: '5.00000000',
                         executedQty: '0.00000000',
                         origQuoteOrderQty: '0.000000',
                         cummulativeQuoteQty: '0.00000000',
-                        status: 'NEW',
+                        status: 'PENDING_NEW',
                         timeInForce: 'GTC',
-                        type: 'LIMIT',
-                        side: 'SELL',
-                        workingTime: 1712291372842,
+                        type: 'LIMIT_MAKER',
+                        side: 'BUY',
+                        workingTime: -1,
                         selfTradePreventionMode: 'NONE',
                     },
                     {
@@ -2473,20 +2725,20 @@ describe('TradeApi', () => {
                     },
                     {
                         symbol: 'LTCBTC',
-                        orderId: 8,
+                        orderId: 6,
                         orderListId: 1,
-                        clientOrderId: 'r4JMv9cwAYYUwwBZfbussx',
+                        clientOrderId: 'fM9Y4m23IFJVCQmIrlUmMK',
                         transactTime: 1712291372842,
-                        price: '3.00000000',
-                        origQty: '5.00000000',
+                        price: '1.00000000',
+                        origQty: '1.00000000',
                         executedQty: '0.00000000',
                         origQuoteOrderQty: '0.000000',
                         cummulativeQuoteQty: '0.00000000',
-                        status: 'PENDING_NEW',
+                        status: 'NEW',
                         timeInForce: 'GTC',
-                        type: 'LIMIT_MAKER',
-                        side: 'BUY',
-                        workingTime: -1,
+                        type: 'LIMIT',
+                        side: 'SELL',
+                        workingTime: 1712291372842,
                         selfTradePreventionMode: 'NONE',
                     },
                 ],
@@ -2509,9 +2761,13 @@ describe('TradeApi', () => {
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: OrderListOtocoRequest = {
                 symbol: 'BNBUSDT',
+                workingType: OrderListOtocoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOtocoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
+                pendingSide: OrderListOtocoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
+                pendingAboveType: OrderListOtocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -2521,12 +2777,54 @@ describe('TradeApi', () => {
             );
         });
 
+        it('should throw RequiredError when workingType is missing', async () => {
+            const _params: OrderListOtocoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOtocoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOtocoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingSide: OrderListOtocoPendingSideEnum.BUY,
+                pendingQuantity: 1.0,
+                pendingAboveType: OrderListOtocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.workingType;
+
+            await expect(client.orderListOtoco(params)).rejects.toThrow(
+                'Required parameter workingType was null or undefined when calling orderListOtoco.'
+            );
+        });
+
+        it('should throw RequiredError when workingSide is missing', async () => {
+            const _params: OrderListOtocoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOtocoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOtocoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingSide: OrderListOtocoPendingSideEnum.BUY,
+                pendingQuantity: 1.0,
+                pendingAboveType: OrderListOtocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.workingSide;
+
+            await expect(client.orderListOtoco(params)).rejects.toThrow(
+                'Required parameter workingSide was null or undefined when calling orderListOtoco.'
+            );
+        });
+
         it('should throw RequiredError when workingPrice is missing', async () => {
             const _params: OrderListOtocoRequest = {
                 symbol: 'BNBUSDT',
+                workingType: OrderListOtocoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOtocoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
+                pendingSide: OrderListOtocoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
+                pendingAboveType: OrderListOtocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,
             };
             const params = Object.assign({ ..._params });
             delete params?.workingPrice;
@@ -2539,9 +2837,13 @@ describe('TradeApi', () => {
         it('should throw RequiredError when workingQuantity is missing', async () => {
             const _params: OrderListOtocoRequest = {
                 symbol: 'BNBUSDT',
+                workingType: OrderListOtocoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOtocoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
+                pendingSide: OrderListOtocoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
+                pendingAboveType: OrderListOtocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,
             };
             const params = Object.assign({ ..._params });
             delete params?.workingQuantity;
@@ -2551,12 +2853,35 @@ describe('TradeApi', () => {
             );
         });
 
+        it('should throw RequiredError when pendingSide is missing', async () => {
+            const _params: OrderListOtocoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOtocoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOtocoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingSide: OrderListOtocoPendingSideEnum.BUY,
+                pendingQuantity: 1.0,
+                pendingAboveType: OrderListOtocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.pendingSide;
+
+            await expect(client.orderListOtoco(params)).rejects.toThrow(
+                'Required parameter pendingSide was null or undefined when calling orderListOtoco.'
+            );
+        });
+
         it('should throw RequiredError when pendingQuantity is missing', async () => {
             const _params: OrderListOtocoRequest = {
                 symbol: 'BNBUSDT',
+                workingType: OrderListOtocoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOtocoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
+                pendingSide: OrderListOtocoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
+                pendingAboveType: OrderListOtocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,
             };
             const params = Object.assign({ ..._params });
             delete params?.pendingQuantity;
@@ -2566,12 +2891,35 @@ describe('TradeApi', () => {
             );
         });
 
+        it('should throw RequiredError when pendingAboveType is missing', async () => {
+            const _params: OrderListOtocoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOtocoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOtocoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingSide: OrderListOtocoPendingSideEnum.BUY,
+                pendingQuantity: 1.0,
+                pendingAboveType: OrderListOtocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.pendingAboveType;
+
+            await expect(client.orderListOtoco(params)).rejects.toThrow(
+                'Required parameter pendingAboveType was null or undefined when calling orderListOtoco.'
+            );
+        });
+
         it('should throw an error when server is returning an error', async () => {
             const params: OrderListOtocoRequest = {
                 symbol: 'BNBUSDT',
+                workingType: OrderListOtocoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOtocoWorkingSideEnum.BUY,
                 workingPrice: 1.0,
                 workingQuantity: 1.0,
+                pendingSide: OrderListOtocoPendingSideEnum.BUY,
                 pendingQuantity: 1.0,
+                pendingAboveType: OrderListOtocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,
             };
 
             const errorResponse = {
@@ -2593,6 +2941,7 @@ describe('TradeApi', () => {
         it('should execute orderOco() successfully with required parameters only', async () => {
             const params: OrderOcoRequest = {
                 symbol: 'BNBUSDT',
+                side: OrderOcoSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
                 stopPrice: 1.0,
@@ -2607,10 +2956,28 @@ describe('TradeApi', () => {
                 transactionTime: 1563417480525,
                 symbol: 'LTCBTC',
                 orders: [
-                    { symbol: 'LTCBTC', orderId: 2, clientOrderId: 'Kk7sqHb9J6mJWTMDVW7Vos' },
                     { symbol: 'LTCBTC', orderId: 3, clientOrderId: 'xTXKaGYd4bluPVp78IVRvl' },
+                    { symbol: 'LTCBTC', orderId: 2, clientOrderId: 'Kk7sqHb9J6mJWTMDVW7Vos' },
                 ],
                 orderReports: [
+                    {
+                        symbol: 'LTCBTC',
+                        orderId: 3,
+                        orderListId: 0,
+                        clientOrderId: 'xTXKaGYd4bluPVp78IVRvl',
+                        transactTime: 1563417480525,
+                        price: '0.036435',
+                        origQty: '0.624363',
+                        executedQty: '0.000000',
+                        origQuoteOrderQty: '0.000000',
+                        cummulativeQuoteQty: '0.000000',
+                        status: 'NEW',
+                        timeInForce: 'GTC',
+                        type: 'LIMIT_MAKER',
+                        side: 'BUY',
+                        workingTime: 1563417480525,
+                        selfTradePreventionMode: 'NONE',
+                    },
                     {
                         symbol: 'LTCBTC',
                         orderId: 2,
@@ -2628,24 +2995,6 @@ describe('TradeApi', () => {
                         side: 'BUY',
                         stopPrice: '0.960664',
                         workingTime: -1,
-                        selfTradePreventionMode: 'NONE',
-                    },
-                    {
-                        symbol: 'LTCBTC',
-                        orderId: 3,
-                        orderListId: 0,
-                        clientOrderId: 'xTXKaGYd4bluPVp78IVRvl',
-                        transactTime: 1563417480525,
-                        price: '0.036435',
-                        origQty: '0.624363',
-                        executedQty: '0.000000',
-                        origQuoteOrderQty: '0.000000',
-                        cummulativeQuoteQty: '0.000000',
-                        status: 'NEW',
-                        timeInForce: 'GTC',
-                        type: 'LIMIT_MAKER',
-                        side: 'BUY',
-                        workingTime: 1563417480525,
                         selfTradePreventionMode: 'NONE',
                     },
                 ],
@@ -2668,11 +3017,11 @@ describe('TradeApi', () => {
         it('should execute orderOco() successfully with optional parameters', async () => {
             const params: OrderOcoRequest = {
                 symbol: 'BNBUSDT',
+                side: OrderOcoSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
                 stopPrice: 1.0,
                 listClientOrderId: 'listClientOrderId_example',
-                side: OrderOcoSideEnum.BUY,
                 limitClientOrderId: 'limitClientOrderId_example',
                 limitStrategyId: 1,
                 limitStrategyType: 1,
@@ -2698,10 +3047,28 @@ describe('TradeApi', () => {
                 transactionTime: 1563417480525,
                 symbol: 'LTCBTC',
                 orders: [
-                    { symbol: 'LTCBTC', orderId: 2, clientOrderId: 'Kk7sqHb9J6mJWTMDVW7Vos' },
                     { symbol: 'LTCBTC', orderId: 3, clientOrderId: 'xTXKaGYd4bluPVp78IVRvl' },
+                    { symbol: 'LTCBTC', orderId: 2, clientOrderId: 'Kk7sqHb9J6mJWTMDVW7Vos' },
                 ],
                 orderReports: [
+                    {
+                        symbol: 'LTCBTC',
+                        orderId: 3,
+                        orderListId: 0,
+                        clientOrderId: 'xTXKaGYd4bluPVp78IVRvl',
+                        transactTime: 1563417480525,
+                        price: '0.036435',
+                        origQty: '0.624363',
+                        executedQty: '0.000000',
+                        origQuoteOrderQty: '0.000000',
+                        cummulativeQuoteQty: '0.000000',
+                        status: 'NEW',
+                        timeInForce: 'GTC',
+                        type: 'LIMIT_MAKER',
+                        side: 'BUY',
+                        workingTime: 1563417480525,
+                        selfTradePreventionMode: 'NONE',
+                    },
                     {
                         symbol: 'LTCBTC',
                         orderId: 2,
@@ -2719,24 +3086,6 @@ describe('TradeApi', () => {
                         side: 'BUY',
                         stopPrice: '0.960664',
                         workingTime: -1,
-                        selfTradePreventionMode: 'NONE',
-                    },
-                    {
-                        symbol: 'LTCBTC',
-                        orderId: 3,
-                        orderListId: 0,
-                        clientOrderId: 'xTXKaGYd4bluPVp78IVRvl',
-                        transactTime: 1563417480525,
-                        price: '0.036435',
-                        origQty: '0.624363',
-                        executedQty: '0.000000',
-                        origQuoteOrderQty: '0.000000',
-                        cummulativeQuoteQty: '0.000000',
-                        status: 'NEW',
-                        timeInForce: 'GTC',
-                        type: 'LIMIT_MAKER',
-                        side: 'BUY',
-                        workingTime: 1563417480525,
                         selfTradePreventionMode: 'NONE',
                     },
                 ],
@@ -2759,6 +3108,7 @@ describe('TradeApi', () => {
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: OrderOcoRequest = {
                 symbol: 'BNBUSDT',
+                side: OrderOcoSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
                 stopPrice: 1.0,
@@ -2771,9 +3121,26 @@ describe('TradeApi', () => {
             );
         });
 
+        it('should throw RequiredError when side is missing', async () => {
+            const _params: OrderOcoRequest = {
+                symbol: 'BNBUSDT',
+                side: OrderOcoSideEnum.BUY,
+                quantity: 1.0,
+                price: 1.0,
+                stopPrice: 1.0,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.side;
+
+            await expect(client.orderOco(params)).rejects.toThrow(
+                'Required parameter side was null or undefined when calling orderOco.'
+            );
+        });
+
         it('should throw RequiredError when quantity is missing', async () => {
             const _params: OrderOcoRequest = {
                 symbol: 'BNBUSDT',
+                side: OrderOcoSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
                 stopPrice: 1.0,
@@ -2789,6 +3156,7 @@ describe('TradeApi', () => {
         it('should throw RequiredError when price is missing', async () => {
             const _params: OrderOcoRequest = {
                 symbol: 'BNBUSDT',
+                side: OrderOcoSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
                 stopPrice: 1.0,
@@ -2804,6 +3172,7 @@ describe('TradeApi', () => {
         it('should throw RequiredError when stopPrice is missing', async () => {
             const _params: OrderOcoRequest = {
                 symbol: 'BNBUSDT',
+                side: OrderOcoSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
                 stopPrice: 1.0,
@@ -2819,6 +3188,7 @@ describe('TradeApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: OrderOcoRequest = {
                 symbol: 'BNBUSDT',
+                side: OrderOcoSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
                 stopPrice: 1.0,
@@ -2916,6 +3286,8 @@ describe('TradeApi', () => {
         it('should execute sorOrder() successfully with required parameters only', async () => {
             const params: SorOrderRequest = {
                 symbol: 'BNBUSDT',
+                side: SorOrderSideEnum.BUY,
+                type: SorOrderTypeEnum.MARKET,
                 quantity: 1.0,
             };
 
@@ -2968,9 +3340,9 @@ describe('TradeApi', () => {
         it('should execute sorOrder() successfully with optional parameters', async () => {
             const params: SorOrderRequest = {
                 symbol: 'BNBUSDT',
-                quantity: 1.0,
                 side: SorOrderSideEnum.BUY,
                 type: SorOrderTypeEnum.MARKET,
+                quantity: 1.0,
                 timeInForce: SorOrderTimeInForceEnum.GTC,
                 price: 400.0,
                 newClientOrderId: 'newClientOrderId_example',
@@ -3031,6 +3403,8 @@ describe('TradeApi', () => {
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: SorOrderRequest = {
                 symbol: 'BNBUSDT',
+                side: SorOrderSideEnum.BUY,
+                type: SorOrderTypeEnum.MARKET,
                 quantity: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -3041,9 +3415,41 @@ describe('TradeApi', () => {
             );
         });
 
+        it('should throw RequiredError when side is missing', async () => {
+            const _params: SorOrderRequest = {
+                symbol: 'BNBUSDT',
+                side: SorOrderSideEnum.BUY,
+                type: SorOrderTypeEnum.MARKET,
+                quantity: 1.0,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.side;
+
+            await expect(client.sorOrder(params)).rejects.toThrow(
+                'Required parameter side was null or undefined when calling sorOrder.'
+            );
+        });
+
+        it('should throw RequiredError when type is missing', async () => {
+            const _params: SorOrderRequest = {
+                symbol: 'BNBUSDT',
+                side: SorOrderSideEnum.BUY,
+                type: SorOrderTypeEnum.MARKET,
+                quantity: 1.0,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.type;
+
+            await expect(client.sorOrder(params)).rejects.toThrow(
+                'Required parameter type was null or undefined when calling sorOrder.'
+            );
+        });
+
         it('should throw RequiredError when quantity is missing', async () => {
             const _params: SorOrderRequest = {
                 symbol: 'BNBUSDT',
+                side: SorOrderSideEnum.BUY,
+                type: SorOrderTypeEnum.MARKET,
                 quantity: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -3057,6 +3463,8 @@ describe('TradeApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: SorOrderRequest = {
                 symbol: 'BNBUSDT',
+                side: SorOrderSideEnum.BUY,
+                type: SorOrderTypeEnum.MARKET,
                 quantity: 1.0,
             };
 

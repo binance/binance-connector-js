@@ -25,10 +25,10 @@
 import type { TickerBookResponse1 } from './ticker-book-response1';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TickerBookResponse1Result } from './ticker-book-response1-result';
+import type { TickerBookResponse2 } from './ticker-book-response2';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TickerBookResponse2 } from './ticker-book-response2';
+import type { TickerBookResponse2ResultInner } from './ticker-book-response2-result-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { TickerResponse1RateLimitsInner } from './ticker-response1-rate-limits-inner';

@@ -190,8 +190,8 @@ describe('AccountApi', () => {
                 updateTime: 123456789,
                 accountType: 'SPOT',
                 balances: [
-                    { asset: 'BTC', free: '4723846.89208129', locked: '0.00000000' },
                     { asset: 'LTC', free: '4763368.68006011', locked: '0.00000000' },
+                    { asset: 'BTC', free: '4723846.89208129', locked: '0.00000000' },
                 ],
                 permissions: ['SPOT'],
                 uid: 354937868,
@@ -237,8 +237,8 @@ describe('AccountApi', () => {
                 updateTime: 123456789,
                 accountType: 'SPOT',
                 balances: [
-                    { asset: 'BTC', free: '4723846.89208129', locked: '0.00000000' },
                     { asset: 'LTC', free: '4763368.68006011', locked: '0.00000000' },
+                    { asset: 'BTC', free: '4723846.89208129', locked: '0.00000000' },
                 ],
                 permissions: ['SPOT'],
                 uid: 354937868,

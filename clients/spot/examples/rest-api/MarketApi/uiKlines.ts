@@ -1,4 +1,4 @@
-import { Spot, SPOT_REST_API_PROD_URL } from '../../../src';
+import { Spot, SpotRestAPI, SPOT_REST_API_PROD_URL } from '../../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -11,6 +11,7 @@ async function uiKlines() {
     try {
         const response = await client.restAPI.uiKlines({
             symbol: 'BNBUSDT',
+            interval: SpotRestAPI.UiKlinesIntervalEnum.INTERVAL_1s,
         });
 
         const rateLimits = response.rateLimits!;

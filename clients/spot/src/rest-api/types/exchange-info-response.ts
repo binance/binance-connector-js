@@ -21,6 +21,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { ExchangeInfoResponseExchangeFiltersInner } from './exchange-info-response-exchange-filters-inner';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { ExchangeInfoResponseRateLimitsInner } from './exchange-info-response-rate-limits-inner';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -52,10 +55,10 @@ export interface ExchangeInfoResponse {
     rateLimits?: Array<ExchangeInfoResponseRateLimitsInner>;
     /**
      *
-     * @type {Array<string>}
+     * @type {Array<ExchangeInfoResponseExchangeFiltersInner>}
      * @memberof ExchangeInfoResponse
      */
-    exchangeFilters?: Array<string>;
+    exchangeFilters?: Array<ExchangeInfoResponseExchangeFiltersInner>;
     /**
      *
      * @type {Array<ExchangeInfoResponseSymbolsInner>}

@@ -21,7 +21,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TickerBookResponse1Result } from './ticker-book-response1-result';
+import type { TickerBookResponse2ResultInner } from './ticker-book-response2-result-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { TickerResponse1RateLimitsInner } from './ticker-response1-rate-limits-inner';
@@ -46,10 +46,10 @@ export interface TickerBookResponse2 {
     status?: number;
     /**
      *
-     * @type {Array<TickerBookResponse1Result>}
+     * @type {Array<TickerBookResponse2ResultInner>}
      * @memberof TickerBookResponse2
      */
-    result?: Array<TickerBookResponse1Result>;
+    result?: Array<TickerBookResponse2ResultInner>;
     /**
      *
      * @type {Array<TickerResponse1RateLimitsInner>}

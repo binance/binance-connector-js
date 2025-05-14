@@ -1,4 +1,4 @@
-import { Spot, SPOT_REST_API_PROD_URL } from '../../../src';
+import { Spot, SpotRestAPI, SPOT_REST_API_PROD_URL } from '../../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -11,6 +11,8 @@ async function sorOrder() {
     try {
         const response = await client.restAPI.sorOrder({
             symbol: 'BNBUSDT',
+            side: SpotRestAPI.SorOrderSideEnum.BUY,
+            type: SpotRestAPI.SorOrderTypeEnum.MARKET,
             quantity: 1.0,
         });
 

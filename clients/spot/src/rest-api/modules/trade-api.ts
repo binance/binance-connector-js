@@ -439,12 +439,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         },
         /**
          * Send in a new order.
+         *
+         * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
          * Weight: 1
          *
          * @summary New order
          * @param {string} symbol
-         * @param {NewOrderSideEnum} [side]
-         * @param {NewOrderTypeEnum} [type]
+         * @param {NewOrderSideEnum} side
+         * @param {NewOrderTypeEnum} type
          * @param {NewOrderTimeInForceEnum} [timeInForce]
          * @param {number} [quantity]
          * @param {number} [quoteOrderQty]
@@ -463,8 +465,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          */
         newOrder: async (
             symbol: string,
-            side?: NewOrderSideEnum,
-            type?: NewOrderTypeEnum,
+            side: NewOrderSideEnum,
+            type: NewOrderTypeEnum,
             timeInForce?: NewOrderTimeInForceEnum,
             quantity?: number,
             quoteOrderQty?: number,
@@ -481,6 +483,10 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('newOrder', 'symbol', symbol);
+            // verify required parameter 'side' is not null or undefined
+            assertParamExists('newOrder', 'side', side);
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('newOrder', 'type', type);
 
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -587,6 +593,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Reduce the quantity of an existing open order.
          *
+         * This adds 0 orders to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
+         *
          * Read [Order Amend Keep Priority FAQ](faqs/order_amend_keep_priority.md) to learn more.
          * Weight: 4
          *
@@ -654,14 +662,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * Filters and Order Count are evaluated before the processing of the cancellation and order placement occurs.
          *
-         * A new order that was not attempted (i.e. when `newOrderResult: NOT_ATTEMPTED` ), will still increase the order count by 1.
+         * A new order that was not attempted (i.e. when `newOrderResult: NOT_ATTEMPTED`), will still increase the unfilled order count by 1.
          * Weight: 1
          *
          * @summary Cancel an Existing Order and Send a New Order
          * @param {string} symbol
-         * @param {OrderCancelReplaceSideEnum} [side]
-         * @param {OrderCancelReplaceTypeEnum} [type]
-         * @param {OrderCancelReplaceCancelReplaceModeEnum} [cancelReplaceMode]
+         * @param {OrderCancelReplaceSideEnum} side
+         * @param {OrderCancelReplaceTypeEnum} type
+         * @param {OrderCancelReplaceCancelReplaceModeEnum} cancelReplaceMode
          * @param {OrderCancelReplaceTimeInForceEnum} [timeInForce]
          * @param {number} [quantity]
          * @param {number} [quoteOrderQty]
@@ -685,9 +693,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          */
         orderCancelReplace: async (
             symbol: string,
-            side?: OrderCancelReplaceSideEnum,
-            type?: OrderCancelReplaceTypeEnum,
-            cancelReplaceMode?: OrderCancelReplaceCancelReplaceModeEnum,
+            side: OrderCancelReplaceSideEnum,
+            type: OrderCancelReplaceTypeEnum,
+            cancelReplaceMode: OrderCancelReplaceCancelReplaceModeEnum,
             timeInForce?: OrderCancelReplaceTimeInForceEnum,
             quantity?: number,
             quoteOrderQty?: number,
@@ -709,6 +717,12 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('orderCancelReplace', 'symbol', symbol);
+            // verify required parameter 'side' is not null or undefined
+            assertParamExists('orderCancelReplace', 'side', side);
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('orderCancelReplace', 'type', type);
+            // verify required parameter 'cancelReplaceMode' is not null or undefined
+            assertParamExists('orderCancelReplace', 'cancelReplaceMode', cancelReplaceMode);
 
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -822,15 +836,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * If the OCO is on the `BUY` side:
          * `LIMIT_MAKER/TAKE_PROFIT_LIMIT price` < Last Traded Price < `stopPrice`
          * `TAKE_PROFIT stopPrice` < Last Traded Price < `STOP_LOSS/STOP_LOSS_LIMIT stopPrice`
-         * OCOs add **2 orders** to the unfilled order count, `EXCHANGE_MAX_ORDERS` filter, and the `MAX_NUM_ORDERS` filter.
+         * OCOs add **2 orders** to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
          * Weight: 1
+         *
+         * Unfilled Order Count: 2
          *
          * @summary New Order list - OCO
          * @param {string} symbol
+         * @param {OrderListOcoSideEnum} side
          * @param {number} quantity
+         * @param {OrderListOcoAboveTypeEnum} aboveType
+         * @param {OrderListOcoBelowTypeEnum} belowType
          * @param {string} [listClientOrderId] A unique Id for the entire orderList
-         * @param {OrderListOcoSideEnum} [side]
-         * @param {OrderListOcoAboveTypeEnum} [aboveType]
          * @param {string} [aboveClientOrderId] Arbitrary unique ID among open orders for the above order. Automatically generated if not sent
          * @param {number} [aboveIcebergQty] Note that this can only be used if `aboveTimeInForce` is `GTC`.
          * @param {number} [abovePrice] Can be used if `aboveType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.
@@ -839,7 +856,6 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [aboveTimeInForce] Required if `aboveType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`
          * @param {number} [aboveStrategyId] Arbitrary numeric value identifying the above order within an order strategy.
          * @param {number} [aboveStrategyType] Arbitrary numeric value identifying the above order strategy. <br>Values smaller than 1000000 are reserved and cannot be used.
-         * @param {OrderListOcoBelowTypeEnum} [belowType]
          * @param {string} [belowClientOrderId] Arbitrary unique ID among open orders for the below order. Automatically generated if not sent
          * @param {number} [belowIcebergQty] Note that this can only be used if `belowTimeInForce` is `GTC`.
          * @param {number} [belowPrice] Can be used if `belowType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.
@@ -856,10 +872,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          */
         orderListOco: async (
             symbol: string,
+            side: OrderListOcoSideEnum,
             quantity: number,
+            aboveType: OrderListOcoAboveTypeEnum,
+            belowType: OrderListOcoBelowTypeEnum,
             listClientOrderId?: string,
-            side?: OrderListOcoSideEnum,
-            aboveType?: OrderListOcoAboveTypeEnum,
             aboveClientOrderId?: string,
             aboveIcebergQty?: number,
             abovePrice?: number,
@@ -868,7 +885,6 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             aboveTimeInForce?: number,
             aboveStrategyId?: number,
             aboveStrategyType?: number,
-            belowType?: OrderListOcoBelowTypeEnum,
             belowClientOrderId?: string,
             belowIcebergQty?: number,
             belowPrice?: number,
@@ -883,8 +899,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('orderListOco', 'symbol', symbol);
+            // verify required parameter 'side' is not null or undefined
+            assertParamExists('orderListOco', 'side', side);
             // verify required parameter 'quantity' is not null or undefined
             assertParamExists('orderListOco', 'quantity', quantity);
+            // verify required parameter 'aboveType' is not null or undefined
+            assertParamExists('orderListOco', 'aboveType', aboveType);
+            // verify required parameter 'belowType' is not null or undefined
+            assertParamExists('orderListOco', 'belowType', belowType);
 
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -1006,26 +1028,28 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * The second order is called the **pending order**. It can be any order type except for `MARKET` orders using parameter `quoteOrderQty`. The pending order is only placed on the order book when the working order gets **fully filled**.
          * If either the working order or the pending order is cancelled individually, the other order in the order list will also be canceled or expired.
          * When the order list is placed, if the working order gets **immediately fully filled**, the placement response will show the working order as `FILLED` but the pending order will still appear as `PENDING_NEW`. You need to query the status of the pending order again to see its updated status.
-         * OTOs add **2 orders** to the unfilled order count, `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
+         * OTOs add **2 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
          * Weight: 1
+         *
+         * Unfilled Order Count: 2
          *
          * @summary New Order list - OTO
          * @param {string} symbol
+         * @param {OrderListOtoWorkingTypeEnum} workingType
+         * @param {OrderListOtoWorkingSideEnum} workingSide
          * @param {number} workingPrice
          * @param {number} workingQuantity Sets the quantity for the working order.
+         * @param {OrderListOtoPendingTypeEnum} pendingType
+         * @param {OrderListOtoPendingSideEnum} pendingSide
          * @param {number} pendingQuantity Sets the quantity for the pending order.
          * @param {string} [listClientOrderId] A unique Id for the entire orderList
          * @param {OrderListOtoNewOrderRespTypeEnum} [newOrderRespType]
          * @param {OrderListOtoSelfTradePreventionModeEnum} [selfTradePreventionMode]
-         * @param {OrderListOtoWorkingTypeEnum} [workingType]
-         * @param {OrderListOtoWorkingSideEnum} [workingSide]
          * @param {string} [workingClientOrderId] Arbitrary unique ID among open orders for the working order.<br> Automatically generated if not sent.
          * @param {number} [workingIcebergQty] This can only be used if `workingTimeInForce` is `GTC`, or if `workingType` is `LIMIT_MAKER`.
          * @param {OrderListOtoWorkingTimeInForceEnum} [workingTimeInForce]
          * @param {number} [workingStrategyId] Arbitrary numeric value identifying the working order within an order strategy.
          * @param {number} [workingStrategyType] Arbitrary numeric value identifying the working order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
-         * @param {OrderListOtoPendingTypeEnum} [pendingType]
-         * @param {OrderListOtoPendingSideEnum} [pendingSide]
          * @param {string} [pendingClientOrderId] Arbitrary unique ID among open orders for the pending order.<br> Automatically generated if not sent.
          * @param {number} [pendingPrice]
          * @param {number} [pendingStopPrice]
@@ -1040,21 +1064,21 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          */
         orderListOto: async (
             symbol: string,
+            workingType: OrderListOtoWorkingTypeEnum,
+            workingSide: OrderListOtoWorkingSideEnum,
             workingPrice: number,
             workingQuantity: number,
+            pendingType: OrderListOtoPendingTypeEnum,
+            pendingSide: OrderListOtoPendingSideEnum,
             pendingQuantity: number,
             listClientOrderId?: string,
             newOrderRespType?: OrderListOtoNewOrderRespTypeEnum,
             selfTradePreventionMode?: OrderListOtoSelfTradePreventionModeEnum,
-            workingType?: OrderListOtoWorkingTypeEnum,
-            workingSide?: OrderListOtoWorkingSideEnum,
             workingClientOrderId?: string,
             workingIcebergQty?: number,
             workingTimeInForce?: OrderListOtoWorkingTimeInForceEnum,
             workingStrategyId?: number,
             workingStrategyType?: number,
-            pendingType?: OrderListOtoPendingTypeEnum,
-            pendingSide?: OrderListOtoPendingSideEnum,
             pendingClientOrderId?: string,
             pendingPrice?: number,
             pendingStopPrice?: number,
@@ -1067,10 +1091,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('orderListOto', 'symbol', symbol);
+            // verify required parameter 'workingType' is not null or undefined
+            assertParamExists('orderListOto', 'workingType', workingType);
+            // verify required parameter 'workingSide' is not null or undefined
+            assertParamExists('orderListOto', 'workingSide', workingSide);
             // verify required parameter 'workingPrice' is not null or undefined
             assertParamExists('orderListOto', 'workingPrice', workingPrice);
             // verify required parameter 'workingQuantity' is not null or undefined
             assertParamExists('orderListOto', 'workingQuantity', workingQuantity);
+            // verify required parameter 'pendingType' is not null or undefined
+            assertParamExists('orderListOto', 'pendingType', pendingType);
+            // verify required parameter 'pendingSide' is not null or undefined
+            assertParamExists('orderListOto', 'pendingSide', pendingSide);
             // verify required parameter 'pendingQuantity' is not null or undefined
             assertParamExists('orderListOto', 'pendingQuantity', pendingQuantity);
 
@@ -1190,31 +1222,32 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Place an OTOCO.
          *
          * An OTOCO (One-Triggers-One-Cancels-the-Other) is an order list comprised of 3 orders.
-         *
          * The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
          * The behavior of the working order is the same as the [OTO](#new-order-list---oto-trade).
          * OTOCO has 2 pending orders (pending above and pending below), forming an OCO pair. The pending orders are only placed on the order book when the working order gets **fully filled**.
          * The rules of the pending above and pending below follow the same rules as the [Order list OCO](#new-order-list---oco-trade).
-         * OTOCOs add **3 orders** against the unfilled order count, `EXCHANGE_MAX_NUM_ORDERS` filter, and `MAX_NUM_ORDERS` filter.
+         * OTOCOs add **3 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
          * Weight: 1
+         *
+         * Unfilled Order Count: 3
          *
          * @summary New Order list - OTOCO
          * @param {string} symbol
+         * @param {OrderListOtocoWorkingTypeEnum} workingType
+         * @param {OrderListOtocoWorkingSideEnum} workingSide
          * @param {number} workingPrice
          * @param {number} workingQuantity Sets the quantity for the working order.
+         * @param {OrderListOtocoPendingSideEnum} pendingSide
          * @param {number} pendingQuantity Sets the quantity for the pending order.
+         * @param {OrderListOtocoPendingAboveTypeEnum} pendingAboveType
          * @param {string} [listClientOrderId] A unique Id for the entire orderList
          * @param {OrderListOtocoNewOrderRespTypeEnum} [newOrderRespType]
          * @param {OrderListOtocoSelfTradePreventionModeEnum} [selfTradePreventionMode]
-         * @param {OrderListOtocoWorkingTypeEnum} [workingType]
-         * @param {OrderListOtocoWorkingSideEnum} [workingSide]
          * @param {string} [workingClientOrderId] Arbitrary unique ID among open orders for the working order.<br> Automatically generated if not sent.
          * @param {number} [workingIcebergQty] This can only be used if `workingTimeInForce` is `GTC`, or if `workingType` is `LIMIT_MAKER`.
          * @param {OrderListOtocoWorkingTimeInForceEnum} [workingTimeInForce]
          * @param {number} [workingStrategyId] Arbitrary numeric value identifying the working order within an order strategy.
          * @param {number} [workingStrategyType] Arbitrary numeric value identifying the working order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
-         * @param {OrderListOtocoPendingSideEnum} [pendingSide]
-         * @param {OrderListOtocoPendingAboveTypeEnum} [pendingAboveType]
          * @param {string} [pendingAboveClientOrderId] Arbitrary unique ID among open orders for the pending above order.<br> Automatically generated if not sent.
          * @param {number} [pendingAbovePrice] Can be used if `pendingAboveType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.
          * @param {number} [pendingAboveStopPrice] Can be used if `pendingAboveType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT`
@@ -1238,21 +1271,21 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          */
         orderListOtoco: async (
             symbol: string,
+            workingType: OrderListOtocoWorkingTypeEnum,
+            workingSide: OrderListOtocoWorkingSideEnum,
             workingPrice: number,
             workingQuantity: number,
+            pendingSide: OrderListOtocoPendingSideEnum,
             pendingQuantity: number,
+            pendingAboveType: OrderListOtocoPendingAboveTypeEnum,
             listClientOrderId?: string,
             newOrderRespType?: OrderListOtocoNewOrderRespTypeEnum,
             selfTradePreventionMode?: OrderListOtocoSelfTradePreventionModeEnum,
-            workingType?: OrderListOtocoWorkingTypeEnum,
-            workingSide?: OrderListOtocoWorkingSideEnum,
             workingClientOrderId?: string,
             workingIcebergQty?: number,
             workingTimeInForce?: OrderListOtocoWorkingTimeInForceEnum,
             workingStrategyId?: number,
             workingStrategyType?: number,
-            pendingSide?: OrderListOtocoPendingSideEnum,
-            pendingAboveType?: OrderListOtocoPendingAboveTypeEnum,
             pendingAboveClientOrderId?: string,
             pendingAbovePrice?: number,
             pendingAboveStopPrice?: number,
@@ -1274,12 +1307,20 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('orderListOtoco', 'symbol', symbol);
+            // verify required parameter 'workingType' is not null or undefined
+            assertParamExists('orderListOtoco', 'workingType', workingType);
+            // verify required parameter 'workingSide' is not null or undefined
+            assertParamExists('orderListOtoco', 'workingSide', workingSide);
             // verify required parameter 'workingPrice' is not null or undefined
             assertParamExists('orderListOtoco', 'workingPrice', workingPrice);
             // verify required parameter 'workingQuantity' is not null or undefined
             assertParamExists('orderListOtoco', 'workingQuantity', workingQuantity);
+            // verify required parameter 'pendingSide' is not null or undefined
+            assertParamExists('orderListOtoco', 'pendingSide', pendingSide);
             // verify required parameter 'pendingQuantity' is not null or undefined
             assertParamExists('orderListOtoco', 'pendingQuantity', pendingQuantity);
+            // verify required parameter 'pendingAboveType' is not null or undefined
+            assertParamExists('orderListOtoco', 'pendingAboveType', pendingAboveType);
 
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -1438,16 +1479,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Quantity Restrictions:
          * Both legs must have the same quantity.
          * `ICEBERG` quantities however do not have to be the same
-         * `OCO` adds **2 orders** to the unfilled order count, `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
+         * `OCO` adds **2 orders** to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
          * Weight: 1
+         *
+         * Unfilled Order Count: 2
          *
          * @summary New OCO - Deprecated
          * @param {string} symbol
+         * @param {OrderOcoSideEnum} side
          * @param {number} quantity
          * @param {number} price
          * @param {number} stopPrice
          * @param {string} [listClientOrderId] A unique Id for the entire orderList
-         * @param {OrderOcoSideEnum} [side]
          * @param {string} [limitClientOrderId] A unique Id for the limit order
          * @param {number} [limitStrategyId]
          * @param {number} [limitStrategyType] The value cannot be less than `1000000`.
@@ -1467,11 +1510,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          */
         orderOco: async (
             symbol: string,
+            side: OrderOcoSideEnum,
             quantity: number,
             price: number,
             stopPrice: number,
             listClientOrderId?: string,
-            side?: OrderOcoSideEnum,
             limitClientOrderId?: string,
             limitStrategyId?: number,
             limitStrategyType?: number,
@@ -1489,6 +1532,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('orderOco', 'symbol', symbol);
+            // verify required parameter 'side' is not null or undefined
+            assertParamExists('orderOco', 'side', side);
             // verify required parameter 'quantity' is not null or undefined
             assertParamExists('orderOco', 'quantity', quantity);
             // verify required parameter 'price' is not null or undefined
@@ -1621,14 +1666,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Places an order using smart order routing (SOR).
          *
+         * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
+         *
          * Read [SOR FAQ](faqs/sor_faq.md) to learn more.
          * Weight: 1
          *
+         * Unfilled Order Count: 1
+         *
          * @summary New order using SOR
          * @param {string} symbol
+         * @param {SorOrderSideEnum} side
+         * @param {SorOrderTypeEnum} type
          * @param {number} quantity
-         * @param {SorOrderSideEnum} [side]
-         * @param {SorOrderTypeEnum} [type]
          * @param {SorOrderTimeInForceEnum} [timeInForce]
          * @param {number} [price]
          * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
@@ -1643,9 +1692,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          */
         sorOrder: async (
             symbol: string,
+            side: SorOrderSideEnum,
+            type: SorOrderTypeEnum,
             quantity: number,
-            side?: SorOrderSideEnum,
-            type?: SorOrderTypeEnum,
             timeInForce?: SorOrderTimeInForceEnum,
             price?: number,
             newClientOrderId?: string,
@@ -1658,6 +1707,10 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('sorOrder', 'symbol', symbol);
+            // verify required parameter 'side' is not null or undefined
+            assertParamExists('sorOrder', 'side', side);
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('sorOrder', 'type', type);
             // verify required parameter 'quantity' is not null or undefined
             assertParamExists('sorOrder', 'quantity', quantity);
 
@@ -1868,6 +1921,8 @@ export interface TradeApiInterface {
     ): Promise<RestApiResponse<GetOrderListResponse>>;
     /**
      * Send in a new order.
+     *
+     * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
      * Weight: 1
      *
      * @summary New order
@@ -1893,6 +1948,8 @@ export interface TradeApiInterface {
     /**
      * Reduce the quantity of an existing open order.
      *
+     * This adds 0 orders to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
+     *
      * Read [Order Amend Keep Priority FAQ](faqs/order_amend_keep_priority.md) to learn more.
      * Weight: 4
      *
@@ -1910,7 +1967,7 @@ export interface TradeApiInterface {
      *
      * Filters and Order Count are evaluated before the processing of the cancellation and order placement occurs.
      *
-     * A new order that was not attempted (i.e. when `newOrderResult: NOT_ATTEMPTED` ), will still increase the order count by 1.
+     * A new order that was not attempted (i.e. when `newOrderResult: NOT_ATTEMPTED`), will still increase the unfilled order count by 1.
      * Weight: 1
      *
      * @summary Cancel an Existing Order and Send a New Order
@@ -1934,8 +1991,10 @@ export interface TradeApiInterface {
      * If the OCO is on the `BUY` side:
      * `LIMIT_MAKER/TAKE_PROFIT_LIMIT price` < Last Traded Price < `stopPrice`
      * `TAKE_PROFIT stopPrice` < Last Traded Price < `STOP_LOSS/STOP_LOSS_LIMIT stopPrice`
-     * OCOs add **2 orders** to the unfilled order count, `EXCHANGE_MAX_ORDERS` filter, and the `MAX_NUM_ORDERS` filter.
+     * OCOs add **2 orders** to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
      * Weight: 1
+     *
+     * Unfilled Order Count: 2
      *
      * @summary New Order list - OCO
      * @param {OrderListOcoRequest} requestParameters Request parameters.
@@ -1954,8 +2013,10 @@ export interface TradeApiInterface {
      * The second order is called the **pending order**. It can be any order type except for `MARKET` orders using parameter `quoteOrderQty`. The pending order is only placed on the order book when the working order gets **fully filled**.
      * If either the working order or the pending order is cancelled individually, the other order in the order list will also be canceled or expired.
      * When the order list is placed, if the working order gets **immediately fully filled**, the placement response will show the working order as `FILLED` but the pending order will still appear as `PENDING_NEW`. You need to query the status of the pending order again to see its updated status.
-     * OTOs add **2 orders** to the unfilled order count, `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
+     * OTOs add **2 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
      * Weight: 1
+     *
+     * Unfilled Order Count: 2
      *
      * @summary New Order list - OTO
      * @param {OrderListOtoRequest} requestParameters Request parameters.
@@ -1970,13 +2031,14 @@ export interface TradeApiInterface {
      * Place an OTOCO.
      *
      * An OTOCO (One-Triggers-One-Cancels-the-Other) is an order list comprised of 3 orders.
-     *
      * The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
      * The behavior of the working order is the same as the [OTO](#new-order-list---oto-trade).
      * OTOCO has 2 pending orders (pending above and pending below), forming an OCO pair. The pending orders are only placed on the order book when the working order gets **fully filled**.
      * The rules of the pending above and pending below follow the same rules as the [Order list OCO](#new-order-list---oco-trade).
-     * OTOCOs add **3 orders** against the unfilled order count, `EXCHANGE_MAX_NUM_ORDERS` filter, and `MAX_NUM_ORDERS` filter.
+     * OTOCOs add **3 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
      * Weight: 1
+     *
+     * Unfilled Order Count: 3
      *
      * @summary New Order list - OTOCO
      * @param {OrderListOtocoRequest} requestParameters Request parameters.
@@ -1996,8 +2058,10 @@ export interface TradeApiInterface {
      * Quantity Restrictions:
      * Both legs must have the same quantity.
      * `ICEBERG` quantities however do not have to be the same
-     * `OCO` adds **2 orders** to the unfilled order count, `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
+     * `OCO` adds **2 orders** to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
      * Weight: 1
+     *
+     * Unfilled Order Count: 2
      *
      * @summary New OCO - Deprecated
      * @param {OrderOcoRequest} requestParameters Request parameters.
@@ -2024,8 +2088,12 @@ export interface TradeApiInterface {
     /**
      * Places an order using smart order routing (SOR).
      *
+     * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
+     *
      * Read [SOR FAQ](faqs/sor_faq.md) to learn more.
      * Weight: 1
+     *
+     * Unfilled Order Count: 1
      *
      * @summary New order using SOR
      * @param {SorOrderRequest} requestParameters Request parameters.
@@ -2349,14 +2417,14 @@ export interface NewOrderRequest {
      * @type {'BUY' | 'SELL'}
      * @memberof TradeApiNewOrder
      */
-    readonly side?: NewOrderSideEnum;
+    readonly side: NewOrderSideEnum;
 
     /**
      *
      * @type {'MARKET' | 'LIMIT' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER' | 'NON_REPRESENTABLE'}
      * @memberof TradeApiNewOrder
      */
-    readonly type?: NewOrderTypeEnum;
+    readonly type: NewOrderTypeEnum;
 
     /**
      *
@@ -2528,21 +2596,21 @@ export interface OrderCancelReplaceRequest {
      * @type {'BUY' | 'SELL'}
      * @memberof TradeApiOrderCancelReplace
      */
-    readonly side?: OrderCancelReplaceSideEnum;
+    readonly side: OrderCancelReplaceSideEnum;
 
     /**
      *
      * @type {'MARKET' | 'LIMIT' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER' | 'NON_REPRESENTABLE'}
      * @memberof TradeApiOrderCancelReplace
      */
-    readonly type?: OrderCancelReplaceTypeEnum;
+    readonly type: OrderCancelReplaceTypeEnum;
 
     /**
      *
      * @type {'STOP_ON_FAILURE' | 'ALLOW_FAILURE'}
      * @memberof TradeApiOrderCancelReplace
      */
-    readonly cancelReplaceMode?: OrderCancelReplaceCancelReplaceModeEnum;
+    readonly cancelReplaceMode: OrderCancelReplaceCancelReplaceModeEnum;
 
     /**
      *
@@ -2685,10 +2753,31 @@ export interface OrderListOcoRequest {
 
     /**
      *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiOrderListOco
+     */
+    readonly side: OrderListOcoSideEnum;
+
+    /**
+     *
      * @type {number}
      * @memberof TradeApiOrderListOco
      */
     readonly quantity: number;
+
+    /**
+     *
+     * @type {'STOP_LOSS_LIMIT' | 'STOP_LOSS' | 'LIMIT_MAKER' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT'}
+     * @memberof TradeApiOrderListOco
+     */
+    readonly aboveType: OrderListOcoAboveTypeEnum;
+
+    /**
+     *
+     * @type {'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT'}
+     * @memberof TradeApiOrderListOco
+     */
+    readonly belowType: OrderListOcoBelowTypeEnum;
 
     /**
      * A unique Id for the entire orderList
@@ -2696,20 +2785,6 @@ export interface OrderListOcoRequest {
      * @memberof TradeApiOrderListOco
      */
     readonly listClientOrderId?: string;
-
-    /**
-     *
-     * @type {'BUY' | 'SELL'}
-     * @memberof TradeApiOrderListOco
-     */
-    readonly side?: OrderListOcoSideEnum;
-
-    /**
-     *
-     * @type {'STOP_LOSS_LIMIT' | 'STOP_LOSS' | 'LIMIT_MAKER' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT'}
-     * @memberof TradeApiOrderListOco
-     */
-    readonly aboveType?: OrderListOcoAboveTypeEnum;
 
     /**
      * Arbitrary unique ID among open orders for the above order. Automatically generated if not sent
@@ -2766,13 +2841,6 @@ export interface OrderListOcoRequest {
      * @memberof TradeApiOrderListOco
      */
     readonly aboveStrategyType?: number;
-
-    /**
-     *
-     * @type {'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT'}
-     * @memberof TradeApiOrderListOco
-     */
-    readonly belowType?: OrderListOcoBelowTypeEnum;
 
     /**
      * Arbitrary unique ID among open orders for the below order. Automatically generated if not sent
@@ -2866,6 +2934,20 @@ export interface OrderListOtoRequest {
 
     /**
      *
+     * @type {'LIMIT' | 'LIMIT_MAKER'}
+     * @memberof TradeApiOrderListOto
+     */
+    readonly workingType: OrderListOtoWorkingTypeEnum;
+
+    /**
+     *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiOrderListOto
+     */
+    readonly workingSide: OrderListOtoWorkingSideEnum;
+
+    /**
+     *
      * @type {number}
      * @memberof TradeApiOrderListOto
      */
@@ -2877,6 +2959,20 @@ export interface OrderListOtoRequest {
      * @memberof TradeApiOrderListOto
      */
     readonly workingQuantity: number;
+
+    /**
+     *
+     * @type {'LIMIT' | 'MARKET' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER'}
+     * @memberof TradeApiOrderListOto
+     */
+    readonly pendingType: OrderListOtoPendingTypeEnum;
+
+    /**
+     *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiOrderListOto
+     */
+    readonly pendingSide: OrderListOtoPendingSideEnum;
 
     /**
      * Sets the quantity for the pending order.
@@ -2905,20 +3001,6 @@ export interface OrderListOtoRequest {
      * @memberof TradeApiOrderListOto
      */
     readonly selfTradePreventionMode?: OrderListOtoSelfTradePreventionModeEnum;
-
-    /**
-     *
-     * @type {'LIMIT' | 'LIMIT_MAKER'}
-     * @memberof TradeApiOrderListOto
-     */
-    readonly workingType?: OrderListOtoWorkingTypeEnum;
-
-    /**
-     *
-     * @type {'BUY' | 'SELL'}
-     * @memberof TradeApiOrderListOto
-     */
-    readonly workingSide?: OrderListOtoWorkingSideEnum;
 
     /**
      * Arbitrary unique ID among open orders for the working order.<br> Automatically generated if not sent.
@@ -2954,20 +3036,6 @@ export interface OrderListOtoRequest {
      * @memberof TradeApiOrderListOto
      */
     readonly workingStrategyType?: number;
-
-    /**
-     *
-     * @type {'LIMIT' | 'MARKET' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER'}
-     * @memberof TradeApiOrderListOto
-     */
-    readonly pendingType?: OrderListOtoPendingTypeEnum;
-
-    /**
-     *
-     * @type {'BUY' | 'SELL'}
-     * @memberof TradeApiOrderListOto
-     */
-    readonly pendingSide?: OrderListOtoPendingSideEnum;
 
     /**
      * Arbitrary unique ID among open orders for the pending order.<br> Automatically generated if not sent.
@@ -3047,6 +3115,20 @@ export interface OrderListOtocoRequest {
 
     /**
      *
+     * @type {'LIMIT' | 'LIMIT_MAKER'}
+     * @memberof TradeApiOrderListOtoco
+     */
+    readonly workingType: OrderListOtocoWorkingTypeEnum;
+
+    /**
+     *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiOrderListOtoco
+     */
+    readonly workingSide: OrderListOtocoWorkingSideEnum;
+
+    /**
+     *
      * @type {number}
      * @memberof TradeApiOrderListOtoco
      */
@@ -3060,11 +3142,25 @@ export interface OrderListOtocoRequest {
     readonly workingQuantity: number;
 
     /**
+     *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiOrderListOtoco
+     */
+    readonly pendingSide: OrderListOtocoPendingSideEnum;
+
+    /**
      * Sets the quantity for the pending order.
      * @type {number}
      * @memberof TradeApiOrderListOtoco
      */
     readonly pendingQuantity: number;
+
+    /**
+     *
+     * @type {'STOP_LOSS_LIMIT' | 'STOP_LOSS' | 'LIMIT_MAKER' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT'}
+     * @memberof TradeApiOrderListOtoco
+     */
+    readonly pendingAboveType: OrderListOtocoPendingAboveTypeEnum;
 
     /**
      * A unique Id for the entire orderList
@@ -3086,20 +3182,6 @@ export interface OrderListOtocoRequest {
      * @memberof TradeApiOrderListOtoco
      */
     readonly selfTradePreventionMode?: OrderListOtocoSelfTradePreventionModeEnum;
-
-    /**
-     *
-     * @type {'LIMIT' | 'LIMIT_MAKER'}
-     * @memberof TradeApiOrderListOtoco
-     */
-    readonly workingType?: OrderListOtocoWorkingTypeEnum;
-
-    /**
-     *
-     * @type {'BUY' | 'SELL'}
-     * @memberof TradeApiOrderListOtoco
-     */
-    readonly workingSide?: OrderListOtocoWorkingSideEnum;
 
     /**
      * Arbitrary unique ID among open orders for the working order.<br> Automatically generated if not sent.
@@ -3135,20 +3217,6 @@ export interface OrderListOtocoRequest {
      * @memberof TradeApiOrderListOtoco
      */
     readonly workingStrategyType?: number;
-
-    /**
-     *
-     * @type {'BUY' | 'SELL'}
-     * @memberof TradeApiOrderListOtoco
-     */
-    readonly pendingSide?: OrderListOtocoPendingSideEnum;
-
-    /**
-     *
-     * @type {'STOP_LOSS_LIMIT' | 'STOP_LOSS' | 'LIMIT_MAKER' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT'}
-     * @memberof TradeApiOrderListOtoco
-     */
-    readonly pendingAboveType?: OrderListOtocoPendingAboveTypeEnum;
 
     /**
      * Arbitrary unique ID among open orders for the pending above order.<br> Automatically generated if not sent.
@@ -3291,6 +3359,13 @@ export interface OrderOcoRequest {
 
     /**
      *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiOrderOco
+     */
+    readonly side: OrderOcoSideEnum;
+
+    /**
+     *
      * @type {number}
      * @memberof TradeApiOrderOco
      */
@@ -3316,13 +3391,6 @@ export interface OrderOcoRequest {
      * @memberof TradeApiOrderOco
      */
     readonly listClientOrderId?: string;
-
-    /**
-     *
-     * @type {'BUY' | 'SELL'}
-     * @memberof TradeApiOrderOco
-     */
-    readonly side?: OrderOcoSideEnum;
 
     /**
      * A unique Id for the limit order
@@ -3450,24 +3518,24 @@ export interface SorOrderRequest {
 
     /**
      *
-     * @type {number}
-     * @memberof TradeApiSorOrder
-     */
-    readonly quantity: number;
-
-    /**
-     *
      * @type {'BUY' | 'SELL'}
      * @memberof TradeApiSorOrder
      */
-    readonly side?: SorOrderSideEnum;
+    readonly side: SorOrderSideEnum;
 
     /**
      *
      * @type {'MARKET' | 'LIMIT' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER' | 'NON_REPRESENTABLE'}
      * @memberof TradeApiSorOrder
      */
-    readonly type?: SorOrderTypeEnum;
+    readonly type: SorOrderTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiSorOrder
+     */
+    readonly quantity: number;
 
     /**
      *
@@ -3805,6 +3873,8 @@ export class TradeApi implements TradeApiInterface {
 
     /**
      * Send in a new order.
+     *
+     * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
      * Weight: 1
      *
      * @summary New order
@@ -3875,6 +3945,8 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Reduce the quantity of an existing open order.
      *
+     * This adds 0 orders to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
+     *
      * Read [Order Amend Keep Priority FAQ](faqs/order_amend_keep_priority.md) to learn more.
      * Weight: 4
      *
@@ -3911,7 +3983,7 @@ export class TradeApi implements TradeApiInterface {
      *
      * Filters and Order Count are evaluated before the processing of the cancellation and order placement occurs.
      *
-     * A new order that was not attempted (i.e. when `newOrderResult: NOT_ATTEMPTED` ), will still increase the order count by 1.
+     * A new order that was not attempted (i.e. when `newOrderResult: NOT_ATTEMPTED`), will still increase the unfilled order count by 1.
      * Weight: 1
      *
      * @summary Cancel an Existing Order and Send a New Order
@@ -3970,8 +4042,10 @@ export class TradeApi implements TradeApiInterface {
      * If the OCO is on the `BUY` side:
      * `LIMIT_MAKER/TAKE_PROFIT_LIMIT price` < Last Traded Price < `stopPrice`
      * `TAKE_PROFIT stopPrice` < Last Traded Price < `STOP_LOSS/STOP_LOSS_LIMIT stopPrice`
-     * OCOs add **2 orders** to the unfilled order count, `EXCHANGE_MAX_ORDERS` filter, and the `MAX_NUM_ORDERS` filter.
+     * OCOs add **2 orders** to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
      * Weight: 1
+     *
+     * Unfilled Order Count: 2
      *
      * @summary New Order list - OCO
      * @param {OrderListOcoRequest} requestParameters Request parameters.
@@ -3985,10 +4059,11 @@ export class TradeApi implements TradeApiInterface {
     ): Promise<RestApiResponse<OrderListOcoResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.orderListOco(
             requestParameters?.symbol,
-            requestParameters?.quantity,
-            requestParameters?.listClientOrderId,
             requestParameters?.side,
+            requestParameters?.quantity,
             requestParameters?.aboveType,
+            requestParameters?.belowType,
+            requestParameters?.listClientOrderId,
             requestParameters?.aboveClientOrderId,
             requestParameters?.aboveIcebergQty,
             requestParameters?.abovePrice,
@@ -3997,7 +4072,6 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.aboveTimeInForce,
             requestParameters?.aboveStrategyId,
             requestParameters?.aboveStrategyType,
-            requestParameters?.belowType,
             requestParameters?.belowClientOrderId,
             requestParameters?.belowIcebergQty,
             requestParameters?.belowPrice,
@@ -4028,8 +4102,10 @@ export class TradeApi implements TradeApiInterface {
      * The second order is called the **pending order**. It can be any order type except for `MARKET` orders using parameter `quoteOrderQty`. The pending order is only placed on the order book when the working order gets **fully filled**.
      * If either the working order or the pending order is cancelled individually, the other order in the order list will also be canceled or expired.
      * When the order list is placed, if the working order gets **immediately fully filled**, the placement response will show the working order as `FILLED` but the pending order will still appear as `PENDING_NEW`. You need to query the status of the pending order again to see its updated status.
-     * OTOs add **2 orders** to the unfilled order count, `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
+     * OTOs add **2 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
      * Weight: 1
+     *
+     * Unfilled Order Count: 2
      *
      * @summary New Order list - OTO
      * @param {OrderListOtoRequest} requestParameters Request parameters.
@@ -4043,21 +4119,21 @@ export class TradeApi implements TradeApiInterface {
     ): Promise<RestApiResponse<OrderListOtoResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.orderListOto(
             requestParameters?.symbol,
+            requestParameters?.workingType,
+            requestParameters?.workingSide,
             requestParameters?.workingPrice,
             requestParameters?.workingQuantity,
+            requestParameters?.pendingType,
+            requestParameters?.pendingSide,
             requestParameters?.pendingQuantity,
             requestParameters?.listClientOrderId,
             requestParameters?.newOrderRespType,
             requestParameters?.selfTradePreventionMode,
-            requestParameters?.workingType,
-            requestParameters?.workingSide,
             requestParameters?.workingClientOrderId,
             requestParameters?.workingIcebergQty,
             requestParameters?.workingTimeInForce,
             requestParameters?.workingStrategyId,
             requestParameters?.workingStrategyType,
-            requestParameters?.pendingType,
-            requestParameters?.pendingSide,
             requestParameters?.pendingClientOrderId,
             requestParameters?.pendingPrice,
             requestParameters?.pendingStopPrice,
@@ -4082,13 +4158,14 @@ export class TradeApi implements TradeApiInterface {
      * Place an OTOCO.
      *
      * An OTOCO (One-Triggers-One-Cancels-the-Other) is an order list comprised of 3 orders.
-     *
      * The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
      * The behavior of the working order is the same as the [OTO](#new-order-list---oto-trade).
      * OTOCO has 2 pending orders (pending above and pending below), forming an OCO pair. The pending orders are only placed on the order book when the working order gets **fully filled**.
      * The rules of the pending above and pending below follow the same rules as the [Order list OCO](#new-order-list---oco-trade).
-     * OTOCOs add **3 orders** against the unfilled order count, `EXCHANGE_MAX_NUM_ORDERS` filter, and `MAX_NUM_ORDERS` filter.
+     * OTOCOs add **3 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
      * Weight: 1
+     *
+     * Unfilled Order Count: 3
      *
      * @summary New Order list - OTOCO
      * @param {OrderListOtocoRequest} requestParameters Request parameters.
@@ -4102,21 +4179,21 @@ export class TradeApi implements TradeApiInterface {
     ): Promise<RestApiResponse<OrderListOtocoResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.orderListOtoco(
             requestParameters?.symbol,
+            requestParameters?.workingType,
+            requestParameters?.workingSide,
             requestParameters?.workingPrice,
             requestParameters?.workingQuantity,
+            requestParameters?.pendingSide,
             requestParameters?.pendingQuantity,
+            requestParameters?.pendingAboveType,
             requestParameters?.listClientOrderId,
             requestParameters?.newOrderRespType,
             requestParameters?.selfTradePreventionMode,
-            requestParameters?.workingType,
-            requestParameters?.workingSide,
             requestParameters?.workingClientOrderId,
             requestParameters?.workingIcebergQty,
             requestParameters?.workingTimeInForce,
             requestParameters?.workingStrategyId,
             requestParameters?.workingStrategyType,
-            requestParameters?.pendingSide,
-            requestParameters?.pendingAboveType,
             requestParameters?.pendingAboveClientOrderId,
             requestParameters?.pendingAbovePrice,
             requestParameters?.pendingAboveStopPrice,
@@ -4155,8 +4232,10 @@ export class TradeApi implements TradeApiInterface {
      * Quantity Restrictions:
      * Both legs must have the same quantity.
      * `ICEBERG` quantities however do not have to be the same
-     * `OCO` adds **2 orders** to the unfilled order count, `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
+     * `OCO` adds **2 orders** to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
      * Weight: 1
+     *
+     * Unfilled Order Count: 2
      *
      * @summary New OCO - Deprecated
      * @param {OrderOcoRequest} requestParameters Request parameters.
@@ -4170,11 +4249,11 @@ export class TradeApi implements TradeApiInterface {
     ): Promise<RestApiResponse<OrderOcoResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.orderOco(
             requestParameters?.symbol,
+            requestParameters?.side,
             requestParameters?.quantity,
             requestParameters?.price,
             requestParameters?.stopPrice,
             requestParameters?.listClientOrderId,
-            requestParameters?.side,
             requestParameters?.limitClientOrderId,
             requestParameters?.limitStrategyId,
             requestParameters?.limitStrategyType,
@@ -4234,8 +4313,12 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Places an order using smart order routing (SOR).
      *
+     * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
+     *
      * Read [SOR FAQ](faqs/sor_faq.md) to learn more.
      * Weight: 1
+     *
+     * Unfilled Order Count: 1
      *
      * @summary New order using SOR
      * @param {SorOrderRequest} requestParameters Request parameters.
@@ -4249,9 +4332,9 @@ export class TradeApi implements TradeApiInterface {
     ): Promise<RestApiResponse<SorOrderResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.sorOrder(
             requestParameters?.symbol,
-            requestParameters?.quantity,
             requestParameters?.side,
             requestParameters?.type,
+            requestParameters?.quantity,
             requestParameters?.timeInForce,
             requestParameters?.price,
             requestParameters?.newClientOrderId,
@@ -4488,6 +4571,39 @@ export const OrderListOcoSelfTradePreventionModeEnum = {
 export type OrderListOcoSelfTradePreventionModeEnum =
     (typeof OrderListOcoSelfTradePreventionModeEnum)[keyof typeof OrderListOcoSelfTradePreventionModeEnum];
 
+export const OrderListOtoWorkingTypeEnum = {
+    LIMIT: 'LIMIT',
+    LIMIT_MAKER: 'LIMIT_MAKER',
+} as const;
+export type OrderListOtoWorkingTypeEnum =
+    (typeof OrderListOtoWorkingTypeEnum)[keyof typeof OrderListOtoWorkingTypeEnum];
+
+export const OrderListOtoWorkingSideEnum = {
+    BUY: 'BUY',
+    SELL: 'SELL',
+} as const;
+export type OrderListOtoWorkingSideEnum =
+    (typeof OrderListOtoWorkingSideEnum)[keyof typeof OrderListOtoWorkingSideEnum];
+
+export const OrderListOtoPendingTypeEnum = {
+    LIMIT: 'LIMIT',
+    MARKET: 'MARKET',
+    STOP_LOSS: 'STOP_LOSS',
+    STOP_LOSS_LIMIT: 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT: 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
+    LIMIT_MAKER: 'LIMIT_MAKER',
+} as const;
+export type OrderListOtoPendingTypeEnum =
+    (typeof OrderListOtoPendingTypeEnum)[keyof typeof OrderListOtoPendingTypeEnum];
+
+export const OrderListOtoPendingSideEnum = {
+    BUY: 'BUY',
+    SELL: 'SELL',
+} as const;
+export type OrderListOtoPendingSideEnum =
+    (typeof OrderListOtoPendingSideEnum)[keyof typeof OrderListOtoPendingSideEnum];
+
 export const OrderListOtoNewOrderRespTypeEnum = {
     ACK: 'ACK',
     RESULT: 'RESULT',
@@ -4509,20 +4625,6 @@ export const OrderListOtoSelfTradePreventionModeEnum = {
 export type OrderListOtoSelfTradePreventionModeEnum =
     (typeof OrderListOtoSelfTradePreventionModeEnum)[keyof typeof OrderListOtoSelfTradePreventionModeEnum];
 
-export const OrderListOtoWorkingTypeEnum = {
-    LIMIT: 'LIMIT',
-    LIMIT_MAKER: 'LIMIT_MAKER',
-} as const;
-export type OrderListOtoWorkingTypeEnum =
-    (typeof OrderListOtoWorkingTypeEnum)[keyof typeof OrderListOtoWorkingTypeEnum];
-
-export const OrderListOtoWorkingSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type OrderListOtoWorkingSideEnum =
-    (typeof OrderListOtoWorkingSideEnum)[keyof typeof OrderListOtoWorkingSideEnum];
-
 export const OrderListOtoWorkingTimeInForceEnum = {
     GTC: 'GTC',
     IOC: 'IOC',
@@ -4531,25 +4633,6 @@ export const OrderListOtoWorkingTimeInForceEnum = {
 export type OrderListOtoWorkingTimeInForceEnum =
     (typeof OrderListOtoWorkingTimeInForceEnum)[keyof typeof OrderListOtoWorkingTimeInForceEnum];
 
-export const OrderListOtoPendingTypeEnum = {
-    LIMIT: 'LIMIT',
-    MARKET: 'MARKET',
-    STOP_LOSS: 'STOP_LOSS',
-    STOP_LOSS_LIMIT: 'STOP_LOSS_LIMIT',
-    TAKE_PROFIT: 'TAKE_PROFIT',
-    TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
-    LIMIT_MAKER: 'LIMIT_MAKER',
-} as const;
-export type OrderListOtoPendingTypeEnum =
-    (typeof OrderListOtoPendingTypeEnum)[keyof typeof OrderListOtoPendingTypeEnum];
-
-export const OrderListOtoPendingSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type OrderListOtoPendingSideEnum =
-    (typeof OrderListOtoPendingSideEnum)[keyof typeof OrderListOtoPendingSideEnum];
-
 export const OrderListOtoPendingTimeInForceEnum = {
     GTC: 'GTC',
     IOC: 'IOC',
@@ -4557,6 +4640,37 @@ export const OrderListOtoPendingTimeInForceEnum = {
 } as const;
 export type OrderListOtoPendingTimeInForceEnum =
     (typeof OrderListOtoPendingTimeInForceEnum)[keyof typeof OrderListOtoPendingTimeInForceEnum];
+
+export const OrderListOtocoWorkingTypeEnum = {
+    LIMIT: 'LIMIT',
+    LIMIT_MAKER: 'LIMIT_MAKER',
+} as const;
+export type OrderListOtocoWorkingTypeEnum =
+    (typeof OrderListOtocoWorkingTypeEnum)[keyof typeof OrderListOtocoWorkingTypeEnum];
+
+export const OrderListOtocoWorkingSideEnum = {
+    BUY: 'BUY',
+    SELL: 'SELL',
+} as const;
+export type OrderListOtocoWorkingSideEnum =
+    (typeof OrderListOtocoWorkingSideEnum)[keyof typeof OrderListOtocoWorkingSideEnum];
+
+export const OrderListOtocoPendingSideEnum = {
+    BUY: 'BUY',
+    SELL: 'SELL',
+} as const;
+export type OrderListOtocoPendingSideEnum =
+    (typeof OrderListOtocoPendingSideEnum)[keyof typeof OrderListOtocoPendingSideEnum];
+
+export const OrderListOtocoPendingAboveTypeEnum = {
+    STOP_LOSS_LIMIT: 'STOP_LOSS_LIMIT',
+    STOP_LOSS: 'STOP_LOSS',
+    LIMIT_MAKER: 'LIMIT_MAKER',
+    TAKE_PROFIT: 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
+} as const;
+export type OrderListOtocoPendingAboveTypeEnum =
+    (typeof OrderListOtocoPendingAboveTypeEnum)[keyof typeof OrderListOtocoPendingAboveTypeEnum];
 
 export const OrderListOtocoNewOrderRespTypeEnum = {
     ACK: 'ACK',
@@ -4579,20 +4693,6 @@ export const OrderListOtocoSelfTradePreventionModeEnum = {
 export type OrderListOtocoSelfTradePreventionModeEnum =
     (typeof OrderListOtocoSelfTradePreventionModeEnum)[keyof typeof OrderListOtocoSelfTradePreventionModeEnum];
 
-export const OrderListOtocoWorkingTypeEnum = {
-    LIMIT: 'LIMIT',
-    LIMIT_MAKER: 'LIMIT_MAKER',
-} as const;
-export type OrderListOtocoWorkingTypeEnum =
-    (typeof OrderListOtocoWorkingTypeEnum)[keyof typeof OrderListOtocoWorkingTypeEnum];
-
-export const OrderListOtocoWorkingSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type OrderListOtocoWorkingSideEnum =
-    (typeof OrderListOtocoWorkingSideEnum)[keyof typeof OrderListOtocoWorkingSideEnum];
-
 export const OrderListOtocoWorkingTimeInForceEnum = {
     GTC: 'GTC',
     IOC: 'IOC',
@@ -4600,23 +4700,6 @@ export const OrderListOtocoWorkingTimeInForceEnum = {
 } as const;
 export type OrderListOtocoWorkingTimeInForceEnum =
     (typeof OrderListOtocoWorkingTimeInForceEnum)[keyof typeof OrderListOtocoWorkingTimeInForceEnum];
-
-export const OrderListOtocoPendingSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type OrderListOtocoPendingSideEnum =
-    (typeof OrderListOtocoPendingSideEnum)[keyof typeof OrderListOtocoPendingSideEnum];
-
-export const OrderListOtocoPendingAboveTypeEnum = {
-    STOP_LOSS_LIMIT: 'STOP_LOSS_LIMIT',
-    STOP_LOSS: 'STOP_LOSS',
-    LIMIT_MAKER: 'LIMIT_MAKER',
-    TAKE_PROFIT: 'TAKE_PROFIT',
-    TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
-} as const;
-export type OrderListOtocoPendingAboveTypeEnum =
-    (typeof OrderListOtocoPendingAboveTypeEnum)[keyof typeof OrderListOtocoPendingAboveTypeEnum];
 
 export const OrderListOtocoPendingAboveTimeInForceEnum = {
     GTC: 'GTC',

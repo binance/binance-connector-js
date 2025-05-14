@@ -1,4 +1,4 @@
-import { Spot, SPOT_REST_API_PROD_URL } from '../../../src';
+import { Spot, SpotRestAPI, SPOT_REST_API_PROD_URL } from '../../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -11,7 +11,10 @@ async function orderListOco() {
     try {
         const response = await client.restAPI.orderListOco({
             symbol: 'BNBUSDT',
+            side: SpotRestAPI.OrderListOcoSideEnum.BUY,
             quantity: 1.0,
+            aboveType: SpotRestAPI.OrderListOcoAboveTypeEnum.STOP_LOSS_LIMIT,
+            belowType: SpotRestAPI.OrderListOcoBelowTypeEnum.STOP_LOSS,
         });
 
         const rateLimits = response.rateLimits!;

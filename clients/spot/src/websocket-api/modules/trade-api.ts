@@ -104,6 +104,8 @@ export interface TradeApiInterface {
     /**
      * Reduce the quantity of an existing open order.
      *
+     * This adds 0 orders to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
+     *
      * Read [Order Amend Keep Priority FAQ](faqs/order_amend_keep_priority.md) to learn more.
      * Weight: 4
      *
@@ -133,6 +135,8 @@ export interface TradeApiInterface {
 
     /**
      * Cancel an existing order and immediately place a new order instead of the canceled one.
+     *
+     * A new order that was not attempted (i.e. when `newOrderResult: NOT_ATTEMPTED`), will still increase the unfilled order count by 1.
      * Weight: 1
      *
      * @summary WebSocket Cancel and replace order
@@ -163,7 +167,11 @@ export interface TradeApiInterface {
      * Send in a new one-cancels-the-other (OCO) pair:
      * `LIMIT_MAKER` + `STOP_LOSS`/`STOP_LOSS_LIMIT` orders (called *legs*),
      * where activation of one order immediately cancels the other.
+     *
+     * This adds 1 order to `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter
      * Weight: 1
+     *
+     * Unfilled Order Count: 1
      *
      * @summary WebSocket Place new OCO - Deprecated
      * @param {OrderListPlaceRequest} requestParameters Request parameters.
@@ -187,10 +195,10 @@ export interface TradeApiInterface {
      * If the OCO is on the `BUY` side:
      * `LIMIT_MAKER` `price` < Last Traded Price < `STOP_LOSS/STOP_LOSS_LIMIT` `stopPrice`
      * `TAKE_PROFIT stopPrice` > Last Traded Price > `STOP_LOSS/STOP_LOSS_LIMIT stopPrice`
-     * OCOs add **2 orders** to the unfilled order count, `EXCHANGE_MAX_ORDERS` filter, and `MAX_NUM_ORDERS` filter.
-     *
-     *
+     * OCOs add **2 orders** to the `EXCHANGE_MAX_ORDERS` filter and `MAX_NUM_ORDERS` filter.
      * Weight: 1
+     *
+     * Unfilled Order Count: 2
      *
      * @summary WebSocket Place new Order list - OCO
      * @param {OrderListPlaceOcoRequest} requestParameters Request parameters.
@@ -209,8 +217,10 @@ export interface TradeApiInterface {
      * The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
      * The second order is called the **pending order**. It can be any order type except for `MARKET` orders using parameter `quoteOrderQty`. The pending order is only placed on the order book when the working order gets **fully filled**.
      * If either the working order or the pending order is cancelled individually, the other order in the order list will also be canceled or expired.
-     * OTOs add **2 orders** to the unfilled order count, `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
+     * OTOs add **2 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
      * Weight: 1
+     *
+     * Unfilled Order Count: 2
      *
      * @summary WebSocket Place new Order list - OTO
      * @param {OrderListPlaceOtoRequest} requestParameters Request parameters.
@@ -229,8 +239,10 @@ export interface TradeApiInterface {
      * The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
      * The behavior of the working order is the same as the [OTO](#place-new-order-list---oto-trade).
      * OTOCO has 2 pending orders (pending above and pending below), forming an OCO pair. The pending orders are only placed on the order book when the working order gets **fully filled**.
-     * OTOCOs add **3 orders** to the unfilled order count, `EXCHANGE_MAX_NUM_ORDERS` filter, and `MAX_NUM_ORDERS` filter.
+     * OTOCOs add **3 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
      * Weight: 1
+     *
+     * Unfilled Order Count: 3
      *
      * @summary WebSocket Place new Order list - OTOCO
      * @param {OrderListPlaceOtocoRequest} requestParameters Request parameters.
@@ -260,6 +272,8 @@ export interface TradeApiInterface {
 
     /**
      * Send in a new order.
+     *
+     * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
      * Weight: 1
      *
      * @summary WebSocket Place new order
@@ -308,7 +322,11 @@ export interface TradeApiInterface {
 
     /**
      * Places an order using smart order routing (SOR).
+     *
+     * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
      * Weight: 1
+     *
+     * Unfilled Order Count: 1
      *
      * @summary WebSocket Place new order using SOR
      * @param {SorOrderPlaceRequest} requestParameters Request parameters.
@@ -536,18 +554,32 @@ export interface OrderCancelReplaceRequest {
     readonly symbol: string;
 
     /**
+     *
+     * @type {'STOP_ON_FAILURE' | 'ALLOW_FAILURE'}
+     * @memberof TradeApiOrderCancelReplace
+     */
+    readonly cancelReplaceMode: OrderCancelReplaceCancelReplaceModeEnum;
+
+    /**
+     *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiOrderCancelReplace
+     */
+    readonly side: OrderCancelReplaceSideEnum;
+
+    /**
+     *
+     * @type {'MARKET' | 'LIMIT' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiOrderCancelReplace
+     */
+    readonly type: OrderCancelReplaceTypeEnum;
+
+    /**
      * Unique WebSocket request ID.
      * @type {string}
      * @memberof TradeApiOrderCancelReplace
      */
     readonly id?: string;
-
-    /**
-     *
-     * @type {'STOP_ON_FAILURE' | 'ALLOW_FAILURE'}
-     * @memberof TradeApiOrderCancelReplace
-     */
-    readonly cancelReplaceMode?: OrderCancelReplaceCancelReplaceModeEnum;
 
     /**
      * Cancel order by orderId
@@ -569,20 +601,6 @@ export interface OrderCancelReplaceRequest {
      * @memberof TradeApiOrderCancelReplace
      */
     readonly cancelNewClientOrderId?: string;
-
-    /**
-     *
-     * @type {'BUY' | 'SELL'}
-     * @memberof TradeApiOrderCancelReplace
-     */
-    readonly side?: OrderCancelReplaceSideEnum;
-
-    /**
-     *
-     * @type {'MARKET' | 'LIMIT' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER' | 'NON_REPRESENTABLE'}
-     * @memberof TradeApiOrderCancelReplace
-     */
-    readonly type?: OrderCancelReplaceTypeEnum;
 
     /**
      *
@@ -752,6 +770,13 @@ export interface OrderListPlaceRequest {
     readonly symbol: string;
 
     /**
+     *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiOrderListPlace
+     */
+    readonly side: OrderListPlaceSideEnum;
+
+    /**
      * Price for the limit order
      * @type {number}
      * @memberof TradeApiOrderListPlace
@@ -771,13 +796,6 @@ export interface OrderListPlaceRequest {
      * @memberof TradeApiOrderListPlace
      */
     readonly id?: string;
-
-    /**
-     *
-     * @type {'BUY' | 'SELL'}
-     * @memberof TradeApiOrderListPlace
-     */
-    readonly side?: OrderListPlaceSideEnum;
 
     /**
      *
@@ -906,10 +924,31 @@ export interface OrderListPlaceOcoRequest {
 
     /**
      *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiOrderListPlaceOco
+     */
+    readonly side: OrderListPlaceOcoSideEnum;
+
+    /**
+     *
      * @type {number}
      * @memberof TradeApiOrderListPlaceOco
      */
     readonly quantity: number;
+
+    /**
+     *
+     * @type {'STOP_LOSS_LIMIT' | 'STOP_LOSS' | 'LIMIT_MAKER' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT'}
+     * @memberof TradeApiOrderListPlaceOco
+     */
+    readonly aboveType: OrderListPlaceOcoAboveTypeEnum;
+
+    /**
+     *
+     * @type {'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT'}
+     * @memberof TradeApiOrderListPlaceOco
+     */
+    readonly belowType: OrderListPlaceOcoBelowTypeEnum;
 
     /**
      * Unique WebSocket request ID.
@@ -924,20 +963,6 @@ export interface OrderListPlaceOcoRequest {
      * @memberof TradeApiOrderListPlaceOco
      */
     readonly listClientOrderId?: string;
-
-    /**
-     *
-     * @type {'BUY' | 'SELL'}
-     * @memberof TradeApiOrderListPlaceOco
-     */
-    readonly side?: OrderListPlaceOcoSideEnum;
-
-    /**
-     *
-     * @type {'STOP_LOSS_LIMIT' | 'STOP_LOSS' | 'LIMIT_MAKER' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT'}
-     * @memberof TradeApiOrderListPlaceOco
-     */
-    readonly aboveType?: OrderListPlaceOcoAboveTypeEnum;
 
     /**
      * Arbitrary unique ID among open orders for the above order. Automatically generated if not sent
@@ -994,13 +1019,6 @@ export interface OrderListPlaceOcoRequest {
      * @memberof TradeApiOrderListPlaceOco
      */
     readonly aboveStrategyType?: number;
-
-    /**
-     *
-     * @type {'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT'}
-     * @memberof TradeApiOrderListPlaceOco
-     */
-    readonly belowType?: OrderListPlaceOcoBelowTypeEnum;
 
     /**
      *
@@ -1094,6 +1112,20 @@ export interface OrderListPlaceOtoRequest {
 
     /**
      *
+     * @type {'LIMIT' | 'LIMIT_MAKER'}
+     * @memberof TradeApiOrderListPlaceOto
+     */
+    readonly workingType: OrderListPlaceOtoWorkingTypeEnum;
+
+    /**
+     *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiOrderListPlaceOto
+     */
+    readonly workingSide: OrderListPlaceOtoWorkingSideEnum;
+
+    /**
+     *
      * @type {number}
      * @memberof TradeApiOrderListPlaceOto
      */
@@ -1105,6 +1137,20 @@ export interface OrderListPlaceOtoRequest {
      * @memberof TradeApiOrderListPlaceOto
      */
     readonly workingQuantity: number;
+
+    /**
+     *
+     * @type {'LIMIT' | 'MARKET' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER'}
+     * @memberof TradeApiOrderListPlaceOto
+     */
+    readonly pendingType: OrderListPlaceOtoPendingTypeEnum;
+
+    /**
+     *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiOrderListPlaceOto
+     */
+    readonly pendingSide: OrderListPlaceOtoPendingSideEnum;
 
     /**
      * Sets the quantity for the pending order.
@@ -1142,20 +1188,6 @@ export interface OrderListPlaceOtoRequest {
     readonly selfTradePreventionMode?: OrderListPlaceOtoSelfTradePreventionModeEnum;
 
     /**
-     *
-     * @type {'LIMIT' | 'LIMIT_MAKER'}
-     * @memberof TradeApiOrderListPlaceOto
-     */
-    readonly workingType?: OrderListPlaceOtoWorkingTypeEnum;
-
-    /**
-     *
-     * @type {'BUY' | 'SELL'}
-     * @memberof TradeApiOrderListPlaceOto
-     */
-    readonly workingSide?: OrderListPlaceOtoWorkingSideEnum;
-
-    /**
      * Arbitrary unique ID among open orders for the working order.<br> Automatically generated if not sent.
      * @type {string}
      * @memberof TradeApiOrderListPlaceOto
@@ -1189,20 +1221,6 @@ export interface OrderListPlaceOtoRequest {
      * @memberof TradeApiOrderListPlaceOto
      */
     readonly workingStrategyType?: number;
-
-    /**
-     *
-     * @type {'LIMIT' | 'MARKET' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER'}
-     * @memberof TradeApiOrderListPlaceOto
-     */
-    readonly pendingType?: OrderListPlaceOtoPendingTypeEnum;
-
-    /**
-     *
-     * @type {'BUY' | 'SELL'}
-     * @memberof TradeApiOrderListPlaceOto
-     */
-    readonly pendingSide?: OrderListPlaceOtoPendingSideEnum;
 
     /**
      * Arbitrary unique ID among open orders for the pending order.<br> Automatically generated if not sent.
@@ -1282,6 +1300,20 @@ export interface OrderListPlaceOtocoRequest {
 
     /**
      *
+     * @type {'LIMIT' | 'LIMIT_MAKER'}
+     * @memberof TradeApiOrderListPlaceOtoco
+     */
+    readonly workingType: OrderListPlaceOtocoWorkingTypeEnum;
+
+    /**
+     *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiOrderListPlaceOtoco
+     */
+    readonly workingSide: OrderListPlaceOtocoWorkingSideEnum;
+
+    /**
+     *
      * @type {number}
      * @memberof TradeApiOrderListPlaceOtoco
      */
@@ -1295,11 +1327,25 @@ export interface OrderListPlaceOtocoRequest {
     readonly workingQuantity: number;
 
     /**
+     *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiOrderListPlaceOtoco
+     */
+    readonly pendingSide: OrderListPlaceOtocoPendingSideEnum;
+
+    /**
      * Sets the quantity for the pending order.
      * @type {number}
      * @memberof TradeApiOrderListPlaceOtoco
      */
     readonly pendingQuantity: number;
+
+    /**
+     *
+     * @type {'STOP_LOSS_LIMIT' | 'STOP_LOSS' | 'LIMIT_MAKER' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT'}
+     * @memberof TradeApiOrderListPlaceOtoco
+     */
+    readonly pendingAboveType: OrderListPlaceOtocoPendingAboveTypeEnum;
 
     /**
      * Unique WebSocket request ID.
@@ -1328,20 +1374,6 @@ export interface OrderListPlaceOtocoRequest {
      * @memberof TradeApiOrderListPlaceOtoco
      */
     readonly selfTradePreventionMode?: OrderListPlaceOtocoSelfTradePreventionModeEnum;
-
-    /**
-     *
-     * @type {'LIMIT' | 'LIMIT_MAKER'}
-     * @memberof TradeApiOrderListPlaceOtoco
-     */
-    readonly workingType?: OrderListPlaceOtocoWorkingTypeEnum;
-
-    /**
-     *
-     * @type {'BUY' | 'SELL'}
-     * @memberof TradeApiOrderListPlaceOtoco
-     */
-    readonly workingSide?: OrderListPlaceOtocoWorkingSideEnum;
 
     /**
      * Arbitrary unique ID among open orders for the working order.<br> Automatically generated if not sent.
@@ -1377,20 +1409,6 @@ export interface OrderListPlaceOtocoRequest {
      * @memberof TradeApiOrderListPlaceOtoco
      */
     readonly workingStrategyType?: number;
-
-    /**
-     *
-     * @type {'BUY' | 'SELL'}
-     * @memberof TradeApiOrderListPlaceOtoco
-     */
-    readonly pendingSide?: OrderListPlaceOtocoPendingSideEnum;
-
-    /**
-     *
-     * @type {'STOP_LOSS_LIMIT' | 'STOP_LOSS' | 'LIMIT_MAKER' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT'}
-     * @memberof TradeApiOrderListPlaceOtoco
-     */
-    readonly pendingAboveType?: OrderListPlaceOtocoPendingAboveTypeEnum;
 
     /**
      * Arbitrary unique ID among open orders for the pending above order.<br> Automatically generated if not sent.
@@ -1566,25 +1584,25 @@ export interface OrderPlaceRequest {
     readonly symbol: string;
 
     /**
-     * Unique WebSocket request ID.
-     * @type {string}
-     * @memberof TradeApiOrderPlace
-     */
-    readonly id?: string;
-
-    /**
      *
      * @type {'BUY' | 'SELL'}
      * @memberof TradeApiOrderPlace
      */
-    readonly side?: OrderPlaceSideEnum;
+    readonly side: OrderPlaceSideEnum;
 
     /**
      *
      * @type {'MARKET' | 'LIMIT' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER' | 'NON_REPRESENTABLE'}
      * @memberof TradeApiOrderPlace
      */
-    readonly type?: OrderPlaceTypeEnum;
+    readonly type: OrderPlaceTypeEnum;
+
+    /**
+     * Unique WebSocket request ID.
+     * @type {string}
+     * @memberof TradeApiOrderPlace
+     */
+    readonly id?: string;
 
     /**
      *
@@ -1754,6 +1772,20 @@ export interface SorOrderPlaceRequest {
 
     /**
      *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiSorOrderPlace
+     */
+    readonly side: SorOrderPlaceSideEnum;
+
+    /**
+     *
+     * @type {'MARKET' | 'LIMIT' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiSorOrderPlace
+     */
+    readonly type: SorOrderPlaceTypeEnum;
+
+    /**
+     *
      * @type {number}
      * @memberof TradeApiSorOrderPlace
      */
@@ -1765,20 +1797,6 @@ export interface SorOrderPlaceRequest {
      * @memberof TradeApiSorOrderPlace
      */
     readonly id?: string;
-
-    /**
-     *
-     * @type {'BUY' | 'SELL'}
-     * @memberof TradeApiSorOrderPlace
-     */
-    readonly side?: SorOrderPlaceSideEnum;
-
-    /**
-     *
-     * @type {'MARKET' | 'LIMIT' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER' | 'NON_REPRESENTABLE'}
-     * @memberof TradeApiSorOrderPlace
-     */
-    readonly type?: SorOrderPlaceTypeEnum;
 
     /**
      *
@@ -1956,6 +1974,8 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Reduce the quantity of an existing open order.
      *
+     * This adds 0 orders to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
+     *
      * Read [Order Amend Keep Priority FAQ](faqs/order_amend_keep_priority.md) to learn more.
      * Weight: 4
      *
@@ -1997,6 +2017,8 @@ export class TradeApi implements TradeApiInterface {
 
     /**
      * Cancel an existing order and immediately place a new order instead of the canceled one.
+     *
+     * A new order that was not attempted (i.e. when `newOrderResult: NOT_ATTEMPTED`), will still increase the unfilled order count by 1.
      * Weight: 1
      *
      * @summary WebSocket Cancel and replace order
@@ -2039,7 +2061,11 @@ export class TradeApi implements TradeApiInterface {
      * Send in a new one-cancels-the-other (OCO) pair:
      * `LIMIT_MAKER` + `STOP_LOSS`/`STOP_LOSS_LIMIT` orders (called *legs*),
      * where activation of one order immediately cancels the other.
+     *
+     * This adds 1 order to `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter
      * Weight: 1
+     *
+     * Unfilled Order Count: 1
      *
      * @summary WebSocket Place new OCO - Deprecated
      * @param {OrderListPlaceRequest} requestParameters Request parameters.
@@ -2069,10 +2095,10 @@ export class TradeApi implements TradeApiInterface {
      * If the OCO is on the `BUY` side:
      * `LIMIT_MAKER` `price` < Last Traded Price < `STOP_LOSS/STOP_LOSS_LIMIT` `stopPrice`
      * `TAKE_PROFIT stopPrice` > Last Traded Price > `STOP_LOSS/STOP_LOSS_LIMIT stopPrice`
-     * OCOs add **2 orders** to the unfilled order count, `EXCHANGE_MAX_ORDERS` filter, and `MAX_NUM_ORDERS` filter.
-     *
-     *
+     * OCOs add **2 orders** to the `EXCHANGE_MAX_ORDERS` filter and `MAX_NUM_ORDERS` filter.
      * Weight: 1
+     *
+     * Unfilled Order Count: 2
      *
      * @summary WebSocket Place new Order list - OCO
      * @param {OrderListPlaceOcoRequest} requestParameters Request parameters.
@@ -2097,8 +2123,10 @@ export class TradeApi implements TradeApiInterface {
      * The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
      * The second order is called the **pending order**. It can be any order type except for `MARKET` orders using parameter `quoteOrderQty`. The pending order is only placed on the order book when the working order gets **fully filled**.
      * If either the working order or the pending order is cancelled individually, the other order in the order list will also be canceled or expired.
-     * OTOs add **2 orders** to the unfilled order count, `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
+     * OTOs add **2 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
      * Weight: 1
+     *
+     * Unfilled Order Count: 2
      *
      * @summary WebSocket Place new Order list - OTO
      * @param {OrderListPlaceOtoRequest} requestParameters Request parameters.
@@ -2123,8 +2151,10 @@ export class TradeApi implements TradeApiInterface {
      * The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
      * The behavior of the working order is the same as the [OTO](#place-new-order-list---oto-trade).
      * OTOCO has 2 pending orders (pending above and pending below), forming an OCO pair. The pending orders are only placed on the order book when the working order gets **fully filled**.
-     * OTOCOs add **3 orders** to the unfilled order count, `EXCHANGE_MAX_NUM_ORDERS` filter, and `MAX_NUM_ORDERS` filter.
+     * OTOCOs add **3 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
      * Weight: 1
+     *
+     * Unfilled Order Count: 3
      *
      * @summary WebSocket Place new Order list - OTOCO
      * @param {OrderListPlaceOtocoRequest} requestParameters Request parameters.
@@ -2166,6 +2196,8 @@ export class TradeApi implements TradeApiInterface {
 
     /**
      * Send in a new order.
+     *
+     * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
      * Weight: 1
      *
      * @summary WebSocket Place new order
@@ -2232,7 +2264,11 @@ export class TradeApi implements TradeApiInterface {
 
     /**
      * Places an order using smart order routing (SOR).
+     *
+     * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
      * Weight: 1
+     *
+     * Unfilled Order Count: 1
      *
      * @summary WebSocket Place new order using SOR
      * @param {SorOrderPlaceRequest} requestParameters Request parameters.
@@ -2508,33 +2544,6 @@ export type OrderListPlaceOcoSelfTradePreventionModeEnum =
 /**
  * @enum {string}
  */
-export const OrderListPlaceOtoNewOrderRespTypeEnum = {
-    ACK: 'ACK',
-    RESULT: 'RESULT',
-    FULL: 'FULL',
-    MARKET: 'MARKET',
-    LIMIT: 'LIMIT',
-} as const;
-export type OrderListPlaceOtoNewOrderRespTypeEnum =
-    (typeof OrderListPlaceOtoNewOrderRespTypeEnum)[keyof typeof OrderListPlaceOtoNewOrderRespTypeEnum];
-
-/**
- * @enum {string}
- */
-export const OrderListPlaceOtoSelfTradePreventionModeEnum = {
-    NONE: 'NONE',
-    EXPIRE_TAKER: 'EXPIRE_TAKER',
-    EXPIRE_MAKER: 'EXPIRE_MAKER',
-    EXPIRE_BOTH: 'EXPIRE_BOTH',
-    DECREMENT: 'DECREMENT',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type OrderListPlaceOtoSelfTradePreventionModeEnum =
-    (typeof OrderListPlaceOtoSelfTradePreventionModeEnum)[keyof typeof OrderListPlaceOtoSelfTradePreventionModeEnum];
-
-/**
- * @enum {string}
- */
 export const OrderListPlaceOtoWorkingTypeEnum = {
     LIMIT: 'LIMIT',
     LIMIT_MAKER: 'LIMIT_MAKER',
@@ -2551,17 +2560,6 @@ export const OrderListPlaceOtoWorkingSideEnum = {
 } as const;
 export type OrderListPlaceOtoWorkingSideEnum =
     (typeof OrderListPlaceOtoWorkingSideEnum)[keyof typeof OrderListPlaceOtoWorkingSideEnum];
-
-/**
- * @enum {string}
- */
-export const OrderListPlaceOtoWorkingTimeInForceEnum = {
-    GTC: 'GTC',
-    IOC: 'IOC',
-    FOK: 'FOK',
-} as const;
-export type OrderListPlaceOtoWorkingTimeInForceEnum =
-    (typeof OrderListPlaceOtoWorkingTimeInForceEnum)[keyof typeof OrderListPlaceOtoWorkingTimeInForceEnum];
 
 /**
  * @enum {string}
@@ -2591,6 +2589,44 @@ export type OrderListPlaceOtoPendingSideEnum =
 /**
  * @enum {string}
  */
+export const OrderListPlaceOtoNewOrderRespTypeEnum = {
+    ACK: 'ACK',
+    RESULT: 'RESULT',
+    FULL: 'FULL',
+    MARKET: 'MARKET',
+    LIMIT: 'LIMIT',
+} as const;
+export type OrderListPlaceOtoNewOrderRespTypeEnum =
+    (typeof OrderListPlaceOtoNewOrderRespTypeEnum)[keyof typeof OrderListPlaceOtoNewOrderRespTypeEnum];
+
+/**
+ * @enum {string}
+ */
+export const OrderListPlaceOtoSelfTradePreventionModeEnum = {
+    NONE: 'NONE',
+    EXPIRE_TAKER: 'EXPIRE_TAKER',
+    EXPIRE_MAKER: 'EXPIRE_MAKER',
+    EXPIRE_BOTH: 'EXPIRE_BOTH',
+    DECREMENT: 'DECREMENT',
+    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
+} as const;
+export type OrderListPlaceOtoSelfTradePreventionModeEnum =
+    (typeof OrderListPlaceOtoSelfTradePreventionModeEnum)[keyof typeof OrderListPlaceOtoSelfTradePreventionModeEnum];
+
+/**
+ * @enum {string}
+ */
+export const OrderListPlaceOtoWorkingTimeInForceEnum = {
+    GTC: 'GTC',
+    IOC: 'IOC',
+    FOK: 'FOK',
+} as const;
+export type OrderListPlaceOtoWorkingTimeInForceEnum =
+    (typeof OrderListPlaceOtoWorkingTimeInForceEnum)[keyof typeof OrderListPlaceOtoWorkingTimeInForceEnum];
+
+/**
+ * @enum {string}
+ */
 export const OrderListPlaceOtoPendingTimeInForceEnum = {
     GTC: 'GTC',
     IOC: 'IOC',
@@ -2598,6 +2634,49 @@ export const OrderListPlaceOtoPendingTimeInForceEnum = {
 } as const;
 export type OrderListPlaceOtoPendingTimeInForceEnum =
     (typeof OrderListPlaceOtoPendingTimeInForceEnum)[keyof typeof OrderListPlaceOtoPendingTimeInForceEnum];
+
+/**
+ * @enum {string}
+ */
+export const OrderListPlaceOtocoWorkingTypeEnum = {
+    LIMIT: 'LIMIT',
+    LIMIT_MAKER: 'LIMIT_MAKER',
+} as const;
+export type OrderListPlaceOtocoWorkingTypeEnum =
+    (typeof OrderListPlaceOtocoWorkingTypeEnum)[keyof typeof OrderListPlaceOtocoWorkingTypeEnum];
+
+/**
+ * @enum {string}
+ */
+export const OrderListPlaceOtocoWorkingSideEnum = {
+    BUY: 'BUY',
+    SELL: 'SELL',
+} as const;
+export type OrderListPlaceOtocoWorkingSideEnum =
+    (typeof OrderListPlaceOtocoWorkingSideEnum)[keyof typeof OrderListPlaceOtocoWorkingSideEnum];
+
+/**
+ * @enum {string}
+ */
+export const OrderListPlaceOtocoPendingSideEnum = {
+    BUY: 'BUY',
+    SELL: 'SELL',
+} as const;
+export type OrderListPlaceOtocoPendingSideEnum =
+    (typeof OrderListPlaceOtocoPendingSideEnum)[keyof typeof OrderListPlaceOtocoPendingSideEnum];
+
+/**
+ * @enum {string}
+ */
+export const OrderListPlaceOtocoPendingAboveTypeEnum = {
+    STOP_LOSS_LIMIT: 'STOP_LOSS_LIMIT',
+    STOP_LOSS: 'STOP_LOSS',
+    LIMIT_MAKER: 'LIMIT_MAKER',
+    TAKE_PROFIT: 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
+} as const;
+export type OrderListPlaceOtocoPendingAboveTypeEnum =
+    (typeof OrderListPlaceOtocoPendingAboveTypeEnum)[keyof typeof OrderListPlaceOtocoPendingAboveTypeEnum];
 
 /**
  * @enum {string}
@@ -2629,26 +2708,6 @@ export type OrderListPlaceOtocoSelfTradePreventionModeEnum =
 /**
  * @enum {string}
  */
-export const OrderListPlaceOtocoWorkingTypeEnum = {
-    LIMIT: 'LIMIT',
-    LIMIT_MAKER: 'LIMIT_MAKER',
-} as const;
-export type OrderListPlaceOtocoWorkingTypeEnum =
-    (typeof OrderListPlaceOtocoWorkingTypeEnum)[keyof typeof OrderListPlaceOtocoWorkingTypeEnum];
-
-/**
- * @enum {string}
- */
-export const OrderListPlaceOtocoWorkingSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type OrderListPlaceOtocoWorkingSideEnum =
-    (typeof OrderListPlaceOtocoWorkingSideEnum)[keyof typeof OrderListPlaceOtocoWorkingSideEnum];
-
-/**
- * @enum {string}
- */
 export const OrderListPlaceOtocoWorkingTimeInForceEnum = {
     GTC: 'GTC',
     IOC: 'IOC',
@@ -2656,29 +2715,6 @@ export const OrderListPlaceOtocoWorkingTimeInForceEnum = {
 } as const;
 export type OrderListPlaceOtocoWorkingTimeInForceEnum =
     (typeof OrderListPlaceOtocoWorkingTimeInForceEnum)[keyof typeof OrderListPlaceOtocoWorkingTimeInForceEnum];
-
-/**
- * @enum {string}
- */
-export const OrderListPlaceOtocoPendingSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type OrderListPlaceOtocoPendingSideEnum =
-    (typeof OrderListPlaceOtocoPendingSideEnum)[keyof typeof OrderListPlaceOtocoPendingSideEnum];
-
-/**
- * @enum {string}
- */
-export const OrderListPlaceOtocoPendingAboveTypeEnum = {
-    STOP_LOSS_LIMIT: 'STOP_LOSS_LIMIT',
-    STOP_LOSS: 'STOP_LOSS',
-    LIMIT_MAKER: 'LIMIT_MAKER',
-    TAKE_PROFIT: 'TAKE_PROFIT',
-    TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
-} as const;
-export type OrderListPlaceOtocoPendingAboveTypeEnum =
-    (typeof OrderListPlaceOtocoPendingAboveTypeEnum)[keyof typeof OrderListPlaceOtocoPendingAboveTypeEnum];
 
 /**
  * @enum {string}

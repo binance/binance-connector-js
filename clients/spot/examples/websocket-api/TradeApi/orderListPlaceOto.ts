@@ -1,4 +1,4 @@
-import { Spot, SPOT_WS_API_PROD_URL } from '../../../src';
+import { Spot, SpotWebsocketAPI, SPOT_WS_API_PROD_URL } from '../../../src';
 
 const configurationWebsocketAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -15,8 +15,12 @@ async function orderListPlaceOto() {
 
         const response = await connection.orderListPlaceOto({
             symbol: 'BNBUSDT',
+            workingType: SpotWebsocketAPI.OrderListPlaceOtoWorkingTypeEnum.LIMIT,
+            workingSide: SpotWebsocketAPI.OrderListPlaceOtoWorkingSideEnum.BUY,
             workingPrice: 1.0,
             workingQuantity: 1.0,
+            pendingType: SpotWebsocketAPI.OrderListPlaceOtoPendingTypeEnum.LIMIT,
+            pendingSide: SpotWebsocketAPI.OrderListPlaceOtoPendingSideEnum.BUY,
             pendingQuantity: 1.0,
         });
 

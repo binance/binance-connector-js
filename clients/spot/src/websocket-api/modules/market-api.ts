@@ -344,18 +344,18 @@ export interface KlinesRequest {
     readonly symbol: string;
 
     /**
+     *
+     * @type {'1s' | '1m' | '3m' | '5m' | '15m' | '30m' | '1h' | '2h' | '4h' | '6h' | '8h' | '12h' | '1d' | '3d' | '1w' | '1M'}
+     * @memberof MarketApiKlines
+     */
+    readonly interval: KlinesIntervalEnum;
+
+    /**
      * Unique WebSocket request ID.
      * @type {string}
      * @memberof MarketApiKlines
      */
     readonly id?: string;
-
-    /**
-     *
-     * @type {'1s' | '1m' | '3m' | '5m' | '15m' | '30m' | '1h' | '2h' | '4h' | '6h' | '8h' | '12h' | '1d' | '3d' | '1w' | '1M'}
-     * @memberof MarketApiKlines
-     */
-    readonly interval?: KlinesIntervalEnum;
 
     /**
      *
@@ -678,18 +678,18 @@ export interface UiKlinesRequest {
     readonly symbol: string;
 
     /**
+     *
+     * @type {'1s' | '1m' | '3m' | '5m' | '15m' | '30m' | '1h' | '2h' | '4h' | '6h' | '8h' | '12h' | '1d' | '3d' | '1w' | '1M'}
+     * @memberof MarketApiUiKlines
+     */
+    readonly interval: UiKlinesIntervalEnum;
+
+    /**
      * Unique WebSocket request ID.
      * @type {string}
      * @memberof MarketApiUiKlines
      */
     readonly id?: string;
-
-    /**
-     *
-     * @type {'1s' | '1m' | '3m' | '5m' | '15m' | '30m' | '1h' | '2h' | '4h' | '6h' | '8h' | '12h' | '1d' | '3d' | '1w' | '1M'}
-     * @memberof MarketApiUiKlines
-     */
-    readonly interval?: UiKlinesIntervalEnum;
 
     /**
      *

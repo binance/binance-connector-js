@@ -24,7 +24,7 @@
 import type { OrderListPlaceOcoResponseResult } from './order-list-place-oco-response-result';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderListPlaceResponseRateLimitsInner } from './order-list-place-response-rate-limits-inner';
+import type { TimeResponseRateLimitsInner } from './time-response-rate-limits-inner';
 
 /**
  *
@@ -52,8 +52,8 @@ export interface OrderListPlaceOcoResponse {
     result?: OrderListPlaceOcoResponseResult;
     /**
      *
-     * @type {Array<OrderListPlaceResponseRateLimitsInner>}
+     * @type {Array<TimeResponseRateLimitsInner>}
      * @memberof OrderListPlaceOcoResponse
      */
-    rateLimits?: Array<OrderListPlaceResponseRateLimitsInner>;
+    rateLimits?: Array<TimeResponseRateLimitsInner>;
 }

@@ -21,7 +21,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ExchangeInfoResponseSymbolsInnerFiltersInner } from './exchange-info-response-symbols-inner-filters-inner';
+import type { ExchangeInfoResponseExchangeFiltersInner } from './exchange-info-response-exchange-filters-inner';
 
 /**
  *
@@ -145,10 +145,10 @@ export interface ExchangeInfoResponseSymbolsInner {
     isMarginTradingAllowed?: boolean;
     /**
      *
-     * @type {Array<ExchangeInfoResponseSymbolsInnerFiltersInner>}
+     * @type {Array<ExchangeInfoResponseExchangeFiltersInner>}
      * @memberof ExchangeInfoResponseSymbolsInner
      */
-    filters?: Array<ExchangeInfoResponseSymbolsInnerFiltersInner>;
+    filters?: Array<ExchangeInfoResponseExchangeFiltersInner>;
     /**
      *
      * @type {Array<string>}

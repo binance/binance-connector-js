@@ -1,4 +1,4 @@
-import { Spot, SPOT_REST_API_PROD_URL } from '../../../src';
+import { Spot, SpotRestAPI, SPOT_REST_API_PROD_URL } from '../../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -11,6 +11,7 @@ async function orderOco() {
     try {
         const response = await client.restAPI.orderOco({
             symbol: 'BNBUSDT',
+            side: SpotRestAPI.OrderOcoSideEnum.BUY,
             quantity: 1.0,
             price: 1.0,
             stopPrice: 1.0,

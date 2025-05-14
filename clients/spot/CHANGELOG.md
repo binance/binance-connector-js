@@ -1,5 +1,30 @@
 # Changelog
 
+## 5.0.0 - 2025-05-14
+
+### Added
+
+- Support streams for `userDataStreamSubscribe()` Websocket endpoint.
+
+```typescript
+const res = await connection.userDataStreamSubscribe();
+const response = res.response;
+
+const data = response.data;
+console.log('userDataStreamSubscribe() response:', data);
+
+const stream = res.stream;
+stream.on('message', (data) => {
+    console.log('userDataStreamSubscribe() stream data:', data);
+});
+```
+
+### Changed
+
+- Updated `@binance/common` library to version `1.0.4`.
+- Updated response types.
+- Updated request parameters to correctly specify their required status.
+
 ## 4.0.0 - 2025-04-28
 
 ### Changed

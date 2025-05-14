@@ -253,7 +253,7 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          *
          * @summary Kline/Candlestick data
          * @param {string} symbol
-         * @param {KlinesIntervalEnum} [interval]
+         * @param {KlinesIntervalEnum} interval
          * @param {number} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
          * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
          * @param {string} [timeZone] Default: 0 (UTC)
@@ -263,7 +263,7 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          */
         klines: async (
             symbol: string,
-            interval?: KlinesIntervalEnum,
+            interval: KlinesIntervalEnum,
             startTime?: number,
             endTime?: number,
             timeZone?: string,
@@ -271,6 +271,8 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('klines', 'symbol', symbol);
+            // verify required parameter 'interval' is not null or undefined
+            assertParamExists('klines', 'interval', interval);
 
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -597,7 +599,7 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          *
          * @summary UIKlines
          * @param {string} symbol
-         * @param {UiKlinesIntervalEnum} [interval]
+         * @param {UiKlinesIntervalEnum} interval
          * @param {number} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
          * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
          * @param {string} [timeZone] Default: 0 (UTC)
@@ -607,7 +609,7 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          */
         uiKlines: async (
             symbol: string,
-            interval?: UiKlinesIntervalEnum,
+            interval: UiKlinesIntervalEnum,
             startTime?: number,
             endTime?: number,
             timeZone?: string,
@@ -615,6 +617,8 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('uiKlines', 'symbol', symbol);
+            // verify required parameter 'interval' is not null or undefined
+            assertParamExists('uiKlines', 'interval', interval);
 
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -1034,7 +1038,7 @@ export interface KlinesRequest {
      * @type {'1s' | '1m' | '3m' | '5m' | '15m' | '30m' | '1h' | '2h' | '4h' | '6h' | '8h' | '12h' | '1d' | '3d' | '1w' | '1M'}
      * @memberof MarketApiKlines
      */
-    readonly interval?: KlinesIntervalEnum;
+    readonly interval: KlinesIntervalEnum;
 
     /**
      * Timestamp in ms to get aggregate trades from INCLUSIVE.
@@ -1217,7 +1221,7 @@ export interface UiKlinesRequest {
      * @type {'1s' | '1m' | '3m' | '5m' | '15m' | '30m' | '1h' | '2h' | '4h' | '6h' | '8h' | '12h' | '1d' | '3d' | '1w' | '1M'}
      * @memberof MarketApiUiKlines
      */
-    readonly interval?: UiKlinesIntervalEnum;
+    readonly interval: UiKlinesIntervalEnum;
 
     /**
      * Timestamp in ms to get aggregate trades from INCLUSIVE.

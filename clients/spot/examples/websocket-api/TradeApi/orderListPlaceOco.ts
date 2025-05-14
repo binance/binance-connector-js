@@ -1,4 +1,4 @@
-import { Spot, SPOT_WS_API_PROD_URL } from '../../../src';
+import { Spot, SpotWebsocketAPI, SPOT_WS_API_PROD_URL } from '../../../src';
 
 const configurationWebsocketAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -15,7 +15,10 @@ async function orderListPlaceOco() {
 
         const response = await connection.orderListPlaceOco({
             symbol: 'BNBUSDT',
+            side: SpotWebsocketAPI.OrderListPlaceOcoSideEnum.BUY,
             quantity: 1.0,
+            aboveType: SpotWebsocketAPI.OrderListPlaceOcoAboveTypeEnum.STOP_LOSS_LIMIT,
+            belowType: SpotWebsocketAPI.OrderListPlaceOcoBelowTypeEnum.STOP_LOSS,
         });
 
         const rateLimits = response.rateLimits!;

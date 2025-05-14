@@ -21,10 +21,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderCancelResponseResultOrderReportsInner } from './order-cancel-response-result-order-reports-inner';
+import type { OpenOrdersCancelAllResponseResultInnerOrderReportsInner } from './open-orders-cancel-all-response-result-inner-order-reports-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderCancelResponseResultOrdersInner } from './order-cancel-response-result-orders-inner';
+import type { OpenOrdersCancelAllResponseResultInnerOrdersInner } from './open-orders-cancel-all-response-result-inner-orders-inner';
 
 /**
  *
@@ -190,14 +190,14 @@ export interface OrderCancelResponseResult {
     transactionTime?: number;
     /**
      *
-     * @type {Array<OrderCancelResponseResultOrdersInner>}
+     * @type {Array<OpenOrdersCancelAllResponseResultInnerOrdersInner>}
      * @memberof OrderCancelResponseResult
      */
-    orders?: Array<OrderCancelResponseResultOrdersInner>;
+    orders?: Array<OpenOrdersCancelAllResponseResultInnerOrdersInner>;
     /**
      *
-     * @type {Array<OrderCancelResponseResultOrderReportsInner>}
+     * @type {Array<OpenOrdersCancelAllResponseResultInnerOrderReportsInner>}
      * @memberof OrderCancelResponseResult
      */
-    orderReports?: Array<OrderCancelResponseResultOrderReportsInner>;
+    orderReports?: Array<OpenOrdersCancelAllResponseResultInnerOrderReportsInner>;
 }

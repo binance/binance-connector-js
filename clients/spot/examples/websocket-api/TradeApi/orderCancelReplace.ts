@@ -1,4 +1,4 @@
-import { Spot, SPOT_WS_API_PROD_URL } from '../../../src';
+import { Spot, SpotWebsocketAPI, SPOT_WS_API_PROD_URL } from '../../../src';
 
 const configurationWebsocketAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -15,6 +15,10 @@ async function orderCancelReplace() {
 
         const response = await connection.orderCancelReplace({
             symbol: 'BNBUSDT',
+            cancelReplaceMode:
+                SpotWebsocketAPI.OrderCancelReplaceCancelReplaceModeEnum.STOP_ON_FAILURE,
+            side: SpotWebsocketAPI.OrderCancelReplaceSideEnum.BUY,
+            type: SpotWebsocketAPI.OrderCancelReplaceTypeEnum.MARKET,
         });
 
         const rateLimits = response.rateLimits!;

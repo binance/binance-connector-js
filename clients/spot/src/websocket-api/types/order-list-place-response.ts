@@ -21,10 +21,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderListPlaceResponseRateLimitsInner } from './order-list-place-response-rate-limits-inner';
+import type { OrderListPlaceResponseResult } from './order-list-place-response-result';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderListPlaceResponseResult } from './order-list-place-response-result';
+import type { TimeResponseRateLimitsInner } from './time-response-rate-limits-inner';
 
 /**
  *
@@ -52,8 +52,8 @@ export interface OrderListPlaceResponse {
     result?: OrderListPlaceResponseResult;
     /**
      *
-     * @type {Array<OrderListPlaceResponseRateLimitsInner>}
+     * @type {Array<TimeResponseRateLimitsInner>}
      * @memberof OrderListPlaceResponse
      */
-    rateLimits?: Array<OrderListPlaceResponseRateLimitsInner>;
+    rateLimits?: Array<TimeResponseRateLimitsInner>;
 }

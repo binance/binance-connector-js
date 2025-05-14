@@ -21,10 +21,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountCommissionResponseResult } from './account-commission-response-result';
+import type { AccountCommissionResponseRateLimitsInner } from './account-commission-response-rate-limits-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ExchangeInfoResponseRateLimitsInner } from './exchange-info-response-rate-limits-inner';
+import type { AccountCommissionResponseResult } from './account-commission-response-result';
 
 /**
  *
@@ -52,8 +52,8 @@ export interface AccountCommissionResponse {
     result?: AccountCommissionResponseResult;
     /**
      *
-     * @type {Array<ExchangeInfoResponseRateLimitsInner>}
+     * @type {Array<AccountCommissionResponseRateLimitsInner>}
      * @memberof AccountCommissionResponse
      */
-    rateLimits?: Array<ExchangeInfoResponseRateLimitsInner>;
+    rateLimits?: Array<AccountCommissionResponseRateLimitsInner>;
 }

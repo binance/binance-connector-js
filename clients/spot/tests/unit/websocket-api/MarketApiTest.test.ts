@@ -23,7 +23,7 @@ import { EventEmitter } from 'events';
 import { jest, expect, beforeEach, afterEach, describe, it } from '@jest/globals';
 import { ConfigurationWebsocketAPI, WebsocketAPIBase, randomString } from '@binance/common';
 
-import { MarketApi } from '../../../src/websocket-api';
+import { MarketApi, KlinesIntervalEnum, UiKlinesIntervalEnum } from '../../../src/websocket-api';
 import {
     AvgPriceRequest,
     DepthRequest,
@@ -50,7 +50,11 @@ describe('MarketApi', () => {
             msg?: string;
         };
         rateLimits?: object[];
-    } = {};
+    } = {
+        result: {},
+        response: {},
+        rateLimits: [],
+    };
 
     describe('avgPrice()', () => {
         beforeEach(async () => {
@@ -123,7 +127,7 @@ describe('MarketApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith('/avgPrice'.slice(1), params, {
                         isSigned: false,
@@ -310,7 +314,7 @@ describe('MarketApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith('/depth'.slice(1), params, {
                         isSigned: false,
@@ -479,6 +483,7 @@ describe('MarketApi', () => {
 
             const params: KlinesRequest = {
                 symbol: 'BNBUSDT',
+                interval: KlinesIntervalEnum.INTERVAL_1s,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -496,7 +501,7 @@ describe('MarketApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith('/klines'.slice(1), params, {
                         isSigned: false,
@@ -536,6 +541,7 @@ describe('MarketApi', () => {
 
             const params: KlinesRequest = {
                 symbol: 'BNBUSDT',
+                interval: KlinesIntervalEnum.INTERVAL_1s,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -570,6 +576,7 @@ describe('MarketApi', () => {
 
             const params: KlinesRequest = {
                 symbol: 'BNBUSDT',
+                interval: KlinesIntervalEnum.INTERVAL_1s,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -676,7 +683,7 @@ describe('MarketApi', () => {
                     const responsePromise = websocketAPIClient.ticker({ id: mockResponse?.id });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith(
                         '/ticker'.slice(1),
@@ -852,7 +859,7 @@ describe('MarketApi', () => {
                     const responsePromise = websocketAPIClient.ticker24hr({ id: mockResponse?.id });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith(
                         '/ticker.24hr'.slice(1),
@@ -1012,7 +1019,7 @@ describe('MarketApi', () => {
                     const responsePromise = websocketAPIClient.tickerBook({ id: mockResponse?.id });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith(
                         '/ticker.book'.slice(1),
@@ -1168,7 +1175,7 @@ describe('MarketApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith(
                         '/ticker.price'.slice(1),
@@ -1301,23 +1308,6 @@ describe('MarketApi', () => {
                 status: 200,
                 result: [
                     {
-                        symbol: 'BTCUSDT',
-                        priceChange: '-83.13000000',
-                        priceChangePercent: '-0.317',
-                        weightedAvgPrice: '26234.58803036',
-                        openPrice: '26304.80000000',
-                        highPrice: '26397.46000000',
-                        lowPrice: '26088.34000000',
-                        lastPrice: '26221.67000000',
-                        volume: '18495.35066000',
-                        quoteVolume: '485217905.04210480',
-                        openTime: 1695686400000,
-                        closeTime: 1695772799999,
-                        firstId: 3220151555,
-                        lastId: 3220849281,
-                        count: 697727,
-                    },
-                    {
                         symbol: 'BNBUSDT',
                         priceChange: '2.60000000',
                         priceChangePercent: '1.238',
@@ -1333,6 +1323,23 @@ describe('MarketApi', () => {
                         firstId: 672397461,
                         lastId: 672496158,
                         count: 98698,
+                    },
+                    {
+                        symbol: 'BTCUSDT',
+                        priceChange: '-83.13000000',
+                        priceChangePercent: '-0.317',
+                        weightedAvgPrice: '26234.58803036',
+                        openPrice: '26304.80000000',
+                        highPrice: '26397.46000000',
+                        lowPrice: '26088.34000000',
+                        lastPrice: '26221.67000000',
+                        volume: '18495.35066000',
+                        quoteVolume: '485217905.04210480',
+                        openTime: 1695686400000,
+                        closeTime: 1695772799999,
+                        firstId: 3220151555,
+                        lastId: 3220849281,
+                        count: 697727,
                     },
                 ],
                 rateLimits: [
@@ -1361,7 +1368,7 @@ describe('MarketApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith(
                         '/ticker.tradingDay'.slice(1),
@@ -1535,7 +1542,7 @@ describe('MarketApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith('/trades.aggregate'.slice(1), params, {
                         isSigned: false,
@@ -1716,7 +1723,7 @@ describe('MarketApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith('/trades.historical'.slice(1), params, {
                         isSigned: false,
@@ -1897,7 +1904,7 @@ describe('MarketApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith('/trades.recent'.slice(1), params, {
                         isSigned: false,
@@ -2066,6 +2073,7 @@ describe('MarketApi', () => {
 
             const params: UiKlinesRequest = {
                 symbol: 'BNBUSDT',
+                interval: UiKlinesIntervalEnum.INTERVAL_1s,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -2083,7 +2091,7 @@ describe('MarketApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith('/uiKlines'.slice(1), params, {
                         isSigned: false,
@@ -2123,6 +2131,7 @@ describe('MarketApi', () => {
 
             const params: UiKlinesRequest = {
                 symbol: 'BNBUSDT',
+                interval: UiKlinesIntervalEnum.INTERVAL_1s,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -2157,6 +2166,7 @@ describe('MarketApi', () => {
 
             const params: UiKlinesRequest = {
                 symbol: 'BNBUSDT',
+                interval: UiKlinesIntervalEnum.INTERVAL_1s,
             };
 
             let resolveTest: (value: unknown) => void;

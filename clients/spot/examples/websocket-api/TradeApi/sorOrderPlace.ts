@@ -1,4 +1,4 @@
-import { Spot, SPOT_WS_API_PROD_URL } from '../../../src';
+import { Spot, SpotWebsocketAPI, SPOT_WS_API_PROD_URL } from '../../../src';
 
 const configurationWebsocketAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -15,6 +15,8 @@ async function sorOrderPlace() {
 
         const response = await connection.sorOrderPlace({
             symbol: 'BNBUSDT',
+            side: SpotWebsocketAPI.SorOrderPlaceSideEnum.BUY,
+            type: SpotWebsocketAPI.SorOrderPlaceTypeEnum.MARKET,
             quantity: 1.0,
         });
 

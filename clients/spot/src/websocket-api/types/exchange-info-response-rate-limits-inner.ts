@@ -48,10 +48,4 @@ export interface ExchangeInfoResponseRateLimitsInner {
      * @memberof ExchangeInfoResponseRateLimitsInner
      */
     limit?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof ExchangeInfoResponseRateLimitsInner
-     */
-    count?: number;
 }

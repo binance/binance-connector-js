@@ -21,25 +21,37 @@
 /**
  *
  * @export
- * @interface OrderCancelResponseResultOrdersInner
+ * @interface TickerBookResponse2ResultInner
  */
-export interface OrderCancelResponseResultOrdersInner {
+export interface TickerBookResponse2ResultInner {
     /**
      *
      * @type {string}
-     * @memberof OrderCancelResponseResultOrdersInner
+     * @memberof TickerBookResponse2ResultInner
      */
     symbol?: string;
     /**
      *
-     * @type {number}
-     * @memberof OrderCancelResponseResultOrdersInner
+     * @type {string}
+     * @memberof TickerBookResponse2ResultInner
      */
-    orderId?: number;
+    bidPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderCancelResponseResultOrdersInner
+     * @memberof TickerBookResponse2ResultInner
      */
-    clientOrderId?: string;
+    bidQty?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof TickerBookResponse2ResultInner
+     */
+    askPrice?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof TickerBookResponse2ResultInner
+     */
+    askQty?: string;
 }

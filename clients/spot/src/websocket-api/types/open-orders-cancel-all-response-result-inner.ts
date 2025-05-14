@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 
 /**
  * Binance Spot WebSocket API
@@ -17,6 +18,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+
+// May contain unused imports in some cases
+// @ts-ignore
+import type { OpenOrdersCancelAllResponseResultInnerOrderReportsInner } from './open-orders-cancel-all-response-result-inner-order-reports-inner';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { OpenOrdersCancelAllResponseResultInnerOrdersInner } from './open-orders-cancel-all-response-result-inner-orders-inner';
 
 /**
  *
@@ -156,4 +164,46 @@ export interface OpenOrdersCancelAllResponseResultInner {
      * @memberof OpenOrdersCancelAllResponseResultInner
      */
     selfTradePreventionMode?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof OpenOrdersCancelAllResponseResultInner
+     */
+    contingencyType?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof OpenOrdersCancelAllResponseResultInner
+     */
+    listStatusType?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof OpenOrdersCancelAllResponseResultInner
+     */
+    listOrderStatus?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof OpenOrdersCancelAllResponseResultInner
+     */
+    listClientOrderId?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof OpenOrdersCancelAllResponseResultInner
+     */
+    transactionTime?: number;
+    /**
+     *
+     * @type {Array<OpenOrdersCancelAllResponseResultInnerOrdersInner>}
+     * @memberof OpenOrdersCancelAllResponseResultInner
+     */
+    orders?: Array<OpenOrdersCancelAllResponseResultInnerOrdersInner>;
+    /**
+     *
+     * @type {Array<OpenOrdersCancelAllResponseResultInnerOrderReportsInner>}
+     * @memberof OpenOrdersCancelAllResponseResultInner
+     */
+    orderReports?: Array<OpenOrdersCancelAllResponseResultInnerOrderReportsInner>;
 }

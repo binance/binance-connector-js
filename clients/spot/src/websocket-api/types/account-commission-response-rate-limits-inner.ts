@@ -21,37 +21,37 @@
 /**
  *
  * @export
- * @interface OrderCancelReplaceResponseRateLimitsInner
+ * @interface AccountCommissionResponseRateLimitsInner
  */
-export interface OrderCancelReplaceResponseRateLimitsInner {
+export interface AccountCommissionResponseRateLimitsInner {
     /**
      *
      * @type {string}
-     * @memberof OrderCancelReplaceResponseRateLimitsInner
+     * @memberof AccountCommissionResponseRateLimitsInner
      */
     rateLimitType?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderCancelReplaceResponseRateLimitsInner
+     * @memberof AccountCommissionResponseRateLimitsInner
      */
     interval?: string;
     /**
      *
      * @type {number}
-     * @memberof OrderCancelReplaceResponseRateLimitsInner
+     * @memberof AccountCommissionResponseRateLimitsInner
      */
     intervalNum?: number;
     /**
      *
      * @type {number}
-     * @memberof OrderCancelReplaceResponseRateLimitsInner
+     * @memberof AccountCommissionResponseRateLimitsInner
      */
     limit?: number;
     /**
      *
      * @type {number}
-     * @memberof OrderCancelReplaceResponseRateLimitsInner
+     * @memberof AccountCommissionResponseRateLimitsInner
      */
     count?: number;
 }

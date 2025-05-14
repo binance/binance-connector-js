@@ -49,7 +49,11 @@ describe('AccountApi', () => {
             msg?: string;
         };
         rateLimits?: object[];
-    } = {};
+    } = {
+        result: {},
+        response: {},
+        rateLimits: [],
+    };
 
     describe('accountCommission()', () => {
         beforeEach(async () => {
@@ -142,7 +146,7 @@ describe('AccountApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith(
                         '/account.commission'.slice(1),
@@ -285,16 +289,16 @@ describe('AccountApi', () => {
                 result: [
                     {
                         rateLimitType: 'ORDERS',
-                        interval: 'SECOND',
-                        intervalNum: 10,
-                        limit: 50,
+                        interval: 'DAY',
+                        intervalNum: 1,
+                        limit: 160000,
                         count: 0,
                     },
                     {
                         rateLimitType: 'ORDERS',
-                        interval: 'DAY',
-                        intervalNum: 1,
-                        limit: 160000,
+                        interval: 'SECOND',
+                        intervalNum: 10,
+                        limit: 50,
                         count: 0,
                     },
                 ],
@@ -324,7 +328,7 @@ describe('AccountApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith(
                         '/account.rateLimits.orders'.slice(1),
@@ -475,9 +479,9 @@ describe('AccountApi', () => {
                     updateTime: 1660801833000,
                     accountType: 'SPOT',
                     balances: [
-                        { asset: 'BNB', free: '0.00000000', locked: '0.00000000' },
-                        { asset: 'BTC', free: '1.3447112', locked: '0.08600000' },
                         { asset: 'USDT', free: '1021.21000000', locked: '0.00000000' },
+                        { asset: 'BTC', free: '1.3447112', locked: '0.08600000' },
+                        { asset: 'BNB', free: '0.00000000', locked: '0.00000000' },
                     ],
                     permissions: ['SPOT'],
                     uid: 354937868,
@@ -508,7 +512,7 @@ describe('AccountApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith(
                         '/account.status'.slice(1),
@@ -651,13 +655,13 @@ describe('AccountApi', () => {
                         orders: [
                             {
                                 symbol: 'BTCUSDT',
-                                orderId: 12569138901,
-                                clientOrderId: 'BqtFCj5odMoWtSqGk2X9tU',
+                                orderId: 12569138902,
+                                clientOrderId: 'jLnZpj5enfMXTuhKB1d0us',
                             },
                             {
                                 symbol: 'BTCUSDT',
-                                orderId: 12569138902,
-                                clientOrderId: 'jLnZpj5enfMXTuhKB1d0us',
+                                orderId: 12569138901,
+                                clientOrderId: 'BqtFCj5odMoWtSqGk2X9tU',
                             },
                         ],
                     },
@@ -688,7 +692,7 @@ describe('AccountApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith(
                         '/allOrderLists'.slice(1),
@@ -876,7 +880,7 @@ describe('AccountApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith('/allOrders'.slice(1), params, {
                         isSigned: true,
@@ -1064,7 +1068,7 @@ describe('AccountApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith('/myAllocations'.slice(1), params, {
                         isSigned: true,
@@ -1248,7 +1252,7 @@ describe('AccountApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith(
                         '/myPreventedMatches'.slice(1),
@@ -1391,12 +1395,12 @@ describe('AccountApi', () => {
                 result: [
                     {
                         symbol: 'BTCUSDT',
-                        id: 1650422481,
+                        id: 1650422482,
                         orderId: 12569099453,
                         orderListId: -1,
-                        price: '23416.10000000',
-                        qty: '0.00635000',
-                        quoteQty: '148.69223500',
+                        price: '23416.50000000',
+                        qty: '0.00212000',
+                        quoteQty: '49.64298000',
                         commission: '0.00000000',
                         commissionAsset: 'BNB',
                         time: 1660801715793,
@@ -1406,12 +1410,12 @@ describe('AccountApi', () => {
                     },
                     {
                         symbol: 'BTCUSDT',
-                        id: 1650422482,
+                        id: 1650422481,
                         orderId: 12569099453,
                         orderListId: -1,
-                        price: '23416.50000000',
-                        qty: '0.00212000',
-                        quoteQty: '49.64298000',
+                        price: '23416.10000000',
+                        qty: '0.00635000',
+                        quoteQty: '148.69223500',
                         commission: '0.00000000',
                         commissionAsset: 'BNB',
                         time: 1660801715793,
@@ -1451,7 +1455,7 @@ describe('AccountApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith('/myTrades'.slice(1), params, {
                         isSigned: true,
@@ -1634,7 +1638,7 @@ describe('AccountApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith('/order.amendments'.slice(1), params, {
                         isSigned: true,

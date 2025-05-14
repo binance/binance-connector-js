@@ -41,7 +41,11 @@ describe('GeneralApi', () => {
             msg?: string;
         };
         rateLimits?: object[];
-    } = {};
+    } = {
+        result: {},
+        response: {},
+        rateLimits: [],
+    };
 
     describe('exchangeInfo()', () => {
         beforeEach(async () => {
@@ -87,21 +91,86 @@ describe('GeneralApi', () => {
                     serverTime: 1655969291181,
                     rateLimits: [
                         {
-                            rateLimitType: 'REQUEST_WEIGHT',
-                            interval: 'MINUTE',
-                            intervalNum: 1,
-                            limit: 6000,
-                        },
-                        { rateLimitType: 'ORDERS', interval: 'SECOND', intervalNum: 10, limit: 50 },
-                        { rateLimitType: 'ORDERS', interval: 'DAY', intervalNum: 1, limit: 160000 },
-                        {
                             rateLimitType: 'CONNECTIONS',
                             interval: 'MINUTE',
                             intervalNum: 5,
                             limit: 300,
                         },
+                        { rateLimitType: 'ORDERS', interval: 'DAY', intervalNum: 1, limit: 160000 },
+                        { rateLimitType: 'ORDERS', interval: 'SECOND', intervalNum: 10, limit: 50 },
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                        },
                     ],
-                    exchangeFilters: [],
+                    exchangeFilters: [
+                        {
+                            filterType: 'EXCHANGE_MAX_NUM_ICEBERG_ORDERS',
+                            maxNumIcebergOrders: 10000,
+                        },
+                        { filterType: 'EXCHANGE_MAX_NUM_ALGO_ORDERS', maxNumAlgoOrders: 200 },
+                        { filterType: 'EXCHANGE_MAX_NUM_ORDERS', maxNumOrders: 1000 },
+                        {
+                            filterType: 'TRAILING_DELTA',
+                            minTrailingAboveDelta: 10,
+                            maxTrailingAboveDelta: 2000,
+                            minTrailingBelowDelta: 10,
+                            maxTrailingBelowDelta: 2000,
+                        },
+                        { filterType: 'MAX_POSITION', maxPosition: '10.00000000' },
+                        { filterType: 'MAX_NUM_ICEBERG_ORDERS', maxNumIcebergOrders: 5 },
+                        { filterType: 'MAX_NUM_ALGO_ORDERS', maxNumAlgoOrders: 5 },
+                        { filterType: 'MAX_NUM_ORDERS', maxNumOrders: 25 },
+                        {
+                            filterType: 'MARKET_LOT_SIZE',
+                            minQty: '0.00100000',
+                            maxQty: '100000.00000000',
+                            stepSize: '0.00100000',
+                        },
+                        { filterType: 'ICEBERG_PARTS', limit: 10 },
+                        {
+                            filterType: 'NOTIONAL',
+                            minNotional: '10.00000000',
+                            applyMinToMarket: false,
+                            maxNotional: '10000.00000000',
+                            applyMaxToMarket: false,
+                            avgPriceMins: 5,
+                        },
+                        {
+                            filterType: 'MIN_NOTIONAL',
+                            minNotional: '0.00100000',
+                            applyToMarket: true,
+                            avgPriceMins: 5,
+                        },
+                        {
+                            filterType: 'LOT_SIZE',
+                            minQty: '0.00100000',
+                            maxQty: '100000.00000000',
+                            stepSize: '0.00100000',
+                        },
+                        {
+                            filterType: 'PERCENT_PRICE_BY_SIDE',
+                            bidMultiplierUp: '1.2',
+                            bidMultiplierDown: '0.2',
+                            askMultiplierUp: '5',
+                            askMultiplierDown: '0.8',
+                            avgPriceMins: 1,
+                        },
+                        {
+                            filterType: 'PERCENT_PRICE',
+                            multiplierUp: '1.3000',
+                            multiplierDown: '0.7000',
+                            avgPriceMins: 5,
+                        },
+                        {
+                            filterType: 'PRICE_FILTER',
+                            minPrice: '0.00000100',
+                            maxPrice: '100000.00000000',
+                            tickSize: '0.00000100',
+                        },
+                    ],
                     symbols: [
                         {
                             symbol: 'BNBBTC',
@@ -127,16 +196,71 @@ describe('GeneralApi', () => {
                             isMarginTradingAllowed: true,
                             filters: [
                                 {
-                                    filterType: 'PRICE_FILTER',
-                                    minPrice: '0.00000100',
-                                    maxPrice: '100000.00000000',
-                                    tickSize: '0.00000100',
+                                    filterType: 'EXCHANGE_MAX_NUM_ICEBERG_ORDERS',
+                                    maxNumIcebergOrders: 10000,
+                                },
+                                {
+                                    filterType: 'EXCHANGE_MAX_NUM_ALGO_ORDERS',
+                                    maxNumAlgoOrders: 200,
+                                },
+                                { filterType: 'EXCHANGE_MAX_NUM_ORDERS', maxNumOrders: 1000 },
+                                {
+                                    filterType: 'TRAILING_DELTA',
+                                    minTrailingAboveDelta: 10,
+                                    maxTrailingAboveDelta: 2000,
+                                    minTrailingBelowDelta: 10,
+                                    maxTrailingBelowDelta: 2000,
+                                },
+                                { filterType: 'MAX_POSITION', maxPosition: '10.00000000' },
+                                { filterType: 'MAX_NUM_ICEBERG_ORDERS', maxNumIcebergOrders: 5 },
+                                { filterType: 'MAX_NUM_ALGO_ORDERS', maxNumAlgoOrders: 5 },
+                                { filterType: 'MAX_NUM_ORDERS', maxNumOrders: 25 },
+                                {
+                                    filterType: 'MARKET_LOT_SIZE',
+                                    minQty: '0.00100000',
+                                    maxQty: '100000.00000000',
+                                    stepSize: '0.00100000',
+                                },
+                                { filterType: 'ICEBERG_PARTS', limit: 10 },
+                                {
+                                    filterType: 'NOTIONAL',
+                                    minNotional: '10.00000000',
+                                    applyMinToMarket: false,
+                                    maxNotional: '10000.00000000',
+                                    applyMaxToMarket: false,
+                                    avgPriceMins: 5,
+                                },
+                                {
+                                    filterType: 'MIN_NOTIONAL',
+                                    minNotional: '0.00100000',
+                                    applyToMarket: true,
+                                    avgPriceMins: 5,
                                 },
                                 {
                                     filterType: 'LOT_SIZE',
                                     minQty: '0.00100000',
                                     maxQty: '100000.00000000',
                                     stepSize: '0.00100000',
+                                },
+                                {
+                                    filterType: 'PERCENT_PRICE_BY_SIDE',
+                                    bidMultiplierUp: '1.2',
+                                    bidMultiplierDown: '0.2',
+                                    askMultiplierUp: '5',
+                                    askMultiplierDown: '0.8',
+                                    avgPriceMins: 1,
+                                },
+                                {
+                                    filterType: 'PERCENT_PRICE',
+                                    multiplierUp: '1.3000',
+                                    multiplierDown: '0.7000',
+                                    avgPriceMins: 5,
+                                },
+                                {
+                                    filterType: 'PRICE_FILTER',
+                                    minPrice: '0.00000100',
+                                    maxPrice: '100000.00000000',
+                                    tickSize: '0.00000100',
                                 },
                             ],
                             permissions: [],
@@ -149,11 +273,17 @@ describe('GeneralApi', () => {
                 },
                 rateLimits: [
                     {
+                        rateLimitType: 'RAW_REQUESTS',
+                        interval: 'MINUTE',
+                        intervalNum: 5,
+                        limit: 61000,
+                    },
+                    { rateLimitType: 'ORDERS', interval: 'DAY', intervalNum: 1, limit: 160000 },
+                    {
                         rateLimitType: 'REQUEST_WEIGHT',
                         interval: 'MINUTE',
                         intervalNum: 1,
                         limit: 6000,
-                        count: 20,
                     },
                 ],
             };
@@ -173,7 +303,7 @@ describe('GeneralApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith(
                         '/exchangeInfo'.slice(1),
@@ -315,7 +445,7 @@ describe('GeneralApi', () => {
                     const responsePromise = websocketAPIClient.ping({ id: mockResponse?.id });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith('/ping'.slice(1), expect.any(Object), {
                         isSigned: false,
@@ -468,7 +598,7 @@ describe('GeneralApi', () => {
                     const responsePromise = websocketAPIClient.time({ id: mockResponse?.id });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith('/time'.slice(1), expect.any(Object), {
                         isSigned: false,

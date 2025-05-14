@@ -528,6 +528,7 @@ describe('MarketApi', () => {
         it('should execute klines() successfully with required parameters only', async () => {
             const params: KlinesRequest = {
                 symbol: 'BNBUSDT',
+                interval: KlinesIntervalEnum.INTERVAL_1s,
             };
 
             mockResponse = [
@@ -605,6 +606,7 @@ describe('MarketApi', () => {
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: KlinesRequest = {
                 symbol: 'BNBUSDT',
+                interval: KlinesIntervalEnum.INTERVAL_1s,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -614,9 +616,23 @@ describe('MarketApi', () => {
             );
         });
 
+        it('should throw RequiredError when interval is missing', async () => {
+            const _params: KlinesRequest = {
+                symbol: 'BNBUSDT',
+                interval: KlinesIntervalEnum.INTERVAL_1s,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.interval;
+
+            await expect(client.klines(params)).rejects.toThrow(
+                'Required parameter interval was null or undefined when calling klines.'
+            );
+        });
+
         it('should throw an error when server is returning an error', async () => {
             const params: KlinesRequest = {
                 symbol: 'BNBUSDT',
+                interval: KlinesIntervalEnum.INTERVAL_1s,
             };
 
             const errorResponse = {
@@ -1013,6 +1029,7 @@ describe('MarketApi', () => {
         it('should execute uiKlines() successfully with required parameters only', async () => {
             const params: UiKlinesRequest = {
                 symbol: 'BNBUSDT',
+                interval: UiKlinesIntervalEnum.INTERVAL_1s,
             };
 
             mockResponse = [
@@ -1090,6 +1107,7 @@ describe('MarketApi', () => {
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: UiKlinesRequest = {
                 symbol: 'BNBUSDT',
+                interval: UiKlinesIntervalEnum.INTERVAL_1s,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1099,9 +1117,23 @@ describe('MarketApi', () => {
             );
         });
 
+        it('should throw RequiredError when interval is missing', async () => {
+            const _params: UiKlinesRequest = {
+                symbol: 'BNBUSDT',
+                interval: UiKlinesIntervalEnum.INTERVAL_1s,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.interval;
+
+            await expect(client.uiKlines(params)).rejects.toThrow(
+                'Required parameter interval was null or undefined when calling uiKlines.'
+            );
+        });
+
         it('should throw an error when server is returning an error', async () => {
             const params: UiKlinesRequest = {
                 symbol: 'BNBUSDT',
+                interval: UiKlinesIntervalEnum.INTERVAL_1s,
             };
 
             const errorResponse = {

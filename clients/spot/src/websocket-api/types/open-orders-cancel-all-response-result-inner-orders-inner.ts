@@ -21,31 +21,25 @@
 /**
  *
  * @export
- * @interface ExchangeInfoResponseResultSymbolsInnerFiltersInner
+ * @interface OpenOrdersCancelAllResponseResultInnerOrdersInner
  */
-export interface ExchangeInfoResponseResultSymbolsInnerFiltersInner {
+export interface OpenOrdersCancelAllResponseResultInnerOrdersInner {
     /**
      *
      * @type {string}
-     * @memberof ExchangeInfoResponseResultSymbolsInnerFiltersInner
+     * @memberof OpenOrdersCancelAllResponseResultInnerOrdersInner
      */
-    filterType?: string;
+    symbol?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof OpenOrdersCancelAllResponseResultInnerOrdersInner
+     */
+    orderId?: number;
     /**
      *
      * @type {string}
-     * @memberof ExchangeInfoResponseResultSymbolsInnerFiltersInner
+     * @memberof OpenOrdersCancelAllResponseResultInnerOrdersInner
      */
-    minPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof ExchangeInfoResponseResultSymbolsInnerFiltersInner
-     */
-    maxPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof ExchangeInfoResponseResultSymbolsInnerFiltersInner
-     */
-    tickSize?: string;
+    clientOrderId?: string;
 }
