@@ -14,14 +14,9 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { IndexPriceKlineCandlestickDataResponseItemInner } from './index-price-kline-candlestick-data-response-item-inner';
-
 /**
  *
  * @export
  * @interface IndexPriceKlineCandlestickDataResponseItem
  */
-export interface IndexPriceKlineCandlestickDataResponseItem
-    extends Array<IndexPriceKlineCandlestickDataResponseItemInner> {}
+export interface IndexPriceKlineCandlestickDataResponseItem extends Array<string> {}

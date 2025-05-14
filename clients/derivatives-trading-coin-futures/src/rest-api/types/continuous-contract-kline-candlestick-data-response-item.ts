@@ -14,14 +14,9 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { ContinuousContractKlineCandlestickDataResponseItemInner } from './continuous-contract-kline-candlestick-data-response-item-inner';
-
 /**
  *
  * @export
  * @interface ContinuousContractKlineCandlestickDataResponseItem
  */
-export interface ContinuousContractKlineCandlestickDataResponseItem
-    extends Array<ContinuousContractKlineCandlestickDataResponseItemInner> {}
+export interface ContinuousContractKlineCandlestickDataResponseItem extends Array<string> {}

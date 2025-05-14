@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.0.0 - 2025-05-14
+
+### Changed
+
+- Updated `@binance/common` library to version `1.0.4`.
+- Updated response types.
+
 ## 2.0.0 - 2025-04-10
 
 ### Changed
