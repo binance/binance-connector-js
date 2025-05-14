@@ -1415,10 +1415,30 @@ describe('TradeApi', () => {
 
             mockResponse = {
                 symbol: 'BTCUSDT',
-                orderId: 28,
-                clientOrderId: '6gCrw2kRUAF9CvJDGP16IP',
-                isIsolated: true,
-                transactTime: 1507725176595,
+                orderId: 26769564559,
+                clientOrderId: 'E156O3KP4gOif65bjuUK5V',
+                isIsolated: false,
+                transactTime: 1713873075893,
+                price: '0',
+                origQty: '0.001',
+                executedQty: '0.001',
+                cummulativeQuoteQty: '65.98253',
+                status: 'FILLED',
+                timeInForce: 'GTC',
+                type: 'MARKET',
+                side: 'SELL',
+                selfTradePreventionMode: 'EXPIRE_MAKER',
+                marginBuyBorrowAmount: 5,
+                marginBuyBorrowAsset: 'BTC',
+                fills: [
+                    {
+                        price: '65982.53',
+                        qty: '0.001',
+                        commission: '0.06598253',
+                        commissionAsset: 'USDT',
+                        tradeId: 3570680726,
+                    },
+                ],
             };
 
             const spy = jest.spyOn(client, 'marginAccountNewOrder').mockReturnValue(
@@ -1457,10 +1477,30 @@ describe('TradeApi', () => {
 
             mockResponse = {
                 symbol: 'BTCUSDT',
-                orderId: 28,
-                clientOrderId: '6gCrw2kRUAF9CvJDGP16IP',
-                isIsolated: true,
-                transactTime: 1507725176595,
+                orderId: 26769564559,
+                clientOrderId: 'E156O3KP4gOif65bjuUK5V',
+                isIsolated: false,
+                transactTime: 1713873075893,
+                price: '0',
+                origQty: '0.001',
+                executedQty: '0.001',
+                cummulativeQuoteQty: '65.98253',
+                status: 'FILLED',
+                timeInForce: 'GTC',
+                type: 'MARKET',
+                side: 'SELL',
+                selfTradePreventionMode: 'EXPIRE_MAKER',
+                marginBuyBorrowAmount: 5,
+                marginBuyBorrowAsset: 'BTC',
+                fills: [
+                    {
+                        price: '65982.53',
+                        qty: '0.001',
+                        commission: '0.06598253',
+                        commissionAsset: 'USDT',
+                        tradeId: 3570680726,
+                    },
+                ],
             };
 
             const spy = jest.spyOn(client, 'marginAccountNewOrder').mockReturnValue(

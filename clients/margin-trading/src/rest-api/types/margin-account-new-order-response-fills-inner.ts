@@ -16,37 +16,37 @@
 /**
  *
  * @export
- * @interface MarginAccountNewOrderResponse3FillsInner
+ * @interface MarginAccountNewOrderResponseFillsInner
  */
-export interface MarginAccountNewOrderResponse3FillsInner {
+export interface MarginAccountNewOrderResponseFillsInner {
     /**
      *
      * @type {string}
-     * @memberof MarginAccountNewOrderResponse3FillsInner
+     * @memberof MarginAccountNewOrderResponseFillsInner
      */
     price?: string;
     /**
      *
      * @type {string}
-     * @memberof MarginAccountNewOrderResponse3FillsInner
+     * @memberof MarginAccountNewOrderResponseFillsInner
      */
     qty?: string;
     /**
      *
      * @type {string}
-     * @memberof MarginAccountNewOrderResponse3FillsInner
+     * @memberof MarginAccountNewOrderResponseFillsInner
      */
     commission?: string;
     /**
      *
      * @type {string}
-     * @memberof MarginAccountNewOrderResponse3FillsInner
+     * @memberof MarginAccountNewOrderResponseFillsInner
      */
     commissionAsset?: string;
     /**
      *
      * @type {number}
-     * @memberof MarginAccountNewOrderResponse3FillsInner
+     * @memberof MarginAccountNewOrderResponseFillsInner
      */
     tradeId?: number;
 }

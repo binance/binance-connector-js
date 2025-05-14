@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
  * Binance Margin Trading REST API
@@ -17,18 +16,36 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { QueryIsolatedMarginAccountInfoResponse1 } from './query-isolated-margin-account-info-response1';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { QueryIsolatedMarginAccountInfoResponse1AssetsInner } from './query-isolated-margin-account-info-response1-assets-inner';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { QueryIsolatedMarginAccountInfoResponse2 } from './query-isolated-margin-account-info-response2';
+import type { QueryIsolatedMarginAccountInfoResponseAssetsInner } from './query-isolated-margin-account-info-response-assets-inner';
 
 /**
- * @type QueryIsolatedMarginAccountInfoResponse
+ *
  * @export
+ * @interface QueryIsolatedMarginAccountInfoResponse
  */
-export type QueryIsolatedMarginAccountInfoResponse =
-    | QueryIsolatedMarginAccountInfoResponse1
-    | QueryIsolatedMarginAccountInfoResponse2;
+export interface QueryIsolatedMarginAccountInfoResponse {
+    /**
+     *
+     * @type {Array<QueryIsolatedMarginAccountInfoResponseAssetsInner>}
+     * @memberof QueryIsolatedMarginAccountInfoResponse
+     */
+    assets?: Array<QueryIsolatedMarginAccountInfoResponseAssetsInner>;
+    /**
+     *
+     * @type {string}
+     * @memberof QueryIsolatedMarginAccountInfoResponse
+     */
+    totalAssetOfBtc?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof QueryIsolatedMarginAccountInfoResponse
+     */
+    totalLiabilityOfBtc?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof QueryIsolatedMarginAccountInfoResponse
+     */
+    totalNetAssetOfBtc?: string;
+}

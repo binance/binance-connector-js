@@ -16,67 +16,67 @@
 /**
  *
  * @export
- * @interface QueryIsolatedMarginAccountInfoResponse1AssetsInnerQuoteAsset
+ * @interface QueryIsolatedMarginAccountInfoResponseAssetsInnerBaseAsset
  */
-export interface QueryIsolatedMarginAccountInfoResponse1AssetsInnerQuoteAsset {
+export interface QueryIsolatedMarginAccountInfoResponseAssetsInnerBaseAsset {
     /**
      *
      * @type {string}
-     * @memberof QueryIsolatedMarginAccountInfoResponse1AssetsInnerQuoteAsset
+     * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInnerBaseAsset
      */
     asset?: string;
     /**
      *
      * @type {boolean}
-     * @memberof QueryIsolatedMarginAccountInfoResponse1AssetsInnerQuoteAsset
+     * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInnerBaseAsset
      */
     borrowEnabled?: boolean;
     /**
      *
      * @type {string}
-     * @memberof QueryIsolatedMarginAccountInfoResponse1AssetsInnerQuoteAsset
+     * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInnerBaseAsset
      */
     borrowed?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryIsolatedMarginAccountInfoResponse1AssetsInnerQuoteAsset
+     * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInnerBaseAsset
      */
     free?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryIsolatedMarginAccountInfoResponse1AssetsInnerQuoteAsset
+     * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInnerBaseAsset
      */
     interest?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryIsolatedMarginAccountInfoResponse1AssetsInnerQuoteAsset
+     * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInnerBaseAsset
      */
     locked?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryIsolatedMarginAccountInfoResponse1AssetsInnerQuoteAsset
+     * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInnerBaseAsset
      */
     netAsset?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryIsolatedMarginAccountInfoResponse1AssetsInnerQuoteAsset
+     * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInnerBaseAsset
      */
     netAssetOfBtc?: string;
     /**
      *
      * @type {boolean}
-     * @memberof QueryIsolatedMarginAccountInfoResponse1AssetsInnerQuoteAsset
+     * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInnerBaseAsset
      */
     repayEnabled?: boolean;
     /**
      *
      * @type {string}
-     * @memberof QueryIsolatedMarginAccountInfoResponse1AssetsInnerQuoteAsset
+     * @memberof QueryIsolatedMarginAccountInfoResponseAssetsInnerBaseAsset
      */
     totalAsset?: string;
 }

@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
  * Binance Margin Trading REST API
@@ -17,22 +16,114 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { MarginAccountNewOrderResponse1 } from './margin-account-new-order-response1';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { MarginAccountNewOrderResponse2 } from './margin-account-new-order-response2';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { MarginAccountNewOrderResponse3 } from './margin-account-new-order-response3';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { MarginAccountNewOrderResponse3FillsInner } from './margin-account-new-order-response3-fills-inner';
+import type { MarginAccountNewOrderResponseFillsInner } from './margin-account-new-order-response-fills-inner';
 
 /**
- * @type MarginAccountNewOrderResponse
+ *
  * @export
+ * @interface MarginAccountNewOrderResponse
  */
-export type MarginAccountNewOrderResponse =
-    | MarginAccountNewOrderResponse1
-    | MarginAccountNewOrderResponse2
-    | MarginAccountNewOrderResponse3;
+export interface MarginAccountNewOrderResponse {
+    /**
+     *
+     * @type {string}
+     * @memberof MarginAccountNewOrderResponse
+     */
+    symbol?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof MarginAccountNewOrderResponse
+     */
+    orderId?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof MarginAccountNewOrderResponse
+     */
+    clientOrderId?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof MarginAccountNewOrderResponse
+     */
+    isIsolated?: boolean;
+    /**
+     *
+     * @type {number}
+     * @memberof MarginAccountNewOrderResponse
+     */
+    transactTime?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof MarginAccountNewOrderResponse
+     */
+    price?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MarginAccountNewOrderResponse
+     */
+    origQty?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MarginAccountNewOrderResponse
+     */
+    executedQty?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MarginAccountNewOrderResponse
+     */
+    cummulativeQuoteQty?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MarginAccountNewOrderResponse
+     */
+    status?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MarginAccountNewOrderResponse
+     */
+    timeInForce?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MarginAccountNewOrderResponse
+     */
+    type?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MarginAccountNewOrderResponse
+     */
+    side?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MarginAccountNewOrderResponse
+     */
+    selfTradePreventionMode?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof MarginAccountNewOrderResponse
+     */
+    marginBuyBorrowAmount?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof MarginAccountNewOrderResponse
+     */
+    marginBuyBorrowAsset?: string;
+    /**
+     *
+     * @type {Array<MarginAccountNewOrderResponseFillsInner>}
+     * @memberof MarginAccountNewOrderResponse
+     */
+    fills?: Array<MarginAccountNewOrderResponseFillsInner>;
+}
