@@ -11,7 +11,5 @@ export * from './get-viploan-ongoing-orders-response-rows-inner';
 export * from './query-application-status-response';
 export * from './query-application-status-response-rows-inner';
 export * from './vip-loan-borrow-response';
-export * from './vip-loan-borrow-response1';
-export * from './vip-loan-borrow-response2';
 export * from './vip-loan-renew-response';
 export * from './vip-loan-repay-response';

@@ -1,5 +1,4 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
  * Binance VIP Loan REST API
@@ -14,15 +13,58 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { VipLoanBorrowResponse1 } from './vip-loan-borrow-response1';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { VipLoanBorrowResponse2 } from './vip-loan-borrow-response2';
-
 /**
- * @type VipLoanBorrowResponse
+ *
  * @export
+ * @interface VipLoanBorrowResponse
  */
-export type VipLoanBorrowResponse = VipLoanBorrowResponse1 | VipLoanBorrowResponse2;
+export interface VipLoanBorrowResponse {
+    /**
+     *
+     * @type {string}
+     * @memberof VipLoanBorrowResponse
+     */
+    loanAccountId?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof VipLoanBorrowResponse
+     */
+    requestId?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof VipLoanBorrowResponse
+     */
+    loanCoin?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof VipLoanBorrowResponse
+     */
+    isFlexibleRate?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof VipLoanBorrowResponse
+     */
+    loanAmount?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof VipLoanBorrowResponse
+     */
+    collateralAccountId?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof VipLoanBorrowResponse
+     */
+    collateralCoin?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof VipLoanBorrowResponse
+     */
+    loanTerm?: string;
+}
