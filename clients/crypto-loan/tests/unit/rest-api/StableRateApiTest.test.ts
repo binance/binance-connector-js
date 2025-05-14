@@ -550,7 +550,7 @@ describe('StableRateApi', () => {
                 collateralCoin: 'BNB',
                 remainingCollateral: '5.253',
                 currentLTV: '0.25',
-                repayStatus: 'Repaid',
+                repayStatus: 'Repaying',
             };
 
             const spy = jest.spyOn(client, 'cryptoLoanRepay').mockReturnValue(
@@ -583,7 +583,7 @@ describe('StableRateApi', () => {
                 collateralCoin: 'BNB',
                 remainingCollateral: '5.253',
                 currentLTV: '0.25',
-                repayStatus: 'Repaid',
+                repayStatus: 'Repaying',
             };
 
             const spy = jest.spyOn(client, 'cryptoLoanRepay').mockReturnValue(

@@ -1,5 +1,4 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
  * Binance Crypto Loan REST API
@@ -14,15 +13,52 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { CryptoLoanRepayResponse1 } from './crypto-loan-repay-response1';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { CryptoLoanRepayResponse2 } from './crypto-loan-repay-response2';
-
 /**
- * @type CryptoLoanRepayResponse
+ *
  * @export
+ * @interface CryptoLoanRepayResponse
  */
-export type CryptoLoanRepayResponse = CryptoLoanRepayResponse1 | CryptoLoanRepayResponse2;
+export interface CryptoLoanRepayResponse {
+    /**
+     *
+     * @type {string}
+     * @memberof CryptoLoanRepayResponse
+     */
+    loanCoin?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CryptoLoanRepayResponse
+     */
+    remainingPrincipal?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CryptoLoanRepayResponse
+     */
+    remainingInterest?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CryptoLoanRepayResponse
+     */
+    collateralCoin?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CryptoLoanRepayResponse
+     */
+    remainingCollateral?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CryptoLoanRepayResponse
+     */
+    currentLTV?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CryptoLoanRepayResponse
+     */
+    repayStatus?: string;
+}

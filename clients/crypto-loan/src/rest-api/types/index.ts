@@ -5,8 +5,6 @@ export * from './crypto-loan-borrow-response';
 export * from './crypto-loan-customize-margin-call-response';
 export * from './crypto-loan-customize-margin-call-response-rows-inner';
 export * from './crypto-loan-repay-response';
-export * from './crypto-loan-repay-response1';
-export * from './crypto-loan-repay-response2';
 export * from './flexible-loan-adjust-ltv-response';
 export * from './flexible-loan-borrow-response';
 export * from './flexible-loan-collateral-repayment-response';
