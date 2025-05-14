@@ -16,15 +16,11 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { PositionInformationV2Response1 } from './position-information-v2-response1';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { PositionInformationV2Response2 } from './position-information-v2-response2';
+import type { PositionInformationV2ResponseInner } from './position-information-v2-response-inner';
 
 /**
- * @type PositionInformationV2Response
+ *
  * @export
+ * @interface PositionInformationV2Response
  */
-export type PositionInformationV2Response =
-    | PositionInformationV2Response1
-    | PositionInformationV2Response2;
+export interface PositionInformationV2Response extends Array<PositionInformationV2ResponseInner> {}

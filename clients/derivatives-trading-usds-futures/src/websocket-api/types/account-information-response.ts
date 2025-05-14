@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
  * Binance Derivatives Trading USDS Futures WebSocket API
@@ -17,19 +16,39 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountInformationResponse1 } from './account-information-response1';
+import type { AccountInformationResponseResult } from './account-information-response-result';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountInformationResponse2 } from './account-information-response2';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { AccountInformationResponse2Result } from './account-information-response2-result';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { AccountInformationV2Response1RateLimitsInner } from './account-information-v2-response1-rate-limits-inner';
+import type { AccountInformationV2ResponseRateLimitsInner } from './account-information-v2-response-rate-limits-inner';
 
 /**
- * @type AccountInformationResponse
+ *
  * @export
+ * @interface AccountInformationResponse
  */
-export type AccountInformationResponse = AccountInformationResponse1 | AccountInformationResponse2;
+export interface AccountInformationResponse {
+    /**
+     *
+     * @type {string}
+     * @memberof AccountInformationResponse
+     */
+    id?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof AccountInformationResponse
+     */
+    status?: number;
+    /**
+     *
+     * @type {AccountInformationResponseResult}
+     * @memberof AccountInformationResponse
+     */
+    result?: AccountInformationResponseResult;
+    /**
+     *
+     * @type {Array<AccountInformationV2ResponseRateLimitsInner>}
+     * @memberof AccountInformationResponse
+     */
+    rateLimits?: Array<AccountInformationV2ResponseRateLimitsInner>;
+}

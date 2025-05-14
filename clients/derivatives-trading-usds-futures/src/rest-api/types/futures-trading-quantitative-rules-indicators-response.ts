@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
  * Binance Derivatives Trading USDS Futures REST API
@@ -17,18 +16,24 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FuturesTradingQuantitativeRulesIndicatorsResponse1 } from './futures-trading-quantitative-rules-indicators-response1';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { FuturesTradingQuantitativeRulesIndicatorsResponse2 } from './futures-trading-quantitative-rules-indicators-response2';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { FuturesTradingQuantitativeRulesIndicatorsResponse2Indicators } from './futures-trading-quantitative-rules-indicators-response2-indicators';
+import type { FuturesTradingQuantitativeRulesIndicatorsResponseIndicators } from './futures-trading-quantitative-rules-indicators-response-indicators';
 
 /**
- * @type FuturesTradingQuantitativeRulesIndicatorsResponse
+ *
  * @export
+ * @interface FuturesTradingQuantitativeRulesIndicatorsResponse
  */
-export type FuturesTradingQuantitativeRulesIndicatorsResponse =
-    | FuturesTradingQuantitativeRulesIndicatorsResponse1
-    | FuturesTradingQuantitativeRulesIndicatorsResponse2;
+export interface FuturesTradingQuantitativeRulesIndicatorsResponse {
+    /**
+     *
+     * @type {FuturesTradingQuantitativeRulesIndicatorsResponseIndicators}
+     * @memberof FuturesTradingQuantitativeRulesIndicatorsResponse
+     */
+    indicators?: FuturesTradingQuantitativeRulesIndicatorsResponseIndicators;
+    /**
+     *
+     * @type {number}
+     * @memberof FuturesTradingQuantitativeRulesIndicatorsResponse
+     */
+    updateTime?: number;
+}

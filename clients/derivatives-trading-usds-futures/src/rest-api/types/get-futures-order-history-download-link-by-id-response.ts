@@ -1,5 +1,4 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
  * Binance Derivatives Trading USDS Futures REST API
@@ -14,17 +13,46 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { GetFuturesOrderHistoryDownloadLinkByIdResponse1 } from './get-futures-order-history-download-link-by-id-response1';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { GetFuturesOrderHistoryDownloadLinkByIdResponse2 } from './get-futures-order-history-download-link-by-id-response2';
-
 /**
- * @type GetFuturesOrderHistoryDownloadLinkByIdResponse
+ *
  * @export
+ * @interface GetFuturesOrderHistoryDownloadLinkByIdResponse
  */
-export type GetFuturesOrderHistoryDownloadLinkByIdResponse =
-    | GetFuturesOrderHistoryDownloadLinkByIdResponse1
-    | GetFuturesOrderHistoryDownloadLinkByIdResponse2;
+export interface GetFuturesOrderHistoryDownloadLinkByIdResponse {
+    /**
+     *
+     * @type {string}
+     * @memberof GetFuturesOrderHistoryDownloadLinkByIdResponse
+     */
+    downloadId?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetFuturesOrderHistoryDownloadLinkByIdResponse
+     */
+    status?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetFuturesOrderHistoryDownloadLinkByIdResponse
+     */
+    url?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof GetFuturesOrderHistoryDownloadLinkByIdResponse
+     */
+    notified?: boolean;
+    /**
+     *
+     * @type {number}
+     * @memberof GetFuturesOrderHistoryDownloadLinkByIdResponse
+     */
+    expirationTimestamp?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof GetFuturesOrderHistoryDownloadLinkByIdResponse
+     */
+    isExpired?: string;
+}

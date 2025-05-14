@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
  * Binance Derivatives Trading USDS Futures WebSocket API
@@ -17,21 +16,39 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountInformationV2Response1RateLimitsInner } from './account-information-v2-response1-rate-limits-inner';
+import type { AccountInformationV2ResponseRateLimitsInner } from './account-information-v2-response-rate-limits-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { PositionInformationV2Response1 } from './position-information-v2-response1';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { PositionInformationV2Response2 } from './position-information-v2-response2';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { PositionInformationV2Response2ResultInner } from './position-information-v2-response2-result-inner';
+import type { PositionInformationV2ResponseResultInner } from './position-information-v2-response-result-inner';
 
 /**
- * @type PositionInformationV2Response
+ *
  * @export
+ * @interface PositionInformationV2Response
  */
-export type PositionInformationV2Response =
-    | PositionInformationV2Response1
-    | PositionInformationV2Response2;
+export interface PositionInformationV2Response {
+    /**
+     *
+     * @type {string}
+     * @memberof PositionInformationV2Response
+     */
+    id?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof PositionInformationV2Response
+     */
+    status?: number;
+    /**
+     *
+     * @type {Array<PositionInformationV2ResponseResultInner>}
+     * @memberof PositionInformationV2Response
+     */
+    result?: Array<PositionInformationV2ResponseResultInner>;
+    /**
+     *
+     * @type {Array<AccountInformationV2ResponseRateLimitsInner>}
+     * @memberof PositionInformationV2Response
+     */
+    rateLimits?: Array<AccountInformationV2ResponseRateLimitsInner>;
+}

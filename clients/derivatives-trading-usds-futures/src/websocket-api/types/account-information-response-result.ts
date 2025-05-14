@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Binance Derivatives Trading USDS Futures WebSocket API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket API
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -16,141 +16,135 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountInformationV2ResponseAssetsInner } from './account-information-v2-response-assets-inner';
+import type { AccountInformationResponseResultAssetsInner } from './account-information-response-result-assets-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountInformationV2ResponsePositionsInner } from './account-information-v2-response-positions-inner';
+import type { AccountInformationResponseResultPositionsInner } from './account-information-response-result-positions-inner';
 
 /**
  *
  * @export
- * @interface AccountInformationV2Response
+ * @interface AccountInformationResponseResult
  */
-export interface AccountInformationV2Response {
+export interface AccountInformationResponseResult {
     /**
      *
      * @type {number}
-     * @memberof AccountInformationV2Response
+     * @memberof AccountInformationResponseResult
      */
     feeTier?: number;
     /**
      *
      * @type {boolean}
-     * @memberof AccountInformationV2Response
+     * @memberof AccountInformationResponseResult
      */
-    feeBurn?: boolean;
+    canTrade?: boolean;
     /**
      *
      * @type {boolean}
-     * @memberof AccountInformationV2Response
+     * @memberof AccountInformationResponseResult
      */
     canDeposit?: boolean;
     /**
      *
      * @type {boolean}
-     * @memberof AccountInformationV2Response
+     * @memberof AccountInformationResponseResult
      */
     canWithdraw?: boolean;
     /**
      *
      * @type {number}
-     * @memberof AccountInformationV2Response
+     * @memberof AccountInformationResponseResult
      */
     updateTime?: number;
     /**
      *
      * @type {boolean}
-     * @memberof AccountInformationV2Response
+     * @memberof AccountInformationResponseResult
      */
     multiAssetsMargin?: boolean;
     /**
      *
      * @type {number}
-     * @memberof AccountInformationV2Response
+     * @memberof AccountInformationResponseResult
      */
     tradeGroupId?: number;
     /**
      *
      * @type {string}
-     * @memberof AccountInformationV2Response
+     * @memberof AccountInformationResponseResult
      */
     totalInitialMargin?: string;
     /**
      *
      * @type {string}
-     * @memberof AccountInformationV2Response
+     * @memberof AccountInformationResponseResult
      */
     totalMaintMargin?: string;
     /**
      *
      * @type {string}
-     * @memberof AccountInformationV2Response
+     * @memberof AccountInformationResponseResult
      */
     totalWalletBalance?: string;
     /**
      *
      * @type {string}
-     * @memberof AccountInformationV2Response
+     * @memberof AccountInformationResponseResult
      */
     totalUnrealizedProfit?: string;
     /**
      *
      * @type {string}
-     * @memberof AccountInformationV2Response
+     * @memberof AccountInformationResponseResult
      */
     totalMarginBalance?: string;
     /**
      *
      * @type {string}
-     * @memberof AccountInformationV2Response
+     * @memberof AccountInformationResponseResult
      */
     totalPositionInitialMargin?: string;
     /**
      *
      * @type {string}
-     * @memberof AccountInformationV2Response
+     * @memberof AccountInformationResponseResult
      */
     totalOpenOrderInitialMargin?: string;
     /**
      *
      * @type {string}
-     * @memberof AccountInformationV2Response
+     * @memberof AccountInformationResponseResult
      */
     totalCrossWalletBalance?: string;
     /**
      *
      * @type {string}
-     * @memberof AccountInformationV2Response
+     * @memberof AccountInformationResponseResult
      */
     totalCrossUnPnl?: string;
     /**
      *
      * @type {string}
-     * @memberof AccountInformationV2Response
+     * @memberof AccountInformationResponseResult
      */
     availableBalance?: string;
     /**
      *
      * @type {string}
-     * @memberof AccountInformationV2Response
+     * @memberof AccountInformationResponseResult
      */
     maxWithdrawAmount?: string;
     /**
      *
-     * @type {Array<AccountInformationV2ResponseAssetsInner>}
-     * @memberof AccountInformationV2Response
+     * @type {Array<AccountInformationResponseResultAssetsInner>}
+     * @memberof AccountInformationResponseResult
      */
-    assets?: Array<AccountInformationV2ResponseAssetsInner>;
+    assets?: Array<AccountInformationResponseResultAssetsInner>;
     /**
      *
-     * @type {Array<AccountInformationV2ResponsePositionsInner>}
-     * @memberof AccountInformationV2Response
+     * @type {Array<AccountInformationResponseResultPositionsInner>}
+     * @memberof AccountInformationResponseResult
      */
-    positions?: Array<AccountInformationV2ResponsePositionsInner>;
-    /**
-     *
-     * @type {boolean}
-     * @memberof AccountInformationV2Response
-     */
-    canTrade?: boolean;
+    positions?: Array<AccountInformationResponseResultPositionsInner>;
 }

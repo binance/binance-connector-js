@@ -1,5 +1,4 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
  * Binance Derivatives Trading USDS Futures REST API
@@ -14,17 +13,46 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { GetFuturesTradeDownloadLinkByIdResponse1 } from './get-futures-trade-download-link-by-id-response1';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { GetFuturesTradeDownloadLinkByIdResponse2 } from './get-futures-trade-download-link-by-id-response2';
-
 /**
- * @type GetFuturesTradeDownloadLinkByIdResponse
+ *
  * @export
+ * @interface GetFuturesTradeDownloadLinkByIdResponse
  */
-export type GetFuturesTradeDownloadLinkByIdResponse =
-    | GetFuturesTradeDownloadLinkByIdResponse1
-    | GetFuturesTradeDownloadLinkByIdResponse2;
+export interface GetFuturesTradeDownloadLinkByIdResponse {
+    /**
+     *
+     * @type {string}
+     * @memberof GetFuturesTradeDownloadLinkByIdResponse
+     */
+    downloadId?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetFuturesTradeDownloadLinkByIdResponse
+     */
+    status?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetFuturesTradeDownloadLinkByIdResponse
+     */
+    url?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof GetFuturesTradeDownloadLinkByIdResponse
+     */
+    notified?: boolean;
+    /**
+     *
+     * @type {number}
+     * @memberof GetFuturesTradeDownloadLinkByIdResponse
+     */
+    expirationTimestamp?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof GetFuturesTradeDownloadLinkByIdResponse
+     */
+    isExpired?: string;
+}

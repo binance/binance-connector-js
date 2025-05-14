@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
  * Binance Derivatives Trading USDS Futures REST API
@@ -17,21 +16,93 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountInformationV2Response2AssetsInner } from './account-information-v2-response2-assets-inner';
+import type { AccountInformationV3ResponseAssetsInner } from './account-information-v3-response-assets-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountInformationV3Response1 } from './account-information-v3-response1';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { AccountInformationV3Response1PositionsInner } from './account-information-v3-response1-positions-inner';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { AccountInformationV3Response2 } from './account-information-v3-response2';
+import type { AccountInformationV3ResponsePositionsInner } from './account-information-v3-response-positions-inner';
 
 /**
- * @type AccountInformationV3Response
+ *
  * @export
+ * @interface AccountInformationV3Response
  */
-export type AccountInformationV3Response =
-    | AccountInformationV3Response1
-    | AccountInformationV3Response2;
+export interface AccountInformationV3Response {
+    /**
+     *
+     * @type {string}
+     * @memberof AccountInformationV3Response
+     */
+    totalInitialMargin?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof AccountInformationV3Response
+     */
+    totalMaintMargin?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof AccountInformationV3Response
+     */
+    totalWalletBalance?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof AccountInformationV3Response
+     */
+    totalUnrealizedProfit?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof AccountInformationV3Response
+     */
+    totalMarginBalance?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof AccountInformationV3Response
+     */
+    totalPositionInitialMargin?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof AccountInformationV3Response
+     */
+    totalOpenOrderInitialMargin?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof AccountInformationV3Response
+     */
+    totalCrossWalletBalance?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof AccountInformationV3Response
+     */
+    totalCrossUnPnl?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof AccountInformationV3Response
+     */
+    availableBalance?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof AccountInformationV3Response
+     */
+    maxWithdrawAmount?: string;
+    /**
+     *
+     * @type {Array<AccountInformationV3ResponseAssetsInner>}
+     * @memberof AccountInformationV3Response
+     */
+    assets?: Array<AccountInformationV3ResponseAssetsInner>;
+    /**
+     *
+     * @type {Array<AccountInformationV3ResponsePositionsInner>}
+     * @memberof AccountInformationV3Response
+     */
+    positions?: Array<AccountInformationV3ResponsePositionsInner>;
+}

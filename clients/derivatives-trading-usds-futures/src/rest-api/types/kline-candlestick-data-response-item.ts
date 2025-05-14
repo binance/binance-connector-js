@@ -14,14 +14,9 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { KlineCandlestickDataResponseItemInner } from './kline-candlestick-data-response-item-inner';
-
 /**
  *
  * @export
  * @interface KlineCandlestickDataResponseItem
  */
-export interface KlineCandlestickDataResponseItem
-    extends Array<KlineCandlestickDataResponseItemInner> {}
+export interface KlineCandlestickDataResponseItem extends Array<string> {}
