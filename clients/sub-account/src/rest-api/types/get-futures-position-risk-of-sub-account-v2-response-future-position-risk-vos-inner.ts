@@ -16,55 +16,55 @@
 /**
  *
  * @export
- * @interface GetFuturesPositionRiskOfSubAccountV2Response1FuturePositionRiskVosInner
+ * @interface GetFuturesPositionRiskOfSubAccountV2ResponseFuturePositionRiskVosInner
  */
-export interface GetFuturesPositionRiskOfSubAccountV2Response1FuturePositionRiskVosInner {
+export interface GetFuturesPositionRiskOfSubAccountV2ResponseFuturePositionRiskVosInner {
     /**
      *
      * @type {string}
-     * @memberof GetFuturesPositionRiskOfSubAccountV2Response1FuturePositionRiskVosInner
+     * @memberof GetFuturesPositionRiskOfSubAccountV2ResponseFuturePositionRiskVosInner
      */
     entryPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof GetFuturesPositionRiskOfSubAccountV2Response1FuturePositionRiskVosInner
+     * @memberof GetFuturesPositionRiskOfSubAccountV2ResponseFuturePositionRiskVosInner
      */
     leverage?: string;
     /**
      *
      * @type {string}
-     * @memberof GetFuturesPositionRiskOfSubAccountV2Response1FuturePositionRiskVosInner
+     * @memberof GetFuturesPositionRiskOfSubAccountV2ResponseFuturePositionRiskVosInner
      */
     maxNotional?: string;
     /**
      *
      * @type {string}
-     * @memberof GetFuturesPositionRiskOfSubAccountV2Response1FuturePositionRiskVosInner
+     * @memberof GetFuturesPositionRiskOfSubAccountV2ResponseFuturePositionRiskVosInner
      */
     liquidationPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof GetFuturesPositionRiskOfSubAccountV2Response1FuturePositionRiskVosInner
+     * @memberof GetFuturesPositionRiskOfSubAccountV2ResponseFuturePositionRiskVosInner
      */
     markPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof GetFuturesPositionRiskOfSubAccountV2Response1FuturePositionRiskVosInner
+     * @memberof GetFuturesPositionRiskOfSubAccountV2ResponseFuturePositionRiskVosInner
      */
     positionAmount?: string;
     /**
      *
      * @type {string}
-     * @memberof GetFuturesPositionRiskOfSubAccountV2Response1FuturePositionRiskVosInner
+     * @memberof GetFuturesPositionRiskOfSubAccountV2ResponseFuturePositionRiskVosInner
      */
     symbol?: string;
     /**
      *
      * @type {string}
-     * @memberof GetFuturesPositionRiskOfSubAccountV2Response1FuturePositionRiskVosInner
+     * @memberof GetFuturesPositionRiskOfSubAccountV2ResponseFuturePositionRiskVosInner
      */
     unrealizedProfit?: string;
 }

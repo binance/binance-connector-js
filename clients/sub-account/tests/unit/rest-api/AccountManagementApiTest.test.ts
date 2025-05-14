@@ -589,6 +589,21 @@ describe('AccountManagementApi', () => {
                         unrealizedProfit: '-0.01612295',
                     },
                 ],
+                deliveryPositionRiskVos: [
+                    {
+                        entryPrice: '9975.12000',
+                        markPrice: '9973.50770517',
+                        leverage: '20',
+                        isolated: 'false',
+                        isolatedWallet: '9973.50770517',
+                        isolatedMargin: '0.00000000',
+                        isAutoAddMargin: 'false',
+                        positionSide: 'BOTH',
+                        positionAmount: '1.230',
+                        symbol: 'BTCUSD_201225',
+                        unrealizedProfit: '-0.01612295',
+                    },
+                ],
             };
 
             const spy = jest.spyOn(client, 'getFuturesPositionRiskOfSubAccountV2').mockReturnValue(
@@ -622,6 +637,21 @@ describe('AccountManagementApi', () => {
                         markPrice: '9973.50770517',
                         positionAmount: '0.010',
                         symbol: 'BTCUSDT',
+                        unrealizedProfit: '-0.01612295',
+                    },
+                ],
+                deliveryPositionRiskVos: [
+                    {
+                        entryPrice: '9975.12000',
+                        markPrice: '9973.50770517',
+                        leverage: '20',
+                        isolated: 'false',
+                        isolatedWallet: '9973.50770517',
+                        isolatedMargin: '0.00000000',
+                        isAutoAddMargin: 'false',
+                        positionSide: 'BOTH',
+                        positionAmount: '1.230',
+                        symbol: 'BTCUSD_201225',
                         unrealizedProfit: '-0.01612295',
                     },
                 ],
@@ -777,14 +807,18 @@ describe('AccountManagementApi', () => {
             mockResponse = {
                 subAccounts: [
                     {
+                        subUserId: 123456,
                         email: 'testsub@gmail.com',
+                        remark: 'remark',
                         isFreeze: false,
                         createTime: 1544433328000,
                         isManagedSubAccount: false,
                         isAssetManagementSubAccount: false,
                     },
                     {
+                        subUserId: 1234567,
                         email: 'virtual@oxebmvfonoemail.com',
+                        remark: 'remarks',
                         isFreeze: false,
                         createTime: 1544433328000,
                         isManagedSubAccount: false,
@@ -819,14 +853,18 @@ describe('AccountManagementApi', () => {
             mockResponse = {
                 subAccounts: [
                     {
+                        subUserId: 123456,
                         email: 'testsub@gmail.com',
+                        remark: 'remark',
                         isFreeze: false,
                         createTime: 1544433328000,
                         isManagedSubAccount: false,
                         isAssetManagementSubAccount: false,
                     },
                     {
+                        subUserId: 1234567,
                         email: 'virtual@oxebmvfonoemail.com',
+                        remark: 'remarks',
                         isFreeze: false,
                         createTime: 1544433328000,
                         isManagedSubAccount: false,
@@ -878,7 +916,38 @@ describe('AccountManagementApi', () => {
                 recent30BusdTotal: '0',
                 recent30BusdFuturesTotal: '0',
                 recent30BusdMarginTotal: '0',
-                tradeInfoVos: [],
+                tradeInfoVos: [
+                    {
+                        userId: 1000138138384,
+                        btc: 0,
+                        btcFutures: 0,
+                        btcMargin: 0,
+                        busd: 0,
+                        busdFutures: 0,
+                        busdMargin: 0,
+                        date: 1676851200000,
+                    },
+                    {
+                        userId: 1000138138384,
+                        btc: 0,
+                        btcFutures: 0,
+                        btcMargin: 0,
+                        busd: 0,
+                        busdFutures: 0,
+                        busdMargin: 0,
+                        date: 1677110400000,
+                    },
+                    {
+                        userId: 1000138138384,
+                        btc: 0,
+                        btcFutures: 0,
+                        btcMargin: 0,
+                        busd: 0,
+                        busdFutures: 0,
+                        busdMargin: 0,
+                        date: 1677369600000,
+                    },
+                ],
             };
 
             const spy = jest.spyOn(client, 'querySubAccountTransactionStatistics').mockReturnValue(
@@ -908,7 +977,38 @@ describe('AccountManagementApi', () => {
                 recent30BusdTotal: '0',
                 recent30BusdFuturesTotal: '0',
                 recent30BusdMarginTotal: '0',
-                tradeInfoVos: [],
+                tradeInfoVos: [
+                    {
+                        userId: 1000138138384,
+                        btc: 0,
+                        btcFutures: 0,
+                        btcMargin: 0,
+                        busd: 0,
+                        busdFutures: 0,
+                        busdMargin: 0,
+                        date: 1676851200000,
+                    },
+                    {
+                        userId: 1000138138384,
+                        btc: 0,
+                        btcFutures: 0,
+                        btcMargin: 0,
+                        busd: 0,
+                        busdFutures: 0,
+                        busdMargin: 0,
+                        date: 1677110400000,
+                    },
+                    {
+                        userId: 1000138138384,
+                        btc: 0,
+                        btcFutures: 0,
+                        btcMargin: 0,
+                        busd: 0,
+                        busdFutures: 0,
+                        busdMargin: 0,
+                        date: 1677369600000,
+                    },
+                ],
             };
 
             const spy = jest.spyOn(client, 'querySubAccountTransactionStatistics').mockReturnValue(

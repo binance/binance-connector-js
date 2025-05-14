@@ -838,6 +838,7 @@ export class RestAPI {
      * Master account `SPOT` transfer to sub-account `MARGIN(Cross)`, `ISOLATED_MARGIN`
      * Sub-account `MARGIN(Cross)`, `ISOLATED_MARGIN` transfer to master account `SPOT`
      * Sub-account `MARGIN(Cross)` transfer to Sub-account `MARGIN(Cross)`
+     * `ALPHA` to `ALPHA`  (regardless of master or sub)
      *
      * Weight: 360
      *

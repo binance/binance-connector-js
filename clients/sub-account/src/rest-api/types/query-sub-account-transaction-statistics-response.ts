@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
  * Binance Sub Account REST API
@@ -17,18 +16,54 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { QuerySubAccountTransactionStatisticsResponse1 } from './query-sub-account-transaction-statistics-response1';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { QuerySubAccountTransactionStatisticsResponse2 } from './query-sub-account-transaction-statistics-response2';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { QuerySubAccountTransactionStatisticsResponse2TradeInfoVosInner } from './query-sub-account-transaction-statistics-response2-trade-info-vos-inner';
+import type { QuerySubAccountTransactionStatisticsResponseTradeInfoVosInner } from './query-sub-account-transaction-statistics-response-trade-info-vos-inner';
 
 /**
- * @type QuerySubAccountTransactionStatisticsResponse
+ *
  * @export
+ * @interface QuerySubAccountTransactionStatisticsResponse
  */
-export type QuerySubAccountTransactionStatisticsResponse =
-    | QuerySubAccountTransactionStatisticsResponse1
-    | QuerySubAccountTransactionStatisticsResponse2;
+export interface QuerySubAccountTransactionStatisticsResponse {
+    /**
+     *
+     * @type {string}
+     * @memberof QuerySubAccountTransactionStatisticsResponse
+     */
+    recent30BtcTotal?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof QuerySubAccountTransactionStatisticsResponse
+     */
+    recent30BtcFuturesTotal?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof QuerySubAccountTransactionStatisticsResponse
+     */
+    recent30BtcMarginTotal?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof QuerySubAccountTransactionStatisticsResponse
+     */
+    recent30BusdTotal?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof QuerySubAccountTransactionStatisticsResponse
+     */
+    recent30BusdFuturesTotal?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof QuerySubAccountTransactionStatisticsResponse
+     */
+    recent30BusdMarginTotal?: string;
+    /**
+     *
+     * @type {Array<QuerySubAccountTransactionStatisticsResponseTradeInfoVosInner>}
+     * @memberof QuerySubAccountTransactionStatisticsResponse
+     */
+    tradeInfoVos?: Array<QuerySubAccountTransactionStatisticsResponseTradeInfoVosInner>;
+}

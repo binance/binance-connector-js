@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
  * Binance Sub Account REST API
@@ -17,21 +16,27 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { GetFuturesPositionRiskOfSubAccountV2Response1 } from './get-futures-position-risk-of-sub-account-v2-response1';
+import type { GetFuturesPositionRiskOfSubAccountV2ResponseDeliveryPositionRiskVosInner } from './get-futures-position-risk-of-sub-account-v2-response-delivery-position-risk-vos-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { GetFuturesPositionRiskOfSubAccountV2Response1FuturePositionRiskVosInner } from './get-futures-position-risk-of-sub-account-v2-response1-future-position-risk-vos-inner';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { GetFuturesPositionRiskOfSubAccountV2Response2 } from './get-futures-position-risk-of-sub-account-v2-response2';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { GetFuturesPositionRiskOfSubAccountV2Response2DeliveryPositionRiskVosInner } from './get-futures-position-risk-of-sub-account-v2-response2-delivery-position-risk-vos-inner';
+import type { GetFuturesPositionRiskOfSubAccountV2ResponseFuturePositionRiskVosInner } from './get-futures-position-risk-of-sub-account-v2-response-future-position-risk-vos-inner';
 
 /**
- * @type GetFuturesPositionRiskOfSubAccountV2Response
+ *
  * @export
+ * @interface GetFuturesPositionRiskOfSubAccountV2Response
  */
-export type GetFuturesPositionRiskOfSubAccountV2Response =
-    | GetFuturesPositionRiskOfSubAccountV2Response1
-    | GetFuturesPositionRiskOfSubAccountV2Response2;
+export interface GetFuturesPositionRiskOfSubAccountV2Response {
+    /**
+     *
+     * @type {Array<GetFuturesPositionRiskOfSubAccountV2ResponseFuturePositionRiskVosInner>}
+     * @memberof GetFuturesPositionRiskOfSubAccountV2Response
+     */
+    futurePositionRiskVos?: Array<GetFuturesPositionRiskOfSubAccountV2ResponseFuturePositionRiskVosInner>;
+    /**
+     *
+     * @type {Array<GetFuturesPositionRiskOfSubAccountV2ResponseDeliveryPositionRiskVosInner>}
+     * @memberof GetFuturesPositionRiskOfSubAccountV2Response
+     */
+    deliveryPositionRiskVos?: Array<GetFuturesPositionRiskOfSubAccountV2ResponseDeliveryPositionRiskVosInner>;
+}

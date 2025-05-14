@@ -16,55 +16,55 @@
 /**
  *
  * @export
- * @interface QuerySubAccountTransactionStatisticsResponse2TradeInfoVosInner
+ * @interface QuerySubAccountTransactionStatisticsResponseTradeInfoVosInner
  */
-export interface QuerySubAccountTransactionStatisticsResponse2TradeInfoVosInner {
+export interface QuerySubAccountTransactionStatisticsResponseTradeInfoVosInner {
     /**
      *
      * @type {number}
-     * @memberof QuerySubAccountTransactionStatisticsResponse2TradeInfoVosInner
+     * @memberof QuerySubAccountTransactionStatisticsResponseTradeInfoVosInner
      */
     userId?: number;
     /**
      *
      * @type {number}
-     * @memberof QuerySubAccountTransactionStatisticsResponse2TradeInfoVosInner
+     * @memberof QuerySubAccountTransactionStatisticsResponseTradeInfoVosInner
      */
     btc?: number;
     /**
      *
      * @type {number}
-     * @memberof QuerySubAccountTransactionStatisticsResponse2TradeInfoVosInner
+     * @memberof QuerySubAccountTransactionStatisticsResponseTradeInfoVosInner
      */
     btcFutures?: number;
     /**
      *
      * @type {number}
-     * @memberof QuerySubAccountTransactionStatisticsResponse2TradeInfoVosInner
+     * @memberof QuerySubAccountTransactionStatisticsResponseTradeInfoVosInner
      */
     btcMargin?: number;
     /**
      *
      * @type {number}
-     * @memberof QuerySubAccountTransactionStatisticsResponse2TradeInfoVosInner
+     * @memberof QuerySubAccountTransactionStatisticsResponseTradeInfoVosInner
      */
     busd?: number;
     /**
      *
      * @type {number}
-     * @memberof QuerySubAccountTransactionStatisticsResponse2TradeInfoVosInner
+     * @memberof QuerySubAccountTransactionStatisticsResponseTradeInfoVosInner
      */
     busdFutures?: number;
     /**
      *
      * @type {number}
-     * @memberof QuerySubAccountTransactionStatisticsResponse2TradeInfoVosInner
+     * @memberof QuerySubAccountTransactionStatisticsResponseTradeInfoVosInner
      */
     busdMargin?: number;
     /**
      *
      * @type {number}
-     * @memberof QuerySubAccountTransactionStatisticsResponse2TradeInfoVosInner
+     * @memberof QuerySubAccountTransactionStatisticsResponseTradeInfoVosInner
      */
     date?: number;
 }

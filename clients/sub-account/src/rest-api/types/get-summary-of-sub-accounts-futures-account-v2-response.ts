@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
  * Binance Sub Account REST API
@@ -17,21 +16,27 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { GetSummaryOfSubAccountsFuturesAccountV2Response1 } from './get-summary-of-sub-accounts-futures-account-v2-response1';
+import type { GetSummaryOfSubAccountsFuturesAccountV2ResponseDeliveryAccountSummaryResp } from './get-summary-of-sub-accounts-futures-account-v2-response-delivery-account-summary-resp';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { GetSummaryOfSubAccountsFuturesAccountV2Response1FutureAccountSummaryResp } from './get-summary-of-sub-accounts-futures-account-v2-response1-future-account-summary-resp';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { GetSummaryOfSubAccountsFuturesAccountV2Response2 } from './get-summary-of-sub-accounts-futures-account-v2-response2';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { GetSummaryOfSubAccountsFuturesAccountV2Response2DeliveryAccountSummaryResp } from './get-summary-of-sub-accounts-futures-account-v2-response2-delivery-account-summary-resp';
+import type { GetSummaryOfSubAccountsFuturesAccountV2ResponseFutureAccountSummaryResp } from './get-summary-of-sub-accounts-futures-account-v2-response-future-account-summary-resp';
 
 /**
- * @type GetSummaryOfSubAccountsFuturesAccountV2Response
+ *
  * @export
+ * @interface GetSummaryOfSubAccountsFuturesAccountV2Response
  */
-export type GetSummaryOfSubAccountsFuturesAccountV2Response =
-    | GetSummaryOfSubAccountsFuturesAccountV2Response1
-    | GetSummaryOfSubAccountsFuturesAccountV2Response2;
+export interface GetSummaryOfSubAccountsFuturesAccountV2Response {
+    /**
+     *
+     * @type {GetSummaryOfSubAccountsFuturesAccountV2ResponseFutureAccountSummaryResp}
+     * @memberof GetSummaryOfSubAccountsFuturesAccountV2Response
+     */
+    futureAccountSummaryResp?: GetSummaryOfSubAccountsFuturesAccountV2ResponseFutureAccountSummaryResp;
+    /**
+     *
+     * @type {GetSummaryOfSubAccountsFuturesAccountV2ResponseDeliveryAccountSummaryResp}
+     * @memberof GetSummaryOfSubAccountsFuturesAccountV2Response
+     */
+    deliveryAccountSummaryResp?: GetSummaryOfSubAccountsFuturesAccountV2ResponseDeliveryAccountSummaryResp;
+}

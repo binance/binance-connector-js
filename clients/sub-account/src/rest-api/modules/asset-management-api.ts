@@ -1291,12 +1291,13 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * Master account `SPOT` transfer to sub-account `MARGIN(Cross)`, `ISOLATED_MARGIN`
          * Sub-account `MARGIN(Cross)`, `ISOLATED_MARGIN` transfer to master account `SPOT`
          * Sub-account `MARGIN(Cross)` transfer to Sub-account `MARGIN(Cross)`
+         * `ALPHA` to `ALPHA`  (regardless of master or sub)
          *
          * Weight: 360
          *
          * @summary Universal Transfer (For Master Account) (USER_DATA)
-         * @param {string} fromAccountType "SPOT","USDT_FUTURE","COIN_FUTURE","MARGIN"(Cross),"ISOLATED_MARGIN"
-         * @param {string} toAccountType "SPOT","USDT_FUTURE","COIN_FUTURE","MARGIN"(Cross),"ISOLATED_MARGIN"
+         * @param {string} fromAccountType "SPOT","USDT_FUTURE","COIN_FUTURE","MARGIN"(Cross),"ISOLATED_MARGIN","ALPHA"
+         * @param {string} toAccountType "SPOT","USDT_FUTURE","COIN_FUTURE","MARGIN"(Cross),"ISOLATED_MARGIN","ALPHA"
          * @param {string} asset
          * @param {number} amount
          * @param {string} [fromEmail]
@@ -1745,6 +1746,7 @@ export interface AssetManagementApiInterface {
      * Master account `SPOT` transfer to sub-account `MARGIN(Cross)`, `ISOLATED_MARGIN`
      * Sub-account `MARGIN(Cross)`, `ISOLATED_MARGIN` transfer to master account `SPOT`
      * Sub-account `MARGIN(Cross)` transfer to Sub-account `MARGIN(Cross)`
+     * `ALPHA` to `ALPHA`  (regardless of master or sub)
      *
      * Weight: 360
      *
@@ -2583,14 +2585,14 @@ export interface TransferToSubAccountOfSameMasterRequest {
  */
 export interface UniversalTransferRequest {
     /**
-     * "SPOT","USDT_FUTURE","COIN_FUTURE","MARGIN"(Cross),"ISOLATED_MARGIN"
+     * "SPOT","USDT_FUTURE","COIN_FUTURE","MARGIN"(Cross),"ISOLATED_MARGIN","ALPHA"
      * @type {string}
      * @memberof AssetManagementApiUniversalTransfer
      */
     readonly fromAccountType: string;
 
     /**
-     * "SPOT","USDT_FUTURE","COIN_FUTURE","MARGIN"(Cross),"ISOLATED_MARGIN"
+     * "SPOT","USDT_FUTURE","COIN_FUTURE","MARGIN"(Cross),"ISOLATED_MARGIN","ALPHA"
      * @type {string}
      * @memberof AssetManagementApiUniversalTransfer
      */
@@ -3419,6 +3421,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      * Master account `SPOT` transfer to sub-account `MARGIN(Cross)`, `ISOLATED_MARGIN`
      * Sub-account `MARGIN(Cross)`, `ISOLATED_MARGIN` transfer to master account `SPOT`
      * Sub-account `MARGIN(Cross)` transfer to Sub-account `MARGIN(Cross)`
+     * `ALPHA` to `ALPHA`  (regardless of master or sub)
      *
      * Weight: 360
      *

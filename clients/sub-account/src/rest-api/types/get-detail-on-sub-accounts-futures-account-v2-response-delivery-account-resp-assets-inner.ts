@@ -16,61 +16,61 @@
 /**
  *
  * @export
- * @interface GetDetailOnSubAccountsFuturesAccountV2Response1FutureAccountRespAssetsInner
+ * @interface GetDetailOnSubAccountsFuturesAccountV2ResponseDeliveryAccountRespAssetsInner
  */
-export interface GetDetailOnSubAccountsFuturesAccountV2Response1FutureAccountRespAssetsInner {
+export interface GetDetailOnSubAccountsFuturesAccountV2ResponseDeliveryAccountRespAssetsInner {
     /**
      *
      * @type {string}
-     * @memberof GetDetailOnSubAccountsFuturesAccountV2Response1FutureAccountRespAssetsInner
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseDeliveryAccountRespAssetsInner
      */
     asset?: string;
     /**
      *
      * @type {string}
-     * @memberof GetDetailOnSubAccountsFuturesAccountV2Response1FutureAccountRespAssetsInner
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseDeliveryAccountRespAssetsInner
      */
     initialMargin?: string;
     /**
      *
      * @type {string}
-     * @memberof GetDetailOnSubAccountsFuturesAccountV2Response1FutureAccountRespAssetsInner
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseDeliveryAccountRespAssetsInner
      */
     maintenanceMargin?: string;
     /**
      *
      * @type {string}
-     * @memberof GetDetailOnSubAccountsFuturesAccountV2Response1FutureAccountRespAssetsInner
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseDeliveryAccountRespAssetsInner
      */
     marginBalance?: string;
     /**
      *
      * @type {string}
-     * @memberof GetDetailOnSubAccountsFuturesAccountV2Response1FutureAccountRespAssetsInner
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseDeliveryAccountRespAssetsInner
      */
     maxWithdrawAmount?: string;
     /**
      *
      * @type {string}
-     * @memberof GetDetailOnSubAccountsFuturesAccountV2Response1FutureAccountRespAssetsInner
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseDeliveryAccountRespAssetsInner
      */
     openOrderInitialMargin?: string;
     /**
      *
      * @type {string}
-     * @memberof GetDetailOnSubAccountsFuturesAccountV2Response1FutureAccountRespAssetsInner
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseDeliveryAccountRespAssetsInner
      */
     positionInitialMargin?: string;
     /**
      *
      * @type {string}
-     * @memberof GetDetailOnSubAccountsFuturesAccountV2Response1FutureAccountRespAssetsInner
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseDeliveryAccountRespAssetsInner
      */
     unrealizedProfit?: string;
     /**
      *
      * @type {string}
-     * @memberof GetDetailOnSubAccountsFuturesAccountV2Response1FutureAccountRespAssetsInner
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseDeliveryAccountRespAssetsInner
      */
     walletBalance?: string;
 }

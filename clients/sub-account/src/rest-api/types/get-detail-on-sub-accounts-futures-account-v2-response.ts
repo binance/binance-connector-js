@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
  * Binance Sub Account REST API
@@ -17,21 +16,27 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { GetDetailOnSubAccountsFuturesAccountV2Response1 } from './get-detail-on-sub-accounts-futures-account-v2-response1';
+import type { GetDetailOnSubAccountsFuturesAccountV2ResponseDeliveryAccountResp } from './get-detail-on-sub-accounts-futures-account-v2-response-delivery-account-resp';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { GetDetailOnSubAccountsFuturesAccountV2Response1FutureAccountResp } from './get-detail-on-sub-accounts-futures-account-v2-response1-future-account-resp';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { GetDetailOnSubAccountsFuturesAccountV2Response2 } from './get-detail-on-sub-accounts-futures-account-v2-response2';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { GetDetailOnSubAccountsFuturesAccountV2Response2DeliveryAccountResp } from './get-detail-on-sub-accounts-futures-account-v2-response2-delivery-account-resp';
+import type { GetDetailOnSubAccountsFuturesAccountV2ResponseFutureAccountResp } from './get-detail-on-sub-accounts-futures-account-v2-response-future-account-resp';
 
 /**
- * @type GetDetailOnSubAccountsFuturesAccountV2Response
+ *
  * @export
+ * @interface GetDetailOnSubAccountsFuturesAccountV2Response
  */
-export type GetDetailOnSubAccountsFuturesAccountV2Response =
-    | GetDetailOnSubAccountsFuturesAccountV2Response1
-    | GetDetailOnSubAccountsFuturesAccountV2Response2;
+export interface GetDetailOnSubAccountsFuturesAccountV2Response {
+    /**
+     *
+     * @type {GetDetailOnSubAccountsFuturesAccountV2ResponseFutureAccountResp}
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2Response
+     */
+    futureAccountResp?: GetDetailOnSubAccountsFuturesAccountV2ResponseFutureAccountResp;
+    /**
+     *
+     * @type {GetDetailOnSubAccountsFuturesAccountV2ResponseDeliveryAccountResp}
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2Response
+     */
+    deliveryAccountResp?: GetDetailOnSubAccountsFuturesAccountV2ResponseDeliveryAccountResp;
+}

@@ -21,103 +21,97 @@ import type { GetDetailOnSubAccountsFuturesAccountV2ResponseFutureAccountRespAss
 /**
  *
  * @export
- * @interface GetDetailOnSubAccountsFuturesAccountResponse
+ * @interface GetDetailOnSubAccountsFuturesAccountV2ResponseFutureAccountResp
  */
-export interface GetDetailOnSubAccountsFuturesAccountResponse {
+export interface GetDetailOnSubAccountsFuturesAccountV2ResponseFutureAccountResp {
     /**
      *
      * @type {string}
-     * @memberof GetDetailOnSubAccountsFuturesAccountResponse
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseFutureAccountResp
      */
     email?: string;
     /**
      *
-     * @type {string}
-     * @memberof GetDetailOnSubAccountsFuturesAccountResponse
-     */
-    asset?: string;
-    /**
-     *
      * @type {Array<GetDetailOnSubAccountsFuturesAccountV2ResponseFutureAccountRespAssetsInner>}
-     * @memberof GetDetailOnSubAccountsFuturesAccountResponse
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseFutureAccountResp
      */
     assets?: Array<GetDetailOnSubAccountsFuturesAccountV2ResponseFutureAccountRespAssetsInner>;
     /**
      *
      * @type {boolean}
-     * @memberof GetDetailOnSubAccountsFuturesAccountResponse
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseFutureAccountResp
      */
     canDeposit?: boolean;
     /**
      *
      * @type {boolean}
-     * @memberof GetDetailOnSubAccountsFuturesAccountResponse
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseFutureAccountResp
      */
     canTrade?: boolean;
     /**
      *
      * @type {boolean}
-     * @memberof GetDetailOnSubAccountsFuturesAccountResponse
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseFutureAccountResp
      */
     canWithdraw?: boolean;
     /**
      *
      * @type {number}
-     * @memberof GetDetailOnSubAccountsFuturesAccountResponse
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseFutureAccountResp
      */
     feeTier?: number;
     /**
      *
      * @type {string}
-     * @memberof GetDetailOnSubAccountsFuturesAccountResponse
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseFutureAccountResp
      */
     maxWithdrawAmount?: string;
     /**
      *
      * @type {string}
-     * @memberof GetDetailOnSubAccountsFuturesAccountResponse
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseFutureAccountResp
      */
     totalInitialMargin?: string;
     /**
      *
      * @type {string}
-     * @memberof GetDetailOnSubAccountsFuturesAccountResponse
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseFutureAccountResp
      */
     totalMaintenanceMargin?: string;
     /**
      *
      * @type {string}
-     * @memberof GetDetailOnSubAccountsFuturesAccountResponse
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseFutureAccountResp
      */
     totalMarginBalance?: string;
     /**
      *
      * @type {string}
-     * @memberof GetDetailOnSubAccountsFuturesAccountResponse
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseFutureAccountResp
      */
     totalOpenOrderInitialMargin?: string;
     /**
      *
      * @type {string}
-     * @memberof GetDetailOnSubAccountsFuturesAccountResponse
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseFutureAccountResp
      */
     totalPositionInitialMargin?: string;
     /**
      *
      * @type {string}
-     * @memberof GetDetailOnSubAccountsFuturesAccountResponse
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseFutureAccountResp
      */
     totalUnrealizedProfit?: string;
     /**
      *
      * @type {string}
-     * @memberof GetDetailOnSubAccountsFuturesAccountResponse
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseFutureAccountResp
      */
     totalWalletBalance?: string;
     /**
      *
      * @type {number}
-     * @memberof GetDetailOnSubAccountsFuturesAccountResponse
+     * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseFutureAccountResp
      */
     updateTime?: number;
 }

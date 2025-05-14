@@ -833,6 +833,48 @@ describe('ManagedSubAccountApi', () => {
                         type: 'spot',
                         updateTime: 1576281599000,
                     },
+                    {
+                        data: {
+                            marginLevel: '2748.02909813',
+                            totalAssetOfBtc: '0.00274803',
+                            totalLiabilityOfBtc: '0.00000100',
+                            totalNetAssetOfBtc: '0.00274750',
+                            userAssets: [
+                                {
+                                    asset: 'XRP',
+                                    borrowed: '0.00000000',
+                                    free: '1.00000000',
+                                    interest: '0.00000000',
+                                    locked: '0.00000000',
+                                    netAsset: '1.00000000',
+                                },
+                            ],
+                        },
+                        type: 'margin',
+                        updateTime: 1576281599000,
+                    },
+                    {
+                        data: {
+                            assets: [
+                                {
+                                    asset: 'USDT',
+                                    marginBalance: '118.99782335',
+                                    walletBalance: '120.23811389',
+                                },
+                            ],
+                            position: [
+                                {
+                                    entryPrice: '7130.41000000',
+                                    markPrice: '7257.66239673',
+                                    positionAmt: '0.01000000',
+                                    symbol: 'BTCUSDT',
+                                    unRealizedProfit: '1.24029054',
+                                },
+                            ],
+                        },
+                        type: 'futures',
+                        updateTime: 1576281599000,
+                    },
                 ],
             };
 
@@ -873,6 +915,48 @@ describe('ManagedSubAccountApi', () => {
                             totalAssetOfBtc: '0.09942700',
                         },
                         type: 'spot',
+                        updateTime: 1576281599000,
+                    },
+                    {
+                        data: {
+                            marginLevel: '2748.02909813',
+                            totalAssetOfBtc: '0.00274803',
+                            totalLiabilityOfBtc: '0.00000100',
+                            totalNetAssetOfBtc: '0.00274750',
+                            userAssets: [
+                                {
+                                    asset: 'XRP',
+                                    borrowed: '0.00000000',
+                                    free: '1.00000000',
+                                    interest: '0.00000000',
+                                    locked: '0.00000000',
+                                    netAsset: '1.00000000',
+                                },
+                            ],
+                        },
+                        type: 'margin',
+                        updateTime: 1576281599000,
+                    },
+                    {
+                        data: {
+                            assets: [
+                                {
+                                    asset: 'USDT',
+                                    marginBalance: '118.99782335',
+                                    walletBalance: '120.23811389',
+                                },
+                            ],
+                            position: [
+                                {
+                                    entryPrice: '7130.41000000',
+                                    markPrice: '7257.66239673',
+                                    positionAmt: '0.01000000',
+                                    symbol: 'BTCUSDT',
+                                    unRealizedProfit: '1.24029054',
+                                },
+                            ],
+                        },
+                        type: 'futures',
                         updateTime: 1576281599000,
                     },
                 ],

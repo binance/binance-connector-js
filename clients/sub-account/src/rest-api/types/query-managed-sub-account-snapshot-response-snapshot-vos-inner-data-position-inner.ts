@@ -16,37 +16,37 @@
 /**
  *
  * @export
- * @interface QueryManagedSubAccountSnapshotResponse3SnapshotVosInnerDataPositionInner
+ * @interface QueryManagedSubAccountSnapshotResponseSnapshotVosInnerDataPositionInner
  */
-export interface QueryManagedSubAccountSnapshotResponse3SnapshotVosInnerDataPositionInner {
+export interface QueryManagedSubAccountSnapshotResponseSnapshotVosInnerDataPositionInner {
     /**
      *
      * @type {string}
-     * @memberof QueryManagedSubAccountSnapshotResponse3SnapshotVosInnerDataPositionInner
+     * @memberof QueryManagedSubAccountSnapshotResponseSnapshotVosInnerDataPositionInner
      */
     entryPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryManagedSubAccountSnapshotResponse3SnapshotVosInnerDataPositionInner
+     * @memberof QueryManagedSubAccountSnapshotResponseSnapshotVosInnerDataPositionInner
      */
     markPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryManagedSubAccountSnapshotResponse3SnapshotVosInnerDataPositionInner
+     * @memberof QueryManagedSubAccountSnapshotResponseSnapshotVosInnerDataPositionInner
      */
     positionAmt?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryManagedSubAccountSnapshotResponse3SnapshotVosInnerDataPositionInner
+     * @memberof QueryManagedSubAccountSnapshotResponseSnapshotVosInnerDataPositionInner
      */
     symbol?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryManagedSubAccountSnapshotResponse3SnapshotVosInnerDataPositionInner
+     * @memberof QueryManagedSubAccountSnapshotResponseSnapshotVosInnerDataPositionInner
      */
     unRealizedProfit?: string;
 }

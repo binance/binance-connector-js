@@ -16,43 +16,43 @@
 /**
  *
  * @export
- * @interface QueryManagedSubAccountSnapshotResponse2SnapshotVosInnerDataUserAssetsInner
+ * @interface QueryManagedSubAccountSnapshotResponseSnapshotVosInnerDataUserAssetsInner
  */
-export interface QueryManagedSubAccountSnapshotResponse2SnapshotVosInnerDataUserAssetsInner {
+export interface QueryManagedSubAccountSnapshotResponseSnapshotVosInnerDataUserAssetsInner {
     /**
      *
      * @type {string}
-     * @memberof QueryManagedSubAccountSnapshotResponse2SnapshotVosInnerDataUserAssetsInner
+     * @memberof QueryManagedSubAccountSnapshotResponseSnapshotVosInnerDataUserAssetsInner
      */
     asset?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryManagedSubAccountSnapshotResponse2SnapshotVosInnerDataUserAssetsInner
+     * @memberof QueryManagedSubAccountSnapshotResponseSnapshotVosInnerDataUserAssetsInner
      */
     borrowed?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryManagedSubAccountSnapshotResponse2SnapshotVosInnerDataUserAssetsInner
+     * @memberof QueryManagedSubAccountSnapshotResponseSnapshotVosInnerDataUserAssetsInner
      */
     free?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryManagedSubAccountSnapshotResponse2SnapshotVosInnerDataUserAssetsInner
+     * @memberof QueryManagedSubAccountSnapshotResponseSnapshotVosInnerDataUserAssetsInner
      */
     interest?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryManagedSubAccountSnapshotResponse2SnapshotVosInnerDataUserAssetsInner
+     * @memberof QueryManagedSubAccountSnapshotResponseSnapshotVosInnerDataUserAssetsInner
      */
     locked?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryManagedSubAccountSnapshotResponse2SnapshotVosInnerDataUserAssetsInner
+     * @memberof QueryManagedSubAccountSnapshotResponseSnapshotVosInnerDataUserAssetsInner
      */
     netAsset?: string;
 }

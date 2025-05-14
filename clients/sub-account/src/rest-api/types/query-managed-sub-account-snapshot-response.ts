@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
  * Binance Sub Account REST API
@@ -17,22 +16,30 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { QueryManagedSubAccountSnapshotResponse1 } from './query-managed-sub-account-snapshot-response1';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { QueryManagedSubAccountSnapshotResponse2 } from './query-managed-sub-account-snapshot-response2';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { QueryManagedSubAccountSnapshotResponse3 } from './query-managed-sub-account-snapshot-response3';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { QueryManagedSubAccountSnapshotResponse3SnapshotVosInner } from './query-managed-sub-account-snapshot-response3-snapshot-vos-inner';
+import type { QueryManagedSubAccountSnapshotResponseSnapshotVosInner } from './query-managed-sub-account-snapshot-response-snapshot-vos-inner';
 
 /**
- * @type QueryManagedSubAccountSnapshotResponse
+ *
  * @export
+ * @interface QueryManagedSubAccountSnapshotResponse
  */
-export type QueryManagedSubAccountSnapshotResponse =
-    | QueryManagedSubAccountSnapshotResponse1
-    | QueryManagedSubAccountSnapshotResponse2
-    | QueryManagedSubAccountSnapshotResponse3;
+export interface QueryManagedSubAccountSnapshotResponse {
+    /**
+     *
+     * @type {number}
+     * @memberof QueryManagedSubAccountSnapshotResponse
+     */
+    code?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof QueryManagedSubAccountSnapshotResponse
+     */
+    msg?: string;
+    /**
+     *
+     * @type {Array<QueryManagedSubAccountSnapshotResponseSnapshotVosInner>}
+     * @memberof QueryManagedSubAccountSnapshotResponse
+     */
+    snapshotVos?: Array<QueryManagedSubAccountSnapshotResponseSnapshotVosInner>;
+}

@@ -21,10 +21,22 @@
 export interface QuerySubAccountListResponseSubAccountsInner {
     /**
      *
+     * @type {number}
+     * @memberof QuerySubAccountListResponseSubAccountsInner
+     */
+    subUserId?: number;
+    /**
+     *
      * @type {string}
      * @memberof QuerySubAccountListResponseSubAccountsInner
      */
     email?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof QuerySubAccountListResponseSubAccountsInner
+     */
+    remark?: string;
     /**
      *
      * @type {boolean}

@@ -16,7 +16,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { GetFuturesPositionRiskOfSubAccountV2Response1FuturePositionRiskVosInner } from './get-futures-position-risk-of-sub-account-v2-response1-future-position-risk-vos-inner';
+import type { GetFuturesPositionRiskOfSubAccountV2ResponseFuturePositionRiskVosInner } from './get-futures-position-risk-of-sub-account-v2-response-future-position-risk-vos-inner';
 
 /**
  *
@@ -24,4 +24,4 @@ import type { GetFuturesPositionRiskOfSubAccountV2Response1FuturePositionRiskVos
  * @interface GetFuturesPositionRiskOfSubAccountResponse
  */
 export interface GetFuturesPositionRiskOfSubAccountResponse
-    extends Array<GetFuturesPositionRiskOfSubAccountV2Response1FuturePositionRiskVosInner> {}
+    extends Array<GetFuturesPositionRiskOfSubAccountV2ResponseFuturePositionRiskVosInner> {}

@@ -392,6 +392,27 @@ describe('AssetManagementApi', () => {
                     totalWalletBalance: '0.88308000',
                     updateTime: 1576756674610,
                 },
+                deliveryAccountResp: {
+                    email: 'abc@test.com',
+                    assets: [
+                        {
+                            asset: 'BTC',
+                            initialMargin: '0.00000000',
+                            maintenanceMargin: '0.00000000',
+                            marginBalance: '0.88308000',
+                            maxWithdrawAmount: '0.88308000',
+                            openOrderInitialMargin: '0.00000000',
+                            positionInitialMargin: '0.00000000',
+                            unrealizedProfit: '0.00000000',
+                            walletBalance: '0.88308000',
+                        },
+                    ],
+                    canDeposit: true,
+                    canTrade: true,
+                    canWithdraw: true,
+                    feeTier: 2,
+                    updateTime: 1598959682001,
+                },
             };
 
             const spy = jest
@@ -446,6 +467,27 @@ describe('AssetManagementApi', () => {
                     totalUnrealizedProfit: '0.00000000',
                     totalWalletBalance: '0.88308000',
                     updateTime: 1576756674610,
+                },
+                deliveryAccountResp: {
+                    email: 'abc@test.com',
+                    assets: [
+                        {
+                            asset: 'BTC',
+                            initialMargin: '0.00000000',
+                            maintenanceMargin: '0.00000000',
+                            marginBalance: '0.88308000',
+                            maxWithdrawAmount: '0.88308000',
+                            openOrderInitialMargin: '0.00000000',
+                            positionInitialMargin: '0.00000000',
+                            unrealizedProfit: '0.00000000',
+                            walletBalance: '0.88308000',
+                        },
+                    ],
+                    canDeposit: true,
+                    canTrade: true,
+                    canWithdraw: true,
+                    feeTier: 2,
+                    updateTime: 1598959682001,
                 },
             };
 
@@ -1304,6 +1346,28 @@ describe('AssetManagementApi', () => {
                         },
                     ],
                 },
+                deliveryAccountSummaryResp: {
+                    totalMarginBalanceOfBTC: '25.03221121',
+                    totalUnrealizedProfitOfBTC: '0.12233410',
+                    totalWalletBalanceOfBTC: '22.15879444',
+                    asset: 'BTC',
+                    subAccountList: [
+                        {
+                            email: '123@test.com',
+                            totalMarginBalance: '22.12659734',
+                            totalUnrealizedProfit: '0.00000000',
+                            totalWalletBalance: '22.12659734',
+                            asset: 'BTC',
+                        },
+                        {
+                            email: '345@test.com',
+                            totalMarginBalance: '0.90575887',
+                            totalUnrealizedProfit: '0.03219710',
+                            totalWalletBalance: '0.87356177',
+                            asset: 'BTC',
+                        },
+                    ],
+                },
             };
 
             const spy = jest
@@ -1362,6 +1426,28 @@ describe('AssetManagementApi', () => {
                             totalUnrealizedProfit: '0.03219710',
                             totalWalletBalance: '0.87356177',
                             asset: 'USD',
+                        },
+                    ],
+                },
+                deliveryAccountSummaryResp: {
+                    totalMarginBalanceOfBTC: '25.03221121',
+                    totalUnrealizedProfitOfBTC: '0.12233410',
+                    totalWalletBalanceOfBTC: '22.15879444',
+                    asset: 'BTC',
+                    subAccountList: [
+                        {
+                            email: '123@test.com',
+                            totalMarginBalance: '22.12659734',
+                            totalUnrealizedProfit: '0.00000000',
+                            totalWalletBalance: '22.12659734',
+                            asset: 'BTC',
+                        },
+                        {
+                            email: '345@test.com',
+                            totalMarginBalance: '0.90575887',
+                            totalUnrealizedProfit: '0.03219710',
+                            totalWalletBalance: '0.87356177',
+                            asset: 'BTC',
                         },
                     ],
                 },

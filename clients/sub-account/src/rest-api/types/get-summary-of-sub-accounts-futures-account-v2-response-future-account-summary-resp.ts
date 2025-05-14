@@ -21,61 +21,61 @@ import type { GetSummaryOfSubAccountsFuturesAccountV2ResponseFutureAccountSummar
 /**
  *
  * @export
- * @interface GetSummaryOfSubAccountsFuturesAccountResponse
+ * @interface GetSummaryOfSubAccountsFuturesAccountV2ResponseFutureAccountSummaryResp
  */
-export interface GetSummaryOfSubAccountsFuturesAccountResponse {
+export interface GetSummaryOfSubAccountsFuturesAccountV2ResponseFutureAccountSummaryResp {
     /**
      *
      * @type {string}
-     * @memberof GetSummaryOfSubAccountsFuturesAccountResponse
+     * @memberof GetSummaryOfSubAccountsFuturesAccountV2ResponseFutureAccountSummaryResp
      */
     totalInitialMargin?: string;
     /**
      *
      * @type {string}
-     * @memberof GetSummaryOfSubAccountsFuturesAccountResponse
+     * @memberof GetSummaryOfSubAccountsFuturesAccountV2ResponseFutureAccountSummaryResp
      */
     totalMaintenanceMargin?: string;
     /**
      *
      * @type {string}
-     * @memberof GetSummaryOfSubAccountsFuturesAccountResponse
+     * @memberof GetSummaryOfSubAccountsFuturesAccountV2ResponseFutureAccountSummaryResp
      */
     totalMarginBalance?: string;
     /**
      *
      * @type {string}
-     * @memberof GetSummaryOfSubAccountsFuturesAccountResponse
+     * @memberof GetSummaryOfSubAccountsFuturesAccountV2ResponseFutureAccountSummaryResp
      */
     totalOpenOrderInitialMargin?: string;
     /**
      *
      * @type {string}
-     * @memberof GetSummaryOfSubAccountsFuturesAccountResponse
+     * @memberof GetSummaryOfSubAccountsFuturesAccountV2ResponseFutureAccountSummaryResp
      */
     totalPositionInitialMargin?: string;
     /**
      *
      * @type {string}
-     * @memberof GetSummaryOfSubAccountsFuturesAccountResponse
+     * @memberof GetSummaryOfSubAccountsFuturesAccountV2ResponseFutureAccountSummaryResp
      */
     totalUnrealizedProfit?: string;
     /**
      *
      * @type {string}
-     * @memberof GetSummaryOfSubAccountsFuturesAccountResponse
+     * @memberof GetSummaryOfSubAccountsFuturesAccountV2ResponseFutureAccountSummaryResp
      */
     totalWalletBalance?: string;
     /**
      *
      * @type {string}
-     * @memberof GetSummaryOfSubAccountsFuturesAccountResponse
+     * @memberof GetSummaryOfSubAccountsFuturesAccountV2ResponseFutureAccountSummaryResp
      */
     asset?: string;
     /**
      *
      * @type {Array<GetSummaryOfSubAccountsFuturesAccountV2ResponseFutureAccountSummaryRespSubAccountListInner>}
-     * @memberof GetSummaryOfSubAccountsFuturesAccountResponse
+     * @memberof GetSummaryOfSubAccountsFuturesAccountV2ResponseFutureAccountSummaryResp
      */
     subAccountList?: Array<GetSummaryOfSubAccountsFuturesAccountV2ResponseFutureAccountSummaryRespSubAccountListInner>;
 }

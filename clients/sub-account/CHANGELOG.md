@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.0.0 - 2025-05-14
+
+### Changed
+
+- Updated response types.
+
 ## 4.0.0 - 2025-04-23
 
 ### Changed
