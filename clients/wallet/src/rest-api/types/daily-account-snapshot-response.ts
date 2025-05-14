@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
  * Binance Wallet REST API
@@ -17,22 +16,30 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { DailyAccountSnapshotResponse1 } from './daily-account-snapshot-response1';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { DailyAccountSnapshotResponse2 } from './daily-account-snapshot-response2';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { DailyAccountSnapshotResponse3 } from './daily-account-snapshot-response3';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { DailyAccountSnapshotResponse3SnapshotVosInner } from './daily-account-snapshot-response3-snapshot-vos-inner';
+import type { DailyAccountSnapshotResponseSnapshotVosInner } from './daily-account-snapshot-response-snapshot-vos-inner';
 
 /**
- * @type DailyAccountSnapshotResponse
+ *
  * @export
+ * @interface DailyAccountSnapshotResponse
  */
-export type DailyAccountSnapshotResponse =
-    | DailyAccountSnapshotResponse1
-    | DailyAccountSnapshotResponse2
-    | DailyAccountSnapshotResponse3;
+export interface DailyAccountSnapshotResponse {
+    /**
+     *
+     * @type {number}
+     * @memberof DailyAccountSnapshotResponse
+     */
+    code?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof DailyAccountSnapshotResponse
+     */
+    msg?: string;
+    /**
+     *
+     * @type {Array<DailyAccountSnapshotResponseSnapshotVosInner>}
+     * @memberof DailyAccountSnapshotResponse
+     */
+    snapshotVos?: Array<DailyAccountSnapshotResponseSnapshotVosInner>;
+}

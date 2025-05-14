@@ -16,25 +16,25 @@
 /**
  *
  * @export
- * @interface DailyAccountSnapshotResponse3SnapshotVosInnerDataAssetsInner
+ * @interface DailyAccountSnapshotResponseSnapshotVosInnerDataBalancesInner
  */
-export interface DailyAccountSnapshotResponse3SnapshotVosInnerDataAssetsInner {
+export interface DailyAccountSnapshotResponseSnapshotVosInnerDataBalancesInner {
     /**
      *
      * @type {string}
-     * @memberof DailyAccountSnapshotResponse3SnapshotVosInnerDataAssetsInner
+     * @memberof DailyAccountSnapshotResponseSnapshotVosInnerDataBalancesInner
      */
     asset?: string;
     /**
      *
      * @type {string}
-     * @memberof DailyAccountSnapshotResponse3SnapshotVosInnerDataAssetsInner
+     * @memberof DailyAccountSnapshotResponseSnapshotVosInnerDataBalancesInner
      */
-    marginBalance?: string;
+    free?: string;
     /**
      *
      * @type {string}
-     * @memberof DailyAccountSnapshotResponse3SnapshotVosInnerDataAssetsInner
+     * @memberof DailyAccountSnapshotResponseSnapshotVosInnerDataBalancesInner
      */
-    walletBalance?: string;
+    locked?: string;
 }

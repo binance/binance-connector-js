@@ -16,37 +16,37 @@
 /**
  *
  * @export
- * @interface DailyAccountSnapshotResponse3SnapshotVosInnerDataPositionInner
+ * @interface DailyAccountSnapshotResponseSnapshotVosInnerDataPositionInner
  */
-export interface DailyAccountSnapshotResponse3SnapshotVosInnerDataPositionInner {
+export interface DailyAccountSnapshotResponseSnapshotVosInnerDataPositionInner {
     /**
      *
      * @type {string}
-     * @memberof DailyAccountSnapshotResponse3SnapshotVosInnerDataPositionInner
+     * @memberof DailyAccountSnapshotResponseSnapshotVosInnerDataPositionInner
      */
     entryPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof DailyAccountSnapshotResponse3SnapshotVosInnerDataPositionInner
+     * @memberof DailyAccountSnapshotResponseSnapshotVosInnerDataPositionInner
      */
     markPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof DailyAccountSnapshotResponse3SnapshotVosInnerDataPositionInner
+     * @memberof DailyAccountSnapshotResponseSnapshotVosInnerDataPositionInner
      */
     positionAmt?: string;
     /**
      *
      * @type {string}
-     * @memberof DailyAccountSnapshotResponse3SnapshotVosInnerDataPositionInner
+     * @memberof DailyAccountSnapshotResponseSnapshotVosInnerDataPositionInner
      */
     symbol?: string;
     /**
      *
      * @type {string}
-     * @memberof DailyAccountSnapshotResponse3SnapshotVosInnerDataPositionInner
+     * @memberof DailyAccountSnapshotResponseSnapshotVosInnerDataPositionInner
      */
     unRealizedProfit?: string;
 }

@@ -16,30 +16,30 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { DailyAccountSnapshotResponse1SnapshotVosInnerData } from './daily-account-snapshot-response1-snapshot-vos-inner-data';
+import type { DailyAccountSnapshotResponseSnapshotVosInnerData } from './daily-account-snapshot-response-snapshot-vos-inner-data';
 
 /**
  *
  * @export
- * @interface DailyAccountSnapshotResponse1SnapshotVosInner
+ * @interface DailyAccountSnapshotResponseSnapshotVosInner
  */
-export interface DailyAccountSnapshotResponse1SnapshotVosInner {
+export interface DailyAccountSnapshotResponseSnapshotVosInner {
     /**
      *
-     * @type {DailyAccountSnapshotResponse1SnapshotVosInnerData}
-     * @memberof DailyAccountSnapshotResponse1SnapshotVosInner
+     * @type {DailyAccountSnapshotResponseSnapshotVosInnerData}
+     * @memberof DailyAccountSnapshotResponseSnapshotVosInner
      */
-    data?: DailyAccountSnapshotResponse1SnapshotVosInnerData;
+    data?: DailyAccountSnapshotResponseSnapshotVosInnerData;
     /**
      *
      * @type {string}
-     * @memberof DailyAccountSnapshotResponse1SnapshotVosInner
+     * @memberof DailyAccountSnapshotResponseSnapshotVosInner
      */
     type?: string;
     /**
      *
      * @type {number}
-     * @memberof DailyAccountSnapshotResponse1SnapshotVosInner
+     * @memberof DailyAccountSnapshotResponseSnapshotVosInner
      */
     updateTime?: number;
 }

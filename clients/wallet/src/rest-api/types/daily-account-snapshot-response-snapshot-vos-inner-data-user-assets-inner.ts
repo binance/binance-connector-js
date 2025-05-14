@@ -16,43 +16,43 @@
 /**
  *
  * @export
- * @interface DailyAccountSnapshotResponse2SnapshotVosInnerDataUserAssetsInner
+ * @interface DailyAccountSnapshotResponseSnapshotVosInnerDataUserAssetsInner
  */
-export interface DailyAccountSnapshotResponse2SnapshotVosInnerDataUserAssetsInner {
+export interface DailyAccountSnapshotResponseSnapshotVosInnerDataUserAssetsInner {
     /**
      *
      * @type {string}
-     * @memberof DailyAccountSnapshotResponse2SnapshotVosInnerDataUserAssetsInner
+     * @memberof DailyAccountSnapshotResponseSnapshotVosInnerDataUserAssetsInner
      */
     asset?: string;
     /**
      *
      * @type {string}
-     * @memberof DailyAccountSnapshotResponse2SnapshotVosInnerDataUserAssetsInner
+     * @memberof DailyAccountSnapshotResponseSnapshotVosInnerDataUserAssetsInner
      */
     borrowed?: string;
     /**
      *
      * @type {string}
-     * @memberof DailyAccountSnapshotResponse2SnapshotVosInnerDataUserAssetsInner
+     * @memberof DailyAccountSnapshotResponseSnapshotVosInnerDataUserAssetsInner
      */
     free?: string;
     /**
      *
      * @type {string}
-     * @memberof DailyAccountSnapshotResponse2SnapshotVosInnerDataUserAssetsInner
+     * @memberof DailyAccountSnapshotResponseSnapshotVosInnerDataUserAssetsInner
      */
     interest?: string;
     /**
      *
      * @type {string}
-     * @memberof DailyAccountSnapshotResponse2SnapshotVosInnerDataUserAssetsInner
+     * @memberof DailyAccountSnapshotResponseSnapshotVosInnerDataUserAssetsInner
      */
     locked?: string;
     /**
      *
      * @type {string}
-     * @memberof DailyAccountSnapshotResponse2SnapshotVosInnerDataUserAssetsInner
+     * @memberof DailyAccountSnapshotResponseSnapshotVosInnerDataUserAssetsInner
      */
     netAsset?: string;
 }
