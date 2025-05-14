@@ -16,15 +16,12 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { QueryCmPositionInformationResponse1 } from './query-cm-position-information-response1';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { QueryCmPositionInformationResponse2 } from './query-cm-position-information-response2';
+import type { QueryCmPositionInformationResponseInner } from './query-cm-position-information-response-inner';
 
 /**
- * @type QueryCmPositionInformationResponse
+ *
  * @export
+ * @interface QueryCmPositionInformationResponse
  */
-export type QueryCmPositionInformationResponse =
-    | QueryCmPositionInformationResponse1
-    | QueryCmPositionInformationResponse2;
+export interface QueryCmPositionInformationResponse
+    extends Array<QueryCmPositionInformationResponseInner> {}

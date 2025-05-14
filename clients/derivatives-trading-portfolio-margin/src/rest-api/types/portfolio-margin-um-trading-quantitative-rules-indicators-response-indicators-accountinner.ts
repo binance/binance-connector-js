@@ -16,37 +16,37 @@
 /**
  *
  * @export
- * @interface PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse2IndicatorsACCOUNTInner
+ * @interface PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicatorsACCOUNTInner
  */
-export interface PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse2IndicatorsACCOUNTInner {
+export interface PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicatorsACCOUNTInner {
     /**
      *
      * @type {string}
-     * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse2IndicatorsACCOUNTInner
+     * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicatorsACCOUNTInner
      */
     indicator?: string;
     /**
      *
      * @type {number}
-     * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse2IndicatorsACCOUNTInner
+     * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicatorsACCOUNTInner
      */
     value?: number;
     /**
      *
      * @type {number}
-     * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse2IndicatorsACCOUNTInner
+     * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicatorsACCOUNTInner
      */
     triggerValue?: number;
     /**
      *
      * @type {number}
-     * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse2IndicatorsACCOUNTInner
+     * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicatorsACCOUNTInner
      */
     plannedRecoverTime?: number;
     /**
      *
      * @type {boolean}
-     * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse2IndicatorsACCOUNTInner
+     * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicatorsACCOUNTInner
      */
     isLocked?: boolean;
 }

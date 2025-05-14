@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
  * Binance Derivatives Trading Portfolio Margin REST API
@@ -17,18 +16,24 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse1 } from './portfolio-margin-um-trading-quantitative-rules-indicators-response1';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse2 } from './portfolio-margin-um-trading-quantitative-rules-indicators-response2';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse2Indicators } from './portfolio-margin-um-trading-quantitative-rules-indicators-response2-indicators';
+import type { PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicators } from './portfolio-margin-um-trading-quantitative-rules-indicators-response-indicators';
 
 /**
- * @type PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse
+ *
  * @export
+ * @interface PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse
  */
-export type PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse =
-    | PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse1
-    | PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse2;
+export interface PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse {
+    /**
+     *
+     * @type {PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicators}
+     * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse
+     */
+    indicators?: PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicators;
+    /**
+     *
+     * @type {number}
+     * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse
+     */
+    updateTime?: number;
+}

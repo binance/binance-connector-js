@@ -16,15 +16,12 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { QueryUmPositionInformationResponse1 } from './query-um-position-information-response1';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { QueryUmPositionInformationResponse2 } from './query-um-position-information-response2';
+import type { QueryUmPositionInformationResponseInner } from './query-um-position-information-response-inner';
 
 /**
- * @type QueryUmPositionInformationResponse
+ *
  * @export
+ * @interface QueryUmPositionInformationResponse
  */
-export type QueryUmPositionInformationResponse =
-    | QueryUmPositionInformationResponse1
-    | QueryUmPositionInformationResponse2;
+export interface QueryUmPositionInformationResponse
+    extends Array<QueryUmPositionInformationResponseInner> {}

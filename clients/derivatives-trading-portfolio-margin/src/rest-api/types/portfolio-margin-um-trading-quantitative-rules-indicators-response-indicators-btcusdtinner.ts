@@ -16,37 +16,37 @@
 /**
  *
  * @export
- * @interface PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse1IndicatorsBTCUSDTInner
+ * @interface PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicatorsBTCUSDTInner
  */
-export interface PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse1IndicatorsBTCUSDTInner {
+export interface PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicatorsBTCUSDTInner {
     /**
      *
      * @type {boolean}
-     * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse1IndicatorsBTCUSDTInner
+     * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicatorsBTCUSDTInner
      */
     isLocked?: boolean;
     /**
      *
      * @type {number}
-     * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse1IndicatorsBTCUSDTInner
+     * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicatorsBTCUSDTInner
      */
     plannedRecoverTime?: number;
     /**
      *
      * @type {string}
-     * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse1IndicatorsBTCUSDTInner
+     * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicatorsBTCUSDTInner
      */
     indicator?: string;
     /**
      *
      * @type {number}
-     * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse1IndicatorsBTCUSDTInner
+     * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicatorsBTCUSDTInner
      */
     value?: number;
     /**
      *
      * @type {number}
-     * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse1IndicatorsBTCUSDTInner
+     * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicatorsBTCUSDTInner
      */
     triggerValue?: number;
 }

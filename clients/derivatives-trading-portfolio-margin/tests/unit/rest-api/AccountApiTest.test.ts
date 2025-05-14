@@ -2026,11 +2026,11 @@ describe('AccountApi', () => {
 
             mockResponse = {
                 downloadId: '545923594199212032',
-                status: 'completed',
-                url: 'www.binance.com',
+                status: 'processing',
+                url: '',
                 s3Link: null,
-                notified: true,
-                expirationTimestamp: 1645009771000,
+                notified: false,
+                expirationTimestamp: -1,
                 isExpired: null,
             };
 
@@ -2056,11 +2056,11 @@ describe('AccountApi', () => {
 
             mockResponse = {
                 downloadId: '545923594199212032',
-                status: 'completed',
-                url: 'www.binance.com',
+                status: 'processing',
+                url: '',
                 s3Link: null,
-                notified: true,
-                expirationTimestamp: 1645009771000,
+                notified: false,
+                expirationTimestamp: -1,
                 isExpired: null,
             };
 
@@ -2122,11 +2122,11 @@ describe('AccountApi', () => {
 
             mockResponse = {
                 downloadId: '545923594199212032',
-                status: 'completed',
-                url: 'www.binance.com',
+                status: 'processing',
+                url: '',
                 s3Link: null,
-                notified: true,
-                expirationTimestamp: 1645009771000,
+                notified: false,
+                expirationTimestamp: -1,
                 isExpired: null,
             };
 
@@ -2152,11 +2152,11 @@ describe('AccountApi', () => {
 
             mockResponse = {
                 downloadId: '545923594199212032',
-                status: 'completed',
-                url: 'www.binance.com',
+                status: 'processing',
+                url: '',
                 s3Link: null,
-                notified: true,
-                expirationTimestamp: 1645009771000,
+                notified: false,
+                expirationTimestamp: -1,
                 isExpired: null,
             };
 
@@ -2218,11 +2218,11 @@ describe('AccountApi', () => {
 
             mockResponse = {
                 downloadId: '545923594199212032',
-                status: 'completed',
-                url: 'www.binance.com',
+                status: 'processing',
+                url: '',
                 s3Link: null,
-                notified: true,
-                expirationTimestamp: 1645009771000,
+                notified: false,
+                expirationTimestamp: -1,
                 isExpired: null,
             };
 
@@ -2250,11 +2250,11 @@ describe('AccountApi', () => {
 
             mockResponse = {
                 downloadId: '545923594199212032',
-                status: 'completed',
-                url: 'www.binance.com',
+                status: 'processing',
+                url: '',
                 s3Link: null,
-                notified: true,
-                expirationTimestamp: 1645009771000,
+                notified: false,
+                expirationTimestamp: -1,
                 isExpired: null,
             };
 
@@ -2699,8 +2699,17 @@ describe('AccountApi', () => {
                             triggerValue: 0.99,
                         },
                     ],
+                    ACCOUNT: [
+                        {
+                            indicator: 'TMV',
+                            value: 10,
+                            triggerValue: 1,
+                            plannedRecoverTime: 1644919865000,
+                            isLocked: true,
+                        },
+                    ],
                 },
-                updateTime: 1545741270000,
+                updateTime: 1644913304748,
             };
 
             const spy = jest
@@ -2757,8 +2766,17 @@ describe('AccountApi', () => {
                             triggerValue: 0.99,
                         },
                     ],
+                    ACCOUNT: [
+                        {
+                            indicator: 'TMV',
+                            value: 10,
+                            triggerValue: 1,
+                            plannedRecoverTime: 1644919865000,
+                            isLocked: true,
+                        },
+                    ],
                 },
-                updateTime: 1545741270000,
+                updateTime: 1644913304748,
             };
 
             const spy = jest
@@ -2814,6 +2832,32 @@ describe('AccountApi', () => {
                     maxQty: '50',
                     notionalValue: '0.00084827',
                 },
+                {
+                    symbol: 'BTCUSD_201225',
+                    positionAmt: '1',
+                    entryPrice: '11707.70000003',
+                    markPrice: '11788.66626667',
+                    unRealizedProfit: '0.00005866',
+                    liquidationPrice: '6170.20509059',
+                    leverage: '125',
+                    positionSide: 'LONG',
+                    updateTime: 1627026881327,
+                    maxQty: '50',
+                    notionalValue: '0.00084827',
+                },
+                {
+                    symbol: 'BTCUSD_201225',
+                    positionAmt: '1',
+                    entryPrice: '11707.70000003',
+                    markPrice: '11788.66626667',
+                    unRealizedProfit: '0.00005866',
+                    liquidationPrice: '6170.20509059',
+                    leverage: '125',
+                    positionSide: 'LONG',
+                    updateTime: 1627026881327,
+                    maxQty: '50',
+                    notionalValue: '0.00084827',
+                },
             ];
 
             const spy = jest.spyOn(client, 'queryCmPositionInformation').mockReturnValue(
@@ -2838,6 +2882,32 @@ describe('AccountApi', () => {
             };
 
             mockResponse = [
+                {
+                    symbol: 'BTCUSD_201225',
+                    positionAmt: '1',
+                    entryPrice: '11707.70000003',
+                    markPrice: '11788.66626667',
+                    unRealizedProfit: '0.00005866',
+                    liquidationPrice: '6170.20509059',
+                    leverage: '125',
+                    positionSide: 'LONG',
+                    updateTime: 1627026881327,
+                    maxQty: '50',
+                    notionalValue: '0.00084827',
+                },
+                {
+                    symbol: 'BTCUSD_201225',
+                    positionAmt: '1',
+                    entryPrice: '11707.70000003',
+                    markPrice: '11788.66626667',
+                    unRealizedProfit: '0.00005866',
+                    liquidationPrice: '6170.20509059',
+                    leverage: '125',
+                    positionSide: 'LONG',
+                    updateTime: 1627026881327,
+                    maxQty: '50',
+                    notionalValue: '0.00084827',
+                },
                 {
                     symbol: 'BTCUSD_201225',
                     positionAmt: '1',
@@ -3279,6 +3349,32 @@ describe('AccountApi', () => {
                     positionSide: 'BOTH',
                     updateTime: 1625474304765,
                 },
+                {
+                    symbol: 'BTCUSDT',
+                    positionAmt: '0.001',
+                    entryPrice: '22185.2',
+                    markPrice: '21123.05052574',
+                    unRealizedProfit: '-1.06214947',
+                    liquidationPrice: '6170.20509059',
+                    leverage: '4',
+                    maxNotionalValue: '100000000',
+                    positionSide: 'LONG',
+                    notional: '21.12305052',
+                    updateTime: 1655217461579,
+                },
+                {
+                    symbol: 'BTCUSDT',
+                    positionAmt: '0.000',
+                    entryPrice: '0.0',
+                    markPrice: '21123.05052574',
+                    unRealizedProfit: '0.00000000',
+                    liquidationPrice: '6170.20509059',
+                    leverage: '4',
+                    maxNotionalValue: '100000000',
+                    positionSide: 'SHORT',
+                    notional: '0',
+                    updateTime: 0,
+                },
             ];
 
             const spy = jest.spyOn(client, 'queryUmPositionInformation').mockReturnValue(
@@ -3314,6 +3410,32 @@ describe('AccountApi', () => {
                     liquidationPrice: '6170.20509059',
                     positionSide: 'BOTH',
                     updateTime: 1625474304765,
+                },
+                {
+                    symbol: 'BTCUSDT',
+                    positionAmt: '0.001',
+                    entryPrice: '22185.2',
+                    markPrice: '21123.05052574',
+                    unRealizedProfit: '-1.06214947',
+                    liquidationPrice: '6170.20509059',
+                    leverage: '4',
+                    maxNotionalValue: '100000000',
+                    positionSide: 'LONG',
+                    notional: '21.12305052',
+                    updateTime: 1655217461579,
+                },
+                {
+                    symbol: 'BTCUSDT',
+                    positionAmt: '0.000',
+                    entryPrice: '0.0',
+                    markPrice: '21123.05052574',
+                    unRealizedProfit: '0.00000000',
+                    liquidationPrice: '6170.20509059',
+                    leverage: '4',
+                    maxNotionalValue: '100000000',
+                    positionSide: 'SHORT',
+                    notional: '0',
+                    updateTime: 0,
                 },
             ];
 

@@ -16,73 +16,73 @@
 /**
  *
  * @export
- * @interface QueryUmPositionInformationResponse2Inner
+ * @interface QueryCmPositionInformationResponseInner
  */
-export interface QueryUmPositionInformationResponse2Inner {
+export interface QueryCmPositionInformationResponseInner {
     /**
      *
      * @type {string}
-     * @memberof QueryUmPositionInformationResponse2Inner
+     * @memberof QueryCmPositionInformationResponseInner
      */
     symbol?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryUmPositionInformationResponse2Inner
+     * @memberof QueryCmPositionInformationResponseInner
      */
     positionAmt?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryUmPositionInformationResponse2Inner
+     * @memberof QueryCmPositionInformationResponseInner
      */
     entryPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryUmPositionInformationResponse2Inner
+     * @memberof QueryCmPositionInformationResponseInner
      */
     markPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryUmPositionInformationResponse2Inner
+     * @memberof QueryCmPositionInformationResponseInner
      */
     unRealizedProfit?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryUmPositionInformationResponse2Inner
+     * @memberof QueryCmPositionInformationResponseInner
      */
     liquidationPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryUmPositionInformationResponse2Inner
+     * @memberof QueryCmPositionInformationResponseInner
      */
     leverage?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryUmPositionInformationResponse2Inner
-     */
-    maxNotionalValue?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryUmPositionInformationResponse2Inner
+     * @memberof QueryCmPositionInformationResponseInner
      */
     positionSide?: string;
     /**
      *
-     * @type {string}
-     * @memberof QueryUmPositionInformationResponse2Inner
-     */
-    notional?: string;
-    /**
-     *
      * @type {number}
-     * @memberof QueryUmPositionInformationResponse2Inner
+     * @memberof QueryCmPositionInformationResponseInner
      */
     updateTime?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof QueryCmPositionInformationResponseInner
+     */
+    maxQty?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof QueryCmPositionInformationResponseInner
+     */
+    notionalValue?: string;
 }

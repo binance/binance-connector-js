@@ -16,73 +16,73 @@
 /**
  *
  * @export
- * @interface QueryUmPositionInformationResponse1Inner
+ * @interface QueryUmPositionInformationResponseInner
  */
-export interface QueryUmPositionInformationResponse1Inner {
+export interface QueryUmPositionInformationResponseInner {
     /**
      *
      * @type {string}
-     * @memberof QueryUmPositionInformationResponse1Inner
+     * @memberof QueryUmPositionInformationResponseInner
      */
     entryPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryUmPositionInformationResponse1Inner
+     * @memberof QueryUmPositionInformationResponseInner
      */
     leverage?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryUmPositionInformationResponse1Inner
+     * @memberof QueryUmPositionInformationResponseInner
      */
     markPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryUmPositionInformationResponse1Inner
+     * @memberof QueryUmPositionInformationResponseInner
      */
     maxNotionalValue?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryUmPositionInformationResponse1Inner
+     * @memberof QueryUmPositionInformationResponseInner
      */
     positionAmt?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryUmPositionInformationResponse1Inner
+     * @memberof QueryUmPositionInformationResponseInner
      */
     notional?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryUmPositionInformationResponse1Inner
+     * @memberof QueryUmPositionInformationResponseInner
      */
     symbol?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryUmPositionInformationResponse1Inner
+     * @memberof QueryUmPositionInformationResponseInner
      */
     unRealizedProfit?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryUmPositionInformationResponse1Inner
+     * @memberof QueryUmPositionInformationResponseInner
      */
     liquidationPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof QueryUmPositionInformationResponse1Inner
+     * @memberof QueryUmPositionInformationResponseInner
      */
     positionSide?: string;
     /**
      *
      * @type {number}
-     * @memberof QueryUmPositionInformationResponse1Inner
+     * @memberof QueryUmPositionInformationResponseInner
      */
     updateTime?: number;
 }

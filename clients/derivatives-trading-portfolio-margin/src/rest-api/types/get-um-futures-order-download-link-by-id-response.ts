@@ -1,5 +1,4 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
  * Binance Derivatives Trading Portfolio Margin REST API
@@ -14,17 +13,52 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { GetUmFuturesOrderDownloadLinkByIdResponse1 } from './get-um-futures-order-download-link-by-id-response1';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { GetUmFuturesOrderDownloadLinkByIdResponse2 } from './get-um-futures-order-download-link-by-id-response2';
-
 /**
- * @type GetUmFuturesOrderDownloadLinkByIdResponse
+ *
  * @export
+ * @interface GetUmFuturesOrderDownloadLinkByIdResponse
  */
-export type GetUmFuturesOrderDownloadLinkByIdResponse =
-    | GetUmFuturesOrderDownloadLinkByIdResponse1
-    | GetUmFuturesOrderDownloadLinkByIdResponse2;
+export interface GetUmFuturesOrderDownloadLinkByIdResponse {
+    /**
+     *
+     * @type {string}
+     * @memberof GetUmFuturesOrderDownloadLinkByIdResponse
+     */
+    downloadId?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetUmFuturesOrderDownloadLinkByIdResponse
+     */
+    status?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetUmFuturesOrderDownloadLinkByIdResponse
+     */
+    url?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetUmFuturesOrderDownloadLinkByIdResponse
+     */
+    s3Link?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof GetUmFuturesOrderDownloadLinkByIdResponse
+     */
+    notified?: boolean;
+    /**
+     *
+     * @type {number}
+     * @memberof GetUmFuturesOrderDownloadLinkByIdResponse
+     */
+    expirationTimestamp?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof GetUmFuturesOrderDownloadLinkByIdResponse
+     */
+    isExpired?: string;
+}
