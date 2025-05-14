@@ -586,6 +586,18 @@ describe('TradeApi', () => {
                 reduceOnly: false,
                 postOnly: false,
                 mmp: false,
+                executedQty: '0',
+                fee: '0',
+                timeInForce: 'GTC',
+                createTime: 1592465880683,
+                updateTime: 1566818724722,
+                status: 'ACCEPTED',
+                avgPrice: '0',
+                clientOrderId: '',
+                priceScale: 2,
+                quantityScale: 2,
+                optionSide: 'CALL',
+                quoteAsset: 'USDT',
             };
 
             const spy = jest.spyOn(client, 'newOrder').mockReturnValue(
@@ -629,6 +641,18 @@ describe('TradeApi', () => {
                 reduceOnly: false,
                 postOnly: false,
                 mmp: false,
+                executedQty: '0',
+                fee: '0',
+                timeInForce: 'GTC',
+                createTime: 1592465880683,
+                updateTime: 1566818724722,
+                status: 'ACCEPTED',
+                avgPrice: '0',
+                clientOrderId: '',
+                priceScale: 2,
+                quantityScale: 2,
+                optionSide: 'CALL',
+                quoteAsset: 'USDT',
             };
 
             const spy = jest.spyOn(client, 'newOrder').mockReturnValue(

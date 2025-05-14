@@ -1,5 +1,4 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
  * Binance Derivatives Trading Options REST API
@@ -14,17 +13,46 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { GetOptionTransactionHistoryDownloadLinkByIdResponse1 } from './get-option-transaction-history-download-link-by-id-response1';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { GetOptionTransactionHistoryDownloadLinkByIdResponse2 } from './get-option-transaction-history-download-link-by-id-response2';
-
 /**
- * @type GetOptionTransactionHistoryDownloadLinkByIdResponse
+ *
  * @export
+ * @interface GetOptionTransactionHistoryDownloadLinkByIdResponse
  */
-export type GetOptionTransactionHistoryDownloadLinkByIdResponse =
-    | GetOptionTransactionHistoryDownloadLinkByIdResponse1
-    | GetOptionTransactionHistoryDownloadLinkByIdResponse2;
+export interface GetOptionTransactionHistoryDownloadLinkByIdResponse {
+    /**
+     *
+     * @type {string}
+     * @memberof GetOptionTransactionHistoryDownloadLinkByIdResponse
+     */
+    downloadId?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetOptionTransactionHistoryDownloadLinkByIdResponse
+     */
+    status?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetOptionTransactionHistoryDownloadLinkByIdResponse
+     */
+    url?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof GetOptionTransactionHistoryDownloadLinkByIdResponse
+     */
+    notified?: boolean;
+    /**
+     *
+     * @type {number}
+     * @memberof GetOptionTransactionHistoryDownloadLinkByIdResponse
+     */
+    expirationTimestamp?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof GetOptionTransactionHistoryDownloadLinkByIdResponse
+     */
+    isExpired?: string;
+}

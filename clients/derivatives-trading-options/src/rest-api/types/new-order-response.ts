@@ -1,5 +1,4 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
  * Binance Derivatives Trading Options REST API
@@ -14,15 +13,142 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { NewOrderResponse1 } from './new-order-response1';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { NewOrderResponse2 } from './new-order-response2';
-
 /**
- * @type NewOrderResponse
+ *
  * @export
+ * @interface NewOrderResponse
  */
-export type NewOrderResponse = NewOrderResponse1 | NewOrderResponse2;
+export interface NewOrderResponse {
+    /**
+     *
+     * @type {number}
+     * @memberof NewOrderResponse
+     */
+    orderId?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    symbol?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    price?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    quantity?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    side?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    type?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof NewOrderResponse
+     */
+    createDate?: number;
+    /**
+     *
+     * @type {boolean}
+     * @memberof NewOrderResponse
+     */
+    reduceOnly?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof NewOrderResponse
+     */
+    postOnly?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof NewOrderResponse
+     */
+    mmp?: boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    executedQty?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    fee?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    timeInForce?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof NewOrderResponse
+     */
+    createTime?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof NewOrderResponse
+     */
+    updateTime?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    status?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    avgPrice?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    clientOrderId?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof NewOrderResponse
+     */
+    priceScale?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof NewOrderResponse
+     */
+    quantityScale?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    optionSide?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    quoteAsset?: string;
+}

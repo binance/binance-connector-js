@@ -275,10 +275,10 @@ describe('AccountApi', () => {
 
             mockResponse = {
                 downloadId: '545923594199212032',
-                status: 'completed',
-                url: 'www.binance.com',
-                notified: true,
-                expirationTimestamp: 1645009771000,
+                status: 'processing',
+                url: '',
+                notified: false,
+                expirationTimestamp: -1,
                 isExpired: null,
             };
 
@@ -306,10 +306,10 @@ describe('AccountApi', () => {
 
             mockResponse = {
                 downloadId: '545923594199212032',
-                status: 'completed',
-                url: 'www.binance.com',
-                notified: true,
-                expirationTimestamp: 1645009771000,
+                status: 'processing',
+                url: '',
+                notified: false,
+                expirationTimestamp: -1,
                 isExpired: null,
             };
 
