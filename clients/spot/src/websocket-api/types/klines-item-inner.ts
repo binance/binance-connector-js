@@ -1,5 +1,4 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
  * Binance Spot WebSocket API
@@ -19,13 +18,8 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { KlinesItemInner } from './klines-item-inner';
-
 /**
- *
+ * @type KlinesItemInner
  * @export
- * @interface KlinesItem
  */
-export interface KlinesItem extends Array<KlinesItemInner> {}
+export type KlinesItemInner = number | string;

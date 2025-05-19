@@ -32,6 +32,7 @@ export * from './get-trades-response';
 export * from './historical-trades-response';
 export * from './historical-trades-response-inner';
 export * from './klines-item';
+export * from './klines-item-inner';
 export * from './klines-response';
 export * from './my-allocations-response';
 export * from './my-allocations-response-inner';

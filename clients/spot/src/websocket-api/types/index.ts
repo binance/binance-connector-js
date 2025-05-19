@@ -27,6 +27,7 @@ export * from './exchange-info-response-result-rate-limits-inner';
 export * from './exchange-info-response-result-sors-inner';
 export * from './exchange-info-response-result-symbols-inner';
 export * from './klines-item';
+export * from './klines-item-inner';
 export * from './klines-response';
 export * from './my-allocations-response';
 export * from './my-allocations-response-result-inner';

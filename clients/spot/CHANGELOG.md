@@ -1,5 +1,19 @@
 # Changelog
 
+## 6.0.0 - 2025-05-19
+
+### Changed (4)
+
+#### REST API
+
+- Modified `klines()` (response type changed - it can be either a number or string)
+- Modified `uiKlines()` (response type changed - it can be either a number or string)
+
+#### WebSocket API
+
+- Modified `klines()` (response type changed - it can be either a number or string)
+- Modified `uiKlines()` (response type changed - it can be either a number or string)
+
 ## 5.0.0 - 2025-05-14
 
 ### Added
