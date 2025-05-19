@@ -271,6 +271,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
          * @param {number} repayAmount repay amount of loanCoin
          * @param {boolean} [collateralReturn] Default: TRUE. TRUE: Return extra collateral to spot account; FALSE: Keep extra collateral in the order, and lower LTV.
          * @param {boolean} [fullRepayment] Default: FALSE. TRUE: Full repayment; FALSE: Partial repayment, based on loanAmount
+         * @param {number} [repaymentType] Default: 1. 1: Repayment with loan asset; 2: Repayment with collateral
          * @param {number} [recvWindow]
          *
          * @throws {RequiredError}
@@ -281,6 +282,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             repayAmount: number,
             collateralReturn?: boolean,
             fullRepayment?: boolean,
+            repaymentType?: number,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'loanCoin' is not null or undefined
@@ -310,6 +312,10 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
 
             if (fullRepayment !== undefined && fullRepayment !== null) {
                 localVarQueryParameter['fullRepayment'] = fullRepayment;
+            }
+
+            if (repaymentType !== undefined && repaymentType !== null) {
+                localVarQueryParameter['repaymentType'] = repaymentType;
             }
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -1087,6 +1093,13 @@ export interface FlexibleLoanRepayRequest {
     readonly fullRepayment?: boolean;
 
     /**
+     * Default: 1. 1: Repayment with loan asset; 2: Repayment with collateral
+     * @type {number}
+     * @memberof FlexibleRateApiFlexibleLoanRepay
+     */
+    readonly repaymentType?: number;
+
+    /**
      *
      * @type {number}
      * @memberof FlexibleRateApiFlexibleLoanRepay
@@ -1561,6 +1574,7 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             requestParameters?.repayAmount,
             requestParameters?.collateralReturn,
             requestParameters?.fullRepayment,
+            requestParameters?.repaymentType,
             requestParameters?.recvWindow
         );
         return sendRequest<FlexibleLoanRepayResponse>(

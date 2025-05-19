@@ -579,6 +579,7 @@ describe('FlexibleRateApi', () => {
                 repayAmount: 1,
                 collateralReturn: true,
                 fullRepayment: false,
+                repaymentType: 1,
                 recvWindow: 5000,
             };
 
