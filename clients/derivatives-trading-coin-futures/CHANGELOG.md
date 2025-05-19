@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.0.0 - 2025-05-19
+
+### Changed (5)
+
+#### REST API
+
+- Modified `continuousContractKlineCandlestickData()` (response type changed - it can be either a number or string)
+- Modified `indexPriceKlineCandlestickData()` (response type changed - it can be either a number or string)
+- Modified `klineCandlestickData()` (response type changed - it can be either a number or string)
+- Modified `markPriceKlineCandlestickData()` (response type changed - it can be either a number or string)
+- Modified `premiumIndexKlineData()` (response type changed - it can be either a number or string)
+
 ## 3.0.0 - 2025-05-14
 
 ### Changed

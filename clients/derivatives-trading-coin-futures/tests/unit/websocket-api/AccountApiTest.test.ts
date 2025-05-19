@@ -36,7 +36,11 @@ describe('AccountApi', () => {
             msg?: string;
         };
         rateLimits?: object[];
-    } = {};
+    } = {
+        result: {},
+        response: {},
+        rateLimits: [],
+    };
 
     describe('accountInformation()', () => {
         beforeEach(async () => {
@@ -147,7 +151,7 @@ describe('AccountApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith(
                         '/account.status'.slice(1),
@@ -316,7 +320,7 @@ describe('AccountApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith(
                         '/account.balance'.slice(1),
