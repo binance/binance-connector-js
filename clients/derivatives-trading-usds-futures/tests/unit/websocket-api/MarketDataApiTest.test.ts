@@ -37,7 +37,11 @@ describe('MarketDataApi', () => {
             msg?: string;
         };
         rateLimits?: object[];
-    } = {};
+    } = {
+        result: {},
+        response: {},
+        rateLimits: [],
+    };
 
     describe('orderBook()', () => {
         beforeEach(async () => {
@@ -116,7 +120,7 @@ describe('MarketDataApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith('/depth'.slice(1), params, {
                         isSigned: false,
@@ -290,7 +294,7 @@ describe('MarketDataApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith(
                         '/ticker.book'.slice(1),
@@ -448,7 +452,7 @@ describe('MarketDataApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith(
                         '/ticker.price'.slice(1),

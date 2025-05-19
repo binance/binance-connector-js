@@ -1,5 +1,4 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
  * Binance Derivatives Trading USDS Futures REST API
@@ -14,14 +13,8 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { IndexPriceKlineCandlestickDataResponseItemInner } from './index-price-kline-candlestick-data-response-item-inner';
-
 /**
- *
+ * @type IndexPriceKlineCandlestickDataResponseItemInner
  * @export
- * @interface IndexPriceKlineCandlestickDataResponseItem
  */
-export interface IndexPriceKlineCandlestickDataResponseItem
-    extends Array<IndexPriceKlineCandlestickDataResponseItemInner> {}
+export type IndexPriceKlineCandlestickDataResponseItemInner = number | string;

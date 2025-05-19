@@ -1,5 +1,18 @@
 # Changelog
 
+## 5.0.0 - 2025-05-19
+
+### Changed (6)
+
+#### REST API
+
+- Modified `continuousContractKlineCandlestickData()` (response type changed - it can be either a number or string)
+- Modified `historicalBlvtNavKlineCandlestick()` (response type changed - it can be either a number or string)
+- Modified `indexPriceKlineCandlestickData()` (response type changed - it can be either a number or string)
+- Modified `klineCandlestickData()` (response type changed - it can be either a number or string)
+- Modified `markPriceKlineCandlestickData()` (response type changed - it can be either a number or string)
+- Modified `premiumIndexKlineData()` (response type changed - it can be either a number or string)
+
 ## 4.0.0 - 2025-05-14
 
 ### Changed

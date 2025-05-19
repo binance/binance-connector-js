@@ -42,7 +42,11 @@ describe('TradeApi', () => {
             msg?: string;
         };
         rateLimits?: object[];
-    } = {};
+    } = {
+        result: {},
+        response: {},
+        rateLimits: [],
+    };
 
     describe('cancelOrder()', () => {
         beforeEach(async () => {
@@ -141,7 +145,7 @@ describe('TradeApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith('/order.cancel'.slice(1), params, {
                         isSigned: true,
@@ -354,7 +358,7 @@ describe('TradeApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith('/order.modify'.slice(1), params, {
                         isSigned: true,
@@ -572,7 +576,7 @@ describe('TradeApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith('/order.place'.slice(1), params, {
                         isSigned: true,
@@ -797,7 +801,7 @@ describe('TradeApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith(
                         '/account.position'.slice(1),
@@ -1022,7 +1026,7 @@ describe('TradeApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith(
                         '/v2/account.position'.slice(1),
@@ -1200,7 +1204,7 @@ describe('TradeApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith('/order.status'.slice(1), params, {
                         isSigned: true,

@@ -14,9 +14,14 @@
  * Do not edit the class manually.
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { PremiumIndexKlineDataResponseItemInner } from './premium-index-kline-data-response-item-inner';
+
 /**
  *
  * @export
  * @interface PremiumIndexKlineDataResponseItem
  */
-export interface PremiumIndexKlineDataResponseItem extends Array<string> {}
+export interface PremiumIndexKlineDataResponseItem
+    extends Array<PremiumIndexKlineDataResponseItemInner> {}

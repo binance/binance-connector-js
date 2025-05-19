@@ -36,7 +36,11 @@ describe('UserDataStreamsApi', () => {
             msg?: string;
         };
         rateLimits?: object[];
-    } = {};
+    } = {
+        result: {},
+        response: {},
+        rateLimits: [],
+    };
 
     describe('closeUserDataStream()', () => {
         beforeEach(async () => {
@@ -104,7 +108,7 @@ describe('UserDataStreamsApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith(
                         '/userDataStream.stop'.slice(1),
@@ -264,7 +268,7 @@ describe('UserDataStreamsApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith(
                         '/userDataStream.ping'.slice(1),
@@ -424,7 +428,7 @@ describe('UserDataStreamsApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result);
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith(
                         '/userDataStream.start'.slice(1),
