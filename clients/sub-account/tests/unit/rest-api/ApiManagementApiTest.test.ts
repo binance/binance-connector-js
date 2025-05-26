@@ -172,6 +172,7 @@ describe('ApiManagementApi', () => {
             const params: DeleteIpListForASubAccountApiKeyRequest = {
                 email: 'sub-account-email@email.com',
                 subAccountApiKey: 'subAccountApiKey_example',
+                ipAddress: 'ipAddress_example',
             };
 
             mockResponse = {
@@ -228,6 +229,7 @@ describe('ApiManagementApi', () => {
             const _params: DeleteIpListForASubAccountApiKeyRequest = {
                 email: 'sub-account-email@email.com',
                 subAccountApiKey: 'subAccountApiKey_example',
+                ipAddress: 'ipAddress_example',
             };
             const params = Object.assign({ ..._params });
             delete params?.email;
@@ -241,6 +243,7 @@ describe('ApiManagementApi', () => {
             const _params: DeleteIpListForASubAccountApiKeyRequest = {
                 email: 'sub-account-email@email.com',
                 subAccountApiKey: 'subAccountApiKey_example',
+                ipAddress: 'ipAddress_example',
             };
             const params = Object.assign({ ..._params });
             delete params?.subAccountApiKey;
@@ -250,10 +253,25 @@ describe('ApiManagementApi', () => {
             );
         });
 
+        it('should throw RequiredError when ipAddress is missing', async () => {
+            const _params: DeleteIpListForASubAccountApiKeyRequest = {
+                email: 'sub-account-email@email.com',
+                subAccountApiKey: 'subAccountApiKey_example',
+                ipAddress: 'ipAddress_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.ipAddress;
+
+            await expect(client.deleteIpListForASubAccountApiKey(params)).rejects.toThrow(
+                'Required parameter ipAddress was null or undefined when calling deleteIpListForASubAccountApiKey.'
+            );
+        });
+
         it('should throw an error when server is returning an error', async () => {
             const params: DeleteIpListForASubAccountApiKeyRequest = {
                 email: 'sub-account-email@email.com',
                 subAccountApiKey: 'subAccountApiKey_example',
+                ipAddress: 'ipAddress_example',
             };
 
             const errorResponse = {

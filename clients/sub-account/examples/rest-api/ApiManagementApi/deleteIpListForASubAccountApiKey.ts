@@ -12,6 +12,7 @@ async function deleteIpListForASubAccountApiKey() {
         const response = await client.restAPI.deleteIpListForASubAccountApiKey({
             email: 'sub-account-email@email.com',
             subAccountApiKey: 'subAccountApiKey_example',
+            ipAddress: 'ipAddress_example',
         });
 
         const rateLimits = response.rateLimits!;

@@ -41,7 +41,7 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
          * @param {string} email [Sub-account email](#email-address)
          * @param {string} subAccountApiKey
          * @param {string} status IP Restriction status. 1 = IP Unrestricted. 2 = Restrict access to trusted IPs only.
-         * @param {string} [ipAddress] Can be added in batches, separated by commas
+         * @param {string} [ipAddress] Insert static IP in batch, separated by commas.
          * @param {number} [recvWindow]
          *
          * @throws {RequiredError}
@@ -106,7 +106,7 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
          * @summary Delete IP List For a Sub-account API Key (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {string} subAccountApiKey
-         * @param {string} [ipAddress] Can be added in batches, separated by commas
+         * @param {string} ipAddress IPs to be deleted. Can be added in batches, separated by commas
          * @param {number} [recvWindow]
          *
          * @throws {RequiredError}
@@ -114,7 +114,7 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
         deleteIpListForASubAccountApiKey: async (
             email: string,
             subAccountApiKey: string,
-            ipAddress?: string,
+            ipAddress: string,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
@@ -125,6 +125,8 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
                 'subAccountApiKey',
                 subAccountApiKey
             );
+            // verify required parameter 'ipAddress' is not null or undefined
+            assertParamExists('deleteIpListForASubAccountApiKey', 'ipAddress', ipAddress);
 
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -287,7 +289,7 @@ export interface AddIpRestrictionForSubAccountApiKeyRequest {
     readonly status: string;
 
     /**
-     * Can be added in batches, separated by commas
+     * Insert static IP in batch, separated by commas.
      * @type {string}
      * @memberof ApiManagementApiAddIpRestrictionForSubAccountApiKey
      */
@@ -321,11 +323,11 @@ export interface DeleteIpListForASubAccountApiKeyRequest {
     readonly subAccountApiKey: string;
 
     /**
-     * Can be added in batches, separated by commas
+     * IPs to be deleted. Can be added in batches, separated by commas
      * @type {string}
      * @memberof ApiManagementApiDeleteIpListForASubAccountApiKey
      */
-    readonly ipAddress?: string;
+    readonly ipAddress: string;
 
     /**
      *

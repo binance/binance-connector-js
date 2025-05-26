@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.0.0 - 2025-05-26
+
+### Changed (1)
+
+- Modified parameter `ipAddress` for the following methods:
+  - `addIpRestrictionForSubAccountApiKey()` (`POST /sapi/v2/sub-account/subAccountApi/ipRestriction`)
+  - `deleteIpListForASubAccountApiKey()` (`DELETE /sapi/v1/sub-account/subAccountApi/ipRestriction/ipList`)
+
 ## 5.0.0 - 2025-05-14
 
 ### Changed
