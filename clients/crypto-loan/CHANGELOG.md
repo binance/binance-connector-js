@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.0.0 - 2025-05-26
+
+### Removed (1)
+
+- `flexibleLoanCollateralRepayment()` (`POST /sapi/v2/loan/flexible/repay/collateral`)
+
 ## 4.0.0 - 2025-05-19
 
 ### Changed (1)

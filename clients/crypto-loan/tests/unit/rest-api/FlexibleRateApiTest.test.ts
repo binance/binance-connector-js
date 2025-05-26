@@ -19,7 +19,6 @@ import {
     CheckCollateralRepayRateRequest,
     FlexibleLoanAdjustLtvRequest,
     FlexibleLoanBorrowRequest,
-    FlexibleLoanCollateralRepaymentRequest,
     FlexibleLoanRepayRequest,
     GetFlexibleLoanAssetsDataRequest,
     GetFlexibleLoanBorrowHistoryRequest,
@@ -33,7 +32,6 @@ import type {
     CheckCollateralRepayRateResponse,
     FlexibleLoanAdjustLtvResponse,
     FlexibleLoanBorrowResponse,
-    FlexibleLoanCollateralRepaymentResponse,
     FlexibleLoanRepayResponse,
     GetFlexibleLoanAssetsDataResponse,
     GetFlexibleLoanBorrowHistoryResponse,
@@ -403,139 +401,6 @@ describe('FlexibleRateApi', () => {
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'flexibleLoanBorrow').mockRejectedValueOnce(mockError);
             await expect(client.flexibleLoanBorrow(params)).rejects.toThrow('ResponseError');
-            spy.mockRestore();
-        });
-    });
-
-    describe('flexibleLoanCollateralRepayment()', () => {
-        it('should execute flexibleLoanCollateralRepayment() successfully with required parameters only', async () => {
-            const params: FlexibleLoanCollateralRepaymentRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                repayAmount: 1,
-            };
-
-            mockResponse = {
-                loanCoin: 'BUSD',
-                collateralCoin: 'BNB',
-                remainingDebt: '100.5',
-                remainingCollateral: '5.253',
-                fullRepayment: false,
-                currentLTV: '0.25',
-                repayStatus: 'Repaid',
-            };
-
-            const spy = jest.spyOn(client, 'flexibleLoanCollateralRepayment').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<FlexibleLoanCollateralRepaymentResponse>)
-            );
-            const response = await client.flexibleLoanCollateralRepayment(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute flexibleLoanCollateralRepayment() successfully with optional parameters', async () => {
-            const params: FlexibleLoanCollateralRepaymentRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                repayAmount: 1,
-                fullRepayment: false,
-                recvWindow: 5000,
-            };
-
-            mockResponse = {
-                loanCoin: 'BUSD',
-                collateralCoin: 'BNB',
-                remainingDebt: '100.5',
-                remainingCollateral: '5.253',
-                fullRepayment: false,
-                currentLTV: '0.25',
-                repayStatus: 'Repaid',
-            };
-
-            const spy = jest.spyOn(client, 'flexibleLoanCollateralRepayment').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<FlexibleLoanCollateralRepaymentResponse>)
-            );
-            const response = await client.flexibleLoanCollateralRepayment(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw RequiredError when loanCoin is missing', async () => {
-            const _params: FlexibleLoanCollateralRepaymentRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                repayAmount: 1,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.loanCoin;
-
-            await expect(client.flexibleLoanCollateralRepayment(params)).rejects.toThrow(
-                'Required parameter loanCoin was null or undefined when calling flexibleLoanCollateralRepayment.'
-            );
-        });
-
-        it('should throw RequiredError when collateralCoin is missing', async () => {
-            const _params: FlexibleLoanCollateralRepaymentRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                repayAmount: 1,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.collateralCoin;
-
-            await expect(client.flexibleLoanCollateralRepayment(params)).rejects.toThrow(
-                'Required parameter collateralCoin was null or undefined when calling flexibleLoanCollateralRepayment.'
-            );
-        });
-
-        it('should throw RequiredError when repayAmount is missing', async () => {
-            const _params: FlexibleLoanCollateralRepaymentRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                repayAmount: 1,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.repayAmount;
-
-            await expect(client.flexibleLoanCollateralRepayment(params)).rejects.toThrow(
-                'Required parameter repayAmount was null or undefined when calling flexibleLoanCollateralRepayment.'
-            );
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const params: FlexibleLoanCollateralRepaymentRequest = {
-                loanCoin: 'loanCoin_example',
-                collateralCoin: 'collateralCoin_example',
-                repayAmount: 1,
-            };
-
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest
-                .spyOn(client, 'flexibleLoanCollateralRepayment')
-                .mockRejectedValueOnce(mockError);
-            await expect(client.flexibleLoanCollateralRepayment(params)).rejects.toThrow(
-                'ResponseError'
-            );
             spy.mockRestore();
         });
     });

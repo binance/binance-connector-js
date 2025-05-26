@@ -23,7 +23,6 @@ import type {
     CheckCollateralRepayRateResponse,
     FlexibleLoanAdjustLtvResponse,
     FlexibleLoanBorrowResponse,
-    FlexibleLoanCollateralRepaymentResponse,
     FlexibleLoanRepayResponse,
     GetFlexibleLoanAssetsDataResponse,
     GetFlexibleLoanBorrowHistoryResponse,
@@ -193,65 +192,6 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
 
             return {
                 endpoint: '/sapi/v2/loan/flexible/borrow',
-                method: 'POST',
-                params: localVarQueryParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
-         *
-         * Weight: 6000
-         *
-         * @summary Flexible Loan Collateral Repayment (TRADE)
-         * @param {string} loanCoin
-         * @param {string} collateralCoin
-         * @param {number} repayAmount repay amount of loanCoin
-         * @param {boolean} [fullRepayment] Default: FALSE. TRUE: Full repayment; FALSE: Partial repayment, based on loanAmount
-         * @param {number} [recvWindow]
-         *
-         * @throws {RequiredError}
-         */
-        flexibleLoanCollateralRepayment: async (
-            loanCoin: string,
-            collateralCoin: string,
-            repayAmount: number,
-            fullRepayment?: boolean,
-            recvWindow?: number
-        ): Promise<RequestArgs> => {
-            // verify required parameter 'loanCoin' is not null or undefined
-            assertParamExists('flexibleLoanCollateralRepayment', 'loanCoin', loanCoin);
-            // verify required parameter 'collateralCoin' is not null or undefined
-            assertParamExists('flexibleLoanCollateralRepayment', 'collateralCoin', collateralCoin);
-            // verify required parameter 'repayAmount' is not null or undefined
-            assertParamExists('flexibleLoanCollateralRepayment', 'repayAmount', repayAmount);
-
-            const localVarQueryParameter: Record<string, unknown> = {};
-
-            if (loanCoin !== undefined && loanCoin !== null) {
-                localVarQueryParameter['loanCoin'] = loanCoin;
-            }
-
-            if (collateralCoin !== undefined && collateralCoin !== null) {
-                localVarQueryParameter['collateralCoin'] = collateralCoin;
-            }
-
-            if (repayAmount !== undefined && repayAmount !== null) {
-                localVarQueryParameter['repayAmount'] = repayAmount;
-            }
-
-            if (fullRepayment !== undefined && fullRepayment !== null) {
-                localVarQueryParameter['fullRepayment'] = fullRepayment;
-            }
-
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/sapi/v2/loan/flexible/repay/collateral',
                 method: 'POST',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
@@ -779,19 +719,6 @@ export interface FlexibleRateApiInterface {
         requestParameters: FlexibleLoanBorrowRequest
     ): Promise<RestApiResponse<FlexibleLoanBorrowResponse>>;
     /**
-     *
-     * Weight: 6000
-     *
-     * @summary Flexible Loan Collateral Repayment (TRADE)
-     * @param {FlexibleLoanCollateralRepaymentRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof FlexibleRateApiInterface
-     */
-    flexibleLoanCollateralRepayment(
-        requestParameters: FlexibleLoanCollateralRepaymentRequest
-    ): Promise<RestApiResponse<FlexibleLoanCollateralRepaymentResponse>>;
-    /**
      * Flexible Loan Repay
      *
      *
@@ -1007,47 +934,6 @@ export interface FlexibleLoanBorrowRequest {
      *
      * @type {number}
      * @memberof FlexibleRateApiFlexibleLoanBorrow
-     */
-    readonly recvWindow?: number;
-}
-
-/**
- * Request parameters for flexibleLoanCollateralRepayment operation in FlexibleRateApi.
- * @interface FlexibleLoanCollateralRepaymentRequest
- */
-export interface FlexibleLoanCollateralRepaymentRequest {
-    /**
-     *
-     * @type {string}
-     * @memberof FlexibleRateApiFlexibleLoanCollateralRepayment
-     */
-    readonly loanCoin: string;
-
-    /**
-     *
-     * @type {string}
-     * @memberof FlexibleRateApiFlexibleLoanCollateralRepayment
-     */
-    readonly collateralCoin: string;
-
-    /**
-     * repay amount of loanCoin
-     * @type {number}
-     * @memberof FlexibleRateApiFlexibleLoanCollateralRepayment
-     */
-    readonly repayAmount: number;
-
-    /**
-     * Default: FALSE. TRUE: Full repayment; FALSE: Partial repayment, based on loanAmount
-     * @type {boolean}
-     * @memberof FlexibleRateApiFlexibleLoanCollateralRepayment
-     */
-    readonly fullRepayment?: boolean;
-
-    /**
-     *
-     * @type {number}
-     * @memberof FlexibleRateApiFlexibleLoanCollateralRepayment
      */
     readonly recvWindow?: number;
 }
@@ -1509,38 +1395,6 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             requestParameters?.recvWindow
         );
         return sendRequest<FlexibleLoanBorrowResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
-        );
-    }
-
-    /**
-     *
-     * Weight: 6000
-     *
-     * @summary Flexible Loan Collateral Repayment (TRADE)
-     * @param {FlexibleLoanCollateralRepaymentRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<FlexibleLoanCollateralRepaymentResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof FlexibleRateApi
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/trade/Flexible-Loan-Collateral-Repay Binance API Documentation}
-     */
-    public async flexibleLoanCollateralRepayment(
-        requestParameters: FlexibleLoanCollateralRepaymentRequest
-    ): Promise<RestApiResponse<FlexibleLoanCollateralRepaymentResponse>> {
-        const localVarAxiosArgs =
-            await this.localVarAxiosParamCreator.flexibleLoanCollateralRepayment(
-                requestParameters?.loanCoin,
-                requestParameters?.collateralCoin,
-                requestParameters?.repayAmount,
-                requestParameters?.fullRepayment,
-                requestParameters?.recvWindow
-            );
-        return sendRequest<FlexibleLoanCollateralRepaymentResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

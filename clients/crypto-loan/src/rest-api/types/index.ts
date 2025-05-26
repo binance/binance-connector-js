@@ -7,7 +7,6 @@ export * from './crypto-loan-customize-margin-call-response-rows-inner';
 export * from './crypto-loan-repay-response';
 export * from './flexible-loan-adjust-ltv-response';
 export * from './flexible-loan-borrow-response';
-export * from './flexible-loan-collateral-repayment-response';
 export * from './flexible-loan-repay-response';
 export * from './get-collateral-assets-data-response';
 export * from './get-collateral-assets-data-response-rows-inner';

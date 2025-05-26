@@ -19,7 +19,6 @@ import type {
     CheckCollateralRepayRateRequest,
     FlexibleLoanAdjustLtvRequest,
     FlexibleLoanBorrowRequest,
-    FlexibleLoanCollateralRepaymentRequest,
     FlexibleLoanRepayRequest,
     GetFlexibleLoanAssetsDataRequest,
     GetFlexibleLoanBorrowHistoryRequest,
@@ -48,7 +47,6 @@ import type {
     CheckCollateralRepayRateResponse,
     FlexibleLoanAdjustLtvResponse,
     FlexibleLoanBorrowResponse,
-    FlexibleLoanCollateralRepaymentResponse,
     FlexibleLoanRepayResponse,
     GetFlexibleLoanAssetsDataResponse,
     GetFlexibleLoanBorrowHistoryResponse,
@@ -172,22 +170,6 @@ export class RestAPI {
         requestParameters: FlexibleLoanBorrowRequest
     ): Promise<RestApiResponse<FlexibleLoanBorrowResponse>> {
         return this.flexibleRateApi.flexibleLoanBorrow(requestParameters);
-    }
-
-    /**
-     *
-     * Weight: 6000
-     *
-     * @summary Flexible Loan Collateral Repayment (TRADE)
-     * @param {FlexibleLoanCollateralRepaymentRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<FlexibleLoanCollateralRepaymentResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/trade/Flexible-Loan-Collateral-Repay Binance API Documentation}
-     */
-    flexibleLoanCollateralRepayment(
-        requestParameters: FlexibleLoanCollateralRepaymentRequest
-    ): Promise<RestApiResponse<FlexibleLoanCollateralRepaymentResponse>> {
-        return this.flexibleRateApi.flexibleLoanCollateralRepayment(requestParameters);
     }
 
     /**
