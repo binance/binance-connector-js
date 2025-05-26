@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.0.0 - 2025-05-26
+
+### Changed (1)
+
+- `queryPortfolioMarginProBankruptcyLoanRepayHistory()` (`GET /sapi/v1/portfolio/pmLoan-history` has been updated to `GET /sapi/v1/portfolio/pmloan-history`)
+
 ## 4.0.0 - 2025-04-23
 
 ### Changed

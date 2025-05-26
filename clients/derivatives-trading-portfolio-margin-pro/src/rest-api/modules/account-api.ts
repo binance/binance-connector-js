@@ -536,7 +536,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
 
             return {
-                endpoint: '/sapi/v1/portfolio/pmLoan-history',
+                endpoint: '/sapi/v1/portfolio/pmloan-history',
                 method: 'GET',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,

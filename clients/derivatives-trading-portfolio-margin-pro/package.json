@@ -1,7 +1,7 @@
 {
     "name": "@binance/derivatives-trading-portfolio-margin-pro",
     "description": "Official Binance Derivatives Trading (COIN-M Futures) Connector - A lightweight library that provides a convenient interface to Binance's COINN-M Futures REST API, WebSocket API and WebSocket Streams.",
-    "version": "4.0.0",
+    "version": "5.0.0",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",
