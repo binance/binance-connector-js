@@ -293,7 +293,7 @@ export class PayApi implements PayApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 }

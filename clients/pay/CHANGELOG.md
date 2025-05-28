@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.0.0 - 2025-05-28
+
+### Changed (1)
+
+- Marked as signed the following endpoints:
+  - `GET /sapi/v1/pay/transactions`
+
 ## 2.0.0 - 2025-04-10
 
 ### Changed
