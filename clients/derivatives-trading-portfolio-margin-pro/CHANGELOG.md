@@ -1,5 +1,12 @@
 # Changelog
 
+## 6.0.0 - 2025-05-28
+
+### Changed (1)
+
+- Marked as signed the following endpoints:
+  - `POST /sapi/v1/portfolio/repay`
+
 ## 5.0.0 - 2025-05-26
 
 ### Changed (1)
