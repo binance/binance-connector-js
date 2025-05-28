@@ -206,7 +206,7 @@ export class MarketDataApi implements MarketDataApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 }

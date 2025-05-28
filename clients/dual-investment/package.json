@@ -1,7 +1,7 @@
 {
     "name": "@binance/dual-investment",
     "description": "Official Binance Dual Investment Connector - A lightweight library that provides a convenient interface to Binance's Dual Investment REST API.",
-    "version": "2.0.0",
+    "version": "3.0.0",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",
