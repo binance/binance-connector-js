@@ -6,7 +6,6 @@ export * as DerivativesTradingPortfolioMarginProRestAPI from './rest-api';
 
 export {
     DERIVATIVES_TRADING_PORTFOLIO_MARGIN_PRO_REST_API_PROD_URL,
-    DERIVATIVES_TRADING_PORTFOLIO_MARGIN_PRO_REST_API_TESTNET_URL,
     ConnectorClientError,
     RequiredError,
     UnauthorizedError,
