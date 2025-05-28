@@ -60,9 +60,7 @@ export const DERIVATIVES_TRADING_PORTFOLIO_MARGIN_REST_API_TESTNET_URL =
 
 // Derivatives Trading (Portfolio Margin Pro) constants
 export const DERIVATIVES_TRADING_PORTFOLIO_MARGIN_PRO_REST_API_PROD_URL =
-    'https://fapi.binance.com';
-export const DERIVATIVES_TRADING_PORTFOLIO_MARGIN_PRO_REST_API_TESTNET_URL =
-    'https://testnet.binancefuture.com';
+    'https://api.binance.com';
 
 // Dual Investment constants
 export const DUAL_INVESTMENT_REST_API_PROD_URL = 'https://api.binance.com';

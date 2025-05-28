@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.5 - 2025-05-28
+
+### Changed
+
+- Updated `DERIVATIVES_TRADING_PORTFOLIO_MARGIN_PRO_REST_API_PROD_URL` to `https://api.binance.com`.
+- Removed `DERIVATIVES_TRADING_PORTFOLIO_MARGIN_PRO_REST_API_TESTNET_URL`.
+
 ## 1.0.4 - 2025-05-13
 
 ### Added
