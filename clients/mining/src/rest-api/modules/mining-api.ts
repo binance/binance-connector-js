@@ -1633,7 +1633,7 @@ export class MiningApi implements MiningApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.params,
             localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
+            { isSigned: true }
         );
     }
 
