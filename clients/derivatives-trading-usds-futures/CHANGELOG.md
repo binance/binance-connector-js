@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.0.0 - 2025-06-03
+
+### Removed (1)
+
+#### REST API
+
+- `historicalBlvtNavKlineCandlestick()` (`GET /fapi/v1/lvtKlines`)
+
 ## 5.0.0 - 2025-05-19
 
 ### Changed (6)

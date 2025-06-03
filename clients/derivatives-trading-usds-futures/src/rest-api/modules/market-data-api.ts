@@ -28,7 +28,6 @@ import type {
     ExchangeInformationResponse,
     GetFundingRateHistoryResponse,
     GetFundingRateInfoResponse,
-    HistoricalBlvtNavKlineCandlestickResponse,
     IndexPriceKlineCandlestickDataResponse,
     KlineCandlestickDataResponse,
     LongShortRatioResponse,
@@ -418,64 +417,6 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
 
             return {
                 endpoint: '/fapi/v1/fundingInfo',
-                method: 'GET',
-                params: localVarQueryParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
-         * The BLVT NAV system is based on Binance Futures, so the endpoint is based on fapi
-         *
-         * Weight: 1
-         *
-         * @summary Historical BLVT NAV Kline/Candlestick
-         * @param {string} symbol
-         * @param {HistoricalBlvtNavKlineCandlestickIntervalEnum} interval
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [limit] Default 100; max 1000
-         *
-         * @throws {RequiredError}
-         */
-        historicalBlvtNavKlineCandlestick: async (
-            symbol: string,
-            interval: HistoricalBlvtNavKlineCandlestickIntervalEnum,
-            startTime?: number,
-            endTime?: number,
-            limit?: number
-        ): Promise<RequestArgs> => {
-            // verify required parameter 'symbol' is not null or undefined
-            assertParamExists('historicalBlvtNavKlineCandlestick', 'symbol', symbol);
-            // verify required parameter 'interval' is not null or undefined
-            assertParamExists('historicalBlvtNavKlineCandlestick', 'interval', interval);
-
-            const localVarQueryParameter: Record<string, unknown> = {};
-
-            if (symbol !== undefined && symbol !== null) {
-                localVarQueryParameter['symbol'] = symbol;
-            }
-
-            if (interval !== undefined && interval !== null) {
-                localVarQueryParameter['interval'] = interval;
-            }
-
-            if (startTime !== undefined && startTime !== null) {
-                localVarQueryParameter['startTime'] = startTime;
-            }
-
-            if (endTime !== undefined && endTime !== null) {
-                localVarQueryParameter['endTime'] = endTime;
-            }
-
-            if (limit !== undefined && limit !== null) {
-                localVarQueryParameter['limit'] = limit;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/fapi/v1/lvtKlines',
                 method: 'GET',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
@@ -1648,20 +1589,6 @@ export interface MarketDataApiInterface {
      */
     getFundingRateInfo(): Promise<RestApiResponse<GetFundingRateInfoResponse>>;
     /**
-     * The BLVT NAV system is based on Binance Futures, so the endpoint is based on fapi
-     *
-     * Weight: 1
-     *
-     * @summary Historical BLVT NAV Kline/Candlestick
-     * @param {HistoricalBlvtNavKlineCandlestickRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MarketDataApiInterface
-     */
-    historicalBlvtNavKlineCandlestick(
-        requestParameters: HistoricalBlvtNavKlineCandlestickRequest
-    ): Promise<RestApiResponse<HistoricalBlvtNavKlineCandlestickResponse>>;
-    /**
      * Kline/candlestick bars for the index price of a pair.
      * Klines are uniquely identified by their open time.
      *
@@ -2247,47 +2174,6 @@ export interface GetFundingRateHistoryRequest {
      * Default 100; max 1000
      * @type {number}
      * @memberof MarketDataApiGetFundingRateHistory
-     */
-    readonly limit?: number;
-}
-
-/**
- * Request parameters for historicalBlvtNavKlineCandlestick operation in MarketDataApi.
- * @interface HistoricalBlvtNavKlineCandlestickRequest
- */
-export interface HistoricalBlvtNavKlineCandlestickRequest {
-    /**
-     *
-     * @type {string}
-     * @memberof MarketDataApiHistoricalBlvtNavKlineCandlestick
-     */
-    readonly symbol: string;
-
-    /**
-     *
-     * @type {'1m' | '3m' | '5m' | '15m' | '30m' | '1h' | '2h' | '4h' | '6h' | '8h' | '12h' | '1d' | '3d' | '1w' | '1M'}
-     * @memberof MarketDataApiHistoricalBlvtNavKlineCandlestick
-     */
-    readonly interval: HistoricalBlvtNavKlineCandlestickIntervalEnum;
-
-    /**
-     *
-     * @type {number}
-     * @memberof MarketDataApiHistoricalBlvtNavKlineCandlestick
-     */
-    readonly startTime?: number;
-
-    /**
-     *
-     * @type {number}
-     * @memberof MarketDataApiHistoricalBlvtNavKlineCandlestick
-     */
-    readonly endTime?: number;
-
-    /**
-     * Default 100; max 1000
-     * @type {number}
-     * @memberof MarketDataApiHistoricalBlvtNavKlineCandlestick
      */
     readonly limit?: number;
 }
@@ -3130,39 +3016,6 @@ export class MarketDataApi implements MarketDataApiInterface {
     }
 
     /**
-     * The BLVT NAV system is based on Binance Futures, so the endpoint is based on fapi
-     *
-     * Weight: 1
-     *
-     * @summary Historical BLVT NAV Kline/Candlestick
-     * @param {HistoricalBlvtNavKlineCandlestickRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<HistoricalBlvtNavKlineCandlestickResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Historical-BLVT-NAV-Kline-Candlestick Binance API Documentation}
-     */
-    public async historicalBlvtNavKlineCandlestick(
-        requestParameters: HistoricalBlvtNavKlineCandlestickRequest
-    ): Promise<RestApiResponse<HistoricalBlvtNavKlineCandlestickResponse>> {
-        const localVarAxiosArgs =
-            await this.localVarAxiosParamCreator.historicalBlvtNavKlineCandlestick(
-                requestParameters?.symbol,
-                requestParameters?.interval,
-                requestParameters?.startTime,
-                requestParameters?.endTime,
-                requestParameters?.limit
-            );
-        return sendRequest<HistoricalBlvtNavKlineCandlestickResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
-        );
-    }
-
-    /**
      * Kline/candlestick bars for the index price of a pair.
      * Klines are uniquely identified by their open time.
      *
@@ -3992,26 +3845,6 @@ export const ContinuousContractKlineCandlestickDataIntervalEnum = {
 } as const;
 export type ContinuousContractKlineCandlestickDataIntervalEnum =
     (typeof ContinuousContractKlineCandlestickDataIntervalEnum)[keyof typeof ContinuousContractKlineCandlestickDataIntervalEnum];
-
-export const HistoricalBlvtNavKlineCandlestickIntervalEnum = {
-    INTERVAL_1m: '1m',
-    INTERVAL_3m: '3m',
-    INTERVAL_5m: '5m',
-    INTERVAL_15m: '15m',
-    INTERVAL_30m: '30m',
-    INTERVAL_1h: '1h',
-    INTERVAL_2h: '2h',
-    INTERVAL_4h: '4h',
-    INTERVAL_6h: '6h',
-    INTERVAL_8h: '8h',
-    INTERVAL_12h: '12h',
-    INTERVAL_1d: '1d',
-    INTERVAL_3d: '3d',
-    INTERVAL_1w: '1w',
-    INTERVAL_1M: '1M',
-} as const;
-export type HistoricalBlvtNavKlineCandlestickIntervalEnum =
-    (typeof HistoricalBlvtNavKlineCandlestickIntervalEnum)[keyof typeof HistoricalBlvtNavKlineCandlestickIntervalEnum];
 
 export const IndexPriceKlineCandlestickDataIntervalEnum = {
     INTERVAL_1m: '1m',

@@ -54,7 +54,6 @@ import type {
     CompressedAggregateTradesListRequest,
     ContinuousContractKlineCandlestickDataRequest,
     GetFundingRateHistoryRequest,
-    HistoricalBlvtNavKlineCandlestickRequest,
     IndexPriceKlineCandlestickDataRequest,
     KlineCandlestickDataRequest,
     LongShortRatioRequest,
@@ -146,7 +145,6 @@ import type {
     ExchangeInformationResponse,
     GetFundingRateHistoryResponse,
     GetFundingRateInfoResponse,
-    HistoricalBlvtNavKlineCandlestickResponse,
     IndexPriceKlineCandlestickDataResponse,
     KlineCandlestickDataResponse,
     LongShortRatioResponse,
@@ -860,23 +858,6 @@ export class RestAPI {
      */
     getFundingRateInfo(): Promise<RestApiResponse<GetFundingRateInfoResponse>> {
         return this.marketDataApi.getFundingRateInfo();
-    }
-
-    /**
-     * The BLVT NAV system is based on Binance Futures, so the endpoint is based on fapi
-     *
-     * Weight: 1
-     *
-     * @summary Historical BLVT NAV Kline/Candlestick
-     * @param {HistoricalBlvtNavKlineCandlestickRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<HistoricalBlvtNavKlineCandlestickResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Historical-BLVT-NAV-Kline-Candlestick Binance API Documentation}
-     */
-    historicalBlvtNavKlineCandlestick(
-        requestParameters: HistoricalBlvtNavKlineCandlestickRequest
-    ): Promise<RestApiResponse<HistoricalBlvtNavKlineCandlestickResponse>> {
-        return this.marketDataApi.historicalBlvtNavKlineCandlestick(requestParameters);
     }
 
     /**
@@ -1683,7 +1664,6 @@ export class RestAPI {
      * when the order is in partially filled status and the new `quantity` <= `executedQty`
      * When the order is `GTX` and the new price will cause it to be executed immediately
      * One order can only be modfied for less than 10000 times
-     * Modify order will set `selfTradePreventionMode` to `NONE`
      *
      * Weight: 1 on 10s order rate limit(X-MBX-ORDER-COUNT-10S);
      * 1 on 1min order rate limit(X-MBX-ORDER-COUNT-1M);

@@ -849,7 +849,6 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * when the order is in partially filled status and the new `quantity` <= `executedQty`
          * When the order is `GTX` and the new price will cause it to be executed immediately
          * One order can only be modfied for less than 10000 times
-         * Modify order will set `selfTradePreventionMode` to `NONE`
          *
          * Weight: 1 on 10s order rate limit(X-MBX-ORDER-COUNT-10S);
          * 1 on 1min order rate limit(X-MBX-ORDER-COUNT-1M);
@@ -1909,7 +1908,6 @@ export interface TradeApiInterface {
      * when the order is in partially filled status and the new `quantity` <= `executedQty`
      * When the order is `GTX` and the new price will cause it to be executed immediately
      * One order can only be modfied for less than 10000 times
-     * Modify order will set `selfTradePreventionMode` to `NONE`
      *
      * Weight: 1 on 10s order rate limit(X-MBX-ORDER-COUNT-10S);
      * 1 on 1min order rate limit(X-MBX-ORDER-COUNT-1M);
@@ -3730,7 +3728,6 @@ export class TradeApi implements TradeApiInterface {
      * when the order is in partially filled status and the new `quantity` <= `executedQty`
      * When the order is `GTX` and the new price will cause it to be executed immediately
      * One order can only be modfied for less than 10000 times
-     * Modify order will set `selfTradePreventionMode` to `NONE`
      *
      * Weight: 1 on 10s order rate limit(X-MBX-ORDER-COUNT-10S);
      * 1 on 1min order rate limit(X-MBX-ORDER-COUNT-1M);

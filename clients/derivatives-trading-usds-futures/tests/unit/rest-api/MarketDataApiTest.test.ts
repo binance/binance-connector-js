@@ -20,7 +20,6 @@ import {
     BasisPeriodEnum,
     ContinuousContractKlineCandlestickDataContractTypeEnum,
     ContinuousContractKlineCandlestickDataIntervalEnum,
-    HistoricalBlvtNavKlineCandlestickIntervalEnum,
     IndexPriceKlineCandlestickDataIntervalEnum,
     KlineCandlestickDataIntervalEnum,
     LongShortRatioPeriodEnum,
@@ -37,7 +36,6 @@ import {
     CompressedAggregateTradesListRequest,
     ContinuousContractKlineCandlestickDataRequest,
     GetFundingRateHistoryRequest,
-    HistoricalBlvtNavKlineCandlestickRequest,
     IndexPriceKlineCandlestickDataRequest,
     KlineCandlestickDataRequest,
     LongShortRatioRequest,
@@ -70,7 +68,6 @@ import type {
     ExchangeInformationResponse,
     GetFundingRateHistoryResponse,
     GetFundingRateInfoResponse,
-    HistoricalBlvtNavKlineCandlestickResponse,
     IndexPriceKlineCandlestickDataResponse,
     KlineCandlestickDataResponse,
     LongShortRatioResponse,
@@ -891,135 +888,6 @@ describe('MarketDataApi', () => {
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'getFundingRateInfo').mockRejectedValueOnce(mockError);
             await expect(client.getFundingRateInfo()).rejects.toThrow('ResponseError');
-            spy.mockRestore();
-        });
-    });
-
-    describe('historicalBlvtNavKlineCandlestick()', () => {
-        it('should execute historicalBlvtNavKlineCandlestick() successfully with required parameters only', async () => {
-            const params: HistoricalBlvtNavKlineCandlestickRequest = {
-                symbol: 'symbol_example',
-                interval: HistoricalBlvtNavKlineCandlestickIntervalEnum.INTERVAL_1m,
-            };
-
-            mockResponse = [
-                [
-                    1598371200000,
-                    '5.88275270',
-                    '6.03142087',
-                    '5.85749741',
-                    '5.99403551',
-                    '2.28602984',
-                    1598374799999,
-                    '0',
-                    6209,
-                    '14517.64507907',
-                    '0',
-                    '0',
-                ],
-            ];
-
-            const spy = jest.spyOn(client, 'historicalBlvtNavKlineCandlestick').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<HistoricalBlvtNavKlineCandlestickResponse>)
-            );
-            const response = await client.historicalBlvtNavKlineCandlestick(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute historicalBlvtNavKlineCandlestick() successfully with optional parameters', async () => {
-            const params: HistoricalBlvtNavKlineCandlestickRequest = {
-                symbol: 'symbol_example',
-                interval: HistoricalBlvtNavKlineCandlestickIntervalEnum.INTERVAL_1m,
-                startTime: 1623319461670,
-                endTime: 1641782889000,
-                limit: 100,
-            };
-
-            mockResponse = [
-                [
-                    1598371200000,
-                    '5.88275270',
-                    '6.03142087',
-                    '5.85749741',
-                    '5.99403551',
-                    '2.28602984',
-                    1598374799999,
-                    '0',
-                    6209,
-                    '14517.64507907',
-                    '0',
-                    '0',
-                ],
-            ];
-
-            const spy = jest.spyOn(client, 'historicalBlvtNavKlineCandlestick').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<HistoricalBlvtNavKlineCandlestickResponse>)
-            );
-            const response = await client.historicalBlvtNavKlineCandlestick(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw RequiredError when symbol is missing', async () => {
-            const _params: HistoricalBlvtNavKlineCandlestickRequest = {
-                symbol: 'symbol_example',
-                interval: HistoricalBlvtNavKlineCandlestickIntervalEnum.INTERVAL_1m,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.symbol;
-
-            await expect(client.historicalBlvtNavKlineCandlestick(params)).rejects.toThrow(
-                'Required parameter symbol was null or undefined when calling historicalBlvtNavKlineCandlestick.'
-            );
-        });
-
-        it('should throw RequiredError when interval is missing', async () => {
-            const _params: HistoricalBlvtNavKlineCandlestickRequest = {
-                symbol: 'symbol_example',
-                interval: HistoricalBlvtNavKlineCandlestickIntervalEnum.INTERVAL_1m,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.interval;
-
-            await expect(client.historicalBlvtNavKlineCandlestick(params)).rejects.toThrow(
-                'Required parameter interval was null or undefined when calling historicalBlvtNavKlineCandlestick.'
-            );
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const params: HistoricalBlvtNavKlineCandlestickRequest = {
-                symbol: 'symbol_example',
-                interval: HistoricalBlvtNavKlineCandlestickIntervalEnum.INTERVAL_1m,
-            };
-
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest
-                .spyOn(client, 'historicalBlvtNavKlineCandlestick')
-                .mockRejectedValueOnce(mockError);
-            await expect(client.historicalBlvtNavKlineCandlestick(params)).rejects.toThrow(
-                'ResponseError'
-            );
             spy.mockRestore();
         });
     });
