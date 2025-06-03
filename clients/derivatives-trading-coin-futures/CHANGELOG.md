@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.1 - 2025-06-03
+
+### Changed
+
+- Update `@binance/common` library to version `1.0.6`.
+
 ## 4.0.0 - 2025-05-19
 
 ### Changed (5)
