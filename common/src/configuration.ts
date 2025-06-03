@@ -115,16 +115,16 @@ export class ConfigurationRestAPI {
         this.privateKeyPassphrase = param.privateKeyPassphrase;
         this.timeUnit = param.timeUnit;
         this.baseOptions = {
-            timeout: this.timeout ?? 1000,
-            proxy: this.proxy && {
-                host: this.proxy.host,
-                port: this.proxy.port,
-                auth: this.proxy.auth,
+            timeout: param.timeout ?? 1000,
+            proxy: param.proxy && {
+                host: param.proxy.host,
+                port: param.proxy.port,
+                auth: param.proxy.auth,
             },
-            httpsAgent: this.httpsAgent ?? false,
+            httpsAgent: param.httpsAgent ?? false,
             headers: {
                 'Content-Type': 'application/json',
-                'X-MBX-APIKEY': this.apiKey,
+                'X-MBX-APIKEY': param.apiKey,
             },
         };
     }
