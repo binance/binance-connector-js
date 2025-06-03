@@ -117,6 +117,7 @@ const HistoryApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {number} [endTime]
          * @param {number} [current] Currently querying the page. Start from 1. Default:1
          * @param {number} [size] Default:10, Max:100
+         * @param {number} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -127,7 +128,8 @@ const HistoryApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             startTime?: number,
             endTime?: number,
             current?: number,
-            size?: number
+            size?: number,
+            recvWindow?: number
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -157,6 +159,10 @@ const HistoryApiAxiosParamCreator = function (configuration: ConfigurationRestAP
 
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
+            }
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
             }
 
             let _timeUnit: TimeUnit | undefined;
@@ -876,6 +882,13 @@ export interface GetFlexibleRedemptionRecordRequest {
      * @memberof HistoryApiGetFlexibleRedemptionRecord
      */
     readonly size?: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof HistoryApiGetFlexibleRedemptionRecord
+     */
+    readonly recvWindow?: number;
 }
 
 /**
@@ -1307,7 +1320,8 @@ export class HistoryApi implements HistoryApiInterface {
             requestParameters?.startTime,
             requestParameters?.endTime,
             requestParameters?.current,
-            requestParameters?.size
+            requestParameters?.size,
+            requestParameters?.recvWindow
         );
         return sendRequest<GetFlexibleRedemptionRecordResponse>(
             this.configuration,

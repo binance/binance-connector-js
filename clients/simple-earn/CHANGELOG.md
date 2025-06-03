@@ -1,5 +1,13 @@
 # Changelog
 
+## 5.0.0 - 2025-06-03
+
+### Changed (1)
+
+- Added parameter `recvWindow`
+  - affected methods:
+    - `getFlexibleRedemptionRecord()` (`GET /sapi/v1/simple-earn/flexible/history/redemptionRecord`)
+
 ## 4.0.0 - 2025-05-28
 
 ### Changed (1)
