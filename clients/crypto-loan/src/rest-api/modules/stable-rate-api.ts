@@ -21,17 +21,10 @@ import {
 } from '@binance/common';
 import type {
     CheckCollateralRepayRateStableRateResponse,
-    CryptoLoanAdjustLtvResponse,
-    CryptoLoanBorrowResponse,
-    CryptoLoanCustomizeMarginCallResponse,
-    CryptoLoanRepayResponse,
-    GetCollateralAssetsDataResponse,
     GetCryptoLoansIncomeHistoryResponse,
     GetLoanBorrowHistoryResponse,
     GetLoanLtvAdjustmentHistoryResponse,
-    GetLoanOngoingOrdersResponse,
     GetLoanRepaymentHistoryResponse,
-    GetLoanableAssetsDataResponse,
 } from '../types';
 
 /**
@@ -92,251 +85,6 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
 
             return {
                 endpoint: '/sapi/v1/loan/repay/collateral/rate',
-                method: 'GET',
-                params: localVarQueryParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
-         * Crypto Loan Adjust LTV
-         *
-         * Weight: 6000
-         *
-         * @summary Crypto Loan Adjust LTV(TRADE)
-         * @param {number} orderId
-         * @param {number} amount
-         * @param {string} direction "ADDITIONAL", "REDUCED"
-         * @param {number} [recvWindow]
-         *
-         * @throws {RequiredError}
-         */
-        cryptoLoanAdjustLtv: async (
-            orderId: number,
-            amount: number,
-            direction: string,
-            recvWindow?: number
-        ): Promise<RequestArgs> => {
-            // verify required parameter 'orderId' is not null or undefined
-            assertParamExists('cryptoLoanAdjustLtv', 'orderId', orderId);
-            // verify required parameter 'amount' is not null or undefined
-            assertParamExists('cryptoLoanAdjustLtv', 'amount', amount);
-            // verify required parameter 'direction' is not null or undefined
-            assertParamExists('cryptoLoanAdjustLtv', 'direction', direction);
-
-            const localVarQueryParameter: Record<string, unknown> = {};
-
-            if (orderId !== undefined && orderId !== null) {
-                localVarQueryParameter['orderId'] = orderId;
-            }
-
-            if (amount !== undefined && amount !== null) {
-                localVarQueryParameter['amount'] = amount;
-            }
-
-            if (direction !== undefined && direction !== null) {
-                localVarQueryParameter['direction'] = direction;
-            }
-
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/sapi/v1/loan/adjust/ltv',
-                method: 'POST',
-                params: localVarQueryParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
-         * Crypto Loan Borrow
-         *
-         * Weight: 6000
-         *
-         * @summary Crypto Loan Borrow(TRADE)
-         * @param {string} loanCoin
-         * @param {string} collateralCoin
-         * @param {number} loanTerm 7/30 days
-         * @param {number} [recvWindow]
-         *
-         * @throws {RequiredError}
-         */
-        cryptoLoanBorrow: async (
-            loanCoin: string,
-            collateralCoin: string,
-            loanTerm: number,
-            recvWindow?: number
-        ): Promise<RequestArgs> => {
-            // verify required parameter 'loanCoin' is not null or undefined
-            assertParamExists('cryptoLoanBorrow', 'loanCoin', loanCoin);
-            // verify required parameter 'collateralCoin' is not null or undefined
-            assertParamExists('cryptoLoanBorrow', 'collateralCoin', collateralCoin);
-            // verify required parameter 'loanTerm' is not null or undefined
-            assertParamExists('cryptoLoanBorrow', 'loanTerm', loanTerm);
-
-            const localVarQueryParameter: Record<string, unknown> = {};
-
-            if (loanCoin !== undefined && loanCoin !== null) {
-                localVarQueryParameter['loanCoin'] = loanCoin;
-            }
-
-            if (collateralCoin !== undefined && collateralCoin !== null) {
-                localVarQueryParameter['collateralCoin'] = collateralCoin;
-            }
-
-            if (loanTerm !== undefined && loanTerm !== null) {
-                localVarQueryParameter['loanTerm'] = loanTerm;
-            }
-
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/sapi/v1/loan/borrow',
-                method: 'POST',
-                params: localVarQueryParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
-         * Customize Margin Call
-         *
-         * Weight: 6000
-         *
-         * @summary Crypto Loan Customize Margin Call(TRADE)
-         * @param {number} marginCall
-         * @param {number} [recvWindow]
-         *
-         * @throws {RequiredError}
-         */
-        cryptoLoanCustomizeMarginCall: async (
-            marginCall: number,
-            recvWindow?: number
-        ): Promise<RequestArgs> => {
-            // verify required parameter 'marginCall' is not null or undefined
-            assertParamExists('cryptoLoanCustomizeMarginCall', 'marginCall', marginCall);
-
-            const localVarQueryParameter: Record<string, unknown> = {};
-
-            if (marginCall !== undefined && marginCall !== null) {
-                localVarQueryParameter['marginCall'] = marginCall;
-            }
-
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/sapi/v1/loan/customize/margin_call',
-                method: 'POST',
-                params: localVarQueryParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
-         * Crypto Loan Repay
-         *
-         * Weight: 6000
-         *
-         * @summary Crypto Loan Repay(TRADE)
-         * @param {number} orderId
-         * @param {number} amount
-         * @param {number} [type] Default: 1. 1 for "repay with borrowed coin"; 2 for "repay with collateral".
-         * @param {boolean} [collateralReturn] Default: TRUE. TRUE: Return extra collateral to spot account; FALSE: Keep extra collateral in the order, and lower LTV.
-         * @param {number} [recvWindow]
-         *
-         * @throws {RequiredError}
-         */
-        cryptoLoanRepay: async (
-            orderId: number,
-            amount: number,
-            type?: number,
-            collateralReturn?: boolean,
-            recvWindow?: number
-        ): Promise<RequestArgs> => {
-            // verify required parameter 'orderId' is not null or undefined
-            assertParamExists('cryptoLoanRepay', 'orderId', orderId);
-            // verify required parameter 'amount' is not null or undefined
-            assertParamExists('cryptoLoanRepay', 'amount', amount);
-
-            const localVarQueryParameter: Record<string, unknown> = {};
-
-            if (orderId !== undefined && orderId !== null) {
-                localVarQueryParameter['orderId'] = orderId;
-            }
-
-            if (amount !== undefined && amount !== null) {
-                localVarQueryParameter['amount'] = amount;
-            }
-
-            if (type !== undefined && type !== null) {
-                localVarQueryParameter['type'] = type;
-            }
-
-            if (collateralReturn !== undefined && collateralReturn !== null) {
-                localVarQueryParameter['collateralReturn'] = collateralReturn;
-            }
-
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/sapi/v1/loan/repay',
-                method: 'POST',
-                params: localVarQueryParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
-         * Get LTV information and collateral limit of collateral assets. The collateral limit is shown in USD value.
-         *
-         * Weight: 400
-         *
-         * @summary Get Collateral Assets Data(USER_DATA)
-         * @param {string} [collateralCoin]
-         * @param {number} [vipLevel] Default: user's vip level. Send "-1" to check specified configuration
-         * @param {number} [recvWindow]
-         *
-         * @throws {RequiredError}
-         */
-        getCollateralAssetsData: async (
-            collateralCoin?: string,
-            vipLevel?: number,
-            recvWindow?: number
-        ): Promise<RequestArgs> => {
-            const localVarQueryParameter: Record<string, unknown> = {};
-
-            if (collateralCoin !== undefined && collateralCoin !== null) {
-                localVarQueryParameter['collateralCoin'] = collateralCoin;
-            }
-
-            if (vipLevel !== undefined && vipLevel !== null) {
-                localVarQueryParameter['vipLevel'] = vipLevel;
-            }
-
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/sapi/v1/loan/collateral/data',
                 method: 'GET',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
@@ -413,7 +161,7 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 400
          *
          * @summary Get Loan Borrow History(USER_DATA)
-         * @param {number} [orderId]
+         * @param {number} [orderId] orderId in `POST /sapi/v1/loan/borrow`
          * @param {string} [loanCoin]
          * @param {string} [collateralCoin]
          * @param {number} [startTime]
@@ -487,7 +235,7 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 400
          *
          * @summary Get Loan LTV Adjustment History(USER_DATA)
-         * @param {number} [orderId]
+         * @param {number} [orderId] orderId in `POST /sapi/v1/loan/borrow`
          * @param {string} [loanCoin]
          * @param {string} [collateralCoin]
          * @param {number} [startTime]
@@ -553,65 +301,6 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
-         * Get Loan Ongoing Orders
-         *
-         * Weight: 300
-         *
-         * @summary Get Loan Ongoing Orders(USER_DATA)
-         * @param {number} [orderId]
-         * @param {string} [loanCoin]
-         * @param {string} [collateralCoin]
-         * @param {number} [current] Current querying page. Start from 1; default: 1; max: 1000
-         * @param {number} [limit] Default: 10; max: 100
-         * @param {number} [recvWindow]
-         *
-         * @throws {RequiredError}
-         */
-        getLoanOngoingOrders: async (
-            orderId?: number,
-            loanCoin?: string,
-            collateralCoin?: string,
-            current?: number,
-            limit?: number,
-            recvWindow?: number
-        ): Promise<RequestArgs> => {
-            const localVarQueryParameter: Record<string, unknown> = {};
-
-            if (orderId !== undefined && orderId !== null) {
-                localVarQueryParameter['orderId'] = orderId;
-            }
-
-            if (loanCoin !== undefined && loanCoin !== null) {
-                localVarQueryParameter['loanCoin'] = loanCoin;
-            }
-
-            if (collateralCoin !== undefined && collateralCoin !== null) {
-                localVarQueryParameter['collateralCoin'] = collateralCoin;
-            }
-
-            if (current !== undefined && current !== null) {
-                localVarQueryParameter['current'] = current;
-            }
-
-            if (limit !== undefined && limit !== null) {
-                localVarQueryParameter['limit'] = limit;
-            }
-
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/sapi/v1/loan/ongoing/orders',
-                method: 'GET',
-                params: localVarQueryParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
          * Get Loan Repayment History
          *
          * If startTime and endTime are not sent, the recent 90-day data will be returned.
@@ -620,7 +309,7 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 400
          *
          * @summary Get Loan Repayment History(USER_DATA)
-         * @param {number} [orderId]
+         * @param {number} [orderId] orderId in `POST /sapi/v1/loan/borrow`
          * @param {string} [loanCoin]
          * @param {string} [collateralCoin]
          * @param {number} [startTime]
@@ -685,47 +374,6 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
                 timeUnit: _timeUnit,
             };
         },
-        /**
-         * Get interest rate and borrow limit of loanable assets. The borrow limit is shown in USD value.
-         *
-         * Weight: 400
-         *
-         * @summary Get Loanable Assets Data(USER_DATA)
-         * @param {string} [loanCoin]
-         * @param {number} [vipLevel] Default: user's vip level. Send "-1" to check specified configuration
-         * @param {number} [recvWindow]
-         *
-         * @throws {RequiredError}
-         */
-        getLoanableAssetsData: async (
-            loanCoin?: string,
-            vipLevel?: number,
-            recvWindow?: number
-        ): Promise<RequestArgs> => {
-            const localVarQueryParameter: Record<string, unknown> = {};
-
-            if (loanCoin !== undefined && loanCoin !== null) {
-                localVarQueryParameter['loanCoin'] = loanCoin;
-            }
-
-            if (vipLevel !== undefined && vipLevel !== null) {
-                localVarQueryParameter['vipLevel'] = vipLevel;
-            }
-
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/sapi/v1/loan/loanable/data',
-                method: 'GET',
-                params: localVarQueryParameter,
-                timeUnit: _timeUnit,
-            };
-        },
     };
 };
 
@@ -748,76 +396,6 @@ export interface StableRateApiInterface {
     checkCollateralRepayRateStableRate(
         requestParameters: CheckCollateralRepayRateStableRateRequest
     ): Promise<RestApiResponse<CheckCollateralRepayRateStableRateResponse>>;
-    /**
-     * Crypto Loan Adjust LTV
-     *
-     * Weight: 6000
-     *
-     * @summary Crypto Loan Adjust LTV(TRADE)
-     * @param {CryptoLoanAdjustLtvRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof StableRateApiInterface
-     */
-    cryptoLoanAdjustLtv(
-        requestParameters: CryptoLoanAdjustLtvRequest
-    ): Promise<RestApiResponse<CryptoLoanAdjustLtvResponse>>;
-    /**
-     * Crypto Loan Borrow
-     *
-     * Weight: 6000
-     *
-     * @summary Crypto Loan Borrow(TRADE)
-     * @param {CryptoLoanBorrowRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof StableRateApiInterface
-     */
-    cryptoLoanBorrow(
-        requestParameters: CryptoLoanBorrowRequest
-    ): Promise<RestApiResponse<CryptoLoanBorrowResponse>>;
-    /**
-     * Customize Margin Call
-     *
-     * Weight: 6000
-     *
-     * @summary Crypto Loan Customize Margin Call(TRADE)
-     * @param {CryptoLoanCustomizeMarginCallRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof StableRateApiInterface
-     */
-    cryptoLoanCustomizeMarginCall(
-        requestParameters: CryptoLoanCustomizeMarginCallRequest
-    ): Promise<RestApiResponse<CryptoLoanCustomizeMarginCallResponse>>;
-    /**
-     * Crypto Loan Repay
-     *
-     * Weight: 6000
-     *
-     * @summary Crypto Loan Repay(TRADE)
-     * @param {CryptoLoanRepayRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof StableRateApiInterface
-     */
-    cryptoLoanRepay(
-        requestParameters: CryptoLoanRepayRequest
-    ): Promise<RestApiResponse<CryptoLoanRepayResponse>>;
-    /**
-     * Get LTV information and collateral limit of collateral assets. The collateral limit is shown in USD value.
-     *
-     * Weight: 400
-     *
-     * @summary Get Collateral Assets Data(USER_DATA)
-     * @param {GetCollateralAssetsDataRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof StableRateApiInterface
-     */
-    getCollateralAssetsData(
-        requestParameters?: GetCollateralAssetsDataRequest
-    ): Promise<RestApiResponse<GetCollateralAssetsDataResponse>>;
     /**
      * Get Crypto Loans Income History
      *
@@ -870,20 +448,6 @@ export interface StableRateApiInterface {
         requestParameters?: GetLoanLtvAdjustmentHistoryRequest
     ): Promise<RestApiResponse<GetLoanLtvAdjustmentHistoryResponse>>;
     /**
-     * Get Loan Ongoing Orders
-     *
-     * Weight: 300
-     *
-     * @summary Get Loan Ongoing Orders(USER_DATA)
-     * @param {GetLoanOngoingOrdersRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof StableRateApiInterface
-     */
-    getLoanOngoingOrders(
-        requestParameters?: GetLoanOngoingOrdersRequest
-    ): Promise<RestApiResponse<GetLoanOngoingOrdersResponse>>;
-    /**
      * Get Loan Repayment History
      *
      * If startTime and endTime are not sent, the recent 90-day data will be returned.
@@ -900,20 +464,6 @@ export interface StableRateApiInterface {
     getLoanRepaymentHistory(
         requestParameters?: GetLoanRepaymentHistoryRequest
     ): Promise<RestApiResponse<GetLoanRepaymentHistoryResponse>>;
-    /**
-     * Get interest rate and borrow limit of loanable assets. The borrow limit is shown in USD value.
-     *
-     * Weight: 400
-     *
-     * @summary Get Loanable Assets Data(USER_DATA)
-     * @param {GetLoanableAssetsDataRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof StableRateApiInterface
-     */
-    getLoanableAssetsData(
-        requestParameters?: GetLoanableAssetsDataRequest
-    ): Promise<RestApiResponse<GetLoanableAssetsDataResponse>>;
 }
 
 /**
@@ -946,162 +496,6 @@ export interface CheckCollateralRepayRateStableRateRequest {
      *
      * @type {number}
      * @memberof StableRateApiCheckCollateralRepayRateStableRate
-     */
-    readonly recvWindow?: number;
-}
-
-/**
- * Request parameters for cryptoLoanAdjustLtv operation in StableRateApi.
- * @interface CryptoLoanAdjustLtvRequest
- */
-export interface CryptoLoanAdjustLtvRequest {
-    /**
-     *
-     * @type {number}
-     * @memberof StableRateApiCryptoLoanAdjustLtv
-     */
-    readonly orderId: number;
-
-    /**
-     *
-     * @type {number}
-     * @memberof StableRateApiCryptoLoanAdjustLtv
-     */
-    readonly amount: number;
-
-    /**
-     * "ADDITIONAL", "REDUCED"
-     * @type {string}
-     * @memberof StableRateApiCryptoLoanAdjustLtv
-     */
-    readonly direction: string;
-
-    /**
-     *
-     * @type {number}
-     * @memberof StableRateApiCryptoLoanAdjustLtv
-     */
-    readonly recvWindow?: number;
-}
-
-/**
- * Request parameters for cryptoLoanBorrow operation in StableRateApi.
- * @interface CryptoLoanBorrowRequest
- */
-export interface CryptoLoanBorrowRequest {
-    /**
-     *
-     * @type {string}
-     * @memberof StableRateApiCryptoLoanBorrow
-     */
-    readonly loanCoin: string;
-
-    /**
-     *
-     * @type {string}
-     * @memberof StableRateApiCryptoLoanBorrow
-     */
-    readonly collateralCoin: string;
-
-    /**
-     * 7/30 days
-     * @type {number}
-     * @memberof StableRateApiCryptoLoanBorrow
-     */
-    readonly loanTerm: number;
-
-    /**
-     *
-     * @type {number}
-     * @memberof StableRateApiCryptoLoanBorrow
-     */
-    readonly recvWindow?: number;
-}
-
-/**
- * Request parameters for cryptoLoanCustomizeMarginCall operation in StableRateApi.
- * @interface CryptoLoanCustomizeMarginCallRequest
- */
-export interface CryptoLoanCustomizeMarginCallRequest {
-    /**
-     *
-     * @type {number}
-     * @memberof StableRateApiCryptoLoanCustomizeMarginCall
-     */
-    readonly marginCall: number;
-
-    /**
-     *
-     * @type {number}
-     * @memberof StableRateApiCryptoLoanCustomizeMarginCall
-     */
-    readonly recvWindow?: number;
-}
-
-/**
- * Request parameters for cryptoLoanRepay operation in StableRateApi.
- * @interface CryptoLoanRepayRequest
- */
-export interface CryptoLoanRepayRequest {
-    /**
-     *
-     * @type {number}
-     * @memberof StableRateApiCryptoLoanRepay
-     */
-    readonly orderId: number;
-
-    /**
-     *
-     * @type {number}
-     * @memberof StableRateApiCryptoLoanRepay
-     */
-    readonly amount: number;
-
-    /**
-     * Default: 1. 1 for "repay with borrowed coin"; 2 for "repay with collateral".
-     * @type {number}
-     * @memberof StableRateApiCryptoLoanRepay
-     */
-    readonly type?: number;
-
-    /**
-     * Default: TRUE. TRUE: Return extra collateral to spot account; FALSE: Keep extra collateral in the order, and lower LTV.
-     * @type {boolean}
-     * @memberof StableRateApiCryptoLoanRepay
-     */
-    readonly collateralReturn?: boolean;
-
-    /**
-     *
-     * @type {number}
-     * @memberof StableRateApiCryptoLoanRepay
-     */
-    readonly recvWindow?: number;
-}
-
-/**
- * Request parameters for getCollateralAssetsData operation in StableRateApi.
- * @interface GetCollateralAssetsDataRequest
- */
-export interface GetCollateralAssetsDataRequest {
-    /**
-     *
-     * @type {string}
-     * @memberof StableRateApiGetCollateralAssetsData
-     */
-    readonly collateralCoin?: string;
-
-    /**
-     * Default: user's vip level. Send "-1" to check specified configuration
-     * @type {number}
-     * @memberof StableRateApiGetCollateralAssetsData
-     */
-    readonly vipLevel?: number;
-
-    /**
-     *
-     * @type {number}
-     * @memberof StableRateApiGetCollateralAssetsData
      */
     readonly recvWindow?: number;
 }
@@ -1160,7 +554,7 @@ export interface GetCryptoLoansIncomeHistoryRequest {
  */
 export interface GetLoanBorrowHistoryRequest {
     /**
-     *
+     * orderId in `POST /sapi/v1/loan/borrow`
      * @type {number}
      * @memberof StableRateApiGetLoanBorrowHistory
      */
@@ -1222,7 +616,7 @@ export interface GetLoanBorrowHistoryRequest {
  */
 export interface GetLoanLtvAdjustmentHistoryRequest {
     /**
-     *
+     * orderId in `POST /sapi/v1/loan/borrow`
      * @type {number}
      * @memberof StableRateApiGetLoanLtvAdjustmentHistory
      */
@@ -1274,54 +668,6 @@ export interface GetLoanLtvAdjustmentHistoryRequest {
      *
      * @type {number}
      * @memberof StableRateApiGetLoanLtvAdjustmentHistory
-     */
-    readonly recvWindow?: number;
-}
-
-/**
- * Request parameters for getLoanOngoingOrders operation in StableRateApi.
- * @interface GetLoanOngoingOrdersRequest
- */
-export interface GetLoanOngoingOrdersRequest {
-    /**
-     *
-     * @type {number}
-     * @memberof StableRateApiGetLoanOngoingOrders
-     */
-    readonly orderId?: number;
-
-    /**
-     *
-     * @type {string}
-     * @memberof StableRateApiGetLoanOngoingOrders
-     */
-    readonly loanCoin?: string;
-
-    /**
-     *
-     * @type {string}
-     * @memberof StableRateApiGetLoanOngoingOrders
-     */
-    readonly collateralCoin?: string;
-
-    /**
-     * Current querying page. Start from 1; default: 1; max: 1000
-     * @type {number}
-     * @memberof StableRateApiGetLoanOngoingOrders
-     */
-    readonly current?: number;
-
-    /**
-     * Default: 10; max: 100
-     * @type {number}
-     * @memberof StableRateApiGetLoanOngoingOrders
-     */
-    readonly limit?: number;
-
-    /**
-     *
-     * @type {number}
-     * @memberof StableRateApiGetLoanOngoingOrders
      */
     readonly recvWindow?: number;
 }
@@ -1332,7 +678,7 @@ export interface GetLoanOngoingOrdersRequest {
  */
 export interface GetLoanRepaymentHistoryRequest {
     /**
-     *
+     * orderId in `POST /sapi/v1/loan/borrow`
      * @type {number}
      * @memberof StableRateApiGetLoanRepaymentHistory
      */
@@ -1384,33 +730,6 @@ export interface GetLoanRepaymentHistoryRequest {
      *
      * @type {number}
      * @memberof StableRateApiGetLoanRepaymentHistory
-     */
-    readonly recvWindow?: number;
-}
-
-/**
- * Request parameters for getLoanableAssetsData operation in StableRateApi.
- * @interface GetLoanableAssetsDataRequest
- */
-export interface GetLoanableAssetsDataRequest {
-    /**
-     *
-     * @type {string}
-     * @memberof StableRateApiGetLoanableAssetsData
-     */
-    readonly loanCoin?: string;
-
-    /**
-     * Default: user's vip level. Send "-1" to check specified configuration
-     * @type {number}
-     * @memberof StableRateApiGetLoanableAssetsData
-     */
-    readonly vipLevel?: number;
-
-    /**
-     *
-     * @type {number}
-     * @memberof StableRateApiGetLoanableAssetsData
      */
     readonly recvWindow?: number;
 }
@@ -1451,160 +770,6 @@ export class StableRateApi implements StableRateApiInterface {
                 requestParameters?.recvWindow
             );
         return sendRequest<CheckCollateralRepayRateStableRateResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
-        );
-    }
-
-    /**
-     * Crypto Loan Adjust LTV
-     *
-     * Weight: 6000
-     *
-     * @summary Crypto Loan Adjust LTV(TRADE)
-     * @param {CryptoLoanAdjustLtvRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<CryptoLoanAdjustLtvResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof StableRateApi
-     * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/trade/Crypto-Loan-Adjust-LTV Binance API Documentation}
-     */
-    public async cryptoLoanAdjustLtv(
-        requestParameters: CryptoLoanAdjustLtvRequest
-    ): Promise<RestApiResponse<CryptoLoanAdjustLtvResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.cryptoLoanAdjustLtv(
-            requestParameters?.orderId,
-            requestParameters?.amount,
-            requestParameters?.direction,
-            requestParameters?.recvWindow
-        );
-        return sendRequest<CryptoLoanAdjustLtvResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
-        );
-    }
-
-    /**
-     * Crypto Loan Borrow
-     *
-     * Weight: 6000
-     *
-     * @summary Crypto Loan Borrow(TRADE)
-     * @param {CryptoLoanBorrowRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<CryptoLoanBorrowResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof StableRateApi
-     * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/trade/Crypto-Loan-Borrow Binance API Documentation}
-     */
-    public async cryptoLoanBorrow(
-        requestParameters: CryptoLoanBorrowRequest
-    ): Promise<RestApiResponse<CryptoLoanBorrowResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.cryptoLoanBorrow(
-            requestParameters?.loanCoin,
-            requestParameters?.collateralCoin,
-            requestParameters?.loanTerm,
-            requestParameters?.recvWindow
-        );
-        return sendRequest<CryptoLoanBorrowResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
-        );
-    }
-
-    /**
-     * Customize Margin Call
-     *
-     * Weight: 6000
-     *
-     * @summary Crypto Loan Customize Margin Call(TRADE)
-     * @param {CryptoLoanCustomizeMarginCallRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<CryptoLoanCustomizeMarginCallResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof StableRateApi
-     * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/trade/Crypto-Loan-Customize-Margin-Call Binance API Documentation}
-     */
-    public async cryptoLoanCustomizeMarginCall(
-        requestParameters: CryptoLoanCustomizeMarginCallRequest
-    ): Promise<RestApiResponse<CryptoLoanCustomizeMarginCallResponse>> {
-        const localVarAxiosArgs =
-            await this.localVarAxiosParamCreator.cryptoLoanCustomizeMarginCall(
-                requestParameters?.marginCall,
-                requestParameters?.recvWindow
-            );
-        return sendRequest<CryptoLoanCustomizeMarginCallResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
-        );
-    }
-
-    /**
-     * Crypto Loan Repay
-     *
-     * Weight: 6000
-     *
-     * @summary Crypto Loan Repay(TRADE)
-     * @param {CryptoLoanRepayRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<CryptoLoanRepayResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof StableRateApi
-     * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/trade/Crypto-Loan-Repay Binance API Documentation}
-     */
-    public async cryptoLoanRepay(
-        requestParameters: CryptoLoanRepayRequest
-    ): Promise<RestApiResponse<CryptoLoanRepayResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.cryptoLoanRepay(
-            requestParameters?.orderId,
-            requestParameters?.amount,
-            requestParameters?.type,
-            requestParameters?.collateralReturn,
-            requestParameters?.recvWindow
-        );
-        return sendRequest<CryptoLoanRepayResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
-        );
-    }
-
-    /**
-     * Get LTV information and collateral limit of collateral assets. The collateral limit is shown in USD value.
-     *
-     * Weight: 400
-     *
-     * @summary Get Collateral Assets Data(USER_DATA)
-     * @param {GetCollateralAssetsDataRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetCollateralAssetsDataResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof StableRateApi
-     * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/market-data/Get-Collateral-Assets-Data Binance API Documentation}
-     */
-    public async getCollateralAssetsData(
-        requestParameters: GetCollateralAssetsDataRequest = {}
-    ): Promise<RestApiResponse<GetCollateralAssetsDataResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getCollateralAssetsData(
-            requestParameters?.collateralCoin,
-            requestParameters?.vipLevel,
-            requestParameters?.recvWindow
-        );
-        return sendRequest<GetCollateralAssetsDataResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
@@ -1727,39 +892,6 @@ export class StableRateApi implements StableRateApiInterface {
     }
 
     /**
-     * Get Loan Ongoing Orders
-     *
-     * Weight: 300
-     *
-     * @summary Get Loan Ongoing Orders(USER_DATA)
-     * @param {GetLoanOngoingOrdersRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetLoanOngoingOrdersResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof StableRateApi
-     * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/user-information/Get-Loan-Ongoing-Orders Binance API Documentation}
-     */
-    public async getLoanOngoingOrders(
-        requestParameters: GetLoanOngoingOrdersRequest = {}
-    ): Promise<RestApiResponse<GetLoanOngoingOrdersResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getLoanOngoingOrders(
-            requestParameters?.orderId,
-            requestParameters?.loanCoin,
-            requestParameters?.collateralCoin,
-            requestParameters?.current,
-            requestParameters?.limit,
-            requestParameters?.recvWindow
-        );
-        return sendRequest<GetLoanOngoingOrdersResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
-        );
-    }
-
-    /**
      * Get Loan Repayment History
      *
      * If startTime and endTime are not sent, the recent 90-day data will be returned.
@@ -1788,36 +920,6 @@ export class StableRateApi implements StableRateApiInterface {
             requestParameters?.recvWindow
         );
         return sendRequest<GetLoanRepaymentHistoryResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
-        );
-    }
-
-    /**
-     * Get interest rate and borrow limit of loanable assets. The borrow limit is shown in USD value.
-     *
-     * Weight: 400
-     *
-     * @summary Get Loanable Assets Data(USER_DATA)
-     * @param {GetLoanableAssetsDataRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetLoanableAssetsDataResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof StableRateApi
-     * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/market-data/Get-Loanable-Assets-Data Binance API Documentation}
-     */
-    public async getLoanableAssetsData(
-        requestParameters: GetLoanableAssetsDataRequest = {}
-    ): Promise<RestApiResponse<GetLoanableAssetsDataResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getLoanableAssetsData(
-            requestParameters?.loanCoin,
-            requestParameters?.vipLevel,
-            requestParameters?.recvWindow
-        );
-        return sendRequest<GetLoanableAssetsDataResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

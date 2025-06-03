@@ -30,17 +30,10 @@ import type {
 } from './modules/flexible-rate-api';
 import type {
     CheckCollateralRepayRateStableRateRequest,
-    CryptoLoanAdjustLtvRequest,
-    CryptoLoanBorrowRequest,
-    CryptoLoanCustomizeMarginCallRequest,
-    CryptoLoanRepayRequest,
-    GetCollateralAssetsDataRequest,
     GetCryptoLoansIncomeHistoryRequest,
     GetLoanBorrowHistoryRequest,
     GetLoanLtvAdjustmentHistoryRequest,
-    GetLoanOngoingOrdersRequest,
     GetLoanRepaymentHistoryRequest,
-    GetLoanableAssetsDataRequest,
 } from './modules/stable-rate-api';
 
 import type {
@@ -58,17 +51,10 @@ import type {
 } from './types';
 import type {
     CheckCollateralRepayRateStableRateResponse,
-    CryptoLoanAdjustLtvResponse,
-    CryptoLoanBorrowResponse,
-    CryptoLoanCustomizeMarginCallResponse,
-    CryptoLoanRepayResponse,
-    GetCollateralAssetsDataResponse,
     GetCryptoLoansIncomeHistoryResponse,
     GetLoanBorrowHistoryResponse,
     GetLoanLtvAdjustmentHistoryResponse,
-    GetLoanOngoingOrdersResponse,
     GetLoanRepaymentHistoryResponse,
-    GetLoanableAssetsDataResponse,
 } from './types';
 
 export class RestAPI {
@@ -337,91 +323,6 @@ export class RestAPI {
     }
 
     /**
-     * Crypto Loan Adjust LTV
-     *
-     * Weight: 6000
-     *
-     * @summary Crypto Loan Adjust LTV(TRADE)
-     * @param {CryptoLoanAdjustLtvRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<CryptoLoanAdjustLtvResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/trade/Crypto-Loan-Adjust-LTV Binance API Documentation}
-     */
-    cryptoLoanAdjustLtv(
-        requestParameters: CryptoLoanAdjustLtvRequest
-    ): Promise<RestApiResponse<CryptoLoanAdjustLtvResponse>> {
-        return this.stableRateApi.cryptoLoanAdjustLtv(requestParameters);
-    }
-
-    /**
-     * Crypto Loan Borrow
-     *
-     * Weight: 6000
-     *
-     * @summary Crypto Loan Borrow(TRADE)
-     * @param {CryptoLoanBorrowRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<CryptoLoanBorrowResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/trade/Crypto-Loan-Borrow Binance API Documentation}
-     */
-    cryptoLoanBorrow(
-        requestParameters: CryptoLoanBorrowRequest
-    ): Promise<RestApiResponse<CryptoLoanBorrowResponse>> {
-        return this.stableRateApi.cryptoLoanBorrow(requestParameters);
-    }
-
-    /**
-     * Customize Margin Call
-     *
-     * Weight: 6000
-     *
-     * @summary Crypto Loan Customize Margin Call(TRADE)
-     * @param {CryptoLoanCustomizeMarginCallRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<CryptoLoanCustomizeMarginCallResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/trade/Crypto-Loan-Customize-Margin-Call Binance API Documentation}
-     */
-    cryptoLoanCustomizeMarginCall(
-        requestParameters: CryptoLoanCustomizeMarginCallRequest
-    ): Promise<RestApiResponse<CryptoLoanCustomizeMarginCallResponse>> {
-        return this.stableRateApi.cryptoLoanCustomizeMarginCall(requestParameters);
-    }
-
-    /**
-     * Crypto Loan Repay
-     *
-     * Weight: 6000
-     *
-     * @summary Crypto Loan Repay(TRADE)
-     * @param {CryptoLoanRepayRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<CryptoLoanRepayResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/trade/Crypto-Loan-Repay Binance API Documentation}
-     */
-    cryptoLoanRepay(
-        requestParameters: CryptoLoanRepayRequest
-    ): Promise<RestApiResponse<CryptoLoanRepayResponse>> {
-        return this.stableRateApi.cryptoLoanRepay(requestParameters);
-    }
-
-    /**
-     * Get LTV information and collateral limit of collateral assets. The collateral limit is shown in USD value.
-     *
-     * Weight: 400
-     *
-     * @summary Get Collateral Assets Data(USER_DATA)
-     * @param {GetCollateralAssetsDataRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetCollateralAssetsDataResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/market-data/Get-Collateral-Assets-Data Binance API Documentation}
-     */
-    getCollateralAssetsData(
-        requestParameters: GetCollateralAssetsDataRequest = {}
-    ): Promise<RestApiResponse<GetCollateralAssetsDataResponse>> {
-        return this.stableRateApi.getCollateralAssetsData(requestParameters);
-    }
-
-    /**
      * Get Crypto Loans Income History
      *
      * If startTime and endTime are not sent, the recent 7-day data will be returned.
@@ -482,23 +383,6 @@ export class RestAPI {
     }
 
     /**
-     * Get Loan Ongoing Orders
-     *
-     * Weight: 300
-     *
-     * @summary Get Loan Ongoing Orders(USER_DATA)
-     * @param {GetLoanOngoingOrdersRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetLoanOngoingOrdersResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/user-information/Get-Loan-Ongoing-Orders Binance API Documentation}
-     */
-    getLoanOngoingOrders(
-        requestParameters: GetLoanOngoingOrdersRequest = {}
-    ): Promise<RestApiResponse<GetLoanOngoingOrdersResponse>> {
-        return this.stableRateApi.getLoanOngoingOrders(requestParameters);
-    }
-
-    /**
      * Get Loan Repayment History
      *
      * If startTime and endTime are not sent, the recent 90-day data will be returned.
@@ -516,22 +400,5 @@ export class RestAPI {
         requestParameters: GetLoanRepaymentHistoryRequest = {}
     ): Promise<RestApiResponse<GetLoanRepaymentHistoryResponse>> {
         return this.stableRateApi.getLoanRepaymentHistory(requestParameters);
-    }
-
-    /**
-     * Get interest rate and borrow limit of loanable assets. The borrow limit is shown in USD value.
-     *
-     * Weight: 400
-     *
-     * @summary Get Loanable Assets Data(USER_DATA)
-     * @param {GetLoanableAssetsDataRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetLoanableAssetsDataResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/market-data/Get-Loanable-Assets-Data Binance API Documentation}
-     */
-    getLoanableAssetsData(
-        requestParameters: GetLoanableAssetsDataRequest = {}
-    ): Promise<RestApiResponse<GetLoanableAssetsDataResponse>> {
-        return this.stableRateApi.getLoanableAssetsData(requestParameters);
     }
 }

@@ -1,5 +1,17 @@
 # Changelog
 
+## 6.0.0 - 2025-06-03
+
+### Removed (7)
+
+- `cryptoLoanAdjustLtv()` (`POST /sapi/v1/loan/adjust/ltv`)
+- `cryptoLoanBorrow()` (`POST /sapi/v1/loan/borrow`)
+- `cryptoLoanCustomizeMarginCall()` (`POST /sapi/v1/loan/customize/margin_call`)
+- `cryptoLoanRepay()` (`POST /sapi/v1/loan/repay`)
+- `getCollateralAssetsData()` (`GET /sapi/v1/loan/collateral/data`)
+- `getLoanOngoingOrders()` (`GET /sapi/v1/loan/ongoing/orders`)
+- `getLoanableAssetsData()` (`GET /sapi/v1/loan/loanable/data`)
+
 ## 5.0.0 - 2025-05-26
 
 ### Removed (1)
