@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.6 - 2025-06-03
+
+### Changed
+
+- Fixed bug on `ConfigurationRestAPI` not respecting `baseOptions` parameters.
+
 ## 1.0.5 - 2025-05-28
 
 ### Changed
