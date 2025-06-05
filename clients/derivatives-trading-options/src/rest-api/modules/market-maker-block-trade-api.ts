@@ -924,9 +924,7 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
     }
 }
 
-export const NewBlockTradeOrderSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type NewBlockTradeOrderSideEnum =
-    (typeof NewBlockTradeOrderSideEnum)[keyof typeof NewBlockTradeOrderSideEnum];
+export enum NewBlockTradeOrderSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
