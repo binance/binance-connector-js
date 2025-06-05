@@ -26,10 +26,16 @@ import {
 } from '@binance/common';
 import type {
     AccountCommissionResponse,
+    AllOrderListResponse,
+    AllOrdersResponse,
     GetAccountResponse,
+    GetOpenOrdersResponse,
+    GetOrderListResponse,
+    GetOrderResponse,
     MyAllocationsResponse,
     MyPreventedMatchesResponse,
     MyTradesResponse,
+    OpenOrderListResponse,
     OrderAmendmentsResponse,
     RateLimitOrderResponse,
 } from '../types';
@@ -69,6 +75,121 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             };
         },
         /**
+         * Retrieves all order lists based on provided optional parameters.
+         *
+         * Note that the time between `startTime` and `endTime` can't be longer than 24 hours.
+         * Weight: 20
+         *
+         * @summary Query all Order lists
+         * @param {number} [fromId] ID to get aggregate trades from INCLUSIVE.
+         * @param {number} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
+         * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
+         * @param {number} [limit] Default: 500; Maximum: 1000.
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         *
+         * @throws {RequiredError}
+         */
+        allOrderList: async (
+            fromId?: number,
+            startTime?: number,
+            endTime?: number,
+            limit?: number,
+            recvWindow?: number
+        ): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (fromId !== undefined && fromId !== null) {
+                localVarQueryParameter['fromId'] = fromId;
+            }
+
+            if (startTime !== undefined && startTime !== null) {
+                localVarQueryParameter['startTime'] = startTime;
+            }
+
+            if (endTime !== undefined && endTime !== null) {
+                localVarQueryParameter['endTime'] = endTime;
+            }
+
+            if (limit !== undefined && limit !== null) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/api/v3/allOrderList',
+                method: 'GET',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Get all account orders; active, canceled, or filled.
+         * Weight: 20
+         *
+         * @summary All orders
+         * @param {string} symbol
+         * @param {number} [orderId]
+         * @param {number} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
+         * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
+         * @param {number} [limit] Default: 500; Maximum: 1000.
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         *
+         * @throws {RequiredError}
+         */
+        allOrders: async (
+            symbol: string,
+            orderId?: number,
+            startTime?: number,
+            endTime?: number,
+            limit?: number,
+            recvWindow?: number
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'symbol' is not null or undefined
+            assertParamExists('allOrders', 'symbol', symbol);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (symbol !== undefined && symbol !== null) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+
+            if (orderId !== undefined && orderId !== null) {
+                localVarQueryParameter['orderId'] = orderId;
+            }
+
+            if (startTime !== undefined && startTime !== null) {
+                localVarQueryParameter['startTime'] = startTime;
+            }
+
+            if (endTime !== undefined && endTime !== null) {
+                localVarQueryParameter['endTime'] = endTime;
+            }
+
+            if (limit !== undefined && limit !== null) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/api/v3/allOrders',
+                method: 'GET',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Get current account information.
          * Weight: 20
          *
@@ -97,6 +218,126 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
 
             return {
                 endpoint: '/api/v3/account',
+                method: 'GET',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Get all open orders on a symbol. **Careful** when accessing this with no symbol.
+         * Weight: 6 for a single symbol; **80** when the symbol parameter is omitted
+         *
+         * @summary Current open orders
+         * @param {string} [symbol] Symbol to query
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         *
+         * @throws {RequiredError}
+         */
+        getOpenOrders: async (symbol?: string, recvWindow?: number): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (symbol !== undefined && symbol !== null) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/api/v3/openOrders',
+                method: 'GET',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Check an order's status.
+         * Weight: 4
+         *
+         * @summary Query order
+         * @param {string} symbol
+         * @param {number} [orderId]
+         * @param {string} [origClientOrderId]
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         *
+         * @throws {RequiredError}
+         */
+        getOrder: async (
+            symbol: string,
+            orderId?: number,
+            origClientOrderId?: string,
+            recvWindow?: number
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'symbol' is not null or undefined
+            assertParamExists('getOrder', 'symbol', symbol);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (symbol !== undefined && symbol !== null) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+
+            if (orderId !== undefined && orderId !== null) {
+                localVarQueryParameter['orderId'] = orderId;
+            }
+
+            if (origClientOrderId !== undefined && origClientOrderId !== null) {
+                localVarQueryParameter['origClientOrderId'] = origClientOrderId;
+            }
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/api/v3/order',
+                method: 'GET',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Retrieves a specific order list based on provided optional parameters.
+         * Weight: 4
+         *
+         * @summary Query Order list
+         * @param {number} [orderListId] Either `orderListId` or `listClientOrderId` must be provided
+         * @param {string} [origClientOrderId]
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         *
+         * @throws {RequiredError}
+         */
+        getOrderList: async (
+            orderListId?: number,
+            origClientOrderId?: string,
+            recvWindow?: number
+        ): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (orderListId !== undefined && orderListId !== null) {
+                localVarQueryParameter['orderListId'] = orderListId;
+            }
+
+            if (origClientOrderId !== undefined && origClientOrderId !== null) {
+                localVarQueryParameter['origClientOrderId'] = origClientOrderId;
+            }
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/api/v3/orderList',
                 method: 'GET',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
@@ -312,6 +553,32 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             };
         },
         /**
+         *
+         * Weight: 6
+         *
+         * @summary Query Open Order lists
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         *
+         * @throws {RequiredError}
+         */
+        openOrderList: async (recvWindow?: number): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/api/v3/openOrderList',
+                method: 'GET',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Queries all amendments of a single order.
          * Weight: 4
          *
@@ -416,6 +683,32 @@ export interface AccountApiInterface {
         requestParameters: AccountCommissionRequest
     ): Promise<RestApiResponse<AccountCommissionResponse>>;
     /**
+     * Retrieves all order lists based on provided optional parameters.
+     *
+     * Note that the time between `startTime` and `endTime` can't be longer than 24 hours.
+     * Weight: 20
+     *
+     * @summary Query all Order lists
+     * @param {AllOrderListRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApiInterface
+     */
+    allOrderList(
+        requestParameters?: AllOrderListRequest
+    ): Promise<RestApiResponse<AllOrderListResponse>>;
+    /**
+     * Get all account orders; active, canceled, or filled.
+     * Weight: 20
+     *
+     * @summary All orders
+     * @param {AllOrdersRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApiInterface
+     */
+    allOrders(requestParameters: AllOrdersRequest): Promise<RestApiResponse<AllOrdersResponse>>;
+    /**
      * Get current account information.
      * Weight: 20
      *
@@ -426,6 +719,43 @@ export interface AccountApiInterface {
      * @memberof AccountApiInterface
      */
     getAccount(requestParameters?: GetAccountRequest): Promise<RestApiResponse<GetAccountResponse>>;
+    /**
+     * Get all open orders on a symbol. **Careful** when accessing this with no symbol.
+     * Weight: 6 for a single symbol; **80** when the symbol parameter is omitted
+     *
+     * @summary Current open orders
+     * @param {GetOpenOrdersRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApiInterface
+     */
+    getOpenOrders(
+        requestParameters?: GetOpenOrdersRequest
+    ): Promise<RestApiResponse<GetOpenOrdersResponse>>;
+    /**
+     * Check an order's status.
+     * Weight: 4
+     *
+     * @summary Query order
+     * @param {GetOrderRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApiInterface
+     */
+    getOrder(requestParameters: GetOrderRequest): Promise<RestApiResponse<GetOrderResponse>>;
+    /**
+     * Retrieves a specific order list based on provided optional parameters.
+     * Weight: 4
+     *
+     * @summary Query Order list
+     * @param {GetOrderListRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApiInterface
+     */
+    getOrderList(
+        requestParameters?: GetOrderListRequest
+    ): Promise<RestApiResponse<GetOrderListResponse>>;
     /**
      * Retrieves allocations resulting from SOR order placement.
      * Weight: 20
@@ -478,6 +808,19 @@ export interface AccountApiInterface {
      */
     myTrades(requestParameters: MyTradesRequest): Promise<RestApiResponse<MyTradesResponse>>;
     /**
+     *
+     * Weight: 6
+     *
+     * @summary Query Open Order lists
+     * @param {OpenOrderListRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApiInterface
+     */
+    openOrderList(
+        requestParameters?: OpenOrderListRequest
+    ): Promise<RestApiResponse<OpenOrderListResponse>>;
+    /**
      * Queries all amendments of a single order.
      * Weight: 4
      *
@@ -519,6 +862,95 @@ export interface AccountCommissionRequest {
 }
 
 /**
+ * Request parameters for allOrderList operation in AccountApi.
+ * @interface AllOrderListRequest
+ */
+export interface AllOrderListRequest {
+    /**
+     * ID to get aggregate trades from INCLUSIVE.
+     * @type {number}
+     * @memberof AccountApiAllOrderList
+     */
+    readonly fromId?: number;
+
+    /**
+     * Timestamp in ms to get aggregate trades from INCLUSIVE.
+     * @type {number}
+     * @memberof AccountApiAllOrderList
+     */
+    readonly startTime?: number;
+
+    /**
+     * Timestamp in ms to get aggregate trades until INCLUSIVE.
+     * @type {number}
+     * @memberof AccountApiAllOrderList
+     */
+    readonly endTime?: number;
+
+    /**
+     * Default: 500; Maximum: 1000.
+     * @type {number}
+     * @memberof AccountApiAllOrderList
+     */
+    readonly limit?: number;
+
+    /**
+     * The value cannot be greater than `60000`
+     * @type {number}
+     * @memberof AccountApiAllOrderList
+     */
+    readonly recvWindow?: number;
+}
+
+/**
+ * Request parameters for allOrders operation in AccountApi.
+ * @interface AllOrdersRequest
+ */
+export interface AllOrdersRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof AccountApiAllOrders
+     */
+    readonly symbol: string;
+
+    /**
+     *
+     * @type {number}
+     * @memberof AccountApiAllOrders
+     */
+    readonly orderId?: number;
+
+    /**
+     * Timestamp in ms to get aggregate trades from INCLUSIVE.
+     * @type {number}
+     * @memberof AccountApiAllOrders
+     */
+    readonly startTime?: number;
+
+    /**
+     * Timestamp in ms to get aggregate trades until INCLUSIVE.
+     * @type {number}
+     * @memberof AccountApiAllOrders
+     */
+    readonly endTime?: number;
+
+    /**
+     * Default: 500; Maximum: 1000.
+     * @type {number}
+     * @memberof AccountApiAllOrders
+     */
+    readonly limit?: number;
+
+    /**
+     * The value cannot be greater than `60000`
+     * @type {number}
+     * @memberof AccountApiAllOrders
+     */
+    readonly recvWindow?: number;
+}
+
+/**
  * Request parameters for getAccount operation in AccountApi.
  * @interface GetAccountRequest
  */
@@ -534,6 +966,87 @@ export interface GetAccountRequest {
      * The value cannot be greater than `60000`
      * @type {number}
      * @memberof AccountApiGetAccount
+     */
+    readonly recvWindow?: number;
+}
+
+/**
+ * Request parameters for getOpenOrders operation in AccountApi.
+ * @interface GetOpenOrdersRequest
+ */
+export interface GetOpenOrdersRequest {
+    /**
+     * Symbol to query
+     * @type {string}
+     * @memberof AccountApiGetOpenOrders
+     */
+    readonly symbol?: string;
+
+    /**
+     * The value cannot be greater than `60000`
+     * @type {number}
+     * @memberof AccountApiGetOpenOrders
+     */
+    readonly recvWindow?: number;
+}
+
+/**
+ * Request parameters for getOrder operation in AccountApi.
+ * @interface GetOrderRequest
+ */
+export interface GetOrderRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof AccountApiGetOrder
+     */
+    readonly symbol: string;
+
+    /**
+     *
+     * @type {number}
+     * @memberof AccountApiGetOrder
+     */
+    readonly orderId?: number;
+
+    /**
+     *
+     * @type {string}
+     * @memberof AccountApiGetOrder
+     */
+    readonly origClientOrderId?: string;
+
+    /**
+     * The value cannot be greater than `60000`
+     * @type {number}
+     * @memberof AccountApiGetOrder
+     */
+    readonly recvWindow?: number;
+}
+
+/**
+ * Request parameters for getOrderList operation in AccountApi.
+ * @interface GetOrderListRequest
+ */
+export interface GetOrderListRequest {
+    /**
+     * Either `orderListId` or `listClientOrderId` must be provided
+     * @type {number}
+     * @memberof AccountApiGetOrderList
+     */
+    readonly orderListId?: number;
+
+    /**
+     *
+     * @type {string}
+     * @memberof AccountApiGetOrderList
+     */
+    readonly origClientOrderId?: string;
+
+    /**
+     * The value cannot be greater than `60000`
+     * @type {number}
+     * @memberof AccountApiGetOrderList
      */
     readonly recvWindow?: number;
 }
@@ -697,6 +1210,19 @@ export interface MyTradesRequest {
 }
 
 /**
+ * Request parameters for openOrderList operation in AccountApi.
+ * @interface OpenOrderListRequest
+ */
+export interface OpenOrderListRequest {
+    /**
+     * The value cannot be greater than `60000`
+     * @type {number}
+     * @memberof AccountApiOpenOrderList
+     */
+    readonly recvWindow?: number;
+}
+
+/**
  * Request parameters for orderAmendments operation in AccountApi.
  * @interface OrderAmendmentsRequest
  */
@@ -791,6 +1317,71 @@ export class AccountApi implements AccountApiInterface {
     }
 
     /**
+     * Retrieves all order lists based on provided optional parameters.
+     *
+     * Note that the time between `startTime` and `endTime` can't be longer than 24 hours.
+     * Weight: 20
+     *
+     * @summary Query all Order lists
+     * @param {AllOrderListRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<AllOrderListResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-all-order-lists-user_data Binance API Documentation}
+     */
+    public async allOrderList(
+        requestParameters: AllOrderListRequest = {}
+    ): Promise<RestApiResponse<AllOrderListResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.allOrderList(
+            requestParameters?.fromId,
+            requestParameters?.startTime,
+            requestParameters?.endTime,
+            requestParameters?.limit,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<AllOrderListResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Get all account orders; active, canceled, or filled.
+     * Weight: 20
+     *
+     * @summary All orders
+     * @param {AllOrdersRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<AllOrdersResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#all-orders-user_data Binance API Documentation}
+     */
+    public async allOrders(
+        requestParameters: AllOrdersRequest
+    ): Promise<RestApiResponse<AllOrdersResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.allOrders(
+            requestParameters?.symbol,
+            requestParameters?.orderId,
+            requestParameters?.startTime,
+            requestParameters?.endTime,
+            requestParameters?.limit,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<AllOrdersResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
      * Get current account information.
      * Weight: 20
      *
@@ -809,6 +1400,93 @@ export class AccountApi implements AccountApiInterface {
             requestParameters?.recvWindow
         );
         return sendRequest<GetAccountResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Get all open orders on a symbol. **Careful** when accessing this with no symbol.
+     * Weight: 6 for a single symbol; **80** when the symbol parameter is omitted
+     *
+     * @summary Current open orders
+     * @param {GetOpenOrdersRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetOpenOrdersResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#current-open-orders-user_data Binance API Documentation}
+     */
+    public async getOpenOrders(
+        requestParameters: GetOpenOrdersRequest = {}
+    ): Promise<RestApiResponse<GetOpenOrdersResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getOpenOrders(
+            requestParameters?.symbol,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<GetOpenOrdersResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Check an order's status.
+     * Weight: 4
+     *
+     * @summary Query order
+     * @param {GetOrderRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetOrderResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-order-user_data Binance API Documentation}
+     */
+    public async getOrder(
+        requestParameters: GetOrderRequest
+    ): Promise<RestApiResponse<GetOrderResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getOrder(
+            requestParameters?.symbol,
+            requestParameters?.orderId,
+            requestParameters?.origClientOrderId,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<GetOrderResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Retrieves a specific order list based on provided optional parameters.
+     * Weight: 4
+     *
+     * @summary Query Order list
+     * @param {GetOrderListRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetOrderListResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-order-list-user_data Binance API Documentation}
+     */
+    public async getOrderList(
+        requestParameters: GetOrderListRequest = {}
+    ): Promise<RestApiResponse<GetOrderListResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getOrderList(
+            requestParameters?.orderListId,
+            requestParameters?.origClientOrderId,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<GetOrderListResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
@@ -921,6 +1599,33 @@ export class AccountApi implements AccountApiInterface {
             requestParameters?.recvWindow
         );
         return sendRequest<MyTradesResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     *
+     * Weight: 6
+     *
+     * @summary Query Open Order lists
+     * @param {OpenOrderListRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<OpenOrderListResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-open-order-lists-user_data Binance API Documentation}
+     */
+    public async openOrderList(
+        requestParameters: OpenOrderListRequest = {}
+    ): Promise<RestApiResponse<OpenOrderListResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.openOrderList(
+            requestParameters?.recvWindow
+        );
+        return sendRequest<OpenOrderListResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

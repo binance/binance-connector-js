@@ -1155,63 +1155,58 @@ export class WebSocketStreamsApi implements WebSocketStreamsApiInterface {
     }
 }
 
-export const AllMarketRollingWindowTickerWindowSizeEnum = {
-    WINDOW_SIZE_1h: '1h',
-    WINDOW_SIZE_4h: '4h',
-    WINDOW_SIZE_1d: '1d',
-} as const;
-export type AllMarketRollingWindowTickerWindowSizeEnum =
-    (typeof AllMarketRollingWindowTickerWindowSizeEnum)[keyof typeof AllMarketRollingWindowTickerWindowSizeEnum];
-export const KlineIntervalEnum = {
-    INTERVAL_1s: '1s',
-    INTERVAL_1m: '1m',
-    INTERVAL_3m: '3m',
-    INTERVAL_5m: '5m',
-    INTERVAL_15m: '15m',
-    INTERVAL_30m: '30m',
-    INTERVAL_1h: '1h',
-    INTERVAL_2h: '2h',
-    INTERVAL_4h: '4h',
-    INTERVAL_6h: '6h',
-    INTERVAL_8h: '8h',
-    INTERVAL_12h: '12h',
-    INTERVAL_1d: '1d',
-    INTERVAL_3d: '3d',
-    INTERVAL_1w: '1w',
-    INTERVAL_1M: '1M',
-} as const;
-export type KlineIntervalEnum = (typeof KlineIntervalEnum)[keyof typeof KlineIntervalEnum];
-export const KlineOffsetIntervalEnum = {
-    INTERVAL_1s: '1s',
-    INTERVAL_1m: '1m',
-    INTERVAL_3m: '3m',
-    INTERVAL_5m: '5m',
-    INTERVAL_15m: '15m',
-    INTERVAL_30m: '30m',
-    INTERVAL_1h: '1h',
-    INTERVAL_2h: '2h',
-    INTERVAL_4h: '4h',
-    INTERVAL_6h: '6h',
-    INTERVAL_8h: '8h',
-    INTERVAL_12h: '12h',
-    INTERVAL_1d: '1d',
-    INTERVAL_3d: '3d',
-    INTERVAL_1w: '1w',
-    INTERVAL_1M: '1M',
-} as const;
-export type KlineOffsetIntervalEnum =
-    (typeof KlineOffsetIntervalEnum)[keyof typeof KlineOffsetIntervalEnum];
-export const PartialBookDepthLevelsEnum = {
-    LEVELS_5: '5',
-    LEVELS_10: '10',
-    LEVELS_20: '20',
-} as const;
-export type PartialBookDepthLevelsEnum =
-    (typeof PartialBookDepthLevelsEnum)[keyof typeof PartialBookDepthLevelsEnum];
-export const RollingWindowTickerWindowSizeEnum = {
-    WINDOW_SIZE_1h: '1h',
-    WINDOW_SIZE_4h: '4h',
-    WINDOW_SIZE_1d: '1d',
-} as const;
-export type RollingWindowTickerWindowSizeEnum =
-    (typeof RollingWindowTickerWindowSizeEnum)[keyof typeof RollingWindowTickerWindowSizeEnum];
+export enum AllMarketRollingWindowTickerWindowSizeEnum {
+    WINDOW_SIZE_1h = '1h',
+    WINDOW_SIZE_4h = '4h',
+    WINDOW_SIZE_1d = '1d',
+}
+
+export enum KlineIntervalEnum {
+    INTERVAL_1s = '1s',
+    INTERVAL_1m = '1m',
+    INTERVAL_3m = '3m',
+    INTERVAL_5m = '5m',
+    INTERVAL_15m = '15m',
+    INTERVAL_30m = '30m',
+    INTERVAL_1h = '1h',
+    INTERVAL_2h = '2h',
+    INTERVAL_4h = '4h',
+    INTERVAL_6h = '6h',
+    INTERVAL_8h = '8h',
+    INTERVAL_12h = '12h',
+    INTERVAL_1d = '1d',
+    INTERVAL_3d = '3d',
+    INTERVAL_1w = '1w',
+    INTERVAL_1M = '1M',
+}
+
+export enum KlineOffsetIntervalEnum {
+    INTERVAL_1s = '1s',
+    INTERVAL_1m = '1m',
+    INTERVAL_3m = '3m',
+    INTERVAL_5m = '5m',
+    INTERVAL_15m = '15m',
+    INTERVAL_30m = '30m',
+    INTERVAL_1h = '1h',
+    INTERVAL_2h = '2h',
+    INTERVAL_4h = '4h',
+    INTERVAL_6h = '6h',
+    INTERVAL_8h = '8h',
+    INTERVAL_12h = '12h',
+    INTERVAL_1d = '1d',
+    INTERVAL_3d = '3d',
+    INTERVAL_1w = '1w',
+    INTERVAL_1M = '1M',
+}
+
+export enum PartialBookDepthLevelsEnum {
+    LEVELS_5 = '5',
+    LEVELS_10 = '10',
+    LEVELS_20 = '20',
+}
+
+export enum RollingWindowTickerWindowSizeEnum {
+    WINDOW_SIZE_1h = '1h',
+    WINDOW_SIZE_4h = '4h',
+    WINDOW_SIZE_1d = '1d',
+}

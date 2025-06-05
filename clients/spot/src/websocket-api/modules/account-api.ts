@@ -26,7 +26,11 @@ import type {
     MyAllocationsResponse,
     MyPreventedMatchesResponse,
     MyTradesResponse,
+    OpenOrderListsStatusResponse,
+    OpenOrdersStatusResponse,
     OrderAmendmentsResponse,
+    OrderListStatusResponse,
+    OrderStatusResponse,
 } from '../types';
 
 /**
@@ -81,7 +85,7 @@ export interface AccountApiInterface {
      * Query information about all your order lists, filtered by time range.
      * Weight: 20
      *
-     * @summary WebSocket Account Order list history
+     * @summary WebSocket Account order list history
      * @param {AllOrderListsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<AllOrderListsResponse>}
@@ -160,6 +164,49 @@ export interface AccountApiInterface {
     myTrades(requestParameters: MyTradesRequest): Promise<WebsocketApiResponse<MyTradesResponse>>;
 
     /**
+     * Query execution status of all open order lists.
+     *
+     * If you need to continuously monitor order status updates, please consider using WebSocket Streams:
+     *
+     * `userDataStream.start` request
+     * `executionReport` user data stream event
+     * Weight: 6
+     *
+     * @summary WebSocket Current open Order lists
+     * @param {OpenOrderListsStatusRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<OpenOrderListsStatusResponse>}
+     * @memberof AccountApiInterface
+     */
+    openOrderListsStatus(
+        requestParameters?: OpenOrderListsStatusRequest
+    ): Promise<WebsocketApiResponse<OpenOrderListsStatusResponse>>;
+
+    /**
+     * Query execution status of all open orders.
+     *
+     * If you need to continuously monitor order status updates, please consider using WebSocket Streams:
+     *
+     * `userDataStream.start` request
+     * `executionReport` user data stream event
+     * Weight: Adjusted based on the number of requested symbols:
+     *
+     * | Parameter | Weight |
+     * | --------- | ------ |
+     * | `symbol`  |      6 |
+     * | none      |     80 |
+     *
+     * @summary WebSocket Current open orders
+     * @param {OpenOrdersStatusRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<OpenOrdersStatusResponse>}
+     * @memberof AccountApiInterface
+     */
+    openOrdersStatus(
+        requestParameters?: OpenOrdersStatusRequest
+    ): Promise<WebsocketApiResponse<OpenOrdersStatusResponse>>;
+
+    /**
      * Queries all amendments of a single order.
      * Weight: 4
      *
@@ -172,6 +219,36 @@ export interface AccountApiInterface {
     orderAmendments(
         requestParameters: OrderAmendmentsRequest
     ): Promise<WebsocketApiResponse<OrderAmendmentsResponse>>;
+
+    /**
+     * Check execution status of an Order list.
+     *
+     * For execution status of individual orders, use `order.status`.
+     * Weight: 4
+     *
+     * @summary WebSocket Query Order list
+     * @param {OrderListStatusRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<OrderListStatusResponse>}
+     * @memberof AccountApiInterface
+     */
+    orderListStatus(
+        requestParameters?: OrderListStatusRequest
+    ): Promise<WebsocketApiResponse<OrderListStatusResponse>>;
+
+    /**
+     * Check execution status of an order.
+     * Weight: 4
+     *
+     * @summary WebSocket Query order
+     * @param {OrderStatusRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<OrderStatusResponse>}
+     * @memberof AccountApiInterface
+     */
+    orderStatus(
+        requestParameters: OrderStatusRequest
+    ): Promise<WebsocketApiResponse<OrderStatusResponse>>;
 }
 
 /**
@@ -524,6 +601,53 @@ export interface MyTradesRequest {
 }
 
 /**
+ * Request parameters for openOrderListsStatus operation in AccountApi.
+ * @interface OpenOrderListsStatusRequest
+ */
+export interface OpenOrderListsStatusRequest {
+    /**
+     * Unique WebSocket request ID.
+     * @type {string}
+     * @memberof AccountApiOpenOrderListsStatus
+     */
+    readonly id?: string;
+
+    /**
+     * The value cannot be greater than `60000`
+     * @type {number}
+     * @memberof AccountApiOpenOrderListsStatus
+     */
+    readonly recvWindow?: number;
+}
+
+/**
+ * Request parameters for openOrdersStatus operation in AccountApi.
+ * @interface OpenOrdersStatusRequest
+ */
+export interface OpenOrdersStatusRequest {
+    /**
+     * Unique WebSocket request ID.
+     * @type {string}
+     * @memberof AccountApiOpenOrdersStatus
+     */
+    readonly id?: string;
+
+    /**
+     * Describe a single symbol
+     * @type {string}
+     * @memberof AccountApiOpenOrdersStatus
+     */
+    readonly symbol?: string;
+
+    /**
+     * The value cannot be greater than `60000`
+     * @type {number}
+     * @memberof AccountApiOpenOrdersStatus
+     */
+    readonly recvWindow?: number;
+}
+
+/**
  * Request parameters for orderAmendments operation in AccountApi.
  * @interface OrderAmendmentsRequest
  */
@@ -567,6 +691,81 @@ export interface OrderAmendmentsRequest {
      * The value cannot be greater than `60000`
      * @type {number}
      * @memberof AccountApiOrderAmendments
+     */
+    readonly recvWindow?: number;
+}
+
+/**
+ * Request parameters for orderListStatus operation in AccountApi.
+ * @interface OrderListStatusRequest
+ */
+export interface OrderListStatusRequest {
+    /**
+     * Unique WebSocket request ID.
+     * @type {string}
+     * @memberof AccountApiOrderListStatus
+     */
+    readonly id?: string;
+
+    /**
+     * `orderId`or`origClientOrderId`mustbesent
+     * @type {string}
+     * @memberof AccountApiOrderListStatus
+     */
+    readonly origClientOrderId?: string;
+
+    /**
+     * Cancel order list by orderListId
+     * @type {number}
+     * @memberof AccountApiOrderListStatus
+     */
+    readonly orderListId?: number;
+
+    /**
+     * The value cannot be greater than `60000`
+     * @type {number}
+     * @memberof AccountApiOrderListStatus
+     */
+    readonly recvWindow?: number;
+}
+
+/**
+ * Request parameters for orderStatus operation in AccountApi.
+ * @interface OrderStatusRequest
+ */
+export interface OrderStatusRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof AccountApiOrderStatus
+     */
+    readonly symbol: string;
+
+    /**
+     * Unique WebSocket request ID.
+     * @type {string}
+     * @memberof AccountApiOrderStatus
+     */
+    readonly id?: string;
+
+    /**
+     * Cancel order by orderId
+     * @type {number}
+     * @memberof AccountApiOrderStatus
+     */
+    readonly orderId?: number;
+
+    /**
+     * `orderId`or`origClientOrderId`mustbesent
+     * @type {string}
+     * @memberof AccountApiOrderStatus
+     */
+    readonly origClientOrderId?: string;
+
+    /**
+     * The value cannot be greater than `60000`
+     * @type {number}
+     * @memberof AccountApiOrderStatus
      */
     readonly recvWindow?: number;
 }
@@ -647,7 +846,7 @@ export class AccountApi implements AccountApiInterface {
      * Query information about all your order lists, filtered by time range.
      * Weight: 20
      *
-     * @summary WebSocket Account Order list history
+     * @summary WebSocket Account order list history
      * @param {AllOrderListsRequest} requestParameters Request parameters.
      * @returns {Promise<AllOrderListsResponse>}
      * @memberof AccountApi
@@ -758,6 +957,61 @@ export class AccountApi implements AccountApiInterface {
     }
 
     /**
+     * Query execution status of all open order lists.
+     *
+     * If you need to continuously monitor order status updates, please consider using WebSocket Streams:
+     *
+     * `userDataStream.start` request
+     * `executionReport` user data stream event
+     * Weight: 6
+     *
+     * @summary WebSocket Current open Order lists
+     * @param {OpenOrderListsStatusRequest} requestParameters Request parameters.
+     * @returns {Promise<OpenOrderListsStatusResponse>}
+     * @memberof AccountApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#current-open-order-lists-user_data Binance API Documentation}
+     */
+    public openOrderListsStatus(
+        requestParameters: OpenOrderListsStatusRequest = {}
+    ): Promise<WebsocketApiResponse<OpenOrderListsStatusResponse>> {
+        return this.websocketBase.sendMessage<OpenOrderListsStatusResponse>(
+            '/openOrderLists.status'.slice(1),
+            requestParameters as unknown as WebsocketSendMsgOptions,
+            { isSigned: true, withApiKey: false }
+        );
+    }
+
+    /**
+     * Query execution status of all open orders.
+     *
+     * If you need to continuously monitor order status updates, please consider using WebSocket Streams:
+     *
+     * `userDataStream.start` request
+     * `executionReport` user data stream event
+     * Weight: Adjusted based on the number of requested symbols:
+     *
+     * | Parameter | Weight |
+     * | --------- | ------ |
+     * | `symbol`  |      6 |
+     * | none      |     80 |
+     *
+     * @summary WebSocket Current open orders
+     * @param {OpenOrdersStatusRequest} requestParameters Request parameters.
+     * @returns {Promise<OpenOrdersStatusResponse>}
+     * @memberof AccountApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#current-open-orders-user_data Binance API Documentation}
+     */
+    public openOrdersStatus(
+        requestParameters: OpenOrdersStatusRequest = {}
+    ): Promise<WebsocketApiResponse<OpenOrdersStatusResponse>> {
+        return this.websocketBase.sendMessage<OpenOrdersStatusResponse>(
+            '/openOrders.status'.slice(1),
+            requestParameters as unknown as WebsocketSendMsgOptions,
+            { isSigned: true, withApiKey: false }
+        );
+    }
+
+    /**
      * Queries all amendments of a single order.
      * Weight: 4
      *
@@ -772,6 +1026,48 @@ export class AccountApi implements AccountApiInterface {
     ): Promise<WebsocketApiResponse<OrderAmendmentsResponse>> {
         return this.websocketBase.sendMessage<OrderAmendmentsResponse>(
             '/order.amendments'.slice(1),
+            requestParameters as unknown as WebsocketSendMsgOptions,
+            { isSigned: true, withApiKey: false }
+        );
+    }
+
+    /**
+     * Check execution status of an Order list.
+     *
+     * For execution status of individual orders, use `order.status`.
+     * Weight: 4
+     *
+     * @summary WebSocket Query Order list
+     * @param {OrderListStatusRequest} requestParameters Request parameters.
+     * @returns {Promise<OrderListStatusResponse>}
+     * @memberof AccountApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#query-order-list-user_data Binance API Documentation}
+     */
+    public orderListStatus(
+        requestParameters: OrderListStatusRequest = {}
+    ): Promise<WebsocketApiResponse<OrderListStatusResponse>> {
+        return this.websocketBase.sendMessage<OrderListStatusResponse>(
+            '/orderList.status'.slice(1),
+            requestParameters as unknown as WebsocketSendMsgOptions,
+            { isSigned: true, withApiKey: false }
+        );
+    }
+
+    /**
+     * Check execution status of an order.
+     * Weight: 4
+     *
+     * @summary WebSocket Query order
+     * @param {OrderStatusRequest} requestParameters Request parameters.
+     * @returns {Promise<OrderStatusResponse>}
+     * @memberof AccountApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#query-order-user_data Binance API Documentation}
+     */
+    public orderStatus(
+        requestParameters: OrderStatusRequest
+    ): Promise<WebsocketApiResponse<OrderStatusResponse>> {
+        return this.websocketBase.sendMessage<OrderStatusResponse>(
+            '/order.status'.slice(1),
             requestParameters as unknown as WebsocketSendMsgOptions,
             { isSigned: true, withApiKey: false }
         );

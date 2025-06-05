@@ -207,15 +207,10 @@ export class GeneralApi implements GeneralApiInterface {
     }
 }
 
-/**
- * @enum {string}
- */
-export const ExchangeInfoSymbolStatusEnum = {
-    TRADING: 'TRADING',
-    END_OF_DAY: 'END_OF_DAY',
-    HALT: 'HALT',
-    BREAK: 'BREAK',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type ExchangeInfoSymbolStatusEnum =
-    (typeof ExchangeInfoSymbolStatusEnum)[keyof typeof ExchangeInfoSymbolStatusEnum];
+export enum ExchangeInfoSymbolStatusEnum {
+    TRADING = 'TRADING',
+    END_OF_DAY = 'END_OF_DAY',
+    HALT = 'HALT',
+    BREAK = 'BREAK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}

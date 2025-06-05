@@ -25,16 +25,10 @@ import {
     type RequestArgs,
 } from '@binance/common';
 import type {
-    AllOrderListResponse,
-    AllOrdersResponse,
     DeleteOpenOrdersResponse,
     DeleteOrderListResponse,
     DeleteOrderResponse,
-    GetOpenOrdersResponse,
-    GetOrderListResponse,
-    GetOrderResponse,
     NewOrderResponse,
-    OpenOrderListResponse,
     OrderAmendKeepPriorityResponse,
     OrderCancelReplaceResponse,
     OrderListOcoResponse,
@@ -51,121 +45,6 @@ import type {
  */
 const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
     return {
-        /**
-         * Retrieves all order lists based on provided optional parameters.
-         *
-         * Note that the time between `startTime` and `endTime` can't be longer than 24 hours.
-         * Weight: 20
-         *
-         * @summary Query all Order lists
-         * @param {number} [fromId] ID to get aggregate trades from INCLUSIVE.
-         * @param {number} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
-         * @param {number} [limit] Default: 500; Maximum: 1000.
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
-         *
-         * @throws {RequiredError}
-         */
-        allOrderList: async (
-            fromId?: number,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
-        ): Promise<RequestArgs> => {
-            const localVarQueryParameter: Record<string, unknown> = {};
-
-            if (fromId !== undefined && fromId !== null) {
-                localVarQueryParameter['fromId'] = fromId;
-            }
-
-            if (startTime !== undefined && startTime !== null) {
-                localVarQueryParameter['startTime'] = startTime;
-            }
-
-            if (endTime !== undefined && endTime !== null) {
-                localVarQueryParameter['endTime'] = endTime;
-            }
-
-            if (limit !== undefined && limit !== null) {
-                localVarQueryParameter['limit'] = limit;
-            }
-
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/api/v3/allOrderList',
-                method: 'GET',
-                params: localVarQueryParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
-         * Get all account orders; active, canceled, or filled.
-         * Weight: 20
-         *
-         * @summary All orders
-         * @param {string} symbol
-         * @param {number} [orderId]
-         * @param {number} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
-         * @param {number} [limit] Default: 500; Maximum: 1000.
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
-         *
-         * @throws {RequiredError}
-         */
-        allOrders: async (
-            symbol: string,
-            orderId?: number,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
-        ): Promise<RequestArgs> => {
-            // verify required parameter 'symbol' is not null or undefined
-            assertParamExists('allOrders', 'symbol', symbol);
-
-            const localVarQueryParameter: Record<string, unknown> = {};
-
-            if (symbol !== undefined && symbol !== null) {
-                localVarQueryParameter['symbol'] = symbol;
-            }
-
-            if (orderId !== undefined && orderId !== null) {
-                localVarQueryParameter['orderId'] = orderId;
-            }
-
-            if (startTime !== undefined && startTime !== null) {
-                localVarQueryParameter['startTime'] = startTime;
-            }
-
-            if (endTime !== undefined && endTime !== null) {
-                localVarQueryParameter['endTime'] = endTime;
-            }
-
-            if (limit !== undefined && limit !== null) {
-                localVarQueryParameter['limit'] = limit;
-            }
-
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/api/v3/allOrders',
-                method: 'GET',
-                params: localVarQueryParameter,
-                timeUnit: _timeUnit,
-            };
-        },
         /**
          * Cancels all active orders on a symbol.
          * This includes orders that are part of an order list.
@@ -318,126 +197,6 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
-         * Get all open orders on a symbol. **Careful** when accessing this with no symbol.
-         * Weight: 6 for a single symbol; **80** when the symbol parameter is omitted
-         *
-         * @summary Current open orders
-         * @param {string} [symbol] Symbol to query
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
-         *
-         * @throws {RequiredError}
-         */
-        getOpenOrders: async (symbol?: string, recvWindow?: number): Promise<RequestArgs> => {
-            const localVarQueryParameter: Record<string, unknown> = {};
-
-            if (symbol !== undefined && symbol !== null) {
-                localVarQueryParameter['symbol'] = symbol;
-            }
-
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/api/v3/openOrders',
-                method: 'GET',
-                params: localVarQueryParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
-         * Check an order's status.
-         * Weight: 4
-         *
-         * @summary Query order
-         * @param {string} symbol
-         * @param {number} [orderId]
-         * @param {string} [origClientOrderId]
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
-         *
-         * @throws {RequiredError}
-         */
-        getOrder: async (
-            symbol: string,
-            orderId?: number,
-            origClientOrderId?: string,
-            recvWindow?: number
-        ): Promise<RequestArgs> => {
-            // verify required parameter 'symbol' is not null or undefined
-            assertParamExists('getOrder', 'symbol', symbol);
-
-            const localVarQueryParameter: Record<string, unknown> = {};
-
-            if (symbol !== undefined && symbol !== null) {
-                localVarQueryParameter['symbol'] = symbol;
-            }
-
-            if (orderId !== undefined && orderId !== null) {
-                localVarQueryParameter['orderId'] = orderId;
-            }
-
-            if (origClientOrderId !== undefined && origClientOrderId !== null) {
-                localVarQueryParameter['origClientOrderId'] = origClientOrderId;
-            }
-
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/api/v3/order',
-                method: 'GET',
-                params: localVarQueryParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
-         * Retrieves a specific order list based on provided optional parameters.
-         * Weight: 4
-         *
-         * @summary Query Order list
-         * @param {number} [orderListId] Either `orderListId` or `listClientOrderId` must be provided
-         * @param {string} [origClientOrderId]
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
-         *
-         * @throws {RequiredError}
-         */
-        getOrderList: async (
-            orderListId?: number,
-            origClientOrderId?: string,
-            recvWindow?: number
-        ): Promise<RequestArgs> => {
-            const localVarQueryParameter: Record<string, unknown> = {};
-
-            if (orderListId !== undefined && orderListId !== null) {
-                localVarQueryParameter['orderListId'] = orderListId;
-            }
-
-            if (origClientOrderId !== undefined && origClientOrderId !== null) {
-                localVarQueryParameter['origClientOrderId'] = origClientOrderId;
-            }
-
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/api/v3/orderList',
-                method: 'GET',
-                params: localVarQueryParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
          * Send in a new order.
          *
          * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
@@ -455,7 +214,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [strategyId]
          * @param {number} [strategyType] The value cannot be less than `1000000`.
          * @param {number} [stopPrice] Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
-         * @param {number} [trailingDelta] Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
+         * @param {number} [trailingDelta] See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
          * @param {number} [icebergQty] Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
          * @param {NewOrderNewOrderRespTypeEnum} [newOrderRespType]
          * @param {NewOrderSelfTradePreventionModeEnum} [selfTradePreventionMode]
@@ -565,32 +324,6 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
-         *
-         * Weight: 6
-         *
-         * @summary Query Open Order lists
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
-         *
-         * @throws {RequiredError}
-         */
-        openOrderList: async (recvWindow?: number): Promise<RequestArgs> => {
-            const localVarQueryParameter: Record<string, unknown> = {};
-
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/api/v3/openOrderList',
-                method: 'GET',
-                params: localVarQueryParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
          * Reduce the quantity of an existing open order.
          *
          * This adds 0 orders to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
@@ -681,7 +414,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [strategyId]
          * @param {number} [strategyType] The value cannot be less than `1000000`.
          * @param {number} [stopPrice] Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
-         * @param {number} [trailingDelta] Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
+         * @param {number} [trailingDelta] See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
          * @param {number} [icebergQty] Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
          * @param {OrderCancelReplaceNewOrderRespTypeEnum} [newOrderRespType]
          * @param {OrderCancelReplaceSelfTradePreventionModeEnum} [selfTradePreventionMode]
@@ -851,14 +584,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} [aboveClientOrderId] Arbitrary unique ID among open orders for the above order. Automatically generated if not sent
          * @param {number} [aboveIcebergQty] Note that this can only be used if `aboveTimeInForce` is `GTC`.
          * @param {number} [abovePrice] Can be used if `aboveType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.
-         * @param {number} [aboveStopPrice] Can be used if `aboveType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` <br>Either `aboveStopPrice` or `aboveTrailingDelta` or both, must be specified.
+         * @param {number} [aboveStopPrice] Can be used if `aboveType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT`. <br>Either `aboveStopPrice` or `aboveTrailingDelta` or both, must be specified.
          * @param {number} [aboveTrailingDelta] See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
          * @param {number} [aboveTimeInForce] Required if `aboveType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`
          * @param {number} [aboveStrategyId] Arbitrary numeric value identifying the above order within an order strategy.
          * @param {number} [aboveStrategyType] Arbitrary numeric value identifying the above order strategy. <br>Values smaller than 1000000 are reserved and cannot be used.
          * @param {string} [belowClientOrderId] Arbitrary unique ID among open orders for the below order. Automatically generated if not sent
          * @param {number} [belowIcebergQty] Note that this can only be used if `belowTimeInForce` is `GTC`.
-         * @param {number} [belowPrice] Can be used if `belowType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.
+         * @param {number} [belowPrice] Can be used if `belowType` is `STOP_LOSS_LIMIT`, `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.
          * @param {number} [belowStopPrice] Can be used if `belowType` is `STOP_LOSS`, `STOP_LOSS_LIMIT, TAKE_PROFIT` or `TAKE_PROFIT_LIMIT` <br>Either belowStopPrice or belowTrailingDelta or both, must be specified.
          * @param {number} [belowTrailingDelta] See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
          * @param {OrderListOcoBelowTimeInForceEnum} [belowTimeInForce]
@@ -1021,7 +754,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
-         * Places an OTO.
+         * Place an OTO.
          *
          * An OTO (One-Triggers-the-Other) is an order list comprised of 2 orders.
          * The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
@@ -1259,7 +992,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderListOtocoPendingBelowTypeEnum} [pendingBelowType]
          * @param {string} [pendingBelowClientOrderId] Arbitrary unique ID among open orders for the pending below order.<br> Automatically generated if not sent.
          * @param {number} [pendingBelowPrice] Can be used if `pendingBelowType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT` to specify limit price
-         * @param {number} [pendingBelowStopPrice] Can be used if `pendingBelowType` is `STOP_LOSS`, `STOP_LOSS_LIMIT, TAKE_PROFIT or TAKE_PROFIT_LIMIT`. <br> Either `pendingBelowStopPrice` or `pendingBelowTrailingDelta` or both, must be specified.
+         * @param {number} [pendingBelowStopPrice] Can be used if `pendingBelowType` is `STOP_LOSS`, `STOP_LOSS_LIMIT, TAKE_PROFIT or TAKE_PROFIT_LIMIT`. <br>Either `pendingBelowStopPrice` or `pendingBelowTrailingDelta` or both, must be specified.
          * @param {number} [pendingBelowTrailingDelta]
          * @param {number} [pendingBelowIcebergQty] This can only be used if `pendingBelowTimeInForce` is `GTC`, or if `pendingBelowType` is `LIMIT_MAKER`.
          * @param {OrderListOtocoPendingBelowTimeInForceEnum} [pendingBelowTimeInForce]
@@ -1495,7 +1228,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [limitStrategyId]
          * @param {number} [limitStrategyType] The value cannot be less than `1000000`.
          * @param {number} [limitIcebergQty] Used to make the `LIMIT_MAKER` leg an iceberg order.
-         * @param {number} [trailingDelta] Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
+         * @param {number} [trailingDelta] See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
          * @param {string} [stopClientOrderId] A unique Id for the stop loss/stop loss limit leg
          * @param {number} [stopStrategyId]
          * @param {number} [stopStrategyType] The value cannot be less than `1000000`.
@@ -1817,32 +1550,6 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
  */
 export interface TradeApiInterface {
     /**
-     * Retrieves all order lists based on provided optional parameters.
-     *
-     * Note that the time between `startTime` and `endTime` can't be longer than 24 hours.
-     * Weight: 20
-     *
-     * @summary Query all Order lists
-     * @param {AllOrderListRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof TradeApiInterface
-     */
-    allOrderList(
-        requestParameters?: AllOrderListRequest
-    ): Promise<RestApiResponse<AllOrderListResponse>>;
-    /**
-     * Get all account orders; active, canceled, or filled.
-     * Weight: 20
-     *
-     * @summary All orders
-     * @param {AllOrdersRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof TradeApiInterface
-     */
-    allOrders(requestParameters: AllOrdersRequest): Promise<RestApiResponse<AllOrdersResponse>>;
-    /**
      * Cancels all active orders on a symbol.
      * This includes orders that are part of an order list.
      * Weight: 1
@@ -1883,43 +1590,6 @@ export interface TradeApiInterface {
         requestParameters: DeleteOrderListRequest
     ): Promise<RestApiResponse<DeleteOrderListResponse>>;
     /**
-     * Get all open orders on a symbol. **Careful** when accessing this with no symbol.
-     * Weight: 6 for a single symbol; **80** when the symbol parameter is omitted
-     *
-     * @summary Current open orders
-     * @param {GetOpenOrdersRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof TradeApiInterface
-     */
-    getOpenOrders(
-        requestParameters?: GetOpenOrdersRequest
-    ): Promise<RestApiResponse<GetOpenOrdersResponse>>;
-    /**
-     * Check an order's status.
-     * Weight: 4
-     *
-     * @summary Query order
-     * @param {GetOrderRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof TradeApiInterface
-     */
-    getOrder(requestParameters: GetOrderRequest): Promise<RestApiResponse<GetOrderResponse>>;
-    /**
-     * Retrieves a specific order list based on provided optional parameters.
-     * Weight: 4
-     *
-     * @summary Query Order list
-     * @param {GetOrderListRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof TradeApiInterface
-     */
-    getOrderList(
-        requestParameters?: GetOrderListRequest
-    ): Promise<RestApiResponse<GetOrderListResponse>>;
-    /**
      * Send in a new order.
      *
      * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
@@ -1932,19 +1602,6 @@ export interface TradeApiInterface {
      * @memberof TradeApiInterface
      */
     newOrder(requestParameters: NewOrderRequest): Promise<RestApiResponse<NewOrderResponse>>;
-    /**
-     *
-     * Weight: 6
-     *
-     * @summary Query Open Order lists
-     * @param {OpenOrderListRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof TradeApiInterface
-     */
-    openOrderList(
-        requestParameters?: OpenOrderListRequest
-    ): Promise<RestApiResponse<OpenOrderListResponse>>;
     /**
      * Reduce the quantity of an existing open order.
      *
@@ -2006,7 +1663,7 @@ export interface TradeApiInterface {
         requestParameters: OrderListOcoRequest
     ): Promise<RestApiResponse<OrderListOcoResponse>>;
     /**
-     * Places an OTO.
+     * Place an OTO.
      *
      * An OTO (One-Triggers-the-Other) is an order list comprised of 2 orders.
      * The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
@@ -2122,95 +1779,6 @@ export interface TradeApiInterface {
 }
 
 /**
- * Request parameters for allOrderList operation in TradeApi.
- * @interface AllOrderListRequest
- */
-export interface AllOrderListRequest {
-    /**
-     * ID to get aggregate trades from INCLUSIVE.
-     * @type {number}
-     * @memberof TradeApiAllOrderList
-     */
-    readonly fromId?: number;
-
-    /**
-     * Timestamp in ms to get aggregate trades from INCLUSIVE.
-     * @type {number}
-     * @memberof TradeApiAllOrderList
-     */
-    readonly startTime?: number;
-
-    /**
-     * Timestamp in ms to get aggregate trades until INCLUSIVE.
-     * @type {number}
-     * @memberof TradeApiAllOrderList
-     */
-    readonly endTime?: number;
-
-    /**
-     * Default: 500; Maximum: 1000.
-     * @type {number}
-     * @memberof TradeApiAllOrderList
-     */
-    readonly limit?: number;
-
-    /**
-     * The value cannot be greater than `60000`
-     * @type {number}
-     * @memberof TradeApiAllOrderList
-     */
-    readonly recvWindow?: number;
-}
-
-/**
- * Request parameters for allOrders operation in TradeApi.
- * @interface AllOrdersRequest
- */
-export interface AllOrdersRequest {
-    /**
-     *
-     * @type {string}
-     * @memberof TradeApiAllOrders
-     */
-    readonly symbol: string;
-
-    /**
-     *
-     * @type {number}
-     * @memberof TradeApiAllOrders
-     */
-    readonly orderId?: number;
-
-    /**
-     * Timestamp in ms to get aggregate trades from INCLUSIVE.
-     * @type {number}
-     * @memberof TradeApiAllOrders
-     */
-    readonly startTime?: number;
-
-    /**
-     * Timestamp in ms to get aggregate trades until INCLUSIVE.
-     * @type {number}
-     * @memberof TradeApiAllOrders
-     */
-    readonly endTime?: number;
-
-    /**
-     * Default: 500; Maximum: 1000.
-     * @type {number}
-     * @memberof TradeApiAllOrders
-     */
-    readonly limit?: number;
-
-    /**
-     * The value cannot be greater than `60000`
-     * @type {number}
-     * @memberof TradeApiAllOrders
-     */
-    readonly recvWindow?: number;
-}
-
-/**
  * Request parameters for deleteOpenOrders operation in TradeApi.
  * @interface DeleteOpenOrdersRequest
  */
@@ -2320,87 +1888,6 @@ export interface DeleteOrderListRequest {
 }
 
 /**
- * Request parameters for getOpenOrders operation in TradeApi.
- * @interface GetOpenOrdersRequest
- */
-export interface GetOpenOrdersRequest {
-    /**
-     * Symbol to query
-     * @type {string}
-     * @memberof TradeApiGetOpenOrders
-     */
-    readonly symbol?: string;
-
-    /**
-     * The value cannot be greater than `60000`
-     * @type {number}
-     * @memberof TradeApiGetOpenOrders
-     */
-    readonly recvWindow?: number;
-}
-
-/**
- * Request parameters for getOrder operation in TradeApi.
- * @interface GetOrderRequest
- */
-export interface GetOrderRequest {
-    /**
-     *
-     * @type {string}
-     * @memberof TradeApiGetOrder
-     */
-    readonly symbol: string;
-
-    /**
-     *
-     * @type {number}
-     * @memberof TradeApiGetOrder
-     */
-    readonly orderId?: number;
-
-    /**
-     *
-     * @type {string}
-     * @memberof TradeApiGetOrder
-     */
-    readonly origClientOrderId?: string;
-
-    /**
-     * The value cannot be greater than `60000`
-     * @type {number}
-     * @memberof TradeApiGetOrder
-     */
-    readonly recvWindow?: number;
-}
-
-/**
- * Request parameters for getOrderList operation in TradeApi.
- * @interface GetOrderListRequest
- */
-export interface GetOrderListRequest {
-    /**
-     * Either `orderListId` or `listClientOrderId` must be provided
-     * @type {number}
-     * @memberof TradeApiGetOrderList
-     */
-    readonly orderListId?: number;
-
-    /**
-     *
-     * @type {string}
-     * @memberof TradeApiGetOrderList
-     */
-    readonly origClientOrderId?: string;
-
-    /**
-     * The value cannot be greater than `60000`
-     * @type {number}
-     * @memberof TradeApiGetOrderList
-     */
-    readonly recvWindow?: number;
-}
-
-/**
  * Request parameters for newOrder operation in TradeApi.
  * @interface NewOrderRequest
  */
@@ -2483,7 +1970,7 @@ export interface NewOrderRequest {
     readonly stopPrice?: number;
 
     /**
-     * Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
+     * See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
      * @type {number}
      * @memberof TradeApiNewOrder
      */
@@ -2514,19 +2001,6 @@ export interface NewOrderRequest {
      * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiNewOrder
-     */
-    readonly recvWindow?: number;
-}
-
-/**
- * Request parameters for openOrderList operation in TradeApi.
- * @interface OpenOrderListRequest
- */
-export interface OpenOrderListRequest {
-    /**
-     * The value cannot be greater than `60000`
-     * @type {number}
-     * @memberof TradeApiOpenOrderList
      */
     readonly recvWindow?: number;
 }
@@ -2690,7 +2164,7 @@ export interface OrderCancelReplaceRequest {
     readonly stopPrice?: number;
 
     /**
-     * Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
+     * See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
      * @type {number}
      * @memberof TradeApiOrderCancelReplace
      */
@@ -2808,7 +2282,7 @@ export interface OrderListOcoRequest {
     readonly abovePrice?: number;
 
     /**
-     * Can be used if `aboveType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` <br>Either `aboveStopPrice` or `aboveTrailingDelta` or both, must be specified.
+     * Can be used if `aboveType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT`. <br>Either `aboveStopPrice` or `aboveTrailingDelta` or both, must be specified.
      * @type {number}
      * @memberof TradeApiOrderListOco
      */
@@ -2857,7 +2331,7 @@ export interface OrderListOcoRequest {
     readonly belowIcebergQty?: number;
 
     /**
-     * Can be used if `belowType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.
+     * Can be used if `belowType` is `STOP_LOSS_LIMIT`, `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.
      * @type {number}
      * @memberof TradeApiOrderListOco
      */
@@ -3296,7 +2770,7 @@ export interface OrderListOtocoRequest {
     readonly pendingBelowPrice?: number;
 
     /**
-     * Can be used if `pendingBelowType` is `STOP_LOSS`, `STOP_LOSS_LIMIT, TAKE_PROFIT or TAKE_PROFIT_LIMIT`. <br> Either `pendingBelowStopPrice` or `pendingBelowTrailingDelta` or both, must be specified.
+     * Can be used if `pendingBelowType` is `STOP_LOSS`, `STOP_LOSS_LIMIT, TAKE_PROFIT or TAKE_PROFIT_LIMIT`. <br>Either `pendingBelowStopPrice` or `pendingBelowTrailingDelta` or both, must be specified.
      * @type {number}
      * @memberof TradeApiOrderListOtoco
      */
@@ -3421,7 +2895,7 @@ export interface OrderOcoRequest {
     readonly limitIcebergQty?: number;
 
     /**
-     * Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
+     * See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
      * @type {number}
      * @memberof TradeApiOrderOco
      */
@@ -3628,71 +3102,6 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Retrieves all order lists based on provided optional parameters.
-     *
-     * Note that the time between `startTime` and `endTime` can't be longer than 24 hours.
-     * Weight: 20
-     *
-     * @summary Query all Order lists
-     * @param {AllOrderListRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<AllOrderListResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#query-all-order-lists-user_data Binance API Documentation}
-     */
-    public async allOrderList(
-        requestParameters: AllOrderListRequest = {}
-    ): Promise<RestApiResponse<AllOrderListResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.allOrderList(
-            requestParameters?.fromId,
-            requestParameters?.startTime,
-            requestParameters?.endTime,
-            requestParameters?.limit,
-            requestParameters?.recvWindow
-        );
-        return sendRequest<AllOrderListResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
-        );
-    }
-
-    /**
-     * Get all account orders; active, canceled, or filled.
-     * Weight: 20
-     *
-     * @summary All orders
-     * @param {AllOrdersRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<AllOrdersResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#all-orders-user_data Binance API Documentation}
-     */
-    public async allOrders(
-        requestParameters: AllOrdersRequest
-    ): Promise<RestApiResponse<AllOrdersResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.allOrders(
-            requestParameters?.symbol,
-            requestParameters?.orderId,
-            requestParameters?.startTime,
-            requestParameters?.endTime,
-            requestParameters?.limit,
-            requestParameters?.recvWindow
-        );
-        return sendRequest<AllOrdersResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
-        );
-    }
-
-    /**
      * Cancels all active orders on a symbol.
      * This includes orders that are part of an order list.
      * Weight: 1
@@ -3785,93 +3194,6 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Get all open orders on a symbol. **Careful** when accessing this with no symbol.
-     * Weight: 6 for a single symbol; **80** when the symbol parameter is omitted
-     *
-     * @summary Current open orders
-     * @param {GetOpenOrdersRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetOpenOrdersResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#current-open-orders-user_data Binance API Documentation}
-     */
-    public async getOpenOrders(
-        requestParameters: GetOpenOrdersRequest = {}
-    ): Promise<RestApiResponse<GetOpenOrdersResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getOpenOrders(
-            requestParameters?.symbol,
-            requestParameters?.recvWindow
-        );
-        return sendRequest<GetOpenOrdersResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
-        );
-    }
-
-    /**
-     * Check an order's status.
-     * Weight: 4
-     *
-     * @summary Query order
-     * @param {GetOrderRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetOrderResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#query-order-user_data Binance API Documentation}
-     */
-    public async getOrder(
-        requestParameters: GetOrderRequest
-    ): Promise<RestApiResponse<GetOrderResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getOrder(
-            requestParameters?.symbol,
-            requestParameters?.orderId,
-            requestParameters?.origClientOrderId,
-            requestParameters?.recvWindow
-        );
-        return sendRequest<GetOrderResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
-        );
-    }
-
-    /**
-     * Retrieves a specific order list based on provided optional parameters.
-     * Weight: 4
-     *
-     * @summary Query Order list
-     * @param {GetOrderListRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetOrderListResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#query-order-list-user_data Binance API Documentation}
-     */
-    public async getOrderList(
-        requestParameters: GetOrderListRequest = {}
-    ): Promise<RestApiResponse<GetOrderListResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getOrderList(
-            requestParameters?.orderListId,
-            requestParameters?.origClientOrderId,
-            requestParameters?.recvWindow
-        );
-        return sendRequest<GetOrderListResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
-        );
-    }
-
-    /**
      * Send in a new order.
      *
      * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
@@ -3906,33 +3228,6 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.recvWindow
         );
         return sendRequest<NewOrderResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
-        );
-    }
-
-    /**
-     *
-     * Weight: 6
-     *
-     * @summary Query Open Order lists
-     * @param {OpenOrderListRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<OpenOrderListResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#query-open-order-lists-user_data Binance API Documentation}
-     */
-    public async openOrderList(
-        requestParameters: OpenOrderListRequest = {}
-    ): Promise<RestApiResponse<OpenOrderListResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.openOrderList(
-            requestParameters?.recvWindow
-        );
-        return sendRequest<OpenOrderListResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
@@ -4095,7 +3390,7 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Places an OTO.
+     * Place an OTO.
      *
      * An OTO (One-Triggers-the-Other) is an order list comprised of 2 orders.
      * The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
@@ -4387,424 +3682,336 @@ export class TradeApi implements TradeApiInterface {
     }
 }
 
-export const DeleteOrderCancelRestrictionsEnum = {
-    ONLY_NEW: 'ONLY_NEW',
-    NEW: 'NEW',
-    ONLY_PARTIALLY_FILLED: 'ONLY_PARTIALLY_FILLED',
-    PARTIALLY_FILLED: 'PARTIALLY_FILLED',
-} as const;
-export type DeleteOrderCancelRestrictionsEnum =
-    (typeof DeleteOrderCancelRestrictionsEnum)[keyof typeof DeleteOrderCancelRestrictionsEnum];
+export enum DeleteOrderCancelRestrictionsEnum {
+    ONLY_NEW = 'ONLY_NEW',
+    NEW = 'NEW',
+    ONLY_PARTIALLY_FILLED = 'ONLY_PARTIALLY_FILLED',
+    PARTIALLY_FILLED = 'PARTIALLY_FILLED',
+}
 
-export const NewOrderSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type NewOrderSideEnum = (typeof NewOrderSideEnum)[keyof typeof NewOrderSideEnum];
+export enum NewOrderSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-export const NewOrderTypeEnum = {
-    MARKET: 'MARKET',
-    LIMIT: 'LIMIT',
-    STOP_LOSS: 'STOP_LOSS',
-    STOP_LOSS_LIMIT: 'STOP_LOSS_LIMIT',
-    TAKE_PROFIT: 'TAKE_PROFIT',
-    TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
-    LIMIT_MAKER: 'LIMIT_MAKER',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type NewOrderTypeEnum = (typeof NewOrderTypeEnum)[keyof typeof NewOrderTypeEnum];
+export enum NewOrderTypeEnum {
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+    STOP_LOSS = 'STOP_LOSS',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
 
-export const NewOrderTimeInForceEnum = {
-    GTC: 'GTC',
-    IOC: 'IOC',
-    FOK: 'FOK',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type NewOrderTimeInForceEnum =
-    (typeof NewOrderTimeInForceEnum)[keyof typeof NewOrderTimeInForceEnum];
+export enum NewOrderTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
 
-export const NewOrderNewOrderRespTypeEnum = {
-    ACK: 'ACK',
-    RESULT: 'RESULT',
-    FULL: 'FULL',
-    MARKET: 'MARKET',
-    LIMIT: 'LIMIT',
-} as const;
-export type NewOrderNewOrderRespTypeEnum =
-    (typeof NewOrderNewOrderRespTypeEnum)[keyof typeof NewOrderNewOrderRespTypeEnum];
+export enum NewOrderNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+}
 
-export const NewOrderSelfTradePreventionModeEnum = {
-    NONE: 'NONE',
-    EXPIRE_TAKER: 'EXPIRE_TAKER',
-    EXPIRE_MAKER: 'EXPIRE_MAKER',
-    EXPIRE_BOTH: 'EXPIRE_BOTH',
-    DECREMENT: 'DECREMENT',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type NewOrderSelfTradePreventionModeEnum =
-    (typeof NewOrderSelfTradePreventionModeEnum)[keyof typeof NewOrderSelfTradePreventionModeEnum];
+export enum NewOrderSelfTradePreventionModeEnum {
+    NONE = 'NONE',
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    DECREMENT = 'DECREMENT',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
 
-export const OrderCancelReplaceSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type OrderCancelReplaceSideEnum =
-    (typeof OrderCancelReplaceSideEnum)[keyof typeof OrderCancelReplaceSideEnum];
+export enum OrderCancelReplaceSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-export const OrderCancelReplaceTypeEnum = {
-    MARKET: 'MARKET',
-    LIMIT: 'LIMIT',
-    STOP_LOSS: 'STOP_LOSS',
-    STOP_LOSS_LIMIT: 'STOP_LOSS_LIMIT',
-    TAKE_PROFIT: 'TAKE_PROFIT',
-    TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
-    LIMIT_MAKER: 'LIMIT_MAKER',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type OrderCancelReplaceTypeEnum =
-    (typeof OrderCancelReplaceTypeEnum)[keyof typeof OrderCancelReplaceTypeEnum];
+export enum OrderCancelReplaceTypeEnum {
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+    STOP_LOSS = 'STOP_LOSS',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
 
-export const OrderCancelReplaceCancelReplaceModeEnum = {
-    STOP_ON_FAILURE: 'STOP_ON_FAILURE',
-    ALLOW_FAILURE: 'ALLOW_FAILURE',
-} as const;
-export type OrderCancelReplaceCancelReplaceModeEnum =
-    (typeof OrderCancelReplaceCancelReplaceModeEnum)[keyof typeof OrderCancelReplaceCancelReplaceModeEnum];
+export enum OrderCancelReplaceCancelReplaceModeEnum {
+    STOP_ON_FAILURE = 'STOP_ON_FAILURE',
+    ALLOW_FAILURE = 'ALLOW_FAILURE',
+}
 
-export const OrderCancelReplaceTimeInForceEnum = {
-    GTC: 'GTC',
-    IOC: 'IOC',
-    FOK: 'FOK',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type OrderCancelReplaceTimeInForceEnum =
-    (typeof OrderCancelReplaceTimeInForceEnum)[keyof typeof OrderCancelReplaceTimeInForceEnum];
+export enum OrderCancelReplaceTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
 
-export const OrderCancelReplaceNewOrderRespTypeEnum = {
-    ACK: 'ACK',
-    RESULT: 'RESULT',
-    FULL: 'FULL',
-    MARKET: 'MARKET',
-    LIMIT: 'LIMIT',
-} as const;
-export type OrderCancelReplaceNewOrderRespTypeEnum =
-    (typeof OrderCancelReplaceNewOrderRespTypeEnum)[keyof typeof OrderCancelReplaceNewOrderRespTypeEnum];
+export enum OrderCancelReplaceNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+}
 
-export const OrderCancelReplaceSelfTradePreventionModeEnum = {
-    NONE: 'NONE',
-    EXPIRE_TAKER: 'EXPIRE_TAKER',
-    EXPIRE_MAKER: 'EXPIRE_MAKER',
-    EXPIRE_BOTH: 'EXPIRE_BOTH',
-    DECREMENT: 'DECREMENT',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type OrderCancelReplaceSelfTradePreventionModeEnum =
-    (typeof OrderCancelReplaceSelfTradePreventionModeEnum)[keyof typeof OrderCancelReplaceSelfTradePreventionModeEnum];
+export enum OrderCancelReplaceSelfTradePreventionModeEnum {
+    NONE = 'NONE',
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    DECREMENT = 'DECREMENT',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
 
-export const OrderCancelReplaceCancelRestrictionsEnum = {
-    ONLY_NEW: 'ONLY_NEW',
-    NEW: 'NEW',
-    ONLY_PARTIALLY_FILLED: 'ONLY_PARTIALLY_FILLED',
-    PARTIALLY_FILLED: 'PARTIALLY_FILLED',
-} as const;
-export type OrderCancelReplaceCancelRestrictionsEnum =
-    (typeof OrderCancelReplaceCancelRestrictionsEnum)[keyof typeof OrderCancelReplaceCancelRestrictionsEnum];
+export enum OrderCancelReplaceCancelRestrictionsEnum {
+    ONLY_NEW = 'ONLY_NEW',
+    NEW = 'NEW',
+    ONLY_PARTIALLY_FILLED = 'ONLY_PARTIALLY_FILLED',
+    PARTIALLY_FILLED = 'PARTIALLY_FILLED',
+}
 
-export const OrderCancelReplaceOrderRateLimitExceededModeEnum = {
-    DO_NOTHING: 'DO_NOTHING',
-    CANCEL_ONLY: 'CANCEL_ONLY',
-} as const;
-export type OrderCancelReplaceOrderRateLimitExceededModeEnum =
-    (typeof OrderCancelReplaceOrderRateLimitExceededModeEnum)[keyof typeof OrderCancelReplaceOrderRateLimitExceededModeEnum];
+export enum OrderCancelReplaceOrderRateLimitExceededModeEnum {
+    DO_NOTHING = 'DO_NOTHING',
+    CANCEL_ONLY = 'CANCEL_ONLY',
+}
 
-export const OrderListOcoSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type OrderListOcoSideEnum = (typeof OrderListOcoSideEnum)[keyof typeof OrderListOcoSideEnum];
+export enum OrderListOcoSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-export const OrderListOcoAboveTypeEnum = {
-    STOP_LOSS_LIMIT: 'STOP_LOSS_LIMIT',
-    STOP_LOSS: 'STOP_LOSS',
-    LIMIT_MAKER: 'LIMIT_MAKER',
-    TAKE_PROFIT: 'TAKE_PROFIT',
-    TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
-} as const;
-export type OrderListOcoAboveTypeEnum =
-    (typeof OrderListOcoAboveTypeEnum)[keyof typeof OrderListOcoAboveTypeEnum];
+export enum OrderListOcoAboveTypeEnum {
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    STOP_LOSS = 'STOP_LOSS',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+}
 
-export const OrderListOcoBelowTypeEnum = {
-    STOP_LOSS: 'STOP_LOSS',
-    STOP_LOSS_LIMIT: 'STOP_LOSS_LIMIT',
-    TAKE_PROFIT: 'TAKE_PROFIT',
-    TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
-} as const;
-export type OrderListOcoBelowTypeEnum =
-    (typeof OrderListOcoBelowTypeEnum)[keyof typeof OrderListOcoBelowTypeEnum];
+export enum OrderListOcoBelowTypeEnum {
+    STOP_LOSS = 'STOP_LOSS',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+}
 
-export const OrderListOcoBelowTimeInForceEnum = {
-    belowType: 'belowType',
-    STOP_LOSS_LIMIT: 'STOP_LOSS_LIMIT',
-    TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
-} as const;
-export type OrderListOcoBelowTimeInForceEnum =
-    (typeof OrderListOcoBelowTimeInForceEnum)[keyof typeof OrderListOcoBelowTimeInForceEnum];
+export enum OrderListOcoBelowTimeInForceEnum {
+    belowType = 'belowType',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+}
 
-export const OrderListOcoNewOrderRespTypeEnum = {
-    ACK: 'ACK',
-    RESULT: 'RESULT',
-    FULL: 'FULL',
-    MARKET: 'MARKET',
-    LIMIT: 'LIMIT',
-} as const;
-export type OrderListOcoNewOrderRespTypeEnum =
-    (typeof OrderListOcoNewOrderRespTypeEnum)[keyof typeof OrderListOcoNewOrderRespTypeEnum];
+export enum OrderListOcoNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+}
 
-export const OrderListOcoSelfTradePreventionModeEnum = {
-    NONE: 'NONE',
-    EXPIRE_TAKER: 'EXPIRE_TAKER',
-    EXPIRE_MAKER: 'EXPIRE_MAKER',
-    EXPIRE_BOTH: 'EXPIRE_BOTH',
-    DECREMENT: 'DECREMENT',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type OrderListOcoSelfTradePreventionModeEnum =
-    (typeof OrderListOcoSelfTradePreventionModeEnum)[keyof typeof OrderListOcoSelfTradePreventionModeEnum];
+export enum OrderListOcoSelfTradePreventionModeEnum {
+    NONE = 'NONE',
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    DECREMENT = 'DECREMENT',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
 
-export const OrderListOtoWorkingTypeEnum = {
-    LIMIT: 'LIMIT',
-    LIMIT_MAKER: 'LIMIT_MAKER',
-} as const;
-export type OrderListOtoWorkingTypeEnum =
-    (typeof OrderListOtoWorkingTypeEnum)[keyof typeof OrderListOtoWorkingTypeEnum];
+export enum OrderListOtoWorkingTypeEnum {
+    LIMIT = 'LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+}
 
-export const OrderListOtoWorkingSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type OrderListOtoWorkingSideEnum =
-    (typeof OrderListOtoWorkingSideEnum)[keyof typeof OrderListOtoWorkingSideEnum];
+export enum OrderListOtoWorkingSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-export const OrderListOtoPendingTypeEnum = {
-    LIMIT: 'LIMIT',
-    MARKET: 'MARKET',
-    STOP_LOSS: 'STOP_LOSS',
-    STOP_LOSS_LIMIT: 'STOP_LOSS_LIMIT',
-    TAKE_PROFIT: 'TAKE_PROFIT',
-    TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
-    LIMIT_MAKER: 'LIMIT_MAKER',
-} as const;
-export type OrderListOtoPendingTypeEnum =
-    (typeof OrderListOtoPendingTypeEnum)[keyof typeof OrderListOtoPendingTypeEnum];
+export enum OrderListOtoPendingTypeEnum {
+    LIMIT = 'LIMIT',
+    MARKET = 'MARKET',
+    STOP_LOSS = 'STOP_LOSS',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+}
 
-export const OrderListOtoPendingSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type OrderListOtoPendingSideEnum =
-    (typeof OrderListOtoPendingSideEnum)[keyof typeof OrderListOtoPendingSideEnum];
+export enum OrderListOtoPendingSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-export const OrderListOtoNewOrderRespTypeEnum = {
-    ACK: 'ACK',
-    RESULT: 'RESULT',
-    FULL: 'FULL',
-    MARKET: 'MARKET',
-    LIMIT: 'LIMIT',
-} as const;
-export type OrderListOtoNewOrderRespTypeEnum =
-    (typeof OrderListOtoNewOrderRespTypeEnum)[keyof typeof OrderListOtoNewOrderRespTypeEnum];
+export enum OrderListOtoNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+}
 
-export const OrderListOtoSelfTradePreventionModeEnum = {
-    NONE: 'NONE',
-    EXPIRE_TAKER: 'EXPIRE_TAKER',
-    EXPIRE_MAKER: 'EXPIRE_MAKER',
-    EXPIRE_BOTH: 'EXPIRE_BOTH',
-    DECREMENT: 'DECREMENT',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type OrderListOtoSelfTradePreventionModeEnum =
-    (typeof OrderListOtoSelfTradePreventionModeEnum)[keyof typeof OrderListOtoSelfTradePreventionModeEnum];
+export enum OrderListOtoSelfTradePreventionModeEnum {
+    NONE = 'NONE',
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    DECREMENT = 'DECREMENT',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
 
-export const OrderListOtoWorkingTimeInForceEnum = {
-    GTC: 'GTC',
-    IOC: 'IOC',
-    FOK: 'FOK',
-} as const;
-export type OrderListOtoWorkingTimeInForceEnum =
-    (typeof OrderListOtoWorkingTimeInForceEnum)[keyof typeof OrderListOtoWorkingTimeInForceEnum];
+export enum OrderListOtoWorkingTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
 
-export const OrderListOtoPendingTimeInForceEnum = {
-    GTC: 'GTC',
-    IOC: 'IOC',
-    FOK: 'FOK',
-} as const;
-export type OrderListOtoPendingTimeInForceEnum =
-    (typeof OrderListOtoPendingTimeInForceEnum)[keyof typeof OrderListOtoPendingTimeInForceEnum];
+export enum OrderListOtoPendingTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
 
-export const OrderListOtocoWorkingTypeEnum = {
-    LIMIT: 'LIMIT',
-    LIMIT_MAKER: 'LIMIT_MAKER',
-} as const;
-export type OrderListOtocoWorkingTypeEnum =
-    (typeof OrderListOtocoWorkingTypeEnum)[keyof typeof OrderListOtocoWorkingTypeEnum];
+export enum OrderListOtocoWorkingTypeEnum {
+    LIMIT = 'LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+}
 
-export const OrderListOtocoWorkingSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type OrderListOtocoWorkingSideEnum =
-    (typeof OrderListOtocoWorkingSideEnum)[keyof typeof OrderListOtocoWorkingSideEnum];
+export enum OrderListOtocoWorkingSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-export const OrderListOtocoPendingSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type OrderListOtocoPendingSideEnum =
-    (typeof OrderListOtocoPendingSideEnum)[keyof typeof OrderListOtocoPendingSideEnum];
+export enum OrderListOtocoPendingSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-export const OrderListOtocoPendingAboveTypeEnum = {
-    STOP_LOSS_LIMIT: 'STOP_LOSS_LIMIT',
-    STOP_LOSS: 'STOP_LOSS',
-    LIMIT_MAKER: 'LIMIT_MAKER',
-    TAKE_PROFIT: 'TAKE_PROFIT',
-    TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
-} as const;
-export type OrderListOtocoPendingAboveTypeEnum =
-    (typeof OrderListOtocoPendingAboveTypeEnum)[keyof typeof OrderListOtocoPendingAboveTypeEnum];
+export enum OrderListOtocoPendingAboveTypeEnum {
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    STOP_LOSS = 'STOP_LOSS',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+}
 
-export const OrderListOtocoNewOrderRespTypeEnum = {
-    ACK: 'ACK',
-    RESULT: 'RESULT',
-    FULL: 'FULL',
-    MARKET: 'MARKET',
-    LIMIT: 'LIMIT',
-} as const;
-export type OrderListOtocoNewOrderRespTypeEnum =
-    (typeof OrderListOtocoNewOrderRespTypeEnum)[keyof typeof OrderListOtocoNewOrderRespTypeEnum];
+export enum OrderListOtocoNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+}
 
-export const OrderListOtocoSelfTradePreventionModeEnum = {
-    NONE: 'NONE',
-    EXPIRE_TAKER: 'EXPIRE_TAKER',
-    EXPIRE_MAKER: 'EXPIRE_MAKER',
-    EXPIRE_BOTH: 'EXPIRE_BOTH',
-    DECREMENT: 'DECREMENT',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type OrderListOtocoSelfTradePreventionModeEnum =
-    (typeof OrderListOtocoSelfTradePreventionModeEnum)[keyof typeof OrderListOtocoSelfTradePreventionModeEnum];
+export enum OrderListOtocoSelfTradePreventionModeEnum {
+    NONE = 'NONE',
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    DECREMENT = 'DECREMENT',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
 
-export const OrderListOtocoWorkingTimeInForceEnum = {
-    GTC: 'GTC',
-    IOC: 'IOC',
-    FOK: 'FOK',
-} as const;
-export type OrderListOtocoWorkingTimeInForceEnum =
-    (typeof OrderListOtocoWorkingTimeInForceEnum)[keyof typeof OrderListOtocoWorkingTimeInForceEnum];
+export enum OrderListOtocoWorkingTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
 
-export const OrderListOtocoPendingAboveTimeInForceEnum = {
-    GTC: 'GTC',
-    IOC: 'IOC',
-    FOK: 'FOK',
-} as const;
-export type OrderListOtocoPendingAboveTimeInForceEnum =
-    (typeof OrderListOtocoPendingAboveTimeInForceEnum)[keyof typeof OrderListOtocoPendingAboveTimeInForceEnum];
+export enum OrderListOtocoPendingAboveTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
 
-export const OrderListOtocoPendingBelowTypeEnum = {
-    STOP_LOSS: 'STOP_LOSS',
-    STOP_LOSS_LIMIT: 'STOP_LOSS_LIMIT',
-    TAKE_PROFIT: 'TAKE_PROFIT',
-    TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
-} as const;
-export type OrderListOtocoPendingBelowTypeEnum =
-    (typeof OrderListOtocoPendingBelowTypeEnum)[keyof typeof OrderListOtocoPendingBelowTypeEnum];
+export enum OrderListOtocoPendingBelowTypeEnum {
+    STOP_LOSS = 'STOP_LOSS',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+}
 
-export const OrderListOtocoPendingBelowTimeInForceEnum = {
-    GTC: 'GTC',
-    IOC: 'IOC',
-    FOK: 'FOK',
-} as const;
-export type OrderListOtocoPendingBelowTimeInForceEnum =
-    (typeof OrderListOtocoPendingBelowTimeInForceEnum)[keyof typeof OrderListOtocoPendingBelowTimeInForceEnum];
+export enum OrderListOtocoPendingBelowTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
 
-export const OrderOcoSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type OrderOcoSideEnum = (typeof OrderOcoSideEnum)[keyof typeof OrderOcoSideEnum];
+export enum OrderOcoSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-export const OrderOcoStopLimitTimeInForceEnum = {
-    GTC: 'GTC',
-    FOK: 'FOK',
-    IOC: 'IOC',
-} as const;
-export type OrderOcoStopLimitTimeInForceEnum =
-    (typeof OrderOcoStopLimitTimeInForceEnum)[keyof typeof OrderOcoStopLimitTimeInForceEnum];
+export enum OrderOcoStopLimitTimeInForceEnum {
+    GTC = 'GTC',
+    FOK = 'FOK',
+    IOC = 'IOC',
+}
 
-export const OrderOcoNewOrderRespTypeEnum = {
-    ACK: 'ACK',
-    RESULT: 'RESULT',
-    FULL: 'FULL',
-    MARKET: 'MARKET',
-    LIMIT: 'LIMIT',
-} as const;
-export type OrderOcoNewOrderRespTypeEnum =
-    (typeof OrderOcoNewOrderRespTypeEnum)[keyof typeof OrderOcoNewOrderRespTypeEnum];
+export enum OrderOcoNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+}
 
-export const OrderOcoSelfTradePreventionModeEnum = {
-    NONE: 'NONE',
-    EXPIRE_TAKER: 'EXPIRE_TAKER',
-    EXPIRE_MAKER: 'EXPIRE_MAKER',
-    EXPIRE_BOTH: 'EXPIRE_BOTH',
-    DECREMENT: 'DECREMENT',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type OrderOcoSelfTradePreventionModeEnum =
-    (typeof OrderOcoSelfTradePreventionModeEnum)[keyof typeof OrderOcoSelfTradePreventionModeEnum];
+export enum OrderOcoSelfTradePreventionModeEnum {
+    NONE = 'NONE',
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    DECREMENT = 'DECREMENT',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
 
-export const SorOrderSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type SorOrderSideEnum = (typeof SorOrderSideEnum)[keyof typeof SorOrderSideEnum];
+export enum SorOrderSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-export const SorOrderTypeEnum = {
-    MARKET: 'MARKET',
-    LIMIT: 'LIMIT',
-    STOP_LOSS: 'STOP_LOSS',
-    STOP_LOSS_LIMIT: 'STOP_LOSS_LIMIT',
-    TAKE_PROFIT: 'TAKE_PROFIT',
-    TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
-    LIMIT_MAKER: 'LIMIT_MAKER',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type SorOrderTypeEnum = (typeof SorOrderTypeEnum)[keyof typeof SorOrderTypeEnum];
+export enum SorOrderTypeEnum {
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+    STOP_LOSS = 'STOP_LOSS',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
 
-export const SorOrderTimeInForceEnum = {
-    GTC: 'GTC',
-    IOC: 'IOC',
-    FOK: 'FOK',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type SorOrderTimeInForceEnum =
-    (typeof SorOrderTimeInForceEnum)[keyof typeof SorOrderTimeInForceEnum];
+export enum SorOrderTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
 
-export const SorOrderNewOrderRespTypeEnum = {
-    ACK: 'ACK',
-    RESULT: 'RESULT',
-    FULL: 'FULL',
-    MARKET: 'MARKET',
-    LIMIT: 'LIMIT',
-} as const;
-export type SorOrderNewOrderRespTypeEnum =
-    (typeof SorOrderNewOrderRespTypeEnum)[keyof typeof SorOrderNewOrderRespTypeEnum];
+export enum SorOrderNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+}
 
-export const SorOrderSelfTradePreventionModeEnum = {
-    NONE: 'NONE',
-    EXPIRE_TAKER: 'EXPIRE_TAKER',
-    EXPIRE_MAKER: 'EXPIRE_MAKER',
-    EXPIRE_BOTH: 'EXPIRE_BOTH',
-    DECREMENT: 'DECREMENT',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type SorOrderSelfTradePreventionModeEnum =
-    (typeof SorOrderSelfTradePreventionModeEnum)[keyof typeof SorOrderSelfTradePreventionModeEnum];
+export enum SorOrderSelfTradePreventionModeEnum {
+    NONE = 'NONE',
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    DECREMENT = 'DECREMENT',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}

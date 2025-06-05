@@ -21,7 +21,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderListStatusResponseResult } from './order-list-status-response-result';
+import type { AllOrderListsResponseResultInner } from './all-order-lists-response-result-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { TickerResponse1RateLimitsInner } from './ticker-response1-rate-limits-inner';
@@ -46,10 +46,10 @@ export interface OrderListStatusResponse {
     status?: number;
     /**
      *
-     * @type {OrderListStatusResponseResult}
+     * @type {AllOrderListsResponseResultInner}
      * @memberof OrderListStatusResponse
      */
-    result?: OrderListStatusResponseResult;
+    result?: AllOrderListsResponseResultInner;
     /**
      *
      * @type {Array<TickerResponse1RateLimitsInner>}
