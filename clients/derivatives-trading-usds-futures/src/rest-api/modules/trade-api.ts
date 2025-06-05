@@ -4177,164 +4177,129 @@ export class TradeApi implements TradeApiInterface {
     }
 }
 
-export const ChangeMarginTypeMarginTypeEnum = {
-    ISOLATED: 'ISOLATED',
-    CROSSED: 'CROSSED',
-} as const;
-export type ChangeMarginTypeMarginTypeEnum =
-    (typeof ChangeMarginTypeMarginTypeEnum)[keyof typeof ChangeMarginTypeMarginTypeEnum];
+export enum ChangeMarginTypeMarginTypeEnum {
+    ISOLATED = 'ISOLATED',
+    CROSSED = 'CROSSED',
+}
 
-export const ModifyIsolatedPositionMarginPositionSideEnum = {
-    BOTH: 'BOTH',
-    LONG: 'LONG',
-    SHORT: 'SHORT',
-} as const;
-export type ModifyIsolatedPositionMarginPositionSideEnum =
-    (typeof ModifyIsolatedPositionMarginPositionSideEnum)[keyof typeof ModifyIsolatedPositionMarginPositionSideEnum];
+export enum ModifyIsolatedPositionMarginPositionSideEnum {
+    BOTH = 'BOTH',
+    LONG = 'LONG',
+    SHORT = 'SHORT',
+}
 
-export const ModifyOrderSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type ModifyOrderSideEnum = (typeof ModifyOrderSideEnum)[keyof typeof ModifyOrderSideEnum];
+export enum ModifyOrderSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-export const ModifyOrderPriceMatchEnum = {
-    NONE: 'NONE',
-    OPPONENT: 'OPPONENT',
-    OPPONENT_5: 'OPPONENT_5',
-    OPPONENT_10: 'OPPONENT_10',
-    OPPONENT_20: 'OPPONENT_20',
-    QUEUE: 'QUEUE',
-    QUEUE_5: 'QUEUE_5',
-    QUEUE_10: 'QUEUE_10',
-    QUEUE_20: 'QUEUE_20',
-} as const;
-export type ModifyOrderPriceMatchEnum =
-    (typeof ModifyOrderPriceMatchEnum)[keyof typeof ModifyOrderPriceMatchEnum];
+export enum ModifyOrderPriceMatchEnum {
+    NONE = 'NONE',
+    OPPONENT = 'OPPONENT',
+    OPPONENT_5 = 'OPPONENT_5',
+    OPPONENT_10 = 'OPPONENT_10',
+    OPPONENT_20 = 'OPPONENT_20',
+    QUEUE = 'QUEUE',
+    QUEUE_5 = 'QUEUE_5',
+    QUEUE_10 = 'QUEUE_10',
+    QUEUE_20 = 'QUEUE_20',
+}
 
-export const NewOrderSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type NewOrderSideEnum = (typeof NewOrderSideEnum)[keyof typeof NewOrderSideEnum];
+export enum NewOrderSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-export const NewOrderPositionSideEnum = {
-    BOTH: 'BOTH',
-    LONG: 'LONG',
-    SHORT: 'SHORT',
-} as const;
-export type NewOrderPositionSideEnum =
-    (typeof NewOrderPositionSideEnum)[keyof typeof NewOrderPositionSideEnum];
+export enum NewOrderPositionSideEnum {
+    BOTH = 'BOTH',
+    LONG = 'LONG',
+    SHORT = 'SHORT',
+}
 
-export const NewOrderTimeInForceEnum = {
-    GTC: 'GTC',
-    IOC: 'IOC',
-    FOK: 'FOK',
-    GTX: 'GTX',
-    GTD: 'GTD',
-} as const;
-export type NewOrderTimeInForceEnum =
-    (typeof NewOrderTimeInForceEnum)[keyof typeof NewOrderTimeInForceEnum];
+export enum NewOrderTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+    GTX = 'GTX',
+    GTD = 'GTD',
+}
 
-export const NewOrderWorkingTypeEnum = {
-    MARK_PRICE: 'MARK_PRICE',
-    CONTRACT_PRICE: 'CONTRACT_PRICE',
-} as const;
-export type NewOrderWorkingTypeEnum =
-    (typeof NewOrderWorkingTypeEnum)[keyof typeof NewOrderWorkingTypeEnum];
+export enum NewOrderWorkingTypeEnum {
+    MARK_PRICE = 'MARK_PRICE',
+    CONTRACT_PRICE = 'CONTRACT_PRICE',
+}
 
-export const NewOrderNewOrderRespTypeEnum = {
-    ACK: 'ACK',
-    RESULT: 'RESULT',
-} as const;
-export type NewOrderNewOrderRespTypeEnum =
-    (typeof NewOrderNewOrderRespTypeEnum)[keyof typeof NewOrderNewOrderRespTypeEnum];
+export enum NewOrderNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+}
 
-export const NewOrderPriceMatchEnum = {
-    NONE: 'NONE',
-    OPPONENT: 'OPPONENT',
-    OPPONENT_5: 'OPPONENT_5',
-    OPPONENT_10: 'OPPONENT_10',
-    OPPONENT_20: 'OPPONENT_20',
-    QUEUE: 'QUEUE',
-    QUEUE_5: 'QUEUE_5',
-    QUEUE_10: 'QUEUE_10',
-    QUEUE_20: 'QUEUE_20',
-} as const;
-export type NewOrderPriceMatchEnum =
-    (typeof NewOrderPriceMatchEnum)[keyof typeof NewOrderPriceMatchEnum];
+export enum NewOrderPriceMatchEnum {
+    NONE = 'NONE',
+    OPPONENT = 'OPPONENT',
+    OPPONENT_5 = 'OPPONENT_5',
+    OPPONENT_10 = 'OPPONENT_10',
+    OPPONENT_20 = 'OPPONENT_20',
+    QUEUE = 'QUEUE',
+    QUEUE_5 = 'QUEUE_5',
+    QUEUE_10 = 'QUEUE_10',
+    QUEUE_20 = 'QUEUE_20',
+}
 
-export const NewOrderSelfTradePreventionModeEnum = {
-    EXPIRE_TAKER: 'EXPIRE_TAKER',
-    EXPIRE_BOTH: 'EXPIRE_BOTH',
-    EXPIRE_MAKER: 'EXPIRE_MAKER',
-} as const;
-export type NewOrderSelfTradePreventionModeEnum =
-    (typeof NewOrderSelfTradePreventionModeEnum)[keyof typeof NewOrderSelfTradePreventionModeEnum];
+export enum NewOrderSelfTradePreventionModeEnum {
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+}
 
-export const TestOrderSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type TestOrderSideEnum = (typeof TestOrderSideEnum)[keyof typeof TestOrderSideEnum];
+export enum TestOrderSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-export const TestOrderPositionSideEnum = {
-    BOTH: 'BOTH',
-    LONG: 'LONG',
-    SHORT: 'SHORT',
-} as const;
-export type TestOrderPositionSideEnum =
-    (typeof TestOrderPositionSideEnum)[keyof typeof TestOrderPositionSideEnum];
+export enum TestOrderPositionSideEnum {
+    BOTH = 'BOTH',
+    LONG = 'LONG',
+    SHORT = 'SHORT',
+}
 
-export const TestOrderTimeInForceEnum = {
-    GTC: 'GTC',
-    IOC: 'IOC',
-    FOK: 'FOK',
-    GTX: 'GTX',
-    GTD: 'GTD',
-} as const;
-export type TestOrderTimeInForceEnum =
-    (typeof TestOrderTimeInForceEnum)[keyof typeof TestOrderTimeInForceEnum];
+export enum TestOrderTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+    GTX = 'GTX',
+    GTD = 'GTD',
+}
 
-export const TestOrderWorkingTypeEnum = {
-    MARK_PRICE: 'MARK_PRICE',
-    CONTRACT_PRICE: 'CONTRACT_PRICE',
-} as const;
-export type TestOrderWorkingTypeEnum =
-    (typeof TestOrderWorkingTypeEnum)[keyof typeof TestOrderWorkingTypeEnum];
+export enum TestOrderWorkingTypeEnum {
+    MARK_PRICE = 'MARK_PRICE',
+    CONTRACT_PRICE = 'CONTRACT_PRICE',
+}
 
-export const TestOrderNewOrderRespTypeEnum = {
-    ACK: 'ACK',
-    RESULT: 'RESULT',
-} as const;
-export type TestOrderNewOrderRespTypeEnum =
-    (typeof TestOrderNewOrderRespTypeEnum)[keyof typeof TestOrderNewOrderRespTypeEnum];
+export enum TestOrderNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+}
 
-export const TestOrderPriceMatchEnum = {
-    NONE: 'NONE',
-    OPPONENT: 'OPPONENT',
-    OPPONENT_5: 'OPPONENT_5',
-    OPPONENT_10: 'OPPONENT_10',
-    OPPONENT_20: 'OPPONENT_20',
-    QUEUE: 'QUEUE',
-    QUEUE_5: 'QUEUE_5',
-    QUEUE_10: 'QUEUE_10',
-    QUEUE_20: 'QUEUE_20',
-} as const;
-export type TestOrderPriceMatchEnum =
-    (typeof TestOrderPriceMatchEnum)[keyof typeof TestOrderPriceMatchEnum];
+export enum TestOrderPriceMatchEnum {
+    NONE = 'NONE',
+    OPPONENT = 'OPPONENT',
+    OPPONENT_5 = 'OPPONENT_5',
+    OPPONENT_10 = 'OPPONENT_10',
+    OPPONENT_20 = 'OPPONENT_20',
+    QUEUE = 'QUEUE',
+    QUEUE_5 = 'QUEUE_5',
+    QUEUE_10 = 'QUEUE_10',
+    QUEUE_20 = 'QUEUE_20',
+}
 
-export const TestOrderSelfTradePreventionModeEnum = {
-    EXPIRE_TAKER: 'EXPIRE_TAKER',
-    EXPIRE_BOTH: 'EXPIRE_BOTH',
-    EXPIRE_MAKER: 'EXPIRE_MAKER',
-} as const;
-export type TestOrderSelfTradePreventionModeEnum =
-    (typeof TestOrderSelfTradePreventionModeEnum)[keyof typeof TestOrderSelfTradePreventionModeEnum];
+export enum TestOrderSelfTradePreventionModeEnum {
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+}
 
-export const UsersForceOrdersAutoCloseTypeEnum = {
-    LIQUIDATION: 'LIQUIDATION',
-    ADL: 'ADL',
-} as const;
-export type UsersForceOrdersAutoCloseTypeEnum =
-    (typeof UsersForceOrdersAutoCloseTypeEnum)[keyof typeof UsersForceOrdersAutoCloseTypeEnum];
+export enum UsersForceOrdersAutoCloseTypeEnum {
+    LIQUIDATION = 'LIQUIDATION',
+    ADL = 'ADL',
+}

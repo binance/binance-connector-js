@@ -3791,207 +3791,182 @@ export class MarketDataApi implements MarketDataApiInterface {
     }
 }
 
-export const BasisContractTypeEnum = {
-    PERPETUAL: 'PERPETUAL',
-    CURRENT_MONTH: 'CURRENT_MONTH',
-    NEXT_MONTH: 'NEXT_MONTH',
-    CURRENT_QUARTER: 'CURRENT_QUARTER',
-    NEXT_QUARTER: 'NEXT_QUARTER',
-    PERPETUAL_DELIVERING: 'PERPETUAL_DELIVERING',
-} as const;
-export type BasisContractTypeEnum =
-    (typeof BasisContractTypeEnum)[keyof typeof BasisContractTypeEnum];
+export enum BasisContractTypeEnum {
+    PERPETUAL = 'PERPETUAL',
+    CURRENT_MONTH = 'CURRENT_MONTH',
+    NEXT_MONTH = 'NEXT_MONTH',
+    CURRENT_QUARTER = 'CURRENT_QUARTER',
+    NEXT_QUARTER = 'NEXT_QUARTER',
+    PERPETUAL_DELIVERING = 'PERPETUAL_DELIVERING',
+}
 
-export const BasisPeriodEnum = {
-    PERIOD_5m: '5m',
-    PERIOD_15m: '15m',
-    PERIOD_30m: '30m',
-    PERIOD_1h: '1h',
-    PERIOD_2h: '2h',
-    PERIOD_4h: '4h',
-    PERIOD_6h: '6h',
-    PERIOD_12h: '12h',
-    PERIOD_1d: '1d',
-} as const;
-export type BasisPeriodEnum = (typeof BasisPeriodEnum)[keyof typeof BasisPeriodEnum];
+export enum BasisPeriodEnum {
+    PERIOD_5m = '5m',
+    PERIOD_15m = '15m',
+    PERIOD_30m = '30m',
+    PERIOD_1h = '1h',
+    PERIOD_2h = '2h',
+    PERIOD_4h = '4h',
+    PERIOD_6h = '6h',
+    PERIOD_12h = '12h',
+    PERIOD_1d = '1d',
+}
 
-export const ContinuousContractKlineCandlestickDataContractTypeEnum = {
-    PERPETUAL: 'PERPETUAL',
-    CURRENT_MONTH: 'CURRENT_MONTH',
-    NEXT_MONTH: 'NEXT_MONTH',
-    CURRENT_QUARTER: 'CURRENT_QUARTER',
-    NEXT_QUARTER: 'NEXT_QUARTER',
-    PERPETUAL_DELIVERING: 'PERPETUAL_DELIVERING',
-} as const;
-export type ContinuousContractKlineCandlestickDataContractTypeEnum =
-    (typeof ContinuousContractKlineCandlestickDataContractTypeEnum)[keyof typeof ContinuousContractKlineCandlestickDataContractTypeEnum];
+export enum ContinuousContractKlineCandlestickDataContractTypeEnum {
+    PERPETUAL = 'PERPETUAL',
+    CURRENT_MONTH = 'CURRENT_MONTH',
+    NEXT_MONTH = 'NEXT_MONTH',
+    CURRENT_QUARTER = 'CURRENT_QUARTER',
+    NEXT_QUARTER = 'NEXT_QUARTER',
+    PERPETUAL_DELIVERING = 'PERPETUAL_DELIVERING',
+}
 
-export const ContinuousContractKlineCandlestickDataIntervalEnum = {
-    INTERVAL_1m: '1m',
-    INTERVAL_3m: '3m',
-    INTERVAL_5m: '5m',
-    INTERVAL_15m: '15m',
-    INTERVAL_30m: '30m',
-    INTERVAL_1h: '1h',
-    INTERVAL_2h: '2h',
-    INTERVAL_4h: '4h',
-    INTERVAL_6h: '6h',
-    INTERVAL_8h: '8h',
-    INTERVAL_12h: '12h',
-    INTERVAL_1d: '1d',
-    INTERVAL_3d: '3d',
-    INTERVAL_1w: '1w',
-    INTERVAL_1M: '1M',
-} as const;
-export type ContinuousContractKlineCandlestickDataIntervalEnum =
-    (typeof ContinuousContractKlineCandlestickDataIntervalEnum)[keyof typeof ContinuousContractKlineCandlestickDataIntervalEnum];
+export enum ContinuousContractKlineCandlestickDataIntervalEnum {
+    INTERVAL_1m = '1m',
+    INTERVAL_3m = '3m',
+    INTERVAL_5m = '5m',
+    INTERVAL_15m = '15m',
+    INTERVAL_30m = '30m',
+    INTERVAL_1h = '1h',
+    INTERVAL_2h = '2h',
+    INTERVAL_4h = '4h',
+    INTERVAL_6h = '6h',
+    INTERVAL_8h = '8h',
+    INTERVAL_12h = '12h',
+    INTERVAL_1d = '1d',
+    INTERVAL_3d = '3d',
+    INTERVAL_1w = '1w',
+    INTERVAL_1M = '1M',
+}
 
-export const IndexPriceKlineCandlestickDataIntervalEnum = {
-    INTERVAL_1m: '1m',
-    INTERVAL_3m: '3m',
-    INTERVAL_5m: '5m',
-    INTERVAL_15m: '15m',
-    INTERVAL_30m: '30m',
-    INTERVAL_1h: '1h',
-    INTERVAL_2h: '2h',
-    INTERVAL_4h: '4h',
-    INTERVAL_6h: '6h',
-    INTERVAL_8h: '8h',
-    INTERVAL_12h: '12h',
-    INTERVAL_1d: '1d',
-    INTERVAL_3d: '3d',
-    INTERVAL_1w: '1w',
-    INTERVAL_1M: '1M',
-} as const;
-export type IndexPriceKlineCandlestickDataIntervalEnum =
-    (typeof IndexPriceKlineCandlestickDataIntervalEnum)[keyof typeof IndexPriceKlineCandlestickDataIntervalEnum];
+export enum IndexPriceKlineCandlestickDataIntervalEnum {
+    INTERVAL_1m = '1m',
+    INTERVAL_3m = '3m',
+    INTERVAL_5m = '5m',
+    INTERVAL_15m = '15m',
+    INTERVAL_30m = '30m',
+    INTERVAL_1h = '1h',
+    INTERVAL_2h = '2h',
+    INTERVAL_4h = '4h',
+    INTERVAL_6h = '6h',
+    INTERVAL_8h = '8h',
+    INTERVAL_12h = '12h',
+    INTERVAL_1d = '1d',
+    INTERVAL_3d = '3d',
+    INTERVAL_1w = '1w',
+    INTERVAL_1M = '1M',
+}
 
-export const KlineCandlestickDataIntervalEnum = {
-    INTERVAL_1m: '1m',
-    INTERVAL_3m: '3m',
-    INTERVAL_5m: '5m',
-    INTERVAL_15m: '15m',
-    INTERVAL_30m: '30m',
-    INTERVAL_1h: '1h',
-    INTERVAL_2h: '2h',
-    INTERVAL_4h: '4h',
-    INTERVAL_6h: '6h',
-    INTERVAL_8h: '8h',
-    INTERVAL_12h: '12h',
-    INTERVAL_1d: '1d',
-    INTERVAL_3d: '3d',
-    INTERVAL_1w: '1w',
-    INTERVAL_1M: '1M',
-} as const;
-export type KlineCandlestickDataIntervalEnum =
-    (typeof KlineCandlestickDataIntervalEnum)[keyof typeof KlineCandlestickDataIntervalEnum];
+export enum KlineCandlestickDataIntervalEnum {
+    INTERVAL_1m = '1m',
+    INTERVAL_3m = '3m',
+    INTERVAL_5m = '5m',
+    INTERVAL_15m = '15m',
+    INTERVAL_30m = '30m',
+    INTERVAL_1h = '1h',
+    INTERVAL_2h = '2h',
+    INTERVAL_4h = '4h',
+    INTERVAL_6h = '6h',
+    INTERVAL_8h = '8h',
+    INTERVAL_12h = '12h',
+    INTERVAL_1d = '1d',
+    INTERVAL_3d = '3d',
+    INTERVAL_1w = '1w',
+    INTERVAL_1M = '1M',
+}
 
-export const LongShortRatioPeriodEnum = {
-    PERIOD_5m: '5m',
-    PERIOD_15m: '15m',
-    PERIOD_30m: '30m',
-    PERIOD_1h: '1h',
-    PERIOD_2h: '2h',
-    PERIOD_4h: '4h',
-    PERIOD_6h: '6h',
-    PERIOD_12h: '12h',
-    PERIOD_1d: '1d',
-} as const;
-export type LongShortRatioPeriodEnum =
-    (typeof LongShortRatioPeriodEnum)[keyof typeof LongShortRatioPeriodEnum];
+export enum LongShortRatioPeriodEnum {
+    PERIOD_5m = '5m',
+    PERIOD_15m = '15m',
+    PERIOD_30m = '30m',
+    PERIOD_1h = '1h',
+    PERIOD_2h = '2h',
+    PERIOD_4h = '4h',
+    PERIOD_6h = '6h',
+    PERIOD_12h = '12h',
+    PERIOD_1d = '1d',
+}
 
-export const MarkPriceKlineCandlestickDataIntervalEnum = {
-    INTERVAL_1m: '1m',
-    INTERVAL_3m: '3m',
-    INTERVAL_5m: '5m',
-    INTERVAL_15m: '15m',
-    INTERVAL_30m: '30m',
-    INTERVAL_1h: '1h',
-    INTERVAL_2h: '2h',
-    INTERVAL_4h: '4h',
-    INTERVAL_6h: '6h',
-    INTERVAL_8h: '8h',
-    INTERVAL_12h: '12h',
-    INTERVAL_1d: '1d',
-    INTERVAL_3d: '3d',
-    INTERVAL_1w: '1w',
-    INTERVAL_1M: '1M',
-} as const;
-export type MarkPriceKlineCandlestickDataIntervalEnum =
-    (typeof MarkPriceKlineCandlestickDataIntervalEnum)[keyof typeof MarkPriceKlineCandlestickDataIntervalEnum];
+export enum MarkPriceKlineCandlestickDataIntervalEnum {
+    INTERVAL_1m = '1m',
+    INTERVAL_3m = '3m',
+    INTERVAL_5m = '5m',
+    INTERVAL_15m = '15m',
+    INTERVAL_30m = '30m',
+    INTERVAL_1h = '1h',
+    INTERVAL_2h = '2h',
+    INTERVAL_4h = '4h',
+    INTERVAL_6h = '6h',
+    INTERVAL_8h = '8h',
+    INTERVAL_12h = '12h',
+    INTERVAL_1d = '1d',
+    INTERVAL_3d = '3d',
+    INTERVAL_1w = '1w',
+    INTERVAL_1M = '1M',
+}
 
-export const OpenInterestStatisticsPeriodEnum = {
-    PERIOD_5m: '5m',
-    PERIOD_15m: '15m',
-    PERIOD_30m: '30m',
-    PERIOD_1h: '1h',
-    PERIOD_2h: '2h',
-    PERIOD_4h: '4h',
-    PERIOD_6h: '6h',
-    PERIOD_12h: '12h',
-    PERIOD_1d: '1d',
-} as const;
-export type OpenInterestStatisticsPeriodEnum =
-    (typeof OpenInterestStatisticsPeriodEnum)[keyof typeof OpenInterestStatisticsPeriodEnum];
+export enum OpenInterestStatisticsPeriodEnum {
+    PERIOD_5m = '5m',
+    PERIOD_15m = '15m',
+    PERIOD_30m = '30m',
+    PERIOD_1h = '1h',
+    PERIOD_2h = '2h',
+    PERIOD_4h = '4h',
+    PERIOD_6h = '6h',
+    PERIOD_12h = '12h',
+    PERIOD_1d = '1d',
+}
 
-export const PremiumIndexKlineDataIntervalEnum = {
-    INTERVAL_1m: '1m',
-    INTERVAL_3m: '3m',
-    INTERVAL_5m: '5m',
-    INTERVAL_15m: '15m',
-    INTERVAL_30m: '30m',
-    INTERVAL_1h: '1h',
-    INTERVAL_2h: '2h',
-    INTERVAL_4h: '4h',
-    INTERVAL_6h: '6h',
-    INTERVAL_8h: '8h',
-    INTERVAL_12h: '12h',
-    INTERVAL_1d: '1d',
-    INTERVAL_3d: '3d',
-    INTERVAL_1w: '1w',
-    INTERVAL_1M: '1M',
-} as const;
-export type PremiumIndexKlineDataIntervalEnum =
-    (typeof PremiumIndexKlineDataIntervalEnum)[keyof typeof PremiumIndexKlineDataIntervalEnum];
+export enum PremiumIndexKlineDataIntervalEnum {
+    INTERVAL_1m = '1m',
+    INTERVAL_3m = '3m',
+    INTERVAL_5m = '5m',
+    INTERVAL_15m = '15m',
+    INTERVAL_30m = '30m',
+    INTERVAL_1h = '1h',
+    INTERVAL_2h = '2h',
+    INTERVAL_4h = '4h',
+    INTERVAL_6h = '6h',
+    INTERVAL_8h = '8h',
+    INTERVAL_12h = '12h',
+    INTERVAL_1d = '1d',
+    INTERVAL_3d = '3d',
+    INTERVAL_1w = '1w',
+    INTERVAL_1M = '1M',
+}
 
-export const TakerBuySellVolumePeriodEnum = {
-    PERIOD_5m: '5m',
-    PERIOD_15m: '15m',
-    PERIOD_30m: '30m',
-    PERIOD_1h: '1h',
-    PERIOD_2h: '2h',
-    PERIOD_4h: '4h',
-    PERIOD_6h: '6h',
-    PERIOD_12h: '12h',
-    PERIOD_1d: '1d',
-} as const;
-export type TakerBuySellVolumePeriodEnum =
-    (typeof TakerBuySellVolumePeriodEnum)[keyof typeof TakerBuySellVolumePeriodEnum];
+export enum TakerBuySellVolumePeriodEnum {
+    PERIOD_5m = '5m',
+    PERIOD_15m = '15m',
+    PERIOD_30m = '30m',
+    PERIOD_1h = '1h',
+    PERIOD_2h = '2h',
+    PERIOD_4h = '4h',
+    PERIOD_6h = '6h',
+    PERIOD_12h = '12h',
+    PERIOD_1d = '1d',
+}
 
-export const TopTraderLongShortRatioAccountsPeriodEnum = {
-    PERIOD_5m: '5m',
-    PERIOD_15m: '15m',
-    PERIOD_30m: '30m',
-    PERIOD_1h: '1h',
-    PERIOD_2h: '2h',
-    PERIOD_4h: '4h',
-    PERIOD_6h: '6h',
-    PERIOD_12h: '12h',
-    PERIOD_1d: '1d',
-} as const;
-export type TopTraderLongShortRatioAccountsPeriodEnum =
-    (typeof TopTraderLongShortRatioAccountsPeriodEnum)[keyof typeof TopTraderLongShortRatioAccountsPeriodEnum];
+export enum TopTraderLongShortRatioAccountsPeriodEnum {
+    PERIOD_5m = '5m',
+    PERIOD_15m = '15m',
+    PERIOD_30m = '30m',
+    PERIOD_1h = '1h',
+    PERIOD_2h = '2h',
+    PERIOD_4h = '4h',
+    PERIOD_6h = '6h',
+    PERIOD_12h = '12h',
+    PERIOD_1d = '1d',
+}
 
-export const TopTraderLongShortRatioPositionsPeriodEnum = {
-    PERIOD_5m: '5m',
-    PERIOD_15m: '15m',
-    PERIOD_30m: '30m',
-    PERIOD_1h: '1h',
-    PERIOD_2h: '2h',
-    PERIOD_4h: '4h',
-    PERIOD_6h: '6h',
-    PERIOD_12h: '12h',
-    PERIOD_1d: '1d',
-} as const;
-export type TopTraderLongShortRatioPositionsPeriodEnum =
-    (typeof TopTraderLongShortRatioPositionsPeriodEnum)[keyof typeof TopTraderLongShortRatioPositionsPeriodEnum];
+export enum TopTraderLongShortRatioPositionsPeriodEnum {
+    PERIOD_5m = '5m',
+    PERIOD_15m = '15m',
+    PERIOD_30m = '30m',
+    PERIOD_1h = '1h',
+    PERIOD_2h = '2h',
+    PERIOD_4h = '4h',
+    PERIOD_6h = '6h',
+    PERIOD_12h = '12h',
+    PERIOD_1d = '1d',
+}

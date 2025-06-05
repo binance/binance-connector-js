@@ -91,7 +91,7 @@ describe('WebsocketMarketStreamsApi', () => {
             };
 
             const stream = websocketStreamApi.aggregateTradeStreams(params);
-            const mockCallback = jest.fn();
+            const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
@@ -171,7 +171,7 @@ describe('WebsocketMarketStreamsApi', () => {
             };
 
             const stream = websocketStreamApi.allBookTickersStream(params);
-            const mockCallback = jest.fn();
+            const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
@@ -247,7 +247,7 @@ describe('WebsocketMarketStreamsApi', () => {
             };
 
             const stream = websocketStreamApi.allMarketLiquidationOrderStreams(params);
-            const mockCallback = jest.fn();
+            const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
@@ -315,7 +315,7 @@ describe('WebsocketMarketStreamsApi', () => {
             ];
 
             const stream = websocketStreamApi.allMarketMiniTickersStream(params);
-            const mockCallback = jest.fn();
+            const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
@@ -401,7 +401,7 @@ describe('WebsocketMarketStreamsApi', () => {
             ];
 
             const stream = websocketStreamApi.allMarketTickersStreams(params);
-            const mockCallback = jest.fn();
+            const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
@@ -467,7 +467,7 @@ describe('WebsocketMarketStreamsApi', () => {
             };
 
             const stream = websocketStreamApi.compositeIndexSymbolInformationStreams(params);
-            const mockCallback = jest.fn();
+            const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
@@ -582,7 +582,7 @@ describe('WebsocketMarketStreamsApi', () => {
             };
 
             const stream = websocketStreamApi.continuousContractKlineCandlestickStreams(params);
-            const mockCallback = jest.fn();
+            const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
@@ -715,7 +715,7 @@ describe('WebsocketMarketStreamsApi', () => {
             };
 
             const stream = websocketStreamApi.contractInfoStream(params);
-            const mockCallback = jest.fn();
+            const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
@@ -783,7 +783,7 @@ describe('WebsocketMarketStreamsApi', () => {
             };
 
             const stream = websocketStreamApi.diffBookDepthStreams(params);
-            const mockCallback = jest.fn();
+            const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
@@ -865,7 +865,7 @@ describe('WebsocketMarketStreamsApi', () => {
             };
 
             const stream = websocketStreamApi.individualSymbolBookTickerStreams(params);
-            const mockCallback = jest.fn();
+            const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
@@ -950,7 +950,7 @@ describe('WebsocketMarketStreamsApi', () => {
             };
 
             const stream = websocketStreamApi.individualSymbolMiniTickerStream(params);
-            const mockCallback = jest.fn();
+            const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
@@ -1050,7 +1050,7 @@ describe('WebsocketMarketStreamsApi', () => {
             };
 
             const stream = websocketStreamApi.individualSymbolTickerStreams(params);
-            const mockCallback = jest.fn();
+            const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
@@ -1160,7 +1160,7 @@ describe('WebsocketMarketStreamsApi', () => {
             };
 
             const stream = websocketStreamApi.klineCandlestickStreams(params);
-            const mockCallback = jest.fn();
+            const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
@@ -1272,7 +1272,7 @@ describe('WebsocketMarketStreamsApi', () => {
             };
 
             const stream = websocketStreamApi.liquidationOrderStreams(params);
-            const mockCallback = jest.fn();
+            const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
@@ -1354,7 +1354,7 @@ describe('WebsocketMarketStreamsApi', () => {
             };
 
             const stream = websocketStreamApi.markPriceStream(params);
-            const mockCallback = jest.fn();
+            const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
@@ -1438,7 +1438,7 @@ describe('WebsocketMarketStreamsApi', () => {
             ];
 
             const stream = websocketStreamApi.markPriceStreamForAllMarket(params);
-            const mockCallback = jest.fn();
+            const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
@@ -1540,7 +1540,7 @@ describe('WebsocketMarketStreamsApi', () => {
             ];
 
             const stream = websocketStreamApi.multiAssetsModeAssetIndex(params);
-            const mockCallback = jest.fn();
+            const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
@@ -1634,7 +1634,7 @@ describe('WebsocketMarketStreamsApi', () => {
             };
 
             const stream = websocketStreamApi.partialBookDepthStreams(params);
-            const mockCallback = jest.fn();
+            const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
