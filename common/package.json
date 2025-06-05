@@ -13,7 +13,7 @@
     },
     "scripts": {
         "prepublishOnly": "npm run build",
-        "build": "tsup",
+        "build": "npm run clean && tsup",
         "typecheck": "tsc --noEmit",
         "clean": "rm -rf dist",
         "test": "npx jest --maxWorkers=4 --bail",
