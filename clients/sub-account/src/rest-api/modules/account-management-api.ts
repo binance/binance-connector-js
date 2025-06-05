@@ -22,8 +22,6 @@ import {
 import type {
     CreateAVirtualSubAccountResponse,
     EnableFuturesForSubAccountResponse,
-    EnableLeverageTokenForSubAccountResponse,
-    EnableMarginForSubAccountResponse,
     EnableOptionsForSubAccountResponse,
     GetFuturesPositionRiskOfSubAccountResponse,
     GetFuturesPositionRiskOfSubAccountV2Response,
@@ -111,90 +109,6 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
 
             return {
                 endpoint: '/sapi/v1/sub-account/futures/enable',
-                method: 'POST',
-                params: localVarQueryParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
-         * Enable Leverage Token for Sub-account
-         *
-         * Weight: 1
-         *
-         * @summary Enable Leverage Token for Sub-account (For Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
-         * @param {boolean} enableBlvt Only true for now
-         * @param {number} [recvWindow]
-         *
-         * @throws {RequiredError}
-         */
-        enableLeverageTokenForSubAccount: async (
-            email: string,
-            enableBlvt: boolean,
-            recvWindow?: number
-        ): Promise<RequestArgs> => {
-            // verify required parameter 'email' is not null or undefined
-            assertParamExists('enableLeverageTokenForSubAccount', 'email', email);
-            // verify required parameter 'enableBlvt' is not null or undefined
-            assertParamExists('enableLeverageTokenForSubAccount', 'enableBlvt', enableBlvt);
-
-            const localVarQueryParameter: Record<string, unknown> = {};
-
-            if (email !== undefined && email !== null) {
-                localVarQueryParameter['email'] = email;
-            }
-
-            if (enableBlvt !== undefined && enableBlvt !== null) {
-                localVarQueryParameter['enableBlvt'] = enableBlvt;
-            }
-
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/sapi/v1/sub-account/blvt/enable',
-                method: 'POST',
-                params: localVarQueryParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
-         * Enable Margin for Sub-account
-         *
-         * Weight: 1
-         *
-         * @summary Enable Margin for Sub-account (For Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
-         * @param {number} [recvWindow]
-         *
-         * @throws {RequiredError}
-         */
-        enableMarginForSubAccount: async (
-            email: string,
-            recvWindow?: number
-        ): Promise<RequestArgs> => {
-            // verify required parameter 'email' is not null or undefined
-            assertParamExists('enableMarginForSubAccount', 'email', email);
-
-            const localVarQueryParameter: Record<string, unknown> = {};
-
-            if (email !== undefined && email !== null) {
-                localVarQueryParameter['email'] = email;
-            }
-
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/sapi/v1/sub-account/margin/enable',
                 method: 'POST',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
@@ -490,34 +404,6 @@ export interface AccountManagementApiInterface {
         requestParameters: EnableFuturesForSubAccountRequest
     ): Promise<RestApiResponse<EnableFuturesForSubAccountResponse>>;
     /**
-     * Enable Leverage Token for Sub-account
-     *
-     * Weight: 1
-     *
-     * @summary Enable Leverage Token for Sub-account (For Master Account) (USER_DATA)
-     * @param {EnableLeverageTokenForSubAccountRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof AccountManagementApiInterface
-     */
-    enableLeverageTokenForSubAccount(
-        requestParameters: EnableLeverageTokenForSubAccountRequest
-    ): Promise<RestApiResponse<EnableLeverageTokenForSubAccountResponse>>;
-    /**
-     * Enable Margin for Sub-account
-     *
-     * Weight: 1
-     *
-     * @summary Enable Margin for Sub-account (For Master Account) (USER_DATA)
-     * @param {EnableMarginForSubAccountRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof AccountManagementApiInterface
-     */
-    enableMarginForSubAccount(
-        requestParameters: EnableMarginForSubAccountRequest
-    ): Promise<RestApiResponse<EnableMarginForSubAccountResponse>>;
-    /**
      * Enable Options for Sub-account (For Master Account).
      *
      * Weight: 1
@@ -641,53 +527,6 @@ export interface EnableFuturesForSubAccountRequest {
      *
      * @type {number}
      * @memberof AccountManagementApiEnableFuturesForSubAccount
-     */
-    readonly recvWindow?: number;
-}
-
-/**
- * Request parameters for enableLeverageTokenForSubAccount operation in AccountManagementApi.
- * @interface EnableLeverageTokenForSubAccountRequest
- */
-export interface EnableLeverageTokenForSubAccountRequest {
-    /**
-     * [Sub-account email](#email-address)
-     * @type {string}
-     * @memberof AccountManagementApiEnableLeverageTokenForSubAccount
-     */
-    readonly email: string;
-
-    /**
-     * Only true for now
-     * @type {boolean}
-     * @memberof AccountManagementApiEnableLeverageTokenForSubAccount
-     */
-    readonly enableBlvt: boolean;
-
-    /**
-     *
-     * @type {number}
-     * @memberof AccountManagementApiEnableLeverageTokenForSubAccount
-     */
-    readonly recvWindow?: number;
-}
-
-/**
- * Request parameters for enableMarginForSubAccount operation in AccountManagementApi.
- * @interface EnableMarginForSubAccountRequest
- */
-export interface EnableMarginForSubAccountRequest {
-    /**
-     * [Sub-account email](#email-address)
-     * @type {string}
-     * @memberof AccountManagementApiEnableMarginForSubAccount
-     */
-    readonly email: string;
-
-    /**
-     *
-     * @type {number}
-     * @memberof AccountManagementApiEnableMarginForSubAccount
      */
     readonly recvWindow?: number;
 }
@@ -905,66 +744,6 @@ export class AccountManagementApi implements AccountManagementApiInterface {
             requestParameters?.recvWindow
         );
         return sendRequest<EnableFuturesForSubAccountResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
-        );
-    }
-
-    /**
-     * Enable Leverage Token for Sub-account
-     *
-     * Weight: 1
-     *
-     * @summary Enable Leverage Token for Sub-account (For Master Account) (USER_DATA)
-     * @param {EnableLeverageTokenForSubAccountRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<EnableLeverageTokenForSubAccountResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof AccountManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/account-management/Enable-Leverage-Token-for-Sub-account Binance API Documentation}
-     */
-    public async enableLeverageTokenForSubAccount(
-        requestParameters: EnableLeverageTokenForSubAccountRequest
-    ): Promise<RestApiResponse<EnableLeverageTokenForSubAccountResponse>> {
-        const localVarAxiosArgs =
-            await this.localVarAxiosParamCreator.enableLeverageTokenForSubAccount(
-                requestParameters?.email,
-                requestParameters?.enableBlvt,
-                requestParameters?.recvWindow
-            );
-        return sendRequest<EnableLeverageTokenForSubAccountResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
-        );
-    }
-
-    /**
-     * Enable Margin for Sub-account
-     *
-     * Weight: 1
-     *
-     * @summary Enable Margin for Sub-account (For Master Account) (USER_DATA)
-     * @param {EnableMarginForSubAccountRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<EnableMarginForSubAccountResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof AccountManagementApi
-     * @see {@link https://developers.binance.com/docs/sub_account/account-management/Enable-Margin-for-Sub-account Binance API Documentation}
-     */
-    public async enableMarginForSubAccount(
-        requestParameters: EnableMarginForSubAccountRequest
-    ): Promise<RestApiResponse<EnableMarginForSubAccountResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.enableMarginForSubAccount(
-            requestParameters?.email,
-            requestParameters?.recvWindow
-        );
-        return sendRequest<EnableMarginForSubAccountResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

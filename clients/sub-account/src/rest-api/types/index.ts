@@ -3,8 +3,6 @@ export * from './create-avirtual-sub-account-response';
 export * from './delete-ip-list-for-asub-account-api-key-response';
 export * from './deposit-assets-into-the-managed-sub-account-response';
 export * from './enable-futures-for-sub-account-response';
-export * from './enable-leverage-token-for-sub-account-response';
-export * from './enable-margin-for-sub-account-response';
 export * from './enable-options-for-sub-account-response';
 export * from './futures-transfer-for-sub-account-response';
 export * from './get-detail-on-sub-accounts-futures-account-response';

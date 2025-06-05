@@ -20,8 +20,6 @@ import { ManagedSubAccountApi } from './modules/managed-sub-account-api';
 import type {
     CreateAVirtualSubAccountRequest,
     EnableFuturesForSubAccountRequest,
-    EnableLeverageTokenForSubAccountRequest,
-    EnableMarginForSubAccountRequest,
     EnableOptionsForSubAccountRequest,
     GetFuturesPositionRiskOfSubAccountRequest,
     GetFuturesPositionRiskOfSubAccountV2Request,
@@ -76,8 +74,6 @@ import type {
 import type {
     CreateAVirtualSubAccountResponse,
     EnableFuturesForSubAccountResponse,
-    EnableLeverageTokenForSubAccountResponse,
-    EnableMarginForSubAccountResponse,
     EnableOptionsForSubAccountResponse,
     GetFuturesPositionRiskOfSubAccountResponse,
     GetFuturesPositionRiskOfSubAccountV2Response,
@@ -213,40 +209,6 @@ export class RestAPI {
         requestParameters: EnableFuturesForSubAccountRequest
     ): Promise<RestApiResponse<EnableFuturesForSubAccountResponse>> {
         return this.accountManagementApi.enableFuturesForSubAccount(requestParameters);
-    }
-
-    /**
-     * Enable Leverage Token for Sub-account
-     *
-     * Weight: 1
-     *
-     * @summary Enable Leverage Token for Sub-account (For Master Account) (USER_DATA)
-     * @param {EnableLeverageTokenForSubAccountRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<EnableLeverageTokenForSubAccountResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/account-management/Enable-Leverage-Token-for-Sub-account Binance API Documentation}
-     */
-    enableLeverageTokenForSubAccount(
-        requestParameters: EnableLeverageTokenForSubAccountRequest
-    ): Promise<RestApiResponse<EnableLeverageTokenForSubAccountResponse>> {
-        return this.accountManagementApi.enableLeverageTokenForSubAccount(requestParameters);
-    }
-
-    /**
-     * Enable Margin for Sub-account
-     *
-     * Weight: 1
-     *
-     * @summary Enable Margin for Sub-account (For Master Account) (USER_DATA)
-     * @param {EnableMarginForSubAccountRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<EnableMarginForSubAccountResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/sub_account/account-management/Enable-Margin-for-Sub-account Binance API Documentation}
-     */
-    enableMarginForSubAccount(
-        requestParameters: EnableMarginForSubAccountRequest
-    ): Promise<RestApiResponse<EnableMarginForSubAccountResponse>> {
-        return this.accountManagementApi.enableMarginForSubAccount(requestParameters);
     }
 
     /**

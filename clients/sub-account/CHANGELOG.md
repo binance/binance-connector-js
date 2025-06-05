@@ -1,5 +1,16 @@
 # Changelog
 
+## 7.0.0 - 2025-06-05
+
+### Changed (1)
+
+- Update `@binance/common` library to version `1.1.0`.
+
+### Removed (2)
+
+- `enableLeverageTokenForSubAccount()` (`POST /sapi/v1/sub-account/blvt/enable`)
+- `enableMarginForSubAccount()` (`POST /sapi/v1/sub-account/margin/enable`)
+
 ## 6.0.1 - 2025-06-03
 
 ### Changed

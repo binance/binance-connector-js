@@ -18,8 +18,6 @@ import { AccountManagementApi } from '../../../src/rest-api';
 import {
     CreateAVirtualSubAccountRequest,
     EnableFuturesForSubAccountRequest,
-    EnableLeverageTokenForSubAccountRequest,
-    EnableMarginForSubAccountRequest,
     EnableOptionsForSubAccountRequest,
     GetFuturesPositionRiskOfSubAccountRequest,
     GetFuturesPositionRiskOfSubAccountV2Request,
@@ -30,8 +28,6 @@ import {
 import type {
     CreateAVirtualSubAccountResponse,
     EnableFuturesForSubAccountResponse,
-    EnableLeverageTokenForSubAccountResponse,
-    EnableMarginForSubAccountResponse,
     EnableOptionsForSubAccountResponse,
     GetFuturesPositionRiskOfSubAccountResponse,
     GetFuturesPositionRiskOfSubAccountV2Response,
@@ -208,181 +204,6 @@ describe('AccountManagementApi', () => {
             await expect(client.enableFuturesForSubAccount(params)).rejects.toThrow(
                 'ResponseError'
             );
-            spy.mockRestore();
-        });
-    });
-
-    describe('enableLeverageTokenForSubAccount()', () => {
-        it('should execute enableLeverageTokenForSubAccount() successfully with required parameters only', async () => {
-            const params: EnableLeverageTokenForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
-                enableBlvt: true,
-            };
-
-            mockResponse = { email: '123@test.com', enableBlvt: true };
-
-            const spy = jest.spyOn(client, 'enableLeverageTokenForSubAccount').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<EnableLeverageTokenForSubAccountResponse>)
-            );
-            const response = await client.enableLeverageTokenForSubAccount(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute enableLeverageTokenForSubAccount() successfully with optional parameters', async () => {
-            const params: EnableLeverageTokenForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
-                enableBlvt: true,
-                recvWindow: 5000,
-            };
-
-            mockResponse = { email: '123@test.com', enableBlvt: true };
-
-            const spy = jest.spyOn(client, 'enableLeverageTokenForSubAccount').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<EnableLeverageTokenForSubAccountResponse>)
-            );
-            const response = await client.enableLeverageTokenForSubAccount(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw RequiredError when email is missing', async () => {
-            const _params: EnableLeverageTokenForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
-                enableBlvt: true,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.email;
-
-            await expect(client.enableLeverageTokenForSubAccount(params)).rejects.toThrow(
-                'Required parameter email was null or undefined when calling enableLeverageTokenForSubAccount.'
-            );
-        });
-
-        it('should throw RequiredError when enableBlvt is missing', async () => {
-            const _params: EnableLeverageTokenForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
-                enableBlvt: true,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.enableBlvt;
-
-            await expect(client.enableLeverageTokenForSubAccount(params)).rejects.toThrow(
-                'Required parameter enableBlvt was null or undefined when calling enableLeverageTokenForSubAccount.'
-            );
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const params: EnableLeverageTokenForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
-                enableBlvt: true,
-            };
-
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest
-                .spyOn(client, 'enableLeverageTokenForSubAccount')
-                .mockRejectedValueOnce(mockError);
-            await expect(client.enableLeverageTokenForSubAccount(params)).rejects.toThrow(
-                'ResponseError'
-            );
-            spy.mockRestore();
-        });
-    });
-
-    describe('enableMarginForSubAccount()', () => {
-        it('should execute enableMarginForSubAccount() successfully with required parameters only', async () => {
-            const params: EnableMarginForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
-            };
-
-            mockResponse = { email: '123@test.com', isMarginEnabled: true };
-
-            const spy = jest.spyOn(client, 'enableMarginForSubAccount').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<EnableMarginForSubAccountResponse>)
-            );
-            const response = await client.enableMarginForSubAccount(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute enableMarginForSubAccount() successfully with optional parameters', async () => {
-            const params: EnableMarginForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
-                recvWindow: 5000,
-            };
-
-            mockResponse = { email: '123@test.com', isMarginEnabled: true };
-
-            const spy = jest.spyOn(client, 'enableMarginForSubAccount').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<EnableMarginForSubAccountResponse>)
-            );
-            const response = await client.enableMarginForSubAccount(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw RequiredError when email is missing', async () => {
-            const _params: EnableMarginForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.email;
-
-            await expect(client.enableMarginForSubAccount(params)).rejects.toThrow(
-                'Required parameter email was null or undefined when calling enableMarginForSubAccount.'
-            );
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const params: EnableMarginForSubAccountRequest = {
-                email: 'sub-account-email@email.com',
-            };
-
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest
-                .spyOn(client, 'enableMarginForSubAccount')
-                .mockRejectedValueOnce(mockError);
-            await expect(client.enableMarginForSubAccount(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
