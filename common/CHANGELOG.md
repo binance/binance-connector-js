@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.1.0 - 2025-06-05
+
+### Added (1)
+
+- Added support for async stream callbacks.
+
+### Changed (2)
+
+- Fixed bug on `configuration.httpsAgent` when `keepAlive` is `true`.
+- Fixed bug on HTTP requests JSON parsing.
+
 ## 1.0.6 - 2025-06-03
 
 ### Changed

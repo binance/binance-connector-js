@@ -1027,7 +1027,7 @@ export interface WebsocketStream<T> {
      * @param event - Event name (currently supports "message").
      * @param callback - Callback function to handle incoming data.
      */
-    on(event: 'message', callback: (data: T) => void): void;
+    on(event: 'message', callback: (data: T) => void | Promise<void>): void;
 
     /**
      * Unsubscribe from the stream and clean up resources.
@@ -1053,9 +1053,13 @@ export function createStreamHandler<T>(
 
     let registeredCallback: (data: unknown) => void;
     return {
-        on: (event: 'message', callback: (data: T) => void) => {
+        on: (event: 'message', callback: (data: T) => void | Promise<void>) => {
             if (event === 'message') {
-                registeredCallback = (data: unknown) => callback(data as T);
+                registeredCallback = (data: unknown) => {
+                    Promise.resolve(callback(data as T)).catch((err) => {
+                        websocketBase.logger.error(`Error in stream callback: ${err}`);
+                    });
+                };
                 const callbackSet = websocketBase.streamCallbackMap.get(streamOrId) ?? new Set();
                 callbackSet.add(registeredCallback);
                 websocketBase.streamCallbackMap.set(streamOrId, callbackSet);

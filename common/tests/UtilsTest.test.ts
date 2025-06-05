@@ -553,6 +553,79 @@ describe('Utility Functions', () => {
                 'The request was invalid or cannot be otherwise served.'
             );
         });
+
+        it('should throw a parse error when response data is invalid JSON on success', async () => {
+            const mockResponse = {
+                data: 'this is not valid JSON',
+                headers: {},
+            };
+            mockAxios.request.mockResolvedValueOnce(mockResponse);
+
+            const requestArgs = {
+                url: '/test',
+                options: {},
+            };
+            const result = await httpRequestFunction(requestArgs, restConfiguration);
+
+            await expect(result.data()).rejects.toThrowError(/Failed to parse JSON response/);
+        });
+
+        it('should throw BadRequestError if error response data is invalid JSON (string)', async () => {
+            const mockError = {
+                response: {
+                    status: 400,
+                    data: 'not valid json',
+                },
+            };
+            mockAxios.request.mockRejectedValueOnce(mockError);
+
+            const requestArgs = {
+                url: '/test',
+                options: {},
+            };
+
+            await expect(httpRequestFunction(requestArgs, restConfiguration)).rejects.toThrowError(
+                'The request was invalid or cannot be otherwise served.'
+            );
+        });
+
+        it('should throw BadRequestError if error response data is an empty string', async () => {
+            const mockError = {
+                response: {
+                    status: 400,
+                    data: '',
+                },
+            };
+            mockAxios.request.mockRejectedValueOnce(mockError);
+
+            const requestArgs = {
+                url: '/test',
+                options: {},
+            };
+
+            await expect(httpRequestFunction(requestArgs, restConfiguration)).rejects.toThrowError(
+                'The request was invalid or cannot be otherwise served.'
+            );
+        });
+
+        it('should throw UnauthorizedError if error response data is invalid JSON and status is 401', async () => {
+            const mockError = {
+                response: {
+                    status: 401,
+                    data: 'garbage text',
+                },
+            };
+            mockAxios.request.mockRejectedValueOnce(mockError);
+
+            const requestArgs = {
+                url: '/test',
+                options: {},
+            };
+
+            await expect(httpRequestFunction(requestArgs, restConfiguration)).rejects.toThrowError(
+                'Unauthorized access. Authentication required.'
+            );
+        });
     });
 
     describe('parseRateLimitHeaders()', () => {

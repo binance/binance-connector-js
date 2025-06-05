@@ -292,8 +292,8 @@ export const httpRequestFunction = async function <T>(
 
     if (configuration?.keepAlive) {
         axiosRequestArgs.httpsAgent = new https.Agent({
-            ...(configuration?.httpsAgent instanceof https.Agent
-                ? configuration.httpsAgent.options
+            ...(configuration?.baseOptions?.httpsAgent instanceof https.Agent
+                ? configuration.baseOptions.httpsAgent.options
                 : {}),
             keepAlive: true,
         });
@@ -319,7 +319,13 @@ export const httpRequestFunction = async function <T>(
             });
             const rateLimits: RestApiRateLimit[] = parseRateLimitHeaders(response.headers);
             return {
-                data: async () => JSON.parse(response.data) as T,
+                data: async (): Promise<T> => {
+                    try {
+                        return JSON.parse(response.data) as T;
+                    } catch (err) {
+                        throw new Error(`Failed to parse JSON response: ${err}`);
+                    }
+                },
                 status: response.status,
                 headers: response.headers as Record<string, string>,
                 rateLimits,
@@ -344,7 +350,11 @@ export const httpRequestFunction = async function <T>(
                     let data: Record<string, unknown> = {};
                     if (responseData && responseData !== null) {
                         if (typeof responseData === 'string' && responseData !== '')
-                            data = JSON.parse(responseData);
+                            try {
+                                data = JSON.parse(responseData);
+                            } catch {
+                                data = {};
+                            }
                         else if (typeof responseData === 'object')
                             data = responseData as Record<string, unknown>;
                     }
