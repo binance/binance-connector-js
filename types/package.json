@@ -11,7 +11,7 @@
     },
     "scripts": {
         "prepublishOnly": "npm run build",
-        "build": "tsup",
+        "build": "npm run clean && tsup",
         "clean": "rm -rf dist"
     },
     "keywords": [
