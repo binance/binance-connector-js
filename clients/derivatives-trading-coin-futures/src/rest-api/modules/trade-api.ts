@@ -818,7 +818,6 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * when the order is in partially filled status and the new `quantity` <= `executedQty`
          * When the order is `GTX` and the new price will cause it to be executed immediately
          * One order can only be modfied for less than 10000 times
-         * Modify order will set `selfTradePreventionMode` to `NONE`
          *
          * Weight: 1
          *
@@ -1591,7 +1590,6 @@ export interface TradeApiInterface {
      * when the order is in partially filled status and the new `quantity` <= `executedQty`
      * When the order is `GTX` and the new price will cause it to be executed immediately
      * One order can only be modfied for less than 10000 times
-     * Modify order will set `selfTradePreventionMode` to `NONE`
      *
      * Weight: 1
      *
@@ -3115,7 +3113,6 @@ export class TradeApi implements TradeApiInterface {
      * when the order is in partially filled status and the new `quantity` <= `executedQty`
      * When the order is `GTX` and the new price will cause it to be executed immediately
      * One order can only be modfied for less than 10000 times
-     * Modify order will set `selfTradePreventionMode` to `NONE`
      *
      * Weight: 1
      *
@@ -3414,127 +3411,102 @@ export class TradeApi implements TradeApiInterface {
     }
 }
 
-export const ChangeMarginTypeMarginTypeEnum = {
-    ISOLATED: 'ISOLATED',
-    CROSSED: 'CROSSED',
-} as const;
-export type ChangeMarginTypeMarginTypeEnum =
-    (typeof ChangeMarginTypeMarginTypeEnum)[keyof typeof ChangeMarginTypeMarginTypeEnum];
+export enum ChangeMarginTypeMarginTypeEnum {
+    ISOLATED = 'ISOLATED',
+    CROSSED = 'CROSSED',
+}
 
-export const ModifyIsolatedPositionMarginTypeEnum = {
-    LIMIT: 'LIMIT',
-    MARKET: 'MARKET',
-    STOP: 'STOP',
-    STOP_MARKET: 'STOP_MARKET',
-    TAKE_PROFIT: 'TAKE_PROFIT',
-    TAKE_PROFIT_MARKET: 'TAKE_PROFIT_MARKET',
-    TRAILING_STOP_MARKET: 'TRAILING_STOP_MARKET',
-} as const;
-export type ModifyIsolatedPositionMarginTypeEnum =
-    (typeof ModifyIsolatedPositionMarginTypeEnum)[keyof typeof ModifyIsolatedPositionMarginTypeEnum];
+export enum ModifyIsolatedPositionMarginTypeEnum {
+    LIMIT = 'LIMIT',
+    MARKET = 'MARKET',
+    STOP = 'STOP',
+    STOP_MARKET = 'STOP_MARKET',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_MARKET = 'TAKE_PROFIT_MARKET',
+    TRAILING_STOP_MARKET = 'TRAILING_STOP_MARKET',
+}
 
-export const ModifyIsolatedPositionMarginPositionSideEnum = {
-    BOTH: 'BOTH',
-    LONG: 'LONG',
-    SHORT: 'SHORT',
-} as const;
-export type ModifyIsolatedPositionMarginPositionSideEnum =
-    (typeof ModifyIsolatedPositionMarginPositionSideEnum)[keyof typeof ModifyIsolatedPositionMarginPositionSideEnum];
+export enum ModifyIsolatedPositionMarginPositionSideEnum {
+    BOTH = 'BOTH',
+    LONG = 'LONG',
+    SHORT = 'SHORT',
+}
 
-export const ModifyOrderSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type ModifyOrderSideEnum = (typeof ModifyOrderSideEnum)[keyof typeof ModifyOrderSideEnum];
+export enum ModifyOrderSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-export const ModifyOrderPriceMatchEnum = {
-    NONE: 'NONE',
-    OPPONENT: 'OPPONENT',
-    OPPONENT_5: 'OPPONENT_5',
-    OPPONENT_10: 'OPPONENT_10',
-    OPPONENT_20: 'OPPONENT_20',
-    QUEUE: 'QUEUE',
-    QUEUE_5: 'QUEUE_5',
-    QUEUE_10: 'QUEUE_10',
-    QUEUE_20: 'QUEUE_20',
-} as const;
-export type ModifyOrderPriceMatchEnum =
-    (typeof ModifyOrderPriceMatchEnum)[keyof typeof ModifyOrderPriceMatchEnum];
+export enum ModifyOrderPriceMatchEnum {
+    NONE = 'NONE',
+    OPPONENT = 'OPPONENT',
+    OPPONENT_5 = 'OPPONENT_5',
+    OPPONENT_10 = 'OPPONENT_10',
+    OPPONENT_20 = 'OPPONENT_20',
+    QUEUE = 'QUEUE',
+    QUEUE_5 = 'QUEUE_5',
+    QUEUE_10 = 'QUEUE_10',
+    QUEUE_20 = 'QUEUE_20',
+}
 
-export const NewOrderSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type NewOrderSideEnum = (typeof NewOrderSideEnum)[keyof typeof NewOrderSideEnum];
+export enum NewOrderSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-export const NewOrderTypeEnum = {
-    LIMIT: 'LIMIT',
-    MARKET: 'MARKET',
-    STOP: 'STOP',
-    STOP_MARKET: 'STOP_MARKET',
-    TAKE_PROFIT: 'TAKE_PROFIT',
-    TAKE_PROFIT_MARKET: 'TAKE_PROFIT_MARKET',
-    TRAILING_STOP_MARKET: 'TRAILING_STOP_MARKET',
-} as const;
-export type NewOrderTypeEnum = (typeof NewOrderTypeEnum)[keyof typeof NewOrderTypeEnum];
+export enum NewOrderTypeEnum {
+    LIMIT = 'LIMIT',
+    MARKET = 'MARKET',
+    STOP = 'STOP',
+    STOP_MARKET = 'STOP_MARKET',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_MARKET = 'TAKE_PROFIT_MARKET',
+    TRAILING_STOP_MARKET = 'TRAILING_STOP_MARKET',
+}
 
-export const NewOrderPositionSideEnum = {
-    BOTH: 'BOTH',
-    LONG: 'LONG',
-    SHORT: 'SHORT',
-} as const;
-export type NewOrderPositionSideEnum =
-    (typeof NewOrderPositionSideEnum)[keyof typeof NewOrderPositionSideEnum];
+export enum NewOrderPositionSideEnum {
+    BOTH = 'BOTH',
+    LONG = 'LONG',
+    SHORT = 'SHORT',
+}
 
-export const NewOrderTimeInForceEnum = {
-    GTC: 'GTC',
-    IOC: 'IOC',
-    FOK: 'FOK',
-    GTX: 'GTX',
-} as const;
-export type NewOrderTimeInForceEnum =
-    (typeof NewOrderTimeInForceEnum)[keyof typeof NewOrderTimeInForceEnum];
+export enum NewOrderTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+    GTX = 'GTX',
+}
 
-export const NewOrderWorkingTypeEnum = {
-    MARK_PRICE: 'MARK_PRICE',
-    CONTRACT_PRICE: 'CONTRACT_PRICE',
-} as const;
-export type NewOrderWorkingTypeEnum =
-    (typeof NewOrderWorkingTypeEnum)[keyof typeof NewOrderWorkingTypeEnum];
+export enum NewOrderWorkingTypeEnum {
+    MARK_PRICE = 'MARK_PRICE',
+    CONTRACT_PRICE = 'CONTRACT_PRICE',
+}
 
-export const NewOrderNewOrderRespTypeEnum = {
-    ACK: 'ACK',
-    RESULT: 'RESULT',
-} as const;
-export type NewOrderNewOrderRespTypeEnum =
-    (typeof NewOrderNewOrderRespTypeEnum)[keyof typeof NewOrderNewOrderRespTypeEnum];
+export enum NewOrderNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+}
 
-export const NewOrderPriceMatchEnum = {
-    NONE: 'NONE',
-    OPPONENT: 'OPPONENT',
-    OPPONENT_5: 'OPPONENT_5',
-    OPPONENT_10: 'OPPONENT_10',
-    OPPONENT_20: 'OPPONENT_20',
-    QUEUE: 'QUEUE',
-    QUEUE_5: 'QUEUE_5',
-    QUEUE_10: 'QUEUE_10',
-    QUEUE_20: 'QUEUE_20',
-} as const;
-export type NewOrderPriceMatchEnum =
-    (typeof NewOrderPriceMatchEnum)[keyof typeof NewOrderPriceMatchEnum];
+export enum NewOrderPriceMatchEnum {
+    NONE = 'NONE',
+    OPPONENT = 'OPPONENT',
+    OPPONENT_5 = 'OPPONENT_5',
+    OPPONENT_10 = 'OPPONENT_10',
+    OPPONENT_20 = 'OPPONENT_20',
+    QUEUE = 'QUEUE',
+    QUEUE_5 = 'QUEUE_5',
+    QUEUE_10 = 'QUEUE_10',
+    QUEUE_20 = 'QUEUE_20',
+}
 
-export const NewOrderSelfTradePreventionModeEnum = {
-    NONE: 'NONE',
-    EXPIRE_TAKER: 'EXPIRE_TAKER',
-    EXPIRE_BOTH: 'EXPIRE_BOTH',
-    EXPIRE_MAKER: 'EXPIRE_MAKER',
-} as const;
-export type NewOrderSelfTradePreventionModeEnum =
-    (typeof NewOrderSelfTradePreventionModeEnum)[keyof typeof NewOrderSelfTradePreventionModeEnum];
+export enum NewOrderSelfTradePreventionModeEnum {
+    NONE = 'NONE',
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+}
 
-export const UsersForceOrdersAutoCloseTypeEnum = {
-    LIQUIDATION: 'LIQUIDATION',
-    ADL: 'ADL',
-} as const;
-export type UsersForceOrdersAutoCloseTypeEnum =
-    (typeof UsersForceOrdersAutoCloseTypeEnum)[keyof typeof UsersForceOrdersAutoCloseTypeEnum];
+export enum UsersForceOrdersAutoCloseTypeEnum {
+    LIQUIDATION = 'LIQUIDATION',
+    ADL = 'ADL',
+}
