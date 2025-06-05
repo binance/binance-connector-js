@@ -1,5 +1,12 @@
 # Changelog
 
+## 7.0.0 - 2025-06-05
+
+### Changed (2)
+
+- Fix bug with enums exporting.
+- Update `@binance/common` library to version `1.1.0`.
+
 ## 6.0.1 - 2025-06-03
 
 ### Changed
