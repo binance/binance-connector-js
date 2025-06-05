@@ -40,7 +40,11 @@ import type {
     MyAllocationsRequest,
     MyPreventedMatchesRequest,
     MyTradesRequest,
+    OpenOrderListsStatusRequest,
+    OpenOrdersStatusRequest,
     OrderAmendmentsRequest,
+    OrderListStatusRequest,
+    OrderStatusRequest,
 } from './modules/account-api';
 import type {
     SessionLogonRequest,
@@ -63,9 +67,7 @@ import type {
     UiKlinesRequest,
 } from './modules/market-api';
 import type {
-    OpenOrderListsStatusRequest,
     OpenOrdersCancelAllRequest,
-    OpenOrdersStatusRequest,
     OrderAmendKeepPriorityRequest,
     OrderCancelRequest,
     OrderCancelReplaceRequest,
@@ -74,9 +76,7 @@ import type {
     OrderListPlaceOcoRequest,
     OrderListPlaceOtoRequest,
     OrderListPlaceOtocoRequest,
-    OrderListStatusRequest,
     OrderPlaceRequest,
-    OrderStatusRequest,
     OrderTestRequest,
     SorOrderPlaceRequest,
     SorOrderTestRequest,
@@ -98,7 +98,11 @@ import type {
     MyAllocationsResponse,
     MyPreventedMatchesResponse,
     MyTradesResponse,
+    OpenOrderListsStatusResponse,
+    OpenOrdersStatusResponse,
     OrderAmendmentsResponse,
+    OrderListStatusResponse,
+    OrderStatusResponse,
 } from './types';
 import type { SessionLogonResponse, SessionLogoutResponse, SessionStatusResponse } from './types';
 import type { ExchangeInfoResponse, TimeResponse } from './types';
@@ -117,9 +121,7 @@ import type {
     UiKlinesResponse,
 } from './types';
 import type {
-    OpenOrderListsStatusResponse,
     OpenOrdersCancelAllResponse,
-    OpenOrdersStatusResponse,
     OrderAmendKeepPriorityResponse,
     OrderCancelResponse,
     OrderCancelReplaceResponse,
@@ -128,9 +130,7 @@ import type {
     OrderListPlaceOcoResponse,
     OrderListPlaceOtoResponse,
     OrderListPlaceOtocoResponse,
-    OrderListStatusResponse,
     OrderPlaceResponse,
-    OrderStatusResponse,
     OrderTestResponse,
     SorOrderPlaceResponse,
     SorOrderTestResponse,
@@ -279,7 +279,7 @@ export class WebsocketAPIConnection {
      * Query information about all your order lists, filtered by time range.
      * Weight: 20
      *
-     * @summary WebSocket Account Order list history
+     * @summary WebSocket Account order list history
      * @param {AllOrderListsRequest} requestParameters Request parameters.
      * @returns Promise<WebsocketApiResponse<AllOrderListsResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-order-list-history-user_data Binance API Documentation}
@@ -363,6 +363,51 @@ export class WebsocketAPIConnection {
     }
 
     /**
+     * Query execution status of all open order lists.
+     *
+     * If you need to continuously monitor order status updates, please consider using WebSocket Streams:
+     *
+     * `userDataStream.start` request
+     * `executionReport` user data stream event
+     * Weight: 6
+     *
+     * @summary WebSocket Current open Order lists
+     * @param {OpenOrderListsStatusRequest} requestParameters Request parameters.
+     * @returns Promise<WebsocketApiResponse<OpenOrderListsStatusResponse>>
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#current-open-order-lists-user_data Binance API Documentation}
+     */
+    openOrderListsStatus(
+        requestParameters: OpenOrderListsStatusRequest = {}
+    ): Promise<WebsocketApiResponse<OpenOrderListsStatusResponse>> {
+        return this.accountApi.openOrderListsStatus(requestParameters);
+    }
+
+    /**
+     * Query execution status of all open orders.
+     *
+     * If you need to continuously monitor order status updates, please consider using WebSocket Streams:
+     *
+     * `userDataStream.start` request
+     * `executionReport` user data stream event
+     * Weight: Adjusted based on the number of requested symbols:
+     *
+     * | Parameter | Weight |
+     * | --------- | ------ |
+     * | `symbol`  |      6 |
+     * | none      |     80 |
+     *
+     * @summary WebSocket Current open orders
+     * @param {OpenOrdersStatusRequest} requestParameters Request parameters.
+     * @returns Promise<WebsocketApiResponse<OpenOrdersStatusResponse>>
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#current-open-orders-user_data Binance API Documentation}
+     */
+    openOrdersStatus(
+        requestParameters: OpenOrdersStatusRequest = {}
+    ): Promise<WebsocketApiResponse<OpenOrdersStatusResponse>> {
+        return this.accountApi.openOrdersStatus(requestParameters);
+    }
+
+    /**
      * Queries all amendments of a single order.
      * Weight: 4
      *
@@ -375,6 +420,38 @@ export class WebsocketAPIConnection {
         requestParameters: OrderAmendmentsRequest
     ): Promise<WebsocketApiResponse<OrderAmendmentsResponse>> {
         return this.accountApi.orderAmendments(requestParameters);
+    }
+
+    /**
+     * Check execution status of an Order list.
+     *
+     * For execution status of individual orders, use `order.status`.
+     * Weight: 4
+     *
+     * @summary WebSocket Query Order list
+     * @param {OrderListStatusRequest} requestParameters Request parameters.
+     * @returns Promise<WebsocketApiResponse<OrderListStatusResponse>>
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#query-order-list-user_data Binance API Documentation}
+     */
+    orderListStatus(
+        requestParameters: OrderListStatusRequest = {}
+    ): Promise<WebsocketApiResponse<OrderListStatusResponse>> {
+        return this.accountApi.orderListStatus(requestParameters);
+    }
+
+    /**
+     * Check execution status of an order.
+     * Weight: 4
+     *
+     * @summary WebSocket Query order
+     * @param {OrderStatusRequest} requestParameters Request parameters.
+     * @returns Promise<WebsocketApiResponse<OrderStatusResponse>>
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#query-order-user_data Binance API Documentation}
+     */
+    orderStatus(
+        requestParameters: OrderStatusRequest
+    ): Promise<WebsocketApiResponse<OrderStatusResponse>> {
+        return this.accountApi.orderStatus(requestParameters);
     }
 
     /**
@@ -732,26 +809,6 @@ export class WebsocketAPIConnection {
     }
 
     /**
-     * Query execution status of all open order lists.
-     *
-     * If you need to continuously monitor order status updates, please consider using WebSocket Streams:
-     *
-     * `userDataStream.start` request
-     * `executionReport` user data stream event
-     * Weight: 6
-     *
-     * @summary WebSocket Current open Order lists
-     * @param {OpenOrderListsStatusRequest} requestParameters Request parameters.
-     * @returns Promise<WebsocketApiResponse<OpenOrderListsStatusResponse>>
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#current-open-order-lists-user_data Binance API Documentation}
-     */
-    openOrderListsStatus(
-        requestParameters: OpenOrderListsStatusRequest = {}
-    ): Promise<WebsocketApiResponse<OpenOrderListsStatusResponse>> {
-        return this.tradeApi.openOrderListsStatus(requestParameters);
-    }
-
-    /**
      * Cancel all open orders on a symbol.
      * This includes orders that are part of an order list.
      * Weight: 1
@@ -765,31 +822,6 @@ export class WebsocketAPIConnection {
         requestParameters: OpenOrdersCancelAllRequest
     ): Promise<WebsocketApiResponse<OpenOrdersCancelAllResponse>> {
         return this.tradeApi.openOrdersCancelAll(requestParameters);
-    }
-
-    /**
-     * Query execution status of all open orders.
-     *
-     * If you need to continuously monitor order status updates, please consider using WebSocket Streams:
-     *
-     * `userDataStream.start` request
-     * `executionReport` user data stream event
-     * Weight: Adjusted based on the number of requested symbols:
-     *
-     * | Parameter | Weight |
-     * | --------- | ------ |
-     * | `symbol`  |      6 |
-     * | none      |     80 |
-     *
-     * @summary WebSocket Current open orders
-     * @param {OpenOrdersStatusRequest} requestParameters Request parameters.
-     * @returns Promise<WebsocketApiResponse<OpenOrdersStatusResponse>>
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#current-open-orders-user_data Binance API Documentation}
-     */
-    openOrdersStatus(
-        requestParameters: OpenOrdersStatusRequest = {}
-    ): Promise<WebsocketApiResponse<OpenOrdersStatusResponse>> {
-        return this.tradeApi.openOrdersStatus(requestParameters);
     }
 
     /**
@@ -880,7 +912,7 @@ export class WebsocketAPIConnection {
     }
 
     /**
-     * Send in an one-cancels the other (OCO) pair, where activation of one order immediately cancels the other.
+     * Send in an one-cancels-the-other (OCO) pair, where activation of one order immediately cancels the other.
      *
      * An OCO has 2 orders called the **above order** and **below order**.
      * One of the orders must be a `LIMIT_MAKER/TAKE_PROFIT/TAKE_PROFIT_LIMIT` order and the other must be `STOP_LOSS` or `STOP_LOSS_LIMIT` order.
@@ -914,6 +946,7 @@ export class WebsocketAPIConnection {
      * The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
      * The second order is called the **pending order**. It can be any order type except for `MARKET` orders using parameter `quoteOrderQty`. The pending order is only placed on the order book when the working order gets **fully filled**.
      * If either the working order or the pending order is cancelled individually, the other order in the order list will also be canceled or expired.
+     * When the order list is placed, if the working order gets **immediately fully filled**, the placement response will show the working order as `FILLED` but the pending order will still appear as `PENDING_NEW`. You need to query the status of the pending order again to see its updated status.
      * OTOs add **2 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
      * Weight: 1
      *
@@ -937,6 +970,7 @@ export class WebsocketAPIConnection {
      * The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
      * The behavior of the working order is the same as the [OTO](#place-new-order-list---oto-trade).
      * OTOCO has 2 pending orders (pending above and pending below), forming an OCO pair. The pending orders are only placed on the order book when the working order gets **fully filled**.
+     * The rules of the pending above and pending below follow the same rules as the [Order list OCO](#new-order-list---oco-trade).
      * OTOCOs add **3 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
      * Weight: 1
      *
@@ -954,23 +988,6 @@ export class WebsocketAPIConnection {
     }
 
     /**
-     * Check execution status of an Order list.
-     *
-     * For execution status of individual orders, use `order.status`.
-     * Weight: 4
-     *
-     * @summary WebSocket Query Order list
-     * @param {OrderListStatusRequest} requestParameters Request parameters.
-     * @returns Promise<WebsocketApiResponse<OrderListStatusResponse>>
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#query-order-list-user_data Binance API Documentation}
-     */
-    orderListStatus(
-        requestParameters: OrderListStatusRequest = {}
-    ): Promise<WebsocketApiResponse<OrderListStatusResponse>> {
-        return this.tradeApi.orderListStatus(requestParameters);
-    }
-
-    /**
      * Send in a new order.
      *
      * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
@@ -985,21 +1002,6 @@ export class WebsocketAPIConnection {
         requestParameters: OrderPlaceRequest
     ): Promise<WebsocketApiResponse<OrderPlaceResponse>> {
         return this.tradeApi.orderPlace(requestParameters);
-    }
-
-    /**
-     * Check execution status of an order.
-     * Weight: 4
-     *
-     * @summary WebSocket Query order
-     * @param {OrderStatusRequest} requestParameters Request parameters.
-     * @returns Promise<WebsocketApiResponse<OrderStatusResponse>>
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#query-order-user_data Binance API Documentation}
-     */
-    orderStatus(
-        requestParameters: OrderStatusRequest
-    ): Promise<WebsocketApiResponse<OrderStatusResponse>> {
-        return this.tradeApi.orderStatus(requestParameters);
     }
 
     /**
@@ -1027,6 +1029,8 @@ export class WebsocketAPIConnection {
      * Places an order using smart order routing (SOR).
      *
      * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
+     *
+     * Read [SOR FAQ](../faqs/sor_faq.md) to learn more.
      * Weight: 1
      *
      * Unfilled Order Count: 1

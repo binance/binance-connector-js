@@ -18,9 +18,7 @@
 
 import { WebsocketAPIBase, WebsocketApiResponse, WebsocketSendMsgOptions } from '@binance/common';
 import type {
-    OpenOrderListsStatusResponse,
     OpenOrdersCancelAllResponse,
-    OpenOrdersStatusResponse,
     OrderAmendKeepPriorityResponse,
     OrderCancelReplaceResponse,
     OrderCancelResponse,
@@ -29,9 +27,7 @@ import type {
     OrderListPlaceOtoResponse,
     OrderListPlaceOtocoResponse,
     OrderListPlaceResponse,
-    OrderListStatusResponse,
     OrderPlaceResponse,
-    OrderStatusResponse,
     OrderTestResponse,
     SorOrderPlaceResponse,
     SorOrderTestResponse,
@@ -43,25 +39,6 @@ import type {
  * @interface TradeApi
  */
 export interface TradeApiInterface {
-    /**
-     * Query execution status of all open order lists.
-     *
-     * If you need to continuously monitor order status updates, please consider using WebSocket Streams:
-     *
-     * `userDataStream.start` request
-     * `executionReport` user data stream event
-     * Weight: 6
-     *
-     * @summary WebSocket Current open Order lists
-     * @param {OpenOrderListsStatusRequest} requestParameters Request parameters.
-     *
-     * @returns {Promise<OpenOrderListsStatusResponse>}
-     * @memberof TradeApiInterface
-     */
-    openOrderListsStatus(
-        requestParameters?: OpenOrderListsStatusRequest
-    ): Promise<WebsocketApiResponse<OpenOrderListsStatusResponse>>;
-
     /**
      * Cancel all open orders on a symbol.
      * This includes orders that are part of an order list.
@@ -76,30 +53,6 @@ export interface TradeApiInterface {
     openOrdersCancelAll(
         requestParameters: OpenOrdersCancelAllRequest
     ): Promise<WebsocketApiResponse<OpenOrdersCancelAllResponse>>;
-
-    /**
-     * Query execution status of all open orders.
-     *
-     * If you need to continuously monitor order status updates, please consider using WebSocket Streams:
-     *
-     * `userDataStream.start` request
-     * `executionReport` user data stream event
-     * Weight: Adjusted based on the number of requested symbols:
-     *
-     * | Parameter | Weight |
-     * | --------- | ------ |
-     * | `symbol`  |      6 |
-     * | none      |     80 |
-     *
-     * @summary WebSocket Current open orders
-     * @param {OpenOrdersStatusRequest} requestParameters Request parameters.
-     *
-     * @returns {Promise<OpenOrdersStatusResponse>}
-     * @memberof TradeApiInterface
-     */
-    openOrdersStatus(
-        requestParameters?: OpenOrdersStatusRequest
-    ): Promise<WebsocketApiResponse<OpenOrdersStatusResponse>>;
 
     /**
      * Reduce the quantity of an existing open order.
@@ -184,7 +137,7 @@ export interface TradeApiInterface {
     ): Promise<WebsocketApiResponse<OrderListPlaceResponse>>;
 
     /**
-     * Send in an one-cancels the other (OCO) pair, where activation of one order immediately cancels the other.
+     * Send in an one-cancels-the-other (OCO) pair, where activation of one order immediately cancels the other.
      *
      * An OCO has 2 orders called the **above order** and **below order**.
      * One of the orders must be a `LIMIT_MAKER/TAKE_PROFIT/TAKE_PROFIT_LIMIT` order and the other must be `STOP_LOSS` or `STOP_LOSS_LIMIT` order.
@@ -217,6 +170,7 @@ export interface TradeApiInterface {
      * The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
      * The second order is called the **pending order**. It can be any order type except for `MARKET` orders using parameter `quoteOrderQty`. The pending order is only placed on the order book when the working order gets **fully filled**.
      * If either the working order or the pending order is cancelled individually, the other order in the order list will also be canceled or expired.
+     * When the order list is placed, if the working order gets **immediately fully filled**, the placement response will show the working order as `FILLED` but the pending order will still appear as `PENDING_NEW`. You need to query the status of the pending order again to see its updated status.
      * OTOs add **2 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
      * Weight: 1
      *
@@ -239,6 +193,7 @@ export interface TradeApiInterface {
      * The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
      * The behavior of the working order is the same as the [OTO](#place-new-order-list---oto-trade).
      * OTOCO has 2 pending orders (pending above and pending below), forming an OCO pair. The pending orders are only placed on the order book when the working order gets **fully filled**.
+     * The rules of the pending above and pending below follow the same rules as the [Order list OCO](#new-order-list---oco-trade).
      * OTOCOs add **3 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
      * Weight: 1
      *
@@ -255,22 +210,6 @@ export interface TradeApiInterface {
     ): Promise<WebsocketApiResponse<OrderListPlaceOtocoResponse>>;
 
     /**
-     * Check execution status of an Order list.
-     *
-     * For execution status of individual orders, use `order.status`.
-     * Weight: 4
-     *
-     * @summary WebSocket Query Order list
-     * @param {OrderListStatusRequest} requestParameters Request parameters.
-     *
-     * @returns {Promise<OrderListStatusResponse>}
-     * @memberof TradeApiInterface
-     */
-    orderListStatus(
-        requestParameters?: OrderListStatusRequest
-    ): Promise<WebsocketApiResponse<OrderListStatusResponse>>;
-
-    /**
      * Send in a new order.
      *
      * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
@@ -285,20 +224,6 @@ export interface TradeApiInterface {
     orderPlace(
         requestParameters: OrderPlaceRequest
     ): Promise<WebsocketApiResponse<OrderPlaceResponse>>;
-
-    /**
-     * Check execution status of an order.
-     * Weight: 4
-     *
-     * @summary WebSocket Query order
-     * @param {OrderStatusRequest} requestParameters Request parameters.
-     *
-     * @returns {Promise<OrderStatusResponse>}
-     * @memberof TradeApiInterface
-     */
-    orderStatus(
-        requestParameters: OrderStatusRequest
-    ): Promise<WebsocketApiResponse<OrderStatusResponse>>;
 
     /**
      * Test order placement.
@@ -324,6 +249,8 @@ export interface TradeApiInterface {
      * Places an order using smart order routing (SOR).
      *
      * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
+     *
+     * Read [SOR FAQ](../faqs/sor_faq.md) to learn more.
      * Weight: 1
      *
      * Unfilled Order Count: 1
@@ -358,26 +285,6 @@ export interface TradeApiInterface {
 }
 
 /**
- * Request parameters for openOrderListsStatus operation in TradeApi.
- * @interface OpenOrderListsStatusRequest
- */
-export interface OpenOrderListsStatusRequest {
-    /**
-     * Unique WebSocket request ID.
-     * @type {string}
-     * @memberof TradeApiOpenOrderListsStatus
-     */
-    readonly id?: string;
-
-    /**
-     * The value cannot be greater than `60000`
-     * @type {number}
-     * @memberof TradeApiOpenOrderListsStatus
-     */
-    readonly recvWindow?: number;
-}
-
-/**
  * Request parameters for openOrdersCancelAll operation in TradeApi.
  * @interface OpenOrdersCancelAllRequest
  */
@@ -400,33 +307,6 @@ export interface OpenOrdersCancelAllRequest {
      * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiOpenOrdersCancelAll
-     */
-    readonly recvWindow?: number;
-}
-
-/**
- * Request parameters for openOrdersStatus operation in TradeApi.
- * @interface OpenOrdersStatusRequest
- */
-export interface OpenOrdersStatusRequest {
-    /**
-     * Unique WebSocket request ID.
-     * @type {string}
-     * @memberof TradeApiOpenOrdersStatus
-     */
-    readonly id?: string;
-
-    /**
-     * Describe a single symbol
-     * @type {string}
-     * @memberof TradeApiOpenOrdersStatus
-     */
-    readonly symbol?: string;
-
-    /**
-     * The value cannot be greater than `60000`
-     * @type {number}
-     * @memberof TradeApiOpenOrdersStatus
      */
     readonly recvWindow?: number;
 }
@@ -986,7 +866,7 @@ export interface OrderListPlaceOcoRequest {
     readonly abovePrice?: number;
 
     /**
-     * Can be used if `aboveType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` <br>Either `aboveStopPrice` or `aboveTrailingDelta` or both, must be specified.
+     * Can be used if `aboveType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT`. <br>Either `aboveStopPrice` or `aboveTrailingDelta` or both, must be specified.
      * @type {number}
      * @memberof TradeApiOrderListPlaceOco
      */
@@ -1042,7 +922,7 @@ export interface OrderListPlaceOcoRequest {
     readonly belowPrice?: number;
 
     /**
-     * Can be used if `belowType` is `STOP_LOSS`, `STOP_LOSS_LIMIT, TAKE_PROFIT` or `TAKE_PROFIT_LIMIT`. Either `belowStopPrice` or `belowTrailingDelta` or both, must be specified.
+     * Can be used if `belowType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT` or `TAKE_PROFIT_LIMIT`. <br>Either `belowStopPrice` or `belowTrailingDelta` or both, must be specified.
      * @type {number}
      * @memberof TradeApiOrderListPlaceOco
      */
@@ -1481,14 +1361,14 @@ export interface OrderListPlaceOtocoRequest {
     readonly pendingBelowClientOrderId?: string;
 
     /**
-     * Can be used if `pendingBelowType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT` to specify limit price
+     * Can be used if `pendingBelowType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT` to specify the limit price.
      * @type {number}
      * @memberof TradeApiOrderListPlaceOtoco
      */
     readonly pendingBelowPrice?: number;
 
     /**
-     * Can be used if `pendingBelowType` is `STOP_LOSS`, `STOP_LOSS_LIMIT, TAKE_PROFIT or TAKE_PROFIT_LIMIT`. Either `pendingBelowStopPrice` or `pendingBelowTrailingDelta` or both, must be specified.
+     * Can be used if `pendingBelowType` is `STOP_LOSS`, `STOP_LOSS_LIMIT, TAKE_PROFIT or TAKE_PROFIT_LIMIT`. <br>Either `pendingBelowStopPrice` or `pendingBelowTrailingDelta` or both, must be specified.
      * @type {number}
      * @memberof TradeApiOrderListPlaceOtoco
      */
@@ -1533,40 +1413,6 @@ export interface OrderListPlaceOtocoRequest {
      * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiOrderListPlaceOtoco
-     */
-    readonly recvWindow?: number;
-}
-
-/**
- * Request parameters for orderListStatus operation in TradeApi.
- * @interface OrderListStatusRequest
- */
-export interface OrderListStatusRequest {
-    /**
-     * Unique WebSocket request ID.
-     * @type {string}
-     * @memberof TradeApiOrderListStatus
-     */
-    readonly id?: string;
-
-    /**
-     * `orderId`or`origClientOrderId`mustbesent
-     * @type {string}
-     * @memberof TradeApiOrderListStatus
-     */
-    readonly origClientOrderId?: string;
-
-    /**
-     * Cancel order list by orderListId
-     * @type {number}
-     * @memberof TradeApiOrderListStatus
-     */
-    readonly orderListId?: number;
-
-    /**
-     * The value cannot be greater than `60000`
-     * @type {number}
-     * @memberof TradeApiOrderListStatus
      */
     readonly recvWindow?: number;
 }
@@ -1693,47 +1539,6 @@ export interface OrderPlaceRequest {
      * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiOrderPlace
-     */
-    readonly recvWindow?: number;
-}
-
-/**
- * Request parameters for orderStatus operation in TradeApi.
- * @interface OrderStatusRequest
- */
-export interface OrderStatusRequest {
-    /**
-     *
-     * @type {string}
-     * @memberof TradeApiOrderStatus
-     */
-    readonly symbol: string;
-
-    /**
-     * Unique WebSocket request ID.
-     * @type {string}
-     * @memberof TradeApiOrderStatus
-     */
-    readonly id?: string;
-
-    /**
-     * Cancel order by orderId
-     * @type {number}
-     * @memberof TradeApiOrderStatus
-     */
-    readonly orderId?: number;
-
-    /**
-     * `orderId`or`origClientOrderId`mustbesent
-     * @type {string}
-     * @memberof TradeApiOrderStatus
-     */
-    readonly origClientOrderId?: string;
-
-    /**
-     * The value cannot be greater than `60000`
-     * @type {number}
-     * @memberof TradeApiOrderStatus
      */
     readonly recvWindow?: number;
 }
@@ -1896,31 +1701,6 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Query execution status of all open order lists.
-     *
-     * If you need to continuously monitor order status updates, please consider using WebSocket Streams:
-     *
-     * `userDataStream.start` request
-     * `executionReport` user data stream event
-     * Weight: 6
-     *
-     * @summary WebSocket Current open Order lists
-     * @param {OpenOrderListsStatusRequest} requestParameters Request parameters.
-     * @returns {Promise<OpenOrderListsStatusResponse>}
-     * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#current-open-order-lists-user_data Binance API Documentation}
-     */
-    public openOrderListsStatus(
-        requestParameters: OpenOrderListsStatusRequest = {}
-    ): Promise<WebsocketApiResponse<OpenOrderListsStatusResponse>> {
-        return this.websocketBase.sendMessage<OpenOrderListsStatusResponse>(
-            '/openOrderLists.status'.slice(1),
-            requestParameters as unknown as WebsocketSendMsgOptions,
-            { isSigned: true, withApiKey: false }
-        );
-    }
-
-    /**
      * Cancel all open orders on a symbol.
      * This includes orders that are part of an order list.
      * Weight: 1
@@ -1936,36 +1716,6 @@ export class TradeApi implements TradeApiInterface {
     ): Promise<WebsocketApiResponse<OpenOrdersCancelAllResponse>> {
         return this.websocketBase.sendMessage<OpenOrdersCancelAllResponse>(
             '/openOrders.cancelAll'.slice(1),
-            requestParameters as unknown as WebsocketSendMsgOptions,
-            { isSigned: true, withApiKey: false }
-        );
-    }
-
-    /**
-     * Query execution status of all open orders.
-     *
-     * If you need to continuously monitor order status updates, please consider using WebSocket Streams:
-     *
-     * `userDataStream.start` request
-     * `executionReport` user data stream event
-     * Weight: Adjusted based on the number of requested symbols:
-     *
-     * | Parameter | Weight |
-     * | --------- | ------ |
-     * | `symbol`  |      6 |
-     * | none      |     80 |
-     *
-     * @summary WebSocket Current open orders
-     * @param {OpenOrdersStatusRequest} requestParameters Request parameters.
-     * @returns {Promise<OpenOrdersStatusResponse>}
-     * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#current-open-orders-user_data Binance API Documentation}
-     */
-    public openOrdersStatus(
-        requestParameters: OpenOrdersStatusRequest = {}
-    ): Promise<WebsocketApiResponse<OpenOrdersStatusResponse>> {
-        return this.websocketBase.sendMessage<OpenOrdersStatusResponse>(
-            '/openOrders.status'.slice(1),
             requestParameters as unknown as WebsocketSendMsgOptions,
             { isSigned: true, withApiKey: false }
         );
@@ -2084,7 +1834,7 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Send in an one-cancels the other (OCO) pair, where activation of one order immediately cancels the other.
+     * Send in an one-cancels-the-other (OCO) pair, where activation of one order immediately cancels the other.
      *
      * An OCO has 2 orders called the **above order** and **below order**.
      * One of the orders must be a `LIMIT_MAKER/TAKE_PROFIT/TAKE_PROFIT_LIMIT` order and the other must be `STOP_LOSS` or `STOP_LOSS_LIMIT` order.
@@ -2123,6 +1873,7 @@ export class TradeApi implements TradeApiInterface {
      * The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
      * The second order is called the **pending order**. It can be any order type except for `MARKET` orders using parameter `quoteOrderQty`. The pending order is only placed on the order book when the working order gets **fully filled**.
      * If either the working order or the pending order is cancelled individually, the other order in the order list will also be canceled or expired.
+     * When the order list is placed, if the working order gets **immediately fully filled**, the placement response will show the working order as `FILLED` but the pending order will still appear as `PENDING_NEW`. You need to query the status of the pending order again to see its updated status.
      * OTOs add **2 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
      * Weight: 1
      *
@@ -2151,6 +1902,7 @@ export class TradeApi implements TradeApiInterface {
      * The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.
      * The behavior of the working order is the same as the [OTO](#place-new-order-list---oto-trade).
      * OTOCO has 2 pending orders (pending above and pending below), forming an OCO pair. The pending orders are only placed on the order book when the working order gets **fully filled**.
+     * The rules of the pending above and pending below follow the same rules as the [Order list OCO](#new-order-list---oco-trade).
      * OTOCOs add **3 orders** to the `EXCHANGE_MAX_NUM_ORDERS` filter and `MAX_NUM_ORDERS` filter.
      * Weight: 1
      *
@@ -2173,28 +1925,6 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Check execution status of an Order list.
-     *
-     * For execution status of individual orders, use `order.status`.
-     * Weight: 4
-     *
-     * @summary WebSocket Query Order list
-     * @param {OrderListStatusRequest} requestParameters Request parameters.
-     * @returns {Promise<OrderListStatusResponse>}
-     * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#query-order-list-user_data Binance API Documentation}
-     */
-    public orderListStatus(
-        requestParameters: OrderListStatusRequest = {}
-    ): Promise<WebsocketApiResponse<OrderListStatusResponse>> {
-        return this.websocketBase.sendMessage<OrderListStatusResponse>(
-            '/orderList.status'.slice(1),
-            requestParameters as unknown as WebsocketSendMsgOptions,
-            { isSigned: true, withApiKey: false }
-        );
-    }
-
-    /**
      * Send in a new order.
      *
      * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
@@ -2211,26 +1941,6 @@ export class TradeApi implements TradeApiInterface {
     ): Promise<WebsocketApiResponse<OrderPlaceResponse>> {
         return this.websocketBase.sendMessage<OrderPlaceResponse>(
             '/order.place'.slice(1),
-            requestParameters as unknown as WebsocketSendMsgOptions,
-            { isSigned: true, withApiKey: false }
-        );
-    }
-
-    /**
-     * Check execution status of an order.
-     * Weight: 4
-     *
-     * @summary WebSocket Query order
-     * @param {OrderStatusRequest} requestParameters Request parameters.
-     * @returns {Promise<OrderStatusResponse>}
-     * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#query-order-user_data Binance API Documentation}
-     */
-    public orderStatus(
-        requestParameters: OrderStatusRequest
-    ): Promise<WebsocketApiResponse<OrderStatusResponse>> {
-        return this.websocketBase.sendMessage<OrderStatusResponse>(
-            '/order.status'.slice(1),
             requestParameters as unknown as WebsocketSendMsgOptions,
             { isSigned: true, withApiKey: false }
         );
@@ -2266,6 +1976,8 @@ export class TradeApi implements TradeApiInterface {
      * Places an order using smart order routing (SOR).
      *
      * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
+     *
+     * Read [SOR FAQ](../faqs/sor_faq.md) to learn more.
      * Weight: 1
      *
      * Unfilled Order Count: 1
@@ -2311,569 +2023,336 @@ export class TradeApi implements TradeApiInterface {
     }
 }
 
-/**
- * @enum {string}
- */
-export const OrderCancelCancelRestrictionsEnum = {
-    ONLY_NEW: 'ONLY_NEW',
-    NEW: 'NEW',
-    ONLY_PARTIALLY_FILLED: 'ONLY_PARTIALLY_FILLED',
-    PARTIALLY_FILLED: 'PARTIALLY_FILLED',
-} as const;
-export type OrderCancelCancelRestrictionsEnum =
-    (typeof OrderCancelCancelRestrictionsEnum)[keyof typeof OrderCancelCancelRestrictionsEnum];
+export enum OrderCancelCancelRestrictionsEnum {
+    ONLY_NEW = 'ONLY_NEW',
+    NEW = 'NEW',
+    ONLY_PARTIALLY_FILLED = 'ONLY_PARTIALLY_FILLED',
+    PARTIALLY_FILLED = 'PARTIALLY_FILLED',
+}
 
-/**
- * @enum {string}
- */
-export const OrderCancelReplaceCancelReplaceModeEnum = {
-    STOP_ON_FAILURE: 'STOP_ON_FAILURE',
-    ALLOW_FAILURE: 'ALLOW_FAILURE',
-} as const;
-export type OrderCancelReplaceCancelReplaceModeEnum =
-    (typeof OrderCancelReplaceCancelReplaceModeEnum)[keyof typeof OrderCancelReplaceCancelReplaceModeEnum];
+export enum OrderCancelReplaceCancelReplaceModeEnum {
+    STOP_ON_FAILURE = 'STOP_ON_FAILURE',
+    ALLOW_FAILURE = 'ALLOW_FAILURE',
+}
 
-/**
- * @enum {string}
- */
-export const OrderCancelReplaceSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type OrderCancelReplaceSideEnum =
-    (typeof OrderCancelReplaceSideEnum)[keyof typeof OrderCancelReplaceSideEnum];
+export enum OrderCancelReplaceSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-/**
- * @enum {string}
- */
-export const OrderCancelReplaceTypeEnum = {
-    MARKET: 'MARKET',
-    LIMIT: 'LIMIT',
-    STOP_LOSS: 'STOP_LOSS',
-    STOP_LOSS_LIMIT: 'STOP_LOSS_LIMIT',
-    TAKE_PROFIT: 'TAKE_PROFIT',
-    TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
-    LIMIT_MAKER: 'LIMIT_MAKER',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type OrderCancelReplaceTypeEnum =
-    (typeof OrderCancelReplaceTypeEnum)[keyof typeof OrderCancelReplaceTypeEnum];
+export enum OrderCancelReplaceTypeEnum {
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+    STOP_LOSS = 'STOP_LOSS',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
 
-/**
- * @enum {string}
- */
-export const OrderCancelReplaceTimeInForceEnum = {
-    GTC: 'GTC',
-    IOC: 'IOC',
-    FOK: 'FOK',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type OrderCancelReplaceTimeInForceEnum =
-    (typeof OrderCancelReplaceTimeInForceEnum)[keyof typeof OrderCancelReplaceTimeInForceEnum];
+export enum OrderCancelReplaceTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
 
-/**
- * @enum {string}
- */
-export const OrderCancelReplaceNewOrderRespTypeEnum = {
-    ACK: 'ACK',
-    RESULT: 'RESULT',
-    FULL: 'FULL',
-    MARKET: 'MARKET',
-    LIMIT: 'LIMIT',
-} as const;
-export type OrderCancelReplaceNewOrderRespTypeEnum =
-    (typeof OrderCancelReplaceNewOrderRespTypeEnum)[keyof typeof OrderCancelReplaceNewOrderRespTypeEnum];
+export enum OrderCancelReplaceNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+}
 
-/**
- * @enum {string}
- */
-export const OrderCancelReplaceSelfTradePreventionModeEnum = {
-    NONE: 'NONE',
-    EXPIRE_TAKER: 'EXPIRE_TAKER',
-    EXPIRE_MAKER: 'EXPIRE_MAKER',
-    EXPIRE_BOTH: 'EXPIRE_BOTH',
-    DECREMENT: 'DECREMENT',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type OrderCancelReplaceSelfTradePreventionModeEnum =
-    (typeof OrderCancelReplaceSelfTradePreventionModeEnum)[keyof typeof OrderCancelReplaceSelfTradePreventionModeEnum];
+export enum OrderCancelReplaceSelfTradePreventionModeEnum {
+    NONE = 'NONE',
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    DECREMENT = 'DECREMENT',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
 
-/**
- * @enum {string}
- */
-export const OrderCancelReplaceCancelRestrictionsEnum = {
-    ONLY_NEW: 'ONLY_NEW',
-    NEW: 'NEW',
-    ONLY_PARTIALLY_FILLED: 'ONLY_PARTIALLY_FILLED',
-    PARTIALLY_FILLED: 'PARTIALLY_FILLED',
-} as const;
-export type OrderCancelReplaceCancelRestrictionsEnum =
-    (typeof OrderCancelReplaceCancelRestrictionsEnum)[keyof typeof OrderCancelReplaceCancelRestrictionsEnum];
+export enum OrderCancelReplaceCancelRestrictionsEnum {
+    ONLY_NEW = 'ONLY_NEW',
+    NEW = 'NEW',
+    ONLY_PARTIALLY_FILLED = 'ONLY_PARTIALLY_FILLED',
+    PARTIALLY_FILLED = 'PARTIALLY_FILLED',
+}
 
-/**
- * @enum {string}
- */
-export const OrderCancelReplaceOrderRateLimitExceededModeEnum = {
-    DO_NOTHING: 'DO_NOTHING',
-    CANCEL_ONLY: 'CANCEL_ONLY',
-} as const;
-export type OrderCancelReplaceOrderRateLimitExceededModeEnum =
-    (typeof OrderCancelReplaceOrderRateLimitExceededModeEnum)[keyof typeof OrderCancelReplaceOrderRateLimitExceededModeEnum];
+export enum OrderCancelReplaceOrderRateLimitExceededModeEnum {
+    DO_NOTHING = 'DO_NOTHING',
+    CANCEL_ONLY = 'CANCEL_ONLY',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type OrderListPlaceSideEnum =
-    (typeof OrderListPlaceSideEnum)[keyof typeof OrderListPlaceSideEnum];
+export enum OrderListPlaceSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceStopLimitTimeInForceEnum = {
-    GTC: 'GTC',
-    FOK: 'FOK',
-    IOC: 'IOC',
-} as const;
-export type OrderListPlaceStopLimitTimeInForceEnum =
-    (typeof OrderListPlaceStopLimitTimeInForceEnum)[keyof typeof OrderListPlaceStopLimitTimeInForceEnum];
+export enum OrderListPlaceStopLimitTimeInForceEnum {
+    GTC = 'GTC',
+    FOK = 'FOK',
+    IOC = 'IOC',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceNewOrderRespTypeEnum = {
-    ACK: 'ACK',
-    RESULT: 'RESULT',
-    FULL: 'FULL',
-    MARKET: 'MARKET',
-    LIMIT: 'LIMIT',
-} as const;
-export type OrderListPlaceNewOrderRespTypeEnum =
-    (typeof OrderListPlaceNewOrderRespTypeEnum)[keyof typeof OrderListPlaceNewOrderRespTypeEnum];
+export enum OrderListPlaceNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceSelfTradePreventionModeEnum = {
-    NONE: 'NONE',
-    EXPIRE_TAKER: 'EXPIRE_TAKER',
-    EXPIRE_MAKER: 'EXPIRE_MAKER',
-    EXPIRE_BOTH: 'EXPIRE_BOTH',
-    DECREMENT: 'DECREMENT',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type OrderListPlaceSelfTradePreventionModeEnum =
-    (typeof OrderListPlaceSelfTradePreventionModeEnum)[keyof typeof OrderListPlaceSelfTradePreventionModeEnum];
+export enum OrderListPlaceSelfTradePreventionModeEnum {
+    NONE = 'NONE',
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    DECREMENT = 'DECREMENT',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceOcoSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type OrderListPlaceOcoSideEnum =
-    (typeof OrderListPlaceOcoSideEnum)[keyof typeof OrderListPlaceOcoSideEnum];
+export enum OrderListPlaceOcoSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceOcoAboveTypeEnum = {
-    STOP_LOSS_LIMIT: 'STOP_LOSS_LIMIT',
-    STOP_LOSS: 'STOP_LOSS',
-    LIMIT_MAKER: 'LIMIT_MAKER',
-    TAKE_PROFIT: 'TAKE_PROFIT',
-    TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
-} as const;
-export type OrderListPlaceOcoAboveTypeEnum =
-    (typeof OrderListPlaceOcoAboveTypeEnum)[keyof typeof OrderListPlaceOcoAboveTypeEnum];
+export enum OrderListPlaceOcoAboveTypeEnum {
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    STOP_LOSS = 'STOP_LOSS',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceOcoBelowTypeEnum = {
-    STOP_LOSS: 'STOP_LOSS',
-    STOP_LOSS_LIMIT: 'STOP_LOSS_LIMIT',
-    TAKE_PROFIT: 'TAKE_PROFIT',
-    TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
-} as const;
-export type OrderListPlaceOcoBelowTypeEnum =
-    (typeof OrderListPlaceOcoBelowTypeEnum)[keyof typeof OrderListPlaceOcoBelowTypeEnum];
+export enum OrderListPlaceOcoBelowTypeEnum {
+    STOP_LOSS = 'STOP_LOSS',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceOcoBelowTimeInForceEnum = {
-    belowType: 'belowType',
-    STOP_LOSS_LIMIT: 'STOP_LOSS_LIMIT',
-    TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
-} as const;
-export type OrderListPlaceOcoBelowTimeInForceEnum =
-    (typeof OrderListPlaceOcoBelowTimeInForceEnum)[keyof typeof OrderListPlaceOcoBelowTimeInForceEnum];
+export enum OrderListPlaceOcoBelowTimeInForceEnum {
+    belowType = 'belowType',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceOcoNewOrderRespTypeEnum = {
-    ACK: 'ACK',
-    RESULT: 'RESULT',
-    FULL: 'FULL',
-    MARKET: 'MARKET',
-    LIMIT: 'LIMIT',
-} as const;
-export type OrderListPlaceOcoNewOrderRespTypeEnum =
-    (typeof OrderListPlaceOcoNewOrderRespTypeEnum)[keyof typeof OrderListPlaceOcoNewOrderRespTypeEnum];
+export enum OrderListPlaceOcoNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceOcoSelfTradePreventionModeEnum = {
-    NONE: 'NONE',
-    EXPIRE_TAKER: 'EXPIRE_TAKER',
-    EXPIRE_MAKER: 'EXPIRE_MAKER',
-    EXPIRE_BOTH: 'EXPIRE_BOTH',
-    DECREMENT: 'DECREMENT',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type OrderListPlaceOcoSelfTradePreventionModeEnum =
-    (typeof OrderListPlaceOcoSelfTradePreventionModeEnum)[keyof typeof OrderListPlaceOcoSelfTradePreventionModeEnum];
+export enum OrderListPlaceOcoSelfTradePreventionModeEnum {
+    NONE = 'NONE',
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    DECREMENT = 'DECREMENT',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceOtoWorkingTypeEnum = {
-    LIMIT: 'LIMIT',
-    LIMIT_MAKER: 'LIMIT_MAKER',
-} as const;
-export type OrderListPlaceOtoWorkingTypeEnum =
-    (typeof OrderListPlaceOtoWorkingTypeEnum)[keyof typeof OrderListPlaceOtoWorkingTypeEnum];
+export enum OrderListPlaceOtoWorkingTypeEnum {
+    LIMIT = 'LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceOtoWorkingSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type OrderListPlaceOtoWorkingSideEnum =
-    (typeof OrderListPlaceOtoWorkingSideEnum)[keyof typeof OrderListPlaceOtoWorkingSideEnum];
+export enum OrderListPlaceOtoWorkingSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceOtoPendingTypeEnum = {
-    LIMIT: 'LIMIT',
-    MARKET: 'MARKET',
-    STOP_LOSS: 'STOP_LOSS',
-    STOP_LOSS_LIMIT: 'STOP_LOSS_LIMIT',
-    TAKE_PROFIT: 'TAKE_PROFIT',
-    TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
-    LIMIT_MAKER: 'LIMIT_MAKER',
-} as const;
-export type OrderListPlaceOtoPendingTypeEnum =
-    (typeof OrderListPlaceOtoPendingTypeEnum)[keyof typeof OrderListPlaceOtoPendingTypeEnum];
+export enum OrderListPlaceOtoPendingTypeEnum {
+    LIMIT = 'LIMIT',
+    MARKET = 'MARKET',
+    STOP_LOSS = 'STOP_LOSS',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceOtoPendingSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type OrderListPlaceOtoPendingSideEnum =
-    (typeof OrderListPlaceOtoPendingSideEnum)[keyof typeof OrderListPlaceOtoPendingSideEnum];
+export enum OrderListPlaceOtoPendingSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceOtoNewOrderRespTypeEnum = {
-    ACK: 'ACK',
-    RESULT: 'RESULT',
-    FULL: 'FULL',
-    MARKET: 'MARKET',
-    LIMIT: 'LIMIT',
-} as const;
-export type OrderListPlaceOtoNewOrderRespTypeEnum =
-    (typeof OrderListPlaceOtoNewOrderRespTypeEnum)[keyof typeof OrderListPlaceOtoNewOrderRespTypeEnum];
+export enum OrderListPlaceOtoNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceOtoSelfTradePreventionModeEnum = {
-    NONE: 'NONE',
-    EXPIRE_TAKER: 'EXPIRE_TAKER',
-    EXPIRE_MAKER: 'EXPIRE_MAKER',
-    EXPIRE_BOTH: 'EXPIRE_BOTH',
-    DECREMENT: 'DECREMENT',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type OrderListPlaceOtoSelfTradePreventionModeEnum =
-    (typeof OrderListPlaceOtoSelfTradePreventionModeEnum)[keyof typeof OrderListPlaceOtoSelfTradePreventionModeEnum];
+export enum OrderListPlaceOtoSelfTradePreventionModeEnum {
+    NONE = 'NONE',
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    DECREMENT = 'DECREMENT',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceOtoWorkingTimeInForceEnum = {
-    GTC: 'GTC',
-    IOC: 'IOC',
-    FOK: 'FOK',
-} as const;
-export type OrderListPlaceOtoWorkingTimeInForceEnum =
-    (typeof OrderListPlaceOtoWorkingTimeInForceEnum)[keyof typeof OrderListPlaceOtoWorkingTimeInForceEnum];
+export enum OrderListPlaceOtoWorkingTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceOtoPendingTimeInForceEnum = {
-    GTC: 'GTC',
-    IOC: 'IOC',
-    FOK: 'FOK',
-} as const;
-export type OrderListPlaceOtoPendingTimeInForceEnum =
-    (typeof OrderListPlaceOtoPendingTimeInForceEnum)[keyof typeof OrderListPlaceOtoPendingTimeInForceEnum];
+export enum OrderListPlaceOtoPendingTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceOtocoWorkingTypeEnum = {
-    LIMIT: 'LIMIT',
-    LIMIT_MAKER: 'LIMIT_MAKER',
-} as const;
-export type OrderListPlaceOtocoWorkingTypeEnum =
-    (typeof OrderListPlaceOtocoWorkingTypeEnum)[keyof typeof OrderListPlaceOtocoWorkingTypeEnum];
+export enum OrderListPlaceOtocoWorkingTypeEnum {
+    LIMIT = 'LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceOtocoWorkingSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type OrderListPlaceOtocoWorkingSideEnum =
-    (typeof OrderListPlaceOtocoWorkingSideEnum)[keyof typeof OrderListPlaceOtocoWorkingSideEnum];
+export enum OrderListPlaceOtocoWorkingSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceOtocoPendingSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type OrderListPlaceOtocoPendingSideEnum =
-    (typeof OrderListPlaceOtocoPendingSideEnum)[keyof typeof OrderListPlaceOtocoPendingSideEnum];
+export enum OrderListPlaceOtocoPendingSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceOtocoPendingAboveTypeEnum = {
-    STOP_LOSS_LIMIT: 'STOP_LOSS_LIMIT',
-    STOP_LOSS: 'STOP_LOSS',
-    LIMIT_MAKER: 'LIMIT_MAKER',
-    TAKE_PROFIT: 'TAKE_PROFIT',
-    TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
-} as const;
-export type OrderListPlaceOtocoPendingAboveTypeEnum =
-    (typeof OrderListPlaceOtocoPendingAboveTypeEnum)[keyof typeof OrderListPlaceOtocoPendingAboveTypeEnum];
+export enum OrderListPlaceOtocoPendingAboveTypeEnum {
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    STOP_LOSS = 'STOP_LOSS',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceOtocoNewOrderRespTypeEnum = {
-    ACK: 'ACK',
-    RESULT: 'RESULT',
-    FULL: 'FULL',
-    MARKET: 'MARKET',
-    LIMIT: 'LIMIT',
-} as const;
-export type OrderListPlaceOtocoNewOrderRespTypeEnum =
-    (typeof OrderListPlaceOtocoNewOrderRespTypeEnum)[keyof typeof OrderListPlaceOtocoNewOrderRespTypeEnum];
+export enum OrderListPlaceOtocoNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceOtocoSelfTradePreventionModeEnum = {
-    NONE: 'NONE',
-    EXPIRE_TAKER: 'EXPIRE_TAKER',
-    EXPIRE_MAKER: 'EXPIRE_MAKER',
-    EXPIRE_BOTH: 'EXPIRE_BOTH',
-    DECREMENT: 'DECREMENT',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type OrderListPlaceOtocoSelfTradePreventionModeEnum =
-    (typeof OrderListPlaceOtocoSelfTradePreventionModeEnum)[keyof typeof OrderListPlaceOtocoSelfTradePreventionModeEnum];
+export enum OrderListPlaceOtocoSelfTradePreventionModeEnum {
+    NONE = 'NONE',
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    DECREMENT = 'DECREMENT',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceOtocoWorkingTimeInForceEnum = {
-    GTC: 'GTC',
-    IOC: 'IOC',
-    FOK: 'FOK',
-} as const;
-export type OrderListPlaceOtocoWorkingTimeInForceEnum =
-    (typeof OrderListPlaceOtocoWorkingTimeInForceEnum)[keyof typeof OrderListPlaceOtocoWorkingTimeInForceEnum];
+export enum OrderListPlaceOtocoWorkingTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceOtocoPendingAboveTimeInForceEnum = {
-    GTC: 'GTC',
-    IOC: 'IOC',
-    FOK: 'FOK',
-} as const;
-export type OrderListPlaceOtocoPendingAboveTimeInForceEnum =
-    (typeof OrderListPlaceOtocoPendingAboveTimeInForceEnum)[keyof typeof OrderListPlaceOtocoPendingAboveTimeInForceEnum];
+export enum OrderListPlaceOtocoPendingAboveTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceOtocoPendingBelowTypeEnum = {
-    STOP_LOSS: 'STOP_LOSS',
-    STOP_LOSS_LIMIT: 'STOP_LOSS_LIMIT',
-    TAKE_PROFIT: 'TAKE_PROFIT',
-    TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
-} as const;
-export type OrderListPlaceOtocoPendingBelowTypeEnum =
-    (typeof OrderListPlaceOtocoPendingBelowTypeEnum)[keyof typeof OrderListPlaceOtocoPendingBelowTypeEnum];
+export enum OrderListPlaceOtocoPendingBelowTypeEnum {
+    STOP_LOSS = 'STOP_LOSS',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+}
 
-/**
- * @enum {string}
- */
-export const OrderListPlaceOtocoPendingBelowTimeInForceEnum = {
-    GTC: 'GTC',
-    IOC: 'IOC',
-    FOK: 'FOK',
-} as const;
-export type OrderListPlaceOtocoPendingBelowTimeInForceEnum =
-    (typeof OrderListPlaceOtocoPendingBelowTimeInForceEnum)[keyof typeof OrderListPlaceOtocoPendingBelowTimeInForceEnum];
+export enum OrderListPlaceOtocoPendingBelowTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
 
-/**
- * @enum {string}
- */
-export const OrderPlaceSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type OrderPlaceSideEnum = (typeof OrderPlaceSideEnum)[keyof typeof OrderPlaceSideEnum];
+export enum OrderPlaceSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-/**
- * @enum {string}
- */
-export const OrderPlaceTypeEnum = {
-    MARKET: 'MARKET',
-    LIMIT: 'LIMIT',
-    STOP_LOSS: 'STOP_LOSS',
-    STOP_LOSS_LIMIT: 'STOP_LOSS_LIMIT',
-    TAKE_PROFIT: 'TAKE_PROFIT',
-    TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
-    LIMIT_MAKER: 'LIMIT_MAKER',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type OrderPlaceTypeEnum = (typeof OrderPlaceTypeEnum)[keyof typeof OrderPlaceTypeEnum];
+export enum OrderPlaceTypeEnum {
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+    STOP_LOSS = 'STOP_LOSS',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
 
-/**
- * @enum {string}
- */
-export const OrderPlaceTimeInForceEnum = {
-    GTC: 'GTC',
-    IOC: 'IOC',
-    FOK: 'FOK',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type OrderPlaceTimeInForceEnum =
-    (typeof OrderPlaceTimeInForceEnum)[keyof typeof OrderPlaceTimeInForceEnum];
+export enum OrderPlaceTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
 
-/**
- * @enum {string}
- */
-export const OrderPlaceNewOrderRespTypeEnum = {
-    ACK: 'ACK',
-    RESULT: 'RESULT',
-    FULL: 'FULL',
-    MARKET: 'MARKET',
-    LIMIT: 'LIMIT',
-} as const;
-export type OrderPlaceNewOrderRespTypeEnum =
-    (typeof OrderPlaceNewOrderRespTypeEnum)[keyof typeof OrderPlaceNewOrderRespTypeEnum];
+export enum OrderPlaceNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+}
 
-/**
- * @enum {string}
- */
-export const OrderPlaceSelfTradePreventionModeEnum = {
-    NONE: 'NONE',
-    EXPIRE_TAKER: 'EXPIRE_TAKER',
-    EXPIRE_MAKER: 'EXPIRE_MAKER',
-    EXPIRE_BOTH: 'EXPIRE_BOTH',
-    DECREMENT: 'DECREMENT',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type OrderPlaceSelfTradePreventionModeEnum =
-    (typeof OrderPlaceSelfTradePreventionModeEnum)[keyof typeof OrderPlaceSelfTradePreventionModeEnum];
+export enum OrderPlaceSelfTradePreventionModeEnum {
+    NONE = 'NONE',
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    DECREMENT = 'DECREMENT',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
 
-/**
- * @enum {string}
- */
-export const SorOrderPlaceSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type SorOrderPlaceSideEnum =
-    (typeof SorOrderPlaceSideEnum)[keyof typeof SorOrderPlaceSideEnum];
+export enum SorOrderPlaceSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-/**
- * @enum {string}
- */
-export const SorOrderPlaceTypeEnum = {
-    MARKET: 'MARKET',
-    LIMIT: 'LIMIT',
-    STOP_LOSS: 'STOP_LOSS',
-    STOP_LOSS_LIMIT: 'STOP_LOSS_LIMIT',
-    TAKE_PROFIT: 'TAKE_PROFIT',
-    TAKE_PROFIT_LIMIT: 'TAKE_PROFIT_LIMIT',
-    LIMIT_MAKER: 'LIMIT_MAKER',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type SorOrderPlaceTypeEnum =
-    (typeof SorOrderPlaceTypeEnum)[keyof typeof SorOrderPlaceTypeEnum];
+export enum SorOrderPlaceTypeEnum {
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+    STOP_LOSS = 'STOP_LOSS',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
 
-/**
- * @enum {string}
- */
-export const SorOrderPlaceTimeInForceEnum = {
-    GTC: 'GTC',
-    IOC: 'IOC',
-    FOK: 'FOK',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type SorOrderPlaceTimeInForceEnum =
-    (typeof SorOrderPlaceTimeInForceEnum)[keyof typeof SorOrderPlaceTimeInForceEnum];
+export enum SorOrderPlaceTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
 
-/**
- * @enum {string}
- */
-export const SorOrderPlaceNewOrderRespTypeEnum = {
-    ACK: 'ACK',
-    RESULT: 'RESULT',
-    FULL: 'FULL',
-    MARKET: 'MARKET',
-    LIMIT: 'LIMIT',
-} as const;
-export type SorOrderPlaceNewOrderRespTypeEnum =
-    (typeof SorOrderPlaceNewOrderRespTypeEnum)[keyof typeof SorOrderPlaceNewOrderRespTypeEnum];
+export enum SorOrderPlaceNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+}
 
-/**
- * @enum {string}
- */
-export const SorOrderPlaceSelfTradePreventionModeEnum = {
-    NONE: 'NONE',
-    EXPIRE_TAKER: 'EXPIRE_TAKER',
-    EXPIRE_MAKER: 'EXPIRE_MAKER',
-    EXPIRE_BOTH: 'EXPIRE_BOTH',
-    DECREMENT: 'DECREMENT',
-    NON_REPRESENTABLE: 'NON_REPRESENTABLE',
-} as const;
-export type SorOrderPlaceSelfTradePreventionModeEnum =
-    (typeof SorOrderPlaceSelfTradePreventionModeEnum)[keyof typeof SorOrderPlaceSelfTradePreventionModeEnum];
+export enum SorOrderPlaceSelfTradePreventionModeEnum {
+    NONE = 'NONE',
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    DECREMENT = 'DECREMENT',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}

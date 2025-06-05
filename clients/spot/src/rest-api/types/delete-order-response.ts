@@ -83,6 +83,12 @@ export interface DeleteOrderResponse {
      * @type {string}
      * @memberof DeleteOrderResponse
      */
+    origQuoteOrderQty?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof DeleteOrderResponse
+     */
     cummulativeQuoteQty?: string;
     /**
      *

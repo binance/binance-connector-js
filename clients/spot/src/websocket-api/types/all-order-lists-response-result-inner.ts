@@ -26,55 +26,55 @@ import type { OrderListCancelResponseResultOrdersInner } from './order-list-canc
 /**
  *
  * @export
- * @interface OrderListStatusResponseResult
+ * @interface AllOrderListsResponseResultInner
  */
-export interface OrderListStatusResponseResult {
+export interface AllOrderListsResponseResultInner {
     /**
      *
      * @type {number}
-     * @memberof OrderListStatusResponseResult
+     * @memberof AllOrderListsResponseResultInner
      */
     orderListId?: number;
     /**
      *
      * @type {string}
-     * @memberof OrderListStatusResponseResult
+     * @memberof AllOrderListsResponseResultInner
      */
     contingencyType?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderListStatusResponseResult
+     * @memberof AllOrderListsResponseResultInner
      */
     listStatusType?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderListStatusResponseResult
+     * @memberof AllOrderListsResponseResultInner
      */
     listOrderStatus?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderListStatusResponseResult
+     * @memberof AllOrderListsResponseResultInner
      */
     listClientOrderId?: string;
     /**
      *
      * @type {number}
-     * @memberof OrderListStatusResponseResult
+     * @memberof AllOrderListsResponseResultInner
      */
     transactionTime?: number;
     /**
      *
      * @type {string}
-     * @memberof OrderListStatusResponseResult
+     * @memberof AllOrderListsResponseResultInner
      */
     symbol?: string;
     /**
      *
      * @type {Array<OrderListCancelResponseResultOrdersInner>}
-     * @memberof OrderListStatusResponseResult
+     * @memberof AllOrderListsResponseResultInner
      */
     orders?: Array<OrderListCancelResponseResultOrdersInner>;
 }

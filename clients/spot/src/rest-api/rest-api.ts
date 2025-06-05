@@ -25,10 +25,16 @@ import { UserDataStreamApi } from './modules/user-data-stream-api';
 
 import type {
     AccountCommissionRequest,
+    AllOrderListRequest,
+    AllOrdersRequest,
     GetAccountRequest,
+    GetOpenOrdersRequest,
+    GetOrderRequest,
+    GetOrderListRequest,
     MyAllocationsRequest,
     MyPreventedMatchesRequest,
     MyTradesRequest,
+    OpenOrderListRequest,
     OrderAmendmentsRequest,
     RateLimitOrderRequest,
 } from './modules/account-api';
@@ -48,16 +54,10 @@ import type {
     UiKlinesRequest,
 } from './modules/market-api';
 import type {
-    AllOrderListRequest,
-    AllOrdersRequest,
     DeleteOpenOrdersRequest,
     DeleteOrderRequest,
     DeleteOrderListRequest,
-    GetOpenOrdersRequest,
-    GetOrderRequest,
-    GetOrderListRequest,
     NewOrderRequest,
-    OpenOrderListRequest,
     OrderAmendKeepPriorityRequest,
     OrderCancelReplaceRequest,
     OrderListOcoRequest,
@@ -75,10 +75,16 @@ import type {
 
 import type {
     AccountCommissionResponse,
+    AllOrderListResponse,
+    AllOrdersResponse,
     GetAccountResponse,
+    GetOpenOrdersResponse,
+    GetOrderResponse,
+    GetOrderListResponse,
     MyAllocationsResponse,
     MyPreventedMatchesResponse,
     MyTradesResponse,
+    OpenOrderListResponse,
     OrderAmendmentsResponse,
     RateLimitOrderResponse,
 } from './types';
@@ -98,16 +104,10 @@ import type {
     UiKlinesResponse,
 } from './types';
 import type {
-    AllOrderListResponse,
-    AllOrdersResponse,
     DeleteOpenOrdersResponse,
     DeleteOrderResponse,
     DeleteOrderListResponse,
-    GetOpenOrdersResponse,
-    GetOrderResponse,
-    GetOrderListResponse,
     NewOrderResponse,
-    OpenOrderListResponse,
     OrderAmendKeepPriorityResponse,
     OrderCancelReplaceResponse,
     OrderListOcoResponse,
@@ -190,6 +190,38 @@ export class RestAPI {
     }
 
     /**
+     * Retrieves all order lists based on provided optional parameters.
+     *
+     * Note that the time between `startTime` and `endTime` can't be longer than 24 hours.
+     * Weight: 20
+     *
+     * @summary Query all Order lists
+     * @param {AllOrderListRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<AllOrderListResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-all-order-lists-user_data Binance API Documentation}
+     */
+    allOrderList(
+        requestParameters: AllOrderListRequest = {}
+    ): Promise<RestApiResponse<AllOrderListResponse>> {
+        return this.accountApi.allOrderList(requestParameters);
+    }
+
+    /**
+     * Get all account orders; active, canceled, or filled.
+     * Weight: 20
+     *
+     * @summary All orders
+     * @param {AllOrdersRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<AllOrdersResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#all-orders-user_data Binance API Documentation}
+     */
+    allOrders(requestParameters: AllOrdersRequest): Promise<RestApiResponse<AllOrdersResponse>> {
+        return this.accountApi.allOrders(requestParameters);
+    }
+
+    /**
      * Get current account information.
      * Weight: 20
      *
@@ -203,6 +235,52 @@ export class RestAPI {
         requestParameters: GetAccountRequest = {}
     ): Promise<RestApiResponse<GetAccountResponse>> {
         return this.accountApi.getAccount(requestParameters);
+    }
+
+    /**
+     * Get all open orders on a symbol. **Careful** when accessing this with no symbol.
+     * Weight: 6 for a single symbol; **80** when the symbol parameter is omitted
+     *
+     * @summary Current open orders
+     * @param {GetOpenOrdersRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetOpenOrdersResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#current-open-orders-user_data Binance API Documentation}
+     */
+    getOpenOrders(
+        requestParameters: GetOpenOrdersRequest = {}
+    ): Promise<RestApiResponse<GetOpenOrdersResponse>> {
+        return this.accountApi.getOpenOrders(requestParameters);
+    }
+
+    /**
+     * Check an order's status.
+     * Weight: 4
+     *
+     * @summary Query order
+     * @param {GetOrderRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetOrderResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-order-user_data Binance API Documentation}
+     */
+    getOrder(requestParameters: GetOrderRequest): Promise<RestApiResponse<GetOrderResponse>> {
+        return this.accountApi.getOrder(requestParameters);
+    }
+
+    /**
+     * Retrieves a specific order list based on provided optional parameters.
+     * Weight: 4
+     *
+     * @summary Query Order list
+     * @param {GetOrderListRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetOrderListResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-order-list-user_data Binance API Documentation}
+     */
+    getOrderList(
+        requestParameters: GetOrderListRequest = {}
+    ): Promise<RestApiResponse<GetOrderListResponse>> {
+        return this.accountApi.getOrderList(requestParameters);
     }
 
     /**
@@ -263,6 +341,22 @@ export class RestAPI {
      */
     myTrades(requestParameters: MyTradesRequest): Promise<RestApiResponse<MyTradesResponse>> {
         return this.accountApi.myTrades(requestParameters);
+    }
+
+    /**
+     *
+     * Weight: 6
+     *
+     * @summary Query Open Order lists
+     * @param {OpenOrderListRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<OpenOrderListResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-open-order-lists-user_data Binance API Documentation}
+     */
+    openOrderList(
+        requestParameters: OpenOrderListRequest = {}
+    ): Promise<RestApiResponse<OpenOrderListResponse>> {
+        return this.accountApi.openOrderList(requestParameters);
     }
 
     /**
@@ -612,38 +706,6 @@ export class RestAPI {
     }
 
     /**
-     * Retrieves all order lists based on provided optional parameters.
-     *
-     * Note that the time between `startTime` and `endTime` can't be longer than 24 hours.
-     * Weight: 20
-     *
-     * @summary Query all Order lists
-     * @param {AllOrderListRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<AllOrderListResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#query-all-order-lists-user_data Binance API Documentation}
-     */
-    allOrderList(
-        requestParameters: AllOrderListRequest = {}
-    ): Promise<RestApiResponse<AllOrderListResponse>> {
-        return this.tradeApi.allOrderList(requestParameters);
-    }
-
-    /**
-     * Get all account orders; active, canceled, or filled.
-     * Weight: 20
-     *
-     * @summary All orders
-     * @param {AllOrdersRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<AllOrdersResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#all-orders-user_data Binance API Documentation}
-     */
-    allOrders(requestParameters: AllOrdersRequest): Promise<RestApiResponse<AllOrdersResponse>> {
-        return this.tradeApi.allOrders(requestParameters);
-    }
-
-    /**
      * Cancels all active orders on a symbol.
      * This includes orders that are part of an order list.
      * Weight: 1
@@ -693,52 +755,6 @@ export class RestAPI {
     }
 
     /**
-     * Get all open orders on a symbol. **Careful** when accessing this with no symbol.
-     * Weight: 6 for a single symbol; **80** when the symbol parameter is omitted
-     *
-     * @summary Current open orders
-     * @param {GetOpenOrdersRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetOpenOrdersResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#current-open-orders-user_data Binance API Documentation}
-     */
-    getOpenOrders(
-        requestParameters: GetOpenOrdersRequest = {}
-    ): Promise<RestApiResponse<GetOpenOrdersResponse>> {
-        return this.tradeApi.getOpenOrders(requestParameters);
-    }
-
-    /**
-     * Check an order's status.
-     * Weight: 4
-     *
-     * @summary Query order
-     * @param {GetOrderRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetOrderResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#query-order-user_data Binance API Documentation}
-     */
-    getOrder(requestParameters: GetOrderRequest): Promise<RestApiResponse<GetOrderResponse>> {
-        return this.tradeApi.getOrder(requestParameters);
-    }
-
-    /**
-     * Retrieves a specific order list based on provided optional parameters.
-     * Weight: 4
-     *
-     * @summary Query Order list
-     * @param {GetOrderListRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetOrderListResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#query-order-list-user_data Binance API Documentation}
-     */
-    getOrderList(
-        requestParameters: GetOrderListRequest = {}
-    ): Promise<RestApiResponse<GetOrderListResponse>> {
-        return this.tradeApi.getOrderList(requestParameters);
-    }
-
-    /**
      * Send in a new order.
      *
      * This adds 1 order to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
@@ -752,22 +768,6 @@ export class RestAPI {
      */
     newOrder(requestParameters: NewOrderRequest): Promise<RestApiResponse<NewOrderResponse>> {
         return this.tradeApi.newOrder(requestParameters);
-    }
-
-    /**
-     *
-     * Weight: 6
-     *
-     * @summary Query Open Order lists
-     * @param {OpenOrderListRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<OpenOrderListResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#query-open-order-lists-user_data Binance API Documentation}
-     */
-    openOrderList(
-        requestParameters: OpenOrderListRequest = {}
-    ): Promise<RestApiResponse<OpenOrderListResponse>> {
-        return this.tradeApi.openOrderList(requestParameters);
     }
 
     /**
@@ -840,7 +840,7 @@ export class RestAPI {
     }
 
     /**
-     * Places an OTO.
+     * Place an OTO.
      *
      * An OTO (One-Triggers-the-Other) is an order list comprised of 2 orders.
      * The first order is called the **working order** and must be `LIMIT` or `LIMIT_MAKER`. Initially, only the working order goes on the order book.

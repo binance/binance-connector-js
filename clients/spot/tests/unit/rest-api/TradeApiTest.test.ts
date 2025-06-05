@@ -70,16 +70,10 @@ import {
     SorOrderSelfTradePreventionModeEnum,
 } from '../../../src/rest-api';
 import {
-    AllOrderListRequest,
-    AllOrdersRequest,
     DeleteOpenOrdersRequest,
     DeleteOrderRequest,
     DeleteOrderListRequest,
-    GetOpenOrdersRequest,
-    GetOrderRequest,
-    GetOrderListRequest,
     NewOrderRequest,
-    OpenOrderListRequest,
     OrderAmendKeepPriorityRequest,
     OrderCancelReplaceRequest,
     OrderListOcoRequest,
@@ -91,16 +85,10 @@ import {
     SorOrderTestRequest,
 } from '../../../src/rest-api';
 import type {
-    AllOrderListResponse,
-    AllOrdersResponse,
     DeleteOpenOrdersResponse,
     DeleteOrderListResponse,
     DeleteOrderResponse,
-    GetOpenOrdersResponse,
-    GetOrderListResponse,
-    GetOrderResponse,
     NewOrderResponse,
-    OpenOrderListResponse,
     OrderAmendKeepPriorityResponse,
     OrderCancelReplaceResponse,
     OrderListOcoResponse,
@@ -126,245 +114,6 @@ describe('TradeApi', () => {
         client = new TradeApi(config);
     });
 
-    describe('allOrderList()', () => {
-        it('should execute allOrderList() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    orderListId: 29,
-                    contingencyType: 'OCO',
-                    listStatusType: 'EXEC_STARTED',
-                    listOrderStatus: 'EXECUTING',
-                    listClientOrderId: 'amEEAXryFzFwYF1FeRpUoZ',
-                    transactionTime: 1565245913483,
-                    symbol: 'LTCBTC',
-                    orders: [
-                        { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'Jr1h6xirOxgeJOUuYQS7V3' },
-                        { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'oD7aesZqjEGlZrbtRpy5zB' },
-                    ],
-                },
-                {
-                    orderListId: 28,
-                    contingencyType: 'OCO',
-                    listStatusType: 'EXEC_STARTED',
-                    listOrderStatus: 'EXECUTING',
-                    listClientOrderId: 'hG7hFNxJV6cZy3Ze4AUT4d',
-                    transactionTime: 1565245913407,
-                    symbol: 'LTCBTC',
-                    orders: [
-                        { symbol: 'LTCBTC', orderId: 2, clientOrderId: 'j6lFOfbmFMRjTYA7rRJ0LP' },
-                        { symbol: 'LTCBTC', orderId: 3, clientOrderId: 'z0KCjOdditiLS5ekAFtK81' },
-                    ],
-                },
-            ];
-
-            const spy = jest.spyOn(client, 'allOrderList').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<AllOrderListResponse>)
-            );
-            const response = await client.allOrderList();
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute allOrderList() successfully with optional parameters', async () => {
-            const params: AllOrderListRequest = {
-                fromId: 1,
-                startTime: 1735693200000,
-                endTime: 1735693200000,
-                limit: 500,
-                recvWindow: 5000,
-            };
-
-            mockResponse = [
-                {
-                    orderListId: 29,
-                    contingencyType: 'OCO',
-                    listStatusType: 'EXEC_STARTED',
-                    listOrderStatus: 'EXECUTING',
-                    listClientOrderId: 'amEEAXryFzFwYF1FeRpUoZ',
-                    transactionTime: 1565245913483,
-                    symbol: 'LTCBTC',
-                    orders: [
-                        { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'Jr1h6xirOxgeJOUuYQS7V3' },
-                        { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'oD7aesZqjEGlZrbtRpy5zB' },
-                    ],
-                },
-                {
-                    orderListId: 28,
-                    contingencyType: 'OCO',
-                    listStatusType: 'EXEC_STARTED',
-                    listOrderStatus: 'EXECUTING',
-                    listClientOrderId: 'hG7hFNxJV6cZy3Ze4AUT4d',
-                    transactionTime: 1565245913407,
-                    symbol: 'LTCBTC',
-                    orders: [
-                        { symbol: 'LTCBTC', orderId: 2, clientOrderId: 'j6lFOfbmFMRjTYA7rRJ0LP' },
-                        { symbol: 'LTCBTC', orderId: 3, clientOrderId: 'z0KCjOdditiLS5ekAFtK81' },
-                    ],
-                },
-            ];
-
-            const spy = jest.spyOn(client, 'allOrderList').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<AllOrderListResponse>)
-            );
-            const response = await client.allOrderList(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest.spyOn(client, 'allOrderList').mockRejectedValueOnce(mockError);
-            await expect(client.allOrderList()).rejects.toThrow('ResponseError');
-            spy.mockRestore();
-        });
-    });
-
-    describe('allOrders()', () => {
-        it('should execute allOrders() successfully with required parameters only', async () => {
-            const params: AllOrdersRequest = {
-                symbol: 'BNBUSDT',
-            };
-
-            mockResponse = [
-                {
-                    symbol: 'LTCBTC',
-                    orderId: 1,
-                    orderListId: -1,
-                    clientOrderId: 'myOrder1',
-                    price: '0.1',
-                    origQty: '1.0',
-                    executedQty: '0.0',
-                    cummulativeQuoteQty: '0.0',
-                    status: 'NEW',
-                    timeInForce: 'GTC',
-                    type: 'LIMIT',
-                    side: 'BUY',
-                    stopPrice: '0.0',
-                    icebergQty: '0.0',
-                    time: 1499827319559,
-                    updateTime: 1499827319559,
-                    isWorking: true,
-                    origQuoteOrderQty: '0.000000',
-                    workingTime: 1499827319559,
-                    selfTradePreventionMode: 'NONE',
-                },
-            ];
-
-            const spy = jest.spyOn(client, 'allOrders').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<AllOrdersResponse>)
-            );
-            const response = await client.allOrders(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute allOrders() successfully with optional parameters', async () => {
-            const params: AllOrdersRequest = {
-                symbol: 'BNBUSDT',
-                orderId: 1,
-                startTime: 1735693200000,
-                endTime: 1735693200000,
-                limit: 500,
-                recvWindow: 5000,
-            };
-
-            mockResponse = [
-                {
-                    symbol: 'LTCBTC',
-                    orderId: 1,
-                    orderListId: -1,
-                    clientOrderId: 'myOrder1',
-                    price: '0.1',
-                    origQty: '1.0',
-                    executedQty: '0.0',
-                    cummulativeQuoteQty: '0.0',
-                    status: 'NEW',
-                    timeInForce: 'GTC',
-                    type: 'LIMIT',
-                    side: 'BUY',
-                    stopPrice: '0.0',
-                    icebergQty: '0.0',
-                    time: 1499827319559,
-                    updateTime: 1499827319559,
-                    isWorking: true,
-                    origQuoteOrderQty: '0.000000',
-                    workingTime: 1499827319559,
-                    selfTradePreventionMode: 'NONE',
-                },
-            ];
-
-            const spy = jest.spyOn(client, 'allOrders').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<AllOrdersResponse>)
-            );
-            const response = await client.allOrders(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw RequiredError when symbol is missing', async () => {
-            const _params: AllOrdersRequest = {
-                symbol: 'BNBUSDT',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.symbol;
-
-            await expect(client.allOrders(params)).rejects.toThrow(
-                'Required parameter symbol was null or undefined when calling allOrders.'
-            );
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const params: AllOrdersRequest = {
-                symbol: 'BNBUSDT',
-            };
-
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest.spyOn(client, 'allOrders').mockRejectedValueOnce(mockError);
-            await expect(client.allOrders(params)).rejects.toThrow('ResponseError');
-            spy.mockRestore();
-        });
-    });
-
     describe('deleteOpenOrders()', () => {
         it('should execute deleteOpenOrders() successfully with required parameters only', async () => {
             const params: DeleteOpenOrdersRequest = {
@@ -382,6 +131,7 @@ describe('TradeApi', () => {
                     price: '0.089853',
                     origQty: '0.178622',
                     executedQty: '0.000000',
+                    origQuoteOrderQty: '0.000000',
                     cummulativeQuoteQty: '0.000000',
                     status: 'CANCELED',
                     timeInForce: 'GTC',
@@ -399,6 +149,7 @@ describe('TradeApi', () => {
                     price: '0.090430',
                     origQty: '0.178622',
                     executedQty: '0.000000',
+                    origQuoteOrderQty: '0.000000',
                     cummulativeQuoteQty: '0.000000',
                     status: 'CANCELED',
                     timeInForce: 'GTC',
@@ -429,6 +180,7 @@ describe('TradeApi', () => {
                             price: '0.668611',
                             origQty: '0.690354',
                             executedQty: '0.000000',
+                            origQuoteOrderQty: '0.000000',
                             cummulativeQuoteQty: '0.000000',
                             status: 'CANCELED',
                             timeInForce: 'GTC',
@@ -448,6 +200,7 @@ describe('TradeApi', () => {
                             price: '0.008791',
                             origQty: '0.690354',
                             executedQty: '0.000000',
+                            origQuoteOrderQty: '0.000000',
                             cummulativeQuoteQty: '0.000000',
                             status: 'CANCELED',
                             timeInForce: 'GTC',
@@ -491,6 +244,7 @@ describe('TradeApi', () => {
                     price: '0.089853',
                     origQty: '0.178622',
                     executedQty: '0.000000',
+                    origQuoteOrderQty: '0.000000',
                     cummulativeQuoteQty: '0.000000',
                     status: 'CANCELED',
                     timeInForce: 'GTC',
@@ -508,6 +262,7 @@ describe('TradeApi', () => {
                     price: '0.090430',
                     origQty: '0.178622',
                     executedQty: '0.000000',
+                    origQuoteOrderQty: '0.000000',
                     cummulativeQuoteQty: '0.000000',
                     status: 'CANCELED',
                     timeInForce: 'GTC',
@@ -538,6 +293,7 @@ describe('TradeApi', () => {
                             price: '0.668611',
                             origQty: '0.690354',
                             executedQty: '0.000000',
+                            origQuoteOrderQty: '0.000000',
                             cummulativeQuoteQty: '0.000000',
                             status: 'CANCELED',
                             timeInForce: 'GTC',
@@ -557,6 +313,7 @@ describe('TradeApi', () => {
                             price: '0.008791',
                             origQty: '0.690354',
                             executedQty: '0.000000',
+                            origQuoteOrderQty: '0.000000',
                             cummulativeQuoteQty: '0.000000',
                             status: 'CANCELED',
                             timeInForce: 'GTC',
@@ -631,6 +388,7 @@ describe('TradeApi', () => {
                 price: '2.00000000',
                 origQty: '1.00000000',
                 executedQty: '0.00000000',
+                origQuoteOrderQty: '0.000000',
                 cummulativeQuoteQty: '0.00000000',
                 status: 'CANCELED',
                 timeInForce: 'GTC',
@@ -673,6 +431,7 @@ describe('TradeApi', () => {
                 price: '2.00000000',
                 origQty: '1.00000000',
                 executedQty: '0.00000000',
+                origQuoteOrderQty: '0.000000',
                 cummulativeQuoteQty: '0.00000000',
                 status: 'CANCELED',
                 timeInForce: 'GTC',
@@ -908,309 +667,6 @@ describe('TradeApi', () => {
         });
     });
 
-    describe('getOpenOrders()', () => {
-        it('should execute getOpenOrders() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    symbol: 'LTCBTC',
-                    orderId: 1,
-                    orderListId: -1,
-                    clientOrderId: 'myOrder1',
-                    price: '0.1',
-                    origQty: '1.0',
-                    executedQty: '0.0',
-                    cummulativeQuoteQty: '0.0',
-                    status: 'NEW',
-                    timeInForce: 'GTC',
-                    type: 'LIMIT',
-                    side: 'BUY',
-                    stopPrice: '0.0',
-                    icebergQty: '0.0',
-                    time: 1499827319559,
-                    updateTime: 1499827319559,
-                    isWorking: true,
-                    origQuoteOrderQty: '0.000000',
-                    workingTime: 1499827319559,
-                    selfTradePreventionMode: 'NONE',
-                },
-            ];
-
-            const spy = jest.spyOn(client, 'getOpenOrders').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<GetOpenOrdersResponse>)
-            );
-            const response = await client.getOpenOrders();
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute getOpenOrders() successfully with optional parameters', async () => {
-            const params: GetOpenOrdersRequest = {
-                symbol: 'BNBUSDT',
-                recvWindow: 5000,
-            };
-
-            mockResponse = [
-                {
-                    symbol: 'LTCBTC',
-                    orderId: 1,
-                    orderListId: -1,
-                    clientOrderId: 'myOrder1',
-                    price: '0.1',
-                    origQty: '1.0',
-                    executedQty: '0.0',
-                    cummulativeQuoteQty: '0.0',
-                    status: 'NEW',
-                    timeInForce: 'GTC',
-                    type: 'LIMIT',
-                    side: 'BUY',
-                    stopPrice: '0.0',
-                    icebergQty: '0.0',
-                    time: 1499827319559,
-                    updateTime: 1499827319559,
-                    isWorking: true,
-                    origQuoteOrderQty: '0.000000',
-                    workingTime: 1499827319559,
-                    selfTradePreventionMode: 'NONE',
-                },
-            ];
-
-            const spy = jest.spyOn(client, 'getOpenOrders').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<GetOpenOrdersResponse>)
-            );
-            const response = await client.getOpenOrders(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest.spyOn(client, 'getOpenOrders').mockRejectedValueOnce(mockError);
-            await expect(client.getOpenOrders()).rejects.toThrow('ResponseError');
-            spy.mockRestore();
-        });
-    });
-
-    describe('getOrder()', () => {
-        it('should execute getOrder() successfully with required parameters only', async () => {
-            const params: GetOrderRequest = {
-                symbol: 'BNBUSDT',
-            };
-
-            mockResponse = {
-                symbol: 'LTCBTC',
-                orderId: 1,
-                orderListId: -1,
-                clientOrderId: 'myOrder1',
-                price: '0.1',
-                origQty: '1.0',
-                executedQty: '0.0',
-                cummulativeQuoteQty: '0.0',
-                status: 'NEW',
-                timeInForce: 'GTC',
-                type: 'LIMIT',
-                side: 'BUY',
-                stopPrice: '0.0',
-                icebergQty: '0.0',
-                time: 1499827319559,
-                updateTime: 1499827319559,
-                isWorking: true,
-                workingTime: 1499827319559,
-                origQuoteOrderQty: '0.000000',
-                selfTradePreventionMode: 'NONE',
-            };
-
-            const spy = jest.spyOn(client, 'getOrder').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<GetOrderResponse>)
-            );
-            const response = await client.getOrder(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute getOrder() successfully with optional parameters', async () => {
-            const params: GetOrderRequest = {
-                symbol: 'BNBUSDT',
-                orderId: 1,
-                origClientOrderId: 'origClientOrderId_example',
-                recvWindow: 5000,
-            };
-
-            mockResponse = {
-                symbol: 'LTCBTC',
-                orderId: 1,
-                orderListId: -1,
-                clientOrderId: 'myOrder1',
-                price: '0.1',
-                origQty: '1.0',
-                executedQty: '0.0',
-                cummulativeQuoteQty: '0.0',
-                status: 'NEW',
-                timeInForce: 'GTC',
-                type: 'LIMIT',
-                side: 'BUY',
-                stopPrice: '0.0',
-                icebergQty: '0.0',
-                time: 1499827319559,
-                updateTime: 1499827319559,
-                isWorking: true,
-                workingTime: 1499827319559,
-                origQuoteOrderQty: '0.000000',
-                selfTradePreventionMode: 'NONE',
-            };
-
-            const spy = jest.spyOn(client, 'getOrder').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<GetOrderResponse>)
-            );
-            const response = await client.getOrder(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw RequiredError when symbol is missing', async () => {
-            const _params: GetOrderRequest = {
-                symbol: 'BNBUSDT',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.symbol;
-
-            await expect(client.getOrder(params)).rejects.toThrow(
-                'Required parameter symbol was null or undefined when calling getOrder.'
-            );
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const params: GetOrderRequest = {
-                symbol: 'BNBUSDT',
-            };
-
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest.spyOn(client, 'getOrder').mockRejectedValueOnce(mockError);
-            await expect(client.getOrder(params)).rejects.toThrow('ResponseError');
-            spy.mockRestore();
-        });
-    });
-
-    describe('getOrderList()', () => {
-        it('should execute getOrderList() successfully with required parameters only', async () => {
-            mockResponse = {
-                orderListId: 27,
-                contingencyType: 'OCO',
-                listStatusType: 'EXEC_STARTED',
-                listOrderStatus: 'EXECUTING',
-                listClientOrderId: 'h2USkA5YQpaXHPIrkd96xE',
-                transactionTime: 1565245656253,
-                symbol: 'LTCBTC',
-                orders: [
-                    { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'ARzZ9I00CPM8i3NhmU9Ega' },
-                    { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'qD1gy3kc3Gx0rihm9Y3xwS' },
-                ],
-            };
-
-            const spy = jest.spyOn(client, 'getOrderList').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<GetOrderListResponse>)
-            );
-            const response = await client.getOrderList();
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute getOrderList() successfully with optional parameters', async () => {
-            const params: GetOrderListRequest = {
-                orderListId: 1,
-                origClientOrderId: 'origClientOrderId_example',
-                recvWindow: 5000,
-            };
-
-            mockResponse = {
-                orderListId: 27,
-                contingencyType: 'OCO',
-                listStatusType: 'EXEC_STARTED',
-                listOrderStatus: 'EXECUTING',
-                listClientOrderId: 'h2USkA5YQpaXHPIrkd96xE',
-                transactionTime: 1565245656253,
-                symbol: 'LTCBTC',
-                orders: [
-                    { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'ARzZ9I00CPM8i3NhmU9Ega' },
-                    { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'qD1gy3kc3Gx0rihm9Y3xwS' },
-                ],
-            };
-
-            const spy = jest.spyOn(client, 'getOrderList').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<GetOrderListResponse>)
-            );
-            const response = await client.getOrderList(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest.spyOn(client, 'getOrderList').mockRejectedValueOnce(mockError);
-            await expect(client.getOrderList()).rejects.toThrow('ResponseError');
-            spy.mockRestore();
-        });
-    });
-
     describe('newOrder()', () => {
         it('should execute newOrder() successfully with required parameters only', async () => {
             const params: NewOrderRequest = {
@@ -1439,89 +895,6 @@ describe('TradeApi', () => {
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'newOrder').mockRejectedValueOnce(mockError);
             await expect(client.newOrder(params)).rejects.toThrow('ResponseError');
-            spy.mockRestore();
-        });
-    });
-
-    describe('openOrderList()', () => {
-        it('should execute openOrderList() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    orderListId: 31,
-                    contingencyType: 'OCO',
-                    listStatusType: 'EXEC_STARTED',
-                    listOrderStatus: 'EXECUTING',
-                    listClientOrderId: 'wuB13fmulKj3YjdqWEcsnp',
-                    transactionTime: 1565246080644,
-                    symbol: 'LTCBTC',
-                    orders: [
-                        { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'Cv1SnyPD3qhqpbjpYEHbd2' },
-                        { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'r3EH2N76dHfLoSZWIUw1bT' },
-                    ],
-                },
-            ];
-
-            const spy = jest.spyOn(client, 'openOrderList').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<OpenOrderListResponse>)
-            );
-            const response = await client.openOrderList();
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute openOrderList() successfully with optional parameters', async () => {
-            const params: OpenOrderListRequest = {
-                recvWindow: 5000,
-            };
-
-            mockResponse = [
-                {
-                    orderListId: 31,
-                    contingencyType: 'OCO',
-                    listStatusType: 'EXEC_STARTED',
-                    listOrderStatus: 'EXECUTING',
-                    listClientOrderId: 'wuB13fmulKj3YjdqWEcsnp',
-                    transactionTime: 1565246080644,
-                    symbol: 'LTCBTC',
-                    orders: [
-                        { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'Cv1SnyPD3qhqpbjpYEHbd2' },
-                        { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'r3EH2N76dHfLoSZWIUw1bT' },
-                    ],
-                },
-            ];
-
-            const spy = jest.spyOn(client, 'openOrderList').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<OpenOrderListResponse>)
-            );
-            const response = await client.openOrderList(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest.spyOn(client, 'openOrderList').mockRejectedValueOnce(mockError);
-            await expect(client.openOrderList()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
@@ -2202,7 +1575,7 @@ describe('TradeApi', () => {
                 listOrderStatus: 'EXECUTING',
                 listClientOrderId: 'yl2ERtcar1o25zcWtqVBTC',
                 transactionTime: 1712289389158,
-                symbol: 'ABCDEF',
+                symbol: 'LTCBTC',
                 orders: [
                     { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'arLFo0zGJVDE69cvGBaU0d' },
                     { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'Bq17mn9fP6vyCn75Jw1xya' },
@@ -2297,7 +1670,7 @@ describe('TradeApi', () => {
                 listOrderStatus: 'EXECUTING',
                 listClientOrderId: 'yl2ERtcar1o25zcWtqVBTC',
                 transactionTime: 1712289389158,
-                symbol: 'ABCDEF',
+                symbol: 'LTCBTC',
                 orders: [
                     { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'arLFo0zGJVDE69cvGBaU0d' },
                     { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'Bq17mn9fP6vyCn75Jw1xya' },
@@ -2555,7 +1928,7 @@ describe('TradeApi', () => {
                 listOrderStatus: 'EXECUTING',
                 listClientOrderId: 'RumwQpBaDctlUu5jyG5rs0',
                 transactionTime: 1712291372842,
-                symbol: 'ABCDEF',
+                symbol: 'LTCBTC',
                 orders: [
                     { symbol: 'LTCBTC', orderId: 8, clientOrderId: 'r4JMv9cwAYYUwwBZfbussx' },
                     { symbol: 'LTCBTC', orderId: 7, clientOrderId: '6pcQbFIzTXGZQ1e2MkGDq4' },
@@ -2679,7 +2052,7 @@ describe('TradeApi', () => {
                 listOrderStatus: 'EXECUTING',
                 listClientOrderId: 'RumwQpBaDctlUu5jyG5rs0',
                 transactionTime: 1712291372842,
-                symbol: 'ABCDEF',
+                symbol: 'LTCBTC',
                 orders: [
                     { symbol: 'LTCBTC', orderId: 8, clientOrderId: 'r4JMv9cwAYYUwwBZfbussx' },
                     { symbol: 'LTCBTC', orderId: 7, clientOrderId: '6pcQbFIzTXGZQ1e2MkGDq4' },

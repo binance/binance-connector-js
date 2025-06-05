@@ -31,6 +31,7 @@ import {
     MyPreventedMatchesRequest,
     MyTradesRequest,
     OrderAmendmentsRequest,
+    OrderStatusRequest,
 } from '../../../src/websocket-api';
 
 jest.mock('ws');
@@ -1555,6 +1556,367 @@ describe('AccountApi', () => {
         }, 10000);
     });
 
+    describe('openOrderListsStatus()', () => {
+        beforeEach(async () => {
+            mockWs = Object.assign(new EventEmitter(), {
+                close: jest.fn(),
+                ping: jest.fn(),
+                pong: jest.fn(),
+                send: jest.fn(),
+                readyState: WebSocketClient.OPEN,
+                OPEN: WebSocket.OPEN,
+                CLOSED: WebSocket.CLOSED,
+            }) as unknown as jest.Mocked<WebSocketClient> & EventEmitter;
+
+            (WebSocketClient as jest.MockedClass<typeof WebSocketClient>).mockImplementation(
+                () => mockWs
+            );
+
+            const config = new ConfigurationWebsocketAPI({
+                apiKey: 'test-api-key',
+                apiSecret: 'test-api-secret',
+                wsURL: 'ws://localhost:3000',
+                timeout: 1000,
+            });
+
+            websocketBase = new WebsocketAPIBase(config);
+            websocketBase.connect();
+        });
+
+        afterEach(async () => {
+            if (websocketBase) {
+                await websocketBase.disconnect();
+            }
+            jest.clearAllMocks();
+            jest.clearAllTimers();
+        });
+
+        it('should execute openOrderListsStatus() successfully', async () => {
+            mockResponse = {
+                id: '3a4437e2-41a3-4c19-897c-9cadc5dce8b6',
+                status: 200,
+                result: [
+                    {
+                        orderListId: 0,
+                        contingencyType: 'OCO',
+                        listStatusType: 'EXEC_STARTED',
+                        listOrderStatus: 'EXECUTING',
+                        listClientOrderId: '08985fedd9ea2cf6b28996',
+                        transactionTime: 1660801713793,
+                        symbol: 'BTCUSDT',
+                        orders: [
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 5,
+                                clientOrderId: '1ZqG7bBuYwaF4SU8CwnwHm',
+                            },
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 4,
+                                clientOrderId: 'CUhLgTXnX5n2c0gWiLpV4d',
+                            },
+                        ],
+                    },
+                ],
+                rateLimits: [
+                    {
+                        rateLimitType: 'REQUEST_WEIGHT',
+                        interval: 'MINUTE',
+                        intervalNum: 1,
+                        limit: 6000,
+                        count: 6,
+                    },
+                ],
+            };
+            mockResponse.id = randomString();
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new AccountApi(conn);
+                    const sendMsgSpy = jest.spyOn(conn, 'sendMessage');
+                    const responsePromise = websocketAPIClient.openOrderListsStatus({
+                        id: mockResponse?.id,
+                    });
+                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    const response = await responsePromise;
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
+                    expect(response.rateLimits).toEqual(mockResponse.rateLimits);
+                    expect(sendMsgSpy).toHaveBeenCalledWith(
+                        '/openOrderLists.status'.slice(1),
+                        expect.any(Object),
+                        { isSigned: true, withApiKey: false }
+                    );
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        });
+
+        it('should handle server error responses gracefully', async () => {
+            mockResponse = {
+                id: randomString(),
+                status: 400,
+                error: {
+                    code: -2010,
+                    msg: 'Account has insufficient balance for requested action.',
+                },
+                rateLimits: [
+                    {
+                        rateLimitType: 'ORDERS',
+                        interval: 'SECOND',
+                        intervalNum: 10,
+                        limit: 50,
+                        count: 13,
+                    },
+                ],
+            };
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new AccountApi(conn);
+                    const responsePromise = websocketAPIClient.openOrderListsStatus({
+                        id: mockResponse?.id,
+                    });
+                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        });
+
+        it('should handle request timeout gracefully', async () => {
+            jest.useRealTimers();
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new AccountApi(websocketBase);
+                    const responsePromise = websocketAPIClient.openOrderListsStatus();
+                    await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        }, 10000);
+    });
+
+    describe('openOrdersStatus()', () => {
+        beforeEach(async () => {
+            mockWs = Object.assign(new EventEmitter(), {
+                close: jest.fn(),
+                ping: jest.fn(),
+                pong: jest.fn(),
+                send: jest.fn(),
+                readyState: WebSocketClient.OPEN,
+                OPEN: WebSocket.OPEN,
+                CLOSED: WebSocket.CLOSED,
+            }) as unknown as jest.Mocked<WebSocketClient> & EventEmitter;
+
+            (WebSocketClient as jest.MockedClass<typeof WebSocketClient>).mockImplementation(
+                () => mockWs
+            );
+
+            const config = new ConfigurationWebsocketAPI({
+                apiKey: 'test-api-key',
+                apiSecret: 'test-api-secret',
+                wsURL: 'ws://localhost:3000',
+                timeout: 1000,
+            });
+
+            websocketBase = new WebsocketAPIBase(config);
+            websocketBase.connect();
+        });
+
+        afterEach(async () => {
+            if (websocketBase) {
+                await websocketBase.disconnect();
+            }
+            jest.clearAllMocks();
+            jest.clearAllTimers();
+        });
+
+        it('should execute openOrdersStatus() successfully', async () => {
+            mockResponse = {
+                id: '55f07876-4f6f-4c47-87dc-43e5fff3f2e7',
+                status: 200,
+                result: [
+                    {
+                        symbol: 'BTCUSDT',
+                        orderId: 12569099453,
+                        orderListId: -1,
+                        clientOrderId: '4d96324ff9d44481926157',
+                        price: '23416.10000000',
+                        origQty: '0.00847000',
+                        executedQty: '0.00720000',
+                        origQuoteOrderQty: '0.00000000',
+                        cummulativeQuoteQty: '172.43931000',
+                        status: 'PARTIALLY_FILLED',
+                        timeInForce: 'GTC',
+                        type: 'LIMIT',
+                        side: 'SELL',
+                        stopPrice: '0.00000000',
+                        icebergQty: '0.00000000',
+                        time: 1660801715639,
+                        updateTime: 1660801717945,
+                        isWorking: true,
+                        workingTime: 1660801715639,
+                        selfTradePreventionMode: 'NONE',
+                    },
+                ],
+                rateLimits: [
+                    {
+                        rateLimitType: 'REQUEST_WEIGHT',
+                        interval: 'MINUTE',
+                        intervalNum: 1,
+                        limit: 6000,
+                        count: 6,
+                    },
+                ],
+            };
+            mockResponse.id = randomString();
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new AccountApi(conn);
+                    const sendMsgSpy = jest.spyOn(conn, 'sendMessage');
+                    const responsePromise = websocketAPIClient.openOrdersStatus({
+                        id: mockResponse?.id,
+                    });
+                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    const response = await responsePromise;
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
+                    expect(response.rateLimits).toEqual(mockResponse.rateLimits);
+                    expect(sendMsgSpy).toHaveBeenCalledWith(
+                        '/openOrders.status'.slice(1),
+                        expect.any(Object),
+                        { isSigned: true, withApiKey: false }
+                    );
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        });
+
+        it('should handle server error responses gracefully', async () => {
+            mockResponse = {
+                id: randomString(),
+                status: 400,
+                error: {
+                    code: -2010,
+                    msg: 'Account has insufficient balance for requested action.',
+                },
+                rateLimits: [
+                    {
+                        rateLimitType: 'ORDERS',
+                        interval: 'SECOND',
+                        intervalNum: 10,
+                        limit: 50,
+                        count: 13,
+                    },
+                ],
+            };
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new AccountApi(conn);
+                    const responsePromise = websocketAPIClient.openOrdersStatus({
+                        id: mockResponse?.id,
+                    });
+                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        });
+
+        it('should handle request timeout gracefully', async () => {
+            jest.useRealTimers();
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new AccountApi(websocketBase);
+                    const responsePromise = websocketAPIClient.openOrdersStatus();
+                    await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        }, 10000);
+    });
+
     describe('orderAmendments()', () => {
         beforeEach(async () => {
             mockWs = Object.assign(new EventEmitter(), {
@@ -1725,6 +2087,382 @@ describe('AccountApi', () => {
                 try {
                     websocketAPIClient = new AccountApi(websocketBase);
                     const responsePromise = websocketAPIClient.orderAmendments(params);
+                    await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        }, 10000);
+    });
+
+    describe('orderListStatus()', () => {
+        beforeEach(async () => {
+            mockWs = Object.assign(new EventEmitter(), {
+                close: jest.fn(),
+                ping: jest.fn(),
+                pong: jest.fn(),
+                send: jest.fn(),
+                readyState: WebSocketClient.OPEN,
+                OPEN: WebSocket.OPEN,
+                CLOSED: WebSocket.CLOSED,
+            }) as unknown as jest.Mocked<WebSocketClient> & EventEmitter;
+
+            (WebSocketClient as jest.MockedClass<typeof WebSocketClient>).mockImplementation(
+                () => mockWs
+            );
+
+            const config = new ConfigurationWebsocketAPI({
+                apiKey: 'test-api-key',
+                apiSecret: 'test-api-secret',
+                wsURL: 'ws://localhost:3000',
+                timeout: 1000,
+            });
+
+            websocketBase = new WebsocketAPIBase(config);
+            websocketBase.connect();
+        });
+
+        afterEach(async () => {
+            if (websocketBase) {
+                await websocketBase.disconnect();
+            }
+            jest.clearAllMocks();
+            jest.clearAllTimers();
+        });
+
+        it('should execute orderListStatus() successfully', async () => {
+            mockResponse = {
+                id: 'b53fd5ff-82c7-4a04-bd64-5f9dc42c2100',
+                status: 200,
+                result: {
+                    orderListId: 1274512,
+                    contingencyType: 'OCO',
+                    listStatusType: 'EXEC_STARTED',
+                    listOrderStatus: 'EXECUTING',
+                    listClientOrderId: '08985fedd9ea2cf6b28996',
+                    transactionTime: 1660801713793,
+                    symbol: 'BTCUSDT',
+                    orders: [
+                        {
+                            symbol: 'BTCUSDT',
+                            orderId: 12569138902,
+                            clientOrderId: 'jLnZpj5enfMXTuhKB1d0us',
+                        },
+                        {
+                            symbol: 'BTCUSDT',
+                            orderId: 12569138901,
+                            clientOrderId: 'BqtFCj5odMoWtSqGk2X9tU',
+                        },
+                    ],
+                },
+                rateLimits: [
+                    {
+                        rateLimitType: 'REQUEST_WEIGHT',
+                        interval: 'MINUTE',
+                        intervalNum: 1,
+                        limit: 6000,
+                        count: 4,
+                    },
+                ],
+            };
+            mockResponse.id = randomString();
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new AccountApi(conn);
+                    const sendMsgSpy = jest.spyOn(conn, 'sendMessage');
+                    const responsePromise = websocketAPIClient.orderListStatus({
+                        id: mockResponse?.id,
+                    });
+                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    const response = await responsePromise;
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
+                    expect(response.rateLimits).toEqual(mockResponse.rateLimits);
+                    expect(sendMsgSpy).toHaveBeenCalledWith(
+                        '/orderList.status'.slice(1),
+                        expect.any(Object),
+                        { isSigned: true, withApiKey: false }
+                    );
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        });
+
+        it('should handle server error responses gracefully', async () => {
+            mockResponse = {
+                id: randomString(),
+                status: 400,
+                error: {
+                    code: -2010,
+                    msg: 'Account has insufficient balance for requested action.',
+                },
+                rateLimits: [
+                    {
+                        rateLimitType: 'ORDERS',
+                        interval: 'SECOND',
+                        intervalNum: 10,
+                        limit: 50,
+                        count: 13,
+                    },
+                ],
+            };
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new AccountApi(conn);
+                    const responsePromise = websocketAPIClient.orderListStatus({
+                        id: mockResponse?.id,
+                    });
+                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        });
+
+        it('should handle request timeout gracefully', async () => {
+            jest.useRealTimers();
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new AccountApi(websocketBase);
+                    const responsePromise = websocketAPIClient.orderListStatus();
+                    await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        }, 10000);
+    });
+
+    describe('orderStatus()', () => {
+        beforeEach(async () => {
+            mockWs = Object.assign(new EventEmitter(), {
+                close: jest.fn(),
+                ping: jest.fn(),
+                pong: jest.fn(),
+                send: jest.fn(),
+                readyState: WebSocketClient.OPEN,
+                OPEN: WebSocket.OPEN,
+                CLOSED: WebSocket.CLOSED,
+            }) as unknown as jest.Mocked<WebSocketClient> & EventEmitter;
+
+            (WebSocketClient as jest.MockedClass<typeof WebSocketClient>).mockImplementation(
+                () => mockWs
+            );
+
+            const config = new ConfigurationWebsocketAPI({
+                apiKey: 'test-api-key',
+                apiSecret: 'test-api-secret',
+                wsURL: 'ws://localhost:3000',
+                timeout: 1000,
+            });
+
+            websocketBase = new WebsocketAPIBase(config);
+            websocketBase.connect();
+        });
+
+        afterEach(async () => {
+            if (websocketBase) {
+                await websocketBase.disconnect();
+            }
+            jest.clearAllMocks();
+            jest.clearAllTimers();
+        });
+
+        it('should execute orderStatus() successfully', async () => {
+            mockResponse = {
+                id: 'aa62318a-5a97-4f3b-bdc7-640bbe33b291',
+                status: 200,
+                result: {
+                    symbol: 'BTCUSDT',
+                    orderId: 12569099453,
+                    orderListId: -1,
+                    clientOrderId: '4d96324ff9d44481926157',
+                    price: '23416.10000000',
+                    origQty: '0.00847000',
+                    executedQty: '0.00847000',
+                    cummulativeQuoteQty: '198.33521500',
+                    status: 'FILLED',
+                    timeInForce: 'GTC',
+                    type: 'LIMIT',
+                    side: 'SELL',
+                    stopPrice: '0.00000000',
+                    trailingDelta: 10,
+                    trailingTime: -1,
+                    icebergQty: '0.00000000',
+                    time: 1660801715639,
+                    updateTime: 1660801717945,
+                    isWorking: true,
+                    workingTime: 1660801715639,
+                    origQuoteOrderQty: '0.00000000',
+                    strategyId: 37463720,
+                    strategyType: 1000000,
+                    selfTradePreventionMode: 'NONE',
+                    preventedMatchId: 0,
+                    preventedQuantity: '1.200000',
+                },
+                rateLimits: [
+                    {
+                        rateLimitType: 'REQUEST_WEIGHT',
+                        interval: 'MINUTE',
+                        intervalNum: 1,
+                        limit: 6000,
+                        count: 4,
+                    },
+                ],
+            };
+            mockResponse.id = randomString();
+
+            const params: OrderStatusRequest = {
+                symbol: 'BNBUSDT',
+            };
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new AccountApi(conn);
+                    const sendMsgSpy = jest.spyOn(conn, 'sendMessage');
+                    const responsePromise = websocketAPIClient.orderStatus({
+                        id: mockResponse?.id,
+                        ...params,
+                    });
+                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    const response = await responsePromise;
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
+                    expect(response.rateLimits).toEqual(mockResponse.rateLimits);
+                    expect(sendMsgSpy).toHaveBeenCalledWith('/order.status'.slice(1), params, {
+                        isSigned: true,
+                        withApiKey: false,
+                    });
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        });
+
+        it('should handle server error responses gracefully', async () => {
+            mockResponse = {
+                id: randomString(),
+                status: 400,
+                error: {
+                    code: -2010,
+                    msg: 'Account has insufficient balance for requested action.',
+                },
+                rateLimits: [
+                    {
+                        rateLimitType: 'ORDERS',
+                        interval: 'SECOND',
+                        intervalNum: 10,
+                        limit: 50,
+                        count: 13,
+                    },
+                ],
+            };
+
+            const params: OrderStatusRequest = {
+                symbol: 'BNBUSDT',
+            };
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new AccountApi(conn);
+                    const responsePromise = websocketAPIClient.orderStatus({
+                        id: mockResponse?.id,
+                        ...params,
+                    });
+                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        });
+
+        it('should handle request timeout gracefully', async () => {
+            jest.useRealTimers();
+
+            const params: OrderStatusRequest = {
+                symbol: 'BNBUSDT',
+            };
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new AccountApi(websocketBase);
+                    const responsePromise = websocketAPIClient.orderStatus(params);
                     await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
                     resolveTest(true);
                 } catch (error) {

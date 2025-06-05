@@ -24,7 +24,7 @@
 import type { AccountCommissionResponseRateLimitsInner } from './account-commission-response-rate-limits-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderListStatusResponseResult } from './order-list-status-response-result';
+import type { AllOrderListsResponseResultInner } from './all-order-lists-response-result-inner';
 
 /**
  *
@@ -46,10 +46,10 @@ export interface AllOrderListsResponse {
     status?: number;
     /**
      *
-     * @type {Array<OrderListStatusResponseResult>}
+     * @type {Array<AllOrderListsResponseResultInner>}
      * @memberof AllOrderListsResponse
      */
-    result?: Array<OrderListStatusResponseResult>;
+    result?: Array<AllOrderListsResponseResultInner>;
     /**
      *
      * @type {Array<AccountCommissionResponseRateLimitsInner>}
