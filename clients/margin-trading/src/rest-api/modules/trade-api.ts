@@ -4593,56 +4593,42 @@ export class TradeApi implements TradeApiInterface {
     }
 }
 
-export const MarginAccountNewOcoSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type MarginAccountNewOcoSideEnum =
-    (typeof MarginAccountNewOcoSideEnum)[keyof typeof MarginAccountNewOcoSideEnum];
+export enum MarginAccountNewOcoSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-export const MarginAccountNewOcoNewOrderRespTypeEnum = {
-    ACK: 'ACK',
-    RESULT: 'RESULT',
-    FULL: 'FULL',
-} as const;
-export type MarginAccountNewOcoNewOrderRespTypeEnum =
-    (typeof MarginAccountNewOcoNewOrderRespTypeEnum)[keyof typeof MarginAccountNewOcoNewOrderRespTypeEnum];
+export enum MarginAccountNewOcoNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+}
 
-export const MarginAccountNewOrderSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type MarginAccountNewOrderSideEnum =
-    (typeof MarginAccountNewOrderSideEnum)[keyof typeof MarginAccountNewOrderSideEnum];
+export enum MarginAccountNewOrderSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-export const MarginAccountNewOrderNewOrderRespTypeEnum = {
-    ACK: 'ACK',
-    RESULT: 'RESULT',
-    FULL: 'FULL',
-} as const;
-export type MarginAccountNewOrderNewOrderRespTypeEnum =
-    (typeof MarginAccountNewOrderNewOrderRespTypeEnum)[keyof typeof MarginAccountNewOrderNewOrderRespTypeEnum];
+export enum MarginAccountNewOrderNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+}
 
-export const MarginAccountNewOrderTimeInForceEnum = {
-    GTC: 'GTC',
-    IOC: 'IOC',
-    FOK: 'FOK',
-} as const;
-export type MarginAccountNewOrderTimeInForceEnum =
-    (typeof MarginAccountNewOrderTimeInForceEnum)[keyof typeof MarginAccountNewOrderTimeInForceEnum];
+export enum MarginAccountNewOrderTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
 
-export const MarginAccountNewOtoNewOrderRespTypeEnum = {
-    ACK: 'ACK',
-    RESULT: 'RESULT',
-    FULL: 'FULL',
-} as const;
-export type MarginAccountNewOtoNewOrderRespTypeEnum =
-    (typeof MarginAccountNewOtoNewOrderRespTypeEnum)[keyof typeof MarginAccountNewOtoNewOrderRespTypeEnum];
+export enum MarginAccountNewOtoNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+}
 
-export const MarginAccountNewOtocoNewOrderRespTypeEnum = {
-    ACK: 'ACK',
-    RESULT: 'RESULT',
-    FULL: 'FULL',
-} as const;
-export type MarginAccountNewOtocoNewOrderRespTypeEnum =
-    (typeof MarginAccountNewOtocoNewOrderRespTypeEnum)[keyof typeof MarginAccountNewOtocoNewOrderRespTypeEnum];
+export enum MarginAccountNewOtocoNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+}
