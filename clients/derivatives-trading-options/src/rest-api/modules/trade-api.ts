@@ -1749,28 +1749,22 @@ export class TradeApi implements TradeApiInterface {
     }
 }
 
-export const NewOrderSideEnum = {
-    BUY: 'BUY',
-    SELL: 'SELL',
-} as const;
-export type NewOrderSideEnum = (typeof NewOrderSideEnum)[keyof typeof NewOrderSideEnum];
+export enum NewOrderSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
 
-export const NewOrderTypeEnum = {
-    LIMIT: 'LIMIT',
-} as const;
-export type NewOrderTypeEnum = (typeof NewOrderTypeEnum)[keyof typeof NewOrderTypeEnum];
+export enum NewOrderTypeEnum {
+    LIMIT = 'LIMIT',
+}
 
-export const NewOrderTimeInForceEnum = {
-    GTC: 'GTC',
-    IOC: 'IOC',
-    FOK: 'FOK',
-} as const;
-export type NewOrderTimeInForceEnum =
-    (typeof NewOrderTimeInForceEnum)[keyof typeof NewOrderTimeInForceEnum];
+export enum NewOrderTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
 
-export const NewOrderNewOrderRespTypeEnum = {
-    ACK: 'ACK',
-    RESULT: 'RESULT',
-} as const;
-export type NewOrderNewOrderRespTypeEnum =
-    (typeof NewOrderNewOrderRespTypeEnum)[keyof typeof NewOrderNewOrderRespTypeEnum];
+export enum NewOrderNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+}
