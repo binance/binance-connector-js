@@ -102,6 +102,7 @@ import type { GetSymbolsDelistScheduleForSpotResponse, SystemStatusResponse } fr
 import type {
     BrokerWithdrawResponse,
     DepositHistoryTravelRuleResponse,
+    FetchAddressVerificationListResponse,
     OnboardedVaspListResponse,
     SubmitDepositQuestionnaireResponse,
     SubmitDepositQuestionnaireTravelRuleResponse,
@@ -844,6 +845,20 @@ export class RestAPI {
         requestParameters: DepositHistoryTravelRuleRequest = {}
     ): Promise<RestApiResponse<DepositHistoryTravelRuleResponse>> {
         return this.travelRuleApi.depositHistoryTravelRule(requestParameters);
+    }
+
+    /**
+     * Fetch address verification list
+     *
+     * Weight: 10
+     *
+     * @summary Fetch address verification list (USER_DATA)
+     * @returns {Promise<RestApiResponse<FetchAddressVerificationListResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/address-verification-list Binance API Documentation}
+     */
+    fetchAddressVerificationList(): Promise<RestApiResponse<FetchAddressVerificationListResponse>> {
+        return this.travelRuleApi.fetchAddressVerificationList();
     }
 
     /**

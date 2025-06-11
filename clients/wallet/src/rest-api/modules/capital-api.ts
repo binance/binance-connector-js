@@ -346,7 +346,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {string} coin
          * @param {string} address
          * @param {number} amount
-         * @param {string} [withdrawOrderId]
+         * @param {string} [withdrawOrderId] client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for query.
          * @param {string} [network]
          * @param {string} [addressTag] Secondary address identifier for coins like XRP,XMR etc.
          * @param {boolean} [transactionFeeFlag] When making internal transfer, `true` for returning the fee to the destination account; `false` for returning the fee back to the departure account. Default `false`.
@@ -442,7 +442,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Withdraw History (supporting network) (USER_DATA)
          * @param {string} [coin]
-         * @param {string} [withdrawOrderId]
+         * @param {string} [withdrawOrderId] client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for query.
          * @param {number} [status] 0(0:Email Sent, 2:Awaiting Approval 3:Rejected 4:Processing 6:Completed)
          * @param {number} [offset] Default: 0
          * @param {number} [limit] min 7, max 30, default 7
@@ -863,7 +863,7 @@ export interface WithdrawRequest {
     readonly amount: number;
 
     /**
-     *
+     * client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for query.
      * @type {string}
      * @memberof CapitalApiWithdraw
      */
@@ -925,7 +925,7 @@ export interface WithdrawHistoryRequest {
     readonly coin?: string;
 
     /**
-     *
+     * client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for query.
      * @type {string}
      * @memberof CapitalApiWithdrawHistory
      */

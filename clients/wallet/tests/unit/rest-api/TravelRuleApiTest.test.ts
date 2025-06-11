@@ -27,6 +27,7 @@ import {
 import type {
     BrokerWithdrawResponse,
     DepositHistoryTravelRuleResponse,
+    FetchAddressVerificationListResponse,
     OnboardedVaspListResponse,
     SubmitDepositQuestionnaireResponse,
     SubmitDepositQuestionnaireTravelRuleResponse,
@@ -404,6 +405,55 @@ describe('TravelRuleApi', () => {
                 .spyOn(client, 'depositHistoryTravelRule')
                 .mockRejectedValueOnce(mockError);
             await expect(client.depositHistoryTravelRule()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('fetchAddressVerificationList()', () => {
+        it('should execute fetchAddressVerificationList() successfully with required parameters only', async () => {
+            mockResponse = [
+                {
+                    status: 'PENDING',
+                    token: 'AVAX',
+                    network: 'AVAXC',
+                    walletAddress: '0xc03a6aa728a8dde7464c33828424ede7553a0021',
+                    addressQuestionnaire: {
+                        sendTo: 1,
+                        satoshiToken: 'AVAX',
+                        isAddressOwner: 1,
+                        verifyMethod: 1,
+                    },
+                },
+            ];
+
+            const spy = jest.spyOn(client, 'fetchAddressVerificationList').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<FetchAddressVerificationListResponse>)
+            );
+            const response = await client.fetchAddressVerificationList();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'fetchAddressVerificationList')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.fetchAddressVerificationList()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

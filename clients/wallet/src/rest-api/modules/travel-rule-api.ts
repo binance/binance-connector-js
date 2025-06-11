@@ -22,6 +22,7 @@ import {
 import type {
     BrokerWithdrawResponse,
     DepositHistoryTravelRuleResponse,
+    FetchAddressVerificationListResponse,
     OnboardedVaspListResponse,
     SubmitDepositQuestionnaireResponse,
     SubmitDepositQuestionnaireTravelRuleResponse,
@@ -243,6 +244,28 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
+         * Fetch address verification list
+         *
+         * Weight: 10
+         *
+         * @summary Fetch address verification list (USER_DATA)
+         *
+         * @throws {RequiredError}
+         */
+        fetchAddressVerificationList: async (): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/addressVerify/list',
+                method: 'GET',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Fetch the onboarded VASP list for local entities that required travel rule.
          *
          * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
@@ -435,7 +458,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @summary Withdraw History (for local entities that require travel rule) (supporting network) (USER_DATA)
          * @param {string} [trId] Comma(,) separated list of travel rule record Ids.
          * @param {string} [txId]
-         * @param {string} [withdrawOrderId]
+         * @param {string} [withdrawOrderId] client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for query.
          * @param {string} [network]
          * @param {string} [coin]
          * @param {number} [travelRuleStatus] 0:Completed,1:Pending,2:Failed
@@ -539,7 +562,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @summary Withdraw History V2 (for local entities that require travel rule) (supporting network) (USER_DATA)
          * @param {string} [trId] Comma(,) separated list of travel rule record Ids.
          * @param {string} [txId]
-         * @param {string} [withdrawOrderId]
+         * @param {string} [withdrawOrderId] client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for query.
          * @param {string} [network]
          * @param {string} [coin]
          * @param {number} [travelRuleStatus] 0:Completed,1:Pending,2:Failed
@@ -635,7 +658,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @param {string} address
          * @param {number} amount
          * @param {string} questionnaire JSON format questionnaire answers.
-         * @param {string} [withdrawOrderId]
+         * @param {string} [withdrawOrderId] client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for query.
          * @param {string} [network]
          * @param {string} [addressTag] Secondary address identifier for coins like XRP,XMR etc.
          * @param {boolean} [transactionFeeFlag] When making internal transfer, `true` for returning the fee to the destination account; `false` for returning the fee back to the departure account. Default `false`.
@@ -767,6 +790,17 @@ export interface TravelRuleApiInterface {
     depositHistoryTravelRule(
         requestParameters?: DepositHistoryTravelRuleRequest
     ): Promise<RestApiResponse<DepositHistoryTravelRuleResponse>>;
+    /**
+     * Fetch address verification list
+     *
+     * Weight: 10
+     *
+     * @summary Fetch address verification list (USER_DATA)
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TravelRuleApiInterface
+     */
+    fetchAddressVerificationList(): Promise<RestApiResponse<FetchAddressVerificationListResponse>>;
     /**
      * Fetch the onboarded VASP list for local entities that required travel rule.
      *
@@ -1184,7 +1218,7 @@ export interface WithdrawHistoryV1Request {
     readonly txId?: string;
 
     /**
-     *
+     * client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for query.
      * @type {string}
      * @memberof TravelRuleApiWithdrawHistoryV1
      */
@@ -1267,7 +1301,7 @@ export interface WithdrawHistoryV2Request {
     readonly txId?: string;
 
     /**
-     *
+     * client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for query.
      * @type {string}
      * @memberof TravelRuleApiWithdrawHistoryV2
      */
@@ -1364,7 +1398,7 @@ export interface WithdrawTravelRuleRequest {
     readonly questionnaire: string;
 
     /**
-     *
+     * client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for query.
      * @type {string}
      * @memberof TravelRuleApiWithdrawTravelRule
      */
@@ -1502,6 +1536,32 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             requestParameters?.limit
         );
         return sendRequest<DepositHistoryTravelRuleResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Fetch address verification list
+     *
+     * Weight: 10
+     *
+     * @summary Fetch address verification list (USER_DATA)
+     * @returns {Promise<RestApiResponse<FetchAddressVerificationListResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TravelRuleApi
+     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/address-verification-list Binance API Documentation}
+     */
+    public async fetchAddressVerificationList(): Promise<
+        RestApiResponse<FetchAddressVerificationListResponse>
+        > {
+        const localVarAxiosArgs =
+            await this.localVarAxiosParamCreator.fetchAddressVerificationList();
+        return sendRequest<FetchAddressVerificationListResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
