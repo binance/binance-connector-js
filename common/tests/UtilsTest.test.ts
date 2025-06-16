@@ -174,6 +174,62 @@ describe('Utility Functions', () => {
                 'Either \'apiSecret\' or \'privateKey\' must be provided for signed requests.'
             );
         });
+
+        it('should call createHmac every time for repeated HMAC signatures', () => {
+            const config = { apiSecret: 'test-secret' };
+            const expected = crypto
+                .createHmac('sha256', config.apiSecret)
+                .update('a=1&b=2')
+                .digest('hex');
+
+            const hmacSpy = jest.spyOn(crypto, 'createHmac');
+
+            const sig1 = getSignature(config, mockParams);
+            const sig2 = getSignature(config, mockParams);
+
+            expect(sig1).toBe(expected);
+            expect(sig2).toBe(expected);
+
+            expect(hmacSpy).toHaveBeenCalledTimes(2);
+        });
+
+        it('should only call createPrivateKey once for repeated RSA signatures', () => {
+            const { privateKey } = crypto.generateKeyPairSync('rsa', { modulusLength: 2048 });
+            const pem = privateKey.export({ type: 'pkcs1', format: 'pem' }) as string;
+            const config = { privateKey: pem };
+
+            const createKeySpy = jest.spyOn(crypto, 'createPrivateKey');
+
+            const sig1 = getSignature(config, mockParams);
+            const sig2 = getSignature(config, mockParams);
+
+            const expectedSig = crypto
+                .sign('RSA-SHA256', Buffer.from('a=1&b=2'), privateKey)
+                .toString('base64');
+            expect(sig1).toBe(expectedSig);
+            expect(sig2).toBe(expectedSig);
+
+            expect(createKeySpy).toHaveBeenCalledTimes(1);
+        });
+
+        it('should only call createPrivateKey once for repeated ED25519 signatures', () => {
+            const { privateKey } = crypto.generateKeyPairSync('ed25519');
+            const pem = privateKey.export({ type: 'pkcs8', format: 'pem' }) as string;
+            const config = { privateKey: pem };
+
+            const createKeySpy = jest.spyOn(crypto, 'createPrivateKey');
+
+            const sig1 = getSignature(config, mockParams);
+            const sig2 = getSignature(config, mockParams);
+
+            const expectedSig = crypto
+                .sign(null, Buffer.from('a=1&b=2'), privateKey)
+                .toString('base64');
+            expect(sig1).toBe(expectedSig);
+            expect(sig2).toBe(expectedSig);
+
+            expect(createKeySpy).toHaveBeenCalledTimes(1);
+        });
     });
 
     describe('shouldRetryRequest()', () => {
@@ -664,6 +720,7 @@ describe('Utility Functions', () => {
 
     describe('sendRequest()', () => {
         beforeEach(() => {
+            utils.clearSignerCache();
             jest.spyOn(utils, 'getSignature').mockImplementation(() => 'mock-signature');
             jest.spyOn(utils, 'setSearchParams').mockImplementation((url, params) => {
                 Object.keys(params).forEach((key) =>
@@ -813,6 +870,124 @@ describe('Utility Functions', () => {
         it('should preserve a preceding "@" for non-updateSpeed placeholders', () => {
             const result = replaceWebsocketStreamsPlaceholders('/prefix@<data>', { data: 'value' });
             expect(result).toBe('/prefix@value');
+        });
+    });
+
+    describe('setFlattenedQueryParams', () => {
+        let params: URLSearchParams;
+
+        beforeEach(() => {
+            params = new URLSearchParams();
+        });
+
+        it('does nothing when parameter is null or undefined', () => {
+            utils.setFlattenedQueryParams(params, null, 'foo');
+            utils.setFlattenedQueryParams(params, undefined, 'bar');
+            expect(params.toString()).toBe('');
+        });
+
+        it('serializes a single primitive', () => {
+            utils.setFlattenedQueryParams(params, 42, 'answer');
+            expect(params.toString()).toBe('answer=42');
+
+            params = new URLSearchParams();
+            utils.setFlattenedQueryParams(params, 'hello', 'greet');
+            expect(params.toString()).toBe('greet=hello');
+        });
+
+        it('flattens a plain object one level deep', () => {
+            const obj = { a: 1, b: 'two' };
+            utils.setFlattenedQueryParams(params, obj);
+            expect(params.toString().split('&').sort()).toEqual(['a=1', 'b=two']);
+        });
+
+        it('flattens nested objects with dot notation', () => {
+            const nested = { user: { id: 7, name: 'alice' }, flag: true };
+            utils.setFlattenedQueryParams(params, nested);
+            expect(params.toString().split('&').sort()).toEqual([
+                'flag=true',
+                'user.id=7',
+                'user.name=alice',
+            ]);
+        });
+
+        it('JSON-stringifies an array of primitives when given a key', () => {
+            const arr = ['BTCUSDT', 'ETHUSDT', 'BNBUSDT'];
+            utils.setFlattenedQueryParams(params, arr, 'symbols');
+            const raw = params.get('symbols')!;
+            expect(raw).toBe(JSON.stringify(arr));
+            expect(params.toString()).toContain(`symbols=${encodeURIComponent(raw)}`);
+        });
+
+        it('JSON-stringifies an array of objects when given a key', () => {
+            const arr = [{ foo: 'bar' }, { foo: 'baz' }];
+            utils.setFlattenedQueryParams(params, arr, 'items');
+            const raw = params.get('items')!;
+            expect(raw).toBe(JSON.stringify(arr));
+            expect(params.toString()).toContain(`items=${encodeURIComponent(raw)}`);
+        });
+
+        it('recurses into array-as-root when no key is provided', () => {
+            const rootArr = [{ symbol: 'BTCUSDT' }, { symbol: 'BNBUSDT' }];
+            utils.setFlattenedQueryParams(params, rootArr);
+            expect(params.getAll('symbol')).toEqual(['BTCUSDT', 'BNBUSDT']);
+        });
+
+        it('JSON-stringifies mixed arrays (primitives + objects + nested arrays) when given a key', () => {
+            const mixed = [1, { x: 2 }, 'three', [4, 5]];
+            utils.setFlattenedQueryParams(params, mixed, 'm');
+            const raw = params.get('m')!;
+            expect(raw).toBe(JSON.stringify(mixed));
+            expect(params.toString()).toContain(`m=${encodeURIComponent(raw)}`);
+        });
+
+        it('appends repeated primitive keys', () => {
+            utils.setFlattenedQueryParams(params, 'first', 'dup');
+            utils.setFlattenedQueryParams(params, 'second', 'dup');
+            expect(params.getAll('dup')).toEqual(['first', 'second']);
+        });
+
+        it('handles a deep nested object with an array at the bottom', () => {
+            const deep = { a: { b: { c: [1, 2, 3] } } };
+            utils.setFlattenedQueryParams(params, deep);
+            const raw = params.get('a.b.c')!;
+            expect(raw).toBe(JSON.stringify([1, 2, 3]));
+            expect(params.toString()).toContain(`a.b.c=${encodeURIComponent(raw)}`);
+        });
+
+        it('serializes an object containing an array of objects as JSON under its key', () => {
+            const complex = {
+                data: [
+                    { id: 1, tags: ['x', 'y'] },
+                    { id: 2, tags: ['z'] },
+                ],
+            };
+            utils.setFlattenedQueryParams(params, complex);
+            const raw = params.get('data')!;
+            expect(raw).toBe(JSON.stringify(complex.data));
+            expect(params.toString()).toContain(`data=${encodeURIComponent(raw)}`);
+        });
+
+        it('JSON-stringifies a double-nested array of primitives when given a key', () => {
+            const doubleArr = [
+                ['foo', 'bar'],
+                ['baz', 'qux'],
+            ];
+            utils.setFlattenedQueryParams(params, doubleArr, 'letters');
+            const raw = params.get('letters')!;
+            expect(raw).toBe(JSON.stringify(doubleArr));
+            expect(params.toString()).toContain(`letters=${encodeURIComponent(raw)}`);
+        });
+
+        it('does not recurse into array elements when a key is provided', () => {
+            const mixed = {
+                top: [100, [200, 300], { deep: [400, 500] }],
+            };
+            utils.setFlattenedQueryParams(params, mixed);
+            const raw = params.get('top')!;
+            expect(raw).toBe(JSON.stringify(mixed.top));
+            expect(params.toString()).toContain(`top=${encodeURIComponent(raw)}`);
+            expect(params.get('top.deep')).toBeNull();
         });
     });
 });

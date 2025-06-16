@@ -44,7 +44,7 @@ export class ConfigurationRestAPI {
         auth?: { username: string; password: string };
     };
     /**
-     * enables keep-alive functionality for the connection
+     * enables keep-alive functionality for the connection (if httpsAgent is set then we use httpsAgent.keepAlive instead)
      * @default true
      * @type {boolean}
      * @memberof ConfigurationRestAPI

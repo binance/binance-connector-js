@@ -30,6 +30,120 @@ import {
 } from '.';
 
 /**
+ * A weak cache for storing RequestSigner instances based on configuration parameters.
+ *
+ * @remarks
+ * Uses a WeakMap to cache and reuse RequestSigner instances for configurations with
+ * apiSecret, privateKey, and privateKeyPassphrase, allowing efficient memory management.
+ */
+let signerCache = new WeakMap<
+    {
+        apiSecret?: string;
+        privateKey?: string | Buffer;
+        privateKeyPassphrase?: string;
+    },
+    RequestSigner
+>();
+
+/**
+ * Represents a request signer for generating signatures using HMAC-SHA256 or asymmetric key signing.
+ *
+ * Supports two signing methods:
+ * 1. HMAC-SHA256 using an API secret
+ * 2. Asymmetric signing using RSA or ED25519 private keys
+ *
+ * @throws {Error} If neither API secret nor private key is provided, or if the private key is invalid
+ */
+class RequestSigner {
+    private apiSecret?: string;
+    private keyObject?: crypto.KeyObject;
+    private keyType?: string;
+
+    constructor(configuration: {
+        apiSecret?: string;
+        privateKey?: string | Buffer;
+        privateKeyPassphrase?: string;
+    }) {
+        // HMAC-SHA256 path
+        if (configuration.apiSecret && !configuration.privateKey) {
+            this.apiSecret = configuration.apiSecret;
+            return;
+        }
+
+        // Asymmetric path
+        if (configuration.privateKey) {
+            let privateKey: string | Buffer = configuration.privateKey;
+
+            // If path, read file once
+            if (typeof privateKey === 'string' && fs.existsSync(privateKey)) {
+                privateKey = fs.readFileSync(privateKey, 'utf-8');
+            }
+
+            // Build KeyObject once
+            const keyInput: crypto.PrivateKeyInput = { key: privateKey };
+            if (
+                configuration.privateKeyPassphrase &&
+                typeof configuration.privateKeyPassphrase === 'string'
+            ) {
+                keyInput.passphrase = configuration.privateKeyPassphrase;
+            }
+
+            try {
+                this.keyObject = crypto.createPrivateKey(keyInput);
+                this.keyType = this.keyObject.asymmetricKeyType;
+            } catch {
+                throw new Error(
+                    'Invalid private key. Please provide a valid RSA or ED25519 private key.'
+                );
+            }
+
+            return;
+        }
+
+        throw new Error('Either \'apiSecret\' or \'privateKey\' must be provided for signed requests.');
+    }
+
+    sign(queryParams: object): string {
+        const params = buildQueryString(queryParams);
+
+        // HMAC-SHA256 signing
+        if (this.apiSecret)
+            return crypto.createHmac('sha256', this.apiSecret).update(params).digest('hex');
+
+        // Asymmetric signing
+        if (this.keyObject && this.keyType) {
+            const data = Buffer.from(params);
+
+            if (this.keyType === 'rsa')
+                return crypto.sign('RSA-SHA256', data, this.keyObject).toString('base64');
+            if (this.keyType === 'ed25519')
+                return crypto.sign(null, data, this.keyObject).toString('base64');
+
+            throw new Error('Unsupported private key type. Must be RSA or ED25519.');
+        }
+
+        throw new Error('Signer is not properly initialized.');
+    }
+}
+
+/**
+ * Resets the signer cache to a new empty WeakMap.
+ *
+ * This function clears the existing signer cache, creating a fresh WeakMap
+ * to store RequestSigner instances associated with configuration objects.
+ */
+export const clearSignerCache = function (): void {
+    signerCache = new WeakMap<
+        {
+            apiSecret?: string;
+            privateKey?: string | Buffer;
+            privateKeyPassphrase?: string;
+        },
+        RequestSigner
+    >();
+};
+
+/**
  * Generates a query string from an object of parameters.
  *
  * @param params - An object containing the query parameters.
@@ -102,11 +216,11 @@ export function getTimestamp(): number {
 }
 
 /**
- * Generates a signature for a signed request based on the provided configuration.
+ * Generates a signature for the given configuration and query parameters using a cached request signer.
  *
- * @param configuration - The configuration object containing the API secret or private key information.
- * @param queryParams - The object containing the query parameters to be signed.
- * @returns The generated signature as a string.
+ * @param configuration - Configuration object containing API secret, private key, and optional passphrase.
+ * @param queryParams - The query parameters to be signed.
+ * @returns A string representing the generated signature.
  */
 export const getSignature = function (
     configuration: {
@@ -116,56 +230,12 @@ export const getSignature = function (
     },
     queryParams: object
 ): string {
-    const params = buildQueryString(queryParams);
-    let signature = '';
-
-    if (configuration?.apiSecret && !configuration?.privateKey) {
-        // Use HMAC-SHA256 if apiSecret is provided
-        signature = crypto
-            .createHmac('sha256', configuration.apiSecret)
-            .update(params)
-            .digest('hex');
-    } else if (configuration?.privateKey) {
-        let privateKey: string | Buffer = configuration.privateKey;
-
-        // Check if privateKey is a path to a file
-        if (typeof privateKey === 'string' && fs.existsSync(privateKey)) {
-            privateKey = fs.readFileSync(privateKey, 'utf-8');
-        }
-
-        let keyObject: crypto.KeyObject;
-        try {
-            const privateKeyObj: crypto.PrivateKeyInput = { key: privateKey };
-            if (
-                configuration.privateKeyPassphrase &&
-                typeof configuration.privateKeyPassphrase === 'string'
-            ) {
-                privateKeyObj.passphrase = configuration.privateKeyPassphrase;
-            }
-            // Create KeyObject
-            keyObject = crypto.createPrivateKey(privateKeyObj);
-        } catch {
-            throw new Error(
-                'Invalid private key. Please provide a valid RSA or ED25519 private key.'
-            );
-        }
-
-        const keyType = keyObject.asymmetricKeyType;
-
-        if (keyType === 'rsa') {
-            signature = crypto
-                .sign('RSA-SHA256', Buffer.from(params), keyObject)
-                .toString('base64');
-        } else if (keyType === 'ed25519') {
-            signature = crypto.sign(null, Buffer.from(params), keyObject).toString('base64');
-        } else {
-            throw new Error('Unsupported private key type. Must be RSA or ED25519.');
-        }
-    } else {
-        throw new Error('Either \'apiSecret\' or \'privateKey\' must be provided for signed requests.');
+    let signer = signerCache.get(configuration);
+    if (!signer) {
+        signer = new RequestSigner(configuration);
+        signerCache.set(configuration, signer);
     }
-
-    return signature;
+    return signer.sign(queryParams);
 };
 
 /**
@@ -190,41 +260,52 @@ export const assertParamExists = function (
 };
 
 /**
- * Recursively flattens an object or array of objects into URL search parameters.
+ * Recursively flattens an object or array into URL search parameters.
  *
- * This function takes a `URLSearchParams` instance and a parameter object or array, and adds the flattened key-value pairs to the search parameters.
- * If the parameter is an object, it recursively flattens the object by iterating over its keys. If the parameter is an array, it recursively flattens each item in the array.
- * If the parameter is a primitive value, it adds the key-value pair to the search parameters.
+ * This function handles nested objects and arrays by converting them into dot-notation query parameters.
+ * It supports different types of parameters:
+ * - Arrays can be stringified or recursively added
+ * - Objects are flattened with dot notation keys
+ * - Primitive values are converted to strings
  *
- * @param urlSearchParams - The `URLSearchParams` instance to add the flattened parameters to.
- * @param parameter - The object or array to flatten into search parameters.
- * @param key - The current key prefix, used for nested objects/arrays.
+ * @param urlSearchParams The URLSearchParams object to modify
+ * @param parameter The parameter to flatten (can be an object, array, or primitive)
+ * @param key Optional key for nested parameters, used for creating dot-notation keys
  */
-function setFlattenedQueryParams(
+export function setFlattenedQueryParams(
     urlSearchParams: URLSearchParams,
     parameter: unknown,
     key: string = ''
 ): void {
     if (parameter == null) return;
-    if (typeof parameter === 'object') {
-        if (Array.isArray(parameter)) {
-            parameter.forEach((item) => setFlattenedQueryParams(urlSearchParams, item, key));
-        } else {
-            Object.keys(parameter as Record<string, unknown>).forEach((currentKey) =>
-                setFlattenedQueryParams(
-                    urlSearchParams,
-                    (parameter as Record<string, unknown>)[currentKey],
-                    `${key}${key !== '' ? '.' : ''}${currentKey}`
-                )
-            );
-        }
-    } else {
-        if (urlSearchParams.has(key)) {
-            urlSearchParams.append(key, String(parameter));
-        } else {
-            urlSearchParams.set(key, String(parameter));
-        }
+
+    // Array handling
+    if (Array.isArray(parameter)) {
+        if (key)
+            // non-empty key: stringify the entire array
+            urlSearchParams.set(key, JSON.stringify(parameter));
+        else
+            // empty key: recurse into each item without using an empty key
+            for (const item of parameter) {
+                setFlattenedQueryParams(urlSearchParams, item, '');
+            }
+        return;
     }
+
+    // Object handling
+    if (typeof parameter === 'object') {
+        for (const subKey of Object.keys(parameter as Record<string, unknown>)) {
+            const subVal = (parameter as Record<string, unknown>)[subKey];
+            const newKey = key ? `${key}.${subKey}` : subKey;
+            setFlattenedQueryParams(urlSearchParams, subVal, newKey);
+        }
+        return;
+    }
+
+    // Primitive handling
+    const str = String(parameter);
+    if (urlSearchParams.has(key)) urlSearchParams.append(key, str);
+    else urlSearchParams.set(key, str);
 }
 
 /**
@@ -290,21 +371,14 @@ export const httpRequestFunction = async function <T>(
         url: (globalAxios.defaults?.baseURL ? '' : (configuration?.basePath ?? '')) + axiosArgs.url,
     };
 
-    if (configuration?.keepAlive) {
-        axiosRequestArgs.httpsAgent = new https.Agent({
-            ...(configuration?.baseOptions?.httpsAgent instanceof https.Agent
-                ? configuration.baseOptions.httpsAgent.options
-                : {}),
-            keepAlive: true,
-        });
-    }
+    if (configuration?.keepAlive && !configuration?.baseOptions?.httpsAgent)
+        axiosRequestArgs.httpsAgent = new https.Agent({ keepAlive: true });
 
-    if (configuration?.compression) {
+    if (configuration?.compression)
         axiosRequestArgs.headers = {
             ...axiosRequestArgs.headers,
             'Accept-Encoding': 'gzip, deflate, br',
         };
-    }
 
     const retries = configuration?.retries ?? 0;
     const backoff = configuration?.backoff ?? 0;

@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.1 - 2025-06-16
+
+### Changed (4)
+
+- Modified `keepAlive` logic to respect `httpsAgent` configuration if set.
+- Exposed `ws` TS types.
+- Fixed bug with array stringification on REST API requests.
+- Cache signature generation.
+
 ## 1.1.0 - 2025-06-05
 
 ### Added (1)
