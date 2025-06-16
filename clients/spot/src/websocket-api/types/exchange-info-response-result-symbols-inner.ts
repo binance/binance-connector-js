@@ -130,7 +130,7 @@ export interface ExchangeInfoResponseResultSymbolsInner {
      * @type {boolean}
      * @memberof ExchangeInfoResponseResultSymbolsInner
      */
-    allowAmend?: boolean;
+    amendAllowed?: boolean;
     /**
      *
      * @type {boolean}

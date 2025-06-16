@@ -1142,9 +1142,9 @@ describe('TradeApi', () => {
             const params: MarginAccountNewOcoRequest = {
                 symbol: 'symbol_example',
                 side: MarginAccountNewOcoSideEnum.BUY,
-                quantity: 1,
-                price: 1,
-                stopPrice: 1,
+                quantity: 1.0,
+                price: 1.0,
+                stopPrice: 1.0,
             };
 
             mockResponse = {
@@ -1217,16 +1217,16 @@ describe('TradeApi', () => {
             const params: MarginAccountNewOcoRequest = {
                 symbol: 'symbol_example',
                 side: MarginAccountNewOcoSideEnum.BUY,
-                quantity: 1,
-                price: 1,
-                stopPrice: 1,
+                quantity: 1.0,
+                price: 1.0,
+                stopPrice: 1.0,
                 isIsolated: 'false',
                 listClientOrderId: '1',
                 limitClientOrderId: '1',
-                limitIcebergQty: 1,
+                limitIcebergQty: 1.0,
                 stopClientOrderId: '1',
-                stopLimitPrice: 1,
-                stopIcebergQty: 1,
+                stopLimitPrice: 1.0,
+                stopIcebergQty: 1.0,
                 stopLimitTimeInForce: 'stopLimitTimeInForce_example',
                 newOrderRespType: MarginAccountNewOcoNewOrderRespTypeEnum.ACK,
                 sideEffectType: 'NO_SIDE_EFFECT',
@@ -1305,9 +1305,9 @@ describe('TradeApi', () => {
             const _params: MarginAccountNewOcoRequest = {
                 symbol: 'symbol_example',
                 side: MarginAccountNewOcoSideEnum.BUY,
-                quantity: 1,
-                price: 1,
-                stopPrice: 1,
+                quantity: 1.0,
+                price: 1.0,
+                stopPrice: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1321,9 +1321,9 @@ describe('TradeApi', () => {
             const _params: MarginAccountNewOcoRequest = {
                 symbol: 'symbol_example',
                 side: MarginAccountNewOcoSideEnum.BUY,
-                quantity: 1,
-                price: 1,
-                stopPrice: 1,
+                quantity: 1.0,
+                price: 1.0,
+                stopPrice: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.side;
@@ -1337,9 +1337,9 @@ describe('TradeApi', () => {
             const _params: MarginAccountNewOcoRequest = {
                 symbol: 'symbol_example',
                 side: MarginAccountNewOcoSideEnum.BUY,
-                quantity: 1,
-                price: 1,
-                stopPrice: 1,
+                quantity: 1.0,
+                price: 1.0,
+                stopPrice: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.quantity;
@@ -1353,9 +1353,9 @@ describe('TradeApi', () => {
             const _params: MarginAccountNewOcoRequest = {
                 symbol: 'symbol_example',
                 side: MarginAccountNewOcoSideEnum.BUY,
-                quantity: 1,
-                price: 1,
-                stopPrice: 1,
+                quantity: 1.0,
+                price: 1.0,
+                stopPrice: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.price;
@@ -1369,9 +1369,9 @@ describe('TradeApi', () => {
             const _params: MarginAccountNewOcoRequest = {
                 symbol: 'symbol_example',
                 side: MarginAccountNewOcoSideEnum.BUY,
-                quantity: 1,
-                price: 1,
-                stopPrice: 1,
+                quantity: 1.0,
+                price: 1.0,
+                stopPrice: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.stopPrice;
@@ -1385,9 +1385,9 @@ describe('TradeApi', () => {
             const params: MarginAccountNewOcoRequest = {
                 symbol: 'symbol_example',
                 side: MarginAccountNewOcoSideEnum.BUY,
-                quantity: 1,
-                price: 1,
-                stopPrice: 1,
+                quantity: 1.0,
+                price: 1.0,
+                stopPrice: 1.0,
             };
 
             const errorResponse = {
@@ -1461,12 +1461,12 @@ describe('TradeApi', () => {
                 side: MarginAccountNewOrderSideEnum.BUY,
                 type: 'type_example',
                 isIsolated: 'false',
-                quantity: 1,
-                quoteOrderQty: 1,
-                price: 1,
-                stopPrice: 1,
+                quantity: 1.0,
+                quoteOrderQty: 1.0,
+                price: 1.0,
+                stopPrice: 1.0,
                 newClientOrderId: '1',
-                icebergQty: 1,
+                icebergQty: 1.0,
                 newOrderRespType: MarginAccountNewOrderNewOrderRespTypeEnum.ACK,
                 sideEffectType: 'NO_SIDE_EFFECT',
                 timeInForce: MarginAccountNewOrderTimeInForceEnum.GTC,
@@ -1589,12 +1589,12 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 workingType: 'workingType_example',
                 workingSide: 'workingSide_example',
-                workingPrice: 1,
-                workingQuantity: 1,
-                workingIcebergQty: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                workingIcebergQty: 1.0,
                 pendingType: 'Order Types',
                 pendingSide: 'pendingSide_example',
-                pendingQuantity: 1,
+                pendingQuantity: 1.0,
             };
 
             mockResponse = {
@@ -1673,12 +1673,12 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 workingType: 'workingType_example',
                 workingSide: 'workingSide_example',
-                workingPrice: 1,
-                workingQuantity: 1,
-                workingIcebergQty: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                workingIcebergQty: 1.0,
                 pendingType: 'Order Types',
                 pendingSide: 'pendingSide_example',
-                pendingQuantity: 1,
+                pendingQuantity: 1.0,
                 isIsolated: 'false',
                 listClientOrderId: '1',
                 newOrderRespType: MarginAccountNewOtoNewOrderRespTypeEnum.ACK,
@@ -1688,10 +1688,10 @@ describe('TradeApi', () => {
                 workingClientOrderId: '1',
                 workingTimeInForce: 'workingTimeInForce_example',
                 pendingClientOrderId: '1',
-                pendingPrice: 1,
-                pendingStopPrice: 1,
-                pendingTrailingDelta: 1,
-                pendingIcebergQty: 1,
+                pendingPrice: 1.0,
+                pendingStopPrice: 1.0,
+                pendingTrailingDelta: 1.0,
+                pendingIcebergQty: 1.0,
                 pendingTimeInForce: 'pendingTimeInForce_example',
             };
 
@@ -1771,12 +1771,12 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 workingType: 'workingType_example',
                 workingSide: 'workingSide_example',
-                workingPrice: 1,
-                workingQuantity: 1,
-                workingIcebergQty: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                workingIcebergQty: 1.0,
                 pendingType: 'Order Types',
                 pendingSide: 'pendingSide_example',
-                pendingQuantity: 1,
+                pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1791,12 +1791,12 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 workingType: 'workingType_example',
                 workingSide: 'workingSide_example',
-                workingPrice: 1,
-                workingQuantity: 1,
-                workingIcebergQty: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                workingIcebergQty: 1.0,
                 pendingType: 'Order Types',
                 pendingSide: 'pendingSide_example',
-                pendingQuantity: 1,
+                pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.workingType;
@@ -1811,12 +1811,12 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 workingType: 'workingType_example',
                 workingSide: 'workingSide_example',
-                workingPrice: 1,
-                workingQuantity: 1,
-                workingIcebergQty: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                workingIcebergQty: 1.0,
                 pendingType: 'Order Types',
                 pendingSide: 'pendingSide_example',
-                pendingQuantity: 1,
+                pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.workingSide;
@@ -1831,12 +1831,12 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 workingType: 'workingType_example',
                 workingSide: 'workingSide_example',
-                workingPrice: 1,
-                workingQuantity: 1,
-                workingIcebergQty: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                workingIcebergQty: 1.0,
                 pendingType: 'Order Types',
                 pendingSide: 'pendingSide_example',
-                pendingQuantity: 1,
+                pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.workingPrice;
@@ -1851,12 +1851,12 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 workingType: 'workingType_example',
                 workingSide: 'workingSide_example',
-                workingPrice: 1,
-                workingQuantity: 1,
-                workingIcebergQty: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                workingIcebergQty: 1.0,
                 pendingType: 'Order Types',
                 pendingSide: 'pendingSide_example',
-                pendingQuantity: 1,
+                pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.workingQuantity;
@@ -1871,12 +1871,12 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 workingType: 'workingType_example',
                 workingSide: 'workingSide_example',
-                workingPrice: 1,
-                workingQuantity: 1,
-                workingIcebergQty: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                workingIcebergQty: 1.0,
                 pendingType: 'Order Types',
                 pendingSide: 'pendingSide_example',
-                pendingQuantity: 1,
+                pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.workingIcebergQty;
@@ -1891,12 +1891,12 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 workingType: 'workingType_example',
                 workingSide: 'workingSide_example',
-                workingPrice: 1,
-                workingQuantity: 1,
-                workingIcebergQty: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                workingIcebergQty: 1.0,
                 pendingType: 'Order Types',
                 pendingSide: 'pendingSide_example',
-                pendingQuantity: 1,
+                pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.pendingType;
@@ -1911,12 +1911,12 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 workingType: 'workingType_example',
                 workingSide: 'workingSide_example',
-                workingPrice: 1,
-                workingQuantity: 1,
-                workingIcebergQty: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                workingIcebergQty: 1.0,
                 pendingType: 'Order Types',
                 pendingSide: 'pendingSide_example',
-                pendingQuantity: 1,
+                pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.pendingSide;
@@ -1931,12 +1931,12 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 workingType: 'workingType_example',
                 workingSide: 'workingSide_example',
-                workingPrice: 1,
-                workingQuantity: 1,
-                workingIcebergQty: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                workingIcebergQty: 1.0,
                 pendingType: 'Order Types',
                 pendingSide: 'pendingSide_example',
-                pendingQuantity: 1,
+                pendingQuantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.pendingQuantity;
@@ -1951,12 +1951,12 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 workingType: 'workingType_example',
                 workingSide: 'workingSide_example',
-                workingPrice: 1,
-                workingQuantity: 1,
-                workingIcebergQty: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                workingIcebergQty: 1.0,
                 pendingType: 'Order Types',
                 pendingSide: 'pendingSide_example',
-                pendingQuantity: 1,
+                pendingQuantity: 1.0,
             };
 
             const errorResponse = {
@@ -1980,10 +1980,10 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 workingType: 'workingType_example',
                 workingSide: 'workingSide_example',
-                workingPrice: 1,
-                workingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
                 pendingSide: 'pendingSide_example',
-                pendingQuantity: 1,
+                pendingQuantity: 1.0,
                 pendingAboveType: 'pendingAboveType_example',
             };
 
@@ -2085,10 +2085,10 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 workingType: 'workingType_example',
                 workingSide: 'workingSide_example',
-                workingPrice: 1,
-                workingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
                 pendingSide: 'pendingSide_example',
-                pendingQuantity: 1,
+                pendingQuantity: 1.0,
                 pendingAboveType: 'pendingAboveType_example',
                 isIsolated: 'false',
                 sideEffectType: 'NO_SIDE_EFFECT',
@@ -2097,20 +2097,20 @@ describe('TradeApi', () => {
                 newOrderRespType: MarginAccountNewOtocoNewOrderRespTypeEnum.ACK,
                 selfTradePreventionMode: 'NONE',
                 workingClientOrderId: '1',
-                workingIcebergQty: 1,
+                workingIcebergQty: 1.0,
                 workingTimeInForce: 'workingTimeInForce_example',
                 pendingAboveClientOrderId: '1',
-                pendingAbovePrice: 1,
-                pendingAboveStopPrice: 1,
-                pendingAboveTrailingDelta: 1,
-                pendingAboveIcebergQty: 1,
+                pendingAbovePrice: 1.0,
+                pendingAboveStopPrice: 1.0,
+                pendingAboveTrailingDelta: 1.0,
+                pendingAboveIcebergQty: 1.0,
                 pendingAboveTimeInForce: 'pendingAboveTimeInForce_example',
                 pendingBelowType: 'pendingBelowType_example',
                 pendingBelowClientOrderId: '1',
-                pendingBelowPrice: 1,
-                pendingBelowStopPrice: 1,
-                pendingBelowTrailingDelta: 1,
-                pendingBelowIcebergQty: 1,
+                pendingBelowPrice: 1.0,
+                pendingBelowStopPrice: 1.0,
+                pendingBelowTrailingDelta: 1.0,
+                pendingBelowIcebergQty: 1.0,
                 pendingBelowTimeInForce: 'pendingBelowTimeInForce_example',
             };
 
@@ -2212,10 +2212,10 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 workingType: 'workingType_example',
                 workingSide: 'workingSide_example',
-                workingPrice: 1,
-                workingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
                 pendingSide: 'pendingSide_example',
-                pendingQuantity: 1,
+                pendingQuantity: 1.0,
                 pendingAboveType: 'pendingAboveType_example',
             };
             const params = Object.assign({ ..._params });
@@ -2231,10 +2231,10 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 workingType: 'workingType_example',
                 workingSide: 'workingSide_example',
-                workingPrice: 1,
-                workingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
                 pendingSide: 'pendingSide_example',
-                pendingQuantity: 1,
+                pendingQuantity: 1.0,
                 pendingAboveType: 'pendingAboveType_example',
             };
             const params = Object.assign({ ..._params });
@@ -2250,10 +2250,10 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 workingType: 'workingType_example',
                 workingSide: 'workingSide_example',
-                workingPrice: 1,
-                workingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
                 pendingSide: 'pendingSide_example',
-                pendingQuantity: 1,
+                pendingQuantity: 1.0,
                 pendingAboveType: 'pendingAboveType_example',
             };
             const params = Object.assign({ ..._params });
@@ -2269,10 +2269,10 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 workingType: 'workingType_example',
                 workingSide: 'workingSide_example',
-                workingPrice: 1,
-                workingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
                 pendingSide: 'pendingSide_example',
-                pendingQuantity: 1,
+                pendingQuantity: 1.0,
                 pendingAboveType: 'pendingAboveType_example',
             };
             const params = Object.assign({ ..._params });
@@ -2288,10 +2288,10 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 workingType: 'workingType_example',
                 workingSide: 'workingSide_example',
-                workingPrice: 1,
-                workingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
                 pendingSide: 'pendingSide_example',
-                pendingQuantity: 1,
+                pendingQuantity: 1.0,
                 pendingAboveType: 'pendingAboveType_example',
             };
             const params = Object.assign({ ..._params });
@@ -2307,10 +2307,10 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 workingType: 'workingType_example',
                 workingSide: 'workingSide_example',
-                workingPrice: 1,
-                workingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
                 pendingSide: 'pendingSide_example',
-                pendingQuantity: 1,
+                pendingQuantity: 1.0,
                 pendingAboveType: 'pendingAboveType_example',
             };
             const params = Object.assign({ ..._params });
@@ -2326,10 +2326,10 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 workingType: 'workingType_example',
                 workingSide: 'workingSide_example',
-                workingPrice: 1,
-                workingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
                 pendingSide: 'pendingSide_example',
-                pendingQuantity: 1,
+                pendingQuantity: 1.0,
                 pendingAboveType: 'pendingAboveType_example',
             };
             const params = Object.assign({ ..._params });
@@ -2345,10 +2345,10 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 workingType: 'workingType_example',
                 workingSide: 'workingSide_example',
-                workingPrice: 1,
-                workingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
                 pendingSide: 'pendingSide_example',
-                pendingQuantity: 1,
+                pendingQuantity: 1.0,
                 pendingAboveType: 'pendingAboveType_example',
             };
             const params = Object.assign({ ..._params });
@@ -2364,10 +2364,10 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 workingType: 'workingType_example',
                 workingSide: 'workingSide_example',
-                workingPrice: 1,
-                workingQuantity: 1,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
                 pendingSide: 'pendingSide_example',
-                pendingQuantity: 1,
+                pendingQuantity: 1.0,
                 pendingAboveType: 'pendingAboveType_example',
             };
 

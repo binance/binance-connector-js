@@ -1,5 +1,24 @@
 # Changelog
 
+## 8.0.0 - 2025-06-16
+
+### Changed (4)
+
+- Update `@binance/common` library to version `1.1.1`.
+
+#### REST API
+
+- Modified response for `exchangeInfo()` method (`GET /api/v3/exchangeInfo`):
+  - `symbols`: item property `amendAllowed` added
+  - `symbols`: item property `allowAmend` deleted
+
+#### WebSocket API
+
+- Modified response for `exchangeInfo()` method (`POST /exchangeInfo`):
+  - `result`.`symbols`: item property `amendAllowed` added
+  - `result`.`symbols`: item property `allowAmend` deleted
+- Exposed `@types/ws` dependency.
+
 ## 7.0.0 - 2025-06-05
 
 ### Changed (2)

@@ -20,6 +20,7 @@ import {
     GetAllIsolatedMarginSymbolRequest,
     GetAllMarginAssetsRequest,
     GetDelistScheduleRequest,
+    GetListScheduleRequest,
     QueryIsolatedMarginTierDataRequest,
     QueryMarginAvailableInventoryRequest,
     QueryMarginPriceindexRequest,
@@ -30,6 +31,7 @@ import type {
     GetAllIsolatedMarginSymbolResponse,
     GetAllMarginAssetsResponse,
     GetDelistScheduleResponse,
+    GetListScheduleResponse,
     QueryIsolatedMarginTierDataResponse,
     QueryLiabilityCoinLeverageBracketInCrossMarginProModeResponse,
     QueryMarginAvailableInventoryResponse,
@@ -472,6 +474,75 @@ describe('MarketDataApi', () => {
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'getDelistSchedule').mockRejectedValueOnce(mockError);
             await expect(client.getDelistSchedule()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('getListSchedule()', () => {
+        it('should execute getListSchedule() successfully with required parameters only', async () => {
+            mockResponse = [
+                {
+                    listTime: 1686161202000,
+                    crossMarginAssets: ['BTC', 'USDT'],
+                    isolatedMarginSymbols: ['ADAUSDT', 'BNBUSDT'],
+                },
+                { listTime: 1686222232000, crossMarginAssets: ['ADA'], isolatedMarginSymbols: [] },
+            ];
+
+            const spy = jest.spyOn(client, 'getListSchedule').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetListScheduleResponse>)
+            );
+            const response = await client.getListSchedule();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute getListSchedule() successfully with optional parameters', async () => {
+            const params: GetListScheduleRequest = {
+                recvWindow: 5000,
+            };
+
+            mockResponse = [
+                {
+                    listTime: 1686161202000,
+                    crossMarginAssets: ['BTC', 'USDT'],
+                    isolatedMarginSymbols: ['ADAUSDT', 'BNBUSDT'],
+                },
+                { listTime: 1686222232000, crossMarginAssets: ['ADA'], isolatedMarginSymbols: [] },
+            ];
+
+            const spy = jest.spyOn(client, 'getListSchedule').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetListScheduleResponse>)
+            );
+            const response = await client.getListSchedule(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'getListSchedule').mockRejectedValueOnce(mockError);
+            await expect(client.getListSchedule()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

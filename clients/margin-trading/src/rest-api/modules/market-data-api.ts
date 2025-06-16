@@ -25,6 +25,7 @@ import type {
     GetAllIsolatedMarginSymbolResponse,
     GetAllMarginAssetsResponse,
     GetDelistScheduleResponse,
+    GetListScheduleResponse,
     QueryIsolatedMarginTierDataResponse,
     QueryLiabilityCoinLeverageBracketInCrossMarginProModeResponse,
     QueryMarginAvailableInventoryResponse,
@@ -169,6 +170,33 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
 
             return {
                 endpoint: '/sapi/v1/margin/delist-schedule',
+                method: 'GET',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Get the upcoming tokens or symbols listing schedule for Cross Margin and Isolated Margin.
+         *
+         * Weight: 100
+         *
+         * @summary Get list Schedule (MARKET_DATA)
+         * @param {number} [recvWindow] No more than 60000
+         *
+         * @throws {RequiredError}
+         */
+        getListSchedule: async (recvWindow?: number): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/margin/list-schedule',
                 method: 'GET',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
@@ -376,6 +404,20 @@ export interface MarketDataApiInterface {
         requestParameters?: GetDelistScheduleRequest
     ): Promise<RestApiResponse<GetDelistScheduleResponse>>;
     /**
+     * Get the upcoming tokens or symbols listing schedule for Cross Margin and Isolated Margin.
+     *
+     * Weight: 100
+     *
+     * @summary Get list Schedule (MARKET_DATA)
+     * @param {GetListScheduleRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApiInterface
+     */
+    getListSchedule(
+        requestParameters?: GetListScheduleRequest
+    ): Promise<RestApiResponse<GetListScheduleResponse>>;
+    /**
      * Get isolated margin tier data collection with any tier as https://www.binance.com/en/margin-data
      *
      * Weight: 1(IP)
@@ -487,6 +529,19 @@ export interface GetDelistScheduleRequest {
      * No more than 60000
      * @type {number}
      * @memberof MarketDataApiGetDelistSchedule
+     */
+    readonly recvWindow?: number;
+}
+
+/**
+ * Request parameters for getListSchedule operation in MarketDataApi.
+ * @interface GetListScheduleRequest
+ */
+export interface GetListScheduleRequest {
+    /**
+     * No more than 60000
+     * @type {number}
+     * @memberof MarketDataApiGetListSchedule
      */
     readonly recvWindow?: number;
 }
@@ -686,6 +741,34 @@ export class MarketDataApi implements MarketDataApiInterface {
             requestParameters?.recvWindow
         );
         return sendRequest<GetDelistScheduleResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: false }
+        );
+    }
+
+    /**
+     * Get the upcoming tokens or symbols listing schedule for Cross Margin and Isolated Margin.
+     *
+     * Weight: 100
+     *
+     * @summary Get list Schedule (MARKET_DATA)
+     * @param {GetListScheduleRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetListScheduleResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApi
+     * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Get-list-Schedule Binance API Documentation}
+     */
+    public async getListSchedule(
+        requestParameters: GetListScheduleRequest = {}
+    ): Promise<RestApiResponse<GetListScheduleResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getListSchedule(
+            requestParameters?.recvWindow
+        );
+        return sendRequest<GetListScheduleResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

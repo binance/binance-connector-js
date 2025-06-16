@@ -13,12 +13,12 @@ async function marginAccountNewOto() {
             symbol: 'symbol_example',
             workingType: 'workingType_example',
             workingSide: 'workingSide_example',
-            workingPrice: 1,
-            workingQuantity: 1,
-            workingIcebergQty: 1,
+            workingPrice: 1.0,
+            workingQuantity: 1.0,
+            workingIcebergQty: 1.0,
             pendingType: 'Order Types',
             pendingSide: 'pendingSide_example',
-            pendingQuantity: 1,
+            pendingQuantity: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

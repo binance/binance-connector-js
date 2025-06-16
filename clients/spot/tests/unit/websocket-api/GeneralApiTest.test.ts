@@ -191,7 +191,7 @@ describe('GeneralApi', () => {
                             quoteOrderQtyMarketAllowed: true,
                             allowTrailingStop: true,
                             cancelReplaceAllowed: true,
-                            allowAmend: false,
+                            amendAllowed: false,
                             isSpotTradingAllowed: true,
                             isMarginTradingAllowed: true,
                             filters: [

@@ -46,6 +46,7 @@ import type {
     GetAllIsolatedMarginSymbolRequest,
     GetAllMarginAssetsRequest,
     GetDelistScheduleRequest,
+    GetListScheduleRequest,
     QueryIsolatedMarginTierDataRequest,
     QueryMarginAvailableInventoryRequest,
     QueryMarginPriceindexRequest,
@@ -117,6 +118,7 @@ import type {
     GetAllIsolatedMarginSymbolResponse,
     GetAllMarginAssetsResponse,
     GetDelistScheduleResponse,
+    GetListScheduleResponse,
     QueryIsolatedMarginTierDataResponse,
     QueryLiabilityCoinLeverageBracketInCrossMarginProModeResponse,
     QueryMarginAvailableInventoryResponse,
@@ -607,6 +609,23 @@ export class RestAPI {
         requestParameters: GetDelistScheduleRequest = {}
     ): Promise<RestApiResponse<GetDelistScheduleResponse>> {
         return this.marketDataApi.getDelistSchedule(requestParameters);
+    }
+
+    /**
+     * Get the upcoming tokens or symbols listing schedule for Cross Margin and Isolated Margin.
+     *
+     * Weight: 100
+     *
+     * @summary Get list Schedule (MARKET_DATA)
+     * @param {GetListScheduleRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetListScheduleResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Get-list-Schedule Binance API Documentation}
+     */
+    getListSchedule(
+        requestParameters: GetListScheduleRequest = {}
+    ): Promise<RestApiResponse<GetListScheduleResponse>> {
+        return this.marketDataApi.getListSchedule(requestParameters);
     }
 
     /**

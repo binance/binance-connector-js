@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.0.1 - 2025-06-16
+
+### Changed (2)
+
+- Exposed `@types/ws` dependency.
+- Update `@binance/common` library to version `1.1.1`.
+
 ## 4.0.0 - 2025-06-05
 
 ### Changed (2)

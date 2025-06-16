@@ -1,6 +1,16 @@
 # Changelog
 
-## 4.0.0 - 2025-06-xx
+## 5.0.0 - 2025-06-16
+
+### Added (1)
+
+- `getListSchedule()` (`GET /sapi/v1/margin/list-schedule`)
+
+### Changed (1)
+
+- Update `@binance/common` library to version `1.1.1`.
+
+## 4.0.0 - 2025-06-05
 
 ### Changed (2)
 

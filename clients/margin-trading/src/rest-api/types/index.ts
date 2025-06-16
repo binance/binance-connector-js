@@ -22,6 +22,8 @@ export * from './get-future-hourly-interest-rate-response';
 export * from './get-future-hourly-interest-rate-response-inner';
 export * from './get-interest-history-response';
 export * from './get-interest-history-response-rows-inner';
+export * from './get-list-schedule-response';
+export * from './get-list-schedule-response-inner';
 export * from './get-small-liability-exchange-coin-list-response';
 export * from './get-small-liability-exchange-coin-list-response-inner';
 export * from './get-small-liability-exchange-history-response';
