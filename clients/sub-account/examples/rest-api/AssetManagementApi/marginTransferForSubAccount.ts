@@ -12,7 +12,7 @@ async function marginTransferForSubAccount() {
         const response = await client.restAPI.marginTransferForSubAccount({
             email: 'sub-account-email@email.com',
             asset: 'asset_example',
-            amount: 1,
+            amount: 1.0,
             type: 789,
         });
 

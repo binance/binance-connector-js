@@ -85,7 +85,7 @@ describe('AssetManagementApi', () => {
             const params: FuturesTransferForSubAccountRequest = {
                 email: 'sub-account-email@email.com',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
                 type: 789,
             };
 
@@ -109,7 +109,7 @@ describe('AssetManagementApi', () => {
             const params: FuturesTransferForSubAccountRequest = {
                 email: 'sub-account-email@email.com',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
                 type: 789,
                 recvWindow: 5000,
             };
@@ -134,7 +134,7 @@ describe('AssetManagementApi', () => {
             const _params: FuturesTransferForSubAccountRequest = {
                 email: 'sub-account-email@email.com',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
                 type: 789,
             };
             const params = Object.assign({ ..._params });
@@ -149,7 +149,7 @@ describe('AssetManagementApi', () => {
             const _params: FuturesTransferForSubAccountRequest = {
                 email: 'sub-account-email@email.com',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
                 type: 789,
             };
             const params = Object.assign({ ..._params });
@@ -164,7 +164,7 @@ describe('AssetManagementApi', () => {
             const _params: FuturesTransferForSubAccountRequest = {
                 email: 'sub-account-email@email.com',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
                 type: 789,
             };
             const params = Object.assign({ ..._params });
@@ -179,7 +179,7 @@ describe('AssetManagementApi', () => {
             const _params: FuturesTransferForSubAccountRequest = {
                 email: 'sub-account-email@email.com',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
                 type: 789,
             };
             const params = Object.assign({ ..._params });
@@ -194,7 +194,7 @@ describe('AssetManagementApi', () => {
             const params: FuturesTransferForSubAccountRequest = {
                 email: 'sub-account-email@email.com',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
                 type: 789,
             };
 
@@ -953,7 +953,7 @@ describe('AssetManagementApi', () => {
                 email: 'sub-account-email@email.com',
                 coin: 'coin_example',
                 network: 'network_example',
-                amount: 1,
+                amount: 1.0,
                 recvWindow: 5000,
             };
 
@@ -1605,7 +1605,7 @@ describe('AssetManagementApi', () => {
             const params: MarginTransferForSubAccountRequest = {
                 email: 'sub-account-email@email.com',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
                 type: 789,
             };
 
@@ -1629,7 +1629,7 @@ describe('AssetManagementApi', () => {
             const params: MarginTransferForSubAccountRequest = {
                 email: 'sub-account-email@email.com',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
                 type: 789,
                 recvWindow: 5000,
             };
@@ -1654,7 +1654,7 @@ describe('AssetManagementApi', () => {
             const _params: MarginTransferForSubAccountRequest = {
                 email: 'sub-account-email@email.com',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
                 type: 789,
             };
             const params = Object.assign({ ..._params });
@@ -1669,7 +1669,7 @@ describe('AssetManagementApi', () => {
             const _params: MarginTransferForSubAccountRequest = {
                 email: 'sub-account-email@email.com',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
                 type: 789,
             };
             const params = Object.assign({ ..._params });
@@ -1684,7 +1684,7 @@ describe('AssetManagementApi', () => {
             const _params: MarginTransferForSubAccountRequest = {
                 email: 'sub-account-email@email.com',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
                 type: 789,
             };
             const params = Object.assign({ ..._params });
@@ -1699,7 +1699,7 @@ describe('AssetManagementApi', () => {
             const _params: MarginTransferForSubAccountRequest = {
                 email: 'sub-account-email@email.com',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
                 type: 789,
             };
             const params = Object.assign({ ..._params });
@@ -1714,7 +1714,7 @@ describe('AssetManagementApi', () => {
             const params: MarginTransferForSubAccountRequest = {
                 email: 'sub-account-email@email.com',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
                 type: 789,
             };
 
@@ -2557,7 +2557,7 @@ describe('AssetManagementApi', () => {
                 toEmail: 'toEmail_example',
                 futuresType: 789,
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
 
             mockResponse = { success: true, txnId: '2934662589' };
@@ -2582,7 +2582,7 @@ describe('AssetManagementApi', () => {
                 toEmail: 'toEmail_example',
                 futuresType: 789,
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
                 recvWindow: 5000,
             };
 
@@ -2608,7 +2608,7 @@ describe('AssetManagementApi', () => {
                 toEmail: 'toEmail_example',
                 futuresType: 789,
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.fromEmail;
@@ -2624,7 +2624,7 @@ describe('AssetManagementApi', () => {
                 toEmail: 'toEmail_example',
                 futuresType: 789,
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.toEmail;
@@ -2640,7 +2640,7 @@ describe('AssetManagementApi', () => {
                 toEmail: 'toEmail_example',
                 futuresType: 789,
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.futuresType;
@@ -2656,7 +2656,7 @@ describe('AssetManagementApi', () => {
                 toEmail: 'toEmail_example',
                 futuresType: 789,
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -2672,7 +2672,7 @@ describe('AssetManagementApi', () => {
                 toEmail: 'toEmail_example',
                 futuresType: 789,
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -2688,7 +2688,7 @@ describe('AssetManagementApi', () => {
                 toEmail: 'toEmail_example',
                 futuresType: 789,
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
 
             const errorResponse = {
@@ -2827,7 +2827,7 @@ describe('AssetManagementApi', () => {
         it('should execute transferToMaster() successfully with required parameters only', async () => {
             const params: TransferToMasterRequest = {
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
 
             mockResponse = { txnId: '2966662589' };
@@ -2849,7 +2849,7 @@ describe('AssetManagementApi', () => {
         it('should execute transferToMaster() successfully with optional parameters', async () => {
             const params: TransferToMasterRequest = {
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
                 recvWindow: 5000,
             };
 
@@ -2872,7 +2872,7 @@ describe('AssetManagementApi', () => {
         it('should throw RequiredError when asset is missing', async () => {
             const _params: TransferToMasterRequest = {
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -2885,7 +2885,7 @@ describe('AssetManagementApi', () => {
         it('should throw RequiredError when amount is missing', async () => {
             const _params: TransferToMasterRequest = {
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -2898,7 +2898,7 @@ describe('AssetManagementApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: TransferToMasterRequest = {
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
 
             const errorResponse = {
@@ -2921,7 +2921,7 @@ describe('AssetManagementApi', () => {
             const params: TransferToSubAccountOfSameMasterRequest = {
                 toEmail: 'toEmail_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
 
             mockResponse = { txnId: '2966662589' };
@@ -2944,7 +2944,7 @@ describe('AssetManagementApi', () => {
             const params: TransferToSubAccountOfSameMasterRequest = {
                 toEmail: 'toEmail_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
                 recvWindow: 5000,
             };
 
@@ -2968,7 +2968,7 @@ describe('AssetManagementApi', () => {
             const _params: TransferToSubAccountOfSameMasterRequest = {
                 toEmail: 'toEmail_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.toEmail;
@@ -2982,7 +2982,7 @@ describe('AssetManagementApi', () => {
             const _params: TransferToSubAccountOfSameMasterRequest = {
                 toEmail: 'toEmail_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -2996,7 +2996,7 @@ describe('AssetManagementApi', () => {
             const _params: TransferToSubAccountOfSameMasterRequest = {
                 toEmail: 'toEmail_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -3010,7 +3010,7 @@ describe('AssetManagementApi', () => {
             const params: TransferToSubAccountOfSameMasterRequest = {
                 toEmail: 'toEmail_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
 
             const errorResponse = {
@@ -3038,7 +3038,7 @@ describe('AssetManagementApi', () => {
                 fromAccountType: 'fromAccountType_example',
                 toAccountType: 'toAccountType_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
 
             mockResponse = { tranId: 11945860693, clientTranId: 'test' };
@@ -3062,7 +3062,7 @@ describe('AssetManagementApi', () => {
                 fromAccountType: 'fromAccountType_example',
                 toAccountType: 'toAccountType_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
                 fromEmail: 'fromEmail_example',
                 toEmail: 'toEmail_example',
                 clientTranId: '1',
@@ -3091,7 +3091,7 @@ describe('AssetManagementApi', () => {
                 fromAccountType: 'fromAccountType_example',
                 toAccountType: 'toAccountType_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.fromAccountType;
@@ -3106,7 +3106,7 @@ describe('AssetManagementApi', () => {
                 fromAccountType: 'fromAccountType_example',
                 toAccountType: 'toAccountType_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.toAccountType;
@@ -3121,7 +3121,7 @@ describe('AssetManagementApi', () => {
                 fromAccountType: 'fromAccountType_example',
                 toAccountType: 'toAccountType_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -3136,7 +3136,7 @@ describe('AssetManagementApi', () => {
                 fromAccountType: 'fromAccountType_example',
                 toAccountType: 'toAccountType_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -3151,7 +3151,7 @@ describe('AssetManagementApi', () => {
                 fromAccountType: 'fromAccountType_example',
                 toAccountType: 'toAccountType_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
 
             const errorResponse = {

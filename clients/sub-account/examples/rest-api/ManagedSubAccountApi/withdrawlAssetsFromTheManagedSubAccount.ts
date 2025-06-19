@@ -12,7 +12,7 @@ async function withdrawlAssetsFromTheManagedSubAccount() {
         const response = await client.restAPI.withdrawlAssetsFromTheManagedSubAccount({
             fromEmail: 'fromEmail_example',
             asset: 'asset_example',
-            amount: 1,
+            amount: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

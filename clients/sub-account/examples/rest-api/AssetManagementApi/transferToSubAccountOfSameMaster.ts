@@ -12,7 +12,7 @@ async function transferToSubAccountOfSameMaster() {
         const response = await client.restAPI.transferToSubAccountOfSameMaster({
             toEmail: 'toEmail_example',
             asset: 'asset_example',
-            amount: 1,
+            amount: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

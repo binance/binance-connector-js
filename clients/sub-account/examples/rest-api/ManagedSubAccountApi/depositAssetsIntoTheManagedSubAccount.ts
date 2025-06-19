@@ -12,7 +12,7 @@ async function depositAssetsIntoTheManagedSubAccount() {
         const response = await client.restAPI.depositAssetsIntoTheManagedSubAccount({
             toEmail: 'toEmail_example',
             asset: 'asset_example',
-            amount: 1,
+            amount: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

@@ -13,7 +13,7 @@ async function universalTransfer() {
             fromAccountType: 'fromAccountType_example',
             toAccountType: 'toAccountType_example',
             asset: 'asset_example',
-            amount: 1,
+            amount: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

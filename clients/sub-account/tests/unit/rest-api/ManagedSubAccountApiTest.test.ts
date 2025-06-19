@@ -61,7 +61,7 @@ describe('ManagedSubAccountApi', () => {
             const params: DepositAssetsIntoTheManagedSubAccountRequest = {
                 toEmail: 'toEmail_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
 
             mockResponse = { tranId: 66157362489 };
@@ -84,7 +84,7 @@ describe('ManagedSubAccountApi', () => {
             const params: DepositAssetsIntoTheManagedSubAccountRequest = {
                 toEmail: 'toEmail_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
                 recvWindow: 5000,
             };
 
@@ -108,7 +108,7 @@ describe('ManagedSubAccountApi', () => {
             const _params: DepositAssetsIntoTheManagedSubAccountRequest = {
                 toEmail: 'toEmail_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.toEmail;
@@ -122,7 +122,7 @@ describe('ManagedSubAccountApi', () => {
             const _params: DepositAssetsIntoTheManagedSubAccountRequest = {
                 toEmail: 'toEmail_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -136,7 +136,7 @@ describe('ManagedSubAccountApi', () => {
             const _params: DepositAssetsIntoTheManagedSubAccountRequest = {
                 toEmail: 'toEmail_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -150,7 +150,7 @@ describe('ManagedSubAccountApi', () => {
             const params: DepositAssetsIntoTheManagedSubAccountRequest = {
                 toEmail: 'toEmail_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
 
             const errorResponse = {
@@ -205,7 +205,7 @@ describe('ManagedSubAccountApi', () => {
                 email: 'sub-account-email@email.com',
                 coin: 'coin_example',
                 network: 'network_example',
-                amount: 1,
+                amount: 1.0,
                 recvWindow: 5000,
             };
 
@@ -1707,7 +1707,7 @@ describe('ManagedSubAccountApi', () => {
             const params: WithdrawlAssetsFromTheManagedSubAccountRequest = {
                 fromEmail: 'fromEmail_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
 
             mockResponse = { tranId: 66157362489 };
@@ -1732,7 +1732,7 @@ describe('ManagedSubAccountApi', () => {
             const params: WithdrawlAssetsFromTheManagedSubAccountRequest = {
                 fromEmail: 'fromEmail_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
                 transferDate: 789,
                 recvWindow: 5000,
             };
@@ -1759,7 +1759,7 @@ describe('ManagedSubAccountApi', () => {
             const _params: WithdrawlAssetsFromTheManagedSubAccountRequest = {
                 fromEmail: 'fromEmail_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.fromEmail;
@@ -1773,7 +1773,7 @@ describe('ManagedSubAccountApi', () => {
             const _params: WithdrawlAssetsFromTheManagedSubAccountRequest = {
                 fromEmail: 'fromEmail_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -1787,7 +1787,7 @@ describe('ManagedSubAccountApi', () => {
             const _params: WithdrawlAssetsFromTheManagedSubAccountRequest = {
                 fromEmail: 'fromEmail_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -1801,7 +1801,7 @@ describe('ManagedSubAccountApi', () => {
             const params: WithdrawlAssetsFromTheManagedSubAccountRequest = {
                 fromEmail: 'fromEmail_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
 
             const errorResponse = {

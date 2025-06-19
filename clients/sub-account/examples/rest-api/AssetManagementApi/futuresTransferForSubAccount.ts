@@ -12,7 +12,7 @@ async function futuresTransferForSubAccount() {
         const response = await client.restAPI.futuresTransferForSubAccount({
             email: 'sub-account-email@email.com',
             asset: 'asset_example',
-            amount: 1,
+            amount: 1.0,
             type: 789,
         });
 

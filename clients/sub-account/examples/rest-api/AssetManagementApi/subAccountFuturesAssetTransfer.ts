@@ -14,7 +14,7 @@ async function subAccountFuturesAssetTransfer() {
             toEmail: 'toEmail_example',
             futuresType: 789,
             asset: 'asset_example',
-            amount: 1,
+            amount: 1.0,
         });
 
         const rateLimits = response.rateLimits!;
