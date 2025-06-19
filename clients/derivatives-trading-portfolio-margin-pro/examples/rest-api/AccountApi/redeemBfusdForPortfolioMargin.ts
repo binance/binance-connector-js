@@ -15,7 +15,7 @@ async function redeemBfusdForPortfolioMargin() {
         const response = await client.restAPI.redeemBfusdForPortfolioMargin({
             fromAsset: 'fromAsset_example',
             targetAsset: 'targetAsset_example',
-            amount: 1,
+            amount: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

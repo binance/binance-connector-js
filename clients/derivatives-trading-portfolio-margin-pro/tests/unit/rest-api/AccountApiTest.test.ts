@@ -71,7 +71,7 @@ describe('AccountApi', () => {
     describe('bnbTransfer()', () => {
         it('should execute bnbTransfer() successfully with required parameters only', async () => {
             const params: BnbTransferRequest = {
-                amount: 1,
+                amount: 1.0,
                 transferSide: 'transferSide_example',
             };
 
@@ -93,7 +93,7 @@ describe('AccountApi', () => {
 
         it('should execute bnbTransfer() successfully with optional parameters', async () => {
             const params: BnbTransferRequest = {
-                amount: 1,
+                amount: 1.0,
                 transferSide: 'transferSide_example',
                 recvWindow: 5000,
             };
@@ -116,7 +116,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when amount is missing', async () => {
             const _params: BnbTransferRequest = {
-                amount: 1,
+                amount: 1.0,
                 transferSide: 'transferSide_example',
             };
             const params = Object.assign({ ..._params });
@@ -129,7 +129,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when transferSide is missing', async () => {
             const _params: BnbTransferRequest = {
-                amount: 1,
+                amount: 1.0,
                 transferSide: 'transferSide_example',
             };
             const params = Object.assign({ ..._params });
@@ -142,7 +142,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: BnbTransferRequest = {
-                amount: 1,
+                amount: 1.0,
                 transferSide: 'transferSide_example',
             };
 
@@ -793,7 +793,7 @@ describe('AccountApi', () => {
             const params: MintBfusdForPortfolioMarginRequest = {
                 fromAsset: 'fromAsset_example',
                 targetAsset: 'targetAsset_example',
-                amount: 1,
+                amount: 1.0,
             };
 
             mockResponse = {
@@ -822,7 +822,7 @@ describe('AccountApi', () => {
             const params: MintBfusdForPortfolioMarginRequest = {
                 fromAsset: 'fromAsset_example',
                 targetAsset: 'targetAsset_example',
-                amount: 1,
+                amount: 1.0,
                 recvWindow: 5000,
             };
 
@@ -852,7 +852,7 @@ describe('AccountApi', () => {
             const _params: MintBfusdForPortfolioMarginRequest = {
                 fromAsset: 'fromAsset_example',
                 targetAsset: 'targetAsset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.fromAsset;
@@ -866,7 +866,7 @@ describe('AccountApi', () => {
             const _params: MintBfusdForPortfolioMarginRequest = {
                 fromAsset: 'fromAsset_example',
                 targetAsset: 'targetAsset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.targetAsset;
@@ -880,7 +880,7 @@ describe('AccountApi', () => {
             const _params: MintBfusdForPortfolioMarginRequest = {
                 fromAsset: 'fromAsset_example',
                 targetAsset: 'targetAsset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -894,7 +894,7 @@ describe('AccountApi', () => {
             const params: MintBfusdForPortfolioMarginRequest = {
                 fromAsset: 'fromAsset_example',
                 targetAsset: 'targetAsset_example',
-                amount: 1,
+                amount: 1.0,
             };
 
             const errorResponse = {
@@ -1207,7 +1207,7 @@ describe('AccountApi', () => {
             const params: RedeemBfusdForPortfolioMarginRequest = {
                 fromAsset: 'fromAsset_example',
                 targetAsset: 'targetAsset_example',
-                amount: 1,
+                amount: 1.0,
             };
 
             mockResponse = {
@@ -1236,7 +1236,7 @@ describe('AccountApi', () => {
             const params: RedeemBfusdForPortfolioMarginRequest = {
                 fromAsset: 'fromAsset_example',
                 targetAsset: 'targetAsset_example',
-                amount: 1,
+                amount: 1.0,
                 recvWindow: 5000,
             };
 
@@ -1266,7 +1266,7 @@ describe('AccountApi', () => {
             const _params: RedeemBfusdForPortfolioMarginRequest = {
                 fromAsset: 'fromAsset_example',
                 targetAsset: 'targetAsset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.fromAsset;
@@ -1280,7 +1280,7 @@ describe('AccountApi', () => {
             const _params: RedeemBfusdForPortfolioMarginRequest = {
                 fromAsset: 'fromAsset_example',
                 targetAsset: 'targetAsset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.targetAsset;
@@ -1294,7 +1294,7 @@ describe('AccountApi', () => {
             const _params: RedeemBfusdForPortfolioMarginRequest = {
                 fromAsset: 'fromAsset_example',
                 targetAsset: 'targetAsset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -1308,7 +1308,7 @@ describe('AccountApi', () => {
             const params: RedeemBfusdForPortfolioMarginRequest = {
                 fromAsset: 'fromAsset_example',
                 targetAsset: 'targetAsset_example',
-                amount: 1,
+                amount: 1.0,
             };
 
             const errorResponse = {
@@ -1393,7 +1393,7 @@ describe('AccountApi', () => {
             const params: TransferLdusdtForPortfolioMarginRequest = {
                 asset: 'asset_example',
                 transferType: 'transferType_example',
-                amount: 1,
+                amount: 1.0,
             };
 
             mockResponse = { msg: 'success' };
@@ -1416,7 +1416,7 @@ describe('AccountApi', () => {
             const params: TransferLdusdtForPortfolioMarginRequest = {
                 asset: 'asset_example',
                 transferType: 'transferType_example',
-                amount: 1,
+                amount: 1.0,
                 recvWindow: 5000,
             };
 
@@ -1440,7 +1440,7 @@ describe('AccountApi', () => {
             const _params: TransferLdusdtForPortfolioMarginRequest = {
                 asset: 'asset_example',
                 transferType: 'transferType_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -1454,7 +1454,7 @@ describe('AccountApi', () => {
             const _params: TransferLdusdtForPortfolioMarginRequest = {
                 asset: 'asset_example',
                 transferType: 'transferType_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.transferType;
@@ -1468,7 +1468,7 @@ describe('AccountApi', () => {
             const _params: TransferLdusdtForPortfolioMarginRequest = {
                 asset: 'asset_example',
                 transferType: 'transferType_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -1482,7 +1482,7 @@ describe('AccountApi', () => {
             const params: TransferLdusdtForPortfolioMarginRequest = {
                 asset: 'asset_example',
                 transferType: 'transferType_example',
-                amount: 1,
+                amount: 1.0,
             };
 
             const errorResponse = {

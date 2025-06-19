@@ -15,7 +15,7 @@ async function transferLdusdtForPortfolioMargin() {
         const response = await client.restAPI.transferLdusdtForPortfolioMargin({
             asset: 'asset_example',
             transferType: 'transferType_example',
-            amount: 1,
+            amount: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

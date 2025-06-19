@@ -15,7 +15,7 @@ async function mintBfusdForPortfolioMargin() {
         const response = await client.restAPI.mintBfusdForPortfolioMargin({
             fromAsset: 'fromAsset_example',
             targetAsset: 'targetAsset_example',
-            amount: 1,
+            amount: 1.0,
         });
 
         const rateLimits = response.rateLimits!;
