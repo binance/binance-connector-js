@@ -695,7 +695,7 @@ describe('EthStakingApi', () => {
     describe('redeemEth()', () => {
         it('should execute redeemEth() successfully with required parameters only', async () => {
             const params: RedeemEthRequest = {
-                amount: 1,
+                amount: 1.0,
             };
 
             mockResponse = {
@@ -721,7 +721,7 @@ describe('EthStakingApi', () => {
 
         it('should execute redeemEth() successfully with optional parameters', async () => {
             const params: RedeemEthRequest = {
-                amount: 1,
+                amount: 1.0,
                 asset: 'BETH',
                 recvWindow: 5000,
             };
@@ -749,7 +749,7 @@ describe('EthStakingApi', () => {
 
         it('should throw RequiredError when amount is missing', async () => {
             const _params: RedeemEthRequest = {
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -761,7 +761,7 @@ describe('EthStakingApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: RedeemEthRequest = {
-                amount: 1,
+                amount: 1.0,
             };
 
             const errorResponse = {
@@ -782,7 +782,7 @@ describe('EthStakingApi', () => {
     describe('subscribeEthStaking()', () => {
         it('should execute subscribeEthStaking() successfully with required parameters only', async () => {
             const params: SubscribeEthStakingRequest = {
-                amount: 1,
+                amount: 1.0,
             };
 
             mockResponse = {
@@ -807,7 +807,7 @@ describe('EthStakingApi', () => {
 
         it('should execute subscribeEthStaking() successfully with optional parameters', async () => {
             const params: SubscribeEthStakingRequest = {
-                amount: 1,
+                amount: 1.0,
                 recvWindow: 5000,
             };
 
@@ -833,7 +833,7 @@ describe('EthStakingApi', () => {
 
         it('should throw RequiredError when amount is missing', async () => {
             const _params: SubscribeEthStakingRequest = {
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -845,7 +845,7 @@ describe('EthStakingApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: SubscribeEthStakingRequest = {
-                amount: 1,
+                amount: 1.0,
             };
 
             const errorResponse = {
@@ -866,7 +866,7 @@ describe('EthStakingApi', () => {
     describe('wrapBeth()', () => {
         it('should execute wrapBeth() successfully with required parameters only', async () => {
             const params: WrapBethRequest = {
-                amount: 1,
+                amount: 1.0,
             };
 
             mockResponse = {
@@ -891,7 +891,7 @@ describe('EthStakingApi', () => {
 
         it('should execute wrapBeth() successfully with optional parameters', async () => {
             const params: WrapBethRequest = {
-                amount: 1,
+                amount: 1.0,
                 recvWindow: 5000,
             };
 
@@ -917,7 +917,7 @@ describe('EthStakingApi', () => {
 
         it('should throw RequiredError when amount is missing', async () => {
             const _params: WrapBethRequest = {
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -929,7 +929,7 @@ describe('EthStakingApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: WrapBethRequest = {
-                amount: 1,
+                amount: 1.0,
             };
 
             const errorResponse = {

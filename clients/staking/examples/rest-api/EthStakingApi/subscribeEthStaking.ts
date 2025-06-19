@@ -10,7 +10,7 @@ const client = new Staking({ configurationRestAPI });
 async function subscribeEthStaking() {
     try {
         const response = await client.restAPI.subscribeEthStaking({
-            amount: 1,
+            amount: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

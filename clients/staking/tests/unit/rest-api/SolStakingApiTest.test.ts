@@ -704,7 +704,7 @@ describe('SolStakingApi', () => {
     describe('redeemSol()', () => {
         it('should execute redeemSol() successfully with required parameters only', async () => {
             const params: RedeemSolRequest = {
-                amount: 1,
+                amount: 1.0,
             };
 
             mockResponse = {
@@ -730,7 +730,7 @@ describe('SolStakingApi', () => {
 
         it('should execute redeemSol() successfully with optional parameters', async () => {
             const params: RedeemSolRequest = {
-                amount: 1,
+                amount: 1.0,
                 recvWindow: 5000,
             };
 
@@ -757,7 +757,7 @@ describe('SolStakingApi', () => {
 
         it('should throw RequiredError when amount is missing', async () => {
             const _params: RedeemSolRequest = {
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -769,7 +769,7 @@ describe('SolStakingApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: RedeemSolRequest = {
-                amount: 1,
+                amount: 1.0,
             };
 
             const errorResponse = {
@@ -853,7 +853,7 @@ describe('SolStakingApi', () => {
     describe('subscribeSolStaking()', () => {
         it('should execute subscribeSolStaking() successfully with required parameters only', async () => {
             const params: SubscribeSolStakingRequest = {
-                amount: 1,
+                amount: 1.0,
             };
 
             mockResponse = {
@@ -878,7 +878,7 @@ describe('SolStakingApi', () => {
 
         it('should execute subscribeSolStaking() successfully with optional parameters', async () => {
             const params: SubscribeSolStakingRequest = {
-                amount: 1,
+                amount: 1.0,
                 recvWindow: 5000,
             };
 
@@ -904,7 +904,7 @@ describe('SolStakingApi', () => {
 
         it('should throw RequiredError when amount is missing', async () => {
             const _params: SubscribeSolStakingRequest = {
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -916,7 +916,7 @@ describe('SolStakingApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: SubscribeSolStakingRequest = {
-                amount: 1,
+                amount: 1.0,
             };
 
             const errorResponse = {

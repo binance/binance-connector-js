@@ -10,7 +10,7 @@ const client = new Staking({ configurationRestAPI });
 async function wrapBeth() {
     try {
         const response = await client.restAPI.wrapBeth({
-            amount: 1,
+            amount: 1.0,
         });
 
         const rateLimits = response.rateLimits!;
