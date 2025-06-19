@@ -565,8 +565,8 @@ describe('MarketMakerEndpointsApi', () => {
                 underlying: 'underlying_example',
                 windowTimeInMilliseconds: 789,
                 frozenTimeInMilliseconds: 789,
-                qtyLimit: 1,
-                deltaLimit: 1,
+                qtyLimit: 1.0,
+                deltaLimit: 1.0,
                 recvWindow: 5000,
             };
 

@@ -17,7 +17,7 @@ async function newOrder() {
             symbol: 'symbol_example',
             side: DerivativesTradingOptionsRestAPI.NewOrderSideEnum.BUY,
             type: DerivativesTradingOptionsRestAPI.NewOrderTypeEnum.LIMIT,
-            quantity: 1,
+            quantity: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

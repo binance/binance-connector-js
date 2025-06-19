@@ -430,8 +430,8 @@ describe('MarketMakerBlockTradeApi', () => {
                 legs: [],
                 symbol: 'symbol_example',
                 side: NewBlockTradeOrderSideEnum.BUY,
-                price: 1,
-                quantity: 1,
+                price: 1.0,
+                quantity: 1.0,
             };
 
             mockResponse = {
@@ -462,8 +462,8 @@ describe('MarketMakerBlockTradeApi', () => {
                 legs: [],
                 symbol: 'symbol_example',
                 side: NewBlockTradeOrderSideEnum.BUY,
-                price: 1,
-                quantity: 1,
+                price: 1.0,
+                quantity: 1.0,
                 recvWindow: 5000,
             };
 
@@ -495,8 +495,8 @@ describe('MarketMakerBlockTradeApi', () => {
                 legs: [],
                 symbol: 'symbol_example',
                 side: NewBlockTradeOrderSideEnum.BUY,
-                price: 1,
-                quantity: 1,
+                price: 1.0,
+                quantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.liquidity;
@@ -512,8 +512,8 @@ describe('MarketMakerBlockTradeApi', () => {
                 legs: [],
                 symbol: 'symbol_example',
                 side: NewBlockTradeOrderSideEnum.BUY,
-                price: 1,
-                quantity: 1,
+                price: 1.0,
+                quantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.legs;
@@ -529,8 +529,8 @@ describe('MarketMakerBlockTradeApi', () => {
                 legs: [],
                 symbol: 'symbol_example',
                 side: NewBlockTradeOrderSideEnum.BUY,
-                price: 1,
-                quantity: 1,
+                price: 1.0,
+                quantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -546,8 +546,8 @@ describe('MarketMakerBlockTradeApi', () => {
                 legs: [],
                 symbol: 'symbol_example',
                 side: NewBlockTradeOrderSideEnum.BUY,
-                price: 1,
-                quantity: 1,
+                price: 1.0,
+                quantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.side;
@@ -563,8 +563,8 @@ describe('MarketMakerBlockTradeApi', () => {
                 legs: [],
                 symbol: 'symbol_example',
                 side: NewBlockTradeOrderSideEnum.BUY,
-                price: 1,
-                quantity: 1,
+                price: 1.0,
+                quantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.price;
@@ -580,8 +580,8 @@ describe('MarketMakerBlockTradeApi', () => {
                 legs: [],
                 symbol: 'symbol_example',
                 side: NewBlockTradeOrderSideEnum.BUY,
-                price: 1,
-                quantity: 1,
+                price: 1.0,
+                quantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.quantity;
@@ -597,8 +597,8 @@ describe('MarketMakerBlockTradeApi', () => {
                 legs: [],
                 symbol: 'symbol_example',
                 side: NewBlockTradeOrderSideEnum.BUY,
-                price: 1,
-                quantity: 1,
+                price: 1.0,
+                quantity: 1.0,
             };
 
             const errorResponse = {

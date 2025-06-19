@@ -572,7 +572,7 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 side: NewOrderSideEnum.BUY,
                 type: NewOrderTypeEnum.LIMIT,
-                quantity: 1,
+                quantity: 1.0,
             };
 
             mockResponse = {
@@ -619,8 +619,8 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 side: NewOrderSideEnum.BUY,
                 type: NewOrderTypeEnum.LIMIT,
-                quantity: 1,
-                price: 1,
+                quantity: 1.0,
+                price: 1.0,
                 timeInForce: NewOrderTimeInForceEnum.GTC,
                 reduceOnly: false,
                 postOnly: false,
@@ -674,7 +674,7 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 side: NewOrderSideEnum.BUY,
                 type: NewOrderTypeEnum.LIMIT,
-                quantity: 1,
+                quantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -689,7 +689,7 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 side: NewOrderSideEnum.BUY,
                 type: NewOrderTypeEnum.LIMIT,
-                quantity: 1,
+                quantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.side;
@@ -704,7 +704,7 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 side: NewOrderSideEnum.BUY,
                 type: NewOrderTypeEnum.LIMIT,
-                quantity: 1,
+                quantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.type;
@@ -719,7 +719,7 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 side: NewOrderSideEnum.BUY,
                 type: NewOrderTypeEnum.LIMIT,
-                quantity: 1,
+                quantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.quantity;
@@ -734,7 +734,7 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
                 side: NewOrderSideEnum.BUY,
                 type: NewOrderTypeEnum.LIMIT,
-                quantity: 1,
+                quantity: 1.0,
             };
 
             const errorResponse = {

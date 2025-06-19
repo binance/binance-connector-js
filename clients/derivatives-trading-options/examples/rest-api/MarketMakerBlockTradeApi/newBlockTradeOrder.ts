@@ -18,8 +18,8 @@ async function newBlockTradeOrder() {
             legs: [],
             symbol: 'symbol_example',
             side: DerivativesTradingOptionsRestAPI.NewBlockTradeOrderSideEnum.BUY,
-            price: 1,
-            quantity: 1,
+            price: 1.0,
+            quantity: 1.0,
         });
 
         const rateLimits = response.rateLimits!;
