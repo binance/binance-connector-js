@@ -13,7 +13,7 @@ const client = new DerivativesTradingPortfolioMargin({ configurationRestAPI });
 async function bnbTransfer() {
     try {
         const response = await client.restAPI.bnbTransfer({
-            amount: 1,
+            amount: 1.0,
             transferSide: 'transferSide_example',
         });
 

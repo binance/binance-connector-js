@@ -16,8 +16,8 @@ async function modifyCmOrder() {
         const response = await client.restAPI.modifyCmOrder({
             symbol: 'symbol_example',
             side: DerivativesTradingPortfolioMarginRestAPI.ModifyCmOrderSideEnum.BUY,
-            quantity: 1,
-            price: 1,
+            quantity: 1.0,
+            price: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

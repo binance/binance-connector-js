@@ -14,7 +14,7 @@ async function marginAccountBorrow() {
     try {
         const response = await client.restAPI.marginAccountBorrow({
             asset: 'asset_example',
-            amount: 1,
+            amount: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

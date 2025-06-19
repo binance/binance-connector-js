@@ -16,8 +16,8 @@ async function modifyUmOrder() {
         const response = await client.restAPI.modifyUmOrder({
             symbol: 'symbol_example',
             side: DerivativesTradingPortfolioMarginRestAPI.ModifyUmOrderSideEnum.BUY,
-            quantity: 1,
-            price: 1,
+            quantity: 1.0,
+            price: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

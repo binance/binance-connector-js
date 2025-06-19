@@ -16,9 +16,9 @@ async function marginAccountNewOco() {
         const response = await client.restAPI.marginAccountNewOco({
             symbol: 'symbol_example',
             side: DerivativesTradingPortfolioMarginRestAPI.MarginAccountNewOcoSideEnum.BUY,
-            quantity: 1,
-            price: 1,
-            stopPrice: 1,
+            quantity: 1.0,
+            price: 1.0,
+            stopPrice: 1.0,
         });
 
         const rateLimits = response.rateLimits!;
