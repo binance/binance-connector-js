@@ -423,7 +423,7 @@ describe('TradeApi', () => {
             const params: PlaceLimitOrderRequest = {
                 baseAsset: 'baseAsset_example',
                 quoteAsset: 'quoteAsset_example',
-                limitPrice: 1,
+                limitPrice: 1.0,
                 side: 'BUY',
                 expiredType: 'expiredType_example',
             };
@@ -455,12 +455,12 @@ describe('TradeApi', () => {
             const params: PlaceLimitOrderRequest = {
                 baseAsset: 'baseAsset_example',
                 quoteAsset: 'quoteAsset_example',
-                limitPrice: 1,
+                limitPrice: 1.0,
                 side: 'BUY',
                 expiredType: 'expiredType_example',
-                baseAmount: 1,
-                quoteAmount: 1,
-                walletType: 'SPOT',
+                baseAmount: 1.0,
+                quoteAmount: 1.0,
+                walletType: '',
                 recvWindow: 5000,
             };
 
@@ -491,7 +491,7 @@ describe('TradeApi', () => {
             const _params: PlaceLimitOrderRequest = {
                 baseAsset: 'baseAsset_example',
                 quoteAsset: 'quoteAsset_example',
-                limitPrice: 1,
+                limitPrice: 1.0,
                 side: 'BUY',
                 expiredType: 'expiredType_example',
             };
@@ -507,7 +507,7 @@ describe('TradeApi', () => {
             const _params: PlaceLimitOrderRequest = {
                 baseAsset: 'baseAsset_example',
                 quoteAsset: 'quoteAsset_example',
-                limitPrice: 1,
+                limitPrice: 1.0,
                 side: 'BUY',
                 expiredType: 'expiredType_example',
             };
@@ -523,7 +523,7 @@ describe('TradeApi', () => {
             const _params: PlaceLimitOrderRequest = {
                 baseAsset: 'baseAsset_example',
                 quoteAsset: 'quoteAsset_example',
-                limitPrice: 1,
+                limitPrice: 1.0,
                 side: 'BUY',
                 expiredType: 'expiredType_example',
             };
@@ -539,7 +539,7 @@ describe('TradeApi', () => {
             const _params: PlaceLimitOrderRequest = {
                 baseAsset: 'baseAsset_example',
                 quoteAsset: 'quoteAsset_example',
-                limitPrice: 1,
+                limitPrice: 1.0,
                 side: 'BUY',
                 expiredType: 'expiredType_example',
             };
@@ -555,7 +555,7 @@ describe('TradeApi', () => {
             const _params: PlaceLimitOrderRequest = {
                 baseAsset: 'baseAsset_example',
                 quoteAsset: 'quoteAsset_example',
-                limitPrice: 1,
+                limitPrice: 1.0,
                 side: 'BUY',
                 expiredType: 'expiredType_example',
             };
@@ -571,7 +571,7 @@ describe('TradeApi', () => {
             const params: PlaceLimitOrderRequest = {
                 baseAsset: 'baseAsset_example',
                 quoteAsset: 'quoteAsset_example',
-                limitPrice: 1,
+                limitPrice: 1.0,
                 side: 'BUY',
                 expiredType: 'expiredType_example',
             };
@@ -712,9 +712,9 @@ describe('TradeApi', () => {
             const params: SendQuoteRequestRequest = {
                 fromAsset: 'fromAsset_example',
                 toAsset: 'toAsset_example',
-                fromAmount: 1,
-                toAmount: 1,
-                walletType: 'SPOT',
+                fromAmount: 1.0,
+                toAmount: 1.0,
+                walletType: '',
                 validTime: '10s',
                 recvWindow: 5000,
             };

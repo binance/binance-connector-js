@@ -12,7 +12,7 @@ async function placeLimitOrder() {
         const response = await client.restAPI.placeLimitOrder({
             baseAsset: 'baseAsset_example',
             quoteAsset: 'quoteAsset_example',
-            limitPrice: 1,
+            limitPrice: 1.0,
             side: 'BUY',
             expiredType: 'expiredType_example',
         });

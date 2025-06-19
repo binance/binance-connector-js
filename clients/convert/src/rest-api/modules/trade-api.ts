@@ -207,7 +207,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} expiredType 1_D, 3_D, 7_D, 30_D  (D means day)
          * @param {number} [baseAmount] Base asset amount.  (One of `baseAmount` or `quoteAmount` is required)
          * @param {number} [quoteAmount] Quote asset amount.  (One of `baseAmount` or `quoteAmount` is required)
-         * @param {string} [walletType] SPOT or FUNDING. Default is SPOT
+         * @param {string} [walletType] It is to choose which wallet of assets. The wallet selection is `SPOT`, `FUNDING` and `EARN`. Combination of wallet is supported i.e. `SPOT_FUNDING`, `FUNDING_EARN`, `SPOT_FUNDING_EARN` or `SPOT_EARN`  Default is `SPOT`.
          * @param {number} [recvWindow] The value cannot be greater than 60000
          *
          * @throws {RequiredError}
@@ -322,7 +322,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} toAsset
          * @param {number} [fromAmount] When specified, it is the amount you will be debited after the conversion
          * @param {number} [toAmount] When specified, it is the amount you will be credited after the conversion
-         * @param {string} [walletType] SPOT or FUNDING. Default is SPOT
+         * @param {string} [walletType] It is to choose which wallet of assets. The wallet selection is `SPOT`, `FUNDING` and `EARN`. Combination of wallet is supported i.e. `SPOT_FUNDING`, `FUNDING_EARN`, `SPOT_FUNDING_EARN` or `SPOT_EARN`  Default is `SPOT`.
          * @param {string} [validTime] 10s, 30s, 1m, default 10s
          * @param {number} [recvWindow] The value cannot be greater than 60000
          *
@@ -648,7 +648,7 @@ export interface PlaceLimitOrderRequest {
     readonly quoteAmount?: number;
 
     /**
-     * SPOT or FUNDING. Default is SPOT
+     * It is to choose which wallet of assets. The wallet selection is `SPOT`, `FUNDING` and `EARN`. Combination of wallet is supported i.e. `SPOT_FUNDING`, `FUNDING_EARN`, `SPOT_FUNDING_EARN` or `SPOT_EARN`  Default is `SPOT`.
      * @type {string}
      * @memberof TradeApiPlaceLimitOrder
      */
@@ -709,7 +709,7 @@ export interface SendQuoteRequestRequest {
     readonly toAmount?: number;
 
     /**
-     * SPOT or FUNDING. Default is SPOT
+     * It is to choose which wallet of assets. The wallet selection is `SPOT`, `FUNDING` and `EARN`. Combination of wallet is supported i.e. `SPOT_FUNDING`, `FUNDING_EARN`, `SPOT_FUNDING_EARN` or `SPOT_EARN`  Default is `SPOT`.
      * @type {string}
      * @memberof TradeApiSendQuoteRequest
      */
