@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 import fs from 'fs';
 import https from 'https';
+import { platform, arch } from 'os';
 import {
     AxiosResponseHeaders,
     RawAxiosResponseHeaders,
@@ -669,4 +670,15 @@ export function replaceWebsocketStreamsPlaceholders(
 
         return '';
     });
+}
+
+/**
+ * Generates a standardized user agent string for the application.
+ *
+ * @param {string} packageName - The name of the package/application.
+ * @param {string} packageVersion - The version of the package/application.
+ * @returns {string} A formatted user agent string including package details, Node.js version, platform, and architecture.
+ */
+export function buildUserAgent(packageName: string, packageVersion: string): string {
+    return `${packageName}/${packageVersion} (Node.js/${process.version}; ${platform()}; ${arch()})`;
 }

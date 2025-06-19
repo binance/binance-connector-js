@@ -1,5 +1,6 @@
 import { EventEmitter } from 'events';
 import WebSocketClient from 'ws';
+import { ClientRequestArgs } from 'http';
 import {
     type ConfigurationWebsocketAPI,
     type ConfigurationWebsocketStreams,
@@ -372,10 +373,14 @@ export class WebsocketCommon extends WebsocketEventEmitter {
      * @returns A new WebSocket client instance.
      */
     protected createWebSocket(url: string): WebSocketClient {
-        return new WebSocketClient(url, {
+        const wsClientOptions: WebSocketClient.ClientOptions | ClientRequestArgs = {
             perMessageDeflate: this.configuration?.compression,
             agent: this.configuration?.agent,
-        });
+        };
+        if (this.configuration.userAgent)
+            wsClientOptions.headers = { 'User-Agent': this.configuration.userAgent };
+
+        return new WebSocketClient(url, wsClientOptions);
     }
 
     /**

@@ -100,6 +100,7 @@ export class ConfigurationRestAPI {
      * base options for axios calls
      * @type {Record<string, unknown>}
      * @memberof ConfigurationRestAPI
+     * @internal
      */
     baseOptions?: Record<string, unknown>;
 
@@ -207,6 +208,13 @@ export class ConfigurationWebsocketAPI {
      * @memberof ConfigurationWebsocketAPI
      */
     timeUnit?: TimeUnit;
+    /**
+     * Optional user agent string for identifying the client
+     * @type {string}
+     * @memberof ConfigurationWebsocketStreams
+     * @internal
+     */
+    userAgent?: string;
 
     constructor(param: ConfigurationWebsocketAPI = { apiKey: '' }) {
         this.apiKey = param.apiKey;
@@ -272,6 +280,13 @@ export class ConfigurationWebsocketStreams {
      * @memberof ConfigurationWebsocketStreams
      */
     timeUnit?: TimeUnit;
+    /**
+     * Optional user agent string for identifying the client
+     * @type {string}
+     * @memberof ConfigurationWebsocketStreams
+     * @internal
+     */
+    userAgent?: string;
 
     constructor(param: ConfigurationWebsocketStreams = {}) {
         this.wsURL = param.wsURL;

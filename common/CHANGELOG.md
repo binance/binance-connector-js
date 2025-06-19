@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.2 - 2025-06-19
+
+### Added (1)
+
+- Added `User-Agent` to `WebsocketAPI` and `WebsocketStreams` connections.
+
 ## 1.1.1 - 2025-06-16
 
 ### Changed (4)

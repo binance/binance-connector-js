@@ -14,7 +14,8 @@
         "strictNullChecks": true,
         "skipLibCheck": true,
         "types": ["jest", "node"],
-        "resolveJsonModule": true
+        "resolveJsonModule": true,
+        "stripInternal": true
     },
     "include": ["src/**/*.ts", "tests/**/*.ts"],
     "exclude": ["node_modules"]

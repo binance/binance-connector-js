@@ -1,7 +1,7 @@
 {
     "name": "@binance/common",
     "description": "Binance Common Types and Utilities for Binance Connectors",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",
