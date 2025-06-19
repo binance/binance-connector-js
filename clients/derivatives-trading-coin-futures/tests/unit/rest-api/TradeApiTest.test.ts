@@ -1407,7 +1407,7 @@ describe('TradeApi', () => {
         it('should execute modifyIsolatedPositionMargin() successfully with required parameters only', async () => {
             const params: ModifyIsolatedPositionMarginRequest = {
                 symbol: 'symbol_example',
-                amount: 1,
+                amount: 1.0,
                 type: ModifyIsolatedPositionMarginTypeEnum.LIMIT,
             };
 
@@ -1435,7 +1435,7 @@ describe('TradeApi', () => {
         it('should execute modifyIsolatedPositionMargin() successfully with optional parameters', async () => {
             const params: ModifyIsolatedPositionMarginRequest = {
                 symbol: 'symbol_example',
-                amount: 1,
+                amount: 1.0,
                 type: ModifyIsolatedPositionMarginTypeEnum.LIMIT,
                 positionSide: ModifyIsolatedPositionMarginPositionSideEnum.BOTH,
                 recvWindow: 5000,
@@ -1465,7 +1465,7 @@ describe('TradeApi', () => {
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: ModifyIsolatedPositionMarginRequest = {
                 symbol: 'symbol_example',
-                amount: 1,
+                amount: 1.0,
                 type: ModifyIsolatedPositionMarginTypeEnum.LIMIT,
             };
             const params = Object.assign({ ..._params });
@@ -1479,7 +1479,7 @@ describe('TradeApi', () => {
         it('should throw RequiredError when amount is missing', async () => {
             const _params: ModifyIsolatedPositionMarginRequest = {
                 symbol: 'symbol_example',
-                amount: 1,
+                amount: 1.0,
                 type: ModifyIsolatedPositionMarginTypeEnum.LIMIT,
             };
             const params = Object.assign({ ..._params });
@@ -1493,7 +1493,7 @@ describe('TradeApi', () => {
         it('should throw RequiredError when type is missing', async () => {
             const _params: ModifyIsolatedPositionMarginRequest = {
                 symbol: 'symbol_example',
-                amount: 1,
+                amount: 1.0,
                 type: ModifyIsolatedPositionMarginTypeEnum.LIMIT,
             };
             const params = Object.assign({ ..._params });
@@ -1507,7 +1507,7 @@ describe('TradeApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: ModifyIsolatedPositionMarginRequest = {
                 symbol: 'symbol_example',
-                amount: 1,
+                amount: 1.0,
                 type: ModifyIsolatedPositionMarginTypeEnum.LIMIT,
             };
 
@@ -1716,8 +1716,8 @@ describe('TradeApi', () => {
                 side: ModifyOrderSideEnum.BUY,
                 orderId: 1,
                 origClientOrderId: '1',
-                quantity: 1,
-                price: 1,
+                quantity: 1.0,
+                price: 1.0,
                 priceMatch: ModifyOrderPriceMatchEnum.NONE,
                 recvWindow: 5000,
             };
@@ -1868,14 +1868,14 @@ describe('TradeApi', () => {
                 type: NewOrderTypeEnum.LIMIT,
                 positionSide: NewOrderPositionSideEnum.BOTH,
                 timeInForce: NewOrderTimeInForceEnum.GTC,
-                quantity: 1,
+                quantity: 1.0,
                 reduceOnly: 'false',
-                price: 1,
+                price: 1.0,
                 newClientOrderId: '1',
-                stopPrice: 1,
+                stopPrice: 1.0,
                 closePosition: 'closePosition_example',
-                activationPrice: 1,
-                callbackRate: 1,
+                activationPrice: 1.0,
+                callbackRate: 1.0,
                 workingType: NewOrderWorkingTypeEnum.MARK_PRICE,
                 priceProtect: 'false',
                 newOrderRespType: NewOrderNewOrderRespTypeEnum.ACK,

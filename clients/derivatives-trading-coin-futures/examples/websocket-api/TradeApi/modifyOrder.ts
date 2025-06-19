@@ -20,8 +20,8 @@ async function modifyOrder() {
         const response = await connection.modifyOrder({
             symbol: 'symbol_example',
             side: DerivativesTradingCoinFuturesWebsocketAPI.ModifyOrderSideEnum.BUY,
-            quantity: 1,
-            price: 1,
+            quantity: 1.0,
+            price: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

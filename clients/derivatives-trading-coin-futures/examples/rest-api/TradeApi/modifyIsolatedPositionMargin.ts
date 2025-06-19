@@ -15,7 +15,7 @@ async function modifyIsolatedPositionMargin() {
     try {
         const response = await client.restAPI.modifyIsolatedPositionMargin({
             symbol: 'symbol_example',
-            amount: 1,
+            amount: 1.0,
             type: DerivativesTradingCoinFuturesRestAPI.ModifyIsolatedPositionMarginTypeEnum.LIMIT,
         });
 
