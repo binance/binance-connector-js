@@ -339,8 +339,8 @@ describe('TradeApi', () => {
             const params: ModifyOrderRequest = {
                 symbol: 'symbol_example',
                 side: ModifyOrderSideEnum.BUY,
-                quantity: 1,
-                price: 1,
+                quantity: 1.0,
+                price: 1.0,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -399,8 +399,8 @@ describe('TradeApi', () => {
             const params: ModifyOrderRequest = {
                 symbol: 'symbol_example',
                 side: ModifyOrderSideEnum.BUY,
-                quantity: 1,
-                price: 1,
+                quantity: 1.0,
+                price: 1.0,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -436,8 +436,8 @@ describe('TradeApi', () => {
             const params: ModifyOrderRequest = {
                 symbol: 'symbol_example',
                 side: ModifyOrderSideEnum.BUY,
-                quantity: 1,
-                price: 1,
+                quantity: 1.0,
+                price: 1.0,
             };
 
             let resolveTest: (value: unknown) => void;

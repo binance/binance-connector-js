@@ -312,8 +312,8 @@ describe('ConvertApi', () => {
             const params: SendQuoteRequestRequest = {
                 fromAsset: 'fromAsset_example',
                 toAsset: 'toAsset_example',
-                fromAmount: 1,
-                toAmount: 1,
+                fromAmount: 1.0,
+                toAmount: 1.0,
                 validTime: '10s',
                 recvWindow: 5000,
             };
