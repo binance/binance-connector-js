@@ -12,7 +12,7 @@ async function flexibleLoanAdjustLtv() {
         const response = await client.restAPI.flexibleLoanAdjustLtv({
             loanCoin: 'loanCoin_example',
             collateralCoin: 'collateralCoin_example',
-            adjustmentAmount: 1,
+            adjustmentAmount: 1.0,
             direction: 'direction_example',
         });
 

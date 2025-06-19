@@ -49,7 +49,7 @@ describe('StableRateApi', () => {
             const params: CheckCollateralRepayRateStableRateRequest = {
                 loanCoin: 'loanCoin_example',
                 collateralCoin: 'collateralCoin_example',
-                repayAmount: 1,
+                repayAmount: 1.0,
             };
 
             mockResponse = {
@@ -77,7 +77,7 @@ describe('StableRateApi', () => {
             const params: CheckCollateralRepayRateStableRateRequest = {
                 loanCoin: 'loanCoin_example',
                 collateralCoin: 'collateralCoin_example',
-                repayAmount: 1,
+                repayAmount: 1.0,
                 recvWindow: 5000,
             };
 
@@ -106,7 +106,7 @@ describe('StableRateApi', () => {
             const _params: CheckCollateralRepayRateStableRateRequest = {
                 loanCoin: 'loanCoin_example',
                 collateralCoin: 'collateralCoin_example',
-                repayAmount: 1,
+                repayAmount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.loanCoin;
@@ -120,7 +120,7 @@ describe('StableRateApi', () => {
             const _params: CheckCollateralRepayRateStableRateRequest = {
                 loanCoin: 'loanCoin_example',
                 collateralCoin: 'collateralCoin_example',
-                repayAmount: 1,
+                repayAmount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.collateralCoin;
@@ -134,7 +134,7 @@ describe('StableRateApi', () => {
             const _params: CheckCollateralRepayRateStableRateRequest = {
                 loanCoin: 'loanCoin_example',
                 collateralCoin: 'collateralCoin_example',
-                repayAmount: 1,
+                repayAmount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.repayAmount;
@@ -148,7 +148,7 @@ describe('StableRateApi', () => {
             const params: CheckCollateralRepayRateStableRateRequest = {
                 loanCoin: 'loanCoin_example',
                 collateralCoin: 'collateralCoin_example',
-                repayAmount: 1,
+                repayAmount: 1.0,
             };
 
             const errorResponse = {

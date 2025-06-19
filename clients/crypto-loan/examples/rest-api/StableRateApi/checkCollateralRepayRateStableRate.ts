@@ -12,7 +12,7 @@ async function checkCollateralRepayRateStableRate() {
         const response = await client.restAPI.checkCollateralRepayRateStableRate({
             loanCoin: 'loanCoin_example',
             collateralCoin: 'collateralCoin_example',
-            repayAmount: 1,
+            repayAmount: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

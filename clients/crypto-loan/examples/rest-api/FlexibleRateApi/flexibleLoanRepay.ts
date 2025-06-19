@@ -12,7 +12,7 @@ async function flexibleLoanRepay() {
         const response = await client.restAPI.flexibleLoanRepay({
             loanCoin: 'loanCoin_example',
             collateralCoin: 'collateralCoin_example',
-            repayAmount: 1,
+            repayAmount: 1.0,
         });
 
         const rateLimits = response.rateLimits!;
