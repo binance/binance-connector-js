@@ -11,7 +11,7 @@ async function createASingleTokenGiftCard() {
     try {
         const response = await client.restAPI.createASingleTokenGiftCard({
             token: 'token_example',
-            amount: 1,
+            amount: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

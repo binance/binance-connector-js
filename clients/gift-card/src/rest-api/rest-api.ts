@@ -87,8 +87,6 @@ export class RestAPI {
      * You need Enable Withdrawals for the API Key which requests this endpoint.
      *
      * Weight: 1
-     * Monthly creation volume: 4,200,000 USDC / month / account
-     * Monthly creation quantity: 6,000 Gift Cards / month / account
      *
      * @summary Create a dual-token gift card(fixed value, discount feature)(TRADE)
      * @param {CreateADualTokenGiftCardRequest} requestParameters Request parameters.
@@ -113,8 +111,6 @@ export class RestAPI {
      * You need `Enable Withdrawals` for the API Key which requests this endpoint.
      *
      * Weight: 1
-     * Monthly creation volume: 4,200,000 USDC / month / account
-     * Monthly creation quantity: 6,000 Gift Cards / month / account
      *
      * @summary Create a single-token gift card (USER_DATA)
      * @param {CreateASingleTokenGiftCardRequest} requestParameters Request parameters.

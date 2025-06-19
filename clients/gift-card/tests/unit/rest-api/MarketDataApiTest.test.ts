@@ -51,7 +51,7 @@ describe('MarketDataApi', () => {
             const params: CreateADualTokenGiftCardRequest = {
                 baseToken: 'baseToken_example',
                 faceToken: 'faceToken_example',
-                baseTokenAmount: 1,
+                baseTokenAmount: 1.0,
             };
 
             mockResponse = {
@@ -83,7 +83,7 @@ describe('MarketDataApi', () => {
             const params: CreateADualTokenGiftCardRequest = {
                 baseToken: 'baseToken_example',
                 faceToken: 'faceToken_example',
-                baseTokenAmount: 1,
+                baseTokenAmount: 1.0,
                 recvWindow: 5000,
             };
 
@@ -116,7 +116,7 @@ describe('MarketDataApi', () => {
             const _params: CreateADualTokenGiftCardRequest = {
                 baseToken: 'baseToken_example',
                 faceToken: 'faceToken_example',
-                baseTokenAmount: 1,
+                baseTokenAmount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.baseToken;
@@ -130,7 +130,7 @@ describe('MarketDataApi', () => {
             const _params: CreateADualTokenGiftCardRequest = {
                 baseToken: 'baseToken_example',
                 faceToken: 'faceToken_example',
-                baseTokenAmount: 1,
+                baseTokenAmount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.faceToken;
@@ -144,7 +144,7 @@ describe('MarketDataApi', () => {
             const _params: CreateADualTokenGiftCardRequest = {
                 baseToken: 'baseToken_example',
                 faceToken: 'faceToken_example',
-                baseTokenAmount: 1,
+                baseTokenAmount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.baseTokenAmount;
@@ -158,7 +158,7 @@ describe('MarketDataApi', () => {
             const params: CreateADualTokenGiftCardRequest = {
                 baseToken: 'baseToken_example',
                 faceToken: 'faceToken_example',
-                baseTokenAmount: 1,
+                baseTokenAmount: 1.0,
             };
 
             const errorResponse = {
@@ -182,7 +182,7 @@ describe('MarketDataApi', () => {
         it('should execute createASingleTokenGiftCard() successfully with required parameters only', async () => {
             const params: CreateASingleTokenGiftCardRequest = {
                 token: 'token_example',
-                amount: 1,
+                amount: 1.0,
             };
 
             mockResponse = {
@@ -213,7 +213,7 @@ describe('MarketDataApi', () => {
         it('should execute createASingleTokenGiftCard() successfully with optional parameters', async () => {
             const params: CreateASingleTokenGiftCardRequest = {
                 token: 'token_example',
-                amount: 1,
+                amount: 1.0,
                 recvWindow: 5000,
             };
 
@@ -245,7 +245,7 @@ describe('MarketDataApi', () => {
         it('should throw RequiredError when token is missing', async () => {
             const _params: CreateASingleTokenGiftCardRequest = {
                 token: 'token_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.token;
@@ -258,7 +258,7 @@ describe('MarketDataApi', () => {
         it('should throw RequiredError when amount is missing', async () => {
             const _params: CreateASingleTokenGiftCardRequest = {
                 token: 'token_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -271,7 +271,7 @@ describe('MarketDataApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: CreateASingleTokenGiftCardRequest = {
                 token: 'token_example',
-                amount: 1,
+                amount: 1.0,
             };
 
             const errorResponse = {

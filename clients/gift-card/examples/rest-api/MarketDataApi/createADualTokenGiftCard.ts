@@ -12,7 +12,7 @@ async function createADualTokenGiftCard() {
         const response = await client.restAPI.createADualTokenGiftCard({
             baseToken: 'baseToken_example',
             faceToken: 'faceToken_example',
-            baseTokenAmount: 1,
+            baseTokenAmount: 1.0,
         });
 
         const rateLimits = response.rateLimits!;
