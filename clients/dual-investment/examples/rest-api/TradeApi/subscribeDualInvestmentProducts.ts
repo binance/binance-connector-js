@@ -12,7 +12,7 @@ async function subscribeDualInvestmentProducts() {
         const response = await client.restAPI.subscribeDualInvestmentProducts({
             id: 'id_example',
             orderId: '1',
-            depositAmount: 1,
+            depositAmount: 1.0,
             autoCompoundPlan: 'NONE',
         });
 

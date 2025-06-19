@@ -281,7 +281,7 @@ describe('TradeApi', () => {
             const params: SubscribeDualInvestmentProductsRequest = {
                 id: 'id_example',
                 orderId: '1',
-                depositAmount: 1,
+                depositAmount: 1.0,
                 autoCompoundPlan: 'NONE',
             };
 
@@ -319,7 +319,7 @@ describe('TradeApi', () => {
             const params: SubscribeDualInvestmentProductsRequest = {
                 id: 'id_example',
                 orderId: '1',
-                depositAmount: 1,
+                depositAmount: 1.0,
                 autoCompoundPlan: 'NONE',
                 recvWindow: 5000,
             };
@@ -358,7 +358,7 @@ describe('TradeApi', () => {
             const _params: SubscribeDualInvestmentProductsRequest = {
                 id: 'id_example',
                 orderId: '1',
-                depositAmount: 1,
+                depositAmount: 1.0,
                 autoCompoundPlan: 'NONE',
             };
             const params = Object.assign({ ..._params });
@@ -373,7 +373,7 @@ describe('TradeApi', () => {
             const _params: SubscribeDualInvestmentProductsRequest = {
                 id: 'id_example',
                 orderId: '1',
-                depositAmount: 1,
+                depositAmount: 1.0,
                 autoCompoundPlan: 'NONE',
             };
             const params = Object.assign({ ..._params });
@@ -388,7 +388,7 @@ describe('TradeApi', () => {
             const _params: SubscribeDualInvestmentProductsRequest = {
                 id: 'id_example',
                 orderId: '1',
-                depositAmount: 1,
+                depositAmount: 1.0,
                 autoCompoundPlan: 'NONE',
             };
             const params = Object.assign({ ..._params });
@@ -403,7 +403,7 @@ describe('TradeApi', () => {
             const _params: SubscribeDualInvestmentProductsRequest = {
                 id: 'id_example',
                 orderId: '1',
-                depositAmount: 1,
+                depositAmount: 1.0,
                 autoCompoundPlan: 'NONE',
             };
             const params = Object.assign({ ..._params });
@@ -418,7 +418,7 @@ describe('TradeApi', () => {
             const params: SubscribeDualInvestmentProductsRequest = {
                 id: 'id_example',
                 orderId: '1',
-                depositAmount: 1,
+                depositAmount: 1.0,
                 autoCompoundPlan: 'NONE',
             };
 
