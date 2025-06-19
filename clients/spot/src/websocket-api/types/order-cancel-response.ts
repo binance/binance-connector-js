@@ -24,7 +24,7 @@
 import type { OrderCancelResponseResult } from './order-cancel-response-result';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TimeResponseRateLimitsInner } from './time-response-rate-limits-inner';
+import type { PingResponseRateLimitsInner } from './ping-response-rate-limits-inner';
 
 /**
  *
@@ -52,8 +52,8 @@ export interface OrderCancelResponse {
     result?: OrderCancelResponseResult;
     /**
      *
-     * @type {Array<TimeResponseRateLimitsInner>}
+     * @type {Array<PingResponseRateLimitsInner>}
      * @memberof OrderCancelResponse
      */
-    rateLimits?: Array<TimeResponseRateLimitsInner>;
+    rateLimits?: Array<PingResponseRateLimitsInner>;
 }

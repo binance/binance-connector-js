@@ -431,6 +431,20 @@ describe('GeneralApi', () => {
         });
 
         it('should execute ping() successfully', async () => {
+            mockResponse = {
+                id: '922bcc6e-9de8-440d-9e84-7c80933a8d0d',
+                status: 200,
+                result: {},
+                rateLimits: [
+                    {
+                        rateLimitType: 'REQUEST_WEIGHT',
+                        interval: 'MINUTE',
+                        intervalNum: 1,
+                        limit: 6000,
+                        count: 1,
+                    },
+                ],
+            };
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;

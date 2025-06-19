@@ -105,7 +105,7 @@ import type {
     OrderStatusResponse,
 } from './types';
 import type { SessionLogonResponse, SessionLogoutResponse, SessionStatusResponse } from './types';
-import type { ExchangeInfoResponse, TimeResponse } from './types';
+import type { ExchangeInfoResponse, PingResponse, TimeResponse } from './types';
 import type {
     AvgPriceResponse,
     DepthResponse,
@@ -531,10 +531,10 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Test connectivity
      * @param {PingRequest} requestParameters Request parameters.
-     * @returns Promise<WebsocketApiResponse<void>>
+     * @returns Promise<WebsocketApiResponse<PingResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-requests#test-connectivity Binance API Documentation}
      */
-    ping(requestParameters: PingRequest = {}): Promise<WebsocketApiResponse<void>> {
+    ping(requestParameters: PingRequest = {}): Promise<WebsocketApiResponse<PingResponse>> {
         return this.generalApi.ping(requestParameters);
     }
 

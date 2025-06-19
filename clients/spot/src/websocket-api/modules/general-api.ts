@@ -17,7 +17,7 @@
  */
 
 import { WebsocketAPIBase, WebsocketApiResponse, WebsocketSendMsgOptions } from '@binance/common';
-import type { ExchangeInfoResponse, TimeResponse } from '../types';
+import type { ExchangeInfoResponse, PingResponse, TimeResponse } from '../types';
 
 /**
  * GeneralApi - interface
@@ -46,10 +46,10 @@ export interface GeneralApiInterface {
      * @summary WebSocket Test connectivity
      * @param {PingRequest} requestParameters Request parameters.
      *
-     * @returns {Promise<void>}
+     * @returns {Promise<PingResponse>}
      * @memberof GeneralApiInterface
      */
-    ping(requestParameters?: PingRequest): Promise<WebsocketApiResponse<void>>;
+    ping(requestParameters?: PingRequest): Promise<WebsocketApiResponse<PingResponse>>;
 
     /**
      * Test connectivity to the WebSocket API and get the current server time.
@@ -176,12 +176,12 @@ export class GeneralApi implements GeneralApiInterface {
      *
      * @summary WebSocket Test connectivity
      * @param {PingRequest} requestParameters Request parameters.
-     * @returns {Promise<void>}
+     * @returns {Promise<PingResponse>}
      * @memberof GeneralApi
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-requests#test-connectivity Binance API Documentation}
      */
-    public ping(requestParameters: PingRequest = {}): Promise<WebsocketApiResponse<void>> {
-        return this.websocketBase.sendMessage<void>(
+    public ping(requestParameters: PingRequest = {}): Promise<WebsocketApiResponse<PingResponse>> {
+        return this.websocketBase.sendMessage<PingResponse>(
             '/ping'.slice(1),
             requestParameters as unknown as WebsocketSendMsgOptions,
             { isSigned: false, withApiKey: false }

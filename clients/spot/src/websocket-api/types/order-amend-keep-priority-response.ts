@@ -24,7 +24,7 @@
 import type { OrderAmendKeepPriorityResponseResult } from './order-amend-keep-priority-response-result';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TimeResponseRateLimitsInner } from './time-response-rate-limits-inner';
+import type { PingResponseRateLimitsInner } from './ping-response-rate-limits-inner';
 
 /**
  *
@@ -52,8 +52,8 @@ export interface OrderAmendKeepPriorityResponse {
     result?: OrderAmendKeepPriorityResponseResult;
     /**
      *
-     * @type {Array<TimeResponseRateLimitsInner>}
+     * @type {Array<PingResponseRateLimitsInner>}
      * @memberof OrderAmendKeepPriorityResponse
      */
-    rateLimits?: Array<TimeResponseRateLimitsInner>;
+    rateLimits?: Array<PingResponseRateLimitsInner>;
 }
