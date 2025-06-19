@@ -11,7 +11,7 @@ async function vipLoanRepay() {
     try {
         const response = await client.restAPI.vipLoanRepay({
             orderId: 1,
-            amount: 1,
+            amount: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

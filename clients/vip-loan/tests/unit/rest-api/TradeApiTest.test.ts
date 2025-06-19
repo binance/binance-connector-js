@@ -45,7 +45,7 @@ describe('TradeApi', () => {
             const params: VipLoanBorrowRequest = {
                 loanAccountId: 1,
                 loanCoin: 'loanCoin_example',
-                loanAmount: 1,
+                loanAmount: 1.0,
                 collateralAccountId: '1',
                 collateralCoin: 'collateralCoin_example',
                 isFlexibleRate: true,
@@ -80,7 +80,7 @@ describe('TradeApi', () => {
             const params: VipLoanBorrowRequest = {
                 loanAccountId: 1,
                 loanCoin: 'loanCoin_example',
-                loanAmount: 1,
+                loanAmount: 1.0,
                 collateralAccountId: '1',
                 collateralCoin: 'collateralCoin_example',
                 isFlexibleRate: true,
@@ -116,7 +116,7 @@ describe('TradeApi', () => {
             const _params: VipLoanBorrowRequest = {
                 loanAccountId: 1,
                 loanCoin: 'loanCoin_example',
-                loanAmount: 1,
+                loanAmount: 1.0,
                 collateralAccountId: '1',
                 collateralCoin: 'collateralCoin_example',
                 isFlexibleRate: true,
@@ -133,7 +133,7 @@ describe('TradeApi', () => {
             const _params: VipLoanBorrowRequest = {
                 loanAccountId: 1,
                 loanCoin: 'loanCoin_example',
-                loanAmount: 1,
+                loanAmount: 1.0,
                 collateralAccountId: '1',
                 collateralCoin: 'collateralCoin_example',
                 isFlexibleRate: true,
@@ -150,7 +150,7 @@ describe('TradeApi', () => {
             const _params: VipLoanBorrowRequest = {
                 loanAccountId: 1,
                 loanCoin: 'loanCoin_example',
-                loanAmount: 1,
+                loanAmount: 1.0,
                 collateralAccountId: '1',
                 collateralCoin: 'collateralCoin_example',
                 isFlexibleRate: true,
@@ -167,7 +167,7 @@ describe('TradeApi', () => {
             const _params: VipLoanBorrowRequest = {
                 loanAccountId: 1,
                 loanCoin: 'loanCoin_example',
-                loanAmount: 1,
+                loanAmount: 1.0,
                 collateralAccountId: '1',
                 collateralCoin: 'collateralCoin_example',
                 isFlexibleRate: true,
@@ -184,7 +184,7 @@ describe('TradeApi', () => {
             const _params: VipLoanBorrowRequest = {
                 loanAccountId: 1,
                 loanCoin: 'loanCoin_example',
-                loanAmount: 1,
+                loanAmount: 1.0,
                 collateralAccountId: '1',
                 collateralCoin: 'collateralCoin_example',
                 isFlexibleRate: true,
@@ -201,7 +201,7 @@ describe('TradeApi', () => {
             const _params: VipLoanBorrowRequest = {
                 loanAccountId: 1,
                 loanCoin: 'loanCoin_example',
-                loanAmount: 1,
+                loanAmount: 1.0,
                 collateralAccountId: '1',
                 collateralCoin: 'collateralCoin_example',
                 isFlexibleRate: true,
@@ -218,7 +218,7 @@ describe('TradeApi', () => {
             const params: VipLoanBorrowRequest = {
                 loanAccountId: 1,
                 loanCoin: 'loanCoin_example',
-                loanAmount: 1,
+                loanAmount: 1.0,
                 collateralAccountId: '1',
                 collateralCoin: 'collateralCoin_example',
                 isFlexibleRate: true,
@@ -350,7 +350,7 @@ describe('TradeApi', () => {
         it('should execute vipLoanRepay() successfully with required parameters only', async () => {
             const params: VipLoanRepayRequest = {
                 orderId: 1,
-                amount: 1,
+                amount: 1.0,
             };
 
             mockResponse = {
@@ -380,7 +380,7 @@ describe('TradeApi', () => {
         it('should execute vipLoanRepay() successfully with optional parameters', async () => {
             const params: VipLoanRepayRequest = {
                 orderId: 1,
-                amount: 1,
+                amount: 1.0,
                 recvWindow: 5000,
             };
 
@@ -411,7 +411,7 @@ describe('TradeApi', () => {
         it('should throw RequiredError when orderId is missing', async () => {
             const _params: VipLoanRepayRequest = {
                 orderId: 1,
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.orderId;
@@ -424,7 +424,7 @@ describe('TradeApi', () => {
         it('should throw RequiredError when amount is missing', async () => {
             const _params: VipLoanRepayRequest = {
                 orderId: 1,
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -437,7 +437,7 @@ describe('TradeApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: VipLoanRepayRequest = {
                 orderId: 1,
-                amount: 1,
+                amount: 1.0,
             };
 
             const errorResponse = {

@@ -12,7 +12,7 @@ async function vipLoanBorrow() {
         const response = await client.restAPI.vipLoanBorrow({
             loanAccountId: 1,
             loanCoin: 'loanCoin_example',
-            loanAmount: 1,
+            loanAmount: 1.0,
             collateralAccountId: '1',
             collateralCoin: 'collateralCoin_example',
             isFlexibleRate: true,
