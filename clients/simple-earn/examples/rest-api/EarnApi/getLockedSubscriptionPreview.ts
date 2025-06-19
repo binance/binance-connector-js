@@ -11,7 +11,7 @@ async function getLockedSubscriptionPreview() {
     try {
         const response = await client.restAPI.getLockedSubscriptionPreview({
             projectId: '1',
-            amount: 1,
+            amount: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

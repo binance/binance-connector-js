@@ -11,7 +11,7 @@ async function subscribeFlexibleProduct() {
     try {
         const response = await client.restAPI.subscribeFlexibleProduct({
             productId: '1',
-            amount: 1,
+            amount: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

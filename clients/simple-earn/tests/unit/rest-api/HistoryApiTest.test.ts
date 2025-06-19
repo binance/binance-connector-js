@@ -563,7 +563,7 @@ describe('HistoryApi', () => {
                         type: 'Locked Rewards',
                     },
                     {
-                        positionId: '123123',
+                        positionId: 123123,
                         time: 1575018510000,
                         asset: 'BNB',
                         amount: '1.23223',
@@ -609,7 +609,7 @@ describe('HistoryApi', () => {
                         type: 'Locked Rewards',
                     },
                     {
-                        positionId: '123123',
+                        positionId: 123123,
                         time: 1575018510000,
                         asset: 'BNB',
                         amount: '1.23223',

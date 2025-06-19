@@ -11,7 +11,7 @@ async function getFlexibleSubscriptionPreview() {
     try {
         const response = await client.restAPI.getFlexibleSubscriptionPreview({
             productId: '1',
-            amount: 1,
+            amount: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

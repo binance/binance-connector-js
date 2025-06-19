@@ -56,7 +56,7 @@ describe('EarnApi', () => {
         it('should execute getFlexibleSubscriptionPreview() successfully with required parameters only', async () => {
             const params: GetFlexibleSubscriptionPreviewRequest = {
                 productId: '1',
-                amount: 1,
+                amount: 1.0,
             };
 
             mockResponse = {
@@ -85,7 +85,7 @@ describe('EarnApi', () => {
         it('should execute getFlexibleSubscriptionPreview() successfully with optional parameters', async () => {
             const params: GetFlexibleSubscriptionPreviewRequest = {
                 productId: '1',
-                amount: 1,
+                amount: 1.0,
                 recvWindow: 5000,
             };
 
@@ -115,7 +115,7 @@ describe('EarnApi', () => {
         it('should throw RequiredError when productId is missing', async () => {
             const _params: GetFlexibleSubscriptionPreviewRequest = {
                 productId: '1',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.productId;
@@ -128,7 +128,7 @@ describe('EarnApi', () => {
         it('should throw RequiredError when amount is missing', async () => {
             const _params: GetFlexibleSubscriptionPreviewRequest = {
                 productId: '1',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -141,7 +141,7 @@ describe('EarnApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: GetFlexibleSubscriptionPreviewRequest = {
                 productId: '1',
-                amount: 1,
+                amount: 1.0,
             };
 
             const errorResponse = {
@@ -167,7 +167,7 @@ describe('EarnApi', () => {
         it('should execute getLockedSubscriptionPreview() successfully with required parameters only', async () => {
             const params: GetLockedSubscriptionPreviewRequest = {
                 projectId: '1',
-                amount: 1,
+                amount: 1.0,
             };
 
             mockResponse = [
@@ -204,7 +204,7 @@ describe('EarnApi', () => {
         it('should execute getLockedSubscriptionPreview() successfully with optional parameters', async () => {
             const params: GetLockedSubscriptionPreviewRequest = {
                 projectId: '1',
-                amount: 1,
+                amount: 1.0,
                 autoSubscribe: true,
                 recvWindow: 5000,
             };
@@ -243,7 +243,7 @@ describe('EarnApi', () => {
         it('should throw RequiredError when projectId is missing', async () => {
             const _params: GetLockedSubscriptionPreviewRequest = {
                 projectId: '1',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.projectId;
@@ -256,7 +256,7 @@ describe('EarnApi', () => {
         it('should throw RequiredError when amount is missing', async () => {
             const _params: GetLockedSubscriptionPreviewRequest = {
                 projectId: '1',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -269,7 +269,7 @@ describe('EarnApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: GetLockedSubscriptionPreviewRequest = {
                 projectId: '1',
-                amount: 1,
+                amount: 1.0,
             };
 
             const errorResponse = {
@@ -317,7 +317,7 @@ describe('EarnApi', () => {
             const params: RedeemFlexibleProductRequest = {
                 productId: '1',
                 redeemAll: false,
-                amount: 1,
+                amount: 1.0,
                 destAccount: 'SPOT',
                 recvWindow: 5000,
             };
@@ -739,7 +739,7 @@ describe('EarnApi', () => {
         it('should execute subscribeFlexibleProduct() successfully with required parameters only', async () => {
             const params: SubscribeFlexibleProductRequest = {
                 productId: '1',
-                amount: 1,
+                amount: 1.0,
             };
 
             mockResponse = { purchaseId: 40607, success: true };
@@ -761,7 +761,7 @@ describe('EarnApi', () => {
         it('should execute subscribeFlexibleProduct() successfully with optional parameters', async () => {
             const params: SubscribeFlexibleProductRequest = {
                 productId: '1',
-                amount: 1,
+                amount: 1.0,
                 autoSubscribe: true,
                 sourceAccount: 'SPOT',
                 recvWindow: 5000,
@@ -786,7 +786,7 @@ describe('EarnApi', () => {
         it('should throw RequiredError when productId is missing', async () => {
             const _params: SubscribeFlexibleProductRequest = {
                 productId: '1',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.productId;
@@ -799,7 +799,7 @@ describe('EarnApi', () => {
         it('should throw RequiredError when amount is missing', async () => {
             const _params: SubscribeFlexibleProductRequest = {
                 productId: '1',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -812,7 +812,7 @@ describe('EarnApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: SubscribeFlexibleProductRequest = {
                 productId: '1',
-                amount: 1,
+                amount: 1.0,
             };
 
             const errorResponse = {
@@ -836,7 +836,7 @@ describe('EarnApi', () => {
         it('should execute subscribeLockedProduct() successfully with required parameters only', async () => {
             const params: SubscribeLockedProductRequest = {
                 projectId: '1',
-                amount: 1,
+                amount: 1.0,
             };
 
             mockResponse = { purchaseId: 40607, positionId: '12345', success: true };
@@ -858,7 +858,7 @@ describe('EarnApi', () => {
         it('should execute subscribeLockedProduct() successfully with optional parameters', async () => {
             const params: SubscribeLockedProductRequest = {
                 projectId: '1',
-                amount: 1,
+                amount: 1.0,
                 autoSubscribe: true,
                 sourceAccount: 'SPOT',
                 redeemTo: '',
@@ -884,7 +884,7 @@ describe('EarnApi', () => {
         it('should throw RequiredError when projectId is missing', async () => {
             const _params: SubscribeLockedProductRequest = {
                 projectId: '1',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.projectId;
@@ -897,7 +897,7 @@ describe('EarnApi', () => {
         it('should throw RequiredError when amount is missing', async () => {
             const _params: SubscribeLockedProductRequest = {
                 projectId: '1',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -910,7 +910,7 @@ describe('EarnApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: SubscribeLockedProductRequest = {
                 projectId: '1',
-                amount: 1,
+                amount: 1.0,
             };
 
             const errorResponse = {

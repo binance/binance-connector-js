@@ -11,7 +11,7 @@ async function subscribeLockedProduct() {
     try {
         const response = await client.restAPI.subscribeLockedProduct({
             projectId: '1',
-            amount: 1,
+            amount: 1.0,
         });
 
         const rateLimits = response.rateLimits!;
