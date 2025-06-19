@@ -422,7 +422,7 @@ describe('CapitalApi', () => {
             const params: DepositAddressRequest = {
                 coin: 'coin_example',
                 network: 'network_example',
-                amount: 1,
+                amount: 1.0,
                 recvWindow: 5000,
             };
 
@@ -874,7 +874,7 @@ describe('CapitalApi', () => {
             const params: WithdrawRequest = {
                 coin: 'coin_example',
                 address: 'address_example',
-                amount: 1,
+                amount: 1.0,
             };
 
             mockResponse = { id: '7213fea8e94b4a5593d507237e5a555b' };
@@ -897,7 +897,7 @@ describe('CapitalApi', () => {
             const params: WithdrawRequest = {
                 coin: 'coin_example',
                 address: 'address_example',
-                amount: 1,
+                amount: 1.0,
                 withdrawOrderId: '1',
                 network: 'network_example',
                 addressTag: 'addressTag_example',
@@ -927,7 +927,7 @@ describe('CapitalApi', () => {
             const _params: WithdrawRequest = {
                 coin: 'coin_example',
                 address: 'address_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.coin;
@@ -941,7 +941,7 @@ describe('CapitalApi', () => {
             const _params: WithdrawRequest = {
                 coin: 'coin_example',
                 address: 'address_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.address;
@@ -955,7 +955,7 @@ describe('CapitalApi', () => {
             const _params: WithdrawRequest = {
                 coin: 'coin_example',
                 address: 'address_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -969,7 +969,7 @@ describe('CapitalApi', () => {
             const params: WithdrawRequest = {
                 coin: 'coin_example',
                 address: 'address_example',
-                amount: 1,
+                amount: 1.0,
             };
 
             const errorResponse = {

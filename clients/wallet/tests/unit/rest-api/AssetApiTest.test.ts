@@ -1611,7 +1611,7 @@ describe('AssetApi', () => {
             const params: UserUniversalTransferRequest = {
                 type: 'type_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
 
             mockResponse = { tranId: 13526853623 };
@@ -1634,7 +1634,7 @@ describe('AssetApi', () => {
             const params: UserUniversalTransferRequest = {
                 type: 'type_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
                 fromSymbol: 'fromSymbol_example',
                 toSymbol: 'toSymbol_example',
                 recvWindow: 5000,
@@ -1660,7 +1660,7 @@ describe('AssetApi', () => {
             const _params: UserUniversalTransferRequest = {
                 type: 'type_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.type;
@@ -1674,7 +1674,7 @@ describe('AssetApi', () => {
             const _params: UserUniversalTransferRequest = {
                 type: 'type_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -1688,7 +1688,7 @@ describe('AssetApi', () => {
             const _params: UserUniversalTransferRequest = {
                 type: 'type_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -1702,7 +1702,7 @@ describe('AssetApi', () => {
             const params: UserUniversalTransferRequest = {
                 type: 'type_example',
                 asset: 'asset_example',
-                amount: 1,
+                amount: 1.0,
             };
 
             const errorResponse = {

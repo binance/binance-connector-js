@@ -12,7 +12,7 @@ async function brokerWithdraw() {
         const response = await client.restAPI.brokerWithdraw({
             address: 'address_example',
             coin: 'coin_example',
-            amount: 1,
+            amount: 1.0,
             withdrawOrderId: '1',
             questionnaire: 'questionnaire_example',
             originatorPii: 'originatorPii_example',

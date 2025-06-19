@@ -55,7 +55,7 @@ describe('TravelRuleApi', () => {
             const params: BrokerWithdrawRequest = {
                 address: 'address_example',
                 coin: 'coin_example',
-                amount: 1,
+                amount: 1.0,
                 withdrawOrderId: '1',
                 questionnaire: 'questionnaire_example',
                 originatorPii: 'originatorPii_example',
@@ -82,7 +82,7 @@ describe('TravelRuleApi', () => {
             const params: BrokerWithdrawRequest = {
                 address: 'address_example',
                 coin: 'coin_example',
-                amount: 1,
+                amount: 1.0,
                 withdrawOrderId: '1',
                 questionnaire: 'questionnaire_example',
                 originatorPii: 'originatorPii_example',
@@ -114,7 +114,7 @@ describe('TravelRuleApi', () => {
             const _params: BrokerWithdrawRequest = {
                 address: 'address_example',
                 coin: 'coin_example',
-                amount: 1,
+                amount: 1.0,
                 withdrawOrderId: '1',
                 questionnaire: 'questionnaire_example',
                 originatorPii: 'originatorPii_example',
@@ -132,7 +132,7 @@ describe('TravelRuleApi', () => {
             const _params: BrokerWithdrawRequest = {
                 address: 'address_example',
                 coin: 'coin_example',
-                amount: 1,
+                amount: 1.0,
                 withdrawOrderId: '1',
                 questionnaire: 'questionnaire_example',
                 originatorPii: 'originatorPii_example',
@@ -150,7 +150,7 @@ describe('TravelRuleApi', () => {
             const _params: BrokerWithdrawRequest = {
                 address: 'address_example',
                 coin: 'coin_example',
-                amount: 1,
+                amount: 1.0,
                 withdrawOrderId: '1',
                 questionnaire: 'questionnaire_example',
                 originatorPii: 'originatorPii_example',
@@ -168,7 +168,7 @@ describe('TravelRuleApi', () => {
             const _params: BrokerWithdrawRequest = {
                 address: 'address_example',
                 coin: 'coin_example',
-                amount: 1,
+                amount: 1.0,
                 withdrawOrderId: '1',
                 questionnaire: 'questionnaire_example',
                 originatorPii: 'originatorPii_example',
@@ -186,7 +186,7 @@ describe('TravelRuleApi', () => {
             const _params: BrokerWithdrawRequest = {
                 address: 'address_example',
                 coin: 'coin_example',
-                amount: 1,
+                amount: 1.0,
                 withdrawOrderId: '1',
                 questionnaire: 'questionnaire_example',
                 originatorPii: 'originatorPii_example',
@@ -204,7 +204,7 @@ describe('TravelRuleApi', () => {
             const _params: BrokerWithdrawRequest = {
                 address: 'address_example',
                 coin: 'coin_example',
-                amount: 1,
+                amount: 1.0,
                 withdrawOrderId: '1',
                 questionnaire: 'questionnaire_example',
                 originatorPii: 'originatorPii_example',
@@ -222,7 +222,7 @@ describe('TravelRuleApi', () => {
             const _params: BrokerWithdrawRequest = {
                 address: 'address_example',
                 coin: 'coin_example',
-                amount: 1,
+                amount: 1.0,
                 withdrawOrderId: '1',
                 questionnaire: 'questionnaire_example',
                 originatorPii: 'originatorPii_example',
@@ -240,7 +240,7 @@ describe('TravelRuleApi', () => {
             const params: BrokerWithdrawRequest = {
                 address: 'address_example',
                 coin: 'coin_example',
-                amount: 1,
+                amount: 1.0,
                 withdrawOrderId: '1',
                 questionnaire: 'questionnaire_example',
                 originatorPii: 'originatorPii_example',
@@ -534,7 +534,7 @@ describe('TravelRuleApi', () => {
                 signature: 'signature_example',
                 network: 'network_example',
                 coin: 'coin_example',
-                amount: 1,
+                amount: 1.0,
                 address: 'address_example',
                 addressTag: 'addressTag_example',
             };
@@ -1078,7 +1078,7 @@ describe('TravelRuleApi', () => {
             const params: WithdrawTravelRuleRequest = {
                 coin: 'coin_example',
                 address: 'address_example',
-                amount: 1,
+                amount: 1.0,
                 questionnaire: 'questionnaire_example',
             };
 
@@ -1102,7 +1102,7 @@ describe('TravelRuleApi', () => {
             const params: WithdrawTravelRuleRequest = {
                 coin: 'coin_example',
                 address: 'address_example',
-                amount: 1,
+                amount: 1.0,
                 questionnaire: 'questionnaire_example',
                 withdrawOrderId: '1',
                 network: 'network_example',
@@ -1133,7 +1133,7 @@ describe('TravelRuleApi', () => {
             const _params: WithdrawTravelRuleRequest = {
                 coin: 'coin_example',
                 address: 'address_example',
-                amount: 1,
+                amount: 1.0,
                 questionnaire: 'questionnaire_example',
             };
             const params = Object.assign({ ..._params });
@@ -1148,7 +1148,7 @@ describe('TravelRuleApi', () => {
             const _params: WithdrawTravelRuleRequest = {
                 coin: 'coin_example',
                 address: 'address_example',
-                amount: 1,
+                amount: 1.0,
                 questionnaire: 'questionnaire_example',
             };
             const params = Object.assign({ ..._params });
@@ -1163,7 +1163,7 @@ describe('TravelRuleApi', () => {
             const _params: WithdrawTravelRuleRequest = {
                 coin: 'coin_example',
                 address: 'address_example',
-                amount: 1,
+                amount: 1.0,
                 questionnaire: 'questionnaire_example',
             };
             const params = Object.assign({ ..._params });
@@ -1178,7 +1178,7 @@ describe('TravelRuleApi', () => {
             const _params: WithdrawTravelRuleRequest = {
                 coin: 'coin_example',
                 address: 'address_example',
-                amount: 1,
+                amount: 1.0,
                 questionnaire: 'questionnaire_example',
             };
             const params = Object.assign({ ..._params });
@@ -1193,7 +1193,7 @@ describe('TravelRuleApi', () => {
             const params: WithdrawTravelRuleRequest = {
                 coin: 'coin_example',
                 address: 'address_example',
-                amount: 1,
+                amount: 1.0,
                 questionnaire: 'questionnaire_example',
             };
 

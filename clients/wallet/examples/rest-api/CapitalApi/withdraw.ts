@@ -12,7 +12,7 @@ async function withdraw() {
         const response = await client.restAPI.withdraw({
             coin: 'coin_example',
             address: 'address_example',
-            amount: 1,
+            amount: 1.0,
         });
 
         const rateLimits = response.rateLimits!;

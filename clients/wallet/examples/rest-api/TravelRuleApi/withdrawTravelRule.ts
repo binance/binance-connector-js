@@ -12,7 +12,7 @@ async function withdrawTravelRule() {
         const response = await client.restAPI.withdrawTravelRule({
             coin: 'coin_example',
             address: 'address_example',
-            amount: 1,
+            amount: 1.0,
             questionnaire: 'questionnaire_example',
         });
 
