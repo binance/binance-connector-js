@@ -451,7 +451,7 @@ describe('SpotAlgoApi', () => {
             const params: TimeWeightedAveragePriceSpotAlgoRequest = {
                 symbol: 'BTCUSDT',
                 side: 'BUY',
-                quantity: 1,
+                quantity: 1.0,
                 duration: 5000,
             };
 
@@ -480,10 +480,10 @@ describe('SpotAlgoApi', () => {
             const params: TimeWeightedAveragePriceSpotAlgoRequest = {
                 symbol: 'BTCUSDT',
                 side: 'BUY',
-                quantity: 1,
+                quantity: 1.0,
                 duration: 5000,
                 clientAlgoId: '1',
-                limitPrice: 1,
+                limitPrice: 1.0,
             };
 
             mockResponse = {
@@ -511,7 +511,7 @@ describe('SpotAlgoApi', () => {
             const _params: TimeWeightedAveragePriceSpotAlgoRequest = {
                 symbol: 'BTCUSDT',
                 side: 'BUY',
-                quantity: 1,
+                quantity: 1.0,
                 duration: 5000,
             };
             const params = Object.assign({ ..._params });
@@ -526,7 +526,7 @@ describe('SpotAlgoApi', () => {
             const _params: TimeWeightedAveragePriceSpotAlgoRequest = {
                 symbol: 'BTCUSDT',
                 side: 'BUY',
-                quantity: 1,
+                quantity: 1.0,
                 duration: 5000,
             };
             const params = Object.assign({ ..._params });
@@ -541,7 +541,7 @@ describe('SpotAlgoApi', () => {
             const _params: TimeWeightedAveragePriceSpotAlgoRequest = {
                 symbol: 'BTCUSDT',
                 side: 'BUY',
-                quantity: 1,
+                quantity: 1.0,
                 duration: 5000,
             };
             const params = Object.assign({ ..._params });
@@ -556,7 +556,7 @@ describe('SpotAlgoApi', () => {
             const _params: TimeWeightedAveragePriceSpotAlgoRequest = {
                 symbol: 'BTCUSDT',
                 side: 'BUY',
-                quantity: 1,
+                quantity: 1.0,
                 duration: 5000,
             };
             const params = Object.assign({ ..._params });
@@ -571,7 +571,7 @@ describe('SpotAlgoApi', () => {
             const params: TimeWeightedAveragePriceSpotAlgoRequest = {
                 symbol: 'BTCUSDT',
                 side: 'BUY',
-                quantity: 1,
+                quantity: 1.0,
                 duration: 5000,
             };
 

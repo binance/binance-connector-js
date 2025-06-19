@@ -12,7 +12,7 @@ async function volumeParticipationFutureAlgo() {
         const response = await client.restAPI.volumeParticipationFutureAlgo({
             symbol: 'BTCUSDT',
             side: 'BUY',
-            quantity: 1,
+            quantity: 1.0,
             urgency: 'LOW',
         });
 

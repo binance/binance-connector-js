@@ -12,7 +12,7 @@ async function timeWeightedAveragePriceSpotAlgo() {
         const response = await client.restAPI.timeWeightedAveragePriceSpotAlgo({
             symbol: 'BTCUSDT',
             side: 'BUY',
-            quantity: 1,
+            quantity: 1.0,
             duration: 5000,
         });
 

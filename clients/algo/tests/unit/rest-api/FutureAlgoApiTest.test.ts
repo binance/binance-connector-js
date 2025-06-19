@@ -457,7 +457,7 @@ describe('FutureAlgoApi', () => {
             const params: TimeWeightedAveragePriceFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
                 side: 'BUY',
-                quantity: 1,
+                quantity: 1.0,
                 duration: 5000,
             };
 
@@ -486,12 +486,12 @@ describe('FutureAlgoApi', () => {
             const params: TimeWeightedAveragePriceFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
                 side: 'BUY',
-                quantity: 1,
+                quantity: 1.0,
                 duration: 5000,
                 positionSide: 'BOTH',
                 clientAlgoId: '1',
                 reduceOnly: false,
-                limitPrice: 1,
+                limitPrice: 1.0,
                 recvWindow: 5000,
             };
 
@@ -520,7 +520,7 @@ describe('FutureAlgoApi', () => {
             const _params: TimeWeightedAveragePriceFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
                 side: 'BUY',
-                quantity: 1,
+                quantity: 1.0,
                 duration: 5000,
             };
             const params = Object.assign({ ..._params });
@@ -535,7 +535,7 @@ describe('FutureAlgoApi', () => {
             const _params: TimeWeightedAveragePriceFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
                 side: 'BUY',
-                quantity: 1,
+                quantity: 1.0,
                 duration: 5000,
             };
             const params = Object.assign({ ..._params });
@@ -550,7 +550,7 @@ describe('FutureAlgoApi', () => {
             const _params: TimeWeightedAveragePriceFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
                 side: 'BUY',
-                quantity: 1,
+                quantity: 1.0,
                 duration: 5000,
             };
             const params = Object.assign({ ..._params });
@@ -565,7 +565,7 @@ describe('FutureAlgoApi', () => {
             const _params: TimeWeightedAveragePriceFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
                 side: 'BUY',
-                quantity: 1,
+                quantity: 1.0,
                 duration: 5000,
             };
             const params = Object.assign({ ..._params });
@@ -580,7 +580,7 @@ describe('FutureAlgoApi', () => {
             const params: TimeWeightedAveragePriceFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
                 side: 'BUY',
-                quantity: 1,
+                quantity: 1.0,
                 duration: 5000,
             };
 
@@ -608,7 +608,7 @@ describe('FutureAlgoApi', () => {
             const params: VolumeParticipationFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
                 side: 'BUY',
-                quantity: 1,
+                quantity: 1.0,
                 urgency: 'LOW',
             };
 
@@ -637,12 +637,12 @@ describe('FutureAlgoApi', () => {
             const params: VolumeParticipationFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
                 side: 'BUY',
-                quantity: 1,
+                quantity: 1.0,
                 urgency: 'LOW',
                 positionSide: 'BOTH',
                 clientAlgoId: '1',
                 reduceOnly: false,
-                limitPrice: 1,
+                limitPrice: 1.0,
                 recvWindow: 5000,
             };
 
@@ -671,7 +671,7 @@ describe('FutureAlgoApi', () => {
             const _params: VolumeParticipationFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
                 side: 'BUY',
-                quantity: 1,
+                quantity: 1.0,
                 urgency: 'LOW',
             };
             const params = Object.assign({ ..._params });
@@ -686,7 +686,7 @@ describe('FutureAlgoApi', () => {
             const _params: VolumeParticipationFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
                 side: 'BUY',
-                quantity: 1,
+                quantity: 1.0,
                 urgency: 'LOW',
             };
             const params = Object.assign({ ..._params });
@@ -701,7 +701,7 @@ describe('FutureAlgoApi', () => {
             const _params: VolumeParticipationFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
                 side: 'BUY',
-                quantity: 1,
+                quantity: 1.0,
                 urgency: 'LOW',
             };
             const params = Object.assign({ ..._params });
@@ -716,7 +716,7 @@ describe('FutureAlgoApi', () => {
             const _params: VolumeParticipationFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
                 side: 'BUY',
-                quantity: 1,
+                quantity: 1.0,
                 urgency: 'LOW',
             };
             const params = Object.assign({ ..._params });
@@ -731,7 +731,7 @@ describe('FutureAlgoApi', () => {
             const params: VolumeParticipationFutureAlgoRequest = {
                 symbol: 'BTCUSDT',
                 side: 'BUY',
-                quantity: 1,
+                quantity: 1.0,
                 urgency: 'LOW',
             };
 
