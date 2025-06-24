@@ -663,8 +663,8 @@ describe('MarketDataApi', () => {
                 ],
                 serverTime: 1565613908500,
                 assets: [
-                    { asset: 'BUSD', marginAvailable: true, autoAssetExchange: 0 },
-                    { asset: 'USDT', marginAvailable: true, autoAssetExchange: 0 },
+                    { asset: 'BTC', marginAvailable: true, autoAssetExchange: '-0.10' },
+                    { asset: 'USDT', marginAvailable: true, autoAssetExchange: '0' },
                     { asset: 'BNB', marginAvailable: false, autoAssetExchange: null },
                 ],
                 symbols: [
@@ -714,7 +714,7 @@ describe('MarketDataApi', () => {
                                 filterType: 'PERCENT_PRICE',
                                 multiplierUp: '1.1500',
                                 multiplierDown: '0.8500',
-                                multiplierDecimal: 4,
+                                multiplierDecimal: '4',
                             },
                         ],
                         OrderType: [

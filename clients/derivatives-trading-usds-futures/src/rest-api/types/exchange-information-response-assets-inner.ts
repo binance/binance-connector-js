@@ -33,8 +33,8 @@ export interface ExchangeInformationResponseAssetsInner {
     marginAvailable?: boolean;
     /**
      *
-     * @type {number}
+     * @type {string}
      * @memberof ExchangeInformationResponseAssetsInner
      */
-    autoAssetExchange?: number;
+    autoAssetExchange?: string;
 }

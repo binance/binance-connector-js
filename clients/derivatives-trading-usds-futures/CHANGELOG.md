@@ -1,5 +1,15 @@
 # Changelog
 
+## 8.0.0 - 2025-06-24
+
+### Changed (1)
+
+#### REST API
+
+- Modified response for `exchangeInformation()` method (`GET /fapi/v1/exchangeInfo`):
+  - `assets`.`autoAssetExchange`: type `integer` → `string`
+  - `symbols`.`filters`.`multiplierDecimal`: type `integer` → `string`
+
 ## 7.0.2 - 2025-06-19
 
 ### Changed (1)
