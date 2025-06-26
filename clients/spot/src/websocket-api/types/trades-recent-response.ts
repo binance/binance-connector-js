@@ -21,7 +21,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AvgPriceResponseRateLimitsInner } from './avg-price-response-rate-limits-inner';
+import type { RateLimits } from './rate-limits';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { TradesRecentResponseResultInner } from './trades-recent-response-result-inner';
@@ -52,8 +52,8 @@ export interface TradesRecentResponse {
     result?: Array<TradesRecentResponseResultInner>;
     /**
      *
-     * @type {Array<AvgPriceResponseRateLimitsInner>}
+     * @type {RateLimits}
      * @memberof TradesRecentResponse
      */
-    rateLimits?: Array<AvgPriceResponseRateLimitsInner>;
+    rateLimits?: RateLimits;
 }

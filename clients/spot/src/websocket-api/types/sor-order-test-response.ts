@@ -24,7 +24,7 @@
 import type { OrderTestResponseResult } from './order-test-response-result';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { PingResponseRateLimitsInner } from './ping-response-rate-limits-inner';
+import type { RateLimits } from './rate-limits';
 
 /**
  *
@@ -52,8 +52,8 @@ export interface SorOrderTestResponse {
     result?: OrderTestResponseResult;
     /**
      *
-     * @type {Array<PingResponseRateLimitsInner>}
+     * @type {RateLimits}
      * @memberof SorOrderTestResponse
      */
-    rateLimits?: Array<PingResponseRateLimitsInner>;
+    rateLimits?: RateLimits;
 }

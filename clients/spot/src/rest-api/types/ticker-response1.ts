@@ -35,6 +35,24 @@ export interface TickerResponse1 {
      * @type {string}
      * @memberof TickerResponse1
      */
+    priceChange?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof TickerResponse1
+     */
+    priceChangePercent?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof TickerResponse1
+     */
+    weightedAvgPrice?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof TickerResponse1
+     */
     openPrice?: string;
     /**
      *

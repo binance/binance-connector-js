@@ -35,6 +35,24 @@ export interface TickerTradingDayResponse2Inner {
      * @type {string}
      * @memberof TickerTradingDayResponse2Inner
      */
+    priceChange?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof TickerTradingDayResponse2Inner
+     */
+    priceChangePercent?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof TickerTradingDayResponse2Inner
+     */
+    weightedAvgPrice?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof TickerTradingDayResponse2Inner
+     */
     openPrice?: string;
     /**
      *

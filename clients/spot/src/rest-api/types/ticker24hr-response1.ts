@@ -35,6 +35,66 @@ export interface Ticker24hrResponse1 {
      * @type {string}
      * @memberof Ticker24hrResponse1
      */
+    priceChange?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Ticker24hrResponse1
+     */
+    priceChangePercent?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Ticker24hrResponse1
+     */
+    weightedAvgPrice?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Ticker24hrResponse1
+     */
+    prevClosePrice?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Ticker24hrResponse1
+     */
+    lastPrice?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Ticker24hrResponse1
+     */
+    lastQty?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Ticker24hrResponse1
+     */
+    bidPrice?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Ticker24hrResponse1
+     */
+    bidQty?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Ticker24hrResponse1
+     */
+    askPrice?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Ticker24hrResponse1
+     */
+    askQty?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Ticker24hrResponse1
+     */
     openPrice?: string;
     /**
      *
@@ -48,12 +108,6 @@ export interface Ticker24hrResponse1 {
      * @memberof Ticker24hrResponse1
      */
     lowPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof Ticker24hrResponse1
-     */
-    lastPrice?: string;
     /**
      *
      * @type {string}

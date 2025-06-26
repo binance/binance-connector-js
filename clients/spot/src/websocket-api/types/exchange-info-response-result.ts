@@ -21,16 +21,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ExchangeInfoResponseResultExchangeFiltersInner } from './exchange-info-response-result-exchange-filters-inner';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { ExchangeInfoResponseResultRateLimitsInner } from './exchange-info-response-result-rate-limits-inner';
+import type { ExchangeFilters } from './exchange-filters';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { ExchangeInfoResponseResultSorsInner } from './exchange-info-response-result-sors-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { ExchangeInfoResponseResultSymbolsInner } from './exchange-info-response-result-symbols-inner';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { RateLimits } from './rate-limits';
 
 /**
  *
@@ -52,16 +52,16 @@ export interface ExchangeInfoResponseResult {
     serverTime?: number;
     /**
      *
-     * @type {Array<ExchangeInfoResponseResultRateLimitsInner>}
+     * @type {RateLimits}
      * @memberof ExchangeInfoResponseResult
      */
-    rateLimits?: Array<ExchangeInfoResponseResultRateLimitsInner>;
+    rateLimits?: RateLimits;
     /**
      *
-     * @type {Array<ExchangeInfoResponseResultExchangeFiltersInner>}
+     * @type {ExchangeFilters}
      * @memberof ExchangeInfoResponseResult
      */
-    exchangeFilters?: Array<ExchangeInfoResponseResultExchangeFiltersInner>;
+    exchangeFilters?: ExchangeFilters;
     /**
      *
      * @type {Array<ExchangeInfoResponseResultSymbolsInner>}

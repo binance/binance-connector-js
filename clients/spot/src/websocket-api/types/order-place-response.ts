@@ -24,7 +24,7 @@
 import type { OrderPlaceResponseResult } from './order-place-response-result';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { PingResponseRateLimitsInner } from './ping-response-rate-limits-inner';
+import type { RateLimits } from './rate-limits';
 
 /**
  *
@@ -52,8 +52,8 @@ export interface OrderPlaceResponse {
     result?: OrderPlaceResponseResult;
     /**
      *
-     * @type {Array<PingResponseRateLimitsInner>}
+     * @type {RateLimits}
      * @memberof OrderPlaceResponse
      */
-    rateLimits?: Array<PingResponseRateLimitsInner>;
+    rateLimits?: RateLimits;
 }

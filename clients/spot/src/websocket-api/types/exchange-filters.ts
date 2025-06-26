@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 
 /**
  * Binance Spot WebSocket API
@@ -18,34 +19,13 @@
  * Do not edit the class manually.
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ExchangeFiltersInner } from './exchange-filters-inner';
+
 /**
  *
  * @export
- * @interface ExchangeInfoResponseResultRateLimitsInner
+ * @interface ExchangeFilters
  */
-export interface ExchangeInfoResponseResultRateLimitsInner {
-    /**
-     *
-     * @type {string}
-     * @memberof ExchangeInfoResponseResultRateLimitsInner
-     */
-    rateLimitType?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof ExchangeInfoResponseResultRateLimitsInner
-     */
-    interval?: string;
-    /**
-     *
-     * @type {number}
-     * @memberof ExchangeInfoResponseResultRateLimitsInner
-     */
-    intervalNum?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof ExchangeInfoResponseResultRateLimitsInner
-     */
-    limit?: number;
-}
+export interface ExchangeFilters extends Array<ExchangeFiltersInner> {}

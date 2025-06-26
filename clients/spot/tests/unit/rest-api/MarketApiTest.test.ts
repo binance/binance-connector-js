@@ -654,6 +654,9 @@ describe('MarketApi', () => {
         it('should execute ticker() successfully with required parameters only', async () => {
             mockResponse = {
                 symbol: 'LTCBTC',
+                priceChange: '-8.00000000',
+                priceChangePercent: '-88.889',
+                weightedAvgPrice: '2.60427807',
                 openPrice: '0.10000000',
                 highPrice: '2.00000000',
                 lowPrice: '0.10000000',
@@ -691,6 +694,9 @@ describe('MarketApi', () => {
 
             mockResponse = {
                 symbol: 'LTCBTC',
+                priceChange: '-8.00000000',
+                priceChangePercent: '-88.889',
+                weightedAvgPrice: '2.60427807',
                 openPrice: '0.10000000',
                 highPrice: '2.00000000',
                 lowPrice: '0.10000000',
@@ -738,10 +744,19 @@ describe('MarketApi', () => {
         it('should execute ticker24hr() successfully with required parameters only', async () => {
             mockResponse = {
                 symbol: 'BNBBTC',
+                priceChange: '-94.99999800',
+                priceChangePercent: '-95.960',
+                weightedAvgPrice: '0.29628482',
+                prevClosePrice: '0.10002000',
+                lastPrice: '4.00000200',
+                lastQty: '200.00000000',
+                bidPrice: '4.00000000',
+                bidQty: '100.00000000',
+                askPrice: '4.00000200',
+                askQty: '100.00000000',
                 openPrice: '99.00000000',
                 highPrice: '100.00000000',
                 lowPrice: '0.10000000',
-                lastPrice: '4.00000200',
                 volume: '8913.30000000',
                 quoteVolume: '15.30000000',
                 openTime: 1499783499040,
@@ -774,10 +789,19 @@ describe('MarketApi', () => {
 
             mockResponse = {
                 symbol: 'BNBBTC',
+                priceChange: '-94.99999800',
+                priceChangePercent: '-95.960',
+                weightedAvgPrice: '0.29628482',
+                prevClosePrice: '0.10002000',
+                lastPrice: '4.00000200',
+                lastQty: '200.00000000',
+                bidPrice: '4.00000000',
+                bidQty: '100.00000000',
+                askPrice: '4.00000200',
+                askQty: '100.00000000',
                 openPrice: '99.00000000',
                 highPrice: '100.00000000',
                 lowPrice: '0.10000000',
-                lastPrice: '4.00000200',
                 volume: '8913.30000000',
                 quoteVolume: '15.30000000',
                 openTime: 1499783499040,
@@ -945,6 +969,9 @@ describe('MarketApi', () => {
         it('should execute tickerTradingDay() successfully with required parameters only', async () => {
             mockResponse = {
                 symbol: 'BTCUSDT',
+                priceChange: '-83.13000000',
+                priceChangePercent: '-0.317',
+                weightedAvgPrice: '26234.58803036',
                 openPrice: '26304.80000000',
                 highPrice: '26397.46000000',
                 lowPrice: '26088.34000000',
@@ -982,6 +1009,9 @@ describe('MarketApi', () => {
 
             mockResponse = {
                 symbol: 'BTCUSDT',
+                priceChange: '-83.13000000',
+                priceChangePercent: '-0.317',
+                weightedAvgPrice: '26234.58803036',
                 openPrice: '26304.80000000',
                 highPrice: '26397.46000000',
                 lowPrice: '26088.34000000',

@@ -21,31 +21,37 @@
 /**
  *
  * @export
- * @interface ExchangeInfoResponseRateLimitsInner
+ * @interface RateLimitsInner
  */
-export interface ExchangeInfoResponseRateLimitsInner {
+export interface RateLimitsInner {
     /**
      *
      * @type {string}
-     * @memberof ExchangeInfoResponseRateLimitsInner
+     * @memberof RateLimitsInner
      */
     rateLimitType?: string;
     /**
      *
      * @type {string}
-     * @memberof ExchangeInfoResponseRateLimitsInner
+     * @memberof RateLimitsInner
      */
     interval?: string;
     /**
      *
      * @type {number}
-     * @memberof ExchangeInfoResponseRateLimitsInner
+     * @memberof RateLimitsInner
      */
     intervalNum?: number;
     /**
      *
      * @type {number}
-     * @memberof ExchangeInfoResponseRateLimitsInner
+     * @memberof RateLimitsInner
      */
     limit?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof RateLimitsInner
+     */
+    count?: number;
 }

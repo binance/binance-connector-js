@@ -35,6 +35,24 @@ export interface TickerResponse2Inner {
      * @type {string}
      * @memberof TickerResponse2Inner
      */
+    priceChange?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof TickerResponse2Inner
+     */
+    priceChangePercent?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof TickerResponse2Inner
+     */
+    weightedAvgPrice?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof TickerResponse2Inner
+     */
     openPrice?: string;
     /**
      *

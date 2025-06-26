@@ -21,7 +21,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AvgPriceResponseRateLimitsInner } from './avg-price-response-rate-limits-inner';
+import type { RateLimits } from './rate-limits';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { UiKlinesItem } from './ui-klines-item';
@@ -52,8 +52,8 @@ export interface UiKlinesResponse {
     result?: Array<UiKlinesItem>;
     /**
      *
-     * @type {Array<AvgPriceResponseRateLimitsInner>}
+     * @type {RateLimits}
      * @memberof UiKlinesResponse
      */
-    rateLimits?: Array<AvgPriceResponseRateLimitsInner>;
+    rateLimits?: RateLimits;
 }

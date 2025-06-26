@@ -21,7 +21,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AvgPriceResponseRateLimitsInner } from './avg-price-response-rate-limits-inner';
+import type { RateLimits } from './rate-limits';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { Ticker24hrResponse2ResultInner } from './ticker24hr-response2-result-inner';
@@ -52,8 +52,8 @@ export interface Ticker24hrResponse2 {
     result?: Array<Ticker24hrResponse2ResultInner>;
     /**
      *
-     * @type {Array<AvgPriceResponseRateLimitsInner>}
+     * @type {RateLimits}
      * @memberof Ticker24hrResponse2
      */
-    rateLimits?: Array<AvgPriceResponseRateLimitsInner>;
+    rateLimits?: RateLimits;
 }

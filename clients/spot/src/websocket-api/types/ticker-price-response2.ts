@@ -21,10 +21,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TickerPriceResponse2ResultInner } from './ticker-price-response2-result-inner';
+import type { RateLimits } from './rate-limits';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TickerResponse1RateLimitsInner } from './ticker-response1-rate-limits-inner';
+import type { TickerPriceResponse2ResultInner } from './ticker-price-response2-result-inner';
 
 /**
  *
@@ -52,8 +52,8 @@ export interface TickerPriceResponse2 {
     result?: Array<TickerPriceResponse2ResultInner>;
     /**
      *
-     * @type {Array<TickerResponse1RateLimitsInner>}
+     * @type {RateLimits}
      * @memberof TickerPriceResponse2
      */
-    rateLimits?: Array<TickerResponse1RateLimitsInner>;
+    rateLimits?: RateLimits;
 }

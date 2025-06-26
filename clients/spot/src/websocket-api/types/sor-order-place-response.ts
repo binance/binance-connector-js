@@ -21,7 +21,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { PingResponseRateLimitsInner } from './ping-response-rate-limits-inner';
+import type { RateLimits } from './rate-limits';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { SorOrderPlaceResponseResultInner } from './sor-order-place-response-result-inner';
@@ -52,8 +52,8 @@ export interface SorOrderPlaceResponse {
     result?: Array<SorOrderPlaceResponseResultInner>;
     /**
      *
-     * @type {Array<PingResponseRateLimitsInner>}
+     * @type {RateLimits}
      * @memberof SorOrderPlaceResponse
      */
-    rateLimits?: Array<PingResponseRateLimitsInner>;
+    rateLimits?: RateLimits;
 }

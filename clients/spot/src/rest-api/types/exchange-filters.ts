@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 
 /**
  * Binance Spot REST API
@@ -18,34 +19,13 @@
  * Do not edit the class manually.
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ExchangeFiltersInner } from './exchange-filters-inner';
+
 /**
  *
  * @export
- * @interface ExchangeInfoResponseRateLimitsInner
+ * @interface ExchangeFilters
  */
-export interface ExchangeInfoResponseRateLimitsInner {
-    /**
-     *
-     * @type {string}
-     * @memberof ExchangeInfoResponseRateLimitsInner
-     */
-    rateLimitType?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof ExchangeInfoResponseRateLimitsInner
-     */
-    interval?: string;
-    /**
-     *
-     * @type {number}
-     * @memberof ExchangeInfoResponseRateLimitsInner
-     */
-    intervalNum?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof ExchangeInfoResponseRateLimitsInner
-     */
-    limit?: number;
-}
+export interface ExchangeFilters extends Array<ExchangeFiltersInner> {}

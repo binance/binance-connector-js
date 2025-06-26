@@ -1,5 +1,39 @@
 # Changelog
 
+## 9.0.0 - 2025-06-26
+
+### Changed (10)
+
+#### REST API
+
+- `RateLimits` is unified as a single object
+- `ExchangeFilters` is unified as a single object
+- Modified response for `exchangeInfo()` method (`GET /api/v3/exchangeInfo`):
+  - `rateLimits`: item property `count` added
+- Modified response for `orderCancelReplace()` method (`POST /api/v3/order/cancelReplace`):
+  - property `cancelResult` added
+  - property `newOrderResponse` added
+  - property `newOrderResult` added
+  - property `cancelResponse` added
+  - `data`.`cancelResponse`: property `code` added
+  - `data`.`cancelResponse`: property `msg` added
+  - `data`.`newOrderResponse`: property `orderListId` added
+  - `data`.`newOrderResponse`: property `symbol` added
+  - `data`.`newOrderResponse`: property `transactTime` added
+  - `data`.`newOrderResponse`: property `clientOrderId` added
+  - `data`.`newOrderResponse`: property `orderId` added
+- Modified response for `ticker()` method (`GET /api/v3/ticker`):
+- Modified response for `ticker24hr()` method (`GET /api/v3/ticker/24hr`):
+- Modified response for `tickerTradingDay()` method (`GET /api/v3/ticker/tradingDay`):
+
+#### WebSocket API
+
+- `RateLimits` is unified as a single object
+- `ExchangeFilters` is unified as a single object
+- Modified response for `exchangeInfo()` method (`POST /exchangeInfo`):
+  - `rateLimits`: item property `count` added
+  - `result`.`rateLimits`: item property `count` added
+
 ## 8.0.1 - 2025-06-19
 
 ### Changed (1)

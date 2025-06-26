@@ -24,7 +24,7 @@
 import type { OpenOrdersCancelAllResponseResultInner } from './open-orders-cancel-all-response-result-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { PingResponseRateLimitsInner } from './ping-response-rate-limits-inner';
+import type { RateLimits } from './rate-limits';
 
 /**
  *
@@ -52,8 +52,8 @@ export interface OpenOrdersCancelAllResponse {
     result?: Array<OpenOrdersCancelAllResponseResultInner>;
     /**
      *
-     * @type {Array<PingResponseRateLimitsInner>}
+     * @type {RateLimits}
      * @memberof OpenOrdersCancelAllResponse
      */
-    rateLimits?: Array<PingResponseRateLimitsInner>;
+    rateLimits?: RateLimits;
 }

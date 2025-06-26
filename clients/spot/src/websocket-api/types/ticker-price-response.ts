@@ -22,6 +22,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { RateLimits } from './rate-limits';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { TickerPriceResponse1 } from './ticker-price-response1';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -29,9 +32,6 @@ import type { TickerPriceResponse2 } from './ticker-price-response2';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { TickerPriceResponse2ResultInner } from './ticker-price-response2-result-inner';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { TickerResponse1RateLimitsInner } from './ticker-response1-rate-limits-inner';
 
 /**
  * @type TickerPriceResponse

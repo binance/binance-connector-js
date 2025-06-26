@@ -21,10 +21,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderListPlaceOtocoResponseRateLimitsInner } from './order-list-place-otoco-response-rate-limits-inner';
+import type { OrderListPlaceOtocoResponseResult } from './order-list-place-otoco-response-result';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderListPlaceOtocoResponseResult } from './order-list-place-otoco-response-result';
+import type { RateLimits } from './rate-limits';
 
 /**
  *
@@ -52,8 +52,8 @@ export interface OrderListPlaceOtocoResponse {
     result?: OrderListPlaceOtocoResponseResult;
     /**
      *
-     * @type {Array<OrderListPlaceOtocoResponseRateLimitsInner>}
+     * @type {RateLimits}
      * @memberof OrderListPlaceOtocoResponse
      */
-    rateLimits?: Array<OrderListPlaceOtocoResponseRateLimitsInner>;
+    rateLimits?: RateLimits;
 }

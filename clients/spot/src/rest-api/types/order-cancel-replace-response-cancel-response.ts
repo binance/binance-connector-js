@@ -21,115 +21,103 @@
 /**
  *
  * @export
- * @interface OrderCancelReplaceResponseDataCancelResponse
+ * @interface OrderCancelReplaceResponseCancelResponse
  */
-export interface OrderCancelReplaceResponseDataCancelResponse {
-    /**
-     *
-     * @type {number}
-     * @memberof OrderCancelReplaceResponseDataCancelResponse
-     */
-    code?: number;
+export interface OrderCancelReplaceResponseCancelResponse {
     /**
      *
      * @type {string}
-     * @memberof OrderCancelReplaceResponseDataCancelResponse
-     */
-    msg?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof OrderCancelReplaceResponseDataCancelResponse
+     * @memberof OrderCancelReplaceResponseCancelResponse
      */
     symbol?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderCancelReplaceResponseDataCancelResponse
+     * @memberof OrderCancelReplaceResponseCancelResponse
      */
     origClientOrderId?: string;
     /**
      *
      * @type {number}
-     * @memberof OrderCancelReplaceResponseDataCancelResponse
+     * @memberof OrderCancelReplaceResponseCancelResponse
      */
     orderId?: number;
     /**
      *
      * @type {number}
-     * @memberof OrderCancelReplaceResponseDataCancelResponse
+     * @memberof OrderCancelReplaceResponseCancelResponse
      */
     orderListId?: number;
     /**
      *
      * @type {string}
-     * @memberof OrderCancelReplaceResponseDataCancelResponse
+     * @memberof OrderCancelReplaceResponseCancelResponse
      */
     clientOrderId?: string;
     /**
      *
+     * @type {number}
+     * @memberof OrderCancelReplaceResponseCancelResponse
+     */
+    transactTime?: number;
+    /**
+     *
      * @type {string}
-     * @memberof OrderCancelReplaceResponseDataCancelResponse
+     * @memberof OrderCancelReplaceResponseCancelResponse
      */
     price?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderCancelReplaceResponseDataCancelResponse
+     * @memberof OrderCancelReplaceResponseCancelResponse
      */
     origQty?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderCancelReplaceResponseDataCancelResponse
+     * @memberof OrderCancelReplaceResponseCancelResponse
      */
     executedQty?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderCancelReplaceResponseDataCancelResponse
+     * @memberof OrderCancelReplaceResponseCancelResponse
      */
     origQuoteOrderQty?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderCancelReplaceResponseDataCancelResponse
+     * @memberof OrderCancelReplaceResponseCancelResponse
      */
     cummulativeQuoteQty?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderCancelReplaceResponseDataCancelResponse
+     * @memberof OrderCancelReplaceResponseCancelResponse
      */
     status?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderCancelReplaceResponseDataCancelResponse
+     * @memberof OrderCancelReplaceResponseCancelResponse
      */
     timeInForce?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderCancelReplaceResponseDataCancelResponse
+     * @memberof OrderCancelReplaceResponseCancelResponse
      */
     type?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderCancelReplaceResponseDataCancelResponse
+     * @memberof OrderCancelReplaceResponseCancelResponse
      */
     side?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderCancelReplaceResponseDataCancelResponse
+     * @memberof OrderCancelReplaceResponseCancelResponse
      */
     selfTradePreventionMode?: string;
-    /**
-     *
-     * @type {number}
-     * @memberof OrderCancelReplaceResponseDataCancelResponse
-     */
-    transactTime?: number;
 }

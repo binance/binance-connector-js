@@ -21,7 +21,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { OrderCancelReplaceResponseCancelResponse } from './order-cancel-replace-response-cancel-response';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { OrderCancelReplaceResponseData } from './order-cancel-replace-response-data';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { OrderCancelReplaceResponseNewOrderResponse } from './order-cancel-replace-response-new-order-response';
 
 /**
  *
@@ -29,6 +35,30 @@ import type { OrderCancelReplaceResponseData } from './order-cancel-replace-resp
  * @interface OrderCancelReplaceResponse
  */
 export interface OrderCancelReplaceResponse {
+    /**
+     *
+     * @type {string}
+     * @memberof OrderCancelReplaceResponse
+     */
+    cancelResult?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof OrderCancelReplaceResponse
+     */
+    newOrderResult?: string;
+    /**
+     *
+     * @type {OrderCancelReplaceResponseCancelResponse}
+     * @memberof OrderCancelReplaceResponse
+     */
+    cancelResponse?: OrderCancelReplaceResponseCancelResponse;
+    /**
+     *
+     * @type {OrderCancelReplaceResponseNewOrderResponse}
+     * @memberof OrderCancelReplaceResponse
+     */
+    newOrderResponse?: OrderCancelReplaceResponseNewOrderResponse;
     /**
      *
      * @type {number}

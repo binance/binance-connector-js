@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 
 /**
  * Binance Spot WebSocket API
@@ -18,40 +19,13 @@
  * Do not edit the class manually.
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { RateLimitsInner } from './rate-limits-inner';
+
 /**
  *
  * @export
- * @interface PingResponseRateLimitsInner
+ * @interface RateLimits
  */
-export interface PingResponseRateLimitsInner {
-    /**
-     *
-     * @type {string}
-     * @memberof PingResponseRateLimitsInner
-     */
-    rateLimitType?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PingResponseRateLimitsInner
-     */
-    interval?: string;
-    /**
-     *
-     * @type {number}
-     * @memberof PingResponseRateLimitsInner
-     */
-    intervalNum?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof PingResponseRateLimitsInner
-     */
-    limit?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof PingResponseRateLimitsInner
-     */
-    count?: number;
-}
+export interface RateLimits extends Array<RateLimitsInner> {}

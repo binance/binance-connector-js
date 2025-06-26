@@ -21,49 +21,37 @@
 /**
  *
  * @export
- * @interface OrderCancelReplaceResponseDataNewOrderResponse
+ * @interface RateLimitsInner
  */
-export interface OrderCancelReplaceResponseDataNewOrderResponse {
-    /**
-     *
-     * @type {number}
-     * @memberof OrderCancelReplaceResponseDataNewOrderResponse
-     */
-    code?: number;
+export interface RateLimitsInner {
     /**
      *
      * @type {string}
-     * @memberof OrderCancelReplaceResponseDataNewOrderResponse
+     * @memberof RateLimitsInner
      */
-    msg?: string;
+    rateLimitType?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderCancelReplaceResponseDataNewOrderResponse
+     * @memberof RateLimitsInner
      */
-    symbol?: string;
+    interval?: string;
     /**
      *
      * @type {number}
-     * @memberof OrderCancelReplaceResponseDataNewOrderResponse
+     * @memberof RateLimitsInner
      */
-    orderId?: number;
+    intervalNum?: number;
     /**
      *
      * @type {number}
-     * @memberof OrderCancelReplaceResponseDataNewOrderResponse
+     * @memberof RateLimitsInner
      */
-    orderListId?: number;
-    /**
-     *
-     * @type {string}
-     * @memberof OrderCancelReplaceResponseDataNewOrderResponse
-     */
-    clientOrderId?: string;
+    limit?: number;
     /**
      *
      * @type {number}
-     * @memberof OrderCancelReplaceResponseDataNewOrderResponse
+     * @memberof RateLimitsInner
      */
-    transactTime?: number;
+    count?: number;
 }

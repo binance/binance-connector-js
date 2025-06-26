@@ -940,10 +940,10 @@ describe('TradeApi', () => {
                 },
                 rateLimits: [
                     {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
+                        rateLimitType: 'ORDERS',
+                        interval: 'SECOND',
+                        intervalNum: 10,
+                        limit: 50,
                         count: 1,
                     },
                     {
@@ -954,10 +954,10 @@ describe('TradeApi', () => {
                         count: 1,
                     },
                     {
-                        rateLimitType: 'ORDERS',
-                        interval: 'SECOND',
-                        intervalNum: 10,
-                        limit: 50,
+                        rateLimitType: 'REQUEST_WEIGHT',
+                        interval: 'MINUTE',
+                        intervalNum: 1,
+                        limit: 6000,
                         count: 1,
                     },
                 ],
@@ -1422,11 +1422,11 @@ describe('TradeApi', () => {
                 },
                 rateLimits: [
                     {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 1,
+                        rateLimitType: 'ORDERS',
+                        interval: 'SECOND',
+                        intervalNum: 10,
+                        limit: 50,
+                        count: 2,
                     },
                     {
                         rateLimitType: 'ORDERS',
@@ -1436,11 +1436,11 @@ describe('TradeApi', () => {
                         count: 2,
                     },
                     {
-                        rateLimitType: 'ORDERS',
-                        interval: 'SECOND',
-                        intervalNum: 10,
-                        limit: 50,
-                        count: 2,
+                        rateLimitType: 'REQUEST_WEIGHT',
+                        interval: 'MINUTE',
+                        intervalNum: 1,
+                        limit: 6000,
+                        count: 1,
                     },
                 ],
             };
@@ -1667,11 +1667,11 @@ describe('TradeApi', () => {
                 },
                 rateLimits: [
                     {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 1,
+                        rateLimitType: 'ORDERS',
+                        interval: 'SECOND',
+                        intervalNum: 10,
+                        limit: 50,
+                        count: 2,
                     },
                     {
                         rateLimitType: 'ORDERS',
@@ -1681,11 +1681,11 @@ describe('TradeApi', () => {
                         count: 2,
                     },
                     {
-                        rateLimitType: 'ORDERS',
-                        interval: 'SECOND',
-                        intervalNum: 10,
-                        limit: 50,
-                        count: 2,
+                        rateLimitType: 'REQUEST_WEIGHT',
+                        interval: 'MINUTE',
+                        intervalNum: 1,
+                        limit: 6000,
+                        count: 1,
                     },
                 ],
             };
@@ -1915,18 +1915,18 @@ describe('TradeApi', () => {
                 },
                 rateLimits: [
                     {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 1000,
-                        count: 38,
-                    },
-                    {
                         rateLimitType: 'ORDERS',
                         interval: 'MINUTE',
                         intervalNum: 1,
                         limit: 10000000,
                         count: 10,
+                    },
+                    {
+                        rateLimitType: 'REQUEST_WEIGHT',
+                        interval: 'MINUTE',
+                        intervalNum: 1,
+                        limit: 1000,
+                        count: 38,
                     },
                 ],
             };
@@ -2185,18 +2185,18 @@ describe('TradeApi', () => {
                 },
                 rateLimits: [
                     {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 1000,
-                        count: 65,
-                    },
-                    {
                         rateLimitType: 'ORDERS',
                         interval: 'MINUTE',
                         intervalNum: 1,
                         limit: 10000000,
                         count: 18,
+                    },
+                    {
+                        rateLimitType: 'REQUEST_WEIGHT',
+                        interval: 'MINUTE',
+                        intervalNum: 1,
+                        limit: 1000,
+                        count: 65,
                     },
                 ],
             };
@@ -2432,10 +2432,10 @@ describe('TradeApi', () => {
                 },
                 rateLimits: [
                     {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
+                        rateLimitType: 'ORDERS',
+                        interval: 'SECOND',
+                        intervalNum: 10,
+                        limit: 50,
                         count: 1,
                     },
                     {
@@ -2446,10 +2446,10 @@ describe('TradeApi', () => {
                         count: 1,
                     },
                     {
-                        rateLimitType: 'ORDERS',
-                        interval: 'SECOND',
-                        intervalNum: 10,
-                        limit: 50,
+                        rateLimitType: 'REQUEST_WEIGHT',
+                        interval: 'MINUTE',
+                        intervalNum: 1,
+                        limit: 6000,
                         count: 1,
                     },
                 ],

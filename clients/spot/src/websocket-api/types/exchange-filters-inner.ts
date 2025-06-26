@@ -21,175 +21,175 @@
 /**
  *
  * @export
- * @interface ExchangeInfoResponseResultExchangeFiltersInner
+ * @interface ExchangeFiltersInner
  */
-export interface ExchangeInfoResponseResultExchangeFiltersInner {
+export interface ExchangeFiltersInner {
     /**
      *
      * @type {string}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     filterType?: string;
     /**
      *
      * @type {string}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     minPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     maxPrice?: string;
     /**
      *
      * @type {string}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     tickSize?: string;
     /**
      *
      * @type {string}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     multiplierUp?: string;
     /**
      *
      * @type {string}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     multiplierDown?: string;
     /**
      *
      * @type {number}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     avgPriceMins?: number;
     /**
      *
      * @type {string}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     bidMultiplierUp?: string;
     /**
      *
      * @type {string}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     bidMultiplierDown?: string;
     /**
      *
      * @type {string}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     askMultiplierUp?: string;
     /**
      *
      * @type {string}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     askMultiplierDown?: string;
     /**
      *
      * @type {string}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     minQty?: string;
     /**
      *
      * @type {string}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     maxQty?: string;
     /**
      *
      * @type {string}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     stepSize?: string;
     /**
      *
      * @type {string}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     minNotional?: string;
     /**
      *
      * @type {boolean}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     applyToMarket?: boolean;
     /**
      *
      * @type {boolean}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     applyMinToMarket?: boolean;
     /**
      *
      * @type {string}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     maxNotional?: string;
     /**
      *
      * @type {boolean}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     applyMaxToMarket?: boolean;
     /**
      *
      * @type {number}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     limit?: number;
     /**
      *
      * @type {number}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     maxNumOrders?: number;
     /**
      *
      * @type {number}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     maxNumAlgoOrders?: number;
     /**
      *
      * @type {number}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     maxNumIcebergOrders?: number;
     /**
      *
      * @type {string}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     maxPosition?: string;
     /**
      *
      * @type {number}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     minTrailingAboveDelta?: number;
     /**
      *
      * @type {number}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     maxTrailingAboveDelta?: number;
     /**
      *
      * @type {number}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     minTrailingBelowDelta?: number;
     /**
      *
      * @type {number}
-     * @memberof ExchangeInfoResponseResultExchangeFiltersInner
+     * @memberof ExchangeFiltersInner
      */
     maxTrailingBelowDelta?: number;
 }

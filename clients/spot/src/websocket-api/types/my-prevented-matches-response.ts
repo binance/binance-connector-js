@@ -21,10 +21,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountCommissionResponseRateLimitsInner } from './account-commission-response-rate-limits-inner';
+import type { MyPreventedMatchesResponseResultInner } from './my-prevented-matches-response-result-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { MyPreventedMatchesResponseResultInner } from './my-prevented-matches-response-result-inner';
+import type { RateLimits } from './rate-limits';
 
 /**
  *
@@ -52,8 +52,8 @@ export interface MyPreventedMatchesResponse {
     result?: Array<MyPreventedMatchesResponseResultInner>;
     /**
      *
-     * @type {Array<AccountCommissionResponseRateLimitsInner>}
+     * @type {RateLimits}
      * @memberof MyPreventedMatchesResponse
      */
-    rateLimits?: Array<AccountCommissionResponseRateLimitsInner>;
+    rateLimits?: RateLimits;
 }
