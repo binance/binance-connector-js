@@ -11,6 +11,7 @@
 This is a client library for the Binance Margin Trading API, enabling developers to interact programmatically with Binance's Margin Trading trading platform. The library provides tools to use funds provided by a third party to conduct asset transactions through the REST API:
 
 - [REST API](./src/rest-api/rest-api.ts)
+- [Websocket Stream](./src/websocket-streams/websocket-streams-connection.ts)
 
 ## Table of Contents
 
@@ -18,6 +19,7 @@ This is a client library for the Binance Margin Trading API, enabling developers
 - [Installation](#installation)
 - [Documentation](#documentation)
 - [REST APIs](#rest-apis)
+- [Websocket Streams](#websocket-streams)
 - [Testing](#testing)
 - [Migration Guide](#migration-guide)
 - [Contributing](#contributing)
@@ -142,6 +144,129 @@ The REST API provides detailed error types to help you handle issues effectively
 See the [Error Handling example](./docs/rest-api/error-handling.md) for detailed usage.
 
 If `basePath` is not provided, it defaults to `https://api.binance.com`.
+
+### Websocket Streams
+
+WebSocket Streams in `margin-trading` is used for subscribing to risk and trade data streams. Use the [websocket-streams](./src/websocket-streams/websocket-streams.ts) module to interact with it.
+
+#### Configuration Options
+
+The WebSocket Streams API supports the following advanced configuration options:
+
+- `reconnectDelay`: Specify the delay between reconnection attempts (default: 5000 ms).
+- `compression`: Enable or disable compression for WebSocket messages (default: true).
+- `agent`: Customize the WebSocket agent for advanced configurations.
+- `mode`: Choose between `single` and `pool` connection modes.
+  - `single`: A single WebSocket connection.
+  - `pool`: A pool of WebSocket connections.
+- `poolSize`: Define the number of WebSocket connections in pool mode.
+
+#### Subscribe to Risk and Trade Data Streams
+
+You can consume the risk and trade data stream, which sends account-level events such as account and order updates. First create a listen-key via REST API; then:
+
+```typescript
+import { MarginTrading, MARGIN_TRADING_WS_STREAMS_PROD_URL } from '@binance/margin-trading';
+
+const configurationWebsocketStreams = {
+  wsURL: MARGIN_TRADING_WS_STREAMS_PROD_URL,
+};
+const client = new MarginTrading({ configurationWebsocketStreams });
+
+client.websocketStreams
+  .connect()
+  .then((connection) => {
+      const tradeStream = connection.tradeData('listenKey');
+      tradeStream.on('message', (data) => {
+          switch (data.e) {
+              case 'balanceUpdate':
+                  console.log('balance update stream', data);
+                  break;
+              case 'outboundAccountPosition':
+                  console.log('outbound account position stream', data);
+                  break;
+              // …handle other variants…
+              default:
+                  console.log('unknown stream', data);
+                  break;
+          }
+      });
+  })
+  .catch((err) => console.error(err));
+```
+
+```typescript
+import { MarginTrading, MARGIN_TRADING_RISK_WS_STREAMS_PROD_URL } from '@binance/margin-trading';
+
+const configurationWebsocketStreams = {
+  wsURL: MARGIN_TRADING_RISK_WS_STREAMS_PROD_URL,
+};
+const client = new MarginTrading({ configurationWebsocketStreams });
+
+client.websocketStreams
+  .connect()
+  .then((connection) => {
+      const riskStream = connection.riskData('listenKey');
+      riskStream.on('message', (data) => {
+          switch (data.e) {
+              case 'MARGIN_LEVEL_STATUS_CHANGE':
+                  console.log('risk level change stream', data);
+                  break;
+              case 'USER_LIABILITY_CHANGE':
+                  console.log('risk level change stream', data);
+                  break;
+              default:
+                  console.log('unknown stream', data);
+                  break;
+          }
+      });
+  })
+  .catch((err) => console.error(err));
+```
+
+#### Unsubscribing from Streams
+
+You can unsubscribe from the risk and trade data streams using the `unsubscribe` method. This is useful for managing active subscriptions without closing the connection.
+
+```typescript
+import { MarginTrading, MARGIN_TRADING_WS_STREAMS_PROD_URL } from '@binance/margin-trading';
+
+const configurationWebsocketStreams = {
+  wsURL: MARGIN_TRADING_WS_STREAMS_PROD_URL,
+};
+const client = new MarginTrading({ configurationWebsocketStreams });
+
+client.websocketStreams
+  .connect()
+  .then((connection) => {
+      const tradeStream = connection.tradeData('listenKey');
+      tradeStream.on('message', (data) => {
+          switch (data.e) {
+              case 'balanceUpdate':
+                  console.log('balance update stream', data);
+                  break;
+              case 'outboundAccountPosition':
+                  console.log('outbound account position stream', data);
+                  break;
+              default:
+                  console.log('unknown stream', data);
+                  break;
+          }
+      });
+
+      setTimeout(() => {
+        stream.unsubscribe();
+        console.log('Unsubscribed from trade data streams');
+      }, 10000);
+  })
+  .catch((err) => console.error(err));
+```
+
+If `wsURL` is not provided, it defaults to `wss://stream.binance.com:9443`.
+
+### Automatic Connection Renewal
+
+The WebSocket connection is automatically renewed for both WebSocket API and WebSocket Streams connections, before the 24 hours expiration of the API key. This ensures continuous connectivity.
 
 ## Testing
 
