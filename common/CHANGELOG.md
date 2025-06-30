@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.3 - 2025-06-xx
+
+### Added (1)
+
+- Added Stream URLs for Portfolio Margin (Classic and Pro) and Margin Trading Data Streams.
+
 ## 1.1.2 - 2025-06-19
 
 ### Added (1)

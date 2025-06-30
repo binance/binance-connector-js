@@ -57,9 +57,15 @@ export const DERIVATIVES_TRADING_OPTIONS_WS_STREAMS_PROD_URL =
 export const DERIVATIVES_TRADING_PORTFOLIO_MARGIN_REST_API_PROD_URL = 'https://papi.binance.com';
 export const DERIVATIVES_TRADING_PORTFOLIO_MARGIN_REST_API_TESTNET_URL =
     'https://testnet.binancefuture.com';
+export const DERIVATIVES_TRADING_PORTFOLIO_MARGIN_WS_STREAMS_PROD_URL =
+    'wss://fstream.binance.com/pm';
+export const DERIVATIVES_TRADING_PORTFOLIO_MARGIN_WS_STREAMS_TESTNET_URL =
+    'wss://fstream.binancefuture.com/pm';
 
 // Derivatives Trading (Portfolio Margin Pro) constants
 export const DERIVATIVES_TRADING_PORTFOLIO_MARGIN_PRO_REST_API_PROD_URL = 'https://api.binance.com';
+export const DERIVATIVES_TRADING_PORTFOLIO_MARGIN_PRO_WS_STREAMS_PROD_URL =
+    'wss://fstream.binance.com/pm-classic';
 
 // Dual Investment constants
 export const DUAL_INVESTMENT_REST_API_PROD_URL = 'https://api.binance.com';
@@ -72,6 +78,8 @@ export const GIFT_CARD_REST_API_PROD_URL = 'https://api.binance.com';
 
 // Margin Trading constants
 export const MARGIN_TRADING_REST_API_PROD_URL = 'https://api.binance.com';
+export const MARGIN_TRADING_WS_STREAMS_PROD_URL = 'wss://stream.binance.com:9443';
+export const MARGIN_TRADING_RISK_WS_STREAMS_PROD_URL = 'wss://margin-stream.binance.com';
 
 // Mining constants
 export const MINING_REST_API_PROD_URL = 'https://api.binance.com';
