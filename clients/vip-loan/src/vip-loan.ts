@@ -2,14 +2,14 @@ import { buildUserAgent, ConfigurationRestAPI, VIP_LOAN_REST_API_PROD_URL } from
 import { name, version } from '../package.json';
 import { RestAPI } from './rest-api';
 
-export interface ConfigurationVipLoan {
+export interface ConfigurationVIPLoan {
     configurationRestAPI?: ConfigurationRestAPI;
 }
 
-export class VipLoan {
+export class VIPLoan {
     public restAPI!: RestAPI;
 
-    constructor(config: ConfigurationVipLoan) {
+    constructor(config: ConfigurationVIPLoan) {
         const userAgent = buildUserAgent(name, version);
 
         if (config?.configurationRestAPI) {

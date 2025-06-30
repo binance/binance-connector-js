@@ -6,6 +6,7 @@
 [![npm Downloads](https://img.shields.io/npm/dm/@binance/derivatives-trading-options.svg)](https://www.npmjs.com/package/@binance/derivatives-trading-options)
 ![Node.js Version](https://img.shields.io/badge/Node.js-%3E=22.12.0-brightgreen)
 [![Known Vulnerabilities](https://snyk.io/test/github/binance/binance-connector-js/badge.svg)](https://snyk.io/test/github/binance/binance-connector-js)
+[![Docs](https://img.shields.io/badge/docs-online-blue?style=flat-square)](https://binance.github.io/binance-connector-js/modules/_binance_derivatives-trading-options.html)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This is a client library for the Binance Derivatives Trading Options API, enabling developers to interact programmatically with Binance's API to suit their derivative trading needs, through three distinct endpoints:

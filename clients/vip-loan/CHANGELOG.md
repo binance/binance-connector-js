@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.0 - 2025-06-30
+
+### Changed (1)
+
+- Renamed `VipLoan` class to `VIPLoan`.
+
 ## 3.0.4 - 2025-06-19
 
 ### Changed (1)

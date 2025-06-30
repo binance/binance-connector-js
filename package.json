@@ -20,11 +20,6 @@
         "url": "https://github.com/binance/binance-connector-js/issues"
     },
     "homepage": "https://github.com/binance/binance-connector-js#readme",
-    "workspaces": [
-        "clients/*",
-        "common",
-        "types"
-    ],
     "devDependencies": {
         "typedoc": "^0.28.5",
         "typedoc-plugin-markdown": "^4.0.0",

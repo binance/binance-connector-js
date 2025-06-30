@@ -5,7 +5,6 @@
         "entryPoints": ["src/index.ts"],
         "skipErrorChecking": true
     },
-    "tsconfig": "./tsconfig.json",
     "out": "docs",
     "readme": "README.md",
     "exclude": ["**/dist/**", "**/*.test.ts"],
