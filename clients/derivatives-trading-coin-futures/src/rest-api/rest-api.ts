@@ -823,7 +823,7 @@ export class RestAPI {
     /**
      * Query index price constituents
      *
-     * Weight: 2
+     * Weight: 1
      *
      * @summary Query Index Price Constituents
      * @param {QueryIndexPriceConstituentsRequest} requestParameters Request parameters.

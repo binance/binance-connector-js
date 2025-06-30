@@ -958,7 +958,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Query index price constituents
          *
-         * Weight: 2
+         * Weight: 1
          *
          * @summary Query Index Price Constituents
          * @param {string} symbol
@@ -1688,7 +1688,7 @@ export interface MarketDataApiInterface {
     /**
      * Query index price constituents
      *
-     * Weight: 2
+     * Weight: 1
      *
      * @summary Query Index Price Constituents
      * @param {QueryIndexPriceConstituentsRequest} requestParameters Request parameters.
@@ -3192,7 +3192,7 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Query index price constituents
      *
-     * Weight: 2
+     * Weight: 1
      *
      * @summary Query Index Price Constituents
      * @param {QueryIndexPriceConstituentsRequest} requestParameters Request parameters.
