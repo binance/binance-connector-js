@@ -14,6 +14,8 @@
 import { WebsocketStreamsBase, WebsocketStream, createStreamHandler } from '@binance/common';
 import { WebsocketMarketStreamsApi } from './modules/websocket-market-streams-api';
 
+import type { UserDataStreamEventsResponse } from './types';
+
 import type {
     IndexPriceStreamsRequest,
     KlineCandlestickStreamsRequest,
@@ -140,8 +142,8 @@ export class WebsocketStreamsConnection {
      * @param id - Optional user data stream ID
      * @returns A WebSocket stream handler for the user data stream.
      */
-    userData(listenKey: string, id?: string): WebsocketStream<object> {
-        return createStreamHandler<object>(this.websocketBase, listenKey, id);
+    userData(listenKey: string, id?: string): WebsocketStream<UserDataStreamEventsResponse> {
+        return createStreamHandler<UserDataStreamEventsResponse>(this.websocketBase, listenKey, id);
     }
 
     /**
