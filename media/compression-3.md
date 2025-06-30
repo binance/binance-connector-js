@@ -1,0 +1,18 @@
+# Compression Configuration
+
+```typescript
+import { Convert, ConvertRestAPI } from '@binance/convert';
+
+const configurationRestAPI = {
+    apiKey: 'your-api-key',
+    apiSecret: 'your-api-secret',
+    compression: false, // Disable compression
+};
+const client = new Convert({ configurationRestAPI });
+
+client.restAPI
+    .listAllConvertPairs()
+    .then((res) => res.data())
+    .then((data: ConvertRestAPI.ListAllConvertPairsResponse) => console.log(data))
+    .catch((err) => console.error(err));
+```
