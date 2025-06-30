@@ -16,7 +16,7 @@
  * Do not edit the class manually.
  */
 
-import { WebsocketStreamsBase, WebsocketStream, createStreamHandler } from '@binance/common';
+import { WebsocketStreamsBase, WebsocketStream } from '@binance/common';
 import { WebSocketStreamsApi } from './modules/web-socket-streams-api';
 
 import type {
@@ -147,16 +147,6 @@ export class WebsocketStreamsConnection {
      */
     isSubscribed(stream: string): boolean {
         return this.websocketBase.isSubscribed(stream);
-    }
-
-    /**
-     * Subscribes to the user data WebSocket stream using the provided listen key.
-     * @param listenKey - The listen key for the user data WebSocket stream.
-     * @param id - Optional user data stream ID
-     * @returns A WebSocket stream handler for the user data stream.
-     */
-    userData(listenKey: string, id?: string): WebsocketStream<object> {
-        return createStreamHandler<object>(this.websocketBase, listenKey, id);
     }
 
     /**

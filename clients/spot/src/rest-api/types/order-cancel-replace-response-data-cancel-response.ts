@@ -68,6 +68,12 @@ export interface OrderCancelReplaceResponseDataCancelResponse {
     clientOrderId?: string;
     /**
      *
+     * @type {number}
+     * @memberof OrderCancelReplaceResponseDataCancelResponse
+     */
+    transactTime?: number;
+    /**
+     *
      * @type {string}
      * @memberof OrderCancelReplaceResponseDataCancelResponse
      */
@@ -126,10 +132,4 @@ export interface OrderCancelReplaceResponseDataCancelResponse {
      * @memberof OrderCancelReplaceResponseDataCancelResponse
      */
     selfTradePreventionMode?: string;
-    /**
-     *
-     * @type {number}
-     * @memberof OrderCancelReplaceResponseDataCancelResponse
-     */
-    transactTime?: number;
 }

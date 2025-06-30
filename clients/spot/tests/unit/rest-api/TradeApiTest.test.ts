@@ -1199,6 +1199,7 @@ describe('TradeApi', () => {
                         orderId: 64,
                         orderListId: -1,
                         clientOrderId: 'loehOJF3FjoreUBDmv739R',
+                        transactTime: 1715779007228,
                         price: '1.00',
                         origQty: '10.00000000',
                         executedQty: '0.00000000',
@@ -1209,7 +1210,6 @@ describe('TradeApi', () => {
                         type: 'LIMIT',
                         side: 'SELL',
                         selfTradePreventionMode: 'NONE',
-                        transactTime: 1715779007228,
                     },
                     newOrderResponse: {
                         code: -1015,
@@ -1317,6 +1317,7 @@ describe('TradeApi', () => {
                         orderId: 64,
                         orderListId: -1,
                         clientOrderId: 'loehOJF3FjoreUBDmv739R',
+                        transactTime: 1715779007228,
                         price: '1.00',
                         origQty: '10.00000000',
                         executedQty: '0.00000000',
@@ -1327,7 +1328,6 @@ describe('TradeApi', () => {
                         type: 'LIMIT',
                         side: 'SELL',
                         selfTradePreventionMode: 'NONE',
-                        transactTime: 1715779007228,
                     },
                     newOrderResponse: {
                         code: -1015,

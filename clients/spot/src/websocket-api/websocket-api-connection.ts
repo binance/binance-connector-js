@@ -31,6 +31,7 @@ import { MarketApi } from './modules/market-api';
 import { TradeApi } from './modules/trade-api';
 import { UserDataStreamApi } from './modules/user-data-stream-api';
 
+import type { UserDataStreamEventsResponse } from './types';
 import type {
     AccountCommissionRequest,
     AccountRateLimitsOrdersRequest,
@@ -1131,13 +1132,16 @@ export class WebsocketAPIConnection {
         id?: string
     ): Promise<{
         response: WebsocketApiResponse<UserDataStreamSubscribeResponse>;
-        stream: WebsocketStream<object>;
+        stream: WebsocketStream<UserDataStreamEventsResponse>;
     }> {
         return this.userDataStreamApi
             .userDataStreamSubscribe(requestParameters)
             .then((response) => {
                 const identifier = id || randomString();
-                const stream = createStreamHandler<object>(this.websocketBase, identifier);
+                const stream = createStreamHandler<UserDataStreamEventsResponse>(
+                    this.websocketBase,
+                    identifier
+                );
                 return { response, stream };
             })
             .catch((error) => {

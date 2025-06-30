@@ -240,6 +240,42 @@ To enhance security, you can use certificate pinning with the `agent` option in 
 
 Specify the time unit for WebSocket API timestamps (e.g., milliseconds or microseconds). See the [Time Unit example](./docs/websocket-api/time-unit.md) for detailed usage.
 
+#### Subscribe to User Data Streams
+
+You can consume the user data stream, which sends account-level events such as account and order updates. First do a `logon` to the websocket connection via WebSocket API; then:
+
+```typescript
+import { Spot, SpotWebsocketAPI } from '@binance/spot';
+
+const configurationWebsocketAPI = {
+    apiKey: 'your-api-key',
+    apiSecret: 'your-api-secret',
+};
+const client = new Spot({ configurationWebsocketAPI });
+
+client.websocketAPI
+    .connect()
+    .then((connection) => connection.sessionLogon())
+    .then(() => connection.userDataStreamSubscribe())
+    .then(({ response, stream }) => {
+        stream.on('message', (data) => {
+            switch (data.e) {
+                case 'balanceUpdate':
+                    console.log('balance update stream', data);
+                    break;
+                case 'outboundAccountPosition':
+                    console.log('outbound account position stream', data);
+                    break;
+                // …handle other variants…
+                default:
+                    console.log('unknown stream', data);
+                    break;
+            }
+        });
+    })
+    .catch((err) => console.error(err));
+```
+
 #### Testnet
 
 For testing purposes, the Websocket API also supports a testnet environment. Update the `wsURL` in your configuration:
