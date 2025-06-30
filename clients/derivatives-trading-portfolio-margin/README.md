@@ -11,6 +11,7 @@
 This is a client library for the Binance Derivatives Trading Portfolio Margin API, enabling developers to interact programmatically with Binance's API to suit their derivative trading needs, through three distinct endpoints:
 
 - [REST API](./src/rest-api/rest-api.ts)
+- [Websocket Stream](./src/websocket-streams/websocket-streams-connection.ts)
 
 ## Table of Contents
 
@@ -18,6 +19,7 @@ This is a client library for the Binance Derivatives Trading Portfolio Margin AP
 - [Installation](#installation)
 - [Documentation](#documentation)
 - [REST APIs](#rest-apis)
+- [Websocket Streams](#websocket-streams)
 - [Testing](#testing)
 - [Migration Guide](#migration-guide)
 - [Contributing](#contributing)
@@ -155,6 +157,114 @@ const client = new DerivativesTradingPortfolioMargin({ configurationRestAPI });
 ```
 
 If `basePath` is not provided, it defaults to `https://papi.binance.com`.
+
+### Websocket Streams
+
+WebSocket Streams in `derivatives-trading-portfolio-margin` is used for subscribing to user data streams. Use the [websocket-streams](./src/websocket-streams/websocket-streams.ts) module to interact with it.
+
+#### Configuration Options
+
+The WebSocket Streams API supports the following advanced configuration options:
+
+- `reconnectDelay`: Specify the delay between reconnection attempts (default: 5000 ms).
+- `compression`: Enable or disable compression for WebSocket messages (default: true).
+- `agent`: Customize the WebSocket agent for advanced configurations.
+- `mode`: Choose between `single` and `pool` connection modes.
+  - `single`: A single WebSocket connection.
+  - `pool`: A pool of WebSocket connections.
+- `poolSize`: Define the number of WebSocket connections in pool mode.
+
+#### Subscribe to User Data Streams
+
+You can consume the user data stream, which sends account-level events such as account and order updates. First create a listen-key via REST API; then:
+
+```typescript
+import { DerivativesTradingPortfolioMargin, DERIVATIVES_TRADING_PORTFOLIO_MARGIN_WS_STREAMS_PROD_URL } from '@binance/derivatives-trading-portfolio-margin';
+
+const configurationWebsocketStreams = {
+  wsURL: DERIVATIVES_TRADING_PORTFOLIO_MARGIN_WS_STREAMS_PROD_URL,
+};
+const client = new DerivativesTradingPortfolioMargin({ configurationWebsocketStreams });
+
+client.websocketStreams
+  .connect()
+  .then((connection) => {
+      const stream = connection.userData('listenKey');
+      stream.on('message', (data) => {
+          switch (data.e) {
+              case 'ACCOUNT_UPDATE':
+                  console.log('account update stream', data);
+                  break;
+              case 'ORDER_TRADE_UPDATE':
+                  console.log('order trade update stream', data);
+                  break;
+              // …handle other variants…
+              default:
+                  console.log('unknown stream', data);
+                  break;
+          }
+      });
+  })
+  .catch((err) => console.error(err));
+```
+
+#### Unsubscribing from Streams
+
+You can unsubscribe from the user data streams using the `unsubscribe` method. This is useful for managing active subscriptions without closing the connection.
+
+```typescript
+import { DerivativesTradingPortfolioMargin, DERIVATIVES_TRADING_PORTFOLIO_MARGIN_WS_STREAMS_PROD_URL } from '@binance/derivatives-trading-portfolio-margin';
+
+const configurationWebsocketStreams = {
+  wsURL: DERIVATIVES_TRADING_PORTFOLIO_MARGIN_WS_STREAMS_PROD_URL,
+};
+const client = new DerivativesTradingPortfolioMargin({ configurationWebsocketStreams });
+
+client.websocketStreams
+  .connect()
+  .then((connection) => {
+      const stream = connection.userData('listenKey');
+      stream.on('message', (data) => {
+          switch (data.e) {
+              case 'ACCOUNT_UPDATE':
+                  console.log('account update stream', data);
+                  break;
+              case 'ORDER_TRADE_UPDATE':
+                  console.log('order trade update stream', data);
+                  break;
+              // …handle other variants…
+              default:
+                  console.log('unknown stream', data);
+                  break;
+          }
+      });
+
+      setTimeout(() => {
+        stream.unsubscribe();
+        console.log('Unsubscribed from user data streams');
+      }, 10000);
+  })
+  .catch((err) => console.error(err));
+```
+
+#### Testnet
+
+Websocket Streams also support a testnet environment for development and testing. Update the `wsURL` in your configuration:
+
+```typescript
+import { DerivativesTradingPortfolioMargin, DERIVATIVES_TRADING_PORTFOLIO_MARGIN_WS_STREAMS_TESTNET_URL } from '@binance/derivatives-trading-portfolio-margin';
+
+const configurationWebsocketStreams = {
+    wsURL: DERIVATIVES_TRADING_PORTFOLIO_MARGIN_WS_STREAMS_TESTNET_URL,
+};
+const client = new DerivativesTradingPortfolioMargin({ configurationWebsocketStreams });
+```
+
+If `wsURL` is not provided, it defaults to `wss://fstream.binance.com/pm`.
+
+### Automatic Connection Renewal
+
+The WebSocket connection is automatically renewed for both WebSocket API and WebSocket Streams connections, before the 24 hours expiration of the API key. This ensures continuous connectivity.
 
 ## Testing
 

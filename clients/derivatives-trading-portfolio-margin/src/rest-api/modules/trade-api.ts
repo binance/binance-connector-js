@@ -606,6 +606,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * `OrderId` can only be sent together with symbol
          * If a `pair` is sent, tickers for all symbols of the `pair` will be returned
          * The parameter `fromId` cannot be sent with `startTime` or `endTime`
+         * If `startTime` and `endTime` are both not sent, then the last '24 hours' data will be returned.
+         * The time between `startTime` and `endTime` cannot be longer than 24 hours.
          *
          * Weight: 20 with symbol, 40 with pair
          *
@@ -3419,8 +3421,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Get trades for a specific account and UM symbol.
          *
          *
-         * If `startTime` and `endTime` are both not sent, then the last '24 hours' data will be returned.
-         * The time between `startTime` and `endTime` cannot be longer than 24 hours.
+         * If `startTime` and `endTime` are both not sent, then the last '7 days' data will be returned.
+         * The time between `startTime` and `endTime` cannot be longer than 7 days.
          * The parameter `fromId` cannot be sent with `startTime` or `endTime`.
          *
          * Weight: 5
@@ -3707,6 +3709,8 @@ export interface TradeApiInterface {
      * `OrderId` can only be sent together with symbol
      * If a `pair` is sent, tickers for all symbols of the `pair` will be returned
      * The parameter `fromId` cannot be sent with `startTime` or `endTime`
+     * If `startTime` and `endTime` are both not sent, then the last '24 hours' data will be returned.
+     * The time between `startTime` and `endTime` cannot be longer than 24 hours.
      *
      * Weight: 20 with symbol, 40 with pair
      *
@@ -4493,8 +4497,8 @@ export interface TradeApiInterface {
      * Get trades for a specific account and UM symbol.
      *
      *
-     * If `startTime` and `endTime` are both not sent, then the last '24 hours' data will be returned.
-     * The time between `startTime` and `endTime` cannot be longer than 24 hours.
+     * If `startTime` and `endTime` are both not sent, then the last '7 days' data will be returned.
+     * The time between `startTime` and `endTime` cannot be longer than 7 days.
      * The parameter `fromId` cannot be sent with `startTime` or `endTime`.
      *
      * Weight: 5
@@ -7309,6 +7313,8 @@ export class TradeApi implements TradeApiInterface {
      * `OrderId` can only be sent together with symbol
      * If a `pair` is sent, tickers for all symbols of the `pair` will be returned
      * The parameter `fromId` cannot be sent with `startTime` or `endTime`
+     * If `startTime` and `endTime` are both not sent, then the last '24 hours' data will be returned.
+     * The time between `startTime` and `endTime` cannot be longer than 24 hours.
      *
      * Weight: 20 with symbol, 40 with pair
      *
@@ -8918,8 +8924,8 @@ export class TradeApi implements TradeApiInterface {
      * Get trades for a specific account and UM symbol.
      *
      *
-     * If `startTime` and `endTime` are both not sent, then the last '24 hours' data will be returned.
-     * The time between `startTime` and `endTime` cannot be longer than 24 hours.
+     * If `startTime` and `endTime` are both not sent, then the last '7 days' data will be returned.
+     * The time between `startTime` and `endTime` cannot be longer than 7 days.
      * The parameter `fromId` cannot be sent with `startTime` or `endTime`.
      *
      * Weight: 5
