@@ -371,7 +371,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Mint BFUSD for Portfolio Margin(TRADE)
          * @param {string} fromAsset `BFUSD` only
-         * @param {string} targetAsset `USDT` only
+         * @param {string} targetAsset `USDT` `USDC`
          * @param {number} amount
          * @param {number} [recvWindow]
          *
@@ -602,7 +602,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Redeem BFUSD for Portfolio Margin(TRADE)
          * @param {string} fromAsset `BFUSD` only
-         * @param {string} targetAsset `USDT` only
+         * @param {string} targetAsset `USDT` `USDC`
          * @param {number} amount
          * @param {number} [recvWindow]
          *
@@ -1180,7 +1180,7 @@ export interface MintBfusdForPortfolioMarginRequest {
     readonly fromAsset: string;
 
     /**
-     * `USDT` only
+     * `USDT` `USDC`
      * @type {string}
      * @memberof AccountApiMintBfusdForPortfolioMargin
      */
@@ -1329,7 +1329,7 @@ export interface RedeemBfusdForPortfolioMarginRequest {
     readonly fromAsset: string;
 
     /**
-     * `USDT` only
+     * `USDT` `USDC`
      * @type {string}
      * @memberof AccountApiRedeemBfusdForPortfolioMargin
      */
