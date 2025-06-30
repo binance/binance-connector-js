@@ -1,5 +1,15 @@
 # Changelog
 
+## 9.0.0 - 2025-06-30
+
+### Added (1)
+
+- Support User Data Streams.
+
+### Changed (1)
+
+- Update `@binance/common` library to version `1.1.3`.
+
 ## 8.0.0 - 2025-06-24
 
 ### Changed (1)
