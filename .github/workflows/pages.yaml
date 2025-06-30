@@ -1,0 +1,31 @@
+name: Build & Deploy Docs
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install & Build Docs
+        run: |
+          npm ci
+          npm run docs:build
+
+      - name: Upload built docs
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: docs
+
+  deploy-docs:
+    needs: build-docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
