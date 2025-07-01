@@ -13,6 +13,7 @@
 
 import { ConfigurationRestAPI, RestApiResponse, sendRequest } from '@binance/common';
 import { EthStakingApi } from './modules/eth-staking-api';
+import { OnChainYieldsApi } from './modules/on-chain-yields-api';
 import { SolStakingApi } from './modules/sol-staking-api';
 
 import type {
@@ -28,6 +29,20 @@ import type {
     SubscribeEthStakingRequest,
     WrapBethRequest,
 } from './modules/eth-staking-api';
+import type {
+    GetOnChainYieldsLockedPersonalLeftQuotaRequest,
+    GetOnChainYieldsLockedProductListRequest,
+    GetOnChainYieldsLockedProductPositionRequest,
+    GetOnChainYieldsLockedRedemptionRecordRequest,
+    GetOnChainYieldsLockedRewardsHistoryRequest,
+    GetOnChainYieldsLockedSubscriptionPreviewRequest,
+    GetOnChainYieldsLockedSubscriptionRecordRequest,
+    OnChainYieldsAccountRequest,
+    RedeemOnChainYieldsLockedProductRequest,
+    SetOnChainYieldsLockedAutoSubscribeRequest,
+    SetOnChainYieldsLockedProductRedeemOptionRequest,
+    SubscribeOnChainYieldsLockedProductRequest,
+} from './modules/on-chain-yields-api';
 import type {
     ClaimBoostRewardsRequest,
     GetBnsolRateHistoryRequest,
@@ -56,6 +71,20 @@ import type {
     WrapBethResponse,
 } from './types';
 import type {
+    GetOnChainYieldsLockedPersonalLeftQuotaResponse,
+    GetOnChainYieldsLockedProductListResponse,
+    GetOnChainYieldsLockedProductPositionResponse,
+    GetOnChainYieldsLockedRedemptionRecordResponse,
+    GetOnChainYieldsLockedRewardsHistoryResponse,
+    GetOnChainYieldsLockedSubscriptionPreviewResponse,
+    GetOnChainYieldsLockedSubscriptionRecordResponse,
+    OnChainYieldsAccountResponse,
+    RedeemOnChainYieldsLockedProductResponse,
+    SetOnChainYieldsLockedAutoSubscribeResponse,
+    SetOnChainYieldsLockedProductRedeemOptionResponse,
+    SubscribeOnChainYieldsLockedProductResponse,
+} from './types';
+import type {
     ClaimBoostRewardsResponse,
     GetBnsolRateHistoryResponse,
     GetBnsolRewardsHistoryResponse,
@@ -72,11 +101,13 @@ import type {
 export class RestAPI {
     private configuration: ConfigurationRestAPI;
     private ethStakingApi: EthStakingApi;
+    private onChainYieldsApi: OnChainYieldsApi;
     private solStakingApi: SolStakingApi;
 
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
         this.ethStakingApi = new EthStakingApi(configuration);
+        this.onChainYieldsApi = new OnChainYieldsApi(configuration);
         this.solStakingApi = new SolStakingApi(configuration);
     }
 
@@ -331,6 +362,231 @@ export class RestAPI {
      */
     wrapBeth(requestParameters: WrapBethRequest): Promise<RestApiResponse<WrapBethResponse>> {
         return this.ethStakingApi.wrapBeth(requestParameters);
+    }
+
+    /**
+     * Get On-chain Yields Locked Personal Left Quota
+     *
+     * Weight: 50
+     *
+     * @summary Get On-chain Yields Locked Personal Left Quota (USER_DATA)
+     * @param {GetOnChainYieldsLockedPersonalLeftQuotaRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedPersonalLeftQuotaResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/account/Get-Onchain-Locked-Personal-Left-Quota Binance API Documentation}
+     */
+    getOnChainYieldsLockedPersonalLeftQuota(
+        requestParameters: GetOnChainYieldsLockedPersonalLeftQuotaRequest
+    ): Promise<RestApiResponse<GetOnChainYieldsLockedPersonalLeftQuotaResponse>> {
+        return this.onChainYieldsApi.getOnChainYieldsLockedPersonalLeftQuota(requestParameters);
+    }
+
+    /**
+     * Get available On-chain Yields Locked product list
+     *
+     * Get available On-chain Yields Locked product list
+     *
+     * Weight: 50
+     *
+     * @summary Get On-chain Yields Locked Product List (USER_DATA)
+     * @param {GetOnChainYieldsLockedProductListRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedProductListResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/account/ Binance API Documentation}
+     */
+    getOnChainYieldsLockedProductList(
+        requestParameters: GetOnChainYieldsLockedProductListRequest = {}
+    ): Promise<RestApiResponse<GetOnChainYieldsLockedProductListResponse>> {
+        return this.onChainYieldsApi.getOnChainYieldsLockedProductList(requestParameters);
+    }
+
+    /**
+     * Get On-chain Yields Locked Product Position
+     *
+     * Weight: 50
+     *
+     * @summary Get On-chain Yields Locked Product Position (USER_DATA)
+     * @param {GetOnChainYieldsLockedProductPositionRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedProductPositionResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/account/Get-Onchain-Locked-Product-Position Binance API Documentation}
+     */
+    getOnChainYieldsLockedProductPosition(
+        requestParameters: GetOnChainYieldsLockedProductPositionRequest = {}
+    ): Promise<RestApiResponse<GetOnChainYieldsLockedProductPositionResponse>> {
+        return this.onChainYieldsApi.getOnChainYieldsLockedProductPosition(requestParameters);
+    }
+
+    /**
+     * Get On-chain Yields Locked Redemption Record
+     *
+     * The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
+     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
+     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * Weight: 50
+     *
+     * @summary Get On-chain Yields Locked Redemption Record (USER_DATA)
+     * @param {GetOnChainYieldsLockedRedemptionRecordRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedRedemptionRecordResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/history/Get-Onchain-Locked-Redemption-Record Binance API Documentation}
+     */
+    getOnChainYieldsLockedRedemptionRecord(
+        requestParameters: GetOnChainYieldsLockedRedemptionRecordRequest = {}
+    ): Promise<RestApiResponse<GetOnChainYieldsLockedRedemptionRecordResponse>> {
+        return this.onChainYieldsApi.getOnChainYieldsLockedRedemptionRecord(requestParameters);
+    }
+
+    /**
+     * Get On-chain Yields Locked Rewards History
+     *
+     * The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
+     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
+     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * Weight: 50
+     *
+     * @summary Get On-chain Yields Locked Rewards History (USER_DATA)
+     * @param {GetOnChainYieldsLockedRewardsHistoryRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedRewardsHistoryResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/history/Get-Onchain-Locked-Rewards-History Binance API Documentation}
+     */
+    getOnChainYieldsLockedRewardsHistory(
+        requestParameters: GetOnChainYieldsLockedRewardsHistoryRequest = {}
+    ): Promise<RestApiResponse<GetOnChainYieldsLockedRewardsHistoryResponse>> {
+        return this.onChainYieldsApi.getOnChainYieldsLockedRewardsHistory(requestParameters);
+    }
+
+    /**
+     * Get On-chain Yields Locked Subscription Preview
+     *
+     * Weight: 50
+     *
+     * @summary Get On-chain Yields Locked Subscription Preview (USER_DATA)
+     * @param {GetOnChainYieldsLockedSubscriptionPreviewRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedSubscriptionPreviewResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/earn/ Binance API Documentation}
+     */
+    getOnChainYieldsLockedSubscriptionPreview(
+        requestParameters: GetOnChainYieldsLockedSubscriptionPreviewRequest
+    ): Promise<RestApiResponse<GetOnChainYieldsLockedSubscriptionPreviewResponse>> {
+        return this.onChainYieldsApi.getOnChainYieldsLockedSubscriptionPreview(requestParameters);
+    }
+
+    /**
+     * Get On-chain Yields Locked Subscription Record
+     *
+     * The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
+     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
+     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * Weight: 50
+     *
+     * @summary Get On-chain Yields Locked Subscription Record (USER_DATA)
+     * @param {GetOnChainYieldsLockedSubscriptionRecordRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedSubscriptionRecordResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/history/ Binance API Documentation}
+     */
+    getOnChainYieldsLockedSubscriptionRecord(
+        requestParameters: GetOnChainYieldsLockedSubscriptionRecordRequest = {}
+    ): Promise<RestApiResponse<GetOnChainYieldsLockedSubscriptionRecordResponse>> {
+        return this.onChainYieldsApi.getOnChainYieldsLockedSubscriptionRecord(requestParameters);
+    }
+
+    /**
+     * On-chain Yields Account query
+     *
+     * Weight: 50
+     *
+     * @summary On-chain Yields Account (USER_DATA)
+     * @param {OnChainYieldsAccountRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<OnChainYieldsAccountResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/account/Onchain-Account Binance API Documentation}
+     */
+    onChainYieldsAccount(
+        requestParameters: OnChainYieldsAccountRequest = {}
+    ): Promise<RestApiResponse<OnChainYieldsAccountResponse>> {
+        return this.onChainYieldsApi.onChainYieldsAccount(requestParameters);
+    }
+
+    /**
+     * Redeem On-chain Yields Locked Product
+     *
+     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     *
+     * Weight: 1/3s per account
+     *
+     * @summary Redeem On-chain Yields Locked Product (TRADE)
+     * @param {RedeemOnChainYieldsLockedProductRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<RedeemOnChainYieldsLockedProductResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/earn/Redeem-Onchain-Locked-Product Binance API Documentation}
+     */
+    redeemOnChainYieldsLockedProduct(
+        requestParameters: RedeemOnChainYieldsLockedProductRequest
+    ): Promise<RestApiResponse<RedeemOnChainYieldsLockedProductResponse>> {
+        return this.onChainYieldsApi.redeemOnChainYieldsLockedProduct(requestParameters);
+    }
+
+    /**
+     * Set On-chain Yield locked auto subscribe
+     *
+     * Weight: 50
+     *
+     * @summary Set On-chain Yields Locked Auto Subscribe(USER_DATA)
+     * @param {SetOnChainYieldsLockedAutoSubscribeRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<SetOnChainYieldsLockedAutoSubscribeResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/earn/Set-Onchain-Locked-Auto-Subscribe Binance API Documentation}
+     */
+    setOnChainYieldsLockedAutoSubscribe(
+        requestParameters: SetOnChainYieldsLockedAutoSubscribeRequest
+    ): Promise<RestApiResponse<SetOnChainYieldsLockedAutoSubscribeResponse>> {
+        return this.onChainYieldsApi.setOnChainYieldsLockedAutoSubscribe(requestParameters);
+    }
+
+    /**
+     * Set On-chain Yields redeem option for Locked product
+     *
+     * Weight: 50
+     *
+     * @summary Set On-chain Yields Locked Product Redeem Option(USER_DATA)
+     * @param {SetOnChainYieldsLockedProductRedeemOptionRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<SetOnChainYieldsLockedProductRedeemOptionResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/earn/Set-Onchain-Locked-Redeem-Option Binance API Documentation}
+     */
+    setOnChainYieldsLockedProductRedeemOption(
+        requestParameters: SetOnChainYieldsLockedProductRedeemOptionRequest
+    ): Promise<RestApiResponse<SetOnChainYieldsLockedProductRedeemOptionResponse>> {
+        return this.onChainYieldsApi.setOnChainYieldsLockedProductRedeemOption(requestParameters);
+    }
+
+    /**
+     * Subscribe On-chain Yields Locked Product
+     *
+     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     *
+     * Weight: 200
+     *
+     * @summary Subscribe On-chain Yields Locked Product(TRADE)
+     * @param {SubscribeOnChainYieldsLockedProductRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<SubscribeOnChainYieldsLockedProductResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/earn/Subscribe-Onchain-Locked-Product Binance API Documentation}
+     */
+    subscribeOnChainYieldsLockedProduct(
+        requestParameters: SubscribeOnChainYieldsLockedProductRequest
+    ): Promise<RestApiResponse<SubscribeOnChainYieldsLockedProductResponse>> {
+        return this.onChainYieldsApi.subscribeOnChainYieldsLockedProduct(requestParameters);
     }
 
     /**

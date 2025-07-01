@@ -1,3 +1,5 @@
+/* tslint:disable */
+
 /**
  * Binance Staking REST API
  *
@@ -11,6 +13,16 @@
  * Do not edit the class manually.
  */
 
-export * from './eth-staking-api';
-export * from './on-chain-yields-api';
-export * from './sol-staking-api';
+/**
+ *
+ * @export
+ * @interface SetOnChainYieldsLockedProductRedeemOptionResponse
+ */
+export interface SetOnChainYieldsLockedProductRedeemOptionResponse {
+    /**
+     *
+     * @type {boolean}
+     * @memberof SetOnChainYieldsLockedProductRedeemOptionResponse
+     */
+    success?: boolean;
+}
