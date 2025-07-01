@@ -359,7 +359,6 @@ export const shouldRetryRequest = function (
  * This function handles retries, rate limit handling, and error handling for the HTTP request.
  *
  * @param axiosArgs The request arguments to be passed to Axios.
- * @param axios The Axios instance to use for the request.
  * @param configuration The configuration options for the request.
  * @returns A Promise that resolves to the API response, including the data and rate limit headers.
  */

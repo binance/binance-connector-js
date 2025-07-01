@@ -312,8 +312,6 @@ export class WebsocketCommon extends WebsocketEventEmitter {
      * Handles the opening of a WebSocket connection.
      * @param url - The URL of the WebSocket server.
      * @param targetConnection - The WebSocket connection being opened.
-     * @param oldConnection - The previous WebSocket connection, if this is a renewal.
-     * @param isRenewal - Indicates whether this is a connection renewal.
      * @param oldWSConnection - The WebSocket client instance associated with the old connection.
      */
     protected onOpen(
@@ -906,7 +904,6 @@ export class WebsocketStreamsBase extends WebsocketCommon {
      * @param url The URL of the WebSocket connection.
      * @param targetConnection The WebSocket connection that was opened.
      * @param oldConnection The previous WebSocket connection, if any.
-     * @param isRenewal Whether the connection is a renewal of an existing connection.
      */
     protected onOpen(
         url: string,
