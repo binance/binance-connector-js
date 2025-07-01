@@ -6,6 +6,7 @@
 [![npm Downloads](https://img.shields.io/npm/dm/@binance/dual-investment.svg)](https://www.npmjs.com/package/@binance/dual-investment)
 ![Node.js Version](https://img.shields.io/badge/Node.js-%3E=22.12.0-brightgreen)
 [![Known Vulnerabilities](https://snyk.io/test/github/binance/binance-connector-js/badge.svg)](https://snyk.io/test/github/binance/binance-connector-js)
+[![Docs](https://img.shields.io/badge/docs-online-blue?style=flat-square)](https://binance.github.io/binance-connector-js/modules/_binance_dual-investment.html)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This is a client library for the Binance Dual Investment API, enabling developers to interact programmatically with Binance's Dual Investment trading platform. The library provides tools to buy or sell cryptocurrency at your desired price and date in the future, while earning high rewards no matter which direction the market goes through the REST API:

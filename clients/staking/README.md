@@ -6,6 +6,7 @@
 [![npm Downloads](https://img.shields.io/npm/dm/@binance/staking.svg)](https://www.npmjs.com/package/@binance/staking)
 ![Node.js Version](https://img.shields.io/badge/Node.js-%3E=22.12.0-brightgreen)
 [![Known Vulnerabilities](https://snyk.io/test/github/binance/binance-connector-js/badge.svg)](https://snyk.io/test/github/binance/binance-connector-js)
+[![Docs](https://img.shields.io/badge/docs-online-blue?style=flat-square)](https://binance.github.io/binance-connector-js/modules/_binance_staking.html)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This is a client library for the Binance Staking API, enabling developers to interact programmatically with Binance's Staking trading platform. The library provides tools to participate in certain DeFi products, obtains and distributes realized earnings through the REST API:

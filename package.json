@@ -3,7 +3,7 @@
     "description": "Official collection of auto-generated TypeScript connectors for Binance APIs.",
     "scripts": {
         "docs:clean": "rm -rf docs",
-        "docs:build": "npm run docs:clean && npx typedoc"
+        "docs:build": "npm run docs:clean && npx typedoc --options typedoc.config.cjs"
     },
     "keywords": [
         "Binance",
@@ -20,11 +20,6 @@
         "url": "https://github.com/binance/binance-connector-js/issues"
     },
     "homepage": "https://github.com/binance/binance-connector-js#readme",
-    "workspaces": [
-        "clients/*",
-        "common",
-        "types"
-    ],
     "devDependencies": {
         "typedoc": "^0.28.5",
         "typedoc-plugin-markdown": "^4.0.0",
