@@ -3,7 +3,7 @@
     "description": "Official collection of auto-generated TypeScript connectors for Binance APIs.",
     "scripts": {
         "docs:clean": "rm -rf docs",
-        "docs:build": "npm run docs:clean && npx typedoc"
+        "docs:build": "npm run docs:clean && npx typedoc --options typedoc.config.cjs"
     },
     "keywords": [
         "Binance",
