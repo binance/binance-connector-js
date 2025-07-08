@@ -256,9 +256,9 @@ const client = new Spot({ configurationWebsocketAPI });
 
 client.websocketAPI
     .connect()
-    .then((connection) => connection.sessionLogon())
-    .then(() => connection.userDataStreamSubscribe())
-    .then(({ response, stream }) => {
+    .then((connection) => connection.sessionLogon().then(() => connection))
+    .then((connection) => connection.userDataStreamSubscribe())
+    .then(({ stream }) => {
         stream.on('message', (data) => {
             switch (data.e) {
                 case 'balanceUpdate':
