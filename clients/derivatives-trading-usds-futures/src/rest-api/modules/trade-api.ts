@@ -38,6 +38,7 @@ import type {
     ModifyMultipleOrdersResponse,
     ModifyOrderResponse,
     NewOrderResponse,
+    PlaceMultipleOrdersBatchOrdersParameterInner,
     PlaceMultipleOrdersResponse,
     PositionAdlQuantileEstimationResponse,
     PositionInformationV2Response,
@@ -1130,13 +1131,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * 5 on IP rate limit(x-mbx-used-weight-1m);
          *
          * @summary Place Multiple Orders(TRADE)
-         * @param {Array<ModifyMultipleOrdersBatchOrdersParameterInner>} batchOrders order list. Max 5 orders
+         * @param {Array<PlaceMultipleOrdersBatchOrdersParameterInner>} batchOrders order list. Max 5 orders
          * @param {number} [recvWindow]
          *
          * @throws {RequiredError}
          */
         placeMultipleOrders: async (
-            batchOrders: Array<ModifyMultipleOrdersBatchOrdersParameterInner>,
+            batchOrders: Array<PlaceMultipleOrdersBatchOrdersParameterInner>,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'batchOrders' is not null or undefined
@@ -2862,10 +2863,10 @@ export interface NewOrderRequest {
 export interface PlaceMultipleOrdersRequest {
     /**
      * order list. Max 5 orders
-     * @type {Array<ModifyMultipleOrdersBatchOrdersParameterInner>}
+     * @type {Array<PlaceMultipleOrdersBatchOrdersParameterInner>}
      * @memberof TradeApiPlaceMultipleOrders
      */
-    readonly batchOrders: Array<ModifyMultipleOrdersBatchOrdersParameterInner>;
+    readonly batchOrders: Array<PlaceMultipleOrdersBatchOrdersParameterInner>;
 
     /**
      *

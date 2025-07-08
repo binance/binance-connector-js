@@ -441,7 +441,7 @@ export class ConvertApi implements ConvertApiInterface {
      * @returns {Promise<RestApiResponse<ListAllConvertPairsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof ConvertApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/convert/List-All-Convert-Pairs Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/convert/ Binance API Documentation}
      */
     public async listAllConvertPairs(
         requestParameters: ListAllConvertPairsRequest = {}

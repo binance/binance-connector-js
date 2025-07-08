@@ -21,6 +21,18 @@
 export interface ModifyMultipleOrdersBatchOrdersParameterInner {
     /**
      *
+     * @type {number}
+     * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
+     */
+    orderId?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
+     */
+    origClientOrderId?: string;
+    /**
+     *
      * @type {string}
      * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
      */
@@ -33,34 +45,10 @@ export interface ModifyMultipleOrdersBatchOrdersParameterInner {
     side?: ModifyMultipleOrdersBatchOrdersParameterInnerSideEnum;
     /**
      *
-     * @type {string}
-     * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
-     */
-    positionSide?: ModifyMultipleOrdersBatchOrdersParameterInnerPositionSideEnum;
-    /**
-     *
-     * @type {string}
-     * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
-     */
-    type?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
-     */
-    timeInForce?: ModifyMultipleOrdersBatchOrdersParameterInnerTimeInForceEnum;
-    /**
-     *
      * @type {number}
      * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
      */
     quantity?: number;
-    /**
-     *
-     * @type {string}
-     * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
-     */
-    reduceOnly?: string;
     /**
      *
      * @type {number}
@@ -72,61 +60,13 @@ export interface ModifyMultipleOrdersBatchOrdersParameterInner {
      * @type {string}
      * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
      */
-    newClientOrderId?: string;
-    /**
-     *
-     * @type {number}
-     * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
-     */
-    stopPrice?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
-     */
-    activationPrice?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
-     */
-    callbackRate?: number;
-    /**
-     *
-     * @type {string}
-     * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
-     */
-    workingType?: ModifyMultipleOrdersBatchOrdersParameterInnerWorkingTypeEnum;
-    /**
-     *
-     * @type {string}
-     * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
-     */
-    priceProtect?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
-     */
-    newOrderRespType?: ModifyMultipleOrdersBatchOrdersParameterInnerNewOrderRespTypeEnum;
-    /**
-     *
-     * @type {string}
-     * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
-     */
     priceMatch?: ModifyMultipleOrdersBatchOrdersParameterInnerPriceMatchEnum;
     /**
      *
-     * @type {string}
-     * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
-     */
-    selfTradePreventionMode?: ModifyMultipleOrdersBatchOrdersParameterInnerSelfTradePreventionModeEnum;
-    /**
-     *
      * @type {number}
      * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
      */
-    goodTillDate?: number;
+    recvWindow?: number;
 }
 
 export const ModifyMultipleOrdersBatchOrdersParameterInnerSideEnum = {
@@ -136,38 +76,6 @@ export const ModifyMultipleOrdersBatchOrdersParameterInnerSideEnum = {
 
 export type ModifyMultipleOrdersBatchOrdersParameterInnerSideEnum =
     (typeof ModifyMultipleOrdersBatchOrdersParameterInnerSideEnum)[keyof typeof ModifyMultipleOrdersBatchOrdersParameterInnerSideEnum];
-export const ModifyMultipleOrdersBatchOrdersParameterInnerPositionSideEnum = {
-    BOTH: 'BOTH',
-    LONG: 'LONG',
-    SHORT: 'SHORT',
-} as const;
-
-export type ModifyMultipleOrdersBatchOrdersParameterInnerPositionSideEnum =
-    (typeof ModifyMultipleOrdersBatchOrdersParameterInnerPositionSideEnum)[keyof typeof ModifyMultipleOrdersBatchOrdersParameterInnerPositionSideEnum];
-export const ModifyMultipleOrdersBatchOrdersParameterInnerTimeInForceEnum = {
-    GTC: 'GTC',
-    IOC: 'IOC',
-    FOK: 'FOK',
-    GTX: 'GTX',
-    GTD: 'GTD',
-} as const;
-
-export type ModifyMultipleOrdersBatchOrdersParameterInnerTimeInForceEnum =
-    (typeof ModifyMultipleOrdersBatchOrdersParameterInnerTimeInForceEnum)[keyof typeof ModifyMultipleOrdersBatchOrdersParameterInnerTimeInForceEnum];
-export const ModifyMultipleOrdersBatchOrdersParameterInnerWorkingTypeEnum = {
-    MARK_PRICE: 'MARK_PRICE',
-    CONTRACT_PRICE: 'CONTRACT_PRICE',
-} as const;
-
-export type ModifyMultipleOrdersBatchOrdersParameterInnerWorkingTypeEnum =
-    (typeof ModifyMultipleOrdersBatchOrdersParameterInnerWorkingTypeEnum)[keyof typeof ModifyMultipleOrdersBatchOrdersParameterInnerWorkingTypeEnum];
-export const ModifyMultipleOrdersBatchOrdersParameterInnerNewOrderRespTypeEnum = {
-    ACK: 'ACK',
-    RESULT: 'RESULT',
-} as const;
-
-export type ModifyMultipleOrdersBatchOrdersParameterInnerNewOrderRespTypeEnum =
-    (typeof ModifyMultipleOrdersBatchOrdersParameterInnerNewOrderRespTypeEnum)[keyof typeof ModifyMultipleOrdersBatchOrdersParameterInnerNewOrderRespTypeEnum];
 export const ModifyMultipleOrdersBatchOrdersParameterInnerPriceMatchEnum = {
     NONE: 'NONE',
     OPPONENT: 'OPPONENT',
@@ -182,11 +90,3 @@ export const ModifyMultipleOrdersBatchOrdersParameterInnerPriceMatchEnum = {
 
 export type ModifyMultipleOrdersBatchOrdersParameterInnerPriceMatchEnum =
     (typeof ModifyMultipleOrdersBatchOrdersParameterInnerPriceMatchEnum)[keyof typeof ModifyMultipleOrdersBatchOrdersParameterInnerPriceMatchEnum];
-export const ModifyMultipleOrdersBatchOrdersParameterInnerSelfTradePreventionModeEnum = {
-    EXPIRE_TAKER: 'EXPIRE_TAKER',
-    EXPIRE_BOTH: 'EXPIRE_BOTH',
-    EXPIRE_MAKER: 'EXPIRE_MAKER',
-} as const;
-
-export type ModifyMultipleOrdersBatchOrdersParameterInnerSelfTradePreventionModeEnum =
-    (typeof ModifyMultipleOrdersBatchOrdersParameterInnerSelfTradePreventionModeEnum)[keyof typeof ModifyMultipleOrdersBatchOrdersParameterInnerSelfTradePreventionModeEnum];

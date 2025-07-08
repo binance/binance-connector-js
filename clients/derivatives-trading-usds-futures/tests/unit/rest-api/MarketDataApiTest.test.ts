@@ -1736,12 +1736,14 @@ describe('MarketDataApi', () => {
                     symbol: 'BTCUSDT',
                     sumOpenInterest: '20403.63700000',
                     sumOpenInterestValue: '150570784.07809979',
+                    CMCCirculatingSupply: '165880.538',
                     timestamp: '1583127900000',
                 },
                 {
                     symbol: 'BTCUSDT',
                     sumOpenInterest: '20401.36700000',
                     sumOpenInterestValue: '149940752.14464448',
+                    CMCCirculatingSupply: '165900.14853',
                     timestamp: '1583128200000',
                 },
             ];
@@ -1774,12 +1776,14 @@ describe('MarketDataApi', () => {
                     symbol: 'BTCUSDT',
                     sumOpenInterest: '20403.63700000',
                     sumOpenInterestValue: '150570784.07809979',
+                    CMCCirculatingSupply: '165880.538',
                     timestamp: '1583127900000',
                 },
                 {
                     symbol: 'BTCUSDT',
                     sumOpenInterest: '20401.36700000',
                     sumOpenInterestValue: '149940752.14464448',
+                    CMCCirculatingSupply: '165900.14853',
                     timestamp: '1583128200000',
                 },
             ];

@@ -659,7 +659,7 @@ export class RestAPI {
      * @param {ListAllConvertPairsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ListAllConvertPairsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/convert/List-All-Convert-Pairs Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/convert/ Binance API Documentation}
      */
     listAllConvertPairs(
         requestParameters: ListAllConvertPairsRequest = {}

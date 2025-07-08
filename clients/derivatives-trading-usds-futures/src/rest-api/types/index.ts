@@ -108,6 +108,7 @@ export * from './order-book-response';
 export * from './order-book-response-asks-item';
 export * from './order-book-response-bids-item';
 export * from './order-status-response';
+export * from './place-multiple-orders-batch-orders-parameter-inner';
 export * from './place-multiple-orders-response';
 export * from './place-multiple-orders-response-inner';
 export * from './position-adl-quantile-estimation-response';

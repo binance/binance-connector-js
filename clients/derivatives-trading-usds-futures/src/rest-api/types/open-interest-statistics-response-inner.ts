@@ -42,5 +42,11 @@ export interface OpenInterestStatisticsResponseInner {
      * @type {string}
      * @memberof OpenInterestStatisticsResponseInner
      */
+    CMCCirculatingSupply?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof OpenInterestStatisticsResponseInner
+     */
     timestamp?: string;
 }

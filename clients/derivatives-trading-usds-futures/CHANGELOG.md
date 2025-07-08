@@ -1,5 +1,17 @@
 # Changelog
 
+## 10.0.0 - 2025-07-08
+
+### Changed (3)
+
+- Update `@binance/common` library to version `1.2.0`.
+
+#### REST API
+
+- Modified response for `openInterestStatistics()` method (`GET /futures/data/openInterestHist`):
+  - item property `CMCCirculatingSupply` added
+- Fixed bug with duplicated `batchOrders` parameters
+
 ## 9.0.0 - 2025-06-30
 
 ### Added (1)
