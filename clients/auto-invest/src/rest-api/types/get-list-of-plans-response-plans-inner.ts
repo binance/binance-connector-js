@@ -16,115 +16,139 @@
 /**
  *
  * @export
- * @interface GetListOfPlansResponse2PlansInner
+ * @interface GetListOfPlansResponsePlansInner
  */
-export interface GetListOfPlansResponse2PlansInner {
+export interface GetListOfPlansResponsePlansInner {
     /**
      *
      * @type {number}
-     * @memberof GetListOfPlansResponse2PlansInner
+     * @memberof GetListOfPlansResponsePlansInner
      */
     planId?: number;
     /**
      *
      * @type {string}
-     * @memberof GetListOfPlansResponse2PlansInner
+     * @memberof GetListOfPlansResponsePlansInner
      */
     planType?: string;
     /**
      *
      * @type {string}
-     * @memberof GetListOfPlansResponse2PlansInner
+     * @memberof GetListOfPlansResponsePlansInner
      */
     editAllowed?: string;
     /**
      *
      * @type {number}
-     * @memberof GetListOfPlansResponse2PlansInner
+     * @memberof GetListOfPlansResponsePlansInner
      */
     creationDateTime?: number;
     /**
      *
      * @type {number}
-     * @memberof GetListOfPlansResponse2PlansInner
+     * @memberof GetListOfPlansResponsePlansInner
      */
     firstExecutionDateTime?: number;
     /**
      *
      * @type {number}
-     * @memberof GetListOfPlansResponse2PlansInner
+     * @memberof GetListOfPlansResponsePlansInner
      */
     nextExecutionDateTime?: number;
     /**
      *
      * @type {string}
-     * @memberof GetListOfPlansResponse2PlansInner
+     * @memberof GetListOfPlansResponsePlansInner
      */
     status?: string;
     /**
      *
      * @type {number}
-     * @memberof GetListOfPlansResponse2PlansInner
+     * @memberof GetListOfPlansResponsePlansInner
      */
     lastUpdatedDateTime?: number;
     /**
      *
      * @type {string}
-     * @memberof GetListOfPlansResponse2PlansInner
+     * @memberof GetListOfPlansResponsePlansInner
      */
     targetAsset?: string;
     /**
      *
      * @type {string}
-     * @memberof GetListOfPlansResponse2PlansInner
+     * @memberof GetListOfPlansResponsePlansInner
+     */
+    totalTargetAmount?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetListOfPlansResponsePlansInner
      */
     sourceAsset?: string;
     /**
      *
      * @type {string}
-     * @memberof GetListOfPlansResponse2PlansInner
+     * @memberof GetListOfPlansResponsePlansInner
      */
     totalInvestedInUSD?: string;
     /**
      *
      * @type {string}
-     * @memberof GetListOfPlansResponse2PlansInner
+     * @memberof GetListOfPlansResponsePlansInner
      */
     subscriptionAmount?: string;
     /**
      *
      * @type {string}
-     * @memberof GetListOfPlansResponse2PlansInner
+     * @memberof GetListOfPlansResponsePlansInner
      */
     subscriptionCycle?: string;
     /**
      *
      * @type {string}
-     * @memberof GetListOfPlansResponse2PlansInner
+     * @memberof GetListOfPlansResponsePlansInner
      */
     subscriptionStartDay?: string;
     /**
      *
      * @type {string}
-     * @memberof GetListOfPlansResponse2PlansInner
+     * @memberof GetListOfPlansResponsePlansInner
      */
     subscriptionStartWeekday?: string;
     /**
      *
      * @type {string}
-     * @memberof GetListOfPlansResponse2PlansInner
+     * @memberof GetListOfPlansResponsePlansInner
      */
     subscriptionStartTime?: string;
     /**
      *
      * @type {string}
-     * @memberof GetListOfPlansResponse2PlansInner
+     * @memberof GetListOfPlansResponsePlansInner
      */
     sourceWallet?: string;
     /**
      *
      * @type {string}
-     * @memberof GetListOfPlansResponse2PlansInner
+     * @memberof GetListOfPlansResponsePlansInner
      */
     flexibleAllowedToUse?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetListOfPlansResponsePlansInner
+     */
+    planValueInUSD?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetListOfPlansResponsePlansInner
+     */
+    pnlInUSD?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetListOfPlansResponsePlansInner
+     */
+    roi?: string;
 }

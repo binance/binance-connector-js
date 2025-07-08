@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
  * Binance Auto Invest REST API
@@ -17,16 +16,42 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { GetListOfPlansResponse1 } from './get-list-of-plans-response1';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { GetListOfPlansResponse2 } from './get-list-of-plans-response2';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { GetListOfPlansResponse2PlansInner } from './get-list-of-plans-response2-plans-inner';
+import type { GetListOfPlansResponsePlansInner } from './get-list-of-plans-response-plans-inner';
 
 /**
- * @type GetListOfPlansResponse
+ *
  * @export
+ * @interface GetListOfPlansResponse
  */
-export type GetListOfPlansResponse = GetListOfPlansResponse1 | GetListOfPlansResponse2;
+export interface GetListOfPlansResponse {
+    /**
+     *
+     * @type {string}
+     * @memberof GetListOfPlansResponse
+     */
+    planValueInUSD?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetListOfPlansResponse
+     */
+    planValueInBTC?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetListOfPlansResponse
+     */
+    pnlInUSD?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetListOfPlansResponse
+     */
+    roi?: string;
+    /**
+     *
+     * @type {Array<GetListOfPlansResponsePlansInner>}
+     * @memberof GetListOfPlansResponse
+     */
+    plans?: Array<GetListOfPlansResponsePlansInner>;
+}

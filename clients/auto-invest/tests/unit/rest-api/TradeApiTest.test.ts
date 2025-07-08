@@ -495,7 +495,7 @@ describe('TradeApi', () => {
         it('should execute investmentPlanAdjustment() successfully with required parameters only', async () => {
             const params: InvestmentPlanAdjustmentRequest = {
                 planId: 1,
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 subscriptionCycle: 'subscriptionCycle_example',
                 subscriptionStartTime: 789,
                 sourceAsset: 'sourceAsset_example',
@@ -521,7 +521,7 @@ describe('TradeApi', () => {
         it('should execute investmentPlanAdjustment() successfully with optional parameters', async () => {
             const params: InvestmentPlanAdjustmentRequest = {
                 planId: 1,
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 subscriptionCycle: 'subscriptionCycle_example',
                 subscriptionStartTime: 789,
                 sourceAsset: 'sourceAsset_example',
@@ -549,7 +549,7 @@ describe('TradeApi', () => {
         it('should throw RequiredError when planId is missing', async () => {
             const _params: InvestmentPlanAdjustmentRequest = {
                 planId: 1,
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 subscriptionCycle: 'subscriptionCycle_example',
                 subscriptionStartTime: 789,
                 sourceAsset: 'sourceAsset_example',
@@ -566,7 +566,7 @@ describe('TradeApi', () => {
         it('should throw RequiredError when subscriptionAmount is missing', async () => {
             const _params: InvestmentPlanAdjustmentRequest = {
                 planId: 1,
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 subscriptionCycle: 'subscriptionCycle_example',
                 subscriptionStartTime: 789,
                 sourceAsset: 'sourceAsset_example',
@@ -583,7 +583,7 @@ describe('TradeApi', () => {
         it('should throw RequiredError when subscriptionCycle is missing', async () => {
             const _params: InvestmentPlanAdjustmentRequest = {
                 planId: 1,
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 subscriptionCycle: 'subscriptionCycle_example',
                 subscriptionStartTime: 789,
                 sourceAsset: 'sourceAsset_example',
@@ -600,7 +600,7 @@ describe('TradeApi', () => {
         it('should throw RequiredError when subscriptionStartTime is missing', async () => {
             const _params: InvestmentPlanAdjustmentRequest = {
                 planId: 1,
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 subscriptionCycle: 'subscriptionCycle_example',
                 subscriptionStartTime: 789,
                 sourceAsset: 'sourceAsset_example',
@@ -617,7 +617,7 @@ describe('TradeApi', () => {
         it('should throw RequiredError when sourceAsset is missing', async () => {
             const _params: InvestmentPlanAdjustmentRequest = {
                 planId: 1,
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 subscriptionCycle: 'subscriptionCycle_example',
                 subscriptionStartTime: 789,
                 sourceAsset: 'sourceAsset_example',
@@ -634,7 +634,7 @@ describe('TradeApi', () => {
         it('should throw RequiredError when details is missing', async () => {
             const _params: InvestmentPlanAdjustmentRequest = {
                 planId: 1,
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 subscriptionCycle: 'subscriptionCycle_example',
                 subscriptionStartTime: 789,
                 sourceAsset: 'sourceAsset_example',
@@ -651,7 +651,7 @@ describe('TradeApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: InvestmentPlanAdjustmentRequest = {
                 planId: 1,
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 subscriptionCycle: 'subscriptionCycle_example',
                 subscriptionStartTime: 789,
                 sourceAsset: 'sourceAsset_example',
@@ -680,7 +680,7 @@ describe('TradeApi', () => {
             const params: InvestmentPlanCreationRequest = {
                 sourceType: 'sourceType_example',
                 planType: 'planType_example',
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 subscriptionCycle: 'subscriptionCycle_example',
                 subscriptionStartTime: 789,
                 sourceAsset: 'sourceAsset_example',
@@ -707,7 +707,7 @@ describe('TradeApi', () => {
             const params: InvestmentPlanCreationRequest = {
                 sourceType: 'sourceType_example',
                 planType: 'planType_example',
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 subscriptionCycle: 'subscriptionCycle_example',
                 subscriptionStartTime: 789,
                 sourceAsset: 'sourceAsset_example',
@@ -738,7 +738,7 @@ describe('TradeApi', () => {
             const _params: InvestmentPlanCreationRequest = {
                 sourceType: 'sourceType_example',
                 planType: 'planType_example',
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 subscriptionCycle: 'subscriptionCycle_example',
                 subscriptionStartTime: 789,
                 sourceAsset: 'sourceAsset_example',
@@ -756,7 +756,7 @@ describe('TradeApi', () => {
             const _params: InvestmentPlanCreationRequest = {
                 sourceType: 'sourceType_example',
                 planType: 'planType_example',
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 subscriptionCycle: 'subscriptionCycle_example',
                 subscriptionStartTime: 789,
                 sourceAsset: 'sourceAsset_example',
@@ -774,7 +774,7 @@ describe('TradeApi', () => {
             const _params: InvestmentPlanCreationRequest = {
                 sourceType: 'sourceType_example',
                 planType: 'planType_example',
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 subscriptionCycle: 'subscriptionCycle_example',
                 subscriptionStartTime: 789,
                 sourceAsset: 'sourceAsset_example',
@@ -792,7 +792,7 @@ describe('TradeApi', () => {
             const _params: InvestmentPlanCreationRequest = {
                 sourceType: 'sourceType_example',
                 planType: 'planType_example',
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 subscriptionCycle: 'subscriptionCycle_example',
                 subscriptionStartTime: 789,
                 sourceAsset: 'sourceAsset_example',
@@ -810,7 +810,7 @@ describe('TradeApi', () => {
             const _params: InvestmentPlanCreationRequest = {
                 sourceType: 'sourceType_example',
                 planType: 'planType_example',
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 subscriptionCycle: 'subscriptionCycle_example',
                 subscriptionStartTime: 789,
                 sourceAsset: 'sourceAsset_example',
@@ -828,7 +828,7 @@ describe('TradeApi', () => {
             const _params: InvestmentPlanCreationRequest = {
                 sourceType: 'sourceType_example',
                 planType: 'planType_example',
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 subscriptionCycle: 'subscriptionCycle_example',
                 subscriptionStartTime: 789,
                 sourceAsset: 'sourceAsset_example',
@@ -846,7 +846,7 @@ describe('TradeApi', () => {
             const _params: InvestmentPlanCreationRequest = {
                 sourceType: 'sourceType_example',
                 planType: 'planType_example',
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 subscriptionCycle: 'subscriptionCycle_example',
                 subscriptionStartTime: 789,
                 sourceAsset: 'sourceAsset_example',
@@ -864,7 +864,7 @@ describe('TradeApi', () => {
             const params: InvestmentPlanCreationRequest = {
                 sourceType: 'sourceType_example',
                 planType: 'planType_example',
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 subscriptionCycle: 'subscriptionCycle_example',
                 subscriptionStartTime: 789,
                 sourceAsset: 'sourceAsset_example',
@@ -892,7 +892,7 @@ describe('TradeApi', () => {
         it('should execute oneTimeTransaction() successfully with required parameters only', async () => {
             const params: OneTimeTransactionRequest = {
                 sourceType: 'sourceType_example',
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 sourceAsset: 'sourceAsset_example',
                 details: [],
             };
@@ -916,7 +916,7 @@ describe('TradeApi', () => {
         it('should execute oneTimeTransaction() successfully with optional parameters', async () => {
             const params: OneTimeTransactionRequest = {
                 sourceType: 'sourceType_example',
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 sourceAsset: 'sourceAsset_example',
                 details: [],
                 requestId: '1',
@@ -945,7 +945,7 @@ describe('TradeApi', () => {
         it('should throw RequiredError when sourceType is missing', async () => {
             const _params: OneTimeTransactionRequest = {
                 sourceType: 'sourceType_example',
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 sourceAsset: 'sourceAsset_example',
                 details: [],
             };
@@ -960,7 +960,7 @@ describe('TradeApi', () => {
         it('should throw RequiredError when subscriptionAmount is missing', async () => {
             const _params: OneTimeTransactionRequest = {
                 sourceType: 'sourceType_example',
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 sourceAsset: 'sourceAsset_example',
                 details: [],
             };
@@ -975,7 +975,7 @@ describe('TradeApi', () => {
         it('should throw RequiredError when sourceAsset is missing', async () => {
             const _params: OneTimeTransactionRequest = {
                 sourceType: 'sourceType_example',
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 sourceAsset: 'sourceAsset_example',
                 details: [],
             };
@@ -990,7 +990,7 @@ describe('TradeApi', () => {
         it('should throw RequiredError when details is missing', async () => {
             const _params: OneTimeTransactionRequest = {
                 sourceType: 'sourceType_example',
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 sourceAsset: 'sourceAsset_example',
                 details: [],
             };
@@ -1005,7 +1005,7 @@ describe('TradeApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: OneTimeTransactionRequest = {
                 sourceType: 'sourceType_example',
-                subscriptionAmount: 1,
+                subscriptionAmount: 1.0,
                 sourceAsset: 'sourceAsset_example',
                 details: [],
             };
