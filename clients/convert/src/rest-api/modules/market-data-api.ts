@@ -190,7 +190,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * @returns {Promise<RestApiResponse<ListAllConvertPairsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/convert/market-data/List-All-Convert-Pairs Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/convert/market-data/ Binance API Documentation}
      */
     public async listAllConvertPairs(
         requestParameters: ListAllConvertPairsRequest = {}
