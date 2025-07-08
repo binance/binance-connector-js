@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.0 - 2025-07-08
+
+### Added (2)
+
+- Support custom Headers on REST API requests (`customHeaders` option on `ConfigurationRestAPI`).
+- Support automatic session re-logon on reconncetions/renewals when session is already logged on (`autoSessionReLogon` option on `ConfigurationWebsocketAPI`).
+
 ## 1.1.3 - 2025-06-30
 
 ### Added (1)

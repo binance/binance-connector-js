@@ -28,6 +28,9 @@ import {
     AxiosRequestArgs,
     SendMessageOptions,
     ObjectType,
+    WebsocketSendMsgOptions,
+    WebsocketSendMsgConfig,
+    ConfigurationWebsocketAPI,
 } from '.';
 
 /**
@@ -680,4 +683,85 @@ export function replaceWebsocketStreamsPlaceholders(
  */
 export function buildUserAgent(packageName: string, packageVersion: string): string {
     return `${packageName}/${packageVersion} (Node.js/${process.version}; ${platform()}; ${arch()})`;
+}
+
+/**
+ * Builds a WebSocket API message with optional authentication and signature.
+ *
+ * @param {ConfigurationWebsocketAPI} configuration - The WebSocket API configuration.
+ * @param {string} method - The method name for the WebSocket message.
+ * @param {WebsocketSendMsgOptions} payload - The payload data to be sent.
+ * @param {WebsocketSendMsgConfig} options - Configuration options for message sending.
+ * @param {boolean} [skipAuth=false] - Flag to skip authentication if needed.
+ * @returns {Object} A structured WebSocket message with id, method, and params.
+ */
+export function buildWebsocketAPIMessage(
+    configuration: ConfigurationWebsocketAPI,
+    method: string,
+    payload: WebsocketSendMsgOptions,
+    options: WebsocketSendMsgConfig,
+    skipAuth: boolean = false
+) {
+    const id = payload.id && /^[0-9a-f]{32}$/.test(payload.id) ? payload.id : randomString();
+    delete payload.id;
+
+    let params = removeEmptyValue(payload);
+    if ((options.withApiKey || options.isSigned) && !skipAuth) params.apiKey = configuration.apiKey;
+
+    if (options.isSigned) {
+        params.timestamp = getTimestamp();
+        params = sortObject(params as ObjectType);
+        if (!skipAuth) params.signature = getSignature(configuration!, params);
+    }
+
+    return { id, method, params };
+}
+
+/**
+ * Sanitizes a header value by checking for and preventing carriage return and line feed characters.
+ *
+ * @param {string | string[]} value - The header value or array of header values to sanitize.
+ * @returns {string | string[]} The sanitized header value(s).
+ * @throws {Error} If the header value contains CR/LF characters.
+ */
+export function sanitizeHeaderValue(value: string | string[]): string | string[] {
+    const sanitizeOne = (v: string) => {
+        if (/\r|\n/.test(v)) throw new Error(`Invalid header value (contains CR/LF): "${v}"`);
+        return v;
+    };
+
+    return Array.isArray(value) ? value.map(sanitizeOne) : sanitizeOne(value);
+}
+
+/**
+ * Parses and sanitizes custom headers, filtering out forbidden headers.
+ *
+ * @param {Record<string, string | string[]>} headers - The input headers to be parsed.
+ * @returns {Record<string, string | string[]>} A new object with sanitized and allowed headers.
+ * @description Removes forbidden headers like 'host', 'authorization', and 'cookie',
+ * and sanitizes remaining header values to prevent injection of carriage return or line feed characters.
+ */
+export function parseCustomHeaders(
+    headers: Record<string, string | string[]>
+): Record<string, string | string[]> {
+    if (!headers || Object.keys(headers).length === 0) return {};
+
+    const forbidden = new Set(['host', 'authorization', 'cookie', ':method', ':path']);
+    const parsedHeaders: Record<string, string | string[]> = {};
+
+    for (const [rawName, rawValue] of Object.entries(headers || {})) {
+        const name = rawName.trim();
+        if (forbidden.has(name.toLowerCase())) {
+            console.warn(`Dropping forbidden header: ${name}`);
+            continue;
+        }
+
+        try {
+            parsedHeaders[name] = sanitizeHeaderValue(rawValue);
+        } catch {
+            continue;
+        }
+    }
+
+    return parsedHeaders;
 }

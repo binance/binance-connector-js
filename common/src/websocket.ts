@@ -8,12 +8,8 @@ import {
     Logger,
     delay,
     randomString,
-    getTimestamp,
-    getSignature,
     validateTimeUnit,
-    removeEmptyValue,
-    sortObject,
-    ObjectType,
+    buildWebsocketAPIMessage,
 } from '.';
 
 export class WebsocketEventEmitter {
@@ -59,6 +55,12 @@ export interface WebsocketConnection {
     >;
     pendingSubscriptions?: string[];
     ws?: WebSocketClient;
+    isSessionLoggedOn?: boolean;
+    sessionLogonReq?: {
+        method: string;
+        payload: WebsocketSendMsgOptions;
+        options: WebsocketSendMsgConfig;
+    };
 }
 
 export class WebsocketCommon extends WebsocketEventEmitter {
@@ -114,6 +116,26 @@ export class WebsocketCommon extends WebsocketEventEmitter {
     }
 
     /**
+     * Retrieves available WebSocket connections based on the connection mode and readiness.
+     * In 'single' mode, returns the first connection in the pool.
+     * In 'pool' mode, filters and returns connections that are ready for use.
+     * @param allowNonEstablishedWebsockets - Optional flag to include non-established WebSocket connections.
+     * @returns An array of available WebSocket connections.
+     */
+    protected getAvailableConnections(
+        allowNonEstablishedWebsockets: boolean = false
+    ): WebsocketConnection[] {
+        if (this.mode === 'single') return [this.connectionPool[0]];
+
+        // Filter connections based on readiness and pending reconnection status
+        const availableConnections = this.connectionPool.filter((connection) =>
+            this.isConnectionReady(connection, allowNonEstablishedWebsockets)
+        );
+
+        return availableConnections;
+    }
+
+    /**
      * Gets a WebSocket connection from the pool or single connection.
      * If the connection mode is 'single', it returns the first connection in the pool.
      * If the connection mode is 'pool', it returns an available connection from the pool,
@@ -122,12 +144,7 @@ export class WebsocketCommon extends WebsocketEventEmitter {
      * @returns {WebsocketConnection} The selected WebSocket connection.
      */
     protected getConnection(allowNonEstablishedWebsockets: boolean = false): WebsocketConnection {
-        if (this.mode === 'single') return this.connectionPool[0];
-
-        // Filter connections based on readiness and pending reconnection status
-        const availableConnections = this.connectionPool.filter((connection) =>
-            this.isConnectionReady(connection, allowNonEstablishedWebsockets)
-        );
+        const availableConnections = this.getAvailableConnections(allowNonEstablishedWebsockets);
 
         if (availableConnections.length === 0) {
             throw new Error('No available Websocket connections are ready.');
@@ -287,6 +304,43 @@ export class WebsocketCommon extends WebsocketEventEmitter {
     }
 
     /**
+     * Attempts to re-establish a session for a WebSocket connection.
+     * If a session logon request exists and the connection is not already logged on,
+     * it sends an authentication request and updates the connection's logged-on status.
+     * @param connection - The WebSocket connection to re-authenticate.
+     * @private
+     */
+    private async sessionReLogon(connection: WebsocketConnection) {
+        const req = connection.sessionLogonReq;
+        if (req && !connection.isSessionLoggedOn) {
+            const data = buildWebsocketAPIMessage(
+                this.configuration as ConfigurationWebsocketAPI,
+                req.method,
+                req.payload,
+                req.options
+            );
+
+            this.logger.debug(`Session re-logon with connection id: ${connection.id}`, data);
+
+            try {
+                await this.send(
+                    JSON.stringify(data),
+                    data.id,
+                    true,
+                    (this.configuration as ConfigurationWebsocketAPI).timeout,
+                    connection
+                );
+                connection.isSessionLoggedOn = true;
+            } catch (err) {
+                this.logger.error(
+                    `Session re-logon with connection id ${connection.id} failed:`,
+                    err
+                );
+            }
+        }
+    }
+
+    /**
      * Cleans up WebSocket connection resources.
      * Removes all listeners and clears any associated timers for the provided WebSocket client.
      * @param ws - The WebSocket client to clean up.
@@ -330,6 +384,7 @@ export class WebsocketCommon extends WebsocketEventEmitter {
         } else {
             this.emit('open', this);
         }
+        this.sessionReLogon(targetConnection);
     }
 
     /**
@@ -420,10 +475,13 @@ export class WebsocketCommon extends WebsocketEventEmitter {
         if (isRenewal) targetConnection.renewalPending = true;
         else targetConnection.ws = ws;
 
+        targetConnection.isSessionLoggedOn = false;
+
         this.scheduleTimer(
             ws,
             () => {
                 this.logger.info(`Renewing Websocket connection with id ${targetConnection.id}`);
+                targetConnection.isSessionLoggedOn = false;
                 this.enqueueReconnection(
                     targetConnection,
                     this.getReconnectURL(url, targetConnection),
@@ -474,6 +532,7 @@ export class WebsocketCommon extends WebsocketEventEmitter {
                         this.logger.info(
                             `Reconnecting conection with id ${targetConnection.id} to the server.`
                         );
+                        targetConnection.isSessionLoggedOn = false;
                         targetConnection.reconnectionPending = true;
                         this.enqueueReconnection(
                             targetConnection,
@@ -512,6 +571,8 @@ export class WebsocketCommon extends WebsocketEventEmitter {
         else {
             this.connectionPool.forEach((connection) => {
                 connection.closeInitiated = true;
+                connection.isSessionLoggedOn = false;
+                connection.sessionLogonReq = undefined;
             });
 
             const disconnectPromises = this.connectionPool.map((connection: WebsocketConnection) =>
@@ -610,6 +671,13 @@ export class WebsocketCommon extends WebsocketEventEmitter {
 export interface WebsocketSendMsgOptions {
     id?: string;
     [key: string]: string | number | boolean | object | undefined;
+}
+
+export interface WebsocketSendMsgConfig {
+    withApiKey?: boolean;
+    isSigned?: boolean;
+    isSessionLogon?: boolean;
+    isSessionLogout?: boolean;
 }
 
 export class WebsocketAPIBase extends WebsocketCommon {
@@ -720,49 +788,82 @@ export class WebsocketAPIBase extends WebsocketCommon {
         });
     }
 
-    /**
-     * Sends a message to the WebSocket API Server.
-     * Supports both signed and unsigned messages.
-     * @param method The API method to call
-     * @param payload Message parameters and options
-     * @param options Additional requests options (withApiKey, isSigned)
-     * @returns Promise that resolves with the server response
-     * @throws Error if not connected
-     */
-    sendMessage<T = unknown>(
+    sendMessage<T>(
+        method: string,
+        payload: WebsocketSendMsgOptions,
+        options: WebsocketSendMsgConfig & { isSessionLogon: true }
+    ): Promise<WebsocketApiResponse<T>[]>;
+
+    sendMessage<T>(
+        method: string,
+        payload: WebsocketSendMsgOptions,
+        options: WebsocketSendMsgConfig & { isSessionLogout: true }
+    ): Promise<WebsocketApiResponse<T>[]>;
+
+    sendMessage<T>(
+        method: string,
+        payload?: WebsocketSendMsgOptions,
+        options?: WebsocketSendMsgConfig
+    ): Promise<WebsocketApiResponse<T>>;
+
+    async sendMessage<T>(
         method: string,
         payload: WebsocketSendMsgOptions = {},
-        options: { withApiKey?: boolean; isSigned?: boolean } = {}
-    ): Promise<WebsocketApiResponse<T>> {
+        options: WebsocketSendMsgConfig = {}
+    ): Promise<WebsocketApiResponse<T> | WebsocketApiResponse<T>[]> {
         if (!this.isConnected()) {
-            return Promise.reject(new Error('Not connected'));
+            throw new Error('Not connected');
         }
 
-        const id = payload.id && /^[0-9a-f]{32}$/.test(payload.id) ? payload.id : randomString();
-        delete payload.id;
+        const connections: WebsocketConnection[] =
+            options.isSessionLogon || options.isSessionLogout
+                ? this.getAvailableConnections()
+                : [this.getConnection()];
 
-        let params = removeEmptyValue(payload);
+        const skipAuth =
+            options.isSessionLogon || options.isSessionLogout
+                ? false
+                : this.configuration.autoSessionReLogon && connections[0].isSessionLoggedOn;
 
-        if (options.withApiKey || options.isSigned) {
-            params.apiKey = this.configuration.apiKey;
-        }
-
-        if (options.isSigned) {
-            params.timestamp = getTimestamp();
-            params = sortObject(params as ObjectType);
-            params.signature = getSignature(this.configuration!, params);
-        }
-
-        const data = {
-            id,
+        const data = buildWebsocketAPIMessage(
+            this.configuration,
             method,
-            params,
-        };
+            payload,
+            options,
+            skipAuth
+        );
 
         this.logger.debug('Send message to Binance WebSocket API Server:', data);
-        return this.send<T>(JSON.stringify(data), id, true, this.configuration?.timeout) as Promise<
-            WebsocketApiResponse<T>
-        >;
+
+        const responses = await Promise.all(
+            connections.map(
+                (connection) =>
+                    this.send<T>(
+                        JSON.stringify(data),
+                        data.id,
+                        true,
+                        this.configuration.timeout,
+                        connection
+                    ) as Promise<WebsocketApiResponse<T>>
+            )
+        );
+
+        if (
+            (options.isSessionLogon || options.isSessionLogout) &&
+            this.configuration.autoSessionReLogon
+        ) {
+            connections.forEach((connection) => {
+                if (options.isSessionLogon) {
+                    connection.isSessionLoggedOn = true;
+                    connection.sessionLogonReq = { method, payload, options };
+                } else {
+                    connection.isSessionLoggedOn = false;
+                    connection.sessionLogonReq = undefined;
+                }
+            });
+        }
+
+        return connections.length === 1 ? responses[0] : responses;
     }
 }
 

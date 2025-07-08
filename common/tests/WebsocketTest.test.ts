@@ -26,6 +26,12 @@ class TestWebsocketCommon extends WebsocketCommon {
         this.initConnect(url, isRenewal, connection);
     }
 
+    public testGetAvailableConnections(
+        allowNonEstablishedWebsockets: boolean = false
+    ): WebsocketConnection[] {
+        return this.getAvailableConnections(allowNonEstablishedWebsockets);
+    }
+
     public testGetConnection(allowNonEstablishedWebsockets: boolean = false): WebsocketConnection {
         return this.getConnection(allowNonEstablishedWebsockets);
     }
@@ -343,6 +349,161 @@ describe('WebsocketCommon', () => {
         });
     });
 
+    describe('sessionReLogon()', () => {
+        let connection: WebsocketConnection;
+        let wsCommon: TestWebsocketCommon;
+        let sendSpy: ReturnType<typeof jest.spyOn>;
+        let debugSpy: ReturnType<typeof jest.spyOn>;
+        let errorSpy: ReturnType<typeof jest.spyOn>;
+
+        beforeEach(() => {
+            wsCommon = new TestWebsocketCommon(configuration);
+            connection = wsCommon.connectionPool[0];
+
+            sendSpy = jest.spyOn(wsCommon as never, 'send');
+            debugSpy = jest.spyOn(wsCommon.logger, 'debug').mockImplementation(() => {});
+            errorSpy = jest.spyOn(wsCommon.logger, 'error').mockImplementation(() => {});
+        });
+
+        afterEach(() => {
+            jest.restoreAllMocks();
+        });
+
+        it('should replay a saved sessionLogonReq and sets isSessionLoggedOn on success', async () => {
+            connection.sessionLogonReq = {
+                method: 'POST',
+                payload: { foo: 'bar' },
+                options: { isSessionLogon: true },
+            };
+            connection.isSessionLoggedOn = false;
+
+            sendSpy.mockResolvedValue({ data: 'OK' });
+
+            wsCommon['sessionReLogon'](connection);
+
+            await Promise.resolve();
+
+            expect(debugSpy).toHaveBeenCalledWith(
+                `Session re-logon with connection id: ${connection.id}`,
+                expect.objectContaining({ method: 'POST', params: { foo: 'bar' } })
+            );
+
+            await Promise.resolve();
+            expect(connection.isSessionLoggedOn).toBe(true);
+        });
+
+        it('should log an error and leaves isSessionLoggedOn false on send failure', async () => {
+            connection.sessionLogonReq = {
+                method: 'POST',
+                payload: {},
+                options: { isSessionLogon: true },
+            };
+            connection.isSessionLoggedOn = false;
+
+            sendSpy.mockRejectedValue(new Error('whoops'));
+
+            wsCommon['sessionReLogon'](connection);
+            await Promise.resolve();
+            await Promise.resolve();
+
+            expect(errorSpy).toHaveBeenCalledWith(
+                `Session re-logon with connection id ${connection.id} failed:`,
+                expect.any(Error)
+            );
+            expect(connection.isSessionLoggedOn).toBe(false);
+        });
+
+        it('sould do nothing if already logged on', () => {
+            connection.sessionLogonReq = { method: 'POST', payload: {}, options: {} };
+            connection.isSessionLoggedOn = true;
+
+            wsCommon['sessionReLogon'](connection);
+
+            expect(sendSpy).not.toHaveBeenCalled();
+            expect(debugSpy).not.toHaveBeenCalled();
+            expect(errorSpy).not.toHaveBeenCalled();
+        });
+
+        it('sould do nothing if there is no sessionLogonReq', () => {
+            connection.sessionLogonReq = undefined;
+            connection.isSessionLoggedOn = false;
+
+            wsCommon['sessionReLogon'](connection);
+
+            expect(sendSpy).not.toHaveBeenCalled();
+            expect(debugSpy).not.toHaveBeenCalled();
+            expect(errorSpy).not.toHaveBeenCalled();
+        });
+    });
+
+    describe('getAvailableConnections()', () => {
+        beforeEach(() => {
+            configuration.mode = 'pool';
+            wsCommon = new TestWebsocketCommon(configuration, connectionPool);
+        });
+
+        it('should returns first connection in single mode', () => {
+            wsCommon = new TestWebsocketCommon({ wsURL: 'wss://x', mode: 'single' });
+            const avail = wsCommon.testGetAvailableConnections();
+            expect(avail).toEqual([wsCommon.connectionPool[0]]);
+        });
+
+        it('should filter only OPEN connections when allowNonEstablished=false in pool mode', () => {
+            wsCommon = new TestWebsocketCommon(
+                {
+                    wsURL: 'wss://x',
+                    mode: 'pool',
+                    poolSize: 0,
+                    reconnectDelay: 0,
+                    compression: false,
+                    agent: false,
+                },
+                connectionPool
+            );
+            const avail = wsCommon.testGetAvailableConnections(false);
+            expect(avail.map((c: WebsocketConnection) => c.id)).toEqual(['test-id1', 'test-id2']);
+        });
+
+        it('should include CLOSED when allowNonEstablished=true in pool mode, ', () => {
+            wsCommon = new TestWebsocketCommon(
+                {
+                    wsURL: 'wss://x',
+                    mode: 'pool',
+                    poolSize: 0,
+                    reconnectDelay: 0,
+                    compression: false,
+                    agent: false,
+                },
+                connectionPool
+            );
+            const avail = wsCommon.testGetAvailableConnections(true);
+            expect(avail.map((c: WebsocketConnection) => c.id)).toEqual([
+                'test-id1',
+                'test-id2',
+                'test-id3',
+            ]);
+        });
+
+        it('sould always excludes reconnectionPending or closeInitiated flags, even if allowNonEstablished=true', () => {
+            connectionPool[0].reconnectionPending = true;
+            connectionPool[2].closeInitiated = true;
+
+            wsCommon = new TestWebsocketCommon(
+                {
+                    wsURL: 'wss://x',
+                    mode: 'pool',
+                    poolSize: 0,
+                    reconnectDelay: 0,
+                    compression: false,
+                    agent: false,
+                },
+                connectionPool
+            );
+            const avail = wsCommon.testGetAvailableConnections(true);
+            expect(avail.map((c: WebsocketConnection) => c.id)).toEqual(['test-id2']);
+        });
+    });
+
     describe('getConnection()', () => {
         beforeEach(() => {
             configuration.mode = 'pool';
@@ -627,6 +788,8 @@ describe('WebsocketCommon', () => {
 
             connectionPool.forEach((connection) => {
                 expect(connection.closeInitiated).toBe(true);
+                expect(connection.isSessionLoggedOn).toBe(false);
+                expect(connection.sessionLogonReq).toBeUndefined();
             });
             expect(closeConnectionGracefullySpy).toHaveBeenCalledTimes(connectionPool.length);
             connectionPool.forEach((connection) => {
@@ -1264,7 +1427,41 @@ describe('WebsocketAPIBase', () => {
 
         connectionPool = [
             {
-                id: 'test-id',
+                id: 'test-id1',
+                ws: Object.assign(new EventEmitter(), {
+                    close: jest.fn(),
+                    ping: jest.fn(),
+                    pong: jest.fn(),
+                    send: jest.fn((data: string | Buffer, cb?: (err?: Error) => void) => {
+                        if (cb) cb();
+                    }),
+                    removeAllListeners: jest.fn(),
+                    readyState: WebSocketClient.OPEN,
+                }) as unknown as jest.Mocked<WebSocketClient> & EventEmitter,
+                closeInitiated: false,
+                reconnectionPending: false,
+                renewalPending: false,
+                pendingRequests: new Map(),
+            },
+            {
+                id: 'test-id2',
+                ws: Object.assign(new EventEmitter(), {
+                    close: jest.fn(),
+                    ping: jest.fn(),
+                    pong: jest.fn(),
+                    send: jest.fn((data: string | Buffer, cb?: (err?: Error) => void) => {
+                        if (cb) cb();
+                    }),
+                    removeAllListeners: jest.fn(),
+                    readyState: WebSocketClient.OPEN,
+                }) as unknown as jest.Mocked<WebSocketClient> & EventEmitter,
+                closeInitiated: false,
+                reconnectionPending: false,
+                renewalPending: false,
+                pendingRequests: new Map(),
+            },
+            {
+                id: 'test-id3',
                 ws: Object.assign(new EventEmitter(), {
                     close: jest.fn(),
                     ping: jest.fn(),
@@ -1362,7 +1559,8 @@ describe('WebsocketAPIBase', () => {
                 expect.any(String),
                 expect.any(String),
                 true,
-                configuration.timeout
+                configuration.timeout,
+                wsAPI.connectionPool[0]
             );
             expect(response).toBe('mockResponse');
         });
@@ -1382,10 +1580,12 @@ describe('WebsocketAPIBase', () => {
                 expect.any(String),
                 expect.any(String),
                 true,
-                configuration.timeout
+                configuration.timeout,
+                wsAPI.connectionPool[0]
             );
             expect(response).toBe('mockResponse');
         });
+
         it('should send a signed message to the WebSocket server', async () => {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const sendSpy = jest.spyOn(wsAPI as any, 'send').mockResolvedValue('mockResponse');
@@ -1402,7 +1602,8 @@ describe('WebsocketAPIBase', () => {
                 expect.any(String),
                 expect.any(String),
                 true,
-                configuration.timeout
+                configuration.timeout,
+                wsAPI.connectionPool[0]
             );
             expect(response).toBe('mockResponse');
         });
@@ -1427,9 +1628,142 @@ describe('WebsocketAPIBase', () => {
                 expect.any(String),
                 expect.any(String),
                 true,
-                configuration.timeout
+                configuration.timeout,
+                wsAPI.connectionPool[0]
             );
             expect(response).toBe('mockResponse');
+        });
+
+        it('should send a message to the WebSocket server, skipping signature generation if session is logged on and autoSessionReLogon=true', async () => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const sendSpy = jest.spyOn(wsAPI as any, 'send').mockResolvedValue('mockResponse');
+
+            wsAPI.configuration.autoSessionReLogon = true;
+            wsAPI.connectionPool[0].isSessionLoggedOn = true;
+
+            const method = 'testMethod';
+            const options = { param1: 'value1' };
+            const response = await wsAPI.sendMessage(method, options, { isSigned: true });
+
+            const sentPayload = JSON.parse(sendSpy.mock.calls[0][0] as string);
+            expect(sentPayload.params.timestamp).toBeDefined();
+            expect(sentPayload.params.signature).toBeUndefined();
+
+            expect(sendSpy).toHaveBeenCalledWith(
+                expect.any(String),
+                expect.any(String),
+                true,
+                configuration.timeout,
+                wsAPI.connectionPool[0]
+            );
+            expect(response).toBe('mockResponse');
+        });
+
+        it('should send a signed message to the WebSocket server, without skipping signature generation if session is logged on and autoSessionReLogon=false', async () => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const sendSpy = jest.spyOn(wsAPI as any, 'send').mockResolvedValue('mockResponse');
+
+            wsAPI.configuration.autoSessionReLogon = false;
+            wsAPI.connectionPool[0].isSessionLoggedOn = true;
+
+            const method = 'testMethod';
+            const options = { param1: 'value1' };
+            const response = await wsAPI.sendMessage(method, options, { isSigned: true });
+
+            const sentPayload = JSON.parse(sendSpy.mock.calls[0][0] as string);
+            expect(sentPayload.params.timestamp).toBeDefined();
+            expect(sentPayload.params.signature).toBe('mock-signature');
+
+            expect(sendSpy).toHaveBeenCalledWith(
+                expect.any(String),
+                expect.any(String),
+                true,
+                configuration.timeout,
+                wsAPI.connectionPool[0]
+            );
+            expect(response).toBe('mockResponse');
+        });
+
+        it('should send a signed message to all available connections when isSessionLogon=true', async () => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const sendSpy = jest.spyOn(wsAPI as any, 'send').mockResolvedValue('mockResponse');
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (wsAPI as any).mode = 'pool';
+            wsAPI.configuration.autoSessionReLogon = true;
+
+            const method = 'sessionLogonMethod';
+            const options = { param1: 'value1' };
+            const response = await wsAPI.sendMessage(method, options, {
+                isSigned: true,
+                isSessionLogon: true,
+            });
+
+            expect(Array.isArray(response)).toBe(true);
+            expect(response.length).toBe(connectionPool.length);
+            expect(sendSpy).toHaveBeenCalledTimes(connectionPool.length);
+
+            connectionPool.forEach((conn, idx) => {
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                const [rawPayload, _idArg, promiseArg, timeoutArg, connectionArg] =
+                    sendSpy.mock.calls[idx];
+                const sent = JSON.parse(rawPayload as string);
+
+                expect(typeof sent.id).toBe('string');
+                expect(sent.method).toBe(method);
+                expect(sent.params.param1).toBe('value1');
+                expect(sent.params.timestamp).toBeDefined();
+                expect(sent.params.signature).toBe('mock-signature');
+                expect(sent.params.apiKey).toBe('test-api-key');
+                expect(promiseArg).toBe(true);
+                expect(timeoutArg).toBe(configuration.timeout);
+                expect(connectionArg).toBe(conn);
+                expect(conn.isSessionLoggedOn).toBe(true);
+                expect(conn.sessionLogonReq).toStrictEqual({
+                    method,
+                    payload: { param1: 'value1' },
+                    options: { isSigned: true, isSessionLogon: true },
+                });
+            });
+        });
+
+        it('should send a signed message to all available connections when isSessionLogout=false', async () => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const sendSpy = jest.spyOn(wsAPI as any, 'send').mockResolvedValue('mockResponse');
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (wsAPI as any).mode = 'pool';
+            wsAPI.configuration.autoSessionReLogon = true;
+
+            const method = 'sessionLogoutMethod';
+            const options = { param1: 'value1' };
+            const response = await wsAPI.sendMessage(method, options, {
+                isSigned: true,
+                isSessionLogout: true,
+            });
+
+            expect(Array.isArray(response)).toBe(true);
+            expect(response.length).toBe(connectionPool.length);
+            expect(sendSpy).toHaveBeenCalledTimes(connectionPool.length);
+
+            connectionPool.forEach((conn, idx) => {
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                const [rawPayload, _idArg, promiseArg, timeoutArg, connectionArg] =
+                    sendSpy.mock.calls[idx];
+                const sent = JSON.parse(rawPayload as string);
+
+                expect(typeof sent.id).toBe('string');
+                expect(sent.method).toBe(method);
+                expect(sent.params.param1).toBe('value1');
+                expect(sent.params.timestamp).toBeDefined();
+                expect(sent.params.signature).toBe('mock-signature');
+                expect(sent.params.apiKey).toBe('test-api-key');
+                expect(promiseArg).toBe(true);
+                expect(timeoutArg).toBe(configuration.timeout);
+                expect(connectionArg).toBe(conn);
+                expect(conn.isSessionLoggedOn).toBe(false);
+                expect(conn.sessionLogonReq).toBeUndefined();
+            });
         });
 
         it('should throw an error if not connected', async () => {

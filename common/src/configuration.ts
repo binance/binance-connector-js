@@ -1,5 +1,6 @@
 import { Agent } from 'https';
 import type { TimeUnit } from './constants';
+import { parseCustomHeaders } from './utils';
 
 export class ConfigurationRestAPI {
     /**
@@ -44,6 +45,13 @@ export class ConfigurationRestAPI {
         auth?: { username: string; password: string };
     };
     /**
+     * Optional custom headers to be sent with the request
+     * @default {}
+     * @type {Record<string, string | string[]>}
+     * @memberof ConfigurationRestAPI
+     */
+    customHeaders?: Record<string, string | string[]>;
+    /**
      * enables keep-alive functionality for the connection (if httpsAgent is set then we use httpsAgent.keepAlive instead)
      * @default true
      * @type {boolean}
@@ -80,10 +88,10 @@ export class ConfigurationRestAPI {
     httpsAgent?: boolean | Agent;
     /**
      * private key
-     * @type {Buffer}
+     * @type {string | Buffer}
      * @memberof ConfigurationRestAPI
      */
-    privateKey?: Buffer;
+    privateKey?: string | Buffer;
     /**
      * private key passphrase
      * @type {string}
@@ -124,6 +132,7 @@ export class ConfigurationRestAPI {
             },
             httpsAgent: param.httpsAgent ?? false,
             headers: {
+                ...parseCustomHeaders(param.customHeaders || {}),
                 'Content-Type': 'application/json',
                 'X-MBX-APIKEY': param.apiKey,
             },
@@ -192,10 +201,10 @@ export class ConfigurationWebsocketAPI {
     poolSize?: number;
     /**
      * private key
-     * @type {Buffer}
+     * @type {string | Buffer}
      * @memberof ConfigurationWebsocketAPI
      */
-    privateKey?: Buffer;
+    privateKey?: string | Buffer;
     /**
      * private key passphrase
      * @type {string}
@@ -208,6 +217,13 @@ export class ConfigurationWebsocketAPI {
      * @memberof ConfigurationWebsocketAPI
      */
     timeUnit?: TimeUnit;
+    /**
+     * auto session re-logon on reconnects/renewals
+     * @default true
+     * @type {boolean}
+     * @memberof ConfigurationWebsocketAPI
+     */
+    autoSessionReLogon?: boolean;
     /**
      * Optional user agent string for identifying the client
      * @type {string}
@@ -229,6 +245,7 @@ export class ConfigurationWebsocketAPI {
         this.privateKey = param.privateKey;
         this.privateKeyPassphrase = param.privateKeyPassphrase;
         this.timeUnit = param.timeUnit;
+        this.autoSessionReLogon = param.autoSessionReLogon ?? true;
     }
 }
 

@@ -17,6 +17,8 @@ import {
     sendRequest,
     replaceWebsocketStreamsPlaceholders,
     SPOT_REST_API_PROD_URL,
+    ConfigurationWebsocketAPI,
+    WebsocketSendMsgOptions,
 } from '../src';
 import { fail } from 'assert';
 
@@ -988,6 +990,192 @@ describe('Utility Functions', () => {
             expect(raw).toBe(JSON.stringify(mixed.top));
             expect(params.toString()).toContain(`top=${encodeURIComponent(raw)}`);
             expect(params.get('top.deep')).toBeNull();
+        });
+    });
+
+    describe('buildWebsocketAPIMessage', () => {
+        const config: ConfigurationWebsocketAPI = {
+            wsURL: 'wss://test',
+            apiKey: 'AK123',
+            apiSecret: 'SK456',
+            timeout: 5000,
+        };
+
+        beforeEach(() => {
+            jest.spyOn(utils, 'getTimestamp').mockReturnValue(111222333);
+            jest.spyOn(utils, 'getSignature').mockReturnValue('SIGNATURE');
+        });
+
+        afterEach(() => {
+            jest.restoreAllMocks();
+        });
+
+        it('uses provided valid 32-hex id instead of randomString', () => {
+            const payload: WebsocketSendMsgOptions = { id: 'a'.repeat(32), foo: 'bar' };
+            const msg = utils.buildWebsocketAPIMessage(config, 'm', payload, {}, false);
+
+            expect(msg.id).toBe('a'.repeat(32));
+        });
+
+        it('generates a random id when none provided', () => {
+            const payload: WebsocketSendMsgOptions = { foo: 'bar' };
+            const msg = utils.buildWebsocketAPIMessage(config, 'm', payload, {}, false);
+
+            expect(msg.id).toBeDefined();
+        });
+
+        it('strips empty values from payload before building params', () => {
+            const payload: WebsocketSendMsgOptions = { a: 1, b: undefined, c: '' };
+            const msg = utils.buildWebsocketAPIMessage(config, 'm', payload, {}, false);
+
+            expect(msg.params).toStrictEqual({ a: 1 });
+        });
+
+        it('includes apiKey when withApiKey and not skipAuth', () => {
+            const payload: WebsocketSendMsgOptions = { foo: 'bar' };
+            const msg = utils.buildWebsocketAPIMessage(
+                config,
+                'methodName',
+                payload,
+                { withApiKey: true },
+                false
+            );
+
+            expect(msg.params.apiKey).toBe(config.apiKey);
+        });
+
+        it('does not include apiKey when skipAuth is true, even if withApiKey', () => {
+            const payload: WebsocketSendMsgOptions = { foo: 'bar' };
+            const msg = utils.buildWebsocketAPIMessage(
+                config,
+                'methodName',
+                payload,
+                { withApiKey: true },
+                true
+            );
+
+            expect(msg.params.apiKey).toBeUndefined();
+        });
+
+        it('appends timestamp, sorts, and signature when isSigned and not skipAuth', () => {
+            const payload: WebsocketSendMsgOptions = { x: 5 };
+            const msg = utils.buildWebsocketAPIMessage(
+                config,
+                'signMe',
+                payload,
+                { isSigned: true },
+                false
+            );
+            expect(msg.params.signature).toBe('SIGNATURE');
+        });
+
+        it('does not sign or add apiKey when skipAuth=true even if isSigned', () => {
+            const payload: WebsocketSendMsgOptions = { y: 10 };
+            const msg = utils.buildWebsocketAPIMessage(
+                config,
+                'noAuthSign',
+                payload,
+                { isSigned: true, withApiKey: true },
+                true
+            );
+
+            expect(msg.params.timestamp).toBeDefined();
+            expect(msg.params.signature).toBeUndefined();
+            expect(msg.params.apiKey).toBeUndefined();
+        });
+
+        it('always returns an object with id, method, and params', () => {
+            const payload: WebsocketSendMsgOptions = { foo: 'bar' };
+            const msg = utils.buildWebsocketAPIMessage(config, 'test', payload, {}, false);
+
+            expect(msg).toEqual({
+                id: expect.any(String),
+                method: 'test',
+                params: { foo: 'bar' },
+            });
+        });
+    });
+
+    describe('sanitizeHeaderValue()', () => {
+        it('returns a simple string unchanged', () => {
+            expect(utils.sanitizeHeaderValue('foo-bar')).toBe('foo-bar');
+        });
+
+        it('throws on a string containing CR', () => {
+            expect(() => utils.sanitizeHeaderValue('bad\rvalue')).toThrowError(
+                /Invalid header value \(contains CR\/LF\): "bad\rvalue"/
+            );
+        });
+
+        it('throws on a string containing LF', () => {
+            expect(() => utils.sanitizeHeaderValue('bad\nvalue')).toThrowError(
+                /Invalid header value \(contains CR\/LF\): "bad\nvalue"/
+            );
+        });
+
+        it('returns an array of strings when all entries are clean', () => {
+            const arr = ['one', 'two', 'three'];
+            expect(utils.sanitizeHeaderValue(arr)).toEqual(arr);
+        });
+
+        it('throws if any element in the array contains CRLF', () => {
+            expect(() =>
+                utils.sanitizeHeaderValue(['good', 'bad\nvalue', 'also-good'])
+            ).toThrowError(/Invalid header value \(contains CR\/LF\): "bad\nvalue"/);
+        });
+    });
+
+    describe('parseCustomHeaders()', () => {
+        it('returns an empty object when input is empty or falsy', () => {
+            expect(utils.parseCustomHeaders({})).toEqual({});
+            // @ts-expect-error testing falsy
+            expect(utils.parseCustomHeaders(null)).toEqual({});
+            // @ts-expect-error testing falsy
+            expect(utils.parseCustomHeaders(undefined)).toEqual({});
+        });
+
+        it('keeps a single safe header', () => {
+            const input = { 'X-Test': 'ok' };
+            expect(utils.parseCustomHeaders(input)).toEqual({ 'X-Test': 'ok' });
+        });
+
+        it('trims whitespace around header names', () => {
+            const input = { '  X-Trim  ': 'value' };
+            expect(utils.parseCustomHeaders(input)).toEqual({ 'X-Trim': 'value' });
+        });
+
+        it('filters out forbidden header names (case-insensitive)', () => {
+            const input = {
+                Host: 'example.com',
+                authorization: 'token',
+                CoOkIe: 'id=123',
+                ':METHOD': 'DELETE',
+                Good: 'yes',
+            };
+            expect(utils.parseCustomHeaders(input)).toEqual({ Good: 'yes' });
+        });
+
+        it('drops headers whose values contain CRLF', () => {
+            const input = {
+                'X-Bad': 'evil\r\ninject',
+                'X-Good': 'safe',
+            };
+            expect(utils.parseCustomHeaders(input)).toEqual({ 'X-Good': 'safe' });
+        });
+
+        it('drops entire header when array value has any bad entry', () => {
+            const input = {
+                'X-Mixed': ['clean', 'bad\nentry'],
+                'X-Also-Good': ['ok1', 'ok2'],
+            };
+            expect(utils.parseCustomHeaders(input)).toEqual({ 'X-Also-Good': ['ok1', 'ok2'] });
+        });
+
+        it('allows array values when all entries are clean', () => {
+            const input = {
+                'X-Array': ['one', 'two', 'three'],
+            };
+            expect(utils.parseCustomHeaders(input)).toEqual({ 'X-Array': ['one', 'two', 'three'] });
         });
     });
 });
