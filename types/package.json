@@ -1,7 +1,7 @@
 {
     "name": "@binance/types",
     "description": "Shared types for Binance connectors",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "types": "./dist/index.d.ts",
     "exports": {
         ".": {
@@ -33,6 +33,6 @@
         "typescript": "^5.7.2"
     },
     "dependencies": {
-        "@binance/common": "1.0.2"
+        "@binance/common": "1.2.0"
     }
 }
