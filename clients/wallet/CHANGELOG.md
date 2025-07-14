@@ -1,5 +1,11 @@
 # Changelog
 
+## 7.0.0 - 2025-07-14
+
+### Changed (1)
+
+- Modified response for `allCoinsInformation()` method (`GET /sapi/v1/capital/config/getall`):
+
 ## 6.0.3 - 2025-07-08
 
 ### Changed (1)

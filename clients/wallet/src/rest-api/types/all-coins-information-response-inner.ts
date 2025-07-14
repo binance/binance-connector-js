@@ -38,34 +38,22 @@ export interface AllCoinsInformationResponseInner {
     depositAllEnable?: boolean;
     /**
      *
+     * @type {boolean}
+     * @memberof AllCoinsInformationResponseInner
+     */
+    withdrawAllEnable?: boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof AllCoinsInformationResponseInner
+     */
+    name?: string;
+    /**
+     *
      * @type {string}
      * @memberof AllCoinsInformationResponseInner
      */
     free?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof AllCoinsInformationResponseInner
-     */
-    freeze?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof AllCoinsInformationResponseInner
-     */
-    ipoable?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof AllCoinsInformationResponseInner
-     */
-    ipoing?: string;
-    /**
-     *
-     * @type {boolean}
-     * @memberof AllCoinsInformationResponseInner
-     */
-    isLegalMoney?: boolean;
     /**
      *
      * @type {string}
@@ -77,13 +65,25 @@ export interface AllCoinsInformationResponseInner {
      * @type {string}
      * @memberof AllCoinsInformationResponseInner
      */
-    name?: string;
+    freeze?: string;
     /**
      *
-     * @type {Array<AllCoinsInformationResponseInnerNetworkListInner>}
+     * @type {string}
      * @memberof AllCoinsInformationResponseInner
      */
-    networkList?: Array<AllCoinsInformationResponseInnerNetworkListInner>;
+    withdrawing?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof AllCoinsInformationResponseInner
+     */
+    ipoing?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof AllCoinsInformationResponseInner
+     */
+    ipoable?: string;
     /**
      *
      * @type {string}
@@ -95,17 +95,17 @@ export interface AllCoinsInformationResponseInner {
      * @type {boolean}
      * @memberof AllCoinsInformationResponseInner
      */
-    trading?: boolean;
+    isLegalMoney?: boolean;
     /**
      *
      * @type {boolean}
      * @memberof AllCoinsInformationResponseInner
      */
-    withdrawAllEnable?: boolean;
+    trading?: boolean;
     /**
      *
-     * @type {string}
+     * @type {Array<AllCoinsInformationResponseInnerNetworkListInner>}
      * @memberof AllCoinsInformationResponseInner
      */
-    withdrawing?: string;
+    networkList?: Array<AllCoinsInformationResponseInnerNetworkListInner>;
 }
