@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.1 - 2025-07-xx
+
+### Changed (2)
+
+- Fixed bug on `sendMessage` with response type on session requests.
+- Improved logging.
+
 ## 1.2.0 - 2025-07-08
 
 ### Added (2)

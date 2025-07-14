@@ -310,7 +310,7 @@ describe('WebsocketCommon', () => {
 
             jest.advanceTimersByTime(1000);
             expect(mockLogger.debug).toHaveBeenCalledWith(
-                'Waiting for pending requests to complete before disconnecting.'
+                `Waiting for pending requests to complete before disconnecting websocket on connection ${connection.id}.`
             );
 
             connection.pendingRequests.clear();
@@ -319,7 +319,9 @@ describe('WebsocketCommon', () => {
             await closePromise;
 
             expect(mockWs.close).toHaveBeenCalled();
-            expect(mockLogger.info).toHaveBeenCalledWith('Closing Websocket connection.');
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                `Closing Websocket connection on connection ${connection.id}.`
+            );
         });
 
         it('should force-close the connection after timeout if pending requests are not completed', async () => {
@@ -332,7 +334,7 @@ describe('WebsocketCommon', () => {
             await closePromise;
 
             expect(mockLogger.warn).toHaveBeenCalledWith(
-                'Force-closing connection after 30 seconds.'
+                `Force-closing websocket connection after 30 seconds on connection ${connection.id}.`
             );
             expect(mockWs.close).toHaveBeenCalled();
         });
@@ -384,7 +386,7 @@ describe('WebsocketCommon', () => {
             await Promise.resolve();
 
             expect(debugSpy).toHaveBeenCalledWith(
-                `Session re-logon with connection id: ${connection.id}`,
+                `Session re-logon on connection ${connection.id}`,
                 expect.objectContaining({ method: 'POST', params: { foo: 'bar' } })
             );
 
@@ -407,7 +409,7 @@ describe('WebsocketCommon', () => {
             await Promise.resolve();
 
             expect(errorSpy).toHaveBeenCalledWith(
-                `Session re-logon with connection id ${connection.id} failed:`,
+                `Session re-logon on connection ${connection.id} failed:`,
                 expect.any(Error)
             );
             expect(connection.isSessionLoggedOn).toBe(false);
@@ -1296,7 +1298,7 @@ describe('WebsocketCommon', () => {
             expect(oldConnection.removeAllListeners).toHaveBeenCalled();
             expect(clearTimersSpy).toHaveBeenCalled();
             expect(mockLogger.warn).toHaveBeenCalledWith(
-                'Force-closing connection after 30 seconds.'
+                `Force-closing websocket connection after 30 seconds on connection ${wsCommon.connectionPool[0].id}.`
             );
         });
     });
@@ -2041,7 +2043,7 @@ describe('WebsocketStreamsBase', () => {
 
             expect(wsStreams.connectionPool[0].pendingSubscriptions).toEqual(['stream1']);
             expect(mockLogger.info).toHaveBeenCalledWith(
-                'Connection is not ready. Queuing subscription for streams: stream1'
+                `Connection ${wsStreams.connectionPool[0].id} is not ready. Queuing subscription for streams: stream1`
             );
         });
 

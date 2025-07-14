@@ -271,13 +271,17 @@ export class WebsocketCommon extends WebsocketEventEmitter {
     ): Promise<void> {
         if (!WebsocketConnectionToClose || !connection) return;
 
-        this.logger.debug('Waiting for pending requests to complete before disconnecting.');
+        this.logger.debug(
+            `Waiting for pending requests to complete before disconnecting websocket on connection ${connection.id}.`
+        );
 
         const closePromise = new Promise<void>((resolve) => {
             this.scheduleTimer(
                 WebsocketConnectionToClose,
                 () => {
-                    this.logger.warn('Force-closing connection after 30 seconds.');
+                    this.logger.warn(
+                        `Force-closing websocket connection after 30 seconds on connection ${connection.id}.`
+                    );
                     resolve();
                 },
                 30000
@@ -287,7 +291,9 @@ export class WebsocketCommon extends WebsocketEventEmitter {
                 WebsocketConnectionToClose,
                 () => {
                     if (connection.pendingRequests.size === 0) {
-                        this.logger.debug('All pending requests completed, closing connection.');
+                        this.logger.debug(
+                            `All pending requests completed, closing websocket connection on connection ${connection.id}.`
+                        );
                         resolve();
                     }
                 },
@@ -298,7 +304,7 @@ export class WebsocketCommon extends WebsocketEventEmitter {
 
         await closePromise;
 
-        this.logger.info('Closing Websocket connection.');
+        this.logger.info(`Closing Websocket connection on connection ${connection.id}.`);
         WebsocketConnectionToClose.close();
         this.cleanup(WebsocketConnectionToClose);
     }
@@ -320,7 +326,7 @@ export class WebsocketCommon extends WebsocketEventEmitter {
                 req.options
             );
 
-            this.logger.debug(`Session re-logon with connection id: ${connection.id}`, data);
+            this.logger.debug(`Session re-logon on connection ${connection.id}`, data);
 
             try {
                 await this.send(
@@ -330,12 +336,12 @@ export class WebsocketCommon extends WebsocketEventEmitter {
                     (this.configuration as ConfigurationWebsocketAPI).timeout,
                     connection
                 );
+                this.logger.debug(
+                    `Session re-logon on connection ${connection.id} was successful.`
+                );
                 connection.isSessionLoggedOn = true;
             } catch (err) {
-                this.logger.error(
-                    `Session re-logon with connection id ${connection.id} failed:`,
-                    err
-                );
+                this.logger.error(`Session re-logon on connection ${connection.id} failed:`, err);
             }
         }
     }
@@ -815,15 +821,15 @@ export class WebsocketAPIBase extends WebsocketCommon {
             throw new Error('Not connected');
         }
 
-        const connections: WebsocketConnection[] =
-            options.isSessionLogon || options.isSessionLogout
-                ? this.getAvailableConnections()
-                : [this.getConnection()];
+        const isSessionReq = options.isSessionLogon || options.isSessionLogout;
 
-        const skipAuth =
-            options.isSessionLogon || options.isSessionLogout
-                ? false
-                : this.configuration.autoSessionReLogon && connections[0].isSessionLoggedOn;
+        const connections: WebsocketConnection[] = isSessionReq
+            ? this.getAvailableConnections()
+            : [this.getConnection()];
+
+        const skipAuth = isSessionReq
+            ? false
+            : this.configuration.autoSessionReLogon && connections[0].isSessionLoggedOn;
 
         const data = buildWebsocketAPIMessage(
             this.configuration,
@@ -848,10 +854,7 @@ export class WebsocketAPIBase extends WebsocketCommon {
             )
         );
 
-        if (
-            (options.isSessionLogon || options.isSessionLogout) &&
-            this.configuration.autoSessionReLogon
-        ) {
+        if (isSessionReq && this.configuration.autoSessionReLogon) {
             connections.forEach((connection) => {
                 if (options.isSessionLogon) {
                     connection.isSessionLoggedOn = true;
@@ -863,7 +866,7 @@ export class WebsocketAPIBase extends WebsocketCommon {
             });
         }
 
-        return connections.length === 1 ? responses[0] : responses;
+        return connections.length === 1 && !isSessionReq ? responses[0] : responses;
     }
 }
 
@@ -1068,7 +1071,7 @@ export class WebsocketStreamsBase extends WebsocketCommon {
         connectionStreamMap.forEach((streams, connection) => {
             if (!this.isConnected(connection)) {
                 this.logger.info(
-                    `Connection is not ready. Queuing subscription for streams: ${streams}`
+                    `Connection ${connection.id} is not ready. Queuing subscription for streams: ${streams}`
                 );
                 connection.pendingSubscriptions?.push(...streams);
 
