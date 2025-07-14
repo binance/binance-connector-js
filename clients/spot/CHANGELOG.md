@@ -1,5 +1,15 @@
 # Changelog
 
+## 11.0.0 - 2025-07-14
+
+### Added (1)
+
+- Support session management for WebSocket API, with auto session re-logon (`autoSessionReLogon` option on `ConfigurationWebsocketAPI`).
+
+### Changed (1)
+
+- Update `@binance/common` library to version `1.2.1`.
+
 ## 10.0.1 - 2025-07-08
 
 ### Changed (1)

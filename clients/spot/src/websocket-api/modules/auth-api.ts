@@ -42,7 +42,7 @@ export interface AuthApiInterface {
      */
     sessionLogon(
         requestParameters?: SessionLogonRequest
-    ): Promise<WebsocketApiResponse<SessionLogonResponse>>;
+    ): Promise<WebsocketApiResponse<SessionLogonResponse>[]>;
 
     /**
      * Forget the API key previously authenticated.
@@ -61,7 +61,7 @@ export interface AuthApiInterface {
      */
     sessionLogout(
         requestParameters?: SessionLogoutRequest
-    ): Promise<WebsocketApiResponse<SessionLogoutResponse>>;
+    ): Promise<WebsocketApiResponse<SessionLogoutResponse>[]>;
 
     /**
      * Query the status of the WebSocket connection,
@@ -154,11 +154,11 @@ export class AuthApi implements AuthApiInterface {
      */
     public sessionLogon(
         requestParameters: SessionLogonRequest = {}
-    ): Promise<WebsocketApiResponse<SessionLogonResponse>> {
+    ): Promise<WebsocketApiResponse<SessionLogonResponse>[]> {
         return this.websocketBase.sendMessage<SessionLogonResponse>(
             '/session.logon'.slice(1),
             requestParameters as unknown as WebsocketSendMsgOptions,
-            { isSigned: true, withApiKey: false }
+            { isSigned: true, withApiKey: false, isSessionLogon: true }
         );
     }
 
@@ -179,11 +179,11 @@ export class AuthApi implements AuthApiInterface {
      */
     public sessionLogout(
         requestParameters: SessionLogoutRequest = {}
-    ): Promise<WebsocketApiResponse<SessionLogoutResponse>> {
+    ): Promise<WebsocketApiResponse<SessionLogoutResponse>[]> {
         return this.websocketBase.sendMessage<SessionLogoutResponse>(
             '/session.logout'.slice(1),
             requestParameters as unknown as WebsocketSendMsgOptions,
-            { isSigned: false, withApiKey: false }
+            { isSigned: false, withApiKey: false, isSessionLogout: true }
         );
     }
 

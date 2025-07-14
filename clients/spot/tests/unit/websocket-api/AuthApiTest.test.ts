@@ -111,12 +111,12 @@ describe('AuthApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
-                    expect(response.rateLimits).toEqual(mockResponse.rateLimits);
+                    expect(response[0].data).toEqual(mockResponse.result ?? mockResponse.response);
+                    expect(response[0].rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith(
                         '/session.logon'.slice(1),
                         expect.any(Object),
-                        { isSigned: true, withApiKey: false }
+                        { isSigned: true, withApiKey: false, isSessionLogon: true }
                     );
                     resolveTest(true);
                 } catch (error) {
@@ -267,12 +267,12 @@ describe('AuthApi', () => {
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
-                    expect(response.rateLimits).toEqual(mockResponse.rateLimits);
+                    expect(response[0].data).toEqual(mockResponse.result ?? mockResponse.response);
+                    expect(response[0].rateLimits).toEqual(mockResponse.rateLimits);
                     expect(sendMsgSpy).toHaveBeenCalledWith(
                         '/session.logout'.slice(1),
                         expect.any(Object),
-                        { isSigned: false, withApiKey: false }
+                        { isSigned: false, withApiKey: false, isSessionLogout: true }
                     );
                     resolveTest(true);
                 } catch (error) {

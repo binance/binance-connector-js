@@ -466,12 +466,12 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Log in with API key
      * @param {SessionLogonRequest} requestParameters Request parameters.
-     * @returns Promise<WebsocketApiResponse<SessionLogonResponse>>
+     * @returns Promise<WebsocketApiResponse<SessionLogonResponse>[]>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/authentication-requests#log-in-with-api-key-signed Binance API Documentation}
      */
     sessionLogon(
         requestParameters: SessionLogonRequest = {}
-    ): Promise<WebsocketApiResponse<SessionLogonResponse>> {
+    ): Promise<WebsocketApiResponse<SessionLogonResponse>[]> {
         return this.authApi.sessionLogon(requestParameters);
     }
 
@@ -486,12 +486,12 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Log out of the session
      * @param {SessionLogoutRequest} requestParameters Request parameters.
-     * @returns Promise<WebsocketApiResponse<SessionLogoutResponse>>
+     * @returns Promise<WebsocketApiResponse<SessionLogoutResponse>[]>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/authentication-requests#log-out-of-the-session Binance API Documentation}
      */
     sessionLogout(
         requestParameters: SessionLogoutRequest = {}
-    ): Promise<WebsocketApiResponse<SessionLogoutResponse>> {
+    ): Promise<WebsocketApiResponse<SessionLogoutResponse>[]> {
         return this.authApi.sessionLogout(requestParameters);
     }
 

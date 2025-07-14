@@ -15,11 +15,13 @@ async function sessionLogout() {
 
         const response = await connection.sessionLogout();
 
-        const rateLimits = response.rateLimits!;
-        console.log('sessionLogout() rate limits:', rateLimits);
+        response.forEach((res) => {
+            const rateLimits = res.rateLimits!;
+            console.log('sessionLogout() rate limits:', rateLimits);
 
-        const data = response.data;
-        console.log('sessionLogout() response:', data);
+            const data = res.data;
+            console.log('sessionLogout() response:', data);
+        });
     } catch (error) {
         console.error('sessionLogout() error:', error);
     } finally {
