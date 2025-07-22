@@ -961,7 +961,7 @@ export class WebsocketStreamsBase extends WebsocketCommon {
             params: streams,
             id: id && /^[0-9a-f]{32}$/.test(id) ? id : randomString(),
         };
-        this.logger.info('SUBSCRIBE', payload);
+        this.logger.debug('SUBSCRIBE', payload);
         this.send(JSON.stringify(payload), undefined, false, 0, connection);
     }
 
@@ -1108,7 +1108,7 @@ export class WebsocketStreamsBase extends WebsocketCommon {
                     params: [stream],
                     id: id && /^[0-9a-f]{32}$/.test(id) ? id : randomString(),
                 };
-                this.logger.info('UNSUBSCRIBE', payload);
+                this.logger.debug('UNSUBSCRIBE', payload);
                 this.send(JSON.stringify(payload), undefined, false, 0, connection);
 
                 this.streamConnectionMap.delete(stream);

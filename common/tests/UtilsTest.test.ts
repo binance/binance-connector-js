@@ -16,12 +16,15 @@ import {
     parseRateLimitHeaders,
     sendRequest,
     replaceWebsocketStreamsPlaceholders,
+    normalizeScientificNumbers,
     SPOT_REST_API_PROD_URL,
     ConfigurationWebsocketAPI,
     WebsocketSendMsgOptions,
+    Logger,
 } from '../src';
 import { fail } from 'assert';
 
+jest.mock('../src/logger');
 jest.mock('axios');
 const mockAxios = axios as jest.Mocked<typeof axios>;
 
@@ -1028,7 +1031,7 @@ describe('Utility Functions', () => {
             const payload: WebsocketSendMsgOptions = { a: 1, b: undefined, c: '' };
             const msg = utils.buildWebsocketAPIMessage(config, 'm', payload, {}, false);
 
-            expect(msg.params).toStrictEqual({ a: 1 });
+            expect(msg.params).toStrictEqual({ a: '1' });
         });
 
         it('includes apiKey when withApiKey and not skipAuth', () => {
@@ -1126,6 +1129,16 @@ describe('Utility Functions', () => {
     });
 
     describe('parseCustomHeaders()', () => {
+        beforeEach(() => {
+            (Logger.getInstance as jest.MockedFunction<typeof Logger.getInstance>).mockReturnValue({
+                info: jest.fn(),
+                error: jest.fn(),
+                warn: jest.fn(),
+                debug: jest.fn(),
+                getInstance: jest.fn().mockReturnThis(),
+            } as unknown as jest.Mocked<Logger>);
+        });
+
         it('returns an empty object when input is empty or falsy', () => {
             expect(utils.parseCustomHeaders({})).toEqual({});
             // @ts-expect-error testing falsy
@@ -1176,6 +1189,112 @@ describe('Utility Functions', () => {
                 'X-Array': ['one', 'two', 'three'],
             };
             expect(utils.parseCustomHeaders(input)).toEqual({ 'X-Array': ['one', 'two', 'three'] });
+        });
+    });
+
+    describe('normalizeScientificNumbers()', () => {
+        it('leaves normal numbers unchanged', () => {
+            expect(normalizeScientificNumbers(12345)).toBe('12345');
+            expect(normalizeScientificNumbers(0.1234)).toBe('0.1234');
+            expect(normalizeScientificNumbers(-999999)).toBe('-999999');
+        });
+
+        it('converts small scientific notation to correct decimal strings', () => {
+            expect(normalizeScientificNumbers(1.5e-8)).toBe('0.000000015');
+            expect(normalizeScientificNumbers(-2.3e-7)).toBe('-0.00000023');
+        });
+
+        it('converts large scientific notation to correct decimal string', () => {
+            expect(normalizeScientificNumbers(1e21)).toBe('1000000000000000000000');
+            expect(normalizeScientificNumbers(2.1e22)).toBe('21000000000000000000000');
+            expect(normalizeScientificNumbers(-5.2e24)).toBe('-5200000000000000000000000');
+        });
+
+        it('handles positive and negative zero correctly', () => {
+            expect(normalizeScientificNumbers(0)).toBe('0');
+            expect(normalizeScientificNumbers(-0)).toBe('0');
+        });
+
+        it('handles numbers at the thresholds', () => {
+            expect(normalizeScientificNumbers(1e-7)).toBe('0.0000001');
+            expect(normalizeScientificNumbers(1e21)).toBe('1000000000000000000000');
+        });
+
+        it('handles nested objects', () => {
+            const input = {
+                price: 1.2e-7,
+                quantity: 100,
+                metadata: {
+                    fee: 4.44e-8,
+                    level: 5,
+                    tag: 'limit',
+                },
+            };
+            const expected = {
+                price: '0.00000012',
+                quantity: '100',
+                metadata: {
+                    fee: '0.0000000444',
+                    level: '5',
+                    tag: 'limit',
+                },
+            };
+            expect(normalizeScientificNumbers(input)).toEqual(expected);
+        });
+
+        it('handles arrays', () => {
+            const input = [1e-8, 2, 3.5e22, 'ok'];
+            const expected = ['0.00000001', '2', '35000000000000000000000', 'ok'];
+            expect(normalizeScientificNumbers(input)).toEqual(expected);
+        });
+
+        it('handles deep nesting (objects in arrays in objects)', () => {
+            const input = {
+                orders: [
+                    { price: 2e-8, qty: 5 },
+                    { price: 5.5e21, qty: 7 },
+                ],
+                status: 'active',
+            };
+            const expected = {
+                orders: [
+                    { price: '0.00000002', qty: '5' },
+                    { price: '5500000000000000000000', qty: '7' },
+                ],
+                status: 'active',
+            };
+            expect(normalizeScientificNumbers(input)).toEqual(expected);
+        });
+
+        it('leaves strings, booleans, null, and undefined untouched', () => {
+            expect(normalizeScientificNumbers('0.00001')).toBe('0.00001');
+            expect(normalizeScientificNumbers(true)).toBe(true);
+            expect(normalizeScientificNumbers(false)).toBe(false);
+            expect(normalizeScientificNumbers(null)).toBeNull();
+            expect(normalizeScientificNumbers(undefined)).toBeUndefined();
+        });
+
+        it('handles empty arrays and objects', () => {
+            expect(normalizeScientificNumbers([])).toEqual([]);
+            expect(normalizeScientificNumbers({})).toEqual({});
+        });
+
+        it('handles mixed types in arrays and objects', () => {
+            const input = [0.000000015, 2.2e22, 'string', null, { value: 7.89e-8, status: true }];
+            const expected = [
+                '0.000000015',
+                '22000000000000000000000',
+                'string',
+                null,
+                { value: '0.0000000789', status: true },
+            ];
+            expect(normalizeScientificNumbers(input)).toEqual(expected);
+        });
+
+        it('leaves NaN and Infinity unchanged', () => {
+            expect(normalizeScientificNumbers(NaN)).toBe(NaN);
+            expect(normalizeScientificNumbers(Infinity)).toBe(Infinity);
+            expect(normalizeScientificNumbers(-Infinity)).toBe(-Infinity);
         });
     });
 });

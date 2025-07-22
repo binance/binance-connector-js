@@ -31,6 +31,7 @@ import {
     WebsocketSendMsgOptions,
     WebsocketSendMsgConfig,
     ConfigurationWebsocketAPI,
+    Logger,
 } from '.';
 
 /**
@@ -326,9 +327,83 @@ export const setSearchParams = function (url: URL, ...objects: Record<string, un
     url.search = searchParams.toString();
 };
 
+/**
+ * Converts a URL object to a full path string, including pathname, search parameters, and hash.
+ *
+ * @param url The URL object to convert to a path string.
+ * @returns A complete path string representation of the URL.
+ */
 export const toPathString = function (url: URL) {
     return url.pathname + url.search + url.hash;
 };
+
+/**
+ * A type utility that transforms numbers in a type to their string representation when in scientific notation,
+ * while preserving the structure of arrays and objects.
+ *
+ * @template T The input type to be transformed
+ * @returns A type where numbers potentially become strings, maintaining the original type's structure
+ */
+type ScientificToString<T> = T extends number
+    ? string | number
+    : T extends Array<infer U>
+      ? Array<ScientificToString<U>>
+      : T extends object
+        ? { [K in keyof T]: ScientificToString<T[K]> }
+        : T;
+
+/**
+ * Normalizes scientific notation numbers in an object or array to a fixed number of decimal places.
+ *
+ * This function recursively processes objects, arrays, and numbers, converting scientific notation
+ * to a fixed decimal representation. Non-numeric values are left unchanged.
+ *
+ * @template T The type of the input object or value
+ * @param obj The object, array, or value to normalize
+ * @returns A new object or value with scientific notation numbers normalized
+ */
+export function normalizeScientificNumbers<T>(obj: T): ScientificToString<T> {
+    if (Array.isArray(obj)) {
+        return obj.map((item) => normalizeScientificNumbers(item)) as ScientificToString<T>;
+    } else if (typeof obj === 'object' && obj !== null) {
+        const result = {} as Record<string, unknown>;
+        for (const key of Object.keys(obj)) {
+            result[key] = normalizeScientificNumbers((obj as Record<string, unknown>)[key]);
+        }
+        return result as ScientificToString<T>;
+    } else if (typeof obj === 'number') {
+        if (!Number.isFinite(obj)) return obj as ScientificToString<T>;
+
+        const abs = Math.abs(obj);
+        if (abs === 0 || (abs >= 1e-6 && abs < 1e21)) return String(obj) as ScientificToString<T>;
+
+        const isNegative = obj < 0;
+        const [rawMantissa, rawExponent] = abs.toExponential().split('e');
+        const exponent = +rawExponent;
+        const digits = rawMantissa.replace('.', '');
+
+        if (exponent < 0) {
+            const zeros = '0'.repeat(Math.abs(exponent) - 1);
+            return ((isNegative ? '-' : '') + '0.' + zeros + digits) as ScientificToString<T>;
+        } else {
+            const pad = exponent - (digits.length - 1);
+
+            if (pad >= 0) {
+                return ((isNegative ? '-' : '') +
+                    digits +
+                    '0'.repeat(pad)) as ScientificToString<T>;
+            } else {
+                const point = digits.length + pad;
+                return ((isNegative ? '-' : '') +
+                    digits.slice(0, point) +
+                    '.' +
+                    digits.slice(point)) as ScientificToString<T>;
+            }
+        }
+    } else {
+        return obj as ScientificToString<T>;
+    }
+}
 
 /**
  * Determines whether a request should be retried based on the provided error.
@@ -570,7 +645,7 @@ export const sendRequest = function <T>(
         method,
         ...configuration?.baseOptions,
     };
-    const localVarQueryParameter = { ...params };
+    const localVarQueryParameter = { ...normalizeScientificNumbers(params) };
 
     if (options.isSigned) {
         const timestamp = getTimestamp();
@@ -701,11 +776,11 @@ export function buildWebsocketAPIMessage(
     payload: WebsocketSendMsgOptions,
     options: WebsocketSendMsgConfig,
     skipAuth: boolean = false
-) {
+): { id: string; method: string; params: Record<string, unknown> } {
     const id = payload.id && /^[0-9a-f]{32}$/.test(payload.id) ? payload.id : randomString();
     delete payload.id;
 
-    let params = removeEmptyValue(payload);
+    let params = normalizeScientificNumbers(removeEmptyValue(payload));
     if ((options.withApiKey || options.isSigned) && !skipAuth) params.apiKey = configuration.apiKey;
 
     if (options.isSigned) {
@@ -752,7 +827,7 @@ export function parseCustomHeaders(
     for (const [rawName, rawValue] of Object.entries(headers || {})) {
         const name = rawName.trim();
         if (forbidden.has(name.toLowerCase())) {
-            console.warn(`Dropping forbidden header: ${name}`);
+            Logger.getInstance().warn(`Dropping forbidden header: ${name}`);
             continue;
         }
 

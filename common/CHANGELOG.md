@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.2 - 2025-07-22
+
+### Changed (2)
+
+- Fixed bug with scientific numbers representation.
+- Use `LOG_LEVEL` environment variable to override log level.
+
 ## 1.2.1 - 2025-07-14
 
 ### Changed (2)

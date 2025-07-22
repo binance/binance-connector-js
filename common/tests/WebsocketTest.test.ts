@@ -2061,15 +2061,15 @@ describe('WebsocketStreamsBase', () => {
             jest.advanceTimersByTime(1000);
             wsStreams.subscribe('stream3');
 
-            expect(mockLogger.info).toHaveBeenCalledTimes(3);
-            expect(mockLogger.info).toHaveBeenCalledWith('SUBSCRIBE', expect.any(Object));
+            expect(mockLogger.debug).toHaveBeenCalledTimes(3);
+            expect(mockLogger.debug).toHaveBeenCalledWith('SUBSCRIBE', expect.any(Object));
         });
 
         it('should send subscription payload for active connections with a custom id', () => {
             wsStreams.subscribe('stream1', 'b72e4deb66bf22b97b6193f688d23315');
 
-            expect(mockLogger.info).toHaveBeenCalledTimes(1);
-            expect(mockLogger.info).toHaveBeenCalledWith('SUBSCRIBE', {
+            expect(mockLogger.debug).toHaveBeenCalledTimes(1);
+            expect(mockLogger.debug).toHaveBeenCalledWith('SUBSCRIBE', {
                 id: 'b72e4deb66bf22b97b6193f688d23315',
                 method: 'SUBSCRIBE',
                 params: ['stream1'],
@@ -2087,7 +2087,7 @@ describe('WebsocketStreamsBase', () => {
 
         it('should handle empty subscriptions gracefully', () => {
             wsStreams.subscribe([]);
-            expect(mockLogger.info).not.toHaveBeenCalledWith('SUBSCRIBE', expect.any(Object));
+            expect(mockLogger.debug).not.toHaveBeenCalledWith('SUBSCRIBE', expect.any(Object));
         });
 
         it('should not send duplicate subscription requests for the same stream', () => {
@@ -2095,7 +2095,7 @@ describe('WebsocketStreamsBase', () => {
             wsStreams.subscribe('stream1');
 
             expect(wsStreams['streamConnectionMap'].get('stream1')).toBeDefined();
-            expect(mockLogger.info).toHaveBeenCalledTimes(1);
+            expect(mockLogger.debug).toHaveBeenCalledTimes(1);
         });
     });
 
@@ -2108,7 +2108,7 @@ describe('WebsocketStreamsBase', () => {
 
             wsStreams.unsubscribe('stream1');
 
-            expect(mockLogger.info).toHaveBeenCalledWith('UNSUBSCRIBE', expect.any(Object));
+            expect(mockLogger.debug).toHaveBeenCalledWith('UNSUBSCRIBE', expect.any(Object));
             expect(wsStreams['streamConnectionMap'].has('stream1')).toBe(false);
         });
 
@@ -2120,7 +2120,7 @@ describe('WebsocketStreamsBase', () => {
 
             wsStreams.unsubscribe('stream1', 'b72e4deb66bf22b97b6193f688d23315');
 
-            expect(mockLogger.info).toHaveBeenCalledWith('UNSUBSCRIBE', {
+            expect(mockLogger.debug).toHaveBeenCalledWith('UNSUBSCRIBE', {
                 id: 'b72e4deb66bf22b97b6193f688d23315',
                 method: 'UNSUBSCRIBE',
                 params: ['stream1'],
@@ -2236,7 +2236,7 @@ describe('WebsocketStreamsBase', () => {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             (wsStreams as any).sendSubscriptionPayload(connectionPool[0], streams);
 
-            expect(wsStreams.logger.info).toHaveBeenCalledWith('SUBSCRIBE', {
+            expect(wsStreams.logger.debug).toHaveBeenCalledWith('SUBSCRIBE', {
                 method: 'SUBSCRIBE',
                 params: streams,
                 id: expect.any(String),
@@ -2264,7 +2264,7 @@ describe('WebsocketStreamsBase', () => {
                 'b72e4deb66bf22b97b6193f688d23315'
             );
 
-            expect(wsStreams.logger.info).toHaveBeenCalledWith('SUBSCRIBE', {
+            expect(wsStreams.logger.debug).toHaveBeenCalledWith('SUBSCRIBE', {
                 method: 'SUBSCRIBE',
                 params: streams,
                 id: 'b72e4deb66bf22b97b6193f688d23315',
