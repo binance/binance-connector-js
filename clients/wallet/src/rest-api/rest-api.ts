@@ -55,9 +55,12 @@ import type {
 import type { GetSymbolsDelistScheduleForSpotRequest } from './modules/others-api';
 import type {
     BrokerWithdrawRequest,
+    CheckQuestionnaireRequirementsRequest,
     DepositHistoryTravelRuleRequest,
+    FetchAddressVerificationListRequest,
     SubmitDepositQuestionnaireRequest,
     SubmitDepositQuestionnaireTravelRuleRequest,
+    VaspListRequest,
     WithdrawHistoryV1Request,
     WithdrawHistoryV2Request,
     WithdrawTravelRuleRequest,
@@ -101,11 +104,12 @@ import type {
 import type { GetSymbolsDelistScheduleForSpotResponse, SystemStatusResponse } from './types';
 import type {
     BrokerWithdrawResponse,
+    CheckQuestionnaireRequirementsResponse,
     DepositHistoryTravelRuleResponse,
     FetchAddressVerificationListResponse,
-    OnboardedVaspListResponse,
     SubmitDepositQuestionnaireResponse,
     SubmitDepositQuestionnaireTravelRuleResponse,
+    VaspListResponse,
     WithdrawHistoryV1Response,
     WithdrawHistoryV2Response,
     WithdrawTravelRuleResponse,
@@ -828,6 +832,29 @@ export class RestAPI {
     }
 
     /**
+     * This API will return user-specific Travel Rule questionnaire requirement information in reference to the current API key.
+     *
+     * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
+     *
+     * Weight: 18000
+     * Request limit: 10 requests per second
+     * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
+     * limit is 180000/second. Response from the endpoint contains header
+     * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
+     *
+     * @summary Check Questionnaire Requirements (for local entities that require travel rule) (supporting network) (USER_DATA)
+     * @param {CheckQuestionnaireRequirementsRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<CheckQuestionnaireRequirementsResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/questionnaire-requirements Binance API Documentation}
+     */
+    checkQuestionnaireRequirements(
+        requestParameters: CheckQuestionnaireRequirementsRequest = {}
+    ): Promise<RestApiResponse<CheckQuestionnaireRequirementsResponse>> {
+        return this.travelRuleApi.checkQuestionnaireRequirements(requestParameters);
+    }
+
+    /**
      * Fetch deposit history for local entities that required travel rule.
      *
      * Please notice the default `startTime` and `endTime` to make sure that time interval is within
@@ -853,32 +880,15 @@ export class RestAPI {
      * Weight: 10
      *
      * @summary Fetch address verification list (USER_DATA)
+     * @param {FetchAddressVerificationListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<FetchAddressVerificationListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/travel-rule/address-verification-list Binance API Documentation}
      */
-    fetchAddressVerificationList(): Promise<RestApiResponse<FetchAddressVerificationListResponse>> {
-        return this.travelRuleApi.fetchAddressVerificationList();
-    }
-
-    /**
-     * Fetch the onboarded VASP list for local entities that required travel rule.
-     *
-     * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-     *
-     * Weight: 18000
-     * Request limit: 10 requests per second
-     * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-     * limit is 180000/second. Response from the endpoint contains header
-     * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
-     *
-     * @summary Onboarded VASP list (for local entities that require travel rule) (supporting network) (USER_DATA)
-     * @returns {Promise<RestApiResponse<OnboardedVaspListResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/Onboarded-VASP-list Binance API Documentation}
-     */
-    onboardedVaspList(): Promise<RestApiResponse<OnboardedVaspListResponse>> {
-        return this.travelRuleApi.onboardedVaspList();
+    fetchAddressVerificationList(
+        requestParameters: FetchAddressVerificationListRequest = {}
+    ): Promise<RestApiResponse<FetchAddressVerificationListResponse>> {
+        return this.travelRuleApi.fetchAddressVerificationList(requestParameters);
     }
 
     /**
@@ -923,6 +933,27 @@ export class RestAPI {
         requestParameters: SubmitDepositQuestionnaireTravelRuleRequest
     ): Promise<RestApiResponse<SubmitDepositQuestionnaireTravelRuleResponse>> {
         return this.travelRuleApi.submitDepositQuestionnaireTravelRule(requestParameters);
+    }
+
+    /**
+     * Fetch the VASP list for local entities.
+     *
+     * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
+     *
+     * Weight: 18000
+     * Request limit: 10 requests per second
+     * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
+     * limit is 180000/second. Response from the endpoint contains header
+     * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
+     *
+     * @summary VASP list (for local entities that require travel rule) (supporting network) (USER_DATA)
+     * @param {VaspListRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<VaspListResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/onboarded-vasp-list Binance API Documentation}
+     */
+    vaspList(requestParameters: VaspListRequest = {}): Promise<RestApiResponse<VaspListResponse>> {
+        return this.travelRuleApi.vaspList(requestParameters);
     }
 
     /**

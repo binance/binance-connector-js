@@ -24,6 +24,7 @@ import type {
     GetDownloadIdForOptionTransactionHistoryResponse,
     GetOptionTransactionHistoryDownloadLinkByIdResponse,
     OptionAccountInformationResponse,
+    OptionMarginAccountInformationResponse,
 } from '../types';
 
 /**
@@ -213,6 +214,33 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
                 timeUnit: _timeUnit,
             };
         },
+        /**
+         * Get current account information.
+         *
+         * Weight: 3
+         *
+         * @summary Option Margin Account Information (USER_DATA)
+         * @param {number} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        optionMarginAccountInformation: async (recvWindow?: number): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/eapi/v1/marginAccount',
+                method: 'GET',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
     };
 };
 
@@ -282,6 +310,20 @@ export interface AccountApiInterface {
     optionAccountInformation(
         requestParameters?: OptionAccountInformationRequest
     ): Promise<RestApiResponse<OptionAccountInformationResponse>>;
+    /**
+     * Get current account information.
+     *
+     * Weight: 3
+     *
+     * @summary Option Margin Account Information (USER_DATA)
+     * @param {OptionMarginAccountInformationRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApiInterface
+     */
+    optionMarginAccountInformation(
+        requestParameters?: OptionMarginAccountInformationRequest
+    ): Promise<RestApiResponse<OptionMarginAccountInformationResponse>>;
 }
 
 /**
@@ -388,6 +430,19 @@ export interface OptionAccountInformationRequest {
      *
      * @type {number}
      * @memberof AccountApiOptionAccountInformation
+     */
+    readonly recvWindow?: number;
+}
+
+/**
+ * Request parameters for optionMarginAccountInformation operation in AccountApi.
+ * @interface OptionMarginAccountInformationRequest
+ */
+export interface OptionMarginAccountInformationRequest {
+    /**
+     *
+     * @type {number}
+     * @memberof AccountApiOptionMarginAccountInformation
      */
     readonly recvWindow?: number;
 }
@@ -523,6 +578,35 @@ export class AccountApi implements AccountApiInterface {
             requestParameters?.recvWindow
         );
         return sendRequest<OptionAccountInformationResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Get current account information.
+     *
+     * Weight: 3
+     *
+     * @summary Option Margin Account Information (USER_DATA)
+     * @param {OptionMarginAccountInformationRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<OptionMarginAccountInformationResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApi
+     * @see {@link https://developers.binance.com/docs/derivatives/option/account/Option-Margin-Account-Information Binance API Documentation}
+     */
+    public async optionMarginAccountInformation(
+        requestParameters: OptionMarginAccountInformationRequest = {}
+    ): Promise<RestApiResponse<OptionMarginAccountInformationResponse>> {
+        const localVarAxiosArgs =
+            await this.localVarAxiosParamCreator.optionMarginAccountInformation(
+                requestParameters?.recvWindow
+            );
+        return sendRequest<OptionMarginAccountInformationResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

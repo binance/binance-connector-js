@@ -1,5 +1,4 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
  * Binance Spot REST API
@@ -19,13 +18,178 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { ExchangeFiltersInner } from './exchange-filters-inner';
-
 /**
  *
  * @export
  * @interface ExchangeFilters
  */
-export interface ExchangeFilters extends Array<ExchangeFiltersInner> {}
+export interface ExchangeFilters {
+    /**
+     *
+     * @type {string}
+     * @memberof ExchangeFilters
+     */
+    filterType?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ExchangeFilters
+     */
+    minPrice?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ExchangeFilters
+     */
+    maxPrice?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ExchangeFilters
+     */
+    tickSize?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ExchangeFilters
+     */
+    multiplierUp?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ExchangeFilters
+     */
+    multiplierDown?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof ExchangeFilters
+     */
+    avgPriceMins?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof ExchangeFilters
+     */
+    bidMultiplierUp?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ExchangeFilters
+     */
+    bidMultiplierDown?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ExchangeFilters
+     */
+    askMultiplierUp?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ExchangeFilters
+     */
+    askMultiplierDown?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ExchangeFilters
+     */
+    minQty?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ExchangeFilters
+     */
+    maxQty?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ExchangeFilters
+     */
+    stepSize?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ExchangeFilters
+     */
+    minNotional?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof ExchangeFilters
+     */
+    applyToMarket?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof ExchangeFilters
+     */
+    applyMinToMarket?: boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof ExchangeFilters
+     */
+    maxNotional?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof ExchangeFilters
+     */
+    applyMaxToMarket?: boolean;
+    /**
+     *
+     * @type {number}
+     * @memberof ExchangeFilters
+     */
+    limit?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof ExchangeFilters
+     */
+    maxNumOrders?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof ExchangeFilters
+     */
+    maxNumAlgoOrders?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof ExchangeFilters
+     */
+    maxNumIcebergOrders?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof ExchangeFilters
+     */
+    maxPosition?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof ExchangeFilters
+     */
+    minTrailingAboveDelta?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof ExchangeFilters
+     */
+    maxTrailingAboveDelta?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof ExchangeFilters
+     */
+    minTrailingBelowDelta?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof ExchangeFilters
+     */
+    maxTrailingBelowDelta?: number;
+}

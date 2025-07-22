@@ -1,5 +1,4 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
  * Binance Wallet REST API
@@ -14,13 +13,16 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { OnboardedVaspListResponseInner } from './onboarded-vasp-list-response-inner';
-
 /**
  *
  * @export
- * @interface OnboardedVaspListResponse
+ * @interface CheckQuestionnaireRequirementsResponse
  */
-export interface OnboardedVaspListResponse extends Array<OnboardedVaspListResponseInner> {}
+export interface CheckQuestionnaireRequirementsResponse {
+    /**
+     *
+     * @type {string}
+     * @memberof CheckQuestionnaireRequirementsResponse
+     */
+    questionnaireCountryCode?: string;
+}

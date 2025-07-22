@@ -145,10 +145,10 @@ export interface ExchangeInfoResponseSymbolsInner {
     isMarginTradingAllowed?: boolean;
     /**
      *
-     * @type {ExchangeFilters}
+     * @type {Array<ExchangeFilters>}
      * @memberof ExchangeInfoResponseSymbolsInner
      */
-    filters?: ExchangeFilters;
+    filters?: Array<ExchangeFilters>;
     /**
      *
      * @type {Array<string>}

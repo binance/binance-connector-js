@@ -1375,15 +1375,120 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * |With `computeCommissionRates`|20|
          *
          * @summary Test new order
+         * @param {string} symbol
+         * @param {OrderTestSideEnum} side
+         * @param {OrderTestTypeEnum} type
          * @param {boolean} [computeCommissionRates] Default: `false`
+         * @param {OrderTestTimeInForceEnum} [timeInForce]
+         * @param {number} [quantity]
+         * @param {number} [quoteOrderQty]
+         * @param {number} [price]
+         * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
+         * @param {number} [strategyId]
+         * @param {number} [strategyType] The value cannot be less than `1000000`.
+         * @param {number} [stopPrice] Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
+         * @param {number} [trailingDelta] See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
+         * @param {number} [icebergQty] Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
+         * @param {OrderTestNewOrderRespTypeEnum} [newOrderRespType]
+         * @param {OrderTestSelfTradePreventionModeEnum} [selfTradePreventionMode]
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
-        orderTest: async (computeCommissionRates?: boolean): Promise<RequestArgs> => {
+        orderTest: async (
+            symbol: string,
+            side: OrderTestSideEnum,
+            type: OrderTestTypeEnum,
+            computeCommissionRates?: boolean,
+            timeInForce?: OrderTestTimeInForceEnum,
+            quantity?: number,
+            quoteOrderQty?: number,
+            price?: number,
+            newClientOrderId?: string,
+            strategyId?: number,
+            strategyType?: number,
+            stopPrice?: number,
+            trailingDelta?: number,
+            icebergQty?: number,
+            newOrderRespType?: OrderTestNewOrderRespTypeEnum,
+            selfTradePreventionMode?: OrderTestSelfTradePreventionModeEnum,
+            recvWindow?: number
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'symbol' is not null or undefined
+            assertParamExists('orderTest', 'symbol', symbol);
+            // verify required parameter 'side' is not null or undefined
+            assertParamExists('orderTest', 'side', side);
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('orderTest', 'type', type);
+
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (computeCommissionRates !== undefined && computeCommissionRates !== null) {
                 localVarQueryParameter['computeCommissionRates'] = computeCommissionRates;
+            }
+
+            if (symbol !== undefined && symbol !== null) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+
+            if (side !== undefined && side !== null) {
+                localVarQueryParameter['side'] = side;
+            }
+
+            if (type !== undefined && type !== null) {
+                localVarQueryParameter['type'] = type;
+            }
+
+            if (timeInForce !== undefined && timeInForce !== null) {
+                localVarQueryParameter['timeInForce'] = timeInForce;
+            }
+
+            if (quantity !== undefined && quantity !== null) {
+                localVarQueryParameter['quantity'] = quantity;
+            }
+
+            if (quoteOrderQty !== undefined && quoteOrderQty !== null) {
+                localVarQueryParameter['quoteOrderQty'] = quoteOrderQty;
+            }
+
+            if (price !== undefined && price !== null) {
+                localVarQueryParameter['price'] = price;
+            }
+
+            if (newClientOrderId !== undefined && newClientOrderId !== null) {
+                localVarQueryParameter['newClientOrderId'] = newClientOrderId;
+            }
+
+            if (strategyId !== undefined && strategyId !== null) {
+                localVarQueryParameter['strategyId'] = strategyId;
+            }
+
+            if (strategyType !== undefined && strategyType !== null) {
+                localVarQueryParameter['strategyType'] = strategyType;
+            }
+
+            if (stopPrice !== undefined && stopPrice !== null) {
+                localVarQueryParameter['stopPrice'] = stopPrice;
+            }
+
+            if (trailingDelta !== undefined && trailingDelta !== null) {
+                localVarQueryParameter['trailingDelta'] = trailingDelta;
+            }
+
+            if (icebergQty !== undefined && icebergQty !== null) {
+                localVarQueryParameter['icebergQty'] = icebergQty;
+            }
+
+            if (newOrderRespType !== undefined && newOrderRespType !== null) {
+                localVarQueryParameter['newOrderRespType'] = newOrderRespType;
+            }
+
+            if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
+                localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
+            }
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
             }
 
             let _timeUnit: TimeUnit | undefined;
@@ -1741,7 +1846,7 @@ export interface TradeApiInterface {
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApiInterface
      */
-    orderTest(requestParameters?: OrderTestRequest): Promise<RestApiResponse<OrderTestResponse>>;
+    orderTest(requestParameters: OrderTestRequest): Promise<RestApiResponse<OrderTestResponse>>;
     /**
      * Places an order using smart order routing (SOR).
      *
@@ -2971,11 +3076,123 @@ export interface OrderOcoRequest {
  */
 export interface OrderTestRequest {
     /**
+     *
+     * @type {string}
+     * @memberof TradeApiOrderTest
+     */
+    readonly symbol: string;
+
+    /**
+     *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiOrderTest
+     */
+    readonly side: OrderTestSideEnum;
+
+    /**
+     *
+     * @type {'MARKET' | 'LIMIT' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiOrderTest
+     */
+    readonly type: OrderTestTypeEnum;
+
+    /**
      * Default: `false`
      * @type {boolean}
      * @memberof TradeApiOrderTest
      */
     readonly computeCommissionRates?: boolean;
+
+    /**
+     *
+     * @type {'GTC' | 'IOC' | 'FOK' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiOrderTest
+     */
+    readonly timeInForce?: OrderTestTimeInForceEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderTest
+     */
+    readonly quantity?: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderTest
+     */
+    readonly quoteOrderQty?: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderTest
+     */
+    readonly price?: number;
+
+    /**
+     * A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
+     * @type {string}
+     * @memberof TradeApiOrderTest
+     */
+    readonly newClientOrderId?: string;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderTest
+     */
+    readonly strategyId?: number;
+
+    /**
+     * The value cannot be less than `1000000`.
+     * @type {number}
+     * @memberof TradeApiOrderTest
+     */
+    readonly strategyType?: number;
+
+    /**
+     * Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
+     * @type {number}
+     * @memberof TradeApiOrderTest
+     */
+    readonly stopPrice?: number;
+
+    /**
+     * See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
+     * @type {number}
+     * @memberof TradeApiOrderTest
+     */
+    readonly trailingDelta?: number;
+
+    /**
+     * Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
+     * @type {number}
+     * @memberof TradeApiOrderTest
+     */
+    readonly icebergQty?: number;
+
+    /**
+     *
+     * @type {'ACK' | 'RESULT' | 'FULL' | 'MARKET' | 'LIMIT'}
+     * @memberof TradeApiOrderTest
+     */
+    readonly newOrderRespType?: OrderTestNewOrderRespTypeEnum;
+
+    /**
+     *
+     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'DECREMENT' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiOrderTest
+     */
+    readonly selfTradePreventionMode?: OrderTestSelfTradePreventionModeEnum;
+
+    /**
+     * The value cannot be greater than `60000`
+     * @type {number}
+     * @memberof TradeApiOrderTest
+     */
+    readonly recvWindow?: number;
 }
 
 /**
@@ -3590,10 +3807,26 @@ export class TradeApi implements TradeApiInterface {
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#test-new-order-trade Binance API Documentation}
      */
     public async orderTest(
-        requestParameters: OrderTestRequest = {}
+        requestParameters: OrderTestRequest
     ): Promise<RestApiResponse<OrderTestResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.orderTest(
-            requestParameters?.computeCommissionRates
+            requestParameters?.symbol,
+            requestParameters?.side,
+            requestParameters?.type,
+            requestParameters?.computeCommissionRates,
+            requestParameters?.timeInForce,
+            requestParameters?.quantity,
+            requestParameters?.quoteOrderQty,
+            requestParameters?.price,
+            requestParameters?.newClientOrderId,
+            requestParameters?.strategyId,
+            requestParameters?.strategyType,
+            requestParameters?.stopPrice,
+            requestParameters?.trailingDelta,
+            requestParameters?.icebergQty,
+            requestParameters?.newOrderRespType,
+            requestParameters?.selfTradePreventionMode,
+            requestParameters?.recvWindow
         );
         return sendRequest<OrderTestResponse>(
             this.configuration,
@@ -3968,6 +4201,46 @@ export enum OrderOcoNewOrderRespTypeEnum {
 }
 
 export enum OrderOcoSelfTradePreventionModeEnum {
+    NONE = 'NONE',
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    DECREMENT = 'DECREMENT',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum OrderTestSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
+
+export enum OrderTestTypeEnum {
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+    STOP_LOSS = 'STOP_LOSS',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum OrderTestTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum OrderTestNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+}
+
+export enum OrderTestSelfTradePreventionModeEnum {
     NONE = 'NONE',
     EXPIRE_TAKER = 'EXPIRE_TAKER',
     EXPIRE_MAKER = 'EXPIRE_MAKER',

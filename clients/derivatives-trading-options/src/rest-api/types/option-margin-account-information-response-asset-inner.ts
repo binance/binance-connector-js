@@ -66,5 +66,5 @@ export interface OptionMarginAccountInformationResponseAssetInner {
      * @type {string}
      * @memberof OptionMarginAccountInformationResponseAssetInner
      */
-    lpProfit?: string;
+    adjustedEquity?: string;
 }

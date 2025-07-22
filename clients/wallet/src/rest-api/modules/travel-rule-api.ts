@@ -21,11 +21,12 @@ import {
 } from '@binance/common';
 import type {
     BrokerWithdrawResponse,
+    CheckQuestionnaireRequirementsResponse,
     DepositHistoryTravelRuleResponse,
     FetchAddressVerificationListResponse,
-    OnboardedVaspListResponse,
     SubmitDepositQuestionnaireResponse,
     SubmitDepositQuestionnaireTravelRuleResponse,
+    VaspListResponse,
     WithdrawHistoryV1Response,
     WithdrawHistoryV2Response,
     WithdrawTravelRuleResponse,
@@ -152,6 +153,39 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
+         * This API will return user-specific Travel Rule questionnaire requirement information in reference to the current API key.
+         *
+         * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
+         *
+         * Weight: 18000
+         * Request limit: 10 requests per second
+         * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
+         * limit is 180000/second. Response from the endpoint contains header
+         * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
+         *
+         * @summary Check Questionnaire Requirements (for local entities that require travel rule) (supporting network) (USER_DATA)
+         * @param {number} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        checkQuestionnaireRequirements: async (recvWindow?: number): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/localentity/questionnaire-requirements',
+                method: 'GET',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Fetch deposit history for local entities that required travel rule.
          *
          * Please notice the default `startTime` and `endTime` to make sure that time interval is within
@@ -249,45 +283,22 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 10
          *
          * @summary Fetch address verification list (USER_DATA)
+         * @param {number} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        fetchAddressVerificationList: async (): Promise<RequestArgs> => {
+        fetchAddressVerificationList: async (recvWindow?: number): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
 
             return {
                 endpoint: '/sapi/v1/addressVerify/list',
-                method: 'GET',
-                params: localVarQueryParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
-         * Fetch the onboarded VASP list for local entities that required travel rule.
-         *
-         * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-         *
-         * Weight: 18000
-         * Request limit: 10 requests per second
-         * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-         * limit is 180000/second. Response from the endpoint contains header
-         * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
-         *
-         * @summary Onboarded VASP list (for local entities that require travel rule) (supporting network) (USER_DATA)
-         *
-         * @throws {RequiredError}
-         */
-        onboardedVaspList: async (): Promise<RequestArgs> => {
-            const localVarQueryParameter: Record<string, unknown> = {};
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/sapi/v1/localentity/vasp',
                 method: 'GET',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
@@ -437,6 +448,39 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v1/localentity/deposit/provide-info',
                 method: 'PUT',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Fetch the VASP list for local entities.
+         *
+         * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
+         *
+         * Weight: 18000
+         * Request limit: 10 requests per second
+         * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
+         * limit is 180000/second. Response from the endpoint contains header
+         * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
+         *
+         * @summary VASP list (for local entities that require travel rule) (supporting network) (USER_DATA)
+         * @param {number} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        vaspList: async (recvWindow?: number): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/localentity/vasp',
+                method: 'GET',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
             };
@@ -774,6 +818,26 @@ export interface TravelRuleApiInterface {
         requestParameters: BrokerWithdrawRequest
     ): Promise<RestApiResponse<BrokerWithdrawResponse>>;
     /**
+     * This API will return user-specific Travel Rule questionnaire requirement information in reference to the current API key.
+     *
+     * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
+     *
+     * Weight: 18000
+     * Request limit: 10 requests per second
+     * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
+     * limit is 180000/second. Response from the endpoint contains header
+     * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
+     *
+     * @summary Check Questionnaire Requirements (for local entities that require travel rule) (supporting network) (USER_DATA)
+     * @param {CheckQuestionnaireRequirementsRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TravelRuleApiInterface
+     */
+    checkQuestionnaireRequirements(
+        requestParameters?: CheckQuestionnaireRequirementsRequest
+    ): Promise<RestApiResponse<CheckQuestionnaireRequirementsResponse>>;
+    /**
      * Fetch deposit history for local entities that required travel rule.
      *
      * Please notice the default `startTime` and `endTime` to make sure that time interval is within
@@ -796,28 +860,14 @@ export interface TravelRuleApiInterface {
      * Weight: 10
      *
      * @summary Fetch address verification list (USER_DATA)
+     * @param {FetchAddressVerificationListRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TravelRuleApiInterface
      */
-    fetchAddressVerificationList(): Promise<RestApiResponse<FetchAddressVerificationListResponse>>;
-    /**
-     * Fetch the onboarded VASP list for local entities that required travel rule.
-     *
-     * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-     *
-     * Weight: 18000
-     * Request limit: 10 requests per second
-     * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-     * limit is 180000/second. Response from the endpoint contains header
-     * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
-     *
-     * @summary Onboarded VASP list (for local entities that require travel rule) (supporting network) (USER_DATA)
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof TravelRuleApiInterface
-     */
-    onboardedVaspList(): Promise<RestApiResponse<OnboardedVaspListResponse>>;
+    fetchAddressVerificationList(
+        requestParameters?: FetchAddressVerificationListRequest
+    ): Promise<RestApiResponse<FetchAddressVerificationListResponse>>;
     /**
      * Submit questionnaire for brokers of local entities that require travel rule.
      * The questionnaire is only applies to transactions from un-hosted wallets or VASPs that are not
@@ -856,6 +906,24 @@ export interface TravelRuleApiInterface {
     submitDepositQuestionnaireTravelRule(
         requestParameters: SubmitDepositQuestionnaireTravelRuleRequest
     ): Promise<RestApiResponse<SubmitDepositQuestionnaireTravelRuleResponse>>;
+    /**
+     * Fetch the VASP list for local entities.
+     *
+     * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
+     *
+     * Weight: 18000
+     * Request limit: 10 requests per second
+     * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
+     * limit is 180000/second. Response from the endpoint contains header
+     * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
+     *
+     * @summary VASP list (for local entities that require travel rule) (supporting network) (USER_DATA)
+     * @param {VaspListRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TravelRuleApiInterface
+     */
+    vaspList(requestParameters?: VaspListRequest): Promise<RestApiResponse<VaspListResponse>>;
     /**
      * Fetch withdraw history for local entities that required travel rule.
      *
@@ -1020,6 +1088,19 @@ export interface BrokerWithdrawRequest {
 }
 
 /**
+ * Request parameters for checkQuestionnaireRequirements operation in TravelRuleApi.
+ * @interface CheckQuestionnaireRequirementsRequest
+ */
+export interface CheckQuestionnaireRequirementsRequest {
+    /**
+     *
+     * @type {number}
+     * @memberof TravelRuleApiCheckQuestionnaireRequirements
+     */
+    readonly recvWindow?: number;
+}
+
+/**
  * Request parameters for depositHistoryTravelRule operation in TravelRuleApi.
  * @interface DepositHistoryTravelRuleRequest
  */
@@ -1100,6 +1181,19 @@ export interface DepositHistoryTravelRuleRequest {
      * @memberof TravelRuleApiDepositHistoryTravelRule
      */
     readonly limit?: number;
+}
+
+/**
+ * Request parameters for fetchAddressVerificationList operation in TravelRuleApi.
+ * @interface FetchAddressVerificationListRequest
+ */
+export interface FetchAddressVerificationListRequest {
+    /**
+     *
+     * @type {number}
+     * @memberof TravelRuleApiFetchAddressVerificationList
+     */
+    readonly recvWindow?: number;
 }
 
 /**
@@ -1196,6 +1290,19 @@ export interface SubmitDepositQuestionnaireTravelRuleRequest {
      * @memberof TravelRuleApiSubmitDepositQuestionnaireTravelRule
      */
     readonly questionnaire: string;
+}
+
+/**
+ * Request parameters for vaspList operation in TravelRuleApi.
+ * @interface VaspListRequest
+ */
+export interface VaspListRequest {
+    /**
+     *
+     * @type {number}
+     * @memberof TravelRuleApiVaspList
+     */
+    readonly recvWindow?: number;
 }
 
 /**
@@ -1505,6 +1612,41 @@ export class TravelRuleApi implements TravelRuleApiInterface {
     }
 
     /**
+     * This API will return user-specific Travel Rule questionnaire requirement information in reference to the current API key.
+     *
+     * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
+     *
+     * Weight: 18000
+     * Request limit: 10 requests per second
+     * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
+     * limit is 180000/second. Response from the endpoint contains header
+     * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
+     *
+     * @summary Check Questionnaire Requirements (for local entities that require travel rule) (supporting network) (USER_DATA)
+     * @param {CheckQuestionnaireRequirementsRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<CheckQuestionnaireRequirementsResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TravelRuleApi
+     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/questionnaire-requirements Binance API Documentation}
+     */
+    public async checkQuestionnaireRequirements(
+        requestParameters: CheckQuestionnaireRequirementsRequest = {}
+    ): Promise<RestApiResponse<CheckQuestionnaireRequirementsResponse>> {
+        const localVarAxiosArgs =
+            await this.localVarAxiosParamCreator.checkQuestionnaireRequirements(
+                requestParameters?.recvWindow
+            );
+        return sendRequest<CheckQuestionnaireRequirementsResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
      * Fetch deposit history for local entities that required travel rule.
      *
      * Please notice the default `startTime` and `endTime` to make sure that time interval is within
@@ -1551,46 +1693,19 @@ export class TravelRuleApi implements TravelRuleApiInterface {
      * Weight: 10
      *
      * @summary Fetch address verification list (USER_DATA)
+     * @param {FetchAddressVerificationListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<FetchAddressVerificationListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TravelRuleApi
      * @see {@link https://developers.binance.com/docs/wallet/travel-rule/address-verification-list Binance API Documentation}
      */
-    public async fetchAddressVerificationList(): Promise<
-        RestApiResponse<FetchAddressVerificationListResponse>
-        > {
-        const localVarAxiosArgs =
-            await this.localVarAxiosParamCreator.fetchAddressVerificationList();
-        return sendRequest<FetchAddressVerificationListResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
+    public async fetchAddressVerificationList(
+        requestParameters: FetchAddressVerificationListRequest = {}
+    ): Promise<RestApiResponse<FetchAddressVerificationListResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.fetchAddressVerificationList(
+            requestParameters?.recvWindow
         );
-    }
-
-    /**
-     * Fetch the onboarded VASP list for local entities that required travel rule.
-     *
-     * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-     *
-     * Weight: 18000
-     * Request limit: 10 requests per second
-     * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-     * limit is 180000/second. Response from the endpoint contains header
-     * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
-     *
-     * @summary Onboarded VASP list (for local entities that require travel rule) (supporting network) (USER_DATA)
-     * @returns {Promise<RestApiResponse<OnboardedVaspListResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof TravelRuleApi
-     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/Onboarded-VASP-list Binance API Documentation}
-     */
-    public async onboardedVaspList(): Promise<RestApiResponse<OnboardedVaspListResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.onboardedVaspList();
-        return sendRequest<OnboardedVaspListResponse>(
+        return sendRequest<FetchAddressVerificationListResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
@@ -1668,6 +1783,40 @@ export class TravelRuleApi implements TravelRuleApiInterface {
                 requestParameters?.questionnaire
             );
         return sendRequest<SubmitDepositQuestionnaireTravelRuleResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Fetch the VASP list for local entities.
+     *
+     * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
+     *
+     * Weight: 18000
+     * Request limit: 10 requests per second
+     * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
+     * limit is 180000/second. Response from the endpoint contains header
+     * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
+     *
+     * @summary VASP list (for local entities that require travel rule) (supporting network) (USER_DATA)
+     * @param {VaspListRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<VaspListResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TravelRuleApi
+     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/onboarded-vasp-list Binance API Documentation}
+     */
+    public async vaspList(
+        requestParameters: VaspListRequest = {}
+    ): Promise<RestApiResponse<VaspListResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.vaspList(
+            requestParameters?.recvWindow
+        );
+        return sendRequest<VaspListResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

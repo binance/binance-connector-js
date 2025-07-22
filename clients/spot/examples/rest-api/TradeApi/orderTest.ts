@@ -1,4 +1,4 @@
-import { Spot, SPOT_REST_API_PROD_URL } from '../../../src';
+import { Spot, SpotRestAPI, SPOT_REST_API_PROD_URL } from '../../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -9,7 +9,11 @@ const client = new Spot({ configurationRestAPI });
 
 async function orderTest() {
     try {
-        const response = await client.restAPI.orderTest();
+        const response = await client.restAPI.orderTest({
+            symbol: 'BNBUSDT',
+            side: SpotRestAPI.OrderTestSideEnum.BUY,
+            type: SpotRestAPI.OrderTestTypeEnum.MARKET,
+        });
 
         const rateLimits = response.rateLimits!;
         console.log('orderTest() rate limits:', rateLimits);

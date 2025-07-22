@@ -927,9 +927,7 @@ export class RestAPI {
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#test-new-order-trade Binance API Documentation}
      */
-    orderTest(
-        requestParameters: OrderTestRequest = {}
-    ): Promise<RestApiResponse<OrderTestResponse>> {
+    orderTest(requestParameters: OrderTestRequest): Promise<RestApiResponse<OrderTestResponse>> {
         return this.tradeApi.orderTest(requestParameters);
     }
 

@@ -17,20 +17,24 @@ import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 import { TravelRuleApi } from '../../../src/rest-api';
 import {
     BrokerWithdrawRequest,
+    CheckQuestionnaireRequirementsRequest,
     DepositHistoryTravelRuleRequest,
+    FetchAddressVerificationListRequest,
     SubmitDepositQuestionnaireRequest,
     SubmitDepositQuestionnaireTravelRuleRequest,
+    VaspListRequest,
     WithdrawHistoryV1Request,
     WithdrawHistoryV2Request,
     WithdrawTravelRuleRequest,
 } from '../../../src/rest-api';
 import type {
     BrokerWithdrawResponse,
+    CheckQuestionnaireRequirementsResponse,
     DepositHistoryTravelRuleResponse,
     FetchAddressVerificationListResponse,
-    OnboardedVaspListResponse,
     SubmitDepositQuestionnaireResponse,
     SubmitDepositQuestionnaireTravelRuleResponse,
+    VaspListResponse,
     WithdrawHistoryV1Response,
     WithdrawHistoryV2Response,
     WithdrawTravelRuleResponse,
@@ -262,6 +266,63 @@ describe('TravelRuleApi', () => {
         });
     });
 
+    describe('checkQuestionnaireRequirements()', () => {
+        it('should execute checkQuestionnaireRequirements() successfully with required parameters only', async () => {
+            mockResponse = { questionnaireCountryCode: 'AE' };
+
+            const spy = jest.spyOn(client, 'checkQuestionnaireRequirements').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<CheckQuestionnaireRequirementsResponse>)
+            );
+            const response = await client.checkQuestionnaireRequirements();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute checkQuestionnaireRequirements() successfully with optional parameters', async () => {
+            const params: CheckQuestionnaireRequirementsRequest = {
+                recvWindow: 5000,
+            };
+
+            mockResponse = { questionnaireCountryCode: 'AE' };
+
+            const spy = jest.spyOn(client, 'checkQuestionnaireRequirements').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<CheckQuestionnaireRequirementsResponse>)
+            );
+            const response = await client.checkQuestionnaireRequirements(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'checkQuestionnaireRequirements')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.checkQuestionnaireRequirements()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
     describe('depositHistoryTravelRule()', () => {
         it('should execute depositHistoryTravelRule() successfully with required parameters only', async () => {
             mockResponse = [
@@ -440,40 +501,35 @@ describe('TravelRuleApi', () => {
             spy.mockRestore();
         });
 
-        it('should throw an error when server is returning an error', async () => {
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
+        it('should execute fetchAddressVerificationList() successfully with optional parameters', async () => {
+            const params: FetchAddressVerificationListRequest = {
+                recvWindow: 5000,
             };
 
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest
-                .spyOn(client, 'fetchAddressVerificationList')
-                .mockRejectedValueOnce(mockError);
-            await expect(client.fetchAddressVerificationList()).rejects.toThrow('ResponseError');
-            spy.mockRestore();
-        });
-    });
-
-    describe('onboardedVaspList()', () => {
-        it('should execute onboardedVaspList() successfully with required parameters only', async () => {
             mockResponse = [
-                { vaspName: 'Binance', vaspCode: 'BINANCE' },
-                { vaspName: 'HashKeyGlobal', vaspCode: 'NVBH3Z_nNEHjvqbUfkaL' },
+                {
+                    status: 'PENDING',
+                    token: 'AVAX',
+                    network: 'AVAXC',
+                    walletAddress: '0xc03a6aa728a8dde7464c33828424ede7553a0021',
+                    addressQuestionnaire: {
+                        sendTo: 1,
+                        satoshiToken: 'AVAX',
+                        isAddressOwner: 1,
+                        verifyMethod: 1,
+                    },
+                },
             ];
 
-            const spy = jest.spyOn(client, 'onboardedVaspList').mockReturnValue(
+            const spy = jest.spyOn(client, 'fetchAddressVerificationList').mockReturnValue(
                 Promise.resolve({
                     data: () => Promise.resolve(mockResponse),
                     status: 200,
                     headers: {},
                     rateLimits: [],
-                } as RestApiResponse<OnboardedVaspListResponse>)
+                } as RestApiResponse<FetchAddressVerificationListResponse>)
             );
-            const response = await client.onboardedVaspList();
+            const response = await client.fetchAddressVerificationList(params);
             expect(response).toBeDefined();
             await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
@@ -489,8 +545,10 @@ describe('TravelRuleApi', () => {
                 response?: { status: number; data: unknown };
             };
             mockError.response = { status: 400, data: errorResponse };
-            const spy = jest.spyOn(client, 'onboardedVaspList').mockRejectedValueOnce(mockError);
-            await expect(client.onboardedVaspList()).rejects.toThrow('ResponseError');
+            const spy = jest
+                .spyOn(client, 'fetchAddressVerificationList')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.fetchAddressVerificationList()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
@@ -767,6 +825,67 @@ describe('TravelRuleApi', () => {
             await expect(client.submitDepositQuestionnaireTravelRule(params)).rejects.toThrow(
                 'ResponseError'
             );
+            spy.mockRestore();
+        });
+    });
+
+    describe('vaspList()', () => {
+        it('should execute vaspList() successfully with required parameters only', async () => {
+            mockResponse = [
+                { vaspName: 'Binance', vaspCode: 'BINANCE' },
+                { vaspName: 'HashKeyGlobal', vaspCode: 'NVBH3Z_nNEHjvqbUfkaL' },
+            ];
+
+            const spy = jest.spyOn(client, 'vaspList').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<VaspListResponse>)
+            );
+            const response = await client.vaspList();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute vaspList() successfully with optional parameters', async () => {
+            const params: VaspListRequest = {
+                recvWindow: 5000,
+            };
+
+            mockResponse = [
+                { vaspName: 'Binance', vaspCode: 'BINANCE' },
+                { vaspName: 'HashKeyGlobal', vaspCode: 'NVBH3Z_nNEHjvqbUfkaL' },
+            ];
+
+            const spy = jest.spyOn(client, 'vaspList').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<VaspListResponse>)
+            );
+            const response = await client.vaspList(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'vaspList').mockRejectedValueOnce(mockError);
+            await expect(client.vaspList()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

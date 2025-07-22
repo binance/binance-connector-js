@@ -1,5 +1,22 @@
 # Changelog
 
+## 6.0.0 - 2025-07-22
+
+### Changed (4)
+
+#### REST API
+
+- Modified response for `exchangeInformation()` method (`GET /eapi/v1/exchangeInfo`):
+  - `optionSymbols`: item property `liquidationFeeRate` added
+
+- Modified response for `optionMarginAccountInformation()` method (`GET /eapi/v1/marginAccount`):
+  - `asset`: item property `adjustedEquity` added
+  - `asset`: item property `lpProfit` deleted
+
+- Update `@binance/common` library to version `1.2.2`.
+
+- Bump `form-data` from `4.0.2` to `4.0.4` to fix a security issue.
+
 ## 5.0.1 - 2025-07-08
 
 ### Changed (1)

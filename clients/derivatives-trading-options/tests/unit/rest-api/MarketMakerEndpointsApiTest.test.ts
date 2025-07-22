@@ -19,7 +19,6 @@ import {
     AutoCancelAllOpenOrdersRequest,
     GetAutoCancelAllOpenOrdersRequest,
     GetMarketMakerProtectionConfigRequest,
-    OptionMarginAccountInformationRequest,
     ResetMarketMakerProtectionConfigRequest,
     SetAutoCancelAllOpenOrdersRequest,
     SetMarketMakerProtectionConfigRequest,
@@ -28,7 +27,6 @@ import type {
     AutoCancelAllOpenOrdersResponse,
     GetAutoCancelAllOpenOrdersResponse,
     GetMarketMakerProtectionConfigResponse,
-    OptionMarginAccountInformationResponse,
     ResetMarketMakerProtectionConfigResponse,
     SetAutoCancelAllOpenOrdersResponse,
     SetMarketMakerProtectionConfigResponse,
@@ -254,109 +252,6 @@ describe('MarketMakerEndpointsApi', () => {
                 .spyOn(client, 'getMarketMakerProtectionConfig')
                 .mockRejectedValueOnce(mockError);
             await expect(client.getMarketMakerProtectionConfig()).rejects.toThrow('ResponseError');
-            spy.mockRestore();
-        });
-    });
-
-    describe('optionMarginAccountInformation()', () => {
-        it('should execute optionMarginAccountInformation() successfully with required parameters only', async () => {
-            mockResponse = {
-                asset: [
-                    {
-                        asset: 'USDT',
-                        marginBalance: '10099.448',
-                        equity: '10094.44662',
-                        available: '8725.92524',
-                        initialMargin: '1084.52138',
-                        maintMargin: '151.00138',
-                        unrealizedPNL: '-5.00138',
-                        lpProfit: '-5.00138',
-                    },
-                ],
-                greek: [
-                    {
-                        underlying: 'BTCUSDT',
-                        delta: '-0.05',
-                        gamma: '-0.002',
-                        theta: '-0.05',
-                        vega: '-0.002',
-                    },
-                ],
-                time: 1592449455993,
-            };
-
-            const spy = jest.spyOn(client, 'optionMarginAccountInformation').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<OptionMarginAccountInformationResponse>)
-            );
-            const response = await client.optionMarginAccountInformation();
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute optionMarginAccountInformation() successfully with optional parameters', async () => {
-            const params: OptionMarginAccountInformationRequest = {
-                recvWindow: 5000,
-            };
-
-            mockResponse = {
-                asset: [
-                    {
-                        asset: 'USDT',
-                        marginBalance: '10099.448',
-                        equity: '10094.44662',
-                        available: '8725.92524',
-                        initialMargin: '1084.52138',
-                        maintMargin: '151.00138',
-                        unrealizedPNL: '-5.00138',
-                        lpProfit: '-5.00138',
-                    },
-                ],
-                greek: [
-                    {
-                        underlying: 'BTCUSDT',
-                        delta: '-0.05',
-                        gamma: '-0.002',
-                        theta: '-0.05',
-                        vega: '-0.002',
-                    },
-                ],
-                time: 1592449455993,
-            };
-
-            const spy = jest.spyOn(client, 'optionMarginAccountInformation').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<OptionMarginAccountInformationResponse>)
-            );
-            const response = await client.optionMarginAccountInformation(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest
-                .spyOn(client, 'optionMarginAccountInformation')
-                .mockRejectedValueOnce(mockError);
-            await expect(client.optionMarginAccountInformation()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

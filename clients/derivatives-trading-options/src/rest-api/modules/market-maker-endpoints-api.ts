@@ -23,7 +23,6 @@ import type {
     AutoCancelAllOpenOrdersResponse,
     GetAutoCancelAllOpenOrdersResponse,
     GetMarketMakerProtectionConfigResponse,
-    OptionMarginAccountInformationResponse,
     ResetMarketMakerProtectionConfigResponse,
     SetAutoCancelAllOpenOrdersResponse,
     SetMarketMakerProtectionConfigResponse,
@@ -141,33 +140,6 @@ const MarketMakerEndpointsApiAxiosParamCreator = function (configuration: Config
 
             return {
                 endpoint: '/eapi/v1/mmp',
-                method: 'GET',
-                params: localVarQueryParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
-         * Get current account information.
-         *
-         * Weight: 3
-         *
-         * @summary Option Margin Account Information (USER_DATA)
-         * @param {number} [recvWindow]
-         *
-         * @throws {RequiredError}
-         */
-        optionMarginAccountInformation: async (recvWindow?: number): Promise<RequestArgs> => {
-            const localVarQueryParameter: Record<string, unknown> = {};
-
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/eapi/v1/marginAccount',
                 method: 'GET',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
@@ -375,20 +347,6 @@ export interface MarketMakerEndpointsApiInterface {
         requestParameters?: GetMarketMakerProtectionConfigRequest
     ): Promise<RestApiResponse<GetMarketMakerProtectionConfigResponse>>;
     /**
-     * Get current account information.
-     *
-     * Weight: 3
-     *
-     * @summary Option Margin Account Information (USER_DATA)
-     * @param {OptionMarginAccountInformationRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MarketMakerEndpointsApiInterface
-     */
-    optionMarginAccountInformation(
-        requestParameters?: OptionMarginAccountInformationRequest
-    ): Promise<RestApiResponse<OptionMarginAccountInformationResponse>>;
-    /**
      * Reset MMP, start MMP order again.
      *
      * Weight: 1
@@ -495,19 +453,6 @@ export interface GetMarketMakerProtectionConfigRequest {
      *
      * @type {number}
      * @memberof MarketMakerEndpointsApiGetMarketMakerProtectionConfig
-     */
-    readonly recvWindow?: number;
-}
-
-/**
- * Request parameters for optionMarginAccountInformation operation in MarketMakerEndpointsApi.
- * @interface OptionMarginAccountInformationRequest
- */
-export interface OptionMarginAccountInformationRequest {
-    /**
-     *
-     * @type {number}
-     * @memberof MarketMakerEndpointsApiOptionMarginAccountInformation
      */
     readonly recvWindow?: number;
 }
@@ -703,35 +648,6 @@ export class MarketMakerEndpointsApi implements MarketMakerEndpointsApiInterface
                 requestParameters?.recvWindow
             );
         return sendRequest<GetMarketMakerProtectionConfigResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
-        );
-    }
-
-    /**
-     * Get current account information.
-     *
-     * Weight: 3
-     *
-     * @summary Option Margin Account Information (USER_DATA)
-     * @param {OptionMarginAccountInformationRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<OptionMarginAccountInformationResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MarketMakerEndpointsApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-maker-endpoints/Option-Margin-Account-Information Binance API Documentation}
-     */
-    public async optionMarginAccountInformation(
-        requestParameters: OptionMarginAccountInformationRequest = {}
-    ): Promise<RestApiResponse<OptionMarginAccountInformationResponse>> {
-        const localVarAxiosArgs =
-            await this.localVarAxiosParamCreator.optionMarginAccountInformation(
-                requestParameters?.recvWindow
-            );
-        return sendRequest<OptionMarginAccountInformationResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

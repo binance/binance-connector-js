@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.0.6 - 2025-07-22
+
+### Changed (2)
+
+- Update `@binance/common` library to version `1.2.2`.
+- Bump `form-data` from `4.0.2` to `4.0.4` to fix a security issue.
+
 ## 3.0.5 - 2025-07-08
 
 ### Changed (1)

@@ -63,6 +63,11 @@ import {
     OrderOcoStopLimitTimeInForceEnum,
     OrderOcoNewOrderRespTypeEnum,
     OrderOcoSelfTradePreventionModeEnum,
+    OrderTestSideEnum,
+    OrderTestTypeEnum,
+    OrderTestTimeInForceEnum,
+    OrderTestNewOrderRespTypeEnum,
+    OrderTestSelfTradePreventionModeEnum,
     SorOrderSideEnum,
     SorOrderTypeEnum,
     SorOrderTimeInForceEnum,
@@ -2746,34 +2751,10 @@ describe('TradeApi', () => {
 
     describe('orderTest()', () => {
         it('should execute orderTest() successfully with required parameters only', async () => {
-            mockResponse = {
-                standardCommissionForOrder: { maker: '0.00000112', taker: '0.00000114' },
-                taxCommissionForOrder: { maker: '0.00000112', taker: '0.00000114' },
-                discount: {
-                    enabledForAccount: true,
-                    enabledForSymbol: true,
-                    discountAsset: 'BNB',
-                    discount: '0.25000000',
-                },
-            };
-
-            const spy = jest.spyOn(client, 'orderTest').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<OrderTestResponse>)
-            );
-            const response = await client.orderTest();
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute orderTest() successfully with optional parameters', async () => {
             const params: OrderTestRequest = {
-                computeCommissionRates: false,
+                symbol: 'BNBUSDT',
+                side: OrderTestSideEnum.BUY,
+                type: OrderTestTypeEnum.MARKET,
             };
 
             mockResponse = {
@@ -2801,7 +2782,101 @@ describe('TradeApi', () => {
             spy.mockRestore();
         });
 
+        it('should execute orderTest() successfully with optional parameters', async () => {
+            const params: OrderTestRequest = {
+                symbol: 'BNBUSDT',
+                side: OrderTestSideEnum.BUY,
+                type: OrderTestTypeEnum.MARKET,
+                computeCommissionRates: false,
+                timeInForce: OrderTestTimeInForceEnum.GTC,
+                quantity: 1.0,
+                quoteOrderQty: 1.0,
+                price: 400.0,
+                newClientOrderId: 'newClientOrderId_example',
+                strategyId: 1,
+                strategyType: 1,
+                stopPrice: 1.0,
+                trailingDelta: 1,
+                icebergQty: 1.0,
+                newOrderRespType: OrderTestNewOrderRespTypeEnum.ACK,
+                selfTradePreventionMode: OrderTestSelfTradePreventionModeEnum.NONE,
+                recvWindow: 5000,
+            };
+
+            mockResponse = {
+                standardCommissionForOrder: { maker: '0.00000112', taker: '0.00000114' },
+                taxCommissionForOrder: { maker: '0.00000112', taker: '0.00000114' },
+                discount: {
+                    enabledForAccount: true,
+                    enabledForSymbol: true,
+                    discountAsset: 'BNB',
+                    discount: '0.25000000',
+                },
+            };
+
+            const spy = jest.spyOn(client, 'orderTest').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<OrderTestResponse>)
+            );
+            const response = await client.orderTest(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when symbol is missing', async () => {
+            const _params: OrderTestRequest = {
+                symbol: 'BNBUSDT',
+                side: OrderTestSideEnum.BUY,
+                type: OrderTestTypeEnum.MARKET,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.symbol;
+
+            await expect(client.orderTest(params)).rejects.toThrow(
+                'Required parameter symbol was null or undefined when calling orderTest.'
+            );
+        });
+
+        it('should throw RequiredError when side is missing', async () => {
+            const _params: OrderTestRequest = {
+                symbol: 'BNBUSDT',
+                side: OrderTestSideEnum.BUY,
+                type: OrderTestTypeEnum.MARKET,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.side;
+
+            await expect(client.orderTest(params)).rejects.toThrow(
+                'Required parameter side was null or undefined when calling orderTest.'
+            );
+        });
+
+        it('should throw RequiredError when type is missing', async () => {
+            const _params: OrderTestRequest = {
+                symbol: 'BNBUSDT',
+                side: OrderTestSideEnum.BUY,
+                type: OrderTestTypeEnum.MARKET,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.type;
+
+            await expect(client.orderTest(params)).rejects.toThrow(
+                'Required parameter type was null or undefined when calling orderTest.'
+            );
+        });
+
         it('should throw an error when server is returning an error', async () => {
+            const params: OrderTestRequest = {
+                symbol: 'BNBUSDT',
+                side: OrderTestSideEnum.BUY,
+                type: OrderTestTypeEnum.MARKET,
+            };
+
             const errorResponse = {
                 code: -1111,
                 msg: 'Server Error',
@@ -2812,7 +2887,7 @@ describe('TradeApi', () => {
             };
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'orderTest').mockRejectedValueOnce(mockError);
-            await expect(client.orderTest()).rejects.toThrow('ResponseError');
+            await expect(client.orderTest(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

@@ -24,6 +24,7 @@ import type {
     GetDownloadIdForOptionTransactionHistoryRequest,
     GetOptionTransactionHistoryDownloadLinkByIdRequest,
     OptionAccountInformationRequest,
+    OptionMarginAccountInformationRequest,
 } from './modules/account-api';
 import type {
     HistoricalExerciseRecordsRequest,
@@ -50,7 +51,6 @@ import type {
     AutoCancelAllOpenOrdersRequest,
     GetAutoCancelAllOpenOrdersRequest,
     GetMarketMakerProtectionConfigRequest,
-    OptionMarginAccountInformationRequest,
     ResetMarketMakerProtectionConfigRequest,
     SetAutoCancelAllOpenOrdersRequest,
     SetMarketMakerProtectionConfigRequest,
@@ -76,6 +76,7 @@ import type {
     GetDownloadIdForOptionTransactionHistoryResponse,
     GetOptionTransactionHistoryDownloadLinkByIdResponse,
     OptionAccountInformationResponse,
+    OptionMarginAccountInformationResponse,
 } from './types';
 import type {
     CheckServerTimeResponse,
@@ -103,7 +104,6 @@ import type {
     AutoCancelAllOpenOrdersResponse,
     GetAutoCancelAllOpenOrdersResponse,
     GetMarketMakerProtectionConfigResponse,
-    OptionMarginAccountInformationResponse,
     ResetMarketMakerProtectionConfigResponse,
     SetAutoCancelAllOpenOrdersResponse,
     SetMarketMakerProtectionConfigResponse,
@@ -248,6 +248,23 @@ export class RestAPI {
         requestParameters: OptionAccountInformationRequest = {}
     ): Promise<RestApiResponse<OptionAccountInformationResponse>> {
         return this.accountApi.optionAccountInformation(requestParameters);
+    }
+
+    /**
+     * Get current account information.
+     *
+     * Weight: 3
+     *
+     * @summary Option Margin Account Information (USER_DATA)
+     * @param {OptionMarginAccountInformationRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<OptionMarginAccountInformationResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/derivatives/option/account/Option-Margin-Account-Information Binance API Documentation}
+     */
+    optionMarginAccountInformation(
+        requestParameters: OptionMarginAccountInformationRequest = {}
+    ): Promise<RestApiResponse<OptionMarginAccountInformationResponse>> {
+        return this.accountApi.optionMarginAccountInformation(requestParameters);
     }
 
     /**
@@ -642,23 +659,6 @@ export class RestAPI {
         requestParameters: GetMarketMakerProtectionConfigRequest = {}
     ): Promise<RestApiResponse<GetMarketMakerProtectionConfigResponse>> {
         return this.marketMakerEndpointsApi.getMarketMakerProtectionConfig(requestParameters);
-    }
-
-    /**
-     * Get current account information.
-     *
-     * Weight: 3
-     *
-     * @summary Option Margin Account Information (USER_DATA)
-     * @param {OptionMarginAccountInformationRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<OptionMarginAccountInformationResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-maker-endpoints/Option-Margin-Account-Information Binance API Documentation}
-     */
-    optionMarginAccountInformation(
-        requestParameters: OptionMarginAccountInformationRequest = {}
-    ): Promise<RestApiResponse<OptionMarginAccountInformationResponse>> {
-        return this.marketMakerEndpointsApi.optionMarginAccountInformation(requestParameters);
     }
 
     /**

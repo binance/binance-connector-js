@@ -7,18 +7,18 @@ const configurationRestAPI = {
 };
 const client = new Wallet({ configurationRestAPI });
 
-async function onboardedVaspList() {
+async function checkQuestionnaireRequirements() {
     try {
-        const response = await client.restAPI.onboardedVaspList();
+        const response = await client.restAPI.checkQuestionnaireRequirements();
 
         const rateLimits = response.rateLimits!;
-        console.log('onboardedVaspList() rate limits:', rateLimits);
+        console.log('checkQuestionnaireRequirements() rate limits:', rateLimits);
 
         const data = await response.data();
-        console.log('onboardedVaspList() response:', data);
+        console.log('checkQuestionnaireRequirements() response:', data);
     } catch (error) {
-        console.error('onboardedVaspList() error:', error);
+        console.error('checkQuestionnaireRequirements() error:', error);
     }
 }
 
-onboardedVaspList();
+checkQuestionnaireRequirements();

@@ -49,16 +49,16 @@ export interface ExchangeInfoResponse {
     serverTime?: number;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof ExchangeInfoResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
     /**
      *
-     * @type {ExchangeFilters}
+     * @type {Array<ExchangeFilters>}
      * @memberof ExchangeInfoResponse
      */
-    exchangeFilters?: ExchangeFilters;
+    exchangeFilters?: Array<ExchangeFilters>;
     /**
      *
      * @type {Array<ExchangeInfoResponseSymbolsInner>}

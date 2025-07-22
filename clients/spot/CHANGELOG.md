@@ -1,5 +1,13 @@
 # Changelog
 
+## 12.0.0 - 2025-07-22
+
+### Changed (3)
+
+- Added missing parameters to `orderTest()` method (`POST /api/v3/order/test`):
+- Update `@binance/common` library to version `1.2.2`.
+- Bump `form-data` from `4.0.2` to `4.0.4` to fix a security issue.
+
 ## 11.0.0 - 2025-07-14
 
 ### Added (1)

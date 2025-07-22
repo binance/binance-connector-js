@@ -83,6 +83,12 @@ export interface ExchangeInformationResponseOptionSymbolsInner {
      * @type {string}
      * @memberof ExchangeInformationResponseOptionSymbolsInner
      */
+    liquidationFeeRate?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ExchangeInformationResponseOptionSymbolsInner
+     */
     minQty?: string;
     /**
      *

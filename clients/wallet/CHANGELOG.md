@@ -1,5 +1,22 @@
 # Changelog
 
+## 8.0.0 - 2025-07-22
+
+### Added (1)
+
+- `checkQuestionnaireRequirements()` (`GET /sapi/v1/localentity/questionnaire-requirements`)
+
+### Changed (3)
+
+- Added parameter `recvWindow`
+  - affected methods:
+    - `fetchAddressVerificationList()` (`GET /sapi/v1/addressVerify/list`)
+    - `vaspList()` (`GET /sapi/v1/localentity/vasp`)
+
+- Update `@binance/common` library to version `1.2.2`.
+
+- Bump `form-data` from `4.0.2` to `4.0.4` to fix a security issue.
+
 ## 7.0.0 - 2025-07-14
 
 ### Changed (1)
