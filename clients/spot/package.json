@@ -1,7 +1,7 @@
 {
     "name": "@binance/spot",
     "description": "Official Binance Spot Connector - A lightweight library that provides a convenient interface to Binance's Spot REST API, WebSocket API and WebSocket Streams.",
-    "version": "12.0.0",
+    "version": "13.0.0",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",

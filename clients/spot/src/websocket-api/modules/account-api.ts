@@ -386,7 +386,7 @@ export interface AllOrdersRequest {
     readonly id?: string;
 
     /**
-     * Cancel order by orderId
+     * `orderId`or`origClientOrderId`mustbesent
      * @type {number}
      * @memberof AccountApiAllOrders
      */
@@ -558,7 +558,7 @@ export interface MyTradesRequest {
     readonly id?: string;
 
     /**
-     * Cancel order by orderId
+     * `orderId`or`origClientOrderId`mustbesent
      * @type {number}
      * @memberof AccountApiMyTrades
      */
@@ -749,7 +749,7 @@ export interface OrderStatusRequest {
     readonly id?: string;
 
     /**
-     * Cancel order by orderId
+     * `orderId`or`origClientOrderId`mustbesent
      * @type {number}
      * @memberof AccountApiOrderStatus
      */

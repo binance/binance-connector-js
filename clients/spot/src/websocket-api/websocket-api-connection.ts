@@ -1021,7 +1021,7 @@ export class WebsocketAPIConnection {
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#test-new-order-trade Binance API Documentation}
      */
     orderTest(
-        requestParameters: OrderTestRequest = {}
+        requestParameters: OrderTestRequest
     ): Promise<WebsocketApiResponse<OrderTestResponse>> {
         return this.tradeApi.orderTest(requestParameters);
     }
@@ -1061,7 +1061,7 @@ export class WebsocketAPIConnection {
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#test-new-order-using-sor-trade Binance API Documentation}
      */
     sorOrderTest(
-        requestParameters: SorOrderTestRequest = {}
+        requestParameters: SorOrderTestRequest
     ): Promise<WebsocketApiResponse<SorOrderTestResponse>> {
         return this.tradeApi.sorOrderTest(requestParameters);
     }

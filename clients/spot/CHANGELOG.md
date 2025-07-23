@@ -1,5 +1,17 @@
 # Changelog
 
+## 13.0.0 - 2025-07-23
+
+### Changed (1)
+
+#### REST API
+
+- Added missing parameters to `orderTest()` (`POST /api/v3/order/test`)
+
+#### WebSocket API
+
+- Added missing parameters to `orderTest()`
+
 ## 12.0.0 - 2025-07-22
 
 ### Changed (3)

@@ -1625,15 +1625,104 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * | With `computeCommissionRates`     | 20 |
          *
          * @summary Test new order using SOR
+         * @param {string} symbol
+         * @param {SorOrderTestSideEnum} side
+         * @param {SorOrderTestTypeEnum} type
+         * @param {number} quantity
          * @param {boolean} [computeCommissionRates] Default: `false`
+         * @param {SorOrderTestTimeInForceEnum} [timeInForce]
+         * @param {number} [price]
+         * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
+         * @param {number} [strategyId]
+         * @param {number} [strategyType] The value cannot be less than `1000000`.
+         * @param {number} [icebergQty] Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
+         * @param {SorOrderTestNewOrderRespTypeEnum} [newOrderRespType]
+         * @param {SorOrderTestSelfTradePreventionModeEnum} [selfTradePreventionMode]
+         * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
-        sorOrderTest: async (computeCommissionRates?: boolean): Promise<RequestArgs> => {
+        sorOrderTest: async (
+            symbol: string,
+            side: SorOrderTestSideEnum,
+            type: SorOrderTestTypeEnum,
+            quantity: number,
+            computeCommissionRates?: boolean,
+            timeInForce?: SorOrderTestTimeInForceEnum,
+            price?: number,
+            newClientOrderId?: string,
+            strategyId?: number,
+            strategyType?: number,
+            icebergQty?: number,
+            newOrderRespType?: SorOrderTestNewOrderRespTypeEnum,
+            selfTradePreventionMode?: SorOrderTestSelfTradePreventionModeEnum,
+            recvWindow?: number
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'symbol' is not null or undefined
+            assertParamExists('sorOrderTest', 'symbol', symbol);
+            // verify required parameter 'side' is not null or undefined
+            assertParamExists('sorOrderTest', 'side', side);
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('sorOrderTest', 'type', type);
+            // verify required parameter 'quantity' is not null or undefined
+            assertParamExists('sorOrderTest', 'quantity', quantity);
+
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (computeCommissionRates !== undefined && computeCommissionRates !== null) {
                 localVarQueryParameter['computeCommissionRates'] = computeCommissionRates;
+            }
+
+            if (symbol !== undefined && symbol !== null) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+
+            if (side !== undefined && side !== null) {
+                localVarQueryParameter['side'] = side;
+            }
+
+            if (type !== undefined && type !== null) {
+                localVarQueryParameter['type'] = type;
+            }
+
+            if (timeInForce !== undefined && timeInForce !== null) {
+                localVarQueryParameter['timeInForce'] = timeInForce;
+            }
+
+            if (quantity !== undefined && quantity !== null) {
+                localVarQueryParameter['quantity'] = quantity;
+            }
+
+            if (price !== undefined && price !== null) {
+                localVarQueryParameter['price'] = price;
+            }
+
+            if (newClientOrderId !== undefined && newClientOrderId !== null) {
+                localVarQueryParameter['newClientOrderId'] = newClientOrderId;
+            }
+
+            if (strategyId !== undefined && strategyId !== null) {
+                localVarQueryParameter['strategyId'] = strategyId;
+            }
+
+            if (strategyType !== undefined && strategyType !== null) {
+                localVarQueryParameter['strategyType'] = strategyType;
+            }
+
+            if (icebergQty !== undefined && icebergQty !== null) {
+                localVarQueryParameter['icebergQty'] = icebergQty;
+            }
+
+            if (newOrderRespType !== undefined && newOrderRespType !== null) {
+                localVarQueryParameter['newOrderRespType'] = newOrderRespType;
+            }
+
+            if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
+                localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
+            }
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
             }
 
             let _timeUnit: TimeUnit | undefined;
@@ -1879,7 +1968,7 @@ export interface TradeApiInterface {
      * @memberof TradeApiInterface
      */
     sorOrderTest(
-        requestParameters?: SorOrderTestRequest
+        requestParameters: SorOrderTestRequest
     ): Promise<RestApiResponse<SorOrderTestResponse>>;
 }
 
@@ -3298,11 +3387,102 @@ export interface SorOrderRequest {
  */
 export interface SorOrderTestRequest {
     /**
+     *
+     * @type {string}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly symbol: string;
+
+    /**
+     *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly side: SorOrderTestSideEnum;
+
+    /**
+     *
+     * @type {'MARKET' | 'LIMIT' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly type: SorOrderTestTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly quantity: number;
+
+    /**
      * Default: `false`
      * @type {boolean}
      * @memberof TradeApiSorOrderTest
      */
     readonly computeCommissionRates?: boolean;
+
+    /**
+     *
+     * @type {'GTC' | 'IOC' | 'FOK' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly timeInForce?: SorOrderTestTimeInForceEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly price?: number;
+
+    /**
+     * A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
+     * @type {string}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly newClientOrderId?: string;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly strategyId?: number;
+
+    /**
+     * The value cannot be less than `1000000`.
+     * @type {number}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly strategyType?: number;
+
+    /**
+     * Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
+     * @type {number}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly icebergQty?: number;
+
+    /**
+     *
+     * @type {'ACK' | 'RESULT' | 'FULL' | 'MARKET' | 'LIMIT'}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly newOrderRespType?: SorOrderTestNewOrderRespTypeEnum;
+
+    /**
+     *
+     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'DECREMENT' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly selfTradePreventionMode?: SorOrderTestSelfTradePreventionModeEnum;
+
+    /**
+     * The value cannot be greater than `60000`
+     * @type {number}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly recvWindow?: number;
 }
 
 /**
@@ -3899,10 +4079,23 @@ export class TradeApi implements TradeApiInterface {
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#test-new-order-using-sor-trade Binance API Documentation}
      */
     public async sorOrderTest(
-        requestParameters: SorOrderTestRequest = {}
+        requestParameters: SorOrderTestRequest
     ): Promise<RestApiResponse<SorOrderTestResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.sorOrderTest(
-            requestParameters?.computeCommissionRates
+            requestParameters?.symbol,
+            requestParameters?.side,
+            requestParameters?.type,
+            requestParameters?.quantity,
+            requestParameters?.computeCommissionRates,
+            requestParameters?.timeInForce,
+            requestParameters?.price,
+            requestParameters?.newClientOrderId,
+            requestParameters?.strategyId,
+            requestParameters?.strategyType,
+            requestParameters?.icebergQty,
+            requestParameters?.newOrderRespType,
+            requestParameters?.selfTradePreventionMode,
+            requestParameters?.recvWindow
         );
         return sendRequest<SorOrderTestResponse>(
             this.configuration,
@@ -4281,6 +4474,46 @@ export enum SorOrderNewOrderRespTypeEnum {
 }
 
 export enum SorOrderSelfTradePreventionModeEnum {
+    NONE = 'NONE',
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    DECREMENT = 'DECREMENT',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum SorOrderTestSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
+
+export enum SorOrderTestTypeEnum {
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+    STOP_LOSS = 'STOP_LOSS',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum SorOrderTestTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum SorOrderTestNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+}
+
+export enum SorOrderTestSelfTradePreventionModeEnum {
     NONE = 'NONE',
     EXPIRE_TAKER = 'EXPIRE_TAKER',
     EXPIRE_MAKER = 'EXPIRE_MAKER',

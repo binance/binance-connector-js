@@ -42,8 +42,12 @@ import {
     OrderListPlaceOtocoPendingAboveTypeEnum,
     OrderPlaceSideEnum,
     OrderPlaceTypeEnum,
+    OrderTestSideEnum,
+    OrderTestTypeEnum,
     SorOrderPlaceSideEnum,
     SorOrderPlaceTypeEnum,
+    SorOrderTestSideEnum,
+    SorOrderTestTypeEnum,
 } from '../../../src/websocket-api';
 import {
     OpenOrdersCancelAllRequest,
@@ -56,7 +60,9 @@ import {
     OrderListPlaceOtoRequest,
     OrderListPlaceOtocoRequest,
     OrderPlaceRequest,
+    OrderTestRequest,
     SorOrderPlaceRequest,
+    SorOrderTestRequest,
 } from '../../../src/websocket-api';
 
 jest.mock('ws');
@@ -2642,6 +2648,12 @@ describe('TradeApi', () => {
             };
             mockResponse.id = randomString();
 
+            const params: OrderTestRequest = {
+                symbol: 'BNBUSDT',
+                side: OrderTestSideEnum.BUY,
+                type: OrderTestTypeEnum.MARKET,
+            };
+
             let resolveTest: (value: unknown) => void;
             const testComplete = new Promise((resolve) => {
                 resolveTest = resolve;
@@ -2651,16 +2663,18 @@ describe('TradeApi', () => {
                 try {
                     websocketAPIClient = new TradeApi(conn);
                     const sendMsgSpy = jest.spyOn(conn, 'sendMessage');
-                    const responsePromise = websocketAPIClient.orderTest({ id: mockResponse?.id });
+                    const responsePromise = websocketAPIClient.orderTest({
+                        id: mockResponse?.id,
+                        ...params,
+                    });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
-                    expect(sendMsgSpy).toHaveBeenCalledWith(
-                        '/order.test'.slice(1),
-                        expect.any(Object),
-                        { isSigned: true, withApiKey: false }
-                    );
+                    expect(sendMsgSpy).toHaveBeenCalledWith('/order.test'.slice(1), params, {
+                        isSigned: true,
+                        withApiKey: false,
+                    });
                     resolveTest(true);
                 } catch (error) {
                     resolveTest(error);
@@ -2693,6 +2707,12 @@ describe('TradeApi', () => {
                 ],
             };
 
+            const params: OrderTestRequest = {
+                symbol: 'BNBUSDT',
+                side: OrderTestSideEnum.BUY,
+                type: OrderTestTypeEnum.MARKET,
+            };
+
             let resolveTest: (value: unknown) => void;
             const testComplete = new Promise((resolve) => {
                 resolveTest = resolve;
@@ -2701,7 +2721,10 @@ describe('TradeApi', () => {
             websocketBase.on('open', async (conn: WebsocketAPIBase) => {
                 try {
                     websocketAPIClient = new TradeApi(conn);
-                    const responsePromise = websocketAPIClient.orderTest({ id: mockResponse?.id });
+                    const responsePromise = websocketAPIClient.orderTest({
+                        id: mockResponse?.id,
+                        ...params,
+                    });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
@@ -2720,6 +2743,12 @@ describe('TradeApi', () => {
         it('should handle request timeout gracefully', async () => {
             jest.useRealTimers();
 
+            const params: OrderTestRequest = {
+                symbol: 'BNBUSDT',
+                side: OrderTestSideEnum.BUY,
+                type: OrderTestTypeEnum.MARKET,
+            };
+
             let resolveTest: (value: unknown) => void;
             const testComplete = new Promise((resolve) => {
                 resolveTest = resolve;
@@ -2728,7 +2757,7 @@ describe('TradeApi', () => {
             websocketBase.on('open', async (conn: WebsocketAPIBase) => {
                 try {
                     websocketAPIClient = new TradeApi(websocketBase);
-                    const responsePromise = websocketAPIClient.orderTest();
+                    const responsePromise = websocketAPIClient.orderTest(params);
                     await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
                     resolveTest(true);
                 } catch (error) {
@@ -3017,6 +3046,13 @@ describe('TradeApi', () => {
             };
             mockResponse.id = randomString();
 
+            const params: SorOrderTestRequest = {
+                symbol: 'BNBUSDT',
+                side: SorOrderTestSideEnum.BUY,
+                type: SorOrderTestTypeEnum.MARKET,
+                quantity: 1.0,
+            };
+
             let resolveTest: (value: unknown) => void;
             const testComplete = new Promise((resolve) => {
                 resolveTest = resolve;
@@ -3028,16 +3064,16 @@ describe('TradeApi', () => {
                     const sendMsgSpy = jest.spyOn(conn, 'sendMessage');
                     const responsePromise = websocketAPIClient.sorOrderTest({
                         id: mockResponse?.id,
+                        ...params,
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
-                    expect(sendMsgSpy).toHaveBeenCalledWith(
-                        '/sor.order.test'.slice(1),
-                        expect.any(Object),
-                        { isSigned: true, withApiKey: false }
-                    );
+                    expect(sendMsgSpy).toHaveBeenCalledWith('/sor.order.test'.slice(1), params, {
+                        isSigned: true,
+                        withApiKey: false,
+                    });
                     resolveTest(true);
                 } catch (error) {
                     resolveTest(error);
@@ -3070,6 +3106,13 @@ describe('TradeApi', () => {
                 ],
             };
 
+            const params: SorOrderTestRequest = {
+                symbol: 'BNBUSDT',
+                side: SorOrderTestSideEnum.BUY,
+                type: SorOrderTestTypeEnum.MARKET,
+                quantity: 1.0,
+            };
+
             let resolveTest: (value: unknown) => void;
             const testComplete = new Promise((resolve) => {
                 resolveTest = resolve;
@@ -3080,6 +3123,7 @@ describe('TradeApi', () => {
                     websocketAPIClient = new TradeApi(conn);
                     const responsePromise = websocketAPIClient.sorOrderTest({
                         id: mockResponse?.id,
+                        ...params,
                     });
                     mockWs.emit('message', JSON.stringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
@@ -3099,6 +3143,13 @@ describe('TradeApi', () => {
         it('should handle request timeout gracefully', async () => {
             jest.useRealTimers();
 
+            const params: SorOrderTestRequest = {
+                symbol: 'BNBUSDT',
+                side: SorOrderTestSideEnum.BUY,
+                type: SorOrderTestTypeEnum.MARKET,
+                quantity: 1.0,
+            };
+
             let resolveTest: (value: unknown) => void;
             const testComplete = new Promise((resolve) => {
                 resolveTest = resolve;
@@ -3107,7 +3158,7 @@ describe('TradeApi', () => {
             websocketBase.on('open', async (conn: WebsocketAPIBase) => {
                 try {
                     websocketAPIClient = new TradeApi(websocketBase);
-                    const responsePromise = websocketAPIClient.sorOrderTest();
+                    const responsePromise = websocketAPIClient.sorOrderTest(params);
                     await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
                     resolveTest(true);
                 } catch (error) {

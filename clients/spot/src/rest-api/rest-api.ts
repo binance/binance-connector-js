@@ -966,7 +966,7 @@ export class RestAPI {
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#test-new-order-using-sor-trade Binance API Documentation}
      */
     sorOrderTest(
-        requestParameters: SorOrderTestRequest = {}
+        requestParameters: SorOrderTestRequest
     ): Promise<RestApiResponse<SorOrderTestResponse>> {
         return this.tradeApi.sorOrderTest(requestParameters);
     }

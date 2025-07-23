@@ -73,6 +73,11 @@ import {
     SorOrderTimeInForceEnum,
     SorOrderNewOrderRespTypeEnum,
     SorOrderSelfTradePreventionModeEnum,
+    SorOrderTestSideEnum,
+    SorOrderTestTypeEnum,
+    SorOrderTestTimeInForceEnum,
+    SorOrderTestNewOrderRespTypeEnum,
+    SorOrderTestSelfTradePreventionModeEnum,
 } from '../../../src/rest-api';
 import {
     DeleteOpenOrdersRequest,
@@ -3095,34 +3100,11 @@ describe('TradeApi', () => {
 
     describe('sorOrderTest()', () => {
         it('should execute sorOrderTest() successfully with required parameters only', async () => {
-            mockResponse = {
-                standardCommissionForOrder: { maker: '0.00000112', taker: '0.00000114' },
-                taxCommissionForOrder: { maker: '0.00000112', taker: '0.00000114' },
-                discount: {
-                    enabledForAccount: true,
-                    enabledForSymbol: true,
-                    discountAsset: 'BNB',
-                    discount: '0.25000000',
-                },
-            };
-
-            const spy = jest.spyOn(client, 'sorOrderTest').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<SorOrderTestResponse>)
-            );
-            const response = await client.sorOrderTest();
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute sorOrderTest() successfully with optional parameters', async () => {
             const params: SorOrderTestRequest = {
-                computeCommissionRates: false,
+                symbol: 'BNBUSDT',
+                side: SorOrderTestSideEnum.BUY,
+                type: SorOrderTestTypeEnum.MARKET,
+                quantity: 1.0,
             };
 
             mockResponse = {
@@ -3150,7 +3132,117 @@ describe('TradeApi', () => {
             spy.mockRestore();
         });
 
+        it('should execute sorOrderTest() successfully with optional parameters', async () => {
+            const params: SorOrderTestRequest = {
+                symbol: 'BNBUSDT',
+                side: SorOrderTestSideEnum.BUY,
+                type: SorOrderTestTypeEnum.MARKET,
+                quantity: 1.0,
+                computeCommissionRates: false,
+                timeInForce: SorOrderTestTimeInForceEnum.GTC,
+                price: 400.0,
+                newClientOrderId: 'newClientOrderId_example',
+                strategyId: 1,
+                strategyType: 1,
+                icebergQty: 1.0,
+                newOrderRespType: SorOrderTestNewOrderRespTypeEnum.ACK,
+                selfTradePreventionMode: SorOrderTestSelfTradePreventionModeEnum.NONE,
+                recvWindow: 5000,
+            };
+
+            mockResponse = {
+                standardCommissionForOrder: { maker: '0.00000112', taker: '0.00000114' },
+                taxCommissionForOrder: { maker: '0.00000112', taker: '0.00000114' },
+                discount: {
+                    enabledForAccount: true,
+                    enabledForSymbol: true,
+                    discountAsset: 'BNB',
+                    discount: '0.25000000',
+                },
+            };
+
+            const spy = jest.spyOn(client, 'sorOrderTest').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<SorOrderTestResponse>)
+            );
+            const response = await client.sorOrderTest(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when symbol is missing', async () => {
+            const _params: SorOrderTestRequest = {
+                symbol: 'BNBUSDT',
+                side: SorOrderTestSideEnum.BUY,
+                type: SorOrderTestTypeEnum.MARKET,
+                quantity: 1.0,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.symbol;
+
+            await expect(client.sorOrderTest(params)).rejects.toThrow(
+                'Required parameter symbol was null or undefined when calling sorOrderTest.'
+            );
+        });
+
+        it('should throw RequiredError when side is missing', async () => {
+            const _params: SorOrderTestRequest = {
+                symbol: 'BNBUSDT',
+                side: SorOrderTestSideEnum.BUY,
+                type: SorOrderTestTypeEnum.MARKET,
+                quantity: 1.0,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.side;
+
+            await expect(client.sorOrderTest(params)).rejects.toThrow(
+                'Required parameter side was null or undefined when calling sorOrderTest.'
+            );
+        });
+
+        it('should throw RequiredError when type is missing', async () => {
+            const _params: SorOrderTestRequest = {
+                symbol: 'BNBUSDT',
+                side: SorOrderTestSideEnum.BUY,
+                type: SorOrderTestTypeEnum.MARKET,
+                quantity: 1.0,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.type;
+
+            await expect(client.sorOrderTest(params)).rejects.toThrow(
+                'Required parameter type was null or undefined when calling sorOrderTest.'
+            );
+        });
+
+        it('should throw RequiredError when quantity is missing', async () => {
+            const _params: SorOrderTestRequest = {
+                symbol: 'BNBUSDT',
+                side: SorOrderTestSideEnum.BUY,
+                type: SorOrderTestTypeEnum.MARKET,
+                quantity: 1.0,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.quantity;
+
+            await expect(client.sorOrderTest(params)).rejects.toThrow(
+                'Required parameter quantity was null or undefined when calling sorOrderTest.'
+            );
+        });
+
         it('should throw an error when server is returning an error', async () => {
+            const params: SorOrderTestRequest = {
+                symbol: 'BNBUSDT',
+                side: SorOrderTestSideEnum.BUY,
+                type: SorOrderTestTypeEnum.MARKET,
+                quantity: 1.0,
+            };
+
             const errorResponse = {
                 code: -1111,
                 msg: 'Server Error',
@@ -3161,7 +3253,7 @@ describe('TradeApi', () => {
             };
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'sorOrderTest').mockRejectedValueOnce(mockError);
-            await expect(client.sorOrderTest()).rejects.toThrow('ResponseError');
+            await expect(client.sorOrderTest(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

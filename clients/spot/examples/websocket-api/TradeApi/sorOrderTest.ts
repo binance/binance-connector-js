@@ -1,4 +1,4 @@
-import { Spot, SPOT_WS_API_PROD_URL } from '../../../src';
+import { Spot, SpotWebsocketAPI, SPOT_WS_API_PROD_URL } from '../../../src';
 
 const configurationWebsocketAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -13,7 +13,12 @@ async function sorOrderTest() {
     try {
         connection = await client.websocketAPI.connect();
 
-        const response = await connection.sorOrderTest();
+        const response = await connection.sorOrderTest({
+            symbol: 'BNBUSDT',
+            side: SpotWebsocketAPI.SorOrderTestSideEnum.BUY,
+            type: SpotWebsocketAPI.SorOrderTestTypeEnum.MARKET,
+            quantity: 1.0,
+        });
 
         const rateLimits = response.rateLimits!;
         console.log('sorOrderTest() rate limits:', rateLimits);

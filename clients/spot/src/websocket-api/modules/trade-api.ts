@@ -242,7 +242,7 @@ export interface TradeApiInterface {
      * @memberof TradeApiInterface
      */
     orderTest(
-        requestParameters?: OrderTestRequest
+        requestParameters: OrderTestRequest
     ): Promise<WebsocketApiResponse<OrderTestResponse>>;
 
     /**
@@ -280,7 +280,7 @@ export interface TradeApiInterface {
      * @memberof TradeApiInterface
      */
     sorOrderTest(
-        requestParameters?: SorOrderTestRequest
+        requestParameters: SorOrderTestRequest
     ): Promise<WebsocketApiResponse<SorOrderTestResponse>>;
 }
 
@@ -386,7 +386,7 @@ export interface OrderCancelRequest {
     readonly id?: string;
 
     /**
-     * Cancel order by orderId
+     * `orderId`or`origClientOrderId`mustbesent
      * @type {number}
      * @memberof TradeApiOrderCancel
      */
@@ -1549,6 +1549,27 @@ export interface OrderPlaceRequest {
  */
 export interface OrderTestRequest {
     /**
+     *
+     * @type {string}
+     * @memberof TradeApiOrderTest
+     */
+    readonly symbol: string;
+
+    /**
+     *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiOrderTest
+     */
+    readonly side: OrderTestSideEnum;
+
+    /**
+     *
+     * @type {'MARKET' | 'LIMIT' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiOrderTest
+     */
+    readonly type: OrderTestTypeEnum;
+
+    /**
      * Unique WebSocket request ID.
      * @type {string}
      * @memberof TradeApiOrderTest
@@ -1561,6 +1582,98 @@ export interface OrderTestRequest {
      * @memberof TradeApiOrderTest
      */
     readonly computeCommissionRates?: boolean;
+
+    /**
+     *
+     * @type {'GTC' | 'IOC' | 'FOK' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiOrderTest
+     */
+    readonly timeInForce?: OrderTestTimeInForceEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderTest
+     */
+    readonly price?: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderTest
+     */
+    readonly quantity?: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderTest
+     */
+    readonly quoteOrderQty?: number;
+
+    /**
+     * The new client order ID for the order after being amended. <br> If not sent, one will be randomly generated. <br> It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`.
+     * @type {string}
+     * @memberof TradeApiOrderTest
+     */
+    readonly newClientOrderId?: string;
+
+    /**
+     *
+     * @type {'ACK' | 'RESULT' | 'FULL' | 'MARKET' | 'LIMIT'}
+     * @memberof TradeApiOrderTest
+     */
+    readonly newOrderRespType?: OrderTestNewOrderRespTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderTest
+     */
+    readonly stopPrice?: number;
+
+    /**
+     * See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md)
+     * @type {number}
+     * @memberof TradeApiOrderTest
+     */
+    readonly trailingDelta?: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderTest
+     */
+    readonly icebergQty?: number;
+
+    /**
+     * Arbitrary numeric value identifying the order within an order strategy.
+     * @type {number}
+     * @memberof TradeApiOrderTest
+     */
+    readonly strategyId?: number;
+
+    /**
+     * Arbitrary numeric value identifying the order strategy.
+     * Values smaller than 1000000 are reserved and cannot be used.
+     * @type {number}
+     * @memberof TradeApiOrderTest
+     */
+    readonly strategyType?: number;
+
+    /**
+     *
+     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'DECREMENT' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiOrderTest
+     */
+    readonly selfTradePreventionMode?: OrderTestSelfTradePreventionModeEnum;
+
+    /**
+     * The value cannot be greater than `60000`
+     * @type {number}
+     * @memberof TradeApiOrderTest
+     */
+    readonly recvWindow?: number;
 }
 
 /**
@@ -1674,6 +1787,34 @@ export interface SorOrderPlaceRequest {
  */
 export interface SorOrderTestRequest {
     /**
+     *
+     * @type {string}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly symbol: string;
+
+    /**
+     *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly side: SorOrderTestSideEnum;
+
+    /**
+     *
+     * @type {'MARKET' | 'LIMIT' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly type: SorOrderTestTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly quantity: number;
+
+    /**
      * Unique WebSocket request ID.
      * @type {string}
      * @memberof TradeApiSorOrderTest
@@ -1686,6 +1827,70 @@ export interface SorOrderTestRequest {
      * @memberof TradeApiSorOrderTest
      */
     readonly computeCommissionRates?: boolean;
+
+    /**
+     *
+     * @type {'GTC' | 'IOC' | 'FOK' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly timeInForce?: SorOrderTestTimeInForceEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly price?: number;
+
+    /**
+     * The new client order ID for the order after being amended. <br> If not sent, one will be randomly generated. <br> It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`.
+     * @type {string}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly newClientOrderId?: string;
+
+    /**
+     *
+     * @type {'ACK' | 'RESULT' | 'FULL' | 'MARKET' | 'LIMIT'}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly newOrderRespType?: SorOrderTestNewOrderRespTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly icebergQty?: number;
+
+    /**
+     * Arbitrary numeric value identifying the order within an order strategy.
+     * @type {number}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly strategyId?: number;
+
+    /**
+     * Arbitrary numeric value identifying the order strategy.
+     * Values smaller than 1000000 are reserved and cannot be used.
+     * @type {number}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly strategyType?: number;
+
+    /**
+     *
+     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'DECREMENT' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly selfTradePreventionMode?: SorOrderTestSelfTradePreventionModeEnum;
+
+    /**
+     * The value cannot be greater than `60000`
+     * @type {number}
+     * @memberof TradeApiSorOrderTest
+     */
+    readonly recvWindow?: number;
 }
 
 /**
@@ -1963,7 +2168,7 @@ export class TradeApi implements TradeApiInterface {
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#test-new-order-trade Binance API Documentation}
      */
     public orderTest(
-        requestParameters: OrderTestRequest = {}
+        requestParameters: OrderTestRequest
     ): Promise<WebsocketApiResponse<OrderTestResponse>> {
         return this.websocketBase.sendMessage<OrderTestResponse>(
             '/order.test'.slice(1),
@@ -2013,7 +2218,7 @@ export class TradeApi implements TradeApiInterface {
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#test-new-order-using-sor-trade Binance API Documentation}
      */
     public sorOrderTest(
-        requestParameters: SorOrderTestRequest = {}
+        requestParameters: SorOrderTestRequest
     ): Promise<WebsocketApiResponse<SorOrderTestResponse>> {
         return this.websocketBase.sendMessage<SorOrderTestResponse>(
             '/sor.order.test'.slice(1),
@@ -2317,6 +2522,46 @@ export enum OrderPlaceSelfTradePreventionModeEnum {
     NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 
+export enum OrderTestSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
+
+export enum OrderTestTypeEnum {
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+    STOP_LOSS = 'STOP_LOSS',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum OrderTestTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum OrderTestNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+}
+
+export enum OrderTestSelfTradePreventionModeEnum {
+    NONE = 'NONE',
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    DECREMENT = 'DECREMENT',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
 export enum SorOrderPlaceSideEnum {
     BUY = 'BUY',
     SELL = 'SELL',
@@ -2349,6 +2594,46 @@ export enum SorOrderPlaceNewOrderRespTypeEnum {
 }
 
 export enum SorOrderPlaceSelfTradePreventionModeEnum {
+    NONE = 'NONE',
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    DECREMENT = 'DECREMENT',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum SorOrderTestSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
+
+export enum SorOrderTestTypeEnum {
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+    STOP_LOSS = 'STOP_LOSS',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum SorOrderTestTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum SorOrderTestNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+}
+
+export enum SorOrderTestSelfTradePreventionModeEnum {
     NONE = 'NONE',
     EXPIRE_TAKER = 'EXPIRE_TAKER',
     EXPIRE_MAKER = 'EXPIRE_MAKER',
