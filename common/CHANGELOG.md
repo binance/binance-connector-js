@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.3 - 2025-07-29
+
+### Changed (1)
+
+- Fixed memory leak on WebSocket API connection timers.
+
 ## 1.2.2 - 2025-07-22
 
 ### Changed (2)
