@@ -44,6 +44,11 @@ export class WebsocketEventEmitter {
     }
 }
 
+export interface TimerRecord {
+    timer?: NodeJS.Timeout;
+    type: 'timeout' | 'interval';
+}
+
 export interface WebsocketConnection {
     id: string;
     reconnectionPending: boolean;
@@ -71,10 +76,7 @@ export class WebsocketCommon extends WebsocketEventEmitter {
         isRenewal: boolean;
     }> = [];
     private queueProcessing: boolean = false;
-    private connectionTimers: Map<
-        WebSocketClient,
-        Set<{ timer: NodeJS.Timeout; type: 'timeout' | 'interval' }>
-    > = new Map();
+    protected connectionTimers: Map<WebSocketClient, Set<TimerRecord>> = new Map();
     private mode: 'single' | 'pool';
     private poolSize: number;
     private roundRobinIndex = 0;
@@ -183,17 +185,34 @@ export class WebsocketCommon extends WebsocketEventEmitter {
      * @param type Timer type ('timeout' or 'interval')
      * @returns Timer handle
      */
-    private scheduleTimer(
+    protected scheduleTimer(
         connection: WebSocketClient,
         callback: () => void,
         delay: number,
         type: 'timeout' | 'interval' = 'timeout'
     ): NodeJS.Timeout {
-        const timer =
-            type === 'timeout' ? setTimeout(callback, delay) : setInterval(callback, delay);
-        if (!this.connectionTimers.has(connection))
-            this.connectionTimers.set(connection, new Set());
-        this.connectionTimers.get(connection)?.add({ timer, type });
+        let timers = this.connectionTimers.get(connection);
+        if (!timers) {
+            timers = new Set<TimerRecord>();
+            this.connectionTimers.set(connection, timers);
+        }
+
+        const timerRecord: TimerRecord = { type };
+
+        const wrappedTimeout = () => {
+            try {
+                callback();
+            } finally {
+                timers!.delete(timerRecord);
+            }
+        };
+
+        let timer: NodeJS.Timeout;
+        if (type === 'timeout') timer = setTimeout(wrappedTimeout, delay);
+        else timer = setInterval(callback, delay);
+
+        timerRecord.timer = timer;
+        timers.add(timerRecord);
         return timer;
     }
 
@@ -202,7 +221,7 @@ export class WebsocketCommon extends WebsocketEventEmitter {
      * @param connection - The WebSocket client instance to clear timers for.
      * @returns void
      */
-    private clearTimers(connection: WebSocketClient): void {
+    protected clearTimers(connection: WebSocketClient): void {
         const timers = this.connectionTimers.get(connection);
         if (timers) {
             timers.forEach(({ timer, type }) => {
@@ -508,14 +527,14 @@ export class WebsocketCommon extends WebsocketEventEmitter {
         });
 
         ws.on('ping', () => {
-            this.logger.info('Received PING from server');
+            this.logger.debug('Received PING from server');
             this.emit('ping');
             ws.pong();
-            this.logger.info('Responded PONG to server\'s PING message');
+            this.logger.debug('Responded PONG to server\'s PING message');
         });
 
         ws.on('pong', () => {
-            this.logger.info('Received PONG from server');
+            this.logger.debug('Received PONG from server');
             this.emit('pong');
         });
 
@@ -606,7 +625,7 @@ export class WebsocketCommon extends WebsocketEventEmitter {
             return;
         }
 
-        this.logger.info('Sending PING to all connected Websocket servers.');
+        this.logger.debug('Sending PING to all connected Websocket servers.');
 
         connectedConnections.forEach((connection) => {
             if (connection.ws) {
@@ -636,7 +655,7 @@ export class WebsocketCommon extends WebsocketEventEmitter {
         connection?: WebsocketConnection
     ): Promise<WebsocketApiResponse<T>> | void {
         if (!this.isConnected(connection)) {
-            const errorMsg = 'Send can only be sent when connection is ready.';
+            const errorMsg = 'Unable to send message — connection is not available.';
             this.logger.warn(errorMsg);
             if (promiseBased) return Promise.reject(new Error(errorMsg));
             else throw new Error(errorMsg);
@@ -657,18 +676,23 @@ export class WebsocketCommon extends WebsocketEventEmitter {
             return new Promise<WebsocketApiResponse<T>>((resolve, reject) => {
                 if (!id) return reject(new Error('id is required for promise-based sending.'));
 
-                connectionToUse.pendingRequests.set(id, { resolve, reject });
+                const timeoutHandle = setTimeout(() => {
+                    if (connectionToUse.pendingRequests.has(id)) {
+                        connectionToUse.pendingRequests.delete(id);
+                        reject(new Error(`Request timeout for id: ${id}`));
+                    }
+                }, timeout);
 
-                this.scheduleTimer(
-                    connectionToUse.ws!,
-                    () => {
-                        if (connectionToUse.pendingRequests.has(id)) {
-                            connectionToUse.pendingRequests.delete(id);
-                            reject(new Error(`Request timeout for id: ${id}`));
-                        }
+                connectionToUse.pendingRequests.set(id, {
+                    resolve: (v) => {
+                        clearTimeout(timeoutHandle);
+                        resolve(v);
                     },
-                    timeout
-                );
+                    reject: (e) => {
+                        clearTimeout(timeoutHandle);
+                        reject(e);
+                    },
+                });
             });
         }
     }
@@ -782,14 +806,15 @@ export class WebsocketAPIBase extends WebsocketCommon {
 
             this.connectPool(this.prepareURL(this.configuration.wsURL as string))
                 .then(() => {
-                    clearTimeout(timeout);
                     this.isConnecting = false;
                     resolve();
                 })
                 .catch((error) => {
-                    clearTimeout(timeout);
                     this.isConnecting = false;
                     reject(error);
+                })
+                .finally(() => {
+                    clearTimeout(timeout);
                 });
         });
     }
@@ -1034,14 +1059,9 @@ export class WebsocketStreamsBase extends WebsocketCommon {
             }, 10000);
 
             this.connectPool(this.prepareURL(streams))
-                .then(() => {
-                    clearTimeout(timeout);
-                    resolve();
-                })
-                .catch((error) => {
-                    clearTimeout(timeout);
-                    reject(error);
-                });
+                .then(() => resolve())
+                .catch((error) => reject(error))
+                .finally(() => clearTimeout(timeout));
         });
     }
 

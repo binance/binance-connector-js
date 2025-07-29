@@ -23,21 +23,38 @@ class TestWebsocketCommon extends WebsocketCommon {
         isRenewal: boolean = false,
         connection?: WebsocketConnection
     ): void {
-        this.initConnect(url, isRenewal, connection);
+        super.initConnect(url, isRenewal, connection);
     }
 
     public testGetAvailableConnections(
         allowNonEstablishedWebsockets: boolean = false
     ): WebsocketConnection[] {
-        return this.getAvailableConnections(allowNonEstablishedWebsockets);
+        return super.getAvailableConnections(allowNonEstablishedWebsockets);
     }
 
     public testGetConnection(allowNonEstablishedWebsockets: boolean = false): WebsocketConnection {
-        return this.getConnection(allowNonEstablishedWebsockets);
+        return super.getConnection(allowNonEstablishedWebsockets);
+    }
+
+    public exposeScheduleTimer(
+        connection: WebSocketClient,
+        callback: () => void,
+        delay: number,
+        type: 'timeout' | 'interval' = 'timeout'
+    ): NodeJS.Timeout {
+        return super.scheduleTimer(connection, callback, delay, type);
+    }
+
+    public getTimers(connection: WebSocketClient) {
+        return this.connectionTimers.get(connection) ?? new Set();
+    }
+
+    public clearTimers(connection: WebSocketClient): void {
+        super.clearTimers(connection);
     }
 
     public async testConnectPool(url: string): Promise<void> {
-        return await this.connectPool(url);
+        return await super.connectPool(url);
     }
 
     public testSend<T = unknown>(
@@ -47,7 +64,7 @@ class TestWebsocketCommon extends WebsocketCommon {
         timeout: number = 5000,
         connection?: WebsocketConnection
     ): Promise<WebsocketApiResponse<T>> | void {
-        return this.send(payload, id, promiseBased, timeout, connection);
+        return super.send(payload, id, promiseBased, timeout, connection);
     }
 }
 
@@ -594,6 +611,91 @@ describe('WebsocketCommon', () => {
         });
     });
 
+    describe('scheduleTimer()', () => {
+        let wsCommon: TestWebsocketCommon;
+        let dummyWs: WebSocketClient;
+
+        beforeEach(() => {
+            jest.useFakeTimers();
+            const config = { mode: 'single' } as ConfigurationWebsocketAPI;
+            wsCommon = new TestWebsocketCommon(config, []);
+            dummyWs = {} as unknown as WebSocketClient;
+        });
+
+        afterEach(() => {
+            jest.useRealTimers();
+        });
+
+        it('should add a timeout record to connectionTimers', () => {
+            const cb = jest.fn();
+            const timer = wsCommon.exposeScheduleTimer(dummyWs, cb, 500, 'timeout');
+
+            const timers = wsCommon.getTimers(dummyWs);
+            expect(timers.size).toBe(1);
+            expect(timer).toBeDefined();
+        });
+
+        it('should invoke the callback after the delay and remove the record', () => {
+            const cb = jest.fn();
+            wsCommon.exposeScheduleTimer(dummyWs, cb, 1000, 'timeout');
+
+            expect(cb).not.toHaveBeenCalled();
+            expect(wsCommon.getTimers(dummyWs).size).toBe(1);
+
+            jest.advanceTimersByTime(1000);
+
+            expect(cb).toHaveBeenCalledTimes(1);
+            expect(wsCommon.getTimers(dummyWs).size).toBe(0);
+        });
+
+        it('should add an interval record and not auto-remove after first tick', () => {
+            const cb = jest.fn();
+            wsCommon.exposeScheduleTimer(dummyWs, cb, 300, 'interval');
+
+            jest.advanceTimersByTime(300);
+            expect(cb).toHaveBeenCalledTimes(1);
+            expect(wsCommon.getTimers(dummyWs).size).toBe(1);
+
+            jest.advanceTimersByTime(300);
+            expect(cb).toHaveBeenCalledTimes(2);
+            expect(wsCommon.getTimers(dummyWs).size).toBe(1);
+        });
+    });
+
+    describe('clearTimers()', () => {
+        let wsCommon: TestWebsocketCommon;
+        let dummyWs: WebSocketClient;
+
+        beforeEach(() => {
+            jest.useFakeTimers();
+            const config = { mode: 'single' } as ConfigurationWebsocketAPI;
+            wsCommon = new TestWebsocketCommon(config, []);
+            dummyWs = {} as unknown as WebSocketClient;
+        });
+
+        afterEach(() => {
+            jest.useRealTimers();
+        });
+
+        it('should remove all timers and clear underlying timeouts/intervals', () => {
+            const cbTimeout = jest.fn();
+            const cbInterval = jest.fn();
+
+            wsCommon.exposeScheduleTimer(dummyWs, cbTimeout, 200, 'timeout');
+            wsCommon.exposeScheduleTimer(dummyWs, cbInterval, 400, 'interval');
+
+            expect(wsCommon.getTimers(dummyWs).size).toBe(2);
+
+            wsCommon.clearTimers(dummyWs);
+
+            expect(wsCommon.getTimers(dummyWs).size).toBe(0);
+
+            jest.advanceTimersByTime(1000);
+            expect(cbTimeout).not.toHaveBeenCalled();
+            expect(cbInterval).not.toHaveBeenCalled();
+        });
+    });
+
     describe('connectPool()', () => {
         const url = 'wss://test.com';
 
@@ -885,7 +987,7 @@ describe('WebsocketCommon', () => {
                 }
             });
 
-            expect(mockLogger.info).toHaveBeenCalledWith(
+            expect(mockLogger.debug).toHaveBeenCalledWith(
                 'Sending PING to all connected Websocket servers.'
             );
         });
@@ -921,7 +1023,7 @@ describe('WebsocketCommon', () => {
             expect(readyConnection.ws?.ping).toHaveBeenCalled();
             expect(notReadyConnection.ws?.ping).not.toHaveBeenCalled();
 
-            expect(mockLogger.info).toHaveBeenCalledWith(
+            expect(mockLogger.debug).toHaveBeenCalledWith(
                 'Sending PING to all connected Websocket servers.'
             );
         });
@@ -971,7 +1073,7 @@ describe('WebsocketCommon', () => {
 
             expect(() =>
                 wsCommon.testSend(testPayload, testId, false, 5000, specificConnection)
-            ).toThrowError('Send can only be sent when connection is ready.');
+            ).toThrowError('Unable to send message — connection is not available.');
         });
 
         it('should send payload when connected in sync mode without a specific connection', () => {
@@ -1019,7 +1121,7 @@ describe('WebsocketCommon', () => {
             jest.spyOn(wsCommon, 'isConnected').mockReturnValue(false);
 
             await expect(wsCommon.testSend(testPayload, testId, true, 5000)).rejects.toThrowError(
-                'Send can only be sent when connection is ready.'
+                'Unable to send message — connection is not available.'
             );
         });
 
