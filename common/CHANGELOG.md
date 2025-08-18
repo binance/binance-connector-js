@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.4 - 2025-08-18
+
+### Changed (1)
+
+- Fixed bug with HTTP proxy protocol was not being applied correctly.
+
 ## 1.2.3 - 2025-07-29
 
 ### Changed (1)
