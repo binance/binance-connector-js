@@ -192,4 +192,16 @@ export interface ExchangeFiltersInner {
      * @memberof ExchangeFiltersInner
      */
     maxTrailingBelowDelta?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof ExchangeFiltersInner
+     */
+    maxNumOrderAmends?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof ExchangeFiltersInner
+     */
+    maxNumOrderLists?: number;
 }

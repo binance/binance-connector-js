@@ -50,7 +50,7 @@ describe('BorrowRepayApi', () => {
         it('should execute getFutureHourlyInterestRate() successfully with required parameters only', async () => {
             const params: GetFutureHourlyInterestRateRequest = {
                 assets: 'assets_example',
-                isIsolated: true,
+                isIsolated: false,
             };
 
             mockResponse = [
@@ -75,7 +75,7 @@ describe('BorrowRepayApi', () => {
         it('should execute getFutureHourlyInterestRate() successfully with optional parameters', async () => {
             const params: GetFutureHourlyInterestRateRequest = {
                 assets: 'assets_example',
-                isIsolated: true,
+                isIsolated: false,
             };
 
             mockResponse = [
@@ -100,7 +100,7 @@ describe('BorrowRepayApi', () => {
         it('should throw RequiredError when assets is missing', async () => {
             const _params: GetFutureHourlyInterestRateRequest = {
                 assets: 'assets_example',
-                isIsolated: true,
+                isIsolated: false,
             };
             const params = Object.assign({ ..._params });
             delete params?.assets;
@@ -113,7 +113,7 @@ describe('BorrowRepayApi', () => {
         it('should throw RequiredError when isIsolated is missing', async () => {
             const _params: GetFutureHourlyInterestRateRequest = {
                 assets: 'assets_example',
-                isIsolated: true,
+                isIsolated: false,
             };
             const params = Object.assign({ ..._params });
             delete params?.isIsolated;
@@ -126,7 +126,7 @@ describe('BorrowRepayApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: GetFutureHourlyInterestRateRequest = {
                 assets: 'assets_example',
-                isIsolated: true,
+                isIsolated: false,
             };
 
             const errorResponse = {
@@ -243,7 +243,7 @@ describe('BorrowRepayApi', () => {
         it('should execute marginAccountBorrowRepay() successfully with required parameters only', async () => {
             const params: MarginAccountBorrowRepayRequest = {
                 asset: 'asset_example',
-                isIsolated: '',
+                isIsolated: 'FALSE',
                 symbol: 'symbol_example',
                 amount: 'amount_example',
                 type: 'type_example',
@@ -268,7 +268,7 @@ describe('BorrowRepayApi', () => {
         it('should execute marginAccountBorrowRepay() successfully with optional parameters', async () => {
             const params: MarginAccountBorrowRepayRequest = {
                 asset: 'asset_example',
-                isIsolated: '',
+                isIsolated: 'FALSE',
                 symbol: 'symbol_example',
                 amount: 'amount_example',
                 type: 'type_example',
@@ -294,7 +294,7 @@ describe('BorrowRepayApi', () => {
         it('should throw RequiredError when asset is missing', async () => {
             const _params: MarginAccountBorrowRepayRequest = {
                 asset: 'asset_example',
-                isIsolated: '',
+                isIsolated: 'FALSE',
                 symbol: 'symbol_example',
                 amount: 'amount_example',
                 type: 'type_example',
@@ -310,7 +310,7 @@ describe('BorrowRepayApi', () => {
         it('should throw RequiredError when isIsolated is missing', async () => {
             const _params: MarginAccountBorrowRepayRequest = {
                 asset: 'asset_example',
-                isIsolated: '',
+                isIsolated: 'FALSE',
                 symbol: 'symbol_example',
                 amount: 'amount_example',
                 type: 'type_example',
@@ -326,7 +326,7 @@ describe('BorrowRepayApi', () => {
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: MarginAccountBorrowRepayRequest = {
                 asset: 'asset_example',
-                isIsolated: '',
+                isIsolated: 'FALSE',
                 symbol: 'symbol_example',
                 amount: 'amount_example',
                 type: 'type_example',
@@ -342,7 +342,7 @@ describe('BorrowRepayApi', () => {
         it('should throw RequiredError when amount is missing', async () => {
             const _params: MarginAccountBorrowRepayRequest = {
                 asset: 'asset_example',
-                isIsolated: '',
+                isIsolated: 'FALSE',
                 symbol: 'symbol_example',
                 amount: 'amount_example',
                 type: 'type_example',
@@ -358,7 +358,7 @@ describe('BorrowRepayApi', () => {
         it('should throw RequiredError when type is missing', async () => {
             const _params: MarginAccountBorrowRepayRequest = {
                 asset: 'asset_example',
-                isIsolated: '',
+                isIsolated: 'FALSE',
                 symbol: 'symbol_example',
                 amount: 'amount_example',
                 type: 'type_example',
@@ -374,7 +374,7 @@ describe('BorrowRepayApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: MarginAccountBorrowRepayRequest = {
                 asset: 'asset_example',
-                isIsolated: '',
+                isIsolated: 'FALSE',
                 symbol: 'symbol_example',
                 amount: 'amount_example',
                 type: 'type_example',

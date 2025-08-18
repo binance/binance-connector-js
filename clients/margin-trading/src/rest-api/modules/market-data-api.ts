@@ -25,6 +25,7 @@ import type {
     GetAllIsolatedMarginSymbolResponse,
     GetAllMarginAssetsResponse,
     GetDelistScheduleResponse,
+    GetLimitPricePairsResponse,
     GetListScheduleResponse,
     QueryIsolatedMarginTierDataResponse,
     QueryLiabilityCoinLeverageBracketInCrossMarginProModeResponse,
@@ -170,6 +171,33 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
 
             return {
                 endpoint: '/sapi/v1/margin/delist-schedule',
+                method: 'GET',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Query trading pairs with restriction on limit price range.
+         * In margin trading, you can place orders with limit price. Limit price should be within (-15%, 15%) of current index price for a list of margin trading pairs. This rule only impacts limit sell orders with limit price that is lower than current index price and limit buy orders with limit price that is higher than current index price.
+         *
+         * - Buy order: Your order will be rejected with an error message notification if the limit price is 15% above the index price.
+         * - Sell order: Your order will be rejected with an error message notification if the limit price is 15% below the index price.
+         * Please review the limit price order placing strategy, backtest and calibrate the planned order size with the trading volume and order book depth to prevent trading loss.
+         *
+         * Weight: 1
+         *
+         * @summary Get Limit Price Pairs(MARKET_DATA)
+         *
+         * @throws {RequiredError}
+         */
+        getLimitPricePairs: async (): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/margin/limit-price-pairs',
                 method: 'GET',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
@@ -403,6 +431,22 @@ export interface MarketDataApiInterface {
     getDelistSchedule(
         requestParameters?: GetDelistScheduleRequest
     ): Promise<RestApiResponse<GetDelistScheduleResponse>>;
+    /**
+     * Query trading pairs with restriction on limit price range.
+     * In margin trading, you can place orders with limit price. Limit price should be within (-15%, 15%) of current index price for a list of margin trading pairs. This rule only impacts limit sell orders with limit price that is lower than current index price and limit buy orders with limit price that is higher than current index price.
+     *
+     * - Buy order: Your order will be rejected with an error message notification if the limit price is 15% above the index price.
+     * - Sell order: Your order will be rejected with an error message notification if the limit price is 15% below the index price.
+     * Please review the limit price order placing strategy, backtest and calibrate the planned order size with the trading volume and order book depth to prevent trading loss.
+     *
+     * Weight: 1
+     *
+     * @summary Get Limit Price Pairs(MARKET_DATA)
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApiInterface
+     */
+    getLimitPricePairs(): Promise<RestApiResponse<GetLimitPricePairsResponse>>;
     /**
      * Get the upcoming tokens or symbols listing schedule for Cross Margin and Isolated Margin.
      *
@@ -741,6 +785,34 @@ export class MarketDataApi implements MarketDataApiInterface {
             requestParameters?.recvWindow
         );
         return sendRequest<GetDelistScheduleResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: false }
+        );
+    }
+
+    /**
+     * Query trading pairs with restriction on limit price range.
+     * In margin trading, you can place orders with limit price. Limit price should be within (-15%, 15%) of current index price for a list of margin trading pairs. This rule only impacts limit sell orders with limit price that is lower than current index price and limit buy orders with limit price that is higher than current index price.
+     *
+     * - Buy order: Your order will be rejected with an error message notification if the limit price is 15% above the index price.
+     * - Sell order: Your order will be rejected with an error message notification if the limit price is 15% below the index price.
+     * Please review the limit price order placing strategy, backtest and calibrate the planned order size with the trading volume and order book depth to prevent trading loss.
+     *
+     * Weight: 1
+     *
+     * @summary Get Limit Price Pairs(MARKET_DATA)
+     * @returns {Promise<RestApiResponse<GetLimitPricePairsResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApi
+     * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Get-Limit-Price-Pairs Binance API Documentation}
+     */
+    public async getLimitPricePairs(): Promise<RestApiResponse<GetLimitPricePairsResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getLimitPricePairs();
+        return sendRequest<GetLimitPricePairsResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

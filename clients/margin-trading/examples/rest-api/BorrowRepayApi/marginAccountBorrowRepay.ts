@@ -11,7 +11,7 @@ async function marginAccountBorrowRepay() {
     try {
         const response = await client.restAPI.marginAccountBorrowRepay({
             asset: 'asset_example',
-            isIsolated: '',
+            isIsolated: 'FALSE',
             symbol: 'symbol_example',
             amount: 'amount_example',
             type: 'type_example',

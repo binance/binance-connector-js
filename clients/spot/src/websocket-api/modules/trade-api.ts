@@ -582,6 +582,28 @@ export interface OrderCancelReplaceRequest {
     readonly orderRateLimitExceededMode?: OrderCancelReplaceOrderRateLimitExceededModeEnum;
 
     /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiOrderCancelReplace
+     */
+    readonly pegPriceType?: OrderCancelReplacePegPriceTypeEnum;
+
+    /**
+     * Price level to peg the price to (max: 100)
+     * See Pegged Orders
+     * @type {number}
+     * @memberof TradeApiOrderCancelReplace
+     */
+    readonly pegOffsetValue?: number;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiOrderCancelReplace
+     */
+    readonly pegOffsetType?: OrderCancelReplacePegOffsetTypeEnum;
+
+    /**
      * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiOrderCancelReplace
@@ -902,6 +924,27 @@ export interface OrderListPlaceOcoRequest {
 
     /**
      *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
+     * @memberof TradeApiOrderListPlaceOco
+     */
+    readonly abovePegPriceType?: OrderListPlaceOcoAbovePegPriceTypeEnum;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL'}
+     * @memberof TradeApiOrderListPlaceOco
+     */
+    readonly abovePegOffsetType?: OrderListPlaceOcoAbovePegOffsetTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOco
+     */
+    readonly abovePegOffsetValue?: number;
+
+    /**
+     *
      * @type {string}
      * @memberof TradeApiOrderListPlaceOco
      */
@@ -955,6 +998,27 @@ export interface OrderListPlaceOcoRequest {
      * @memberof TradeApiOrderListPlaceOco
      */
     readonly belowStrategyType?: number;
+
+    /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
+     * @memberof TradeApiOrderListPlaceOco
+     */
+    readonly belowPegPriceType?: OrderListPlaceOcoBelowPegPriceTypeEnum;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL'}
+     * @memberof TradeApiOrderListPlaceOco
+     */
+    readonly belowPegOffsetType?: OrderListPlaceOcoBelowPegOffsetTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOco
+     */
+    readonly belowPegOffsetValue?: number;
 
     /**
      *
@@ -1103,6 +1167,27 @@ export interface OrderListPlaceOtoRequest {
     readonly workingStrategyType?: number;
 
     /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
+     * @memberof TradeApiOrderListPlaceOto
+     */
+    readonly workingPegPriceType?: OrderListPlaceOtoWorkingPegPriceTypeEnum;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL'}
+     * @memberof TradeApiOrderListPlaceOto
+     */
+    readonly workingPegOffsetType?: OrderListPlaceOtoWorkingPegOffsetTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOto
+     */
+    readonly workingPegOffsetValue?: number;
+
+    /**
      * Arbitrary unique ID among open orders for the pending order.<br> Automatically generated if not sent.
      * @type {string}
      * @memberof TradeApiOrderListPlaceOto
@@ -1157,6 +1242,27 @@ export interface OrderListPlaceOtoRequest {
      * @memberof TradeApiOrderListPlaceOto
      */
     readonly pendingStrategyType?: number;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL'}
+     * @memberof TradeApiOrderListPlaceOto
+     */
+    readonly pendingPegOffsetType?: OrderListPlaceOtoPendingPegOffsetTypeEnum;
+
+    /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
+     * @memberof TradeApiOrderListPlaceOto
+     */
+    readonly pendingPegPriceType?: OrderListPlaceOtoPendingPegPriceTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOto
+     */
+    readonly pendingPegOffsetValue?: number;
 
     /**
      * The value cannot be greater than `60000`
@@ -1291,6 +1397,27 @@ export interface OrderListPlaceOtocoRequest {
     readonly workingStrategyType?: number;
 
     /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
+     * @memberof TradeApiOrderListPlaceOtoco
+     */
+    readonly workingPegPriceType?: OrderListPlaceOtocoWorkingPegPriceTypeEnum;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL'}
+     * @memberof TradeApiOrderListPlaceOtoco
+     */
+    readonly workingPegOffsetType?: OrderListPlaceOtocoWorkingPegOffsetTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOtoco
+     */
+    readonly workingPegOffsetValue?: number;
+
+    /**
      * Arbitrary unique ID among open orders for the pending above order.<br> Automatically generated if not sent.
      * @type {string}
      * @memberof TradeApiOrderListPlaceOtoco
@@ -1345,6 +1472,27 @@ export interface OrderListPlaceOtocoRequest {
      * @memberof TradeApiOrderListPlaceOtoco
      */
     readonly pendingAboveStrategyType?: number;
+
+    /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
+     * @memberof TradeApiOrderListPlaceOtoco
+     */
+    readonly pendingAbovePegPriceType?: OrderListPlaceOtocoPendingAbovePegPriceTypeEnum;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL'}
+     * @memberof TradeApiOrderListPlaceOtoco
+     */
+    readonly pendingAbovePegOffsetType?: OrderListPlaceOtocoPendingAbovePegOffsetTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOtoco
+     */
+    readonly pendingAbovePegOffsetValue?: number;
 
     /**
      *
@@ -1408,6 +1556,27 @@ export interface OrderListPlaceOtocoRequest {
      * @memberof TradeApiOrderListPlaceOtoco
      */
     readonly pendingBelowStrategyType?: number;
+
+    /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
+     * @memberof TradeApiOrderListPlaceOtoco
+     */
+    readonly pendingBelowPegPriceType?: OrderListPlaceOtocoPendingBelowPegPriceTypeEnum;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL'}
+     * @memberof TradeApiOrderListPlaceOtoco
+     */
+    readonly pendingBelowPegOffsetType?: OrderListPlaceOtocoPendingBelowPegOffsetTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOtoco
+     */
+    readonly pendingBelowPegOffsetValue?: number;
 
     /**
      * The value cannot be greater than `60000`
@@ -1536,6 +1705,28 @@ export interface OrderPlaceRequest {
     readonly selfTradePreventionMode?: OrderPlaceSelfTradePreventionModeEnum;
 
     /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiOrderPlace
+     */
+    readonly pegPriceType?: OrderPlacePegPriceTypeEnum;
+
+    /**
+     * Price level to peg the price to (max: 100)
+     * See Pegged Orders
+     * @type {number}
+     * @memberof TradeApiOrderPlace
+     */
+    readonly pegOffsetValue?: number;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiOrderPlace
+     */
+    readonly pegOffsetType?: OrderPlacePegOffsetTypeEnum;
+
+    /**
      * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiOrderPlace
@@ -1577,7 +1768,7 @@ export interface OrderTestRequest {
     readonly id?: string;
 
     /**
-     * Default: `false`
+     * Default: `false` <br> See [Commissions FAQ](faqs/commission_faq.md#test-order-diferences) to learn more.
      * @type {boolean}
      * @memberof TradeApiOrderTest
      */
@@ -1667,6 +1858,28 @@ export interface OrderTestRequest {
      * @memberof TradeApiOrderTest
      */
     readonly selfTradePreventionMode?: OrderTestSelfTradePreventionModeEnum;
+
+    /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiOrderTest
+     */
+    readonly pegPriceType?: OrderTestPegPriceTypeEnum;
+
+    /**
+     * Price level to peg the price to (max: 100)
+     * See Pegged Orders
+     * @type {number}
+     * @memberof TradeApiOrderTest
+     */
+    readonly pegOffsetValue?: number;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiOrderTest
+     */
+    readonly pegOffsetType?: OrderTestPegOffsetTypeEnum;
 
     /**
      * The value cannot be greater than `60000`
@@ -1822,7 +2035,7 @@ export interface SorOrderTestRequest {
     readonly id?: string;
 
     /**
-     * Default: `false`
+     * Default: `false` <br> See [Commissions FAQ](faqs/commission_faq.md#test-order-diferences) to learn more.
      * @type {boolean}
      * @memberof TradeApiSorOrderTest
      */
@@ -2292,6 +2505,17 @@ export enum OrderCancelReplaceOrderRateLimitExceededModeEnum {
     CANCEL_ONLY = 'CANCEL_ONLY',
 }
 
+export enum OrderCancelReplacePegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum OrderCancelReplacePegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
 export enum OrderListPlaceSideEnum {
     BUY = 'BUY',
     SELL = 'SELL',
@@ -2340,10 +2564,28 @@ export enum OrderListPlaceOcoBelowTypeEnum {
     TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
 }
 
+export enum OrderListPlaceOcoAbovePegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+}
+
+export enum OrderListPlaceOcoAbovePegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
+}
+
 export enum OrderListPlaceOcoBelowTimeInForceEnum {
     belowType = 'belowType',
     STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
     TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+}
+
+export enum OrderListPlaceOcoBelowPegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+}
+
+export enum OrderListPlaceOcoBelowPegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
 }
 
 export enum OrderListPlaceOcoNewOrderRespTypeEnum {
@@ -2411,10 +2653,28 @@ export enum OrderListPlaceOtoWorkingTimeInForceEnum {
     FOK = 'FOK',
 }
 
+export enum OrderListPlaceOtoWorkingPegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+}
+
+export enum OrderListPlaceOtoWorkingPegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
+}
+
 export enum OrderListPlaceOtoPendingTimeInForceEnum {
     GTC = 'GTC',
     IOC = 'IOC',
     FOK = 'FOK',
+}
+
+export enum OrderListPlaceOtoPendingPegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
+}
+
+export enum OrderListPlaceOtoPendingPegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
 }
 
 export enum OrderListPlaceOtocoWorkingTypeEnum {
@@ -2463,10 +2723,28 @@ export enum OrderListPlaceOtocoWorkingTimeInForceEnum {
     FOK = 'FOK',
 }
 
+export enum OrderListPlaceOtocoWorkingPegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+}
+
+export enum OrderListPlaceOtocoWorkingPegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
+}
+
 export enum OrderListPlaceOtocoPendingAboveTimeInForceEnum {
     GTC = 'GTC',
     IOC = 'IOC',
     FOK = 'FOK',
+}
+
+export enum OrderListPlaceOtocoPendingAbovePegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+}
+
+export enum OrderListPlaceOtocoPendingAbovePegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
 }
 
 export enum OrderListPlaceOtocoPendingBelowTypeEnum {
@@ -2480,6 +2758,15 @@ export enum OrderListPlaceOtocoPendingBelowTimeInForceEnum {
     GTC = 'GTC',
     IOC = 'IOC',
     FOK = 'FOK',
+}
+
+export enum OrderListPlaceOtocoPendingBelowPegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+}
+
+export enum OrderListPlaceOtocoPendingBelowPegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
 }
 
 export enum OrderPlaceSideEnum {
@@ -2522,6 +2809,17 @@ export enum OrderPlaceSelfTradePreventionModeEnum {
     NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 
+export enum OrderPlacePegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum OrderPlacePegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
 export enum OrderTestSideEnum {
     BUY = 'BUY',
     SELL = 'SELL',
@@ -2559,6 +2857,17 @@ export enum OrderTestSelfTradePreventionModeEnum {
     EXPIRE_MAKER = 'EXPIRE_MAKER',
     EXPIRE_BOTH = 'EXPIRE_BOTH',
     DECREMENT = 'DECREMENT',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum OrderTestPegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum OrderTestPegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
     NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 

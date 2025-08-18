@@ -79,6 +79,12 @@ describe('AccountApi', () => {
                     buyer: '0.00000030',
                     seller: '0.00000040',
                 },
+                specialCommission: {
+                    maker: '0.01000000',
+                    taker: '0.02000000',
+                    buyer: '0.03000000',
+                    seller: '0.04000000',
+                },
                 taxCommission: {
                     maker: '0.00000112',
                     taker: '0.00000114',
@@ -119,6 +125,12 @@ describe('AccountApi', () => {
                     taker: '0.00000020',
                     buyer: '0.00000030',
                     seller: '0.00000040',
+                },
+                specialCommission: {
+                    maker: '0.01000000',
+                    taker: '0.02000000',
+                    buyer: '0.03000000',
+                    seller: '0.04000000',
                 },
                 taxCommission: {
                     maker: '0.00000112',

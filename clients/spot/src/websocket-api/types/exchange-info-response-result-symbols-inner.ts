@@ -136,6 +136,12 @@ export interface ExchangeInfoResponseResultSymbolsInner {
      * @type {boolean}
      * @memberof ExchangeInfoResponseResultSymbolsInner
      */
+    pegInstructionsAllowed?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof ExchangeInfoResponseResultSymbolsInner
+     */
     isSpotTradingAllowed?: boolean;
     /**
      *

@@ -2628,6 +2628,7 @@ describe('TradeApi', () => {
                 status: 200,
                 result: {
                     standardCommissionForOrder: { maker: '0.00000112', taker: '0.00000114' },
+                    specialCommissionForOrder: { maker: '0.05000000', taker: '0.06000000' },
                     taxCommissionForOrder: { maker: '0.00000112', taker: '0.00000114' },
                     discount: {
                         enabledForAccount: true,

@@ -1,5 +1,17 @@
 # Changelog
 
+## 7.0.0 - 2025-08-18
+
+### Added (1)
+
+#### REST API
+
+- `getLimitPricePairs()` (`GET /sapi/v1/margin/limit-price-pairs`)
+
+### Changed (1)
+
+- Update `@binance/common` library to version `1.2.4`.
+
 ## 6.0.3 - 2025-07-29
 
 ### Changed (1)

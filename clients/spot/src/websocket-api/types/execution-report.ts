@@ -324,4 +324,28 @@ export interface ExecutionReport {
      * @memberof ExecutionReport
      */
     uS?: boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof ExecutionReport
+     */
+    gP?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ExecutionReport
+     */
+    gOT?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof ExecutionReport
+     */
+    gOV?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof ExecutionReport
+     */
+    gp?: string;
 }
