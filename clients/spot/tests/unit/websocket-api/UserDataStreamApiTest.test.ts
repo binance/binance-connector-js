@@ -48,6 +48,155 @@ describe('UserDataStreamApi', () => {
         rateLimits: [],
     };
 
+    describe('sessionSubscriptions()', () => {
+        beforeEach(async () => {
+            mockWs = Object.assign(new EventEmitter(), {
+                close: jest.fn(),
+                ping: jest.fn(),
+                pong: jest.fn(),
+                send: jest.fn(),
+                readyState: WebSocketClient.OPEN,
+                OPEN: WebSocket.OPEN,
+                CLOSED: WebSocket.CLOSED,
+            }) as unknown as jest.Mocked<WebSocketClient> & EventEmitter;
+
+            (WebSocketClient as jest.MockedClass<typeof WebSocketClient>).mockImplementation(
+                () => mockWs
+            );
+
+            const config = new ConfigurationWebsocketAPI({
+                apiKey: 'test-api-key',
+                apiSecret: 'test-api-secret',
+                wsURL: 'ws://localhost:3000',
+                timeout: 1000,
+            });
+
+            websocketBase = new WebsocketAPIBase(config);
+            websocketBase.connect();
+        });
+
+        afterEach(async () => {
+            if (websocketBase) {
+                await websocketBase.disconnect();
+            }
+            jest.clearAllMocks();
+            jest.clearAllTimers();
+        });
+
+        it('should execute sessionSubscriptions() successfully', async () => {
+            mockResponse = {
+                id: 'd3df5a22-88ea-4fe0-9f4e-0fcea5d418b7',
+                status: 200,
+                result: [{ subscriptionId: 1 }, { subscriptionId: 0 }],
+            };
+            mockResponse.id = randomString();
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new UserDataStreamApi(conn);
+                    const sendMsgSpy = jest.spyOn(conn, 'sendMessage');
+                    const responsePromise = websocketAPIClient.sessionSubscriptions({
+                        id: mockResponse?.id,
+                    });
+                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    const response = await responsePromise;
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
+                    expect(response.rateLimits).toEqual(mockResponse.rateLimits);
+                    expect(sendMsgSpy).toHaveBeenCalledWith(
+                        '/session.subscriptions'.slice(1),
+                        expect.any(Object),
+                        { isSigned: false, withApiKey: false }
+                    );
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        });
+
+        it('should handle server error responses gracefully', async () => {
+            mockResponse = {
+                id: randomString(),
+                status: 400,
+                error: {
+                    code: -2010,
+                    msg: 'Account has insufficient balance for requested action.',
+                },
+                rateLimits: [
+                    {
+                        rateLimitType: 'ORDERS',
+                        interval: 'SECOND',
+                        intervalNum: 10,
+                        limit: 50,
+                        count: 13,
+                    },
+                ],
+            };
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new UserDataStreamApi(conn);
+                    const responsePromise = websocketAPIClient.sessionSubscriptions({
+                        id: mockResponse?.id,
+                    });
+                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        });
+
+        it('should handle request timeout gracefully', async () => {
+            jest.useRealTimers();
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new UserDataStreamApi(websocketBase);
+                    const responsePromise = websocketAPIClient.sessionSubscriptions();
+                    await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        }, 10000);
+    });
+
     describe('userDataStreamPing()', () => {
         beforeEach(async () => {
             mockWs = Object.assign(new EventEmitter(), {
@@ -682,6 +831,155 @@ describe('UserDataStreamApi', () => {
                 try {
                     websocketAPIClient = new UserDataStreamApi(websocketBase);
                     const responsePromise = websocketAPIClient.userDataStreamSubscribe();
+                    await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        }, 10000);
+    });
+
+    describe('userDataStreamSubscribeSignature()', () => {
+        beforeEach(async () => {
+            mockWs = Object.assign(new EventEmitter(), {
+                close: jest.fn(),
+                ping: jest.fn(),
+                pong: jest.fn(),
+                send: jest.fn(),
+                readyState: WebSocketClient.OPEN,
+                OPEN: WebSocket.OPEN,
+                CLOSED: WebSocket.CLOSED,
+            }) as unknown as jest.Mocked<WebSocketClient> & EventEmitter;
+
+            (WebSocketClient as jest.MockedClass<typeof WebSocketClient>).mockImplementation(
+                () => mockWs
+            );
+
+            const config = new ConfigurationWebsocketAPI({
+                apiKey: 'test-api-key',
+                apiSecret: 'test-api-secret',
+                wsURL: 'ws://localhost:3000',
+                timeout: 1000,
+            });
+
+            websocketBase = new WebsocketAPIBase(config);
+            websocketBase.connect();
+        });
+
+        afterEach(async () => {
+            if (websocketBase) {
+                await websocketBase.disconnect();
+            }
+            jest.clearAllMocks();
+            jest.clearAllTimers();
+        });
+
+        it('should execute userDataStreamSubscribeSignature() successfully', async () => {
+            mockResponse = {
+                id: 'd3df8a22-98ea-4fe0-9f4e-0fcea5d418b7',
+                status: 200,
+                result: { subscriptionId: 0 },
+            };
+            mockResponse.id = randomString();
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new UserDataStreamApi(conn);
+                    const sendMsgSpy = jest.spyOn(conn, 'sendMessage');
+                    const responsePromise = websocketAPIClient.userDataStreamSubscribeSignature({
+                        id: mockResponse?.id,
+                    });
+                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    const response = await responsePromise;
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
+                    expect(response.rateLimits).toEqual(mockResponse.rateLimits);
+                    expect(sendMsgSpy).toHaveBeenCalledWith(
+                        '/userDataStream.subscribe.signature'.slice(1),
+                        expect.any(Object),
+                        { isSigned: false, withApiKey: true }
+                    );
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        });
+
+        it('should handle server error responses gracefully', async () => {
+            mockResponse = {
+                id: randomString(),
+                status: 400,
+                error: {
+                    code: -2010,
+                    msg: 'Account has insufficient balance for requested action.',
+                },
+                rateLimits: [
+                    {
+                        rateLimitType: 'ORDERS',
+                        interval: 'SECOND',
+                        intervalNum: 10,
+                        limit: 50,
+                        count: 13,
+                    },
+                ],
+            };
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new UserDataStreamApi(conn);
+                    const responsePromise = websocketAPIClient.userDataStreamSubscribeSignature({
+                        id: mockResponse?.id,
+                    });
+                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        });
+
+        it('should handle request timeout gracefully', async () => {
+            jest.useRealTimers();
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new UserDataStreamApi(websocketBase);
+                    const responsePromise = websocketAPIClient.userDataStreamSubscribeSignature();
                     await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
                     resolveTest(true);
                 } catch (error) {

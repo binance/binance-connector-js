@@ -83,10 +83,12 @@ import type {
     SorOrderTestRequest,
 } from './modules/trade-api';
 import type {
+    SessionSubscriptionsRequest,
     UserDataStreamPingRequest,
     UserDataStreamStartRequest,
     UserDataStreamStopRequest,
     UserDataStreamSubscribeRequest,
+    UserDataStreamSubscribeSignatureRequest,
     UserDataStreamUnsubscribeRequest,
 } from './modules/user-data-stream-api';
 
@@ -137,10 +139,12 @@ import type {
     SorOrderTestResponse,
 } from './types';
 import type {
+    SessionSubscriptionsResponse,
     UserDataStreamPingResponse,
     UserDataStreamStartResponse,
     UserDataStreamStopResponse,
     UserDataStreamSubscribeResponse,
+    UserDataStreamSubscribeSignatureResponse,
     UserDataStreamUnsubscribeResponse,
 } from './types';
 
@@ -1067,6 +1071,24 @@ export class WebsocketAPIConnection {
     }
 
     /**
+     *
+     * Weight: 2
+     *
+     **Data Source**:
+     * Memory
+     *
+     * @summary WebSocket Listing all subscriptions
+     * @param {SessionSubscriptionsRequest} requestParameters Request parameters.
+     * @returns Promise<WebsocketApiResponse<SessionSubscriptionsResponse>>
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#listing-all-subscriptions Binance API Documentation}
+     */
+    sessionSubscriptions(
+        requestParameters: SessionSubscriptionsRequest = {}
+    ): Promise<WebsocketApiResponse<SessionSubscriptionsResponse>> {
+        return this.userDataStreamApi.sessionSubscriptions(requestParameters);
+    }
+
+    /**
      * Ping a user data stream to keep it alive.
      *
      * User data streams close automatically after 60 minutes,
@@ -1150,13 +1172,47 @@ export class WebsocketAPIConnection {
     }
 
     /**
+     *
+     * Weight: 2
+     *
+     * @summary WebSocket Subscribe to User Data Stream through signature subscription
+     * @param {UserDataStreamSubscribeSignatureRequest} requestParameters Request parameters.
+     * @param {string} [id] Optional custom stream identifier.
+     * @returns Promise<{response: WebsocketApiResponse<UserDataStreamSubscribeSignatureResponse>, stream: WebsocketStream<object>}>
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#subscribe-to-user-data-stream-through-signature-subscription-user\_stream Binance API Documentation}
+     */
+    userDataStreamSubscribeSignature(
+        requestParameters: UserDataStreamSubscribeSignatureRequest = {},
+        id?: string
+    ): Promise<{
+        response: WebsocketApiResponse<UserDataStreamSubscribeSignatureResponse>;
+        stream: WebsocketStream<UserDataStreamEventsResponse>;
+    }> {
+        return this.userDataStreamApi
+            .userDataStreamSubscribeSignature(requestParameters)
+            .then((response) => {
+                const identifier = id || randomString();
+                const stream = createStreamHandler<UserDataStreamEventsResponse>(
+                    this.websocketBase,
+                    identifier
+                );
+                return { response, stream };
+            })
+            .catch((error) => {
+                throw error;
+            });
+    }
+
+    /**
      * Stop listening to the User Data Stream in the current WebSocket connection.
+     *
+     * Note that `session.logout` will only close the subscription created with `userdataStream.subscribe` but not subscriptions opened with `userDataStream.subscribe.signature`.
      * Weight: 2
      *
      * @summary WebSocket Unsubscribe from User Data Stream
      * @param {UserDataStreamUnsubscribeRequest} requestParameters Request parameters.
      * @returns Promise<WebsocketApiResponse<UserDataStreamUnsubscribeResponse>>
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#unsubscribe-from-user-data-stream-user_stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#unsubscribe-from-user-data-stream Binance API Documentation}
      */
     userDataStreamUnsubscribe(
         requestParameters: UserDataStreamUnsubscribeRequest = {}

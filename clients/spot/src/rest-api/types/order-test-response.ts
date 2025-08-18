@@ -24,6 +24,9 @@
 import type { OrderTestResponseDiscount } from './order-test-response-discount';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { OrderTestResponseSpecialCommissionForOrder } from './order-test-response-special-commission-for-order';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { OrderTestResponseStandardCommissionForOrder } from './order-test-response-standard-commission-for-order';
 
 /**
@@ -38,6 +41,12 @@ export interface OrderTestResponse {
      * @memberof OrderTestResponse
      */
     standardCommissionForOrder?: OrderTestResponseStandardCommissionForOrder;
+    /**
+     *
+     * @type {OrderTestResponseSpecialCommissionForOrder}
+     * @memberof OrderTestResponse
+     */
+    specialCommissionForOrder?: OrderTestResponseSpecialCommissionForOrder;
     /**
      *
      * @type {OrderTestResponseStandardCommissionForOrder}

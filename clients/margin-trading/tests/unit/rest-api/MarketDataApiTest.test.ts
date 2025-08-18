@@ -31,6 +31,7 @@ import type {
     GetAllIsolatedMarginSymbolResponse,
     GetAllMarginAssetsResponse,
     GetDelistScheduleResponse,
+    GetLimitPricePairsResponse,
     GetListScheduleResponse,
     QueryIsolatedMarginTierDataResponse,
     QueryLiabilityCoinLeverageBracketInCrossMarginProModeResponse,
@@ -474,6 +475,50 @@ describe('MarketDataApi', () => {
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'getDelistSchedule').mockRejectedValueOnce(mockError);
             await expect(client.getDelistSchedule()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('getLimitPricePairs()', () => {
+        it('should execute getLimitPricePairs() successfully with required parameters only', async () => {
+            mockResponse = {
+                crossMarginSymbols: [
+                    'BLURUSDC',
+                    'SANDBTC',
+                    'QKCBTC',
+                    'SEIFDUSD',
+                    'NEOUSDC',
+                    'ARBFDUSD',
+                    'ORDIUSDC',
+                ],
+            };
+
+            const spy = jest.spyOn(client, 'getLimitPricePairs').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetLimitPricePairsResponse>)
+            );
+            const response = await client.getLimitPricePairs();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'getLimitPricePairs').mockRejectedValueOnce(mockError);
+            await expect(client.getLimitPricePairs()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

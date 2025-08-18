@@ -11,7 +11,7 @@ async function getFutureHourlyInterestRate() {
     try {
         const response = await client.restAPI.getFutureHourlyInterestRate({
             assets: 'assets_example',
-            isIsolated: true,
+            isIsolated: false,
         });
 
         const rateLimits = response.rateLimits!;

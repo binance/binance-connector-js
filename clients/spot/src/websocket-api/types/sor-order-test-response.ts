@@ -21,10 +21,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderTestResponseResult } from './order-test-response-result';
+import type { RateLimits } from './rate-limits';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { RateLimits } from './rate-limits';
+import type { SorOrderTestResponseResult } from './sor-order-test-response-result';
 
 /**
  *
@@ -46,10 +46,10 @@ export interface SorOrderTestResponse {
     status?: number;
     /**
      *
-     * @type {OrderTestResponseResult}
+     * @type {SorOrderTestResponseResult}
      * @memberof SorOrderTestResponse
      */
-    result?: OrderTestResponseResult;
+    result?: SorOrderTestResponseResult;
     /**
      *
      * @type {RateLimits}

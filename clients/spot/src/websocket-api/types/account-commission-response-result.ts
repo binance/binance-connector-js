@@ -24,6 +24,9 @@
 import type { AccountCommissionResponseResultDiscount } from './account-commission-response-result-discount';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { AccountCommissionResponseResultSpecialCommission } from './account-commission-response-result-special-commission';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { AccountCommissionResponseResultStandardCommission } from './account-commission-response-result-standard-commission';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -47,6 +50,12 @@ export interface AccountCommissionResponseResult {
      * @memberof AccountCommissionResponseResult
      */
     standardCommission?: AccountCommissionResponseResultStandardCommission;
+    /**
+     *
+     * @type {AccountCommissionResponseResultSpecialCommission}
+     * @memberof AccountCommissionResponseResult
+     */
+    specialCommission?: AccountCommissionResponseResultSpecialCommission;
     /**
      *
      * @type {AccountCommissionResponseResultTaxCommission}

@@ -116,9 +116,12 @@ describe('GeneralApi', () => {
                         minTrailingBelowDelta: 10,
                         maxTrailingBelowDelta: 2000,
                     },
+                    { filterType: 'MAX_NUM_ORDER_AMENDS', maxNumOrderAmends: 10 },
+                    { filterType: 'MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
                     { filterType: 'EXCHANGE_MAX_NUM_ORDERS', maxNumOrders: 1000 },
                     { filterType: 'EXCHANGE_MAX_NUM_ALGO_ORDERS', maxNumAlgoOrders: 200 },
                     { filterType: 'EXCHANGE_MAX_NUM_ICEBERG_ORDERS', maxNumIcebergOrders: 10000 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
                 ],
                 symbols: [
                     {
@@ -141,6 +144,7 @@ describe('GeneralApi', () => {
                         allowTrailingStop: false,
                         cancelReplaceAllowed: false,
                         amendAllowed: false,
+                        pegInstructionsAllowed: true,
                         isSpotTradingAllowed: true,
                         isMarginTradingAllowed: true,
                         filters: [
@@ -202,12 +206,15 @@ describe('GeneralApi', () => {
                                 minTrailingBelowDelta: 10,
                                 maxTrailingBelowDelta: 2000,
                             },
+                            { filterType: 'MAX_NUM_ORDER_AMENDS', maxNumOrderAmends: 10 },
+                            { filterType: 'MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
                             { filterType: 'EXCHANGE_MAX_NUM_ORDERS', maxNumOrders: 1000 },
                             { filterType: 'EXCHANGE_MAX_NUM_ALGO_ORDERS', maxNumAlgoOrders: 200 },
                             {
                                 filterType: 'EXCHANGE_MAX_NUM_ICEBERG_ORDERS',
                                 maxNumIcebergOrders: 10000,
                             },
+                            { filterType: 'EXCHANGE_MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
                         ],
                         permissions: [],
                         permissionSets: [['SPOT', 'MARGIN']],
@@ -317,9 +324,12 @@ describe('GeneralApi', () => {
                         minTrailingBelowDelta: 10,
                         maxTrailingBelowDelta: 2000,
                     },
+                    { filterType: 'MAX_NUM_ORDER_AMENDS', maxNumOrderAmends: 10 },
+                    { filterType: 'MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
                     { filterType: 'EXCHANGE_MAX_NUM_ORDERS', maxNumOrders: 1000 },
                     { filterType: 'EXCHANGE_MAX_NUM_ALGO_ORDERS', maxNumAlgoOrders: 200 },
                     { filterType: 'EXCHANGE_MAX_NUM_ICEBERG_ORDERS', maxNumIcebergOrders: 10000 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
                 ],
                 symbols: [
                     {
@@ -342,6 +352,7 @@ describe('GeneralApi', () => {
                         allowTrailingStop: false,
                         cancelReplaceAllowed: false,
                         amendAllowed: false,
+                        pegInstructionsAllowed: true,
                         isSpotTradingAllowed: true,
                         isMarginTradingAllowed: true,
                         filters: [
@@ -403,12 +414,15 @@ describe('GeneralApi', () => {
                                 minTrailingBelowDelta: 10,
                                 maxTrailingBelowDelta: 2000,
                             },
+                            { filterType: 'MAX_NUM_ORDER_AMENDS', maxNumOrderAmends: 10 },
+                            { filterType: 'MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
                             { filterType: 'EXCHANGE_MAX_NUM_ORDERS', maxNumOrders: 1000 },
                             { filterType: 'EXCHANGE_MAX_NUM_ALGO_ORDERS', maxNumAlgoOrders: 200 },
                             {
                                 filterType: 'EXCHANGE_MAX_NUM_ICEBERG_ORDERS',
                                 maxNumIcebergOrders: 10000,
                             },
+                            { filterType: 'EXCHANGE_MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
                         ],
                         permissions: [],
                         permissionSets: [['SPOT', 'MARGIN']],

@@ -218,6 +218,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [icebergQty] Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
          * @param {NewOrderNewOrderRespTypeEnum} [newOrderRespType]
          * @param {NewOrderSelfTradePreventionModeEnum} [selfTradePreventionMode]
+         * @param {NewOrderPegPriceTypeEnum} [pegPriceType]
+         * @param {number} [pegOffsetValue] Priceleveltopegthepriceto(max:100).<br>See[PeggedOrdersInfo](#pegged-orders-info)
+         * @param {NewOrderPegOffsetTypeEnum} [pegOffsetType]
          * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
@@ -238,6 +241,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             icebergQty?: number,
             newOrderRespType?: NewOrderNewOrderRespTypeEnum,
             selfTradePreventionMode?: NewOrderSelfTradePreventionModeEnum,
+            pegPriceType?: NewOrderPegPriceTypeEnum,
+            pegOffsetValue?: number,
+            pegOffsetType?: NewOrderPegOffsetTypeEnum,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
@@ -307,6 +313,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
 
             if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
                 localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
+            }
+
+            if (pegPriceType !== undefined && pegPriceType !== null) {
+                localVarQueryParameter['pegPriceType'] = pegPriceType;
+            }
+
+            if (pegOffsetValue !== undefined && pegOffsetValue !== null) {
+                localVarQueryParameter['pegOffsetValue'] = pegOffsetValue;
+            }
+
+            if (pegOffsetType !== undefined && pegOffsetType !== null) {
+                localVarQueryParameter['pegOffsetType'] = pegOffsetType;
             }
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -420,6 +438,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderCancelReplaceSelfTradePreventionModeEnum} [selfTradePreventionMode]
          * @param {OrderCancelReplaceCancelRestrictionsEnum} [cancelRestrictions]
          * @param {OrderCancelReplaceOrderRateLimitExceededModeEnum} [orderRateLimitExceededMode]
+         * @param {OrderCancelReplacePegPriceTypeEnum} [pegPriceType]
+         * @param {number} [pegOffsetValue] Priceleveltopegthepriceto(max:100).<br>See[PeggedOrdersInfo](#pegged-orders-info)
+         * @param {OrderCancelReplacePegOffsetTypeEnum} [pegOffsetType]
          * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
@@ -446,6 +467,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             selfTradePreventionMode?: OrderCancelReplaceSelfTradePreventionModeEnum,
             cancelRestrictions?: OrderCancelReplaceCancelRestrictionsEnum,
             orderRateLimitExceededMode?: OrderCancelReplaceOrderRateLimitExceededModeEnum,
+            pegPriceType?: OrderCancelReplacePegPriceTypeEnum,
+            pegOffsetValue?: number,
+            pegOffsetType?: OrderCancelReplacePegOffsetTypeEnum,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
@@ -543,6 +567,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
                 localVarQueryParameter['orderRateLimitExceededMode'] = orderRateLimitExceededMode;
             }
 
+            if (pegPriceType !== undefined && pegPriceType !== null) {
+                localVarQueryParameter['pegPriceType'] = pegPriceType;
+            }
+
+            if (pegOffsetValue !== undefined && pegOffsetValue !== null) {
+                localVarQueryParameter['pegOffsetValue'] = pegOffsetValue;
+            }
+
+            if (pegOffsetType !== undefined && pegOffsetType !== null) {
+                localVarQueryParameter['pegOffsetType'] = pegOffsetType;
+            }
+
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -589,6 +625,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [aboveTimeInForce] Required if `aboveType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`
          * @param {number} [aboveStrategyId] Arbitrary numeric value identifying the above order within an order strategy.
          * @param {number} [aboveStrategyType] Arbitrary numeric value identifying the above order strategy. <br>Values smaller than 1000000 are reserved and cannot be used.
+         * @param {OrderListOcoAbovePegPriceTypeEnum} [abovePegPriceType]
+         * @param {OrderListOcoAbovePegOffsetTypeEnum} [abovePegOffsetType]
+         * @param {number} [abovePegOffsetValue]
          * @param {string} [belowClientOrderId] Arbitrary unique ID among open orders for the below order. Automatically generated if not sent
          * @param {number} [belowIcebergQty] Note that this can only be used if `belowTimeInForce` is `GTC`.
          * @param {number} [belowPrice] Can be used if `belowType` is `STOP_LOSS_LIMIT`, `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.
@@ -597,6 +636,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderListOcoBelowTimeInForceEnum} [belowTimeInForce]
          * @param {number} [belowStrategyId] Arbitrary numeric value identifying the below order within an order strategy.
          * @param {number} [belowStrategyType] Arbitrary numeric value identifying the below order strategy. <br>Values smaller than 1000000 are reserved and cannot be used.
+         * @param {OrderListOcoBelowPegPriceTypeEnum} [belowPegPriceType]
+         * @param {OrderListOcoBelowPegOffsetTypeEnum} [belowPegOffsetType]
+         * @param {number} [belowPegOffsetValue]
          * @param {OrderListOcoNewOrderRespTypeEnum} [newOrderRespType]
          * @param {OrderListOcoSelfTradePreventionModeEnum} [selfTradePreventionMode]
          * @param {number} [recvWindow] The value cannot be greater than `60000`
@@ -618,6 +660,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             aboveTimeInForce?: number,
             aboveStrategyId?: number,
             aboveStrategyType?: number,
+            abovePegPriceType?: OrderListOcoAbovePegPriceTypeEnum,
+            abovePegOffsetType?: OrderListOcoAbovePegOffsetTypeEnum,
+            abovePegOffsetValue?: number,
             belowClientOrderId?: string,
             belowIcebergQty?: number,
             belowPrice?: number,
@@ -626,6 +671,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             belowTimeInForce?: OrderListOcoBelowTimeInForceEnum,
             belowStrategyId?: number,
             belowStrategyType?: number,
+            belowPegPriceType?: OrderListOcoBelowPegPriceTypeEnum,
+            belowPegOffsetType?: OrderListOcoBelowPegOffsetTypeEnum,
+            belowPegOffsetValue?: number,
             newOrderRespType?: OrderListOcoNewOrderRespTypeEnum,
             selfTradePreventionMode?: OrderListOcoSelfTradePreventionModeEnum,
             recvWindow?: number
@@ -695,6 +743,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
                 localVarQueryParameter['aboveStrategyType'] = aboveStrategyType;
             }
 
+            if (abovePegPriceType !== undefined && abovePegPriceType !== null) {
+                localVarQueryParameter['abovePegPriceType'] = abovePegPriceType;
+            }
+
+            if (abovePegOffsetType !== undefined && abovePegOffsetType !== null) {
+                localVarQueryParameter['abovePegOffsetType'] = abovePegOffsetType;
+            }
+
+            if (abovePegOffsetValue !== undefined && abovePegOffsetValue !== null) {
+                localVarQueryParameter['abovePegOffsetValue'] = abovePegOffsetValue;
+            }
+
             if (belowType !== undefined && belowType !== null) {
                 localVarQueryParameter['belowType'] = belowType;
             }
@@ -729,6 +789,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
 
             if (belowStrategyType !== undefined && belowStrategyType !== null) {
                 localVarQueryParameter['belowStrategyType'] = belowStrategyType;
+            }
+
+            if (belowPegPriceType !== undefined && belowPegPriceType !== null) {
+                localVarQueryParameter['belowPegPriceType'] = belowPegPriceType;
+            }
+
+            if (belowPegOffsetType !== undefined && belowPegOffsetType !== null) {
+                localVarQueryParameter['belowPegOffsetType'] = belowPegOffsetType;
+            }
+
+            if (belowPegOffsetValue !== undefined && belowPegOffsetValue !== null) {
+                localVarQueryParameter['belowPegOffsetValue'] = belowPegOffsetValue;
             }
 
             if (newOrderRespType !== undefined && newOrderRespType !== null) {
@@ -783,6 +855,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderListOtoWorkingTimeInForceEnum} [workingTimeInForce]
          * @param {number} [workingStrategyId] Arbitrary numeric value identifying the working order within an order strategy.
          * @param {number} [workingStrategyType] Arbitrary numeric value identifying the working order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
+         * @param {OrderListOtoWorkingPegPriceTypeEnum} [workingPegPriceType]
+         * @param {OrderListOtoWorkingPegOffsetTypeEnum} [workingPegOffsetType]
+         * @param {number} [workingPegOffsetValue]
          * @param {string} [pendingClientOrderId] Arbitrary unique ID among open orders for the pending order.<br> Automatically generated if not sent.
          * @param {number} [pendingPrice]
          * @param {number} [pendingStopPrice]
@@ -791,6 +866,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderListOtoPendingTimeInForceEnum} [pendingTimeInForce]
          * @param {number} [pendingStrategyId] Arbitrary numeric value identifying the pending order within an order strategy.
          * @param {number} [pendingStrategyType] Arbitrary numeric value identifying the pending order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
+         * @param {OrderListOtoPendingPegPriceTypeEnum} [pendingPegPriceType]
+         * @param {OrderListOtoPendingPegOffsetTypeEnum} [pendingPegOffsetType]
+         * @param {number} [pendingPegOffsetValue]
          * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
@@ -812,6 +890,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             workingTimeInForce?: OrderListOtoWorkingTimeInForceEnum,
             workingStrategyId?: number,
             workingStrategyType?: number,
+            workingPegPriceType?: OrderListOtoWorkingPegPriceTypeEnum,
+            workingPegOffsetType?: OrderListOtoWorkingPegOffsetTypeEnum,
+            workingPegOffsetValue?: number,
             pendingClientOrderId?: string,
             pendingPrice?: number,
             pendingStopPrice?: number,
@@ -820,6 +901,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             pendingTimeInForce?: OrderListOtoPendingTimeInForceEnum,
             pendingStrategyId?: number,
             pendingStrategyType?: number,
+            pendingPegPriceType?: OrderListOtoPendingPegPriceTypeEnum,
+            pendingPegOffsetType?: OrderListOtoPendingPegOffsetTypeEnum,
+            pendingPegOffsetValue?: number,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
@@ -893,6 +977,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
                 localVarQueryParameter['workingStrategyType'] = workingStrategyType;
             }
 
+            if (workingPegPriceType !== undefined && workingPegPriceType !== null) {
+                localVarQueryParameter['workingPegPriceType'] = workingPegPriceType;
+            }
+
+            if (workingPegOffsetType !== undefined && workingPegOffsetType !== null) {
+                localVarQueryParameter['workingPegOffsetType'] = workingPegOffsetType;
+            }
+
+            if (workingPegOffsetValue !== undefined && workingPegOffsetValue !== null) {
+                localVarQueryParameter['workingPegOffsetValue'] = workingPegOffsetValue;
+            }
+
             if (pendingType !== undefined && pendingType !== null) {
                 localVarQueryParameter['pendingType'] = pendingType;
             }
@@ -935,6 +1031,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
 
             if (pendingStrategyType !== undefined && pendingStrategyType !== null) {
                 localVarQueryParameter['pendingStrategyType'] = pendingStrategyType;
+            }
+
+            if (pendingPegPriceType !== undefined && pendingPegPriceType !== null) {
+                localVarQueryParameter['pendingPegPriceType'] = pendingPegPriceType;
+            }
+
+            if (pendingPegOffsetType !== undefined && pendingPegOffsetType !== null) {
+                localVarQueryParameter['pendingPegOffsetType'] = pendingPegOffsetType;
+            }
+
+            if (pendingPegOffsetValue !== undefined && pendingPegOffsetValue !== null) {
+                localVarQueryParameter['pendingPegOffsetValue'] = pendingPegOffsetValue;
             }
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -981,6 +1089,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderListOtocoWorkingTimeInForceEnum} [workingTimeInForce]
          * @param {number} [workingStrategyId] Arbitrary numeric value identifying the working order within an order strategy.
          * @param {number} [workingStrategyType] Arbitrary numeric value identifying the working order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
+         * @param {OrderListOtocoWorkingPegPriceTypeEnum} [workingPegPriceType]
+         * @param {OrderListOtocoWorkingPegOffsetTypeEnum} [workingPegOffsetType]
+         * @param {number} [workingPegOffsetValue]
          * @param {string} [pendingAboveClientOrderId] Arbitrary unique ID among open orders for the pending above order.<br> Automatically generated if not sent.
          * @param {number} [pendingAbovePrice] Can be used if `pendingAboveType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.
          * @param {number} [pendingAboveStopPrice] Can be used if `pendingAboveType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT`
@@ -989,6 +1100,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderListOtocoPendingAboveTimeInForceEnum} [pendingAboveTimeInForce]
          * @param {number} [pendingAboveStrategyId] Arbitrary numeric value identifying the pending above order within an order strategy.
          * @param {number} [pendingAboveStrategyType] Arbitrary numeric value identifying the pending above order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
+         * @param {OrderListOtocoPendingAbovePegPriceTypeEnum} [pendingAbovePegPriceType]
+         * @param {OrderListOtocoPendingAbovePegOffsetTypeEnum} [pendingAbovePegOffsetType]
+         * @param {number} [pendingAbovePegOffsetValue]
          * @param {OrderListOtocoPendingBelowTypeEnum} [pendingBelowType]
          * @param {string} [pendingBelowClientOrderId] Arbitrary unique ID among open orders for the pending below order.<br> Automatically generated if not sent.
          * @param {number} [pendingBelowPrice] Can be used if `pendingBelowType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT` to specify limit price
@@ -998,6 +1112,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderListOtocoPendingBelowTimeInForceEnum} [pendingBelowTimeInForce]
          * @param {number} [pendingBelowStrategyId] Arbitrary numeric value identifying the pending below order within an order strategy.
          * @param {number} [pendingBelowStrategyType] Arbitrary numeric value identifying the pending below order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
+         * @param {OrderListOtocoPendingBelowPegPriceTypeEnum} [pendingBelowPegPriceType]
+         * @param {OrderListOtocoPendingBelowPegOffsetTypeEnum} [pendingBelowPegOffsetType]
+         * @param {number} [pendingBelowPegOffsetValue]
          * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
@@ -1019,6 +1136,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             workingTimeInForce?: OrderListOtocoWorkingTimeInForceEnum,
             workingStrategyId?: number,
             workingStrategyType?: number,
+            workingPegPriceType?: OrderListOtocoWorkingPegPriceTypeEnum,
+            workingPegOffsetType?: OrderListOtocoWorkingPegOffsetTypeEnum,
+            workingPegOffsetValue?: number,
             pendingAboveClientOrderId?: string,
             pendingAbovePrice?: number,
             pendingAboveStopPrice?: number,
@@ -1027,6 +1147,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             pendingAboveTimeInForce?: OrderListOtocoPendingAboveTimeInForceEnum,
             pendingAboveStrategyId?: number,
             pendingAboveStrategyType?: number,
+            pendingAbovePegPriceType?: OrderListOtocoPendingAbovePegPriceTypeEnum,
+            pendingAbovePegOffsetType?: OrderListOtocoPendingAbovePegOffsetTypeEnum,
+            pendingAbovePegOffsetValue?: number,
             pendingBelowType?: OrderListOtocoPendingBelowTypeEnum,
             pendingBelowClientOrderId?: string,
             pendingBelowPrice?: number,
@@ -1036,6 +1159,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             pendingBelowTimeInForce?: OrderListOtocoPendingBelowTimeInForceEnum,
             pendingBelowStrategyId?: number,
             pendingBelowStrategyType?: number,
+            pendingBelowPegPriceType?: OrderListOtocoPendingBelowPegPriceTypeEnum,
+            pendingBelowPegOffsetType?: OrderListOtocoPendingBelowPegOffsetTypeEnum,
+            pendingBelowPegOffsetValue?: number,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
@@ -1109,6 +1235,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
                 localVarQueryParameter['workingStrategyType'] = workingStrategyType;
             }
 
+            if (workingPegPriceType !== undefined && workingPegPriceType !== null) {
+                localVarQueryParameter['workingPegPriceType'] = workingPegPriceType;
+            }
+
+            if (workingPegOffsetType !== undefined && workingPegOffsetType !== null) {
+                localVarQueryParameter['workingPegOffsetType'] = workingPegOffsetType;
+            }
+
+            if (workingPegOffsetValue !== undefined && workingPegOffsetValue !== null) {
+                localVarQueryParameter['workingPegOffsetValue'] = workingPegOffsetValue;
+            }
+
             if (pendingSide !== undefined && pendingSide !== null) {
                 localVarQueryParameter['pendingSide'] = pendingSide;
             }
@@ -1153,6 +1291,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
                 localVarQueryParameter['pendingAboveStrategyType'] = pendingAboveStrategyType;
             }
 
+            if (pendingAbovePegPriceType !== undefined && pendingAbovePegPriceType !== null) {
+                localVarQueryParameter['pendingAbovePegPriceType'] = pendingAbovePegPriceType;
+            }
+
+            if (pendingAbovePegOffsetType !== undefined && pendingAbovePegOffsetType !== null) {
+                localVarQueryParameter['pendingAbovePegOffsetType'] = pendingAbovePegOffsetType;
+            }
+
+            if (pendingAbovePegOffsetValue !== undefined && pendingAbovePegOffsetValue !== null) {
+                localVarQueryParameter['pendingAbovePegOffsetValue'] = pendingAbovePegOffsetValue;
+            }
+
             if (pendingBelowType !== undefined && pendingBelowType !== null) {
                 localVarQueryParameter['pendingBelowType'] = pendingBelowType;
             }
@@ -1187,6 +1337,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
 
             if (pendingBelowStrategyType !== undefined && pendingBelowStrategyType !== null) {
                 localVarQueryParameter['pendingBelowStrategyType'] = pendingBelowStrategyType;
+            }
+
+            if (pendingBelowPegPriceType !== undefined && pendingBelowPegPriceType !== null) {
+                localVarQueryParameter['pendingBelowPegPriceType'] = pendingBelowPegPriceType;
+            }
+
+            if (pendingBelowPegOffsetType !== undefined && pendingBelowPegOffsetType !== null) {
+                localVarQueryParameter['pendingBelowPegOffsetType'] = pendingBelowPegOffsetType;
+            }
+
+            if (pendingBelowPegOffsetValue !== undefined && pendingBelowPegOffsetValue !== null) {
+                localVarQueryParameter['pendingBelowPegOffsetValue'] = pendingBelowPegOffsetValue;
             }
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -1378,7 +1540,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} symbol
          * @param {OrderTestSideEnum} side
          * @param {OrderTestTypeEnum} type
-         * @param {boolean} [computeCommissionRates] Default: `false`
+         * @param {boolean} [computeCommissionRates] Default: `false` <br> See [Commissions FAQ](faqs/commission_faq.md#test-order-diferences) to learn more.
          * @param {OrderTestTimeInForceEnum} [timeInForce]
          * @param {number} [quantity]
          * @param {number} [quoteOrderQty]
@@ -1391,6 +1553,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [icebergQty] Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
          * @param {OrderTestNewOrderRespTypeEnum} [newOrderRespType]
          * @param {OrderTestSelfTradePreventionModeEnum} [selfTradePreventionMode]
+         * @param {OrderTestPegPriceTypeEnum} [pegPriceType]
+         * @param {number} [pegOffsetValue] Priceleveltopegthepriceto(max:100).<br>See[PeggedOrdersInfo](#pegged-orders-info)
+         * @param {OrderTestPegOffsetTypeEnum} [pegOffsetType]
          * @param {number} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
@@ -1412,6 +1577,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             icebergQty?: number,
             newOrderRespType?: OrderTestNewOrderRespTypeEnum,
             selfTradePreventionMode?: OrderTestSelfTradePreventionModeEnum,
+            pegPriceType?: OrderTestPegPriceTypeEnum,
+            pegOffsetValue?: number,
+            pegOffsetType?: OrderTestPegOffsetTypeEnum,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
@@ -1485,6 +1653,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
 
             if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
                 localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
+            }
+
+            if (pegPriceType !== undefined && pegPriceType !== null) {
+                localVarQueryParameter['pegPriceType'] = pegPriceType;
+            }
+
+            if (pegOffsetValue !== undefined && pegOffsetValue !== null) {
+                localVarQueryParameter['pegOffsetValue'] = pegOffsetValue;
+            }
+
+            if (pegOffsetType !== undefined && pegOffsetType !== null) {
+                localVarQueryParameter['pegOffsetType'] = pegOffsetType;
             }
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -1629,7 +1809,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {SorOrderTestSideEnum} side
          * @param {SorOrderTestTypeEnum} type
          * @param {number} quantity
-         * @param {boolean} [computeCommissionRates] Default: `false`
+         * @param {boolean} [computeCommissionRates] Default: `false` <br> See [Commissions FAQ](faqs/commission_faq.md#test-order-diferences) to learn more.
          * @param {SorOrderTestTimeInForceEnum} [timeInForce]
          * @param {number} [price]
          * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
@@ -2192,6 +2372,27 @@ export interface NewOrderRequest {
     readonly selfTradePreventionMode?: NewOrderSelfTradePreventionModeEnum;
 
     /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiNewOrder
+     */
+    readonly pegPriceType?: NewOrderPegPriceTypeEnum;
+
+    /**
+     * Priceleveltopegthepriceto(max:100).<br>See[PeggedOrdersInfo](#pegged-orders-info)
+     * @type {number}
+     * @memberof TradeApiNewOrder
+     */
+    readonly pegOffsetValue?: number;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiNewOrder
+     */
+    readonly pegOffsetType?: NewOrderPegOffsetTypeEnum;
+
+    /**
      * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiNewOrder
@@ -2400,6 +2601,27 @@ export interface OrderCancelReplaceRequest {
     readonly orderRateLimitExceededMode?: OrderCancelReplaceOrderRateLimitExceededModeEnum;
 
     /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiOrderCancelReplace
+     */
+    readonly pegPriceType?: OrderCancelReplacePegPriceTypeEnum;
+
+    /**
+     * Priceleveltopegthepriceto(max:100).<br>See[PeggedOrdersInfo](#pegged-orders-info)
+     * @type {number}
+     * @memberof TradeApiOrderCancelReplace
+     */
+    readonly pegOffsetValue?: number;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiOrderCancelReplace
+     */
+    readonly pegOffsetType?: OrderCancelReplacePegOffsetTypeEnum;
+
+    /**
      * The value cannot be greater than `60000`
      * @type {number}
      * @memberof TradeApiOrderCancelReplace
@@ -2511,6 +2733,27 @@ export interface OrderListOcoRequest {
     readonly aboveStrategyType?: number;
 
     /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
+     * @memberof TradeApiOrderListOco
+     */
+    readonly abovePegPriceType?: OrderListOcoAbovePegPriceTypeEnum;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL'}
+     * @memberof TradeApiOrderListOco
+     */
+    readonly abovePegOffsetType?: OrderListOcoAbovePegOffsetTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListOco
+     */
+    readonly abovePegOffsetValue?: number;
+
+    /**
      * Arbitrary unique ID among open orders for the below order. Automatically generated if not sent
      * @type {string}
      * @memberof TradeApiOrderListOco
@@ -2565,6 +2808,27 @@ export interface OrderListOcoRequest {
      * @memberof TradeApiOrderListOco
      */
     readonly belowStrategyType?: number;
+
+    /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
+     * @memberof TradeApiOrderListOco
+     */
+    readonly belowPegPriceType?: OrderListOcoBelowPegPriceTypeEnum;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL'}
+     * @memberof TradeApiOrderListOco
+     */
+    readonly belowPegOffsetType?: OrderListOcoBelowPegOffsetTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListOco
+     */
+    readonly belowPegOffsetValue?: number;
 
     /**
      *
@@ -2706,6 +2970,27 @@ export interface OrderListOtoRequest {
     readonly workingStrategyType?: number;
 
     /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
+     * @memberof TradeApiOrderListOto
+     */
+    readonly workingPegPriceType?: OrderListOtoWorkingPegPriceTypeEnum;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL'}
+     * @memberof TradeApiOrderListOto
+     */
+    readonly workingPegOffsetType?: OrderListOtoWorkingPegOffsetTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListOto
+     */
+    readonly workingPegOffsetValue?: number;
+
+    /**
      * Arbitrary unique ID among open orders for the pending order.<br> Automatically generated if not sent.
      * @type {string}
      * @memberof TradeApiOrderListOto
@@ -2760,6 +3045,27 @@ export interface OrderListOtoRequest {
      * @memberof TradeApiOrderListOto
      */
     readonly pendingStrategyType?: number;
+
+    /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
+     * @memberof TradeApiOrderListOto
+     */
+    readonly pendingPegPriceType?: OrderListOtoPendingPegPriceTypeEnum;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL'}
+     * @memberof TradeApiOrderListOto
+     */
+    readonly pendingPegOffsetType?: OrderListOtoPendingPegOffsetTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListOto
+     */
+    readonly pendingPegOffsetValue?: number;
 
     /**
      * The value cannot be greater than `60000`
@@ -2887,6 +3193,27 @@ export interface OrderListOtocoRequest {
     readonly workingStrategyType?: number;
 
     /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
+     * @memberof TradeApiOrderListOtoco
+     */
+    readonly workingPegPriceType?: OrderListOtocoWorkingPegPriceTypeEnum;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL'}
+     * @memberof TradeApiOrderListOtoco
+     */
+    readonly workingPegOffsetType?: OrderListOtocoWorkingPegOffsetTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListOtoco
+     */
+    readonly workingPegOffsetValue?: number;
+
+    /**
      * Arbitrary unique ID among open orders for the pending above order.<br> Automatically generated if not sent.
      * @type {string}
      * @memberof TradeApiOrderListOtoco
@@ -2941,6 +3268,27 @@ export interface OrderListOtocoRequest {
      * @memberof TradeApiOrderListOtoco
      */
     readonly pendingAboveStrategyType?: number;
+
+    /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
+     * @memberof TradeApiOrderListOtoco
+     */
+    readonly pendingAbovePegPriceType?: OrderListOtocoPendingAbovePegPriceTypeEnum;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL'}
+     * @memberof TradeApiOrderListOtoco
+     */
+    readonly pendingAbovePegOffsetType?: OrderListOtocoPendingAbovePegOffsetTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListOtoco
+     */
+    readonly pendingAbovePegOffsetValue?: number;
 
     /**
      *
@@ -3004,6 +3352,27 @@ export interface OrderListOtocoRequest {
      * @memberof TradeApiOrderListOtoco
      */
     readonly pendingBelowStrategyType?: number;
+
+    /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
+     * @memberof TradeApiOrderListOtoco
+     */
+    readonly pendingBelowPegPriceType?: OrderListOtocoPendingBelowPegPriceTypeEnum;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL'}
+     * @memberof TradeApiOrderListOtoco
+     */
+    readonly pendingBelowPegOffsetType?: OrderListOtocoPendingBelowPegOffsetTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListOtoco
+     */
+    readonly pendingBelowPegOffsetValue?: number;
 
     /**
      * The value cannot be greater than `60000`
@@ -3186,7 +3555,7 @@ export interface OrderTestRequest {
     readonly type: OrderTestTypeEnum;
 
     /**
-     * Default: `false`
+     * Default: `false` <br> See [Commissions FAQ](faqs/commission_faq.md#test-order-diferences) to learn more.
      * @type {boolean}
      * @memberof TradeApiOrderTest
      */
@@ -3275,6 +3644,27 @@ export interface OrderTestRequest {
      * @memberof TradeApiOrderTest
      */
     readonly selfTradePreventionMode?: OrderTestSelfTradePreventionModeEnum;
+
+    /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiOrderTest
+     */
+    readonly pegPriceType?: OrderTestPegPriceTypeEnum;
+
+    /**
+     * Priceleveltopegthepriceto(max:100).<br>See[PeggedOrdersInfo](#pegged-orders-info)
+     * @type {number}
+     * @memberof TradeApiOrderTest
+     */
+    readonly pegOffsetValue?: number;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiOrderTest
+     */
+    readonly pegOffsetType?: OrderTestPegOffsetTypeEnum;
 
     /**
      * The value cannot be greater than `60000`
@@ -3415,7 +3805,7 @@ export interface SorOrderTestRequest {
     readonly quantity: number;
 
     /**
-     * Default: `false`
+     * Default: `false` <br> See [Commissions FAQ](faqs/commission_faq.md#test-order-diferences) to learn more.
      * @type {boolean}
      * @memberof TradeApiSorOrderTest
      */
@@ -3622,6 +4012,9 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.icebergQty,
             requestParameters?.newOrderRespType,
             requestParameters?.selfTradePreventionMode,
+            requestParameters?.pegPriceType,
+            requestParameters?.pegOffsetValue,
+            requestParameters?.pegOffsetType,
             requestParameters?.recvWindow
         );
         return sendRequest<NewOrderResponse>(
@@ -3710,6 +4103,9 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.selfTradePreventionMode,
             requestParameters?.cancelRestrictions,
             requestParameters?.orderRateLimitExceededMode,
+            requestParameters?.pegPriceType,
+            requestParameters?.pegOffsetValue,
+            requestParameters?.pegOffsetType,
             requestParameters?.recvWindow
         );
         return sendRequest<OrderCancelReplaceResponse>(
@@ -3764,6 +4160,9 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.aboveTimeInForce,
             requestParameters?.aboveStrategyId,
             requestParameters?.aboveStrategyType,
+            requestParameters?.abovePegPriceType,
+            requestParameters?.abovePegOffsetType,
+            requestParameters?.abovePegOffsetValue,
             requestParameters?.belowClientOrderId,
             requestParameters?.belowIcebergQty,
             requestParameters?.belowPrice,
@@ -3772,6 +4171,9 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.belowTimeInForce,
             requestParameters?.belowStrategyId,
             requestParameters?.belowStrategyType,
+            requestParameters?.belowPegPriceType,
+            requestParameters?.belowPegOffsetType,
+            requestParameters?.belowPegOffsetValue,
             requestParameters?.newOrderRespType,
             requestParameters?.selfTradePreventionMode,
             requestParameters?.recvWindow
@@ -3826,6 +4228,9 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.workingTimeInForce,
             requestParameters?.workingStrategyId,
             requestParameters?.workingStrategyType,
+            requestParameters?.workingPegPriceType,
+            requestParameters?.workingPegOffsetType,
+            requestParameters?.workingPegOffsetValue,
             requestParameters?.pendingClientOrderId,
             requestParameters?.pendingPrice,
             requestParameters?.pendingStopPrice,
@@ -3834,6 +4239,9 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.pendingTimeInForce,
             requestParameters?.pendingStrategyId,
             requestParameters?.pendingStrategyType,
+            requestParameters?.pendingPegPriceType,
+            requestParameters?.pendingPegOffsetType,
+            requestParameters?.pendingPegOffsetValue,
             requestParameters?.recvWindow
         );
         return sendRequest<OrderListOtoResponse>(
@@ -3886,6 +4294,9 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.workingTimeInForce,
             requestParameters?.workingStrategyId,
             requestParameters?.workingStrategyType,
+            requestParameters?.workingPegPriceType,
+            requestParameters?.workingPegOffsetType,
+            requestParameters?.workingPegOffsetValue,
             requestParameters?.pendingAboveClientOrderId,
             requestParameters?.pendingAbovePrice,
             requestParameters?.pendingAboveStopPrice,
@@ -3894,6 +4305,9 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.pendingAboveTimeInForce,
             requestParameters?.pendingAboveStrategyId,
             requestParameters?.pendingAboveStrategyType,
+            requestParameters?.pendingAbovePegPriceType,
+            requestParameters?.pendingAbovePegOffsetType,
+            requestParameters?.pendingAbovePegOffsetValue,
             requestParameters?.pendingBelowType,
             requestParameters?.pendingBelowClientOrderId,
             requestParameters?.pendingBelowPrice,
@@ -3903,6 +4317,9 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.pendingBelowTimeInForce,
             requestParameters?.pendingBelowStrategyId,
             requestParameters?.pendingBelowStrategyType,
+            requestParameters?.pendingBelowPegPriceType,
+            requestParameters?.pendingBelowPegOffsetType,
+            requestParameters?.pendingBelowPegOffsetValue,
             requestParameters?.recvWindow
         );
         return sendRequest<OrderListOtocoResponse>(
@@ -4006,6 +4423,9 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.icebergQty,
             requestParameters?.newOrderRespType,
             requestParameters?.selfTradePreventionMode,
+            requestParameters?.pegPriceType,
+            requestParameters?.pegOffsetValue,
+            requestParameters?.pegOffsetType,
             requestParameters?.recvWindow
         );
         return sendRequest<OrderTestResponse>(
@@ -4155,6 +4575,17 @@ export enum NewOrderSelfTradePreventionModeEnum {
     NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 
+export enum NewOrderPegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum NewOrderPegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
 export enum OrderCancelReplaceSideEnum {
     BUY = 'BUY',
     SELL = 'SELL',
@@ -4212,6 +4643,17 @@ export enum OrderCancelReplaceOrderRateLimitExceededModeEnum {
     CANCEL_ONLY = 'CANCEL_ONLY',
 }
 
+export enum OrderCancelReplacePegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum OrderCancelReplacePegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
 export enum OrderListOcoSideEnum {
     BUY = 'BUY',
     SELL = 'SELL',
@@ -4232,10 +4674,28 @@ export enum OrderListOcoBelowTypeEnum {
     TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
 }
 
+export enum OrderListOcoAbovePegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+}
+
+export enum OrderListOcoAbovePegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
+}
+
 export enum OrderListOcoBelowTimeInForceEnum {
     belowType = 'belowType',
     STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
     TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+}
+
+export enum OrderListOcoBelowPegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+}
+
+export enum OrderListOcoBelowPegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
 }
 
 export enum OrderListOcoNewOrderRespTypeEnum {
@@ -4303,10 +4763,28 @@ export enum OrderListOtoWorkingTimeInForceEnum {
     FOK = 'FOK',
 }
 
+export enum OrderListOtoWorkingPegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+}
+
+export enum OrderListOtoWorkingPegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
+}
+
 export enum OrderListOtoPendingTimeInForceEnum {
     GTC = 'GTC',
     IOC = 'IOC',
     FOK = 'FOK',
+}
+
+export enum OrderListOtoPendingPegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+}
+
+export enum OrderListOtoPendingPegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
 }
 
 export enum OrderListOtocoWorkingTypeEnum {
@@ -4355,10 +4833,28 @@ export enum OrderListOtocoWorkingTimeInForceEnum {
     FOK = 'FOK',
 }
 
+export enum OrderListOtocoWorkingPegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+}
+
+export enum OrderListOtocoWorkingPegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
+}
+
 export enum OrderListOtocoPendingAboveTimeInForceEnum {
     GTC = 'GTC',
     IOC = 'IOC',
     FOK = 'FOK',
+}
+
+export enum OrderListOtocoPendingAbovePegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+}
+
+export enum OrderListOtocoPendingAbovePegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
 }
 
 export enum OrderListOtocoPendingBelowTypeEnum {
@@ -4372,6 +4868,15 @@ export enum OrderListOtocoPendingBelowTimeInForceEnum {
     GTC = 'GTC',
     IOC = 'IOC',
     FOK = 'FOK',
+}
+
+export enum OrderListOtocoPendingBelowPegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+}
+
+export enum OrderListOtocoPendingBelowPegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
 }
 
 export enum OrderOcoSideEnum {
@@ -4439,6 +4944,17 @@ export enum OrderTestSelfTradePreventionModeEnum {
     EXPIRE_MAKER = 'EXPIRE_MAKER',
     EXPIRE_BOTH = 'EXPIRE_BOTH',
     DECREMENT = 'DECREMENT',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum OrderTestPegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum OrderTestPegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
     NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 

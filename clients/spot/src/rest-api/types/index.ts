@@ -1,5 +1,6 @@
 export * from './account-commission-response';
 export * from './account-commission-response-discount';
+export * from './account-commission-response-special-commission';
 export * from './account-commission-response-standard-commission';
 export * from './account-commission-response-tax-commission';
 export * from './agg-trades-response';
@@ -71,6 +72,7 @@ export * from './order-oco-response-order-reports-inner';
 export * from './order-oco-response-orders-inner';
 export * from './order-test-response';
 export * from './order-test-response-discount';
+export * from './order-test-response-special-commission-for-order';
 export * from './order-test-response-standard-commission-for-order';
 export * from './rate-limit-order-response';
 export * from './rate-limit-order-response-inner';
