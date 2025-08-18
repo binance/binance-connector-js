@@ -128,7 +128,8 @@ export class ConfigurationRestAPI {
             proxy: param.proxy && {
                 host: param.proxy.host,
                 port: param.proxy.port,
-                auth: param.proxy.auth,
+                ...(param.proxy.protocol && { protocol: param.proxy.protocol }),
+                ...(param.proxy.auth && { auth: param.proxy.auth }),
             },
             httpsAgent: param.httpsAgent ?? false,
             headers: {
