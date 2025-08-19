@@ -1,5 +1,14 @@
 # Changelog
 
+## 7.0.0 - 2025-08-19
+
+### Changed (1)
+
+#### REST API
+
+- Modified response for `exchangeInformation()` method (`GET /dapi/v1/exchangeInfo`):
+  - `symbols`.`filters`.`multiplierDecimal`: type `integer` → `string`
+
 ## 6.0.4 - 2025-08-18
 
 ### Changed (1)

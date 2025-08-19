@@ -81,8 +81,8 @@ export interface ExchangeInformationResponseSymbolsInnerFiltersInner {
     multiplierDown?: string;
     /**
      *
-     * @type {number}
+     * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInnerFiltersInner
      */
-    multiplierDecimal?: number;
+    multiplierDecimal?: string;
 }

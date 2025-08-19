@@ -563,7 +563,7 @@ describe('MarketDataApi', () => {
                                 filterType: 'PERCENT_PRICE',
                                 multiplierUp: '1.0500',
                                 multiplierDown: '0.9500',
-                                multiplierDecimal: 4,
+                                multiplierDecimal: '4',
                             },
                         ],
                         OrderType: [
