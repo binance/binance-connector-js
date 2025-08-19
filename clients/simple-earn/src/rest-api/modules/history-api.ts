@@ -186,7 +186,7 @@ const HistoryApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 150
          *
          * @summary Get Flexible Rewards History(USER_DATA)
-         * @param {string} type `Bonus` - Bonus tiered APR, `REALTIME` Real-time APR, `REWARDS` Historical rewards,`ALL`(set to default)
+         * @param {string} type `BONUS` - Bonus tiered APR, `REALTIME` Real-time APR, `REWARDS` Historical rewards,`ALL`(set to default)
          * @param {string} [productId]
          * @param {string} [asset]
          * @param {number} [startTime]
@@ -897,7 +897,7 @@ export interface GetFlexibleRedemptionRecordRequest {
  */
 export interface GetFlexibleRewardsHistoryRequest {
     /**
-     * `Bonus` - Bonus tiered APR, `REALTIME` Real-time APR, `REWARDS` Historical rewards,`ALL`(set to default)
+     * `BONUS` - Bonus tiered APR, `REALTIME` Real-time APR, `REWARDS` Historical rewards,`ALL`(set to default)
      * @type {string}
      * @memberof HistoryApiGetFlexibleRewardsHistory
      */

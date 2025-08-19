@@ -10,7 +10,7 @@ const client = new SimpleEarn({ configurationRestAPI });
 async function getFlexibleRewardsHistory() {
     try {
         const response = await client.restAPI.getFlexibleRewardsHistory({
-            type: 'Bonus',
+            type: 'BONUS',
         });
 
         const rateLimits = response.rateLimits!;

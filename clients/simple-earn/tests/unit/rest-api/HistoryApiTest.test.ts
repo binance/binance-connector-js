@@ -229,7 +229,7 @@ describe('HistoryApi', () => {
     describe('getFlexibleRewardsHistory()', () => {
         it('should execute getFlexibleRewardsHistory() successfully with required parameters only', async () => {
             const params: GetFlexibleRewardsHistoryRequest = {
-                type: 'Bonus',
+                type: 'BONUS',
             };
 
             mockResponse = {
@@ -268,7 +268,7 @@ describe('HistoryApi', () => {
 
         it('should execute getFlexibleRewardsHistory() successfully with optional parameters', async () => {
             const params: GetFlexibleRewardsHistoryRequest = {
-                type: 'Bonus',
+                type: 'BONUS',
                 productId: '1',
                 asset: 'asset_example',
                 startTime: 1623319461670,
@@ -314,7 +314,7 @@ describe('HistoryApi', () => {
 
         it('should throw RequiredError when type is missing', async () => {
             const _params: GetFlexibleRewardsHistoryRequest = {
-                type: 'Bonus',
+                type: 'BONUS',
             };
             const params = Object.assign({ ..._params });
             delete params?.type;
@@ -326,7 +326,7 @@ describe('HistoryApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetFlexibleRewardsHistoryRequest = {
-                type: 'Bonus',
+                type: 'BONUS',
             };
 
             const errorResponse = {

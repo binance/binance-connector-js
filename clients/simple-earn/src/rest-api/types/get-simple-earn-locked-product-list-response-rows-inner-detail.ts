@@ -63,10 +63,10 @@ export interface GetSimpleEarnLockedProductListResponseRowsInnerDetail {
     status?: string;
     /**
      *
-     * @type {string}
+     * @type {number}
      * @memberof GetSimpleEarnLockedProductListResponseRowsInnerDetail
      */
-    subscriptionStartTime?: string;
+    subscriptionStartTime?: number;
     /**
      *
      * @type {string}

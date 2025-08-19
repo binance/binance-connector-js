@@ -1,5 +1,15 @@
 # Changelog
 
+## 6.0.0 - 2025-08-19
+
+### Changed (2)
+
+- Modified response for `getSimpleEarnFlexibleProductList()` method (`GET /sapi/v1/simple-earn/flexible/list`):
+  - `rows`.`subscriptionStartTime`: type `string` → `integer`
+
+- Modified response for `getSimpleEarnLockedProductList()` method (`GET /sapi/v1/simple-earn/locked/list`):
+  - `rows`.`detail`.`subscriptionStartTime`: type `string` → `integer`
+
 ## 5.0.7 - 2025-08-18
 
 ### Changed (1)
