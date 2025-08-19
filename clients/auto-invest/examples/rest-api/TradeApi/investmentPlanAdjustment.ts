@@ -11,7 +11,7 @@ async function investmentPlanAdjustment() {
     try {
         const response = await client.restAPI.investmentPlanAdjustment({
             planId: 1,
-            subscriptionAmount: 1,
+            subscriptionAmount: 1.0,
             subscriptionCycle: 'subscriptionCycle_example',
             subscriptionStartTime: 789,
             sourceAsset: 'sourceAsset_example',

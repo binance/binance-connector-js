@@ -11,7 +11,7 @@ async function oneTimeTransaction() {
     try {
         const response = await client.restAPI.oneTimeTransaction({
             sourceType: 'sourceType_example',
-            subscriptionAmount: 1,
+            subscriptionAmount: 1.0,
             sourceAsset: 'sourceAsset_example',
             details: [],
         });

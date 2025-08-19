@@ -12,7 +12,7 @@ async function investmentPlanCreation() {
         const response = await client.restAPI.investmentPlanCreation({
             sourceType: 'sourceType_example',
             planType: 'planType_example',
-            subscriptionAmount: 1,
+            subscriptionAmount: 1.0,
             subscriptionCycle: 'subscriptionCycle_example',
             subscriptionStartTime: 789,
             sourceAsset: 'sourceAsset_example',
