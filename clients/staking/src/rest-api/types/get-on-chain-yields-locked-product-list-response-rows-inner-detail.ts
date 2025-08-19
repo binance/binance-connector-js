@@ -63,10 +63,10 @@ export interface GetOnChainYieldsLockedProductListResponseRowsInnerDetail {
     status?: string;
     /**
      *
-     * @type {string}
+     * @type {number}
      * @memberof GetOnChainYieldsLockedProductListResponseRowsInnerDetail
      */
-    subscriptionStartTime?: string;
+    subscriptionStartTime?: number;
     /**
      *
      * @type {boolean}

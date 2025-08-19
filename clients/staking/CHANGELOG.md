@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.0.0 - 2025-08-19
+
+### Changed (1)
+
+- Modified response for `getOnChainYieldsLockedProductList()` method (`GET /sapi/v1/onchain-yields/locked/list`):
+  - `rows`.`detail`.`subscriptionStartTime`: type `string` → `integer`
+
 ## 3.0.3 - 2025-08-18
 
 ### Changed (1)
