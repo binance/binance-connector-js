@@ -1179,7 +1179,7 @@ export class WebsocketAPIConnection {
      * @param {UserDataStreamSubscribeSignatureRequest} requestParameters Request parameters.
      * @param {string} [id] Optional custom stream identifier.
      * @returns Promise<{response: WebsocketApiResponse<UserDataStreamSubscribeSignatureResponse>, stream: WebsocketStream<object>}>
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#subscribe-to-user-data-stream-through-signature-subscription-user\_stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#subscribe-to-user-data-stream-through-signature-subscription-user_data Binance API Documentation}
      */
     userDataStreamSubscribeSignature(
         requestParameters: UserDataStreamSubscribeSignatureRequest = {},

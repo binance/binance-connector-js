@@ -384,7 +384,7 @@ export class UserDataStreamApi implements UserDataStreamApiInterface {
      * @param {UserDataStreamSubscribeSignatureRequest} requestParameters Request parameters.
      * @returns {Promise<UserDataStreamSubscribeSignatureResponse>}
      * @memberof UserDataStreamApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#subscribe-to-user-data-stream-through-signature-subscription-user\_stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#subscribe-to-user-data-stream-through-signature-subscription-user_data Binance API Documentation}
      */
     public userDataStreamSubscribeSignature(
         requestParameters: UserDataStreamSubscribeSignatureRequest = {}
@@ -392,7 +392,7 @@ export class UserDataStreamApi implements UserDataStreamApiInterface {
         return this.websocketBase.sendMessage<UserDataStreamSubscribeSignatureResponse>(
             '/userDataStream.subscribe.signature'.slice(1),
             requestParameters as unknown as WebsocketSendMsgOptions,
-            { isSigned: false, withApiKey: true }
+            { isSigned: true, withApiKey: false }
         );
     }
 

@@ -1,5 +1,15 @@
 # Changelog
 
+## 15.0.0 - 2025-08-19
+
+### Changed (2)
+
+#### WebSocket API
+
+- Modified response for `userDataStreamUnsubscribe()` method (`POST /userDataStream.unsubscribe`):
+  - `result`: property `subscriptionId` added
+- Fixed bug with `userDataStreamSubscribeSignature()` being unsigned.
+
 ## 14.0.0 - 2025-08-18
 
 ### Added (2)
