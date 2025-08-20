@@ -21,13 +21,13 @@
 /**
  *
  * @export
- * @interface UserDataStreamSubscribeSignatureResponseResult
+ * @interface UserDataStreamSubscribeResponseResult
  */
-export interface UserDataStreamSubscribeSignatureResponseResult {
+export interface UserDataStreamSubscribeResponseResult {
     /**
      *
      * @type {number}
-     * @memberof UserDataStreamSubscribeSignatureResponseResult
+     * @memberof UserDataStreamSubscribeResponseResult
      */
     subscriptionId?: number;
 }

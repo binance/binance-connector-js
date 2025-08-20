@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 
 /**
  * Binance Spot WebSocket API
@@ -17,6 +18,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+
+// May contain unused imports in some cases
+// @ts-ignore
+import type { UserDataStreamSubscribeResponseResult } from './user-data-stream-subscribe-response-result';
 
 /**
  *
@@ -38,8 +43,8 @@ export interface UserDataStreamSubscribeResponse {
     status?: number;
     /**
      *
-     * @type {object}
+     * @type {UserDataStreamSubscribeResponseResult}
      * @memberof UserDataStreamSubscribeResponse
      */
-    result?: object;
+    result?: UserDataStreamSubscribeResponseResult;
 }

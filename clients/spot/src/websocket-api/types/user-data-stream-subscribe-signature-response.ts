@@ -21,7 +21,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { UserDataStreamSubscribeSignatureResponseResult } from './user-data-stream-subscribe-signature-response-result';
+import type { UserDataStreamSubscribeResponseResult } from './user-data-stream-subscribe-response-result';
 
 /**
  *
@@ -43,8 +43,8 @@ export interface UserDataStreamSubscribeSignatureResponse {
     status?: number;
     /**
      *
-     * @type {UserDataStreamSubscribeSignatureResponseResult}
+     * @type {UserDataStreamSubscribeResponseResult}
      * @memberof UserDataStreamSubscribeSignatureResponse
      */
-    result?: UserDataStreamSubscribeSignatureResponseResult;
+    result?: UserDataStreamSubscribeResponseResult;
 }

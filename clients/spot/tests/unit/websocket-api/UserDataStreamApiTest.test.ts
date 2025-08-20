@@ -737,7 +737,11 @@ describe('UserDataStreamApi', () => {
         });
 
         it('should execute userDataStreamSubscribe() successfully', async () => {
-            mockResponse = { id: 'd3df8a21-98ea-4fe0-8f4e-0fcea5d418b7', status: 200, result: {} };
+            mockResponse = {
+                id: 'd3df8a21-98ea-4fe0-8f4e-0fcea5d418b7',
+                status: 200,
+                result: { subscriptionId: 0 },
+            };
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -1031,11 +1035,7 @@ describe('UserDataStreamApi', () => {
         });
 
         it('should execute userDataStreamUnsubscribe() successfully', async () => {
-            mockResponse = {
-                id: 'd3df8a21-98ea-4fe0-8f4e-0fcea5d418b7',
-                status: 200,
-                result: { subscriptionId: 0 },
-            };
+            mockResponse = { id: 'd3df8a21-98ea-4fe0-8f4e-0fcea5d418b7', status: 200, result: {} };
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;

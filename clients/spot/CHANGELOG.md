@@ -1,5 +1,17 @@
 # Changelog
 
+## 16.0.0 - 2025-08-20
+
+### Changed (2)
+
+#### WebSocket API
+
+- Modified response for `userDataStreamSubscribe()` method (`POST /userDataStream.subscribe`):
+  - `result`: property `subscriptionId` added
+
+- Modified response for `userDataStreamUnsubscribe()` method (`POST /userDataStream.unsubscribe`):
+  - `result`: property `subscriptionId` deleted
+
 ## 15.0.0 - 2025-08-19
 
 ### Changed (2)

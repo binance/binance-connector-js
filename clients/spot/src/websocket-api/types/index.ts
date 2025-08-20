@@ -148,6 +148,6 @@ export * from './user-data-stream-start-response';
 export * from './user-data-stream-start-response-result';
 export * from './user-data-stream-stop-response';
 export * from './user-data-stream-subscribe-response';
+export * from './user-data-stream-subscribe-response-result';
 export * from './user-data-stream-subscribe-signature-response';
-export * from './user-data-stream-subscribe-signature-response-result';
 export * from './user-data-stream-unsubscribe-response';
