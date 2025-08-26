@@ -159,6 +159,8 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
          * @summary Flexible Loan Borrow(TRADE)
          * @param {string} loanCoin
          * @param {string} collateralCoin
+         * @param {number} [loanAmount] Mandatory when collateralAmount is empty
+         * @param {number} [collateralAmount] Mandatory when loanAmount is empty
          * @param {number} [recvWindow]
          *
          * @throws {RequiredError}
@@ -166,6 +168,8 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
         flexibleLoanBorrow: async (
             loanCoin: string,
             collateralCoin: string,
+            loanAmount?: number,
+            collateralAmount?: number,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'loanCoin' is not null or undefined
@@ -179,8 +183,16 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
                 localVarQueryParameter['loanCoin'] = loanCoin;
             }
 
+            if (loanAmount !== undefined && loanAmount !== null) {
+                localVarQueryParameter['loanAmount'] = loanAmount;
+            }
+
             if (collateralCoin !== undefined && collateralCoin !== null) {
                 localVarQueryParameter['collateralCoin'] = collateralCoin;
+            }
+
+            if (collateralAmount !== undefined && collateralAmount !== null) {
+                localVarQueryParameter['collateralAmount'] = collateralAmount;
             }
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -931,6 +943,20 @@ export interface FlexibleLoanBorrowRequest {
     readonly collateralCoin: string;
 
     /**
+     * Mandatory when collateralAmount is empty
+     * @type {number}
+     * @memberof FlexibleRateApiFlexibleLoanBorrow
+     */
+    readonly loanAmount?: number;
+
+    /**
+     * Mandatory when loanAmount is empty
+     * @type {number}
+     * @memberof FlexibleRateApiFlexibleLoanBorrow
+     */
+    readonly collateralAmount?: number;
+
+    /**
      *
      * @type {number}
      * @memberof FlexibleRateApiFlexibleLoanBorrow
@@ -1392,6 +1418,8 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.flexibleLoanBorrow(
             requestParameters?.loanCoin,
             requestParameters?.collateralCoin,
+            requestParameters?.loanAmount,
+            requestParameters?.collateralAmount,
             requestParameters?.recvWindow
         );
         return sendRequest<FlexibleLoanBorrowResponse>(

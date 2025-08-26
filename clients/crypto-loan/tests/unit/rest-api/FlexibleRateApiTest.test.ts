@@ -333,6 +333,8 @@ describe('FlexibleRateApi', () => {
             const params: FlexibleLoanBorrowRequest = {
                 loanCoin: 'loanCoin_example',
                 collateralCoin: 'collateralCoin_example',
+                loanAmount: 1.0,
+                collateralAmount: 1.0,
                 recvWindow: 5000,
             };
 
@@ -420,7 +422,7 @@ describe('FlexibleRateApi', () => {
                 remainingCollateral: '5.253',
                 fullRepayment: false,
                 currentLTV: '0.25',
-                repayStatus: 'Repaid',
+                repayStatus: 'REPAID',
             };
 
             const spy = jest.spyOn(client, 'flexibleLoanRepay').mockReturnValue(
@@ -455,7 +457,7 @@ describe('FlexibleRateApi', () => {
                 remainingCollateral: '5.253',
                 fullRepayment: false,
                 currentLTV: '0.25',
-                repayStatus: 'Repaid',
+                repayStatus: 'REPAID',
             };
 
             const spy = jest.spyOn(client, 'flexibleLoanRepay').mockReturnValue(
@@ -1061,7 +1063,7 @@ describe('FlexibleRateApi', () => {
                         repayAmount: '10000',
                         collateralCoin: 'BNB',
                         collateralReturn: '49.27565492',
-                        repayStatus: 'Repaid',
+                        repayStatus: 'REPAID',
                         repayTime: 1575018510000,
                     },
                 ],
@@ -1100,7 +1102,7 @@ describe('FlexibleRateApi', () => {
                         repayAmount: '10000',
                         collateralCoin: 'BNB',
                         collateralReturn: '49.27565492',
-                        repayStatus: 'Repaid',
+                        repayStatus: 'REPAID',
                         repayTime: 1575018510000,
                     },
                 ],

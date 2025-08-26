@@ -1,5 +1,16 @@
 # Changelog
 
+## 7.0.0 - 2025-08-26
+
+### Changed (2)
+
+- Added parameter `collateralAmount`
+  - affected methods:
+    - `flexibleLoanBorrow()` (`POST /sapi/v2/loan/flexible/borrow`)
+- Added parameter `loanAmount`
+  - affected methods:
+    - `flexibleLoanBorrow()` (`POST /sapi/v2/loan/flexible/borrow`)
+
 ## 6.0.7 - 2025-08-18
 
 ### Changed (1)
