@@ -43,6 +43,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} collateralAccountId Multiple split by `,`
          * @param {string} collateralCoin Multiple split by `,`
          * @param {boolean} isFlexibleRate Default: TRUE. TRUE : flexible rate; FALSE: fixed rate
+         * @param {number} [loanTerm] Mandatory for fixed rate. Optional for fixed interest rate. Eg: 30/60 days
          * @param {number} [recvWindow]
          *
          * @throws {RequiredError}
@@ -54,6 +55,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             collateralAccountId: string,
             collateralCoin: string,
             isFlexibleRate: boolean,
+            loanTerm?: number,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'loanAccountId' is not null or undefined
@@ -93,6 +95,10 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
 
             if (isFlexibleRate !== undefined && isFlexibleRate !== null) {
                 localVarQueryParameter['isFlexibleRate'] = isFlexibleRate;
+            }
+
+            if (loanTerm !== undefined && loanTerm !== null) {
+                localVarQueryParameter['loanTerm'] = loanTerm;
             }
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -306,6 +312,13 @@ export interface VipLoanBorrowRequest {
     readonly isFlexibleRate: boolean;
 
     /**
+     * Mandatory for fixed rate. Optional for fixed interest rate. Eg: 30/60 days
+     * @type {number}
+     * @memberof TradeApiVipLoanBorrow
+     */
+    readonly loanTerm?: number;
+
+    /**
      *
      * @type {number}
      * @memberof TradeApiVipLoanBorrow
@@ -407,6 +420,7 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.collateralAccountId,
             requestParameters?.collateralCoin,
             requestParameters?.isFlexibleRate,
+            requestParameters?.loanTerm,
             requestParameters?.recvWindow
         );
         return sendRequest<VipLoanBorrowResponse>(

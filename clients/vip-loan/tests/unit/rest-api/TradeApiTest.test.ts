@@ -84,6 +84,7 @@ describe('TradeApi', () => {
                 collateralAccountId: '1',
                 collateralCoin: 'collateralCoin_example',
                 isFlexibleRate: true,
+                loanTerm: 789,
                 recvWindow: 5000,
             };
 

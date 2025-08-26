@@ -1,5 +1,13 @@
 # Changelog
 
+## 5.0.0 - 2025-08-26
+
+### Changed (1)
+
+- Added parameter `loanTerm`
+  - affected methods:
+    - `vipLoanBorrow()` (`POST /sapi/v1/loan/vip/borrow`)
+
 ## 4.0.3 - 2025-08-18
 
 ### Changed (1)
