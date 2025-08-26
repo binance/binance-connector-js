@@ -1,5 +1,14 @@
 # Changelog
 
+## 11.0.0 - 2025-08-26
+
+### Changed (1)
+
+#### REST API
+
+- Modified response for `accountInformationV3()` method (`GET /fapi/v3/account`):
+  - `assets`: item property `marginAvailable` deleted
+
 ## 10.0.3 - 2025-08-18
 
 ### Changed (1)

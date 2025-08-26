@@ -97,10 +97,4 @@ export interface AccountInformationV3ResponseAssetsInner {
      * @memberof AccountInformationV3ResponseAssetsInner
      */
     updateTime?: number;
-    /**
-     *
-     * @type {boolean}
-     * @memberof AccountInformationV3ResponseAssetsInner
-     */
-    marginAvailable?: boolean;
 }

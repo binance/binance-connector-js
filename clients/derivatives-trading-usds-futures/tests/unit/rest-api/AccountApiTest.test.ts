@@ -433,7 +433,6 @@ describe('AccountApi', () => {
                         crossUnPnl: '0.00000000',
                         availableBalance: '126.72469206',
                         maxWithdrawAmount: '23.72469206',
-                        marginAvailable: true,
                         updateTime: 1625474304765,
                     },
                     {
@@ -449,7 +448,6 @@ describe('AccountApi', () => {
                         crossUnPnl: '0.00000000',
                         availableBalance: '126.72469206',
                         maxWithdrawAmount: '103.12345678',
-                        marginAvailable: true,
                         updateTime: 1625474304765,
                     },
                 ],
@@ -556,7 +554,6 @@ describe('AccountApi', () => {
                         crossUnPnl: '0.00000000',
                         availableBalance: '126.72469206',
                         maxWithdrawAmount: '23.72469206',
-                        marginAvailable: true,
                         updateTime: 1625474304765,
                     },
                     {
@@ -572,7 +569,6 @@ describe('AccountApi', () => {
                         crossUnPnl: '0.00000000',
                         availableBalance: '126.72469206',
                         maxWithdrawAmount: '103.12345678',
-                        marginAvailable: true,
                         updateTime: 1625474304765,
                     },
                 ],

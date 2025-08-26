@@ -827,7 +827,7 @@ export class RestAPI {
      * Get Funding Rate History
      *
      *
-     * If `startTime` and `endTime` are not sent, the most recent `limit` datas are returned.
+     * If `startTime` and `endTime` are not sent, the most recent 200 records are returned.
      * If the number of data between `startTime` and `endTime` is larger than `limit`, return as `startTime` + `limit`.
      * In ascending order.
      *
@@ -1198,7 +1198,7 @@ export class RestAPI {
      * Weight: 1 for a single symbol;
      * 2 when the symbol parameter is omitted
      *
-     * @summary Symbol Price Ticker
+     * @summary Symbol Price Ticker(Deprecated)
      * @param {SymbolPriceTickerRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SymbolPriceTickerResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
