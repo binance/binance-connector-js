@@ -1,5 +1,11 @@
 # Changelog
 
+## 9.0.0 - 2025-08-29
+
+### Added (1)
+
+- `depositHistoryV2()` (`GET /sapi/v2/localentity/deposit/history`)
+
 ## 8.0.1 - 2025-08-18
 
 ### Changed (1)

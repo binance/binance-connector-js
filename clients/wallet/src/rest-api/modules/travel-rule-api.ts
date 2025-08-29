@@ -23,6 +23,7 @@ import type {
     BrokerWithdrawResponse,
     CheckQuestionnaireRequirementsResponse,
     DepositHistoryTravelRuleResponse,
+    DepositHistoryV2Response,
     FetchAddressVerificationListResponse,
     SubmitDepositQuestionnaireResponse,
     SubmitDepositQuestionnaireTravelRuleResponse,
@@ -155,13 +156,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * This API will return user-specific Travel Rule questionnaire requirement information in reference to the current API key.
          *
-         * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-         *
-         * Weight: 18000
-         * Request limit: 10 requests per second
-         * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-         * limit is 180000/second. Response from the endpoint contains header
-         * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
+         * Weight: 1
          *
          * @summary Check Questionnaire Requirements (for local entities that require travel rule) (supporting network) (USER_DATA)
          * @param {number} [recvWindow]
@@ -278,9 +273,89 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
-         * Fetch address verification list
+         * Fetch deposit history for local entities that with required travel rule information.
          *
-         * Weight: 10
+         * Please notice the default `startTime` and `endTime` to make sure that time interval is within
+         * If both ``startTime`` and ``endTime`` are sent, time between ``startTime`` and ``endTime`` must
+         *
+         * Weight: 1
+         *
+         * @summary Deposit History V2 (for local entities that required travel rule) (supporting network) (USER_DATA)
+         * @param {string} [depositId] Comma(,) separated list of wallet tran Ids.
+         * @param {string} [txId]
+         * @param {string} [network]
+         * @param {string} [coin]
+         * @param {boolean} [retrieveQuestionnaire] true: return `questionnaire` within response.
+         * @param {number} [startTime]
+         * @param {number} [endTime]
+         * @param {number} [offset] Default: 0
+         * @param {number} [limit] min 7, max 30, default 7
+         *
+         * @throws {RequiredError}
+         */
+        depositHistoryV2: async (
+            depositId?: string,
+            txId?: string,
+            network?: string,
+            coin?: string,
+            retrieveQuestionnaire?: boolean,
+            startTime?: number,
+            endTime?: number,
+            offset?: number,
+            limit?: number
+        ): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (depositId !== undefined && depositId !== null) {
+                localVarQueryParameter['depositId'] = depositId;
+            }
+
+            if (txId !== undefined && txId !== null) {
+                localVarQueryParameter['txId'] = txId;
+            }
+
+            if (network !== undefined && network !== null) {
+                localVarQueryParameter['network'] = network;
+            }
+
+            if (coin !== undefined && coin !== null) {
+                localVarQueryParameter['coin'] = coin;
+            }
+
+            if (retrieveQuestionnaire !== undefined && retrieveQuestionnaire !== null) {
+                localVarQueryParameter['retrieveQuestionnaire'] = retrieveQuestionnaire;
+            }
+
+            if (startTime !== undefined && startTime !== null) {
+                localVarQueryParameter['startTime'] = startTime;
+            }
+
+            if (endTime !== undefined && endTime !== null) {
+                localVarQueryParameter['endTime'] = endTime;
+            }
+
+            if (offset !== undefined && offset !== null) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined && limit !== null) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v2/localentity/deposit/history',
+                method: 'GET',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Fetch address verification list for user to check on status and other details for the addresses stored in Address Book.
+         *
+         * Weight: 1
          *
          * @summary Fetch address verification list (USER_DATA)
          * @param {number} [recvWindow]
@@ -455,13 +530,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Fetch the VASP list for local entities.
          *
-         * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-         *
-         * Weight: 18000
-         * Request limit: 10 requests per second
-         * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-         * limit is 180000/second. Response from the endpoint contains header
-         * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
+         * Weight: 1
          *
          * @summary VASP list (for local entities that require travel rule) (supporting network) (USER_DATA)
          * @param {number} [recvWindow]
@@ -488,16 +557,11 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Fetch withdraw history for local entities that required travel rule.
          *
-         * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
          * `network` may not be in the response for old withdraw.
          * Please notice the default `startTime` and `endTime` to make sure that time interval is within
          * If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less
          *
-         * Weight: 18000
-         * Request limit: 10 requests per second
-         * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-         * limit is 180000/second. Response from the endpoint contains header
-         * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
+         * Weight: 1
          *
          * @summary Withdraw History (for local entities that require travel rule) (supporting network) (USER_DATA)
          * @param {string} [trId] Comma(,) separated list of travel rule record Ids.
@@ -586,7 +650,6 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Fetch withdraw history for local entities that required travel rule.
          *
-         * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
          * `network` may not be in the response for old withdraw.
          * Withdrawal made through /sapi/v1/capital/withdraw/apply may not be in the response.
          * Please notice the default `startTime` and `endTime` to make sure that time interval is within
@@ -597,11 +660,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * WithdrawOrderId only support 1.
          * If responsible does not include withdrawalStatus, please input trId or txId retrieve the data.
          *
-         * Weight: 18000
-         * Request limit: 10 requests per second
-         * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-         * limit is 180000/second. Response from the endpoint contains header
-         * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
+         * Weight: 1
          *
          * @summary Withdraw History V2 (for local entities that require travel rule) (supporting network) (USER_DATA)
          * @param {string} [trId] Comma(,) separated list of travel rule record Ids.
@@ -820,13 +879,7 @@ export interface TravelRuleApiInterface {
     /**
      * This API will return user-specific Travel Rule questionnaire requirement information in reference to the current API key.
      *
-     * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-     *
-     * Weight: 18000
-     * Request limit: 10 requests per second
-     * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-     * limit is 180000/second. Response from the endpoint contains header
-     * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
+     * Weight: 1
      *
      * @summary Check Questionnaire Requirements (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {CheckQuestionnaireRequirementsRequest} requestParameters Request parameters.
@@ -855,9 +908,26 @@ export interface TravelRuleApiInterface {
         requestParameters?: DepositHistoryTravelRuleRequest
     ): Promise<RestApiResponse<DepositHistoryTravelRuleResponse>>;
     /**
-     * Fetch address verification list
+     * Fetch deposit history for local entities that with required travel rule information.
      *
-     * Weight: 10
+     * Please notice the default `startTime` and `endTime` to make sure that time interval is within
+     * If both ``startTime`` and ``endTime`` are sent, time between ``startTime`` and ``endTime`` must
+     *
+     * Weight: 1
+     *
+     * @summary Deposit History V2 (for local entities that required travel rule) (supporting network) (USER_DATA)
+     * @param {DepositHistoryV2Request} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TravelRuleApiInterface
+     */
+    depositHistoryV2(
+        requestParameters?: DepositHistoryV2Request
+    ): Promise<RestApiResponse<DepositHistoryV2Response>>;
+    /**
+     * Fetch address verification list for user to check on status and other details for the addresses stored in Address Book.
+     *
+     * Weight: 1
      *
      * @summary Fetch address verification list (USER_DATA)
      * @param {FetchAddressVerificationListRequest} requestParameters Request parameters.
@@ -909,13 +979,7 @@ export interface TravelRuleApiInterface {
     /**
      * Fetch the VASP list for local entities.
      *
-     * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-     *
-     * Weight: 18000
-     * Request limit: 10 requests per second
-     * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-     * limit is 180000/second. Response from the endpoint contains header
-     * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
+     * Weight: 1
      *
      * @summary VASP list (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {VaspListRequest} requestParameters Request parameters.
@@ -927,16 +991,11 @@ export interface TravelRuleApiInterface {
     /**
      * Fetch withdraw history for local entities that required travel rule.
      *
-     * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
      * `network` may not be in the response for old withdraw.
      * Please notice the default `startTime` and `endTime` to make sure that time interval is within
      * If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less
      *
-     * Weight: 18000
-     * Request limit: 10 requests per second
-     * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-     * limit is 180000/second. Response from the endpoint contains header
-     * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
+     * Weight: 1
      *
      * @summary Withdraw History (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {WithdrawHistoryV1Request} requestParameters Request parameters.
@@ -950,7 +1009,6 @@ export interface TravelRuleApiInterface {
     /**
      * Fetch withdraw history for local entities that required travel rule.
      *
-     * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
      * `network` may not be in the response for old withdraw.
      * Withdrawal made through /sapi/v1/capital/withdraw/apply may not be in the response.
      * Please notice the default `startTime` and `endTime` to make sure that time interval is within
@@ -961,11 +1019,7 @@ export interface TravelRuleApiInterface {
      * WithdrawOrderId only support 1.
      * If responsible does not include withdrawalStatus, please input trId or txId retrieve the data.
      *
-     * Weight: 18000
-     * Request limit: 10 requests per second
-     * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-     * limit is 180000/second. Response from the endpoint contains header
-     * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
+     * Weight: 1
      *
      * @summary Withdraw History V2 (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {WithdrawHistoryV2Request} requestParameters Request parameters.
@@ -1179,6 +1233,75 @@ export interface DepositHistoryTravelRuleRequest {
      * min 7, max 30, default 7
      * @type {number}
      * @memberof TravelRuleApiDepositHistoryTravelRule
+     */
+    readonly limit?: number;
+}
+
+/**
+ * Request parameters for depositHistoryV2 operation in TravelRuleApi.
+ * @interface DepositHistoryV2Request
+ */
+export interface DepositHistoryV2Request {
+    /**
+     * Comma(,) separated list of wallet tran Ids.
+     * @type {string}
+     * @memberof TravelRuleApiDepositHistoryV2
+     */
+    readonly depositId?: string;
+
+    /**
+     *
+     * @type {string}
+     * @memberof TravelRuleApiDepositHistoryV2
+     */
+    readonly txId?: string;
+
+    /**
+     *
+     * @type {string}
+     * @memberof TravelRuleApiDepositHistoryV2
+     */
+    readonly network?: string;
+
+    /**
+     *
+     * @type {string}
+     * @memberof TravelRuleApiDepositHistoryV2
+     */
+    readonly coin?: string;
+
+    /**
+     * true: return `questionnaire` within response.
+     * @type {boolean}
+     * @memberof TravelRuleApiDepositHistoryV2
+     */
+    readonly retrieveQuestionnaire?: boolean;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TravelRuleApiDepositHistoryV2
+     */
+    readonly startTime?: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TravelRuleApiDepositHistoryV2
+     */
+    readonly endTime?: number;
+
+    /**
+     * Default: 0
+     * @type {number}
+     * @memberof TravelRuleApiDepositHistoryV2
+     */
+    readonly offset?: number;
+
+    /**
+     * min 7, max 30, default 7
+     * @type {number}
+     * @memberof TravelRuleApiDepositHistoryV2
      */
     readonly limit?: number;
 }
@@ -1614,13 +1737,7 @@ export class TravelRuleApi implements TravelRuleApiInterface {
     /**
      * This API will return user-specific Travel Rule questionnaire requirement information in reference to the current API key.
      *
-     * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-     *
-     * Weight: 18000
-     * Request limit: 10 requests per second
-     * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-     * limit is 180000/second. Response from the endpoint contains header
-     * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
+     * Weight: 1
      *
      * @summary Check Questionnaire Requirements (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {CheckQuestionnaireRequirementsRequest} requestParameters Request parameters.
@@ -1688,9 +1805,48 @@ export class TravelRuleApi implements TravelRuleApiInterface {
     }
 
     /**
-     * Fetch address verification list
+     * Fetch deposit history for local entities that with required travel rule information.
      *
-     * Weight: 10
+     * Please notice the default `startTime` and `endTime` to make sure that time interval is within
+     * If both ``startTime`` and ``endTime`` are sent, time between ``startTime`` and ``endTime`` must
+     *
+     * Weight: 1
+     *
+     * @summary Deposit History V2 (for local entities that required travel rule) (supporting network) (USER_DATA)
+     * @param {DepositHistoryV2Request} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<DepositHistoryV2Response>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TravelRuleApi
+     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/Deposit-History-V2 Binance API Documentation}
+     */
+    public async depositHistoryV2(
+        requestParameters: DepositHistoryV2Request = {}
+    ): Promise<RestApiResponse<DepositHistoryV2Response>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.depositHistoryV2(
+            requestParameters?.depositId,
+            requestParameters?.txId,
+            requestParameters?.network,
+            requestParameters?.coin,
+            requestParameters?.retrieveQuestionnaire,
+            requestParameters?.startTime,
+            requestParameters?.endTime,
+            requestParameters?.offset,
+            requestParameters?.limit
+        );
+        return sendRequest<DepositHistoryV2Response>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Fetch address verification list for user to check on status and other details for the addresses stored in Address Book.
+     *
+     * Weight: 1
      *
      * @summary Fetch address verification list (USER_DATA)
      * @param {FetchAddressVerificationListRequest} requestParameters Request parameters.
@@ -1795,13 +1951,7 @@ export class TravelRuleApi implements TravelRuleApiInterface {
     /**
      * Fetch the VASP list for local entities.
      *
-     * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-     *
-     * Weight: 18000
-     * Request limit: 10 requests per second
-     * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-     * limit is 180000/second. Response from the endpoint contains header
-     * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
+     * Weight: 1
      *
      * @summary VASP list (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {VaspListRequest} requestParameters Request parameters.
@@ -1829,16 +1979,11 @@ export class TravelRuleApi implements TravelRuleApiInterface {
     /**
      * Fetch withdraw history for local entities that required travel rule.
      *
-     * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
      * `network` may not be in the response for old withdraw.
      * Please notice the default `startTime` and `endTime` to make sure that time interval is within
      * If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less
      *
-     * Weight: 18000
-     * Request limit: 10 requests per second
-     * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-     * limit is 180000/second. Response from the endpoint contains header
-     * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
+     * Weight: 1
      *
      * @summary Withdraw History (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {WithdrawHistoryV1Request} requestParameters Request parameters.
@@ -1876,7 +2021,6 @@ export class TravelRuleApi implements TravelRuleApiInterface {
     /**
      * Fetch withdraw history for local entities that required travel rule.
      *
-     * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
      * `network` may not be in the response for old withdraw.
      * Withdrawal made through /sapi/v1/capital/withdraw/apply may not be in the response.
      * Please notice the default `startTime` and `endTime` to make sure that time interval is within
@@ -1887,11 +2031,7 @@ export class TravelRuleApi implements TravelRuleApiInterface {
      * WithdrawOrderId only support 1.
      * If responsible does not include withdrawalStatus, please input trId or txId retrieve the data.
      *
-     * Weight: 18000
-     * Request limit: 10 requests per second
-     * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-     * limit is 180000/second. Response from the endpoint contains header
-     * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
+     * Weight: 1
      *
      * @summary Withdraw History V2 (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {WithdrawHistoryV2Request} requestParameters Request parameters.

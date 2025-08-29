@@ -19,6 +19,7 @@ import {
     BrokerWithdrawRequest,
     CheckQuestionnaireRequirementsRequest,
     DepositHistoryTravelRuleRequest,
+    DepositHistoryV2Request,
     FetchAddressVerificationListRequest,
     SubmitDepositQuestionnaireRequest,
     SubmitDepositQuestionnaireTravelRuleRequest,
@@ -31,6 +32,7 @@ import type {
     BrokerWithdrawResponse,
     CheckQuestionnaireRequirementsResponse,
     DepositHistoryTravelRuleResponse,
+    DepositHistoryV2Response,
     FetchAddressVerificationListResponse,
     SubmitDepositQuestionnaireResponse,
     SubmitDepositQuestionnaireTravelRuleResponse,
@@ -342,7 +344,7 @@ describe('TravelRuleApi', () => {
                     confirmTimes: '1/1',
                     unlockConfirm: 0,
                     walletType: 0,
-                    requireQuestionnaire: true,
+                    requireQuestionnaire: false,
                     questionnaire: null,
                 },
                 {
@@ -413,7 +415,7 @@ describe('TravelRuleApi', () => {
                     confirmTimes: '1/1',
                     unlockConfirm: 0,
                     walletType: 0,
-                    requireQuestionnaire: true,
+                    requireQuestionnaire: false,
                     questionnaire: null,
                 },
                 {
@@ -466,6 +468,103 @@ describe('TravelRuleApi', () => {
                 .spyOn(client, 'depositHistoryTravelRule')
                 .mockRejectedValueOnce(mockError);
             await expect(client.depositHistoryTravelRule()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('depositHistoryV2()', () => {
+        it('should execute depositHistoryV2() successfully with required parameters only', async () => {
+            mockResponse = [
+                {
+                    depositId: '4615328107052018945',
+                    amount: '0.01',
+                    network: 'AVAXC',
+                    coin: 'AVAX',
+                    depositStatus: 1,
+                    travelRuleReqStatus: 0,
+                    address: '0x0010627ab66d69232f4080d54e0f838b4dc3894a',
+                    addressTag: '',
+                    txId: '0xdde578983015741eed764e7ca10defb5a2caafdca3db5f92872d24a96beb1879',
+                    transferType: 0,
+                    confirmTimes: '12/12',
+                    requireQuestionnaire: false,
+                    questionnaire: { vaspName: 'BINANCE', depositOriginator: 0 },
+                    insertTime: 1753053392000,
+                },
+            ];
+
+            const spy = jest.spyOn(client, 'depositHistoryV2').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<DepositHistoryV2Response>)
+            );
+            const response = await client.depositHistoryV2();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute depositHistoryV2() successfully with optional parameters', async () => {
+            const params: DepositHistoryV2Request = {
+                depositId: '1',
+                txId: '1',
+                network: 'network_example',
+                coin: 'coin_example',
+                retrieveQuestionnaire: true,
+                startTime: 1623319461670,
+                endTime: 1641782889000,
+                offset: 0,
+                limit: 7,
+            };
+
+            mockResponse = [
+                {
+                    depositId: '4615328107052018945',
+                    amount: '0.01',
+                    network: 'AVAXC',
+                    coin: 'AVAX',
+                    depositStatus: 1,
+                    travelRuleReqStatus: 0,
+                    address: '0x0010627ab66d69232f4080d54e0f838b4dc3894a',
+                    addressTag: '',
+                    txId: '0xdde578983015741eed764e7ca10defb5a2caafdca3db5f92872d24a96beb1879',
+                    transferType: 0,
+                    confirmTimes: '12/12',
+                    requireQuestionnaire: false,
+                    questionnaire: { vaspName: 'BINANCE', depositOriginator: 0 },
+                    insertTime: 1753053392000,
+                },
+            ];
+
+            const spy = jest.spyOn(client, 'depositHistoryV2').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<DepositHistoryV2Response>)
+            );
+            const response = await client.depositHistoryV2(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'depositHistoryV2').mockRejectedValueOnce(mockError);
+            await expect(client.depositHistoryV2()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

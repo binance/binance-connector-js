@@ -339,6 +339,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * If `network` not send, return with default network of the coin.
          * You can get `network` and `isDefault` in `networkList` of a coin in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
+         * To check if travel rule is required, by using  `GET /sapi/v1/localentity/questionnaire-requirements` and if it returns anything other than `NIL` you will need update SAPI to `POST /sapi/v1/localentity/withdraw/apply` else you can continue `POST /sapi/v1/capital/withdraw/apply`. Please note that if you are required to comply to travel rule please refer to the Travel Rule SAPI.
          *
          * Weight: 900
          *
@@ -632,6 +633,7 @@ export interface CapitalApiInterface {
      *
      * If `network` not send, return with default network of the coin.
      * You can get `network` and `isDefault` in `networkList` of a coin in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
+     * To check if travel rule is required, by using  `GET /sapi/v1/localentity/questionnaire-requirements` and if it returns anything other than `NIL` you will need update SAPI to `POST /sapi/v1/localentity/withdraw/apply` else you can continue `POST /sapi/v1/capital/withdraw/apply`. Please note that if you are required to comply to travel rule please refer to the Travel Rule SAPI.
      *
      * Weight: 900
      *
@@ -1218,6 +1220,7 @@ export class CapitalApi implements CapitalApiInterface {
      *
      * If `network` not send, return with default network of the coin.
      * You can get `network` and `isDefault` in `networkList` of a coin in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
+     * To check if travel rule is required, by using  `GET /sapi/v1/localentity/questionnaire-requirements` and if it returns anything other than `NIL` you will need update SAPI to `POST /sapi/v1/localentity/withdraw/apply` else you can continue `POST /sapi/v1/capital/withdraw/apply`. Please note that if you are required to comply to travel rule please refer to the Travel Rule SAPI.
      *
      * Weight: 900
      *

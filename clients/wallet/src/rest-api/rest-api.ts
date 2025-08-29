@@ -57,6 +57,7 @@ import type {
     BrokerWithdrawRequest,
     CheckQuestionnaireRequirementsRequest,
     DepositHistoryTravelRuleRequest,
+    DepositHistoryV2Request,
     FetchAddressVerificationListRequest,
     SubmitDepositQuestionnaireRequest,
     SubmitDepositQuestionnaireTravelRuleRequest,
@@ -106,6 +107,7 @@ import type {
     BrokerWithdrawResponse,
     CheckQuestionnaireRequirementsResponse,
     DepositHistoryTravelRuleResponse,
+    DepositHistoryV2Response,
     FetchAddressVerificationListResponse,
     SubmitDepositQuestionnaireResponse,
     SubmitDepositQuestionnaireTravelRuleResponse,
@@ -740,6 +742,7 @@ export class RestAPI {
      *
      * If `network` not send, return with default network of the coin.
      * You can get `network` and `isDefault` in `networkList` of a coin in the response of `Get /sapi/v1/capital/config/getall (HMAC SHA256)`.
+     * To check if travel rule is required, by using  `GET /sapi/v1/localentity/questionnaire-requirements` and if it returns anything other than `NIL` you will need update SAPI to `POST /sapi/v1/localentity/withdraw/apply` else you can continue `POST /sapi/v1/capital/withdraw/apply`. Please note that if you are required to comply to travel rule please refer to the Travel Rule SAPI.
      *
      * Weight: 900
      *
@@ -834,13 +837,7 @@ export class RestAPI {
     /**
      * This API will return user-specific Travel Rule questionnaire requirement information in reference to the current API key.
      *
-     * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-     *
-     * Weight: 18000
-     * Request limit: 10 requests per second
-     * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-     * limit is 180000/second. Response from the endpoint contains header
-     * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
+     * Weight: 1
      *
      * @summary Check Questionnaire Requirements (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {CheckQuestionnaireRequirementsRequest} requestParameters Request parameters.
@@ -875,9 +872,29 @@ export class RestAPI {
     }
 
     /**
-     * Fetch address verification list
+     * Fetch deposit history for local entities that with required travel rule information.
      *
-     * Weight: 10
+     * Please notice the default `startTime` and `endTime` to make sure that time interval is within
+     * If both ``startTime`` and ``endTime`` are sent, time between ``startTime`` and ``endTime`` must
+     *
+     * Weight: 1
+     *
+     * @summary Deposit History V2 (for local entities that required travel rule) (supporting network) (USER_DATA)
+     * @param {DepositHistoryV2Request} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<DepositHistoryV2Response>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/Deposit-History-V2 Binance API Documentation}
+     */
+    depositHistoryV2(
+        requestParameters: DepositHistoryV2Request = {}
+    ): Promise<RestApiResponse<DepositHistoryV2Response>> {
+        return this.travelRuleApi.depositHistoryV2(requestParameters);
+    }
+
+    /**
+     * Fetch address verification list for user to check on status and other details for the addresses stored in Address Book.
+     *
+     * Weight: 1
      *
      * @summary Fetch address verification list (USER_DATA)
      * @param {FetchAddressVerificationListRequest} requestParameters Request parameters.
@@ -938,13 +955,7 @@ export class RestAPI {
     /**
      * Fetch the VASP list for local entities.
      *
-     * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-     *
-     * Weight: 18000
-     * Request limit: 10 requests per second
-     * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-     * limit is 180000/second. Response from the endpoint contains header
-     * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
+     * Weight: 1
      *
      * @summary VASP list (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {VaspListRequest} requestParameters Request parameters.
@@ -959,16 +970,11 @@ export class RestAPI {
     /**
      * Fetch withdraw history for local entities that required travel rule.
      *
-     * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
      * `network` may not be in the response for old withdraw.
      * Please notice the default `startTime` and `endTime` to make sure that time interval is within
      * If both `startTime` and `endTime`are sent, time between `startTime`and `endTime`must be less
      *
-     * Weight: 18000
-     * Request limit: 10 requests per second
-     * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-     * limit is 180000/second. Response from the endpoint contains header
-     * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
+     * Weight: 1
      *
      * @summary Withdraw History (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {WithdrawHistoryV1Request} requestParameters Request parameters.
@@ -985,7 +991,6 @@ export class RestAPI {
     /**
      * Fetch withdraw history for local entities that required travel rule.
      *
-     * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
      * `network` may not be in the response for old withdraw.
      * Withdrawal made through /sapi/v1/capital/withdraw/apply may not be in the response.
      * Please notice the default `startTime` and `endTime` to make sure that time interval is within
@@ -996,11 +1001,7 @@ export class RestAPI {
      * WithdrawOrderId only support 1.
      * If responsible does not include withdrawalStatus, please input trId or txId retrieve the data.
      *
-     * Weight: 18000
-     * Request limit: 10 requests per second
-     * > * This endpoint specifically uses per second IP rate limit, user's total second level IP rate
-     * limit is 180000/second. Response from the endpoint contains header
-     * key X-SAPI-USED-IP-WEIGHT-1S, which defines weight used by the current IP.
+     * Weight: 1
      *
      * @summary Withdraw History V2 (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {WithdrawHistoryV2Request} requestParameters Request parameters.
