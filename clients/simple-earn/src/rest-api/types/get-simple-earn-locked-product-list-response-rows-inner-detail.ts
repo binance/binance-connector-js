@@ -93,8 +93,8 @@ export interface GetSimpleEarnLockedProductListResponseRowsInnerDetail {
     boostApr?: string;
     /**
      *
-     * @type {string}
+     * @type {number}
      * @memberof GetSimpleEarnLockedProductListResponseRowsInnerDetail
      */
-    boostEndTime?: string;
+    boostEndTime?: number;
 }

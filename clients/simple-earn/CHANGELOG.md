@@ -1,5 +1,12 @@
 # Changelog
 
+## 7.0.0 - 2025-08-29
+
+### Changed (1)
+
+- Modified response for `getSimpleEarnLockedProductList()` (`GET /sapi/v1/simple-earn/locked/list`):
+  - `rows`.`detail`.`boostEndTime`: type `string` → `integer`
+
 ## 6.0.0 - 2025-08-19
 
 ### Changed (2)
