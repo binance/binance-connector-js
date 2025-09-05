@@ -16,7 +16,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { NotionalAndLeverageBracketsResponse1InnerBracketsInner } from './notional-and-leverage-brackets-response1-inner-brackets-inner';
+import type { NotionalAndLeverageBracketsResponse2BracketsInner } from './notional-and-leverage-brackets-response2-brackets-inner';
 
 /**
  *
@@ -38,8 +38,8 @@ export interface NotionalAndLeverageBracketsResponse2 {
     notionalCoef?: number;
     /**
      *
-     * @type {Array<NotionalAndLeverageBracketsResponse1InnerBracketsInner>}
+     * @type {Array<NotionalAndLeverageBracketsResponse2BracketsInner>}
      * @memberof NotionalAndLeverageBracketsResponse2
      */
-    brackets?: Array<NotionalAndLeverageBracketsResponse1InnerBracketsInner>;
+    brackets?: Array<NotionalAndLeverageBracketsResponse2BracketsInner>;
 }

@@ -99,6 +99,7 @@ export * from './notional-and-leverage-brackets-response1';
 export * from './notional-and-leverage-brackets-response1-inner';
 export * from './notional-and-leverage-brackets-response1-inner-brackets-inner';
 export * from './notional-and-leverage-brackets-response2';
+export * from './notional-and-leverage-brackets-response2-brackets-inner';
 export * from './old-trades-lookup-response';
 export * from './old-trades-lookup-response-inner';
 export * from './open-interest-response';

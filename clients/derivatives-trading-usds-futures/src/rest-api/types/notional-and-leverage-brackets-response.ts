@@ -20,10 +20,10 @@
 import type { NotionalAndLeverageBracketsResponse1 } from './notional-and-leverage-brackets-response1';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { NotionalAndLeverageBracketsResponse1InnerBracketsInner } from './notional-and-leverage-brackets-response1-inner-brackets-inner';
+import type { NotionalAndLeverageBracketsResponse2 } from './notional-and-leverage-brackets-response2';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { NotionalAndLeverageBracketsResponse2 } from './notional-and-leverage-brackets-response2';
+import type { NotionalAndLeverageBracketsResponse2BracketsInner } from './notional-and-leverage-brackets-response2-brackets-inner';
 
 /**
  * @type NotionalAndLeverageBracketsResponse

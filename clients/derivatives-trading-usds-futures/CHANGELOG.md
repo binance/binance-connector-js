@@ -1,5 +1,13 @@
 # Changelog
 
+## 12.0.0 - 2025-09-05
+
+### Changed (1)
+
+#### REST API
+
+- Modified response for `notionalAndLeverageBrackets()` (`GET /fapi/v1/leverageBracket`):
+
 ## 11.0.0 - 2025-08-26
 
 ### Changed (1)
