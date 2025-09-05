@@ -12,83 +12,92 @@
  */
 
 import { ConfigurationRestAPI, RestApiResponse, sendRequest } from '@binance/common';
-import { AccountApi } from './modules/account-api';
-import { EarnApi } from './modules/earn-api';
-import { HistoryApi } from './modules/history-api';
+import { FlexibleLockedApi } from './modules/flexible-locked-api';
+import { RwusdApi } from './modules/rwusd-api';
 
 import type {
+    GetCollateralRecordRequest,
     GetFlexiblePersonalLeftQuotaRequest,
     GetFlexibleProductPositionRequest,
+    GetFlexibleRedemptionRecordRequest,
+    GetFlexibleRewardsHistoryRequest,
+    GetFlexibleSubscriptionPreviewRequest,
+    GetFlexibleSubscriptionRecordRequest,
     GetLockedPersonalLeftQuotaRequest,
     GetLockedProductPositionRequest,
+    GetLockedRedemptionRecordRequest,
+    GetLockedRewardsHistoryRequest,
+    GetLockedSubscriptionPreviewRequest,
+    GetLockedSubscriptionRecordRequest,
+    GetRateHistoryRequest,
     GetSimpleEarnFlexibleProductListRequest,
     GetSimpleEarnLockedProductListRequest,
-    SimpleAccountRequest,
-} from './modules/account-api';
-import type {
-    GetFlexibleSubscriptionPreviewRequest,
-    GetLockedSubscriptionPreviewRequest,
     RedeemFlexibleProductRequest,
     RedeemLockedProductRequest,
     SetFlexibleAutoSubscribeRequest,
     SetLockedAutoSubscribeRequest,
     SetLockedProductRedeemOptionRequest,
+    SimpleAccountRequest,
     SubscribeFlexibleProductRequest,
     SubscribeLockedProductRequest,
-} from './modules/earn-api';
+} from './modules/flexible-locked-api';
 import type {
-    GetCollateralRecordRequest,
-    GetFlexibleRedemptionRecordRequest,
-    GetFlexibleRewardsHistoryRequest,
-    GetFlexibleSubscriptionRecordRequest,
-    GetLockedRedemptionRecordRequest,
-    GetLockedRewardsHistoryRequest,
-    GetLockedSubscriptionRecordRequest,
-    GetRateHistoryRequest,
-} from './modules/history-api';
+    GetRwusdAccountRequest,
+    GetRwusdQuotaDetailsRequest,
+    GetRwusdRateHistoryRequest,
+    GetRwusdRedemptionHistoryRequest,
+    GetRwusdRewardsHistoryRequest,
+    GetRwusdSubscriptionHistoryRequest,
+    RedeemRwusdRequest,
+    SubscribeRwusdRequest,
+} from './modules/rwusd-api';
 
 import type {
+    GetCollateralRecordResponse,
     GetFlexiblePersonalLeftQuotaResponse,
     GetFlexibleProductPositionResponse,
+    GetFlexibleRedemptionRecordResponse,
+    GetFlexibleRewardsHistoryResponse,
+    GetFlexibleSubscriptionPreviewResponse,
+    GetFlexibleSubscriptionRecordResponse,
     GetLockedPersonalLeftQuotaResponse,
     GetLockedProductPositionResponse,
+    GetLockedRedemptionRecordResponse,
+    GetLockedRewardsHistoryResponse,
+    GetLockedSubscriptionPreviewResponse,
+    GetLockedSubscriptionRecordResponse,
+    GetRateHistoryResponse,
     GetSimpleEarnFlexibleProductListResponse,
     GetSimpleEarnLockedProductListResponse,
-    SimpleAccountResponse,
-} from './types';
-import type {
-    GetFlexibleSubscriptionPreviewResponse,
-    GetLockedSubscriptionPreviewResponse,
     RedeemFlexibleProductResponse,
     RedeemLockedProductResponse,
     SetFlexibleAutoSubscribeResponse,
     SetLockedAutoSubscribeResponse,
     SetLockedProductRedeemOptionResponse,
+    SimpleAccountResponse,
     SubscribeFlexibleProductResponse,
     SubscribeLockedProductResponse,
 } from './types';
 import type {
-    GetCollateralRecordResponse,
-    GetFlexibleRedemptionRecordResponse,
-    GetFlexibleRewardsHistoryResponse,
-    GetFlexibleSubscriptionRecordResponse,
-    GetLockedRedemptionRecordResponse,
-    GetLockedRewardsHistoryResponse,
-    GetLockedSubscriptionRecordResponse,
-    GetRateHistoryResponse,
+    GetRwusdAccountResponse,
+    GetRwusdQuotaDetailsResponse,
+    GetRwusdRateHistoryResponse,
+    GetRwusdRedemptionHistoryResponse,
+    GetRwusdRewardsHistoryResponse,
+    GetRwusdSubscriptionHistoryResponse,
+    RedeemRwusdResponse,
+    SubscribeRwusdResponse,
 } from './types';
 
 export class RestAPI {
     private configuration: ConfigurationRestAPI;
-    private accountApi: AccountApi;
-    private earnApi: EarnApi;
-    private historyApi: HistoryApi;
+    private flexibleLockedApi: FlexibleLockedApi;
+    private rwusdApi: RwusdApi;
 
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
-        this.accountApi = new AccountApi(configuration);
-        this.earnApi = new EarnApi(configuration);
-        this.historyApi = new HistoryApi(configuration);
+        this.flexibleLockedApi = new FlexibleLockedApi(configuration);
+        this.rwusdApi = new RwusdApi(configuration);
     }
 
     /**
@@ -126,288 +135,6 @@ export class RestAPI {
     }
 
     /**
-     * Get Flexible Personal Left Quota
-     *
-     * Weight: 150
-     *
-     * @summary Get Flexible Personal Left Quota(USER_DATA)
-     * @param {GetFlexiblePersonalLeftQuotaRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetFlexiblePersonalLeftQuotaResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/account/Get-Flexible-Personal-Left-Quota Binance API Documentation}
-     */
-    getFlexiblePersonalLeftQuota(
-        requestParameters: GetFlexiblePersonalLeftQuotaRequest
-    ): Promise<RestApiResponse<GetFlexiblePersonalLeftQuotaResponse>> {
-        return this.accountApi.getFlexiblePersonalLeftQuota(requestParameters);
-    }
-
-    /**
-     * Get Flexible Product Position
-     *
-     * Weight: 150
-     *
-     * @summary Get Flexible Product Position(USER_DATA)
-     * @param {GetFlexibleProductPositionRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetFlexibleProductPositionResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/account/Get-Flexible-Product-Position Binance API Documentation}
-     */
-    getFlexibleProductPosition(
-        requestParameters: GetFlexibleProductPositionRequest = {}
-    ): Promise<RestApiResponse<GetFlexibleProductPositionResponse>> {
-        return this.accountApi.getFlexibleProductPosition(requestParameters);
-    }
-
-    /**
-     * Get Locked Personal Left Quota
-     *
-     * Weight: 150
-     *
-     * @summary Get Locked Personal Left Quota(USER_DATA)
-     * @param {GetLockedPersonalLeftQuotaRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetLockedPersonalLeftQuotaResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/account/Get-Locked-Personal-Left-Quota Binance API Documentation}
-     */
-    getLockedPersonalLeftQuota(
-        requestParameters: GetLockedPersonalLeftQuotaRequest
-    ): Promise<RestApiResponse<GetLockedPersonalLeftQuotaResponse>> {
-        return this.accountApi.getLockedPersonalLeftQuota(requestParameters);
-    }
-
-    /**
-     * Get Locked Product Position
-     *
-     * Weight: 150
-     *
-     * @summary Get Locked Product Position
-     * @param {GetLockedProductPositionRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetLockedProductPositionResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/account/Get-Locked-Product-Position Binance API Documentation}
-     */
-    getLockedProductPosition(
-        requestParameters: GetLockedProductPositionRequest = {}
-    ): Promise<RestApiResponse<GetLockedProductPositionResponse>> {
-        return this.accountApi.getLockedProductPosition(requestParameters);
-    }
-
-    /**
-     * Get available Simple Earn flexible product list
-     *
-     * Weight: 150
-     *
-     * @summary Get Simple Earn Flexible Product List(USER_DATA)
-     * @param {GetSimpleEarnFlexibleProductListRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetSimpleEarnFlexibleProductListResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/account/Get-Simple-Earn-Flexible-Product-List Binance API Documentation}
-     */
-    getSimpleEarnFlexibleProductList(
-        requestParameters: GetSimpleEarnFlexibleProductListRequest = {}
-    ): Promise<RestApiResponse<GetSimpleEarnFlexibleProductListResponse>> {
-        return this.accountApi.getSimpleEarnFlexibleProductList(requestParameters);
-    }
-
-    /**
-     * Get Simple Earn Locked Product List
-     *
-     * Get available Simple Earn locked product list
-     *
-     * Weight: 150
-     *
-     * @summary Get Simple Earn Locked Product List(USER_DATA)
-     * @param {GetSimpleEarnLockedProductListRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetSimpleEarnLockedProductListResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/account/Get-Simple-Earn-Locked-Product-List Binance API Documentation}
-     */
-    getSimpleEarnLockedProductList(
-        requestParameters: GetSimpleEarnLockedProductListRequest = {}
-    ): Promise<RestApiResponse<GetSimpleEarnLockedProductListResponse>> {
-        return this.accountApi.getSimpleEarnLockedProductList(requestParameters);
-    }
-
-    /**
-     * Simple Account query
-     *
-     * Weight: 150
-     *
-     * @summary Simple Account(USER_DATA)
-     * @param {SimpleAccountRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<SimpleAccountResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/account/Simple-Account Binance API Documentation}
-     */
-    simpleAccount(
-        requestParameters: SimpleAccountRequest = {}
-    ): Promise<RestApiResponse<SimpleAccountResponse>> {
-        return this.accountApi.simpleAccount(requestParameters);
-    }
-
-    /**
-     * Get Flexible Subscription Preview
-     *
-     * Weight: 150
-     *
-     * @summary Get Flexible Subscription Preview(USER_DATA)
-     * @param {GetFlexibleSubscriptionPreviewRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetFlexibleSubscriptionPreviewResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/earn/Get-Flexible-Subscription-Preview Binance API Documentation}
-     */
-    getFlexibleSubscriptionPreview(
-        requestParameters: GetFlexibleSubscriptionPreviewRequest
-    ): Promise<RestApiResponse<GetFlexibleSubscriptionPreviewResponse>> {
-        return this.earnApi.getFlexibleSubscriptionPreview(requestParameters);
-    }
-
-    /**
-     * Get Locked Subscription Preview
-     *
-     * Weight: 150
-     *
-     * @summary Get Locked Subscription Preview(USER_DATA)
-     * @param {GetLockedSubscriptionPreviewRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetLockedSubscriptionPreviewResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/earn/Get-Locked-Subscription-Preview Binance API Documentation}
-     */
-    getLockedSubscriptionPreview(
-        requestParameters: GetLockedSubscriptionPreviewRequest
-    ): Promise<RestApiResponse<GetLockedSubscriptionPreviewResponse>> {
-        return this.earnApi.getLockedSubscriptionPreview(requestParameters);
-    }
-
-    /**
-     * Redeem Flexible Product
-     *
-     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
-     *
-     * Weight: 1
-     *
-     * @summary Redeem Flexible Product(TRADE)
-     * @param {RedeemFlexibleProductRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<RedeemFlexibleProductResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/earn/Redeem-Flexible-Product Binance API Documentation}
-     */
-    redeemFlexibleProduct(
-        requestParameters: RedeemFlexibleProductRequest
-    ): Promise<RestApiResponse<RedeemFlexibleProductResponse>> {
-        return this.earnApi.redeemFlexibleProduct(requestParameters);
-    }
-
-    /**
-     * Redeem Locked Product
-     *
-     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
-     *
-     * Weight: 1/3s per account
-     *
-     * @summary Redeem Locked Product(TRADE)
-     * @param {RedeemLockedProductRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<RedeemLockedProductResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/earn/Redeem-Locked-Product Binance API Documentation}
-     */
-    redeemLockedProduct(
-        requestParameters: RedeemLockedProductRequest
-    ): Promise<RestApiResponse<RedeemLockedProductResponse>> {
-        return this.earnApi.redeemLockedProduct(requestParameters);
-    }
-
-    /**
-     * Set Flexible Auto Subscribe
-     *
-     * Weight: 150
-     *
-     * @summary Set Flexible Auto Subscribe(USER_DATA)
-     * @param {SetFlexibleAutoSubscribeRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<SetFlexibleAutoSubscribeResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/earn/Set-Flexible-Auto-Subscribe Binance API Documentation}
-     */
-    setFlexibleAutoSubscribe(
-        requestParameters: SetFlexibleAutoSubscribeRequest
-    ): Promise<RestApiResponse<SetFlexibleAutoSubscribeResponse>> {
-        return this.earnApi.setFlexibleAutoSubscribe(requestParameters);
-    }
-
-    /**
-     * Set locked auto subscribe
-     *
-     * Weight: 150
-     *
-     * @summary Set Locked Auto Subscribe(USER_DATA)
-     * @param {SetLockedAutoSubscribeRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<SetLockedAutoSubscribeResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/earn/Set-Locked-Auto-Subscribe Binance API Documentation}
-     */
-    setLockedAutoSubscribe(
-        requestParameters: SetLockedAutoSubscribeRequest
-    ): Promise<RestApiResponse<SetLockedAutoSubscribeResponse>> {
-        return this.earnApi.setLockedAutoSubscribe(requestParameters);
-    }
-
-    /**
-     * Set redeem option for Locked product
-     *
-     * Weight: 50
-     *
-     * @summary Set Locked Product Redeem Option(USER_DATA)
-     * @param {SetLockedProductRedeemOptionRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<SetLockedProductRedeemOptionResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/earn/Set-Locked-Redeem-Option Binance API Documentation}
-     */
-    setLockedProductRedeemOption(
-        requestParameters: SetLockedProductRedeemOptionRequest
-    ): Promise<RestApiResponse<SetLockedProductRedeemOptionResponse>> {
-        return this.earnApi.setLockedProductRedeemOption(requestParameters);
-    }
-
-    /**
-     * Subscribe Flexible Product
-     *
-     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
-     *
-     * Weight: 1
-     *
-     * @summary Subscribe Flexible Product(TRADE)
-     * @param {SubscribeFlexibleProductRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<SubscribeFlexibleProductResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/earn/Subscribe-Flexible-Product Binance API Documentation}
-     */
-    subscribeFlexibleProduct(
-        requestParameters: SubscribeFlexibleProductRequest
-    ): Promise<RestApiResponse<SubscribeFlexibleProductResponse>> {
-        return this.earnApi.subscribeFlexibleProduct(requestParameters);
-    }
-
-    /**
-     * Subscribe Locked Product
-     *
-     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
-     *
-     * Weight: 1
-     *
-     * @summary Subscribe Locked Product(TRADE)
-     * @param {SubscribeLockedProductRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<SubscribeLockedProductResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/earn/Subscribe-Locked-Product Binance API Documentation}
-     */
-    subscribeLockedProduct(
-        requestParameters: SubscribeLockedProductRequest
-    ): Promise<RestApiResponse<SubscribeLockedProductResponse>> {
-        return this.earnApi.subscribeLockedProduct(requestParameters);
-    }
-
-    /**
      * Get Collateral Record
      *
      * The time between `startTime` and `endTime` cannot be longer than 30 days.
@@ -421,12 +148,46 @@ export class RestAPI {
      * @param {GetCollateralRecordRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetCollateralRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/history/Get-Collateral-Record Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/history/Get-Collateral-Record Binance API Documentation}
      */
     getCollateralRecord(
         requestParameters: GetCollateralRecordRequest = {}
     ): Promise<RestApiResponse<GetCollateralRecordResponse>> {
-        return this.historyApi.getCollateralRecord(requestParameters);
+        return this.flexibleLockedApi.getCollateralRecord(requestParameters);
+    }
+
+    /**
+     * Get Flexible Personal Left Quota
+     *
+     * Weight: 150
+     *
+     * @summary Get Flexible Personal Left Quota(USER_DATA)
+     * @param {GetFlexiblePersonalLeftQuotaRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetFlexiblePersonalLeftQuotaResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/account/Get-Flexible-Personal-Left-Quota Binance API Documentation}
+     */
+    getFlexiblePersonalLeftQuota(
+        requestParameters: GetFlexiblePersonalLeftQuotaRequest
+    ): Promise<RestApiResponse<GetFlexiblePersonalLeftQuotaResponse>> {
+        return this.flexibleLockedApi.getFlexiblePersonalLeftQuota(requestParameters);
+    }
+
+    /**
+     * Get Flexible Product Position
+     *
+     * Weight: 150
+     *
+     * @summary Get Flexible Product Position(USER_DATA)
+     * @param {GetFlexibleProductPositionRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetFlexibleProductPositionResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/account/Get-Flexible-Product-Position Binance API Documentation}
+     */
+    getFlexibleProductPosition(
+        requestParameters: GetFlexibleProductPositionRequest = {}
+    ): Promise<RestApiResponse<GetFlexibleProductPositionResponse>> {
+        return this.flexibleLockedApi.getFlexibleProductPosition(requestParameters);
     }
 
     /**
@@ -443,12 +204,12 @@ export class RestAPI {
      * @param {GetFlexibleRedemptionRecordRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFlexibleRedemptionRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/history/Get-Flexible-Redemption-Record Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/history/Get-Flexible-Redemption-Record Binance API Documentation}
      */
     getFlexibleRedemptionRecord(
         requestParameters: GetFlexibleRedemptionRecordRequest = {}
     ): Promise<RestApiResponse<GetFlexibleRedemptionRecordResponse>> {
-        return this.historyApi.getFlexibleRedemptionRecord(requestParameters);
+        return this.flexibleLockedApi.getFlexibleRedemptionRecord(requestParameters);
     }
 
     /**
@@ -465,12 +226,29 @@ export class RestAPI {
      * @param {GetFlexibleRewardsHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFlexibleRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/history/Get-Flexible-Rewards-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/history/Get-Flexible-Rewards-History Binance API Documentation}
      */
     getFlexibleRewardsHistory(
         requestParameters: GetFlexibleRewardsHistoryRequest
     ): Promise<RestApiResponse<GetFlexibleRewardsHistoryResponse>> {
-        return this.historyApi.getFlexibleRewardsHistory(requestParameters);
+        return this.flexibleLockedApi.getFlexibleRewardsHistory(requestParameters);
+    }
+
+    /**
+     * Get Flexible Subscription Preview
+     *
+     * Weight: 150
+     *
+     * @summary Get Flexible Subscription Preview(USER_DATA)
+     * @param {GetFlexibleSubscriptionPreviewRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetFlexibleSubscriptionPreviewResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Get-Flexible-Subscription-Preview Binance API Documentation}
+     */
+    getFlexibleSubscriptionPreview(
+        requestParameters: GetFlexibleSubscriptionPreviewRequest
+    ): Promise<RestApiResponse<GetFlexibleSubscriptionPreviewResponse>> {
+        return this.flexibleLockedApi.getFlexibleSubscriptionPreview(requestParameters);
     }
 
     /**
@@ -487,12 +265,46 @@ export class RestAPI {
      * @param {GetFlexibleSubscriptionRecordRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFlexibleSubscriptionRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/history/Get-Flexible-Subscription-Record Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/history/Get-Flexible-Subscription-Record Binance API Documentation}
      */
     getFlexibleSubscriptionRecord(
         requestParameters: GetFlexibleSubscriptionRecordRequest = {}
     ): Promise<RestApiResponse<GetFlexibleSubscriptionRecordResponse>> {
-        return this.historyApi.getFlexibleSubscriptionRecord(requestParameters);
+        return this.flexibleLockedApi.getFlexibleSubscriptionRecord(requestParameters);
+    }
+
+    /**
+     * Get Locked Personal Left Quota
+     *
+     * Weight: 150
+     *
+     * @summary Get Locked Personal Left Quota(USER_DATA)
+     * @param {GetLockedPersonalLeftQuotaRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetLockedPersonalLeftQuotaResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/account/Get-Locked-Personal-Left-Quota Binance API Documentation}
+     */
+    getLockedPersonalLeftQuota(
+        requestParameters: GetLockedPersonalLeftQuotaRequest
+    ): Promise<RestApiResponse<GetLockedPersonalLeftQuotaResponse>> {
+        return this.flexibleLockedApi.getLockedPersonalLeftQuota(requestParameters);
+    }
+
+    /**
+     * Get Locked Product Position
+     *
+     * Weight: 150
+     *
+     * @summary Get Locked Product Position
+     * @param {GetLockedProductPositionRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetLockedProductPositionResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/account/Get-Locked-Product-Position Binance API Documentation}
+     */
+    getLockedProductPosition(
+        requestParameters: GetLockedProductPositionRequest = {}
+    ): Promise<RestApiResponse<GetLockedProductPositionResponse>> {
+        return this.flexibleLockedApi.getLockedProductPosition(requestParameters);
     }
 
     /**
@@ -509,12 +321,12 @@ export class RestAPI {
      * @param {GetLockedRedemptionRecordRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetLockedRedemptionRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/history/Get-Locked-Redemption-Record Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/history/Get-Locked-Redemption-Record Binance API Documentation}
      */
     getLockedRedemptionRecord(
         requestParameters: GetLockedRedemptionRecordRequest = {}
     ): Promise<RestApiResponse<GetLockedRedemptionRecordResponse>> {
-        return this.historyApi.getLockedRedemptionRecord(requestParameters);
+        return this.flexibleLockedApi.getLockedRedemptionRecord(requestParameters);
     }
 
     /**
@@ -531,12 +343,29 @@ export class RestAPI {
      * @param {GetLockedRewardsHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetLockedRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/history/Get-Locked-Rewards-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/history/Get-Locked-Rewards-History Binance API Documentation}
      */
     getLockedRewardsHistory(
         requestParameters: GetLockedRewardsHistoryRequest = {}
     ): Promise<RestApiResponse<GetLockedRewardsHistoryResponse>> {
-        return this.historyApi.getLockedRewardsHistory(requestParameters);
+        return this.flexibleLockedApi.getLockedRewardsHistory(requestParameters);
+    }
+
+    /**
+     * Get Locked Subscription Preview
+     *
+     * Weight: 150
+     *
+     * @summary Get Locked Subscription Preview(USER_DATA)
+     * @param {GetLockedSubscriptionPreviewRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetLockedSubscriptionPreviewResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Get-Locked-Subscription-Preview Binance API Documentation}
+     */
+    getLockedSubscriptionPreview(
+        requestParameters: GetLockedSubscriptionPreviewRequest
+    ): Promise<RestApiResponse<GetLockedSubscriptionPreviewResponse>> {
+        return this.flexibleLockedApi.getLockedSubscriptionPreview(requestParameters);
     }
 
     /**
@@ -553,12 +382,12 @@ export class RestAPI {
      * @param {GetLockedSubscriptionRecordRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetLockedSubscriptionRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/history/Get-Locked-Subscription-Record Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/history/Get-Locked-Subscription-Record Binance API Documentation}
      */
     getLockedSubscriptionRecord(
         requestParameters: GetLockedSubscriptionRecordRequest = {}
     ): Promise<RestApiResponse<GetLockedSubscriptionRecordResponse>> {
-        return this.historyApi.getLockedSubscriptionRecord(requestParameters);
+        return this.flexibleLockedApi.getLockedSubscriptionRecord(requestParameters);
     }
 
     /**
@@ -575,11 +404,351 @@ export class RestAPI {
      * @param {GetRateHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetRateHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/history/Get-Rate-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/history/Get-Rate-History Binance API Documentation}
      */
     getRateHistory(
         requestParameters: GetRateHistoryRequest
     ): Promise<RestApiResponse<GetRateHistoryResponse>> {
-        return this.historyApi.getRateHistory(requestParameters);
+        return this.flexibleLockedApi.getRateHistory(requestParameters);
+    }
+
+    /**
+     * Get available Simple Earn flexible product list
+     *
+     * Weight: 150
+     *
+     * @summary Get Simple Earn Flexible Product List(USER_DATA)
+     * @param {GetSimpleEarnFlexibleProductListRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetSimpleEarnFlexibleProductListResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/account/Get-Simple-Earn-Flexible-Product-List Binance API Documentation}
+     */
+    getSimpleEarnFlexibleProductList(
+        requestParameters: GetSimpleEarnFlexibleProductListRequest = {}
+    ): Promise<RestApiResponse<GetSimpleEarnFlexibleProductListResponse>> {
+        return this.flexibleLockedApi.getSimpleEarnFlexibleProductList(requestParameters);
+    }
+
+    /**
+     * Get Simple Earn Locked Product List
+     *
+     * Get available Simple Earn locked product list
+     *
+     * Weight: 150
+     *
+     * @summary Get Simple Earn Locked Product List(USER_DATA)
+     * @param {GetSimpleEarnLockedProductListRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetSimpleEarnLockedProductListResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/account/Get-Simple-Earn-Locked-Product-List Binance API Documentation}
+     */
+    getSimpleEarnLockedProductList(
+        requestParameters: GetSimpleEarnLockedProductListRequest = {}
+    ): Promise<RestApiResponse<GetSimpleEarnLockedProductListResponse>> {
+        return this.flexibleLockedApi.getSimpleEarnLockedProductList(requestParameters);
+    }
+
+    /**
+     * Redeem Flexible Product
+     *
+     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     *
+     * Weight: 1
+     *
+     * @summary Redeem Flexible Product(TRADE)
+     * @param {RedeemFlexibleProductRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<RedeemFlexibleProductResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Redeem-Flexible-Product Binance API Documentation}
+     */
+    redeemFlexibleProduct(
+        requestParameters: RedeemFlexibleProductRequest
+    ): Promise<RestApiResponse<RedeemFlexibleProductResponse>> {
+        return this.flexibleLockedApi.redeemFlexibleProduct(requestParameters);
+    }
+
+    /**
+     * Redeem Locked Product
+     *
+     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     *
+     * Weight: 1/3s per account
+     *
+     * @summary Redeem Locked Product(TRADE)
+     * @param {RedeemLockedProductRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<RedeemLockedProductResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Redeem-Locked-Product Binance API Documentation}
+     */
+    redeemLockedProduct(
+        requestParameters: RedeemLockedProductRequest
+    ): Promise<RestApiResponse<RedeemLockedProductResponse>> {
+        return this.flexibleLockedApi.redeemLockedProduct(requestParameters);
+    }
+
+    /**
+     * Set Flexible Auto Subscribe
+     *
+     * Weight: 150
+     *
+     * @summary Set Flexible Auto Subscribe(USER_DATA)
+     * @param {SetFlexibleAutoSubscribeRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<SetFlexibleAutoSubscribeResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Set-Flexible-Auto-Subscribe Binance API Documentation}
+     */
+    setFlexibleAutoSubscribe(
+        requestParameters: SetFlexibleAutoSubscribeRequest
+    ): Promise<RestApiResponse<SetFlexibleAutoSubscribeResponse>> {
+        return this.flexibleLockedApi.setFlexibleAutoSubscribe(requestParameters);
+    }
+
+    /**
+     * Set locked auto subscribe
+     *
+     * Weight: 150
+     *
+     * @summary Set Locked Auto Subscribe(USER_DATA)
+     * @param {SetLockedAutoSubscribeRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<SetLockedAutoSubscribeResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Set-Locked-Auto-Subscribe Binance API Documentation}
+     */
+    setLockedAutoSubscribe(
+        requestParameters: SetLockedAutoSubscribeRequest
+    ): Promise<RestApiResponse<SetLockedAutoSubscribeResponse>> {
+        return this.flexibleLockedApi.setLockedAutoSubscribe(requestParameters);
+    }
+
+    /**
+     * Set redeem option for Locked product
+     *
+     * Weight: 50
+     *
+     * @summary Set Locked Product Redeem Option(USER_DATA)
+     * @param {SetLockedProductRedeemOptionRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<SetLockedProductRedeemOptionResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Set-Locked-Redeem-Option Binance API Documentation}
+     */
+    setLockedProductRedeemOption(
+        requestParameters: SetLockedProductRedeemOptionRequest
+    ): Promise<RestApiResponse<SetLockedProductRedeemOptionResponse>> {
+        return this.flexibleLockedApi.setLockedProductRedeemOption(requestParameters);
+    }
+
+    /**
+     * Simple Account query
+     *
+     * Weight: 150
+     *
+     * @summary Simple Account(USER_DATA)
+     * @param {SimpleAccountRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<SimpleAccountResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/account/Simple-Account Binance API Documentation}
+     */
+    simpleAccount(
+        requestParameters: SimpleAccountRequest = {}
+    ): Promise<RestApiResponse<SimpleAccountResponse>> {
+        return this.flexibleLockedApi.simpleAccount(requestParameters);
+    }
+
+    /**
+     * Subscribe Flexible Product
+     *
+     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     *
+     * Weight: 1
+     *
+     * @summary Subscribe Flexible Product(TRADE)
+     * @param {SubscribeFlexibleProductRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<SubscribeFlexibleProductResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Subscribe-Flexible-Product Binance API Documentation}
+     */
+    subscribeFlexibleProduct(
+        requestParameters: SubscribeFlexibleProductRequest
+    ): Promise<RestApiResponse<SubscribeFlexibleProductResponse>> {
+        return this.flexibleLockedApi.subscribeFlexibleProduct(requestParameters);
+    }
+
+    /**
+     * Subscribe Locked Product
+     *
+     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     *
+     * Weight: 1
+     *
+     * @summary Subscribe Locked Product(TRADE)
+     * @param {SubscribeLockedProductRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<SubscribeLockedProductResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Subscribe-Locked-Product Binance API Documentation}
+     */
+    subscribeLockedProduct(
+        requestParameters: SubscribeLockedProductRequest
+    ): Promise<RestApiResponse<SubscribeLockedProductResponse>> {
+        return this.flexibleLockedApi.subscribeLockedProduct(requestParameters);
+    }
+
+    /**
+     * Get RWUSD account information.
+     *
+     * Weight: 150
+     *
+     * @summary Get RWUSD Account (USER_DATA)
+     * @param {GetRwusdAccountRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetRwusdAccountResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/account/ Binance API Documentation}
+     */
+    getRwusdAccount(
+        requestParameters: GetRwusdAccountRequest = {}
+    ): Promise<RestApiResponse<GetRwusdAccountResponse>> {
+        return this.rwusdApi.getRwusdAccount(requestParameters);
+    }
+
+    /**
+     * Get RWUSD quota details including subscription quota, fast redemption quota, and standard redemption quota.
+     *
+     * Weight: 150
+     *
+     * @summary Get RWUSD Quota Details (USER_DATA)
+     * @param {GetRwusdQuotaDetailsRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetRwusdQuotaDetailsResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/account/Get-RWUSD-Quota-Details Binance API Documentation}
+     */
+    getRwusdQuotaDetails(
+        requestParameters: GetRwusdQuotaDetailsRequest = {}
+    ): Promise<RestApiResponse<GetRwusdQuotaDetailsResponse>> {
+        return this.rwusdApi.getRwusdQuotaDetails(requestParameters);
+    }
+
+    /**
+     * Get RWUSD rate history sorted by descending order.
+     *
+     * The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
+     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+     *
+     * Weight: 150
+     *
+     * @summary Get RWUSD Rate History (USER_DATA)
+     * @param {GetRwusdRateHistoryRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetRwusdRateHistoryResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/history/Get-RWUSD-Rate-History Binance API Documentation}
+     */
+    getRwusdRateHistory(
+        requestParameters: GetRwusdRateHistoryRequest = {}
+    ): Promise<RestApiResponse<GetRwusdRateHistoryResponse>> {
+        return this.rwusdApi.getRwusdRateHistory(requestParameters);
+    }
+
+    /**
+     * Get RWUSD redemption history.
+     *
+     * The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
+     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+     *
+     * Weight: 150
+     *
+     * @summary Get RWUSD Redemption History (USER_DATA)
+     * @param {GetRwusdRedemptionHistoryRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetRwusdRedemptionHistoryResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/history/Get-RWUSD-Redemption-History Binance API Documentation}
+     */
+    getRwusdRedemptionHistory(
+        requestParameters: GetRwusdRedemptionHistoryRequest = {}
+    ): Promise<RestApiResponse<GetRwusdRedemptionHistoryResponse>> {
+        return this.rwusdApi.getRwusdRedemptionHistory(requestParameters);
+    }
+
+    /**
+     * Get RWUSD rewards history.
+     *
+     * The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
+     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+     *
+     * Weight: 150
+     *
+     * @summary Get RWUSD Rewards History (USER_DATA)
+     * @param {GetRwusdRewardsHistoryRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetRwusdRewardsHistoryResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/history/Get-RWUSD-Rewards-History Binance API Documentation}
+     */
+    getRwusdRewardsHistory(
+        requestParameters: GetRwusdRewardsHistoryRequest = {}
+    ): Promise<RestApiResponse<GetRwusdRewardsHistoryResponse>> {
+        return this.rwusdApi.getRwusdRewardsHistory(requestParameters);
+    }
+
+    /**
+     * Get RWUSD subscription history
+     *
+     * The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
+     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time advanced by one month, and data between `startTime` and `endTime` will be returned.
+     *
+     * Weight: 150
+     *
+     * @summary Get RWUSD subscription history(USER_DATA)
+     * @param {GetRwusdSubscriptionHistoryRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetRwusdSubscriptionHistoryResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/history/Get-RWUSD-subscription-history Binance API Documentation}
+     */
+    getRwusdSubscriptionHistory(
+        requestParameters: GetRwusdSubscriptionHistoryRequest = {}
+    ): Promise<RestApiResponse<GetRwusdSubscriptionHistoryResponse>> {
+        return this.rwusdApi.getRwusdSubscriptionHistory(requestParameters);
+    }
+
+    /**
+     * Redeem RWUSD to USDC
+     *
+     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     *
+     * Weight: 150
+     *
+     * @summary Redeem RWUSD(TRADE)
+     * @param {RedeemRwusdRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<RedeemRwusdResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/earn/Redeem-RWUSD Binance API Documentation}
+     */
+    redeemRwusd(
+        requestParameters: RedeemRwusdRequest
+    ): Promise<RestApiResponse<RedeemRwusdResponse>> {
+        return this.rwusdApi.redeemRwusd(requestParameters);
+    }
+
+    /**
+     * Subscribe RWUSD
+     *
+     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     *
+     * Weight: 150
+     *
+     * @summary Subscribe RWUSD(TRADE)
+     * @param {SubscribeRwusdRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<SubscribeRwusdResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/earn/Subscribe-RWUSD Binance API Documentation}
+     */
+    subscribeRwusd(
+        requestParameters: SubscribeRwusdRequest
+    ): Promise<RestApiResponse<SubscribeRwusdResponse>> {
+        return this.rwusdApi.subscribeRwusd(requestParameters);
     }
 }

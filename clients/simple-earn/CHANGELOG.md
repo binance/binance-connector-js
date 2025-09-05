@@ -1,5 +1,18 @@
 # Changelog
 
+## 8.0.0 - 2025-09-05
+
+### Added (8)
+
+- `getRwusdAccount()` (`GET /sapi/v1/rwusd/account`)
+- `getRwusdQuotaDetails()` (`GET /sapi/v1/rwusd/quota`)
+- `getRwusdRateHistory()` (`GET /sapi/v1/rwusd/history/rateHistory`)
+- `getRwusdRedemptionHistory()` (`GET /sapi/v1/rwusd/history/redemptionHistory`)
+- `getRwusdRewardsHistory()` (`GET /sapi/v1/rwusd/history/rewardsHistory`)
+- `getRwusdSubscriptionHistory()` (`GET /sapi/v1/rwusd/history/subscriptionHistory`)
+- `redeemRwusd()` (`POST /sapi/v1/rwusd/redeem`)
+- `subscribeRwusd()` (`POST /sapi/v1/rwusd/subscribe`)
+
 ## 7.0.0 - 2025-08-29
 
 ### Changed (1)

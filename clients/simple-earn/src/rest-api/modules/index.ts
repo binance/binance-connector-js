@@ -11,6 +11,5 @@
  * Do not edit the class manually.
  */
 
-export * from './account-api';
-export * from './earn-api';
-export * from './history-api';
+export * from './flexible-locked-api';
+export * from './rwusd-api';

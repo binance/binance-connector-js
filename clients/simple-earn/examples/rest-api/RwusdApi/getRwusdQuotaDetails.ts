@@ -7,20 +7,18 @@ const configurationRestAPI = {
 };
 const client = new SimpleEarn({ configurationRestAPI });
 
-async function getFlexibleRewardsHistory() {
+async function getRwusdQuotaDetails() {
     try {
-        const response = await client.restAPI.getFlexibleRewardsHistory({
-            type: 'BONUS',
-        });
+        const response = await client.restAPI.getRwusdQuotaDetails();
 
         const rateLimits = response.rateLimits!;
-        console.log('getFlexibleRewardsHistory() rate limits:', rateLimits);
+        console.log('getRwusdQuotaDetails() rate limits:', rateLimits);
 
         const data = await response.data();
-        console.log('getFlexibleRewardsHistory() response:', data);
+        console.log('getRwusdQuotaDetails() response:', data);
     } catch (error) {
-        console.error('getFlexibleRewardsHistory() error:', error);
+        console.error('getRwusdQuotaDetails() error:', error);
     }
 }
 
-getFlexibleRewardsHistory();
+getRwusdQuotaDetails();
