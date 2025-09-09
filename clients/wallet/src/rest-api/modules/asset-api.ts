@@ -555,9 +555,6 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query User Wallet Balance
          *
-         *
-         * You need to open Permits Universal Transfer permission for the API Key which requests this endpoint.
-         *
          * Weight: 60
          *
          * @summary Query User Wallet Balance (USER_DATA)
@@ -980,9 +977,6 @@ export interface AssetApiInterface {
     ): Promise<RestApiResponse<QueryUserUniversalTransferHistoryResponse>>;
     /**
      * Query User Wallet Balance
-     *
-     *
-     * You need to open Permits Universal Transfer permission for the API Key which requests this endpoint.
      *
      * Weight: 60
      *
@@ -1914,9 +1908,6 @@ export class AssetApi implements AssetApiInterface {
 
     /**
      * Query User Wallet Balance
-     *
-     *
-     * You need to open Permits Universal Transfer permission for the API Key which requests this endpoint.
      *
      * Weight: 60
      *

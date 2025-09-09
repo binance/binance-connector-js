@@ -486,9 +486,6 @@ export class RestAPI {
     /**
      * Query User Wallet Balance
      *
-     *
-     * You need to open Permits Universal Transfer permission for the API Key which requests this endpoint.
-     *
      * Weight: 60
      *
      * @summary Query User Wallet Balance (USER_DATA)

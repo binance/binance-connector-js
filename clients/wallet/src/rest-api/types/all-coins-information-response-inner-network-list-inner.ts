@@ -153,6 +153,12 @@ export interface AllCoinsInformationResponseInnerNetworkListInner {
     sameAddress?: boolean;
     /**
      *
+     * @type {boolean}
+     * @memberof AllCoinsInformationResponseInnerNetworkListInner
+     */
+    withdrawTag?: boolean;
+    /**
+     *
      * @type {number}
      * @memberof AllCoinsInformationResponseInnerNetworkListInner
      */

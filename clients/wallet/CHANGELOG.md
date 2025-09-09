@@ -1,5 +1,12 @@
 # Changelog
 
+## 10.0.0 - 2025-09-09
+
+### Changed (1)
+
+- Modified response for `allCoinsInformation()` (`GET /sapi/v1/capital/config/getall`):
+  - `networkList`: item property `withdrawTag` added
+
 ## 9.0.0 - 2025-08-29
 
 ### Added (1)
