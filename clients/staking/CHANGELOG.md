@@ -1,5 +1,13 @@
 # Changelog
 
+## 5.0.0 - 2025-09-09
+
+### Added (3)
+
+- `getSoftStakingProductList()` (`GET /sapi/v1/soft-staking/list`)
+- `getSoftStakingRewardsHistory()` (`GET /sapi/v1/soft-staking/history/rewardsRecord`)
+- `setSoftStaking()` (`GET /sapi/v1/soft-staking/set`)
+
 ## 4.0.0 - 2025-08-19
 
 ### Changed (1)

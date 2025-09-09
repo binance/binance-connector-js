@@ -28,6 +28,10 @@ export * from './get-on-chain-yields-locked-rewards-history-response-rows-inner'
 export * from './get-on-chain-yields-locked-subscription-preview-response';
 export * from './get-on-chain-yields-locked-subscription-record-response';
 export * from './get-on-chain-yields-locked-subscription-record-response-rows-inner';
+export * from './get-soft-staking-product-list-response';
+export * from './get-soft-staking-product-list-response-rows-inner';
+export * from './get-soft-staking-rewards-history-response';
+export * from './get-soft-staking-rewards-history-response-rows-inner';
 export * from './get-sol-redemption-history-response';
 export * from './get-sol-redemption-history-response-rows-inner';
 export * from './get-sol-staking-history-response';
@@ -49,6 +53,7 @@ export * from './redeem-on-chain-yields-locked-product-response';
 export * from './redeem-sol-response';
 export * from './set-on-chain-yields-locked-auto-subscribe-response';
 export * from './set-on-chain-yields-locked-product-redeem-option-response';
+export * from './set-soft-staking-response';
 export * from './sol-staking-account-response';
 export * from './subscribe-eth-staking-response';
 export * from './subscribe-on-chain-yields-locked-product-response';

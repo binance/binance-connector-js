@@ -14,6 +14,7 @@
 import { ConfigurationRestAPI, RestApiResponse, sendRequest } from '@binance/common';
 import { EthStakingApi } from './modules/eth-staking-api';
 import { OnChainYieldsApi } from './modules/on-chain-yields-api';
+import { SoftStakingApi } from './modules/soft-staking-api';
 import { SolStakingApi } from './modules/sol-staking-api';
 
 import type {
@@ -43,6 +44,11 @@ import type {
     SetOnChainYieldsLockedProductRedeemOptionRequest,
     SubscribeOnChainYieldsLockedProductRequest,
 } from './modules/on-chain-yields-api';
+import type {
+    GetSoftStakingProductListRequest,
+    GetSoftStakingRewardsHistoryRequest,
+    SetSoftStakingRequest,
+} from './modules/soft-staking-api';
 import type {
     ClaimBoostRewardsRequest,
     GetBnsolRateHistoryRequest,
@@ -85,6 +91,11 @@ import type {
     SubscribeOnChainYieldsLockedProductResponse,
 } from './types';
 import type {
+    GetSoftStakingProductListResponse,
+    GetSoftStakingRewardsHistoryResponse,
+    SetSoftStakingResponse,
+} from './types';
+import type {
     ClaimBoostRewardsResponse,
     GetBnsolRateHistoryResponse,
     GetBnsolRewardsHistoryResponse,
@@ -102,12 +113,14 @@ export class RestAPI {
     private configuration: ConfigurationRestAPI;
     private ethStakingApi: EthStakingApi;
     private onChainYieldsApi: OnChainYieldsApi;
+    private softStakingApi: SoftStakingApi;
     private solStakingApi: SolStakingApi;
 
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
         this.ethStakingApi = new EthStakingApi(configuration);
         this.onChainYieldsApi = new OnChainYieldsApi(configuration);
+        this.softStakingApi = new SoftStakingApi(configuration);
         this.solStakingApi = new SolStakingApi(configuration);
     }
 
@@ -587,6 +600,60 @@ export class RestAPI {
         requestParameters: SubscribeOnChainYieldsLockedProductRequest
     ): Promise<RestApiResponse<SubscribeOnChainYieldsLockedProductResponse>> {
         return this.onChainYieldsApi.subscribeOnChainYieldsLockedProduct(requestParameters);
+    }
+
+    /**
+     * Get the available Soft Staking product list.
+     *
+     * Weight: 50
+     *
+     * @summary Get Soft Staking Product List (USER_DATA)
+     * @param {GetSoftStakingProductListRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetSoftStakingProductListResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/staking/soft-staking/ Binance API Documentation}
+     */
+    getSoftStakingProductList(
+        requestParameters: GetSoftStakingProductListRequest = {}
+    ): Promise<RestApiResponse<GetSoftStakingProductListResponse>> {
+        return this.softStakingApi.getSoftStakingProductList(requestParameters);
+    }
+
+    /**
+     * * The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
+     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
+     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * Weight: 50
+     *
+     * @summary Get Soft Staking Rewards History(USER_DATA)
+     * @param {GetSoftStakingRewardsHistoryRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetSoftStakingRewardsHistoryResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/staking/soft-staking/Get-Soft-Staking-Rewards-History Binance API Documentation}
+     */
+    getSoftStakingRewardsHistory(
+        requestParameters: GetSoftStakingRewardsHistoryRequest = {}
+    ): Promise<RestApiResponse<GetSoftStakingRewardsHistoryResponse>> {
+        return this.softStakingApi.getSoftStakingRewardsHistory(requestParameters);
+    }
+
+    /**
+     * Enable or disable Soft Staking.
+     *
+     * Weight: 50
+     *
+     * @summary Set Soft Staking (USER_DATA)
+     * @param {SetSoftStakingRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<SetSoftStakingResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/staking/soft-staking/Set-Soft-Staking Binance API Documentation}
+     */
+    setSoftStaking(
+        requestParameters: SetSoftStakingRequest
+    ): Promise<RestApiResponse<SetSoftStakingResponse>> {
+        return this.softStakingApi.setSoftStaking(requestParameters);
     }
 
     /**

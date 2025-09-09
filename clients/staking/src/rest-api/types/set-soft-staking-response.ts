@@ -1,3 +1,5 @@
+/* tslint:disable */
+
 /**
  * Binance Staking REST API
  *
@@ -11,7 +13,16 @@
  * Do not edit the class manually.
  */
 
-export * from './eth-staking-api';
-export * from './on-chain-yields-api';
-export * from './soft-staking-api';
-export * from './sol-staking-api';
+/**
+ *
+ * @export
+ * @interface SetSoftStakingResponse
+ */
+export interface SetSoftStakingResponse {
+    /**
+     *
+     * @type {boolean}
+     * @memberof SetSoftStakingResponse
+     */
+    success?: boolean;
+}
