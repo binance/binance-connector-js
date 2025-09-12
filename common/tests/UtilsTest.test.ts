@@ -45,6 +45,10 @@ describe('Utility Functions', () => {
             expect(buildQueryString(undefined as never)).toBe('');
         });
 
+        it('should return an empty string for empty object', () => {
+            expect(buildQueryString({})).toBe('');
+        });
+
         it('should return a query string for given params', () => {
             const params = { a: 1, b: 2, c: 'test' };
             expect(buildQueryString(params)).toBe('a=1&b=2&c=test');
@@ -53,6 +57,206 @@ describe('Utility Functions', () => {
         it('should handle special characters in values', () => {
             const params = { a: 'hello world', b: 'foo@bar.com' };
             expect(buildQueryString(params)).toBe('a=hello%20world&b=foo%40bar.com');
+        });
+
+        it('should handle array values with JSON.stringify format', () => {
+            const params = { symbols: ['BTCUSDT', 'ETHUSDT', 'ADAUSDT'] };
+            const expected = 'symbols=%5B%22BTCUSDT%22%2C%22ETHUSDT%22%2C%22ADAUSDT%22%5D';
+            expect(buildQueryString(params)).toBe(expected);
+        });
+
+        it('should handle empty arrays', () => {
+            const params = { emptyArray: [] };
+            expect(buildQueryString(params)).toBe('emptyArray=%5B%5D');
+        });
+
+        it('should handle array of objects', () => {
+            const params = {
+                orders: [
+                    { symbol: 'BTCUSDT', side: 'BUY', quantity: '0.1' },
+                    { symbol: 'ETHUSDT', side: 'SELL', quantity: '1.0' },
+                ],
+            };
+            const result = buildQueryString(params);
+            const decoded = decodeURIComponent(result);
+            expect(decoded).toContain(
+                'orders=[{"symbol":"BTCUSDT","side":"BUY","quantity":"0.1"},{"symbol":"ETHUSDT","side":"SELL","quantity":"1.0"}]'
+            );
+        });
+
+        it('should handle nested objects', () => {
+            const params = {
+                user: { name: 'John', age: 30 },
+                timestamp: 1234567890,
+            };
+            const result = buildQueryString(params);
+            const decoded = decodeURIComponent(result);
+            expect(decoded).toContain('user={"name":"John","age":30}');
+            expect(decoded).toContain('timestamp=1234567890');
+        });
+
+        it('should handle boolean values', () => {
+            const params = { active: true, verified: false };
+            expect(buildQueryString(params)).toBe('active=true&verified=false');
+        });
+
+        it('should handle numeric values including zero', () => {
+            const params = { count: 0, price: 123.45, negative: -10 };
+            expect(buildQueryString(params)).toBe('count=0&price=123.45&negative=-10');
+        });
+
+        it('should handle null and undefined values in object', () => {
+            const params = { a: 'test', b: null, c: undefined, d: 'valid' };
+            const result = buildQueryString(params);
+            expect(result).toMatch(/a=test/);
+            expect(result).toMatch(/d=valid/);
+        });
+
+        it('should handle mixed data types', () => {
+            const params = {
+                string: 'hello',
+                number: 42,
+                boolean: true,
+                array: ['a', 'b'],
+                object: { nested: 'value' },
+            };
+            const result = buildQueryString(params);
+            expect(result).toContain('string=hello');
+            expect(result).toContain('number=42');
+            expect(result).toContain('boolean=true');
+
+            const decoded = decodeURIComponent(result);
+            expect(decoded).toContain('array=["a","b"]');
+            expect(decoded).toContain('object={"nested":"value"}');
+        });
+
+        it('should handle URL-unsafe characters', () => {
+            const params = {
+                special: '!@#$%^&*()+={}[]|\\:";\'<>?,./`~',
+                unicode: 'café résumé 中文',
+            };
+            const result = buildQueryString(params);
+            expect(result).not.toContain('!@#$%^&*()+={}[]|\\:";\'<>?,./`~');
+            expect(result).not.toContain('café résumé 中文');
+            expect(result).toMatch(/special=/);
+            expect(result).toMatch(/unicode=/);
+        });
+    });
+
+    describe('setSearchParams()', () => {
+        let url: URL;
+
+        beforeEach(() => {
+            url = new URL('https://api.example.com/endpoint');
+        });
+
+        it('should set search parameters from a single object', () => {
+            const params = { a: 1, b: 'test', c: true };
+            utils.setSearchParams(url, params);
+
+            expect(url.searchParams.get('a')).toBe('1');
+            expect(url.searchParams.get('b')).toBe('test');
+            expect(url.searchParams.get('c')).toBe('true');
+        });
+
+        it('should handle multiple parameter objects', () => {
+            const params1 = { a: 1, b: 2 };
+            const params2 = { c: 3, d: 4 };
+            utils.setSearchParams(url, { ...params1, ...params2 });
+
+            expect(url.searchParams.get('a')).toBe('1');
+            expect(url.searchParams.get('b')).toBe('2');
+            expect(url.searchParams.get('c')).toBe('3');
+            expect(url.searchParams.get('d')).toBe('4');
+        });
+
+        it('should handle array parameters consistently with buildQueryString', () => {
+            const params = { symbols: ['BTCUSDT', 'ETHUSDT'] };
+            utils.setSearchParams(url, params);
+
+            const fromUrl = url.searchParams.get('symbols');
+            const fromQueryString = buildQueryString(params).split('=')[1];
+
+            expect(fromUrl).toBe(decodeURIComponent(fromQueryString));
+        });
+
+        it('should handle array of objects', () => {
+            const params = {
+                orders: [
+                    { symbol: 'BTCUSDT', side: 'BUY', quantity: '0.1' },
+                    { symbol: 'ETHUSDT', side: 'SELL', quantity: '1.0' },
+                ],
+            };
+            utils.setSearchParams(url, params);
+
+            const urlParam = url.searchParams.get('orders');
+            const queryStringParam = decodeURIComponent(buildQueryString(params).split('=')[1]);
+
+            expect(urlParam).toBe(queryStringParam);
+            expect(JSON.parse(urlParam!)).toEqual(params.orders);
+        });
+
+        it('should handle nested objects consistently', () => {
+            const params = {
+                user: { name: 'John', preferences: { theme: 'dark', lang: 'en' } },
+                timestamp: 1234567890,
+            };
+            utils.setSearchParams(url, params);
+
+            const userParam = url.searchParams.get('user');
+            expect(JSON.parse(userParam!)).toEqual(params.user);
+        });
+
+        it('should preserve existing URL pathname and hash', () => {
+            url = new URL('https://api.example.com/v1/orders?existing=param#section');
+            const params = { new: 'value' };
+            utils.setSearchParams(url, params);
+
+            expect(url.pathname).toBe('/v1/orders');
+            expect(url.hash).toBe('#section');
+            expect(url.searchParams.get('new')).toBe('value');
+        });
+
+        it('should handle empty objects', () => {
+            utils.setSearchParams(url, {});
+            expect(url.search).toBe('');
+        });
+
+        it('should handle null and undefined values', () => {
+            const params = { a: 'test', b: null, c: undefined, d: 'valid' };
+            utils.setSearchParams(url, params);
+
+            expect(url.searchParams.get('a')).toBe('test');
+            expect(url.searchParams.get('d')).toBe('valid');
+        });
+
+        it('should handle special characters', () => {
+            const params = {
+                special: 'hello world & more',
+                email: 'test@example.com',
+                unicode: 'café',
+            };
+            utils.setSearchParams(url, params);
+
+            expect(url.searchParams.get('special')).toBe('hello world & more');
+            expect(url.searchParams.get('email')).toBe('test@example.com');
+            expect(url.searchParams.get('unicode')).toBe('café');
+        });
+
+        it('should produce URLs that generate same query string as buildQueryString', () => {
+            const params = {
+                symbol: 'BTCUSDT',
+                side: 'BUY',
+                quantity: 1.5,
+                orders: [{ symbol: 'ETHUSDT', side: 'SELL' }],
+                timestamp: 1234567890,
+            };
+
+            utils.setSearchParams(url, params);
+            const fromUrl = url.search.substring(1);
+            const fromBuildQuery = buildQueryString(params);
+
+            expect(fromUrl).toBe(fromBuildQuery);
         });
     });
 
@@ -875,124 +1079,6 @@ describe('Utility Functions', () => {
         it('should preserve a preceding "@" for non-updateSpeed placeholders', () => {
             const result = replaceWebsocketStreamsPlaceholders('/prefix@<data>', { data: 'value' });
             expect(result).toBe('/prefix@value');
-        });
-    });
-
-    describe('setFlattenedQueryParams', () => {
-        let params: URLSearchParams;
-
-        beforeEach(() => {
-            params = new URLSearchParams();
-        });
-
-        it('does nothing when parameter is null or undefined', () => {
-            utils.setFlattenedQueryParams(params, null, 'foo');
-            utils.setFlattenedQueryParams(params, undefined, 'bar');
-            expect(params.toString()).toBe('');
-        });
-
-        it('serializes a single primitive', () => {
-            utils.setFlattenedQueryParams(params, 42, 'answer');
-            expect(params.toString()).toBe('answer=42');
-
-            params = new URLSearchParams();
-            utils.setFlattenedQueryParams(params, 'hello', 'greet');
-            expect(params.toString()).toBe('greet=hello');
-        });
-
-        it('flattens a plain object one level deep', () => {
-            const obj = { a: 1, b: 'two' };
-            utils.setFlattenedQueryParams(params, obj);
-            expect(params.toString().split('&').sort()).toEqual(['a=1', 'b=two']);
-        });
-
-        it('flattens nested objects with dot notation', () => {
-            const nested = { user: { id: 7, name: 'alice' }, flag: true };
-            utils.setFlattenedQueryParams(params, nested);
-            expect(params.toString().split('&').sort()).toEqual([
-                'flag=true',
-                'user.id=7',
-                'user.name=alice',
-            ]);
-        });
-
-        it('JSON-stringifies an array of primitives when given a key', () => {
-            const arr = ['BTCUSDT', 'ETHUSDT', 'BNBUSDT'];
-            utils.setFlattenedQueryParams(params, arr, 'symbols');
-            const raw = params.get('symbols')!;
-            expect(raw).toBe(JSON.stringify(arr));
-            expect(params.toString()).toContain(`symbols=${encodeURIComponent(raw)}`);
-        });
-
-        it('JSON-stringifies an array of objects when given a key', () => {
-            const arr = [{ foo: 'bar' }, { foo: 'baz' }];
-            utils.setFlattenedQueryParams(params, arr, 'items');
-            const raw = params.get('items')!;
-            expect(raw).toBe(JSON.stringify(arr));
-            expect(params.toString()).toContain(`items=${encodeURIComponent(raw)}`);
-        });
-
-        it('recurses into array-as-root when no key is provided', () => {
-            const rootArr = [{ symbol: 'BTCUSDT' }, { symbol: 'BNBUSDT' }];
-            utils.setFlattenedQueryParams(params, rootArr);
-            expect(params.getAll('symbol')).toEqual(['BTCUSDT', 'BNBUSDT']);
-        });
-
-        it('JSON-stringifies mixed arrays (primitives + objects + nested arrays) when given a key', () => {
-            const mixed = [1, { x: 2 }, 'three', [4, 5]];
-            utils.setFlattenedQueryParams(params, mixed, 'm');
-            const raw = params.get('m')!;
-            expect(raw).toBe(JSON.stringify(mixed));
-            expect(params.toString()).toContain(`m=${encodeURIComponent(raw)}`);
-        });
-
-        it('appends repeated primitive keys', () => {
-            utils.setFlattenedQueryParams(params, 'first', 'dup');
-            utils.setFlattenedQueryParams(params, 'second', 'dup');
-            expect(params.getAll('dup')).toEqual(['first', 'second']);
-        });
-
-        it('handles a deep nested object with an array at the bottom', () => {
-            const deep = { a: { b: { c: [1, 2, 3] } } };
-            utils.setFlattenedQueryParams(params, deep);
-            const raw = params.get('a.b.c')!;
-            expect(raw).toBe(JSON.stringify([1, 2, 3]));
-            expect(params.toString()).toContain(`a.b.c=${encodeURIComponent(raw)}`);
-        });
-
-        it('serializes an object containing an array of objects as JSON under its key', () => {
-            const complex = {
-                data: [
-                    { id: 1, tags: ['x', 'y'] },
-                    { id: 2, tags: ['z'] },
-                ],
-            };
-            utils.setFlattenedQueryParams(params, complex);
-            const raw = params.get('data')!;
-            expect(raw).toBe(JSON.stringify(complex.data));
-            expect(params.toString()).toContain(`data=${encodeURIComponent(raw)}`);
-        });
-
-        it('JSON-stringifies a double-nested array of primitives when given a key', () => {
-            const doubleArr = [
-                ['foo', 'bar'],
-                ['baz', 'qux'],
-            ];
-            utils.setFlattenedQueryParams(params, doubleArr, 'letters');
-            const raw = params.get('letters')!;
-            expect(raw).toBe(JSON.stringify(doubleArr));
-            expect(params.toString()).toContain(`letters=${encodeURIComponent(raw)}`);
-        });
-
-        it('does not recurse into array elements when a key is provided', () => {
-            const mixed = {
-                top: [100, [200, 300], { deep: [400, 500] }],
-            };
-            utils.setFlattenedQueryParams(params, mixed);
-            const raw = params.get('top')!;
-            expect(raw).toBe(JSON.stringify(mixed.top));
-            expect(params.toString()).toContain(`top=${encodeURIComponent(raw)}`);
-            expect(params.get('top.deep')).toBeNull();
         });
     });
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.5 - 2025-09-12
+
+### Changed (2)
+
+- Fixed bug with query params serialisation on REST API requests.
+- Addressed `axios` vulnerabilities.
+
 ## 1.2.4 - 2025-08-18
 
 ### Changed (1)

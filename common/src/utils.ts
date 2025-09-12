@@ -108,7 +108,7 @@ class RequestSigner {
         throw new Error('Either \'apiSecret\' or \'privateKey\' must be provided for signed requests.');
     }
 
-    sign(queryParams: object): string {
+    sign(queryParams: Record<string, unknown>): string {
         const params = buildQueryString(queryParams);
 
         // HMAC-SHA256 signing
@@ -149,25 +149,44 @@ export const clearSignerCache = function (): void {
 };
 
 /**
- * Generates a query string from an object of parameters.
+ * Serializes a value to a string representation.
  *
- * @param params - An object containing the query parameters.
- * @returns The generated query string.
+ * - If the value is `null` or `undefined`, returns an empty string.
+ * - If the value is an array or a non-null object, returns its JSON string representation.
+ * - Otherwise, converts the value to a string using `String()`.
+ *
+ * @param value - The value to serialize.
+ * @returns The serialized string representation of the value.
  */
-export function buildQueryString(params: object): string {
-    if (!params) return '';
-    return Object.entries(params).map(stringifyKeyValuePair).join('&');
+function serializeValue(value: unknown): string {
+    if (value === null || value === undefined) return '';
+    if (Array.isArray(value) || (typeof value === 'object' && value !== null))
+        return JSON.stringify(value);
+    return String(value);
 }
 
 /**
- * Converts a key-value pair into a URL-encoded query parameter string.
+ * Builds a URL query string from the given parameters object.
  *
- * @param [key, value] - The key-value pair to be converted.
- * @returns The URL-encoded query parameter string.
+ * Iterates over the key-value pairs in the `params` object, serializes each value,
+ * and encodes it for use in a URL. Only keys with non-null and non-undefined values
+ * are included in the resulting query string.
+ *
+ * @param params - An object containing key-value pairs to be serialized into a query string.
+ * @returns A URL-encoded query string representing the provided parameters.
  */
-function stringifyKeyValuePair([key, value]: [string, string]) {
-    const valueString = Array.isArray(value) ? `["${value.join('","')}"]` : value;
-    return `${key}=${encodeURIComponent(valueString)}`;
+export function buildQueryString(params: Record<string, unknown>): string {
+    if (!params) return '';
+
+    const pairs: string[] = [];
+    Object.entries(params).forEach(([key, value]) => {
+        if (value !== null && value !== undefined) {
+            const serializedValue = serializeValue(value);
+            pairs.push(`${key}=${encodeURIComponent(serializedValue)}`);
+        }
+    });
+
+    return pairs.join('&');
 }
 
 /**
@@ -233,7 +252,7 @@ export const getSignature = function (
         privateKey?: string | Buffer;
         privateKeyPassphrase?: string;
     },
-    queryParams: object
+    queryParams: Record<string, unknown>
 ): string {
     let signer = signerCache.get(configuration);
     if (!signer) {
@@ -265,67 +284,25 @@ export const assertParamExists = function (
 };
 
 /**
- * Recursively flattens an object or array into URL search parameters.
+ * Sets the search parameters of a given URL object based on the provided key-value pairs.
+ * Only parameters with non-null and non-undefined values are included.
+ * Values are serialized using the `serializeValue` function before being set.
  *
- * This function handles nested objects and arrays by converting them into dot-notation query parameters.
- * It supports different types of parameters:
- * - Arrays can be stringified or recursively added
- * - Objects are flattened with dot notation keys
- * - Primitive values are converted to strings
- *
- * @param urlSearchParams The URLSearchParams object to modify
- * @param parameter The parameter to flatten (can be an object, array, or primitive)
- * @param key Optional key for nested parameters, used for creating dot-notation keys
+ * @param url - The URL object whose search parameters will be updated.
+ * @param params - An object containing key-value pairs to be set as search parameters.
  */
-export function setFlattenedQueryParams(
-    urlSearchParams: URLSearchParams,
-    parameter: unknown,
-    key: string = ''
-): void {
-    if (parameter == null) return;
+export function setSearchParams(url: URL, params: Record<string, unknown>): void {
+    const searchParams = new URLSearchParams();
 
-    // Array handling
-    if (Array.isArray(parameter)) {
-        if (key)
-            // non-empty key: stringify the entire array
-            urlSearchParams.set(key, JSON.stringify(parameter));
-        else
-            // empty key: recurse into each item without using an empty key
-            for (const item of parameter) {
-                setFlattenedQueryParams(urlSearchParams, item, '');
-            }
-        return;
-    }
-
-    // Object handling
-    if (typeof parameter === 'object') {
-        for (const subKey of Object.keys(parameter as Record<string, unknown>)) {
-            const subVal = (parameter as Record<string, unknown>)[subKey];
-            const newKey = key ? `${key}.${subKey}` : subKey;
-            setFlattenedQueryParams(urlSearchParams, subVal, newKey);
+    Object.entries(params).forEach(([key, value]) => {
+        if (value !== null && value !== undefined) {
+            const serializedValue = serializeValue(value);
+            searchParams.set(key, serializedValue);
         }
-        return;
-    }
+    });
 
-    // Primitive handling
-    const str = String(parameter);
-    if (urlSearchParams.has(key)) urlSearchParams.append(key, str);
-    else urlSearchParams.set(key, str);
-}
-
-/**
- * Sets the search parameters of the provided URL by flattening the given objects into the URL's search parameters.
- *
- * This function takes a URL and one or more objects, and updates the URL's search parameters by flattening the objects into key-value pairs. It uses the `setFlattenedQueryParams` function to recursively flatten the objects.
- *
- * @param url - The URL to update the search parameters for.
- * @param objects - One or more objects to flatten into the URL's search parameters.
- */
-export const setSearchParams = function (url: URL, ...objects: Record<string, unknown>[]) {
-    const searchParams = new URLSearchParams(url.search);
-    setFlattenedQueryParams(searchParams, objects);
     url.search = searchParams.toString();
-};
+}
 
 /**
  * Converts a URL object to a full path string, including pathname, search parameters, and hash.
