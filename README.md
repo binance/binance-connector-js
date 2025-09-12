@@ -32,7 +32,6 @@ nvm use 22.12.0
 ## Available Connectors
 
 - [@binance/algo](./clients/algo/) - Algo Trading connector
-- **Deprecated**: ~~[@binance/auto-invest](./clients/auto-invest/) - Auto Invest connector~~
 - [@binance/c2c](./clients/c2c/) - C2C connector
 - [@binance/convert](./clients/convert/) - Convert connector
 - [@binance/copy-trading](./clients/copy-trading/) - Copy Trading connector
