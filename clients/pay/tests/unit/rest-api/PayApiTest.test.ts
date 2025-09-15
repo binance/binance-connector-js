@@ -58,12 +58,7 @@ describe('PayApi', () => {
                                 walletAssetCost: [{ '1': '0.00005' }, { '2': '0.00005' }],
                             },
                         ],
-                        payerInfo: {
-                            name: 'Jack',
-                            type: 'USER',
-                            binanceId: '12345678',
-                            accountId: '67736251',
-                        },
+                        payerInfo: { name: 'Jack', type: 'USER', binanceId: '12345678' },
                         receiverInfo: {
                             name: 'Alan',
                             type: 'MERCHANT',
@@ -126,12 +121,7 @@ describe('PayApi', () => {
                                 walletAssetCost: [{ '1': '0.00005' }, { '2': '0.00005' }],
                             },
                         ],
-                        payerInfo: {
-                            name: 'Jack',
-                            type: 'USER',
-                            binanceId: '12345678',
-                            accountId: '67736251',
-                        },
+                        payerInfo: { name: 'Jack', type: 'USER', binanceId: '12345678' },
                         receiverInfo: {
                             name: 'Alan',
                             type: 'MERCHANT',

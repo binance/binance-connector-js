@@ -36,19 +36,19 @@ const PayApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
          * payerInfo : binanceId
          * receiverInfo : name, binanceId/accountId/email/countryCode/phoneNumber/mobileCode (based on user input)
          * Receiver's perspective when orderType is C2C
-         * payerInfo : name, accountId
+         * payerInfo : name
          * receiverInfo : binanceId
          * Sender's perspective when orderType is CRYPTO_BOX
          * payerInfo : binanceId
          * receiverInfo : name(the value is always "Crypto Box")
          * Receiver's perspective when orderType is CRYPTO_BOX
-         * payerInfo : name, accountId
+         * payerInfo : name
          * receiverInfo : binanceId
          * Sender's perspective when orderType is PAY
          * payerInfo : binanceId
          * receiverInfo : name
          * Receiver's perspective when orderType is PAY
-         * payerInfo : name, accountId
+         * payerInfo : name
          * receiverInfo : binanceId, name
          * Sender's perspective when orderType is PAY_REFUND
          * payerInfo : binanceId, name
@@ -132,19 +132,19 @@ export interface PayApiInterface {
      * payerInfo : binanceId
      * receiverInfo : name, binanceId/accountId/email/countryCode/phoneNumber/mobileCode (based on user input)
      * Receiver's perspective when orderType is C2C
-     * payerInfo : name, accountId
+     * payerInfo : name
      * receiverInfo : binanceId
      * Sender's perspective when orderType is CRYPTO_BOX
      * payerInfo : binanceId
      * receiverInfo : name(the value is always "Crypto Box")
      * Receiver's perspective when orderType is CRYPTO_BOX
-     * payerInfo : name, accountId
+     * payerInfo : name
      * receiverInfo : binanceId
      * Sender's perspective when orderType is PAY
      * payerInfo : binanceId
      * receiverInfo : name
      * Receiver's perspective when orderType is PAY
-     * payerInfo : name, accountId
+     * payerInfo : name
      * receiverInfo : binanceId, name
      * Sender's perspective when orderType is PAY_REFUND
      * payerInfo : binanceId, name
@@ -236,19 +236,19 @@ export class PayApi implements PayApiInterface {
      * payerInfo : binanceId
      * receiverInfo : name, binanceId/accountId/email/countryCode/phoneNumber/mobileCode (based on user input)
      * Receiver's perspective when orderType is C2C
-     * payerInfo : name, accountId
+     * payerInfo : name
      * receiverInfo : binanceId
      * Sender's perspective when orderType is CRYPTO_BOX
      * payerInfo : binanceId
      * receiverInfo : name(the value is always "Crypto Box")
      * Receiver's perspective when orderType is CRYPTO_BOX
-     * payerInfo : name, accountId
+     * payerInfo : name
      * receiverInfo : binanceId
      * Sender's perspective when orderType is PAY
      * payerInfo : binanceId
      * receiverInfo : name
      * Receiver's perspective when orderType is PAY
-     * payerInfo : name, accountId
+     * payerInfo : name
      * receiverInfo : binanceId, name
      * Sender's perspective when orderType is PAY_REFUND
      * payerInfo : binanceId, name

@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.0.0 - 2025-09-15
+
+### Changed (1)
+
+- Modified response for `getPayTradeHistory()` (`GET /sapi/v1/pay/transactions`):
+  - `data`.`payerInfo`: property `accountId` deleted
+
 ## 3.0.8 - 2025-09-12
 
 ### Changed (1)

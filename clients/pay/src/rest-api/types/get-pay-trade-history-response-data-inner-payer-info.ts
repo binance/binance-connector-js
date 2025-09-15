@@ -37,10 +37,4 @@ export interface GetPayTradeHistoryResponseDataInnerPayerInfo {
      * @memberof GetPayTradeHistoryResponseDataInnerPayerInfo
      */
     binanceId?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof GetPayTradeHistoryResponseDataInnerPayerInfo
-     */
-    accountId?: string;
 }
