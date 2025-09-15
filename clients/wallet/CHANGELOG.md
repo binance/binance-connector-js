@@ -1,5 +1,12 @@
 # Changelog
 
+## 11.0.0 - 2025-09-15
+
+### Changed (1)
+
+- Modified response for `depositHistory()` (`GET /sapi/v1/capital/deposit/hisrec`):
+  - item property `travelRuleStatus` added
+
 ## 10.0.1 - 2025-09-12
 
 ### Changed (1)

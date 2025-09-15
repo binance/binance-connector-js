@@ -367,6 +367,7 @@ describe('CapitalApi', () => {
                     confirmTimes: '1/1',
                     unlockConfirm: 0,
                     walletType: 0,
+                    travelRuleStatus: 0,
                 },
                 {
                     id: '769754833590042625',
@@ -384,6 +385,7 @@ describe('CapitalApi', () => {
                     confirmTimes: '1/1',
                     unlockConfirm: 0,
                     walletType: 0,
+                    travelRuleStatus: 1,
                 },
             ];
 
@@ -430,6 +432,7 @@ describe('CapitalApi', () => {
                     confirmTimes: '1/1',
                     unlockConfirm: 0,
                     walletType: 0,
+                    travelRuleStatus: 0,
                 },
                 {
                     id: '769754833590042625',
@@ -447,6 +450,7 @@ describe('CapitalApi', () => {
                     confirmTimes: '1/1',
                     unlockConfirm: 0,
                     walletType: 0,
+                    travelRuleStatus: 1,
                 },
             ];
 

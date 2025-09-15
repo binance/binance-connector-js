@@ -103,4 +103,10 @@ export interface DepositHistoryResponseInner {
      * @memberof DepositHistoryResponseInner
      */
     walletType?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof DepositHistoryResponseInner
+     */
+    travelRuleStatus?: number;
 }
