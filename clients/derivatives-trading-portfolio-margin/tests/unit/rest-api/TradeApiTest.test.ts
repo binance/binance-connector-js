@@ -3045,7 +3045,7 @@ describe('TradeApi', () => {
                 timeInForce: 'GTC',
                 type: 'MARKET',
                 side: 'SELL',
-                marginBuyBorrowAmount: 5,
+                marginBuyBorrowAmount: '5',
                 marginBuyBorrowAsset: 'BTC',
                 fills: [
                     {
@@ -3109,7 +3109,7 @@ describe('TradeApi', () => {
                 timeInForce: 'GTC',
                 type: 'MARKET',
                 side: 'SELL',
-                marginBuyBorrowAmount: 5,
+                marginBuyBorrowAmount: '5',
                 marginBuyBorrowAsset: 'BTC',
                 fills: [
                     {

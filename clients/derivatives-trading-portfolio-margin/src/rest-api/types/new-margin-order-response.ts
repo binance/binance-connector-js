@@ -98,10 +98,10 @@ export interface NewMarginOrderResponse {
     side?: string;
     /**
      *
-     * @type {number}
+     * @type {string}
      * @memberof NewMarginOrderResponse
      */
-    marginBuyBorrowAmount?: number;
+    marginBuyBorrowAmount?: string;
     /**
      *
      * @type {string}

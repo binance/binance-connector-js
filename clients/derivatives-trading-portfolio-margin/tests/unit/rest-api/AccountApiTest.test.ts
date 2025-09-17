@@ -379,7 +379,7 @@ describe('AccountApi', () => {
     describe('changeAutoRepayFuturesStatus()', () => {
         it('should execute changeAutoRepayFuturesStatus() successfully with required parameters only', async () => {
             const params: ChangeAutoRepayFuturesStatusRequest = {
-                autoRepay: '',
+                autoRepay: 'true',
             };
 
             mockResponse = { msg: 'success' };
@@ -400,7 +400,7 @@ describe('AccountApi', () => {
 
         it('should execute changeAutoRepayFuturesStatus() successfully with optional parameters', async () => {
             const params: ChangeAutoRepayFuturesStatusRequest = {
-                autoRepay: '',
+                autoRepay: 'true',
                 recvWindow: 5000,
             };
 
@@ -422,7 +422,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when autoRepay is missing', async () => {
             const _params: ChangeAutoRepayFuturesStatusRequest = {
-                autoRepay: '',
+                autoRepay: 'true',
             };
             const params = Object.assign({ ..._params });
             delete params?.autoRepay;
@@ -434,7 +434,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: ChangeAutoRepayFuturesStatusRequest = {
-                autoRepay: '',
+                autoRepay: 'true',
             };
 
             const errorResponse = {
@@ -2595,7 +2595,7 @@ describe('AccountApi', () => {
                 asset: 'asset_example',
             };
 
-            mockResponse = { amount: 1.69248805, borrowLimit: 60 };
+            mockResponse = { amount: '1.69248805', borrowLimit: '60' };
 
             const spy = jest.spyOn(client, 'marginMaxBorrow').mockReturnValue(
                 Promise.resolve({
@@ -2617,7 +2617,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { amount: 1.69248805, borrowLimit: 60 };
+            mockResponse = { amount: '1.69248805', borrowLimit: '60' };
 
             const spy = jest.spyOn(client, 'marginMaxBorrow').mockReturnValue(
                 Promise.resolve({

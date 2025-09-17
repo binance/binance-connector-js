@@ -21,14 +21,14 @@
 export interface MarginMaxBorrowResponse {
     /**
      *
-     * @type {number}
+     * @type {string}
      * @memberof MarginMaxBorrowResponse
      */
-    amount?: number;
+    amount?: string;
     /**
      *
-     * @type {number}
+     * @type {string}
      * @memberof MarginMaxBorrowResponse
      */
-    borrowLimit?: number;
+    borrowLimit?: string;
 }
