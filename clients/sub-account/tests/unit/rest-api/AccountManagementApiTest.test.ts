@@ -726,10 +726,6 @@ describe('AccountManagementApi', () => {
 
     describe('querySubAccountTransactionStatistics()', () => {
         it('should execute querySubAccountTransactionStatistics() successfully with required parameters only', async () => {
-            const params: QuerySubAccountTransactionStatisticsRequest = {
-                email: 'sub-account-email@email.com',
-            };
-
             mockResponse = {
                 recent30BtcTotal: '0',
                 recent30BtcFuturesTotal: '0',
@@ -779,7 +775,7 @@ describe('AccountManagementApi', () => {
                     rateLimits: [],
                 } as RestApiResponse<QuerySubAccountTransactionStatisticsResponse>)
             );
-            const response = await client.querySubAccountTransactionStatistics(params);
+            const response = await client.querySubAccountTransactionStatistics();
             expect(response).toBeDefined();
             await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
@@ -787,7 +783,7 @@ describe('AccountManagementApi', () => {
 
         it('should execute querySubAccountTransactionStatistics() successfully with optional parameters', async () => {
             const params: QuerySubAccountTransactionStatisticsRequest = {
-                email: 'sub-account-email@email.com',
+                email: 'email_example',
                 recvWindow: 5000,
             };
 
@@ -846,23 +842,7 @@ describe('AccountManagementApi', () => {
             spy.mockRestore();
         });
 
-        it('should throw RequiredError when email is missing', async () => {
-            const _params: QuerySubAccountTransactionStatisticsRequest = {
-                email: 'sub-account-email@email.com',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.email;
-
-            await expect(client.querySubAccountTransactionStatistics(params)).rejects.toThrow(
-                'Required parameter email was null or undefined when calling querySubAccountTransactionStatistics.'
-            );
-        });
-
         it('should throw an error when server is returning an error', async () => {
-            const params: QuerySubAccountTransactionStatisticsRequest = {
-                email: 'sub-account-email@email.com',
-            };
-
             const errorResponse = {
                 code: -1111,
                 msg: 'Server Error',
@@ -875,7 +855,7 @@ describe('AccountManagementApi', () => {
             const spy = jest
                 .spyOn(client, 'querySubAccountTransactionStatistics')
                 .mockRejectedValueOnce(mockError);
-            await expect(client.querySubAccountTransactionStatistics(params)).rejects.toThrow(
+            await expect(client.querySubAccountTransactionStatistics()).rejects.toThrow(
                 'ResponseError'
             );
             spy.mockRestore();

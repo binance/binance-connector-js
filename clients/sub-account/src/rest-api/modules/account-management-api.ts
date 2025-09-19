@@ -332,18 +332,15 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
          * Weight: 60
          *
          * @summary Query Sub-account Transaction Statistics (For Master Account) (USER_DATA)
-         * @param {string} email [Sub-account email](#email-address)
+         * @param {string} [email] Managed sub-account email
          * @param {number} [recvWindow]
          *
          * @throws {RequiredError}
          */
         querySubAccountTransactionStatistics: async (
-            email: string,
+            email?: string,
             recvWindow?: number
         ): Promise<RequestArgs> => {
-            // verify required parameter 'email' is not null or undefined
-            assertParamExists('querySubAccountTransactionStatistics', 'email', email);
-
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
@@ -487,7 +484,7 @@ export interface AccountManagementApiInterface {
      * @memberof AccountManagementApiInterface
      */
     querySubAccountTransactionStatistics(
-        requestParameters: QuerySubAccountTransactionStatisticsRequest
+        requestParameters?: QuerySubAccountTransactionStatisticsRequest
     ): Promise<RestApiResponse<QuerySubAccountTransactionStatisticsResponse>>;
 }
 
@@ -665,11 +662,11 @@ export interface QuerySubAccountListRequest {
  */
 export interface QuerySubAccountTransactionStatisticsRequest {
     /**
-     * [Sub-account email](#email-address)
+     * Managed sub-account email
      * @type {string}
      * @memberof AccountManagementApiQuerySubAccountTransactionStatistics
      */
-    readonly email: string;
+    readonly email?: string;
 
     /**
      *
@@ -920,7 +917,7 @@ export class AccountManagementApi implements AccountManagementApiInterface {
      * @see {@link https://developers.binance.com/docs/sub_account/account-management/Query-Sub-account-Transaction-Statistics Binance API Documentation}
      */
     public async querySubAccountTransactionStatistics(
-        requestParameters: QuerySubAccountTransactionStatisticsRequest
+        requestParameters: QuerySubAccountTransactionStatisticsRequest = {}
     ): Promise<RestApiResponse<QuerySubAccountTransactionStatisticsResponse>> {
         const localVarAxiosArgs =
             await this.localVarAxiosParamCreator.querySubAccountTransactionStatistics(

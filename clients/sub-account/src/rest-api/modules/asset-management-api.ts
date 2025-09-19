@@ -1296,8 +1296,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * Weight: 360
          *
          * @summary Universal Transfer (For Master Account) (USER_DATA)
-         * @param {string} fromAccountType "SPOT","USDT_FUTURE","COIN_FUTURE","MARGIN"(Cross),"ISOLATED_MARGIN","ALPHA"
-         * @param {string} toAccountType "SPOT","USDT_FUTURE","COIN_FUTURE","MARGIN"(Cross),"ISOLATED_MARGIN","ALPHA"
+         * @param {string} fromAccountType "SPOT","USDT_FUTURE","COIN_FUTURE","MARGIN"(Cross),"ISOLATED_MARGIN"
+         * @param {string} toAccountType "SPOT","USDT_FUTURE","COIN_FUTURE","MARGIN"(Cross),"ISOLATED_MARGIN"
          * @param {string} asset
          * @param {number} amount
          * @param {string} [fromEmail]
@@ -2585,14 +2585,14 @@ export interface TransferToSubAccountOfSameMasterRequest {
  */
 export interface UniversalTransferRequest {
     /**
-     * "SPOT","USDT_FUTURE","COIN_FUTURE","MARGIN"(Cross),"ISOLATED_MARGIN","ALPHA"
+     * "SPOT","USDT_FUTURE","COIN_FUTURE","MARGIN"(Cross),"ISOLATED_MARGIN"
      * @type {string}
      * @memberof AssetManagementApiUniversalTransfer
      */
     readonly fromAccountType: string;
 
     /**
-     * "SPOT","USDT_FUTURE","COIN_FUTURE","MARGIN"(Cross),"ISOLATED_MARGIN","ALPHA"
+     * "SPOT","USDT_FUTURE","COIN_FUTURE","MARGIN"(Cross),"ISOLATED_MARGIN"
      * @type {string}
      * @memberof AssetManagementApiUniversalTransfer
      */

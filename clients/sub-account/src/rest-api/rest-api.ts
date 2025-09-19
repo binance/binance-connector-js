@@ -310,7 +310,7 @@ export class RestAPI {
      * @see {@link https://developers.binance.com/docs/sub_account/account-management/Query-Sub-account-Transaction-Statistics Binance API Documentation}
      */
     querySubAccountTransactionStatistics(
-        requestParameters: QuerySubAccountTransactionStatisticsRequest
+        requestParameters: QuerySubAccountTransactionStatisticsRequest = {}
     ): Promise<RestApiResponse<QuerySubAccountTransactionStatisticsResponse>> {
         return this.accountManagementApi.querySubAccountTransactionStatistics(requestParameters);
     }

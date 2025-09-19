@@ -9,9 +9,7 @@ const client = new SubAccount({ configurationRestAPI });
 
 async function querySubAccountTransactionStatistics() {
     try {
-        const response = await client.restAPI.querySubAccountTransactionStatistics({
-            email: 'sub-account-email@email.com',
-        });
+        const response = await client.restAPI.querySubAccountTransactionStatistics();
 
         const rateLimits = response.rateLimits!;
         console.log('querySubAccountTransactionStatistics() rate limits:', rateLimits);

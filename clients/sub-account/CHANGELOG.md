@@ -1,5 +1,14 @@
 # Changelog
 
+## 8.0.0 - 2025-09-19
+
+### Changed (1)
+
+- Modified parameter `email`:
+  - required: `true` → `false`
+  - affected methods:
+    - `querySubAccountTransactionStatistics()` (`GET /sapi/v1/sub-account/transaction-statistics`)
+
 ## 7.0.6 - 2025-09-12
 
 ### Changed (1)
