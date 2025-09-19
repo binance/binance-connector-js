@@ -52,7 +52,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Cancel All Open Orders on a Symbol
          * @param {string} symbol
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -90,7 +90,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} [origClientOrderId]
          * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
          * @param {DeleteOrderCancelRestrictionsEnum} [cancelRestrictions]
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -150,7 +150,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [orderListId] Either `orderListId` or `listClientOrderId` must be provided
          * @param {string} [listClientOrderId] A unique Id for the entire orderList
          * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -221,7 +221,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {NewOrderPegPriceTypeEnum} [pegPriceType]
          * @param {number} [pegOffsetValue] Priceleveltopegthepriceto(max:100).<br>See[PeggedOrdersInfo](#pegged-orders-info)
          * @param {NewOrderPegOffsetTypeEnum} [pegOffsetType]
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -355,7 +355,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [orderId]
          * @param {string} [origClientOrderId]
          * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -441,7 +441,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderCancelReplacePegPriceTypeEnum} [pegPriceType]
          * @param {number} [pegOffsetValue] Priceleveltopegthepriceto(max:100).<br>See[PeggedOrdersInfo](#pegged-orders-info)
          * @param {OrderCancelReplacePegOffsetTypeEnum} [pegOffsetType]
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -641,7 +641,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [belowPegOffsetValue]
          * @param {OrderListOcoNewOrderRespTypeEnum} [newOrderRespType]
          * @param {OrderListOcoSelfTradePreventionModeEnum} [selfTradePreventionMode]
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -869,7 +869,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderListOtoPendingPegPriceTypeEnum} [pendingPegPriceType]
          * @param {OrderListOtoPendingPegOffsetTypeEnum} [pendingPegOffsetType]
          * @param {number} [pendingPegOffsetValue]
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -1115,7 +1115,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderListOtocoPendingBelowPegPriceTypeEnum} [pendingBelowPegPriceType]
          * @param {OrderListOtocoPendingBelowPegOffsetTypeEnum} [pendingBelowPegOffsetType]
          * @param {number} [pendingBelowPegOffsetValue]
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -1399,7 +1399,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderOcoStopLimitTimeInForceEnum} [stopLimitTimeInForce]
          * @param {OrderOcoNewOrderRespTypeEnum} [newOrderRespType]
          * @param {OrderOcoSelfTradePreventionModeEnum} [selfTradePreventionMode]
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -1556,7 +1556,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderTestPegPriceTypeEnum} [pegPriceType]
          * @param {number} [pegOffsetValue] Priceleveltopegthepriceto(max:100).<br>See[PeggedOrdersInfo](#pegged-orders-info)
          * @param {OrderTestPegOffsetTypeEnum} [pegOffsetType]
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -1704,7 +1704,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [icebergQty] Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
          * @param {SorOrderNewOrderRespTypeEnum} [newOrderRespType]
          * @param {SorOrderSelfTradePreventionModeEnum} [selfTradePreventionMode]
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -1818,7 +1818,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [icebergQty] Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
          * @param {SorOrderTestNewOrderRespTypeEnum} [newOrderRespType]
          * @param {SorOrderTestSelfTradePreventionModeEnum} [selfTradePreventionMode]
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -2165,7 +2165,7 @@ export interface DeleteOpenOrdersRequest {
     readonly symbol: string;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiDeleteOpenOrders
      */
@@ -2213,7 +2213,7 @@ export interface DeleteOrderRequest {
     readonly cancelRestrictions?: DeleteOrderCancelRestrictionsEnum;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiDeleteOrder
      */
@@ -2254,7 +2254,7 @@ export interface DeleteOrderListRequest {
     readonly newClientOrderId?: string;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiDeleteOrderList
      */
@@ -2393,7 +2393,7 @@ export interface NewOrderRequest {
     readonly pegOffsetType?: NewOrderPegOffsetTypeEnum;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiNewOrder
      */
@@ -2441,7 +2441,7 @@ export interface OrderAmendKeepPriorityRequest {
     readonly newClientOrderId?: string;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderAmendKeepPriority
      */
@@ -2622,7 +2622,7 @@ export interface OrderCancelReplaceRequest {
     readonly pegOffsetType?: OrderCancelReplacePegOffsetTypeEnum;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderCancelReplace
      */
@@ -2845,7 +2845,7 @@ export interface OrderListOcoRequest {
     readonly selfTradePreventionMode?: OrderListOcoSelfTradePreventionModeEnum;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderListOco
      */
@@ -3068,7 +3068,7 @@ export interface OrderListOtoRequest {
     readonly pendingPegOffsetValue?: number;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderListOto
      */
@@ -3375,7 +3375,7 @@ export interface OrderListOtocoRequest {
     readonly pendingBelowPegOffsetValue?: number;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderListOtoco
      */
@@ -3521,7 +3521,7 @@ export interface OrderOcoRequest {
     readonly selfTradePreventionMode?: OrderOcoSelfTradePreventionModeEnum;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderOco
      */
@@ -3667,7 +3667,7 @@ export interface OrderTestRequest {
     readonly pegOffsetType?: OrderTestPegOffsetTypeEnum;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderTest
      */
@@ -3764,7 +3764,7 @@ export interface SorOrderRequest {
     readonly selfTradePreventionMode?: SorOrderSelfTradePreventionModeEnum;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiSorOrder
      */
@@ -3868,7 +3868,7 @@ export interface SorOrderTestRequest {
     readonly selfTradePreventionMode?: SorOrderTestSelfTradePreventionModeEnum;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiSorOrderTest
      */

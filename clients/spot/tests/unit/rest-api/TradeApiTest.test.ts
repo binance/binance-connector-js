@@ -260,7 +260,7 @@ describe('TradeApi', () => {
         it('should execute deleteOpenOrders() successfully with optional parameters', async () => {
             const params: DeleteOpenOrdersRequest = {
                 symbol: 'BNBUSDT',
-                recvWindow: 5000,
+                recvWindow: 5000.0,
             };
 
             mockResponse = [
@@ -448,7 +448,7 @@ describe('TradeApi', () => {
                 origClientOrderId: 'origClientOrderId_example',
                 newClientOrderId: 'newClientOrderId_example',
                 cancelRestrictions: DeleteOrderCancelRestrictionsEnum.ONLY_NEW,
-                recvWindow: 5000,
+                recvWindow: 5000.0,
             };
 
             mockResponse = {
@@ -595,7 +595,7 @@ describe('TradeApi', () => {
                 orderListId: 1,
                 listClientOrderId: 'listClientOrderId_example',
                 newClientOrderId: 'newClientOrderId_example',
-                recvWindow: 5000,
+                recvWindow: 5000.0,
             };
 
             mockResponse = {
@@ -830,7 +830,7 @@ describe('TradeApi', () => {
                 pegPriceType: NewOrderPegPriceTypeEnum.PRIMARY_PEG,
                 pegOffsetValue: 1,
                 pegOffsetType: NewOrderPegOffsetTypeEnum.PRICE_LEVEL,
-                recvWindow: 5000,
+                recvWindow: 5000.0,
             };
 
             mockResponse = {
@@ -1067,7 +1067,7 @@ describe('TradeApi', () => {
                 orderId: 1,
                 origClientOrderId: 'origClientOrderId_example',
                 newClientOrderId: 'newClientOrderId_example',
-                recvWindow: 5000,
+                recvWindow: 5000.0,
             };
 
             mockResponse = {
@@ -1297,7 +1297,7 @@ describe('TradeApi', () => {
                 pegPriceType: OrderCancelReplacePegPriceTypeEnum.PRIMARY_PEG,
                 pegOffsetValue: 1,
                 pegOffsetType: OrderCancelReplacePegOffsetTypeEnum.PRICE_LEVEL,
-                recvWindow: 5000,
+                recvWindow: 5000.0,
             };
 
             mockResponse = {
@@ -1584,7 +1584,7 @@ describe('TradeApi', () => {
                 belowPegOffsetValue: 1,
                 newOrderRespType: OrderListOcoNewOrderRespTypeEnum.ACK,
                 selfTradePreventionMode: OrderListOcoSelfTradePreventionModeEnum.NONE,
-                recvWindow: 5000,
+                recvWindow: 5000.0,
             };
 
             mockResponse = {
@@ -1870,7 +1870,7 @@ describe('TradeApi', () => {
                 pendingPegPriceType: OrderListOtoPendingPegPriceTypeEnum.PRIMARY_PEG,
                 pendingPegOffsetType: OrderListOtoPendingPegOffsetTypeEnum.PRICE_LEVEL,
                 pendingPegOffsetValue: 1,
-                recvWindow: 5000,
+                recvWindow: 5000.0,
             };
 
             mockResponse = {
@@ -2261,7 +2261,7 @@ describe('TradeApi', () => {
                 pendingBelowPegPriceType: OrderListOtocoPendingBelowPegPriceTypeEnum.PRIMARY_PEG,
                 pendingBelowPegOffsetType: OrderListOtocoPendingBelowPegOffsetTypeEnum.PRICE_LEVEL,
                 pendingBelowPegOffsetValue: 1,
-                recvWindow: 5000,
+                recvWindow: 5000.0,
             };
 
             mockResponse = {
@@ -2627,7 +2627,7 @@ describe('TradeApi', () => {
                 stopLimitTimeInForce: OrderOcoStopLimitTimeInForceEnum.GTC,
                 newOrderRespType: OrderOcoNewOrderRespTypeEnum.ACK,
                 selfTradePreventionMode: OrderOcoSelfTradePreventionModeEnum.NONE,
-                recvWindow: 5000,
+                recvWindow: 5000.0,
             };
 
             mockResponse = {
@@ -2856,7 +2856,7 @@ describe('TradeApi', () => {
                 pegPriceType: OrderTestPegPriceTypeEnum.PRIMARY_PEG,
                 pegOffsetValue: 1,
                 pegOffsetType: OrderTestPegOffsetTypeEnum.PRICE_LEVEL,
-                recvWindow: 5000,
+                recvWindow: 5000.0,
             };
 
             mockResponse = {
@@ -3018,7 +3018,7 @@ describe('TradeApi', () => {
                 icebergQty: 1.0,
                 newOrderRespType: SorOrderNewOrderRespTypeEnum.ACK,
                 selfTradePreventionMode: SorOrderSelfTradePreventionModeEnum.NONE,
-                recvWindow: 5000,
+                recvWindow: 5000.0,
             };
 
             mockResponse = {
@@ -3199,7 +3199,7 @@ describe('TradeApi', () => {
                 icebergQty: 1.0,
                 newOrderRespType: SorOrderTestNewOrderRespTypeEnum.ACK,
                 selfTradePreventionMode: SorOrderTestSelfTradePreventionModeEnum.NONE,
-                recvWindow: 5000,
+                recvWindow: 5000.0,
             };
 
             mockResponse = {

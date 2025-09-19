@@ -243,7 +243,7 @@ describe('AccountApi', () => {
                 startTime: 1735693200000,
                 endTime: 1735693200000,
                 limit: 500,
-                recvWindow: 5000,
+                recvWindow: 5000.0,
             };
 
             mockResponse = [
@@ -357,7 +357,7 @@ describe('AccountApi', () => {
                 startTime: 1735693200000,
                 endTime: 1735693200000,
                 limit: 500,
-                recvWindow: 5000,
+                recvWindow: 5000.0,
             };
 
             mockResponse = [
@@ -477,7 +477,7 @@ describe('AccountApi', () => {
         it('should execute getAccount() successfully with optional parameters', async () => {
             const params: GetAccountRequest = {
                 omitZeroBalances: false,
-                recvWindow: 5000,
+                recvWindow: 5000.0,
             };
 
             mockResponse = {
@@ -581,7 +581,7 @@ describe('AccountApi', () => {
         it('should execute getOpenOrders() successfully with optional parameters', async () => {
             const params: GetOpenOrdersRequest = {
                 symbol: 'BNBUSDT',
-                recvWindow: 5000,
+                recvWindow: 5000.0,
             };
 
             mockResponse = [
@@ -687,7 +687,7 @@ describe('AccountApi', () => {
                 symbol: 'BNBUSDT',
                 orderId: 1,
                 origClientOrderId: 'origClientOrderId_example',
-                recvWindow: 5000,
+                recvWindow: 5000.0,
             };
 
             mockResponse = {
@@ -793,7 +793,7 @@ describe('AccountApi', () => {
             const params: GetOrderListRequest = {
                 orderListId: 1,
                 origClientOrderId: 'origClientOrderId_example',
-                recvWindow: 5000,
+                recvWindow: 5000.0,
             };
 
             mockResponse = {
@@ -887,7 +887,7 @@ describe('AccountApi', () => {
                 fromAllocationId: 1,
                 limit: 500,
                 orderId: 1,
-                recvWindow: 5000,
+                recvWindow: 5000.0,
             };
 
             mockResponse = [
@@ -997,7 +997,7 @@ describe('AccountApi', () => {
                 orderId: 1,
                 fromPreventedMatchId: 1,
                 limit: 500,
-                recvWindow: 5000,
+                recvWindow: 5000.0,
             };
 
             mockResponse = [
@@ -1107,7 +1107,7 @@ describe('AccountApi', () => {
                 endTime: 1735693200000,
                 fromId: 1,
                 limit: 500,
-                recvWindow: 5000,
+                recvWindow: 5000.0,
             };
 
             mockResponse = [
@@ -1208,7 +1208,7 @@ describe('AccountApi', () => {
 
         it('should execute openOrderList() successfully with optional parameters', async () => {
             const params: OpenOrderListRequest = {
-                recvWindow: 5000,
+                recvWindow: 5000.0,
             };
 
             mockResponse = [
@@ -1307,7 +1307,7 @@ describe('AccountApi', () => {
                 orderId: 1,
                 fromExecutionId: 1,
                 limit: 500,
-                recvWindow: 5000,
+                recvWindow: 5000.0,
             };
 
             mockResponse = [
@@ -1429,7 +1429,7 @@ describe('AccountApi', () => {
 
         it('should execute rateLimitOrder() successfully with optional parameters', async () => {
             const params: RateLimitOrderRequest = {
-                recvWindow: 5000,
+                recvWindow: 5000.0,
             };
 
             mockResponse = [

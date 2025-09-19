@@ -62,6 +62,7 @@ const UserDataStreamApiAxiosParamCreator = function (configuration: Configuratio
         },
         /**
          * Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent.
+         * This request does not require `signature`.
          * Weight: 2
          *
          * @summary Start user data stream
@@ -83,6 +84,8 @@ const UserDataStreamApiAxiosParamCreator = function (configuration: Configuratio
         },
         /**
          * Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes. It's recommended to send a ping about every 30 minutes.
+         *
+         * This request does not require `signature`.
          * Weight: 2
          *
          * @summary Keepalive user data stream
@@ -133,6 +136,7 @@ export interface UserDataStreamApiInterface {
     ): Promise<RestApiResponse<void>>;
     /**
      * Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent.
+     * This request does not require `signature`.
      * Weight: 2
      *
      * @summary Start user data stream
@@ -143,6 +147,8 @@ export interface UserDataStreamApiInterface {
     newUserDataStream(): Promise<RestApiResponse<NewUserDataStreamResponse>>;
     /**
      * Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes. It's recommended to send a ping about every 30 minutes.
+     *
+     * This request does not require `signature`.
      * Weight: 2
      *
      * @summary Keepalive user data stream
@@ -222,6 +228,7 @@ export class UserDataStreamApi implements UserDataStreamApiInterface {
 
     /**
      * Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent.
+     * This request does not require `signature`.
      * Weight: 2
      *
      * @summary Start user data stream
@@ -244,6 +251,8 @@ export class UserDataStreamApi implements UserDataStreamApiInterface {
 
     /**
      * Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes. It's recommended to send a ping about every 30 minutes.
+     *
+     * This request does not require `signature`.
      * Weight: 2
      *
      * @summary Keepalive user data stream

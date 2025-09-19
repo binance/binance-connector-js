@@ -92,7 +92,7 @@ export interface SessionLogonRequest {
     readonly id?: string;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AuthApiSessionLogon
      */

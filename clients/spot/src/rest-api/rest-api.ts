@@ -989,6 +989,7 @@ export class RestAPI {
 
     /**
      * Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent.
+     * This request does not require `signature`.
      * Weight: 2
      *
      * @summary Start user data stream
@@ -1002,6 +1003,8 @@ export class RestAPI {
 
     /**
      * Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes. It's recommended to send a ping about every 30 minutes.
+     *
+     * This request does not require `signature`.
      * Weight: 2
      *
      * @summary Keepalive user data stream

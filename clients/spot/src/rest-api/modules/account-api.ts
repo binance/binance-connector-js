@@ -85,7 +85,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {number} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
          * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
          * @param {number} [limit] Default: 500; Maximum: 1000.
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -138,7 +138,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {number} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
          * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
          * @param {number} [limit] Default: 500; Maximum: 1000.
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -195,7 +195,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Account information
          * @param {boolean} [omitZeroBalances] When set to `true`, emits only the non-zero balances of an account. <br>Default value: `false`
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -229,7 +229,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Current open orders
          * @param {string} [symbol] Symbol to query
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -262,7 +262,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {string} symbol
          * @param {number} [orderId]
          * @param {string} [origClientOrderId]
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -310,7 +310,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @summary Query Order list
          * @param {number} [orderListId] Either `orderListId` or `listClientOrderId` must be provided
          * @param {string} [origClientOrderId]
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -354,7 +354,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {number} [fromAllocationId]
          * @param {number} [limit] Default: 500; Maximum: 1000.
          * @param {number} [orderId]
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -431,7 +431,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {number} [orderId]
          * @param {number} [fromPreventedMatchId]
          * @param {number} [limit] Default: 500; Maximum: 1000.
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -496,7 +496,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
          * @param {number} [fromId] ID to get aggregate trades from INCLUSIVE.
          * @param {number} [limit] Default: 500; Maximum: 1000.
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -557,7 +557,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 6
          *
          * @summary Query Open Order lists
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -587,7 +587,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {number} orderId
          * @param {number} [fromExecutionId]
          * @param {number} [limit] Default:500; Maximum: 1000
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -640,7 +640,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 40
          *
          * @summary Query Unfilled Order Count
-         * @param {number} [recvWindow] The value cannot be greater than `60000`
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
@@ -895,7 +895,7 @@ export interface AllOrderListRequest {
     readonly limit?: number;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiAllOrderList
      */
@@ -943,7 +943,7 @@ export interface AllOrdersRequest {
     readonly limit?: number;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiAllOrders
      */
@@ -963,7 +963,7 @@ export interface GetAccountRequest {
     readonly omitZeroBalances?: boolean;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiGetAccount
      */
@@ -983,7 +983,7 @@ export interface GetOpenOrdersRequest {
     readonly symbol?: string;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiGetOpenOrders
      */
@@ -1017,7 +1017,7 @@ export interface GetOrderRequest {
     readonly origClientOrderId?: string;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiGetOrder
      */
@@ -1044,7 +1044,7 @@ export interface GetOrderListRequest {
     readonly origClientOrderId?: string;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiGetOrderList
      */
@@ -1099,7 +1099,7 @@ export interface MyAllocationsRequest {
     readonly orderId?: number;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiMyAllocations
      */
@@ -1147,7 +1147,7 @@ export interface MyPreventedMatchesRequest {
     readonly limit?: number;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiMyPreventedMatches
      */
@@ -1202,7 +1202,7 @@ export interface MyTradesRequest {
     readonly limit?: number;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiMyTrades
      */
@@ -1215,7 +1215,7 @@ export interface MyTradesRequest {
  */
 export interface OpenOrderListRequest {
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiOpenOrderList
      */
@@ -1256,7 +1256,7 @@ export interface OrderAmendmentsRequest {
     readonly limit?: number;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiOrderAmendments
      */
@@ -1269,7 +1269,7 @@ export interface OrderAmendmentsRequest {
  */
 export interface RateLimitOrderRequest {
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiRateLimitOrder
      */

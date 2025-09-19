@@ -1,5 +1,74 @@
 # Changelog
 
+## 17.0.0 - 2025-09-19
+
+### Changed (2)
+
+#### REST API
+
+- Modified parameter `recvWindow`:
+  - type `integer` → `number`
+  - format `int64` → `float`
+  - affected methods:
+    - `getAccount()` (`GET /api/v3/account`)
+    - `allOrderList()` (`GET /api/v3/allOrderList`)
+    - `allOrders()` (`GET /api/v3/allOrders`)
+    - `myAllocations()` (`GET /api/v3/myAllocations`)
+    - `myPreventedMatches()` (`GET /api/v3/myPreventedMatches`)
+    - `myTrades()` (`GET /api/v3/myTrades`)
+    - `openOrderList()` (`GET /api/v3/openOrderList`)
+    - `deleteOpenOrders()` (`DELETE /api/v3/openOrders`)
+    - `getOpenOrders()` (`GET /api/v3/openOrders`)
+    - `deleteOrder()` (`DELETE /api/v3/order`)
+    - `getOrder()` (`GET /api/v3/order`)
+    - `newOrder()` (`POST /api/v3/order`)
+    - `orderAmendKeepPriority()` (`PUT /api/v3/order/amend/keepPriority`)
+    - `orderAmendments()` (`GET /api/v3/order/amendments`)
+    - `orderCancelReplace()` (`POST /api/v3/order/cancelReplace`)
+    - `orderOco()` (`POST /api/v3/order/oco`)
+    - `orderTest()` (`POST /api/v3/order/test`)
+    - `deleteOrderList()` (`DELETE /api/v3/orderList`)
+    - `getOrderList()` (`GET /api/v3/orderList`)
+    - `orderListOco()` (`POST /api/v3/orderList/oco`)
+    - `orderListOto()` (`POST /api/v3/orderList/oto`)
+    - `orderListOtoco()` (`POST /api/v3/orderList/otoco`)
+    - `rateLimitOrder()` (`GET /api/v3/rateLimit/order`)
+    - `sorOrder()` (`POST /api/v3/sor/order`)
+    - `sorOrderTest()` (`POST /api/v3/sor/order/test`)
+
+#### WebSocket API
+
+- Modified parameter `recvWindow`:
+  - type `integer` → `number`
+  - format `int64` → `float`
+  - affected methods:
+    - `accountRateLimitsOrders()` (`account.rateLimits.orders` method)
+    - `accountStatus()` (`account.status` method)
+    - `allOrderLists()` (`allOrderLists` method)
+    - `allOrders()` (`allOrders` method)
+    - `myAllocations()` (`myAllocations` method)
+    - `myPreventedMatches()` (`myPreventedMatches` method)
+    - `myTrades()` (`myTrades` method)
+    - `openOrderListsStatus()` (`openOrderLists.status` method)
+    - `openOrdersCancelAll()` (`openOrders.cancelAll` method)
+    - `openOrdersStatus()` (`openOrders.status` method)
+    - `orderAmendKeepPriority()` (`order.amend.keepPriority` method)
+    - `orderAmendments()` (`order.amendments` method)
+    - `orderCancel()` (`order.cancel` method)
+    - `orderCancelReplace()` (`order.cancelReplace` method)
+    - `orderPlace()` (`order.place` method)
+    - `orderStatus()` (`order.status` method)
+    - `orderTest()` (`order.test` method)
+    - `orderListCancel()` (`orderList.cancel` method)
+    - `orderListPlace()` (`orderList.place` method)
+    - `orderListPlaceOco()` (`orderList.place.oco` method)
+    - `orderListPlaceOto()` (`orderList.place.oto` method)
+    - `orderListPlaceOtoco()` (`orderList.place.otoco` method)
+    - `orderListStatus()` (`orderList.status` method)
+    - `sessionLogon()` (`session.logon` method)
+    - `sorOrderPlace()` (`sor.order.place` method)
+    - `sorOrderTest()` (`sor.order.test` method)
+
 ## 16.0.1 - 2025-09-12
 
 ### Changed (1)

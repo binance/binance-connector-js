@@ -304,7 +304,7 @@ export interface OpenOrdersCancelAllRequest {
     readonly id?: string;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOpenOrdersCancelAll
      */
@@ -359,7 +359,7 @@ export interface OrderAmendKeepPriorityRequest {
     readonly newClientOrderId?: string;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderAmendKeepPriority
      */
@@ -414,7 +414,7 @@ export interface OrderCancelRequest {
     readonly cancelRestrictions?: OrderCancelCancelRestrictionsEnum;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderCancel
      */
@@ -604,7 +604,7 @@ export interface OrderCancelReplaceRequest {
     readonly pegOffsetType?: OrderCancelReplacePegOffsetTypeEnum;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderCancelReplace
      */
@@ -652,7 +652,7 @@ export interface OrderListCancelRequest {
     readonly newClientOrderId?: string;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderListCancel
      */
@@ -805,7 +805,7 @@ export interface OrderListPlaceRequest {
     readonly selfTradePreventionMode?: OrderListPlaceSelfTradePreventionModeEnum;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderListPlace
      */
@@ -1035,7 +1035,7 @@ export interface OrderListPlaceOcoRequest {
     readonly selfTradePreventionMode?: OrderListPlaceOcoSelfTradePreventionModeEnum;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderListPlaceOco
      */
@@ -1265,7 +1265,7 @@ export interface OrderListPlaceOtoRequest {
     readonly pendingPegOffsetValue?: number;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderListPlaceOto
      */
@@ -1579,7 +1579,7 @@ export interface OrderListPlaceOtocoRequest {
     readonly pendingBelowPegOffsetValue?: number;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderListPlaceOtoco
      */
@@ -1727,7 +1727,7 @@ export interface OrderPlaceRequest {
     readonly pegOffsetType?: OrderPlacePegOffsetTypeEnum;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderPlace
      */
@@ -1882,7 +1882,7 @@ export interface OrderTestRequest {
     readonly pegOffsetType?: OrderTestPegOffsetTypeEnum;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiOrderTest
      */
@@ -1987,7 +1987,7 @@ export interface SorOrderPlaceRequest {
     readonly selfTradePreventionMode?: SorOrderPlaceSelfTradePreventionModeEnum;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiSorOrderPlace
      */
@@ -2099,7 +2099,7 @@ export interface SorOrderTestRequest {
     readonly selfTradePreventionMode?: SorOrderTestSelfTradePreventionModeEnum;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof TradeApiSorOrderTest
      */

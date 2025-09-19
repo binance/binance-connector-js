@@ -1096,6 +1096,8 @@ export class WebsocketAPIConnection {
      * In order to keep the stream open, you have to regularly send pings using the `userDataStream.ping` request.
      *
      * It is recommended to send a ping once every 30 minutes.
+     *
+     * This request does not require `signature`.
      * Weight: 2
      *
      * @summary WebSocket Ping user data stream
@@ -1111,6 +1113,8 @@ export class WebsocketAPIConnection {
 
     /**
      * Start a new user data stream.
+     * Note the stream will close in 60 minutes unless `userDataStream.ping` requests are sent regularly.
+     * This request does not require `signature`.
      * Weight: 2
      *
      * @summary WebSocket Start user data stream
@@ -1126,6 +1130,7 @@ export class WebsocketAPIConnection {
 
     /**
      * Explicitly stop and close the user data stream.
+     * This request does not require `signature`.
      * Weight: 2
      *
      * @summary WebSocket Stop user data stream

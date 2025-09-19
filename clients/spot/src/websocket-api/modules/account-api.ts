@@ -284,7 +284,7 @@ export interface AccountRateLimitsOrdersRequest {
     readonly id?: string;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiAccountRateLimitsOrders
      */
@@ -311,7 +311,7 @@ export interface AccountStatusRequest {
     readonly omitZeroBalances?: boolean;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiAccountStatus
      */
@@ -359,7 +359,7 @@ export interface AllOrderListsRequest {
     readonly limit?: number;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiAllOrderLists
      */
@@ -414,7 +414,7 @@ export interface AllOrdersRequest {
     readonly limit?: number;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiAllOrders
      */
@@ -476,7 +476,7 @@ export interface MyAllocationsRequest {
     readonly orderId?: number;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiMyAllocations
      */
@@ -531,7 +531,7 @@ export interface MyPreventedMatchesRequest {
     readonly limit?: number;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiMyPreventedMatches
      */
@@ -593,7 +593,7 @@ export interface MyTradesRequest {
     readonly limit?: number;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiMyTrades
      */
@@ -613,7 +613,7 @@ export interface OpenOrderListsStatusRequest {
     readonly id?: string;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiOpenOrderListsStatus
      */
@@ -640,7 +640,7 @@ export interface OpenOrdersStatusRequest {
     readonly symbol?: string;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiOpenOrdersStatus
      */
@@ -688,7 +688,7 @@ export interface OrderAmendmentsRequest {
     readonly limit?: number;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiOrderAmendments
      */
@@ -722,7 +722,7 @@ export interface OrderListStatusRequest {
     readonly orderListId?: number;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiOrderListStatus
      */
@@ -763,7 +763,7 @@ export interface OrderStatusRequest {
     readonly origClientOrderId?: string;
 
     /**
-     * The value cannot be greater than `60000`
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiOrderStatus
      */
