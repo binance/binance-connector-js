@@ -304,7 +304,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
 
             return {
                 endpoint: '/sapi/v1/convert/limit/queryOpenOrders',
-                method: 'POST',
+                method: 'GET',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
             };

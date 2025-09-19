@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.0 - 2025-09-19
+
+### Changed (1)
+
+- Update `queryLimitOpenOrders()` HTTP method (`GET` from `POST`)
+
 ## 2.0.8 - 2025-09-12
 
 ### Changed (1)
