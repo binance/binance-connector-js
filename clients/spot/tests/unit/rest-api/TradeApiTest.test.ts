@@ -1576,7 +1576,7 @@ describe('TradeApi', () => {
                 belowPrice: 1.0,
                 belowStopPrice: 1.0,
                 belowTrailingDelta: 1,
-                belowTimeInForce: OrderListOcoBelowTimeInForceEnum.belowType,
+                belowTimeInForce: OrderListOcoBelowTimeInForceEnum.GTC,
                 belowStrategyId: 1,
                 belowStrategyType: 1,
                 belowPegPriceType: OrderListOcoBelowPegPriceTypeEnum.PRIMARY_PEG,

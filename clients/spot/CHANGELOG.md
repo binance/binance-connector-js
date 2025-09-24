@@ -1,5 +1,17 @@
 # Changelog
 
+## 18.0.0 - 2025-09-24
+
+### Changed (2)
+
+#### WebSocket API
+
+- Modified parameter `belowTimeInForce`:
+  - enum removed: `belowType`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT_LIMIT`
+  - enum added: `GTC`, `IOC`, `FOK`
+  - affected methods:
+    - `orderListPlaceOco()` (`orderList.place.oco` method)
+
 ## 17.0.0 - 2025-09-19
 
 ### Changed (2)

@@ -2790,7 +2790,7 @@ export interface OrderListOcoRequest {
 
     /**
      *
-     * @type {'belowType' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT_LIMIT'}
+     * @type {'GTC' | 'IOC' | 'FOK'}
      * @memberof TradeApiOrderListOco
      */
     readonly belowTimeInForce?: OrderListOcoBelowTimeInForceEnum;
@@ -3501,7 +3501,7 @@ export interface OrderOcoRequest {
 
     /**
      *
-     * @type {'GTC' | 'FOK' | 'IOC'}
+     * @type {'GTC' | 'IOC' | 'FOK'}
      * @memberof TradeApiOrderOco
      */
     readonly stopLimitTimeInForce?: OrderOcoStopLimitTimeInForceEnum;
@@ -4684,9 +4684,9 @@ export enum OrderListOcoAbovePegOffsetTypeEnum {
 }
 
 export enum OrderListOcoBelowTimeInForceEnum {
-    belowType = 'belowType',
-    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
-    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
 }
 
 export enum OrderListOcoBelowPegPriceTypeEnum {
@@ -4886,8 +4886,8 @@ export enum OrderOcoSideEnum {
 
 export enum OrderOcoStopLimitTimeInForceEnum {
     GTC = 'GTC',
-    FOK = 'FOK',
     IOC = 'IOC',
+    FOK = 'FOK',
 }
 
 export enum OrderOcoNewOrderRespTypeEnum {
