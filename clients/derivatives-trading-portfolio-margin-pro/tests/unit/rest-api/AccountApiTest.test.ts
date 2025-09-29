@@ -164,7 +164,7 @@ describe('AccountApi', () => {
     describe('changeAutoRepayFuturesStatus()', () => {
         it('should execute changeAutoRepayFuturesStatus() successfully with required parameters only', async () => {
             const params: ChangeAutoRepayFuturesStatusRequest = {
-                autoRepay: '',
+                autoRepay: 'true',
             };
 
             mockResponse = { msg: 'success' };
@@ -185,7 +185,7 @@ describe('AccountApi', () => {
 
         it('should execute changeAutoRepayFuturesStatus() successfully with optional parameters', async () => {
             const params: ChangeAutoRepayFuturesStatusRequest = {
-                autoRepay: '',
+                autoRepay: 'true',
                 recvWindow: 5000,
             };
 
@@ -207,7 +207,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when autoRepay is missing', async () => {
             const _params: ChangeAutoRepayFuturesStatusRequest = {
-                autoRepay: '',
+                autoRepay: 'true',
             };
             const params = Object.assign({ ..._params });
             delete params?.autoRepay;
@@ -219,7 +219,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: ChangeAutoRepayFuturesStatusRequest = {
-                autoRepay: '',
+                autoRepay: 'true',
             };
 
             const errorResponse = {
@@ -801,7 +801,7 @@ describe('AccountApi', () => {
                 targetAsset: 'BFUSD',
                 fromAssetQty: 10,
                 targetAssetQty: 9.998,
-                rate: 0.9998,
+                mintRate: 0.9998,
             };
 
             const spy = jest.spyOn(client, 'mintBfusdForPortfolioMargin').mockReturnValue(
@@ -831,7 +831,7 @@ describe('AccountApi', () => {
                 targetAsset: 'BFUSD',
                 fromAssetQty: 10,
                 targetAssetQty: 9.998,
-                rate: 0.9998,
+                mintRate: 0.9998,
             };
 
             const spy = jest.spyOn(client, 'mintBfusdForPortfolioMargin').mockReturnValue(
@@ -1215,7 +1215,7 @@ describe('AccountApi', () => {
                 targetAsset: 'USDT',
                 fromAssetQty: 9.99800001,
                 targetAssetQty: 9.996000409998,
-                rate: 0.9998,
+                redeemRate: 0.9998,
             };
 
             const spy = jest.spyOn(client, 'redeemBfusdForPortfolioMargin').mockReturnValue(
@@ -1245,7 +1245,7 @@ describe('AccountApi', () => {
                 targetAsset: 'USDT',
                 fromAssetQty: 9.99800001,
                 targetAssetQty: 9.996000409998,
-                rate: 0.9998,
+                redeemRate: 0.9998,
             };
 
             const spy = jest.spyOn(client, 'redeemBfusdForPortfolioMargin').mockReturnValue(

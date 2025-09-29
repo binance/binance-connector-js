@@ -13,7 +13,7 @@ const client = new DerivativesTradingPortfolioMarginPro({ configurationRestAPI }
 async function changeAutoRepayFuturesStatus() {
     try {
         const response = await client.restAPI.changeAutoRepayFuturesStatus({
-            autoRepay: '',
+            autoRepay: 'true',
         });
 
         const rateLimits = response.rateLimits!;

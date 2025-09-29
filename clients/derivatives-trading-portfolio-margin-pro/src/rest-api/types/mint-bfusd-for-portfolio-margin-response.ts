@@ -48,5 +48,5 @@ export interface MintBfusdForPortfolioMarginResponse {
      * @type {number}
      * @memberof MintBfusdForPortfolioMarginResponse
      */
-    rate?: number;
+    mintRate?: number;
 }

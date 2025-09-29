@@ -48,5 +48,5 @@ export interface RedeemBfusdForPortfolioMarginResponse {
      * @type {number}
      * @memberof RedeemBfusdForPortfolioMarginResponse
      */
-    rate?: number;
+    redeemRate?: number;
 }

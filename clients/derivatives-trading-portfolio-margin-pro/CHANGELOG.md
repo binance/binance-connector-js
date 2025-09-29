@@ -1,5 +1,19 @@
 # Changelog
 
+## 8.0.0 - 2025-09-29
+
+### Changed (2)
+
+#### REST API
+
+- Modified response for `mintBfusdForPortfolioMargin()` (`POST /sapi/v1/portfolio/mint`):
+  - property `mintRate` added
+  - property `rate` deleted
+
+- Modified response for `redeemBfusdForPortfolioMargin()` (`POST /sapi/v1/portfolio/redeem`):
+  - property `redeemRate` added
+  - property `rate` deleted
+
 ## 7.0.5 - 2025-09-12
 
 ### Changed (1)
