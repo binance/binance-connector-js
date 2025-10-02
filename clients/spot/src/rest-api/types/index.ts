@@ -36,6 +36,7 @@ export * from './klines-item-inner';
 export * from './klines-response';
 export * from './my-allocations-response';
 export * from './my-allocations-response-inner';
+export * from './my-filters-response';
 export * from './my-prevented-matches-response';
 export * from './my-prevented-matches-response-inner';
 export * from './my-trades-response';

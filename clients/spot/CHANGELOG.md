@@ -1,5 +1,47 @@
 # Changelog
 
+## 19.0.0 - 2025-10-02
+
+### Added (2)
+
+#### REST API
+
+- `myFilters()` (`GET /api/v3/myFilters`)
+
+#### WebSocket API
+
+- `myFilters()` (`myFilters` method)
+
+### Changed (4)
+
+#### REST API
+
+- Modified parameter `aboveTimeInForce`:
+  - type `number` → `string`
+  - enum added: `GTC`, `IOC`, `FOK`
+  - affected methods:
+    - `orderListOco()` (`POST /api/v3/orderList/oco`)
+
+- Modified response for `exchangeInfo()` (`GET /api/v3/exchangeInfo`):
+  - `exchangeFilters`: item property `asset` added
+  - `exchangeFilters`.`limit`: type `integer` → `string`
+  - `symbols`.`filters`: item property `asset` added
+  - `symbols`.`filters`.`limit`: type `integer` → `string`
+
+#### WebSocket API
+
+- Modified parameter `aboveTimeInForce`:
+  - type `number` → `string`
+  - enum added: `GTC`, `IOC`, `FOK`
+  - affected methods:
+    - `orderListPlaceOco()` (`orderList.place.oco` method)
+
+- Modified response for `exchangeInfo()` (`exchangeInfo` method):
+  - `result`.`exchangeFilters`: item property `asset` added
+  - `result`.`exchangeFilters`.`limit`: type `integer` → `string`
+  - `result`.`symbols`.`filters`: item property `asset` added
+  - `result`.`symbols`.`filters`.`limit`: type `integer` → `string`
+
 ## 18.0.0 - 2025-09-24
 
 ### Changed (2)

@@ -622,7 +622,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [abovePrice] Can be used if `aboveType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.
          * @param {number} [aboveStopPrice] Can be used if `aboveType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT`. <br>Either `aboveStopPrice` or `aboveTrailingDelta` or both, must be specified.
          * @param {number} [aboveTrailingDelta] See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
-         * @param {number} [aboveTimeInForce] Required if `aboveType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`
+         * @param {OrderListOcoAboveTimeInForceEnum} [aboveTimeInForce]
          * @param {number} [aboveStrategyId] Arbitrary numeric value identifying the above order within an order strategy.
          * @param {number} [aboveStrategyType] Arbitrary numeric value identifying the above order strategy. <br>Values smaller than 1000000 are reserved and cannot be used.
          * @param {OrderListOcoAbovePegPriceTypeEnum} [abovePegPriceType]
@@ -657,7 +657,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             abovePrice?: number,
             aboveStopPrice?: number,
             aboveTrailingDelta?: number,
-            aboveTimeInForce?: number,
+            aboveTimeInForce?: OrderListOcoAboveTimeInForceEnum,
             aboveStrategyId?: number,
             aboveStrategyType?: number,
             abovePegPriceType?: OrderListOcoAbovePegPriceTypeEnum,
@@ -2712,11 +2712,11 @@ export interface OrderListOcoRequest {
     readonly aboveTrailingDelta?: number;
 
     /**
-     * Required if `aboveType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`
-     * @type {number}
+     *
+     * @type {'GTC' | 'IOC' | 'FOK'}
      * @memberof TradeApiOrderListOco
      */
-    readonly aboveTimeInForce?: number;
+    readonly aboveTimeInForce?: OrderListOcoAboveTimeInForceEnum;
 
     /**
      * Arbitrary numeric value identifying the above order within an order strategy.
@@ -4672,6 +4672,12 @@ export enum OrderListOcoBelowTypeEnum {
     STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
     TAKE_PROFIT = 'TAKE_PROFIT',
     TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+}
+
+export enum OrderListOcoAboveTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
 }
 
 export enum OrderListOcoAbovePegPriceTypeEnum {

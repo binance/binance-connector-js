@@ -24,6 +24,7 @@ import type {
     AllOrderListsResponse,
     AllOrdersResponse,
     MyAllocationsResponse,
+    MyFiltersResponse,
     MyPreventedMatchesResponse,
     MyTradesResponse,
     OpenOrderListsStatusResponse,
@@ -122,6 +123,20 @@ export interface AccountApiInterface {
     myAllocations(
         requestParameters: MyAllocationsRequest
     ): Promise<WebsocketApiResponse<MyAllocationsResponse>>;
+
+    /**
+     * Retrieves the list of [filters](filters.md) relevant to an account on a given symbol. This is the only endpoint that shows if an account has `MAX_ASSET` filters applied to it.
+     * Weight: 40
+     *
+     * @summary WebSocket Query Relevant Filters
+     * @param {MyFiltersRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<MyFiltersResponse>}
+     * @memberof AccountApiInterface
+     */
+    myFilters(
+        requestParameters: MyFiltersRequest
+    ): Promise<WebsocketApiResponse<MyFiltersResponse>>;
 
     /**
      * Displays the list of orders that were expired due to STP.
@@ -479,6 +494,33 @@ export interface MyAllocationsRequest {
      * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiMyAllocations
+     */
+    readonly recvWindow?: number;
+}
+
+/**
+ * Request parameters for myFilters operation in AccountApi.
+ * @interface MyFiltersRequest
+ */
+export interface MyFiltersRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof AccountApiMyFilters
+     */
+    readonly symbol: string;
+
+    /**
+     * Unique WebSocket request ID.
+     * @type {string}
+     * @memberof AccountApiMyFilters
+     */
+    readonly id?: string;
+
+    /**
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * @type {number}
+     * @memberof AccountApiMyFilters
      */
     readonly recvWindow?: number;
 }
@@ -897,6 +939,26 @@ export class AccountApi implements AccountApiInterface {
     ): Promise<WebsocketApiResponse<MyAllocationsResponse>> {
         return this.websocketBase.sendMessage<MyAllocationsResponse>(
             '/myAllocations'.slice(1),
+            requestParameters as unknown as WebsocketSendMsgOptions,
+            { isSigned: true, withApiKey: false }
+        );
+    }
+
+    /**
+     * Retrieves the list of [filters](filters.md) relevant to an account on a given symbol. This is the only endpoint that shows if an account has `MAX_ASSET` filters applied to it.
+     * Weight: 40
+     *
+     * @summary WebSocket Query Relevant Filters
+     * @param {MyFiltersRequest} requestParameters Request parameters.
+     * @returns {Promise<MyFiltersResponse>}
+     * @memberof AccountApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#query-relevant-filters-user_data Binance API Documentation}
+     */
+    public myFilters(
+        requestParameters: MyFiltersRequest
+    ): Promise<WebsocketApiResponse<MyFiltersResponse>> {
+        return this.websocketBase.sendMessage<MyFiltersResponse>(
+            '/myFilters'.slice(1),
             requestParameters as unknown as WebsocketSendMsgOptions,
             { isSigned: true, withApiKey: false }
         );

@@ -36,6 +36,8 @@ export * from './list-status-oinner';
 export * from './listen-key-expired';
 export * from './my-allocations-response';
 export * from './my-allocations-response-result-inner';
+export * from './my-filters-response';
+export * from './my-filters-response-result';
 export * from './my-prevented-matches-response';
 export * from './my-prevented-matches-response-result-inner';
 export * from './my-trades-response';

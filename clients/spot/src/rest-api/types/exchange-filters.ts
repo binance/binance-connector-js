@@ -140,10 +140,10 @@ export interface ExchangeFilters {
     applyMaxToMarket?: boolean;
     /**
      *
-     * @type {number}
+     * @type {string}
      * @memberof ExchangeFilters
      */
-    limit?: number;
+    limit?: string;
     /**
      *
      * @type {number}
@@ -204,4 +204,10 @@ export interface ExchangeFilters {
      * @memberof ExchangeFilters
      */
     maxNumOrderLists?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof ExchangeFilters
+     */
+    asset?: string;
 }

@@ -28,6 +28,7 @@ import {
     AccountCommissionRequest,
     AllOrdersRequest,
     MyAllocationsRequest,
+    MyFiltersRequest,
     MyPreventedMatchesRequest,
     MyTradesRequest,
     OrderAmendmentsRequest,
@@ -1160,6 +1161,258 @@ describe('AccountApi', () => {
                 try {
                     websocketAPIClient = new AccountApi(websocketBase);
                     const responsePromise = websocketAPIClient.myAllocations(params);
+                    await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        }, 10000);
+    });
+
+    describe('myFilters()', () => {
+        beforeEach(async () => {
+            mockWs = Object.assign(new EventEmitter(), {
+                close: jest.fn(),
+                ping: jest.fn(),
+                pong: jest.fn(),
+                send: jest.fn(),
+                readyState: WebSocketClient.OPEN,
+                OPEN: WebSocket.OPEN,
+                CLOSED: WebSocket.CLOSED,
+            }) as unknown as jest.Mocked<WebSocketClient> & EventEmitter;
+
+            (WebSocketClient as jest.MockedClass<typeof WebSocketClient>).mockImplementation(
+                () => mockWs
+            );
+
+            const config = new ConfigurationWebsocketAPI({
+                apiKey: 'test-api-key',
+                apiSecret: 'test-api-secret',
+                wsURL: 'ws://localhost:3000',
+                timeout: 1000,
+            });
+
+            websocketBase = new WebsocketAPIBase(config);
+            websocketBase.connect();
+        });
+
+        afterEach(async () => {
+            if (websocketBase) {
+                await websocketBase.disconnect();
+            }
+            jest.clearAllMocks();
+            jest.clearAllTimers();
+        });
+
+        it('should execute myFilters() successfully', async () => {
+            mockResponse = {
+                id: '1758009606869',
+                status: 200,
+                result: {
+                    exchangeFilters: [
+                        {
+                            filterType: 'PRICE_FILTER',
+                            minPrice: '0.00000100',
+                            maxPrice: '100000.00000000',
+                            tickSize: '0.00000100',
+                        },
+                        {
+                            filterType: 'PERCENT_PRICE',
+                            multiplierUp: '1.3000',
+                            multiplierDown: '0.7000',
+                            avgPriceMins: 5,
+                        },
+                        {
+                            filterType: 'PERCENT_PRICE_BY_SIDE',
+                            bidMultiplierUp: '1.2',
+                            bidMultiplierDown: '0.2',
+                            askMultiplierUp: '5',
+                            askMultiplierDown: '0.8',
+                            avgPriceMins: 1,
+                        },
+                        {
+                            filterType: 'LOT_SIZE',
+                            minQty: '0.00100000',
+                            maxQty: '100000.00000000',
+                            stepSize: '0.00100000',
+                        },
+                        {
+                            filterType: 'MIN_NOTIONAL',
+                            minNotional: '0.00100000',
+                            applyToMarket: true,
+                            avgPriceMins: 5,
+                        },
+                        {
+                            filterType: 'NOTIONAL',
+                            minNotional: '10.00000000',
+                            applyMinToMarket: false,
+                            maxNotional: '10000.00000000',
+                            applyMaxToMarket: false,
+                            avgPriceMins: 5,
+                        },
+                        { filterType: 'ICEBERG_PARTS', limit: 10 },
+                        {
+                            filterType: 'MARKET_LOT_SIZE',
+                            minQty: '0.00100000',
+                            maxQty: '100000.00000000',
+                            stepSize: '0.00100000',
+                        },
+                        { filterType: 'MAX_NUM_ORDERS', maxNumOrders: 25 },
+                        { filterType: 'MAX_NUM_ALGO_ORDERS', maxNumAlgoOrders: 5 },
+                        { filterType: 'MAX_NUM_ICEBERG_ORDERS', maxNumIcebergOrders: 5 },
+                        { filterType: 'MAX_POSITION', maxPosition: '10.00000000' },
+                        {
+                            filterType: 'TRAILING_DELTA',
+                            minTrailingAboveDelta: 10,
+                            maxTrailingAboveDelta: 2000,
+                            minTrailingBelowDelta: 10,
+                            maxTrailingBelowDelta: 2000,
+                        },
+                        { filterType: 'MAX_NUM_ORDER_AMENDS', maxNumOrderAmends: 10 },
+                        { filterType: 'MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
+                        { filterType: 'EXCHANGE_MAX_NUM_ORDERS', maxNumOrders: 1000 },
+                        { filterType: 'EXCHANGE_MAX_NUM_ALGO_ORDERS', maxNumAlgoOrders: 200 },
+                        {
+                            filterType: 'EXCHANGE_MAX_NUM_ICEBERG_ORDERS',
+                            maxNumIcebergOrders: 10000,
+                        },
+                        { filterType: 'EXCHANGE_MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
+                        { filterType: 'MAX_ASSET', asset: 'USDC', limit: '42.00000000' },
+                    ],
+                    symbolFilters: [{ filterType: 'MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 }],
+                    assetFilters: [
+                        { filterType: 'MAX_ASSET', asset: 'JPY', limit: '1000000.00000000' },
+                    ],
+                },
+                rateLimits: [
+                    {
+                        rateLimitType: 'REQUEST_WEIGHT',
+                        interval: 'MINUTE',
+                        intervalNum: 1,
+                        limit: 6000,
+                    },
+                    { rateLimitType: 'ORDERS', interval: 'DAY', intervalNum: 1, limit: 160000 },
+                    {
+                        rateLimitType: 'RAW_REQUESTS',
+                        interval: 'MINUTE',
+                        intervalNum: 5,
+                        limit: 61000,
+                    },
+                ],
+            };
+            mockResponse.id = randomString();
+
+            const params: MyFiltersRequest = {
+                symbol: 'BNBUSDT',
+            };
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new AccountApi(conn);
+                    const sendMsgSpy = jest.spyOn(conn, 'sendMessage');
+                    const responsePromise = websocketAPIClient.myFilters({
+                        id: mockResponse?.id,
+                        ...params,
+                    });
+                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    const response = await responsePromise;
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
+                    expect(response.rateLimits).toEqual(mockResponse.rateLimits);
+                    expect(sendMsgSpy).toHaveBeenCalledWith('/myFilters'.slice(1), params, {
+                        isSigned: true,
+                        withApiKey: false,
+                    });
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        });
+
+        it('should handle server error responses gracefully', async () => {
+            mockResponse = {
+                id: randomString(),
+                status: 400,
+                error: {
+                    code: -2010,
+                    msg: 'Account has insufficient balance for requested action.',
+                },
+                rateLimits: [
+                    {
+                        rateLimitType: 'ORDERS',
+                        interval: 'SECOND',
+                        intervalNum: 10,
+                        limit: 50,
+                        count: 13,
+                    },
+                ],
+            };
+
+            const params: MyFiltersRequest = {
+                symbol: 'BNBUSDT',
+            };
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new AccountApi(conn);
+                    const responsePromise = websocketAPIClient.myFilters({
+                        id: mockResponse?.id,
+                        ...params,
+                    });
+                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        });
+
+        it('should handle request timeout gracefully', async () => {
+            jest.useRealTimers();
+
+            const params: MyFiltersRequest = {
+                symbol: 'BNBUSDT',
+            };
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new AccountApi(websocketBase);
+                    const responsePromise = websocketAPIClient.myFilters(params);
                     await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
                     resolveTest(true);
                 } catch (error) {

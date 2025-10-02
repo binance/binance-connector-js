@@ -902,11 +902,11 @@ export interface OrderListPlaceOcoRequest {
     readonly aboveTrailingDelta?: number;
 
     /**
-     * Required if `aboveType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`.
-     * @type {number}
+     *
+     * @type {'GTC' | 'IOC' | 'FOK'}
      * @memberof TradeApiOrderListPlaceOco
      */
-    readonly aboveTimeInForce?: number;
+    readonly aboveTimeInForce?: OrderListPlaceOcoAboveTimeInForceEnum;
 
     /**
      * Arbitrary numeric value identifying the above order within an order strategy.
@@ -2562,6 +2562,12 @@ export enum OrderListPlaceOcoBelowTypeEnum {
     STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
     TAKE_PROFIT = 'TAKE_PROFIT',
     TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+}
+
+export enum OrderListPlaceOcoAboveTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
 }
 
 export enum OrderListPlaceOcoAbovePegPriceTypeEnum {

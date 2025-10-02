@@ -29,6 +29,7 @@ import {
     GetOrderRequest,
     GetOrderListRequest,
     MyAllocationsRequest,
+    MyFiltersRequest,
     MyPreventedMatchesRequest,
     MyTradesRequest,
     OpenOrderListRequest,
@@ -44,6 +45,7 @@ import type {
     GetOrderListResponse,
     GetOrderResponse,
     MyAllocationsResponse,
+    MyFiltersResponse,
     MyPreventedMatchesResponse,
     MyTradesResponse,
     OpenOrderListResponse,
@@ -951,6 +953,516 @@ describe('AccountApi', () => {
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'myAllocations').mockRejectedValueOnce(mockError);
             await expect(client.myAllocations(params)).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('myFilters()', () => {
+        it('should execute myFilters() successfully with required parameters only', async () => {
+            const params: MyFiltersRequest = {
+                symbol: 'BNBUSDT',
+            };
+
+            mockResponse = {
+                exchangeFilters: [
+                    {
+                        filterType: 'PRICE_FILTER',
+                        minPrice: '0.00000100',
+                        maxPrice: '100000.00000000',
+                        tickSize: '0.00000100',
+                    },
+                    {
+                        filterType: 'PERCENT_PRICE',
+                        multiplierUp: '1.3000',
+                        multiplierDown: '0.7000',
+                        avgPriceMins: 5,
+                    },
+                    {
+                        filterType: 'PERCENT_PRICE_BY_SIDE',
+                        bidMultiplierUp: '1.2',
+                        bidMultiplierDown: '0.2',
+                        askMultiplierUp: '5',
+                        askMultiplierDown: '0.8',
+                        avgPriceMins: 1,
+                    },
+                    {
+                        filterType: 'LOT_SIZE',
+                        minQty: '0.00100000',
+                        maxQty: '100000.00000000',
+                        stepSize: '0.00100000',
+                    },
+                    {
+                        filterType: 'MIN_NOTIONAL',
+                        minNotional: '0.00100000',
+                        applyToMarket: true,
+                        avgPriceMins: 5,
+                    },
+                    {
+                        filterType: 'NOTIONAL',
+                        minNotional: '10.00000000',
+                        applyMinToMarket: false,
+                        maxNotional: '10000.00000000',
+                        applyMaxToMarket: false,
+                        avgPriceMins: 5,
+                    },
+                    { filterType: 'ICEBERG_PARTS', limit: 10 },
+                    {
+                        filterType: 'MARKET_LOT_SIZE',
+                        minQty: '0.00100000',
+                        maxQty: '100000.00000000',
+                        stepSize: '0.00100000',
+                    },
+                    { filterType: 'MAX_NUM_ORDERS', maxNumOrders: 25 },
+                    { filterType: 'MAX_NUM_ALGO_ORDERS', maxNumAlgoOrders: 5 },
+                    { filterType: 'MAX_NUM_ICEBERG_ORDERS', maxNumIcebergOrders: 5 },
+                    { filterType: 'MAX_POSITION', maxPosition: '10.00000000' },
+                    {
+                        filterType: 'TRAILING_DELTA',
+                        minTrailingAboveDelta: 10,
+                        maxTrailingAboveDelta: 2000,
+                        minTrailingBelowDelta: 10,
+                        maxTrailingBelowDelta: 2000,
+                    },
+                    { filterType: 'MAX_NUM_ORDER_AMENDS', maxNumOrderAmends: 10 },
+                    { filterType: 'MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ORDERS', maxNumOrders: 1000 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ALGO_ORDERS', maxNumAlgoOrders: 200 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ICEBERG_ORDERS', maxNumIcebergOrders: 10000 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
+                    { filterType: 'MAX_ASSET', asset: 'USDC', limit: '42.00000000' },
+                ],
+                symbolFilters: [
+                    {
+                        filterType: 'PRICE_FILTER',
+                        minPrice: '0.00000100',
+                        maxPrice: '100000.00000000',
+                        tickSize: '0.00000100',
+                    },
+                    {
+                        filterType: 'PERCENT_PRICE',
+                        multiplierUp: '1.3000',
+                        multiplierDown: '0.7000',
+                        avgPriceMins: 5,
+                    },
+                    {
+                        filterType: 'PERCENT_PRICE_BY_SIDE',
+                        bidMultiplierUp: '1.2',
+                        bidMultiplierDown: '0.2',
+                        askMultiplierUp: '5',
+                        askMultiplierDown: '0.8',
+                        avgPriceMins: 1,
+                    },
+                    {
+                        filterType: 'LOT_SIZE',
+                        minQty: '0.00100000',
+                        maxQty: '100000.00000000',
+                        stepSize: '0.00100000',
+                    },
+                    {
+                        filterType: 'MIN_NOTIONAL',
+                        minNotional: '0.00100000',
+                        applyToMarket: true,
+                        avgPriceMins: 5,
+                    },
+                    {
+                        filterType: 'NOTIONAL',
+                        minNotional: '10.00000000',
+                        applyMinToMarket: false,
+                        maxNotional: '10000.00000000',
+                        applyMaxToMarket: false,
+                        avgPriceMins: 5,
+                    },
+                    { filterType: 'ICEBERG_PARTS', limit: 10 },
+                    {
+                        filterType: 'MARKET_LOT_SIZE',
+                        minQty: '0.00100000',
+                        maxQty: '100000.00000000',
+                        stepSize: '0.00100000',
+                    },
+                    { filterType: 'MAX_NUM_ORDERS', maxNumOrders: 25 },
+                    { filterType: 'MAX_NUM_ALGO_ORDERS', maxNumAlgoOrders: 5 },
+                    { filterType: 'MAX_NUM_ICEBERG_ORDERS', maxNumIcebergOrders: 5 },
+                    { filterType: 'MAX_POSITION', maxPosition: '10.00000000' },
+                    {
+                        filterType: 'TRAILING_DELTA',
+                        minTrailingAboveDelta: 10,
+                        maxTrailingAboveDelta: 2000,
+                        minTrailingBelowDelta: 10,
+                        maxTrailingBelowDelta: 2000,
+                    },
+                    { filterType: 'MAX_NUM_ORDER_AMENDS', maxNumOrderAmends: 10 },
+                    { filterType: 'MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ORDERS', maxNumOrders: 1000 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ALGO_ORDERS', maxNumAlgoOrders: 200 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ICEBERG_ORDERS', maxNumIcebergOrders: 10000 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
+                    { filterType: 'MAX_ASSET', asset: 'USDC', limit: '42.00000000' },
+                ],
+                assetFilters: [
+                    {
+                        filterType: 'PRICE_FILTER',
+                        minPrice: '0.00000100',
+                        maxPrice: '100000.00000000',
+                        tickSize: '0.00000100',
+                    },
+                    {
+                        filterType: 'PERCENT_PRICE',
+                        multiplierUp: '1.3000',
+                        multiplierDown: '0.7000',
+                        avgPriceMins: 5,
+                    },
+                    {
+                        filterType: 'PERCENT_PRICE_BY_SIDE',
+                        bidMultiplierUp: '1.2',
+                        bidMultiplierDown: '0.2',
+                        askMultiplierUp: '5',
+                        askMultiplierDown: '0.8',
+                        avgPriceMins: 1,
+                    },
+                    {
+                        filterType: 'LOT_SIZE',
+                        minQty: '0.00100000',
+                        maxQty: '100000.00000000',
+                        stepSize: '0.00100000',
+                    },
+                    {
+                        filterType: 'MIN_NOTIONAL',
+                        minNotional: '0.00100000',
+                        applyToMarket: true,
+                        avgPriceMins: 5,
+                    },
+                    {
+                        filterType: 'NOTIONAL',
+                        minNotional: '10.00000000',
+                        applyMinToMarket: false,
+                        maxNotional: '10000.00000000',
+                        applyMaxToMarket: false,
+                        avgPriceMins: 5,
+                    },
+                    { filterType: 'ICEBERG_PARTS', limit: 10 },
+                    {
+                        filterType: 'MARKET_LOT_SIZE',
+                        minQty: '0.00100000',
+                        maxQty: '100000.00000000',
+                        stepSize: '0.00100000',
+                    },
+                    { filterType: 'MAX_NUM_ORDERS', maxNumOrders: 25 },
+                    { filterType: 'MAX_NUM_ALGO_ORDERS', maxNumAlgoOrders: 5 },
+                    { filterType: 'MAX_NUM_ICEBERG_ORDERS', maxNumIcebergOrders: 5 },
+                    { filterType: 'MAX_POSITION', maxPosition: '10.00000000' },
+                    {
+                        filterType: 'TRAILING_DELTA',
+                        minTrailingAboveDelta: 10,
+                        maxTrailingAboveDelta: 2000,
+                        minTrailingBelowDelta: 10,
+                        maxTrailingBelowDelta: 2000,
+                    },
+                    { filterType: 'MAX_NUM_ORDER_AMENDS', maxNumOrderAmends: 10 },
+                    { filterType: 'MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ORDERS', maxNumOrders: 1000 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ALGO_ORDERS', maxNumAlgoOrders: 200 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ICEBERG_ORDERS', maxNumIcebergOrders: 10000 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
+                    { filterType: 'MAX_ASSET', asset: 'USDC', limit: '42.00000000' },
+                ],
+                rateLimits: [
+                    {
+                        rateLimitType: 'REQUEST_WEIGHT',
+                        interval: 'MINUTE',
+                        intervalNum: 1,
+                        limit: 6000,
+                    },
+                    { rateLimitType: 'ORDERS', interval: 'DAY', intervalNum: 1, limit: 160000 },
+                    {
+                        rateLimitType: 'RAW_REQUESTS',
+                        interval: 'MINUTE',
+                        intervalNum: 5,
+                        limit: 61000,
+                    },
+                ],
+            };
+
+            const spy = jest.spyOn(client, 'myFilters').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<MyFiltersResponse>)
+            );
+            const response = await client.myFilters(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute myFilters() successfully with optional parameters', async () => {
+            const params: MyFiltersRequest = {
+                symbol: 'BNBUSDT',
+                recvWindow: 5000.0,
+            };
+
+            mockResponse = {
+                exchangeFilters: [
+                    {
+                        filterType: 'PRICE_FILTER',
+                        minPrice: '0.00000100',
+                        maxPrice: '100000.00000000',
+                        tickSize: '0.00000100',
+                    },
+                    {
+                        filterType: 'PERCENT_PRICE',
+                        multiplierUp: '1.3000',
+                        multiplierDown: '0.7000',
+                        avgPriceMins: 5,
+                    },
+                    {
+                        filterType: 'PERCENT_PRICE_BY_SIDE',
+                        bidMultiplierUp: '1.2',
+                        bidMultiplierDown: '0.2',
+                        askMultiplierUp: '5',
+                        askMultiplierDown: '0.8',
+                        avgPriceMins: 1,
+                    },
+                    {
+                        filterType: 'LOT_SIZE',
+                        minQty: '0.00100000',
+                        maxQty: '100000.00000000',
+                        stepSize: '0.00100000',
+                    },
+                    {
+                        filterType: 'MIN_NOTIONAL',
+                        minNotional: '0.00100000',
+                        applyToMarket: true,
+                        avgPriceMins: 5,
+                    },
+                    {
+                        filterType: 'NOTIONAL',
+                        minNotional: '10.00000000',
+                        applyMinToMarket: false,
+                        maxNotional: '10000.00000000',
+                        applyMaxToMarket: false,
+                        avgPriceMins: 5,
+                    },
+                    { filterType: 'ICEBERG_PARTS', limit: 10 },
+                    {
+                        filterType: 'MARKET_LOT_SIZE',
+                        minQty: '0.00100000',
+                        maxQty: '100000.00000000',
+                        stepSize: '0.00100000',
+                    },
+                    { filterType: 'MAX_NUM_ORDERS', maxNumOrders: 25 },
+                    { filterType: 'MAX_NUM_ALGO_ORDERS', maxNumAlgoOrders: 5 },
+                    { filterType: 'MAX_NUM_ICEBERG_ORDERS', maxNumIcebergOrders: 5 },
+                    { filterType: 'MAX_POSITION', maxPosition: '10.00000000' },
+                    {
+                        filterType: 'TRAILING_DELTA',
+                        minTrailingAboveDelta: 10,
+                        maxTrailingAboveDelta: 2000,
+                        minTrailingBelowDelta: 10,
+                        maxTrailingBelowDelta: 2000,
+                    },
+                    { filterType: 'MAX_NUM_ORDER_AMENDS', maxNumOrderAmends: 10 },
+                    { filterType: 'MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ORDERS', maxNumOrders: 1000 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ALGO_ORDERS', maxNumAlgoOrders: 200 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ICEBERG_ORDERS', maxNumIcebergOrders: 10000 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
+                    { filterType: 'MAX_ASSET', asset: 'USDC', limit: '42.00000000' },
+                ],
+                symbolFilters: [
+                    {
+                        filterType: 'PRICE_FILTER',
+                        minPrice: '0.00000100',
+                        maxPrice: '100000.00000000',
+                        tickSize: '0.00000100',
+                    },
+                    {
+                        filterType: 'PERCENT_PRICE',
+                        multiplierUp: '1.3000',
+                        multiplierDown: '0.7000',
+                        avgPriceMins: 5,
+                    },
+                    {
+                        filterType: 'PERCENT_PRICE_BY_SIDE',
+                        bidMultiplierUp: '1.2',
+                        bidMultiplierDown: '0.2',
+                        askMultiplierUp: '5',
+                        askMultiplierDown: '0.8',
+                        avgPriceMins: 1,
+                    },
+                    {
+                        filterType: 'LOT_SIZE',
+                        minQty: '0.00100000',
+                        maxQty: '100000.00000000',
+                        stepSize: '0.00100000',
+                    },
+                    {
+                        filterType: 'MIN_NOTIONAL',
+                        minNotional: '0.00100000',
+                        applyToMarket: true,
+                        avgPriceMins: 5,
+                    },
+                    {
+                        filterType: 'NOTIONAL',
+                        minNotional: '10.00000000',
+                        applyMinToMarket: false,
+                        maxNotional: '10000.00000000',
+                        applyMaxToMarket: false,
+                        avgPriceMins: 5,
+                    },
+                    { filterType: 'ICEBERG_PARTS', limit: 10 },
+                    {
+                        filterType: 'MARKET_LOT_SIZE',
+                        minQty: '0.00100000',
+                        maxQty: '100000.00000000',
+                        stepSize: '0.00100000',
+                    },
+                    { filterType: 'MAX_NUM_ORDERS', maxNumOrders: 25 },
+                    { filterType: 'MAX_NUM_ALGO_ORDERS', maxNumAlgoOrders: 5 },
+                    { filterType: 'MAX_NUM_ICEBERG_ORDERS', maxNumIcebergOrders: 5 },
+                    { filterType: 'MAX_POSITION', maxPosition: '10.00000000' },
+                    {
+                        filterType: 'TRAILING_DELTA',
+                        minTrailingAboveDelta: 10,
+                        maxTrailingAboveDelta: 2000,
+                        minTrailingBelowDelta: 10,
+                        maxTrailingBelowDelta: 2000,
+                    },
+                    { filterType: 'MAX_NUM_ORDER_AMENDS', maxNumOrderAmends: 10 },
+                    { filterType: 'MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ORDERS', maxNumOrders: 1000 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ALGO_ORDERS', maxNumAlgoOrders: 200 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ICEBERG_ORDERS', maxNumIcebergOrders: 10000 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
+                    { filterType: 'MAX_ASSET', asset: 'USDC', limit: '42.00000000' },
+                ],
+                assetFilters: [
+                    {
+                        filterType: 'PRICE_FILTER',
+                        minPrice: '0.00000100',
+                        maxPrice: '100000.00000000',
+                        tickSize: '0.00000100',
+                    },
+                    {
+                        filterType: 'PERCENT_PRICE',
+                        multiplierUp: '1.3000',
+                        multiplierDown: '0.7000',
+                        avgPriceMins: 5,
+                    },
+                    {
+                        filterType: 'PERCENT_PRICE_BY_SIDE',
+                        bidMultiplierUp: '1.2',
+                        bidMultiplierDown: '0.2',
+                        askMultiplierUp: '5',
+                        askMultiplierDown: '0.8',
+                        avgPriceMins: 1,
+                    },
+                    {
+                        filterType: 'LOT_SIZE',
+                        minQty: '0.00100000',
+                        maxQty: '100000.00000000',
+                        stepSize: '0.00100000',
+                    },
+                    {
+                        filterType: 'MIN_NOTIONAL',
+                        minNotional: '0.00100000',
+                        applyToMarket: true,
+                        avgPriceMins: 5,
+                    },
+                    {
+                        filterType: 'NOTIONAL',
+                        minNotional: '10.00000000',
+                        applyMinToMarket: false,
+                        maxNotional: '10000.00000000',
+                        applyMaxToMarket: false,
+                        avgPriceMins: 5,
+                    },
+                    { filterType: 'ICEBERG_PARTS', limit: 10 },
+                    {
+                        filterType: 'MARKET_LOT_SIZE',
+                        minQty: '0.00100000',
+                        maxQty: '100000.00000000',
+                        stepSize: '0.00100000',
+                    },
+                    { filterType: 'MAX_NUM_ORDERS', maxNumOrders: 25 },
+                    { filterType: 'MAX_NUM_ALGO_ORDERS', maxNumAlgoOrders: 5 },
+                    { filterType: 'MAX_NUM_ICEBERG_ORDERS', maxNumIcebergOrders: 5 },
+                    { filterType: 'MAX_POSITION', maxPosition: '10.00000000' },
+                    {
+                        filterType: 'TRAILING_DELTA',
+                        minTrailingAboveDelta: 10,
+                        maxTrailingAboveDelta: 2000,
+                        minTrailingBelowDelta: 10,
+                        maxTrailingBelowDelta: 2000,
+                    },
+                    { filterType: 'MAX_NUM_ORDER_AMENDS', maxNumOrderAmends: 10 },
+                    { filterType: 'MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ORDERS', maxNumOrders: 1000 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ALGO_ORDERS', maxNumAlgoOrders: 200 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ICEBERG_ORDERS', maxNumIcebergOrders: 10000 },
+                    { filterType: 'EXCHANGE_MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
+                    { filterType: 'MAX_ASSET', asset: 'USDC', limit: '42.00000000' },
+                ],
+                rateLimits: [
+                    {
+                        rateLimitType: 'REQUEST_WEIGHT',
+                        interval: 'MINUTE',
+                        intervalNum: 1,
+                        limit: 6000,
+                    },
+                    { rateLimitType: 'ORDERS', interval: 'DAY', intervalNum: 1, limit: 160000 },
+                    {
+                        rateLimitType: 'RAW_REQUESTS',
+                        interval: 'MINUTE',
+                        intervalNum: 5,
+                        limit: 61000,
+                    },
+                ],
+            };
+
+            const spy = jest.spyOn(client, 'myFilters').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<MyFiltersResponse>)
+            );
+            const response = await client.myFilters(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when symbol is missing', async () => {
+            const _params: MyFiltersRequest = {
+                symbol: 'BNBUSDT',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.symbol;
+
+            await expect(client.myFilters(params)).rejects.toThrow(
+                'Required parameter symbol was null or undefined when calling myFilters.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: MyFiltersRequest = {
+                symbol: 'BNBUSDT',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'myFilters').mockRejectedValueOnce(mockError);
+            await expect(client.myFilters(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

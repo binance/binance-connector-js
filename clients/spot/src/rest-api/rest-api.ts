@@ -32,6 +32,7 @@ import type {
     GetOrderRequest,
     GetOrderListRequest,
     MyAllocationsRequest,
+    MyFiltersRequest,
     MyPreventedMatchesRequest,
     MyTradesRequest,
     OpenOrderListRequest,
@@ -82,6 +83,7 @@ import type {
     GetOrderResponse,
     GetOrderListResponse,
     MyAllocationsResponse,
+    MyFiltersResponse,
     MyPreventedMatchesResponse,
     MyTradesResponse,
     OpenOrderListResponse,
@@ -297,6 +299,20 @@ export class RestAPI {
         requestParameters: MyAllocationsRequest
     ): Promise<RestApiResponse<MyAllocationsResponse>> {
         return this.accountApi.myAllocations(requestParameters);
+    }
+
+    /**
+     * Retrieves the list of [filters](filters.md) relevant to an account on a given symbol. This is the only endpoint that shows if an account has `MAX_ASSET` filters applied to it.
+     * Weight: 40
+     *
+     * @summary Query relevant filters
+     * @param {MyFiltersRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<MyFiltersResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-relevant-filters-user_data Binance API Documentation}
+     */
+    myFilters(requestParameters: MyFiltersRequest): Promise<RestApiResponse<MyFiltersResponse>> {
+        return this.accountApi.myFilters(requestParameters);
     }
 
     /**

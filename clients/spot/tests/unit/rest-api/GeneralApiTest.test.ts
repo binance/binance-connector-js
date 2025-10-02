@@ -122,6 +122,7 @@ describe('GeneralApi', () => {
                     { filterType: 'EXCHANGE_MAX_NUM_ALGO_ORDERS', maxNumAlgoOrders: 200 },
                     { filterType: 'EXCHANGE_MAX_NUM_ICEBERG_ORDERS', maxNumIcebergOrders: 10000 },
                     { filterType: 'EXCHANGE_MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
+                    { filterType: 'MAX_ASSET', asset: 'USDC', limit: '42.00000000' },
                 ],
                 symbols: [
                     {
@@ -215,6 +216,7 @@ describe('GeneralApi', () => {
                                 maxNumIcebergOrders: 10000,
                             },
                             { filterType: 'EXCHANGE_MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
+                            { filterType: 'MAX_ASSET', asset: 'USDC', limit: '42.00000000' },
                         ],
                         permissions: [],
                         permissionSets: [['SPOT', 'MARGIN']],
@@ -330,6 +332,7 @@ describe('GeneralApi', () => {
                     { filterType: 'EXCHANGE_MAX_NUM_ALGO_ORDERS', maxNumAlgoOrders: 200 },
                     { filterType: 'EXCHANGE_MAX_NUM_ICEBERG_ORDERS', maxNumIcebergOrders: 10000 },
                     { filterType: 'EXCHANGE_MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
+                    { filterType: 'MAX_ASSET', asset: 'USDC', limit: '42.00000000' },
                 ],
                 symbols: [
                     {
@@ -423,6 +426,7 @@ describe('GeneralApi', () => {
                                 maxNumIcebergOrders: 10000,
                             },
                             { filterType: 'EXCHANGE_MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
+                            { filterType: 'MAX_ASSET', asset: 'USDC', limit: '42.00000000' },
                         ],
                         permissions: [],
                         permissionSets: [['SPOT', 'MARGIN']],

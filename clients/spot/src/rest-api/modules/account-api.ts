@@ -33,6 +33,7 @@ import type {
     GetOrderListResponse,
     GetOrderResponse,
     MyAllocationsResponse,
+    MyFiltersResponse,
     MyPreventedMatchesResponse,
     MyTradesResponse,
     OpenOrderListResponse,
@@ -411,6 +412,40 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             };
         },
         /**
+         * Retrieves the list of [filters](filters.md) relevant to an account on a given symbol. This is the only endpoint that shows if an account has `MAX_ASSET` filters applied to it.
+         * Weight: 40
+         *
+         * @summary Query relevant filters
+         * @param {string} symbol
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+         *
+         * @throws {RequiredError}
+         */
+        myFilters: async (symbol: string, recvWindow?: number): Promise<RequestArgs> => {
+            // verify required parameter 'symbol' is not null or undefined
+            assertParamExists('myFilters', 'symbol', symbol);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (symbol !== undefined && symbol !== null) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/api/v3/myFilters',
+                method: 'GET',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Displays the list of orders that were expired due to STP.
          *
          * These are the combinations supported:
@@ -770,6 +805,17 @@ export interface AccountApiInterface {
         requestParameters: MyAllocationsRequest
     ): Promise<RestApiResponse<MyAllocationsResponse>>;
     /**
+     * Retrieves the list of [filters](filters.md) relevant to an account on a given symbol. This is the only endpoint that shows if an account has `MAX_ASSET` filters applied to it.
+     * Weight: 40
+     *
+     * @summary Query relevant filters
+     * @param {MyFiltersRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApiInterface
+     */
+    myFilters(requestParameters: MyFiltersRequest): Promise<RestApiResponse<MyFiltersResponse>>;
+    /**
      * Displays the list of orders that were expired due to STP.
      *
      * These are the combinations supported:
@@ -1102,6 +1148,26 @@ export interface MyAllocationsRequest {
      * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
      * @type {number}
      * @memberof AccountApiMyAllocations
+     */
+    readonly recvWindow?: number;
+}
+
+/**
+ * Request parameters for myFilters operation in AccountApi.
+ * @interface MyFiltersRequest
+ */
+export interface MyFiltersRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof AccountApiMyFilters
+     */
+    readonly symbol: string;
+
+    /**
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * @type {number}
+     * @memberof AccountApiMyFilters
      */
     readonly recvWindow?: number;
 }
@@ -1520,6 +1586,34 @@ export class AccountApi implements AccountApiInterface {
             requestParameters?.recvWindow
         );
         return sendRequest<MyAllocationsResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Retrieves the list of [filters](filters.md) relevant to an account on a given symbol. This is the only endpoint that shows if an account has `MAX_ASSET` filters applied to it.
+     * Weight: 40
+     *
+     * @summary Query relevant filters
+     * @param {MyFiltersRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<MyFiltersResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-relevant-filters-user_data Binance API Documentation}
+     */
+    public async myFilters(
+        requestParameters: MyFiltersRequest
+    ): Promise<RestApiResponse<MyFiltersResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.myFilters(
+            requestParameters?.symbol,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<MyFiltersResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

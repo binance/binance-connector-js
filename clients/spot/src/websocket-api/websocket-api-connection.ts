@@ -39,6 +39,7 @@ import type {
     AllOrderListsRequest,
     AllOrdersRequest,
     MyAllocationsRequest,
+    MyFiltersRequest,
     MyPreventedMatchesRequest,
     MyTradesRequest,
     OpenOrderListsStatusRequest,
@@ -99,6 +100,7 @@ import type {
     AllOrderListsResponse,
     AllOrdersResponse,
     MyAllocationsResponse,
+    MyFiltersResponse,
     MyPreventedMatchesResponse,
     MyTradesResponse,
     OpenOrderListsStatusResponse,
@@ -323,6 +325,21 @@ export class WebsocketAPIConnection {
         requestParameters: MyAllocationsRequest
     ): Promise<WebsocketApiResponse<MyAllocationsResponse>> {
         return this.accountApi.myAllocations(requestParameters);
+    }
+
+    /**
+     * Retrieves the list of [filters](filters.md) relevant to an account on a given symbol. This is the only endpoint that shows if an account has `MAX_ASSET` filters applied to it.
+     * Weight: 40
+     *
+     * @summary WebSocket Query Relevant Filters
+     * @param {MyFiltersRequest} requestParameters Request parameters.
+     * @returns Promise<WebsocketApiResponse<MyFiltersResponse>>
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#query-relevant-filters-user_data Binance API Documentation}
+     */
+    myFilters(
+        requestParameters: MyFiltersRequest
+    ): Promise<WebsocketApiResponse<MyFiltersResponse>> {
+        return this.accountApi.myFilters(requestParameters);
     }
 
     /**
