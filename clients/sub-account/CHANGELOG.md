@@ -1,5 +1,16 @@
 # Changelog
 
+## 9.0.0 - 2025-10-02
+
+### Changed (1)
+
+- Modified parameter `orderArgs`:
+  - item property `quantity` added
+  - item property `symbol` added
+  - item property `positionSide` added
+  - affected methods:
+    - `movePositionForSubAccount()` (`POST /sapi/v1/sub-account/futures/move-position`)
+
 ## 8.0.0 - 2025-09-19
 
 ### Changed (1)

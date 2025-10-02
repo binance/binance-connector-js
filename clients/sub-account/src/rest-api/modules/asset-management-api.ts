@@ -31,6 +31,7 @@ import type {
     GetSummaryOfSubAccountsFuturesAccountV2Response,
     GetSummaryOfSubAccountsMarginAccountResponse,
     MarginTransferForSubAccountResponse,
+    MovePositionForSubAccountOrderArgsParameterInner,
     MovePositionForSubAccountResponse,
     QuerySubAccountAssetsAssetManagementResponse,
     QuerySubAccountAssetsResponse,
@@ -641,7 +642,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * @param {string} fromUserEmail
          * @param {string} toUserEmail
          * @param {string} productType Only support UM
-         * @param {Array<object>} orderArgs Max 10 positions supported. When input request parameter,orderArgs.symbol should be STRING, orderArgs.quantity should be BIGDECIMAL, and orderArgs.positionSide should be STRING, positionSide support BOTH,LONG and SHORT. Each entry should be like orderArgs[0].symbol=BTCUSDT,orderArgs[0].quantity=0.001,orderArgs[0].positionSide=BOTH. Example of the request parameter array: orderArgs[0].symbol=BTCUSDT orderArgs[0].quantity=0.001 orderArgs[0].positionSide=BOTH orderArgs[1].symbol=ETHUSDT orderArgs[1].quantity=0.01 orderArgs[1].positionSide=BOTH
+         * @param {Array<MovePositionForSubAccountOrderArgsParameterInner>} orderArgs Max 10 positions supported. When input request parameter,orderArgs.symbol should be STRING, orderArgs.quantity should be BIGDECIMAL, and orderArgs.positionSide should be STRING, positionSide support BOTH,LONG and SHORT. Each entry should be like orderArgs[0].symbol=BTCUSDT,orderArgs[0].quantity=0.001,orderArgs[0].positionSide=BOTH. Example of the request parameter array: orderArgs[0].symbol=BTCUSDT orderArgs[0].quantity=0.001 orderArgs[0].positionSide=BOTH orderArgs[1].symbol=ETHUSDT orderArgs[1].quantity=0.01 orderArgs[1].positionSide=BOTH
          * @param {number} [recvWindow]
          *
          * @throws {RequiredError}
@@ -650,7 +651,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             fromUserEmail: string,
             toUserEmail: string,
             productType: string,
-            orderArgs: Array<object>,
+            orderArgs: Array<MovePositionForSubAccountOrderArgsParameterInner>,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'fromUserEmail' is not null or undefined
@@ -2156,10 +2157,10 @@ export interface MovePositionForSubAccountRequest {
 
     /**
      * Max 10 positions supported. When input request parameter,orderArgs.symbol should be STRING, orderArgs.quantity should be BIGDECIMAL, and orderArgs.positionSide should be STRING, positionSide support BOTH,LONG and SHORT. Each entry should be like orderArgs[0].symbol=BTCUSDT,orderArgs[0].quantity=0.001,orderArgs[0].positionSide=BOTH. Example of the request parameter array: orderArgs[0].symbol=BTCUSDT orderArgs[0].quantity=0.001 orderArgs[0].positionSide=BOTH orderArgs[1].symbol=ETHUSDT orderArgs[1].quantity=0.01 orderArgs[1].positionSide=BOTH
-     * @type {Array<object>}
+     * @type {Array<MovePositionForSubAccountOrderArgsParameterInner>}
      * @memberof AssetManagementApiMovePositionForSubAccount
      */
-    readonly orderArgs: Array<object>;
+    readonly orderArgs: Array<MovePositionForSubAccountOrderArgsParameterInner>;
 
     /**
      *

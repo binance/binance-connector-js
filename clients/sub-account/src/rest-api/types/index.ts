@@ -36,6 +36,7 @@ export * from './get-summary-of-sub-accounts-futures-account-v2-response-future-
 export * from './get-summary-of-sub-accounts-margin-account-response';
 export * from './get-summary-of-sub-accounts-margin-account-response-sub-account-list-inner';
 export * from './margin-transfer-for-sub-account-response';
+export * from './move-position-for-sub-account-order-args-parameter-inner';
 export * from './move-position-for-sub-account-response';
 export * from './move-position-for-sub-account-response-move-position-orders-inner';
 export * from './query-managed-sub-account-asset-details-response';
