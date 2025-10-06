@@ -140,7 +140,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Cancel all active order on a symbol.
          *
-         * Weight: 1
+         * Weight: 5
          *
          * @summary Cancel all Option orders on specific symbol (TRADE)
          * @param {string} symbol Option trading pair, e.g BTC-200730-9000-C
@@ -427,7 +427,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 5
          *
          * @summary Place Multiple Orders(TRADE)
-         * @param {Array<PlaceMultipleOrdersOrdersParameterInner>} orders order list. Max 5 orders
+         * @param {Array<PlaceMultipleOrdersOrdersParameterInner>} orders order list. Max 10 orders
          * @param {number} [recvWindow]
          *
          * @throws {RequiredError}
@@ -469,7 +469,6 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [orderId] Order ID, e.g 4611875134427365377
          * @param {number} [startTime] Start Time, e.g 1593511200000
          * @param {number} [endTime] End Time, e.g 1593512200000
-         * @param {number} [limit] Number of result sets returned Default:100 Max:1000
          * @param {number} [recvWindow]
          *
          * @throws {RequiredError}
@@ -479,7 +478,6 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             orderId?: number,
             startTime?: number,
             endTime?: number,
-            limit?: number,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
@@ -498,10 +496,6 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
 
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
-            }
-
-            if (limit !== undefined && limit !== null) {
-                localVarQueryParameter['limit'] = limit;
             }
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -730,7 +724,7 @@ export interface TradeApiInterface {
     /**
      * Cancel all active order on a symbol.
      *
-     * Weight: 1
+     * Weight: 5
      *
      * @summary Cancel all Option orders on specific symbol (TRADE)
      * @param {CancelAllOptionOrdersOnSpecificSymbolRequest} requestParameters Request parameters.
@@ -1154,7 +1148,7 @@ export interface OptionPositionInformationRequest {
  */
 export interface PlaceMultipleOrdersRequest {
     /**
-     * order list. Max 5 orders
+     * order list. Max 10 orders
      * @type {Array<PlaceMultipleOrdersOrdersParameterInner>}
      * @memberof TradeApiPlaceMultipleOrders
      */
@@ -1200,13 +1194,6 @@ export interface QueryCurrentOpenOptionOrdersRequest {
      * @memberof TradeApiQueryCurrentOpenOptionOrders
      */
     readonly endTime?: number;
-
-    /**
-     * Number of result sets returned Default:100 Max:1000
-     * @type {number}
-     * @memberof TradeApiQueryCurrentOpenOptionOrders
-     */
-    readonly limit?: number;
 
     /**
      *
@@ -1418,7 +1405,7 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel all active order on a symbol.
      *
-     * Weight: 1
+     * Weight: 5
      *
      * @summary Cancel all Option orders on specific symbol (TRADE)
      * @param {CancelAllOptionOrdersOnSpecificSymbolRequest} requestParameters Request parameters.
@@ -1631,7 +1618,6 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.orderId,
             requestParameters?.startTime,
             requestParameters?.endTime,
-            requestParameters?.limit,
             requestParameters?.recvWindow
         );
         return sendRequest<QueryCurrentOpenOptionOrdersResponse>(

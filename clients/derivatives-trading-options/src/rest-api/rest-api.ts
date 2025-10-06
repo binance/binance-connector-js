@@ -756,7 +756,7 @@ export class RestAPI {
     /**
      * Cancel all active order on a symbol.
      *
-     * Weight: 1
+     * Weight: 5
      *
      * @summary Cancel all Option orders on specific symbol (TRADE)
      * @param {CancelAllOptionOrdersOnSpecificSymbolRequest} requestParameters Request parameters.

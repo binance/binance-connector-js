@@ -998,7 +998,6 @@ describe('TradeApi', () => {
                 orderId: 1,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
                 recvWindow: 5000,
             };
 

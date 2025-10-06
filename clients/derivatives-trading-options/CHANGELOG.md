@@ -1,5 +1,15 @@
 # Changelog
 
+## 7.0.0 - 2025-10-06
+
+### Changed (1)
+
+#### REST API
+
+- Deleted parameter `limit`
+  - affected methods:
+    - `queryCurrentOpenOptionOrders()` (`GET /eapi/v1/openOrders`)
+
 ## 6.0.3 - 2025-09-12
 
 ### Changed (1)
