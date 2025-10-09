@@ -52,8 +52,8 @@ export interface SorOrderPlaceResponse {
     result?: Array<SorOrderPlaceResponseResultInner>;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof SorOrderPlaceResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

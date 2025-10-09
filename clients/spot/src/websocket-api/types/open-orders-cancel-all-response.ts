@@ -52,8 +52,8 @@ export interface OpenOrdersCancelAllResponse {
     result?: Array<OpenOrdersCancelAllResponseResultInner>;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof OpenOrdersCancelAllResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

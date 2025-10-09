@@ -52,8 +52,8 @@ export interface DepthResponse {
     result?: DepthResponseResult;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof DepthResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

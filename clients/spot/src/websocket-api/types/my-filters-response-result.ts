@@ -21,7 +21,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { AssetFilters } from './asset-filters';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { ExchangeFilters } from './exchange-filters';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { SymbolFilters } from './symbol-filters';
 
 /**
  *
@@ -31,20 +37,20 @@ import type { ExchangeFilters } from './exchange-filters';
 export interface MyFiltersResponseResult {
     /**
      *
-     * @type {ExchangeFilters}
+     * @type {Array<ExchangeFilters>}
      * @memberof MyFiltersResponseResult
      */
-    exchangeFilters?: ExchangeFilters;
+    exchangeFilters?: Array<ExchangeFilters>;
     /**
      *
-     * @type {ExchangeFilters}
+     * @type {Array<SymbolFilters>}
      * @memberof MyFiltersResponseResult
      */
-    symbolFilters?: ExchangeFilters;
+    symbolFilters?: Array<SymbolFilters>;
     /**
      *
-     * @type {ExchangeFilters}
+     * @type {Array<AssetFilters>}
      * @memberof MyFiltersResponseResult
      */
-    assetFilters?: ExchangeFilters;
+    assetFilters?: Array<AssetFilters>;
 }

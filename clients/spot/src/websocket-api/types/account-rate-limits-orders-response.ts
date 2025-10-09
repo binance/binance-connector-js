@@ -52,8 +52,8 @@ export interface AccountRateLimitsOrdersResponse {
     result?: Array<AccountRateLimitsOrdersResponseResultInner>;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof AccountRateLimitsOrdersResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

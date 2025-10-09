@@ -52,8 +52,8 @@ export interface OrderCancelResponse {
     result?: OrderCancelResponseResult;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof OrderCancelResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

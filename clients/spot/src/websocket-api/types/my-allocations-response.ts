@@ -52,8 +52,8 @@ export interface MyAllocationsResponse {
     result?: Array<MyAllocationsResponseResultInner>;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof MyAllocationsResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

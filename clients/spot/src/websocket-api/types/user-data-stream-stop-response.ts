@@ -49,8 +49,8 @@ export interface UserDataStreamStopResponse {
     response?: object;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof UserDataStreamStopResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

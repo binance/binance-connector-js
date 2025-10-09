@@ -52,8 +52,8 @@ export interface OrderAmendmentsResponse {
     result?: Array<OrderAmendmentsResponseResultInner>;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof OrderAmendmentsResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

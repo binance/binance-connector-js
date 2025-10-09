@@ -52,8 +52,8 @@ export interface SorOrderTestResponse {
     result?: SorOrderTestResponseResult;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof SorOrderTestResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

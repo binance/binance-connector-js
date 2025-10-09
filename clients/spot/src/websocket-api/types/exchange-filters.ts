@@ -21,11 +21,23 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ExchangeFiltersInner } from './exchange-filters-inner';
+import type { ExchangeMaxNumAlgoOrdersFilter } from './exchange-max-num-algo-orders-filter';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ExchangeMaxNumIcebergOrdersFilter } from './exchange-max-num-iceberg-orders-filter';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ExchangeMaxNumOrderListsFilter } from './exchange-max-num-order-lists-filter';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ExchangeMaxNumOrdersFilter } from './exchange-max-num-orders-filter';
 
 /**
- *
+ * @type ExchangeFilters
  * @export
- * @interface ExchangeFilters
  */
-export interface ExchangeFilters extends Array<ExchangeFiltersInner> {}
+export type ExchangeFilters =
+    | ({ filterType: 'EXCHANGE_MAX_NUM_ALGO_ORDERS' } & ExchangeMaxNumAlgoOrdersFilter)
+    | ({ filterType: 'EXCHANGE_MAX_NUM_ICEBERG_ORDERS' } & ExchangeMaxNumIcebergOrdersFilter)
+    | ({ filterType: 'EXCHANGE_MAX_NUM_ORDERS' } & ExchangeMaxNumOrdersFilter)
+    | ({ filterType: 'EXCHANGE_MAX_NUM_ORDER_LISTS' } & ExchangeMaxNumOrderListsFilter);

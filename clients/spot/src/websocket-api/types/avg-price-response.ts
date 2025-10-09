@@ -52,8 +52,8 @@ export interface AvgPriceResponse {
     result?: AvgPriceResponseResult;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof AvgPriceResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

@@ -21,37 +21,19 @@
 /**
  *
  * @export
- * @interface RateLimitsInner
+ * @interface MaxNumOrderListsFilter
  */
-export interface RateLimitsInner {
+export interface MaxNumOrderListsFilter {
     /**
      *
      * @type {string}
-     * @memberof RateLimitsInner
+     * @memberof MaxNumOrderListsFilter
      */
-    rateLimitType?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof RateLimitsInner
-     */
-    interval?: string;
+    filterType?: string;
     /**
      *
      * @type {number}
-     * @memberof RateLimitsInner
+     * @memberof MaxNumOrderListsFilter
      */
-    intervalNum?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof RateLimitsInner
-     */
-    limit?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof RateLimitsInner
-     */
-    count?: number;
+    maxNumOrderLists?: number;
 }

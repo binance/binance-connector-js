@@ -52,8 +52,8 @@ export interface MyPreventedMatchesResponse {
     result?: Array<MyPreventedMatchesResponseResultInner>;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof MyPreventedMatchesResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

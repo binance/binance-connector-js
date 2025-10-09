@@ -52,8 +52,8 @@ export interface TradesAggregateResponse {
     result?: Array<TradesAggregateResponseResultInner>;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof TradesAggregateResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

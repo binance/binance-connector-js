@@ -52,8 +52,8 @@ export interface TickerBookResponse1 {
     result?: TickerBookResponse1Result;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof TickerBookResponse1
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

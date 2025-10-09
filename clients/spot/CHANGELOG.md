@@ -1,5 +1,25 @@
 # Changelog
 
+## 20.0.0 - 2025-10-09
+
+### Changed (4)
+
+#### REST API
+
+- Modified response for `exchangeInfo()` (`GET /api/v3/exchangeInfo`):
+  - modified `exchangeFilters` and `symbols`.`filters`
+
+- Modified response for `myFilters()` (`GET /api/v3/myFilters`):
+  - modified `assetFilters`, `exchangeFilters` and `symbolFilters`
+
+#### WebSocket API
+
+- Modified response for `exchangeInfo()` (`exchangeInfo` method):
+  - modified `result`.`exchangeFilters` and `result`.`symbols`.`filters`
+
+- Modified response for `myFilters()` (`myFilters` method):
+  - modified `result`.`assetFilters`, `result`.`exchangeFilters` and `result`.`symbolFilters`
+
 ## 19.0.0 - 2025-10-02
 
 ### Added (2)

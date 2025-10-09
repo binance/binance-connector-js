@@ -52,8 +52,8 @@ export interface Ticker24hrResponse1 {
     result?: Ticker24hrResponse1Result;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof Ticker24hrResponse1
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

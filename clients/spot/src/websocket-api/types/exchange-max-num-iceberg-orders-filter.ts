@@ -21,37 +21,19 @@
 /**
  *
  * @export
- * @interface RateLimitsInner
+ * @interface ExchangeMaxNumIcebergOrdersFilter
  */
-export interface RateLimitsInner {
+export interface ExchangeMaxNumIcebergOrdersFilter {
     /**
      *
      * @type {string}
-     * @memberof RateLimitsInner
+     * @memberof ExchangeMaxNumIcebergOrdersFilter
      */
-    rateLimitType?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof RateLimitsInner
-     */
-    interval?: string;
+    filterType?: string;
     /**
      *
      * @type {number}
-     * @memberof RateLimitsInner
+     * @memberof ExchangeMaxNumIcebergOrdersFilter
      */
-    intervalNum?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof RateLimitsInner
-     */
-    limit?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof RateLimitsInner
-     */
-    count?: number;
+    maxNumIcebergOrders?: number;
 }

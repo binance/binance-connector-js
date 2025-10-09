@@ -49,8 +49,8 @@ export interface UserDataStreamPingResponse {
     response?: object;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof UserDataStreamPingResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

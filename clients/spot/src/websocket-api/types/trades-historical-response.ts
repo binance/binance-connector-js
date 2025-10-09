@@ -52,8 +52,8 @@ export interface TradesHistoricalResponse {
     result?: Array<TradesHistoricalResponseResultInner>;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof TradesHistoricalResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

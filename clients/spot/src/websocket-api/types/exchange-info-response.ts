@@ -52,8 +52,8 @@ export interface ExchangeInfoResponse {
     result?: ExchangeInfoResponseResult;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof ExchangeInfoResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

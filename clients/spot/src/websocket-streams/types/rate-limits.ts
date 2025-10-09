@@ -1,5 +1,4 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
  * Binance Spot WebSocket Streams
@@ -19,13 +18,40 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { RateLimitsInner } from './rate-limits-inner';
-
 /**
  *
  * @export
  * @interface RateLimits
  */
-export interface RateLimits extends Array<RateLimitsInner> {}
+export interface RateLimits {
+    /**
+     *
+     * @type {string}
+     * @memberof RateLimits
+     */
+    rateLimitType?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof RateLimits
+     */
+    interval?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof RateLimits
+     */
+    intervalNum?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof RateLimits
+     */
+    limit?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof RateLimits
+     */
+    count?: number;
+}

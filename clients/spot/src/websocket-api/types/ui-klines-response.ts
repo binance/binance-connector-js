@@ -52,8 +52,8 @@ export interface UiKlinesResponse {
     result?: Array<UiKlinesItem>;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof UiKlinesResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

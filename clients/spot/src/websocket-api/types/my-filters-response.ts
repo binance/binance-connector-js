@@ -52,8 +52,8 @@ export interface MyFiltersResponse {
     result?: MyFiltersResponseResult;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof MyFiltersResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

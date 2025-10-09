@@ -52,8 +52,8 @@ export interface KlinesResponse {
     result?: Array<KlinesItem>;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof KlinesResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

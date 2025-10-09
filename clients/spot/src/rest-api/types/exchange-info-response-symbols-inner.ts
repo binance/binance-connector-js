@@ -21,7 +21,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ExchangeFilters } from './exchange-filters';
+import type { SymbolFilters } from './symbol-filters';
 
 /**
  *
@@ -151,10 +151,10 @@ export interface ExchangeInfoResponseSymbolsInner {
     isMarginTradingAllowed?: boolean;
     /**
      *
-     * @type {Array<ExchangeFilters>}
+     * @type {Array<SymbolFilters>}
      * @memberof ExchangeInfoResponseSymbolsInner
      */
-    filters?: Array<ExchangeFilters>;
+    filters?: Array<SymbolFilters>;
     /**
      *
      * @type {Array<string>}

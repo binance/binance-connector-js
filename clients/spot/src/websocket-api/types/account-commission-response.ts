@@ -52,8 +52,8 @@ export interface AccountCommissionResponse {
     result?: AccountCommissionResponseResult;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof AccountCommissionResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

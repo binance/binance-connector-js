@@ -52,8 +52,8 @@ export interface TickerTradingDayResponse {
     result?: Array<TickerTradingDayResponseResultInner>;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof TickerTradingDayResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

@@ -52,8 +52,8 @@ export interface OrderAmendKeepPriorityResponse {
     result?: OrderAmendKeepPriorityResponseResult;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof OrderAmendKeepPriorityResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

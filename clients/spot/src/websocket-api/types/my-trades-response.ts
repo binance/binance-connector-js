@@ -52,8 +52,8 @@ export interface MyTradesResponse {
     result?: Array<MyTradesResponseResultInner>;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof MyTradesResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

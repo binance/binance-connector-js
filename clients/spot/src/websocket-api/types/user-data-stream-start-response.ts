@@ -52,8 +52,8 @@ export interface UserDataStreamStartResponse {
     result?: UserDataStreamStartResponseResult;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof UserDataStreamStartResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

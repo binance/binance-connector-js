@@ -52,8 +52,8 @@ export interface OrderPlaceResponse {
     result?: OrderPlaceResponseResult;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof OrderPlaceResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }

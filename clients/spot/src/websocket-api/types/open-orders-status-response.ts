@@ -52,8 +52,8 @@ export interface OpenOrdersStatusResponse {
     result?: Array<OpenOrdersStatusResponseResultInner>;
     /**
      *
-     * @type {RateLimits}
+     * @type {Array<RateLimits>}
      * @memberof OpenOrdersStatusResponse
      */
-    rateLimits?: RateLimits;
+    rateLimits?: Array<RateLimits>;
 }
