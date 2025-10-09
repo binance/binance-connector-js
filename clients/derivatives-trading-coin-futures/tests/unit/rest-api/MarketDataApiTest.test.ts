@@ -727,7 +727,7 @@ describe('MarketDataApi', () => {
         it('should execute getFundingRateInfo() successfully with required parameters only', async () => {
             mockResponse = [
                 {
-                    symbol: 'BLZUSDT',
+                    symbol: 'BTCUSD_PERP',
                     adjustedFundingRateCap: '0.02500000',
                     adjustedFundingRateFloor: '-0.02500000',
                     fundingIntervalHours: 8,

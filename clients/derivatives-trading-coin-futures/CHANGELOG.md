@@ -1,5 +1,14 @@
 # Changelog
 
+## 8.0.0 - 2025-10-09
+
+### Changed (1)
+
+#### REST API
+
+- Modified response for `queryOrder()` (`GET /dapi/v1/order`):
+  - property `positionSide` added
+
 ## 7.0.1 - 2025-09-12
 
 ### Changed (1)

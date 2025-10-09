@@ -84,6 +84,12 @@ export interface QueryOrderResponse {
      * @type {string}
      * @memberof QueryOrderResponse
      */
+    positionSide?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof QueryOrderResponse
+     */
     status?: string;
     /**
      *
