@@ -14,7 +14,7 @@
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { MarketMakerBlockTradeApi, NewBlockTradeOrderSideEnum } from '../../../src/rest-api';
+import { MarketMakerBlockTradeApi } from '../../../src/rest-api';
 import {
     AcceptBlockTradeOrderRequest,
     AccountBlockTradeListRequest,
@@ -428,10 +428,6 @@ describe('MarketMakerBlockTradeApi', () => {
             const params: NewBlockTradeOrderRequest = {
                 liquidity: 'liquidity_example',
                 legs: [],
-                symbol: 'symbol_example',
-                side: NewBlockTradeOrderSideEnum.BUY,
-                price: 1.0,
-                quantity: 1.0,
             };
 
             mockResponse = {
@@ -460,10 +456,6 @@ describe('MarketMakerBlockTradeApi', () => {
             const params: NewBlockTradeOrderRequest = {
                 liquidity: 'liquidity_example',
                 legs: [],
-                symbol: 'symbol_example',
-                side: NewBlockTradeOrderSideEnum.BUY,
-                price: 1.0,
-                quantity: 1.0,
                 recvWindow: 5000,
             };
 
@@ -493,10 +485,6 @@ describe('MarketMakerBlockTradeApi', () => {
             const _params: NewBlockTradeOrderRequest = {
                 liquidity: 'liquidity_example',
                 legs: [],
-                symbol: 'symbol_example',
-                side: NewBlockTradeOrderSideEnum.BUY,
-                price: 1.0,
-                quantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.liquidity;
@@ -510,10 +498,6 @@ describe('MarketMakerBlockTradeApi', () => {
             const _params: NewBlockTradeOrderRequest = {
                 liquidity: 'liquidity_example',
                 legs: [],
-                symbol: 'symbol_example',
-                side: NewBlockTradeOrderSideEnum.BUY,
-                price: 1.0,
-                quantity: 1.0,
             };
             const params = Object.assign({ ..._params });
             delete params?.legs;
@@ -523,82 +507,10 @@ describe('MarketMakerBlockTradeApi', () => {
             );
         });
 
-        it('should throw RequiredError when symbol is missing', async () => {
-            const _params: NewBlockTradeOrderRequest = {
-                liquidity: 'liquidity_example',
-                legs: [],
-                symbol: 'symbol_example',
-                side: NewBlockTradeOrderSideEnum.BUY,
-                price: 1.0,
-                quantity: 1.0,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.symbol;
-
-            await expect(client.newBlockTradeOrder(params)).rejects.toThrow(
-                'Required parameter symbol was null or undefined when calling newBlockTradeOrder.'
-            );
-        });
-
-        it('should throw RequiredError when side is missing', async () => {
-            const _params: NewBlockTradeOrderRequest = {
-                liquidity: 'liquidity_example',
-                legs: [],
-                symbol: 'symbol_example',
-                side: NewBlockTradeOrderSideEnum.BUY,
-                price: 1.0,
-                quantity: 1.0,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.side;
-
-            await expect(client.newBlockTradeOrder(params)).rejects.toThrow(
-                'Required parameter side was null or undefined when calling newBlockTradeOrder.'
-            );
-        });
-
-        it('should throw RequiredError when price is missing', async () => {
-            const _params: NewBlockTradeOrderRequest = {
-                liquidity: 'liquidity_example',
-                legs: [],
-                symbol: 'symbol_example',
-                side: NewBlockTradeOrderSideEnum.BUY,
-                price: 1.0,
-                quantity: 1.0,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.price;
-
-            await expect(client.newBlockTradeOrder(params)).rejects.toThrow(
-                'Required parameter price was null or undefined when calling newBlockTradeOrder.'
-            );
-        });
-
-        it('should throw RequiredError when quantity is missing', async () => {
-            const _params: NewBlockTradeOrderRequest = {
-                liquidity: 'liquidity_example',
-                legs: [],
-                symbol: 'symbol_example',
-                side: NewBlockTradeOrderSideEnum.BUY,
-                price: 1.0,
-                quantity: 1.0,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.quantity;
-
-            await expect(client.newBlockTradeOrder(params)).rejects.toThrow(
-                'Required parameter quantity was null or undefined when calling newBlockTradeOrder.'
-            );
-        });
-
         it('should throw an error when server is returning an error', async () => {
             const params: NewBlockTradeOrderRequest = {
                 liquidity: 'liquidity_example',
                 legs: [],
-                symbol: 'symbol_example',
-                side: NewBlockTradeOrderSideEnum.BUY,
-                price: 1.0,
-                quantity: 1.0,
             };
 
             const errorResponse = {

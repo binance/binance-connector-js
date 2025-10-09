@@ -214,10 +214,6 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
          * @summary New Block Trade Order (TRADE)
          * @param {string} liquidity Taker or Maker
          * @param {Array<object>} legs Max 1 (only single leg supported), list of legs parameters in JSON; example: eapi/v1/block/order/create?orders=[{"symbol":"BTC-210115-35000-C", "price":"100","quantity":"0.0002","side":"BUY","type":"LIMIT"}]
-         * @param {string} symbol Option trading pair, e.g BTC-200730-9000-C
-         * @param {NewBlockTradeOrderSideEnum} side BUY or SELL
-         * @param {number} price Order Price
-         * @param {number} quantity Order Quantity
          * @param {number} [recvWindow]
          *
          * @throws {RequiredError}
@@ -225,24 +221,12 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
         newBlockTradeOrder: async (
             liquidity: string,
             legs: Array<object>,
-            symbol: string,
-            side: NewBlockTradeOrderSideEnum,
-            price: number,
-            quantity: number,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'liquidity' is not null or undefined
             assertParamExists('newBlockTradeOrder', 'liquidity', liquidity);
             // verify required parameter 'legs' is not null or undefined
             assertParamExists('newBlockTradeOrder', 'legs', legs);
-            // verify required parameter 'symbol' is not null or undefined
-            assertParamExists('newBlockTradeOrder', 'symbol', symbol);
-            // verify required parameter 'side' is not null or undefined
-            assertParamExists('newBlockTradeOrder', 'side', side);
-            // verify required parameter 'price' is not null or undefined
-            assertParamExists('newBlockTradeOrder', 'price', price);
-            // verify required parameter 'quantity' is not null or undefined
-            assertParamExists('newBlockTradeOrder', 'quantity', quantity);
 
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -252,22 +236,6 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
 
             if (legs) {
                 localVarQueryParameter['legs'] = legs;
-            }
-
-            if (symbol !== undefined && symbol !== null) {
-                localVarQueryParameter['symbol'] = symbol;
-            }
-
-            if (side !== undefined && side !== null) {
-                localVarQueryParameter['side'] = side;
-            }
-
-            if (price !== undefined && price !== null) {
-                localVarQueryParameter['price'] = price;
-            }
-
-            if (quantity !== undefined && quantity !== null) {
-                localVarQueryParameter['quantity'] = quantity;
             }
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -601,34 +569,6 @@ export interface NewBlockTradeOrderRequest {
     readonly legs: Array<object>;
 
     /**
-     * Option trading pair, e.g BTC-200730-9000-C
-     * @type {string}
-     * @memberof MarketMakerBlockTradeApiNewBlockTradeOrder
-     */
-    readonly symbol: string;
-
-    /**
-     * BUY or SELL
-     * @type {'BUY' | 'SELL'}
-     * @memberof MarketMakerBlockTradeApiNewBlockTradeOrder
-     */
-    readonly side: NewBlockTradeOrderSideEnum;
-
-    /**
-     * Order Price
-     * @type {number}
-     * @memberof MarketMakerBlockTradeApiNewBlockTradeOrder
-     */
-    readonly price: number;
-
-    /**
-     * Order Quantity
-     * @type {number}
-     * @memberof MarketMakerBlockTradeApiNewBlockTradeOrder
-     */
-    readonly quantity: number;
-
-    /**
      *
      * @type {number}
      * @memberof MarketMakerBlockTradeApiNewBlockTradeOrder
@@ -846,10 +786,6 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.newBlockTradeOrder(
             requestParameters?.liquidity,
             requestParameters?.legs,
-            requestParameters?.symbol,
-            requestParameters?.side,
-            requestParameters?.price,
-            requestParameters?.quantity,
             requestParameters?.recvWindow
         );
         return sendRequest<NewBlockTradeOrderResponse>(
@@ -922,9 +858,4 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
             { isSigned: true }
         );
     }
-}
-
-export enum NewBlockTradeOrderSideEnum {
-    BUY = 'BUY',
-    SELL = 'SELL',
 }

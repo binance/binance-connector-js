@@ -286,7 +286,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary New Order (TRADE)
          * @param {string} symbol Option trading pair, e.g BTC-200730-9000-C
-         * @param {NewOrderSideEnum} side BUY or SELL
+         * @param {NewOrderSideEnum} side Buy/sell direction: SELL, BUY
          * @param {NewOrderTypeEnum} type Order Type: LIMIT(only support limit)
          * @param {number} quantity Order Quantity
          * @param {number} [price] Order Price
@@ -1045,7 +1045,7 @@ export interface NewOrderRequest {
     readonly symbol: string;
 
     /**
-     * BUY or SELL
+     * Buy/sell direction: SELL, BUY
      * @type {'BUY' | 'SELL'}
      * @memberof TradeApiNewOrder
      */

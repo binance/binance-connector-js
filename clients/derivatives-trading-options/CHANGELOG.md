@@ -1,5 +1,24 @@
 # Changelog
 
+## 8.0.0 - 2025-10-09
+
+### Changed (4)
+
+#### REST API
+
+- Deleted parameter `price`
+  - affected methods:
+    - `newBlockTradeOrder()` (`POST /eapi/v1/block/order/create`)
+- Deleted parameter `quantity`
+  - affected methods:
+    - `newBlockTradeOrder()` (`POST /eapi/v1/block/order/create`)
+- Deleted parameter `side`
+  - affected methods:
+    - `newBlockTradeOrder()` (`POST /eapi/v1/block/order/create`)
+- Deleted parameter `symbol`
+  - affected methods:
+    - `newBlockTradeOrder()` (`POST /eapi/v1/block/order/create`)
+
 ## 7.0.0 - 2025-10-06
 
 ### Changed (1)

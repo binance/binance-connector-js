@@ -1,6 +1,5 @@
 import {
     DerivativesTradingOptions,
-    DerivativesTradingOptionsRestAPI,
     DERIVATIVES_TRADING_OPTIONS_REST_API_PROD_URL,
 } from '../../../src';
 
@@ -16,10 +15,6 @@ async function newBlockTradeOrder() {
         const response = await client.restAPI.newBlockTradeOrder({
             liquidity: 'liquidity_example',
             legs: [],
-            symbol: 'symbol_example',
-            side: DerivativesTradingOptionsRestAPI.NewBlockTradeOrderSideEnum.BUY,
-            price: 1.0,
-            quantity: 1.0,
         });
 
         const rateLimits = response.rateLimits!;
