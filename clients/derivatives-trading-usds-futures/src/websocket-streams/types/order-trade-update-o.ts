@@ -235,4 +235,10 @@ export interface OrderTradeUpdateO {
      * @memberof OrderTradeUpdateO
      */
     gtd?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof OrderTradeUpdateO
+     */
+    er?: string;
 }

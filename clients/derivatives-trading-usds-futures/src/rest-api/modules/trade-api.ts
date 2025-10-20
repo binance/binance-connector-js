@@ -853,7 +853,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * Weight: 1 on 10s order rate limit(X-MBX-ORDER-COUNT-10S);
          * 1 on 1min order rate limit(X-MBX-ORDER-COUNT-1M);
-         * 1 on IP rate limit(x-mbx-used-weight-1m)
+         * 0 on IP rate limit(x-mbx-used-weight-1m)
          *
          * @summary Modify Order (TRADE)
          * @param {string} symbol
@@ -1912,7 +1912,7 @@ export interface TradeApiInterface {
      *
      * Weight: 1 on 10s order rate limit(X-MBX-ORDER-COUNT-10S);
      * 1 on 1min order rate limit(X-MBX-ORDER-COUNT-1M);
-     * 1 on IP rate limit(x-mbx-used-weight-1m)
+     * 0 on IP rate limit(x-mbx-used-weight-1m)
      *
      * @summary Modify Order (TRADE)
      * @param {ModifyOrderRequest} requestParameters Request parameters.
@@ -3732,7 +3732,7 @@ export class TradeApi implements TradeApiInterface {
      *
      * Weight: 1 on 10s order rate limit(X-MBX-ORDER-COUNT-10S);
      * 1 on 1min order rate limit(X-MBX-ORDER-COUNT-1M);
-     * 1 on IP rate limit(x-mbx-used-weight-1m)
+     * 0 on IP rate limit(x-mbx-used-weight-1m)
      *
      * @summary Modify Order (TRADE)
      * @param {ModifyOrderRequest} requestParameters Request parameters.
