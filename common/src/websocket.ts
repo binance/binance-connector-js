@@ -407,6 +407,7 @@ export class WebsocketCommon extends WebsocketEventEmitter {
         } else if (targetConnection.closeInitiated) {
             this.closeConnectionGracefully(targetConnection.ws!, targetConnection);
         } else {
+            targetConnection.reconnectionPending = false;
             this.emit('open', this);
         }
         this.sessionReLogon(targetConnection);
@@ -548,6 +549,9 @@ export class WebsocketCommon extends WebsocketEventEmitter {
             this.emit('close', closeEventCode, reason);
 
             if (!targetConnection.closeInitiated && !isRenewal) {
+                // Clean up the closed WebSocket immediately to prevent memory leaks
+                this.cleanup(ws);
+
                 this.logger.warn(
                     `Connection with id ${targetConnection.id} closed due to ${closeEventCode}: ${reason}`
                 );

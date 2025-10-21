@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.6 - 2025-10-21
+
+### Changed (2)
+
+- Fixed bug with `reconnectionPending` flag not being reset after reconnection.
+- Fixed memory leak on terminated WebSockets not cleaned up during reconnection.
+
 ## 1.2.5 - 2025-09-12
 
 ### Changed (2)

@@ -1500,6 +1500,24 @@ describe('WebsocketCommon', () => {
             );
             expect(WebSocketClient).toHaveBeenCalledTimes(1);
         });
+
+        it('should reset reconnectionPending flag after successful reconnection', () => {
+            wsCommon.connectionPool[0].reconnectionPending = true;
+
+            wsCommon.connectionPool[0].ws?.emit('open');
+
+            expect(wsCommon.connectionPool[0].reconnectionPending).toBe(false);
+        });
+
+        it('should clean up closed WebSocket', () => {
+            const clearTimersSpy = jest.spyOn(wsCommon as never, 'clearTimers');
+            const oldConnection = wsCommon.connectionPool[0].ws as WebSocketClient;
+
+            wsCommon.connectionPool[0].ws?.emit('close', 1006, 'Abnormal closure');
+
+            expect(oldConnection.removeAllListeners).toHaveBeenCalled();
+            expect(clearTimersSpy).toHaveBeenCalledWith(oldConnection);
+        });
     });
 });
 
