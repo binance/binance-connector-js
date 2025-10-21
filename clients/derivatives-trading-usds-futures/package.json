@@ -1,7 +1,7 @@
 {
     "name": "@binance/derivatives-trading-usds-futures",
     "description": "Official Binance Derivatives Trading (COIN-M Futures) Connector - A lightweight library that provides a convenient interface to Binance's COINN-M Futures REST API, WebSocket API and WebSocket Streams.",
-    "version": "13.0.0",
+    "version": "13.0.1",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",
@@ -50,7 +50,7 @@
         "typescript-eslint": "^8.24.0"
     },
     "dependencies": {
-        "@binance/common": "1.2.5",
+        "@binance/common": "1.2.6",
         "@types/ws": "^8.5.5",
         "axios": "^1.7.4",
         "ws": "^8.17.1"
