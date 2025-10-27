@@ -38,6 +38,7 @@ const TradeDataStreamApiAxiosParamCreator = function (configuration: Configurati
          * @param {string} symbol
          * @param {string} listenkey
          *
+         * @deprecated
          * @throws {RequiredError}
          */
         closeIsolatedMarginUserDataStream: async (
@@ -77,6 +78,7 @@ const TradeDataStreamApiAxiosParamCreator = function (configuration: Configurati
          * @summary Close Margin User Data Stream (USER_STREAM)
          * @param {string} listenkey
          *
+         * @deprecated
          * @throws {RequiredError}
          */
         closeMarginUserDataStream: async (listenkey: string): Promise<RequestArgs> => {
@@ -108,6 +110,7 @@ const TradeDataStreamApiAxiosParamCreator = function (configuration: Configurati
          * @param {string} symbol
          * @param {string} listenKey
          *
+         * @deprecated
          * @throws {RequiredError}
          */
         keepaliveIsolatedMarginUserDataStream: async (
@@ -147,6 +150,7 @@ const TradeDataStreamApiAxiosParamCreator = function (configuration: Configurati
          * @summary Keepalive Margin User Data Stream (USER_STREAM)
          * @param {string} listenKey
          *
+         * @deprecated
          * @throws {RequiredError}
          */
         keepaliveMarginUserDataStream: async (listenKey: string): Promise<RequestArgs> => {
@@ -177,6 +181,7 @@ const TradeDataStreamApiAxiosParamCreator = function (configuration: Configurati
          * @summary Start Isolated Margin User Data Stream (USER_STREAM)
          * @param {string} symbol
          *
+         * @deprecated
          * @throws {RequiredError}
          */
         startIsolatedMarginUserDataStream: async (symbol: string): Promise<RequestArgs> => {
@@ -206,6 +211,7 @@ const TradeDataStreamApiAxiosParamCreator = function (configuration: Configurati
          *
          * @summary Start Margin User Data Stream (USER_STREAM)
          *
+         * @deprecated
          * @throws {RequiredError}
          */
         startMarginUserDataStream: async (): Promise<RequestArgs> => {
@@ -237,6 +243,7 @@ export interface TradeDataStreamApiInterface {
      * @summary Close Isolated Margin User Data Stream (USER_STREAM)
      * @param {CloseIsolatedMarginUserDataStreamRequest} requestParameters Request parameters.
      *
+     * @deprecated
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeDataStreamApiInterface
      */
@@ -251,6 +258,7 @@ export interface TradeDataStreamApiInterface {
      * @summary Close Margin User Data Stream (USER_STREAM)
      * @param {CloseMarginUserDataStreamRequest} requestParameters Request parameters.
      *
+     * @deprecated
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeDataStreamApiInterface
      */
@@ -265,6 +273,7 @@ export interface TradeDataStreamApiInterface {
      * @summary Keepalive Isolated Margin User Data Stream (USER_STREAM)
      * @param {KeepaliveIsolatedMarginUserDataStreamRequest} requestParameters Request parameters.
      *
+     * @deprecated
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeDataStreamApiInterface
      */
@@ -279,6 +288,7 @@ export interface TradeDataStreamApiInterface {
      * @summary Keepalive Margin User Data Stream (USER_STREAM)
      * @param {KeepaliveMarginUserDataStreamRequest} requestParameters Request parameters.
      *
+     * @deprecated
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeDataStreamApiInterface
      */
@@ -293,6 +303,7 @@ export interface TradeDataStreamApiInterface {
      * @summary Start Isolated Margin User Data Stream (USER_STREAM)
      * @param {StartIsolatedMarginUserDataStreamRequest} requestParameters Request parameters.
      *
+     * @deprecated
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeDataStreamApiInterface
      */
@@ -306,6 +317,7 @@ export interface TradeDataStreamApiInterface {
      *
      * @summary Start Margin User Data Stream (USER_STREAM)
      *
+     * @deprecated
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeDataStreamApiInterface
      */

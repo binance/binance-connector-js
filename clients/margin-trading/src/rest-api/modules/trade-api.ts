@@ -50,9 +50,19 @@ import type {
 const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
     return {
         /**
-         * **Binance Margin offers low-latency trading through a [special key](https://www.binance.com/en/support/faq/frequently-asked-questions-on-margin-special-api-key-3208663e900d4d2e9fec4140e1832f4e), available exclusively to users with VIP level 4 or higher. **
+         * - Binance Margin offers low-latency trading through a [special key](https://www.binance.com/en/support/faq/frequently-asked-questions-on-margin-special-api-key-3208663e900d4d2e9fec4140e1832f4e), available exclusively to users with VIP level 4 or higher.
+         * - If you are VIP level 3 or below, please contact your VIP manager for eligibility criterias.**
          *
-         **If you are VIP level 3 or below, please contact your VIP manager for eligibility criterias.**
+         **Supported Products:**
+         *
+         * - Cross Margin
+         * - Isolated Margin
+         * - Portfolio Margin Pro
+         * - Cross Margin Pro (Additional agreement required and subject to meeting eligibility criteria)
+         *
+         **Unsupported Products:**
+         *
+         * - Portfolio Margin
          *
          * We support several types of API keys:
          *
@@ -61,10 +71,6 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * RSA
          *
          * We recommend to **use Ed25519 API keys** as it should provide the best performance and security out of all supported key types. We accept PKCS#8 (BEGIN PUBLIC KEY). For how to generate an RSA key pair to send API requests on Binance. Please refer to the document below [FAQ](https://www.binance.com/en/support/faq/how-to-generate-an-rsa-key-pair-to-send-api-requests-on-binance-2b79728f331e43079b27440d9d15c5db) .
-         *
-         * Read [REST API](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#signed-trade-and-user_data-endpoint-security) or [WebSocket API](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md#request-security) documentation to learn how to use different API keys
-         *
-         * You need to enable Permits “Enable Spot & Margin Trading” option for the API Key which requests this endpoint.
          *
          * Weight: 1(UID)
          *
@@ -1844,9 +1850,19 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
  */
 export interface TradeApiInterface {
     /**
-     * **Binance Margin offers low-latency trading through a [special key](https://www.binance.com/en/support/faq/frequently-asked-questions-on-margin-special-api-key-3208663e900d4d2e9fec4140e1832f4e), available exclusively to users with VIP level 4 or higher. **
+     * - Binance Margin offers low-latency trading through a [special key](https://www.binance.com/en/support/faq/frequently-asked-questions-on-margin-special-api-key-3208663e900d4d2e9fec4140e1832f4e), available exclusively to users with VIP level 4 or higher.
+     * - If you are VIP level 3 or below, please contact your VIP manager for eligibility criterias.**
      *
-     **If you are VIP level 3 or below, please contact your VIP manager for eligibility criterias.**
+     **Supported Products:**
+     *
+     * - Cross Margin
+     * - Isolated Margin
+     * - Portfolio Margin Pro
+     * - Cross Margin Pro (Additional agreement required and subject to meeting eligibility criteria)
+     *
+     **Unsupported Products:**
+     *
+     * - Portfolio Margin
      *
      * We support several types of API keys:
      *
@@ -1855,10 +1871,6 @@ export interface TradeApiInterface {
      * RSA
      *
      * We recommend to **use Ed25519 API keys** as it should provide the best performance and security out of all supported key types. We accept PKCS#8 (BEGIN PUBLIC KEY). For how to generate an RSA key pair to send API requests on Binance. Please refer to the document below [FAQ](https://www.binance.com/en/support/faq/how-to-generate-an-rsa-key-pair-to-send-api-requests-on-binance-2b79728f331e43079b27440d9d15c5db) .
-     *
-     * Read [REST API](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#signed-trade-and-user_data-endpoint-security) or [WebSocket API](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md#request-security) documentation to learn how to use different API keys
-     *
-     * You need to enable Permits “Enable Spot & Margin Trading” option for the API Key which requests this endpoint.
      *
      * Weight: 1(UID)
      *
@@ -3663,9 +3675,19 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * **Binance Margin offers low-latency trading through a [special key](https://www.binance.com/en/support/faq/frequently-asked-questions-on-margin-special-api-key-3208663e900d4d2e9fec4140e1832f4e), available exclusively to users with VIP level 4 or higher. **
+     * - Binance Margin offers low-latency trading through a [special key](https://www.binance.com/en/support/faq/frequently-asked-questions-on-margin-special-api-key-3208663e900d4d2e9fec4140e1832f4e), available exclusively to users with VIP level 4 or higher.
+     * - If you are VIP level 3 or below, please contact your VIP manager for eligibility criterias.**
      *
-     **If you are VIP level 3 or below, please contact your VIP manager for eligibility criterias.**
+     **Supported Products:**
+     *
+     * - Cross Margin
+     * - Isolated Margin
+     * - Portfolio Margin Pro
+     * - Cross Margin Pro (Additional agreement required and subject to meeting eligibility criteria)
+     *
+     **Unsupported Products:**
+     *
+     * - Portfolio Margin
      *
      * We support several types of API keys:
      *
@@ -3674,10 +3696,6 @@ export class TradeApi implements TradeApiInterface {
      * RSA
      *
      * We recommend to **use Ed25519 API keys** as it should provide the best performance and security out of all supported key types. We accept PKCS#8 (BEGIN PUBLIC KEY). For how to generate an RSA key pair to send API requests on Binance. Please refer to the document below [FAQ](https://www.binance.com/en/support/faq/how-to-generate-an-rsa-key-pair-to-send-api-requests-on-binance-2b79728f331e43079b27440d9d15c5db) .
-     *
-     * Read [REST API](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#signed-trade-and-user_data-endpoint-security) or [WebSocket API](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md#request-security) documentation to learn how to use different API keys
-     *
-     * You need to enable Permits “Enable Spot & Margin Trading” option for the API Key which requests this endpoint.
      *
      * Weight: 1(UID)
      *

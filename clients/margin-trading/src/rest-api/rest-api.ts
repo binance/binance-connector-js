@@ -223,6 +223,7 @@ export class RestAPI {
      *
      * @summary Adjust cross margin max leverage (USER_DATA)
      * @param {AdjustCrossMarginMaxLeverageRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<AdjustCrossMarginMaxLeverageResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/account/Adjust-cross-margin-max-leverage Binance API Documentation}
@@ -241,6 +242,7 @@ export class RestAPI {
      *
      * @summary Disable Isolated Margin Account (TRADE)
      * @param {DisableIsolatedMarginAccountRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<DisableIsolatedMarginAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/account/Disable-Isolated-Margin-Account Binance API Documentation}
@@ -258,6 +260,7 @@ export class RestAPI {
      *
      * @summary Enable Isolated Margin Account (TRADE)
      * @param {EnableIsolatedMarginAccountRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<EnableIsolatedMarginAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/account/Enable-Isolated-Margin-Account Binance API Documentation}
@@ -275,6 +278,7 @@ export class RestAPI {
      *
      * @summary Get BNB Burn Status (USER_DATA)
      * @param {GetBnbBurnStatusRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetBnbBurnStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/account/Get-BNB-Burn-Status Binance API Documentation}
@@ -292,6 +296,7 @@ export class RestAPI {
      *
      * @summary Get Summary of Margin account (USER_DATA)
      * @param {GetSummaryOfMarginAccountRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetSummaryOfMarginAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/account/Get-Summary-of-Margin-account Binance API Documentation}
@@ -309,6 +314,7 @@ export class RestAPI {
      *
      * @summary Query Cross Isolated Margin Capital Flow (USER_DATA)
      * @param {QueryCrossIsolatedMarginCapitalFlowRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryCrossIsolatedMarginCapitalFlowResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/account/Query-Cross-Isolated-Margin-Capital-Flow Binance API Documentation}
@@ -326,6 +332,7 @@ export class RestAPI {
      *
      * @summary Query Cross Margin Account Details (USER_DATA)
      * @param {QueryCrossMarginAccountDetailsRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryCrossMarginAccountDetailsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/account/Query-Cross-Margin-Account-Details Binance API Documentation}
@@ -343,6 +350,7 @@ export class RestAPI {
      *
      * @summary Query Cross Margin Fee Data (USER_DATA)
      * @param {QueryCrossMarginFeeDataRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryCrossMarginFeeDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/account/Query-Cross-Margin-Fee-Data Binance API Documentation}
@@ -360,6 +368,7 @@ export class RestAPI {
      *
      * @summary Query Enabled Isolated Margin Account Limit (USER_DATA)
      * @param {QueryEnabledIsolatedMarginAccountLimitRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryEnabledIsolatedMarginAccountLimitResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/account/Query-Enabled-Isolated-Margin-Account-Limit Binance API Documentation}
@@ -380,6 +389,7 @@ export class RestAPI {
      *
      * @summary Query Isolated Margin Account Info (USER_DATA)
      * @param {QueryIsolatedMarginAccountInfoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryIsolatedMarginAccountInfoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/account/Query-Isolated-Margin-Account-Info Binance API Documentation}
@@ -397,6 +407,7 @@ export class RestAPI {
      *
      * @summary Query Isolated Margin Fee Data (USER_DATA)
      * @param {QueryIsolatedMarginFeeDataRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryIsolatedMarginFeeDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/account/Query-Isolated-Margin-Fee-Data Binance API Documentation}
@@ -414,6 +425,7 @@ export class RestAPI {
      *
      * @summary Get future hourly interest rate (USER_DATA)
      * @param {GetFutureHourlyInterestRateRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetFutureHourlyInterestRateResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/borrow-and-repay/Get-a-future-hourly-interest-rate Binance API Documentation}
@@ -444,6 +456,7 @@ export class RestAPI {
      *
      * @summary Get Interest History (USER_DATA)
      * @param {GetInterestHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetInterestHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/borrow-and-repay/Get-Interest-History Binance API Documentation}
@@ -461,6 +474,7 @@ export class RestAPI {
      *
      * @summary Margin account borrow/repay(MARGIN)
      * @param {MarginAccountBorrowRepayRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<MarginAccountBorrowRepayResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/borrow-and-repay/Margin-account-borrow-repay Binance API Documentation}
@@ -483,6 +497,7 @@ export class RestAPI {
      *
      * @summary Query borrow/repay records in Margin account(USER_DATA)
      * @param {QueryBorrowRepayRecordsInMarginAccountRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryBorrowRepayRecordsInMarginAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/borrow-and-repay/Query-Borrow-Repay Binance API Documentation}
@@ -500,6 +515,7 @@ export class RestAPI {
      *
      * @summary Query Margin Interest Rate History (USER_DATA)
      * @param {QueryMarginInterestRateHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryMarginInterestRateHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/borrow-and-repay/Query-Margin-Interest-Rate-History Binance API Documentation}
@@ -520,6 +536,7 @@ export class RestAPI {
      *
      * @summary Query Max Borrow (USER_DATA)
      * @param {QueryMaxBorrowRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryMaxBorrowResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/borrow-and-repay/Query-Max-Borrow Binance API Documentation}
@@ -536,6 +553,7 @@ export class RestAPI {
      * Weight: 100(IP)
      *
      * @summary Cross margin collateral ratio (MARKET_DATA)
+     *
      * @returns {Promise<RestApiResponse<CrossMarginCollateralRatioResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Cross-margin-collateral-ratio Binance API Documentation}
@@ -551,6 +569,7 @@ export class RestAPI {
      *
      * @summary Get All Cross Margin Pairs (MARKET_DATA)
      * @param {GetAllCrossMarginPairsRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetAllCrossMarginPairsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Get-All-Cross-Margin-Pairs Binance API Documentation}
@@ -568,6 +587,7 @@ export class RestAPI {
      *
      * @summary Get All Isolated Margin Symbol(MARKET_DATA)
      * @param {GetAllIsolatedMarginSymbolRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetAllIsolatedMarginSymbolResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Get-All-Isolated-Margin-Symbol Binance API Documentation}
@@ -585,6 +605,7 @@ export class RestAPI {
      *
      * @summary Get All Margin Assets (MARKET_DATA)
      * @param {GetAllMarginAssetsRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetAllMarginAssetsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Get-All-Margin-Assets Binance API Documentation}
@@ -602,6 +623,7 @@ export class RestAPI {
      *
      * @summary Get Delist Schedule (MARKET_DATA)
      * @param {GetDelistScheduleRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetDelistScheduleResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Get-Delist-Schedule Binance API Documentation}
@@ -623,6 +645,7 @@ export class RestAPI {
      * Weight: 1
      *
      * @summary Get Limit Price Pairs(MARKET_DATA)
+     *
      * @returns {Promise<RestApiResponse<GetLimitPricePairsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Get-Limit-Price-Pairs Binance API Documentation}
@@ -638,6 +661,7 @@ export class RestAPI {
      *
      * @summary Get list Schedule (MARKET_DATA)
      * @param {GetListScheduleRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetListScheduleResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Get-list-Schedule Binance API Documentation}
@@ -655,6 +679,7 @@ export class RestAPI {
      *
      * @summary Query Isolated Margin Tier Data (USER_DATA)
      * @param {QueryIsolatedMarginTierDataRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryIsolatedMarginTierDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Query-Isolated-Margin-Tier-Data Binance API Documentation}
@@ -671,6 +696,7 @@ export class RestAPI {
      * Weight: 1
      *
      * @summary Query Liability Coin Leverage Bracket in Cross Margin Pro Mode(MARKET_DATA)
+     *
      * @returns {Promise<RestApiResponse<QueryLiabilityCoinLeverageBracketInCrossMarginProModeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Query-Liability-Coin-Leverage-Bracket-in-Cross-Margin-Pro-Mode Binance API Documentation}
@@ -688,6 +714,7 @@ export class RestAPI {
      *
      * @summary Query Margin Available Inventory(USER_DATA)
      * @param {QueryMarginAvailableInventoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryMarginAvailableInventoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Query-margin-avaliable-inventory Binance API Documentation}
@@ -705,6 +732,7 @@ export class RestAPI {
      *
      * @summary Query Margin PriceIndex (MARKET_DATA)
      * @param {QueryMarginPriceindexRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryMarginPriceindexResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Query-Margin-PriceIndex Binance API Documentation}
@@ -721,6 +749,7 @@ export class RestAPI {
      * Weight: 3000
      *
      * @summary Close User Data Stream (USER_STREAM)
+     *
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/risk-data-stream/Close-User-Data-Stream Binance API Documentation}
@@ -736,6 +765,7 @@ export class RestAPI {
      *
      * @summary Keepalive User Data Stream (USER_STREAM)
      * @param {KeepaliveUserDataStreamRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/risk-data-stream/Keepalive-User-Data-Stream Binance API Documentation}
@@ -752,6 +782,7 @@ export class RestAPI {
      * Weight: 1
      *
      * @summary Start User Data Stream (USER_STREAM)
+     *
      * @returns {Promise<RestApiResponse<StartUserDataStreamResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/risk-data-stream/Start-User-Data-Stream Binance API Documentation}
@@ -761,9 +792,19 @@ export class RestAPI {
     }
 
     /**
-     * **Binance Margin offers low-latency trading through a [special key](https://www.binance.com/en/support/faq/frequently-asked-questions-on-margin-special-api-key-3208663e900d4d2e9fec4140e1832f4e), available exclusively to users with VIP level 4 or higher. **
+     * - Binance Margin offers low-latency trading through a [special key](https://www.binance.com/en/support/faq/frequently-asked-questions-on-margin-special-api-key-3208663e900d4d2e9fec4140e1832f4e), available exclusively to users with VIP level 4 or higher.
+     * - If you are VIP level 3 or below, please contact your VIP manager for eligibility criterias.**
      *
-     **If you are VIP level 3 or below, please contact your VIP manager for eligibility criterias.**
+     **Supported Products:**
+     *
+     * - Cross Margin
+     * - Isolated Margin
+     * - Portfolio Margin Pro
+     * - Cross Margin Pro (Additional agreement required and subject to meeting eligibility criteria)
+     *
+     **Unsupported Products:**
+     *
+     * - Portfolio Margin
      *
      * We support several types of API keys:
      *
@@ -773,14 +814,11 @@ export class RestAPI {
      *
      * We recommend to **use Ed25519 API keys** as it should provide the best performance and security out of all supported key types. We accept PKCS#8 (BEGIN PUBLIC KEY). For how to generate an RSA key pair to send API requests on Binance. Please refer to the document below [FAQ](https://www.binance.com/en/support/faq/how-to-generate-an-rsa-key-pair-to-send-api-requests-on-binance-2b79728f331e43079b27440d9d15c5db) .
      *
-     * Read [REST API](https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#signed-trade-and-user_data-endpoint-security) or [WebSocket API](https://github.com/binance/binance-spot-api-docs/blob/master/web-socket-api.md#request-security) documentation to learn how to use different API keys
-     *
-     * You need to enable Permits “Enable Spot & Margin Trading” option for the API Key which requests this endpoint.
-     *
      * Weight: 1(UID)
      *
      * @summary Create Special Key(Low-Latency Trading)(TRADE)
      * @param {CreateSpecialKeyRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<CreateSpecialKeyResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade/Create-Special-Key-of-Low-Latency-Trading Binance API Documentation}
@@ -802,6 +840,7 @@ export class RestAPI {
      *
      * @summary Delete Special Key(Low-Latency Trading)(TRADE)
      * @param {DeleteSpecialKeyRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade/Delete-Special-Key-of-Low-Latency-Trading Binance API Documentation}
@@ -821,6 +860,7 @@ export class RestAPI {
      *
      * @summary Edit ip for Special Key(Low-Latency Trading)(TRADE)
      * @param {EditIpForSpecialKeyRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade/Edit-ip-for-Special-Key-of-Low-Latency-Trading Binance API Documentation}
@@ -840,6 +880,7 @@ export class RestAPI {
      *
      * @summary Get Force Liquidation Record (USER_DATA)
      * @param {GetForceLiquidationRecordRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetForceLiquidationRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade/Get-Force-Liquidation-Record Binance API Documentation}
@@ -857,6 +898,7 @@ export class RestAPI {
      *
      * @summary Get Small Liability Exchange Coin List (USER_DATA)
      * @param {GetSmallLiabilityExchangeCoinListRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetSmallLiabilityExchangeCoinListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade/Get-Small-Liability-Exchange-Coin-List Binance API Documentation}
@@ -874,6 +916,7 @@ export class RestAPI {
      *
      * @summary Get Small Liability Exchange History (USER_DATA)
      * @param {GetSmallLiabilityExchangeHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetSmallLiabilityExchangeHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade/Get-Small-Liability-Exchange-History Binance API Documentation}
@@ -892,6 +935,7 @@ export class RestAPI {
      *
      * @summary Margin Account Cancel all Open Orders on a Symbol (TRADE)
      * @param {MarginAccountCancelAllOpenOrdersOnASymbolRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<MarginAccountCancelAllOpenOrdersOnASymbolResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade/Margin-Account-Cancel-All-Open-Orders Binance API Documentation}
@@ -911,6 +955,7 @@ export class RestAPI {
      *
      * @summary Margin Account Cancel OCO (TRADE)
      * @param {MarginAccountCancelOcoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<MarginAccountCancelOcoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade/Margin-Account-Cancel-OCO Binance API Documentation}
@@ -930,6 +975,7 @@ export class RestAPI {
      *
      * @summary Margin Account Cancel Order (TRADE)
      * @param {MarginAccountCancelOrderRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<MarginAccountCancelOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade/Margin-Account-Cancel-Order Binance API Documentation}
@@ -949,6 +995,7 @@ export class RestAPI {
      *
      * @summary Margin Account New OCO (TRADE)
      * @param {MarginAccountNewOcoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<MarginAccountNewOcoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade/Margin-Account-New-OCO Binance API Documentation}
@@ -968,6 +1015,7 @@ export class RestAPI {
      *
      * @summary Margin Account New Order (TRADE)
      * @param {MarginAccountNewOrderRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<MarginAccountNewOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade/Margin-Account-New-Order Binance API Documentation}
@@ -995,6 +1043,7 @@ export class RestAPI {
      *
      * @summary Margin Account New OTO (TRADE)
      * @param {MarginAccountNewOtoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<MarginAccountNewOtoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade/Margin-Account-New-OTO Binance API Documentation}
@@ -1022,6 +1071,7 @@ export class RestAPI {
      *
      * @summary Margin Account New OTOCO (TRADE)
      * @param {MarginAccountNewOtocoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<MarginAccountNewOtocoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade/Margin-Account-New-OTOCO Binance API Documentation}
@@ -1042,6 +1092,7 @@ export class RestAPI {
      *
      * @summary Margin Manual Liquidation(MARGIN)
      * @param {MarginManualLiquidationRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<MarginManualLiquidationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade/Margin-Manual-Liquidation Binance API Documentation}
@@ -1059,6 +1110,7 @@ export class RestAPI {
      *
      * @summary Query Current Margin Order Count Usage (TRADE)
      * @param {QueryCurrentMarginOrderCountUsageRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryCurrentMarginOrderCountUsageResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade/Query-Current-Margin-Order-Count-Usage Binance API Documentation}
@@ -1076,6 +1128,7 @@ export class RestAPI {
      *
      * @summary Query Margin Account\'s all OCO (USER_DATA)
      * @param {QueryMarginAccountsAllOcoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryMarginAccountsAllOcoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-all-OCO Binance API Documentation}
@@ -1097,6 +1150,7 @@ export class RestAPI {
      *
      * @summary Query Margin Account\'s All Orders (USER_DATA)
      * @param {QueryMarginAccountsAllOrdersRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryMarginAccountsAllOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-All-Orders Binance API Documentation}
@@ -1114,6 +1168,7 @@ export class RestAPI {
      *
      * @summary Query Margin Account\'s OCO (USER_DATA)
      * @param {QueryMarginAccountsOcoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryMarginAccountsOcoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-OCO Binance API Documentation}
@@ -1131,6 +1186,7 @@ export class RestAPI {
      *
      * @summary Query Margin Account\'s Open OCO (USER_DATA)
      * @param {QueryMarginAccountsOpenOcoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryMarginAccountsOpenOcoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-Open-OCO Binance API Documentation}
@@ -1152,6 +1208,7 @@ export class RestAPI {
      *
      * @summary Query Margin Account\'s Open Orders (USER_DATA)
      * @param {QueryMarginAccountsOpenOrdersRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryMarginAccountsOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-Open-Orders Binance API Documentation}
@@ -1172,6 +1229,7 @@ export class RestAPI {
      *
      * @summary Query Margin Account\'s Order (USER_DATA)
      * @param {QueryMarginAccountsOrderRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryMarginAccountsOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-Order Binance API Documentation}
@@ -1192,6 +1250,7 @@ export class RestAPI {
      *
      * @summary Query Margin Account\'s Trade List (USER_DATA)
      * @param {QueryMarginAccountsTradeListRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryMarginAccountsTradeListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-Trade-List Binance API Documentation}
@@ -1211,6 +1270,7 @@ export class RestAPI {
      *
      * @summary Query Special key(Low Latency Trading)(TRADE)
      * @param {QuerySpecialKeyRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QuerySpecialKeyResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade/Query-Special-Key-of-Low-Latency-Trading Binance API Documentation}
@@ -1228,6 +1288,7 @@ export class RestAPI {
      *
      * @summary Query Special key List(Low Latency Trading)(TRADE)
      * @param {QuerySpecialKeyListRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QuerySpecialKeyListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade/Query-Special-Key-List-of-Low-Latency-Trading Binance API Documentation}
@@ -1249,6 +1310,7 @@ export class RestAPI {
      *
      * @summary Small Liability Exchange (MARGIN)
      * @param {SmallLiabilityExchangeRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade/Small-Liability-Exchange Binance API Documentation}
@@ -1266,6 +1328,7 @@ export class RestAPI {
      *
      * @summary Close Isolated Margin User Data Stream (USER_STREAM)
      * @param {CloseIsolatedMarginUserDataStreamRequest} requestParameters Request parameters.
+     * @deprecated
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade-data-stream/Close-Isolated-Margin-User-Data-Stream Binance API Documentation}
@@ -1283,6 +1346,7 @@ export class RestAPI {
      *
      * @summary Close Margin User Data Stream (USER_STREAM)
      * @param {CloseMarginUserDataStreamRequest} requestParameters Request parameters.
+     * @deprecated
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade-data-stream/Close-Margin-User-Data-Stream Binance API Documentation}
@@ -1300,6 +1364,7 @@ export class RestAPI {
      *
      * @summary Keepalive Isolated Margin User Data Stream (USER_STREAM)
      * @param {KeepaliveIsolatedMarginUserDataStreamRequest} requestParameters Request parameters.
+     * @deprecated
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade-data-stream/Keepalive-Isolated-Margin-User-Data-Stream Binance API Documentation}
@@ -1317,6 +1382,7 @@ export class RestAPI {
      *
      * @summary Keepalive Margin User Data Stream (USER_STREAM)
      * @param {KeepaliveMarginUserDataStreamRequest} requestParameters Request parameters.
+     * @deprecated
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade-data-stream/Keepalive-Margin-User-Data-Stream Binance API Documentation}
@@ -1334,6 +1400,7 @@ export class RestAPI {
      *
      * @summary Start Isolated Margin User Data Stream (USER_STREAM)
      * @param {StartIsolatedMarginUserDataStreamRequest} requestParameters Request parameters.
+     * @deprecated
      * @returns {Promise<RestApiResponse<StartIsolatedMarginUserDataStreamResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade-data-stream/Start-Isolated-Margin-User-Data-Stream Binance API Documentation}
@@ -1350,6 +1417,7 @@ export class RestAPI {
      * Weight: 1
      *
      * @summary Start Margin User Data Stream (USER_STREAM)
+     * @deprecated
      * @returns {Promise<RestApiResponse<StartMarginUserDataStreamResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/trade-data-stream/Start-Margin-User-Data-Stream Binance API Documentation}
@@ -1369,6 +1437,7 @@ export class RestAPI {
      *
      * @summary Get Cross Margin Transfer History (USER_DATA)
      * @param {GetCrossMarginTransferHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetCrossMarginTransferHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/transfer/Get-Cross-Margin-Transfer-History Binance API Documentation}
@@ -1388,6 +1457,7 @@ export class RestAPI {
      *
      * @summary Query Max Transfer-Out Amount (USER_DATA)
      * @param {QueryMaxTransferOutAmountRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryMaxTransferOutAmountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/margin_trading/transfer/Query-Max-Transfer-Out-Amount Binance API Documentation}
