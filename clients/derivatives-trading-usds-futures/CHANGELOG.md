@@ -1,5 +1,13 @@
 # Changelog
 
+## 14.0.0 - 2025-10-27
+
+### Changed (1)
+
+#### REST API
+
+- Marked `symbolPriceTicker` (`GET /fapi/v1/ticker/price`) as deprecated.
+
 ## 13.0.1 - 2025-10-21
 
 ### Changed (1)

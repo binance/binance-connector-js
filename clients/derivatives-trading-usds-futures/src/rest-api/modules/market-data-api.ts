@@ -1150,9 +1150,10 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 1 for a single symbol;
          * 2 when the symbol parameter is omitted
          *
-         * @summary Symbol Price Ticker(Deprecated)
+         * @summary Symbol Price Ticker
          * @param {string} [symbol]
          *
+         * @deprecated
          * @throws {RequiredError}
          */
         symbolPriceTicker: async (symbol?: string): Promise<RequestArgs> => {
@@ -1876,9 +1877,10 @@ export interface MarketDataApiInterface {
      * Weight: 1 for a single symbol;
      * 2 when the symbol parameter is omitted
      *
-     * @summary Symbol Price Ticker(Deprecated)
+     * @summary Symbol Price Ticker
      * @param {SymbolPriceTickerRequest} requestParameters Request parameters.
      *
+     * @deprecated
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApiInterface
      */
@@ -3563,7 +3565,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * Weight: 1 for a single symbol;
      * 2 when the symbol parameter is omitted
      *
-     * @summary Symbol Price Ticker(Deprecated)
+     * @summary Symbol Price Ticker
      * @param {SymbolPriceTickerRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SymbolPriceTickerResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
