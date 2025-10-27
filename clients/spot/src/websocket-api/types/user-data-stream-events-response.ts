@@ -40,9 +40,6 @@ import type { ListStatus } from './list-status';
 import type { ListStatusOInner } from './list-status-oinner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ListenKeyExpired } from './listen-key-expired';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { OutboundAccountPosition } from './outbound-account-position';
 
 /**
@@ -55,5 +52,4 @@ export type UserDataStreamEventsResponse =
     | ({ e: 'executionReport' } & ExecutionReport)
     | ({ e: 'externalLockUpdate' } & ExternalLockUpdate)
     | ({ e: 'listStatus' } & ListStatus)
-    | ({ e: 'listenKeyExpired' } & ListenKeyExpired)
     | ({ e: 'outboundAccountPosition' } & OutboundAccountPosition);

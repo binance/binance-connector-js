@@ -19,9 +19,6 @@
 import { WebsocketAPIBase, WebsocketApiResponse, WebsocketSendMsgOptions } from '@binance/common';
 import type {
     SessionSubscriptionsResponse,
-    UserDataStreamPingResponse,
-    UserDataStreamStartResponse,
-    UserDataStreamStopResponse,
     UserDataStreamSubscribeResponse,
     UserDataStreamSubscribeSignatureResponse,
     UserDataStreamUnsubscribeResponse,
@@ -49,59 +46,6 @@ export interface UserDataStreamApiInterface {
     sessionSubscriptions(
         requestParameters?: SessionSubscriptionsRequest
     ): Promise<WebsocketApiResponse<SessionSubscriptionsResponse>>;
-
-    /**
-     * Ping a user data stream to keep it alive.
-     *
-     * User data streams close automatically after 60 minutes,
-     * even if you're listening to them on WebSocket Streams.
-     * In order to keep the stream open, you have to regularly send pings using the `userDataStream.ping` request.
-     *
-     * It is recommended to send a ping once every 30 minutes.
-     *
-     * This request does not require `signature`.
-     * Weight: 2
-     *
-     * @summary WebSocket Ping user data stream
-     * @param {UserDataStreamPingRequest} requestParameters Request parameters.
-     *
-     * @returns {Promise<UserDataStreamPingResponse>}
-     * @memberof UserDataStreamApiInterface
-     */
-    userDataStreamPing(
-        requestParameters: UserDataStreamPingRequest
-    ): Promise<WebsocketApiResponse<UserDataStreamPingResponse>>;
-
-    /**
-     * Start a new user data stream.
-     * Note the stream will close in 60 minutes unless `userDataStream.ping` requests are sent regularly.
-     * This request does not require `signature`.
-     * Weight: 2
-     *
-     * @summary WebSocket Start user data stream
-     * @param {UserDataStreamStartRequest} requestParameters Request parameters.
-     *
-     * @returns {Promise<UserDataStreamStartResponse>}
-     * @memberof UserDataStreamApiInterface
-     */
-    userDataStreamStart(
-        requestParameters?: UserDataStreamStartRequest
-    ): Promise<WebsocketApiResponse<UserDataStreamStartResponse>>;
-
-    /**
-     * Explicitly stop and close the user data stream.
-     * This request does not require `signature`.
-     * Weight: 2
-     *
-     * @summary WebSocket Stop user data stream
-     * @param {UserDataStreamStopRequest} requestParameters Request parameters.
-     *
-     * @returns {Promise<UserDataStreamStopResponse>}
-     * @memberof UserDataStreamApiInterface
-     */
-    userDataStreamStop(
-        requestParameters: UserDataStreamStopRequest
-    ): Promise<WebsocketApiResponse<UserDataStreamStopResponse>>;
 
     /**
      * Subscribe to the User Data Stream in the current WebSocket connection.
@@ -157,59 +101,6 @@ export interface SessionSubscriptionsRequest {
      * Unique WebSocket request ID.
      * @type {string}
      * @memberof UserDataStreamApiSessionSubscriptions
-     */
-    readonly id?: string;
-}
-
-/**
- * Request parameters for userDataStreamPing operation in UserDataStreamApi.
- * @interface UserDataStreamPingRequest
- */
-export interface UserDataStreamPingRequest {
-    /**
-     *
-     * @type {string}
-     * @memberof UserDataStreamApiUserDataStreamPing
-     */
-    readonly listenKey: string;
-
-    /**
-     * Unique WebSocket request ID.
-     * @type {string}
-     * @memberof UserDataStreamApiUserDataStreamPing
-     */
-    readonly id?: string;
-}
-
-/**
- * Request parameters for userDataStreamStart operation in UserDataStreamApi.
- * @interface UserDataStreamStartRequest
- */
-export interface UserDataStreamStartRequest {
-    /**
-     * Unique WebSocket request ID.
-     * @type {string}
-     * @memberof UserDataStreamApiUserDataStreamStart
-     */
-    readonly id?: string;
-}
-
-/**
- * Request parameters for userDataStreamStop operation in UserDataStreamApi.
- * @interface UserDataStreamStopRequest
- */
-export interface UserDataStreamStopRequest {
-    /**
-     *
-     * @type {string}
-     * @memberof UserDataStreamApiUserDataStreamStop
-     */
-    readonly listenKey: string;
-
-    /**
-     * Unique WebSocket request ID.
-     * @type {string}
-     * @memberof UserDataStreamApiUserDataStreamStop
      */
     readonly id?: string;
 }
@@ -296,77 +187,6 @@ export class UserDataStreamApi implements UserDataStreamApiInterface {
     }
 
     /**
-     * Ping a user data stream to keep it alive.
-     *
-     * User data streams close automatically after 60 minutes,
-     * even if you're listening to them on WebSocket Streams.
-     * In order to keep the stream open, you have to regularly send pings using the `userDataStream.ping` request.
-     *
-     * It is recommended to send a ping once every 30 minutes.
-     *
-     * This request does not require `signature`.
-     * Weight: 2
-     *
-     * @summary WebSocket Ping user data stream
-     * @param {UserDataStreamPingRequest} requestParameters Request parameters.
-     * @returns {Promise<UserDataStreamPingResponse>}
-     * @memberof UserDataStreamApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#ping-user-data-stream-user_stream Binance API Documentation}
-     */
-    public userDataStreamPing(
-        requestParameters: UserDataStreamPingRequest
-    ): Promise<WebsocketApiResponse<UserDataStreamPingResponse>> {
-        return this.websocketBase.sendMessage<UserDataStreamPingResponse>(
-            '/userDataStream.ping'.slice(1),
-            requestParameters as unknown as WebsocketSendMsgOptions,
-            { isSigned: false, withApiKey: true }
-        );
-    }
-
-    /**
-     * Start a new user data stream.
-     * Note the stream will close in 60 minutes unless `userDataStream.ping` requests are sent regularly.
-     * This request does not require `signature`.
-     * Weight: 2
-     *
-     * @summary WebSocket Start user data stream
-     * @param {UserDataStreamStartRequest} requestParameters Request parameters.
-     * @returns {Promise<UserDataStreamStartResponse>}
-     * @memberof UserDataStreamApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#start-user-data-stream-user_stream Binance API Documentation}
-     */
-    public userDataStreamStart(
-        requestParameters: UserDataStreamStartRequest = {}
-    ): Promise<WebsocketApiResponse<UserDataStreamStartResponse>> {
-        return this.websocketBase.sendMessage<UserDataStreamStartResponse>(
-            '/userDataStream.start'.slice(1),
-            requestParameters as unknown as WebsocketSendMsgOptions,
-            { isSigned: false, withApiKey: true }
-        );
-    }
-
-    /**
-     * Explicitly stop and close the user data stream.
-     * This request does not require `signature`.
-     * Weight: 2
-     *
-     * @summary WebSocket Stop user data stream
-     * @param {UserDataStreamStopRequest} requestParameters Request parameters.
-     * @returns {Promise<UserDataStreamStopResponse>}
-     * @memberof UserDataStreamApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#stop-user-data-stream-user_stream Binance API Documentation}
-     */
-    public userDataStreamStop(
-        requestParameters: UserDataStreamStopRequest
-    ): Promise<WebsocketApiResponse<UserDataStreamStopResponse>> {
-        return this.websocketBase.sendMessage<UserDataStreamStopResponse>(
-            '/userDataStream.stop'.slice(1),
-            requestParameters as unknown as WebsocketSendMsgOptions,
-            { isSigned: false, withApiKey: true }
-        );
-    }
-
-    /**
      * Subscribe to the User Data Stream in the current WebSocket connection.
      * Weight: 2
      *
@@ -394,7 +214,7 @@ export class UserDataStreamApi implements UserDataStreamApiInterface {
      * @param {UserDataStreamSubscribeSignatureRequest} requestParameters Request parameters.
      * @returns {Promise<UserDataStreamSubscribeSignatureResponse>}
      * @memberof UserDataStreamApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#subscribe-to-user-data-stream-through-signature-subscription-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#subscribe-to-user-data-stream-through-signature-subscription-user_stream Binance API Documentation}
      */
     public userDataStreamSubscribeSignature(
         requestParameters: UserDataStreamSubscribeSignatureRequest = {}

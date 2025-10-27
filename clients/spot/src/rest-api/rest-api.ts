@@ -21,7 +21,6 @@ import { AccountApi } from './modules/account-api';
 import { GeneralApi } from './modules/general-api';
 import { MarketApi } from './modules/market-api';
 import { TradeApi } from './modules/trade-api';
-import { UserDataStreamApi } from './modules/user-data-stream-api';
 
 import type {
     AccountCommissionRequest,
@@ -69,10 +68,6 @@ import type {
     SorOrderRequest,
     SorOrderTestRequest,
 } from './modules/trade-api';
-import type {
-    DeleteUserDataStreamRequest,
-    PutUserDataStreamRequest,
-} from './modules/user-data-stream-api';
 
 import type {
     AccountCommissionResponse,
@@ -120,7 +115,6 @@ import type {
     SorOrderResponse,
     SorOrderTestResponse,
 } from './types';
-import type { NewUserDataStreamResponse } from './types';
 
 export class RestAPI {
     private configuration: ConfigurationRestAPI;
@@ -128,7 +122,6 @@ export class RestAPI {
     private generalApi: GeneralApi;
     private marketApi: MarketApi;
     private tradeApi: TradeApi;
-    private userDataStreamApi: UserDataStreamApi;
 
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
@@ -136,7 +129,6 @@ export class RestAPI {
         this.generalApi = new GeneralApi(configuration);
         this.marketApi = new MarketApi(configuration);
         this.tradeApi = new TradeApi(configuration);
-        this.userDataStreamApi = new UserDataStreamApi(configuration);
     }
 
     /**
@@ -181,6 +173,7 @@ export class RestAPI {
      *
      * @summary Query Commission Rates
      * @param {AccountCommissionRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<AccountCommissionResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-commission-rates-user_data Binance API Documentation}
@@ -199,6 +192,7 @@ export class RestAPI {
      *
      * @summary Query all Order lists
      * @param {AllOrderListRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<AllOrderListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-all-order-lists-user_data Binance API Documentation}
@@ -215,6 +209,7 @@ export class RestAPI {
      *
      * @summary All orders
      * @param {AllOrdersRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<AllOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#all-orders-user_data Binance API Documentation}
@@ -229,6 +224,7 @@ export class RestAPI {
      *
      * @summary Account information
      * @param {GetAccountRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#account-information-user_data Binance API Documentation}
@@ -245,6 +241,7 @@ export class RestAPI {
      *
      * @summary Current open orders
      * @param {GetOpenOrdersRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#current-open-orders-user_data Binance API Documentation}
@@ -261,6 +258,7 @@ export class RestAPI {
      *
      * @summary Query order
      * @param {GetOrderRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-order-user_data Binance API Documentation}
@@ -275,6 +273,7 @@ export class RestAPI {
      *
      * @summary Query Order list
      * @param {GetOrderListRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetOrderListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-order-list-user_data Binance API Documentation}
@@ -291,6 +290,7 @@ export class RestAPI {
      *
      * @summary Query Allocations
      * @param {MyAllocationsRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<MyAllocationsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-allocations-user_data Binance API Documentation}
@@ -307,6 +307,7 @@ export class RestAPI {
      *
      * @summary Query relevant filters
      * @param {MyFiltersRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<MyFiltersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-relevant-filters-user_data Binance API Documentation}
@@ -332,6 +333,7 @@ export class RestAPI {
      *
      * @summary Query Prevented Matches
      * @param {MyPreventedMatchesRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<MyPreventedMatchesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-prevented-matches-user_data Binance API Documentation}
@@ -351,6 +353,7 @@ export class RestAPI {
      *
      * @summary Account trade list
      * @param {MyTradesRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<MyTradesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#account-trade-list-user_data Binance API Documentation}
@@ -365,6 +368,7 @@ export class RestAPI {
      *
      * @summary Query Open Order lists
      * @param {OpenOrderListRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<OpenOrderListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-open-order-lists-user_data Binance API Documentation}
@@ -381,6 +385,7 @@ export class RestAPI {
      *
      * @summary Query Order Amendments
      * @param {OrderAmendmentsRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<OrderAmendmentsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-order-amendments-user_data Binance API Documentation}
@@ -397,6 +402,7 @@ export class RestAPI {
      *
      * @summary Query Unfilled Order Count
      * @param {RateLimitOrderRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<RateLimitOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-unfilled-order-count-user_data Binance API Documentation}
@@ -413,6 +419,7 @@ export class RestAPI {
      *
      * @summary Exchange information
      * @param {ExchangeInfoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<ExchangeInfoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#exchange-information Binance API Documentation}
@@ -428,6 +435,7 @@ export class RestAPI {
      * Weight: 1
      *
      * @summary Test connectivity
+     *
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#test-connectivity Binance API Documentation}
@@ -441,6 +449,7 @@ export class RestAPI {
      * Weight: 1
      *
      * @summary Check server time
+     *
      * @returns {Promise<RestApiResponse<TimeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#check-server-time Binance API Documentation}
@@ -455,6 +464,7 @@ export class RestAPI {
      *
      * @summary Compressed/Aggregate trades list
      * @param {AggTradesRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<AggTradesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#compressedaggregate-trades-list Binance API Documentation}
@@ -469,6 +479,7 @@ export class RestAPI {
      *
      * @summary Current average price
      * @param {AvgPriceRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<AvgPriceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#current-average-price Binance API Documentation}
@@ -490,6 +501,7 @@ export class RestAPI {
      *
      * @summary Order book
      * @param {DepthRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<DepthResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#order-book Binance API Documentation}
@@ -504,6 +516,7 @@ export class RestAPI {
      *
      * @summary Recent trades list
      * @param {GetTradesRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetTradesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#recent-trades-list Binance API Documentation}
@@ -518,6 +531,7 @@ export class RestAPI {
      *
      * @summary Old trade lookup
      * @param {HistoricalTradesRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<HistoricalTradesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#old-trade-lookup Binance API Documentation}
@@ -535,6 +549,7 @@ export class RestAPI {
      *
      * @summary Kline/Candlestick data
      * @param {KlinesRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<KlinesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#klinecandlestick-data Binance API Documentation}
@@ -549,6 +564,7 @@ export class RestAPI {
      *
      * @summary Rolling window price change statistics
      * @param {TickerRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<TickerResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#rolling-window-price-change-statistics Binance API Documentation}
@@ -599,6 +615,7 @@ export class RestAPI {
      *
      * @summary 24hr ticker price change statistics
      * @param {Ticker24hrRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<Ticker24hrResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#24hr-ticker-price-change-statistics Binance API Documentation}
@@ -639,6 +656,7 @@ export class RestAPI {
      *
      * @summary Symbol order book ticker
      * @param {TickerBookTickerRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<TickerBookTickerResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-order-book-ticker Binance API Documentation}
@@ -679,6 +697,7 @@ export class RestAPI {
      *
      * @summary Symbol price ticker
      * @param {TickerPriceRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<TickerPriceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-price-ticker Binance API Documentation}
@@ -695,6 +714,7 @@ export class RestAPI {
      *
      * @summary Trading Day Ticker
      * @param {TickerTradingDayRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<TickerTradingDayResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#trading-day-ticker Binance API Documentation}
@@ -713,6 +733,7 @@ export class RestAPI {
      *
      * @summary UIKlines
      * @param {UiKlinesRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<UiKlinesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#uiklines Binance API Documentation}
@@ -728,6 +749,7 @@ export class RestAPI {
      *
      * @summary Cancel All Open Orders on a Symbol
      * @param {DeleteOpenOrdersRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<DeleteOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#cancel-all-open-orders-on-a-symbol-trade Binance API Documentation}
@@ -744,6 +766,7 @@ export class RestAPI {
      *
      * @summary Cancel order
      * @param {DeleteOrderRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<DeleteOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#cancel-order-trade Binance API Documentation}
@@ -760,6 +783,7 @@ export class RestAPI {
      *
      * @summary Cancel Order list
      * @param {DeleteOrderListRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<DeleteOrderListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#cancel-order-list-trade Binance API Documentation}
@@ -778,6 +802,7 @@ export class RestAPI {
      *
      * @summary New order
      * @param {NewOrderRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<NewOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-order-trade Binance API Documentation}
@@ -796,6 +821,7 @@ export class RestAPI {
      *
      * @summary Order Amend Keep Priority
      * @param {OrderAmendKeepPriorityRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<OrderAmendKeepPriorityResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#order-amend-keep-priority-trade Binance API Documentation}
@@ -816,6 +842,7 @@ export class RestAPI {
      *
      * @summary Cancel an Existing Order and Send a New Order
      * @param {OrderCancelReplaceRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<OrderCancelReplaceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#cancel-an-existing-order-and-send-a-new-order-trade Binance API Documentation}
@@ -845,6 +872,7 @@ export class RestAPI {
      *
      * @summary New Order list - OCO
      * @param {OrderListOcoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<OrderListOcoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-order-list---oco-trade Binance API Documentation}
@@ -870,6 +898,7 @@ export class RestAPI {
      *
      * @summary New Order list - OTO
      * @param {OrderListOtoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<OrderListOtoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-order-list---oto-trade Binance API Documentation}
@@ -895,6 +924,7 @@ export class RestAPI {
      *
      * @summary New Order list - OTOCO
      * @param {OrderListOtocoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<OrderListOtocoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-order-list---otoco-trade Binance API Documentation}
@@ -921,6 +951,7 @@ export class RestAPI {
      *
      * @summary New OCO - Deprecated
      * @param {OrderOcoRequest} requestParameters Request parameters.
+     * @deprecated
      * @returns {Promise<RestApiResponse<OrderOcoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-oco---deprecated-trade Binance API Documentation}
@@ -939,6 +970,7 @@ export class RestAPI {
      *
      * @summary Test new order
      * @param {OrderTestRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<OrderTestResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#test-new-order-trade Binance API Documentation}
@@ -959,6 +991,7 @@ export class RestAPI {
      *
      * @summary New order using SOR
      * @param {SorOrderRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<SorOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-order-using-sor-trade Binance API Documentation}
@@ -977,6 +1010,7 @@ export class RestAPI {
      *
      * @summary Test new order using SOR
      * @param {SorOrderTestRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<SorOrderTestResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#test-new-order-using-sor-trade Binance API Documentation}
@@ -985,51 +1019,5 @@ export class RestAPI {
         requestParameters: SorOrderTestRequest
     ): Promise<RestApiResponse<SorOrderTestResponse>> {
         return this.tradeApi.sorOrderTest(requestParameters);
-    }
-
-    /**
-     * Close out a user data stream.
-     * Weight: 2
-     *
-     * @summary Close user data stream
-     * @param {DeleteUserDataStreamRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<void>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/user-data-stream-endpoints---deprecated#close-user-data-stream-user_stream Binance API Documentation}
-     */
-    deleteUserDataStream(
-        requestParameters: DeleteUserDataStreamRequest
-    ): Promise<RestApiResponse<void>> {
-        return this.userDataStreamApi.deleteUserDataStream(requestParameters);
-    }
-
-    /**
-     * Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent.
-     * This request does not require `signature`.
-     * Weight: 2
-     *
-     * @summary Start user data stream
-     * @returns {Promise<RestApiResponse<NewUserDataStreamResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/user-data-stream-endpoints---deprecated#start-user-data-stream-user_stream Binance API Documentation}
-     */
-    newUserDataStream(): Promise<RestApiResponse<NewUserDataStreamResponse>> {
-        return this.userDataStreamApi.newUserDataStream();
-    }
-
-    /**
-     * Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes. It's recommended to send a ping about every 30 minutes.
-     *
-     * This request does not require `signature`.
-     * Weight: 2
-     *
-     * @summary Keepalive user data stream
-     * @param {PutUserDataStreamRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<void>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/user-data-stream-endpoints---deprecated#keepalive-user-data-stream-user_stream Binance API Documentation}
-     */
-    putUserDataStream(requestParameters: PutUserDataStreamRequest): Promise<RestApiResponse<void>> {
-        return this.userDataStreamApi.putUserDataStream(requestParameters);
     }
 }

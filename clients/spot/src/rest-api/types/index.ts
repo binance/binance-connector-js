@@ -59,7 +59,6 @@ export * from './my-trades-response';
 export * from './my-trades-response-inner';
 export * from './new-order-response';
 export * from './new-order-response-fills-inner';
-export * from './new-user-data-stream-response';
 export * from './notional-filter';
 export * from './open-order-list-response';
 export * from './open-order-list-response-inner';

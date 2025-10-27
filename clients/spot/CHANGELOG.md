@@ -1,5 +1,31 @@
 # Changelog
 
+## 21.0.0 - 2025-10-27
+
+### Changed (2)
+
+#### REST API
+
+- Marked `orderOco` (`POST /api/v3/order/oco`) as deprecated.
+
+#### WebSocket API
+
+- Marked `orderListPlace` (`orderList.place` method) as deprecated.
+
+### Removed (6)
+
+#### REST API
+
+- `deleteUserDataStream()` (`DELETE /api/v3/userDataStream`)
+- `newUserDataStream()` (`POST /api/v3/userDataStream`)
+- `putUserDataStream()` (`PUT /api/v3/userDataStream`)
+
+#### WebSocket API
+
+- `/userDataStream.ping()` (`userDataStream.ping` method)
+- `/userDataStream.start()` (`userDataStream.start` method)
+- `/userDataStream.stop()` (`userDataStream.stop` method)
+
 ## 20.0.1 - 2025-10-21
 
 ### Changed (1)

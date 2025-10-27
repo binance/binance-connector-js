@@ -154,6 +154,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary WebSocket Aggregate Trade Streams
      * @param {AggTradeRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<AggTradeResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#aggregate-trade-streams Binance API Documentation}
@@ -168,6 +169,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary WebSocket All Market Rolling Window Statistics Streams
      * @param {AllMarketRollingWindowTickerRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<AllMarketRollingWindowTickerResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#all-market-rolling-window-statistics-streams Binance API Documentation}
@@ -183,6 +185,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary WebSocket All Market Mini Tickers Stream
      * @param {AllMiniTickerRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<AllMiniTickerResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#all-market-mini-tickers-stream Binance API Documentation}
@@ -198,6 +201,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary WebSocket All Market Tickers Stream
      * @param {AllTickerRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<AllTickerResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#all-market-tickers-stream Binance API Documentation}
@@ -211,6 +215,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary WebSocket Average Price
      * @param {AvgPriceRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<AvgPriceResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#average-price Binance API Documentation}
@@ -225,6 +230,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary WebSocket Individual Symbol Book Ticker Streams
      * @param {BookTickerRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<BookTickerResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#individual-symbol-book-ticker-streams Binance API Documentation}
@@ -238,6 +244,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary WebSocket Diff. Depth Stream
      * @param {DiffBookDepthRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<DiffBookDepthResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#diff-depth-stream Binance API Documentation}
@@ -253,6 +260,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary WebSocket Kline/Candlestick Streams for UTC
      * @param {KlineRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<KlineResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#klinecandlestick-streams-for-utc Binance API Documentation}
@@ -266,6 +274,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary WebSocket Kline/Candlestick Streams with timezone offset
      * @param {KlineOffsetRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<KlineOffsetResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#klinecandlestick-streams-with-timezone-offset Binance API Documentation}
@@ -279,6 +288,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary WebSocket Individual Symbol Mini Ticker Stream
      * @param {MiniTickerRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<MiniTickerResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#individual-symbol-mini-ticker-stream Binance API Documentation}
@@ -292,6 +302,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary WebSocket Partial Book Depth Streams
      * @param {PartialBookDepthRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<PartialBookDepthResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#partial-book-depth-streams Binance API Documentation}
@@ -307,6 +318,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary WebSocket Individual Symbol Rolling Window Statistics Streams
      * @param {RollingWindowTickerRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<RollingWindowTickerResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#individual-symbol-rolling-window-statistics-streams Binance API Documentation}
@@ -322,6 +334,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary WebSocket Individual Symbol Ticker Streams
      * @param {TickerRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<TickerResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#individual-symbol-ticker-streams Binance API Documentation}
@@ -335,6 +348,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary WebSocket Trade Streams
      * @param {TradeRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<TradeResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#trade-streams Binance API Documentation}

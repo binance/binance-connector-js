@@ -85,9 +85,6 @@ import type {
 } from './modules/trade-api';
 import type {
     SessionSubscriptionsRequest,
-    UserDataStreamPingRequest,
-    UserDataStreamStartRequest,
-    UserDataStreamStopRequest,
     UserDataStreamSubscribeRequest,
     UserDataStreamSubscribeSignatureRequest,
     UserDataStreamUnsubscribeRequest,
@@ -142,9 +139,6 @@ import type {
 } from './types';
 import type {
     SessionSubscriptionsResponse,
-    UserDataStreamPingResponse,
-    UserDataStreamStartResponse,
-    UserDataStreamStopResponse,
     UserDataStreamSubscribeResponse,
     UserDataStreamSubscribeSignatureResponse,
     UserDataStreamUnsubscribeResponse,
@@ -243,6 +237,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Account Commission Rates
      * @param {AccountCommissionRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<AccountCommissionResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-commission-rates-user_data Binance API Documentation}
      */
@@ -258,6 +253,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Unfilled Order Count
      * @param {AccountRateLimitsOrdersRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<AccountRateLimitsOrdersResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#unfilled-order-count-user_data Binance API Documentation}
      */
@@ -273,6 +269,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Account information
      * @param {AccountStatusRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<AccountStatusResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-information-user_data Binance API Documentation}
      */
@@ -288,6 +285,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Account order list history
      * @param {AllOrderListsRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<AllOrderListsResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-order-list-history-user_data Binance API Documentation}
      */
@@ -303,6 +301,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Account order history
      * @param {AllOrdersRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<AllOrdersResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-order-history-user_data Binance API Documentation}
      */
@@ -318,6 +317,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Account allocations
      * @param {MyAllocationsRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<MyAllocationsResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-allocations-user_data Binance API Documentation}
      */
@@ -333,6 +333,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Query Relevant Filters
      * @param {MyFiltersRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<MyFiltersResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#query-relevant-filters-user_data Binance API Documentation}
      */
@@ -359,6 +360,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Account prevented matches
      * @param {MyPreventedMatchesRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<MyPreventedMatchesResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-prevented-matches-user_data Binance API Documentation}
      */
@@ -377,6 +379,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Account trade history
      * @param {MyTradesRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<MyTradesResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-trade-history-user_data Binance API Documentation}
      */
@@ -395,6 +398,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Current open Order lists
      * @param {OpenOrderListsStatusRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<OpenOrderListsStatusResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#current-open-order-lists-user_data Binance API Documentation}
      */
@@ -420,6 +424,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Current open orders
      * @param {OpenOrdersStatusRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<OpenOrdersStatusResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#current-open-orders-user_data Binance API Documentation}
      */
@@ -435,6 +440,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Query Order Amendments
      * @param {OrderAmendmentsRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<OrderAmendmentsResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#query-order-amendments-user_data Binance API Documentation}
      */
@@ -452,6 +458,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Query Order list
      * @param {OrderListStatusRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<OrderListStatusResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#query-order-list-user_data Binance API Documentation}
      */
@@ -467,6 +474,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Query order
      * @param {OrderStatusRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<OrderStatusResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#query-order-user_data Binance API Documentation}
      */
@@ -487,6 +495,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Log in with API key
      * @param {SessionLogonRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<SessionLogonResponse>[]>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/authentication-requests#log-in-with-api-key-signed Binance API Documentation}
      */
@@ -507,6 +516,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Log out of the session
      * @param {SessionLogoutRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<SessionLogoutResponse>[]>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/authentication-requests#log-out-of-the-session Binance API Documentation}
      */
@@ -523,6 +533,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Query session status
      * @param {SessionStatusRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<SessionStatusResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/authentication-requests#query-session-status Binance API Documentation}
      */
@@ -538,6 +549,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Exchange information
      * @param {ExchangeInfoRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<ExchangeInfoResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-requests#exchange-information Binance API Documentation}
      */
@@ -553,6 +565,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Test connectivity
      * @param {PingRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<PingResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-requests#test-connectivity Binance API Documentation}
      */
@@ -566,6 +579,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Check server time
      * @param {TimeRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<TimeResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-requests#check-server-time Binance API Documentation}
      */
@@ -579,6 +593,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Current average price
      * @param {AvgPriceRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<AvgPriceResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#current-average-price Binance API Documentation}
      */
@@ -608,6 +623,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Order book
      * @param {DepthRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<DepthResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#order-book Binance API Documentation}
      */
@@ -630,6 +646,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Klines
      * @param {KlinesRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<KlinesResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#klines Binance API Documentation}
      */
@@ -651,6 +668,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Rolling window price change statistics
      * @param {TickerRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<TickerResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#rolling-window-price-change-statistics Binance API Documentation}
      */
@@ -679,6 +697,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket 24hr ticker price change statistics
      * @param {Ticker24hrRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<Ticker24hrResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#24hr-ticker-price-change-statistics Binance API Documentation}
      */
@@ -704,6 +723,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Symbol order book ticker
      * @param {TickerBookRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<TickerBookResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#symbol-order-book-ticker Binance API Documentation}
      */
@@ -730,6 +750,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Symbol price ticker
      * @param {TickerPriceRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<TickerPriceResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#symbol-price-ticker Binance API Documentation}
      */
@@ -745,6 +766,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Trading Day Ticker
      * @param {TickerTradingDayRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<TickerTradingDayResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#trading-day-ticker Binance API Documentation}
      */
@@ -771,6 +793,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Aggregate trades
      * @param {TradesAggregateRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<TradesAggregateResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#aggregate-trades Binance API Documentation}
      */
@@ -786,6 +809,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Historical trades
      * @param {TradesHistoricalRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<TradesHistoricalResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#historical-trades Binance API Documentation}
      */
@@ -805,6 +829,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Recent trades
      * @param {TradesRecentRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<TradesRecentResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#recent-trades Binance API Documentation}
      */
@@ -823,6 +848,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket UI Klines
      * @param {UiKlinesRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<UiKlinesResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#ui-klines Binance API Documentation}
      */
@@ -837,6 +863,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Cancel open orders
      * @param {OpenOrdersCancelAllRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<OpenOrdersCancelAllResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#cancel-open-orders-trade Binance API Documentation}
      */
@@ -856,6 +883,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Order Amend Keep Priority
      * @param {OrderAmendKeepPriorityRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<OrderAmendKeepPriorityResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#order-amend-keep-priority-trade Binance API Documentation}
      */
@@ -871,6 +899,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Cancel order
      * @param {OrderCancelRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<OrderCancelResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#cancel-order-trade Binance API Documentation}
      */
@@ -888,6 +917,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Cancel and replace order
      * @param {OrderCancelReplaceRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<OrderCancelReplaceResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#cancel-and-replace-order-trade Binance API Documentation}
      */
@@ -903,6 +933,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Cancel Order list
      * @param {OrderListCancelRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<OrderListCancelResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#cancel-order-list-trade Binance API Documentation}
      */
@@ -924,6 +955,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Place new OCO - Deprecated
      * @param {OrderListPlaceRequest} requestParameters Request parameters.
+     * @deprecated
      * @returns Promise<WebsocketApiResponse<OrderListPlaceResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#place-new-oco---deprecated-trade Binance API Documentation}
      */
@@ -952,6 +984,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Place new Order list - OCO
      * @param {OrderListPlaceOcoRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<OrderListPlaceOcoResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#place-new-order-list---oco-trade Binance API Documentation}
      */
@@ -976,6 +1009,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Place new Order list - OTO
      * @param {OrderListPlaceOtoRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<OrderListPlaceOtoResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#place-new-order-list---oto-trade Binance API Documentation}
      */
@@ -1000,6 +1034,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Place new Order list - OTOCO
      * @param {OrderListPlaceOtocoRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<OrderListPlaceOtocoResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#place-new-order-list---otoco-trade Binance API Documentation}
      */
@@ -1017,6 +1052,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Place new order
      * @param {OrderPlaceRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<OrderPlaceResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#place-new-order-trade Binance API Documentation}
      */
@@ -1038,6 +1074,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Test new order
      * @param {OrderTestRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<OrderTestResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#test-new-order-trade Binance API Documentation}
      */
@@ -1059,6 +1096,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Place new order using SOR
      * @param {SorOrderPlaceRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<SorOrderPlaceResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#place-new-order-using-sor-trade Binance API Documentation}
      */
@@ -1078,6 +1116,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Test new order using SOR
      * @param {SorOrderTestRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<SorOrderTestResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#test-new-order-using-sor-trade Binance API Documentation}
      */
@@ -1096,6 +1135,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Listing all subscriptions
      * @param {SessionSubscriptionsRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<SessionSubscriptionsResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#listing-all-subscriptions Binance API Documentation}
      */
@@ -1106,68 +1146,13 @@ export class WebsocketAPIConnection {
     }
 
     /**
-     * Ping a user data stream to keep it alive.
-     *
-     * User data streams close automatically after 60 minutes,
-     * even if you're listening to them on WebSocket Streams.
-     * In order to keep the stream open, you have to regularly send pings using the `userDataStream.ping` request.
-     *
-     * It is recommended to send a ping once every 30 minutes.
-     *
-     * This request does not require `signature`.
-     * Weight: 2
-     *
-     * @summary WebSocket Ping user data stream
-     * @param {UserDataStreamPingRequest} requestParameters Request parameters.
-     * @returns Promise<WebsocketApiResponse<UserDataStreamPingResponse>>
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#ping-user-data-stream-user_stream Binance API Documentation}
-     */
-    userDataStreamPing(
-        requestParameters: UserDataStreamPingRequest
-    ): Promise<WebsocketApiResponse<UserDataStreamPingResponse>> {
-        return this.userDataStreamApi.userDataStreamPing(requestParameters);
-    }
-
-    /**
-     * Start a new user data stream.
-     * Note the stream will close in 60 minutes unless `userDataStream.ping` requests are sent regularly.
-     * This request does not require `signature`.
-     * Weight: 2
-     *
-     * @summary WebSocket Start user data stream
-     * @param {UserDataStreamStartRequest} requestParameters Request parameters.
-     * @returns Promise<WebsocketApiResponse<UserDataStreamStartResponse>>
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#start-user-data-stream-user_stream Binance API Documentation}
-     */
-    userDataStreamStart(
-        requestParameters: UserDataStreamStartRequest = {}
-    ): Promise<WebsocketApiResponse<UserDataStreamStartResponse>> {
-        return this.userDataStreamApi.userDataStreamStart(requestParameters);
-    }
-
-    /**
-     * Explicitly stop and close the user data stream.
-     * This request does not require `signature`.
-     * Weight: 2
-     *
-     * @summary WebSocket Stop user data stream
-     * @param {UserDataStreamStopRequest} requestParameters Request parameters.
-     * @returns Promise<WebsocketApiResponse<UserDataStreamStopResponse>>
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#stop-user-data-stream-user_stream Binance API Documentation}
-     */
-    userDataStreamStop(
-        requestParameters: UserDataStreamStopRequest
-    ): Promise<WebsocketApiResponse<UserDataStreamStopResponse>> {
-        return this.userDataStreamApi.userDataStreamStop(requestParameters);
-    }
-
-    /**
      * Subscribe to the User Data Stream in the current WebSocket connection.
      * Weight: 2
      *
      * @summary WebSocket Subscribe to User Data Stream
      * @param {UserDataStreamSubscribeRequest} requestParameters Request parameters.
      * @param {string} [id] Optional custom stream identifier.
+     *
      * @returns Promise<{response: WebsocketApiResponse<UserDataStreamSubscribeResponse>, stream: WebsocketStream<object>}>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#subscribe-to-user-data-stream-user_stream Binance API Documentation}
      */
@@ -1200,8 +1185,9 @@ export class WebsocketAPIConnection {
      * @summary WebSocket Subscribe to User Data Stream through signature subscription
      * @param {UserDataStreamSubscribeSignatureRequest} requestParameters Request parameters.
      * @param {string} [id] Optional custom stream identifier.
+     *
      * @returns Promise<{response: WebsocketApiResponse<UserDataStreamSubscribeSignatureResponse>, stream: WebsocketStream<object>}>
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#subscribe-to-user-data-stream-through-signature-subscription-user_data Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#subscribe-to-user-data-stream-through-signature-subscription-user_stream Binance API Documentation}
      */
     userDataStreamSubscribeSignature(
         requestParameters: UserDataStreamSubscribeSignatureRequest = {},
@@ -1233,6 +1219,7 @@ export class WebsocketAPIConnection {
      *
      * @summary WebSocket Unsubscribe from User Data Stream
      * @param {UserDataStreamUnsubscribeRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<UserDataStreamUnsubscribeResponse>>
      * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-Data-Stream-requests#unsubscribe-from-user-data-stream Binance API Documentation}
      */

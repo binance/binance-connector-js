@@ -128,7 +128,7 @@ export interface TradeApiInterface {
      *
      * @summary WebSocket Place new OCO - Deprecated
      * @param {OrderListPlaceRequest} requestParameters Request parameters.
-     *
+     * @deprecated
      * @returns {Promise<OrderListPlaceResponse>}
      * @memberof TradeApiInterface
      */
