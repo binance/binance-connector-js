@@ -165,6 +165,7 @@ export class RestAPI {
      *
      * @summary ETH Staking account(USER_DATA)
      * @param {EthStakingAccountRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<EthStakingAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/eth-staking/account/ETH-Staking-account Binance API Documentation}
@@ -182,6 +183,7 @@ export class RestAPI {
      *
      * @summary Get current ETH staking quota(USER_DATA)
      * @param {GetCurrentEthStakingQuotaRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetCurrentEthStakingQuotaResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/eth-staking/account/Get-current-ETH-staking-quota Binance API Documentation}
@@ -204,6 +206,7 @@ export class RestAPI {
      *
      * @summary Get ETH redemption history(USER_DATA)
      * @param {GetEthRedemptionHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetEthRedemptionHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/eth-staking/history/Get-ETH-redemption-history Binance API Documentation}
@@ -226,6 +229,7 @@ export class RestAPI {
      *
      * @summary Get ETH staking history(USER_DATA)
      * @param {GetEthStakingHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetEthStakingHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/eth-staking/history/Get-ETH-staking-history Binance API Documentation}
@@ -248,6 +252,7 @@ export class RestAPI {
      *
      * @summary Get WBETH Rate History(USER_DATA)
      * @param {GetWbethRateHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetWbethRateHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/eth-staking/history/Get-BETH-Rate-History Binance API Documentation}
@@ -270,6 +275,7 @@ export class RestAPI {
      *
      * @summary Get WBETH rewards history(USER_DATA)
      * @param {GetWbethRewardsHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetWbethRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/eth-staking/history/Get-WBETH-rewards-history Binance API Documentation}
@@ -292,6 +298,7 @@ export class RestAPI {
      *
      * @summary Get WBETH unwrap history(USER_DATA)
      * @param {GetWbethUnwrapHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetWbethUnwrapHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/eth-staking/history/Get-WBETH-unwrap-history Binance API Documentation}
@@ -314,6 +321,7 @@ export class RestAPI {
      *
      * @summary Get WBETH wrap history(USER_DATA)
      * @param {GetWbethWrapHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetWbethWrapHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/eth-staking/history/Get-WBETH-wrap-history Binance API Documentation}
@@ -333,6 +341,7 @@ export class RestAPI {
      *
      * @summary Redeem ETH(TRADE)
      * @param {RedeemEthRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<RedeemEthResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/eth-staking/staking/Redeem-ETH Binance API Documentation}
@@ -350,6 +359,7 @@ export class RestAPI {
      *
      * @summary Subscribe ETH Staking(TRADE)
      * @param {SubscribeEthStakingRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<SubscribeEthStakingResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/eth-staking/staking/Subscribe-ETH-Staking Binance API Documentation}
@@ -369,6 +379,7 @@ export class RestAPI {
      *
      * @summary Wrap BETH(TRADE)
      * @param {WrapBethRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<WrapBethResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/eth-staking/staking/Wrap-BETH Binance API Documentation}
@@ -384,6 +395,7 @@ export class RestAPI {
      *
      * @summary Get On-chain Yields Locked Personal Left Quota (USER_DATA)
      * @param {GetOnChainYieldsLockedPersonalLeftQuotaRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedPersonalLeftQuotaResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/account/Get-Onchain-Locked-Personal-Left-Quota Binance API Documentation}
@@ -403,6 +415,7 @@ export class RestAPI {
      *
      * @summary Get On-chain Yields Locked Product List (USER_DATA)
      * @param {GetOnChainYieldsLockedProductListRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedProductListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/account/ Binance API Documentation}
@@ -420,6 +433,7 @@ export class RestAPI {
      *
      * @summary Get On-chain Yields Locked Product Position (USER_DATA)
      * @param {GetOnChainYieldsLockedProductPositionRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedProductPositionResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/account/Get-Onchain-Locked-Product-Position Binance API Documentation}
@@ -442,6 +456,7 @@ export class RestAPI {
      *
      * @summary Get On-chain Yields Locked Redemption Record (USER_DATA)
      * @param {GetOnChainYieldsLockedRedemptionRecordRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedRedemptionRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/history/Get-Onchain-Locked-Redemption-Record Binance API Documentation}
@@ -464,6 +479,7 @@ export class RestAPI {
      *
      * @summary Get On-chain Yields Locked Rewards History (USER_DATA)
      * @param {GetOnChainYieldsLockedRewardsHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/history/Get-Onchain-Locked-Rewards-History Binance API Documentation}
@@ -481,6 +497,7 @@ export class RestAPI {
      *
      * @summary Get On-chain Yields Locked Subscription Preview (USER_DATA)
      * @param {GetOnChainYieldsLockedSubscriptionPreviewRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedSubscriptionPreviewResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/earn/ Binance API Documentation}
@@ -503,6 +520,7 @@ export class RestAPI {
      *
      * @summary Get On-chain Yields Locked Subscription Record (USER_DATA)
      * @param {GetOnChainYieldsLockedSubscriptionRecordRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedSubscriptionRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/history/ Binance API Documentation}
@@ -520,6 +538,7 @@ export class RestAPI {
      *
      * @summary On-chain Yields Account (USER_DATA)
      * @param {OnChainYieldsAccountRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<OnChainYieldsAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/account/Onchain-Account Binance API Documentation}
@@ -539,6 +558,7 @@ export class RestAPI {
      *
      * @summary Redeem On-chain Yields Locked Product (TRADE)
      * @param {RedeemOnChainYieldsLockedProductRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<RedeemOnChainYieldsLockedProductResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/earn/Redeem-Onchain-Locked-Product Binance API Documentation}
@@ -556,6 +576,7 @@ export class RestAPI {
      *
      * @summary Set On-chain Yields Locked Auto Subscribe(USER_DATA)
      * @param {SetOnChainYieldsLockedAutoSubscribeRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<SetOnChainYieldsLockedAutoSubscribeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/earn/Set-Onchain-Locked-Auto-Subscribe Binance API Documentation}
@@ -573,6 +594,7 @@ export class RestAPI {
      *
      * @summary Set On-chain Yields Locked Product Redeem Option(USER_DATA)
      * @param {SetOnChainYieldsLockedProductRedeemOptionRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<SetOnChainYieldsLockedProductRedeemOptionResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/earn/Set-Onchain-Locked-Redeem-Option Binance API Documentation}
@@ -592,6 +614,7 @@ export class RestAPI {
      *
      * @summary Subscribe On-chain Yields Locked Product(TRADE)
      * @param {SubscribeOnChainYieldsLockedProductRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<SubscribeOnChainYieldsLockedProductResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/earn/Subscribe-Onchain-Locked-Product Binance API Documentation}
@@ -609,6 +632,7 @@ export class RestAPI {
      *
      * @summary Get Soft Staking Product List (USER_DATA)
      * @param {GetSoftStakingProductListRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetSoftStakingProductListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/soft-staking/ Binance API Documentation}
@@ -629,6 +653,7 @@ export class RestAPI {
      *
      * @summary Get Soft Staking Rewards History(USER_DATA)
      * @param {GetSoftStakingRewardsHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetSoftStakingRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/soft-staking/Get-Soft-Staking-Rewards-History Binance API Documentation}
@@ -646,6 +671,7 @@ export class RestAPI {
      *
      * @summary Set Soft Staking (USER_DATA)
      * @param {SetSoftStakingRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<SetSoftStakingResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/soft-staking/Set-Soft-Staking Binance API Documentation}
@@ -665,6 +691,7 @@ export class RestAPI {
      *
      * @summary Claim Boost Rewards(TRADE)
      * @param {ClaimBoostRewardsRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<ClaimBoostRewardsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/sol-staking/staking/Claim-Boost-Rewards Binance API Documentation}
@@ -687,6 +714,7 @@ export class RestAPI {
      *
      * @summary Get BNSOL Rate History(USER_DATA)
      * @param {GetBnsolRateHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetBnsolRateHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/sol-staking/history/Get-BNSOL-Rate-History Binance API Documentation}
@@ -709,6 +737,7 @@ export class RestAPI {
      *
      * @summary Get BNSOL rewards history(USER_DATA)
      * @param {GetBnsolRewardsHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetBnsolRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/sol-staking/history/Get-BNSOL-rewards-history Binance API Documentation}
@@ -731,6 +760,7 @@ export class RestAPI {
      *
      * @summary Get Boost Rewards History(USER_DATA)
      * @param {GetBoostRewardsHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetBoostRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/sol-staking/history/Get-Boost-Rewards-History Binance API Documentation}
@@ -753,6 +783,7 @@ export class RestAPI {
      *
      * @summary Get SOL redemption history(USER_DATA)
      * @param {GetSolRedemptionHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetSolRedemptionHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/sol-staking/history/Get-SOL-redemption-history Binance API Documentation}
@@ -775,6 +806,7 @@ export class RestAPI {
      *
      * @summary Get SOL staking history(USER_DATA)
      * @param {GetSolStakingHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetSolStakingHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/sol-staking/history/Get-SOL-staking-history Binance API Documentation}
@@ -792,6 +824,7 @@ export class RestAPI {
      *
      * @summary Get SOL staking quota details(USER_DATA)
      * @param {GetSolStakingQuotaDetailsRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetSolStakingQuotaDetailsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/sol-staking/account/Get-SOL-staking-quota-details Binance API Documentation}
@@ -814,6 +847,7 @@ export class RestAPI {
      *
      * @summary Get Unclaimed Rewards(USER_DATA)
      * @param {GetUnclaimedRewardsRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetUnclaimedRewardsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/sol-staking/history/Get-Unclaimed-Rewards Binance API Documentation}
@@ -833,6 +867,7 @@ export class RestAPI {
      *
      * @summary Redeem SOL(TRADE)
      * @param {RedeemSolRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<RedeemSolResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/sol-staking/staking/Redeem-SOL Binance API Documentation}
@@ -848,6 +883,7 @@ export class RestAPI {
      *
      * @summary SOL Staking account(USER_DATA)
      * @param {SolStakingAccountRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<SolStakingAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/sol-staking/account/SOL-Staking-account Binance API Documentation}
@@ -867,6 +903,7 @@ export class RestAPI {
      *
      * @summary Subscribe SOL Staking(TRADE)
      * @param {SubscribeSolStakingRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<SubscribeSolStakingResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/staking/sol-staking/staking/Subscribe-SOL-Staking Binance API Documentation}

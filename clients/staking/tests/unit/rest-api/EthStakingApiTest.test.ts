@@ -126,6 +126,13 @@ describe('EthStakingApi', () => {
             mockResponse = {
                 leftStakingPersonalQuota: '1000',
                 leftRedemptionPersonalQuota: '1000',
+                minStakeAmount: '0.00010000',
+                minRedeemAmount: '0.00000001',
+                redeemPeriod: 20,
+                stakeable: true,
+                redeemable: true,
+                commissionFee: '0.05000000',
+                calculating: false,
             };
 
             const spy = jest.spyOn(client, 'getCurrentEthStakingQuota').mockReturnValue(
@@ -150,6 +157,13 @@ describe('EthStakingApi', () => {
             mockResponse = {
                 leftStakingPersonalQuota: '1000',
                 leftRedemptionPersonalQuota: '1000',
+                minStakeAmount: '0.00010000',
+                minRedeemAmount: '0.00000001',
+                redeemPeriod: 20,
+                stakeable: true,
+                redeemable: true,
+                commissionFee: '0.05000000',
+                calculating: false,
             };
 
             const spy = jest.spyOn(client, 'getCurrentEthStakingQuota').mockReturnValue(

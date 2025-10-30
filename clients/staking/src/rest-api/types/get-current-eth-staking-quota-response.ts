@@ -31,4 +31,46 @@ export interface GetCurrentEthStakingQuotaResponse {
      * @memberof GetCurrentEthStakingQuotaResponse
      */
     leftRedemptionPersonalQuota?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetCurrentEthStakingQuotaResponse
+     */
+    minStakeAmount?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetCurrentEthStakingQuotaResponse
+     */
+    minRedeemAmount?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof GetCurrentEthStakingQuotaResponse
+     */
+    redeemPeriod?: number;
+    /**
+     *
+     * @type {boolean}
+     * @memberof GetCurrentEthStakingQuotaResponse
+     */
+    stakeable?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof GetCurrentEthStakingQuotaResponse
+     */
+    redeemable?: boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof GetCurrentEthStakingQuotaResponse
+     */
+    commissionFee?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof GetCurrentEthStakingQuotaResponse
+     */
+    calculating?: boolean;
 }
