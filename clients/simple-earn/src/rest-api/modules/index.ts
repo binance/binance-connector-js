@@ -11,5 +11,6 @@
  * Do not edit the class manually.
  */
 
+export * from './bfusd-api';
 export * from './flexible-locked-api';
 export * from './rwusd-api';

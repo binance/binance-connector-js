@@ -20,32 +20,32 @@ import {
     type RequestArgs,
 } from '@binance/common';
 import type {
-    GetRwusdAccountResponse,
-    GetRwusdQuotaDetailsResponse,
-    GetRwusdRateHistoryResponse,
-    GetRwusdRedemptionHistoryResponse,
-    GetRwusdRewardsHistoryResponse,
-    GetRwusdSubscriptionHistoryResponse,
-    RedeemRwusdResponse,
-    SubscribeRwusdResponse,
+    GetBfusdAccountResponse,
+    GetBfusdQuotaDetailsResponse,
+    GetBfusdRateHistoryResponse,
+    GetBfusdRedemptionHistoryResponse,
+    GetBfusdRewardsHistoryResponse,
+    GetBfusdSubscriptionHistoryResponse,
+    RedeemBfusdResponse,
+    SubscribeBfusdResponse,
 } from '../types';
 
 /**
- * RwusdApi - axios parameter creator
+ * BfusdApi - axios parameter creator
  */
-const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
+const BfusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
     return {
         /**
-         * Get RWUSD account information.
+         * Get BFUSD account information.
          *
          * Weight: 150
          *
-         * @summary Get RWUSD Account (USER_DATA)
+         * @summary Get BFUSD Account (USER_DATA)
          * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
-        getRwusdAccount: async (recvWindow?: number): Promise<RequestArgs> => {
+        getBfusdAccount: async (recvWindow?: number): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -56,23 +56,23 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
 
             return {
-                endpoint: '/sapi/v1/rwusd/account',
+                endpoint: '/sapi/v1/bfusd/account',
                 method: 'GET',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
             };
         },
         /**
-         * Get RWUSD quota details including subscription quota, fast redemption quota, and standard redemption quota.
+         * Get BFUSD quota details including fast redemption quota and standard redemption quota.
          *
          * Weight: 150
          *
-         * @summary Get RWUSD Quota Details (USER_DATA)
+         * @summary Get BFUSD Quota Details (USER_DATA)
          * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
-        getRwusdQuotaDetails: async (recvWindow?: number): Promise<RequestArgs> => {
+        getBfusdQuotaDetails: async (recvWindow?: number): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -83,14 +83,14 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
 
             return {
-                endpoint: '/sapi/v1/rwusd/quota',
+                endpoint: '/sapi/v1/bfusd/quota',
                 method: 'GET',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
             };
         },
         /**
-         * Get RWUSD rate history sorted by descending order.
+         * Get BFUSD rate history sorted by descending order.
          *
          * The time between `startTime` and `endTime` cannot be longer than 6 months.
          * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
@@ -99,7 +99,7 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * Weight: 150
          *
-         * @summary Get RWUSD Rate History (USER_DATA)
+         * @summary Get BFUSD Rate History (USER_DATA)
          * @param {number} [startTime]
          * @param {number} [endTime]
          * @param {number} [current] Currently querying page. Starts from 1. Default: 1
@@ -108,7 +108,7 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @throws {RequiredError}
          */
-        getRwusdRateHistory: async (
+        getBfusdRateHistory: async (
             startTime?: number,
             endTime?: number,
             current?: number,
@@ -141,14 +141,14 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
 
             return {
-                endpoint: '/sapi/v1/rwusd/history/rateHistory',
+                endpoint: '/sapi/v1/bfusd/history/rateHistory',
                 method: 'GET',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
             };
         },
         /**
-         * Get RWUSD redemption history.
+         * Get BFUSD redemption history.
          *
          * The time between `startTime` and `endTime` cannot be longer than 6 months.
          * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
@@ -157,7 +157,7 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * Weight: 150
          *
-         * @summary Get RWUSD Redemption History (USER_DATA)
+         * @summary Get BFUSD Redemption History (USER_DATA)
          * @param {number} [startTime]
          * @param {number} [endTime]
          * @param {number} [current] Currently querying page. Starts from 1. Default: 1
@@ -166,7 +166,7 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @throws {RequiredError}
          */
-        getRwusdRedemptionHistory: async (
+        getBfusdRedemptionHistory: async (
             startTime?: number,
             endTime?: number,
             current?: number,
@@ -199,14 +199,14 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
 
             return {
-                endpoint: '/sapi/v1/rwusd/history/redemptionHistory',
+                endpoint: '/sapi/v1/bfusd/history/redemptionHistory',
                 method: 'GET',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
             };
         },
         /**
-         * Get RWUSD rewards history.
+         * Get BFUSD rewards history.
          *
          * The time between `startTime` and `endTime` cannot be longer than 6 months.
          * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
@@ -215,7 +215,7 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * Weight: 150
          *
-         * @summary Get RWUSD Rewards History (USER_DATA)
+         * @summary Get BFUSD Rewards History (USER_DATA)
          * @param {number} [startTime]
          * @param {number} [endTime]
          * @param {number} [current] Currently querying page. Starts from 1. Default: 1
@@ -224,7 +224,7 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @throws {RequiredError}
          */
-        getRwusdRewardsHistory: async (
+        getBfusdRewardsHistory: async (
             startTime?: number,
             endTime?: number,
             current?: number,
@@ -257,14 +257,14 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
 
             return {
-                endpoint: '/sapi/v1/rwusd/history/rewardsHistory',
+                endpoint: '/sapi/v1/bfusd/history/rewardsHistory',
                 method: 'GET',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
             };
         },
         /**
-         * Get RWUSD subscription history
+         * Get BFUSD subscription history
          *
          * The time between `startTime` and `endTime` cannot be longer than 6 months.
          * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
@@ -273,7 +273,7 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * Weight: 150
          *
-         * @summary Get RWUSD subscription history(USER_DATA)
+         * @summary Get BFUSD subscription history(USER_DATA)
          * @param {string} [asset] USDC or USDT
          * @param {number} [startTime]
          * @param {number} [endTime]
@@ -283,7 +283,7 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @throws {RequiredError}
          */
-        getRwusdSubscriptionHistory: async (
+        getBfusdSubscriptionHistory: async (
             asset?: string,
             startTime?: number,
             endTime?: number,
@@ -321,35 +321,35 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
 
             return {
-                endpoint: '/sapi/v1/rwusd/history/subscriptionHistory',
+                endpoint: '/sapi/v1/bfusd/history/subscriptionHistory',
                 method: 'GET',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
             };
         },
         /**
-         * Redeem RWUSD to USDC
+         * Redeem BFUSD to USDT
          *
          * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
          *
          * Weight: 150
          *
-         * @summary Redeem RWUSD(TRADE)
+         * @summary Redeem BFUSD(TRADE)
          * @param {number} amount Amount
          * @param {string} type FAST or STANDARD, defaults to STANDARD
          * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
-        redeemRwusd: async (
+        redeemBfusd: async (
             amount: number,
             type: string,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'amount' is not null or undefined
-            assertParamExists('redeemRwusd', 'amount', amount);
+            assertParamExists('redeemBfusd', 'amount', amount);
             // verify required parameter 'type' is not null or undefined
-            assertParamExists('redeemRwusd', 'type', type);
+            assertParamExists('redeemBfusd', 'type', type);
 
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -369,35 +369,35 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
 
             return {
-                endpoint: '/sapi/v1/rwusd/redeem',
+                endpoint: '/sapi/v1/bfusd/redeem',
                 method: 'POST',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
             };
         },
         /**
-         * Subscribe RWUSD
+         * Subscribe BFUSD
          *
          * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
          *
          * Weight: 150
          *
-         * @summary Subscribe RWUSD(TRADE)
+         * @summary Subscribe BFUSD(TRADE)
          * @param {string} asset USDT or USDC (whichever is eligible)
          * @param {number} amount Amount
          * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
-        subscribeRwusd: async (
+        subscribeBfusd: async (
             asset: string,
             amount: number,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
-            assertParamExists('subscribeRwusd', 'asset', asset);
+            assertParamExists('subscribeBfusd', 'asset', asset);
             // verify required parameter 'amount' is not null or undefined
-            assertParamExists('subscribeRwusd', 'amount', amount);
+            assertParamExists('subscribeBfusd', 'amount', amount);
 
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -417,7 +417,7 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
 
             return {
-                endpoint: '/sapi/v1/rwusd/subscribe',
+                endpoint: '/sapi/v1/bfusd/subscribe',
                 method: 'POST',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
@@ -427,40 +427,40 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
 };
 
 /**
- * RwusdApi - interface
- * @interface RwusdApi
+ * BfusdApi - interface
+ * @interface BfusdApi
  */
-export interface RwusdApiInterface {
+export interface BfusdApiInterface {
     /**
-     * Get RWUSD account information.
+     * Get BFUSD account information.
      *
      * Weight: 150
      *
-     * @summary Get RWUSD Account (USER_DATA)
-     * @param {GetRwusdAccountRequest} requestParameters Request parameters.
+     * @summary Get BFUSD Account (USER_DATA)
+     * @param {GetBfusdAccountRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof RwusdApiInterface
+     * @memberof BfusdApiInterface
      */
-    getRwusdAccount(
-        requestParameters?: GetRwusdAccountRequest
-    ): Promise<RestApiResponse<GetRwusdAccountResponse>>;
+    getBfusdAccount(
+        requestParameters?: GetBfusdAccountRequest
+    ): Promise<RestApiResponse<GetBfusdAccountResponse>>;
     /**
-     * Get RWUSD quota details including subscription quota, fast redemption quota, and standard redemption quota.
+     * Get BFUSD quota details including fast redemption quota and standard redemption quota.
      *
      * Weight: 150
      *
-     * @summary Get RWUSD Quota Details (USER_DATA)
-     * @param {GetRwusdQuotaDetailsRequest} requestParameters Request parameters.
+     * @summary Get BFUSD Quota Details (USER_DATA)
+     * @param {GetBfusdQuotaDetailsRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof RwusdApiInterface
+     * @memberof BfusdApiInterface
      */
-    getRwusdQuotaDetails(
-        requestParameters?: GetRwusdQuotaDetailsRequest
-    ): Promise<RestApiResponse<GetRwusdQuotaDetailsResponse>>;
+    getBfusdQuotaDetails(
+        requestParameters?: GetBfusdQuotaDetailsRequest
+    ): Promise<RestApiResponse<GetBfusdQuotaDetailsResponse>>;
     /**
-     * Get RWUSD rate history sorted by descending order.
+     * Get BFUSD rate history sorted by descending order.
      *
      * The time between `startTime` and `endTime` cannot be longer than 6 months.
      * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
@@ -469,17 +469,17 @@ export interface RwusdApiInterface {
      *
      * Weight: 150
      *
-     * @summary Get RWUSD Rate History (USER_DATA)
-     * @param {GetRwusdRateHistoryRequest} requestParameters Request parameters.
+     * @summary Get BFUSD Rate History (USER_DATA)
+     * @param {GetBfusdRateHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof RwusdApiInterface
+     * @memberof BfusdApiInterface
      */
-    getRwusdRateHistory(
-        requestParameters?: GetRwusdRateHistoryRequest
-    ): Promise<RestApiResponse<GetRwusdRateHistoryResponse>>;
+    getBfusdRateHistory(
+        requestParameters?: GetBfusdRateHistoryRequest
+    ): Promise<RestApiResponse<GetBfusdRateHistoryResponse>>;
     /**
-     * Get RWUSD redemption history.
+     * Get BFUSD redemption history.
      *
      * The time between `startTime` and `endTime` cannot be longer than 6 months.
      * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
@@ -488,17 +488,17 @@ export interface RwusdApiInterface {
      *
      * Weight: 150
      *
-     * @summary Get RWUSD Redemption History (USER_DATA)
-     * @param {GetRwusdRedemptionHistoryRequest} requestParameters Request parameters.
+     * @summary Get BFUSD Redemption History (USER_DATA)
+     * @param {GetBfusdRedemptionHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof RwusdApiInterface
+     * @memberof BfusdApiInterface
      */
-    getRwusdRedemptionHistory(
-        requestParameters?: GetRwusdRedemptionHistoryRequest
-    ): Promise<RestApiResponse<GetRwusdRedemptionHistoryResponse>>;
+    getBfusdRedemptionHistory(
+        requestParameters?: GetBfusdRedemptionHistoryRequest
+    ): Promise<RestApiResponse<GetBfusdRedemptionHistoryResponse>>;
     /**
-     * Get RWUSD rewards history.
+     * Get BFUSD rewards history.
      *
      * The time between `startTime` and `endTime` cannot be longer than 6 months.
      * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
@@ -507,17 +507,17 @@ export interface RwusdApiInterface {
      *
      * Weight: 150
      *
-     * @summary Get RWUSD Rewards History (USER_DATA)
-     * @param {GetRwusdRewardsHistoryRequest} requestParameters Request parameters.
+     * @summary Get BFUSD Rewards History (USER_DATA)
+     * @param {GetBfusdRewardsHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof RwusdApiInterface
+     * @memberof BfusdApiInterface
      */
-    getRwusdRewardsHistory(
-        requestParameters?: GetRwusdRewardsHistoryRequest
-    ): Promise<RestApiResponse<GetRwusdRewardsHistoryResponse>>;
+    getBfusdRewardsHistory(
+        requestParameters?: GetBfusdRewardsHistoryRequest
+    ): Promise<RestApiResponse<GetBfusdRewardsHistoryResponse>>;
     /**
-     * Get RWUSD subscription history
+     * Get BFUSD subscription history
      *
      * The time between `startTime` and `endTime` cannot be longer than 6 months.
      * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
@@ -526,332 +526,332 @@ export interface RwusdApiInterface {
      *
      * Weight: 150
      *
-     * @summary Get RWUSD subscription history(USER_DATA)
-     * @param {GetRwusdSubscriptionHistoryRequest} requestParameters Request parameters.
+     * @summary Get BFUSD subscription history(USER_DATA)
+     * @param {GetBfusdSubscriptionHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof RwusdApiInterface
+     * @memberof BfusdApiInterface
      */
-    getRwusdSubscriptionHistory(
-        requestParameters?: GetRwusdSubscriptionHistoryRequest
-    ): Promise<RestApiResponse<GetRwusdSubscriptionHistoryResponse>>;
+    getBfusdSubscriptionHistory(
+        requestParameters?: GetBfusdSubscriptionHistoryRequest
+    ): Promise<RestApiResponse<GetBfusdSubscriptionHistoryResponse>>;
     /**
-     * Redeem RWUSD to USDC
+     * Redeem BFUSD to USDT
      *
      * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
      *
      * Weight: 150
      *
-     * @summary Redeem RWUSD(TRADE)
-     * @param {RedeemRwusdRequest} requestParameters Request parameters.
+     * @summary Redeem BFUSD(TRADE)
+     * @param {RedeemBfusdRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof RwusdApiInterface
+     * @memberof BfusdApiInterface
      */
-    redeemRwusd(
-        requestParameters: RedeemRwusdRequest
-    ): Promise<RestApiResponse<RedeemRwusdResponse>>;
+    redeemBfusd(
+        requestParameters: RedeemBfusdRequest
+    ): Promise<RestApiResponse<RedeemBfusdResponse>>;
     /**
-     * Subscribe RWUSD
+     * Subscribe BFUSD
      *
      * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
      *
      * Weight: 150
      *
-     * @summary Subscribe RWUSD(TRADE)
-     * @param {SubscribeRwusdRequest} requestParameters Request parameters.
+     * @summary Subscribe BFUSD(TRADE)
+     * @param {SubscribeBfusdRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof RwusdApiInterface
+     * @memberof BfusdApiInterface
      */
-    subscribeRwusd(
-        requestParameters: SubscribeRwusdRequest
-    ): Promise<RestApiResponse<SubscribeRwusdResponse>>;
+    subscribeBfusd(
+        requestParameters: SubscribeBfusdRequest
+    ): Promise<RestApiResponse<SubscribeBfusdResponse>>;
 }
 
 /**
- * Request parameters for getRwusdAccount operation in RwusdApi.
- * @interface GetRwusdAccountRequest
+ * Request parameters for getBfusdAccount operation in BfusdApi.
+ * @interface GetBfusdAccountRequest
  */
-export interface GetRwusdAccountRequest {
+export interface GetBfusdAccountRequest {
     /**
      * The value cannot be greater than 60000 (ms)
      * @type {number}
-     * @memberof RwusdApiGetRwusdAccount
+     * @memberof BfusdApiGetBfusdAccount
      */
     readonly recvWindow?: number;
 }
 
 /**
- * Request parameters for getRwusdQuotaDetails operation in RwusdApi.
- * @interface GetRwusdQuotaDetailsRequest
+ * Request parameters for getBfusdQuotaDetails operation in BfusdApi.
+ * @interface GetBfusdQuotaDetailsRequest
  */
-export interface GetRwusdQuotaDetailsRequest {
+export interface GetBfusdQuotaDetailsRequest {
     /**
      * The value cannot be greater than 60000 (ms)
      * @type {number}
-     * @memberof RwusdApiGetRwusdQuotaDetails
+     * @memberof BfusdApiGetBfusdQuotaDetails
      */
     readonly recvWindow?: number;
 }
 
 /**
- * Request parameters for getRwusdRateHistory operation in RwusdApi.
- * @interface GetRwusdRateHistoryRequest
+ * Request parameters for getBfusdRateHistory operation in BfusdApi.
+ * @interface GetBfusdRateHistoryRequest
  */
-export interface GetRwusdRateHistoryRequest {
+export interface GetBfusdRateHistoryRequest {
     /**
      *
      * @type {number}
-     * @memberof RwusdApiGetRwusdRateHistory
+     * @memberof BfusdApiGetBfusdRateHistory
      */
     readonly startTime?: number;
 
     /**
      *
      * @type {number}
-     * @memberof RwusdApiGetRwusdRateHistory
+     * @memberof BfusdApiGetBfusdRateHistory
      */
     readonly endTime?: number;
 
     /**
      * Currently querying page. Starts from 1. Default: 1
      * @type {number}
-     * @memberof RwusdApiGetRwusdRateHistory
+     * @memberof BfusdApiGetBfusdRateHistory
      */
     readonly current?: number;
 
     /**
      * Number of results per page. Default: 10, Max: 100
      * @type {number}
-     * @memberof RwusdApiGetRwusdRateHistory
+     * @memberof BfusdApiGetBfusdRateHistory
      */
     readonly size?: number;
 
     /**
      * The value cannot be greater than 60000 (ms)
      * @type {number}
-     * @memberof RwusdApiGetRwusdRateHistory
+     * @memberof BfusdApiGetBfusdRateHistory
      */
     readonly recvWindow?: number;
 }
 
 /**
- * Request parameters for getRwusdRedemptionHistory operation in RwusdApi.
- * @interface GetRwusdRedemptionHistoryRequest
+ * Request parameters for getBfusdRedemptionHistory operation in BfusdApi.
+ * @interface GetBfusdRedemptionHistoryRequest
  */
-export interface GetRwusdRedemptionHistoryRequest {
+export interface GetBfusdRedemptionHistoryRequest {
     /**
      *
      * @type {number}
-     * @memberof RwusdApiGetRwusdRedemptionHistory
+     * @memberof BfusdApiGetBfusdRedemptionHistory
      */
     readonly startTime?: number;
 
     /**
      *
      * @type {number}
-     * @memberof RwusdApiGetRwusdRedemptionHistory
+     * @memberof BfusdApiGetBfusdRedemptionHistory
      */
     readonly endTime?: number;
 
     /**
      * Currently querying page. Starts from 1. Default: 1
      * @type {number}
-     * @memberof RwusdApiGetRwusdRedemptionHistory
+     * @memberof BfusdApiGetBfusdRedemptionHistory
      */
     readonly current?: number;
 
     /**
      * Number of results per page. Default: 10, Max: 100
      * @type {number}
-     * @memberof RwusdApiGetRwusdRedemptionHistory
+     * @memberof BfusdApiGetBfusdRedemptionHistory
      */
     readonly size?: number;
 
     /**
      * The value cannot be greater than 60000 (ms)
      * @type {number}
-     * @memberof RwusdApiGetRwusdRedemptionHistory
+     * @memberof BfusdApiGetBfusdRedemptionHistory
      */
     readonly recvWindow?: number;
 }
 
 /**
- * Request parameters for getRwusdRewardsHistory operation in RwusdApi.
- * @interface GetRwusdRewardsHistoryRequest
+ * Request parameters for getBfusdRewardsHistory operation in BfusdApi.
+ * @interface GetBfusdRewardsHistoryRequest
  */
-export interface GetRwusdRewardsHistoryRequest {
+export interface GetBfusdRewardsHistoryRequest {
     /**
      *
      * @type {number}
-     * @memberof RwusdApiGetRwusdRewardsHistory
+     * @memberof BfusdApiGetBfusdRewardsHistory
      */
     readonly startTime?: number;
 
     /**
      *
      * @type {number}
-     * @memberof RwusdApiGetRwusdRewardsHistory
+     * @memberof BfusdApiGetBfusdRewardsHistory
      */
     readonly endTime?: number;
 
     /**
      * Currently querying page. Starts from 1. Default: 1
      * @type {number}
-     * @memberof RwusdApiGetRwusdRewardsHistory
+     * @memberof BfusdApiGetBfusdRewardsHistory
      */
     readonly current?: number;
 
     /**
      * Number of results per page. Default: 10, Max: 100
      * @type {number}
-     * @memberof RwusdApiGetRwusdRewardsHistory
+     * @memberof BfusdApiGetBfusdRewardsHistory
      */
     readonly size?: number;
 
     /**
      * The value cannot be greater than 60000 (ms)
      * @type {number}
-     * @memberof RwusdApiGetRwusdRewardsHistory
+     * @memberof BfusdApiGetBfusdRewardsHistory
      */
     readonly recvWindow?: number;
 }
 
 /**
- * Request parameters for getRwusdSubscriptionHistory operation in RwusdApi.
- * @interface GetRwusdSubscriptionHistoryRequest
+ * Request parameters for getBfusdSubscriptionHistory operation in BfusdApi.
+ * @interface GetBfusdSubscriptionHistoryRequest
  */
-export interface GetRwusdSubscriptionHistoryRequest {
+export interface GetBfusdSubscriptionHistoryRequest {
     /**
      * USDC or USDT
      * @type {string}
-     * @memberof RwusdApiGetRwusdSubscriptionHistory
+     * @memberof BfusdApiGetBfusdSubscriptionHistory
      */
     readonly asset?: string;
 
     /**
      *
      * @type {number}
-     * @memberof RwusdApiGetRwusdSubscriptionHistory
+     * @memberof BfusdApiGetBfusdSubscriptionHistory
      */
     readonly startTime?: number;
 
     /**
      *
      * @type {number}
-     * @memberof RwusdApiGetRwusdSubscriptionHistory
+     * @memberof BfusdApiGetBfusdSubscriptionHistory
      */
     readonly endTime?: number;
 
     /**
      * Currently querying page. Starts from 1. Default: 1
      * @type {number}
-     * @memberof RwusdApiGetRwusdSubscriptionHistory
+     * @memberof BfusdApiGetBfusdSubscriptionHistory
      */
     readonly current?: number;
 
     /**
      * Number of results per page. Default: 10, Max: 100
      * @type {number}
-     * @memberof RwusdApiGetRwusdSubscriptionHistory
+     * @memberof BfusdApiGetBfusdSubscriptionHistory
      */
     readonly size?: number;
 
     /**
      * The value cannot be greater than 60000 (ms)
      * @type {number}
-     * @memberof RwusdApiGetRwusdSubscriptionHistory
+     * @memberof BfusdApiGetBfusdSubscriptionHistory
      */
     readonly recvWindow?: number;
 }
 
 /**
- * Request parameters for redeemRwusd operation in RwusdApi.
- * @interface RedeemRwusdRequest
+ * Request parameters for redeemBfusd operation in BfusdApi.
+ * @interface RedeemBfusdRequest
  */
-export interface RedeemRwusdRequest {
+export interface RedeemBfusdRequest {
     /**
      * Amount
      * @type {number}
-     * @memberof RwusdApiRedeemRwusd
+     * @memberof BfusdApiRedeemBfusd
      */
     readonly amount: number;
 
     /**
      * FAST or STANDARD, defaults to STANDARD
      * @type {string}
-     * @memberof RwusdApiRedeemRwusd
+     * @memberof BfusdApiRedeemBfusd
      */
     readonly type: string;
 
     /**
      * The value cannot be greater than 60000 (ms)
      * @type {number}
-     * @memberof RwusdApiRedeemRwusd
+     * @memberof BfusdApiRedeemBfusd
      */
     readonly recvWindow?: number;
 }
 
 /**
- * Request parameters for subscribeRwusd operation in RwusdApi.
- * @interface SubscribeRwusdRequest
+ * Request parameters for subscribeBfusd operation in BfusdApi.
+ * @interface SubscribeBfusdRequest
  */
-export interface SubscribeRwusdRequest {
+export interface SubscribeBfusdRequest {
     /**
      * USDT or USDC (whichever is eligible)
      * @type {string}
-     * @memberof RwusdApiSubscribeRwusd
+     * @memberof BfusdApiSubscribeBfusd
      */
     readonly asset: string;
 
     /**
      * Amount
      * @type {number}
-     * @memberof RwusdApiSubscribeRwusd
+     * @memberof BfusdApiSubscribeBfusd
      */
     readonly amount: number;
 
     /**
      * The value cannot be greater than 60000 (ms)
      * @type {number}
-     * @memberof RwusdApiSubscribeRwusd
+     * @memberof BfusdApiSubscribeBfusd
      */
     readonly recvWindow?: number;
 }
 
 /**
- * RwusdApi - object-oriented interface
- * @class RwusdApi
+ * BfusdApi - object-oriented interface
+ * @class BfusdApi
  */
-export class RwusdApi implements RwusdApiInterface {
+export class BfusdApi implements BfusdApiInterface {
     private readonly configuration: ConfigurationRestAPI;
     private localVarAxiosParamCreator;
 
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
-        this.localVarAxiosParamCreator = RwusdApiAxiosParamCreator(configuration);
+        this.localVarAxiosParamCreator = BfusdApiAxiosParamCreator(configuration);
     }
 
     /**
-     * Get RWUSD account information.
+     * Get BFUSD account information.
      *
      * Weight: 150
      *
-     * @summary Get RWUSD Account (USER_DATA)
-     * @param {GetRwusdAccountRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetRwusdAccountResponse>>}
+     * @summary Get BFUSD Account (USER_DATA)
+     * @param {GetBfusdAccountRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetBfusdAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof RwusdApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/account/ Binance API Documentation}
+     * @memberof BfusdApi
+     * @see {@link https://developers.binance.com/docs/simple_earn/bfusd/account/ Binance API Documentation}
      */
-    public async getRwusdAccount(
-        requestParameters: GetRwusdAccountRequest = {}
-    ): Promise<RestApiResponse<GetRwusdAccountResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getRwusdAccount(
+    public async getBfusdAccount(
+        requestParameters: GetBfusdAccountRequest = {}
+    ): Promise<RestApiResponse<GetBfusdAccountResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getBfusdAccount(
             requestParameters?.recvWindow
         );
-        return sendRequest<GetRwusdAccountResponse>(
+        return sendRequest<GetBfusdAccountResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
@@ -862,24 +862,24 @@ export class RwusdApi implements RwusdApiInterface {
     }
 
     /**
-     * Get RWUSD quota details including subscription quota, fast redemption quota, and standard redemption quota.
+     * Get BFUSD quota details including fast redemption quota and standard redemption quota.
      *
      * Weight: 150
      *
-     * @summary Get RWUSD Quota Details (USER_DATA)
-     * @param {GetRwusdQuotaDetailsRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetRwusdQuotaDetailsResponse>>}
+     * @summary Get BFUSD Quota Details (USER_DATA)
+     * @param {GetBfusdQuotaDetailsRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetBfusdQuotaDetailsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof RwusdApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/account/Get-RWUSD-Quota-Details Binance API Documentation}
+     * @memberof BfusdApi
+     * @see {@link https://developers.binance.com/docs/simple_earn/bfusd/account/Get-BFUSD-Quota-Details Binance API Documentation}
      */
-    public async getRwusdQuotaDetails(
-        requestParameters: GetRwusdQuotaDetailsRequest = {}
-    ): Promise<RestApiResponse<GetRwusdQuotaDetailsResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getRwusdQuotaDetails(
+    public async getBfusdQuotaDetails(
+        requestParameters: GetBfusdQuotaDetailsRequest = {}
+    ): Promise<RestApiResponse<GetBfusdQuotaDetailsResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getBfusdQuotaDetails(
             requestParameters?.recvWindow
         );
-        return sendRequest<GetRwusdQuotaDetailsResponse>(
+        return sendRequest<GetBfusdQuotaDetailsResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
@@ -890,7 +890,7 @@ export class RwusdApi implements RwusdApiInterface {
     }
 
     /**
-     * Get RWUSD rate history sorted by descending order.
+     * Get BFUSD rate history sorted by descending order.
      *
      * The time between `startTime` and `endTime` cannot be longer than 6 months.
      * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
@@ -899,24 +899,24 @@ export class RwusdApi implements RwusdApiInterface {
      *
      * Weight: 150
      *
-     * @summary Get RWUSD Rate History (USER_DATA)
-     * @param {GetRwusdRateHistoryRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetRwusdRateHistoryResponse>>}
+     * @summary Get BFUSD Rate History (USER_DATA)
+     * @param {GetBfusdRateHistoryRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetBfusdRateHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof RwusdApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/history/Get-RWUSD-Rate-History Binance API Documentation}
+     * @memberof BfusdApi
+     * @see {@link https://developers.binance.com/docs/simple_earn/bfusd/history/Get-BFUSD-Rate-History Binance API Documentation}
      */
-    public async getRwusdRateHistory(
-        requestParameters: GetRwusdRateHistoryRequest = {}
-    ): Promise<RestApiResponse<GetRwusdRateHistoryResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getRwusdRateHistory(
+    public async getBfusdRateHistory(
+        requestParameters: GetBfusdRateHistoryRequest = {}
+    ): Promise<RestApiResponse<GetBfusdRateHistoryResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getBfusdRateHistory(
             requestParameters?.startTime,
             requestParameters?.endTime,
             requestParameters?.current,
             requestParameters?.size,
             requestParameters?.recvWindow
         );
-        return sendRequest<GetRwusdRateHistoryResponse>(
+        return sendRequest<GetBfusdRateHistoryResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
@@ -927,7 +927,7 @@ export class RwusdApi implements RwusdApiInterface {
     }
 
     /**
-     * Get RWUSD redemption history.
+     * Get BFUSD redemption history.
      *
      * The time between `startTime` and `endTime` cannot be longer than 6 months.
      * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
@@ -936,24 +936,24 @@ export class RwusdApi implements RwusdApiInterface {
      *
      * Weight: 150
      *
-     * @summary Get RWUSD Redemption History (USER_DATA)
-     * @param {GetRwusdRedemptionHistoryRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetRwusdRedemptionHistoryResponse>>}
+     * @summary Get BFUSD Redemption History (USER_DATA)
+     * @param {GetBfusdRedemptionHistoryRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetBfusdRedemptionHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof RwusdApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/history/Get-RWUSD-Redemption-History Binance API Documentation}
+     * @memberof BfusdApi
+     * @see {@link https://developers.binance.com/docs/simple_earn/bfusd/history/Get-BFUSD-Redemption-History Binance API Documentation}
      */
-    public async getRwusdRedemptionHistory(
-        requestParameters: GetRwusdRedemptionHistoryRequest = {}
-    ): Promise<RestApiResponse<GetRwusdRedemptionHistoryResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getRwusdRedemptionHistory(
+    public async getBfusdRedemptionHistory(
+        requestParameters: GetBfusdRedemptionHistoryRequest = {}
+    ): Promise<RestApiResponse<GetBfusdRedemptionHistoryResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getBfusdRedemptionHistory(
             requestParameters?.startTime,
             requestParameters?.endTime,
             requestParameters?.current,
             requestParameters?.size,
             requestParameters?.recvWindow
         );
-        return sendRequest<GetRwusdRedemptionHistoryResponse>(
+        return sendRequest<GetBfusdRedemptionHistoryResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
@@ -964,7 +964,7 @@ export class RwusdApi implements RwusdApiInterface {
     }
 
     /**
-     * Get RWUSD rewards history.
+     * Get BFUSD rewards history.
      *
      * The time between `startTime` and `endTime` cannot be longer than 6 months.
      * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
@@ -973,24 +973,24 @@ export class RwusdApi implements RwusdApiInterface {
      *
      * Weight: 150
      *
-     * @summary Get RWUSD Rewards History (USER_DATA)
-     * @param {GetRwusdRewardsHistoryRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetRwusdRewardsHistoryResponse>>}
+     * @summary Get BFUSD Rewards History (USER_DATA)
+     * @param {GetBfusdRewardsHistoryRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetBfusdRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof RwusdApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/history/Get-RWUSD-Rewards-History Binance API Documentation}
+     * @memberof BfusdApi
+     * @see {@link https://developers.binance.com/docs/simple_earn/bfusd/history/Get-BFUSD-Rewards-History Binance API Documentation}
      */
-    public async getRwusdRewardsHistory(
-        requestParameters: GetRwusdRewardsHistoryRequest = {}
-    ): Promise<RestApiResponse<GetRwusdRewardsHistoryResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getRwusdRewardsHistory(
+    public async getBfusdRewardsHistory(
+        requestParameters: GetBfusdRewardsHistoryRequest = {}
+    ): Promise<RestApiResponse<GetBfusdRewardsHistoryResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getBfusdRewardsHistory(
             requestParameters?.startTime,
             requestParameters?.endTime,
             requestParameters?.current,
             requestParameters?.size,
             requestParameters?.recvWindow
         );
-        return sendRequest<GetRwusdRewardsHistoryResponse>(
+        return sendRequest<GetBfusdRewardsHistoryResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
@@ -1001,7 +1001,7 @@ export class RwusdApi implements RwusdApiInterface {
     }
 
     /**
-     * Get RWUSD subscription history
+     * Get BFUSD subscription history
      *
      * The time between `startTime` and `endTime` cannot be longer than 6 months.
      * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
@@ -1010,17 +1010,17 @@ export class RwusdApi implements RwusdApiInterface {
      *
      * Weight: 150
      *
-     * @summary Get RWUSD subscription history(USER_DATA)
-     * @param {GetRwusdSubscriptionHistoryRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetRwusdSubscriptionHistoryResponse>>}
+     * @summary Get BFUSD subscription history(USER_DATA)
+     * @param {GetBfusdSubscriptionHistoryRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetBfusdSubscriptionHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof RwusdApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/history/Get-RWUSD-subscription-history Binance API Documentation}
+     * @memberof BfusdApi
+     * @see {@link https://developers.binance.com/docs/simple_earn/bfusd/history/Get-BFUSD-subscription-history Binance API Documentation}
      */
-    public async getRwusdSubscriptionHistory(
-        requestParameters: GetRwusdSubscriptionHistoryRequest = {}
-    ): Promise<RestApiResponse<GetRwusdSubscriptionHistoryResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getRwusdSubscriptionHistory(
+    public async getBfusdSubscriptionHistory(
+        requestParameters: GetBfusdSubscriptionHistoryRequest = {}
+    ): Promise<RestApiResponse<GetBfusdSubscriptionHistoryResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getBfusdSubscriptionHistory(
             requestParameters?.asset,
             requestParameters?.startTime,
             requestParameters?.endTime,
@@ -1028,7 +1028,7 @@ export class RwusdApi implements RwusdApiInterface {
             requestParameters?.size,
             requestParameters?.recvWindow
         );
-        return sendRequest<GetRwusdSubscriptionHistoryResponse>(
+        return sendRequest<GetBfusdSubscriptionHistoryResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
@@ -1039,28 +1039,28 @@ export class RwusdApi implements RwusdApiInterface {
     }
 
     /**
-     * Redeem RWUSD to USDC
+     * Redeem BFUSD to USDT
      *
      * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
      *
      * Weight: 150
      *
-     * @summary Redeem RWUSD(TRADE)
-     * @param {RedeemRwusdRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<RedeemRwusdResponse>>}
+     * @summary Redeem BFUSD(TRADE)
+     * @param {RedeemBfusdRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<RedeemBfusdResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof RwusdApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/earn/Redeem-RWUSD Binance API Documentation}
+     * @memberof BfusdApi
+     * @see {@link https://developers.binance.com/docs/simple_earn/bfusd/earn/Redeem-BFUSD Binance API Documentation}
      */
-    public async redeemRwusd(
-        requestParameters: RedeemRwusdRequest
-    ): Promise<RestApiResponse<RedeemRwusdResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.redeemRwusd(
+    public async redeemBfusd(
+        requestParameters: RedeemBfusdRequest
+    ): Promise<RestApiResponse<RedeemBfusdResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.redeemBfusd(
             requestParameters?.amount,
             requestParameters?.type,
             requestParameters?.recvWindow
         );
-        return sendRequest<RedeemRwusdResponse>(
+        return sendRequest<RedeemBfusdResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
@@ -1071,28 +1071,28 @@ export class RwusdApi implements RwusdApiInterface {
     }
 
     /**
-     * Subscribe RWUSD
+     * Subscribe BFUSD
      *
      * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
      *
      * Weight: 150
      *
-     * @summary Subscribe RWUSD(TRADE)
-     * @param {SubscribeRwusdRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<SubscribeRwusdResponse>>}
+     * @summary Subscribe BFUSD(TRADE)
+     * @param {SubscribeBfusdRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<SubscribeBfusdResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof RwusdApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/earn/Subscribe-RWUSD Binance API Documentation}
+     * @memberof BfusdApi
+     * @see {@link https://developers.binance.com/docs/simple_earn/bfusd/earn/Subscribe-BFUSD Binance API Documentation}
      */
-    public async subscribeRwusd(
-        requestParameters: SubscribeRwusdRequest
-    ): Promise<RestApiResponse<SubscribeRwusdResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.subscribeRwusd(
+    public async subscribeBfusd(
+        requestParameters: SubscribeBfusdRequest
+    ): Promise<RestApiResponse<SubscribeBfusdResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.subscribeBfusd(
             requestParameters?.asset,
             requestParameters?.amount,
             requestParameters?.recvWindow
         );
-        return sendRequest<SubscribeRwusdResponse>(
+        return sendRequest<SubscribeBfusdResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

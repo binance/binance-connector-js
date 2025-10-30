@@ -16,19 +16,19 @@
 /**
  *
  * @export
- * @interface GetRwusdRateHistoryResponseRowsInner
+ * @interface SubscribeBfusdResponse
  */
-export interface GetRwusdRateHistoryResponseRowsInner {
+export interface SubscribeBfusdResponse {
+    /**
+     *
+     * @type {boolean}
+     * @memberof SubscribeBfusdResponse
+     */
+    success?: boolean;
     /**
      *
      * @type {string}
-     * @memberof GetRwusdRateHistoryResponseRowsInner
+     * @memberof SubscribeBfusdResponse
      */
-    annualPercentageRate?: string;
-    /**
-     *
-     * @type {number}
-     * @memberof GetRwusdRateHistoryResponseRowsInner
-     */
-    time?: number;
+    bfusdAmount?: string;
 }

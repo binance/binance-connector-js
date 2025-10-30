@@ -21,19 +21,19 @@ import type { GetBfusdRateHistoryResponseRowsInner } from './get-bfusd-rate-hist
 /**
  *
  * @export
- * @interface GetRwusdRateHistoryResponse
+ * @interface GetBfusdRateHistoryResponse
  */
-export interface GetRwusdRateHistoryResponse {
+export interface GetBfusdRateHistoryResponse {
     /**
      *
      * @type {Array<GetBfusdRateHistoryResponseRowsInner>}
-     * @memberof GetRwusdRateHistoryResponse
+     * @memberof GetBfusdRateHistoryResponse
      */
     rows?: Array<GetBfusdRateHistoryResponseRowsInner>;
     /**
      *
      * @type {string}
-     * @memberof GetRwusdRateHistoryResponse
+     * @memberof GetBfusdRateHistoryResponse
      */
     total?: string;
 }

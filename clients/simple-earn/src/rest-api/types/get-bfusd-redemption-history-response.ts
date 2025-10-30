@@ -16,24 +16,24 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { GetBfusdRateHistoryResponseRowsInner } from './get-bfusd-rate-history-response-rows-inner';
+import type { GetBfusdRedemptionHistoryResponseRowsInner } from './get-bfusd-redemption-history-response-rows-inner';
 
 /**
  *
  * @export
- * @interface GetRwusdRateHistoryResponse
+ * @interface GetBfusdRedemptionHistoryResponse
  */
-export interface GetRwusdRateHistoryResponse {
+export interface GetBfusdRedemptionHistoryResponse {
     /**
      *
-     * @type {Array<GetBfusdRateHistoryResponseRowsInner>}
-     * @memberof GetRwusdRateHistoryResponse
+     * @type {Array<GetBfusdRedemptionHistoryResponseRowsInner>}
+     * @memberof GetBfusdRedemptionHistoryResponse
      */
-    rows?: Array<GetBfusdRateHistoryResponseRowsInner>;
+    rows?: Array<GetBfusdRedemptionHistoryResponseRowsInner>;
     /**
      *
-     * @type {string}
-     * @memberof GetRwusdRateHistoryResponse
+     * @type {number}
+     * @memberof GetBfusdRedemptionHistoryResponse
      */
-    total?: string;
+    total?: number;
 }
