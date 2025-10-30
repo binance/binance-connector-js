@@ -329,6 +329,13 @@ export interface DepthRequest {
      * @memberof MarketApiDepth
      */
     readonly limit?: number;
+
+    /**
+     *
+     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * @memberof MarketApiDepth
+     */
+    readonly symbolStatus?: DepthSymbolStatusEnum;
 }
 
 /**
@@ -425,6 +432,13 @@ export interface TickerRequest {
      * @memberof MarketApiTicker
      */
     readonly windowSize?: TickerWindowSizeEnum;
+
+    /**
+     *
+     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * @memberof MarketApiTicker
+     */
+    readonly symbolStatus?: TickerSymbolStatusEnum;
 }
 
 /**
@@ -459,6 +473,13 @@ export interface Ticker24hrRequest {
      * @memberof MarketApiTicker24hr
      */
     readonly type?: Ticker24hrTypeEnum;
+
+    /**
+     *
+     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * @memberof MarketApiTicker24hr
+     */
+    readonly symbolStatus?: Ticker24hrSymbolStatusEnum;
 }
 
 /**
@@ -486,6 +507,13 @@ export interface TickerBookRequest {
      * @memberof MarketApiTickerBook
      */
     readonly symbols?: Array<string>;
+
+    /**
+     *
+     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * @memberof MarketApiTickerBook
+     */
+    readonly symbolStatus?: TickerBookSymbolStatusEnum;
 }
 
 /**
@@ -513,6 +541,13 @@ export interface TickerPriceRequest {
      * @memberof MarketApiTickerPrice
      */
     readonly symbols?: Array<string>;
+
+    /**
+     *
+     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * @memberof MarketApiTickerPrice
+     */
+    readonly symbolStatus?: TickerPriceSymbolStatusEnum;
 }
 
 /**
@@ -554,6 +589,13 @@ export interface TickerTradingDayRequest {
      * @memberof MarketApiTickerTradingDay
      */
     readonly type?: TickerTradingDayTypeEnum;
+
+    /**
+     *
+     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * @memberof MarketApiTickerTradingDay
+     */
+    readonly symbolStatus?: TickerTradingDaySymbolStatusEnum;
 }
 
 /**
@@ -1056,6 +1098,14 @@ export class MarketApi implements MarketApiInterface {
     }
 }
 
+export enum DepthSymbolStatusEnum {
+    TRADING = 'TRADING',
+    END_OF_DAY = 'END_OF_DAY',
+    HALT = 'HALT',
+    BREAK = 'BREAK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
 export enum KlinesIntervalEnum {
     INTERVAL_1s = '1s',
     INTERVAL_1m = '1m',
@@ -1171,14 +1221,54 @@ export enum TickerWindowSizeEnum {
     WINDOW_SIZE_6d = '6d',
 }
 
+export enum TickerSymbolStatusEnum {
+    TRADING = 'TRADING',
+    END_OF_DAY = 'END_OF_DAY',
+    HALT = 'HALT',
+    BREAK = 'BREAK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
 export enum Ticker24hrTypeEnum {
     FULL = 'FULL',
     MINI = 'MINI',
 }
 
+export enum Ticker24hrSymbolStatusEnum {
+    TRADING = 'TRADING',
+    END_OF_DAY = 'END_OF_DAY',
+    HALT = 'HALT',
+    BREAK = 'BREAK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum TickerBookSymbolStatusEnum {
+    TRADING = 'TRADING',
+    END_OF_DAY = 'END_OF_DAY',
+    HALT = 'HALT',
+    BREAK = 'BREAK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum TickerPriceSymbolStatusEnum {
+    TRADING = 'TRADING',
+    END_OF_DAY = 'END_OF_DAY',
+    HALT = 'HALT',
+    BREAK = 'BREAK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
 export enum TickerTradingDayTypeEnum {
     FULL = 'FULL',
     MINI = 'MINI',
+}
+
+export enum TickerTradingDaySymbolStatusEnum {
+    TRADING = 'TRADING',
+    END_OF_DAY = 'END_OF_DAY',
+    HALT = 'HALT',
+    BREAK = 'BREAK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 
 export enum UiKlinesIntervalEnum {

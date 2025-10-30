@@ -142,10 +142,15 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * @summary Order book
          * @param {string} symbol
          * @param {number} [limit] Default: 500; Maximum: 1000.
+         * @param {DepthSymbolStatusEnum} [symbolStatus]
          *
          * @throws {RequiredError}
          */
-        depth: async (symbol: string, limit?: number): Promise<RequestArgs> => {
+        depth: async (
+            symbol: string,
+            limit?: number,
+            symbolStatus?: DepthSymbolStatusEnum
+        ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('depth', 'symbol', symbol);
 
@@ -157,6 +162,10 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
 
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
+            }
+
+            if (symbolStatus !== undefined && symbolStatus !== null) {
+                localVarQueryParameter['symbolStatus'] = symbolStatus;
             }
 
             let _timeUnit: TimeUnit | undefined;
@@ -319,6 +328,7 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * @param {Array<string>} [symbols] List of symbols to query
          * @param {TickerWindowSizeEnum} [windowSize]
          * @param {TickerTypeEnum} [type]
+         * @param {TickerSymbolStatusEnum} [symbolStatus]
          *
          * @throws {RequiredError}
          */
@@ -326,7 +336,8 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             symbol?: string,
             symbols?: Array<string>,
             windowSize?: TickerWindowSizeEnum,
-            type?: TickerTypeEnum
+            type?: TickerTypeEnum,
+            symbolStatus?: TickerSymbolStatusEnum
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -344,6 +355,10 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
 
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
+            }
+
+            if (symbolStatus !== undefined && symbolStatus !== null) {
+                localVarQueryParameter['symbolStatus'] = symbolStatus;
             }
 
             let _timeUnit: TimeUnit | undefined;
@@ -400,13 +415,15 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * @param {string} [symbol] Symbol to query
          * @param {Array<string>} [symbols] List of symbols to query
          * @param {Ticker24hrTypeEnum} [type]
+         * @param {Ticker24hrSymbolStatusEnum} [symbolStatus]
          *
          * @throws {RequiredError}
          */
         ticker24hr: async (
             symbol?: string,
             symbols?: Array<string>,
-            type?: Ticker24hrTypeEnum
+            type?: Ticker24hrTypeEnum,
+            symbolStatus?: Ticker24hrSymbolStatusEnum
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -420,6 +437,10 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
 
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
+            }
+
+            if (symbolStatus !== undefined && symbolStatus !== null) {
+                localVarQueryParameter['symbolStatus'] = symbolStatus;
             }
 
             let _timeUnit: TimeUnit | undefined;
@@ -463,12 +484,14 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * @summary Symbol order book ticker
          * @param {string} [symbol] Symbol to query
          * @param {Array<string>} [symbols] List of symbols to query
+         * @param {TickerBookTickerSymbolStatusEnum} [symbolStatus]
          *
          * @throws {RequiredError}
          */
         tickerBookTicker: async (
             symbol?: string,
-            symbols?: Array<string>
+            symbols?: Array<string>,
+            symbolStatus?: TickerBookTickerSymbolStatusEnum
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -478,6 +501,10 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
 
             if (symbols) {
                 localVarQueryParameter['symbols'] = symbols;
+            }
+
+            if (symbolStatus !== undefined && symbolStatus !== null) {
+                localVarQueryParameter['symbolStatus'] = symbolStatus;
             }
 
             let _timeUnit: TimeUnit | undefined;
@@ -521,10 +548,15 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * @summary Symbol price ticker
          * @param {string} [symbol] Symbol to query
          * @param {Array<string>} [symbols] List of symbols to query
+         * @param {TickerPriceSymbolStatusEnum} [symbolStatus]
          *
          * @throws {RequiredError}
          */
-        tickerPrice: async (symbol?: string, symbols?: Array<string>): Promise<RequestArgs> => {
+        tickerPrice: async (
+            symbol?: string,
+            symbols?: Array<string>,
+            symbolStatus?: TickerPriceSymbolStatusEnum
+        ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
@@ -533,6 +565,10 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
 
             if (symbols) {
                 localVarQueryParameter['symbols'] = symbols;
+            }
+
+            if (symbolStatus !== undefined && symbolStatus !== null) {
+                localVarQueryParameter['symbolStatus'] = symbolStatus;
             }
 
             let _timeUnit: TimeUnit | undefined;
@@ -554,6 +590,7 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * @param {Array<string>} [symbols] List of symbols to query
          * @param {string} [timeZone] Default: 0 (UTC)
          * @param {TickerTradingDayTypeEnum} [type]
+         * @param {TickerTradingDaySymbolStatusEnum} [symbolStatus]
          *
          * @throws {RequiredError}
          */
@@ -561,7 +598,8 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             symbol?: string,
             symbols?: Array<string>,
             timeZone?: string,
-            type?: TickerTradingDayTypeEnum
+            type?: TickerTradingDayTypeEnum,
+            symbolStatus?: TickerTradingDaySymbolStatusEnum
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -579,6 +617,10 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
 
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
+            }
+
+            if (symbolStatus !== undefined && symbolStatus !== null) {
+                localVarQueryParameter['symbolStatus'] = symbolStatus;
             }
 
             let _timeUnit: TimeUnit | undefined;
@@ -972,6 +1014,13 @@ export interface DepthRequest {
      * @memberof MarketApiDepth
      */
     readonly limit?: number;
+
+    /**
+     *
+     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * @memberof MarketApiDepth
+     */
+    readonly symbolStatus?: DepthSymbolStatusEnum;
 }
 
 /**
@@ -1101,6 +1150,13 @@ export interface TickerRequest {
      * @memberof MarketApiTicker
      */
     readonly type?: TickerTypeEnum;
+
+    /**
+     *
+     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * @memberof MarketApiTicker
+     */
+    readonly symbolStatus?: TickerSymbolStatusEnum;
 }
 
 /**
@@ -1128,6 +1184,13 @@ export interface Ticker24hrRequest {
      * @memberof MarketApiTicker24hr
      */
     readonly type?: Ticker24hrTypeEnum;
+
+    /**
+     *
+     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * @memberof MarketApiTicker24hr
+     */
+    readonly symbolStatus?: Ticker24hrSymbolStatusEnum;
 }
 
 /**
@@ -1148,6 +1211,13 @@ export interface TickerBookTickerRequest {
      * @memberof MarketApiTickerBookTicker
      */
     readonly symbols?: Array<string>;
+
+    /**
+     *
+     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * @memberof MarketApiTickerBookTicker
+     */
+    readonly symbolStatus?: TickerBookTickerSymbolStatusEnum;
 }
 
 /**
@@ -1168,6 +1238,13 @@ export interface TickerPriceRequest {
      * @memberof MarketApiTickerPrice
      */
     readonly symbols?: Array<string>;
+
+    /**
+     *
+     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * @memberof MarketApiTickerPrice
+     */
+    readonly symbolStatus?: TickerPriceSymbolStatusEnum;
 }
 
 /**
@@ -1202,6 +1279,13 @@ export interface TickerTradingDayRequest {
      * @memberof MarketApiTickerTradingDay
      */
     readonly type?: TickerTradingDayTypeEnum;
+
+    /**
+     *
+     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * @memberof MarketApiTickerTradingDay
+     */
+    readonly symbolStatus?: TickerTradingDaySymbolStatusEnum;
 }
 
 /**
@@ -1344,7 +1428,8 @@ export class MarketApi implements MarketApiInterface {
     public async depth(requestParameters: DepthRequest): Promise<RestApiResponse<DepthResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.depth(
             requestParameters?.symbol,
-            requestParameters?.limit
+            requestParameters?.limit,
+            requestParameters?.symbolStatus
         );
         return sendRequest<DepthResponse>(
             this.configuration,
@@ -1464,7 +1549,8 @@ export class MarketApi implements MarketApiInterface {
             requestParameters?.symbol,
             requestParameters?.symbols,
             requestParameters?.windowSize,
-            requestParameters?.type
+            requestParameters?.type,
+            requestParameters?.symbolStatus
         );
         return sendRequest<TickerResponse>(
             this.configuration,
@@ -1529,7 +1615,8 @@ export class MarketApi implements MarketApiInterface {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.ticker24hr(
             requestParameters?.symbol,
             requestParameters?.symbols,
-            requestParameters?.type
+            requestParameters?.type,
+            requestParameters?.symbolStatus
         );
         return sendRequest<Ticker24hrResponse>(
             this.configuration,
@@ -1581,7 +1668,8 @@ export class MarketApi implements MarketApiInterface {
     ): Promise<RestApiResponse<TickerBookTickerResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.tickerBookTicker(
             requestParameters?.symbol,
-            requestParameters?.symbols
+            requestParameters?.symbols,
+            requestParameters?.symbolStatus
         );
         return sendRequest<TickerBookTickerResponse>(
             this.configuration,
@@ -1633,7 +1721,8 @@ export class MarketApi implements MarketApiInterface {
     ): Promise<RestApiResponse<TickerPriceResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.tickerPrice(
             requestParameters?.symbol,
-            requestParameters?.symbols
+            requestParameters?.symbols,
+            requestParameters?.symbolStatus
         );
         return sendRequest<TickerPriceResponse>(
             this.configuration,
@@ -1663,7 +1752,8 @@ export class MarketApi implements MarketApiInterface {
             requestParameters?.symbol,
             requestParameters?.symbols,
             requestParameters?.timeZone,
-            requestParameters?.type
+            requestParameters?.type,
+            requestParameters?.symbolStatus
         );
         return sendRequest<TickerTradingDayResponse>(
             this.configuration,
@@ -1708,6 +1798,14 @@ export class MarketApi implements MarketApiInterface {
             { isSigned: false }
         );
     }
+}
+
+export enum DepthSymbolStatusEnum {
+    TRADING = 'TRADING',
+    END_OF_DAY = 'END_OF_DAY',
+    HALT = 'HALT',
+    BREAK = 'BREAK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 
 export enum KlinesIntervalEnum {
@@ -1825,14 +1923,54 @@ export enum TickerTypeEnum {
     MINI = 'MINI',
 }
 
+export enum TickerSymbolStatusEnum {
+    TRADING = 'TRADING',
+    END_OF_DAY = 'END_OF_DAY',
+    HALT = 'HALT',
+    BREAK = 'BREAK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
 export enum Ticker24hrTypeEnum {
     FULL = 'FULL',
     MINI = 'MINI',
 }
 
+export enum Ticker24hrSymbolStatusEnum {
+    TRADING = 'TRADING',
+    END_OF_DAY = 'END_OF_DAY',
+    HALT = 'HALT',
+    BREAK = 'BREAK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum TickerBookTickerSymbolStatusEnum {
+    TRADING = 'TRADING',
+    END_OF_DAY = 'END_OF_DAY',
+    HALT = 'HALT',
+    BREAK = 'BREAK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum TickerPriceSymbolStatusEnum {
+    TRADING = 'TRADING',
+    END_OF_DAY = 'END_OF_DAY',
+    HALT = 'HALT',
+    BREAK = 'BREAK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
 export enum TickerTradingDayTypeEnum {
     FULL = 'FULL',
     MINI = 'MINI',
+}
+
+export enum TickerTradingDaySymbolStatusEnum {
+    TRADING = 'TRADING',
+    END_OF_DAY = 'END_OF_DAY',
+    HALT = 'HALT',
+    BREAK = 'BREAK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 
 export enum UiKlinesIntervalEnum {

@@ -21,11 +21,17 @@ import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import {
     MarketApi,
+    DepthSymbolStatusEnum,
     KlinesIntervalEnum,
     TickerWindowSizeEnum,
     TickerTypeEnum,
+    TickerSymbolStatusEnum,
     Ticker24hrTypeEnum,
+    Ticker24hrSymbolStatusEnum,
+    TickerBookTickerSymbolStatusEnum,
+    TickerPriceSymbolStatusEnum,
     TickerTradingDayTypeEnum,
+    TickerTradingDaySymbolStatusEnum,
     UiKlinesIntervalEnum,
 } from '../../../src/rest-api';
 import {
@@ -277,6 +283,7 @@ describe('MarketApi', () => {
             const params: DepthRequest = {
                 symbol: 'BNBUSDT',
                 limit: 500,
+                symbolStatus: DepthSymbolStatusEnum.TRADING,
             };
 
             mockResponse = {
@@ -690,6 +697,7 @@ describe('MarketApi', () => {
                 symbols: ['null'],
                 windowSize: TickerWindowSizeEnum.WINDOW_SIZE_1m,
                 type: TickerTypeEnum.FULL,
+                symbolStatus: TickerSymbolStatusEnum.TRADING,
             };
 
             mockResponse = {
@@ -785,6 +793,7 @@ describe('MarketApi', () => {
                 symbol: 'BNBUSDT',
                 symbols: ['null'],
                 type: Ticker24hrTypeEnum.FULL,
+                symbolStatus: Ticker24hrSymbolStatusEnum.TRADING,
             };
 
             mockResponse = {
@@ -869,6 +878,7 @@ describe('MarketApi', () => {
             const params: TickerBookTickerRequest = {
                 symbol: 'BNBUSDT',
                 symbols: ['null'],
+                symbolStatus: TickerBookTickerSymbolStatusEnum.TRADING,
             };
 
             mockResponse = {
@@ -931,6 +941,7 @@ describe('MarketApi', () => {
             const params: TickerPriceRequest = {
                 symbol: 'BNBUSDT',
                 symbols: ['null'],
+                symbolStatus: TickerPriceSymbolStatusEnum.TRADING,
             };
 
             mockResponse = { symbol: 'LTCBTC', price: '4.00000200' };
@@ -1005,6 +1016,7 @@ describe('MarketApi', () => {
                 symbols: ['null'],
                 timeZone: 'timeZone_example',
                 type: TickerTradingDayTypeEnum.FULL,
+                symbolStatus: TickerTradingDaySymbolStatusEnum.TRADING,
             };
 
             mockResponse = {

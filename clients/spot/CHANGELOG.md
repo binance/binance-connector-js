@@ -1,5 +1,31 @@
 # Changelog
 
+## 22.0.0 - 2025-10-30
+
+### Changed (2)
+
+#### REST API
+
+- Added parameter `symbolStatus`
+  - affected methods:
+    - `depth()` (`GET /api/v3/depth`)
+    - `ticker()` (`GET /api/v3/ticker`)
+    - `ticker24hr()` (`GET /api/v3/ticker/24hr`)
+    - `tickerBookTicker()` (`GET /api/v3/ticker/bookTicker`)
+    - `tickerPrice()` (`GET /api/v3/ticker/price`)
+    - `tickerTradingDay()` (`GET /api/v3/ticker/tradingDay`)
+
+#### WebSocket API
+
+- Added parameter `symbolStatus`
+  - affected methods:
+    - `depth()` (`depth` method)
+    - `ticker()` (`ticker` method)
+    - `ticker24hr()` (`ticker.24hr` method)
+    - `tickerBook()` (`ticker.book` method)
+    - `tickerPrice()` (`ticker.price` method)
+    - `tickerTradingDay()` (`ticker.tradingDay` method)
+
 ## 21.0.0 - 2025-10-27
 
 ### Changed (2)
