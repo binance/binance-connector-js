@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 import fs from 'fs';
 import https from 'https';
+import { JSONParse } from 'json-with-bigint';
 import { platform, arch } from 'os';
 import {
     AxiosResponseHeaders,
@@ -450,7 +451,7 @@ export const httpRequestFunction = async function <T>(
             return {
                 data: async (): Promise<T> => {
                     try {
-                        return JSON.parse(response.data) as T;
+                        return JSONParse(response.data) as T;
                     } catch (err) {
                         throw new Error(`Failed to parse JSON response: ${err}`);
                     }
@@ -480,7 +481,7 @@ export const httpRequestFunction = async function <T>(
                     if (responseData && responseData !== null) {
                         if (typeof responseData === 'string' && responseData !== '')
                             try {
-                                data = JSON.parse(responseData);
+                                data = JSONParse(responseData);
                             } catch {
                                 data = {};
                             }

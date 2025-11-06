@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.0 - 2025-11-xx
+
+### Changed (1)
+
+- Using `json-with-bigint` library for all JSON parsing to handle large integers consistently.
+
 ## 1.2.6 - 2025-10-21
 
 ### Changed (2)

@@ -1,5 +1,6 @@
 import crypto from 'crypto';
 import axios, { AxiosError } from 'axios';
+import { JSONParse } from 'json-with-bigint';
 import * as utils from '../src/utils';
 import { expect, beforeEach, afterEach, describe, it, jest } from '@jest/globals';
 import {
@@ -193,7 +194,7 @@ describe('Utility Functions', () => {
             const queryStringParam = decodeURIComponent(buildQueryString(params).split('=')[1]);
 
             expect(urlParam).toBe(queryStringParam);
-            expect(JSON.parse(urlParam!)).toEqual(params.orders);
+            expect(JSONParse(urlParam!)).toEqual(params.orders);
         });
 
         it('should handle nested objects consistently', () => {
@@ -204,7 +205,7 @@ describe('Utility Functions', () => {
             utils.setSearchParams(url, params);
 
             const userParam = url.searchParams.get('user');
-            expect(JSON.parse(userParam!)).toEqual(params.user);
+            expect(JSONParse(userParam!)).toEqual(params.user);
         });
 
         it('should preserve existing URL pathname and hash', () => {

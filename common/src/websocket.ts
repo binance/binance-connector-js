@@ -1,5 +1,6 @@
 import { EventEmitter } from 'events';
 import WebSocketClient from 'ws';
+import { JSONParse } from 'json-with-bigint';
 import { ClientRequestArgs } from 'http';
 import {
     type ConfigurationWebsocketAPI,
@@ -752,7 +753,7 @@ export class WebsocketAPIBase extends WebsocketCommon {
      */
     protected onMessage<T>(data: string, connection: WebsocketConnection): void {
         try {
-            const message = JSON.parse(data);
+            const message = JSONParse(data);
             const { id, status } = message;
 
             if (id && connection.pendingRequests.has(id)) {
@@ -1017,7 +1018,7 @@ export class WebsocketStreamsBase extends WebsocketCommon {
      */
     protected onMessage(data: string, connection: WebsocketConnection): void {
         try {
-            const parsedData = JSON.parse(data);
+            const parsedData = JSONParse(data);
             const streamName = parsedData?.stream;
 
             if (streamName && this.streamCallbackMap.has(streamName))

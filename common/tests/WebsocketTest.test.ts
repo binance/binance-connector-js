@@ -1,5 +1,6 @@
 import WebSocketClient from 'ws';
 import crypto from 'crypto';
+import { JSONParse } from 'json-with-bigint';
 import { expect, beforeEach, afterEach, describe, it, jest } from '@jest/globals';
 import { EventEmitter } from 'events';
 import {
@@ -1695,7 +1696,7 @@ describe('WebsocketAPIBase', () => {
             const options = { param1: 'value1' };
             const response = await wsAPI.sendMessage(method, options, { withApiKey: true });
 
-            const sentPayload = JSON.parse(sendSpy.mock.calls[0][0] as string);
+            const sentPayload = JSONParse(sendSpy.mock.calls[0][0] as string);
             expect(sentPayload.params.apiKey).toBe(configuration.apiKey);
 
             expect(sendSpy).toHaveBeenCalledWith(
@@ -1716,7 +1717,7 @@ describe('WebsocketAPIBase', () => {
             const options = { param1: 'value1' };
             const response = await wsAPI.sendMessage(method, options, { isSigned: true });
 
-            const sentPayload = JSON.parse(sendSpy.mock.calls[0][0] as string);
+            const sentPayload = JSONParse(sendSpy.mock.calls[0][0] as string);
             expect(sentPayload.params.timestamp).toBeDefined();
             expect(sentPayload.params.signature).toBe('mock-signature');
 
@@ -1741,7 +1742,7 @@ describe('WebsocketAPIBase', () => {
                 isSigned: true,
             });
 
-            const sentPayload = JSON.parse(sendSpy.mock.calls[0][0] as string);
+            const sentPayload = JSONParse(sendSpy.mock.calls[0][0] as string);
             expect(sentPayload.params.apiKey).toBe(configuration.apiKey);
             expect(sentPayload.params.timestamp).toBeDefined();
             expect(sentPayload.params.signature).toBe('mock-signature');
@@ -1767,7 +1768,7 @@ describe('WebsocketAPIBase', () => {
             const options = { param1: 'value1' };
             const response = await wsAPI.sendMessage(method, options, { isSigned: true });
 
-            const sentPayload = JSON.parse(sendSpy.mock.calls[0][0] as string);
+            const sentPayload = JSONParse(sendSpy.mock.calls[0][0] as string);
             expect(sentPayload.params.timestamp).toBeDefined();
             expect(sentPayload.params.signature).toBeUndefined();
 
@@ -1792,7 +1793,7 @@ describe('WebsocketAPIBase', () => {
             const options = { param1: 'value1' };
             const response = await wsAPI.sendMessage(method, options, { isSigned: true });
 
-            const sentPayload = JSON.parse(sendSpy.mock.calls[0][0] as string);
+            const sentPayload = JSONParse(sendSpy.mock.calls[0][0] as string);
             expect(sentPayload.params.timestamp).toBeDefined();
             expect(sentPayload.params.signature).toBe('mock-signature');
 
@@ -1829,7 +1830,7 @@ describe('WebsocketAPIBase', () => {
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 const [rawPayload, _idArg, promiseArg, timeoutArg, connectionArg] =
                     sendSpy.mock.calls[idx];
-                const sent = JSON.parse(rawPayload as string);
+                const sent = JSONParse(rawPayload as string);
 
                 expect(typeof sent.id).toBe('string');
                 expect(sent.method).toBe(method);
@@ -1872,7 +1873,7 @@ describe('WebsocketAPIBase', () => {
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 const [rawPayload, _idArg, promiseArg, timeoutArg, connectionArg] =
                     sendSpy.mock.calls[idx];
-                const sent = JSON.parse(rawPayload as string);
+                const sent = JSONParse(rawPayload as string);
 
                 expect(typeof sent.id).toBe('string');
                 expect(sent.method).toBe(method);
