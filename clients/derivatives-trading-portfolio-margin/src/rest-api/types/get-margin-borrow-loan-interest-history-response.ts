@@ -32,8 +32,8 @@ export interface GetMarginBorrowLoanInterestHistoryResponse {
     rows?: Array<GetMarginBorrowLoanInterestHistoryResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetMarginBorrowLoanInterestHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

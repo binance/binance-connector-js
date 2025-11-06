@@ -51,10 +51,10 @@ export interface CancelCmOrderResponse {
     executedQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelCmOrderResponse
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -117,8 +117,8 @@ export interface CancelCmOrderResponse {
     type?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelCmOrderResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

@@ -21,10 +21,10 @@
 export interface Executionreport {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Executionreport
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}
@@ -75,10 +75,10 @@ export interface Executionreport {
     P?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Executionreport
      */
-    d?: number;
+    d?: number | bigint;
     /**
      *
      * @type {string}
@@ -87,10 +87,10 @@ export interface Executionreport {
     F?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Executionreport
      */
-    g?: number;
+    g?: number | bigint;
     /**
      *
      * @type {string}
@@ -117,10 +117,10 @@ export interface Executionreport {
     r?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Executionreport
      */
-    i?: number;
+    i?: number | bigint;
     /**
      *
      * @type {string}
@@ -153,28 +153,28 @@ export interface Executionreport {
     N?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Executionreport
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Executionreport
      */
-    t?: number;
+    t?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Executionreport
      */
-    v?: number;
+    v?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Executionreport
      */
-    I?: number;
+    I?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -195,10 +195,10 @@ export interface Executionreport {
     M?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Executionreport
      */
-    O?: number;
+    O?: number | bigint;
     /**
      *
      * @type {string}
@@ -219,28 +219,28 @@ export interface Executionreport {
     Q?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Executionreport
      */
-    D?: number;
+    D?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Executionreport
      */
-    j?: number;
+    j?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Executionreport
      */
-    J?: number;
+    J?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Executionreport
      */
-    W?: number;
+    W?: number | bigint;
     /**
      *
      * @type {string}
@@ -249,16 +249,16 @@ export interface Executionreport {
     V?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Executionreport
      */
-    u?: number;
+    u?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Executionreport
      */
-    U?: number;
+    U?: number | bigint;
     /**
      *
      * @type {string}

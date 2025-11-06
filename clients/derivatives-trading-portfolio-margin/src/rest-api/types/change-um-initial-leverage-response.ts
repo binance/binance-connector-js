@@ -21,10 +21,10 @@
 export interface ChangeUmInitialLeverageResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ChangeUmInitialLeverageResponse
      */
-    leverage?: number;
+    leverage?: number | bigint;
     /**
      *
      * @type {string}

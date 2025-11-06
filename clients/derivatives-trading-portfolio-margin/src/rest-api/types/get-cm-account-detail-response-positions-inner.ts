@@ -87,8 +87,8 @@ export interface GetCmAccountDetailResponsePositionsInner {
     maxQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetCmAccountDetailResponsePositionsInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

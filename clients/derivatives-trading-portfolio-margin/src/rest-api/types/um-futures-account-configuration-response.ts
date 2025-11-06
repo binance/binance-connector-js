@@ -21,10 +21,10 @@
 export interface UmFuturesAccountConfigurationResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UmFuturesAccountConfigurationResponse
      */
-    feeTier?: number;
+    feeTier?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -51,10 +51,10 @@ export interface UmFuturesAccountConfigurationResponse {
     dualSidePosition?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UmFuturesAccountConfigurationResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -63,8 +63,8 @@ export interface UmFuturesAccountConfigurationResponse {
     multiAssetsMargin?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UmFuturesAccountConfigurationResponse
      */
-    tradeGroupId?: number;
+    tradeGroupId?: number | bigint;
 }

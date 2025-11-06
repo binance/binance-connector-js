@@ -21,10 +21,10 @@
 export interface ChangeUmPositionModeResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ChangeUmPositionModeResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}

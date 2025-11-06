@@ -51,10 +51,10 @@ export interface QueryCurrentMarginOpenOrderResponseInner {
     isWorking?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCurrentMarginOpenOrderResponseInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -93,10 +93,10 @@ export interface QueryCurrentMarginOpenOrderResponseInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCurrentMarginOpenOrderResponseInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}
@@ -111,16 +111,16 @@ export interface QueryCurrentMarginOpenOrderResponseInner {
     type?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCurrentMarginOpenOrderResponseInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCurrentMarginOpenOrderResponseInner
      */
-    accountId?: number;
+    accountId?: number | bigint;
     /**
      *
      * @type {string}

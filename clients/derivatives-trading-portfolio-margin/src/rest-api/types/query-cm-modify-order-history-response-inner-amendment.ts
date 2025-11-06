@@ -41,8 +41,8 @@ export interface QueryCmModifyOrderHistoryResponseInnerAmendment {
     origQty?: QueryCmModifyOrderHistoryResponseInnerAmendmentOrigQty;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCmModifyOrderHistoryResponseInnerAmendment
      */
-    count?: number;
+    count?: number | bigint;
 }

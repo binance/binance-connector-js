@@ -33,14 +33,14 @@ export interface QueryUserRateLimitResponseInner {
     interval?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUserRateLimitResponseInner
      */
-    intervalNum?: number;
+    intervalNum?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUserRateLimitResponseInner
      */
-    limit?: number;
+    limit?: number | bigint;
 }

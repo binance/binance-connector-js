@@ -45,10 +45,10 @@ export interface QueryUmOrderResponse {
     executedQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUmOrderResponse
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -99,10 +99,10 @@ export interface QueryUmOrderResponse {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUmOrderResponse
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}
@@ -117,10 +117,10 @@ export interface QueryUmOrderResponse {
     type?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUmOrderResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -129,10 +129,10 @@ export interface QueryUmOrderResponse {
     selfTradePreventionMode?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUmOrderResponse
      */
-    goodTillDate?: number;
+    goodTillDate?: number | bigint;
     /**
      *
      * @type {string}

@@ -32,16 +32,16 @@ export interface OrderTradeUpdate {
     fs?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderTradeUpdate
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderTradeUpdate
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {string}

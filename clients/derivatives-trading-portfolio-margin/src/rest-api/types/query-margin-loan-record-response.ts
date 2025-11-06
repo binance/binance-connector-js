@@ -32,8 +32,8 @@ export interface QueryMarginLoanRecordResponse {
     rows?: Array<QueryMarginLoanRecordResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryMarginLoanRecordResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

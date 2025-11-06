@@ -33,10 +33,10 @@ export interface QueryUsersMarginForceOrdersResponseRowsInner {
     executedQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUsersMarginForceOrdersResponseRowsInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -69,8 +69,8 @@ export interface QueryUsersMarginForceOrdersResponseRowsInner {
     timeInForce?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUsersMarginForceOrdersResponseRowsInner
      */
-    updatedTime?: number;
+    updatedTime?: number | bigint;
 }

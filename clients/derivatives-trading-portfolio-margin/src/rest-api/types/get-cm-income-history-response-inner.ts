@@ -51,10 +51,10 @@ export interface GetCmIncomeHistoryResponseInner {
     info?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetCmIncomeHistoryResponseInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}

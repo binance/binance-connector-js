@@ -57,10 +57,10 @@ export interface GetUmAccountDetailV2ResponsePositionsInner {
     positionAmt?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetUmAccountDetailV2ResponsePositionsInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}

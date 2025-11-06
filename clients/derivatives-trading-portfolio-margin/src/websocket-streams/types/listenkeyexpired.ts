@@ -21,8 +21,8 @@
 export interface Listenkeyexpired {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Listenkeyexpired
      */
-    E?: number;
+    E?: number | bigint;
 }

@@ -27,10 +27,10 @@ export interface PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndi
     isLocked?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicatorsBTCUSDTInner
      */
-    plannedRecoverTime?: number;
+    plannedRecoverTime?: number | bigint;
     /**
      *
      * @type {string}

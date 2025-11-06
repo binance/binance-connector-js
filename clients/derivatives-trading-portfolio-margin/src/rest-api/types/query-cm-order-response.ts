@@ -45,10 +45,10 @@ export interface QueryCmOrderResponse {
     executedQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCmOrderResponse
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -105,10 +105,10 @@ export interface QueryCmOrderResponse {
     positionSide?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCmOrderResponse
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}
@@ -123,8 +123,8 @@ export interface QueryCmOrderResponse {
     type?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCmOrderResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

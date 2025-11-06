@@ -51,10 +51,10 @@ export interface GetUmFuturesTransactionDownloadLinkByIdResponse {
     notified?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetUmFuturesTransactionDownloadLinkByIdResponse
      */
-    expirationTimestamp?: number;
+    expirationTimestamp?: number | bigint;
     /**
      *
      * @type {string}

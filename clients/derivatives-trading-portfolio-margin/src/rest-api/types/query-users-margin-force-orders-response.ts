@@ -32,8 +32,8 @@ export interface QueryUsersMarginForceOrdersResponse {
     rows?: Array<QueryUsersMarginForceOrdersResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUsersMarginForceOrdersResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

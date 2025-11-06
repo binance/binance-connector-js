@@ -32,8 +32,8 @@ export interface PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse {
     indicators?: PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicators;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

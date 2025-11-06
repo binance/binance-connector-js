@@ -33,10 +33,10 @@ export interface QueryPortfolioMarginNegativeBalanceInterestHistoryResponseInner
     interest?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryPortfolioMarginNegativeBalanceInterestHistoryResponseInner
      */
-    interestAccuredTime?: number;
+    interestAccuredTime?: number | bigint;
     /**
      *
      * @type {string}

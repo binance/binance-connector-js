@@ -39,10 +39,10 @@ export interface UmFuturesSymbolConfigurationResponseInner {
     isAutoAddMargin?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UmFuturesSymbolConfigurationResponseInner
      */
-    leverage?: number;
+    leverage?: number | bigint;
     /**
      *
      * @type {string}

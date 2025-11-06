@@ -21,10 +21,10 @@
 export interface QueryUsersCmForceOrdersResponseInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUsersCmForceOrdersResponseInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -117,14 +117,14 @@ export interface QueryUsersCmForceOrdersResponseInner {
     origType?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUsersCmForceOrdersResponseInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUsersCmForceOrdersResponseInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

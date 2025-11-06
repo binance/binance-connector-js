@@ -27,10 +27,10 @@ export interface CancelCmConditionalOrderResponse {
     newClientStrategyId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelCmConditionalOrderResponse
      */
-    strategyId?: number;
+    strategyId?: number | bigint;
     /**
      *
      * @type {string}
@@ -105,16 +105,16 @@ export interface CancelCmConditionalOrderResponse {
     priceRate?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelCmConditionalOrderResponse
      */
-    bookTime?: number;
+    bookTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelCmConditionalOrderResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}

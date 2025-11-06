@@ -27,16 +27,16 @@ export interface CmAccountTradeListResponseInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CmAccountTradeListResponseInner
      */
-    id?: number;
+    id?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CmAccountTradeListResponseInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -93,10 +93,10 @@ export interface CmAccountTradeListResponseInner {
     commissionAsset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CmAccountTradeListResponseInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}

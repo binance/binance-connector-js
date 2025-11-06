@@ -27,10 +27,10 @@ export interface QueryCurrentCmOpenConditionalOrderResponse {
     newClientStrategyId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCurrentCmOpenConditionalOrderResponse
      */
-    strategyId?: number;
+    strategyId?: number | bigint;
     /**
      *
      * @type {string}
@@ -87,16 +87,16 @@ export interface QueryCurrentCmOpenConditionalOrderResponse {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCurrentCmOpenConditionalOrderResponse
      */
-    bookTime?: number;
+    bookTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCurrentCmOpenConditionalOrderResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}

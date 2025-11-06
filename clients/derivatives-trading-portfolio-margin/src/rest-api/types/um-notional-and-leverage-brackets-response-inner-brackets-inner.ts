@@ -21,28 +21,28 @@
 export interface UmNotionalAndLeverageBracketsResponseInnerBracketsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UmNotionalAndLeverageBracketsResponseInnerBracketsInner
      */
-    bracket?: number;
+    bracket?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UmNotionalAndLeverageBracketsResponseInnerBracketsInner
      */
-    initialLeverage?: number;
+    initialLeverage?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UmNotionalAndLeverageBracketsResponseInnerBracketsInner
      */
-    notionalCap?: number;
+    notionalCap?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UmNotionalAndLeverageBracketsResponseInnerBracketsInner
      */
-    notionalFloor?: number;
+    notionalFloor?: number | bigint;
     /**
      *
      * @type {number}
@@ -51,8 +51,8 @@ export interface UmNotionalAndLeverageBracketsResponseInnerBracketsInner {
     maintMarginRatio?: number;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UmNotionalAndLeverageBracketsResponseInnerBracketsInner
      */
-    cum?: number;
+    cum?: number | bigint;
 }

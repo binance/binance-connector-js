@@ -21,10 +21,10 @@
 export interface CancelAllUmOpenOrdersResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelAllUmOpenOrdersResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}

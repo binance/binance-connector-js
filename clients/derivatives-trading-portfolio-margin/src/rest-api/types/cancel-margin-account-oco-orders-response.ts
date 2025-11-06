@@ -29,10 +29,10 @@ import type { CancelMarginAccountOcoOrdersResponseOrdersInner } from './cancel-m
 export interface CancelMarginAccountOcoOrdersResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelMarginAccountOcoOrdersResponse
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -59,10 +59,10 @@ export interface CancelMarginAccountOcoOrdersResponse {
     listClientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelMarginAccountOcoOrdersResponse
      */
-    transactionTime?: number;
+    transactionTime?: number | bigint;
     /**
      *
      * @type {string}

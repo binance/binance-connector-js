@@ -27,10 +27,10 @@ export interface QueryUmConditionalOrderHistoryResponse {
     newClientStrategyId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
-    strategyId?: number;
+    strategyId?: number | bigint;
     /**
      *
      * @type {string}
@@ -87,10 +87,10 @@ export interface QueryUmConditionalOrderHistoryResponse {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -99,22 +99,22 @@ export interface QueryUmConditionalOrderHistoryResponse {
     status?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
-    bookTime?: number;
+    bookTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
-    triggerTime?: number;
+    triggerTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -159,8 +159,8 @@ export interface QueryUmConditionalOrderHistoryResponse {
     selfTradePreventionMode?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUmConditionalOrderHistoryResponse
      */
-    goodTillDate?: number;
+    goodTillDate?: number | bigint;
 }

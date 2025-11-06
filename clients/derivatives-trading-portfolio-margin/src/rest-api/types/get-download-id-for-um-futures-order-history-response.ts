@@ -21,10 +21,10 @@
 export interface GetDownloadIdForUmFuturesOrderHistoryResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetDownloadIdForUmFuturesOrderHistoryResponse
      */
-    avgCostTimestampOfLast30d?: number;
+    avgCostTimestampOfLast30d?: number | bigint;
     /**
      *
      * @type {string}

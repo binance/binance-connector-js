@@ -21,10 +21,10 @@
 export interface QueryMarginLoanRecordResponseRowsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryMarginLoanRecordResponseRowsInner
      */
-    txId?: number;
+    txId?: number | bigint;
     /**
      *
      * @type {string}
@@ -39,10 +39,10 @@ export interface QueryMarginLoanRecordResponseRowsInner {
     principal?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryMarginLoanRecordResponseRowsInner
      */
-    timestamp?: number;
+    timestamp?: number | bigint;
     /**
      *
      * @type {string}

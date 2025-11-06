@@ -21,10 +21,10 @@
 export interface Liabilitychange {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Liabilitychange
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}
@@ -39,10 +39,10 @@ export interface Liabilitychange {
     t?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Liabilitychange
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {string}

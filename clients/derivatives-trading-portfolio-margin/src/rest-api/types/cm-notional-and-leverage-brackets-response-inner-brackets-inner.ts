@@ -21,28 +21,28 @@
 export interface CmNotionalAndLeverageBracketsResponseInnerBracketsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CmNotionalAndLeverageBracketsResponseInnerBracketsInner
      */
-    bracket?: number;
+    bracket?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CmNotionalAndLeverageBracketsResponseInnerBracketsInner
      */
-    initialLeverage?: number;
+    initialLeverage?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CmNotionalAndLeverageBracketsResponseInnerBracketsInner
      */
-    qtyCap?: number;
+    qtyCap?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CmNotionalAndLeverageBracketsResponseInnerBracketsInner
      */
-    qtyFloor?: number;
+    qtyFloor?: number | bigint;
     /**
      *
      * @type {number}

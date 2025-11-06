@@ -21,10 +21,10 @@
 export interface ModifyCmOrderResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ModifyCmOrderResponse
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -123,8 +123,8 @@ export interface ModifyCmOrderResponse {
     origType?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ModifyCmOrderResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

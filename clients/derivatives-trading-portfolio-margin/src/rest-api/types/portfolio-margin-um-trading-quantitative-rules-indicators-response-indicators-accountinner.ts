@@ -27,22 +27,22 @@ export interface PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndi
     indicator?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicatorsACCOUNTInner
      */
-    value?: number;
+    value?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicatorsACCOUNTInner
      */
-    triggerValue?: number;
+    triggerValue?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PortfolioMarginUmTradingQuantitativeRulesIndicatorsResponseIndicatorsACCOUNTInner
      */
-    plannedRecoverTime?: number;
+    plannedRecoverTime?: number | bigint;
     /**
      *
      * @type {boolean}

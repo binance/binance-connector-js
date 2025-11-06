@@ -26,10 +26,10 @@ import type { QueryUserNegativeBalanceAutoExchangeRecordResponseRowsInner } from
 export interface QueryUserNegativeBalanceAutoExchangeRecordResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUserNegativeBalanceAutoExchangeRecordResponse
      */
-    total?: number;
+    total?: number | bigint;
     /**
      *
      * @type {Array<QueryUserNegativeBalanceAutoExchangeRecordResponseRowsInner>}

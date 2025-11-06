@@ -41,16 +41,16 @@ export interface CancelMarginAccountAllOpenOrdersOnASymbolResponseInner {
     origClientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelMarginAccountAllOpenOrdersOnASymbolResponseInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelMarginAccountAllOpenOrdersOnASymbolResponseInner
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -131,10 +131,10 @@ export interface CancelMarginAccountAllOpenOrdersOnASymbolResponseInner {
     listClientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelMarginAccountAllOpenOrdersOnASymbolResponseInner
      */
-    transactionTime?: number;
+    transactionTime?: number | bigint;
     /**
      *
      * @type {Array<CancelMarginAccountAllOpenOrdersOnASymbolResponseInnerOrdersInner>}

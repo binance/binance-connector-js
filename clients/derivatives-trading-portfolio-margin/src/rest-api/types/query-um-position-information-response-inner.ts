@@ -81,8 +81,8 @@ export interface QueryUmPositionInformationResponseInner {
     positionSide?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUmPositionInformationResponseInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

@@ -26,16 +26,16 @@ import type { QueryUserNegativeBalanceAutoExchangeRecordResponseRowsInnerDetails
 export interface QueryUserNegativeBalanceAutoExchangeRecordResponseRowsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUserNegativeBalanceAutoExchangeRecordResponseRowsInner
      */
-    startTime?: number;
+    startTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUserNegativeBalanceAutoExchangeRecordResponseRowsInner
      */
-    endTime?: number;
+    endTime?: number | bigint;
     /**
      *
      * @type {Array<QueryUserNegativeBalanceAutoExchangeRecordResponseRowsInnerDetailsInner>}

@@ -26,16 +26,16 @@ import type { ConditionalOrderTradeUpdateSo } from './conditional-order-trade-up
 export interface ConditionalOrderTradeUpdate {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ConditionalOrderTradeUpdate
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ConditionalOrderTradeUpdate
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}

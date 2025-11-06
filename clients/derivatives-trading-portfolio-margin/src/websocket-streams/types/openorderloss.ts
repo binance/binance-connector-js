@@ -26,10 +26,10 @@ import type { OpenorderlossOInner } from './openorderloss-oinner';
 export interface Openorderloss {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Openorderloss
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {Array<OpenorderlossOInner>}

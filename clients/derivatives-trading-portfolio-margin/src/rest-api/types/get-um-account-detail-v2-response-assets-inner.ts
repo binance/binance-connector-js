@@ -63,8 +63,8 @@ export interface GetUmAccountDetailV2ResponseAssetsInner {
     openOrderInitialMargin?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetUmAccountDetailV2ResponseAssetsInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

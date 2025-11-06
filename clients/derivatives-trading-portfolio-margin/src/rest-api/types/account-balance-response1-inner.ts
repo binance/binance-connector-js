@@ -87,10 +87,10 @@ export interface AccountBalanceResponse1Inner {
     cmUnrealizedPNL?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountBalanceResponse1Inner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}

@@ -45,10 +45,10 @@ export interface QueryAllCurrentUmOpenOrdersResponseInner {
     executedQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryAllCurrentUmOpenOrdersResponseInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -99,10 +99,10 @@ export interface QueryAllCurrentUmOpenOrdersResponseInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryAllCurrentUmOpenOrdersResponseInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}
@@ -117,10 +117,10 @@ export interface QueryAllCurrentUmOpenOrdersResponseInner {
     type?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryAllCurrentUmOpenOrdersResponseInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -129,10 +129,10 @@ export interface QueryAllCurrentUmOpenOrdersResponseInner {
     selfTradePreventionMode?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryAllCurrentUmOpenOrdersResponseInner
      */
-    goodTillDate?: number;
+    goodTillDate?: number | bigint;
     /**
      *
      * @type {string}

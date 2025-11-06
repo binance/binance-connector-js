@@ -32,16 +32,16 @@ export interface AccountConfigUpdate {
     fs?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountConfigUpdate
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountConfigUpdate
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {AccountConfigUpdateAc}

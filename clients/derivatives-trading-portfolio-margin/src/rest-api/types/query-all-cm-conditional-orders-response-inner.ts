@@ -27,10 +27,10 @@ export interface QueryAllCmConditionalOrdersResponseInner {
     newClientStrategyId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryAllCmConditionalOrdersResponseInner
      */
-    strategyId?: number;
+    strategyId?: number | bigint;
     /**
      *
      * @type {string}
@@ -87,10 +87,10 @@ export interface QueryAllCmConditionalOrdersResponseInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryAllCmConditionalOrdersResponseInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -99,22 +99,22 @@ export interface QueryAllCmConditionalOrdersResponseInner {
     status?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryAllCmConditionalOrdersResponseInner
      */
-    bookTime?: number;
+    bookTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryAllCmConditionalOrdersResponseInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryAllCmConditionalOrdersResponseInner
      */
-    triggerTime?: number;
+    triggerTime?: number | bigint;
     /**
      *
      * @type {string}

@@ -33,10 +33,10 @@ export interface ConditionalOrderTradeUpdateSo {
     c?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ConditionalOrderTradeUpdateSo
      */
-    si?: number;
+    si?: number | bigint;
     /**
      *
      * @type {string}
@@ -81,16 +81,16 @@ export interface ConditionalOrderTradeUpdateSo {
     os?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ConditionalOrderTradeUpdateSo
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ConditionalOrderTradeUpdateSo
      */
-    ut?: number;
+    ut?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -129,10 +129,10 @@ export interface ConditionalOrderTradeUpdateSo {
     cr?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ConditionalOrderTradeUpdateSo
      */
-    i?: number;
+    i?: number | bigint;
     /**
      *
      * @type {string}
@@ -141,8 +141,8 @@ export interface ConditionalOrderTradeUpdateSo {
     V?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ConditionalOrderTradeUpdateSo
      */
-    gtd?: number;
+    gtd?: number | bigint;
 }

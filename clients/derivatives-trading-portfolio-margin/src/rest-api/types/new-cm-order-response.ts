@@ -45,10 +45,10 @@ export interface NewCmOrderResponse {
     executedQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NewCmOrderResponse
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -117,8 +117,8 @@ export interface NewCmOrderResponse {
     type?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NewCmOrderResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

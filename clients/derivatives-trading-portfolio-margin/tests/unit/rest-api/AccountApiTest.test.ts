@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { AccountApi } from '../../../src/rest-api';
@@ -120,23 +121,25 @@ describe('AccountApi', () => {
 
     describe('accountBalance()', () => {
         it('should execute accountBalance() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    asset: 'USDT',
-                    totalWalletBalance: '122607.35137903',
-                    crossMarginAsset: '92.27530794',
-                    crossMarginBorrowed: '10.00000000',
-                    crossMarginFree: '100.00000000',
-                    crossMarginInterest: '0.72469206',
-                    crossMarginLocked: '3.00000000',
-                    umWalletBalance: '0.00000000',
-                    umUnrealizedPNL: '23.72469206',
-                    cmWalletBalance: '23.72469206',
-                    cmUnrealizedPNL: '',
-                    updateTime: 1617939110373,
-                    negativeBalance: '0',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        asset: 'USDT',
+                        totalWalletBalance: '122607.35137903',
+                        crossMarginAsset: '92.27530794',
+                        crossMarginBorrowed: '10.00000000',
+                        crossMarginFree: '100.00000000',
+                        crossMarginInterest: '0.72469206',
+                        crossMarginLocked: '3.00000000',
+                        umWalletBalance: '0.00000000',
+                        umUnrealizedPNL: '23.72469206',
+                        cmWalletBalance: '23.72469206',
+                        cmUnrealizedPNL: '',
+                        updateTime: 1617939110373,
+                        negativeBalance: '0',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'accountBalance').mockReturnValue(
                 Promise.resolve({
@@ -158,23 +161,25 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    asset: 'USDT',
-                    totalWalletBalance: '122607.35137903',
-                    crossMarginAsset: '92.27530794',
-                    crossMarginBorrowed: '10.00000000',
-                    crossMarginFree: '100.00000000',
-                    crossMarginInterest: '0.72469206',
-                    crossMarginLocked: '3.00000000',
-                    umWalletBalance: '0.00000000',
-                    umUnrealizedPNL: '23.72469206',
-                    cmWalletBalance: '23.72469206',
-                    cmUnrealizedPNL: '',
-                    updateTime: 1617939110373,
-                    negativeBalance: '0',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        asset: 'USDT',
+                        totalWalletBalance: '122607.35137903',
+                        crossMarginAsset: '92.27530794',
+                        crossMarginBorrowed: '10.00000000',
+                        crossMarginFree: '100.00000000',
+                        crossMarginInterest: '0.72469206',
+                        crossMarginLocked: '3.00000000',
+                        umWalletBalance: '0.00000000',
+                        umUnrealizedPNL: '23.72469206',
+                        cmWalletBalance: '23.72469206',
+                        cmUnrealizedPNL: '',
+                        updateTime: 1617939110373,
+                        negativeBalance: '0',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'accountBalance').mockReturnValue(
                 Promise.resolve({
@@ -208,18 +213,20 @@ describe('AccountApi', () => {
 
     describe('accountInformation()', () => {
         it('should execute accountInformation() successfully with required parameters only', async () => {
-            mockResponse = {
-                uniMMR: '5167.92171923',
-                accountEquity: '122607.35137903',
-                actualEquity: '73.47428058',
-                accountInitialMargin: '23.72469206',
-                accountMaintMargin: '23.72469206',
-                accountStatus: 'NORMAL',
-                virtualMaxWithdrawAmount: '1627523.32459208',
-                totalAvailableBalance: '',
-                totalMarginOpenLoss: '',
-                updateTime: 1657707212154,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    uniMMR: '5167.92171923',
+                    accountEquity: '122607.35137903',
+                    actualEquity: '73.47428058',
+                    accountInitialMargin: '23.72469206',
+                    accountMaintMargin: '23.72469206',
+                    accountStatus: 'NORMAL',
+                    virtualMaxWithdrawAmount: '1627523.32459208',
+                    totalAvailableBalance: '',
+                    totalMarginOpenLoss: '',
+                    updateTime: 1657707212154,
+                })
+            );
 
             const spy = jest.spyOn(client, 'accountInformation').mockReturnValue(
                 Promise.resolve({
@@ -240,18 +247,20 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                uniMMR: '5167.92171923',
-                accountEquity: '122607.35137903',
-                actualEquity: '73.47428058',
-                accountInitialMargin: '23.72469206',
-                accountMaintMargin: '23.72469206',
-                accountStatus: 'NORMAL',
-                virtualMaxWithdrawAmount: '1627523.32459208',
-                totalAvailableBalance: '',
-                totalMarginOpenLoss: '',
-                updateTime: 1657707212154,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    uniMMR: '5167.92171923',
+                    accountEquity: '122607.35137903',
+                    actualEquity: '73.47428058',
+                    accountInitialMargin: '23.72469206',
+                    accountMaintMargin: '23.72469206',
+                    accountStatus: 'NORMAL',
+                    virtualMaxWithdrawAmount: '1627523.32459208',
+                    totalAvailableBalance: '',
+                    totalMarginOpenLoss: '',
+                    updateTime: 1657707212154,
+                })
+            );
 
             const spy = jest.spyOn(client, 'accountInformation').mockReturnValue(
                 Promise.resolve({
@@ -290,7 +299,7 @@ describe('AccountApi', () => {
                 transferSide: 'transferSide_example',
             };
 
-            mockResponse = { tranId: 100000001 };
+            mockResponse = JSONParse(JSONStringify({ tranId: 100000001 }));
 
             const spy = jest.spyOn(client, 'bnbTransfer').mockReturnValue(
                 Promise.resolve({
@@ -313,7 +322,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { tranId: 100000001 };
+            mockResponse = JSONParse(JSONStringify({ tranId: 100000001 }));
 
             const spy = jest.spyOn(client, 'bnbTransfer').mockReturnValue(
                 Promise.resolve({
@@ -382,7 +391,7 @@ describe('AccountApi', () => {
                 autoRepay: 'true',
             };
 
-            mockResponse = { msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
 
             const spy = jest.spyOn(client, 'changeAutoRepayFuturesStatus').mockReturnValue(
                 Promise.resolve({
@@ -404,7 +413,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
 
             const spy = jest.spyOn(client, 'changeAutoRepayFuturesStatus').mockReturnValue(
                 Promise.resolve({
@@ -463,7 +472,9 @@ describe('AccountApi', () => {
                 leverage: 789,
             };
 
-            mockResponse = { leverage: 21, maxQty: '1000', symbol: 'BTCUSD_200925' };
+            mockResponse = JSONParse(
+                JSONStringify({ leverage: 21, maxQty: '1000', symbol: 'BTCUSD_200925' })
+            );
 
             const spy = jest.spyOn(client, 'changeCmInitialLeverage').mockReturnValue(
                 Promise.resolve({
@@ -486,7 +497,9 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { leverage: 21, maxQty: '1000', symbol: 'BTCUSD_200925' };
+            mockResponse = JSONParse(
+                JSONStringify({ leverage: 21, maxQty: '1000', symbol: 'BTCUSD_200925' })
+            );
 
             const spy = jest.spyOn(client, 'changeCmInitialLeverage').mockReturnValue(
                 Promise.resolve({
@@ -557,7 +570,7 @@ describe('AccountApi', () => {
                 dualSidePosition: 'dualSidePosition_example',
             };
 
-            mockResponse = { code: 200, msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ code: 200, msg: 'success' }));
 
             const spy = jest.spyOn(client, 'changeCmPositionMode').mockReturnValue(
                 Promise.resolve({
@@ -579,7 +592,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { code: 200, msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ code: 200, msg: 'success' }));
 
             const spy = jest.spyOn(client, 'changeCmPositionMode').mockReturnValue(
                 Promise.resolve({
@@ -634,7 +647,9 @@ describe('AccountApi', () => {
                 leverage: 789,
             };
 
-            mockResponse = { leverage: 21, maxNotionalValue: '1000000', symbol: 'BTCUSDT' };
+            mockResponse = JSONParse(
+                JSONStringify({ leverage: 21, maxNotionalValue: '1000000', symbol: 'BTCUSDT' })
+            );
 
             const spy = jest.spyOn(client, 'changeUmInitialLeverage').mockReturnValue(
                 Promise.resolve({
@@ -657,7 +672,9 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { leverage: 21, maxNotionalValue: '1000000', symbol: 'BTCUSDT' };
+            mockResponse = JSONParse(
+                JSONStringify({ leverage: 21, maxNotionalValue: '1000000', symbol: 'BTCUSDT' })
+            );
 
             const spy = jest.spyOn(client, 'changeUmInitialLeverage').mockReturnValue(
                 Promise.resolve({
@@ -728,7 +745,7 @@ describe('AccountApi', () => {
                 dualSidePosition: 'dualSidePosition_example',
             };
 
-            mockResponse = { code: 200, msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ code: 200, msg: 'success' }));
 
             const spy = jest.spyOn(client, 'changeUmPositionMode').mockReturnValue(
                 Promise.resolve({
@@ -750,7 +767,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { code: 200, msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ code: 200, msg: 'success' }));
 
             const spy = jest.spyOn(client, 'changeUmPositionMode').mockReturnValue(
                 Promise.resolve({
@@ -800,21 +817,23 @@ describe('AccountApi', () => {
 
     describe('cmNotionalAndLeverageBrackets()', () => {
         it('should execute cmNotionalAndLeverageBrackets() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    symbol: 'BTCUSD_PERP',
-                    brackets: [
-                        {
-                            bracket: 1,
-                            initialLeverage: 125,
-                            qtyCap: 50,
-                            qtyFloor: 0,
-                            maintMarginRatio: 0.004,
-                            cum: 0,
-                        },
-                    ],
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BTCUSD_PERP',
+                        brackets: [
+                            {
+                                bracket: 1,
+                                initialLeverage: 125,
+                                qtyCap: 50,
+                                qtyFloor: 0,
+                                maintMarginRatio: 0.004,
+                                cum: 0,
+                            },
+                        ],
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'cmNotionalAndLeverageBrackets').mockReturnValue(
                 Promise.resolve({
@@ -836,21 +855,23 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    symbol: 'BTCUSD_PERP',
-                    brackets: [
-                        {
-                            bracket: 1,
-                            initialLeverage: 125,
-                            qtyCap: 50,
-                            qtyFloor: 0,
-                            maintMarginRatio: 0.004,
-                            cum: 0,
-                        },
-                    ],
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BTCUSD_PERP',
+                        brackets: [
+                            {
+                                bracket: 1,
+                                initialLeverage: 125,
+                                qtyCap: 50,
+                                qtyFloor: 0,
+                                maintMarginRatio: 0.004,
+                                cum: 0,
+                            },
+                        ],
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'cmNotionalAndLeverageBrackets').mockReturnValue(
                 Promise.resolve({
@@ -886,7 +907,7 @@ describe('AccountApi', () => {
 
     describe('fundAutoCollection()', () => {
         it('should execute fundAutoCollection() successfully with required parameters only', async () => {
-            mockResponse = { msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
 
             const spy = jest.spyOn(client, 'fundAutoCollection').mockReturnValue(
                 Promise.resolve({
@@ -907,7 +928,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
 
             const spy = jest.spyOn(client, 'fundAutoCollection').mockReturnValue(
                 Promise.resolve({
@@ -945,7 +966,7 @@ describe('AccountApi', () => {
                 asset: 'asset_example',
             };
 
-            mockResponse = { msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
 
             const spy = jest.spyOn(client, 'fundCollectionByAsset').mockReturnValue(
                 Promise.resolve({
@@ -967,7 +988,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
 
             const spy = jest.spyOn(client, 'fundCollectionByAsset').mockReturnValue(
                 Promise.resolve({
@@ -1019,7 +1040,7 @@ describe('AccountApi', () => {
 
     describe('getAutoRepayFuturesStatus()', () => {
         it('should execute getAutoRepayFuturesStatus() successfully with required parameters only', async () => {
-            mockResponse = { autoRepay: true };
+            mockResponse = JSONParse(JSONStringify({ autoRepay: true }));
 
             const spy = jest.spyOn(client, 'getAutoRepayFuturesStatus').mockReturnValue(
                 Promise.resolve({
@@ -1040,7 +1061,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { autoRepay: true };
+            mockResponse = JSONParse(JSONStringify({ autoRepay: true }));
 
             const spy = jest.spyOn(client, 'getAutoRepayFuturesStatus').mockReturnValue(
                 Promise.resolve({
@@ -1076,36 +1097,38 @@ describe('AccountApi', () => {
 
     describe('getCmAccountDetail()', () => {
         it('should execute getCmAccountDetail() successfully with required parameters only', async () => {
-            mockResponse = {
-                assets: [
-                    {
-                        asset: 'BTC',
-                        crossWalletBalance: '0.00241969',
-                        crossUnPnl: '0.00000000',
-                        maintMargin: '0.00000000',
-                        initialMargin: '0.00000000',
-                        positionInitialMargin: '0.00000000',
-                        openOrderInitialMargin: '0.00000000',
-                        updateTime: 1625474304765,
-                    },
-                ],
-                positions: [
-                    {
-                        symbol: 'BTCUSD_201225',
-                        positionAmt: '0',
-                        initialMargin: '0',
-                        maintMargin: '0',
-                        unrealizedProfit: '0.00000000',
-                        positionInitialMargin: '0',
-                        openOrderInitialMargin: '0',
-                        leverage: '125',
-                        positionSide: 'BOTH',
-                        entryPrice: '0.0',
-                        maxQty: '50',
-                        updateTime: 0,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    assets: [
+                        {
+                            asset: 'BTC',
+                            crossWalletBalance: '0.00241969',
+                            crossUnPnl: '0.00000000',
+                            maintMargin: '0.00000000',
+                            initialMargin: '0.00000000',
+                            positionInitialMargin: '0.00000000',
+                            openOrderInitialMargin: '0.00000000',
+                            updateTime: 1625474304765,
+                        },
+                    ],
+                    positions: [
+                        {
+                            symbol: 'BTCUSD_201225',
+                            positionAmt: '0',
+                            initialMargin: '0',
+                            maintMargin: '0',
+                            unrealizedProfit: '0.00000000',
+                            positionInitialMargin: '0',
+                            openOrderInitialMargin: '0',
+                            leverage: '125',
+                            positionSide: 'BOTH',
+                            entryPrice: '0.0',
+                            maxQty: '50',
+                            updateTime: 0,
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'getCmAccountDetail').mockReturnValue(
                 Promise.resolve({
@@ -1126,36 +1149,38 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                assets: [
-                    {
-                        asset: 'BTC',
-                        crossWalletBalance: '0.00241969',
-                        crossUnPnl: '0.00000000',
-                        maintMargin: '0.00000000',
-                        initialMargin: '0.00000000',
-                        positionInitialMargin: '0.00000000',
-                        openOrderInitialMargin: '0.00000000',
-                        updateTime: 1625474304765,
-                    },
-                ],
-                positions: [
-                    {
-                        symbol: 'BTCUSD_201225',
-                        positionAmt: '0',
-                        initialMargin: '0',
-                        maintMargin: '0',
-                        unrealizedProfit: '0.00000000',
-                        positionInitialMargin: '0',
-                        openOrderInitialMargin: '0',
-                        leverage: '125',
-                        positionSide: 'BOTH',
-                        entryPrice: '0.0',
-                        maxQty: '50',
-                        updateTime: 0,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    assets: [
+                        {
+                            asset: 'BTC',
+                            crossWalletBalance: '0.00241969',
+                            crossUnPnl: '0.00000000',
+                            maintMargin: '0.00000000',
+                            initialMargin: '0.00000000',
+                            positionInitialMargin: '0.00000000',
+                            openOrderInitialMargin: '0.00000000',
+                            updateTime: 1625474304765,
+                        },
+                    ],
+                    positions: [
+                        {
+                            symbol: 'BTCUSD_201225',
+                            positionAmt: '0',
+                            initialMargin: '0',
+                            maintMargin: '0',
+                            unrealizedProfit: '0.00000000',
+                            positionInitialMargin: '0',
+                            openOrderInitialMargin: '0',
+                            leverage: '125',
+                            positionSide: 'BOTH',
+                            entryPrice: '0.0',
+                            maxQty: '50',
+                            updateTime: 0,
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'getCmAccountDetail').mockReturnValue(
                 Promise.resolve({
@@ -1189,7 +1214,7 @@ describe('AccountApi', () => {
 
     describe('getCmCurrentPositionMode()', () => {
         it('should execute getCmCurrentPositionMode() successfully with required parameters only', async () => {
-            mockResponse = { dualSidePosition: true };
+            mockResponse = JSONParse(JSONStringify({ dualSidePosition: true }));
 
             const spy = jest.spyOn(client, 'getCmCurrentPositionMode').mockReturnValue(
                 Promise.resolve({
@@ -1210,7 +1235,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { dualSidePosition: true };
+            mockResponse = JSONParse(JSONStringify({ dualSidePosition: true }));
 
             const spy = jest.spyOn(client, 'getCmCurrentPositionMode').mockReturnValue(
                 Promise.resolve({
@@ -1246,28 +1271,30 @@ describe('AccountApi', () => {
 
     describe('getCmIncomeHistory()', () => {
         it('should execute getCmIncomeHistory() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    symbol: '',
-                    incomeType: 'TRANSFER',
-                    income: '-0.37500000',
-                    asset: 'BTC',
-                    info: 'WITHDRAW',
-                    time: 1570608000000,
-                    tranId: '9689322392',
-                    tradeId: '',
-                },
-                {
-                    symbol: 'BTCUSD_200925',
-                    incomeType: 'COMMISSION',
-                    income: '-0.01000000',
-                    asset: 'BTC',
-                    info: '',
-                    time: 1570636800000,
-                    tranId: '9689322392',
-                    tradeId: '2059192',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: '',
+                        incomeType: 'TRANSFER',
+                        income: '-0.37500000',
+                        asset: 'BTC',
+                        info: 'WITHDRAW',
+                        time: 1570608000000,
+                        tranId: '9689322392',
+                        tradeId: '',
+                    },
+                    {
+                        symbol: 'BTCUSD_200925',
+                        incomeType: 'COMMISSION',
+                        income: '-0.01000000',
+                        asset: 'BTC',
+                        info: '',
+                        time: 1570636800000,
+                        tranId: '9689322392',
+                        tradeId: '2059192',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getCmIncomeHistory').mockReturnValue(
                 Promise.resolve({
@@ -1294,28 +1321,30 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    symbol: '',
-                    incomeType: 'TRANSFER',
-                    income: '-0.37500000',
-                    asset: 'BTC',
-                    info: 'WITHDRAW',
-                    time: 1570608000000,
-                    tranId: '9689322392',
-                    tradeId: '',
-                },
-                {
-                    symbol: 'BTCUSD_200925',
-                    incomeType: 'COMMISSION',
-                    income: '-0.01000000',
-                    asset: 'BTC',
-                    info: '',
-                    time: 1570636800000,
-                    tranId: '9689322392',
-                    tradeId: '2059192',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: '',
+                        incomeType: 'TRANSFER',
+                        income: '-0.37500000',
+                        asset: 'BTC',
+                        info: 'WITHDRAW',
+                        time: 1570608000000,
+                        tranId: '9689322392',
+                        tradeId: '',
+                    },
+                    {
+                        symbol: 'BTCUSD_200925',
+                        incomeType: 'COMMISSION',
+                        income: '-0.01000000',
+                        asset: 'BTC',
+                        info: '',
+                        time: 1570636800000,
+                        tranId: '9689322392',
+                        tradeId: '2059192',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getCmIncomeHistory').mockReturnValue(
                 Promise.resolve({
@@ -1354,7 +1383,12 @@ describe('AccountApi', () => {
                 endTime: 1641782889000,
             };
 
-            mockResponse = { avgCostTimestampOfLast30d: 7241837, downloadId: '546975389218332672' };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    avgCostTimestampOfLast30d: 7241837,
+                    downloadId: '546975389218332672',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getDownloadIdForUmFuturesOrderHistory').mockReturnValue(
                 Promise.resolve({
@@ -1377,7 +1411,12 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { avgCostTimestampOfLast30d: 7241837, downloadId: '546975389218332672' };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    avgCostTimestampOfLast30d: 7241837,
+                    downloadId: '546975389218332672',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getDownloadIdForUmFuturesOrderHistory').mockReturnValue(
                 Promise.resolve({
@@ -1451,7 +1490,12 @@ describe('AccountApi', () => {
                 endTime: 1641782889000,
             };
 
-            mockResponse = { avgCostTimestampOfLast30d: 7241837, downloadId: '546975389218332672' };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    avgCostTimestampOfLast30d: 7241837,
+                    downloadId: '546975389218332672',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getDownloadIdForUmFuturesTradeHistory').mockReturnValue(
                 Promise.resolve({
@@ -1474,7 +1518,12 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { avgCostTimestampOfLast30d: 7241837, downloadId: '546975389218332672' };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    avgCostTimestampOfLast30d: 7241837,
+                    downloadId: '546975389218332672',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getDownloadIdForUmFuturesTradeHistory').mockReturnValue(
                 Promise.resolve({
@@ -1548,7 +1597,12 @@ describe('AccountApi', () => {
                 endTime: 1641782889000,
             };
 
-            mockResponse = { avgCostTimestampOfLast30d: 7241837, downloadId: '546975389218332672' };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    avgCostTimestampOfLast30d: 7241837,
+                    downloadId: '546975389218332672',
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'getDownloadIdForUmFuturesTransactionHistory')
@@ -1573,7 +1627,12 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { avgCostTimestampOfLast30d: 7241837, downloadId: '546975389218332672' };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    avgCostTimestampOfLast30d: 7241837,
+                    downloadId: '546975389218332672',
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'getDownloadIdForUmFuturesTransactionHistory')
@@ -1648,21 +1707,23 @@ describe('AccountApi', () => {
 
     describe('getMarginBorrowLoanInterestHistory()', () => {
         it('should execute getMarginBorrowLoanInterestHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        txId: 1352286576452864800,
-                        interestAccuredTime: 1672160400000,
-                        asset: 'USDT',
-                        rawAsset: 'USDT',
-                        principal: '45.3313',
-                        interest: '0.00024995',
-                        interestRate: '0.00013233',
-                        type: 'ON_BORROW',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            txId: 1352286576452864800,
+                            interestAccuredTime: 1672160400000,
+                            asset: 'USDT',
+                            rawAsset: 'USDT',
+                            principal: '45.3313',
+                            interest: '0.00024995',
+                            interestRate: '0.00013233',
+                            type: 'ON_BORROW',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getMarginBorrowLoanInterestHistory').mockReturnValue(
                 Promise.resolve({
@@ -1689,21 +1750,23 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        txId: 1352286576452864800,
-                        interestAccuredTime: 1672160400000,
-                        asset: 'USDT',
-                        rawAsset: 'USDT',
-                        principal: '45.3313',
-                        interest: '0.00024995',
-                        interestRate: '0.00013233',
-                        type: 'ON_BORROW',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            txId: 1352286576452864800,
+                            interestAccuredTime: 1672160400000,
+                            asset: 'USDT',
+                            rawAsset: 'USDT',
+                            principal: '45.3313',
+                            interest: '0.00024995',
+                            interestRate: '0.00013233',
+                            type: 'ON_BORROW',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getMarginBorrowLoanInterestHistory').mockReturnValue(
                 Promise.resolve({
@@ -1741,38 +1804,40 @@ describe('AccountApi', () => {
 
     describe('getUmAccountDetail()', () => {
         it('should execute getUmAccountDetail() successfully with required parameters only', async () => {
-            mockResponse = {
-                assets: [
-                    {
-                        asset: 'USDT',
-                        crossWalletBalance: '23.72469206',
-                        crossUnPnl: '0.00000000',
-                        maintMargin: '0.00000000',
-                        initialMargin: '0.00000000',
-                        positionInitialMargin: '0.00000000',
-                        openOrderInitialMargin: '0.00000000',
-                        updateTime: 1625474304765,
-                    },
-                ],
-                positions: [
-                    {
-                        symbol: 'BTCUSDT',
-                        initialMargin: '0',
-                        maintMargin: '0',
-                        unrealizedProfit: '0.00000000',
-                        positionInitialMargin: '0',
-                        openOrderInitialMargin: '0',
-                        leverage: '100',
-                        entryPrice: '0.00000',
-                        maxNotional: '250000',
-                        bidNotional: '0',
-                        askNotional: '0',
-                        positionSide: 'BOTH',
-                        positionAmt: '0',
-                        updateTime: 0,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    assets: [
+                        {
+                            asset: 'USDT',
+                            crossWalletBalance: '23.72469206',
+                            crossUnPnl: '0.00000000',
+                            maintMargin: '0.00000000',
+                            initialMargin: '0.00000000',
+                            positionInitialMargin: '0.00000000',
+                            openOrderInitialMargin: '0.00000000',
+                            updateTime: 1625474304765,
+                        },
+                    ],
+                    positions: [
+                        {
+                            symbol: 'BTCUSDT',
+                            initialMargin: '0',
+                            maintMargin: '0',
+                            unrealizedProfit: '0.00000000',
+                            positionInitialMargin: '0',
+                            openOrderInitialMargin: '0',
+                            leverage: '100',
+                            entryPrice: '0.00000',
+                            maxNotional: '250000',
+                            bidNotional: '0',
+                            askNotional: '0',
+                            positionSide: 'BOTH',
+                            positionAmt: '0',
+                            updateTime: 0,
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'getUmAccountDetail').mockReturnValue(
                 Promise.resolve({
@@ -1793,38 +1858,40 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                assets: [
-                    {
-                        asset: 'USDT',
-                        crossWalletBalance: '23.72469206',
-                        crossUnPnl: '0.00000000',
-                        maintMargin: '0.00000000',
-                        initialMargin: '0.00000000',
-                        positionInitialMargin: '0.00000000',
-                        openOrderInitialMargin: '0.00000000',
-                        updateTime: 1625474304765,
-                    },
-                ],
-                positions: [
-                    {
-                        symbol: 'BTCUSDT',
-                        initialMargin: '0',
-                        maintMargin: '0',
-                        unrealizedProfit: '0.00000000',
-                        positionInitialMargin: '0',
-                        openOrderInitialMargin: '0',
-                        leverage: '100',
-                        entryPrice: '0.00000',
-                        maxNotional: '250000',
-                        bidNotional: '0',
-                        askNotional: '0',
-                        positionSide: 'BOTH',
-                        positionAmt: '0',
-                        updateTime: 0,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    assets: [
+                        {
+                            asset: 'USDT',
+                            crossWalletBalance: '23.72469206',
+                            crossUnPnl: '0.00000000',
+                            maintMargin: '0.00000000',
+                            initialMargin: '0.00000000',
+                            positionInitialMargin: '0.00000000',
+                            openOrderInitialMargin: '0.00000000',
+                            updateTime: 1625474304765,
+                        },
+                    ],
+                    positions: [
+                        {
+                            symbol: 'BTCUSDT',
+                            initialMargin: '0',
+                            maintMargin: '0',
+                            unrealizedProfit: '0.00000000',
+                            positionInitialMargin: '0',
+                            openOrderInitialMargin: '0',
+                            leverage: '100',
+                            entryPrice: '0.00000',
+                            maxNotional: '250000',
+                            bidNotional: '0',
+                            askNotional: '0',
+                            positionSide: 'BOTH',
+                            positionAmt: '0',
+                            updateTime: 0,
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'getUmAccountDetail').mockReturnValue(
                 Promise.resolve({
@@ -1858,32 +1925,34 @@ describe('AccountApi', () => {
 
     describe('getUmAccountDetailV2()', () => {
         it('should execute getUmAccountDetailV2() successfully with required parameters only', async () => {
-            mockResponse = {
-                assets: [
-                    {
-                        asset: 'USDT',
-                        crossWalletBalance: '23.72469206',
-                        crossUnPnl: '0.00000000',
-                        maintMargin: '0.00000000',
-                        initialMargin: '0.00000000',
-                        positionInitialMargin: '0.00000000',
-                        openOrderInitialMargin: '0.00000000',
-                        updateTime: 1625474304765,
-                    },
-                ],
-                positions: [
-                    {
-                        symbol: 'BTCUSDT',
-                        initialMargin: '0',
-                        maintMargin: '0',
-                        unrealizedProfit: '0.00000000',
-                        positionSide: 'BOTH',
-                        positionAmt: '0',
-                        updateTime: 0,
-                        notional: '86.98650000',
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    assets: [
+                        {
+                            asset: 'USDT',
+                            crossWalletBalance: '23.72469206',
+                            crossUnPnl: '0.00000000',
+                            maintMargin: '0.00000000',
+                            initialMargin: '0.00000000',
+                            positionInitialMargin: '0.00000000',
+                            openOrderInitialMargin: '0.00000000',
+                            updateTime: 1625474304765,
+                        },
+                    ],
+                    positions: [
+                        {
+                            symbol: 'BTCUSDT',
+                            initialMargin: '0',
+                            maintMargin: '0',
+                            unrealizedProfit: '0.00000000',
+                            positionSide: 'BOTH',
+                            positionAmt: '0',
+                            updateTime: 0,
+                            notional: '86.98650000',
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'getUmAccountDetailV2').mockReturnValue(
                 Promise.resolve({
@@ -1904,32 +1973,34 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                assets: [
-                    {
-                        asset: 'USDT',
-                        crossWalletBalance: '23.72469206',
-                        crossUnPnl: '0.00000000',
-                        maintMargin: '0.00000000',
-                        initialMargin: '0.00000000',
-                        positionInitialMargin: '0.00000000',
-                        openOrderInitialMargin: '0.00000000',
-                        updateTime: 1625474304765,
-                    },
-                ],
-                positions: [
-                    {
-                        symbol: 'BTCUSDT',
-                        initialMargin: '0',
-                        maintMargin: '0',
-                        unrealizedProfit: '0.00000000',
-                        positionSide: 'BOTH',
-                        positionAmt: '0',
-                        updateTime: 0,
-                        notional: '86.98650000',
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    assets: [
+                        {
+                            asset: 'USDT',
+                            crossWalletBalance: '23.72469206',
+                            crossUnPnl: '0.00000000',
+                            maintMargin: '0.00000000',
+                            initialMargin: '0.00000000',
+                            positionInitialMargin: '0.00000000',
+                            openOrderInitialMargin: '0.00000000',
+                            updateTime: 1625474304765,
+                        },
+                    ],
+                    positions: [
+                        {
+                            symbol: 'BTCUSDT',
+                            initialMargin: '0',
+                            maintMargin: '0',
+                            unrealizedProfit: '0.00000000',
+                            positionSide: 'BOTH',
+                            positionAmt: '0',
+                            updateTime: 0,
+                            notional: '86.98650000',
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'getUmAccountDetailV2').mockReturnValue(
                 Promise.resolve({
@@ -1963,7 +2034,7 @@ describe('AccountApi', () => {
 
     describe('getUmCurrentPositionMode()', () => {
         it('should execute getUmCurrentPositionMode() successfully with required parameters only', async () => {
-            mockResponse = { dualSidePosition: true };
+            mockResponse = JSONParse(JSONStringify({ dualSidePosition: true }));
 
             const spy = jest.spyOn(client, 'getUmCurrentPositionMode').mockReturnValue(
                 Promise.resolve({
@@ -1984,7 +2055,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { dualSidePosition: true };
+            mockResponse = JSONParse(JSONStringify({ dualSidePosition: true }));
 
             const spy = jest.spyOn(client, 'getUmCurrentPositionMode').mockReturnValue(
                 Promise.resolve({
@@ -2024,15 +2095,17 @@ describe('AccountApi', () => {
                 downloadId: '1',
             };
 
-            mockResponse = {
-                downloadId: '545923594199212032',
-                status: 'processing',
-                url: '',
-                s3Link: null,
-                notified: false,
-                expirationTimestamp: -1,
-                isExpired: null,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    downloadId: '545923594199212032',
+                    status: 'processing',
+                    url: '',
+                    s3Link: null,
+                    notified: false,
+                    expirationTimestamp: -1,
+                    isExpired: null,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getUmFuturesOrderDownloadLinkById').mockReturnValue(
                 Promise.resolve({
@@ -2054,15 +2127,17 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                downloadId: '545923594199212032',
-                status: 'processing',
-                url: '',
-                s3Link: null,
-                notified: false,
-                expirationTimestamp: -1,
-                isExpired: null,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    downloadId: '545923594199212032',
+                    status: 'processing',
+                    url: '',
+                    s3Link: null,
+                    notified: false,
+                    expirationTimestamp: -1,
+                    isExpired: null,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getUmFuturesOrderDownloadLinkById').mockReturnValue(
                 Promise.resolve({
@@ -2120,15 +2195,17 @@ describe('AccountApi', () => {
                 downloadId: '1',
             };
 
-            mockResponse = {
-                downloadId: '545923594199212032',
-                status: 'processing',
-                url: '',
-                s3Link: null,
-                notified: false,
-                expirationTimestamp: -1,
-                isExpired: null,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    downloadId: '545923594199212032',
+                    status: 'processing',
+                    url: '',
+                    s3Link: null,
+                    notified: false,
+                    expirationTimestamp: -1,
+                    isExpired: null,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getUmFuturesTradeDownloadLinkById').mockReturnValue(
                 Promise.resolve({
@@ -2150,15 +2227,17 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                downloadId: '545923594199212032',
-                status: 'processing',
-                url: '',
-                s3Link: null,
-                notified: false,
-                expirationTimestamp: -1,
-                isExpired: null,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    downloadId: '545923594199212032',
+                    status: 'processing',
+                    url: '',
+                    s3Link: null,
+                    notified: false,
+                    expirationTimestamp: -1,
+                    isExpired: null,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getUmFuturesTradeDownloadLinkById').mockReturnValue(
                 Promise.resolve({
@@ -2216,15 +2295,17 @@ describe('AccountApi', () => {
                 downloadId: '1',
             };
 
-            mockResponse = {
-                downloadId: '545923594199212032',
-                status: 'processing',
-                url: '',
-                s3Link: null,
-                notified: false,
-                expirationTimestamp: -1,
-                isExpired: null,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    downloadId: '545923594199212032',
+                    status: 'processing',
+                    url: '',
+                    s3Link: null,
+                    notified: false,
+                    expirationTimestamp: -1,
+                    isExpired: null,
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'getUmFuturesTransactionDownloadLinkById')
@@ -2248,15 +2329,17 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                downloadId: '545923594199212032',
-                status: 'processing',
-                url: '',
-                s3Link: null,
-                notified: false,
-                expirationTimestamp: -1,
-                isExpired: null,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    downloadId: '545923594199212032',
+                    status: 'processing',
+                    url: '',
+                    s3Link: null,
+                    notified: false,
+                    expirationTimestamp: -1,
+                    isExpired: null,
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'getUmFuturesTransactionDownloadLinkById')
@@ -2312,28 +2395,30 @@ describe('AccountApi', () => {
 
     describe('getUmIncomeHistory()', () => {
         it('should execute getUmIncomeHistory() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    symbol: '',
-                    incomeType: 'TRANSFER',
-                    income: '-0.37500000',
-                    asset: 'USDT',
-                    info: 'TRANSFER',
-                    time: 1570608000000,
-                    tranId: '9689322392',
-                    tradeId: '',
-                },
-                {
-                    symbol: 'BTCUSDT',
-                    incomeType: 'COMMISSION',
-                    income: '-0.01000000',
-                    asset: 'USDT',
-                    info: 'COMMISSION',
-                    time: 1570636800000,
-                    tranId: '9689322392',
-                    tradeId: '2059192',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: '',
+                        incomeType: 'TRANSFER',
+                        income: '-0.37500000',
+                        asset: 'USDT',
+                        info: 'TRANSFER',
+                        time: 1570608000000,
+                        tranId: '9689322392',
+                        tradeId: '',
+                    },
+                    {
+                        symbol: 'BTCUSDT',
+                        incomeType: 'COMMISSION',
+                        income: '-0.01000000',
+                        asset: 'USDT',
+                        info: 'COMMISSION',
+                        time: 1570636800000,
+                        tranId: '9689322392',
+                        tradeId: '2059192',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getUmIncomeHistory').mockReturnValue(
                 Promise.resolve({
@@ -2360,28 +2445,30 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    symbol: '',
-                    incomeType: 'TRANSFER',
-                    income: '-0.37500000',
-                    asset: 'USDT',
-                    info: 'TRANSFER',
-                    time: 1570608000000,
-                    tranId: '9689322392',
-                    tradeId: '',
-                },
-                {
-                    symbol: 'BTCUSDT',
-                    incomeType: 'COMMISSION',
-                    income: '-0.01000000',
-                    asset: 'USDT',
-                    info: 'COMMISSION',
-                    time: 1570636800000,
-                    tranId: '9689322392',
-                    tradeId: '2059192',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: '',
+                        incomeType: 'TRANSFER',
+                        income: '-0.37500000',
+                        asset: 'USDT',
+                        info: 'TRANSFER',
+                        time: 1570608000000,
+                        tranId: '9689322392',
+                        tradeId: '',
+                    },
+                    {
+                        symbol: 'BTCUSDT',
+                        incomeType: 'COMMISSION',
+                        income: '-0.01000000',
+                        asset: 'USDT',
+                        info: 'COMMISSION',
+                        time: 1570636800000,
+                        tranId: '9689322392',
+                        tradeId: '2059192',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getUmIncomeHistory').mockReturnValue(
                 Promise.resolve({
@@ -2419,11 +2506,13 @@ describe('AccountApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = {
-                symbol: 'BTCUSD_PERP',
-                makerCommissionRate: '0.00015',
-                takerCommissionRate: '0.00040',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    symbol: 'BTCUSD_PERP',
+                    makerCommissionRate: '0.00015',
+                    takerCommissionRate: '0.00040',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getUserCommissionRateForCm').mockReturnValue(
                 Promise.resolve({
@@ -2445,11 +2534,13 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                symbol: 'BTCUSD_PERP',
-                makerCommissionRate: '0.00015',
-                takerCommissionRate: '0.00040',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    symbol: 'BTCUSD_PERP',
+                    makerCommissionRate: '0.00015',
+                    takerCommissionRate: '0.00040',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getUserCommissionRateForCm').mockReturnValue(
                 Promise.resolve({
@@ -2507,11 +2598,13 @@ describe('AccountApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = {
-                symbol: 'BTCUSDT',
-                makerCommissionRate: '0.0002',
-                takerCommissionRate: '0.0004',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    symbol: 'BTCUSDT',
+                    makerCommissionRate: '0.0002',
+                    takerCommissionRate: '0.0004',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getUserCommissionRateForUm').mockReturnValue(
                 Promise.resolve({
@@ -2533,11 +2626,13 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                symbol: 'BTCUSDT',
-                makerCommissionRate: '0.0002',
-                takerCommissionRate: '0.0004',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    symbol: 'BTCUSDT',
+                    makerCommissionRate: '0.0002',
+                    takerCommissionRate: '0.0004',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getUserCommissionRateForUm').mockReturnValue(
                 Promise.resolve({
@@ -2595,7 +2690,7 @@ describe('AccountApi', () => {
                 asset: 'asset_example',
             };
 
-            mockResponse = { amount: '1.69248805', borrowLimit: '60' };
+            mockResponse = JSONParse(JSONStringify({ amount: '1.69248805', borrowLimit: '60' }));
 
             const spy = jest.spyOn(client, 'marginMaxBorrow').mockReturnValue(
                 Promise.resolve({
@@ -2617,7 +2712,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { amount: '1.69248805', borrowLimit: '60' };
+            mockResponse = JSONParse(JSONStringify({ amount: '1.69248805', borrowLimit: '60' }));
 
             const spy = jest.spyOn(client, 'marginMaxBorrow').mockReturnValue(
                 Promise.resolve({
@@ -2667,50 +2762,52 @@ describe('AccountApi', () => {
 
     describe('portfolioMarginUmTradingQuantitativeRulesIndicators()', () => {
         it('should execute portfolioMarginUmTradingQuantitativeRulesIndicators() successfully with required parameters only', async () => {
-            mockResponse = {
-                indicators: {
-                    BTCUSDT: [
-                        {
-                            isLocked: true,
-                            plannedRecoverTime: 1545741270000,
-                            indicator: 'UFR',
-                            value: 0.05,
-                            triggerValue: 0.995,
-                        },
-                        {
-                            isLocked: true,
-                            plannedRecoverTime: 1545741270000,
-                            indicator: 'IFER',
-                            value: 0.99,
-                            triggerValue: 0.99,
-                        },
-                        {
-                            isLocked: true,
-                            plannedRecoverTime: 1545741270000,
-                            indicator: 'GCR',
-                            value: 0.99,
-                            triggerValue: 0.99,
-                        },
-                        {
-                            isLocked: true,
-                            plannedRecoverTime: 1545741270000,
-                            indicator: 'DR',
-                            value: 0.99,
-                            triggerValue: 0.99,
-                        },
-                    ],
-                    ACCOUNT: [
-                        {
-                            indicator: 'TMV',
-                            value: 10,
-                            triggerValue: 1,
-                            plannedRecoverTime: 1644919865000,
-                            isLocked: true,
-                        },
-                    ],
-                },
-                updateTime: 1644913304748,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    indicators: {
+                        BTCUSDT: [
+                            {
+                                isLocked: true,
+                                plannedRecoverTime: 1545741270000,
+                                indicator: 'UFR',
+                                value: 0.05,
+                                triggerValue: 0.995,
+                            },
+                            {
+                                isLocked: true,
+                                plannedRecoverTime: 1545741270000,
+                                indicator: 'IFER',
+                                value: 0.99,
+                                triggerValue: 0.99,
+                            },
+                            {
+                                isLocked: true,
+                                plannedRecoverTime: 1545741270000,
+                                indicator: 'GCR',
+                                value: 0.99,
+                                triggerValue: 0.99,
+                            },
+                            {
+                                isLocked: true,
+                                plannedRecoverTime: 1545741270000,
+                                indicator: 'DR',
+                                value: 0.99,
+                                triggerValue: 0.99,
+                            },
+                        ],
+                        ACCOUNT: [
+                            {
+                                indicator: 'TMV',
+                                value: 10,
+                                triggerValue: 1,
+                                plannedRecoverTime: 1644919865000,
+                                isLocked: true,
+                            },
+                        ],
+                    },
+                    updateTime: 1644913304748,
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'portfolioMarginUmTradingQuantitativeRulesIndicators')
@@ -2734,50 +2831,52 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                indicators: {
-                    BTCUSDT: [
-                        {
-                            isLocked: true,
-                            plannedRecoverTime: 1545741270000,
-                            indicator: 'UFR',
-                            value: 0.05,
-                            triggerValue: 0.995,
-                        },
-                        {
-                            isLocked: true,
-                            plannedRecoverTime: 1545741270000,
-                            indicator: 'IFER',
-                            value: 0.99,
-                            triggerValue: 0.99,
-                        },
-                        {
-                            isLocked: true,
-                            plannedRecoverTime: 1545741270000,
-                            indicator: 'GCR',
-                            value: 0.99,
-                            triggerValue: 0.99,
-                        },
-                        {
-                            isLocked: true,
-                            plannedRecoverTime: 1545741270000,
-                            indicator: 'DR',
-                            value: 0.99,
-                            triggerValue: 0.99,
-                        },
-                    ],
-                    ACCOUNT: [
-                        {
-                            indicator: 'TMV',
-                            value: 10,
-                            triggerValue: 1,
-                            plannedRecoverTime: 1644919865000,
-                            isLocked: true,
-                        },
-                    ],
-                },
-                updateTime: 1644913304748,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    indicators: {
+                        BTCUSDT: [
+                            {
+                                isLocked: true,
+                                plannedRecoverTime: 1545741270000,
+                                indicator: 'UFR',
+                                value: 0.05,
+                                triggerValue: 0.995,
+                            },
+                            {
+                                isLocked: true,
+                                plannedRecoverTime: 1545741270000,
+                                indicator: 'IFER',
+                                value: 0.99,
+                                triggerValue: 0.99,
+                            },
+                            {
+                                isLocked: true,
+                                plannedRecoverTime: 1545741270000,
+                                indicator: 'GCR',
+                                value: 0.99,
+                                triggerValue: 0.99,
+                            },
+                            {
+                                isLocked: true,
+                                plannedRecoverTime: 1545741270000,
+                                indicator: 'DR',
+                                value: 0.99,
+                                triggerValue: 0.99,
+                            },
+                        ],
+                        ACCOUNT: [
+                            {
+                                indicator: 'TMV',
+                                value: 10,
+                                triggerValue: 1,
+                                plannedRecoverTime: 1644919865000,
+                                isLocked: true,
+                            },
+                        ],
+                    },
+                    updateTime: 1644913304748,
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'portfolioMarginUmTradingQuantitativeRulesIndicators')
@@ -2818,47 +2917,49 @@ describe('AccountApi', () => {
 
     describe('queryCmPositionInformation()', () => {
         it('should execute queryCmPositionInformation() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    symbol: 'BTCUSD_201225',
-                    positionAmt: '1',
-                    entryPrice: '11707.70000003',
-                    markPrice: '11788.66626667',
-                    unRealizedProfit: '0.00005866',
-                    liquidationPrice: '6170.20509059',
-                    leverage: '125',
-                    positionSide: 'LONG',
-                    updateTime: 1627026881327,
-                    maxQty: '50',
-                    notionalValue: '0.00084827',
-                },
-                {
-                    symbol: 'BTCUSD_201225',
-                    positionAmt: '1',
-                    entryPrice: '11707.70000003',
-                    markPrice: '11788.66626667',
-                    unRealizedProfit: '0.00005866',
-                    liquidationPrice: '6170.20509059',
-                    leverage: '125',
-                    positionSide: 'LONG',
-                    updateTime: 1627026881327,
-                    maxQty: '50',
-                    notionalValue: '0.00084827',
-                },
-                {
-                    symbol: 'BTCUSD_201225',
-                    positionAmt: '1',
-                    entryPrice: '11707.70000003',
-                    markPrice: '11788.66626667',
-                    unRealizedProfit: '0.00005866',
-                    liquidationPrice: '6170.20509059',
-                    leverage: '125',
-                    positionSide: 'LONG',
-                    updateTime: 1627026881327,
-                    maxQty: '50',
-                    notionalValue: '0.00084827',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BTCUSD_201225',
+                        positionAmt: '1',
+                        entryPrice: '11707.70000003',
+                        markPrice: '11788.66626667',
+                        unRealizedProfit: '0.00005866',
+                        liquidationPrice: '6170.20509059',
+                        leverage: '125',
+                        positionSide: 'LONG',
+                        updateTime: 1627026881327,
+                        maxQty: '50',
+                        notionalValue: '0.00084827',
+                    },
+                    {
+                        symbol: 'BTCUSD_201225',
+                        positionAmt: '1',
+                        entryPrice: '11707.70000003',
+                        markPrice: '11788.66626667',
+                        unRealizedProfit: '0.00005866',
+                        liquidationPrice: '6170.20509059',
+                        leverage: '125',
+                        positionSide: 'LONG',
+                        updateTime: 1627026881327,
+                        maxQty: '50',
+                        notionalValue: '0.00084827',
+                    },
+                    {
+                        symbol: 'BTCUSD_201225',
+                        positionAmt: '1',
+                        entryPrice: '11707.70000003',
+                        markPrice: '11788.66626667',
+                        unRealizedProfit: '0.00005866',
+                        liquidationPrice: '6170.20509059',
+                        leverage: '125',
+                        positionSide: 'LONG',
+                        updateTime: 1627026881327,
+                        maxQty: '50',
+                        notionalValue: '0.00084827',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryCmPositionInformation').mockReturnValue(
                 Promise.resolve({
@@ -2881,47 +2982,49 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    symbol: 'BTCUSD_201225',
-                    positionAmt: '1',
-                    entryPrice: '11707.70000003',
-                    markPrice: '11788.66626667',
-                    unRealizedProfit: '0.00005866',
-                    liquidationPrice: '6170.20509059',
-                    leverage: '125',
-                    positionSide: 'LONG',
-                    updateTime: 1627026881327,
-                    maxQty: '50',
-                    notionalValue: '0.00084827',
-                },
-                {
-                    symbol: 'BTCUSD_201225',
-                    positionAmt: '1',
-                    entryPrice: '11707.70000003',
-                    markPrice: '11788.66626667',
-                    unRealizedProfit: '0.00005866',
-                    liquidationPrice: '6170.20509059',
-                    leverage: '125',
-                    positionSide: 'LONG',
-                    updateTime: 1627026881327,
-                    maxQty: '50',
-                    notionalValue: '0.00084827',
-                },
-                {
-                    symbol: 'BTCUSD_201225',
-                    positionAmt: '1',
-                    entryPrice: '11707.70000003',
-                    markPrice: '11788.66626667',
-                    unRealizedProfit: '0.00005866',
-                    liquidationPrice: '6170.20509059',
-                    leverage: '125',
-                    positionSide: 'LONG',
-                    updateTime: 1627026881327,
-                    maxQty: '50',
-                    notionalValue: '0.00084827',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BTCUSD_201225',
+                        positionAmt: '1',
+                        entryPrice: '11707.70000003',
+                        markPrice: '11788.66626667',
+                        unRealizedProfit: '0.00005866',
+                        liquidationPrice: '6170.20509059',
+                        leverage: '125',
+                        positionSide: 'LONG',
+                        updateTime: 1627026881327,
+                        maxQty: '50',
+                        notionalValue: '0.00084827',
+                    },
+                    {
+                        symbol: 'BTCUSD_201225',
+                        positionAmt: '1',
+                        entryPrice: '11707.70000003',
+                        markPrice: '11788.66626667',
+                        unRealizedProfit: '0.00005866',
+                        liquidationPrice: '6170.20509059',
+                        leverage: '125',
+                        positionSide: 'LONG',
+                        updateTime: 1627026881327,
+                        maxQty: '50',
+                        notionalValue: '0.00084827',
+                    },
+                    {
+                        symbol: 'BTCUSD_201225',
+                        positionAmt: '1',
+                        entryPrice: '11707.70000003',
+                        markPrice: '11788.66626667',
+                        unRealizedProfit: '0.00005866',
+                        liquidationPrice: '6170.20509059',
+                        leverage: '125',
+                        positionSide: 'LONG',
+                        updateTime: 1627026881327,
+                        maxQty: '50',
+                        notionalValue: '0.00084827',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryCmPositionInformation').mockReturnValue(
                 Promise.resolve({
@@ -2961,18 +3064,20 @@ describe('AccountApi', () => {
                 asset: 'asset_example',
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        txId: 12807067523,
-                        asset: 'BNB',
-                        principal: '0.84624403',
-                        timestamp: 1555056425000,
-                        status: 'CONFIRMED',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            txId: 12807067523,
+                            asset: 'BNB',
+                            principal: '0.84624403',
+                            timestamp: 1555056425000,
+                            status: 'CONFIRMED',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryMarginLoanRecord').mockReturnValue(
                 Promise.resolve({
@@ -3000,18 +3105,20 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        txId: 12807067523,
-                        asset: 'BNB',
-                        principal: '0.84624403',
-                        timestamp: 1555056425000,
-                        status: 'CONFIRMED',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            txId: 12807067523,
+                            asset: 'BNB',
+                            principal: '0.84624403',
+                            timestamp: 1555056425000,
+                            status: 'CONFIRMED',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryMarginLoanRecord').mockReturnValue(
                 Promise.resolve({
@@ -3067,7 +3174,7 @@ describe('AccountApi', () => {
                 asset: 'asset_example',
             };
 
-            mockResponse = { amount: '60' };
+            mockResponse = JSONParse(JSONStringify({ amount: '60' }));
 
             const spy = jest.spyOn(client, 'queryMarginMaxWithdraw').mockReturnValue(
                 Promise.resolve({
@@ -3089,7 +3196,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { amount: '60' };
+            mockResponse = JSONParse(JSONStringify({ amount: '60' }));
 
             const spy = jest.spyOn(client, 'queryMarginMaxWithdraw').mockReturnValue(
                 Promise.resolve({
@@ -3145,20 +3252,22 @@ describe('AccountApi', () => {
                 asset: 'asset_example',
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        amount: '14.00000000',
-                        asset: 'BNB',
-                        interest: '0.01866667',
-                        principal: '13.98133333',
-                        status: 'CONFIRMED',
-                        timestamp: 1563438204000,
-                        txId: 2970933056,
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            amount: '14.00000000',
+                            asset: 'BNB',
+                            interest: '0.01866667',
+                            principal: '13.98133333',
+                            status: 'CONFIRMED',
+                            timestamp: 1563438204000,
+                            txId: 2970933056,
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryMarginRepayRecord').mockReturnValue(
                 Promise.resolve({
@@ -3186,20 +3295,22 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        amount: '14.00000000',
-                        asset: 'BNB',
-                        interest: '0.01866667',
-                        principal: '13.98133333',
-                        status: 'CONFIRMED',
-                        timestamp: 1563438204000,
-                        txId: 2970933056,
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            amount: '14.00000000',
+                            asset: 'BNB',
+                            interest: '0.01866667',
+                            principal: '13.98133333',
+                            status: 'CONFIRMED',
+                            timestamp: 1563438204000,
+                            txId: 2970933056,
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryMarginRepayRecord').mockReturnValue(
                 Promise.resolve({
@@ -3251,15 +3362,17 @@ describe('AccountApi', () => {
 
     describe('queryPortfolioMarginNegativeBalanceInterestHistory()', () => {
         it('should execute queryPortfolioMarginNegativeBalanceInterestHistory() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    asset: 'USDT',
-                    interest: '24.4440',
-                    interestAccuredTime: 1670227200000,
-                    interestRate: '0.0001164',
-                    principal: '210000',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        asset: 'USDT',
+                        interest: '24.4440',
+                        interestAccuredTime: 1670227200000,
+                        interestRate: '0.0001164',
+                        principal: '210000',
+                    },
+                ])
+            );
 
             const spy = jest
                 .spyOn(client, 'queryPortfolioMarginNegativeBalanceInterestHistory')
@@ -3286,15 +3399,17 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    asset: 'USDT',
-                    interest: '24.4440',
-                    interestAccuredTime: 1670227200000,
-                    interestRate: '0.0001164',
-                    principal: '210000',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        asset: 'USDT',
+                        interest: '24.4440',
+                        interestAccuredTime: 1670227200000,
+                        interestRate: '0.0001164',
+                        principal: '210000',
+                    },
+                ])
+            );
 
             const spy = jest
                 .spyOn(client, 'queryPortfolioMarginNegativeBalanceInterestHistory')
@@ -3335,47 +3450,49 @@ describe('AccountApi', () => {
 
     describe('queryUmPositionInformation()', () => {
         it('should execute queryUmPositionInformation() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    entryPrice: '0.00000',
-                    leverage: '10',
-                    markPrice: '6679.50671178',
-                    maxNotionalValue: '20000000',
-                    positionAmt: '0.000',
-                    notional: '0',
-                    symbol: 'BTCUSDT',
-                    unRealizedProfit: '0.00000000',
-                    liquidationPrice: '6170.20509059',
-                    positionSide: 'BOTH',
-                    updateTime: 1625474304765,
-                },
-                {
-                    symbol: 'BTCUSDT',
-                    positionAmt: '0.001',
-                    entryPrice: '22185.2',
-                    markPrice: '21123.05052574',
-                    unRealizedProfit: '-1.06214947',
-                    liquidationPrice: '6170.20509059',
-                    leverage: '4',
-                    maxNotionalValue: '100000000',
-                    positionSide: 'LONG',
-                    notional: '21.12305052',
-                    updateTime: 1655217461579,
-                },
-                {
-                    symbol: 'BTCUSDT',
-                    positionAmt: '0.000',
-                    entryPrice: '0.0',
-                    markPrice: '21123.05052574',
-                    unRealizedProfit: '0.00000000',
-                    liquidationPrice: '6170.20509059',
-                    leverage: '4',
-                    maxNotionalValue: '100000000',
-                    positionSide: 'SHORT',
-                    notional: '0',
-                    updateTime: 0,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        entryPrice: '0.00000',
+                        leverage: '10',
+                        markPrice: '6679.50671178',
+                        maxNotionalValue: '20000000',
+                        positionAmt: '0.000',
+                        notional: '0',
+                        symbol: 'BTCUSDT',
+                        unRealizedProfit: '0.00000000',
+                        liquidationPrice: '6170.20509059',
+                        positionSide: 'BOTH',
+                        updateTime: 1625474304765,
+                    },
+                    {
+                        symbol: 'BTCUSDT',
+                        positionAmt: '0.001',
+                        entryPrice: '22185.2',
+                        markPrice: '21123.05052574',
+                        unRealizedProfit: '-1.06214947',
+                        liquidationPrice: '6170.20509059',
+                        leverage: '4',
+                        maxNotionalValue: '100000000',
+                        positionSide: 'LONG',
+                        notional: '21.12305052',
+                        updateTime: 1655217461579,
+                    },
+                    {
+                        symbol: 'BTCUSDT',
+                        positionAmt: '0.000',
+                        entryPrice: '0.0',
+                        markPrice: '21123.05052574',
+                        unRealizedProfit: '0.00000000',
+                        liquidationPrice: '6170.20509059',
+                        leverage: '4',
+                        maxNotionalValue: '100000000',
+                        positionSide: 'SHORT',
+                        notional: '0',
+                        updateTime: 0,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryUmPositionInformation').mockReturnValue(
                 Promise.resolve({
@@ -3397,47 +3514,49 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    entryPrice: '0.00000',
-                    leverage: '10',
-                    markPrice: '6679.50671178',
-                    maxNotionalValue: '20000000',
-                    positionAmt: '0.000',
-                    notional: '0',
-                    symbol: 'BTCUSDT',
-                    unRealizedProfit: '0.00000000',
-                    liquidationPrice: '6170.20509059',
-                    positionSide: 'BOTH',
-                    updateTime: 1625474304765,
-                },
-                {
-                    symbol: 'BTCUSDT',
-                    positionAmt: '0.001',
-                    entryPrice: '22185.2',
-                    markPrice: '21123.05052574',
-                    unRealizedProfit: '-1.06214947',
-                    liquidationPrice: '6170.20509059',
-                    leverage: '4',
-                    maxNotionalValue: '100000000',
-                    positionSide: 'LONG',
-                    notional: '21.12305052',
-                    updateTime: 1655217461579,
-                },
-                {
-                    symbol: 'BTCUSDT',
-                    positionAmt: '0.000',
-                    entryPrice: '0.0',
-                    markPrice: '21123.05052574',
-                    unRealizedProfit: '0.00000000',
-                    liquidationPrice: '6170.20509059',
-                    leverage: '4',
-                    maxNotionalValue: '100000000',
-                    positionSide: 'SHORT',
-                    notional: '0',
-                    updateTime: 0,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        entryPrice: '0.00000',
+                        leverage: '10',
+                        markPrice: '6679.50671178',
+                        maxNotionalValue: '20000000',
+                        positionAmt: '0.000',
+                        notional: '0',
+                        symbol: 'BTCUSDT',
+                        unRealizedProfit: '0.00000000',
+                        liquidationPrice: '6170.20509059',
+                        positionSide: 'BOTH',
+                        updateTime: 1625474304765,
+                    },
+                    {
+                        symbol: 'BTCUSDT',
+                        positionAmt: '0.001',
+                        entryPrice: '22185.2',
+                        markPrice: '21123.05052574',
+                        unRealizedProfit: '-1.06214947',
+                        liquidationPrice: '6170.20509059',
+                        leverage: '4',
+                        maxNotionalValue: '100000000',
+                        positionSide: 'LONG',
+                        notional: '21.12305052',
+                        updateTime: 1655217461579,
+                    },
+                    {
+                        symbol: 'BTCUSDT',
+                        positionAmt: '0.000',
+                        entryPrice: '0.0',
+                        markPrice: '21123.05052574',
+                        unRealizedProfit: '0.00000000',
+                        liquidationPrice: '6170.20509059',
+                        leverage: '4',
+                        maxNotionalValue: '100000000',
+                        positionSide: 'SHORT',
+                        notional: '0',
+                        updateTime: 0,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryUmPositionInformation').mockReturnValue(
                 Promise.resolve({
@@ -3478,23 +3597,31 @@ describe('AccountApi', () => {
                 endTime: 1641782889000,
             };
 
-            mockResponse = {
-                total: 2,
-                rows: [
-                    {
-                        startTime: 1736263046841,
-                        endTime: 1736263248179,
-                        details: [{ asset: 'ETH', negativeBalance: 18, negativeMaxThreshold: 5 }],
-                    },
-                    {
-                        startTime: 1736184913252,
-                        endTime: 1736184965474,
-                        details: [
-                            { asset: 'BNB', negativeBalance: 1.10264488, negativeMaxThreshold: 0 },
-                        ],
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 2,
+                    rows: [
+                        {
+                            startTime: 1736263046841,
+                            endTime: 1736263248179,
+                            details: [
+                                { asset: 'ETH', negativeBalance: 18, negativeMaxThreshold: 5 },
+                            ],
+                        },
+                        {
+                            startTime: 1736184913252,
+                            endTime: 1736184965474,
+                            details: [
+                                {
+                                    asset: 'BNB',
+                                    negativeBalance: 1.10264488,
+                                    negativeMaxThreshold: 0,
+                                },
+                            ],
+                        },
+                    ],
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'queryUserNegativeBalanceAutoExchangeRecord')
@@ -3519,23 +3646,31 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                total: 2,
-                rows: [
-                    {
-                        startTime: 1736263046841,
-                        endTime: 1736263248179,
-                        details: [{ asset: 'ETH', negativeBalance: 18, negativeMaxThreshold: 5 }],
-                    },
-                    {
-                        startTime: 1736184913252,
-                        endTime: 1736184965474,
-                        details: [
-                            { asset: 'BNB', negativeBalance: 1.10264488, negativeMaxThreshold: 0 },
-                        ],
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 2,
+                    rows: [
+                        {
+                            startTime: 1736263046841,
+                            endTime: 1736263248179,
+                            details: [
+                                { asset: 'ETH', negativeBalance: 18, negativeMaxThreshold: 5 },
+                            ],
+                        },
+                        {
+                            startTime: 1736184913252,
+                            endTime: 1736184965474,
+                            details: [
+                                {
+                                    asset: 'BNB',
+                                    negativeBalance: 1.10264488,
+                                    negativeMaxThreshold: 0,
+                                },
+                            ],
+                        },
+                    ],
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'queryUserNegativeBalanceAutoExchangeRecord')
@@ -3606,9 +3741,11 @@ describe('AccountApi', () => {
 
     describe('queryUserRateLimit()', () => {
         it('should execute queryUserRateLimit() successfully with required parameters only', async () => {
-            mockResponse = [
-                { rateLimitType: 'ORDERS', interval: 'MINUTE', intervalNum: 1, limit: 1200 },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { rateLimitType: 'ORDERS', interval: 'MINUTE', intervalNum: 1, limit: 1200 },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryUserRateLimit').mockReturnValue(
                 Promise.resolve({
@@ -3629,9 +3766,11 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                { rateLimitType: 'ORDERS', interval: 'MINUTE', intervalNum: 1, limit: 1200 },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { rateLimitType: 'ORDERS', interval: 'MINUTE', intervalNum: 1, limit: 1200 },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryUserRateLimit').mockReturnValue(
                 Promise.resolve({
@@ -3665,7 +3804,7 @@ describe('AccountApi', () => {
 
     describe('repayFuturesNegativeBalance()', () => {
         it('should execute repayFuturesNegativeBalance() successfully with required parameters only', async () => {
-            mockResponse = { msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
 
             const spy = jest.spyOn(client, 'repayFuturesNegativeBalance').mockReturnValue(
                 Promise.resolve({
@@ -3686,7 +3825,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
 
             const spy = jest.spyOn(client, 'repayFuturesNegativeBalance').mockReturnValue(
                 Promise.resolve({
@@ -3722,16 +3861,18 @@ describe('AccountApi', () => {
 
     describe('umFuturesAccountConfiguration()', () => {
         it('should execute umFuturesAccountConfiguration() successfully with required parameters only', async () => {
-            mockResponse = {
-                feeTier: 0,
-                canTrade: true,
-                canDeposit: true,
-                canWithdraw: true,
-                dualSidePosition: true,
-                updateTime: 1724416653850,
-                multiAssetsMargin: false,
-                tradeGroupId: -1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    feeTier: 0,
+                    canTrade: true,
+                    canDeposit: true,
+                    canWithdraw: true,
+                    dualSidePosition: true,
+                    updateTime: 1724416653850,
+                    multiAssetsMargin: false,
+                    tradeGroupId: -1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'umFuturesAccountConfiguration').mockReturnValue(
                 Promise.resolve({
@@ -3752,16 +3893,18 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                feeTier: 0,
-                canTrade: true,
-                canDeposit: true,
-                canWithdraw: true,
-                dualSidePosition: true,
-                updateTime: 1724416653850,
-                multiAssetsMargin: false,
-                tradeGroupId: -1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    feeTier: 0,
+                    canTrade: true,
+                    canDeposit: true,
+                    canWithdraw: true,
+                    dualSidePosition: true,
+                    updateTime: 1724416653850,
+                    multiAssetsMargin: false,
+                    tradeGroupId: -1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'umFuturesAccountConfiguration').mockReturnValue(
                 Promise.resolve({
@@ -3797,15 +3940,17 @@ describe('AccountApi', () => {
 
     describe('umFuturesSymbolConfiguration()', () => {
         it('should execute umFuturesSymbolConfiguration() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    symbol: 'BTCUSDT',
-                    marginType: 'CROSSED',
-                    isAutoAddMargin: 'false',
-                    leverage: 21,
-                    maxNotionalValue: '1000000',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BTCUSDT',
+                        marginType: 'CROSSED',
+                        isAutoAddMargin: 'false',
+                        leverage: 21,
+                        maxNotionalValue: '1000000',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'umFuturesSymbolConfiguration').mockReturnValue(
                 Promise.resolve({
@@ -3827,15 +3972,17 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    symbol: 'BTCUSDT',
-                    marginType: 'CROSSED',
-                    isAutoAddMargin: 'false',
-                    leverage: 21,
-                    maxNotionalValue: '1000000',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BTCUSDT',
+                        marginType: 'CROSSED',
+                        isAutoAddMargin: 'false',
+                        leverage: 21,
+                        maxNotionalValue: '1000000',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'umFuturesSymbolConfiguration').mockReturnValue(
                 Promise.resolve({
@@ -3871,22 +4018,24 @@ describe('AccountApi', () => {
 
     describe('umNotionalAndLeverageBrackets()', () => {
         it('should execute umNotionalAndLeverageBrackets() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    symbol: 'ETHUSDT',
-                    notionalCoef: '4.0',
-                    brackets: [
-                        {
-                            bracket: 1,
-                            initialLeverage: 75,
-                            notionalCap: 10000,
-                            notionalFloor: 0,
-                            maintMarginRatio: 0.0065,
-                            cum: 0,
-                        },
-                    ],
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'ETHUSDT',
+                        notionalCoef: '4.0',
+                        brackets: [
+                            {
+                                bracket: 1,
+                                initialLeverage: 75,
+                                notionalCap: 10000,
+                                notionalFloor: 0,
+                                maintMarginRatio: 0.0065,
+                                cum: 0,
+                            },
+                        ],
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'umNotionalAndLeverageBrackets').mockReturnValue(
                 Promise.resolve({
@@ -3908,22 +4057,24 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    symbol: 'ETHUSDT',
-                    notionalCoef: '4.0',
-                    brackets: [
-                        {
-                            bracket: 1,
-                            initialLeverage: 75,
-                            notionalCap: 10000,
-                            notionalFloor: 0,
-                            maintMarginRatio: 0.0065,
-                            cum: 0,
-                        },
-                    ],
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'ETHUSDT',
+                        notionalCoef: '4.0',
+                        brackets: [
+                            {
+                                bracket: 1,
+                                initialLeverage: 75,
+                                notionalCap: 10000,
+                                notionalFloor: 0,
+                                maintMarginRatio: 0.0065,
+                                cum: 0,
+                            },
+                        ],
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'umNotionalAndLeverageBrackets').mockReturnValue(
                 Promise.resolve({

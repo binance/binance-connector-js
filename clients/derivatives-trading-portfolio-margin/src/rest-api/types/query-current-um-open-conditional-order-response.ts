@@ -27,10 +27,10 @@ export interface QueryCurrentUmOpenConditionalOrderResponse {
     newClientStrategyId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCurrentUmOpenConditionalOrderResponse
      */
-    strategyId?: number;
+    strategyId?: number | bigint;
     /**
      *
      * @type {string}
@@ -87,16 +87,16 @@ export interface QueryCurrentUmOpenConditionalOrderResponse {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCurrentUmOpenConditionalOrderResponse
      */
-    bookTime?: number;
+    bookTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCurrentUmOpenConditionalOrderResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -123,10 +123,10 @@ export interface QueryCurrentUmOpenConditionalOrderResponse {
     selfTradePreventionMode?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCurrentUmOpenConditionalOrderResponse
      */
-    goodTillDate?: number;
+    goodTillDate?: number | bigint;
     /**
      *
      * @type {string}

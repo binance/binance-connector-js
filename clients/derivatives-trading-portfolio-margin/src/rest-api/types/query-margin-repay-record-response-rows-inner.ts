@@ -51,14 +51,14 @@ export interface QueryMarginRepayRecordResponseRowsInner {
     status?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryMarginRepayRecordResponseRowsInner
      */
-    timestamp?: number;
+    timestamp?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryMarginRepayRecordResponseRowsInner
      */
-    txId?: number;
+    txId?: number | bigint;
 }

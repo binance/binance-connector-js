@@ -99,8 +99,8 @@ export interface GetUmAccountDetailResponsePositionsInner {
     positionAmt?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetUmAccountDetailResponsePositionsInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

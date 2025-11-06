@@ -21,10 +21,10 @@
 export interface ModifyUmOrderResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ModifyUmOrderResponse
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -123,16 +123,16 @@ export interface ModifyUmOrderResponse {
     selfTradePreventionMode?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ModifyUmOrderResponse
      */
-    goodTillDate?: number;
+    goodTillDate?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ModifyUmOrderResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}

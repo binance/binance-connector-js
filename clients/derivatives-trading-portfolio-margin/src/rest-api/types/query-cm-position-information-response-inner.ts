@@ -69,10 +69,10 @@ export interface QueryCmPositionInformationResponseInner {
     positionSide?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCmPositionInformationResponseInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}

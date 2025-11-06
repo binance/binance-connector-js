@@ -33,10 +33,10 @@ export interface MarginAccountTradeListResponseInner {
     commissionAsset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarginAccountTradeListResponseInner
      */
-    id?: number;
+    id?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -57,10 +57,10 @@ export interface MarginAccountTradeListResponseInner {
     isMaker?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarginAccountTradeListResponseInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -81,8 +81,8 @@ export interface MarginAccountTradeListResponseInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarginAccountTradeListResponseInner
      */
-    time?: number;
+    time?: number | bigint;
 }

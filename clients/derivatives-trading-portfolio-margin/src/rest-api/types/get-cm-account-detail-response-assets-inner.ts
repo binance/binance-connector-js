@@ -63,8 +63,8 @@ export interface GetCmAccountDetailResponseAssetsInner {
     openOrderInitialMargin?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetCmAccountDetailResponseAssetsInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

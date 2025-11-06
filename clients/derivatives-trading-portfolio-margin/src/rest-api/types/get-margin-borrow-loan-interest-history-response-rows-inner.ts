@@ -21,16 +21,16 @@
 export interface GetMarginBorrowLoanInterestHistoryResponseRowsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetMarginBorrowLoanInterestHistoryResponseRowsInner
      */
-    txId?: number;
+    txId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetMarginBorrowLoanInterestHistoryResponseRowsInner
      */
-    interestAccuredTime?: number;
+    interestAccuredTime?: number | bigint;
     /**
      *
      * @type {string}

@@ -26,10 +26,10 @@ import type { QueryCmModifyOrderHistoryResponseInnerAmendment } from './query-cm
 export interface QueryCmModifyOrderHistoryResponseInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCmModifyOrderHistoryResponseInner
      */
-    amendmentId?: number;
+    amendmentId?: number | bigint;
     /**
      *
      * @type {string}
@@ -44,10 +44,10 @@ export interface QueryCmModifyOrderHistoryResponseInner {
     pair?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCmModifyOrderHistoryResponseInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -56,10 +56,10 @@ export interface QueryCmModifyOrderHistoryResponseInner {
     clientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCmModifyOrderHistoryResponseInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {QueryCmModifyOrderHistoryResponseInnerAmendment}

@@ -75,8 +75,8 @@ export interface AccountInformationResponse {
     totalMarginOpenLoss?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountInformationResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

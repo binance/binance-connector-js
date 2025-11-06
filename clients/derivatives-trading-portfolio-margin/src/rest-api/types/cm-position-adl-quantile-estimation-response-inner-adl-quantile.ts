@@ -21,26 +21,26 @@
 export interface CmPositionAdlQuantileEstimationResponseInnerAdlQuantile {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CmPositionAdlQuantileEstimationResponseInnerAdlQuantile
      */
-    LONG?: number;
+    LONG?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CmPositionAdlQuantileEstimationResponseInnerAdlQuantile
      */
-    SHORT?: number;
+    SHORT?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CmPositionAdlQuantileEstimationResponseInnerAdlQuantile
      */
-    HEDGE?: number;
+    HEDGE?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CmPositionAdlQuantileEstimationResponseInnerAdlQuantile
      */
-    BOTH?: number;
+    BOTH?: number | bigint;
 }

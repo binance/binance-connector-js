@@ -33,8 +33,8 @@ export interface QueryUserNegativeBalanceAutoExchangeRecordResponseRowsInnerDeta
     negativeBalance?: number;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUserNegativeBalanceAutoExchangeRecordResponseRowsInnerDetailsInner
      */
-    negativeMaxThreshold?: number;
+    negativeMaxThreshold?: number | bigint;
 }

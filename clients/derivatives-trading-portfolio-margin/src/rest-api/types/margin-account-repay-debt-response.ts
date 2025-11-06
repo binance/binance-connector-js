@@ -39,10 +39,10 @@ export interface MarginAccountRepayDebtResponse {
     specifyRepayAssets?: Array<string>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarginAccountRepayDebtResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {boolean}
