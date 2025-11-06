@@ -45,28 +45,28 @@ export interface GetDualInvestmentProductListResponseListInner {
     strikePrice?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetDualInvestmentProductListResponseListInner
      */
-    duration?: number;
+    duration?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetDualInvestmentProductListResponseListInner
      */
-    settleDate?: number;
+    settleDate?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetDualInvestmentProductListResponseListInner
      */
-    purchaseDecimal?: number;
+    purchaseDecimal?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetDualInvestmentProductListResponseListInner
      */
-    purchaseEndTime?: number;
+    purchaseEndTime?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -81,10 +81,10 @@ export interface GetDualInvestmentProductListResponseListInner {
     apr?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetDualInvestmentProductListResponseListInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -99,10 +99,10 @@ export interface GetDualInvestmentProductListResponseListInner {
     maxAmount?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetDualInvestmentProductListResponseListInner
      */
-    createTimestamp?: number;
+    createTimestamp?: number | bigint;
     /**
      *
      * @type {string}

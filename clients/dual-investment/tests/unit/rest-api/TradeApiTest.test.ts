@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { TradeApi } from '../../../src/rest-api';
@@ -48,7 +49,9 @@ describe('TradeApi', () => {
                 positionId: '1',
             };
 
-            mockResponse = { positionId: '123456789', autoCompoundPlan: 'ADVANCED' };
+            mockResponse = JSONParse(
+                JSONStringify({ positionId: '123456789', autoCompoundPlan: 'ADVANCED' })
+            );
 
             const spy = jest.spyOn(client, 'changeAutoCompoundStatus').mockReturnValue(
                 Promise.resolve({
@@ -71,7 +74,9 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { positionId: '123456789', autoCompoundPlan: 'ADVANCED' };
+            mockResponse = JSONParse(
+                JSONStringify({ positionId: '123456789', autoCompoundPlan: 'ADVANCED' })
+            );
 
             const spy = jest.spyOn(client, 'changeAutoCompoundStatus').mockReturnValue(
                 Promise.resolve({
@@ -123,7 +128,9 @@ describe('TradeApi', () => {
 
     describe('checkDualInvestmentAccounts()', () => {
         it('should execute checkDualInvestmentAccounts() successfully with required parameters only', async () => {
-            mockResponse = { totalAmountInBTC: '0.01067982', totalAmountInUSDT: '77.13289230' };
+            mockResponse = JSONParse(
+                JSONStringify({ totalAmountInBTC: '0.01067982', totalAmountInUSDT: '77.13289230' })
+            );
 
             const spy = jest.spyOn(client, 'checkDualInvestmentAccounts').mockReturnValue(
                 Promise.resolve({
@@ -144,7 +151,9 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { totalAmountInBTC: '0.01067982', totalAmountInUSDT: '77.13289230' };
+            mockResponse = JSONParse(
+                JSONStringify({ totalAmountInBTC: '0.01067982', totalAmountInUSDT: '77.13289230' })
+            );
 
             const spy = jest.spyOn(client, 'checkDualInvestmentAccounts').mockReturnValue(
                 Promise.resolve({
@@ -180,26 +189,28 @@ describe('TradeApi', () => {
 
     describe('getDualInvestmentPositions()', () => {
         it('should execute getDualInvestmentPositions() successfully with required parameters only', async () => {
-            mockResponse = {
-                total: 1,
-                list: [
-                    {
-                        id: '10160533',
-                        investCoin: 'USDT',
-                        exercisedCoin: 'BNB',
-                        subscriptionAmount: '0.5',
-                        strikePrice: '330',
-                        duration: 4,
-                        settleDate: 1708416000000,
-                        purchaseStatus: 'PURCHASE_SUCCESS',
-                        apr: '0.0365',
-                        orderId: 7973677530,
-                        purchaseEndTime: 1708329600000,
-                        optionType: 'PUT',
-                        autoCompoundPlan: 'STANDARD',
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 1,
+                    list: [
+                        {
+                            id: '10160533',
+                            investCoin: 'USDT',
+                            exercisedCoin: 'BNB',
+                            subscriptionAmount: '0.5',
+                            strikePrice: '330',
+                            duration: 4,
+                            settleDate: 1708416000000,
+                            purchaseStatus: 'PURCHASE_SUCCESS',
+                            apr: '0.0365',
+                            orderId: 7973677530,
+                            purchaseEndTime: 1708329600000,
+                            optionType: 'PUT',
+                            autoCompoundPlan: 'STANDARD',
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'getDualInvestmentPositions').mockReturnValue(
                 Promise.resolve({
@@ -223,26 +234,28 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                total: 1,
-                list: [
-                    {
-                        id: '10160533',
-                        investCoin: 'USDT',
-                        exercisedCoin: 'BNB',
-                        subscriptionAmount: '0.5',
-                        strikePrice: '330',
-                        duration: 4,
-                        settleDate: 1708416000000,
-                        purchaseStatus: 'PURCHASE_SUCCESS',
-                        apr: '0.0365',
-                        orderId: 7973677530,
-                        purchaseEndTime: 1708329600000,
-                        optionType: 'PUT',
-                        autoCompoundPlan: 'STANDARD',
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 1,
+                    list: [
+                        {
+                            id: '10160533',
+                            investCoin: 'USDT',
+                            exercisedCoin: 'BNB',
+                            subscriptionAmount: '0.5',
+                            strikePrice: '330',
+                            duration: 4,
+                            settleDate: 1708416000000,
+                            purchaseStatus: 'PURCHASE_SUCCESS',
+                            apr: '0.0365',
+                            orderId: 7973677530,
+                            purchaseEndTime: 1708329600000,
+                            optionType: 'PUT',
+                            autoCompoundPlan: 'STANDARD',
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'getDualInvestmentPositions').mockReturnValue(
                 Promise.resolve({
@@ -285,21 +298,23 @@ describe('TradeApi', () => {
                 autoCompoundPlan: 'NONE',
             };
 
-            mockResponse = {
-                positionId: 10208824,
-                investCoin: 'BNB',
-                exercisedCoin: 'USDT',
-                subscriptionAmount: '0.002',
-                duration: 4,
-                autoCompoundPlan: 'STANDARD',
-                strikePrice: '380',
-                settleDate: 1709020800000,
-                purchaseStatus: 'PURCHASE_SUCCESS',
-                apr: '0.7397',
-                orderId: 8259117597,
-                purchaseTime: 1708677583874,
-                optionType: 'CALL',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    positionId: 10208824,
+                    investCoin: 'BNB',
+                    exercisedCoin: 'USDT',
+                    subscriptionAmount: '0.002',
+                    duration: 4,
+                    autoCompoundPlan: 'STANDARD',
+                    strikePrice: '380',
+                    settleDate: 1709020800000,
+                    purchaseStatus: 'PURCHASE_SUCCESS',
+                    apr: '0.7397',
+                    orderId: 8259117597,
+                    purchaseTime: 1708677583874,
+                    optionType: 'CALL',
+                })
+            );
 
             const spy = jest.spyOn(client, 'subscribeDualInvestmentProducts').mockReturnValue(
                 Promise.resolve({
@@ -324,21 +339,23 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                positionId: 10208824,
-                investCoin: 'BNB',
-                exercisedCoin: 'USDT',
-                subscriptionAmount: '0.002',
-                duration: 4,
-                autoCompoundPlan: 'STANDARD',
-                strikePrice: '380',
-                settleDate: 1709020800000,
-                purchaseStatus: 'PURCHASE_SUCCESS',
-                apr: '0.7397',
-                orderId: 8259117597,
-                purchaseTime: 1708677583874,
-                optionType: 'CALL',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    positionId: 10208824,
+                    investCoin: 'BNB',
+                    exercisedCoin: 'USDT',
+                    subscriptionAmount: '0.002',
+                    duration: 4,
+                    autoCompoundPlan: 'STANDARD',
+                    strikePrice: '380',
+                    settleDate: 1709020800000,
+                    purchaseStatus: 'PURCHASE_SUCCESS',
+                    apr: '0.7397',
+                    orderId: 8259117597,
+                    purchaseTime: 1708677583874,
+                    optionType: 'CALL',
+                })
+            );
 
             const spy = jest.spyOn(client, 'subscribeDualInvestmentProducts').mockReturnValue(
                 Promise.resolve({

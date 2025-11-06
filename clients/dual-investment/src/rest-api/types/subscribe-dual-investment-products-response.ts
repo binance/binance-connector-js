@@ -21,10 +21,10 @@
 export interface SubscribeDualInvestmentProductsResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SubscribeDualInvestmentProductsResponse
      */
-    positionId?: number;
+    positionId?: number | bigint;
     /**
      *
      * @type {string}
@@ -45,10 +45,10 @@ export interface SubscribeDualInvestmentProductsResponse {
     subscriptionAmount?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SubscribeDualInvestmentProductsResponse
      */
-    duration?: number;
+    duration?: number | bigint;
     /**
      *
      * @type {string}
@@ -63,10 +63,10 @@ export interface SubscribeDualInvestmentProductsResponse {
     strikePrice?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SubscribeDualInvestmentProductsResponse
      */
-    settleDate?: number;
+    settleDate?: number | bigint;
     /**
      *
      * @type {string}
@@ -81,16 +81,16 @@ export interface SubscribeDualInvestmentProductsResponse {
     apr?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SubscribeDualInvestmentProductsResponse
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SubscribeDualInvestmentProductsResponse
      */
-    purchaseTime?: number;
+    purchaseTime?: number | bigint;
     /**
      *
      * @type {string}

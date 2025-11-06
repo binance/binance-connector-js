@@ -26,10 +26,10 @@ import type { GetDualInvestmentProductListResponseListInner } from './get-dual-i
 export interface GetDualInvestmentProductListResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetDualInvestmentProductListResponse
      */
-    total?: number;
+    total?: number | bigint;
     /**
      *
      * @type {Array<GetDualInvestmentProductListResponseListInner>}

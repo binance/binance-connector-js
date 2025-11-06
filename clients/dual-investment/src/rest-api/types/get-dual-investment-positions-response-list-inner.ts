@@ -51,16 +51,16 @@ export interface GetDualInvestmentPositionsResponseListInner {
     strikePrice?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetDualInvestmentPositionsResponseListInner
      */
-    duration?: number;
+    duration?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetDualInvestmentPositionsResponseListInner
      */
-    settleDate?: number;
+    settleDate?: number | bigint;
     /**
      *
      * @type {string}
@@ -75,16 +75,16 @@ export interface GetDualInvestmentPositionsResponseListInner {
     apr?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetDualInvestmentPositionsResponseListInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetDualInvestmentPositionsResponseListInner
      */
-    purchaseEndTime?: number;
+    purchaseEndTime?: number | bigint;
     /**
      *
      * @type {string}
