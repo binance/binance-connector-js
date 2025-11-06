@@ -36,18 +36,18 @@ const RebateApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * Weight: 12000
          *
          * @summary Get Spot Rebate History Records (USER_DATA)
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [page] Default 1
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [page] Default 1
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getSpotRebateHistoryRecords: async (
-            startTime?: number,
-            endTime?: number,
-            page?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            page?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -113,31 +113,31 @@ export interface RebateApiInterface {
 export interface GetSpotRebateHistoryRecordsRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RebateApiGetSpotRebateHistoryRecords
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RebateApiGetSpotRebateHistoryRecords
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RebateApiGetSpotRebateHistoryRecords
      */
-    readonly page?: number;
+    readonly page?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RebateApiGetSpotRebateHistoryRecords
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
