@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { RebateApi } from '../../../src/rest-api';
@@ -34,20 +35,32 @@ describe('RebateApi', () => {
 
     describe('getSpotRebateHistoryRecords()', () => {
         it('should execute getSpotRebateHistoryRecords() successfully with required parameters only', async () => {
-            mockResponse = {
-                status: 'OK',
-                type: 'GENERAL',
-                code: '000000000',
-                data: {
-                    page: 1,
-                    totalRecords: 2,
-                    totalPageNum: 1,
-                    data: [
-                        { asset: 'USDT', type: 1, amount: '0.0001126', updateTime: 1637651320000 },
-                        { asset: 'ETH', type: 1, amount: '0.00000056', updateTime: 1637928379000 },
-                    ],
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    status: 'OK',
+                    type: 'GENERAL',
+                    code: '000000000',
+                    data: {
+                        page: 1,
+                        totalRecords: 2,
+                        totalPageNum: 1,
+                        data: [
+                            {
+                                asset: 'USDT',
+                                type: 1,
+                                amount: '0.0001126',
+                                updateTime: 1637651320000,
+                            },
+                            {
+                                asset: 'ETH',
+                                type: 1,
+                                amount: '0.00000056',
+                                updateTime: 1637928379000,
+                            },
+                        ],
+                    },
+                })
+            );
 
             const spy = jest.spyOn(client, 'getSpotRebateHistoryRecords').mockReturnValue(
                 Promise.resolve({
@@ -71,20 +84,32 @@ describe('RebateApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                status: 'OK',
-                type: 'GENERAL',
-                code: '000000000',
-                data: {
-                    page: 1,
-                    totalRecords: 2,
-                    totalPageNum: 1,
-                    data: [
-                        { asset: 'USDT', type: 1, amount: '0.0001126', updateTime: 1637651320000 },
-                        { asset: 'ETH', type: 1, amount: '0.00000056', updateTime: 1637928379000 },
-                    ],
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    status: 'OK',
+                    type: 'GENERAL',
+                    code: '000000000',
+                    data: {
+                        page: 1,
+                        totalRecords: 2,
+                        totalPageNum: 1,
+                        data: [
+                            {
+                                asset: 'USDT',
+                                type: 1,
+                                amount: '0.0001126',
+                                updateTime: 1637651320000,
+                            },
+                            {
+                                asset: 'ETH',
+                                type: 1,
+                                amount: '0.00000056',
+                                updateTime: 1637928379000,
+                            },
+                        ],
+                    },
+                })
+            );
 
             const spy = jest.spyOn(client, 'getSpotRebateHistoryRecords').mockReturnValue(
                 Promise.resolve({

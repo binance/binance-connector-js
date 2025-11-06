@@ -27,10 +27,10 @@ export interface GetSpotRebateHistoryRecordsResponseDataDataInner {
     asset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSpotRebateHistoryRecordsResponseDataDataInner
      */
-    type?: number;
+    type?: number | bigint;
     /**
      *
      * @type {string}
@@ -39,8 +39,8 @@ export interface GetSpotRebateHistoryRecordsResponseDataDataInner {
     amount?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSpotRebateHistoryRecordsResponseDataDataInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

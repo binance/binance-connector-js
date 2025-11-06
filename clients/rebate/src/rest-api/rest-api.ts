@@ -73,6 +73,7 @@ export class RestAPI {
      *
      * @summary Get Spot Rebate History Records (USER_DATA)
      * @param {GetSpotRebateHistoryRecordsRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetSpotRebateHistoryRecordsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/rebate/rest-api/Get-Spot-Rebate-History-Records Binance API Documentation}

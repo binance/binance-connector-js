@@ -26,22 +26,22 @@ import type { GetSpotRebateHistoryRecordsResponseDataDataInner } from './get-spo
 export interface GetSpotRebateHistoryRecordsResponseData {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSpotRebateHistoryRecordsResponseData
      */
-    page?: number;
+    page?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSpotRebateHistoryRecordsResponseData
      */
-    totalRecords?: number;
+    totalRecords?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSpotRebateHistoryRecordsResponseData
      */
-    totalPageNum?: number;
+    totalPageNum?: number | bigint;
     /**
      *
      * @type {Array<GetSpotRebateHistoryRecordsResponseDataDataInner>}
