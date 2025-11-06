@@ -69,11 +69,13 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 100(IP)
          *
          * @summary Query order quantity precision per asset(USER_DATA)
-         * @param {number} [recvWindow] The value cannot be greater than 60000
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
-        queryOrderQuantityPrecisionPerAsset: async (recvWindow?: number): Promise<RequestArgs> => {
+        queryOrderQuantityPrecisionPerAsset: async (
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -158,10 +160,10 @@ export interface ListAllConvertPairsRequest {
 export interface QueryOrderQuantityPrecisionPerAssetRequest {
     /**
      * The value cannot be greater than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiQueryOrderQuantityPrecisionPerAsset
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

@@ -41,11 +41,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Accept Quote (TRADE)
          * @param {string} quoteId
-         * @param {number} [recvWindow] The value cannot be greater than 60000
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
-        acceptQuote: async (quoteId: string, recvWindow?: number): Promise<RequestArgs> => {
+        acceptQuote: async (
+            quoteId: string,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             // verify required parameter 'quoteId' is not null or undefined
             assertParamExists('acceptQuote', 'quoteId', quoteId);
 
@@ -75,12 +78,15 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 200(UID)
          *
          * @summary Cancel limit order (USER_DATA)
-         * @param {number} orderId The orderId from `placeOrder` api
-         * @param {number} [recvWindow] The value cannot be greater than 60000
+         * @param {number | bigint} orderId The orderId from `placeOrder` api
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
-        cancelLimitOrder: async (orderId: number, recvWindow?: number): Promise<RequestArgs> => {
+        cancelLimitOrder: async (
+            orderId: number | bigint,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             // verify required parameter 'orderId' is not null or undefined
             assertParamExists('cancelLimitOrder', 'orderId', orderId);
 
@@ -112,18 +118,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 3000
          *
          * @summary Get Convert Trade History(USER_DATA)
-         * @param {number} startTime
-         * @param {number} endTime
-         * @param {number} [limit] Default 100, Max 1000
-         * @param {number} [recvWindow] The value cannot be greater than 60000
+         * @param {number | bigint} startTime
+         * @param {number | bigint} endTime
+         * @param {number | bigint} [limit] Default 100, Max 1000
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
         getConvertTradeHistory: async (
-            startTime: number,
-            endTime: number,
-            limit?: number,
-            recvWindow?: number
+            startTime: number | bigint,
+            endTime: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'startTime' is not null or undefined
             assertParamExists('getConvertTradeHistory', 'startTime', startTime);
@@ -208,7 +214,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [baseAmount] Base asset amount.  (One of `baseAmount` or `quoteAmount` is required)
          * @param {number} [quoteAmount] Quote asset amount.  (One of `baseAmount` or `quoteAmount` is required)
          * @param {string} [walletType] It is to choose which wallet of assets. The wallet selection is `SPOT`, `FUNDING` and `EARN`. Combination of wallet is supported i.e. `SPOT_FUNDING`, `FUNDING_EARN`, `SPOT_FUNDING_EARN` or `SPOT_EARN`  Default is `SPOT`.
-         * @param {number} [recvWindow] The value cannot be greater than 60000
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
@@ -221,7 +227,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             baseAmount?: number,
             quoteAmount?: number,
             walletType?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'baseAsset' is not null or undefined
             assertParamExists('placeLimitOrder', 'baseAsset', baseAsset);
@@ -288,11 +294,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 3000(UID)
          *
          * @summary Query limit open orders (USER_DATA)
-         * @param {number} [recvWindow] The value cannot be greater than 60000
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
-        queryLimitOpenOrders: async (recvWindow?: number): Promise<RequestArgs> => {
+        queryLimitOpenOrders: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -324,7 +330,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [toAmount] When specified, it is the amount you will be credited after the conversion
          * @param {string} [walletType] It is to choose which wallet of assets. The wallet selection is `SPOT`, `FUNDING` and `EARN`. Combination of wallet is supported i.e. `SPOT_FUNDING`, `FUNDING_EARN`, `SPOT_FUNDING_EARN` or `SPOT_EARN`  Default is `SPOT`.
          * @param {string} [validTime] 10s, 30s, 1m, default 10s
-         * @param {number} [recvWindow] The value cannot be greater than 60000
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
@@ -335,7 +341,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             toAmount?: number,
             walletType?: string,
             validTime?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'fromAsset' is not null or undefined
             assertParamExists('sendQuoteRequest', 'fromAsset', fromAsset);
@@ -513,10 +519,10 @@ export interface AcceptQuoteRequest {
 
     /**
      * The value cannot be greater than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiAcceptQuote
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -526,17 +532,17 @@ export interface AcceptQuoteRequest {
 export interface CancelLimitOrderRequest {
     /**
      * The orderId from `placeOrder` api
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelLimitOrder
      */
-    readonly orderId: number;
+    readonly orderId: number | bigint;
 
     /**
      * The value cannot be greater than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelLimitOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -546,31 +552,31 @@ export interface CancelLimitOrderRequest {
 export interface GetConvertTradeHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetConvertTradeHistory
      */
-    readonly startTime: number;
+    readonly startTime: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetConvertTradeHistory
      */
-    readonly endTime: number;
+    readonly endTime: number | bigint;
 
     /**
      * Default 100, Max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetConvertTradeHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      * The value cannot be greater than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetConvertTradeHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -656,10 +662,10 @@ export interface PlaceLimitOrderRequest {
 
     /**
      * The value cannot be greater than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiPlaceLimitOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -669,10 +675,10 @@ export interface PlaceLimitOrderRequest {
 export interface QueryLimitOpenOrdersRequest {
     /**
      * The value cannot be greater than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryLimitOpenOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -724,10 +730,10 @@ export interface SendQuoteRequestRequest {
 
     /**
      * The value cannot be greater than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiSendQuoteRequest
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
