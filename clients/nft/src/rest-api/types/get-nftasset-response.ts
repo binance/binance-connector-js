@@ -26,10 +26,10 @@ import type { GetNFTAssetResponseListInner } from './get-nftasset-response-list-
 export interface GetNFTAssetResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetNFTAssetResponse
      */
-    total?: number;
+    total?: number | bigint;
     /**
      *
      * @type {Array<GetNFTAssetResponseListInner>}

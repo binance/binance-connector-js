@@ -26,10 +26,10 @@ import type { GetNFTTransactionHistoryResponseListInner } from './get-nfttransac
 export interface GetNFTTransactionHistoryResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetNFTTransactionHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
     /**
      *
      * @type {Array<GetNFTTransactionHistoryResponseListInner>}

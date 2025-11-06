@@ -38,10 +38,10 @@ export interface GetNFTTransactionHistoryResponseListInner {
     tokens?: Array<GetNFTTransactionHistoryResponseListInnerTokensInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetNFTTransactionHistoryResponseListInner
      */
-    tradeTime?: number;
+    tradeTime?: number | bigint;
     /**
      *
      * @type {string}

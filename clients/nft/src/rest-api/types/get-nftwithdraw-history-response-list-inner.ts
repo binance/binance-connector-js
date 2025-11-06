@@ -45,10 +45,10 @@ export interface GetNFTWithdrawHistoryResponseListInner {
     tokenId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetNFTWithdrawHistoryResponseListInner
      */
-    timestamp?: number;
+    timestamp?: number | bigint;
     /**
      *
      * @type {number}

@@ -26,10 +26,10 @@ import type { GetNFTDepositHistoryResponseListInner } from './get-nftdeposit-his
 export interface GetNFTDepositHistoryResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetNFTDepositHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
     /**
      *
      * @type {Array<GetNFTDepositHistoryResponseListInner>}

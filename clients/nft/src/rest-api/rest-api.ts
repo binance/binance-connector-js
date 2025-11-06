@@ -78,6 +78,7 @@ export class RestAPI {
      *
      * @summary Get NFT Asset(USER_DATA)
      * @param {GetNFTAssetRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetNFTAssetResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/nft/rest-api/Get-NFT-Asset Binance API Documentation}
@@ -99,6 +100,7 @@ export class RestAPI {
      *
      * @summary Get NFT Deposit History(USER_DATA)
      * @param {GetNFTDepositHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetNFTDepositHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/nft/rest-api/Get-NFT-Deposit-History Binance API Documentation}
@@ -119,6 +121,7 @@ export class RestAPI {
      *
      * @summary Get NFT Transaction History(USER_DATA)
      * @param {GetNFTTransactionHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetNFTTransactionHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/nft/rest-api/Get-NFT-Transaction-History Binance API Documentation}
@@ -139,6 +142,7 @@ export class RestAPI {
      *
      * @summary Get NFT Withdraw History(USER_DATA)
      * @param {GetNFTWithdrawHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetNFTWithdrawHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/nft/rest-api/Get-NFT-Withdraw-History Binance API Documentation}

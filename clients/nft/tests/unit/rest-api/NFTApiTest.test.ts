@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { NFTApi } from '../../../src/rest-api';
@@ -44,18 +45,20 @@ describe('NFTApi', () => {
 
     describe('getNFTAsset()', () => {
         it('should execute getNFTAsset() successfully with required parameters only', async () => {
-            mockResponse = {
-                total: 347,
-                list: [
-                    {
-                        network: 'BSC',
-                        contractAddress: 'REGULAR11234567891779',
-                        tokenId: '100900000017',
-                    },
-                    { network: 'BSC', contractAddress: 'SSMDQ8W59', tokenId: '200500000011' },
-                    { network: 'BSC', contractAddress: 'SSMDQ8W59', tokenId: '200500000019' },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 347,
+                    list: [
+                        {
+                            network: 'BSC',
+                            contractAddress: 'REGULAR11234567891779',
+                            tokenId: '100900000017',
+                        },
+                        { network: 'BSC', contractAddress: 'SSMDQ8W59', tokenId: '200500000011' },
+                        { network: 'BSC', contractAddress: 'SSMDQ8W59', tokenId: '200500000019' },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'getNFTAsset').mockReturnValue(
                 Promise.resolve({
@@ -78,18 +81,20 @@ describe('NFTApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                total: 347,
-                list: [
-                    {
-                        network: 'BSC',
-                        contractAddress: 'REGULAR11234567891779',
-                        tokenId: '100900000017',
-                    },
-                    { network: 'BSC', contractAddress: 'SSMDQ8W59', tokenId: '200500000011' },
-                    { network: 'BSC', contractAddress: 'SSMDQ8W59', tokenId: '200500000019' },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 347,
+                    list: [
+                        {
+                            network: 'BSC',
+                            contractAddress: 'REGULAR11234567891779',
+                            tokenId: '100900000017',
+                        },
+                        { network: 'BSC', contractAddress: 'SSMDQ8W59', tokenId: '200500000011' },
+                        { network: 'BSC', contractAddress: 'SSMDQ8W59', tokenId: '200500000019' },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'getNFTAsset').mockReturnValue(
                 Promise.resolve({
@@ -123,25 +128,27 @@ describe('NFTApi', () => {
 
     describe('getNFTDepositHistory()', () => {
         it('should execute getNFTDepositHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                total: 2,
-                list: [
-                    {
-                        network: 'ETH',
-                        txID: null,
-                        contractAdrress: '0xe507c961ee127d4439977a61af39c34eafee0dc6',
-                        tokenId: '10014',
-                        timestamp: 1629986047000,
-                    },
-                    {
-                        network: 'BSC',
-                        txID: null,
-                        contractAdrress: '0x058451b463bab04f52c0799d55c4094f507acfa9',
-                        tokenId: '10016',
-                        timestamp: 1630083581000,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 2,
+                    list: [
+                        {
+                            network: 'ETH',
+                            txID: null,
+                            contractAdrress: '0xe507c961ee127d4439977a61af39c34eafee0dc6',
+                            tokenId: '10014',
+                            timestamp: 1629986047000,
+                        },
+                        {
+                            network: 'BSC',
+                            txID: null,
+                            contractAdrress: '0x058451b463bab04f52c0799d55c4094f507acfa9',
+                            tokenId: '10016',
+                            timestamp: 1630083581000,
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'getNFTDepositHistory').mockReturnValue(
                 Promise.resolve({
@@ -166,25 +173,27 @@ describe('NFTApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                total: 2,
-                list: [
-                    {
-                        network: 'ETH',
-                        txID: null,
-                        contractAdrress: '0xe507c961ee127d4439977a61af39c34eafee0dc6',
-                        tokenId: '10014',
-                        timestamp: 1629986047000,
-                    },
-                    {
-                        network: 'BSC',
-                        txID: null,
-                        contractAdrress: '0x058451b463bab04f52c0799d55c4094f507acfa9',
-                        tokenId: '10016',
-                        timestamp: 1630083581000,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 2,
+                    list: [
+                        {
+                            network: 'ETH',
+                            txID: null,
+                            contractAdrress: '0xe507c961ee127d4439977a61af39c34eafee0dc6',
+                            tokenId: '10014',
+                            timestamp: 1629986047000,
+                        },
+                        {
+                            network: 'BSC',
+                            txID: null,
+                            contractAdrress: '0x058451b463bab04f52c0799d55c4094f507acfa9',
+                            tokenId: '10016',
+                            timestamp: 1630083581000,
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'getNFTDepositHistory').mockReturnValue(
                 Promise.resolve({
@@ -222,37 +231,39 @@ describe('NFTApi', () => {
                 orderType: 789,
             };
 
-            mockResponse = {
-                total: 2,
-                list: [
-                    {
-                        orderNo: '1_470502070600699904',
-                        tokens: [
-                            {
-                                network: 'BSC',
-                                tokenId: '216000000496',
-                                contractAddress: 'MYSTERY_BOX0000087',
-                            },
-                        ],
-                        tradeTime: 1626941236000,
-                        tradeAmount: '19.60000000',
-                        tradeCurrency: 'BNB',
-                    },
-                    {
-                        orderNo: '1_488306442479116288',
-                        tokens: [
-                            {
-                                network: 'BSC',
-                                tokenId: '132900000007',
-                                contractAddress: '0xAf12111a592e408DAbC740849fcd5e68629D9fb6',
-                            },
-                        ],
-                        tradeTime: 1631186130000,
-                        tradeAmount: '192.00000000',
-                        tradeCurrency: 'BNB',
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 2,
+                    list: [
+                        {
+                            orderNo: '1_470502070600699904',
+                            tokens: [
+                                {
+                                    network: 'BSC',
+                                    tokenId: '216000000496',
+                                    contractAddress: 'MYSTERY_BOX0000087',
+                                },
+                            ],
+                            tradeTime: 1626941236000,
+                            tradeAmount: '19.60000000',
+                            tradeCurrency: 'BNB',
+                        },
+                        {
+                            orderNo: '1_488306442479116288',
+                            tokens: [
+                                {
+                                    network: 'BSC',
+                                    tokenId: '132900000007',
+                                    contractAddress: '0xAf12111a592e408DAbC740849fcd5e68629D9fb6',
+                                },
+                            ],
+                            tradeTime: 1631186130000,
+                            tradeAmount: '192.00000000',
+                            tradeCurrency: 'BNB',
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'getNFTTransactionHistory').mockReturnValue(
                 Promise.resolve({
@@ -278,37 +289,39 @@ describe('NFTApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                total: 2,
-                list: [
-                    {
-                        orderNo: '1_470502070600699904',
-                        tokens: [
-                            {
-                                network: 'BSC',
-                                tokenId: '216000000496',
-                                contractAddress: 'MYSTERY_BOX0000087',
-                            },
-                        ],
-                        tradeTime: 1626941236000,
-                        tradeAmount: '19.60000000',
-                        tradeCurrency: 'BNB',
-                    },
-                    {
-                        orderNo: '1_488306442479116288',
-                        tokens: [
-                            {
-                                network: 'BSC',
-                                tokenId: '132900000007',
-                                contractAddress: '0xAf12111a592e408DAbC740849fcd5e68629D9fb6',
-                            },
-                        ],
-                        tradeTime: 1631186130000,
-                        tradeAmount: '192.00000000',
-                        tradeCurrency: 'BNB',
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 2,
+                    list: [
+                        {
+                            orderNo: '1_470502070600699904',
+                            tokens: [
+                                {
+                                    network: 'BSC',
+                                    tokenId: '216000000496',
+                                    contractAddress: 'MYSTERY_BOX0000087',
+                                },
+                            ],
+                            tradeTime: 1626941236000,
+                            tradeAmount: '19.60000000',
+                            tradeCurrency: 'BNB',
+                        },
+                        {
+                            orderNo: '1_488306442479116288',
+                            tokens: [
+                                {
+                                    network: 'BSC',
+                                    tokenId: '132900000007',
+                                    contractAddress: '0xAf12111a592e408DAbC740849fcd5e68629D9fb6',
+                                },
+                            ],
+                            tradeTime: 1631186130000,
+                            tradeAmount: '192.00000000',
+                            tradeCurrency: 'BNB',
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'getNFTTransactionHistory').mockReturnValue(
                 Promise.resolve({
@@ -360,29 +373,31 @@ describe('NFTApi', () => {
 
     describe('getNFTWithdrawHistory()', () => {
         it('should execute getNFTWithdrawHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                total: 178,
-                list: [
-                    {
-                        network: 'ETH',
-                        txID: '0x2be5eed31d787fdb4880bc631c8e76bdfb6150e137f5cf1732e0416ea206f57f',
-                        contractAdrress: '0xe507c961ee127d4439977a61af39c34eafee0dc6',
-                        tokenId: '1000001247',
-                        timestamp: 1633674433000,
-                        fee: 0.1,
-                        feeAsset: 'ETH',
-                    },
-                    {
-                        network: 'ETH',
-                        txID: '0x3b3aea5c0a4faccd6f306641e6deb9713ab229ac233be3be227f580311e4362a',
-                        contractAdrress: '0xe507c961ee127d4439977a61af39c34eafee0dc6',
-                        tokenId: '40000030',
-                        timestamp: 1633677022000,
-                        fee: 0.1,
-                        feeAsset: 'ETH',
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 178,
+                    list: [
+                        {
+                            network: 'ETH',
+                            txID: '0x2be5eed31d787fdb4880bc631c8e76bdfb6150e137f5cf1732e0416ea206f57f',
+                            contractAdrress: '0xe507c961ee127d4439977a61af39c34eafee0dc6',
+                            tokenId: '1000001247',
+                            timestamp: 1633674433000,
+                            fee: 0.1,
+                            feeAsset: 'ETH',
+                        },
+                        {
+                            network: 'ETH',
+                            txID: '0x3b3aea5c0a4faccd6f306641e6deb9713ab229ac233be3be227f580311e4362a',
+                            contractAdrress: '0xe507c961ee127d4439977a61af39c34eafee0dc6',
+                            tokenId: '40000030',
+                            timestamp: 1633677022000,
+                            fee: 0.1,
+                            feeAsset: 'ETH',
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'getNFTWithdrawHistory').mockReturnValue(
                 Promise.resolve({
@@ -407,29 +422,31 @@ describe('NFTApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                total: 178,
-                list: [
-                    {
-                        network: 'ETH',
-                        txID: '0x2be5eed31d787fdb4880bc631c8e76bdfb6150e137f5cf1732e0416ea206f57f',
-                        contractAdrress: '0xe507c961ee127d4439977a61af39c34eafee0dc6',
-                        tokenId: '1000001247',
-                        timestamp: 1633674433000,
-                        fee: 0.1,
-                        feeAsset: 'ETH',
-                    },
-                    {
-                        network: 'ETH',
-                        txID: '0x3b3aea5c0a4faccd6f306641e6deb9713ab229ac233be3be227f580311e4362a',
-                        contractAdrress: '0xe507c961ee127d4439977a61af39c34eafee0dc6',
-                        tokenId: '40000030',
-                        timestamp: 1633677022000,
-                        fee: 0.1,
-                        feeAsset: 'ETH',
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 178,
+                    list: [
+                        {
+                            network: 'ETH',
+                            txID: '0x2be5eed31d787fdb4880bc631c8e76bdfb6150e137f5cf1732e0416ea206f57f',
+                            contractAdrress: '0xe507c961ee127d4439977a61af39c34eafee0dc6',
+                            tokenId: '1000001247',
+                            timestamp: 1633674433000,
+                            fee: 0.1,
+                            feeAsset: 'ETH',
+                        },
+                        {
+                            network: 'ETH',
+                            txID: '0x3b3aea5c0a4faccd6f306641e6deb9713ab229ac233be3be227f580311e4362a',
+                            contractAdrress: '0xe507c961ee127d4439977a61af39c34eafee0dc6',
+                            tokenId: '40000030',
+                            timestamp: 1633677022000,
+                            fee: 0.1,
+                            feeAsset: 'ETH',
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'getNFTWithdrawHistory').mockReturnValue(
                 Promise.resolve({

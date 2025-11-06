@@ -26,10 +26,10 @@ import type { GetNFTWithdrawHistoryResponseListInner } from './get-nftwithdraw-h
 export interface GetNFTWithdrawHistoryResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetNFTWithdrawHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
     /**
      *
      * @type {Array<GetNFTWithdrawHistoryResponseListInner>}

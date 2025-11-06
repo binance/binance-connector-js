@@ -45,8 +45,8 @@ export interface GetNFTDepositHistoryResponseListInner {
     tokenId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetNFTDepositHistoryResponseListInner
      */
-    timestamp?: number;
+    timestamp?: number | bigint;
 }
