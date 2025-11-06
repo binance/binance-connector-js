@@ -38,21 +38,21 @@ const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) 
          *
          * @summary Get Fiat Deposit/Withdraw History (USER_DATA)
          * @param {string} transactionType 0-buy,1-sell
-         * @param {number} [beginTime]
-         * @param {number} [endTime]
-         * @param {number} [page] default 1
-         * @param {number} [rows] default 100, max 500
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [beginTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [page] default 1
+         * @param {number | bigint} [rows] default 100, max 500
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getFiatDepositWithdrawHistory: async (
             transactionType: string,
-            beginTime?: number,
-            endTime?: number,
-            page?: number,
-            rows?: number,
-            recvWindow?: number
+            beginTime?: number | bigint,
+            endTime?: number | bigint,
+            page?: number | bigint,
+            rows?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'transactionType' is not null or undefined
             assertParamExists('getFiatDepositWithdrawHistory', 'transactionType', transactionType);
@@ -107,21 +107,21 @@ const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) 
          *
          * @summary Get Fiat Payments History (USER_DATA)
          * @param {string} transactionType 0-buy,1-sell
-         * @param {number} [beginTime]
-         * @param {number} [endTime]
-         * @param {number} [page] default 1
-         * @param {number} [rows] default 100, max 500
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [beginTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [page] default 1
+         * @param {number | bigint} [rows] default 100, max 500
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getFiatPaymentsHistory: async (
             transactionType: string,
-            beginTime?: number,
-            endTime?: number,
-            page?: number,
-            rows?: number,
-            recvWindow?: number
+            beginTime?: number | bigint,
+            endTime?: number | bigint,
+            page?: number | bigint,
+            rows?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'transactionType' is not null or undefined
             assertParamExists('getFiatPaymentsHistory', 'transactionType', transactionType);
@@ -223,38 +223,38 @@ export interface GetFiatDepositWithdrawHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FiatApiGetFiatDepositWithdrawHistory
      */
-    readonly beginTime?: number;
+    readonly beginTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FiatApiGetFiatDepositWithdrawHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * default 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FiatApiGetFiatDepositWithdrawHistory
      */
-    readonly page?: number;
+    readonly page?: number | bigint;
 
     /**
      * default 100, max 500
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FiatApiGetFiatDepositWithdrawHistory
      */
-    readonly rows?: number;
+    readonly rows?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FiatApiGetFiatDepositWithdrawHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -271,38 +271,38 @@ export interface GetFiatPaymentsHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FiatApiGetFiatPaymentsHistory
      */
-    readonly beginTime?: number;
+    readonly beginTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FiatApiGetFiatPaymentsHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * default 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FiatApiGetFiatPaymentsHistory
      */
-    readonly page?: number;
+    readonly page?: number | bigint;
 
     /**
      * default 100, max 500
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FiatApiGetFiatPaymentsHistory
      */
-    readonly rows?: number;
+    readonly rows?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FiatApiGetFiatPaymentsHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
