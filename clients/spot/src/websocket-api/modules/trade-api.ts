@@ -339,10 +339,10 @@ export interface OrderAmendKeepPriorityRequest {
 
     /**
      * `orderId`or`origClientOrderId`mustbesent
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderAmendKeepPriority
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      * `orderId`or`origClientOrderId`mustbesent
@@ -387,10 +387,10 @@ export interface OrderCancelRequest {
 
     /**
      * `orderId`or`origClientOrderId`mustbesent
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderCancel
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      * `orderId`or`origClientOrderId`mustbesent
@@ -463,10 +463,10 @@ export interface OrderCancelReplaceRequest {
 
     /**
      * Cancel order by orderId
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderCancelReplace
      */
-    readonly cancelOrderId?: number;
+    readonly cancelOrderId?: number | bigint;
 
     /**
      *
@@ -547,10 +547,10 @@ export interface OrderCancelReplaceRequest {
 
     /**
      * Arbitrary numeric value identifying the order within an order strategy.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderCancelReplace
      */
-    readonly strategyId?: number;
+    readonly strategyId?: number | bigint;
 
     /**
      * Arbitrary numeric value identifying the order strategy.
@@ -722,10 +722,10 @@ export interface OrderListPlaceRequest {
 
     /**
      * Arbitrary numeric value identifying the limit order within an order strategy.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderListPlace
      */
-    readonly limitStrategyId?: number;
+    readonly limitStrategyId?: number | bigint;
 
     /**
      * <p>Arbitrary numeric value identifying the limit order strategy.</p><p>Values smaller than `1000000` are reserved and cannot be used.</p>
@@ -778,10 +778,10 @@ export interface OrderListPlaceRequest {
 
     /**
      * Arbitrary numeric value identifying the stop order within an order strategy.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderListPlace
      */
-    readonly stopStrategyId?: number;
+    readonly stopStrategyId?: number | bigint;
 
     /**
      * <p>Arbitrary numeric value identifying the stop order strategy.</p><p>Values smaller than `1000000` are reserved and cannot be used.</p>
@@ -875,10 +875,10 @@ export interface OrderListPlaceOcoRequest {
 
     /**
      * Note that this can only be used if `aboveTimeInForce` is `GTC`.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderListPlaceOco
      */
-    readonly aboveIcebergQty?: number;
+    readonly aboveIcebergQty?: number | bigint;
 
     /**
      * Can be used if `aboveType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.
@@ -896,10 +896,10 @@ export interface OrderListPlaceOcoRequest {
 
     /**
      * See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderListPlaceOco
      */
-    readonly aboveTrailingDelta?: number;
+    readonly aboveTrailingDelta?: number | bigint;
 
     /**
      *
@@ -910,10 +910,10 @@ export interface OrderListPlaceOcoRequest {
 
     /**
      * Arbitrary numeric value identifying the above order within an order strategy.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderListPlaceOco
      */
-    readonly aboveStrategyId?: number;
+    readonly aboveStrategyId?: number | bigint;
 
     /**
      * Arbitrary numeric value identifying the above order strategy. <br>Values smaller than 1000000 are reserved and cannot be used.
@@ -952,10 +952,10 @@ export interface OrderListPlaceOcoRequest {
 
     /**
      * Note that this can only be used if `belowTimeInForce` is `GTC`.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderListPlaceOco
      */
-    readonly belowIcebergQty?: number;
+    readonly belowIcebergQty?: number | bigint;
 
     /**
      * Can be used if `belowType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.
@@ -973,10 +973,10 @@ export interface OrderListPlaceOcoRequest {
 
     /**
      * See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderListPlaceOco
      */
-    readonly belowTrailingDelta?: number;
+    readonly belowTrailingDelta?: number | bigint;
 
     /**
      *
@@ -987,10 +987,10 @@ export interface OrderListPlaceOcoRequest {
 
     /**
      * Arbitrary numeric value identifying the below order within an order strategy.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderListPlaceOco
      */
-    readonly belowStrategyId?: number;
+    readonly belowStrategyId?: number | bigint;
 
     /**
      * Arbitrary numeric value identifying the below order strategy. <br>Values smaller than 1000000 are reserved and cannot be used.
@@ -1154,10 +1154,10 @@ export interface OrderListPlaceOtoRequest {
 
     /**
      * Arbitrary numeric value identifying the working order within an order strategy.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderListPlaceOto
      */
-    readonly workingStrategyId?: number;
+    readonly workingStrategyId?: number | bigint;
 
     /**
      * Arbitrary numeric value identifying the working order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
@@ -1231,10 +1231,10 @@ export interface OrderListPlaceOtoRequest {
 
     /**
      * Arbitrary numeric value identifying the pending order within an order strategy.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderListPlaceOto
      */
-    readonly pendingStrategyId?: number;
+    readonly pendingStrategyId?: number | bigint;
 
     /**
      * Arbitrary numeric value identifying the pending order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
@@ -1384,10 +1384,10 @@ export interface OrderListPlaceOtocoRequest {
 
     /**
      * Arbitrary numeric value identifying the working order within an order strategy.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderListPlaceOtoco
      */
-    readonly workingStrategyId?: number;
+    readonly workingStrategyId?: number | bigint;
 
     /**
      * Arbitrary numeric value identifying the working order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
@@ -1461,10 +1461,10 @@ export interface OrderListPlaceOtocoRequest {
 
     /**
      * Arbitrary numeric value identifying the pending above order within an order strategy.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderListPlaceOtoco
      */
-    readonly pendingAboveStrategyId?: number;
+    readonly pendingAboveStrategyId?: number | bigint;
 
     /**
      * Arbitrary numeric value identifying the pending above order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
@@ -1545,10 +1545,10 @@ export interface OrderListPlaceOtocoRequest {
 
     /**
      * Arbitrary numeric value identifying the pending below order within an order strategy.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderListPlaceOtoco
      */
-    readonly pendingBelowStrategyId?: number;
+    readonly pendingBelowStrategyId?: number | bigint;
 
     /**
      * Arbitrary numeric value identifying the pending below order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
@@ -1684,10 +1684,10 @@ export interface OrderPlaceRequest {
 
     /**
      * Arbitrary numeric value identifying the order within an order strategy.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderPlace
      */
-    readonly strategyId?: number;
+    readonly strategyId?: number | bigint;
 
     /**
      * Arbitrary numeric value identifying the order strategy.
@@ -1839,10 +1839,10 @@ export interface OrderTestRequest {
 
     /**
      * Arbitrary numeric value identifying the order within an order strategy.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderTest
      */
-    readonly strategyId?: number;
+    readonly strategyId?: number | bigint;
 
     /**
      * Arbitrary numeric value identifying the order strategy.
@@ -1966,10 +1966,10 @@ export interface SorOrderPlaceRequest {
 
     /**
      * Arbitrary numeric value identifying the order within an order strategy.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiSorOrderPlace
      */
-    readonly strategyId?: number;
+    readonly strategyId?: number | bigint;
 
     /**
      * Arbitrary numeric value identifying the order strategy.
@@ -2078,10 +2078,10 @@ export interface SorOrderTestRequest {
 
     /**
      * Arbitrary numeric value identifying the order within an order strategy.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiSorOrderTest
      */
-    readonly strategyId?: number;
+    readonly strategyId?: number | bigint;
 
     /**
      * Arbitrary numeric value identifying the order strategy.

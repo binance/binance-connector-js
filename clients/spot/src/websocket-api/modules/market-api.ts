@@ -366,17 +366,17 @@ export interface KlinesRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketApiKlines
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketApiKlines
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default: 0 (UTC)
@@ -626,17 +626,17 @@ export interface TradesAggregateRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketApiTradesAggregate
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketApiTradesAggregate
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default: 100; Maximum: 5000
@@ -735,17 +735,17 @@ export interface UiKlinesRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketApiUiKlines
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketApiUiKlines
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default: 0 (UTC)

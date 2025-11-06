@@ -86,7 +86,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Cancel order
          * @param {string} symbol
-         * @param {number} [orderId]
+         * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
          * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
          * @param {DeleteOrderCancelRestrictionsEnum} [cancelRestrictions]
@@ -96,7 +96,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          */
         deleteOrder: async (
             symbol: string,
-            orderId?: number,
+            orderId?: number | bigint,
             origClientOrderId?: string,
             newClientOrderId?: string,
             cancelRestrictions?: DeleteOrderCancelRestrictionsEnum,
@@ -147,7 +147,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Cancel Order list
          * @param {string} symbol
-         * @param {number} [orderListId] Either `orderListId` or `listClientOrderId` must be provided
+         * @param {number | bigint} [orderListId] Either `orderListId` or `listClientOrderId` must be provided
          * @param {string} [listClientOrderId] A unique Id for the entire orderList
          * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
          * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
@@ -156,7 +156,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          */
         deleteOrderList: async (
             symbol: string,
-            orderListId?: number,
+            orderListId?: number | bigint,
             listClientOrderId?: string,
             newClientOrderId?: string,
             recvWindow?: number
@@ -211,10 +211,10 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [quoteOrderQty]
          * @param {number} [price]
          * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
-         * @param {number} [strategyId]
+         * @param {number | bigint} [strategyId]
          * @param {number} [strategyType] The value cannot be less than `1000000`.
          * @param {number} [stopPrice] Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
-         * @param {number} [trailingDelta] See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
+         * @param {number | bigint} [trailingDelta] See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
          * @param {number} [icebergQty] Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
          * @param {NewOrderNewOrderRespTypeEnum} [newOrderRespType]
          * @param {NewOrderSelfTradePreventionModeEnum} [selfTradePreventionMode]
@@ -234,10 +234,10 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             quoteOrderQty?: number,
             price?: number,
             newClientOrderId?: string,
-            strategyId?: number,
+            strategyId?: number | bigint,
             strategyType?: number,
             stopPrice?: number,
-            trailingDelta?: number,
+            trailingDelta?: number | bigint,
             icebergQty?: number,
             newOrderRespType?: NewOrderNewOrderRespTypeEnum,
             selfTradePreventionMode?: NewOrderSelfTradePreventionModeEnum,
@@ -352,7 +352,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Order Amend Keep Priority
          * @param {string} symbol
          * @param {number} newQty `newQty` must be greater than 0 and less than the order's quantity.
-         * @param {number} [orderId]
+         * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
          * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
          * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
@@ -362,7 +362,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         orderAmendKeepPriority: async (
             symbol: string,
             newQty: number,
-            orderId?: number,
+            orderId?: number | bigint,
             origClientOrderId?: string,
             newClientOrderId?: string,
             recvWindow?: number
@@ -427,12 +427,12 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [price]
          * @param {string} [cancelNewClientOrderId] Used to uniquely identify this cancel. Automatically generated by default.
          * @param {string} [cancelOrigClientOrderId] Either `cancelOrderId` or `cancelOrigClientOrderId` must be sent. <br></br> If both `cancelOrderId` and `cancelOrigClientOrderId` parameters are provided, the `cancelOrderId` is searched first, then the `cancelOrigClientOrderId` from that result is checked against that order. <br></br> If both conditions are not met the request will be rejected.
-         * @param {number} [cancelOrderId] Either `cancelOrderId` or `cancelOrigClientOrderId` must be sent. <br></br>If both `cancelOrderId` and `cancelOrigClientOrderId` parameters are provided, the `cancelOrderId` is searched first, then the `cancelOrigClientOrderId` from that result is checked against that order. <br></br>If both conditions are not met the request will be rejected.
+         * @param {number | bigint} [cancelOrderId] Either `cancelOrderId` or `cancelOrigClientOrderId` must be sent. <br></br>If both `cancelOrderId` and `cancelOrigClientOrderId` parameters are provided, the `cancelOrderId` is searched first, then the `cancelOrigClientOrderId` from that result is checked against that order. <br></br>If both conditions are not met the request will be rejected.
          * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
-         * @param {number} [strategyId]
+         * @param {number | bigint} [strategyId]
          * @param {number} [strategyType] The value cannot be less than `1000000`.
          * @param {number} [stopPrice] Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
-         * @param {number} [trailingDelta] See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
+         * @param {number | bigint} [trailingDelta] See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
          * @param {number} [icebergQty] Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
          * @param {OrderCancelReplaceNewOrderRespTypeEnum} [newOrderRespType]
          * @param {OrderCancelReplaceSelfTradePreventionModeEnum} [selfTradePreventionMode]
@@ -456,12 +456,12 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             price?: number,
             cancelNewClientOrderId?: string,
             cancelOrigClientOrderId?: string,
-            cancelOrderId?: number,
+            cancelOrderId?: number | bigint,
             newClientOrderId?: string,
-            strategyId?: number,
+            strategyId?: number | bigint,
             strategyType?: number,
             stopPrice?: number,
-            trailingDelta?: number,
+            trailingDelta?: number | bigint,
             icebergQty?: number,
             newOrderRespType?: OrderCancelReplaceNewOrderRespTypeEnum,
             selfTradePreventionMode?: OrderCancelReplaceSelfTradePreventionModeEnum,
@@ -618,23 +618,23 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {OrderListOcoBelowTypeEnum} belowType
          * @param {string} [listClientOrderId] A unique Id for the entire orderList
          * @param {string} [aboveClientOrderId] Arbitrary unique ID among open orders for the above order. Automatically generated if not sent
-         * @param {number} [aboveIcebergQty] Note that this can only be used if `aboveTimeInForce` is `GTC`.
+         * @param {number | bigint} [aboveIcebergQty] Note that this can only be used if `aboveTimeInForce` is `GTC`.
          * @param {number} [abovePrice] Can be used if `aboveType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.
          * @param {number} [aboveStopPrice] Can be used if `aboveType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT`. <br>Either `aboveStopPrice` or `aboveTrailingDelta` or both, must be specified.
-         * @param {number} [aboveTrailingDelta] See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
+         * @param {number | bigint} [aboveTrailingDelta] See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
          * @param {OrderListOcoAboveTimeInForceEnum} [aboveTimeInForce]
-         * @param {number} [aboveStrategyId] Arbitrary numeric value identifying the above order within an order strategy.
+         * @param {number | bigint} [aboveStrategyId] Arbitrary numeric value identifying the above order within an order strategy.
          * @param {number} [aboveStrategyType] Arbitrary numeric value identifying the above order strategy. <br>Values smaller than 1000000 are reserved and cannot be used.
          * @param {OrderListOcoAbovePegPriceTypeEnum} [abovePegPriceType]
          * @param {OrderListOcoAbovePegOffsetTypeEnum} [abovePegOffsetType]
          * @param {number} [abovePegOffsetValue]
          * @param {string} [belowClientOrderId] Arbitrary unique ID among open orders for the below order. Automatically generated if not sent
-         * @param {number} [belowIcebergQty] Note that this can only be used if `belowTimeInForce` is `GTC`.
+         * @param {number | bigint} [belowIcebergQty] Note that this can only be used if `belowTimeInForce` is `GTC`.
          * @param {number} [belowPrice] Can be used if `belowType` is `STOP_LOSS_LIMIT`, `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.
          * @param {number} [belowStopPrice] Can be used if `belowType` is `STOP_LOSS`, `STOP_LOSS_LIMIT, TAKE_PROFIT` or `TAKE_PROFIT_LIMIT` <br>Either belowStopPrice or belowTrailingDelta or both, must be specified.
-         * @param {number} [belowTrailingDelta] See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
+         * @param {number | bigint} [belowTrailingDelta] See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
          * @param {OrderListOcoBelowTimeInForceEnum} [belowTimeInForce]
-         * @param {number} [belowStrategyId] Arbitrary numeric value identifying the below order within an order strategy.
+         * @param {number | bigint} [belowStrategyId] Arbitrary numeric value identifying the below order within an order strategy.
          * @param {number} [belowStrategyType] Arbitrary numeric value identifying the below order strategy. <br>Values smaller than 1000000 are reserved and cannot be used.
          * @param {OrderListOcoBelowPegPriceTypeEnum} [belowPegPriceType]
          * @param {OrderListOcoBelowPegOffsetTypeEnum} [belowPegOffsetType]
@@ -653,23 +653,23 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             belowType: OrderListOcoBelowTypeEnum,
             listClientOrderId?: string,
             aboveClientOrderId?: string,
-            aboveIcebergQty?: number,
+            aboveIcebergQty?: number | bigint,
             abovePrice?: number,
             aboveStopPrice?: number,
-            aboveTrailingDelta?: number,
+            aboveTrailingDelta?: number | bigint,
             aboveTimeInForce?: OrderListOcoAboveTimeInForceEnum,
-            aboveStrategyId?: number,
+            aboveStrategyId?: number | bigint,
             aboveStrategyType?: number,
             abovePegPriceType?: OrderListOcoAbovePegPriceTypeEnum,
             abovePegOffsetType?: OrderListOcoAbovePegOffsetTypeEnum,
             abovePegOffsetValue?: number,
             belowClientOrderId?: string,
-            belowIcebergQty?: number,
+            belowIcebergQty?: number | bigint,
             belowPrice?: number,
             belowStopPrice?: number,
-            belowTrailingDelta?: number,
+            belowTrailingDelta?: number | bigint,
             belowTimeInForce?: OrderListOcoBelowTimeInForceEnum,
-            belowStrategyId?: number,
+            belowStrategyId?: number | bigint,
             belowStrategyType?: number,
             belowPegPriceType?: OrderListOcoBelowPegPriceTypeEnum,
             belowPegOffsetType?: OrderListOcoBelowPegOffsetTypeEnum,
@@ -853,7 +853,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} [workingClientOrderId] Arbitrary unique ID among open orders for the working order.<br> Automatically generated if not sent.
          * @param {number} [workingIcebergQty] This can only be used if `workingTimeInForce` is `GTC`, or if `workingType` is `LIMIT_MAKER`.
          * @param {OrderListOtoWorkingTimeInForceEnum} [workingTimeInForce]
-         * @param {number} [workingStrategyId] Arbitrary numeric value identifying the working order within an order strategy.
+         * @param {number | bigint} [workingStrategyId] Arbitrary numeric value identifying the working order within an order strategy.
          * @param {number} [workingStrategyType] Arbitrary numeric value identifying the working order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
          * @param {OrderListOtoWorkingPegPriceTypeEnum} [workingPegPriceType]
          * @param {OrderListOtoWorkingPegOffsetTypeEnum} [workingPegOffsetType]
@@ -864,7 +864,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [pendingTrailingDelta]
          * @param {number} [pendingIcebergQty] This can only be used if `pendingTimeInForce` is `GTC` or if `pendingType` is `LIMIT_MAKER`.
          * @param {OrderListOtoPendingTimeInForceEnum} [pendingTimeInForce]
-         * @param {number} [pendingStrategyId] Arbitrary numeric value identifying the pending order within an order strategy.
+         * @param {number | bigint} [pendingStrategyId] Arbitrary numeric value identifying the pending order within an order strategy.
          * @param {number} [pendingStrategyType] Arbitrary numeric value identifying the pending order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
          * @param {OrderListOtoPendingPegPriceTypeEnum} [pendingPegPriceType]
          * @param {OrderListOtoPendingPegOffsetTypeEnum} [pendingPegOffsetType]
@@ -888,7 +888,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             workingClientOrderId?: string,
             workingIcebergQty?: number,
             workingTimeInForce?: OrderListOtoWorkingTimeInForceEnum,
-            workingStrategyId?: number,
+            workingStrategyId?: number | bigint,
             workingStrategyType?: number,
             workingPegPriceType?: OrderListOtoWorkingPegPriceTypeEnum,
             workingPegOffsetType?: OrderListOtoWorkingPegOffsetTypeEnum,
@@ -899,7 +899,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             pendingTrailingDelta?: number,
             pendingIcebergQty?: number,
             pendingTimeInForce?: OrderListOtoPendingTimeInForceEnum,
-            pendingStrategyId?: number,
+            pendingStrategyId?: number | bigint,
             pendingStrategyType?: number,
             pendingPegPriceType?: OrderListOtoPendingPegPriceTypeEnum,
             pendingPegOffsetType?: OrderListOtoPendingPegOffsetTypeEnum,
@@ -1087,7 +1087,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} [workingClientOrderId] Arbitrary unique ID among open orders for the working order.<br> Automatically generated if not sent.
          * @param {number} [workingIcebergQty] This can only be used if `workingTimeInForce` is `GTC`, or if `workingType` is `LIMIT_MAKER`.
          * @param {OrderListOtocoWorkingTimeInForceEnum} [workingTimeInForce]
-         * @param {number} [workingStrategyId] Arbitrary numeric value identifying the working order within an order strategy.
+         * @param {number | bigint} [workingStrategyId] Arbitrary numeric value identifying the working order within an order strategy.
          * @param {number} [workingStrategyType] Arbitrary numeric value identifying the working order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
          * @param {OrderListOtocoWorkingPegPriceTypeEnum} [workingPegPriceType]
          * @param {OrderListOtocoWorkingPegOffsetTypeEnum} [workingPegOffsetType]
@@ -1098,7 +1098,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [pendingAboveTrailingDelta] See [Trailing Stop FAQ](faqs/trailing-stop-faq.md)
          * @param {number} [pendingAboveIcebergQty] This can only be used if `pendingAboveTimeInForce` is `GTC` or if `pendingAboveType` is `LIMIT_MAKER`.
          * @param {OrderListOtocoPendingAboveTimeInForceEnum} [pendingAboveTimeInForce]
-         * @param {number} [pendingAboveStrategyId] Arbitrary numeric value identifying the pending above order within an order strategy.
+         * @param {number | bigint} [pendingAboveStrategyId] Arbitrary numeric value identifying the pending above order within an order strategy.
          * @param {number} [pendingAboveStrategyType] Arbitrary numeric value identifying the pending above order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
          * @param {OrderListOtocoPendingAbovePegPriceTypeEnum} [pendingAbovePegPriceType]
          * @param {OrderListOtocoPendingAbovePegOffsetTypeEnum} [pendingAbovePegOffsetType]
@@ -1110,7 +1110,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [pendingBelowTrailingDelta]
          * @param {number} [pendingBelowIcebergQty] This can only be used if `pendingBelowTimeInForce` is `GTC`, or if `pendingBelowType` is `LIMIT_MAKER`.
          * @param {OrderListOtocoPendingBelowTimeInForceEnum} [pendingBelowTimeInForce]
-         * @param {number} [pendingBelowStrategyId] Arbitrary numeric value identifying the pending below order within an order strategy.
+         * @param {number | bigint} [pendingBelowStrategyId] Arbitrary numeric value identifying the pending below order within an order strategy.
          * @param {number} [pendingBelowStrategyType] Arbitrary numeric value identifying the pending below order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
          * @param {OrderListOtocoPendingBelowPegPriceTypeEnum} [pendingBelowPegPriceType]
          * @param {OrderListOtocoPendingBelowPegOffsetTypeEnum} [pendingBelowPegOffsetType]
@@ -1134,7 +1134,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             workingClientOrderId?: string,
             workingIcebergQty?: number,
             workingTimeInForce?: OrderListOtocoWorkingTimeInForceEnum,
-            workingStrategyId?: number,
+            workingStrategyId?: number | bigint,
             workingStrategyType?: number,
             workingPegPriceType?: OrderListOtocoWorkingPegPriceTypeEnum,
             workingPegOffsetType?: OrderListOtocoWorkingPegOffsetTypeEnum,
@@ -1145,7 +1145,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             pendingAboveTrailingDelta?: number,
             pendingAboveIcebergQty?: number,
             pendingAboveTimeInForce?: OrderListOtocoPendingAboveTimeInForceEnum,
-            pendingAboveStrategyId?: number,
+            pendingAboveStrategyId?: number | bigint,
             pendingAboveStrategyType?: number,
             pendingAbovePegPriceType?: OrderListOtocoPendingAbovePegPriceTypeEnum,
             pendingAbovePegOffsetType?: OrderListOtocoPendingAbovePegOffsetTypeEnum,
@@ -1157,7 +1157,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             pendingBelowTrailingDelta?: number,
             pendingBelowIcebergQty?: number,
             pendingBelowTimeInForce?: OrderListOtocoPendingBelowTimeInForceEnum,
-            pendingBelowStrategyId?: number,
+            pendingBelowStrategyId?: number | bigint,
             pendingBelowStrategyType?: number,
             pendingBelowPegPriceType?: OrderListOtocoPendingBelowPegPriceTypeEnum,
             pendingBelowPegOffsetType?: OrderListOtocoPendingBelowPegOffsetTypeEnum,
@@ -1387,12 +1387,12 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} stopPrice
          * @param {string} [listClientOrderId] A unique Id for the entire orderList
          * @param {string} [limitClientOrderId] A unique Id for the limit order
-         * @param {number} [limitStrategyId]
+         * @param {number | bigint} [limitStrategyId]
          * @param {number} [limitStrategyType] The value cannot be less than `1000000`.
          * @param {number} [limitIcebergQty] Used to make the `LIMIT_MAKER` leg an iceberg order.
-         * @param {number} [trailingDelta] See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
+         * @param {number | bigint} [trailingDelta] See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
          * @param {string} [stopClientOrderId] A unique Id for the stop loss/stop loss limit leg
-         * @param {number} [stopStrategyId]
+         * @param {number | bigint} [stopStrategyId]
          * @param {number} [stopStrategyType] The value cannot be less than `1000000`.
          * @param {number} [stopLimitPrice] If provided, `stopLimitTimeInForce` is required.
          * @param {number} [stopIcebergQty] Used with `STOP_LOSS_LIMIT` leg to make an iceberg order.
@@ -1412,12 +1412,12 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             stopPrice: number,
             listClientOrderId?: string,
             limitClientOrderId?: string,
-            limitStrategyId?: number,
+            limitStrategyId?: number | bigint,
             limitStrategyType?: number,
             limitIcebergQty?: number,
-            trailingDelta?: number,
+            trailingDelta?: number | bigint,
             stopClientOrderId?: string,
-            stopStrategyId?: number,
+            stopStrategyId?: number | bigint,
             stopStrategyType?: number,
             stopLimitPrice?: number,
             stopIcebergQty?: number,
@@ -1547,10 +1547,10 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [quoteOrderQty]
          * @param {number} [price]
          * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
-         * @param {number} [strategyId]
+         * @param {number | bigint} [strategyId]
          * @param {number} [strategyType] The value cannot be less than `1000000`.
          * @param {number} [stopPrice] Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
-         * @param {number} [trailingDelta] See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
+         * @param {number | bigint} [trailingDelta] See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
          * @param {number} [icebergQty] Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
          * @param {OrderTestNewOrderRespTypeEnum} [newOrderRespType]
          * @param {OrderTestSelfTradePreventionModeEnum} [selfTradePreventionMode]
@@ -1571,10 +1571,10 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             quoteOrderQty?: number,
             price?: number,
             newClientOrderId?: string,
-            strategyId?: number,
+            strategyId?: number | bigint,
             strategyType?: number,
             stopPrice?: number,
-            trailingDelta?: number,
+            trailingDelta?: number | bigint,
             icebergQty?: number,
             newOrderRespType?: OrderTestNewOrderRespTypeEnum,
             selfTradePreventionMode?: OrderTestSelfTradePreventionModeEnum,
@@ -1700,7 +1700,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {SorOrderTimeInForceEnum} [timeInForce]
          * @param {number} [price]
          * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
-         * @param {number} [strategyId]
+         * @param {number | bigint} [strategyId]
          * @param {number} [strategyType] The value cannot be less than `1000000`.
          * @param {number} [icebergQty] Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
          * @param {SorOrderNewOrderRespTypeEnum} [newOrderRespType]
@@ -1717,7 +1717,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             timeInForce?: SorOrderTimeInForceEnum,
             price?: number,
             newClientOrderId?: string,
-            strategyId?: number,
+            strategyId?: number | bigint,
             strategyType?: number,
             icebergQty?: number,
             newOrderRespType?: SorOrderNewOrderRespTypeEnum,
@@ -1814,7 +1814,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {SorOrderTestTimeInForceEnum} [timeInForce]
          * @param {number} [price]
          * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
-         * @param {number} [strategyId]
+         * @param {number | bigint} [strategyId]
          * @param {number} [strategyType] The value cannot be less than `1000000`.
          * @param {number} [icebergQty] Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
          * @param {SorOrderTestNewOrderRespTypeEnum} [newOrderRespType]
@@ -1832,7 +1832,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             timeInForce?: SorOrderTestTimeInForceEnum,
             price?: number,
             newClientOrderId?: string,
-            strategyId?: number,
+            strategyId?: number | bigint,
             strategyType?: number,
             icebergQty?: number,
             newOrderRespType?: SorOrderTestNewOrderRespTypeEnum,
@@ -2188,10 +2188,10 @@ export interface DeleteOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiDeleteOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -2236,10 +2236,10 @@ export interface DeleteOrderListRequest {
 
     /**
      * Either `orderListId` or `listClientOrderId` must be provided
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiDeleteOrderList
      */
-    readonly orderListId?: number;
+    readonly orderListId?: number | bigint;
 
     /**
      * A unique Id for the entire orderList
@@ -2326,10 +2326,10 @@ export interface NewOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiNewOrder
      */
-    readonly strategyId?: number;
+    readonly strategyId?: number | bigint;
 
     /**
      * The value cannot be less than `1000000`.
@@ -2347,10 +2347,10 @@ export interface NewOrderRequest {
 
     /**
      * See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiNewOrder
      */
-    readonly trailingDelta?: number;
+    readonly trailingDelta?: number | bigint;
 
     /**
      * Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
@@ -2423,10 +2423,10 @@ export interface OrderAmendKeepPriorityRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderAmendKeepPriority
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -2527,10 +2527,10 @@ export interface OrderCancelReplaceRequest {
 
     /**
      * Either `cancelOrderId` or `cancelOrigClientOrderId` must be sent. <br></br>If both `cancelOrderId` and `cancelOrigClientOrderId` parameters are provided, the `cancelOrderId` is searched first, then the `cancelOrigClientOrderId` from that result is checked against that order. <br></br>If both conditions are not met the request will be rejected.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderCancelReplace
      */
-    readonly cancelOrderId?: number;
+    readonly cancelOrderId?: number | bigint;
 
     /**
      * A unique id among open orders. Automatically generated if not sent.<br/> Orders with the same `newClientOrderID` can be accepted only when the previous one is filled, otherwise the order will be rejected.
@@ -2541,10 +2541,10 @@ export interface OrderCancelReplaceRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderCancelReplace
      */
-    readonly strategyId?: number;
+    readonly strategyId?: number | bigint;
 
     /**
      * The value cannot be less than `1000000`.
@@ -2562,10 +2562,10 @@ export interface OrderCancelReplaceRequest {
 
     /**
      * See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderCancelReplace
      */
-    readonly trailingDelta?: number;
+    readonly trailingDelta?: number | bigint;
 
     /**
      * Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
@@ -2687,10 +2687,10 @@ export interface OrderListOcoRequest {
 
     /**
      * Note that this can only be used if `aboveTimeInForce` is `GTC`.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderListOco
      */
-    readonly aboveIcebergQty?: number;
+    readonly aboveIcebergQty?: number | bigint;
 
     /**
      * Can be used if `aboveType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.
@@ -2708,10 +2708,10 @@ export interface OrderListOcoRequest {
 
     /**
      * See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderListOco
      */
-    readonly aboveTrailingDelta?: number;
+    readonly aboveTrailingDelta?: number | bigint;
 
     /**
      *
@@ -2722,10 +2722,10 @@ export interface OrderListOcoRequest {
 
     /**
      * Arbitrary numeric value identifying the above order within an order strategy.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderListOco
      */
-    readonly aboveStrategyId?: number;
+    readonly aboveStrategyId?: number | bigint;
 
     /**
      * Arbitrary numeric value identifying the above order strategy. <br>Values smaller than 1000000 are reserved and cannot be used.
@@ -2764,10 +2764,10 @@ export interface OrderListOcoRequest {
 
     /**
      * Note that this can only be used if `belowTimeInForce` is `GTC`.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderListOco
      */
-    readonly belowIcebergQty?: number;
+    readonly belowIcebergQty?: number | bigint;
 
     /**
      * Can be used if `belowType` is `STOP_LOSS_LIMIT`, `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.
@@ -2785,10 +2785,10 @@ export interface OrderListOcoRequest {
 
     /**
      * See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderListOco
      */
-    readonly belowTrailingDelta?: number;
+    readonly belowTrailingDelta?: number | bigint;
 
     /**
      *
@@ -2799,10 +2799,10 @@ export interface OrderListOcoRequest {
 
     /**
      * Arbitrary numeric value identifying the below order within an order strategy.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderListOco
      */
-    readonly belowStrategyId?: number;
+    readonly belowStrategyId?: number | bigint;
 
     /**
      * Arbitrary numeric value identifying the below order strategy. <br>Values smaller than 1000000 are reserved and cannot be used.
@@ -2959,10 +2959,10 @@ export interface OrderListOtoRequest {
 
     /**
      * Arbitrary numeric value identifying the working order within an order strategy.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderListOto
      */
-    readonly workingStrategyId?: number;
+    readonly workingStrategyId?: number | bigint;
 
     /**
      * Arbitrary numeric value identifying the working order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
@@ -3036,10 +3036,10 @@ export interface OrderListOtoRequest {
 
     /**
      * Arbitrary numeric value identifying the pending order within an order strategy.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderListOto
      */
-    readonly pendingStrategyId?: number;
+    readonly pendingStrategyId?: number | bigint;
 
     /**
      * Arbitrary numeric value identifying the pending order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
@@ -3182,10 +3182,10 @@ export interface OrderListOtocoRequest {
 
     /**
      * Arbitrary numeric value identifying the working order within an order strategy.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderListOtoco
      */
-    readonly workingStrategyId?: number;
+    readonly workingStrategyId?: number | bigint;
 
     /**
      * Arbitrary numeric value identifying the working order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
@@ -3259,10 +3259,10 @@ export interface OrderListOtocoRequest {
 
     /**
      * Arbitrary numeric value identifying the pending above order within an order strategy.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderListOtoco
      */
-    readonly pendingAboveStrategyId?: number;
+    readonly pendingAboveStrategyId?: number | bigint;
 
     /**
      * Arbitrary numeric value identifying the pending above order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
@@ -3343,10 +3343,10 @@ export interface OrderListOtocoRequest {
 
     /**
      * Arbitrary numeric value identifying the pending below order within an order strategy.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderListOtoco
      */
-    readonly pendingBelowStrategyId?: number;
+    readonly pendingBelowStrategyId?: number | bigint;
 
     /**
      * Arbitrary numeric value identifying the pending below order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
@@ -3440,10 +3440,10 @@ export interface OrderOcoRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderOco
      */
-    readonly limitStrategyId?: number;
+    readonly limitStrategyId?: number | bigint;
 
     /**
      * The value cannot be less than `1000000`.
@@ -3461,10 +3461,10 @@ export interface OrderOcoRequest {
 
     /**
      * See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderOco
      */
-    readonly trailingDelta?: number;
+    readonly trailingDelta?: number | bigint;
 
     /**
      * A unique Id for the stop loss/stop loss limit leg
@@ -3475,10 +3475,10 @@ export interface OrderOcoRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderOco
      */
-    readonly stopStrategyId?: number;
+    readonly stopStrategyId?: number | bigint;
 
     /**
      * The value cannot be less than `1000000`.
@@ -3600,10 +3600,10 @@ export interface OrderTestRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderTest
      */
-    readonly strategyId?: number;
+    readonly strategyId?: number | bigint;
 
     /**
      * The value cannot be less than `1000000`.
@@ -3621,10 +3621,10 @@ export interface OrderTestRequest {
 
     /**
      * See [Trailing Stop order FAQ](faqs/trailing-stop-faq.md).
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOrderTest
      */
-    readonly trailingDelta?: number;
+    readonly trailingDelta?: number | bigint;
 
     /**
      * Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
@@ -3732,10 +3732,10 @@ export interface SorOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiSorOrder
      */
-    readonly strategyId?: number;
+    readonly strategyId?: number | bigint;
 
     /**
      * The value cannot be less than `1000000`.
@@ -3836,10 +3836,10 @@ export interface SorOrderTestRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiSorOrderTest
      */
-    readonly strategyId?: number;
+    readonly strategyId?: number | bigint;
 
     /**
      * The value cannot be less than `1000000`.

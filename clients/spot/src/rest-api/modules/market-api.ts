@@ -50,18 +50,18 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          *
          * @summary Compressed/Aggregate trades list
          * @param {string} symbol
-         * @param {number} [fromId] ID to get aggregate trades from INCLUSIVE.
-         * @param {number} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
+         * @param {number | bigint} [fromId] ID to get aggregate trades from INCLUSIVE.
+         * @param {number | bigint} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
          * @param {number} [limit] Default: 500; Maximum: 1000.
          *
          * @throws {RequiredError}
          */
         aggTrades: async (
             symbol: string,
-            fromId?: number,
-            startTime?: number,
-            endTime?: number,
+            fromId?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
             limit?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
@@ -219,14 +219,14 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * @summary Old trade lookup
          * @param {string} symbol
          * @param {number} [limit] Default: 500; Maximum: 1000.
-         * @param {number} [fromId] ID to get aggregate trades from INCLUSIVE.
+         * @param {number | bigint} [fromId] ID to get aggregate trades from INCLUSIVE.
          *
          * @throws {RequiredError}
          */
         historicalTrades: async (
             symbol: string,
             limit?: number,
-            fromId?: number
+            fromId?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('historicalTrades', 'symbol', symbol);
@@ -263,8 +263,8 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * @summary Kline/Candlestick data
          * @param {string} symbol
          * @param {KlinesIntervalEnum} interval
-         * @param {number} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
+         * @param {number | bigint} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
          * @param {string} [timeZone] Default: 0 (UTC)
          * @param {number} [limit] Default: 500; Maximum: 1000.
          *
@@ -273,8 +273,8 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         klines: async (
             symbol: string,
             interval: KlinesIntervalEnum,
-            startTime?: number,
-            endTime?: number,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
             timeZone?: string,
             limit?: number
         ): Promise<RequestArgs> => {
@@ -642,8 +642,8 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * @summary UIKlines
          * @param {string} symbol
          * @param {UiKlinesIntervalEnum} interval
-         * @param {number} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
+         * @param {number | bigint} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
          * @param {string} [timeZone] Default: 0 (UTC)
          * @param {number} [limit] Default: 500; Maximum: 1000.
          *
@@ -652,8 +652,8 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         uiKlines: async (
             symbol: string,
             interval: UiKlinesIntervalEnum,
-            startTime?: number,
-            endTime?: number,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
             timeZone?: string,
             limit?: number
         ): Promise<RequestArgs> => {
@@ -956,24 +956,24 @@ export interface AggTradesRequest {
 
     /**
      * ID to get aggregate trades from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketApiAggTrades
      */
-    readonly fromId?: number;
+    readonly fromId?: number | bigint;
 
     /**
      * Timestamp in ms to get aggregate trades from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketApiAggTrades
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get aggregate trades until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketApiAggTrades
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default: 500; Maximum: 1000.
@@ -1064,10 +1064,10 @@ export interface HistoricalTradesRequest {
 
     /**
      * ID to get aggregate trades from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketApiHistoricalTrades
      */
-    readonly fromId?: number;
+    readonly fromId?: number | bigint;
 }
 
 /**
@@ -1091,17 +1091,17 @@ export interface KlinesRequest {
 
     /**
      * Timestamp in ms to get aggregate trades from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketApiKlines
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get aggregate trades until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketApiKlines
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default: 0 (UTC)
@@ -1309,17 +1309,17 @@ export interface UiKlinesRequest {
 
     /**
      * Timestamp in ms to get aggregate trades from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketApiUiKlines
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get aggregate trades until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketApiUiKlines
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default: 0 (UTC)

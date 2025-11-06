@@ -354,17 +354,17 @@ export interface AllOrderListsRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiAllOrderLists
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiAllOrderLists
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default: 100; Maximum: 5000
@@ -402,24 +402,24 @@ export interface AllOrdersRequest {
 
     /**
      * `orderId`or`origClientOrderId`mustbesent
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiAllOrders
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiAllOrders
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiAllOrders
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default: 100; Maximum: 5000
@@ -457,17 +457,17 @@ export interface MyAllocationsRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiMyAllocations
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiMyAllocations
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      *
@@ -485,10 +485,10 @@ export interface MyAllocationsRequest {
 
     /**
      * `orderId`or`origClientOrderId`mustbesent
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiMyAllocations
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
@@ -546,24 +546,24 @@ export interface MyPreventedMatchesRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiMyPreventedMatches
      */
-    readonly preventedMatchId?: number;
+    readonly preventedMatchId?: number | bigint;
 
     /**
      * `orderId`or`origClientOrderId`mustbesent
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiMyPreventedMatches
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiMyPreventedMatches
      */
-    readonly fromPreventedMatchId?: number;
+    readonly fromPreventedMatchId?: number | bigint;
 
     /**
      * Default: 100; Maximum: 5000
@@ -601,24 +601,24 @@ export interface MyTradesRequest {
 
     /**
      * `orderId`or`origClientOrderId`mustbesent
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiMyTrades
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiMyTrades
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiMyTrades
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Aggregate trade ID to begin at
@@ -703,10 +703,10 @@ export interface OrderAmendmentsRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiOrderAmendments
      */
-    readonly orderId: number;
+    readonly orderId: number | bigint;
 
     /**
      * Unique WebSocket request ID.
@@ -717,10 +717,10 @@ export interface OrderAmendmentsRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiOrderAmendments
      */
-    readonly fromExecutionId?: number;
+    readonly fromExecutionId?: number | bigint;
 
     /**
      * Default: 100; Maximum: 5000
@@ -792,10 +792,10 @@ export interface OrderStatusRequest {
 
     /**
      * `orderId`or`origClientOrderId`mustbesent
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiOrderStatus
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      * `orderId`or`origClientOrderId`mustbesent

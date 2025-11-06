@@ -82,18 +82,18 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 20
          *
          * @summary Query all Order lists
-         * @param {number} [fromId] ID to get aggregate trades from INCLUSIVE.
-         * @param {number} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
+         * @param {number | bigint} [fromId] ID to get aggregate trades from INCLUSIVE.
+         * @param {number | bigint} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
          * @param {number} [limit] Default: 500; Maximum: 1000.
          * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
         allOrderList: async (
-            fromId?: number,
-            startTime?: number,
-            endTime?: number,
+            fromId?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
             limit?: number,
             recvWindow?: number
         ): Promise<RequestArgs> => {
@@ -135,9 +135,9 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary All orders
          * @param {string} symbol
-         * @param {number} [orderId]
-         * @param {number} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
+         * @param {number | bigint} [orderId]
+         * @param {number | bigint} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
          * @param {number} [limit] Default: 500; Maximum: 1000.
          * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
@@ -145,9 +145,9 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          */
         allOrders: async (
             symbol: string,
-            orderId?: number,
-            startTime?: number,
-            endTime?: number,
+            orderId?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
             limit?: number,
             recvWindow?: number
         ): Promise<RequestArgs> => {
@@ -261,7 +261,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Query order
          * @param {string} symbol
-         * @param {number} [orderId]
+         * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
          * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
@@ -269,7 +269,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          */
         getOrder: async (
             symbol: string,
-            orderId?: number,
+            orderId?: number | bigint,
             origClientOrderId?: string,
             recvWindow?: number
         ): Promise<RequestArgs> => {
@@ -309,14 +309,14 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 4
          *
          * @summary Query Order list
-         * @param {number} [orderListId] Either `orderListId` or `listClientOrderId` must be provided
+         * @param {number | bigint} [orderListId] Either `orderListId` or `listClientOrderId` must be provided
          * @param {string} [origClientOrderId]
          * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
         getOrderList: async (
-            orderListId?: number,
+            orderListId?: number | bigint,
             origClientOrderId?: string,
             recvWindow?: number
         ): Promise<RequestArgs> => {
@@ -350,22 +350,22 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Query Allocations
          * @param {string} symbol
-         * @param {number} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
+         * @param {number | bigint} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
          * @param {number} [fromAllocationId]
          * @param {number} [limit] Default: 500; Maximum: 1000.
-         * @param {number} [orderId]
+         * @param {number | bigint} [orderId]
          * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
         myAllocations: async (
             symbol: string,
-            startTime?: number,
-            endTime?: number,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
             fromAllocationId?: number,
             limit?: number,
-            orderId?: number,
+            orderId?: number | bigint,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
@@ -462,9 +462,9 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Query Prevented Matches
          * @param {string} symbol
-         * @param {number} [preventedMatchId]
-         * @param {number} [orderId]
-         * @param {number} [fromPreventedMatchId]
+         * @param {number | bigint} [preventedMatchId]
+         * @param {number | bigint} [orderId]
+         * @param {number | bigint} [fromPreventedMatchId]
          * @param {number} [limit] Default: 500; Maximum: 1000.
          * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
@@ -472,9 +472,9 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          */
         myPreventedMatches: async (
             symbol: string,
-            preventedMatchId?: number,
-            orderId?: number,
-            fromPreventedMatchId?: number,
+            preventedMatchId?: number | bigint,
+            orderId?: number | bigint,
+            fromPreventedMatchId?: number | bigint,
             limit?: number,
             recvWindow?: number
         ): Promise<RequestArgs> => {
@@ -526,10 +526,10 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Account trade list
          * @param {string} symbol
-         * @param {number} [orderId]
-         * @param {number} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
-         * @param {number} [fromId] ID to get aggregate trades from INCLUSIVE.
+         * @param {number | bigint} [orderId]
+         * @param {number | bigint} [startTime] Timestamp in ms to get aggregate trades from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get aggregate trades until INCLUSIVE.
+         * @param {number | bigint} [fromId] ID to get aggregate trades from INCLUSIVE.
          * @param {number} [limit] Default: 500; Maximum: 1000.
          * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
@@ -537,10 +537,10 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          */
         myTrades: async (
             symbol: string,
-            orderId?: number,
-            startTime?: number,
-            endTime?: number,
-            fromId?: number,
+            orderId?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            fromId?: number | bigint,
             limit?: number,
             recvWindow?: number
         ): Promise<RequestArgs> => {
@@ -619,18 +619,18 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Query Order Amendments
          * @param {string} symbol
-         * @param {number} orderId
-         * @param {number} [fromExecutionId]
-         * @param {number} [limit] Default:500; Maximum: 1000
+         * @param {number | bigint} orderId
+         * @param {number | bigint} [fromExecutionId]
+         * @param {number | bigint} [limit] Default:500; Maximum: 1000
          * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
          *
          * @throws {RequiredError}
          */
         orderAmendments: async (
             symbol: string,
-            orderId: number,
-            fromExecutionId?: number,
-            limit?: number,
+            orderId: number | bigint,
+            fromExecutionId?: number | bigint,
+            limit?: number | bigint,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
@@ -914,24 +914,24 @@ export interface AccountCommissionRequest {
 export interface AllOrderListRequest {
     /**
      * ID to get aggregate trades from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiAllOrderList
      */
-    readonly fromId?: number;
+    readonly fromId?: number | bigint;
 
     /**
      * Timestamp in ms to get aggregate trades from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiAllOrderList
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get aggregate trades until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiAllOrderList
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default: 500; Maximum: 1000.
@@ -962,24 +962,24 @@ export interface AllOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiAllOrders
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      * Timestamp in ms to get aggregate trades from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiAllOrders
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get aggregate trades until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiAllOrders
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default: 500; Maximum: 1000.
@@ -1050,10 +1050,10 @@ export interface GetOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -1077,10 +1077,10 @@ export interface GetOrderRequest {
 export interface GetOrderListRequest {
     /**
      * Either `orderListId` or `listClientOrderId` must be provided
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetOrderList
      */
-    readonly orderListId?: number;
+    readonly orderListId?: number | bigint;
 
     /**
      *
@@ -1111,17 +1111,17 @@ export interface MyAllocationsRequest {
 
     /**
      * Timestamp in ms to get aggregate trades from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiMyAllocations
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get aggregate trades until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiMyAllocations
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      *
@@ -1139,10 +1139,10 @@ export interface MyAllocationsRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiMyAllocations
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
@@ -1186,24 +1186,24 @@ export interface MyPreventedMatchesRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiMyPreventedMatches
      */
-    readonly preventedMatchId?: number;
+    readonly preventedMatchId?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiMyPreventedMatches
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiMyPreventedMatches
      */
-    readonly fromPreventedMatchId?: number;
+    readonly fromPreventedMatchId?: number | bigint;
 
     /**
      * Default: 500; Maximum: 1000.
@@ -1234,31 +1234,31 @@ export interface MyTradesRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiMyTrades
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      * Timestamp in ms to get aggregate trades from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiMyTrades
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get aggregate trades until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiMyTrades
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * ID to get aggregate trades from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiMyTrades
      */
-    readonly fromId?: number;
+    readonly fromId?: number | bigint;
 
     /**
      * Default: 500; Maximum: 1000.
@@ -1302,24 +1302,24 @@ export interface OrderAmendmentsRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiOrderAmendments
      */
-    readonly orderId: number;
+    readonly orderId: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiOrderAmendments
      */
-    readonly fromExecutionId?: number;
+    readonly fromExecutionId?: number | bigint;
 
     /**
      * Default:500; Maximum: 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiOrderAmendments
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
