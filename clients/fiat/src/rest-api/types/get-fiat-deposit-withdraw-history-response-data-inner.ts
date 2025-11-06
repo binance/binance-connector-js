@@ -63,14 +63,14 @@ export interface GetFiatDepositWithdrawHistoryResponseDataInner {
     status?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFiatDepositWithdrawHistoryResponseDataInner
      */
-    createTime?: number;
+    createTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFiatDepositWithdrawHistoryResponseDataInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

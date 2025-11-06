@@ -44,10 +44,10 @@ export interface GetFiatDepositWithdrawHistoryResponse {
     data?: Array<GetFiatDepositWithdrawHistoryResponseDataInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFiatDepositWithdrawHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
     /**
      *
      * @type {boolean}

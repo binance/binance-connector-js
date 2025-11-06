@@ -34,7 +34,7 @@ const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) 
          *
          * If beginTime and endTime are not sent, the recent 30-day data will be returned.
          *
-         * Weight: 90000
+         * Weight: 45000
          *
          * @summary Get Fiat Deposit/Withdraw History (USER_DATA)
          * @param {string} transactionType 0-buy,1-sell
@@ -175,7 +175,7 @@ export interface FiatApiInterface {
      *
      * If beginTime and endTime are not sent, the recent 30-day data will be returned.
      *
-     * Weight: 90000
+     * Weight: 45000
      *
      * @summary Get Fiat Deposit/Withdraw History (USER_DATA)
      * @param {GetFiatDepositWithdrawHistoryRequest} requestParameters Request parameters.
@@ -323,7 +323,7 @@ export class FiatApi implements FiatApiInterface {
      *
      * If beginTime and endTime are not sent, the recent 30-day data will be returned.
      *
-     * Weight: 90000
+     * Weight: 45000
      *
      * @summary Get Fiat Deposit/Withdraw History (USER_DATA)
      * @param {GetFiatDepositWithdrawHistoryRequest} requestParameters Request parameters.

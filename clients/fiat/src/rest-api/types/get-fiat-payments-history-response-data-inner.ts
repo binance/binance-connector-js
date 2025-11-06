@@ -75,14 +75,14 @@ export interface GetFiatPaymentsHistoryResponseDataInner {
     paymentMethod?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFiatPaymentsHistoryResponseDataInner
      */
-    createTime?: number;
+    createTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFiatPaymentsHistoryResponseDataInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

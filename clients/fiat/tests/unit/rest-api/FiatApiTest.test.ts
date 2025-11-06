@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { FiatApi } from '../../../src/rest-api';
@@ -44,25 +45,27 @@ describe('FiatApi', () => {
                 transactionType: 'transactionType_example',
             };
 
-            mockResponse = {
-                code: '000000',
-                message: 'success',
-                data: [
-                    {
-                        orderNo: '7d76d611-0568-4f43-afb6-24cac7767365',
-                        fiatCurrency: 'BRL',
-                        indicatedAmount: '10.00',
-                        amount: '10.00',
-                        totalFee: '0.00',
-                        method: 'BankAccount',
-                        status: 'Expired',
-                        createTime: 1626144956000,
-                        updateTime: 1626400907000,
-                    },
-                ],
-                total: 1,
-                success: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: [
+                        {
+                            orderNo: '7d76d611-0568-4f43-afb6-24cac7767365',
+                            fiatCurrency: 'BRL',
+                            indicatedAmount: '10.00',
+                            amount: '10.00',
+                            totalFee: '0.00',
+                            method: 'BankAccount',
+                            status: 'Expired',
+                            createTime: 1626144956000,
+                            updateTime: 1626400907000,
+                        },
+                    ],
+                    total: 1,
+                    success: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFiatDepositWithdrawHistory').mockReturnValue(
                 Promise.resolve({
@@ -88,25 +91,27 @@ describe('FiatApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                code: '000000',
-                message: 'success',
-                data: [
-                    {
-                        orderNo: '7d76d611-0568-4f43-afb6-24cac7767365',
-                        fiatCurrency: 'BRL',
-                        indicatedAmount: '10.00',
-                        amount: '10.00',
-                        totalFee: '0.00',
-                        method: 'BankAccount',
-                        status: 'Expired',
-                        createTime: 1626144956000,
-                        updateTime: 1626400907000,
-                    },
-                ],
-                total: 1,
-                success: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: [
+                        {
+                            orderNo: '7d76d611-0568-4f43-afb6-24cac7767365',
+                            fiatCurrency: 'BRL',
+                            indicatedAmount: '10.00',
+                            amount: '10.00',
+                            totalFee: '0.00',
+                            method: 'BankAccount',
+                            status: 'Expired',
+                            createTime: 1626144956000,
+                            updateTime: 1626400907000,
+                        },
+                    ],
+                    total: 1,
+                    success: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFiatDepositWithdrawHistory').mockReturnValue(
                 Promise.resolve({
@@ -164,27 +169,29 @@ describe('FiatApi', () => {
                 transactionType: 'transactionType_example',
             };
 
-            mockResponse = {
-                code: '000000',
-                message: 'success',
-                data: [
-                    {
-                        orderNo: '353fca443f06466db0c4dc89f94f027a',
-                        sourceAmount: '20.0',
-                        fiatCurrency: 'EUR',
-                        obtainAmount: '4.462',
-                        cryptoCurrency: 'LUNA',
-                        totalFee: '0.2',
-                        price: '4.437472',
-                        status: 'Failed',
-                        paymentMethod: 'Credit Card',
-                        createTime: 1624529919000,
-                        updateTime: 1624529919000,
-                    },
-                ],
-                total: 1,
-                success: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: [
+                        {
+                            orderNo: '353fca443f06466db0c4dc89f94f027a',
+                            sourceAmount: '20.0',
+                            fiatCurrency: 'EUR',
+                            obtainAmount: '4.462',
+                            cryptoCurrency: 'LUNA',
+                            totalFee: '0.2',
+                            price: '4.437472',
+                            status: 'Failed',
+                            paymentMethod: 'Credit Card',
+                            createTime: 1624529919000,
+                            updateTime: 1624529919000,
+                        },
+                    ],
+                    total: 1,
+                    success: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFiatPaymentsHistory').mockReturnValue(
                 Promise.resolve({
@@ -210,27 +217,29 @@ describe('FiatApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                code: '000000',
-                message: 'success',
-                data: [
-                    {
-                        orderNo: '353fca443f06466db0c4dc89f94f027a',
-                        sourceAmount: '20.0',
-                        fiatCurrency: 'EUR',
-                        obtainAmount: '4.462',
-                        cryptoCurrency: 'LUNA',
-                        totalFee: '0.2',
-                        price: '4.437472',
-                        status: 'Failed',
-                        paymentMethod: 'Credit Card',
-                        createTime: 1624529919000,
-                        updateTime: 1624529919000,
-                    },
-                ],
-                total: 1,
-                success: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: [
+                        {
+                            orderNo: '353fca443f06466db0c4dc89f94f027a',
+                            sourceAmount: '20.0',
+                            fiatCurrency: 'EUR',
+                            obtainAmount: '4.462',
+                            cryptoCurrency: 'LUNA',
+                            totalFee: '0.2',
+                            price: '4.437472',
+                            status: 'Failed',
+                            paymentMethod: 'Credit Card',
+                            createTime: 1624529919000,
+                            updateTime: 1624529919000,
+                        },
+                    ],
+                    total: 1,
+                    success: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFiatPaymentsHistory').mockReturnValue(
                 Promise.resolve({

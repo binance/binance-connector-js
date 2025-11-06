@@ -72,10 +72,11 @@ export class RestAPI {
      *
      * If beginTime and endTime are not sent, the recent 30-day data will be returned.
      *
-     * Weight: 90000
+     * Weight: 45000
      *
      * @summary Get Fiat Deposit/Withdraw History (USER_DATA)
      * @param {GetFiatDepositWithdrawHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetFiatDepositWithdrawHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/fiat/rest-api/Get-Fiat-Deposit-Withdraw-History Binance API Documentation}
@@ -100,6 +101,7 @@ export class RestAPI {
      *
      * @summary Get Fiat Payments History (USER_DATA)
      * @param {GetFiatPaymentsHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetFiatPaymentsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/fiat/rest-api/Get-Fiat-Payments-History Binance API Documentation}
