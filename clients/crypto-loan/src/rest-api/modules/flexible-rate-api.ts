@@ -45,14 +45,14 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
          * @summary Check Collateral Repay Rate (USER_DATA)
          * @param {string} loanCoin
          * @param {string} collateralCoin
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         checkCollateralRepayRate: async (
             loanCoin: string,
             collateralCoin: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'loanCoin' is not null or undefined
             assertParamExists('checkCollateralRepayRate', 'loanCoin', loanCoin);
@@ -95,7 +95,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
          * @param {string} collateralCoin
          * @param {number} adjustmentAmount
          * @param {string} direction "ADDITIONAL", "REDUCED"
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -104,7 +104,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             collateralCoin: string,
             adjustmentAmount: number,
             direction: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'loanCoin' is not null or undefined
             assertParamExists('flexibleLoanAdjustLtv', 'loanCoin', loanCoin);
@@ -161,7 +161,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
          * @param {string} collateralCoin
          * @param {number} [loanAmount] Mandatory when collateralAmount is empty
          * @param {number} [collateralAmount] Mandatory when loanAmount is empty
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -170,7 +170,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             collateralCoin: string,
             loanAmount?: number,
             collateralAmount?: number,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'loanCoin' is not null or undefined
             assertParamExists('flexibleLoanBorrow', 'loanCoin', loanCoin);
@@ -223,8 +223,8 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
          * @param {number} repayAmount repay amount of loanCoin
          * @param {boolean} [collateralReturn] Default: TRUE. TRUE: Return extra collateral to spot account; FALSE: Keep extra collateral in the order, and lower LTV.
          * @param {boolean} [fullRepayment] Default: FALSE. TRUE: Full repayment; FALSE: Partial repayment, based on loanAmount
-         * @param {number} [repaymentType] Default: 1. 1: Repayment with loan asset; 2: Repayment with collateral
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [repaymentType] Default: 1. 1: Repayment with loan asset; 2: Repayment with collateral
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -234,8 +234,8 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             repayAmount: number,
             collateralReturn?: boolean,
             fullRepayment?: boolean,
-            repaymentType?: number,
-            recvWindow?: number
+            repaymentType?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'loanCoin' is not null or undefined
             assertParamExists('flexibleLoanRepay', 'loanCoin', loanCoin);
@@ -291,13 +291,13 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
          *
          * @summary Get Flexible Loan Assets Data(USER_DATA)
          * @param {string} [loanCoin]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getFlexibleLoanAssetsData: async (
             loanCoin?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -330,22 +330,22 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
          * @summary Get Flexible Loan Borrow History(USER_DATA)
          * @param {string} [loanCoin]
          * @param {string} [collateralCoin]
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Current querying page. Start from 1; default: 1; max: 1000
-         * @param {number} [limit] Default: 10; max: 100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
+         * @param {number | bigint} [limit] Default: 10; max: 100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getFlexibleLoanBorrowHistory: async (
             loanCoin?: string,
             collateralCoin?: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -394,13 +394,13 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
          *
          * @summary Get Flexible Loan Collateral Assets Data(USER_DATA)
          * @param {string} [collateralCoin]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getFlexibleLoanCollateralAssetsData: async (
             collateralCoin?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -429,22 +429,22 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
          * @summary Get Flexible Loan Liquidation History (USER_DATA)
          * @param {string} [loanCoin]
          * @param {string} [collateralCoin]
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Current querying page. Start from 1; default: 1; max: 1000
-         * @param {number} [limit] Default: 10; max: 100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
+         * @param {number | bigint} [limit] Default: 10; max: 100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getFlexibleLoanLiquidationHistory: async (
             loanCoin?: string,
             collateralCoin?: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -497,22 +497,22 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
          * @summary Get Flexible Loan LTV Adjustment History(USER_DATA)
          * @param {string} [loanCoin]
          * @param {string} [collateralCoin]
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Current querying page. Start from 1; default: 1; max: 1000
-         * @param {number} [limit] Default: 10; max: 100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
+         * @param {number | bigint} [limit] Default: 10; max: 100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getFlexibleLoanLtvAdjustmentHistory: async (
             loanCoin?: string,
             collateralCoin?: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -562,18 +562,18 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
          * @summary Get Flexible Loan Ongoing Orders(USER_DATA)
          * @param {string} [loanCoin]
          * @param {string} [collateralCoin]
-         * @param {number} [current] Current querying page. Start from 1; default: 1; max: 1000
-         * @param {number} [limit] Default: 10; max: 100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
+         * @param {number | bigint} [limit] Default: 10; max: 100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getFlexibleLoanOngoingOrders: async (
             loanCoin?: string,
             collateralCoin?: string,
-            current?: number,
-            limit?: number,
-            recvWindow?: number
+            current?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -618,22 +618,22 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
          * @summary Get Flexible Loan Repayment History(USER_DATA)
          * @param {string} [loanCoin]
          * @param {string} [collateralCoin]
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Current querying page. Start from 1; default: 1; max: 1000
-         * @param {number} [limit] Default: 10; max: 100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
+         * @param {number | bigint} [limit] Default: 10; max: 100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getFlexibleLoanRepaymentHistory: async (
             loanCoin?: string,
             collateralCoin?: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -876,10 +876,10 @@ export interface CheckCollateralRepayRateRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiCheckCollateralRepayRate
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -917,10 +917,10 @@ export interface FlexibleLoanAdjustLtvRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiFlexibleLoanAdjustLtv
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -958,10 +958,10 @@ export interface FlexibleLoanBorrowRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiFlexibleLoanBorrow
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1006,17 +1006,17 @@ export interface FlexibleLoanRepayRequest {
 
     /**
      * Default: 1. 1: Repayment with loan asset; 2: Repayment with collateral
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiFlexibleLoanRepay
      */
-    readonly repaymentType?: number;
+    readonly repaymentType?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiFlexibleLoanRepay
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1033,10 +1033,10 @@ export interface GetFlexibleLoanAssetsDataRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanAssetsData
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1060,38 +1060,38 @@ export interface GetFlexibleLoanBorrowHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanBorrowHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanBorrowHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Current querying page. Start from 1; default: 1; max: 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanBorrowHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default: 10; max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanBorrowHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanBorrowHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1108,10 +1108,10 @@ export interface GetFlexibleLoanCollateralAssetsDataRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanCollateralAssetsData
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1135,38 +1135,38 @@ export interface GetFlexibleLoanLiquidationHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanLiquidationHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanLiquidationHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Current querying page. Start from 1; default: 1; max: 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanLiquidationHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default: 10; max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanLiquidationHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanLiquidationHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1190,38 +1190,38 @@ export interface GetFlexibleLoanLtvAdjustmentHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanLtvAdjustmentHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanLtvAdjustmentHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Current querying page. Start from 1; default: 1; max: 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanLtvAdjustmentHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default: 10; max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanLtvAdjustmentHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanLtvAdjustmentHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1245,24 +1245,24 @@ export interface GetFlexibleLoanOngoingOrdersRequest {
 
     /**
      * Current querying page. Start from 1; default: 1; max: 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanOngoingOrders
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default: 10; max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanOngoingOrders
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanOngoingOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1286,38 +1286,38 @@ export interface GetFlexibleLoanRepaymentHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanRepaymentHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanRepaymentHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Current querying page. Start from 1; default: 1; max: 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanRepaymentHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default: 10; max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanRepaymentHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleRateApiGetFlexibleLoanRepaymentHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

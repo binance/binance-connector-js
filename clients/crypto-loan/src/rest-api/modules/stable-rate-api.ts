@@ -41,7 +41,7 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @param {string} loanCoin
          * @param {string} collateralCoin
          * @param {number} repayAmount repay amount of loanCoin
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -49,7 +49,7 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
             loanCoin: string,
             collateralCoin: string,
             repayAmount: number,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'loanCoin' is not null or undefined
             assertParamExists('checkCollateralRepayRateStableRate', 'loanCoin', loanCoin);
@@ -101,20 +101,20 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @summary Get Crypto Loans Income History(USER_DATA)
          * @param {string} [asset]
          * @param {string} [type] All types will be returned by default. Enum：`borrowIn` ,`collateralSpent`, `repayAmount`, `collateralReturn`(Collateral return after repayment), `addCollateral`, `removeCollateral`, `collateralReturnAfterLiquidation`
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [limit] Default: 10; max: 100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [limit] Default: 10; max: 100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getCryptoLoansIncomeHistory: async (
             asset?: string,
             type?: string,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -161,26 +161,26 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 400
          *
          * @summary Get Loan Borrow History(USER_DATA)
-         * @param {number} [orderId] orderId in `POST /sapi/v1/loan/borrow`
+         * @param {number | bigint} [orderId] orderId in `POST /sapi/v1/loan/borrow`
          * @param {string} [loanCoin]
          * @param {string} [collateralCoin]
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Current querying page. Start from 1; default: 1; max: 1000
-         * @param {number} [limit] Default: 10; max: 100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
+         * @param {number | bigint} [limit] Default: 10; max: 100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getLoanBorrowHistory: async (
-            orderId?: number,
+            orderId?: number | bigint,
             loanCoin?: string,
             collateralCoin?: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -235,26 +235,26 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 400
          *
          * @summary Get Loan LTV Adjustment History(USER_DATA)
-         * @param {number} [orderId] orderId in `POST /sapi/v1/loan/borrow`
+         * @param {number | bigint} [orderId] orderId in `POST /sapi/v1/loan/borrow`
          * @param {string} [loanCoin]
          * @param {string} [collateralCoin]
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Current querying page. Start from 1; default: 1; max: 1000
-         * @param {number} [limit] Default: 10; max: 100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
+         * @param {number | bigint} [limit] Default: 10; max: 100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getLoanLtvAdjustmentHistory: async (
-            orderId?: number,
+            orderId?: number | bigint,
             loanCoin?: string,
             collateralCoin?: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -309,26 +309,26 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 400
          *
          * @summary Get Loan Repayment History(USER_DATA)
-         * @param {number} [orderId] orderId in `POST /sapi/v1/loan/borrow`
+         * @param {number | bigint} [orderId] orderId in `POST /sapi/v1/loan/borrow`
          * @param {string} [loanCoin]
          * @param {string} [collateralCoin]
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Current querying page. Start from 1; default: 1; max: 1000
-         * @param {number} [limit] Default: 10; max: 100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
+         * @param {number | bigint} [limit] Default: 10; max: 100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getLoanRepaymentHistory: async (
-            orderId?: number,
+            orderId?: number | bigint,
             loanCoin?: string,
             collateralCoin?: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -494,10 +494,10 @@ export interface CheckCollateralRepayRateStableRateRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StableRateApiCheckCollateralRepayRateStableRate
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -521,31 +521,31 @@ export interface GetCryptoLoansIncomeHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StableRateApiGetCryptoLoansIncomeHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StableRateApiGetCryptoLoansIncomeHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default: 10; max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StableRateApiGetCryptoLoansIncomeHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StableRateApiGetCryptoLoansIncomeHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -555,10 +555,10 @@ export interface GetCryptoLoansIncomeHistoryRequest {
 export interface GetLoanBorrowHistoryRequest {
     /**
      * orderId in `POST /sapi/v1/loan/borrow`
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StableRateApiGetLoanBorrowHistory
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -576,38 +576,38 @@ export interface GetLoanBorrowHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StableRateApiGetLoanBorrowHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StableRateApiGetLoanBorrowHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Current querying page. Start from 1; default: 1; max: 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StableRateApiGetLoanBorrowHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default: 10; max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StableRateApiGetLoanBorrowHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StableRateApiGetLoanBorrowHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -617,10 +617,10 @@ export interface GetLoanBorrowHistoryRequest {
 export interface GetLoanLtvAdjustmentHistoryRequest {
     /**
      * orderId in `POST /sapi/v1/loan/borrow`
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StableRateApiGetLoanLtvAdjustmentHistory
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -638,38 +638,38 @@ export interface GetLoanLtvAdjustmentHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StableRateApiGetLoanLtvAdjustmentHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StableRateApiGetLoanLtvAdjustmentHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Current querying page. Start from 1; default: 1; max: 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StableRateApiGetLoanLtvAdjustmentHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default: 10; max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StableRateApiGetLoanLtvAdjustmentHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StableRateApiGetLoanLtvAdjustmentHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -679,10 +679,10 @@ export interface GetLoanLtvAdjustmentHistoryRequest {
 export interface GetLoanRepaymentHistoryRequest {
     /**
      * orderId in `POST /sapi/v1/loan/borrow`
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StableRateApiGetLoanRepaymentHistory
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -700,38 +700,38 @@ export interface GetLoanRepaymentHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StableRateApiGetLoanRepaymentHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StableRateApiGetLoanRepaymentHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Current querying page. Start from 1; default: 1; max: 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StableRateApiGetLoanRepaymentHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default: 10; max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StableRateApiGetLoanRepaymentHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StableRateApiGetLoanRepaymentHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
