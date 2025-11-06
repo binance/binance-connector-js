@@ -21,16 +21,16 @@
 export interface QuerySubOrdersFutureAlgoResponseSubOrdersInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySubOrdersFutureAlgoResponseSubOrdersInner
      */
-    algoId?: number;
+    algoId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySubOrdersFutureAlgoResponseSubOrdersInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -63,10 +63,10 @@ export interface QuerySubOrdersFutureAlgoResponseSubOrdersInner {
     feeAsset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySubOrdersFutureAlgoResponseSubOrdersInner
      */
-    bookTime?: number;
+    bookTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -87,10 +87,10 @@ export interface QuerySubOrdersFutureAlgoResponseSubOrdersInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySubOrdersFutureAlgoResponseSubOrdersInner
      */
-    subId?: number;
+    subId?: number | bigint;
     /**
      *
      * @type {string}

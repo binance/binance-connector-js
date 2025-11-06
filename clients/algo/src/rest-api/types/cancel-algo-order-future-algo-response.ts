@@ -21,10 +21,10 @@
 export interface CancelAlgoOrderFutureAlgoResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelAlgoOrderFutureAlgoResponse
      */
-    algoId?: number;
+    algoId?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -33,10 +33,10 @@ export interface CancelAlgoOrderFutureAlgoResponse {
     success?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelAlgoOrderFutureAlgoResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}

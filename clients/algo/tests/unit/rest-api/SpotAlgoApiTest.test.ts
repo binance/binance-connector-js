@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { SpotAlgoApi } from '../../../src/rest-api';
@@ -50,7 +51,9 @@ describe('SpotAlgoApi', () => {
                 algoId: 1,
             };
 
-            mockResponse = { algoId: 14511, success: true, code: 0, msg: 'OK' };
+            mockResponse = JSONParse(
+                JSONStringify({ algoId: 14511, success: true, code: 0, msg: 'OK' })
+            );
 
             const spy = jest.spyOn(client, 'cancelAlgoOrderSpotAlgo').mockReturnValue(
                 Promise.resolve({
@@ -72,7 +75,9 @@ describe('SpotAlgoApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { algoId: 14511, success: true, code: 0, msg: 'OK' };
+            mockResponse = JSONParse(
+                JSONStringify({ algoId: 14511, success: true, code: 0, msg: 'OK' })
+            );
 
             const spy = jest.spyOn(client, 'cancelAlgoOrderSpotAlgo').mockReturnValue(
                 Promise.resolve({
@@ -124,26 +129,28 @@ describe('SpotAlgoApi', () => {
 
     describe('queryCurrentAlgoOpenOrdersSpotAlgo()', () => {
         it('should execute queryCurrentAlgoOpenOrdersSpotAlgo() successfully with required parameters only', async () => {
-            mockResponse = {
-                total: 1,
-                orders: [
-                    {
-                        algoId: 14517,
-                        symbol: 'ETHUSDT',
-                        side: 'SELL',
-                        totalQty: '5.000',
-                        executedQty: '0.000',
-                        executedAmt: '0.00000000',
-                        avgPrice: '0.00',
-                        clientAlgoId: 'd7096549481642f8a0bb69e9e2e31f2e',
-                        bookTime: 1649756817004,
-                        endTime: 0,
-                        algoStatus: 'WORKING',
-                        algoType: 'TWAP',
-                        urgency: 'LOW',
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 1,
+                    orders: [
+                        {
+                            algoId: 14517,
+                            symbol: 'ETHUSDT',
+                            side: 'SELL',
+                            totalQty: '5.000',
+                            executedQty: '0.000',
+                            executedAmt: '0.00000000',
+                            avgPrice: '0.00',
+                            clientAlgoId: 'd7096549481642f8a0bb69e9e2e31f2e',
+                            bookTime: 1649756817004,
+                            endTime: 0,
+                            algoStatus: 'WORKING',
+                            algoType: 'TWAP',
+                            urgency: 'LOW',
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryCurrentAlgoOpenOrdersSpotAlgo').mockReturnValue(
                 Promise.resolve({
@@ -164,26 +171,28 @@ describe('SpotAlgoApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                total: 1,
-                orders: [
-                    {
-                        algoId: 14517,
-                        symbol: 'ETHUSDT',
-                        side: 'SELL',
-                        totalQty: '5.000',
-                        executedQty: '0.000',
-                        executedAmt: '0.00000000',
-                        avgPrice: '0.00',
-                        clientAlgoId: 'd7096549481642f8a0bb69e9e2e31f2e',
-                        bookTime: 1649756817004,
-                        endTime: 0,
-                        algoStatus: 'WORKING',
-                        algoType: 'TWAP',
-                        urgency: 'LOW',
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 1,
+                    orders: [
+                        {
+                            algoId: 14517,
+                            symbol: 'ETHUSDT',
+                            side: 'SELL',
+                            totalQty: '5.000',
+                            executedQty: '0.000',
+                            executedAmt: '0.00000000',
+                            avgPrice: '0.00',
+                            clientAlgoId: 'd7096549481642f8a0bb69e9e2e31f2e',
+                            bookTime: 1649756817004,
+                            endTime: 0,
+                            algoStatus: 'WORKING',
+                            algoType: 'TWAP',
+                            urgency: 'LOW',
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryCurrentAlgoOpenOrdersSpotAlgo').mockReturnValue(
                 Promise.resolve({
@@ -221,26 +230,28 @@ describe('SpotAlgoApi', () => {
 
     describe('queryHistoricalAlgoOrdersSpotAlgo()', () => {
         it('should execute queryHistoricalAlgoOrdersSpotAlgo() successfully with required parameters only', async () => {
-            mockResponse = {
-                total: 1,
-                orders: [
-                    {
-                        algoId: 14518,
-                        symbol: 'BNBUSDT',
-                        side: 'BUY',
-                        totalQty: '100.00',
-                        executedQty: '0.00',
-                        executedAmt: '0.00000000',
-                        avgPrice: '0.000',
-                        clientAlgoId: 'acacab56b3c44bef9f6a8f8ebd2a8408',
-                        bookTime: 1649757019503,
-                        endTime: 1649757088101,
-                        algoStatus: 'CANCELLED',
-                        algoType: 'VP',
-                        urgency: 'LOW',
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 1,
+                    orders: [
+                        {
+                            algoId: 14518,
+                            symbol: 'BNBUSDT',
+                            side: 'BUY',
+                            totalQty: '100.00',
+                            executedQty: '0.00',
+                            executedAmt: '0.00000000',
+                            avgPrice: '0.000',
+                            clientAlgoId: 'acacab56b3c44bef9f6a8f8ebd2a8408',
+                            bookTime: 1649757019503,
+                            endTime: 1649757088101,
+                            algoStatus: 'CANCELLED',
+                            algoType: 'VP',
+                            urgency: 'LOW',
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryHistoricalAlgoOrdersSpotAlgo').mockReturnValue(
                 Promise.resolve({
@@ -267,26 +278,28 @@ describe('SpotAlgoApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                total: 1,
-                orders: [
-                    {
-                        algoId: 14518,
-                        symbol: 'BNBUSDT',
-                        side: 'BUY',
-                        totalQty: '100.00',
-                        executedQty: '0.00',
-                        executedAmt: '0.00000000',
-                        avgPrice: '0.000',
-                        clientAlgoId: 'acacab56b3c44bef9f6a8f8ebd2a8408',
-                        bookTime: 1649757019503,
-                        endTime: 1649757088101,
-                        algoStatus: 'CANCELLED',
-                        algoType: 'VP',
-                        urgency: 'LOW',
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 1,
+                    orders: [
+                        {
+                            algoId: 14518,
+                            symbol: 'BNBUSDT',
+                            side: 'BUY',
+                            totalQty: '100.00',
+                            executedQty: '0.00',
+                            executedAmt: '0.00000000',
+                            avgPrice: '0.000',
+                            clientAlgoId: 'acacab56b3c44bef9f6a8f8ebd2a8408',
+                            bookTime: 1649757019503,
+                            endTime: 1649757088101,
+                            algoStatus: 'CANCELLED',
+                            algoType: 'VP',
+                            urgency: 'LOW',
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryHistoricalAlgoOrdersSpotAlgo').mockReturnValue(
                 Promise.resolve({
@@ -328,29 +341,31 @@ describe('SpotAlgoApi', () => {
                 algoId: 1,
             };
 
-            mockResponse = {
-                total: 1,
-                executedQty: '1.000',
-                executedAmt: '3229.44000000',
-                subOrders: [
-                    {
-                        algoId: 13723,
-                        orderId: 8389765519993909000,
-                        orderStatus: 'FILLED',
-                        executedQty: '1.000',
-                        executedAmt: '3229.44000000',
-                        feeAmt: '-1.61471999',
-                        feeAsset: 'USDT',
-                        bookTime: 1649319001964,
-                        avgPrice: '3229.44',
-                        side: 'SELL',
-                        symbol: 'ETHUSDT',
-                        subId: 1,
-                        timeInForce: 'IMMEDIATE_OR_CANCEL',
-                        origQty: '1.000',
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 1,
+                    executedQty: '1.000',
+                    executedAmt: '3229.44000000',
+                    subOrders: [
+                        {
+                            algoId: 13723,
+                            orderId: 8389765519993909000,
+                            orderStatus: 'FILLED',
+                            executedQty: '1.000',
+                            executedAmt: '3229.44000000',
+                            feeAmt: '-1.61471999',
+                            feeAsset: 'USDT',
+                            bookTime: 1649319001964,
+                            avgPrice: '3229.44',
+                            side: 'SELL',
+                            symbol: 'ETHUSDT',
+                            subId: 1,
+                            timeInForce: 'IMMEDIATE_OR_CANCEL',
+                            origQty: '1.000',
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'querySubOrdersSpotAlgo').mockReturnValue(
                 Promise.resolve({
@@ -374,29 +389,31 @@ describe('SpotAlgoApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                total: 1,
-                executedQty: '1.000',
-                executedAmt: '3229.44000000',
-                subOrders: [
-                    {
-                        algoId: 13723,
-                        orderId: 8389765519993909000,
-                        orderStatus: 'FILLED',
-                        executedQty: '1.000',
-                        executedAmt: '3229.44000000',
-                        feeAmt: '-1.61471999',
-                        feeAsset: 'USDT',
-                        bookTime: 1649319001964,
-                        avgPrice: '3229.44',
-                        side: 'SELL',
-                        symbol: 'ETHUSDT',
-                        subId: 1,
-                        timeInForce: 'IMMEDIATE_OR_CANCEL',
-                        origQty: '1.000',
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 1,
+                    executedQty: '1.000',
+                    executedAmt: '3229.44000000',
+                    subOrders: [
+                        {
+                            algoId: 13723,
+                            orderId: 8389765519993909000,
+                            orderStatus: 'FILLED',
+                            executedQty: '1.000',
+                            executedAmt: '3229.44000000',
+                            feeAmt: '-1.61471999',
+                            feeAsset: 'USDT',
+                            bookTime: 1649319001964,
+                            avgPrice: '3229.44',
+                            side: 'SELL',
+                            symbol: 'ETHUSDT',
+                            subId: 1,
+                            timeInForce: 'IMMEDIATE_OR_CANCEL',
+                            origQty: '1.000',
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'querySubOrdersSpotAlgo').mockReturnValue(
                 Promise.resolve({
@@ -455,12 +472,14 @@ describe('SpotAlgoApi', () => {
                 duration: 5000,
             };
 
-            mockResponse = {
-                clientAlgoId: '65ce1630101a480b85915d7e11fd5078',
-                success: true,
-                code: 0,
-                msg: 'OK',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    clientAlgoId: '65ce1630101a480b85915d7e11fd5078',
+                    success: true,
+                    code: 0,
+                    msg: 'OK',
+                })
+            );
 
             const spy = jest.spyOn(client, 'timeWeightedAveragePriceSpotAlgo').mockReturnValue(
                 Promise.resolve({
@@ -486,12 +505,14 @@ describe('SpotAlgoApi', () => {
                 limitPrice: 1.0,
             };
 
-            mockResponse = {
-                clientAlgoId: '65ce1630101a480b85915d7e11fd5078',
-                success: true,
-                code: 0,
-                msg: 'OK',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    clientAlgoId: '65ce1630101a480b85915d7e11fd5078',
+                    success: true,
+                    code: 0,
+                    msg: 'OK',
+                })
+            );
 
             const spy = jest.spyOn(client, 'timeWeightedAveragePriceSpotAlgo').mockReturnValue(
                 Promise.resolve({

@@ -21,10 +21,10 @@
 export interface QueryCurrentAlgoOpenOrdersFutureAlgoResponseOrdersInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCurrentAlgoOpenOrdersFutureAlgoResponseOrdersInner
      */
-    algoId?: number;
+    algoId?: number | bigint;
     /**
      *
      * @type {string}
@@ -75,16 +75,16 @@ export interface QueryCurrentAlgoOpenOrdersFutureAlgoResponseOrdersInner {
     clientAlgoId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCurrentAlgoOpenOrdersFutureAlgoResponseOrdersInner
      */
-    bookTime?: number;
+    bookTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCurrentAlgoOpenOrdersFutureAlgoResponseOrdersInner
      */
-    endTime?: number;
+    endTime?: number | bigint;
     /**
      *
      * @type {string}

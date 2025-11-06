@@ -21,10 +21,10 @@
 export interface CancelAlgoOrderSpotAlgoResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelAlgoOrderSpotAlgoResponse
      */
-    algoId?: number;
+    algoId?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -33,10 +33,10 @@ export interface CancelAlgoOrderSpotAlgoResponse {
     success?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelAlgoOrderSpotAlgoResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}

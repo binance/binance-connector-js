@@ -102,6 +102,7 @@ export class RestAPI {
      *
      * @summary Cancel Algo Order(TRADE)
      * @param {CancelAlgoOrderFutureAlgoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<CancelAlgoOrderFutureAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/algo/future-algo/Cancel-Algo-Order Binance API Documentation}
@@ -122,6 +123,7 @@ export class RestAPI {
      *
      * @summary Query Current Algo Open Orders(USER_DATA)
      * @param {QueryCurrentAlgoOpenOrdersFutureAlgoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryCurrentAlgoOpenOrdersFutureAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/algo/future-algo/Query-Current-Algo-Open-Orders Binance API Documentation}
@@ -142,6 +144,7 @@ export class RestAPI {
      *
      * @summary Query Historical Algo Orders(USER_DATA)
      * @param {QueryHistoricalAlgoOrdersFutureAlgoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryHistoricalAlgoOrdersFutureAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/algo/future-algo/Query-Historical-Algo-Orders Binance API Documentation}
@@ -162,6 +165,7 @@ export class RestAPI {
      *
      * @summary Query Sub Orders(USER_DATA)
      * @param {QuerySubOrdersFutureAlgoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QuerySubOrdersFutureAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/algo/future-algo/Query-Sub-Orders Binance API Documentation}
@@ -190,6 +194,7 @@ export class RestAPI {
      *
      * @summary Time-Weighted Average Price(Twap) New Order(TRADE)
      * @param {TimeWeightedAveragePriceFutureAlgoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<TimeWeightedAveragePriceFutureAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/algo/future-algo/Time-Weighted-Average-Price-New-Order Binance API Documentation}
@@ -215,6 +220,7 @@ export class RestAPI {
      *
      * @summary Volume Participation(VP) New Order (TRADE)
      * @param {VolumeParticipationFutureAlgoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<VolumeParticipationFutureAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/algo/future-algo/Volume-Participation-New-Order Binance API Documentation}
@@ -232,6 +238,7 @@ export class RestAPI {
      *
      * @summary Cancel Algo Order(TRADE)
      * @param {CancelAlgoOrderSpotAlgoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<CancelAlgoOrderSpotAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/algo/spot-algo/Cancel-Algo-Order Binance API Documentation}
@@ -249,6 +256,7 @@ export class RestAPI {
      *
      * @summary Query Current Algo Open Orders(USER_DATA)
      * @param {QueryCurrentAlgoOpenOrdersSpotAlgoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryCurrentAlgoOpenOrdersSpotAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/algo/spot-algo/Query-Current-Algo-Open-Orders Binance API Documentation}
@@ -266,6 +274,7 @@ export class RestAPI {
      *
      * @summary Query Historical Algo Orders(USER_DATA)
      * @param {QueryHistoricalAlgoOrdersSpotAlgoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryHistoricalAlgoOrdersSpotAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/algo/spot-algo/Query-Historical-Algo-Orders Binance API Documentation}
@@ -283,6 +292,7 @@ export class RestAPI {
      *
      * @summary Query Sub Orders(USER_DATA)
      * @param {QuerySubOrdersSpotAlgoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QuerySubOrdersSpotAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/algo/spot-algo/Query-Sub-Orders Binance API Documentation}
@@ -302,6 +312,7 @@ export class RestAPI {
      *
      * @summary Time-Weighted Average Price(Twap) New Order(TRADE)
      * @param {TimeWeightedAveragePriceSpotAlgoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<TimeWeightedAveragePriceSpotAlgoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/algo/spot-algo/Time-Weighted-Average-Price-New-Order Binance API Documentation}

@@ -26,10 +26,10 @@ import type { QueryCurrentAlgoOpenOrdersFutureAlgoResponseOrdersInner } from './
 export interface QueryCurrentAlgoOpenOrdersFutureAlgoResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCurrentAlgoOpenOrdersFutureAlgoResponse
      */
-    total?: number;
+    total?: number | bigint;
     /**
      *
      * @type {Array<QueryCurrentAlgoOpenOrdersFutureAlgoResponseOrdersInner>}

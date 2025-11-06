@@ -33,10 +33,10 @@ export interface TimeWeightedAveragePriceSpotAlgoResponse {
     success?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TimeWeightedAveragePriceSpotAlgoResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}

@@ -33,10 +33,10 @@ export interface VolumeParticipationFutureAlgoResponse {
     success?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof VolumeParticipationFutureAlgoResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}

@@ -26,10 +26,10 @@ import type { QueryHistoricalAlgoOrdersSpotAlgoResponseOrdersInner } from './que
 export interface QueryHistoricalAlgoOrdersSpotAlgoResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryHistoricalAlgoOrdersSpotAlgoResponse
      */
-    total?: number;
+    total?: number | bigint;
     /**
      *
      * @type {Array<QueryHistoricalAlgoOrdersSpotAlgoResponseOrdersInner>}

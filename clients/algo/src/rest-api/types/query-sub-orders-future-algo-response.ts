@@ -26,10 +26,10 @@ import type { QuerySubOrdersFutureAlgoResponseSubOrdersInner } from './query-sub
 export interface QuerySubOrdersFutureAlgoResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySubOrdersFutureAlgoResponse
      */
-    total?: number;
+    total?: number | bigint;
     /**
      *
      * @type {string}
