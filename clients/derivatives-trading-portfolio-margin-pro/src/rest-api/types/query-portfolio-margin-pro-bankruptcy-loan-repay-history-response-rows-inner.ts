@@ -33,8 +33,8 @@ export interface QueryPortfolioMarginProBankruptcyLoanRepayHistoryResponseRowsIn
     amount?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryPortfolioMarginProBankruptcyLoanRepayHistoryResponseRowsInner
      */
-    repayTime?: number;
+    repayTime?: number | bigint;
 }

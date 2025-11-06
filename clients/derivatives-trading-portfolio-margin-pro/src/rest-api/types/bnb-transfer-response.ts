@@ -21,8 +21,8 @@
 export interface BnbTransferResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BnbTransferResponse
      */
-    tranId?: number;
+    tranId?: number | bigint;
 }

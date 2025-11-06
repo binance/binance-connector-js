@@ -120,6 +120,7 @@ export class RestAPI {
      *
      * @summary BNB transfer(USER_DATA)
      * @param {BnbTransferRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<BnbTransferResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/BNB-transfer Binance API Documentation}
@@ -137,6 +138,7 @@ export class RestAPI {
      *
      * @summary Change Auto-repay-futures Status(TRADE)
      * @param {ChangeAutoRepayFuturesStatusRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<ChangeAutoRepayFuturesStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Change-Auto-repay-futures-Status Binance API Documentation}
@@ -157,6 +159,7 @@ export class RestAPI {
      *
      * @summary Fund Auto-collection(USER_DATA)
      * @param {FundAutoCollectionRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<FundAutoCollectionResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Fund-Auto-collection Binance API Documentation}
@@ -176,6 +179,7 @@ export class RestAPI {
      *
      * @summary Fund Collection by Asset(USER_DATA)
      * @param {FundCollectionByAssetRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<FundCollectionByAssetResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Fund-Collection-by-Asset Binance API Documentation}
@@ -193,6 +197,7 @@ export class RestAPI {
      *
      * @summary Get Auto-repay-futures Status(USER_DATA)
      * @param {GetAutoRepayFuturesStatusRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetAutoRepayFuturesStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Get-Auto-repay-futures-Status Binance API Documentation}
@@ -210,6 +215,7 @@ export class RestAPI {
      *
      * @summary Get Portfolio Margin Pro Account Balance(USER_DATA)
      * @param {GetPortfolioMarginProAccountBalanceRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetPortfolioMarginProAccountBalanceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Get-Classic-Portfolio-Margin-Balance-Info Binance API Documentation}
@@ -227,6 +233,7 @@ export class RestAPI {
      *
      * @summary Get Portfolio Margin Pro Account Info(USER_DATA)
      * @param {GetPortfolioMarginProAccountInfoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetPortfolioMarginProAccountInfoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Get-Classic-Portfolio-Margin-Account-Info Binance API Documentation}
@@ -244,6 +251,7 @@ export class RestAPI {
      *
      * @summary Get Portfolio Margin Pro SPAN Account Info(USER_DATA)
      * @param {GetPortfolioMarginProSpanAccountInfoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetPortfolioMarginProSpanAccountInfoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Get-Classic-Portfolio-Margin-Account-Info-V2 Binance API Documentation}
@@ -261,6 +269,7 @@ export class RestAPI {
      *
      * @summary Get Transferable Earn Asset Balance for Portfolio Margin (USER_DATA)
      * @param {GetTransferableEarnAssetBalanceForPortfolioMarginRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetTransferableEarnAssetBalanceForPortfolioMarginResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Get-Transferable-Earn-Asset-Balance-for-Portfolio-Margin Binance API Documentation}
@@ -278,6 +287,7 @@ export class RestAPI {
      *
      * @summary Mint BFUSD for Portfolio Margin(TRADE)
      * @param {MintBfusdForPortfolioMarginRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<MintBfusdForPortfolioMarginResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Mint-BFUSD-Portfolio-Margin Binance API Documentation}
@@ -295,6 +305,7 @@ export class RestAPI {
      *
      * @summary Portfolio Margin Pro Bankruptcy Loan Repay
      * @param {PortfolioMarginProBankruptcyLoanRepayRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<PortfolioMarginProBankruptcyLoanRepayResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Classic-Portfolio-Margin-Bankruptcy-Loan-Repay Binance API Documentation}
@@ -314,6 +325,7 @@ export class RestAPI {
      *
      * @summary Query Portfolio Margin Pro Bankruptcy Loan Amount(USER_DATA)
      * @param {QueryPortfolioMarginProBankruptcyLoanAmountRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryPortfolioMarginProBankruptcyLoanAmountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Query-Classic-Portfolio-Margin-Bankruptcy-Loan-Amount Binance API Documentation}
@@ -336,6 +348,7 @@ export class RestAPI {
      *
      * @summary Query Portfolio Margin Pro Bankruptcy Loan Repay History(USER_DATA)
      * @param {QueryPortfolioMarginProBankruptcyLoanRepayHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryPortfolioMarginProBankruptcyLoanRepayHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Query-Portfolio-Margin-Pro-Bankruptcy-Loan-Repay-History Binance API Documentation}
@@ -353,6 +366,7 @@ export class RestAPI {
      *
      * @summary Query Portfolio Margin Pro Negative Balance Interest History(USER_DATA)
      * @param {QueryPortfolioMarginProNegativeBalanceInterestHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryPortfolioMarginProNegativeBalanceInterestHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Query-Classic-Portfolio-Margin-Negative-Balance-Interest-History Binance API Documentation}
@@ -372,6 +386,7 @@ export class RestAPI {
      *
      * @summary Redeem BFUSD for Portfolio Margin(TRADE)
      * @param {RedeemBfusdForPortfolioMarginRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<RedeemBfusdForPortfolioMarginResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Redeem-BFUSD-Portfolio-Margin Binance API Documentation}
@@ -389,6 +404,7 @@ export class RestAPI {
      *
      * @summary Repay futures Negative Balance(USER_DATA)
      * @param {RepayFuturesNegativeBalanceRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<RepayFuturesNegativeBalanceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Repay-futures-Negative-Balance Binance API Documentation}
@@ -406,6 +422,7 @@ export class RestAPI {
      *
      * @summary Transfer LDUSDT for Portfolio Margin(TRADE)
      * @param {TransferLdusdtForPortfolioMarginRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<TransferLdusdtForPortfolioMarginResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Transfer-LDUSDT-Portfolio-Margin Binance API Documentation}
@@ -422,6 +439,7 @@ export class RestAPI {
      * Weight: 50
      *
      * @summary Get Portfolio Margin Asset Leverage(USER_DATA)
+     *
      * @returns {Promise<RestApiResponse<GetPortfolioMarginAssetLeverageResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/market-data/Get-Portfolio-Margin-Asset-Leverage Binance API Documentation}
@@ -438,6 +456,7 @@ export class RestAPI {
      * Weight: 50
      *
      * @summary Portfolio Margin Collateral Rate(MARKET_DATA)
+     *
      * @returns {Promise<RestApiResponse<PortfolioMarginCollateralRateResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/market-data/Classic-Portfolio-Margin-Collateral-Rate Binance API Documentation}
@@ -455,6 +474,7 @@ export class RestAPI {
      *
      * @summary Portfolio Margin Pro Tiered Collateral Rate(USER_DATA)
      * @param {PortfolioMarginProTieredCollateralRateRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<PortfolioMarginProTieredCollateralRateResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/market-data/Portfolio-Margin-Pro-Tiered-Collateral-Rate Binance API Documentation}
@@ -472,6 +492,7 @@ export class RestAPI {
      *
      * @summary Query Portfolio Margin Asset Index Price (MARKET_DATA)
      * @param {QueryPortfolioMarginAssetIndexPriceRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryPortfolioMarginAssetIndexPriceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/market-data/Query-Portfolio-Margin-Asset-Index-Price Binance API Documentation}

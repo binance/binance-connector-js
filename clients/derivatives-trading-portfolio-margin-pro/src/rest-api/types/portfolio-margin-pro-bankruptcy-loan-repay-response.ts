@@ -21,8 +21,8 @@
 export interface PortfolioMarginProBankruptcyLoanRepayResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PortfolioMarginProBankruptcyLoanRepayResponse
      */
-    tranId?: number;
+    tranId?: number | bigint;
 }

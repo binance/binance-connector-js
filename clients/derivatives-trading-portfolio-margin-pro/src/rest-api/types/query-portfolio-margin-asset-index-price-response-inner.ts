@@ -33,8 +33,8 @@ export interface QueryPortfolioMarginAssetIndexPriceResponseInner {
     assetIndexPrice?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryPortfolioMarginAssetIndexPriceResponseInner
      */
-    time?: number;
+    time?: number | bigint;
 }

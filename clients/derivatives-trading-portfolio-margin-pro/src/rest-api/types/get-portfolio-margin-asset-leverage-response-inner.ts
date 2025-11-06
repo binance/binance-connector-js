@@ -27,8 +27,8 @@ export interface GetPortfolioMarginAssetLeverageResponseInner {
     asset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetPortfolioMarginAssetLeverageResponseInner
      */
-    leverage?: number;
+    leverage?: number | bigint;
 }

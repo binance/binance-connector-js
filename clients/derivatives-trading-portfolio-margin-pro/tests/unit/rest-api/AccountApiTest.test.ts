@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { AccountApi } from '../../../src/rest-api';
@@ -75,7 +76,7 @@ describe('AccountApi', () => {
                 transferSide: 'transferSide_example',
             };
 
-            mockResponse = { tranId: 100000001 };
+            mockResponse = JSONParse(JSONStringify({ tranId: 100000001 }));
 
             const spy = jest.spyOn(client, 'bnbTransfer').mockReturnValue(
                 Promise.resolve({
@@ -98,7 +99,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { tranId: 100000001 };
+            mockResponse = JSONParse(JSONStringify({ tranId: 100000001 }));
 
             const spy = jest.spyOn(client, 'bnbTransfer').mockReturnValue(
                 Promise.resolve({
@@ -167,7 +168,7 @@ describe('AccountApi', () => {
                 autoRepay: 'true',
             };
 
-            mockResponse = { msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
 
             const spy = jest.spyOn(client, 'changeAutoRepayFuturesStatus').mockReturnValue(
                 Promise.resolve({
@@ -189,7 +190,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
 
             const spy = jest.spyOn(client, 'changeAutoRepayFuturesStatus').mockReturnValue(
                 Promise.resolve({
@@ -243,7 +244,7 @@ describe('AccountApi', () => {
 
     describe('fundAutoCollection()', () => {
         it('should execute fundAutoCollection() successfully with required parameters only', async () => {
-            mockResponse = { msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
 
             const spy = jest.spyOn(client, 'fundAutoCollection').mockReturnValue(
                 Promise.resolve({
@@ -264,7 +265,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
 
             const spy = jest.spyOn(client, 'fundAutoCollection').mockReturnValue(
                 Promise.resolve({
@@ -302,7 +303,7 @@ describe('AccountApi', () => {
                 asset: 'asset_example',
             };
 
-            mockResponse = { msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
 
             const spy = jest.spyOn(client, 'fundCollectionByAsset').mockReturnValue(
                 Promise.resolve({
@@ -324,7 +325,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
 
             const spy = jest.spyOn(client, 'fundCollectionByAsset').mockReturnValue(
                 Promise.resolve({
@@ -376,7 +377,7 @@ describe('AccountApi', () => {
 
     describe('getAutoRepayFuturesStatus()', () => {
         it('should execute getAutoRepayFuturesStatus() successfully with required parameters only', async () => {
-            mockResponse = { autoRepay: true };
+            mockResponse = JSONParse(JSONStringify({ autoRepay: true }));
 
             const spy = jest.spyOn(client, 'getAutoRepayFuturesStatus').mockReturnValue(
                 Promise.resolve({
@@ -397,7 +398,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { autoRepay: true };
+            mockResponse = JSONParse(JSONStringify({ autoRepay: true }));
 
             const spy = jest.spyOn(client, 'getAutoRepayFuturesStatus').mockReturnValue(
                 Promise.resolve({
@@ -433,25 +434,27 @@ describe('AccountApi', () => {
 
     describe('getPortfolioMarginProAccountBalance()', () => {
         it('should execute getPortfolioMarginProAccountBalance() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    asset: 'BTC',
-                    totalWalletBalance: '100',
-                    crossMarginAsset: '100',
-                    crossMarginBorrowed: '0',
-                    crossMarginFree: '100',
-                    crossMarginInterest: '0',
-                    crossMarginLocked: '0',
-                    umWalletBalance: '0',
-                    umUnrealizedPNL: '0',
-                    cmWalletBalance: '0',
-                    cmUnrealizedPNL: '0',
-                    updateTime: 0,
-                    negativeBalance: '0',
-                    optionWalletBalance: '0',
-                    optionEquity: '0',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        asset: 'BTC',
+                        totalWalletBalance: '100',
+                        crossMarginAsset: '100',
+                        crossMarginBorrowed: '0',
+                        crossMarginFree: '100',
+                        crossMarginInterest: '0',
+                        crossMarginLocked: '0',
+                        umWalletBalance: '0',
+                        umUnrealizedPNL: '0',
+                        cmWalletBalance: '0',
+                        cmUnrealizedPNL: '0',
+                        updateTime: 0,
+                        negativeBalance: '0',
+                        optionWalletBalance: '0',
+                        optionEquity: '0',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getPortfolioMarginProAccountBalance').mockReturnValue(
                 Promise.resolve({
@@ -473,25 +476,27 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    asset: 'BTC',
-                    totalWalletBalance: '100',
-                    crossMarginAsset: '100',
-                    crossMarginBorrowed: '0',
-                    crossMarginFree: '100',
-                    crossMarginInterest: '0',
-                    crossMarginLocked: '0',
-                    umWalletBalance: '0',
-                    umUnrealizedPNL: '0',
-                    cmWalletBalance: '0',
-                    cmUnrealizedPNL: '0',
-                    updateTime: 0,
-                    negativeBalance: '0',
-                    optionWalletBalance: '0',
-                    optionEquity: '0',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        asset: 'BTC',
+                        totalWalletBalance: '100',
+                        crossMarginAsset: '100',
+                        crossMarginBorrowed: '0',
+                        crossMarginFree: '100',
+                        crossMarginInterest: '0',
+                        crossMarginLocked: '0',
+                        umWalletBalance: '0',
+                        umUnrealizedPNL: '0',
+                        cmWalletBalance: '0',
+                        cmUnrealizedPNL: '0',
+                        updateTime: 0,
+                        negativeBalance: '0',
+                        optionWalletBalance: '0',
+                        optionEquity: '0',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getPortfolioMarginProAccountBalance').mockReturnValue(
                 Promise.resolve({
@@ -529,16 +534,18 @@ describe('AccountApi', () => {
 
     describe('getPortfolioMarginProAccountInfo()', () => {
         it('should execute getPortfolioMarginProAccountInfo() successfully with required parameters only', async () => {
-            mockResponse = {
-                uniMMR: '5167.92171923',
-                accountEquity: '122607.35137903',
-                actualEquity: '142607.35137903',
-                accountMaintMargin: '23.72469206',
-                accountInitialMargin: '47.44938412',
-                totalAvailableBalance: '122,559.90199491',
-                accountStatus: 'NORMAL',
-                accountType: 'PM_1',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    uniMMR: '5167.92171923',
+                    accountEquity: '122607.35137903',
+                    actualEquity: '142607.35137903',
+                    accountMaintMargin: '23.72469206',
+                    accountInitialMargin: '47.44938412',
+                    totalAvailableBalance: '122,559.90199491',
+                    accountStatus: 'NORMAL',
+                    accountType: 'PM_1',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getPortfolioMarginProAccountInfo').mockReturnValue(
                 Promise.resolve({
@@ -559,16 +566,18 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                uniMMR: '5167.92171923',
-                accountEquity: '122607.35137903',
-                actualEquity: '142607.35137903',
-                accountMaintMargin: '23.72469206',
-                accountInitialMargin: '47.44938412',
-                totalAvailableBalance: '122,559.90199491',
-                accountStatus: 'NORMAL',
-                accountType: 'PM_1',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    uniMMR: '5167.92171923',
+                    accountEquity: '122607.35137903',
+                    actualEquity: '142607.35137903',
+                    accountMaintMargin: '23.72469206',
+                    accountInitialMargin: '47.44938412',
+                    totalAvailableBalance: '122,559.90199491',
+                    accountStatus: 'NORMAL',
+                    accountType: 'PM_1',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getPortfolioMarginProAccountInfo').mockReturnValue(
                 Promise.resolve({
@@ -606,17 +615,19 @@ describe('AccountApi', () => {
 
     describe('getPortfolioMarginProSpanAccountInfo()', () => {
         it('should execute getPortfolioMarginProSpanAccountInfo() successfully with required parameters only', async () => {
-            mockResponse = {
-                uniMMR: '5167.92171923',
-                accountEquity: '122607.35137903',
-                actualEquity: '142607.35137903',
-                accountMaintMargin: '23.72469206',
-                riskUnitMMList: [{ asset: 'BTC', uniMaintainUsd: '23.72469206' }],
-                marginMM: '0.00000000',
-                otherMM: '0.00000000',
-                accountStatus: 'NORMAL',
-                accountType: 'PM_3',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    uniMMR: '5167.92171923',
+                    accountEquity: '122607.35137903',
+                    actualEquity: '142607.35137903',
+                    accountMaintMargin: '23.72469206',
+                    riskUnitMMList: [{ asset: 'BTC', uniMaintainUsd: '23.72469206' }],
+                    marginMM: '0.00000000',
+                    otherMM: '0.00000000',
+                    accountStatus: 'NORMAL',
+                    accountType: 'PM_3',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getPortfolioMarginProSpanAccountInfo').mockReturnValue(
                 Promise.resolve({
@@ -637,17 +648,19 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                uniMMR: '5167.92171923',
-                accountEquity: '122607.35137903',
-                actualEquity: '142607.35137903',
-                accountMaintMargin: '23.72469206',
-                riskUnitMMList: [{ asset: 'BTC', uniMaintainUsd: '23.72469206' }],
-                marginMM: '0.00000000',
-                otherMM: '0.00000000',
-                accountStatus: 'NORMAL',
-                accountType: 'PM_3',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    uniMMR: '5167.92171923',
+                    accountEquity: '122607.35137903',
+                    actualEquity: '142607.35137903',
+                    accountMaintMargin: '23.72469206',
+                    riskUnitMMList: [{ asset: 'BTC', uniMaintainUsd: '23.72469206' }],
+                    marginMM: '0.00000000',
+                    otherMM: '0.00000000',
+                    accountStatus: 'NORMAL',
+                    accountType: 'PM_3',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getPortfolioMarginProSpanAccountInfo').mockReturnValue(
                 Promise.resolve({
@@ -690,7 +703,7 @@ describe('AccountApi', () => {
                 transferType: 'transferType_example',
             };
 
-            mockResponse = { asset: 'LDUSDT', amount: '0.55' };
+            mockResponse = JSONParse(JSONStringify({ asset: 'LDUSDT', amount: '0.55' }));
 
             const spy = jest
                 .spyOn(client, 'getTransferableEarnAssetBalanceForPortfolioMargin')
@@ -715,7 +728,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { asset: 'LDUSDT', amount: '0.55' };
+            mockResponse = JSONParse(JSONStringify({ asset: 'LDUSDT', amount: '0.55' }));
 
             const spy = jest
                 .spyOn(client, 'getTransferableEarnAssetBalanceForPortfolioMargin')
@@ -796,13 +809,15 @@ describe('AccountApi', () => {
                 amount: 1.0,
             };
 
-            mockResponse = {
-                fromAsset: 'USDT',
-                targetAsset: 'BFUSD',
-                fromAssetQty: 10,
-                targetAssetQty: 9.998,
-                mintRate: 0.9998,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    fromAsset: 'USDT',
+                    targetAsset: 'BFUSD',
+                    fromAssetQty: 10,
+                    targetAssetQty: 9.998,
+                    mintRate: 0.9998,
+                })
+            );
 
             const spy = jest.spyOn(client, 'mintBfusdForPortfolioMargin').mockReturnValue(
                 Promise.resolve({
@@ -826,13 +841,15 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                fromAsset: 'USDT',
-                targetAsset: 'BFUSD',
-                fromAssetQty: 10,
-                targetAssetQty: 9.998,
-                mintRate: 0.9998,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    fromAsset: 'USDT',
+                    targetAsset: 'BFUSD',
+                    fromAssetQty: 10,
+                    targetAssetQty: 9.998,
+                    mintRate: 0.9998,
+                })
+            );
 
             const spy = jest.spyOn(client, 'mintBfusdForPortfolioMargin').mockReturnValue(
                 Promise.resolve({
@@ -918,7 +935,7 @@ describe('AccountApi', () => {
 
     describe('portfolioMarginProBankruptcyLoanRepay()', () => {
         it('should execute portfolioMarginProBankruptcyLoanRepay() successfully with required parameters only', async () => {
-            mockResponse = { tranId: 58203331886213500 };
+            mockResponse = JSONParse(JSONStringify({ tranId: 58203331886213500 }));
 
             const spy = jest.spyOn(client, 'portfolioMarginProBankruptcyLoanRepay').mockReturnValue(
                 Promise.resolve({
@@ -940,7 +957,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { tranId: 58203331886213500 };
+            mockResponse = JSONParse(JSONStringify({ tranId: 58203331886213500 }));
 
             const spy = jest.spyOn(client, 'portfolioMarginProBankruptcyLoanRepay').mockReturnValue(
                 Promise.resolve({
@@ -978,7 +995,7 @@ describe('AccountApi', () => {
 
     describe('queryPortfolioMarginProBankruptcyLoanAmount()', () => {
         it('should execute queryPortfolioMarginProBankruptcyLoanAmount() successfully with required parameters only', async () => {
-            mockResponse = { asset: 'BUSD', amount: '579.45' };
+            mockResponse = JSONParse(JSONStringify({ asset: 'BUSD', amount: '579.45' }));
 
             const spy = jest
                 .spyOn(client, 'queryPortfolioMarginProBankruptcyLoanAmount')
@@ -1001,7 +1018,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { asset: 'BUSD', amount: '579.45' };
+            mockResponse = JSONParse(JSONStringify({ asset: 'BUSD', amount: '579.45' }));
 
             const spy = jest
                 .spyOn(client, 'queryPortfolioMarginProBankruptcyLoanAmount')
@@ -1041,13 +1058,15 @@ describe('AccountApi', () => {
 
     describe('queryPortfolioMarginProBankruptcyLoanRepayHistory()', () => {
         it('should execute queryPortfolioMarginProBankruptcyLoanRepayHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                total: 3,
-                rows: [
-                    { asset: 'USDT', amount: '404.80294503', repayTime: 1731336427804 },
-                    { asset: 'USDT', amount: '4620.41204574', repayTime: 1726125090016 },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 3,
+                    rows: [
+                        { asset: 'USDT', amount: '404.80294503', repayTime: 1731336427804 },
+                        { asset: 'USDT', amount: '4620.41204574', repayTime: 1726125090016 },
+                    ],
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'queryPortfolioMarginProBankruptcyLoanRepayHistory')
@@ -1074,13 +1093,15 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                total: 3,
-                rows: [
-                    { asset: 'USDT', amount: '404.80294503', repayTime: 1731336427804 },
-                    { asset: 'USDT', amount: '4620.41204574', repayTime: 1726125090016 },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 3,
+                    rows: [
+                        { asset: 'USDT', amount: '404.80294503', repayTime: 1731336427804 },
+                        { asset: 'USDT', amount: '4620.41204574', repayTime: 1726125090016 },
+                    ],
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'queryPortfolioMarginProBankruptcyLoanRepayHistory')
@@ -1120,15 +1141,17 @@ describe('AccountApi', () => {
 
     describe('queryPortfolioMarginProNegativeBalanceInterestHistory()', () => {
         it('should execute queryPortfolioMarginProNegativeBalanceInterestHistory() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    asset: 'USDT',
-                    interest: '24.4440',
-                    interestAccruedTime: 1670227200000,
-                    interestRate: '0.0001164',
-                    principal: '210000',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        asset: 'USDT',
+                        interest: '24.4440',
+                        interestAccruedTime: 1670227200000,
+                        interestRate: '0.0001164',
+                        principal: '210000',
+                    },
+                ])
+            );
 
             const spy = jest
                 .spyOn(client, 'queryPortfolioMarginProNegativeBalanceInterestHistory')
@@ -1155,15 +1178,17 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    asset: 'USDT',
-                    interest: '24.4440',
-                    interestAccruedTime: 1670227200000,
-                    interestRate: '0.0001164',
-                    principal: '210000',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        asset: 'USDT',
+                        interest: '24.4440',
+                        interestAccruedTime: 1670227200000,
+                        interestRate: '0.0001164',
+                        principal: '210000',
+                    },
+                ])
+            );
 
             const spy = jest
                 .spyOn(client, 'queryPortfolioMarginProNegativeBalanceInterestHistory')
@@ -1210,13 +1235,15 @@ describe('AccountApi', () => {
                 amount: 1.0,
             };
 
-            mockResponse = {
-                fromAsset: 'BFUSD',
-                targetAsset: 'USDT',
-                fromAssetQty: 9.99800001,
-                targetAssetQty: 9.996000409998,
-                redeemRate: 0.9998,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    fromAsset: 'BFUSD',
+                    targetAsset: 'USDT',
+                    fromAssetQty: 9.99800001,
+                    targetAssetQty: 9.996000409998,
+                    redeemRate: 0.9998,
+                })
+            );
 
             const spy = jest.spyOn(client, 'redeemBfusdForPortfolioMargin').mockReturnValue(
                 Promise.resolve({
@@ -1240,13 +1267,15 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                fromAsset: 'BFUSD',
-                targetAsset: 'USDT',
-                fromAssetQty: 9.99800001,
-                targetAssetQty: 9.996000409998,
-                redeemRate: 0.9998,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    fromAsset: 'BFUSD',
+                    targetAsset: 'USDT',
+                    fromAssetQty: 9.99800001,
+                    targetAssetQty: 9.996000409998,
+                    redeemRate: 0.9998,
+                })
+            );
 
             const spy = jest.spyOn(client, 'redeemBfusdForPortfolioMargin').mockReturnValue(
                 Promise.resolve({
@@ -1332,7 +1361,7 @@ describe('AccountApi', () => {
 
     describe('repayFuturesNegativeBalance()', () => {
         it('should execute repayFuturesNegativeBalance() successfully with required parameters only', async () => {
-            mockResponse = { msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
 
             const spy = jest.spyOn(client, 'repayFuturesNegativeBalance').mockReturnValue(
                 Promise.resolve({
@@ -1354,7 +1383,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
 
             const spy = jest.spyOn(client, 'repayFuturesNegativeBalance').mockReturnValue(
                 Promise.resolve({
@@ -1396,7 +1425,7 @@ describe('AccountApi', () => {
                 amount: 1.0,
             };
 
-            mockResponse = { msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
 
             const spy = jest.spyOn(client, 'transferLdusdtForPortfolioMargin').mockReturnValue(
                 Promise.resolve({
@@ -1420,7 +1449,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
 
             const spy = jest.spyOn(client, 'transferLdusdtForPortfolioMargin').mockReturnValue(
                 Promise.resolve({

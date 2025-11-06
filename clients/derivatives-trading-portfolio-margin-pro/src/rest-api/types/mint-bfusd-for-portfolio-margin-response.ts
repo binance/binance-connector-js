@@ -33,10 +33,10 @@ export interface MintBfusdForPortfolioMarginResponse {
     targetAsset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MintBfusdForPortfolioMarginResponse
      */
-    fromAssetQty?: number;
+    fromAssetQty?: number | bigint;
     /**
      *
      * @type {number}

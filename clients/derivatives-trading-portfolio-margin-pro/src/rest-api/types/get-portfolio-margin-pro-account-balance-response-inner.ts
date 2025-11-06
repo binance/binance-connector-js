@@ -87,10 +87,10 @@ export interface GetPortfolioMarginProAccountBalanceResponseInner {
     cmUnrealizedPNL?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetPortfolioMarginProAccountBalanceResponseInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}

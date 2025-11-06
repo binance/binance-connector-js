@@ -26,10 +26,10 @@ import type { QueryPortfolioMarginProBankruptcyLoanRepayHistoryResponseRowsInner
 export interface QueryPortfolioMarginProBankruptcyLoanRepayHistoryResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryPortfolioMarginProBankruptcyLoanRepayHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
     /**
      *
      * @type {Array<QueryPortfolioMarginProBankruptcyLoanRepayHistoryResponseRowsInner>}

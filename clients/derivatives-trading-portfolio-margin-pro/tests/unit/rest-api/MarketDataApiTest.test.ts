@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { MarketDataApi } from '../../../src/rest-api';
@@ -42,10 +43,12 @@ describe('MarketDataApi', () => {
 
     describe('getPortfolioMarginAssetLeverage()', () => {
         it('should execute getPortfolioMarginAssetLeverage() successfully with required parameters only', async () => {
-            mockResponse = [
-                { asset: 'USDC', leverage: 10 },
-                { asset: 'USDT', leverage: 10 },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { asset: 'USDC', leverage: 10 },
+                    { asset: 'USDT', leverage: 10 },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getPortfolioMarginAssetLeverage').mockReturnValue(
                 Promise.resolve({
@@ -81,10 +84,12 @@ describe('MarketDataApi', () => {
 
     describe('portfolioMarginCollateralRate()', () => {
         it('should execute portfolioMarginCollateralRate() successfully with required parameters only', async () => {
-            mockResponse = [
-                { asset: 'USDC', collateralRate: '1.0000' },
-                { asset: 'BUSD', collateralRate: '1.0000' },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { asset: 'USDC', collateralRate: '1.0000' },
+                    { asset: 'BUSD', collateralRate: '1.0000' },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'portfolioMarginCollateralRate').mockReturnValue(
                 Promise.resolve({
@@ -120,42 +125,44 @@ describe('MarketDataApi', () => {
 
     describe('portfolioMarginProTieredCollateralRate()', () => {
         it('should execute portfolioMarginProTieredCollateralRate() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    asset: 'BNB',
-                    collateralInfo: [
-                        {
-                            tierFloor: '0.0000',
-                            tierCap: '1000.0000',
-                            collateralRate: '1.0000',
-                            cum: '0.0000',
-                        },
-                        {
-                            tierFloor: '1000.0000',
-                            tierCap: '2000.0000',
-                            collateralRate: '0.9000',
-                            cum: '0.0000',
-                        },
-                    ],
-                },
-                {
-                    asset: 'USDT',
-                    collateralInfo: [
-                        {
-                            tierFloor: '0.0000',
-                            tierCap: '1000.0000',
-                            collateralRate: '1.0000',
-                            cum: '0.0000',
-                        },
-                        {
-                            tierFloor: '1000.0000',
-                            tierCap: '2000.0000',
-                            collateralRate: '0.9999',
-                            cum: '0.0000',
-                        },
-                    ],
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        asset: 'BNB',
+                        collateralInfo: [
+                            {
+                                tierFloor: '0.0000',
+                                tierCap: '1000.0000',
+                                collateralRate: '1.0000',
+                                cum: '0.0000',
+                            },
+                            {
+                                tierFloor: '1000.0000',
+                                tierCap: '2000.0000',
+                                collateralRate: '0.9000',
+                                cum: '0.0000',
+                            },
+                        ],
+                    },
+                    {
+                        asset: 'USDT',
+                        collateralInfo: [
+                            {
+                                tierFloor: '0.0000',
+                                tierCap: '1000.0000',
+                                collateralRate: '1.0000',
+                                cum: '0.0000',
+                            },
+                            {
+                                tierFloor: '1000.0000',
+                                tierCap: '2000.0000',
+                                collateralRate: '0.9999',
+                                cum: '0.0000',
+                            },
+                        ],
+                    },
+                ])
+            );
 
             const spy = jest
                 .spyOn(client, 'portfolioMarginProTieredCollateralRate')
@@ -178,42 +185,44 @@ describe('MarketDataApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    asset: 'BNB',
-                    collateralInfo: [
-                        {
-                            tierFloor: '0.0000',
-                            tierCap: '1000.0000',
-                            collateralRate: '1.0000',
-                            cum: '0.0000',
-                        },
-                        {
-                            tierFloor: '1000.0000',
-                            tierCap: '2000.0000',
-                            collateralRate: '0.9000',
-                            cum: '0.0000',
-                        },
-                    ],
-                },
-                {
-                    asset: 'USDT',
-                    collateralInfo: [
-                        {
-                            tierFloor: '0.0000',
-                            tierCap: '1000.0000',
-                            collateralRate: '1.0000',
-                            cum: '0.0000',
-                        },
-                        {
-                            tierFloor: '1000.0000',
-                            tierCap: '2000.0000',
-                            collateralRate: '0.9999',
-                            cum: '0.0000',
-                        },
-                    ],
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        asset: 'BNB',
+                        collateralInfo: [
+                            {
+                                tierFloor: '0.0000',
+                                tierCap: '1000.0000',
+                                collateralRate: '1.0000',
+                                cum: '0.0000',
+                            },
+                            {
+                                tierFloor: '1000.0000',
+                                tierCap: '2000.0000',
+                                collateralRate: '0.9000',
+                                cum: '0.0000',
+                            },
+                        ],
+                    },
+                    {
+                        asset: 'USDT',
+                        collateralInfo: [
+                            {
+                                tierFloor: '0.0000',
+                                tierCap: '1000.0000',
+                                collateralRate: '1.0000',
+                                cum: '0.0000',
+                            },
+                            {
+                                tierFloor: '1000.0000',
+                                tierCap: '2000.0000',
+                                collateralRate: '0.9999',
+                                cum: '0.0000',
+                            },
+                        ],
+                    },
+                ])
+            );
 
             const spy = jest
                 .spyOn(client, 'portfolioMarginProTieredCollateralRate')
@@ -253,9 +262,11 @@ describe('MarketDataApi', () => {
 
     describe('queryPortfolioMarginAssetIndexPrice()', () => {
         it('should execute queryPortfolioMarginAssetIndexPrice() successfully with required parameters only', async () => {
-            mockResponse = [
-                { asset: 'BTC', assetIndexPrice: '28251.9136906', time: 1683518338121 },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { asset: 'BTC', assetIndexPrice: '28251.9136906', time: 1683518338121 },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryPortfolioMarginAssetIndexPrice').mockReturnValue(
                 Promise.resolve({
@@ -276,9 +287,11 @@ describe('MarketDataApi', () => {
                 asset: 'asset_example',
             };
 
-            mockResponse = [
-                { asset: 'BTC', assetIndexPrice: '28251.9136906', time: 1683518338121 },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { asset: 'BTC', assetIndexPrice: '28251.9136906', time: 1683518338121 },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryPortfolioMarginAssetIndexPrice').mockReturnValue(
                 Promise.resolve({
