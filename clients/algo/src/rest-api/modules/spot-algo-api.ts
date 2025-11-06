@@ -38,14 +38,14 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
          * Weight: 1
          *
          * @summary Cancel Algo Order(TRADE)
-         * @param {number} algoId eg. 14511
-         * @param {number} [recvWindow]
+         * @param {number | bigint} algoId eg. 14511
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         cancelAlgoOrderSpotAlgo: async (
-            algoId: number,
-            recvWindow?: number
+            algoId: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'algoId' is not null or undefined
             assertParamExists('cancelAlgoOrderSpotAlgo', 'algoId', algoId);
@@ -76,11 +76,13 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
          * Weight: 1
          *
          * @summary Query Current Algo Open Orders(USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        queryCurrentAlgoOpenOrdersSpotAlgo: async (recvWindow?: number): Promise<RequestArgs> => {
+        queryCurrentAlgoOpenOrdersSpotAlgo: async (
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -105,22 +107,22 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
          * @summary Query Historical Algo Orders(USER_DATA)
          * @param {string} [symbol] Trading symbol eg. BTCUSDT
          * @param {string} [side] BUY or SELL
-         * @param {number} [startTime] in milliseconds  eg.1641522717552
-         * @param {number} [endTime] in milliseconds  eg.1641522526562
-         * @param {number} [page] Default is 1
-         * @param {number} [pageSize] MIN 1, MAX 100; Default 100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime] in milliseconds  eg.1641522717552
+         * @param {number | bigint} [endTime] in milliseconds  eg.1641522526562
+         * @param {number | bigint} [page] Default is 1
+         * @param {number | bigint} [pageSize] MIN 1, MAX 100; Default 100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryHistoricalAlgoOrdersSpotAlgo: async (
             symbol?: string,
             side?: string,
-            startTime?: number,
-            endTime?: number,
-            page?: number,
-            pageSize?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            page?: number | bigint,
+            pageSize?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -168,18 +170,18 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
          * Weight: 1
          *
          * @summary Query Sub Orders(USER_DATA)
-         * @param {number} algoId eg. 14511
-         * @param {number} [page] Default is 1
-         * @param {number} [pageSize] MIN 1, MAX 100; Default 100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} algoId eg. 14511
+         * @param {number | bigint} [page] Default is 1
+         * @param {number | bigint} [pageSize] MIN 1, MAX 100; Default 100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         querySubOrdersSpotAlgo: async (
-            algoId: number,
-            page?: number,
-            pageSize?: number,
-            recvWindow?: number
+            algoId: number | bigint,
+            page?: number | bigint,
+            pageSize?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'algoId' is not null or undefined
             assertParamExists('querySubOrdersSpotAlgo', 'algoId', algoId);
@@ -223,7 +225,7 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
          * @param {string} symbol Trading symbol eg. BTCUSDT
          * @param {string} side Trading side ( BUY or SELL )
          * @param {number} quantity Quantity of base asset; Maximum notional per order is 200k, 2mm or 10mm, depending on symbol. Please reduce your size if you order is above the maximum notional per order.
-         * @param {number} duration Duration for TWAP orders in seconds. [300, 86400]
+         * @param {number | bigint} duration Duration for TWAP orders in seconds. [300, 86400]
          * @param {string} [clientAlgoId] A unique id among Algo orders (length should be 32 characters)， If it is not sent, we will give default value
          * @param {number} [limitPrice] Limit price of the order; If it is not sent, will place order by market price by default
          *
@@ -233,7 +235,7 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
             symbol: string,
             side: string,
             quantity: number,
-            duration: number,
+            duration: number | bigint,
             clientAlgoId?: string,
             limitPrice?: number
         ): Promise<RequestArgs> => {
@@ -371,17 +373,17 @@ export interface SpotAlgoApiInterface {
 export interface CancelAlgoOrderSpotAlgoRequest {
     /**
      * eg. 14511
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SpotAlgoApiCancelAlgoOrderSpotAlgo
      */
-    readonly algoId: number;
+    readonly algoId: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SpotAlgoApiCancelAlgoOrderSpotAlgo
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -391,10 +393,10 @@ export interface CancelAlgoOrderSpotAlgoRequest {
 export interface QueryCurrentAlgoOpenOrdersSpotAlgoRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SpotAlgoApiQueryCurrentAlgoOpenOrdersSpotAlgo
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -418,38 +420,38 @@ export interface QueryHistoricalAlgoOrdersSpotAlgoRequest {
 
     /**
      * in milliseconds  eg.1641522717552
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SpotAlgoApiQueryHistoricalAlgoOrdersSpotAlgo
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * in milliseconds  eg.1641522526562
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SpotAlgoApiQueryHistoricalAlgoOrdersSpotAlgo
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default is 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SpotAlgoApiQueryHistoricalAlgoOrdersSpotAlgo
      */
-    readonly page?: number;
+    readonly page?: number | bigint;
 
     /**
      * MIN 1, MAX 100; Default 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SpotAlgoApiQueryHistoricalAlgoOrdersSpotAlgo
      */
-    readonly pageSize?: number;
+    readonly pageSize?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SpotAlgoApiQueryHistoricalAlgoOrdersSpotAlgo
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -459,31 +461,31 @@ export interface QueryHistoricalAlgoOrdersSpotAlgoRequest {
 export interface QuerySubOrdersSpotAlgoRequest {
     /**
      * eg. 14511
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SpotAlgoApiQuerySubOrdersSpotAlgo
      */
-    readonly algoId: number;
+    readonly algoId: number | bigint;
 
     /**
      * Default is 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SpotAlgoApiQuerySubOrdersSpotAlgo
      */
-    readonly page?: number;
+    readonly page?: number | bigint;
 
     /**
      * MIN 1, MAX 100; Default 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SpotAlgoApiQuerySubOrdersSpotAlgo
      */
-    readonly pageSize?: number;
+    readonly pageSize?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SpotAlgoApiQuerySubOrdersSpotAlgo
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -514,10 +516,10 @@ export interface TimeWeightedAveragePriceSpotAlgoRequest {
 
     /**
      * Duration for TWAP orders in seconds. [300, 86400]
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SpotAlgoApiTimeWeightedAveragePriceSpotAlgo
      */
-    readonly duration: number;
+    readonly duration: number | bigint;
 
     /**
      * A unique id among Algo orders (length should be 32 characters)， If it is not sent, we will give default value

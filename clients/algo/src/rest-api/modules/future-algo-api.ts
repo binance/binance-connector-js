@@ -42,14 +42,14 @@ const FutureAlgoApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 1
          *
          * @summary Cancel Algo Order(TRADE)
-         * @param {number} algoId eg. 14511
-         * @param {number} [recvWindow]
+         * @param {number | bigint} algoId eg. 14511
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         cancelAlgoOrderFutureAlgo: async (
-            algoId: number,
-            recvWindow?: number
+            algoId: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'algoId' is not null or undefined
             assertParamExists('cancelAlgoOrderFutureAlgo', 'algoId', algoId);
@@ -83,11 +83,13 @@ const FutureAlgoApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 1
          *
          * @summary Query Current Algo Open Orders(USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        queryCurrentAlgoOpenOrdersFutureAlgo: async (recvWindow?: number): Promise<RequestArgs> => {
+        queryCurrentAlgoOpenOrdersFutureAlgo: async (
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -115,22 +117,22 @@ const FutureAlgoApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @summary Query Historical Algo Orders(USER_DATA)
          * @param {string} [symbol] Trading symbol eg. BTCUSDT
          * @param {string} [side] BUY or SELL
-         * @param {number} [startTime] in milliseconds  eg.1641522717552
-         * @param {number} [endTime] in milliseconds  eg.1641522526562
-         * @param {number} [page] Default is 1
-         * @param {number} [pageSize] MIN 1, MAX 100; Default 100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime] in milliseconds  eg.1641522717552
+         * @param {number | bigint} [endTime] in milliseconds  eg.1641522526562
+         * @param {number | bigint} [page] Default is 1
+         * @param {number | bigint} [pageSize] MIN 1, MAX 100; Default 100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryHistoricalAlgoOrdersFutureAlgo: async (
             symbol?: string,
             side?: string,
-            startTime?: number,
-            endTime?: number,
-            page?: number,
-            pageSize?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            page?: number | bigint,
+            pageSize?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -181,18 +183,18 @@ const FutureAlgoApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 1
          *
          * @summary Query Sub Orders(USER_DATA)
-         * @param {number} algoId eg. 14511
-         * @param {number} [page] Default is 1
-         * @param {number} [pageSize] MIN 1, MAX 100; Default 100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} algoId eg. 14511
+         * @param {number | bigint} [page] Default is 1
+         * @param {number | bigint} [pageSize] MIN 1, MAX 100; Default 100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         querySubOrdersFutureAlgo: async (
-            algoId: number,
-            page?: number,
-            pageSize?: number,
-            recvWindow?: number
+            algoId: number | bigint,
+            page?: number | bigint,
+            pageSize?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'algoId' is not null or undefined
             assertParamExists('querySubOrdersFutureAlgo', 'algoId', algoId);
@@ -245,12 +247,12 @@ const FutureAlgoApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @param {string} symbol Trading symbol eg. BTCUSDT
          * @param {string} side Trading side ( BUY or SELL )
          * @param {number} quantity Quantity of base asset; Maximum notional per order is 200k, 2mm or 10mm, depending on symbol. Please reduce your size if you order is above the maximum notional per order.
-         * @param {number} duration Duration for TWAP orders in seconds. [300, 86400]
+         * @param {number | bigint} duration Duration for TWAP orders in seconds. [300, 86400]
          * @param {string} [positionSide] Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent in Hedge Mode.
          * @param {string} [clientAlgoId] A unique id among Algo orders (length should be 32 characters)， If it is not sent, we will give default value
          * @param {boolean} [reduceOnly] "true" or "false". Default "false"; Cannot be sent in Hedge Mode; Cannot be sent when you open a position
          * @param {number} [limitPrice] Limit price of the order; If it is not sent, will place order by market price by default
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -258,12 +260,12 @@ const FutureAlgoApiAxiosParamCreator = function (configuration: ConfigurationRes
             symbol: string,
             side: string,
             quantity: number,
-            duration: number,
+            duration: number | bigint,
             positionSide?: string,
             clientAlgoId?: string,
             reduceOnly?: boolean,
             limitPrice?: number,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('timeWeightedAveragePriceFutureAlgo', 'symbol', symbol);
@@ -344,7 +346,7 @@ const FutureAlgoApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @param {string} [clientAlgoId] A unique id among Algo orders (length should be 32 characters)， If it is not sent, we will give default value
          * @param {boolean} [reduceOnly] "true" or "false". Default "false"; Cannot be sent in Hedge Mode; Cannot be sent when you open a position
          * @param {number} [limitPrice] Limit price of the order; If it is not sent, will place order by market price by default
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -357,7 +359,7 @@ const FutureAlgoApiAxiosParamCreator = function (configuration: ConfigurationRes
             clientAlgoId?: string,
             reduceOnly?: boolean,
             limitPrice?: number,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('volumeParticipationFutureAlgo', 'symbol', symbol);
@@ -548,17 +550,17 @@ export interface FutureAlgoApiInterface {
 export interface CancelAlgoOrderFutureAlgoRequest {
     /**
      * eg. 14511
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FutureAlgoApiCancelAlgoOrderFutureAlgo
      */
-    readonly algoId: number;
+    readonly algoId: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FutureAlgoApiCancelAlgoOrderFutureAlgo
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -568,10 +570,10 @@ export interface CancelAlgoOrderFutureAlgoRequest {
 export interface QueryCurrentAlgoOpenOrdersFutureAlgoRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FutureAlgoApiQueryCurrentAlgoOpenOrdersFutureAlgo
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -595,38 +597,38 @@ export interface QueryHistoricalAlgoOrdersFutureAlgoRequest {
 
     /**
      * in milliseconds  eg.1641522717552
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FutureAlgoApiQueryHistoricalAlgoOrdersFutureAlgo
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * in milliseconds  eg.1641522526562
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FutureAlgoApiQueryHistoricalAlgoOrdersFutureAlgo
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default is 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FutureAlgoApiQueryHistoricalAlgoOrdersFutureAlgo
      */
-    readonly page?: number;
+    readonly page?: number | bigint;
 
     /**
      * MIN 1, MAX 100; Default 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FutureAlgoApiQueryHistoricalAlgoOrdersFutureAlgo
      */
-    readonly pageSize?: number;
+    readonly pageSize?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FutureAlgoApiQueryHistoricalAlgoOrdersFutureAlgo
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -636,31 +638,31 @@ export interface QueryHistoricalAlgoOrdersFutureAlgoRequest {
 export interface QuerySubOrdersFutureAlgoRequest {
     /**
      * eg. 14511
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FutureAlgoApiQuerySubOrdersFutureAlgo
      */
-    readonly algoId: number;
+    readonly algoId: number | bigint;
 
     /**
      * Default is 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FutureAlgoApiQuerySubOrdersFutureAlgo
      */
-    readonly page?: number;
+    readonly page?: number | bigint;
 
     /**
      * MIN 1, MAX 100; Default 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FutureAlgoApiQuerySubOrdersFutureAlgo
      */
-    readonly pageSize?: number;
+    readonly pageSize?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FutureAlgoApiQuerySubOrdersFutureAlgo
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -691,10 +693,10 @@ export interface TimeWeightedAveragePriceFutureAlgoRequest {
 
     /**
      * Duration for TWAP orders in seconds. [300, 86400]
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FutureAlgoApiTimeWeightedAveragePriceFutureAlgo
      */
-    readonly duration: number;
+    readonly duration: number | bigint;
 
     /**
      * Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent in Hedge Mode.
@@ -726,10 +728,10 @@ export interface TimeWeightedAveragePriceFutureAlgoRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FutureAlgoApiTimeWeightedAveragePriceFutureAlgo
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -795,10 +797,10 @@ export interface VolumeParticipationFutureAlgoRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FutureAlgoApiVolumeParticipationFutureAlgo
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
