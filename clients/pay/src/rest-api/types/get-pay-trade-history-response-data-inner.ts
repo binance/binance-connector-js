@@ -44,10 +44,10 @@ export interface GetPayTradeHistoryResponseDataInner {
     transactionId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetPayTradeHistoryResponseDataInner
      */
-    transactionTime?: number;
+    transactionTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -62,10 +62,10 @@ export interface GetPayTradeHistoryResponseDataInner {
     currency?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetPayTradeHistoryResponseDataInner
      */
-    walletType?: number;
+    walletType?: number | bigint;
     /**
      *
      * @type {Array<number>}

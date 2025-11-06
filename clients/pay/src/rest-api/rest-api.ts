@@ -109,6 +109,7 @@ export class RestAPI {
      *
      * @summary Get Pay Trade History
      * @param {GetPayTradeHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetPayTradeHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/pay/rest-api/Get-Pay-Trade-History Binance API Documentation}
