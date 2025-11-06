@@ -36,21 +36,21 @@ const C2CApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
          *
          * @summary Get C2C Trade History (USER_DATA)
          * @param {string} [tradeType] BUY, SELL
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [page] Default 1
-         * @param {number} [rows] default 100, max 100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [page] Default 1
+         * @param {number | bigint} [rows] default 100, max 100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getC2CTradeHistory: async (
             tradeType?: string,
-            startTime?: number,
-            endTime?: number,
-            page?: number,
-            rows?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            page?: number | bigint,
+            rows?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -130,38 +130,38 @@ export interface GetC2CTradeHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof C2CApiGetC2CTradeHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof C2CApiGetC2CTradeHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof C2CApiGetC2CTradeHistory
      */
-    readonly page?: number;
+    readonly page?: number | bigint;
 
     /**
      * default 100, max 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof C2CApiGetC2CTradeHistory
      */
-    readonly rows?: number;
+    readonly rows?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof C2CApiGetC2CTradeHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
