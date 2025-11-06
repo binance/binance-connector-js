@@ -27,10 +27,10 @@ export interface GetOnChainYieldsLockedRewardsHistoryResponseRowsInner {
     positionId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetOnChainYieldsLockedRewardsHistoryResponseRowsInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}

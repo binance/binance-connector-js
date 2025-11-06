@@ -45,10 +45,10 @@ export interface GetSolStakingQuotaDetailsResponse {
     minRedeemAmount?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSolStakingQuotaDetailsResponse
      */
-    redeemPeriod?: number;
+    redeemPeriod?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -75,10 +75,10 @@ export interface GetSolStakingQuotaDetailsResponse {
     commissionFee?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSolStakingQuotaDetailsResponse
      */
-    nextEpochTime?: number;
+    nextEpochTime?: number | bigint;
     /**
      *
      * @type {boolean}

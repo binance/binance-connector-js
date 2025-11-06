@@ -32,8 +32,8 @@ export interface GetWbethWrapHistoryResponse {
     rows?: Array<GetWbethWrapHistoryResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetWbethWrapHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

@@ -38,8 +38,8 @@ export interface GetWbethRewardsHistoryResponse {
     rows?: Array<GetWbethRewardsHistoryResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetWbethRewardsHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

@@ -21,16 +21,16 @@
 export interface GetEthRedemptionHistoryResponseRowsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetEthRedemptionHistoryResponseRowsInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetEthRedemptionHistoryResponseRowsInner
      */
-    arrivalTime?: number;
+    arrivalTime?: number | bigint;
     /**
      *
      * @type {string}

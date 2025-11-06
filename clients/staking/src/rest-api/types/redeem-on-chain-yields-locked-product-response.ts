@@ -21,10 +21,10 @@
 export interface RedeemOnChainYieldsLockedProductResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RedeemOnChainYieldsLockedProductResponse
      */
-    redeemId?: number;
+    redeemId?: number | bigint;
     /**
      *
      * @type {boolean}

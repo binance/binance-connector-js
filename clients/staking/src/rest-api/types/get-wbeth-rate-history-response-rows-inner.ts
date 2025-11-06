@@ -33,8 +33,8 @@ export interface GetWbethRateHistoryResponseRowsInner {
     exchangeRate?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetWbethRateHistoryResponseRowsInner
      */
-    time?: number;
+    time?: number | bigint;
 }

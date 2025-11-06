@@ -32,8 +32,8 @@ export interface GetOnChainYieldsLockedRedemptionRecordResponse {
     rows?: Array<GetOnChainYieldsLockedRedemptionRecordResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetOnChainYieldsLockedRedemptionRecordResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

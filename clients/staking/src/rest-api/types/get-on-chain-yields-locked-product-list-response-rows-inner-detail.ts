@@ -33,10 +33,10 @@ export interface GetOnChainYieldsLockedProductListResponseRowsInnerDetail {
     rewardAsset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetOnChainYieldsLockedProductListResponseRowsInnerDetail
      */
-    duration?: number;
+    duration?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -63,10 +63,10 @@ export interface GetOnChainYieldsLockedProductListResponseRowsInnerDetail {
     status?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetOnChainYieldsLockedProductListResponseRowsInnerDetail
      */
-    subscriptionStartTime?: number;
+    subscriptionStartTime?: number | bigint;
     /**
      *
      * @type {boolean}

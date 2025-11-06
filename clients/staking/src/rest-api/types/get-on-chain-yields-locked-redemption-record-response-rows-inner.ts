@@ -27,16 +27,16 @@ export interface GetOnChainYieldsLockedRedemptionRecordResponseRowsInner {
     positionId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetOnChainYieldsLockedRedemptionRecordResponseRowsInner
      */
-    redeemId?: number;
+    redeemId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetOnChainYieldsLockedRedemptionRecordResponseRowsInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}

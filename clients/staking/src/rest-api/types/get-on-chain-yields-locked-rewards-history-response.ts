@@ -32,8 +32,8 @@ export interface GetOnChainYieldsLockedRewardsHistoryResponse {
     rows?: Array<GetOnChainYieldsLockedRewardsHistoryResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetOnChainYieldsLockedRewardsHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

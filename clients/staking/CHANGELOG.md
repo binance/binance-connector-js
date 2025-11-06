@@ -1,5 +1,12 @@
 # Changelog
 
+## 7.0.0 - 2025-11-06
+
+### Changed (2)
+
+- Convert long numbers to `BigInt` in all API responses when precision is high.
+- Update `@binance/common` library to version `2.0.0`.
+
 ## 6.0.0 - 2025-10-30
 
 ### Changed (1)

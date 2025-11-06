@@ -45,10 +45,10 @@ export interface GetCurrentEthStakingQuotaResponse {
     minRedeemAmount?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetCurrentEthStakingQuotaResponse
      */
-    redeemPeriod?: number;
+    redeemPeriod?: number | bigint;
     /**
      *
      * @type {boolean}

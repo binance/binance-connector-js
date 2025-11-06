@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { EthStakingApi } from '../../../src/rest-api';
@@ -58,12 +59,14 @@ describe('EthStakingApi', () => {
 
     describe('ethStakingAccount()', () => {
         it('should execute ethStakingAccount() successfully with required parameters only', async () => {
-            mockResponse = {
-                holdingInETH: '1.22330928',
-                holdings: { wbethAmount: '1.10928781', bethAmount: '1.90002112' },
-                thirtyDaysProfitInETH: '0.22330928',
-                profit: { amountFromWBETH: '0.12330928', amountFromBETH: '0.1' },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    holdingInETH: '1.22330928',
+                    holdings: { wbethAmount: '1.10928781', bethAmount: '1.90002112' },
+                    thirtyDaysProfitInETH: '0.22330928',
+                    profit: { amountFromWBETH: '0.12330928', amountFromBETH: '0.1' },
+                })
+            );
 
             const spy = jest.spyOn(client, 'ethStakingAccount').mockReturnValue(
                 Promise.resolve({
@@ -84,12 +87,14 @@ describe('EthStakingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                holdingInETH: '1.22330928',
-                holdings: { wbethAmount: '1.10928781', bethAmount: '1.90002112' },
-                thirtyDaysProfitInETH: '0.22330928',
-                profit: { amountFromWBETH: '0.12330928', amountFromBETH: '0.1' },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    holdingInETH: '1.22330928',
+                    holdings: { wbethAmount: '1.10928781', bethAmount: '1.90002112' },
+                    thirtyDaysProfitInETH: '0.22330928',
+                    profit: { amountFromWBETH: '0.12330928', amountFromBETH: '0.1' },
+                })
+            );
 
             const spy = jest.spyOn(client, 'ethStakingAccount').mockReturnValue(
                 Promise.resolve({
@@ -123,17 +128,19 @@ describe('EthStakingApi', () => {
 
     describe('getCurrentEthStakingQuota()', () => {
         it('should execute getCurrentEthStakingQuota() successfully with required parameters only', async () => {
-            mockResponse = {
-                leftStakingPersonalQuota: '1000',
-                leftRedemptionPersonalQuota: '1000',
-                minStakeAmount: '0.00010000',
-                minRedeemAmount: '0.00000001',
-                redeemPeriod: 20,
-                stakeable: true,
-                redeemable: true,
-                commissionFee: '0.05000000',
-                calculating: false,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    leftStakingPersonalQuota: '1000',
+                    leftRedemptionPersonalQuota: '1000',
+                    minStakeAmount: '0.00010000',
+                    minRedeemAmount: '0.00000001',
+                    redeemPeriod: 20,
+                    stakeable: true,
+                    redeemable: true,
+                    commissionFee: '0.05000000',
+                    calculating: false,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getCurrentEthStakingQuota').mockReturnValue(
                 Promise.resolve({
@@ -154,17 +161,19 @@ describe('EthStakingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                leftStakingPersonalQuota: '1000',
-                leftRedemptionPersonalQuota: '1000',
-                minStakeAmount: '0.00010000',
-                minRedeemAmount: '0.00000001',
-                redeemPeriod: 20,
-                stakeable: true,
-                redeemable: true,
-                commissionFee: '0.05000000',
-                calculating: false,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    leftStakingPersonalQuota: '1000',
+                    leftRedemptionPersonalQuota: '1000',
+                    minStakeAmount: '0.00010000',
+                    minRedeemAmount: '0.00000001',
+                    redeemPeriod: 20,
+                    stakeable: true,
+                    redeemable: true,
+                    commissionFee: '0.05000000',
+                    calculating: false,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getCurrentEthStakingQuota').mockReturnValue(
                 Promise.resolve({
@@ -200,21 +209,23 @@ describe('EthStakingApi', () => {
 
     describe('getEthRedemptionHistory()', () => {
         it('should execute getEthRedemptionHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1575018510000,
-                        arrivalTime: 1575018510000,
-                        asset: 'WBETH',
-                        amount: '21312.23223',
-                        distributeAsset: 'ETH',
-                        distributeAmount: '21338.0699',
-                        conversionRatio: '1.00121234',
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            arrivalTime: 1575018510000,
+                            asset: 'WBETH',
+                            amount: '21312.23223',
+                            distributeAsset: 'ETH',
+                            distributeAmount: '21338.0699',
+                            conversionRatio: '1.00121234',
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getEthRedemptionHistory').mockReturnValue(
                 Promise.resolve({
@@ -239,21 +250,23 @@ describe('EthStakingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1575018510000,
-                        arrivalTime: 1575018510000,
-                        asset: 'WBETH',
-                        amount: '21312.23223',
-                        distributeAsset: 'ETH',
-                        distributeAmount: '21338.0699',
-                        conversionRatio: '1.00121234',
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            arrivalTime: 1575018510000,
+                            asset: 'WBETH',
+                            amount: '21312.23223',
+                            distributeAsset: 'ETH',
+                            distributeAmount: '21338.0699',
+                            conversionRatio: '1.00121234',
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getEthRedemptionHistory').mockReturnValue(
                 Promise.resolve({
@@ -289,20 +302,22 @@ describe('EthStakingApi', () => {
 
     describe('getEthStakingHistory()', () => {
         it('should execute getEthStakingHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1575018510000,
-                        asset: 'ETH',
-                        amount: '21312.23223',
-                        distributeAsset: 'WBETH',
-                        distributeAmount: '21286.42584',
-                        conversionRatio: '1.00121234',
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            asset: 'ETH',
+                            amount: '21312.23223',
+                            distributeAsset: 'WBETH',
+                            distributeAmount: '21286.42584',
+                            conversionRatio: '1.00121234',
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getEthStakingHistory').mockReturnValue(
                 Promise.resolve({
@@ -327,20 +342,22 @@ describe('EthStakingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1575018510000,
-                        asset: 'ETH',
-                        amount: '21312.23223',
-                        distributeAsset: 'WBETH',
-                        distributeAmount: '21286.42584',
-                        conversionRatio: '1.00121234',
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            asset: 'ETH',
+                            amount: '21312.23223',
+                            distributeAsset: 'WBETH',
+                            distributeAmount: '21286.42584',
+                            conversionRatio: '1.00121234',
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getEthStakingHistory').mockReturnValue(
                 Promise.resolve({
@@ -374,16 +391,18 @@ describe('EthStakingApi', () => {
 
     describe('getWbethRateHistory()', () => {
         it('should execute getWbethRateHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        annualPercentageRate: '0.00006408',
-                        exchangeRate: '1.00121234',
-                        time: 1577233578000,
-                    },
-                ],
-                total: '1',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            annualPercentageRate: '0.00006408',
+                            exchangeRate: '1.00121234',
+                            time: 1577233578000,
+                        },
+                    ],
+                    total: '1',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getWbethRateHistory').mockReturnValue(
                 Promise.resolve({
@@ -408,16 +427,18 @@ describe('EthStakingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        annualPercentageRate: '0.00006408',
-                        exchangeRate: '1.00121234',
-                        time: 1577233578000,
-                    },
-                ],
-                total: '1',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            annualPercentageRate: '0.00006408',
+                            exchangeRate: '1.00121234',
+                            time: 1577233578000,
+                        },
+                    ],
+                    total: '1',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getWbethRateHistory').mockReturnValue(
                 Promise.resolve({
@@ -451,19 +472,21 @@ describe('EthStakingApi', () => {
 
     describe('getWbethRewardsHistory()', () => {
         it('should execute getWbethRewardsHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                estRewardsInETH: '1.23230920',
-                rows: [
-                    {
-                        time: 1575018510000,
-                        amountInETH: '0.23223',
-                        holding: '2.3223',
-                        holdingInETH: '2.4231',
-                        annualPercentageRate: '0.5',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    estRewardsInETH: '1.23230920',
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            amountInETH: '0.23223',
+                            holding: '2.3223',
+                            holdingInETH: '2.4231',
+                            annualPercentageRate: '0.5',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getWbethRewardsHistory').mockReturnValue(
                 Promise.resolve({
@@ -488,19 +511,21 @@ describe('EthStakingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                estRewardsInETH: '1.23230920',
-                rows: [
-                    {
-                        time: 1575018510000,
-                        amountInETH: '0.23223',
-                        holding: '2.3223',
-                        holdingInETH: '2.4231',
-                        annualPercentageRate: '0.5',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    estRewardsInETH: '1.23230920',
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            amountInETH: '0.23223',
+                            holding: '2.3223',
+                            holdingInETH: '2.4231',
+                            annualPercentageRate: '0.5',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getWbethRewardsHistory').mockReturnValue(
                 Promise.resolve({
@@ -536,20 +561,22 @@ describe('EthStakingApi', () => {
 
     describe('getWbethUnwrapHistory()', () => {
         it('should execute getWbethUnwrapHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1575018510000,
-                        fromAsset: 'WBETH',
-                        fromAmount: '21312.23223',
-                        toAsset: 'BETH',
-                        toAmount: '21312.23223',
-                        exchangeRate: '1.01243253',
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            fromAsset: 'WBETH',
+                            fromAmount: '21312.23223',
+                            toAsset: 'BETH',
+                            toAmount: '21312.23223',
+                            exchangeRate: '1.01243253',
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getWbethUnwrapHistory').mockReturnValue(
                 Promise.resolve({
@@ -574,20 +601,22 @@ describe('EthStakingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1575018510000,
-                        fromAsset: 'WBETH',
-                        fromAmount: '21312.23223',
-                        toAsset: 'BETH',
-                        toAmount: '21312.23223',
-                        exchangeRate: '1.01243253',
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            fromAsset: 'WBETH',
+                            fromAmount: '21312.23223',
+                            toAsset: 'BETH',
+                            toAmount: '21312.23223',
+                            exchangeRate: '1.01243253',
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getWbethUnwrapHistory').mockReturnValue(
                 Promise.resolve({
@@ -623,20 +652,22 @@ describe('EthStakingApi', () => {
 
     describe('getWbethWrapHistory()', () => {
         it('should execute getWbethWrapHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1575018510000,
-                        fromAsset: 'BETH',
-                        fromAmount: '21312.23223',
-                        toAsset: 'WBETH',
-                        toAmount: '21312.23223',
-                        exchangeRate: '1.01243253',
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            fromAsset: 'BETH',
+                            fromAmount: '21312.23223',
+                            toAsset: 'WBETH',
+                            toAmount: '21312.23223',
+                            exchangeRate: '1.01243253',
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getWbethWrapHistory').mockReturnValue(
                 Promise.resolve({
@@ -661,20 +692,22 @@ describe('EthStakingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1575018510000,
-                        fromAsset: 'BETH',
-                        fromAmount: '21312.23223',
-                        toAsset: 'WBETH',
-                        toAmount: '21312.23223',
-                        exchangeRate: '1.01243253',
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            fromAsset: 'BETH',
+                            fromAmount: '21312.23223',
+                            toAsset: 'WBETH',
+                            toAmount: '21312.23223',
+                            exchangeRate: '1.01243253',
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getWbethWrapHistory').mockReturnValue(
                 Promise.resolve({
@@ -712,12 +745,14 @@ describe('EthStakingApi', () => {
                 amount: 1.0,
             };
 
-            mockResponse = {
-                success: true,
-                ethAmount: '0.23092091',
-                conversionRatio: '1.00121234',
-                arrivalTime: 1575018510000,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    success: true,
+                    ethAmount: '0.23092091',
+                    conversionRatio: '1.00121234',
+                    arrivalTime: 1575018510000,
+                })
+            );
 
             const spy = jest.spyOn(client, 'redeemEth').mockReturnValue(
                 Promise.resolve({
@@ -740,12 +775,14 @@ describe('EthStakingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                success: true,
-                ethAmount: '0.23092091',
-                conversionRatio: '1.00121234',
-                arrivalTime: 1575018510000,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    success: true,
+                    ethAmount: '0.23092091',
+                    conversionRatio: '1.00121234',
+                    arrivalTime: 1575018510000,
+                })
+            );
 
             const spy = jest.spyOn(client, 'redeemEth').mockReturnValue(
                 Promise.resolve({
@@ -799,11 +836,13 @@ describe('EthStakingApi', () => {
                 amount: 1.0,
             };
 
-            mockResponse = {
-                success: true,
-                wbethAmount: '0.23092091',
-                conversionRatio: '1.001212342342',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    success: true,
+                    wbethAmount: '0.23092091',
+                    conversionRatio: '1.001212342342',
+                })
+            );
 
             const spy = jest.spyOn(client, 'subscribeEthStaking').mockReturnValue(
                 Promise.resolve({
@@ -825,11 +864,13 @@ describe('EthStakingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                success: true,
-                wbethAmount: '0.23092091',
-                conversionRatio: '1.001212342342',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    success: true,
+                    wbethAmount: '0.23092091',
+                    conversionRatio: '1.001212342342',
+                })
+            );
 
             const spy = jest.spyOn(client, 'subscribeEthStaking').mockReturnValue(
                 Promise.resolve({
@@ -883,11 +924,13 @@ describe('EthStakingApi', () => {
                 amount: 1.0,
             };
 
-            mockResponse = {
-                success: true,
-                wbethAmount: '0.23092091',
-                exchangeRate: '1.001212343432',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    success: true,
+                    wbethAmount: '0.23092091',
+                    exchangeRate: '1.001212343432',
+                })
+            );
 
             const spy = jest.spyOn(client, 'wrapBeth').mockReturnValue(
                 Promise.resolve({
@@ -909,11 +952,13 @@ describe('EthStakingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                success: true,
-                wbethAmount: '0.23092091',
-                exchangeRate: '1.001212343432',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    success: true,
+                    wbethAmount: '0.23092091',
+                    exchangeRate: '1.001212343432',
+                })
+            );
 
             const spy = jest.spyOn(client, 'wrapBeth').mockReturnValue(
                 Promise.resolve({

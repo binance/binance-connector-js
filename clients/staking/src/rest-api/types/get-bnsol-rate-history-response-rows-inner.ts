@@ -44,8 +44,8 @@ export interface GetBnsolRateHistoryResponseRowsInner {
     boostRewards?: Array<GetBnsolRateHistoryResponseRowsInnerBoostRewardsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetBnsolRateHistoryResponseRowsInner
      */
-    time?: number;
+    time?: number | bigint;
 }

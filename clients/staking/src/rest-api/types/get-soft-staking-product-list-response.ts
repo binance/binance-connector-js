@@ -44,8 +44,8 @@ export interface GetSoftStakingProductListResponse {
     rows?: Array<GetSoftStakingProductListResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSoftStakingProductListResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

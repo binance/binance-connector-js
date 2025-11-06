@@ -39,8 +39,8 @@ export interface RedeemEthResponse {
     conversionRatio?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RedeemEthResponse
      */
-    arrivalTime?: number;
+    arrivalTime?: number | bigint;
 }

@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { OnChainYieldsApi } from '../../../src/rest-api';
@@ -64,7 +65,7 @@ describe('OnChainYieldsApi', () => {
                 projectId: '1',
             };
 
-            mockResponse = { leftPersonalQuota: '1000' };
+            mockResponse = JSONParse(JSONStringify({ leftPersonalQuota: '1000' }));
 
             const spy = jest
                 .spyOn(client, 'getOnChainYieldsLockedPersonalLeftQuota')
@@ -88,7 +89,7 @@ describe('OnChainYieldsApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { leftPersonalQuota: '1000' };
+            mockResponse = JSONParse(JSONStringify({ leftPersonalQuota: '1000' }));
 
             const spy = jest
                 .spyOn(client, 'getOnChainYieldsLockedPersonalLeftQuota')
@@ -144,26 +145,28 @@ describe('OnChainYieldsApi', () => {
 
     describe('getOnChainYieldsLockedProductList()', () => {
         it('should execute getOnChainYieldsLockedProductList() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        projectId: 'Solv-60d',
-                        detail: {
-                            asset: 'BTC',
-                            rewardAsset: 'SOLV',
-                            duration: 60,
-                            renewable: true,
-                            isSoldOut: true,
-                            apr: '0.039',
-                            status: 'PREHEATING',
-                            subscriptionStartTime: 1646182276000,
-                            canRedeemToFlex: true,
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            projectId: 'Solv-60d',
+                            detail: {
+                                asset: 'BTC',
+                                rewardAsset: 'SOLV',
+                                duration: 60,
+                                renewable: true,
+                                isSoldOut: true,
+                                apr: '0.039',
+                                status: 'PREHEATING',
+                                subscriptionStartTime: 1646182276000,
+                                canRedeemToFlex: true,
+                            },
+                            quota: { totalPersonalQuota: '2', minimum: '0.001' },
                         },
-                        quota: { totalPersonalQuota: '2', minimum: '0.001' },
-                    },
-                ],
-                total: 1,
-            };
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getOnChainYieldsLockedProductList').mockReturnValue(
                 Promise.resolve({
@@ -187,26 +190,28 @@ describe('OnChainYieldsApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        projectId: 'Solv-60d',
-                        detail: {
-                            asset: 'BTC',
-                            rewardAsset: 'SOLV',
-                            duration: 60,
-                            renewable: true,
-                            isSoldOut: true,
-                            apr: '0.039',
-                            status: 'PREHEATING',
-                            subscriptionStartTime: 1646182276000,
-                            canRedeemToFlex: true,
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            projectId: 'Solv-60d',
+                            detail: {
+                                asset: 'BTC',
+                                rewardAsset: 'SOLV',
+                                duration: 60,
+                                renewable: true,
+                                isSoldOut: true,
+                                apr: '0.039',
+                                status: 'PREHEATING',
+                                subscriptionStartTime: 1646182276000,
+                                canRedeemToFlex: true,
+                            },
+                            quota: { totalPersonalQuota: '2', minimum: '0.001' },
                         },
-                        quota: { totalPersonalQuota: '2', minimum: '0.001' },
-                    },
-                ],
-                total: 1,
-            };
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getOnChainYieldsLockedProductList').mockReturnValue(
                 Promise.resolve({
@@ -244,36 +249,38 @@ describe('OnChainYieldsApi', () => {
 
     describe('getOnChainYieldsLockedProductPosition()', () => {
         it('should execute getOnChainYieldsLockedProductPosition() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        positionId: '123123',
-                        projectId: 'Solv-60d',
-                        asset: 'BTC',
-                        amount: '122.09202928',
-                        purchaseTime: '1646182276000',
-                        duration: '60',
-                        accrualDays: '4',
-                        rewardAsset: 'SOLV',
-                        APY: '0.039',
-                        rewardAmt: '5.17181528',
-                        nextPay: '1.29295383',
-                        nextPayDate: '1646697600000',
-                        payPeriod: '1',
-                        rewardsPayDate: '1646697600000',
-                        rewardsEndDate: '1651449600000',
-                        deliverDate: '1651536000000',
-                        nextSubscriptionDate: '1651536000000',
-                        redeemingAmt: '232.2323',
-                        redeemTo: 'FLEXIBLE',
-                        canRedeemEarly: true,
-                        autoSubscribe: true,
-                        type: 'AUTO',
-                        status: 'HOLDING',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            positionId: '123123',
+                            projectId: 'Solv-60d',
+                            asset: 'BTC',
+                            amount: '122.09202928',
+                            purchaseTime: '1646182276000',
+                            duration: '60',
+                            accrualDays: '4',
+                            rewardAsset: 'SOLV',
+                            APY: '0.039',
+                            rewardAmt: '5.17181528',
+                            nextPay: '1.29295383',
+                            nextPayDate: '1646697600000',
+                            payPeriod: '1',
+                            rewardsPayDate: '1646697600000',
+                            rewardsEndDate: '1651449600000',
+                            deliverDate: '1651536000000',
+                            nextSubscriptionDate: '1651536000000',
+                            redeemingAmt: '232.2323',
+                            redeemTo: 'FLEXIBLE',
+                            canRedeemEarly: true,
+                            autoSubscribe: true,
+                            type: 'AUTO',
+                            status: 'HOLDING',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getOnChainYieldsLockedProductPosition').mockReturnValue(
                 Promise.resolve({
@@ -299,36 +306,38 @@ describe('OnChainYieldsApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        positionId: '123123',
-                        projectId: 'Solv-60d',
-                        asset: 'BTC',
-                        amount: '122.09202928',
-                        purchaseTime: '1646182276000',
-                        duration: '60',
-                        accrualDays: '4',
-                        rewardAsset: 'SOLV',
-                        APY: '0.039',
-                        rewardAmt: '5.17181528',
-                        nextPay: '1.29295383',
-                        nextPayDate: '1646697600000',
-                        payPeriod: '1',
-                        rewardsPayDate: '1646697600000',
-                        rewardsEndDate: '1651449600000',
-                        deliverDate: '1651536000000',
-                        nextSubscriptionDate: '1651536000000',
-                        redeemingAmt: '232.2323',
-                        redeemTo: 'FLEXIBLE',
-                        canRedeemEarly: true,
-                        autoSubscribe: true,
-                        type: 'AUTO',
-                        status: 'HOLDING',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            positionId: '123123',
+                            projectId: 'Solv-60d',
+                            asset: 'BTC',
+                            amount: '122.09202928',
+                            purchaseTime: '1646182276000',
+                            duration: '60',
+                            accrualDays: '4',
+                            rewardAsset: 'SOLV',
+                            APY: '0.039',
+                            rewardAmt: '5.17181528',
+                            nextPay: '1.29295383',
+                            nextPayDate: '1646697600000',
+                            payPeriod: '1',
+                            rewardsPayDate: '1646697600000',
+                            rewardsEndDate: '1651449600000',
+                            deliverDate: '1651536000000',
+                            nextSubscriptionDate: '1651536000000',
+                            redeemingAmt: '232.2323',
+                            redeemTo: 'FLEXIBLE',
+                            canRedeemEarly: true,
+                            autoSubscribe: true,
+                            type: 'AUTO',
+                            status: 'HOLDING',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getOnChainYieldsLockedProductPosition').mockReturnValue(
                 Promise.resolve({
@@ -366,27 +375,29 @@ describe('OnChainYieldsApi', () => {
 
     describe('getOnChainYieldsLockedRedemptionRecord()', () => {
         it('should execute getOnChainYieldsLockedRedemptionRecord() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        positionId: '123123',
-                        redeemId: 40607,
-                        time: 1575018510000,
-                        asset: 'BTC',
-                        lockPeriod: '30',
-                        amount: '21312.23223',
-                        originalAmount: '21312.23223',
-                        type: 'NORMAL',
-                        deliverDate: '1575018510000',
-                        lossAmount: '0.00001232',
-                        isComplete: true,
-                        rewardAsset: 'SOLV',
-                        rewardAmt: '5.17181528',
-                        status: 'PAID',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            positionId: '123123',
+                            redeemId: 40607,
+                            time: 1575018510000,
+                            asset: 'BTC',
+                            lockPeriod: '30',
+                            amount: '21312.23223',
+                            originalAmount: '21312.23223',
+                            type: 'NORMAL',
+                            deliverDate: '1575018510000',
+                            lossAmount: '0.00001232',
+                            isComplete: true,
+                            rewardAsset: 'SOLV',
+                            rewardAmt: '5.17181528',
+                            status: 'PAID',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'getOnChainYieldsLockedRedemptionRecord')
@@ -416,27 +427,29 @@ describe('OnChainYieldsApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        positionId: '123123',
-                        redeemId: 40607,
-                        time: 1575018510000,
-                        asset: 'BTC',
-                        lockPeriod: '30',
-                        amount: '21312.23223',
-                        originalAmount: '21312.23223',
-                        type: 'NORMAL',
-                        deliverDate: '1575018510000',
-                        lossAmount: '0.00001232',
-                        isComplete: true,
-                        rewardAsset: 'SOLV',
-                        rewardAmt: '5.17181528',
-                        status: 'PAID',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            positionId: '123123',
+                            redeemId: 40607,
+                            time: 1575018510000,
+                            asset: 'BTC',
+                            lockPeriod: '30',
+                            amount: '21312.23223',
+                            originalAmount: '21312.23223',
+                            type: 'NORMAL',
+                            deliverDate: '1575018510000',
+                            lossAmount: '0.00001232',
+                            isComplete: true,
+                            rewardAsset: 'SOLV',
+                            rewardAmt: '5.17181528',
+                            status: 'PAID',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'getOnChainYieldsLockedRedemptionRecord')
@@ -476,18 +489,20 @@ describe('OnChainYieldsApi', () => {
 
     describe('getOnChainYieldsLockedRewardsHistory()', () => {
         it('should execute getOnChainYieldsLockedRewardsHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        positionId: '123123',
-                        time: 1575018510000,
-                        asset: 'BNB',
-                        lockPeriod: '30',
-                        amount: '21312.23223',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            positionId: '123123',
+                            time: 1575018510000,
+                            asset: 'BNB',
+                            lockPeriod: '30',
+                            amount: '21312.23223',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getOnChainYieldsLockedRewardsHistory').mockReturnValue(
                 Promise.resolve({
@@ -514,18 +529,20 @@ describe('OnChainYieldsApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        positionId: '123123',
-                        time: 1575018510000,
-                        asset: 'BNB',
-                        lockPeriod: '30',
-                        amount: '21312.23223',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            positionId: '123123',
+                            time: 1575018510000,
+                            asset: 'BNB',
+                            lockPeriod: '30',
+                            amount: '21312.23223',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getOnChainYieldsLockedRewardsHistory').mockReturnValue(
                 Promise.resolve({
@@ -568,17 +585,19 @@ describe('OnChainYieldsApi', () => {
                 amount: 1.0,
             };
 
-            mockResponse = {
-                rewardAsset: 'SOLV',
-                totalRewardAmt: '5.17181528',
-                nextPay: '1.29295383',
-                nextPayDate: '1646697600000',
-                rewardsPayDate: '1646697600000',
-                valueDate: '1646697600000',
-                rewardsEndDate: '1651449600000',
-                deliverDate: '1651536000000',
-                nextSubscriptionDate: '1651536000000',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rewardAsset: 'SOLV',
+                    totalRewardAmt: '5.17181528',
+                    nextPay: '1.29295383',
+                    nextPayDate: '1646697600000',
+                    rewardsPayDate: '1646697600000',
+                    valueDate: '1646697600000',
+                    rewardsEndDate: '1651449600000',
+                    deliverDate: '1651536000000',
+                    nextSubscriptionDate: '1651536000000',
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'getOnChainYieldsLockedSubscriptionPreview')
@@ -604,17 +623,19 @@ describe('OnChainYieldsApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rewardAsset: 'SOLV',
-                totalRewardAmt: '5.17181528',
-                nextPay: '1.29295383',
-                nextPayDate: '1646697600000',
-                rewardsPayDate: '1646697600000',
-                valueDate: '1646697600000',
-                rewardsEndDate: '1651449600000',
-                deliverDate: '1651536000000',
-                nextSubscriptionDate: '1651536000000',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rewardAsset: 'SOLV',
+                    totalRewardAmt: '5.17181528',
+                    nextPay: '1.29295383',
+                    nextPayDate: '1646697600000',
+                    rewardsPayDate: '1646697600000',
+                    valueDate: '1646697600000',
+                    rewardsEndDate: '1651449600000',
+                    deliverDate: '1651536000000',
+                    nextSubscriptionDate: '1651536000000',
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'getOnChainYieldsLockedSubscriptionPreview')
@@ -685,26 +706,28 @@ describe('OnChainYieldsApi', () => {
 
     describe('getOnChainYieldsLockedSubscriptionRecord()', () => {
         it('should execute getOnChainYieldsLockedSubscriptionRecord() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        positionId: '123123',
-                        purchaseId: '26055',
-                        projectId: 'Solv-60d',
-                        clientId: 'ABC',
-                        time: 1575018510000,
-                        asset: 'BTC',
-                        amount: '21312.23223',
-                        lockPeriod: '30',
-                        type: 'AUTO',
-                        sourceAccount: 'SPOT',
-                        amtFromSpot: '30',
-                        amtFromFunding: '70',
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            positionId: '123123',
+                            purchaseId: '26055',
+                            projectId: 'Solv-60d',
+                            clientId: 'ABC',
+                            time: 1575018510000,
+                            asset: 'BTC',
+                            amount: '21312.23223',
+                            lockPeriod: '30',
+                            type: 'AUTO',
+                            sourceAccount: 'SPOT',
+                            amtFromSpot: '30',
+                            amtFromFunding: '70',
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'getOnChainYieldsLockedSubscriptionRecord')
@@ -734,26 +757,28 @@ describe('OnChainYieldsApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        positionId: '123123',
-                        purchaseId: '26055',
-                        projectId: 'Solv-60d',
-                        clientId: 'ABC',
-                        time: 1575018510000,
-                        asset: 'BTC',
-                        amount: '21312.23223',
-                        lockPeriod: '30',
-                        type: 'AUTO',
-                        sourceAccount: 'SPOT',
-                        amtFromSpot: '30',
-                        amtFromFunding: '70',
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            positionId: '123123',
+                            purchaseId: '26055',
+                            projectId: 'Solv-60d',
+                            clientId: 'ABC',
+                            time: 1575018510000,
+                            asset: 'BTC',
+                            amount: '21312.23223',
+                            lockPeriod: '30',
+                            type: 'AUTO',
+                            sourceAccount: 'SPOT',
+                            amtFromSpot: '30',
+                            amtFromFunding: '70',
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'getOnChainYieldsLockedSubscriptionRecord')
@@ -793,14 +818,16 @@ describe('OnChainYieldsApi', () => {
 
     describe('onChainYieldsAccount()', () => {
         it('should execute onChainYieldsAccount() successfully with required parameters only', async () => {
-            mockResponse = {
-                totalAmountInBTC: '0.01067982',
-                totalAmountInUSDT: '77.13289230',
-                totalFlexibleAmountInBTC: '0.00000000',
-                totalFlexibleAmountInUSDT: '0.00000000',
-                totalLockedInBTC: '0.01067982',
-                totalLockedInUSDT: '77.13289230',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    totalAmountInBTC: '0.01067982',
+                    totalAmountInUSDT: '77.13289230',
+                    totalFlexibleAmountInBTC: '0.00000000',
+                    totalFlexibleAmountInUSDT: '0.00000000',
+                    totalLockedInBTC: '0.01067982',
+                    totalLockedInUSDT: '77.13289230',
+                })
+            );
 
             const spy = jest.spyOn(client, 'onChainYieldsAccount').mockReturnValue(
                 Promise.resolve({
@@ -821,14 +848,16 @@ describe('OnChainYieldsApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                totalAmountInBTC: '0.01067982',
-                totalAmountInUSDT: '77.13289230',
-                totalFlexibleAmountInBTC: '0.00000000',
-                totalFlexibleAmountInUSDT: '0.00000000',
-                totalLockedInBTC: '0.01067982',
-                totalLockedInUSDT: '77.13289230',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    totalAmountInBTC: '0.01067982',
+                    totalAmountInUSDT: '77.13289230',
+                    totalFlexibleAmountInBTC: '0.00000000',
+                    totalFlexibleAmountInUSDT: '0.00000000',
+                    totalLockedInBTC: '0.01067982',
+                    totalLockedInUSDT: '77.13289230',
+                })
+            );
 
             const spy = jest.spyOn(client, 'onChainYieldsAccount').mockReturnValue(
                 Promise.resolve({
@@ -866,7 +895,7 @@ describe('OnChainYieldsApi', () => {
                 positionId: '1',
             };
 
-            mockResponse = { redeemId: 40607, success: true };
+            mockResponse = JSONParse(JSONStringify({ redeemId: 40607, success: true }));
 
             const spy = jest.spyOn(client, 'redeemOnChainYieldsLockedProduct').mockReturnValue(
                 Promise.resolve({
@@ -889,7 +918,7 @@ describe('OnChainYieldsApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { redeemId: 40607, success: true };
+            mockResponse = JSONParse(JSONStringify({ redeemId: 40607, success: true }));
 
             const spy = jest.spyOn(client, 'redeemOnChainYieldsLockedProduct').mockReturnValue(
                 Promise.resolve({
@@ -948,7 +977,7 @@ describe('OnChainYieldsApi', () => {
                 autoSubscribe: true,
             };
 
-            mockResponse = { success: true };
+            mockResponse = JSONParse(JSONStringify({ success: true }));
 
             const spy = jest.spyOn(client, 'setOnChainYieldsLockedAutoSubscribe').mockReturnValue(
                 Promise.resolve({
@@ -971,7 +1000,7 @@ describe('OnChainYieldsApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { success: true };
+            mockResponse = JSONParse(JSONStringify({ success: true }));
 
             const spy = jest.spyOn(client, 'setOnChainYieldsLockedAutoSubscribe').mockReturnValue(
                 Promise.resolve({
@@ -1045,7 +1074,7 @@ describe('OnChainYieldsApi', () => {
                 redeemTo: 'redeemTo_example',
             };
 
-            mockResponse = { success: true };
+            mockResponse = JSONParse(JSONStringify({ success: true }));
 
             const spy = jest
                 .spyOn(client, 'setOnChainYieldsLockedProductRedeemOption')
@@ -1070,7 +1099,7 @@ describe('OnChainYieldsApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { success: true };
+            mockResponse = JSONParse(JSONStringify({ success: true }));
 
             const spy = jest
                 .spyOn(client, 'setOnChainYieldsLockedProductRedeemOption')
@@ -1146,12 +1175,14 @@ describe('OnChainYieldsApi', () => {
                 amount: 1.0,
             };
 
-            mockResponse = {
-                purchaseId: 40607,
-                positionId: '12345',
-                amount: '75.46000000',
-                success: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    purchaseId: 40607,
+                    positionId: '12345',
+                    amount: '75.46000000',
+                    success: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'subscribeOnChainYieldsLockedProduct').mockReturnValue(
                 Promise.resolve({
@@ -1179,12 +1210,14 @@ describe('OnChainYieldsApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                purchaseId: 40607,
-                positionId: '12345',
-                amount: '75.46000000',
-                success: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    purchaseId: 40607,
+                    positionId: '12345',
+                    amount: '75.46000000',
+                    success: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'subscribeOnChainYieldsLockedProduct').mockReturnValue(
                 Promise.resolve({

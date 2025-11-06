@@ -32,8 +32,8 @@ export interface GetSolRedemptionHistoryResponse {
     rows?: Array<GetSolRedemptionHistoryResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSolRedemptionHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

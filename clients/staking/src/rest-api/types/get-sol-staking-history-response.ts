@@ -32,8 +32,8 @@ export interface GetSolStakingHistoryResponse {
     rows?: Array<GetSolStakingHistoryResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSolStakingHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

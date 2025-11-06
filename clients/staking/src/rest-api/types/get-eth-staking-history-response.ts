@@ -32,8 +32,8 @@ export interface GetEthStakingHistoryResponse {
     rows?: Array<GetEthStakingHistoryResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetEthStakingHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

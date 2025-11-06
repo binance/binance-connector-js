@@ -32,8 +32,8 @@ export interface GetOnChainYieldsLockedProductPositionResponse {
     rows?: Array<GetOnChainYieldsLockedProductPositionResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetOnChainYieldsLockedProductPositionResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

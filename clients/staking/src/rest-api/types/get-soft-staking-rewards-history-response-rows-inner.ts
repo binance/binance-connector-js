@@ -45,8 +45,8 @@ export interface GetSoftStakingRewardsHistoryResponseRowsInner {
     avgAmount?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSoftStakingRewardsHistoryResponseRowsInner
      */
-    time?: number;
+    time?: number | bigint;
 }

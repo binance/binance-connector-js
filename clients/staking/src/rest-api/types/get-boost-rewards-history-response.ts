@@ -32,8 +32,8 @@ export interface GetBoostRewardsHistoryResponse {
     rows?: Array<GetBoostRewardsHistoryResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetBoostRewardsHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

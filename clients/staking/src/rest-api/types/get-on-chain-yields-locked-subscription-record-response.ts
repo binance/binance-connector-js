@@ -32,8 +32,8 @@ export interface GetOnChainYieldsLockedSubscriptionRecordResponse {
     rows?: Array<GetOnChainYieldsLockedSubscriptionRecordResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetOnChainYieldsLockedSubscriptionRecordResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

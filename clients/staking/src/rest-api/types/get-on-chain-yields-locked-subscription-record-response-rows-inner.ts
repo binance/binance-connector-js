@@ -45,10 +45,10 @@ export interface GetOnChainYieldsLockedSubscriptionRecordResponseRowsInner {
     clientId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetOnChainYieldsLockedSubscriptionRecordResponseRowsInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}

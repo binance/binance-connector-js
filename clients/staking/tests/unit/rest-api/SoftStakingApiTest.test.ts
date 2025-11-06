@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { SoftStakingApi } from '../../../src/rest-api';
@@ -42,29 +43,31 @@ describe('SoftStakingApi', () => {
 
     describe('getSoftStakingProductList()', () => {
         it('should execute getSoftStakingProductList() successfully with required parameters only', async () => {
-            mockResponse = {
-                status: true,
-                totalRewardsUsdt: '3.09827182',
-                rows: [
-                    {
-                        asset: 'BNB',
-                        minAmount: '0.5',
-                        maxCap: '1000',
-                        apr: '0.0015',
-                        stakedAmount: '2.14',
-                        totalProfit: '0.00171234',
-                    },
-                    {
-                        asset: 'SUI',
-                        minAmount: '100',
-                        maxCap: '50000',
-                        apr: '0.01',
-                        stakedAmount: '100',
-                        totalProfit: '0.1',
-                    },
-                ],
-                total: 2,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    status: true,
+                    totalRewardsUsdt: '3.09827182',
+                    rows: [
+                        {
+                            asset: 'BNB',
+                            minAmount: '0.5',
+                            maxCap: '1000',
+                            apr: '0.0015',
+                            stakedAmount: '2.14',
+                            totalProfit: '0.00171234',
+                        },
+                        {
+                            asset: 'SUI',
+                            minAmount: '100',
+                            maxCap: '50000',
+                            apr: '0.01',
+                            stakedAmount: '100',
+                            totalProfit: '0.1',
+                        },
+                    ],
+                    total: 2,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getSoftStakingProductList').mockReturnValue(
                 Promise.resolve({
@@ -88,29 +91,31 @@ describe('SoftStakingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                status: true,
-                totalRewardsUsdt: '3.09827182',
-                rows: [
-                    {
-                        asset: 'BNB',
-                        minAmount: '0.5',
-                        maxCap: '1000',
-                        apr: '0.0015',
-                        stakedAmount: '2.14',
-                        totalProfit: '0.00171234',
-                    },
-                    {
-                        asset: 'SUI',
-                        minAmount: '100',
-                        maxCap: '50000',
-                        apr: '0.01',
-                        stakedAmount: '100',
-                        totalProfit: '0.1',
-                    },
-                ],
-                total: 2,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    status: true,
+                    totalRewardsUsdt: '3.09827182',
+                    rows: [
+                        {
+                            asset: 'BNB',
+                            minAmount: '0.5',
+                            maxCap: '1000',
+                            apr: '0.0015',
+                            stakedAmount: '2.14',
+                            totalProfit: '0.00171234',
+                        },
+                        {
+                            asset: 'SUI',
+                            minAmount: '100',
+                            maxCap: '50000',
+                            apr: '0.01',
+                            stakedAmount: '100',
+                            totalProfit: '0.1',
+                        },
+                    ],
+                    total: 2,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getSoftStakingProductList').mockReturnValue(
                 Promise.resolve({
@@ -146,25 +151,27 @@ describe('SoftStakingApi', () => {
 
     describe('getSoftStakingRewardsHistory()', () => {
         it('should execute getSoftStakingRewardsHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        asset: 'BNB',
-                        rewards: '0.00000557',
-                        rewardAsset: 'BNB',
-                        avgAmount: '2.14',
-                        time: 1754007978000,
-                    },
-                    {
-                        asset: 'SUI',
-                        rewards: '0.00274257',
-                        rewardAsset: 'SUI',
-                        avgAmount: '100',
-                        time: 1754007978000,
-                    },
-                ],
-                total: 2,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            asset: 'BNB',
+                            rewards: '0.00000557',
+                            rewardAsset: 'BNB',
+                            avgAmount: '2.14',
+                            time: 1754007978000,
+                        },
+                        {
+                            asset: 'SUI',
+                            rewards: '0.00274257',
+                            rewardAsset: 'SUI',
+                            avgAmount: '100',
+                            time: 1754007978000,
+                        },
+                    ],
+                    total: 2,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getSoftStakingRewardsHistory').mockReturnValue(
                 Promise.resolve({
@@ -190,25 +197,27 @@ describe('SoftStakingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        asset: 'BNB',
-                        rewards: '0.00000557',
-                        rewardAsset: 'BNB',
-                        avgAmount: '2.14',
-                        time: 1754007978000,
-                    },
-                    {
-                        asset: 'SUI',
-                        rewards: '0.00274257',
-                        rewardAsset: 'SUI',
-                        avgAmount: '100',
-                        time: 1754007978000,
-                    },
-                ],
-                total: 2,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            asset: 'BNB',
+                            rewards: '0.00000557',
+                            rewardAsset: 'BNB',
+                            avgAmount: '2.14',
+                            time: 1754007978000,
+                        },
+                        {
+                            asset: 'SUI',
+                            rewards: '0.00274257',
+                            rewardAsset: 'SUI',
+                            avgAmount: '100',
+                            time: 1754007978000,
+                        },
+                    ],
+                    total: 2,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getSoftStakingRewardsHistory').mockReturnValue(
                 Promise.resolve({
@@ -248,7 +257,7 @@ describe('SoftStakingApi', () => {
                 softStaking: true,
             };
 
-            mockResponse = { success: true };
+            mockResponse = JSONParse(JSONStringify({ success: true }));
 
             const spy = jest.spyOn(client, 'setSoftStaking').mockReturnValue(
                 Promise.resolve({
@@ -270,7 +279,7 @@ describe('SoftStakingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { success: true };
+            mockResponse = JSONParse(JSONStringify({ success: true }));
 
             const spy = jest.spyOn(client, 'setSoftStaking').mockReturnValue(
                 Promise.resolve({

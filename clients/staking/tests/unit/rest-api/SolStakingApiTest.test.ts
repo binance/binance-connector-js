@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { SolStakingApi } from '../../../src/rest-api';
@@ -58,7 +59,7 @@ describe('SolStakingApi', () => {
 
     describe('claimBoostRewards()', () => {
         it('should execute claimBoostRewards() successfully with required parameters only', async () => {
-            mockResponse = { success: true };
+            mockResponse = JSONParse(JSONStringify({ success: true }));
 
             const spy = jest.spyOn(client, 'claimBoostRewards').mockReturnValue(
                 Promise.resolve({
@@ -79,7 +80,7 @@ describe('SolStakingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { success: true };
+            mockResponse = JSONParse(JSONStringify({ success: true }));
 
             const spy = jest.spyOn(client, 'claimBoostRewards').mockReturnValue(
                 Promise.resolve({
@@ -113,20 +114,22 @@ describe('SolStakingApi', () => {
 
     describe('getBnsolRateHistory()', () => {
         it('should execute getBnsolRateHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        annualPercentageRate: '0.00006408',
-                        exchangeRate: '1.001212343432',
-                        boostRewards: [
-                            { boostAPR: '0.12000000', rewardsAsset: 'SOL' },
-                            { boostAPR: '0.00200000', rewardsAsset: 'BNB' },
-                        ],
-                        time: 1577233578000,
-                    },
-                ],
-                total: '1',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            annualPercentageRate: '0.00006408',
+                            exchangeRate: '1.001212343432',
+                            boostRewards: [
+                                { boostAPR: '0.12000000', rewardsAsset: 'SOL' },
+                                { boostAPR: '0.00200000', rewardsAsset: 'BNB' },
+                            ],
+                            time: 1577233578000,
+                        },
+                    ],
+                    total: '1',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getBnsolRateHistory').mockReturnValue(
                 Promise.resolve({
@@ -151,20 +154,22 @@ describe('SolStakingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        annualPercentageRate: '0.00006408',
-                        exchangeRate: '1.001212343432',
-                        boostRewards: [
-                            { boostAPR: '0.12000000', rewardsAsset: 'SOL' },
-                            { boostAPR: '0.00200000', rewardsAsset: 'BNB' },
-                        ],
-                        time: 1577233578000,
-                    },
-                ],
-                total: '1',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            annualPercentageRate: '0.00006408',
+                            exchangeRate: '1.001212343432',
+                            boostRewards: [
+                                { boostAPR: '0.12000000', rewardsAsset: 'SOL' },
+                                { boostAPR: '0.00200000', rewardsAsset: 'BNB' },
+                            ],
+                            time: 1577233578000,
+                        },
+                    ],
+                    total: '1',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getBnsolRateHistory').mockReturnValue(
                 Promise.resolve({
@@ -198,19 +203,21 @@ describe('SolStakingApi', () => {
 
     describe('getBnsolRewardsHistory()', () => {
         it('should execute getBnsolRewardsHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                estRewardsInSOL: '1.23230920',
-                rows: [
-                    {
-                        time: 1575018510000,
-                        amountInSOL: '0.23223',
-                        holding: '2.3223',
-                        holdingInSOL: '2.4231',
-                        annualPercentageRate: '0.5',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    estRewardsInSOL: '1.23230920',
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            amountInSOL: '0.23223',
+                            holding: '2.3223',
+                            holdingInSOL: '2.4231',
+                            annualPercentageRate: '0.5',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getBnsolRewardsHistory').mockReturnValue(
                 Promise.resolve({
@@ -235,19 +242,21 @@ describe('SolStakingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                estRewardsInSOL: '1.23230920',
-                rows: [
-                    {
-                        time: 1575018510000,
-                        amountInSOL: '0.23223',
-                        holding: '2.3223',
-                        holdingInSOL: '2.4231',
-                        annualPercentageRate: '0.5',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    estRewardsInSOL: '1.23230920',
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            amountInSOL: '0.23223',
+                            holding: '2.3223',
+                            holdingInSOL: '2.4231',
+                            annualPercentageRate: '0.5',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getBnsolRewardsHistory').mockReturnValue(
                 Promise.resolve({
@@ -287,18 +296,20 @@ describe('SolStakingApi', () => {
                 type: 'CLAIM',
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1729520680,
-                        token: 'SOL',
-                        amount: '1.20291028',
-                        bnsolHolding: '2.0928798',
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1729520680,
+                            token: 'SOL',
+                            amount: '1.20291028',
+                            bnsolHolding: '2.0928798',
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getBoostRewardsHistory').mockReturnValue(
                 Promise.resolve({
@@ -324,18 +335,20 @@ describe('SolStakingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1729520680,
-                        token: 'SOL',
-                        amount: '1.20291028',
-                        bnsolHolding: '2.0928798',
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1729520680,
+                            token: 'SOL',
+                            amount: '1.20291028',
+                            bnsolHolding: '2.0928798',
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getBoostRewardsHistory').mockReturnValue(
                 Promise.resolve({
@@ -387,21 +400,23 @@ describe('SolStakingApi', () => {
 
     describe('getSolRedemptionHistory()', () => {
         it('should execute getSolRedemptionHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1575018510000,
-                        arrivalTime: 1575018510000,
-                        asset: 'BNSOL',
-                        amount: '21312.23223',
-                        distributeAsset: 'SOL',
-                        distributeAmount: '21338.0699',
-                        exchangeRate: '1.00121234',
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            arrivalTime: 1575018510000,
+                            asset: 'BNSOL',
+                            amount: '21312.23223',
+                            distributeAsset: 'SOL',
+                            distributeAmount: '21338.0699',
+                            exchangeRate: '1.00121234',
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getSolRedemptionHistory').mockReturnValue(
                 Promise.resolve({
@@ -426,21 +441,23 @@ describe('SolStakingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1575018510000,
-                        arrivalTime: 1575018510000,
-                        asset: 'BNSOL',
-                        amount: '21312.23223',
-                        distributeAsset: 'SOL',
-                        distributeAmount: '21338.0699',
-                        exchangeRate: '1.00121234',
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            arrivalTime: 1575018510000,
+                            asset: 'BNSOL',
+                            amount: '21312.23223',
+                            distributeAsset: 'SOL',
+                            distributeAmount: '21338.0699',
+                            exchangeRate: '1.00121234',
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getSolRedemptionHistory').mockReturnValue(
                 Promise.resolve({
@@ -476,20 +493,22 @@ describe('SolStakingApi', () => {
 
     describe('getSolStakingHistory()', () => {
         it('should execute getSolStakingHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1575018510000,
-                        asset: 'SOL',
-                        amount: '21312.23223',
-                        distributeAsset: 'BNSOL',
-                        distributeAmount: '21286.42584',
-                        exchangeRate: '1.00121234',
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            asset: 'SOL',
+                            amount: '21312.23223',
+                            distributeAsset: 'BNSOL',
+                            distributeAmount: '21286.42584',
+                            exchangeRate: '1.00121234',
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getSolStakingHistory').mockReturnValue(
                 Promise.resolve({
@@ -514,20 +533,22 @@ describe('SolStakingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1575018510000,
-                        asset: 'SOL',
-                        amount: '21312.23223',
-                        distributeAsset: 'BNSOL',
-                        distributeAmount: '21286.42584',
-                        exchangeRate: '1.00121234',
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            asset: 'SOL',
+                            amount: '21312.23223',
+                            distributeAsset: 'BNSOL',
+                            distributeAmount: '21286.42584',
+                            exchangeRate: '1.00121234',
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getSolStakingHistory').mockReturnValue(
                 Promise.resolve({
@@ -561,19 +582,21 @@ describe('SolStakingApi', () => {
 
     describe('getSolStakingQuotaDetails()', () => {
         it('should execute getSolStakingQuotaDetails() successfully with required parameters only', async () => {
-            mockResponse = {
-                leftStakingPersonalQuota: '1000',
-                leftRedemptionPersonalQuota: '1000',
-                minStakeAmount: '0.01000000',
-                minRedeemAmount: '0.00000001',
-                redeemPeriod: 4,
-                stakeable: true,
-                redeemable: true,
-                soldOut: false,
-                commissionFee: '0.25000000',
-                nextEpochTime: 725993969475,
-                calculating: false,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    leftStakingPersonalQuota: '1000',
+                    leftRedemptionPersonalQuota: '1000',
+                    minStakeAmount: '0.01000000',
+                    minRedeemAmount: '0.00000001',
+                    redeemPeriod: 4,
+                    stakeable: true,
+                    redeemable: true,
+                    soldOut: false,
+                    commissionFee: '0.25000000',
+                    nextEpochTime: 725993969475,
+                    calculating: false,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getSolStakingQuotaDetails').mockReturnValue(
                 Promise.resolve({
@@ -594,19 +617,21 @@ describe('SolStakingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                leftStakingPersonalQuota: '1000',
-                leftRedemptionPersonalQuota: '1000',
-                minStakeAmount: '0.01000000',
-                minRedeemAmount: '0.00000001',
-                redeemPeriod: 4,
-                stakeable: true,
-                redeemable: true,
-                soldOut: false,
-                commissionFee: '0.25000000',
-                nextEpochTime: 725993969475,
-                calculating: false,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    leftStakingPersonalQuota: '1000',
+                    leftRedemptionPersonalQuota: '1000',
+                    minStakeAmount: '0.01000000',
+                    minRedeemAmount: '0.00000001',
+                    redeemPeriod: 4,
+                    stakeable: true,
+                    redeemable: true,
+                    soldOut: false,
+                    commissionFee: '0.25000000',
+                    nextEpochTime: 725993969475,
+                    calculating: false,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getSolStakingQuotaDetails').mockReturnValue(
                 Promise.resolve({
@@ -642,10 +667,12 @@ describe('SolStakingApi', () => {
 
     describe('getUnclaimedRewards()', () => {
         it('should execute getUnclaimedRewards() successfully with required parameters only', async () => {
-            mockResponse = [
-                { amount: '1.00000011', rewardsAsset: 'SOL' },
-                { amount: '2.00202321', rewardsAsset: 'BNB' },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { amount: '1.00000011', rewardsAsset: 'SOL' },
+                    { amount: '2.00202321', rewardsAsset: 'BNB' },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getUnclaimedRewards').mockReturnValue(
                 Promise.resolve({
@@ -666,10 +693,12 @@ describe('SolStakingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                { amount: '1.00000011', rewardsAsset: 'SOL' },
-                { amount: '2.00202321', rewardsAsset: 'BNB' },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { amount: '1.00000011', rewardsAsset: 'SOL' },
+                    { amount: '2.00202321', rewardsAsset: 'BNB' },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getUnclaimedRewards').mockReturnValue(
                 Promise.resolve({
@@ -707,12 +736,14 @@ describe('SolStakingApi', () => {
                 amount: 1.0,
             };
 
-            mockResponse = {
-                success: true,
-                solAmount: '0.23092091',
-                exchangeRate: '1.00121234',
-                arrivalTime: 1575018510000,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    success: true,
+                    solAmount: '0.23092091',
+                    exchangeRate: '1.00121234',
+                    arrivalTime: 1575018510000,
+                })
+            );
 
             const spy = jest.spyOn(client, 'redeemSol').mockReturnValue(
                 Promise.resolve({
@@ -734,12 +765,14 @@ describe('SolStakingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                success: true,
-                solAmount: '0.23092091',
-                exchangeRate: '1.00121234',
-                arrivalTime: 1575018510000,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    success: true,
+                    solAmount: '0.23092091',
+                    exchangeRate: '1.00121234',
+                    arrivalTime: 1575018510000,
+                })
+            );
 
             const spy = jest.spyOn(client, 'redeemSol').mockReturnValue(
                 Promise.resolve({
@@ -789,11 +822,13 @@ describe('SolStakingApi', () => {
 
     describe('solStakingAccount()', () => {
         it('should execute solStakingAccount() successfully with required parameters only', async () => {
-            mockResponse = {
-                bnsolAmount: '1.10928781',
-                holdingInSOL: '1.22330928',
-                thirtyDaysProfitInSOL: '0.22330928',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    bnsolAmount: '1.10928781',
+                    holdingInSOL: '1.22330928',
+                    thirtyDaysProfitInSOL: '0.22330928',
+                })
+            );
 
             const spy = jest.spyOn(client, 'solStakingAccount').mockReturnValue(
                 Promise.resolve({
@@ -814,11 +849,13 @@ describe('SolStakingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                bnsolAmount: '1.10928781',
-                holdingInSOL: '1.22330928',
-                thirtyDaysProfitInSOL: '0.22330928',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    bnsolAmount: '1.10928781',
+                    holdingInSOL: '1.22330928',
+                    thirtyDaysProfitInSOL: '0.22330928',
+                })
+            );
 
             const spy = jest.spyOn(client, 'solStakingAccount').mockReturnValue(
                 Promise.resolve({
@@ -856,11 +893,13 @@ describe('SolStakingApi', () => {
                 amount: 1.0,
             };
 
-            mockResponse = {
-                success: true,
-                bnsolAmount: '0.23092091',
-                exchangeRate: '1.001212342342',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    success: true,
+                    bnsolAmount: '0.23092091',
+                    exchangeRate: '1.001212342342',
+                })
+            );
 
             const spy = jest.spyOn(client, 'subscribeSolStaking').mockReturnValue(
                 Promise.resolve({
@@ -882,11 +921,13 @@ describe('SolStakingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                success: true,
-                bnsolAmount: '0.23092091',
-                exchangeRate: '1.001212342342',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    success: true,
+                    bnsolAmount: '0.23092091',
+                    exchangeRate: '1.001212342342',
+                })
+            );
 
             const spy = jest.spyOn(client, 'subscribeSolStaking').mockReturnValue(
                 Promise.resolve({

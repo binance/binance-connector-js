@@ -32,8 +32,8 @@ export interface GetSoftStakingRewardsHistoryResponse {
     rows?: Array<GetSoftStakingRewardsHistoryResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSoftStakingRewardsHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

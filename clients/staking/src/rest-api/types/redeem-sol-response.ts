@@ -39,8 +39,8 @@ export interface RedeemSolResponse {
     exchangeRate?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RedeemSolResponse
      */
-    arrivalTime?: number;
+    arrivalTime?: number | bigint;
 }

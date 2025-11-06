@@ -38,8 +38,8 @@ export interface GetBnsolRewardsHistoryResponse {
     rows?: Array<GetBnsolRewardsHistoryResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetBnsolRewardsHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
 }
