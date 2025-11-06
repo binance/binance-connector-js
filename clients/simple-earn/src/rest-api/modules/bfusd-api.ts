@@ -41,11 +41,11 @@ const BfusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 150
          *
          * @summary Get BFUSD Account (USER_DATA)
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
-        getBfusdAccount: async (recvWindow?: number): Promise<RequestArgs> => {
+        getBfusdAccount: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -68,11 +68,11 @@ const BfusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 150
          *
          * @summary Get BFUSD Quota Details (USER_DATA)
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
-        getBfusdQuotaDetails: async (recvWindow?: number): Promise<RequestArgs> => {
+        getBfusdQuotaDetails: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -100,20 +100,20 @@ const BfusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 150
          *
          * @summary Get BFUSD Rate History (USER_DATA)
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number} [size] Number of results per page. Default: 10, Max: 100
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
+         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getBfusdRateHistory: async (
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -158,20 +158,20 @@ const BfusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 150
          *
          * @summary Get BFUSD Redemption History (USER_DATA)
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number} [size] Number of results per page. Default: 10, Max: 100
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
+         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getBfusdRedemptionHistory: async (
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -216,20 +216,20 @@ const BfusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 150
          *
          * @summary Get BFUSD Rewards History (USER_DATA)
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number} [size] Number of results per page. Default: 10, Max: 100
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
+         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getBfusdRewardsHistory: async (
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -275,21 +275,21 @@ const BfusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Get BFUSD subscription history(USER_DATA)
          * @param {string} [asset] USDC or USDT
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number} [size] Number of results per page. Default: 10, Max: 100
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
+         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getBfusdSubscriptionHistory: async (
             asset?: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -337,14 +337,14 @@ const BfusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Redeem BFUSD(TRADE)
          * @param {number} amount Amount
          * @param {string} type FAST or STANDARD, defaults to STANDARD
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         redeemBfusd: async (
             amount: number,
             type: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'amount' is not null or undefined
             assertParamExists('redeemBfusd', 'amount', amount);
@@ -385,14 +385,14 @@ const BfusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Subscribe BFUSD(TRADE)
          * @param {string} asset USDT or USDC (whichever is eligible)
          * @param {number} amount Amount
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         subscribeBfusd: async (
             asset: string,
             amount: number,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
             assertParamExists('subscribeBfusd', 'asset', asset);
@@ -576,10 +576,10 @@ export interface BfusdApiInterface {
 export interface GetBfusdAccountRequest {
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BfusdApiGetBfusdAccount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -589,10 +589,10 @@ export interface GetBfusdAccountRequest {
 export interface GetBfusdQuotaDetailsRequest {
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BfusdApiGetBfusdQuotaDetails
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -602,38 +602,38 @@ export interface GetBfusdQuotaDetailsRequest {
 export interface GetBfusdRateHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BfusdApiGetBfusdRateHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BfusdApiGetBfusdRateHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Starts from 1. Default: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BfusdApiGetBfusdRateHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Number of results per page. Default: 10, Max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BfusdApiGetBfusdRateHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BfusdApiGetBfusdRateHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -643,38 +643,38 @@ export interface GetBfusdRateHistoryRequest {
 export interface GetBfusdRedemptionHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BfusdApiGetBfusdRedemptionHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BfusdApiGetBfusdRedemptionHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Starts from 1. Default: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BfusdApiGetBfusdRedemptionHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Number of results per page. Default: 10, Max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BfusdApiGetBfusdRedemptionHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BfusdApiGetBfusdRedemptionHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -684,38 +684,38 @@ export interface GetBfusdRedemptionHistoryRequest {
 export interface GetBfusdRewardsHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BfusdApiGetBfusdRewardsHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BfusdApiGetBfusdRewardsHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Starts from 1. Default: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BfusdApiGetBfusdRewardsHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Number of results per page. Default: 10, Max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BfusdApiGetBfusdRewardsHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BfusdApiGetBfusdRewardsHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -732,38 +732,38 @@ export interface GetBfusdSubscriptionHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BfusdApiGetBfusdSubscriptionHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BfusdApiGetBfusdSubscriptionHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Starts from 1. Default: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BfusdApiGetBfusdSubscriptionHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Number of results per page. Default: 10, Max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BfusdApiGetBfusdSubscriptionHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BfusdApiGetBfusdSubscriptionHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -787,10 +787,10 @@ export interface RedeemBfusdRequest {
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BfusdApiRedeemBfusd
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -814,10 +814,10 @@ export interface SubscribeBfusdRequest {
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BfusdApiSubscribeBfusd
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

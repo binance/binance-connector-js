@@ -41,11 +41,11 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 150
          *
          * @summary Get RWUSD Account (USER_DATA)
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
-        getRwusdAccount: async (recvWindow?: number): Promise<RequestArgs> => {
+        getRwusdAccount: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -68,11 +68,11 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 150
          *
          * @summary Get RWUSD Quota Details (USER_DATA)
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
-        getRwusdQuotaDetails: async (recvWindow?: number): Promise<RequestArgs> => {
+        getRwusdQuotaDetails: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -100,20 +100,20 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 150
          *
          * @summary Get RWUSD Rate History (USER_DATA)
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number} [size] Number of results per page. Default: 10, Max: 100
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
+         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getRwusdRateHistory: async (
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -158,20 +158,20 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 150
          *
          * @summary Get RWUSD Redemption History (USER_DATA)
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number} [size] Number of results per page. Default: 10, Max: 100
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
+         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getRwusdRedemptionHistory: async (
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -216,20 +216,20 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 150
          *
          * @summary Get RWUSD Rewards History (USER_DATA)
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number} [size] Number of results per page. Default: 10, Max: 100
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
+         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getRwusdRewardsHistory: async (
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -275,21 +275,21 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Get RWUSD subscription history(USER_DATA)
          * @param {string} [asset] USDC or USDT
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number} [size] Number of results per page. Default: 10, Max: 100
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
+         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getRwusdSubscriptionHistory: async (
             asset?: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -337,14 +337,14 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Redeem RWUSD(TRADE)
          * @param {number} amount Amount
          * @param {string} type FAST or STANDARD, defaults to STANDARD
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         redeemRwusd: async (
             amount: number,
             type: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'amount' is not null or undefined
             assertParamExists('redeemRwusd', 'amount', amount);
@@ -385,14 +385,14 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Subscribe RWUSD(TRADE)
          * @param {string} asset USDT or USDC (whichever is eligible)
          * @param {number} amount Amount
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         subscribeRwusd: async (
             asset: string,
             amount: number,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
             assertParamExists('subscribeRwusd', 'asset', asset);
@@ -576,10 +576,10 @@ export interface RwusdApiInterface {
 export interface GetRwusdAccountRequest {
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RwusdApiGetRwusdAccount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -589,10 +589,10 @@ export interface GetRwusdAccountRequest {
 export interface GetRwusdQuotaDetailsRequest {
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RwusdApiGetRwusdQuotaDetails
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -602,38 +602,38 @@ export interface GetRwusdQuotaDetailsRequest {
 export interface GetRwusdRateHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RwusdApiGetRwusdRateHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RwusdApiGetRwusdRateHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Starts from 1. Default: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RwusdApiGetRwusdRateHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Number of results per page. Default: 10, Max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RwusdApiGetRwusdRateHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RwusdApiGetRwusdRateHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -643,38 +643,38 @@ export interface GetRwusdRateHistoryRequest {
 export interface GetRwusdRedemptionHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RwusdApiGetRwusdRedemptionHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RwusdApiGetRwusdRedemptionHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Starts from 1. Default: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RwusdApiGetRwusdRedemptionHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Number of results per page. Default: 10, Max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RwusdApiGetRwusdRedemptionHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RwusdApiGetRwusdRedemptionHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -684,38 +684,38 @@ export interface GetRwusdRedemptionHistoryRequest {
 export interface GetRwusdRewardsHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RwusdApiGetRwusdRewardsHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RwusdApiGetRwusdRewardsHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Starts from 1. Default: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RwusdApiGetRwusdRewardsHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Number of results per page. Default: 10, Max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RwusdApiGetRwusdRewardsHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RwusdApiGetRwusdRewardsHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -732,38 +732,38 @@ export interface GetRwusdSubscriptionHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RwusdApiGetRwusdSubscriptionHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RwusdApiGetRwusdSubscriptionHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Starts from 1. Default: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RwusdApiGetRwusdSubscriptionHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Number of results per page. Default: 10, Max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RwusdApiGetRwusdSubscriptionHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RwusdApiGetRwusdSubscriptionHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -787,10 +787,10 @@ export interface RedeemRwusdRequest {
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RwusdApiRedeemRwusd
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -814,10 +814,10 @@ export interface SubscribeRwusdRequest {
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RwusdApiSubscribeRwusd
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

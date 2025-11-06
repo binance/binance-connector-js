@@ -63,21 +63,21 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          *
          * @summary Get Collateral Record(USER_DATA)
          * @param {string} [productId]
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number} [size] Number of results per page. Default: 10, Max: 100
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
+         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getCollateralRecord: async (
             productId?: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -122,13 +122,13 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          *
          * @summary Get Flexible Personal Left Quota(USER_DATA)
          * @param {string} productId
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getFlexiblePersonalLeftQuota: async (
             productId: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'productId' is not null or undefined
             assertParamExists('getFlexiblePersonalLeftQuota', 'productId', productId);
@@ -161,18 +161,18 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          * @summary Get Flexible Product Position(USER_DATA)
          * @param {string} [asset] USDC or USDT
          * @param {string} [productId]
-         * @param {number} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number} [size] Number of results per page. Default: 10, Max: 100
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
+         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getFlexibleProductPosition: async (
             asset?: string,
             productId?: string,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -220,11 +220,11 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          * @param {string} [productId]
          * @param {string} [redeemId]
          * @param {string} [asset] USDC or USDT
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number} [size] Number of results per page. Default: 10, Max: 100
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
+         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
@@ -232,11 +232,11 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             productId?: string,
             redeemId?: string,
             asset?: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -296,11 +296,11 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          * @param {string} type FAST or STANDARD, defaults to STANDARD
          * @param {string} [productId]
          * @param {string} [asset] USDC or USDT
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number} [size] Number of results per page. Default: 10, Max: 100
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
+         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
@@ -308,11 +308,11 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             type: string,
             productId?: string,
             asset?: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'type' is not null or undefined
             assertParamExists('getFlexibleRewardsHistory', 'type', type);
@@ -369,14 +369,14 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          * @summary Get Flexible Subscription Preview(USER_DATA)
          * @param {string} productId
          * @param {number} amount Amount
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getFlexibleSubscriptionPreview: async (
             productId: string,
             amount: number,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'productId' is not null or undefined
             assertParamExists('getFlexibleSubscriptionPreview', 'productId', productId);
@@ -421,11 +421,11 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          * @param {string} [productId]
          * @param {string} [purchaseId]
          * @param {string} [asset] USDC or USDT
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number} [size] Number of results per page. Default: 10, Max: 100
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
+         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
@@ -433,11 +433,11 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             productId?: string,
             purchaseId?: string,
             asset?: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -490,13 +490,13 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          *
          * @summary Get Locked Personal Left Quota(USER_DATA)
          * @param {string} projectId
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getLockedPersonalLeftQuota: async (
             projectId: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'projectId' is not null or undefined
             assertParamExists('getLockedPersonalLeftQuota', 'projectId', projectId);
@@ -528,21 +528,21 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          *
          * @summary Get Locked Product Position
          * @param {string} [asset] USDC or USDT
-         * @param {number} [positionId]
+         * @param {number | bigint} [positionId]
          * @param {string} [projectId]
-         * @param {number} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number} [size] Number of results per page. Default: 10, Max: 100
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
+         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getLockedProductPosition: async (
             asset?: string,
-            positionId?: number,
+            positionId?: number | bigint,
             projectId?: string,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -591,26 +591,26 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          * Weight: 150
          *
          * @summary Get Locked Redemption Record(USER_DATA)
-         * @param {number} [positionId]
+         * @param {number | bigint} [positionId]
          * @param {string} [redeemId]
          * @param {string} [asset] USDC or USDT
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number} [size] Number of results per page. Default: 10, Max: 100
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
+         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getLockedRedemptionRecord: async (
-            positionId?: number,
+            positionId?: number | bigint,
             redeemId?: string,
             asset?: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -667,24 +667,24 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          * Weight: 150
          *
          * @summary Get Locked Rewards History(USER_DATA)
-         * @param {number} [positionId]
+         * @param {number | bigint} [positionId]
          * @param {string} [asset] USDC or USDT
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number} [size] Number of results per page. Default: 10, Max: 100
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
+         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getLockedRewardsHistory: async (
-            positionId?: number,
+            positionId?: number | bigint,
             asset?: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -735,7 +735,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          * @param {string} projectId
          * @param {number} amount Amount
          * @param {boolean} [autoSubscribe] true or false, default true.
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
@@ -743,7 +743,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             projectId: string,
             amount: number,
             autoSubscribe?: boolean,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'projectId' is not null or undefined
             assertParamExists('getLockedSubscriptionPreview', 'projectId', projectId);
@@ -791,22 +791,22 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          * @summary Get Locked Subscription Record(USER_DATA)
          * @param {string} [purchaseId]
          * @param {string} [asset] USDC or USDT
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number} [size] Number of results per page. Default: 10, Max: 100
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
+         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getLockedSubscriptionRecord: async (
             purchaseId?: string,
             asset?: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -861,22 +861,22 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          * @summary Get Rate History(USER_DATA)
          * @param {string} productId
          * @param {string} [aprPeriod] "DAY","YEAR",default"DAY"
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number} [size] Number of results per page. Default: 10, Max: 100
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
+         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getRateHistory: async (
             productId: string,
             aprPeriod?: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'productId' is not null or undefined
             assertParamExists('getRateHistory', 'productId', productId);
@@ -928,17 +928,17 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          *
          * @summary Get Simple Earn Flexible Product List(USER_DATA)
          * @param {string} [asset] USDC or USDT
-         * @param {number} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number} [size] Number of results per page. Default: 10, Max: 100
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
+         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getSimpleEarnFlexibleProductList: async (
             asset?: string,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -977,17 +977,17 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          *
          * @summary Get Simple Earn Locked Product List(USER_DATA)
          * @param {string} [asset] USDC or USDT
-         * @param {number} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number} [size] Number of results per page. Default: 10, Max: 100
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
+         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getSimpleEarnLockedProductList: async (
             asset?: string,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -1029,7 +1029,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          * @param {boolean} [redeemAll] true or false, default to false
          * @param {number} [amount] if redeemAll is false, amount is mandatory
          * @param {string} [destAccount] `SPOT`,`FUND`, default `SPOT`
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
@@ -1038,7 +1038,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             redeemAll?: boolean,
             amount?: number,
             destAccount?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'productId' is not null or undefined
             assertParamExists('redeemFlexibleProduct', 'productId', productId);
@@ -1084,13 +1084,13 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          *
          * @summary Redeem Locked Product(TRADE)
          * @param {string} positionId
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         redeemLockedProduct: async (
             positionId: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'positionId' is not null or undefined
             assertParamExists('redeemLockedProduct', 'positionId', positionId);
@@ -1123,14 +1123,14 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          * @summary Set Flexible Auto Subscribe(USER_DATA)
          * @param {string} productId
          * @param {boolean} autoSubscribe true or false
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         setFlexibleAutoSubscribe: async (
             productId: string,
             autoSubscribe: boolean,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'productId' is not null or undefined
             assertParamExists('setFlexibleAutoSubscribe', 'productId', productId);
@@ -1169,14 +1169,14 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          * @summary Set Locked Auto Subscribe(USER_DATA)
          * @param {string} positionId
          * @param {boolean} autoSubscribe true or false
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         setLockedAutoSubscribe: async (
             positionId: string,
             autoSubscribe: boolean,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'positionId' is not null or undefined
             assertParamExists('setLockedAutoSubscribe', 'positionId', positionId);
@@ -1215,14 +1215,14 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          * @summary Set Locked Product Redeem Option(USER_DATA)
          * @param {string} positionId
          * @param {string} redeemTo `SPOT`,'FLEXIBLE'
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         setLockedProductRedeemOption: async (
             positionId: string,
             redeemTo: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'positionId' is not null or undefined
             assertParamExists('setLockedProductRedeemOption', 'positionId', positionId);
@@ -1259,11 +1259,11 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          * Weight: 150
          *
          * @summary Simple Account(USER_DATA)
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
-        simpleAccount: async (recvWindow?: number): Promise<RequestArgs> => {
+        simpleAccount: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -1292,7 +1292,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          * @param {number} amount Amount
          * @param {boolean} [autoSubscribe] true or false, default true.
          * @param {string} [sourceAccount] `SPOT`,`FUND`,`ALL`, default `SPOT`
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
@@ -1301,7 +1301,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             amount: number,
             autoSubscribe?: boolean,
             sourceAccount?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'productId' is not null or undefined
             assertParamExists('subscribeFlexibleProduct', 'productId', productId);
@@ -1353,7 +1353,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          * @param {boolean} [autoSubscribe] true or false, default true.
          * @param {string} [sourceAccount] `SPOT`,`FUND`,`ALL`, default `SPOT`
          * @param {string} [redeemTo] `SPOT`,`FLEXIBLE`, default `FLEXIBLE`
-         * @param {number} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
@@ -1363,7 +1363,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             autoSubscribe?: boolean,
             sourceAccount?: string,
             redeemTo?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'projectId' is not null or undefined
             assertParamExists('subscribeLockedProduct', 'projectId', projectId);
@@ -1816,38 +1816,38 @@ export interface GetCollateralRecordRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetCollateralRecord
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetCollateralRecord
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Starts from 1. Default: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetCollateralRecord
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Number of results per page. Default: 10, Max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetCollateralRecord
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetCollateralRecord
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1864,10 +1864,10 @@ export interface GetFlexiblePersonalLeftQuotaRequest {
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexiblePersonalLeftQuota
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1891,24 +1891,24 @@ export interface GetFlexibleProductPositionRequest {
 
     /**
      * Currently querying page. Starts from 1. Default: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleProductPosition
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Number of results per page. Default: 10, Max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleProductPosition
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleProductPosition
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1939,38 +1939,38 @@ export interface GetFlexibleRedemptionRecordRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleRedemptionRecord
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleRedemptionRecord
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Starts from 1. Default: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleRedemptionRecord
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Number of results per page. Default: 10, Max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleRedemptionRecord
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleRedemptionRecord
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2001,38 +2001,38 @@ export interface GetFlexibleRewardsHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleRewardsHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleRewardsHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Starts from 1. Default: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleRewardsHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Number of results per page. Default: 10, Max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleRewardsHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleRewardsHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2056,10 +2056,10 @@ export interface GetFlexibleSubscriptionPreviewRequest {
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleSubscriptionPreview
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2090,38 +2090,38 @@ export interface GetFlexibleSubscriptionRecordRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleSubscriptionRecord
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleSubscriptionRecord
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Starts from 1. Default: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleSubscriptionRecord
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Number of results per page. Default: 10, Max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleSubscriptionRecord
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleSubscriptionRecord
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2138,10 +2138,10 @@ export interface GetLockedPersonalLeftQuotaRequest {
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedPersonalLeftQuota
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2158,10 +2158,10 @@ export interface GetLockedProductPositionRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedProductPosition
      */
-    readonly positionId?: number;
+    readonly positionId?: number | bigint;
 
     /**
      *
@@ -2172,24 +2172,24 @@ export interface GetLockedProductPositionRequest {
 
     /**
      * Currently querying page. Starts from 1. Default: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedProductPosition
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Number of results per page. Default: 10, Max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedProductPosition
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedProductPosition
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2199,10 +2199,10 @@ export interface GetLockedProductPositionRequest {
 export interface GetLockedRedemptionRecordRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedRedemptionRecord
      */
-    readonly positionId?: number;
+    readonly positionId?: number | bigint;
 
     /**
      *
@@ -2220,38 +2220,38 @@ export interface GetLockedRedemptionRecordRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedRedemptionRecord
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedRedemptionRecord
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Starts from 1. Default: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedRedemptionRecord
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Number of results per page. Default: 10, Max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedRedemptionRecord
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedRedemptionRecord
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2261,10 +2261,10 @@ export interface GetLockedRedemptionRecordRequest {
 export interface GetLockedRewardsHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedRewardsHistory
      */
-    readonly positionId?: number;
+    readonly positionId?: number | bigint;
 
     /**
      * USDC or USDT
@@ -2275,38 +2275,38 @@ export interface GetLockedRewardsHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedRewardsHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedRewardsHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Starts from 1. Default: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedRewardsHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Number of results per page. Default: 10, Max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedRewardsHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedRewardsHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2337,10 +2337,10 @@ export interface GetLockedSubscriptionPreviewRequest {
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedSubscriptionPreview
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2364,38 +2364,38 @@ export interface GetLockedSubscriptionRecordRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedSubscriptionRecord
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedSubscriptionRecord
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Starts from 1. Default: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedSubscriptionRecord
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Number of results per page. Default: 10, Max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedSubscriptionRecord
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedSubscriptionRecord
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2419,38 +2419,38 @@ export interface GetRateHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetRateHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetRateHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Starts from 1. Default: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetRateHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Number of results per page. Default: 10, Max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetRateHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetRateHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2467,24 +2467,24 @@ export interface GetSimpleEarnFlexibleProductListRequest {
 
     /**
      * Currently querying page. Starts from 1. Default: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetSimpleEarnFlexibleProductList
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Number of results per page. Default: 10, Max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetSimpleEarnFlexibleProductList
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetSimpleEarnFlexibleProductList
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2501,24 +2501,24 @@ export interface GetSimpleEarnLockedProductListRequest {
 
     /**
      * Currently querying page. Starts from 1. Default: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetSimpleEarnLockedProductList
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Number of results per page. Default: 10, Max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetSimpleEarnLockedProductList
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiGetSimpleEarnLockedProductList
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2556,10 +2556,10 @@ export interface RedeemFlexibleProductRequest {
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiRedeemFlexibleProduct
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2576,10 +2576,10 @@ export interface RedeemLockedProductRequest {
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiRedeemLockedProduct
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2603,10 +2603,10 @@ export interface SetFlexibleAutoSubscribeRequest {
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiSetFlexibleAutoSubscribe
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2630,10 +2630,10 @@ export interface SetLockedAutoSubscribeRequest {
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiSetLockedAutoSubscribe
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2657,10 +2657,10 @@ export interface SetLockedProductRedeemOptionRequest {
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiSetLockedProductRedeemOption
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2670,10 +2670,10 @@ export interface SetLockedProductRedeemOptionRequest {
 export interface SimpleAccountRequest {
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiSimpleAccount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2711,10 +2711,10 @@ export interface SubscribeFlexibleProductRequest {
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiSubscribeFlexibleProduct
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2759,10 +2759,10 @@ export interface SubscribeLockedProductRequest {
 
     /**
      * The value cannot be greater than 60000 (ms)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FlexibleLockedApiSubscribeLockedProduct
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
