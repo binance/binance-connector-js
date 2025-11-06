@@ -21,16 +21,16 @@
 export interface QuerySubAccountAssetsResponseBalancesInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySubAccountAssetsResponseBalancesInner
      */
-    freeze?: number;
+    freeze?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySubAccountAssetsResponseBalancesInner
      */
-    withdrawing?: number;
+    withdrawing?: number | bigint;
     /**
      *
      * @type {string}
@@ -45,8 +45,8 @@ export interface QuerySubAccountAssetsResponseBalancesInner {
     free?: number;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySubAccountAssetsResponseBalancesInner
      */
-    locked?: number;
+    locked?: number | bigint;
 }

@@ -26,10 +26,10 @@ import type { GetMovePositionHistoryForSubAccountResponseFutureMovePositionOrder
 export interface GetMovePositionHistoryForSubAccountResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetMovePositionHistoryForSubAccountResponse
      */
-    total?: number;
+    total?: number | bigint;
     /**
      *
      * @type {Array<GetMovePositionHistoryForSubAccountResponseFutureMovePositionOrderVoListInner>}

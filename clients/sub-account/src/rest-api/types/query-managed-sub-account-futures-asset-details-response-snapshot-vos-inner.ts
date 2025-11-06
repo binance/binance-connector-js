@@ -32,10 +32,10 @@ export interface QueryManagedSubAccountFuturesAssetDetailsResponseSnapshotVosInn
     type?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryManagedSubAccountFuturesAssetDetailsResponseSnapshotVosInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {QueryManagedSubAccountFuturesAssetDetailsResponseSnapshotVosInnerData}

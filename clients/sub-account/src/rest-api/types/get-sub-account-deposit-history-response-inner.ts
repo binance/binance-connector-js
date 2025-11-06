@@ -45,10 +45,10 @@ export interface GetSubAccountDepositHistoryResponseInner {
     network?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSubAccountDepositHistoryResponseInner
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {string}
@@ -69,16 +69,16 @@ export interface GetSubAccountDepositHistoryResponseInner {
     txId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSubAccountDepositHistoryResponseInner
      */
-    insertTime?: number;
+    insertTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSubAccountDepositHistoryResponseInner
      */
-    transferType?: number;
+    transferType?: number | bigint;
     /**
      *
      * @type {string}
@@ -87,14 +87,14 @@ export interface GetSubAccountDepositHistoryResponseInner {
     confirmTimes?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSubAccountDepositHistoryResponseInner
      */
-    unlockConfirm?: number;
+    unlockConfirm?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSubAccountDepositHistoryResponseInner
      */
-    walletType?: number;
+    walletType?: number | bigint;
 }

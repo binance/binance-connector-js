@@ -21,10 +21,10 @@
 export interface QuerySubAccountListResponseSubAccountsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySubAccountListResponseSubAccountsInner
      */
-    subUserId?: number;
+    subUserId?: number | bigint;
     /**
      *
      * @type {string}
@@ -45,10 +45,10 @@ export interface QuerySubAccountListResponseSubAccountsInner {
     isFreeze?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySubAccountListResponseSubAccountsInner
      */
-    createTime?: number;
+    createTime?: number | bigint;
     /**
      *
      * @type {boolean}

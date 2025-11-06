@@ -69,8 +69,8 @@ export interface GetMovePositionHistoryForSubAccountResponseFutureMovePositionOr
     side?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetMovePositionHistoryForSubAccountResponseFutureMovePositionOrderVoListInner
      */
-    timeStamp?: number;
+    timeStamp?: number | bigint;
 }

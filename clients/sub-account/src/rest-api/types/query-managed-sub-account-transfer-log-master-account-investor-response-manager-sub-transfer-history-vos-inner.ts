@@ -57,16 +57,16 @@ export interface QueryManagedSubAccountTransferLogMasterAccountInvestorResponseM
     amount?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryManagedSubAccountTransferLogMasterAccountInvestorResponseManagerSubTransferHistoryVosInner
      */
-    scheduledData?: number;
+    scheduledData?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryManagedSubAccountTransferLogMasterAccountInvestorResponseManagerSubTransferHistoryVosInner
      */
-    createTime?: number;
+    createTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -75,8 +75,8 @@ export interface QueryManagedSubAccountTransferLogMasterAccountInvestorResponseM
     status?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryManagedSubAccountTransferLogMasterAccountInvestorResponseManagerSubTransferHistoryVosInner
      */
-    tranId?: number;
+    tranId?: number | bigint;
 }

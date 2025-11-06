@@ -27,16 +27,16 @@ export interface QueryManagedSubAccountFuturesAssetDetailsResponseSnapshotVosInn
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryManagedSubAccountFuturesAssetDetailsResponseSnapshotVosInnerDataPositionInner
      */
-    entryPrice?: number;
+    entryPrice?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryManagedSubAccountFuturesAssetDetailsResponseSnapshotVosInnerDataPositionInner
      */
-    markPrice?: number;
+    markPrice?: number | bigint;
     /**
      *
      * @type {number}

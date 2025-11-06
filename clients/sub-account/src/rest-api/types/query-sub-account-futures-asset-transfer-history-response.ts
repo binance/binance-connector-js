@@ -32,10 +32,10 @@ export interface QuerySubAccountFuturesAssetTransferHistoryResponse {
     success?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySubAccountFuturesAssetTransferHistoryResponse
      */
-    futuresType?: number;
+    futuresType?: number | bigint;
     /**
      *
      * @type {Array<QuerySubAccountFuturesAssetTransferHistoryResponseTransfersInner>}

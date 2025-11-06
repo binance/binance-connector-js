@@ -33,10 +33,10 @@ export interface AddIpRestrictionForSubAccountApiKeyResponse {
     ipList?: Array<string>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AddIpRestrictionForSubAccountApiKeyResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}

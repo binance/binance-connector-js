@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { AccountManagementApi } from '../../../src/rest-api';
@@ -56,7 +57,9 @@ describe('AccountManagementApi', () => {
                 subAccountString: 'subAccountString_example',
             };
 
-            mockResponse = { email: 'addsdd_virtual@aasaixwqnoemail.com' };
+            mockResponse = JSONParse(
+                JSONStringify({ email: 'addsdd_virtual@aasaixwqnoemail.com' })
+            );
 
             const spy = jest.spyOn(client, 'createAVirtualSubAccount').mockReturnValue(
                 Promise.resolve({
@@ -78,7 +81,9 @@ describe('AccountManagementApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { email: 'addsdd_virtual@aasaixwqnoemail.com' };
+            mockResponse = JSONParse(
+                JSONStringify({ email: 'addsdd_virtual@aasaixwqnoemail.com' })
+            );
 
             const spy = jest.spyOn(client, 'createAVirtualSubAccount').mockReturnValue(
                 Promise.resolve({
@@ -134,7 +139,9 @@ describe('AccountManagementApi', () => {
                 email: 'sub-account-email@email.com',
             };
 
-            mockResponse = { email: '123@test.com', isFuturesEnabled: true };
+            mockResponse = JSONParse(
+                JSONStringify({ email: '123@test.com', isFuturesEnabled: true })
+            );
 
             const spy = jest.spyOn(client, 'enableFuturesForSubAccount').mockReturnValue(
                 Promise.resolve({
@@ -156,7 +163,9 @@ describe('AccountManagementApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { email: '123@test.com', isFuturesEnabled: true };
+            mockResponse = JSONParse(
+                JSONStringify({ email: '123@test.com', isFuturesEnabled: true })
+            );
 
             const spy = jest.spyOn(client, 'enableFuturesForSubAccount').mockReturnValue(
                 Promise.resolve({
@@ -214,7 +223,9 @@ describe('AccountManagementApi', () => {
                 email: 'sub-account-email@email.com',
             };
 
-            mockResponse = { email: '123@test.com', isEOptionsEnabled: true };
+            mockResponse = JSONParse(
+                JSONStringify({ email: '123@test.com', isEOptionsEnabled: true })
+            );
 
             const spy = jest.spyOn(client, 'enableOptionsForSubAccount').mockReturnValue(
                 Promise.resolve({
@@ -236,7 +247,9 @@ describe('AccountManagementApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { email: '123@test.com', isEOptionsEnabled: true };
+            mockResponse = JSONParse(
+                JSONStringify({ email: '123@test.com', isEOptionsEnabled: true })
+            );
 
             const spy = jest.spyOn(client, 'enableOptionsForSubAccount').mockReturnValue(
                 Promise.resolve({
@@ -294,18 +307,20 @@ describe('AccountManagementApi', () => {
                 email: 'sub-account-email@email.com',
             };
 
-            mockResponse = [
-                {
-                    entryPrice: '9975.12000',
-                    leverage: '50',
-                    maxNotional: '1000000',
-                    liquidationPrice: '7963.54',
-                    markPrice: '9973.50770517',
-                    positionAmount: '0.010',
-                    symbol: 'BTCUSDT',
-                    unrealizedProfit: '-0.01612295',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        entryPrice: '9975.12000',
+                        leverage: '50',
+                        maxNotional: '1000000',
+                        liquidationPrice: '7963.54',
+                        markPrice: '9973.50770517',
+                        positionAmount: '0.010',
+                        symbol: 'BTCUSDT',
+                        unrealizedProfit: '-0.01612295',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getFuturesPositionRiskOfSubAccount').mockReturnValue(
                 Promise.resolve({
@@ -327,18 +342,20 @@ describe('AccountManagementApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    entryPrice: '9975.12000',
-                    leverage: '50',
-                    maxNotional: '1000000',
-                    liquidationPrice: '7963.54',
-                    markPrice: '9973.50770517',
-                    positionAmount: '0.010',
-                    symbol: 'BTCUSDT',
-                    unrealizedProfit: '-0.01612295',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        entryPrice: '9975.12000',
+                        leverage: '50',
+                        maxNotional: '1000000',
+                        liquidationPrice: '7963.54',
+                        markPrice: '9973.50770517',
+                        positionAmount: '0.010',
+                        symbol: 'BTCUSDT',
+                        unrealizedProfit: '-0.01612295',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getFuturesPositionRiskOfSubAccount').mockReturnValue(
                 Promise.resolve({
@@ -397,35 +414,37 @@ describe('AccountManagementApi', () => {
                 futuresType: 789,
             };
 
-            mockResponse = {
-                futurePositionRiskVos: [
-                    {
-                        entryPrice: '9975.12000',
-                        leverage: '50',
-                        maxNotional: '1000000',
-                        liquidationPrice: '7963.54',
-                        markPrice: '9973.50770517',
-                        positionAmount: '0.010',
-                        symbol: 'BTCUSDT',
-                        unrealizedProfit: '-0.01612295',
-                    },
-                ],
-                deliveryPositionRiskVos: [
-                    {
-                        entryPrice: '9975.12000',
-                        markPrice: '9973.50770517',
-                        leverage: '20',
-                        isolated: 'false',
-                        isolatedWallet: '9973.50770517',
-                        isolatedMargin: '0.00000000',
-                        isAutoAddMargin: 'false',
-                        positionSide: 'BOTH',
-                        positionAmount: '1.230',
-                        symbol: 'BTCUSD_201225',
-                        unrealizedProfit: '-0.01612295',
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    futurePositionRiskVos: [
+                        {
+                            entryPrice: '9975.12000',
+                            leverage: '50',
+                            maxNotional: '1000000',
+                            liquidationPrice: '7963.54',
+                            markPrice: '9973.50770517',
+                            positionAmount: '0.010',
+                            symbol: 'BTCUSDT',
+                            unrealizedProfit: '-0.01612295',
+                        },
+                    ],
+                    deliveryPositionRiskVos: [
+                        {
+                            entryPrice: '9975.12000',
+                            markPrice: '9973.50770517',
+                            leverage: '20',
+                            isolated: 'false',
+                            isolatedWallet: '9973.50770517',
+                            isolatedMargin: '0.00000000',
+                            isAutoAddMargin: 'false',
+                            positionSide: 'BOTH',
+                            positionAmount: '1.230',
+                            symbol: 'BTCUSD_201225',
+                            unrealizedProfit: '-0.01612295',
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFuturesPositionRiskOfSubAccountV2').mockReturnValue(
                 Promise.resolve({
@@ -448,35 +467,37 @@ describe('AccountManagementApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                futurePositionRiskVos: [
-                    {
-                        entryPrice: '9975.12000',
-                        leverage: '50',
-                        maxNotional: '1000000',
-                        liquidationPrice: '7963.54',
-                        markPrice: '9973.50770517',
-                        positionAmount: '0.010',
-                        symbol: 'BTCUSDT',
-                        unrealizedProfit: '-0.01612295',
-                    },
-                ],
-                deliveryPositionRiskVos: [
-                    {
-                        entryPrice: '9975.12000',
-                        markPrice: '9973.50770517',
-                        leverage: '20',
-                        isolated: 'false',
-                        isolatedWallet: '9973.50770517',
-                        isolatedMargin: '0.00000000',
-                        isAutoAddMargin: 'false',
-                        positionSide: 'BOTH',
-                        positionAmount: '1.230',
-                        symbol: 'BTCUSD_201225',
-                        unrealizedProfit: '-0.01612295',
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    futurePositionRiskVos: [
+                        {
+                            entryPrice: '9975.12000',
+                            leverage: '50',
+                            maxNotional: '1000000',
+                            liquidationPrice: '7963.54',
+                            markPrice: '9973.50770517',
+                            positionAmount: '0.010',
+                            symbol: 'BTCUSDT',
+                            unrealizedProfit: '-0.01612295',
+                        },
+                    ],
+                    deliveryPositionRiskVos: [
+                        {
+                            entryPrice: '9975.12000',
+                            markPrice: '9973.50770517',
+                            leverage: '20',
+                            isolated: 'false',
+                            isolatedWallet: '9973.50770517',
+                            isolatedMargin: '0.00000000',
+                            isAutoAddMargin: 'false',
+                            positionSide: 'BOTH',
+                            positionAmount: '1.230',
+                            symbol: 'BTCUSD_201225',
+                            unrealizedProfit: '-0.01612295',
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFuturesPositionRiskOfSubAccountV2').mockReturnValue(
                 Promise.resolve({
@@ -545,17 +566,19 @@ describe('AccountManagementApi', () => {
 
     describe('getSubAccountsStatusOnMarginOrFutures()', () => {
         it('should execute getSubAccountsStatusOnMarginOrFutures() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    email: '123@test.com',
-                    isSubUserEnabled: true,
-                    isUserActive: true,
-                    insertTime: 1570791523523,
-                    isMarginEnabled: true,
-                    isFutureEnabled: true,
-                    mobile: 1570791523523,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        email: '123@test.com',
+                        isSubUserEnabled: true,
+                        isUserActive: true,
+                        insertTime: 1570791523523,
+                        isMarginEnabled: true,
+                        isFutureEnabled: true,
+                        mobile: 1570791523523,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getSubAccountsStatusOnMarginOrFutures').mockReturnValue(
                 Promise.resolve({
@@ -577,17 +600,19 @@ describe('AccountManagementApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    email: '123@test.com',
-                    isSubUserEnabled: true,
-                    isUserActive: true,
-                    insertTime: 1570791523523,
-                    isMarginEnabled: true,
-                    isFutureEnabled: true,
-                    mobile: 1570791523523,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        email: '123@test.com',
+                        isSubUserEnabled: true,
+                        isUserActive: true,
+                        insertTime: 1570791523523,
+                        isMarginEnabled: true,
+                        isFutureEnabled: true,
+                        mobile: 1570791523523,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getSubAccountsStatusOnMarginOrFutures').mockReturnValue(
                 Promise.resolve({
@@ -625,28 +650,30 @@ describe('AccountManagementApi', () => {
 
     describe('querySubAccountList()', () => {
         it('should execute querySubAccountList() successfully with required parameters only', async () => {
-            mockResponse = {
-                subAccounts: [
-                    {
-                        subUserId: 123456,
-                        email: 'testsub@gmail.com',
-                        remark: 'remark',
-                        isFreeze: false,
-                        createTime: 1544433328000,
-                        isManagedSubAccount: false,
-                        isAssetManagementSubAccount: false,
-                    },
-                    {
-                        subUserId: 1234567,
-                        email: 'virtual@oxebmvfonoemail.com',
-                        remark: 'remarks',
-                        isFreeze: false,
-                        createTime: 1544433328000,
-                        isManagedSubAccount: false,
-                        isAssetManagementSubAccount: false,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    subAccounts: [
+                        {
+                            subUserId: 123456,
+                            email: 'testsub@gmail.com',
+                            remark: 'remark',
+                            isFreeze: false,
+                            createTime: 1544433328000,
+                            isManagedSubAccount: false,
+                            isAssetManagementSubAccount: false,
+                        },
+                        {
+                            subUserId: 1234567,
+                            email: 'virtual@oxebmvfonoemail.com',
+                            remark: 'remarks',
+                            isFreeze: false,
+                            createTime: 1544433328000,
+                            isManagedSubAccount: false,
+                            isAssetManagementSubAccount: false,
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'querySubAccountList').mockReturnValue(
                 Promise.resolve({
@@ -671,28 +698,30 @@ describe('AccountManagementApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                subAccounts: [
-                    {
-                        subUserId: 123456,
-                        email: 'testsub@gmail.com',
-                        remark: 'remark',
-                        isFreeze: false,
-                        createTime: 1544433328000,
-                        isManagedSubAccount: false,
-                        isAssetManagementSubAccount: false,
-                    },
-                    {
-                        subUserId: 1234567,
-                        email: 'virtual@oxebmvfonoemail.com',
-                        remark: 'remarks',
-                        isFreeze: false,
-                        createTime: 1544433328000,
-                        isManagedSubAccount: false,
-                        isAssetManagementSubAccount: false,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    subAccounts: [
+                        {
+                            subUserId: 123456,
+                            email: 'testsub@gmail.com',
+                            remark: 'remark',
+                            isFreeze: false,
+                            createTime: 1544433328000,
+                            isManagedSubAccount: false,
+                            isAssetManagementSubAccount: false,
+                        },
+                        {
+                            subUserId: 1234567,
+                            email: 'virtual@oxebmvfonoemail.com',
+                            remark: 'remarks',
+                            isFreeze: false,
+                            createTime: 1544433328000,
+                            isManagedSubAccount: false,
+                            isAssetManagementSubAccount: false,
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'querySubAccountList').mockReturnValue(
                 Promise.resolve({
@@ -726,46 +755,48 @@ describe('AccountManagementApi', () => {
 
     describe('querySubAccountTransactionStatistics()', () => {
         it('should execute querySubAccountTransactionStatistics() successfully with required parameters only', async () => {
-            mockResponse = {
-                recent30BtcTotal: '0',
-                recent30BtcFuturesTotal: '0',
-                recent30BtcMarginTotal: '0',
-                recent30BusdTotal: '0',
-                recent30BusdFuturesTotal: '0',
-                recent30BusdMarginTotal: '0',
-                tradeInfoVos: [
-                    {
-                        userId: 1000138138384,
-                        btc: 0,
-                        btcFutures: 0,
-                        btcMargin: 0,
-                        busd: 0,
-                        busdFutures: 0,
-                        busdMargin: 0,
-                        date: 1676851200000,
-                    },
-                    {
-                        userId: 1000138138384,
-                        btc: 0,
-                        btcFutures: 0,
-                        btcMargin: 0,
-                        busd: 0,
-                        busdFutures: 0,
-                        busdMargin: 0,
-                        date: 1677110400000,
-                    },
-                    {
-                        userId: 1000138138384,
-                        btc: 0,
-                        btcFutures: 0,
-                        btcMargin: 0,
-                        busd: 0,
-                        busdFutures: 0,
-                        busdMargin: 0,
-                        date: 1677369600000,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    recent30BtcTotal: '0',
+                    recent30BtcFuturesTotal: '0',
+                    recent30BtcMarginTotal: '0',
+                    recent30BusdTotal: '0',
+                    recent30BusdFuturesTotal: '0',
+                    recent30BusdMarginTotal: '0',
+                    tradeInfoVos: [
+                        {
+                            userId: 1000138138384,
+                            btc: 0,
+                            btcFutures: 0,
+                            btcMargin: 0,
+                            busd: 0,
+                            busdFutures: 0,
+                            busdMargin: 0,
+                            date: 1676851200000,
+                        },
+                        {
+                            userId: 1000138138384,
+                            btc: 0,
+                            btcFutures: 0,
+                            btcMargin: 0,
+                            busd: 0,
+                            busdFutures: 0,
+                            busdMargin: 0,
+                            date: 1677110400000,
+                        },
+                        {
+                            userId: 1000138138384,
+                            btc: 0,
+                            btcFutures: 0,
+                            btcMargin: 0,
+                            busd: 0,
+                            busdFutures: 0,
+                            busdMargin: 0,
+                            date: 1677369600000,
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'querySubAccountTransactionStatistics').mockReturnValue(
                 Promise.resolve({
@@ -787,46 +818,48 @@ describe('AccountManagementApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                recent30BtcTotal: '0',
-                recent30BtcFuturesTotal: '0',
-                recent30BtcMarginTotal: '0',
-                recent30BusdTotal: '0',
-                recent30BusdFuturesTotal: '0',
-                recent30BusdMarginTotal: '0',
-                tradeInfoVos: [
-                    {
-                        userId: 1000138138384,
-                        btc: 0,
-                        btcFutures: 0,
-                        btcMargin: 0,
-                        busd: 0,
-                        busdFutures: 0,
-                        busdMargin: 0,
-                        date: 1676851200000,
-                    },
-                    {
-                        userId: 1000138138384,
-                        btc: 0,
-                        btcFutures: 0,
-                        btcMargin: 0,
-                        busd: 0,
-                        busdFutures: 0,
-                        busdMargin: 0,
-                        date: 1677110400000,
-                    },
-                    {
-                        userId: 1000138138384,
-                        btc: 0,
-                        btcFutures: 0,
-                        btcMargin: 0,
-                        busd: 0,
-                        busdFutures: 0,
-                        busdMargin: 0,
-                        date: 1677369600000,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    recent30BtcTotal: '0',
+                    recent30BtcFuturesTotal: '0',
+                    recent30BtcMarginTotal: '0',
+                    recent30BusdTotal: '0',
+                    recent30BusdFuturesTotal: '0',
+                    recent30BusdMarginTotal: '0',
+                    tradeInfoVos: [
+                        {
+                            userId: 1000138138384,
+                            btc: 0,
+                            btcFutures: 0,
+                            btcMargin: 0,
+                            busd: 0,
+                            busdFutures: 0,
+                            busdMargin: 0,
+                            date: 1676851200000,
+                        },
+                        {
+                            userId: 1000138138384,
+                            btc: 0,
+                            btcFutures: 0,
+                            btcMargin: 0,
+                            busd: 0,
+                            busdFutures: 0,
+                            busdMargin: 0,
+                            date: 1677110400000,
+                        },
+                        {
+                            userId: 1000138138384,
+                            btc: 0,
+                            btcFutures: 0,
+                            btcMargin: 0,
+                            busd: 0,
+                            busdFutures: 0,
+                            busdMargin: 0,
+                            date: 1677369600000,
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'querySubAccountTransactionStatistics').mockReturnValue(
                 Promise.resolve({

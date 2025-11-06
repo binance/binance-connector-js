@@ -62,10 +62,10 @@ export interface GetDetailOnSubAccountsFuturesAccountResponse {
     canWithdraw?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetDetailOnSubAccountsFuturesAccountResponse
      */
-    feeTier?: number;
+    feeTier?: number | bigint;
     /**
      *
      * @type {string}
@@ -116,8 +116,8 @@ export interface GetDetailOnSubAccountsFuturesAccountResponse {
     totalWalletBalance?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetDetailOnSubAccountsFuturesAccountResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

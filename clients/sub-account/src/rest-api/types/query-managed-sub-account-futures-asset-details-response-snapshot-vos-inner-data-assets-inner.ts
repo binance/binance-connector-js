@@ -27,14 +27,14 @@ export interface QueryManagedSubAccountFuturesAssetDetailsResponseSnapshotVosInn
     asset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryManagedSubAccountFuturesAssetDetailsResponseSnapshotVosInnerDataAssetsInner
      */
-    marginBalance?: number;
+    marginBalance?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryManagedSubAccountFuturesAssetDetailsResponseSnapshotVosInnerDataAssetsInner
      */
-    walletBalance?: number;
+    walletBalance?: number | bigint;
 }

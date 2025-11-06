@@ -26,10 +26,10 @@ import type { QuerySubAccountSpotAssetsSummaryResponseSpotSubUserAssetBtcVoListI
 export interface QuerySubAccountSpotAssetsSummaryResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySubAccountSpotAssetsSummaryResponse
      */
-    totalCount?: number;
+    totalCount?: number | bigint;
     /**
      *
      * @type {string}

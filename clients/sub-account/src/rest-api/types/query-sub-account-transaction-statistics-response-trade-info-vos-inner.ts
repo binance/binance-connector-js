@@ -21,50 +21,50 @@
 export interface QuerySubAccountTransactionStatisticsResponseTradeInfoVosInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySubAccountTransactionStatisticsResponseTradeInfoVosInner
      */
-    userId?: number;
+    userId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySubAccountTransactionStatisticsResponseTradeInfoVosInner
      */
-    btc?: number;
+    btc?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySubAccountTransactionStatisticsResponseTradeInfoVosInner
      */
-    btcFutures?: number;
+    btcFutures?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySubAccountTransactionStatisticsResponseTradeInfoVosInner
      */
-    btcMargin?: number;
+    btcMargin?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySubAccountTransactionStatisticsResponseTradeInfoVosInner
      */
-    busd?: number;
+    busd?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySubAccountTransactionStatisticsResponseTradeInfoVosInner
      */
-    busdFutures?: number;
+    busdFutures?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySubAccountTransactionStatisticsResponseTradeInfoVosInner
      */
-    busdMargin?: number;
+    busdMargin?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySubAccountTransactionStatisticsResponseTradeInfoVosInner
      */
-    date?: number;
+    date?: number | bigint;
 }

@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { ManagedSubAccountApi } from '../../../src/rest-api';
@@ -64,7 +65,7 @@ describe('ManagedSubAccountApi', () => {
                 amount: 1.0,
             };
 
-            mockResponse = { tranId: 66157362489 };
+            mockResponse = JSONParse(JSONStringify({ tranId: 66157362489 }));
 
             const spy = jest.spyOn(client, 'depositAssetsIntoTheManagedSubAccount').mockReturnValue(
                 Promise.resolve({
@@ -88,7 +89,7 @@ describe('ManagedSubAccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { tranId: 66157362489 };
+            mockResponse = JSONParse(JSONStringify({ tranId: 66157362489 }));
 
             const spy = jest.spyOn(client, 'depositAssetsIntoTheManagedSubAccount').mockReturnValue(
                 Promise.resolve({
@@ -179,12 +180,14 @@ describe('ManagedSubAccountApi', () => {
                 coin: 'coin_example',
             };
 
-            mockResponse = {
-                coin: 'USDT',
-                address: '0x206c22d833bb0bb2102da6b7c7d4c3eb14bcf73d',
-                tag: '',
-                url: 'https://etherscan.io/address/0x206c22d833bb0bb2102da6b7c7d4c3eb14bcf73d',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    coin: 'USDT',
+                    address: '0x206c22d833bb0bb2102da6b7c7d4c3eb14bcf73d',
+                    tag: '',
+                    url: 'https://etherscan.io/address/0x206c22d833bb0bb2102da6b7c7d4c3eb14bcf73d',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getManagedSubAccountDepositAddress').mockReturnValue(
                 Promise.resolve({
@@ -209,12 +212,14 @@ describe('ManagedSubAccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                coin: 'USDT',
-                address: '0x206c22d833bb0bb2102da6b7c7d4c3eb14bcf73d',
-                tag: '',
-                url: 'https://etherscan.io/address/0x206c22d833bb0bb2102da6b7c7d4c3eb14bcf73d',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    coin: 'USDT',
+                    address: '0x206c22d833bb0bb2102da6b7c7d4c3eb14bcf73d',
+                    tag: '',
+                    url: 'https://etherscan.io/address/0x206c22d833bb0bb2102da6b7c7d4c3eb14bcf73d',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getManagedSubAccountDepositAddress').mockReturnValue(
                 Promise.resolve({
@@ -287,24 +292,26 @@ describe('ManagedSubAccountApi', () => {
                 email: 'sub-account-email@email.com',
             };
 
-            mockResponse = [
-                {
-                    coin: 'INJ',
-                    name: 'Injective Protocol',
-                    totalBalance: '0',
-                    availableBalance: '0',
-                    inOrder: '0',
-                    btcValue: '0',
-                },
-                {
-                    coin: 'FILDOWN',
-                    name: 'FILDOWN',
-                    totalBalance: '0',
-                    availableBalance: '0',
-                    inOrder: '0',
-                    btcValue: '0',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        coin: 'INJ',
+                        name: 'Injective Protocol',
+                        totalBalance: '0',
+                        availableBalance: '0',
+                        inOrder: '0',
+                        btcValue: '0',
+                    },
+                    {
+                        coin: 'FILDOWN',
+                        name: 'FILDOWN',
+                        totalBalance: '0',
+                        availableBalance: '0',
+                        inOrder: '0',
+                        btcValue: '0',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryManagedSubAccountAssetDetails').mockReturnValue(
                 Promise.resolve({
@@ -326,24 +333,26 @@ describe('ManagedSubAccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    coin: 'INJ',
-                    name: 'Injective Protocol',
-                    totalBalance: '0',
-                    availableBalance: '0',
-                    inOrder: '0',
-                    btcValue: '0',
-                },
-                {
-                    coin: 'FILDOWN',
-                    name: 'FILDOWN',
-                    totalBalance: '0',
-                    availableBalance: '0',
-                    inOrder: '0',
-                    btcValue: '0',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        coin: 'INJ',
+                        name: 'Injective Protocol',
+                        totalBalance: '0',
+                        availableBalance: '0',
+                        inOrder: '0',
+                        btcValue: '0',
+                    },
+                    {
+                        coin: 'FILDOWN',
+                        name: 'FILDOWN',
+                        totalBalance: '0',
+                        availableBalance: '0',
+                        inOrder: '0',
+                        btcValue: '0',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryManagedSubAccountAssetDetails').mockReturnValue(
                 Promise.resolve({
@@ -401,27 +410,29 @@ describe('ManagedSubAccountApi', () => {
                 email: 'sub-account-email@email.com',
             };
 
-            mockResponse = {
-                code: '200',
-                message: 'OK',
-                snapshotVos: [
-                    {
-                        type: 'FUTURES',
-                        updateTime: 1672893855394,
-                        data: {
-                            assets: [{ asset: 'USDT', marginBalance: 100, walletBalance: 120 }],
-                            position: [
-                                {
-                                    symbol: 'BTCUSDT',
-                                    entryPrice: 17000,
-                                    markPrice: 17000,
-                                    positionAmt: 1.0e-4,
-                                },
-                            ],
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '200',
+                    message: 'OK',
+                    snapshotVos: [
+                        {
+                            type: 'FUTURES',
+                            updateTime: 1672893855394,
+                            data: {
+                                assets: [{ asset: 'USDT', marginBalance: 100, walletBalance: 120 }],
+                                position: [
+                                    {
+                                        symbol: 'BTCUSDT',
+                                        entryPrice: 17000,
+                                        markPrice: 17000,
+                                        positionAmt: 1.0e-4,
+                                    },
+                                ],
+                            },
                         },
-                    },
-                ],
-            };
+                    ],
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'queryManagedSubAccountFuturesAssetDetails')
@@ -445,27 +456,29 @@ describe('ManagedSubAccountApi', () => {
                 accountType: 'accountType_example',
             };
 
-            mockResponse = {
-                code: '200',
-                message: 'OK',
-                snapshotVos: [
-                    {
-                        type: 'FUTURES',
-                        updateTime: 1672893855394,
-                        data: {
-                            assets: [{ asset: 'USDT', marginBalance: 100, walletBalance: 120 }],
-                            position: [
-                                {
-                                    symbol: 'BTCUSDT',
-                                    entryPrice: 17000,
-                                    markPrice: 17000,
-                                    positionAmt: 1.0e-4,
-                                },
-                            ],
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '200',
+                    message: 'OK',
+                    snapshotVos: [
+                        {
+                            type: 'FUTURES',
+                            updateTime: 1672893855394,
+                            data: {
+                                assets: [{ asset: 'USDT', marginBalance: 100, walletBalance: 120 }],
+                                position: [
+                                    {
+                                        symbol: 'BTCUSDT',
+                                        entryPrice: 17000,
+                                        markPrice: 17000,
+                                        positionAmt: 1.0e-4,
+                                    },
+                                ],
+                            },
                         },
-                    },
-                ],
-            };
+                    ],
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'queryManagedSubAccountFuturesAssetDetails')
@@ -521,50 +534,52 @@ describe('ManagedSubAccountApi', () => {
 
     describe('queryManagedSubAccountList()', () => {
         it('should execute queryManagedSubAccountList() successfully with required parameters only', async () => {
-            mockResponse = {
-                total: 3,
-                managerSubUserInfoVoList: [
-                    {
-                        rootUserId: 1000138475670,
-                        managersubUserId: 1000137842513,
-                        bindParentUserId: 1000138475669,
-                        email: 'test_0_virtual@kq3kno9imanagedsub.com',
-                        insertTimeStamp: 1678435149000,
-                        bindParentEmail: 'wdyw8xsh8pey@test.com',
-                        isSubUserEnabled: true,
-                        isUserActive: true,
-                        isMarginEnabled: false,
-                        isFutureEnabled: false,
-                        isSignedLVTRiskAgreement: false,
-                    },
-                    {
-                        rootUserId: 1000138475670,
-                        managersubUserId: 1000137842514,
-                        bindParentUserId: 1000138475669,
-                        email: 'test_1_virtual@4qd2u7zxmanagedsub.com',
-                        insertTimeStamp: 1678435152000,
-                        bindParentEmail: 'wdyw8xsh8pey@test.com',
-                        isSubUserEnabled: true,
-                        isUserActive: true,
-                        isMarginEnabled: false,
-                        isFutureEnabled: false,
-                        isSignedLVTRiskAgreement: false,
-                    },
-                    {
-                        rootUserId: 1000138475670,
-                        managersubUserId: 1000137842515,
-                        bindParentUserId: 1000138475669,
-                        email: 'test_2_virtual@akc05o8hmanagedsub.com',
-                        insertTimeStamp: 1678435153000,
-                        bindParentEmail: 'wdyw8xsh8pey@test.com',
-                        isSubUserEnabled: true,
-                        isUserActive: true,
-                        isMarginEnabled: false,
-                        isFutureEnabled: false,
-                        isSignedLVTRiskAgreement: false,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 3,
+                    managerSubUserInfoVoList: [
+                        {
+                            rootUserId: 1000138475670,
+                            managersubUserId: 1000137842513,
+                            bindParentUserId: 1000138475669,
+                            email: 'test_0_virtual@kq3kno9imanagedsub.com',
+                            insertTimeStamp: 1678435149000,
+                            bindParentEmail: 'wdyw8xsh8pey@test.com',
+                            isSubUserEnabled: true,
+                            isUserActive: true,
+                            isMarginEnabled: false,
+                            isFutureEnabled: false,
+                            isSignedLVTRiskAgreement: false,
+                        },
+                        {
+                            rootUserId: 1000138475670,
+                            managersubUserId: 1000137842514,
+                            bindParentUserId: 1000138475669,
+                            email: 'test_1_virtual@4qd2u7zxmanagedsub.com',
+                            insertTimeStamp: 1678435152000,
+                            bindParentEmail: 'wdyw8xsh8pey@test.com',
+                            isSubUserEnabled: true,
+                            isUserActive: true,
+                            isMarginEnabled: false,
+                            isFutureEnabled: false,
+                            isSignedLVTRiskAgreement: false,
+                        },
+                        {
+                            rootUserId: 1000138475670,
+                            managersubUserId: 1000137842515,
+                            bindParentUserId: 1000138475669,
+                            email: 'test_2_virtual@akc05o8hmanagedsub.com',
+                            insertTimeStamp: 1678435153000,
+                            bindParentEmail: 'wdyw8xsh8pey@test.com',
+                            isSubUserEnabled: true,
+                            isUserActive: true,
+                            isMarginEnabled: false,
+                            isFutureEnabled: false,
+                            isSignedLVTRiskAgreement: false,
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryManagedSubAccountList').mockReturnValue(
                 Promise.resolve({
@@ -588,50 +603,52 @@ describe('ManagedSubAccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                total: 3,
-                managerSubUserInfoVoList: [
-                    {
-                        rootUserId: 1000138475670,
-                        managersubUserId: 1000137842513,
-                        bindParentUserId: 1000138475669,
-                        email: 'test_0_virtual@kq3kno9imanagedsub.com',
-                        insertTimeStamp: 1678435149000,
-                        bindParentEmail: 'wdyw8xsh8pey@test.com',
-                        isSubUserEnabled: true,
-                        isUserActive: true,
-                        isMarginEnabled: false,
-                        isFutureEnabled: false,
-                        isSignedLVTRiskAgreement: false,
-                    },
-                    {
-                        rootUserId: 1000138475670,
-                        managersubUserId: 1000137842514,
-                        bindParentUserId: 1000138475669,
-                        email: 'test_1_virtual@4qd2u7zxmanagedsub.com',
-                        insertTimeStamp: 1678435152000,
-                        bindParentEmail: 'wdyw8xsh8pey@test.com',
-                        isSubUserEnabled: true,
-                        isUserActive: true,
-                        isMarginEnabled: false,
-                        isFutureEnabled: false,
-                        isSignedLVTRiskAgreement: false,
-                    },
-                    {
-                        rootUserId: 1000138475670,
-                        managersubUserId: 1000137842515,
-                        bindParentUserId: 1000138475669,
-                        email: 'test_2_virtual@akc05o8hmanagedsub.com',
-                        insertTimeStamp: 1678435153000,
-                        bindParentEmail: 'wdyw8xsh8pey@test.com',
-                        isSubUserEnabled: true,
-                        isUserActive: true,
-                        isMarginEnabled: false,
-                        isFutureEnabled: false,
-                        isSignedLVTRiskAgreement: false,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 3,
+                    managerSubUserInfoVoList: [
+                        {
+                            rootUserId: 1000138475670,
+                            managersubUserId: 1000137842513,
+                            bindParentUserId: 1000138475669,
+                            email: 'test_0_virtual@kq3kno9imanagedsub.com',
+                            insertTimeStamp: 1678435149000,
+                            bindParentEmail: 'wdyw8xsh8pey@test.com',
+                            isSubUserEnabled: true,
+                            isUserActive: true,
+                            isMarginEnabled: false,
+                            isFutureEnabled: false,
+                            isSignedLVTRiskAgreement: false,
+                        },
+                        {
+                            rootUserId: 1000138475670,
+                            managersubUserId: 1000137842514,
+                            bindParentUserId: 1000138475669,
+                            email: 'test_1_virtual@4qd2u7zxmanagedsub.com',
+                            insertTimeStamp: 1678435152000,
+                            bindParentEmail: 'wdyw8xsh8pey@test.com',
+                            isSubUserEnabled: true,
+                            isUserActive: true,
+                            isMarginEnabled: false,
+                            isFutureEnabled: false,
+                            isSignedLVTRiskAgreement: false,
+                        },
+                        {
+                            rootUserId: 1000138475670,
+                            managersubUserId: 1000137842515,
+                            bindParentUserId: 1000138475669,
+                            email: 'test_2_virtual@akc05o8hmanagedsub.com',
+                            insertTimeStamp: 1678435153000,
+                            bindParentEmail: 'wdyw8xsh8pey@test.com',
+                            isSubUserEnabled: true,
+                            isUserActive: true,
+                            isMarginEnabled: false,
+                            isFutureEnabled: false,
+                            isSignedLVTRiskAgreement: false,
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryManagedSubAccountList').mockReturnValue(
                 Promise.resolve({
@@ -671,38 +688,40 @@ describe('ManagedSubAccountApi', () => {
                 email: 'sub-account-email@email.com',
             };
 
-            mockResponse = {
-                marginLevel: '999',
-                totalAssetOfBtc: '0',
-                totalLiabilityOfBtc: '0',
-                totalNetAssetOfBtc: '0',
-                userAssets: [
-                    {
-                        asset: 'MATIC',
-                        borrowed: '0',
-                        free: '0',
-                        interest: '0',
-                        locked: '0',
-                        netAsset: '0',
-                    },
-                    {
-                        asset: 'VET',
-                        borrowed: '0',
-                        free: '0',
-                        interest: '0',
-                        locked: '0',
-                        netAsset: '0',
-                    },
-                    {
-                        asset: 'BAKE',
-                        borrowed: '0',
-                        free: '0',
-                        interest: '0',
-                        locked: '0',
-                        netAsset: '0',
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    marginLevel: '999',
+                    totalAssetOfBtc: '0',
+                    totalLiabilityOfBtc: '0',
+                    totalNetAssetOfBtc: '0',
+                    userAssets: [
+                        {
+                            asset: 'MATIC',
+                            borrowed: '0',
+                            free: '0',
+                            interest: '0',
+                            locked: '0',
+                            netAsset: '0',
+                        },
+                        {
+                            asset: 'VET',
+                            borrowed: '0',
+                            free: '0',
+                            interest: '0',
+                            locked: '0',
+                            netAsset: '0',
+                        },
+                        {
+                            asset: 'BAKE',
+                            borrowed: '0',
+                            free: '0',
+                            interest: '0',
+                            locked: '0',
+                            netAsset: '0',
+                        },
+                    ],
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'queryManagedSubAccountMarginAssetDetails')
@@ -726,38 +745,40 @@ describe('ManagedSubAccountApi', () => {
                 accountType: 'accountType_example',
             };
 
-            mockResponse = {
-                marginLevel: '999',
-                totalAssetOfBtc: '0',
-                totalLiabilityOfBtc: '0',
-                totalNetAssetOfBtc: '0',
-                userAssets: [
-                    {
-                        asset: 'MATIC',
-                        borrowed: '0',
-                        free: '0',
-                        interest: '0',
-                        locked: '0',
-                        netAsset: '0',
-                    },
-                    {
-                        asset: 'VET',
-                        borrowed: '0',
-                        free: '0',
-                        interest: '0',
-                        locked: '0',
-                        netAsset: '0',
-                    },
-                    {
-                        asset: 'BAKE',
-                        borrowed: '0',
-                        free: '0',
-                        interest: '0',
-                        locked: '0',
-                        netAsset: '0',
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    marginLevel: '999',
+                    totalAssetOfBtc: '0',
+                    totalLiabilityOfBtc: '0',
+                    totalNetAssetOfBtc: '0',
+                    userAssets: [
+                        {
+                            asset: 'MATIC',
+                            borrowed: '0',
+                            free: '0',
+                            interest: '0',
+                            locked: '0',
+                            netAsset: '0',
+                        },
+                        {
+                            asset: 'VET',
+                            borrowed: '0',
+                            free: '0',
+                            interest: '0',
+                            locked: '0',
+                            netAsset: '0',
+                        },
+                        {
+                            asset: 'BAKE',
+                            borrowed: '0',
+                            free: '0',
+                            interest: '0',
+                            locked: '0',
+                            netAsset: '0',
+                        },
+                    ],
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'queryManagedSubAccountMarginAssetDetails')
@@ -818,65 +839,67 @@ describe('ManagedSubAccountApi', () => {
                 type: 'type_example',
             };
 
-            mockResponse = {
-                code: 200,
-                msg: '',
-                snapshotVos: [
-                    {
-                        data: {
-                            balances: [
-                                { asset: 'BTC', free: '0.09905021', locked: '0.00000000' },
-                                { asset: 'USDT', free: '1.89109409', locked: '0.00000000' },
-                            ],
-                            totalAssetOfBtc: '0.09942700',
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: 200,
+                    msg: '',
+                    snapshotVos: [
+                        {
+                            data: {
+                                balances: [
+                                    { asset: 'BTC', free: '0.09905021', locked: '0.00000000' },
+                                    { asset: 'USDT', free: '1.89109409', locked: '0.00000000' },
+                                ],
+                                totalAssetOfBtc: '0.09942700',
+                            },
+                            type: 'spot',
+                            updateTime: 1576281599000,
                         },
-                        type: 'spot',
-                        updateTime: 1576281599000,
-                    },
-                    {
-                        data: {
-                            marginLevel: '2748.02909813',
-                            totalAssetOfBtc: '0.00274803',
-                            totalLiabilityOfBtc: '0.00000100',
-                            totalNetAssetOfBtc: '0.00274750',
-                            userAssets: [
-                                {
-                                    asset: 'XRP',
-                                    borrowed: '0.00000000',
-                                    free: '1.00000000',
-                                    interest: '0.00000000',
-                                    locked: '0.00000000',
-                                    netAsset: '1.00000000',
-                                },
-                            ],
+                        {
+                            data: {
+                                marginLevel: '2748.02909813',
+                                totalAssetOfBtc: '0.00274803',
+                                totalLiabilityOfBtc: '0.00000100',
+                                totalNetAssetOfBtc: '0.00274750',
+                                userAssets: [
+                                    {
+                                        asset: 'XRP',
+                                        borrowed: '0.00000000',
+                                        free: '1.00000000',
+                                        interest: '0.00000000',
+                                        locked: '0.00000000',
+                                        netAsset: '1.00000000',
+                                    },
+                                ],
+                            },
+                            type: 'margin',
+                            updateTime: 1576281599000,
                         },
-                        type: 'margin',
-                        updateTime: 1576281599000,
-                    },
-                    {
-                        data: {
-                            assets: [
-                                {
-                                    asset: 'USDT',
-                                    marginBalance: '118.99782335',
-                                    walletBalance: '120.23811389',
-                                },
-                            ],
-                            position: [
-                                {
-                                    entryPrice: '7130.41000000',
-                                    markPrice: '7257.66239673',
-                                    positionAmt: '0.01000000',
-                                    symbol: 'BTCUSDT',
-                                    unRealizedProfit: '1.24029054',
-                                },
-                            ],
+                        {
+                            data: {
+                                assets: [
+                                    {
+                                        asset: 'USDT',
+                                        marginBalance: '118.99782335',
+                                        walletBalance: '120.23811389',
+                                    },
+                                ],
+                                position: [
+                                    {
+                                        entryPrice: '7130.41000000',
+                                        markPrice: '7257.66239673',
+                                        positionAmt: '0.01000000',
+                                        symbol: 'BTCUSDT',
+                                        unRealizedProfit: '1.24029054',
+                                    },
+                                ],
+                            },
+                            type: 'futures',
+                            updateTime: 1576281599000,
                         },
-                        type: 'futures',
-                        updateTime: 1576281599000,
-                    },
-                ],
-            };
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryManagedSubAccountSnapshot').mockReturnValue(
                 Promise.resolve({
@@ -902,65 +925,67 @@ describe('ManagedSubAccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                code: 200,
-                msg: '',
-                snapshotVos: [
-                    {
-                        data: {
-                            balances: [
-                                { asset: 'BTC', free: '0.09905021', locked: '0.00000000' },
-                                { asset: 'USDT', free: '1.89109409', locked: '0.00000000' },
-                            ],
-                            totalAssetOfBtc: '0.09942700',
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: 200,
+                    msg: '',
+                    snapshotVos: [
+                        {
+                            data: {
+                                balances: [
+                                    { asset: 'BTC', free: '0.09905021', locked: '0.00000000' },
+                                    { asset: 'USDT', free: '1.89109409', locked: '0.00000000' },
+                                ],
+                                totalAssetOfBtc: '0.09942700',
+                            },
+                            type: 'spot',
+                            updateTime: 1576281599000,
                         },
-                        type: 'spot',
-                        updateTime: 1576281599000,
-                    },
-                    {
-                        data: {
-                            marginLevel: '2748.02909813',
-                            totalAssetOfBtc: '0.00274803',
-                            totalLiabilityOfBtc: '0.00000100',
-                            totalNetAssetOfBtc: '0.00274750',
-                            userAssets: [
-                                {
-                                    asset: 'XRP',
-                                    borrowed: '0.00000000',
-                                    free: '1.00000000',
-                                    interest: '0.00000000',
-                                    locked: '0.00000000',
-                                    netAsset: '1.00000000',
-                                },
-                            ],
+                        {
+                            data: {
+                                marginLevel: '2748.02909813',
+                                totalAssetOfBtc: '0.00274803',
+                                totalLiabilityOfBtc: '0.00000100',
+                                totalNetAssetOfBtc: '0.00274750',
+                                userAssets: [
+                                    {
+                                        asset: 'XRP',
+                                        borrowed: '0.00000000',
+                                        free: '1.00000000',
+                                        interest: '0.00000000',
+                                        locked: '0.00000000',
+                                        netAsset: '1.00000000',
+                                    },
+                                ],
+                            },
+                            type: 'margin',
+                            updateTime: 1576281599000,
                         },
-                        type: 'margin',
-                        updateTime: 1576281599000,
-                    },
-                    {
-                        data: {
-                            assets: [
-                                {
-                                    asset: 'USDT',
-                                    marginBalance: '118.99782335',
-                                    walletBalance: '120.23811389',
-                                },
-                            ],
-                            position: [
-                                {
-                                    entryPrice: '7130.41000000',
-                                    markPrice: '7257.66239673',
-                                    positionAmt: '0.01000000',
-                                    symbol: 'BTCUSDT',
-                                    unRealizedProfit: '1.24029054',
-                                },
-                            ],
+                        {
+                            data: {
+                                assets: [
+                                    {
+                                        asset: 'USDT',
+                                        marginBalance: '118.99782335',
+                                        walletBalance: '120.23811389',
+                                    },
+                                ],
+                                position: [
+                                    {
+                                        entryPrice: '7130.41000000',
+                                        markPrice: '7257.66239673',
+                                        positionAmt: '0.01000000',
+                                        symbol: 'BTCUSDT',
+                                        unRealizedProfit: '1.24029054',
+                                    },
+                                ],
+                            },
+                            type: 'futures',
+                            updateTime: 1576281599000,
                         },
-                        type: 'futures',
-                        updateTime: 1576281599000,
-                    },
-                ],
-            };
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryManagedSubAccountSnapshot').mockReturnValue(
                 Promise.resolve({
@@ -1037,35 +1062,37 @@ describe('ManagedSubAccountApi', () => {
                 limit: 789,
             };
 
-            mockResponse = {
-                managerSubTransferHistoryVos: [
-                    {
-                        fromEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
-                        fromAccountType: 'SPOT',
-                        toEmail: 'wdywl0lddakh@test.com',
-                        toAccountType: 'SPOT',
-                        asset: 'BNB',
-                        amount: '0.01',
-                        scheduledData: 1679416673000,
-                        createTime: 1679416673000,
-                        status: 'SUCCESS',
-                        tranId: 91077779,
-                    },
-                    {
-                        fromEmail: 'wdywl0lddakh@test.com',
-                        fromAccountType: 'SPOT',
-                        toEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
-                        toAccountType: 'SPOT',
-                        asset: 'BNB',
-                        amount: '1',
-                        scheduledData: 1679416616000,
-                        createTime: 1679416616000,
-                        status: 'SUCCESS',
-                        tranId: 91077676,
-                    },
-                ],
-                count: 2,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    managerSubTransferHistoryVos: [
+                        {
+                            fromEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
+                            fromAccountType: 'SPOT',
+                            toEmail: 'wdywl0lddakh@test.com',
+                            toAccountType: 'SPOT',
+                            asset: 'BNB',
+                            amount: '0.01',
+                            scheduledData: 1679416673000,
+                            createTime: 1679416673000,
+                            status: 'SUCCESS',
+                            tranId: 91077779,
+                        },
+                        {
+                            fromEmail: 'wdywl0lddakh@test.com',
+                            fromAccountType: 'SPOT',
+                            toEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
+                            toAccountType: 'SPOT',
+                            asset: 'BNB',
+                            amount: '1',
+                            scheduledData: 1679416616000,
+                            createTime: 1679416616000,
+                            status: 'SUCCESS',
+                            tranId: 91077676,
+                        },
+                    ],
+                    count: 2,
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'queryManagedSubAccountTransferLogMasterAccountInvestor')
@@ -1095,35 +1122,37 @@ describe('ManagedSubAccountApi', () => {
                 transferFunctionAccountType: 'transferFunctionAccountType_example',
             };
 
-            mockResponse = {
-                managerSubTransferHistoryVos: [
-                    {
-                        fromEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
-                        fromAccountType: 'SPOT',
-                        toEmail: 'wdywl0lddakh@test.com',
-                        toAccountType: 'SPOT',
-                        asset: 'BNB',
-                        amount: '0.01',
-                        scheduledData: 1679416673000,
-                        createTime: 1679416673000,
-                        status: 'SUCCESS',
-                        tranId: 91077779,
-                    },
-                    {
-                        fromEmail: 'wdywl0lddakh@test.com',
-                        fromAccountType: 'SPOT',
-                        toEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
-                        toAccountType: 'SPOT',
-                        asset: 'BNB',
-                        amount: '1',
-                        scheduledData: 1679416616000,
-                        createTime: 1679416616000,
-                        status: 'SUCCESS',
-                        tranId: 91077676,
-                    },
-                ],
-                count: 2,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    managerSubTransferHistoryVos: [
+                        {
+                            fromEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
+                            fromAccountType: 'SPOT',
+                            toEmail: 'wdywl0lddakh@test.com',
+                            toAccountType: 'SPOT',
+                            asset: 'BNB',
+                            amount: '0.01',
+                            scheduledData: 1679416673000,
+                            createTime: 1679416673000,
+                            status: 'SUCCESS',
+                            tranId: 91077779,
+                        },
+                        {
+                            fromEmail: 'wdywl0lddakh@test.com',
+                            fromAccountType: 'SPOT',
+                            toEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
+                            toAccountType: 'SPOT',
+                            asset: 'BNB',
+                            amount: '1',
+                            scheduledData: 1679416616000,
+                            createTime: 1679416616000,
+                            status: 'SUCCESS',
+                            tranId: 91077676,
+                        },
+                    ],
+                    count: 2,
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'queryManagedSubAccountTransferLogMasterAccountInvestor')
@@ -1270,35 +1299,37 @@ describe('ManagedSubAccountApi', () => {
                 limit: 789,
             };
 
-            mockResponse = {
-                managerSubTransferHistoryVos: [
-                    {
-                        fromEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
-                        fromAccountType: 'SPOT',
-                        toEmail: 'wdywl0lddakh@test.com',
-                        toAccountType: 'SPOT',
-                        asset: 'BNB',
-                        amount: '0.01',
-                        scheduledData: 1679416673000,
-                        createTime: 1679416673000,
-                        status: 'SUCCESS',
-                        tranId: 91077779,
-                    },
-                    {
-                        fromEmail: 'wdywl0lddakh@test.com',
-                        fromAccountType: 'SPOT',
-                        toEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
-                        toAccountType: 'SPOT',
-                        asset: 'BNB',
-                        amount: '1',
-                        scheduledData: 1679416616000,
-                        createTime: 1679416616000,
-                        status: 'SUCCESS',
-                        tranId: 91077676,
-                    },
-                ],
-                count: 2,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    managerSubTransferHistoryVos: [
+                        {
+                            fromEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
+                            fromAccountType: 'SPOT',
+                            toEmail: 'wdywl0lddakh@test.com',
+                            toAccountType: 'SPOT',
+                            asset: 'BNB',
+                            amount: '0.01',
+                            scheduledData: 1679416673000,
+                            createTime: 1679416673000,
+                            status: 'SUCCESS',
+                            tranId: 91077779,
+                        },
+                        {
+                            fromEmail: 'wdywl0lddakh@test.com',
+                            fromAccountType: 'SPOT',
+                            toEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
+                            toAccountType: 'SPOT',
+                            asset: 'BNB',
+                            amount: '1',
+                            scheduledData: 1679416616000,
+                            createTime: 1679416616000,
+                            status: 'SUCCESS',
+                            tranId: 91077676,
+                        },
+                    ],
+                    count: 2,
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'queryManagedSubAccountTransferLogMasterAccountTrading')
@@ -1328,35 +1359,37 @@ describe('ManagedSubAccountApi', () => {
                 transferFunctionAccountType: 'transferFunctionAccountType_example',
             };
 
-            mockResponse = {
-                managerSubTransferHistoryVos: [
-                    {
-                        fromEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
-                        fromAccountType: 'SPOT',
-                        toEmail: 'wdywl0lddakh@test.com',
-                        toAccountType: 'SPOT',
-                        asset: 'BNB',
-                        amount: '0.01',
-                        scheduledData: 1679416673000,
-                        createTime: 1679416673000,
-                        status: 'SUCCESS',
-                        tranId: 91077779,
-                    },
-                    {
-                        fromEmail: 'wdywl0lddakh@test.com',
-                        fromAccountType: 'SPOT',
-                        toEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
-                        toAccountType: 'SPOT',
-                        asset: 'BNB',
-                        amount: '1',
-                        scheduledData: 1679416616000,
-                        createTime: 1679416616000,
-                        status: 'SUCCESS',
-                        tranId: 91077676,
-                    },
-                ],
-                count: 2,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    managerSubTransferHistoryVos: [
+                        {
+                            fromEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
+                            fromAccountType: 'SPOT',
+                            toEmail: 'wdywl0lddakh@test.com',
+                            toAccountType: 'SPOT',
+                            asset: 'BNB',
+                            amount: '0.01',
+                            scheduledData: 1679416673000,
+                            createTime: 1679416673000,
+                            status: 'SUCCESS',
+                            tranId: 91077779,
+                        },
+                        {
+                            fromEmail: 'wdywl0lddakh@test.com',
+                            fromAccountType: 'SPOT',
+                            toEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
+                            toAccountType: 'SPOT',
+                            asset: 'BNB',
+                            amount: '1',
+                            scheduledData: 1679416616000,
+                            createTime: 1679416616000,
+                            status: 'SUCCESS',
+                            tranId: 91077676,
+                        },
+                    ],
+                    count: 2,
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'queryManagedSubAccountTransferLogMasterAccountTrading')
@@ -1502,35 +1535,37 @@ describe('ManagedSubAccountApi', () => {
                 limit: 789,
             };
 
-            mockResponse = {
-                managerSubTransferHistoryVos: [
-                    {
-                        fromEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
-                        fromAccountType: 'SPOT',
-                        toEmail: 'wdywl0lddakh@test.com',
-                        toAccountType: 'SPOT',
-                        asset: 'BNB',
-                        amount: '0.01',
-                        scheduledData: 1679416673000,
-                        createTime: 1679416673000,
-                        status: 'SUCCESS',
-                        tranId: 91077779,
-                    },
-                    {
-                        fromEmail: 'wdywl0lddakh@test.com',
-                        fromAccountType: 'SPOT',
-                        toEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
-                        toAccountType: 'SPOT',
-                        asset: 'BNB',
-                        amount: '1',
-                        scheduledData: 1679416616000,
-                        createTime: 1679416616000,
-                        status: 'SUCCESS',
-                        tranId: 91077676,
-                    },
-                ],
-                count: 2,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    managerSubTransferHistoryVos: [
+                        {
+                            fromEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
+                            fromAccountType: 'SPOT',
+                            toEmail: 'wdywl0lddakh@test.com',
+                            toAccountType: 'SPOT',
+                            asset: 'BNB',
+                            amount: '0.01',
+                            scheduledData: 1679416673000,
+                            createTime: 1679416673000,
+                            status: 'SUCCESS',
+                            tranId: 91077779,
+                        },
+                        {
+                            fromEmail: 'wdywl0lddakh@test.com',
+                            fromAccountType: 'SPOT',
+                            toEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
+                            toAccountType: 'SPOT',
+                            asset: 'BNB',
+                            amount: '1',
+                            scheduledData: 1679416616000,
+                            createTime: 1679416616000,
+                            status: 'SUCCESS',
+                            tranId: 91077676,
+                        },
+                    ],
+                    count: 2,
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'queryManagedSubAccountTransferLogSubAccountTrading')
@@ -1560,35 +1595,37 @@ describe('ManagedSubAccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                managerSubTransferHistoryVos: [
-                    {
-                        fromEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
-                        fromAccountType: 'SPOT',
-                        toEmail: 'wdywl0lddakh@test.com',
-                        toAccountType: 'SPOT',
-                        asset: 'BNB',
-                        amount: '0.01',
-                        scheduledData: 1679416673000,
-                        createTime: 1679416673000,
-                        status: 'SUCCESS',
-                        tranId: 91077779,
-                    },
-                    {
-                        fromEmail: 'wdywl0lddakh@test.com',
-                        fromAccountType: 'SPOT',
-                        toEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
-                        toAccountType: 'SPOT',
-                        asset: 'BNB',
-                        amount: '1',
-                        scheduledData: 1679416616000,
-                        createTime: 1679416616000,
-                        status: 'SUCCESS',
-                        tranId: 91077676,
-                    },
-                ],
-                count: 2,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    managerSubTransferHistoryVos: [
+                        {
+                            fromEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
+                            fromAccountType: 'SPOT',
+                            toEmail: 'wdywl0lddakh@test.com',
+                            toAccountType: 'SPOT',
+                            asset: 'BNB',
+                            amount: '0.01',
+                            scheduledData: 1679416673000,
+                            createTime: 1679416673000,
+                            status: 'SUCCESS',
+                            tranId: 91077779,
+                        },
+                        {
+                            fromEmail: 'wdywl0lddakh@test.com',
+                            fromAccountType: 'SPOT',
+                            toEmail: 'test_0_virtual@kq3kno9imanagedsub.com',
+                            toAccountType: 'SPOT',
+                            asset: 'BNB',
+                            amount: '1',
+                            scheduledData: 1679416616000,
+                            createTime: 1679416616000,
+                            status: 'SUCCESS',
+                            tranId: 91077676,
+                        },
+                    ],
+                    count: 2,
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'queryManagedSubAccountTransferLogSubAccountTrading')
@@ -1710,7 +1747,7 @@ describe('ManagedSubAccountApi', () => {
                 amount: 1.0,
             };
 
-            mockResponse = { tranId: 66157362489 };
+            mockResponse = JSONParse(JSONStringify({ tranId: 66157362489 }));
 
             const spy = jest
                 .spyOn(client, 'withdrawlAssetsFromTheManagedSubAccount')
@@ -1737,7 +1774,7 @@ describe('ManagedSubAccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { tranId: 66157362489 };
+            mockResponse = JSONParse(JSONStringify({ tranId: 66157362489 }));
 
             const spy = jest
                 .spyOn(client, 'withdrawlAssetsFromTheManagedSubAccount')

@@ -51,14 +51,14 @@ export interface QuerySubAccountSpotAssetTransferHistoryResponseInner {
     status?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySubAccountSpotAssetTransferHistoryResponseInner
      */
-    tranId?: number;
+    tranId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySubAccountSpotAssetTransferHistoryResponseInner
      */
-    time?: number;
+    time?: number | bigint;
 }

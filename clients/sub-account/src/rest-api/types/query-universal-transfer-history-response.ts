@@ -32,8 +32,8 @@ export interface QueryUniversalTransferHistoryResponse {
     result?: Array<QueryUniversalTransferHistoryResponseResultInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUniversalTransferHistoryResponse
      */
-    totalCount?: number;
+    totalCount?: number | bigint;
 }

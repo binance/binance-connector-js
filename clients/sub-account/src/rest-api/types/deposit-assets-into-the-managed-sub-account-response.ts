@@ -21,8 +21,8 @@
 export interface DepositAssetsIntoTheManagedSubAccountResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DepositAssetsIntoTheManagedSubAccountResponse
      */
-    tranId?: number;
+    tranId?: number | bigint;
 }

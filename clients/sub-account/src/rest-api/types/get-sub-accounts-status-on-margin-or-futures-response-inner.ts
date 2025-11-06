@@ -39,10 +39,10 @@ export interface GetSubAccountsStatusOnMarginOrFuturesResponseInner {
     isUserActive?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSubAccountsStatusOnMarginOrFuturesResponseInner
      */
-    insertTime?: number;
+    insertTime?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -57,8 +57,8 @@ export interface GetSubAccountsStatusOnMarginOrFuturesResponseInner {
     isFutureEnabled?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSubAccountsStatusOnMarginOrFuturesResponseInner
      */
-    mobile?: number;
+    mobile?: number | bigint;
 }

@@ -21,10 +21,10 @@
 export interface QueryUniversalTransferHistoryResponseResultInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUniversalTransferHistoryResponseResultInner
      */
-    tranId?: number;
+    tranId?: number | bigint;
     /**
      *
      * @type {string}
@@ -51,10 +51,10 @@ export interface QueryUniversalTransferHistoryResponseResultInner {
     amount?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUniversalTransferHistoryResponseResultInner
      */
-    createTimeStamp?: number;
+    createTimeStamp?: number | bigint;
     /**
      *
      * @type {string}

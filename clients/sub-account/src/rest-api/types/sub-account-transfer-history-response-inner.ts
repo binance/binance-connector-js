@@ -33,10 +33,10 @@ export interface SubAccountTransferHistoryResponseInner {
     email?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SubAccountTransferHistoryResponseInner
      */
-    type?: number;
+    type?: number | bigint;
     /**
      *
      * @type {string}
@@ -69,14 +69,14 @@ export interface SubAccountTransferHistoryResponseInner {
     status?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SubAccountTransferHistoryResponseInner
      */
-    tranId?: number;
+    tranId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SubAccountTransferHistoryResponseInner
      */
-    time?: number;
+    time?: number | bigint;
 }

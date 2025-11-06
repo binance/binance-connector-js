@@ -32,8 +32,8 @@ export interface QueryManagedSubAccountTransferLogMasterAccountInvestorResponse 
     managerSubTransferHistoryVos?: Array<QueryManagedSubAccountTransferLogMasterAccountInvestorResponseManagerSubTransferHistoryVosInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryManagedSubAccountTransferLogMasterAccountInvestorResponse
      */
-    count?: number;
+    count?: number | bigint;
 }

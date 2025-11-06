@@ -33,10 +33,10 @@ export interface DeleteIpListForASubAccountApiKeyResponse {
     ipList?: Array<string>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DeleteIpListForASubAccountApiKeyResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}

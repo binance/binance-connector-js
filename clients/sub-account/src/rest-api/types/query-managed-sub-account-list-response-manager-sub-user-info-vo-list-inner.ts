@@ -21,22 +21,22 @@
 export interface QueryManagedSubAccountListResponseManagerSubUserInfoVoListInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryManagedSubAccountListResponseManagerSubUserInfoVoListInner
      */
-    rootUserId?: number;
+    rootUserId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryManagedSubAccountListResponseManagerSubUserInfoVoListInner
      */
-    managersubUserId?: number;
+    managersubUserId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryManagedSubAccountListResponseManagerSubUserInfoVoListInner
      */
-    bindParentUserId?: number;
+    bindParentUserId?: number | bigint;
     /**
      *
      * @type {string}
@@ -45,10 +45,10 @@ export interface QueryManagedSubAccountListResponseManagerSubUserInfoVoListInner
     email?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryManagedSubAccountListResponseManagerSubUserInfoVoListInner
      */
-    insertTimeStamp?: number;
+    insertTimeStamp?: number | bigint;
     /**
      *
      * @type {string}

@@ -38,8 +38,8 @@ export interface QueryManagedSubAccountSnapshotResponseSnapshotVosInner {
     type?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryManagedSubAccountSnapshotResponseSnapshotVosInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

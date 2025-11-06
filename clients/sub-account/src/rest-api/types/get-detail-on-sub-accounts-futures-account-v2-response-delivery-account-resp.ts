@@ -56,14 +56,14 @@ export interface GetDetailOnSubAccountsFuturesAccountV2ResponseDeliveryAccountRe
     canWithdraw?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseDeliveryAccountResp
      */
-    feeTier?: number;
+    feeTier?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetDetailOnSubAccountsFuturesAccountV2ResponseDeliveryAccountResp
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

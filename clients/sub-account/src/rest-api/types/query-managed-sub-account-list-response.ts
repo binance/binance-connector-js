@@ -26,10 +26,10 @@ import type { QueryManagedSubAccountListResponseManagerSubUserInfoVoListInner } 
 export interface QueryManagedSubAccountListResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryManagedSubAccountListResponse
      */
-    total?: number;
+    total?: number | bigint;
     /**
      *
      * @type {Array<QueryManagedSubAccountListResponseManagerSubUserInfoVoListInner>}

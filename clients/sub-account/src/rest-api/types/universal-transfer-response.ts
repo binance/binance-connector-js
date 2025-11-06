@@ -21,10 +21,10 @@
 export interface UniversalTransferResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UniversalTransferResponse
      */
-    tranId?: number;
+    tranId?: number | bigint;
     /**
      *
      * @type {string}

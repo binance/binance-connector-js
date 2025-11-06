@@ -21,8 +21,8 @@
 export interface WithdrawlAssetsFromTheManagedSubAccountResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof WithdrawlAssetsFromTheManagedSubAccountResponse
      */
-    tranId?: number;
+    tranId?: number | bigint;
 }

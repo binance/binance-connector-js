@@ -26,10 +26,10 @@ import type { QueryManagedSubAccountSnapshotResponseSnapshotVosInner } from './q
 export interface QueryManagedSubAccountSnapshotResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryManagedSubAccountSnapshotResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}

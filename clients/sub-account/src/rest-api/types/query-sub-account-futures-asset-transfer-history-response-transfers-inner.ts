@@ -45,14 +45,14 @@ export interface QuerySubAccountFuturesAssetTransferHistoryResponseTransfersInne
     qty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySubAccountFuturesAssetTransferHistoryResponseTransfersInner
      */
-    tranId?: number;
+    tranId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySubAccountFuturesAssetTransferHistoryResponseTransfersInner
      */
-    time?: number;
+    time?: number | bigint;
 }

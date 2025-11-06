@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { ApiManagementApi } from '../../../src/rest-api';
@@ -48,12 +49,14 @@ describe('ApiManagementApi', () => {
                 status: 'status_example',
             };
 
-            mockResponse = {
-                status: '2',
-                ipList: ['69.210.67.14', '8.34.21.10'],
-                updateTime: 1636371437000,
-                apiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    status: '2',
+                    ipList: ['69.210.67.14', '8.34.21.10'],
+                    updateTime: 1636371437000,
+                    apiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+                })
+            );
 
             const spy = jest.spyOn(client, 'addIpRestrictionForSubAccountApiKey').mockReturnValue(
                 Promise.resolve({
@@ -78,12 +81,14 @@ describe('ApiManagementApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                status: '2',
-                ipList: ['69.210.67.14', '8.34.21.10'],
-                updateTime: 1636371437000,
-                apiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    status: '2',
+                    ipList: ['69.210.67.14', '8.34.21.10'],
+                    updateTime: 1636371437000,
+                    apiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+                })
+            );
 
             const spy = jest.spyOn(client, 'addIpRestrictionForSubAccountApiKey').mockReturnValue(
                 Promise.resolve({
@@ -175,12 +180,14 @@ describe('ApiManagementApi', () => {
                 ipAddress: 'ipAddress_example',
             };
 
-            mockResponse = {
-                ipRestrict: 'true',
-                ipList: ['69.210.67.14', '8.34.21.10'],
-                updateTime: 1636371437000,
-                apiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    ipRestrict: 'true',
+                    ipList: ['69.210.67.14', '8.34.21.10'],
+                    updateTime: 1636371437000,
+                    apiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+                })
+            );
 
             const spy = jest.spyOn(client, 'deleteIpListForASubAccountApiKey').mockReturnValue(
                 Promise.resolve({
@@ -204,12 +211,14 @@ describe('ApiManagementApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                ipRestrict: 'true',
-                ipList: ['69.210.67.14', '8.34.21.10'],
-                updateTime: 1636371437000,
-                apiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    ipRestrict: 'true',
+                    ipList: ['69.210.67.14', '8.34.21.10'],
+                    updateTime: 1636371437000,
+                    apiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+                })
+            );
 
             const spy = jest.spyOn(client, 'deleteIpListForASubAccountApiKey').mockReturnValue(
                 Promise.resolve({
@@ -300,12 +309,14 @@ describe('ApiManagementApi', () => {
                 subAccountApiKey: 'subAccountApiKey_example',
             };
 
-            mockResponse = {
-                ipRestrict: 'true',
-                ipList: ['69.210.67.14', '8.34.21.10'],
-                updateTime: 1636371437000,
-                apiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    ipRestrict: 'true',
+                    ipList: ['69.210.67.14', '8.34.21.10'],
+                    updateTime: 1636371437000,
+                    apiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getIpRestrictionForASubAccountApiKey').mockReturnValue(
                 Promise.resolve({
@@ -328,12 +339,14 @@ describe('ApiManagementApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                ipRestrict: 'true',
-                ipList: ['69.210.67.14', '8.34.21.10'],
-                updateTime: 1636371437000,
-                apiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    ipRestrict: 'true',
+                    ipList: ['69.210.67.14', '8.34.21.10'],
+                    updateTime: 1636371437000,
+                    apiKey: 'k5V49ldtn4tszj6W3hystegdfvmGbqDzjmkCtpTvC0G74WhK7yd4rfCTo4lShf',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getIpRestrictionForASubAccountApiKey').mockReturnValue(
                 Promise.resolve({
