@@ -48,14 +48,14 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * @summary Account List(USER_DATA)
          * @param {string} algo Algorithm(sha256) sha256
          * @param {string} userName Mining account test
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         accountList: async (
             algo: string,
             userName: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'algo' is not null or undefined
             assertParamExists('accountList', 'algo', algo);
@@ -135,16 +135,16 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * Weight: 5
          *
          * @summary Cancel hashrate resale configuration(USER_DATA)
-         * @param {number} configId Mining ID 168
+         * @param {number | bigint} configId Mining ID 168
          * @param {string} userName Mining account test
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         cancelHashrateResaleConfiguration: async (
-            configId: number,
+            configId: number | bigint,
             userName: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'configId' is not null or undefined
             assertParamExists('cancelHashrateResaleConfiguration', 'configId', configId);
@@ -184,11 +184,11 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * @param {string} algo Algorithm(sha256) sha256
          * @param {string} userName Mining account test
          * @param {string} [coin] Coin Name
-         * @param {number} [startDate] Millisecond timestamp
-         * @param {number} [endDate] Millisecond timestamp
-         * @param {number} [pageIndex] Page number, empty default first page, starting from 1
-         * @param {number} [pageSize] Min 10,Max 200
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startDate] Millisecond timestamp
+         * @param {number | bigint} [endDate] Millisecond timestamp
+         * @param {number | bigint} [pageIndex] Page number, empty default first page, starting from 1
+         * @param {number | bigint} [pageSize] Min 10,Max 200
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -196,11 +196,11 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             algo: string,
             userName: string,
             coin?: string,
-            startDate?: number,
-            endDate?: number,
-            pageIndex?: number,
-            pageSize?: number,
-            recvWindow?: number
+            startDate?: number | bigint,
+            endDate?: number | bigint,
+            pageIndex?: number | bigint,
+            pageSize?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'algo' is not null or undefined
             assertParamExists('earningsList', 'algo', algo);
@@ -260,11 +260,11 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * @param {string} algo Algorithm(sha256) sha256
          * @param {string} userName Mining account test
          * @param {string} [coin] Coin Name
-         * @param {number} [startDate] Millisecond timestamp
-         * @param {number} [endDate] Millisecond timestamp
-         * @param {number} [pageIndex] Page number, empty default first page, starting from 1
-         * @param {number} [pageSize] Min 10,Max 200
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startDate] Millisecond timestamp
+         * @param {number | bigint} [endDate] Millisecond timestamp
+         * @param {number | bigint} [pageIndex] Page number, empty default first page, starting from 1
+         * @param {number | bigint} [pageSize] Min 10,Max 200
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -272,11 +272,11 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             algo: string,
             userName: string,
             coin?: string,
-            startDate?: number,
-            endDate?: number,
-            pageIndex?: number,
-            pageSize?: number,
-            recvWindow?: number
+            startDate?: number | bigint,
+            endDate?: number | bigint,
+            pageIndex?: number | bigint,
+            pageSize?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'algo' is not null or undefined
             assertParamExists('extraBonusList', 'algo', algo);
@@ -333,20 +333,20 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * Weight: 5
          *
          * @summary Hashrate Resale Detail(USER_DATA)
-         * @param {number} configId Mining ID 168
+         * @param {number | bigint} configId Mining ID 168
          * @param {string} userName Mining account test
-         * @param {number} [pageIndex] Page number, empty default first page, starting from 1
-         * @param {number} [pageSize] Min 10,Max 200
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [pageIndex] Page number, empty default first page, starting from 1
+         * @param {number | bigint} [pageSize] Min 10,Max 200
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         hashrateResaleDetail: async (
-            configId: number,
+            configId: number | bigint,
             userName: string,
-            pageIndex?: number,
-            pageSize?: number,
-            recvWindow?: number
+            pageIndex?: number | bigint,
+            pageSize?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'configId' is not null or undefined
             assertParamExists('hashrateResaleDetail', 'configId', configId);
@@ -391,16 +391,16 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * Weight: 5
          *
          * @summary Hashrate Resale List
-         * @param {number} [pageIndex] Page number, empty default first page, starting from 1
-         * @param {number} [pageSize] Min 10,Max 200
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [pageIndex] Page number, empty default first page, starting from 1
+         * @param {number | bigint} [pageSize] Min 10,Max 200
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         hashrateResaleList: async (
-            pageIndex?: number,
-            pageSize?: number,
-            recvWindow?: number
+            pageIndex?: number | bigint,
+            pageSize?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -434,22 +434,22 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * @summary Hashrate Resale Request(USER_DATA)
          * @param {string} userName Mining account test
          * @param {string} algo Algorithm(sha256) sha256
-         * @param {number} endDate Resale End Time (Millisecond timestamp) 1617659086000
-         * @param {number} startDate Resale Start Time(Millisecond timestamp) 1607659086000
+         * @param {number | bigint} endDate Resale End Time (Millisecond timestamp) 1617659086000
+         * @param {number | bigint} startDate Resale Start Time(Millisecond timestamp) 1607659086000
          * @param {string} toPoolUser Mining Account S19pro
-         * @param {number} hashRate Resale hashrate h/s must be transferred (BTC is greater than 500000000000 ETH is greater than 500000) 100000000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} hashRate Resale hashrate h/s must be transferred (BTC is greater than 500000000000 ETH is greater than 500000) 100000000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         hashrateResaleRequest: async (
             userName: string,
             algo: string,
-            endDate: number,
-            startDate: number,
+            endDate: number | bigint,
+            startDate: number | bigint,
             toPoolUser: string,
-            hashRate: number,
-            recvWindow?: number
+            hashRate: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'userName' is not null or undefined
             assertParamExists('hashrateResaleRequest', 'userName', userName);
@@ -511,21 +511,21 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          *
          * @summary Mining Account Earning(USER_DATA)
          * @param {string} algo Algorithm(sha256) sha256
-         * @param {number} [startDate] Millisecond timestamp
-         * @param {number} [endDate] Millisecond timestamp
-         * @param {number} [pageIndex] Page number, empty default first page, starting from 1
-         * @param {number} [pageSize] Min 10,Max 200
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startDate] Millisecond timestamp
+         * @param {number | bigint} [endDate] Millisecond timestamp
+         * @param {number | bigint} [pageIndex] Page number, empty default first page, starting from 1
+         * @param {number | bigint} [pageSize] Min 10,Max 200
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         miningAccountEarning: async (
             algo: string,
-            startDate?: number,
-            endDate?: number,
-            pageIndex?: number,
-            pageSize?: number,
-            recvWindow?: number
+            startDate?: number | bigint,
+            endDate?: number | bigint,
+            pageIndex?: number | bigint,
+            pageSize?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'algo' is not null or undefined
             assertParamExists('miningAccountEarning', 'algo', algo);
@@ -575,7 +575,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * @param {string} algo Algorithm(sha256) sha256
          * @param {string} userName Mining account test
          * @param {string} workerName Miner’s name(required) bhdc1.16A10404B
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -583,7 +583,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             algo: string,
             userName: string,
             workerName: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'algo' is not null or undefined
             assertParamExists('requestForDetailMinerList', 'algo', algo);
@@ -628,22 +628,22 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * @summary Request for Miner List(USER_DATA)
          * @param {string} algo Algorithm(sha256) sha256
          * @param {string} userName Mining account test
-         * @param {number} [pageIndex] Page number, empty default first page, starting from 1
-         * @param {number} [sort] sort sequence(default=0)0 positive sequence，1 negative sequence
-         * @param {number} [sortColumn] Sort by( default 1): <br></br>1: miner name, <br></br>2: real-time computing power, <br></br>3: daily average computing power, <br></br>4: real-time rejection rate, <br></br>5: last submission time
-         * @param {number} [workerStatus] miners status(default=0),0 all，1 valid，2 invalid，3 failure
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [pageIndex] Page number, empty default first page, starting from 1
+         * @param {number | bigint} [sort] sort sequence(default=0)0 positive sequence，1 negative sequence
+         * @param {number | bigint} [sortColumn] Sort by( default 1): <br></br>1: miner name, <br></br>2: real-time computing power, <br></br>3: daily average computing power, <br></br>4: real-time rejection rate, <br></br>5: last submission time
+         * @param {number | bigint} [workerStatus] miners status(default=0),0 all，1 valid，2 invalid，3 failure
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         requestForMinerList: async (
             algo: string,
             userName: string,
-            pageIndex?: number,
-            sort?: number,
-            sortColumn?: number,
-            workerStatus?: number,
-            recvWindow?: number
+            pageIndex?: number | bigint,
+            sort?: number | bigint,
+            sortColumn?: number | bigint,
+            workerStatus?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'algo' is not null or undefined
             assertParamExists('requestForMinerList', 'algo', algo);
@@ -698,14 +698,14 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * @summary Statistic List(USER_DATA)
          * @param {string} algo Algorithm(sha256) sha256
          * @param {string} userName Mining account test
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         statisticList: async (
             algo: string,
             userName: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'algo' is not null or undefined
             assertParamExists('statisticList', 'algo', algo);
@@ -942,10 +942,10 @@ export interface AccountListRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiAccountList
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -955,10 +955,10 @@ export interface AccountListRequest {
 export interface CancelHashrateResaleConfigurationRequest {
     /**
      * Mining ID 168
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiCancelHashrateResaleConfiguration
      */
-    readonly configId: number;
+    readonly configId: number | bigint;
 
     /**
      * Mining account test
@@ -969,10 +969,10 @@ export interface CancelHashrateResaleConfigurationRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiCancelHashrateResaleConfiguration
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1003,38 +1003,38 @@ export interface EarningsListRequest {
 
     /**
      * Millisecond timestamp
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiEarningsList
      */
-    readonly startDate?: number;
+    readonly startDate?: number | bigint;
 
     /**
      * Millisecond timestamp
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiEarningsList
      */
-    readonly endDate?: number;
+    readonly endDate?: number | bigint;
 
     /**
      * Page number, empty default first page, starting from 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiEarningsList
      */
-    readonly pageIndex?: number;
+    readonly pageIndex?: number | bigint;
 
     /**
      * Min 10,Max 200
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiEarningsList
      */
-    readonly pageSize?: number;
+    readonly pageSize?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiEarningsList
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1065,38 +1065,38 @@ export interface ExtraBonusListRequest {
 
     /**
      * Millisecond timestamp
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiExtraBonusList
      */
-    readonly startDate?: number;
+    readonly startDate?: number | bigint;
 
     /**
      * Millisecond timestamp
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiExtraBonusList
      */
-    readonly endDate?: number;
+    readonly endDate?: number | bigint;
 
     /**
      * Page number, empty default first page, starting from 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiExtraBonusList
      */
-    readonly pageIndex?: number;
+    readonly pageIndex?: number | bigint;
 
     /**
      * Min 10,Max 200
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiExtraBonusList
      */
-    readonly pageSize?: number;
+    readonly pageSize?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiExtraBonusList
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1106,10 +1106,10 @@ export interface ExtraBonusListRequest {
 export interface HashrateResaleDetailRequest {
     /**
      * Mining ID 168
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiHashrateResaleDetail
      */
-    readonly configId: number;
+    readonly configId: number | bigint;
 
     /**
      * Mining account test
@@ -1120,24 +1120,24 @@ export interface HashrateResaleDetailRequest {
 
     /**
      * Page number, empty default first page, starting from 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiHashrateResaleDetail
      */
-    readonly pageIndex?: number;
+    readonly pageIndex?: number | bigint;
 
     /**
      * Min 10,Max 200
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiHashrateResaleDetail
      */
-    readonly pageSize?: number;
+    readonly pageSize?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiHashrateResaleDetail
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1147,24 +1147,24 @@ export interface HashrateResaleDetailRequest {
 export interface HashrateResaleListRequest {
     /**
      * Page number, empty default first page, starting from 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiHashrateResaleList
      */
-    readonly pageIndex?: number;
+    readonly pageIndex?: number | bigint;
 
     /**
      * Min 10,Max 200
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiHashrateResaleList
      */
-    readonly pageSize?: number;
+    readonly pageSize?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiHashrateResaleList
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1188,17 +1188,17 @@ export interface HashrateResaleRequestRequest {
 
     /**
      * Resale End Time (Millisecond timestamp) 1617659086000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiHashrateResaleRequest
      */
-    readonly endDate: number;
+    readonly endDate: number | bigint;
 
     /**
      * Resale Start Time(Millisecond timestamp) 1607659086000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiHashrateResaleRequest
      */
-    readonly startDate: number;
+    readonly startDate: number | bigint;
 
     /**
      * Mining Account S19pro
@@ -1209,17 +1209,17 @@ export interface HashrateResaleRequestRequest {
 
     /**
      * Resale hashrate h/s must be transferred (BTC is greater than 500000000000 ETH is greater than 500000) 100000000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiHashrateResaleRequest
      */
-    readonly hashRate: number;
+    readonly hashRate: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiHashrateResaleRequest
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1236,38 +1236,38 @@ export interface MiningAccountEarningRequest {
 
     /**
      * Millisecond timestamp
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiMiningAccountEarning
      */
-    readonly startDate?: number;
+    readonly startDate?: number | bigint;
 
     /**
      * Millisecond timestamp
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiMiningAccountEarning
      */
-    readonly endDate?: number;
+    readonly endDate?: number | bigint;
 
     /**
      * Page number, empty default first page, starting from 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiMiningAccountEarning
      */
-    readonly pageIndex?: number;
+    readonly pageIndex?: number | bigint;
 
     /**
      * Min 10,Max 200
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiMiningAccountEarning
      */
-    readonly pageSize?: number;
+    readonly pageSize?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiMiningAccountEarning
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1298,10 +1298,10 @@ export interface RequestForDetailMinerListRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiRequestForDetailMinerList
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1325,38 +1325,38 @@ export interface RequestForMinerListRequest {
 
     /**
      * Page number, empty default first page, starting from 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiRequestForMinerList
      */
-    readonly pageIndex?: number;
+    readonly pageIndex?: number | bigint;
 
     /**
      * sort sequence(default=0)0 positive sequence，1 negative sequence
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiRequestForMinerList
      */
-    readonly sort?: number;
+    readonly sort?: number | bigint;
 
     /**
      * Sort by( default 1): <br></br>1: miner name, <br></br>2: real-time computing power, <br></br>3: daily average computing power, <br></br>4: real-time rejection rate, <br></br>5: last submission time
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiRequestForMinerList
      */
-    readonly sortColumn?: number;
+    readonly sortColumn?: number | bigint;
 
     /**
      * miners status(default=0),0 all，1 valid，2 invalid，3 failure
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiRequestForMinerList
      */
-    readonly workerStatus?: number;
+    readonly workerStatus?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiRequestForMinerList
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1380,10 +1380,10 @@ export interface StatisticListRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningApiStatisticList
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
