@@ -69,9 +69,9 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @param {string} pair
          * @param {BasisContractTypeEnum} contractType
          * @param {BasisPeriodEnum} period "5m","15m","30m","1h","2h","4h","6h","12h","1d"
-         * @param {number} limit Default 30,Max 500
-         * @param {number} [startTime]
-         * @param {number} [endTime]
+         * @param {number | bigint} limit Default 30,Max 500
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
          *
          * @throws {RequiredError}
          */
@@ -79,9 +79,9 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             pair: string,
             contractType: BasisContractTypeEnum,
             period: BasisPeriodEnum,
-            limit: number,
-            startTime?: number,
-            endTime?: number
+            limit: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'pair' is not null or undefined
             assertParamExists('basis', 'pair', pair);
@@ -193,19 +193,19 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * @summary Compressed/Aggregate Trades List
          * @param {string} symbol
-         * @param {number} [fromId] ID to get aggregate trades from INCLUSIVE.
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [limit] Default 100; max 1000
+         * @param {number | bigint} [fromId] ID to get aggregate trades from INCLUSIVE.
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [limit] Default 100; max 1000
          *
          * @throws {RequiredError}
          */
         compressedAggregateTradesList: async (
             symbol: string,
-            fromId?: number,
-            startTime?: number,
-            endTime?: number,
-            limit?: number
+            fromId?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('compressedAggregateTradesList', 'symbol', symbol);
@@ -264,9 +264,9 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @param {string} pair
          * @param {ContinuousContractKlineCandlestickDataContractTypeEnum} contractType
          * @param {ContinuousContractKlineCandlestickDataIntervalEnum} interval
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [limit] Default 100; max 1000
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [limit] Default 100; max 1000
          *
          * @throws {RequiredError}
          */
@@ -274,9 +274,9 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             pair: string,
             contractType: ContinuousContractKlineCandlestickDataContractTypeEnum,
             interval: ContinuousContractKlineCandlestickDataIntervalEnum,
-            startTime?: number,
-            endTime?: number,
-            limit?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'pair' is not null or undefined
             assertParamExists('continuousContractKlineCandlestickData', 'pair', pair);
@@ -359,17 +359,17 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * @summary Get Funding Rate History
          * @param {string} [symbol]
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [limit] Default 100; max 1000
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [limit] Default 100; max 1000
          *
          * @throws {RequiredError}
          */
         getFundingRateHistory: async (
             symbol?: string,
-            startTime?: number,
-            endTime?: number,
-            limit?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -440,18 +440,18 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @summary Index Price Kline/Candlestick Data
          * @param {string} pair
          * @param {IndexPriceKlineCandlestickDataIntervalEnum} interval
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [limit] Default 100; max 1000
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [limit] Default 100; max 1000
          *
          * @throws {RequiredError}
          */
         indexPriceKlineCandlestickData: async (
             pair: string,
             interval: IndexPriceKlineCandlestickDataIntervalEnum,
-            startTime?: number,
-            endTime?: number,
-            limit?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'pair' is not null or undefined
             assertParamExists('indexPriceKlineCandlestickData', 'pair', pair);
@@ -507,18 +507,18 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @summary Kline/Candlestick Data
          * @param {string} symbol
          * @param {KlineCandlestickDataIntervalEnum} interval
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [limit] Default 100; max 1000
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [limit] Default 100; max 1000
          *
          * @throws {RequiredError}
          */
         klineCandlestickData: async (
             symbol: string,
             interval: KlineCandlestickDataIntervalEnum,
-            startTime?: number,
-            endTime?: number,
-            limit?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('klineCandlestickData', 'symbol', symbol);
@@ -569,18 +569,18 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @summary Long/Short Ratio
          * @param {string} symbol
          * @param {LongShortRatioPeriodEnum} period "5m","15m","30m","1h","2h","4h","6h","12h","1d"
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [startTime]
-         * @param {number} [endTime]
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
          *
          * @throws {RequiredError}
          */
         longShortRatio: async (
             symbol: string,
             period: LongShortRatioPeriodEnum,
-            limit?: number,
-            startTime?: number,
-            endTime?: number
+            limit?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('longShortRatio', 'symbol', symbol);
@@ -663,18 +663,18 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @summary Mark Price Kline/Candlestick Data
          * @param {string} symbol
          * @param {MarkPriceKlineCandlestickDataIntervalEnum} interval
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [limit] Default 100; max 1000
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [limit] Default 100; max 1000
          *
          * @throws {RequiredError}
          */
         markPriceKlineCandlestickData: async (
             symbol: string,
             interval: MarkPriceKlineCandlestickDataIntervalEnum,
-            startTime?: number,
-            endTime?: number,
-            limit?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('markPriceKlineCandlestickData', 'symbol', symbol);
@@ -750,15 +750,15 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * @summary Old Trades Lookup (MARKET_DATA)
          * @param {string} symbol
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [fromId] ID to get aggregate trades from INCLUSIVE.
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [fromId] ID to get aggregate trades from INCLUSIVE.
          *
          * @throws {RequiredError}
          */
         oldTradesLookup: async (
             symbol: string,
-            limit?: number,
-            fromId?: number
+            limit?: number | bigint,
+            fromId?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('oldTradesLookup', 'symbol', symbol);
@@ -829,18 +829,18 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @summary Open Interest Statistics
          * @param {string} symbol
          * @param {OpenInterestStatisticsPeriodEnum} period "5m","15m","30m","1h","2h","4h","6h","12h","1d"
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [startTime]
-         * @param {number} [endTime]
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
          *
          * @throws {RequiredError}
          */
         openInterestStatistics: async (
             symbol: string,
             period: OpenInterestStatisticsPeriodEnum,
-            limit?: number,
-            startTime?: number,
-            endTime?: number
+            limit?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('openInterestStatistics', 'symbol', symbol);
@@ -892,11 +892,11 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * @summary Order Book
          * @param {string} symbol
-         * @param {number} [limit] Default 100; max 1000
+         * @param {number | bigint} [limit] Default 100; max 1000
          *
          * @throws {RequiredError}
          */
-        orderBook: async (symbol: string, limit?: number): Promise<RequestArgs> => {
+        orderBook: async (symbol: string, limit?: number | bigint): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('orderBook', 'symbol', symbol);
 
@@ -937,18 +937,18 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @summary Premium index Kline Data
          * @param {string} symbol
          * @param {PremiumIndexKlineDataIntervalEnum} interval
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [limit] Default 100; max 1000
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [limit] Default 100; max 1000
          *
          * @throws {RequiredError}
          */
         premiumIndexKlineData: async (
             symbol: string,
             interval: PremiumIndexKlineDataIntervalEnum,
-            startTime?: number,
-            endTime?: number,
-            limit?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('premiumIndexKlineData', 'symbol', symbol);
@@ -1083,11 +1083,11 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * @summary Recent Trades List
          * @param {string} symbol
-         * @param {number} [limit] Default 100; max 1000
+         * @param {number | bigint} [limit] Default 100; max 1000
          *
          * @throws {RequiredError}
          */
-        recentTradesList: async (symbol: string, limit?: number): Promise<RequestArgs> => {
+        recentTradesList: async (symbol: string, limit?: number | bigint): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('recentTradesList', 'symbol', symbol);
 
@@ -1216,18 +1216,18 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @summary Taker Buy/Sell Volume
          * @param {string} symbol
          * @param {TakerBuySellVolumePeriodEnum} period "5m","15m","30m","1h","2h","4h","6h","12h","1d"
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [startTime]
-         * @param {number} [endTime]
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
          *
          * @throws {RequiredError}
          */
         takerBuySellVolume: async (
             symbol: string,
             period: TakerBuySellVolumePeriodEnum,
-            limit?: number,
-            startTime?: number,
-            endTime?: number
+            limit?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('takerBuySellVolume', 'symbol', symbol);
@@ -1334,18 +1334,18 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @summary Top Trader Long/Short Ratio (Accounts)
          * @param {string} symbol
          * @param {TopTraderLongShortRatioAccountsPeriodEnum} period "5m","15m","30m","1h","2h","4h","6h","12h","1d"
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [startTime]
-         * @param {number} [endTime]
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
          *
          * @throws {RequiredError}
          */
         topTraderLongShortRatioAccounts: async (
             symbol: string,
             period: TopTraderLongShortRatioAccountsPeriodEnum,
-            limit?: number,
-            startTime?: number,
-            endTime?: number
+            limit?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('topTraderLongShortRatioAccounts', 'symbol', symbol);
@@ -1399,18 +1399,18 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @summary Top Trader Long/Short Ratio (Positions)
          * @param {string} symbol
          * @param {TopTraderLongShortRatioPositionsPeriodEnum} period "5m","15m","30m","1h","2h","4h","6h","12h","1d"
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [startTime]
-         * @param {number} [endTime]
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
          *
          * @throws {RequiredError}
          */
         topTraderLongShortRatioPositions: async (
             symbol: string,
             period: TopTraderLongShortRatioPositionsPeriodEnum,
-            limit?: number,
-            startTime?: number,
-            endTime?: number
+            limit?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('topTraderLongShortRatioPositions', 'symbol', symbol);
@@ -2024,24 +2024,24 @@ export interface BasisRequest {
 
     /**
      * Default 30,Max 500
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiBasis
      */
-    readonly limit: number;
+    readonly limit: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiBasis
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiBasis
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 }
 
 /**
@@ -2071,31 +2071,31 @@ export interface CompressedAggregateTradesListRequest {
 
     /**
      * ID to get aggregate trades from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiCompressedAggregateTradesList
      */
-    readonly fromId?: number;
+    readonly fromId?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiCompressedAggregateTradesList
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiCompressedAggregateTradesList
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiCompressedAggregateTradesList
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 }
 
 /**
@@ -2126,24 +2126,24 @@ export interface ContinuousContractKlineCandlestickDataRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiContinuousContractKlineCandlestickData
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiContinuousContractKlineCandlestickData
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiContinuousContractKlineCandlestickData
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 }
 
 /**
@@ -2160,24 +2160,24 @@ export interface GetFundingRateHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiGetFundingRateHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiGetFundingRateHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiGetFundingRateHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 }
 
 /**
@@ -2201,24 +2201,24 @@ export interface IndexPriceKlineCandlestickDataRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiIndexPriceKlineCandlestickData
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiIndexPriceKlineCandlestickData
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiIndexPriceKlineCandlestickData
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 }
 
 /**
@@ -2242,24 +2242,24 @@ export interface KlineCandlestickDataRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiKlineCandlestickData
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiKlineCandlestickData
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiKlineCandlestickData
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 }
 
 /**
@@ -2283,24 +2283,24 @@ export interface LongShortRatioRequest {
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiLongShortRatio
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiLongShortRatio
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiLongShortRatio
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 }
 
 /**
@@ -2337,24 +2337,24 @@ export interface MarkPriceKlineCandlestickDataRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiMarkPriceKlineCandlestickData
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiMarkPriceKlineCandlestickData
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiMarkPriceKlineCandlestickData
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 }
 
 /**
@@ -2384,17 +2384,17 @@ export interface OldTradesLookupRequest {
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiOldTradesLookup
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      * ID to get aggregate trades from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiOldTradesLookup
      */
-    readonly fromId?: number;
+    readonly fromId?: number | bigint;
 }
 
 /**
@@ -2431,24 +2431,24 @@ export interface OpenInterestStatisticsRequest {
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiOpenInterestStatistics
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiOpenInterestStatistics
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiOpenInterestStatistics
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 }
 
 /**
@@ -2465,10 +2465,10 @@ export interface OrderBookRequest {
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiOrderBook
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 }
 
 /**
@@ -2492,24 +2492,24 @@ export interface PremiumIndexKlineDataRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiPremiumIndexKlineData
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiPremiumIndexKlineData
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiPremiumIndexKlineData
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 }
 
 /**
@@ -2565,10 +2565,10 @@ export interface RecentTradesListRequest {
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiRecentTradesList
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 }
 
 /**
@@ -2631,24 +2631,24 @@ export interface TakerBuySellVolumeRequest {
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiTakerBuySellVolume
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiTakerBuySellVolume
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiTakerBuySellVolume
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 }
 
 /**
@@ -2685,24 +2685,24 @@ export interface TopTraderLongShortRatioAccountsRequest {
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiTopTraderLongShortRatioAccounts
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiTopTraderLongShortRatioAccounts
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiTopTraderLongShortRatioAccounts
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 }
 
 /**
@@ -2726,24 +2726,24 @@ export interface TopTraderLongShortRatioPositionsRequest {
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiTopTraderLongShortRatioPositions
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiTopTraderLongShortRatioPositions
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiTopTraderLongShortRatioPositions
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 }
 
 /**

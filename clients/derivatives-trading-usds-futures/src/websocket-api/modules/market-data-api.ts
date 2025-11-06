@@ -109,10 +109,10 @@ export interface OrderBookRequest {
 
     /**
      * Default 500; Valid limits:[5, 10, 20, 50, 100, 500, 1000]
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiOrderBook
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 }
 
 /**

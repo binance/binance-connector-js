@@ -38,13 +38,13 @@ const ConvertApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Accept the offered quote (USER_DATA)
          * @param {string} quoteId
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         acceptTheOfferedQuote: async (
             quoteId: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'quoteId' is not null or undefined
             assertParamExists('acceptTheOfferedQuote', 'quoteId', quoteId);
@@ -151,7 +151,7 @@ const ConvertApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {number} [fromAmount] When specified, it is the amount you will be debited after the conversion
          * @param {number} [toAmount] When specified, it is the amount you will be credited after the conversion
          * @param {string} [validTime] 10s, default 10s
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -161,7 +161,7 @@ const ConvertApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             fromAmount?: number,
             toAmount?: number,
             validTime?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'fromAsset' is not null or undefined
             assertParamExists('sendQuoteRequest', 'fromAsset', fromAsset);
@@ -291,10 +291,10 @@ export interface AcceptTheOfferedQuoteRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ConvertApiAcceptTheOfferedQuote
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -379,10 +379,10 @@ export interface SendQuoteRequestRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ConvertApiSendQuoteRequest
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

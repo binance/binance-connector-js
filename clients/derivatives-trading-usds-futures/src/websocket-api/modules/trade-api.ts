@@ -195,10 +195,10 @@ export interface CancelOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -209,10 +209,10 @@ export interface CancelOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -257,10 +257,10 @@ export interface ModifyOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiModifyOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -278,10 +278,10 @@ export interface ModifyOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiModifyOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -424,17 +424,17 @@ export interface NewOrderRequest {
 
     /**
      * order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiNewOrder
      */
-    readonly goodTillDate?: number;
+    readonly goodTillDate?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiNewOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -458,10 +458,10 @@ export interface PositionInformationRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiPositionInformation
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -485,10 +485,10 @@ export interface PositionInformationV2Request {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiPositionInformationV2
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -512,10 +512,10 @@ export interface QueryOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -526,10 +526,10 @@ export interface QueryOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
