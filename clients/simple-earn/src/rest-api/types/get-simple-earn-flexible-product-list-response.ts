@@ -32,8 +32,8 @@ export interface GetSimpleEarnFlexibleProductListResponse {
     rows?: Array<GetSimpleEarnFlexibleProductListResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSimpleEarnFlexibleProductListResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

@@ -33,10 +33,10 @@ export interface GetSimpleEarnLockedProductListResponseRowsInnerDetail {
     rewardAsset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSimpleEarnLockedProductListResponseRowsInnerDetail
      */
-    duration?: number;
+    duration?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -63,10 +63,10 @@ export interface GetSimpleEarnLockedProductListResponseRowsInnerDetail {
     status?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSimpleEarnLockedProductListResponseRowsInnerDetail
      */
-    subscriptionStartTime?: number;
+    subscriptionStartTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -93,8 +93,8 @@ export interface GetSimpleEarnLockedProductListResponseRowsInnerDetail {
     boostApr?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSimpleEarnLockedProductListResponseRowsInnerDetail
      */
-    boostEndTime?: number;
+    boostEndTime?: number | bigint;
 }

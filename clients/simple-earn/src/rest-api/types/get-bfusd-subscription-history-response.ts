@@ -32,8 +32,8 @@ export interface GetBfusdSubscriptionHistoryResponse {
     rows?: Array<GetBfusdSubscriptionHistoryResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetBfusdSubscriptionHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

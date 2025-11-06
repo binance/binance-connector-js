@@ -21,10 +21,10 @@
 export interface GetBfusdRedemptionHistoryResponseRowsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetBfusdRedemptionHistoryResponseRowsInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}
@@ -57,10 +57,10 @@ export interface GetBfusdRedemptionHistoryResponseRowsInner {
     fee?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetBfusdRedemptionHistoryResponseRowsInner
      */
-    arrivalTime?: number;
+    arrivalTime?: number | bigint;
     /**
      *
      * @type {string}

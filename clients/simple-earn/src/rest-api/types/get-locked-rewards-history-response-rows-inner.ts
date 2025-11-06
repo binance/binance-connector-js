@@ -21,16 +21,16 @@
 export interface GetLockedRewardsHistoryResponseRowsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetLockedRewardsHistoryResponseRowsInner
      */
-    positionId?: number;
+    positionId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetLockedRewardsHistoryResponseRowsInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}

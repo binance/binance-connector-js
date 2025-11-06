@@ -21,10 +21,10 @@
 export interface SubscribeFlexibleProductResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SubscribeFlexibleProductResponse
      */
-    purchaseId?: number;
+    purchaseId?: number | bigint;
     /**
      *
      * @type {boolean}

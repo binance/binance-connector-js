@@ -21,16 +21,16 @@
 export interface GetLockedProductPositionResponseRowsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetLockedProductPositionResponseRowsInner
      */
-    positionId?: number;
+    positionId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetLockedProductPositionResponseRowsInner
      */
-    parentPositionId?: number;
+    parentPositionId?: number | bigint;
     /**
      *
      * @type {string}

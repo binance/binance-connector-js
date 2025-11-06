@@ -32,8 +32,8 @@ export interface GetBfusdRedemptionHistoryResponse {
     rows?: Array<GetBfusdRedemptionHistoryResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetBfusdRedemptionHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

@@ -39,8 +39,8 @@ export interface GetRwusdQuotaDetailsResponseStandardRedemptionQuota {
     fee?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetRwusdQuotaDetailsResponseStandardRedemptionQuota
      */
-    redeemPeriod?: number;
+    redeemPeriod?: number | bigint;
 }

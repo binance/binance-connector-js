@@ -39,10 +39,10 @@ export interface GetCollateralRecordResponseRowsInner {
     asset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetCollateralRecordResponseRowsInner
      */
-    createTime?: number;
+    createTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -57,8 +57,8 @@ export interface GetCollateralRecordResponseRowsInner {
     productName?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetCollateralRecordResponseRowsInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
 }

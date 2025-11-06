@@ -33,16 +33,16 @@ export interface GetFlexibleSubscriptionRecordResponseRowsInner {
     asset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFlexibleSubscriptionRecordResponseRowsInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFlexibleSubscriptionRecordResponseRowsInner
      */
-    purchaseId?: number;
+    purchaseId?: number | bigint;
     /**
      *
      * @type {string}

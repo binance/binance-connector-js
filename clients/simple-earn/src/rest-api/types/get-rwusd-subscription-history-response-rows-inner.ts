@@ -21,10 +21,10 @@
 export interface GetRwusdSubscriptionHistoryResponseRowsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetRwusdSubscriptionHistoryResponseRowsInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}

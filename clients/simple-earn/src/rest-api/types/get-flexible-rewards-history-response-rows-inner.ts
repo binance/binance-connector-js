@@ -45,8 +45,8 @@ export interface GetFlexibleRewardsHistoryResponseRowsInner {
     type?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFlexibleRewardsHistoryResponseRowsInner
      */
-    time?: number;
+    time?: number | bigint;
 }

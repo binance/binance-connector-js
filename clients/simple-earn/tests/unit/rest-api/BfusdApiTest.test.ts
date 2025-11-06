@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { BfusdApi } from '../../../src/rest-api';
@@ -52,7 +53,7 @@ describe('BfusdApi', () => {
 
     describe('getBfusdAccount()', () => {
         it('should execute getBfusdAccount() successfully with required parameters only', async () => {
-            mockResponse = { bfusdAmount: '100', totalProfit: '12.81' };
+            mockResponse = JSONParse(JSONStringify({ bfusdAmount: '100', totalProfit: '12.81' }));
 
             const spy = jest.spyOn(client, 'getBfusdAccount').mockReturnValue(
                 Promise.resolve({
@@ -73,7 +74,7 @@ describe('BfusdApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { bfusdAmount: '100', totalProfit: '12.81' };
+            mockResponse = JSONParse(JSONStringify({ bfusdAmount: '100', totalProfit: '12.81' }));
 
             const spy = jest.spyOn(client, 'getBfusdAccount').mockReturnValue(
                 Promise.resolve({
@@ -107,22 +108,24 @@ describe('BfusdApi', () => {
 
     describe('getBfusdQuotaDetails()', () => {
         it('should execute getBfusdQuotaDetails() successfully with required parameters only', async () => {
-            mockResponse = {
-                fastRedemptionQuota: {
-                    leftQuota: '2',
-                    minimum: '0.1',
-                    fee: '0.001',
-                    freeQuota: '100',
-                },
-                standardRedemptionQuota: {
-                    leftQuota: '2',
-                    minimum: '0.1',
-                    fee: '0.0005',
-                    redeemPeriod: 3,
-                },
-                subscribeEnable: true,
-                redeemEnable: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    fastRedemptionQuota: {
+                        leftQuota: '2',
+                        minimum: '0.1',
+                        fee: '0.001',
+                        freeQuota: '100',
+                    },
+                    standardRedemptionQuota: {
+                        leftQuota: '2',
+                        minimum: '0.1',
+                        fee: '0.0005',
+                        redeemPeriod: 3,
+                    },
+                    subscribeEnable: true,
+                    redeemEnable: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getBfusdQuotaDetails').mockReturnValue(
                 Promise.resolve({
@@ -143,22 +146,24 @@ describe('BfusdApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                fastRedemptionQuota: {
-                    leftQuota: '2',
-                    minimum: '0.1',
-                    fee: '0.001',
-                    freeQuota: '100',
-                },
-                standardRedemptionQuota: {
-                    leftQuota: '2',
-                    minimum: '0.1',
-                    fee: '0.0005',
-                    redeemPeriod: 3,
-                },
-                subscribeEnable: true,
-                redeemEnable: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    fastRedemptionQuota: {
+                        leftQuota: '2',
+                        minimum: '0.1',
+                        fee: '0.001',
+                        freeQuota: '100',
+                    },
+                    standardRedemptionQuota: {
+                        leftQuota: '2',
+                        minimum: '0.1',
+                        fee: '0.0005',
+                        redeemPeriod: 3,
+                    },
+                    subscribeEnable: true,
+                    redeemEnable: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getBfusdQuotaDetails').mockReturnValue(
                 Promise.resolve({
@@ -192,10 +197,12 @@ describe('BfusdApi', () => {
 
     describe('getBfusdRateHistory()', () => {
         it('should execute getBfusdRateHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [{ annualPercentageRate: '0.0418', time: 1577233578000 }],
-                total: '1',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [{ annualPercentageRate: '0.0418', time: 1577233578000 }],
+                    total: '1',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getBfusdRateHistory').mockReturnValue(
                 Promise.resolve({
@@ -220,10 +227,12 @@ describe('BfusdApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [{ annualPercentageRate: '0.0418', time: 1577233578000 }],
-                total: '1',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [{ annualPercentageRate: '0.0418', time: 1577233578000 }],
+                    total: '1',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getBfusdRateHistory').mockReturnValue(
                 Promise.resolve({
@@ -257,21 +266,23 @@ describe('BfusdApi', () => {
 
     describe('getBfusdRedemptionHistory()', () => {
         it('should execute getBfusdRedemptionHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1575018510000,
-                        asset: 'BFUSD',
-                        amount: '51',
-                        receiveAsset: 'USDT',
-                        receiveAmount: '50',
-                        fee: '1',
-                        arrivalTime: 1575018510000,
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            asset: 'BFUSD',
+                            amount: '51',
+                            receiveAsset: 'USDT',
+                            receiveAmount: '50',
+                            fee: '1',
+                            arrivalTime: 1575018510000,
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getBfusdRedemptionHistory').mockReturnValue(
                 Promise.resolve({
@@ -296,21 +307,23 @@ describe('BfusdApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1575018510000,
-                        asset: 'BFUSD',
-                        amount: '51',
-                        receiveAsset: 'USDT',
-                        receiveAmount: '50',
-                        fee: '1',
-                        arrivalTime: 1575018510000,
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            asset: 'BFUSD',
+                            amount: '51',
+                            receiveAsset: 'USDT',
+                            receiveAmount: '50',
+                            fee: '1',
+                            arrivalTime: 1575018510000,
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getBfusdRedemptionHistory').mockReturnValue(
                 Promise.resolve({
@@ -346,17 +359,19 @@ describe('BfusdApi', () => {
 
     describe('getBfusdRewardsHistory()', () => {
         it('should execute getBfusdRewardsHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1575018510000,
-                        rewardsAmount: '1',
-                        BFUSDPosition: '100',
-                        annualPercentageRate: '0.0418',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            rewardsAmount: '1',
+                            BFUSDPosition: '100',
+                            annualPercentageRate: '0.0418',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getBfusdRewardsHistory').mockReturnValue(
                 Promise.resolve({
@@ -381,17 +396,19 @@ describe('BfusdApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1575018510000,
-                        rewardsAmount: '1',
-                        BFUSDPosition: '100',
-                        annualPercentageRate: '0.0418',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            rewardsAmount: '1',
+                            BFUSDPosition: '100',
+                            annualPercentageRate: '0.0418',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getBfusdRewardsHistory').mockReturnValue(
                 Promise.resolve({
@@ -427,19 +444,21 @@ describe('BfusdApi', () => {
 
     describe('getBfusdSubscriptionHistory()', () => {
         it('should execute getBfusdSubscriptionHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1575018510000,
-                        asset: 'USDT',
-                        amount: '100',
-                        receiveAsset: 'BFUSD',
-                        receiveAmount: '100',
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            asset: 'USDT',
+                            amount: '100',
+                            receiveAsset: 'BFUSD',
+                            receiveAmount: '100',
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getBfusdSubscriptionHistory').mockReturnValue(
                 Promise.resolve({
@@ -465,19 +484,21 @@ describe('BfusdApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1575018510000,
-                        asset: 'USDT',
-                        amount: '100',
-                        receiveAsset: 'BFUSD',
-                        receiveAmount: '100',
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            asset: 'USDT',
+                            amount: '100',
+                            receiveAsset: 'BFUSD',
+                            receiveAmount: '100',
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getBfusdSubscriptionHistory').mockReturnValue(
                 Promise.resolve({
@@ -518,12 +539,14 @@ describe('BfusdApi', () => {
                 type: 's',
             };
 
-            mockResponse = {
-                success: true,
-                receiveAmount: '0.23092091',
-                fee: '0.00000012',
-                arrivalTime: 1575018510000,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    success: true,
+                    receiveAmount: '0.23092091',
+                    fee: '0.00000012',
+                    arrivalTime: 1575018510000,
+                })
+            );
 
             const spy = jest.spyOn(client, 'redeemBfusd').mockReturnValue(
                 Promise.resolve({
@@ -546,12 +569,14 @@ describe('BfusdApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                success: true,
-                receiveAmount: '0.23092091',
-                fee: '0.00000012',
-                arrivalTime: 1575018510000,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    success: true,
+                    receiveAmount: '0.23092091',
+                    fee: '0.00000012',
+                    arrivalTime: 1575018510000,
+                })
+            );
 
             const spy = jest.spyOn(client, 'redeemBfusd').mockReturnValue(
                 Promise.resolve({
@@ -621,7 +646,7 @@ describe('BfusdApi', () => {
                 amount: 1.0,
             };
 
-            mockResponse = { success: true, bfusdAmount: '0.22091092' };
+            mockResponse = JSONParse(JSONStringify({ success: true, bfusdAmount: '0.22091092' }));
 
             const spy = jest.spyOn(client, 'subscribeBfusd').mockReturnValue(
                 Promise.resolve({
@@ -644,7 +669,7 @@ describe('BfusdApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { success: true, bfusdAmount: '0.22091092' };
+            mockResponse = JSONParse(JSONStringify({ success: true, bfusdAmount: '0.22091092' }));
 
             const spy = jest.spyOn(client, 'subscribeBfusd').mockReturnValue(
                 Promise.resolve({

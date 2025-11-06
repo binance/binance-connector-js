@@ -33,10 +33,10 @@ export interface GetFlexibleRedemptionRecordResponseRowsInner {
     asset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFlexibleRedemptionRecordResponseRowsInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}
@@ -45,10 +45,10 @@ export interface GetFlexibleRedemptionRecordResponseRowsInner {
     projectId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFlexibleRedemptionRecordResponseRowsInner
      */
-    redeemId?: number;
+    redeemId?: number | bigint;
     /**
      *
      * @type {string}

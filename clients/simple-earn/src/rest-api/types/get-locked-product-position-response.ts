@@ -32,8 +32,8 @@ export interface GetLockedProductPositionResponse {
     rows?: Array<GetLockedProductPositionResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetLockedProductPositionResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

@@ -21,10 +21,10 @@
 export interface SubscribeLockedProductResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SubscribeLockedProductResponse
      */
-    purchaseId?: number;
+    purchaseId?: number | bigint;
     /**
      *
      * @type {string}

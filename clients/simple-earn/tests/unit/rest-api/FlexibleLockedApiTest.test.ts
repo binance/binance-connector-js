@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { FlexibleLockedApi } from '../../../src/rest-api';
@@ -84,20 +85,22 @@ describe('FlexibleLockedApi', () => {
 
     describe('getCollateralRecord()', () => {
         it('should execute getCollateralRecord() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        amount: '100.00000000',
-                        productId: 'BUSD001',
-                        asset: 'USDT',
-                        createTime: 1575018510000,
-                        type: 'REPAY',
-                        productName: 'USDT',
-                        orderId: 26055,
-                    },
-                ],
-                total: '1',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            amount: '100.00000000',
+                            productId: 'BUSD001',
+                            asset: 'USDT',
+                            createTime: 1575018510000,
+                            type: 'REPAY',
+                            productName: 'USDT',
+                            orderId: 26055,
+                        },
+                    ],
+                    total: '1',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getCollateralRecord').mockReturnValue(
                 Promise.resolve({
@@ -123,20 +126,22 @@ describe('FlexibleLockedApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        amount: '100.00000000',
-                        productId: 'BUSD001',
-                        asset: 'USDT',
-                        createTime: 1575018510000,
-                        type: 'REPAY',
-                        productName: 'USDT',
-                        orderId: 26055,
-                    },
-                ],
-                total: '1',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            amount: '100.00000000',
+                            productId: 'BUSD001',
+                            asset: 'USDT',
+                            createTime: 1575018510000,
+                            type: 'REPAY',
+                            productName: 'USDT',
+                            orderId: 26055,
+                        },
+                    ],
+                    total: '1',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getCollateralRecord').mockReturnValue(
                 Promise.resolve({
@@ -174,7 +179,7 @@ describe('FlexibleLockedApi', () => {
                 productId: '1',
             };
 
-            mockResponse = { leftPersonalQuota: '1000' };
+            mockResponse = JSONParse(JSONStringify({ leftPersonalQuota: '1000' }));
 
             const spy = jest.spyOn(client, 'getFlexiblePersonalLeftQuota').mockReturnValue(
                 Promise.resolve({
@@ -196,7 +201,7 @@ describe('FlexibleLockedApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { leftPersonalQuota: '1000' };
+            mockResponse = JSONParse(JSONStringify({ leftPersonalQuota: '1000' }));
 
             const spy = jest.spyOn(client, 'getFlexiblePersonalLeftQuota').mockReturnValue(
                 Promise.resolve({
@@ -250,27 +255,29 @@ describe('FlexibleLockedApi', () => {
 
     describe('getFlexibleProductPosition()', () => {
         it('should execute getFlexibleProductPosition() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        totalAmount: '75.46000000',
-                        tierAnnualPercentageRate: { '0-5BTC': 0.05, '5-10BTC': 0.03 },
-                        latestAnnualPercentageRate: '0.02599895',
-                        yesterdayAirdropPercentageRate: '0.02599895',
-                        asset: 'USDT',
-                        airDropAsset: 'BETH',
-                        canRedeem: true,
-                        collateralAmount: '232.23123213',
-                        productId: 'USDT001',
-                        yesterdayRealTimeRewards: '0.10293829',
-                        cumulativeBonusRewards: '0.22759183',
-                        cumulativeRealTimeRewards: '0.22759183',
-                        cumulativeTotalRewards: '0.45459183',
-                        autoSubscribe: true,
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            totalAmount: '75.46000000',
+                            tierAnnualPercentageRate: { '0-5BTC': 0.05, '5-10BTC': 0.03 },
+                            latestAnnualPercentageRate: '0.02599895',
+                            yesterdayAirdropPercentageRate: '0.02599895',
+                            asset: 'USDT',
+                            airDropAsset: 'BETH',
+                            canRedeem: true,
+                            collateralAmount: '232.23123213',
+                            productId: 'USDT001',
+                            yesterdayRealTimeRewards: '0.10293829',
+                            cumulativeBonusRewards: '0.22759183',
+                            cumulativeRealTimeRewards: '0.22759183',
+                            cumulativeTotalRewards: '0.45459183',
+                            autoSubscribe: true,
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFlexibleProductPosition').mockReturnValue(
                 Promise.resolve({
@@ -295,27 +302,29 @@ describe('FlexibleLockedApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        totalAmount: '75.46000000',
-                        tierAnnualPercentageRate: { '0-5BTC': 0.05, '5-10BTC': 0.03 },
-                        latestAnnualPercentageRate: '0.02599895',
-                        yesterdayAirdropPercentageRate: '0.02599895',
-                        asset: 'USDT',
-                        airDropAsset: 'BETH',
-                        canRedeem: true,
-                        collateralAmount: '232.23123213',
-                        productId: 'USDT001',
-                        yesterdayRealTimeRewards: '0.10293829',
-                        cumulativeBonusRewards: '0.22759183',
-                        cumulativeRealTimeRewards: '0.22759183',
-                        cumulativeTotalRewards: '0.45459183',
-                        autoSubscribe: true,
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            totalAmount: '75.46000000',
+                            tierAnnualPercentageRate: { '0-5BTC': 0.05, '5-10BTC': 0.03 },
+                            latestAnnualPercentageRate: '0.02599895',
+                            yesterdayAirdropPercentageRate: '0.02599895',
+                            asset: 'USDT',
+                            airDropAsset: 'BETH',
+                            canRedeem: true,
+                            collateralAmount: '232.23123213',
+                            productId: 'USDT001',
+                            yesterdayRealTimeRewards: '0.10293829',
+                            cumulativeBonusRewards: '0.22759183',
+                            cumulativeRealTimeRewards: '0.22759183',
+                            cumulativeTotalRewards: '0.45459183',
+                            autoSubscribe: true,
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFlexibleProductPosition').mockReturnValue(
                 Promise.resolve({
@@ -351,20 +360,22 @@ describe('FlexibleLockedApi', () => {
 
     describe('getFlexibleRedemptionRecord()', () => {
         it('should execute getFlexibleRedemptionRecord() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        amount: '10.54000000',
-                        asset: 'USDT',
-                        time: 1577257222000,
-                        projectId: 'USDT001',
-                        redeemId: 40607,
-                        destAccount: 'SPOT',
-                        status: 'PAID',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            amount: '10.54000000',
+                            asset: 'USDT',
+                            time: 1577257222000,
+                            projectId: 'USDT001',
+                            redeemId: 40607,
+                            destAccount: 'SPOT',
+                            status: 'PAID',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFlexibleRedemptionRecord').mockReturnValue(
                 Promise.resolve({
@@ -392,20 +403,22 @@ describe('FlexibleLockedApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        amount: '10.54000000',
-                        asset: 'USDT',
-                        time: 1577257222000,
-                        projectId: 'USDT001',
-                        redeemId: 40607,
-                        destAccount: 'SPOT',
-                        status: 'PAID',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            amount: '10.54000000',
+                            asset: 'USDT',
+                            time: 1577257222000,
+                            projectId: 'USDT001',
+                            redeemId: 40607,
+                            destAccount: 'SPOT',
+                            status: 'PAID',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFlexibleRedemptionRecord').mockReturnValue(
                 Promise.resolve({
@@ -445,25 +458,27 @@ describe('FlexibleLockedApi', () => {
                 type: 's',
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        asset: 'BUSD',
-                        rewards: '0.00006408',
-                        projectId: 'USDT001',
-                        type: 'BONUS',
-                        time: 1577233578000,
-                    },
-                    {
-                        asset: 'USDT',
-                        rewards: '0.00687654',
-                        projectId: 'USDT001',
-                        type: 'REALTIME',
-                        time: 1577233562000,
-                    },
-                ],
-                total: 2,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            asset: 'BUSD',
+                            rewards: '0.00006408',
+                            projectId: 'USDT001',
+                            type: 'BONUS',
+                            time: 1577233578000,
+                        },
+                        {
+                            asset: 'USDT',
+                            rewards: '0.00687654',
+                            projectId: 'USDT001',
+                            type: 'REALTIME',
+                            time: 1577233562000,
+                        },
+                    ],
+                    total: 2,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFlexibleRewardsHistory').mockReturnValue(
                 Promise.resolve({
@@ -491,25 +506,27 @@ describe('FlexibleLockedApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        asset: 'BUSD',
-                        rewards: '0.00006408',
-                        projectId: 'USDT001',
-                        type: 'BONUS',
-                        time: 1577233578000,
-                    },
-                    {
-                        asset: 'USDT',
-                        rewards: '0.00687654',
-                        projectId: 'USDT001',
-                        type: 'REALTIME',
-                        time: 1577233562000,
-                    },
-                ],
-                total: 2,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            asset: 'BUSD',
+                            rewards: '0.00006408',
+                            projectId: 'USDT001',
+                            type: 'BONUS',
+                            time: 1577233578000,
+                        },
+                        {
+                            asset: 'USDT',
+                            rewards: '0.00687654',
+                            projectId: 'USDT001',
+                            type: 'REALTIME',
+                            time: 1577233562000,
+                        },
+                    ],
+                    total: 2,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFlexibleRewardsHistory').mockReturnValue(
                 Promise.resolve({
@@ -566,14 +583,16 @@ describe('FlexibleLockedApi', () => {
                 amount: 1.0,
             };
 
-            mockResponse = {
-                totalAmount: '1232.32230982',
-                rewardAsset: 'BUSD',
-                airDropAsset: 'BETH',
-                estDailyBonusRewards: '0.22759183',
-                estDailyRealTimeRewards: '0.22759183',
-                estDailyAirdropRewards: '0.22759183',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    totalAmount: '1232.32230982',
+                    rewardAsset: 'BUSD',
+                    airDropAsset: 'BETH',
+                    estDailyBonusRewards: '0.22759183',
+                    estDailyRealTimeRewards: '0.22759183',
+                    estDailyAirdropRewards: '0.22759183',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFlexibleSubscriptionPreview').mockReturnValue(
                 Promise.resolve({
@@ -596,14 +615,16 @@ describe('FlexibleLockedApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                totalAmount: '1232.32230982',
-                rewardAsset: 'BUSD',
-                airDropAsset: 'BETH',
-                estDailyBonusRewards: '0.22759183',
-                estDailyRealTimeRewards: '0.22759183',
-                estDailyAirdropRewards: '0.22759183',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    totalAmount: '1232.32230982',
+                    rewardAsset: 'BUSD',
+                    airDropAsset: 'BETH',
+                    estDailyBonusRewards: '0.22759183',
+                    estDailyRealTimeRewards: '0.22759183',
+                    estDailyAirdropRewards: '0.22759183',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFlexibleSubscriptionPreview').mockReturnValue(
                 Promise.resolve({
@@ -672,23 +693,25 @@ describe('FlexibleLockedApi', () => {
 
     describe('getFlexibleSubscriptionRecord()', () => {
         it('should execute getFlexibleSubscriptionRecord() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        amount: '100.00000000',
-                        asset: 'USDT',
-                        time: 1575018510000,
-                        purchaseId: 26055,
-                        productId: 'USDT001',
-                        type: 'AUTO',
-                        sourceAccount: 'SPOT',
-                        amtFromSpot: '30',
-                        amtFromFunding: '70',
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            amount: '100.00000000',
+                            asset: 'USDT',
+                            time: 1575018510000,
+                            purchaseId: 26055,
+                            productId: 'USDT001',
+                            type: 'AUTO',
+                            sourceAccount: 'SPOT',
+                            amtFromSpot: '30',
+                            amtFromFunding: '70',
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFlexibleSubscriptionRecord').mockReturnValue(
                 Promise.resolve({
@@ -716,23 +739,25 @@ describe('FlexibleLockedApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        amount: '100.00000000',
-                        asset: 'USDT',
-                        time: 1575018510000,
-                        purchaseId: 26055,
-                        productId: 'USDT001',
-                        type: 'AUTO',
-                        sourceAccount: 'SPOT',
-                        amtFromSpot: '30',
-                        amtFromFunding: '70',
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            amount: '100.00000000',
+                            asset: 'USDT',
+                            time: 1575018510000,
+                            purchaseId: 26055,
+                            productId: 'USDT001',
+                            type: 'AUTO',
+                            sourceAccount: 'SPOT',
+                            amtFromSpot: '30',
+                            amtFromFunding: '70',
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFlexibleSubscriptionRecord').mockReturnValue(
                 Promise.resolve({
@@ -772,7 +797,7 @@ describe('FlexibleLockedApi', () => {
                 projectId: '1',
             };
 
-            mockResponse = { leftPersonalQuota: '1000' };
+            mockResponse = JSONParse(JSONStringify({ leftPersonalQuota: '1000' }));
 
             const spy = jest.spyOn(client, 'getLockedPersonalLeftQuota').mockReturnValue(
                 Promise.resolve({
@@ -794,7 +819,7 @@ describe('FlexibleLockedApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { leftPersonalQuota: '1000' };
+            mockResponse = JSONParse(JSONStringify({ leftPersonalQuota: '1000' }));
 
             const spy = jest.spyOn(client, 'getLockedPersonalLeftQuota').mockReturnValue(
                 Promise.resolve({
@@ -848,46 +873,48 @@ describe('FlexibleLockedApi', () => {
 
     describe('getLockedProductPosition()', () => {
         it('should execute getLockedProductPosition() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        positionId: 123123,
-                        parentPositionId: 123122,
-                        projectId: 'Axs*90',
-                        asset: 'AXS',
-                        amount: '122.09202928',
-                        purchaseTime: '1646182276000',
-                        duration: '60',
-                        accrualDays: '4',
-                        rewardAsset: 'AXS',
-                        APY: '0.2032',
-                        rewardAmt: '5.17181528',
-                        extraRewardAsset: 'BNB',
-                        extraRewardAPR: '0.0203',
-                        estExtraRewardAmt: '5.17181528',
-                        boostRewardAsset: 'AXS',
-                        boostApr: '0.0121',
-                        totalBoostRewardAmt: '3.98201829',
-                        nextPay: '1.29295383',
-                        nextPayDate: '1646697600000',
-                        payPeriod: '1',
-                        redeemAmountEarly: '2802.24068892',
-                        rewardsEndDate: '1651449600000',
-                        deliverDate: '1651536000000',
-                        redeemPeriod: '1',
-                        redeemingAmt: '232.2323',
-                        redeemTo: 'FLEXIBLE',
-                        partialAmtDeliverDate: '1651536000000',
-                        canRedeemEarly: true,
-                        canFastRedemption: true,
-                        autoSubscribe: true,
-                        type: 'AUTO',
-                        status: 'HOLDING',
-                        canReStake: true,
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            positionId: 123123,
+                            parentPositionId: 123122,
+                            projectId: 'Axs*90',
+                            asset: 'AXS',
+                            amount: '122.09202928',
+                            purchaseTime: '1646182276000',
+                            duration: '60',
+                            accrualDays: '4',
+                            rewardAsset: 'AXS',
+                            APY: '0.2032',
+                            rewardAmt: '5.17181528',
+                            extraRewardAsset: 'BNB',
+                            extraRewardAPR: '0.0203',
+                            estExtraRewardAmt: '5.17181528',
+                            boostRewardAsset: 'AXS',
+                            boostApr: '0.0121',
+                            totalBoostRewardAmt: '3.98201829',
+                            nextPay: '1.29295383',
+                            nextPayDate: '1646697600000',
+                            payPeriod: '1',
+                            redeemAmountEarly: '2802.24068892',
+                            rewardsEndDate: '1651449600000',
+                            deliverDate: '1651536000000',
+                            redeemPeriod: '1',
+                            redeemingAmt: '232.2323',
+                            redeemTo: 'FLEXIBLE',
+                            partialAmtDeliverDate: '1651536000000',
+                            canRedeemEarly: true,
+                            canFastRedemption: true,
+                            autoSubscribe: true,
+                            type: 'AUTO',
+                            status: 'HOLDING',
+                            canReStake: true,
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getLockedProductPosition').mockReturnValue(
                 Promise.resolve({
@@ -913,46 +940,48 @@ describe('FlexibleLockedApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        positionId: 123123,
-                        parentPositionId: 123122,
-                        projectId: 'Axs*90',
-                        asset: 'AXS',
-                        amount: '122.09202928',
-                        purchaseTime: '1646182276000',
-                        duration: '60',
-                        accrualDays: '4',
-                        rewardAsset: 'AXS',
-                        APY: '0.2032',
-                        rewardAmt: '5.17181528',
-                        extraRewardAsset: 'BNB',
-                        extraRewardAPR: '0.0203',
-                        estExtraRewardAmt: '5.17181528',
-                        boostRewardAsset: 'AXS',
-                        boostApr: '0.0121',
-                        totalBoostRewardAmt: '3.98201829',
-                        nextPay: '1.29295383',
-                        nextPayDate: '1646697600000',
-                        payPeriod: '1',
-                        redeemAmountEarly: '2802.24068892',
-                        rewardsEndDate: '1651449600000',
-                        deliverDate: '1651536000000',
-                        redeemPeriod: '1',
-                        redeemingAmt: '232.2323',
-                        redeemTo: 'FLEXIBLE',
-                        partialAmtDeliverDate: '1651536000000',
-                        canRedeemEarly: true,
-                        canFastRedemption: true,
-                        autoSubscribe: true,
-                        type: 'AUTO',
-                        status: 'HOLDING',
-                        canReStake: true,
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            positionId: 123123,
+                            parentPositionId: 123122,
+                            projectId: 'Axs*90',
+                            asset: 'AXS',
+                            amount: '122.09202928',
+                            purchaseTime: '1646182276000',
+                            duration: '60',
+                            accrualDays: '4',
+                            rewardAsset: 'AXS',
+                            APY: '0.2032',
+                            rewardAmt: '5.17181528',
+                            extraRewardAsset: 'BNB',
+                            extraRewardAPR: '0.0203',
+                            estExtraRewardAmt: '5.17181528',
+                            boostRewardAsset: 'AXS',
+                            boostApr: '0.0121',
+                            totalBoostRewardAmt: '3.98201829',
+                            nextPay: '1.29295383',
+                            nextPayDate: '1646697600000',
+                            payPeriod: '1',
+                            redeemAmountEarly: '2802.24068892',
+                            rewardsEndDate: '1651449600000',
+                            deliverDate: '1651536000000',
+                            redeemPeriod: '1',
+                            redeemingAmt: '232.2323',
+                            redeemTo: 'FLEXIBLE',
+                            partialAmtDeliverDate: '1651536000000',
+                            canRedeemEarly: true,
+                            canFastRedemption: true,
+                            autoSubscribe: true,
+                            type: 'AUTO',
+                            status: 'HOLDING',
+                            canReStake: true,
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getLockedProductPosition').mockReturnValue(
                 Promise.resolve({
@@ -988,29 +1017,31 @@ describe('FlexibleLockedApi', () => {
 
     describe('getLockedRedemptionRecord()', () => {
         it('should execute getLockedRedemptionRecord() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        positionId: 123123,
-                        redeemId: 40607,
-                        time: 1575018510000,
-                        asset: 'BNB',
-                        lockPeriod: '30',
-                        amount: '21312.23223',
-                        originalAmount: '21312.23223',
-                        type: 'MATURE',
-                        deliverDate: '1575018510000',
-                        lossAmount: '0.00001232',
-                        isComplete: true,
-                        rewardAsset: 'AXS',
-                        rewardAmt: '5.17181528',
-                        extraRewardAsset: 'BNB',
-                        estExtraRewardAmt: '5.17181528',
-                        status: 'PAID',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            positionId: 123123,
+                            redeemId: 40607,
+                            time: 1575018510000,
+                            asset: 'BNB',
+                            lockPeriod: '30',
+                            amount: '21312.23223',
+                            originalAmount: '21312.23223',
+                            type: 'MATURE',
+                            deliverDate: '1575018510000',
+                            lossAmount: '0.00001232',
+                            isComplete: true,
+                            rewardAsset: 'AXS',
+                            rewardAmt: '5.17181528',
+                            extraRewardAsset: 'BNB',
+                            estExtraRewardAmt: '5.17181528',
+                            status: 'PAID',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getLockedRedemptionRecord').mockReturnValue(
                 Promise.resolve({
@@ -1038,29 +1069,31 @@ describe('FlexibleLockedApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        positionId: 123123,
-                        redeemId: 40607,
-                        time: 1575018510000,
-                        asset: 'BNB',
-                        lockPeriod: '30',
-                        amount: '21312.23223',
-                        originalAmount: '21312.23223',
-                        type: 'MATURE',
-                        deliverDate: '1575018510000',
-                        lossAmount: '0.00001232',
-                        isComplete: true,
-                        rewardAsset: 'AXS',
-                        rewardAmt: '5.17181528',
-                        extraRewardAsset: 'BNB',
-                        estExtraRewardAmt: '5.17181528',
-                        status: 'PAID',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            positionId: 123123,
+                            redeemId: 40607,
+                            time: 1575018510000,
+                            asset: 'BNB',
+                            lockPeriod: '30',
+                            amount: '21312.23223',
+                            originalAmount: '21312.23223',
+                            type: 'MATURE',
+                            deliverDate: '1575018510000',
+                            lossAmount: '0.00001232',
+                            isComplete: true,
+                            rewardAsset: 'AXS',
+                            rewardAmt: '5.17181528',
+                            extraRewardAsset: 'BNB',
+                            estExtraRewardAmt: '5.17181528',
+                            status: 'PAID',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getLockedRedemptionRecord').mockReturnValue(
                 Promise.resolve({
@@ -1096,26 +1129,28 @@ describe('FlexibleLockedApi', () => {
 
     describe('getLockedRewardsHistory()', () => {
         it('should execute getLockedRewardsHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        positionId: 123123,
-                        time: 1575018510000,
-                        asset: 'BNB',
-                        lockPeriod: '30',
-                        amount: '21312.23223',
-                        type: 'Locked Rewards',
-                    },
-                    {
-                        positionId: 123123,
-                        time: 1575018510000,
-                        asset: 'BNB',
-                        amount: '1.23223',
-                        type: 'Boost Rewards',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            positionId: 123123,
+                            time: 1575018510000,
+                            asset: 'BNB',
+                            lockPeriod: '30',
+                            amount: '21312.23223',
+                            type: 'Locked Rewards',
+                        },
+                        {
+                            positionId: 123123,
+                            time: 1575018510000,
+                            asset: 'BNB',
+                            amount: '1.23223',
+                            type: 'Boost Rewards',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getLockedRewardsHistory').mockReturnValue(
                 Promise.resolve({
@@ -1142,26 +1177,28 @@ describe('FlexibleLockedApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        positionId: 123123,
-                        time: 1575018510000,
-                        asset: 'BNB',
-                        lockPeriod: '30',
-                        amount: '21312.23223',
-                        type: 'Locked Rewards',
-                    },
-                    {
-                        positionId: 123123,
-                        time: 1575018510000,
-                        asset: 'BNB',
-                        amount: '1.23223',
-                        type: 'Boost Rewards',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            positionId: 123123,
+                            time: 1575018510000,
+                            asset: 'BNB',
+                            lockPeriod: '30',
+                            amount: '21312.23223',
+                            type: 'Locked Rewards',
+                        },
+                        {
+                            positionId: 123123,
+                            time: 1575018510000,
+                            asset: 'BNB',
+                            amount: '1.23223',
+                            type: 'Boost Rewards',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getLockedRewardsHistory').mockReturnValue(
                 Promise.resolve({
@@ -1202,22 +1239,24 @@ describe('FlexibleLockedApi', () => {
                 amount: 1.0,
             };
 
-            mockResponse = [
-                {
-                    rewardAsset: 'AXS',
-                    totalRewardAmt: '5.17181528',
-                    extraRewardAsset: 'BNB',
-                    estTotalExtraRewardAmt: '5.17181528',
-                    boostRewardAsset: 'AXS',
-                    estDailyRewardAmt: '1.20928901',
-                    nextPay: '1.29295383',
-                    nextPayDate: '1646697600000',
-                    valueDate: '1646697600000',
-                    rewardsEndDate: '1651449600000',
-                    deliverDate: '1651536000000',
-                    nextSubscriptionDate: '1651536000000',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        rewardAsset: 'AXS',
+                        totalRewardAmt: '5.17181528',
+                        extraRewardAsset: 'BNB',
+                        estTotalExtraRewardAmt: '5.17181528',
+                        boostRewardAsset: 'AXS',
+                        estDailyRewardAmt: '1.20928901',
+                        nextPay: '1.29295383',
+                        nextPayDate: '1646697600000',
+                        valueDate: '1646697600000',
+                        rewardsEndDate: '1651449600000',
+                        deliverDate: '1651536000000',
+                        nextSubscriptionDate: '1651536000000',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getLockedSubscriptionPreview').mockReturnValue(
                 Promise.resolve({
@@ -1241,22 +1280,24 @@ describe('FlexibleLockedApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    rewardAsset: 'AXS',
-                    totalRewardAmt: '5.17181528',
-                    extraRewardAsset: 'BNB',
-                    estTotalExtraRewardAmt: '5.17181528',
-                    boostRewardAsset: 'AXS',
-                    estDailyRewardAmt: '1.20928901',
-                    nextPay: '1.29295383',
-                    nextPayDate: '1646697600000',
-                    valueDate: '1646697600000',
-                    rewardsEndDate: '1651449600000',
-                    deliverDate: '1651536000000',
-                    nextSubscriptionDate: '1651536000000',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        rewardAsset: 'AXS',
+                        totalRewardAmt: '5.17181528',
+                        extraRewardAsset: 'BNB',
+                        estTotalExtraRewardAmt: '5.17181528',
+                        boostRewardAsset: 'AXS',
+                        estDailyRewardAmt: '1.20928901',
+                        nextPay: '1.29295383',
+                        nextPayDate: '1646697600000',
+                        valueDate: '1646697600000',
+                        rewardsEndDate: '1651449600000',
+                        deliverDate: '1651536000000',
+                        nextSubscriptionDate: '1651536000000',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getLockedSubscriptionPreview').mockReturnValue(
                 Promise.resolve({
@@ -1325,25 +1366,27 @@ describe('FlexibleLockedApi', () => {
 
     describe('getLockedSubscriptionRecord()', () => {
         it('should execute getLockedSubscriptionRecord() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        positionId: 123123,
-                        purchaseId: '26055',
-                        projectId: 'Axs*90',
-                        time: 1575018510000,
-                        asset: 'BNB',
-                        amount: '21312.23223',
-                        lockPeriod: '30',
-                        type: 'AUTO',
-                        sourceAccount: 'SPOT',
-                        amtFromSpot: '30',
-                        amtFromFunding: '70',
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            positionId: 123123,
+                            purchaseId: '26055',
+                            projectId: 'Axs*90',
+                            time: 1575018510000,
+                            asset: 'BNB',
+                            amount: '21312.23223',
+                            lockPeriod: '30',
+                            type: 'AUTO',
+                            sourceAccount: 'SPOT',
+                            amtFromSpot: '30',
+                            amtFromFunding: '70',
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getLockedSubscriptionRecord').mockReturnValue(
                 Promise.resolve({
@@ -1370,25 +1413,27 @@ describe('FlexibleLockedApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        positionId: 123123,
-                        purchaseId: '26055',
-                        projectId: 'Axs*90',
-                        time: 1575018510000,
-                        asset: 'BNB',
-                        amount: '21312.23223',
-                        lockPeriod: '30',
-                        type: 'AUTO',
-                        sourceAccount: 'SPOT',
-                        amtFromSpot: '30',
-                        amtFromFunding: '70',
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            positionId: 123123,
+                            purchaseId: '26055',
+                            projectId: 'Axs*90',
+                            time: 1575018510000,
+                            asset: 'BNB',
+                            amount: '21312.23223',
+                            lockPeriod: '30',
+                            type: 'AUTO',
+                            sourceAccount: 'SPOT',
+                            amtFromSpot: '30',
+                            amtFromFunding: '70',
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getLockedSubscriptionRecord').mockReturnValue(
                 Promise.resolve({
@@ -1428,17 +1473,19 @@ describe('FlexibleLockedApi', () => {
                 productId: '1',
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        productId: 'BUSD001',
-                        asset: 'BUSD',
-                        annualPercentageRate: '0.00006408',
-                        time: 1577233578000,
-                    },
-                ],
-                total: '1',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            productId: 'BUSD001',
+                            asset: 'BUSD',
+                            annualPercentageRate: '0.00006408',
+                            time: 1577233578000,
+                        },
+                    ],
+                    total: '1',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getRateHistory').mockReturnValue(
                 Promise.resolve({
@@ -1465,17 +1512,19 @@ describe('FlexibleLockedApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        productId: 'BUSD001',
-                        asset: 'BUSD',
-                        annualPercentageRate: '0.00006408',
-                        time: 1577233578000,
-                    },
-                ],
-                total: '1',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            productId: 'BUSD001',
+                            asset: 'BUSD',
+                            annualPercentageRate: '0.00006408',
+                            time: 1577233578000,
+                        },
+                    ],
+                    total: '1',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getRateHistory').mockReturnValue(
                 Promise.resolve({
@@ -1525,25 +1574,27 @@ describe('FlexibleLockedApi', () => {
 
     describe('getSimpleEarnFlexibleProductList()', () => {
         it('should execute getSimpleEarnFlexibleProductList() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        asset: 'BTC',
-                        latestAnnualPercentageRate: '0.05000000',
-                        tierAnnualPercentageRate: { '0-5BTC': 0.05, '5-10BTC': 0.03 },
-                        airDropPercentageRate: '0.05000000',
-                        canPurchase: true,
-                        canRedeem: true,
-                        isSoldOut: true,
-                        hot: true,
-                        minPurchaseAmount: '0.01000000',
-                        productId: 'BTC001',
-                        subscriptionStartTime: 1646182276000,
-                        status: 'PURCHASING',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            asset: 'BTC',
+                            latestAnnualPercentageRate: '0.05000000',
+                            tierAnnualPercentageRate: { '0-5BTC': 0.05, '5-10BTC': 0.03 },
+                            airDropPercentageRate: '0.05000000',
+                            canPurchase: true,
+                            canRedeem: true,
+                            isSoldOut: true,
+                            hot: true,
+                            minPurchaseAmount: '0.01000000',
+                            productId: 'BTC001',
+                            subscriptionStartTime: 1646182276000,
+                            status: 'PURCHASING',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getSimpleEarnFlexibleProductList').mockReturnValue(
                 Promise.resolve({
@@ -1567,25 +1618,27 @@ describe('FlexibleLockedApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        asset: 'BTC',
-                        latestAnnualPercentageRate: '0.05000000',
-                        tierAnnualPercentageRate: { '0-5BTC': 0.05, '5-10BTC': 0.03 },
-                        airDropPercentageRate: '0.05000000',
-                        canPurchase: true,
-                        canRedeem: true,
-                        isSoldOut: true,
-                        hot: true,
-                        minPurchaseAmount: '0.01000000',
-                        productId: 'BTC001',
-                        subscriptionStartTime: 1646182276000,
-                        status: 'PURCHASING',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            asset: 'BTC',
+                            latestAnnualPercentageRate: '0.05000000',
+                            tierAnnualPercentageRate: { '0-5BTC': 0.05, '5-10BTC': 0.03 },
+                            airDropPercentageRate: '0.05000000',
+                            canPurchase: true,
+                            canRedeem: true,
+                            isSoldOut: true,
+                            hot: true,
+                            minPurchaseAmount: '0.01000000',
+                            productId: 'BTC001',
+                            subscriptionStartTime: 1646182276000,
+                            status: 'PURCHASING',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getSimpleEarnFlexibleProductList').mockReturnValue(
                 Promise.resolve({
@@ -1623,30 +1676,32 @@ describe('FlexibleLockedApi', () => {
 
     describe('getSimpleEarnLockedProductList()', () => {
         it('should execute getSimpleEarnLockedProductList() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        projectId: 'Axs*90',
-                        detail: {
-                            asset: 'AXS',
-                            rewardAsset: 'AXS',
-                            duration: 90,
-                            renewable: true,
-                            isSoldOut: true,
-                            apr: '1.2069',
-                            status: 'CREATED',
-                            subscriptionStartTime: 1646182276000,
-                            extraRewardAsset: 'BNB',
-                            extraRewardAPR: '0.23',
-                            boostRewardAsset: 'AXS',
-                            boostApr: '0.0121',
-                            boostEndTime: 1646182276000,
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            projectId: 'Axs*90',
+                            detail: {
+                                asset: 'AXS',
+                                rewardAsset: 'AXS',
+                                duration: 90,
+                                renewable: true,
+                                isSoldOut: true,
+                                apr: '1.2069',
+                                status: 'CREATED',
+                                subscriptionStartTime: 1646182276000,
+                                extraRewardAsset: 'BNB',
+                                extraRewardAPR: '0.23',
+                                boostRewardAsset: 'AXS',
+                                boostApr: '0.0121',
+                                boostEndTime: 1646182276000,
+                            },
+                            quota: { totalPersonalQuota: '2', minimum: '0.001' },
                         },
-                        quota: { totalPersonalQuota: '2', minimum: '0.001' },
-                    },
-                ],
-                total: 1,
-            };
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getSimpleEarnLockedProductList').mockReturnValue(
                 Promise.resolve({
@@ -1670,30 +1725,32 @@ describe('FlexibleLockedApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        projectId: 'Axs*90',
-                        detail: {
-                            asset: 'AXS',
-                            rewardAsset: 'AXS',
-                            duration: 90,
-                            renewable: true,
-                            isSoldOut: true,
-                            apr: '1.2069',
-                            status: 'CREATED',
-                            subscriptionStartTime: 1646182276000,
-                            extraRewardAsset: 'BNB',
-                            extraRewardAPR: '0.23',
-                            boostRewardAsset: 'AXS',
-                            boostApr: '0.0121',
-                            boostEndTime: 1646182276000,
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            projectId: 'Axs*90',
+                            detail: {
+                                asset: 'AXS',
+                                rewardAsset: 'AXS',
+                                duration: 90,
+                                renewable: true,
+                                isSoldOut: true,
+                                apr: '1.2069',
+                                status: 'CREATED',
+                                subscriptionStartTime: 1646182276000,
+                                extraRewardAsset: 'BNB',
+                                extraRewardAPR: '0.23',
+                                boostRewardAsset: 'AXS',
+                                boostApr: '0.0121',
+                                boostEndTime: 1646182276000,
+                            },
+                            quota: { totalPersonalQuota: '2', minimum: '0.001' },
                         },
-                        quota: { totalPersonalQuota: '2', minimum: '0.001' },
-                    },
-                ],
-                total: 1,
-            };
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getSimpleEarnLockedProductList').mockReturnValue(
                 Promise.resolve({
@@ -1733,7 +1790,7 @@ describe('FlexibleLockedApi', () => {
                 productId: '1',
             };
 
-            mockResponse = { redeemId: 40607, success: true };
+            mockResponse = JSONParse(JSONStringify({ redeemId: 40607, success: true }));
 
             const spy = jest.spyOn(client, 'redeemFlexibleProduct').mockReturnValue(
                 Promise.resolve({
@@ -1758,7 +1815,7 @@ describe('FlexibleLockedApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { redeemId: 40607, success: true };
+            mockResponse = JSONParse(JSONStringify({ redeemId: 40607, success: true }));
 
             const spy = jest.spyOn(client, 'redeemFlexibleProduct').mockReturnValue(
                 Promise.resolve({
@@ -1814,7 +1871,7 @@ describe('FlexibleLockedApi', () => {
                 positionId: '1',
             };
 
-            mockResponse = { redeemId: 40607, success: true };
+            mockResponse = JSONParse(JSONStringify({ redeemId: 40607, success: true }));
 
             const spy = jest.spyOn(client, 'redeemLockedProduct').mockReturnValue(
                 Promise.resolve({
@@ -1836,7 +1893,7 @@ describe('FlexibleLockedApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { redeemId: 40607, success: true };
+            mockResponse = JSONParse(JSONStringify({ redeemId: 40607, success: true }));
 
             const spy = jest.spyOn(client, 'redeemLockedProduct').mockReturnValue(
                 Promise.resolve({
@@ -1891,7 +1948,7 @@ describe('FlexibleLockedApi', () => {
                 autoSubscribe: true,
             };
 
-            mockResponse = { success: true };
+            mockResponse = JSONParse(JSONStringify({ success: true }));
 
             const spy = jest.spyOn(client, 'setFlexibleAutoSubscribe').mockReturnValue(
                 Promise.resolve({
@@ -1914,7 +1971,7 @@ describe('FlexibleLockedApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { success: true };
+            mockResponse = JSONParse(JSONStringify({ success: true }));
 
             const spy = jest.spyOn(client, 'setFlexibleAutoSubscribe').mockReturnValue(
                 Promise.resolve({
@@ -1986,7 +2043,7 @@ describe('FlexibleLockedApi', () => {
                 autoSubscribe: true,
             };
 
-            mockResponse = { success: true };
+            mockResponse = JSONParse(JSONStringify({ success: true }));
 
             const spy = jest.spyOn(client, 'setLockedAutoSubscribe').mockReturnValue(
                 Promise.resolve({
@@ -2009,7 +2066,7 @@ describe('FlexibleLockedApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { success: true };
+            mockResponse = JSONParse(JSONStringify({ success: true }));
 
             const spy = jest.spyOn(client, 'setLockedAutoSubscribe').mockReturnValue(
                 Promise.resolve({
@@ -2081,7 +2138,7 @@ describe('FlexibleLockedApi', () => {
                 redeemTo: 'redeemTo_example',
             };
 
-            mockResponse = { success: true };
+            mockResponse = JSONParse(JSONStringify({ success: true }));
 
             const spy = jest.spyOn(client, 'setLockedProductRedeemOption').mockReturnValue(
                 Promise.resolve({
@@ -2104,7 +2161,7 @@ describe('FlexibleLockedApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { success: true };
+            mockResponse = JSONParse(JSONStringify({ success: true }));
 
             const spy = jest.spyOn(client, 'setLockedProductRedeemOption').mockReturnValue(
                 Promise.resolve({
@@ -2173,14 +2230,16 @@ describe('FlexibleLockedApi', () => {
 
     describe('simpleAccount()', () => {
         it('should execute simpleAccount() successfully with required parameters only', async () => {
-            mockResponse = {
-                totalAmountInBTC: '0.01067982',
-                totalAmountInUSDT: '77.13289230',
-                totalFlexibleAmountInBTC: '0.00000000',
-                totalFlexibleAmountInUSDT: '0.00000000',
-                totalLockedInBTC: '0.01067982',
-                totalLockedInUSDT: '77.13289230',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    totalAmountInBTC: '0.01067982',
+                    totalAmountInUSDT: '77.13289230',
+                    totalFlexibleAmountInBTC: '0.00000000',
+                    totalFlexibleAmountInUSDT: '0.00000000',
+                    totalLockedInBTC: '0.01067982',
+                    totalLockedInUSDT: '77.13289230',
+                })
+            );
 
             const spy = jest.spyOn(client, 'simpleAccount').mockReturnValue(
                 Promise.resolve({
@@ -2201,14 +2260,16 @@ describe('FlexibleLockedApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                totalAmountInBTC: '0.01067982',
-                totalAmountInUSDT: '77.13289230',
-                totalFlexibleAmountInBTC: '0.00000000',
-                totalFlexibleAmountInUSDT: '0.00000000',
-                totalLockedInBTC: '0.01067982',
-                totalLockedInUSDT: '77.13289230',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    totalAmountInBTC: '0.01067982',
+                    totalAmountInUSDT: '77.13289230',
+                    totalFlexibleAmountInBTC: '0.00000000',
+                    totalFlexibleAmountInUSDT: '0.00000000',
+                    totalLockedInBTC: '0.01067982',
+                    totalLockedInUSDT: '77.13289230',
+                })
+            );
 
             const spy = jest.spyOn(client, 'simpleAccount').mockReturnValue(
                 Promise.resolve({
@@ -2247,7 +2308,7 @@ describe('FlexibleLockedApi', () => {
                 amount: 1.0,
             };
 
-            mockResponse = { purchaseId: 40607, success: true };
+            mockResponse = JSONParse(JSONStringify({ purchaseId: 40607, success: true }));
 
             const spy = jest.spyOn(client, 'subscribeFlexibleProduct').mockReturnValue(
                 Promise.resolve({
@@ -2272,7 +2333,7 @@ describe('FlexibleLockedApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { purchaseId: 40607, success: true };
+            mockResponse = JSONParse(JSONStringify({ purchaseId: 40607, success: true }));
 
             const spy = jest.spyOn(client, 'subscribeFlexibleProduct').mockReturnValue(
                 Promise.resolve({
@@ -2344,7 +2405,9 @@ describe('FlexibleLockedApi', () => {
                 amount: 1.0,
             };
 
-            mockResponse = { purchaseId: 40607, positionId: '12345', success: true };
+            mockResponse = JSONParse(
+                JSONStringify({ purchaseId: 40607, positionId: '12345', success: true })
+            );
 
             const spy = jest.spyOn(client, 'subscribeLockedProduct').mockReturnValue(
                 Promise.resolve({
@@ -2370,7 +2433,9 @@ describe('FlexibleLockedApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { purchaseId: 40607, positionId: '12345', success: true };
+            mockResponse = JSONParse(
+                JSONStringify({ purchaseId: 40607, positionId: '12345', success: true })
+            );
 
             const spy = jest.spyOn(client, 'subscribeLockedProduct').mockReturnValue(
                 Promise.resolve({

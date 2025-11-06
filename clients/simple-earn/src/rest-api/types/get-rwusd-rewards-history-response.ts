@@ -32,8 +32,8 @@ export interface GetRwusdRewardsHistoryResponse {
     rows?: Array<GetRwusdRewardsHistoryResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetRwusdRewardsHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

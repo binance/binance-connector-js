@@ -21,10 +21,10 @@
 export interface GetLockedSubscriptionRecordResponseRowsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetLockedSubscriptionRecordResponseRowsInner
      */
-    positionId?: number;
+    positionId?: number | bigint;
     /**
      *
      * @type {string}
@@ -39,10 +39,10 @@ export interface GetLockedSubscriptionRecordResponseRowsInner {
     projectId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetLockedSubscriptionRecordResponseRowsInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}

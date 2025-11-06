@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { RwusdApi } from '../../../src/rest-api';
@@ -52,7 +53,7 @@ describe('RwusdApi', () => {
 
     describe('getRwusdAccount()', () => {
         it('should execute getRwusdAccount() successfully with required parameters only', async () => {
-            mockResponse = { rwusdAmount: '100', totalProfit: '12.81' };
+            mockResponse = JSONParse(JSONStringify({ rwusdAmount: '100', totalProfit: '12.81' }));
 
             const spy = jest.spyOn(client, 'getRwusdAccount').mockReturnValue(
                 Promise.resolve({
@@ -73,7 +74,7 @@ describe('RwusdApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { rwusdAmount: '100', totalProfit: '12.81' };
+            mockResponse = JSONParse(JSONStringify({ rwusdAmount: '100', totalProfit: '12.81' }));
 
             const spy = jest.spyOn(client, 'getRwusdAccount').mockReturnValue(
                 Promise.resolve({
@@ -107,27 +108,29 @@ describe('RwusdApi', () => {
 
     describe('getRwusdQuotaDetails()', () => {
         it('should execute getRwusdQuotaDetails() successfully with required parameters only', async () => {
-            mockResponse = {
-                subscriptionQuota: {
-                    assets: ['USDT', 'USDC'],
-                    leftQuota: '1000',
-                    minimum: '0.10000000',
-                },
-                fastRedemptionQuota: {
-                    leftQuota: '2',
-                    minimum: '0.1',
-                    fee: '0.0005',
-                    freeQuota: '100',
-                },
-                standardRedemptionQuota: {
-                    leftQuota: '2',
-                    minimum: '0.1',
-                    fee: '0.001',
-                    redeemPeriod: 3,
-                },
-                subscribeEnable: true,
-                redeemEnable: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    subscriptionQuota: {
+                        assets: ['USDT', 'USDC'],
+                        leftQuota: '1000',
+                        minimum: '0.10000000',
+                    },
+                    fastRedemptionQuota: {
+                        leftQuota: '2',
+                        minimum: '0.1',
+                        fee: '0.0005',
+                        freeQuota: '100',
+                    },
+                    standardRedemptionQuota: {
+                        leftQuota: '2',
+                        minimum: '0.1',
+                        fee: '0.001',
+                        redeemPeriod: 3,
+                    },
+                    subscribeEnable: true,
+                    redeemEnable: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getRwusdQuotaDetails').mockReturnValue(
                 Promise.resolve({
@@ -148,27 +151,29 @@ describe('RwusdApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                subscriptionQuota: {
-                    assets: ['USDT', 'USDC'],
-                    leftQuota: '1000',
-                    minimum: '0.10000000',
-                },
-                fastRedemptionQuota: {
-                    leftQuota: '2',
-                    minimum: '0.1',
-                    fee: '0.0005',
-                    freeQuota: '100',
-                },
-                standardRedemptionQuota: {
-                    leftQuota: '2',
-                    minimum: '0.1',
-                    fee: '0.001',
-                    redeemPeriod: 3,
-                },
-                subscribeEnable: true,
-                redeemEnable: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    subscriptionQuota: {
+                        assets: ['USDT', 'USDC'],
+                        leftQuota: '1000',
+                        minimum: '0.10000000',
+                    },
+                    fastRedemptionQuota: {
+                        leftQuota: '2',
+                        minimum: '0.1',
+                        fee: '0.0005',
+                        freeQuota: '100',
+                    },
+                    standardRedemptionQuota: {
+                        leftQuota: '2',
+                        minimum: '0.1',
+                        fee: '0.001',
+                        redeemPeriod: 3,
+                    },
+                    subscribeEnable: true,
+                    redeemEnable: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getRwusdQuotaDetails').mockReturnValue(
                 Promise.resolve({
@@ -202,10 +207,12 @@ describe('RwusdApi', () => {
 
     describe('getRwusdRateHistory()', () => {
         it('should execute getRwusdRateHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [{ annualPercentageRate: '0.0418', time: 1577233578000 }],
-                total: '1',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [{ annualPercentageRate: '0.0418', time: 1577233578000 }],
+                    total: '1',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getRwusdRateHistory').mockReturnValue(
                 Promise.resolve({
@@ -230,10 +237,12 @@ describe('RwusdApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [{ annualPercentageRate: '0.0418', time: 1577233578000 }],
-                total: '1',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [{ annualPercentageRate: '0.0418', time: 1577233578000 }],
+                    total: '1',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getRwusdRateHistory').mockReturnValue(
                 Promise.resolve({
@@ -267,21 +276,23 @@ describe('RwusdApi', () => {
 
     describe('getRwusdRedemptionHistory()', () => {
         it('should execute getRwusdRedemptionHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1575018510000,
-                        asset: 'RWUSD',
-                        amount: '51',
-                        receiveAsset: 'USDC',
-                        receiveAmount: '50',
-                        fee: '1',
-                        arrivalTime: 1575018510000,
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            asset: 'RWUSD',
+                            amount: '51',
+                            receiveAsset: 'USDC',
+                            receiveAmount: '50',
+                            fee: '1',
+                            arrivalTime: 1575018510000,
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getRwusdRedemptionHistory').mockReturnValue(
                 Promise.resolve({
@@ -306,21 +317,23 @@ describe('RwusdApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1575018510000,
-                        asset: 'RWUSD',
-                        amount: '51',
-                        receiveAsset: 'USDC',
-                        receiveAmount: '50',
-                        fee: '1',
-                        arrivalTime: 1575018510000,
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            asset: 'RWUSD',
+                            amount: '51',
+                            receiveAsset: 'USDC',
+                            receiveAmount: '50',
+                            fee: '1',
+                            arrivalTime: 1575018510000,
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getRwusdRedemptionHistory').mockReturnValue(
                 Promise.resolve({
@@ -356,17 +369,19 @@ describe('RwusdApi', () => {
 
     describe('getRwusdRewardsHistory()', () => {
         it('should execute getRwusdRewardsHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1575018510000,
-                        rewardsAmount: '1',
-                        rwusdPosition: '100',
-                        annualPercentageRate: '0.0418',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            rewardsAmount: '1',
+                            rwusdPosition: '100',
+                            annualPercentageRate: '0.0418',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getRwusdRewardsHistory').mockReturnValue(
                 Promise.resolve({
@@ -391,17 +406,19 @@ describe('RwusdApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1575018510000,
-                        rewardsAmount: '1',
-                        rwusdPosition: '100',
-                        annualPercentageRate: '0.0418',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            rewardsAmount: '1',
+                            rwusdPosition: '100',
+                            annualPercentageRate: '0.0418',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getRwusdRewardsHistory').mockReturnValue(
                 Promise.resolve({
@@ -437,19 +454,21 @@ describe('RwusdApi', () => {
 
     describe('getRwusdSubscriptionHistory()', () => {
         it('should execute getRwusdSubscriptionHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1575018510000,
-                        asset: 'USDC',
-                        amount: '100',
-                        receiveAsset: 'RWUSD',
-                        receiveAmount: '100',
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            asset: 'USDC',
+                            amount: '100',
+                            receiveAsset: 'RWUSD',
+                            receiveAmount: '100',
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getRwusdSubscriptionHistory').mockReturnValue(
                 Promise.resolve({
@@ -475,19 +494,21 @@ describe('RwusdApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        time: 1575018510000,
-                        asset: 'USDC',
-                        amount: '100',
-                        receiveAsset: 'RWUSD',
-                        receiveAmount: '100',
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            time: 1575018510000,
+                            asset: 'USDC',
+                            amount: '100',
+                            receiveAsset: 'RWUSD',
+                            receiveAmount: '100',
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getRwusdSubscriptionHistory').mockReturnValue(
                 Promise.resolve({
@@ -528,12 +549,14 @@ describe('RwusdApi', () => {
                 type: 's',
             };
 
-            mockResponse = {
-                success: true,
-                receiveAmount: '0.23092091',
-                fee: '0.00000012',
-                arrivalTime: 1575018510000,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    success: true,
+                    receiveAmount: '0.23092091',
+                    fee: '0.00000012',
+                    arrivalTime: 1575018510000,
+                })
+            );
 
             const spy = jest.spyOn(client, 'redeemRwusd').mockReturnValue(
                 Promise.resolve({
@@ -556,12 +579,14 @@ describe('RwusdApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                success: true,
-                receiveAmount: '0.23092091',
-                fee: '0.00000012',
-                arrivalTime: 1575018510000,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    success: true,
+                    receiveAmount: '0.23092091',
+                    fee: '0.00000012',
+                    arrivalTime: 1575018510000,
+                })
+            );
 
             const spy = jest.spyOn(client, 'redeemRwusd').mockReturnValue(
                 Promise.resolve({
@@ -631,7 +656,7 @@ describe('RwusdApi', () => {
                 amount: 1.0,
             };
 
-            mockResponse = { success: true, rwusdAmount: '0.22091092' };
+            mockResponse = JSONParse(JSONStringify({ success: true, rwusdAmount: '0.22091092' }));
 
             const spy = jest.spyOn(client, 'subscribeRwusd').mockReturnValue(
                 Promise.resolve({
@@ -654,7 +679,7 @@ describe('RwusdApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { success: true, rwusdAmount: '0.22091092' };
+            mockResponse = JSONParse(JSONStringify({ success: true, rwusdAmount: '0.22091092' }));
 
             const spy = jest.spyOn(client, 'subscribeRwusd').mockReturnValue(
                 Promise.resolve({

@@ -32,8 +32,8 @@ export interface GetFlexibleRewardsHistoryResponse {
     rows?: Array<GetFlexibleRewardsHistoryResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFlexibleRewardsHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

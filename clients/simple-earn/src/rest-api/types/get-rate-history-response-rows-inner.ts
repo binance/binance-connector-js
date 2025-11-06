@@ -39,8 +39,8 @@ export interface GetRateHistoryResponseRowsInner {
     annualPercentageRate?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetRateHistoryResponseRowsInner
      */
-    time?: number;
+    time?: number | bigint;
 }

@@ -32,8 +32,8 @@ export interface GetFlexibleRedemptionRecordResponse {
     rows?: Array<GetFlexibleRedemptionRecordResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFlexibleRedemptionRecordResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

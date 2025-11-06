@@ -32,8 +32,8 @@ export interface GetFlexibleProductPositionResponse {
     rows?: Array<GetFlexibleProductPositionResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFlexibleProductPositionResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

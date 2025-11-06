@@ -32,8 +32,8 @@ export interface GetLockedRedemptionRecordResponse {
     rows?: Array<GetLockedRedemptionRecordResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetLockedRedemptionRecordResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

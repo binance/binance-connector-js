@@ -32,8 +32,8 @@ export interface GetFlexibleSubscriptionRecordResponse {
     rows?: Array<GetFlexibleSubscriptionRecordResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFlexibleSubscriptionRecordResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

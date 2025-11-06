@@ -86,10 +86,10 @@ export interface GetSimpleEarnFlexibleProductListResponseRowsInner {
     productId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSimpleEarnFlexibleProductListResponseRowsInner
      */
-    subscriptionStartTime?: number;
+    subscriptionStartTime?: number | bigint;
     /**
      *
      * @type {string}

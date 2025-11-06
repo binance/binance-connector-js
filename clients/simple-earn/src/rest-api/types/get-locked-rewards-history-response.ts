@@ -32,8 +32,8 @@ export interface GetLockedRewardsHistoryResponse {
     rows?: Array<GetLockedRewardsHistoryResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetLockedRewardsHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

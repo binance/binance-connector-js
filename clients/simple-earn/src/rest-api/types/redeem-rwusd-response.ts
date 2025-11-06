@@ -39,8 +39,8 @@ export interface RedeemRwusdResponse {
     fee?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RedeemRwusdResponse
      */
-    arrivalTime?: number;
+    arrivalTime?: number | bigint;
 }

@@ -39,8 +39,8 @@ export interface GetBfusdQuotaDetailsResponseStandardRedemptionQuota {
     fee?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetBfusdQuotaDetailsResponseStandardRedemptionQuota
      */
-    redeemPeriod?: number;
+    redeemPeriod?: number | bigint;
 }

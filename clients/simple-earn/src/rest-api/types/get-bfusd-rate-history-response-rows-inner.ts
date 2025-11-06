@@ -27,8 +27,8 @@ export interface GetBfusdRateHistoryResponseRowsInner {
     annualPercentageRate?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetBfusdRateHistoryResponseRowsInner
      */
-    time?: number;
+    time?: number | bigint;
 }

@@ -32,8 +32,8 @@ export interface GetLockedSubscriptionRecordResponse {
     rows?: Array<GetLockedSubscriptionRecordResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetLockedSubscriptionRecordResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

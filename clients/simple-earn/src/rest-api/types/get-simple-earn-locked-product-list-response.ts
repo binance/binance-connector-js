@@ -32,8 +32,8 @@ export interface GetSimpleEarnLockedProductListResponse {
     rows?: Array<GetSimpleEarnLockedProductListResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSimpleEarnLockedProductListResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

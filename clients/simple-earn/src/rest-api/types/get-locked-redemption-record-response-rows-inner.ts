@@ -21,22 +21,22 @@
 export interface GetLockedRedemptionRecordResponseRowsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetLockedRedemptionRecordResponseRowsInner
      */
-    positionId?: number;
+    positionId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetLockedRedemptionRecordResponseRowsInner
      */
-    redeemId?: number;
+    redeemId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetLockedRedemptionRecordResponseRowsInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}
