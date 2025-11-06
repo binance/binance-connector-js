@@ -90,13 +90,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Cancel All CM Open Conditional Orders(TRADE)
          * @param {string} symbol
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         cancelAllCmOpenConditionalOrders: async (
             symbol: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('cancelAllCmOpenConditionalOrders', 'symbol', symbol);
@@ -128,13 +128,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Cancel All CM Open Orders(TRADE)
          * @param {string} symbol
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         cancelAllCmOpenOrders: async (
             symbol: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('cancelAllCmOpenOrders', 'symbol', symbol);
@@ -166,13 +166,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Cancel All UM Open Conditional Orders (TRADE)
          * @param {string} symbol
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         cancelAllUmOpenConditionalOrders: async (
             symbol: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('cancelAllUmOpenConditionalOrders', 'symbol', symbol);
@@ -204,13 +204,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Cancel All UM Open Orders(TRADE)
          * @param {string} symbol
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         cancelAllUmOpenOrders: async (
             symbol: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('cancelAllUmOpenOrders', 'symbol', symbol);
@@ -244,17 +244,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Cancel CM Conditional Order(TRADE)
          * @param {string} symbol
-         * @param {number} [strategyId]
+         * @param {number | bigint} [strategyId]
          * @param {string} [newClientStrategyId]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         cancelCmConditionalOrder: async (
             symbol: string,
-            strategyId?: number,
+            strategyId?: number | bigint,
             newClientStrategyId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('cancelCmConditionalOrder', 'symbol', symbol);
@@ -296,17 +296,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Cancel CM Order(TRADE)
          * @param {string} symbol
-         * @param {number} [orderId]
+         * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         cancelCmOrder: async (
             symbol: string,
-            orderId?: number,
+            orderId?: number | bigint,
             origClientOrderId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('cancelCmOrder', 'symbol', symbol);
@@ -346,13 +346,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Cancel Margin Account All Open Orders on a Symbol(TRADE)
          * @param {string} symbol
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         cancelMarginAccountAllOpenOrdersOnASymbol: async (
             symbol: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('cancelMarginAccountAllOpenOrdersOnASymbol', 'symbol', symbol);
@@ -386,19 +386,19 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Cancel Margin Account OCO Orders(TRADE)
          * @param {string} symbol
-         * @param {number} [orderListId] Either `orderListId` or `listClientOrderId` must be provided
+         * @param {number | bigint} [orderListId] Either `orderListId` or `listClientOrderId` must be provided
          * @param {string} [listClientOrderId] Either `orderListId` or `listClientOrderId` must be provided
          * @param {string} [newClientOrderId] Used to uniquely identify this cancel. Automatically generated by default
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         cancelMarginAccountOcoOrders: async (
             symbol: string,
-            orderListId?: number,
+            orderListId?: number | bigint,
             listClientOrderId?: string,
             newClientOrderId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('cancelMarginAccountOcoOrders', 'symbol', symbol);
@@ -444,19 +444,19 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Cancel Margin Account Order(TRADE)
          * @param {string} symbol
-         * @param {number} [orderId]
+         * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
          * @param {string} [newClientOrderId] Used to uniquely identify this cancel. Automatically generated by default
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         cancelMarginAccountOrder: async (
             symbol: string,
-            orderId?: number,
+            orderId?: number | bigint,
             origClientOrderId?: string,
             newClientOrderId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('cancelMarginAccountOrder', 'symbol', symbol);
@@ -502,17 +502,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Cancel UM Conditional Order(TRADE)
          * @param {string} symbol
-         * @param {number} [strategyId]
+         * @param {number | bigint} [strategyId]
          * @param {string} [newClientStrategyId]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         cancelUmConditionalOrder: async (
             symbol: string,
-            strategyId?: number,
+            strategyId?: number | bigint,
             newClientStrategyId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('cancelUmConditionalOrder', 'symbol', symbol);
@@ -554,17 +554,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Cancel UM Order(TRADE)
          * @param {string} symbol
-         * @param {number} [orderId]
+         * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         cancelUmOrder: async (
             symbol: string,
-            orderId?: number,
+            orderId?: number | bigint,
             origClientOrderId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('cancelUmOrder', 'symbol', symbol);
@@ -614,22 +614,22 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary CM Account Trade List(USER_DATA)
          * @param {string} [symbol]
          * @param {string} [pair]
-         * @param {number} [startTime] Timestamp in ms to get funding from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number} [fromId] Trade id to fetch from. Default gets most recent trades.
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
+         * @param {number | bigint} [fromId] Trade id to fetch from. Default gets most recent trades.
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         cmAccountTradeList: async (
             symbol?: string,
             pair?: string,
-            startTime?: number,
-            endTime?: number,
-            fromId?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            fromId?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -684,13 +684,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary CM Position ADL Quantile Estimation(USER_DATA)
          * @param {string} [symbol]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         cmPositionAdlQuantileEstimation: async (
             symbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -718,11 +718,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 30
          *
          * @summary Get UM Futures BNB Burn Status (USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        getUmFuturesBnbBurnStatus: async (recvWindow?: number): Promise<RequestArgs> => {
+        getUmFuturesBnbBurnStatus: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -747,14 +747,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Margin Account Borrow(MARGIN)
          * @param {string} asset
          * @param {number} amount
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         marginAccountBorrow: async (
             asset: string,
             amount: number,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
             assertParamExists('marginAccountBorrow', 'asset', asset);
@@ -814,7 +814,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {MarginAccountNewOcoStopLimitTimeInForceEnum} [stopLimitTimeInForce] Valid values are `GTC/FOK/IOC`
          * @param {MarginAccountNewOcoNewOrderRespTypeEnum} [newOrderRespType] "ACK", "RESULT", default "ACK"
          * @param {MarginAccountNewOcoSideEffectTypeEnum} [sideEffectType] NO_SIDE_EFFECT, MARGIN_BUY, AUTO_REPAY; default NO_SIDE_EFFECT.
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -833,7 +833,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             stopLimitTimeInForce?: MarginAccountNewOcoStopLimitTimeInForceEnum,
             newOrderRespType?: MarginAccountNewOcoNewOrderRespTypeEnum,
             sideEffectType?: MarginAccountNewOcoSideEffectTypeEnum,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('marginAccountNewOco', 'symbol', symbol);
@@ -926,14 +926,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Margin Account Repay(MARGIN)
          * @param {string} asset
          * @param {number} amount
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         marginAccountRepay: async (
             asset: string,
             amount: number,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
             assertParamExists('marginAccountRepay', 'asset', asset);
@@ -978,7 +978,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} asset
          * @param {string} [amount]
          * @param {string} [specifyRepayAssets] Specific asset list to repay debt; Can be added in batch, separated by commas
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -986,7 +986,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             asset: string,
             amount?: string,
             specifyRepayAssets?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
             assertParamExists('marginAccountRepayDebt', 'asset', asset);
@@ -1026,23 +1026,23 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Margin Account Trade List (USER_DATA)
          * @param {string} symbol
-         * @param {number} [orderId]
-         * @param {number} [startTime] Timestamp in ms to get funding from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number} [fromId] Trade id to fetch from. Default gets most recent trades.
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [orderId]
+         * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
+         * @param {number | bigint} [fromId] Trade id to fetch from. Default gets most recent trades.
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         marginAccountTradeList: async (
             symbol: string,
-            orderId?: number,
-            startTime?: number,
-            endTime?: number,
-            fromId?: number,
-            limit?: number,
-            recvWindow?: number
+            orderId?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            fromId?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('marginAccountTradeList', 'symbol', symbol);
@@ -1104,10 +1104,10 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {ModifyCmOrderSideEnum} side
          * @param {number} quantity Order quantity
          * @param {number} price
-         * @param {number} [orderId]
+         * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
          * @param {ModifyCmOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -1116,10 +1116,10 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             side: ModifyCmOrderSideEnum,
             quantity: number,
             price: number,
-            orderId?: number,
+            orderId?: number | bigint,
             origClientOrderId?: string,
             priceMatch?: ModifyCmOrderPriceMatchEnum,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('modifyCmOrder', 'symbol', symbol);
@@ -1191,10 +1191,10 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {ModifyUmOrderSideEnum} side
          * @param {number} quantity Order quantity
          * @param {number} price
-         * @param {number} [orderId]
+         * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
          * @param {ModifyUmOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -1203,10 +1203,10 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             side: ModifyUmOrderSideEnum,
             quantity: number,
             price: number,
-            orderId?: number,
+            orderId?: number | bigint,
             origClientOrderId?: string,
             priceMatch?: ModifyUmOrderPriceMatchEnum,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('modifyUmOrder', 'symbol', symbol);
@@ -1306,7 +1306,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [stopPrice] Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
          * @param {number} [activationPrice] Used with `TRAILING_STOP_MARKET` orders, default as the mark price
          * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1%
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -1325,7 +1325,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             stopPrice?: number,
             activationPrice?: number,
             callbackRate?: number,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('newCmConditionalOrder', 'symbol', symbol);
@@ -1427,7 +1427,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {NewCmOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
          * @param {string} [newClientOrderId] Used to uniquely identify this cancel. Automatically generated by default
          * @param {NewCmOrderNewOrderRespTypeEnum} [newOrderRespType] "ACK", "RESULT", default "ACK"
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -1443,7 +1443,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             priceMatch?: NewCmOrderPriceMatchEnum,
             newClientOrderId?: string,
             newOrderRespType?: NewCmOrderNewOrderRespTypeEnum,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('newCmOrder', 'symbol', symbol);
@@ -1532,7 +1532,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {NewMarginOrderTimeInForceEnum} [timeInForce]
          * @param {NewMarginOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `NONE`:No STP / `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers
          * @param {boolean} [autoRepayAtCancel] 只有在自动借款单或者自动借还单生效，true表示的是撤单后需要把订单产生的借款归还，默认为true
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -1551,7 +1551,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             timeInForce?: NewMarginOrderTimeInForceEnum,
             selfTradePreventionMode?: NewMarginOrderSelfTradePreventionModeEnum,
             autoRepayAtCancel?: boolean,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('newMarginOrder', 'symbol', symbol);
@@ -1681,8 +1681,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1%
          * @param {NewUmConditionalOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
          * @param {NewUmConditionalOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `NONE`:No STP / `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers
-         * @param {number} [goodTillDate] order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000Mode. It must be sent in Hedge Mode.
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [goodTillDate] order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000Mode. It must be sent in Hedge Mode.
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -1703,8 +1703,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             callbackRate?: number,
             priceMatch?: NewUmConditionalOrderPriceMatchEnum,
             selfTradePreventionMode?: NewUmConditionalOrderSelfTradePreventionModeEnum,
-            goodTillDate?: number,
-            recvWindow?: number
+            goodTillDate?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('newUmConditionalOrder', 'symbol', symbol);
@@ -1821,8 +1821,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {NewUmOrderNewOrderRespTypeEnum} [newOrderRespType] "ACK", "RESULT", default "ACK"
          * @param {NewUmOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
          * @param {NewUmOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `NONE`:No STP / `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers
-         * @param {number} [goodTillDate] order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000Mode. It must be sent in Hedge Mode.
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [goodTillDate] order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000Mode. It must be sent in Hedge Mode.
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -1839,8 +1839,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             newOrderRespType?: NewUmOrderNewOrderRespTypeEnum,
             priceMatch?: NewUmOrderPriceMatchEnum,
             selfTradePreventionMode?: NewUmOrderSelfTradePreventionModeEnum,
-            goodTillDate?: number,
-            recvWindow?: number
+            goodTillDate?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('newUmOrder', 'symbol', symbol);
@@ -1930,21 +1930,21 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query All CM Conditional Orders(USER_DATA)
          * @param {string} [symbol]
-         * @param {number} [strategyId]
-         * @param {number} [startTime] Timestamp in ms to get funding from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [strategyId]
+         * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryAllCmConditionalOrders: async (
             symbol?: string,
-            strategyId?: number,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
+            strategyId?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -1997,22 +1997,22 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Query All CM Orders (USER_DATA)
          * @param {string} symbol
          * @param {string} [pair]
-         * @param {number} [orderId]
-         * @param {number} [startTime] Timestamp in ms to get funding from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [orderId]
+         * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryAllCmOrders: async (
             symbol: string,
             pair?: string,
-            orderId?: number,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
+            orderId?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('queryAllCmOrders', 'symbol', symbol);
@@ -2066,13 +2066,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query All Current CM Open Conditional Orders (USER_DATA)
          * @param {string} [symbol]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryAllCurrentCmOpenConditionalOrders: async (
             symbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -2105,14 +2105,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Query All Current CM Open Orders(USER_DATA)
          * @param {string} [symbol]
          * @param {string} [pair]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryAllCurrentCmOpenOrders: async (
             symbol?: string,
             pair?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -2148,13 +2148,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query All Current UM Open Conditional Orders(USER_DATA)
          * @param {string} [symbol]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryAllCurrentUmOpenConditionalOrders: async (
             symbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -2186,13 +2186,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query All Current UM Open Orders(USER_DATA)
          * @param {string} [symbol]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryAllCurrentUmOpenOrders: async (
             symbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -2221,21 +2221,21 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query All Margin Account Orders (USER_DATA)
          * @param {string} symbol
-         * @param {number} [orderId]
-         * @param {number} [startTime] Timestamp in ms to get funding from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [orderId]
+         * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryAllMarginAccountOrders: async (
             symbol: string,
-            orderId?: number,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
+            orderId?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('queryAllMarginAccountOrders', 'symbol', symbol);
@@ -2289,21 +2289,21 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query All UM Conditional Orders(USER_DATA)
          * @param {string} [symbol]
-         * @param {number} [strategyId]
-         * @param {number} [startTime] Timestamp in ms to get funding from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [strategyId]
+         * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryAllUmConditionalOrders: async (
             symbol?: string,
-            strategyId?: number,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
+            strategyId?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -2355,21 +2355,21 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query All UM Orders(USER_DATA)
          * @param {string} symbol
-         * @param {number} [orderId]
-         * @param {number} [startTime] Timestamp in ms to get funding from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [orderId]
+         * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryAllUmOrders: async (
             symbol: string,
-            orderId?: number,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
+            orderId?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('queryAllUmOrders', 'symbol', symbol);
@@ -2425,17 +2425,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query CM Conditional Order History(USER_DATA)
          * @param {string} symbol
-         * @param {number} [strategyId]
+         * @param {number | bigint} [strategyId]
          * @param {string} [newClientStrategyId]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryCmConditionalOrderHistory: async (
             symbol: string,
-            strategyId?: number,
+            strategyId?: number | bigint,
             newClientStrategyId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('queryCmConditionalOrderHistory', 'symbol', symbol);
@@ -2477,23 +2477,23 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query CM Modify Order History(TRADE)
          * @param {string} symbol
-         * @param {number} [orderId]
+         * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
-         * @param {number} [startTime] Timestamp in ms to get funding from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryCmModifyOrderHistory: async (
             symbol: string,
-            orderId?: number,
+            orderId?: number | bigint,
             origClientOrderId?: string,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('queryCmModifyOrderHistory', 'symbol', symbol);
@@ -2551,17 +2551,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query CM Order(USER_DATA)
          * @param {string} symbol
-         * @param {number} [orderId]
+         * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryCmOrder: async (
             symbol: string,
-            orderId?: number,
+            orderId?: number | bigint,
             origClientOrderId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('queryCmOrder', 'symbol', symbol);
@@ -2604,17 +2604,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query Current CM Open Conditional Order(USER_DATA)
          * @param {string} symbol
-         * @param {number} [strategyId]
+         * @param {number | bigint} [strategyId]
          * @param {string} [newClientStrategyId]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryCurrentCmOpenConditionalOrder: async (
             symbol: string,
-            strategyId?: number,
+            strategyId?: number | bigint,
             newClientStrategyId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('queryCurrentCmOpenConditionalOrder', 'symbol', symbol);
@@ -2657,17 +2657,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query Current CM Open Order (USER_DATA)
          * @param {string} symbol
-         * @param {number} [orderId]
+         * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryCurrentCmOpenOrder: async (
             symbol: string,
-            orderId?: number,
+            orderId?: number | bigint,
             origClientOrderId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('queryCurrentCmOpenOrder', 'symbol', symbol);
@@ -2707,13 +2707,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query Current Margin Open Order (USER_DATA)
          * @param {string} symbol
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryCurrentMarginOpenOrder: async (
             symbol: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('queryCurrentMarginOpenOrder', 'symbol', symbol);
@@ -2748,17 +2748,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query Current UM Open Conditional Order(USER_DATA)
          * @param {string} symbol
-         * @param {number} [strategyId]
+         * @param {number | bigint} [strategyId]
          * @param {string} [newClientStrategyId]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryCurrentUmOpenConditionalOrder: async (
             symbol: string,
-            strategyId?: number,
+            strategyId?: number | bigint,
             newClientStrategyId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('queryCurrentUmOpenConditionalOrder', 'symbol', symbol);
@@ -2802,17 +2802,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query Current UM Open Order(USER_DATA)
          * @param {string} symbol
-         * @param {number} [orderId]
+         * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryCurrentUmOpenOrder: async (
             symbol: string,
-            orderId?: number,
+            orderId?: number | bigint,
             origClientOrderId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('queryCurrentUmOpenOrder', 'symbol', symbol);
@@ -2852,17 +2852,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query Margin Account Order (USER_DATA)
          * @param {string} symbol
-         * @param {number} [orderId]
+         * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryMarginAccountOrder: async (
             symbol: string,
-            orderId?: number,
+            orderId?: number | bigint,
             origClientOrderId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('queryMarginAccountOrder', 'symbol', symbol);
@@ -2901,20 +2901,20 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 100
          *
          * @summary Query Margin Account\'s all OCO (USER_DATA)
-         * @param {number} [fromId] Trade id to fetch from. Default gets most recent trades.
-         * @param {number} [startTime] Timestamp in ms to get funding from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [fromId] Trade id to fetch from. Default gets most recent trades.
+         * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryMarginAccountsAllOco: async (
-            fromId?: number,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
+            fromId?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -2954,16 +2954,16 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 5
          *
          * @summary Query Margin Account\'s OCO (USER_DATA)
-         * @param {number} [orderListId] Either `orderListId` or `listClientOrderId` must be provided
+         * @param {number | bigint} [orderListId] Either `orderListId` or `listClientOrderId` must be provided
          * @param {string} [origClientOrderId]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryMarginAccountsOco: async (
-            orderListId?: number,
+            orderListId?: number | bigint,
             origClientOrderId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -2995,11 +2995,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 5
          *
          * @summary Query Margin Account\'s Open OCO (USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        queryMarginAccountsOpenOco: async (recvWindow?: number): Promise<RequestArgs> => {
+        queryMarginAccountsOpenOco: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -3030,17 +3030,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query UM Conditional Order History(USER_DATA)
          * @param {string} symbol
-         * @param {number} [strategyId]
+         * @param {number | bigint} [strategyId]
          * @param {string} [newClientStrategyId]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryUmConditionalOrderHistory: async (
             symbol: string,
-            strategyId?: number,
+            strategyId?: number | bigint,
             newClientStrategyId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('queryUmConditionalOrderHistory', 'symbol', symbol);
@@ -3082,23 +3082,23 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query UM Modify Order History(TRADE)
          * @param {string} symbol
-         * @param {number} [orderId]
+         * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
-         * @param {number} [startTime] Timestamp in ms to get funding from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryUmModifyOrderHistory: async (
             symbol: string,
-            orderId?: number,
+            orderId?: number | bigint,
             origClientOrderId?: string,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('queryUmModifyOrderHistory', 'symbol', symbol);
@@ -3156,17 +3156,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query UM Order (USER_DATA)
          * @param {string} symbol
-         * @param {number} [orderId]
+         * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryUmOrder: async (
             symbol: string,
-            orderId?: number,
+            orderId?: number | bigint,
             origClientOrderId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('queryUmOrder', 'symbol', symbol);
@@ -3210,20 +3210,20 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Query User\'s CM Force Orders(USER_DATA)
          * @param {string} [symbol]
          * @param {QueryUsersCmForceOrdersAutoCloseTypeEnum} [autoCloseType] `LIQUIDATION` for liquidation orders, `ADL` for ADL orders.
-         * @param {number} [startTime] Timestamp in ms to get funding from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryUsersCmForceOrders: async (
             symbol?: string,
             autoCloseType?: QueryUsersCmForceOrdersAutoCloseTypeEnum,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -3267,20 +3267,20 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 1
          *
          * @summary Query User\'s Margin Force Orders(USER_DATA)
-         * @param {number} [startTime] Timestamp in ms to get funding from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10 Max:100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10 Max:100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryUsersMarginForceOrders: async (
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -3325,20 +3325,20 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Query User\'s UM Force Orders (USER_DATA)
          * @param {string} [symbol]
          * @param {QueryUsersUmForceOrdersAutoCloseTypeEnum} [autoCloseType] `LIQUIDATION` for liquidation orders, `ADL` for ADL orders.
-         * @param {number} [startTime] Timestamp in ms to get funding from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryUsersUmForceOrders: async (
             symbol?: string,
             autoCloseType?: QueryUsersUmForceOrdersAutoCloseTypeEnum,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -3386,13 +3386,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Toggle BNB Burn On UM Futures Trade (TRADE)
          * @param {string} feeBurn "true": Fee Discount On; "false": Fee Discount Off
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         toggleBnbBurnOnUmFuturesTrade: async (
             feeBurn: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'feeBurn' is not null or undefined
             assertParamExists('toggleBnbBurnOnUmFuturesTrade', 'feeBurn', feeBurn);
@@ -3429,21 +3429,21 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary UM Account Trade List(USER_DATA)
          * @param {string} symbol
-         * @param {number} [startTime] Timestamp in ms to get funding from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number} [fromId] Trade id to fetch from. Default gets most recent trades.
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
+         * @param {number | bigint} [fromId] Trade id to fetch from. Default gets most recent trades.
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         umAccountTradeList: async (
             symbol: string,
-            startTime?: number,
-            endTime?: number,
-            fromId?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            fromId?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('umAccountTradeList', 'symbol', symbol);
@@ -3498,13 +3498,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary UM Position ADL Quantile Estimation(USER_DATA)
          * @param {string} [symbol]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         umPositionAdlQuantileEstimation: async (
             symbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -4549,10 +4549,10 @@ export interface CancelAllCmOpenConditionalOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelAllCmOpenConditionalOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -4569,10 +4569,10 @@ export interface CancelAllCmOpenOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelAllCmOpenOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -4589,10 +4589,10 @@ export interface CancelAllUmOpenConditionalOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelAllUmOpenConditionalOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -4609,10 +4609,10 @@ export interface CancelAllUmOpenOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelAllUmOpenOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -4629,10 +4629,10 @@ export interface CancelCmConditionalOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelCmConditionalOrder
      */
-    readonly strategyId?: number;
+    readonly strategyId?: number | bigint;
 
     /**
      *
@@ -4643,10 +4643,10 @@ export interface CancelCmConditionalOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelCmConditionalOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -4663,10 +4663,10 @@ export interface CancelCmOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelCmOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -4677,10 +4677,10 @@ export interface CancelCmOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelCmOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -4697,10 +4697,10 @@ export interface CancelMarginAccountAllOpenOrdersOnASymbolRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelMarginAccountAllOpenOrdersOnASymbol
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -4717,10 +4717,10 @@ export interface CancelMarginAccountOcoOrdersRequest {
 
     /**
      * Either `orderListId` or `listClientOrderId` must be provided
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelMarginAccountOcoOrders
      */
-    readonly orderListId?: number;
+    readonly orderListId?: number | bigint;
 
     /**
      * Either `orderListId` or `listClientOrderId` must be provided
@@ -4738,10 +4738,10 @@ export interface CancelMarginAccountOcoOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelMarginAccountOcoOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -4758,10 +4758,10 @@ export interface CancelMarginAccountOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelMarginAccountOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -4779,10 +4779,10 @@ export interface CancelMarginAccountOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelMarginAccountOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -4799,10 +4799,10 @@ export interface CancelUmConditionalOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelUmConditionalOrder
      */
-    readonly strategyId?: number;
+    readonly strategyId?: number | bigint;
 
     /**
      *
@@ -4813,10 +4813,10 @@ export interface CancelUmConditionalOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelUmConditionalOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -4833,10 +4833,10 @@ export interface CancelUmOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelUmOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -4847,10 +4847,10 @@ export interface CancelUmOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelUmOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -4874,38 +4874,38 @@ export interface CmAccountTradeListRequest {
 
     /**
      * Timestamp in ms to get funding from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCmAccountTradeList
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get funding until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCmAccountTradeList
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Trade id to fetch from. Default gets most recent trades.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCmAccountTradeList
      */
-    readonly fromId?: number;
+    readonly fromId?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCmAccountTradeList
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCmAccountTradeList
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -4922,10 +4922,10 @@ export interface CmPositionAdlQuantileEstimationRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCmPositionAdlQuantileEstimation
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -4935,10 +4935,10 @@ export interface CmPositionAdlQuantileEstimationRequest {
 export interface GetUmFuturesBnbBurnStatusRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetUmFuturesBnbBurnStatus
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -4962,10 +4962,10 @@ export interface MarginAccountBorrowRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiMarginAccountBorrow
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -5073,10 +5073,10 @@ export interface MarginAccountNewOcoRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiMarginAccountNewOco
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -5100,10 +5100,10 @@ export interface MarginAccountRepayRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiMarginAccountRepay
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -5134,10 +5134,10 @@ export interface MarginAccountRepayDebtRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiMarginAccountRepayDebt
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -5154,45 +5154,45 @@ export interface MarginAccountTradeListRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiMarginAccountTradeList
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      * Timestamp in ms to get funding from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiMarginAccountTradeList
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get funding until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiMarginAccountTradeList
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Trade id to fetch from. Default gets most recent trades.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiMarginAccountTradeList
      */
-    readonly fromId?: number;
+    readonly fromId?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiMarginAccountTradeList
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiMarginAccountTradeList
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -5230,10 +5230,10 @@ export interface ModifyCmOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiModifyCmOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -5251,10 +5251,10 @@ export interface ModifyCmOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiModifyCmOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -5292,10 +5292,10 @@ export interface ModifyUmOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiModifyUmOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -5313,10 +5313,10 @@ export interface ModifyUmOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiModifyUmOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -5424,10 +5424,10 @@ export interface NewCmConditionalOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiNewCmConditionalOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -5514,10 +5514,10 @@ export interface NewCmOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiNewCmOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -5625,10 +5625,10 @@ export interface NewMarginOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiNewMarginOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -5750,17 +5750,17 @@ export interface NewUmConditionalOrderRequest {
 
     /**
      * order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000Mode. It must be sent in Hedge Mode.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiNewUmConditionalOrder
      */
-    readonly goodTillDate?: number;
+    readonly goodTillDate?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiNewUmConditionalOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -5854,17 +5854,17 @@ export interface NewUmOrderRequest {
 
     /**
      * order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000Mode. It must be sent in Hedge Mode.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiNewUmOrder
      */
-    readonly goodTillDate?: number;
+    readonly goodTillDate?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiNewUmOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -5881,38 +5881,38 @@ export interface QueryAllCmConditionalOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllCmConditionalOrders
      */
-    readonly strategyId?: number;
+    readonly strategyId?: number | bigint;
 
     /**
      * Timestamp in ms to get funding from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllCmConditionalOrders
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get funding until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllCmConditionalOrders
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllCmConditionalOrders
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllCmConditionalOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -5936,38 +5936,38 @@ export interface QueryAllCmOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllCmOrders
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      * Timestamp in ms to get funding from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllCmOrders
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get funding until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllCmOrders
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllCmOrders
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllCmOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -5984,10 +5984,10 @@ export interface QueryAllCurrentCmOpenConditionalOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllCurrentCmOpenConditionalOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6011,10 +6011,10 @@ export interface QueryAllCurrentCmOpenOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllCurrentCmOpenOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6031,10 +6031,10 @@ export interface QueryAllCurrentUmOpenConditionalOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllCurrentUmOpenConditionalOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6051,10 +6051,10 @@ export interface QueryAllCurrentUmOpenOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllCurrentUmOpenOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6071,38 +6071,38 @@ export interface QueryAllMarginAccountOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllMarginAccountOrders
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      * Timestamp in ms to get funding from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllMarginAccountOrders
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get funding until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllMarginAccountOrders
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllMarginAccountOrders
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllMarginAccountOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6119,38 +6119,38 @@ export interface QueryAllUmConditionalOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllUmConditionalOrders
      */
-    readonly strategyId?: number;
+    readonly strategyId?: number | bigint;
 
     /**
      * Timestamp in ms to get funding from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllUmConditionalOrders
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get funding until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllUmConditionalOrders
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllUmConditionalOrders
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllUmConditionalOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6167,38 +6167,38 @@ export interface QueryAllUmOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllUmOrders
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      * Timestamp in ms to get funding from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllUmOrders
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get funding until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllUmOrders
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllUmOrders
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryAllUmOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6215,10 +6215,10 @@ export interface QueryCmConditionalOrderHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryCmConditionalOrderHistory
      */
-    readonly strategyId?: number;
+    readonly strategyId?: number | bigint;
 
     /**
      *
@@ -6229,10 +6229,10 @@ export interface QueryCmConditionalOrderHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryCmConditionalOrderHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6249,10 +6249,10 @@ export interface QueryCmModifyOrderHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryCmModifyOrderHistory
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -6263,31 +6263,31 @@ export interface QueryCmModifyOrderHistoryRequest {
 
     /**
      * Timestamp in ms to get funding from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryCmModifyOrderHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get funding until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryCmModifyOrderHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryCmModifyOrderHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryCmModifyOrderHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6304,10 +6304,10 @@ export interface QueryCmOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryCmOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -6318,10 +6318,10 @@ export interface QueryCmOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryCmOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6338,10 +6338,10 @@ export interface QueryCurrentCmOpenConditionalOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryCurrentCmOpenConditionalOrder
      */
-    readonly strategyId?: number;
+    readonly strategyId?: number | bigint;
 
     /**
      *
@@ -6352,10 +6352,10 @@ export interface QueryCurrentCmOpenConditionalOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryCurrentCmOpenConditionalOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6372,10 +6372,10 @@ export interface QueryCurrentCmOpenOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryCurrentCmOpenOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -6386,10 +6386,10 @@ export interface QueryCurrentCmOpenOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryCurrentCmOpenOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6406,10 +6406,10 @@ export interface QueryCurrentMarginOpenOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryCurrentMarginOpenOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6426,10 +6426,10 @@ export interface QueryCurrentUmOpenConditionalOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryCurrentUmOpenConditionalOrder
      */
-    readonly strategyId?: number;
+    readonly strategyId?: number | bigint;
 
     /**
      *
@@ -6440,10 +6440,10 @@ export interface QueryCurrentUmOpenConditionalOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryCurrentUmOpenConditionalOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6460,10 +6460,10 @@ export interface QueryCurrentUmOpenOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryCurrentUmOpenOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -6474,10 +6474,10 @@ export interface QueryCurrentUmOpenOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryCurrentUmOpenOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6494,10 +6494,10 @@ export interface QueryMarginAccountOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -6508,10 +6508,10 @@ export interface QueryMarginAccountOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6521,38 +6521,38 @@ export interface QueryMarginAccountOrderRequest {
 export interface QueryMarginAccountsAllOcoRequest {
     /**
      * Trade id to fetch from. Default gets most recent trades.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOco
      */
-    readonly fromId?: number;
+    readonly fromId?: number | bigint;
 
     /**
      * Timestamp in ms to get funding from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOco
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get funding until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOco
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOco
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOco
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6562,10 +6562,10 @@ export interface QueryMarginAccountsAllOcoRequest {
 export interface QueryMarginAccountsOcoRequest {
     /**
      * Either `orderListId` or `listClientOrderId` must be provided
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsOco
      */
-    readonly orderListId?: number;
+    readonly orderListId?: number | bigint;
 
     /**
      *
@@ -6576,10 +6576,10 @@ export interface QueryMarginAccountsOcoRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsOco
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6589,10 +6589,10 @@ export interface QueryMarginAccountsOcoRequest {
 export interface QueryMarginAccountsOpenOcoRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsOpenOco
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6609,10 +6609,10 @@ export interface QueryUmConditionalOrderHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryUmConditionalOrderHistory
      */
-    readonly strategyId?: number;
+    readonly strategyId?: number | bigint;
 
     /**
      *
@@ -6623,10 +6623,10 @@ export interface QueryUmConditionalOrderHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryUmConditionalOrderHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6643,10 +6643,10 @@ export interface QueryUmModifyOrderHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryUmModifyOrderHistory
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -6657,31 +6657,31 @@ export interface QueryUmModifyOrderHistoryRequest {
 
     /**
      * Timestamp in ms to get funding from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryUmModifyOrderHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get funding until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryUmModifyOrderHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryUmModifyOrderHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryUmModifyOrderHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6698,10 +6698,10 @@ export interface QueryUmOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryUmOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -6712,10 +6712,10 @@ export interface QueryUmOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryUmOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6739,31 +6739,31 @@ export interface QueryUsersCmForceOrdersRequest {
 
     /**
      * Timestamp in ms to get funding from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryUsersCmForceOrders
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get funding until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryUsersCmForceOrders
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryUsersCmForceOrders
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryUsersCmForceOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6773,38 +6773,38 @@ export interface QueryUsersCmForceOrdersRequest {
 export interface QueryUsersMarginForceOrdersRequest {
     /**
      * Timestamp in ms to get funding from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryUsersMarginForceOrders
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get funding until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryUsersMarginForceOrders
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryUsersMarginForceOrders
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10 Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryUsersMarginForceOrders
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryUsersMarginForceOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6828,31 +6828,31 @@ export interface QueryUsersUmForceOrdersRequest {
 
     /**
      * Timestamp in ms to get funding from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryUsersUmForceOrders
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get funding until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryUsersUmForceOrders
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryUsersUmForceOrders
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryUsersUmForceOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6869,10 +6869,10 @@ export interface ToggleBnbBurnOnUmFuturesTradeRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiToggleBnbBurnOnUmFuturesTrade
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6889,38 +6889,38 @@ export interface UmAccountTradeListRequest {
 
     /**
      * Timestamp in ms to get funding from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiUmAccountTradeList
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get funding until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiUmAccountTradeList
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Trade id to fetch from. Default gets most recent trades.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiUmAccountTradeList
      */
-    readonly fromId?: number;
+    readonly fromId?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiUmAccountTradeList
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiUmAccountTradeList
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -6937,10 +6937,10 @@ export interface UmPositionAdlQuantileEstimationRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiUmPositionAdlQuantileEstimation
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

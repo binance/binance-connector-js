@@ -76,11 +76,14 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Account Balance(USER_DATA)
          * @param {string} [asset]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        accountBalance: async (asset?: string, recvWindow?: number): Promise<RequestArgs> => {
+        accountBalance: async (
+            asset?: string,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
@@ -107,11 +110,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 20
          *
          * @summary Account Information(USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        accountInformation: async (recvWindow?: number): Promise<RequestArgs> => {
+        accountInformation: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -138,14 +141,14 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @summary BNB transfer (TRADE)
          * @param {number} amount
          * @param {string} transferSide "TO_UM","FROM_UM"
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         bnbTransfer: async (
             amount: number,
             transferSide: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'amount' is not null or undefined
             assertParamExists('bnbTransfer', 'amount', amount);
@@ -183,13 +186,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Change Auto-repay-futures Status(TRADE)
          * @param {string} autoRepay Default: `true`; `false` for turn off the auto-repay futures negative balance function
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         changeAutoRepayFuturesStatus: async (
             autoRepay: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'autoRepay' is not null or undefined
             assertParamExists('changeAutoRepayFuturesStatus', 'autoRepay', autoRepay);
@@ -221,15 +224,15 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Change CM Initial Leverage (TRADE)
          * @param {string} symbol
-         * @param {number} leverage target initial leverage: int from 1 to 125
-         * @param {number} [recvWindow]
+         * @param {number | bigint} leverage target initial leverage: int from 1 to 125
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         changeCmInitialLeverage: async (
             symbol: string,
-            leverage: number,
-            recvWindow?: number
+            leverage: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('changeCmInitialLeverage', 'symbol', symbol);
@@ -267,13 +270,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Change CM Position Mode(TRADE)
          * @param {string} dualSidePosition "true": Hedge Mode; "false": One-way Mode
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         changeCmPositionMode: async (
             dualSidePosition: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'dualSidePosition' is not null or undefined
             assertParamExists('changeCmPositionMode', 'dualSidePosition', dualSidePosition);
@@ -305,15 +308,15 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Change UM Initial Leverage(TRADE)
          * @param {string} symbol
-         * @param {number} leverage target initial leverage: int from 1 to 125
-         * @param {number} [recvWindow]
+         * @param {number | bigint} leverage target initial leverage: int from 1 to 125
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         changeUmInitialLeverage: async (
             symbol: string,
-            leverage: number,
-            recvWindow?: number
+            leverage: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('changeUmInitialLeverage', 'symbol', symbol);
@@ -351,13 +354,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Change UM Position Mode(TRADE)
          * @param {string} dualSidePosition "true": Hedge Mode; "false": One-way Mode
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         changeUmPositionMode: async (
             dualSidePosition: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'dualSidePosition' is not null or undefined
             assertParamExists('changeUmPositionMode', 'dualSidePosition', dualSidePosition);
@@ -389,13 +392,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary CM Notional and Leverage Brackets(USER_DATA)
          * @param {string} [symbol]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         cmNotionalAndLeverageBrackets: async (
             symbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -426,11 +429,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 750
          *
          * @summary Fund Auto-collection(TRADE)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        fundAutoCollection: async (recvWindow?: number): Promise<RequestArgs> => {
+        fundAutoCollection: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -456,11 +459,14 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Fund Collection by Asset(TRADE)
          * @param {string} asset
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        fundCollectionByAsset: async (asset: string, recvWindow?: number): Promise<RequestArgs> => {
+        fundCollectionByAsset: async (
+            asset: string,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
             assertParamExists('fundCollectionByAsset', 'asset', asset);
 
@@ -490,11 +496,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 30
          *
          * @summary Get Auto-repay-futures Status(USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        getAutoRepayFuturesStatus: async (recvWindow?: number): Promise<RequestArgs> => {
+        getAutoRepayFuturesStatus: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -517,11 +523,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 5
          *
          * @summary Get CM Account Detail(USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        getCmAccountDetail: async (recvWindow?: number): Promise<RequestArgs> => {
+        getCmAccountDetail: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -544,11 +550,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 30
          *
          * @summary Get CM Current Position Mode(USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        getCmCurrentPositionMode: async (recvWindow?: number): Promise<RequestArgs> => {
+        getCmCurrentPositionMode: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -579,22 +585,22 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @summary Get CM Income History(USER_DATA)
          * @param {string} [symbol]
          * @param {string} [incomeType] TRANSFER, WELCOME_BONUS, REALIZED_PNL, FUNDING_FEE, COMMISSION, INSURANCE_CLEAR, REFERRAL_KICKBACK, COMMISSION_REBATE, API_REBATE, CONTEST_REWARD, CROSS_COLLATERAL_TRANSFER, OPTIONS_PREMIUM_FEE, OPTIONS_SETTLE_PROFIT, INTERNAL_TRANSFER, AUTO_EXCHANGE, DELIVERED_SETTELMENT, COIN_SWAP_DEPOSIT, COIN_SWAP_WITHDRAW, POSITION_LIMIT_INCREASE_FEE
-         * @param {number} [startTime] Timestamp in ms to get funding from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number} [page]
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
+         * @param {number | bigint} [page]
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getCmIncomeHistory: async (
             symbol?: string,
             incomeType?: string,
-            startTime?: number,
-            endTime?: number,
-            page?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            page?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -645,16 +651,16 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 1500
          *
          * @summary Get Download Id For UM Futures Order History (USER_DATA)
-         * @param {number} startTime
-         * @param {number} endTime
-         * @param {number} [recvWindow]
+         * @param {number | bigint} startTime
+         * @param {number | bigint} endTime
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getDownloadIdForUmFuturesOrderHistory: async (
-            startTime: number,
-            endTime: number,
-            recvWindow?: number
+            startTime: number | bigint,
+            endTime: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'startTime' is not null or undefined
             assertParamExists('getDownloadIdForUmFuturesOrderHistory', 'startTime', startTime);
@@ -694,16 +700,16 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 1500
          *
          * @summary Get Download Id For UM Futures Trade History (USER_DATA)
-         * @param {number} startTime
-         * @param {number} endTime
-         * @param {number} [recvWindow]
+         * @param {number | bigint} startTime
+         * @param {number | bigint} endTime
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getDownloadIdForUmFuturesTradeHistory: async (
-            startTime: number,
-            endTime: number,
-            recvWindow?: number
+            startTime: number | bigint,
+            endTime: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'startTime' is not null or undefined
             assertParamExists('getDownloadIdForUmFuturesTradeHistory', 'startTime', startTime);
@@ -743,16 +749,16 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 1500
          *
          * @summary Get Download Id For UM Futures Transaction History (USER_DATA)
-         * @param {number} startTime
-         * @param {number} endTime
-         * @param {number} [recvWindow]
+         * @param {number | bigint} startTime
+         * @param {number | bigint} endTime
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getDownloadIdForUmFuturesTransactionHistory: async (
-            startTime: number,
-            endTime: number,
-            recvWindow?: number
+            startTime: number | bigint,
+            endTime: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'startTime' is not null or undefined
             assertParamExists(
@@ -807,23 +813,23 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Get Margin Borrow/Loan Interest History(USER_DATA)
          * @param {string} [asset]
-         * @param {number} [startTime] Timestamp in ms to get funding from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10 Max:100
+         * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10 Max:100
          * @param {string} [archived] Default: `false`. Set to `true` for archived data from 6 months ago
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getMarginBorrowLoanInterestHistory: async (
             asset?: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
             archived?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -871,11 +877,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 5
          *
          * @summary Get UM Account Detail(USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        getUmAccountDetail: async (recvWindow?: number): Promise<RequestArgs> => {
+        getUmAccountDetail: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -898,11 +904,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 5
          *
          * @summary Get UM Account Detail V2(USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        getUmAccountDetailV2: async (recvWindow?: number): Promise<RequestArgs> => {
+        getUmAccountDetailV2: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -925,11 +931,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 30
          *
          * @summary Get UM Current Position Mode(USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        getUmCurrentPositionMode: async (recvWindow?: number): Promise<RequestArgs> => {
+        getUmCurrentPositionMode: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -955,13 +961,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Get UM Futures Order Download Link by Id(USER_DATA)
          * @param {string} downloadId get by download id api
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getUmFuturesOrderDownloadLinkById: async (
             downloadId: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'downloadId' is not null or undefined
             assertParamExists('getUmFuturesOrderDownloadLinkById', 'downloadId', downloadId);
@@ -995,13 +1001,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Get UM Futures Trade Download Link by Id(USER_DATA)
          * @param {string} downloadId get by download id api
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getUmFuturesTradeDownloadLinkById: async (
             downloadId: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'downloadId' is not null or undefined
             assertParamExists('getUmFuturesTradeDownloadLinkById', 'downloadId', downloadId);
@@ -1035,13 +1041,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Get UM Futures Transaction Download Link by Id(USER_DATA)
          * @param {string} downloadId get by download id api
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getUmFuturesTransactionDownloadLinkById: async (
             downloadId: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'downloadId' is not null or undefined
             assertParamExists('getUmFuturesTransactionDownloadLinkById', 'downloadId', downloadId);
@@ -1079,22 +1085,22 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @summary Get UM Income History(USER_DATA)
          * @param {string} [symbol]
          * @param {string} [incomeType] TRANSFER, WELCOME_BONUS, REALIZED_PNL, FUNDING_FEE, COMMISSION, INSURANCE_CLEAR, REFERRAL_KICKBACK, COMMISSION_REBATE, API_REBATE, CONTEST_REWARD, CROSS_COLLATERAL_TRANSFER, OPTIONS_PREMIUM_FEE, OPTIONS_SETTLE_PROFIT, INTERNAL_TRANSFER, AUTO_EXCHANGE, DELIVERED_SETTELMENT, COIN_SWAP_DEPOSIT, COIN_SWAP_WITHDRAW, POSITION_LIMIT_INCREASE_FEE
-         * @param {number} [startTime] Timestamp in ms to get funding from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number} [page]
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
+         * @param {number | bigint} [page]
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getUmIncomeHistory: async (
             symbol?: string,
             incomeType?: string,
-            startTime?: number,
-            endTime?: number,
-            page?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            page?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -1143,13 +1149,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Get User Commission Rate for CM(USER_DATA)
          * @param {string} symbol
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getUserCommissionRateForCm: async (
             symbol: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('getUserCommissionRateForCm', 'symbol', symbol);
@@ -1181,13 +1187,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Get User Commission Rate for UM(USER_DATA)
          * @param {string} symbol
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getUserCommissionRateForUm: async (
             symbol: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('getUserCommissionRateForUm', 'symbol', symbol);
@@ -1219,11 +1225,14 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Margin Max Borrow(USER_DATA)
          * @param {string} asset
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        marginMaxBorrow: async (asset: string, recvWindow?: number): Promise<RequestArgs> => {
+        marginMaxBorrow: async (
+            asset: string,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
             assertParamExists('marginMaxBorrow', 'asset', asset);
 
@@ -1255,13 +1264,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Portfolio Margin UM Trading Quantitative Rules Indicators(USER_DATA)
          * @param {string} [symbol]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         portfolioMarginUmTradingQuantitativeRulesIndicators: async (
             symbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -1296,14 +1305,14 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @summary Query CM Position Information(USER_DATA)
          * @param {string} [marginAsset]
          * @param {string} [pair]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryCmPositionInformation: async (
             marginAsset?: string,
             pair?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -1342,25 +1351,25 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Query Margin Loan Record(USER_DATA)
          * @param {string} asset
-         * @param {number} [txId] the `tranId` in `POST/papi/v1/marginLoan`
-         * @param {number} [startTime] Timestamp in ms to get funding from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10 Max:100
+         * @param {number | bigint} [txId] the `tranId` in `POST/papi/v1/marginLoan`
+         * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10 Max:100
          * @param {string} [archived] Default: `false`. Set to `true` for archived data from 6 months ago
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryMarginLoanRecord: async (
             asset: string,
-            txId?: number,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
+            txId?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
             archived?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
             assertParamExists('queryMarginLoanRecord', 'asset', asset);
@@ -1416,13 +1425,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Query Margin Max Withdraw(USER_DATA)
          * @param {string} asset
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryMarginMaxWithdraw: async (
             asset: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
             assertParamExists('queryMarginMaxWithdraw', 'asset', asset);
@@ -1460,25 +1469,25 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Query Margin repay Record(USER_DATA)
          * @param {string} asset
-         * @param {number} [txId] the `tranId` in `POST/papi/v1/marginLoan`
-         * @param {number} [startTime] Timestamp in ms to get funding from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10 Max:100
+         * @param {number | bigint} [txId] the `tranId` in `POST/papi/v1/marginLoan`
+         * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10 Max:100
          * @param {string} [archived] Default: `false`. Set to `true` for archived data from 6 months ago
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryMarginRepayRecord: async (
             asset: string,
-            txId?: number,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
+            txId?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
             archived?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
             assertParamExists('queryMarginRepayRecord', 'asset', asset);
@@ -1540,19 +1549,19 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Query Portfolio Margin Negative Balance Interest History(USER_DATA)
          * @param {string} [asset]
-         * @param {number} [startTime] Timestamp in ms to get funding from INCLUSIVE.
-         * @param {number} [endTime] Timestamp in ms to get funding until INCLUSIVE.
-         * @param {number} [size] Default:10 Max:100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime] Timestamp in ms to get funding from INCLUSIVE.
+         * @param {number | bigint} [endTime] Timestamp in ms to get funding until INCLUSIVE.
+         * @param {number | bigint} [size] Default:10 Max:100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryPortfolioMarginNegativeBalanceInterestHistory: async (
             asset?: string,
-            startTime?: number,
-            endTime?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -1597,13 +1606,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Query UM Position Information(USER_DATA)
          * @param {string} [symbol]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryUmPositionInformation: async (
             symbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -1634,16 +1643,16 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 100
          *
          * @summary Query User Negative Balance Auto Exchange Record (USER_DATA)
-         * @param {number} startTime
-         * @param {number} endTime
-         * @param {number} [recvWindow]
+         * @param {number | bigint} startTime
+         * @param {number | bigint} endTime
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryUserNegativeBalanceAutoExchangeRecord: async (
-            startTime: number,
-            endTime: number,
-            recvWindow?: number
+            startTime: number | bigint,
+            endTime: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'startTime' is not null or undefined
             assertParamExists('queryUserNegativeBalanceAutoExchangeRecord', 'startTime', startTime);
@@ -1680,11 +1689,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 1
          *
          * @summary Query User Rate Limit (USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        queryUserRateLimit: async (recvWindow?: number): Promise<RequestArgs> => {
+        queryUserRateLimit: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -1707,11 +1716,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 750
          *
          * @summary Repay futures Negative Balance(USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        repayFuturesNegativeBalance: async (recvWindow?: number): Promise<RequestArgs> => {
+        repayFuturesNegativeBalance: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -1734,11 +1743,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 5
          *
          * @summary UM Futures Account Configuration(USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        umFuturesAccountConfiguration: async (recvWindow?: number): Promise<RequestArgs> => {
+        umFuturesAccountConfiguration: async (
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -1762,13 +1773,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary UM Futures Symbol Configuration(USER_DATA)
          * @param {string} [symbol]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         umFuturesSymbolConfiguration: async (
             symbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -1797,13 +1808,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary UM Notional and Leverage Brackets (USER_DATA)
          * @param {string} [symbol]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         umNotionalAndLeverageBrackets: async (
             symbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -2514,10 +2525,10 @@ export interface AccountBalanceRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiAccountBalance
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2527,10 +2538,10 @@ export interface AccountBalanceRequest {
 export interface AccountInformationRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiAccountInformation
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2554,10 +2565,10 @@ export interface BnbTransferRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiBnbTransfer
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2574,10 +2585,10 @@ export interface ChangeAutoRepayFuturesStatusRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiChangeAutoRepayFuturesStatus
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2594,17 +2605,17 @@ export interface ChangeCmInitialLeverageRequest {
 
     /**
      * target initial leverage: int from 1 to 125
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiChangeCmInitialLeverage
      */
-    readonly leverage: number;
+    readonly leverage: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiChangeCmInitialLeverage
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2621,10 +2632,10 @@ export interface ChangeCmPositionModeRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiChangeCmPositionMode
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2641,17 +2652,17 @@ export interface ChangeUmInitialLeverageRequest {
 
     /**
      * target initial leverage: int from 1 to 125
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiChangeUmInitialLeverage
      */
-    readonly leverage: number;
+    readonly leverage: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiChangeUmInitialLeverage
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2668,10 +2679,10 @@ export interface ChangeUmPositionModeRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiChangeUmPositionMode
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2688,10 +2699,10 @@ export interface CmNotionalAndLeverageBracketsRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiCmNotionalAndLeverageBrackets
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2701,10 +2712,10 @@ export interface CmNotionalAndLeverageBracketsRequest {
 export interface FundAutoCollectionRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiFundAutoCollection
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2721,10 +2732,10 @@ export interface FundCollectionByAssetRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiFundCollectionByAsset
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2734,10 +2745,10 @@ export interface FundCollectionByAssetRequest {
 export interface GetAutoRepayFuturesStatusRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetAutoRepayFuturesStatus
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2747,10 +2758,10 @@ export interface GetAutoRepayFuturesStatusRequest {
 export interface GetCmAccountDetailRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetCmAccountDetail
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2760,10 +2771,10 @@ export interface GetCmAccountDetailRequest {
 export interface GetCmCurrentPositionModeRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetCmCurrentPositionMode
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2787,38 +2798,38 @@ export interface GetCmIncomeHistoryRequest {
 
     /**
      * Timestamp in ms to get funding from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetCmIncomeHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get funding until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetCmIncomeHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetCmIncomeHistory
      */
-    readonly page?: number;
+    readonly page?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetCmIncomeHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetCmIncomeHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2828,24 +2839,24 @@ export interface GetCmIncomeHistoryRequest {
 export interface GetDownloadIdForUmFuturesOrderHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForUmFuturesOrderHistory
      */
-    readonly startTime: number;
+    readonly startTime: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForUmFuturesOrderHistory
      */
-    readonly endTime: number;
+    readonly endTime: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForUmFuturesOrderHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2855,24 +2866,24 @@ export interface GetDownloadIdForUmFuturesOrderHistoryRequest {
 export interface GetDownloadIdForUmFuturesTradeHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForUmFuturesTradeHistory
      */
-    readonly startTime: number;
+    readonly startTime: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForUmFuturesTradeHistory
      */
-    readonly endTime: number;
+    readonly endTime: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForUmFuturesTradeHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2882,24 +2893,24 @@ export interface GetDownloadIdForUmFuturesTradeHistoryRequest {
 export interface GetDownloadIdForUmFuturesTransactionHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForUmFuturesTransactionHistory
      */
-    readonly startTime: number;
+    readonly startTime: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForUmFuturesTransactionHistory
      */
-    readonly endTime: number;
+    readonly endTime: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForUmFuturesTransactionHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2916,31 +2927,31 @@ export interface GetMarginBorrowLoanInterestHistoryRequest {
 
     /**
      * Timestamp in ms to get funding from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetMarginBorrowLoanInterestHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get funding until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetMarginBorrowLoanInterestHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetMarginBorrowLoanInterestHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10 Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetMarginBorrowLoanInterestHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * Default: `false`. Set to `true` for archived data from 6 months ago
@@ -2951,10 +2962,10 @@ export interface GetMarginBorrowLoanInterestHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetMarginBorrowLoanInterestHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2964,10 +2975,10 @@ export interface GetMarginBorrowLoanInterestHistoryRequest {
 export interface GetUmAccountDetailRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetUmAccountDetail
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2977,10 +2988,10 @@ export interface GetUmAccountDetailRequest {
 export interface GetUmAccountDetailV2Request {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetUmAccountDetailV2
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2990,10 +3001,10 @@ export interface GetUmAccountDetailV2Request {
 export interface GetUmCurrentPositionModeRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetUmCurrentPositionMode
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3010,10 +3021,10 @@ export interface GetUmFuturesOrderDownloadLinkByIdRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetUmFuturesOrderDownloadLinkById
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3030,10 +3041,10 @@ export interface GetUmFuturesTradeDownloadLinkByIdRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetUmFuturesTradeDownloadLinkById
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3050,10 +3061,10 @@ export interface GetUmFuturesTransactionDownloadLinkByIdRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetUmFuturesTransactionDownloadLinkById
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3077,38 +3088,38 @@ export interface GetUmIncomeHistoryRequest {
 
     /**
      * Timestamp in ms to get funding from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetUmIncomeHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get funding until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetUmIncomeHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetUmIncomeHistory
      */
-    readonly page?: number;
+    readonly page?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetUmIncomeHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetUmIncomeHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3125,10 +3136,10 @@ export interface GetUserCommissionRateForCmRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetUserCommissionRateForCm
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3145,10 +3156,10 @@ export interface GetUserCommissionRateForUmRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetUserCommissionRateForUm
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3165,10 +3176,10 @@ export interface MarginMaxBorrowRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiMarginMaxBorrow
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3185,10 +3196,10 @@ export interface PortfolioMarginUmTradingQuantitativeRulesIndicatorsRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiPortfolioMarginUmTradingQuantitativeRulesIndicators
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3212,10 +3223,10 @@ export interface QueryCmPositionInformationRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryCmPositionInformation
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3232,38 +3243,38 @@ export interface QueryMarginLoanRecordRequest {
 
     /**
      * the `tranId` in `POST/papi/v1/marginLoan`
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryMarginLoanRecord
      */
-    readonly txId?: number;
+    readonly txId?: number | bigint;
 
     /**
      * Timestamp in ms to get funding from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryMarginLoanRecord
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get funding until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryMarginLoanRecord
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryMarginLoanRecord
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10 Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryMarginLoanRecord
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * Default: `false`. Set to `true` for archived data from 6 months ago
@@ -3274,10 +3285,10 @@ export interface QueryMarginLoanRecordRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryMarginLoanRecord
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3294,10 +3305,10 @@ export interface QueryMarginMaxWithdrawRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryMarginMaxWithdraw
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3314,38 +3325,38 @@ export interface QueryMarginRepayRecordRequest {
 
     /**
      * the `tranId` in `POST/papi/v1/marginLoan`
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryMarginRepayRecord
      */
-    readonly txId?: number;
+    readonly txId?: number | bigint;
 
     /**
      * Timestamp in ms to get funding from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryMarginRepayRecord
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get funding until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryMarginRepayRecord
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryMarginRepayRecord
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10 Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryMarginRepayRecord
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * Default: `false`. Set to `true` for archived data from 6 months ago
@@ -3356,10 +3367,10 @@ export interface QueryMarginRepayRecordRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryMarginRepayRecord
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3376,31 +3387,31 @@ export interface QueryPortfolioMarginNegativeBalanceInterestHistoryRequest {
 
     /**
      * Timestamp in ms to get funding from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryPortfolioMarginNegativeBalanceInterestHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * Timestamp in ms to get funding until INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryPortfolioMarginNegativeBalanceInterestHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default:10 Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryPortfolioMarginNegativeBalanceInterestHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryPortfolioMarginNegativeBalanceInterestHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3417,10 +3428,10 @@ export interface QueryUmPositionInformationRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryUmPositionInformation
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3430,24 +3441,24 @@ export interface QueryUmPositionInformationRequest {
 export interface QueryUserNegativeBalanceAutoExchangeRecordRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryUserNegativeBalanceAutoExchangeRecord
      */
-    readonly startTime: number;
+    readonly startTime: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryUserNegativeBalanceAutoExchangeRecord
      */
-    readonly endTime: number;
+    readonly endTime: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryUserNegativeBalanceAutoExchangeRecord
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3457,10 +3468,10 @@ export interface QueryUserNegativeBalanceAutoExchangeRecordRequest {
 export interface QueryUserRateLimitRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryUserRateLimit
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3470,10 +3481,10 @@ export interface QueryUserRateLimitRequest {
 export interface RepayFuturesNegativeBalanceRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiRepayFuturesNegativeBalance
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3483,10 +3494,10 @@ export interface RepayFuturesNegativeBalanceRequest {
 export interface UmFuturesAccountConfigurationRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiUmFuturesAccountConfiguration
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3503,10 +3514,10 @@ export interface UmFuturesSymbolConfigurationRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiUmFuturesSymbolConfiguration
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3523,10 +3534,10 @@ export interface UmNotionalAndLeverageBracketsRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiUmNotionalAndLeverageBrackets
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
