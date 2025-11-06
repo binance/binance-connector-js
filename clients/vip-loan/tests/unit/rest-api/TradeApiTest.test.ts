@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { TradeApi } from '../../../src/rest-api';
@@ -51,16 +52,18 @@ describe('TradeApi', () => {
                 isFlexibleRate: true,
             };
 
-            mockResponse = {
-                loanAccountId: '12345678',
-                requestId: '12345678',
-                loanCoin: 'BTC',
-                isFlexibleRate: 'Yes',
-                loanAmount: '100.55',
-                collateralAccountId: '12345678,12345678,12345678',
-                collateralCoin: 'BUSD,USDT,ETH',
-                loanTerm: '30',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    loanAccountId: '12345678',
+                    requestId: '12345678',
+                    loanCoin: 'BTC',
+                    isFlexibleRate: 'Yes',
+                    loanAmount: '100.55',
+                    collateralAccountId: '12345678,12345678,12345678',
+                    collateralCoin: 'BUSD,USDT,ETH',
+                    loanTerm: '30',
+                })
+            );
 
             const spy = jest.spyOn(client, 'vipLoanBorrow').mockReturnValue(
                 Promise.resolve({
@@ -88,16 +91,18 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                loanAccountId: '12345678',
-                requestId: '12345678',
-                loanCoin: 'BTC',
-                isFlexibleRate: 'Yes',
-                loanAmount: '100.55',
-                collateralAccountId: '12345678,12345678,12345678',
-                collateralCoin: 'BUSD,USDT,ETH',
-                loanTerm: '30',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    loanAccountId: '12345678',
+                    requestId: '12345678',
+                    loanCoin: 'BTC',
+                    isFlexibleRate: 'Yes',
+                    loanAmount: '100.55',
+                    collateralAccountId: '12345678,12345678,12345678',
+                    collateralCoin: 'BUSD,USDT,ETH',
+                    loanTerm: '30',
+                })
+            );
 
             const spy = jest.spyOn(client, 'vipLoanBorrow').mockReturnValue(
                 Promise.resolve({
@@ -247,14 +252,16 @@ describe('TradeApi', () => {
                 loanTerm: 789,
             };
 
-            mockResponse = {
-                loanAccountId: '12345678',
-                loanCoin: 'BTC',
-                loanAmount: '100.55',
-                collateralAccountId: '12345677,12345678,12345679',
-                collateralCoin: 'BUSD,USDT,ETH',
-                loanTerm: '30',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    loanAccountId: '12345678',
+                    loanCoin: 'BTC',
+                    loanAmount: '100.55',
+                    collateralAccountId: '12345677,12345678,12345679',
+                    collateralCoin: 'BUSD,USDT,ETH',
+                    loanTerm: '30',
+                })
+            );
 
             const spy = jest.spyOn(client, 'vipLoanRenew').mockReturnValue(
                 Promise.resolve({
@@ -277,14 +284,16 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                loanAccountId: '12345678',
-                loanCoin: 'BTC',
-                loanAmount: '100.55',
-                collateralAccountId: '12345677,12345678,12345679',
-                collateralCoin: 'BUSD,USDT,ETH',
-                loanTerm: '30',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    loanAccountId: '12345678',
+                    loanCoin: 'BTC',
+                    loanAmount: '100.55',
+                    collateralAccountId: '12345677,12345678,12345679',
+                    collateralCoin: 'BUSD,USDT,ETH',
+                    loanTerm: '30',
+                })
+            );
 
             const spy = jest.spyOn(client, 'vipLoanRenew').mockReturnValue(
                 Promise.resolve({
@@ -354,15 +363,17 @@ describe('TradeApi', () => {
                 amount: 1.0,
             };
 
-            mockResponse = {
-                loanCoin: 'BUSD',
-                repayAmount: '200.5',
-                remainingPrincipal: '100.5',
-                remainingInterest: '0',
-                collateralCoin: 'BNB,BTC,ETH',
-                currentLTV: '0.25',
-                repayStatus: 'Repaid',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    loanCoin: 'BUSD',
+                    repayAmount: '200.5',
+                    remainingPrincipal: '100.5',
+                    remainingInterest: '0',
+                    collateralCoin: 'BNB,BTC,ETH',
+                    currentLTV: '0.25',
+                    repayStatus: 'Repaid',
+                })
+            );
 
             const spy = jest.spyOn(client, 'vipLoanRepay').mockReturnValue(
                 Promise.resolve({
@@ -385,15 +396,17 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                loanCoin: 'BUSD',
-                repayAmount: '200.5',
-                remainingPrincipal: '100.5',
-                remainingInterest: '0',
-                collateralCoin: 'BNB,BTC,ETH',
-                currentLTV: '0.25',
-                repayStatus: 'Repaid',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    loanCoin: 'BUSD',
+                    repayAmount: '200.5',
+                    remainingPrincipal: '100.5',
+                    remainingInterest: '0',
+                    collateralCoin: 'BNB,BTC,ETH',
+                    currentLTV: '0.25',
+                    repayStatus: 'Repaid',
+                })
+            );
 
             const spy = jest.spyOn(client, 'vipLoanRepay').mockReturnValue(
                 Promise.resolve({

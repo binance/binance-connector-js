@@ -75,8 +75,8 @@ export interface GetLoanableAssetsDataResponseRowsInner {
     maxLimit?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetLoanableAssetsDataResponseRowsInner
      */
-    vipLevel?: number;
+    vipLevel?: number | bigint;
 }

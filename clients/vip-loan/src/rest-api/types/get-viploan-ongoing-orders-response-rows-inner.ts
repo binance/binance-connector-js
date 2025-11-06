@@ -21,10 +21,10 @@
 export interface GetVIPLoanOngoingOrdersResponseRowsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetVIPLoanOngoingOrdersResponseRowsInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -75,10 +75,10 @@ export interface GetVIPLoanOngoingOrdersResponseRowsInner {
     currentLTV?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetVIPLoanOngoingOrdersResponseRowsInner
      */
-    expirationTime?: number;
+    expirationTime?: number | bigint;
     /**
      *
      * @type {string}

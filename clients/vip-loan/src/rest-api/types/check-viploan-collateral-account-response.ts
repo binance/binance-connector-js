@@ -32,8 +32,8 @@ export interface CheckVIPLoanCollateralAccountResponse {
     rows?: Array<CheckVIPLoanCollateralAccountResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CheckVIPLoanCollateralAccountResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

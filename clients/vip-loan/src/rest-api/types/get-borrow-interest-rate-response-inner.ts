@@ -39,8 +39,8 @@ export interface GetBorrowInterestRateResponseInner {
     flexibleYearlyInterestRate?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetBorrowInterestRateResponseInner
      */
-    time?: number;
+    time?: number | bigint;
 }

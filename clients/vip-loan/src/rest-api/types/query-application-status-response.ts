@@ -32,8 +32,8 @@ export interface QueryApplicationStatusResponse {
     rows?: Array<QueryApplicationStatusResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryApplicationStatusResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

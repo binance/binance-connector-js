@@ -32,8 +32,8 @@ export interface GetCollateralAssetDataResponse {
     rows?: Array<GetCollateralAssetDataResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetCollateralAssetDataResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

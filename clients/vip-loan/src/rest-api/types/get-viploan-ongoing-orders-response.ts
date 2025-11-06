@@ -32,8 +32,8 @@ export interface GetVIPLoanOngoingOrdersResponse {
     rows?: Array<GetVIPLoanOngoingOrdersResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetVIPLoanOngoingOrdersResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

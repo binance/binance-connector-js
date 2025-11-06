@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { MarketDataApi } from '../../../src/rest-api';
@@ -46,20 +47,22 @@ describe('MarketDataApi', () => {
                 loanCoin: 'loanCoin_example',
             };
 
-            mockResponse = [
-                {
-                    asset: 'BUSD',
-                    flexibleDailyInterestRate: '0.001503',
-                    flexibleYearlyInterestRate: '0.548595',
-                    time: 1577233578000,
-                },
-                {
-                    asset: 'BTC',
-                    flexibleDailyInterestRate: '0.001503',
-                    flexibleYearlyInterestRate: '0.548595',
-                    time: 1577233562000,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        asset: 'BUSD',
+                        flexibleDailyInterestRate: '0.001503',
+                        flexibleYearlyInterestRate: '0.548595',
+                        time: 1577233578000,
+                    },
+                    {
+                        asset: 'BTC',
+                        flexibleDailyInterestRate: '0.001503',
+                        flexibleYearlyInterestRate: '0.548595',
+                        time: 1577233562000,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getBorrowInterestRate').mockReturnValue(
                 Promise.resolve({
@@ -81,20 +84,22 @@ describe('MarketDataApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    asset: 'BUSD',
-                    flexibleDailyInterestRate: '0.001503',
-                    flexibleYearlyInterestRate: '0.548595',
-                    time: 1577233578000,
-                },
-                {
-                    asset: 'BTC',
-                    flexibleDailyInterestRate: '0.001503',
-                    flexibleYearlyInterestRate: '0.548595',
-                    time: 1577233562000,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        asset: 'BUSD',
+                        flexibleDailyInterestRate: '0.001503',
+                        flexibleYearlyInterestRate: '0.548595',
+                        time: 1577233578000,
+                    },
+                    {
+                        asset: 'BTC',
+                        flexibleDailyInterestRate: '0.001503',
+                        flexibleYearlyInterestRate: '0.548595',
+                        time: 1577233562000,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getBorrowInterestRate').mockReturnValue(
                 Promise.resolve({
@@ -146,22 +151,24 @@ describe('MarketDataApi', () => {
 
     describe('getCollateralAssetData()', () => {
         it('should execute getCollateralAssetData() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        collateralCoin: 'BUSD',
-                        _1stCollateralRatio: '100%',
-                        _1stCollateralRange: '1-10000000',
-                        _2ndCollateralRatio: '80%',
-                        _2ndCollateralRange: '10000000-100000000',
-                        _3rdCollateralRatio: '60%',
-                        _3rdCollateralRange: '100000000-1000000000',
-                        _4thCollateralRatio: '0%',
-                        _4thCollateralRange: '>10000000000',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            collateralCoin: 'BUSD',
+                            _1stCollateralRatio: '100%',
+                            _1stCollateralRange: '1-10000000',
+                            _2ndCollateralRatio: '80%',
+                            _2ndCollateralRange: '10000000-100000000',
+                            _3rdCollateralRatio: '60%',
+                            _3rdCollateralRange: '100000000-1000000000',
+                            _4thCollateralRatio: '0%',
+                            _4thCollateralRange: '>10000000000',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getCollateralAssetData').mockReturnValue(
                 Promise.resolve({
@@ -183,22 +190,24 @@ describe('MarketDataApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        collateralCoin: 'BUSD',
-                        _1stCollateralRatio: '100%',
-                        _1stCollateralRange: '1-10000000',
-                        _2ndCollateralRatio: '80%',
-                        _2ndCollateralRange: '10000000-100000000',
-                        _3rdCollateralRatio: '60%',
-                        _3rdCollateralRange: '100000000-1000000000',
-                        _4thCollateralRatio: '0%',
-                        _4thCollateralRange: '>10000000000',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            collateralCoin: 'BUSD',
+                            _1stCollateralRatio: '100%',
+                            _1stCollateralRange: '1-10000000',
+                            _2ndCollateralRatio: '80%',
+                            _2ndCollateralRange: '10000000-100000000',
+                            _3rdCollateralRatio: '60%',
+                            _3rdCollateralRange: '100000000-1000000000',
+                            _4thCollateralRatio: '0%',
+                            _4thCollateralRange: '>10000000000',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getCollateralAssetData').mockReturnValue(
                 Promise.resolve({
@@ -234,23 +243,25 @@ describe('MarketDataApi', () => {
 
     describe('getLoanableAssetsData()', () => {
         it('should execute getLoanableAssetsData() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        loanCoin: 'BUSD',
-                        _flexibleDailyInterestRate: '0.001503',
-                        _flexibleYearlyInterestRate: '0.548595',
-                        _30dDailyInterestRate: '0.000136',
-                        _30dYearlyInterestRate: '0.03450',
-                        _60dDailyInterestRate: '0.000145',
-                        _60dYearlyInterestRate: '0.04103',
-                        minLimit: '100',
-                        maxLimit: '1000000',
-                        vipLevel: 1,
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            loanCoin: 'BUSD',
+                            _flexibleDailyInterestRate: '0.001503',
+                            _flexibleYearlyInterestRate: '0.548595',
+                            _30dDailyInterestRate: '0.000136',
+                            _30dYearlyInterestRate: '0.03450',
+                            _60dDailyInterestRate: '0.000145',
+                            _60dYearlyInterestRate: '0.04103',
+                            minLimit: '100',
+                            maxLimit: '1000000',
+                            vipLevel: 1,
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getLoanableAssetsData').mockReturnValue(
                 Promise.resolve({
@@ -273,23 +284,25 @@ describe('MarketDataApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        loanCoin: 'BUSD',
-                        _flexibleDailyInterestRate: '0.001503',
-                        _flexibleYearlyInterestRate: '0.548595',
-                        _30dDailyInterestRate: '0.000136',
-                        _30dYearlyInterestRate: '0.03450',
-                        _60dDailyInterestRate: '0.000145',
-                        _60dYearlyInterestRate: '0.04103',
-                        minLimit: '100',
-                        maxLimit: '1000000',
-                        vipLevel: 1,
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            loanCoin: 'BUSD',
+                            _flexibleDailyInterestRate: '0.001503',
+                            _flexibleYearlyInterestRate: '0.548595',
+                            _30dDailyInterestRate: '0.000136',
+                            _30dYearlyInterestRate: '0.03450',
+                            _60dDailyInterestRate: '0.000145',
+                            _60dYearlyInterestRate: '0.04103',
+                            minLimit: '100',
+                            maxLimit: '1000000',
+                            vipLevel: 1,
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getLoanableAssetsData').mockReturnValue(
                 Promise.resolve({

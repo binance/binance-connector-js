@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { UserInformationApi } from '../../../src/rest-api';
@@ -42,13 +43,15 @@ describe('UserInformationApi', () => {
 
     describe('checkVIPLoanCollateralAccount()', () => {
         it('should execute checkVIPLoanCollateralAccount() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    { collateralAccountId: '12345678', collateralCoin: 'BNB,BTC,ETH' },
-                    { collateralAccountId: '23456789', collateralCoin: 'BNB,BTC,ETH' },
-                ],
-                total: 2,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        { collateralAccountId: '12345678', collateralCoin: 'BNB,BTC,ETH' },
+                        { collateralAccountId: '23456789', collateralCoin: 'BNB,BTC,ETH' },
+                    ],
+                    total: 2,
+                })
+            );
 
             const spy = jest.spyOn(client, 'checkVIPLoanCollateralAccount').mockReturnValue(
                 Promise.resolve({
@@ -71,13 +74,15 @@ describe('UserInformationApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    { collateralAccountId: '12345678', collateralCoin: 'BNB,BTC,ETH' },
-                    { collateralAccountId: '23456789', collateralCoin: 'BNB,BTC,ETH' },
-                ],
-                total: 2,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        { collateralAccountId: '12345678', collateralCoin: 'BNB,BTC,ETH' },
+                        { collateralAccountId: '23456789', collateralCoin: 'BNB,BTC,ETH' },
+                    ],
+                    total: 2,
+                })
+            );
 
             const spy = jest.spyOn(client, 'checkVIPLoanCollateralAccount').mockReturnValue(
                 Promise.resolve({
@@ -113,25 +118,27 @@ describe('UserInformationApi', () => {
 
     describe('getVIPLoanOngoingOrders()', () => {
         it('should execute getVIPLoanOngoingOrders() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        orderId: 100000001,
-                        loanCoin: 'BUSD',
-                        totalDebt: '10000',
-                        residualInterest: '10.27687923',
-                        collateralAccountId: '12345678,23456789',
-                        collateralCoin: 'BNB,BTC,ETH',
-                        totalCollateralValueAfterHaircut: '25000.27565492',
-                        lockedCollateralValue: '25000.27565492',
-                        currentLTV: '0.57',
-                        expirationTime: 1575018510000,
-                        loanDate: '1676851200000',
-                        loanTerm: '30days',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            orderId: 100000001,
+                            loanCoin: 'BUSD',
+                            totalDebt: '10000',
+                            residualInterest: '10.27687923',
+                            collateralAccountId: '12345678,23456789',
+                            collateralCoin: 'BNB,BTC,ETH',
+                            totalCollateralValueAfterHaircut: '25000.27565492',
+                            lockedCollateralValue: '25000.27565492',
+                            currentLTV: '0.57',
+                            expirationTime: 1575018510000,
+                            loanDate: '1676851200000',
+                            loanTerm: '30days',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getVIPLoanOngoingOrders').mockReturnValue(
                 Promise.resolve({
@@ -158,25 +165,27 @@ describe('UserInformationApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        orderId: 100000001,
-                        loanCoin: 'BUSD',
-                        totalDebt: '10000',
-                        residualInterest: '10.27687923',
-                        collateralAccountId: '12345678,23456789',
-                        collateralCoin: 'BNB,BTC,ETH',
-                        totalCollateralValueAfterHaircut: '25000.27565492',
-                        lockedCollateralValue: '25000.27565492',
-                        currentLTV: '0.57',
-                        expirationTime: 1575018510000,
-                        loanDate: '1676851200000',
-                        loanTerm: '30days',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            orderId: 100000001,
+                            loanCoin: 'BUSD',
+                            totalDebt: '10000',
+                            residualInterest: '10.27687923',
+                            collateralAccountId: '12345678,23456789',
+                            collateralCoin: 'BNB,BTC,ETH',
+                            totalCollateralValueAfterHaircut: '25000.27565492',
+                            lockedCollateralValue: '25000.27565492',
+                            currentLTV: '0.57',
+                            expirationTime: 1575018510000,
+                            loanDate: '1676851200000',
+                            loanTerm: '30days',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getVIPLoanOngoingOrders').mockReturnValue(
                 Promise.resolve({
@@ -212,23 +221,25 @@ describe('UserInformationApi', () => {
 
     describe('queryApplicationStatus()', () => {
         it('should execute queryApplicationStatus() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        loanAccountId: '12345678',
-                        orderId: '12345678',
-                        requestId: '12345678',
-                        loanCoin: 'BTC',
-                        loanAmount: '100.55',
-                        collateralAccountId: '12345678,12345678,12345678',
-                        collateralCoin: 'BUSD,USDT,ETH',
-                        loanTerm: '30',
-                        status: 'Repaid',
-                        loanDate: '1676851200000',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            loanAccountId: '12345678',
+                            orderId: '12345678',
+                            requestId: '12345678',
+                            loanCoin: 'BTC',
+                            loanAmount: '100.55',
+                            collateralAccountId: '12345678,12345678,12345678',
+                            collateralCoin: 'BUSD,USDT,ETH',
+                            loanTerm: '30',
+                            status: 'Repaid',
+                            loanDate: '1676851200000',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryApplicationStatus').mockReturnValue(
                 Promise.resolve({
@@ -251,23 +262,25 @@ describe('UserInformationApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        loanAccountId: '12345678',
-                        orderId: '12345678',
-                        requestId: '12345678',
-                        loanCoin: 'BTC',
-                        loanAmount: '100.55',
-                        collateralAccountId: '12345678,12345678,12345678',
-                        collateralCoin: 'BUSD,USDT,ETH',
-                        loanTerm: '30',
-                        status: 'Repaid',
-                        loanDate: '1676851200000',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            loanAccountId: '12345678',
+                            orderId: '12345678',
+                            requestId: '12345678',
+                            loanCoin: 'BTC',
+                            loanAmount: '100.55',
+                            collateralAccountId: '12345678,12345678,12345678',
+                            collateralCoin: 'BUSD,USDT,ETH',
+                            loanTerm: '30',
+                            status: 'Repaid',
+                            loanDate: '1676851200000',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryApplicationStatus').mockReturnValue(
                 Promise.resolve({
