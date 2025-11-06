@@ -46,13 +46,13 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
          *
          * @summary Get On-chain Yields Locked Personal Left Quota (USER_DATA)
          * @param {string} projectId
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getOnChainYieldsLockedPersonalLeftQuota: async (
             projectId: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'projectId' is not null or undefined
             assertParamExists('getOnChainYieldsLockedPersonalLeftQuota', 'projectId', projectId);
@@ -86,17 +86,17 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
          *
          * @summary Get On-chain Yields Locked Product List (USER_DATA)
          * @param {string} [asset] WBETH or BETH, default to BETH
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10, Max:100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10, Max:100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getOnChainYieldsLockedProductList: async (
             asset?: string,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -133,21 +133,21 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
          *
          * @summary Get On-chain Yields Locked Product Position (USER_DATA)
          * @param {string} [asset] WBETH or BETH, default to BETH
-         * @param {number} [positionId]
+         * @param {number | bigint} [positionId]
          * @param {string} [projectId]
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10, Max:100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10, Max:100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getOnChainYieldsLockedProductPosition: async (
             asset?: string,
-            positionId?: number,
+            positionId?: number | bigint,
             projectId?: string,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -196,26 +196,26 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
          * Weight: 50
          *
          * @summary Get On-chain Yields Locked Redemption Record (USER_DATA)
-         * @param {number} [positionId]
+         * @param {number | bigint} [positionId]
          * @param {string} [redeemId]
          * @param {string} [asset] WBETH or BETH, default to BETH
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10, Max:100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10, Max:100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getOnChainYieldsLockedRedemptionRecord: async (
-            positionId?: number,
+            positionId?: number | bigint,
             redeemId?: string,
             asset?: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -274,22 +274,22 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
          * @summary Get On-chain Yields Locked Rewards History (USER_DATA)
          * @param {string} [positionId]
          * @param {string} [asset] WBETH or BETH, default to BETH
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10, Max:100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10, Max:100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getOnChainYieldsLockedRewardsHistory: async (
             positionId?: string,
             asset?: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -340,7 +340,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
          * @param {string} projectId
          * @param {number} amount Amount in SOL.
          * @param {boolean} [autoSubscribe] true or false, default true.
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -348,7 +348,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             projectId: string,
             amount: number,
             autoSubscribe?: boolean,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'projectId' is not null or undefined
             assertParamExists('getOnChainYieldsLockedSubscriptionPreview', 'projectId', projectId);
@@ -397,11 +397,11 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
          * @param {string} [purchaseId]
          * @param {string} [clientId]
          * @param {string} [asset] WBETH or BETH, default to BETH
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10, Max:100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10, Max:100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -409,11 +409,11 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             purchaseId?: string,
             clientId?: string,
             asset?: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -465,11 +465,11 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
          * Weight: 50
          *
          * @summary On-chain Yields Account (USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        onChainYieldsAccount: async (recvWindow?: number): Promise<RequestArgs> => {
+        onChainYieldsAccount: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -496,14 +496,14 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
          * @summary Redeem On-chain Yields Locked Product (TRADE)
          * @param {string} positionId
          * @param {string} [channelId]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         redeemOnChainYieldsLockedProduct: async (
             positionId: string,
             channelId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'positionId' is not null or undefined
             assertParamExists('redeemOnChainYieldsLockedProduct', 'positionId', positionId);
@@ -540,14 +540,14 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
          * @summary Set On-chain Yields Locked Auto Subscribe(USER_DATA)
          * @param {string} positionId
          * @param {boolean} autoSubscribe true or false
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         setOnChainYieldsLockedAutoSubscribe: async (
             positionId: string,
             autoSubscribe: boolean,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'positionId' is not null or undefined
             assertParamExists('setOnChainYieldsLockedAutoSubscribe', 'positionId', positionId);
@@ -590,14 +590,14 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
          * @summary Set On-chain Yields Locked Product Redeem Option(USER_DATA)
          * @param {string} positionId
          * @param {string} redeemTo 'SPOT','FLEXIBLE'
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         setOnChainYieldsLockedProductRedeemOption: async (
             positionId: string,
             redeemTo: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'positionId' is not null or undefined
             assertParamExists(
@@ -647,7 +647,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
          * @param {string} [redeemTo] `SPOT`,`FLEXIBLE`, default `FLEXIBLE` Takes effect when Auto Subscribe is false
          * @param {string} [channelId]
          * @param {string} [clientId]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -659,7 +659,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             redeemTo?: string,
             channelId?: string,
             clientId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'projectId' is not null or undefined
             assertParamExists('subscribeOnChainYieldsLockedProduct', 'projectId', projectId);
@@ -923,10 +923,10 @@ export interface GetOnChainYieldsLockedPersonalLeftQuotaRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedPersonalLeftQuota
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -943,24 +943,24 @@ export interface GetOnChainYieldsLockedProductListRequest {
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedProductList
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10, Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedProductList
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedProductList
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -977,10 +977,10 @@ export interface GetOnChainYieldsLockedProductPositionRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedProductPosition
      */
-    readonly positionId?: number;
+    readonly positionId?: number | bigint;
 
     /**
      *
@@ -991,24 +991,24 @@ export interface GetOnChainYieldsLockedProductPositionRequest {
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedProductPosition
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10, Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedProductPosition
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedProductPosition
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1018,10 +1018,10 @@ export interface GetOnChainYieldsLockedProductPositionRequest {
 export interface GetOnChainYieldsLockedRedemptionRecordRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedRedemptionRecord
      */
-    readonly positionId?: number;
+    readonly positionId?: number | bigint;
 
     /**
      *
@@ -1039,38 +1039,38 @@ export interface GetOnChainYieldsLockedRedemptionRecordRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedRedemptionRecord
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedRedemptionRecord
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedRedemptionRecord
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10, Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedRedemptionRecord
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedRedemptionRecord
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1094,38 +1094,38 @@ export interface GetOnChainYieldsLockedRewardsHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedRewardsHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedRewardsHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedRewardsHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10, Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedRewardsHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedRewardsHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1156,10 +1156,10 @@ export interface GetOnChainYieldsLockedSubscriptionPreviewRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedSubscriptionPreview
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1190,38 +1190,38 @@ export interface GetOnChainYieldsLockedSubscriptionRecordRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedSubscriptionRecord
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedSubscriptionRecord
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedSubscriptionRecord
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10, Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedSubscriptionRecord
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedSubscriptionRecord
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1231,10 +1231,10 @@ export interface GetOnChainYieldsLockedSubscriptionRecordRequest {
 export interface OnChainYieldsAccountRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiOnChainYieldsAccount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1258,10 +1258,10 @@ export interface RedeemOnChainYieldsLockedProductRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiRedeemOnChainYieldsLockedProduct
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1285,10 +1285,10 @@ export interface SetOnChainYieldsLockedAutoSubscribeRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiSetOnChainYieldsLockedAutoSubscribe
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1312,10 +1312,10 @@ export interface SetOnChainYieldsLockedProductRedeemOptionRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiSetOnChainYieldsLockedProductRedeemOption
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1374,10 +1374,10 @@ export interface SubscribeOnChainYieldsLockedProductRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OnChainYieldsApiSubscribeOnChainYieldsLockedProduct
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

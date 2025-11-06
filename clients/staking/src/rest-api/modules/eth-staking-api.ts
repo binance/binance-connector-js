@@ -44,11 +44,11 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 150
          *
          * @summary ETH Staking account(USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        ethStakingAccount: async (recvWindow?: number): Promise<RequestArgs> => {
+        ethStakingAccount: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -71,11 +71,11 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 150
          *
          * @summary Get current ETH staking quota(USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        getCurrentEthStakingQuota: async (recvWindow?: number): Promise<RequestArgs> => {
+        getCurrentEthStakingQuota: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -103,20 +103,20 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 150
          *
          * @summary Get ETH redemption history(USER_DATA)
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10, Max:100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10, Max:100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getEthRedemptionHistory: async (
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -161,20 +161,20 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 150
          *
          * @summary Get ETH staking history(USER_DATA)
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10, Max:100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10, Max:100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getEthStakingHistory: async (
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -219,20 +219,20 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 150
          *
          * @summary Get WBETH Rate History(USER_DATA)
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10, Max:100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10, Max:100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getWbethRateHistory: async (
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -277,20 +277,20 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 150
          *
          * @summary Get WBETH rewards history(USER_DATA)
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10, Max:100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10, Max:100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getWbethRewardsHistory: async (
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -335,20 +335,20 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 150
          *
          * @summary Get WBETH unwrap history(USER_DATA)
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10, Max:100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10, Max:100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getWbethUnwrapHistory: async (
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -393,20 +393,20 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 150
          *
          * @summary Get WBETH wrap history(USER_DATA)
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10, Max:100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10, Max:100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getWbethWrapHistory: async (
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -450,14 +450,14 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @summary Redeem ETH(TRADE)
          * @param {number} amount Amount in SOL.
          * @param {string} [asset] WBETH or BETH, default to BETH
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         redeemEth: async (
             amount: number,
             asset?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'amount' is not null or undefined
             assertParamExists('redeemEth', 'amount', amount);
@@ -495,11 +495,14 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * @summary Subscribe ETH Staking(TRADE)
          * @param {number} amount Amount in SOL.
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        subscribeEthStaking: async (amount: number, recvWindow?: number): Promise<RequestArgs> => {
+        subscribeEthStaking: async (
+            amount: number,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             // verify required parameter 'amount' is not null or undefined
             assertParamExists('subscribeEthStaking', 'amount', amount);
 
@@ -532,11 +535,11 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * @summary Wrap BETH(TRADE)
          * @param {number} amount Amount in SOL.
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        wrapBeth: async (amount: number, recvWindow?: number): Promise<RequestArgs> => {
+        wrapBeth: async (amount: number, recvWindow?: number | bigint): Promise<RequestArgs> => {
             // verify required parameter 'amount' is not null or undefined
             assertParamExists('wrapBeth', 'amount', amount);
 
@@ -763,10 +766,10 @@ export interface EthStakingApiInterface {
 export interface EthStakingAccountRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiEthStakingAccount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -776,10 +779,10 @@ export interface EthStakingAccountRequest {
 export interface GetCurrentEthStakingQuotaRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetCurrentEthStakingQuota
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -789,38 +792,38 @@ export interface GetCurrentEthStakingQuotaRequest {
 export interface GetEthRedemptionHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetEthRedemptionHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetEthRedemptionHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetEthRedemptionHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10, Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetEthRedemptionHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetEthRedemptionHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -830,38 +833,38 @@ export interface GetEthRedemptionHistoryRequest {
 export interface GetEthStakingHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetEthStakingHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetEthStakingHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetEthStakingHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10, Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetEthStakingHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetEthStakingHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -871,38 +874,38 @@ export interface GetEthStakingHistoryRequest {
 export interface GetWbethRateHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetWbethRateHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetWbethRateHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetWbethRateHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10, Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetWbethRateHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetWbethRateHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -912,38 +915,38 @@ export interface GetWbethRateHistoryRequest {
 export interface GetWbethRewardsHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetWbethRewardsHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetWbethRewardsHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetWbethRewardsHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10, Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetWbethRewardsHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetWbethRewardsHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -953,38 +956,38 @@ export interface GetWbethRewardsHistoryRequest {
 export interface GetWbethUnwrapHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetWbethUnwrapHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetWbethUnwrapHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetWbethUnwrapHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10, Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetWbethUnwrapHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetWbethUnwrapHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -994,38 +997,38 @@ export interface GetWbethUnwrapHistoryRequest {
 export interface GetWbethWrapHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetWbethWrapHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetWbethWrapHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetWbethWrapHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10, Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetWbethWrapHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiGetWbethWrapHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1049,10 +1052,10 @@ export interface RedeemEthRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiRedeemEth
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1069,10 +1072,10 @@ export interface SubscribeEthStakingRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiSubscribeEthStaking
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1089,10 +1092,10 @@ export interface WrapBethRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EthStakingApiWrapBeth
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

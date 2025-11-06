@@ -46,11 +46,11 @@ const SolStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 150
          *
          * @summary Claim Boost Rewards(TRADE)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        claimBoostRewards: async (recvWindow?: number): Promise<RequestArgs> => {
+        claimBoostRewards: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -78,20 +78,20 @@ const SolStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 150
          *
          * @summary Get BNSOL Rate History(USER_DATA)
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10, Max:100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10, Max:100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getBnsolRateHistory: async (
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -136,20 +136,20 @@ const SolStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 150
          *
          * @summary Get BNSOL rewards history(USER_DATA)
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10, Max:100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10, Max:100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getBnsolRewardsHistory: async (
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -195,21 +195,21 @@ const SolStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * @summary Get Boost Rewards History(USER_DATA)
          * @param {string} type "CLAIM", "DISTRIBUTE", default "CLAIM"
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10, Max:100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10, Max:100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getBoostRewardsHistory: async (
             type: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'type' is not null or undefined
             assertParamExists('getBoostRewardsHistory', 'type', type);
@@ -261,20 +261,20 @@ const SolStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 150
          *
          * @summary Get SOL redemption history(USER_DATA)
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10, Max:100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10, Max:100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getSolRedemptionHistory: async (
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -319,20 +319,20 @@ const SolStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 150
          *
          * @summary Get SOL staking history(USER_DATA)
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10, Max:100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10, Max:100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getSolStakingHistory: async (
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -372,11 +372,11 @@ const SolStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 150
          *
          * @summary Get SOL staking quota details(USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        getSolStakingQuotaDetails: async (recvWindow?: number): Promise<RequestArgs> => {
+        getSolStakingQuotaDetails: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -404,11 +404,11 @@ const SolStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 150
          *
          * @summary Get Unclaimed Rewards(USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        getUnclaimedRewards: async (recvWindow?: number): Promise<RequestArgs> => {
+        getUnclaimedRewards: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -434,11 +434,11 @@ const SolStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * @summary Redeem SOL(TRADE)
          * @param {number} amount Amount in SOL.
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        redeemSol: async (amount: number, recvWindow?: number): Promise<RequestArgs> => {
+        redeemSol: async (amount: number, recvWindow?: number | bigint): Promise<RequestArgs> => {
             // verify required parameter 'amount' is not null or undefined
             assertParamExists('redeemSol', 'amount', amount);
 
@@ -468,11 +468,11 @@ const SolStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 150
          *
          * @summary SOL Staking account(USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        solStakingAccount: async (recvWindow?: number): Promise<RequestArgs> => {
+        solStakingAccount: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -498,11 +498,14 @@ const SolStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * @summary Subscribe SOL Staking(TRADE)
          * @param {number} amount Amount in SOL.
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        subscribeSolStaking: async (amount: number, recvWindow?: number): Promise<RequestArgs> => {
+        subscribeSolStaking: async (
+            amount: number,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             // verify required parameter 'amount' is not null or undefined
             assertParamExists('subscribeSolStaking', 'amount', amount);
 
@@ -731,10 +734,10 @@ export interface SolStakingApiInterface {
 export interface ClaimBoostRewardsRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiClaimBoostRewards
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -744,38 +747,38 @@ export interface ClaimBoostRewardsRequest {
 export interface GetBnsolRateHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetBnsolRateHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetBnsolRateHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetBnsolRateHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10, Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetBnsolRateHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetBnsolRateHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -785,38 +788,38 @@ export interface GetBnsolRateHistoryRequest {
 export interface GetBnsolRewardsHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetBnsolRewardsHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetBnsolRewardsHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetBnsolRewardsHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10, Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetBnsolRewardsHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetBnsolRewardsHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -833,38 +836,38 @@ export interface GetBoostRewardsHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetBoostRewardsHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetBoostRewardsHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetBoostRewardsHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10, Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetBoostRewardsHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetBoostRewardsHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -874,38 +877,38 @@ export interface GetBoostRewardsHistoryRequest {
 export interface GetSolRedemptionHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetSolRedemptionHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetSolRedemptionHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetSolRedemptionHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10, Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetSolRedemptionHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetSolRedemptionHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -915,38 +918,38 @@ export interface GetSolRedemptionHistoryRequest {
 export interface GetSolStakingHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetSolStakingHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetSolStakingHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetSolStakingHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10, Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetSolStakingHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetSolStakingHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -956,10 +959,10 @@ export interface GetSolStakingHistoryRequest {
 export interface GetSolStakingQuotaDetailsRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetSolStakingQuotaDetails
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -969,10 +972,10 @@ export interface GetSolStakingQuotaDetailsRequest {
 export interface GetUnclaimedRewardsRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiGetUnclaimedRewards
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -989,10 +992,10 @@ export interface RedeemSolRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiRedeemSol
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1002,10 +1005,10 @@ export interface RedeemSolRequest {
 export interface SolStakingAccountRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiSolStakingAccount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1022,10 +1025,10 @@ export interface SubscribeSolStakingRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SolStakingApiSubscribeSolStaking
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

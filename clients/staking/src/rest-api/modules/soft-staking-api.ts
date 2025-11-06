@@ -37,17 +37,17 @@ const SoftStakingApiAxiosParamCreator = function (configuration: ConfigurationRe
          *
          * @summary Get Soft Staking Product List (USER_DATA)
          * @param {string} [asset] WBETH or BETH, default to BETH
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10, Max:100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10, Max:100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getSoftStakingProductList: async (
             asset?: string,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -87,21 +87,21 @@ const SoftStakingApiAxiosParamCreator = function (configuration: ConfigurationRe
          *
          * @summary Get Soft Staking Rewards History(USER_DATA)
          * @param {string} [asset] WBETH or BETH, default to BETH
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10, Max:100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10, Max:100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getSoftStakingRewardsHistory: async (
             asset?: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -146,11 +146,14 @@ const SoftStakingApiAxiosParamCreator = function (configuration: ConfigurationRe
          *
          * @summary Set Soft Staking (USER_DATA)
          * @param {boolean} softStaking true or false
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        setSoftStaking: async (softStaking: boolean, recvWindow?: number): Promise<RequestArgs> => {
+        setSoftStaking: async (
+            softStaking: boolean,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             // verify required parameter 'softStaking' is not null or undefined
             assertParamExists('setSoftStaking', 'softStaking', softStaking);
 
@@ -243,24 +246,24 @@ export interface GetSoftStakingProductListRequest {
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SoftStakingApiGetSoftStakingProductList
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10, Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SoftStakingApiGetSoftStakingProductList
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SoftStakingApiGetSoftStakingProductList
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -277,38 +280,38 @@ export interface GetSoftStakingRewardsHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SoftStakingApiGetSoftStakingRewardsHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SoftStakingApiGetSoftStakingRewardsHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SoftStakingApiGetSoftStakingRewardsHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10, Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SoftStakingApiGetSoftStakingRewardsHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SoftStakingApiGetSoftStakingRewardsHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -325,10 +328,10 @@ export interface SetSoftStakingRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SoftStakingApiSetSoftStaking
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
