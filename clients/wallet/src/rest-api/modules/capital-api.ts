@@ -42,11 +42,11 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 10
          *
          * @summary All Coins\' Information (USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        allCoinsInformation: async (recvWindow?: number): Promise<RequestArgs> => {
+        allCoinsInformation: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -76,7 +76,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {string} coin
          * @param {string} [network]
          * @param {number} [amount]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -84,7 +84,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             coin: string,
             network?: string,
             amount?: number,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'coin' is not null or undefined
             assertParamExists('depositAddress', 'coin', coin);
@@ -129,12 +129,12 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @summary Deposit History (supporting network) (USER_DATA)
          * @param {boolean} [includeSource] Default: `false`, return `sourceAddress`field when set to `true`
          * @param {string} [coin]
-         * @param {number} [status] 0(0:Email Sent, 2:Awaiting Approval 3:Rejected 4:Processing 6:Completed)
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [offset] Default: 0
-         * @param {number} [limit] min 7, max 30, default 7
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [status] 0(0:Email Sent, 2:Awaiting Approval 3:Rejected 4:Processing 6:Completed)
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [offset] Default: 0
+         * @param {number | bigint} [limit] min 7, max 30, default 7
+         * @param {number | bigint} [recvWindow]
          * @param {string} [txId]
          *
          * @throws {RequiredError}
@@ -142,12 +142,12 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         depositHistory: async (
             includeSource?: boolean,
             coin?: string,
-            status?: number,
-            startTime?: number,
-            endTime?: number,
-            offset?: number,
-            limit?: number,
-            recvWindow?: number,
+            status?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            offset?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint,
             txId?: string
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
@@ -292,18 +292,18 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 1
          *
          * @summary One click arrival deposit apply (for expired address deposit) (USER_DATA)
-         * @param {number} [depositId] Deposit record Id, priority use
+         * @param {number | bigint} [depositId] Deposit record Id, priority use
          * @param {string} [txId]
-         * @param {number} [subAccountId] Sub-accountId of Cloud user
-         * @param {number} [subUserId] Sub-userId of parent user
+         * @param {number | bigint} [subAccountId] Sub-accountId of Cloud user
+         * @param {number | bigint} [subUserId] Sub-userId of parent user
          *
          * @throws {RequiredError}
          */
         oneClickArrivalDepositApply: async (
-            depositId?: number,
+            depositId?: number | bigint,
             txId?: string,
-            subAccountId?: number,
-            subUserId?: number
+            subAccountId?: number | bigint,
+            subUserId?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -352,8 +352,8 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {string} [addressTag] Secondary address identifier for coins like XRP,XMR etc.
          * @param {boolean} [transactionFeeFlag] When making internal transfer, `true` for returning the fee to the destination account; `false` for returning the fee back to the departure account. Default `false`.
          * @param {string} [name] Description of the address. Address book cap is 200, space in name should be encoded into `%20`
-         * @param {number} [walletType] The wallet type for withdraw，0-spot wallet ，1-funding wallet. Default walletType is the current "selected wallet" under wallet->Fiat and Spot/Funding->Deposit
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [walletType] The wallet type for withdraw，0-spot wallet ，1-funding wallet. Default walletType is the current "selected wallet" under wallet->Fiat and Spot/Funding->Deposit
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -366,8 +366,8 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             addressTag?: string,
             transactionFeeFlag?: boolean,
             name?: string,
-            walletType?: number,
-            recvWindow?: number
+            walletType?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'coin' is not null or undefined
             assertParamExists('withdraw', 'coin', coin);
@@ -444,26 +444,26 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @summary Withdraw History (supporting network) (USER_DATA)
          * @param {string} [coin]
          * @param {string} [withdrawOrderId] client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for query.
-         * @param {number} [status] 0(0:Email Sent, 2:Awaiting Approval 3:Rejected 4:Processing 6:Completed)
-         * @param {number} [offset] Default: 0
-         * @param {number} [limit] min 7, max 30, default 7
+         * @param {number | bigint} [status] 0(0:Email Sent, 2:Awaiting Approval 3:Rejected 4:Processing 6:Completed)
+         * @param {number | bigint} [offset] Default: 0
+         * @param {number | bigint} [limit] min 7, max 30, default 7
          * @param {string} [idList] id list returned in the response of POST `/sapi/v1/capital/withdraw/apply`, separated by `,`
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         withdrawHistory: async (
             coin?: string,
             withdrawOrderId?: string,
-            status?: number,
-            offset?: number,
-            limit?: number,
+            status?: number | bigint,
+            offset?: number | bigint,
+            limit?: number | bigint,
             idList?: string,
-            startTime?: number,
-            endTime?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -675,10 +675,10 @@ export interface CapitalApiInterface {
 export interface AllCoinsInformationRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CapitalApiAllCoinsInformation
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -709,10 +709,10 @@ export interface DepositAddressRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CapitalApiDepositAddress
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -736,45 +736,45 @@ export interface DepositHistoryRequest {
 
     /**
      * 0(0:Email Sent, 2:Awaiting Approval 3:Rejected 4:Processing 6:Completed)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CapitalApiDepositHistory
      */
-    readonly status?: number;
+    readonly status?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CapitalApiDepositHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CapitalApiDepositHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default: 0
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CapitalApiDepositHistory
      */
-    readonly offset?: number;
+    readonly offset?: number | bigint;
 
     /**
      * min 7, max 30, default 7
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CapitalApiDepositHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CapitalApiDepositHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 
     /**
      *
@@ -811,10 +811,10 @@ export interface FetchDepositAddressListWithNetworkRequest {
 export interface OneClickArrivalDepositApplyRequest {
     /**
      * Deposit record Id, priority use
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CapitalApiOneClickArrivalDepositApply
      */
-    readonly depositId?: number;
+    readonly depositId?: number | bigint;
 
     /**
      *
@@ -825,17 +825,17 @@ export interface OneClickArrivalDepositApplyRequest {
 
     /**
      * Sub-accountId of Cloud user
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CapitalApiOneClickArrivalDepositApply
      */
-    readonly subAccountId?: number;
+    readonly subAccountId?: number | bigint;
 
     /**
      * Sub-userId of parent user
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CapitalApiOneClickArrivalDepositApply
      */
-    readonly subUserId?: number;
+    readonly subUserId?: number | bigint;
 }
 
 /**
@@ -901,17 +901,17 @@ export interface WithdrawRequest {
 
     /**
      * The wallet type for withdraw，0-spot wallet ，1-funding wallet. Default walletType is the current "selected wallet" under wallet->Fiat and Spot/Funding->Deposit
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CapitalApiWithdraw
      */
-    readonly walletType?: number;
+    readonly walletType?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CapitalApiWithdraw
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -935,24 +935,24 @@ export interface WithdrawHistoryRequest {
 
     /**
      * 0(0:Email Sent, 2:Awaiting Approval 3:Rejected 4:Processing 6:Completed)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CapitalApiWithdrawHistory
      */
-    readonly status?: number;
+    readonly status?: number | bigint;
 
     /**
      * Default: 0
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CapitalApiWithdrawHistory
      */
-    readonly offset?: number;
+    readonly offset?: number | bigint;
 
     /**
      * min 7, max 30, default 7
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CapitalApiWithdrawHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      * id list returned in the response of POST `/sapi/v1/capital/withdraw/apply`, separated by `,`
@@ -963,24 +963,24 @@ export interface WithdrawHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CapitalApiWithdrawHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CapitalApiWithdrawHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CapitalApiWithdrawHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

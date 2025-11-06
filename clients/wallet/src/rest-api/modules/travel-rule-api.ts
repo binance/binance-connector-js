@@ -60,7 +60,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @param {string} [network]
          * @param {string} [addressName] Description of the address. Address book cap is 200, space in name should be encoded into `%20`
          * @param {boolean} [transactionFeeFlag] When making internal transfer, `true` for returning the fee to the destination account; `false` for returning the fee back to the departure account. Default `false`.
-         * @param {number} [walletType] The wallet type for withdraw，0-spot wallet ，1-funding wallet. Default walletType is the current "selected wallet" under wallet->Fiat and Spot/Funding->Deposit
+         * @param {number | bigint} [walletType] The wallet type for withdraw，0-spot wallet ，1-funding wallet. Default walletType is the current "selected wallet" under wallet->Fiat and Spot/Funding->Deposit
          *
          * @throws {RequiredError}
          */
@@ -76,7 +76,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             network?: string,
             addressName?: string,
             transactionFeeFlag?: boolean,
-            walletType?: number
+            walletType?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'address' is not null or undefined
             assertParamExists('brokerWithdraw', 'address', address);
@@ -159,11 +159,13 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 1
          *
          * @summary Check Questionnaire Requirements (for local entities that require travel rule) (supporting network) (USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        checkQuestionnaireRequirements: async (recvWindow?: number): Promise<RequestArgs> => {
+        checkQuestionnaireRequirements: async (
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -194,12 +196,12 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @param {string} [tranId] Comma(,) separated list of wallet tran Ids.
          * @param {string} [network]
          * @param {string} [coin]
-         * @param {number} [travelRuleStatus] 0:Completed,1:Pending,2:Failed
+         * @param {number | bigint} [travelRuleStatus] 0:Completed,1:Pending,2:Failed
          * @param {boolean} [pendingQuestionnaire] true: Only return records that pending deposit questionnaire. false/not provided: return all records.
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [offset] Default: 0
-         * @param {number} [limit] min 7, max 30, default 7
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [offset] Default: 0
+         * @param {number | bigint} [limit] min 7, max 30, default 7
          *
          * @throws {RequiredError}
          */
@@ -209,12 +211,12 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             tranId?: string,
             network?: string,
             coin?: string,
-            travelRuleStatus?: number,
+            travelRuleStatus?: number | bigint,
             pendingQuestionnaire?: boolean,
-            startTime?: number,
-            endTime?: number,
-            offset?: number,
-            limit?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            offset?: number | bigint,
+            limit?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -286,10 +288,10 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @param {string} [network]
          * @param {string} [coin]
          * @param {boolean} [retrieveQuestionnaire] true: return `questionnaire` within response.
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [offset] Default: 0
-         * @param {number} [limit] min 7, max 30, default 7
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [offset] Default: 0
+         * @param {number | bigint} [limit] min 7, max 30, default 7
          *
          * @throws {RequiredError}
          */
@@ -299,10 +301,10 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             network?: string,
             coin?: string,
             retrieveQuestionnaire?: boolean,
-            startTime?: number,
-            endTime?: number,
-            offset?: number,
-            limit?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            offset?: number | bigint,
+            limit?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -358,11 +360,13 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 1
          *
          * @summary Fetch address verification list (USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        fetchAddressVerificationList: async (recvWindow?: number): Promise<RequestArgs> => {
+        fetchAddressVerificationList: async (
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -489,13 +493,13 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 600
          *
          * @summary Submit Deposit Questionnaire (For local entities that require travel rule) (supporting network) (USER_DATA)
-         * @param {number} tranId Wallet tran ID
+         * @param {number | bigint} tranId Wallet tran ID
          * @param {string} questionnaire JSON format questionnaire answers.
          *
          * @throws {RequiredError}
          */
         submitDepositQuestionnaireTravelRule: async (
-            tranId: number,
+            tranId: number | bigint,
             questionnaire: string
         ): Promise<RequestArgs> => {
             // verify required parameter 'tranId' is not null or undefined
@@ -533,11 +537,11 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 1
          *
          * @summary VASP list (for local entities that require travel rule) (supporting network) (USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        vaspList: async (recvWindow?: number): Promise<RequestArgs> => {
+        vaspList: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -569,12 +573,12 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @param {string} [withdrawOrderId] client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for query.
          * @param {string} [network]
          * @param {string} [coin]
-         * @param {number} [travelRuleStatus] 0:Completed,1:Pending,2:Failed
-         * @param {number} [offset] Default: 0
-         * @param {number} [limit] min 7, max 30, default 7
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [travelRuleStatus] 0:Completed,1:Pending,2:Failed
+         * @param {number | bigint} [offset] Default: 0
+         * @param {number | bigint} [limit] min 7, max 30, default 7
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -584,12 +588,12 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             withdrawOrderId?: string,
             network?: string,
             coin?: string,
-            travelRuleStatus?: number,
-            offset?: number,
-            limit?: number,
-            startTime?: number,
-            endTime?: number,
-            recvWindow?: number
+            travelRuleStatus?: number | bigint,
+            offset?: number | bigint,
+            limit?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -668,12 +672,12 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @param {string} [withdrawOrderId] client side id for withdrawal, if provided in POST `/sapi/v1/capital/withdraw/apply`, can be used here for query.
          * @param {string} [network]
          * @param {string} [coin]
-         * @param {number} [travelRuleStatus] 0:Completed,1:Pending,2:Failed
-         * @param {number} [offset] Default: 0
-         * @param {number} [limit] min 7, max 30, default 7
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [travelRuleStatus] 0:Completed,1:Pending,2:Failed
+         * @param {number | bigint} [offset] Default: 0
+         * @param {number | bigint} [limit] min 7, max 30, default 7
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -683,12 +687,12 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             withdrawOrderId?: string,
             network?: string,
             coin?: string,
-            travelRuleStatus?: number,
-            offset?: number,
-            limit?: number,
-            startTime?: number,
-            endTime?: number,
-            recvWindow?: number
+            travelRuleStatus?: number | bigint,
+            offset?: number | bigint,
+            limit?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -766,8 +770,8 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @param {string} [addressTag] Secondary address identifier for coins like XRP,XMR etc.
          * @param {boolean} [transactionFeeFlag] When making internal transfer, `true` for returning the fee to the destination account; `false` for returning the fee back to the departure account. Default `false`.
          * @param {string} [name] Description of the address. Address book cap is 200, space in name should be encoded into `%20`
-         * @param {number} [walletType] The wallet type for withdraw，0-spot wallet ，1-funding wallet. Default walletType is the current "selected wallet" under wallet->Fiat and Spot/Funding->Deposit
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [walletType] The wallet type for withdraw，0-spot wallet ，1-funding wallet. Default walletType is the current "selected wallet" under wallet->Fiat and Spot/Funding->Deposit
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -781,8 +785,8 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             addressTag?: string,
             transactionFeeFlag?: boolean,
             name?: string,
-            walletType?: number,
-            recvWindow?: number
+            walletType?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'coin' is not null or undefined
             assertParamExists('withdrawTravelRule', 'coin', coin);
@@ -1135,10 +1139,10 @@ export interface BrokerWithdrawRequest {
 
     /**
      * The wallet type for withdraw，0-spot wallet ，1-funding wallet. Default walletType is the current "selected wallet" under wallet->Fiat and Spot/Funding->Deposit
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiBrokerWithdraw
      */
-    readonly walletType?: number;
+    readonly walletType?: number | bigint;
 }
 
 /**
@@ -1148,10 +1152,10 @@ export interface BrokerWithdrawRequest {
 export interface CheckQuestionnaireRequirementsRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiCheckQuestionnaireRequirements
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1196,10 +1200,10 @@ export interface DepositHistoryTravelRuleRequest {
 
     /**
      * 0:Completed,1:Pending,2:Failed
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiDepositHistoryTravelRule
      */
-    readonly travelRuleStatus?: number;
+    readonly travelRuleStatus?: number | bigint;
 
     /**
      * true: Only return records that pending deposit questionnaire. false/not provided: return all records.
@@ -1210,31 +1214,31 @@ export interface DepositHistoryTravelRuleRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiDepositHistoryTravelRule
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiDepositHistoryTravelRule
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default: 0
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiDepositHistoryTravelRule
      */
-    readonly offset?: number;
+    readonly offset?: number | bigint;
 
     /**
      * min 7, max 30, default 7
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiDepositHistoryTravelRule
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 }
 
 /**
@@ -1279,31 +1283,31 @@ export interface DepositHistoryV2Request {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiDepositHistoryV2
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiDepositHistoryV2
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default: 0
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiDepositHistoryV2
      */
-    readonly offset?: number;
+    readonly offset?: number | bigint;
 
     /**
      * min 7, max 30, default 7
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiDepositHistoryV2
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 }
 
 /**
@@ -1313,10 +1317,10 @@ export interface DepositHistoryV2Request {
 export interface FetchAddressVerificationListRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiFetchAddressVerificationList
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1402,10 +1406,10 @@ export interface SubmitDepositQuestionnaireRequest {
 export interface SubmitDepositQuestionnaireTravelRuleRequest {
     /**
      * Wallet tran ID
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiSubmitDepositQuestionnaireTravelRule
      */
-    readonly tranId: number;
+    readonly tranId: number | bigint;
 
     /**
      * JSON format questionnaire answers.
@@ -1422,10 +1426,10 @@ export interface SubmitDepositQuestionnaireTravelRuleRequest {
 export interface VaspListRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiVaspList
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1470,45 +1474,45 @@ export interface WithdrawHistoryV1Request {
 
     /**
      * 0:Completed,1:Pending,2:Failed
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiWithdrawHistoryV1
      */
-    readonly travelRuleStatus?: number;
+    readonly travelRuleStatus?: number | bigint;
 
     /**
      * Default: 0
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiWithdrawHistoryV1
      */
-    readonly offset?: number;
+    readonly offset?: number | bigint;
 
     /**
      * min 7, max 30, default 7
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiWithdrawHistoryV1
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiWithdrawHistoryV1
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiWithdrawHistoryV1
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiWithdrawHistoryV1
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1553,45 +1557,45 @@ export interface WithdrawHistoryV2Request {
 
     /**
      * 0:Completed,1:Pending,2:Failed
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiWithdrawHistoryV2
      */
-    readonly travelRuleStatus?: number;
+    readonly travelRuleStatus?: number | bigint;
 
     /**
      * Default: 0
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiWithdrawHistoryV2
      */
-    readonly offset?: number;
+    readonly offset?: number | bigint;
 
     /**
      * min 7, max 30, default 7
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiWithdrawHistoryV2
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiWithdrawHistoryV2
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiWithdrawHistoryV2
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiWithdrawHistoryV2
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1664,17 +1668,17 @@ export interface WithdrawTravelRuleRequest {
 
     /**
      * The wallet type for withdraw，0-spot wallet ，1-funding wallet. Default walletType is the current "selected wallet" under wallet->Fiat and Spot/Funding->Deposit
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiWithdrawTravelRule
      */
-    readonly walletType?: number;
+    readonly walletType?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TravelRuleApiWithdrawTravelRule
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

@@ -31,11 +31,13 @@ const OthersApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * Weight: 100
          *
          * @summary Get symbols delist schedule for spot (MARKET_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        getSymbolsDelistScheduleForSpot: async (recvWindow?: number): Promise<RequestArgs> => {
+        getSymbolsDelistScheduleForSpot: async (
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -116,10 +118,10 @@ export interface OthersApiInterface {
 export interface GetSymbolsDelistScheduleForSpotRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OthersApiGetSymbolsDelistScheduleForSpot
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

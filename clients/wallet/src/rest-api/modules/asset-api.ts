@@ -51,11 +51,11 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 1
          *
          * @summary Asset Detail (USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        assetDetail: async (recvWindow?: number): Promise<RequestArgs> => {
+        assetDetail: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -82,19 +82,19 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Asset Dividend Record (USER_DATA)
          * @param {string} [asset] If asset is blank, then query all positive assets user have.
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [limit] min 7, max 30, default 7
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [limit] min 7, max 30, default 7
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         assetDividendRecord: async (
             asset?: string,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -138,14 +138,14 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Dust Transfer (USER_DATA)
          * @param {string} asset
          * @param {string} [accountType] `SPOT` or `MARGIN`,default `SPOT`
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         dustTransfer: async (
             asset: string,
             accountType?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
             assertParamExists('dustTransfer', 'asset', asset);
@@ -183,16 +183,16 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 1
          *
          * @summary DustLog(USER_DATA)
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         dustlog: async (
-            startTime?: number,
-            endTime?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -229,14 +229,14 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Funding Wallet (USER_DATA)
          * @param {string} [asset] If asset is blank, then query all positive assets user have.
          * @param {string} [needBtcValuation] true or false
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         fundingWallet: async (
             asset?: string,
             needBtcValuation?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -269,13 +269,13 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Get Assets That Can Be Converted Into BNB (USER_DATA)
          * @param {string} [accountType] `SPOT` or `MARGIN`,default `SPOT`
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getAssetsThatCanBeConvertedIntoBnb: async (
             accountType?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -306,24 +306,24 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 600
          *
          * @summary Get Cloud-Mining payment and refund history (USER_DATA)
-         * @param {number} startTime
-         * @param {number} endTime
-         * @param {number} [tranId] The transaction id
+         * @param {number | bigint} startTime
+         * @param {number | bigint} endTime
+         * @param {number | bigint} [tranId] The transaction id
          * @param {string} [clientTranId] The unique flag
          * @param {string} [asset] If asset is blank, then query all positive assets user have.
-         * @param {number} [current] current page, default 1, the min value is 1
-         * @param {number} [size] page size, default 10, the max value is 100
+         * @param {number | bigint} [current] current page, default 1, the min value is 1
+         * @param {number | bigint} [size] page size, default 10, the max value is 100
          *
          * @throws {RequiredError}
          */
         getCloudMiningPaymentAndRefundHistory: async (
-            startTime: number,
-            endTime: number,
-            tranId?: number,
+            startTime: number | bigint,
+            endTime: number | bigint,
+            tranId?: number | bigint,
             clientTranId?: string,
             asset?: string,
-            current?: number,
-            size?: number
+            current?: number | bigint,
+            size?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'startTime' is not null or undefined
             assertParamExists('getCloudMiningPaymentAndRefundHistory', 'startTime', startTime);
@@ -401,25 +401,25 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query User Delegation History(For Master Account)(USER_DATA)
          * @param {string} email
-         * @param {number} startTime
-         * @param {number} endTime
+         * @param {number | bigint} startTime
+         * @param {number | bigint} endTime
          * @param {string} [type] Delegate/Undelegate
          * @param {string} [asset] If asset is blank, then query all positive assets user have.
-         * @param {number} [current] current page, default 1, the min value is 1
-         * @param {number} [size] page size, default 10, the max value is 100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [current] current page, default 1, the min value is 1
+         * @param {number | bigint} [size] page size, default 10, the max value is 100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryUserDelegationHistory: async (
             email: string,
-            startTime: number,
-            endTime: number,
+            startTime: number | bigint,
+            endTime: number | bigint,
             type?: string,
             asset?: string,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
             assertParamExists('queryUserDelegationHistory', 'email', email);
@@ -485,25 +485,25 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query User Universal Transfer History(USER_DATA)
          * @param {string} type
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] current page, default 1, the min value is 1
-         * @param {number} [size] page size, default 10, the max value is 100
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] current page, default 1, the min value is 1
+         * @param {number | bigint} [size] page size, default 10, the max value is 100
          * @param {string} [fromSymbol]
          * @param {string} [toSymbol]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryUserUniversalTransferHistory: async (
             type: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
             fromSymbol?: string,
             toSymbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'type' is not null or undefined
             assertParamExists('queryUserUniversalTransferHistory', 'type', type);
@@ -559,13 +559,13 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query User Wallet Balance (USER_DATA)
          * @param {string} [quoteAsset] `USDT`, `ETH`, `USDC`, `BNB`, etc. default `BTC`
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryUserWalletBalance: async (
             quoteAsset?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -597,14 +597,14 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Toggle BNB Burn On Spot Trade And Margin Interest (USER_DATA)
          * @param {string} [spotBNBBurn] "true" or "false"; Determines whether to use BNB to pay for trading fees on SPOT
          * @param {string} [interestBNBBurn] "true" or "false"; Determines whether to use BNB to pay for margin loan's interest
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         toggleBnbBurnOnSpotTradeAndMarginInterest: async (
             spotBNBBurn?: string,
             interestBNBBurn?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -637,11 +637,11 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Trade Fee (USER_DATA)
          * @param {string} [symbol]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        tradeFee: async (symbol?: string, recvWindow?: number): Promise<RequestArgs> => {
+        tradeFee: async (symbol?: string, recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
@@ -673,14 +673,14 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary User Asset (USER_DATA)
          * @param {string} [asset] If asset is blank, then query all positive assets user have.
          * @param {boolean} [needBtcValuation] Whether need btc valuation or not.
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         userAsset: async (
             asset?: string,
             needBtcValuation?: boolean,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -752,7 +752,7 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} amount
          * @param {string} [fromSymbol]
          * @param {string} [toSymbol]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -762,7 +762,7 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             amount: number,
             fromSymbol?: string,
             toSymbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'type' is not null or undefined
             assertParamExists('userUniversalTransfer', 'type', type);
@@ -1090,10 +1090,10 @@ export interface AssetApiInterface {
 export interface AssetDetailRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiAssetDetail
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1110,31 +1110,31 @@ export interface AssetDividendRecordRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiAssetDividendRecord
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiAssetDividendRecord
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * min 7, max 30, default 7
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiAssetDividendRecord
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiAssetDividendRecord
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1158,10 +1158,10 @@ export interface DustTransferRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiDustTransfer
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1171,24 +1171,24 @@ export interface DustTransferRequest {
 export interface DustlogRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiDustlog
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiDustlog
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiDustlog
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1212,10 +1212,10 @@ export interface FundingWalletRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiFundingWallet
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1232,10 +1232,10 @@ export interface GetAssetsThatCanBeConvertedIntoBnbRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiGetAssetsThatCanBeConvertedIntoBnb
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1245,24 +1245,24 @@ export interface GetAssetsThatCanBeConvertedIntoBnbRequest {
 export interface GetCloudMiningPaymentAndRefundHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiGetCloudMiningPaymentAndRefundHistory
      */
-    readonly startTime: number;
+    readonly startTime: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiGetCloudMiningPaymentAndRefundHistory
      */
-    readonly endTime: number;
+    readonly endTime: number | bigint;
 
     /**
      * The transaction id
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiGetCloudMiningPaymentAndRefundHistory
      */
-    readonly tranId?: number;
+    readonly tranId?: number | bigint;
 
     /**
      * The unique flag
@@ -1280,17 +1280,17 @@ export interface GetCloudMiningPaymentAndRefundHistoryRequest {
 
     /**
      * current page, default 1, the min value is 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiGetCloudMiningPaymentAndRefundHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * page size, default 10, the max value is 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiGetCloudMiningPaymentAndRefundHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 }
 
 /**
@@ -1307,17 +1307,17 @@ export interface QueryUserDelegationHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiQueryUserDelegationHistory
      */
-    readonly startTime: number;
+    readonly startTime: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiQueryUserDelegationHistory
      */
-    readonly endTime: number;
+    readonly endTime: number | bigint;
 
     /**
      * Delegate/Undelegate
@@ -1335,24 +1335,24 @@ export interface QueryUserDelegationHistoryRequest {
 
     /**
      * current page, default 1, the min value is 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiQueryUserDelegationHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * page size, default 10, the max value is 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiQueryUserDelegationHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiQueryUserDelegationHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1369,31 +1369,31 @@ export interface QueryUserUniversalTransferHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiQueryUserUniversalTransferHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiQueryUserUniversalTransferHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * current page, default 1, the min value is 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiQueryUserUniversalTransferHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * page size, default 10, the max value is 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiQueryUserUniversalTransferHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      *
@@ -1411,10 +1411,10 @@ export interface QueryUserUniversalTransferHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiQueryUserUniversalTransferHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1431,10 +1431,10 @@ export interface QueryUserWalletBalanceRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiQueryUserWalletBalance
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1458,10 +1458,10 @@ export interface ToggleBnbBurnOnSpotTradeAndMarginInterestRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiToggleBnbBurnOnSpotTradeAndMarginInterest
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1478,10 +1478,10 @@ export interface TradeFeeRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiTradeFee
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1505,10 +1505,10 @@ export interface UserAssetRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiUserAsset
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1553,10 +1553,10 @@ export interface UserUniversalTransferRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetApiUserUniversalTransfer
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

@@ -38,11 +38,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 1
          *
          * @summary Account API Trading Status (USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        accountApiTradingStatus: async (recvWindow?: number): Promise<RequestArgs> => {
+        accountApiTradingStatus: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -65,11 +65,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 1
          *
          * @summary Account info (USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        accountInfo: async (recvWindow?: number): Promise<RequestArgs> => {
+        accountInfo: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -92,11 +92,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 1
          *
          * @summary Account Status (USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        accountStatus: async (recvWindow?: number): Promise<RequestArgs> => {
+        accountStatus: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -124,19 +124,19 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Daily Account Snapshot (USER_DATA)
          * @param {string} type
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [limit] min 7, max 30, default 7
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [limit] min 7, max 30, default 7
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         dailyAccountSnapshot: async (
             type: string,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'type' is not null or undefined
             assertParamExists('dailyAccountSnapshot', 'type', type);
@@ -178,11 +178,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 1
          *
          * @summary Disable Fast Withdraw Switch (USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        disableFastWithdrawSwitch: async (recvWindow?: number): Promise<RequestArgs> => {
+        disableFastWithdrawSwitch: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -208,11 +208,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 1
          *
          * @summary Enable Fast Withdraw Switch (USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        enableFastWithdrawSwitch: async (recvWindow?: number): Promise<RequestArgs> => {
+        enableFastWithdrawSwitch: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -235,11 +235,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 1
          *
          * @summary Get API Key Permission (USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        getApiKeyPermission: async (recvWindow?: number): Promise<RequestArgs> => {
+        getApiKeyPermission: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -377,10 +377,10 @@ export interface AccountApiInterface {
 export interface AccountApiTradingStatusRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiAccountApiTradingStatus
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -390,10 +390,10 @@ export interface AccountApiTradingStatusRequest {
 export interface AccountInfoRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiAccountInfo
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -403,10 +403,10 @@ export interface AccountInfoRequest {
 export interface AccountStatusRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiAccountStatus
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -423,31 +423,31 @@ export interface DailyAccountSnapshotRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiDailyAccountSnapshot
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiDailyAccountSnapshot
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * min 7, max 30, default 7
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiDailyAccountSnapshot
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiDailyAccountSnapshot
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -457,10 +457,10 @@ export interface DailyAccountSnapshotRequest {
 export interface DisableFastWithdrawSwitchRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiDisableFastWithdrawSwitch
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -470,10 +470,10 @@ export interface DisableFastWithdrawSwitchRequest {
 export interface EnableFastWithdrawSwitchRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiEnableFastWithdrawSwitch
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -483,10 +483,10 @@ export interface EnableFastWithdrawSwitchRequest {
 export interface GetApiKeyPermissionRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetApiKeyPermission
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
