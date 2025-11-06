@@ -37,26 +37,26 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 0
          *
          * @summary VIP Loan Borrow(TRADE)
-         * @param {number} loanAccountId
+         * @param {number | bigint} loanAccountId
          * @param {string} loanCoin
          * @param {number} loanAmount
          * @param {string} collateralAccountId Multiple split by `,`
          * @param {string} collateralCoin Multiple split by `,`
          * @param {boolean} isFlexibleRate Default: TRUE. TRUE : flexible rate; FALSE: fixed rate
-         * @param {number} [loanTerm] Mandatory for fixed rate. Optional for fixed interest rate. Eg: 30/60 days
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [loanTerm] Mandatory for fixed rate. Optional for fixed interest rate. Eg: 30/60 days
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         vipLoanBorrow: async (
-            loanAccountId: number,
+            loanAccountId: number | bigint,
             loanCoin: string,
             loanAmount: number,
             collateralAccountId: string,
             collateralCoin: string,
             isFlexibleRate: boolean,
-            loanTerm?: number,
-            recvWindow?: number
+            loanTerm?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'loanAccountId' is not null or undefined
             assertParamExists('vipLoanBorrow', 'loanAccountId', loanAccountId);
@@ -121,16 +121,16 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 6000
          *
          * @summary VIP Loan Renew(TRADE)
-         * @param {number} orderId
-         * @param {number} loanTerm 30/60 days
-         * @param {number} [recvWindow]
+         * @param {number | bigint} orderId
+         * @param {number | bigint} loanTerm 30/60 days
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         vipLoanRenew: async (
-            orderId: number,
-            loanTerm: number,
-            recvWindow?: number
+            orderId: number | bigint,
+            loanTerm: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'orderId' is not null or undefined
             assertParamExists('vipLoanRenew', 'orderId', orderId);
@@ -167,16 +167,16 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 6000
          *
          * @summary VIP Loan Repay(TRADE)
-         * @param {number} orderId
+         * @param {number | bigint} orderId
          * @param {number} amount
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         vipLoanRepay: async (
-            orderId: number,
+            orderId: number | bigint,
             amount: number,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'orderId' is not null or undefined
             assertParamExists('vipLoanRepay', 'orderId', orderId);
@@ -271,10 +271,10 @@ export interface TradeApiInterface {
 export interface VipLoanBorrowRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiVipLoanBorrow
      */
-    readonly loanAccountId: number;
+    readonly loanAccountId: number | bigint;
 
     /**
      *
@@ -313,17 +313,17 @@ export interface VipLoanBorrowRequest {
 
     /**
      * Mandatory for fixed rate. Optional for fixed interest rate. Eg: 30/60 days
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiVipLoanBorrow
      */
-    readonly loanTerm?: number;
+    readonly loanTerm?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiVipLoanBorrow
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -333,24 +333,24 @@ export interface VipLoanBorrowRequest {
 export interface VipLoanRenewRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiVipLoanRenew
      */
-    readonly orderId: number;
+    readonly orderId: number | bigint;
 
     /**
      * 30/60 days
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiVipLoanRenew
      */
-    readonly loanTerm: number;
+    readonly loanTerm: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiVipLoanRenew
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -360,10 +360,10 @@ export interface VipLoanRenewRequest {
 export interface VipLoanRepayRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiVipLoanRepay
      */
-    readonly orderId: number;
+    readonly orderId: number | bigint;
 
     /**
      *
@@ -374,10 +374,10 @@ export interface VipLoanRepayRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiVipLoanRepay
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

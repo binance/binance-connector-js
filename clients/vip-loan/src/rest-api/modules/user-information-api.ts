@@ -38,16 +38,16 @@ const UserInformationApiAxiosParamCreator = function (configuration: Configurati
          * Weight: 6000
          *
          * @summary Check VIP Loan Collateral Account (USER_DATA)
-         * @param {number} [orderId]
-         * @param {number} [collateralAccountId]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [orderId]
+         * @param {number | bigint} [collateralAccountId]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         checkVIPLoanCollateralAccount: async (
-            orderId?: number,
-            collateralAccountId?: number,
-            recvWindow?: number
+            orderId?: number | bigint,
+            collateralAccountId?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -79,24 +79,24 @@ const UserInformationApiAxiosParamCreator = function (configuration: Configurati
          * Weight: 400
          *
          * @summary Get VIP Loan Ongoing Orders(USER_DATA)
-         * @param {number} [orderId]
-         * @param {number} [collateralAccountId]
+         * @param {number | bigint} [orderId]
+         * @param {number | bigint} [collateralAccountId]
          * @param {string} [loanCoin]
          * @param {string} [collateralCoin]
-         * @param {number} [current] Currently querying page. Start from 1, Default:1, Max: 1000.
-         * @param {number} [limit] Default: 10, Max: 100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [current] Currently querying page. Start from 1, Default:1, Max: 1000.
+         * @param {number | bigint} [limit] Default: 10, Max: 100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getVIPLoanOngoingOrders: async (
-            orderId?: number,
-            collateralAccountId?: number,
+            orderId?: number | bigint,
+            collateralAccountId?: number | bigint,
             loanCoin?: string,
             collateralCoin?: string,
-            current?: number,
-            limit?: number,
-            recvWindow?: number
+            current?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -144,16 +144,16 @@ const UserInformationApiAxiosParamCreator = function (configuration: Configurati
          * Weight: 400
          *
          * @summary Query Application Status(USER_DATA)
-         * @param {number} [current] Currently querying page. Start from 1, Default:1, Max: 1000.
-         * @param {number} [limit] Default: 10, Max: 100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [current] Currently querying page. Start from 1, Default:1, Max: 1000.
+         * @param {number | bigint} [limit] Default: 10, Max: 100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryApplicationStatus: async (
-            current?: number,
-            limit?: number,
-            recvWindow?: number
+            current?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -241,24 +241,24 @@ export interface UserInformationApiInterface {
 export interface CheckVIPLoanCollateralAccountRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UserInformationApiCheckVIPLoanCollateralAccount
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UserInformationApiCheckVIPLoanCollateralAccount
      */
-    readonly collateralAccountId?: number;
+    readonly collateralAccountId?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UserInformationApiCheckVIPLoanCollateralAccount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -268,17 +268,17 @@ export interface CheckVIPLoanCollateralAccountRequest {
 export interface GetVIPLoanOngoingOrdersRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UserInformationApiGetVIPLoanOngoingOrders
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UserInformationApiGetVIPLoanOngoingOrders
      */
-    readonly collateralAccountId?: number;
+    readonly collateralAccountId?: number | bigint;
 
     /**
      *
@@ -296,24 +296,24 @@ export interface GetVIPLoanOngoingOrdersRequest {
 
     /**
      * Currently querying page. Start from 1, Default:1, Max: 1000.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UserInformationApiGetVIPLoanOngoingOrders
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default: 10, Max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UserInformationApiGetVIPLoanOngoingOrders
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UserInformationApiGetVIPLoanOngoingOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -323,24 +323,24 @@ export interface GetVIPLoanOngoingOrdersRequest {
 export interface QueryApplicationStatusRequest {
     /**
      * Currently querying page. Start from 1, Default:1, Max: 1000.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UserInformationApiQueryApplicationStatus
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default: 10, Max: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UserInformationApiQueryApplicationStatus
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UserInformationApiQueryApplicationStatus
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

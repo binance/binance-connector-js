@@ -37,13 +37,13 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * @summary Get Borrow Interest Rate(USER_DATA)
          * @param {string} loanCoin
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getBorrowInterestRate: async (
             loanCoin: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'loanCoin' is not null or undefined
             assertParamExists('getBorrowInterestRate', 'loanCoin', loanCoin);
@@ -75,13 +75,13 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * @summary Get Collateral Asset Data(USER_DATA)
          * @param {string} [collateralCoin]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getCollateralAssetData: async (
             collateralCoin?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -110,15 +110,15 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * @summary Get Loanable Assets Data(USER_DATA)
          * @param {string} [loanCoin]
-         * @param {number} [vipLevel] default:user's vip level
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [vipLevel] default:user's vip level
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getLoanableAssetsData: async (
             loanCoin?: string,
-            vipLevel?: number,
-            recvWindow?: number
+            vipLevel?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -210,10 +210,10 @@ export interface GetBorrowInterestRateRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiGetBorrowInterestRate
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -230,10 +230,10 @@ export interface GetCollateralAssetDataRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiGetCollateralAssetData
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -250,17 +250,17 @@ export interface GetLoanableAssetsDataRequest {
 
     /**
      * default:user's vip level
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiGetLoanableAssetsData
      */
-    readonly vipLevel?: number;
+    readonly vipLevel?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiGetLoanableAssetsData
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
