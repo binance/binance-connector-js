@@ -39,14 +39,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Change Auto-Compound status(USER_DATA)
          * @param {string} positionId Get positionId from `/sapi/v1/dci/product/positions`
          * @param {string} [autoCompoundPlan]
-         * @param {number} [recvWindow] The value cannot be greater than 60000
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
         changeAutoCompoundStatus: async (
             positionId: string,
             autoCompoundPlan?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'positionId' is not null or undefined
             assertParamExists('changeAutoCompoundStatus', 'positionId', positionId);
@@ -81,11 +81,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 1(IP)
          *
          * @summary Check Dual Investment accounts(USER_DATA)
-         * @param {number} [recvWindow] The value cannot be greater than 60000
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
-        checkDualInvestmentAccounts: async (recvWindow?: number): Promise<RequestArgs> => {
+        checkDualInvestmentAccounts: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -109,17 +109,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Get Dual Investment positions(USER_DATA)
          * @param {string} [status] `PENDING`:Products are purchasing, will give results later;`PURCHASE_SUCCESS`:purchase successfully;`SETTLED`: Products are finish settling;`PURCHASE_FAIL`:fail to purchase;`REFUNDING`:refund ongoing;`REFUND_SUCCESS`:refund to spot account successfully; `SETTLING`:Products are settling. If don't fill this field, will response all the position status.
-         * @param {number} [pageSize] Default: 10, Maximum: 100
-         * @param {number} [pageIndex] Default: 1
-         * @param {number} [recvWindow] The value cannot be greater than 60000
+         * @param {number | bigint} [pageSize] Default: 10, Maximum: 100
+         * @param {number | bigint} [pageIndex] Default: 1
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
         getDualInvestmentPositions: async (
             status?: string,
-            pageSize?: number,
-            pageIndex?: number,
-            recvWindow?: number
+            pageSize?: number | bigint,
+            pageIndex?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -162,7 +162,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} orderId get orderId from `/sapi/v1/dci/product/list`
          * @param {number} depositAmount the amount for subscribing
          * @param {string} autoCompoundPlan `NONE`: switch off the plan, `STANDARD`:standard plan,`ADVANCED`:advanced plan
-         * @param {number} [recvWindow] The value cannot be greater than 60000
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
@@ -171,7 +171,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             orderId: string,
             depositAmount: number,
             autoCompoundPlan: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('subscribeDualInvestmentProducts', 'id', id);
@@ -308,10 +308,10 @@ export interface ChangeAutoCompoundStatusRequest {
 
     /**
      * The value cannot be greater than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiChangeAutoCompoundStatus
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -321,10 +321,10 @@ export interface ChangeAutoCompoundStatusRequest {
 export interface CheckDualInvestmentAccountsRequest {
     /**
      * The value cannot be greater than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCheckDualInvestmentAccounts
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -341,24 +341,24 @@ export interface GetDualInvestmentPositionsRequest {
 
     /**
      * Default: 10, Maximum: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetDualInvestmentPositions
      */
-    readonly pageSize?: number;
+    readonly pageSize?: number | bigint;
 
     /**
      * Default: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetDualInvestmentPositions
      */
-    readonly pageIndex?: number;
+    readonly pageIndex?: number | bigint;
 
     /**
      * The value cannot be greater than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetDualInvestmentPositions
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -396,10 +396,10 @@ export interface SubscribeDualInvestmentProductsRequest {
 
     /**
      * The value cannot be greater than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiSubscribeDualInvestmentProducts
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

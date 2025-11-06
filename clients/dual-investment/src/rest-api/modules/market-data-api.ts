@@ -35,9 +35,9 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @param {string} optionType Input CALL or PUT
          * @param {string} exercisedCoin Target exercised asset, e.g.: if you subscribe to a high sell product (call option), you should input: `optionType`:CALL,`exercisedCoin`:USDT,`investCoin`:BNB; if you subscribe to a low buy product (put option), you should input: `optionType`:PUT,`exercisedCoin`:BNB,`investCoin`:USDT
          * @param {string} investCoin Asset used for subscribing, e.g.: if you subscribe to a high sell product (call option), you should input: `optionType`:CALL,`exercisedCoin`:USDT,`investCoin`:BNB; if you subscribe to a low buy product (put option), you should input: `optionType`:PUT,`exercisedCoin`:BNB,`investCoin`:USDT
-         * @param {number} [pageSize] Default: 10, Maximum: 100
-         * @param {number} [pageIndex] Default: 1
-         * @param {number} [recvWindow] The value cannot be greater than 60000
+         * @param {number | bigint} [pageSize] Default: 10, Maximum: 100
+         * @param {number | bigint} [pageIndex] Default: 1
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
@@ -45,9 +45,9 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             optionType: string,
             exercisedCoin: string,
             investCoin: string,
-            pageSize?: number,
-            pageIndex?: number,
-            recvWindow?: number
+            pageSize?: number | bigint,
+            pageIndex?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'optionType' is not null or undefined
             assertParamExists('getDualInvestmentProductList', 'optionType', optionType);
@@ -144,24 +144,24 @@ export interface GetDualInvestmentProductListRequest {
 
     /**
      * Default: 10, Maximum: 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiGetDualInvestmentProductList
      */
-    readonly pageSize?: number;
+    readonly pageSize?: number | bigint;
 
     /**
      * Default: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiGetDualInvestmentProductList
      */
-    readonly pageIndex?: number;
+    readonly pageIndex?: number | bigint;
 
     /**
      * The value cannot be greater than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiGetDualInvestmentProductList
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
