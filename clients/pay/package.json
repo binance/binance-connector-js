@@ -1,7 +1,7 @@
 {
     "name": "@binance/pay",
     "description": "Official Binance Pay Connector - A lightweight library that provides a convenient interface to Binance's Pay REST API.",
-    "version": "5.0.0",
+    "version": "5.0.1",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",

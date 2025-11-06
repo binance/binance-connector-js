@@ -72,18 +72,18 @@ const PayApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
          * Weight: 3000
          *
          * @summary Get Pay Trade History
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [limit] default 100, max 100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [limit] default 100, max 100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getPayTradeHistory: async (
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -185,31 +185,31 @@ export interface PayApiInterface {
 export interface GetPayTradeHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PayApiGetPayTradeHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PayApiGetPayTradeHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * default 100, max 100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PayApiGetPayTradeHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PayApiGetPayTradeHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
