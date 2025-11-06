@@ -21,16 +21,16 @@
 export interface GetInterestHistoryResponseRowsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetInterestHistoryResponseRowsInner
      */
-    txId?: number;
+    txId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetInterestHistoryResponseRowsInner
      */
-    interestAccuredTime?: number;
+    interestAccuredTime?: number | bigint;
     /**
      *
      * @type {string}

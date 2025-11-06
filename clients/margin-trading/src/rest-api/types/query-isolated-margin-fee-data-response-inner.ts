@@ -26,10 +26,10 @@ import type { QueryIsolatedMarginFeeDataResponseInnerDataInner } from './query-i
 export interface QueryIsolatedMarginFeeDataResponseInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryIsolatedMarginFeeDataResponseInner
      */
-    vipLevel?: number;
+    vipLevel?: number | bigint;
     /**
      *
      * @type {string}

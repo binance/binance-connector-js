@@ -51,10 +51,10 @@ export interface QueryMarginAccountsAllOrdersResponseInner {
     isWorking?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryMarginAccountsAllOrdersResponseInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -99,10 +99,10 @@ export interface QueryMarginAccountsAllOrdersResponseInner {
     isIsolated?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryMarginAccountsAllOrdersResponseInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}
@@ -123,8 +123,8 @@ export interface QueryMarginAccountsAllOrdersResponseInner {
     selfTradePreventionMode?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryMarginAccountsAllOrdersResponseInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

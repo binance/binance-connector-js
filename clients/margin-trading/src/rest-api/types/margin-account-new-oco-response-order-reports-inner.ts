@@ -27,16 +27,16 @@ export interface MarginAccountNewOcoResponseOrderReportsInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -45,10 +45,10 @@ export interface MarginAccountNewOcoResponseOrderReportsInner {
     clientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarginAccountNewOcoResponseOrderReportsInner
      */
-    transactTime?: number;
+    transactTime?: number | bigint;
     /**
      *
      * @type {string}

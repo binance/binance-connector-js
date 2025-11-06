@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { RiskDataStreamApi } from '../../../src/rest-api';
@@ -139,7 +140,9 @@ describe('RiskDataStreamApi', () => {
 
     describe('startUserDataStream()', () => {
         it('should execute startUserDataStream() successfully with required parameters only', async () => {
-            mockResponse = { listenKey: 'T3ee22BIYuWqmvne0HNq2A2WsFlEtLhvWCtItw6ffhhd' };
+            mockResponse = JSONParse(
+                JSONStringify({ listenKey: 'T3ee22BIYuWqmvne0HNq2A2WsFlEtLhvWCtItw6ffhhd' })
+            );
 
             const spy = jest.spyOn(client, 'startUserDataStream').mockReturnValue(
                 Promise.resolve({

@@ -21,10 +21,10 @@
 export interface QueryMarginPriceindexResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryMarginPriceindexResponse
      */
-    calcTime?: number;
+    calcTime?: number | bigint;
     /**
      *
      * @type {string}

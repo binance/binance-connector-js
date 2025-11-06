@@ -32,8 +32,8 @@ export interface GetCrossMarginTransferHistoryResponse {
     rows?: Array<GetCrossMarginTransferHistoryResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetCrossMarginTransferHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

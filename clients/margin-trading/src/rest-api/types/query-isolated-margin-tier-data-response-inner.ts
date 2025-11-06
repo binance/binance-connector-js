@@ -27,10 +27,10 @@ export interface QueryIsolatedMarginTierDataResponseInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryIsolatedMarginTierDataResponseInner
      */
-    tier?: number;
+    tier?: number | bigint;
     /**
      *
      * @type {string}

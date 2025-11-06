@@ -26,10 +26,10 @@ import type { QueryMarginAccountsAllOcoResponseInnerOrdersInner } from './query-
 export interface QueryMarginAccountsAllOcoResponseInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryMarginAccountsAllOcoResponseInner
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -56,10 +56,10 @@ export interface QueryMarginAccountsAllOcoResponseInner {
     listClientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryMarginAccountsAllOcoResponseInner
      */
-    transactionTime?: number;
+    transactionTime?: number | bigint;
     /**
      *
      * @type {string}

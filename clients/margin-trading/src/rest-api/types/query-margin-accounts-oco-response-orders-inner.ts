@@ -27,10 +27,10 @@ export interface QueryMarginAccountsOcoResponseOrdersInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryMarginAccountsOcoResponseOrdersInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}

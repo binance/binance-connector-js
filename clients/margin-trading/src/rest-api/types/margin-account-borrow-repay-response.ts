@@ -21,8 +21,8 @@
 export interface MarginAccountBorrowRepayResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarginAccountBorrowRepayResponse
      */
-    tranId?: number;
+    tranId?: number | bigint;
 }

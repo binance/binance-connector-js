@@ -32,10 +32,10 @@ export interface MarginAccountNewOrderResponse {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarginAccountNewOrderResponse
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -50,10 +50,10 @@ export interface MarginAccountNewOrderResponse {
     isIsolated?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarginAccountNewOrderResponse
      */
-    transactTime?: number;
+    transactTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -110,10 +110,10 @@ export interface MarginAccountNewOrderResponse {
     selfTradePreventionMode?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarginAccountNewOrderResponse
      */
-    marginBuyBorrowAmount?: number;
+    marginBuyBorrowAmount?: number | bigint;
     /**
      *
      * @type {string}

@@ -51,8 +51,8 @@ export interface GetSmallLiabilityExchangeHistoryResponseRowsInner {
     bizType?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSmallLiabilityExchangeHistoryResponseRowsInner
      */
-    timestamp?: number;
+    timestamp?: number | bigint;
 }

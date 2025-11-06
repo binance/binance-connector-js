@@ -32,8 +32,8 @@ export interface GetInterestHistoryResponse {
     rows?: Array<GetInterestHistoryResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetInterestHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

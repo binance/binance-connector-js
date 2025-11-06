@@ -57,8 +57,8 @@ export interface GetAllMarginAssetsResponseInner {
     userMinRepay?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetAllMarginAssetsResponseInner
      */
-    delistTime?: number;
+    delistTime?: number | bigint;
 }

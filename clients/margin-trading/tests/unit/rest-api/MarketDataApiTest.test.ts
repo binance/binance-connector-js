@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { MarketDataApi } from '../../../src/rest-api';
@@ -55,20 +56,26 @@ describe('MarketDataApi', () => {
 
     describe('crossMarginCollateralRatio()', () => {
         it('should execute crossMarginCollateralRatio() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    collaterals: [
-                        { minUsdValue: '0', maxUsdValue: '13000000', discountRate: '1' },
-                        { minUsdValue: '13000000', maxUsdValue: '20000000', discountRate: '0.975' },
-                        { minUsdValue: '20000000', discountRate: '0' },
-                    ],
-                    assetNames: ['BNX'],
-                },
-                {
-                    collaterals: [{ minUsdValue: '0', discountRate: '1' }],
-                    assetNames: ['BTC', 'BUSD', 'ETH', 'USDT'],
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        collaterals: [
+                            { minUsdValue: '0', maxUsdValue: '13000000', discountRate: '1' },
+                            {
+                                minUsdValue: '13000000',
+                                maxUsdValue: '20000000',
+                                discountRate: '0.975',
+                            },
+                            { minUsdValue: '20000000', discountRate: '0' },
+                        ],
+                        assetNames: ['BNX'],
+                    },
+                    {
+                        collaterals: [{ minUsdValue: '0', discountRate: '1' }],
+                        assetNames: ['BTC', 'BUSD', 'ETH', 'USDT'],
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'crossMarginCollateralRatio').mockReturnValue(
                 Promise.resolve({
@@ -104,45 +111,47 @@ describe('MarketDataApi', () => {
 
     describe('getAllCrossMarginPairs()', () => {
         it('should execute getAllCrossMarginPairs() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    base: 'BNB',
-                    id: 351637150141315840,
-                    isBuyAllowed: true,
-                    isMarginTrade: true,
-                    isSellAllowed: true,
-                    quote: 'BTC',
-                    symbol: 'BNBBTC',
-                },
-                {
-                    base: 'TRX',
-                    id: 351637923235429100,
-                    isBuyAllowed: true,
-                    isMarginTrade: true,
-                    isSellAllowed: true,
-                    quote: 'BTC',
-                    symbol: 'TRXBTC',
-                    delistTime: 1704973040,
-                },
-                {
-                    base: 'XRP',
-                    id: 351638112213990140,
-                    isBuyAllowed: true,
-                    isMarginTrade: true,
-                    isSellAllowed: true,
-                    quote: 'BTC',
-                    symbol: 'XRPBTC',
-                },
-                {
-                    base: 'ETH',
-                    id: 351638524530850560,
-                    isBuyAllowed: true,
-                    isMarginTrade: true,
-                    isSellAllowed: true,
-                    quote: 'BTC',
-                    symbol: 'ETHBTC',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        base: 'BNB',
+                        id: 351637150141315840,
+                        isBuyAllowed: true,
+                        isMarginTrade: true,
+                        isSellAllowed: true,
+                        quote: 'BTC',
+                        symbol: 'BNBBTC',
+                    },
+                    {
+                        base: 'TRX',
+                        id: 351637923235429100,
+                        isBuyAllowed: true,
+                        isMarginTrade: true,
+                        isSellAllowed: true,
+                        quote: 'BTC',
+                        symbol: 'TRXBTC',
+                        delistTime: 1704973040,
+                    },
+                    {
+                        base: 'XRP',
+                        id: 351638112213990140,
+                        isBuyAllowed: true,
+                        isMarginTrade: true,
+                        isSellAllowed: true,
+                        quote: 'BTC',
+                        symbol: 'XRPBTC',
+                    },
+                    {
+                        base: 'ETH',
+                        id: 351638524530850560,
+                        isBuyAllowed: true,
+                        isMarginTrade: true,
+                        isSellAllowed: true,
+                        quote: 'BTC',
+                        symbol: 'ETHBTC',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getAllCrossMarginPairs').mockReturnValue(
                 Promise.resolve({
@@ -163,45 +172,47 @@ describe('MarketDataApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = [
-                {
-                    base: 'BNB',
-                    id: 351637150141315840,
-                    isBuyAllowed: true,
-                    isMarginTrade: true,
-                    isSellAllowed: true,
-                    quote: 'BTC',
-                    symbol: 'BNBBTC',
-                },
-                {
-                    base: 'TRX',
-                    id: 351637923235429100,
-                    isBuyAllowed: true,
-                    isMarginTrade: true,
-                    isSellAllowed: true,
-                    quote: 'BTC',
-                    symbol: 'TRXBTC',
-                    delistTime: 1704973040,
-                },
-                {
-                    base: 'XRP',
-                    id: 351638112213990140,
-                    isBuyAllowed: true,
-                    isMarginTrade: true,
-                    isSellAllowed: true,
-                    quote: 'BTC',
-                    symbol: 'XRPBTC',
-                },
-                {
-                    base: 'ETH',
-                    id: 351638524530850560,
-                    isBuyAllowed: true,
-                    isMarginTrade: true,
-                    isSellAllowed: true,
-                    quote: 'BTC',
-                    symbol: 'ETHBTC',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        base: 'BNB',
+                        id: 351637150141315840,
+                        isBuyAllowed: true,
+                        isMarginTrade: true,
+                        isSellAllowed: true,
+                        quote: 'BTC',
+                        symbol: 'BNBBTC',
+                    },
+                    {
+                        base: 'TRX',
+                        id: 351637923235429100,
+                        isBuyAllowed: true,
+                        isMarginTrade: true,
+                        isSellAllowed: true,
+                        quote: 'BTC',
+                        symbol: 'TRXBTC',
+                        delistTime: 1704973040,
+                    },
+                    {
+                        base: 'XRP',
+                        id: 351638112213990140,
+                        isBuyAllowed: true,
+                        isMarginTrade: true,
+                        isSellAllowed: true,
+                        quote: 'BTC',
+                        symbol: 'XRPBTC',
+                    },
+                    {
+                        base: 'ETH',
+                        id: 351638524530850560,
+                        isBuyAllowed: true,
+                        isMarginTrade: true,
+                        isSellAllowed: true,
+                        quote: 'BTC',
+                        symbol: 'ETHBTC',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getAllCrossMarginPairs').mockReturnValue(
                 Promise.resolve({
@@ -237,24 +248,26 @@ describe('MarketDataApi', () => {
 
     describe('getAllIsolatedMarginSymbol()', () => {
         it('should execute getAllIsolatedMarginSymbol() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    base: 'BNB',
-                    isBuyAllowed: true,
-                    isMarginTrade: true,
-                    isSellAllowed: true,
-                    quote: 'BTC',
-                    symbol: 'BNBBTC',
-                },
-                {
-                    base: 'TRX',
-                    isBuyAllowed: true,
-                    isMarginTrade: true,
-                    isSellAllowed: true,
-                    quote: 'BTC',
-                    symbol: 'TRXBTC',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        base: 'BNB',
+                        isBuyAllowed: true,
+                        isMarginTrade: true,
+                        isSellAllowed: true,
+                        quote: 'BTC',
+                        symbol: 'BNBBTC',
+                    },
+                    {
+                        base: 'TRX',
+                        isBuyAllowed: true,
+                        isMarginTrade: true,
+                        isSellAllowed: true,
+                        quote: 'BTC',
+                        symbol: 'TRXBTC',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getAllIsolatedMarginSymbol').mockReturnValue(
                 Promise.resolve({
@@ -276,24 +289,26 @@ describe('MarketDataApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    base: 'BNB',
-                    isBuyAllowed: true,
-                    isMarginTrade: true,
-                    isSellAllowed: true,
-                    quote: 'BTC',
-                    symbol: 'BNBBTC',
-                },
-                {
-                    base: 'TRX',
-                    isBuyAllowed: true,
-                    isMarginTrade: true,
-                    isSellAllowed: true,
-                    quote: 'BTC',
-                    symbol: 'TRXBTC',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        base: 'BNB',
+                        isBuyAllowed: true,
+                        isMarginTrade: true,
+                        isSellAllowed: true,
+                        quote: 'BTC',
+                        symbol: 'BNBBTC',
+                    },
+                    {
+                        base: 'TRX',
+                        isBuyAllowed: true,
+                        isMarginTrade: true,
+                        isSellAllowed: true,
+                        quote: 'BTC',
+                        symbol: 'TRXBTC',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getAllIsolatedMarginSymbol').mockReturnValue(
                 Promise.resolve({
@@ -329,17 +344,19 @@ describe('MarketDataApi', () => {
 
     describe('getAllMarginAssets()', () => {
         it('should execute getAllMarginAssets() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    assetFullName: 'USD coin',
-                    assetName: 'USDC',
-                    isBorrowable: true,
-                    isMortgageable: true,
-                    userMinBorrow: '0.00000000',
-                    userMinRepay: '0.00000000',
-                    delistTime: 1704973040,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        assetFullName: 'USD coin',
+                        assetName: 'USDC',
+                        isBorrowable: true,
+                        isMortgageable: true,
+                        userMinBorrow: '0.00000000',
+                        userMinRepay: '0.00000000',
+                        delistTime: 1704973040,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getAllMarginAssets').mockReturnValue(
                 Promise.resolve({
@@ -360,17 +377,19 @@ describe('MarketDataApi', () => {
                 asset: 'asset_example',
             };
 
-            mockResponse = [
-                {
-                    assetFullName: 'USD coin',
-                    assetName: 'USDC',
-                    isBorrowable: true,
-                    isMortgageable: true,
-                    userMinBorrow: '0.00000000',
-                    userMinRepay: '0.00000000',
-                    delistTime: 1704973040,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        assetFullName: 'USD coin',
+                        assetName: 'USDC',
+                        isBorrowable: true,
+                        isMortgageable: true,
+                        userMinBorrow: '0.00000000',
+                        userMinRepay: '0.00000000',
+                        delistTime: 1704973040,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getAllMarginAssets').mockReturnValue(
                 Promise.resolve({
@@ -404,18 +423,20 @@ describe('MarketDataApi', () => {
 
     describe('getDelistSchedule()', () => {
         it('should execute getDelistSchedule() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    delistTime: 1686161202000,
-                    crossMarginAssets: ['BTC', 'USDT'],
-                    isolatedMarginSymbols: ['ADAUSDT', 'BNBUSDT'],
-                },
-                {
-                    delistTime: 1686222232000,
-                    crossMarginAssets: ['ADA'],
-                    isolatedMarginSymbols: [],
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        delistTime: 1686161202000,
+                        crossMarginAssets: ['BTC', 'USDT'],
+                        isolatedMarginSymbols: ['ADAUSDT', 'BNBUSDT'],
+                    },
+                    {
+                        delistTime: 1686222232000,
+                        crossMarginAssets: ['ADA'],
+                        isolatedMarginSymbols: [],
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getDelistSchedule').mockReturnValue(
                 Promise.resolve({
@@ -436,18 +457,20 @@ describe('MarketDataApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    delistTime: 1686161202000,
-                    crossMarginAssets: ['BTC', 'USDT'],
-                    isolatedMarginSymbols: ['ADAUSDT', 'BNBUSDT'],
-                },
-                {
-                    delistTime: 1686222232000,
-                    crossMarginAssets: ['ADA'],
-                    isolatedMarginSymbols: [],
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        delistTime: 1686161202000,
+                        crossMarginAssets: ['BTC', 'USDT'],
+                        isolatedMarginSymbols: ['ADAUSDT', 'BNBUSDT'],
+                    },
+                    {
+                        delistTime: 1686222232000,
+                        crossMarginAssets: ['ADA'],
+                        isolatedMarginSymbols: [],
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getDelistSchedule').mockReturnValue(
                 Promise.resolve({
@@ -481,17 +504,19 @@ describe('MarketDataApi', () => {
 
     describe('getLimitPricePairs()', () => {
         it('should execute getLimitPricePairs() successfully with required parameters only', async () => {
-            mockResponse = {
-                crossMarginSymbols: [
-                    'BLURUSDC',
-                    'SANDBTC',
-                    'QKCBTC',
-                    'SEIFDUSD',
-                    'NEOUSDC',
-                    'ARBFDUSD',
-                    'ORDIUSDC',
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    crossMarginSymbols: [
+                        'BLURUSDC',
+                        'SANDBTC',
+                        'QKCBTC',
+                        'SEIFDUSD',
+                        'NEOUSDC',
+                        'ARBFDUSD',
+                        'ORDIUSDC',
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'getLimitPricePairs').mockReturnValue(
                 Promise.resolve({
@@ -525,14 +550,20 @@ describe('MarketDataApi', () => {
 
     describe('getListSchedule()', () => {
         it('should execute getListSchedule() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    listTime: 1686161202000,
-                    crossMarginAssets: ['BTC', 'USDT'],
-                    isolatedMarginSymbols: ['ADAUSDT', 'BNBUSDT'],
-                },
-                { listTime: 1686222232000, crossMarginAssets: ['ADA'], isolatedMarginSymbols: [] },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        listTime: 1686161202000,
+                        crossMarginAssets: ['BTC', 'USDT'],
+                        isolatedMarginSymbols: ['ADAUSDT', 'BNBUSDT'],
+                    },
+                    {
+                        listTime: 1686222232000,
+                        crossMarginAssets: ['ADA'],
+                        isolatedMarginSymbols: [],
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getListSchedule').mockReturnValue(
                 Promise.resolve({
@@ -553,14 +584,20 @@ describe('MarketDataApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    listTime: 1686161202000,
-                    crossMarginAssets: ['BTC', 'USDT'],
-                    isolatedMarginSymbols: ['ADAUSDT', 'BNBUSDT'],
-                },
-                { listTime: 1686222232000, crossMarginAssets: ['ADA'], isolatedMarginSymbols: [] },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        listTime: 1686161202000,
+                        crossMarginAssets: ['BTC', 'USDT'],
+                        isolatedMarginSymbols: ['ADAUSDT', 'BNBUSDT'],
+                    },
+                    {
+                        listTime: 1686222232000,
+                        crossMarginAssets: ['ADA'],
+                        isolatedMarginSymbols: [],
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getListSchedule').mockReturnValue(
                 Promise.resolve({
@@ -598,17 +635,19 @@ describe('MarketDataApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = [
-                {
-                    symbol: 'BTCUSDT',
-                    tier: 1,
-                    effectiveMultiple: '10',
-                    initialRiskRatio: '1.111',
-                    liquidationRiskRatio: '1.05',
-                    baseAssetMaxBorrowable: '9',
-                    quoteAssetMaxBorrowable: '70000',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BTCUSDT',
+                        tier: 1,
+                        effectiveMultiple: '10',
+                        initialRiskRatio: '1.111',
+                        liquidationRiskRatio: '1.05',
+                        baseAssetMaxBorrowable: '9',
+                        quoteAssetMaxBorrowable: '70000',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryIsolatedMarginTierData').mockReturnValue(
                 Promise.resolve({
@@ -631,17 +670,19 @@ describe('MarketDataApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    symbol: 'BTCUSDT',
-                    tier: 1,
-                    effectiveMultiple: '10',
-                    initialRiskRatio: '1.111',
-                    liquidationRiskRatio: '1.05',
-                    baseAssetMaxBorrowable: '9',
-                    quoteAssetMaxBorrowable: '70000',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BTCUSDT',
+                        tier: 1,
+                        effectiveMultiple: '10',
+                        initialRiskRatio: '1.111',
+                        liquidationRiskRatio: '1.05',
+                        baseAssetMaxBorrowable: '9',
+                        quoteAssetMaxBorrowable: '70000',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryIsolatedMarginTierData').mockReturnValue(
                 Promise.resolve({
@@ -695,28 +736,30 @@ describe('MarketDataApi', () => {
 
     describe('queryLiabilityCoinLeverageBracketInCrossMarginProMode()', () => {
         it('should execute queryLiabilityCoinLeverageBracketInCrossMarginProMode() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    assetNames: ['SHIB', 'FDUSD', 'BTC', 'ETH', 'USDC'],
-                    rank: 1,
-                    brackets: [
-                        {
-                            leverage: 10,
-                            maxDebt: 1000000,
-                            maintenanceMarginRate: 0.02,
-                            initialMarginRate: 0.1112,
-                            fastNum: 0,
-                        },
-                        {
-                            leverage: 3,
-                            maxDebt: 4000000,
-                            maintenanceMarginRate: 0.07,
-                            initialMarginRate: 0.5,
-                            fastNum: 60000,
-                        },
-                    ],
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        assetNames: ['SHIB', 'FDUSD', 'BTC', 'ETH', 'USDC'],
+                        rank: 1,
+                        brackets: [
+                            {
+                                leverage: 10,
+                                maxDebt: 1000000,
+                                maintenanceMarginRate: 0.02,
+                                initialMarginRate: 0.1112,
+                                fastNum: 0,
+                            },
+                            {
+                                leverage: 3,
+                                maxDebt: 4000000,
+                                maintenanceMarginRate: 0.07,
+                                initialMarginRate: 0.5,
+                                fastNum: 60000,
+                            },
+                        ],
+                    },
+                ])
+            );
 
             const spy = jest
                 .spyOn(client, 'queryLiabilityCoinLeverageBracketInCrossMarginProMode')
@@ -760,15 +803,17 @@ describe('MarketDataApi', () => {
                 type: 'type_example',
             };
 
-            mockResponse = {
-                assets: {
-                    MATIC: '100000000',
-                    STPT: '100000000',
-                    TVK: '100000000',
-                    SHIB: '97409653',
-                },
-                updateTime: 1699272487,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    assets: {
+                        MATIC: '100000000',
+                        STPT: '100000000',
+                        TVK: '100000000',
+                        SHIB: '97409653',
+                    },
+                    updateTime: 1699272487,
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryMarginAvailableInventory').mockReturnValue(
                 Promise.resolve({
@@ -789,15 +834,17 @@ describe('MarketDataApi', () => {
                 type: 'type_example',
             };
 
-            mockResponse = {
-                assets: {
-                    MATIC: '100000000',
-                    STPT: '100000000',
-                    TVK: '100000000',
-                    SHIB: '97409653',
-                },
-                updateTime: 1699272487,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    assets: {
+                        MATIC: '100000000',
+                        STPT: '100000000',
+                        TVK: '100000000',
+                        SHIB: '97409653',
+                    },
+                    updateTime: 1699272487,
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryMarginAvailableInventory').mockReturnValue(
                 Promise.resolve({
@@ -855,7 +902,9 @@ describe('MarketDataApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = { calcTime: 1562046418000, price: '0.00333930', symbol: 'BNBBTC' };
+            mockResponse = JSONParse(
+                JSONStringify({ calcTime: 1562046418000, price: '0.00333930', symbol: 'BNBBTC' })
+            );
 
             const spy = jest.spyOn(client, 'queryMarginPriceindex').mockReturnValue(
                 Promise.resolve({
@@ -876,7 +925,9 @@ describe('MarketDataApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = { calcTime: 1562046418000, price: '0.00333930', symbol: 'BNBBTC' };
+            mockResponse = JSONParse(
+                JSONStringify({ calcTime: 1562046418000, price: '0.00333930', symbol: 'BNBBTC' })
+            );
 
             const spy = jest.spyOn(client, 'queryMarginPriceindex').mockReturnValue(
                 Promise.resolve({

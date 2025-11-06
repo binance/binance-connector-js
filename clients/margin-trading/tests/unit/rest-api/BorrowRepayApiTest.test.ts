@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { BorrowRepayApi } from '../../../src/rest-api';
@@ -53,10 +54,12 @@ describe('BorrowRepayApi', () => {
                 isIsolated: false,
             };
 
-            mockResponse = [
-                { asset: 'BTC', nextHourlyInterestRate: '0.00000571' },
-                { asset: 'ETH', nextHourlyInterestRate: '0.00000578' },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { asset: 'BTC', nextHourlyInterestRate: '0.00000571' },
+                    { asset: 'ETH', nextHourlyInterestRate: '0.00000578' },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getFutureHourlyInterestRate').mockReturnValue(
                 Promise.resolve({
@@ -78,10 +81,12 @@ describe('BorrowRepayApi', () => {
                 isIsolated: false,
             };
 
-            mockResponse = [
-                { asset: 'BTC', nextHourlyInterestRate: '0.00000571' },
-                { asset: 'ETH', nextHourlyInterestRate: '0.00000578' },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { asset: 'BTC', nextHourlyInterestRate: '0.00000571' },
+                    { asset: 'ETH', nextHourlyInterestRate: '0.00000578' },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getFutureHourlyInterestRate').mockReturnValue(
                 Promise.resolve({
@@ -150,22 +155,24 @@ describe('BorrowRepayApi', () => {
 
     describe('getInterestHistory()', () => {
         it('should execute getInterestHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        txId: 1352286576452864800,
-                        interestAccuredTime: 1672160400000,
-                        asset: 'USDT',
-                        rawAsset: 'USDT',
-                        principal: '45.3313',
-                        interest: '0.00024995',
-                        interestRate: '0.00013233',
-                        type: 'ON_BORROW',
-                        isolatedSymbol: 'BNBUSDT',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            txId: 1352286576452864800,
+                            interestAccuredTime: 1672160400000,
+                            asset: 'USDT',
+                            rawAsset: 'USDT',
+                            principal: '45.3313',
+                            interest: '0.00024995',
+                            interestRate: '0.00013233',
+                            type: 'ON_BORROW',
+                            isolatedSymbol: 'BNBUSDT',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getInterestHistory').mockReturnValue(
                 Promise.resolve({
@@ -192,22 +199,24 @@ describe('BorrowRepayApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        txId: 1352286576452864800,
-                        interestAccuredTime: 1672160400000,
-                        asset: 'USDT',
-                        rawAsset: 'USDT',
-                        principal: '45.3313',
-                        interest: '0.00024995',
-                        interestRate: '0.00013233',
-                        type: 'ON_BORROW',
-                        isolatedSymbol: 'BNBUSDT',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            txId: 1352286576452864800,
+                            interestAccuredTime: 1672160400000,
+                            asset: 'USDT',
+                            rawAsset: 'USDT',
+                            principal: '45.3313',
+                            interest: '0.00024995',
+                            interestRate: '0.00013233',
+                            type: 'ON_BORROW',
+                            isolatedSymbol: 'BNBUSDT',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getInterestHistory').mockReturnValue(
                 Promise.resolve({
@@ -249,7 +258,7 @@ describe('BorrowRepayApi', () => {
                 type: 'type_example',
             };
 
-            mockResponse = { tranId: 100000001 };
+            mockResponse = JSONParse(JSONStringify({ tranId: 100000001 }));
 
             const spy = jest.spyOn(client, 'marginAccountBorrowRepay').mockReturnValue(
                 Promise.resolve({
@@ -275,7 +284,7 @@ describe('BorrowRepayApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { tranId: 100000001 };
+            mockResponse = JSONParse(JSONStringify({ tranId: 100000001 }));
 
             const spy = jest.spyOn(client, 'marginAccountBorrowRepay').mockReturnValue(
                 Promise.resolve({
@@ -403,22 +412,24 @@ describe('BorrowRepayApi', () => {
                 type: 'type_example',
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        type: 'AUTO',
-                        isolatedSymbol: 'BNBUSDT',
-                        amount: '14.00000000',
-                        asset: 'BNB',
-                        interest: '0.01866667',
-                        principal: '13.98133333',
-                        status: 'CONFIRMED',
-                        timestamp: 1563438204000,
-                        txId: 2970933056,
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            type: 'AUTO',
+                            isolatedSymbol: 'BNBUSDT',
+                            amount: '14.00000000',
+                            asset: 'BNB',
+                            interest: '0.01866667',
+                            principal: '13.98133333',
+                            status: 'CONFIRMED',
+                            timestamp: 1563438204000,
+                            txId: 2970933056,
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'queryBorrowRepayRecordsInMarginAccount')
@@ -449,22 +460,24 @@ describe('BorrowRepayApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        type: 'AUTO',
-                        isolatedSymbol: 'BNBUSDT',
-                        amount: '14.00000000',
-                        asset: 'BNB',
-                        interest: '0.01866667',
-                        principal: '13.98133333',
-                        status: 'CONFIRMED',
-                        timestamp: 1563438204000,
-                        txId: 2970933056,
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            type: 'AUTO',
+                            isolatedSymbol: 'BNBUSDT',
+                            amount: '14.00000000',
+                            asset: 'BNB',
+                            interest: '0.01866667',
+                            principal: '13.98133333',
+                            status: 'CONFIRMED',
+                            timestamp: 1563438204000,
+                            txId: 2970933056,
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'queryBorrowRepayRecordsInMarginAccount')
@@ -524,20 +537,22 @@ describe('BorrowRepayApi', () => {
                 asset: 'asset_example',
             };
 
-            mockResponse = [
-                {
-                    asset: 'BTC',
-                    dailyInterestRate: '0.00025000',
-                    timestamp: 1611544731000,
-                    vipLevel: 1,
-                },
-                {
-                    asset: 'BTC',
-                    dailyInterestRate: '0.00035000',
-                    timestamp: 1610248118000,
-                    vipLevel: 1,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        asset: 'BTC',
+                        dailyInterestRate: '0.00025000',
+                        timestamp: 1611544731000,
+                        vipLevel: 1,
+                    },
+                    {
+                        asset: 'BTC',
+                        dailyInterestRate: '0.00035000',
+                        timestamp: 1610248118000,
+                        vipLevel: 1,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryMarginInterestRateHistory').mockReturnValue(
                 Promise.resolve({
@@ -562,20 +577,22 @@ describe('BorrowRepayApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    asset: 'BTC',
-                    dailyInterestRate: '0.00025000',
-                    timestamp: 1611544731000,
-                    vipLevel: 1,
-                },
-                {
-                    asset: 'BTC',
-                    dailyInterestRate: '0.00035000',
-                    timestamp: 1610248118000,
-                    vipLevel: 1,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        asset: 'BTC',
+                        dailyInterestRate: '0.00025000',
+                        timestamp: 1611544731000,
+                        vipLevel: 1,
+                    },
+                    {
+                        asset: 'BTC',
+                        dailyInterestRate: '0.00035000',
+                        timestamp: 1610248118000,
+                        vipLevel: 1,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryMarginInterestRateHistory').mockReturnValue(
                 Promise.resolve({
@@ -633,7 +650,7 @@ describe('BorrowRepayApi', () => {
                 asset: 'asset_example',
             };
 
-            mockResponse = { amount: '1.69248805', borrowLimit: '60' };
+            mockResponse = JSONParse(JSONStringify({ amount: '1.69248805', borrowLimit: '60' }));
 
             const spy = jest.spyOn(client, 'queryMaxBorrow').mockReturnValue(
                 Promise.resolve({
@@ -656,7 +673,7 @@ describe('BorrowRepayApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { amount: '1.69248805', borrowLimit: '60' };
+            mockResponse = JSONParse(JSONStringify({ amount: '1.69248805', borrowLimit: '60' }));
 
             const spy = jest.spyOn(client, 'queryMaxBorrow').mockReturnValue(
                 Promise.resolve({

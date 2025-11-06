@@ -21,10 +21,10 @@
 export interface QueryCrossMarginFeeDataResponseInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCrossMarginFeeDataResponseInner
      */
-    vipLevel?: number;
+    vipLevel?: number | bigint;
     /**
      *
      * @type {string}

@@ -21,10 +21,10 @@
 export interface QueryLiabilityCoinLeverageBracketInCrossMarginProModeResponseInnerBracketsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryLiabilityCoinLeverageBracketInCrossMarginProModeResponseInnerBracketsInner
      */
-    leverage?: number;
+    leverage?: number | bigint;
     /**
      *
      * @type {number}

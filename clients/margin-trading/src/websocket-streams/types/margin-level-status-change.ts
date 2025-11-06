@@ -21,10 +21,10 @@
 export interface MarginLevelStatusChange {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarginLevelStatusChange
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}

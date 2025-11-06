@@ -33,20 +33,20 @@ export interface QueryCurrentMarginOrderCountUsageResponseInner {
     interval?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCurrentMarginOrderCountUsageResponseInner
      */
-    intervalNum?: number;
+    intervalNum?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCurrentMarginOrderCountUsageResponseInner
      */
-    limit?: number;
+    limit?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCurrentMarginOrderCountUsageResponseInner
      */
-    count?: number;
+    count?: number | bigint;
 }

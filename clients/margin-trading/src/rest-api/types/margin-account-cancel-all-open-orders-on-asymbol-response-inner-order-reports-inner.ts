@@ -33,16 +33,16 @@ export interface MarginAccountCancelAllOpenOrdersOnASymbolResponseInnerOrderRepo
     origClientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarginAccountCancelAllOpenOrdersOnASymbolResponseInnerOrderReportsInner
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}

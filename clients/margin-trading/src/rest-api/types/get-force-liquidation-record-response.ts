@@ -32,8 +32,8 @@ export interface GetForceLiquidationRecordResponse {
     rows?: Array<GetForceLiquidationRecordResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetForceLiquidationRecordResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

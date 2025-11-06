@@ -21,14 +21,14 @@
 export interface QueryEnabledIsolatedMarginAccountLimitResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryEnabledIsolatedMarginAccountLimitResponse
      */
-    enabledAccount?: number;
+    enabledAccount?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryEnabledIsolatedMarginAccountLimitResponse
      */
-    maxAccount?: number;
+    maxAccount?: number | bigint;
 }

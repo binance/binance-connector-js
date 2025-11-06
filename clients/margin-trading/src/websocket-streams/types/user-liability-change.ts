@@ -21,10 +21,10 @@
 export interface UserLiabilityChange {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UserLiabilityChange
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}

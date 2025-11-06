@@ -26,10 +26,10 @@ import type { GetSmallLiabilityExchangeHistoryResponseRowsInner } from './get-sm
 export interface GetSmallLiabilityExchangeHistoryResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSmallLiabilityExchangeHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
     /**
      *
      * @type {Array<GetSmallLiabilityExchangeHistoryResponseRowsInner>}

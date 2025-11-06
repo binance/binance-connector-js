@@ -27,10 +27,10 @@ export interface ListstatusOInner {
     s?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ListstatusOInner
      */
-    i?: number;
+    i?: number | bigint;
     /**
      *
      * @type {string}

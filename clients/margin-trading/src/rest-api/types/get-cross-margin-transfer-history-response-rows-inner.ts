@@ -39,16 +39,16 @@ export interface GetCrossMarginTransferHistoryResponseRowsInner {
     status?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetCrossMarginTransferHistoryResponseRowsInner
      */
-    timestamp?: number;
+    timestamp?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetCrossMarginTransferHistoryResponseRowsInner
      */
-    txId?: number;
+    txId?: number | bigint;
     /**
      *
      * @type {string}

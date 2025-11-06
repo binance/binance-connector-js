@@ -63,14 +63,14 @@ export interface QueryBorrowRepayRecordsInMarginAccountResponseRowsInner {
     status?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryBorrowRepayRecordsInMarginAccountResponseRowsInner
      */
-    timestamp?: number;
+    timestamp?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryBorrowRepayRecordsInMarginAccountResponseRowsInner
      */
-    txId?: number;
+    txId?: number | bigint;
 }

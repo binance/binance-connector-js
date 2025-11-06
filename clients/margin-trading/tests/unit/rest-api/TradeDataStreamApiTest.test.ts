@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { TradeDataStreamApi } from '../../../src/rest-api';
@@ -379,9 +380,11 @@ describe('TradeDataStreamApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = {
-                listenKey: 'T3ee22BIYuWqmvne0HNq2A2WsFlEtLhvWCtItw6ffhhdmjifQ2tRbuKkTHhr',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    listenKey: 'T3ee22BIYuWqmvne0HNq2A2WsFlEtLhvWCtItw6ffhhdmjifQ2tRbuKkTHhr',
+                })
+            );
 
             const spy = jest.spyOn(client, 'startIsolatedMarginUserDataStream').mockReturnValue(
                 Promise.resolve({
@@ -402,9 +405,11 @@ describe('TradeDataStreamApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = {
-                listenKey: 'T3ee22BIYuWqmvne0HNq2A2WsFlEtLhvWCtItw6ffhhdmjifQ2tRbuKkTHhr',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    listenKey: 'T3ee22BIYuWqmvne0HNq2A2WsFlEtLhvWCtItw6ffhhdmjifQ2tRbuKkTHhr',
+                })
+            );
 
             const spy = jest.spyOn(client, 'startIsolatedMarginUserDataStream').mockReturnValue(
                 Promise.resolve({
@@ -458,9 +463,11 @@ describe('TradeDataStreamApi', () => {
 
     describe('startMarginUserDataStream()', () => {
         it('should execute startMarginUserDataStream() successfully with required parameters only', async () => {
-            mockResponse = {
-                listenKey: 'T3ee22BIYuWqmvne0HNq2A2WsFlEtLhvWCtItw6ffhhdmjifQ2tRbuKkTHhr',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    listenKey: 'T3ee22BIYuWqmvne0HNq2A2WsFlEtLhvWCtItw6ffhhdmjifQ2tRbuKkTHhr',
+                })
+            );
 
             const spy = jest.spyOn(client, 'startMarginUserDataStream').mockReturnValue(
                 Promise.resolve({

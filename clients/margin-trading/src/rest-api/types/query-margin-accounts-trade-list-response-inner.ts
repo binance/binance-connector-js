@@ -33,10 +33,10 @@ export interface QueryMarginAccountsTradeListResponseInner {
     commissionAsset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryMarginAccountsTradeListResponseInner
      */
-    id?: number;
+    id?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -57,10 +57,10 @@ export interface QueryMarginAccountsTradeListResponseInner {
     isMaker?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryMarginAccountsTradeListResponseInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -87,8 +87,8 @@ export interface QueryMarginAccountsTradeListResponseInner {
     isIsolated?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryMarginAccountsTradeListResponseInner
      */
-    time?: number;
+    time?: number | bigint;
 }

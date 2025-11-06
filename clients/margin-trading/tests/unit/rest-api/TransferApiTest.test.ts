@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { TransferApi } from '../../../src/rest-api';
@@ -40,41 +41,43 @@ describe('TransferApi', () => {
 
     describe('getCrossMarginTransferHistory()', () => {
         it('should execute getCrossMarginTransferHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        amount: '0.10000000',
-                        asset: 'BNB',
-                        status: 'CONFIRMED',
-                        timestamp: 1566898617,
-                        txId: 5240372201,
-                        type: 'ROLL_IN',
-                        transFrom: 'SPOT',
-                        transTo: 'ISOLATED_MARGIN',
-                    },
-                    {
-                        amount: '5.00000000',
-                        asset: 'USDT',
-                        status: 'CONFIRMED',
-                        timestamp: 1566888436,
-                        txId: 5239810406,
-                        type: 'ROLL_OUT',
-                        transFrom: 'ISOLATED_MARGIN',
-                        transTo: 'ISOLATED_MARGIN',
-                        fromSymbol: 'BNBUSDT',
-                        toSymbol: 'BTCUSDT',
-                    },
-                    {
-                        amount: '1.00000000',
-                        asset: 'EOS',
-                        status: 'CONFIRMED',
-                        timestamp: 1566888403,
-                        txId: 5239808703,
-                        type: 'ROLL_IN',
-                    },
-                ],
-                total: 3,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            amount: '0.10000000',
+                            asset: 'BNB',
+                            status: 'CONFIRMED',
+                            timestamp: 1566898617,
+                            txId: 5240372201,
+                            type: 'ROLL_IN',
+                            transFrom: 'SPOT',
+                            transTo: 'ISOLATED_MARGIN',
+                        },
+                        {
+                            amount: '5.00000000',
+                            asset: 'USDT',
+                            status: 'CONFIRMED',
+                            timestamp: 1566888436,
+                            txId: 5239810406,
+                            type: 'ROLL_OUT',
+                            transFrom: 'ISOLATED_MARGIN',
+                            transTo: 'ISOLATED_MARGIN',
+                            fromSymbol: 'BNBUSDT',
+                            toSymbol: 'BTCUSDT',
+                        },
+                        {
+                            amount: '1.00000000',
+                            asset: 'EOS',
+                            status: 'CONFIRMED',
+                            timestamp: 1566888403,
+                            txId: 5239808703,
+                            type: 'ROLL_IN',
+                        },
+                    ],
+                    total: 3,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getCrossMarginTransferHistory').mockReturnValue(
                 Promise.resolve({
@@ -102,41 +105,43 @@ describe('TransferApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        amount: '0.10000000',
-                        asset: 'BNB',
-                        status: 'CONFIRMED',
-                        timestamp: 1566898617,
-                        txId: 5240372201,
-                        type: 'ROLL_IN',
-                        transFrom: 'SPOT',
-                        transTo: 'ISOLATED_MARGIN',
-                    },
-                    {
-                        amount: '5.00000000',
-                        asset: 'USDT',
-                        status: 'CONFIRMED',
-                        timestamp: 1566888436,
-                        txId: 5239810406,
-                        type: 'ROLL_OUT',
-                        transFrom: 'ISOLATED_MARGIN',
-                        transTo: 'ISOLATED_MARGIN',
-                        fromSymbol: 'BNBUSDT',
-                        toSymbol: 'BTCUSDT',
-                    },
-                    {
-                        amount: '1.00000000',
-                        asset: 'EOS',
-                        status: 'CONFIRMED',
-                        timestamp: 1566888403,
-                        txId: 5239808703,
-                        type: 'ROLL_IN',
-                    },
-                ],
-                total: 3,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            amount: '0.10000000',
+                            asset: 'BNB',
+                            status: 'CONFIRMED',
+                            timestamp: 1566898617,
+                            txId: 5240372201,
+                            type: 'ROLL_IN',
+                            transFrom: 'SPOT',
+                            transTo: 'ISOLATED_MARGIN',
+                        },
+                        {
+                            amount: '5.00000000',
+                            asset: 'USDT',
+                            status: 'CONFIRMED',
+                            timestamp: 1566888436,
+                            txId: 5239810406,
+                            type: 'ROLL_OUT',
+                            transFrom: 'ISOLATED_MARGIN',
+                            transTo: 'ISOLATED_MARGIN',
+                            fromSymbol: 'BNBUSDT',
+                            toSymbol: 'BTCUSDT',
+                        },
+                        {
+                            amount: '1.00000000',
+                            asset: 'EOS',
+                            status: 'CONFIRMED',
+                            timestamp: 1566888403,
+                            txId: 5239808703,
+                            type: 'ROLL_IN',
+                        },
+                    ],
+                    total: 3,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getCrossMarginTransferHistory').mockReturnValue(
                 Promise.resolve({
@@ -176,7 +181,7 @@ describe('TransferApi', () => {
                 asset: 'asset_example',
             };
 
-            mockResponse = { amount: '3.59498107' };
+            mockResponse = JSONParse(JSONStringify({ amount: '3.59498107' }));
 
             const spy = jest.spyOn(client, 'queryMaxTransferOutAmount').mockReturnValue(
                 Promise.resolve({
@@ -199,7 +204,7 @@ describe('TransferApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { amount: '3.59498107' };
+            mockResponse = JSONParse(JSONStringify({ amount: '3.59498107' }));
 
             const spy = jest.spyOn(client, 'queryMaxTransferOutAmount').mockReturnValue(
                 Promise.resolve({

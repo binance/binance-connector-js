@@ -32,8 +32,8 @@ export interface QueryMarginAvailableInventoryResponse {
     assets?: QueryMarginAvailableInventoryResponseAssets;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryMarginAvailableInventoryResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

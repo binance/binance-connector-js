@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { AccountApi } from '../../../src/rest-api';
@@ -62,7 +63,7 @@ describe('AccountApi', () => {
                 maxLeverage: 789,
             };
 
-            mockResponse = { success: true };
+            mockResponse = JSONParse(JSONStringify({ success: true }));
 
             const spy = jest.spyOn(client, 'adjustCrossMarginMaxLeverage').mockReturnValue(
                 Promise.resolve({
@@ -83,7 +84,7 @@ describe('AccountApi', () => {
                 maxLeverage: 789,
             };
 
-            mockResponse = { success: true };
+            mockResponse = JSONParse(JSONStringify({ success: true }));
 
             const spy = jest.spyOn(client, 'adjustCrossMarginMaxLeverage').mockReturnValue(
                 Promise.resolve({
@@ -141,7 +142,7 @@ describe('AccountApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = { success: true, symbol: 'BTCUSDT' };
+            mockResponse = JSONParse(JSONStringify({ success: true, symbol: 'BTCUSDT' }));
 
             const spy = jest.spyOn(client, 'disableIsolatedMarginAccount').mockReturnValue(
                 Promise.resolve({
@@ -163,7 +164,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { success: true, symbol: 'BTCUSDT' };
+            mockResponse = JSONParse(JSONStringify({ success: true, symbol: 'BTCUSDT' }));
 
             const spy = jest.spyOn(client, 'disableIsolatedMarginAccount').mockReturnValue(
                 Promise.resolve({
@@ -221,7 +222,7 @@ describe('AccountApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = { success: true, symbol: 'BTCUSDT' };
+            mockResponse = JSONParse(JSONStringify({ success: true, symbol: 'BTCUSDT' }));
 
             const spy = jest.spyOn(client, 'enableIsolatedMarginAccount').mockReturnValue(
                 Promise.resolve({
@@ -243,7 +244,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { success: true, symbol: 'BTCUSDT' };
+            mockResponse = JSONParse(JSONStringify({ success: true, symbol: 'BTCUSDT' }));
 
             const spy = jest.spyOn(client, 'enableIsolatedMarginAccount').mockReturnValue(
                 Promise.resolve({
@@ -297,7 +298,7 @@ describe('AccountApi', () => {
 
     describe('getBnbBurnStatus()', () => {
         it('should execute getBnbBurnStatus() successfully with required parameters only', async () => {
-            mockResponse = { spotBNBBurn: true, interestBNBBurn: false };
+            mockResponse = JSONParse(JSONStringify({ spotBNBBurn: true, interestBNBBurn: false }));
 
             const spy = jest.spyOn(client, 'getBnbBurnStatus').mockReturnValue(
                 Promise.resolve({
@@ -318,7 +319,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { spotBNBBurn: true, interestBNBBurn: false };
+            mockResponse = JSONParse(JSONStringify({ spotBNBBurn: true, interestBNBBurn: false }));
 
             const spy = jest.spyOn(client, 'getBnbBurnStatus').mockReturnValue(
                 Promise.resolve({
@@ -352,7 +353,13 @@ describe('AccountApi', () => {
 
     describe('getSummaryOfMarginAccount()', () => {
         it('should execute getSummaryOfMarginAccount() successfully with required parameters only', async () => {
-            mockResponse = { normalBar: '1.5', marginCallBar: '1.3', forceLiquidationBar: '1.1' };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    normalBar: '1.5',
+                    marginCallBar: '1.3',
+                    forceLiquidationBar: '1.1',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getSummaryOfMarginAccount').mockReturnValue(
                 Promise.resolve({
@@ -373,7 +380,13 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { normalBar: '1.5', marginCallBar: '1.3', forceLiquidationBar: '1.1' };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    normalBar: '1.5',
+                    marginCallBar: '1.3',
+                    forceLiquidationBar: '1.1',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getSummaryOfMarginAccount').mockReturnValue(
                 Promise.resolve({
@@ -409,26 +422,28 @@ describe('AccountApi', () => {
 
     describe('queryCrossIsolatedMarginCapitalFlow()', () => {
         it('should execute queryCrossIsolatedMarginCapitalFlow() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    id: 123456,
-                    tranId: 123123,
-                    timestamp: 1691116657000,
-                    asset: 'USDT',
-                    symbol: 'BTCUSDT',
-                    type: 'BORROW',
-                    amount: '101',
-                },
-                {
-                    id: 123457,
-                    tranId: 123124,
-                    timestamp: 1691116658000,
-                    asset: 'BTC',
-                    symbol: 'BTCUSDT',
-                    type: 'REPAY',
-                    amount: '10',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        id: 123456,
+                        tranId: 123123,
+                        timestamp: 1691116657000,
+                        asset: 'USDT',
+                        symbol: 'BTCUSDT',
+                        type: 'BORROW',
+                        amount: '101',
+                    },
+                    {
+                        id: 123457,
+                        tranId: 123124,
+                        timestamp: 1691116658000,
+                        asset: 'BTC',
+                        symbol: 'BTCUSDT',
+                        type: 'REPAY',
+                        amount: '10',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryCrossIsolatedMarginCapitalFlow').mockReturnValue(
                 Promise.resolve({
@@ -456,26 +471,28 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    id: 123456,
-                    tranId: 123123,
-                    timestamp: 1691116657000,
-                    asset: 'USDT',
-                    symbol: 'BTCUSDT',
-                    type: 'BORROW',
-                    amount: '101',
-                },
-                {
-                    id: 123457,
-                    tranId: 123124,
-                    timestamp: 1691116658000,
-                    asset: 'BTC',
-                    symbol: 'BTCUSDT',
-                    type: 'REPAY',
-                    amount: '10',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        id: 123456,
+                        tranId: 123123,
+                        timestamp: 1691116657000,
+                        asset: 'USDT',
+                        symbol: 'BTCUSDT',
+                        type: 'BORROW',
+                        amount: '101',
+                    },
+                    {
+                        id: 123457,
+                        tranId: 123124,
+                        timestamp: 1691116658000,
+                        asset: 'BTC',
+                        symbol: 'BTCUSDT',
+                        type: 'REPAY',
+                        amount: '10',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryCrossIsolatedMarginCapitalFlow').mockReturnValue(
                 Promise.resolve({
@@ -513,55 +530,57 @@ describe('AccountApi', () => {
 
     describe('queryCrossMarginAccountDetails()', () => {
         it('should execute queryCrossMarginAccountDetails() successfully with required parameters only', async () => {
-            mockResponse = {
-                created: true,
-                borrowEnabled: true,
-                marginLevel: '11.64405625',
-                collateralMarginLevel: '3.2',
-                totalAssetOfBtc: '6.82728457',
-                totalLiabilityOfBtc: '0.58633215',
-                totalNetAssetOfBtc: '6.24095242',
-                TotalCollateralValueInUSDT: '5.82728457',
-                totalOpenOrderLossInUSDT: '582.728457',
-                tradeEnabled: true,
-                transferInEnabled: true,
-                transferOutEnabled: true,
-                accountType: 'MARGIN_1',
-                userAssets: [
-                    {
-                        asset: 'BTC',
-                        borrowed: '0.00000000',
-                        free: '0.00499500',
-                        interest: '0.00000000',
-                        locked: '0.00000000',
-                        netAsset: '0.00499500',
-                    },
-                    {
-                        asset: 'BNB',
-                        borrowed: '201.66666672',
-                        free: '2346.50000000',
-                        interest: '0.00000000',
-                        locked: '0.00000000',
-                        netAsset: '2144.83333328',
-                    },
-                    {
-                        asset: 'ETH',
-                        borrowed: '0.00000000',
-                        free: '0.00000000',
-                        interest: '0.00000000',
-                        locked: '0.00000000',
-                        netAsset: '0.00000000',
-                    },
-                    {
-                        asset: 'USDT',
-                        borrowed: '0.00000000',
-                        free: '0.00000000',
-                        interest: '0.00000000',
-                        locked: '0.00000000',
-                        netAsset: '0.00000000',
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    created: true,
+                    borrowEnabled: true,
+                    marginLevel: '11.64405625',
+                    collateralMarginLevel: '3.2',
+                    totalAssetOfBtc: '6.82728457',
+                    totalLiabilityOfBtc: '0.58633215',
+                    totalNetAssetOfBtc: '6.24095242',
+                    TotalCollateralValueInUSDT: '5.82728457',
+                    totalOpenOrderLossInUSDT: '582.728457',
+                    tradeEnabled: true,
+                    transferInEnabled: true,
+                    transferOutEnabled: true,
+                    accountType: 'MARGIN_1',
+                    userAssets: [
+                        {
+                            asset: 'BTC',
+                            borrowed: '0.00000000',
+                            free: '0.00499500',
+                            interest: '0.00000000',
+                            locked: '0.00000000',
+                            netAsset: '0.00499500',
+                        },
+                        {
+                            asset: 'BNB',
+                            borrowed: '201.66666672',
+                            free: '2346.50000000',
+                            interest: '0.00000000',
+                            locked: '0.00000000',
+                            netAsset: '2144.83333328',
+                        },
+                        {
+                            asset: 'ETH',
+                            borrowed: '0.00000000',
+                            free: '0.00000000',
+                            interest: '0.00000000',
+                            locked: '0.00000000',
+                            netAsset: '0.00000000',
+                        },
+                        {
+                            asset: 'USDT',
+                            borrowed: '0.00000000',
+                            free: '0.00000000',
+                            interest: '0.00000000',
+                            locked: '0.00000000',
+                            netAsset: '0.00000000',
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryCrossMarginAccountDetails').mockReturnValue(
                 Promise.resolve({
@@ -582,55 +601,57 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                created: true,
-                borrowEnabled: true,
-                marginLevel: '11.64405625',
-                collateralMarginLevel: '3.2',
-                totalAssetOfBtc: '6.82728457',
-                totalLiabilityOfBtc: '0.58633215',
-                totalNetAssetOfBtc: '6.24095242',
-                TotalCollateralValueInUSDT: '5.82728457',
-                totalOpenOrderLossInUSDT: '582.728457',
-                tradeEnabled: true,
-                transferInEnabled: true,
-                transferOutEnabled: true,
-                accountType: 'MARGIN_1',
-                userAssets: [
-                    {
-                        asset: 'BTC',
-                        borrowed: '0.00000000',
-                        free: '0.00499500',
-                        interest: '0.00000000',
-                        locked: '0.00000000',
-                        netAsset: '0.00499500',
-                    },
-                    {
-                        asset: 'BNB',
-                        borrowed: '201.66666672',
-                        free: '2346.50000000',
-                        interest: '0.00000000',
-                        locked: '0.00000000',
-                        netAsset: '2144.83333328',
-                    },
-                    {
-                        asset: 'ETH',
-                        borrowed: '0.00000000',
-                        free: '0.00000000',
-                        interest: '0.00000000',
-                        locked: '0.00000000',
-                        netAsset: '0.00000000',
-                    },
-                    {
-                        asset: 'USDT',
-                        borrowed: '0.00000000',
-                        free: '0.00000000',
-                        interest: '0.00000000',
-                        locked: '0.00000000',
-                        netAsset: '0.00000000',
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    created: true,
+                    borrowEnabled: true,
+                    marginLevel: '11.64405625',
+                    collateralMarginLevel: '3.2',
+                    totalAssetOfBtc: '6.82728457',
+                    totalLiabilityOfBtc: '0.58633215',
+                    totalNetAssetOfBtc: '6.24095242',
+                    TotalCollateralValueInUSDT: '5.82728457',
+                    totalOpenOrderLossInUSDT: '582.728457',
+                    tradeEnabled: true,
+                    transferInEnabled: true,
+                    transferOutEnabled: true,
+                    accountType: 'MARGIN_1',
+                    userAssets: [
+                        {
+                            asset: 'BTC',
+                            borrowed: '0.00000000',
+                            free: '0.00499500',
+                            interest: '0.00000000',
+                            locked: '0.00000000',
+                            netAsset: '0.00499500',
+                        },
+                        {
+                            asset: 'BNB',
+                            borrowed: '201.66666672',
+                            free: '2346.50000000',
+                            interest: '0.00000000',
+                            locked: '0.00000000',
+                            netAsset: '2144.83333328',
+                        },
+                        {
+                            asset: 'ETH',
+                            borrowed: '0.00000000',
+                            free: '0.00000000',
+                            interest: '0.00000000',
+                            locked: '0.00000000',
+                            netAsset: '0.00000000',
+                        },
+                        {
+                            asset: 'USDT',
+                            borrowed: '0.00000000',
+                            free: '0.00000000',
+                            interest: '0.00000000',
+                            locked: '0.00000000',
+                            netAsset: '0.00000000',
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryCrossMarginAccountDetails').mockReturnValue(
                 Promise.resolve({
@@ -666,18 +687,20 @@ describe('AccountApi', () => {
 
     describe('queryCrossMarginFeeData()', () => {
         it('should execute queryCrossMarginFeeData() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    vipLevel: 0,
-                    coin: 'BTC',
-                    transferIn: true,
-                    borrowable: true,
-                    dailyInterest: '0.00026125',
-                    yearlyInterest: '0.0953',
-                    borrowLimit: '180',
-                    marginablePairs: ['BNBBTC', 'TRXBTC', 'ETHBTC', 'BTCUSDT'],
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        vipLevel: 0,
+                        coin: 'BTC',
+                        transferIn: true,
+                        borrowable: true,
+                        dailyInterest: '0.00026125',
+                        yearlyInterest: '0.0953',
+                        borrowLimit: '180',
+                        marginablePairs: ['BNBBTC', 'TRXBTC', 'ETHBTC', 'BTCUSDT'],
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryCrossMarginFeeData').mockReturnValue(
                 Promise.resolve({
@@ -700,18 +723,20 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    vipLevel: 0,
-                    coin: 'BTC',
-                    transferIn: true,
-                    borrowable: true,
-                    dailyInterest: '0.00026125',
-                    yearlyInterest: '0.0953',
-                    borrowLimit: '180',
-                    marginablePairs: ['BNBBTC', 'TRXBTC', 'ETHBTC', 'BTCUSDT'],
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        vipLevel: 0,
+                        coin: 'BTC',
+                        transferIn: true,
+                        borrowable: true,
+                        dailyInterest: '0.00026125',
+                        yearlyInterest: '0.0953',
+                        borrowLimit: '180',
+                        marginablePairs: ['BNBBTC', 'TRXBTC', 'ETHBTC', 'BTCUSDT'],
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryCrossMarginFeeData').mockReturnValue(
                 Promise.resolve({
@@ -747,7 +772,7 @@ describe('AccountApi', () => {
 
     describe('queryEnabledIsolatedMarginAccountLimit()', () => {
         it('should execute queryEnabledIsolatedMarginAccountLimit() successfully with required parameters only', async () => {
-            mockResponse = { enabledAccount: 5, maxAccount: 20 };
+            mockResponse = JSONParse(JSONStringify({ enabledAccount: 5, maxAccount: 20 }));
 
             const spy = jest
                 .spyOn(client, 'queryEnabledIsolatedMarginAccountLimit')
@@ -770,7 +795,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { enabledAccount: 5, maxAccount: 20 };
+            mockResponse = JSONParse(JSONStringify({ enabledAccount: 5, maxAccount: 20 }));
 
             const spy = jest
                 .spyOn(client, 'queryEnabledIsolatedMarginAccountLimit')
@@ -810,85 +835,87 @@ describe('AccountApi', () => {
 
     describe('queryIsolatedMarginAccountInfo()', () => {
         it('should execute queryIsolatedMarginAccountInfo() successfully with required parameters only', async () => {
-            mockResponse = {
-                assets: [
-                    {
-                        baseAsset: {
-                            asset: 'BTC',
-                            borrowEnabled: true,
-                            borrowed: '0.00000000',
-                            free: '0.00000000',
-                            interest: '0.00000000',
-                            locked: '0.00000000',
-                            netAsset: '0.00000000',
-                            netAssetOfBtc: '0.00000000',
-                            repayEnabled: true,
-                            totalAsset: '0.00000000',
+            mockResponse = JSONParse(
+                JSONStringify({
+                    assets: [
+                        {
+                            baseAsset: {
+                                asset: 'BTC',
+                                borrowEnabled: true,
+                                borrowed: '0.00000000',
+                                free: '0.00000000',
+                                interest: '0.00000000',
+                                locked: '0.00000000',
+                                netAsset: '0.00000000',
+                                netAssetOfBtc: '0.00000000',
+                                repayEnabled: true,
+                                totalAsset: '0.00000000',
+                            },
+                            quoteAsset: {
+                                asset: 'USDT',
+                                borrowEnabled: true,
+                                borrowed: '0.00000000',
+                                free: '0.00000000',
+                                interest: '0.00000000',
+                                locked: '0.00000000',
+                                netAsset: '0.00000000',
+                                netAssetOfBtc: '0.00000000',
+                                repayEnabled: true,
+                                totalAsset: '0.00000000',
+                            },
+                            symbol: 'BTCUSDT',
+                            isolatedCreated: true,
+                            enabled: true,
+                            marginLevel: '0.00000000',
+                            marginLevelStatus: 'EXCESSIVE',
+                            marginRatio: '0.00000000',
+                            indexPrice: '10000.00000000',
+                            liquidatePrice: '1000.00000000',
+                            liquidateRate: '1.00000000',
+                            tradeEnabled: true,
                         },
-                        quoteAsset: {
-                            asset: 'USDT',
-                            borrowEnabled: true,
-                            borrowed: '0.00000000',
-                            free: '0.00000000',
-                            interest: '0.00000000',
-                            locked: '0.00000000',
-                            netAsset: '0.00000000',
-                            netAssetOfBtc: '0.00000000',
-                            repayEnabled: true,
-                            totalAsset: '0.00000000',
+                        {
+                            baseAsset: {
+                                asset: 'BTC',
+                                borrowEnabled: true,
+                                borrowed: '0.00000000',
+                                free: '0.00000000',
+                                interest: '0.00000000',
+                                locked: '0.00000000',
+                                netAsset: '0.00000000',
+                                netAssetOfBtc: '0.00000000',
+                                repayEnabled: true,
+                                totalAsset: '0.00000000',
+                            },
+                            quoteAsset: {
+                                asset: 'USDT',
+                                borrowEnabled: true,
+                                borrowed: '0.00000000',
+                                free: '0.00000000',
+                                interest: '0.00000000',
+                                locked: '0.00000000',
+                                netAsset: '0.00000000',
+                                netAssetOfBtc: '0.00000000',
+                                repayEnabled: true,
+                                totalAsset: '0.00000000',
+                            },
+                            symbol: 'BTCUSDT',
+                            isolatedCreated: true,
+                            enabled: true,
+                            marginLevel: '0.00000000',
+                            marginLevelStatus: 'EXCESSIVE',
+                            marginRatio: '0.00000000',
+                            indexPrice: '10000.00000000',
+                            liquidatePrice: '1000.00000000',
+                            liquidateRate: '1.00000000',
+                            tradeEnabled: true,
                         },
-                        symbol: 'BTCUSDT',
-                        isolatedCreated: true,
-                        enabled: true,
-                        marginLevel: '0.00000000',
-                        marginLevelStatus: 'EXCESSIVE',
-                        marginRatio: '0.00000000',
-                        indexPrice: '10000.00000000',
-                        liquidatePrice: '1000.00000000',
-                        liquidateRate: '1.00000000',
-                        tradeEnabled: true,
-                    },
-                    {
-                        baseAsset: {
-                            asset: 'BTC',
-                            borrowEnabled: true,
-                            borrowed: '0.00000000',
-                            free: '0.00000000',
-                            interest: '0.00000000',
-                            locked: '0.00000000',
-                            netAsset: '0.00000000',
-                            netAssetOfBtc: '0.00000000',
-                            repayEnabled: true,
-                            totalAsset: '0.00000000',
-                        },
-                        quoteAsset: {
-                            asset: 'USDT',
-                            borrowEnabled: true,
-                            borrowed: '0.00000000',
-                            free: '0.00000000',
-                            interest: '0.00000000',
-                            locked: '0.00000000',
-                            netAsset: '0.00000000',
-                            netAssetOfBtc: '0.00000000',
-                            repayEnabled: true,
-                            totalAsset: '0.00000000',
-                        },
-                        symbol: 'BTCUSDT',
-                        isolatedCreated: true,
-                        enabled: true,
-                        marginLevel: '0.00000000',
-                        marginLevelStatus: 'EXCESSIVE',
-                        marginRatio: '0.00000000',
-                        indexPrice: '10000.00000000',
-                        liquidatePrice: '1000.00000000',
-                        liquidateRate: '1.00000000',
-                        tradeEnabled: true,
-                    },
-                ],
-                totalAssetOfBtc: '0.00000000',
-                totalLiabilityOfBtc: '0.00000000',
-                totalNetAssetOfBtc: '0.00000000',
-            };
+                    ],
+                    totalAssetOfBtc: '0.00000000',
+                    totalLiabilityOfBtc: '0.00000000',
+                    totalNetAssetOfBtc: '0.00000000',
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryIsolatedMarginAccountInfo').mockReturnValue(
                 Promise.resolve({
@@ -910,85 +937,87 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                assets: [
-                    {
-                        baseAsset: {
-                            asset: 'BTC',
-                            borrowEnabled: true,
-                            borrowed: '0.00000000',
-                            free: '0.00000000',
-                            interest: '0.00000000',
-                            locked: '0.00000000',
-                            netAsset: '0.00000000',
-                            netAssetOfBtc: '0.00000000',
-                            repayEnabled: true,
-                            totalAsset: '0.00000000',
+            mockResponse = JSONParse(
+                JSONStringify({
+                    assets: [
+                        {
+                            baseAsset: {
+                                asset: 'BTC',
+                                borrowEnabled: true,
+                                borrowed: '0.00000000',
+                                free: '0.00000000',
+                                interest: '0.00000000',
+                                locked: '0.00000000',
+                                netAsset: '0.00000000',
+                                netAssetOfBtc: '0.00000000',
+                                repayEnabled: true,
+                                totalAsset: '0.00000000',
+                            },
+                            quoteAsset: {
+                                asset: 'USDT',
+                                borrowEnabled: true,
+                                borrowed: '0.00000000',
+                                free: '0.00000000',
+                                interest: '0.00000000',
+                                locked: '0.00000000',
+                                netAsset: '0.00000000',
+                                netAssetOfBtc: '0.00000000',
+                                repayEnabled: true,
+                                totalAsset: '0.00000000',
+                            },
+                            symbol: 'BTCUSDT',
+                            isolatedCreated: true,
+                            enabled: true,
+                            marginLevel: '0.00000000',
+                            marginLevelStatus: 'EXCESSIVE',
+                            marginRatio: '0.00000000',
+                            indexPrice: '10000.00000000',
+                            liquidatePrice: '1000.00000000',
+                            liquidateRate: '1.00000000',
+                            tradeEnabled: true,
                         },
-                        quoteAsset: {
-                            asset: 'USDT',
-                            borrowEnabled: true,
-                            borrowed: '0.00000000',
-                            free: '0.00000000',
-                            interest: '0.00000000',
-                            locked: '0.00000000',
-                            netAsset: '0.00000000',
-                            netAssetOfBtc: '0.00000000',
-                            repayEnabled: true,
-                            totalAsset: '0.00000000',
+                        {
+                            baseAsset: {
+                                asset: 'BTC',
+                                borrowEnabled: true,
+                                borrowed: '0.00000000',
+                                free: '0.00000000',
+                                interest: '0.00000000',
+                                locked: '0.00000000',
+                                netAsset: '0.00000000',
+                                netAssetOfBtc: '0.00000000',
+                                repayEnabled: true,
+                                totalAsset: '0.00000000',
+                            },
+                            quoteAsset: {
+                                asset: 'USDT',
+                                borrowEnabled: true,
+                                borrowed: '0.00000000',
+                                free: '0.00000000',
+                                interest: '0.00000000',
+                                locked: '0.00000000',
+                                netAsset: '0.00000000',
+                                netAssetOfBtc: '0.00000000',
+                                repayEnabled: true,
+                                totalAsset: '0.00000000',
+                            },
+                            symbol: 'BTCUSDT',
+                            isolatedCreated: true,
+                            enabled: true,
+                            marginLevel: '0.00000000',
+                            marginLevelStatus: 'EXCESSIVE',
+                            marginRatio: '0.00000000',
+                            indexPrice: '10000.00000000',
+                            liquidatePrice: '1000.00000000',
+                            liquidateRate: '1.00000000',
+                            tradeEnabled: true,
                         },
-                        symbol: 'BTCUSDT',
-                        isolatedCreated: true,
-                        enabled: true,
-                        marginLevel: '0.00000000',
-                        marginLevelStatus: 'EXCESSIVE',
-                        marginRatio: '0.00000000',
-                        indexPrice: '10000.00000000',
-                        liquidatePrice: '1000.00000000',
-                        liquidateRate: '1.00000000',
-                        tradeEnabled: true,
-                    },
-                    {
-                        baseAsset: {
-                            asset: 'BTC',
-                            borrowEnabled: true,
-                            borrowed: '0.00000000',
-                            free: '0.00000000',
-                            interest: '0.00000000',
-                            locked: '0.00000000',
-                            netAsset: '0.00000000',
-                            netAssetOfBtc: '0.00000000',
-                            repayEnabled: true,
-                            totalAsset: '0.00000000',
-                        },
-                        quoteAsset: {
-                            asset: 'USDT',
-                            borrowEnabled: true,
-                            borrowed: '0.00000000',
-                            free: '0.00000000',
-                            interest: '0.00000000',
-                            locked: '0.00000000',
-                            netAsset: '0.00000000',
-                            netAssetOfBtc: '0.00000000',
-                            repayEnabled: true,
-                            totalAsset: '0.00000000',
-                        },
-                        symbol: 'BTCUSDT',
-                        isolatedCreated: true,
-                        enabled: true,
-                        marginLevel: '0.00000000',
-                        marginLevelStatus: 'EXCESSIVE',
-                        marginRatio: '0.00000000',
-                        indexPrice: '10000.00000000',
-                        liquidatePrice: '1000.00000000',
-                        liquidateRate: '1.00000000',
-                        tradeEnabled: true,
-                    },
-                ],
-                totalAssetOfBtc: '0.00000000',
-                totalLiabilityOfBtc: '0.00000000',
-                totalNetAssetOfBtc: '0.00000000',
-            };
+                    ],
+                    totalAssetOfBtc: '0.00000000',
+                    totalLiabilityOfBtc: '0.00000000',
+                    totalNetAssetOfBtc: '0.00000000',
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryIsolatedMarginAccountInfo').mockReturnValue(
                 Promise.resolve({
@@ -1024,17 +1053,19 @@ describe('AccountApi', () => {
 
     describe('queryIsolatedMarginFeeData()', () => {
         it('should execute queryIsolatedMarginFeeData() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    vipLevel: 0,
-                    symbol: 'BTCUSDT',
-                    leverage: '10',
-                    data: [
-                        { coin: 'BTC', dailyInterest: '0.00026125', borrowLimit: '270' },
-                        { coin: 'USDT', dailyInterest: '0.000475', borrowLimit: '2100000' },
-                    ],
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        vipLevel: 0,
+                        symbol: 'BTCUSDT',
+                        leverage: '10',
+                        data: [
+                            { coin: 'BTC', dailyInterest: '0.00026125', borrowLimit: '270' },
+                            { coin: 'USDT', dailyInterest: '0.000475', borrowLimit: '2100000' },
+                        ],
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryIsolatedMarginFeeData').mockReturnValue(
                 Promise.resolve({
@@ -1057,17 +1088,19 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    vipLevel: 0,
-                    symbol: 'BTCUSDT',
-                    leverage: '10',
-                    data: [
-                        { coin: 'BTC', dailyInterest: '0.00026125', borrowLimit: '270' },
-                        { coin: 'USDT', dailyInterest: '0.000475', borrowLimit: '2100000' },
-                    ],
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        vipLevel: 0,
+                        symbol: 'BTCUSDT',
+                        leverage: '10',
+                        data: [
+                            { coin: 'BTC', dailyInterest: '0.00026125', borrowLimit: '270' },
+                            { coin: 'USDT', dailyInterest: '0.000475', borrowLimit: '2100000' },
+                        ],
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryIsolatedMarginFeeData').mockReturnValue(
                 Promise.resolve({

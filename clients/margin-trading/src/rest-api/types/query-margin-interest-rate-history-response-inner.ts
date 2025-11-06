@@ -33,14 +33,14 @@ export interface QueryMarginInterestRateHistoryResponseInner {
     dailyInterestRate?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryMarginInterestRateHistoryResponseInner
      */
-    timestamp?: number;
+    timestamp?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryMarginInterestRateHistoryResponseInner
      */
-    vipLevel?: number;
+    vipLevel?: number | bigint;
 }

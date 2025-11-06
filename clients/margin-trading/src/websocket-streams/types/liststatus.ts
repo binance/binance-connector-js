@@ -26,10 +26,10 @@ import type { ListstatusOInner } from './liststatus-oinner';
 export interface Liststatus {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Liststatus
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}
@@ -38,10 +38,10 @@ export interface Liststatus {
     s?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Liststatus
      */
-    g?: number;
+    g?: number | bigint;
     /**
      *
      * @type {string}
@@ -74,10 +74,10 @@ export interface Liststatus {
     C?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Liststatus
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {Array<ListstatusOInner>}

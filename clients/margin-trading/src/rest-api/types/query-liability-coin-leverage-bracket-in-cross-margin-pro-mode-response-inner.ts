@@ -32,10 +32,10 @@ export interface QueryLiabilityCoinLeverageBracketInCrossMarginProModeResponseIn
     assetNames?: Array<string>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryLiabilityCoinLeverageBracketInCrossMarginProModeResponseInner
      */
-    rank?: number;
+    rank?: number | bigint;
     /**
      *
      * @type {Array<QueryLiabilityCoinLeverageBracketInCrossMarginProModeResponseInnerBracketsInner>}

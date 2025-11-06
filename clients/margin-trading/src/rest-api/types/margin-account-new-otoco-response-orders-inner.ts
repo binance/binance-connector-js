@@ -27,10 +27,10 @@ export interface MarginAccountNewOtocoResponseOrdersInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarginAccountNewOtocoResponseOrdersInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}

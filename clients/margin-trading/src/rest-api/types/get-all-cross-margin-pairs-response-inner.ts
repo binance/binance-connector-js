@@ -27,10 +27,10 @@ export interface GetAllCrossMarginPairsResponseInner {
     base?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetAllCrossMarginPairsResponseInner
      */
-    id?: number;
+    id?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -63,8 +63,8 @@ export interface GetAllCrossMarginPairsResponseInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetAllCrossMarginPairsResponseInner
      */
-    delistTime?: number;
+    delistTime?: number | bigint;
 }

@@ -33,10 +33,10 @@ export interface GetForceLiquidationRecordResponseRowsInner {
     executedQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetForceLiquidationRecordResponseRowsInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -75,8 +75,8 @@ export interface GetForceLiquidationRecordResponseRowsInner {
     isIsolated?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetForceLiquidationRecordResponseRowsInner
      */
-    updatedTime?: number;
+    updatedTime?: number | bigint;
 }

@@ -21,22 +21,22 @@
 export interface QueryCrossIsolatedMarginCapitalFlowResponseInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCrossIsolatedMarginCapitalFlowResponseInner
      */
-    id?: number;
+    id?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCrossIsolatedMarginCapitalFlowResponseInner
      */
-    tranId?: number;
+    tranId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCrossIsolatedMarginCapitalFlowResponseInner
      */
-    timestamp?: number;
+    timestamp?: number | bigint;
     /**
      *
      * @type {string}

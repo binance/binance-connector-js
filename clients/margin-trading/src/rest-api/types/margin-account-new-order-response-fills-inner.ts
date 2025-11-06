@@ -45,8 +45,8 @@ export interface MarginAccountNewOrderResponseFillsInner {
     commissionAsset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarginAccountNewOrderResponseFillsInner
      */
-    tradeId?: number;
+    tradeId?: number | bigint;
 }

@@ -29,10 +29,10 @@ import type { MarginAccountCancelOcoResponseOrdersInner } from './margin-account
 export interface MarginAccountCancelOcoResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarginAccountCancelOcoResponse
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -59,10 +59,10 @@ export interface MarginAccountCancelOcoResponse {
     listClientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarginAccountCancelOcoResponse
      */
-    transactionTime?: number;
+    transactionTime?: number | bigint;
     /**
      *
      * @type {string}

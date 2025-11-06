@@ -21,10 +21,10 @@
 export interface GetListScheduleResponseInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetListScheduleResponseInner
      */
-    listTime?: number;
+    listTime?: number | bigint;
     /**
      *
      * @type {Array<string>}

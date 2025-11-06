@@ -27,10 +27,10 @@ export interface MarginAccountCancelOcoResponseOrdersInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarginAccountCancelOcoResponseOrdersInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
