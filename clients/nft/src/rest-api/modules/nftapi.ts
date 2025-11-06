@@ -37,16 +37,16 @@ const NFTApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
          * Weight: 3000
          *
          * @summary Get NFT Asset(USER_DATA)
-         * @param {number} [limit] Default 50, Max 50
-         * @param {number} [page] Default 1
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [limit] Default 50, Max 50
+         * @param {number | bigint} [page] Default 1
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getNFTAsset: async (
-            limit?: number,
-            page?: number,
-            recvWindow?: number
+            limit?: number | bigint,
+            page?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -82,20 +82,20 @@ const NFTApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
          * Weight: 3000
          *
          * @summary Get NFT Deposit History(USER_DATA)
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [limit] Default 50, Max 50
-         * @param {number} [page] Default 1
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [limit] Default 50, Max 50
+         * @param {number | bigint} [page] Default 1
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getNFTDepositHistory: async (
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            page?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            page?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -138,22 +138,22 @@ const NFTApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
          * Weight: 3000
          *
          * @summary Get NFT Transaction History(USER_DATA)
-         * @param {number} orderType 0: purchase order, 1: sell order, 2: royalty income, 3: primary market order, 4: mint fee
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [limit] Default 50, Max 50
-         * @param {number} [page] Default 1
-         * @param {number} [recvWindow]
+         * @param {number | bigint} orderType 0: purchase order, 1: sell order, 2: royalty income, 3: primary market order, 4: mint fee
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [limit] Default 50, Max 50
+         * @param {number | bigint} [page] Default 1
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getNFTTransactionHistory: async (
-            orderType: number,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            page?: number,
-            recvWindow?: number
+            orderType: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            page?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'orderType' is not null or undefined
             assertParamExists('getNFTTransactionHistory', 'orderType', orderType);
@@ -203,20 +203,20 @@ const NFTApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
          * Weight: 3000
          *
          * @summary Get NFT Withdraw History(USER_DATA)
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [limit] Default 50, Max 50
-         * @param {number} [page] Default 1
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [limit] Default 50, Max 50
+         * @param {number | bigint} [page] Default 1
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getNFTWithdrawHistory: async (
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            page?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            page?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -333,24 +333,24 @@ export interface NFTApiInterface {
 export interface GetNFTAssetRequest {
     /**
      * Default 50, Max 50
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NFTApiGetNFTAsset
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      * Default 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NFTApiGetNFTAsset
      */
-    readonly page?: number;
+    readonly page?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NFTApiGetNFTAsset
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -360,38 +360,38 @@ export interface GetNFTAssetRequest {
 export interface GetNFTDepositHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NFTApiGetNFTDepositHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NFTApiGetNFTDepositHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 50, Max 50
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NFTApiGetNFTDepositHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      * Default 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NFTApiGetNFTDepositHistory
      */
-    readonly page?: number;
+    readonly page?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NFTApiGetNFTDepositHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -401,45 +401,45 @@ export interface GetNFTDepositHistoryRequest {
 export interface GetNFTTransactionHistoryRequest {
     /**
      * 0: purchase order, 1: sell order, 2: royalty income, 3: primary market order, 4: mint fee
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NFTApiGetNFTTransactionHistory
      */
-    readonly orderType: number;
+    readonly orderType: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NFTApiGetNFTTransactionHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NFTApiGetNFTTransactionHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 50, Max 50
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NFTApiGetNFTTransactionHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      * Default 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NFTApiGetNFTTransactionHistory
      */
-    readonly page?: number;
+    readonly page?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NFTApiGetNFTTransactionHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -449,38 +449,38 @@ export interface GetNFTTransactionHistoryRequest {
 export interface GetNFTWithdrawHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NFTApiGetNFTWithdrawHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NFTApiGetNFTWithdrawHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 50, Max 50
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NFTApiGetNFTWithdrawHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      * Default 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NFTApiGetNFTWithdrawHistory
      */
-    readonly page?: number;
+    readonly page?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NFTApiGetNFTWithdrawHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
