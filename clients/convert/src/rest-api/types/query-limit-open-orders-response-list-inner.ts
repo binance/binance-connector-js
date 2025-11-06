@@ -27,10 +27,10 @@ export interface QueryLimitOpenOrdersResponseListInner {
     quoteId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryLimitOpenOrdersResponseListInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -75,14 +75,14 @@ export interface QueryLimitOpenOrdersResponseListInner {
     inverseRatio?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryLimitOpenOrdersResponseListInner
      */
-    createTime?: number;
+    createTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryLimitOpenOrdersResponseListInner
      */
-    expiredTimestamp?: number;
+    expiredTimestamp?: number | bigint;
 }

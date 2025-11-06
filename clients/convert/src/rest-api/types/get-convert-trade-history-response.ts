@@ -32,22 +32,22 @@ export interface GetConvertTradeHistoryResponse {
     list?: Array<GetConvertTradeHistoryResponseListInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetConvertTradeHistoryResponse
      */
-    startTime?: number;
+    startTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetConvertTradeHistoryResponse
      */
-    endTime?: number;
+    endTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetConvertTradeHistoryResponse
      */
-    limit?: number;
+    limit?: number | bigint;
     /**
      *
      * @type {boolean}

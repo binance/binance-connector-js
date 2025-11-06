@@ -27,10 +27,10 @@ export interface GetConvertTradeHistoryResponseListInner {
     quoteId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetConvertTradeHistoryResponseListInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -75,8 +75,8 @@ export interface GetConvertTradeHistoryResponseListInner {
     inverseRatio?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetConvertTradeHistoryResponseListInner
      */
-    createTime?: number;
+    createTime?: number | bigint;
 }

@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { MarketDataApi } from '../../../src/rest-api';
@@ -40,16 +41,18 @@ describe('MarketDataApi', () => {
 
     describe('listAllConvertPairs()', () => {
         it('should execute listAllConvertPairs() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    fromAsset: 'BTC',
-                    toAsset: 'USDT',
-                    fromAssetMinAmount: '0.0004',
-                    fromAssetMaxAmount: '50',
-                    toAssetMinAmount: '20',
-                    toAssetMaxAmount: '2500000',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        fromAsset: 'BTC',
+                        toAsset: 'USDT',
+                        fromAssetMinAmount: '0.0004',
+                        fromAssetMaxAmount: '50',
+                        toAssetMinAmount: '20',
+                        toAssetMaxAmount: '2500000',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'listAllConvertPairs').mockReturnValue(
                 Promise.resolve({
@@ -71,16 +74,18 @@ describe('MarketDataApi', () => {
                 toAsset: 'toAsset_example',
             };
 
-            mockResponse = [
-                {
-                    fromAsset: 'BTC',
-                    toAsset: 'USDT',
-                    fromAssetMinAmount: '0.0004',
-                    fromAssetMaxAmount: '50',
-                    toAssetMinAmount: '20',
-                    toAssetMaxAmount: '2500000',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        fromAsset: 'BTC',
+                        toAsset: 'USDT',
+                        fromAssetMinAmount: '0.0004',
+                        fromAssetMaxAmount: '50',
+                        toAssetMinAmount: '20',
+                        toAssetMaxAmount: '2500000',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'listAllConvertPairs').mockReturnValue(
                 Promise.resolve({
@@ -114,10 +119,12 @@ describe('MarketDataApi', () => {
 
     describe('queryOrderQuantityPrecisionPerAsset()', () => {
         it('should execute queryOrderQuantityPrecisionPerAsset() successfully with required parameters only', async () => {
-            mockResponse = [
-                { asset: 'BTC', fraction: 8 },
-                { asset: 'SHIB', fraction: 2 },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { asset: 'BTC', fraction: 8 },
+                    { asset: 'SHIB', fraction: 2 },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryOrderQuantityPrecisionPerAsset').mockReturnValue(
                 Promise.resolve({
@@ -138,10 +145,12 @@ describe('MarketDataApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                { asset: 'BTC', fraction: 8 },
-                { asset: 'SHIB', fraction: 2 },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { asset: 'BTC', fraction: 8 },
+                    { asset: 'SHIB', fraction: 2 },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryOrderQuantityPrecisionPerAsset').mockReturnValue(
                 Promise.resolve({

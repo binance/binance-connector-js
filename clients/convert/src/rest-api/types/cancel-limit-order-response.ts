@@ -21,10 +21,10 @@
 export interface CancelLimitOrderResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelLimitOrderResponse
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}

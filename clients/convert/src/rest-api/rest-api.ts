@@ -98,6 +98,7 @@ export class RestAPI {
      *
      * @summary List All Convert Pairs
      * @param {ListAllConvertPairsRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<ListAllConvertPairsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/convert/market-data/ Binance API Documentation}
@@ -115,6 +116,7 @@ export class RestAPI {
      *
      * @summary Query order quantity precision per asset(USER_DATA)
      * @param {QueryOrderQuantityPrecisionPerAssetRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryOrderQuantityPrecisionPerAssetResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/convert/market-data/Query-order-quantity-precision-per-asset Binance API Documentation}
@@ -132,6 +134,7 @@ export class RestAPI {
      *
      * @summary Accept Quote (TRADE)
      * @param {AcceptQuoteRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<AcceptQuoteResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/convert/trade/Accept-Quote Binance API Documentation}
@@ -149,6 +152,7 @@ export class RestAPI {
      *
      * @summary Cancel limit order (USER_DATA)
      * @param {CancelLimitOrderRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<CancelLimitOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/convert/trade/Cancel-Order Binance API Documentation}
@@ -168,6 +172,7 @@ export class RestAPI {
      *
      * @summary Get Convert Trade History(USER_DATA)
      * @param {GetConvertTradeHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetConvertTradeHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/convert/trade/Get-Convert-Trade-History Binance API Documentation}
@@ -185,6 +190,7 @@ export class RestAPI {
      *
      * @summary Order status(USER_DATA)
      * @param {OrderStatusRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<OrderStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/convert/trade/Order-Status Binance API Documentation}
@@ -206,6 +212,7 @@ export class RestAPI {
      *
      * @summary Place limit order (USER_DATA)
      * @param {PlaceLimitOrderRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<PlaceLimitOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/convert/trade/Place-Order Binance API Documentation}
@@ -223,6 +230,7 @@ export class RestAPI {
      *
      * @summary Query limit open orders (USER_DATA)
      * @param {QueryLimitOpenOrdersRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryLimitOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/convert/trade/Query-Order Binance API Documentation}
@@ -243,6 +251,7 @@ export class RestAPI {
      *
      * @summary Send Quote Request(USER_DATA)
      * @param {SendQuoteRequestRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<SendQuoteRequestResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/convert/trade/Send-quote-request Binance API Documentation}

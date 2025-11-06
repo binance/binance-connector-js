@@ -39,10 +39,10 @@ export interface PlaceLimitOrderResponse {
     inverseRatio?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PlaceLimitOrderResponse
      */
-    validTimestamp?: number;
+    validTimestamp?: number | bigint;
     /**
      *
      * @type {string}

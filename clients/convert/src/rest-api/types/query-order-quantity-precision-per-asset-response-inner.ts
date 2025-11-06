@@ -27,8 +27,8 @@ export interface QueryOrderQuantityPrecisionPerAssetResponseInner {
     asset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryOrderQuantityPrecisionPerAssetResponseInner
      */
-    fraction?: number;
+    fraction?: number | bigint;
 }

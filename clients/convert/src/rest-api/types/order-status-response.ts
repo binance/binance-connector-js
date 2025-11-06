@@ -21,10 +21,10 @@
 export interface OrderStatusResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderStatusResponse
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -69,8 +69,8 @@ export interface OrderStatusResponse {
     inverseRatio?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderStatusResponse
      */
-    createTime?: number;
+    createTime?: number | bigint;
 }

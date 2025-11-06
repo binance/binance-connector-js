@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { TradeApi } from '../../../src/rest-api';
@@ -54,11 +55,13 @@ describe('TradeApi', () => {
                 quoteId: '1',
             };
 
-            mockResponse = {
-                orderId: '933256278426274426',
-                createTime: 1623381330472,
-                orderStatus: 'PROCESS',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    orderId: '933256278426274426',
+                    createTime: 1623381330472,
+                    orderStatus: 'PROCESS',
+                })
+            );
 
             const spy = jest.spyOn(client, 'acceptQuote').mockReturnValue(
                 Promise.resolve({
@@ -80,11 +83,13 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                orderId: '933256278426274426',
-                createTime: 1623381330472,
-                orderStatus: 'PROCESS',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    orderId: '933256278426274426',
+                    createTime: 1623381330472,
+                    orderStatus: 'PROCESS',
+                })
+            );
 
             const spy = jest.spyOn(client, 'acceptQuote').mockReturnValue(
                 Promise.resolve({
@@ -138,7 +143,9 @@ describe('TradeApi', () => {
                 orderId: 1,
             };
 
-            mockResponse = { orderId: 1603680255057330400, status: 'CANCELED' };
+            mockResponse = JSONParse(
+                JSONStringify({ orderId: 1603680255057330400, status: 'CANCELED' })
+            );
 
             const spy = jest.spyOn(client, 'cancelLimitOrder').mockReturnValue(
                 Promise.resolve({
@@ -160,7 +167,9 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { orderId: 1603680255057330400, status: 'CANCELED' };
+            mockResponse = JSONParse(
+                JSONStringify({ orderId: 1603680255057330400, status: 'CANCELED' })
+            );
 
             const spy = jest.spyOn(client, 'cancelLimitOrder').mockReturnValue(
                 Promise.resolve({
@@ -215,26 +224,28 @@ describe('TradeApi', () => {
                 endTime: 1641782889000,
             };
 
-            mockResponse = {
-                list: [
-                    {
-                        quoteId: 'f3b91c525b2644c7bc1e1cd31b6e1aa6',
-                        orderId: 940708407462087200,
-                        orderStatus: 'SUCCESS',
-                        fromAsset: 'USDT',
-                        fromAmount: '20',
-                        toAsset: 'BNB',
-                        toAmount: '0.06154036',
-                        ratio: '0.00307702',
-                        inverseRatio: '324.99',
-                        createTime: 1624248872184,
-                    },
-                ],
-                startTime: 1623824139000,
-                endTime: 1626416139000,
-                limit: 100,
-                moreData: false,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    list: [
+                        {
+                            quoteId: 'f3b91c525b2644c7bc1e1cd31b6e1aa6',
+                            orderId: 940708407462087200,
+                            orderStatus: 'SUCCESS',
+                            fromAsset: 'USDT',
+                            fromAmount: '20',
+                            toAsset: 'BNB',
+                            toAmount: '0.06154036',
+                            ratio: '0.00307702',
+                            inverseRatio: '324.99',
+                            createTime: 1624248872184,
+                        },
+                    ],
+                    startTime: 1623824139000,
+                    endTime: 1626416139000,
+                    limit: 100,
+                    moreData: false,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getConvertTradeHistory').mockReturnValue(
                 Promise.resolve({
@@ -258,26 +269,28 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                list: [
-                    {
-                        quoteId: 'f3b91c525b2644c7bc1e1cd31b6e1aa6',
-                        orderId: 940708407462087200,
-                        orderStatus: 'SUCCESS',
-                        fromAsset: 'USDT',
-                        fromAmount: '20',
-                        toAsset: 'BNB',
-                        toAmount: '0.06154036',
-                        ratio: '0.00307702',
-                        inverseRatio: '324.99',
-                        createTime: 1624248872184,
-                    },
-                ],
-                startTime: 1623824139000,
-                endTime: 1626416139000,
-                limit: 100,
-                moreData: false,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    list: [
+                        {
+                            quoteId: 'f3b91c525b2644c7bc1e1cd31b6e1aa6',
+                            orderId: 940708407462087200,
+                            orderStatus: 'SUCCESS',
+                            fromAsset: 'USDT',
+                            fromAmount: '20',
+                            toAsset: 'BNB',
+                            toAmount: '0.06154036',
+                            ratio: '0.00307702',
+                            inverseRatio: '324.99',
+                            createTime: 1624248872184,
+                        },
+                    ],
+                    startTime: 1623824139000,
+                    endTime: 1626416139000,
+                    limit: 100,
+                    moreData: false,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getConvertTradeHistory').mockReturnValue(
                 Promise.resolve({
@@ -344,17 +357,19 @@ describe('TradeApi', () => {
 
     describe('orderStatus()', () => {
         it('should execute orderStatus() successfully with required parameters only', async () => {
-            mockResponse = {
-                orderId: 933256278426274400,
-                orderStatus: 'SUCCESS',
-                fromAsset: 'BTC',
-                fromAmount: '0.00054414',
-                toAsset: 'USDT',
-                toAmount: '20',
-                ratio: '36755',
-                inverseRatio: '0.00002721',
-                createTime: 1623381330472,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    orderId: 933256278426274400,
+                    orderStatus: 'SUCCESS',
+                    fromAsset: 'BTC',
+                    fromAmount: '0.00054414',
+                    toAsset: 'USDT',
+                    toAmount: '20',
+                    ratio: '36755',
+                    inverseRatio: '0.00002721',
+                    createTime: 1623381330472,
+                })
+            );
 
             const spy = jest.spyOn(client, 'orderStatus').mockReturnValue(
                 Promise.resolve({
@@ -376,17 +391,19 @@ describe('TradeApi', () => {
                 quoteId: '1',
             };
 
-            mockResponse = {
-                orderId: 933256278426274400,
-                orderStatus: 'SUCCESS',
-                fromAsset: 'BTC',
-                fromAmount: '0.00054414',
-                toAsset: 'USDT',
-                toAmount: '20',
-                ratio: '36755',
-                inverseRatio: '0.00002721',
-                createTime: 1623381330472,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    orderId: 933256278426274400,
+                    orderStatus: 'SUCCESS',
+                    fromAsset: 'BTC',
+                    fromAmount: '0.00054414',
+                    toAsset: 'USDT',
+                    toAmount: '20',
+                    ratio: '36755',
+                    inverseRatio: '0.00002721',
+                    createTime: 1623381330472,
+                })
+            );
 
             const spy = jest.spyOn(client, 'orderStatus').mockReturnValue(
                 Promise.resolve({
@@ -428,14 +445,16 @@ describe('TradeApi', () => {
                 expiredType: 'expiredType_example',
             };
 
-            mockResponse = {
-                quoteId: '12415572564',
-                ratio: '38163.7',
-                inverseRatio: '0.0000262',
-                validTimestamp: 1623319461670,
-                toAmount: '3816.37',
-                fromAmount: '0.1',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    quoteId: '12415572564',
+                    ratio: '38163.7',
+                    inverseRatio: '0.0000262',
+                    validTimestamp: 1623319461670,
+                    toAmount: '3816.37',
+                    fromAmount: '0.1',
+                })
+            );
 
             const spy = jest.spyOn(client, 'placeLimitOrder').mockReturnValue(
                 Promise.resolve({
@@ -464,14 +483,16 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                quoteId: '12415572564',
-                ratio: '38163.7',
-                inverseRatio: '0.0000262',
-                validTimestamp: 1623319461670,
-                toAmount: '3816.37',
-                fromAmount: '0.1',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    quoteId: '12415572564',
+                    ratio: '38163.7',
+                    inverseRatio: '0.0000262',
+                    validTimestamp: 1623319461670,
+                    toAmount: '3816.37',
+                    fromAmount: '0.1',
+                })
+            );
 
             const spy = jest.spyOn(client, 'placeLimitOrder').mockReturnValue(
                 Promise.resolve({
@@ -593,23 +614,25 @@ describe('TradeApi', () => {
 
     describe('queryLimitOpenOrders()', () => {
         it('should execute queryLimitOpenOrders() successfully with required parameters only', async () => {
-            mockResponse = {
-                list: [
-                    {
-                        quoteId: '18sdf87kh9df',
-                        orderId: 1150901289839,
-                        orderStatus: 'SUCCESS',
-                        fromAsset: 'BNB',
-                        fromAmount: '10',
-                        toAsset: 'USDT',
-                        toAmount: '2317.89',
-                        ratio: '231.789',
-                        inverseRatio: '0.00431427',
-                        createTime: 1614089498000,
-                        expiredTimestamp: 1614099498000,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    list: [
+                        {
+                            quoteId: '18sdf87kh9df',
+                            orderId: 1150901289839,
+                            orderStatus: 'SUCCESS',
+                            fromAsset: 'BNB',
+                            fromAmount: '10',
+                            toAsset: 'USDT',
+                            toAmount: '2317.89',
+                            ratio: '231.789',
+                            inverseRatio: '0.00431427',
+                            createTime: 1614089498000,
+                            expiredTimestamp: 1614099498000,
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryLimitOpenOrders').mockReturnValue(
                 Promise.resolve({
@@ -630,23 +653,25 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                list: [
-                    {
-                        quoteId: '18sdf87kh9df',
-                        orderId: 1150901289839,
-                        orderStatus: 'SUCCESS',
-                        fromAsset: 'BNB',
-                        fromAmount: '10',
-                        toAsset: 'USDT',
-                        toAmount: '2317.89',
-                        ratio: '231.789',
-                        inverseRatio: '0.00431427',
-                        createTime: 1614089498000,
-                        expiredTimestamp: 1614099498000,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    list: [
+                        {
+                            quoteId: '18sdf87kh9df',
+                            orderId: 1150901289839,
+                            orderStatus: 'SUCCESS',
+                            fromAsset: 'BNB',
+                            fromAmount: '10',
+                            toAsset: 'USDT',
+                            toAmount: '2317.89',
+                            ratio: '231.789',
+                            inverseRatio: '0.00431427',
+                            createTime: 1614089498000,
+                            expiredTimestamp: 1614099498000,
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryLimitOpenOrders').mockReturnValue(
                 Promise.resolve({
@@ -685,14 +710,16 @@ describe('TradeApi', () => {
                 toAsset: 'toAsset_example',
             };
 
-            mockResponse = {
-                quoteId: '12415572564',
-                ratio: '38163.7',
-                inverseRatio: '0.0000262',
-                validTimestamp: 1623319461670,
-                toAmount: '3816.37',
-                fromAmount: '0.1',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    quoteId: '12415572564',
+                    ratio: '38163.7',
+                    inverseRatio: '0.0000262',
+                    validTimestamp: 1623319461670,
+                    toAmount: '3816.37',
+                    fromAmount: '0.1',
+                })
+            );
 
             const spy = jest.spyOn(client, 'sendQuoteRequest').mockReturnValue(
                 Promise.resolve({
@@ -719,14 +746,16 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                quoteId: '12415572564',
-                ratio: '38163.7',
-                inverseRatio: '0.0000262',
-                validTimestamp: 1623319461670,
-                toAmount: '3816.37',
-                fromAmount: '0.1',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    quoteId: '12415572564',
+                    ratio: '38163.7',
+                    inverseRatio: '0.0000262',
+                    validTimestamp: 1623319461670,
+                    toAmount: '3816.37',
+                    fromAmount: '0.1',
+                })
+            );
 
             const spy = jest.spyOn(client, 'sendQuoteRequest').mockReturnValue(
                 Promise.resolve({
