@@ -21,10 +21,10 @@
 export interface GetOpenSymbolListResponseInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetOpenSymbolListResponseInner
      */
-    openTime?: number;
+    openTime?: number | bigint;
     /**
      *
      * @type {Array<string>}

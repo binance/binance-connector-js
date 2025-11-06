@@ -21,8 +21,8 @@
 export interface UserUniversalTransferResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UserUniversalTransferResponse
      */
-    tranId?: number;
+    tranId?: number | bigint;
 }

@@ -21,10 +21,10 @@
 export interface GetSymbolsDelistScheduleForSpotResponseInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetSymbolsDelistScheduleForSpotResponseInner
      */
-    delistTime?: number;
+    delistTime?: number | bigint;
     /**
      *
      * @type {Array<string>}

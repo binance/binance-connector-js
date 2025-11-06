@@ -21,10 +21,10 @@
 export interface FetchAddressVerificationListResponseInnerAddressQuestionnaire {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FetchAddressVerificationListResponseInnerAddressQuestionnaire
      */
-    sendTo?: number;
+    sendTo?: number | bigint;
     /**
      *
      * @type {string}
@@ -33,14 +33,14 @@ export interface FetchAddressVerificationListResponseInnerAddressQuestionnaire {
     satoshiToken?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FetchAddressVerificationListResponseInnerAddressQuestionnaire
      */
-    isAddressOwner?: number;
+    isAddressOwner?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FetchAddressVerificationListResponseInnerAddressQuestionnaire
      */
-    verifyMethod?: number;
+    verifyMethod?: number | bigint;
 }

@@ -21,10 +21,10 @@
 export interface AccountInfoResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountInfoResponse
      */
-    vipLevel?: number;
+    vipLevel?: number | bigint;
     /**
      *
      * @type {boolean}

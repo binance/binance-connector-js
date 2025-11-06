@@ -50,16 +50,16 @@ export interface DepositHistoryV2ResponseInner {
     coin?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DepositHistoryV2ResponseInner
      */
-    depositStatus?: number;
+    depositStatus?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DepositHistoryV2ResponseInner
      */
-    travelRuleReqStatus?: number;
+    travelRuleReqStatus?: number | bigint;
     /**
      *
      * @type {string}
@@ -80,10 +80,10 @@ export interface DepositHistoryV2ResponseInner {
     txId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DepositHistoryV2ResponseInner
      */
-    transferType?: number;
+    transferType?: number | bigint;
     /**
      *
      * @type {string}
@@ -104,8 +104,8 @@ export interface DepositHistoryV2ResponseInner {
     questionnaire?: DepositHistoryV2ResponseInnerQuestionnaire;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DepositHistoryV2ResponseInner
      */
-    insertTime?: number;
+    insertTime?: number | bigint;
 }

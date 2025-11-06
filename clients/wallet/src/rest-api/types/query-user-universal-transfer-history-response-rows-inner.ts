@@ -45,14 +45,14 @@ export interface QueryUserUniversalTransferHistoryResponseRowsInner {
     status?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUserUniversalTransferHistoryResponseRowsInner
      */
-    tranId?: number;
+    tranId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUserUniversalTransferHistoryResponseRowsInner
      */
-    timestamp?: number;
+    timestamp?: number | bigint;
 }

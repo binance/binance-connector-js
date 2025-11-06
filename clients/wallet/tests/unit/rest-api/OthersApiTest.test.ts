@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { OthersApi } from '../../../src/rest-api';
@@ -37,10 +38,12 @@ describe('OthersApi', () => {
 
     describe('getSymbolsDelistScheduleForSpot()', () => {
         it('should execute getSymbolsDelistScheduleForSpot() successfully with required parameters only', async () => {
-            mockResponse = [
-                { delistTime: 1686161202000, symbols: ['ADAUSDT', 'BNBUSDT'] },
-                { delistTime: 1686222232000, symbols: ['ETHUSDT'] },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { delistTime: 1686161202000, symbols: ['ADAUSDT', 'BNBUSDT'] },
+                    { delistTime: 1686222232000, symbols: ['ETHUSDT'] },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getSymbolsDelistScheduleForSpot').mockReturnValue(
                 Promise.resolve({
@@ -61,10 +64,12 @@ describe('OthersApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                { delistTime: 1686161202000, symbols: ['ADAUSDT', 'BNBUSDT'] },
-                { delistTime: 1686222232000, symbols: ['ETHUSDT'] },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { delistTime: 1686161202000, symbols: ['ADAUSDT', 'BNBUSDT'] },
+                    { delistTime: 1686222232000, symbols: ['ETHUSDT'] },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getSymbolsDelistScheduleForSpot').mockReturnValue(
                 Promise.resolve({
@@ -100,7 +105,7 @@ describe('OthersApi', () => {
 
     describe('systemStatus()', () => {
         it('should execute systemStatus() successfully with required parameters only', async () => {
-            mockResponse = { status: 0, msg: 'normal' };
+            mockResponse = JSONParse(JSONStringify({ status: 0, msg: 'normal' }));
 
             const spy = jest.spyOn(client, 'systemStatus').mockReturnValue(
                 Promise.resolve({

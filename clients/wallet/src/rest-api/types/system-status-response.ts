@@ -21,10 +21,10 @@
 export interface SystemStatusResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SystemStatusResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {string}

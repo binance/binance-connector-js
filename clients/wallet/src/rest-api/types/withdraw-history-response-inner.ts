@@ -45,10 +45,10 @@ export interface WithdrawHistoryResponseInner {
     coin?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof WithdrawHistoryResponseInner
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {string}
@@ -75,10 +75,10 @@ export interface WithdrawHistoryResponseInner {
     network?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof WithdrawHistoryResponseInner
      */
-    transferType?: number;
+    transferType?: number | bigint;
     /**
      *
      * @type {string}
@@ -93,16 +93,16 @@ export interface WithdrawHistoryResponseInner {
     info?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof WithdrawHistoryResponseInner
      */
-    confirmNo?: number;
+    confirmNo?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof WithdrawHistoryResponseInner
      */
-    walletType?: number;
+    walletType?: number | bigint;
     /**
      *
      * @type {string}

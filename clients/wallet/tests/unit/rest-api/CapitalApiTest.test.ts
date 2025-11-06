@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { CapitalApi } from '../../../src/rest-api';
@@ -52,85 +53,87 @@ describe('CapitalApi', () => {
 
     describe('allCoinsInformation()', () => {
         it('should execute allCoinsInformation() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    coin: '1MBABYDOGE',
-                    depositAllEnable: true,
-                    withdrawAllEnable: true,
-                    name: '1M x BABYDOGE',
-                    free: '34941.1',
-                    locked: '0',
-                    freeze: '0',
-                    withdrawing: '0',
-                    ipoing: '0',
-                    ipoable: '0',
-                    storage: '0',
-                    isLegalMoney: false,
-                    trading: true,
-                    networkList: [
-                        {
-                            network: 'BSC',
-                            coin: '1MBABYDOGE',
-                            withdrawIntegerMultiple: '0.01',
-                            isDefault: false,
-                            depositEnable: true,
-                            withdrawEnable: true,
-                            depositDesc: '',
-                            withdrawDesc: '',
-                            specialTips: '',
-                            specialWithdrawTips: '',
-                            name: 'BNB Smart Chain (BEP20)',
-                            resetAddressStatus: false,
-                            addressRegex: '^(0x)[0-9A-Fa-f]{40}$',
-                            memoRegex: '',
-                            withdrawFee: '10',
-                            withdrawMin: '20',
-                            withdrawMax: '9999999999',
-                            withdrawInternalMin: '0.01',
-                            depositDust: '0.01',
-                            minConfirm: 5,
-                            unLockConfirm: 0,
-                            sameAddress: false,
-                            withdrawTag: false,
-                            estimatedArrivalTime: 1,
-                            busy: false,
-                            contractAddressUrl: 'https://bscscan.com/token/',
-                            contractAddress: '0xc748673057861a797275cd8a068abb95a902e8de',
-                            denomination: 1000000,
-                        },
-                        {
-                            network: 'ETH',
-                            coin: '1MBABYDOGE',
-                            withdrawIntegerMultiple: '0.01',
-                            isDefault: true,
-                            depositEnable: true,
-                            withdrawEnable: true,
-                            depositDesc: '',
-                            withdrawDesc: '',
-                            specialTips: '',
-                            specialWithdrawTips: '',
-                            name: 'Ethereum (ERC20)',
-                            resetAddressStatus: false,
-                            addressRegex: '^(0x)[0-9A-Fa-f]{40}$',
-                            memoRegex: '',
-                            withdrawFee: '1511',
-                            withdrawMin: '3022',
-                            withdrawMax: '9999999999',
-                            withdrawInternalMin: '0.01',
-                            depositDust: '0.01',
-                            minConfirm: 6,
-                            unLockConfirm: 64,
-                            sameAddress: false,
-                            withdrawTag: false,
-                            estimatedArrivalTime: 2,
-                            busy: false,
-                            contractAddressUrl: 'https://etherscan.io/address/',
-                            contractAddress: '0xac57de9c1a09fec648e93eb98875b212db0d460b',
-                            denomination: 1000000,
-                        },
-                    ],
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        coin: '1MBABYDOGE',
+                        depositAllEnable: true,
+                        withdrawAllEnable: true,
+                        name: '1M x BABYDOGE',
+                        free: '34941.1',
+                        locked: '0',
+                        freeze: '0',
+                        withdrawing: '0',
+                        ipoing: '0',
+                        ipoable: '0',
+                        storage: '0',
+                        isLegalMoney: false,
+                        trading: true,
+                        networkList: [
+                            {
+                                network: 'BSC',
+                                coin: '1MBABYDOGE',
+                                withdrawIntegerMultiple: '0.01',
+                                isDefault: false,
+                                depositEnable: true,
+                                withdrawEnable: true,
+                                depositDesc: '',
+                                withdrawDesc: '',
+                                specialTips: '',
+                                specialWithdrawTips: '',
+                                name: 'BNB Smart Chain (BEP20)',
+                                resetAddressStatus: false,
+                                addressRegex: '^(0x)[0-9A-Fa-f]{40}$',
+                                memoRegex: '',
+                                withdrawFee: '10',
+                                withdrawMin: '20',
+                                withdrawMax: '9999999999',
+                                withdrawInternalMin: '0.01',
+                                depositDust: '0.01',
+                                minConfirm: 5,
+                                unLockConfirm: 0,
+                                sameAddress: false,
+                                withdrawTag: false,
+                                estimatedArrivalTime: 1,
+                                busy: false,
+                                contractAddressUrl: 'https://bscscan.com/token/',
+                                contractAddress: '0xc748673057861a797275cd8a068abb95a902e8de',
+                                denomination: 1000000,
+                            },
+                            {
+                                network: 'ETH',
+                                coin: '1MBABYDOGE',
+                                withdrawIntegerMultiple: '0.01',
+                                isDefault: true,
+                                depositEnable: true,
+                                withdrawEnable: true,
+                                depositDesc: '',
+                                withdrawDesc: '',
+                                specialTips: '',
+                                specialWithdrawTips: '',
+                                name: 'Ethereum (ERC20)',
+                                resetAddressStatus: false,
+                                addressRegex: '^(0x)[0-9A-Fa-f]{40}$',
+                                memoRegex: '',
+                                withdrawFee: '1511',
+                                withdrawMin: '3022',
+                                withdrawMax: '9999999999',
+                                withdrawInternalMin: '0.01',
+                                depositDust: '0.01',
+                                minConfirm: 6,
+                                unLockConfirm: 64,
+                                sameAddress: false,
+                                withdrawTag: false,
+                                estimatedArrivalTime: 2,
+                                busy: false,
+                                contractAddressUrl: 'https://etherscan.io/address/',
+                                contractAddress: '0xac57de9c1a09fec648e93eb98875b212db0d460b',
+                                denomination: 1000000,
+                            },
+                        ],
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'allCoinsInformation').mockReturnValue(
                 Promise.resolve({
@@ -151,85 +154,87 @@ describe('CapitalApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    coin: '1MBABYDOGE',
-                    depositAllEnable: true,
-                    withdrawAllEnable: true,
-                    name: '1M x BABYDOGE',
-                    free: '34941.1',
-                    locked: '0',
-                    freeze: '0',
-                    withdrawing: '0',
-                    ipoing: '0',
-                    ipoable: '0',
-                    storage: '0',
-                    isLegalMoney: false,
-                    trading: true,
-                    networkList: [
-                        {
-                            network: 'BSC',
-                            coin: '1MBABYDOGE',
-                            withdrawIntegerMultiple: '0.01',
-                            isDefault: false,
-                            depositEnable: true,
-                            withdrawEnable: true,
-                            depositDesc: '',
-                            withdrawDesc: '',
-                            specialTips: '',
-                            specialWithdrawTips: '',
-                            name: 'BNB Smart Chain (BEP20)',
-                            resetAddressStatus: false,
-                            addressRegex: '^(0x)[0-9A-Fa-f]{40}$',
-                            memoRegex: '',
-                            withdrawFee: '10',
-                            withdrawMin: '20',
-                            withdrawMax: '9999999999',
-                            withdrawInternalMin: '0.01',
-                            depositDust: '0.01',
-                            minConfirm: 5,
-                            unLockConfirm: 0,
-                            sameAddress: false,
-                            withdrawTag: false,
-                            estimatedArrivalTime: 1,
-                            busy: false,
-                            contractAddressUrl: 'https://bscscan.com/token/',
-                            contractAddress: '0xc748673057861a797275cd8a068abb95a902e8de',
-                            denomination: 1000000,
-                        },
-                        {
-                            network: 'ETH',
-                            coin: '1MBABYDOGE',
-                            withdrawIntegerMultiple: '0.01',
-                            isDefault: true,
-                            depositEnable: true,
-                            withdrawEnable: true,
-                            depositDesc: '',
-                            withdrawDesc: '',
-                            specialTips: '',
-                            specialWithdrawTips: '',
-                            name: 'Ethereum (ERC20)',
-                            resetAddressStatus: false,
-                            addressRegex: '^(0x)[0-9A-Fa-f]{40}$',
-                            memoRegex: '',
-                            withdrawFee: '1511',
-                            withdrawMin: '3022',
-                            withdrawMax: '9999999999',
-                            withdrawInternalMin: '0.01',
-                            depositDust: '0.01',
-                            minConfirm: 6,
-                            unLockConfirm: 64,
-                            sameAddress: false,
-                            withdrawTag: false,
-                            estimatedArrivalTime: 2,
-                            busy: false,
-                            contractAddressUrl: 'https://etherscan.io/address/',
-                            contractAddress: '0xac57de9c1a09fec648e93eb98875b212db0d460b',
-                            denomination: 1000000,
-                        },
-                    ],
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        coin: '1MBABYDOGE',
+                        depositAllEnable: true,
+                        withdrawAllEnable: true,
+                        name: '1M x BABYDOGE',
+                        free: '34941.1',
+                        locked: '0',
+                        freeze: '0',
+                        withdrawing: '0',
+                        ipoing: '0',
+                        ipoable: '0',
+                        storage: '0',
+                        isLegalMoney: false,
+                        trading: true,
+                        networkList: [
+                            {
+                                network: 'BSC',
+                                coin: '1MBABYDOGE',
+                                withdrawIntegerMultiple: '0.01',
+                                isDefault: false,
+                                depositEnable: true,
+                                withdrawEnable: true,
+                                depositDesc: '',
+                                withdrawDesc: '',
+                                specialTips: '',
+                                specialWithdrawTips: '',
+                                name: 'BNB Smart Chain (BEP20)',
+                                resetAddressStatus: false,
+                                addressRegex: '^(0x)[0-9A-Fa-f]{40}$',
+                                memoRegex: '',
+                                withdrawFee: '10',
+                                withdrawMin: '20',
+                                withdrawMax: '9999999999',
+                                withdrawInternalMin: '0.01',
+                                depositDust: '0.01',
+                                minConfirm: 5,
+                                unLockConfirm: 0,
+                                sameAddress: false,
+                                withdrawTag: false,
+                                estimatedArrivalTime: 1,
+                                busy: false,
+                                contractAddressUrl: 'https://bscscan.com/token/',
+                                contractAddress: '0xc748673057861a797275cd8a068abb95a902e8de',
+                                denomination: 1000000,
+                            },
+                            {
+                                network: 'ETH',
+                                coin: '1MBABYDOGE',
+                                withdrawIntegerMultiple: '0.01',
+                                isDefault: true,
+                                depositEnable: true,
+                                withdrawEnable: true,
+                                depositDesc: '',
+                                withdrawDesc: '',
+                                specialTips: '',
+                                specialWithdrawTips: '',
+                                name: 'Ethereum (ERC20)',
+                                resetAddressStatus: false,
+                                addressRegex: '^(0x)[0-9A-Fa-f]{40}$',
+                                memoRegex: '',
+                                withdrawFee: '1511',
+                                withdrawMin: '3022',
+                                withdrawMax: '9999999999',
+                                withdrawInternalMin: '0.01',
+                                depositDust: '0.01',
+                                minConfirm: 6,
+                                unLockConfirm: 64,
+                                sameAddress: false,
+                                withdrawTag: false,
+                                estimatedArrivalTime: 2,
+                                busy: false,
+                                contractAddressUrl: 'https://etherscan.io/address/',
+                                contractAddress: '0xac57de9c1a09fec648e93eb98875b212db0d460b',
+                                denomination: 1000000,
+                            },
+                        ],
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'allCoinsInformation').mockReturnValue(
                 Promise.resolve({
@@ -267,12 +272,14 @@ describe('CapitalApi', () => {
                 coin: 'coin_example',
             };
 
-            mockResponse = {
-                address: '1HPn8Rx2y6nNSfagQBKy27GB99Vbzg89wv',
-                coin: 'BTC',
-                tag: '',
-                url: 'https://btc.com/1HPn8Rx2y6nNSfagQBKy27GB99Vbzg89wv',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    address: '1HPn8Rx2y6nNSfagQBKy27GB99Vbzg89wv',
+                    coin: 'BTC',
+                    tag: '',
+                    url: 'https://btc.com/1HPn8Rx2y6nNSfagQBKy27GB99Vbzg89wv',
+                })
+            );
 
             const spy = jest.spyOn(client, 'depositAddress').mockReturnValue(
                 Promise.resolve({
@@ -296,12 +303,14 @@ describe('CapitalApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                address: '1HPn8Rx2y6nNSfagQBKy27GB99Vbzg89wv',
-                coin: 'BTC',
-                tag: '',
-                url: 'https://btc.com/1HPn8Rx2y6nNSfagQBKy27GB99Vbzg89wv',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    address: '1HPn8Rx2y6nNSfagQBKy27GB99Vbzg89wv',
+                    coin: 'BTC',
+                    tag: '',
+                    url: 'https://btc.com/1HPn8Rx2y6nNSfagQBKy27GB99Vbzg89wv',
+                })
+            );
 
             const spy = jest.spyOn(client, 'depositAddress').mockReturnValue(
                 Promise.resolve({
@@ -351,43 +360,45 @@ describe('CapitalApi', () => {
 
     describe('depositHistory()', () => {
         it('should execute depositHistory() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    id: '769800519366885376',
-                    amount: '0.001',
-                    coin: 'BNB',
-                    network: 'BNB',
-                    status: 1,
-                    address: 'bnb136ns6lfw4zs5hg4n85vdthaad7hq5m4gtkgf23',
-                    addressTag: '101764890',
-                    txId: '98A3EA560C6B3336D348B6C83F0F95ECE4F1F5919E94BD006E5BF3BF264FACFC',
-                    insertTime: 1661493146000,
-                    completeTime: 1661493146000,
-                    transferType: 0,
-                    confirmTimes: '1/1',
-                    unlockConfirm: 0,
-                    walletType: 0,
-                    travelRuleStatus: 0,
-                },
-                {
-                    id: '769754833590042625',
-                    amount: '0.50000000',
-                    coin: 'IOTA',
-                    network: 'IOTA',
-                    status: 1,
-                    address:
-                        'SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW',
-                    addressTag: '',
-                    txId: 'ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999',
-                    insertTime: 1599620082000,
-                    completeTime: 1661493146000,
-                    transferType: 0,
-                    confirmTimes: '1/1',
-                    unlockConfirm: 0,
-                    walletType: 0,
-                    travelRuleStatus: 1,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        id: '769800519366885376',
+                        amount: '0.001',
+                        coin: 'BNB',
+                        network: 'BNB',
+                        status: 1,
+                        address: 'bnb136ns6lfw4zs5hg4n85vdthaad7hq5m4gtkgf23',
+                        addressTag: '101764890',
+                        txId: '98A3EA560C6B3336D348B6C83F0F95ECE4F1F5919E94BD006E5BF3BF264FACFC',
+                        insertTime: 1661493146000,
+                        completeTime: 1661493146000,
+                        transferType: 0,
+                        confirmTimes: '1/1',
+                        unlockConfirm: 0,
+                        walletType: 0,
+                        travelRuleStatus: 0,
+                    },
+                    {
+                        id: '769754833590042625',
+                        amount: '0.50000000',
+                        coin: 'IOTA',
+                        network: 'IOTA',
+                        status: 1,
+                        address:
+                            'SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW',
+                        addressTag: '',
+                        txId: 'ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999',
+                        insertTime: 1599620082000,
+                        completeTime: 1661493146000,
+                        transferType: 0,
+                        confirmTimes: '1/1',
+                        unlockConfirm: 0,
+                        walletType: 0,
+                        travelRuleStatus: 1,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'depositHistory').mockReturnValue(
                 Promise.resolve({
@@ -416,43 +427,45 @@ describe('CapitalApi', () => {
                 txId: '1',
             };
 
-            mockResponse = [
-                {
-                    id: '769800519366885376',
-                    amount: '0.001',
-                    coin: 'BNB',
-                    network: 'BNB',
-                    status: 1,
-                    address: 'bnb136ns6lfw4zs5hg4n85vdthaad7hq5m4gtkgf23',
-                    addressTag: '101764890',
-                    txId: '98A3EA560C6B3336D348B6C83F0F95ECE4F1F5919E94BD006E5BF3BF264FACFC',
-                    insertTime: 1661493146000,
-                    completeTime: 1661493146000,
-                    transferType: 0,
-                    confirmTimes: '1/1',
-                    unlockConfirm: 0,
-                    walletType: 0,
-                    travelRuleStatus: 0,
-                },
-                {
-                    id: '769754833590042625',
-                    amount: '0.50000000',
-                    coin: 'IOTA',
-                    network: 'IOTA',
-                    status: 1,
-                    address:
-                        'SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW',
-                    addressTag: '',
-                    txId: 'ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999',
-                    insertTime: 1599620082000,
-                    completeTime: 1661493146000,
-                    transferType: 0,
-                    confirmTimes: '1/1',
-                    unlockConfirm: 0,
-                    walletType: 0,
-                    travelRuleStatus: 1,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        id: '769800519366885376',
+                        amount: '0.001',
+                        coin: 'BNB',
+                        network: 'BNB',
+                        status: 1,
+                        address: 'bnb136ns6lfw4zs5hg4n85vdthaad7hq5m4gtkgf23',
+                        addressTag: '101764890',
+                        txId: '98A3EA560C6B3336D348B6C83F0F95ECE4F1F5919E94BD006E5BF3BF264FACFC',
+                        insertTime: 1661493146000,
+                        completeTime: 1661493146000,
+                        transferType: 0,
+                        confirmTimes: '1/1',
+                        unlockConfirm: 0,
+                        walletType: 0,
+                        travelRuleStatus: 0,
+                    },
+                    {
+                        id: '769754833590042625',
+                        amount: '0.50000000',
+                        coin: 'IOTA',
+                        network: 'IOTA',
+                        status: 1,
+                        address:
+                            'SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW',
+                        addressTag: '',
+                        txId: 'ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999',
+                        insertTime: 1599620082000,
+                        completeTime: 1661493146000,
+                        transferType: 0,
+                        confirmTimes: '1/1',
+                        unlockConfirm: 0,
+                        walletType: 0,
+                        travelRuleStatus: 1,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'depositHistory').mockReturnValue(
                 Promise.resolve({
@@ -490,26 +503,28 @@ describe('CapitalApi', () => {
                 coin: 'coin_example',
             };
 
-            mockResponse = [
-                {
-                    coin: 'ETH',
-                    address: '0xD316E95Fd9E8E237Cb11f8200Babbc5D8D177BA4',
-                    tag: '',
-                    isDefault: 0,
-                },
-                {
-                    coin: 'ETH',
-                    address: '0xD316E95Fd9E8E237Cb11f8200Babbc5D8D177BA4',
-                    tag: '',
-                    isDefault: 0,
-                },
-                {
-                    coin: 'ETH',
-                    address: '0x00003ada75e7da97ba0db2fcde72131f712455e2',
-                    tag: '',
-                    isDefault: 1,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        coin: 'ETH',
+                        address: '0xD316E95Fd9E8E237Cb11f8200Babbc5D8D177BA4',
+                        tag: '',
+                        isDefault: 0,
+                    },
+                    {
+                        coin: 'ETH',
+                        address: '0xD316E95Fd9E8E237Cb11f8200Babbc5D8D177BA4',
+                        tag: '',
+                        isDefault: 0,
+                    },
+                    {
+                        coin: 'ETH',
+                        address: '0x00003ada75e7da97ba0db2fcde72131f712455e2',
+                        tag: '',
+                        isDefault: 1,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'fetchDepositAddressListWithNetwork').mockReturnValue(
                 Promise.resolve({
@@ -531,26 +546,28 @@ describe('CapitalApi', () => {
                 network: 'network_example',
             };
 
-            mockResponse = [
-                {
-                    coin: 'ETH',
-                    address: '0xD316E95Fd9E8E237Cb11f8200Babbc5D8D177BA4',
-                    tag: '',
-                    isDefault: 0,
-                },
-                {
-                    coin: 'ETH',
-                    address: '0xD316E95Fd9E8E237Cb11f8200Babbc5D8D177BA4',
-                    tag: '',
-                    isDefault: 0,
-                },
-                {
-                    coin: 'ETH',
-                    address: '0x00003ada75e7da97ba0db2fcde72131f712455e2',
-                    tag: '',
-                    isDefault: 1,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        coin: 'ETH',
+                        address: '0xD316E95Fd9E8E237Cb11f8200Babbc5D8D177BA4',
+                        tag: '',
+                        isDefault: 0,
+                    },
+                    {
+                        coin: 'ETH',
+                        address: '0xD316E95Fd9E8E237Cb11f8200Babbc5D8D177BA4',
+                        tag: '',
+                        isDefault: 0,
+                    },
+                    {
+                        coin: 'ETH',
+                        address: '0x00003ada75e7da97ba0db2fcde72131f712455e2',
+                        tag: '',
+                        isDefault: 1,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'fetchDepositAddressListWithNetwork').mockReturnValue(
                 Promise.resolve({
@@ -604,18 +621,20 @@ describe('CapitalApi', () => {
 
     describe('fetchWithdrawAddressList()', () => {
         it('should execute fetchWithdrawAddressList() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    address: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa',
-                    addressTag: '',
-                    coin: 'BTC',
-                    name: 'Satoshi',
-                    network: 'BTC',
-                    origin: 'bla',
-                    originType: 'others',
-                    whiteStatus: true,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        address: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa',
+                        addressTag: '',
+                        coin: 'BTC',
+                        name: 'Satoshi',
+                        network: 'BTC',
+                        origin: 'bla',
+                        originType: 'others',
+                        whiteStatus: true,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'fetchWithdrawAddressList').mockReturnValue(
                 Promise.resolve({
@@ -651,7 +670,7 @@ describe('CapitalApi', () => {
 
     describe('fetchWithdrawQuota()', () => {
         it('should execute fetchWithdrawQuota() successfully with required parameters only', async () => {
-            mockResponse = { wdQuota: '10000', usedWdQuota: '1000' };
+            mockResponse = JSONParse(JSONStringify({ wdQuota: '10000', usedWdQuota: '1000' }));
 
             const spy = jest.spyOn(client, 'fetchWithdrawQuota').mockReturnValue(
                 Promise.resolve({
@@ -685,7 +704,9 @@ describe('CapitalApi', () => {
 
     describe('oneClickArrivalDepositApply()', () => {
         it('should execute oneClickArrivalDepositApply() successfully with required parameters only', async () => {
-            mockResponse = { code: '000000', message: 'success', data: true, success: true };
+            mockResponse = JSONParse(
+                JSONStringify({ code: '000000', message: 'success', data: true, success: true })
+            );
 
             const spy = jest.spyOn(client, 'oneClickArrivalDepositApply').mockReturnValue(
                 Promise.resolve({
@@ -709,7 +730,9 @@ describe('CapitalApi', () => {
                 subUserId: 1,
             };
 
-            mockResponse = { code: '000000', message: 'success', data: true, success: true };
+            mockResponse = JSONParse(
+                JSONStringify({ code: '000000', message: 'success', data: true, success: true })
+            );
 
             const spy = jest.spyOn(client, 'oneClickArrivalDepositApply').mockReturnValue(
                 Promise.resolve({
@@ -751,7 +774,7 @@ describe('CapitalApi', () => {
                 amount: 1.0,
             };
 
-            mockResponse = { id: '7213fea8e94b4a5593d507237e5a555b' };
+            mockResponse = JSONParse(JSONStringify({ id: '7213fea8e94b4a5593d507237e5a555b' }));
 
             const spy = jest.spyOn(client, 'withdraw').mockReturnValue(
                 Promise.resolve({
@@ -781,7 +804,7 @@ describe('CapitalApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { id: '7213fea8e94b4a5593d507237e5a555b' };
+            mockResponse = JSONParse(JSONStringify({ id: '7213fea8e94b4a5593d507237e5a555b' }));
 
             const spy = jest.spyOn(client, 'withdraw').mockReturnValue(
                 Promise.resolve({
@@ -863,43 +886,45 @@ describe('CapitalApi', () => {
 
     describe('withdrawHistory()', () => {
         it('should execute withdrawHistory() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    id: 'b6ae22b3aa844210a7041aee7589627c',
-                    amount: '8.91000000',
-                    transactionFee: '0.004',
-                    coin: 'USDT',
-                    status: 6,
-                    address: '0x94df8b352de7f46f64b01d3666bf6e936e44ce60',
-                    txId: '0xb5ef8c13b968a406cc62a93a8bd80f9e9a906ef1b3fcf20a2e48573c17659268',
-                    applyTime: '2019-10-12 11:12:02',
-                    network: 'ETH',
-                    transferType: 0,
-                    withdrawOrderId: 'WITHDRAWtest123',
-                    info: 'The address is not valid. Please confirm with the recipient',
-                    confirmNo: 3,
-                    walletType: 1,
-                    txKey: '',
-                    completeTime: '2023-03-23 16:52:41',
-                },
-                {
-                    id: '156ec387f49b41df8724fa744fa82719',
-                    amount: '0.00150000',
-                    transactionFee: '0.004',
-                    coin: 'BTC',
-                    status: 6,
-                    address: '1FZdVHtiBqMrWdjPyRPULCUceZPJ2WLCsB',
-                    txId: '60fd9007ebfddc753455f95fafa808c4302c836e4d1eebc5a132c36c1d8ac354',
-                    applyTime: '2019-09-24 12:43:45',
-                    network: 'BTC',
-                    transferType: 0,
-                    info: '',
-                    confirmNo: 2,
-                    walletType: 1,
-                    txKey: '',
-                    completeTime: '2023-03-23 16:52:41',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        id: 'b6ae22b3aa844210a7041aee7589627c',
+                        amount: '8.91000000',
+                        transactionFee: '0.004',
+                        coin: 'USDT',
+                        status: 6,
+                        address: '0x94df8b352de7f46f64b01d3666bf6e936e44ce60',
+                        txId: '0xb5ef8c13b968a406cc62a93a8bd80f9e9a906ef1b3fcf20a2e48573c17659268',
+                        applyTime: '2019-10-12 11:12:02',
+                        network: 'ETH',
+                        transferType: 0,
+                        withdrawOrderId: 'WITHDRAWtest123',
+                        info: 'The address is not valid. Please confirm with the recipient',
+                        confirmNo: 3,
+                        walletType: 1,
+                        txKey: '',
+                        completeTime: '2023-03-23 16:52:41',
+                    },
+                    {
+                        id: '156ec387f49b41df8724fa744fa82719',
+                        amount: '0.00150000',
+                        transactionFee: '0.004',
+                        coin: 'BTC',
+                        status: 6,
+                        address: '1FZdVHtiBqMrWdjPyRPULCUceZPJ2WLCsB',
+                        txId: '60fd9007ebfddc753455f95fafa808c4302c836e4d1eebc5a132c36c1d8ac354',
+                        applyTime: '2019-09-24 12:43:45',
+                        network: 'BTC',
+                        transferType: 0,
+                        info: '',
+                        confirmNo: 2,
+                        walletType: 1,
+                        txKey: '',
+                        completeTime: '2023-03-23 16:52:41',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'withdrawHistory').mockReturnValue(
                 Promise.resolve({
@@ -928,43 +953,45 @@ describe('CapitalApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    id: 'b6ae22b3aa844210a7041aee7589627c',
-                    amount: '8.91000000',
-                    transactionFee: '0.004',
-                    coin: 'USDT',
-                    status: 6,
-                    address: '0x94df8b352de7f46f64b01d3666bf6e936e44ce60',
-                    txId: '0xb5ef8c13b968a406cc62a93a8bd80f9e9a906ef1b3fcf20a2e48573c17659268',
-                    applyTime: '2019-10-12 11:12:02',
-                    network: 'ETH',
-                    transferType: 0,
-                    withdrawOrderId: 'WITHDRAWtest123',
-                    info: 'The address is not valid. Please confirm with the recipient',
-                    confirmNo: 3,
-                    walletType: 1,
-                    txKey: '',
-                    completeTime: '2023-03-23 16:52:41',
-                },
-                {
-                    id: '156ec387f49b41df8724fa744fa82719',
-                    amount: '0.00150000',
-                    transactionFee: '0.004',
-                    coin: 'BTC',
-                    status: 6,
-                    address: '1FZdVHtiBqMrWdjPyRPULCUceZPJ2WLCsB',
-                    txId: '60fd9007ebfddc753455f95fafa808c4302c836e4d1eebc5a132c36c1d8ac354',
-                    applyTime: '2019-09-24 12:43:45',
-                    network: 'BTC',
-                    transferType: 0,
-                    info: '',
-                    confirmNo: 2,
-                    walletType: 1,
-                    txKey: '',
-                    completeTime: '2023-03-23 16:52:41',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        id: 'b6ae22b3aa844210a7041aee7589627c',
+                        amount: '8.91000000',
+                        transactionFee: '0.004',
+                        coin: 'USDT',
+                        status: 6,
+                        address: '0x94df8b352de7f46f64b01d3666bf6e936e44ce60',
+                        txId: '0xb5ef8c13b968a406cc62a93a8bd80f9e9a906ef1b3fcf20a2e48573c17659268',
+                        applyTime: '2019-10-12 11:12:02',
+                        network: 'ETH',
+                        transferType: 0,
+                        withdrawOrderId: 'WITHDRAWtest123',
+                        info: 'The address is not valid. Please confirm with the recipient',
+                        confirmNo: 3,
+                        walletType: 1,
+                        txKey: '',
+                        completeTime: '2023-03-23 16:52:41',
+                    },
+                    {
+                        id: '156ec387f49b41df8724fa744fa82719',
+                        amount: '0.00150000',
+                        transactionFee: '0.004',
+                        coin: 'BTC',
+                        status: 6,
+                        address: '1FZdVHtiBqMrWdjPyRPULCUceZPJ2WLCsB',
+                        txId: '60fd9007ebfddc753455f95fafa808c4302c836e4d1eebc5a132c36c1d8ac354',
+                        applyTime: '2019-09-24 12:43:45',
+                        network: 'BTC',
+                        transferType: 0,
+                        info: '',
+                        confirmNo: 2,
+                        walletType: 1,
+                        txKey: '',
+                        completeTime: '2023-03-23 16:52:41',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'withdrawHistory').mockReturnValue(
                 Promise.resolve({

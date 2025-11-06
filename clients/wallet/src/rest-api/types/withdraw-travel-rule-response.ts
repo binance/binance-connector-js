@@ -21,10 +21,10 @@
 export interface WithdrawTravelRuleResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof WithdrawTravelRuleResponse
      */
-    trId?: number;
+    trId?: number | bigint;
     /**
      *
      * @type {boolean}

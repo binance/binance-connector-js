@@ -21,10 +21,10 @@
 export interface SubmitDepositQuestionnaireTravelRuleResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SubmitDepositQuestionnaireTravelRuleResponse
      */
-    trId?: number;
+    trId?: number | bigint;
     /**
      *
      * @type {boolean}

@@ -26,10 +26,10 @@ import type { QueryUserUniversalTransferHistoryResponseRowsInner } from './query
 export interface QueryUserUniversalTransferHistoryResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUserUniversalTransferHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
     /**
      *
      * @type {Array<QueryUserUniversalTransferHistoryResponseRowsInner>}

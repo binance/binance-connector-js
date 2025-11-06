@@ -26,10 +26,10 @@ import type { QueryUserDelegationHistoryResponseRowsInner } from './query-user-d
 export interface QueryUserDelegationHistoryResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUserDelegationHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
     /**
      *
      * @type {Array<QueryUserDelegationHistoryResponseRowsInner>}

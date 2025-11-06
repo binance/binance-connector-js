@@ -32,8 +32,8 @@ export interface AssetDividendRecordResponse {
     rows?: Array<AssetDividendRecordResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetDividendRecordResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

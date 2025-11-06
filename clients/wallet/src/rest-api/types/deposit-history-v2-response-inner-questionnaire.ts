@@ -27,8 +27,8 @@ export interface DepositHistoryV2ResponseInnerQuestionnaire {
     vaspName?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DepositHistoryV2ResponseInnerQuestionnaire
      */
-    depositOriginator?: number;
+    depositOriginator?: number | bigint;
 }

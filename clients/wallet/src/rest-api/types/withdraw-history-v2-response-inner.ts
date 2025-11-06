@@ -27,10 +27,10 @@ export interface WithdrawHistoryV2ResponseInner {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof WithdrawHistoryV2ResponseInner
      */
-    trId?: number;
+    trId?: number | bigint;
     /**
      *
      * @type {string}
@@ -51,16 +51,16 @@ export interface WithdrawHistoryV2ResponseInner {
     coin?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof WithdrawHistoryV2ResponseInner
      */
-    withdrawalStatus?: number;
+    withdrawalStatus?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof WithdrawHistoryV2ResponseInner
      */
-    travelRuleStatus?: number;
+    travelRuleStatus?: number | bigint;
     /**
      *
      * @type {string}
@@ -93,10 +93,10 @@ export interface WithdrawHistoryV2ResponseInner {
     network?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof WithdrawHistoryV2ResponseInner
      */
-    transferType?: number;
+    transferType?: number | bigint;
     /**
      *
      * @type {string}
@@ -111,16 +111,16 @@ export interface WithdrawHistoryV2ResponseInner {
     info?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof WithdrawHistoryV2ResponseInner
      */
-    confirmNo?: number;
+    confirmNo?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof WithdrawHistoryV2ResponseInner
      */
-    walletType?: number;
+    walletType?: number | bigint;
     /**
      *
      * @type {string}

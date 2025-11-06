@@ -21,10 +21,10 @@
 export interface DustlogResponseUserAssetDribbletsInnerUserAssetDribbletDetailsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DustlogResponseUserAssetDribbletsInnerUserAssetDribbletDetailsInner
      */
-    transId?: number;
+    transId?: number | bigint;
     /**
      *
      * @type {string}
@@ -39,10 +39,10 @@ export interface DustlogResponseUserAssetDribbletsInnerUserAssetDribbletDetailsI
     amount?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DustlogResponseUserAssetDribbletsInnerUserAssetDribbletDetailsInner
      */
-    operateTime?: number;
+    operateTime?: number | bigint;
     /**
      *
      * @type {string}

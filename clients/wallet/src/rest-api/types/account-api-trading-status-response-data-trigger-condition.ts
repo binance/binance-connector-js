@@ -21,20 +21,20 @@
 export interface AccountApiTradingStatusResponseDataTriggerCondition {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiTradingStatusResponseDataTriggerCondition
      */
-    GCR?: number;
+    GCR?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiTradingStatusResponseDataTriggerCondition
      */
-    IFER?: number;
+    IFER?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiTradingStatusResponseDataTriggerCondition
      */
-    UFR?: number;
+    UFR?: number | bigint;
 }

@@ -32,10 +32,10 @@ export interface AccountApiTradingStatusResponseData {
     isLocked?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiTradingStatusResponseData
      */
-    plannedRecoverTime?: number;
+    plannedRecoverTime?: number | bigint;
     /**
      *
      * @type {AccountApiTradingStatusResponseDataTriggerCondition}
@@ -44,8 +44,8 @@ export interface AccountApiTradingStatusResponseData {
     triggerCondition?: AccountApiTradingStatusResponseDataTriggerCondition;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiTradingStatusResponseData
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

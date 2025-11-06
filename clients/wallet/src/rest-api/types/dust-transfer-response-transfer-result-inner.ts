@@ -33,10 +33,10 @@ export interface DustTransferResponseTransferResultInner {
     fromAsset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DustTransferResponseTransferResultInner
      */
-    operateTime?: number;
+    operateTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -45,10 +45,10 @@ export interface DustTransferResponseTransferResultInner {
     serviceChargeAmount?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DustTransferResponseTransferResultInner
      */
-    tranId?: number;
+    tranId?: number | bigint;
     /**
      *
      * @type {string}

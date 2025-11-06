@@ -39,8 +39,8 @@ export interface FetchDepositAddressListWithNetworkResponseInner {
     tag?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FetchDepositAddressListWithNetworkResponseInner
      */
-    isDefault?: number;
+    isDefault?: number | bigint;
 }

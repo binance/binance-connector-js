@@ -38,8 +38,8 @@ export interface DailyAccountSnapshotResponseSnapshotVosInner {
     type?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DailyAccountSnapshotResponseSnapshotVosInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

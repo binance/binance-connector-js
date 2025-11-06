@@ -175,6 +175,7 @@ export class RestAPI {
      *
      * @summary Account API Trading Status (USER_DATA)
      * @param {AccountApiTradingStatusRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<AccountApiTradingStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/account/Account-API-Trading-Status Binance API Documentation}
@@ -192,6 +193,7 @@ export class RestAPI {
      *
      * @summary Account info (USER_DATA)
      * @param {AccountInfoRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<AccountInfoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/account/Account-info Binance API Documentation}
@@ -209,6 +211,7 @@ export class RestAPI {
      *
      * @summary Account Status (USER_DATA)
      * @param {AccountStatusRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<AccountStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/account/Account-Status Binance API Documentation}
@@ -230,6 +233,7 @@ export class RestAPI {
      *
      * @summary Daily Account Snapshot (USER_DATA)
      * @param {DailyAccountSnapshotRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<DailyAccountSnapshotResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/account/daily-account-snapshoot Binance API Documentation}
@@ -246,6 +250,7 @@ export class RestAPI {
      *
      * @summary Disable Fast Withdraw Switch (USER_DATA)
      * @param {DisableFastWithdrawSwitchRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/account/Disable-Fast-Withdraw-Switch Binance API Documentation}
@@ -266,6 +271,7 @@ export class RestAPI {
      *
      * @summary Enable Fast Withdraw Switch (USER_DATA)
      * @param {EnableFastWithdrawSwitchRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/account/Enable-Fast-Withdraw-Switch Binance API Documentation}
@@ -283,6 +289,7 @@ export class RestAPI {
      *
      * @summary Get API Key Permission (USER_DATA)
      * @param {GetApiKeyPermissionRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetApiKeyPermissionResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/account/api-key-permission Binance API Documentation}
@@ -303,6 +310,7 @@ export class RestAPI {
      *
      * @summary Asset Detail (USER_DATA)
      * @param {AssetDetailRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<AssetDetailResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/asset/Asset-Detail Binance API Documentation}
@@ -323,6 +331,7 @@ export class RestAPI {
      *
      * @summary Asset Dividend Record (USER_DATA)
      * @param {AssetDividendRecordRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<AssetDividendRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/asset/assets-divided-record Binance API Documentation}
@@ -342,6 +351,7 @@ export class RestAPI {
      *
      * @summary Dust Transfer (USER_DATA)
      * @param {DustTransferRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<DustTransferResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/asset/Dust-Transfer Binance API Documentation}
@@ -362,6 +372,7 @@ export class RestAPI {
      *
      * @summary DustLog(USER_DATA)
      * @param {DustlogRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<DustlogResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/asset/dust-log Binance API Documentation}
@@ -380,6 +391,7 @@ export class RestAPI {
      *
      * @summary Funding Wallet (USER_DATA)
      * @param {FundingWalletRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<FundingWalletResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/asset/Funding-Wallet Binance API Documentation}
@@ -397,6 +409,7 @@ export class RestAPI {
      *
      * @summary Get Assets That Can Be Converted Into BNB (USER_DATA)
      * @param {GetAssetsThatCanBeConvertedIntoBnbRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetAssetsThatCanBeConvertedIntoBnbResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/asset/assets-can-convert-bnb Binance API Documentation}
@@ -417,6 +430,7 @@ export class RestAPI {
      *
      * @summary Get Cloud-Mining payment and refund history (USER_DATA)
      * @param {GetCloudMiningPaymentAndRefundHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetCloudMiningPaymentAndRefundHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/asset/cloud-mining-payment-and-refund-history Binance API Documentation}
@@ -433,6 +447,7 @@ export class RestAPI {
      * Weight: 100
      *
      * @summary Get Open Symbol List (MARKET_DATA)
+     *
      * @returns {Promise<RestApiResponse<GetOpenSymbolListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/asset/open-symbol-list Binance API Documentation}
@@ -450,6 +465,7 @@ export class RestAPI {
      *
      * @summary Query User Delegation History(For Master Account)(USER_DATA)
      * @param {QueryUserDelegationHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryUserDelegationHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/asset/query-user-delegation Binance API Documentation}
@@ -473,6 +489,7 @@ export class RestAPI {
      *
      * @summary Query User Universal Transfer History(USER_DATA)
      * @param {QueryUserUniversalTransferHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryUserUniversalTransferHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/asset/query-user-universal-transfer Binance API Documentation}
@@ -490,6 +507,7 @@ export class RestAPI {
      *
      * @summary Query User Wallet Balance (USER_DATA)
      * @param {QueryUserWalletBalanceRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryUserWalletBalanceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/asset/Query-User-Wallet-Balance Binance API Documentation}
@@ -509,6 +527,7 @@ export class RestAPI {
      *
      * @summary Toggle BNB Burn On Spot Trade And Margin Interest (USER_DATA)
      * @param {ToggleBnbBurnOnSpotTradeAndMarginInterestRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<ToggleBnbBurnOnSpotTradeAndMarginInterestResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/asset/Toggle-BNB-Burn-On-Spot-Trade-And-Margin-Interest Binance API Documentation}
@@ -526,6 +545,7 @@ export class RestAPI {
      *
      * @summary Trade Fee (USER_DATA)
      * @param {TradeFeeRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<TradeFeeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/asset/Trade-Fee Binance API Documentation}
@@ -544,6 +564,7 @@ export class RestAPI {
      *
      * @summary User Asset (USER_DATA)
      * @param {UserAssetRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<UserAssetResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/asset/user-assets Binance API Documentation}
@@ -596,6 +617,7 @@ export class RestAPI {
      *
      * @summary User Universal Transfer (USER_DATA)
      * @param {UserUniversalTransferRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<UserUniversalTransferResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/asset/User-Universal-Transfer Binance API Documentation}
@@ -613,6 +635,7 @@ export class RestAPI {
      *
      * @summary All Coins\' Information (USER_DATA)
      * @param {AllCoinsInformationRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<AllCoinsInformationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/capital/all-coins-info Binance API Documentation}
@@ -634,6 +657,7 @@ export class RestAPI {
      *
      * @summary Deposit Address(supporting network) (USER_DATA)
      * @param {DepositAddressRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<DepositAddressResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/capital/deposite-address Binance API Documentation}
@@ -655,6 +679,7 @@ export class RestAPI {
      *
      * @summary Deposit History (supporting network) (USER_DATA)
      * @param {DepositHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<DepositHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/capital/deposite-history Binance API Documentation}
@@ -676,6 +701,7 @@ export class RestAPI {
      *
      * @summary Fetch deposit address list with network(USER_DATA)
      * @param {FetchDepositAddressListWithNetworkRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<FetchDepositAddressListWithNetworkResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/capital/Fetch-deposit-address-list-with-network Binance API Documentation}
@@ -692,6 +718,7 @@ export class RestAPI {
      * Weight: 10
      *
      * @summary Fetch withdraw address list (USER_DATA)
+     *
      * @returns {Promise<RestApiResponse<FetchWithdrawAddressListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/capital/fetch-withdraw-address Binance API Documentation}
@@ -706,6 +733,7 @@ export class RestAPI {
      * Weight: 10
      *
      * @summary Fetch withdraw quota (USER_DATA)
+     *
      * @returns {Promise<RestApiResponse<FetchWithdrawQuotaResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/capital/Fetch-withdraw-quota Binance API Documentation}
@@ -723,6 +751,7 @@ export class RestAPI {
      *
      * @summary One click arrival deposit apply (for expired address deposit) (USER_DATA)
      * @param {OneClickArrivalDepositApplyRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<OneClickArrivalDepositApplyResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/capital/one-click-arrival-deposite-apply Binance API Documentation}
@@ -745,6 +774,7 @@ export class RestAPI {
      *
      * @summary Withdraw(USER_DATA)
      * @param {WithdrawRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<WithdrawResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/capital/Withdraw Binance API Documentation}
@@ -768,6 +798,7 @@ export class RestAPI {
      *
      * @summary Withdraw History (supporting network) (USER_DATA)
      * @param {WithdrawHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<WithdrawHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/capital/Withdraw-History Binance API Documentation}
@@ -785,6 +816,7 @@ export class RestAPI {
      *
      * @summary Get symbols delist schedule for spot (MARKET_DATA)
      * @param {GetSymbolsDelistScheduleForSpotRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetSymbolsDelistScheduleForSpotResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/others/delist-schedule Binance API Documentation}
@@ -801,6 +833,7 @@ export class RestAPI {
      * Weight: 1
      *
      * @summary System Status (System)
+     *
      * @returns {Promise<RestApiResponse<SystemStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/others/System-Status Binance API Documentation}
@@ -821,6 +854,7 @@ export class RestAPI {
      *
      * @summary Broker Withdraw (for brokers of local entities that require travel rule) (USER_DATA)
      * @param {BrokerWithdrawRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<BrokerWithdrawResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/travel-rule/Broker-Withdraw Binance API Documentation}
@@ -838,6 +872,7 @@ export class RestAPI {
      *
      * @summary Check Questionnaire Requirements (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {CheckQuestionnaireRequirementsRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<CheckQuestionnaireRequirementsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/travel-rule/questionnaire-requirements Binance API Documentation}
@@ -858,6 +893,7 @@ export class RestAPI {
      *
      * @summary Deposit History (for local entities that required travel rule) (supporting network) (USER_DATA)
      * @param {DepositHistoryTravelRuleRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<DepositHistoryTravelRuleResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/travel-rule/Deposit-History Binance API Documentation}
@@ -878,6 +914,7 @@ export class RestAPI {
      *
      * @summary Deposit History V2 (for local entities that required travel rule) (supporting network) (USER_DATA)
      * @param {DepositHistoryV2Request} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<DepositHistoryV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/travel-rule/Deposit-History-V2 Binance API Documentation}
@@ -895,6 +932,7 @@ export class RestAPI {
      *
      * @summary Fetch address verification list (USER_DATA)
      * @param {FetchAddressVerificationListRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<FetchAddressVerificationListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/travel-rule/address-verification-list Binance API Documentation}
@@ -917,6 +955,7 @@ export class RestAPI {
      *
      * @summary Submit Deposit Questionnaire (For local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {SubmitDepositQuestionnaireRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<SubmitDepositQuestionnaireResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/travel-rule/deposit-provide-info Binance API Documentation}
@@ -939,6 +978,7 @@ export class RestAPI {
      *
      * @summary Submit Deposit Questionnaire (For local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {SubmitDepositQuestionnaireTravelRuleRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<SubmitDepositQuestionnaireTravelRuleResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/travel-rule/deposit-provide-info Binance API Documentation}
@@ -956,6 +996,7 @@ export class RestAPI {
      *
      * @summary VASP list (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {VaspListRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<VaspListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/travel-rule/onboarded-vasp-list Binance API Documentation}
@@ -975,6 +1016,7 @@ export class RestAPI {
      *
      * @summary Withdraw History (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {WithdrawHistoryV1Request} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<WithdrawHistoryV1Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/travel-rule/Withdraw-History Binance API Documentation}
@@ -1002,6 +1044,7 @@ export class RestAPI {
      *
      * @summary Withdraw History V2 (for local entities that require travel rule) (supporting network) (USER_DATA)
      * @param {WithdrawHistoryV2Request} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<WithdrawHistoryV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/travel-rule/Withdraw-History-V2 Binance API Documentation}
@@ -1024,6 +1067,7 @@ export class RestAPI {
      *
      * @summary Withdraw (for local entities that require travel rule) (USER_DATA)
      * @param {WithdrawTravelRuleRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<WithdrawTravelRuleResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/wallet/travel-rule/Withdraw Binance API Documentation}

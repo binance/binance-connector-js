@@ -45,10 +45,10 @@ export interface DepositHistoryResponseInner {
     network?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DepositHistoryResponseInner
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {string}
@@ -69,22 +69,22 @@ export interface DepositHistoryResponseInner {
     txId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DepositHistoryResponseInner
      */
-    insertTime?: number;
+    insertTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DepositHistoryResponseInner
      */
-    completeTime?: number;
+    completeTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DepositHistoryResponseInner
      */
-    transferType?: number;
+    transferType?: number | bigint;
     /**
      *
      * @type {string}
@@ -93,20 +93,20 @@ export interface DepositHistoryResponseInner {
     confirmTimes?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DepositHistoryResponseInner
      */
-    unlockConfirm?: number;
+    unlockConfirm?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DepositHistoryResponseInner
      */
-    walletType?: number;
+    walletType?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DepositHistoryResponseInner
      */
-    travelRuleStatus?: number;
+    travelRuleStatus?: number | bigint;
 }

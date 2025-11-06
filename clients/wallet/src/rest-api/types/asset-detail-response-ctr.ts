@@ -33,10 +33,10 @@ export interface AssetDetailResponseCTR {
     depositStatus?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetDetailResponseCTR
      */
-    withdrawFee?: number;
+    withdrawFee?: number | bigint;
     /**
      *
      * @type {boolean}

@@ -26,10 +26,10 @@ import type { DailyAccountSnapshotResponseSnapshotVosInner } from './daily-accou
 export interface DailyAccountSnapshotResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DailyAccountSnapshotResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}

@@ -21,10 +21,10 @@
 export interface AssetDividendRecordResponseRowsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetDividendRecordResponseRowsInner
      */
-    id?: number;
+    id?: number | bigint;
     /**
      *
      * @type {string}
@@ -39,10 +39,10 @@ export interface AssetDividendRecordResponseRowsInner {
     asset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetDividendRecordResponseRowsInner
      */
-    divTime?: number;
+    divTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -51,8 +51,8 @@ export interface AssetDividendRecordResponseRowsInner {
     enInfo?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetDividendRecordResponseRowsInner
      */
-    tranId?: number;
+    tranId?: number | bigint;
 }

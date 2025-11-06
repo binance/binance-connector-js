@@ -26,10 +26,10 @@ import type { GetCloudMiningPaymentAndRefundHistoryResponseRowsInner } from './g
 export interface GetCloudMiningPaymentAndRefundHistoryResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetCloudMiningPaymentAndRefundHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
     /**
      *
      * @type {Array<GetCloudMiningPaymentAndRefundHistoryResponseRowsInner>}

@@ -21,16 +21,16 @@
 export interface DepositHistoryTravelRuleResponseInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DepositHistoryTravelRuleResponseInner
      */
-    trId?: number;
+    trId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DepositHistoryTravelRuleResponseInner
      */
-    tranId?: number;
+    tranId?: number | bigint;
     /**
      *
      * @type {string}
@@ -51,16 +51,16 @@ export interface DepositHistoryTravelRuleResponseInner {
     network?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DepositHistoryTravelRuleResponseInner
      */
-    depositStatus?: number;
+    depositStatus?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DepositHistoryTravelRuleResponseInner
      */
-    travelRuleStatus?: number;
+    travelRuleStatus?: number | bigint;
     /**
      *
      * @type {string}
@@ -81,16 +81,16 @@ export interface DepositHistoryTravelRuleResponseInner {
     txId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DepositHistoryTravelRuleResponseInner
      */
-    insertTime?: number;
+    insertTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DepositHistoryTravelRuleResponseInner
      */
-    transferType?: number;
+    transferType?: number | bigint;
     /**
      *
      * @type {string}
@@ -99,16 +99,16 @@ export interface DepositHistoryTravelRuleResponseInner {
     confirmTimes?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DepositHistoryTravelRuleResponseInner
      */
-    unlockConfirm?: number;
+    unlockConfirm?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DepositHistoryTravelRuleResponseInner
      */
-    walletType?: number;
+    walletType?: number | bigint;
     /**
      *
      * @type {boolean}

@@ -21,10 +21,10 @@
 export interface SubmitDepositQuestionnaireResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SubmitDepositQuestionnaireResponse
      */
-    trId?: number;
+    trId?: number | bigint;
     /**
      *
      * @type {boolean}

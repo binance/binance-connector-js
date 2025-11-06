@@ -26,10 +26,10 @@ import type { DustlogResponseUserAssetDribbletsInner } from './dustlog-response-
 export interface DustlogResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DustlogResponse
      */
-    total?: number;
+    total?: number | bigint;
     /**
      *
      * @type {Array<DustlogResponseUserAssetDribbletsInner>}

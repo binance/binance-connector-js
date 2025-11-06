@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { TravelRuleApi } from '../../../src/rest-api';
@@ -68,7 +69,9 @@ describe('TravelRuleApi', () => {
                 signature: 'signature_example',
             };
 
-            mockResponse = { trId: 123456, accpted: true, info: 'Withdraw request accepted' };
+            mockResponse = JSONParse(
+                JSONStringify({ trId: 123456, accpted: true, info: 'Withdraw request accepted' })
+            );
 
             const spy = jest.spyOn(client, 'brokerWithdraw').mockReturnValue(
                 Promise.resolve({
@@ -100,7 +103,9 @@ describe('TravelRuleApi', () => {
                 walletType: 0,
             };
 
-            mockResponse = { trId: 123456, accpted: true, info: 'Withdraw request accepted' };
+            mockResponse = JSONParse(
+                JSONStringify({ trId: 123456, accpted: true, info: 'Withdraw request accepted' })
+            );
 
             const spy = jest.spyOn(client, 'brokerWithdraw').mockReturnValue(
                 Promise.resolve({
@@ -270,7 +275,7 @@ describe('TravelRuleApi', () => {
 
     describe('checkQuestionnaireRequirements()', () => {
         it('should execute checkQuestionnaireRequirements() successfully with required parameters only', async () => {
-            mockResponse = { questionnaireCountryCode: 'AE' };
+            mockResponse = JSONParse(JSONStringify({ questionnaireCountryCode: 'AE' }));
 
             const spy = jest.spyOn(client, 'checkQuestionnaireRequirements').mockReturnValue(
                 Promise.resolve({
@@ -291,7 +296,7 @@ describe('TravelRuleApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { questionnaireCountryCode: 'AE' };
+            mockResponse = JSONParse(JSONStringify({ questionnaireCountryCode: 'AE' }));
 
             const spy = jest.spyOn(client, 'checkQuestionnaireRequirements').mockReturnValue(
                 Promise.resolve({
@@ -327,47 +332,49 @@ describe('TravelRuleApi', () => {
 
     describe('depositHistoryTravelRule()', () => {
         it('should execute depositHistoryTravelRule() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    trId: 123451123,
-                    tranId: 17644346245865,
-                    amount: '0.001',
-                    coin: 'BNB',
-                    network: 'BNB',
-                    depositStatus: 0,
-                    travelRuleStatus: 1,
-                    address: 'bnb136ns6lfw4zs5hg4n85vdthaad7hq5m4gtkgf23',
-                    addressTag: '101764890',
-                    txId: '98A3EA560C6B3336D348B6C83F0F95ECE4F1F5919E94BD006E5BF3BF264FACFC',
-                    insertTime: 1661493146000,
-                    transferType: 0,
-                    confirmTimes: '1/1',
-                    unlockConfirm: 0,
-                    walletType: 0,
-                    requireQuestionnaire: false,
-                    questionnaire: null,
-                },
-                {
-                    trId: 2451123,
-                    tranId: 4544346245865,
-                    amount: '0.50000000',
-                    coin: 'IOTA',
-                    network: 'IOTA',
-                    depositStatus: 0,
-                    travelRuleStatus: 0,
-                    address:
-                        'SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW',
-                    addressTag: '',
-                    txId: 'ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999',
-                    insertTime: 1599620082000,
-                    transferType: 0,
-                    confirmTimes: '1/1',
-                    unlockConfirm: 0,
-                    walletType: 0,
-                    requireQuestionnaire: false,
-                    questionnaire: '{"question1":"answer1","question2":"answer2"}',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        trId: 123451123,
+                        tranId: 17644346245865,
+                        amount: '0.001',
+                        coin: 'BNB',
+                        network: 'BNB',
+                        depositStatus: 0,
+                        travelRuleStatus: 1,
+                        address: 'bnb136ns6lfw4zs5hg4n85vdthaad7hq5m4gtkgf23',
+                        addressTag: '101764890',
+                        txId: '98A3EA560C6B3336D348B6C83F0F95ECE4F1F5919E94BD006E5BF3BF264FACFC',
+                        insertTime: 1661493146000,
+                        transferType: 0,
+                        confirmTimes: '1/1',
+                        unlockConfirm: 0,
+                        walletType: 0,
+                        requireQuestionnaire: false,
+                        questionnaire: null,
+                    },
+                    {
+                        trId: 2451123,
+                        tranId: 4544346245865,
+                        amount: '0.50000000',
+                        coin: 'IOTA',
+                        network: 'IOTA',
+                        depositStatus: 0,
+                        travelRuleStatus: 0,
+                        address:
+                            'SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW',
+                        addressTag: '',
+                        txId: 'ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999',
+                        insertTime: 1599620082000,
+                        transferType: 0,
+                        confirmTimes: '1/1',
+                        unlockConfirm: 0,
+                        walletType: 0,
+                        requireQuestionnaire: false,
+                        questionnaire: '{"question1":"answer1","question2":"answer2"}',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'depositHistoryTravelRule').mockReturnValue(
                 Promise.resolve({
@@ -398,47 +405,49 @@ describe('TravelRuleApi', () => {
                 limit: 7,
             };
 
-            mockResponse = [
-                {
-                    trId: 123451123,
-                    tranId: 17644346245865,
-                    amount: '0.001',
-                    coin: 'BNB',
-                    network: 'BNB',
-                    depositStatus: 0,
-                    travelRuleStatus: 1,
-                    address: 'bnb136ns6lfw4zs5hg4n85vdthaad7hq5m4gtkgf23',
-                    addressTag: '101764890',
-                    txId: '98A3EA560C6B3336D348B6C83F0F95ECE4F1F5919E94BD006E5BF3BF264FACFC',
-                    insertTime: 1661493146000,
-                    transferType: 0,
-                    confirmTimes: '1/1',
-                    unlockConfirm: 0,
-                    walletType: 0,
-                    requireQuestionnaire: false,
-                    questionnaire: null,
-                },
-                {
-                    trId: 2451123,
-                    tranId: 4544346245865,
-                    amount: '0.50000000',
-                    coin: 'IOTA',
-                    network: 'IOTA',
-                    depositStatus: 0,
-                    travelRuleStatus: 0,
-                    address:
-                        'SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW',
-                    addressTag: '',
-                    txId: 'ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999',
-                    insertTime: 1599620082000,
-                    transferType: 0,
-                    confirmTimes: '1/1',
-                    unlockConfirm: 0,
-                    walletType: 0,
-                    requireQuestionnaire: false,
-                    questionnaire: '{"question1":"answer1","question2":"answer2"}',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        trId: 123451123,
+                        tranId: 17644346245865,
+                        amount: '0.001',
+                        coin: 'BNB',
+                        network: 'BNB',
+                        depositStatus: 0,
+                        travelRuleStatus: 1,
+                        address: 'bnb136ns6lfw4zs5hg4n85vdthaad7hq5m4gtkgf23',
+                        addressTag: '101764890',
+                        txId: '98A3EA560C6B3336D348B6C83F0F95ECE4F1F5919E94BD006E5BF3BF264FACFC',
+                        insertTime: 1661493146000,
+                        transferType: 0,
+                        confirmTimes: '1/1',
+                        unlockConfirm: 0,
+                        walletType: 0,
+                        requireQuestionnaire: false,
+                        questionnaire: null,
+                    },
+                    {
+                        trId: 2451123,
+                        tranId: 4544346245865,
+                        amount: '0.50000000',
+                        coin: 'IOTA',
+                        network: 'IOTA',
+                        depositStatus: 0,
+                        travelRuleStatus: 0,
+                        address:
+                            'SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW',
+                        addressTag: '',
+                        txId: 'ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999',
+                        insertTime: 1599620082000,
+                        transferType: 0,
+                        confirmTimes: '1/1',
+                        unlockConfirm: 0,
+                        walletType: 0,
+                        requireQuestionnaire: false,
+                        questionnaire: '{"question1":"answer1","question2":"answer2"}',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'depositHistoryTravelRule').mockReturnValue(
                 Promise.resolve({
@@ -474,24 +483,26 @@ describe('TravelRuleApi', () => {
 
     describe('depositHistoryV2()', () => {
         it('should execute depositHistoryV2() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    depositId: '4615328107052018945',
-                    amount: '0.01',
-                    network: 'AVAXC',
-                    coin: 'AVAX',
-                    depositStatus: 1,
-                    travelRuleReqStatus: 0,
-                    address: '0x0010627ab66d69232f4080d54e0f838b4dc3894a',
-                    addressTag: '',
-                    txId: '0xdde578983015741eed764e7ca10defb5a2caafdca3db5f92872d24a96beb1879',
-                    transferType: 0,
-                    confirmTimes: '12/12',
-                    requireQuestionnaire: false,
-                    questionnaire: { vaspName: 'BINANCE', depositOriginator: 0 },
-                    insertTime: 1753053392000,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        depositId: '4615328107052018945',
+                        amount: '0.01',
+                        network: 'AVAXC',
+                        coin: 'AVAX',
+                        depositStatus: 1,
+                        travelRuleReqStatus: 0,
+                        address: '0x0010627ab66d69232f4080d54e0f838b4dc3894a',
+                        addressTag: '',
+                        txId: '0xdde578983015741eed764e7ca10defb5a2caafdca3db5f92872d24a96beb1879',
+                        transferType: 0,
+                        confirmTimes: '12/12',
+                        requireQuestionnaire: false,
+                        questionnaire: { vaspName: 'BINANCE', depositOriginator: 0 },
+                        insertTime: 1753053392000,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'depositHistoryV2').mockReturnValue(
                 Promise.resolve({
@@ -520,24 +531,26 @@ describe('TravelRuleApi', () => {
                 limit: 7,
             };
 
-            mockResponse = [
-                {
-                    depositId: '4615328107052018945',
-                    amount: '0.01',
-                    network: 'AVAXC',
-                    coin: 'AVAX',
-                    depositStatus: 1,
-                    travelRuleReqStatus: 0,
-                    address: '0x0010627ab66d69232f4080d54e0f838b4dc3894a',
-                    addressTag: '',
-                    txId: '0xdde578983015741eed764e7ca10defb5a2caafdca3db5f92872d24a96beb1879',
-                    transferType: 0,
-                    confirmTimes: '12/12',
-                    requireQuestionnaire: false,
-                    questionnaire: { vaspName: 'BINANCE', depositOriginator: 0 },
-                    insertTime: 1753053392000,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        depositId: '4615328107052018945',
+                        amount: '0.01',
+                        network: 'AVAXC',
+                        coin: 'AVAX',
+                        depositStatus: 1,
+                        travelRuleReqStatus: 0,
+                        address: '0x0010627ab66d69232f4080d54e0f838b4dc3894a',
+                        addressTag: '',
+                        txId: '0xdde578983015741eed764e7ca10defb5a2caafdca3db5f92872d24a96beb1879',
+                        transferType: 0,
+                        confirmTimes: '12/12',
+                        requireQuestionnaire: false,
+                        questionnaire: { vaspName: 'BINANCE', depositOriginator: 0 },
+                        insertTime: 1753053392000,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'depositHistoryV2').mockReturnValue(
                 Promise.resolve({
@@ -571,20 +584,22 @@ describe('TravelRuleApi', () => {
 
     describe('fetchAddressVerificationList()', () => {
         it('should execute fetchAddressVerificationList() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    status: 'PENDING',
-                    token: 'AVAX',
-                    network: 'AVAXC',
-                    walletAddress: '0xc03a6aa728a8dde7464c33828424ede7553a0021',
-                    addressQuestionnaire: {
-                        sendTo: 1,
-                        satoshiToken: 'AVAX',
-                        isAddressOwner: 1,
-                        verifyMethod: 1,
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        status: 'PENDING',
+                        token: 'AVAX',
+                        network: 'AVAXC',
+                        walletAddress: '0xc03a6aa728a8dde7464c33828424ede7553a0021',
+                        addressQuestionnaire: {
+                            sendTo: 1,
+                            satoshiToken: 'AVAX',
+                            isAddressOwner: 1,
+                            verifyMethod: 1,
+                        },
                     },
-                },
-            ];
+                ])
+            );
 
             const spy = jest.spyOn(client, 'fetchAddressVerificationList').mockReturnValue(
                 Promise.resolve({
@@ -605,20 +620,22 @@ describe('TravelRuleApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    status: 'PENDING',
-                    token: 'AVAX',
-                    network: 'AVAXC',
-                    walletAddress: '0xc03a6aa728a8dde7464c33828424ede7553a0021',
-                    addressQuestionnaire: {
-                        sendTo: 1,
-                        satoshiToken: 'AVAX',
-                        isAddressOwner: 1,
-                        verifyMethod: 1,
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        status: 'PENDING',
+                        token: 'AVAX',
+                        network: 'AVAXC',
+                        walletAddress: '0xc03a6aa728a8dde7464c33828424ede7553a0021',
+                        addressQuestionnaire: {
+                            sendTo: 1,
+                            satoshiToken: 'AVAX',
+                            isAddressOwner: 1,
+                            verifyMethod: 1,
+                        },
                     },
-                },
-            ];
+                ])
+            );
 
             const spy = jest.spyOn(client, 'fetchAddressVerificationList').mockReturnValue(
                 Promise.resolve({
@@ -662,11 +679,13 @@ describe('TravelRuleApi', () => {
                 signature: 'signature_example',
             };
 
-            mockResponse = {
-                trId: 765127651,
-                accepted: true,
-                info: 'Deposit questionnaire accepted.',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    trId: 765127651,
+                    accepted: true,
+                    info: 'Deposit questionnaire accepted.',
+                })
+            );
 
             const spy = jest.spyOn(client, 'submitDepositQuestionnaire').mockReturnValue(
                 Promise.resolve({
@@ -696,11 +715,13 @@ describe('TravelRuleApi', () => {
                 addressTag: 'addressTag_example',
             };
 
-            mockResponse = {
-                trId: 765127651,
-                accepted: true,
-                info: 'Deposit questionnaire accepted.',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    trId: 765127651,
+                    accepted: true,
+                    info: 'Deposit questionnaire accepted.',
+                })
+            );
 
             const spy = jest.spyOn(client, 'submitDepositQuestionnaire').mockReturnValue(
                 Promise.resolve({
@@ -831,11 +852,13 @@ describe('TravelRuleApi', () => {
                 questionnaire: 'questionnaire_example',
             };
 
-            mockResponse = {
-                trId: 765127651,
-                accepted: true,
-                info: 'Deposit questionnaire accepted.',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    trId: 765127651,
+                    accepted: true,
+                    info: 'Deposit questionnaire accepted.',
+                })
+            );
 
             const spy = jest.spyOn(client, 'submitDepositQuestionnaireTravelRule').mockReturnValue(
                 Promise.resolve({
@@ -857,11 +880,13 @@ describe('TravelRuleApi', () => {
                 questionnaire: 'questionnaire_example',
             };
 
-            mockResponse = {
-                trId: 765127651,
-                accepted: true,
-                info: 'Deposit questionnaire accepted.',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    trId: 765127651,
+                    accepted: true,
+                    info: 'Deposit questionnaire accepted.',
+                })
+            );
 
             const spy = jest.spyOn(client, 'submitDepositQuestionnaireTravelRule').mockReturnValue(
                 Promise.resolve({
@@ -930,10 +955,12 @@ describe('TravelRuleApi', () => {
 
     describe('vaspList()', () => {
         it('should execute vaspList() successfully with required parameters only', async () => {
-            mockResponse = [
-                { vaspName: 'Binance', vaspCode: 'BINANCE' },
-                { vaspName: 'HashKeyGlobal', vaspCode: 'NVBH3Z_nNEHjvqbUfkaL' },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { vaspName: 'Binance', vaspCode: 'BINANCE' },
+                    { vaspName: 'HashKeyGlobal', vaspCode: 'NVBH3Z_nNEHjvqbUfkaL' },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'vaspList').mockReturnValue(
                 Promise.resolve({
@@ -954,10 +981,12 @@ describe('TravelRuleApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                { vaspName: 'Binance', vaspCode: 'BINANCE' },
-                { vaspName: 'HashKeyGlobal', vaspCode: 'NVBH3Z_nNEHjvqbUfkaL' },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { vaspName: 'Binance', vaspCode: 'BINANCE' },
+                    { vaspName: 'HashKeyGlobal', vaspCode: 'NVBH3Z_nNEHjvqbUfkaL' },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'vaspList').mockReturnValue(
                 Promise.resolve({
@@ -991,50 +1020,52 @@ describe('TravelRuleApi', () => {
 
     describe('withdrawHistoryV1()', () => {
         it('should execute withdrawHistoryV1() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    id: 'b6ae22b3aa844210a7041aee7589627c',
-                    trId: 1234456,
-                    amount: '8.91000000',
-                    transactionFee: '0.004',
-                    coin: 'USDT',
-                    withdrawalStatus: 6,
-                    travelRuleStatus: 0,
-                    address: '0x94df8b352de7f46f64b01d3666bf6e936e44ce60',
-                    addressTag: '1231212',
-                    txId: '0xb5ef8c13b968a406cc62a93a8bd80f9e9a906ef1b3fcf20a2e48573c17659268',
-                    applyTime: '2019-10-12 11:12:02',
-                    network: 'ETH',
-                    transferType: 0,
-                    withdrawOrderId: 'WITHDRAWtest123',
-                    info: 'The address is not valid. Please confirm with the recipient',
-                    confirmNo: 3,
-                    walletType: 1,
-                    txKey: '',
-                    questionnaire: '{"question1":"answer1","question2":"answer2"}',
-                    completeTime: '2023-03-23 16:52:41',
-                },
-                {
-                    id: '156ec387f49b41df8724fa744fa82719',
-                    trId: 2231556234,
-                    amount: '0.00150000',
-                    transactionFee: '0.004',
-                    coin: 'BTC',
-                    withdrawalStatus: 6,
-                    travelRuleStatus: 0,
-                    address: '1FZdVHtiBqMrWdjPyRPULCUceZPJ2WLCsB',
-                    txId: '60fd9007ebfddc753455f95fafa808c4302c836e4d1eebc5a132c36c1d8ac354',
-                    applyTime: '2019-09-24 12:43:45',
-                    network: 'BTC',
-                    transferType: 0,
-                    info: '',
-                    confirmNo: 2,
-                    walletType: 1,
-                    txKey: '',
-                    questionnaire: '{"question1":"answer1","question2":"answer2"}',
-                    completeTime: '2023-03-23 16:52:41',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        id: 'b6ae22b3aa844210a7041aee7589627c',
+                        trId: 1234456,
+                        amount: '8.91000000',
+                        transactionFee: '0.004',
+                        coin: 'USDT',
+                        withdrawalStatus: 6,
+                        travelRuleStatus: 0,
+                        address: '0x94df8b352de7f46f64b01d3666bf6e936e44ce60',
+                        addressTag: '1231212',
+                        txId: '0xb5ef8c13b968a406cc62a93a8bd80f9e9a906ef1b3fcf20a2e48573c17659268',
+                        applyTime: '2019-10-12 11:12:02',
+                        network: 'ETH',
+                        transferType: 0,
+                        withdrawOrderId: 'WITHDRAWtest123',
+                        info: 'The address is not valid. Please confirm with the recipient',
+                        confirmNo: 3,
+                        walletType: 1,
+                        txKey: '',
+                        questionnaire: '{"question1":"answer1","question2":"answer2"}',
+                        completeTime: '2023-03-23 16:52:41',
+                    },
+                    {
+                        id: '156ec387f49b41df8724fa744fa82719',
+                        trId: 2231556234,
+                        amount: '0.00150000',
+                        transactionFee: '0.004',
+                        coin: 'BTC',
+                        withdrawalStatus: 6,
+                        travelRuleStatus: 0,
+                        address: '1FZdVHtiBqMrWdjPyRPULCUceZPJ2WLCsB',
+                        txId: '60fd9007ebfddc753455f95fafa808c4302c836e4d1eebc5a132c36c1d8ac354',
+                        applyTime: '2019-09-24 12:43:45',
+                        network: 'BTC',
+                        transferType: 0,
+                        info: '',
+                        confirmNo: 2,
+                        walletType: 1,
+                        txKey: '',
+                        questionnaire: '{"question1":"answer1","question2":"answer2"}',
+                        completeTime: '2023-03-23 16:52:41',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'withdrawHistoryV1').mockReturnValue(
                 Promise.resolve({
@@ -1065,50 +1096,52 @@ describe('TravelRuleApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    id: 'b6ae22b3aa844210a7041aee7589627c',
-                    trId: 1234456,
-                    amount: '8.91000000',
-                    transactionFee: '0.004',
-                    coin: 'USDT',
-                    withdrawalStatus: 6,
-                    travelRuleStatus: 0,
-                    address: '0x94df8b352de7f46f64b01d3666bf6e936e44ce60',
-                    addressTag: '1231212',
-                    txId: '0xb5ef8c13b968a406cc62a93a8bd80f9e9a906ef1b3fcf20a2e48573c17659268',
-                    applyTime: '2019-10-12 11:12:02',
-                    network: 'ETH',
-                    transferType: 0,
-                    withdrawOrderId: 'WITHDRAWtest123',
-                    info: 'The address is not valid. Please confirm with the recipient',
-                    confirmNo: 3,
-                    walletType: 1,
-                    txKey: '',
-                    questionnaire: '{"question1":"answer1","question2":"answer2"}',
-                    completeTime: '2023-03-23 16:52:41',
-                },
-                {
-                    id: '156ec387f49b41df8724fa744fa82719',
-                    trId: 2231556234,
-                    amount: '0.00150000',
-                    transactionFee: '0.004',
-                    coin: 'BTC',
-                    withdrawalStatus: 6,
-                    travelRuleStatus: 0,
-                    address: '1FZdVHtiBqMrWdjPyRPULCUceZPJ2WLCsB',
-                    txId: '60fd9007ebfddc753455f95fafa808c4302c836e4d1eebc5a132c36c1d8ac354',
-                    applyTime: '2019-09-24 12:43:45',
-                    network: 'BTC',
-                    transferType: 0,
-                    info: '',
-                    confirmNo: 2,
-                    walletType: 1,
-                    txKey: '',
-                    questionnaire: '{"question1":"answer1","question2":"answer2"}',
-                    completeTime: '2023-03-23 16:52:41',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        id: 'b6ae22b3aa844210a7041aee7589627c',
+                        trId: 1234456,
+                        amount: '8.91000000',
+                        transactionFee: '0.004',
+                        coin: 'USDT',
+                        withdrawalStatus: 6,
+                        travelRuleStatus: 0,
+                        address: '0x94df8b352de7f46f64b01d3666bf6e936e44ce60',
+                        addressTag: '1231212',
+                        txId: '0xb5ef8c13b968a406cc62a93a8bd80f9e9a906ef1b3fcf20a2e48573c17659268',
+                        applyTime: '2019-10-12 11:12:02',
+                        network: 'ETH',
+                        transferType: 0,
+                        withdrawOrderId: 'WITHDRAWtest123',
+                        info: 'The address is not valid. Please confirm with the recipient',
+                        confirmNo: 3,
+                        walletType: 1,
+                        txKey: '',
+                        questionnaire: '{"question1":"answer1","question2":"answer2"}',
+                        completeTime: '2023-03-23 16:52:41',
+                    },
+                    {
+                        id: '156ec387f49b41df8724fa744fa82719',
+                        trId: 2231556234,
+                        amount: '0.00150000',
+                        transactionFee: '0.004',
+                        coin: 'BTC',
+                        withdrawalStatus: 6,
+                        travelRuleStatus: 0,
+                        address: '1FZdVHtiBqMrWdjPyRPULCUceZPJ2WLCsB',
+                        txId: '60fd9007ebfddc753455f95fafa808c4302c836e4d1eebc5a132c36c1d8ac354',
+                        applyTime: '2019-09-24 12:43:45',
+                        network: 'BTC',
+                        transferType: 0,
+                        info: '',
+                        confirmNo: 2,
+                        walletType: 1,
+                        txKey: '',
+                        questionnaire: '{"question1":"answer1","question2":"answer2"}',
+                        completeTime: '2023-03-23 16:52:41',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'withdrawHistoryV1').mockReturnValue(
                 Promise.resolve({
@@ -1142,50 +1175,52 @@ describe('TravelRuleApi', () => {
 
     describe('withdrawHistoryV2()', () => {
         it('should execute withdrawHistoryV2() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    id: 'b6ae22b3aa844210a7041aee7589627c',
-                    trId: 1234456,
-                    amount: '8.91000000',
-                    transactionFee: '0.004',
-                    coin: 'USDT',
-                    withdrawalStatus: 6,
-                    travelRuleStatus: 0,
-                    address: '0x94df8b352de7f46f64b01d3666bf6e936e44ce60',
-                    addressTag: '1231212',
-                    txId: '0xb5ef8c13b968a406cc62a93a8bd80f9e9a906ef1b3fcf20a2e48573c17659268',
-                    applyTime: '2019-10-12 11:12:02',
-                    network: 'ETH',
-                    transferType: 0,
-                    withdrawOrderId: 'WITHDRAWtest123',
-                    info: 'The address is not valid. Please confirm with the recipient',
-                    confirmNo: 3,
-                    walletType: 1,
-                    txKey: '',
-                    questionnaire: '{"question1":"answer1","question2":"answer2"}',
-                    completeTime: '2023-03-23 16:52:41',
-                },
-                {
-                    id: '156ec387f49b41df8724fa744fa82719',
-                    trId: 2231556234,
-                    amount: '0.00150000',
-                    transactionFee: '0.004',
-                    coin: 'BTC',
-                    withdrawalStatus: 6,
-                    travelRuleStatus: 0,
-                    address: '1FZdVHtiBqMrWdjPyRPULCUceZPJ2WLCsB',
-                    txId: '60fd9007ebfddc753455f95fafa808c4302c836e4d1eebc5a132c36c1d8ac354',
-                    applyTime: '2019-09-24 12:43:45',
-                    network: 'BTC',
-                    transferType: 0,
-                    info: '',
-                    confirmNo: 2,
-                    walletType: 1,
-                    txKey: '',
-                    questionnaire: '{"question1":"answer1","question2":"answer2"}',
-                    completeTime: '2023-03-23 16:52:41',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        id: 'b6ae22b3aa844210a7041aee7589627c',
+                        trId: 1234456,
+                        amount: '8.91000000',
+                        transactionFee: '0.004',
+                        coin: 'USDT',
+                        withdrawalStatus: 6,
+                        travelRuleStatus: 0,
+                        address: '0x94df8b352de7f46f64b01d3666bf6e936e44ce60',
+                        addressTag: '1231212',
+                        txId: '0xb5ef8c13b968a406cc62a93a8bd80f9e9a906ef1b3fcf20a2e48573c17659268',
+                        applyTime: '2019-10-12 11:12:02',
+                        network: 'ETH',
+                        transferType: 0,
+                        withdrawOrderId: 'WITHDRAWtest123',
+                        info: 'The address is not valid. Please confirm with the recipient',
+                        confirmNo: 3,
+                        walletType: 1,
+                        txKey: '',
+                        questionnaire: '{"question1":"answer1","question2":"answer2"}',
+                        completeTime: '2023-03-23 16:52:41',
+                    },
+                    {
+                        id: '156ec387f49b41df8724fa744fa82719',
+                        trId: 2231556234,
+                        amount: '0.00150000',
+                        transactionFee: '0.004',
+                        coin: 'BTC',
+                        withdrawalStatus: 6,
+                        travelRuleStatus: 0,
+                        address: '1FZdVHtiBqMrWdjPyRPULCUceZPJ2WLCsB',
+                        txId: '60fd9007ebfddc753455f95fafa808c4302c836e4d1eebc5a132c36c1d8ac354',
+                        applyTime: '2019-09-24 12:43:45',
+                        network: 'BTC',
+                        transferType: 0,
+                        info: '',
+                        confirmNo: 2,
+                        walletType: 1,
+                        txKey: '',
+                        questionnaire: '{"question1":"answer1","question2":"answer2"}',
+                        completeTime: '2023-03-23 16:52:41',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'withdrawHistoryV2').mockReturnValue(
                 Promise.resolve({
@@ -1216,50 +1251,52 @@ describe('TravelRuleApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    id: 'b6ae22b3aa844210a7041aee7589627c',
-                    trId: 1234456,
-                    amount: '8.91000000',
-                    transactionFee: '0.004',
-                    coin: 'USDT',
-                    withdrawalStatus: 6,
-                    travelRuleStatus: 0,
-                    address: '0x94df8b352de7f46f64b01d3666bf6e936e44ce60',
-                    addressTag: '1231212',
-                    txId: '0xb5ef8c13b968a406cc62a93a8bd80f9e9a906ef1b3fcf20a2e48573c17659268',
-                    applyTime: '2019-10-12 11:12:02',
-                    network: 'ETH',
-                    transferType: 0,
-                    withdrawOrderId: 'WITHDRAWtest123',
-                    info: 'The address is not valid. Please confirm with the recipient',
-                    confirmNo: 3,
-                    walletType: 1,
-                    txKey: '',
-                    questionnaire: '{"question1":"answer1","question2":"answer2"}',
-                    completeTime: '2023-03-23 16:52:41',
-                },
-                {
-                    id: '156ec387f49b41df8724fa744fa82719',
-                    trId: 2231556234,
-                    amount: '0.00150000',
-                    transactionFee: '0.004',
-                    coin: 'BTC',
-                    withdrawalStatus: 6,
-                    travelRuleStatus: 0,
-                    address: '1FZdVHtiBqMrWdjPyRPULCUceZPJ2WLCsB',
-                    txId: '60fd9007ebfddc753455f95fafa808c4302c836e4d1eebc5a132c36c1d8ac354',
-                    applyTime: '2019-09-24 12:43:45',
-                    network: 'BTC',
-                    transferType: 0,
-                    info: '',
-                    confirmNo: 2,
-                    walletType: 1,
-                    txKey: '',
-                    questionnaire: '{"question1":"answer1","question2":"answer2"}',
-                    completeTime: '2023-03-23 16:52:41',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        id: 'b6ae22b3aa844210a7041aee7589627c',
+                        trId: 1234456,
+                        amount: '8.91000000',
+                        transactionFee: '0.004',
+                        coin: 'USDT',
+                        withdrawalStatus: 6,
+                        travelRuleStatus: 0,
+                        address: '0x94df8b352de7f46f64b01d3666bf6e936e44ce60',
+                        addressTag: '1231212',
+                        txId: '0xb5ef8c13b968a406cc62a93a8bd80f9e9a906ef1b3fcf20a2e48573c17659268',
+                        applyTime: '2019-10-12 11:12:02',
+                        network: 'ETH',
+                        transferType: 0,
+                        withdrawOrderId: 'WITHDRAWtest123',
+                        info: 'The address is not valid. Please confirm with the recipient',
+                        confirmNo: 3,
+                        walletType: 1,
+                        txKey: '',
+                        questionnaire: '{"question1":"answer1","question2":"answer2"}',
+                        completeTime: '2023-03-23 16:52:41',
+                    },
+                    {
+                        id: '156ec387f49b41df8724fa744fa82719',
+                        trId: 2231556234,
+                        amount: '0.00150000',
+                        transactionFee: '0.004',
+                        coin: 'BTC',
+                        withdrawalStatus: 6,
+                        travelRuleStatus: 0,
+                        address: '1FZdVHtiBqMrWdjPyRPULCUceZPJ2WLCsB',
+                        txId: '60fd9007ebfddc753455f95fafa808c4302c836e4d1eebc5a132c36c1d8ac354',
+                        applyTime: '2019-09-24 12:43:45',
+                        network: 'BTC',
+                        transferType: 0,
+                        info: '',
+                        confirmNo: 2,
+                        walletType: 1,
+                        txKey: '',
+                        questionnaire: '{"question1":"answer1","question2":"answer2"}',
+                        completeTime: '2023-03-23 16:52:41',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'withdrawHistoryV2').mockReturnValue(
                 Promise.resolve({
@@ -1300,7 +1337,9 @@ describe('TravelRuleApi', () => {
                 questionnaire: 'questionnaire_example',
             };
 
-            mockResponse = { trId: 123456, accpted: true, info: 'Withdraw request accepted' };
+            mockResponse = JSONParse(
+                JSONStringify({ trId: 123456, accpted: true, info: 'Withdraw request accepted' })
+            );
 
             const spy = jest.spyOn(client, 'withdrawTravelRule').mockReturnValue(
                 Promise.resolve({
@@ -1331,7 +1370,9 @@ describe('TravelRuleApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { trId: 123456, accpted: true, info: 'Withdraw request accepted' };
+            mockResponse = JSONParse(
+                JSONStringify({ trId: 123456, accpted: true, info: 'Withdraw request accepted' })
+            );
 
             const spy = jest.spyOn(client, 'withdrawTravelRule').mockReturnValue(
                 Promise.resolve({

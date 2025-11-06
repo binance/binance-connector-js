@@ -135,16 +135,16 @@ export interface AllCoinsInformationResponseInnerNetworkListInner {
     depositDust?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllCoinsInformationResponseInnerNetworkListInner
      */
-    minConfirm?: number;
+    minConfirm?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllCoinsInformationResponseInnerNetworkListInner
      */
-    unLockConfirm?: number;
+    unLockConfirm?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -159,10 +159,10 @@ export interface AllCoinsInformationResponseInnerNetworkListInner {
     withdrawTag?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllCoinsInformationResponseInnerNetworkListInner
      */
-    estimatedArrivalTime?: number;
+    estimatedArrivalTime?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -183,8 +183,8 @@ export interface AllCoinsInformationResponseInnerNetworkListInner {
     contractAddress?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllCoinsInformationResponseInnerNetworkListInner
      */
-    denomination?: number;
+    denomination?: number | bigint;
 }

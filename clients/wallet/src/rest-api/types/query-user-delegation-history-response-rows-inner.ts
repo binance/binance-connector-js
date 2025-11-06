@@ -45,8 +45,8 @@ export interface QueryUserDelegationHistoryResponseRowsInner {
     amount?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryUserDelegationHistoryResponseRowsInner
      */
-    time?: number;
+    time?: number | bigint;
 }

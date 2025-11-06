@@ -27,10 +27,10 @@ export interface GetApiKeyPermissionResponse {
     ipRestrict?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetApiKeyPermissionResponse
      */
-    createTime?: number;
+    createTime?: number | bigint;
     /**
      *
      * @type {boolean}

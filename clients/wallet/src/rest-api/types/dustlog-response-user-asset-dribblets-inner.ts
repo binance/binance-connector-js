@@ -26,10 +26,10 @@ import type { DustlogResponseUserAssetDribbletsInnerUserAssetDribbletDetailsInne
 export interface DustlogResponseUserAssetDribbletsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DustlogResponseUserAssetDribbletsInner
      */
-    operateTime?: number;
+    operateTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -44,10 +44,10 @@ export interface DustlogResponseUserAssetDribbletsInner {
     totalServiceChargeAmount?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DustlogResponseUserAssetDribbletsInner
      */
-    transId?: number;
+    transId?: number | bigint;
     /**
      *
      * @type {Array<DustlogResponseUserAssetDribbletsInnerUserAssetDribbletDetailsInner>}

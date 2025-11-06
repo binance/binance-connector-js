@@ -21,10 +21,10 @@
 export interface BrokerWithdrawResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BrokerWithdrawResponse
      */
-    trId?: number;
+    trId?: number | bigint;
     /**
      *
      * @type {boolean}

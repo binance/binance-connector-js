@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { AssetApi } from '../../../src/rest-api';
@@ -65,21 +66,23 @@ describe('AssetApi', () => {
 
     describe('assetDetail()', () => {
         it('should execute assetDetail() successfully with required parameters only', async () => {
-            mockResponse = {
-                CTR: {
-                    minWithdrawAmount: '70.00000000',
-                    depositStatus: false,
-                    withdrawFee: 35,
-                    withdrawStatus: true,
-                    depositTip: 'Delisted, Deposit Suspended',
-                },
-                SKY: {
-                    minWithdrawAmount: '0.02000000',
-                    depositStatus: true,
-                    withdrawFee: 0.01,
-                    withdrawStatus: true,
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    CTR: {
+                        minWithdrawAmount: '70.00000000',
+                        depositStatus: false,
+                        withdrawFee: 35,
+                        withdrawStatus: true,
+                        depositTip: 'Delisted, Deposit Suspended',
+                    },
+                    SKY: {
+                        minWithdrawAmount: '0.02000000',
+                        depositStatus: true,
+                        withdrawFee: 0.01,
+                        withdrawStatus: true,
+                    },
+                })
+            );
 
             const spy = jest.spyOn(client, 'assetDetail').mockReturnValue(
                 Promise.resolve({
@@ -100,21 +103,23 @@ describe('AssetApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                CTR: {
-                    minWithdrawAmount: '70.00000000',
-                    depositStatus: false,
-                    withdrawFee: 35,
-                    withdrawStatus: true,
-                    depositTip: 'Delisted, Deposit Suspended',
-                },
-                SKY: {
-                    minWithdrawAmount: '0.02000000',
-                    depositStatus: true,
-                    withdrawFee: 0.01,
-                    withdrawStatus: true,
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    CTR: {
+                        minWithdrawAmount: '70.00000000',
+                        depositStatus: false,
+                        withdrawFee: 35,
+                        withdrawStatus: true,
+                        depositTip: 'Delisted, Deposit Suspended',
+                    },
+                    SKY: {
+                        minWithdrawAmount: '0.02000000',
+                        depositStatus: true,
+                        withdrawFee: 0.01,
+                        withdrawStatus: true,
+                    },
+                })
+            );
 
             const spy = jest.spyOn(client, 'assetDetail').mockReturnValue(
                 Promise.resolve({
@@ -148,27 +153,29 @@ describe('AssetApi', () => {
 
     describe('assetDividendRecord()', () => {
         it('should execute assetDividendRecord() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        id: 1637366104,
-                        amount: '10.00000000',
-                        asset: 'BHFT',
-                        divTime: 1563189166000,
-                        enInfo: 'BHFT distribution',
-                        tranId: 2968885920,
-                    },
-                    {
-                        id: 1631750237,
-                        amount: '10.00000000',
-                        asset: 'BHFT',
-                        divTime: 1563189165000,
-                        enInfo: 'BHFT distribution',
-                        tranId: 2968885920,
-                    },
-                ],
-                total: 2,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            id: 1637366104,
+                            amount: '10.00000000',
+                            asset: 'BHFT',
+                            divTime: 1563189166000,
+                            enInfo: 'BHFT distribution',
+                            tranId: 2968885920,
+                        },
+                        {
+                            id: 1631750237,
+                            amount: '10.00000000',
+                            asset: 'BHFT',
+                            divTime: 1563189165000,
+                            enInfo: 'BHFT distribution',
+                            tranId: 2968885920,
+                        },
+                    ],
+                    total: 2,
+                })
+            );
 
             const spy = jest.spyOn(client, 'assetDividendRecord').mockReturnValue(
                 Promise.resolve({
@@ -193,27 +200,29 @@ describe('AssetApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        id: 1637366104,
-                        amount: '10.00000000',
-                        asset: 'BHFT',
-                        divTime: 1563189166000,
-                        enInfo: 'BHFT distribution',
-                        tranId: 2968885920,
-                    },
-                    {
-                        id: 1631750237,
-                        amount: '10.00000000',
-                        asset: 'BHFT',
-                        divTime: 1563189165000,
-                        enInfo: 'BHFT distribution',
-                        tranId: 2968885920,
-                    },
-                ],
-                total: 2,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            id: 1637366104,
+                            amount: '10.00000000',
+                            asset: 'BHFT',
+                            divTime: 1563189166000,
+                            enInfo: 'BHFT distribution',
+                            tranId: 2968885920,
+                        },
+                        {
+                            id: 1631750237,
+                            amount: '10.00000000',
+                            asset: 'BHFT',
+                            divTime: 1563189165000,
+                            enInfo: 'BHFT distribution',
+                            tranId: 2968885920,
+                        },
+                    ],
+                    total: 2,
+                })
+            );
 
             const spy = jest.spyOn(client, 'assetDividendRecord').mockReturnValue(
                 Promise.resolve({
@@ -251,36 +260,38 @@ describe('AssetApi', () => {
                 asset: 'asset_example',
             };
 
-            mockResponse = {
-                totalServiceCharge: '0.02102542',
-                totalTransfered: '1.05127099',
-                transferResult: [
-                    {
-                        amount: '0.03000000',
-                        fromAsset: 'ETH',
-                        operateTime: 1563368549307,
-                        serviceChargeAmount: '0.00500000',
-                        tranId: 2970932918,
-                        transferedAmount: '0.25000000',
-                    },
-                    {
-                        amount: '0.09000000',
-                        fromAsset: 'LTC',
-                        operateTime: 1563368549404,
-                        serviceChargeAmount: '0.01548000',
-                        tranId: 2970932918,
-                        transferedAmount: '0.77400000',
-                    },
-                    {
-                        amount: '248.61878453',
-                        fromAsset: 'TRX',
-                        operateTime: 1563368549489,
-                        serviceChargeAmount: '0.00054542',
-                        tranId: 2970932918,
-                        transferedAmount: '0.02727099',
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    totalServiceCharge: '0.02102542',
+                    totalTransfered: '1.05127099',
+                    transferResult: [
+                        {
+                            amount: '0.03000000',
+                            fromAsset: 'ETH',
+                            operateTime: 1563368549307,
+                            serviceChargeAmount: '0.00500000',
+                            tranId: 2970932918,
+                            transferedAmount: '0.25000000',
+                        },
+                        {
+                            amount: '0.09000000',
+                            fromAsset: 'LTC',
+                            operateTime: 1563368549404,
+                            serviceChargeAmount: '0.01548000',
+                            tranId: 2970932918,
+                            transferedAmount: '0.77400000',
+                        },
+                        {
+                            amount: '248.61878453',
+                            fromAsset: 'TRX',
+                            operateTime: 1563368549489,
+                            serviceChargeAmount: '0.00054542',
+                            tranId: 2970932918,
+                            transferedAmount: '0.02727099',
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'dustTransfer').mockReturnValue(
                 Promise.resolve({
@@ -303,36 +314,38 @@ describe('AssetApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                totalServiceCharge: '0.02102542',
-                totalTransfered: '1.05127099',
-                transferResult: [
-                    {
-                        amount: '0.03000000',
-                        fromAsset: 'ETH',
-                        operateTime: 1563368549307,
-                        serviceChargeAmount: '0.00500000',
-                        tranId: 2970932918,
-                        transferedAmount: '0.25000000',
-                    },
-                    {
-                        amount: '0.09000000',
-                        fromAsset: 'LTC',
-                        operateTime: 1563368549404,
-                        serviceChargeAmount: '0.01548000',
-                        tranId: 2970932918,
-                        transferedAmount: '0.77400000',
-                    },
-                    {
-                        amount: '248.61878453',
-                        fromAsset: 'TRX',
-                        operateTime: 1563368549489,
-                        serviceChargeAmount: '0.00054542',
-                        tranId: 2970932918,
-                        transferedAmount: '0.02727099',
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    totalServiceCharge: '0.02102542',
+                    totalTransfered: '1.05127099',
+                    transferResult: [
+                        {
+                            amount: '0.03000000',
+                            fromAsset: 'ETH',
+                            operateTime: 1563368549307,
+                            serviceChargeAmount: '0.00500000',
+                            tranId: 2970932918,
+                            transferedAmount: '0.25000000',
+                        },
+                        {
+                            amount: '0.09000000',
+                            fromAsset: 'LTC',
+                            operateTime: 1563368549404,
+                            serviceChargeAmount: '0.01548000',
+                            tranId: 2970932918,
+                            transferedAmount: '0.77400000',
+                        },
+                        {
+                            amount: '248.61878453',
+                            fromAsset: 'TRX',
+                            operateTime: 1563368549489,
+                            serviceChargeAmount: '0.00054542',
+                            tranId: 2970932918,
+                            transferedAmount: '0.02727099',
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'dustTransfer').mockReturnValue(
                 Promise.resolve({
@@ -382,59 +395,61 @@ describe('AssetApi', () => {
 
     describe('dustlog()', () => {
         it('should execute dustlog() successfully with required parameters only', async () => {
-            mockResponse = {
-                total: 8,
-                userAssetDribblets: [
-                    {
-                        operateTime: 1615985535000,
-                        totalTransferedAmount: '0.00132256',
-                        totalServiceChargeAmount: '0.00002699',
-                        transId: 45178372831,
-                        userAssetDribbletDetails: [
-                            {
-                                transId: 4359321,
-                                serviceChargeAmount: '0.000009',
-                                amount: '0.0009',
-                                operateTime: 1615985535000,
-                                transferedAmount: '0.000441',
-                                fromAsset: 'USDT',
-                            },
-                            {
-                                transId: 4359321,
-                                serviceChargeAmount: '0.00001799',
-                                amount: '0.0009',
-                                operateTime: 1615985535000,
-                                transferedAmount: '0.00088156',
-                                fromAsset: 'ETH',
-                            },
-                        ],
-                    },
-                    {
-                        operateTime: 1616203180000,
-                        totalTransferedAmount: '0.00058795',
-                        totalServiceChargeAmount: '0.000012',
-                        transId: 4357015,
-                        userAssetDribbletDetails: [
-                            {
-                                transId: 4357015,
-                                serviceChargeAmount: '0.00001',
-                                amount: '0.001',
-                                operateTime: 1616203180000,
-                                transferedAmount: '0.00049',
-                                fromAsset: 'USDT',
-                            },
-                            {
-                                transId: 4357015,
-                                serviceChargeAmount: '0.000002',
-                                amount: '0.0001',
-                                operateTime: 1616203180000,
-                                transferedAmount: '0.00009795',
-                                fromAsset: 'ETH',
-                            },
-                        ],
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 8,
+                    userAssetDribblets: [
+                        {
+                            operateTime: 1615985535000,
+                            totalTransferedAmount: '0.00132256',
+                            totalServiceChargeAmount: '0.00002699',
+                            transId: 45178372831,
+                            userAssetDribbletDetails: [
+                                {
+                                    transId: 4359321,
+                                    serviceChargeAmount: '0.000009',
+                                    amount: '0.0009',
+                                    operateTime: 1615985535000,
+                                    transferedAmount: '0.000441',
+                                    fromAsset: 'USDT',
+                                },
+                                {
+                                    transId: 4359321,
+                                    serviceChargeAmount: '0.00001799',
+                                    amount: '0.0009',
+                                    operateTime: 1615985535000,
+                                    transferedAmount: '0.00088156',
+                                    fromAsset: 'ETH',
+                                },
+                            ],
+                        },
+                        {
+                            operateTime: 1616203180000,
+                            totalTransferedAmount: '0.00058795',
+                            totalServiceChargeAmount: '0.000012',
+                            transId: 4357015,
+                            userAssetDribbletDetails: [
+                                {
+                                    transId: 4357015,
+                                    serviceChargeAmount: '0.00001',
+                                    amount: '0.001',
+                                    operateTime: 1616203180000,
+                                    transferedAmount: '0.00049',
+                                    fromAsset: 'USDT',
+                                },
+                                {
+                                    transId: 4357015,
+                                    serviceChargeAmount: '0.000002',
+                                    amount: '0.0001',
+                                    operateTime: 1616203180000,
+                                    transferedAmount: '0.00009795',
+                                    fromAsset: 'ETH',
+                                },
+                            ],
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'dustlog').mockReturnValue(
                 Promise.resolve({
@@ -457,59 +472,61 @@ describe('AssetApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                total: 8,
-                userAssetDribblets: [
-                    {
-                        operateTime: 1615985535000,
-                        totalTransferedAmount: '0.00132256',
-                        totalServiceChargeAmount: '0.00002699',
-                        transId: 45178372831,
-                        userAssetDribbletDetails: [
-                            {
-                                transId: 4359321,
-                                serviceChargeAmount: '0.000009',
-                                amount: '0.0009',
-                                operateTime: 1615985535000,
-                                transferedAmount: '0.000441',
-                                fromAsset: 'USDT',
-                            },
-                            {
-                                transId: 4359321,
-                                serviceChargeAmount: '0.00001799',
-                                amount: '0.0009',
-                                operateTime: 1615985535000,
-                                transferedAmount: '0.00088156',
-                                fromAsset: 'ETH',
-                            },
-                        ],
-                    },
-                    {
-                        operateTime: 1616203180000,
-                        totalTransferedAmount: '0.00058795',
-                        totalServiceChargeAmount: '0.000012',
-                        transId: 4357015,
-                        userAssetDribbletDetails: [
-                            {
-                                transId: 4357015,
-                                serviceChargeAmount: '0.00001',
-                                amount: '0.001',
-                                operateTime: 1616203180000,
-                                transferedAmount: '0.00049',
-                                fromAsset: 'USDT',
-                            },
-                            {
-                                transId: 4357015,
-                                serviceChargeAmount: '0.000002',
-                                amount: '0.0001',
-                                operateTime: 1616203180000,
-                                transferedAmount: '0.00009795',
-                                fromAsset: 'ETH',
-                            },
-                        ],
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 8,
+                    userAssetDribblets: [
+                        {
+                            operateTime: 1615985535000,
+                            totalTransferedAmount: '0.00132256',
+                            totalServiceChargeAmount: '0.00002699',
+                            transId: 45178372831,
+                            userAssetDribbletDetails: [
+                                {
+                                    transId: 4359321,
+                                    serviceChargeAmount: '0.000009',
+                                    amount: '0.0009',
+                                    operateTime: 1615985535000,
+                                    transferedAmount: '0.000441',
+                                    fromAsset: 'USDT',
+                                },
+                                {
+                                    transId: 4359321,
+                                    serviceChargeAmount: '0.00001799',
+                                    amount: '0.0009',
+                                    operateTime: 1615985535000,
+                                    transferedAmount: '0.00088156',
+                                    fromAsset: 'ETH',
+                                },
+                            ],
+                        },
+                        {
+                            operateTime: 1616203180000,
+                            totalTransferedAmount: '0.00058795',
+                            totalServiceChargeAmount: '0.000012',
+                            transId: 4357015,
+                            userAssetDribbletDetails: [
+                                {
+                                    transId: 4357015,
+                                    serviceChargeAmount: '0.00001',
+                                    amount: '0.001',
+                                    operateTime: 1616203180000,
+                                    transferedAmount: '0.00049',
+                                    fromAsset: 'USDT',
+                                },
+                                {
+                                    transId: 4357015,
+                                    serviceChargeAmount: '0.000002',
+                                    amount: '0.0001',
+                                    operateTime: 1616203180000,
+                                    transferedAmount: '0.00009795',
+                                    fromAsset: 'ETH',
+                                },
+                            ],
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'dustlog').mockReturnValue(
                 Promise.resolve({
@@ -543,16 +560,18 @@ describe('AssetApi', () => {
 
     describe('fundingWallet()', () => {
         it('should execute fundingWallet() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    asset: 'USDT',
-                    free: '1',
-                    locked: '0',
-                    freeze: '0',
-                    withdrawing: '0',
-                    btcValuation: '0.00000091',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        asset: 'USDT',
+                        free: '1',
+                        locked: '0',
+                        freeze: '0',
+                        withdrawing: '0',
+                        btcValuation: '0.00000091',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'fundingWallet').mockReturnValue(
                 Promise.resolve({
@@ -575,16 +594,18 @@ describe('AssetApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    asset: 'USDT',
-                    free: '1',
-                    locked: '0',
-                    freeze: '0',
-                    withdrawing: '0',
-                    btcValuation: '0.00000091',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        asset: 'USDT',
+                        free: '1',
+                        locked: '0',
+                        freeze: '0',
+                        withdrawing: '0',
+                        btcValuation: '0.00000091',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'fundingWallet').mockReturnValue(
                 Promise.resolve({
@@ -618,22 +639,24 @@ describe('AssetApi', () => {
 
     describe('getAssetsThatCanBeConvertedIntoBnb()', () => {
         it('should execute getAssetsThatCanBeConvertedIntoBnb() successfully with required parameters only', async () => {
-            mockResponse = {
-                details: [
-                    {
-                        asset: 'ADA',
-                        assetFullName: 'ADA',
-                        amountFree: '6.21',
-                        toBTC: '0.00016848',
-                        toBNB: '0.01777302',
-                        toBNBOffExchange: '0.01741756',
-                        exchange: '0.00035546',
-                    },
-                ],
-                totalTransferBtc: '0.00016848',
-                totalTransferBNB: '0.01777302',
-                dribbletPercentage: '0.02',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    details: [
+                        {
+                            asset: 'ADA',
+                            assetFullName: 'ADA',
+                            amountFree: '6.21',
+                            toBTC: '0.00016848',
+                            toBNB: '0.01777302',
+                            toBNBOffExchange: '0.01741756',
+                            exchange: '0.00035546',
+                        },
+                    ],
+                    totalTransferBtc: '0.00016848',
+                    totalTransferBNB: '0.01777302',
+                    dribbletPercentage: '0.02',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getAssetsThatCanBeConvertedIntoBnb').mockReturnValue(
                 Promise.resolve({
@@ -655,22 +678,24 @@ describe('AssetApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                details: [
-                    {
-                        asset: 'ADA',
-                        assetFullName: 'ADA',
-                        amountFree: '6.21',
-                        toBTC: '0.00016848',
-                        toBNB: '0.01777302',
-                        toBNBOffExchange: '0.01741756',
-                        exchange: '0.00035546',
-                    },
-                ],
-                totalTransferBtc: '0.00016848',
-                totalTransferBNB: '0.01777302',
-                dribbletPercentage: '0.02',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    details: [
+                        {
+                            asset: 'ADA',
+                            assetFullName: 'ADA',
+                            amountFree: '6.21',
+                            toBTC: '0.00016848',
+                            toBNB: '0.01777302',
+                            toBNBOffExchange: '0.01741756',
+                            exchange: '0.00035546',
+                        },
+                    ],
+                    totalTransferBtc: '0.00016848',
+                    totalTransferBNB: '0.01777302',
+                    dribbletPercentage: '0.02',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getAssetsThatCanBeConvertedIntoBnb').mockReturnValue(
                 Promise.resolve({
@@ -713,51 +738,53 @@ describe('AssetApi', () => {
                 endTime: 1641782889000,
             };
 
-            mockResponse = {
-                total: 5,
-                rows: [
-                    {
-                        createTime: 1667880112000,
-                        tranId: 121230610120,
-                        type: 248,
-                        asset: 'USDT',
-                        amount: '25.0068',
-                        status: 'S',
-                    },
-                    {
-                        createTime: 1666776366000,
-                        tranId: 119991507468,
-                        type: 249,
-                        asset: 'USDT',
-                        amount: '0.027',
-                        status: 'S',
-                    },
-                    {
-                        createTime: 1666764505000,
-                        tranId: 119977966327,
-                        type: 248,
-                        asset: 'USDT',
-                        amount: '0.027',
-                        status: 'S',
-                    },
-                    {
-                        createTime: 1666758189000,
-                        tranId: 119973601721,
-                        type: 248,
-                        asset: 'USDT',
-                        amount: '0.018',
-                        status: 'S',
-                    },
-                    {
-                        createTime: 1666757278000,
-                        tranId: 119973028551,
-                        type: 248,
-                        asset: 'USDT',
-                        amount: '0.018',
-                        status: 'S',
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 5,
+                    rows: [
+                        {
+                            createTime: 1667880112000,
+                            tranId: 121230610120,
+                            type: 248,
+                            asset: 'USDT',
+                            amount: '25.0068',
+                            status: 'S',
+                        },
+                        {
+                            createTime: 1666776366000,
+                            tranId: 119991507468,
+                            type: 249,
+                            asset: 'USDT',
+                            amount: '0.027',
+                            status: 'S',
+                        },
+                        {
+                            createTime: 1666764505000,
+                            tranId: 119977966327,
+                            type: 248,
+                            asset: 'USDT',
+                            amount: '0.027',
+                            status: 'S',
+                        },
+                        {
+                            createTime: 1666758189000,
+                            tranId: 119973601721,
+                            type: 248,
+                            asset: 'USDT',
+                            amount: '0.018',
+                            status: 'S',
+                        },
+                        {
+                            createTime: 1666757278000,
+                            tranId: 119973028551,
+                            type: 248,
+                            asset: 'USDT',
+                            amount: '0.018',
+                            status: 'S',
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'getCloudMiningPaymentAndRefundHistory').mockReturnValue(
                 Promise.resolve({
@@ -784,51 +811,53 @@ describe('AssetApi', () => {
                 size: 10,
             };
 
-            mockResponse = {
-                total: 5,
-                rows: [
-                    {
-                        createTime: 1667880112000,
-                        tranId: 121230610120,
-                        type: 248,
-                        asset: 'USDT',
-                        amount: '25.0068',
-                        status: 'S',
-                    },
-                    {
-                        createTime: 1666776366000,
-                        tranId: 119991507468,
-                        type: 249,
-                        asset: 'USDT',
-                        amount: '0.027',
-                        status: 'S',
-                    },
-                    {
-                        createTime: 1666764505000,
-                        tranId: 119977966327,
-                        type: 248,
-                        asset: 'USDT',
-                        amount: '0.027',
-                        status: 'S',
-                    },
-                    {
-                        createTime: 1666758189000,
-                        tranId: 119973601721,
-                        type: 248,
-                        asset: 'USDT',
-                        amount: '0.018',
-                        status: 'S',
-                    },
-                    {
-                        createTime: 1666757278000,
-                        tranId: 119973028551,
-                        type: 248,
-                        asset: 'USDT',
-                        amount: '0.018',
-                        status: 'S',
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 5,
+                    rows: [
+                        {
+                            createTime: 1667880112000,
+                            tranId: 121230610120,
+                            type: 248,
+                            asset: 'USDT',
+                            amount: '25.0068',
+                            status: 'S',
+                        },
+                        {
+                            createTime: 1666776366000,
+                            tranId: 119991507468,
+                            type: 249,
+                            asset: 'USDT',
+                            amount: '0.027',
+                            status: 'S',
+                        },
+                        {
+                            createTime: 1666764505000,
+                            tranId: 119977966327,
+                            type: 248,
+                            asset: 'USDT',
+                            amount: '0.027',
+                            status: 'S',
+                        },
+                        {
+                            createTime: 1666758189000,
+                            tranId: 119973601721,
+                            type: 248,
+                            asset: 'USDT',
+                            amount: '0.018',
+                            status: 'S',
+                        },
+                        {
+                            createTime: 1666757278000,
+                            tranId: 119973028551,
+                            type: 248,
+                            asset: 'USDT',
+                            amount: '0.018',
+                            status: 'S',
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'getCloudMiningPaymentAndRefundHistory').mockReturnValue(
                 Promise.resolve({
@@ -897,10 +926,12 @@ describe('AssetApi', () => {
 
     describe('getOpenSymbolList()', () => {
         it('should execute getOpenSymbolList() successfully with required parameters only', async () => {
-            mockResponse = [
-                { openTime: 1686161202000, symbols: ['BNBBTC', 'BNBETH'] },
-                { openTime: 1686222232000, symbols: ['BTCUSDT'] },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { openTime: 1686161202000, symbols: ['BNBBTC', 'BNBETH'] },
+                    { openTime: 1686222232000, symbols: ['BTCUSDT'] },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getOpenSymbolList').mockReturnValue(
                 Promise.resolve({
@@ -940,25 +971,27 @@ describe('AssetApi', () => {
                 endTime: 1641782889000,
             };
 
-            mockResponse = {
-                total: 3316,
-                rows: [
-                    {
-                        clientTranId: '293915932290879488',
-                        transferType: 'Undelegate',
-                        asset: 'ETH',
-                        amount: '1',
-                        time: 1695205406000,
-                    },
-                    {
-                        clientTranId: '293915892281413632',
-                        transferType: 'Delegate',
-                        asset: 'ETH',
-                        amount: '1',
-                        time: 1695205396000,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 3316,
+                    rows: [
+                        {
+                            clientTranId: '293915932290879488',
+                            transferType: 'Undelegate',
+                            asset: 'ETH',
+                            amount: '1',
+                            time: 1695205406000,
+                        },
+                        {
+                            clientTranId: '293915892281413632',
+                            transferType: 'Delegate',
+                            asset: 'ETH',
+                            amount: '1',
+                            time: 1695205396000,
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryUserDelegationHistory').mockReturnValue(
                 Promise.resolve({
@@ -986,25 +1019,27 @@ describe('AssetApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                total: 3316,
-                rows: [
-                    {
-                        clientTranId: '293915932290879488',
-                        transferType: 'Undelegate',
-                        asset: 'ETH',
-                        amount: '1',
-                        time: 1695205406000,
-                    },
-                    {
-                        clientTranId: '293915892281413632',
-                        transferType: 'Delegate',
-                        asset: 'ETH',
-                        amount: '1',
-                        time: 1695205396000,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 3316,
+                    rows: [
+                        {
+                            clientTranId: '293915932290879488',
+                            transferType: 'Undelegate',
+                            asset: 'ETH',
+                            amount: '1',
+                            time: 1695205406000,
+                        },
+                        {
+                            clientTranId: '293915892281413632',
+                            transferType: 'Delegate',
+                            asset: 'ETH',
+                            amount: '1',
+                            time: 1695205396000,
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryUserDelegationHistory').mockReturnValue(
                 Promise.resolve({
@@ -1094,27 +1129,29 @@ describe('AssetApi', () => {
                 type: 'type_example',
             };
 
-            mockResponse = {
-                total: 2,
-                rows: [
-                    {
-                        asset: 'USDT',
-                        amount: '1',
-                        type: 'MAIN_UMFUTURE',
-                        status: 'CONFIRMED',
-                        tranId: 11415955596,
-                        timestamp: 1544433328000,
-                    },
-                    {
-                        asset: 'USDT',
-                        amount: '2',
-                        type: 'MAIN_UMFUTURE',
-                        status: 'CONFIRMED',
-                        tranId: 11366865406,
-                        timestamp: 1544433328000,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 2,
+                    rows: [
+                        {
+                            asset: 'USDT',
+                            amount: '1',
+                            type: 'MAIN_UMFUTURE',
+                            status: 'CONFIRMED',
+                            tranId: 11415955596,
+                            timestamp: 1544433328000,
+                        },
+                        {
+                            asset: 'USDT',
+                            amount: '2',
+                            type: 'MAIN_UMFUTURE',
+                            status: 'CONFIRMED',
+                            tranId: 11366865406,
+                            timestamp: 1544433328000,
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryUserUniversalTransferHistory').mockReturnValue(
                 Promise.resolve({
@@ -1142,27 +1179,29 @@ describe('AssetApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                total: 2,
-                rows: [
-                    {
-                        asset: 'USDT',
-                        amount: '1',
-                        type: 'MAIN_UMFUTURE',
-                        status: 'CONFIRMED',
-                        tranId: 11415955596,
-                        timestamp: 1544433328000,
-                    },
-                    {
-                        asset: 'USDT',
-                        amount: '2',
-                        type: 'MAIN_UMFUTURE',
-                        status: 'CONFIRMED',
-                        tranId: 11366865406,
-                        timestamp: 1544433328000,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 2,
+                    rows: [
+                        {
+                            asset: 'USDT',
+                            amount: '1',
+                            type: 'MAIN_UMFUTURE',
+                            status: 'CONFIRMED',
+                            tranId: 11415955596,
+                            timestamp: 1544433328000,
+                        },
+                        {
+                            asset: 'USDT',
+                            amount: '2',
+                            type: 'MAIN_UMFUTURE',
+                            status: 'CONFIRMED',
+                            tranId: 11366865406,
+                            timestamp: 1544433328000,
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryUserUniversalTransferHistory').mockReturnValue(
                 Promise.resolve({
@@ -1216,18 +1255,20 @@ describe('AssetApi', () => {
 
     describe('queryUserWalletBalance()', () => {
         it('should execute queryUserWalletBalance() successfully with required parameters only', async () => {
-            mockResponse = [
-                { activate: true, balance: '0', walletName: 'Spot' },
-                { activate: true, balance: '0', walletName: 'Funding' },
-                { activate: true, balance: '0', walletName: 'Cross Margin' },
-                { activate: true, balance: '0', walletName: 'Isolated Margin' },
-                { activate: true, balance: '0.71842752', walletName: 'USDⓈ-M Futures' },
-                { activate: true, balance: '0', walletName: 'COIN-M Futures' },
-                { activate: true, balance: '0', walletName: 'Earn' },
-                { activate: false, balance: '0', walletName: 'Options' },
-                { activate: true, balance: '0', walletName: 'Trading Bots' },
-                { activate: true, balance: '0', walletName: 'Copy Trading' },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { activate: true, balance: '0', walletName: 'Spot' },
+                    { activate: true, balance: '0', walletName: 'Funding' },
+                    { activate: true, balance: '0', walletName: 'Cross Margin' },
+                    { activate: true, balance: '0', walletName: 'Isolated Margin' },
+                    { activate: true, balance: '0.71842752', walletName: 'USDⓈ-M Futures' },
+                    { activate: true, balance: '0', walletName: 'COIN-M Futures' },
+                    { activate: true, balance: '0', walletName: 'Earn' },
+                    { activate: false, balance: '0', walletName: 'Options' },
+                    { activate: true, balance: '0', walletName: 'Trading Bots' },
+                    { activate: true, balance: '0', walletName: 'Copy Trading' },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryUserWalletBalance').mockReturnValue(
                 Promise.resolve({
@@ -1249,18 +1290,20 @@ describe('AssetApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                { activate: true, balance: '0', walletName: 'Spot' },
-                { activate: true, balance: '0', walletName: 'Funding' },
-                { activate: true, balance: '0', walletName: 'Cross Margin' },
-                { activate: true, balance: '0', walletName: 'Isolated Margin' },
-                { activate: true, balance: '0.71842752', walletName: 'USDⓈ-M Futures' },
-                { activate: true, balance: '0', walletName: 'COIN-M Futures' },
-                { activate: true, balance: '0', walletName: 'Earn' },
-                { activate: false, balance: '0', walletName: 'Options' },
-                { activate: true, balance: '0', walletName: 'Trading Bots' },
-                { activate: true, balance: '0', walletName: 'Copy Trading' },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { activate: true, balance: '0', walletName: 'Spot' },
+                    { activate: true, balance: '0', walletName: 'Funding' },
+                    { activate: true, balance: '0', walletName: 'Cross Margin' },
+                    { activate: true, balance: '0', walletName: 'Isolated Margin' },
+                    { activate: true, balance: '0.71842752', walletName: 'USDⓈ-M Futures' },
+                    { activate: true, balance: '0', walletName: 'COIN-M Futures' },
+                    { activate: true, balance: '0', walletName: 'Earn' },
+                    { activate: false, balance: '0', walletName: 'Options' },
+                    { activate: true, balance: '0', walletName: 'Trading Bots' },
+                    { activate: true, balance: '0', walletName: 'Copy Trading' },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryUserWalletBalance').mockReturnValue(
                 Promise.resolve({
@@ -1296,7 +1339,7 @@ describe('AssetApi', () => {
 
     describe('toggleBnbBurnOnSpotTradeAndMarginInterest()', () => {
         it('should execute toggleBnbBurnOnSpotTradeAndMarginInterest() successfully with required parameters only', async () => {
-            mockResponse = { spotBNBBurn: true, interestBNBBurn: false };
+            mockResponse = JSONParse(JSONStringify({ spotBNBBurn: true, interestBNBBurn: false }));
 
             const spy = jest
                 .spyOn(client, 'toggleBnbBurnOnSpotTradeAndMarginInterest')
@@ -1321,7 +1364,7 @@ describe('AssetApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { spotBNBBurn: true, interestBNBBurn: false };
+            mockResponse = JSONParse(JSONStringify({ spotBNBBurn: true, interestBNBBurn: false }));
 
             const spy = jest
                 .spyOn(client, 'toggleBnbBurnOnSpotTradeAndMarginInterest')
@@ -1361,10 +1404,12 @@ describe('AssetApi', () => {
 
     describe('tradeFee()', () => {
         it('should execute tradeFee() successfully with required parameters only', async () => {
-            mockResponse = [
-                { symbol: 'ADABNB', makerCommission: '0.001', takerCommission: '0.001' },
-                { symbol: 'BNBBTC', makerCommission: '0.001', takerCommission: '0.001' },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { symbol: 'ADABNB', makerCommission: '0.001', takerCommission: '0.001' },
+                    { symbol: 'BNBBTC', makerCommission: '0.001', takerCommission: '0.001' },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'tradeFee').mockReturnValue(
                 Promise.resolve({
@@ -1386,10 +1431,12 @@ describe('AssetApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                { symbol: 'ADABNB', makerCommission: '0.001', takerCommission: '0.001' },
-                { symbol: 'BNBBTC', makerCommission: '0.001', takerCommission: '0.001' },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { symbol: 'ADABNB', makerCommission: '0.001', takerCommission: '0.001' },
+                    { symbol: 'BNBBTC', makerCommission: '0.001', takerCommission: '0.001' },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'tradeFee').mockReturnValue(
                 Promise.resolve({
@@ -1423,71 +1470,73 @@ describe('AssetApi', () => {
 
     describe('userAsset()', () => {
         it('should execute userAsset() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    asset: 'AVAX',
-                    free: '1',
-                    locked: '0',
-                    freeze: '0',
-                    withdrawing: '0',
-                    ipoable: '0',
-                    btcValuation: '0',
-                },
-                {
-                    asset: 'BCH',
-                    free: '0.9',
-                    locked: '0',
-                    freeze: '0',
-                    withdrawing: '0',
-                    ipoable: '0',
-                    btcValuation: '0',
-                },
-                {
-                    asset: 'BNB',
-                    free: '887.47061626',
-                    locked: '0',
-                    freeze: '10.52',
-                    withdrawing: '0.1',
-                    ipoable: '0',
-                    btcValuation: '0',
-                },
-                {
-                    asset: 'BUSD',
-                    free: '9999.7',
-                    locked: '0',
-                    freeze: '0',
-                    withdrawing: '0',
-                    ipoable: '0',
-                    btcValuation: '0',
-                },
-                {
-                    asset: 'SHIB',
-                    free: '532.32',
-                    locked: '0',
-                    freeze: '0',
-                    withdrawing: '0',
-                    ipoable: '0',
-                    btcValuation: '0',
-                },
-                {
-                    asset: 'USDT',
-                    free: '50300000001.44911105',
-                    locked: '0',
-                    freeze: '0',
-                    withdrawing: '0',
-                    ipoable: '0',
-                    btcValuation: '0',
-                },
-                {
-                    asset: 'WRZ',
-                    free: '1',
-                    locked: '0',
-                    freeze: '0',
-                    withdrawing: '0',
-                    ipoable: '0',
-                    btcValuation: '0',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        asset: 'AVAX',
+                        free: '1',
+                        locked: '0',
+                        freeze: '0',
+                        withdrawing: '0',
+                        ipoable: '0',
+                        btcValuation: '0',
+                    },
+                    {
+                        asset: 'BCH',
+                        free: '0.9',
+                        locked: '0',
+                        freeze: '0',
+                        withdrawing: '0',
+                        ipoable: '0',
+                        btcValuation: '0',
+                    },
+                    {
+                        asset: 'BNB',
+                        free: '887.47061626',
+                        locked: '0',
+                        freeze: '10.52',
+                        withdrawing: '0.1',
+                        ipoable: '0',
+                        btcValuation: '0',
+                    },
+                    {
+                        asset: 'BUSD',
+                        free: '9999.7',
+                        locked: '0',
+                        freeze: '0',
+                        withdrawing: '0',
+                        ipoable: '0',
+                        btcValuation: '0',
+                    },
+                    {
+                        asset: 'SHIB',
+                        free: '532.32',
+                        locked: '0',
+                        freeze: '0',
+                        withdrawing: '0',
+                        ipoable: '0',
+                        btcValuation: '0',
+                    },
+                    {
+                        asset: 'USDT',
+                        free: '50300000001.44911105',
+                        locked: '0',
+                        freeze: '0',
+                        withdrawing: '0',
+                        ipoable: '0',
+                        btcValuation: '0',
+                    },
+                    {
+                        asset: 'WRZ',
+                        free: '1',
+                        locked: '0',
+                        freeze: '0',
+                        withdrawing: '0',
+                        ipoable: '0',
+                        btcValuation: '0',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'userAsset').mockReturnValue(
                 Promise.resolve({
@@ -1510,71 +1559,73 @@ describe('AssetApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    asset: 'AVAX',
-                    free: '1',
-                    locked: '0',
-                    freeze: '0',
-                    withdrawing: '0',
-                    ipoable: '0',
-                    btcValuation: '0',
-                },
-                {
-                    asset: 'BCH',
-                    free: '0.9',
-                    locked: '0',
-                    freeze: '0',
-                    withdrawing: '0',
-                    ipoable: '0',
-                    btcValuation: '0',
-                },
-                {
-                    asset: 'BNB',
-                    free: '887.47061626',
-                    locked: '0',
-                    freeze: '10.52',
-                    withdrawing: '0.1',
-                    ipoable: '0',
-                    btcValuation: '0',
-                },
-                {
-                    asset: 'BUSD',
-                    free: '9999.7',
-                    locked: '0',
-                    freeze: '0',
-                    withdrawing: '0',
-                    ipoable: '0',
-                    btcValuation: '0',
-                },
-                {
-                    asset: 'SHIB',
-                    free: '532.32',
-                    locked: '0',
-                    freeze: '0',
-                    withdrawing: '0',
-                    ipoable: '0',
-                    btcValuation: '0',
-                },
-                {
-                    asset: 'USDT',
-                    free: '50300000001.44911105',
-                    locked: '0',
-                    freeze: '0',
-                    withdrawing: '0',
-                    ipoable: '0',
-                    btcValuation: '0',
-                },
-                {
-                    asset: 'WRZ',
-                    free: '1',
-                    locked: '0',
-                    freeze: '0',
-                    withdrawing: '0',
-                    ipoable: '0',
-                    btcValuation: '0',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        asset: 'AVAX',
+                        free: '1',
+                        locked: '0',
+                        freeze: '0',
+                        withdrawing: '0',
+                        ipoable: '0',
+                        btcValuation: '0',
+                    },
+                    {
+                        asset: 'BCH',
+                        free: '0.9',
+                        locked: '0',
+                        freeze: '0',
+                        withdrawing: '0',
+                        ipoable: '0',
+                        btcValuation: '0',
+                    },
+                    {
+                        asset: 'BNB',
+                        free: '887.47061626',
+                        locked: '0',
+                        freeze: '10.52',
+                        withdrawing: '0.1',
+                        ipoable: '0',
+                        btcValuation: '0',
+                    },
+                    {
+                        asset: 'BUSD',
+                        free: '9999.7',
+                        locked: '0',
+                        freeze: '0',
+                        withdrawing: '0',
+                        ipoable: '0',
+                        btcValuation: '0',
+                    },
+                    {
+                        asset: 'SHIB',
+                        free: '532.32',
+                        locked: '0',
+                        freeze: '0',
+                        withdrawing: '0',
+                        ipoable: '0',
+                        btcValuation: '0',
+                    },
+                    {
+                        asset: 'USDT',
+                        free: '50300000001.44911105',
+                        locked: '0',
+                        freeze: '0',
+                        withdrawing: '0',
+                        ipoable: '0',
+                        btcValuation: '0',
+                    },
+                    {
+                        asset: 'WRZ',
+                        free: '1',
+                        locked: '0',
+                        freeze: '0',
+                        withdrawing: '0',
+                        ipoable: '0',
+                        btcValuation: '0',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'userAsset').mockReturnValue(
                 Promise.resolve({
@@ -1614,7 +1665,7 @@ describe('AssetApi', () => {
                 amount: 1.0,
             };
 
-            mockResponse = { tranId: 13526853623 };
+            mockResponse = JSONParse(JSONStringify({ tranId: 13526853623 }));
 
             const spy = jest.spyOn(client, 'userUniversalTransfer').mockReturnValue(
                 Promise.resolve({
@@ -1640,7 +1691,7 @@ describe('AssetApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { tranId: 13526853623 };
+            mockResponse = JSONParse(JSONStringify({ tranId: 13526853623 }));
 
             const spy = jest.spyOn(client, 'userUniversalTransfer').mockReturnValue(
                 Promise.resolve({

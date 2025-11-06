@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { AccountApi } from '../../../src/rest-api';
@@ -48,14 +49,16 @@ describe('AccountApi', () => {
 
     describe('accountApiTradingStatus()', () => {
         it('should execute accountApiTradingStatus() successfully with required parameters only', async () => {
-            mockResponse = {
-                data: {
-                    isLocked: false,
-                    plannedRecoverTime: 0,
-                    triggerCondition: { GCR: 150, IFER: 150, UFR: 300 },
-                    updateTime: 1547630471725,
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    data: {
+                        isLocked: false,
+                        plannedRecoverTime: 0,
+                        triggerCondition: { GCR: 150, IFER: 150, UFR: 300 },
+                        updateTime: 1547630471725,
+                    },
+                })
+            );
 
             const spy = jest.spyOn(client, 'accountApiTradingStatus').mockReturnValue(
                 Promise.resolve({
@@ -76,14 +79,16 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                data: {
-                    isLocked: false,
-                    plannedRecoverTime: 0,
-                    triggerCondition: { GCR: 150, IFER: 150, UFR: 300 },
-                    updateTime: 1547630471725,
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    data: {
+                        isLocked: false,
+                        plannedRecoverTime: 0,
+                        triggerCondition: { GCR: 150, IFER: 150, UFR: 300 },
+                        updateTime: 1547630471725,
+                    },
+                })
+            );
 
             const spy = jest.spyOn(client, 'accountApiTradingStatus').mockReturnValue(
                 Promise.resolve({
@@ -119,13 +124,15 @@ describe('AccountApi', () => {
 
     describe('accountInfo()', () => {
         it('should execute accountInfo() successfully with required parameters only', async () => {
-            mockResponse = {
-                vipLevel: 0,
-                isMarginEnabled: true,
-                isFutureEnabled: true,
-                isOptionsEnabled: true,
-                isPortfolioMarginRetailEnabled: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    vipLevel: 0,
+                    isMarginEnabled: true,
+                    isFutureEnabled: true,
+                    isOptionsEnabled: true,
+                    isPortfolioMarginRetailEnabled: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'accountInfo').mockReturnValue(
                 Promise.resolve({
@@ -146,13 +153,15 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                vipLevel: 0,
-                isMarginEnabled: true,
-                isFutureEnabled: true,
-                isOptionsEnabled: true,
-                isPortfolioMarginRetailEnabled: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    vipLevel: 0,
+                    isMarginEnabled: true,
+                    isFutureEnabled: true,
+                    isOptionsEnabled: true,
+                    isPortfolioMarginRetailEnabled: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'accountInfo').mockReturnValue(
                 Promise.resolve({
@@ -186,7 +195,7 @@ describe('AccountApi', () => {
 
     describe('accountStatus()', () => {
         it('should execute accountStatus() successfully with required parameters only', async () => {
-            mockResponse = { data: 'Normal' };
+            mockResponse = JSONParse(JSONStringify({ data: 'Normal' }));
 
             const spy = jest.spyOn(client, 'accountStatus').mockReturnValue(
                 Promise.resolve({
@@ -207,7 +216,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { data: 'Normal' };
+            mockResponse = JSONParse(JSONStringify({ data: 'Normal' }));
 
             const spy = jest.spyOn(client, 'accountStatus').mockReturnValue(
                 Promise.resolve({
@@ -245,65 +254,67 @@ describe('AccountApi', () => {
                 type: 'type_example',
             };
 
-            mockResponse = {
-                code: 200,
-                msg: '',
-                snapshotVos: [
-                    {
-                        data: {
-                            balances: [
-                                { asset: 'BTC', free: '0.09905021', locked: '0.00000000' },
-                                { asset: 'USDT', free: '1.89109409', locked: '0.00000000' },
-                            ],
-                            totalAssetOfBtc: '0.09942700',
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: 200,
+                    msg: '',
+                    snapshotVos: [
+                        {
+                            data: {
+                                balances: [
+                                    { asset: 'BTC', free: '0.09905021', locked: '0.00000000' },
+                                    { asset: 'USDT', free: '1.89109409', locked: '0.00000000' },
+                                ],
+                                totalAssetOfBtc: '0.09942700',
+                            },
+                            type: 'spot',
+                            updateTime: 1576281599000,
                         },
-                        type: 'spot',
-                        updateTime: 1576281599000,
-                    },
-                    {
-                        data: {
-                            marginLevel: '2748.02909813',
-                            totalAssetOfBtc: '0.00274803',
-                            totalLiabilityOfBtc: '0.00000100',
-                            totalNetAssetOfBtc: '0.00274750',
-                            userAssets: [
-                                {
-                                    asset: 'XRP',
-                                    borrowed: '0.00000000',
-                                    free: '1.00000000',
-                                    interest: '0.00000000',
-                                    locked: '0.00000000',
-                                    netAsset: '1.00000000',
-                                },
-                            ],
+                        {
+                            data: {
+                                marginLevel: '2748.02909813',
+                                totalAssetOfBtc: '0.00274803',
+                                totalLiabilityOfBtc: '0.00000100',
+                                totalNetAssetOfBtc: '0.00274750',
+                                userAssets: [
+                                    {
+                                        asset: 'XRP',
+                                        borrowed: '0.00000000',
+                                        free: '1.00000000',
+                                        interest: '0.00000000',
+                                        locked: '0.00000000',
+                                        netAsset: '1.00000000',
+                                    },
+                                ],
+                            },
+                            type: 'margin',
+                            updateTime: 1576281599000,
                         },
-                        type: 'margin',
-                        updateTime: 1576281599000,
-                    },
-                    {
-                        data: {
-                            assets: [
-                                {
-                                    asset: 'USDT',
-                                    marginBalance: '118.99782335',
-                                    walletBalance: '120.23811389',
-                                },
-                            ],
-                            position: [
-                                {
-                                    entryPrice: '7130.41000000',
-                                    markPrice: '7257.66239673',
-                                    positionAmt: '0.01000000',
-                                    symbol: 'BTCUSDT',
-                                    unRealizedProfit: '1.24029054',
-                                },
-                            ],
+                        {
+                            data: {
+                                assets: [
+                                    {
+                                        asset: 'USDT',
+                                        marginBalance: '118.99782335',
+                                        walletBalance: '120.23811389',
+                                    },
+                                ],
+                                position: [
+                                    {
+                                        entryPrice: '7130.41000000',
+                                        markPrice: '7257.66239673',
+                                        positionAmt: '0.01000000',
+                                        symbol: 'BTCUSDT',
+                                        unRealizedProfit: '1.24029054',
+                                    },
+                                ],
+                            },
+                            type: 'futures',
+                            updateTime: 1576281599000,
                         },
-                        type: 'futures',
-                        updateTime: 1576281599000,
-                    },
-                ],
-            };
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'dailyAccountSnapshot').mockReturnValue(
                 Promise.resolve({
@@ -328,65 +339,67 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                code: 200,
-                msg: '',
-                snapshotVos: [
-                    {
-                        data: {
-                            balances: [
-                                { asset: 'BTC', free: '0.09905021', locked: '0.00000000' },
-                                { asset: 'USDT', free: '1.89109409', locked: '0.00000000' },
-                            ],
-                            totalAssetOfBtc: '0.09942700',
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: 200,
+                    msg: '',
+                    snapshotVos: [
+                        {
+                            data: {
+                                balances: [
+                                    { asset: 'BTC', free: '0.09905021', locked: '0.00000000' },
+                                    { asset: 'USDT', free: '1.89109409', locked: '0.00000000' },
+                                ],
+                                totalAssetOfBtc: '0.09942700',
+                            },
+                            type: 'spot',
+                            updateTime: 1576281599000,
                         },
-                        type: 'spot',
-                        updateTime: 1576281599000,
-                    },
-                    {
-                        data: {
-                            marginLevel: '2748.02909813',
-                            totalAssetOfBtc: '0.00274803',
-                            totalLiabilityOfBtc: '0.00000100',
-                            totalNetAssetOfBtc: '0.00274750',
-                            userAssets: [
-                                {
-                                    asset: 'XRP',
-                                    borrowed: '0.00000000',
-                                    free: '1.00000000',
-                                    interest: '0.00000000',
-                                    locked: '0.00000000',
-                                    netAsset: '1.00000000',
-                                },
-                            ],
+                        {
+                            data: {
+                                marginLevel: '2748.02909813',
+                                totalAssetOfBtc: '0.00274803',
+                                totalLiabilityOfBtc: '0.00000100',
+                                totalNetAssetOfBtc: '0.00274750',
+                                userAssets: [
+                                    {
+                                        asset: 'XRP',
+                                        borrowed: '0.00000000',
+                                        free: '1.00000000',
+                                        interest: '0.00000000',
+                                        locked: '0.00000000',
+                                        netAsset: '1.00000000',
+                                    },
+                                ],
+                            },
+                            type: 'margin',
+                            updateTime: 1576281599000,
                         },
-                        type: 'margin',
-                        updateTime: 1576281599000,
-                    },
-                    {
-                        data: {
-                            assets: [
-                                {
-                                    asset: 'USDT',
-                                    marginBalance: '118.99782335',
-                                    walletBalance: '120.23811389',
-                                },
-                            ],
-                            position: [
-                                {
-                                    entryPrice: '7130.41000000',
-                                    markPrice: '7257.66239673',
-                                    positionAmt: '0.01000000',
-                                    symbol: 'BTCUSDT',
-                                    unRealizedProfit: '1.24029054',
-                                },
-                            ],
+                        {
+                            data: {
+                                assets: [
+                                    {
+                                        asset: 'USDT',
+                                        marginBalance: '118.99782335',
+                                        walletBalance: '120.23811389',
+                                    },
+                                ],
+                                position: [
+                                    {
+                                        entryPrice: '7130.41000000',
+                                        markPrice: '7257.66239673',
+                                        positionAmt: '0.01000000',
+                                        symbol: 'BTCUSDT',
+                                        unRealizedProfit: '1.24029054',
+                                    },
+                                ],
+                            },
+                            type: 'futures',
+                            updateTime: 1576281599000,
                         },
-                        type: 'futures',
-                        updateTime: 1576281599000,
-                    },
-                ],
-            };
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'dailyAccountSnapshot').mockReturnValue(
                 Promise.resolve({
@@ -542,21 +555,23 @@ describe('AccountApi', () => {
 
     describe('getApiKeyPermission()', () => {
         it('should execute getApiKeyPermission() successfully with required parameters only', async () => {
-            mockResponse = {
-                ipRestrict: false,
-                createTime: 1698645219000,
-                enableReading: true,
-                enableWithdrawals: false,
-                enableInternalTransfer: false,
-                enableMargin: false,
-                enableFutures: false,
-                permitsUniversalTransfer: false,
-                enableVanillaOptions: false,
-                enableFixApiTrade: false,
-                enableFixReadOnly: true,
-                enableSpotAndMarginTrading: false,
-                enablePortfolioMarginTrading: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    ipRestrict: false,
+                    createTime: 1698645219000,
+                    enableReading: true,
+                    enableWithdrawals: false,
+                    enableInternalTransfer: false,
+                    enableMargin: false,
+                    enableFutures: false,
+                    permitsUniversalTransfer: false,
+                    enableVanillaOptions: false,
+                    enableFixApiTrade: false,
+                    enableFixReadOnly: true,
+                    enableSpotAndMarginTrading: false,
+                    enablePortfolioMarginTrading: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getApiKeyPermission').mockReturnValue(
                 Promise.resolve({
@@ -577,21 +592,23 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                ipRestrict: false,
-                createTime: 1698645219000,
-                enableReading: true,
-                enableWithdrawals: false,
-                enableInternalTransfer: false,
-                enableMargin: false,
-                enableFutures: false,
-                permitsUniversalTransfer: false,
-                enableVanillaOptions: false,
-                enableFixApiTrade: false,
-                enableFixReadOnly: true,
-                enableSpotAndMarginTrading: false,
-                enablePortfolioMarginTrading: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    ipRestrict: false,
+                    createTime: 1698645219000,
+                    enableReading: true,
+                    enableWithdrawals: false,
+                    enableInternalTransfer: false,
+                    enableMargin: false,
+                    enableFutures: false,
+                    permitsUniversalTransfer: false,
+                    enableVanillaOptions: false,
+                    enableFixApiTrade: false,
+                    enableFixReadOnly: true,
+                    enableSpotAndMarginTrading: false,
+                    enablePortfolioMarginTrading: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getApiKeyPermission').mockReturnValue(
                 Promise.resolve({

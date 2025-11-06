@@ -21,22 +21,22 @@
 export interface GetCloudMiningPaymentAndRefundHistoryResponseRowsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetCloudMiningPaymentAndRefundHistoryResponseRowsInner
      */
-    createTime?: number;
+    createTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetCloudMiningPaymentAndRefundHistoryResponseRowsInner
      */
-    tranId?: number;
+    tranId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetCloudMiningPaymentAndRefundHistoryResponseRowsInner
      */
-    type?: number;
+    type?: number | bigint;
     /**
      *
      * @type {string}
