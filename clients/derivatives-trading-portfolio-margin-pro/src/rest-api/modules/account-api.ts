@@ -55,14 +55,14 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @summary BNB transfer(USER_DATA)
          * @param {number} amount
          * @param {string} transferSide "TO_UM","FROM_UM"
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         bnbTransfer: async (
             amount: number,
             transferSide: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'amount' is not null or undefined
             assertParamExists('bnbTransfer', 'amount', amount);
@@ -100,13 +100,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Change Auto-repay-futures Status(TRADE)
          * @param {string} autoRepay Default: `true`; `false` for turn off the auto-repay futures negative balance function
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         changeAutoRepayFuturesStatus: async (
             autoRepay: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'autoRepay' is not null or undefined
             assertParamExists('changeAutoRepayFuturesStatus', 'autoRepay', autoRepay);
@@ -140,11 +140,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 1500
          *
          * @summary Fund Auto-collection(USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        fundAutoCollection: async (recvWindow?: number): Promise<RequestArgs> => {
+        fundAutoCollection: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -170,11 +170,14 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Fund Collection by Asset(USER_DATA)
          * @param {string} asset `LDUSDT` only
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        fundCollectionByAsset: async (asset: string, recvWindow?: number): Promise<RequestArgs> => {
+        fundCollectionByAsset: async (
+            asset: string,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
             assertParamExists('fundCollectionByAsset', 'asset', asset);
 
@@ -204,11 +207,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 30
          *
          * @summary Get Auto-repay-futures Status(USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        getAutoRepayFuturesStatus: async (recvWindow?: number): Promise<RequestArgs> => {
+        getAutoRepayFuturesStatus: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -232,13 +235,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Get Portfolio Margin Pro Account Balance(USER_DATA)
          * @param {string} [asset]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getPortfolioMarginProAccountBalance: async (
             asset?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -266,11 +269,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 5
          *
          * @summary Get Portfolio Margin Pro Account Info(USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        getPortfolioMarginProAccountInfo: async (recvWindow?: number): Promise<RequestArgs> => {
+        getPortfolioMarginProAccountInfo: async (
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -293,11 +298,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 5
          *
          * @summary Get Portfolio Margin Pro SPAN Account Info(USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        getPortfolioMarginProSpanAccountInfo: async (recvWindow?: number): Promise<RequestArgs> => {
+        getPortfolioMarginProSpanAccountInfo: async (
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -322,14 +329,14 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @summary Get Transferable Earn Asset Balance for Portfolio Margin (USER_DATA)
          * @param {string} asset `LDUSDT` only
          * @param {string} transferType `EARN_TO_FUTURE` /`FUTURE_TO_EARN`
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getTransferableEarnAssetBalanceForPortfolioMargin: async (
             asset: string,
             transferType: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
             assertParamExists('getTransferableEarnAssetBalanceForPortfolioMargin', 'asset', asset);
@@ -373,7 +380,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {string} fromAsset `BFUSD` only
          * @param {string} targetAsset `USDT` `USDC`
          * @param {number} amount
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -381,7 +388,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             fromAsset: string,
             targetAsset: string,
             amount: number,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'fromAsset' is not null or undefined
             assertParamExists('mintBfusdForPortfolioMargin', 'fromAsset', fromAsset);
@@ -425,13 +432,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Portfolio Margin Pro Bankruptcy Loan Repay
          * @param {string} [from] SPOT or MARGIN，default SPOT
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         portfolioMarginProBankruptcyLoanRepay: async (
             from?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -461,12 +468,12 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 500
          *
          * @summary Query Portfolio Margin Pro Bankruptcy Loan Amount(USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryPortfolioMarginProBankruptcyLoanAmount: async (
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -495,20 +502,20 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 500
          *
          * @summary Query Portfolio Margin Pro Bankruptcy Loan Repay History(USER_DATA)
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10 Max:100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10 Max:100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryPortfolioMarginProBankruptcyLoanRepayHistory: async (
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -549,19 +556,19 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Query Portfolio Margin Pro Negative Balance Interest History(USER_DATA)
          * @param {string} [asset]
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [size] Default:10 Max:100
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [size] Default:10 Max:100
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryPortfolioMarginProNegativeBalanceInterestHistory: async (
             asset?: string,
-            startTime?: number,
-            endTime?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -604,7 +611,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {string} fromAsset `BFUSD` only
          * @param {string} targetAsset `USDT` `USDC`
          * @param {number} amount
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -612,7 +619,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             fromAsset: string,
             targetAsset: string,
             amount: number,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'fromAsset' is not null or undefined
             assertParamExists('redeemBfusdForPortfolioMargin', 'fromAsset', fromAsset);
@@ -656,13 +663,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Repay futures Negative Balance(USER_DATA)
          * @param {string} [from] SPOT or MARGIN，default SPOT
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         repayFuturesNegativeBalance: async (
             from?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -693,7 +700,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {string} asset `LDUSDT` only
          * @param {string} transferType `EARN_TO_FUTURE` /`FUTURE_TO_EARN`
          * @param {number} amount
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -701,7 +708,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             asset: string,
             transferType: string,
             amount: number,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
             assertParamExists('transferLdusdtForPortfolioMargin', 'asset', asset);
@@ -1022,10 +1029,10 @@ export interface BnbTransferRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiBnbTransfer
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1042,10 +1049,10 @@ export interface ChangeAutoRepayFuturesStatusRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiChangeAutoRepayFuturesStatus
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1055,10 +1062,10 @@ export interface ChangeAutoRepayFuturesStatusRequest {
 export interface FundAutoCollectionRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiFundAutoCollection
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1075,10 +1082,10 @@ export interface FundCollectionByAssetRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiFundCollectionByAsset
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1088,10 +1095,10 @@ export interface FundCollectionByAssetRequest {
 export interface GetAutoRepayFuturesStatusRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetAutoRepayFuturesStatus
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1108,10 +1115,10 @@ export interface GetPortfolioMarginProAccountBalanceRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetPortfolioMarginProAccountBalance
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1121,10 +1128,10 @@ export interface GetPortfolioMarginProAccountBalanceRequest {
 export interface GetPortfolioMarginProAccountInfoRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetPortfolioMarginProAccountInfo
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1134,10 +1141,10 @@ export interface GetPortfolioMarginProAccountInfoRequest {
 export interface GetPortfolioMarginProSpanAccountInfoRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetPortfolioMarginProSpanAccountInfo
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1161,10 +1168,10 @@ export interface GetTransferableEarnAssetBalanceForPortfolioMarginRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetTransferableEarnAssetBalanceForPortfolioMargin
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1195,10 +1202,10 @@ export interface MintBfusdForPortfolioMarginRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiMintBfusdForPortfolioMargin
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1215,10 +1222,10 @@ export interface PortfolioMarginProBankruptcyLoanRepayRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiPortfolioMarginProBankruptcyLoanRepay
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1228,10 +1235,10 @@ export interface PortfolioMarginProBankruptcyLoanRepayRequest {
 export interface QueryPortfolioMarginProBankruptcyLoanAmountRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryPortfolioMarginProBankruptcyLoanAmount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1241,38 +1248,38 @@ export interface QueryPortfolioMarginProBankruptcyLoanAmountRequest {
 export interface QueryPortfolioMarginProBankruptcyLoanRepayHistoryRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryPortfolioMarginProBankruptcyLoanRepayHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryPortfolioMarginProBankruptcyLoanRepayHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryPortfolioMarginProBankruptcyLoanRepayHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10 Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryPortfolioMarginProBankruptcyLoanRepayHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryPortfolioMarginProBankruptcyLoanRepayHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1289,31 +1296,31 @@ export interface QueryPortfolioMarginProNegativeBalanceInterestHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryPortfolioMarginProNegativeBalanceInterestHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryPortfolioMarginProNegativeBalanceInterestHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default:10 Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryPortfolioMarginProNegativeBalanceInterestHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryPortfolioMarginProNegativeBalanceInterestHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1344,10 +1351,10 @@ export interface RedeemBfusdForPortfolioMarginRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiRedeemBfusdForPortfolioMargin
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1364,10 +1371,10 @@ export interface RepayFuturesNegativeBalanceRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiRepayFuturesNegativeBalance
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1398,10 +1405,10 @@ export interface TransferLdusdtForPortfolioMarginRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiTransferLdusdtForPortfolioMargin
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

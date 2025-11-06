@@ -80,12 +80,12 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 50
          *
          * @summary Portfolio Margin Pro Tiered Collateral Rate(USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         portfolioMarginProTieredCollateralRate: async (
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -201,10 +201,10 @@ export interface MarketDataApiInterface {
 export interface PortfolioMarginProTieredCollateralRateRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiPortfolioMarginProTieredCollateralRate
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
