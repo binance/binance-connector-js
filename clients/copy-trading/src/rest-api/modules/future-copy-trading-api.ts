@@ -34,11 +34,11 @@ const FutureCopyTradingApiAxiosParamCreator = function (configuration: Configura
          * Weight: 20
          *
          * @summary Get Futures Lead Trader Status(TRADE)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        getFuturesLeadTraderStatus: async (recvWindow?: number): Promise<RequestArgs> => {
+        getFuturesLeadTraderStatus: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -61,11 +61,13 @@ const FutureCopyTradingApiAxiosParamCreator = function (configuration: Configura
          * Weight: 20
          *
          * @summary Get Futures Lead Trading Symbol Whitelist(USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        getFuturesLeadTradingSymbolWhitelist: async (recvWindow?: number): Promise<RequestArgs> => {
+        getFuturesLeadTradingSymbolWhitelist: async (
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -127,10 +129,10 @@ export interface FutureCopyTradingApiInterface {
 export interface GetFuturesLeadTraderStatusRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FutureCopyTradingApiGetFuturesLeadTraderStatus
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -140,10 +142,10 @@ export interface GetFuturesLeadTraderStatusRequest {
 export interface GetFuturesLeadTradingSymbolWhitelistRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FutureCopyTradingApiGetFuturesLeadTradingSymbolWhitelist
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
