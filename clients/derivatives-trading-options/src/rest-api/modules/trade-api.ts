@@ -47,21 +47,21 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Account Trade List (USER_DATA)
          * @param {string} [symbol] Option trading pair, e.g BTC-200730-9000-C
-         * @param {number} [fromId] The UniqueId ID from which to return. The latest deal record is returned by default
-         * @param {number} [startTime] Start Time, e.g 1593511200000
-         * @param {number} [endTime] End Time, e.g 1593512200000
-         * @param {number} [limit] Number of result sets returned Default:100 Max:1000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [fromId] The UniqueId ID from which to return. The latest deal record is returned by default
+         * @param {number | bigint} [startTime] Start Time, e.g 1593511200000
+         * @param {number | bigint} [endTime] End Time, e.g 1593512200000
+         * @param {number | bigint} [limit] Number of result sets returned Default:100 Max:1000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         accountTradeList: async (
             symbol?: string,
-            fromId?: number,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
+            fromId?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -106,13 +106,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Cancel All Option Orders By Underlying (TRADE)
          * @param {string} underlying Option underlying, e.g BTCUSDT
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         cancelAllOptionOrdersByUnderlying: async (
             underlying: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'underlying' is not null or undefined
             assertParamExists('cancelAllOptionOrdersByUnderlying', 'underlying', underlying);
@@ -144,13 +144,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Cancel all Option orders on specific symbol (TRADE)
          * @param {string} symbol Option trading pair, e.g BTC-200730-9000-C
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         cancelAllOptionOrdersOnSpecificSymbol: async (
             symbol: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('cancelAllOptionOrdersOnSpecificSymbol', 'symbol', symbol);
@@ -186,7 +186,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} symbol Option trading pair, e.g BTC-200730-9000-C
          * @param {Array<number>} [orderIds] Order ID, e.g [4611875134427365377,4611875134427365378]
          * @param {Array<string>} [clientOrderIds] User-defined order ID, e.g ["my_id_1","my_id_2"]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -194,7 +194,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             symbol: string,
             orderIds?: Array<number>,
             clientOrderIds?: Array<string>,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('cancelMultipleOptionOrders', 'symbol', symbol);
@@ -236,17 +236,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Cancel Option Order (TRADE)
          * @param {string} symbol Option trading pair, e.g BTC-200730-9000-C
-         * @param {number} [orderId] Order ID, e.g 4611875134427365377
+         * @param {number | bigint} [orderId] Order ID, e.g 4611875134427365377
          * @param {string} [clientOrderId] User-defined order ID, e.g 10000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         cancelOptionOrder: async (
             symbol: string,
-            orderId?: number,
+            orderId?: number | bigint,
             clientOrderId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('cancelOptionOrder', 'symbol', symbol);
@@ -296,7 +296,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {NewOrderNewOrderRespTypeEnum} [newOrderRespType] "ACK", "RESULT", Default "ACK"
          * @param {string} [clientOrderId] User-defined order ID, e.g 10000
          * @param {boolean} [isMmp] is market maker protection order, true/false
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -312,7 +312,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             newOrderRespType?: NewOrderNewOrderRespTypeEnum,
             clientOrderId?: string,
             isMmp?: boolean,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('newOrder', 'symbol', symbol);
@@ -390,13 +390,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Option Position Information (USER_DATA)
          * @param {string} [symbol] Option trading pair, e.g BTC-200730-9000-C
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         optionPositionInformation: async (
             symbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -428,13 +428,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Place Multiple Orders(TRADE)
          * @param {Array<PlaceMultipleOrdersOrdersParameterInner>} orders order list. Max 10 orders
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         placeMultipleOrders: async (
             orders: Array<PlaceMultipleOrdersOrdersParameterInner>,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'orders' is not null or undefined
             assertParamExists('placeMultipleOrders', 'orders', orders);
@@ -466,19 +466,19 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query Current Open Option Orders (USER_DATA)
          * @param {string} [symbol] Option trading pair, e.g BTC-200730-9000-C
-         * @param {number} [orderId] Order ID, e.g 4611875134427365377
-         * @param {number} [startTime] Start Time, e.g 1593511200000
-         * @param {number} [endTime] End Time, e.g 1593512200000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [orderId] Order ID, e.g 4611875134427365377
+         * @param {number | bigint} [startTime] Start Time, e.g 1593511200000
+         * @param {number | bigint} [endTime] End Time, e.g 1593512200000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryCurrentOpenOptionOrders: async (
             symbol?: string,
-            orderId?: number,
-            startTime?: number,
-            endTime?: number,
-            recvWindow?: number
+            orderId?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -519,21 +519,21 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query Option Order History (TRADE)
          * @param {string} symbol Option trading pair, e.g BTC-200730-9000-C
-         * @param {number} [orderId] Order ID, e.g 4611875134427365377
-         * @param {number} [startTime] Start Time, e.g 1593511200000
-         * @param {number} [endTime] End Time, e.g 1593512200000
-         * @param {number} [limit] Number of result sets returned Default:100 Max:1000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [orderId] Order ID, e.g 4611875134427365377
+         * @param {number | bigint} [startTime] Start Time, e.g 1593511200000
+         * @param {number | bigint} [endTime] End Time, e.g 1593512200000
+         * @param {number | bigint} [limit] Number of result sets returned Default:100 Max:1000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryOptionOrderHistory: async (
             symbol: string,
-            orderId?: number,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
+            orderId?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('queryOptionOrderHistory', 'symbol', symbol);
@@ -589,17 +589,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query Single Order (TRADE)
          * @param {string} symbol Option trading pair, e.g BTC-200730-9000-C
-         * @param {number} [orderId] Order ID, e.g 4611875134427365377
+         * @param {number | bigint} [orderId] Order ID, e.g 4611875134427365377
          * @param {string} [clientOrderId] User-defined order ID, e.g 10000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         querySingleOrder: async (
             symbol: string,
-            orderId?: number,
+            orderId?: number | bigint,
             clientOrderId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('querySingleOrder', 'symbol', symbol);
@@ -639,19 +639,19 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary User Exercise Record (USER_DATA)
          * @param {string} [symbol] Option trading pair, e.g BTC-200730-9000-C
-         * @param {number} [startTime] Start Time, e.g 1593511200000
-         * @param {number} [endTime] End Time, e.g 1593512200000
-         * @param {number} [limit] Number of result sets returned Default:100 Max:1000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime] Start Time, e.g 1593511200000
+         * @param {number | bigint} [endTime] End Time, e.g 1593512200000
+         * @param {number | bigint} [limit] Number of result sets returned Default:100 Max:1000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         userExerciseRecord: async (
             symbol?: string,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -890,38 +890,38 @@ export interface AccountTradeListRequest {
 
     /**
      * The UniqueId ID from which to return. The latest deal record is returned by default
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiAccountTradeList
      */
-    readonly fromId?: number;
+    readonly fromId?: number | bigint;
 
     /**
      * Start Time, e.g 1593511200000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiAccountTradeList
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * End Time, e.g 1593512200000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiAccountTradeList
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Number of result sets returned Default:100 Max:1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiAccountTradeList
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiAccountTradeList
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -938,10 +938,10 @@ export interface CancelAllOptionOrdersByUnderlyingRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelAllOptionOrdersByUnderlying
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -958,10 +958,10 @@ export interface CancelAllOptionOrdersOnSpecificSymbolRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelAllOptionOrdersOnSpecificSymbol
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -992,10 +992,10 @@ export interface CancelMultipleOptionOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelMultipleOptionOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1012,10 +1012,10 @@ export interface CancelOptionOrderRequest {
 
     /**
      * Order ID, e.g 4611875134427365377
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelOptionOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      * User-defined order ID, e.g 10000
@@ -1026,10 +1026,10 @@ export interface CancelOptionOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelOptionOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1116,10 +1116,10 @@ export interface NewOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiNewOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1136,10 +1136,10 @@ export interface OptionPositionInformationRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiOptionPositionInformation
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1156,10 +1156,10 @@ export interface PlaceMultipleOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiPlaceMultipleOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1176,31 +1176,31 @@ export interface QueryCurrentOpenOptionOrdersRequest {
 
     /**
      * Order ID, e.g 4611875134427365377
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryCurrentOpenOptionOrders
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      * Start Time, e.g 1593511200000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryCurrentOpenOptionOrders
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * End Time, e.g 1593512200000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryCurrentOpenOptionOrders
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryCurrentOpenOptionOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1217,38 +1217,38 @@ export interface QueryOptionOrderHistoryRequest {
 
     /**
      * Order ID, e.g 4611875134427365377
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryOptionOrderHistory
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      * Start Time, e.g 1593511200000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryOptionOrderHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * End Time, e.g 1593512200000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryOptionOrderHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Number of result sets returned Default:100 Max:1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryOptionOrderHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryOptionOrderHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1265,10 +1265,10 @@ export interface QuerySingleOrderRequest {
 
     /**
      * Order ID, e.g 4611875134427365377
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQuerySingleOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      * User-defined order ID, e.g 10000
@@ -1279,10 +1279,10 @@ export interface QuerySingleOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQuerySingleOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1299,31 +1299,31 @@ export interface UserExerciseRecordRequest {
 
     /**
      * Start Time, e.g 1593511200000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiUserExerciseRecord
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * End Time, e.g 1593512200000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiUserExerciseRecord
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Number of result sets returned Default:100 Max:1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiUserExerciseRecord
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiUserExerciseRecord
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

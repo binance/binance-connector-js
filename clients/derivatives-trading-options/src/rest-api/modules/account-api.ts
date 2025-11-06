@@ -39,21 +39,21 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Account Funding Flow (USER_DATA)
          * @param {string} currency Asset type, only support USDT  as of now
-         * @param {number} [recordId] Return the recordId and subsequent data, the latest data is returned by default, e.g 100000
-         * @param {number} [startTime] Start Time, e.g 1593511200000
-         * @param {number} [endTime] End Time, e.g 1593512200000
-         * @param {number} [limit] Number of result sets returned Default:100 Max:1000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recordId] Return the recordId and subsequent data, the latest data is returned by default, e.g 100000
+         * @param {number | bigint} [startTime] Start Time, e.g 1593511200000
+         * @param {number | bigint} [endTime] End Time, e.g 1593512200000
+         * @param {number | bigint} [limit] Number of result sets returned Default:100 Max:1000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         accountFundingFlow: async (
             currency: string,
-            recordId?: number,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
+            recordId?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'currency' is not null or undefined
             assertParamExists('accountFundingFlow', 'currency', currency);
@@ -103,16 +103,16 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 5
          *
          * @summary Get Download Id For Option Transaction History (USER_DATA)
-         * @param {number} startTime Timestamp in ms
-         * @param {number} endTime Timestamp in ms
-         * @param {number} [recvWindow]
+         * @param {number | bigint} startTime Timestamp in ms
+         * @param {number | bigint} endTime Timestamp in ms
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getDownloadIdForOptionTransactionHistory: async (
-            startTime: number,
-            endTime: number,
-            recvWindow?: number
+            startTime: number | bigint,
+            endTime: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'startTime' is not null or undefined
             assertParamExists('getDownloadIdForOptionTransactionHistory', 'startTime', startTime);
@@ -152,13 +152,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Get Option Transaction History Download Link by Id (USER_DATA)
          * @param {string} downloadId get by download id api
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getOptionTransactionHistoryDownloadLinkById: async (
             downloadId: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'downloadId' is not null or undefined
             assertParamExists(
@@ -193,11 +193,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 3
          *
          * @summary Option Account Information(TRADE)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        optionAccountInformation: async (recvWindow?: number): Promise<RequestArgs> => {
+        optionAccountInformation: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -220,11 +220,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 3
          *
          * @summary Option Margin Account Information (USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        optionMarginAccountInformation: async (recvWindow?: number): Promise<RequestArgs> => {
+        optionMarginAccountInformation: async (
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -340,38 +342,38 @@ export interface AccountFundingFlowRequest {
 
     /**
      * Return the recordId and subsequent data, the latest data is returned by default, e.g 100000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiAccountFundingFlow
      */
-    readonly recordId?: number;
+    readonly recordId?: number | bigint;
 
     /**
      * Start Time, e.g 1593511200000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiAccountFundingFlow
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * End Time, e.g 1593512200000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiAccountFundingFlow
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Number of result sets returned Default:100 Max:1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiAccountFundingFlow
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiAccountFundingFlow
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -381,24 +383,24 @@ export interface AccountFundingFlowRequest {
 export interface GetDownloadIdForOptionTransactionHistoryRequest {
     /**
      * Timestamp in ms
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForOptionTransactionHistory
      */
-    readonly startTime: number;
+    readonly startTime: number | bigint;
 
     /**
      * Timestamp in ms
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForOptionTransactionHistory
      */
-    readonly endTime: number;
+    readonly endTime: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForOptionTransactionHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -415,10 +417,10 @@ export interface GetOptionTransactionHistoryDownloadLinkByIdRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetOptionTransactionHistoryDownloadLinkById
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -428,10 +430,10 @@ export interface GetOptionTransactionHistoryDownloadLinkByIdRequest {
 export interface OptionAccountInformationRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiOptionAccountInformation
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -441,10 +443,10 @@ export interface OptionAccountInformationRequest {
 export interface OptionMarginAccountInformationRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiOptionMarginAccountInformation
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

@@ -40,13 +40,13 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
          *
          * @summary Accept Block Trade Order (TRADE)
          * @param {string} blockOrderMatchingKey
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         acceptBlockTradeOrder: async (
             blockOrderMatchingKey: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'blockOrderMatchingKey' is not null or undefined
             assertParamExists(
@@ -81,18 +81,18 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
          * Weight: 5
          *
          * @summary Account Block Trade List (USER_DATA)
-         * @param {number} [endTime] End Time, e.g 1593512200000
-         * @param {number} [startTime] Start Time, e.g 1593511200000
+         * @param {number | bigint} [endTime] End Time, e.g 1593512200000
+         * @param {number | bigint} [startTime] Start Time, e.g 1593511200000
          * @param {string} [underlying] underlying, e.g BTCUSDT
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         accountBlockTradeList: async (
-            endTime?: number,
-            startTime?: number,
+            endTime?: number | bigint,
+            startTime?: number | bigint,
             underlying?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -129,13 +129,13 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
          *
          * @summary Cancel Block Trade Order (TRADE)
          * @param {string} blockOrderMatchingKey
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         cancelBlockTradeOrder: async (
             blockOrderMatchingKey: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'blockOrderMatchingKey' is not null or undefined
             assertParamExists(
@@ -171,13 +171,13 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
          *
          * @summary Extend Block Trade Order (TRADE)
          * @param {string} blockOrderMatchingKey
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         extendBlockTradeOrder: async (
             blockOrderMatchingKey: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'blockOrderMatchingKey' is not null or undefined
             assertParamExists(
@@ -214,14 +214,14 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
          * @summary New Block Trade Order (TRADE)
          * @param {string} liquidity Taker or Maker
          * @param {Array<object>} legs Max 1 (only single leg supported), list of legs parameters in JSON; example: eapi/v1/block/order/create?orders=[{"symbol":"BTC-210115-35000-C", "price":"100","quantity":"0.0002","side":"BUY","type":"LIMIT"}]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         newBlockTradeOrder: async (
             liquidity: string,
             legs: Array<object>,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'liquidity' is not null or undefined
             assertParamExists('newBlockTradeOrder', 'liquidity', liquidity);
@@ -259,13 +259,13 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
          *
          * @summary Query Block Trade Details (USER_DATA)
          * @param {string} blockOrderMatchingKey
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryBlockTradeDetails: async (
             blockOrderMatchingKey: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'blockOrderMatchingKey' is not null or undefined
             assertParamExists(
@@ -301,19 +301,19 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
          *
          * @summary Query Block Trade Order (TRADE)
          * @param {string} [blockOrderMatchingKey] If specified, returns the specific block trade associated with the blockOrderMatchingKey
-         * @param {number} [endTime] End Time, e.g 1593512200000
-         * @param {number} [startTime] Start Time, e.g 1593511200000
+         * @param {number | bigint} [endTime] End Time, e.g 1593512200000
+         * @param {number | bigint} [startTime] Start Time, e.g 1593511200000
          * @param {string} [underlying] underlying, e.g BTCUSDT
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryBlockTradeOrder: async (
             blockOrderMatchingKey?: string,
-            endTime?: number,
-            startTime?: number,
+            endTime?: number | bigint,
+            startTime?: number | bigint,
             underlying?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -469,10 +469,10 @@ export interface AcceptBlockTradeOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketMakerBlockTradeApiAcceptBlockTradeOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -482,17 +482,17 @@ export interface AcceptBlockTradeOrderRequest {
 export interface AccountBlockTradeListRequest {
     /**
      * End Time, e.g 1593512200000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketMakerBlockTradeApiAccountBlockTradeList
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Start Time, e.g 1593511200000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketMakerBlockTradeApiAccountBlockTradeList
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * underlying, e.g BTCUSDT
@@ -503,10 +503,10 @@ export interface AccountBlockTradeListRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketMakerBlockTradeApiAccountBlockTradeList
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -523,10 +523,10 @@ export interface CancelBlockTradeOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketMakerBlockTradeApiCancelBlockTradeOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -543,10 +543,10 @@ export interface ExtendBlockTradeOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketMakerBlockTradeApiExtendBlockTradeOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -570,10 +570,10 @@ export interface NewBlockTradeOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketMakerBlockTradeApiNewBlockTradeOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -590,10 +590,10 @@ export interface QueryBlockTradeDetailsRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketMakerBlockTradeApiQueryBlockTradeDetails
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -610,17 +610,17 @@ export interface QueryBlockTradeOrderRequest {
 
     /**
      * End Time, e.g 1593512200000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketMakerBlockTradeApiQueryBlockTradeOrder
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Start Time, e.g 1593511200000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketMakerBlockTradeApiQueryBlockTradeOrder
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * underlying, e.g BTCUSDT
@@ -631,10 +631,10 @@ export interface QueryBlockTradeOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketMakerBlockTradeApiQueryBlockTradeOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

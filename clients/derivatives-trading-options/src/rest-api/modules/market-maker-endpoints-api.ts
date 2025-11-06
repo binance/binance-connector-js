@@ -42,13 +42,13 @@ const MarketMakerEndpointsApiAxiosParamCreator = function (configuration: Config
          *
          * @summary Auto-Cancel All Open Orders (Kill-Switch) Heartbeat (TRADE)
          * @param {string} underlyings Option Underlying Symbols, e.g BTCUSDT,ETHUSDT
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         autoCancelAllOpenOrders: async (
             underlyings: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'underlyings' is not null or undefined
             assertParamExists('autoCancelAllOpenOrders', 'underlyings', underlyings);
@@ -82,13 +82,13 @@ const MarketMakerEndpointsApiAxiosParamCreator = function (configuration: Config
          *
          * @summary Get Auto-Cancel All Open Orders (Kill-Switch) Config (TRADE)
          * @param {string} [underlying] underlying, e.g BTCUSDT
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getAutoCancelAllOpenOrders: async (
             underlying?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -117,13 +117,13 @@ const MarketMakerEndpointsApiAxiosParamCreator = function (configuration: Config
          *
          * @summary Get Market Maker Protection Config (TRADE)
          * @param {string} [underlying] underlying, e.g BTCUSDT
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getMarketMakerProtectionConfig: async (
             underlying?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -152,13 +152,13 @@ const MarketMakerEndpointsApiAxiosParamCreator = function (configuration: Config
          *
          * @summary Reset Market Maker Protection Config (TRADE)
          * @param {string} [underlying] underlying, e.g BTCUSDT
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         resetMarketMakerProtectionConfig: async (
             underlying?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -193,15 +193,15 @@ const MarketMakerEndpointsApiAxiosParamCreator = function (configuration: Config
          *
          * @summary Set Auto-Cancel All Open Orders (Kill-Switch) Config (TRADE)
          * @param {string} underlying Option underlying, e.g BTCUSDT
-         * @param {number} countdownTime Countdown time in milliseconds (ex. 1,000 for 1 second). 0 to disable the timer. Negative values (ex. -10000) are not accepted. Minimum acceptable value is 5,000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} countdownTime Countdown time in milliseconds (ex. 1,000 for 1 second). 0 to disable the timer. Negative values (ex. -10000) are not accepted. Minimum acceptable value is 5,000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         setAutoCancelAllOpenOrders: async (
             underlying: string,
-            countdownTime: number,
-            recvWindow?: number
+            countdownTime: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'underlying' is not null or undefined
             assertParamExists('setAutoCancelAllOpenOrders', 'underlying', underlying);
@@ -240,21 +240,21 @@ const MarketMakerEndpointsApiAxiosParamCreator = function (configuration: Config
          *
          * @summary Set Market Maker Protection Config (TRADE)
          * @param {string} [underlying] underlying, e.g BTCUSDT
-         * @param {number} [windowTimeInMilliseconds] MMP Interval in milliseconds; Range (0,5000]
-         * @param {number} [frozenTimeInMilliseconds] MMP frozen time in milliseconds, if set to 0 manual reset is required
+         * @param {number | bigint} [windowTimeInMilliseconds] MMP Interval in milliseconds; Range (0,5000]
+         * @param {number | bigint} [frozenTimeInMilliseconds] MMP frozen time in milliseconds, if set to 0 manual reset is required
          * @param {number} [qtyLimit] quantity limit
          * @param {number} [deltaLimit] net delta limit
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         setMarketMakerProtectionConfig: async (
             underlying?: string,
-            windowTimeInMilliseconds?: number,
-            frozenTimeInMilliseconds?: number,
+            windowTimeInMilliseconds?: number | bigint,
+            frozenTimeInMilliseconds?: number | bigint,
             qtyLimit?: number,
             deltaLimit?: number,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -411,10 +411,10 @@ export interface AutoCancelAllOpenOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketMakerEndpointsApiAutoCancelAllOpenOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -431,10 +431,10 @@ export interface GetAutoCancelAllOpenOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketMakerEndpointsApiGetAutoCancelAllOpenOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -451,10 +451,10 @@ export interface GetMarketMakerProtectionConfigRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketMakerEndpointsApiGetMarketMakerProtectionConfig
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -471,10 +471,10 @@ export interface ResetMarketMakerProtectionConfigRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketMakerEndpointsApiResetMarketMakerProtectionConfig
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -491,17 +491,17 @@ export interface SetAutoCancelAllOpenOrdersRequest {
 
     /**
      * Countdown time in milliseconds (ex. 1,000 for 1 second). 0 to disable the timer. Negative values (ex. -10000) are not accepted. Minimum acceptable value is 5,000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketMakerEndpointsApiSetAutoCancelAllOpenOrders
      */
-    readonly countdownTime: number;
+    readonly countdownTime: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketMakerEndpointsApiSetAutoCancelAllOpenOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -518,17 +518,17 @@ export interface SetMarketMakerProtectionConfigRequest {
 
     /**
      * MMP Interval in milliseconds; Range (0,5000]
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketMakerEndpointsApiSetMarketMakerProtectionConfig
      */
-    readonly windowTimeInMilliseconds?: number;
+    readonly windowTimeInMilliseconds?: number | bigint;
 
     /**
      * MMP frozen time in milliseconds, if set to 0 manual reset is required
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketMakerEndpointsApiSetMarketMakerProtectionConfig
      */
-    readonly frozenTimeInMilliseconds?: number;
+    readonly frozenTimeInMilliseconds?: number | bigint;
 
     /**
      * quantity limit
@@ -546,10 +546,10 @@ export interface SetMarketMakerProtectionConfigRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketMakerEndpointsApiSetMarketMakerProtectionConfig
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

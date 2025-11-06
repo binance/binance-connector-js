@@ -92,17 +92,17 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * @summary Historical Exercise Records
          * @param {string} [underlying] underlying, e.g BTCUSDT
-         * @param {number} [startTime] Start Time, e.g 1593511200000
-         * @param {number} [endTime] End Time, e.g 1593512200000
-         * @param {number} [limit] Number of result sets returned Default:100 Max:1000
+         * @param {number | bigint} [startTime] Start Time, e.g 1593511200000
+         * @param {number | bigint} [endTime] End Time, e.g 1593512200000
+         * @param {number | bigint} [limit] Number of result sets returned Default:100 Max:1000
          *
          * @throws {RequiredError}
          */
         historicalExerciseRecords: async (
             underlying?: string,
-            startTime?: number,
-            endTime?: number,
-            limit?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -143,18 +143,18 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @summary Kline/Candlestick Data
          * @param {string} symbol Option trading pair, e.g BTC-200730-9000-C
          * @param {string} interval Time interval
-         * @param {number} [startTime] Start Time, e.g 1593511200000
-         * @param {number} [endTime] End Time, e.g 1593512200000
-         * @param {number} [limit] Number of result sets returned Default:100 Max:1000
+         * @param {number | bigint} [startTime] Start Time, e.g 1593511200000
+         * @param {number | bigint} [endTime] End Time, e.g 1593512200000
+         * @param {number | bigint} [limit] Number of result sets returned Default:100 Max:1000
          *
          * @throws {RequiredError}
          */
         klineCandlestickData: async (
             symbol: string,
             interval: string,
-            startTime?: number,
-            endTime?: number,
-            limit?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('klineCandlestickData', 'symbol', symbol);
@@ -200,15 +200,15 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * @summary Old Trades Lookup (MARKET_DATA)
          * @param {string} symbol Option trading pair, e.g BTC-200730-9000-C
-         * @param {number} [fromId] The UniqueId ID from which to return. The latest deal record is returned by default
-         * @param {number} [limit] Number of result sets returned Default:100 Max:1000
+         * @param {number | bigint} [fromId] The UniqueId ID from which to return. The latest deal record is returned by default
+         * @param {number | bigint} [limit] Number of result sets returned Default:100 Max:1000
          *
          * @throws {RequiredError}
          */
         oldTradesLookup: async (
             symbol: string,
-            fromId?: number,
-            limit?: number
+            fromId?: number | bigint,
+            limit?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('oldTradesLookup', 'symbol', symbol);
@@ -313,11 +313,11 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * @summary Order Book
          * @param {string} symbol Option trading pair, e.g BTC-200730-9000-C
-         * @param {number} [limit] Number of result sets returned Default:100 Max:1000
+         * @param {number | bigint} [limit] Number of result sets returned Default:100 Max:1000
          *
          * @throws {RequiredError}
          */
-        orderBook: async (symbol: string, limit?: number): Promise<RequestArgs> => {
+        orderBook: async (symbol: string, limit?: number | bigint): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('orderBook', 'symbol', symbol);
 
@@ -348,11 +348,14 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * @summary Recent Block Trades List
          * @param {string} [symbol] Option trading pair, e.g BTC-200730-9000-C
-         * @param {number} [limit] Number of result sets returned Default:100 Max:1000
+         * @param {number | bigint} [limit] Number of result sets returned Default:100 Max:1000
          *
          * @throws {RequiredError}
          */
-        recentBlockTradesList: async (symbol?: string, limit?: number): Promise<RequestArgs> => {
+        recentBlockTradesList: async (
+            symbol?: string,
+            limit?: number | bigint
+        ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
@@ -380,11 +383,11 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * @summary Recent Trades List
          * @param {string} symbol Option trading pair, e.g BTC-200730-9000-C
-         * @param {number} [limit] Number of result sets returned Default:100 Max:1000
+         * @param {number | bigint} [limit] Number of result sets returned Default:100 Max:1000
          *
          * @throws {RequiredError}
          */
-        recentTradesList: async (symbol: string, limit?: number): Promise<RequestArgs> => {
+        recentTradesList: async (symbol: string, limit?: number | bigint): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('recentTradesList', 'symbol', symbol);
 
@@ -692,24 +695,24 @@ export interface HistoricalExerciseRecordsRequest {
 
     /**
      * Start Time, e.g 1593511200000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiHistoricalExerciseRecords
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * End Time, e.g 1593512200000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiHistoricalExerciseRecords
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Number of result sets returned Default:100 Max:1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiHistoricalExerciseRecords
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 }
 
 /**
@@ -733,24 +736,24 @@ export interface KlineCandlestickDataRequest {
 
     /**
      * Start Time, e.g 1593511200000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiKlineCandlestickData
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      * End Time, e.g 1593512200000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiKlineCandlestickData
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Number of result sets returned Default:100 Max:1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiKlineCandlestickData
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 }
 
 /**
@@ -767,17 +770,17 @@ export interface OldTradesLookupRequest {
 
     /**
      * The UniqueId ID from which to return. The latest deal record is returned by default
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiOldTradesLookup
      */
-    readonly fromId?: number;
+    readonly fromId?: number | bigint;
 
     /**
      * Number of result sets returned Default:100 Max:1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiOldTradesLookup
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 }
 
 /**
@@ -827,10 +830,10 @@ export interface OrderBookRequest {
 
     /**
      * Number of result sets returned Default:100 Max:1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiOrderBook
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 }
 
 /**
@@ -847,10 +850,10 @@ export interface RecentBlockTradesListRequest {
 
     /**
      * Number of result sets returned Default:100 Max:1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiRecentBlockTradesList
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 }
 
 /**
@@ -867,10 +870,10 @@ export interface RecentTradesListRequest {
 
     /**
      * Number of result sets returned Default:100 Max:1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiRecentTradesList
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 }
 
 /**
