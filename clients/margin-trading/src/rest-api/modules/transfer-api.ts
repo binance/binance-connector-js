@@ -41,24 +41,24 @@ const TransferApiAxiosParamCreator = function (configuration: ConfigurationRestA
          * @summary Get Cross Margin Transfer History (USER_DATA)
          * @param {string} [asset]
          * @param {string} [type] Transfer Type: ROLL_IN, ROLL_OUT
-         * @param {number} [startTime] 只支持查询最近90天的数据
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10 Max:100
+         * @param {number | bigint} [startTime] 只支持查询最近90天的数据
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10 Max:100
          * @param {string} [isolatedSymbol] isolated symbol
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         getCrossMarginTransferHistory: async (
             asset?: string,
             type?: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
             isolatedSymbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -114,14 +114,14 @@ const TransferApiAxiosParamCreator = function (configuration: ConfigurationRestA
          * @summary Query Max Transfer-Out Amount (USER_DATA)
          * @param {string} asset
          * @param {string} [isolatedSymbol] isolated symbol
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         queryMaxTransferOutAmount: async (
             asset: string,
             isolatedSymbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
             assertParamExists('queryMaxTransferOutAmount', 'asset', asset);
@@ -215,31 +215,31 @@ export interface GetCrossMarginTransferHistoryRequest {
 
     /**
      * 只支持查询最近90天的数据
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TransferApiGetCrossMarginTransferHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TransferApiGetCrossMarginTransferHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TransferApiGetCrossMarginTransferHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10 Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TransferApiGetCrossMarginTransferHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * isolated symbol
@@ -250,10 +250,10 @@ export interface GetCrossMarginTransferHistoryRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TransferApiGetCrossMarginTransferHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -277,10 +277,10 @@ export interface QueryMaxTransferOutAmountRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TransferApiQueryMaxTransferOutAmount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

@@ -80,7 +80,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} [ip] Can be added in batches, separated by commas. Max 30 for an API key
          * @param {string} [publicKey] 1. If publicKey is inputted it will create an RSA or Ed25519 key. <br />2. Need to be encoded to URL-encoded format
          * @param {string} [permissionMode] This parameter is only for the Ed25519 API key, and does not effact for other encryption methods. The value can be TRADE (TRADE for all permissions) or READ (READ for USER_DATA, FIX_API_READ_ONLY). The default value is TRADE.
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
@@ -90,7 +90,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             ip?: string,
             publicKey?: string,
             permissionMode?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'apiName' is not null or undefined
             assertParamExists('createSpecialKey', 'apiName', apiName);
@@ -143,14 +143,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Delete Special Key(Low-Latency Trading)(TRADE)
          * @param {string} [apiName]
          * @param {string} [symbol] isolated margin pair
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         deleteSpecialKey: async (
             apiName?: string,
             symbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -186,14 +186,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Edit ip for Special Key(Low-Latency Trading)(TRADE)
          * @param {string} ip Can be added in batches, separated by commas. Max 30 for an API key
          * @param {string} [symbol] isolated margin pair
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         editIpForSpecialKey: async (
             ip: string,
             symbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'ip' is not null or undefined
             assertParamExists('editIpForSpecialKey', 'ip', ip);
@@ -230,22 +230,22 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 1(IP)
          *
          * @summary Get Force Liquidation Record (USER_DATA)
-         * @param {number} [startTime] 只支持查询最近90天的数据
-         * @param {number} [endTime]
+         * @param {number | bigint} [startTime] 只支持查询最近90天的数据
+         * @param {number | bigint} [endTime]
          * @param {string} [isolatedSymbol] isolated symbol
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10 Max:100
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10 Max:100
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         getForceLiquidationRecord: async (
-            startTime?: number,
-            endTime?: number,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
             isolatedSymbol?: string,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -289,11 +289,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 100
          *
          * @summary Get Small Liability Exchange Coin List (USER_DATA)
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
-        getSmallLiabilityExchangeCoinList: async (recvWindow?: number): Promise<RequestArgs> => {
+        getSmallLiabilityExchangeCoinList: async (
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -316,20 +318,20 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 100(UID)
          *
          * @summary Get Small Liability Exchange History (USER_DATA)
-         * @param {number} current Currently querying page. Start from 1. Default:1
-         * @param {number} size Default:10, Max:100
-         * @param {number} [startTime] 只支持查询最近90天的数据
-         * @param {number} [endTime]
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} current Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} size Default:10, Max:100
+         * @param {number | bigint} [startTime] 只支持查询最近90天的数据
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         getSmallLiabilityExchangeHistory: async (
-            current: number,
-            size: number,
-            startTime?: number,
-            endTime?: number,
-            recvWindow?: number
+            current: number | bigint,
+            size: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'current' is not null or undefined
             assertParamExists('getSmallLiabilityExchangeHistory', 'current', current);
@@ -377,14 +379,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Margin Account Cancel all Open Orders on a Symbol (TRADE)
          * @param {string} symbol
          * @param {string} [isIsolated] for isolated margin or not, "TRUE", "FALSE"，default "FALSE"
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         marginAccountCancelAllOpenOrdersOnASymbol: async (
             symbol: string,
             isIsolated?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('marginAccountCancelAllOpenOrdersOnASymbol', 'symbol', symbol);
@@ -423,20 +425,20 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Margin Account Cancel OCO (TRADE)
          * @param {string} symbol
          * @param {string} [isIsolated] for isolated margin or not, "TRUE", "FALSE"，default "FALSE"
-         * @param {number} [orderListId] Either `orderListId` or `listClientOrderId` must be provided
+         * @param {number | bigint} [orderListId] Either `orderListId` or `listClientOrderId` must be provided
          * @param {string} [listClientOrderId] Either `orderListId` or `listClientOrderId` must be provided
          * @param {string} [newClientOrderId] Used to uniquely identify this cancel. Automatically generated by default
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         marginAccountCancelOco: async (
             symbol: string,
             isIsolated?: string,
-            orderListId?: number,
+            orderListId?: number | bigint,
             listClientOrderId?: string,
             newClientOrderId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('marginAccountCancelOco', 'symbol', symbol);
@@ -487,20 +489,20 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Margin Account Cancel Order (TRADE)
          * @param {string} symbol
          * @param {string} [isIsolated] for isolated margin or not, "TRUE", "FALSE"，default "FALSE"
-         * @param {number} [orderId]
+         * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
          * @param {string} [newClientOrderId] Used to uniquely identify this cancel. Automatically generated by default
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         marginAccountCancelOrder: async (
             symbol: string,
             isIsolated?: string,
-            orderId?: number,
+            orderId?: number | bigint,
             origClientOrderId?: string,
             newClientOrderId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('marginAccountCancelOrder', 'symbol', symbol);
@@ -566,7 +568,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} [sideEffectType] NO_SIDE_EFFECT, MARGIN_BUY, AUTO_REPAY,AUTO_BORROW_REPAY; default NO_SIDE_EFFECT. More info in [FAQ](https://www.binance.com/en/support/faq/how-to-use-the-sideeffecttype-parameter-with-the-margin-order-endpoints-f9fc51cda1984bf08b95e0d96c4570bc)
          * @param {string} [selfTradePreventionMode] The allowed enums is dependent on what is configured on the symbol. The possible supported values are EXPIRE_TAKER, EXPIRE_MAKER, EXPIRE_BOTH, NONE
          * @param {boolean} [autoRepayAtCancel] Only when MARGIN_BUY or AUTO_BORROW_REPAY order takes effect, true means that the debt generated by the order needs to be repay after the order is cancelled. The default is true
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
@@ -588,7 +590,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             sideEffectType?: string,
             selfTradePreventionMode?: string,
             autoRepayAtCancel?: boolean,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('marginAccountNewOco', 'symbol', symbol);
@@ -708,7 +710,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {MarginAccountNewOrderTimeInForceEnum} [timeInForce] GTC,IOC,FOK
          * @param {string} [selfTradePreventionMode] The allowed enums is dependent on what is configured on the symbol. The possible supported values are EXPIRE_TAKER, EXPIRE_MAKER, EXPIRE_BOTH, NONE
          * @param {boolean} [autoRepayAtCancel] Only when MARGIN_BUY or AUTO_BORROW_REPAY order takes effect, true means that the debt generated by the order needs to be repay after the order is cancelled. The default is true
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
@@ -728,7 +730,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             timeInForce?: MarginAccountNewOrderTimeInForceEnum,
             selfTradePreventionMode?: string,
             autoRepayAtCancel?: boolean,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('marginAccountNewOrder', 'symbol', symbol);
@@ -1244,14 +1246,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Margin Manual Liquidation(MARGIN)
          * @param {string} type `MARGIN`,`ISOLATED`
          * @param {string} [symbol] isolated margin pair
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         marginManualLiquidation: async (
             type: string,
             symbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'type' is not null or undefined
             assertParamExists('marginManualLiquidation', 'type', type);
@@ -1288,14 +1290,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Query Current Margin Order Count Usage (TRADE)
          * @param {string} [isIsolated] for isolated margin or not, "TRUE", "FALSE"，default "FALSE"
          * @param {string} [symbol] isolated margin pair
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         queryCurrentMarginOrderCountUsage: async (
             isIsolated?: string,
             symbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -1329,22 +1331,22 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Query Margin Account\'s all OCO (USER_DATA)
          * @param {string} [isIsolated] for isolated margin or not, "TRUE", "FALSE"，default "FALSE"
          * @param {string} [symbol] isolated margin pair
-         * @param {number} [fromId] 如设置fromId, 将返回id > fromId的数据。否则将返回最新数据
-         * @param {number} [startTime] 只支持查询最近90天的数据
-         * @param {number} [endTime]
-         * @param {number} [limit] Default Value: 500; Max Value: 1000
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [fromId] 如设置fromId, 将返回id > fromId的数据。否则将返回最新数据
+         * @param {number | bigint} [startTime] 只支持查询最近90天的数据
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [limit] Default Value: 500; Max Value: 1000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         queryMarginAccountsAllOco: async (
             isIsolated?: string,
             symbol?: string,
-            fromId?: number,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
+            fromId?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -1398,22 +1400,22 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Query Margin Account\'s All Orders (USER_DATA)
          * @param {string} symbol
          * @param {string} [isIsolated] for isolated margin or not, "TRUE", "FALSE"，default "FALSE"
-         * @param {number} [orderId]
-         * @param {number} [startTime] 只支持查询最近90天的数据
-         * @param {number} [endTime]
-         * @param {number} [limit] Default Value: 500; Max Value: 1000
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [orderId]
+         * @param {number | bigint} [startTime] 只支持查询最近90天的数据
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [limit] Default Value: 500; Max Value: 1000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         queryMarginAccountsAllOrders: async (
             symbol: string,
             isIsolated?: string,
-            orderId?: number,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
+            orderId?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('queryMarginAccountsAllOrders', 'symbol', symbol);
@@ -1466,18 +1468,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Query Margin Account\'s OCO (USER_DATA)
          * @param {string} [isIsolated] for isolated margin or not, "TRUE", "FALSE"，default "FALSE"
          * @param {string} [symbol] isolated margin pair
-         * @param {number} [orderListId] Either `orderListId` or `listClientOrderId` must be provided
+         * @param {number | bigint} [orderListId] Either `orderListId` or `listClientOrderId` must be provided
          * @param {string} [origClientOrderId]
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         queryMarginAccountsOco: async (
             isIsolated?: string,
             symbol?: string,
-            orderListId?: number,
+            orderListId?: number | bigint,
             origClientOrderId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -1519,14 +1521,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Query Margin Account\'s Open OCO (USER_DATA)
          * @param {string} [isIsolated] for isolated margin or not, "TRUE", "FALSE"，default "FALSE"
          * @param {string} [symbol] isolated margin pair
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         queryMarginAccountsOpenOco: async (
             isIsolated?: string,
             symbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -1564,14 +1566,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Query Margin Account\'s Open Orders (USER_DATA)
          * @param {string} [symbol] isolated margin pair
          * @param {string} [isIsolated] for isolated margin or not, "TRUE", "FALSE"，default "FALSE"
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         queryMarginAccountsOpenOrders: async (
             symbol?: string,
             isIsolated?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -1608,18 +1610,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Query Margin Account\'s Order (USER_DATA)
          * @param {string} symbol
          * @param {string} [isIsolated] for isolated margin or not, "TRUE", "FALSE"，default "FALSE"
-         * @param {number} [orderId]
+         * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         queryMarginAccountsOrder: async (
             symbol: string,
             isIsolated?: string,
-            orderId?: number,
+            orderId?: number | bigint,
             origClientOrderId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('queryMarginAccountsOrder', 'symbol', symbol);
@@ -1667,24 +1669,24 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Query Margin Account\'s Trade List (USER_DATA)
          * @param {string} symbol
          * @param {string} [isIsolated] for isolated margin or not, "TRUE", "FALSE"，default "FALSE"
-         * @param {number} [orderId]
-         * @param {number} [startTime] 只支持查询最近90天的数据
-         * @param {number} [endTime]
-         * @param {number} [fromId] 如设置fromId, 将返回id > fromId的数据。否则将返回最新数据
-         * @param {number} [limit] Default Value: 500; Max Value: 1000
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [orderId]
+         * @param {number | bigint} [startTime] 只支持查询最近90天的数据
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [fromId] 如设置fromId, 将返回id > fromId的数据。否则将返回最新数据
+         * @param {number | bigint} [limit] Default Value: 500; Max Value: 1000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         queryMarginAccountsTradeList: async (
             symbol: string,
             isIsolated?: string,
-            orderId?: number,
-            startTime?: number,
-            endTime?: number,
-            fromId?: number,
-            limit?: number,
-            recvWindow?: number
+            orderId?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            fromId?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('queryMarginAccountsTradeList', 'symbol', symbol);
@@ -1742,11 +1744,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query Special key(Low Latency Trading)(TRADE)
          * @param {string} [symbol] isolated margin pair
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
-        querySpecialKey: async (symbol?: string, recvWindow?: number): Promise<RequestArgs> => {
+        querySpecialKey: async (
+            symbol?: string,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
@@ -1774,11 +1779,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query Special key List(Low Latency Trading)(TRADE)
          * @param {string} [symbol] isolated margin pair
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
-        querySpecialKeyList: async (symbol?: string, recvWindow?: number): Promise<RequestArgs> => {
+        querySpecialKeyList: async (
+            symbol?: string,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
@@ -1810,13 +1818,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Small Liability Exchange (MARGIN)
          * @param {Array<string>} assetNames The assets list of small liability exchange， Example: assetNames = BTC,ETH
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         smallLiabilityExchange: async (
             assetNames: Array<string>,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'assetNames' is not null or undefined
             assertParamExists('smallLiabilityExchange', 'assetNames', assetNames);
@@ -2321,10 +2329,10 @@ export interface CreateSpecialKeyRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCreateSpecialKey
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2348,10 +2356,10 @@ export interface DeleteSpecialKeyRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiDeleteSpecialKey
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2375,10 +2383,10 @@ export interface EditIpForSpecialKeyRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiEditIpForSpecialKey
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2388,17 +2396,17 @@ export interface EditIpForSpecialKeyRequest {
 export interface GetForceLiquidationRecordRequest {
     /**
      * 只支持查询最近90天的数据
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetForceLiquidationRecord
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetForceLiquidationRecord
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * isolated symbol
@@ -2409,24 +2417,24 @@ export interface GetForceLiquidationRecordRequest {
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetForceLiquidationRecord
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10 Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetForceLiquidationRecord
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetForceLiquidationRecord
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2436,10 +2444,10 @@ export interface GetForceLiquidationRecordRequest {
 export interface GetSmallLiabilityExchangeCoinListRequest {
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetSmallLiabilityExchangeCoinList
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2449,38 +2457,38 @@ export interface GetSmallLiabilityExchangeCoinListRequest {
 export interface GetSmallLiabilityExchangeHistoryRequest {
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetSmallLiabilityExchangeHistory
      */
-    readonly current: number;
+    readonly current: number | bigint;
 
     /**
      * Default:10, Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetSmallLiabilityExchangeHistory
      */
-    readonly size: number;
+    readonly size: number | bigint;
 
     /**
      * 只支持查询最近90天的数据
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetSmallLiabilityExchangeHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetSmallLiabilityExchangeHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetSmallLiabilityExchangeHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2504,10 +2512,10 @@ export interface MarginAccountCancelAllOpenOrdersOnASymbolRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiMarginAccountCancelAllOpenOrdersOnASymbol
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2531,10 +2539,10 @@ export interface MarginAccountCancelOcoRequest {
 
     /**
      * Either `orderListId` or `listClientOrderId` must be provided
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiMarginAccountCancelOco
      */
-    readonly orderListId?: number;
+    readonly orderListId?: number | bigint;
 
     /**
      * Either `orderListId` or `listClientOrderId` must be provided
@@ -2552,10 +2560,10 @@ export interface MarginAccountCancelOcoRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiMarginAccountCancelOco
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2579,10 +2587,10 @@ export interface MarginAccountCancelOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiMarginAccountCancelOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -2600,10 +2608,10 @@ export interface MarginAccountCancelOrderRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiMarginAccountCancelOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2732,10 +2740,10 @@ export interface MarginAccountNewOcoRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiMarginAccountNewOco
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2850,10 +2858,10 @@ export interface MarginAccountNewOrderRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiMarginAccountNewOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3260,10 +3268,10 @@ export interface MarginManualLiquidationRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiMarginManualLiquidation
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3287,10 +3295,10 @@ export interface QueryCurrentMarginOrderCountUsageRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryCurrentMarginOrderCountUsage
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3314,38 +3322,38 @@ export interface QueryMarginAccountsAllOcoRequest {
 
     /**
      * 如设置fromId, 将返回id > fromId的数据。否则将返回最新数据
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOco
      */
-    readonly fromId?: number;
+    readonly fromId?: number | bigint;
 
     /**
      * 只支持查询最近90天的数据
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOco
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOco
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default Value: 500; Max Value: 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOco
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOco
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3369,38 +3377,38 @@ export interface QueryMarginAccountsAllOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOrders
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      * 只支持查询最近90天的数据
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOrders
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOrders
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default Value: 500; Max Value: 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOrders
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3424,10 +3432,10 @@ export interface QueryMarginAccountsOcoRequest {
 
     /**
      * Either `orderListId` or `listClientOrderId` must be provided
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsOco
      */
-    readonly orderListId?: number;
+    readonly orderListId?: number | bigint;
 
     /**
      *
@@ -3438,10 +3446,10 @@ export interface QueryMarginAccountsOcoRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsOco
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3465,10 +3473,10 @@ export interface QueryMarginAccountsOpenOcoRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsOpenOco
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3492,10 +3500,10 @@ export interface QueryMarginAccountsOpenOrdersRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsOpenOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3519,10 +3527,10 @@ export interface QueryMarginAccountsOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -3533,10 +3541,10 @@ export interface QueryMarginAccountsOrderRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3560,45 +3568,45 @@ export interface QueryMarginAccountsTradeListRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsTradeList
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      * 只支持查询最近90天的数据
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsTradeList
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsTradeList
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * 如设置fromId, 将返回id > fromId的数据。否则将返回最新数据
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsTradeList
      */
-    readonly fromId?: number;
+    readonly fromId?: number | bigint;
 
     /**
      * Default Value: 500; Max Value: 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsTradeList
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsTradeList
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3615,10 +3623,10 @@ export interface QuerySpecialKeyRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQuerySpecialKey
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3635,10 +3643,10 @@ export interface QuerySpecialKeyListRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQuerySpecialKeyList
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -3655,10 +3663,10 @@ export interface SmallLiabilityExchangeRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiSmallLiabilityExchange
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

@@ -94,22 +94,22 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
          * @summary Get Interest History (USER_DATA)
          * @param {string} [asset]
          * @param {string} [isolatedSymbol] isolated symbol
-         * @param {number} [startTime] 只支持查询最近90天的数据
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10 Max:100
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [startTime] 只支持查询最近90天的数据
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10 Max:100
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         getInterestHistory: async (
             asset?: string,
             isolatedSymbol?: string,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -162,7 +162,7 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
          * @param {string} symbol
          * @param {string} amount
          * @param {string} type `MARGIN`,`ISOLATED`
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
@@ -172,7 +172,7 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
             symbol: string,
             amount: string,
             type: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
             assertParamExists('marginAccountBorrowRepay', 'asset', asset);
@@ -235,12 +235,12 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
          * @param {string} type `MARGIN`,`ISOLATED`
          * @param {string} [asset]
          * @param {string} [isolatedSymbol] isolated symbol
-         * @param {number} [txId] `tranId` in `POST /sapi/v1/margin/loan`
-         * @param {number} [startTime] 只支持查询最近90天的数据
-         * @param {number} [endTime]
-         * @param {number} [current] Currently querying page. Start from 1. Default:1
-         * @param {number} [size] Default:10 Max:100
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [txId] `tranId` in `POST /sapi/v1/margin/loan`
+         * @param {number | bigint} [startTime] 只支持查询最近90天的数据
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
+         * @param {number | bigint} [size] Default:10 Max:100
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
@@ -248,12 +248,12 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
             type: string,
             asset?: string,
             isolatedSymbol?: string,
-            txId?: number,
-            startTime?: number,
-            endTime?: number,
-            current?: number,
-            size?: number,
-            recvWindow?: number
+            txId?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'type' is not null or undefined
             assertParamExists('queryBorrowRepayRecordsInMarginAccount', 'type', type);
@@ -313,19 +313,19 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
          *
          * @summary Query Margin Interest Rate History (USER_DATA)
          * @param {string} asset
-         * @param {number} [vipLevel] User's current specific margin data will be returned if vipLevel is omitted
-         * @param {number} [startTime] 只支持查询最近90天的数据
-         * @param {number} [endTime]
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [vipLevel] User's current specific margin data will be returned if vipLevel is omitted
+         * @param {number | bigint} [startTime] 只支持查询最近90天的数据
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         queryMarginInterestRateHistory: async (
             asset: string,
-            vipLevel?: number,
-            startTime?: number,
-            endTime?: number,
-            recvWindow?: number
+            vipLevel?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
             assertParamExists('queryMarginInterestRateHistory', 'asset', asset);
@@ -373,14 +373,14 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
          * @summary Query Max Borrow (USER_DATA)
          * @param {string} asset
          * @param {string} [isolatedSymbol] isolated symbol
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         queryMaxBorrow: async (
             asset: string,
             isolatedSymbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
             assertParamExists('queryMaxBorrow', 'asset', asset);
@@ -565,38 +565,38 @@ export interface GetInterestHistoryRequest {
 
     /**
      * 只支持查询最近90天的数据
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BorrowRepayApiGetInterestHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BorrowRepayApiGetInterestHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BorrowRepayApiGetInterestHistory
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10 Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BorrowRepayApiGetInterestHistory
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BorrowRepayApiGetInterestHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -641,10 +641,10 @@ export interface MarginAccountBorrowRepayRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BorrowRepayApiMarginAccountBorrowRepay
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -675,45 +675,45 @@ export interface QueryBorrowRepayRecordsInMarginAccountRequest {
 
     /**
      * `tranId` in `POST /sapi/v1/margin/loan`
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BorrowRepayApiQueryBorrowRepayRecordsInMarginAccount
      */
-    readonly txId?: number;
+    readonly txId?: number | bigint;
 
     /**
      * 只支持查询最近90天的数据
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BorrowRepayApiQueryBorrowRepayRecordsInMarginAccount
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BorrowRepayApiQueryBorrowRepayRecordsInMarginAccount
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Currently querying page. Start from 1. Default:1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BorrowRepayApiQueryBorrowRepayRecordsInMarginAccount
      */
-    readonly current?: number;
+    readonly current?: number | bigint;
 
     /**
      * Default:10 Max:100
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BorrowRepayApiQueryBorrowRepayRecordsInMarginAccount
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BorrowRepayApiQueryBorrowRepayRecordsInMarginAccount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -730,31 +730,31 @@ export interface QueryMarginInterestRateHistoryRequest {
 
     /**
      * User's current specific margin data will be returned if vipLevel is omitted
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BorrowRepayApiQueryMarginInterestRateHistory
      */
-    readonly vipLevel?: number;
+    readonly vipLevel?: number | bigint;
 
     /**
      * 只支持查询最近90天的数据
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BorrowRepayApiQueryMarginInterestRateHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BorrowRepayApiQueryMarginInterestRateHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BorrowRepayApiQueryMarginInterestRateHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -778,10 +778,10 @@ export interface QueryMaxBorrowRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BorrowRepayApiQueryMaxBorrow
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

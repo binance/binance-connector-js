@@ -94,13 +94,13 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * @summary Get All Isolated Margin Symbol(MARKET_DATA)
          * @param {string} [symbol] isolated margin pair
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         getAllIsolatedMarginSymbol: async (
             symbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -155,11 +155,11 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 100
          *
          * @summary Get Delist Schedule (MARKET_DATA)
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
-        getDelistSchedule: async (recvWindow?: number): Promise<RequestArgs> => {
+        getDelistSchedule: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -209,11 +209,11 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 100
          *
          * @summary Get list Schedule (MARKET_DATA)
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
-        getListSchedule: async (recvWindow?: number): Promise<RequestArgs> => {
+        getListSchedule: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -237,15 +237,15 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * @summary Query Isolated Margin Tier Data (USER_DATA)
          * @param {string} symbol
-         * @param {number} [tier] All margin tier data will be returned if tier is omitted
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [tier] All margin tier data will be returned if tier is omitted
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         queryIsolatedMarginTierData: async (
             symbol: string,
-            tier?: number,
-            recvWindow?: number
+            tier?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('queryIsolatedMarginTierData', 'symbol', symbol);
@@ -545,10 +545,10 @@ export interface GetAllIsolatedMarginSymbolRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiGetAllIsolatedMarginSymbol
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -571,10 +571,10 @@ export interface GetAllMarginAssetsRequest {
 export interface GetDelistScheduleRequest {
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiGetDelistSchedule
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -584,10 +584,10 @@ export interface GetDelistScheduleRequest {
 export interface GetListScheduleRequest {
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiGetListSchedule
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -604,17 +604,17 @@ export interface QueryIsolatedMarginTierDataRequest {
 
     /**
      * All margin tier data will be returned if tier is omitted
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiQueryIsolatedMarginTierData
      */
-    readonly tier?: number;
+    readonly tier?: number | bigint;
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiQueryIsolatedMarginTierData
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

@@ -46,11 +46,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 3000
          *
          * @summary Adjust cross margin max leverage (USER_DATA)
-         * @param {number} maxLeverage Can only adjust 3 , 5 or 10，Example: maxLeverage = 5 or 3 for Cross Margin Classic; maxLeverage=10 for Cross Margin Pro 10x leverage or 20x if compliance allows.
+         * @param {number | bigint} maxLeverage Can only adjust 3 , 5 or 10，Example: maxLeverage = 5 or 3 for Cross Margin Classic; maxLeverage=10 for Cross Margin Pro 10x leverage or 20x if compliance allows.
          *
          * @throws {RequiredError}
          */
-        adjustCrossMarginMaxLeverage: async (maxLeverage: number): Promise<RequestArgs> => {
+        adjustCrossMarginMaxLeverage: async (
+            maxLeverage: number | bigint
+        ): Promise<RequestArgs> => {
             // verify required parameter 'maxLeverage' is not null or undefined
             assertParamExists('adjustCrossMarginMaxLeverage', 'maxLeverage', maxLeverage);
 
@@ -78,13 +80,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Disable Isolated Margin Account (TRADE)
          * @param {string} symbol
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         disableIsolatedMarginAccount: async (
             symbol: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('disableIsolatedMarginAccount', 'symbol', symbol);
@@ -116,13 +118,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Enable Isolated Margin Account (TRADE)
          * @param {string} symbol
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         enableIsolatedMarginAccount: async (
             symbol: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('enableIsolatedMarginAccount', 'symbol', symbol);
@@ -153,11 +155,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 1(IP)
          *
          * @summary Get BNB Burn Status (USER_DATA)
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
-        getBnbBurnStatus: async (recvWindow?: number): Promise<RequestArgs> => {
+        getBnbBurnStatus: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -180,11 +182,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 10(IP)
          *
          * @summary Get Summary of Margin account (USER_DATA)
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
-        getSummaryOfMarginAccount: async (recvWindow?: number): Promise<RequestArgs> => {
+        getSummaryOfMarginAccount: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -210,11 +212,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @param {string} [asset]
          * @param {string} [symbol] isolated margin pair
          * @param {string} [type] Transfer Type: ROLL_IN, ROLL_OUT
-         * @param {number} [startTime] 只支持查询最近90天的数据
-         * @param {number} [endTime]
-         * @param {number} [fromId] 如设置fromId, 将返回id > fromId的数据。否则将返回最新数据
-         * @param {number} [limit] Default Value: 500; Max Value: 1000
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [startTime] 只支持查询最近90天的数据
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [fromId] 如设置fromId, 将返回id > fromId的数据。否则将返回最新数据
+         * @param {number | bigint} [limit] Default Value: 500; Max Value: 1000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
@@ -222,11 +224,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             asset?: string,
             symbol?: string,
             type?: string,
-            startTime?: number,
-            endTime?: number,
-            fromId?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            fromId?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -278,11 +280,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 10(IP)
          *
          * @summary Query Cross Margin Account Details (USER_DATA)
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
-        queryCrossMarginAccountDetails: async (recvWindow?: number): Promise<RequestArgs> => {
+        queryCrossMarginAccountDetails: async (
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -305,16 +309,16 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 1 when coin is specified;(IP)
          *
          * @summary Query Cross Margin Fee Data (USER_DATA)
-         * @param {number} [vipLevel] User's current specific margin data will be returned if vipLevel is omitted
+         * @param {number | bigint} [vipLevel] User's current specific margin data will be returned if vipLevel is omitted
          * @param {string} [coin]
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         queryCrossMarginFeeData: async (
-            vipLevel?: number,
+            vipLevel?: number | bigint,
             coin?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -346,12 +350,12 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 1(IP)
          *
          * @summary Query Enabled Isolated Margin Account Limit (USER_DATA)
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         queryEnabledIsolatedMarginAccountLimit: async (
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -379,13 +383,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Query Isolated Margin Account Info (USER_DATA)
          * @param {string} [symbols] Max 5 symbols can be sent; separated by ",". e.g. "BTCUSDT,BNBUSDT,ADAUSDT"
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         queryIsolatedMarginAccountInfo: async (
             symbols?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -413,16 +417,16 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 1 when a single is specified;(IP)
          *
          * @summary Query Isolated Margin Fee Data (USER_DATA)
-         * @param {number} [vipLevel] User's current specific margin data will be returned if vipLevel is omitted
+         * @param {number | bigint} [vipLevel] User's current specific margin data will be returned if vipLevel is omitted
          * @param {string} [symbol] isolated margin pair
-         * @param {number} [recvWindow] No more than 60000
+         * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
          */
         queryIsolatedMarginFeeData: async (
-            vipLevel?: number,
+            vipLevel?: number | bigint,
             symbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -625,10 +629,10 @@ export interface AccountApiInterface {
 export interface AdjustCrossMarginMaxLeverageRequest {
     /**
      * Can only adjust 3 , 5 or 10，Example: maxLeverage = 5 or 3 for Cross Margin Classic; maxLeverage=10 for Cross Margin Pro 10x leverage or 20x if compliance allows.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiAdjustCrossMarginMaxLeverage
      */
-    readonly maxLeverage: number;
+    readonly maxLeverage: number | bigint;
 }
 
 /**
@@ -645,10 +649,10 @@ export interface DisableIsolatedMarginAccountRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiDisableIsolatedMarginAccount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -665,10 +669,10 @@ export interface EnableIsolatedMarginAccountRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiEnableIsolatedMarginAccount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -678,10 +682,10 @@ export interface EnableIsolatedMarginAccountRequest {
 export interface GetBnbBurnStatusRequest {
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetBnbBurnStatus
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -691,10 +695,10 @@ export interface GetBnbBurnStatusRequest {
 export interface GetSummaryOfMarginAccountRequest {
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetSummaryOfMarginAccount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -725,38 +729,38 @@ export interface QueryCrossIsolatedMarginCapitalFlowRequest {
 
     /**
      * 只支持查询最近90天的数据
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryCrossIsolatedMarginCapitalFlow
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryCrossIsolatedMarginCapitalFlow
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * 如设置fromId, 将返回id > fromId的数据。否则将返回最新数据
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryCrossIsolatedMarginCapitalFlow
      */
-    readonly fromId?: number;
+    readonly fromId?: number | bigint;
 
     /**
      * Default Value: 500; Max Value: 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryCrossIsolatedMarginCapitalFlow
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryCrossIsolatedMarginCapitalFlow
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -766,10 +770,10 @@ export interface QueryCrossIsolatedMarginCapitalFlowRequest {
 export interface QueryCrossMarginAccountDetailsRequest {
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryCrossMarginAccountDetails
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -779,10 +783,10 @@ export interface QueryCrossMarginAccountDetailsRequest {
 export interface QueryCrossMarginFeeDataRequest {
     /**
      * User's current specific margin data will be returned if vipLevel is omitted
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryCrossMarginFeeData
      */
-    readonly vipLevel?: number;
+    readonly vipLevel?: number | bigint;
 
     /**
      *
@@ -793,10 +797,10 @@ export interface QueryCrossMarginFeeDataRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryCrossMarginFeeData
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -806,10 +810,10 @@ export interface QueryCrossMarginFeeDataRequest {
 export interface QueryEnabledIsolatedMarginAccountLimitRequest {
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryEnabledIsolatedMarginAccountLimit
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -826,10 +830,10 @@ export interface QueryIsolatedMarginAccountInfoRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryIsolatedMarginAccountInfo
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -839,10 +843,10 @@ export interface QueryIsolatedMarginAccountInfoRequest {
 export interface QueryIsolatedMarginFeeDataRequest {
     /**
      * User's current specific margin data will be returned if vipLevel is omitted
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryIsolatedMarginFeeData
      */
-    readonly vipLevel?: number;
+    readonly vipLevel?: number | bigint;
 
     /**
      * isolated margin pair
@@ -853,10 +857,10 @@ export interface QueryIsolatedMarginFeeDataRequest {
 
     /**
      * No more than 60000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiQueryIsolatedMarginFeeData
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
