@@ -32,8 +32,8 @@ export interface GetFlexibleLoanOngoingOrdersResponse {
     rows?: Array<GetFlexibleLoanOngoingOrdersResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFlexibleLoanOngoingOrdersResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

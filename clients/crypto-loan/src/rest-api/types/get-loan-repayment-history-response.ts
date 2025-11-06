@@ -32,8 +32,8 @@ export interface GetLoanRepaymentHistoryResponse {
     rows?: Array<GetLoanRepaymentHistoryResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetLoanRepaymentHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

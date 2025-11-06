@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { StableRateApi } from '../../../src/rest-api';
@@ -52,12 +53,14 @@ describe('StableRateApi', () => {
                 repayAmount: 1.0,
             };
 
-            mockResponse = {
-                loanlCoin: 'BUSD',
-                collateralCoin: 'BNB',
-                repayAmount: '1000',
-                rate: '300.36781234',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    loanlCoin: 'BUSD',
+                    collateralCoin: 'BNB',
+                    repayAmount: '1000',
+                    rate: '300.36781234',
+                })
+            );
 
             const spy = jest.spyOn(client, 'checkCollateralRepayRateStableRate').mockReturnValue(
                 Promise.resolve({
@@ -81,12 +84,14 @@ describe('StableRateApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                loanlCoin: 'BUSD',
-                collateralCoin: 'BNB',
-                repayAmount: '1000',
-                rate: '300.36781234',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    loanlCoin: 'BUSD',
+                    collateralCoin: 'BNB',
+                    repayAmount: '1000',
+                    rate: '300.36781234',
+                })
+            );
 
             const spy = jest.spyOn(client, 'checkCollateralRepayRateStableRate').mockReturnValue(
                 Promise.resolve({
@@ -172,22 +177,24 @@ describe('StableRateApi', () => {
 
     describe('getCryptoLoansIncomeHistory()', () => {
         it('should execute getCryptoLoansIncomeHistory() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    asset: 'BUSD',
-                    type: 'borrowIn',
-                    amount: '100',
-                    timestamp: 1633771139847,
-                    tranId: '80423589583',
-                },
-                {
-                    asset: 'BUSD',
-                    type: 'borrowIn',
-                    amount: '100',
-                    timestamp: 1634638371496,
-                    tranId: '81685123491',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        asset: 'BUSD',
+                        type: 'borrowIn',
+                        amount: '100',
+                        timestamp: 1633771139847,
+                        tranId: '80423589583',
+                    },
+                    {
+                        asset: 'BUSD',
+                        type: 'borrowIn',
+                        amount: '100',
+                        timestamp: 1634638371496,
+                        tranId: '81685123491',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getCryptoLoansIncomeHistory').mockReturnValue(
                 Promise.resolve({
@@ -213,22 +220,24 @@ describe('StableRateApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    asset: 'BUSD',
-                    type: 'borrowIn',
-                    amount: '100',
-                    timestamp: 1633771139847,
-                    tranId: '80423589583',
-                },
-                {
-                    asset: 'BUSD',
-                    type: 'borrowIn',
-                    amount: '100',
-                    timestamp: 1634638371496,
-                    tranId: '81685123491',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        asset: 'BUSD',
+                        type: 'borrowIn',
+                        amount: '100',
+                        timestamp: 1633771139847,
+                        tranId: '80423589583',
+                    },
+                    {
+                        asset: 'BUSD',
+                        type: 'borrowIn',
+                        amount: '100',
+                        timestamp: 1634638371496,
+                        tranId: '81685123491',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getCryptoLoansIncomeHistory').mockReturnValue(
                 Promise.resolve({
@@ -264,22 +273,24 @@ describe('StableRateApi', () => {
 
     describe('getLoanBorrowHistory()', () => {
         it('should execute getLoanBorrowHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        orderId: 100000001,
-                        loanCoin: 'BUSD',
-                        initialLoanAmount: '10000',
-                        hourlyInterestRate: '0.000057',
-                        loanTerm: '7',
-                        collateralCoin: 'BNB',
-                        initialCollateralAmount: '49.27565492',
-                        borrowTime: 1575018510000,
-                        status: 'Repaid',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            orderId: 100000001,
+                            loanCoin: 'BUSD',
+                            initialLoanAmount: '10000',
+                            hourlyInterestRate: '0.000057',
+                            loanTerm: '7',
+                            collateralCoin: 'BNB',
+                            initialCollateralAmount: '49.27565492',
+                            borrowTime: 1575018510000,
+                            status: 'Repaid',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getLoanBorrowHistory').mockReturnValue(
                 Promise.resolve({
@@ -307,22 +318,24 @@ describe('StableRateApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        orderId: 100000001,
-                        loanCoin: 'BUSD',
-                        initialLoanAmount: '10000',
-                        hourlyInterestRate: '0.000057',
-                        loanTerm: '7',
-                        collateralCoin: 'BNB',
-                        initialCollateralAmount: '49.27565492',
-                        borrowTime: 1575018510000,
-                        status: 'Repaid',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            orderId: 100000001,
+                            loanCoin: 'BUSD',
+                            initialLoanAmount: '10000',
+                            hourlyInterestRate: '0.000057',
+                            loanTerm: '7',
+                            collateralCoin: 'BNB',
+                            initialCollateralAmount: '49.27565492',
+                            borrowTime: 1575018510000,
+                            status: 'Repaid',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getLoanBorrowHistory').mockReturnValue(
                 Promise.resolve({
@@ -356,21 +369,23 @@ describe('StableRateApi', () => {
 
     describe('getLoanLtvAdjustmentHistory()', () => {
         it('should execute getLoanLtvAdjustmentHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        loanCoin: 'BUSD',
-                        collateralCoin: 'BNB',
-                        direction: 'ADDITIONAL',
-                        amount: '5.235',
-                        preLTV: '0.78',
-                        afterLTV: '0.56',
-                        adjustTime: 1575018510000,
-                        orderId: 756783308056935400,
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            loanCoin: 'BUSD',
+                            collateralCoin: 'BNB',
+                            direction: 'ADDITIONAL',
+                            amount: '5.235',
+                            preLTV: '0.78',
+                            afterLTV: '0.56',
+                            adjustTime: 1575018510000,
+                            orderId: 756783308056935400,
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getLoanLtvAdjustmentHistory').mockReturnValue(
                 Promise.resolve({
@@ -398,21 +413,23 @@ describe('StableRateApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        loanCoin: 'BUSD',
-                        collateralCoin: 'BNB',
-                        direction: 'ADDITIONAL',
-                        amount: '5.235',
-                        preLTV: '0.78',
-                        afterLTV: '0.56',
-                        adjustTime: 1575018510000,
-                        orderId: 756783308056935400,
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            loanCoin: 'BUSD',
+                            collateralCoin: 'BNB',
+                            direction: 'ADDITIONAL',
+                            amount: '5.235',
+                            preLTV: '0.78',
+                            afterLTV: '0.56',
+                            adjustTime: 1575018510000,
+                            orderId: 756783308056935400,
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getLoanLtvAdjustmentHistory').mockReturnValue(
                 Promise.resolve({
@@ -448,22 +465,24 @@ describe('StableRateApi', () => {
 
     describe('getLoanRepaymentHistory()', () => {
         it('should execute getLoanRepaymentHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        loanCoin: 'BUSD',
-                        repayAmount: '10000',
-                        collateralCoin: 'BNB',
-                        collateralUsed: '0',
-                        collateralReturn: '49.27565492',
-                        repayType: '1',
-                        repayStatus: 'Repaid',
-                        repayTime: 1575018510000,
-                        orderId: 756783308056935400,
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            loanCoin: 'BUSD',
+                            repayAmount: '10000',
+                            collateralCoin: 'BNB',
+                            collateralUsed: '0',
+                            collateralReturn: '49.27565492',
+                            repayType: '1',
+                            repayStatus: 'Repaid',
+                            repayTime: 1575018510000,
+                            orderId: 756783308056935400,
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getLoanRepaymentHistory').mockReturnValue(
                 Promise.resolve({
@@ -491,22 +510,24 @@ describe('StableRateApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        loanCoin: 'BUSD',
-                        repayAmount: '10000',
-                        collateralCoin: 'BNB',
-                        collateralUsed: '0',
-                        collateralReturn: '49.27565492',
-                        repayType: '1',
-                        repayStatus: 'Repaid',
-                        repayTime: 1575018510000,
-                        orderId: 756783308056935400,
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            loanCoin: 'BUSD',
+                            repayAmount: '10000',
+                            collateralCoin: 'BNB',
+                            collateralUsed: '0',
+                            collateralReturn: '49.27565492',
+                            repayType: '1',
+                            repayStatus: 'Repaid',
+                            repayTime: 1575018510000,
+                            orderId: 756783308056935400,
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getLoanRepaymentHistory').mockReturnValue(
                 Promise.resolve({

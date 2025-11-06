@@ -45,10 +45,10 @@ export interface GetFlexibleLoanBorrowHistoryResponseRowsInner {
     initialCollateralAmount?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFlexibleLoanBorrowHistoryResponseRowsInner
      */
-    borrowTime?: number;
+    borrowTime?: number | bigint;
     /**
      *
      * @type {string}

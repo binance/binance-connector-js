@@ -63,14 +63,14 @@ export interface GetLoanRepaymentHistoryResponseRowsInner {
     repayStatus?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetLoanRepaymentHistoryResponseRowsInner
      */
-    repayTime?: number;
+    repayTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetLoanRepaymentHistoryResponseRowsInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
 }

@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { FlexibleRateApi } from '../../../src/rest-api';
@@ -63,7 +64,9 @@ describe('FlexibleRateApi', () => {
                 collateralCoin: 'collateralCoin_example',
             };
 
-            mockResponse = { loanCoin: 'BUSD', collateralCoin: 'BNB', rate: '300.36781234' };
+            mockResponse = JSONParse(
+                JSONStringify({ loanCoin: 'BUSD', collateralCoin: 'BNB', rate: '300.36781234' })
+            );
 
             const spy = jest.spyOn(client, 'checkCollateralRepayRate').mockReturnValue(
                 Promise.resolve({
@@ -86,7 +89,9 @@ describe('FlexibleRateApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { loanCoin: 'BUSD', collateralCoin: 'BNB', rate: '300.36781234' };
+            mockResponse = JSONParse(
+                JSONStringify({ loanCoin: 'BUSD', collateralCoin: 'BNB', rate: '300.36781234' })
+            );
 
             const spy = jest.spyOn(client, 'checkCollateralRepayRate').mockReturnValue(
                 Promise.resolve({
@@ -160,14 +165,16 @@ describe('FlexibleRateApi', () => {
                 direction: 'direction_example',
             };
 
-            mockResponse = {
-                loanCoin: 'BUSD',
-                collateralCoin: 'BNB',
-                direction: 'ADDITIONAL',
-                adjustmentAmount: '5.235',
-                currentLTV: '0.52',
-                status: 'Succeeds',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    loanCoin: 'BUSD',
+                    collateralCoin: 'BNB',
+                    direction: 'ADDITIONAL',
+                    adjustmentAmount: '5.235',
+                    currentLTV: '0.52',
+                    status: 'Succeeds',
+                })
+            );
 
             const spy = jest.spyOn(client, 'flexibleLoanAdjustLtv').mockReturnValue(
                 Promise.resolve({
@@ -192,14 +199,16 @@ describe('FlexibleRateApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                loanCoin: 'BUSD',
-                collateralCoin: 'BNB',
-                direction: 'ADDITIONAL',
-                adjustmentAmount: '5.235',
-                currentLTV: '0.52',
-                status: 'Succeeds',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    loanCoin: 'BUSD',
+                    collateralCoin: 'BNB',
+                    direction: 'ADDITIONAL',
+                    adjustmentAmount: '5.235',
+                    currentLTV: '0.52',
+                    status: 'Succeeds',
+                })
+            );
 
             const spy = jest.spyOn(client, 'flexibleLoanAdjustLtv').mockReturnValue(
                 Promise.resolve({
@@ -307,13 +316,15 @@ describe('FlexibleRateApi', () => {
                 collateralCoin: 'collateralCoin_example',
             };
 
-            mockResponse = {
-                loanCoin: 'BUSD',
-                loanAmount: '100.5',
-                collateralCoin: 'BNB',
-                collateralAmount: '50.5',
-                status: 'Succeeds',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    loanCoin: 'BUSD',
+                    loanAmount: '100.5',
+                    collateralCoin: 'BNB',
+                    collateralAmount: '50.5',
+                    status: 'Succeeds',
+                })
+            );
 
             const spy = jest.spyOn(client, 'flexibleLoanBorrow').mockReturnValue(
                 Promise.resolve({
@@ -338,13 +349,15 @@ describe('FlexibleRateApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                loanCoin: 'BUSD',
-                loanAmount: '100.5',
-                collateralCoin: 'BNB',
-                collateralAmount: '50.5',
-                status: 'Succeeds',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    loanCoin: 'BUSD',
+                    loanAmount: '100.5',
+                    collateralCoin: 'BNB',
+                    collateralAmount: '50.5',
+                    status: 'Succeeds',
+                })
+            );
 
             const spy = jest.spyOn(client, 'flexibleLoanBorrow').mockReturnValue(
                 Promise.resolve({
@@ -415,15 +428,17 @@ describe('FlexibleRateApi', () => {
                 repayAmount: 1.0,
             };
 
-            mockResponse = {
-                loanCoin: 'BUSD',
-                collateralCoin: 'BNB',
-                remainingDebt: '100.5',
-                remainingCollateral: '5.253',
-                fullRepayment: false,
-                currentLTV: '0.25',
-                repayStatus: 'REPAID',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    loanCoin: 'BUSD',
+                    collateralCoin: 'BNB',
+                    remainingDebt: '100.5',
+                    remainingCollateral: '5.253',
+                    fullRepayment: false,
+                    currentLTV: '0.25',
+                    repayStatus: 'REPAID',
+                })
+            );
 
             const spy = jest.spyOn(client, 'flexibleLoanRepay').mockReturnValue(
                 Promise.resolve({
@@ -450,15 +465,17 @@ describe('FlexibleRateApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                loanCoin: 'BUSD',
-                collateralCoin: 'BNB',
-                remainingDebt: '100.5',
-                remainingCollateral: '5.253',
-                fullRepayment: false,
-                currentLTV: '0.25',
-                repayStatus: 'REPAID',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    loanCoin: 'BUSD',
+                    collateralCoin: 'BNB',
+                    remainingDebt: '100.5',
+                    remainingCollateral: '5.253',
+                    fullRepayment: false,
+                    currentLTV: '0.25',
+                    repayStatus: 'REPAID',
+                })
+            );
 
             const spy = jest.spyOn(client, 'flexibleLoanRepay').mockReturnValue(
                 Promise.resolve({
@@ -540,17 +557,19 @@ describe('FlexibleRateApi', () => {
 
     describe('getFlexibleLoanAssetsData()', () => {
         it('should execute getFlexibleLoanAssetsData() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        loanCoin: 'BUSD',
-                        flexibleInterestRate: '0.00000491',
-                        flexibleMinLimit: '100',
-                        flexibleMaxLimit: '1000000',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            loanCoin: 'BUSD',
+                            flexibleInterestRate: '0.00000491',
+                            flexibleMinLimit: '100',
+                            flexibleMaxLimit: '1000000',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFlexibleLoanAssetsData').mockReturnValue(
                 Promise.resolve({
@@ -572,17 +591,19 @@ describe('FlexibleRateApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        loanCoin: 'BUSD',
-                        flexibleInterestRate: '0.00000491',
-                        flexibleMinLimit: '100',
-                        flexibleMaxLimit: '1000000',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            loanCoin: 'BUSD',
+                            flexibleInterestRate: '0.00000491',
+                            flexibleMinLimit: '100',
+                            flexibleMaxLimit: '1000000',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFlexibleLoanAssetsData').mockReturnValue(
                 Promise.resolve({
@@ -618,19 +639,21 @@ describe('FlexibleRateApi', () => {
 
     describe('getFlexibleLoanBorrowHistory()', () => {
         it('should execute getFlexibleLoanBorrowHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        loanCoin: 'BUSD',
-                        initialLoanAmount: '10000',
-                        collateralCoin: 'BNB',
-                        initialCollateralAmount: '49.27565492',
-                        borrowTime: 1575018510000,
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            loanCoin: 'BUSD',
+                            initialLoanAmount: '10000',
+                            collateralCoin: 'BNB',
+                            initialCollateralAmount: '49.27565492',
+                            borrowTime: 1575018510000,
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFlexibleLoanBorrowHistory').mockReturnValue(
                 Promise.resolve({
@@ -657,19 +680,21 @@ describe('FlexibleRateApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        loanCoin: 'BUSD',
-                        initialLoanAmount: '10000',
-                        collateralCoin: 'BNB',
-                        initialCollateralAmount: '49.27565492',
-                        borrowTime: 1575018510000,
-                        status: 'SUCCESS',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            loanCoin: 'BUSD',
+                            initialLoanAmount: '10000',
+                            collateralCoin: 'BNB',
+                            initialCollateralAmount: '49.27565492',
+                            borrowTime: 1575018510000,
+                            status: 'SUCCESS',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFlexibleLoanBorrowHistory').mockReturnValue(
                 Promise.resolve({
@@ -705,18 +730,20 @@ describe('FlexibleRateApi', () => {
 
     describe('getFlexibleLoanCollateralAssetsData()', () => {
         it('should execute getFlexibleLoanCollateralAssetsData() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        collateralCoin: 'BNB',
-                        initialLTV: '0.65',
-                        marginCallLTV: '0.75',
-                        liquidationLTV: '0.83',
-                        maxLimit: '1000000',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            collateralCoin: 'BNB',
+                            initialLTV: '0.65',
+                            marginCallLTV: '0.75',
+                            liquidationLTV: '0.83',
+                            maxLimit: '1000000',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFlexibleLoanCollateralAssetsData').mockReturnValue(
                 Promise.resolve({
@@ -738,18 +765,20 @@ describe('FlexibleRateApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        collateralCoin: 'BNB',
-                        initialLTV: '0.65',
-                        marginCallLTV: '0.75',
-                        liquidationLTV: '0.83',
-                        maxLimit: '1000000',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            collateralCoin: 'BNB',
+                            initialLTV: '0.65',
+                            marginCallLTV: '0.75',
+                            liquidationLTV: '0.83',
+                            maxLimit: '1000000',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFlexibleLoanCollateralAssetsData').mockReturnValue(
                 Promise.resolve({
@@ -787,22 +816,24 @@ describe('FlexibleRateApi', () => {
 
     describe('getFlexibleLoanLiquidationHistory()', () => {
         it('should execute getFlexibleLoanLiquidationHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        loanCoin: 'BUSD',
-                        liquidationDebt: '10000',
-                        collateralCoin: 'BNB',
-                        liquidationCollateralAmount: '123',
-                        returnCollateralAmount: '0.2',
-                        liquidationFee: '1.2',
-                        liquidationStartingPrice: '49.27565492',
-                        liquidationStartingTime: 1575018510000,
-                        status: 'Liquidated',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            loanCoin: 'BUSD',
+                            liquidationDebt: '10000',
+                            collateralCoin: 'BNB',
+                            liquidationCollateralAmount: '123',
+                            returnCollateralAmount: '0.2',
+                            liquidationFee: '1.2',
+                            liquidationStartingPrice: '49.27565492',
+                            liquidationStartingTime: 1575018510000,
+                            status: 'Liquidated',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFlexibleLoanLiquidationHistory').mockReturnValue(
                 Promise.resolve({
@@ -829,22 +860,24 @@ describe('FlexibleRateApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        loanCoin: 'BUSD',
-                        liquidationDebt: '10000',
-                        collateralCoin: 'BNB',
-                        liquidationCollateralAmount: '123',
-                        returnCollateralAmount: '0.2',
-                        liquidationFee: '1.2',
-                        liquidationStartingPrice: '49.27565492',
-                        liquidationStartingTime: 1575018510000,
-                        status: 'Liquidated',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            loanCoin: 'BUSD',
+                            liquidationDebt: '10000',
+                            collateralCoin: 'BNB',
+                            liquidationCollateralAmount: '123',
+                            returnCollateralAmount: '0.2',
+                            liquidationFee: '1.2',
+                            liquidationStartingPrice: '49.27565492',
+                            liquidationStartingTime: 1575018510000,
+                            status: 'Liquidated',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFlexibleLoanLiquidationHistory').mockReturnValue(
                 Promise.resolve({
@@ -882,20 +915,22 @@ describe('FlexibleRateApi', () => {
 
     describe('getFlexibleLoanLtvAdjustmentHistory()', () => {
         it('should execute getFlexibleLoanLtvAdjustmentHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        loanCoin: 'BUSD',
-                        collateralCoin: 'BNB',
-                        direction: 'ADDITIONAL',
-                        collateralAmount: '5.235',
-                        preLTV: '0.78',
-                        afterLTV: '0.56',
-                        adjustTime: 1575018510000,
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            loanCoin: 'BUSD',
+                            collateralCoin: 'BNB',
+                            direction: 'ADDITIONAL',
+                            collateralAmount: '5.235',
+                            preLTV: '0.78',
+                            afterLTV: '0.56',
+                            adjustTime: 1575018510000,
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFlexibleLoanLtvAdjustmentHistory').mockReturnValue(
                 Promise.resolve({
@@ -922,20 +957,22 @@ describe('FlexibleRateApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        loanCoin: 'BUSD',
-                        collateralCoin: 'BNB',
-                        direction: 'ADDITIONAL',
-                        collateralAmount: '5.235',
-                        preLTV: '0.78',
-                        afterLTV: '0.56',
-                        adjustTime: 1575018510000,
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            loanCoin: 'BUSD',
+                            collateralCoin: 'BNB',
+                            direction: 'ADDITIONAL',
+                            collateralAmount: '5.235',
+                            preLTV: '0.78',
+                            afterLTV: '0.56',
+                            adjustTime: 1575018510000,
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFlexibleLoanLtvAdjustmentHistory').mockReturnValue(
                 Promise.resolve({
@@ -973,18 +1010,20 @@ describe('FlexibleRateApi', () => {
 
     describe('getFlexibleLoanOngoingOrders()', () => {
         it('should execute getFlexibleLoanOngoingOrders() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        loanCoin: 'BUSD',
-                        totalDebt: '10000',
-                        collateralCoin: 'BNB',
-                        collateralAmount: '49.27565492',
-                        currentLTV: '0.57',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            loanCoin: 'BUSD',
+                            totalDebt: '10000',
+                            collateralCoin: 'BNB',
+                            collateralAmount: '49.27565492',
+                            currentLTV: '0.57',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFlexibleLoanOngoingOrders').mockReturnValue(
                 Promise.resolve({
@@ -1009,18 +1048,20 @@ describe('FlexibleRateApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        loanCoin: 'BUSD',
-                        totalDebt: '10000',
-                        collateralCoin: 'BNB',
-                        collateralAmount: '49.27565492',
-                        currentLTV: '0.57',
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            loanCoin: 'BUSD',
+                            totalDebt: '10000',
+                            collateralCoin: 'BNB',
+                            collateralAmount: '49.27565492',
+                            currentLTV: '0.57',
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFlexibleLoanOngoingOrders').mockReturnValue(
                 Promise.resolve({
@@ -1056,19 +1097,21 @@ describe('FlexibleRateApi', () => {
 
     describe('getFlexibleLoanRepaymentHistory()', () => {
         it('should execute getFlexibleLoanRepaymentHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                rows: [
-                    {
-                        loanCoin: 'BUSD',
-                        repayAmount: '10000',
-                        collateralCoin: 'BNB',
-                        collateralReturn: '49.27565492',
-                        repayStatus: 'REPAID',
-                        repayTime: 1575018510000,
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            loanCoin: 'BUSD',
+                            repayAmount: '10000',
+                            collateralCoin: 'BNB',
+                            collateralReturn: '49.27565492',
+                            repayStatus: 'REPAID',
+                            repayTime: 1575018510000,
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFlexibleLoanRepaymentHistory').mockReturnValue(
                 Promise.resolve({
@@ -1095,19 +1138,21 @@ describe('FlexibleRateApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                rows: [
-                    {
-                        loanCoin: 'BUSD',
-                        repayAmount: '10000',
-                        collateralCoin: 'BNB',
-                        collateralReturn: '49.27565492',
-                        repayStatus: 'REPAID',
-                        repayTime: 1575018510000,
-                    },
-                ],
-                total: 1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            loanCoin: 'BUSD',
+                            repayAmount: '10000',
+                            collateralCoin: 'BNB',
+                            collateralReturn: '49.27565492',
+                            repayStatus: 'REPAID',
+                            repayTime: 1575018510000,
+                        },
+                    ],
+                    total: 1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFlexibleLoanRepaymentHistory').mockReturnValue(
                 Promise.resolve({

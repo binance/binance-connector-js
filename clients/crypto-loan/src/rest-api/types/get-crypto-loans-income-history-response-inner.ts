@@ -39,10 +39,10 @@ export interface GetCryptoLoansIncomeHistoryResponseInner {
     amount?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetCryptoLoansIncomeHistoryResponseInner
      */
-    timestamp?: number;
+    timestamp?: number | bigint;
     /**
      *
      * @type {string}

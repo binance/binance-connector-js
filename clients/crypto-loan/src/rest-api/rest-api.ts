@@ -108,6 +108,7 @@ export class RestAPI {
      *
      * @summary Check Collateral Repay Rate (USER_DATA)
      * @param {CheckCollateralRepayRateRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<CheckCollateralRepayRateResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Check-Collateral-Repay-Rate Binance API Documentation}
@@ -127,6 +128,7 @@ export class RestAPI {
      *
      * @summary Flexible Loan Adjust LTV(TRADE)
      * @param {FlexibleLoanAdjustLtvRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<FlexibleLoanAdjustLtvResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/trade/Flexible-Loan-Adjust-LTV Binance API Documentation}
@@ -148,6 +150,7 @@ export class RestAPI {
      *
      * @summary Flexible Loan Borrow(TRADE)
      * @param {FlexibleLoanBorrowRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<FlexibleLoanBorrowResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/trade/Flexible-Loan-Borrow Binance API Documentation}
@@ -168,6 +171,7 @@ export class RestAPI {
      *
      * @summary Flexible Loan Repay(TRADE)
      * @param {FlexibleLoanRepayRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<FlexibleLoanRepayResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/trade/Flexible-Loan-Repay Binance API Documentation}
@@ -185,6 +189,7 @@ export class RestAPI {
      *
      * @summary Get Flexible Loan Assets Data(USER_DATA)
      * @param {GetFlexibleLoanAssetsDataRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetFlexibleLoanAssetsDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/market-data/Get-Flexible-Loan-Assets-Data Binance API Documentation}
@@ -205,6 +210,7 @@ export class RestAPI {
      *
      * @summary Get Flexible Loan Borrow History(USER_DATA)
      * @param {GetFlexibleLoanBorrowHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetFlexibleLoanBorrowHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Get-Flexible-Loan-Borrow-History Binance API Documentation}
@@ -222,6 +228,7 @@ export class RestAPI {
      *
      * @summary Get Flexible Loan Collateral Assets Data(USER_DATA)
      * @param {GetFlexibleLoanCollateralAssetsDataRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetFlexibleLoanCollateralAssetsDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/market-data/Get-Flexible-Loan-Collateral-Assets-Data Binance API Documentation}
@@ -238,6 +245,7 @@ export class RestAPI {
      *
      * @summary Get Flexible Loan Liquidation History (USER_DATA)
      * @param {GetFlexibleLoanLiquidationHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetFlexibleLoanLiquidationHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Get-Flexible-Loan-Liquidation-History Binance API Documentation}
@@ -258,6 +266,7 @@ export class RestAPI {
      *
      * @summary Get Flexible Loan LTV Adjustment History(USER_DATA)
      * @param {GetFlexibleLoanLtvAdjustmentHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetFlexibleLoanLtvAdjustmentHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Get-Flexible-Loan-LTV-Adjustment-History Binance API Documentation}
@@ -275,6 +284,7 @@ export class RestAPI {
      *
      * @summary Get Flexible Loan Ongoing Orders(USER_DATA)
      * @param {GetFlexibleLoanOngoingOrdersRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetFlexibleLoanOngoingOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Get-Flexible-Loan-Ongoing-Orders Binance API Documentation}
@@ -295,6 +305,7 @@ export class RestAPI {
      *
      * @summary Get Flexible Loan Repayment History(USER_DATA)
      * @param {GetFlexibleLoanRepaymentHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetFlexibleLoanRepaymentHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Get-Flexible-Loan-Repayment-History Binance API Documentation}
@@ -312,6 +323,7 @@ export class RestAPI {
      *
      * @summary Check Collateral Repay Rate(USER_DATA)
      * @param {CheckCollateralRepayRateStableRateRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<CheckCollateralRepayRateStableRateResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/market-data/Check-Collateral-Repay-Rate Binance API Documentation}
@@ -332,6 +344,7 @@ export class RestAPI {
      *
      * @summary Get Crypto Loans Income History(USER_DATA)
      * @param {GetCryptoLoansIncomeHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetCryptoLoansIncomeHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/market-data/Get-Crypto-Loans-Income-History Binance API Documentation}
@@ -352,6 +365,7 @@ export class RestAPI {
      *
      * @summary Get Loan Borrow History(USER_DATA)
      * @param {GetLoanBorrowHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetLoanBorrowHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/user-information/Get-Loan-Borrow-History Binance API Documentation}
@@ -372,6 +386,7 @@ export class RestAPI {
      *
      * @summary Get Loan LTV Adjustment History(USER_DATA)
      * @param {GetLoanLtvAdjustmentHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetLoanLtvAdjustmentHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/user-information/Get-Loan-LTV-Adjustment-History Binance API Documentation}
@@ -392,6 +407,7 @@ export class RestAPI {
      *
      * @summary Get Loan Repayment History(USER_DATA)
      * @param {GetLoanRepaymentHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetLoanRepaymentHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/crypto_loan/stable-rate/user-information/Get-Loan-Repayment-History Binance API Documentation}

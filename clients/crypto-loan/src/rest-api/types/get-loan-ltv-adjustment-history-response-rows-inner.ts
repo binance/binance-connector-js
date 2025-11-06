@@ -57,14 +57,14 @@ export interface GetLoanLtvAdjustmentHistoryResponseRowsInner {
     afterLTV?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetLoanLtvAdjustmentHistoryResponseRowsInner
      */
-    adjustTime?: number;
+    adjustTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetLoanLtvAdjustmentHistoryResponseRowsInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
 }

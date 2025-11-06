@@ -32,8 +32,8 @@ export interface GetFlexibleLoanCollateralAssetsDataResponse {
     rows?: Array<GetFlexibleLoanCollateralAssetsDataResponseRowsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFlexibleLoanCollateralAssetsDataResponse
      */
-    total?: number;
+    total?: number | bigint;
 }

@@ -21,10 +21,10 @@
 export interface GetLoanBorrowHistoryResponseRowsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetLoanBorrowHistoryResponseRowsInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -63,10 +63,10 @@ export interface GetLoanBorrowHistoryResponseRowsInner {
     initialCollateralAmount?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetLoanBorrowHistoryResponseRowsInner
      */
-    borrowTime?: number;
+    borrowTime?: number | bigint;
     /**
      *
      * @type {string}

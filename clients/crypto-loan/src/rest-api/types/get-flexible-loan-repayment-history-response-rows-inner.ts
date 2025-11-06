@@ -51,8 +51,8 @@ export interface GetFlexibleLoanRepaymentHistoryResponseRowsInner {
     repayStatus?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFlexibleLoanRepaymentHistoryResponseRowsInner
      */
-    repayTime?: number;
+    repayTime?: number | bigint;
 }

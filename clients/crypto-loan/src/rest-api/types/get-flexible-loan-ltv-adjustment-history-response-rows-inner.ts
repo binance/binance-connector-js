@@ -57,8 +57,8 @@ export interface GetFlexibleLoanLtvAdjustmentHistoryResponseRowsInner {
     afterLTV?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFlexibleLoanLtvAdjustmentHistoryResponseRowsInner
      */
-    adjustTime?: number;
+    adjustTime?: number | bigint;
 }

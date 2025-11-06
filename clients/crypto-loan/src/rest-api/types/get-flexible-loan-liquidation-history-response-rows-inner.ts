@@ -63,10 +63,10 @@ export interface GetFlexibleLoanLiquidationHistoryResponseRowsInner {
     liquidationStartingPrice?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFlexibleLoanLiquidationHistoryResponseRowsInner
      */
-    liquidationStartingTime?: number;
+    liquidationStartingTime?: number | bigint;
     /**
      *
      * @type {string}
