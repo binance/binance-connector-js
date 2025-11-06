@@ -37,13 +37,13 @@ const PortfolioMarginEndpointsApiAxiosParamCreator = function (
          *
          * @summary Classic Portfolio Margin Account Information (USER_DATA)
          * @param {string} asset
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         classicPortfolioMarginAccountInformation: async (
             asset: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
             assertParamExists('classicPortfolioMarginAccountInformation', 'asset', asset);
@@ -108,10 +108,10 @@ export interface ClassicPortfolioMarginAccountInformationRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PortfolioMarginEndpointsApiClassicPortfolioMarginAccountInformation
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

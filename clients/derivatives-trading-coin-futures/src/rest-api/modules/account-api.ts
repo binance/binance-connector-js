@@ -49,11 +49,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 5
          *
          * @summary Account Information (USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        accountInformation: async (recvWindow?: number): Promise<RequestArgs> => {
+        accountInformation: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -76,11 +76,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 1
          *
          * @summary Futures Account Balance (USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        futuresAccountBalance: async (recvWindow?: number): Promise<RequestArgs> => {
+        futuresAccountBalance: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -103,11 +103,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 30
          *
          * @summary Get Current Position Mode(USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        getCurrentPositionMode: async (recvWindow?: number): Promise<RequestArgs> => {
+        getCurrentPositionMode: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -133,16 +133,16 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 5
          *
          * @summary Get Download Id For Futures Order History (USER_DATA)
-         * @param {number} startTime Timestamp in ms
-         * @param {number} endTime Timestamp in ms
-         * @param {number} [recvWindow]
+         * @param {number | bigint} startTime Timestamp in ms
+         * @param {number | bigint} endTime Timestamp in ms
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getDownloadIdForFuturesOrderHistory: async (
-            startTime: number,
-            endTime: number,
-            recvWindow?: number
+            startTime: number | bigint,
+            endTime: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'startTime' is not null or undefined
             assertParamExists('getDownloadIdForFuturesOrderHistory', 'startTime', startTime);
@@ -182,16 +182,16 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 5
          *
          * @summary Get Download Id For Futures Trade History (USER_DATA)
-         * @param {number} startTime Timestamp in ms
-         * @param {number} endTime Timestamp in ms
-         * @param {number} [recvWindow]
+         * @param {number | bigint} startTime Timestamp in ms
+         * @param {number | bigint} endTime Timestamp in ms
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getDownloadIdForFuturesTradeHistory: async (
-            startTime: number,
-            endTime: number,
-            recvWindow?: number
+            startTime: number | bigint,
+            endTime: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'startTime' is not null or undefined
             assertParamExists('getDownloadIdForFuturesTradeHistory', 'startTime', startTime);
@@ -231,16 +231,16 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 5
          *
          * @summary Get Download Id For Futures Transaction History(USER_DATA)
-         * @param {number} startTime Timestamp in ms
-         * @param {number} endTime Timestamp in ms
-         * @param {number} [recvWindow]
+         * @param {number | bigint} startTime Timestamp in ms
+         * @param {number | bigint} endTime Timestamp in ms
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getDownloadIdForFuturesTransactionHistory: async (
-            startTime: number,
-            endTime: number,
-            recvWindow?: number
+            startTime: number | bigint,
+            endTime: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'startTime' is not null or undefined
             assertParamExists('getDownloadIdForFuturesTransactionHistory', 'startTime', startTime);
@@ -280,13 +280,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Get Futures Order History Download Link by Id (USER_DATA)
          * @param {string} downloadId get by download id api
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getFuturesOrderHistoryDownloadLinkById: async (
             downloadId: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'downloadId' is not null or undefined
             assertParamExists('getFuturesOrderHistoryDownloadLinkById', 'downloadId', downloadId);
@@ -320,13 +320,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Get Futures Trade Download Link by Id(USER_DATA)
          * @param {string} downloadId get by download id api
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getFuturesTradeDownloadLinkById: async (
             downloadId: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'downloadId' is not null or undefined
             assertParamExists('getFuturesTradeDownloadLinkById', 'downloadId', downloadId);
@@ -360,13 +360,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Get Futures Transaction History Download Link by Id (USER_DATA)
          * @param {string} downloadId get by download id api
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getFuturesTransactionHistoryDownloadLinkById: async (
             downloadId: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'downloadId' is not null or undefined
             assertParamExists(
@@ -407,22 +407,22 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * @summary Get Income History(USER_DATA)
          * @param {string} [symbol]
          * @param {string} [incomeType] "TRANSFER","WELCOME_BONUS", "FUNDING_FEE", "REALIZED_PNL", "COMMISSION", "INSURANCE_CLEAR", and "DELIVERED_SETTELMENT"
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [page]
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [page]
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getIncomeHistory: async (
             symbol?: string,
             incomeType?: string,
-            startTime?: number,
-            endTime?: number,
-            page?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            page?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -473,13 +473,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Notional Bracket for Pair(USER_DATA)
          * @param {string} [pair]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         notionalBracketForPair: async (
             pair?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -508,13 +508,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary Notional Bracket for Symbol(USER_DATA)
          * @param {string} [symbol]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         notionalBracketForSymbol: async (
             symbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -543,11 +543,14 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          *
          * @summary User Commission Rate (USER_DATA)
          * @param {string} symbol
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        userCommissionRate: async (symbol: string, recvWindow?: number): Promise<RequestArgs> => {
+        userCommissionRate: async (
+            symbol: string,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('userCommissionRate', 'symbol', symbol);
 
@@ -794,10 +797,10 @@ export interface AccountApiInterface {
 export interface AccountInformationRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiAccountInformation
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -807,10 +810,10 @@ export interface AccountInformationRequest {
 export interface FuturesAccountBalanceRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiFuturesAccountBalance
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -820,10 +823,10 @@ export interface FuturesAccountBalanceRequest {
 export interface GetCurrentPositionModeRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetCurrentPositionMode
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -833,24 +836,24 @@ export interface GetCurrentPositionModeRequest {
 export interface GetDownloadIdForFuturesOrderHistoryRequest {
     /**
      * Timestamp in ms
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForFuturesOrderHistory
      */
-    readonly startTime: number;
+    readonly startTime: number | bigint;
 
     /**
      * Timestamp in ms
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForFuturesOrderHistory
      */
-    readonly endTime: number;
+    readonly endTime: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForFuturesOrderHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -860,24 +863,24 @@ export interface GetDownloadIdForFuturesOrderHistoryRequest {
 export interface GetDownloadIdForFuturesTradeHistoryRequest {
     /**
      * Timestamp in ms
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForFuturesTradeHistory
      */
-    readonly startTime: number;
+    readonly startTime: number | bigint;
 
     /**
      * Timestamp in ms
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForFuturesTradeHistory
      */
-    readonly endTime: number;
+    readonly endTime: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForFuturesTradeHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -887,24 +890,24 @@ export interface GetDownloadIdForFuturesTradeHistoryRequest {
 export interface GetDownloadIdForFuturesTransactionHistoryRequest {
     /**
      * Timestamp in ms
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForFuturesTransactionHistory
      */
-    readonly startTime: number;
+    readonly startTime: number | bigint;
 
     /**
      * Timestamp in ms
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForFuturesTransactionHistory
      */
-    readonly endTime: number;
+    readonly endTime: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetDownloadIdForFuturesTransactionHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -921,10 +924,10 @@ export interface GetFuturesOrderHistoryDownloadLinkByIdRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetFuturesOrderHistoryDownloadLinkById
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -941,10 +944,10 @@ export interface GetFuturesTradeDownloadLinkByIdRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetFuturesTradeDownloadLinkById
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -961,10 +964,10 @@ export interface GetFuturesTransactionHistoryDownloadLinkByIdRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetFuturesTransactionHistoryDownloadLinkById
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -988,38 +991,38 @@ export interface GetIncomeHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetIncomeHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetIncomeHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetIncomeHistory
      */
-    readonly page?: number;
+    readonly page?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetIncomeHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiGetIncomeHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1036,10 +1039,10 @@ export interface NotionalBracketForPairRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiNotionalBracketForPair
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1056,10 +1059,10 @@ export interface NotionalBracketForSymbolRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiNotionalBracketForSymbol
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1076,10 +1079,10 @@ export interface UserCommissionRateRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiUserCommissionRate
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

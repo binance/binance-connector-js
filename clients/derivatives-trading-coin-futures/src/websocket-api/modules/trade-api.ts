@@ -170,10 +170,10 @@ export interface CancelOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -184,10 +184,10 @@ export interface CancelOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -232,10 +232,10 @@ export interface ModifyOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiModifyOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -253,10 +253,10 @@ export interface ModifyOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiModifyOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -399,10 +399,10 @@ export interface NewOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiNewOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -433,10 +433,10 @@ export interface PositionInformationRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiPositionInformation
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -460,10 +460,10 @@ export interface QueryOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -474,10 +474,10 @@ export interface QueryOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

@@ -65,10 +65,10 @@ export interface AccountInformationRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiAccountInformation
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -85,10 +85,10 @@ export interface FuturesAccountBalanceRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountApiFuturesAccountBalance
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

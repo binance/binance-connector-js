@@ -67,11 +67,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} [symbol]
          * @param {string} [pair]
          * @param {string} [orderId]
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [fromId] ID to get aggregate trades from INCLUSIVE.
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [fromId] ID to get aggregate trades from INCLUSIVE.
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -79,11 +79,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             symbol?: string,
             pair?: string,
             orderId?: string,
-            startTime?: number,
-            endTime?: number,
-            fromId?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            fromId?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -148,22 +148,22 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary All Orders (USER_DATA)
          * @param {string} [symbol]
          * @param {string} [pair]
-         * @param {number} [orderId]
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [orderId]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         allOrders: async (
             symbol?: string,
             pair?: string,
-            orderId?: number,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
+            orderId?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -217,15 +217,15 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Auto-Cancel All Open Orders (TRADE)
          * @param {string} symbol
-         * @param {number} countdownTime countdown time, 1000 for 1 second. 0 to cancel the timer
-         * @param {number} [recvWindow]
+         * @param {number | bigint} countdownTime countdown time, 1000 for 1 second. 0 to cancel the timer
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         autoCancelAllOpenOrders: async (
             symbol: string,
-            countdownTime: number,
-            recvWindow?: number
+            countdownTime: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('autoCancelAllOpenOrders', 'symbol', symbol);
@@ -263,11 +263,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Cancel All Open Orders(TRADE)
          * @param {string} symbol
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        cancelAllOpenOrders: async (symbol: string, recvWindow?: number): Promise<RequestArgs> => {
+        cancelAllOpenOrders: async (
+            symbol: string,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('cancelAllOpenOrders', 'symbol', symbol);
 
@@ -302,7 +305,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} symbol
          * @param {Array<number>} [orderIdList] max length 10 <br /> e.g. [1234567,2345678]
          * @param {Array<string>} [origClientOrderIdList] max length 10<br /> e.g. ["my_id_1","my_id_2"], encode the double quotes. No space after comma.
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -310,7 +313,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             symbol: string,
             orderIdList?: Array<number>,
             origClientOrderIdList?: Array<string>,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('cancelMultipleOrders', 'symbol', symbol);
@@ -353,17 +356,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Cancel Order (TRADE)
          * @param {string} symbol
-         * @param {number} [orderId]
+         * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         cancelOrder: async (
             symbol: string,
-            orderId?: number,
+            orderId?: number | bigint,
             origClientOrderId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('cancelOrder', 'symbol', symbol);
@@ -404,15 +407,15 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Change Initial Leverage (TRADE)
          * @param {string} symbol
-         * @param {number} leverage target initial leverage: int from 1 to 125
-         * @param {number} [recvWindow]
+         * @param {number | bigint} leverage target initial leverage: int from 1 to 125
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         changeInitialLeverage: async (
             symbol: string,
-            leverage: number,
-            recvWindow?: number
+            leverage: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('changeInitialLeverage', 'symbol', symbol);
@@ -452,14 +455,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Change Margin Type (TRADE)
          * @param {string} symbol
          * @param {ChangeMarginTypeMarginTypeEnum} marginType ISOLATED, CROSSED
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         changeMarginType: async (
             symbol: string,
             marginType: ChangeMarginTypeMarginTypeEnum,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('changeMarginType', 'symbol', symbol);
@@ -497,13 +500,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Change Position Mode(TRADE)
          * @param {string} dualSidePosition "true": Hedge Mode; "false": One-way Mode
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         changePositionMode: async (
             dualSidePosition: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'dualSidePosition' is not null or undefined
             assertParamExists('changePositionMode', 'dualSidePosition', dualSidePosition);
@@ -536,14 +539,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Current All Open Orders (USER_DATA)
          * @param {string} [symbol]
          * @param {string} [pair]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         currentAllOpenOrders: async (
             symbol?: string,
             pair?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -580,23 +583,23 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Get Order Modify History (USER_DATA)
          * @param {string} symbol
-         * @param {number} [orderId]
+         * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getOrderModifyHistory: async (
             symbol: string,
-            orderId?: number,
+            orderId?: number | bigint,
             origClientOrderId?: string,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('getOrderModifyHistory', 'symbol', symbol);
@@ -648,21 +651,21 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Get Position Margin Change History(TRADE)
          * @param {string} symbol
-         * @param {number} [type] 1: Add position margin,2: Reduce position margin
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [type] 1: Add position margin,2: Reduce position margin
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getPositionMarginChangeHistory: async (
             symbol: string,
-            type?: number,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
+            type?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('getPositionMarginChangeHistory', 'symbol', symbol);
@@ -715,7 +718,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} amount
          * @param {ModifyIsolatedPositionMarginTypeEnum} type
          * @param {ModifyIsolatedPositionMarginPositionSideEnum} [positionSide] Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent with Hedge Mode.
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -724,7 +727,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             amount: number,
             type: ModifyIsolatedPositionMarginTypeEnum,
             positionSide?: ModifyIsolatedPositionMarginPositionSideEnum,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('modifyIsolatedPositionMargin', 'symbol', symbol);
@@ -777,13 +780,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Modify Multiple Orders(TRADE)
          * @param {Array<ModifyMultipleOrdersBatchOrdersParameterInner>} batchOrders order list. Max 5 orders
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         modifyMultipleOrders: async (
             batchOrders: Array<ModifyMultipleOrdersBatchOrdersParameterInner>,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'batchOrders' is not null or undefined
             assertParamExists('modifyMultipleOrders', 'batchOrders', batchOrders);
@@ -824,24 +827,24 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Modify Order (TRADE)
          * @param {string} symbol
          * @param {ModifyOrderSideEnum} side `SELL`, `BUY`
-         * @param {number} [orderId]
+         * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
          * @param {number} [quantity] quantity measured by contract number, Cannot be sent with `closePosition`=`true`
          * @param {number} [price]
          * @param {ModifyOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         modifyOrder: async (
             symbol: string,
             side: ModifyOrderSideEnum,
-            orderId?: number,
+            orderId?: number | bigint,
             origClientOrderId?: string,
             quantity?: number,
             price?: number,
             priceMatch?: ModifyOrderPriceMatchEnum,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('modifyOrder', 'symbol', symbol);
@@ -954,7 +957,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {NewOrderNewOrderRespTypeEnum} [newOrderRespType] "ACK", "RESULT", default "ACK"
          * @param {NewOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
          * @param {NewOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `EXPIRE_MAKER`
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -977,7 +980,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             newOrderRespType?: NewOrderNewOrderRespTypeEnum,
             priceMatch?: NewOrderPriceMatchEnum,
             selfTradePreventionMode?: NewOrderSelfTradePreventionModeEnum,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('newOrder', 'symbol', symbol);
@@ -1088,13 +1091,13 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Position ADL Quantile Estimation(USER_DATA)
          * @param {string} [symbol]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         positionAdlQuantileEstimation: async (
             symbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -1129,14 +1132,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Position Information(USER_DATA)
          * @param {string} [marginAsset]
          * @param {string} [pair]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         positionInformation: async (
             marginAsset?: string,
             pair?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -1172,17 +1175,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query Current Open Order(USER_DATA)
          * @param {string} symbol
-         * @param {number} [orderId]
+         * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryCurrentOpenOrder: async (
             symbol: string,
-            orderId?: number,
+            orderId?: number | bigint,
             origClientOrderId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('queryCurrentOpenOrder', 'symbol', symbol);
@@ -1229,17 +1232,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query Order (USER_DATA)
          * @param {string} symbol
-         * @param {number} [orderId]
+         * @param {number | bigint} [orderId]
          * @param {string} [origClientOrderId]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryOrder: async (
             symbol: string,
-            orderId?: number,
+            orderId?: number | bigint,
             origClientOrderId?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('queryOrder', 'symbol', symbol);
@@ -1283,20 +1286,20 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary User\'s Force Orders(USER_DATA)
          * @param {string} [symbol]
          * @param {UsersForceOrdersAutoCloseTypeEnum} [autoCloseType] "LIQUIDATION" for liquidation orders, "ADL" for ADL orders.
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [limit] Default 100; max 1000
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         usersForceOrders: async (
             symbol?: string,
             autoCloseType?: UsersForceOrdersAutoCloseTypeEnum,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -1775,38 +1778,38 @@ export interface AccountTradeListRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiAccountTradeList
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiAccountTradeList
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * ID to get aggregate trades from INCLUSIVE.
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiAccountTradeList
      */
-    readonly fromId?: number;
+    readonly fromId?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiAccountTradeList
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiAccountTradeList
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1830,38 +1833,38 @@ export interface AllOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiAllOrders
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiAllOrders
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiAllOrders
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiAllOrders
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiAllOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1878,17 +1881,17 @@ export interface AutoCancelAllOpenOrdersRequest {
 
     /**
      * countdown time, 1000 for 1 second. 0 to cancel the timer
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiAutoCancelAllOpenOrders
      */
-    readonly countdownTime: number;
+    readonly countdownTime: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiAutoCancelAllOpenOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1905,10 +1908,10 @@ export interface CancelAllOpenOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelAllOpenOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1939,10 +1942,10 @@ export interface CancelMultipleOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelMultipleOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1959,10 +1962,10 @@ export interface CancelOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -1973,10 +1976,10 @@ export interface CancelOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCancelOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1993,17 +1996,17 @@ export interface ChangeInitialLeverageRequest {
 
     /**
      * target initial leverage: int from 1 to 125
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiChangeInitialLeverage
      */
-    readonly leverage: number;
+    readonly leverage: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiChangeInitialLeverage
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2027,10 +2030,10 @@ export interface ChangeMarginTypeRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiChangeMarginType
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2047,10 +2050,10 @@ export interface ChangePositionModeRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiChangePositionMode
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2074,10 +2077,10 @@ export interface CurrentAllOpenOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiCurrentAllOpenOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2094,10 +2097,10 @@ export interface GetOrderModifyHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetOrderModifyHistory
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -2108,31 +2111,31 @@ export interface GetOrderModifyHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetOrderModifyHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetOrderModifyHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetOrderModifyHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetOrderModifyHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2149,38 +2152,38 @@ export interface GetPositionMarginChangeHistoryRequest {
 
     /**
      * 1: Add position margin,2: Reduce position margin
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetPositionMarginChangeHistory
      */
-    readonly type?: number;
+    readonly type?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetPositionMarginChangeHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetPositionMarginChangeHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetPositionMarginChangeHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiGetPositionMarginChangeHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2218,10 +2221,10 @@ export interface ModifyIsolatedPositionMarginRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiModifyIsolatedPositionMargin
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2238,10 +2241,10 @@ export interface ModifyMultipleOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiModifyMultipleOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2265,10 +2268,10 @@ export interface ModifyOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiModifyOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -2300,10 +2303,10 @@ export interface ModifyOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiModifyOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2439,10 +2442,10 @@ export interface NewOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiNewOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2459,10 +2462,10 @@ export interface PositionAdlQuantileEstimationRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiPositionAdlQuantileEstimation
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2486,10 +2489,10 @@ export interface PositionInformationRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiPositionInformation
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2506,10 +2509,10 @@ export interface QueryCurrentOpenOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryCurrentOpenOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -2520,10 +2523,10 @@ export interface QueryCurrentOpenOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryCurrentOpenOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2540,10 +2543,10 @@ export interface QueryOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryOrder
      */
-    readonly orderId?: number;
+    readonly orderId?: number | bigint;
 
     /**
      *
@@ -2554,10 +2557,10 @@ export interface QueryOrderRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiQueryOrder
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2581,31 +2584,31 @@ export interface UsersForceOrdersRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiUsersForceOrders
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiUsersForceOrders
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default 100; max 1000
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiUsersForceOrders
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeApiUsersForceOrders
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

@@ -409,7 +409,7 @@ const WebsocketMarketStreamsApiParamCreator = function () {
          *
          * @summary Partial Book Depth Streams
          * @param {string} symbol The symbol parameter
-         * @param {number} levels The levels parameter
+         * @param {number | bigint} levels The levels parameter
          * @param {string} [id] Unique WebSocket request ID.
          * @param {string} [updateSpeed] WebSocket stream update speed
          *
@@ -417,7 +417,7 @@ const WebsocketMarketStreamsApiParamCreator = function () {
          */
         partialBookDepthStreams: (
             symbol: string,
-            levels: number,
+            levels: number | bigint,
             id?: string,
             updateSpeed?: string
         ): string => {
@@ -1149,10 +1149,10 @@ export interface PartialBookDepthStreamsRequest {
 
     /**
      * The levels parameter
-     * @type {number}
+     * @type {number | bigint}
      * @memberof WebsocketMarketStreamsApiPartialBookDepthStreams
      */
-    readonly levels: number;
+    readonly levels: number | bigint;
 
     /**
      * Unique WebSocket request ID.
