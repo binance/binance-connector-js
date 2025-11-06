@@ -26,10 +26,10 @@ import type { AcquiringAlgorithmResponseDataInner } from './acquiring-algorithm-
 export interface AcquiringAlgorithmResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AcquiringAlgorithmResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}

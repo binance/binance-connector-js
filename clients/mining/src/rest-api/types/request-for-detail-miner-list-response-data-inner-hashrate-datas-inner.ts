@@ -21,10 +21,10 @@
 export interface RequestForDetailMinerListResponseDataInnerHashrateDatasInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RequestForDetailMinerListResponseDataInnerHashrateDatasInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}
@@ -33,8 +33,8 @@ export interface RequestForDetailMinerListResponseDataInnerHashrateDatasInner {
     hashrate?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RequestForDetailMinerListResponseDataInnerHashrateDatasInner
      */
-    reject?: number;
+    reject?: number | bigint;
 }

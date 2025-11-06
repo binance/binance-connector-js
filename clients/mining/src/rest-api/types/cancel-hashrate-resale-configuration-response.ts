@@ -21,10 +21,10 @@
 export interface CancelHashrateResaleConfigurationResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelHashrateResaleConfigurationResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}

@@ -21,10 +21,10 @@
 export interface HashrateResaleListResponseDataConfigDetailsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof HashrateResaleListResponseDataConfigDetailsInner
      */
-    configId?: number;
+    configId?: number | bigint;
     /**
      *
      * @type {string}
@@ -45,26 +45,26 @@ export interface HashrateResaleListResponseDataConfigDetailsInner {
     algoName?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof HashrateResaleListResponseDataConfigDetailsInner
      */
-    hashRate?: number;
+    hashRate?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof HashrateResaleListResponseDataConfigDetailsInner
      */
-    startDay?: number;
+    startDay?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof HashrateResaleListResponseDataConfigDetailsInner
      */
-    endDay?: number;
+    endDay?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof HashrateResaleListResponseDataConfigDetailsInner
      */
-    status?: number;
+    status?: number | bigint;
 }

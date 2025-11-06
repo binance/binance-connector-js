@@ -27,16 +27,16 @@ export interface AcquiringAlgorithmResponseDataInner {
     algoName?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AcquiringAlgorithmResponseDataInner
      */
-    algoId?: number;
+    algoId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AcquiringAlgorithmResponseDataInner
      */
-    poolIndex?: number;
+    poolIndex?: number | bigint;
     /**
      *
      * @type {string}

@@ -39,16 +39,16 @@ export interface HashrateResaleDetailResponseDataProfitTransferDetailsInner {
     algoName?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof HashrateResaleDetailResponseDataProfitTransferDetailsInner
      */
-    hashRate?: number;
+    hashRate?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof HashrateResaleDetailResponseDataProfitTransferDetailsInner
      */
-    day?: number;
+    day?: number | bigint;
     /**
      *
      * @type {number}

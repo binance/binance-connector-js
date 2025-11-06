@@ -38,16 +38,16 @@ export interface StatisticListResponseData {
     dayHashRate?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StatisticListResponseData
      */
-    validNum?: number;
+    validNum?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StatisticListResponseData
      */
-    invalidNum?: number;
+    invalidNum?: number | bigint;
     /**
      *
      * @type {StatisticListResponseDataProfitToday}

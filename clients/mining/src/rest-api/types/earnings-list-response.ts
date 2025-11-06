@@ -26,10 +26,10 @@ import type { EarningsListResponseData } from './earnings-list-response-data';
 export interface EarningsListResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EarningsListResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}

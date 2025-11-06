@@ -26,10 +26,10 @@ import type { MiningAccountEarningResponseData } from './mining-account-earning-
 export interface MiningAccountEarningResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningAccountEarningResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}

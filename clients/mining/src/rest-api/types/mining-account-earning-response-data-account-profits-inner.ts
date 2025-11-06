@@ -21,10 +21,10 @@
 export interface MiningAccountEarningResponseDataAccountProfitsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningAccountEarningResponseDataAccountProfitsInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}
@@ -33,16 +33,16 @@ export interface MiningAccountEarningResponseDataAccountProfitsInner {
     coinName?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningAccountEarningResponseDataAccountProfitsInner
      */
-    type?: number;
+    type?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningAccountEarningResponseDataAccountProfitsInner
      */
-    puid?: number;
+    puid?: number | bigint;
     /**
      *
      * @type {string}

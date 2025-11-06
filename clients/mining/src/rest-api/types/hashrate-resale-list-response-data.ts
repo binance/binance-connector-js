@@ -32,14 +32,14 @@ export interface HashrateResaleListResponseData {
     configDetails?: Array<HashrateResaleListResponseDataConfigDetailsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof HashrateResaleListResponseData
      */
-    totalNum?: number;
+    totalNum?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof HashrateResaleListResponseData
      */
-    pageSize?: number;
+    pageSize?: number | bigint;
 }

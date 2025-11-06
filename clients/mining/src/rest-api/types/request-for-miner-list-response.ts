@@ -26,10 +26,10 @@ import type { RequestForMinerListResponseData } from './request-for-miner-list-r
 export interface RequestForMinerListResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RequestForMinerListResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}

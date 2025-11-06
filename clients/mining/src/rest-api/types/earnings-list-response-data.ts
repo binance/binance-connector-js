@@ -32,14 +32,14 @@ export interface EarningsListResponseData {
     accountProfits?: Array<EarningsListResponseDataAccountProfitsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EarningsListResponseData
      */
-    totalNum?: number;
+    totalNum?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EarningsListResponseData
      */
-    pageSize?: number;
+    pageSize?: number | bigint;
 }

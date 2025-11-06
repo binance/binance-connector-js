@@ -21,10 +21,10 @@
 export interface ExtraBonusListResponseDataOtherProfitsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExtraBonusListResponseDataOtherProfitsInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}
@@ -33,10 +33,10 @@ export interface ExtraBonusListResponseDataOtherProfitsInner {
     coinName?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExtraBonusListResponseDataOtherProfitsInner
      */
-    type?: number;
+    type?: number | bigint;
     /**
      *
      * @type {number}
@@ -45,8 +45,8 @@ export interface ExtraBonusListResponseDataOtherProfitsInner {
     profitAmount?: number;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExtraBonusListResponseDataOtherProfitsInner
      */
-    status?: number;
+    status?: number | bigint;
 }

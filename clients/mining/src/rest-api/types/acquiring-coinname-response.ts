@@ -26,10 +26,10 @@ import type { AcquiringCoinnameResponseDataInner } from './acquiring-coinname-re
 export interface AcquiringCoinnameResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AcquiringCoinnameResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}

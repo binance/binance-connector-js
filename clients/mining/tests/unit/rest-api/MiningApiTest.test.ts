@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { MiningApi } from '../../../src/rest-api';
@@ -65,28 +66,46 @@ describe('MiningApi', () => {
                 userName: 'userName_example',
             };
 
-            mockResponse = {
-                code: 0,
-                msg: '',
-                data: [
-                    {
-                        type: 'H_hashrate',
-                        userName: 'test',
-                        list: [
-                            { time: 1585267200000, hashrate: '0.00000000', reject: '0.00000000' },
-                            { time: 1585353600000, hashrate: '0.00000000', reject: '0.00000000' },
-                        ],
-                    },
-                    {
-                        type: 'D_hashrate',
-                        userName: 'test',
-                        list: [
-                            { time: 1587906000000, hashrate: '0.00000000', reject: '0.00000000' },
-                            { time: 1587909600000, hashrate: '0.00000000', reject: '0.00000000' },
-                        ],
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: 0,
+                    msg: '',
+                    data: [
+                        {
+                            type: 'H_hashrate',
+                            userName: 'test',
+                            list: [
+                                {
+                                    time: 1585267200000,
+                                    hashrate: '0.00000000',
+                                    reject: '0.00000000',
+                                },
+                                {
+                                    time: 1585353600000,
+                                    hashrate: '0.00000000',
+                                    reject: '0.00000000',
+                                },
+                            ],
+                        },
+                        {
+                            type: 'D_hashrate',
+                            userName: 'test',
+                            list: [
+                                {
+                                    time: 1587906000000,
+                                    hashrate: '0.00000000',
+                                    reject: '0.00000000',
+                                },
+                                {
+                                    time: 1587909600000,
+                                    hashrate: '0.00000000',
+                                    reject: '0.00000000',
+                                },
+                            ],
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'accountList').mockReturnValue(
                 Promise.resolve({
@@ -109,28 +128,46 @@ describe('MiningApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                code: 0,
-                msg: '',
-                data: [
-                    {
-                        type: 'H_hashrate',
-                        userName: 'test',
-                        list: [
-                            { time: 1585267200000, hashrate: '0.00000000', reject: '0.00000000' },
-                            { time: 1585353600000, hashrate: '0.00000000', reject: '0.00000000' },
-                        ],
-                    },
-                    {
-                        type: 'D_hashrate',
-                        userName: 'test',
-                        list: [
-                            { time: 1587906000000, hashrate: '0.00000000', reject: '0.00000000' },
-                            { time: 1587909600000, hashrate: '0.00000000', reject: '0.00000000' },
-                        ],
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: 0,
+                    msg: '',
+                    data: [
+                        {
+                            type: 'H_hashrate',
+                            userName: 'test',
+                            list: [
+                                {
+                                    time: 1585267200000,
+                                    hashrate: '0.00000000',
+                                    reject: '0.00000000',
+                                },
+                                {
+                                    time: 1585353600000,
+                                    hashrate: '0.00000000',
+                                    reject: '0.00000000',
+                                },
+                            ],
+                        },
+                        {
+                            type: 'D_hashrate',
+                            userName: 'test',
+                            list: [
+                                {
+                                    time: 1587906000000,
+                                    hashrate: '0.00000000',
+                                    reject: '0.00000000',
+                                },
+                                {
+                                    time: 1587909600000,
+                                    hashrate: '0.00000000',
+                                    reject: '0.00000000',
+                                },
+                            ],
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'accountList').mockReturnValue(
                 Promise.resolve({
@@ -195,11 +232,13 @@ describe('MiningApi', () => {
 
     describe('acquiringAlgorithm()', () => {
         it('should execute acquiringAlgorithm() successfully with required parameters only', async () => {
-            mockResponse = {
-                code: 0,
-                msg: '',
-                data: [{ algoName: 'sha256', algoId: 1, poolIndex: 0, unit: 'h/s' }],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: 0,
+                    msg: '',
+                    data: [{ algoName: 'sha256', algoId: 1, poolIndex: 0, unit: 'h/s' }],
+                })
+            );
 
             const spy = jest.spyOn(client, 'acquiringAlgorithm').mockReturnValue(
                 Promise.resolve({
@@ -233,11 +272,15 @@ describe('MiningApi', () => {
 
     describe('acquiringCoinname()', () => {
         it('should execute acquiringCoinname() successfully with required parameters only', async () => {
-            mockResponse = {
-                code: 0,
-                msg: '',
-                data: [{ coinName: 'BTC', coinId: 1, poolIndex: 0, algoId: 1, algoName: 'sha256' }],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: 0,
+                    msg: '',
+                    data: [
+                        { coinName: 'BTC', coinId: 1, poolIndex: 0, algoId: 1, algoName: 'sha256' },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'acquiringCoinname').mockReturnValue(
                 Promise.resolve({
@@ -276,7 +319,7 @@ describe('MiningApi', () => {
                 userName: 'userName_example',
             };
 
-            mockResponse = { code: 0, msg: '', data: true };
+            mockResponse = JSONParse(JSONStringify({ code: 0, msg: '', data: true }));
 
             const spy = jest.spyOn(client, 'cancelHashrateResaleConfiguration').mockReturnValue(
                 Promise.resolve({
@@ -299,7 +342,7 @@ describe('MiningApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { code: 0, msg: '', data: true };
+            mockResponse = JSONParse(JSONStringify({ code: 0, msg: '', data: true }));
 
             const spy = jest.spyOn(client, 'cancelHashrateResaleConfiguration').mockReturnValue(
                 Promise.resolve({
@@ -373,46 +416,48 @@ describe('MiningApi', () => {
                 userName: 'userName_example',
             };
 
-            mockResponse = {
-                code: 0,
-                msg: '',
-                data: {
-                    accountProfits: [
-                        {
-                            time: 1586188800000,
-                            type: 31,
-                            hashTransfer: null,
-                            transferAmount: null,
-                            dayHashRate: 129129903378244,
-                            profitAmount: 8.6083060304,
-                            coinName: 'BTC',
-                            status: 2,
-                        },
-                        {
-                            time: 1607529600000,
-                            coinName: 'BTC',
-                            type: 0,
-                            dayHashRate: 9942053925926,
-                            profitAmount: 0.85426469,
-                            hashTransfer: 200000000000,
-                            transferAmount: 0.02180958,
-                            status: 2,
-                        },
-                        {
-                            time: 1607443200000,
-                            coinName: 'BTC',
-                            type: 31,
-                            dayHashRate: 200000000000,
-                            profitAmount: 0.02905916,
-                            hashTransfer: null,
-                            transferAmount: null,
-                            status: 2,
-                        },
-                    ],
-                    totalNum: 3,
-                    pageSize: 20,
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: 0,
+                    msg: '',
+                    data: {
+                        accountProfits: [
+                            {
+                                time: 1586188800000,
+                                type: 31,
+                                hashTransfer: null,
+                                transferAmount: null,
+                                dayHashRate: 129129903378244,
+                                profitAmount: 8.6083060304,
+                                coinName: 'BTC',
+                                status: 2,
+                            },
+                            {
+                                time: 1607529600000,
+                                coinName: 'BTC',
+                                type: 0,
+                                dayHashRate: 9942053925926,
+                                profitAmount: 0.85426469,
+                                hashTransfer: 200000000000,
+                                transferAmount: 0.02180958,
+                                status: 2,
+                            },
+                            {
+                                time: 1607443200000,
+                                coinName: 'BTC',
+                                type: 31,
+                                dayHashRate: 200000000000,
+                                profitAmount: 0.02905916,
+                                hashTransfer: null,
+                                transferAmount: null,
+                                status: 2,
+                            },
+                        ],
+                        totalNum: 3,
+                        pageSize: 20,
+                    },
+                })
+            );
 
             const spy = jest.spyOn(client, 'earningsList').mockReturnValue(
                 Promise.resolve({
@@ -440,46 +485,48 @@ describe('MiningApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                code: 0,
-                msg: '',
-                data: {
-                    accountProfits: [
-                        {
-                            time: 1586188800000,
-                            type: 31,
-                            hashTransfer: null,
-                            transferAmount: null,
-                            dayHashRate: 129129903378244,
-                            profitAmount: 8.6083060304,
-                            coinName: 'BTC',
-                            status: 2,
-                        },
-                        {
-                            time: 1607529600000,
-                            coinName: 'BTC',
-                            type: 0,
-                            dayHashRate: 9942053925926,
-                            profitAmount: 0.85426469,
-                            hashTransfer: 200000000000,
-                            transferAmount: 0.02180958,
-                            status: 2,
-                        },
-                        {
-                            time: 1607443200000,
-                            coinName: 'BTC',
-                            type: 31,
-                            dayHashRate: 200000000000,
-                            profitAmount: 0.02905916,
-                            hashTransfer: null,
-                            transferAmount: null,
-                            status: 2,
-                        },
-                    ],
-                    totalNum: 3,
-                    pageSize: 20,
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: 0,
+                    msg: '',
+                    data: {
+                        accountProfits: [
+                            {
+                                time: 1586188800000,
+                                type: 31,
+                                hashTransfer: null,
+                                transferAmount: null,
+                                dayHashRate: 129129903378244,
+                                profitAmount: 8.6083060304,
+                                coinName: 'BTC',
+                                status: 2,
+                            },
+                            {
+                                time: 1607529600000,
+                                coinName: 'BTC',
+                                type: 0,
+                                dayHashRate: 9942053925926,
+                                profitAmount: 0.85426469,
+                                hashTransfer: 200000000000,
+                                transferAmount: 0.02180958,
+                                status: 2,
+                            },
+                            {
+                                time: 1607443200000,
+                                coinName: 'BTC',
+                                type: 31,
+                                dayHashRate: 200000000000,
+                                profitAmount: 0.02905916,
+                                hashTransfer: null,
+                                transferAmount: null,
+                                status: 2,
+                            },
+                        ],
+                        totalNum: 3,
+                        pageSize: 20,
+                    },
+                })
+            );
 
             const spy = jest.spyOn(client, 'earningsList').mockReturnValue(
                 Promise.resolve({
@@ -549,23 +596,25 @@ describe('MiningApi', () => {
                 userName: 'userName_example',
             };
 
-            mockResponse = {
-                code: 0,
-                msg: '',
-                data: {
-                    otherProfits: [
-                        {
-                            time: 1607443200000,
-                            coinName: 'BTC',
-                            type: 4,
-                            profitAmount: 0.0011859,
-                            status: 2,
-                        },
-                    ],
-                    totalNum: 3,
-                    pageSize: 20,
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: 0,
+                    msg: '',
+                    data: {
+                        otherProfits: [
+                            {
+                                time: 1607443200000,
+                                coinName: 'BTC',
+                                type: 4,
+                                profitAmount: 0.0011859,
+                                status: 2,
+                            },
+                        ],
+                        totalNum: 3,
+                        pageSize: 20,
+                    },
+                })
+            );
 
             const spy = jest.spyOn(client, 'extraBonusList').mockReturnValue(
                 Promise.resolve({
@@ -593,23 +642,25 @@ describe('MiningApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                code: 0,
-                msg: '',
-                data: {
-                    otherProfits: [
-                        {
-                            time: 1607443200000,
-                            coinName: 'BTC',
-                            type: 4,
-                            profitAmount: 0.0011859,
-                            status: 2,
-                        },
-                    ],
-                    totalNum: 3,
-                    pageSize: 20,
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: 0,
+                    msg: '',
+                    data: {
+                        otherProfits: [
+                            {
+                                time: 1607443200000,
+                                coinName: 'BTC',
+                                type: 4,
+                                profitAmount: 0.0011859,
+                                status: 2,
+                            },
+                        ],
+                        totalNum: 3,
+                        pageSize: 20,
+                    },
+                })
+            );
 
             const spy = jest.spyOn(client, 'extraBonusList').mockReturnValue(
                 Promise.resolve({
@@ -679,34 +730,36 @@ describe('MiningApi', () => {
                 userName: 'userName_example',
             };
 
-            mockResponse = {
-                code: 0,
-                msg: '',
-                data: {
-                    profitTransferDetails: [
-                        {
-                            poolUsername: 'test4001',
-                            toPoolUsername: 'pop',
-                            algoName: 'sha256',
-                            hashRate: 200000000000,
-                            day: 20201213,
-                            amount: 0.2256872,
-                            coinName: 'BTC',
-                        },
-                        {
-                            poolUsername: 'test4001',
-                            toPoolUsername: 'pop',
-                            algoName: 'sha256',
-                            hashRate: 200000000000,
-                            day: 20201213,
-                            amount: 0.2256872,
-                            coinName: 'BTC',
-                        },
-                    ],
-                    totalNum: 8,
-                    pageSize: 200,
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: 0,
+                    msg: '',
+                    data: {
+                        profitTransferDetails: [
+                            {
+                                poolUsername: 'test4001',
+                                toPoolUsername: 'pop',
+                                algoName: 'sha256',
+                                hashRate: 200000000000,
+                                day: 20201213,
+                                amount: 0.2256872,
+                                coinName: 'BTC',
+                            },
+                            {
+                                poolUsername: 'test4001',
+                                toPoolUsername: 'pop',
+                                algoName: 'sha256',
+                                hashRate: 200000000000,
+                                day: 20201213,
+                                amount: 0.2256872,
+                                coinName: 'BTC',
+                            },
+                        ],
+                        totalNum: 8,
+                        pageSize: 200,
+                    },
+                })
+            );
 
             const spy = jest.spyOn(client, 'hashrateResaleDetail').mockReturnValue(
                 Promise.resolve({
@@ -731,34 +784,36 @@ describe('MiningApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                code: 0,
-                msg: '',
-                data: {
-                    profitTransferDetails: [
-                        {
-                            poolUsername: 'test4001',
-                            toPoolUsername: 'pop',
-                            algoName: 'sha256',
-                            hashRate: 200000000000,
-                            day: 20201213,
-                            amount: 0.2256872,
-                            coinName: 'BTC',
-                        },
-                        {
-                            poolUsername: 'test4001',
-                            toPoolUsername: 'pop',
-                            algoName: 'sha256',
-                            hashRate: 200000000000,
-                            day: 20201213,
-                            amount: 0.2256872,
-                            coinName: 'BTC',
-                        },
-                    ],
-                    totalNum: 8,
-                    pageSize: 200,
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: 0,
+                    msg: '',
+                    data: {
+                        profitTransferDetails: [
+                            {
+                                poolUsername: 'test4001',
+                                toPoolUsername: 'pop',
+                                algoName: 'sha256',
+                                hashRate: 200000000000,
+                                day: 20201213,
+                                amount: 0.2256872,
+                                coinName: 'BTC',
+                            },
+                            {
+                                poolUsername: 'test4001',
+                                toPoolUsername: 'pop',
+                                algoName: 'sha256',
+                                hashRate: 200000000000,
+                                day: 20201213,
+                                amount: 0.2256872,
+                                coinName: 'BTC',
+                            },
+                        ],
+                        totalNum: 8,
+                        pageSize: 200,
+                    },
+                })
+            );
 
             const spy = jest.spyOn(client, 'hashrateResaleDetail').mockReturnValue(
                 Promise.resolve({
@@ -823,36 +878,38 @@ describe('MiningApi', () => {
 
     describe('hashrateResaleList()', () => {
         it('should execute hashrateResaleList() successfully with required parameters only', async () => {
-            mockResponse = {
-                code: 0,
-                msg: '',
-                data: {
-                    configDetails: [
-                        {
-                            configId: 168,
-                            poolUsername: '123',
-                            toPoolUsername: 'user1',
-                            algoName: 'Ethash',
-                            hashRate: 5000000,
-                            startDay: 20201210,
-                            endDay: 20210405,
-                            status: 1,
-                        },
-                        {
-                            configId: 166,
-                            poolUsername: 'pop',
-                            toPoolUsername: '111111',
-                            algoName: 'Ethash',
-                            hashRate: 3320000,
-                            startDay: 20201226,
-                            endDay: 20201227,
-                            status: 0,
-                        },
-                    ],
-                    totalNum: 21,
-                    pageSize: 200,
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: 0,
+                    msg: '',
+                    data: {
+                        configDetails: [
+                            {
+                                configId: 168,
+                                poolUsername: '123',
+                                toPoolUsername: 'user1',
+                                algoName: 'Ethash',
+                                hashRate: 5000000,
+                                startDay: 20201210,
+                                endDay: 20210405,
+                                status: 1,
+                            },
+                            {
+                                configId: 166,
+                                poolUsername: 'pop',
+                                toPoolUsername: '111111',
+                                algoName: 'Ethash',
+                                hashRate: 3320000,
+                                startDay: 20201226,
+                                endDay: 20201227,
+                                status: 0,
+                            },
+                        ],
+                        totalNum: 21,
+                        pageSize: 200,
+                    },
+                })
+            );
 
             const spy = jest.spyOn(client, 'hashrateResaleList').mockReturnValue(
                 Promise.resolve({
@@ -875,36 +932,38 @@ describe('MiningApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                code: 0,
-                msg: '',
-                data: {
-                    configDetails: [
-                        {
-                            configId: 168,
-                            poolUsername: '123',
-                            toPoolUsername: 'user1',
-                            algoName: 'Ethash',
-                            hashRate: 5000000,
-                            startDay: 20201210,
-                            endDay: 20210405,
-                            status: 1,
-                        },
-                        {
-                            configId: 166,
-                            poolUsername: 'pop',
-                            toPoolUsername: '111111',
-                            algoName: 'Ethash',
-                            hashRate: 3320000,
-                            startDay: 20201226,
-                            endDay: 20201227,
-                            status: 0,
-                        },
-                    ],
-                    totalNum: 21,
-                    pageSize: 200,
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: 0,
+                    msg: '',
+                    data: {
+                        configDetails: [
+                            {
+                                configId: 168,
+                                poolUsername: '123',
+                                toPoolUsername: 'user1',
+                                algoName: 'Ethash',
+                                hashRate: 5000000,
+                                startDay: 20201210,
+                                endDay: 20210405,
+                                status: 1,
+                            },
+                            {
+                                configId: 166,
+                                poolUsername: 'pop',
+                                toPoolUsername: '111111',
+                                algoName: 'Ethash',
+                                hashRate: 3320000,
+                                startDay: 20201226,
+                                endDay: 20201227,
+                                status: 0,
+                            },
+                        ],
+                        totalNum: 21,
+                        pageSize: 200,
+                    },
+                })
+            );
 
             const spy = jest.spyOn(client, 'hashrateResaleList').mockReturnValue(
                 Promise.resolve({
@@ -947,7 +1006,7 @@ describe('MiningApi', () => {
                 hashRate: 789,
             };
 
-            mockResponse = { code: 0, msg: '', data: 171 };
+            mockResponse = JSONParse(JSONStringify({ code: 0, msg: '', data: 171 }));
 
             const spy = jest.spyOn(client, 'hashrateResaleRequest').mockReturnValue(
                 Promise.resolve({
@@ -974,7 +1033,7 @@ describe('MiningApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { code: 0, msg: '', data: 171 };
+            mockResponse = JSONParse(JSONStringify({ code: 0, msg: '', data: 171 }));
 
             const spy = jest.spyOn(client, 'hashrateResaleRequest').mockReturnValue(
                 Promise.resolve({
@@ -1125,24 +1184,26 @@ describe('MiningApi', () => {
                 algo: 'algo_example',
             };
 
-            mockResponse = {
-                code: 0,
-                msg: '',
-                data: {
-                    accountProfits: [
-                        {
-                            time: 1607443200000,
-                            coinName: 'BTC',
-                            type: 2,
-                            puid: 59985472,
-                            subName: 'vdvaghani',
-                            amount: 0.09186957,
-                        },
-                    ],
-                    totalNum: 3,
-                    pageSize: 20,
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: 0,
+                    msg: '',
+                    data: {
+                        accountProfits: [
+                            {
+                                time: 1607443200000,
+                                coinName: 'BTC',
+                                type: 2,
+                                puid: 59985472,
+                                subName: 'vdvaghani',
+                                amount: 0.09186957,
+                            },
+                        ],
+                        totalNum: 3,
+                        pageSize: 20,
+                    },
+                })
+            );
 
             const spy = jest.spyOn(client, 'miningAccountEarning').mockReturnValue(
                 Promise.resolve({
@@ -1168,24 +1229,26 @@ describe('MiningApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                code: 0,
-                msg: '',
-                data: {
-                    accountProfits: [
-                        {
-                            time: 1607443200000,
-                            coinName: 'BTC',
-                            type: 2,
-                            puid: 59985472,
-                            subName: 'vdvaghani',
-                            amount: 0.09186957,
-                        },
-                    ],
-                    totalNum: 3,
-                    pageSize: 20,
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: 0,
+                    msg: '',
+                    data: {
+                        accountProfits: [
+                            {
+                                time: 1607443200000,
+                                coinName: 'BTC',
+                                type: 2,
+                                puid: 59985472,
+                                subName: 'vdvaghani',
+                                amount: 0.09186957,
+                            },
+                        ],
+                        totalNum: 3,
+                        pageSize: 20,
+                    },
+                })
+            );
 
             const spy = jest.spyOn(client, 'miningAccountEarning').mockReturnValue(
                 Promise.resolve({
@@ -1241,28 +1304,30 @@ describe('MiningApi', () => {
                 workerName: 'workerName_example',
             };
 
-            mockResponse = {
-                code: 0,
-                msg: '',
-                data: [
-                    {
-                        workerName: 'bhdc1.16A10404B',
-                        type: 'H_hashrate',
-                        hashrateDatas: [
-                            { time: 1587902400000, hashrate: '0', reject: 0 },
-                            { time: 1587906000000, hashrate: '0', reject: 0 },
-                        ],
-                    },
-                    {
-                        workerName: 'bhdc1.16A10404B',
-                        type: 'D_hashrate',
-                        hashrateDatas: [
-                            { time: 1587902400000, hashrate: '0', reject: 0 },
-                            { time: 1587906000000, hashrate: '0', reject: 0 },
-                        ],
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: 0,
+                    msg: '',
+                    data: [
+                        {
+                            workerName: 'bhdc1.16A10404B',
+                            type: 'H_hashrate',
+                            hashrateDatas: [
+                                { time: 1587902400000, hashrate: '0', reject: 0 },
+                                { time: 1587906000000, hashrate: '0', reject: 0 },
+                            ],
+                        },
+                        {
+                            workerName: 'bhdc1.16A10404B',
+                            type: 'D_hashrate',
+                            hashrateDatas: [
+                                { time: 1587902400000, hashrate: '0', reject: 0 },
+                                { time: 1587906000000, hashrate: '0', reject: 0 },
+                            ],
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'requestForDetailMinerList').mockReturnValue(
                 Promise.resolve({
@@ -1286,28 +1351,30 @@ describe('MiningApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                code: 0,
-                msg: '',
-                data: [
-                    {
-                        workerName: 'bhdc1.16A10404B',
-                        type: 'H_hashrate',
-                        hashrateDatas: [
-                            { time: 1587902400000, hashrate: '0', reject: 0 },
-                            { time: 1587906000000, hashrate: '0', reject: 0 },
-                        ],
-                    },
-                    {
-                        workerName: 'bhdc1.16A10404B',
-                        type: 'D_hashrate',
-                        hashrateDatas: [
-                            { time: 1587902400000, hashrate: '0', reject: 0 },
-                            { time: 1587906000000, hashrate: '0', reject: 0 },
-                        ],
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: 0,
+                    msg: '',
+                    data: [
+                        {
+                            workerName: 'bhdc1.16A10404B',
+                            type: 'H_hashrate',
+                            hashrateDatas: [
+                                { time: 1587902400000, hashrate: '0', reject: 0 },
+                                { time: 1587906000000, hashrate: '0', reject: 0 },
+                            ],
+                        },
+                        {
+                            workerName: 'bhdc1.16A10404B',
+                            type: 'D_hashrate',
+                            hashrateDatas: [
+                                { time: 1587902400000, hashrate: '0', reject: 0 },
+                                { time: 1587906000000, hashrate: '0', reject: 0 },
+                            ],
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'requestForDetailMinerList').mockReturnValue(
                 Promise.resolve({
@@ -1396,34 +1463,36 @@ describe('MiningApi', () => {
                 userName: 'userName_example',
             };
 
-            mockResponse = {
-                code: 0,
-                msg: '',
-                data: {
-                    workerDatas: [
-                        {
-                            workerId: '1420554439452400131',
-                            workerName: '2X73',
-                            status: 3,
-                            hashRate: 0,
-                            dayHashRate: 0,
-                            rejectRate: 0,
-                            lastShareTime: 1587712919000,
-                        },
-                        {
-                            workerId: '7893926126382807951',
-                            workerName: 'AZDC1.1A10101',
-                            status: 2,
-                            hashRate: 29711247541680,
-                            dayHashRate: 1.269778129801366e13,
-                            rejectRate: 0,
-                            lastShareTime: 1587969727000,
-                        },
-                    ],
-                    totalNum: 18530,
-                    pageSize: 20,
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: 0,
+                    msg: '',
+                    data: {
+                        workerDatas: [
+                            {
+                                workerId: '1420554439452400131',
+                                workerName: '2X73',
+                                status: 3,
+                                hashRate: 0,
+                                dayHashRate: 0,
+                                rejectRate: 0,
+                                lastShareTime: 1587712919000,
+                            },
+                            {
+                                workerId: '7893926126382807951',
+                                workerName: 'AZDC1.1A10101',
+                                status: 2,
+                                hashRate: 29711247541680,
+                                dayHashRate: 1.269778129801366e13,
+                                rejectRate: 0,
+                                lastShareTime: 1587969727000,
+                            },
+                        ],
+                        totalNum: 18530,
+                        pageSize: 20,
+                    },
+                })
+            );
 
             const spy = jest.spyOn(client, 'requestForMinerList').mockReturnValue(
                 Promise.resolve({
@@ -1450,34 +1519,36 @@ describe('MiningApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                code: 0,
-                msg: '',
-                data: {
-                    workerDatas: [
-                        {
-                            workerId: '1420554439452400131',
-                            workerName: '2X73',
-                            status: 3,
-                            hashRate: 0,
-                            dayHashRate: 0,
-                            rejectRate: 0,
-                            lastShareTime: 1587712919000,
-                        },
-                        {
-                            workerId: '7893926126382807951',
-                            workerName: 'AZDC1.1A10101',
-                            status: 2,
-                            hashRate: 29711247541680,
-                            dayHashRate: 1.269778129801366e13,
-                            rejectRate: 0,
-                            lastShareTime: 1587969727000,
-                        },
-                    ],
-                    totalNum: 18530,
-                    pageSize: 20,
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: 0,
+                    msg: '',
+                    data: {
+                        workerDatas: [
+                            {
+                                workerId: '1420554439452400131',
+                                workerName: '2X73',
+                                status: 3,
+                                hashRate: 0,
+                                dayHashRate: 0,
+                                rejectRate: 0,
+                                lastShareTime: 1587712919000,
+                            },
+                            {
+                                workerId: '7893926126382807951',
+                                workerName: 'AZDC1.1A10101',
+                                status: 2,
+                                hashRate: 29711247541680,
+                                dayHashRate: 1.269778129801366e13,
+                                rejectRate: 0,
+                                lastShareTime: 1587969727000,
+                            },
+                        ],
+                        totalNum: 18530,
+                        pageSize: 20,
+                    },
+                })
+            );
 
             const spy = jest.spyOn(client, 'requestForMinerList').mockReturnValue(
                 Promise.resolve({
@@ -1547,21 +1618,27 @@ describe('MiningApi', () => {
                 userName: 'userName_example',
             };
 
-            mockResponse = {
-                code: 0,
-                msg: '',
-                data: {
-                    fifteenMinHashRate: '457835490067496409.00000000',
-                    dayHashRate: '214289268068874127.65000000',
-                    validNum: 0,
-                    invalidNum: 17562,
-                    profitToday: { BTC: '0.00314332', BSV: '56.17055953', BCH: '106.61586001' },
-                    profitYesterday: { BTC: '0.00314332', BSV: '56.17055953', BCH: '106.61586001' },
-                    userName: 'test',
-                    unit: 'h/s',
-                    algo: 'sha256',
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: 0,
+                    msg: '',
+                    data: {
+                        fifteenMinHashRate: '457835490067496409.00000000',
+                        dayHashRate: '214289268068874127.65000000',
+                        validNum: 0,
+                        invalidNum: 17562,
+                        profitToday: { BTC: '0.00314332', BSV: '56.17055953', BCH: '106.61586001' },
+                        profitYesterday: {
+                            BTC: '0.00314332',
+                            BSV: '56.17055953',
+                            BCH: '106.61586001',
+                        },
+                        userName: 'test',
+                        unit: 'h/s',
+                        algo: 'sha256',
+                    },
+                })
+            );
 
             const spy = jest.spyOn(client, 'statisticList').mockReturnValue(
                 Promise.resolve({
@@ -1584,21 +1661,27 @@ describe('MiningApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                code: 0,
-                msg: '',
-                data: {
-                    fifteenMinHashRate: '457835490067496409.00000000',
-                    dayHashRate: '214289268068874127.65000000',
-                    validNum: 0,
-                    invalidNum: 17562,
-                    profitToday: { BTC: '0.00314332', BSV: '56.17055953', BCH: '106.61586001' },
-                    profitYesterday: { BTC: '0.00314332', BSV: '56.17055953', BCH: '106.61586001' },
-                    userName: 'test',
-                    unit: 'h/s',
-                    algo: 'sha256',
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: 0,
+                    msg: '',
+                    data: {
+                        fifteenMinHashRate: '457835490067496409.00000000',
+                        dayHashRate: '214289268068874127.65000000',
+                        validNum: 0,
+                        invalidNum: 17562,
+                        profitToday: { BTC: '0.00314332', BSV: '56.17055953', BCH: '106.61586001' },
+                        profitYesterday: {
+                            BTC: '0.00314332',
+                            BSV: '56.17055953',
+                            BCH: '106.61586001',
+                        },
+                        userName: 'test',
+                        unit: 'h/s',
+                        algo: 'sha256',
+                    },
+                })
+            );
 
             const spy = jest.spyOn(client, 'statisticList').mockReturnValue(
                 Promise.resolve({

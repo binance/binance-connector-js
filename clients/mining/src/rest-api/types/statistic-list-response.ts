@@ -26,10 +26,10 @@ import type { StatisticListResponseData } from './statistic-list-response-data';
 export interface StatisticListResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StatisticListResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}

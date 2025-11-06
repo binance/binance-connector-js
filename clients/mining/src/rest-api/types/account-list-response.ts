@@ -26,10 +26,10 @@ import type { AccountListResponseDataInner } from './account-list-response-data-
 export interface AccountListResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountListResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}

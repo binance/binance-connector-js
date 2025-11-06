@@ -94,6 +94,7 @@ export class RestAPI {
      *
      * @summary Account List(USER_DATA)
      * @param {AccountListRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<AccountListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/mining/rest-api/Account-List Binance API Documentation}
@@ -110,6 +111,7 @@ export class RestAPI {
      * Weight: 1
      *
      * @summary Acquiring Algorithm(MARKET_DATA)
+     *
      * @returns {Promise<RestApiResponse<AcquiringAlgorithmResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/mining/rest-api/Acquiring-Algorithm Binance API Documentation}
@@ -124,6 +126,7 @@ export class RestAPI {
      * Weight: 1
      *
      * @summary Acquiring CoinName(MARKET_DATA)
+     *
      * @returns {Promise<RestApiResponse<AcquiringCoinnameResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/mining/rest-api/Acquiring-CoinName Binance API Documentation}
@@ -138,6 +141,7 @@ export class RestAPI {
      *
      * @summary Cancel hashrate resale configuration(USER_DATA)
      * @param {CancelHashrateResaleConfigurationRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<CancelHashrateResaleConfigurationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/mining/rest-api/Cancel-hashrate-resale-configuration Binance API Documentation}
@@ -155,6 +159,7 @@ export class RestAPI {
      *
      * @summary Earnings List(USER_DATA)
      * @param {EarningsListRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<EarningsListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/mining/rest-api/Earnings-List Binance API Documentation}
@@ -172,6 +177,7 @@ export class RestAPI {
      *
      * @summary Extra Bonus List(USER_DATA)
      * @param {ExtraBonusListRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<ExtraBonusListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/mining/rest-api/Extra-Bonus-List Binance API Documentation}
@@ -189,6 +195,7 @@ export class RestAPI {
      *
      * @summary Hashrate Resale Detail(USER_DATA)
      * @param {HashrateResaleDetailRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<HashrateResaleDetailResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/mining/rest-api/Hashrate-Resale-Detail Binance API Documentation}
@@ -206,6 +213,7 @@ export class RestAPI {
      *
      * @summary Hashrate Resale List
      * @param {HashrateResaleListRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<HashrateResaleListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/mining/rest-api/Hashrate-Resale-List Binance API Documentation}
@@ -223,6 +231,7 @@ export class RestAPI {
      *
      * @summary Hashrate Resale Request(USER_DATA)
      * @param {HashrateResaleRequestRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<HashrateResaleRequestResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/mining/rest-api/Hashrate-Resale-Request Binance API Documentation}
@@ -240,6 +249,7 @@ export class RestAPI {
      *
      * @summary Mining Account Earning(USER_DATA)
      * @param {MiningAccountEarningRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<MiningAccountEarningResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/mining/rest-api/Mining-Account-Earning Binance API Documentation}
@@ -257,6 +267,7 @@ export class RestAPI {
      *
      * @summary Request for Detail Miner List(USER_DATA)
      * @param {RequestForDetailMinerListRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<RequestForDetailMinerListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/mining/rest-api/Request-for-Detail-Miner-List Binance API Documentation}
@@ -274,6 +285,7 @@ export class RestAPI {
      *
      * @summary Request for Miner List(USER_DATA)
      * @param {RequestForMinerListRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<RequestForMinerListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/mining/rest-api/Request-for-Miner-List Binance API Documentation}
@@ -291,6 +303,7 @@ export class RestAPI {
      *
      * @summary Statistic List(USER_DATA)
      * @param {StatisticListRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<StatisticListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/mining/rest-api/Statistic-List Binance API Documentation}

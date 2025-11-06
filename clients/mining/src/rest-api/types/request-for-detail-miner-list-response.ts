@@ -26,10 +26,10 @@ import type { RequestForDetailMinerListResponseDataInner } from './request-for-d
 export interface RequestForDetailMinerListResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RequestForDetailMinerListResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}

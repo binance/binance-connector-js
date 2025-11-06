@@ -21,10 +21,10 @@
 export interface AccountListResponseDataInnerListInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountListResponseDataInnerListInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}

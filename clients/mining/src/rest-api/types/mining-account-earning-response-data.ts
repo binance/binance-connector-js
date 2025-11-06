@@ -32,14 +32,14 @@ export interface MiningAccountEarningResponseData {
     accountProfits?: Array<MiningAccountEarningResponseDataAccountProfitsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningAccountEarningResponseData
      */
-    totalNum?: number;
+    totalNum?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiningAccountEarningResponseData
      */
-    pageSize?: number;
+    pageSize?: number | bigint;
 }

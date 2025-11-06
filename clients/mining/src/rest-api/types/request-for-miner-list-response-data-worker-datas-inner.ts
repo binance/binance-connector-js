@@ -33,16 +33,16 @@ export interface RequestForMinerListResponseDataWorkerDatasInner {
     workerName?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RequestForMinerListResponseDataWorkerDatasInner
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RequestForMinerListResponseDataWorkerDatasInner
      */
-    hashRate?: number;
+    hashRate?: number | bigint;
     /**
      *
      * @type {number}
@@ -51,14 +51,14 @@ export interface RequestForMinerListResponseDataWorkerDatasInner {
     dayHashRate?: number;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RequestForMinerListResponseDataWorkerDatasInner
      */
-    rejectRate?: number;
+    rejectRate?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RequestForMinerListResponseDataWorkerDatasInner
      */
-    lastShareTime?: number;
+    lastShareTime?: number | bigint;
 }

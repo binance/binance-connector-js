@@ -32,14 +32,14 @@ export interface HashrateResaleDetailResponseData {
     profitTransferDetails?: Array<HashrateResaleDetailResponseDataProfitTransferDetailsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof HashrateResaleDetailResponseData
      */
-    totalNum?: number;
+    totalNum?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof HashrateResaleDetailResponseData
      */
-    pageSize?: number;
+    pageSize?: number | bigint;
 }

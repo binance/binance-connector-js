@@ -26,10 +26,10 @@ import type { HashrateResaleDetailResponseData } from './hashrate-resale-detail-
 export interface HashrateResaleDetailResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof HashrateResaleDetailResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}

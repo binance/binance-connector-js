@@ -21,10 +21,10 @@
 export interface HashrateResaleRequestResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof HashrateResaleRequestResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}
@@ -33,8 +33,8 @@ export interface HashrateResaleRequestResponse {
     msg?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof HashrateResaleRequestResponse
      */
-    data?: number;
+    data?: number | bigint;
 }

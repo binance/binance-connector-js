@@ -26,10 +26,10 @@ import type { ExtraBonusListResponseData } from './extra-bonus-list-response-dat
 export interface ExtraBonusListResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExtraBonusListResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}

@@ -32,14 +32,14 @@ export interface RequestForMinerListResponseData {
     workerDatas?: Array<RequestForMinerListResponseDataWorkerDatasInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RequestForMinerListResponseData
      */
-    totalNum?: number;
+    totalNum?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RequestForMinerListResponseData
      */
-    pageSize?: number;
+    pageSize?: number | bigint;
 }

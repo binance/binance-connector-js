@@ -32,14 +32,14 @@ export interface ExtraBonusListResponseData {
     otherProfits?: Array<ExtraBonusListResponseDataOtherProfitsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExtraBonusListResponseData
      */
-    totalNum?: number;
+    totalNum?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExtraBonusListResponseData
      */
-    pageSize?: number;
+    pageSize?: number | bigint;
 }

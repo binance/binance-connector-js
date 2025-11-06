@@ -27,22 +27,22 @@ export interface AcquiringCoinnameResponseDataInner {
     coinName?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AcquiringCoinnameResponseDataInner
      */
-    coinId?: number;
+    coinId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AcquiringCoinnameResponseDataInner
      */
-    poolIndex?: number;
+    poolIndex?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AcquiringCoinnameResponseDataInner
      */
-    algoId?: number;
+    algoId?: number | bigint;
     /**
      *
      * @type {string}

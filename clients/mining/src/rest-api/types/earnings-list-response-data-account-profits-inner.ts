@@ -21,22 +21,22 @@
 export interface EarningsListResponseDataAccountProfitsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EarningsListResponseDataAccountProfitsInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EarningsListResponseDataAccountProfitsInner
      */
-    type?: number;
+    type?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EarningsListResponseDataAccountProfitsInner
      */
-    hashTransfer?: number;
+    hashTransfer?: number | bigint;
     /**
      *
      * @type {number}
@@ -45,10 +45,10 @@ export interface EarningsListResponseDataAccountProfitsInner {
     transferAmount?: number;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EarningsListResponseDataAccountProfitsInner
      */
-    dayHashRate?: number;
+    dayHashRate?: number | bigint;
     /**
      *
      * @type {number}
@@ -63,8 +63,8 @@ export interface EarningsListResponseDataAccountProfitsInner {
     coinName?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EarningsListResponseDataAccountProfitsInner
      */
-    status?: number;
+    status?: number | bigint;
 }
