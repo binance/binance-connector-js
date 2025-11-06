@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.6 - 2025-11-06
+
+### Changed (1)
+
+- Accept `BigInt` as input for all parameters that expect long numbers.
+
 ## 1.0.5 - 2025-09-12
 
 ### Changed (1)
