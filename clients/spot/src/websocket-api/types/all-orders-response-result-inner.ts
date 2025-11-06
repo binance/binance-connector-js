@@ -32,16 +32,16 @@ export interface AllOrdersResponseResultInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllOrdersResponseResultInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllOrdersResponseResultInner
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -110,16 +110,16 @@ export interface AllOrdersResponseResultInner {
     icebergQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllOrdersResponseResultInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllOrdersResponseResultInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -128,10 +128,10 @@ export interface AllOrdersResponseResultInner {
     isWorking?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllOrdersResponseResultInner
      */
-    workingTime?: number;
+    workingTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -146,10 +146,10 @@ export interface AllOrdersResponseResultInner {
     selfTradePreventionMode?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllOrdersResponseResultInner
      */
-    preventedMatchId?: number;
+    preventedMatchId?: number | bigint;
     /**
      *
      * @type {string}

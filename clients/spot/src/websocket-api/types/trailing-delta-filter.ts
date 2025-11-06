@@ -32,26 +32,26 @@ export interface TrailingDeltaFilter {
     filterType?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TrailingDeltaFilter
      */
-    minTrailingAboveDelta?: number;
+    minTrailingAboveDelta?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TrailingDeltaFilter
      */
-    maxTrailingAboveDelta?: number;
+    maxTrailingAboveDelta?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TrailingDeltaFilter
      */
-    minTrailingBelowDelta?: number;
+    minTrailingBelowDelta?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TrailingDeltaFilter
      */
-    maxTrailingBelowDelta?: number;
+    maxTrailingBelowDelta?: number | bigint;
 }

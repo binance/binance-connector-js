@@ -40,10 +40,10 @@ export interface MyFiltersResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MyFiltersResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {MyFiltersResponseResult}

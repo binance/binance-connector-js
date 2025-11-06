@@ -32,16 +32,16 @@ export interface OrderAmendmentsResponseResultInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderAmendmentsResponseResultInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderAmendmentsResponseResultInner
      */
-    executionId?: number;
+    executionId?: number | bigint;
     /**
      *
      * @type {string}
@@ -68,8 +68,8 @@ export interface OrderAmendmentsResponseResultInner {
     newQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderAmendmentsResponseResultInner
      */
-    time?: number;
+    time?: number | bigint;
 }

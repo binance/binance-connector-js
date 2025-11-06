@@ -26,10 +26,10 @@
 export interface TradesAggregateResponseResultInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradesAggregateResponseResultInner
      */
-    a?: number;
+    a?: number | bigint;
     /**
      *
      * @type {string}
@@ -44,22 +44,22 @@ export interface TradesAggregateResponseResultInner {
     q?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradesAggregateResponseResultInner
      */
-    f?: number;
+    f?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradesAggregateResponseResultInner
      */
-    l?: number;
+    l?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradesAggregateResponseResultInner
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {boolean}

@@ -40,10 +40,10 @@ export interface OrderTestResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderTestResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {OrderTestResponseResult}

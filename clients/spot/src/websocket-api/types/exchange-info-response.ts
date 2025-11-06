@@ -40,10 +40,10 @@ export interface ExchangeInfoResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExchangeInfoResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {ExchangeInfoResponseResult}

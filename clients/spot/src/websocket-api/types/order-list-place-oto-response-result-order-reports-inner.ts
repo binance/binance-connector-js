@@ -32,16 +32,16 @@ export interface OrderListPlaceOtoResponseResultOrderReportsInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderListPlaceOtoResponseResultOrderReportsInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderListPlaceOtoResponseResultOrderReportsInner
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -50,10 +50,10 @@ export interface OrderListPlaceOtoResponseResultOrderReportsInner {
     clientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderListPlaceOtoResponseResultOrderReportsInner
      */
-    transactTime?: number;
+    transactTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -110,10 +110,10 @@ export interface OrderListPlaceOtoResponseResultOrderReportsInner {
     side?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderListPlaceOtoResponseResultOrderReportsInner
      */
-    workingTime?: number;
+    workingTime?: number | bigint;
     /**
      *
      * @type {string}

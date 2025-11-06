@@ -46,16 +46,16 @@ export interface OrderCancelResponseResult {
     origClientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderCancelResponseResult
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderCancelResponseResult
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -64,10 +64,10 @@ export interface OrderCancelResponseResult {
     clientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderCancelResponseResult
      */
-    transactTime?: number;
+    transactTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -130,10 +130,10 @@ export interface OrderCancelResponseResult {
     stopPrice?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderCancelResponseResult
      */
-    trailingDelta?: number;
+    trailingDelta?: number | bigint;
     /**
      *
      * @type {string}
@@ -142,16 +142,16 @@ export interface OrderCancelResponseResult {
     icebergQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderCancelResponseResult
      */
-    strategyId?: number;
+    strategyId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderCancelResponseResult
      */
-    strategyType?: number;
+    strategyType?: number | bigint;
     /**
      *
      * @type {string}
@@ -184,10 +184,10 @@ export interface OrderCancelResponseResult {
     listClientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderCancelResponseResult
      */
-    transactionTime?: number;
+    transactionTime?: number | bigint;
     /**
      *
      * @type {Array<OpenOrdersCancelAllResponseResultInnerOrdersInner>}

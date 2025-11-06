@@ -37,10 +37,10 @@ export interface PingResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PingResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {object}

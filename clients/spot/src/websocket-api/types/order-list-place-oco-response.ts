@@ -40,10 +40,10 @@ export interface OrderListPlaceOcoResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderListPlaceOcoResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {OrderListPlaceOcoResponseResult}

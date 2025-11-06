@@ -32,10 +32,10 @@ export interface OrderAmendKeepPriorityResponseResultListStatusOrdersInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderAmendKeepPriorityResponseResultListStatusOrdersInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}

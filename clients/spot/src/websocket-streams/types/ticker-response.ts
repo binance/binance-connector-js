@@ -32,10 +32,10 @@ export interface TickerResponse {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TickerResponse
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}
@@ -134,32 +134,32 @@ export interface TickerResponse {
     q?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TickerResponse
      */
-    O?: number;
+    O?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TickerResponse
      */
-    C?: number;
+    C?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TickerResponse
      */
-    F?: number;
+    F?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TickerResponse
      */
-    L?: number;
+    L?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TickerResponse
      */
-    n?: number;
+    n?: number | bigint;
 }

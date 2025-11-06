@@ -26,10 +26,10 @@
 export interface BookTickerResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BookTickerResponse
      */
-    u?: number;
+    u?: number | bigint;
     /**
      *
      * @type {string}

@@ -37,10 +37,10 @@ export interface UserDataStreamSubscribeResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UserDataStreamSubscribeResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {UserDataStreamSubscribeResponseResult}

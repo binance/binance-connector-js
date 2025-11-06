@@ -32,10 +32,10 @@ export interface OpenOrderListResponseInnerOrdersInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OpenOrderListResponseInnerOrdersInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}

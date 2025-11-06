@@ -40,10 +40,10 @@ export interface KlinesResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof KlinesResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {Array<KlinesItem>}

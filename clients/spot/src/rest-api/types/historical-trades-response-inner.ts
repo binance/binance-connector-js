@@ -26,10 +26,10 @@
 export interface HistoricalTradesResponseInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof HistoricalTradesResponseInner
      */
-    id?: number;
+    id?: number | bigint;
     /**
      *
      * @type {string}
@@ -50,10 +50,10 @@ export interface HistoricalTradesResponseInner {
     quoteQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof HistoricalTradesResponseInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {boolean}

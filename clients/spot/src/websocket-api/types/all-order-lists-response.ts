@@ -40,10 +40,10 @@ export interface AllOrderListsResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllOrderListsResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {Array<AllOrderListsResponseResultInner>}

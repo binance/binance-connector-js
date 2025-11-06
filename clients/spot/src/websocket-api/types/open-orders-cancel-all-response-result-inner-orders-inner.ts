@@ -32,10 +32,10 @@ export interface OpenOrdersCancelAllResponseResultInnerOrdersInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OpenOrdersCancelAllResponseResultInnerOrdersInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}

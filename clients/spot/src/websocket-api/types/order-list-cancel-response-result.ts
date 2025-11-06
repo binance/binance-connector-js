@@ -34,10 +34,10 @@ import type { OrderListCancelResponseResultOrdersInner } from './order-list-canc
 export interface OrderListCancelResponseResult {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderListCancelResponseResult
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -64,10 +64,10 @@ export interface OrderListCancelResponseResult {
     listClientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderListCancelResponseResult
      */
-    transactionTime?: number;
+    transactionTime?: number | bigint;
     /**
      *
      * @type {string}

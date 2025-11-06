@@ -40,10 +40,10 @@ export interface AccountCommissionResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountCommissionResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {AccountCommissionResponseResult}

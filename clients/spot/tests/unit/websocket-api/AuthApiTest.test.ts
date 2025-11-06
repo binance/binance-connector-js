@@ -20,6 +20,7 @@
 
 import WebSocketClient from 'ws';
 import { EventEmitter } from 'events';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { jest, expect, beforeEach, afterEach, describe, it } from '@jest/globals';
 import { ConfigurationWebsocketAPI, WebsocketAPIBase, randomString } from '@binance/common';
 
@@ -83,18 +84,20 @@ describe('AuthApi', () => {
         });
 
         it('should execute sessionLogon() successfully', async () => {
-            mockResponse = {
-                id: 'c174a2b1-3f51-4580-b200-8528bd237cb7',
-                status: 200,
-                result: {
-                    apiKey: 'vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A',
-                    authorizedSince: 1649729878532,
-                    connectedSince: 1649729873021,
-                    returnRateLimits: false,
-                    serverTime: 1649729878630,
-                    userDataStream: false,
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: 'c174a2b1-3f51-4580-b200-8528bd237cb7',
+                    status: 200,
+                    result: {
+                        apiKey: 'vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A',
+                        authorizedSince: 1649729878532,
+                        connectedSince: 1649729873021,
+                        returnRateLimits: false,
+                        serverTime: 1649729878630,
+                        userDataStream: false,
+                    },
+                })
+            );
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -109,7 +112,7 @@ describe('AuthApi', () => {
                     const responsePromise = websocketAPIClient.sessionLogon({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response[0].data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response[0].rateLimits).toEqual(mockResponse.rateLimits);
@@ -161,7 +164,7 @@ describe('AuthApi', () => {
                     const responsePromise = websocketAPIClient.sessionLogon({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -239,18 +242,20 @@ describe('AuthApi', () => {
         });
 
         it('should execute sessionLogout() successfully', async () => {
-            mockResponse = {
-                id: 'c174a2b1-3f51-4580-b200-8528bd237cb7',
-                status: 200,
-                result: {
-                    apiKey: 'CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TRTQ',
-                    authorizedSince: 1649729878532,
-                    connectedSince: 1649729873021,
-                    returnRateLimits: false,
-                    serverTime: 1649730611671,
-                    userDataStream: false,
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: 'c174a2b1-3f51-4580-b200-8528bd237cb7',
+                    status: 200,
+                    result: {
+                        apiKey: 'CAvIjXy3F44yW6Pou5k8Dy1swsYDWJZLeoK2r8G4cFDnE9nosRppc2eKc1T8TRTQ',
+                        authorizedSince: 1649729878532,
+                        connectedSince: 1649729873021,
+                        returnRateLimits: false,
+                        serverTime: 1649730611671,
+                        userDataStream: false,
+                    },
+                })
+            );
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -265,7 +270,7 @@ describe('AuthApi', () => {
                     const responsePromise = websocketAPIClient.sessionLogout({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response[0].data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response[0].rateLimits).toEqual(mockResponse.rateLimits);
@@ -317,7 +322,7 @@ describe('AuthApi', () => {
                     const responsePromise = websocketAPIClient.sessionLogout({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -395,18 +400,20 @@ describe('AuthApi', () => {
         });
 
         it('should execute sessionStatus() successfully', async () => {
-            mockResponse = {
-                id: 'b50c16cd-62c9-4e29-89e4-37f10111f5bf',
-                status: 200,
-                result: {
-                    apiKey: 'vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A',
-                    authorizedSince: 1649729878532,
-                    connectedSince: 1649729873021,
-                    returnRateLimits: false,
-                    serverTime: 1649730611671,
-                    userDataStream: true,
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: 'b50c16cd-62c9-4e29-89e4-37f10111f5bf',
+                    status: 200,
+                    result: {
+                        apiKey: 'vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A',
+                        authorizedSince: 1649729878532,
+                        connectedSince: 1649729873021,
+                        returnRateLimits: false,
+                        serverTime: 1649730611671,
+                        userDataStream: true,
+                    },
+                })
+            );
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -421,7 +428,7 @@ describe('AuthApi', () => {
                     const responsePromise = websocketAPIClient.sessionStatus({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -473,7 +480,7 @@ describe('AuthApi', () => {
                     const responsePromise = websocketAPIClient.sessionStatus({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {

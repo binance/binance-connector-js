@@ -37,16 +37,16 @@ export interface SorOrderPlaceResponseResultInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SorOrderPlaceResponseResultInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SorOrderPlaceResponseResultInner
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -55,10 +55,10 @@ export interface SorOrderPlaceResponseResultInner {
     clientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SorOrderPlaceResponseResultInner
      */
-    transactTime?: number;
+    transactTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -115,10 +115,10 @@ export interface SorOrderPlaceResponseResultInner {
     side?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SorOrderPlaceResponseResultInner
      */
-    workingTime?: number;
+    workingTime?: number | bigint;
     /**
      *
      * @type {Array<SorOrderPlaceResponseResultInnerFillsInner>}

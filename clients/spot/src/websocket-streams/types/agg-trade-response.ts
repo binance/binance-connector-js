@@ -32,10 +32,10 @@ export interface AggTradeResponse {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AggTradeResponse
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}
@@ -44,10 +44,10 @@ export interface AggTradeResponse {
     s?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AggTradeResponse
      */
-    a?: number;
+    a?: number | bigint;
     /**
      *
      * @type {string}
@@ -62,22 +62,22 @@ export interface AggTradeResponse {
     q?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AggTradeResponse
      */
-    f?: number;
+    f?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AggTradeResponse
      */
-    l?: number;
+    l?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AggTradeResponse
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {boolean}

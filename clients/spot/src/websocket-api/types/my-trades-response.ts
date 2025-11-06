@@ -40,10 +40,10 @@ export interface MyTradesResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MyTradesResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {Array<MyTradesResponseResultInner>}

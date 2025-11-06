@@ -40,10 +40,10 @@ export interface AvgPriceResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AvgPriceResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {AvgPriceResponseResult}

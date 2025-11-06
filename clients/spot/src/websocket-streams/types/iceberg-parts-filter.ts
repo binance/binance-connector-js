@@ -32,8 +32,8 @@ export interface IcebergPartsFilter {
     filterType?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof IcebergPartsFilter
      */
-    limit?: number;
+    limit?: number | bigint;
 }

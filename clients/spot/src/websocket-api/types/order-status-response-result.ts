@@ -32,16 +32,16 @@ export interface OrderStatusResponseResult {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderStatusResponseResult
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderStatusResponseResult
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -104,16 +104,16 @@ export interface OrderStatusResponseResult {
     stopPrice?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderStatusResponseResult
      */
-    trailingDelta?: number;
+    trailingDelta?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderStatusResponseResult
      */
-    trailingTime?: number;
+    trailingTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -122,16 +122,16 @@ export interface OrderStatusResponseResult {
     icebergQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderStatusResponseResult
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderStatusResponseResult
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -140,10 +140,10 @@ export interface OrderStatusResponseResult {
     isWorking?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderStatusResponseResult
      */
-    workingTime?: number;
+    workingTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -152,16 +152,16 @@ export interface OrderStatusResponseResult {
     origQuoteOrderQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderStatusResponseResult
      */
-    strategyId?: number;
+    strategyId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderStatusResponseResult
      */
-    strategyType?: number;
+    strategyType?: number | bigint;
     /**
      *
      * @type {string}
@@ -170,10 +170,10 @@ export interface OrderStatusResponseResult {
     selfTradePreventionMode?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderStatusResponseResult
      */
-    preventedMatchId?: number;
+    preventedMatchId?: number | bigint;
     /**
      *
      * @type {string}

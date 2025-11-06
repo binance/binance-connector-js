@@ -20,6 +20,7 @@
 
 import WebSocketClient from 'ws';
 import { EventEmitter } from 'events';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { jest, expect, beforeEach, afterEach, describe, it } from '@jest/globals';
 import { ConfigurationWebsocketAPI, WebsocketAPIBase, randomString } from '@binance/common';
 
@@ -93,46 +94,48 @@ describe('AccountApi', () => {
         });
 
         it('should execute accountCommission() successfully', async () => {
-            mockResponse = {
-                id: 'd3df8a61-98ea-4fe0-8f4e-0fcea5d418b0',
-                status: 200,
-                result: {
-                    symbol: 'BTCUSDT',
-                    standardCommission: {
-                        maker: '0.00000010',
-                        taker: '0.00000020',
-                        buyer: '0.00000030',
-                        seller: '0.00000040',
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: 'd3df8a61-98ea-4fe0-8f4e-0fcea5d418b0',
+                    status: 200,
+                    result: {
+                        symbol: 'BTCUSDT',
+                        standardCommission: {
+                            maker: '0.00000010',
+                            taker: '0.00000020',
+                            buyer: '0.00000030',
+                            seller: '0.00000040',
+                        },
+                        specialCommission: {
+                            maker: '0.01000000',
+                            taker: '0.02000000',
+                            buyer: '0.03000000',
+                            seller: '0.04000000',
+                        },
+                        taxCommission: {
+                            maker: '0.00000112',
+                            taker: '0.00000114',
+                            buyer: '0.00000118',
+                            seller: '0.00000116',
+                        },
+                        discount: {
+                            enabledForAccount: true,
+                            enabledForSymbol: true,
+                            discountAsset: 'BNB',
+                            discount: '0.75000000',
+                        },
                     },
-                    specialCommission: {
-                        maker: '0.01000000',
-                        taker: '0.02000000',
-                        buyer: '0.03000000',
-                        seller: '0.04000000',
-                    },
-                    taxCommission: {
-                        maker: '0.00000112',
-                        taker: '0.00000114',
-                        buyer: '0.00000118',
-                        seller: '0.00000116',
-                    },
-                    discount: {
-                        enabledForAccount: true,
-                        enabledForSymbol: true,
-                        discountAsset: 'BNB',
-                        discount: '0.75000000',
-                    },
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 20,
-                    },
-                ],
-            };
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 20,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             const params: AccountCommissionRequest = {
@@ -152,7 +155,7 @@ describe('AccountApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -209,7 +212,7 @@ describe('AccountApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -291,35 +294,37 @@ describe('AccountApi', () => {
         });
 
         it('should execute accountRateLimitsOrders() successfully', async () => {
-            mockResponse = {
-                id: 'd3783d8d-f8d1-4d2c-b8a0-b7596af5a664',
-                status: 200,
-                result: [
-                    {
-                        rateLimitType: 'ORDERS',
-                        interval: 'DAY',
-                        intervalNum: 1,
-                        limit: 160000,
-                        count: 0,
-                    },
-                    {
-                        rateLimitType: 'ORDERS',
-                        interval: 'SECOND',
-                        intervalNum: 10,
-                        limit: 50,
-                        count: 0,
-                    },
-                ],
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 40,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: 'd3783d8d-f8d1-4d2c-b8a0-b7596af5a664',
+                    status: 200,
+                    result: [
+                        {
+                            rateLimitType: 'ORDERS',
+                            interval: 'DAY',
+                            intervalNum: 1,
+                            limit: 160000,
+                            count: 0,
+                        },
+                        {
+                            rateLimitType: 'ORDERS',
+                            interval: 'SECOND',
+                            intervalNum: 10,
+                            limit: 50,
+                            count: 0,
+                        },
+                    ],
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 40,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -334,7 +339,7 @@ describe('AccountApi', () => {
                     const responsePromise = websocketAPIClient.accountRateLimitsOrders({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -386,7 +391,7 @@ describe('AccountApi', () => {
                     const responsePromise = websocketAPIClient.accountRateLimitsOrders({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -464,46 +469,48 @@ describe('AccountApi', () => {
         });
 
         it('should execute accountStatus() successfully', async () => {
-            mockResponse = {
-                id: '605a6d20-6588-4cb9-afa0-b0ab087507ba',
-                status: 200,
-                result: {
-                    makerCommission: 15,
-                    takerCommission: 15,
-                    buyerCommission: 0,
-                    sellerCommission: 0,
-                    canTrade: true,
-                    canWithdraw: true,
-                    canDeposit: true,
-                    commissionRates: {
-                        maker: '0.00150000',
-                        taker: '0.00150000',
-                        buyer: '0.00000000',
-                        seller: '0.00000000',
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '605a6d20-6588-4cb9-afa0-b0ab087507ba',
+                    status: 200,
+                    result: {
+                        makerCommission: 15,
+                        takerCommission: 15,
+                        buyerCommission: 0,
+                        sellerCommission: 0,
+                        canTrade: true,
+                        canWithdraw: true,
+                        canDeposit: true,
+                        commissionRates: {
+                            maker: '0.00150000',
+                            taker: '0.00150000',
+                            buyer: '0.00000000',
+                            seller: '0.00000000',
+                        },
+                        brokered: false,
+                        requireSelfTradePrevention: false,
+                        preventSor: false,
+                        updateTime: 1660801833000,
+                        accountType: 'SPOT',
+                        balances: [
+                            { asset: 'USDT', free: '1021.21000000', locked: '0.00000000' },
+                            { asset: 'BTC', free: '1.3447112', locked: '0.08600000' },
+                            { asset: 'BNB', free: '0.00000000', locked: '0.00000000' },
+                        ],
+                        permissions: ['SPOT'],
+                        uid: 354937868,
                     },
-                    brokered: false,
-                    requireSelfTradePrevention: false,
-                    preventSor: false,
-                    updateTime: 1660801833000,
-                    accountType: 'SPOT',
-                    balances: [
-                        { asset: 'USDT', free: '1021.21000000', locked: '0.00000000' },
-                        { asset: 'BTC', free: '1.3447112', locked: '0.08600000' },
-                        { asset: 'BNB', free: '0.00000000', locked: '0.00000000' },
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 20,
+                        },
                     ],
-                    permissions: ['SPOT'],
-                    uid: 354937868,
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 20,
-                    },
-                ],
-            };
+                })
+            );
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -518,7 +525,7 @@ describe('AccountApi', () => {
                     const responsePromise = websocketAPIClient.accountStatus({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -570,7 +577,7 @@ describe('AccountApi', () => {
                     const responsePromise = websocketAPIClient.accountStatus({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -648,42 +655,44 @@ describe('AccountApi', () => {
         });
 
         it('should execute allOrderLists() successfully', async () => {
-            mockResponse = {
-                id: '8617b7b3-1b3d-4dec-94cd-eefd929b8ceb',
-                status: 200,
-                result: [
-                    {
-                        orderListId: 1274512,
-                        contingencyType: 'OCO',
-                        listStatusType: 'EXEC_STARTED',
-                        listOrderStatus: 'EXECUTING',
-                        listClientOrderId: '08985fedd9ea2cf6b28996',
-                        transactionTime: 1660801713793,
-                        symbol: 'BTCUSDT',
-                        orders: [
-                            {
-                                symbol: 'BTCUSDT',
-                                orderId: 12569138902,
-                                clientOrderId: 'jLnZpj5enfMXTuhKB1d0us',
-                            },
-                            {
-                                symbol: 'BTCUSDT',
-                                orderId: 12569138901,
-                                clientOrderId: 'BqtFCj5odMoWtSqGk2X9tU',
-                            },
-                        ],
-                    },
-                ],
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 20,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '8617b7b3-1b3d-4dec-94cd-eefd929b8ceb',
+                    status: 200,
+                    result: [
+                        {
+                            orderListId: 1274512,
+                            contingencyType: 'OCO',
+                            listStatusType: 'EXEC_STARTED',
+                            listOrderStatus: 'EXECUTING',
+                            listClientOrderId: '08985fedd9ea2cf6b28996',
+                            transactionTime: 1660801713793,
+                            symbol: 'BTCUSDT',
+                            orders: [
+                                {
+                                    symbol: 'BTCUSDT',
+                                    orderId: 12569138902,
+                                    clientOrderId: 'jLnZpj5enfMXTuhKB1d0us',
+                                },
+                                {
+                                    symbol: 'BTCUSDT',
+                                    orderId: 12569138901,
+                                    clientOrderId: 'BqtFCj5odMoWtSqGk2X9tU',
+                                },
+                            ],
+                        },
+                    ],
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 20,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -698,7 +707,7 @@ describe('AccountApi', () => {
                     const responsePromise = websocketAPIClient.allOrderLists({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -750,7 +759,7 @@ describe('AccountApi', () => {
                     const responsePromise = websocketAPIClient.allOrderLists({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -828,45 +837,47 @@ describe('AccountApi', () => {
         });
 
         it('should execute allOrders() successfully', async () => {
-            mockResponse = {
-                id: '734235c2-13d2-4574-be68-723e818c08f3',
-                status: 200,
-                result: [
-                    {
-                        symbol: 'BTCUSDT',
-                        orderId: 12569099453,
-                        orderListId: -1,
-                        clientOrderId: '4d96324ff9d44481926157',
-                        price: '23416.10000000',
-                        origQty: '0.00847000',
-                        executedQty: '0.00847000',
-                        cummulativeQuoteQty: '198.33521500',
-                        status: 'FILLED',
-                        timeInForce: 'GTC',
-                        type: 'LIMIT',
-                        side: 'SELL',
-                        stopPrice: '0.00000000',
-                        icebergQty: '0.00000000',
-                        time: 1660801715639,
-                        updateTime: 1660801717945,
-                        isWorking: true,
-                        workingTime: 1660801715639,
-                        origQuoteOrderQty: '0.00000000',
-                        selfTradePreventionMode: 'NONE',
-                        preventedMatchId: 0,
-                        preventedQuantity: '1.200000',
-                    },
-                ],
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 20,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '734235c2-13d2-4574-be68-723e818c08f3',
+                    status: 200,
+                    result: [
+                        {
+                            symbol: 'BTCUSDT',
+                            orderId: 12569099453,
+                            orderListId: -1,
+                            clientOrderId: '4d96324ff9d44481926157',
+                            price: '23416.10000000',
+                            origQty: '0.00847000',
+                            executedQty: '0.00847000',
+                            cummulativeQuoteQty: '198.33521500',
+                            status: 'FILLED',
+                            timeInForce: 'GTC',
+                            type: 'LIMIT',
+                            side: 'SELL',
+                            stopPrice: '0.00000000',
+                            icebergQty: '0.00000000',
+                            time: 1660801715639,
+                            updateTime: 1660801717945,
+                            isWorking: true,
+                            workingTime: 1660801715639,
+                            origQuoteOrderQty: '0.00000000',
+                            selfTradePreventionMode: 'NONE',
+                            preventedMatchId: 0,
+                            preventedQuantity: '1.200000',
+                        },
+                    ],
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 20,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             const params: AllOrdersRequest = {
@@ -886,7 +897,7 @@ describe('AccountApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -942,7 +953,7 @@ describe('AccountApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -1024,37 +1035,39 @@ describe('AccountApi', () => {
         });
 
         it('should execute myAllocations() successfully', async () => {
-            mockResponse = {
-                id: 'g4ce6a53-a39d-4f71-823b-4ab5r391d6y8',
-                status: 200,
-                result: [
-                    {
-                        symbol: 'BTCUSDT',
-                        allocationId: 0,
-                        allocationType: 'SOR',
-                        orderId: 500,
-                        orderListId: -1,
-                        price: '1.00000000',
-                        qty: '0.10000000',
-                        quoteQty: '0.10000000',
-                        commission: '0.00000000',
-                        commissionAsset: 'BTC',
-                        time: 1687319487614,
-                        isBuyer: false,
-                        isMaker: false,
-                        isAllocator: false,
-                    },
-                ],
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 20,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: 'g4ce6a53-a39d-4f71-823b-4ab5r391d6y8',
+                    status: 200,
+                    result: [
+                        {
+                            symbol: 'BTCUSDT',
+                            allocationId: 0,
+                            allocationType: 'SOR',
+                            orderId: 500,
+                            orderListId: -1,
+                            price: '1.00000000',
+                            qty: '0.10000000',
+                            quoteQty: '0.10000000',
+                            commission: '0.00000000',
+                            commissionAsset: 'BTC',
+                            time: 1687319487614,
+                            isBuyer: false,
+                            isMaker: false,
+                            isAllocator: false,
+                        },
+                    ],
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 20,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             const params: MyAllocationsRequest = {
@@ -1074,7 +1087,7 @@ describe('AccountApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -1130,7 +1143,7 @@ describe('AccountApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -1212,34 +1225,38 @@ describe('AccountApi', () => {
         });
 
         it('should execute myFilters() successfully', async () => {
-            mockResponse = {
-                id: '1758009606869',
-                status: 200,
-                result: {
-                    exchangeFilters: [
-                        { filterType: 'EXCHANGE_MAX_NUM_ORDERS', maxNumOrders: 1000 },
-                    ],
-                    symbolFilters: [{ filterType: 'MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 }],
-                    assetFilters: [
-                        { filterType: 'MAX_ASSET', asset: 'JPY', limit: '1000000.00000000' },
-                    ],
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '1758009606869',
+                    status: 200,
+                    result: {
+                        exchangeFilters: [
+                            { filterType: 'EXCHANGE_MAX_NUM_ORDERS', maxNumOrders: 1000 },
+                        ],
+                        symbolFilters: [
+                            { filterType: 'MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 },
+                        ],
+                        assetFilters: [
+                            { filterType: 'MAX_ASSET', asset: 'JPY', limit: '1000000.00000000' },
+                        ],
                     },
-                    { rateLimitType: 'ORDERS', interval: 'DAY', intervalNum: 1, limit: 160000 },
-                    {
-                        rateLimitType: 'RAW_REQUESTS',
-                        interval: 'MINUTE',
-                        intervalNum: 5,
-                        limit: 61000,
-                    },
-                ],
-            };
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                        },
+                        { rateLimitType: 'ORDERS', interval: 'DAY', intervalNum: 1, limit: 160000 },
+                        {
+                            rateLimitType: 'RAW_REQUESTS',
+                            interval: 'MINUTE',
+                            intervalNum: 5,
+                            limit: 61000,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             const params: MyFiltersRequest = {
@@ -1259,7 +1276,7 @@ describe('AccountApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -1315,7 +1332,7 @@ describe('AccountApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -1397,33 +1414,35 @@ describe('AccountApi', () => {
         });
 
         it('should execute myPreventedMatches() successfully', async () => {
-            mockResponse = {
-                id: 'g4ce6a53-a39d-4f71-823b-4ab5r391d6y8',
-                status: 200,
-                result: [
-                    {
-                        symbol: 'BTCUSDT',
-                        preventedMatchId: 1,
-                        takerOrderId: 5,
-                        makerSymbol: 'BTCUSDT',
-                        makerOrderId: 3,
-                        tradeGroupId: 1,
-                        selfTradePreventionMode: 'EXPIRE_MAKER',
-                        price: '1.100000',
-                        makerPreventedQuantity: '1.300000',
-                        transactTime: 1669101687094,
-                    },
-                ],
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 20,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: 'g4ce6a53-a39d-4f71-823b-4ab5r391d6y8',
+                    status: 200,
+                    result: [
+                        {
+                            symbol: 'BTCUSDT',
+                            preventedMatchId: 1,
+                            takerOrderId: 5,
+                            makerSymbol: 'BTCUSDT',
+                            makerOrderId: 3,
+                            tradeGroupId: 1,
+                            selfTradePreventionMode: 'EXPIRE_MAKER',
+                            price: '1.100000',
+                            makerPreventedQuantity: '1.300000',
+                            transactTime: 1669101687094,
+                        },
+                    ],
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 20,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             const params: MyPreventedMatchesRequest = {
@@ -1443,7 +1462,7 @@ describe('AccountApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -1500,7 +1519,7 @@ describe('AccountApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -1582,51 +1601,53 @@ describe('AccountApi', () => {
         });
 
         it('should execute myTrades() successfully', async () => {
-            mockResponse = {
-                id: 'f4ce6a53-a29d-4f70-823b-4ab59391d6e8',
-                status: 200,
-                result: [
-                    {
-                        symbol: 'BTCUSDT',
-                        id: 1650422482,
-                        orderId: 12569099453,
-                        orderListId: -1,
-                        price: '23416.50000000',
-                        qty: '0.00212000',
-                        quoteQty: '49.64298000',
-                        commission: '0.00000000',
-                        commissionAsset: 'BNB',
-                        time: 1660801715793,
-                        isBuyer: false,
-                        isMaker: true,
-                        isBestMatch: true,
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        id: 1650422481,
-                        orderId: 12569099453,
-                        orderListId: -1,
-                        price: '23416.10000000',
-                        qty: '0.00635000',
-                        quoteQty: '148.69223500',
-                        commission: '0.00000000',
-                        commissionAsset: 'BNB',
-                        time: 1660801715793,
-                        isBuyer: false,
-                        isMaker: true,
-                        isBestMatch: true,
-                    },
-                ],
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 20,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: 'f4ce6a53-a29d-4f70-823b-4ab59391d6e8',
+                    status: 200,
+                    result: [
+                        {
+                            symbol: 'BTCUSDT',
+                            id: 1650422482,
+                            orderId: 12569099453,
+                            orderListId: -1,
+                            price: '23416.50000000',
+                            qty: '0.00212000',
+                            quoteQty: '49.64298000',
+                            commission: '0.00000000',
+                            commissionAsset: 'BNB',
+                            time: 1660801715793,
+                            isBuyer: false,
+                            isMaker: true,
+                            isBestMatch: true,
+                        },
+                        {
+                            symbol: 'BTCUSDT',
+                            id: 1650422481,
+                            orderId: 12569099453,
+                            orderListId: -1,
+                            price: '23416.10000000',
+                            qty: '0.00635000',
+                            quoteQty: '148.69223500',
+                            commission: '0.00000000',
+                            commissionAsset: 'BNB',
+                            time: 1660801715793,
+                            isBuyer: false,
+                            isMaker: true,
+                            isBestMatch: true,
+                        },
+                    ],
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 20,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             const params: MyTradesRequest = {
@@ -1646,7 +1667,7 @@ describe('AccountApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -1702,7 +1723,7 @@ describe('AccountApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -1784,42 +1805,44 @@ describe('AccountApi', () => {
         });
 
         it('should execute openOrderListsStatus() successfully', async () => {
-            mockResponse = {
-                id: '3a4437e2-41a3-4c19-897c-9cadc5dce8b6',
-                status: 200,
-                result: [
-                    {
-                        orderListId: 0,
-                        contingencyType: 'OCO',
-                        listStatusType: 'EXEC_STARTED',
-                        listOrderStatus: 'EXECUTING',
-                        listClientOrderId: '08985fedd9ea2cf6b28996',
-                        transactionTime: 1660801713793,
-                        symbol: 'BTCUSDT',
-                        orders: [
-                            {
-                                symbol: 'BTCUSDT',
-                                orderId: 5,
-                                clientOrderId: '1ZqG7bBuYwaF4SU8CwnwHm',
-                            },
-                            {
-                                symbol: 'BTCUSDT',
-                                orderId: 4,
-                                clientOrderId: 'CUhLgTXnX5n2c0gWiLpV4d',
-                            },
-                        ],
-                    },
-                ],
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 6,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '3a4437e2-41a3-4c19-897c-9cadc5dce8b6',
+                    status: 200,
+                    result: [
+                        {
+                            orderListId: 0,
+                            contingencyType: 'OCO',
+                            listStatusType: 'EXEC_STARTED',
+                            listOrderStatus: 'EXECUTING',
+                            listClientOrderId: '08985fedd9ea2cf6b28996',
+                            transactionTime: 1660801713793,
+                            symbol: 'BTCUSDT',
+                            orders: [
+                                {
+                                    symbol: 'BTCUSDT',
+                                    orderId: 5,
+                                    clientOrderId: '1ZqG7bBuYwaF4SU8CwnwHm',
+                                },
+                                {
+                                    symbol: 'BTCUSDT',
+                                    orderId: 4,
+                                    clientOrderId: 'CUhLgTXnX5n2c0gWiLpV4d',
+                                },
+                            ],
+                        },
+                    ],
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 6,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -1834,7 +1857,7 @@ describe('AccountApi', () => {
                     const responsePromise = websocketAPIClient.openOrderListsStatus({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -1886,7 +1909,7 @@ describe('AccountApi', () => {
                     const responsePromise = websocketAPIClient.openOrderListsStatus({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -1964,43 +1987,45 @@ describe('AccountApi', () => {
         });
 
         it('should execute openOrdersStatus() successfully', async () => {
-            mockResponse = {
-                id: '55f07876-4f6f-4c47-87dc-43e5fff3f2e7',
-                status: 200,
-                result: [
-                    {
-                        symbol: 'BTCUSDT',
-                        orderId: 12569099453,
-                        orderListId: -1,
-                        clientOrderId: '4d96324ff9d44481926157',
-                        price: '23416.10000000',
-                        origQty: '0.00847000',
-                        executedQty: '0.00720000',
-                        origQuoteOrderQty: '0.00000000',
-                        cummulativeQuoteQty: '172.43931000',
-                        status: 'PARTIALLY_FILLED',
-                        timeInForce: 'GTC',
-                        type: 'LIMIT',
-                        side: 'SELL',
-                        stopPrice: '0.00000000',
-                        icebergQty: '0.00000000',
-                        time: 1660801715639,
-                        updateTime: 1660801717945,
-                        isWorking: true,
-                        workingTime: 1660801715639,
-                        selfTradePreventionMode: 'NONE',
-                    },
-                ],
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 6,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '55f07876-4f6f-4c47-87dc-43e5fff3f2e7',
+                    status: 200,
+                    result: [
+                        {
+                            symbol: 'BTCUSDT',
+                            orderId: 12569099453,
+                            orderListId: -1,
+                            clientOrderId: '4d96324ff9d44481926157',
+                            price: '23416.10000000',
+                            origQty: '0.00847000',
+                            executedQty: '0.00720000',
+                            origQuoteOrderQty: '0.00000000',
+                            cummulativeQuoteQty: '172.43931000',
+                            status: 'PARTIALLY_FILLED',
+                            timeInForce: 'GTC',
+                            type: 'LIMIT',
+                            side: 'SELL',
+                            stopPrice: '0.00000000',
+                            icebergQty: '0.00000000',
+                            time: 1660801715639,
+                            updateTime: 1660801717945,
+                            isWorking: true,
+                            workingTime: 1660801715639,
+                            selfTradePreventionMode: 'NONE',
+                        },
+                    ],
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 6,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -2015,7 +2040,7 @@ describe('AccountApi', () => {
                     const responsePromise = websocketAPIClient.openOrdersStatus({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -2067,7 +2092,7 @@ describe('AccountApi', () => {
                     const responsePromise = websocketAPIClient.openOrdersStatus({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -2145,31 +2170,33 @@ describe('AccountApi', () => {
         });
 
         it('should execute orderAmendments() successfully', async () => {
-            mockResponse = {
-                id: '6f5ebe91-01d9-43ac-be99-57cf062e0e30',
-                status: 200,
-                result: [
-                    {
-                        symbol: 'BTCUSDT',
-                        orderId: 23,
-                        executionId: 60,
-                        origClientOrderId: 'my_pending_order',
-                        newClientOrderId: 'xbxXh5SSwaHS7oUEOCI88B',
-                        origQty: '7.00000000',
-                        newQty: '5.00000000',
-                        time: 1741924229819,
-                    },
-                ],
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 4,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '6f5ebe91-01d9-43ac-be99-57cf062e0e30',
+                    status: 200,
+                    result: [
+                        {
+                            symbol: 'BTCUSDT',
+                            orderId: 23,
+                            executionId: 60,
+                            origClientOrderId: 'my_pending_order',
+                            newClientOrderId: 'xbxXh5SSwaHS7oUEOCI88B',
+                            origQty: '7.00000000',
+                            newQty: '5.00000000',
+                            time: 1741924229819,
+                        },
+                    ],
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 4,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             const params: OrderAmendmentsRequest = {
@@ -2190,7 +2217,7 @@ describe('AccountApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -2247,7 +2274,7 @@ describe('AccountApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -2330,40 +2357,42 @@ describe('AccountApi', () => {
         });
 
         it('should execute orderListStatus() successfully', async () => {
-            mockResponse = {
-                id: 'b53fd5ff-82c7-4a04-bd64-5f9dc42c2100',
-                status: 200,
-                result: {
-                    orderListId: 1274512,
-                    contingencyType: 'OCO',
-                    listStatusType: 'EXEC_STARTED',
-                    listOrderStatus: 'EXECUTING',
-                    listClientOrderId: '08985fedd9ea2cf6b28996',
-                    transactionTime: 1660801713793,
-                    symbol: 'BTCUSDT',
-                    orders: [
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: 'b53fd5ff-82c7-4a04-bd64-5f9dc42c2100',
+                    status: 200,
+                    result: {
+                        orderListId: 1274512,
+                        contingencyType: 'OCO',
+                        listStatusType: 'EXEC_STARTED',
+                        listOrderStatus: 'EXECUTING',
+                        listClientOrderId: '08985fedd9ea2cf6b28996',
+                        transactionTime: 1660801713793,
+                        symbol: 'BTCUSDT',
+                        orders: [
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 12569138902,
+                                clientOrderId: 'jLnZpj5enfMXTuhKB1d0us',
+                            },
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 12569138901,
+                                clientOrderId: 'BqtFCj5odMoWtSqGk2X9tU',
+                            },
+                        ],
+                    },
+                    rateLimits: [
                         {
-                            symbol: 'BTCUSDT',
-                            orderId: 12569138902,
-                            clientOrderId: 'jLnZpj5enfMXTuhKB1d0us',
-                        },
-                        {
-                            symbol: 'BTCUSDT',
-                            orderId: 12569138901,
-                            clientOrderId: 'BqtFCj5odMoWtSqGk2X9tU',
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 4,
                         },
                     ],
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 4,
-                    },
-                ],
-            };
+                })
+            );
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -2378,7 +2407,7 @@ describe('AccountApi', () => {
                     const responsePromise = websocketAPIClient.orderListStatus({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -2430,7 +2459,7 @@ describe('AccountApi', () => {
                     const responsePromise = websocketAPIClient.orderListStatus({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -2508,47 +2537,49 @@ describe('AccountApi', () => {
         });
 
         it('should execute orderStatus() successfully', async () => {
-            mockResponse = {
-                id: 'aa62318a-5a97-4f3b-bdc7-640bbe33b291',
-                status: 200,
-                result: {
-                    symbol: 'BTCUSDT',
-                    orderId: 12569099453,
-                    orderListId: -1,
-                    clientOrderId: '4d96324ff9d44481926157',
-                    price: '23416.10000000',
-                    origQty: '0.00847000',
-                    executedQty: '0.00847000',
-                    cummulativeQuoteQty: '198.33521500',
-                    status: 'FILLED',
-                    timeInForce: 'GTC',
-                    type: 'LIMIT',
-                    side: 'SELL',
-                    stopPrice: '0.00000000',
-                    trailingDelta: 10,
-                    trailingTime: -1,
-                    icebergQty: '0.00000000',
-                    time: 1660801715639,
-                    updateTime: 1660801717945,
-                    isWorking: true,
-                    workingTime: 1660801715639,
-                    origQuoteOrderQty: '0.00000000',
-                    strategyId: 37463720,
-                    strategyType: 1000000,
-                    selfTradePreventionMode: 'NONE',
-                    preventedMatchId: 0,
-                    preventedQuantity: '1.200000',
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 4,
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: 'aa62318a-5a97-4f3b-bdc7-640bbe33b291',
+                    status: 200,
+                    result: {
+                        symbol: 'BTCUSDT',
+                        orderId: 12569099453,
+                        orderListId: -1,
+                        clientOrderId: '4d96324ff9d44481926157',
+                        price: '23416.10000000',
+                        origQty: '0.00847000',
+                        executedQty: '0.00847000',
+                        cummulativeQuoteQty: '198.33521500',
+                        status: 'FILLED',
+                        timeInForce: 'GTC',
+                        type: 'LIMIT',
+                        side: 'SELL',
+                        stopPrice: '0.00000000',
+                        trailingDelta: 10,
+                        trailingTime: -1,
+                        icebergQty: '0.00000000',
+                        time: 1660801715639,
+                        updateTime: 1660801717945,
+                        isWorking: true,
+                        workingTime: 1660801715639,
+                        origQuoteOrderQty: '0.00000000',
+                        strategyId: 37463720,
+                        strategyType: 1000000,
+                        selfTradePreventionMode: 'NONE',
+                        preventedMatchId: 0,
+                        preventedQuantity: '1.200000',
                     },
-                ],
-            };
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 4,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             const params: OrderStatusRequest = {
@@ -2568,7 +2599,7 @@ describe('AccountApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -2624,7 +2655,7 @@ describe('AccountApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {

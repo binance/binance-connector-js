@@ -40,10 +40,10 @@ export interface OrderAmendKeepPriorityResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderAmendKeepPriorityResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {OrderAmendKeepPriorityResponseResult}

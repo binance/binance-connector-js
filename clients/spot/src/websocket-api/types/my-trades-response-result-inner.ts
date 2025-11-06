@@ -32,22 +32,22 @@ export interface MyTradesResponseResultInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MyTradesResponseResultInner
      */
-    id?: number;
+    id?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MyTradesResponseResultInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MyTradesResponseResultInner
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -80,10 +80,10 @@ export interface MyTradesResponseResultInner {
     commissionAsset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MyTradesResponseResultInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {boolean}

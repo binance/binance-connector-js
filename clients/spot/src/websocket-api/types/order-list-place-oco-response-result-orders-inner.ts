@@ -32,10 +32,10 @@ export interface OrderListPlaceOcoResponseResultOrdersInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderListPlaceOcoResponseResultOrdersInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}

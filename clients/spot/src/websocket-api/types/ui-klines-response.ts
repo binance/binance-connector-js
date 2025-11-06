@@ -40,10 +40,10 @@ export interface UiKlinesResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UiKlinesResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {Array<UiKlinesItem>}

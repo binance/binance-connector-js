@@ -26,16 +26,16 @@
 export interface KlineResponseK {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof KlineResponseK
      */
-    t?: number;
+    t?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof KlineResponseK
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {string}
@@ -50,16 +50,16 @@ export interface KlineResponseK {
     i?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof KlineResponseK
      */
-    f?: number;
+    f?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof KlineResponseK
      */
-    L?: number;
+    L?: number | bigint;
     /**
      *
      * @type {string}
@@ -92,10 +92,10 @@ export interface KlineResponseK {
     v?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof KlineResponseK
      */
-    n?: number;
+    n?: number | bigint;
     /**
      *
      * @type {boolean}

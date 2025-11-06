@@ -50,8 +50,8 @@ export interface OrderPlaceResponseResultFillsInner {
     commissionAsset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderPlaceResponseResultFillsInner
      */
-    tradeId?: number;
+    tradeId?: number | bigint;
 }

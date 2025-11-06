@@ -86,32 +86,32 @@ export interface TickerTradingDayResponse1 {
     quoteVolume?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TickerTradingDayResponse1
      */
-    openTime?: number;
+    openTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TickerTradingDayResponse1
      */
-    closeTime?: number;
+    closeTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TickerTradingDayResponse1
      */
-    firstId?: number;
+    firstId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TickerTradingDayResponse1
      */
-    lastId?: number;
+    lastId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TickerTradingDayResponse1
      */
-    count?: number;
+    count?: number | bigint;
 }

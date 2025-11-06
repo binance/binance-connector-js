@@ -31,10 +31,10 @@ import type { AllOrderListResponseInnerOrdersInner } from './all-order-list-resp
 export interface AllOrderListResponseInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllOrderListResponseInner
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -61,10 +61,10 @@ export interface AllOrderListResponseInner {
     listClientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllOrderListResponseInner
      */
-    transactionTime?: number;
+    transactionTime?: number | bigint;
     /**
      *
      * @type {string}

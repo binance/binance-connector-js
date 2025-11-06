@@ -20,6 +20,7 @@
 
 import WebSocketClient from 'ws';
 import { EventEmitter } from 'events';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { jest, expect, beforeEach, afterEach, describe, it } from '@jest/globals';
 import { ConfigurationWebsocketAPI, WebsocketAPIBase, randomString } from '@binance/common';
 
@@ -123,105 +124,107 @@ describe('TradeApi', () => {
         });
 
         it('should execute openOrdersCancelAll() successfully', async () => {
-            mockResponse = {
-                id: '778f938f-9041-4b88-9914-efbf64eeacc8',
-                status: 200,
-                result: [
-                    {
-                        orderListId: 19431,
-                        contingencyType: 'OCO',
-                        listStatusType: 'ALL_DONE',
-                        listOrderStatus: 'ALL_DONE',
-                        listClientOrderId: 'iuVNVJYYrByz6C4yGOPPK0',
-                        transactionTime: 1660803702431,
-                        symbol: 'BTCUSDT',
-                        orders: [
-                            {
-                                symbol: 'BTCUSDT',
-                                orderId: 12569099454,
-                                clientOrderId: 'Tnu2IP0J5Y4mxw3IATBfmW',
-                            },
-                            {
-                                symbol: 'BTCUSDT',
-                                orderId: 12569099453,
-                                clientOrderId: 'bX5wROblo6YeDwa9iTLeyY',
-                            },
-                        ],
-                        orderReports: [
-                            {
-                                symbol: 'BTCUSDT',
-                                origClientOrderId: 'Tnu2IP0J5Y4mxw3IATBfmW',
-                                orderId: 12569099454,
-                                orderListId: 19431,
-                                clientOrderId: 'OFFXQtxVFZ6Nbcg4PgE2DA',
-                                transactTime: 1684804350068,
-                                price: '23400.00000000',
-                                origQty: '0.00850000',
-                                executedQty: '0.00000000',
-                                origQuoteOrderQty: '0.000000',
-                                cummulativeQuoteQty: '0.00000000',
-                                status: 'CANCELED',
-                                timeInForce: 'GTC',
-                                type: 'LIMIT_MAKER',
-                                side: 'BUY',
-                                selfTradePreventionMode: 'NONE',
-                            },
-                            {
-                                symbol: 'BTCUSDT',
-                                origClientOrderId: 'bX5wROblo6YeDwa9iTLeyY',
-                                orderId: 12569099453,
-                                orderListId: 19431,
-                                clientOrderId: 'OFFXQtxVFZ6Nbcg4PgE2DA',
-                                transactTime: 1684804350068,
-                                price: '23450.50000000',
-                                origQty: '0.00850000',
-                                executedQty: '0.00000000',
-                                origQuoteOrderQty: '0.000000',
-                                cummulativeQuoteQty: '0.00000000',
-                                status: 'CANCELED',
-                                timeInForce: 'GTC',
-                                type: 'STOP_LOSS_LIMIT',
-                                side: 'BUY',
-                                stopPrice: '23430.00000000',
-                                selfTradePreventionMode: 'NONE',
-                            },
-                        ],
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        origClientOrderId: '4d96324ff9d44481926157',
-                        orderId: 12569099453,
-                        orderListId: -1,
-                        clientOrderId: '91fe37ce9e69c90d6358c0',
-                        transactTime: 1684804350068,
-                        price: '23416.10000000',
-                        origQty: '0.00847000',
-                        executedQty: '0.00001000',
-                        origQuoteOrderQty: '0.000000',
-                        cummulativeQuoteQty: '0.23416100',
-                        status: 'CANCELED',
-                        timeInForce: 'GTC',
-                        type: 'LIMIT',
-                        side: 'SELL',
-                        stopPrice: '0.00000000',
-                        trailingDelta: 0,
-                        trailingTime: -1,
-                        icebergQty: '0.00000000',
-                        strategyId: 37463720,
-                        strategyType: 1000000,
-                        selfTradePreventionMode: 'NONE',
-                    },
-                ],
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 1,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '778f938f-9041-4b88-9914-efbf64eeacc8',
+                    status: 200,
+                    result: [
+                        {
+                            orderListId: 19431,
+                            contingencyType: 'OCO',
+                            listStatusType: 'ALL_DONE',
+                            listOrderStatus: 'ALL_DONE',
+                            listClientOrderId: 'iuVNVJYYrByz6C4yGOPPK0',
+                            transactionTime: 1660803702431,
+                            symbol: 'BTCUSDT',
+                            orders: [
+                                {
+                                    symbol: 'BTCUSDT',
+                                    orderId: 12569099454,
+                                    clientOrderId: 'Tnu2IP0J5Y4mxw3IATBfmW',
+                                },
+                                {
+                                    symbol: 'BTCUSDT',
+                                    orderId: 12569099453,
+                                    clientOrderId: 'bX5wROblo6YeDwa9iTLeyY',
+                                },
+                            ],
+                            orderReports: [
+                                {
+                                    symbol: 'BTCUSDT',
+                                    origClientOrderId: 'Tnu2IP0J5Y4mxw3IATBfmW',
+                                    orderId: 12569099454,
+                                    orderListId: 19431,
+                                    clientOrderId: 'OFFXQtxVFZ6Nbcg4PgE2DA',
+                                    transactTime: 1684804350068,
+                                    price: '23400.00000000',
+                                    origQty: '0.00850000',
+                                    executedQty: '0.00000000',
+                                    origQuoteOrderQty: '0.000000',
+                                    cummulativeQuoteQty: '0.00000000',
+                                    status: 'CANCELED',
+                                    timeInForce: 'GTC',
+                                    type: 'LIMIT_MAKER',
+                                    side: 'BUY',
+                                    selfTradePreventionMode: 'NONE',
+                                },
+                                {
+                                    symbol: 'BTCUSDT',
+                                    origClientOrderId: 'bX5wROblo6YeDwa9iTLeyY',
+                                    orderId: 12569099453,
+                                    orderListId: 19431,
+                                    clientOrderId: 'OFFXQtxVFZ6Nbcg4PgE2DA',
+                                    transactTime: 1684804350068,
+                                    price: '23450.50000000',
+                                    origQty: '0.00850000',
+                                    executedQty: '0.00000000',
+                                    origQuoteOrderQty: '0.000000',
+                                    cummulativeQuoteQty: '0.00000000',
+                                    status: 'CANCELED',
+                                    timeInForce: 'GTC',
+                                    type: 'STOP_LOSS_LIMIT',
+                                    side: 'BUY',
+                                    stopPrice: '23430.00000000',
+                                    selfTradePreventionMode: 'NONE',
+                                },
+                            ],
+                        },
+                        {
+                            symbol: 'BTCUSDT',
+                            origClientOrderId: '4d96324ff9d44481926157',
+                            orderId: 12569099453,
+                            orderListId: -1,
+                            clientOrderId: '91fe37ce9e69c90d6358c0',
+                            transactTime: 1684804350068,
+                            price: '23416.10000000',
+                            origQty: '0.00847000',
+                            executedQty: '0.00001000',
+                            origQuoteOrderQty: '0.000000',
+                            cummulativeQuoteQty: '0.23416100',
+                            status: 'CANCELED',
+                            timeInForce: 'GTC',
+                            type: 'LIMIT',
+                            side: 'SELL',
+                            stopPrice: '0.00000000',
+                            trailingDelta: 0,
+                            trailingTime: -1,
+                            icebergQty: '0.00000000',
+                            strategyId: 37463720,
+                            strategyType: 1000000,
+                            selfTradePreventionMode: 'NONE',
+                        },
+                    ],
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 1,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             const params: OpenOrdersCancelAllRequest = {
@@ -241,7 +244,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -298,7 +301,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -380,71 +383,73 @@ describe('TradeApi', () => {
         });
 
         it('should execute orderAmendKeepPriority() successfully', async () => {
-            mockResponse = {
-                id: '56374b46-3061-486b-a311-89ee972eb648',
-                status: 200,
-                result: {
-                    transactTime: 1741924229819,
-                    executionId: 60,
-                    amendedOrder: {
-                        symbol: 'BTUCSDT',
-                        orderId: 23,
-                        orderListId: 4,
-                        origClientOrderId: 'my_pending_order',
-                        clientOrderId: 'xbxXh5SSwaHS7oUEOCI88B',
-                        price: '1.00000000',
-                        qty: '5.00000000',
-                        executedQty: '0.00000000',
-                        preventedQty: '0.00000000',
-                        quoteOrderQty: '0.00000000',
-                        cumulativeQuoteQty: '0.00000000',
-                        status: 'NEW',
-                        timeInForce: 'GTC',
-                        type: 'LIMIT',
-                        side: 'BUY',
-                        workingTime: 1741924204920,
-                        selfTradePreventionMode: 'NONE',
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '56374b46-3061-486b-a311-89ee972eb648',
+                    status: 200,
+                    result: {
+                        transactTime: 1741924229819,
+                        executionId: 60,
+                        amendedOrder: {
+                            symbol: 'BTUCSDT',
+                            orderId: 23,
+                            orderListId: 4,
+                            origClientOrderId: 'my_pending_order',
+                            clientOrderId: 'xbxXh5SSwaHS7oUEOCI88B',
+                            price: '1.00000000',
+                            qty: '5.00000000',
+                            executedQty: '0.00000000',
+                            preventedQty: '0.00000000',
+                            quoteOrderQty: '0.00000000',
+                            cumulativeQuoteQty: '0.00000000',
+                            status: 'NEW',
+                            timeInForce: 'GTC',
+                            type: 'LIMIT',
+                            side: 'BUY',
+                            workingTime: 1741924204920,
+                            selfTradePreventionMode: 'NONE',
+                        },
+                        listStatus: {
+                            orderListId: 4,
+                            contingencyType: 'OTO',
+                            listOrderStatus: 'EXECUTING',
+                            listClientOrderId: '8nOGLLawudj1QoOiwbroRH',
+                            symbol: 'BTCUSDT',
+                            orders: [
+                                {
+                                    symbol: 'BTCUSDT',
+                                    orderId: 23,
+                                    clientOrderId: 'xbxXh5SSwaHS7oUEOCI88B',
+                                },
+                                {
+                                    symbol: 'BTCUSDT',
+                                    orderId: 22,
+                                    clientOrderId: 'g04EWsjaackzedjC9wRkWD',
+                                },
+                                {
+                                    symbol: 'BTCUSDT',
+                                    orderId: 23,
+                                    clientOrderId: 'xbxXh5SSwaHS7oUEOCI88B',
+                                },
+                                {
+                                    symbol: 'BTCUSDT',
+                                    orderId: 22,
+                                    clientOrderId: 'g04EWsjaackzedjC9wRkWD',
+                                },
+                            ],
+                        },
                     },
-                    listStatus: {
-                        orderListId: 4,
-                        contingencyType: 'OTO',
-                        listOrderStatus: 'EXECUTING',
-                        listClientOrderId: '8nOGLLawudj1QoOiwbroRH',
-                        symbol: 'BTCUSDT',
-                        orders: [
-                            {
-                                symbol: 'BTCUSDT',
-                                orderId: 23,
-                                clientOrderId: 'xbxXh5SSwaHS7oUEOCI88B',
-                            },
-                            {
-                                symbol: 'BTCUSDT',
-                                orderId: 22,
-                                clientOrderId: 'g04EWsjaackzedjC9wRkWD',
-                            },
-                            {
-                                symbol: 'BTCUSDT',
-                                orderId: 23,
-                                clientOrderId: 'xbxXh5SSwaHS7oUEOCI88B',
-                            },
-                            {
-                                symbol: 'BTCUSDT',
-                                orderId: 22,
-                                clientOrderId: 'g04EWsjaackzedjC9wRkWD',
-                            },
-                        ],
-                    },
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 1,
-                    },
-                ],
-            };
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 1,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             const params: OrderAmendKeepPriorityRequest = {
@@ -465,7 +470,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -523,7 +528,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -606,145 +611,147 @@ describe('TradeApi', () => {
         });
 
         it('should execute orderCancel() successfully', async () => {
-            mockResponse = {
-                id: '16eaf097-bbec-44b9-96ff-e97e6e875870',
-                status: 200,
-                result: {
-                    symbol: 'BTCUSDT',
-                    origClientOrderId: '4d96324ff9d44481926157',
-                    orderId: 12569099453,
-                    orderListId: 19431,
-                    clientOrderId: '91fe37ce9e69c90d6358c0',
-                    transactTime: 1684804350068,
-                    price: '23416.10000000',
-                    origQty: '0.00847000',
-                    executedQty: '0.00001000',
-                    origQuoteOrderQty: '0.000000',
-                    cummulativeQuoteQty: '0.23416100',
-                    status: 'CANCELED',
-                    timeInForce: 'GTC',
-                    type: 'LIMIT',
-                    side: 'SELL',
-                    stopPrice: '0.00000000',
-                    trailingDelta: 0,
-                    icebergQty: '0.00000000',
-                    strategyId: 37463720,
-                    strategyType: 1000000,
-                    selfTradePreventionMode: 'NONE',
-                    contingencyType: 'OCO',
-                    listStatusType: 'ALL_DONE',
-                    listOrderStatus: 'ALL_DONE',
-                    listClientOrderId: 'iuVNVJYYrByz6C4yGOPPK0',
-                    transactionTime: 1660803702431,
-                    orders: [
-                        {
-                            symbol: 'BTCUSDT',
-                            orderId: 12569099454,
-                            clientOrderId: 'Tnu2IP0J5Y4mxw3IATBfmW',
-                        },
-                        {
-                            symbol: 'BTCUSDT',
-                            orderId: 12569099453,
-                            clientOrderId: 'bX5wROblo6YeDwa9iTLeyY',
-                        },
-                        {
-                            symbol: 'BTCUSDT',
-                            orderId: 12569099454,
-                            clientOrderId: 'Tnu2IP0J5Y4mxw3IATBfmW',
-                        },
-                        {
-                            symbol: 'BTCUSDT',
-                            orderId: 12569099453,
-                            clientOrderId: 'bX5wROblo6YeDwa9iTLeyY',
-                        },
-                    ],
-                    orderReports: [
-                        {
-                            symbol: 'BTCUSDT',
-                            origClientOrderId: 'Tnu2IP0J5Y4mxw3IATBfmW',
-                            orderId: 12569099454,
-                            orderListId: 19431,
-                            clientOrderId: 'OFFXQtxVFZ6Nbcg4PgE2DA',
-                            transactTime: 1684804350068,
-                            price: '23400.00000000',
-                            origQty: '0.00850000',
-                            executedQty: '0.00000000',
-                            origQuoteOrderQty: '0.000000',
-                            cummulativeQuoteQty: '0.00000000',
-                            status: 'CANCELED',
-                            timeInForce: 'GTC',
-                            type: 'LIMIT_MAKER',
-                            side: 'BUY',
-                            selfTradePreventionMode: 'NONE',
-                        },
-                        {
-                            symbol: 'BTCUSDT',
-                            origClientOrderId: 'bX5wROblo6YeDwa9iTLeyY',
-                            orderId: 12569099453,
-                            orderListId: 19431,
-                            clientOrderId: 'OFFXQtxVFZ6Nbcg4PgE2DA',
-                            transactTime: 1684804350068,
-                            price: '23450.50000000',
-                            origQty: '0.00850000',
-                            executedQty: '0.00000000',
-                            origQuoteOrderQty: '0.000000',
-                            cummulativeQuoteQty: '0.00000000',
-                            status: 'CANCELED',
-                            timeInForce: 'GTC',
-                            type: 'STOP_LOSS_LIMIT',
-                            side: 'BUY',
-                            stopPrice: '23430.00000000',
-                            selfTradePreventionMode: 'NONE',
-                        },
-                        {
-                            symbol: 'BTCUSDT',
-                            origClientOrderId: 'Tnu2IP0J5Y4mxw3IATBfmW',
-                            orderId: 12569099454,
-                            orderListId: 19431,
-                            clientOrderId: 'OFFXQtxVFZ6Nbcg4PgE2DA',
-                            transactTime: 1684804350068,
-                            price: '23400.00000000',
-                            origQty: '0.00850000',
-                            executedQty: '0.00000000',
-                            origQuoteOrderQty: '0.000000',
-                            cummulativeQuoteQty: '0.00000000',
-                            status: 'CANCELED',
-                            timeInForce: 'GTC',
-                            type: 'LIMIT_MAKER',
-                            side: 'BUY',
-                            selfTradePreventionMode: 'NONE',
-                        },
-                        {
-                            symbol: 'BTCUSDT',
-                            origClientOrderId: 'bX5wROblo6YeDwa9iTLeyY',
-                            orderId: 12569099453,
-                            orderListId: 19431,
-                            clientOrderId: 'OFFXQtxVFZ6Nbcg4PgE2DA',
-                            transactTime: 1684804350068,
-                            price: '23450.50000000',
-                            origQty: '0.00850000',
-                            executedQty: '0.00000000',
-                            origQuoteOrderQty: '0.000000',
-                            cummulativeQuoteQty: '0.00000000',
-                            status: 'CANCELED',
-                            timeInForce: 'GTC',
-                            type: 'STOP_LOSS_LIMIT',
-                            side: 'BUY',
-                            stopPrice: '23430.00000000',
-                            selfTradePreventionMode: 'NONE',
-                        },
-                    ],
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 1,
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '16eaf097-bbec-44b9-96ff-e97e6e875870',
+                    status: 200,
+                    result: {
+                        symbol: 'BTCUSDT',
+                        origClientOrderId: '4d96324ff9d44481926157',
+                        orderId: 12569099453,
+                        orderListId: 19431,
+                        clientOrderId: '91fe37ce9e69c90d6358c0',
+                        transactTime: 1684804350068,
+                        price: '23416.10000000',
+                        origQty: '0.00847000',
+                        executedQty: '0.00001000',
+                        origQuoteOrderQty: '0.000000',
+                        cummulativeQuoteQty: '0.23416100',
+                        status: 'CANCELED',
+                        timeInForce: 'GTC',
+                        type: 'LIMIT',
+                        side: 'SELL',
+                        stopPrice: '0.00000000',
+                        trailingDelta: 0,
+                        icebergQty: '0.00000000',
+                        strategyId: 37463720,
+                        strategyType: 1000000,
+                        selfTradePreventionMode: 'NONE',
+                        contingencyType: 'OCO',
+                        listStatusType: 'ALL_DONE',
+                        listOrderStatus: 'ALL_DONE',
+                        listClientOrderId: 'iuVNVJYYrByz6C4yGOPPK0',
+                        transactionTime: 1660803702431,
+                        orders: [
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 12569099454,
+                                clientOrderId: 'Tnu2IP0J5Y4mxw3IATBfmW',
+                            },
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 12569099453,
+                                clientOrderId: 'bX5wROblo6YeDwa9iTLeyY',
+                            },
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 12569099454,
+                                clientOrderId: 'Tnu2IP0J5Y4mxw3IATBfmW',
+                            },
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 12569099453,
+                                clientOrderId: 'bX5wROblo6YeDwa9iTLeyY',
+                            },
+                        ],
+                        orderReports: [
+                            {
+                                symbol: 'BTCUSDT',
+                                origClientOrderId: 'Tnu2IP0J5Y4mxw3IATBfmW',
+                                orderId: 12569099454,
+                                orderListId: 19431,
+                                clientOrderId: 'OFFXQtxVFZ6Nbcg4PgE2DA',
+                                transactTime: 1684804350068,
+                                price: '23400.00000000',
+                                origQty: '0.00850000',
+                                executedQty: '0.00000000',
+                                origQuoteOrderQty: '0.000000',
+                                cummulativeQuoteQty: '0.00000000',
+                                status: 'CANCELED',
+                                timeInForce: 'GTC',
+                                type: 'LIMIT_MAKER',
+                                side: 'BUY',
+                                selfTradePreventionMode: 'NONE',
+                            },
+                            {
+                                symbol: 'BTCUSDT',
+                                origClientOrderId: 'bX5wROblo6YeDwa9iTLeyY',
+                                orderId: 12569099453,
+                                orderListId: 19431,
+                                clientOrderId: 'OFFXQtxVFZ6Nbcg4PgE2DA',
+                                transactTime: 1684804350068,
+                                price: '23450.50000000',
+                                origQty: '0.00850000',
+                                executedQty: '0.00000000',
+                                origQuoteOrderQty: '0.000000',
+                                cummulativeQuoteQty: '0.00000000',
+                                status: 'CANCELED',
+                                timeInForce: 'GTC',
+                                type: 'STOP_LOSS_LIMIT',
+                                side: 'BUY',
+                                stopPrice: '23430.00000000',
+                                selfTradePreventionMode: 'NONE',
+                            },
+                            {
+                                symbol: 'BTCUSDT',
+                                origClientOrderId: 'Tnu2IP0J5Y4mxw3IATBfmW',
+                                orderId: 12569099454,
+                                orderListId: 19431,
+                                clientOrderId: 'OFFXQtxVFZ6Nbcg4PgE2DA',
+                                transactTime: 1684804350068,
+                                price: '23400.00000000',
+                                origQty: '0.00850000',
+                                executedQty: '0.00000000',
+                                origQuoteOrderQty: '0.000000',
+                                cummulativeQuoteQty: '0.00000000',
+                                status: 'CANCELED',
+                                timeInForce: 'GTC',
+                                type: 'LIMIT_MAKER',
+                                side: 'BUY',
+                                selfTradePreventionMode: 'NONE',
+                            },
+                            {
+                                symbol: 'BTCUSDT',
+                                origClientOrderId: 'bX5wROblo6YeDwa9iTLeyY',
+                                orderId: 12569099453,
+                                orderListId: 19431,
+                                clientOrderId: 'OFFXQtxVFZ6Nbcg4PgE2DA',
+                                transactTime: 1684804350068,
+                                price: '23450.50000000',
+                                origQty: '0.00850000',
+                                executedQty: '0.00000000',
+                                origQuoteOrderQty: '0.000000',
+                                cummulativeQuoteQty: '0.00000000',
+                                status: 'CANCELED',
+                                timeInForce: 'GTC',
+                                type: 'STOP_LOSS_LIMIT',
+                                side: 'BUY',
+                                stopPrice: '23430.00000000',
+                                selfTradePreventionMode: 'NONE',
+                            },
+                        ],
                     },
-                ],
-            };
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 1,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             const params: OrderCancelRequest = {
@@ -764,7 +771,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -820,7 +827,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -902,72 +909,74 @@ describe('TradeApi', () => {
         });
 
         it('should execute orderCancelReplace() successfully', async () => {
-            mockResponse = {
-                id: '99de1036-b5e2-4e0f-9b5c-13d751c93a1a',
-                status: 200,
-                result: {
-                    cancelResult: 'SUCCESS',
-                    newOrderResult: 'SUCCESS',
-                    cancelResponse: {
-                        symbol: 'BTCUSDT',
-                        origClientOrderId: '4d96324ff9d44481926157',
-                        orderId: 125690984230,
-                        orderListId: -1,
-                        clientOrderId: '91fe37ce9e69c90d6358c0',
-                        transactTime: 1684804350068,
-                        price: '23450.00000000',
-                        origQty: '0.00847000',
-                        executedQty: '0.00001000',
-                        origQuoteOrderQty: '0.000000',
-                        cummulativeQuoteQty: '0.23450000',
-                        status: 'CANCELED',
-                        timeInForce: 'GTC',
-                        type: 'LIMIT',
-                        side: 'SELL',
-                        selfTradePreventionMode: 'NONE',
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '99de1036-b5e2-4e0f-9b5c-13d751c93a1a',
+                    status: 200,
+                    result: {
+                        cancelResult: 'SUCCESS',
+                        newOrderResult: 'SUCCESS',
+                        cancelResponse: {
+                            symbol: 'BTCUSDT',
+                            origClientOrderId: '4d96324ff9d44481926157',
+                            orderId: 125690984230,
+                            orderListId: -1,
+                            clientOrderId: '91fe37ce9e69c90d6358c0',
+                            transactTime: 1684804350068,
+                            price: '23450.00000000',
+                            origQty: '0.00847000',
+                            executedQty: '0.00001000',
+                            origQuoteOrderQty: '0.000000',
+                            cummulativeQuoteQty: '0.23450000',
+                            status: 'CANCELED',
+                            timeInForce: 'GTC',
+                            type: 'LIMIT',
+                            side: 'SELL',
+                            selfTradePreventionMode: 'NONE',
+                        },
+                        newOrderResponse: {
+                            symbol: 'BTCUSDT',
+                            orderId: 12569099453,
+                            orderListId: -1,
+                            clientOrderId: 'bX5wROblo6YeDwa9iTLeyY',
+                            transactTime: 1660813156959,
+                            price: '23416.10000000',
+                            origQty: '0.00847000',
+                            executedQty: '0.00000000',
+                            origQuoteOrderQty: '0.000000',
+                            cummulativeQuoteQty: '0.00000000',
+                            status: 'NEW',
+                            timeInForce: 'GTC',
+                            type: 'LIMIT',
+                            side: 'SELL',
+                            selfTradePreventionMode: 'NONE',
+                        },
                     },
-                    newOrderResponse: {
-                        symbol: 'BTCUSDT',
-                        orderId: 12569099453,
-                        orderListId: -1,
-                        clientOrderId: 'bX5wROblo6YeDwa9iTLeyY',
-                        transactTime: 1660813156959,
-                        price: '23416.10000000',
-                        origQty: '0.00847000',
-                        executedQty: '0.00000000',
-                        origQuoteOrderQty: '0.000000',
-                        cummulativeQuoteQty: '0.00000000',
-                        status: 'NEW',
-                        timeInForce: 'GTC',
-                        type: 'LIMIT',
-                        side: 'SELL',
-                        selfTradePreventionMode: 'NONE',
-                    },
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'ORDERS',
-                        interval: 'SECOND',
-                        intervalNum: 10,
-                        limit: 50,
-                        count: 1,
-                    },
-                    {
-                        rateLimitType: 'ORDERS',
-                        interval: 'DAY',
-                        intervalNum: 1,
-                        limit: 160000,
-                        count: 1,
-                    },
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 1,
-                    },
-                ],
-            };
+                    rateLimits: [
+                        {
+                            rateLimitType: 'ORDERS',
+                            interval: 'SECOND',
+                            intervalNum: 10,
+                            limit: 50,
+                            count: 1,
+                        },
+                        {
+                            rateLimitType: 'ORDERS',
+                            interval: 'DAY',
+                            intervalNum: 1,
+                            limit: 160000,
+                            count: 1,
+                        },
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 1,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             const params: OrderCancelReplaceRequest = {
@@ -990,7 +999,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -1050,7 +1059,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -1135,77 +1144,79 @@ describe('TradeApi', () => {
         });
 
         it('should execute orderListCancel() successfully', async () => {
-            mockResponse = {
-                id: 'c5899911-d3f4-47ae-8835-97da553d27d0',
-                status: 200,
-                result: {
-                    orderListId: 1274512,
-                    contingencyType: 'OCO',
-                    listStatusType: 'ALL_DONE',
-                    listOrderStatus: 'ALL_DONE',
-                    listClientOrderId: '6023531d7edaad348f5aff',
-                    transactionTime: 1660801720215,
-                    symbol: 'BTCUSDT',
-                    orders: [
-                        {
-                            symbol: 'BTCUSDT',
-                            orderId: 12569138902,
-                            clientOrderId: 'jLnZpj5enfMXTuhKB1d0us',
-                        },
-                        {
-                            symbol: 'BTCUSDT',
-                            orderId: 12569138901,
-                            clientOrderId: 'BqtFCj5odMoWtSqGk2X9tU',
-                        },
-                    ],
-                    orderReports: [
-                        {
-                            symbol: 'BTCUSDT',
-                            orderId: 12569138902,
-                            orderListId: 1274512,
-                            clientOrderId: 'jLnZpj5enfMXTuhKB1d0us',
-                            transactTime: 1660801720215,
-                            price: '23420.00000000',
-                            origQty: '0.00650000',
-                            executedQty: '0.00000000',
-                            origQuoteOrderQty: '0.000000',
-                            cummulativeQuoteQty: '0.00000000',
-                            status: 'CANCELED',
-                            timeInForce: 'GTC',
-                            type: 'LIMIT_MAKER',
-                            side: 'SELL',
-                            selfTradePreventionMode: 'NONE',
-                        },
-                        {
-                            symbol: 'BTCUSDT',
-                            orderId: 12569138901,
-                            orderListId: 1274512,
-                            clientOrderId: 'BqtFCj5odMoWtSqGk2X9tU',
-                            transactTime: 1660801720215,
-                            price: '23410.00000000',
-                            origQty: '0.00650000',
-                            executedQty: '0.00000000',
-                            origQuoteOrderQty: '0.000000',
-                            cummulativeQuoteQty: '0.00000000',
-                            status: 'CANCELED',
-                            timeInForce: 'GTC',
-                            type: 'STOP_LOSS_LIMIT',
-                            side: 'SELL',
-                            stopPrice: '23405.00000000',
-                            selfTradePreventionMode: 'NONE',
-                        },
-                    ],
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 1,
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: 'c5899911-d3f4-47ae-8835-97da553d27d0',
+                    status: 200,
+                    result: {
+                        orderListId: 1274512,
+                        contingencyType: 'OCO',
+                        listStatusType: 'ALL_DONE',
+                        listOrderStatus: 'ALL_DONE',
+                        listClientOrderId: '6023531d7edaad348f5aff',
+                        transactionTime: 1660801720215,
+                        symbol: 'BTCUSDT',
+                        orders: [
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 12569138902,
+                                clientOrderId: 'jLnZpj5enfMXTuhKB1d0us',
+                            },
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 12569138901,
+                                clientOrderId: 'BqtFCj5odMoWtSqGk2X9tU',
+                            },
+                        ],
+                        orderReports: [
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 12569138902,
+                                orderListId: 1274512,
+                                clientOrderId: 'jLnZpj5enfMXTuhKB1d0us',
+                                transactTime: 1660801720215,
+                                price: '23420.00000000',
+                                origQty: '0.00650000',
+                                executedQty: '0.00000000',
+                                origQuoteOrderQty: '0.000000',
+                                cummulativeQuoteQty: '0.00000000',
+                                status: 'CANCELED',
+                                timeInForce: 'GTC',
+                                type: 'LIMIT_MAKER',
+                                side: 'SELL',
+                                selfTradePreventionMode: 'NONE',
+                            },
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 12569138901,
+                                orderListId: 1274512,
+                                clientOrderId: 'BqtFCj5odMoWtSqGk2X9tU',
+                                transactTime: 1660801720215,
+                                price: '23410.00000000',
+                                origQty: '0.00650000',
+                                executedQty: '0.00000000',
+                                origQuoteOrderQty: '0.000000',
+                                cummulativeQuoteQty: '0.00000000',
+                                status: 'CANCELED',
+                                timeInForce: 'GTC',
+                                type: 'STOP_LOSS_LIMIT',
+                                side: 'SELL',
+                                stopPrice: '23405.00000000',
+                                selfTradePreventionMode: 'NONE',
+                            },
+                        ],
                     },
-                ],
-            };
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 1,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             const params: OrderListCancelRequest = {
@@ -1225,7 +1236,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -1281,7 +1292,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -1363,93 +1374,95 @@ describe('TradeApi', () => {
         });
 
         it('should execute orderListPlace() successfully', async () => {
-            mockResponse = {
-                id: '57833dc0-e3f2-43fb-ba20-46480973b0aa',
-                status: 200,
-                result: {
-                    orderListId: 1274512,
-                    contingencyType: 'OCO',
-                    listStatusType: 'EXEC_STARTED',
-                    listOrderStatus: 'EXECUTING',
-                    listClientOrderId: '08985fedd9ea2cf6b28996',
-                    transactionTime: 1660801713793,
-                    symbol: 'BTCUSDT',
-                    orders: [
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '57833dc0-e3f2-43fb-ba20-46480973b0aa',
+                    status: 200,
+                    result: {
+                        orderListId: 1274512,
+                        contingencyType: 'OCO',
+                        listStatusType: 'EXEC_STARTED',
+                        listOrderStatus: 'EXECUTING',
+                        listClientOrderId: '08985fedd9ea2cf6b28996',
+                        transactionTime: 1660801713793,
+                        symbol: 'BTCUSDT',
+                        orders: [
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 12569138902,
+                                clientOrderId: 'jLnZpj5enfMXTuhKB1d0us',
+                            },
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 12569138901,
+                                clientOrderId: 'BqtFCj5odMoWtSqGk2X9tU',
+                            },
+                        ],
+                        orderReports: [
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 12569138902,
+                                orderListId: 1274512,
+                                clientOrderId: 'jLnZpj5enfMXTuhKB1d0us',
+                                transactTime: 1660801713793,
+                                price: '23420.00000000',
+                                origQty: '0.00650000',
+                                executedQty: '0.00000000',
+                                origQuoteOrderQty: '0.000000',
+                                cummulativeQuoteQty: '0.00000000',
+                                status: 'NEW',
+                                timeInForce: 'GTC',
+                                type: 'LIMIT_MAKER',
+                                side: 'SELL',
+                                workingTime: 1660801713793,
+                                selfTradePreventionMode: 'NONE',
+                            },
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 12569138901,
+                                orderListId: 1274512,
+                                clientOrderId: 'BqtFCj5odMoWtSqGk2X9tU',
+                                transactTime: 1660801713793,
+                                price: '23410.00000000',
+                                origQty: '0.00650000',
+                                executedQty: '0.00000000',
+                                origQuoteOrderQty: '0.000000',
+                                cummulativeQuoteQty: '0.00000000',
+                                status: 'NEW',
+                                timeInForce: 'GTC',
+                                type: 'STOP_LOSS_LIMIT',
+                                side: 'SELL',
+                                stopPrice: '23405.00000000',
+                                workingTime: -1,
+                                selfTradePreventionMode: 'NONE',
+                            },
+                        ],
+                    },
+                    rateLimits: [
                         {
-                            symbol: 'BTCUSDT',
-                            orderId: 12569138902,
-                            clientOrderId: 'jLnZpj5enfMXTuhKB1d0us',
+                            rateLimitType: 'ORDERS',
+                            interval: 'SECOND',
+                            intervalNum: 10,
+                            limit: 50,
+                            count: 2,
                         },
                         {
-                            symbol: 'BTCUSDT',
-                            orderId: 12569138901,
-                            clientOrderId: 'BqtFCj5odMoWtSqGk2X9tU',
+                            rateLimitType: 'ORDERS',
+                            interval: 'DAY',
+                            intervalNum: 1,
+                            limit: 160000,
+                            count: 2,
+                        },
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 1,
                         },
                     ],
-                    orderReports: [
-                        {
-                            symbol: 'BTCUSDT',
-                            orderId: 12569138902,
-                            orderListId: 1274512,
-                            clientOrderId: 'jLnZpj5enfMXTuhKB1d0us',
-                            transactTime: 1660801713793,
-                            price: '23420.00000000',
-                            origQty: '0.00650000',
-                            executedQty: '0.00000000',
-                            origQuoteOrderQty: '0.000000',
-                            cummulativeQuoteQty: '0.00000000',
-                            status: 'NEW',
-                            timeInForce: 'GTC',
-                            type: 'LIMIT_MAKER',
-                            side: 'SELL',
-                            workingTime: 1660801713793,
-                            selfTradePreventionMode: 'NONE',
-                        },
-                        {
-                            symbol: 'BTCUSDT',
-                            orderId: 12569138901,
-                            orderListId: 1274512,
-                            clientOrderId: 'BqtFCj5odMoWtSqGk2X9tU',
-                            transactTime: 1660801713793,
-                            price: '23410.00000000',
-                            origQty: '0.00650000',
-                            executedQty: '0.00000000',
-                            origQuoteOrderQty: '0.000000',
-                            cummulativeQuoteQty: '0.00000000',
-                            status: 'NEW',
-                            timeInForce: 'GTC',
-                            type: 'STOP_LOSS_LIMIT',
-                            side: 'SELL',
-                            stopPrice: '23405.00000000',
-                            workingTime: -1,
-                            selfTradePreventionMode: 'NONE',
-                        },
-                    ],
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'ORDERS',
-                        interval: 'SECOND',
-                        intervalNum: 10,
-                        limit: 50,
-                        count: 2,
-                    },
-                    {
-                        rateLimitType: 'ORDERS',
-                        interval: 'DAY',
-                        intervalNum: 1,
-                        limit: 160000,
-                        count: 2,
-                    },
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 1,
-                    },
-                ],
-            };
+                })
+            );
             mockResponse.id = randomString();
 
             const params: OrderListPlaceRequest = {
@@ -1472,7 +1485,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -1531,7 +1544,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -1616,85 +1629,95 @@ describe('TradeApi', () => {
         });
 
         it('should execute orderListPlaceOco() successfully', async () => {
-            mockResponse = {
-                id: '56374a46-3261-486b-a211-99ed972eb648',
-                status: 200,
-                result: {
-                    orderListId: 2,
-                    contingencyType: 'OCO',
-                    listStatusType: 'EXEC_STARTED',
-                    listOrderStatus: 'EXECUTING',
-                    listClientOrderId: 'cKPMnDCbcLQILtDYM4f4fX',
-                    transactionTime: 1711062760648,
-                    symbol: 'LTCBNB',
-                    orders: [
-                        { symbol: 'LTCBNB', orderId: 3, clientOrderId: 'Z2IMlR79XNY5LU0tOxrWyW' },
-                        { symbol: 'LTCBNB', orderId: 2, clientOrderId: '0m6I4wfxvTUrOBSMUl0OPU' },
-                    ],
-                    orderReports: [
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '56374a46-3261-486b-a211-99ed972eb648',
+                    status: 200,
+                    result: {
+                        orderListId: 2,
+                        contingencyType: 'OCO',
+                        listStatusType: 'EXEC_STARTED',
+                        listOrderStatus: 'EXECUTING',
+                        listClientOrderId: 'cKPMnDCbcLQILtDYM4f4fX',
+                        transactionTime: 1711062760648,
+                        symbol: 'LTCBNB',
+                        orders: [
+                            {
+                                symbol: 'LTCBNB',
+                                orderId: 3,
+                                clientOrderId: 'Z2IMlR79XNY5LU0tOxrWyW',
+                            },
+                            {
+                                symbol: 'LTCBNB',
+                                orderId: 2,
+                                clientOrderId: '0m6I4wfxvTUrOBSMUl0OPU',
+                            },
+                        ],
+                        orderReports: [
+                            {
+                                symbol: 'LTCBNB',
+                                orderId: 3,
+                                orderListId: 2,
+                                clientOrderId: 'Z2IMlR79XNY5LU0tOxrWyW',
+                                transactTime: 1711062760648,
+                                price: '1.49999999',
+                                origQty: '1.000000',
+                                executedQty: '0.000000',
+                                origQuoteOrderQty: '0.000000',
+                                cummulativeQuoteQty: '0.00000000',
+                                status: 'NEW',
+                                timeInForce: 'GTC',
+                                type: 'LIMIT_MAKER',
+                                side: 'BUY',
+                                workingTime: 1711062760648,
+                                selfTradePreventionMode: 'NONE',
+                            },
+                            {
+                                symbol: 'LTCBNB',
+                                orderId: 2,
+                                orderListId: 2,
+                                clientOrderId: '0m6I4wfxvTUrOBSMUl0OPU',
+                                transactTime: 1711062760648,
+                                price: '1.50000000',
+                                origQty: '1.000000',
+                                executedQty: '0.000000',
+                                origQuoteOrderQty: '0.000000',
+                                cummulativeQuoteQty: '0.00000000',
+                                status: 'NEW',
+                                timeInForce: 'GTC',
+                                type: 'STOP_LOSS_LIMIT',
+                                side: 'BUY',
+                                stopPrice: '1.50000001',
+                                workingTime: -1,
+                                selfTradePreventionMode: 'NONE',
+                            },
+                        ],
+                    },
+                    rateLimits: [
                         {
-                            symbol: 'LTCBNB',
-                            orderId: 3,
-                            orderListId: 2,
-                            clientOrderId: 'Z2IMlR79XNY5LU0tOxrWyW',
-                            transactTime: 1711062760648,
-                            price: '1.49999999',
-                            origQty: '1.000000',
-                            executedQty: '0.000000',
-                            origQuoteOrderQty: '0.000000',
-                            cummulativeQuoteQty: '0.00000000',
-                            status: 'NEW',
-                            timeInForce: 'GTC',
-                            type: 'LIMIT_MAKER',
-                            side: 'BUY',
-                            workingTime: 1711062760648,
-                            selfTradePreventionMode: 'NONE',
+                            rateLimitType: 'ORDERS',
+                            interval: 'SECOND',
+                            intervalNum: 10,
+                            limit: 50,
+                            count: 2,
                         },
                         {
-                            symbol: 'LTCBNB',
-                            orderId: 2,
-                            orderListId: 2,
-                            clientOrderId: '0m6I4wfxvTUrOBSMUl0OPU',
-                            transactTime: 1711062760648,
-                            price: '1.50000000',
-                            origQty: '1.000000',
-                            executedQty: '0.000000',
-                            origQuoteOrderQty: '0.000000',
-                            cummulativeQuoteQty: '0.00000000',
-                            status: 'NEW',
-                            timeInForce: 'GTC',
-                            type: 'STOP_LOSS_LIMIT',
-                            side: 'BUY',
-                            stopPrice: '1.50000001',
-                            workingTime: -1,
-                            selfTradePreventionMode: 'NONE',
+                            rateLimitType: 'ORDERS',
+                            interval: 'DAY',
+                            intervalNum: 1,
+                            limit: 160000,
+                            count: 2,
+                        },
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 1,
                         },
                     ],
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'ORDERS',
-                        interval: 'SECOND',
-                        intervalNum: 10,
-                        limit: 50,
-                        count: 2,
-                    },
-                    {
-                        rateLimitType: 'ORDERS',
-                        interval: 'DAY',
-                        intervalNum: 1,
-                        limit: 160000,
-                        count: 2,
-                    },
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 1,
-                    },
-                ],
-            };
+                })
+            );
             mockResponse.id = randomString();
 
             const params: OrderListPlaceOcoRequest = {
@@ -1718,7 +1741,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -1779,7 +1802,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -1865,77 +1888,87 @@ describe('TradeApi', () => {
         });
 
         it('should execute orderListPlaceOto() successfully', async () => {
-            mockResponse = {
-                id: '1712544395950',
-                status: 200,
-                result: {
-                    orderListId: 626,
-                    contingencyType: 'OTO',
-                    listStatusType: 'EXEC_STARTED',
-                    listOrderStatus: 'EXECUTING',
-                    listClientOrderId: 'KA4EBjGnzvSwSCQsDdTrlf',
-                    transactionTime: 1712544395981,
-                    symbol: '1712544378871',
-                    orders: [
-                        { symbol: 'LTCBNB', orderId: 14, clientOrderId: '9MxJSE1TYkmyx5lbGLve7R' },
-                        { symbol: 'LTCBNB', orderId: 13, clientOrderId: 'YiAUtM9yJjl1a2jXHSp9Ny' },
-                    ],
-                    orderReports: [
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '1712544395950',
+                    status: 200,
+                    result: {
+                        orderListId: 626,
+                        contingencyType: 'OTO',
+                        listStatusType: 'EXEC_STARTED',
+                        listOrderStatus: 'EXECUTING',
+                        listClientOrderId: 'KA4EBjGnzvSwSCQsDdTrlf',
+                        transactionTime: 1712544395981,
+                        symbol: '1712544378871',
+                        orders: [
+                            {
+                                symbol: 'LTCBNB',
+                                orderId: 14,
+                                clientOrderId: '9MxJSE1TYkmyx5lbGLve7R',
+                            },
+                            {
+                                symbol: 'LTCBNB',
+                                orderId: 13,
+                                clientOrderId: 'YiAUtM9yJjl1a2jXHSp9Ny',
+                            },
+                        ],
+                        orderReports: [
+                            {
+                                symbol: 'LTCBNB',
+                                orderId: 14,
+                                orderListId: 626,
+                                clientOrderId: '9MxJSE1TYkmyx5lbGLve7R',
+                                transactTime: 1712544395981,
+                                price: '0.000000',
+                                origQty: '1.000000',
+                                executedQty: '0.000000',
+                                origQuoteOrderQty: '0.000000',
+                                cummulativeQuoteQty: '0.000000',
+                                status: 'PENDING_NEW',
+                                timeInForce: 'GTC',
+                                type: 'MARKET',
+                                side: 'BUY',
+                                workingTime: -1,
+                                selfTradePreventionMode: 'NONE',
+                            },
+                            {
+                                symbol: 'LTCBNB',
+                                orderId: 13,
+                                orderListId: 626,
+                                clientOrderId: 'YiAUtM9yJjl1a2jXHSp9Ny',
+                                transactTime: 1712544395981,
+                                price: '1.000000',
+                                origQty: '1.000000',
+                                executedQty: '0.000000',
+                                origQuoteOrderQty: '0.000000',
+                                cummulativeQuoteQty: '0.000000',
+                                status: 'NEW',
+                                timeInForce: 'GTC',
+                                type: 'LIMIT',
+                                side: 'SELL',
+                                workingTime: 1712544395981,
+                                selfTradePreventionMode: 'NONE',
+                            },
+                        ],
+                    },
+                    rateLimits: [
                         {
-                            symbol: 'LTCBNB',
-                            orderId: 14,
-                            orderListId: 626,
-                            clientOrderId: '9MxJSE1TYkmyx5lbGLve7R',
-                            transactTime: 1712544395981,
-                            price: '0.000000',
-                            origQty: '1.000000',
-                            executedQty: '0.000000',
-                            origQuoteOrderQty: '0.000000',
-                            cummulativeQuoteQty: '0.000000',
-                            status: 'PENDING_NEW',
-                            timeInForce: 'GTC',
-                            type: 'MARKET',
-                            side: 'BUY',
-                            workingTime: -1,
-                            selfTradePreventionMode: 'NONE',
+                            rateLimitType: 'ORDERS',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 10000000,
+                            count: 10,
                         },
                         {
-                            symbol: 'LTCBNB',
-                            orderId: 13,
-                            orderListId: 626,
-                            clientOrderId: 'YiAUtM9yJjl1a2jXHSp9Ny',
-                            transactTime: 1712544395981,
-                            price: '1.000000',
-                            origQty: '1.000000',
-                            executedQty: '0.000000',
-                            origQuoteOrderQty: '0.000000',
-                            cummulativeQuoteQty: '0.000000',
-                            status: 'NEW',
-                            timeInForce: 'GTC',
-                            type: 'LIMIT',
-                            side: 'SELL',
-                            workingTime: 1712544395981,
-                            selfTradePreventionMode: 'NONE',
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 1000,
+                            count: 38,
                         },
                     ],
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'ORDERS',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 10000000,
-                        count: 10,
-                    },
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 1000,
-                        count: 38,
-                    },
-                ],
-            };
+                })
+            );
             mockResponse.id = randomString();
 
             const params: OrderListPlaceOtoRequest = {
@@ -1962,7 +1995,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -2026,7 +2059,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -2115,97 +2148,111 @@ describe('TradeApi', () => {
         });
 
         it('should execute orderListPlaceOtoco() successfully', async () => {
-            mockResponse = {
-                id: '1712544408508',
-                status: 200,
-                result: {
-                    orderListId: 629,
-                    contingencyType: 'OTO',
-                    listStatusType: 'EXEC_STARTED',
-                    listOrderStatus: 'EXECUTING',
-                    listClientOrderId: 'GaeJHjZPasPItFj4x7Mqm6',
-                    transactionTime: 1712544408537,
-                    symbol: '1712544378871',
-                    orders: [
-                        { symbol: 'LTCBNB', orderId: 25, clientOrderId: 'ilpIoShcFZ1ZGgSASKxMPt' },
-                        { symbol: 'LTCBNB', orderId: 24, clientOrderId: 'YcCPKCDMQIjNvLtNswt82X' },
-                        { symbol: 'LTCBNB', orderId: 23, clientOrderId: 'OVQOpKwfmPCfaBTD0n7e7H' },
-                    ],
-                    orderReports: [
-                        {
-                            symbol: 'LTCBNB',
-                            orderId: 25,
-                            orderListId: 629,
-                            clientOrderId: 'ilpIoShcFZ1ZGgSASKxMPt',
-                            transactTime: 1712544408537,
-                            price: '5.000000',
-                            origQty: '5.000000',
-                            executedQty: '0.000000',
-                            origQuoteOrderQty: '0.000000',
-                            cummulativeQuoteQty: '0.000000',
-                            status: 'PENDING_NEW',
-                            timeInForce: 'GTC',
-                            type: 'LIMIT_MAKER',
-                            side: 'SELL',
-                            workingTime: -1,
-                            selfTradePreventionMode: 'NONE',
-                        },
-                        {
-                            symbol: 'LTCBNB',
-                            orderId: 24,
-                            orderListId: 629,
-                            clientOrderId: 'YcCPKCDMQIjNvLtNswt82X',
-                            transactTime: 1712544408537,
-                            price: '0.000000',
-                            origQty: '5.000000',
-                            executedQty: '0.000000',
-                            origQuoteOrderQty: '0.000000',
-                            cummulativeQuoteQty: '0.000000',
-                            status: 'PENDING_NEW',
-                            timeInForce: 'GTC',
-                            type: 'STOP_LOSS',
-                            side: 'SELL',
-                            stopPrice: '0.500000',
-                            workingTime: -1,
-                            selfTradePreventionMode: 'NONE',
-                        },
-                        {
-                            symbol: 'LTCBNB',
-                            orderId: 23,
-                            orderListId: 629,
-                            clientOrderId: 'OVQOpKwfmPCfaBTD0n7e7H',
-                            transactTime: 1712544408537,
-                            price: '1.500000',
-                            origQty: '1.000000',
-                            executedQty: '0.000000',
-                            origQuoteOrderQty: '0.000000',
-                            cummulativeQuoteQty: '0.000000',
-                            status: 'NEW',
-                            timeInForce: 'GTC',
-                            type: 'LIMIT',
-                            side: 'BUY',
-                            workingTime: 1712544408537,
-                            selfTradePreventionMode: 'NONE',
-                        },
-                    ],
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'ORDERS',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 10000000,
-                        count: 18,
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '1712544408508',
+                    status: 200,
+                    result: {
+                        orderListId: 629,
+                        contingencyType: 'OTO',
+                        listStatusType: 'EXEC_STARTED',
+                        listOrderStatus: 'EXECUTING',
+                        listClientOrderId: 'GaeJHjZPasPItFj4x7Mqm6',
+                        transactionTime: 1712544408537,
+                        symbol: '1712544378871',
+                        orders: [
+                            {
+                                symbol: 'LTCBNB',
+                                orderId: 25,
+                                clientOrderId: 'ilpIoShcFZ1ZGgSASKxMPt',
+                            },
+                            {
+                                symbol: 'LTCBNB',
+                                orderId: 24,
+                                clientOrderId: 'YcCPKCDMQIjNvLtNswt82X',
+                            },
+                            {
+                                symbol: 'LTCBNB',
+                                orderId: 23,
+                                clientOrderId: 'OVQOpKwfmPCfaBTD0n7e7H',
+                            },
+                        ],
+                        orderReports: [
+                            {
+                                symbol: 'LTCBNB',
+                                orderId: 25,
+                                orderListId: 629,
+                                clientOrderId: 'ilpIoShcFZ1ZGgSASKxMPt',
+                                transactTime: 1712544408537,
+                                price: '5.000000',
+                                origQty: '5.000000',
+                                executedQty: '0.000000',
+                                origQuoteOrderQty: '0.000000',
+                                cummulativeQuoteQty: '0.000000',
+                                status: 'PENDING_NEW',
+                                timeInForce: 'GTC',
+                                type: 'LIMIT_MAKER',
+                                side: 'SELL',
+                                workingTime: -1,
+                                selfTradePreventionMode: 'NONE',
+                            },
+                            {
+                                symbol: 'LTCBNB',
+                                orderId: 24,
+                                orderListId: 629,
+                                clientOrderId: 'YcCPKCDMQIjNvLtNswt82X',
+                                transactTime: 1712544408537,
+                                price: '0.000000',
+                                origQty: '5.000000',
+                                executedQty: '0.000000',
+                                origQuoteOrderQty: '0.000000',
+                                cummulativeQuoteQty: '0.000000',
+                                status: 'PENDING_NEW',
+                                timeInForce: 'GTC',
+                                type: 'STOP_LOSS',
+                                side: 'SELL',
+                                stopPrice: '0.500000',
+                                workingTime: -1,
+                                selfTradePreventionMode: 'NONE',
+                            },
+                            {
+                                symbol: 'LTCBNB',
+                                orderId: 23,
+                                orderListId: 629,
+                                clientOrderId: 'OVQOpKwfmPCfaBTD0n7e7H',
+                                transactTime: 1712544408537,
+                                price: '1.500000',
+                                origQty: '1.000000',
+                                executedQty: '0.000000',
+                                origQuoteOrderQty: '0.000000',
+                                cummulativeQuoteQty: '0.000000',
+                                status: 'NEW',
+                                timeInForce: 'GTC',
+                                type: 'LIMIT',
+                                side: 'BUY',
+                                workingTime: 1712544408537,
+                                selfTradePreventionMode: 'NONE',
+                            },
+                        ],
                     },
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 1000,
-                        count: 65,
-                    },
-                ],
-            };
+                    rateLimits: [
+                        {
+                            rateLimitType: 'ORDERS',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 10000000,
+                            count: 18,
+                        },
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 1000,
+                            count: 65,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             const params: OrderListPlaceOtocoRequest = {
@@ -2232,7 +2279,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -2296,7 +2343,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -2385,81 +2432,83 @@ describe('TradeApi', () => {
         });
 
         it('should execute orderPlace() successfully', async () => {
-            mockResponse = {
-                id: '56374a46-3061-486b-a311-99ee972eb648',
-                status: 200,
-                result: {
-                    symbol: 'BTCUSDT',
-                    orderId: 12569099453,
-                    orderListId: -1,
-                    clientOrderId: '4d96324ff9d44481926157ec08158a40',
-                    transactTime: 1660801715793,
-                    price: '23416.10000000',
-                    origQty: '0.00847000',
-                    executedQty: '0.00847000',
-                    origQuoteOrderQty: '0.000000',
-                    cummulativeQuoteQty: '198.33521500',
-                    status: 'FILLED',
-                    timeInForce: 'GTC',
-                    type: 'LIMIT',
-                    side: 'SELL',
-                    workingTime: 1660801715793,
-                    selfTradePreventionMode: 'NONE',
-                    fills: [
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '56374a46-3061-486b-a311-99ee972eb648',
+                    status: 200,
+                    result: {
+                        symbol: 'BTCUSDT',
+                        orderId: 12569099453,
+                        orderListId: -1,
+                        clientOrderId: '4d96324ff9d44481926157ec08158a40',
+                        transactTime: 1660801715793,
+                        price: '23416.10000000',
+                        origQty: '0.00847000',
+                        executedQty: '0.00847000',
+                        origQuoteOrderQty: '0.000000',
+                        cummulativeQuoteQty: '198.33521500',
+                        status: 'FILLED',
+                        timeInForce: 'GTC',
+                        type: 'LIMIT',
+                        side: 'SELL',
+                        workingTime: 1660801715793,
+                        selfTradePreventionMode: 'NONE',
+                        fills: [
+                            {
+                                price: '23416.50000000',
+                                qty: '0.00212000',
+                                commission: '0.000000',
+                                commissionAsset: 'BNB',
+                                tradeId: 1650422482,
+                            },
+                            {
+                                price: '23416.10000000',
+                                qty: '0.00635000',
+                                commission: '0.000000',
+                                commissionAsset: 'BNB',
+                                tradeId: 1650422481,
+                            },
+                            {
+                                price: '23416.50000000',
+                                qty: '0.00212000',
+                                commission: '0.000000',
+                                commissionAsset: 'BNB',
+                                tradeId: 1650422482,
+                            },
+                            {
+                                price: '23416.10000000',
+                                qty: '0.00635000',
+                                commission: '0.000000',
+                                commissionAsset: 'BNB',
+                                tradeId: 1650422481,
+                            },
+                        ],
+                    },
+                    rateLimits: [
                         {
-                            price: '23416.50000000',
-                            qty: '0.00212000',
-                            commission: '0.000000',
-                            commissionAsset: 'BNB',
-                            tradeId: 1650422482,
+                            rateLimitType: 'ORDERS',
+                            interval: 'SECOND',
+                            intervalNum: 10,
+                            limit: 50,
+                            count: 1,
                         },
                         {
-                            price: '23416.10000000',
-                            qty: '0.00635000',
-                            commission: '0.000000',
-                            commissionAsset: 'BNB',
-                            tradeId: 1650422481,
+                            rateLimitType: 'ORDERS',
+                            interval: 'DAY',
+                            intervalNum: 1,
+                            limit: 160000,
+                            count: 1,
                         },
                         {
-                            price: '23416.50000000',
-                            qty: '0.00212000',
-                            commission: '0.000000',
-                            commissionAsset: 'BNB',
-                            tradeId: 1650422482,
-                        },
-                        {
-                            price: '23416.10000000',
-                            qty: '0.00635000',
-                            commission: '0.000000',
-                            commissionAsset: 'BNB',
-                            tradeId: 1650422481,
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 1,
                         },
                     ],
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'ORDERS',
-                        interval: 'SECOND',
-                        intervalNum: 10,
-                        limit: 50,
-                        count: 1,
-                    },
-                    {
-                        rateLimitType: 'ORDERS',
-                        interval: 'DAY',
-                        intervalNum: 1,
-                        limit: 160000,
-                        count: 1,
-                    },
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 1,
-                    },
-                ],
-            };
+                })
+            );
             mockResponse.id = randomString();
 
             const params: OrderPlaceRequest = {
@@ -2481,7 +2530,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -2539,7 +2588,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -2623,30 +2672,32 @@ describe('TradeApi', () => {
         });
 
         it('should execute orderTest() successfully', async () => {
-            mockResponse = {
-                id: '6ffebe91-01d9-43ac-be99-57cf062e0e30',
-                status: 200,
-                result: {
-                    standardCommissionForOrder: { maker: '0.00000112', taker: '0.00000114' },
-                    specialCommissionForOrder: { maker: '0.05000000', taker: '0.06000000' },
-                    taxCommissionForOrder: { maker: '0.00000112', taker: '0.00000114' },
-                    discount: {
-                        enabledForAccount: true,
-                        enabledForSymbol: true,
-                        discountAsset: 'BNB',
-                        discount: '0.25000000',
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '6ffebe91-01d9-43ac-be99-57cf062e0e30',
+                    status: 200,
+                    result: {
+                        standardCommissionForOrder: { maker: '0.00000112', taker: '0.00000114' },
+                        specialCommissionForOrder: { maker: '0.05000000', taker: '0.06000000' },
+                        taxCommissionForOrder: { maker: '0.00000112', taker: '0.00000114' },
+                        discount: {
+                            enabledForAccount: true,
+                            enabledForSymbol: true,
+                            discountAsset: 'BNB',
+                            discount: '0.25000000',
+                        },
                     },
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 1,
-                    },
-                ],
-            };
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 1,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             const params: OrderTestRequest = {
@@ -2668,7 +2719,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -2726,7 +2777,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -2810,52 +2861,54 @@ describe('TradeApi', () => {
         });
 
         it('should execute sorOrderPlace() successfully', async () => {
-            mockResponse = {
-                id: '3a4437e2-41a3-4c19-897c-9cadc5dce8b6',
-                status: 200,
-                result: [
-                    {
-                        symbol: 'BTCUSDT',
-                        orderId: 2,
-                        orderListId: -1,
-                        clientOrderId: 'sBI1KM6nNtOfj5tccZSKly',
-                        transactTime: 1689149087774,
-                        price: '31000.00000000',
-                        origQty: '0.50000000',
-                        executedQty: '0.50000000',
-                        origQuoteOrderQty: '0.000000',
-                        cummulativeQuoteQty: '14000.00000000',
-                        status: 'FILLED',
-                        timeInForce: 'GTC',
-                        type: 'LIMIT',
-                        side: 'BUY',
-                        workingTime: 1689149087774,
-                        fills: [
-                            {
-                                matchType: 'ONE_PARTY_TRADE_REPORT',
-                                price: '28000.00000000',
-                                qty: '0.50000000',
-                                commission: '0.00000000',
-                                commissionAsset: 'BTC',
-                                tradeId: -1,
-                                allocId: 0,
-                            },
-                        ],
-                        workingFloor: 'SOR',
-                        selfTradePreventionMode: 'NONE',
-                        usedSor: true,
-                    },
-                ],
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 1,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '3a4437e2-41a3-4c19-897c-9cadc5dce8b6',
+                    status: 200,
+                    result: [
+                        {
+                            symbol: 'BTCUSDT',
+                            orderId: 2,
+                            orderListId: -1,
+                            clientOrderId: 'sBI1KM6nNtOfj5tccZSKly',
+                            transactTime: 1689149087774,
+                            price: '31000.00000000',
+                            origQty: '0.50000000',
+                            executedQty: '0.50000000',
+                            origQuoteOrderQty: '0.000000',
+                            cummulativeQuoteQty: '14000.00000000',
+                            status: 'FILLED',
+                            timeInForce: 'GTC',
+                            type: 'LIMIT',
+                            side: 'BUY',
+                            workingTime: 1689149087774,
+                            fills: [
+                                {
+                                    matchType: 'ONE_PARTY_TRADE_REPORT',
+                                    price: '28000.00000000',
+                                    qty: '0.50000000',
+                                    commission: '0.00000000',
+                                    commissionAsset: 'BTC',
+                                    tradeId: -1,
+                                    allocId: 0,
+                                },
+                            ],
+                            workingFloor: 'SOR',
+                            selfTradePreventionMode: 'NONE',
+                            usedSor: true,
+                        },
+                    ],
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 1,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             const params: SorOrderPlaceRequest = {
@@ -2878,7 +2931,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -2937,7 +2990,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -3022,29 +3075,31 @@ describe('TradeApi', () => {
         });
 
         it('should execute sorOrderTest() successfully', async () => {
-            mockResponse = {
-                id: '3a4437e2-41a3-4c19-897c-9cadc5dce8b6',
-                status: 200,
-                result: {
-                    standardCommissionForOrder: { maker: '0.00000112', taker: '0.00000114' },
-                    taxCommissionForOrder: { maker: '0.00000112', taker: '0.00000114' },
-                    discount: {
-                        enabledForAccount: true,
-                        enabledForSymbol: true,
-                        discountAsset: 'BNB',
-                        discount: '0.25',
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '3a4437e2-41a3-4c19-897c-9cadc5dce8b6',
+                    status: 200,
+                    result: {
+                        standardCommissionForOrder: { maker: '0.00000112', taker: '0.00000114' },
+                        taxCommissionForOrder: { maker: '0.00000112', taker: '0.00000114' },
+                        discount: {
+                            enabledForAccount: true,
+                            enabledForSymbol: true,
+                            discountAsset: 'BNB',
+                            discount: '0.25',
+                        },
                     },
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 1,
-                    },
-                ],
-            };
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 1,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             const params: SorOrderTestRequest = {
@@ -3067,7 +3122,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -3126,7 +3181,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {

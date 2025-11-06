@@ -34,10 +34,10 @@ import type { OrderListOtoResponseOrdersInner } from './order-list-oto-response-
 export interface OrderListOtoResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderListOtoResponse
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -64,10 +64,10 @@ export interface OrderListOtoResponse {
     listClientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderListOtoResponse
      */
-    transactionTime?: number;
+    transactionTime?: number | bigint;
     /**
      *
      * @type {string}

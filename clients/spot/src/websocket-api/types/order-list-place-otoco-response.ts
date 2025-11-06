@@ -40,10 +40,10 @@ export interface OrderListPlaceOtocoResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderListPlaceOtocoResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {OrderListPlaceOtocoResponseResult}

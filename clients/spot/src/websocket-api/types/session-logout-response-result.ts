@@ -32,16 +32,16 @@ export interface SessionLogoutResponseResult {
     apiKey?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SessionLogoutResponseResult
      */
-    authorizedSince?: number;
+    authorizedSince?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SessionLogoutResponseResult
      */
-    connectedSince?: number;
+    connectedSince?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -50,10 +50,10 @@ export interface SessionLogoutResponseResult {
     returnRateLimits?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SessionLogoutResponseResult
      */
-    serverTime?: number;
+    serverTime?: number | bigint;
     /**
      *
      * @type {boolean}

@@ -32,10 +32,10 @@ export interface RollingWindowTickerResponse {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RollingWindowTickerResponse
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}
@@ -98,32 +98,32 @@ export interface RollingWindowTickerResponse {
     q?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RollingWindowTickerResponse
      */
-    O?: number;
+    O?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RollingWindowTickerResponse
      */
-    C?: number;
+    C?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RollingWindowTickerResponse
      */
-    F?: number;
+    F?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RollingWindowTickerResponse
      */
-    L?: number;
+    L?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RollingWindowTickerResponse
      */
-    n?: number;
+    n?: number | bigint;
 }

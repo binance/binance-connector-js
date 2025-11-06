@@ -17,6 +17,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { GeneralApi, ExchangeInfoSymbolStatusEnum } from '../../../src/rest-api';
@@ -39,57 +40,59 @@ describe('GeneralApi', () => {
 
     describe('exchangeInfo()', () => {
         it('should execute exchangeInfo() successfully with required parameters only', async () => {
-            mockResponse = {
-                timezone: 'UTC',
-                serverTime: 1565246363776,
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                    },
-                    { rateLimitType: 'ORDERS', interval: 'DAY', intervalNum: 1, limit: 160000 },
-                    {
-                        rateLimitType: 'RAW_REQUESTS',
-                        interval: 'MINUTE',
-                        intervalNum: 5,
-                        limit: 61000,
-                    },
-                ],
-                exchangeFilters: [],
-                symbols: [
-                    {
-                        symbol: 'ETHBTC',
-                        status: 'TRADING',
-                        baseAsset: 'ETH',
-                        baseAssetPrecision: 8,
-                        quoteAsset: 'BTC',
-                        quotePrecision: 8,
-                        quoteAssetPrecision: 8,
-                        baseCommissionPrecision: 8,
-                        quoteCommissionPrecision: 8,
-                        orderTypes: [
-                            'LIMIT LIMIT_MAKER MARKET STOP_LOSS STOP_LOSS_LIMIT TAKE_PROFIT TAKE_PROFIT_LIMIT',
-                        ],
-                        icebergAllowed: true,
-                        ocoAllowed: true,
-                        otoAllowed: true,
-                        quoteOrderQtyMarketAllowed: true,
-                        allowTrailingStop: false,
-                        cancelReplaceAllowed: false,
-                        amendAllowed: false,
-                        pegInstructionsAllowed: true,
-                        isSpotTradingAllowed: true,
-                        isMarginTradingAllowed: true,
-                        filters: [],
-                        permissions: [],
-                        permissionSets: [['SPOT', 'MARGIN']],
-                        defaultSelfTradePreventionMode: 'NONE',
-                        allowedSelfTradePreventionModes: ['NONE'],
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    timezone: 'UTC',
+                    serverTime: 1565246363776,
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                        },
+                        { rateLimitType: 'ORDERS', interval: 'DAY', intervalNum: 1, limit: 160000 },
+                        {
+                            rateLimitType: 'RAW_REQUESTS',
+                            interval: 'MINUTE',
+                            intervalNum: 5,
+                            limit: 61000,
+                        },
+                    ],
+                    exchangeFilters: [],
+                    symbols: [
+                        {
+                            symbol: 'ETHBTC',
+                            status: 'TRADING',
+                            baseAsset: 'ETH',
+                            baseAssetPrecision: 8,
+                            quoteAsset: 'BTC',
+                            quotePrecision: 8,
+                            quoteAssetPrecision: 8,
+                            baseCommissionPrecision: 8,
+                            quoteCommissionPrecision: 8,
+                            orderTypes: [
+                                'LIMIT LIMIT_MAKER MARKET STOP_LOSS STOP_LOSS_LIMIT TAKE_PROFIT TAKE_PROFIT_LIMIT',
+                            ],
+                            icebergAllowed: true,
+                            ocoAllowed: true,
+                            otoAllowed: true,
+                            quoteOrderQtyMarketAllowed: true,
+                            allowTrailingStop: false,
+                            cancelReplaceAllowed: false,
+                            amendAllowed: false,
+                            pegInstructionsAllowed: true,
+                            isSpotTradingAllowed: true,
+                            isMarginTradingAllowed: true,
+                            filters: [],
+                            permissions: [],
+                            permissionSets: [['SPOT', 'MARGIN']],
+                            defaultSelfTradePreventionMode: 'NONE',
+                            allowedSelfTradePreventionModes: ['NONE'],
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'exchangeInfo').mockReturnValue(
                 Promise.resolve({
@@ -114,57 +117,59 @@ describe('GeneralApi', () => {
                 symbolStatus: ExchangeInfoSymbolStatusEnum.TRADING,
             };
 
-            mockResponse = {
-                timezone: 'UTC',
-                serverTime: 1565246363776,
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                    },
-                    { rateLimitType: 'ORDERS', interval: 'DAY', intervalNum: 1, limit: 160000 },
-                    {
-                        rateLimitType: 'RAW_REQUESTS',
-                        interval: 'MINUTE',
-                        intervalNum: 5,
-                        limit: 61000,
-                    },
-                ],
-                exchangeFilters: [],
-                symbols: [
-                    {
-                        symbol: 'ETHBTC',
-                        status: 'TRADING',
-                        baseAsset: 'ETH',
-                        baseAssetPrecision: 8,
-                        quoteAsset: 'BTC',
-                        quotePrecision: 8,
-                        quoteAssetPrecision: 8,
-                        baseCommissionPrecision: 8,
-                        quoteCommissionPrecision: 8,
-                        orderTypes: [
-                            'LIMIT LIMIT_MAKER MARKET STOP_LOSS STOP_LOSS_LIMIT TAKE_PROFIT TAKE_PROFIT_LIMIT',
-                        ],
-                        icebergAllowed: true,
-                        ocoAllowed: true,
-                        otoAllowed: true,
-                        quoteOrderQtyMarketAllowed: true,
-                        allowTrailingStop: false,
-                        cancelReplaceAllowed: false,
-                        amendAllowed: false,
-                        pegInstructionsAllowed: true,
-                        isSpotTradingAllowed: true,
-                        isMarginTradingAllowed: true,
-                        filters: [],
-                        permissions: [],
-                        permissionSets: [['SPOT', 'MARGIN']],
-                        defaultSelfTradePreventionMode: 'NONE',
-                        allowedSelfTradePreventionModes: ['NONE'],
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    timezone: 'UTC',
+                    serverTime: 1565246363776,
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                        },
+                        { rateLimitType: 'ORDERS', interval: 'DAY', intervalNum: 1, limit: 160000 },
+                        {
+                            rateLimitType: 'RAW_REQUESTS',
+                            interval: 'MINUTE',
+                            intervalNum: 5,
+                            limit: 61000,
+                        },
+                    ],
+                    exchangeFilters: [],
+                    symbols: [
+                        {
+                            symbol: 'ETHBTC',
+                            status: 'TRADING',
+                            baseAsset: 'ETH',
+                            baseAssetPrecision: 8,
+                            quoteAsset: 'BTC',
+                            quotePrecision: 8,
+                            quoteAssetPrecision: 8,
+                            baseCommissionPrecision: 8,
+                            quoteCommissionPrecision: 8,
+                            orderTypes: [
+                                'LIMIT LIMIT_MAKER MARKET STOP_LOSS STOP_LOSS_LIMIT TAKE_PROFIT TAKE_PROFIT_LIMIT',
+                            ],
+                            icebergAllowed: true,
+                            ocoAllowed: true,
+                            otoAllowed: true,
+                            quoteOrderQtyMarketAllowed: true,
+                            allowTrailingStop: false,
+                            cancelReplaceAllowed: false,
+                            amendAllowed: false,
+                            pegInstructionsAllowed: true,
+                            isSpotTradingAllowed: true,
+                            isMarginTradingAllowed: true,
+                            filters: [],
+                            permissions: [],
+                            permissionSets: [['SPOT', 'MARGIN']],
+                            defaultSelfTradePreventionMode: 'NONE',
+                            allowedSelfTradePreventionModes: ['NONE'],
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'exchangeInfo').mockReturnValue(
                 Promise.resolve({
@@ -230,7 +235,7 @@ describe('GeneralApi', () => {
 
     describe('time()', () => {
         it('should execute time() successfully with required parameters only', async () => {
-            mockResponse = { serverTime: 1499827319559 };
+            mockResponse = JSONParse(JSONStringify({ serverTime: 1499827319559 }));
 
             const spy = jest.spyOn(client, 'time').mockReturnValue(
                 Promise.resolve({

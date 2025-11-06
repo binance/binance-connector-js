@@ -32,8 +32,8 @@ export interface MaxNumIcebergOrdersFilter {
     filterType?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MaxNumIcebergOrdersFilter
      */
-    maxNumIcebergOrders?: number;
+    maxNumIcebergOrders?: number | bigint;
 }

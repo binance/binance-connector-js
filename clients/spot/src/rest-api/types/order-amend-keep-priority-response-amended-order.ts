@@ -32,16 +32,16 @@ export interface OrderAmendKeepPriorityResponseAmendedOrder {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderAmendKeepPriorityResponseAmendedOrder
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderAmendKeepPriorityResponseAmendedOrder
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -116,10 +116,10 @@ export interface OrderAmendKeepPriorityResponseAmendedOrder {
     side?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderAmendKeepPriorityResponseAmendedOrder
      */
-    workingTime?: number;
+    workingTime?: number | bigint;
     /**
      *
      * @type {string}

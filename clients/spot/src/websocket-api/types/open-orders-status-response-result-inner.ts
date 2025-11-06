@@ -32,16 +32,16 @@ export interface OpenOrdersStatusResponseResultInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OpenOrdersStatusResponseResultInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OpenOrdersStatusResponseResultInner
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -116,16 +116,16 @@ export interface OpenOrdersStatusResponseResultInner {
     icebergQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OpenOrdersStatusResponseResultInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OpenOrdersStatusResponseResultInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -134,10 +134,10 @@ export interface OpenOrdersStatusResponseResultInner {
     isWorking?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OpenOrdersStatusResponseResultInner
      */
-    workingTime?: number;
+    workingTime?: number | bigint;
     /**
      *
      * @type {string}

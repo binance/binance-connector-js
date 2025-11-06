@@ -34,16 +34,16 @@ import type { OrderAmendKeepPriorityResponseResultListStatus } from './order-ame
 export interface OrderAmendKeepPriorityResponseResult {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderAmendKeepPriorityResponseResult
      */
-    transactTime?: number;
+    transactTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderAmendKeepPriorityResponseResult
      */
-    executionId?: number;
+    executionId?: number | bigint;
     /**
      *
      * @type {OrderAmendKeepPriorityResponseResultAmendedOrder}

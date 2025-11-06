@@ -40,10 +40,10 @@ export interface OrderListPlaceResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderListPlaceResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {OrderListPlaceResponseResult}

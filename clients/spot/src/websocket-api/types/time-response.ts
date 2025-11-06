@@ -40,10 +40,10 @@ export interface TimeResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TimeResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {TimeResponseResult}

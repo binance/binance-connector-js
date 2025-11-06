@@ -34,28 +34,28 @@ import type { AccountStatusResponseResultCommissionRates } from './account-statu
 export interface AccountStatusResponseResult {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountStatusResponseResult
      */
-    makerCommission?: number;
+    makerCommission?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountStatusResponseResult
      */
-    takerCommission?: number;
+    takerCommission?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountStatusResponseResult
      */
-    buyerCommission?: number;
+    buyerCommission?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountStatusResponseResult
      */
-    sellerCommission?: number;
+    sellerCommission?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -100,10 +100,10 @@ export interface AccountStatusResponseResult {
     preventSor?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountStatusResponseResult
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -124,8 +124,8 @@ export interface AccountStatusResponseResult {
     permissions?: Array<string>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountStatusResponseResult
      */
-    uid?: number;
+    uid?: number | bigint;
 }

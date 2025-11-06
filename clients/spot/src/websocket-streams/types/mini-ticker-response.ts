@@ -32,10 +32,10 @@ export interface MiniTickerResponse {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MiniTickerResponse
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}

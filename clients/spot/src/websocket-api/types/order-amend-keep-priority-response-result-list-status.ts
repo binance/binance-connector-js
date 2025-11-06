@@ -31,10 +31,10 @@ import type { OrderAmendKeepPriorityResponseResultListStatusOrdersInner } from '
 export interface OrderAmendKeepPriorityResponseResultListStatus {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderAmendKeepPriorityResponseResultListStatus
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}

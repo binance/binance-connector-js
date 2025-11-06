@@ -32,10 +32,10 @@ export interface UserDataStreamUnsubscribeResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UserDataStreamUnsubscribeResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {object}

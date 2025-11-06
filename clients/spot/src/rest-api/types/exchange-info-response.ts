@@ -43,10 +43,10 @@ export interface ExchangeInfoResponse {
     timezone?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExchangeInfoResponse
      */
-    serverTime?: number;
+    serverTime?: number | bigint;
     /**
      *
      * @type {Array<RateLimits>}

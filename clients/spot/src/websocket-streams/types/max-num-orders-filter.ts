@@ -32,8 +32,8 @@ export interface MaxNumOrdersFilter {
     filterType?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MaxNumOrdersFilter
      */
-    maxNumOrders?: number;
+    maxNumOrders?: number | bigint;
 }

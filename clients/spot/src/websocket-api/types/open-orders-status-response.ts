@@ -40,10 +40,10 @@ export interface OpenOrdersStatusResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OpenOrdersStatusResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {Array<OpenOrdersStatusResponseResultInner>}

@@ -32,8 +32,8 @@ export interface TPlusSellFilter {
     filterType?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TPlusSellFilter
      */
-    endTime?: number;
+    endTime?: number | bigint;
 }

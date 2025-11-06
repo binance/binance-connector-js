@@ -26,10 +26,10 @@
 export interface TradesRecentResponseResultInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradesRecentResponseResultInner
      */
-    id?: number;
+    id?: number | bigint;
     /**
      *
      * @type {string}
@@ -50,10 +50,10 @@ export interface TradesRecentResponseResultInner {
     quoteQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradesRecentResponseResultInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {boolean}

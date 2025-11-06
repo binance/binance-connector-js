@@ -40,10 +40,10 @@ export interface Ticker24hrResponse2 {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Ticker24hrResponse2
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {Array<Ticker24hrResponse2ResultInner>}

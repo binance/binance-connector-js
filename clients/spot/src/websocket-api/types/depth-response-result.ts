@@ -26,10 +26,10 @@
 export interface DepthResponseResult {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DepthResponseResult
      */
-    lastUpdateId?: number;
+    lastUpdateId?: number | bigint;
     /**
      *
      * @type {Array<Array<string>>}

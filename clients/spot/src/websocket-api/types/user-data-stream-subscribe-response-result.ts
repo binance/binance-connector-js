@@ -26,8 +26,8 @@
 export interface UserDataStreamSubscribeResponseResult {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UserDataStreamSubscribeResponseResult
      */
-    subscriptionId?: number;
+    subscriptionId?: number | bigint;
 }

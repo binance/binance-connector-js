@@ -37,16 +37,16 @@ export interface NewOrderResponse {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NewOrderResponse
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NewOrderResponse
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -55,10 +55,10 @@ export interface NewOrderResponse {
     clientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NewOrderResponse
      */
-    transactTime?: number;
+    transactTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -115,10 +115,10 @@ export interface NewOrderResponse {
     side?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NewOrderResponse
      */
-    workingTime?: number;
+    workingTime?: number | bigint;
     /**
      *
      * @type {string}

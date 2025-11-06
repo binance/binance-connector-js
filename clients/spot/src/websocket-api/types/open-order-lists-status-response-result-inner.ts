@@ -31,10 +31,10 @@ import type { OpenOrderListsStatusResponseResultInnerOrdersInner } from './open-
 export interface OpenOrderListsStatusResponseResultInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OpenOrderListsStatusResponseResultInner
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -61,10 +61,10 @@ export interface OpenOrderListsStatusResponseResultInner {
     listClientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OpenOrderListsStatusResponseResultInner
      */
-    transactionTime?: number;
+    transactionTime?: number | bigint;
     /**
      *
      * @type {string}

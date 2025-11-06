@@ -32,10 +32,10 @@ export interface AllTickerResponseInner {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllTickerResponseInner
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}
@@ -134,32 +134,32 @@ export interface AllTickerResponseInner {
     q?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllTickerResponseInner
      */
-    O?: number;
+    O?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllTickerResponseInner
      */
-    C?: number;
+    C?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllTickerResponseInner
      */
-    F?: number;
+    F?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllTickerResponseInner
      */
-    L?: number;
+    L?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllTickerResponseInner
      */
-    n?: number;
+    n?: number | bigint;
 }

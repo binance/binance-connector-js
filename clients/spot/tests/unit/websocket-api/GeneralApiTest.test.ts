@@ -20,6 +20,7 @@
 
 import WebSocketClient from 'ws';
 import { EventEmitter } from 'events';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { jest, expect, beforeEach, afterEach, describe, it } from '@jest/globals';
 import { ConfigurationWebsocketAPI, WebsocketAPIBase, randomString } from '@binance/common';
 
@@ -83,12 +84,86 @@ describe('GeneralApi', () => {
         });
 
         it('should execute exchangeInfo() successfully', async () => {
-            mockResponse = {
-                id: '5494febb-d167-46a2-996d-70533eb4d976',
-                status: 200,
-                result: {
-                    timezone: 'UTC',
-                    serverTime: 1655969291181,
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '5494febb-d167-46a2-996d-70533eb4d976',
+                    status: 200,
+                    result: {
+                        timezone: 'UTC',
+                        serverTime: 1655969291181,
+                        rateLimits: [
+                            {
+                                rateLimitType: 'REQUEST_WEIGHT',
+                                interval: 'MINUTE',
+                                intervalNum: 1,
+                                limit: 6000,
+                            },
+                            {
+                                rateLimitType: 'ORDERS',
+                                interval: 'SECOND',
+                                intervalNum: 10,
+                                limit: 50,
+                            },
+                            {
+                                rateLimitType: 'ORDERS',
+                                interval: 'DAY',
+                                intervalNum: 1,
+                                limit: 160000,
+                            },
+                            {
+                                rateLimitType: 'CONNECTIONS',
+                                interval: 'MINUTE',
+                                intervalNum: 5,
+                                limit: 300,
+                            },
+                        ],
+                        exchangeFilters: [],
+                        symbols: [
+                            {
+                                symbol: 'BNBBTC',
+                                status: 'TRADING',
+                                baseAsset: 'BNB',
+                                baseAssetPrecision: 8,
+                                quoteAsset: 'BTC',
+                                quotePrecision: 8,
+                                quoteAssetPrecision: 8,
+                                baseCommissionPrecision: 8,
+                                quoteCommissionPrecision: 8,
+                                orderTypes: [
+                                    'LIMIT LIMIT_MAKER MARKET STOP_LOSS_LIMIT TAKE_PROFIT_LIMIT',
+                                ],
+                                icebergAllowed: true,
+                                ocoAllowed: true,
+                                otoAllowed: true,
+                                quoteOrderQtyMarketAllowed: true,
+                                allowTrailingStop: true,
+                                cancelReplaceAllowed: true,
+                                amendAllowed: false,
+                                pegInstructionsAllowed: true,
+                                isSpotTradingAllowed: true,
+                                isMarginTradingAllowed: true,
+                                filters: [
+                                    {
+                                        filterType: 'PRICE_FILTER',
+                                        minPrice: '0.00000100',
+                                        maxPrice: '100000.00000000',
+                                        tickSize: '0.00000100',
+                                    },
+                                    {
+                                        filterType: 'LOT_SIZE',
+                                        minQty: '0.00100000',
+                                        maxQty: '100000.00000000',
+                                        stepSize: '0.00100000',
+                                    },
+                                ],
+                                permissions: [],
+                                permissionSets: [['SPOT', 'MARGIN', 'TRD_GRP_004']],
+                                defaultSelfTradePreventionMode: 'NONE',
+                                allowedSelfTradePreventionModes: ['NONE'],
+                            },
+                        ],
+                        sors: [{ baseAsset: 'BTC', symbols: ['BTCUSDT BTCUSDC'] }],
+                    },
                     rateLimits: [
                         {
                             rateLimitType: 'REQUEST_WEIGHT',
@@ -96,78 +171,16 @@ describe('GeneralApi', () => {
                             intervalNum: 1,
                             limit: 6000,
                         },
-                        { rateLimitType: 'ORDERS', interval: 'SECOND', intervalNum: 10, limit: 50 },
                         { rateLimitType: 'ORDERS', interval: 'DAY', intervalNum: 1, limit: 160000 },
                         {
-                            rateLimitType: 'CONNECTIONS',
+                            rateLimitType: 'RAW_REQUESTS',
                             interval: 'MINUTE',
                             intervalNum: 5,
-                            limit: 300,
+                            limit: 61000,
                         },
                     ],
-                    exchangeFilters: [],
-                    symbols: [
-                        {
-                            symbol: 'BNBBTC',
-                            status: 'TRADING',
-                            baseAsset: 'BNB',
-                            baseAssetPrecision: 8,
-                            quoteAsset: 'BTC',
-                            quotePrecision: 8,
-                            quoteAssetPrecision: 8,
-                            baseCommissionPrecision: 8,
-                            quoteCommissionPrecision: 8,
-                            orderTypes: [
-                                'LIMIT LIMIT_MAKER MARKET STOP_LOSS_LIMIT TAKE_PROFIT_LIMIT',
-                            ],
-                            icebergAllowed: true,
-                            ocoAllowed: true,
-                            otoAllowed: true,
-                            quoteOrderQtyMarketAllowed: true,
-                            allowTrailingStop: true,
-                            cancelReplaceAllowed: true,
-                            amendAllowed: false,
-                            pegInstructionsAllowed: true,
-                            isSpotTradingAllowed: true,
-                            isMarginTradingAllowed: true,
-                            filters: [
-                                {
-                                    filterType: 'PRICE_FILTER',
-                                    minPrice: '0.00000100',
-                                    maxPrice: '100000.00000000',
-                                    tickSize: '0.00000100',
-                                },
-                                {
-                                    filterType: 'LOT_SIZE',
-                                    minQty: '0.00100000',
-                                    maxQty: '100000.00000000',
-                                    stepSize: '0.00100000',
-                                },
-                            ],
-                            permissions: [],
-                            permissionSets: [['SPOT', 'MARGIN', 'TRD_GRP_004']],
-                            defaultSelfTradePreventionMode: 'NONE',
-                            allowedSelfTradePreventionModes: ['NONE'],
-                        },
-                    ],
-                    sors: [{ baseAsset: 'BTC', symbols: ['BTCUSDT BTCUSDC'] }],
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                    },
-                    { rateLimitType: 'ORDERS', interval: 'DAY', intervalNum: 1, limit: 160000 },
-                    {
-                        rateLimitType: 'RAW_REQUESTS',
-                        interval: 'MINUTE',
-                        intervalNum: 5,
-                        limit: 61000,
-                    },
-                ],
-            };
+                })
+            );
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -182,7 +195,7 @@ describe('GeneralApi', () => {
                     const responsePromise = websocketAPIClient.exchangeInfo({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -234,7 +247,7 @@ describe('GeneralApi', () => {
                     const responsePromise = websocketAPIClient.exchangeInfo({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -312,20 +325,22 @@ describe('GeneralApi', () => {
         });
 
         it('should execute ping() successfully', async () => {
-            mockResponse = {
-                id: '922bcc6e-9de8-440d-9e84-7c80933a8d0d',
-                status: 200,
-                result: {},
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 1,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '922bcc6e-9de8-440d-9e84-7c80933a8d0d',
+                    status: 200,
+                    result: {},
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 1,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -338,7 +353,7 @@ describe('GeneralApi', () => {
                     websocketAPIClient = new GeneralApi(conn);
                     const sendMsgSpy = jest.spyOn(conn, 'sendMessage');
                     const responsePromise = websocketAPIClient.ping({ id: mockResponse?.id });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -387,7 +402,7 @@ describe('GeneralApi', () => {
                 try {
                     websocketAPIClient = new GeneralApi(conn);
                     const responsePromise = websocketAPIClient.ping({ id: mockResponse?.id });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -465,20 +480,22 @@ describe('GeneralApi', () => {
         });
 
         it('should execute time() successfully', async () => {
-            mockResponse = {
-                id: '187d3cb2-942d-484c-8271-4e2141bbadb1',
-                status: 200,
-                result: { serverTime: 1656400526260 },
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        count: 1,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '187d3cb2-942d-484c-8271-4e2141bbadb1',
+                    status: 200,
+                    result: { serverTime: 1656400526260 },
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            count: 1,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -491,7 +508,7 @@ describe('GeneralApi', () => {
                     websocketAPIClient = new GeneralApi(conn);
                     const sendMsgSpy = jest.spyOn(conn, 'sendMessage');
                     const responsePromise = websocketAPIClient.time({ id: mockResponse?.id });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -540,7 +557,7 @@ describe('GeneralApi', () => {
                 try {
                     websocketAPIClient = new GeneralApi(conn);
                     const responsePromise = websocketAPIClient.time({ id: mockResponse?.id });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {

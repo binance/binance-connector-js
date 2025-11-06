@@ -40,10 +40,10 @@ export interface AccountRateLimitsOrdersResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountRateLimitsOrdersResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {Array<AccountRateLimitsOrdersResponseResultInner>}

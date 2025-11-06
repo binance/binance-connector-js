@@ -32,10 +32,10 @@ export interface TradeResponse {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeResponse
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}
@@ -44,10 +44,10 @@ export interface TradeResponse {
     s?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeResponse
      */
-    t?: number;
+    t?: number | bigint;
     /**
      *
      * @type {string}
@@ -62,10 +62,10 @@ export interface TradeResponse {
     q?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeResponse
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {boolean}

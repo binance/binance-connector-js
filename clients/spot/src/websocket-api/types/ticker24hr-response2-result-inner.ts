@@ -122,32 +122,32 @@ export interface Ticker24hrResponse2ResultInner {
     quoteVolume?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Ticker24hrResponse2ResultInner
      */
-    openTime?: number;
+    openTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Ticker24hrResponse2ResultInner
      */
-    closeTime?: number;
+    closeTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Ticker24hrResponse2ResultInner
      */
-    firstId?: number;
+    firstId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Ticker24hrResponse2ResultInner
      */
-    lastId?: number;
+    lastId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Ticker24hrResponse2ResultInner
      */
-    count?: number;
+    count?: number | bigint;
 }

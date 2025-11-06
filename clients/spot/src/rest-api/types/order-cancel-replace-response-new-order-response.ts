@@ -32,16 +32,16 @@ export interface OrderCancelReplaceResponseNewOrderResponse {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderCancelReplaceResponseNewOrderResponse
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderCancelReplaceResponseNewOrderResponse
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -50,10 +50,10 @@ export interface OrderCancelReplaceResponseNewOrderResponse {
     clientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderCancelReplaceResponseNewOrderResponse
      */
-    transactTime?: number;
+    transactTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -110,10 +110,10 @@ export interface OrderCancelReplaceResponseNewOrderResponse {
     side?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderCancelReplaceResponseNewOrderResponse
      */
-    workingTime?: number;
+    workingTime?: number | bigint;
     /**
      *
      * @type {Array<string>}

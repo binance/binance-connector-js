@@ -26,10 +26,10 @@
 export interface ExternalLockUpdate {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExternalLockUpdate
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}
@@ -44,8 +44,8 @@ export interface ExternalLockUpdate {
     d?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExternalLockUpdate
      */
-    T?: number;
+    T?: number | bigint;
 }

@@ -37,16 +37,16 @@ export interface SorOrderResponse {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SorOrderResponse
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SorOrderResponse
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -55,10 +55,10 @@ export interface SorOrderResponse {
     clientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SorOrderResponse
      */
-    transactTime?: number;
+    transactTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -115,10 +115,10 @@ export interface SorOrderResponse {
     side?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SorOrderResponse
      */
-    workingTime?: number;
+    workingTime?: number | bigint;
     /**
      *
      * @type {Array<SorOrderResponseFillsInner>}

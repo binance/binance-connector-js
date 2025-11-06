@@ -32,16 +32,16 @@ export interface MyPreventedMatchesResponseInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MyPreventedMatchesResponseInner
      */
-    preventedMatchId?: number;
+    preventedMatchId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MyPreventedMatchesResponseInner
      */
-    takerOrderId?: number;
+    takerOrderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -50,16 +50,16 @@ export interface MyPreventedMatchesResponseInner {
     makerSymbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MyPreventedMatchesResponseInner
      */
-    makerOrderId?: number;
+    makerOrderId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MyPreventedMatchesResponseInner
      */
-    tradeGroupId?: number;
+    tradeGroupId?: number | bigint;
     /**
      *
      * @type {string}
@@ -80,8 +80,8 @@ export interface MyPreventedMatchesResponseInner {
     makerPreventedQuantity?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MyPreventedMatchesResponseInner
      */
-    transactTime?: number;
+    transactTime?: number | bigint;
 }

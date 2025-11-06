@@ -37,10 +37,10 @@ export interface KlineOffsetResponse {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof KlineOffsetResponse
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}

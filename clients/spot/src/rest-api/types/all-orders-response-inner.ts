@@ -32,16 +32,16 @@ export interface AllOrdersResponseInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllOrdersResponseInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllOrdersResponseInner
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -110,16 +110,16 @@ export interface AllOrdersResponseInner {
     icebergQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllOrdersResponseInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllOrdersResponseInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -134,10 +134,10 @@ export interface AllOrdersResponseInner {
     origQuoteOrderQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllOrdersResponseInner
      */
-    workingTime?: number;
+    workingTime?: number | bigint;
     /**
      *
      * @type {string}

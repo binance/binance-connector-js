@@ -32,10 +32,10 @@ export interface DiffBookDepthResponse {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DiffBookDepthResponse
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}
@@ -44,16 +44,16 @@ export interface DiffBookDepthResponse {
     s?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DiffBookDepthResponse
      */
-    U?: number;
+    U?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DiffBookDepthResponse
      */
-    u?: number;
+    u?: number | bigint;
     /**
      *
      * @type {Array<Array<string>>}

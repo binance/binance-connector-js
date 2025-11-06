@@ -31,16 +31,16 @@ import type { OutboundAccountPositionBInner } from './outbound-account-position-
 export interface OutboundAccountPosition {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OutboundAccountPosition
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OutboundAccountPosition
      */
-    u?: number;
+    u?: number | bigint;
     /**
      *
      * @type {Array<OutboundAccountPositionBInner>}

@@ -17,6 +17,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { AccountApi } from '../../../src/rest-api';
@@ -73,33 +74,35 @@ describe('AccountApi', () => {
                 symbol: 'BNBUSDT',
             };
 
-            mockResponse = {
-                symbol: 'BTCUSDT',
-                standardCommission: {
-                    maker: '0.00000010',
-                    taker: '0.00000020',
-                    buyer: '0.00000030',
-                    seller: '0.00000040',
-                },
-                specialCommission: {
-                    maker: '0.01000000',
-                    taker: '0.02000000',
-                    buyer: '0.03000000',
-                    seller: '0.04000000',
-                },
-                taxCommission: {
-                    maker: '0.00000112',
-                    taker: '0.00000114',
-                    buyer: '0.00000118',
-                    seller: '0.00000116',
-                },
-                discount: {
-                    enabledForAccount: true,
-                    enabledForSymbol: true,
-                    discountAsset: 'BNB',
-                    discount: '0.75000000',
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    symbol: 'BTCUSDT',
+                    standardCommission: {
+                        maker: '0.00000010',
+                        taker: '0.00000020',
+                        buyer: '0.00000030',
+                        seller: '0.00000040',
+                    },
+                    specialCommission: {
+                        maker: '0.01000000',
+                        taker: '0.02000000',
+                        buyer: '0.03000000',
+                        seller: '0.04000000',
+                    },
+                    taxCommission: {
+                        maker: '0.00000112',
+                        taker: '0.00000114',
+                        buyer: '0.00000118',
+                        seller: '0.00000116',
+                    },
+                    discount: {
+                        enabledForAccount: true,
+                        enabledForSymbol: true,
+                        discountAsset: 'BNB',
+                        discount: '0.75000000',
+                    },
+                })
+            );
 
             const spy = jest.spyOn(client, 'accountCommission').mockReturnValue(
                 Promise.resolve({
@@ -120,33 +123,35 @@ describe('AccountApi', () => {
                 symbol: 'BNBUSDT',
             };
 
-            mockResponse = {
-                symbol: 'BTCUSDT',
-                standardCommission: {
-                    maker: '0.00000010',
-                    taker: '0.00000020',
-                    buyer: '0.00000030',
-                    seller: '0.00000040',
-                },
-                specialCommission: {
-                    maker: '0.01000000',
-                    taker: '0.02000000',
-                    buyer: '0.03000000',
-                    seller: '0.04000000',
-                },
-                taxCommission: {
-                    maker: '0.00000112',
-                    taker: '0.00000114',
-                    buyer: '0.00000118',
-                    seller: '0.00000116',
-                },
-                discount: {
-                    enabledForAccount: true,
-                    enabledForSymbol: true,
-                    discountAsset: 'BNB',
-                    discount: '0.75000000',
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    symbol: 'BTCUSDT',
+                    standardCommission: {
+                        maker: '0.00000010',
+                        taker: '0.00000020',
+                        buyer: '0.00000030',
+                        seller: '0.00000040',
+                    },
+                    specialCommission: {
+                        maker: '0.01000000',
+                        taker: '0.02000000',
+                        buyer: '0.03000000',
+                        seller: '0.04000000',
+                    },
+                    taxCommission: {
+                        maker: '0.00000112',
+                        taker: '0.00000114',
+                        buyer: '0.00000118',
+                        seller: '0.00000116',
+                    },
+                    discount: {
+                        enabledForAccount: true,
+                        enabledForSymbol: true,
+                        discountAsset: 'BNB',
+                        discount: '0.75000000',
+                    },
+                })
+            );
 
             const spy = jest.spyOn(client, 'accountCommission').mockReturnValue(
                 Promise.resolve({
@@ -196,34 +201,52 @@ describe('AccountApi', () => {
 
     describe('allOrderList()', () => {
         it('should execute allOrderList() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    orderListId: 29,
-                    contingencyType: 'OCO',
-                    listStatusType: 'EXEC_STARTED',
-                    listOrderStatus: 'EXECUTING',
-                    listClientOrderId: 'amEEAXryFzFwYF1FeRpUoZ',
-                    transactionTime: 1565245913483,
-                    symbol: 'LTCBTC',
-                    orders: [
-                        { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'Jr1h6xirOxgeJOUuYQS7V3' },
-                        { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'oD7aesZqjEGlZrbtRpy5zB' },
-                    ],
-                },
-                {
-                    orderListId: 28,
-                    contingencyType: 'OCO',
-                    listStatusType: 'EXEC_STARTED',
-                    listOrderStatus: 'EXECUTING',
-                    listClientOrderId: 'hG7hFNxJV6cZy3Ze4AUT4d',
-                    transactionTime: 1565245913407,
-                    symbol: 'LTCBTC',
-                    orders: [
-                        { symbol: 'LTCBTC', orderId: 2, clientOrderId: 'j6lFOfbmFMRjTYA7rRJ0LP' },
-                        { symbol: 'LTCBTC', orderId: 3, clientOrderId: 'z0KCjOdditiLS5ekAFtK81' },
-                    ],
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        orderListId: 29,
+                        contingencyType: 'OCO',
+                        listStatusType: 'EXEC_STARTED',
+                        listOrderStatus: 'EXECUTING',
+                        listClientOrderId: 'amEEAXryFzFwYF1FeRpUoZ',
+                        transactionTime: 1565245913483,
+                        symbol: 'LTCBTC',
+                        orders: [
+                            {
+                                symbol: 'LTCBTC',
+                                orderId: 5,
+                                clientOrderId: 'Jr1h6xirOxgeJOUuYQS7V3',
+                            },
+                            {
+                                symbol: 'LTCBTC',
+                                orderId: 4,
+                                clientOrderId: 'oD7aesZqjEGlZrbtRpy5zB',
+                            },
+                        ],
+                    },
+                    {
+                        orderListId: 28,
+                        contingencyType: 'OCO',
+                        listStatusType: 'EXEC_STARTED',
+                        listOrderStatus: 'EXECUTING',
+                        listClientOrderId: 'hG7hFNxJV6cZy3Ze4AUT4d',
+                        transactionTime: 1565245913407,
+                        symbol: 'LTCBTC',
+                        orders: [
+                            {
+                                symbol: 'LTCBTC',
+                                orderId: 2,
+                                clientOrderId: 'j6lFOfbmFMRjTYA7rRJ0LP',
+                            },
+                            {
+                                symbol: 'LTCBTC',
+                                orderId: 3,
+                                clientOrderId: 'z0KCjOdditiLS5ekAFtK81',
+                            },
+                        ],
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'allOrderList').mockReturnValue(
                 Promise.resolve({
@@ -248,34 +271,52 @@ describe('AccountApi', () => {
                 recvWindow: 5000.0,
             };
 
-            mockResponse = [
-                {
-                    orderListId: 29,
-                    contingencyType: 'OCO',
-                    listStatusType: 'EXEC_STARTED',
-                    listOrderStatus: 'EXECUTING',
-                    listClientOrderId: 'amEEAXryFzFwYF1FeRpUoZ',
-                    transactionTime: 1565245913483,
-                    symbol: 'LTCBTC',
-                    orders: [
-                        { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'Jr1h6xirOxgeJOUuYQS7V3' },
-                        { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'oD7aesZqjEGlZrbtRpy5zB' },
-                    ],
-                },
-                {
-                    orderListId: 28,
-                    contingencyType: 'OCO',
-                    listStatusType: 'EXEC_STARTED',
-                    listOrderStatus: 'EXECUTING',
-                    listClientOrderId: 'hG7hFNxJV6cZy3Ze4AUT4d',
-                    transactionTime: 1565245913407,
-                    symbol: 'LTCBTC',
-                    orders: [
-                        { symbol: 'LTCBTC', orderId: 2, clientOrderId: 'j6lFOfbmFMRjTYA7rRJ0LP' },
-                        { symbol: 'LTCBTC', orderId: 3, clientOrderId: 'z0KCjOdditiLS5ekAFtK81' },
-                    ],
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        orderListId: 29,
+                        contingencyType: 'OCO',
+                        listStatusType: 'EXEC_STARTED',
+                        listOrderStatus: 'EXECUTING',
+                        listClientOrderId: 'amEEAXryFzFwYF1FeRpUoZ',
+                        transactionTime: 1565245913483,
+                        symbol: 'LTCBTC',
+                        orders: [
+                            {
+                                symbol: 'LTCBTC',
+                                orderId: 5,
+                                clientOrderId: 'Jr1h6xirOxgeJOUuYQS7V3',
+                            },
+                            {
+                                symbol: 'LTCBTC',
+                                orderId: 4,
+                                clientOrderId: 'oD7aesZqjEGlZrbtRpy5zB',
+                            },
+                        ],
+                    },
+                    {
+                        orderListId: 28,
+                        contingencyType: 'OCO',
+                        listStatusType: 'EXEC_STARTED',
+                        listOrderStatus: 'EXECUTING',
+                        listClientOrderId: 'hG7hFNxJV6cZy3Ze4AUT4d',
+                        transactionTime: 1565245913407,
+                        symbol: 'LTCBTC',
+                        orders: [
+                            {
+                                symbol: 'LTCBTC',
+                                orderId: 2,
+                                clientOrderId: 'j6lFOfbmFMRjTYA7rRJ0LP',
+                            },
+                            {
+                                symbol: 'LTCBTC',
+                                orderId: 3,
+                                clientOrderId: 'z0KCjOdditiLS5ekAFtK81',
+                            },
+                        ],
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'allOrderList').mockReturnValue(
                 Promise.resolve({
@@ -313,30 +354,32 @@ describe('AccountApi', () => {
                 symbol: 'BNBUSDT',
             };
 
-            mockResponse = [
-                {
-                    symbol: 'LTCBTC',
-                    orderId: 1,
-                    orderListId: -1,
-                    clientOrderId: 'myOrder1',
-                    price: '0.1',
-                    origQty: '1.0',
-                    executedQty: '0.0',
-                    cummulativeQuoteQty: '0.0',
-                    status: 'NEW',
-                    timeInForce: 'GTC',
-                    type: 'LIMIT',
-                    side: 'BUY',
-                    stopPrice: '0.0',
-                    icebergQty: '0.0',
-                    time: 1499827319559,
-                    updateTime: 1499827319559,
-                    isWorking: true,
-                    origQuoteOrderQty: '0.000000',
-                    workingTime: 1499827319559,
-                    selfTradePreventionMode: 'NONE',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'LTCBTC',
+                        orderId: 1,
+                        orderListId: -1,
+                        clientOrderId: 'myOrder1',
+                        price: '0.1',
+                        origQty: '1.0',
+                        executedQty: '0.0',
+                        cummulativeQuoteQty: '0.0',
+                        status: 'NEW',
+                        timeInForce: 'GTC',
+                        type: 'LIMIT',
+                        side: 'BUY',
+                        stopPrice: '0.0',
+                        icebergQty: '0.0',
+                        time: 1499827319559,
+                        updateTime: 1499827319559,
+                        isWorking: true,
+                        origQuoteOrderQty: '0.000000',
+                        workingTime: 1499827319559,
+                        selfTradePreventionMode: 'NONE',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'allOrders').mockReturnValue(
                 Promise.resolve({
@@ -362,30 +405,32 @@ describe('AccountApi', () => {
                 recvWindow: 5000.0,
             };
 
-            mockResponse = [
-                {
-                    symbol: 'LTCBTC',
-                    orderId: 1,
-                    orderListId: -1,
-                    clientOrderId: 'myOrder1',
-                    price: '0.1',
-                    origQty: '1.0',
-                    executedQty: '0.0',
-                    cummulativeQuoteQty: '0.0',
-                    status: 'NEW',
-                    timeInForce: 'GTC',
-                    type: 'LIMIT',
-                    side: 'BUY',
-                    stopPrice: '0.0',
-                    icebergQty: '0.0',
-                    time: 1499827319559,
-                    updateTime: 1499827319559,
-                    isWorking: true,
-                    origQuoteOrderQty: '0.000000',
-                    workingTime: 1499827319559,
-                    selfTradePreventionMode: 'NONE',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'LTCBTC',
+                        orderId: 1,
+                        orderListId: -1,
+                        clientOrderId: 'myOrder1',
+                        price: '0.1',
+                        origQty: '1.0',
+                        executedQty: '0.0',
+                        cummulativeQuoteQty: '0.0',
+                        status: 'NEW',
+                        timeInForce: 'GTC',
+                        type: 'LIMIT',
+                        side: 'BUY',
+                        stopPrice: '0.0',
+                        icebergQty: '0.0',
+                        time: 1499827319559,
+                        updateTime: 1499827319559,
+                        isWorking: true,
+                        origQuoteOrderQty: '0.000000',
+                        workingTime: 1499827319559,
+                        selfTradePreventionMode: 'NONE',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'allOrders').mockReturnValue(
                 Promise.resolve({
@@ -435,32 +480,34 @@ describe('AccountApi', () => {
 
     describe('getAccount()', () => {
         it('should execute getAccount() successfully with required parameters only', async () => {
-            mockResponse = {
-                makerCommission: 15,
-                takerCommission: 15,
-                buyerCommission: 0,
-                sellerCommission: 0,
-                commissionRates: {
-                    maker: '0.00150000',
-                    taker: '0.00150000',
-                    buyer: '0.00000000',
-                    seller: '0.00000000',
-                },
-                canTrade: true,
-                canWithdraw: true,
-                canDeposit: true,
-                brokered: false,
-                requireSelfTradePrevention: false,
-                preventSor: false,
-                updateTime: 123456789,
-                accountType: 'SPOT',
-                balances: [
-                    { asset: 'LTC', free: '4763368.68006011', locked: '0.00000000' },
-                    { asset: 'BTC', free: '4723846.89208129', locked: '0.00000000' },
-                ],
-                permissions: ['SPOT'],
-                uid: 354937868,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    makerCommission: 15,
+                    takerCommission: 15,
+                    buyerCommission: 0,
+                    sellerCommission: 0,
+                    commissionRates: {
+                        maker: '0.00150000',
+                        taker: '0.00150000',
+                        buyer: '0.00000000',
+                        seller: '0.00000000',
+                    },
+                    canTrade: true,
+                    canWithdraw: true,
+                    canDeposit: true,
+                    brokered: false,
+                    requireSelfTradePrevention: false,
+                    preventSor: false,
+                    updateTime: 123456789,
+                    accountType: 'SPOT',
+                    balances: [
+                        { asset: 'LTC', free: '4763368.68006011', locked: '0.00000000' },
+                        { asset: 'BTC', free: '4723846.89208129', locked: '0.00000000' },
+                    ],
+                    permissions: ['SPOT'],
+                    uid: 354937868,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getAccount').mockReturnValue(
                 Promise.resolve({
@@ -482,32 +529,34 @@ describe('AccountApi', () => {
                 recvWindow: 5000.0,
             };
 
-            mockResponse = {
-                makerCommission: 15,
-                takerCommission: 15,
-                buyerCommission: 0,
-                sellerCommission: 0,
-                commissionRates: {
-                    maker: '0.00150000',
-                    taker: '0.00150000',
-                    buyer: '0.00000000',
-                    seller: '0.00000000',
-                },
-                canTrade: true,
-                canWithdraw: true,
-                canDeposit: true,
-                brokered: false,
-                requireSelfTradePrevention: false,
-                preventSor: false,
-                updateTime: 123456789,
-                accountType: 'SPOT',
-                balances: [
-                    { asset: 'LTC', free: '4763368.68006011', locked: '0.00000000' },
-                    { asset: 'BTC', free: '4723846.89208129', locked: '0.00000000' },
-                ],
-                permissions: ['SPOT'],
-                uid: 354937868,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    makerCommission: 15,
+                    takerCommission: 15,
+                    buyerCommission: 0,
+                    sellerCommission: 0,
+                    commissionRates: {
+                        maker: '0.00150000',
+                        taker: '0.00150000',
+                        buyer: '0.00000000',
+                        seller: '0.00000000',
+                    },
+                    canTrade: true,
+                    canWithdraw: true,
+                    canDeposit: true,
+                    brokered: false,
+                    requireSelfTradePrevention: false,
+                    preventSor: false,
+                    updateTime: 123456789,
+                    accountType: 'SPOT',
+                    balances: [
+                        { asset: 'LTC', free: '4763368.68006011', locked: '0.00000000' },
+                        { asset: 'BTC', free: '4723846.89208129', locked: '0.00000000' },
+                    ],
+                    permissions: ['SPOT'],
+                    uid: 354937868,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getAccount').mockReturnValue(
                 Promise.resolve({
@@ -541,30 +590,32 @@ describe('AccountApi', () => {
 
     describe('getOpenOrders()', () => {
         it('should execute getOpenOrders() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    symbol: 'LTCBTC',
-                    orderId: 1,
-                    orderListId: -1,
-                    clientOrderId: 'myOrder1',
-                    price: '0.1',
-                    origQty: '1.0',
-                    executedQty: '0.0',
-                    cummulativeQuoteQty: '0.0',
-                    status: 'NEW',
-                    timeInForce: 'GTC',
-                    type: 'LIMIT',
-                    side: 'BUY',
-                    stopPrice: '0.0',
-                    icebergQty: '0.0',
-                    time: 1499827319559,
-                    updateTime: 1499827319559,
-                    isWorking: true,
-                    origQuoteOrderQty: '0.000000',
-                    workingTime: 1499827319559,
-                    selfTradePreventionMode: 'NONE',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'LTCBTC',
+                        orderId: 1,
+                        orderListId: -1,
+                        clientOrderId: 'myOrder1',
+                        price: '0.1',
+                        origQty: '1.0',
+                        executedQty: '0.0',
+                        cummulativeQuoteQty: '0.0',
+                        status: 'NEW',
+                        timeInForce: 'GTC',
+                        type: 'LIMIT',
+                        side: 'BUY',
+                        stopPrice: '0.0',
+                        icebergQty: '0.0',
+                        time: 1499827319559,
+                        updateTime: 1499827319559,
+                        isWorking: true,
+                        origQuoteOrderQty: '0.000000',
+                        workingTime: 1499827319559,
+                        selfTradePreventionMode: 'NONE',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getOpenOrders').mockReturnValue(
                 Promise.resolve({
@@ -586,30 +637,32 @@ describe('AccountApi', () => {
                 recvWindow: 5000.0,
             };
 
-            mockResponse = [
-                {
-                    symbol: 'LTCBTC',
-                    orderId: 1,
-                    orderListId: -1,
-                    clientOrderId: 'myOrder1',
-                    price: '0.1',
-                    origQty: '1.0',
-                    executedQty: '0.0',
-                    cummulativeQuoteQty: '0.0',
-                    status: 'NEW',
-                    timeInForce: 'GTC',
-                    type: 'LIMIT',
-                    side: 'BUY',
-                    stopPrice: '0.0',
-                    icebergQty: '0.0',
-                    time: 1499827319559,
-                    updateTime: 1499827319559,
-                    isWorking: true,
-                    origQuoteOrderQty: '0.000000',
-                    workingTime: 1499827319559,
-                    selfTradePreventionMode: 'NONE',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'LTCBTC',
+                        orderId: 1,
+                        orderListId: -1,
+                        clientOrderId: 'myOrder1',
+                        price: '0.1',
+                        origQty: '1.0',
+                        executedQty: '0.0',
+                        cummulativeQuoteQty: '0.0',
+                        status: 'NEW',
+                        timeInForce: 'GTC',
+                        type: 'LIMIT',
+                        side: 'BUY',
+                        stopPrice: '0.0',
+                        icebergQty: '0.0',
+                        time: 1499827319559,
+                        updateTime: 1499827319559,
+                        isWorking: true,
+                        origQuoteOrderQty: '0.000000',
+                        workingTime: 1499827319559,
+                        selfTradePreventionMode: 'NONE',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getOpenOrders').mockReturnValue(
                 Promise.resolve({
@@ -647,28 +700,30 @@ describe('AccountApi', () => {
                 symbol: 'BNBUSDT',
             };
 
-            mockResponse = {
-                symbol: 'LTCBTC',
-                orderId: 1,
-                orderListId: -1,
-                clientOrderId: 'myOrder1',
-                price: '0.1',
-                origQty: '1.0',
-                executedQty: '0.0',
-                cummulativeQuoteQty: '0.0',
-                status: 'NEW',
-                timeInForce: 'GTC',
-                type: 'LIMIT',
-                side: 'BUY',
-                stopPrice: '0.0',
-                icebergQty: '0.0',
-                time: 1499827319559,
-                updateTime: 1499827319559,
-                isWorking: true,
-                workingTime: 1499827319559,
-                origQuoteOrderQty: '0.000000',
-                selfTradePreventionMode: 'NONE',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    symbol: 'LTCBTC',
+                    orderId: 1,
+                    orderListId: -1,
+                    clientOrderId: 'myOrder1',
+                    price: '0.1',
+                    origQty: '1.0',
+                    executedQty: '0.0',
+                    cummulativeQuoteQty: '0.0',
+                    status: 'NEW',
+                    timeInForce: 'GTC',
+                    type: 'LIMIT',
+                    side: 'BUY',
+                    stopPrice: '0.0',
+                    icebergQty: '0.0',
+                    time: 1499827319559,
+                    updateTime: 1499827319559,
+                    isWorking: true,
+                    workingTime: 1499827319559,
+                    origQuoteOrderQty: '0.000000',
+                    selfTradePreventionMode: 'NONE',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getOrder').mockReturnValue(
                 Promise.resolve({
@@ -692,28 +747,30 @@ describe('AccountApi', () => {
                 recvWindow: 5000.0,
             };
 
-            mockResponse = {
-                symbol: 'LTCBTC',
-                orderId: 1,
-                orderListId: -1,
-                clientOrderId: 'myOrder1',
-                price: '0.1',
-                origQty: '1.0',
-                executedQty: '0.0',
-                cummulativeQuoteQty: '0.0',
-                status: 'NEW',
-                timeInForce: 'GTC',
-                type: 'LIMIT',
-                side: 'BUY',
-                stopPrice: '0.0',
-                icebergQty: '0.0',
-                time: 1499827319559,
-                updateTime: 1499827319559,
-                isWorking: true,
-                workingTime: 1499827319559,
-                origQuoteOrderQty: '0.000000',
-                selfTradePreventionMode: 'NONE',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    symbol: 'LTCBTC',
+                    orderId: 1,
+                    orderListId: -1,
+                    clientOrderId: 'myOrder1',
+                    price: '0.1',
+                    origQty: '1.0',
+                    executedQty: '0.0',
+                    cummulativeQuoteQty: '0.0',
+                    status: 'NEW',
+                    timeInForce: 'GTC',
+                    type: 'LIMIT',
+                    side: 'BUY',
+                    stopPrice: '0.0',
+                    icebergQty: '0.0',
+                    time: 1499827319559,
+                    updateTime: 1499827319559,
+                    isWorking: true,
+                    workingTime: 1499827319559,
+                    origQuoteOrderQty: '0.000000',
+                    selfTradePreventionMode: 'NONE',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getOrder').mockReturnValue(
                 Promise.resolve({
@@ -763,19 +820,21 @@ describe('AccountApi', () => {
 
     describe('getOrderList()', () => {
         it('should execute getOrderList() successfully with required parameters only', async () => {
-            mockResponse = {
-                orderListId: 27,
-                contingencyType: 'OCO',
-                listStatusType: 'EXEC_STARTED',
-                listOrderStatus: 'EXECUTING',
-                listClientOrderId: 'h2USkA5YQpaXHPIrkd96xE',
-                transactionTime: 1565245656253,
-                symbol: 'LTCBTC',
-                orders: [
-                    { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'ARzZ9I00CPM8i3NhmU9Ega' },
-                    { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'qD1gy3kc3Gx0rihm9Y3xwS' },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    orderListId: 27,
+                    contingencyType: 'OCO',
+                    listStatusType: 'EXEC_STARTED',
+                    listOrderStatus: 'EXECUTING',
+                    listClientOrderId: 'h2USkA5YQpaXHPIrkd96xE',
+                    transactionTime: 1565245656253,
+                    symbol: 'LTCBTC',
+                    orders: [
+                        { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'ARzZ9I00CPM8i3NhmU9Ega' },
+                        { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'qD1gy3kc3Gx0rihm9Y3xwS' },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'getOrderList').mockReturnValue(
                 Promise.resolve({
@@ -798,19 +857,21 @@ describe('AccountApi', () => {
                 recvWindow: 5000.0,
             };
 
-            mockResponse = {
-                orderListId: 27,
-                contingencyType: 'OCO',
-                listStatusType: 'EXEC_STARTED',
-                listOrderStatus: 'EXECUTING',
-                listClientOrderId: 'h2USkA5YQpaXHPIrkd96xE',
-                transactionTime: 1565245656253,
-                symbol: 'LTCBTC',
-                orders: [
-                    { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'ARzZ9I00CPM8i3NhmU9Ega' },
-                    { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'qD1gy3kc3Gx0rihm9Y3xwS' },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    orderListId: 27,
+                    contingencyType: 'OCO',
+                    listStatusType: 'EXEC_STARTED',
+                    listOrderStatus: 'EXECUTING',
+                    listClientOrderId: 'h2USkA5YQpaXHPIrkd96xE',
+                    transactionTime: 1565245656253,
+                    symbol: 'LTCBTC',
+                    orders: [
+                        { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'ARzZ9I00CPM8i3NhmU9Ega' },
+                        { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'qD1gy3kc3Gx0rihm9Y3xwS' },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'getOrderList').mockReturnValue(
                 Promise.resolve({
@@ -848,24 +909,26 @@ describe('AccountApi', () => {
                 symbol: 'BNBUSDT',
             };
 
-            mockResponse = [
-                {
-                    symbol: 'BTCUSDT',
-                    allocationId: 0,
-                    allocationType: 'SOR',
-                    orderId: 1,
-                    orderListId: -1,
-                    price: '1.00000000',
-                    qty: '5.00000000',
-                    quoteQty: '5.00000000',
-                    commission: '0.00000000',
-                    commissionAsset: 'BTC',
-                    time: 1687506878118,
-                    isBuyer: true,
-                    isMaker: false,
-                    isAllocator: false,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BTCUSDT',
+                        allocationId: 0,
+                        allocationType: 'SOR',
+                        orderId: 1,
+                        orderListId: -1,
+                        price: '1.00000000',
+                        qty: '5.00000000',
+                        quoteQty: '5.00000000',
+                        commission: '0.00000000',
+                        commissionAsset: 'BTC',
+                        time: 1687506878118,
+                        isBuyer: true,
+                        isMaker: false,
+                        isAllocator: false,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'myAllocations').mockReturnValue(
                 Promise.resolve({
@@ -892,24 +955,26 @@ describe('AccountApi', () => {
                 recvWindow: 5000.0,
             };
 
-            mockResponse = [
-                {
-                    symbol: 'BTCUSDT',
-                    allocationId: 0,
-                    allocationType: 'SOR',
-                    orderId: 1,
-                    orderListId: -1,
-                    price: '1.00000000',
-                    qty: '5.00000000',
-                    quoteQty: '5.00000000',
-                    commission: '0.00000000',
-                    commissionAsset: 'BTC',
-                    time: 1687506878118,
-                    isBuyer: true,
-                    isMaker: false,
-                    isAllocator: false,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BTCUSDT',
+                        allocationId: 0,
+                        allocationType: 'SOR',
+                        orderId: 1,
+                        orderListId: -1,
+                        price: '1.00000000',
+                        qty: '5.00000000',
+                        quoteQty: '5.00000000',
+                        commission: '0.00000000',
+                        commissionAsset: 'BTC',
+                        time: 1687506878118,
+                        isBuyer: true,
+                        isMaker: false,
+                        isAllocator: false,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'myAllocations').mockReturnValue(
                 Promise.resolve({
@@ -963,28 +1028,32 @@ describe('AccountApi', () => {
                 symbol: 'BNBUSDT',
             };
 
-            mockResponse = {
-                exchangeFilters: [{ filterType: 'EXCHANGE_MAX_NUM_ORDERS', maxNumOrders: 1000 }],
-                symbolFilters: [{ filterType: 'MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 }],
-                assetFilters: [
-                    { filterType: 'MAX_ASSET', asset: 'JPY', limit: '1000000.00000000' },
-                ],
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                    },
-                    { rateLimitType: 'ORDERS', interval: 'DAY', intervalNum: 1, limit: 160000 },
-                    {
-                        rateLimitType: 'RAW_REQUESTS',
-                        interval: 'MINUTE',
-                        intervalNum: 5,
-                        limit: 61000,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    exchangeFilters: [
+                        { filterType: 'EXCHANGE_MAX_NUM_ORDERS', maxNumOrders: 1000 },
+                    ],
+                    symbolFilters: [{ filterType: 'MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 }],
+                    assetFilters: [
+                        { filterType: 'MAX_ASSET', asset: 'JPY', limit: '1000000.00000000' },
+                    ],
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                        },
+                        { rateLimitType: 'ORDERS', interval: 'DAY', intervalNum: 1, limit: 160000 },
+                        {
+                            rateLimitType: 'RAW_REQUESTS',
+                            interval: 'MINUTE',
+                            intervalNum: 5,
+                            limit: 61000,
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'myFilters').mockReturnValue(
                 Promise.resolve({
@@ -1006,28 +1075,32 @@ describe('AccountApi', () => {
                 recvWindow: 5000.0,
             };
 
-            mockResponse = {
-                exchangeFilters: [{ filterType: 'EXCHANGE_MAX_NUM_ORDERS', maxNumOrders: 1000 }],
-                symbolFilters: [{ filterType: 'MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 }],
-                assetFilters: [
-                    { filterType: 'MAX_ASSET', asset: 'JPY', limit: '1000000.00000000' },
-                ],
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                    },
-                    { rateLimitType: 'ORDERS', interval: 'DAY', intervalNum: 1, limit: 160000 },
-                    {
-                        rateLimitType: 'RAW_REQUESTS',
-                        interval: 'MINUTE',
-                        intervalNum: 5,
-                        limit: 61000,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    exchangeFilters: [
+                        { filterType: 'EXCHANGE_MAX_NUM_ORDERS', maxNumOrders: 1000 },
+                    ],
+                    symbolFilters: [{ filterType: 'MAX_NUM_ORDER_LISTS', maxNumOrderLists: 20 }],
+                    assetFilters: [
+                        { filterType: 'MAX_ASSET', asset: 'JPY', limit: '1000000.00000000' },
+                    ],
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                        },
+                        { rateLimitType: 'ORDERS', interval: 'DAY', intervalNum: 1, limit: 160000 },
+                        {
+                            rateLimitType: 'RAW_REQUESTS',
+                            interval: 'MINUTE',
+                            intervalNum: 5,
+                            limit: 61000,
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'myFilters').mockReturnValue(
                 Promise.resolve({
@@ -1081,20 +1154,22 @@ describe('AccountApi', () => {
                 symbol: 'BNBUSDT',
             };
 
-            mockResponse = [
-                {
-                    symbol: 'BTCUSDT',
-                    preventedMatchId: 1,
-                    takerOrderId: 5,
-                    makerSymbol: 'BTCUSDT',
-                    makerOrderId: 3,
-                    tradeGroupId: 1,
-                    selfTradePreventionMode: 'EXPIRE_MAKER',
-                    price: '1.100000',
-                    makerPreventedQuantity: '1.300000',
-                    transactTime: 1669101687094,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BTCUSDT',
+                        preventedMatchId: 1,
+                        takerOrderId: 5,
+                        makerSymbol: 'BTCUSDT',
+                        makerOrderId: 3,
+                        tradeGroupId: 1,
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
+                        price: '1.100000',
+                        makerPreventedQuantity: '1.300000',
+                        transactTime: 1669101687094,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'myPreventedMatches').mockReturnValue(
                 Promise.resolve({
@@ -1120,20 +1195,22 @@ describe('AccountApi', () => {
                 recvWindow: 5000.0,
             };
 
-            mockResponse = [
-                {
-                    symbol: 'BTCUSDT',
-                    preventedMatchId: 1,
-                    takerOrderId: 5,
-                    makerSymbol: 'BTCUSDT',
-                    makerOrderId: 3,
-                    tradeGroupId: 1,
-                    selfTradePreventionMode: 'EXPIRE_MAKER',
-                    price: '1.100000',
-                    makerPreventedQuantity: '1.300000',
-                    transactTime: 1669101687094,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BTCUSDT',
+                        preventedMatchId: 1,
+                        takerOrderId: 5,
+                        makerSymbol: 'BTCUSDT',
+                        makerOrderId: 3,
+                        tradeGroupId: 1,
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
+                        price: '1.100000',
+                        makerPreventedQuantity: '1.300000',
+                        transactTime: 1669101687094,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'myPreventedMatches').mockReturnValue(
                 Promise.resolve({
@@ -1187,23 +1264,25 @@ describe('AccountApi', () => {
                 symbol: 'BNBUSDT',
             };
 
-            mockResponse = [
-                {
-                    symbol: 'BNBBTC',
-                    id: 28457,
-                    orderId: 100234,
-                    orderListId: -1,
-                    price: '4.00000100',
-                    qty: '12.00000000',
-                    quoteQty: '48.000012',
-                    commission: '10.10000000',
-                    commissionAsset: 'BNB',
-                    time: 1499865549590,
-                    isBuyer: true,
-                    isMaker: false,
-                    isBestMatch: true,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BNBBTC',
+                        id: 28457,
+                        orderId: 100234,
+                        orderListId: -1,
+                        price: '4.00000100',
+                        qty: '12.00000000',
+                        quoteQty: '48.000012',
+                        commission: '10.10000000',
+                        commissionAsset: 'BNB',
+                        time: 1499865549590,
+                        isBuyer: true,
+                        isMaker: false,
+                        isBestMatch: true,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'myTrades').mockReturnValue(
                 Promise.resolve({
@@ -1230,23 +1309,25 @@ describe('AccountApi', () => {
                 recvWindow: 5000.0,
             };
 
-            mockResponse = [
-                {
-                    symbol: 'BNBBTC',
-                    id: 28457,
-                    orderId: 100234,
-                    orderListId: -1,
-                    price: '4.00000100',
-                    qty: '12.00000000',
-                    quoteQty: '48.000012',
-                    commission: '10.10000000',
-                    commissionAsset: 'BNB',
-                    time: 1499865549590,
-                    isBuyer: true,
-                    isMaker: false,
-                    isBestMatch: true,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BNBBTC',
+                        id: 28457,
+                        orderId: 100234,
+                        orderListId: -1,
+                        price: '4.00000100',
+                        qty: '12.00000000',
+                        quoteQty: '48.000012',
+                        commission: '10.10000000',
+                        commissionAsset: 'BNB',
+                        time: 1499865549590,
+                        isBuyer: true,
+                        isMaker: false,
+                        isBestMatch: true,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'myTrades').mockReturnValue(
                 Promise.resolve({
@@ -1296,21 +1377,31 @@ describe('AccountApi', () => {
 
     describe('openOrderList()', () => {
         it('should execute openOrderList() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    orderListId: 31,
-                    contingencyType: 'OCO',
-                    listStatusType: 'EXEC_STARTED',
-                    listOrderStatus: 'EXECUTING',
-                    listClientOrderId: 'wuB13fmulKj3YjdqWEcsnp',
-                    transactionTime: 1565246080644,
-                    symbol: 'LTCBTC',
-                    orders: [
-                        { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'Cv1SnyPD3qhqpbjpYEHbd2' },
-                        { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'r3EH2N76dHfLoSZWIUw1bT' },
-                    ],
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        orderListId: 31,
+                        contingencyType: 'OCO',
+                        listStatusType: 'EXEC_STARTED',
+                        listOrderStatus: 'EXECUTING',
+                        listClientOrderId: 'wuB13fmulKj3YjdqWEcsnp',
+                        transactionTime: 1565246080644,
+                        symbol: 'LTCBTC',
+                        orders: [
+                            {
+                                symbol: 'LTCBTC',
+                                orderId: 5,
+                                clientOrderId: 'Cv1SnyPD3qhqpbjpYEHbd2',
+                            },
+                            {
+                                symbol: 'LTCBTC',
+                                orderId: 4,
+                                clientOrderId: 'r3EH2N76dHfLoSZWIUw1bT',
+                            },
+                        ],
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'openOrderList').mockReturnValue(
                 Promise.resolve({
@@ -1331,21 +1422,31 @@ describe('AccountApi', () => {
                 recvWindow: 5000.0,
             };
 
-            mockResponse = [
-                {
-                    orderListId: 31,
-                    contingencyType: 'OCO',
-                    listStatusType: 'EXEC_STARTED',
-                    listOrderStatus: 'EXECUTING',
-                    listClientOrderId: 'wuB13fmulKj3YjdqWEcsnp',
-                    transactionTime: 1565246080644,
-                    symbol: 'LTCBTC',
-                    orders: [
-                        { symbol: 'LTCBTC', orderId: 5, clientOrderId: 'Cv1SnyPD3qhqpbjpYEHbd2' },
-                        { symbol: 'LTCBTC', orderId: 4, clientOrderId: 'r3EH2N76dHfLoSZWIUw1bT' },
-                    ],
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        orderListId: 31,
+                        contingencyType: 'OCO',
+                        listStatusType: 'EXEC_STARTED',
+                        listOrderStatus: 'EXECUTING',
+                        listClientOrderId: 'wuB13fmulKj3YjdqWEcsnp',
+                        transactionTime: 1565246080644,
+                        symbol: 'LTCBTC',
+                        orders: [
+                            {
+                                symbol: 'LTCBTC',
+                                orderId: 5,
+                                clientOrderId: 'Cv1SnyPD3qhqpbjpYEHbd2',
+                            },
+                            {
+                                symbol: 'LTCBTC',
+                                orderId: 4,
+                                clientOrderId: 'r3EH2N76dHfLoSZWIUw1bT',
+                            },
+                        ],
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'openOrderList').mockReturnValue(
                 Promise.resolve({
@@ -1384,28 +1485,30 @@ describe('AccountApi', () => {
                 orderId: 1,
             };
 
-            mockResponse = [
-                {
-                    symbol: 'BTCUSDT',
-                    orderId: 9,
-                    executionId: 22,
-                    origClientOrderId: 'W0fJ9fiLKHOJutovPK3oJp',
-                    newClientOrderId: 'UQ1Np3bmQ71jJzsSDW9Vpi',
-                    origQty: '5.00000000',
-                    newQty: '4.00000000',
-                    time: 1741669661670,
-                },
-                {
-                    symbol: 'BTCUDST',
-                    orderId: 9,
-                    executionId: 25,
-                    origClientOrderId: 'UQ1Np3bmQ71jJzsSDW9Vpi',
-                    newClientOrderId: '5uS0r35ohuQyDlCzZuYXq2',
-                    origQty: '4.00000000',
-                    newQty: '3.00000000',
-                    time: 1741672924895,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BTCUSDT',
+                        orderId: 9,
+                        executionId: 22,
+                        origClientOrderId: 'W0fJ9fiLKHOJutovPK3oJp',
+                        newClientOrderId: 'UQ1Np3bmQ71jJzsSDW9Vpi',
+                        origQty: '5.00000000',
+                        newQty: '4.00000000',
+                        time: 1741669661670,
+                    },
+                    {
+                        symbol: 'BTCUDST',
+                        orderId: 9,
+                        executionId: 25,
+                        origClientOrderId: 'UQ1Np3bmQ71jJzsSDW9Vpi',
+                        newClientOrderId: '5uS0r35ohuQyDlCzZuYXq2',
+                        origQty: '4.00000000',
+                        newQty: '3.00000000',
+                        time: 1741672924895,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'orderAmendments').mockReturnValue(
                 Promise.resolve({
@@ -1430,28 +1533,30 @@ describe('AccountApi', () => {
                 recvWindow: 5000.0,
             };
 
-            mockResponse = [
-                {
-                    symbol: 'BTCUSDT',
-                    orderId: 9,
-                    executionId: 22,
-                    origClientOrderId: 'W0fJ9fiLKHOJutovPK3oJp',
-                    newClientOrderId: 'UQ1Np3bmQ71jJzsSDW9Vpi',
-                    origQty: '5.00000000',
-                    newQty: '4.00000000',
-                    time: 1741669661670,
-                },
-                {
-                    symbol: 'BTCUDST',
-                    orderId: 9,
-                    executionId: 25,
-                    origClientOrderId: 'UQ1Np3bmQ71jJzsSDW9Vpi',
-                    newClientOrderId: '5uS0r35ohuQyDlCzZuYXq2',
-                    origQty: '4.00000000',
-                    newQty: '3.00000000',
-                    time: 1741672924895,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BTCUSDT',
+                        orderId: 9,
+                        executionId: 22,
+                        origClientOrderId: 'W0fJ9fiLKHOJutovPK3oJp',
+                        newClientOrderId: 'UQ1Np3bmQ71jJzsSDW9Vpi',
+                        origQty: '5.00000000',
+                        newQty: '4.00000000',
+                        time: 1741669661670,
+                    },
+                    {
+                        symbol: 'BTCUDST',
+                        orderId: 9,
+                        executionId: 25,
+                        origClientOrderId: 'UQ1Np3bmQ71jJzsSDW9Vpi',
+                        newClientOrderId: '5uS0r35ohuQyDlCzZuYXq2',
+                        origQty: '4.00000000',
+                        newQty: '3.00000000',
+                        time: 1741672924895,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'orderAmendments').mockReturnValue(
                 Promise.resolve({
@@ -1516,22 +1621,24 @@ describe('AccountApi', () => {
 
     describe('rateLimitOrder()', () => {
         it('should execute rateLimitOrder() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    rateLimitType: 'ORDERS',
-                    interval: 'SECOND',
-                    intervalNum: 10,
-                    limit: 50,
-                    count: 0,
-                },
-                {
-                    rateLimitType: 'ORDERS',
-                    interval: 'DAY',
-                    intervalNum: 1,
-                    limit: 160000,
-                    count: 0,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        rateLimitType: 'ORDERS',
+                        interval: 'SECOND',
+                        intervalNum: 10,
+                        limit: 50,
+                        count: 0,
+                    },
+                    {
+                        rateLimitType: 'ORDERS',
+                        interval: 'DAY',
+                        intervalNum: 1,
+                        limit: 160000,
+                        count: 0,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'rateLimitOrder').mockReturnValue(
                 Promise.resolve({
@@ -1552,22 +1659,24 @@ describe('AccountApi', () => {
                 recvWindow: 5000.0,
             };
 
-            mockResponse = [
-                {
-                    rateLimitType: 'ORDERS',
-                    interval: 'SECOND',
-                    intervalNum: 10,
-                    limit: 50,
-                    count: 0,
-                },
-                {
-                    rateLimitType: 'ORDERS',
-                    interval: 'DAY',
-                    intervalNum: 1,
-                    limit: 160000,
-                    count: 0,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        rateLimitType: 'ORDERS',
+                        interval: 'SECOND',
+                        intervalNum: 10,
+                        limit: 50,
+                        count: 0,
+                    },
+                    {
+                        rateLimitType: 'ORDERS',
+                        interval: 'DAY',
+                        intervalNum: 1,
+                        limit: 160000,
+                        count: 0,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'rateLimitOrder').mockReturnValue(
                 Promise.resolve({

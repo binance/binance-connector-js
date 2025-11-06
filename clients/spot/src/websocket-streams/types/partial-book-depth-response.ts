@@ -26,10 +26,10 @@
 export interface PartialBookDepthResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PartialBookDepthResponse
      */
-    lastUpdateId?: number;
+    lastUpdateId?: number | bigint;
     /**
      *
      * @type {Array<Array<string>>}

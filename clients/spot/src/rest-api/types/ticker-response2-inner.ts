@@ -86,32 +86,32 @@ export interface TickerResponse2Inner {
     quoteVolume?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TickerResponse2Inner
      */
-    openTime?: number;
+    openTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TickerResponse2Inner
      */
-    closeTime?: number;
+    closeTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TickerResponse2Inner
      */
-    firstId?: number;
+    firstId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TickerResponse2Inner
      */
-    lastId?: number;
+    lastId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TickerResponse2Inner
      */
-    count?: number;
+    count?: number | bigint;
 }

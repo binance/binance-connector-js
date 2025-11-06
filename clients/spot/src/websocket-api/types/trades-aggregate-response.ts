@@ -40,10 +40,10 @@ export interface TradesAggregateResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradesAggregateResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {Array<TradesAggregateResponseResultInner>}

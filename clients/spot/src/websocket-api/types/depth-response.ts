@@ -40,10 +40,10 @@ export interface DepthResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DepthResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {DepthResponseResult}

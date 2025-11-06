@@ -34,10 +34,10 @@ import type { OrderOcoResponseOrdersInner } from './order-oco-response-orders-in
 export interface OrderOcoResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderOcoResponse
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -64,10 +64,10 @@ export interface OrderOcoResponse {
     listClientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderOcoResponse
      */
-    transactionTime?: number;
+    transactionTime?: number | bigint;
     /**
      *
      * @type {string}

@@ -26,8 +26,8 @@
 export interface EventStreamTerminated {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof EventStreamTerminated
      */
-    E?: number;
+    E?: number | bigint;
 }

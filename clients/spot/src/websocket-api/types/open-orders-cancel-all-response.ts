@@ -40,10 +40,10 @@ export interface OpenOrdersCancelAllResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OpenOrdersCancelAllResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {Array<OpenOrdersCancelAllResponseResultInner>}

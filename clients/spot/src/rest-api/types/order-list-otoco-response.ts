@@ -34,10 +34,10 @@ import type { OrderListOtocoResponseOrdersInner } from './order-list-otoco-respo
 export interface OrderListOtocoResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderListOtocoResponse
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -64,10 +64,10 @@ export interface OrderListOtocoResponse {
     listClientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderListOtocoResponse
      */
-    transactionTime?: number;
+    transactionTime?: number | bigint;
     /**
      *
      * @type {string}

@@ -26,8 +26,8 @@
 export interface SessionSubscriptionsResponseResultInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SessionSubscriptionsResponseResultInner
      */
-    subscriptionId?: number;
+    subscriptionId?: number | bigint;
 }

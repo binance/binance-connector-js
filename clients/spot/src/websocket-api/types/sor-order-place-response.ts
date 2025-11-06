@@ -40,10 +40,10 @@ export interface SorOrderPlaceResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SorOrderPlaceResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {Array<SorOrderPlaceResponseResultInner>}

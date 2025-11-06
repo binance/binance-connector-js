@@ -46,16 +46,16 @@ export interface OpenOrdersCancelAllResponseResultInner {
     origClientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OpenOrdersCancelAllResponseResultInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OpenOrdersCancelAllResponseResultInner
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -64,10 +64,10 @@ export interface OpenOrdersCancelAllResponseResultInner {
     clientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OpenOrdersCancelAllResponseResultInner
      */
-    transactTime?: number;
+    transactTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -130,16 +130,16 @@ export interface OpenOrdersCancelAllResponseResultInner {
     stopPrice?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OpenOrdersCancelAllResponseResultInner
      */
-    trailingDelta?: number;
+    trailingDelta?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OpenOrdersCancelAllResponseResultInner
      */
-    trailingTime?: number;
+    trailingTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -148,16 +148,16 @@ export interface OpenOrdersCancelAllResponseResultInner {
     icebergQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OpenOrdersCancelAllResponseResultInner
      */
-    strategyId?: number;
+    strategyId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OpenOrdersCancelAllResponseResultInner
      */
-    strategyType?: number;
+    strategyType?: number | bigint;
     /**
      *
      * @type {string}
@@ -190,10 +190,10 @@ export interface OpenOrdersCancelAllResponseResultInner {
     listClientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OpenOrdersCancelAllResponseResultInner
      */
-    transactionTime?: number;
+    transactionTime?: number | bigint;
     /**
      *
      * @type {Array<OpenOrdersCancelAllResponseResultInnerOrdersInner>}

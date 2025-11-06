@@ -32,8 +32,8 @@ export interface ExchangeMaxNumOrdersFilter {
     filterType?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExchangeMaxNumOrdersFilter
      */
-    maxNumOrders?: number;
+    maxNumOrders?: number | bigint;
 }

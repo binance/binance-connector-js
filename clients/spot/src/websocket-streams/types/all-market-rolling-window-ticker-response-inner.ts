@@ -32,10 +32,10 @@ export interface AllMarketRollingWindowTickerResponseInner {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllMarketRollingWindowTickerResponseInner
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}
@@ -98,32 +98,32 @@ export interface AllMarketRollingWindowTickerResponseInner {
     q?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllMarketRollingWindowTickerResponseInner
      */
-    O?: number;
+    O?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllMarketRollingWindowTickerResponseInner
      */
-    C?: number;
+    C?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllMarketRollingWindowTickerResponseInner
      */
-    F?: number;
+    F?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllMarketRollingWindowTickerResponseInner
      */
-    L?: number;
+    L?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllMarketRollingWindowTickerResponseInner
      */
-    n?: number;
+    n?: number | bigint;
 }

@@ -61,10 +61,10 @@ export interface OrderCancelReplaceResponse {
     newOrderResponse?: OrderCancelReplaceResponseNewOrderResponse;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderCancelReplaceResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}

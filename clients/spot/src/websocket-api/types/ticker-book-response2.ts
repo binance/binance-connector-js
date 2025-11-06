@@ -40,10 +40,10 @@ export interface TickerBookResponse2 {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TickerBookResponse2
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {Array<TickerBookResponse2ResultInner>}

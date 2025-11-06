@@ -40,10 +40,10 @@ export interface MyPreventedMatchesResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MyPreventedMatchesResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {Array<MyPreventedMatchesResponseResultInner>}

@@ -37,10 +37,10 @@ export interface SessionStatusResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SessionStatusResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {SessionStatusResponseResult}

@@ -38,20 +38,20 @@ export interface AccountRateLimitsOrdersResponseResultInner {
     interval?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountRateLimitsOrdersResponseResultInner
      */
-    intervalNum?: number;
+    intervalNum?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountRateLimitsOrdersResponseResultInner
      */
-    limit?: number;
+    limit?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountRateLimitsOrdersResponseResultInner
      */
-    count?: number;
+    count?: number | bigint;
 }

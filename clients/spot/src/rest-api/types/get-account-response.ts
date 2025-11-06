@@ -34,28 +34,28 @@ import type { GetAccountResponseCommissionRates } from './get-account-response-c
 export interface GetAccountResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetAccountResponse
      */
-    makerCommission?: number;
+    makerCommission?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetAccountResponse
      */
-    takerCommission?: number;
+    takerCommission?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetAccountResponse
      */
-    buyerCommission?: number;
+    buyerCommission?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetAccountResponse
      */
-    sellerCommission?: number;
+    sellerCommission?: number | bigint;
     /**
      *
      * @type {GetAccountResponseCommissionRates}
@@ -100,10 +100,10 @@ export interface GetAccountResponse {
     preventSor?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetAccountResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -124,8 +124,8 @@ export interface GetAccountResponse {
     permissions?: Array<string>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetAccountResponse
      */
-    uid?: number;
+    uid?: number | bigint;
 }

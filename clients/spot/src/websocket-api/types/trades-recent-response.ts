@@ -40,10 +40,10 @@ export interface TradesRecentResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradesRecentResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {Array<TradesRecentResponseResultInner>}

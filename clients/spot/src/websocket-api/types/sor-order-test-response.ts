@@ -40,10 +40,10 @@ export interface SorOrderTestResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SorOrderTestResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {SorOrderTestResponseResult}

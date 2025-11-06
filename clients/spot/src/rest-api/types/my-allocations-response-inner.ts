@@ -32,10 +32,10 @@ export interface MyAllocationsResponseInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MyAllocationsResponseInner
      */
-    allocationId?: number;
+    allocationId?: number | bigint;
     /**
      *
      * @type {string}
@@ -44,16 +44,16 @@ export interface MyAllocationsResponseInner {
     allocationType?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MyAllocationsResponseInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MyAllocationsResponseInner
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -86,10 +86,10 @@ export interface MyAllocationsResponseInner {
     commissionAsset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MyAllocationsResponseInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {boolean}

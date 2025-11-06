@@ -26,10 +26,10 @@
 export interface AvgPriceResponseResult {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AvgPriceResponseResult
      */
-    mins?: number;
+    mins?: number | bigint;
     /**
      *
      * @type {string}
@@ -38,8 +38,8 @@ export interface AvgPriceResponseResult {
     price?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AvgPriceResponseResult
      */
-    closeTime?: number;
+    closeTime?: number | bigint;
 }

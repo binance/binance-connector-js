@@ -40,10 +40,10 @@ export interface MyAllocationsResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MyAllocationsResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {Array<MyAllocationsResponseResultInner>}

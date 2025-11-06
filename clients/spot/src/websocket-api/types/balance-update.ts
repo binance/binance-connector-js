@@ -26,10 +26,10 @@
 export interface BalanceUpdate {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BalanceUpdate
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}
@@ -44,8 +44,8 @@ export interface BalanceUpdate {
     d?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BalanceUpdate
      */
-    T?: number;
+    T?: number | bigint;
 }

@@ -37,10 +37,10 @@ export interface SessionSubscriptionsResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SessionSubscriptionsResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {Array<SessionSubscriptionsResponseResultInner>}

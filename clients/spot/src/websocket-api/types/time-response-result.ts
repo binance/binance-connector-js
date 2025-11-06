@@ -26,8 +26,8 @@
 export interface TimeResponseResult {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TimeResponseResult
      */
-    serverTime?: number;
+    serverTime?: number | bigint;
 }

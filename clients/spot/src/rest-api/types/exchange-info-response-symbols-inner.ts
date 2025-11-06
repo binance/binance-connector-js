@@ -49,10 +49,10 @@ export interface ExchangeInfoResponseSymbolsInner {
     baseAsset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExchangeInfoResponseSymbolsInner
      */
-    baseAssetPrecision?: number;
+    baseAssetPrecision?: number | bigint;
     /**
      *
      * @type {string}
@@ -61,28 +61,28 @@ export interface ExchangeInfoResponseSymbolsInner {
     quoteAsset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExchangeInfoResponseSymbolsInner
      */
-    quotePrecision?: number;
+    quotePrecision?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExchangeInfoResponseSymbolsInner
      */
-    quoteAssetPrecision?: number;
+    quoteAssetPrecision?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExchangeInfoResponseSymbolsInner
      */
-    baseCommissionPrecision?: number;
+    baseCommissionPrecision?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExchangeInfoResponseSymbolsInner
      */
-    quoteCommissionPrecision?: number;
+    quoteCommissionPrecision?: number | bigint;
     /**
      *
      * @type {Array<string>}

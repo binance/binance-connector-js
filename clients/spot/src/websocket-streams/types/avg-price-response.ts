@@ -32,10 +32,10 @@ export interface AvgPriceResponse {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AvgPriceResponse
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}
@@ -56,8 +56,8 @@ export interface AvgPriceResponse {
     w?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AvgPriceResponse
      */
-    T?: number;
+    T?: number | bigint;
 }

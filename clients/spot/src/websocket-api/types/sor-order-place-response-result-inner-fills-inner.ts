@@ -56,14 +56,14 @@ export interface SorOrderPlaceResponseResultInnerFillsInner {
     commissionAsset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SorOrderPlaceResponseResultInnerFillsInner
      */
-    tradeId?: number;
+    tradeId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SorOrderPlaceResponseResultInnerFillsInner
      */
-    allocId?: number;
+    allocId?: number | bigint;
 }

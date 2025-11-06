@@ -31,10 +31,10 @@ import type { ListStatusOInner } from './list-status-oinner';
 export interface ListStatus {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ListStatus
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}
@@ -43,10 +43,10 @@ export interface ListStatus {
     s?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ListStatus
      */
-    g?: number;
+    g?: number | bigint;
     /**
      *
      * @type {string}
@@ -79,10 +79,10 @@ export interface ListStatus {
     C?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ListStatus
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {Array<ListStatusOInner>}

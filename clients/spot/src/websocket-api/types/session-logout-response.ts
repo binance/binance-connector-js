@@ -37,10 +37,10 @@ export interface SessionLogoutResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SessionLogoutResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {SessionLogoutResponseResult}

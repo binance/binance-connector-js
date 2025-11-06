@@ -34,10 +34,10 @@ import type { DeleteOrderListResponseOrdersInner } from './delete-order-list-res
 export interface DeleteOrderListResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DeleteOrderListResponse
      */
-    orderListId?: number;
+    orderListId?: number | bigint;
     /**
      *
      * @type {string}
@@ -64,10 +64,10 @@ export interface DeleteOrderListResponse {
     listClientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DeleteOrderListResponse
      */
-    transactionTime?: number;
+    transactionTime?: number | bigint;
     /**
      *
      * @type {string}

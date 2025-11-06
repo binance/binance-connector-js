@@ -40,10 +40,10 @@ export interface OrderListCancelResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderListCancelResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {OrderListCancelResponseResult}
