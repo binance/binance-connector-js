@@ -21,10 +21,10 @@
 export interface CancelOptionOrderResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelOptionOrderResponse
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -87,16 +87,16 @@ export interface CancelOptionOrderResponse {
     postOnly?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelOptionOrderResponse
      */
-    createDate?: number;
+    createDate?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelOptionOrderResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -123,16 +123,16 @@ export interface CancelOptionOrderResponse {
     clientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelOptionOrderResponse
      */
-    priceScale?: number;
+    priceScale?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelOptionOrderResponse
      */
-    quantityScale?: number;
+    quantityScale?: number | bigint;
     /**
      *
      * @type {string}

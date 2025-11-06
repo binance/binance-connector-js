@@ -21,10 +21,10 @@
 export interface QueryCurrentOpenOptionOrdersResponseInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -87,16 +87,16 @@ export interface QueryCurrentOpenOptionOrdersResponseInner {
     postOnly?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
-    createTime?: number;
+    createTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -117,16 +117,16 @@ export interface QueryCurrentOpenOptionOrdersResponseInner {
     clientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
-    priceScale?: number;
+    priceScale?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
-    quantityScale?: number;
+    quantityScale?: number | bigint;
     /**
      *
      * @type {string}

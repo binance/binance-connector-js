@@ -21,10 +21,10 @@
 export interface QuerySingleOrderResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySingleOrderResponse
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -87,16 +87,16 @@ export interface QuerySingleOrderResponse {
     postOnly?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySingleOrderResponse
      */
-    createTime?: number;
+    createTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySingleOrderResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -123,16 +123,16 @@ export interface QuerySingleOrderResponse {
     clientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySingleOrderResponse
      */
-    priceScale?: number;
+    priceScale?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuerySingleOrderResponse
      */
-    quantityScale?: number;
+    quantityScale?: number | bigint;
     /**
      *
      * @type {string}

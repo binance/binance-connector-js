@@ -27,16 +27,16 @@ export interface Ticker24HourResponse {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Ticker24HourResponse
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Ticker24HourResponse
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {string}
@@ -111,10 +111,10 @@ export interface Ticker24HourResponse {
     L?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Ticker24HourResponse
      */
-    n?: number;
+    n?: number | bigint;
     /**
      *
      * @type {string}

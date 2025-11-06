@@ -51,14 +51,14 @@ export interface OldTradesLookupResponseInner {
     quoteQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OldTradesLookupResponseInner
      */
-    side?: number;
+    side?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OldTradesLookupResponseInner
      */
-    time?: number;
+    time?: number | bigint;
 }

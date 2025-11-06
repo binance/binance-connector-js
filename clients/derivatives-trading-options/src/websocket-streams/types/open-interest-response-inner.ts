@@ -27,10 +27,10 @@ export interface OpenInterestResponseInner {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OpenInterestResponseInner
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}

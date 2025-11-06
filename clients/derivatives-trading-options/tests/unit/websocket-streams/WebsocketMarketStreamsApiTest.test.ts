@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import {
     ConfigurationWebsocketStreams,
     WebsocketStreamsBase,
@@ -39,7 +40,9 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = { e: 'index', E: 1661415480351, s: 'ETHUSDT', p: '1707.89008607' };
+            const mockResponse = JSONParse(
+                JSONStringify({ e: 'index', E: 1661415480351, s: 'ETHUSDT', p: '1707.89008607' })
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@index'.slice(1), params as unknown as Record<string, IndexPriceStreamsRequest>)}`,
@@ -57,14 +60,16 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = { e: 'index', E: 1661415480351, s: 'ETHUSDT', p: '1707.89008607' };
+            const mockResponse = JSONParse(
+                JSONStringify({ e: 'index', E: 1661415480351, s: 'ETHUSDT', p: '1707.89008607' })
+            );
 
             const stream = websocketStreamApi.indexPriceStreams(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/<symbol>@index'.slice(1),
                         params as unknown as Record<string, IndexPriceStreamsRequest>
@@ -102,29 +107,31 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: 'kline',
-                E: 1638747660000,
-                s: 'BTC-200630-9000-P',
-                k: {
-                    t: 1638747660000,
-                    T: 1638747719999,
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'kline',
+                    E: 1638747660000,
                     s: 'BTC-200630-9000-P',
-                    i: '1m',
-                    F: 0,
-                    L: 0,
-                    o: '1000',
-                    c: '1000',
-                    h: '1000',
-                    l: '1000',
-                    v: '0',
-                    n: 0,
-                    x: false,
-                    q: '0',
-                    V: '0',
-                    Q: '0',
-                },
-            };
+                    k: {
+                        t: 1638747660000,
+                        T: 1638747719999,
+                        s: 'BTC-200630-9000-P',
+                        i: '1m',
+                        F: 0,
+                        L: 0,
+                        o: '1000',
+                        c: '1000',
+                        h: '1000',
+                        l: '1000',
+                        v: '0',
+                        n: 0,
+                        x: false,
+                        q: '0',
+                        V: '0',
+                        Q: '0',
+                    },
+                })
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@kline_<interval>'.slice(1), params as unknown as Record<string, KlineCandlestickStreamsRequest>)}`,
@@ -143,36 +150,38 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: 'kline',
-                E: 1638747660000,
-                s: 'BTC-200630-9000-P',
-                k: {
-                    t: 1638747660000,
-                    T: 1638747719999,
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'kline',
+                    E: 1638747660000,
                     s: 'BTC-200630-9000-P',
-                    i: '1m',
-                    F: 0,
-                    L: 0,
-                    o: '1000',
-                    c: '1000',
-                    h: '1000',
-                    l: '1000',
-                    v: '0',
-                    n: 0,
-                    x: false,
-                    q: '0',
-                    V: '0',
-                    Q: '0',
-                },
-            };
+                    k: {
+                        t: 1638747660000,
+                        T: 1638747719999,
+                        s: 'BTC-200630-9000-P',
+                        i: '1m',
+                        F: 0,
+                        L: 0,
+                        o: '1000',
+                        c: '1000',
+                        h: '1000',
+                        l: '1000',
+                        v: '0',
+                        n: 0,
+                        x: false,
+                        q: '0',
+                        V: '0',
+                        Q: '0',
+                    },
+                })
+            );
 
             const stream = websocketStreamApi.klineCandlestickStreams(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/<symbol>@kline_<interval>'.slice(1),
                         params as unknown as Record<string, KlineCandlestickStreamsRequest>
@@ -227,10 +236,12 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = [
-                { e: 'markPrice', E: 1663684594227, s: 'ETH-220930-1500-C', mp: '30.3' },
-                { e: 'markPrice', E: 1663684594228, s: 'ETH-220923-1000-C', mp: '341.5' },
-            ];
+            const mockResponse = JSONParse(
+                JSONStringify([
+                    { e: 'markPrice', E: 1663684594227, s: 'ETH-220930-1500-C', mp: '30.3' },
+                    { e: 'markPrice', E: 1663684594228, s: 'ETH-220923-1000-C', mp: '341.5' },
+                ])
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/<underlyingAsset>@markPrice'.slice(1), params as unknown as Record<string, MarkPriceRequest>)}`,
@@ -248,17 +259,19 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = [
-                { e: 'markPrice', E: 1663684594227, s: 'ETH-220930-1500-C', mp: '30.3' },
-                { e: 'markPrice', E: 1663684594228, s: 'ETH-220923-1000-C', mp: '341.5' },
-            ];
+            const mockResponse = JSONParse(
+                JSONStringify([
+                    { e: 'markPrice', E: 1663684594227, s: 'ETH-220930-1500-C', mp: '30.3' },
+                    { e: 'markPrice', E: 1663684594228, s: 'ETH-220923-1000-C', mp: '341.5' },
+                ])
+            );
 
             const stream = websocketStreamApi.markPrice(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/<underlyingAsset>@markPrice'.slice(1),
                         params as unknown as Record<string, MarkPriceRequest>
@@ -294,18 +307,20 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: 'OPTION_PAIR',
-                E: 1668573571842,
-                u: 'BTCUSDT',
-                qa: 'USDT',
-                s: 'BTC-221116-21000-C',
-                unit: 1,
-                mq: '0.01',
-                d: 'CALL',
-                sp: '21000',
-                ed: 1668585600000,
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'OPTION_PAIR',
+                    E: 1668573571842,
+                    u: 'BTCUSDT',
+                    qa: 'USDT',
+                    s: 'BTC-221116-21000-C',
+                    unit: 1,
+                    mq: '0.01',
+                    d: 'CALL',
+                    sp: '21000',
+                    ed: 1668585600000,
+                })
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/option_pair'.slice(1), params as unknown as Record<string, NewSymbolInfoRequest>)}`,
@@ -322,25 +337,27 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: 'OPTION_PAIR',
-                E: 1668573571842,
-                u: 'BTCUSDT',
-                qa: 'USDT',
-                s: 'BTC-221116-21000-C',
-                unit: 1,
-                mq: '0.01',
-                d: 'CALL',
-                sp: '21000',
-                ed: 1668585600000,
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'OPTION_PAIR',
+                    E: 1668573571842,
+                    u: 'BTCUSDT',
+                    qa: 'USDT',
+                    s: 'BTC-221116-21000-C',
+                    unit: 1,
+                    mq: '0.01',
+                    d: 'CALL',
+                    sp: '21000',
+                    ed: 1668585600000,
+                })
+            );
 
             const stream = websocketStreamApi.newSymbolInfo(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/option_pair'.slice(1),
                         params as unknown as Record<string, NewSymbolInfoRequest>
@@ -362,15 +379,17 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = [
-                {
-                    e: 'openInterest',
-                    E: 1668759300045,
-                    s: 'ETH-221125-2700-C',
-                    o: '1580.87',
-                    h: '1912992.178168204',
-                },
-            ];
+            const mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        e: 'openInterest',
+                        E: 1668759300045,
+                        s: 'ETH-221125-2700-C',
+                        o: '1580.87',
+                        h: '1912992.178168204',
+                    },
+                ])
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/<underlyingAsset>@openInterest@<expirationDate>'.slice(1), params as unknown as Record<string, OpenInterestRequest>)}`,
@@ -389,22 +408,24 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = [
-                {
-                    e: 'openInterest',
-                    E: 1668759300045,
-                    s: 'ETH-221125-2700-C',
-                    o: '1580.87',
-                    h: '1912992.178168204',
-                },
-            ];
+            const mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        e: 'openInterest',
+                        E: 1668759300045,
+                        s: 'ETH-221125-2700-C',
+                        o: '1580.87',
+                        h: '1912992.178168204',
+                    },
+                ])
+            );
 
             const stream = websocketStreamApi.openInterest(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/<underlyingAsset>@openInterest@<expirationDate>'.slice(1),
                         params as unknown as Record<string, OpenInterestRequest>
@@ -461,20 +482,22 @@ describe('WebsocketMarketStreamsApi', () => {
                 updateSpeed: 'updateSpeed_example',
             };
 
-            const mockResponse = {
-                e: 'depth',
-                E: 1591695934010,
-                T: 1591695934000,
-                s: 'BTC-200630-9000-P',
-                u: 162,
-                pu: 162,
-                b: [
-                    ['200', '3'],
-                    ['101', '1'],
-                    ['100', '2'],
-                ],
-                a: [['1000', '89']],
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'depth',
+                    E: 1591695934010,
+                    T: 1591695934000,
+                    s: 'BTC-200630-9000-P',
+                    u: 162,
+                    pu: 162,
+                    b: [
+                        ['200', '3'],
+                        ['101', '1'],
+                        ['100', '2'],
+                    ],
+                    a: [['1000', '89']],
+                })
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@depth<levels>@<updateSpeed>'.slice(1), params as unknown as Record<string, PartialBookDepthStreamsRequest>)}`,
@@ -494,27 +517,29 @@ describe('WebsocketMarketStreamsApi', () => {
                 updateSpeed: 'updateSpeed_example',
             };
 
-            const mockResponse = {
-                e: 'depth',
-                E: 1591695934010,
-                T: 1591695934000,
-                s: 'BTC-200630-9000-P',
-                u: 162,
-                pu: 162,
-                b: [
-                    ['200', '3'],
-                    ['101', '1'],
-                    ['100', '2'],
-                ],
-                a: [['1000', '89']],
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'depth',
+                    E: 1591695934010,
+                    T: 1591695934000,
+                    s: 'BTC-200630-9000-P',
+                    u: 162,
+                    pu: 162,
+                    b: [
+                        ['200', '3'],
+                        ['101', '1'],
+                        ['100', '2'],
+                    ],
+                    a: [['1000', '89']],
+                })
+            );
 
             const stream = websocketStreamApi.partialBookDepthStreams(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/<symbol>@depth<levels>@<updateSpeed>'.slice(1),
                         params as unknown as Record<string, PartialBookDepthStreamsRequest>
@@ -569,39 +594,41 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: '24hrTicker',
-                E: 1657706425200,
-                T: 1657706425220,
-                s: 'BTC-220930-18000-C',
-                o: '2000',
-                h: '2020',
-                l: '2000',
-                c: '2020',
-                V: '1.42',
-                A: '2841',
-                P: '0.01',
-                p: '20',
-                Q: '0.01',
-                F: '27',
-                L: '48',
-                n: 22,
-                bo: '2012',
-                ao: '2020',
-                bq: '4.9',
-                aq: '0.03',
-                b: '0.1202',
-                a: '0.1318',
-                d: '0.98911',
-                t: '-0.16961',
-                g: '0.00004',
-                v: '2.66584',
-                vo: '0.10001',
-                mp: '2003.5102',
-                hl: '2023.511',
-                ll: '1983.511',
-                eep: '0',
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: '24hrTicker',
+                    E: 1657706425200,
+                    T: 1657706425220,
+                    s: 'BTC-220930-18000-C',
+                    o: '2000',
+                    h: '2020',
+                    l: '2000',
+                    c: '2020',
+                    V: '1.42',
+                    A: '2841',
+                    P: '0.01',
+                    p: '20',
+                    Q: '0.01',
+                    F: '27',
+                    L: '48',
+                    n: 22,
+                    bo: '2012',
+                    ao: '2020',
+                    bq: '4.9',
+                    aq: '0.03',
+                    b: '0.1202',
+                    a: '0.1318',
+                    d: '0.98911',
+                    t: '-0.16961',
+                    g: '0.00004',
+                    v: '2.66584',
+                    vo: '0.10001',
+                    mp: '2003.5102',
+                    hl: '2023.511',
+                    ll: '1983.511',
+                    eep: '0',
+                })
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@ticker'.slice(1), params as unknown as Record<string, Ticker24HourRequest>)}`,
@@ -619,46 +646,48 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: '24hrTicker',
-                E: 1657706425200,
-                T: 1657706425220,
-                s: 'BTC-220930-18000-C',
-                o: '2000',
-                h: '2020',
-                l: '2000',
-                c: '2020',
-                V: '1.42',
-                A: '2841',
-                P: '0.01',
-                p: '20',
-                Q: '0.01',
-                F: '27',
-                L: '48',
-                n: 22,
-                bo: '2012',
-                ao: '2020',
-                bq: '4.9',
-                aq: '0.03',
-                b: '0.1202',
-                a: '0.1318',
-                d: '0.98911',
-                t: '-0.16961',
-                g: '0.00004',
-                v: '2.66584',
-                vo: '0.10001',
-                mp: '2003.5102',
-                hl: '2023.511',
-                ll: '1983.511',
-                eep: '0',
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: '24hrTicker',
+                    E: 1657706425200,
+                    T: 1657706425220,
+                    s: 'BTC-220930-18000-C',
+                    o: '2000',
+                    h: '2020',
+                    l: '2000',
+                    c: '2020',
+                    V: '1.42',
+                    A: '2841',
+                    P: '0.01',
+                    p: '20',
+                    Q: '0.01',
+                    F: '27',
+                    L: '48',
+                    n: 22,
+                    bo: '2012',
+                    ao: '2020',
+                    bq: '4.9',
+                    aq: '0.03',
+                    b: '0.1202',
+                    a: '0.1318',
+                    d: '0.98911',
+                    t: '-0.16961',
+                    g: '0.00004',
+                    v: '2.66584',
+                    vo: '0.10001',
+                    mp: '2003.5102',
+                    hl: '2023.511',
+                    ll: '1983.511',
+                    eep: '0',
+                })
+            );
 
             const stream = websocketStreamApi.ticker24Hour(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/<symbol>@ticker'.slice(1),
                         params as unknown as Record<string, Ticker24HourRequest>
@@ -696,73 +725,75 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = [
-                {
-                    e: '24hrTicker',
-                    E: 1657706425200,
-                    T: 1657706425220,
-                    s: 'ETH-220930-1600-C',
-                    o: '2000',
-                    h: '2020',
-                    l: '2000',
-                    c: '2020',
-                    V: '1.42',
-                    A: '2841',
-                    P: '0.01',
-                    p: '20',
-                    Q: '0.01',
-                    F: '27',
-                    L: '48',
-                    n: 22,
-                    bo: '2012',
-                    ao: '2020',
-                    bq: '4.9',
-                    aq: '0.03',
-                    b: '0.1202',
-                    a: '0.1318',
-                    d: '0.98911',
-                    t: '-0.16961',
-                    g: '0.00004',
-                    v: '2.66584',
-                    vo: '0.10001',
-                    mp: '2003.5102',
-                    hl: '2023.511',
-                    ll: '1983.511',
-                    eep: '0',
-                },
-                {
-                    e: '24hrTicker',
-                    E: 1663685112123,
-                    s: 'ETH-220930-1500-C',
-                    o: '34.9',
-                    h: '44.6',
-                    l: '26.8',
-                    c: '26.8',
-                    V: '11.84',
-                    A: '444.37',
-                    P: '-0.232',
-                    p: '-8.1',
-                    Q: '0',
-                    F: '91',
-                    L: '129',
-                    n: 39,
-                    bo: '26.8',
-                    ao: '33.9',
-                    bq: '0.65',
-                    aq: '0.01',
-                    b: '0.88790536',
-                    a: '0.98729014',
-                    d: '0.2621153',
-                    t: '-3.44806807',
-                    g: '0.00158298',
-                    v: '0.7148147',
-                    vo: '0.93759775',
-                    mp: '30.3',
-                    hl: '228.7',
-                    ll: '0.1',
-                    eep: '0',
-                },
-            ];
+            const mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        e: '24hrTicker',
+                        E: 1657706425200,
+                        T: 1657706425220,
+                        s: 'ETH-220930-1600-C',
+                        o: '2000',
+                        h: '2020',
+                        l: '2000',
+                        c: '2020',
+                        V: '1.42',
+                        A: '2841',
+                        P: '0.01',
+                        p: '20',
+                        Q: '0.01',
+                        F: '27',
+                        L: '48',
+                        n: 22,
+                        bo: '2012',
+                        ao: '2020',
+                        bq: '4.9',
+                        aq: '0.03',
+                        b: '0.1202',
+                        a: '0.1318',
+                        d: '0.98911',
+                        t: '-0.16961',
+                        g: '0.00004',
+                        v: '2.66584',
+                        vo: '0.10001',
+                        mp: '2003.5102',
+                        hl: '2023.511',
+                        ll: '1983.511',
+                        eep: '0',
+                    },
+                    {
+                        e: '24hrTicker',
+                        E: 1663685112123,
+                        s: 'ETH-220930-1500-C',
+                        o: '34.9',
+                        h: '44.6',
+                        l: '26.8',
+                        c: '26.8',
+                        V: '11.84',
+                        A: '444.37',
+                        P: '-0.232',
+                        p: '-8.1',
+                        Q: '0',
+                        F: '91',
+                        L: '129',
+                        n: 39,
+                        bo: '26.8',
+                        ao: '33.9',
+                        bq: '0.65',
+                        aq: '0.01',
+                        b: '0.88790536',
+                        a: '0.98729014',
+                        d: '0.2621153',
+                        t: '-3.44806807',
+                        g: '0.00158298',
+                        v: '0.7148147',
+                        vo: '0.93759775',
+                        mp: '30.3',
+                        hl: '228.7',
+                        ll: '0.1',
+                        eep: '0',
+                    },
+                ])
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/<underlyingAsset>@ticker@<expirationDate>'.slice(1), params as unknown as Record<string, Ticker24HourByUnderlyingAssetAndExpirationDataRequest>)}`,
@@ -781,73 +812,75 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = [
-                {
-                    e: '24hrTicker',
-                    E: 1657706425200,
-                    T: 1657706425220,
-                    s: 'ETH-220930-1600-C',
-                    o: '2000',
-                    h: '2020',
-                    l: '2000',
-                    c: '2020',
-                    V: '1.42',
-                    A: '2841',
-                    P: '0.01',
-                    p: '20',
-                    Q: '0.01',
-                    F: '27',
-                    L: '48',
-                    n: 22,
-                    bo: '2012',
-                    ao: '2020',
-                    bq: '4.9',
-                    aq: '0.03',
-                    b: '0.1202',
-                    a: '0.1318',
-                    d: '0.98911',
-                    t: '-0.16961',
-                    g: '0.00004',
-                    v: '2.66584',
-                    vo: '0.10001',
-                    mp: '2003.5102',
-                    hl: '2023.511',
-                    ll: '1983.511',
-                    eep: '0',
-                },
-                {
-                    e: '24hrTicker',
-                    E: 1663685112123,
-                    s: 'ETH-220930-1500-C',
-                    o: '34.9',
-                    h: '44.6',
-                    l: '26.8',
-                    c: '26.8',
-                    V: '11.84',
-                    A: '444.37',
-                    P: '-0.232',
-                    p: '-8.1',
-                    Q: '0',
-                    F: '91',
-                    L: '129',
-                    n: 39,
-                    bo: '26.8',
-                    ao: '33.9',
-                    bq: '0.65',
-                    aq: '0.01',
-                    b: '0.88790536',
-                    a: '0.98729014',
-                    d: '0.2621153',
-                    t: '-3.44806807',
-                    g: '0.00158298',
-                    v: '0.7148147',
-                    vo: '0.93759775',
-                    mp: '30.3',
-                    hl: '228.7',
-                    ll: '0.1',
-                    eep: '0',
-                },
-            ];
+            const mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        e: '24hrTicker',
+                        E: 1657706425200,
+                        T: 1657706425220,
+                        s: 'ETH-220930-1600-C',
+                        o: '2000',
+                        h: '2020',
+                        l: '2000',
+                        c: '2020',
+                        V: '1.42',
+                        A: '2841',
+                        P: '0.01',
+                        p: '20',
+                        Q: '0.01',
+                        F: '27',
+                        L: '48',
+                        n: 22,
+                        bo: '2012',
+                        ao: '2020',
+                        bq: '4.9',
+                        aq: '0.03',
+                        b: '0.1202',
+                        a: '0.1318',
+                        d: '0.98911',
+                        t: '-0.16961',
+                        g: '0.00004',
+                        v: '2.66584',
+                        vo: '0.10001',
+                        mp: '2003.5102',
+                        hl: '2023.511',
+                        ll: '1983.511',
+                        eep: '0',
+                    },
+                    {
+                        e: '24hrTicker',
+                        E: 1663685112123,
+                        s: 'ETH-220930-1500-C',
+                        o: '34.9',
+                        h: '44.6',
+                        l: '26.8',
+                        c: '26.8',
+                        V: '11.84',
+                        A: '444.37',
+                        P: '-0.232',
+                        p: '-8.1',
+                        Q: '0',
+                        F: '91',
+                        L: '129',
+                        n: 39,
+                        bo: '26.8',
+                        ao: '33.9',
+                        bq: '0.65',
+                        aq: '0.01',
+                        b: '0.88790536',
+                        a: '0.98729014',
+                        d: '0.2621153',
+                        t: '-3.44806807',
+                        g: '0.00158298',
+                        v: '0.7148147',
+                        vo: '0.93759775',
+                        mp: '30.3',
+                        hl: '228.7',
+                        ll: '0.1',
+                        eep: '0',
+                    },
+                ])
+            );
 
             const stream =
                 websocketStreamApi.ticker24HourByUnderlyingAssetAndExpirationData(params);
@@ -855,7 +888,7 @@ describe('WebsocketMarketStreamsApi', () => {
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/<underlyingAsset>@ticker@<expirationDate>'.slice(1),
                         params as unknown as Record<
@@ -917,19 +950,21 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: 'trade',
-                E: 1591677941092,
-                s: 'BTC-200630-9000-P',
-                t: 1,
-                p: '1000',
-                q: '-2',
-                b: 4611781675939004000,
-                a: 4611781675939004000,
-                T: 1591677567872,
-                S: '-1',
-                X: 'MARKET',
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'trade',
+                    E: 1591677941092,
+                    s: 'BTC-200630-9000-P',
+                    t: 1,
+                    p: '1000',
+                    q: '-2',
+                    b: 4611781675939004000,
+                    a: 4611781675939004000,
+                    T: 1591677567872,
+                    S: '-1',
+                    X: 'MARKET',
+                })
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@trade'.slice(1), params as unknown as Record<string, TradeStreamsRequest>)}`,
@@ -947,26 +982,28 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: 'trade',
-                E: 1591677941092,
-                s: 'BTC-200630-9000-P',
-                t: 1,
-                p: '1000',
-                q: '-2',
-                b: 4611781675939004000,
-                a: 4611781675939004000,
-                T: 1591677567872,
-                S: '-1',
-                X: 'MARKET',
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'trade',
+                    E: 1591677941092,
+                    s: 'BTC-200630-9000-P',
+                    t: 1,
+                    p: '1000',
+                    q: '-2',
+                    b: 4611781675939004000,
+                    a: 4611781675939004000,
+                    T: 1591677567872,
+                    S: '-1',
+                    X: 'MARKET',
+                })
+            );
 
             const stream = websocketStreamApi.tradeStreams(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/<symbol>@trade'.slice(1),
                         params as unknown as Record<string, TradeStreamsRequest>

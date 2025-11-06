@@ -21,10 +21,10 @@
 export interface PlaceMultipleOrdersResponseInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PlaceMultipleOrdersResponseInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}

@@ -21,10 +21,10 @@
 export interface SymbolPriceTickerResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SymbolPriceTickerResponse
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}

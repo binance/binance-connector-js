@@ -21,16 +21,16 @@
 export interface RecentBlockTradesListResponseInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RecentBlockTradesListResponseInner
      */
-    id?: number;
+    id?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RecentBlockTradesListResponseInner
      */
-    tradeId?: number;
+    tradeId?: number | bigint;
     /**
      *
      * @type {string}
@@ -57,14 +57,14 @@ export interface RecentBlockTradesListResponseInner {
     quoteQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RecentBlockTradesListResponseInner
      */
-    side?: number;
+    side?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RecentBlockTradesListResponseInner
      */
-    time?: number;
+    time?: number | bigint;
 }

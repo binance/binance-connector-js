@@ -32,10 +32,10 @@ export interface KlineCandlestickStreamsResponse {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof KlineCandlestickStreamsResponse
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}

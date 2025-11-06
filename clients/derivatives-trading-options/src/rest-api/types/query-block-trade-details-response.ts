@@ -32,10 +32,10 @@ export interface QueryBlockTradeDetailsResponse {
     blockTradeSettlementKey?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryBlockTradeDetailsResponse
      */
-    expireTime?: number;
+    expireTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -50,10 +50,10 @@ export interface QueryBlockTradeDetailsResponse {
     status?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryBlockTradeDetailsResponse
      */
-    createTime?: number;
+    createTime?: number | bigint;
     /**
      *
      * @type {Array<QueryBlockTradeDetailsResponseLegsInner>}

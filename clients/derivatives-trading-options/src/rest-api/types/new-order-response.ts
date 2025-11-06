@@ -21,10 +21,10 @@
 export interface NewOrderResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NewOrderResponse
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -57,10 +57,10 @@ export interface NewOrderResponse {
     type?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NewOrderResponse
      */
-    createDate?: number;
+    createDate?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -99,16 +99,16 @@ export interface NewOrderResponse {
     timeInForce?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NewOrderResponse
      */
-    createTime?: number;
+    createTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NewOrderResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -129,16 +129,16 @@ export interface NewOrderResponse {
     clientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NewOrderResponse
      */
-    priceScale?: number;
+    priceScale?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NewOrderResponse
      */
-    quantityScale?: number;
+    quantityScale?: number | bigint;
     /**
      *
      * @type {string}

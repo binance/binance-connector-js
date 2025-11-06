@@ -26,10 +26,10 @@ import type { ExchangeInformationResponseOptionSymbolsInnerFiltersInner } from '
 export interface ExchangeInformationResponseOptionSymbolsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExchangeInformationResponseOptionSymbolsInner
      */
-    expiryDate?: number;
+    expiryDate?: number | bigint;
     /**
      *
      * @type {Array<ExchangeInformationResponseOptionSymbolsInnerFiltersInner>}
@@ -62,10 +62,10 @@ export interface ExchangeInformationResponseOptionSymbolsInner {
     underlying?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExchangeInformationResponseOptionSymbolsInner
      */
-    unit?: number;
+    unit?: number | bigint;
     /**
      *
      * @type {string}
@@ -122,16 +122,16 @@ export interface ExchangeInformationResponseOptionSymbolsInner {
     minMaintenanceMargin?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExchangeInformationResponseOptionSymbolsInner
      */
-    priceScale?: number;
+    priceScale?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExchangeInformationResponseOptionSymbolsInner
      */
-    quantityScale?: number;
+    quantityScale?: number | bigint;
     /**
      *
      * @type {string}

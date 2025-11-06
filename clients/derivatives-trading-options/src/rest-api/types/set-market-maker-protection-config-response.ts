@@ -21,10 +21,10 @@
 export interface SetMarketMakerProtectionConfigResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SetMarketMakerProtectionConfigResponse
      */
-    underlyingId?: number;
+    underlyingId?: number | bigint;
     /**
      *
      * @type {string}
@@ -33,16 +33,16 @@ export interface SetMarketMakerProtectionConfigResponse {
     underlying?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SetMarketMakerProtectionConfigResponse
      */
-    windowTimeInMilliseconds?: number;
+    windowTimeInMilliseconds?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SetMarketMakerProtectionConfigResponse
      */
-    frozenTimeInMilliseconds?: number;
+    frozenTimeInMilliseconds?: number | bigint;
     /**
      *
      * @type {string}
@@ -57,8 +57,8 @@ export interface SetMarketMakerProtectionConfigResponse {
     deltaLimit?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SetMarketMakerProtectionConfigResponse
      */
-    lastTriggerTime?: number;
+    lastTriggerTime?: number | bigint;
 }

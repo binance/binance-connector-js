@@ -27,8 +27,8 @@ export interface SetAutoCancelAllOpenOrdersResponse {
     underlying?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SetAutoCancelAllOpenOrdersResponse
      */
-    countdownTime?: number;
+    countdownTime?: number | bigint;
 }

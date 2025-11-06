@@ -41,10 +41,10 @@ export interface ExchangeInformationResponse {
     timezone?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExchangeInformationResponse
      */
-    serverTime?: number;
+    serverTime?: number | bigint;
     /**
      *
      * @type {Array<ExchangeInformationResponseOptionContractsInner>}

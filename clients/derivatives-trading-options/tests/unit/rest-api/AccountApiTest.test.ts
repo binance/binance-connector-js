@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { AccountApi } from '../../../src/rest-api';
@@ -50,29 +51,31 @@ describe('AccountApi', () => {
                 currency: 'currency_example',
             };
 
-            mockResponse = [
-                {
-                    id: 1125899906842624000,
-                    asset: 'USDT',
-                    amount: '-0.552',
-                    type: 'FEE',
-                    createDate: 1592449456000,
-                },
-                {
-                    id: 1125899906842624000,
-                    asset: 'USDT',
-                    amount: '100',
-                    type: 'CONTRACT',
-                    createDate: 1592449456000,
-                },
-                {
-                    id: 1125899906842624000,
-                    asset: 'USDT',
-                    amount: '10000',
-                    type: 'TRANSFER',
-                    createDate: 1592448410000,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        id: 1125899906842624000,
+                        asset: 'USDT',
+                        amount: '-0.552',
+                        type: 'FEE',
+                        createDate: 1592449456000,
+                    },
+                    {
+                        id: 1125899906842624000,
+                        asset: 'USDT',
+                        amount: '100',
+                        type: 'CONTRACT',
+                        createDate: 1592449456000,
+                    },
+                    {
+                        id: 1125899906842624000,
+                        asset: 'USDT',
+                        amount: '10000',
+                        type: 'TRANSFER',
+                        createDate: 1592448410000,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'accountFundingFlow').mockReturnValue(
                 Promise.resolve({
@@ -98,29 +101,31 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    id: 1125899906842624000,
-                    asset: 'USDT',
-                    amount: '-0.552',
-                    type: 'FEE',
-                    createDate: 1592449456000,
-                },
-                {
-                    id: 1125899906842624000,
-                    asset: 'USDT',
-                    amount: '100',
-                    type: 'CONTRACT',
-                    createDate: 1592449456000,
-                },
-                {
-                    id: 1125899906842624000,
-                    asset: 'USDT',
-                    amount: '10000',
-                    type: 'TRANSFER',
-                    createDate: 1592448410000,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        id: 1125899906842624000,
+                        asset: 'USDT',
+                        amount: '-0.552',
+                        type: 'FEE',
+                        createDate: 1592449456000,
+                    },
+                    {
+                        id: 1125899906842624000,
+                        asset: 'USDT',
+                        amount: '100',
+                        type: 'CONTRACT',
+                        createDate: 1592449456000,
+                    },
+                    {
+                        id: 1125899906842624000,
+                        asset: 'USDT',
+                        amount: '10000',
+                        type: 'TRANSFER',
+                        createDate: 1592448410000,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'accountFundingFlow').mockReturnValue(
                 Promise.resolve({
@@ -175,7 +180,12 @@ describe('AccountApi', () => {
                 endTime: 1641782889000,
             };
 
-            mockResponse = { avgCostTimestampOfLast30d: 7241837, downloadId: '546975389218332672' };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    avgCostTimestampOfLast30d: 7241837,
+                    downloadId: '546975389218332672',
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'getDownloadIdForOptionTransactionHistory')
@@ -200,7 +210,12 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { avgCostTimestampOfLast30d: 7241837, downloadId: '546975389218332672' };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    avgCostTimestampOfLast30d: 7241837,
+                    downloadId: '546975389218332672',
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'getDownloadIdForOptionTransactionHistory')
@@ -275,14 +290,16 @@ describe('AccountApi', () => {
                 downloadId: '1',
             };
 
-            mockResponse = {
-                downloadId: '545923594199212032',
-                status: 'processing',
-                url: '',
-                notified: false,
-                expirationTimestamp: -1,
-                isExpired: null,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    downloadId: '545923594199212032',
+                    status: 'processing',
+                    url: '',
+                    notified: false,
+                    expirationTimestamp: -1,
+                    isExpired: null,
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'getOptionTransactionHistoryDownloadLinkById')
@@ -306,14 +323,16 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                downloadId: '545923594199212032',
-                status: 'processing',
-                url: '',
-                notified: false,
-                expirationTimestamp: -1,
-                isExpired: null,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    downloadId: '545923594199212032',
+                    status: 'processing',
+                    url: '',
+                    notified: false,
+                    expirationTimestamp: -1,
+                    isExpired: null,
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'getOptionTransactionHistoryDownloadLinkById')
@@ -371,29 +390,31 @@ describe('AccountApi', () => {
 
     describe('optionAccountInformation()', () => {
         it('should execute optionAccountInformation() successfully with required parameters only', async () => {
-            mockResponse = {
-                asset: [
-                    {
-                        asset: 'USDT',
-                        marginBalance: '1877.52214415',
-                        equity: '617.77711415',
-                        available: '0',
-                        locked: '2898.92389933',
-                        unrealizedPNL: '222.23697000',
-                    },
-                ],
-                greek: [
-                    {
-                        underlying: 'BTCUSDT',
-                        delta: '-0.05',
-                        gamma: '-0.002',
-                        theta: '-0.05',
-                        vega: '-0.002',
-                    },
-                ],
-                time: 1592449455993,
-                riskLevel: 'NORMAL',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    asset: [
+                        {
+                            asset: 'USDT',
+                            marginBalance: '1877.52214415',
+                            equity: '617.77711415',
+                            available: '0',
+                            locked: '2898.92389933',
+                            unrealizedPNL: '222.23697000',
+                        },
+                    ],
+                    greek: [
+                        {
+                            underlying: 'BTCUSDT',
+                            delta: '-0.05',
+                            gamma: '-0.002',
+                            theta: '-0.05',
+                            vega: '-0.002',
+                        },
+                    ],
+                    time: 1592449455993,
+                    riskLevel: 'NORMAL',
+                })
+            );
 
             const spy = jest.spyOn(client, 'optionAccountInformation').mockReturnValue(
                 Promise.resolve({
@@ -414,29 +435,31 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                asset: [
-                    {
-                        asset: 'USDT',
-                        marginBalance: '1877.52214415',
-                        equity: '617.77711415',
-                        available: '0',
-                        locked: '2898.92389933',
-                        unrealizedPNL: '222.23697000',
-                    },
-                ],
-                greek: [
-                    {
-                        underlying: 'BTCUSDT',
-                        delta: '-0.05',
-                        gamma: '-0.002',
-                        theta: '-0.05',
-                        vega: '-0.002',
-                    },
-                ],
-                time: 1592449455993,
-                riskLevel: 'NORMAL',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    asset: [
+                        {
+                            asset: 'USDT',
+                            marginBalance: '1877.52214415',
+                            equity: '617.77711415',
+                            available: '0',
+                            locked: '2898.92389933',
+                            unrealizedPNL: '222.23697000',
+                        },
+                    ],
+                    greek: [
+                        {
+                            underlying: 'BTCUSDT',
+                            delta: '-0.05',
+                            gamma: '-0.002',
+                            theta: '-0.05',
+                            vega: '-0.002',
+                        },
+                    ],
+                    time: 1592449455993,
+                    riskLevel: 'NORMAL',
+                })
+            );
 
             const spy = jest.spyOn(client, 'optionAccountInformation').mockReturnValue(
                 Promise.resolve({
@@ -472,30 +495,32 @@ describe('AccountApi', () => {
 
     describe('optionMarginAccountInformation()', () => {
         it('should execute optionMarginAccountInformation() successfully with required parameters only', async () => {
-            mockResponse = {
-                asset: [
-                    {
-                        asset: 'USDT',
-                        marginBalance: '10099.448',
-                        equity: '10094.44662',
-                        available: '8725.92524',
-                        initialMargin: '1084.52138',
-                        maintMargin: '151.00138',
-                        unrealizedPNL: '-5.00138',
-                        adjustedEquity: '34.13282285',
-                    },
-                ],
-                greek: [
-                    {
-                        underlying: 'BTCUSDT',
-                        delta: '-0.05',
-                        gamma: '-0.002',
-                        theta: '-0.05',
-                        vega: '-0.002',
-                    },
-                ],
-                time: 1592449455993,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    asset: [
+                        {
+                            asset: 'USDT',
+                            marginBalance: '10099.448',
+                            equity: '10094.44662',
+                            available: '8725.92524',
+                            initialMargin: '1084.52138',
+                            maintMargin: '151.00138',
+                            unrealizedPNL: '-5.00138',
+                            adjustedEquity: '34.13282285',
+                        },
+                    ],
+                    greek: [
+                        {
+                            underlying: 'BTCUSDT',
+                            delta: '-0.05',
+                            gamma: '-0.002',
+                            theta: '-0.05',
+                            vega: '-0.002',
+                        },
+                    ],
+                    time: 1592449455993,
+                })
+            );
 
             const spy = jest.spyOn(client, 'optionMarginAccountInformation').mockReturnValue(
                 Promise.resolve({
@@ -516,30 +541,32 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                asset: [
-                    {
-                        asset: 'USDT',
-                        marginBalance: '10099.448',
-                        equity: '10094.44662',
-                        available: '8725.92524',
-                        initialMargin: '1084.52138',
-                        maintMargin: '151.00138',
-                        unrealizedPNL: '-5.00138',
-                        adjustedEquity: '34.13282285',
-                    },
-                ],
-                greek: [
-                    {
-                        underlying: 'BTCUSDT',
-                        delta: '-0.05',
-                        gamma: '-0.002',
-                        theta: '-0.05',
-                        vega: '-0.002',
-                    },
-                ],
-                time: 1592449455993,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    asset: [
+                        {
+                            asset: 'USDT',
+                            marginBalance: '10099.448',
+                            equity: '10094.44662',
+                            available: '8725.92524',
+                            initialMargin: '1084.52138',
+                            maintMargin: '151.00138',
+                            unrealizedPNL: '-5.00138',
+                            adjustedEquity: '34.13282285',
+                        },
+                    ],
+                    greek: [
+                        {
+                            underlying: 'BTCUSDT',
+                            delta: '-0.05',
+                            gamma: '-0.002',
+                            theta: '-0.05',
+                            vega: '-0.002',
+                        },
+                    ],
+                    time: 1592449455993,
+                })
+            );
 
             const spy = jest.spyOn(client, 'optionMarginAccountInformation').mockReturnValue(
                 Promise.resolve({

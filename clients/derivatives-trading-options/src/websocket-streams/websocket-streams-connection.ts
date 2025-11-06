@@ -153,6 +153,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary Index Price Streams
      * @param {IndexPriceStreamsRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<IndexPriceStreamsResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/option/websocket-market-streams/Index-Price-Streams Binance API Documentation}
@@ -170,6 +171,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary Kline/Candlestick Streams
      * @param {KlineCandlestickStreamsRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<KlineCandlestickStreamsResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/option/websocket-market-streams/Kline-Candlestick-Streams Binance API Documentation}
@@ -187,6 +189,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary Mark Price
      * @param {MarkPriceRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<MarkPriceResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/option/websocket-market-streams/Mark-Price Binance API Documentation}
@@ -202,6 +205,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary New Symbol Info
      * @param {NewSymbolInfoRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<NewSymbolInfoResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/option/websocket-market-streams/New-Symbol-Info Binance API Documentation}
@@ -219,6 +223,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary Open Interest
      * @param {OpenInterestRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<OpenInterestResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/option/websocket-market-streams/Open-Interest Binance API Documentation}
@@ -234,6 +239,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary Partial Book Depth Streams
      * @param {PartialBookDepthStreamsRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<PartialBookDepthStreamsResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/option/websocket-market-streams/Partial-Book-Depth-Streams Binance API Documentation}
@@ -251,6 +257,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary 24-hour TICKER
      * @param {Ticker24HourRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<Ticker24HourResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/option/websocket-market-streams/24-hour-TICKER Binance API Documentation}
@@ -266,6 +273,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary 24-hour TICKER by underlying asset and expiration data
      * @param {Ticker24HourByUnderlyingAssetAndExpirationDataRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<Ticker24HourByUnderlyingAssetAndExpirationDataResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/option/websocket-market-streams/24-hour-TICKER-by-underlying-asset-and-expiration-data Binance API Documentation}
@@ -285,6 +293,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary Trade Streams
      * @param {TradeStreamsRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<TradeStreamsResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/option/websocket-market-streams/Trade-Streams Binance API Documentation}

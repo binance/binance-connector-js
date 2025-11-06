@@ -21,16 +21,16 @@
 export interface AccountBlockTradeListResponseInnerLegsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountBlockTradeListResponseInnerLegsInner
      */
-    createTime?: number;
+    createTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountBlockTradeListResponseInnerLegsInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -99,10 +99,10 @@ export interface AccountBlockTradeListResponseInnerLegsInner {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountBlockTradeListResponseInnerLegsInner
      */
-    tradeId?: number;
+    tradeId?: number | bigint;
     /**
      *
      * @type {number}
@@ -117,10 +117,10 @@ export interface AccountBlockTradeListResponseInnerLegsInner {
     tradeQty?: number;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountBlockTradeListResponseInnerLegsInner
      */
-    tradeTime?: number;
+    tradeTime?: number | bigint;
     /**
      *
      * @type {string}

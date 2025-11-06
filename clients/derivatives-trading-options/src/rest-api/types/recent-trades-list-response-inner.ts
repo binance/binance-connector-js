@@ -51,14 +51,14 @@ export interface RecentTradesListResponseInner {
     quoteQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RecentTradesListResponseInner
      */
-    side?: number;
+    side?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RecentTradesListResponseInner
      */
-    time?: number;
+    time?: number | bigint;
 }

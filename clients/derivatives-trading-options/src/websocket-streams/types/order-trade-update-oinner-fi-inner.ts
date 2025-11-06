@@ -39,10 +39,10 @@ export interface OrderTradeUpdateOInnerFiInner {
     q?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderTradeUpdateOInnerFiInner
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {string}

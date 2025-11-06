@@ -21,10 +21,10 @@
 export interface CancelMultipleOptionOrdersResponseInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelMultipleOptionOrdersResponseInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -51,10 +51,10 @@ export interface CancelMultipleOptionOrdersResponseInner {
     executedQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelMultipleOptionOrdersResponseInner
      */
-    fee?: number;
+    fee?: number | bigint;
     /**
      *
      * @type {string}
@@ -75,10 +75,10 @@ export interface CancelMultipleOptionOrdersResponseInner {
     timeInForce?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelMultipleOptionOrdersResponseInner
      */
-    createTime?: number;
+    createTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -105,8 +105,8 @@ export interface CancelMultipleOptionOrdersResponseInner {
     clientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelMultipleOptionOrdersResponseInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

@@ -27,10 +27,10 @@ export interface NewSymbolInfoResponse {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NewSymbolInfoResponse
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}
@@ -51,10 +51,10 @@ export interface NewSymbolInfoResponse {
     s?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NewSymbolInfoResponse
      */
-    unit?: number;
+    unit?: number | bigint;
     /**
      *
      * @type {string}
@@ -75,8 +75,8 @@ export interface NewSymbolInfoResponse {
     sp?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NewSymbolInfoResponse
      */
-    ed?: number;
+    ed?: number | bigint;
 }

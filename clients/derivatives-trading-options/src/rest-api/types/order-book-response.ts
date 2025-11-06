@@ -29,16 +29,16 @@ import type { OrderBookResponseBidsItem } from './order-book-response-bids-item'
 export interface OrderBookResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderBookResponse
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderBookResponse
      */
-    u?: number;
+    u?: number | bigint;
     /**
      *
      * @type {Array<OrderBookResponseBidsItem>}

@@ -32,10 +32,10 @@ import type { AccountUpdatePInner } from './account-update-pinner';
 export interface AccountUpdate {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountUpdate
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {Array<AccountUpdateBInner>}
@@ -56,8 +56,8 @@ export interface AccountUpdate {
     P?: Array<AccountUpdatePInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountUpdate
      */
-    uid?: number;
+    uid?: number | bigint;
 }

@@ -21,10 +21,10 @@
 export interface AccountFundingFlowResponseInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountFundingFlowResponseInner
      */
-    id?: number;
+    id?: number | bigint;
     /**
      *
      * @type {string}
@@ -45,8 +45,8 @@ export interface AccountFundingFlowResponseInner {
     type?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountFundingFlowResponseInner
      */
-    createDate?: number;
+    createDate?: number | bigint;
 }

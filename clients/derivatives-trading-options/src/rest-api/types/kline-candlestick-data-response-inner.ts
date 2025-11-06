@@ -63,10 +63,10 @@ export interface KlineCandlestickDataResponseInner {
     interval?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof KlineCandlestickDataResponseInner
      */
-    tradeCount?: number;
+    tradeCount?: number | bigint;
     /**
      *
      * @type {string}
@@ -81,14 +81,14 @@ export interface KlineCandlestickDataResponseInner {
     takerAmount?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof KlineCandlestickDataResponseInner
      */
-    openTime?: number;
+    openTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof KlineCandlestickDataResponseInner
      */
-    closeTime?: number;
+    closeTime?: number | bigint;
 }

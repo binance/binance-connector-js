@@ -21,10 +21,10 @@
 export interface CancelAllOptionOrdersByUnderlyingResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelAllOptionOrdersByUnderlyingResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}
@@ -33,8 +33,8 @@ export interface CancelAllOptionOrdersByUnderlyingResponse {
     msg?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelAllOptionOrdersByUnderlyingResponse
      */
-    data?: number;
+    data?: number | bigint;
 }

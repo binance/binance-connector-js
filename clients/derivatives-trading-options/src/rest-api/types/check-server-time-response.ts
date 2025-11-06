@@ -21,8 +21,8 @@
 export interface CheckServerTimeResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CheckServerTimeResponse
      */
-    serverTime?: number;
+    serverTime?: number | bigint;
 }

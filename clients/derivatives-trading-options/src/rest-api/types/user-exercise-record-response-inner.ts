@@ -69,22 +69,22 @@ export interface UserExerciseRecordResponseInner {
     fee?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UserExerciseRecordResponseInner
      */
-    createDate?: number;
+    createDate?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UserExerciseRecordResponseInner
      */
-    priceScale?: number;
+    priceScale?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UserExerciseRecordResponseInner
      */
-    quantityScale?: number;
+    quantityScale?: number | bigint;
     /**
      *
      * @type {string}

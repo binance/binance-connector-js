@@ -27,16 +27,16 @@ export interface Ticker24HourByUnderlyingAssetAndExpirationDataResponseInner {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Ticker24HourByUnderlyingAssetAndExpirationDataResponseInner
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Ticker24HourByUnderlyingAssetAndExpirationDataResponseInner
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {string}
@@ -111,10 +111,10 @@ export interface Ticker24HourByUnderlyingAssetAndExpirationDataResponseInner {
     L?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Ticker24HourByUnderlyingAssetAndExpirationDataResponseInner
      */
-    n?: number;
+    n?: number | bigint;
     /**
      *
      * @type {string}

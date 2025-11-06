@@ -26,16 +26,16 @@ import type { OrderTradeUpdateOInnerFiInner } from './order-trade-update-oinner-
 export interface OrderTradeUpdateOInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderTradeUpdateOInner
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderTradeUpdateOInner
      */
-    t?: number;
+    t?: number | bigint;
     /**
      *
      * @type {string}
@@ -68,10 +68,10 @@ export interface OrderTradeUpdateOInner {
     q?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderTradeUpdateOInner
      */
-    stp?: number;
+    stp?: number | bigint;
     /**
      *
      * @type {boolean}

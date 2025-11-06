@@ -32,10 +32,10 @@ export interface ExtendBlockTradeOrderResponse {
     blockTradeSettlementKey?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExtendBlockTradeOrderResponse
      */
-    expireTime?: number;
+    expireTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -50,10 +50,10 @@ export interface ExtendBlockTradeOrderResponse {
     status?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExtendBlockTradeOrderResponse
      */
-    createTime?: number;
+    createTime?: number | bigint;
     /**
      *
      * @type {Array<ExtendBlockTradeOrderResponseLegsInner>}

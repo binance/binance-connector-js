@@ -21,10 +21,10 @@
 export interface ResetMarketMakerProtectionConfigResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ResetMarketMakerProtectionConfigResponse
      */
-    underlyingId?: number;
+    underlyingId?: number | bigint;
     /**
      *
      * @type {string}
@@ -33,16 +33,16 @@ export interface ResetMarketMakerProtectionConfigResponse {
     underlying?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ResetMarketMakerProtectionConfigResponse
      */
-    windowTimeInMilliseconds?: number;
+    windowTimeInMilliseconds?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ResetMarketMakerProtectionConfigResponse
      */
-    frozenTimeInMilliseconds?: number;
+    frozenTimeInMilliseconds?: number | bigint;
     /**
      *
      * @type {string}
@@ -57,8 +57,8 @@ export interface ResetMarketMakerProtectionConfigResponse {
     deltaLimit?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ResetMarketMakerProtectionConfigResponse
      */
-    lastTriggerTime?: number;
+    lastTriggerTime?: number | bigint;
 }

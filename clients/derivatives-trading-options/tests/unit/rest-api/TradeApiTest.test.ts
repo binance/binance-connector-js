@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import {
@@ -66,27 +67,29 @@ describe('TradeApi', () => {
 
     describe('accountTradeList()', () => {
         it('should execute accountTradeList() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    id: 4611875134427365000,
-                    tradeId: 239,
-                    orderId: 4611875134427365000,
-                    symbol: 'BTC-200730-9000-C',
-                    price: '100',
-                    quantity: '1',
-                    fee: '0',
-                    realizedProfit: '0.00000000',
-                    side: 'BUY',
-                    type: 'LIMIT',
-                    volatility: '0.9',
-                    liquidity: 'TAKER',
-                    quoteAsset: 'USDT',
-                    time: 1592465880683,
-                    priceScale: 2,
-                    quantityScale: 2,
-                    optionSide: 'CALL',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        id: 4611875134427365000,
+                        tradeId: 239,
+                        orderId: 4611875134427365000,
+                        symbol: 'BTC-200730-9000-C',
+                        price: '100',
+                        quantity: '1',
+                        fee: '0',
+                        realizedProfit: '0.00000000',
+                        side: 'BUY',
+                        type: 'LIMIT',
+                        volatility: '0.9',
+                        liquidity: 'TAKER',
+                        quoteAsset: 'USDT',
+                        time: 1592465880683,
+                        priceScale: 2,
+                        quantityScale: 2,
+                        optionSide: 'CALL',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'accountTradeList').mockReturnValue(
                 Promise.resolve({
@@ -112,27 +115,29 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    id: 4611875134427365000,
-                    tradeId: 239,
-                    orderId: 4611875134427365000,
-                    symbol: 'BTC-200730-9000-C',
-                    price: '100',
-                    quantity: '1',
-                    fee: '0',
-                    realizedProfit: '0.00000000',
-                    side: 'BUY',
-                    type: 'LIMIT',
-                    volatility: '0.9',
-                    liquidity: 'TAKER',
-                    quoteAsset: 'USDT',
-                    time: 1592465880683,
-                    priceScale: 2,
-                    quantityScale: 2,
-                    optionSide: 'CALL',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        id: 4611875134427365000,
+                        tradeId: 239,
+                        orderId: 4611875134427365000,
+                        symbol: 'BTC-200730-9000-C',
+                        price: '100',
+                        quantity: '1',
+                        fee: '0',
+                        realizedProfit: '0.00000000',
+                        side: 'BUY',
+                        type: 'LIMIT',
+                        volatility: '0.9',
+                        liquidity: 'TAKER',
+                        quoteAsset: 'USDT',
+                        time: 1592465880683,
+                        priceScale: 2,
+                        quantityScale: 2,
+                        optionSide: 'CALL',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'accountTradeList').mockReturnValue(
                 Promise.resolve({
@@ -170,7 +175,7 @@ describe('TradeApi', () => {
                 underlying: 'underlying_example',
             };
 
-            mockResponse = { code: 0, msg: 'success', data: 0 };
+            mockResponse = JSONParse(JSONStringify({ code: 0, msg: 'success', data: 0 }));
 
             const spy = jest.spyOn(client, 'cancelAllOptionOrdersByUnderlying').mockReturnValue(
                 Promise.resolve({
@@ -192,7 +197,7 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { code: 0, msg: 'success', data: 0 };
+            mockResponse = JSONParse(JSONStringify({ code: 0, msg: 'success', data: 0 }));
 
             const spy = jest.spyOn(client, 'cancelAllOptionOrdersByUnderlying').mockReturnValue(
                 Promise.resolve({
@@ -250,7 +255,7 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = { code: 0, msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ code: 0, msg: 'success' }));
 
             const spy = jest.spyOn(client, 'cancelAllOptionOrdersOnSpecificSymbol').mockReturnValue(
                 Promise.resolve({
@@ -272,7 +277,7 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { code: 0, msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ code: 0, msg: 'success' }));
 
             const spy = jest.spyOn(client, 'cancelAllOptionOrdersOnSpecificSymbol').mockReturnValue(
                 Promise.resolve({
@@ -330,25 +335,27 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = [
-                {
-                    orderId: 4611875134427365000,
-                    symbol: 'BTC-200730-9000-C',
-                    price: '100',
-                    quantity: '1',
-                    executedQty: '0',
-                    fee: 0,
-                    side: 'BUY',
-                    type: 'LIMIT',
-                    timeInForce: 'GTC',
-                    createTime: 1592465880683,
-                    status: 'ACCEPTED',
-                    avgPrice: '0',
-                    reduceOnly: false,
-                    clientOrderId: '',
-                    updateTime: 1566818724722,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        orderId: 4611875134427365000,
+                        symbol: 'BTC-200730-9000-C',
+                        price: '100',
+                        quantity: '1',
+                        executedQty: '0',
+                        fee: 0,
+                        side: 'BUY',
+                        type: 'LIMIT',
+                        timeInForce: 'GTC',
+                        createTime: 1592465880683,
+                        status: 'ACCEPTED',
+                        avgPrice: '0',
+                        reduceOnly: false,
+                        clientOrderId: '',
+                        updateTime: 1566818724722,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'cancelMultipleOptionOrders').mockReturnValue(
                 Promise.resolve({
@@ -372,25 +379,27 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    orderId: 4611875134427365000,
-                    symbol: 'BTC-200730-9000-C',
-                    price: '100',
-                    quantity: '1',
-                    executedQty: '0',
-                    fee: 0,
-                    side: 'BUY',
-                    type: 'LIMIT',
-                    timeInForce: 'GTC',
-                    createTime: 1592465880683,
-                    status: 'ACCEPTED',
-                    avgPrice: '0',
-                    reduceOnly: false,
-                    clientOrderId: '',
-                    updateTime: 1566818724722,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        orderId: 4611875134427365000,
+                        symbol: 'BTC-200730-9000-C',
+                        price: '100',
+                        quantity: '1',
+                        executedQty: '0',
+                        fee: 0,
+                        side: 'BUY',
+                        type: 'LIMIT',
+                        timeInForce: 'GTC',
+                        createTime: 1592465880683,
+                        status: 'ACCEPTED',
+                        avgPrice: '0',
+                        reduceOnly: false,
+                        clientOrderId: '',
+                        updateTime: 1566818724722,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'cancelMultipleOptionOrders').mockReturnValue(
                 Promise.resolve({
@@ -448,30 +457,32 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = {
-                orderId: 4611875134427365000,
-                symbol: 'BTC-200730-9000-C',
-                price: '100',
-                quantity: '1',
-                executedQty: '0',
-                fee: '0',
-                side: 'BUY',
-                type: 'LIMIT',
-                timeInForce: 'GTC',
-                reduceOnly: false,
-                postOnly: false,
-                createDate: 1592465880683,
-                updateTime: 1566818724722,
-                status: 'ACCEPTED',
-                avgPrice: '0',
-                source: 'API',
-                clientOrderId: '',
-                priceScale: 4,
-                quantityScale: 4,
-                optionSide: 'CALL',
-                quoteAsset: 'USDT',
-                mmp: false,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    orderId: 4611875134427365000,
+                    symbol: 'BTC-200730-9000-C',
+                    price: '100',
+                    quantity: '1',
+                    executedQty: '0',
+                    fee: '0',
+                    side: 'BUY',
+                    type: 'LIMIT',
+                    timeInForce: 'GTC',
+                    reduceOnly: false,
+                    postOnly: false,
+                    createDate: 1592465880683,
+                    updateTime: 1566818724722,
+                    status: 'ACCEPTED',
+                    avgPrice: '0',
+                    source: 'API',
+                    clientOrderId: '',
+                    priceScale: 4,
+                    quantityScale: 4,
+                    optionSide: 'CALL',
+                    quoteAsset: 'USDT',
+                    mmp: false,
+                })
+            );
 
             const spy = jest.spyOn(client, 'cancelOptionOrder').mockReturnValue(
                 Promise.resolve({
@@ -495,30 +506,32 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                orderId: 4611875134427365000,
-                symbol: 'BTC-200730-9000-C',
-                price: '100',
-                quantity: '1',
-                executedQty: '0',
-                fee: '0',
-                side: 'BUY',
-                type: 'LIMIT',
-                timeInForce: 'GTC',
-                reduceOnly: false,
-                postOnly: false,
-                createDate: 1592465880683,
-                updateTime: 1566818724722,
-                status: 'ACCEPTED',
-                avgPrice: '0',
-                source: 'API',
-                clientOrderId: '',
-                priceScale: 4,
-                quantityScale: 4,
-                optionSide: 'CALL',
-                quoteAsset: 'USDT',
-                mmp: false,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    orderId: 4611875134427365000,
+                    symbol: 'BTC-200730-9000-C',
+                    price: '100',
+                    quantity: '1',
+                    executedQty: '0',
+                    fee: '0',
+                    side: 'BUY',
+                    type: 'LIMIT',
+                    timeInForce: 'GTC',
+                    reduceOnly: false,
+                    postOnly: false,
+                    createDate: 1592465880683,
+                    updateTime: 1566818724722,
+                    status: 'ACCEPTED',
+                    avgPrice: '0',
+                    source: 'API',
+                    clientOrderId: '',
+                    priceScale: 4,
+                    quantityScale: 4,
+                    optionSide: 'CALL',
+                    quoteAsset: 'USDT',
+                    mmp: false,
+                })
+            );
 
             const spy = jest.spyOn(client, 'cancelOptionOrder').mockReturnValue(
                 Promise.resolve({
@@ -575,30 +588,32 @@ describe('TradeApi', () => {
                 quantity: 1.0,
             };
 
-            mockResponse = {
-                orderId: 4611875134427365000,
-                symbol: 'BTC-200730-9000-C',
-                price: '100',
-                quantity: '1',
-                side: 'BUY',
-                type: 'LIMIT',
-                createDate: 1592465880683,
-                reduceOnly: false,
-                postOnly: false,
-                mmp: false,
-                executedQty: '0',
-                fee: '0',
-                timeInForce: 'GTC',
-                createTime: 1592465880683,
-                updateTime: 1566818724722,
-                status: 'ACCEPTED',
-                avgPrice: '0',
-                clientOrderId: '',
-                priceScale: 2,
-                quantityScale: 2,
-                optionSide: 'CALL',
-                quoteAsset: 'USDT',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    orderId: 4611875134427365000,
+                    symbol: 'BTC-200730-9000-C',
+                    price: '100',
+                    quantity: '1',
+                    side: 'BUY',
+                    type: 'LIMIT',
+                    createDate: 1592465880683,
+                    reduceOnly: false,
+                    postOnly: false,
+                    mmp: false,
+                    executedQty: '0',
+                    fee: '0',
+                    timeInForce: 'GTC',
+                    createTime: 1592465880683,
+                    updateTime: 1566818724722,
+                    status: 'ACCEPTED',
+                    avgPrice: '0',
+                    clientOrderId: '',
+                    priceScale: 2,
+                    quantityScale: 2,
+                    optionSide: 'CALL',
+                    quoteAsset: 'USDT',
+                })
+            );
 
             const spy = jest.spyOn(client, 'newOrder').mockReturnValue(
                 Promise.resolve({
@@ -630,30 +645,32 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                orderId: 4611875134427365000,
-                symbol: 'BTC-200730-9000-C',
-                price: '100',
-                quantity: '1',
-                side: 'BUY',
-                type: 'LIMIT',
-                createDate: 1592465880683,
-                reduceOnly: false,
-                postOnly: false,
-                mmp: false,
-                executedQty: '0',
-                fee: '0',
-                timeInForce: 'GTC',
-                createTime: 1592465880683,
-                updateTime: 1566818724722,
-                status: 'ACCEPTED',
-                avgPrice: '0',
-                clientOrderId: '',
-                priceScale: 2,
-                quantityScale: 2,
-                optionSide: 'CALL',
-                quoteAsset: 'USDT',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    orderId: 4611875134427365000,
+                    symbol: 'BTC-200730-9000-C',
+                    price: '100',
+                    quantity: '1',
+                    side: 'BUY',
+                    type: 'LIMIT',
+                    createDate: 1592465880683,
+                    reduceOnly: false,
+                    postOnly: false,
+                    mmp: false,
+                    executedQty: '0',
+                    fee: '0',
+                    timeInForce: 'GTC',
+                    createTime: 1592465880683,
+                    updateTime: 1566818724722,
+                    status: 'ACCEPTED',
+                    avgPrice: '0',
+                    clientOrderId: '',
+                    priceScale: 2,
+                    quantityScale: 2,
+                    optionSide: 'CALL',
+                    quoteAsset: 'USDT',
+                })
+            );
 
             const spy = jest.spyOn(client, 'newOrder').mockReturnValue(
                 Promise.resolve({
@@ -754,26 +771,28 @@ describe('TradeApi', () => {
 
     describe('optionPositionInformation()', () => {
         it('should execute optionPositionInformation() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    entryPrice: '1000',
-                    symbol: 'BTC-200730-9000-C',
-                    side: 'SHORT',
-                    quantity: '-0.1',
-                    reducibleQty: '0',
-                    markValue: '105.00138',
-                    ror: '-0.05',
-                    unrealizedPNL: '-5.00138',
-                    markPrice: '1050.0138',
-                    strikePrice: '9000',
-                    positionCost: '1000.0000',
-                    expiryDate: 1593511200000,
-                    priceScale: 2,
-                    quantityScale: 2,
-                    optionSide: 'CALL',
-                    quoteAsset: 'USDT',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        entryPrice: '1000',
+                        symbol: 'BTC-200730-9000-C',
+                        side: 'SHORT',
+                        quantity: '-0.1',
+                        reducibleQty: '0',
+                        markValue: '105.00138',
+                        ror: '-0.05',
+                        unrealizedPNL: '-5.00138',
+                        markPrice: '1050.0138',
+                        strikePrice: '9000',
+                        positionCost: '1000.0000',
+                        expiryDate: 1593511200000,
+                        priceScale: 2,
+                        quantityScale: 2,
+                        optionSide: 'CALL',
+                        quoteAsset: 'USDT',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'optionPositionInformation').mockReturnValue(
                 Promise.resolve({
@@ -795,26 +814,28 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    entryPrice: '1000',
-                    symbol: 'BTC-200730-9000-C',
-                    side: 'SHORT',
-                    quantity: '-0.1',
-                    reducibleQty: '0',
-                    markValue: '105.00138',
-                    ror: '-0.05',
-                    unrealizedPNL: '-5.00138',
-                    markPrice: '1050.0138',
-                    strikePrice: '9000',
-                    positionCost: '1000.0000',
-                    expiryDate: 1593511200000,
-                    priceScale: 2,
-                    quantityScale: 2,
-                    optionSide: 'CALL',
-                    quoteAsset: 'USDT',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        entryPrice: '1000',
+                        symbol: 'BTC-200730-9000-C',
+                        side: 'SHORT',
+                        quantity: '-0.1',
+                        reducibleQty: '0',
+                        markValue: '105.00138',
+                        ror: '-0.05',
+                        unrealizedPNL: '-5.00138',
+                        markPrice: '1050.0138',
+                        strikePrice: '9000',
+                        positionCost: '1000.0000',
+                        expiryDate: 1593511200000,
+                        priceScale: 2,
+                        quantityScale: 2,
+                        optionSide: 'CALL',
+                        quoteAsset: 'USDT',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'optionPositionInformation').mockReturnValue(
                 Promise.resolve({
@@ -854,20 +875,22 @@ describe('TradeApi', () => {
                 orders: [],
             };
 
-            mockResponse = [
-                {
-                    orderId: 4612288550799409000,
-                    symbol: 'ETH-220826-1800-C',
-                    price: '100',
-                    quantity: '0.01',
-                    side: 'BUY',
-                    type: 'LIMIT',
-                    reduceOnly: false,
-                    postOnly: false,
-                    clientOrderId: '1001',
-                    mmp: false,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        orderId: 4612288550799409000,
+                        symbol: 'ETH-220826-1800-C',
+                        price: '100',
+                        quantity: '0.01',
+                        side: 'BUY',
+                        type: 'LIMIT',
+                        reduceOnly: false,
+                        postOnly: false,
+                        clientOrderId: '1001',
+                        mmp: false,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'placeMultipleOrders').mockReturnValue(
                 Promise.resolve({
@@ -889,20 +912,22 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    orderId: 4612288550799409000,
-                    symbol: 'ETH-220826-1800-C',
-                    price: '100',
-                    quantity: '0.01',
-                    side: 'BUY',
-                    type: 'LIMIT',
-                    reduceOnly: false,
-                    postOnly: false,
-                    clientOrderId: '1001',
-                    mmp: false,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        orderId: 4612288550799409000,
+                        symbol: 'ETH-220826-1800-C',
+                        price: '100',
+                        quantity: '0.01',
+                        side: 'BUY',
+                        type: 'LIMIT',
+                        reduceOnly: false,
+                        postOnly: false,
+                        clientOrderId: '1001',
+                        mmp: false,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'placeMultipleOrders').mockReturnValue(
                 Promise.resolve({
@@ -952,31 +977,33 @@ describe('TradeApi', () => {
 
     describe('queryCurrentOpenOptionOrders()', () => {
         it('should execute queryCurrentOpenOptionOrders() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    orderId: 4611875134427365000,
-                    symbol: 'BTC-200730-9000-C',
-                    price: '100',
-                    quantity: '1',
-                    executedQty: '0',
-                    fee: '0',
-                    side: 'BUY',
-                    type: 'LIMIT',
-                    timeInForce: 'GTC',
-                    reduceOnly: false,
-                    postOnly: false,
-                    createTime: 1592465880683,
-                    updateTime: 1592465880683,
-                    status: 'ACCEPTED',
-                    avgPrice: '0',
-                    clientOrderId: '',
-                    priceScale: 2,
-                    quantityScale: 2,
-                    optionSide: 'CALL',
-                    quoteAsset: 'USDT',
-                    mmp: false,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        orderId: 4611875134427365000,
+                        symbol: 'BTC-200730-9000-C',
+                        price: '100',
+                        quantity: '1',
+                        executedQty: '0',
+                        fee: '0',
+                        side: 'BUY',
+                        type: 'LIMIT',
+                        timeInForce: 'GTC',
+                        reduceOnly: false,
+                        postOnly: false,
+                        createTime: 1592465880683,
+                        updateTime: 1592465880683,
+                        status: 'ACCEPTED',
+                        avgPrice: '0',
+                        clientOrderId: '',
+                        priceScale: 2,
+                        quantityScale: 2,
+                        optionSide: 'CALL',
+                        quoteAsset: 'USDT',
+                        mmp: false,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryCurrentOpenOptionOrders').mockReturnValue(
                 Promise.resolve({
@@ -1001,31 +1028,33 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    orderId: 4611875134427365000,
-                    symbol: 'BTC-200730-9000-C',
-                    price: '100',
-                    quantity: '1',
-                    executedQty: '0',
-                    fee: '0',
-                    side: 'BUY',
-                    type: 'LIMIT',
-                    timeInForce: 'GTC',
-                    reduceOnly: false,
-                    postOnly: false,
-                    createTime: 1592465880683,
-                    updateTime: 1592465880683,
-                    status: 'ACCEPTED',
-                    avgPrice: '0',
-                    clientOrderId: '',
-                    priceScale: 2,
-                    quantityScale: 2,
-                    optionSide: 'CALL',
-                    quoteAsset: 'USDT',
-                    mmp: false,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        orderId: 4611875134427365000,
+                        symbol: 'BTC-200730-9000-C',
+                        price: '100',
+                        quantity: '1',
+                        executedQty: '0',
+                        fee: '0',
+                        side: 'BUY',
+                        type: 'LIMIT',
+                        timeInForce: 'GTC',
+                        reduceOnly: false,
+                        postOnly: false,
+                        createTime: 1592465880683,
+                        updateTime: 1592465880683,
+                        status: 'ACCEPTED',
+                        avgPrice: '0',
+                        clientOrderId: '',
+                        priceScale: 2,
+                        quantityScale: 2,
+                        optionSide: 'CALL',
+                        quoteAsset: 'USDT',
+                        mmp: false,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryCurrentOpenOptionOrders').mockReturnValue(
                 Promise.resolve({
@@ -1065,33 +1094,35 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = [
-                {
-                    orderId: 4611922413427360000,
-                    symbol: 'BTC-220715-2000-C',
-                    price: '18000.00000000',
-                    quantity: '-0.50000000',
-                    executedQty: '-0.50000000',
-                    fee: '3.00000000',
-                    side: 'SELL',
-                    type: 'LIMIT',
-                    timeInForce: 'GTC',
-                    reduceOnly: false,
-                    postOnly: false,
-                    createTime: 1657867694244,
-                    updateTime: 1657867888216,
-                    status: 'FILLED',
-                    reason: '0',
-                    avgPrice: '18000.00000000',
-                    source: 'API',
-                    clientOrderId: '',
-                    priceScale: 2,
-                    quantityScale: 2,
-                    optionSide: 'CALL',
-                    quoteAsset: 'USDT',
-                    mmp: false,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        orderId: 4611922413427360000,
+                        symbol: 'BTC-220715-2000-C',
+                        price: '18000.00000000',
+                        quantity: '-0.50000000',
+                        executedQty: '-0.50000000',
+                        fee: '3.00000000',
+                        side: 'SELL',
+                        type: 'LIMIT',
+                        timeInForce: 'GTC',
+                        reduceOnly: false,
+                        postOnly: false,
+                        createTime: 1657867694244,
+                        updateTime: 1657867888216,
+                        status: 'FILLED',
+                        reason: '0',
+                        avgPrice: '18000.00000000',
+                        source: 'API',
+                        clientOrderId: '',
+                        priceScale: 2,
+                        quantityScale: 2,
+                        optionSide: 'CALL',
+                        quoteAsset: 'USDT',
+                        mmp: false,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryOptionOrderHistory').mockReturnValue(
                 Promise.resolve({
@@ -1117,33 +1148,35 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    orderId: 4611922413427360000,
-                    symbol: 'BTC-220715-2000-C',
-                    price: '18000.00000000',
-                    quantity: '-0.50000000',
-                    executedQty: '-0.50000000',
-                    fee: '3.00000000',
-                    side: 'SELL',
-                    type: 'LIMIT',
-                    timeInForce: 'GTC',
-                    reduceOnly: false,
-                    postOnly: false,
-                    createTime: 1657867694244,
-                    updateTime: 1657867888216,
-                    status: 'FILLED',
-                    reason: '0',
-                    avgPrice: '18000.00000000',
-                    source: 'API',
-                    clientOrderId: '',
-                    priceScale: 2,
-                    quantityScale: 2,
-                    optionSide: 'CALL',
-                    quoteAsset: 'USDT',
-                    mmp: false,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        orderId: 4611922413427360000,
+                        symbol: 'BTC-220715-2000-C',
+                        price: '18000.00000000',
+                        quantity: '-0.50000000',
+                        executedQty: '-0.50000000',
+                        fee: '3.00000000',
+                        side: 'SELL',
+                        type: 'LIMIT',
+                        timeInForce: 'GTC',
+                        reduceOnly: false,
+                        postOnly: false,
+                        createTime: 1657867694244,
+                        updateTime: 1657867888216,
+                        status: 'FILLED',
+                        reason: '0',
+                        avgPrice: '18000.00000000',
+                        source: 'API',
+                        clientOrderId: '',
+                        priceScale: 2,
+                        quantityScale: 2,
+                        optionSide: 'CALL',
+                        quoteAsset: 'USDT',
+                        mmp: false,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryOptionOrderHistory').mockReturnValue(
                 Promise.resolve({
@@ -1199,30 +1232,32 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = {
-                orderId: 4611875134427365000,
-                symbol: 'BTC-200730-9000-C',
-                price: '100',
-                quantity: '1',
-                executedQty: '0',
-                fee: '0',
-                side: 'BUY',
-                type: 'LIMIT',
-                timeInForce: 'GTC',
-                reduceOnly: false,
-                postOnly: false,
-                createTime: 1592465880683,
-                updateTime: 1566818724722,
-                status: 'ACCEPTED',
-                avgPrice: '0',
-                source: 'API',
-                clientOrderId: '',
-                priceScale: 2,
-                quantityScale: 2,
-                optionSide: 'CALL',
-                quoteAsset: 'USDT',
-                mmp: false,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    orderId: 4611875134427365000,
+                    symbol: 'BTC-200730-9000-C',
+                    price: '100',
+                    quantity: '1',
+                    executedQty: '0',
+                    fee: '0',
+                    side: 'BUY',
+                    type: 'LIMIT',
+                    timeInForce: 'GTC',
+                    reduceOnly: false,
+                    postOnly: false,
+                    createTime: 1592465880683,
+                    updateTime: 1566818724722,
+                    status: 'ACCEPTED',
+                    avgPrice: '0',
+                    source: 'API',
+                    clientOrderId: '',
+                    priceScale: 2,
+                    quantityScale: 2,
+                    optionSide: 'CALL',
+                    quoteAsset: 'USDT',
+                    mmp: false,
+                })
+            );
 
             const spy = jest.spyOn(client, 'querySingleOrder').mockReturnValue(
                 Promise.resolve({
@@ -1246,30 +1281,32 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                orderId: 4611875134427365000,
-                symbol: 'BTC-200730-9000-C',
-                price: '100',
-                quantity: '1',
-                executedQty: '0',
-                fee: '0',
-                side: 'BUY',
-                type: 'LIMIT',
-                timeInForce: 'GTC',
-                reduceOnly: false,
-                postOnly: false,
-                createTime: 1592465880683,
-                updateTime: 1566818724722,
-                status: 'ACCEPTED',
-                avgPrice: '0',
-                source: 'API',
-                clientOrderId: '',
-                priceScale: 2,
-                quantityScale: 2,
-                optionSide: 'CALL',
-                quoteAsset: 'USDT',
-                mmp: false,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    orderId: 4611875134427365000,
+                    symbol: 'BTC-200730-9000-C',
+                    price: '100',
+                    quantity: '1',
+                    executedQty: '0',
+                    fee: '0',
+                    side: 'BUY',
+                    type: 'LIMIT',
+                    timeInForce: 'GTC',
+                    reduceOnly: false,
+                    postOnly: false,
+                    createTime: 1592465880683,
+                    updateTime: 1566818724722,
+                    status: 'ACCEPTED',
+                    avgPrice: '0',
+                    source: 'API',
+                    clientOrderId: '',
+                    priceScale: 2,
+                    quantityScale: 2,
+                    optionSide: 'CALL',
+                    quoteAsset: 'USDT',
+                    mmp: false,
+                })
+            );
 
             const spy = jest.spyOn(client, 'querySingleOrder').mockReturnValue(
                 Promise.resolve({
@@ -1319,24 +1356,26 @@ describe('TradeApi', () => {
 
     describe('userExerciseRecord()', () => {
         it('should execute userExerciseRecord() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    id: '1125899906842624042',
-                    currency: 'USDT',
-                    symbol: 'BTC-220721-25000-C',
-                    exercisePrice: '25000.00000000',
-                    markPrice: '25000.00000000',
-                    quantity: '1.00000000',
-                    amount: '0.00000000',
-                    fee: '0.00000000',
-                    createDate: 1658361600000,
-                    priceScale: 2,
-                    quantityScale: 2,
-                    optionSide: 'CALL',
-                    positionSide: 'LONG',
-                    quoteAsset: 'USDT',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        id: '1125899906842624042',
+                        currency: 'USDT',
+                        symbol: 'BTC-220721-25000-C',
+                        exercisePrice: '25000.00000000',
+                        markPrice: '25000.00000000',
+                        quantity: '1.00000000',
+                        amount: '0.00000000',
+                        fee: '0.00000000',
+                        createDate: 1658361600000,
+                        priceScale: 2,
+                        quantityScale: 2,
+                        optionSide: 'CALL',
+                        positionSide: 'LONG',
+                        quoteAsset: 'USDT',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'userExerciseRecord').mockReturnValue(
                 Promise.resolve({
@@ -1361,24 +1400,26 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    id: '1125899906842624042',
-                    currency: 'USDT',
-                    symbol: 'BTC-220721-25000-C',
-                    exercisePrice: '25000.00000000',
-                    markPrice: '25000.00000000',
-                    quantity: '1.00000000',
-                    amount: '0.00000000',
-                    fee: '0.00000000',
-                    createDate: 1658361600000,
-                    priceScale: 2,
-                    quantityScale: 2,
-                    optionSide: 'CALL',
-                    positionSide: 'LONG',
-                    quoteAsset: 'USDT',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        id: '1125899906842624042',
+                        currency: 'USDT',
+                        symbol: 'BTC-220721-25000-C',
+                        exercisePrice: '25000.00000000',
+                        markPrice: '25000.00000000',
+                        quantity: '1.00000000',
+                        amount: '0.00000000',
+                        fee: '0.00000000',
+                        createDate: 1658361600000,
+                        priceScale: 2,
+                        quantityScale: 2,
+                        optionSide: 'CALL',
+                        positionSide: 'LONG',
+                        quoteAsset: 'USDT',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'userExerciseRecord').mockReturnValue(
                 Promise.resolve({

@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { MarketMakerEndpointsApi } from '../../../src/rest-api';
@@ -52,7 +53,7 @@ describe('MarketMakerEndpointsApi', () => {
                 underlyings: 'underlyings_example',
             };
 
-            mockResponse = { underlyings: ['BTCUSDT', 'ETHUSDT'] };
+            mockResponse = JSONParse(JSONStringify({ underlyings: ['BTCUSDT', 'ETHUSDT'] }));
 
             const spy = jest.spyOn(client, 'autoCancelAllOpenOrders').mockReturnValue(
                 Promise.resolve({
@@ -74,7 +75,7 @@ describe('MarketMakerEndpointsApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { underlyings: ['BTCUSDT', 'ETHUSDT'] };
+            mockResponse = JSONParse(JSONStringify({ underlyings: ['BTCUSDT', 'ETHUSDT'] }));
 
             const spy = jest.spyOn(client, 'autoCancelAllOpenOrders').mockReturnValue(
                 Promise.resolve({
@@ -126,7 +127,9 @@ describe('MarketMakerEndpointsApi', () => {
 
     describe('getAutoCancelAllOpenOrders()', () => {
         it('should execute getAutoCancelAllOpenOrders() successfully with required parameters only', async () => {
-            mockResponse = { underlying: 'ETHUSDT', countdownTime: 100000 };
+            mockResponse = JSONParse(
+                JSONStringify({ underlying: 'ETHUSDT', countdownTime: 100000 })
+            );
 
             const spy = jest.spyOn(client, 'getAutoCancelAllOpenOrders').mockReturnValue(
                 Promise.resolve({
@@ -148,7 +151,9 @@ describe('MarketMakerEndpointsApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { underlying: 'ETHUSDT', countdownTime: 100000 };
+            mockResponse = JSONParse(
+                JSONStringify({ underlying: 'ETHUSDT', countdownTime: 100000 })
+            );
 
             const spy = jest.spyOn(client, 'getAutoCancelAllOpenOrders').mockReturnValue(
                 Promise.resolve({
@@ -184,15 +189,17 @@ describe('MarketMakerEndpointsApi', () => {
 
     describe('getMarketMakerProtectionConfig()', () => {
         it('should execute getMarketMakerProtectionConfig() successfully with required parameters only', async () => {
-            mockResponse = {
-                underlyingId: 2,
-                underlying: 'BTCUSDT',
-                windowTimeInMilliseconds: 3000,
-                frozenTimeInMilliseconds: 300000,
-                qtyLimit: '2',
-                deltaLimit: '2.3',
-                lastTriggerTime: 0,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    underlyingId: 2,
+                    underlying: 'BTCUSDT',
+                    windowTimeInMilliseconds: 3000,
+                    frozenTimeInMilliseconds: 300000,
+                    qtyLimit: '2',
+                    deltaLimit: '2.3',
+                    lastTriggerTime: 0,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getMarketMakerProtectionConfig').mockReturnValue(
                 Promise.resolve({
@@ -214,15 +221,17 @@ describe('MarketMakerEndpointsApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                underlyingId: 2,
-                underlying: 'BTCUSDT',
-                windowTimeInMilliseconds: 3000,
-                frozenTimeInMilliseconds: 300000,
-                qtyLimit: '2',
-                deltaLimit: '2.3',
-                lastTriggerTime: 0,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    underlyingId: 2,
+                    underlying: 'BTCUSDT',
+                    windowTimeInMilliseconds: 3000,
+                    frozenTimeInMilliseconds: 300000,
+                    qtyLimit: '2',
+                    deltaLimit: '2.3',
+                    lastTriggerTime: 0,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getMarketMakerProtectionConfig').mockReturnValue(
                 Promise.resolve({
@@ -258,15 +267,17 @@ describe('MarketMakerEndpointsApi', () => {
 
     describe('resetMarketMakerProtectionConfig()', () => {
         it('should execute resetMarketMakerProtectionConfig() successfully with required parameters only', async () => {
-            mockResponse = {
-                underlyingId: 2,
-                underlying: 'BTCUSDT',
-                windowTimeInMilliseconds: 3000,
-                frozenTimeInMilliseconds: 300000,
-                qtyLimit: '2',
-                deltaLimit: '2.3',
-                lastTriggerTime: 0,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    underlyingId: 2,
+                    underlying: 'BTCUSDT',
+                    windowTimeInMilliseconds: 3000,
+                    frozenTimeInMilliseconds: 300000,
+                    qtyLimit: '2',
+                    deltaLimit: '2.3',
+                    lastTriggerTime: 0,
+                })
+            );
 
             const spy = jest.spyOn(client, 'resetMarketMakerProtectionConfig').mockReturnValue(
                 Promise.resolve({
@@ -288,15 +299,17 @@ describe('MarketMakerEndpointsApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                underlyingId: 2,
-                underlying: 'BTCUSDT',
-                windowTimeInMilliseconds: 3000,
-                frozenTimeInMilliseconds: 300000,
-                qtyLimit: '2',
-                deltaLimit: '2.3',
-                lastTriggerTime: 0,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    underlyingId: 2,
+                    underlying: 'BTCUSDT',
+                    windowTimeInMilliseconds: 3000,
+                    frozenTimeInMilliseconds: 300000,
+                    qtyLimit: '2',
+                    deltaLimit: '2.3',
+                    lastTriggerTime: 0,
+                })
+            );
 
             const spy = jest.spyOn(client, 'resetMarketMakerProtectionConfig').mockReturnValue(
                 Promise.resolve({
@@ -339,7 +352,9 @@ describe('MarketMakerEndpointsApi', () => {
                 countdownTime: 789,
             };
 
-            mockResponse = { underlying: 'ETHUSDT', countdownTime: 30000 };
+            mockResponse = JSONParse(
+                JSONStringify({ underlying: 'ETHUSDT', countdownTime: 30000 })
+            );
 
             const spy = jest.spyOn(client, 'setAutoCancelAllOpenOrders').mockReturnValue(
                 Promise.resolve({
@@ -362,7 +377,9 @@ describe('MarketMakerEndpointsApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { underlying: 'ETHUSDT', countdownTime: 30000 };
+            mockResponse = JSONParse(
+                JSONStringify({ underlying: 'ETHUSDT', countdownTime: 30000 })
+            );
 
             const spy = jest.spyOn(client, 'setAutoCancelAllOpenOrders').mockReturnValue(
                 Promise.resolve({
@@ -431,15 +448,17 @@ describe('MarketMakerEndpointsApi', () => {
 
     describe('setMarketMakerProtectionConfig()', () => {
         it('should execute setMarketMakerProtectionConfig() successfully with required parameters only', async () => {
-            mockResponse = {
-                underlyingId: 2,
-                underlying: 'BTCUSDT',
-                windowTimeInMilliseconds: 3000,
-                frozenTimeInMilliseconds: 300000,
-                qtyLimit: '2',
-                deltaLimit: '2.3',
-                lastTriggerTime: 0,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    underlyingId: 2,
+                    underlying: 'BTCUSDT',
+                    windowTimeInMilliseconds: 3000,
+                    frozenTimeInMilliseconds: 300000,
+                    qtyLimit: '2',
+                    deltaLimit: '2.3',
+                    lastTriggerTime: 0,
+                })
+            );
 
             const spy = jest.spyOn(client, 'setMarketMakerProtectionConfig').mockReturnValue(
                 Promise.resolve({
@@ -465,15 +484,17 @@ describe('MarketMakerEndpointsApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                underlyingId: 2,
-                underlying: 'BTCUSDT',
-                windowTimeInMilliseconds: 3000,
-                frozenTimeInMilliseconds: 300000,
-                qtyLimit: '2',
-                deltaLimit: '2.3',
-                lastTriggerTime: 0,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    underlyingId: 2,
+                    underlying: 'BTCUSDT',
+                    windowTimeInMilliseconds: 3000,
+                    frozenTimeInMilliseconds: 300000,
+                    qtyLimit: '2',
+                    deltaLimit: '2.3',
+                    lastTriggerTime: 0,
+                })
+            );
 
             const spy = jest.spyOn(client, 'setMarketMakerProtectionConfig').mockReturnValue(
                 Promise.resolve({

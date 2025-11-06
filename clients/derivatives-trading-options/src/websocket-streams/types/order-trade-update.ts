@@ -26,10 +26,10 @@ import type { OrderTradeUpdateOInner } from './order-trade-update-oinner';
 export interface OrderTradeUpdate {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderTradeUpdate
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {Array<OrderTradeUpdateOInner>}

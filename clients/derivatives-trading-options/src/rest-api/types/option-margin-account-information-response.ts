@@ -41,8 +41,8 @@ export interface OptionMarginAccountInformationResponse {
     greek?: Array<OptionAccountInformationResponseGreekInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OptionMarginAccountInformationResponse
      */
-    time?: number;
+    time?: number | bigint;
 }

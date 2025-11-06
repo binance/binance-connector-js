@@ -21,22 +21,22 @@
 export interface AccountTradeListResponseInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountTradeListResponseInner
      */
-    id?: number;
+    id?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountTradeListResponseInner
      */
-    tradeId?: number;
+    tradeId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountTradeListResponseInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -99,22 +99,22 @@ export interface AccountTradeListResponseInner {
     quoteAsset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountTradeListResponseInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountTradeListResponseInner
      */
-    priceScale?: number;
+    priceScale?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountTradeListResponseInner
      */
-    quantityScale?: number;
+    quantityScale?: number | bigint;
     /**
      *
      * @type {string}

@@ -39,10 +39,10 @@ export interface AccountUpdateBInner {
     u?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountUpdateBInner
      */
-    U?: number;
+    U?: number | bigint;
     /**
      *
      * @type {string}

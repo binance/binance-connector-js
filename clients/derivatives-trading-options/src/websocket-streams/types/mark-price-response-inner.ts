@@ -27,10 +27,10 @@ export interface MarkPriceResponseInner {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarkPriceResponseInner
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}

@@ -32,10 +32,10 @@ export interface NewBlockTradeOrderResponse {
     blockTradeSettlementKey?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NewBlockTradeOrderResponse
      */
-    expireTime?: number;
+    expireTime?: number | bigint;
     /**
      *
      * @type {string}

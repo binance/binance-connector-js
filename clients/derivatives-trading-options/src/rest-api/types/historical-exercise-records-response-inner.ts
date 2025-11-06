@@ -39,10 +39,10 @@ export interface HistoricalExerciseRecordsResponseInner {
     realStrikePrice?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof HistoricalExerciseRecordsResponseInner
      */
-    expiryDate?: number;
+    expiryDate?: number | bigint;
     /**
      *
      * @type {string}

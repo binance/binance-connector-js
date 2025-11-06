@@ -33,14 +33,14 @@ export interface ExchangeInformationResponseRateLimitsInner {
     interval?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExchangeInformationResponseRateLimitsInner
      */
-    intervalNum?: number;
+    intervalNum?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExchangeInformationResponseRateLimitsInner
      */
-    limit?: number;
+    limit?: number | bigint;
 }

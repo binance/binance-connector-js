@@ -21,10 +21,10 @@
 export interface RiskLevelChange {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RiskLevelChange
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}

@@ -87,22 +87,22 @@ export interface OptionPositionInformationResponseInner {
     positionCost?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OptionPositionInformationResponseInner
      */
-    expiryDate?: number;
+    expiryDate?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OptionPositionInformationResponseInner
      */
-    priceScale?: number;
+    priceScale?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OptionPositionInformationResponseInner
      */
-    quantityScale?: number;
+    quantityScale?: number | bigint;
     /**
      *
      * @type {string}

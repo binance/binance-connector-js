@@ -41,10 +41,10 @@ export interface OptionAccountInformationResponse {
     greek?: Array<OptionAccountInformationResponseGreekInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OptionAccountInformationResponse
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}
