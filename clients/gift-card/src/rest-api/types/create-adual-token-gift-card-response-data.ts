@@ -33,8 +33,8 @@ export interface CreateADualTokenGiftCardResponseData {
     code?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CreateADualTokenGiftCardResponseData
      */
-    expiredTime?: number;
+    expiredTime?: number | bigint;
 }

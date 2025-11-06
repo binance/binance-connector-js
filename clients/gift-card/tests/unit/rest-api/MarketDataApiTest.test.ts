@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { MarketDataApi } from '../../../src/rest-api';
@@ -54,16 +55,18 @@ describe('MarketDataApi', () => {
                 baseTokenAmount: 1.0,
             };
 
-            mockResponse = {
-                code: '000000',
-                message: 'success',
-                data: {
-                    referenceNo: '0033002144060553',
-                    code: '6H9EKF5ECCWFBHGE',
-                    expiredTime: 1727417154000,
-                },
-                success: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: {
+                        referenceNo: '0033002144060553',
+                        code: '6H9EKF5ECCWFBHGE',
+                        expiredTime: 1727417154000,
+                    },
+                    success: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'createADualTokenGiftCard').mockReturnValue(
                 Promise.resolve({
@@ -87,16 +90,18 @@ describe('MarketDataApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                code: '000000',
-                message: 'success',
-                data: {
-                    referenceNo: '0033002144060553',
-                    code: '6H9EKF5ECCWFBHGE',
-                    expiredTime: 1727417154000,
-                },
-                success: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: {
+                        referenceNo: '0033002144060553',
+                        code: '6H9EKF5ECCWFBHGE',
+                        expiredTime: 1727417154000,
+                    },
+                    success: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'createADualTokenGiftCard').mockReturnValue(
                 Promise.resolve({
@@ -185,16 +190,18 @@ describe('MarketDataApi', () => {
                 amount: 1.0,
             };
 
-            mockResponse = {
-                code: '000000',
-                message: 'success',
-                data: {
-                    referenceNo: '0033002144060553',
-                    code: '6H9EKF5ECCWFBHGE',
-                    expiredTime: 1727417154000,
-                },
-                success: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: {
+                        referenceNo: '0033002144060553',
+                        code: '6H9EKF5ECCWFBHGE',
+                        expiredTime: 1727417154000,
+                    },
+                    success: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'createASingleTokenGiftCard').mockReturnValue(
                 Promise.resolve({
@@ -217,16 +224,18 @@ describe('MarketDataApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                code: '000000',
-                message: 'success',
-                data: {
-                    referenceNo: '0033002144060553',
-                    code: '6H9EKF5ECCWFBHGE',
-                    expiredTime: 1727417154000,
-                },
-                success: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: {
+                        referenceNo: '0033002144060553',
+                        code: '6H9EKF5ECCWFBHGE',
+                        expiredTime: 1727417154000,
+                    },
+                    success: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'createASingleTokenGiftCard').mockReturnValue(
                 Promise.resolve({
@@ -295,12 +304,14 @@ describe('MarketDataApi', () => {
 
     describe('fetchRsaPublicKey()', () => {
         it('should execute fetchRsaPublicKey() successfully with required parameters only', async () => {
-            mockResponse = {
-                code: '000000',
-                message: 'success',
-                data: 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCXBBVKLAc1GQ5FsIFFqOHrPTox5noBONIKr+IAedTR9FkVxq6e65updEbfdhRNkMOeYIO2i0UylrjGC0X8YSoIszmrVHeV0l06Zh1oJuZos1+7N+WLuz9JvlPaawof3GUakTxYWWCa9+8KIbLKsoKMdfS96VT+8iOXO3quMGKUmQIDAQAB',
-                success: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCXBBVKLAc1GQ5FsIFFqOHrPTox5noBONIKr+IAedTR9FkVxq6e65updEbfdhRNkMOeYIO2i0UylrjGC0X8YSoIszmrVHeV0l06Zh1oJuZos1+7N+WLuz9JvlPaawof3GUakTxYWWCa9+8KIbLKsoKMdfS96VT+8iOXO3quMGKUmQIDAQAB',
+                    success: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'fetchRsaPublicKey').mockReturnValue(
                 Promise.resolve({
@@ -321,12 +332,14 @@ describe('MarketDataApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                code: '000000',
-                message: 'success',
-                data: 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCXBBVKLAc1GQ5FsIFFqOHrPTox5noBONIKr+IAedTR9FkVxq6e65updEbfdhRNkMOeYIO2i0UylrjGC0X8YSoIszmrVHeV0l06Zh1oJuZos1+7N+WLuz9JvlPaawof3GUakTxYWWCa9+8KIbLKsoKMdfS96VT+8iOXO3quMGKUmQIDAQAB',
-                success: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCXBBVKLAc1GQ5FsIFFqOHrPTox5noBONIKr+IAedTR9FkVxq6e65updEbfdhRNkMOeYIO2i0UylrjGC0X8YSoIszmrVHeV0l06Zh1oJuZos1+7N+WLuz9JvlPaawof3GUakTxYWWCa9+8KIbLKsoKMdfS96VT+8iOXO3quMGKUmQIDAQAB',
+                    success: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'fetchRsaPublicKey').mockReturnValue(
                 Promise.resolve({
@@ -364,12 +377,14 @@ describe('MarketDataApi', () => {
                 baseToken: 'baseToken_example',
             };
 
-            mockResponse = {
-                code: '000000',
-                message: 'success',
-                data: [{ coin: 'BNB', fromMin: '0.01', fromMax: '1' }],
-                success: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: [{ coin: 'BNB', fromMin: '0.01', fromMax: '1' }],
+                    success: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'fetchTokenLimit').mockReturnValue(
                 Promise.resolve({
@@ -391,12 +406,14 @@ describe('MarketDataApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                code: '000000',
-                message: 'success',
-                data: [{ coin: 'BNB', fromMin: '0.01', fromMax: '1' }],
-                success: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: [{ coin: 'BNB', fromMin: '0.01', fromMax: '1' }],
+                    success: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'fetchTokenLimit').mockReturnValue(
                 Promise.resolve({
@@ -450,17 +467,19 @@ describe('MarketDataApi', () => {
                 code: 'code_example',
             };
 
-            mockResponse = {
-                code: '000000',
-                message: 'success',
-                data: {
-                    referenceNo: '0033002328060227',
-                    identityNo: '10317392647411060736',
-                    token: 'BNB',
-                    amount: '0.00000001',
-                },
-                success: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: {
+                        referenceNo: '0033002328060227',
+                        identityNo: '10317392647411060736',
+                        token: 'BNB',
+                        amount: '0.00000001',
+                    },
+                    success: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'redeemABinanceGiftCard').mockReturnValue(
                 Promise.resolve({
@@ -483,17 +502,19 @@ describe('MarketDataApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                code: '000000',
-                message: 'success',
-                data: {
-                    referenceNo: '0033002328060227',
-                    identityNo: '10317392647411060736',
-                    token: 'BNB',
-                    amount: '0.00000001',
-                },
-                success: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: {
+                        referenceNo: '0033002328060227',
+                        identityNo: '10317392647411060736',
+                        token: 'BNB',
+                        amount: '0.00000001',
+                    },
+                    success: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'redeemABinanceGiftCard').mockReturnValue(
                 Promise.resolve({
@@ -549,12 +570,14 @@ describe('MarketDataApi', () => {
                 referenceNo: 'referenceNo_example',
             };
 
-            mockResponse = {
-                code: '000000',
-                message: 'success',
-                data: { valid: true, token: 'BNB', amount: '0.00000001' },
-                success: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: { valid: true, token: 'BNB', amount: '0.00000001' },
+                    success: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'verifyBinanceGiftCardByGiftCardNumber').mockReturnValue(
                 Promise.resolve({
@@ -576,12 +599,14 @@ describe('MarketDataApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                code: '000000',
-                message: 'success',
-                data: { valid: true, token: 'BNB', amount: '0.00000001' },
-                success: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: { valid: true, token: 'BNB', amount: '0.00000001' },
+                    success: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'verifyBinanceGiftCardByGiftCardNumber').mockReturnValue(
                 Promise.resolve({

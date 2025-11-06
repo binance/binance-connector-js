@@ -76,7 +76,7 @@ export class RestAPI {
     }
 
     /**
-     * * This API is for creating a dual-token ( stablecoin-denominated) Binance Gift Card. You may create a gift card using USDT as baseToken, that is redeemable to another designated token (faceToken). For example, you can create a fixed-value BTC gift card and pay with 100 USDT plus 1 USDT fee. This gift card can keep the value fixed at 100 USDT before redemption, and will be redeemable to BTC equivalent to 100 USDT upon redemption.
+     * * This API is for creating a dual-token ( stablecoin-denominated) Binance Gift Card. You may create a gift card using USDT as baseToken, that is redeemable to another designated token (faceToken). For example, you can create a fixed-value BTC gift card and pay with 100 USDT plus minting fee. This gift card can keep the value fixed at 100 USDT before redemption, and will be redeemable to BTC equivalent to 100 USDT upon redemption.
      * Once successfully created, the amount of baseToken (e.g. USDT) in the fixed-value gift card along with the fee would be deducted from your funding wallet.
      *
      *
@@ -90,6 +90,7 @@ export class RestAPI {
      *
      * @summary Create a dual-token gift card(fixed value, discount feature)(TRADE)
      * @param {CreateADualTokenGiftCardRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<CreateADualTokenGiftCardResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/gift_card/market-data/Create-a-dual-token-gift-card Binance API Documentation}
@@ -114,6 +115,7 @@ export class RestAPI {
      *
      * @summary Create a single-token gift card (USER_DATA)
      * @param {CreateASingleTokenGiftCardRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<CreateASingleTokenGiftCardResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/gift_card/market-data/Create-a-single-token-gift-card Binance API Documentation}
@@ -134,6 +136,7 @@ export class RestAPI {
      *
      * @summary Fetch RSA Public Key(USER_DATA)
      * @param {FetchRsaPublicKeyRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<FetchRsaPublicKeyResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/gift_card/market-data/Fetch-RSA-Public-Key Binance API Documentation}
@@ -151,6 +154,7 @@ export class RestAPI {
      *
      * @summary Fetch Token Limit(USER_DATA)
      * @param {FetchTokenLimitRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<FetchTokenLimitResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/gift_card/market-data/Fetch-Token-Limit Binance API Documentation}
@@ -178,6 +182,7 @@ export class RestAPI {
      *
      * @summary Redeem a Binance Gift Card(USER_DATA)
      * @param {RedeemABinanceGiftCardRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<RedeemABinanceGiftCardResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/gift_card/market-data/Redeem-a-Binance-Gift-Card Binance API Documentation}
@@ -197,6 +202,7 @@ export class RestAPI {
      *
      * @summary Verify Binance Gift Card by Gift Card Number(USER_DATA)
      * @param {VerifyBinanceGiftCardByGiftCardNumberRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<VerifyBinanceGiftCardByGiftCardNumberResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/gift_card/market-data/Verify-Binance-Gift-Card-by-Gift-Card-Number Binance API Documentation}
