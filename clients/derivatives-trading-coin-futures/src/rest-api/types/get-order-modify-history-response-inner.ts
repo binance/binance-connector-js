@@ -26,10 +26,10 @@ import type { GetOrderModifyHistoryResponseInnerAmendment } from './get-order-mo
 export interface GetOrderModifyHistoryResponseInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetOrderModifyHistoryResponseInner
      */
-    amendmentId?: number;
+    amendmentId?: number | bigint;
     /**
      *
      * @type {string}
@@ -44,10 +44,10 @@ export interface GetOrderModifyHistoryResponseInner {
     pair?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetOrderModifyHistoryResponseInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -56,10 +56,10 @@ export interface GetOrderModifyHistoryResponseInner {
     clientOrderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetOrderModifyHistoryResponseInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {GetOrderModifyHistoryResponseInnerAmendment}

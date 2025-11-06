@@ -27,10 +27,10 @@ export interface IndividualSymbolMiniTickerStreamResponse {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof IndividualSymbolMiniTickerStreamResponse
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}

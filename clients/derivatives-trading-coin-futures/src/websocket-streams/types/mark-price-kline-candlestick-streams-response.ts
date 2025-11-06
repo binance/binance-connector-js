@@ -32,10 +32,10 @@ export interface MarkPriceKlineCandlestickStreamsResponse {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarkPriceKlineCandlestickStreamsResponse
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}

@@ -27,10 +27,10 @@ export interface IndividualSymbolBookTickerStreamsResponse {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
-    u?: number;
+    u?: number | bigint;
     /**
      *
      * @type {string}
@@ -69,14 +69,14 @@ export interface IndividualSymbolBookTickerStreamsResponse {
     A?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
-    E?: number;
+    E?: number | bigint;
 }

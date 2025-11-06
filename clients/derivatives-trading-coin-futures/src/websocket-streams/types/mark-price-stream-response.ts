@@ -27,10 +27,10 @@ export interface MarkPriceStreamResponse {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarkPriceStreamResponse
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}
@@ -63,8 +63,8 @@ export interface MarkPriceStreamResponse {
     r?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarkPriceStreamResponse
      */
-    T?: number;
+    T?: number | bigint;
 }

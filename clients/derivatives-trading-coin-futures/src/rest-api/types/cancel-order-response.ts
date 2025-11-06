@@ -51,10 +51,10 @@ export interface CancelOrderResponse {
     executedQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelOrderResponse
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -147,10 +147,10 @@ export interface CancelOrderResponse {
     priceRate?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelOrderResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}

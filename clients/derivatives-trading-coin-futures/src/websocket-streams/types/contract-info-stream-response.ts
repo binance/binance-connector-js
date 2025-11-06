@@ -32,10 +32,10 @@ export interface ContractInfoStreamResponse {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ContractInfoStreamResponse
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}
@@ -56,16 +56,16 @@ export interface ContractInfoStreamResponse {
     ct?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ContractInfoStreamResponse
      */
-    dt?: number;
+    dt?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ContractInfoStreamResponse
      */
-    ot?: number;
+    ot?: number | bigint;
     /**
      *
      * @type {string}

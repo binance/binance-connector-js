@@ -27,8 +27,8 @@ export interface AccountConfigUpdateAc {
     s?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountConfigUpdateAc
      */
-    l?: number;
+    l?: number | bigint;
 }

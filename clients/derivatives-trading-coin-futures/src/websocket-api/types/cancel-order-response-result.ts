@@ -21,10 +21,10 @@
 export interface CancelOrderResponseResult {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelOrderResponseResult
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -147,8 +147,8 @@ export interface CancelOrderResponseResult {
     origType?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelOrderResponseResult
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

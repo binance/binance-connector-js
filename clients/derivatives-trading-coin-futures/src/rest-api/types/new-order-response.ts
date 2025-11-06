@@ -45,10 +45,10 @@ export interface NewOrderResponse {
     executedQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NewOrderResponse
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -147,10 +147,10 @@ export interface NewOrderResponse {
     priceRate?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NewOrderResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}

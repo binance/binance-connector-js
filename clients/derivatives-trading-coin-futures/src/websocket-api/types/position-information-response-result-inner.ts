@@ -105,10 +105,10 @@ export interface PositionInformationResponseResultInner {
     isolatedWallet?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PositionInformationResponseResultInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}

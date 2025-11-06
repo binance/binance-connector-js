@@ -45,8 +45,8 @@ export interface OpenInterestStatisticsResponseInner {
     sumOpenInterestValue?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OpenInterestStatisticsResponseInner
      */
-    timestamp?: number;
+    timestamp?: number | bigint;
 }

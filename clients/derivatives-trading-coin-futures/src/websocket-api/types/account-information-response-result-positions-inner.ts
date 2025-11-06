@@ -99,10 +99,10 @@ export interface AccountInformationResponseResultPositionsInner {
     isolatedWallet?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountInformationResponseResultPositionsInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}

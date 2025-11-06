@@ -93,32 +93,32 @@ export interface Ticker24hrPriceChangeStatisticsResponseInner {
     baseVolume?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
-    openTime?: number;
+    openTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
-    closeTime?: number;
+    closeTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
-    firstId?: number;
+    firstId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
-    lastId?: number;
+    lastId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Ticker24hrPriceChangeStatisticsResponseInner
      */
-    count?: number;
+    count?: number | bigint;
 }

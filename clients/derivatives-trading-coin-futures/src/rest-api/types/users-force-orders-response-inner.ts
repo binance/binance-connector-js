@@ -21,10 +21,10 @@
 export interface UsersForceOrdersResponseInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UsersForceOrdersResponseInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -141,14 +141,14 @@ export interface UsersForceOrdersResponseInner {
     origType?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UsersForceOrdersResponseInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof UsersForceOrdersResponseInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

@@ -21,10 +21,10 @@
 export interface ChangeMarginTypeResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ChangeMarginTypeResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}

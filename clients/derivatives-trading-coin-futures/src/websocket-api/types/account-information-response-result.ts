@@ -29,10 +29,10 @@ import type { AccountInformationResponseResultPositionsInner } from './account-i
 export interface AccountInformationResponseResult {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountInformationResponseResult
      */
-    feeTier?: number;
+    feeTier?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -53,10 +53,10 @@ export interface AccountInformationResponseResult {
     canWithdraw?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountInformationResponseResult
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {Array<AccountInformationResponseResultAssetsInner>}

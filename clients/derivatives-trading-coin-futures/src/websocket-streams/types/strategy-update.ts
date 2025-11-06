@@ -26,16 +26,16 @@ import type { StrategyUpdateSu } from './strategy-update-su';
 export interface StrategyUpdate {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StrategyUpdate
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StrategyUpdate
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {StrategyUpdateSu}

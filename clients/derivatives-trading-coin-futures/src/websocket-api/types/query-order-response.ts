@@ -35,10 +35,10 @@ export interface QueryOrderResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryOrderResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {QueryOrderResponseResult}

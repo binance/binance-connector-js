@@ -21,10 +21,10 @@
 export interface CompressedAggregateTradesListResponseInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CompressedAggregateTradesListResponseInner
      */
-    a?: number;
+    a?: number | bigint;
     /**
      *
      * @type {string}
@@ -39,22 +39,22 @@ export interface CompressedAggregateTradesListResponseInner {
     q?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CompressedAggregateTradesListResponseInner
      */
-    f?: number;
+    f?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CompressedAggregateTradesListResponseInner
      */
-    l?: number;
+    l?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CompressedAggregateTradesListResponseInner
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {boolean}

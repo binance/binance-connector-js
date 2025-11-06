@@ -63,14 +63,14 @@ export interface IndexPriceAndMarkPriceResponseInner {
     interestRate?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof IndexPriceAndMarkPriceResponseInner
      */
-    nextFundingTime?: number;
+    nextFundingTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof IndexPriceAndMarkPriceResponseInner
      */
-    time?: number;
+    time?: number | bigint;
 }

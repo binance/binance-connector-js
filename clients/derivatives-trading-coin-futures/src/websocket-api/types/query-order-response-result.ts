@@ -21,10 +21,10 @@
 export interface QueryOrderResponseResult {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryOrderResponseResult
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -147,16 +147,16 @@ export interface QueryOrderResponseResult {
     selfTradePreventionMode?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryOrderResponseResult
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryOrderResponseResult
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}

@@ -29,10 +29,10 @@ import type { OrderBookResponseBidsItem } from './order-book-response-bids-item'
 export interface OrderBookResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderBookResponse
      */
-    lastUpdateId?: number;
+    lastUpdateId?: number | bigint;
     /**
      *
      * @type {string}
@@ -47,16 +47,16 @@ export interface OrderBookResponse {
     pair?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderBookResponse
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderBookResponse
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {Array<OrderBookResponseBidsItem>}

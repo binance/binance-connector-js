@@ -35,10 +35,10 @@ export interface StartUserDataStreamResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StartUserDataStreamResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {StartUserDataStreamResponseResult}

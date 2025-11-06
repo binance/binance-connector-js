@@ -45,8 +45,8 @@ export interface OpenInterestResponse {
     contractType?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OpenInterestResponse
      */
-    time?: number;
+    time?: number | bigint;
 }

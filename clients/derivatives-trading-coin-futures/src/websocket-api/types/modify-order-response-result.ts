@@ -21,10 +21,10 @@
 export interface ModifyOrderResponseResult {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ModifyOrderResponseResult
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -147,8 +147,8 @@ export interface ModifyOrderResponseResult {
     origType?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ModifyOrderResponseResult
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

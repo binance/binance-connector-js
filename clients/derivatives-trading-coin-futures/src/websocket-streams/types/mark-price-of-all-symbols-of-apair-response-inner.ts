@@ -27,10 +27,10 @@ export interface MarkPriceOfAllSymbolsOfAPairResponseInner {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarkPriceOfAllSymbolsOfAPairResponseInner
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}
@@ -63,8 +63,8 @@ export interface MarkPriceOfAllSymbolsOfAPairResponseInner {
     r?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarkPriceOfAllSymbolsOfAPairResponseInner
      */
-    T?: number;
+    T?: number | bigint;
 }

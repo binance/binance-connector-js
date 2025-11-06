@@ -87,10 +87,10 @@ export interface OrderTradeUpdateO {
     X?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderTradeUpdateO
      */
-    i?: number;
+    i?: number | bigint;
     /**
      *
      * @type {string}
@@ -129,16 +129,16 @@ export interface OrderTradeUpdateO {
     n?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderTradeUpdateO
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderTradeUpdateO
      */
-    t?: number;
+    t?: number | bigint;
     /**
      *
      * @type {string}

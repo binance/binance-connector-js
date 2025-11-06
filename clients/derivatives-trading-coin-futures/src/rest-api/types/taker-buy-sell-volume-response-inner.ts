@@ -57,8 +57,8 @@ export interface TakerBuySellVolumeResponseInner {
     takerSellVolValue?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TakerBuySellVolumeResponseInner
      */
-    timestamp?: number;
+    timestamp?: number | bigint;
 }

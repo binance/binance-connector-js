@@ -27,10 +27,10 @@ export interface ModifyIsolatedPositionMarginResponse {
     amount?: number;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ModifyIsolatedPositionMarginResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}
@@ -39,8 +39,8 @@ export interface ModifyIsolatedPositionMarginResponse {
     msg?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ModifyIsolatedPositionMarginResponse
      */
-    type?: number;
+    type?: number | bigint;
 }

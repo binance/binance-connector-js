@@ -21,10 +21,10 @@
 export interface ModifyMultipleOrdersResponseInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ModifyMultipleOrdersResponseInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -159,16 +159,16 @@ export interface ModifyMultipleOrdersResponseInner {
     selfTradePreventionMode?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ModifyMultipleOrdersResponseInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ModifyMultipleOrdersResponseInner
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}

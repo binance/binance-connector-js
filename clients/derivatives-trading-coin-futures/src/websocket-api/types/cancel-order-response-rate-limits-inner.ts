@@ -33,20 +33,20 @@ export interface CancelOrderResponseRateLimitsInner {
     interval?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelOrderResponseRateLimitsInner
      */
-    intervalNum?: number;
+    intervalNum?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelOrderResponseRateLimitsInner
      */
-    limit?: number;
+    limit?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelOrderResponseRateLimitsInner
      */
-    count?: number;
+    count?: number | bigint;
 }

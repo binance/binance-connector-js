@@ -15,6 +15,7 @@
 
 import WebSocketClient from 'ws';
 import { EventEmitter } from 'events';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { jest, expect, beforeEach, afterEach, describe, it } from '@jest/globals';
 import { ConfigurationWebsocketAPI, WebsocketAPIBase, randomString } from '@binance/common';
 
@@ -78,63 +79,65 @@ describe('AccountApi', () => {
         });
 
         it('should execute accountInformation() successfully', async () => {
-            mockResponse = {
-                id: 'baaec739-c5cf-4920-b448-c0b9c5431410',
-                status: 200,
-                result: {
-                    feeTier: 0,
-                    canTrade: true,
-                    canDeposit: true,
-                    canWithdraw: true,
-                    updateTime: 0,
-                    assets: [
-                        {
-                            asset: 'WLD',
-                            walletBalance: '0.00000000',
-                            unrealizedProfit: '0.00000000',
-                            marginBalance: '0.00000000',
-                            maintMargin: '0.00000000',
-                            initialMargin: '0.00000000',
-                            positionInitialMargin: '0.00000000',
-                            openOrderInitialMargin: '0.00000000',
-                            maxWithdrawAmount: '0.00000000',
-                            crossWalletBalance: '0.00000000',
-                            crossUnPnl: '0.00000000',
-                            availableBalance: '0.00000000',
-                            updateTime: 0,
-                        },
-                    ],
-                    positions: [
-                        {
-                            symbol: 'ETHUSD_220930',
-                            initialMargin: '0',
-                            maintMargin: '0',
-                            unrealizedProfit: '0.00000000',
-                            positionInitialMargin: '0',
-                            openOrderInitialMargin: '0',
-                            leverage: '7',
-                            isolated: false,
-                            positionSide: 'BOTH',
-                            entryPrice: '0.00000000',
-                            maxQty: '1000',
-                            notionalValue: '0',
-                            isolatedWallet: '0',
-                            updateTime: 0,
-                            positionAmt: '0',
-                            breakEvenPrice: '0.00000000',
-                        },
-                    ],
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 2400,
-                        count: 10,
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: 'baaec739-c5cf-4920-b448-c0b9c5431410',
+                    status: 200,
+                    result: {
+                        feeTier: 0,
+                        canTrade: true,
+                        canDeposit: true,
+                        canWithdraw: true,
+                        updateTime: 0,
+                        assets: [
+                            {
+                                asset: 'WLD',
+                                walletBalance: '0.00000000',
+                                unrealizedProfit: '0.00000000',
+                                marginBalance: '0.00000000',
+                                maintMargin: '0.00000000',
+                                initialMargin: '0.00000000',
+                                positionInitialMargin: '0.00000000',
+                                openOrderInitialMargin: '0.00000000',
+                                maxWithdrawAmount: '0.00000000',
+                                crossWalletBalance: '0.00000000',
+                                crossUnPnl: '0.00000000',
+                                availableBalance: '0.00000000',
+                                updateTime: 0,
+                            },
+                        ],
+                        positions: [
+                            {
+                                symbol: 'ETHUSD_220930',
+                                initialMargin: '0',
+                                maintMargin: '0',
+                                unrealizedProfit: '0.00000000',
+                                positionInitialMargin: '0',
+                                openOrderInitialMargin: '0',
+                                leverage: '7',
+                                isolated: false,
+                                positionSide: 'BOTH',
+                                entryPrice: '0.00000000',
+                                maxQty: '1000',
+                                notionalValue: '0',
+                                isolatedWallet: '0',
+                                updateTime: 0,
+                                positionAmt: '0',
+                                breakEvenPrice: '0.00000000',
+                            },
+                        ],
                     },
-                ],
-            };
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 2400,
+                            count: 10,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -149,7 +152,7 @@ describe('AccountApi', () => {
                     const responsePromise = websocketAPIClient.accountInformation({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -201,7 +204,7 @@ describe('AccountApi', () => {
                     const responsePromise = websocketAPIClient.accountInformation({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -279,31 +282,33 @@ describe('AccountApi', () => {
         });
 
         it('should execute futuresAccountBalance() successfully', async () => {
-            mockResponse = {
-                id: '9328e612-1560-4108-979e-283bf85b5acb',
-                status: 200,
-                result: [
-                    {
-                        accountAlias: 'fWAuTiuXoCuXmY',
-                        asset: 'WLD',
-                        balance: '0.00000000',
-                        withdrawAvailable: '0.00000000',
-                        crossWalletBalance: '0.00000000',
-                        crossUnPnl: '0.00000000',
-                        availableBalance: '0.00000000',
-                        updateTime: 0,
-                    },
-                ],
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 2400,
-                        count: 10,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '9328e612-1560-4108-979e-283bf85b5acb',
+                    status: 200,
+                    result: [
+                        {
+                            accountAlias: 'fWAuTiuXoCuXmY',
+                            asset: 'WLD',
+                            balance: '0.00000000',
+                            withdrawAvailable: '0.00000000',
+                            crossWalletBalance: '0.00000000',
+                            crossUnPnl: '0.00000000',
+                            availableBalance: '0.00000000',
+                            updateTime: 0,
+                        },
+                    ],
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 2400,
+                            count: 10,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -318,7 +323,7 @@ describe('AccountApi', () => {
                     const responsePromise = websocketAPIClient.futuresAccountBalance({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -370,7 +375,7 @@ describe('AccountApi', () => {
                     const responsePromise = websocketAPIClient.futuresAccountBalance({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {

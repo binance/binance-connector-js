@@ -35,16 +35,16 @@ export interface DiffBookDepthStreamsResponse {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DiffBookDepthStreamsResponse
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DiffBookDepthStreamsResponse
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {string}
@@ -59,22 +59,22 @@ export interface DiffBookDepthStreamsResponse {
     ps?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DiffBookDepthStreamsResponse
      */
-    U?: number;
+    U?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DiffBookDepthStreamsResponse
      */
-    u?: number;
+    u?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof DiffBookDepthStreamsResponse
      */
-    pu?: number;
+    pu?: number | bigint;
     /**
      *
      * @type {Array<DiffBookDepthStreamsResponseBItem>}

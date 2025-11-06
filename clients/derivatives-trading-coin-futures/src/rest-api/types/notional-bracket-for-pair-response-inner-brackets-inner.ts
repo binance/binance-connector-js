@@ -21,28 +21,28 @@
 export interface NotionalBracketForPairResponseInnerBracketsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NotionalBracketForPairResponseInnerBracketsInner
      */
-    bracket?: number;
+    bracket?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NotionalBracketForPairResponseInnerBracketsInner
      */
-    initialLeverage?: number;
+    initialLeverage?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NotionalBracketForPairResponseInnerBracketsInner
      */
-    qtyCap?: number;
+    qtyCap?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NotionalBracketForPairResponseInnerBracketsInner
      */
-    qtylFloor?: number;
+    qtylFloor?: number | bigint;
     /**
      *
      * @type {number}

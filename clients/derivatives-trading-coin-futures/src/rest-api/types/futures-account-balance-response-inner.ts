@@ -63,8 +63,8 @@ export interface FuturesAccountBalanceResponseInner {
     availableBalance?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FuturesAccountBalanceResponseInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

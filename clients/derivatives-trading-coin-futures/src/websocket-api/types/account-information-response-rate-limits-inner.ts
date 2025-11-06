@@ -33,20 +33,20 @@ export interface AccountInformationResponseRateLimitsInner {
     interval?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountInformationResponseRateLimitsInner
      */
-    intervalNum?: number;
+    intervalNum?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountInformationResponseRateLimitsInner
      */
-    limit?: number;
+    limit?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountInformationResponseRateLimitsInner
      */
-    count?: number;
+    count?: number | bigint;
 }

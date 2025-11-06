@@ -59,14 +59,14 @@ export interface AccountInformationResponse {
     canWithdraw?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountInformationResponse
      */
-    feeTier?: number;
+    feeTier?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountInformationResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

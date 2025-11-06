@@ -93,8 +93,8 @@ export interface AccountInformationResponseResultAssetsInner {
     availableBalance?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountInformationResponseResultAssetsInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

@@ -211,6 +211,7 @@ export class RestAPI {
      *
      * @summary Account Information (USER_DATA)
      * @param {AccountInformationRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<AccountInformationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Account-Information Binance API Documentation}
@@ -228,6 +229,7 @@ export class RestAPI {
      *
      * @summary Futures Account Balance (USER_DATA)
      * @param {FuturesAccountBalanceRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<FuturesAccountBalanceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Futures-Account-Balance Binance API Documentation}
@@ -245,6 +247,7 @@ export class RestAPI {
      *
      * @summary Get Current Position Mode(USER_DATA)
      * @param {GetCurrentPositionModeRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetCurrentPositionModeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Get-Current-Position-Mode Binance API Documentation}
@@ -265,6 +268,7 @@ export class RestAPI {
      *
      * @summary Get Download Id For Futures Order History (USER_DATA)
      * @param {GetDownloadIdForFuturesOrderHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetDownloadIdForFuturesOrderHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Order-History Binance API Documentation}
@@ -285,6 +289,7 @@ export class RestAPI {
      *
      * @summary Get Download Id For Futures Trade History (USER_DATA)
      * @param {GetDownloadIdForFuturesTradeHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetDownloadIdForFuturesTradeHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History Binance API Documentation}
@@ -305,6 +310,7 @@ export class RestAPI {
      *
      * @summary Get Download Id For Futures Transaction History(USER_DATA)
      * @param {GetDownloadIdForFuturesTransactionHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetDownloadIdForFuturesTransactionHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History Binance API Documentation}
@@ -324,6 +330,7 @@ export class RestAPI {
      *
      * @summary Get Futures Order History Download Link by Id (USER_DATA)
      * @param {GetFuturesOrderHistoryDownloadLinkByIdRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetFuturesOrderHistoryDownloadLinkByIdResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id Binance API Documentation}
@@ -343,6 +350,7 @@ export class RestAPI {
      *
      * @summary Get Futures Trade Download Link by Id(USER_DATA)
      * @param {GetFuturesTradeDownloadLinkByIdRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetFuturesTradeDownloadLinkByIdResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id Binance API Documentation}
@@ -362,6 +370,7 @@ export class RestAPI {
      *
      * @summary Get Futures Transaction History Download Link by Id (USER_DATA)
      * @param {GetFuturesTransactionHistoryDownloadLinkByIdRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetFuturesTransactionHistoryDownloadLinkByIdResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id Binance API Documentation}
@@ -383,6 +392,7 @@ export class RestAPI {
      *
      * @summary Get Income History(USER_DATA)
      * @param {GetIncomeHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetIncomeHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Get-Income-History Binance API Documentation}
@@ -402,6 +412,7 @@ export class RestAPI {
      *
      * @summary Notional Bracket for Pair(USER_DATA)
      * @param {NotionalBracketForPairRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<NotionalBracketForPairResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Pair Binance API Documentation}
@@ -419,6 +430,7 @@ export class RestAPI {
      *
      * @summary Notional Bracket for Symbol(USER_DATA)
      * @param {NotionalBracketForSymbolRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<NotionalBracketForSymbolResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Symbol Binance API Documentation}
@@ -436,6 +448,7 @@ export class RestAPI {
      *
      * @summary User Commission Rate (USER_DATA)
      * @param {UserCommissionRateRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<UserCommissionRateResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/User-Commission-Rate Binance API Documentation}
@@ -456,6 +469,7 @@ export class RestAPI {
      *
      * @summary Basis
      * @param {BasisRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<BasisResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Basis Binance API Documentation}
@@ -470,6 +484,7 @@ export class RestAPI {
      * Weight: 1
      *
      * @summary Check Server time
+     *
      * @returns {Promise<RestApiResponse<CheckServerTimeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Check-Server-time Binance API Documentation}
@@ -491,6 +506,7 @@ export class RestAPI {
      *
      * @summary Compressed/Aggregate Trades List
      * @param {CompressedAggregateTradesListRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<CompressedAggregateTradesListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Compressed-Aggregate-Trades-List Binance API Documentation}
@@ -528,6 +544,7 @@ export class RestAPI {
      *
      * @summary Continuous Contract Kline/Candlestick Data
      * @param {ContinuousContractKlineCandlestickDataRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<ContinuousContractKlineCandlestickDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data Binance API Documentation}
@@ -544,6 +561,7 @@ export class RestAPI {
      * Weight: 1
      *
      * @summary Exchange Information
+     *
      * @returns {Promise<RestApiResponse<ExchangeInformationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Exchange-Information Binance API Documentation}
@@ -561,6 +579,7 @@ export class RestAPI {
      *
      * @summary Get Funding Rate History of Perpetual Futures
      * @param {GetFundingRateHistoryOfPerpetualFuturesRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetFundingRateHistoryOfPerpetualFuturesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Get-Funding-Rate-History-of-Perpetual-Futures Binance API Documentation}
@@ -577,6 +596,7 @@ export class RestAPI {
      * Weight: 0
      *
      * @summary Get Funding Rate Info
+     *
      * @returns {Promise<RestApiResponse<GetFundingRateInfoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Get-Funding-Info Binance API Documentation}
@@ -592,6 +612,7 @@ export class RestAPI {
      *
      * @summary Index Price and Mark Price
      * @param {IndexPriceAndMarkPriceRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<IndexPriceAndMarkPriceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Index-Price-and-Mark-Price Binance API Documentation}
@@ -623,6 +644,7 @@ export class RestAPI {
      *
      * @summary Index Price Kline/Candlestick Data
      * @param {IndexPriceKlineCandlestickDataRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<IndexPriceKlineCandlestickDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Index-Price-Kline-Candlestick-Data Binance API Documentation}
@@ -654,6 +676,7 @@ export class RestAPI {
      *
      * @summary Kline/Candlestick Data
      * @param {KlineCandlestickDataRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<KlineCandlestickDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Kline-Candlestick-Data Binance API Documentation}
@@ -674,6 +697,7 @@ export class RestAPI {
      *
      * @summary Long/Short Ratio
      * @param {LongShortRatioRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<LongShortRatioResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Long-Short-Ratio Binance API Documentation}
@@ -706,6 +730,7 @@ export class RestAPI {
      *
      * @summary Mark Price Kline/Candlestick Data
      * @param {MarkPriceKlineCandlestickDataRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<MarkPriceKlineCandlestickDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Mark-Price-Kline-Candlestick-Data Binance API Documentation}
@@ -725,6 +750,7 @@ export class RestAPI {
      *
      * @summary Old Trades Lookup(MARKET_DATA)
      * @param {OldTradesLookupRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<OldTradesLookupResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Old-Trades-Lookup Binance API Documentation}
@@ -742,6 +768,7 @@ export class RestAPI {
      *
      * @summary Open Interest
      * @param {OpenInterestRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<OpenInterestResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Open-Interest Binance API Documentation}
@@ -763,6 +790,7 @@ export class RestAPI {
      *
      * @summary Open Interest Statistics
      * @param {OpenInterestStatisticsRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<OpenInterestStatisticsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Open-Interest-Statistics Binance API Documentation}
@@ -786,6 +814,7 @@ export class RestAPI {
      *
      * @summary Order Book
      * @param {OrderBookRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<OrderBookResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Order-Book Binance API Documentation}
@@ -810,6 +839,7 @@ export class RestAPI {
      *
      * @summary Premium index Kline Data
      * @param {PremiumIndexKlineDataRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<PremiumIndexKlineDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Premium-index-Kline-Data Binance API Documentation}
@@ -827,6 +857,7 @@ export class RestAPI {
      *
      * @summary Query Index Price Constituents
      * @param {QueryIndexPriceConstituentsRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryIndexPriceConstituentsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Index-Constituents Binance API Documentation}
@@ -846,6 +877,7 @@ export class RestAPI {
      *
      * @summary Recent Trades List
      * @param {RecentTradesListRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<RecentTradesListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Recent-Trades-List Binance API Documentation}
@@ -867,6 +899,7 @@ export class RestAPI {
      *
      * @summary Symbol Order Book Ticker
      * @param {SymbolOrderBookTickerRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<SymbolOrderBookTickerResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker Binance API Documentation}
@@ -888,6 +921,7 @@ export class RestAPI {
      *
      * @summary Symbol Price Ticker
      * @param {SymbolPriceTickerRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<SymbolPriceTickerResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Symbol-Price-Ticker Binance API Documentation}
@@ -909,6 +943,7 @@ export class RestAPI {
      *
      * @summary Taker Buy/Sell Volume
      * @param {TakerBuySellVolumeRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<TakerBuySellVolumeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Taker-Buy-Sell-Volume Binance API Documentation}
@@ -925,6 +960,7 @@ export class RestAPI {
      * Weight: 1
      *
      * @summary Test Connectivity
+     *
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Test-Connectivity Binance API Documentation}
@@ -945,6 +981,7 @@ export class RestAPI {
      *
      * @summary 24hr Ticker Price Change Statistics
      * @param {Ticker24hrPriceChangeStatisticsRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<Ticker24hrPriceChangeStatisticsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics Binance API Documentation}
@@ -968,6 +1005,7 @@ export class RestAPI {
      *
      * @summary Top Trader Long/Short Ratio (Accounts)
      * @param {TopTraderLongShortRatioAccountsRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<TopTraderLongShortRatioAccountsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Top-Long-Short-Account-Ratio Binance API Documentation}
@@ -991,6 +1029,7 @@ export class RestAPI {
      *
      * @summary Top Trader Long/Short Ratio (Positions)
      * @param {TopTraderLongShortRatioPositionsRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<TopTraderLongShortRatioPositionsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Top-Trader-Long-Short-Ratio Binance API Documentation}
@@ -1010,6 +1049,7 @@ export class RestAPI {
      *
      * @summary Classic Portfolio Margin Account Information (USER_DATA)
      * @param {ClassicPortfolioMarginAccountInformationRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<ClassicPortfolioMarginAccountInformationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/portfolio-margin-endpoints/Classic-Portfolio-Margin-Account-Information Binance API Documentation}
@@ -1039,6 +1079,7 @@ export class RestAPI {
      *
      * @summary Account Trade List (USER_DATA)
      * @param {AccountTradeListRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<AccountTradeListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Account-Trade-List Binance API Documentation}
@@ -1067,6 +1108,7 @@ export class RestAPI {
      *
      * @summary All Orders (USER_DATA)
      * @param {AllOrdersRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<AllOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/All-Orders Binance API Documentation}
@@ -1089,6 +1131,7 @@ export class RestAPI {
      *
      * @summary Auto-Cancel All Open Orders (TRADE)
      * @param {AutoCancelAllOpenOrdersRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Auto-Cancel-All-Open-Orders Binance API Documentation}
@@ -1106,6 +1149,7 @@ export class RestAPI {
      *
      * @summary Cancel All Open Orders(TRADE)
      * @param {CancelAllOpenOrdersRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<CancelAllOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-All-Open-Orders Binance API Documentation}
@@ -1125,6 +1169,7 @@ export class RestAPI {
      *
      * @summary Cancel Multiple Orders(TRADE)
      * @param {CancelMultipleOrdersRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<CancelMultipleOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-Multiple-Orders Binance API Documentation}
@@ -1145,6 +1190,7 @@ export class RestAPI {
      *
      * @summary Cancel Order (TRADE)
      * @param {CancelOrderRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<CancelOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Cancel-Order Binance API Documentation}
@@ -1163,6 +1209,7 @@ export class RestAPI {
      *
      * @summary Change Initial Leverage (TRADE)
      * @param {ChangeInitialLeverageRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<ChangeInitialLeverageResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Initial-Leverage Binance API Documentation}
@@ -1181,6 +1228,7 @@ export class RestAPI {
      *
      * @summary Change Margin Type (TRADE)
      * @param {ChangeMarginTypeRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<ChangeMarginTypeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Margin-Type Binance API Documentation}
@@ -1198,6 +1246,7 @@ export class RestAPI {
      *
      * @summary Change Position Mode(TRADE)
      * @param {ChangePositionModeRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<ChangePositionModeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Position-Mode Binance API Documentation}
@@ -1215,6 +1264,7 @@ export class RestAPI {
      *
      * @summary Current All Open Orders (USER_DATA)
      * @param {CurrentAllOpenOrdersRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<CurrentAllOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Current-All-Open-Orders Binance API Documentation}
@@ -1236,6 +1286,7 @@ export class RestAPI {
      *
      * @summary Get Order Modify History (USER_DATA)
      * @param {GetOrderModifyHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetOrderModifyHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Get-Order-Modify-History Binance API Documentation}
@@ -1253,6 +1304,7 @@ export class RestAPI {
      *
      * @summary Get Position Margin Change History(TRADE)
      * @param {GetPositionMarginChangeHistoryRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetPositionMarginChangeHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Get-Position-Margin-Change-History Binance API Documentation}
@@ -1272,6 +1324,7 @@ export class RestAPI {
      *
      * @summary Modify Isolated Position Margin(TRADE)
      * @param {ModifyIsolatedPositionMarginRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<ModifyIsolatedPositionMarginResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin Binance API Documentation}
@@ -1294,6 +1347,7 @@ export class RestAPI {
      *
      * @summary Modify Multiple Orders(TRADE)
      * @param {ModifyMultipleOrdersRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<ModifyMultipleOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Multiple-Orders Binance API Documentation}
@@ -1319,6 +1373,7 @@ export class RestAPI {
      *
      * @summary Modify Order (TRADE)
      * @param {ModifyOrderRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<ModifyOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Order Binance API Documentation}
@@ -1374,6 +1429,7 @@ export class RestAPI {
      *
      * @summary New Order (TRADE)
      * @param {NewOrderRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<NewOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/New-Order Binance API Documentation}
@@ -1396,6 +1452,7 @@ export class RestAPI {
      *
      * @summary Position ADL Quantile Estimation(USER_DATA)
      * @param {PositionAdlQuantileEstimationRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<PositionAdlQuantileEstimationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation Binance API Documentation}
@@ -1418,6 +1475,7 @@ export class RestAPI {
      *
      * @summary Position Information(USER_DATA)
      * @param {PositionInformationRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<PositionInformationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Position-Information Binance API Documentation}
@@ -1438,6 +1496,7 @@ export class RestAPI {
      *
      * @summary Query Current Open Order(USER_DATA)
      * @param {QueryCurrentOpenOrderRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryCurrentOpenOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Query-Current-Open-Order Binance API Documentation}
@@ -1462,6 +1521,7 @@ export class RestAPI {
      *
      * @summary Query Order (USER_DATA)
      * @param {QueryOrderRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<QueryOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Query-Order Binance API Documentation}
@@ -1480,6 +1540,7 @@ export class RestAPI {
      *
      * @summary User\'s Force Orders(USER_DATA)
      * @param {UsersForceOrdersRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<UsersForceOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Users-Force-Orders Binance API Documentation}
@@ -1496,6 +1557,7 @@ export class RestAPI {
      * Weight: 1
      *
      * @summary Close User Data Stream(USER_STREAM)
+     *
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream Binance API Documentation}
@@ -1510,6 +1572,7 @@ export class RestAPI {
      * Weight: 1
      *
      * @summary Keepalive User Data Stream (USER_STREAM)
+     *
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream Binance API Documentation}
@@ -1524,6 +1587,7 @@ export class RestAPI {
      * Weight: 1
      *
      * @summary Start User Data Stream (USER_STREAM)
+     *
      * @returns {Promise<RestApiResponse<StartUserDataStreamResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream Binance API Documentation}

@@ -63,8 +63,8 @@ export interface BasisResponseInner {
     pair?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof BasisResponseInner
      */
-    timestamp?: number;
+    timestamp?: number | bigint;
 }

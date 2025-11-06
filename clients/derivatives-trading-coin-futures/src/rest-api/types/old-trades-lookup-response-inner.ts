@@ -21,10 +21,10 @@
 export interface OldTradesLookupResponseInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OldTradesLookupResponseInner
      */
-    id?: number;
+    id?: number | bigint;
     /**
      *
      * @type {string}
@@ -45,10 +45,10 @@ export interface OldTradesLookupResponseInner {
     baseQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OldTradesLookupResponseInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {boolean}

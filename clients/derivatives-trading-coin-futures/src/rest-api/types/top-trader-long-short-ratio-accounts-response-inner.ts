@@ -45,8 +45,8 @@ export interface TopTraderLongShortRatioAccountsResponseInner {
     shortAccount?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TopTraderLongShortRatioAccountsResponseInner
      */
-    timestamp?: number;
+    timestamp?: number | bigint;
 }

@@ -45,10 +45,10 @@ export interface GetFuturesTradeDownloadLinkByIdResponse {
     notified?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFuturesTradeDownloadLinkByIdResponse
      */
-    expirationTimestamp?: number;
+    expirationTimestamp?: number | bigint;
     /**
      *
      * @type {string}

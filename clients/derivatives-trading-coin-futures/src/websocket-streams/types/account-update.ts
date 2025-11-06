@@ -26,16 +26,16 @@ import type { AccountUpdateA } from './account-update-a';
 export interface AccountUpdate {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountUpdate
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountUpdate
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {string}

@@ -39,16 +39,16 @@ export interface GetPositionMarginChangeHistoryResponseInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetPositionMarginChangeHistoryResponseInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetPositionMarginChangeHistoryResponseInner
      */
-    type?: number;
+    type?: number | bigint;
     /**
      *
      * @type {string}

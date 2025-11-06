@@ -45,8 +45,8 @@ export interface LongShortRatioResponseInner {
     shortAccount?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof LongShortRatioResponseInner
      */
-    timestamp?: number;
+    timestamp?: number | bigint;
 }

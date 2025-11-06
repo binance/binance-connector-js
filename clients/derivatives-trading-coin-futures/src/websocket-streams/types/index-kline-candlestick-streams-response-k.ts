@@ -21,16 +21,16 @@
 export interface IndexKlineCandlestickStreamsResponseK {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof IndexKlineCandlestickStreamsResponseK
      */
-    t?: number;
+    t?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof IndexKlineCandlestickStreamsResponseK
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {string}
@@ -45,16 +45,16 @@ export interface IndexKlineCandlestickStreamsResponseK {
     i?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof IndexKlineCandlestickStreamsResponseK
      */
-    f?: number;
+    f?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof IndexKlineCandlestickStreamsResponseK
      */
-    L?: number;
+    L?: number | bigint;
     /**
      *
      * @type {string}
@@ -87,10 +87,10 @@ export interface IndexKlineCandlestickStreamsResponseK {
     v?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof IndexKlineCandlestickStreamsResponseK
      */
-    n?: number;
+    n?: number | bigint;
     /**
      *
      * @type {boolean}

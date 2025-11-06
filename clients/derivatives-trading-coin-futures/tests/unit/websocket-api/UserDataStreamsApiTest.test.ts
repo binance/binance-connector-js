@@ -15,6 +15,7 @@
 
 import WebSocketClient from 'ws';
 import { EventEmitter } from 'events';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { jest, expect, beforeEach, afterEach, describe, it } from '@jest/globals';
 import { ConfigurationWebsocketAPI, WebsocketAPIBase, randomString } from '@binance/common';
 
@@ -78,20 +79,22 @@ describe('UserDataStreamsApi', () => {
         });
 
         it('should execute closeUserDataStream() successfully', async () => {
-            mockResponse = {
-                id: '819e1b1b-8c06-485b-a13e-131326c69599',
-                status: 200,
-                result: {},
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 2400,
-                        count: 2,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '819e1b1b-8c06-485b-a13e-131326c69599',
+                    status: 200,
+                    result: {},
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 2400,
+                            count: 2,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -106,7 +109,7 @@ describe('UserDataStreamsApi', () => {
                     const responsePromise = websocketAPIClient.closeUserDataStream({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -158,7 +161,7 @@ describe('UserDataStreamsApi', () => {
                     const responsePromise = websocketAPIClient.closeUserDataStream({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -236,22 +239,25 @@ describe('UserDataStreamsApi', () => {
         });
 
         it('should execute keepaliveUserDataStream() successfully', async () => {
-            mockResponse = {
-                id: '815d5fce-0880-4287-a567-80badf004c74',
-                status: 200,
-                result: {
-                    listenKey: '3HBntNTepshgEdjIwSUIBgB9keLyOCg5qv3n6bYAtktG8ejcaW5HXz9Vx1JgIieg',
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 2400,
-                        count: 2,
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '815d5fce-0880-4287-a567-80badf004c74',
+                    status: 200,
+                    result: {
+                        listenKey:
+                            '3HBntNTepshgEdjIwSUIBgB9keLyOCg5qv3n6bYAtktG8ejcaW5HXz9Vx1JgIieg',
                     },
-                ],
-            };
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 2400,
+                            count: 2,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -266,7 +272,7 @@ describe('UserDataStreamsApi', () => {
                     const responsePromise = websocketAPIClient.keepaliveUserDataStream({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -318,7 +324,7 @@ describe('UserDataStreamsApi', () => {
                     const responsePromise = websocketAPIClient.keepaliveUserDataStream({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -396,22 +402,24 @@ describe('UserDataStreamsApi', () => {
         });
 
         it('should execute startUserDataStream() successfully', async () => {
-            mockResponse = {
-                id: 'd3df8a61-98ea-4fe0-8f4e-0fcea5d418b0',
-                status: 200,
-                result: {
-                    listenKey: 'xs0mRXdAKlIPDRFrlPcw0qI41Eh3ixNntmymGyhrhgqo7L6FuLaWArTD7RLP',
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 2400,
-                        count: 8,
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: 'd3df8a61-98ea-4fe0-8f4e-0fcea5d418b0',
+                    status: 200,
+                    result: {
+                        listenKey: 'xs0mRXdAKlIPDRFrlPcw0qI41Eh3ixNntmymGyhrhgqo7L6FuLaWArTD7RLP',
                     },
-                ],
-            };
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 2400,
+                            count: 8,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -426,7 +434,7 @@ describe('UserDataStreamsApi', () => {
                     const responsePromise = websocketAPIClient.startUserDataStream({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -478,7 +486,7 @@ describe('UserDataStreamsApi', () => {
                     const responsePromise = websocketAPIClient.startUserDataStream({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {

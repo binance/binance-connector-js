@@ -27,10 +27,10 @@ export interface IndexPriceStreamResponse {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof IndexPriceStreamResponse
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}

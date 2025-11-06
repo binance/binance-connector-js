@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import {
@@ -106,18 +107,20 @@ describe('MarketDataApi', () => {
                 period: BasisPeriodEnum.PERIOD_5m,
             };
 
-            mockResponse = [
-                {
-                    indexPrice: '29269.93972727',
-                    contractType: 'CURRENT_QUARTER',
-                    basisRate: '0.0024',
-                    futuresPrice: '29341.3',
-                    annualizedBasisRate: '0.0283',
-                    basis: '71.36027273',
-                    pair: 'BTCUSD',
-                    timestamp: 1653381600000,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        indexPrice: '29269.93972727',
+                        contractType: 'CURRENT_QUARTER',
+                        basisRate: '0.0024',
+                        futuresPrice: '29341.3',
+                        annualizedBasisRate: '0.0283',
+                        basis: '71.36027273',
+                        pair: 'BTCUSD',
+                        timestamp: 1653381600000,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'basis').mockReturnValue(
                 Promise.resolve({
@@ -143,18 +146,20 @@ describe('MarketDataApi', () => {
                 endTime: 1641782889000,
             };
 
-            mockResponse = [
-                {
-                    indexPrice: '29269.93972727',
-                    contractType: 'CURRENT_QUARTER',
-                    basisRate: '0.0024',
-                    futuresPrice: '29341.3',
-                    annualizedBasisRate: '0.0283',
-                    basis: '71.36027273',
-                    pair: 'BTCUSD',
-                    timestamp: 1653381600000,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        indexPrice: '29269.93972727',
+                        contractType: 'CURRENT_QUARTER',
+                        basisRate: '0.0024',
+                        futuresPrice: '29341.3',
+                        annualizedBasisRate: '0.0283',
+                        basis: '71.36027273',
+                        pair: 'BTCUSD',
+                        timestamp: 1653381600000,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'basis').mockReturnValue(
                 Promise.resolve({
@@ -236,7 +241,7 @@ describe('MarketDataApi', () => {
 
     describe('checkServerTime()', () => {
         it('should execute checkServerTime() successfully with required parameters only', async () => {
-            mockResponse = { serverTime: 1499827319559 };
+            mockResponse = JSONParse(JSONStringify({ serverTime: 1499827319559 }));
 
             const spy = jest.spyOn(client, 'checkServerTime').mockReturnValue(
                 Promise.resolve({
@@ -274,17 +279,19 @@ describe('MarketDataApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = [
-                {
-                    a: 416690,
-                    p: '9642.4',
-                    q: '3',
-                    f: 595259,
-                    l: 595259,
-                    T: 1591250548649,
-                    m: false,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        a: 416690,
+                        p: '9642.4',
+                        q: '3',
+                        f: 595259,
+                        l: 595259,
+                        T: 1591250548649,
+                        m: false,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'compressedAggregateTradesList').mockReturnValue(
                 Promise.resolve({
@@ -309,17 +316,19 @@ describe('MarketDataApi', () => {
                 limit: 100,
             };
 
-            mockResponse = [
-                {
-                    a: 416690,
-                    p: '9642.4',
-                    q: '3',
-                    f: 595259,
-                    l: 595259,
-                    T: 1591250548649,
-                    m: false,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        a: 416690,
+                        p: '9642.4',
+                        q: '3',
+                        f: 595259,
+                        l: 595259,
+                        T: 1591250548649,
+                        m: false,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'compressedAggregateTradesList').mockReturnValue(
                 Promise.resolve({
@@ -379,22 +388,24 @@ describe('MarketDataApi', () => {
                 interval: ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1m,
             };
 
-            mockResponse = [
-                [
-                    1591258320000,
-                    '9640.7',
-                    '9642.4',
-                    '9640.6',
-                    '9642.0',
-                    '206',
-                    1591258379999,
-                    '2.13660389',
-                    48,
-                    '119',
-                    '1.23424865',
-                    '0',
-                ],
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    [
+                        1591258320000,
+                        '9640.7',
+                        '9642.4',
+                        '9640.6',
+                        '9642.0',
+                        '206',
+                        1591258379999,
+                        '2.13660389',
+                        48,
+                        '119',
+                        '1.23424865',
+                        '0',
+                    ],
+                ])
+            );
 
             const spy = jest
                 .spyOn(client, 'continuousContractKlineCandlestickData')
@@ -422,22 +433,24 @@ describe('MarketDataApi', () => {
                 limit: 100,
             };
 
-            mockResponse = [
-                [
-                    1591258320000,
-                    '9640.7',
-                    '9642.4',
-                    '9640.6',
-                    '9642.0',
-                    '206',
-                    1591258379999,
-                    '2.13660389',
-                    48,
-                    '119',
-                    '1.23424865',
-                    '0',
-                ],
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    [
+                        1591258320000,
+                        '9640.7',
+                        '9642.4',
+                        '9640.6',
+                        '9642.0',
+                        '206',
+                        1591258379999,
+                        '2.13660389',
+                        48,
+                        '119',
+                        '1.23424865',
+                        '0',
+                    ],
+                ])
+            );
 
             const spy = jest
                 .spyOn(client, 'continuousContractKlineCandlestickData')
@@ -525,81 +538,88 @@ describe('MarketDataApi', () => {
 
     describe('exchangeInformation()', () => {
         it('should execute exchangeInformation() successfully with required parameters only', async () => {
-            mockResponse = {
-                exchangeFilters: [],
-                rateLimits: [
-                    {
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 6000,
-                        rateLimitType: 'REQUEST_WEIGHT',
-                    },
-                    { interval: 'MINUTE', intervalNum: 1, limit: 6000, rateLimitType: 'ORDERS' },
-                ],
-                serverTime: 1565613908500,
-                symbols: [
-                    {
-                        filters: [
-                            {
-                                filterType: 'PRICE_FILTER',
-                                maxPrice: '100000',
-                                minPrice: '0.1',
-                                tickSize: '0.1',
-                            },
-                            {
-                                filterType: 'LOT_SIZE',
-                                maxQty: '100000',
-                                minQty: '1',
-                                stepSize: '1',
-                            },
-                            {
-                                filterType: 'MARKET_LOT_SIZE',
-                                maxQty: '100000',
-                                minQty: '1',
-                                stepSize: '1',
-                            },
-                            { filterType: 'MAX_NUM_ORDERS', limit: 200 },
-                            {
-                                filterType: 'PERCENT_PRICE',
-                                multiplierUp: '1.0500',
-                                multiplierDown: '0.9500',
-                                multiplierDecimal: '4',
-                            },
-                        ],
-                        OrderType: [
-                            'LIMIT',
-                            'MARKET',
-                            'STOP',
-                            'TAKE_PROFIT',
-                            'TRAILING_STOP_MARKET',
-                        ],
-                        timeInForce: ['GTC', 'IOC', 'FOK', 'GTX'],
-                        liquidationFee: '0.010000',
-                        marketTakeBound: '0.30',
-                        symbol: 'BTCUSD_200925',
-                        pair: 'BTCUSD',
-                        contractType: 'CURRENT_QUARTER',
-                        deliveryDate: 1601020800000,
-                        onboardDate: 1590739200000,
-                        contractStatus: 'TRADING',
-                        contractSize: 100,
-                        quoteAsset: 'USD',
-                        baseAsset: 'BTC',
-                        marginAsset: 'BTC',
-                        pricePrecision: 1,
-                        quantityPrecision: 0,
-                        baseAssetPrecision: 8,
-                        quotePrecision: 8,
-                        equalQtyPrecision: 4,
-                        triggerProtect: '0.0500',
-                        maintMarginPercent: '2.5000',
-                        requiredMarginPercent: '5.0000',
-                        underlyingType: 'COIN',
-                        underlyingSubType: [],
-                    },
-                ],
-                timezone: 'UTC',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    exchangeFilters: [],
+                    rateLimits: [
+                        {
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            rateLimitType: 'REQUEST_WEIGHT',
+                        },
+                        {
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 6000,
+                            rateLimitType: 'ORDERS',
+                        },
+                    ],
+                    serverTime: 1565613908500,
+                    symbols: [
+                        {
+                            filters: [
+                                {
+                                    filterType: 'PRICE_FILTER',
+                                    maxPrice: '100000',
+                                    minPrice: '0.1',
+                                    tickSize: '0.1',
+                                },
+                                {
+                                    filterType: 'LOT_SIZE',
+                                    maxQty: '100000',
+                                    minQty: '1',
+                                    stepSize: '1',
+                                },
+                                {
+                                    filterType: 'MARKET_LOT_SIZE',
+                                    maxQty: '100000',
+                                    minQty: '1',
+                                    stepSize: '1',
+                                },
+                                { filterType: 'MAX_NUM_ORDERS', limit: 200 },
+                                {
+                                    filterType: 'PERCENT_PRICE',
+                                    multiplierUp: '1.0500',
+                                    multiplierDown: '0.9500',
+                                    multiplierDecimal: '4',
+                                },
+                            ],
+                            OrderType: [
+                                'LIMIT',
+                                'MARKET',
+                                'STOP',
+                                'TAKE_PROFIT',
+                                'TRAILING_STOP_MARKET',
+                            ],
+                            timeInForce: ['GTC', 'IOC', 'FOK', 'GTX'],
+                            liquidationFee: '0.010000',
+                            marketTakeBound: '0.30',
+                            symbol: 'BTCUSD_200925',
+                            pair: 'BTCUSD',
+                            contractType: 'CURRENT_QUARTER',
+                            deliveryDate: 1601020800000,
+                            onboardDate: 1590739200000,
+                            contractStatus: 'TRADING',
+                            contractSize: 100,
+                            quoteAsset: 'USD',
+                            baseAsset: 'BTC',
+                            marginAsset: 'BTC',
+                            pricePrecision: 1,
+                            quantityPrecision: 0,
+                            baseAssetPrecision: 8,
+                            quotePrecision: 8,
+                            equalQtyPrecision: 4,
+                            triggerProtect: '0.0500',
+                            maintMarginPercent: '2.5000',
+                            requiredMarginPercent: '5.0000',
+                            underlyingType: 'COIN',
+                            underlyingSubType: [],
+                        },
+                    ],
+                    timezone: 'UTC',
+                })
+            );
 
             const spy = jest.spyOn(client, 'exchangeInformation').mockReturnValue(
                 Promise.resolve({
@@ -637,10 +657,20 @@ describe('MarketDataApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = [
-                { symbol: 'BTCUSD_PERP', fundingTime: 1596038400000, fundingRate: '-0.00300000' },
-                { symbol: 'BTCUSD_PERP', fundingTime: 1596067200000, fundingRate: '-0.00300000' },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BTCUSD_PERP',
+                        fundingTime: 1596038400000,
+                        fundingRate: '-0.00300000',
+                    },
+                    {
+                        symbol: 'BTCUSD_PERP',
+                        fundingTime: 1596067200000,
+                        fundingRate: '-0.00300000',
+                    },
+                ])
+            );
 
             const spy = jest
                 .spyOn(client, 'getFundingRateHistoryOfPerpetualFutures')
@@ -666,10 +696,20 @@ describe('MarketDataApi', () => {
                 limit: 100,
             };
 
-            mockResponse = [
-                { symbol: 'BTCUSD_PERP', fundingTime: 1596038400000, fundingRate: '-0.00300000' },
-                { symbol: 'BTCUSD_PERP', fundingTime: 1596067200000, fundingRate: '-0.00300000' },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BTCUSD_PERP',
+                        fundingTime: 1596038400000,
+                        fundingRate: '-0.00300000',
+                    },
+                    {
+                        symbol: 'BTCUSD_PERP',
+                        fundingTime: 1596067200000,
+                        fundingRate: '-0.00300000',
+                    },
+                ])
+            );
 
             const spy = jest
                 .spyOn(client, 'getFundingRateHistoryOfPerpetualFutures')
@@ -725,15 +765,17 @@ describe('MarketDataApi', () => {
 
     describe('getFundingRateInfo()', () => {
         it('should execute getFundingRateInfo() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    symbol: 'BTCUSD_PERP',
-                    adjustedFundingRateCap: '0.02500000',
-                    adjustedFundingRateFloor: '-0.02500000',
-                    fundingIntervalHours: 8,
-                    disclaimer: false,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BTCUSD_PERP',
+                        adjustedFundingRateCap: '0.02500000',
+                        adjustedFundingRateFloor: '-0.02500000',
+                        fundingIntervalHours: 8,
+                        disclaimer: false,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getFundingRateInfo').mockReturnValue(
                 Promise.resolve({
@@ -767,30 +809,32 @@ describe('MarketDataApi', () => {
 
     describe('indexPriceAndMarkPrice()', () => {
         it('should execute indexPriceAndMarkPrice() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    symbol: 'BTCUSD_PERP',
-                    pair: 'BTCUSD',
-                    markPrice: '11029.69574559',
-                    indexPrice: '10979.14437500',
-                    estimatedSettlePrice: '10981.74168236',
-                    lastFundingRate: '0.00071003',
-                    interestRate: '0.00010000',
-                    nextFundingTime: 1596096000000,
-                    time: 1596094042000,
-                },
-                {
-                    symbol: 'BTCUSD_200925',
-                    pair: 'BTCUSD',
-                    markPrice: '12077.01343750',
-                    indexPrice: '10979.10312500',
-                    estimatedSettlePrice: '10981.74168236',
-                    lastFundingRate: '',
-                    interestRate: '',
-                    nextFundingTime: 0,
-                    time: 1596094042000,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BTCUSD_PERP',
+                        pair: 'BTCUSD',
+                        markPrice: '11029.69574559',
+                        indexPrice: '10979.14437500',
+                        estimatedSettlePrice: '10981.74168236',
+                        lastFundingRate: '0.00071003',
+                        interestRate: '0.00010000',
+                        nextFundingTime: 1596096000000,
+                        time: 1596094042000,
+                    },
+                    {
+                        symbol: 'BTCUSD_200925',
+                        pair: 'BTCUSD',
+                        markPrice: '12077.01343750',
+                        indexPrice: '10979.10312500',
+                        estimatedSettlePrice: '10981.74168236',
+                        lastFundingRate: '',
+                        interestRate: '',
+                        nextFundingTime: 0,
+                        time: 1596094042000,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'indexPriceAndMarkPrice').mockReturnValue(
                 Promise.resolve({
@@ -812,30 +856,32 @@ describe('MarketDataApi', () => {
                 pair: 'pair_example',
             };
 
-            mockResponse = [
-                {
-                    symbol: 'BTCUSD_PERP',
-                    pair: 'BTCUSD',
-                    markPrice: '11029.69574559',
-                    indexPrice: '10979.14437500',
-                    estimatedSettlePrice: '10981.74168236',
-                    lastFundingRate: '0.00071003',
-                    interestRate: '0.00010000',
-                    nextFundingTime: 1596096000000,
-                    time: 1596094042000,
-                },
-                {
-                    symbol: 'BTCUSD_200925',
-                    pair: 'BTCUSD',
-                    markPrice: '12077.01343750',
-                    indexPrice: '10979.10312500',
-                    estimatedSettlePrice: '10981.74168236',
-                    lastFundingRate: '',
-                    interestRate: '',
-                    nextFundingTime: 0,
-                    time: 1596094042000,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BTCUSD_PERP',
+                        pair: 'BTCUSD',
+                        markPrice: '11029.69574559',
+                        indexPrice: '10979.14437500',
+                        estimatedSettlePrice: '10981.74168236',
+                        lastFundingRate: '0.00071003',
+                        interestRate: '0.00010000',
+                        nextFundingTime: 1596096000000,
+                        time: 1596094042000,
+                    },
+                    {
+                        symbol: 'BTCUSD_200925',
+                        pair: 'BTCUSD',
+                        markPrice: '12077.01343750',
+                        indexPrice: '10979.10312500',
+                        estimatedSettlePrice: '10981.74168236',
+                        lastFundingRate: '',
+                        interestRate: '',
+                        nextFundingTime: 0,
+                        time: 1596094042000,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'indexPriceAndMarkPrice').mockReturnValue(
                 Promise.resolve({
@@ -876,22 +922,24 @@ describe('MarketDataApi', () => {
                 interval: IndexPriceKlineCandlestickDataIntervalEnum.INTERVAL_1m,
             };
 
-            mockResponse = [
-                [
-                    1591256400000,
-                    '9653.69440000',
-                    '9653.69640000',
-                    '9651.38600000',
-                    '9651.55200000',
-                    '0',
-                    1591256459999,
-                    '0',
-                    60,
-                    '0',
-                    '0',
-                    '0',
-                ],
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    [
+                        1591256400000,
+                        '9653.69440000',
+                        '9653.69640000',
+                        '9651.38600000',
+                        '9651.55200000',
+                        '0',
+                        1591256459999,
+                        '0',
+                        60,
+                        '0',
+                        '0',
+                        '0',
+                    ],
+                ])
+            );
 
             const spy = jest.spyOn(client, 'indexPriceKlineCandlestickData').mockReturnValue(
                 Promise.resolve({
@@ -916,22 +964,24 @@ describe('MarketDataApi', () => {
                 limit: 100,
             };
 
-            mockResponse = [
-                [
-                    1591256400000,
-                    '9653.69440000',
-                    '9653.69640000',
-                    '9651.38600000',
-                    '9651.55200000',
-                    '0',
-                    1591256459999,
-                    '0',
-                    60,
-                    '0',
-                    '0',
-                    '0',
-                ],
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    [
+                        1591256400000,
+                        '9653.69440000',
+                        '9653.69640000',
+                        '9651.38600000',
+                        '9651.55200000',
+                        '0',
+                        1591256459999,
+                        '0',
+                        60,
+                        '0',
+                        '0',
+                        '0',
+                    ],
+                ])
+            );
 
             const spy = jest.spyOn(client, 'indexPriceKlineCandlestickData').mockReturnValue(
                 Promise.resolve({
@@ -1005,22 +1055,24 @@ describe('MarketDataApi', () => {
                 interval: KlineCandlestickDataIntervalEnum.INTERVAL_1m,
             };
 
-            mockResponse = [
-                [
-                    1591258320000,
-                    '9640.7',
-                    '9642.4',
-                    '9640.6',
-                    '9642.0',
-                    '206',
-                    1591258379999,
-                    '2.13660389',
-                    48,
-                    '119',
-                    '1.23424865',
-                    '0',
-                ],
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    [
+                        1591258320000,
+                        '9640.7',
+                        '9642.4',
+                        '9640.6',
+                        '9642.0',
+                        '206',
+                        1591258379999,
+                        '2.13660389',
+                        48,
+                        '119',
+                        '1.23424865',
+                        '0',
+                    ],
+                ])
+            );
 
             const spy = jest.spyOn(client, 'klineCandlestickData').mockReturnValue(
                 Promise.resolve({
@@ -1045,22 +1097,24 @@ describe('MarketDataApi', () => {
                 limit: 100,
             };
 
-            mockResponse = [
-                [
-                    1591258320000,
-                    '9640.7',
-                    '9642.4',
-                    '9640.6',
-                    '9642.0',
-                    '206',
-                    1591258379999,
-                    '2.13660389',
-                    48,
-                    '119',
-                    '1.23424865',
-                    '0',
-                ],
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    [
+                        1591258320000,
+                        '9640.7',
+                        '9642.4',
+                        '9640.6',
+                        '9642.0',
+                        '206',
+                        1591258379999,
+                        '2.13660389',
+                        48,
+                        '119',
+                        '1.23424865',
+                        '0',
+                    ],
+                ])
+            );
 
             const spy = jest.spyOn(client, 'klineCandlestickData').mockReturnValue(
                 Promise.resolve({
@@ -1130,22 +1184,24 @@ describe('MarketDataApi', () => {
                 period: LongShortRatioPeriodEnum.PERIOD_5m,
             };
 
-            mockResponse = [
-                {
-                    pair: 'BTCUSD',
-                    longShortRatio: '0.1960',
-                    longAccount: '0.6622',
-                    shortAccount: '0.3378',
-                    timestamp: 1583139600000,
-                },
-                {
-                    pair: 'BTCUSD',
-                    longShortRatio: '1.9559',
-                    longAccount: '0.6617',
-                    shortAccount: '0.3382',
-                    timestamp: 1583139900000,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        pair: 'BTCUSD',
+                        longShortRatio: '0.1960',
+                        longAccount: '0.6622',
+                        shortAccount: '0.3378',
+                        timestamp: 1583139600000,
+                    },
+                    {
+                        pair: 'BTCUSD',
+                        longShortRatio: '1.9559',
+                        longAccount: '0.6617',
+                        shortAccount: '0.3382',
+                        timestamp: 1583139900000,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'longShortRatio').mockReturnValue(
                 Promise.resolve({
@@ -1170,22 +1226,24 @@ describe('MarketDataApi', () => {
                 endTime: 1641782889000,
             };
 
-            mockResponse = [
-                {
-                    pair: 'BTCUSD',
-                    longShortRatio: '0.1960',
-                    longAccount: '0.6622',
-                    shortAccount: '0.3378',
-                    timestamp: 1583139600000,
-                },
-                {
-                    pair: 'BTCUSD',
-                    longShortRatio: '1.9559',
-                    longAccount: '0.6617',
-                    shortAccount: '0.3382',
-                    timestamp: 1583139900000,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        pair: 'BTCUSD',
+                        longShortRatio: '0.1960',
+                        longAccount: '0.6622',
+                        shortAccount: '0.3378',
+                        timestamp: 1583139600000,
+                    },
+                    {
+                        pair: 'BTCUSD',
+                        longShortRatio: '1.9559',
+                        longAccount: '0.6617',
+                        shortAccount: '0.3382',
+                        timestamp: 1583139900000,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'longShortRatio').mockReturnValue(
                 Promise.resolve({
@@ -1255,22 +1313,24 @@ describe('MarketDataApi', () => {
                 interval: MarkPriceKlineCandlestickDataIntervalEnum.INTERVAL_1m,
             };
 
-            mockResponse = [
-                [
-                    1591256460000,
-                    '9653.29201333',
-                    '9654.56401333',
-                    '9653.07367333',
-                    '9653.07367333',
-                    '0',
-                    1591256519999,
-                    '0',
-                    60,
-                    '0',
-                    '0',
-                    '0',
-                ],
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    [
+                        1591256460000,
+                        '9653.29201333',
+                        '9654.56401333',
+                        '9653.07367333',
+                        '9653.07367333',
+                        '0',
+                        1591256519999,
+                        '0',
+                        60,
+                        '0',
+                        '0',
+                        '0',
+                    ],
+                ])
+            );
 
             const spy = jest.spyOn(client, 'markPriceKlineCandlestickData').mockReturnValue(
                 Promise.resolve({
@@ -1295,22 +1355,24 @@ describe('MarketDataApi', () => {
                 limit: 100,
             };
 
-            mockResponse = [
-                [
-                    1591256460000,
-                    '9653.29201333',
-                    '9654.56401333',
-                    '9653.07367333',
-                    '9653.07367333',
-                    '0',
-                    1591256519999,
-                    '0',
-                    60,
-                    '0',
-                    '0',
-                    '0',
-                ],
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    [
+                        1591256460000,
+                        '9653.29201333',
+                        '9654.56401333',
+                        '9653.07367333',
+                        '9653.07367333',
+                        '0',
+                        1591256519999,
+                        '0',
+                        60,
+                        '0',
+                        '0',
+                        '0',
+                    ],
+                ])
+            );
 
             const spy = jest.spyOn(client, 'markPriceKlineCandlestickData').mockReturnValue(
                 Promise.resolve({
@@ -1383,16 +1445,18 @@ describe('MarketDataApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = [
-                {
-                    id: 595103,
-                    price: '9642.2',
-                    qty: '1',
-                    baseQty: '0.01037108',
-                    time: 1499865549590,
-                    isBuyerMaker: true,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        id: 595103,
+                        price: '9642.2',
+                        qty: '1',
+                        baseQty: '0.01037108',
+                        time: 1499865549590,
+                        isBuyerMaker: true,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'oldTradesLookup').mockReturnValue(
                 Promise.resolve({
@@ -1415,16 +1479,18 @@ describe('MarketDataApi', () => {
                 fromId: 1,
             };
 
-            mockResponse = [
-                {
-                    id: 595103,
-                    price: '9642.2',
-                    qty: '1',
-                    baseQty: '0.01037108',
-                    time: 1499865549590,
-                    isBuyerMaker: true,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        id: 595103,
+                        price: '9642.2',
+                        qty: '1',
+                        baseQty: '0.01037108',
+                        time: 1499865549590,
+                        isBuyerMaker: true,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'oldTradesLookup').mockReturnValue(
                 Promise.resolve({
@@ -1478,13 +1544,15 @@ describe('MarketDataApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = {
-                symbol: 'BTCUSD_200626',
-                pair: 'BTCUSD',
-                openInterest: '15004',
-                contractType: 'CURRENT_QUARTER',
-                time: 1591261042378,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    symbol: 'BTCUSD_200626',
+                    pair: 'BTCUSD',
+                    openInterest: '15004',
+                    contractType: 'CURRENT_QUARTER',
+                    time: 1591261042378,
+                })
+            );
 
             const spy = jest.spyOn(client, 'openInterest').mockReturnValue(
                 Promise.resolve({
@@ -1505,13 +1573,15 @@ describe('MarketDataApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = {
-                symbol: 'BTCUSD_200626',
-                pair: 'BTCUSD',
-                openInterest: '15004',
-                contractType: 'CURRENT_QUARTER',
-                time: 1591261042378,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    symbol: 'BTCUSD_200626',
+                    pair: 'BTCUSD',
+                    openInterest: '15004',
+                    contractType: 'CURRENT_QUARTER',
+                    time: 1591261042378,
+                })
+            );
 
             const spy = jest.spyOn(client, 'openInterest').mockReturnValue(
                 Promise.resolve({
@@ -1567,22 +1637,24 @@ describe('MarketDataApi', () => {
                 period: OpenInterestStatisticsPeriodEnum.PERIOD_5m,
             };
 
-            mockResponse = [
-                {
-                    pair: 'BTCUSD',
-                    contractType: 'CURRENT_QUARTER',
-                    sumOpenInterest: '20403',
-                    sumOpenInterestValue: '176196512.23400000',
-                    timestamp: 1591261042378,
-                },
-                {
-                    pair: 'BTCUSD',
-                    contractType: 'CURRENT_QUARTER',
-                    sumOpenInterest: '20401',
-                    sumOpenInterestValue: '176178704.98700000',
-                    timestamp: 1583128200000,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        pair: 'BTCUSD',
+                        contractType: 'CURRENT_QUARTER',
+                        sumOpenInterest: '20403',
+                        sumOpenInterestValue: '176196512.23400000',
+                        timestamp: 1591261042378,
+                    },
+                    {
+                        pair: 'BTCUSD',
+                        contractType: 'CURRENT_QUARTER',
+                        sumOpenInterest: '20401',
+                        sumOpenInterestValue: '176178704.98700000',
+                        timestamp: 1583128200000,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'openInterestStatistics').mockReturnValue(
                 Promise.resolve({
@@ -1608,22 +1680,24 @@ describe('MarketDataApi', () => {
                 endTime: 1641782889000,
             };
 
-            mockResponse = [
-                {
-                    pair: 'BTCUSD',
-                    contractType: 'CURRENT_QUARTER',
-                    sumOpenInterest: '20403',
-                    sumOpenInterestValue: '176196512.23400000',
-                    timestamp: 1591261042378,
-                },
-                {
-                    pair: 'BTCUSD',
-                    contractType: 'CURRENT_QUARTER',
-                    sumOpenInterest: '20401',
-                    sumOpenInterestValue: '176178704.98700000',
-                    timestamp: 1583128200000,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        pair: 'BTCUSD',
+                        contractType: 'CURRENT_QUARTER',
+                        sumOpenInterest: '20403',
+                        sumOpenInterestValue: '176196512.23400000',
+                        timestamp: 1591261042378,
+                    },
+                    {
+                        pair: 'BTCUSD',
+                        contractType: 'CURRENT_QUARTER',
+                        sumOpenInterest: '20401',
+                        sumOpenInterestValue: '176178704.98700000',
+                        timestamp: 1583128200000,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'openInterestStatistics').mockReturnValue(
                 Promise.resolve({
@@ -1711,15 +1785,17 @@ describe('MarketDataApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = {
-                lastUpdateId: 16769853,
-                symbol: 'BTCUSD_PERP',
-                pair: 'BTCUSD',
-                E: 1591250106370,
-                T: 1591250106368,
-                bids: [['9638.0', '431']],
-                asks: [['9638.2', '12']],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    lastUpdateId: 16769853,
+                    symbol: 'BTCUSD_PERP',
+                    pair: 'BTCUSD',
+                    E: 1591250106370,
+                    T: 1591250106368,
+                    bids: [['9638.0', '431']],
+                    asks: [['9638.2', '12']],
+                })
+            );
 
             const spy = jest.spyOn(client, 'orderBook').mockReturnValue(
                 Promise.resolve({
@@ -1741,15 +1817,17 @@ describe('MarketDataApi', () => {
                 limit: 100,
             };
 
-            mockResponse = {
-                lastUpdateId: 16769853,
-                symbol: 'BTCUSD_PERP',
-                pair: 'BTCUSD',
-                E: 1591250106370,
-                T: 1591250106368,
-                bids: [['9638.0', '431']],
-                asks: [['9638.2', '12']],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    lastUpdateId: 16769853,
+                    symbol: 'BTCUSD_PERP',
+                    pair: 'BTCUSD',
+                    E: 1591250106370,
+                    T: 1591250106368,
+                    bids: [['9638.0', '431']],
+                    asks: [['9638.2', '12']],
+                })
+            );
 
             const spy = jest.spyOn(client, 'orderBook').mockReturnValue(
                 Promise.resolve({
@@ -1804,22 +1882,24 @@ describe('MarketDataApi', () => {
                 interval: PremiumIndexKlineDataIntervalEnum.INTERVAL_1m,
             };
 
-            mockResponse = [
-                [
-                    1691603820000,
-                    '-0.00042931',
-                    '-0.00023641',
-                    '-0.00059406',
-                    '-0.00043659',
-                    '0',
-                    1691603879999,
-                    '0',
-                    12,
-                    '0',
-                    '0',
-                    '0',
-                ],
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    [
+                        1691603820000,
+                        '-0.00042931',
+                        '-0.00023641',
+                        '-0.00059406',
+                        '-0.00043659',
+                        '0',
+                        1691603879999,
+                        '0',
+                        12,
+                        '0',
+                        '0',
+                        '0',
+                    ],
+                ])
+            );
 
             const spy = jest.spyOn(client, 'premiumIndexKlineData').mockReturnValue(
                 Promise.resolve({
@@ -1844,22 +1924,24 @@ describe('MarketDataApi', () => {
                 limit: 100,
             };
 
-            mockResponse = [
-                [
-                    1691603820000,
-                    '-0.00042931',
-                    '-0.00023641',
-                    '-0.00059406',
-                    '-0.00043659',
-                    '0',
-                    1691603879999,
-                    '0',
-                    12,
-                    '0',
-                    '0',
-                    '0',
-                ],
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    [
+                        1691603820000,
+                        '-0.00042931',
+                        '-0.00023641',
+                        '-0.00059406',
+                        '-0.00043659',
+                        '0',
+                        1691603879999,
+                        '0',
+                        12,
+                        '0',
+                        '0',
+                        '0',
+                    ],
+                ])
+            );
 
             const spy = jest.spyOn(client, 'premiumIndexKlineData').mockReturnValue(
                 Promise.resolve({
@@ -1930,16 +2012,18 @@ describe('MarketDataApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = {
-                symbol: 'BTCUSD',
-                time: 1697422647853,
-                constituents: [
-                    { exchange: 'bitstamp', symbol: 'btcusd' },
-                    { exchange: 'coinbase', symbol: 'BTC-USD' },
-                    { exchange: 'kraken', symbol: 'XBT/USD' },
-                    { exchange: 'binance_cross', symbol: 'BTCUSDC*index(USDCUSD)' },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    symbol: 'BTCUSD',
+                    time: 1697422647853,
+                    constituents: [
+                        { exchange: 'bitstamp', symbol: 'btcusd' },
+                        { exchange: 'coinbase', symbol: 'BTC-USD' },
+                        { exchange: 'kraken', symbol: 'XBT/USD' },
+                        { exchange: 'binance_cross', symbol: 'BTCUSDC*index(USDCUSD)' },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryIndexPriceConstituents').mockReturnValue(
                 Promise.resolve({
@@ -1960,16 +2044,18 @@ describe('MarketDataApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = {
-                symbol: 'BTCUSD',
-                time: 1697422647853,
-                constituents: [
-                    { exchange: 'bitstamp', symbol: 'btcusd' },
-                    { exchange: 'coinbase', symbol: 'BTC-USD' },
-                    { exchange: 'kraken', symbol: 'XBT/USD' },
-                    { exchange: 'binance_cross', symbol: 'BTCUSDC*index(USDCUSD)' },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    symbol: 'BTCUSD',
+                    time: 1697422647853,
+                    constituents: [
+                        { exchange: 'bitstamp', symbol: 'btcusd' },
+                        { exchange: 'coinbase', symbol: 'BTC-USD' },
+                        { exchange: 'kraken', symbol: 'XBT/USD' },
+                        { exchange: 'binance_cross', symbol: 'BTCUSDC*index(USDCUSD)' },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'queryIndexPriceConstituents').mockReturnValue(
                 Promise.resolve({
@@ -2027,16 +2113,18 @@ describe('MarketDataApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = [
-                {
-                    id: 28457,
-                    price: '9635.0',
-                    qty: '1',
-                    baseQty: '0.01037883',
-                    time: 1591250192508,
-                    isBuyerMaker: true,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        id: 28457,
+                        price: '9635.0',
+                        qty: '1',
+                        baseQty: '0.01037883',
+                        time: 1591250192508,
+                        isBuyerMaker: true,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'recentTradesList').mockReturnValue(
                 Promise.resolve({
@@ -2058,16 +2146,18 @@ describe('MarketDataApi', () => {
                 limit: 100,
             };
 
-            mockResponse = [
-                {
-                    id: 28457,
-                    price: '9635.0',
-                    qty: '1',
-                    baseQty: '0.01037883',
-                    time: 1591250192508,
-                    isBuyerMaker: true,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        id: 28457,
+                        price: '9635.0',
+                        qty: '1',
+                        baseQty: '0.01037883',
+                        time: 1591250192508,
+                        isBuyerMaker: true,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'recentTradesList').mockReturnValue(
                 Promise.resolve({
@@ -2117,18 +2207,20 @@ describe('MarketDataApi', () => {
 
     describe('symbolOrderBookTicker()', () => {
         it('should execute symbolOrderBookTicker() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    lastUpdateId: 1027024,
-                    symbol: 'BTCUSD_200626',
-                    pair: 'BTCUSD',
-                    bidPrice: '9650.1',
-                    bidQty: '16',
-                    askPrice: '9650.3',
-                    askQty: '7',
-                    time: 1591257300345,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        lastUpdateId: 1027024,
+                        symbol: 'BTCUSD_200626',
+                        pair: 'BTCUSD',
+                        bidPrice: '9650.1',
+                        bidQty: '16',
+                        askPrice: '9650.3',
+                        askQty: '7',
+                        time: 1591257300345,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'symbolOrderBookTicker').mockReturnValue(
                 Promise.resolve({
@@ -2150,18 +2242,20 @@ describe('MarketDataApi', () => {
                 pair: 'pair_example',
             };
 
-            mockResponse = [
-                {
-                    lastUpdateId: 1027024,
-                    symbol: 'BTCUSD_200626',
-                    pair: 'BTCUSD',
-                    bidPrice: '9650.1',
-                    bidQty: '16',
-                    askPrice: '9650.3',
-                    askQty: '7',
-                    time: 1591257300345,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        lastUpdateId: 1027024,
+                        symbol: 'BTCUSD_200626',
+                        pair: 'BTCUSD',
+                        bidPrice: '9650.1',
+                        bidQty: '16',
+                        askPrice: '9650.3',
+                        askQty: '7',
+                        time: 1591257300345,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'symbolOrderBookTicker').mockReturnValue(
                 Promise.resolve({
@@ -2197,9 +2291,11 @@ describe('MarketDataApi', () => {
 
     describe('symbolPriceTicker()', () => {
         it('should execute symbolPriceTicker() successfully with required parameters only', async () => {
-            mockResponse = [
-                { symbol: 'BTCUSD_200626', ps: '9647.8', price: '9647.8', time: 1591257246176 },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { symbol: 'BTCUSD_200626', ps: '9647.8', price: '9647.8', time: 1591257246176 },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'symbolPriceTicker').mockReturnValue(
                 Promise.resolve({
@@ -2221,9 +2317,11 @@ describe('MarketDataApi', () => {
                 pair: 'pair_example',
             };
 
-            mockResponse = [
-                { symbol: 'BTCUSD_200626', ps: '9647.8', price: '9647.8', time: 1591257246176 },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { symbol: 'BTCUSD_200626', ps: '9647.8', price: '9647.8', time: 1591257246176 },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'symbolPriceTicker').mockReturnValue(
                 Promise.resolve({
@@ -2263,26 +2361,28 @@ describe('MarketDataApi', () => {
                 period: TakerBuySellVolumePeriodEnum.PERIOD_5m,
             };
 
-            mockResponse = [
-                {
-                    pair: 'BTCUSD',
-                    contractType: 'CURRENT_QUARTER',
-                    takerBuyVol: '387',
-                    takerSellVol: '248',
-                    takerBuyVolValue: '2342.1220',
-                    takerSellVolValue: '4213.9800',
-                    timestamp: 1591261042378,
-                },
-                {
-                    pair: 'BTCUSD',
-                    contractType: 'CURRENT_QUARTER',
-                    takerBuyVol: '234',
-                    takerSellVol: '121',
-                    takerBuyVolValue: '4563.1320',
-                    takerSellVolValue: '3313.3940',
-                    timestamp: 1585615200000,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        pair: 'BTCUSD',
+                        contractType: 'CURRENT_QUARTER',
+                        takerBuyVol: '387',
+                        takerSellVol: '248',
+                        takerBuyVolValue: '2342.1220',
+                        takerSellVolValue: '4213.9800',
+                        timestamp: 1591261042378,
+                    },
+                    {
+                        pair: 'BTCUSD',
+                        contractType: 'CURRENT_QUARTER',
+                        takerBuyVol: '234',
+                        takerSellVol: '121',
+                        takerBuyVolValue: '4563.1320',
+                        takerSellVolValue: '3313.3940',
+                        timestamp: 1585615200000,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'takerBuySellVolume').mockReturnValue(
                 Promise.resolve({
@@ -2308,26 +2408,28 @@ describe('MarketDataApi', () => {
                 endTime: 1641782889000,
             };
 
-            mockResponse = [
-                {
-                    pair: 'BTCUSD',
-                    contractType: 'CURRENT_QUARTER',
-                    takerBuyVol: '387',
-                    takerSellVol: '248',
-                    takerBuyVolValue: '2342.1220',
-                    takerSellVolValue: '4213.9800',
-                    timestamp: 1591261042378,
-                },
-                {
-                    pair: 'BTCUSD',
-                    contractType: 'CURRENT_QUARTER',
-                    takerBuyVol: '234',
-                    takerSellVol: '121',
-                    takerBuyVolValue: '4563.1320',
-                    takerSellVolValue: '3313.3940',
-                    timestamp: 1585615200000,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        pair: 'BTCUSD',
+                        contractType: 'CURRENT_QUARTER',
+                        takerBuyVol: '387',
+                        takerSellVol: '248',
+                        takerBuyVolValue: '2342.1220',
+                        takerSellVolValue: '4213.9800',
+                        timestamp: 1591261042378,
+                    },
+                    {
+                        pair: 'BTCUSD',
+                        contractType: 'CURRENT_QUARTER',
+                        takerBuyVol: '234',
+                        takerSellVol: '121',
+                        takerBuyVolValue: '4563.1320',
+                        takerSellVolValue: '3313.3940',
+                        timestamp: 1585615200000,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'takerBuySellVolume').mockReturnValue(
                 Promise.resolve({
@@ -2441,27 +2543,29 @@ describe('MarketDataApi', () => {
 
     describe('ticker24hrPriceChangeStatistics()', () => {
         it('should execute ticker24hrPriceChangeStatistics() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    symbol: 'BTCUSD_200925',
-                    pair: 'BTCUSD',
-                    priceChange: '136.6',
-                    priceChangePercent: '1.436',
-                    weightedAvgPrice: '9547.3',
-                    lastPrice: '9651.6',
-                    lastQty: '1',
-                    openPrice: '9515.0',
-                    highPrice: '9687.0',
-                    lowPrice: '9499.5',
-                    volume: '494109',
-                    baseVolume: '5192.94797687',
-                    openTime: 1591170300000,
-                    closeTime: 1591256718418,
-                    firstId: 600507,
-                    lastId: 697803,
-                    count: 97297,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BTCUSD_200925',
+                        pair: 'BTCUSD',
+                        priceChange: '136.6',
+                        priceChangePercent: '1.436',
+                        weightedAvgPrice: '9547.3',
+                        lastPrice: '9651.6',
+                        lastQty: '1',
+                        openPrice: '9515.0',
+                        highPrice: '9687.0',
+                        lowPrice: '9499.5',
+                        volume: '494109',
+                        baseVolume: '5192.94797687',
+                        openTime: 1591170300000,
+                        closeTime: 1591256718418,
+                        firstId: 600507,
+                        lastId: 697803,
+                        count: 97297,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'ticker24hrPriceChangeStatistics').mockReturnValue(
                 Promise.resolve({
@@ -2483,27 +2587,29 @@ describe('MarketDataApi', () => {
                 pair: 'pair_example',
             };
 
-            mockResponse = [
-                {
-                    symbol: 'BTCUSD_200925',
-                    pair: 'BTCUSD',
-                    priceChange: '136.6',
-                    priceChangePercent: '1.436',
-                    weightedAvgPrice: '9547.3',
-                    lastPrice: '9651.6',
-                    lastQty: '1',
-                    openPrice: '9515.0',
-                    highPrice: '9687.0',
-                    lowPrice: '9499.5',
-                    volume: '494109',
-                    baseVolume: '5192.94797687',
-                    openTime: 1591170300000,
-                    closeTime: 1591256718418,
-                    firstId: 600507,
-                    lastId: 697803,
-                    count: 97297,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BTCUSD_200925',
+                        pair: 'BTCUSD',
+                        priceChange: '136.6',
+                        priceChangePercent: '1.436',
+                        weightedAvgPrice: '9547.3',
+                        lastPrice: '9651.6',
+                        lastQty: '1',
+                        openPrice: '9515.0',
+                        highPrice: '9687.0',
+                        lowPrice: '9499.5',
+                        volume: '494109',
+                        baseVolume: '5192.94797687',
+                        openTime: 1591170300000,
+                        closeTime: 1591256718418,
+                        firstId: 600507,
+                        lastId: 697803,
+                        count: 97297,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'ticker24hrPriceChangeStatistics').mockReturnValue(
                 Promise.resolve({
@@ -2544,22 +2650,24 @@ describe('MarketDataApi', () => {
                 period: TopTraderLongShortRatioAccountsPeriodEnum.PERIOD_5m,
             };
 
-            mockResponse = [
-                {
-                    pair: 'BTCUSD',
-                    longShortRatio: '1.8105',
-                    longAccount: '0.6442',
-                    shortAccount: '0.3558',
-                    timestamp: 1591261042378,
-                },
-                {
-                    pair: 'BTCUSD',
-                    longShortRatio: '1.1110',
-                    longAccount: '0.5263',
-                    shortAccount: '0.4737',
-                    timestamp: 1592870400000,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        pair: 'BTCUSD',
+                        longShortRatio: '1.8105',
+                        longAccount: '0.6442',
+                        shortAccount: '0.3558',
+                        timestamp: 1591261042378,
+                    },
+                    {
+                        pair: 'BTCUSD',
+                        longShortRatio: '1.1110',
+                        longAccount: '0.5263',
+                        shortAccount: '0.4737',
+                        timestamp: 1592870400000,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'topTraderLongShortRatioAccounts').mockReturnValue(
                 Promise.resolve({
@@ -2584,22 +2692,24 @@ describe('MarketDataApi', () => {
                 endTime: 1641782889000,
             };
 
-            mockResponse = [
-                {
-                    pair: 'BTCUSD',
-                    longShortRatio: '1.8105',
-                    longAccount: '0.6442',
-                    shortAccount: '0.3558',
-                    timestamp: 1591261042378,
-                },
-                {
-                    pair: 'BTCUSD',
-                    longShortRatio: '1.1110',
-                    longAccount: '0.5263',
-                    shortAccount: '0.4737',
-                    timestamp: 1592870400000,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        pair: 'BTCUSD',
+                        longShortRatio: '1.8105',
+                        longAccount: '0.6442',
+                        shortAccount: '0.3558',
+                        timestamp: 1591261042378,
+                    },
+                    {
+                        pair: 'BTCUSD',
+                        longShortRatio: '1.1110',
+                        longAccount: '0.5263',
+                        shortAccount: '0.4737',
+                        timestamp: 1592870400000,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'topTraderLongShortRatioAccounts').mockReturnValue(
                 Promise.resolve({
@@ -2673,22 +2783,24 @@ describe('MarketDataApi', () => {
                 period: TopTraderLongShortRatioPositionsPeriodEnum.PERIOD_5m,
             };
 
-            mockResponse = [
-                {
-                    pair: 'BTCUSD',
-                    longShortRatio: '0.7869',
-                    longPosition: '0.6442',
-                    shortPosition: '0.4404',
-                    timestamp: 1592870400000,
-                },
-                {
-                    pair: 'BTCUSD',
-                    longShortRatio: '1.1231',
-                    longPosition: '0.2363',
-                    shortPosition: '0.4537',
-                    timestamp: 1592956800000,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        pair: 'BTCUSD',
+                        longShortRatio: '0.7869',
+                        longPosition: '0.6442',
+                        shortPosition: '0.4404',
+                        timestamp: 1592870400000,
+                    },
+                    {
+                        pair: 'BTCUSD',
+                        longShortRatio: '1.1231',
+                        longPosition: '0.2363',
+                        shortPosition: '0.4537',
+                        timestamp: 1592956800000,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'topTraderLongShortRatioPositions').mockReturnValue(
                 Promise.resolve({
@@ -2713,22 +2825,24 @@ describe('MarketDataApi', () => {
                 endTime: 1641782889000,
             };
 
-            mockResponse = [
-                {
-                    pair: 'BTCUSD',
-                    longShortRatio: '0.7869',
-                    longPosition: '0.6442',
-                    shortPosition: '0.4404',
-                    timestamp: 1592870400000,
-                },
-                {
-                    pair: 'BTCUSD',
-                    longShortRatio: '1.1231',
-                    longPosition: '0.2363',
-                    shortPosition: '0.4537',
-                    timestamp: 1592956800000,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        pair: 'BTCUSD',
+                        longShortRatio: '0.7869',
+                        longPosition: '0.6442',
+                        shortPosition: '0.4404',
+                        timestamp: 1592870400000,
+                    },
+                    {
+                        pair: 'BTCUSD',
+                        longShortRatio: '1.1231',
+                        longPosition: '0.2363',
+                        shortPosition: '0.4537',
+                        timestamp: 1592956800000,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'topTraderLongShortRatioPositions').mockReturnValue(
                 Promise.resolve({

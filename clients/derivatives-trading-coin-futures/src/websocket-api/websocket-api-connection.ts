@@ -135,6 +135,7 @@ export class WebsocketAPIConnection {
      *
      * @summary Account Information(USER_DATA)
      * @param {AccountInformationRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<AccountInformationResponse>>
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/account/websocket-api/Account-Information Binance API Documentation}
      */
@@ -151,6 +152,7 @@ export class WebsocketAPIConnection {
      *
      * @summary Futures Account Balance(USER_DATA)
      * @param {FuturesAccountBalanceRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<FuturesAccountBalanceResponse>>
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/account/websocket-api/Futures-Account-Balance Binance API Documentation}
      */
@@ -169,6 +171,7 @@ export class WebsocketAPIConnection {
      *
      * @summary Cancel Order (TRADE)
      * @param {CancelOrderRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<CancelOrderResponse>>
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/websocket-api/Cancel-Order Binance API Documentation}
      */
@@ -195,6 +198,7 @@ export class WebsocketAPIConnection {
      *
      * @summary Modify Order (TRADE)
      * @param {ModifyOrderRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<ModifyOrderResponse>>
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/websocket-api/Modify-Order Binance API Documentation}
      */
@@ -239,6 +243,7 @@ export class WebsocketAPIConnection {
      *
      * @summary New Order(TRADE)
      * @param {NewOrderRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<NewOrderResponse>>
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/websocket-api/New-Order Binance API Documentation}
      */
@@ -255,6 +260,7 @@ export class WebsocketAPIConnection {
      *
      * @summary Position Information(USER_DATA)
      * @param {PositionInformationRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<PositionInformationResponse>>
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/websocket-api/Position-Information Binance API Documentation}
      */
@@ -278,6 +284,7 @@ export class WebsocketAPIConnection {
      *
      * @summary Query Order (USER_DATA)
      * @param {QueryOrderRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<QueryOrderResponse>>
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/websocket-api/Query-Order Binance API Documentation}
      */
@@ -294,6 +301,7 @@ export class WebsocketAPIConnection {
      *
      * @summary Close User Data Stream (USER_STREAM)
      * @param {CloseUserDataStreamRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<CloseUserDataStreamResponse>>
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream-Wsp Binance API Documentation}
      */
@@ -310,6 +318,7 @@ export class WebsocketAPIConnection {
      *
      * @summary Keepalive User Data Stream (USER_STREAM)
      * @param {KeepaliveUserDataStreamRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<KeepaliveUserDataStreamResponse>>
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream-Wsp Binance API Documentation}
      */
@@ -326,6 +335,7 @@ export class WebsocketAPIConnection {
      *
      * @summary Start User Data Stream (USER_STREAM)
      * @param {StartUserDataStreamRequest} requestParameters Request parameters.
+     *
      * @returns Promise<WebsocketApiResponse<StartUserDataStreamResponse>>
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream-Wsp Binance API Documentation}
      */

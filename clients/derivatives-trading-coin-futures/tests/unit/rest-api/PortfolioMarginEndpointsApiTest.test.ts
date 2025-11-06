@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { PortfolioMarginEndpointsApi } from '../../../src/rest-api';
@@ -38,11 +39,13 @@ describe('PortfolioMarginEndpointsApi', () => {
                 asset: 'asset_example',
             };
 
-            mockResponse = {
-                maxWithdrawAmountUSD: '25347.92083245',
-                asset: 'BTC',
-                maxWithdrawAmount: '1.33663654',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    maxWithdrawAmountUSD: '25347.92083245',
+                    asset: 'BTC',
+                    maxWithdrawAmount: '1.33663654',
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'classicPortfolioMarginAccountInformation')
@@ -66,11 +69,13 @@ describe('PortfolioMarginEndpointsApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                maxWithdrawAmountUSD: '25347.92083245',
-                asset: 'BTC',
-                maxWithdrawAmount: '1.33663654',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    maxWithdrawAmountUSD: '25347.92083245',
+                    asset: 'BTC',
+                    maxWithdrawAmount: '1.33663654',
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'classicPortfolioMarginAccountInformation')

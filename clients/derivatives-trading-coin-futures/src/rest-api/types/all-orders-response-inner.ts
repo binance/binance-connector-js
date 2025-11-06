@@ -45,10 +45,10 @@ export interface AllOrdersResponseInner {
     executedQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllOrdersResponseInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -117,10 +117,10 @@ export interface AllOrdersResponseInner {
     pair?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllOrdersResponseInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}
@@ -147,10 +147,10 @@ export interface AllOrdersResponseInner {
     priceRate?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllOrdersResponseInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}

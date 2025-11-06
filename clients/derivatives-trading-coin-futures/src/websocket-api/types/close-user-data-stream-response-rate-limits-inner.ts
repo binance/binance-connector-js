@@ -33,20 +33,20 @@ export interface CloseUserDataStreamResponseRateLimitsInner {
     interval?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CloseUserDataStreamResponseRateLimitsInner
      */
-    intervalNum?: number;
+    intervalNum?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CloseUserDataStreamResponseRateLimitsInner
      */
-    limit?: number;
+    limit?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CloseUserDataStreamResponseRateLimitsInner
      */
-    count?: number;
+    count?: number | bigint;
 }

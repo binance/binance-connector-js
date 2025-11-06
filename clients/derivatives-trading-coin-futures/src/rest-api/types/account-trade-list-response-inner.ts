@@ -27,16 +27,16 @@ export interface AccountTradeListResponseInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountTradeListResponseInner
      */
-    id?: number;
+    id?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountTradeListResponseInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -93,10 +93,10 @@ export interface AccountTradeListResponseInner {
     commissionAsset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountTradeListResponseInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}

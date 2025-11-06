@@ -21,16 +21,16 @@
 export interface MarkPriceKlineCandlestickStreamsResponseK {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarkPriceKlineCandlestickStreamsResponseK
      */
-    t?: number;
+    t?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarkPriceKlineCandlestickStreamsResponseK
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {string}
@@ -45,16 +45,16 @@ export interface MarkPriceKlineCandlestickStreamsResponseK {
     i?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarkPriceKlineCandlestickStreamsResponseK
      */
-    f?: number;
+    f?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarkPriceKlineCandlestickStreamsResponseK
      */
-    L?: number;
+    L?: number | bigint;
     /**
      *
      * @type {string}
@@ -87,10 +87,10 @@ export interface MarkPriceKlineCandlestickStreamsResponseK {
     v?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarkPriceKlineCandlestickStreamsResponseK
      */
-    n?: number;
+    n?: number | bigint;
     /**
      *
      * @type {boolean}

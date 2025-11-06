@@ -27,10 +27,10 @@ export interface IndividualSymbolTickerStreamsResponse {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}
@@ -105,32 +105,32 @@ export interface IndividualSymbolTickerStreamsResponse {
     q?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
-    O?: number;
+    O?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
-    C?: number;
+    C?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
-    F?: number;
+    F?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
-    L?: number;
+    L?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof IndividualSymbolTickerStreamsResponse
      */
-    n?: number;
+    n?: number | bigint;
 }

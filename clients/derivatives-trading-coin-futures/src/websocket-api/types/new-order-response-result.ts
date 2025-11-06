@@ -21,10 +21,10 @@
 export interface NewOrderResponseResult {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NewOrderResponseResult
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -147,8 +147,8 @@ export interface NewOrderResponseResult {
     origType?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NewOrderResponseResult
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

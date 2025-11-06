@@ -173,6 +173,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary Aggregate Trade Streams
      * @param {AggregateTradeStreamsRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<AggregateTradeStreamsResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Aggregate-Trade-Streams Binance API Documentation}
@@ -190,6 +191,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary All Book Tickers Stream
      * @param {AllBookTickersStreamRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<AllBookTickersStreamResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/All-Book-Tickers-Stream Binance API Documentation}
@@ -208,6 +210,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary All Market Liquidation Order Streams
      * @param {AllMarketLiquidationOrderStreamsRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<AllMarketLiquidationOrderStreamsResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/All-Market-Liquidation-Order-Streams Binance API Documentation}
@@ -225,6 +228,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary All Market Mini Tickers Stream
      * @param {AllMarketMiniTickersStreamRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<AllMarketMiniTickersStreamResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/All-Market-Mini-Tickers-Stream Binance API Documentation}
@@ -242,6 +246,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary All Market Tickers Streams
      * @param {AllMarketTickersStreamsRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<AllMarketTickersStreamsResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/All-Market-Tickers-Streams Binance API Documentation}
@@ -259,6 +264,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary Continuous Contract Kline/Candlestick Streams
      * @param {ContinuousContractKlineCandlestickStreamsRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<ContinuousContractKlineCandlestickStreamsResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Continuous-Contract-Kline-Candlestick-Streams Binance API Documentation}
@@ -278,6 +284,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary Contract Info Stream
      * @param {ContractInfoStreamRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<ContractInfoStreamResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Contract-Info-Stream Binance API Documentation}
@@ -295,6 +302,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary Diff. Book Depth Streams
      * @param {DiffBookDepthStreamsRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<DiffBookDepthStreamsResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams Binance API Documentation}
@@ -312,6 +320,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary Index Kline/Candlestick Streams
      * @param {IndexKlineCandlestickStreamsRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<IndexKlineCandlestickStreamsResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Index-Kline-Candlestick-Streams Binance API Documentation}
@@ -329,6 +338,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary Index Price Stream
      * @param {IndexPriceStreamRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<IndexPriceStreamResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Index-Price-Stream Binance API Documentation}
@@ -346,6 +356,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary Individual Symbol Book Ticker Streams
      * @param {IndividualSymbolBookTickerStreamsRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<IndividualSymbolBookTickerStreamsResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Individual-Symbol-Book-Ticker-Streams Binance API Documentation}
@@ -363,6 +374,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary Individual Symbol Mini Ticker Stream
      * @param {IndividualSymbolMiniTickerStreamRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<IndividualSymbolMiniTickerStreamResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Individual-Symbol-Mini-Ticker-Stream Binance API Documentation}
@@ -380,6 +392,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary Individual Symbol Ticker Streams
      * @param {IndividualSymbolTickerStreamsRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<IndividualSymbolTickerStreamsResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Individual-Symbol-Ticker-Streams Binance API Documentation}
@@ -397,6 +410,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary Kline/Candlestick Streams
      * @param {KlineCandlestickStreamsRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<KlineCandlestickStreamsResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Kline-Candlestick-Streams Binance API Documentation}
@@ -416,6 +430,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary Liquidation Order Streams
      * @param {LiquidationOrderStreamsRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<LiquidationOrderStreamsResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Liquidation-Order-Streams Binance API Documentation}
@@ -433,6 +448,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary Mark Price Kline/Candlestick Streams
      * @param {MarkPriceKlineCandlestickStreamsRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<MarkPriceKlineCandlestickStreamsResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Mark-Price-Kline-Candlestick-Streams Binance API Documentation}
@@ -450,6 +466,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary Mark Price of All Symbols of a Pair
      * @param {MarkPriceOfAllSymbolsOfAPairRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<MarkPriceOfAllSymbolsOfAPairResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Mark-Price-of-All-Symbols-of-a-Pair Binance API Documentation}
@@ -467,6 +484,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary Mark Price Stream
      * @param {MarkPriceStreamRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<MarkPriceStreamResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Mark-Price-Stream Binance API Documentation}
@@ -484,6 +502,7 @@ export class WebsocketStreamsConnection {
      *
      * @summary Partial Book Depth Streams
      * @param {PartialBookDepthStreamsRequest} requestParameters Request parameters.
+     *
      * @returns {WebsocketStream<PartialBookDepthStreamsResponse>}
      * @throws {RequiredError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Partial-Book-Depth-Streams Binance API Documentation}

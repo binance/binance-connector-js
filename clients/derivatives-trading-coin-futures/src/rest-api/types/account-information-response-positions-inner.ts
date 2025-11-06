@@ -99,10 +99,10 @@ export interface AccountInformationResponsePositionsInner {
     maxQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountInformationResponsePositionsInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}

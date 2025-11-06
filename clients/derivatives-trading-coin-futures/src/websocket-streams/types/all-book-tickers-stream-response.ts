@@ -27,10 +27,10 @@ export interface AllBookTickersStreamResponse {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllBookTickersStreamResponse
      */
-    u?: number;
+    u?: number | bigint;
     /**
      *
      * @type {string}
@@ -69,14 +69,14 @@ export interface AllBookTickersStreamResponse {
     A?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllBookTickersStreamResponse
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllBookTickersStreamResponse
      */
-    E?: number;
+    E?: number | bigint;
 }

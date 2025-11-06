@@ -26,16 +26,16 @@ import type { GridUpdateGu } from './grid-update-gu';
 export interface GridUpdate {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GridUpdate
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GridUpdate
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {GridUpdateGu}

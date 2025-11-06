@@ -27,10 +27,10 @@ export interface GetFundingRateHistoryOfPerpetualFuturesResponseInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFundingRateHistoryOfPerpetualFuturesResponseInner
      */
-    fundingTime?: number;
+    fundingTime?: number | bigint;
     /**
      *
      * @type {string}

@@ -45,10 +45,10 @@ export interface CurrentAllOpenOrdersResponseInner {
     executedQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CurrentAllOpenOrdersResponseInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -111,10 +111,10 @@ export interface CurrentAllOpenOrdersResponseInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CurrentAllOpenOrdersResponseInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}
@@ -141,10 +141,10 @@ export interface CurrentAllOpenOrdersResponseInner {
     priceRate?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CurrentAllOpenOrdersResponseInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}
