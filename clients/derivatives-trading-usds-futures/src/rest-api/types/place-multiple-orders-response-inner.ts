@@ -45,10 +45,10 @@ export interface PlaceMultipleOrdersResponseInner {
     executedQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PlaceMultipleOrdersResponseInner
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -135,10 +135,10 @@ export interface PlaceMultipleOrdersResponseInner {
     priceRate?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PlaceMultipleOrdersResponseInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -165,16 +165,16 @@ export interface PlaceMultipleOrdersResponseInner {
     selfTradePreventionMode?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PlaceMultipleOrdersResponseInner
      */
-    goodTillDate?: number;
+    goodTillDate?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PlaceMultipleOrdersResponseInner
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}

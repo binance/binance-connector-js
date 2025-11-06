@@ -27,22 +27,22 @@ export interface FuturesTradingQuantitativeRulesIndicatorsResponseIndicatorsACCO
     indicator?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FuturesTradingQuantitativeRulesIndicatorsResponseIndicatorsACCOUNTInner
      */
-    value?: number;
+    value?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FuturesTradingQuantitativeRulesIndicatorsResponseIndicatorsACCOUNTInner
      */
-    triggerValue?: number;
+    triggerValue?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FuturesTradingQuantitativeRulesIndicatorsResponseIndicatorsACCOUNTInner
      */
-    plannedRecoverTime?: number;
+    plannedRecoverTime?: number | bigint;
     /**
      *
      * @type {boolean}

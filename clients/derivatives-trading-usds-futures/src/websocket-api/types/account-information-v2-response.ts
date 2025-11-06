@@ -35,10 +35,10 @@ export interface AccountInformationV2Response {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountInformationV2Response
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {AccountInformationV2ResponseResult}

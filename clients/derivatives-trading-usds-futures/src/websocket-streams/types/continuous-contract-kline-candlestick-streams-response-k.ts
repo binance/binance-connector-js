@@ -21,16 +21,16 @@
 export interface ContinuousContractKlineCandlestickStreamsResponseK {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ContinuousContractKlineCandlestickStreamsResponseK
      */
-    t?: number;
+    t?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ContinuousContractKlineCandlestickStreamsResponseK
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {string}
@@ -39,16 +39,16 @@ export interface ContinuousContractKlineCandlestickStreamsResponseK {
     i?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ContinuousContractKlineCandlestickStreamsResponseK
      */
-    f?: number;
+    f?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ContinuousContractKlineCandlestickStreamsResponseK
      */
-    L?: number;
+    L?: number | bigint;
     /**
      *
      * @type {string}
@@ -81,10 +81,10 @@ export interface ContinuousContractKlineCandlestickStreamsResponseK {
     v?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ContinuousContractKlineCandlestickStreamsResponseK
      */
-    n?: number;
+    n?: number | bigint;
     /**
      *
      * @type {boolean}

@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { UserDataStreamsApi } from '../../../src/rest-api';
@@ -69,9 +70,11 @@ describe('UserDataStreamsApi', () => {
 
     describe('keepaliveUserDataStream()', () => {
         it('should execute keepaliveUserDataStream() successfully with required parameters only', async () => {
-            mockResponse = {
-                listenKey: '3HBntNTepshgEdjIwSUIBgB9keLyOCg5qv3n6bYAtktG8ejcaW5HXz9Vx1JgIieg',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    listenKey: '3HBntNTepshgEdjIwSUIBgB9keLyOCg5qv3n6bYAtktG8ejcaW5HXz9Vx1JgIieg',
+                })
+            );
 
             const spy = jest.spyOn(client, 'keepaliveUserDataStream').mockReturnValue(
                 Promise.resolve({
@@ -107,9 +110,11 @@ describe('UserDataStreamsApi', () => {
 
     describe('startUserDataStream()', () => {
         it('should execute startUserDataStream() successfully with required parameters only', async () => {
-            mockResponse = {
-                listenKey: 'pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    listenKey: 'pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1',
+                })
+            );
 
             const spy = jest.spyOn(client, 'startUserDataStream').mockReturnValue(
                 Promise.resolve({

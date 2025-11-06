@@ -45,10 +45,10 @@ export interface TestOrderResponse {
     executedQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TestOrderResponse
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -141,10 +141,10 @@ export interface TestOrderResponse {
     priceRate?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TestOrderResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -171,8 +171,8 @@ export interface TestOrderResponse {
     selfTradePreventionMode?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TestOrderResponse
      */
-    goodTillDate?: number;
+    goodTillDate?: number | bigint;
 }

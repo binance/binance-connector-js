@@ -105,10 +105,10 @@ export interface AccountInformationResponseResultPositionsInner {
     positionAmt?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountInformationResponseResultPositionsInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}

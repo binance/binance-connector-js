@@ -21,26 +21,26 @@
 export interface PositionAdlQuantileEstimationResponseInnerAdlQuantile {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PositionAdlQuantileEstimationResponseInnerAdlQuantile
      */
-    LONG?: number;
+    LONG?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PositionAdlQuantileEstimationResponseInnerAdlQuantile
      */
-    SHORT?: number;
+    SHORT?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PositionAdlQuantileEstimationResponseInnerAdlQuantile
      */
-    HEDGE?: number;
+    HEDGE?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PositionAdlQuantileEstimationResponseInnerAdlQuantile
      */
-    BOTH?: number;
+    BOTH?: number | bigint;
 }

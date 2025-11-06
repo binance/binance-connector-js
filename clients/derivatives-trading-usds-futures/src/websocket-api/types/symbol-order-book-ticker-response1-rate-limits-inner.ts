@@ -33,20 +33,20 @@ export interface SymbolOrderBookTickerResponse1RateLimitsInner {
     interval?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SymbolOrderBookTickerResponse1RateLimitsInner
      */
-    intervalNum?: number;
+    intervalNum?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SymbolOrderBookTickerResponse1RateLimitsInner
      */
-    limit?: number;
+    limit?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SymbolOrderBookTickerResponse1RateLimitsInner
      */
-    count?: number;
+    count?: number | bigint;
 }

@@ -26,16 +26,16 @@ import type { OrderTradeUpdateO } from './order-trade-update-o';
 export interface OrderTradeUpdate {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderTradeUpdate
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderTradeUpdate
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {OrderTradeUpdateO}

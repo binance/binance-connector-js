@@ -35,10 +35,10 @@ export interface ModifyOrderResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ModifyOrderResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {ModifyOrderResponseResult}

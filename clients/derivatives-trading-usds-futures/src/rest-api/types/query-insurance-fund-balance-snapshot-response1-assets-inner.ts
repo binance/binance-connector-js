@@ -33,8 +33,8 @@ export interface QueryInsuranceFundBalanceSnapshotResponse1AssetsInner {
     marginBalance?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryInsuranceFundBalanceSnapshotResponse1AssetsInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

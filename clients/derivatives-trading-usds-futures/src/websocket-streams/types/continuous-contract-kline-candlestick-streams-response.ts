@@ -32,10 +32,10 @@ export interface ContinuousContractKlineCandlestickStreamsResponse {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ContinuousContractKlineCandlestickStreamsResponse
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}

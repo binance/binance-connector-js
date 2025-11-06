@@ -21,28 +21,28 @@
 export interface NotionalAndLeverageBracketsResponse2BracketsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NotionalAndLeverageBracketsResponse2BracketsInner
      */
-    bracket?: number;
+    bracket?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NotionalAndLeverageBracketsResponse2BracketsInner
      */
-    initialLeverage?: number;
+    initialLeverage?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NotionalAndLeverageBracketsResponse2BracketsInner
      */
-    notionalCap?: number;
+    notionalCap?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NotionalAndLeverageBracketsResponse2BracketsInner
      */
-    notionalFloor?: number;
+    notionalFloor?: number | bigint;
     /**
      *
      * @type {number}
@@ -51,8 +51,8 @@ export interface NotionalAndLeverageBracketsResponse2BracketsInner {
     maintMarginRatio?: number;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NotionalAndLeverageBracketsResponse2BracketsInner
      */
-    cum?: number;
+    cum?: number | bigint;
 }

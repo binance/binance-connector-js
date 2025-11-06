@@ -32,10 +32,10 @@ export interface QueryIndexPriceConstituentsResponse {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryIndexPriceConstituentsResponse
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {Array<QueryIndexPriceConstituentsResponseConstituentsInner>}

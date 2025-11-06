@@ -27,10 +27,10 @@ export interface AllMarketMiniTickersStreamResponseInner {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllMarketMiniTickersStreamResponseInner
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}

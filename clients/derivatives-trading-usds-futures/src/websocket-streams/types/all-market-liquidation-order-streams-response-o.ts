@@ -81,8 +81,8 @@ export interface AllMarketLiquidationOrderStreamsResponseO {
     z?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllMarketLiquidationOrderStreamsResponseO
      */
-    T?: number;
+    T?: number | bigint;
 }

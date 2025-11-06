@@ -26,10 +26,10 @@ import type { MarginCallPInner } from './margin-call-pinner';
 export interface MarginCall {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarginCall
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}

@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { AccountApi } from '../../../src/rest-api';
@@ -78,129 +79,131 @@ describe('AccountApi', () => {
 
     describe('accountInformationV2()', () => {
         it('should execute accountInformationV2() successfully with required parameters only', async () => {
-            mockResponse = {
-                feeTier: 0,
-                feeBurn: true,
-                canDeposit: true,
-                canWithdraw: true,
-                updateTime: 0,
-                multiAssetsMargin: true,
-                tradeGroupId: -1,
-                totalInitialMargin: '0.00000000',
-                totalMaintMargin: '0.00000000',
-                totalWalletBalance: '126.72469206',
-                totalUnrealizedProfit: '0.00000000',
-                totalMarginBalance: '126.72469206',
-                totalPositionInitialMargin: '0.00000000',
-                totalOpenOrderInitialMargin: '0.00000000',
-                totalCrossWalletBalance: '126.72469206',
-                totalCrossUnPnl: '0.00000000',
-                availableBalance: '126.72469206',
-                maxWithdrawAmount: '126.72469206',
-                assets: [
-                    {
-                        asset: 'USDT',
-                        walletBalance: '23.72469206',
-                        unrealizedProfit: '0.00000000',
-                        marginBalance: '23.72469206',
-                        maintMargin: '0.00000000',
-                        initialMargin: '0.00000000',
-                        positionInitialMargin: '0.00000000',
-                        openOrderInitialMargin: '0.00000000',
-                        crossWalletBalance: '23.72469206',
-                        crossUnPnl: '0.00000000',
-                        availableBalance: '23.72469206',
-                        maxWithdrawAmount: '23.72469206',
-                        marginAvailable: true,
-                        updateTime: 1625474304765,
-                    },
-                    {
-                        asset: 'BUSD',
-                        walletBalance: '103.12345678',
-                        unrealizedProfit: '0.00000000',
-                        marginBalance: '103.12345678',
-                        maintMargin: '0.00000000',
-                        initialMargin: '0.00000000',
-                        positionInitialMargin: '0.00000000',
-                        openOrderInitialMargin: '0.00000000',
-                        crossWalletBalance: '103.12345678',
-                        crossUnPnl: '0.00000000',
-                        availableBalance: '103.12345678',
-                        maxWithdrawAmount: '103.12345678',
-                        marginAvailable: true,
-                        updateTime: 1625474304765,
-                    },
-                    {
-                        asset: 'USDT',
-                        walletBalance: '23.72469206',
-                        unrealizedProfit: '0.00000000',
-                        marginBalance: '23.72469206',
-                        maintMargin: '0.00000000',
-                        initialMargin: '0.00000000',
-                        positionInitialMargin: '0.00000000',
-                        openOrderInitialMargin: '0.00000000',
-                        crossWalletBalance: '23.72469206',
-                        crossUnPnl: '0.00000000',
-                        availableBalance: '126.72469206',
-                        maxWithdrawAmount: '23.72469206',
-                        marginAvailable: true,
-                        updateTime: 1625474304765,
-                    },
-                    {
-                        asset: 'BUSD',
-                        walletBalance: '103.12345678',
-                        unrealizedProfit: '0.00000000',
-                        marginBalance: '103.12345678',
-                        maintMargin: '0.00000000',
-                        initialMargin: '0.00000000',
-                        positionInitialMargin: '0.00000000',
-                        openOrderInitialMargin: '0.00000000',
-                        crossWalletBalance: '103.12345678',
-                        crossUnPnl: '0.00000000',
-                        availableBalance: '126.72469206',
-                        maxWithdrawAmount: '103.12345678',
-                        marginAvailable: true,
-                        updateTime: 1625474304765,
-                    },
-                ],
-                positions: [
-                    {
-                        symbol: 'BTCUSDT',
-                        initialMargin: '0',
-                        maintMargin: '0',
-                        unrealizedProfit: '0.00000000',
-                        positionInitialMargin: '0',
-                        openOrderInitialMargin: '0',
-                        leverage: '100',
-                        isolated: true,
-                        entryPrice: '0.00000',
-                        maxNotional: '250000',
-                        bidNotional: '0',
-                        askNotional: '0',
-                        positionSide: 'BOTH',
-                        positionAmt: '0',
-                        updateTime: 0,
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        initialMargin: '0',
-                        maintMargin: '0',
-                        unrealizedProfit: '0.00000000',
-                        positionInitialMargin: '0',
-                        openOrderInitialMargin: '0',
-                        leverage: '100',
-                        isolated: true,
-                        entryPrice: '0.00000',
-                        maxNotional: '250000',
-                        bidNotional: '0',
-                        askNotional: '0',
-                        positionSide: 'BOTH',
-                        positionAmt: '0',
-                        updateTime: 0,
-                    },
-                ],
-                canTrade: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    feeTier: 0,
+                    feeBurn: true,
+                    canDeposit: true,
+                    canWithdraw: true,
+                    updateTime: 0,
+                    multiAssetsMargin: true,
+                    tradeGroupId: -1,
+                    totalInitialMargin: '0.00000000',
+                    totalMaintMargin: '0.00000000',
+                    totalWalletBalance: '126.72469206',
+                    totalUnrealizedProfit: '0.00000000',
+                    totalMarginBalance: '126.72469206',
+                    totalPositionInitialMargin: '0.00000000',
+                    totalOpenOrderInitialMargin: '0.00000000',
+                    totalCrossWalletBalance: '126.72469206',
+                    totalCrossUnPnl: '0.00000000',
+                    availableBalance: '126.72469206',
+                    maxWithdrawAmount: '126.72469206',
+                    assets: [
+                        {
+                            asset: 'USDT',
+                            walletBalance: '23.72469206',
+                            unrealizedProfit: '0.00000000',
+                            marginBalance: '23.72469206',
+                            maintMargin: '0.00000000',
+                            initialMargin: '0.00000000',
+                            positionInitialMargin: '0.00000000',
+                            openOrderInitialMargin: '0.00000000',
+                            crossWalletBalance: '23.72469206',
+                            crossUnPnl: '0.00000000',
+                            availableBalance: '23.72469206',
+                            maxWithdrawAmount: '23.72469206',
+                            marginAvailable: true,
+                            updateTime: 1625474304765,
+                        },
+                        {
+                            asset: 'BUSD',
+                            walletBalance: '103.12345678',
+                            unrealizedProfit: '0.00000000',
+                            marginBalance: '103.12345678',
+                            maintMargin: '0.00000000',
+                            initialMargin: '0.00000000',
+                            positionInitialMargin: '0.00000000',
+                            openOrderInitialMargin: '0.00000000',
+                            crossWalletBalance: '103.12345678',
+                            crossUnPnl: '0.00000000',
+                            availableBalance: '103.12345678',
+                            maxWithdrawAmount: '103.12345678',
+                            marginAvailable: true,
+                            updateTime: 1625474304765,
+                        },
+                        {
+                            asset: 'USDT',
+                            walletBalance: '23.72469206',
+                            unrealizedProfit: '0.00000000',
+                            marginBalance: '23.72469206',
+                            maintMargin: '0.00000000',
+                            initialMargin: '0.00000000',
+                            positionInitialMargin: '0.00000000',
+                            openOrderInitialMargin: '0.00000000',
+                            crossWalletBalance: '23.72469206',
+                            crossUnPnl: '0.00000000',
+                            availableBalance: '126.72469206',
+                            maxWithdrawAmount: '23.72469206',
+                            marginAvailable: true,
+                            updateTime: 1625474304765,
+                        },
+                        {
+                            asset: 'BUSD',
+                            walletBalance: '103.12345678',
+                            unrealizedProfit: '0.00000000',
+                            marginBalance: '103.12345678',
+                            maintMargin: '0.00000000',
+                            initialMargin: '0.00000000',
+                            positionInitialMargin: '0.00000000',
+                            openOrderInitialMargin: '0.00000000',
+                            crossWalletBalance: '103.12345678',
+                            crossUnPnl: '0.00000000',
+                            availableBalance: '126.72469206',
+                            maxWithdrawAmount: '103.12345678',
+                            marginAvailable: true,
+                            updateTime: 1625474304765,
+                        },
+                    ],
+                    positions: [
+                        {
+                            symbol: 'BTCUSDT',
+                            initialMargin: '0',
+                            maintMargin: '0',
+                            unrealizedProfit: '0.00000000',
+                            positionInitialMargin: '0',
+                            openOrderInitialMargin: '0',
+                            leverage: '100',
+                            isolated: true,
+                            entryPrice: '0.00000',
+                            maxNotional: '250000',
+                            bidNotional: '0',
+                            askNotional: '0',
+                            positionSide: 'BOTH',
+                            positionAmt: '0',
+                            updateTime: 0,
+                        },
+                        {
+                            symbol: 'BTCUSDT',
+                            initialMargin: '0',
+                            maintMargin: '0',
+                            unrealizedProfit: '0.00000000',
+                            positionInitialMargin: '0',
+                            openOrderInitialMargin: '0',
+                            leverage: '100',
+                            isolated: true,
+                            entryPrice: '0.00000',
+                            maxNotional: '250000',
+                            bidNotional: '0',
+                            askNotional: '0',
+                            positionSide: 'BOTH',
+                            positionAmt: '0',
+                            updateTime: 0,
+                        },
+                    ],
+                    canTrade: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'accountInformationV2').mockReturnValue(
                 Promise.resolve({
@@ -221,129 +224,131 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                feeTier: 0,
-                feeBurn: true,
-                canDeposit: true,
-                canWithdraw: true,
-                updateTime: 0,
-                multiAssetsMargin: true,
-                tradeGroupId: -1,
-                totalInitialMargin: '0.00000000',
-                totalMaintMargin: '0.00000000',
-                totalWalletBalance: '126.72469206',
-                totalUnrealizedProfit: '0.00000000',
-                totalMarginBalance: '126.72469206',
-                totalPositionInitialMargin: '0.00000000',
-                totalOpenOrderInitialMargin: '0.00000000',
-                totalCrossWalletBalance: '126.72469206',
-                totalCrossUnPnl: '0.00000000',
-                availableBalance: '126.72469206',
-                maxWithdrawAmount: '126.72469206',
-                assets: [
-                    {
-                        asset: 'USDT',
-                        walletBalance: '23.72469206',
-                        unrealizedProfit: '0.00000000',
-                        marginBalance: '23.72469206',
-                        maintMargin: '0.00000000',
-                        initialMargin: '0.00000000',
-                        positionInitialMargin: '0.00000000',
-                        openOrderInitialMargin: '0.00000000',
-                        crossWalletBalance: '23.72469206',
-                        crossUnPnl: '0.00000000',
-                        availableBalance: '23.72469206',
-                        maxWithdrawAmount: '23.72469206',
-                        marginAvailable: true,
-                        updateTime: 1625474304765,
-                    },
-                    {
-                        asset: 'BUSD',
-                        walletBalance: '103.12345678',
-                        unrealizedProfit: '0.00000000',
-                        marginBalance: '103.12345678',
-                        maintMargin: '0.00000000',
-                        initialMargin: '0.00000000',
-                        positionInitialMargin: '0.00000000',
-                        openOrderInitialMargin: '0.00000000',
-                        crossWalletBalance: '103.12345678',
-                        crossUnPnl: '0.00000000',
-                        availableBalance: '103.12345678',
-                        maxWithdrawAmount: '103.12345678',
-                        marginAvailable: true,
-                        updateTime: 1625474304765,
-                    },
-                    {
-                        asset: 'USDT',
-                        walletBalance: '23.72469206',
-                        unrealizedProfit: '0.00000000',
-                        marginBalance: '23.72469206',
-                        maintMargin: '0.00000000',
-                        initialMargin: '0.00000000',
-                        positionInitialMargin: '0.00000000',
-                        openOrderInitialMargin: '0.00000000',
-                        crossWalletBalance: '23.72469206',
-                        crossUnPnl: '0.00000000',
-                        availableBalance: '126.72469206',
-                        maxWithdrawAmount: '23.72469206',
-                        marginAvailable: true,
-                        updateTime: 1625474304765,
-                    },
-                    {
-                        asset: 'BUSD',
-                        walletBalance: '103.12345678',
-                        unrealizedProfit: '0.00000000',
-                        marginBalance: '103.12345678',
-                        maintMargin: '0.00000000',
-                        initialMargin: '0.00000000',
-                        positionInitialMargin: '0.00000000',
-                        openOrderInitialMargin: '0.00000000',
-                        crossWalletBalance: '103.12345678',
-                        crossUnPnl: '0.00000000',
-                        availableBalance: '126.72469206',
-                        maxWithdrawAmount: '103.12345678',
-                        marginAvailable: true,
-                        updateTime: 1625474304765,
-                    },
-                ],
-                positions: [
-                    {
-                        symbol: 'BTCUSDT',
-                        initialMargin: '0',
-                        maintMargin: '0',
-                        unrealizedProfit: '0.00000000',
-                        positionInitialMargin: '0',
-                        openOrderInitialMargin: '0',
-                        leverage: '100',
-                        isolated: true,
-                        entryPrice: '0.00000',
-                        maxNotional: '250000',
-                        bidNotional: '0',
-                        askNotional: '0',
-                        positionSide: 'BOTH',
-                        positionAmt: '0',
-                        updateTime: 0,
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        initialMargin: '0',
-                        maintMargin: '0',
-                        unrealizedProfit: '0.00000000',
-                        positionInitialMargin: '0',
-                        openOrderInitialMargin: '0',
-                        leverage: '100',
-                        isolated: true,
-                        entryPrice: '0.00000',
-                        maxNotional: '250000',
-                        bidNotional: '0',
-                        askNotional: '0',
-                        positionSide: 'BOTH',
-                        positionAmt: '0',
-                        updateTime: 0,
-                    },
-                ],
-                canTrade: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    feeTier: 0,
+                    feeBurn: true,
+                    canDeposit: true,
+                    canWithdraw: true,
+                    updateTime: 0,
+                    multiAssetsMargin: true,
+                    tradeGroupId: -1,
+                    totalInitialMargin: '0.00000000',
+                    totalMaintMargin: '0.00000000',
+                    totalWalletBalance: '126.72469206',
+                    totalUnrealizedProfit: '0.00000000',
+                    totalMarginBalance: '126.72469206',
+                    totalPositionInitialMargin: '0.00000000',
+                    totalOpenOrderInitialMargin: '0.00000000',
+                    totalCrossWalletBalance: '126.72469206',
+                    totalCrossUnPnl: '0.00000000',
+                    availableBalance: '126.72469206',
+                    maxWithdrawAmount: '126.72469206',
+                    assets: [
+                        {
+                            asset: 'USDT',
+                            walletBalance: '23.72469206',
+                            unrealizedProfit: '0.00000000',
+                            marginBalance: '23.72469206',
+                            maintMargin: '0.00000000',
+                            initialMargin: '0.00000000',
+                            positionInitialMargin: '0.00000000',
+                            openOrderInitialMargin: '0.00000000',
+                            crossWalletBalance: '23.72469206',
+                            crossUnPnl: '0.00000000',
+                            availableBalance: '23.72469206',
+                            maxWithdrawAmount: '23.72469206',
+                            marginAvailable: true,
+                            updateTime: 1625474304765,
+                        },
+                        {
+                            asset: 'BUSD',
+                            walletBalance: '103.12345678',
+                            unrealizedProfit: '0.00000000',
+                            marginBalance: '103.12345678',
+                            maintMargin: '0.00000000',
+                            initialMargin: '0.00000000',
+                            positionInitialMargin: '0.00000000',
+                            openOrderInitialMargin: '0.00000000',
+                            crossWalletBalance: '103.12345678',
+                            crossUnPnl: '0.00000000',
+                            availableBalance: '103.12345678',
+                            maxWithdrawAmount: '103.12345678',
+                            marginAvailable: true,
+                            updateTime: 1625474304765,
+                        },
+                        {
+                            asset: 'USDT',
+                            walletBalance: '23.72469206',
+                            unrealizedProfit: '0.00000000',
+                            marginBalance: '23.72469206',
+                            maintMargin: '0.00000000',
+                            initialMargin: '0.00000000',
+                            positionInitialMargin: '0.00000000',
+                            openOrderInitialMargin: '0.00000000',
+                            crossWalletBalance: '23.72469206',
+                            crossUnPnl: '0.00000000',
+                            availableBalance: '126.72469206',
+                            maxWithdrawAmount: '23.72469206',
+                            marginAvailable: true,
+                            updateTime: 1625474304765,
+                        },
+                        {
+                            asset: 'BUSD',
+                            walletBalance: '103.12345678',
+                            unrealizedProfit: '0.00000000',
+                            marginBalance: '103.12345678',
+                            maintMargin: '0.00000000',
+                            initialMargin: '0.00000000',
+                            positionInitialMargin: '0.00000000',
+                            openOrderInitialMargin: '0.00000000',
+                            crossWalletBalance: '103.12345678',
+                            crossUnPnl: '0.00000000',
+                            availableBalance: '126.72469206',
+                            maxWithdrawAmount: '103.12345678',
+                            marginAvailable: true,
+                            updateTime: 1625474304765,
+                        },
+                    ],
+                    positions: [
+                        {
+                            symbol: 'BTCUSDT',
+                            initialMargin: '0',
+                            maintMargin: '0',
+                            unrealizedProfit: '0.00000000',
+                            positionInitialMargin: '0',
+                            openOrderInitialMargin: '0',
+                            leverage: '100',
+                            isolated: true,
+                            entryPrice: '0.00000',
+                            maxNotional: '250000',
+                            bidNotional: '0',
+                            askNotional: '0',
+                            positionSide: 'BOTH',
+                            positionAmt: '0',
+                            updateTime: 0,
+                        },
+                        {
+                            symbol: 'BTCUSDT',
+                            initialMargin: '0',
+                            maintMargin: '0',
+                            unrealizedProfit: '0.00000000',
+                            positionInitialMargin: '0',
+                            openOrderInitialMargin: '0',
+                            leverage: '100',
+                            isolated: true,
+                            entryPrice: '0.00000',
+                            maxNotional: '250000',
+                            bidNotional: '0',
+                            askNotional: '0',
+                            positionSide: 'BOTH',
+                            positionAmt: '0',
+                            updateTime: 0,
+                        },
+                    ],
+                    canTrade: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'accountInformationV2').mockReturnValue(
                 Promise.resolve({
@@ -377,107 +382,109 @@ describe('AccountApi', () => {
 
     describe('accountInformationV3()', () => {
         it('should execute accountInformationV3() successfully with required parameters only', async () => {
-            mockResponse = {
-                totalInitialMargin: '0.00000000',
-                totalMaintMargin: '0.00000000',
-                totalWalletBalance: '126.72469206',
-                totalUnrealizedProfit: '0.00000000',
-                totalMarginBalance: '126.72469206',
-                totalPositionInitialMargin: '0.00000000',
-                totalOpenOrderInitialMargin: '0.00000000',
-                totalCrossWalletBalance: '126.72469206',
-                totalCrossUnPnl: '0.00000000',
-                availableBalance: '126.72469206',
-                maxWithdrawAmount: '126.72469206',
-                assets: [
-                    {
-                        asset: 'USDT',
-                        walletBalance: '23.72469206',
-                        unrealizedProfit: '0.00000000',
-                        marginBalance: '23.72469206',
-                        maintMargin: '0.00000000',
-                        initialMargin: '0.00000000',
-                        positionInitialMargin: '0.00000000',
-                        openOrderInitialMargin: '0.00000000',
-                        crossWalletBalance: '23.72469206',
-                        crossUnPnl: '0.00000000',
-                        availableBalance: '23.72469206',
-                        maxWithdrawAmount: '23.72469206',
-                        updateTime: 1625474304765,
-                    },
-                    {
-                        asset: 'USDC',
-                        walletBalance: '103.12345678',
-                        unrealizedProfit: '0.00000000',
-                        marginBalance: '103.12345678',
-                        maintMargin: '0.00000000',
-                        initialMargin: '0.00000000',
-                        positionInitialMargin: '0.00000000',
-                        openOrderInitialMargin: '0.00000000',
-                        crossWalletBalance: '103.12345678',
-                        crossUnPnl: '0.00000000',
-                        availableBalance: '126.72469206',
-                        maxWithdrawAmount: '103.12345678',
-                        updateTime: 1625474304765,
-                    },
-                    {
-                        asset: 'USDT',
-                        walletBalance: '23.72469206',
-                        unrealizedProfit: '0.00000000',
-                        marginBalance: '23.72469206',
-                        maintMargin: '0.00000000',
-                        initialMargin: '0.00000000',
-                        positionInitialMargin: '0.00000000',
-                        openOrderInitialMargin: '0.00000000',
-                        crossWalletBalance: '23.72469206',
-                        crossUnPnl: '0.00000000',
-                        availableBalance: '126.72469206',
-                        maxWithdrawAmount: '23.72469206',
-                        updateTime: 1625474304765,
-                    },
-                    {
-                        asset: 'BUSD',
-                        walletBalance: '103.12345678',
-                        unrealizedProfit: '0.00000000',
-                        marginBalance: '103.12345678',
-                        maintMargin: '0.00000000',
-                        initialMargin: '0.00000000',
-                        positionInitialMargin: '0.00000000',
-                        openOrderInitialMargin: '0.00000000',
-                        crossWalletBalance: '103.12345678',
-                        crossUnPnl: '0.00000000',
-                        availableBalance: '126.72469206',
-                        maxWithdrawAmount: '103.12345678',
-                        updateTime: 1625474304765,
-                    },
-                ],
-                positions: [
-                    {
-                        symbol: 'BTCUSDT',
-                        positionSide: 'BOTH',
-                        positionAmt: '1.000',
-                        unrealizedProfit: '0.00000000',
-                        isolatedMargin: '0.00000000',
-                        notional: '0',
-                        isolatedWallet: '0',
-                        initialMargin: '0',
-                        maintMargin: '0',
-                        updateTime: 0,
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        positionSide: 'BOTH',
-                        positionAmt: '1.000',
-                        unrealizedProfit: '0.00000000',
-                        isolatedMargin: '0.00000000',
-                        notional: '0',
-                        isolatedWallet: '0',
-                        initialMargin: '0',
-                        maintMargin: '0',
-                        updateTime: 0,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    totalInitialMargin: '0.00000000',
+                    totalMaintMargin: '0.00000000',
+                    totalWalletBalance: '126.72469206',
+                    totalUnrealizedProfit: '0.00000000',
+                    totalMarginBalance: '126.72469206',
+                    totalPositionInitialMargin: '0.00000000',
+                    totalOpenOrderInitialMargin: '0.00000000',
+                    totalCrossWalletBalance: '126.72469206',
+                    totalCrossUnPnl: '0.00000000',
+                    availableBalance: '126.72469206',
+                    maxWithdrawAmount: '126.72469206',
+                    assets: [
+                        {
+                            asset: 'USDT',
+                            walletBalance: '23.72469206',
+                            unrealizedProfit: '0.00000000',
+                            marginBalance: '23.72469206',
+                            maintMargin: '0.00000000',
+                            initialMargin: '0.00000000',
+                            positionInitialMargin: '0.00000000',
+                            openOrderInitialMargin: '0.00000000',
+                            crossWalletBalance: '23.72469206',
+                            crossUnPnl: '0.00000000',
+                            availableBalance: '23.72469206',
+                            maxWithdrawAmount: '23.72469206',
+                            updateTime: 1625474304765,
+                        },
+                        {
+                            asset: 'USDC',
+                            walletBalance: '103.12345678',
+                            unrealizedProfit: '0.00000000',
+                            marginBalance: '103.12345678',
+                            maintMargin: '0.00000000',
+                            initialMargin: '0.00000000',
+                            positionInitialMargin: '0.00000000',
+                            openOrderInitialMargin: '0.00000000',
+                            crossWalletBalance: '103.12345678',
+                            crossUnPnl: '0.00000000',
+                            availableBalance: '126.72469206',
+                            maxWithdrawAmount: '103.12345678',
+                            updateTime: 1625474304765,
+                        },
+                        {
+                            asset: 'USDT',
+                            walletBalance: '23.72469206',
+                            unrealizedProfit: '0.00000000',
+                            marginBalance: '23.72469206',
+                            maintMargin: '0.00000000',
+                            initialMargin: '0.00000000',
+                            positionInitialMargin: '0.00000000',
+                            openOrderInitialMargin: '0.00000000',
+                            crossWalletBalance: '23.72469206',
+                            crossUnPnl: '0.00000000',
+                            availableBalance: '126.72469206',
+                            maxWithdrawAmount: '23.72469206',
+                            updateTime: 1625474304765,
+                        },
+                        {
+                            asset: 'BUSD',
+                            walletBalance: '103.12345678',
+                            unrealizedProfit: '0.00000000',
+                            marginBalance: '103.12345678',
+                            maintMargin: '0.00000000',
+                            initialMargin: '0.00000000',
+                            positionInitialMargin: '0.00000000',
+                            openOrderInitialMargin: '0.00000000',
+                            crossWalletBalance: '103.12345678',
+                            crossUnPnl: '0.00000000',
+                            availableBalance: '126.72469206',
+                            maxWithdrawAmount: '103.12345678',
+                            updateTime: 1625474304765,
+                        },
+                    ],
+                    positions: [
+                        {
+                            symbol: 'BTCUSDT',
+                            positionSide: 'BOTH',
+                            positionAmt: '1.000',
+                            unrealizedProfit: '0.00000000',
+                            isolatedMargin: '0.00000000',
+                            notional: '0',
+                            isolatedWallet: '0',
+                            initialMargin: '0',
+                            maintMargin: '0',
+                            updateTime: 0,
+                        },
+                        {
+                            symbol: 'BTCUSDT',
+                            positionSide: 'BOTH',
+                            positionAmt: '1.000',
+                            unrealizedProfit: '0.00000000',
+                            isolatedMargin: '0.00000000',
+                            notional: '0',
+                            isolatedWallet: '0',
+                            initialMargin: '0',
+                            maintMargin: '0',
+                            updateTime: 0,
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'accountInformationV3').mockReturnValue(
                 Promise.resolve({
@@ -498,107 +505,109 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                totalInitialMargin: '0.00000000',
-                totalMaintMargin: '0.00000000',
-                totalWalletBalance: '126.72469206',
-                totalUnrealizedProfit: '0.00000000',
-                totalMarginBalance: '126.72469206',
-                totalPositionInitialMargin: '0.00000000',
-                totalOpenOrderInitialMargin: '0.00000000',
-                totalCrossWalletBalance: '126.72469206',
-                totalCrossUnPnl: '0.00000000',
-                availableBalance: '126.72469206',
-                maxWithdrawAmount: '126.72469206',
-                assets: [
-                    {
-                        asset: 'USDT',
-                        walletBalance: '23.72469206',
-                        unrealizedProfit: '0.00000000',
-                        marginBalance: '23.72469206',
-                        maintMargin: '0.00000000',
-                        initialMargin: '0.00000000',
-                        positionInitialMargin: '0.00000000',
-                        openOrderInitialMargin: '0.00000000',
-                        crossWalletBalance: '23.72469206',
-                        crossUnPnl: '0.00000000',
-                        availableBalance: '23.72469206',
-                        maxWithdrawAmount: '23.72469206',
-                        updateTime: 1625474304765,
-                    },
-                    {
-                        asset: 'USDC',
-                        walletBalance: '103.12345678',
-                        unrealizedProfit: '0.00000000',
-                        marginBalance: '103.12345678',
-                        maintMargin: '0.00000000',
-                        initialMargin: '0.00000000',
-                        positionInitialMargin: '0.00000000',
-                        openOrderInitialMargin: '0.00000000',
-                        crossWalletBalance: '103.12345678',
-                        crossUnPnl: '0.00000000',
-                        availableBalance: '126.72469206',
-                        maxWithdrawAmount: '103.12345678',
-                        updateTime: 1625474304765,
-                    },
-                    {
-                        asset: 'USDT',
-                        walletBalance: '23.72469206',
-                        unrealizedProfit: '0.00000000',
-                        marginBalance: '23.72469206',
-                        maintMargin: '0.00000000',
-                        initialMargin: '0.00000000',
-                        positionInitialMargin: '0.00000000',
-                        openOrderInitialMargin: '0.00000000',
-                        crossWalletBalance: '23.72469206',
-                        crossUnPnl: '0.00000000',
-                        availableBalance: '126.72469206',
-                        maxWithdrawAmount: '23.72469206',
-                        updateTime: 1625474304765,
-                    },
-                    {
-                        asset: 'BUSD',
-                        walletBalance: '103.12345678',
-                        unrealizedProfit: '0.00000000',
-                        marginBalance: '103.12345678',
-                        maintMargin: '0.00000000',
-                        initialMargin: '0.00000000',
-                        positionInitialMargin: '0.00000000',
-                        openOrderInitialMargin: '0.00000000',
-                        crossWalletBalance: '103.12345678',
-                        crossUnPnl: '0.00000000',
-                        availableBalance: '126.72469206',
-                        maxWithdrawAmount: '103.12345678',
-                        updateTime: 1625474304765,
-                    },
-                ],
-                positions: [
-                    {
-                        symbol: 'BTCUSDT',
-                        positionSide: 'BOTH',
-                        positionAmt: '1.000',
-                        unrealizedProfit: '0.00000000',
-                        isolatedMargin: '0.00000000',
-                        notional: '0',
-                        isolatedWallet: '0',
-                        initialMargin: '0',
-                        maintMargin: '0',
-                        updateTime: 0,
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        positionSide: 'BOTH',
-                        positionAmt: '1.000',
-                        unrealizedProfit: '0.00000000',
-                        isolatedMargin: '0.00000000',
-                        notional: '0',
-                        isolatedWallet: '0',
-                        initialMargin: '0',
-                        maintMargin: '0',
-                        updateTime: 0,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    totalInitialMargin: '0.00000000',
+                    totalMaintMargin: '0.00000000',
+                    totalWalletBalance: '126.72469206',
+                    totalUnrealizedProfit: '0.00000000',
+                    totalMarginBalance: '126.72469206',
+                    totalPositionInitialMargin: '0.00000000',
+                    totalOpenOrderInitialMargin: '0.00000000',
+                    totalCrossWalletBalance: '126.72469206',
+                    totalCrossUnPnl: '0.00000000',
+                    availableBalance: '126.72469206',
+                    maxWithdrawAmount: '126.72469206',
+                    assets: [
+                        {
+                            asset: 'USDT',
+                            walletBalance: '23.72469206',
+                            unrealizedProfit: '0.00000000',
+                            marginBalance: '23.72469206',
+                            maintMargin: '0.00000000',
+                            initialMargin: '0.00000000',
+                            positionInitialMargin: '0.00000000',
+                            openOrderInitialMargin: '0.00000000',
+                            crossWalletBalance: '23.72469206',
+                            crossUnPnl: '0.00000000',
+                            availableBalance: '23.72469206',
+                            maxWithdrawAmount: '23.72469206',
+                            updateTime: 1625474304765,
+                        },
+                        {
+                            asset: 'USDC',
+                            walletBalance: '103.12345678',
+                            unrealizedProfit: '0.00000000',
+                            marginBalance: '103.12345678',
+                            maintMargin: '0.00000000',
+                            initialMargin: '0.00000000',
+                            positionInitialMargin: '0.00000000',
+                            openOrderInitialMargin: '0.00000000',
+                            crossWalletBalance: '103.12345678',
+                            crossUnPnl: '0.00000000',
+                            availableBalance: '126.72469206',
+                            maxWithdrawAmount: '103.12345678',
+                            updateTime: 1625474304765,
+                        },
+                        {
+                            asset: 'USDT',
+                            walletBalance: '23.72469206',
+                            unrealizedProfit: '0.00000000',
+                            marginBalance: '23.72469206',
+                            maintMargin: '0.00000000',
+                            initialMargin: '0.00000000',
+                            positionInitialMargin: '0.00000000',
+                            openOrderInitialMargin: '0.00000000',
+                            crossWalletBalance: '23.72469206',
+                            crossUnPnl: '0.00000000',
+                            availableBalance: '126.72469206',
+                            maxWithdrawAmount: '23.72469206',
+                            updateTime: 1625474304765,
+                        },
+                        {
+                            asset: 'BUSD',
+                            walletBalance: '103.12345678',
+                            unrealizedProfit: '0.00000000',
+                            marginBalance: '103.12345678',
+                            maintMargin: '0.00000000',
+                            initialMargin: '0.00000000',
+                            positionInitialMargin: '0.00000000',
+                            openOrderInitialMargin: '0.00000000',
+                            crossWalletBalance: '103.12345678',
+                            crossUnPnl: '0.00000000',
+                            availableBalance: '126.72469206',
+                            maxWithdrawAmount: '103.12345678',
+                            updateTime: 1625474304765,
+                        },
+                    ],
+                    positions: [
+                        {
+                            symbol: 'BTCUSDT',
+                            positionSide: 'BOTH',
+                            positionAmt: '1.000',
+                            unrealizedProfit: '0.00000000',
+                            isolatedMargin: '0.00000000',
+                            notional: '0',
+                            isolatedWallet: '0',
+                            initialMargin: '0',
+                            maintMargin: '0',
+                            updateTime: 0,
+                        },
+                        {
+                            symbol: 'BTCUSDT',
+                            positionSide: 'BOTH',
+                            positionAmt: '1.000',
+                            unrealizedProfit: '0.00000000',
+                            isolatedMargin: '0.00000000',
+                            notional: '0',
+                            isolatedWallet: '0',
+                            initialMargin: '0',
+                            maintMargin: '0',
+                            updateTime: 0,
+                        },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'accountInformationV3').mockReturnValue(
                 Promise.resolve({
@@ -632,19 +641,21 @@ describe('AccountApi', () => {
 
     describe('futuresAccountBalanceV2()', () => {
         it('should execute futuresAccountBalanceV2() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    accountAlias: 'SgsR',
-                    asset: 'USDT',
-                    balance: '122607.35137903',
-                    crossWalletBalance: '23.72469206',
-                    crossUnPnl: '0.00000000',
-                    availableBalance: '23.72469206',
-                    maxWithdrawAmount: '23.72469206',
-                    marginAvailable: true,
-                    updateTime: 1617939110373,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        accountAlias: 'SgsR',
+                        asset: 'USDT',
+                        balance: '122607.35137903',
+                        crossWalletBalance: '23.72469206',
+                        crossUnPnl: '0.00000000',
+                        availableBalance: '23.72469206',
+                        maxWithdrawAmount: '23.72469206',
+                        marginAvailable: true,
+                        updateTime: 1617939110373,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'futuresAccountBalanceV2').mockReturnValue(
                 Promise.resolve({
@@ -665,19 +676,21 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    accountAlias: 'SgsR',
-                    asset: 'USDT',
-                    balance: '122607.35137903',
-                    crossWalletBalance: '23.72469206',
-                    crossUnPnl: '0.00000000',
-                    availableBalance: '23.72469206',
-                    maxWithdrawAmount: '23.72469206',
-                    marginAvailable: true,
-                    updateTime: 1617939110373,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        accountAlias: 'SgsR',
+                        asset: 'USDT',
+                        balance: '122607.35137903',
+                        crossWalletBalance: '23.72469206',
+                        crossUnPnl: '0.00000000',
+                        availableBalance: '23.72469206',
+                        maxWithdrawAmount: '23.72469206',
+                        marginAvailable: true,
+                        updateTime: 1617939110373,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'futuresAccountBalanceV2').mockReturnValue(
                 Promise.resolve({
@@ -713,19 +726,21 @@ describe('AccountApi', () => {
 
     describe('futuresAccountBalanceV3()', () => {
         it('should execute futuresAccountBalanceV3() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    accountAlias: 'SgsR',
-                    asset: 'USDT',
-                    balance: '122607.35137903',
-                    crossWalletBalance: '23.72469206',
-                    crossUnPnl: '0.00000000',
-                    availableBalance: '23.72469206',
-                    maxWithdrawAmount: '23.72469206',
-                    marginAvailable: true,
-                    updateTime: 1617939110373,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        accountAlias: 'SgsR',
+                        asset: 'USDT',
+                        balance: '122607.35137903',
+                        crossWalletBalance: '23.72469206',
+                        crossUnPnl: '0.00000000',
+                        availableBalance: '23.72469206',
+                        maxWithdrawAmount: '23.72469206',
+                        marginAvailable: true,
+                        updateTime: 1617939110373,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'futuresAccountBalanceV3').mockReturnValue(
                 Promise.resolve({
@@ -746,19 +761,21 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    accountAlias: 'SgsR',
-                    asset: 'USDT',
-                    balance: '122607.35137903',
-                    crossWalletBalance: '23.72469206',
-                    crossUnPnl: '0.00000000',
-                    availableBalance: '23.72469206',
-                    maxWithdrawAmount: '23.72469206',
-                    marginAvailable: true,
-                    updateTime: 1617939110373,
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        accountAlias: 'SgsR',
+                        asset: 'USDT',
+                        balance: '122607.35137903',
+                        crossWalletBalance: '23.72469206',
+                        crossUnPnl: '0.00000000',
+                        availableBalance: '23.72469206',
+                        maxWithdrawAmount: '23.72469206',
+                        marginAvailable: true,
+                        updateTime: 1617939110373,
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'futuresAccountBalanceV3').mockReturnValue(
                 Promise.resolve({
@@ -794,16 +811,18 @@ describe('AccountApi', () => {
 
     describe('futuresAccountConfiguration()', () => {
         it('should execute futuresAccountConfiguration() successfully with required parameters only', async () => {
-            mockResponse = {
-                feeTier: 0,
-                canTrade: true,
-                canDeposit: true,
-                canWithdraw: true,
-                dualSidePosition: true,
-                updateTime: 0,
-                multiAssetsMargin: false,
-                tradeGroupId: -1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    feeTier: 0,
+                    canTrade: true,
+                    canDeposit: true,
+                    canWithdraw: true,
+                    dualSidePosition: true,
+                    updateTime: 0,
+                    multiAssetsMargin: false,
+                    tradeGroupId: -1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'futuresAccountConfiguration').mockReturnValue(
                 Promise.resolve({
@@ -824,16 +843,18 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                feeTier: 0,
-                canTrade: true,
-                canDeposit: true,
-                canWithdraw: true,
-                dualSidePosition: true,
-                updateTime: 0,
-                multiAssetsMargin: false,
-                tradeGroupId: -1,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    feeTier: 0,
+                    canTrade: true,
+                    canDeposit: true,
+                    canWithdraw: true,
+                    dualSidePosition: true,
+                    updateTime: 0,
+                    multiAssetsMargin: false,
+                    tradeGroupId: -1,
+                })
+            );
 
             const spy = jest.spyOn(client, 'futuresAccountConfiguration').mockReturnValue(
                 Promise.resolve({
@@ -869,80 +890,82 @@ describe('AccountApi', () => {
 
     describe('futuresTradingQuantitativeRulesIndicators()', () => {
         it('should execute futuresTradingQuantitativeRulesIndicators() successfully with required parameters only', async () => {
-            mockResponse = {
-                indicators: {
-                    BTCUSDT: [
-                        {
-                            isLocked: true,
-                            plannedRecoverTime: 1545741270000,
-                            indicator: 'UFR',
-                            value: 0.05,
-                            triggerValue: 0.995,
-                        },
-                        {
-                            isLocked: true,
-                            plannedRecoverTime: 1545741270000,
-                            indicator: 'IFER',
-                            value: 0.99,
-                            triggerValue: 0.99,
-                        },
-                        {
-                            isLocked: true,
-                            plannedRecoverTime: 1545741270000,
-                            indicator: 'GCR',
-                            value: 0.99,
-                            triggerValue: 0.99,
-                        },
-                        {
-                            isLocked: true,
-                            plannedRecoverTime: 1545741270000,
-                            indicator: 'DR',
-                            value: 0.99,
-                            triggerValue: 0.99,
-                        },
-                    ],
-                    ETHUSDT: [
-                        {
-                            isLocked: true,
-                            plannedRecoverTime: 1545741270000,
-                            indicator: 'UFR',
-                            value: 0.05,
-                            triggerValue: 0.995,
-                        },
-                        {
-                            isLocked: true,
-                            plannedRecoverTime: 1545741270000,
-                            indicator: 'IFER',
-                            value: 0.99,
-                            triggerValue: 0.99,
-                        },
-                        {
-                            isLocked: true,
-                            plannedRecoverTime: 1545741270000,
-                            indicator: 'GCR',
-                            value: 0.99,
-                            triggerValue: 0.99,
-                        },
-                        {
-                            isLocked: true,
-                            plannedRecoverTime: 1545741270000,
-                            indicator: 'DR',
-                            value: 0.99,
-                            triggerValue: 0.99,
-                        },
-                    ],
-                    ACCOUNT: [
-                        {
-                            indicator: 'TMV',
-                            value: 10,
-                            triggerValue: 1,
-                            plannedRecoverTime: 1644919865000,
-                            isLocked: true,
-                        },
-                    ],
-                },
-                updateTime: 1644913304748,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    indicators: {
+                        BTCUSDT: [
+                            {
+                                isLocked: true,
+                                plannedRecoverTime: 1545741270000,
+                                indicator: 'UFR',
+                                value: 0.05,
+                                triggerValue: 0.995,
+                            },
+                            {
+                                isLocked: true,
+                                plannedRecoverTime: 1545741270000,
+                                indicator: 'IFER',
+                                value: 0.99,
+                                triggerValue: 0.99,
+                            },
+                            {
+                                isLocked: true,
+                                plannedRecoverTime: 1545741270000,
+                                indicator: 'GCR',
+                                value: 0.99,
+                                triggerValue: 0.99,
+                            },
+                            {
+                                isLocked: true,
+                                plannedRecoverTime: 1545741270000,
+                                indicator: 'DR',
+                                value: 0.99,
+                                triggerValue: 0.99,
+                            },
+                        ],
+                        ETHUSDT: [
+                            {
+                                isLocked: true,
+                                plannedRecoverTime: 1545741270000,
+                                indicator: 'UFR',
+                                value: 0.05,
+                                triggerValue: 0.995,
+                            },
+                            {
+                                isLocked: true,
+                                plannedRecoverTime: 1545741270000,
+                                indicator: 'IFER',
+                                value: 0.99,
+                                triggerValue: 0.99,
+                            },
+                            {
+                                isLocked: true,
+                                plannedRecoverTime: 1545741270000,
+                                indicator: 'GCR',
+                                value: 0.99,
+                                triggerValue: 0.99,
+                            },
+                            {
+                                isLocked: true,
+                                plannedRecoverTime: 1545741270000,
+                                indicator: 'DR',
+                                value: 0.99,
+                                triggerValue: 0.99,
+                            },
+                        ],
+                        ACCOUNT: [
+                            {
+                                indicator: 'TMV',
+                                value: 10,
+                                triggerValue: 1,
+                                plannedRecoverTime: 1644919865000,
+                                isLocked: true,
+                            },
+                        ],
+                    },
+                    updateTime: 1644913304748,
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'futuresTradingQuantitativeRulesIndicators')
@@ -966,80 +989,82 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                indicators: {
-                    BTCUSDT: [
-                        {
-                            isLocked: true,
-                            plannedRecoverTime: 1545741270000,
-                            indicator: 'UFR',
-                            value: 0.05,
-                            triggerValue: 0.995,
-                        },
-                        {
-                            isLocked: true,
-                            plannedRecoverTime: 1545741270000,
-                            indicator: 'IFER',
-                            value: 0.99,
-                            triggerValue: 0.99,
-                        },
-                        {
-                            isLocked: true,
-                            plannedRecoverTime: 1545741270000,
-                            indicator: 'GCR',
-                            value: 0.99,
-                            triggerValue: 0.99,
-                        },
-                        {
-                            isLocked: true,
-                            plannedRecoverTime: 1545741270000,
-                            indicator: 'DR',
-                            value: 0.99,
-                            triggerValue: 0.99,
-                        },
-                    ],
-                    ETHUSDT: [
-                        {
-                            isLocked: true,
-                            plannedRecoverTime: 1545741270000,
-                            indicator: 'UFR',
-                            value: 0.05,
-                            triggerValue: 0.995,
-                        },
-                        {
-                            isLocked: true,
-                            plannedRecoverTime: 1545741270000,
-                            indicator: 'IFER',
-                            value: 0.99,
-                            triggerValue: 0.99,
-                        },
-                        {
-                            isLocked: true,
-                            plannedRecoverTime: 1545741270000,
-                            indicator: 'GCR',
-                            value: 0.99,
-                            triggerValue: 0.99,
-                        },
-                        {
-                            isLocked: true,
-                            plannedRecoverTime: 1545741270000,
-                            indicator: 'DR',
-                            value: 0.99,
-                            triggerValue: 0.99,
-                        },
-                    ],
-                    ACCOUNT: [
-                        {
-                            indicator: 'TMV',
-                            value: 10,
-                            triggerValue: 1,
-                            plannedRecoverTime: 1644919865000,
-                            isLocked: true,
-                        },
-                    ],
-                },
-                updateTime: 1644913304748,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    indicators: {
+                        BTCUSDT: [
+                            {
+                                isLocked: true,
+                                plannedRecoverTime: 1545741270000,
+                                indicator: 'UFR',
+                                value: 0.05,
+                                triggerValue: 0.995,
+                            },
+                            {
+                                isLocked: true,
+                                plannedRecoverTime: 1545741270000,
+                                indicator: 'IFER',
+                                value: 0.99,
+                                triggerValue: 0.99,
+                            },
+                            {
+                                isLocked: true,
+                                plannedRecoverTime: 1545741270000,
+                                indicator: 'GCR',
+                                value: 0.99,
+                                triggerValue: 0.99,
+                            },
+                            {
+                                isLocked: true,
+                                plannedRecoverTime: 1545741270000,
+                                indicator: 'DR',
+                                value: 0.99,
+                                triggerValue: 0.99,
+                            },
+                        ],
+                        ETHUSDT: [
+                            {
+                                isLocked: true,
+                                plannedRecoverTime: 1545741270000,
+                                indicator: 'UFR',
+                                value: 0.05,
+                                triggerValue: 0.995,
+                            },
+                            {
+                                isLocked: true,
+                                plannedRecoverTime: 1545741270000,
+                                indicator: 'IFER',
+                                value: 0.99,
+                                triggerValue: 0.99,
+                            },
+                            {
+                                isLocked: true,
+                                plannedRecoverTime: 1545741270000,
+                                indicator: 'GCR',
+                                value: 0.99,
+                                triggerValue: 0.99,
+                            },
+                            {
+                                isLocked: true,
+                                plannedRecoverTime: 1545741270000,
+                                indicator: 'DR',
+                                value: 0.99,
+                                triggerValue: 0.99,
+                            },
+                        ],
+                        ACCOUNT: [
+                            {
+                                indicator: 'TMV',
+                                value: 10,
+                                triggerValue: 1,
+                                plannedRecoverTime: 1644919865000,
+                                isLocked: true,
+                            },
+                        ],
+                    },
+                    updateTime: 1644913304748,
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'futuresTradingQuantitativeRulesIndicators')
@@ -1079,7 +1104,7 @@ describe('AccountApi', () => {
 
     describe('getBnbBurnStatus()', () => {
         it('should execute getBnbBurnStatus() successfully with required parameters only', async () => {
-            mockResponse = { feeBurn: true };
+            mockResponse = JSONParse(JSONStringify({ feeBurn: true }));
 
             const spy = jest.spyOn(client, 'getBnbBurnStatus').mockReturnValue(
                 Promise.resolve({
@@ -1100,7 +1125,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { feeBurn: true };
+            mockResponse = JSONParse(JSONStringify({ feeBurn: true }));
 
             const spy = jest.spyOn(client, 'getBnbBurnStatus').mockReturnValue(
                 Promise.resolve({
@@ -1134,7 +1159,7 @@ describe('AccountApi', () => {
 
     describe('getCurrentMultiAssetsMode()', () => {
         it('should execute getCurrentMultiAssetsMode() successfully with required parameters only', async () => {
-            mockResponse = { multiAssetsMargin: true };
+            mockResponse = JSONParse(JSONStringify({ multiAssetsMargin: true }));
 
             const spy = jest.spyOn(client, 'getCurrentMultiAssetsMode').mockReturnValue(
                 Promise.resolve({
@@ -1155,7 +1180,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { multiAssetsMargin: true };
+            mockResponse = JSONParse(JSONStringify({ multiAssetsMargin: true }));
 
             const spy = jest.spyOn(client, 'getCurrentMultiAssetsMode').mockReturnValue(
                 Promise.resolve({
@@ -1191,7 +1216,7 @@ describe('AccountApi', () => {
 
     describe('getCurrentPositionMode()', () => {
         it('should execute getCurrentPositionMode() successfully with required parameters only', async () => {
-            mockResponse = { dualSidePosition: true };
+            mockResponse = JSONParse(JSONStringify({ dualSidePosition: true }));
 
             const spy = jest.spyOn(client, 'getCurrentPositionMode').mockReturnValue(
                 Promise.resolve({
@@ -1212,7 +1237,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { dualSidePosition: true };
+            mockResponse = JSONParse(JSONStringify({ dualSidePosition: true }));
 
             const spy = jest.spyOn(client, 'getCurrentPositionMode').mockReturnValue(
                 Promise.resolve({
@@ -1253,7 +1278,12 @@ describe('AccountApi', () => {
                 endTime: 1641782889000,
             };
 
-            mockResponse = { avgCostTimestampOfLast30d: 7241837, downloadId: '546975389218332672' };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    avgCostTimestampOfLast30d: 7241837,
+                    downloadId: '546975389218332672',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getDownloadIdForFuturesOrderHistory').mockReturnValue(
                 Promise.resolve({
@@ -1276,7 +1306,12 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { avgCostTimestampOfLast30d: 7241837, downloadId: '546975389218332672' };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    avgCostTimestampOfLast30d: 7241837,
+                    downloadId: '546975389218332672',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getDownloadIdForFuturesOrderHistory').mockReturnValue(
                 Promise.resolve({
@@ -1350,7 +1385,12 @@ describe('AccountApi', () => {
                 endTime: 1641782889000,
             };
 
-            mockResponse = { avgCostTimestampOfLast30d: 7241837, downloadId: '546975389218332672' };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    avgCostTimestampOfLast30d: 7241837,
+                    downloadId: '546975389218332672',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getDownloadIdForFuturesTradeHistory').mockReturnValue(
                 Promise.resolve({
@@ -1373,7 +1413,12 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { avgCostTimestampOfLast30d: 7241837, downloadId: '546975389218332672' };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    avgCostTimestampOfLast30d: 7241837,
+                    downloadId: '546975389218332672',
+                })
+            );
 
             const spy = jest.spyOn(client, 'getDownloadIdForFuturesTradeHistory').mockReturnValue(
                 Promise.resolve({
@@ -1447,7 +1492,12 @@ describe('AccountApi', () => {
                 endTime: 1641782889000,
             };
 
-            mockResponse = { avgCostTimestampOfLast30d: 7241837, downloadId: '546975389218332672' };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    avgCostTimestampOfLast30d: 7241837,
+                    downloadId: '546975389218332672',
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'getDownloadIdForFuturesTransactionHistory')
@@ -1472,7 +1522,12 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { avgCostTimestampOfLast30d: 7241837, downloadId: '546975389218332672' };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    avgCostTimestampOfLast30d: 7241837,
+                    downloadId: '546975389218332672',
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'getDownloadIdForFuturesTransactionHistory')
@@ -1547,14 +1602,16 @@ describe('AccountApi', () => {
                 downloadId: '1',
             };
 
-            mockResponse = {
-                downloadId: '545923594199212032',
-                status: 'processing',
-                url: '',
-                notified: false,
-                expirationTimestamp: -1,
-                isExpired: null,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    downloadId: '545923594199212032',
+                    status: 'processing',
+                    url: '',
+                    notified: false,
+                    expirationTimestamp: -1,
+                    isExpired: null,
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'getFuturesOrderHistoryDownloadLinkById')
@@ -1578,14 +1635,16 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                downloadId: '545923594199212032',
-                status: 'processing',
-                url: '',
-                notified: false,
-                expirationTimestamp: -1,
-                isExpired: null,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    downloadId: '545923594199212032',
+                    status: 'processing',
+                    url: '',
+                    notified: false,
+                    expirationTimestamp: -1,
+                    isExpired: null,
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'getFuturesOrderHistoryDownloadLinkById')
@@ -1645,14 +1704,16 @@ describe('AccountApi', () => {
                 downloadId: '1',
             };
 
-            mockResponse = {
-                downloadId: '545923594199212032',
-                status: 'processing',
-                url: '',
-                notified: false,
-                expirationTimestamp: -1,
-                isExpired: null,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    downloadId: '545923594199212032',
+                    status: 'processing',
+                    url: '',
+                    notified: false,
+                    expirationTimestamp: -1,
+                    isExpired: null,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFuturesTradeDownloadLinkById').mockReturnValue(
                 Promise.resolve({
@@ -1674,14 +1735,16 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                downloadId: '545923594199212032',
-                status: 'processing',
-                url: '',
-                notified: false,
-                expirationTimestamp: -1,
-                isExpired: null,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    downloadId: '545923594199212032',
+                    status: 'processing',
+                    url: '',
+                    notified: false,
+                    expirationTimestamp: -1,
+                    isExpired: null,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFuturesTradeDownloadLinkById').mockReturnValue(
                 Promise.resolve({
@@ -1739,14 +1802,16 @@ describe('AccountApi', () => {
                 downloadId: '1',
             };
 
-            mockResponse = {
-                downloadId: '545923594199212032',
-                status: 'processing',
-                url: '',
-                notified: false,
-                expirationTimestamp: -1,
-                isExpired: null,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    downloadId: '545923594199212032',
+                    status: 'processing',
+                    url: '',
+                    notified: false,
+                    expirationTimestamp: -1,
+                    isExpired: null,
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'getFuturesTransactionHistoryDownloadLinkById')
@@ -1770,14 +1835,16 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                downloadId: '545923594199212032',
-                status: 'processing',
-                url: '',
-                notified: false,
-                expirationTimestamp: -1,
-                isExpired: null,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    downloadId: '545923594199212032',
+                    status: 'processing',
+                    url: '',
+                    notified: false,
+                    expirationTimestamp: -1,
+                    isExpired: null,
+                })
+            );
 
             const spy = jest
                 .spyOn(client, 'getFuturesTransactionHistoryDownloadLinkById')
@@ -1835,28 +1902,30 @@ describe('AccountApi', () => {
 
     describe('getIncomeHistory()', () => {
         it('should execute getIncomeHistory() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    symbol: '',
-                    incomeType: 'TRANSFER',
-                    income: '-0.37500000',
-                    asset: 'USDT',
-                    info: 'TRANSFER',
-                    time: 1570608000000,
-                    tranId: 9689322392,
-                    tradeId: '',
-                },
-                {
-                    symbol: 'BTCUSDT',
-                    incomeType: 'COMMISSION',
-                    income: '-0.01000000',
-                    asset: 'USDT',
-                    info: 'COMMISSION',
-                    time: 1570636800000,
-                    tranId: 9689322392,
-                    tradeId: '2059192',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: '',
+                        incomeType: 'TRANSFER',
+                        income: '-0.37500000',
+                        asset: 'USDT',
+                        info: 'TRANSFER',
+                        time: 1570608000000,
+                        tranId: 9689322392,
+                        tradeId: '',
+                    },
+                    {
+                        symbol: 'BTCUSDT',
+                        incomeType: 'COMMISSION',
+                        income: '-0.01000000',
+                        asset: 'USDT',
+                        info: 'COMMISSION',
+                        time: 1570636800000,
+                        tranId: 9689322392,
+                        tradeId: '2059192',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getIncomeHistory').mockReturnValue(
                 Promise.resolve({
@@ -1883,28 +1952,30 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    symbol: '',
-                    incomeType: 'TRANSFER',
-                    income: '-0.37500000',
-                    asset: 'USDT',
-                    info: 'TRANSFER',
-                    time: 1570608000000,
-                    tranId: 9689322392,
-                    tradeId: '',
-                },
-                {
-                    symbol: 'BTCUSDT',
-                    incomeType: 'COMMISSION',
-                    income: '-0.01000000',
-                    asset: 'USDT',
-                    info: 'COMMISSION',
-                    time: 1570636800000,
-                    tranId: 9689322392,
-                    tradeId: '2059192',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: '',
+                        incomeType: 'TRANSFER',
+                        income: '-0.37500000',
+                        asset: 'USDT',
+                        info: 'TRANSFER',
+                        time: 1570608000000,
+                        tranId: 9689322392,
+                        tradeId: '',
+                    },
+                    {
+                        symbol: 'BTCUSDT',
+                        incomeType: 'COMMISSION',
+                        income: '-0.01000000',
+                        asset: 'USDT',
+                        info: 'COMMISSION',
+                        time: 1570636800000,
+                        tranId: 9689322392,
+                        tradeId: '2059192',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'getIncomeHistory').mockReturnValue(
                 Promise.resolve({
@@ -1938,22 +2009,24 @@ describe('AccountApi', () => {
 
     describe('notionalAndLeverageBrackets()', () => {
         it('should execute notionalAndLeverageBrackets() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    symbol: 'ETHUSDT',
-                    notionalCoef: 1.5,
-                    brackets: [
-                        {
-                            bracket: 1,
-                            initialLeverage: 75,
-                            notionalCap: 10000,
-                            notionalFloor: 0,
-                            maintMarginRatio: 0.0065,
-                            cum: 0,
-                        },
-                    ],
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'ETHUSDT',
+                        notionalCoef: 1.5,
+                        brackets: [
+                            {
+                                bracket: 1,
+                                initialLeverage: 75,
+                                notionalCap: 10000,
+                                notionalFloor: 0,
+                                maintMarginRatio: 0.0065,
+                                cum: 0,
+                            },
+                        ],
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'notionalAndLeverageBrackets').mockReturnValue(
                 Promise.resolve({
@@ -1975,22 +2048,24 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    symbol: 'ETHUSDT',
-                    notionalCoef: 1.5,
-                    brackets: [
-                        {
-                            bracket: 1,
-                            initialLeverage: 75,
-                            notionalCap: 10000,
-                            notionalFloor: 0,
-                            maintMarginRatio: 0.0065,
-                            cum: 0,
-                        },
-                    ],
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'ETHUSDT',
+                        notionalCoef: 1.5,
+                        brackets: [
+                            {
+                                bracket: 1,
+                                initialLeverage: 75,
+                                notionalCap: 10000,
+                                notionalFloor: 0,
+                                maintMarginRatio: 0.0065,
+                                cum: 0,
+                            },
+                        ],
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'notionalAndLeverageBrackets').mockReturnValue(
                 Promise.resolve({
@@ -2026,10 +2101,12 @@ describe('AccountApi', () => {
 
     describe('queryUserRateLimit()', () => {
         it('should execute queryUserRateLimit() successfully with required parameters only', async () => {
-            mockResponse = [
-                { rateLimitType: 'ORDERS', interval: 'SECOND', intervalNum: 10, limit: 10000 },
-                { rateLimitType: 'ORDERS', interval: 'MINUTE', intervalNum: 1, limit: 20000 },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { rateLimitType: 'ORDERS', interval: 'SECOND', intervalNum: 10, limit: 10000 },
+                    { rateLimitType: 'ORDERS', interval: 'MINUTE', intervalNum: 1, limit: 20000 },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryUserRateLimit').mockReturnValue(
                 Promise.resolve({
@@ -2050,10 +2127,12 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                { rateLimitType: 'ORDERS', interval: 'SECOND', intervalNum: 10, limit: 10000 },
-                { rateLimitType: 'ORDERS', interval: 'MINUTE', intervalNum: 1, limit: 20000 },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { rateLimitType: 'ORDERS', interval: 'SECOND', intervalNum: 10, limit: 10000 },
+                    { rateLimitType: 'ORDERS', interval: 'MINUTE', intervalNum: 1, limit: 20000 },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'queryUserRateLimit').mockReturnValue(
                 Promise.resolve({
@@ -2087,15 +2166,17 @@ describe('AccountApi', () => {
 
     describe('symbolConfiguration()', () => {
         it('should execute symbolConfiguration() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    symbol: 'BTCUSDT',
-                    marginType: 'CROSSED',
-                    isAutoAddMargin: 'false',
-                    leverage: 21,
-                    maxNotionalValue: '1000000',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BTCUSDT',
+                        marginType: 'CROSSED',
+                        isAutoAddMargin: 'false',
+                        leverage: 21,
+                        maxNotionalValue: '1000000',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'symbolConfiguration').mockReturnValue(
                 Promise.resolve({
@@ -2117,15 +2198,17 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = [
-                {
-                    symbol: 'BTCUSDT',
-                    marginType: 'CROSSED',
-                    isAutoAddMargin: 'false',
-                    leverage: 21,
-                    maxNotionalValue: '1000000',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BTCUSDT',
+                        marginType: 'CROSSED',
+                        isAutoAddMargin: 'false',
+                        leverage: 21,
+                        maxNotionalValue: '1000000',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'symbolConfiguration').mockReturnValue(
                 Promise.resolve({
@@ -2163,7 +2246,7 @@ describe('AccountApi', () => {
                 feeBurn: 'feeBurn_example',
             };
 
-            mockResponse = { code: 200, msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ code: 200, msg: 'success' }));
 
             const spy = jest.spyOn(client, 'toggleBnbBurnOnFuturesTrade').mockReturnValue(
                 Promise.resolve({
@@ -2185,7 +2268,7 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = { code: 200, msg: 'success' };
+            mockResponse = JSONParse(JSONStringify({ code: 200, msg: 'success' }));
 
             const spy = jest.spyOn(client, 'toggleBnbBurnOnFuturesTrade').mockReturnValue(
                 Promise.resolve({
@@ -2243,11 +2326,13 @@ describe('AccountApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = {
-                symbol: 'BTCUSDT',
-                makerCommissionRate: '0.0002',
-                takerCommissionRate: '0.0004',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    symbol: 'BTCUSDT',
+                    makerCommissionRate: '0.0002',
+                    takerCommissionRate: '0.0004',
+                })
+            );
 
             const spy = jest.spyOn(client, 'userCommissionRate').mockReturnValue(
                 Promise.resolve({
@@ -2269,11 +2354,13 @@ describe('AccountApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                symbol: 'BTCUSDT',
-                makerCommissionRate: '0.0002',
-                takerCommissionRate: '0.0004',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    symbol: 'BTCUSDT',
+                    makerCommissionRate: '0.0002',
+                    takerCommissionRate: '0.0004',
+                })
+            );
 
             const spy = jest.spyOn(client, 'userCommissionRate').mockReturnValue(
                 Promise.resolve({

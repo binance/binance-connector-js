@@ -32,8 +32,8 @@ export interface FuturesTradingQuantitativeRulesIndicatorsResponse {
     indicators?: FuturesTradingQuantitativeRulesIndicatorsResponseIndicators;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FuturesTradingQuantitativeRulesIndicatorsResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

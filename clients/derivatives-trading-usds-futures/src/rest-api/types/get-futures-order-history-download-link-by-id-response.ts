@@ -45,10 +45,10 @@ export interface GetFuturesOrderHistoryDownloadLinkByIdResponse {
     notified?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFuturesOrderHistoryDownloadLinkByIdResponse
      */
-    expirationTimestamp?: number;
+    expirationTimestamp?: number | bigint;
     /**
      *
      * @type {string}

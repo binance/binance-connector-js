@@ -75,8 +75,8 @@ export interface AccountInformationV2ResponseResultPositionsInner {
     maintMargin?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountInformationV2ResponseResultPositionsInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

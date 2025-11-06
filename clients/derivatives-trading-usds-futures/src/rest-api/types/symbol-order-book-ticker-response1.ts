@@ -51,8 +51,8 @@ export interface SymbolOrderBookTickerResponse1 {
     askQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SymbolOrderBookTickerResponse1
      */
-    time?: number;
+    time?: number | bigint;
 }

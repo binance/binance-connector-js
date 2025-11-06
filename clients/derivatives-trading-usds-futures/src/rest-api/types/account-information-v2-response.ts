@@ -29,10 +29,10 @@ import type { AccountInformationV2ResponsePositionsInner } from './account-infor
 export interface AccountInformationV2Response {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountInformationV2Response
      */
-    feeTier?: number;
+    feeTier?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -53,10 +53,10 @@ export interface AccountInformationV2Response {
     canWithdraw?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountInformationV2Response
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -65,10 +65,10 @@ export interface AccountInformationV2Response {
     multiAssetsMargin?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountInformationV2Response
      */
-    tradeGroupId?: number;
+    tradeGroupId?: number | bigint;
     /**
      *
      * @type {string}

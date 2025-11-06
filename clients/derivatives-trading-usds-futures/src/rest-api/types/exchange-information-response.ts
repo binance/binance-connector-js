@@ -44,10 +44,10 @@ export interface ExchangeInformationResponse {
     rateLimits?: Array<ExchangeInformationResponseRateLimitsInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExchangeInformationResponse
      */
-    serverTime?: number;
+    serverTime?: number | bigint;
     /**
      *
      * @type {Array<ExchangeInformationResponseAssetsInner>}

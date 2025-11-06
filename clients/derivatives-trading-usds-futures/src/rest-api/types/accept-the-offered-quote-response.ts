@@ -27,10 +27,10 @@ export interface AcceptTheOfferedQuoteResponse {
     orderId?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AcceptTheOfferedQuoteResponse
      */
-    createTime?: number;
+    createTime?: number | bigint;
     /**
      *
      * @type {string}

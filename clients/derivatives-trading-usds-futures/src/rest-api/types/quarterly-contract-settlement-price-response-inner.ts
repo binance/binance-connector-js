@@ -21,10 +21,10 @@
 export interface QuarterlyContractSettlementPriceResponseInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QuarterlyContractSettlementPriceResponseInner
      */
-    deliveryTime?: number;
+    deliveryTime?: number | bigint;
     /**
      *
      * @type {number}

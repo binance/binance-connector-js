@@ -27,10 +27,10 @@ export interface AllMarketTickersStreamsResponseInner {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllMarketTickersStreamsResponseInner
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}
@@ -99,32 +99,32 @@ export interface AllMarketTickersStreamsResponseInner {
     q?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllMarketTickersStreamsResponseInner
      */
-    O?: number;
+    O?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllMarketTickersStreamsResponseInner
      */
-    C?: number;
+    C?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllMarketTickersStreamsResponseInner
      */
-    F?: number;
+    F?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllMarketTickersStreamsResponseInner
      */
-    L?: number;
+    L?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllMarketTickersStreamsResponseInner
      */
-    n?: number;
+    n?: number | bigint;
 }

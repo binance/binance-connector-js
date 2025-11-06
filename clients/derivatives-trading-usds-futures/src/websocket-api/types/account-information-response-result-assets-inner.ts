@@ -99,8 +99,8 @@ export interface AccountInformationResponseResultAssetsInner {
     marginAvailable?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountInformationResponseResultAssetsInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

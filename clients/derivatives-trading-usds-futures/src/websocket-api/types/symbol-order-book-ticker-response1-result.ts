@@ -21,10 +21,10 @@
 export interface SymbolOrderBookTickerResponse1Result {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SymbolOrderBookTickerResponse1Result
      */
-    lastUpdateId?: number;
+    lastUpdateId?: number | bigint;
     /**
      *
      * @type {string}
@@ -57,8 +57,8 @@ export interface SymbolOrderBookTickerResponse1Result {
     askQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SymbolOrderBookTickerResponse1Result
      */
-    time?: number;
+    time?: number | bigint;
 }

@@ -21,10 +21,10 @@
 export interface ModifyOrderResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ModifyOrderResponse
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -159,14 +159,14 @@ export interface ModifyOrderResponse {
     selfTradePreventionMode?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ModifyOrderResponse
      */
-    goodTillDate?: number;
+    goodTillDate?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ModifyOrderResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

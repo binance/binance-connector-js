@@ -32,10 +32,10 @@ export interface CompositeIndexSymbolInformationResponseInner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CompositeIndexSymbolInformationResponseInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}

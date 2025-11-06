@@ -33,8 +33,8 @@ export interface SymbolPriceTickerResponse1Result {
     price?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SymbolPriceTickerResponse1Result
      */
-    time?: number;
+    time?: number | bigint;
 }

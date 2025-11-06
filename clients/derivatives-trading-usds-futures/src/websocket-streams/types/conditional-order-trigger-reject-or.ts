@@ -27,10 +27,10 @@ export interface ConditionalOrderTriggerRejectOr {
     s?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ConditionalOrderTriggerRejectOr
      */
-    i?: number;
+    i?: number | bigint;
     /**
      *
      * @type {string}

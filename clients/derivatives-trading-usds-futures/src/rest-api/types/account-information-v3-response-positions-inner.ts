@@ -75,8 +75,8 @@ export interface AccountInformationV3ResponsePositionsInner {
     maintMargin?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountInformationV3ResponsePositionsInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

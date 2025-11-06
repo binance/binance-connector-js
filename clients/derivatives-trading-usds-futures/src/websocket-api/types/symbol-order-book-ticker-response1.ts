@@ -35,10 +35,10 @@ export interface SymbolOrderBookTickerResponse1 {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SymbolOrderBookTickerResponse1
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {SymbolOrderBookTickerResponse1Result}

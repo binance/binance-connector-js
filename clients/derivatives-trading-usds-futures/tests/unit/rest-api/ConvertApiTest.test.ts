@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { ConvertApi } from '../../../src/rest-api';
@@ -48,11 +49,13 @@ describe('ConvertApi', () => {
                 quoteId: '1',
             };
 
-            mockResponse = {
-                orderId: '933256278426274426',
-                createTime: 1623381330472,
-                orderStatus: 'PROCESS',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    orderId: '933256278426274426',
+                    createTime: 1623381330472,
+                    orderStatus: 'PROCESS',
+                })
+            );
 
             const spy = jest.spyOn(client, 'acceptTheOfferedQuote').mockReturnValue(
                 Promise.resolve({
@@ -74,11 +77,13 @@ describe('ConvertApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                orderId: '933256278426274426',
-                createTime: 1623381330472,
-                orderStatus: 'PROCESS',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    orderId: '933256278426274426',
+                    createTime: 1623381330472,
+                    orderStatus: 'PROCESS',
+                })
+            );
 
             const spy = jest.spyOn(client, 'acceptTheOfferedQuote').mockReturnValue(
                 Promise.resolve({
@@ -130,16 +135,18 @@ describe('ConvertApi', () => {
 
     describe('listAllConvertPairs()', () => {
         it('should execute listAllConvertPairs() successfully with required parameters only', async () => {
-            mockResponse = [
-                {
-                    fromAsset: 'BTC',
-                    toAsset: 'USDT',
-                    fromAssetMinAmount: '0.0004',
-                    fromAssetMaxAmount: '50',
-                    toAssetMinAmount: '20',
-                    toAssetMaxAmount: '2500000',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        fromAsset: 'BTC',
+                        toAsset: 'USDT',
+                        fromAssetMinAmount: '0.0004',
+                        fromAssetMaxAmount: '50',
+                        toAssetMinAmount: '20',
+                        toAssetMaxAmount: '2500000',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'listAllConvertPairs').mockReturnValue(
                 Promise.resolve({
@@ -161,16 +168,18 @@ describe('ConvertApi', () => {
                 toAsset: 'toAsset_example',
             };
 
-            mockResponse = [
-                {
-                    fromAsset: 'BTC',
-                    toAsset: 'USDT',
-                    fromAssetMinAmount: '0.0004',
-                    fromAssetMaxAmount: '50',
-                    toAssetMinAmount: '20',
-                    toAssetMaxAmount: '2500000',
-                },
-            ];
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        fromAsset: 'BTC',
+                        toAsset: 'USDT',
+                        fromAssetMinAmount: '0.0004',
+                        fromAssetMaxAmount: '50',
+                        toAssetMinAmount: '20',
+                        toAssetMaxAmount: '2500000',
+                    },
+                ])
+            );
 
             const spy = jest.spyOn(client, 'listAllConvertPairs').mockReturnValue(
                 Promise.resolve({
@@ -204,17 +213,19 @@ describe('ConvertApi', () => {
 
     describe('orderStatus()', () => {
         it('should execute orderStatus() successfully with required parameters only', async () => {
-            mockResponse = {
-                orderId: 933256278426274400,
-                orderStatus: 'SUCCESS',
-                fromAsset: 'BTC',
-                fromAmount: '0.00054414',
-                toAsset: 'USDT',
-                toAmount: '20',
-                ratio: '36755',
-                inverseRatio: '0.00002721',
-                createTime: 1623381330472,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    orderId: 933256278426274400,
+                    orderStatus: 'SUCCESS',
+                    fromAsset: 'BTC',
+                    fromAmount: '0.00054414',
+                    toAsset: 'USDT',
+                    toAmount: '20',
+                    ratio: '36755',
+                    inverseRatio: '0.00002721',
+                    createTime: 1623381330472,
+                })
+            );
 
             const spy = jest.spyOn(client, 'orderStatus').mockReturnValue(
                 Promise.resolve({
@@ -236,17 +247,19 @@ describe('ConvertApi', () => {
                 quoteId: '1',
             };
 
-            mockResponse = {
-                orderId: 933256278426274400,
-                orderStatus: 'SUCCESS',
-                fromAsset: 'BTC',
-                fromAmount: '0.00054414',
-                toAsset: 'USDT',
-                toAmount: '20',
-                ratio: '36755',
-                inverseRatio: '0.00002721',
-                createTime: 1623381330472,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    orderId: 933256278426274400,
+                    orderStatus: 'SUCCESS',
+                    fromAsset: 'BTC',
+                    fromAmount: '0.00054414',
+                    toAsset: 'USDT',
+                    toAmount: '20',
+                    ratio: '36755',
+                    inverseRatio: '0.00002721',
+                    createTime: 1623381330472,
+                })
+            );
 
             const spy = jest.spyOn(client, 'orderStatus').mockReturnValue(
                 Promise.resolve({
@@ -285,14 +298,16 @@ describe('ConvertApi', () => {
                 toAsset: 'toAsset_example',
             };
 
-            mockResponse = {
-                quoteId: '12415572564',
-                ratio: '38163.7',
-                inverseRatio: '0.0000262',
-                validTimestamp: 1623319461670,
-                toAmount: '3816.37',
-                fromAmount: '0.1',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    quoteId: '12415572564',
+                    ratio: '38163.7',
+                    inverseRatio: '0.0000262',
+                    validTimestamp: 1623319461670,
+                    toAmount: '3816.37',
+                    fromAmount: '0.1',
+                })
+            );
 
             const spy = jest.spyOn(client, 'sendQuoteRequest').mockReturnValue(
                 Promise.resolve({
@@ -318,14 +333,16 @@ describe('ConvertApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                quoteId: '12415572564',
-                ratio: '38163.7',
-                inverseRatio: '0.0000262',
-                validTimestamp: 1623319461670,
-                toAmount: '3816.37',
-                fromAmount: '0.1',
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    quoteId: '12415572564',
+                    ratio: '38163.7',
+                    inverseRatio: '0.0000262',
+                    validTimestamp: 1623319461670,
+                    toAmount: '3816.37',
+                    fromAmount: '0.1',
+                })
+            );
 
             const spy = jest.spyOn(client, 'sendQuoteRequest').mockReturnValue(
                 Promise.resolve({

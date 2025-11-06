@@ -111,8 +111,8 @@ export interface PositionInformationV2ResponseInner {
     positionSide?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PositionInformationV2ResponseInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

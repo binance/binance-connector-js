@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import {
     ConfigurationWebsocketStreams,
     WebsocketStreamsBase,
@@ -48,18 +49,20 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: 'aggTrade',
-                E: 123456789,
-                s: 'BTCUSDT',
-                a: 5933014,
-                p: '0.001',
-                q: '100',
-                f: 100,
-                l: 105,
-                T: 123456785,
-                m: true,
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'aggTrade',
+                    E: 123456789,
+                    s: 'BTCUSDT',
+                    a: 5933014,
+                    p: '0.001',
+                    q: '100',
+                    f: 100,
+                    l: 105,
+                    T: 123456785,
+                    m: true,
+                })
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@aggTrade'.slice(1), params as unknown as Record<string, AggregateTradeStreamsRequest>)}`,
@@ -77,25 +80,27 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: 'aggTrade',
-                E: 123456789,
-                s: 'BTCUSDT',
-                a: 5933014,
-                p: '0.001',
-                q: '100',
-                f: 100,
-                l: 105,
-                T: 123456785,
-                m: true,
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'aggTrade',
+                    E: 123456789,
+                    s: 'BTCUSDT',
+                    a: 5933014,
+                    p: '0.001',
+                    q: '100',
+                    f: 100,
+                    l: 105,
+                    T: 123456785,
+                    m: true,
+                })
+            );
 
             const stream = websocketStreamApi.aggregateTradeStreams(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/<symbol>@aggTrade'.slice(1),
                         params as unknown as Record<string, AggregateTradeStreamsRequest>
@@ -131,17 +136,19 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: 'bookTicker',
-                u: 400900217,
-                E: 1568014460893,
-                T: 1568014460891,
-                s: 'BNBUSDT',
-                b: '25.35190000',
-                B: '31.21000000',
-                a: '25.36520000',
-                A: '40.66000000',
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'bookTicker',
+                    u: 400900217,
+                    E: 1568014460893,
+                    T: 1568014460891,
+                    s: 'BNBUSDT',
+                    b: '25.35190000',
+                    B: '31.21000000',
+                    a: '25.36520000',
+                    A: '40.66000000',
+                })
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/!bookTicker'.slice(1), params as unknown as Record<string, AllBookTickersStreamRequest>)}`,
@@ -158,24 +165,26 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: 'bookTicker',
-                u: 400900217,
-                E: 1568014460893,
-                T: 1568014460891,
-                s: 'BNBUSDT',
-                b: '25.35190000',
-                B: '31.21000000',
-                a: '25.36520000',
-                A: '40.66000000',
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'bookTicker',
+                    u: 400900217,
+                    E: 1568014460893,
+                    T: 1568014460891,
+                    s: 'BNBUSDT',
+                    b: '25.35190000',
+                    B: '31.21000000',
+                    a: '25.36520000',
+                    A: '40.66000000',
+                })
+            );
 
             const stream = websocketStreamApi.allBookTickersStream(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/!bookTicker'.slice(1),
                         params as unknown as Record<string, AllBookTickersStreamRequest>
@@ -195,23 +204,25 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: 'forceOrder',
-                E: 1568014460893,
-                o: {
-                    s: 'BTCUSDT',
-                    S: 'SELL',
-                    o: 'LIMIT',
-                    f: 'IOC',
-                    q: '0.014',
-                    p: '9910',
-                    ap: '9910',
-                    X: 'FILLED',
-                    l: '0.014',
-                    z: '0.014',
-                    T: 1568014460893,
-                },
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'forceOrder',
+                    E: 1568014460893,
+                    o: {
+                        s: 'BTCUSDT',
+                        S: 'SELL',
+                        o: 'LIMIT',
+                        f: 'IOC',
+                        q: '0.014',
+                        p: '9910',
+                        ap: '9910',
+                        X: 'FILLED',
+                        l: '0.014',
+                        z: '0.014',
+                        T: 1568014460893,
+                    },
+                })
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/!forceOrder@arr'.slice(1), params as unknown as Record<string, AllMarketLiquidationOrderStreamsRequest>)}`,
@@ -228,30 +239,32 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: 'forceOrder',
-                E: 1568014460893,
-                o: {
-                    s: 'BTCUSDT',
-                    S: 'SELL',
-                    o: 'LIMIT',
-                    f: 'IOC',
-                    q: '0.014',
-                    p: '9910',
-                    ap: '9910',
-                    X: 'FILLED',
-                    l: '0.014',
-                    z: '0.014',
-                    T: 1568014460893,
-                },
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'forceOrder',
+                    E: 1568014460893,
+                    o: {
+                        s: 'BTCUSDT',
+                        S: 'SELL',
+                        o: 'LIMIT',
+                        f: 'IOC',
+                        q: '0.014',
+                        p: '9910',
+                        ap: '9910',
+                        X: 'FILLED',
+                        l: '0.014',
+                        z: '0.014',
+                        T: 1568014460893,
+                    },
+                })
+            );
 
             const stream = websocketStreamApi.allMarketLiquidationOrderStreams(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/!forceOrder@arr'.slice(1),
                         params as unknown as Record<string, AllMarketLiquidationOrderStreamsRequest>
@@ -271,19 +284,21 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = [
-                {
-                    e: '24hrMiniTicker',
-                    E: 123456789,
-                    s: 'BTCUSDT',
-                    c: '0.0025',
-                    o: '0.0010',
-                    h: '0.0025',
-                    l: '0.0010',
-                    v: '10000',
-                    q: '18',
-                },
-            ];
+            const mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        e: '24hrMiniTicker',
+                        E: 123456789,
+                        s: 'BTCUSDT',
+                        c: '0.0025',
+                        o: '0.0010',
+                        h: '0.0025',
+                        l: '0.0010',
+                        v: '10000',
+                        q: '18',
+                    },
+                ])
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/!miniTicker@arr'.slice(1), params as unknown as Record<string, AllMarketMiniTickersStreamRequest>)}`,
@@ -300,26 +315,28 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = [
-                {
-                    e: '24hrMiniTicker',
-                    E: 123456789,
-                    s: 'BTCUSDT',
-                    c: '0.0025',
-                    o: '0.0010',
-                    h: '0.0025',
-                    l: '0.0010',
-                    v: '10000',
-                    q: '18',
-                },
-            ];
+            const mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        e: '24hrMiniTicker',
+                        E: 123456789,
+                        s: 'BTCUSDT',
+                        c: '0.0025',
+                        o: '0.0010',
+                        h: '0.0025',
+                        l: '0.0010',
+                        v: '10000',
+                        q: '18',
+                    },
+                ])
+            );
 
             const stream = websocketStreamApi.allMarketMiniTickersStream(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/!miniTicker@arr'.slice(1),
                         params as unknown as Record<string, AllMarketMiniTickersStreamRequest>
@@ -339,28 +356,30 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = [
-                {
-                    e: '24hrTicker',
-                    E: 123456789,
-                    s: 'BTCUSDT',
-                    p: '0.0015',
-                    P: '250.00',
-                    w: '0.0018',
-                    c: '0.0025',
-                    Q: '10',
-                    o: '0.0010',
-                    h: '0.0025',
-                    l: '0.0010',
-                    v: '10000',
-                    q: '18',
-                    O: 0,
-                    C: 86400000,
-                    F: 0,
-                    L: 18150,
-                    n: 18151,
-                },
-            ];
+            const mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        e: '24hrTicker',
+                        E: 123456789,
+                        s: 'BTCUSDT',
+                        p: '0.0015',
+                        P: '250.00',
+                        w: '0.0018',
+                        c: '0.0025',
+                        Q: '10',
+                        o: '0.0010',
+                        h: '0.0025',
+                        l: '0.0010',
+                        v: '10000',
+                        q: '18',
+                        O: 0,
+                        C: 86400000,
+                        F: 0,
+                        L: 18150,
+                        n: 18151,
+                    },
+                ])
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/!ticker@arr'.slice(1), params as unknown as Record<string, AllMarketTickersStreamsRequest>)}`,
@@ -377,35 +396,37 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = [
-                {
-                    e: '24hrTicker',
-                    E: 123456789,
-                    s: 'BTCUSDT',
-                    p: '0.0015',
-                    P: '250.00',
-                    w: '0.0018',
-                    c: '0.0025',
-                    Q: '10',
-                    o: '0.0010',
-                    h: '0.0025',
-                    l: '0.0010',
-                    v: '10000',
-                    q: '18',
-                    O: 0,
-                    C: 86400000,
-                    F: 0,
-                    L: 18150,
-                    n: 18151,
-                },
-            ];
+            const mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        e: '24hrTicker',
+                        E: 123456789,
+                        s: 'BTCUSDT',
+                        p: '0.0015',
+                        P: '250.00',
+                        w: '0.0018',
+                        c: '0.0025',
+                        Q: '10',
+                        o: '0.0010',
+                        h: '0.0025',
+                        l: '0.0010',
+                        v: '10000',
+                        q: '18',
+                        O: 0,
+                        C: 86400000,
+                        F: 0,
+                        L: 18150,
+                        n: 18151,
+                    },
+                ])
+            );
 
             const stream = websocketStreamApi.allMarketTickersStreams(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/!ticker@arr'.slice(1),
                         params as unknown as Record<string, AllMarketTickersStreamsRequest>
@@ -426,17 +447,19 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: 'compositeIndex',
-                E: 1602310596000,
-                s: 'DEFIUSDT',
-                p: '554.41604065',
-                C: 'baseAsset',
-                c: [
-                    { b: 'BAL', q: 'USDT', w: '1.04884844', W: '0.01457800', i: '24.33521021' },
-                    { b: 'BAND', q: 'USDT', w: '3.53782729', W: '0.03935200', i: '7.26420084' },
-                ],
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'compositeIndex',
+                    E: 1602310596000,
+                    s: 'DEFIUSDT',
+                    p: '554.41604065',
+                    C: 'baseAsset',
+                    c: [
+                        { b: 'BAL', q: 'USDT', w: '1.04884844', W: '0.01457800', i: '24.33521021' },
+                        { b: 'BAND', q: 'USDT', w: '3.53782729', W: '0.03935200', i: '7.26420084' },
+                    ],
+                })
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@compositeIndex'.slice(1), params as unknown as Record<string, CompositeIndexSymbolInformationStreamsRequest>)}`,
@@ -454,24 +477,26 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: 'compositeIndex',
-                E: 1602310596000,
-                s: 'DEFIUSDT',
-                p: '554.41604065',
-                C: 'baseAsset',
-                c: [
-                    { b: 'BAL', q: 'USDT', w: '1.04884844', W: '0.01457800', i: '24.33521021' },
-                    { b: 'BAND', q: 'USDT', w: '3.53782729', W: '0.03935200', i: '7.26420084' },
-                ],
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'compositeIndex',
+                    E: 1602310596000,
+                    s: 'DEFIUSDT',
+                    p: '554.41604065',
+                    C: 'baseAsset',
+                    c: [
+                        { b: 'BAL', q: 'USDT', w: '1.04884844', W: '0.01457800', i: '24.33521021' },
+                        { b: 'BAND', q: 'USDT', w: '3.53782729', W: '0.03935200', i: '7.26420084' },
+                    ],
+                })
+            );
 
             const stream = websocketStreamApi.compositeIndexSymbolInformationStreams(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/<symbol>@compositeIndex'.slice(1),
                         params as unknown as Record<
@@ -513,30 +538,32 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: 'continuous_kline',
-                E: 1607443058651,
-                ps: 'BTCUSDT',
-                ct: 'PERPETUAL',
-                k: {
-                    t: 1607443020000,
-                    T: 1607443079999,
-                    i: '1m',
-                    f: 116467658886,
-                    L: 116468012423,
-                    o: '18787.00',
-                    c: '18804.04',
-                    h: '18804.04',
-                    l: '18786.54',
-                    v: '197.664',
-                    n: 543,
-                    x: false,
-                    q: '3715253.19494',
-                    V: '184.769',
-                    Q: '3472925.84746',
-                    B: '0',
-                },
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'continuous_kline',
+                    E: 1607443058651,
+                    ps: 'BTCUSDT',
+                    ct: 'PERPETUAL',
+                    k: {
+                        t: 1607443020000,
+                        T: 1607443079999,
+                        i: '1m',
+                        f: 116467658886,
+                        L: 116468012423,
+                        o: '18787.00',
+                        c: '18804.04',
+                        h: '18804.04',
+                        l: '18786.54',
+                        v: '197.664',
+                        n: 543,
+                        x: false,
+                        q: '3715253.19494',
+                        V: '184.769',
+                        Q: '3472925.84746',
+                        B: '0',
+                    },
+                })
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/<pair>_<contractType>@continuousKline_<interval>'.slice(1), params as unknown as Record<string, ContinuousContractKlineCandlestickStreamsRequest>)}`,
@@ -556,37 +583,39 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: 'continuous_kline',
-                E: 1607443058651,
-                ps: 'BTCUSDT',
-                ct: 'PERPETUAL',
-                k: {
-                    t: 1607443020000,
-                    T: 1607443079999,
-                    i: '1m',
-                    f: 116467658886,
-                    L: 116468012423,
-                    o: '18787.00',
-                    c: '18804.04',
-                    h: '18804.04',
-                    l: '18786.54',
-                    v: '197.664',
-                    n: 543,
-                    x: false,
-                    q: '3715253.19494',
-                    V: '184.769',
-                    Q: '3472925.84746',
-                    B: '0',
-                },
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'continuous_kline',
+                    E: 1607443058651,
+                    ps: 'BTCUSDT',
+                    ct: 'PERPETUAL',
+                    k: {
+                        t: 1607443020000,
+                        T: 1607443079999,
+                        i: '1m',
+                        f: 116467658886,
+                        L: 116468012423,
+                        o: '18787.00',
+                        c: '18804.04',
+                        h: '18804.04',
+                        l: '18786.54',
+                        v: '197.664',
+                        n: 543,
+                        x: false,
+                        q: '3715253.19494',
+                        V: '184.769',
+                        Q: '3472925.84746',
+                        B: '0',
+                    },
+                })
+            );
 
             const stream = websocketStreamApi.continuousContractKlineCandlestickStreams(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/<pair>_<contractType>@continuousKline_<interval>'.slice(1),
                         params as unknown as Record<
@@ -669,20 +698,22 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: 'contractInfo',
-                E: 1669356423908,
-                s: 'IOTAUSDT',
-                ps: 'IOTAUSDT',
-                ct: 'PERPETUAL',
-                dt: 4133404800000,
-                ot: 1569398400000,
-                cs: 'TRADING',
-                bks: [
-                    { bs: 1, bnf: 0, bnc: 5000, mmr: 0.01, cf: 0, mi: 21, ma: 50 },
-                    { bs: 2, bnf: 5000, bnc: 25000, mmr: 0.025, cf: 75, mi: 11, ma: 20 },
-                ],
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'contractInfo',
+                    E: 1669356423908,
+                    s: 'IOTAUSDT',
+                    ps: 'IOTAUSDT',
+                    ct: 'PERPETUAL',
+                    dt: 4133404800000,
+                    ot: 1569398400000,
+                    cs: 'TRADING',
+                    bks: [
+                        { bs: 1, bnf: 0, bnc: 5000, mmr: 0.01, cf: 0, mi: 21, ma: 50 },
+                        { bs: 2, bnf: 5000, bnc: 25000, mmr: 0.025, cf: 75, mi: 11, ma: 20 },
+                    ],
+                })
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/!contractInfo'.slice(1), params as unknown as Record<string, ContractInfoStreamRequest>)}`,
@@ -699,27 +730,29 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: 'contractInfo',
-                E: 1669356423908,
-                s: 'IOTAUSDT',
-                ps: 'IOTAUSDT',
-                ct: 'PERPETUAL',
-                dt: 4133404800000,
-                ot: 1569398400000,
-                cs: 'TRADING',
-                bks: [
-                    { bs: 1, bnf: 0, bnc: 5000, mmr: 0.01, cf: 0, mi: 21, ma: 50 },
-                    { bs: 2, bnf: 5000, bnc: 25000, mmr: 0.025, cf: 75, mi: 11, ma: 20 },
-                ],
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'contractInfo',
+                    E: 1669356423908,
+                    s: 'IOTAUSDT',
+                    ps: 'IOTAUSDT',
+                    ct: 'PERPETUAL',
+                    dt: 4133404800000,
+                    ot: 1569398400000,
+                    cs: 'TRADING',
+                    bks: [
+                        { bs: 1, bnf: 0, bnc: 5000, mmr: 0.01, cf: 0, mi: 21, ma: 50 },
+                        { bs: 2, bnf: 5000, bnc: 25000, mmr: 0.025, cf: 75, mi: 11, ma: 20 },
+                    ],
+                })
+            );
 
             const stream = websocketStreamApi.contractInfoStream(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/!contractInfo'.slice(1),
                         params as unknown as Record<string, ContractInfoStreamRequest>
@@ -741,17 +774,19 @@ describe('WebsocketMarketStreamsApi', () => {
                 updateSpeed: 'updateSpeed_example',
             };
 
-            const mockResponse = {
-                e: 'depthUpdate',
-                E: 123456789,
-                T: 123456788,
-                s: 'BTCUSDT',
-                U: 157,
-                u: 160,
-                pu: 149,
-                b: [['0.0024', '10']],
-                a: [['0.0026', '100']],
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'depthUpdate',
+                    E: 123456789,
+                    T: 123456788,
+                    s: 'BTCUSDT',
+                    U: 157,
+                    u: 160,
+                    pu: 149,
+                    b: [['0.0024', '10']],
+                    a: [['0.0026', '100']],
+                })
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@depth@<updateSpeed>'.slice(1), params as unknown as Record<string, DiffBookDepthStreamsRequest>)}`,
@@ -770,24 +805,26 @@ describe('WebsocketMarketStreamsApi', () => {
                 updateSpeed: 'updateSpeed_example',
             };
 
-            const mockResponse = {
-                e: 'depthUpdate',
-                E: 123456789,
-                T: 123456788,
-                s: 'BTCUSDT',
-                U: 157,
-                u: 160,
-                pu: 149,
-                b: [['0.0024', '10']],
-                a: [['0.0026', '100']],
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'depthUpdate',
+                    E: 123456789,
+                    T: 123456788,
+                    s: 'BTCUSDT',
+                    U: 157,
+                    u: 160,
+                    pu: 149,
+                    b: [['0.0024', '10']],
+                    a: [['0.0026', '100']],
+                })
+            );
 
             const stream = websocketStreamApi.diffBookDepthStreams(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/<symbol>@depth@<updateSpeed>'.slice(1),
                         params as unknown as Record<string, DiffBookDepthStreamsRequest>
@@ -824,17 +861,19 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: 'bookTicker',
-                u: 400900217,
-                E: 1568014460893,
-                T: 1568014460891,
-                s: 'BNBUSDT',
-                b: '25.35190000',
-                B: '31.21000000',
-                a: '25.36520000',
-                A: '40.66000000',
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'bookTicker',
+                    u: 400900217,
+                    E: 1568014460893,
+                    T: 1568014460891,
+                    s: 'BNBUSDT',
+                    b: '25.35190000',
+                    B: '31.21000000',
+                    a: '25.36520000',
+                    A: '40.66000000',
+                })
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@bookTicker'.slice(1), params as unknown as Record<string, IndividualSymbolBookTickerStreamsRequest>)}`,
@@ -852,24 +891,26 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: 'bookTicker',
-                u: 400900217,
-                E: 1568014460893,
-                T: 1568014460891,
-                s: 'BNBUSDT',
-                b: '25.35190000',
-                B: '31.21000000',
-                a: '25.36520000',
-                A: '40.66000000',
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'bookTicker',
+                    u: 400900217,
+                    E: 1568014460893,
+                    T: 1568014460891,
+                    s: 'BNBUSDT',
+                    b: '25.35190000',
+                    B: '31.21000000',
+                    a: '25.36520000',
+                    A: '40.66000000',
+                })
+            );
 
             const stream = websocketStreamApi.individualSymbolBookTickerStreams(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/<symbol>@bookTicker'.slice(1),
                         params as unknown as Record<
@@ -909,17 +950,19 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: '24hrMiniTicker',
-                E: 123456789,
-                s: 'BTCUSDT',
-                c: '0.0025',
-                o: '0.0010',
-                h: '0.0025',
-                l: '0.0010',
-                v: '10000',
-                q: '18',
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: '24hrMiniTicker',
+                    E: 123456789,
+                    s: 'BTCUSDT',
+                    c: '0.0025',
+                    o: '0.0010',
+                    h: '0.0025',
+                    l: '0.0010',
+                    v: '10000',
+                    q: '18',
+                })
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@miniTicker'.slice(1), params as unknown as Record<string, IndividualSymbolMiniTickerStreamRequest>)}`,
@@ -937,24 +980,26 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: '24hrMiniTicker',
-                E: 123456789,
-                s: 'BTCUSDT',
-                c: '0.0025',
-                o: '0.0010',
-                h: '0.0025',
-                l: '0.0010',
-                v: '10000',
-                q: '18',
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: '24hrMiniTicker',
+                    E: 123456789,
+                    s: 'BTCUSDT',
+                    c: '0.0025',
+                    o: '0.0010',
+                    h: '0.0025',
+                    l: '0.0010',
+                    v: '10000',
+                    q: '18',
+                })
+            );
 
             const stream = websocketStreamApi.individualSymbolMiniTickerStream(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/<symbol>@miniTicker'.slice(1),
                         params as unknown as Record<string, IndividualSymbolMiniTickerStreamRequest>
@@ -991,26 +1036,28 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: '24hrTicker',
-                E: 123456789,
-                s: 'BTCUSDT',
-                p: '0.0015',
-                P: '250.00',
-                w: '0.0018',
-                c: '0.0025',
-                Q: '10',
-                o: '0.0010',
-                h: '0.0025',
-                l: '0.0010',
-                v: '10000',
-                q: '18',
-                O: 0,
-                C: 86400000,
-                F: 0,
-                L: 18150,
-                n: 18151,
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: '24hrTicker',
+                    E: 123456789,
+                    s: 'BTCUSDT',
+                    p: '0.0015',
+                    P: '250.00',
+                    w: '0.0018',
+                    c: '0.0025',
+                    Q: '10',
+                    o: '0.0010',
+                    h: '0.0025',
+                    l: '0.0010',
+                    v: '10000',
+                    q: '18',
+                    O: 0,
+                    C: 86400000,
+                    F: 0,
+                    L: 18150,
+                    n: 18151,
+                })
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@ticker'.slice(1), params as unknown as Record<string, IndividualSymbolTickerStreamsRequest>)}`,
@@ -1028,33 +1075,35 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: '24hrTicker',
-                E: 123456789,
-                s: 'BTCUSDT',
-                p: '0.0015',
-                P: '250.00',
-                w: '0.0018',
-                c: '0.0025',
-                Q: '10',
-                o: '0.0010',
-                h: '0.0025',
-                l: '0.0010',
-                v: '10000',
-                q: '18',
-                O: 0,
-                C: 86400000,
-                F: 0,
-                L: 18150,
-                n: 18151,
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: '24hrTicker',
+                    E: 123456789,
+                    s: 'BTCUSDT',
+                    p: '0.0015',
+                    P: '250.00',
+                    w: '0.0018',
+                    c: '0.0025',
+                    Q: '10',
+                    o: '0.0010',
+                    h: '0.0025',
+                    l: '0.0010',
+                    v: '10000',
+                    q: '18',
+                    O: 0,
+                    C: 86400000,
+                    F: 0,
+                    L: 18150,
+                    n: 18151,
+                })
+            );
 
             const stream = websocketStreamApi.individualSymbolTickerStreams(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/<symbol>@ticker'.slice(1),
                         params as unknown as Record<string, IndividualSymbolTickerStreamsRequest>
@@ -1092,30 +1141,32 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: 'kline',
-                E: 1638747660000,
-                s: 'BTCUSDT',
-                k: {
-                    t: 1638747660000,
-                    T: 1638747719999,
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'kline',
+                    E: 1638747660000,
                     s: 'BTCUSDT',
-                    i: '1m',
-                    f: 100,
-                    L: 200,
-                    o: '0.0010',
-                    c: '0.0020',
-                    h: '0.0025',
-                    l: '0.0015',
-                    v: '1000',
-                    n: 100,
-                    x: false,
-                    q: '1.0000',
-                    V: '500',
-                    Q: '0.500',
-                    B: '123456',
-                },
-            };
+                    k: {
+                        t: 1638747660000,
+                        T: 1638747719999,
+                        s: 'BTCUSDT',
+                        i: '1m',
+                        f: 100,
+                        L: 200,
+                        o: '0.0010',
+                        c: '0.0020',
+                        h: '0.0025',
+                        l: '0.0015',
+                        v: '1000',
+                        n: 100,
+                        x: false,
+                        q: '1.0000',
+                        V: '500',
+                        Q: '0.500',
+                        B: '123456',
+                    },
+                })
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@kline_<interval>'.slice(1), params as unknown as Record<string, KlineCandlestickStreamsRequest>)}`,
@@ -1134,37 +1185,39 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: 'kline',
-                E: 1638747660000,
-                s: 'BTCUSDT',
-                k: {
-                    t: 1638747660000,
-                    T: 1638747719999,
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'kline',
+                    E: 1638747660000,
                     s: 'BTCUSDT',
-                    i: '1m',
-                    f: 100,
-                    L: 200,
-                    o: '0.0010',
-                    c: '0.0020',
-                    h: '0.0025',
-                    l: '0.0015',
-                    v: '1000',
-                    n: 100,
-                    x: false,
-                    q: '1.0000',
-                    V: '500',
-                    Q: '0.500',
-                    B: '123456',
-                },
-            };
+                    k: {
+                        t: 1638747660000,
+                        T: 1638747719999,
+                        s: 'BTCUSDT',
+                        i: '1m',
+                        f: 100,
+                        L: 200,
+                        o: '0.0010',
+                        c: '0.0020',
+                        h: '0.0025',
+                        l: '0.0015',
+                        v: '1000',
+                        n: 100,
+                        x: false,
+                        q: '1.0000',
+                        V: '500',
+                        Q: '0.500',
+                        B: '123456',
+                    },
+                })
+            );
 
             const stream = websocketStreamApi.klineCandlestickStreams(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/<symbol>@kline_<interval>'.slice(1),
                         params as unknown as Record<string, KlineCandlestickStreamsRequest>
@@ -1219,23 +1272,25 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: 'forceOrder',
-                E: 1568014460893,
-                o: {
-                    s: 'BTCUSDT',
-                    S: 'SELL',
-                    o: 'LIMIT',
-                    f: 'IOC',
-                    q: '0.014',
-                    p: '9910',
-                    ap: '9910',
-                    X: 'FILLED',
-                    l: '0.014',
-                    z: '0.014',
-                    T: 1568014460893,
-                },
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'forceOrder',
+                    E: 1568014460893,
+                    o: {
+                        s: 'BTCUSDT',
+                        S: 'SELL',
+                        o: 'LIMIT',
+                        f: 'IOC',
+                        q: '0.014',
+                        p: '9910',
+                        ap: '9910',
+                        X: 'FILLED',
+                        l: '0.014',
+                        z: '0.014',
+                        T: 1568014460893,
+                    },
+                })
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@forceOrder'.slice(1), params as unknown as Record<string, LiquidationOrderStreamsRequest>)}`,
@@ -1253,30 +1308,32 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = {
-                e: 'forceOrder',
-                E: 1568014460893,
-                o: {
-                    s: 'BTCUSDT',
-                    S: 'SELL',
-                    o: 'LIMIT',
-                    f: 'IOC',
-                    q: '0.014',
-                    p: '9910',
-                    ap: '9910',
-                    X: 'FILLED',
-                    l: '0.014',
-                    z: '0.014',
-                    T: 1568014460893,
-                },
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'forceOrder',
+                    E: 1568014460893,
+                    o: {
+                        s: 'BTCUSDT',
+                        S: 'SELL',
+                        o: 'LIMIT',
+                        f: 'IOC',
+                        q: '0.014',
+                        p: '9910',
+                        ap: '9910',
+                        X: 'FILLED',
+                        l: '0.014',
+                        z: '0.014',
+                        T: 1568014460893,
+                    },
+                })
+            );
 
             const stream = websocketStreamApi.liquidationOrderStreams(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/<symbol>@forceOrder'.slice(1),
                         params as unknown as Record<string, LiquidationOrderStreamsRequest>
@@ -1314,16 +1371,18 @@ describe('WebsocketMarketStreamsApi', () => {
                 updateSpeed: 'updateSpeed_example',
             };
 
-            const mockResponse = {
-                e: 'markPriceUpdate',
-                E: 1562305380000,
-                s: 'BTCUSDT',
-                p: '11794.15000000',
-                i: '11784.62659091',
-                P: '11784.25641265',
-                r: '0.00038167',
-                T: 1562306400000,
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'markPriceUpdate',
+                    E: 1562305380000,
+                    s: 'BTCUSDT',
+                    p: '11794.15000000',
+                    i: '11784.62659091',
+                    P: '11784.25641265',
+                    r: '0.00038167',
+                    T: 1562306400000,
+                })
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@markPrice@<updateSpeed>'.slice(1), params as unknown as Record<string, MarkPriceStreamRequest>)}`,
@@ -1342,23 +1401,25 @@ describe('WebsocketMarketStreamsApi', () => {
                 updateSpeed: 'updateSpeed_example',
             };
 
-            const mockResponse = {
-                e: 'markPriceUpdate',
-                E: 1562305380000,
-                s: 'BTCUSDT',
-                p: '11794.15000000',
-                i: '11784.62659091',
-                P: '11784.25641265',
-                r: '0.00038167',
-                T: 1562306400000,
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'markPriceUpdate',
+                    E: 1562305380000,
+                    s: 'BTCUSDT',
+                    p: '11794.15000000',
+                    i: '11784.62659091',
+                    P: '11784.25641265',
+                    r: '0.00038167',
+                    T: 1562306400000,
+                })
+            );
 
             const stream = websocketStreamApi.markPriceStream(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/<symbol>@markPrice@<updateSpeed>'.slice(1),
                         params as unknown as Record<string, MarkPriceStreamRequest>
@@ -1395,18 +1456,20 @@ describe('WebsocketMarketStreamsApi', () => {
                 updateSpeed: 'updateSpeed_example',
             };
 
-            const mockResponse = [
-                {
-                    e: 'markPriceUpdate',
-                    E: 1562305380000,
-                    s: 'BTCUSDT',
-                    p: '11185.87786614',
-                    i: '11784.62659091',
-                    P: '11784.25641265',
-                    r: '0.00030000',
-                    T: 1562306400000,
-                },
-            ];
+            const mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        e: 'markPriceUpdate',
+                        E: 1562305380000,
+                        s: 'BTCUSDT',
+                        p: '11185.87786614',
+                        i: '11784.62659091',
+                        P: '11784.25641265',
+                        r: '0.00030000',
+                        T: 1562306400000,
+                    },
+                ])
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/!markPrice@arr@<updateSpeed>'.slice(1), params as unknown as Record<string, MarkPriceStreamForAllMarketRequest>)}`,
@@ -1424,25 +1487,27 @@ describe('WebsocketMarketStreamsApi', () => {
                 updateSpeed: 'updateSpeed_example',
             };
 
-            const mockResponse = [
-                {
-                    e: 'markPriceUpdate',
-                    E: 1562305380000,
-                    s: 'BTCUSDT',
-                    p: '11185.87786614',
-                    i: '11784.62659091',
-                    P: '11784.25641265',
-                    r: '0.00030000',
-                    T: 1562306400000,
-                },
-            ];
+            const mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        e: 'markPriceUpdate',
+                        E: 1562305380000,
+                        s: 'BTCUSDT',
+                        p: '11185.87786614',
+                        i: '11784.62659091',
+                        P: '11784.25641265',
+                        r: '0.00030000',
+                        T: 1562306400000,
+                    },
+                ])
+            );
 
             const stream = websocketStreamApi.markPriceStreamForAllMarket(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/!markPrice@arr@<updateSpeed>'.slice(1),
                         params as unknown as Record<string, MarkPriceStreamForAllMarketRequest>
@@ -1462,36 +1527,38 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = [
-                {
-                    e: 'assetIndexUpdate',
-                    E: 1686749230000,
-                    s: 'ADAUSD',
-                    i: '0.27462452',
-                    b: '0.10000000',
-                    a: '0.10000000',
-                    B: '0.24716207',
-                    A: '0.30208698',
-                    q: '0.05000000',
-                    g: '0.05000000',
-                    Q: '0.26089330',
-                    G: '0.28835575',
-                },
-                {
-                    e: 'assetIndexUpdate',
-                    E: 1686749230000,
-                    s: 'USDTUSD',
-                    i: '0.99987691',
-                    b: '0.00010000',
-                    a: '0.00010000',
-                    B: '0.99977692',
-                    A: '0.99997689',
-                    q: '0.00010000',
-                    g: '0.00010000',
-                    Q: '0.99977692',
-                    G: '0.99997689',
-                },
-            ];
+            const mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        e: 'assetIndexUpdate',
+                        E: 1686749230000,
+                        s: 'ADAUSD',
+                        i: '0.27462452',
+                        b: '0.10000000',
+                        a: '0.10000000',
+                        B: '0.24716207',
+                        A: '0.30208698',
+                        q: '0.05000000',
+                        g: '0.05000000',
+                        Q: '0.26089330',
+                        G: '0.28835575',
+                    },
+                    {
+                        e: 'assetIndexUpdate',
+                        E: 1686749230000,
+                        s: 'USDTUSD',
+                        i: '0.99987691',
+                        b: '0.00010000',
+                        a: '0.00010000',
+                        B: '0.99977692',
+                        A: '0.99997689',
+                        q: '0.00010000',
+                        g: '0.00010000',
+                        Q: '0.99977692',
+                        G: '0.99997689',
+                    },
+                ])
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/!assetIndex@arr'.slice(1), params as unknown as Record<string, MultiAssetsModeAssetIndexRequest>)}`,
@@ -1508,43 +1575,45 @@ describe('WebsocketMarketStreamsApi', () => {
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
-            const mockResponse = [
-                {
-                    e: 'assetIndexUpdate',
-                    E: 1686749230000,
-                    s: 'ADAUSD',
-                    i: '0.27462452',
-                    b: '0.10000000',
-                    a: '0.10000000',
-                    B: '0.24716207',
-                    A: '0.30208698',
-                    q: '0.05000000',
-                    g: '0.05000000',
-                    Q: '0.26089330',
-                    G: '0.28835575',
-                },
-                {
-                    e: 'assetIndexUpdate',
-                    E: 1686749230000,
-                    s: 'USDTUSD',
-                    i: '0.99987691',
-                    b: '0.00010000',
-                    a: '0.00010000',
-                    B: '0.99977692',
-                    A: '0.99997689',
-                    q: '0.00010000',
-                    g: '0.00010000',
-                    Q: '0.99977692',
-                    G: '0.99997689',
-                },
-            ];
+            const mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        e: 'assetIndexUpdate',
+                        E: 1686749230000,
+                        s: 'ADAUSD',
+                        i: '0.27462452',
+                        b: '0.10000000',
+                        a: '0.10000000',
+                        B: '0.24716207',
+                        A: '0.30208698',
+                        q: '0.05000000',
+                        g: '0.05000000',
+                        Q: '0.26089330',
+                        G: '0.28835575',
+                    },
+                    {
+                        e: 'assetIndexUpdate',
+                        E: 1686749230000,
+                        s: 'USDTUSD',
+                        i: '0.99987691',
+                        b: '0.00010000',
+                        a: '0.00010000',
+                        B: '0.99977692',
+                        A: '0.99997689',
+                        q: '0.00010000',
+                        g: '0.00010000',
+                        Q: '0.99977692',
+                        G: '0.99997689',
+                    },
+                ])
+            );
 
             const stream = websocketStreamApi.multiAssetsModeAssetIndex(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/!assetIndex@arr'.slice(1),
                         params as unknown as Record<string, MultiAssetsModeAssetIndexRequest>
@@ -1567,29 +1636,31 @@ describe('WebsocketMarketStreamsApi', () => {
                 updateSpeed: 'updateSpeed_example',
             };
 
-            const mockResponse = {
-                e: 'depthUpdate',
-                E: 1571889248277,
-                T: 1571889248276,
-                s: 'BTCUSDT',
-                U: 390497796,
-                u: 390497878,
-                pu: 390497794,
-                b: [
-                    ['7403.89', '0.002'],
-                    ['7403.90', '3.906'],
-                    ['7404.00', '1.428'],
-                    ['7404.85', '5.239'],
-                    ['7405.43', '2.562'],
-                ],
-                a: [
-                    ['7405.96', '3.340'],
-                    ['7406.63', '4.525'],
-                    ['7407.08', '2.475'],
-                    ['7407.15', '4.800'],
-                    ['7407.20', '0.175'],
-                ],
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'depthUpdate',
+                    E: 1571889248277,
+                    T: 1571889248276,
+                    s: 'BTCUSDT',
+                    U: 390497796,
+                    u: 390497878,
+                    pu: 390497794,
+                    b: [
+                        ['7403.89', '0.002'],
+                        ['7403.90', '3.906'],
+                        ['7404.00', '1.428'],
+                        ['7404.85', '5.239'],
+                        ['7405.43', '2.562'],
+                    ],
+                    a: [
+                        ['7405.96', '3.340'],
+                        ['7406.63', '4.525'],
+                        ['7407.08', '2.475'],
+                        ['7407.15', '4.800'],
+                        ['7407.20', '0.175'],
+                    ],
+                })
+            );
 
             mockSubscription(
                 `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@depth<levels>@<updateSpeed>'.slice(1), params as unknown as Record<string, PartialBookDepthStreamsRequest>)}`,
@@ -1609,36 +1680,38 @@ describe('WebsocketMarketStreamsApi', () => {
                 updateSpeed: 'updateSpeed_example',
             };
 
-            const mockResponse = {
-                e: 'depthUpdate',
-                E: 1571889248277,
-                T: 1571889248276,
-                s: 'BTCUSDT',
-                U: 390497796,
-                u: 390497878,
-                pu: 390497794,
-                b: [
-                    ['7403.89', '0.002'],
-                    ['7403.90', '3.906'],
-                    ['7404.00', '1.428'],
-                    ['7404.85', '5.239'],
-                    ['7405.43', '2.562'],
-                ],
-                a: [
-                    ['7405.96', '3.340'],
-                    ['7406.63', '4.525'],
-                    ['7407.08', '2.475'],
-                    ['7407.15', '4.800'],
-                    ['7407.20', '0.175'],
-                ],
-            };
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'depthUpdate',
+                    E: 1571889248277,
+                    T: 1571889248276,
+                    s: 'BTCUSDT',
+                    U: 390497796,
+                    u: 390497878,
+                    pu: 390497794,
+                    b: [
+                        ['7403.89', '0.002'],
+                        ['7403.90', '3.906'],
+                        ['7404.00', '1.428'],
+                        ['7404.85', '5.239'],
+                        ['7405.43', '2.562'],
+                    ],
+                    a: [
+                        ['7405.96', '3.340'],
+                        ['7406.63', '4.525'],
+                        ['7407.08', '2.475'],
+                        ['7407.15', '4.800'],
+                        ['7407.20', '0.175'],
+                    ],
+                })
+            );
 
             const stream = websocketStreamApi.partialBookDepthStreams(params);
             const mockCallback = jest.fn(() => {});
             stream.on('message', mockCallback);
 
             websocketStreamClient['onMessage'](
-                JSON.stringify({
+                JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/<symbol>@depth<levels>@<updateSpeed>'.slice(1),
                         params as unknown as Record<string, PartialBookDepthStreamsRequest>

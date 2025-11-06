@@ -32,10 +32,10 @@ export interface CompositeIndexSymbolInformationStreamsResponse {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CompositeIndexSymbolInformationStreamsResponse
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}

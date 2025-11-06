@@ -21,22 +21,22 @@
 export interface ContractInfoStreamResponseBksInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ContractInfoStreamResponseBksInner
      */
-    bs?: number;
+    bs?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ContractInfoStreamResponseBksInner
      */
-    bnf?: number;
+    bnf?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ContractInfoStreamResponseBksInner
      */
-    bnc?: number;
+    bnc?: number | bigint;
     /**
      *
      * @type {number}
@@ -45,20 +45,20 @@ export interface ContractInfoStreamResponseBksInner {
     mmr?: number;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ContractInfoStreamResponseBksInner
      */
-    cf?: number;
+    cf?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ContractInfoStreamResponseBksInner
      */
-    mi?: number;
+    mi?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ContractInfoStreamResponseBksInner
      */
-    ma?: number;
+    ma?: number | bigint;
 }

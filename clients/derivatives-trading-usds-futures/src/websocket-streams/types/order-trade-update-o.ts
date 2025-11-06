@@ -87,10 +87,10 @@ export interface OrderTradeUpdateO {
     X?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderTradeUpdateO
      */
-    i?: number;
+    i?: number | bigint;
     /**
      *
      * @type {string}
@@ -123,16 +123,16 @@ export interface OrderTradeUpdateO {
     n?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderTradeUpdateO
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderTradeUpdateO
      */
-    t?: number;
+    t?: number | bigint;
     /**
      *
      * @type {string}
@@ -201,16 +201,16 @@ export interface OrderTradeUpdateO {
     pP?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderTradeUpdateO
      */
-    si?: number;
+    si?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderTradeUpdateO
      */
-    ss?: number;
+    ss?: number | bigint;
     /**
      *
      * @type {string}
@@ -231,10 +231,10 @@ export interface OrderTradeUpdateO {
     pm?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderTradeUpdateO
      */
-    gtd?: number;
+    gtd?: number | bigint;
     /**
      *
      * @type {string}

@@ -123,10 +123,10 @@ export interface PlaceMultipleOrdersBatchOrdersParameterInner {
     selfTradePreventionMode?: PlaceMultipleOrdersBatchOrdersParameterInnerSelfTradePreventionModeEnum;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PlaceMultipleOrdersBatchOrdersParameterInner
      */
-    goodTillDate?: number;
+    goodTillDate?: number | bigint;
 }
 
 export const PlaceMultipleOrdersBatchOrdersParameterInnerSideEnum = {

@@ -21,28 +21,28 @@
 export interface NotionalAndLeverageBracketsResponse1InnerBracketsInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NotionalAndLeverageBracketsResponse1InnerBracketsInner
      */
-    bracket?: number;
+    bracket?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NotionalAndLeverageBracketsResponse1InnerBracketsInner
      */
-    initialLeverage?: number;
+    initialLeverage?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NotionalAndLeverageBracketsResponse1InnerBracketsInner
      */
-    notionalCap?: number;
+    notionalCap?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof NotionalAndLeverageBracketsResponse1InnerBracketsInner
      */
-    notionalFloor?: number;
+    notionalFloor?: number | bigint;
     /**
      *
      * @type {number}

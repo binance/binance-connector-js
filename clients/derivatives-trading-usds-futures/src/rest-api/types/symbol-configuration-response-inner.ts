@@ -39,10 +39,10 @@ export interface SymbolConfigurationResponseInner {
     isAutoAddMargin?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SymbolConfigurationResponseInner
      */
-    leverage?: number;
+    leverage?: number | bigint;
     /**
      *
      * @type {string}

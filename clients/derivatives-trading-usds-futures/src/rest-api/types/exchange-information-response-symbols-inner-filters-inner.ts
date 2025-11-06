@@ -63,10 +63,10 @@ export interface ExchangeInformationResponseSymbolsInnerFiltersInner {
     stepSize?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExchangeInformationResponseSymbolsInnerFiltersInner
      */
-    limit?: number;
+    limit?: number | bigint;
     /**
      *
      * @type {string}

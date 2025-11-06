@@ -45,10 +45,10 @@ export interface CancelOrderResponseResult {
     executedQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelOrderResponseResult
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -135,10 +135,10 @@ export interface CancelOrderResponseResult {
     priceRate?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelOrderResponseResult
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -165,8 +165,8 @@ export interface CancelOrderResponseResult {
     selfTradePreventionMode?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CancelOrderResponseResult
      */
-    goodTillDate?: number;
+    goodTillDate?: number | bigint;
 }

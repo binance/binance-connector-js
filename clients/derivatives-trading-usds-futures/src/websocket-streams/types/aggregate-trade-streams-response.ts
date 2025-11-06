@@ -27,10 +27,10 @@ export interface AggregateTradeStreamsResponse {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AggregateTradeStreamsResponse
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}
@@ -39,10 +39,10 @@ export interface AggregateTradeStreamsResponse {
     s?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AggregateTradeStreamsResponse
      */
-    a?: number;
+    a?: number | bigint;
     /**
      *
      * @type {string}
@@ -57,22 +57,22 @@ export interface AggregateTradeStreamsResponse {
     q?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AggregateTradeStreamsResponse
      */
-    f?: number;
+    f?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AggregateTradeStreamsResponse
      */
-    l?: number;
+    l?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AggregateTradeStreamsResponse
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {boolean}

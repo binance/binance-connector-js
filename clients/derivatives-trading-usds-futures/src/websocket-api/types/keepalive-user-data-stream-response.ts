@@ -35,10 +35,10 @@ export interface KeepaliveUserDataStreamResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof KeepaliveUserDataStreamResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {KeepaliveUserDataStreamResponseResult}

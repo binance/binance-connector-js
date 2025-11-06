@@ -21,10 +21,10 @@
 export interface RecentTradesListResponseInner {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RecentTradesListResponseInner
      */
-    id?: number;
+    id?: number | bigint;
     /**
      *
      * @type {string}
@@ -45,10 +45,10 @@ export interface RecentTradesListResponseInner {
     quoteQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof RecentTradesListResponseInner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {boolean}

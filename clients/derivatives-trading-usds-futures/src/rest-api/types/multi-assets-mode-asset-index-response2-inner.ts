@@ -27,10 +27,10 @@ export interface MultiAssetsModeAssetIndexResponse2Inner {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MultiAssetsModeAssetIndexResponse2Inner
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}

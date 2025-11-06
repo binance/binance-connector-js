@@ -35,10 +35,10 @@ export interface PositionInformationResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PositionInformationResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {Array<PositionInformationResponseResultInner>}

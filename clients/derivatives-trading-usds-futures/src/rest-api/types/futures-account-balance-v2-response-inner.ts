@@ -69,8 +69,8 @@ export interface FuturesAccountBalanceV2ResponseInner {
     marginAvailable?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FuturesAccountBalanceV2ResponseInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

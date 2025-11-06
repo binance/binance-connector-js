@@ -21,10 +21,10 @@
 export interface GridUpdateGu {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GridUpdateGu
      */
-    si?: number;
+    si?: number | bigint;
     /**
      *
      * @type {string}
@@ -75,8 +75,8 @@ export interface GridUpdateGu {
     mp?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GridUpdateGu
      */
-    ut?: number;
+    ut?: number | bigint;
 }

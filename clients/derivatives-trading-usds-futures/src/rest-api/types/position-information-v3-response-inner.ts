@@ -117,10 +117,10 @@ export interface PositionInformationV3ResponseInner {
     openOrderInitialMargin?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PositionInformationV3ResponseInner
      */
-    adl?: number;
+    adl?: number | bigint;
     /**
      *
      * @type {string}
@@ -135,8 +135,8 @@ export interface PositionInformationV3ResponseInner {
     askNotional?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PositionInformationV3ResponseInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

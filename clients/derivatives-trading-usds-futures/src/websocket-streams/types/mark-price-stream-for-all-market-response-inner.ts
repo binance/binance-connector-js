@@ -27,10 +27,10 @@ export interface MarkPriceStreamForAllMarketResponseInner {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarkPriceStreamForAllMarketResponseInner
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {string}
@@ -63,8 +63,8 @@ export interface MarkPriceStreamForAllMarketResponseInner {
     r?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarkPriceStreamForAllMarketResponseInner
      */
-    T?: number;
+    T?: number | bigint;
 }

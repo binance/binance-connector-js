@@ -35,10 +35,10 @@ export interface FuturesAccountBalanceResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FuturesAccountBalanceResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {Array<FuturesAccountBalanceV2ResponseResultInner>}

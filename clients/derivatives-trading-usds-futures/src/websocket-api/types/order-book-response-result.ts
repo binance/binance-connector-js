@@ -29,22 +29,22 @@ import type { OrderBookResponseResultBidsItem } from './order-book-response-resu
 export interface OrderBookResponseResult {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderBookResponseResult
      */
-    lastUpdateId?: number;
+    lastUpdateId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderBookResponseResult
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OrderBookResponseResult
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {Array<OrderBookResponseResultBidsItem>}

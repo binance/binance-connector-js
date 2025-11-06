@@ -32,10 +32,10 @@ export interface CloseUserDataStreamResponse {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof CloseUserDataStreamResponse
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {object}

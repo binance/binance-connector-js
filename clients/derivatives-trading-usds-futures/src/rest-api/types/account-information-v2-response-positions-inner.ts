@@ -105,8 +105,8 @@ export interface AccountInformationV2ResponsePositionsInner {
     positionAmt?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountInformationV2ResponsePositionsInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

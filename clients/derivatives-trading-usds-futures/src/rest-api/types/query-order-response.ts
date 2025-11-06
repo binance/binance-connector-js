@@ -45,10 +45,10 @@ export interface QueryOrderResponse {
     executedQty?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryOrderResponse
      */
-    orderId?: number;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -111,10 +111,10 @@ export interface QueryOrderResponse {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryOrderResponse
      */
-    time?: number;
+    time?: number | bigint;
     /**
      *
      * @type {string}
@@ -141,10 +141,10 @@ export interface QueryOrderResponse {
     priceRate?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryOrderResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -171,8 +171,8 @@ export interface QueryOrderResponse {
     selfTradePreventionMode?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof QueryOrderResponse
      */
-    goodTillDate?: number;
+    goodTillDate?: number | bigint;
 }

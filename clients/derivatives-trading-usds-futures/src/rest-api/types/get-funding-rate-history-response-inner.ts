@@ -33,10 +33,10 @@ export interface GetFundingRateHistoryResponseInner {
     fundingRate?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFundingRateHistoryResponseInner
      */
-    fundingTime?: number;
+    fundingTime?: number | bigint;
     /**
      *
      * @type {string}

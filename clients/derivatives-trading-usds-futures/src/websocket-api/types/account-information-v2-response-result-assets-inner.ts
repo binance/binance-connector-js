@@ -93,10 +93,10 @@ export interface AccountInformationV2ResponseResultAssetsInner {
     maxWithdrawAmount?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountInformationV2ResponseResultAssetsInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {boolean}

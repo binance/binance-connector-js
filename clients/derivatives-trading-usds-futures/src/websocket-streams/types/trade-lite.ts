@@ -21,16 +21,16 @@
 export interface TradeLite {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeLite
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeLite
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {string}
@@ -81,14 +81,14 @@ export interface TradeLite {
     l?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeLite
      */
-    t?: number;
+    t?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof TradeLite
      */
-    i?: number;
+    i?: number | bigint;
 }

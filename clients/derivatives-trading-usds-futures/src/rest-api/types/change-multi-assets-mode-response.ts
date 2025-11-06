@@ -21,10 +21,10 @@
 export interface ChangeMultiAssetsModeResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ChangeMultiAssetsModeResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}

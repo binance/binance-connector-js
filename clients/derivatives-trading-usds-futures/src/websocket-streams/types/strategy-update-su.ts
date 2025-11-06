@@ -21,10 +21,10 @@
 export interface StrategyUpdateSu {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StrategyUpdateSu
      */
-    si?: number;
+    si?: number | bigint;
     /**
      *
      * @type {string}
@@ -45,14 +45,14 @@ export interface StrategyUpdateSu {
     s?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StrategyUpdateSu
      */
-    ut?: number;
+    ut?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof StrategyUpdateSu
      */
-    c?: number;
+    c?: number | bigint;
 }

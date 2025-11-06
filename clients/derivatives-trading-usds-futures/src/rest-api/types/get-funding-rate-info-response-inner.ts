@@ -39,10 +39,10 @@ export interface GetFundingRateInfoResponseInner {
     adjustedFundingRateFloor?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFundingRateInfoResponseInner
      */
-    fundingIntervalHours?: number;
+    fundingIntervalHours?: number | bigint;
     /**
      *
      * @type {boolean}

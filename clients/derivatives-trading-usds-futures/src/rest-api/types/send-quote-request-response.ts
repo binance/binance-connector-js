@@ -39,10 +39,10 @@ export interface SendQuoteRequestResponse {
     inverseRatio?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SendQuoteRequestResponse
      */
-    validTimestamp?: number;
+    validTimestamp?: number | bigint;
     /**
      *
      * @type {string}

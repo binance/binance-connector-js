@@ -41,8 +41,8 @@ export interface GetOrderModifyHistoryResponseInnerAmendment {
     origQty?: GetOrderModifyHistoryResponseInnerAmendmentOrigQty;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetOrderModifyHistoryResponseInnerAmendment
      */
-    count?: number;
+    count?: number | bigint;
 }

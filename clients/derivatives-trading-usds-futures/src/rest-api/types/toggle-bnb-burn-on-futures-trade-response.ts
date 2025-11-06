@@ -21,10 +21,10 @@
 export interface ToggleBnbBurnOnFuturesTradeResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ToggleBnbBurnOnFuturesTradeResponse
      */
-    code?: number;
+    code?: number | bigint;
     /**
      *
      * @type {string}

@@ -44,16 +44,16 @@ export interface ExchangeInformationResponseSymbolsInner {
     contractType?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
-    deliveryDate?: number;
+    deliveryDate?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
-    onboardDate?: number;
+    onboardDate?: number | bigint;
     /**
      *
      * @type {string}
@@ -92,28 +92,28 @@ export interface ExchangeInformationResponseSymbolsInner {
     marginAsset?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
-    pricePrecision?: number;
+    pricePrecision?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
-    quantityPrecision?: number;
+    quantityPrecision?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
-    baseAssetPrecision?: number;
+    baseAssetPrecision?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
-    quotePrecision?: number;
+    quotePrecision?: number | bigint;
     /**
      *
      * @type {string}
@@ -128,10 +128,10 @@ export interface ExchangeInformationResponseSymbolsInner {
     underlyingSubType?: Array<string>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
-    settlePlan?: number;
+    settlePlan?: number | bigint;
     /**
      *
      * @type {string}

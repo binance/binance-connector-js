@@ -29,16 +29,16 @@ import type { AccountConfigUpdateAi } from './account-config-update-ai';
 export interface AccountConfigUpdate {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountConfigUpdate
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountConfigUpdate
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {AccountConfigUpdateAc}

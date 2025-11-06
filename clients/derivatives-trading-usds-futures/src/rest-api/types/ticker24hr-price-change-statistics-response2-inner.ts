@@ -87,32 +87,32 @@ export interface Ticker24hrPriceChangeStatisticsResponse2Inner {
     quoteVolume?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Ticker24hrPriceChangeStatisticsResponse2Inner
      */
-    openTime?: number;
+    openTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Ticker24hrPriceChangeStatisticsResponse2Inner
      */
-    closeTime?: number;
+    closeTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Ticker24hrPriceChangeStatisticsResponse2Inner
      */
-    firstId?: number;
+    firstId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Ticker24hrPriceChangeStatisticsResponse2Inner
      */
-    lastId?: number;
+    lastId?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof Ticker24hrPriceChangeStatisticsResponse2Inner
      */
-    count?: number;
+    count?: number | bigint;
 }

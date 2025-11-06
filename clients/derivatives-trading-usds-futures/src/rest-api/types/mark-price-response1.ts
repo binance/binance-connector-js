@@ -57,14 +57,14 @@ export interface MarkPriceResponse1 {
     interestRate?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarkPriceResponse1
      */
-    nextFundingTime?: number;
+    nextFundingTime?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarkPriceResponse1
      */
-    time?: number;
+    time?: number | bigint;
 }

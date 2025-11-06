@@ -27,10 +27,10 @@ export interface FuturesTradingQuantitativeRulesIndicatorsResponseIndicatorsBTCU
     isLocked?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FuturesTradingQuantitativeRulesIndicatorsResponseIndicatorsBTCUSDTInner
      */
-    plannedRecoverTime?: number;
+    plannedRecoverTime?: number | bigint;
     /**
      *
      * @type {string}

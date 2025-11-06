@@ -32,10 +32,10 @@ export interface AllMarketLiquidationOrderStreamsResponse {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AllMarketLiquidationOrderStreamsResponse
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
      * @type {AllMarketLiquidationOrderStreamsResponseO}

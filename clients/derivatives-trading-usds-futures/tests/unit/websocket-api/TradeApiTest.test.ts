@@ -15,6 +15,7 @@
 
 import WebSocketClient from 'ws';
 import { EventEmitter } from 'events';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { jest, expect, beforeEach, afterEach, describe, it } from '@jest/globals';
 import { ConfigurationWebsocketAPI, WebsocketAPIBase, randomString } from '@binance/common';
 
@@ -84,46 +85,48 @@ describe('TradeApi', () => {
         });
 
         it('should execute cancelOrder() successfully', async () => {
-            mockResponse = {
-                id: '5633b6a2-90a9-4192-83e7-925c90b6a2fd',
-                status: 200,
-                result: {
-                    clientOrderId: 'myOrder1',
-                    cumQty: '0',
-                    cumQuote: '0',
-                    executedQty: '0',
-                    orderId: 283194212,
-                    origQty: '11',
-                    origType: 'TRAILING_STOP_MARKET',
-                    price: '0',
-                    reduceOnly: false,
-                    side: 'BUY',
-                    positionSide: 'SHORT',
-                    status: 'CANCELED',
-                    stopPrice: '9300',
-                    closePosition: false,
-                    symbol: 'BTCUSDT',
-                    timeInForce: 'GTC',
-                    type: 'TRAILING_STOP_MARKET',
-                    activatePrice: '9020',
-                    priceRate: '0.3',
-                    updateTime: 1571110484038,
-                    workingType: 'CONTRACT_PRICE',
-                    priceProtect: false,
-                    priceMatch: 'NONE',
-                    selfTradePreventionMode: 'NONE',
-                    goodTillDate: 0,
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 2400,
-                        count: 1,
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '5633b6a2-90a9-4192-83e7-925c90b6a2fd',
+                    status: 200,
+                    result: {
+                        clientOrderId: 'myOrder1',
+                        cumQty: '0',
+                        cumQuote: '0',
+                        executedQty: '0',
+                        orderId: 283194212,
+                        origQty: '11',
+                        origType: 'TRAILING_STOP_MARKET',
+                        price: '0',
+                        reduceOnly: false,
+                        side: 'BUY',
+                        positionSide: 'SHORT',
+                        status: 'CANCELED',
+                        stopPrice: '9300',
+                        closePosition: false,
+                        symbol: 'BTCUSDT',
+                        timeInForce: 'GTC',
+                        type: 'TRAILING_STOP_MARKET',
+                        activatePrice: '9020',
+                        priceRate: '0.3',
+                        updateTime: 1571110484038,
+                        workingType: 'CONTRACT_PRICE',
+                        priceProtect: false,
+                        priceMatch: 'NONE',
+                        selfTradePreventionMode: 'NONE',
+                        goodTillDate: 0,
                     },
-                ],
-            };
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 2400,
+                            count: 1,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             const params: CancelOrderRequest = {
@@ -143,7 +146,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -199,7 +202,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -281,59 +284,61 @@ describe('TradeApi', () => {
         });
 
         it('should execute modifyOrder() successfully', async () => {
-            mockResponse = {
-                id: 'c8c271ba-de70-479e-870c-e64951c753d9',
-                status: 200,
-                result: {
-                    orderId: 328971409,
-                    symbol: 'BTCUSDT',
-                    status: 'NEW',
-                    clientOrderId: 'xGHfltUMExx0TbQstQQfRX',
-                    price: '43769.10',
-                    avgPrice: '0.00',
-                    origQty: '0.110',
-                    executedQty: '0.000',
-                    cumQty: '0.000',
-                    cumQuote: '0.00000',
-                    timeInForce: 'GTC',
-                    type: 'LIMIT',
-                    reduceOnly: false,
-                    closePosition: false,
-                    side: 'SELL',
-                    positionSide: 'SHORT',
-                    stopPrice: '0.00',
-                    workingType: 'CONTRACT_PRICE',
-                    priceProtect: false,
-                    origType: 'LIMIT',
-                    priceMatch: 'NONE',
-                    selfTradePreventionMode: 'NONE',
-                    goodTillDate: 0,
-                    updateTime: 1703426756190,
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'ORDERS',
-                        interval: 'SECOND',
-                        intervalNum: 10,
-                        limit: 300,
-                        count: 1,
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: 'c8c271ba-de70-479e-870c-e64951c753d9',
+                    status: 200,
+                    result: {
+                        orderId: 328971409,
+                        symbol: 'BTCUSDT',
+                        status: 'NEW',
+                        clientOrderId: 'xGHfltUMExx0TbQstQQfRX',
+                        price: '43769.10',
+                        avgPrice: '0.00',
+                        origQty: '0.110',
+                        executedQty: '0.000',
+                        cumQty: '0.000',
+                        cumQuote: '0.00000',
+                        timeInForce: 'GTC',
+                        type: 'LIMIT',
+                        reduceOnly: false,
+                        closePosition: false,
+                        side: 'SELL',
+                        positionSide: 'SHORT',
+                        stopPrice: '0.00',
+                        workingType: 'CONTRACT_PRICE',
+                        priceProtect: false,
+                        origType: 'LIMIT',
+                        priceMatch: 'NONE',
+                        selfTradePreventionMode: 'NONE',
+                        goodTillDate: 0,
+                        updateTime: 1703426756190,
                     },
-                    {
-                        rateLimitType: 'ORDERS',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 1200,
-                        count: 1,
-                    },
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 2400,
-                        count: 1,
-                    },
-                ],
-            };
+                    rateLimits: [
+                        {
+                            rateLimitType: 'ORDERS',
+                            interval: 'SECOND',
+                            intervalNum: 10,
+                            limit: 300,
+                            count: 1,
+                        },
+                        {
+                            rateLimitType: 'ORDERS',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 1200,
+                            count: 1,
+                        },
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 2400,
+                            count: 1,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             const params: ModifyOrderRequest = {
@@ -356,7 +361,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -415,7 +420,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -500,59 +505,61 @@ describe('TradeApi', () => {
         });
 
         it('should execute newOrder() successfully', async () => {
-            mockResponse = {
-                id: '3f7df6e3-2df4-44b9-9919-d2f38f90a99a',
-                status: 200,
-                result: {
-                    orderId: 325078477,
-                    symbol: 'BTCUSDT',
-                    status: 'NEW',
-                    clientOrderId: 'iCXL1BywlBaf2sesNUrVl3',
-                    price: '43187.00',
-                    avgPrice: '0.00',
-                    origQty: '0.100',
-                    executedQty: '0.000',
-                    cumQty: '0.000',
-                    cumQuote: '0.00000',
-                    timeInForce: 'GTC',
-                    type: 'LIMIT',
-                    reduceOnly: false,
-                    closePosition: false,
-                    side: 'BUY',
-                    positionSide: 'BOTH',
-                    stopPrice: '0.00',
-                    workingType: 'CONTRACT_PRICE',
-                    priceProtect: false,
-                    origType: 'LIMIT',
-                    priceMatch: 'NONE',
-                    selfTradePreventionMode: 'NONE',
-                    goodTillDate: 0,
-                    updateTime: 1702555534435,
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'ORDERS',
-                        interval: 'SECOND',
-                        intervalNum: 10,
-                        limit: 300,
-                        count: 1,
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '3f7df6e3-2df4-44b9-9919-d2f38f90a99a',
+                    status: 200,
+                    result: {
+                        orderId: 325078477,
+                        symbol: 'BTCUSDT',
+                        status: 'NEW',
+                        clientOrderId: 'iCXL1BywlBaf2sesNUrVl3',
+                        price: '43187.00',
+                        avgPrice: '0.00',
+                        origQty: '0.100',
+                        executedQty: '0.000',
+                        cumQty: '0.000',
+                        cumQuote: '0.00000',
+                        timeInForce: 'GTC',
+                        type: 'LIMIT',
+                        reduceOnly: false,
+                        closePosition: false,
+                        side: 'BUY',
+                        positionSide: 'BOTH',
+                        stopPrice: '0.00',
+                        workingType: 'CONTRACT_PRICE',
+                        priceProtect: false,
+                        origType: 'LIMIT',
+                        priceMatch: 'NONE',
+                        selfTradePreventionMode: 'NONE',
+                        goodTillDate: 0,
+                        updateTime: 1702555534435,
                     },
-                    {
-                        rateLimitType: 'ORDERS',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 1200,
-                        count: 1,
-                    },
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 2400,
-                        count: 1,
-                    },
-                ],
-            };
+                    rateLimits: [
+                        {
+                            rateLimitType: 'ORDERS',
+                            interval: 'SECOND',
+                            intervalNum: 10,
+                            limit: 300,
+                            count: 1,
+                        },
+                        {
+                            rateLimitType: 'ORDERS',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 1200,
+                            count: 1,
+                        },
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 2400,
+                            count: 1,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             const params: NewOrderRequest = {
@@ -574,7 +581,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -632,7 +639,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -716,75 +723,77 @@ describe('TradeApi', () => {
         });
 
         it('should execute positionInformation() successfully', async () => {
-            mockResponse = {
-                id: '605a6d20-6588-4cb9-afa0-b0ab087507ba',
-                status: 200,
-                result: [
-                    {
-                        entryPrice: '0.00000',
-                        breakEvenPrice: '0.0',
-                        marginType: 'isolated',
-                        isAutoAddMargin: 'false',
-                        isolatedMargin: '0.00000000',
-                        leverage: '10',
-                        liquidationPrice: '0',
-                        markPrice: '6679.50671178',
-                        maxNotionalValue: '20000000',
-                        positionAmt: '0.000',
-                        notional: '0',
-                        isolatedWallet: '0',
-                        symbol: 'BTCUSDT',
-                        unRealizedProfit: '0.00000000',
-                        positionSide: 'BOTH',
-                        updateTime: 0,
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        positionAmt: '0.001',
-                        entryPrice: '22185.2',
-                        breakEvenPrice: '0.0',
-                        markPrice: '21123.05052574',
-                        unRealizedProfit: '-1.06214947',
-                        liquidationPrice: '19731.45529116',
-                        leverage: '4',
-                        maxNotionalValue: '100000000',
-                        marginType: 'cross',
-                        isolatedMargin: '0.00000000',
-                        isAutoAddMargin: 'false',
-                        positionSide: 'LONG',
-                        notional: '21.12305052',
-                        isolatedWallet: '0',
-                        updateTime: 1655217461579,
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        positionAmt: '0.000',
-                        entryPrice: '0.0',
-                        breakEvenPrice: '0.0',
-                        markPrice: '21123.05052574',
-                        unRealizedProfit: '0.00000000',
-                        liquidationPrice: '0',
-                        leverage: '4',
-                        maxNotionalValue: '100000000',
-                        marginType: 'cross',
-                        isolatedMargin: '0.00000000',
-                        isAutoAddMargin: 'false',
-                        positionSide: 'SHORT',
-                        notional: '0',
-                        isolatedWallet: '0',
-                        updateTime: 0,
-                    },
-                ],
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 2400,
-                        count: 20,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '605a6d20-6588-4cb9-afa0-b0ab087507ba',
+                    status: 200,
+                    result: [
+                        {
+                            entryPrice: '0.00000',
+                            breakEvenPrice: '0.0',
+                            marginType: 'isolated',
+                            isAutoAddMargin: 'false',
+                            isolatedMargin: '0.00000000',
+                            leverage: '10',
+                            liquidationPrice: '0',
+                            markPrice: '6679.50671178',
+                            maxNotionalValue: '20000000',
+                            positionAmt: '0.000',
+                            notional: '0',
+                            isolatedWallet: '0',
+                            symbol: 'BTCUSDT',
+                            unRealizedProfit: '0.00000000',
+                            positionSide: 'BOTH',
+                            updateTime: 0,
+                        },
+                        {
+                            symbol: 'BTCUSDT',
+                            positionAmt: '0.001',
+                            entryPrice: '22185.2',
+                            breakEvenPrice: '0.0',
+                            markPrice: '21123.05052574',
+                            unRealizedProfit: '-1.06214947',
+                            liquidationPrice: '19731.45529116',
+                            leverage: '4',
+                            maxNotionalValue: '100000000',
+                            marginType: 'cross',
+                            isolatedMargin: '0.00000000',
+                            isAutoAddMargin: 'false',
+                            positionSide: 'LONG',
+                            notional: '21.12305052',
+                            isolatedWallet: '0',
+                            updateTime: 1655217461579,
+                        },
+                        {
+                            symbol: 'BTCUSDT',
+                            positionAmt: '0.000',
+                            entryPrice: '0.0',
+                            breakEvenPrice: '0.0',
+                            markPrice: '21123.05052574',
+                            unRealizedProfit: '0.00000000',
+                            liquidationPrice: '0',
+                            leverage: '4',
+                            maxNotionalValue: '100000000',
+                            marginType: 'cross',
+                            isolatedMargin: '0.00000000',
+                            isAutoAddMargin: 'false',
+                            positionSide: 'SHORT',
+                            notional: '0',
+                            isolatedWallet: '0',
+                            updateTime: 0,
+                        },
+                    ],
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 2400,
+                            count: 20,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -799,7 +808,7 @@ describe('TradeApi', () => {
                     const responsePromise = websocketAPIClient.positionInformation({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -851,7 +860,7 @@ describe('TradeApi', () => {
                     const responsePromise = websocketAPIClient.positionInformation({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -929,87 +938,89 @@ describe('TradeApi', () => {
         });
 
         it('should execute positionInformationV2() successfully', async () => {
-            mockResponse = {
-                id: '605a6d20-6588-4cb9-afa0-b0ab087507ba',
-                status: 200,
-                result: [
-                    {
-                        symbol: 'BTCUSDT',
-                        positionSide: 'BOTH',
-                        positionAmt: '1.000',
-                        entryPrice: '0.00000',
-                        breakEvenPrice: '0.0',
-                        markPrice: '6679.50671178',
-                        unrealizedProfit: '0.00000000',
-                        liquidationPrice: '0',
-                        isolatedMargin: '0.00000000',
-                        notional: '0',
-                        marginAsset: 'USDT',
-                        isolatedWallet: '0',
-                        initialMargin: '0',
-                        maintMargin: '0',
-                        positionInitialMargin: '0',
-                        openOrderInitialMargin: '0',
-                        adl: 0,
-                        bidNotional: '0',
-                        askNotional: '0',
-                        updateTime: 0,
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        positionSide: 'LONG',
-                        positionAmt: '1.000',
-                        entryPrice: '0.00000',
-                        breakEvenPrice: '0.0',
-                        markPrice: '6679.50671178',
-                        unrealizedProfit: '0.00000000',
-                        liquidationPrice: '0',
-                        isolatedMargin: '0.00000000',
-                        notional: '0',
-                        marginAsset: 'USDT',
-                        isolatedWallet: '0',
-                        initialMargin: '0',
-                        maintMargin: '0',
-                        positionInitialMargin: '0',
-                        openOrderInitialMargin: '0',
-                        adl: 0,
-                        bidNotional: '0',
-                        askNotional: '0',
-                        updateTime: 0,
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        positionSide: 'SHORT',
-                        positionAmt: '1.000',
-                        entryPrice: '0.00000',
-                        breakEvenPrice: '0.0',
-                        markPrice: '6679.50671178',
-                        unrealizedProfit: '0.00000000',
-                        liquidationPrice: '0',
-                        isolatedMargin: '0.00000000',
-                        notional: '0',
-                        marginAsset: 'USDT',
-                        isolatedWallet: '0',
-                        initialMargin: '0',
-                        maintMargin: '0',
-                        positionInitialMargin: '0',
-                        openOrderInitialMargin: '0',
-                        adl: 0,
-                        bidNotional: '0',
-                        askNotional: '0',
-                        updateTime: 0,
-                    },
-                ],
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 2400,
-                        count: 20,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '605a6d20-6588-4cb9-afa0-b0ab087507ba',
+                    status: 200,
+                    result: [
+                        {
+                            symbol: 'BTCUSDT',
+                            positionSide: 'BOTH',
+                            positionAmt: '1.000',
+                            entryPrice: '0.00000',
+                            breakEvenPrice: '0.0',
+                            markPrice: '6679.50671178',
+                            unrealizedProfit: '0.00000000',
+                            liquidationPrice: '0',
+                            isolatedMargin: '0.00000000',
+                            notional: '0',
+                            marginAsset: 'USDT',
+                            isolatedWallet: '0',
+                            initialMargin: '0',
+                            maintMargin: '0',
+                            positionInitialMargin: '0',
+                            openOrderInitialMargin: '0',
+                            adl: 0,
+                            bidNotional: '0',
+                            askNotional: '0',
+                            updateTime: 0,
+                        },
+                        {
+                            symbol: 'BTCUSDT',
+                            positionSide: 'LONG',
+                            positionAmt: '1.000',
+                            entryPrice: '0.00000',
+                            breakEvenPrice: '0.0',
+                            markPrice: '6679.50671178',
+                            unrealizedProfit: '0.00000000',
+                            liquidationPrice: '0',
+                            isolatedMargin: '0.00000000',
+                            notional: '0',
+                            marginAsset: 'USDT',
+                            isolatedWallet: '0',
+                            initialMargin: '0',
+                            maintMargin: '0',
+                            positionInitialMargin: '0',
+                            openOrderInitialMargin: '0',
+                            adl: 0,
+                            bidNotional: '0',
+                            askNotional: '0',
+                            updateTime: 0,
+                        },
+                        {
+                            symbol: 'BTCUSDT',
+                            positionSide: 'SHORT',
+                            positionAmt: '1.000',
+                            entryPrice: '0.00000',
+                            breakEvenPrice: '0.0',
+                            markPrice: '6679.50671178',
+                            unrealizedProfit: '0.00000000',
+                            liquidationPrice: '0',
+                            isolatedMargin: '0.00000000',
+                            notional: '0',
+                            marginAsset: 'USDT',
+                            isolatedWallet: '0',
+                            initialMargin: '0',
+                            maintMargin: '0',
+                            positionInitialMargin: '0',
+                            openOrderInitialMargin: '0',
+                            adl: 0,
+                            bidNotional: '0',
+                            askNotional: '0',
+                            updateTime: 0,
+                        },
+                    ],
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 2400,
+                            count: 20,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -1024,7 +1035,7 @@ describe('TradeApi', () => {
                     const responsePromise = websocketAPIClient.positionInformationV2({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -1076,7 +1087,7 @@ describe('TradeApi', () => {
                     const responsePromise = websocketAPIClient.positionInformationV2({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -1154,35 +1165,37 @@ describe('TradeApi', () => {
         });
 
         it('should execute queryOrder() successfully', async () => {
-            mockResponse = {
-                id: '605a6d20-6588-4cb9-afa0-b0ab087507ba',
-                status: 200,
-                result: {
-                    avgPrice: '0.00000',
-                    clientOrderId: 'abc',
-                    cumQuote: '0',
-                    executedQty: '0',
-                    orderId: 1917641,
-                    origQty: '0.40',
-                    origType: 'TRAILING_STOP_MARKET',
-                    price: '0',
-                    reduceOnly: false,
-                    side: 'BUY',
-                    positionSide: 'SHORT',
-                    status: 'NEW',
-                    stopPrice: '9300',
-                    closePosition: false,
-                    symbol: 'BTCUSDT',
-                    time: 1579276756075,
-                    timeInForce: 'GTC',
-                    type: 'TRAILING_STOP_MARKET',
-                    activatePrice: '9020',
-                    priceRate: '0.3',
-                    updateTime: 1579276756075,
-                    workingType: 'CONTRACT_PRICE',
-                    priceProtect: false,
-                },
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '605a6d20-6588-4cb9-afa0-b0ab087507ba',
+                    status: 200,
+                    result: {
+                        avgPrice: '0.00000',
+                        clientOrderId: 'abc',
+                        cumQuote: '0',
+                        executedQty: '0',
+                        orderId: 1917641,
+                        origQty: '0.40',
+                        origType: 'TRAILING_STOP_MARKET',
+                        price: '0',
+                        reduceOnly: false,
+                        side: 'BUY',
+                        positionSide: 'SHORT',
+                        status: 'NEW',
+                        stopPrice: '9300',
+                        closePosition: false,
+                        symbol: 'BTCUSDT',
+                        time: 1579276756075,
+                        timeInForce: 'GTC',
+                        type: 'TRAILING_STOP_MARKET',
+                        activatePrice: '9020',
+                        priceRate: '0.3',
+                        updateTime: 1579276756075,
+                        workingType: 'CONTRACT_PRICE',
+                        priceProtect: false,
+                    },
+                })
+            );
             mockResponse.id = randomString();
 
             const params: QueryOrderRequest = {
@@ -1202,7 +1215,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -1258,7 +1271,7 @@ describe('TradeApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {

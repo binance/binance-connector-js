@@ -26,16 +26,16 @@ import type { ConditionalOrderTriggerRejectOr } from './conditional-order-trigge
 export interface ConditionalOrderTriggerReject {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ConditionalOrderTriggerReject
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ConditionalOrderTriggerReject
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {ConditionalOrderTriggerRejectOr}

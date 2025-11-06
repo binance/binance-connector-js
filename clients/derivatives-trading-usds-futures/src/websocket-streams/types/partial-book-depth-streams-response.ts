@@ -35,16 +35,16 @@ export interface PartialBookDepthStreamsResponse {
     e?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PartialBookDepthStreamsResponse
      */
-    E?: number;
+    E?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PartialBookDepthStreamsResponse
      */
-    T?: number;
+    T?: number | bigint;
     /**
      *
      * @type {string}
@@ -53,22 +53,22 @@ export interface PartialBookDepthStreamsResponse {
     s?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PartialBookDepthStreamsResponse
      */
-    U?: number;
+    U?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PartialBookDepthStreamsResponse
      */
-    u?: number;
+    u?: number | bigint;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof PartialBookDepthStreamsResponse
      */
-    pu?: number;
+    pu?: number | bigint;
     /**
      *
      * @type {Array<PartialBookDepthStreamsResponseBItem>}

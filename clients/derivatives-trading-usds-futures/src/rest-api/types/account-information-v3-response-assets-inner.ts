@@ -93,8 +93,8 @@ export interface AccountInformationV3ResponseAssetsInner {
     maxWithdrawAmount?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountInformationV3ResponseAssetsInner
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
 }

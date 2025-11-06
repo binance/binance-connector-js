@@ -35,10 +35,10 @@ export interface SymbolPriceTickerResponse1 {
     id?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof SymbolPriceTickerResponse1
      */
-    status?: number;
+    status?: number | bigint;
     /**
      *
      * @type {SymbolPriceTickerResponse1Result}

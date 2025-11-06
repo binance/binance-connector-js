@@ -15,6 +15,7 @@
 
 import WebSocketClient from 'ws';
 import { EventEmitter } from 'events';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { jest, expect, beforeEach, afterEach, describe, it } from '@jest/globals';
 import { ConfigurationWebsocketAPI, WebsocketAPIBase, randomString } from '@binance/common';
 
@@ -79,26 +80,28 @@ describe('MarketDataApi', () => {
         });
 
         it('should execute orderBook() successfully', async () => {
-            mockResponse = {
-                id: '51e2affb-0aba-4821-ba75-f2625006eb43',
-                status: 200,
-                result: {
-                    lastUpdateId: 1027024,
-                    E: 1589436922972,
-                    T: 1589436922959,
-                    bids: [['4.00000000', '431.00000000']],
-                    asks: [['4.00000200', '12.00000000']],
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 2400,
-                        count: 5,
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '51e2affb-0aba-4821-ba75-f2625006eb43',
+                    status: 200,
+                    result: {
+                        lastUpdateId: 1027024,
+                        E: 1589436922972,
+                        T: 1589436922959,
+                        bids: [['4.00000000', '431.00000000']],
+                        asks: [['4.00000200', '12.00000000']],
                     },
-                ],
-            };
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 2400,
+                            count: 5,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             const params: OrderBookRequest = {
@@ -118,7 +121,7 @@ describe('MarketDataApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -174,7 +177,7 @@ describe('MarketDataApi', () => {
                         id: mockResponse?.id,
                         ...params,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -256,28 +259,30 @@ describe('MarketDataApi', () => {
         });
 
         it('should execute symbolOrderBookTicker() successfully', async () => {
-            mockResponse = {
-                id: '9d32157c-a556-4d27-9866-66760a174b57',
-                status: 200,
-                result: {
-                    lastUpdateId: 1027024,
-                    symbol: 'BTCUSDT',
-                    bidPrice: '4.00000000',
-                    bidQty: '431.00000000',
-                    askPrice: '4.00000200',
-                    askQty: '9.00000000',
-                    time: 1589437530011,
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 2400,
-                        count: 2,
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '9d32157c-a556-4d27-9866-66760a174b57',
+                    status: 200,
+                    result: {
+                        lastUpdateId: 1027024,
+                        symbol: 'BTCUSDT',
+                        bidPrice: '4.00000000',
+                        bidQty: '431.00000000',
+                        askPrice: '4.00000200',
+                        askQty: '9.00000000',
+                        time: 1589437530011,
                     },
-                ],
-            };
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 2400,
+                            count: 2,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -292,7 +297,7 @@ describe('MarketDataApi', () => {
                     const responsePromise = websocketAPIClient.symbolOrderBookTicker({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -344,7 +349,7 @@ describe('MarketDataApi', () => {
                     const responsePromise = websocketAPIClient.symbolOrderBookTicker({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -422,20 +427,22 @@ describe('MarketDataApi', () => {
         });
 
         it('should execute symbolPriceTicker() successfully', async () => {
-            mockResponse = {
-                id: '9d32157c-a556-4d27-9866-66760a174b57',
-                status: 200,
-                result: { symbol: 'BTCUSDT', price: '6000.01', time: 1589437530011 },
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 2400,
-                        count: 2,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '9d32157c-a556-4d27-9866-66760a174b57',
+                    status: 200,
+                    result: { symbol: 'BTCUSDT', price: '6000.01', time: 1589437530011 },
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 2400,
+                            count: 2,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -450,7 +457,7 @@ describe('MarketDataApi', () => {
                     const responsePromise = websocketAPIClient.symbolPriceTicker({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -502,7 +509,7 @@ describe('MarketDataApi', () => {
                     const responsePromise = websocketAPIClient.symbolPriceTicker({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {

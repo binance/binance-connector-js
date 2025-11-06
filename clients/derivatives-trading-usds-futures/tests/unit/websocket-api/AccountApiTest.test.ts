@@ -15,6 +15,7 @@
 
 import WebSocketClient from 'ws';
 import { EventEmitter } from 'events';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { jest, expect, beforeEach, afterEach, describe, it } from '@jest/globals';
 import { ConfigurationWebsocketAPI, WebsocketAPIBase, randomString } from '@binance/common';
 
@@ -78,142 +79,144 @@ describe('AccountApi', () => {
         });
 
         it('should execute accountInformation() successfully', async () => {
-            mockResponse = {
-                id: '605a6d20-6588-4cb9-afa0-b0ab087507ba',
-                status: 200,
-                result: {
-                    feeTier: 0,
-                    canTrade: true,
-                    canDeposit: true,
-                    canWithdraw: true,
-                    updateTime: 0,
-                    multiAssetsMargin: true,
-                    tradeGroupId: -1,
-                    totalInitialMargin: '0.00000000',
-                    totalMaintMargin: '0.00000000',
-                    totalWalletBalance: '126.72469206',
-                    totalUnrealizedProfit: '0.00000000',
-                    totalMarginBalance: '126.72469206',
-                    totalPositionInitialMargin: '0.00000000',
-                    totalOpenOrderInitialMargin: '0.00000000',
-                    totalCrossWalletBalance: '126.72469206',
-                    totalCrossUnPnl: '0.00000000',
-                    availableBalance: '126.72469206',
-                    maxWithdrawAmount: '126.72469206',
-                    assets: [
-                        {
-                            asset: 'USDT',
-                            walletBalance: '23.72469206',
-                            unrealizedProfit: '0.00000000',
-                            marginBalance: '23.72469206',
-                            maintMargin: '0.00000000',
-                            initialMargin: '0.00000000',
-                            positionInitialMargin: '0.00000000',
-                            openOrderInitialMargin: '0.00000000',
-                            crossWalletBalance: '23.72469206',
-                            crossUnPnl: '0.00000000',
-                            availableBalance: '23.72469206',
-                            maxWithdrawAmount: '23.72469206',
-                            marginAvailable: true,
-                            updateTime: 1625474304765,
-                        },
-                        {
-                            asset: 'BUSD',
-                            walletBalance: '103.12345678',
-                            unrealizedProfit: '0.00000000',
-                            marginBalance: '103.12345678',
-                            maintMargin: '0.00000000',
-                            initialMargin: '0.00000000',
-                            positionInitialMargin: '0.00000000',
-                            openOrderInitialMargin: '0.00000000',
-                            crossWalletBalance: '103.12345678',
-                            crossUnPnl: '0.00000000',
-                            availableBalance: '103.12345678',
-                            maxWithdrawAmount: '103.12345678',
-                            marginAvailable: true,
-                            updateTime: 1625474304765,
-                        },
-                        {
-                            asset: 'USDT',
-                            walletBalance: '23.72469206',
-                            unrealizedProfit: '0.00000000',
-                            marginBalance: '23.72469206',
-                            maintMargin: '0.00000000',
-                            initialMargin: '0.00000000',
-                            positionInitialMargin: '0.00000000',
-                            openOrderInitialMargin: '0.00000000',
-                            crossWalletBalance: '23.72469206',
-                            crossUnPnl: '0.00000000',
-                            availableBalance: '126.72469206',
-                            maxWithdrawAmount: '23.72469206',
-                            marginAvailable: true,
-                            updateTime: 1625474304765,
-                        },
-                        {
-                            asset: 'BUSD',
-                            walletBalance: '103.12345678',
-                            unrealizedProfit: '0.00000000',
-                            marginBalance: '103.12345678',
-                            maintMargin: '0.00000000',
-                            initialMargin: '0.00000000',
-                            positionInitialMargin: '0.00000000',
-                            openOrderInitialMargin: '0.00000000',
-                            crossWalletBalance: '103.12345678',
-                            crossUnPnl: '0.00000000',
-                            availableBalance: '126.72469206',
-                            maxWithdrawAmount: '103.12345678',
-                            marginAvailable: true,
-                            updateTime: 1625474304765,
-                        },
-                    ],
-                    positions: [
-                        {
-                            symbol: 'BTCUSDT',
-                            initialMargin: '0',
-                            maintMargin: '0',
-                            unrealizedProfit: '0.00000000',
-                            positionInitialMargin: '0',
-                            openOrderInitialMargin: '0',
-                            leverage: '100',
-                            isolated: true,
-                            entryPrice: '0.00000',
-                            maxNotional: '250000',
-                            bidNotional: '0',
-                            askNotional: '0',
-                            positionSide: 'BOTH',
-                            positionAmt: '0',
-                            updateTime: 0,
-                        },
-                        {
-                            symbol: 'BTCUSDT',
-                            initialMargin: '0',
-                            maintMargin: '0',
-                            unrealizedProfit: '0.00000000',
-                            positionInitialMargin: '0',
-                            openOrderInitialMargin: '0',
-                            leverage: '100',
-                            isolated: true,
-                            entryPrice: '0.00000',
-                            breakEvenPrice: '0.0',
-                            maxNotional: '250000',
-                            bidNotional: '0',
-                            askNotional: '0',
-                            positionSide: 'BOTH',
-                            positionAmt: '0',
-                            updateTime: 0,
-                        },
-                    ],
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 2400,
-                        count: 20,
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '605a6d20-6588-4cb9-afa0-b0ab087507ba',
+                    status: 200,
+                    result: {
+                        feeTier: 0,
+                        canTrade: true,
+                        canDeposit: true,
+                        canWithdraw: true,
+                        updateTime: 0,
+                        multiAssetsMargin: true,
+                        tradeGroupId: -1,
+                        totalInitialMargin: '0.00000000',
+                        totalMaintMargin: '0.00000000',
+                        totalWalletBalance: '126.72469206',
+                        totalUnrealizedProfit: '0.00000000',
+                        totalMarginBalance: '126.72469206',
+                        totalPositionInitialMargin: '0.00000000',
+                        totalOpenOrderInitialMargin: '0.00000000',
+                        totalCrossWalletBalance: '126.72469206',
+                        totalCrossUnPnl: '0.00000000',
+                        availableBalance: '126.72469206',
+                        maxWithdrawAmount: '126.72469206',
+                        assets: [
+                            {
+                                asset: 'USDT',
+                                walletBalance: '23.72469206',
+                                unrealizedProfit: '0.00000000',
+                                marginBalance: '23.72469206',
+                                maintMargin: '0.00000000',
+                                initialMargin: '0.00000000',
+                                positionInitialMargin: '0.00000000',
+                                openOrderInitialMargin: '0.00000000',
+                                crossWalletBalance: '23.72469206',
+                                crossUnPnl: '0.00000000',
+                                availableBalance: '23.72469206',
+                                maxWithdrawAmount: '23.72469206',
+                                marginAvailable: true,
+                                updateTime: 1625474304765,
+                            },
+                            {
+                                asset: 'BUSD',
+                                walletBalance: '103.12345678',
+                                unrealizedProfit: '0.00000000',
+                                marginBalance: '103.12345678',
+                                maintMargin: '0.00000000',
+                                initialMargin: '0.00000000',
+                                positionInitialMargin: '0.00000000',
+                                openOrderInitialMargin: '0.00000000',
+                                crossWalletBalance: '103.12345678',
+                                crossUnPnl: '0.00000000',
+                                availableBalance: '103.12345678',
+                                maxWithdrawAmount: '103.12345678',
+                                marginAvailable: true,
+                                updateTime: 1625474304765,
+                            },
+                            {
+                                asset: 'USDT',
+                                walletBalance: '23.72469206',
+                                unrealizedProfit: '0.00000000',
+                                marginBalance: '23.72469206',
+                                maintMargin: '0.00000000',
+                                initialMargin: '0.00000000',
+                                positionInitialMargin: '0.00000000',
+                                openOrderInitialMargin: '0.00000000',
+                                crossWalletBalance: '23.72469206',
+                                crossUnPnl: '0.00000000',
+                                availableBalance: '126.72469206',
+                                maxWithdrawAmount: '23.72469206',
+                                marginAvailable: true,
+                                updateTime: 1625474304765,
+                            },
+                            {
+                                asset: 'BUSD',
+                                walletBalance: '103.12345678',
+                                unrealizedProfit: '0.00000000',
+                                marginBalance: '103.12345678',
+                                maintMargin: '0.00000000',
+                                initialMargin: '0.00000000',
+                                positionInitialMargin: '0.00000000',
+                                openOrderInitialMargin: '0.00000000',
+                                crossWalletBalance: '103.12345678',
+                                crossUnPnl: '0.00000000',
+                                availableBalance: '126.72469206',
+                                maxWithdrawAmount: '103.12345678',
+                                marginAvailable: true,
+                                updateTime: 1625474304765,
+                            },
+                        ],
+                        positions: [
+                            {
+                                symbol: 'BTCUSDT',
+                                initialMargin: '0',
+                                maintMargin: '0',
+                                unrealizedProfit: '0.00000000',
+                                positionInitialMargin: '0',
+                                openOrderInitialMargin: '0',
+                                leverage: '100',
+                                isolated: true,
+                                entryPrice: '0.00000',
+                                maxNotional: '250000',
+                                bidNotional: '0',
+                                askNotional: '0',
+                                positionSide: 'BOTH',
+                                positionAmt: '0',
+                                updateTime: 0,
+                            },
+                            {
+                                symbol: 'BTCUSDT',
+                                initialMargin: '0',
+                                maintMargin: '0',
+                                unrealizedProfit: '0.00000000',
+                                positionInitialMargin: '0',
+                                openOrderInitialMargin: '0',
+                                leverage: '100',
+                                isolated: true,
+                                entryPrice: '0.00000',
+                                breakEvenPrice: '0.0',
+                                maxNotional: '250000',
+                                bidNotional: '0',
+                                askNotional: '0',
+                                positionSide: 'BOTH',
+                                positionAmt: '0',
+                                updateTime: 0,
+                            },
+                        ],
                     },
-                ],
-            };
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 2400,
+                            count: 20,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -228,7 +231,7 @@ describe('AccountApi', () => {
                     const responsePromise = websocketAPIClient.accountInformation({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -280,7 +283,7 @@ describe('AccountApi', () => {
                     const responsePromise = websocketAPIClient.accountInformation({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -358,122 +361,124 @@ describe('AccountApi', () => {
         });
 
         it('should execute accountInformationV2() successfully', async () => {
-            mockResponse = {
-                id: '605a6d20-6588-4cb9-afa0-b0ab087507ba',
-                status: 200,
-                result: {
-                    totalInitialMargin: '0.00000000',
-                    totalMaintMargin: '0.00000000',
-                    totalWalletBalance: '126.72469206',
-                    totalUnrealizedProfit: '0.00000000',
-                    totalMarginBalance: '126.72469206',
-                    totalPositionInitialMargin: '0.00000000',
-                    totalOpenOrderInitialMargin: '0.00000000',
-                    totalCrossWalletBalance: '126.72469206',
-                    totalCrossUnPnl: '0.00000000',
-                    availableBalance: '126.72469206',
-                    maxWithdrawAmount: '126.72469206',
-                    assets: [
-                        {
-                            asset: 'USDT',
-                            walletBalance: '23.72469206',
-                            unrealizedProfit: '0.00000000',
-                            marginBalance: '23.72469206',
-                            maintMargin: '0.00000000',
-                            initialMargin: '0.00000000',
-                            positionInitialMargin: '0.00000000',
-                            openOrderInitialMargin: '0.00000000',
-                            crossWalletBalance: '23.72469206',
-                            crossUnPnl: '0.00000000',
-                            availableBalance: '23.72469206',
-                            maxWithdrawAmount: '23.72469206',
-                            updateTime: 1625474304765,
-                        },
-                        {
-                            asset: 'USDC',
-                            walletBalance: '103.12345678',
-                            unrealizedProfit: '0.00000000',
-                            marginBalance: '103.12345678',
-                            maintMargin: '0.00000000',
-                            initialMargin: '0.00000000',
-                            positionInitialMargin: '0.00000000',
-                            openOrderInitialMargin: '0.00000000',
-                            crossWalletBalance: '103.12345678',
-                            crossUnPnl: '0.00000000',
-                            availableBalance: '126.72469206',
-                            maxWithdrawAmount: '103.12345678',
-                            updateTime: 1625474304765,
-                        },
-                        {
-                            asset: 'USDT',
-                            walletBalance: '23.72469206',
-                            unrealizedProfit: '0.00000000',
-                            marginBalance: '23.72469206',
-                            maintMargin: '0.00000000',
-                            initialMargin: '0.00000000',
-                            positionInitialMargin: '0.00000000',
-                            openOrderInitialMargin: '0.00000000',
-                            crossWalletBalance: '23.72469206',
-                            crossUnPnl: '0.00000000',
-                            availableBalance: '126.72469206',
-                            maxWithdrawAmount: '23.72469206',
-                            marginAvailable: true,
-                            updateTime: 1625474304765,
-                        },
-                        {
-                            asset: 'BUSD',
-                            walletBalance: '103.12345678',
-                            unrealizedProfit: '0.00000000',
-                            marginBalance: '103.12345678',
-                            maintMargin: '0.00000000',
-                            initialMargin: '0.00000000',
-                            positionInitialMargin: '0.00000000',
-                            openOrderInitialMargin: '0.00000000',
-                            crossWalletBalance: '103.12345678',
-                            crossUnPnl: '0.00000000',
-                            availableBalance: '126.72469206',
-                            maxWithdrawAmount: '103.12345678',
-                            marginAvailable: true,
-                            updateTime: 1625474304765,
-                        },
-                    ],
-                    positions: [
-                        {
-                            symbol: 'BTCUSDT',
-                            positionSide: 'BOTH',
-                            positionAmt: '1.000',
-                            unrealizedProfit: '0.00000000',
-                            isolatedMargin: '0.00000000',
-                            notional: '0',
-                            isolatedWallet: '0',
-                            initialMargin: '0',
-                            maintMargin: '0',
-                            updateTime: 0,
-                        },
-                        {
-                            symbol: 'BTCUSDT',
-                            positionSide: 'BOTH',
-                            positionAmt: '1.000',
-                            unrealizedProfit: '0.00000000',
-                            isolatedMargin: '0.00000000',
-                            notional: '0',
-                            isolatedWallet: '0',
-                            initialMargin: '0',
-                            maintMargin: '0',
-                            updateTime: 0,
-                        },
-                    ],
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 2400,
-                        count: 20,
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '605a6d20-6588-4cb9-afa0-b0ab087507ba',
+                    status: 200,
+                    result: {
+                        totalInitialMargin: '0.00000000',
+                        totalMaintMargin: '0.00000000',
+                        totalWalletBalance: '126.72469206',
+                        totalUnrealizedProfit: '0.00000000',
+                        totalMarginBalance: '126.72469206',
+                        totalPositionInitialMargin: '0.00000000',
+                        totalOpenOrderInitialMargin: '0.00000000',
+                        totalCrossWalletBalance: '126.72469206',
+                        totalCrossUnPnl: '0.00000000',
+                        availableBalance: '126.72469206',
+                        maxWithdrawAmount: '126.72469206',
+                        assets: [
+                            {
+                                asset: 'USDT',
+                                walletBalance: '23.72469206',
+                                unrealizedProfit: '0.00000000',
+                                marginBalance: '23.72469206',
+                                maintMargin: '0.00000000',
+                                initialMargin: '0.00000000',
+                                positionInitialMargin: '0.00000000',
+                                openOrderInitialMargin: '0.00000000',
+                                crossWalletBalance: '23.72469206',
+                                crossUnPnl: '0.00000000',
+                                availableBalance: '23.72469206',
+                                maxWithdrawAmount: '23.72469206',
+                                updateTime: 1625474304765,
+                            },
+                            {
+                                asset: 'USDC',
+                                walletBalance: '103.12345678',
+                                unrealizedProfit: '0.00000000',
+                                marginBalance: '103.12345678',
+                                maintMargin: '0.00000000',
+                                initialMargin: '0.00000000',
+                                positionInitialMargin: '0.00000000',
+                                openOrderInitialMargin: '0.00000000',
+                                crossWalletBalance: '103.12345678',
+                                crossUnPnl: '0.00000000',
+                                availableBalance: '126.72469206',
+                                maxWithdrawAmount: '103.12345678',
+                                updateTime: 1625474304765,
+                            },
+                            {
+                                asset: 'USDT',
+                                walletBalance: '23.72469206',
+                                unrealizedProfit: '0.00000000',
+                                marginBalance: '23.72469206',
+                                maintMargin: '0.00000000',
+                                initialMargin: '0.00000000',
+                                positionInitialMargin: '0.00000000',
+                                openOrderInitialMargin: '0.00000000',
+                                crossWalletBalance: '23.72469206',
+                                crossUnPnl: '0.00000000',
+                                availableBalance: '126.72469206',
+                                maxWithdrawAmount: '23.72469206',
+                                marginAvailable: true,
+                                updateTime: 1625474304765,
+                            },
+                            {
+                                asset: 'BUSD',
+                                walletBalance: '103.12345678',
+                                unrealizedProfit: '0.00000000',
+                                marginBalance: '103.12345678',
+                                maintMargin: '0.00000000',
+                                initialMargin: '0.00000000',
+                                positionInitialMargin: '0.00000000',
+                                openOrderInitialMargin: '0.00000000',
+                                crossWalletBalance: '103.12345678',
+                                crossUnPnl: '0.00000000',
+                                availableBalance: '126.72469206',
+                                maxWithdrawAmount: '103.12345678',
+                                marginAvailable: true,
+                                updateTime: 1625474304765,
+                            },
+                        ],
+                        positions: [
+                            {
+                                symbol: 'BTCUSDT',
+                                positionSide: 'BOTH',
+                                positionAmt: '1.000',
+                                unrealizedProfit: '0.00000000',
+                                isolatedMargin: '0.00000000',
+                                notional: '0',
+                                isolatedWallet: '0',
+                                initialMargin: '0',
+                                maintMargin: '0',
+                                updateTime: 0,
+                            },
+                            {
+                                symbol: 'BTCUSDT',
+                                positionSide: 'BOTH',
+                                positionAmt: '1.000',
+                                unrealizedProfit: '0.00000000',
+                                isolatedMargin: '0.00000000',
+                                notional: '0',
+                                isolatedWallet: '0',
+                                initialMargin: '0',
+                                maintMargin: '0',
+                                updateTime: 0,
+                            },
+                        ],
                     },
-                ],
-            };
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 2400,
+                            count: 20,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -488,7 +493,7 @@ describe('AccountApi', () => {
                     const responsePromise = websocketAPIClient.accountInformationV2({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -540,7 +545,7 @@ describe('AccountApi', () => {
                     const responsePromise = websocketAPIClient.accountInformationV2({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -618,32 +623,34 @@ describe('AccountApi', () => {
         });
 
         it('should execute futuresAccountBalance() successfully', async () => {
-            mockResponse = {
-                id: '605a6d20-6588-4cb9-afa0-b0ab087507ba',
-                status: 200,
-                result: [
-                    {
-                        accountAlias: 'SgsR',
-                        asset: 'USDT',
-                        balance: '122607.35137903',
-                        crossWalletBalance: '23.72469206',
-                        crossUnPnl: '0.00000000',
-                        availableBalance: '23.72469206',
-                        maxWithdrawAmount: '23.72469206',
-                        marginAvailable: true,
-                        updateTime: 1617939110373,
-                    },
-                ],
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 2400,
-                        count: 20,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '605a6d20-6588-4cb9-afa0-b0ab087507ba',
+                    status: 200,
+                    result: [
+                        {
+                            accountAlias: 'SgsR',
+                            asset: 'USDT',
+                            balance: '122607.35137903',
+                            crossWalletBalance: '23.72469206',
+                            crossUnPnl: '0.00000000',
+                            availableBalance: '23.72469206',
+                            maxWithdrawAmount: '23.72469206',
+                            marginAvailable: true,
+                            updateTime: 1617939110373,
+                        },
+                    ],
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 2400,
+                            count: 20,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -658,7 +665,7 @@ describe('AccountApi', () => {
                     const responsePromise = websocketAPIClient.futuresAccountBalance({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -710,7 +717,7 @@ describe('AccountApi', () => {
                     const responsePromise = websocketAPIClient.futuresAccountBalance({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {
@@ -788,32 +795,34 @@ describe('AccountApi', () => {
         });
 
         it('should execute futuresAccountBalanceV2() successfully', async () => {
-            mockResponse = {
-                id: '605a6d20-6588-4cb9-afa0-b0ab087507ba',
-                status: 200,
-                result: [
-                    {
-                        accountAlias: 'SgsR',
-                        asset: 'USDT',
-                        balance: '122607.35137903',
-                        crossWalletBalance: '23.72469206',
-                        crossUnPnl: '0.00000000',
-                        availableBalance: '23.72469206',
-                        maxWithdrawAmount: '23.72469206',
-                        marginAvailable: true,
-                        updateTime: 1617939110373,
-                    },
-                ],
-                rateLimits: [
-                    {
-                        rateLimitType: 'REQUEST_WEIGHT',
-                        interval: 'MINUTE',
-                        intervalNum: 1,
-                        limit: 2400,
-                        count: 20,
-                    },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '605a6d20-6588-4cb9-afa0-b0ab087507ba',
+                    status: 200,
+                    result: [
+                        {
+                            accountAlias: 'SgsR',
+                            asset: 'USDT',
+                            balance: '122607.35137903',
+                            crossWalletBalance: '23.72469206',
+                            crossUnPnl: '0.00000000',
+                            availableBalance: '23.72469206',
+                            maxWithdrawAmount: '23.72469206',
+                            marginAvailable: true,
+                            updateTime: 1617939110373,
+                        },
+                    ],
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 2400,
+                            count: 20,
+                        },
+                    ],
+                })
+            );
             mockResponse.id = randomString();
 
             let resolveTest: (value: unknown) => void;
@@ -828,7 +837,7 @@ describe('AccountApi', () => {
                     const responsePromise = websocketAPIClient.futuresAccountBalanceV2({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     const response = await responsePromise;
                     expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
                     expect(response.rateLimits).toEqual(mockResponse.rateLimits);
@@ -880,7 +889,7 @@ describe('AccountApi', () => {
                     const responsePromise = websocketAPIClient.futuresAccountBalanceV2({
                         id: mockResponse?.id,
                     });
-                    mockWs.emit('message', JSON.stringify(mockResponse));
+                    mockWs.emit('message', JSONStringify(mockResponse));
                     await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
                     resolveTest(true);
                 } catch (error) {

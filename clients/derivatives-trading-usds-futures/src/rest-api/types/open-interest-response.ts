@@ -33,8 +33,8 @@ export interface OpenInterestResponse {
     symbol?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof OpenInterestResponse
      */
-    time?: number;
+    time?: number | bigint;
 }

@@ -21,10 +21,10 @@
 export interface FuturesAccountConfigurationResponse {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FuturesAccountConfigurationResponse
      */
-    feeTier?: number;
+    feeTier?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -51,10 +51,10 @@ export interface FuturesAccountConfigurationResponse {
     dualSidePosition?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FuturesAccountConfigurationResponse
      */
-    updateTime?: number;
+    updateTime?: number | bigint;
     /**
      *
      * @type {boolean}
@@ -63,8 +63,8 @@ export interface FuturesAccountConfigurationResponse {
     multiAssetsMargin?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof FuturesAccountConfigurationResponse
      */
-    tradeGroupId?: number;
+    tradeGroupId?: number | bigint;
 }
