@@ -62,8 +62,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * @param {string} email [Sub-account email](#email-address)
          * @param {string} asset
          * @param {number} amount
-         * @param {number} type 1: transfer from subaccount's  spot account to margin account 2: transfer from subaccount's margin account to its spot account
-         * @param {number} [recvWindow]
+         * @param {number | bigint} type 1: transfer from subaccount's  spot account to margin account 2: transfer from subaccount's margin account to its spot account
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -71,8 +71,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             email: string,
             asset: string,
             amount: number,
-            type: number,
-            recvWindow?: number
+            type: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
             assertParamExists('futuresTransferForSubAccount', 'email', email);
@@ -122,13 +122,13 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * @summary Get Detail on Sub-account\'s Futures Account (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getDetailOnSubAccountsFuturesAccount: async (
             email: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
             assertParamExists('getDetailOnSubAccountsFuturesAccount', 'email', email);
@@ -160,15 +160,15 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * @summary Get Detail on Sub-account\'s Futures Account V2 (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
-         * @param {number} futuresType 1:USDT-margined Futures，2: Coin-margined Futures
-         * @param {number} [recvWindow]
+         * @param {number | bigint} futuresType 1:USDT-margined Futures，2: Coin-margined Futures
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getDetailOnSubAccountsFuturesAccountV2: async (
             email: string,
-            futuresType: number,
-            recvWindow?: number
+            futuresType: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
             assertParamExists('getDetailOnSubAccountsFuturesAccountV2', 'email', email);
@@ -206,13 +206,13 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * @summary Get Detail on Sub-account\'s Margin Account (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getDetailOnSubAccountsMarginAccount: async (
             email: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
             assertParamExists('getDetailOnSubAccountsMarginAccount', 'email', email);
@@ -248,21 +248,21 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * @summary Get Move Position History for Sub-account (For Master Account) (USER_DATA)
          * @param {string} symbol
-         * @param {number} page Page
-         * @param {number} row
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} page Page
+         * @param {number | bigint} row
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getMovePositionHistoryForSubAccount: async (
             symbol: string,
-            page: number,
-            row: number,
-            startTime?: number,
-            endTime?: number,
-            recvWindow?: number
+            page: number | bigint,
+            row: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('getMovePositionHistoryForSubAccount', 'symbol', symbol);
@@ -319,7 +319,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * @param {string} coin
          * @param {string} [network] networks can be found in `GET /sapi/v1/capital/deposit/address`
          * @param {number} [amount]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -328,7 +328,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             coin: string,
             network?: string,
             amount?: number,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
             assertParamExists('getSubAccountDepositAddress', 'email', email);
@@ -375,12 +375,12 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * @summary Get Sub-account Deposit History (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {string} [coin]
-         * @param {number} [status] 0(0:pending,6: credited but cannot withdraw,7:Wrong Deposit,8:Waiting User confirm,1:success)
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [limit] Default value: 1, Max value: 200
-         * @param {number} [offset] default:0
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [status] 0(0:pending,6: credited but cannot withdraw,7:Wrong Deposit,8:Waiting User confirm,1:success)
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [limit] Default value: 1, Max value: 200
+         * @param {number | bigint} [offset] default:0
+         * @param {number | bigint} [recvWindow]
          * @param {string} [txId]
          *
          * @throws {RequiredError}
@@ -388,12 +388,12 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
         getSubAccountDepositHistory: async (
             email: string,
             coin?: string,
-            status?: number,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            offset?: number,
-            recvWindow?: number,
+            status?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            offset?: number | bigint,
+            recvWindow?: number | bigint,
             txId?: string
         ): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
@@ -453,12 +453,12 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * Weight: 1
          *
          * @summary Get Summary of Sub-account\'s Futures Account (For Master Account) (USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getSummaryOfSubAccountsFuturesAccount: async (
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -482,18 +482,18 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * Weight: 10
          *
          * @summary Get Summary of Sub-account\'s Futures Account V2 (For Master Account) (USER_DATA)
-         * @param {number} futuresType 1:USDT-margined Futures，2: Coin-margined Futures
-         * @param {number} [page] Default value: 1
-         * @param {number} [limit] Default value: 1, Max value: 200
-         * @param {number} [recvWindow]
+         * @param {number | bigint} futuresType 1:USDT-margined Futures，2: Coin-margined Futures
+         * @param {number | bigint} [page] Default value: 1
+         * @param {number | bigint} [limit] Default value: 1, Max value: 200
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getSummaryOfSubAccountsFuturesAccountV2: async (
-            futuresType: number,
-            page?: number,
-            limit?: number,
-            recvWindow?: number
+            futuresType: number | bigint,
+            page?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'futuresType' is not null or undefined
             assertParamExists(
@@ -536,11 +536,13 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * Weight: 10
          *
          * @summary Get Summary of Sub-account\'s Margin Account (For Master Account) (USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        getSummaryOfSubAccountsMarginAccount: async (recvWindow?: number): Promise<RequestArgs> => {
+        getSummaryOfSubAccountsMarginAccount: async (
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -568,8 +570,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * @param {string} email [Sub-account email](#email-address)
          * @param {string} asset
          * @param {number} amount
-         * @param {number} type 1: transfer from subaccount's  spot account to margin account 2: transfer from subaccount's margin account to its spot account
-         * @param {number} [recvWindow]
+         * @param {number | bigint} type 1: transfer from subaccount's  spot account to margin account 2: transfer from subaccount's margin account to its spot account
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -577,8 +579,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             email: string,
             asset: string,
             amount: number,
-            type: number,
-            recvWindow?: number
+            type: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
             assertParamExists('marginTransferForSubAccount', 'email', email);
@@ -643,7 +645,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * @param {string} toUserEmail
          * @param {string} productType Only support UM
          * @param {Array<MovePositionForSubAccountOrderArgsParameterInner>} orderArgs Max 10 positions supported. When input request parameter,orderArgs.symbol should be STRING, orderArgs.quantity should be BIGDECIMAL, and orderArgs.positionSide should be STRING, positionSide support BOTH,LONG and SHORT. Each entry should be like orderArgs[0].symbol=BTCUSDT,orderArgs[0].quantity=0.001,orderArgs[0].positionSide=BOTH. Example of the request parameter array: orderArgs[0].symbol=BTCUSDT orderArgs[0].quantity=0.001 orderArgs[0].positionSide=BOTH orderArgs[1].symbol=ETHUSDT orderArgs[1].quantity=0.01 orderArgs[1].positionSide=BOTH
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -652,7 +654,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             toUserEmail: string,
             productType: string,
             orderArgs: Array<MovePositionForSubAccountOrderArgsParameterInner>,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'fromUserEmail' is not null or undefined
             assertParamExists('movePositionForSubAccount', 'fromUserEmail', fromUserEmail);
@@ -702,11 +704,14 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * @summary Query Sub-account Assets (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        querySubAccountAssets: async (email: string, recvWindow?: number): Promise<RequestArgs> => {
+        querySubAccountAssets: async (
+            email: string,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
             assertParamExists('querySubAccountAssets', 'email', email);
 
@@ -737,13 +742,13 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * @summary Query Sub-account Assets (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         querySubAccountAssetsAssetManagement: async (
             email: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
             assertParamExists('querySubAccountAssetsAssetManagement', 'email', email);
@@ -775,23 +780,23 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * @summary Query Sub-account Futures Asset Transfer History (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
-         * @param {number} futuresType 1:USDT-margined Futures，2: Coin-margined Futures
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [page] Default value: 1
-         * @param {number} [limit] Default value: 1, Max value: 200
-         * @param {number} [recvWindow]
+         * @param {number | bigint} futuresType 1:USDT-margined Futures，2: Coin-margined Futures
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [page] Default value: 1
+         * @param {number | bigint} [limit] Default value: 1, Max value: 200
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         querySubAccountFuturesAssetTransferHistory: async (
             email: string,
-            futuresType: number,
-            startTime?: number,
-            endTime?: number,
-            page?: number,
-            limit?: number,
-            recvWindow?: number
+            futuresType: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            page?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
             assertParamExists('querySubAccountFuturesAssetTransferHistory', 'email', email);
@@ -853,22 +858,22 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * @summary Query Sub-account Spot Asset Transfer History (For Master Account) (USER_DATA)
          * @param {string} [fromEmail]
          * @param {string} [toEmail]
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [page] Default value: 1
-         * @param {number} [limit] Default value: 1, Max value: 200
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [page] Default value: 1
+         * @param {number | bigint} [limit] Default value: 1, Max value: 200
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         querySubAccountSpotAssetTransferHistory: async (
             fromEmail?: string,
             toEmail?: string,
-            startTime?: number,
-            endTime?: number,
-            page?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            page?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -917,17 +922,17 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * @summary Query Sub-account Spot Assets Summary (For Master Account) (USER_DATA)
          * @param {string} [email] Managed sub-account email
-         * @param {number} [page] Default value: 1
-         * @param {number} [size] default 10, max 20
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [page] Default value: 1
+         * @param {number | bigint} [size] default 10, max 20
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         querySubAccountSpotAssetsSummary: async (
             email?: string,
-            page?: number,
-            size?: number,
-            recvWindow?: number
+            page?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -971,11 +976,11 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * @param {string} [fromEmail]
          * @param {string} [toEmail]
          * @param {string} [clientTranId]
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [page] Default value: 1
-         * @param {number} [limit] Default value: 1, Max value: 200
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [page] Default value: 1
+         * @param {number | bigint} [limit] Default value: 1, Max value: 200
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -983,11 +988,11 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             fromEmail?: string,
             toEmail?: string,
             clientTranId?: string,
-            startTime?: number,
-            endTime?: number,
-            page?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            page?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -1045,20 +1050,20 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * @summary Sub-account Futures Asset Transfer (For Master Account) (USER_DATA)
          * @param {string} fromEmail
          * @param {string} toEmail
-         * @param {number} futuresType 1:USDT-margined Futures，2: Coin-margined Futures
+         * @param {number | bigint} futuresType 1:USDT-margined Futures，2: Coin-margined Futures
          * @param {string} asset
          * @param {number} amount
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         subAccountFuturesAssetTransfer: async (
             fromEmail: string,
             toEmail: string,
-            futuresType: number,
+            futuresType: number | bigint,
             asset: string,
             amount: number,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'fromEmail' is not null or undefined
             assertParamExists('subAccountFuturesAssetTransfer', 'fromEmail', fromEmail);
@@ -1117,23 +1122,23 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * @summary Sub-account Transfer History (For Sub-account) (USER_DATA)
          * @param {string} [asset] If not sent, result of all assets will be returned
-         * @param {number} [type] 1: transfer in, 2: transfer out
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [limit] Default value: 1, Max value: 200
+         * @param {number | bigint} [type] 1: transfer in, 2: transfer out
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [limit] Default value: 1, Max value: 200
          * @param {boolean} [returnFailHistory] Default `False`, return PROCESS and SUCCESS status history; If `True`,return PROCESS and SUCCESS and FAILURE status history
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         subAccountTransferHistory: async (
             asset?: string,
-            type?: number,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
+            type?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
             returnFailHistory?: boolean,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -1185,14 +1190,14 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * @summary Transfer to Master (For Sub-account) (USER_DATA)
          * @param {string} asset
          * @param {number} amount
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         transferToMaster: async (
             asset: string,
             amount: number,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
             assertParamExists('transferToMaster', 'asset', asset);
@@ -1234,7 +1239,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * @param {string} toEmail
          * @param {string} asset
          * @param {number} amount
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -1242,7 +1247,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             toEmail: string,
             asset: string,
             amount: number,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'toEmail' is not null or undefined
             assertParamExists('transferToSubAccountOfSameMaster', 'toEmail', toEmail);
@@ -1305,7 +1310,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * @param {string} [toEmail]
          * @param {string} [clientTranId]
          * @param {string} [symbol] Only supported under ISOLATED_MARGIN type
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -1318,7 +1323,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             toEmail?: string,
             clientTranId?: string,
             symbol?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'fromAccountType' is not null or undefined
             assertParamExists('universalTransfer', 'fromAccountType', fromAccountType);
@@ -1790,17 +1795,17 @@ export interface FuturesTransferForSubAccountRequest {
 
     /**
      * 1: transfer from subaccount's  spot account to margin account 2: transfer from subaccount's margin account to its spot account
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiFuturesTransferForSubAccount
      */
-    readonly type: number;
+    readonly type: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiFuturesTransferForSubAccount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1817,10 +1822,10 @@ export interface GetDetailOnSubAccountsFuturesAccountRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiGetDetailOnSubAccountsFuturesAccount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1837,17 +1842,17 @@ export interface GetDetailOnSubAccountsFuturesAccountV2Request {
 
     /**
      * 1:USDT-margined Futures，2: Coin-margined Futures
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiGetDetailOnSubAccountsFuturesAccountV2
      */
-    readonly futuresType: number;
+    readonly futuresType: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiGetDetailOnSubAccountsFuturesAccountV2
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1864,10 +1869,10 @@ export interface GetDetailOnSubAccountsMarginAccountRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiGetDetailOnSubAccountsMarginAccount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1884,38 +1889,38 @@ export interface GetMovePositionHistoryForSubAccountRequest {
 
     /**
      * Page
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiGetMovePositionHistoryForSubAccount
      */
-    readonly page: number;
+    readonly page: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiGetMovePositionHistoryForSubAccount
      */
-    readonly row: number;
+    readonly row: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiGetMovePositionHistoryForSubAccount
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiGetMovePositionHistoryForSubAccount
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiGetMovePositionHistoryForSubAccount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1953,10 +1958,10 @@ export interface GetSubAccountDepositAddressRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiGetSubAccountDepositAddress
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1980,45 +1985,45 @@ export interface GetSubAccountDepositHistoryRequest {
 
     /**
      * 0(0:pending,6: credited but cannot withdraw,7:Wrong Deposit,8:Waiting User confirm,1:success)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiGetSubAccountDepositHistory
      */
-    readonly status?: number;
+    readonly status?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiGetSubAccountDepositHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiGetSubAccountDepositHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default value: 1, Max value: 200
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiGetSubAccountDepositHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      * default:0
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiGetSubAccountDepositHistory
      */
-    readonly offset?: number;
+    readonly offset?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiGetSubAccountDepositHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 
     /**
      *
@@ -2035,10 +2040,10 @@ export interface GetSubAccountDepositHistoryRequest {
 export interface GetSummaryOfSubAccountsFuturesAccountRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiGetSummaryOfSubAccountsFuturesAccount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2048,31 +2053,31 @@ export interface GetSummaryOfSubAccountsFuturesAccountRequest {
 export interface GetSummaryOfSubAccountsFuturesAccountV2Request {
     /**
      * 1:USDT-margined Futures，2: Coin-margined Futures
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiGetSummaryOfSubAccountsFuturesAccountV2
      */
-    readonly futuresType: number;
+    readonly futuresType: number | bigint;
 
     /**
      * Default value: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiGetSummaryOfSubAccountsFuturesAccountV2
      */
-    readonly page?: number;
+    readonly page?: number | bigint;
 
     /**
      * Default value: 1, Max value: 200
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiGetSummaryOfSubAccountsFuturesAccountV2
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiGetSummaryOfSubAccountsFuturesAccountV2
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2082,10 +2087,10 @@ export interface GetSummaryOfSubAccountsFuturesAccountV2Request {
 export interface GetSummaryOfSubAccountsMarginAccountRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiGetSummaryOfSubAccountsMarginAccount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2116,17 +2121,17 @@ export interface MarginTransferForSubAccountRequest {
 
     /**
      * 1: transfer from subaccount's  spot account to margin account 2: transfer from subaccount's margin account to its spot account
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiMarginTransferForSubAccount
      */
-    readonly type: number;
+    readonly type: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiMarginTransferForSubAccount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2164,10 +2169,10 @@ export interface MovePositionForSubAccountRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiMovePositionForSubAccount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2184,10 +2189,10 @@ export interface QuerySubAccountAssetsRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiQuerySubAccountAssets
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2204,10 +2209,10 @@ export interface QuerySubAccountAssetsAssetManagementRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiQuerySubAccountAssetsAssetManagement
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2224,45 +2229,45 @@ export interface QuerySubAccountFuturesAssetTransferHistoryRequest {
 
     /**
      * 1:USDT-margined Futures，2: Coin-margined Futures
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiQuerySubAccountFuturesAssetTransferHistory
      */
-    readonly futuresType: number;
+    readonly futuresType: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiQuerySubAccountFuturesAssetTransferHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiQuerySubAccountFuturesAssetTransferHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default value: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiQuerySubAccountFuturesAssetTransferHistory
      */
-    readonly page?: number;
+    readonly page?: number | bigint;
 
     /**
      * Default value: 1, Max value: 200
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiQuerySubAccountFuturesAssetTransferHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiQuerySubAccountFuturesAssetTransferHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2286,38 +2291,38 @@ export interface QuerySubAccountSpotAssetTransferHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiQuerySubAccountSpotAssetTransferHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiQuerySubAccountSpotAssetTransferHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default value: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiQuerySubAccountSpotAssetTransferHistory
      */
-    readonly page?: number;
+    readonly page?: number | bigint;
 
     /**
      * Default value: 1, Max value: 200
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiQuerySubAccountSpotAssetTransferHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiQuerySubAccountSpotAssetTransferHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2334,24 +2339,24 @@ export interface QuerySubAccountSpotAssetsSummaryRequest {
 
     /**
      * Default value: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiQuerySubAccountSpotAssetsSummary
      */
-    readonly page?: number;
+    readonly page?: number | bigint;
 
     /**
      * default 10, max 20
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiQuerySubAccountSpotAssetsSummary
      */
-    readonly size?: number;
+    readonly size?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiQuerySubAccountSpotAssetsSummary
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2382,38 +2387,38 @@ export interface QueryUniversalTransferHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiQueryUniversalTransferHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiQueryUniversalTransferHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default value: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiQueryUniversalTransferHistory
      */
-    readonly page?: number;
+    readonly page?: number | bigint;
 
     /**
      * Default value: 1, Max value: 200
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiQueryUniversalTransferHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiQueryUniversalTransferHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2437,10 +2442,10 @@ export interface SubAccountFuturesAssetTransferRequest {
 
     /**
      * 1:USDT-margined Futures，2: Coin-margined Futures
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiSubAccountFuturesAssetTransfer
      */
-    readonly futuresType: number;
+    readonly futuresType: number | bigint;
 
     /**
      *
@@ -2458,10 +2463,10 @@ export interface SubAccountFuturesAssetTransferRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiSubAccountFuturesAssetTransfer
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2478,31 +2483,31 @@ export interface SubAccountTransferHistoryRequest {
 
     /**
      * 1: transfer in, 2: transfer out
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiSubAccountTransferHistory
      */
-    readonly type?: number;
+    readonly type?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiSubAccountTransferHistory
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiSubAccountTransferHistory
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default value: 1, Max value: 200
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiSubAccountTransferHistory
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      * Default `False`, return PROCESS and SUCCESS status history; If `True`,return PROCESS and SUCCESS and FAILURE status history
@@ -2513,10 +2518,10 @@ export interface SubAccountTransferHistoryRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiSubAccountTransferHistory
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2540,10 +2545,10 @@ export interface TransferToMasterRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiTransferToMaster
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2574,10 +2579,10 @@ export interface TransferToSubAccountOfSameMasterRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiTransferToSubAccountOfSameMaster
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -2643,10 +2648,10 @@ export interface UniversalTransferRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AssetManagementApiUniversalTransfer
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

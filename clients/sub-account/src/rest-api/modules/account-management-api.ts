@@ -45,13 +45,13 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
          *
          * @summary Create a Virtual Sub-account (For Master Account) (USER_DATA)
          * @param {string} subAccountString Please input a string. We will create a virtual email using that string for you to register
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         createAVirtualSubAccount: async (
             subAccountString: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'subAccountString' is not null or undefined
             assertParamExists('createAVirtualSubAccount', 'subAccountString', subAccountString);
@@ -83,13 +83,13 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
          *
          * @summary Enable Futures for Sub-account (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         enableFuturesForSubAccount: async (
             email: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
             assertParamExists('enableFuturesForSubAccount', 'email', email);
@@ -121,13 +121,13 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
          *
          * @summary Enable Options for Sub-account (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         enableOptionsForSubAccount: async (
             email: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
             assertParamExists('enableOptionsForSubAccount', 'email', email);
@@ -159,13 +159,13 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
          *
          * @summary Get Futures Position-Risk of Sub-account (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getFuturesPositionRiskOfSubAccount: async (
             email: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
             assertParamExists('getFuturesPositionRiskOfSubAccount', 'email', email);
@@ -197,15 +197,15 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
          *
          * @summary Get Futures Position-Risk of Sub-account V2 (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
-         * @param {number} futuresType 1:USDT-margined Futures，2: Coin-margined Futures
-         * @param {number} [recvWindow]
+         * @param {number | bigint} futuresType 1:USDT-margined Futures，2: Coin-margined Futures
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getFuturesPositionRiskOfSubAccountV2: async (
             email: string,
-            futuresType: number,
-            recvWindow?: number
+            futuresType: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
             assertParamExists('getFuturesPositionRiskOfSubAccountV2', 'email', email);
@@ -245,13 +245,13 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
          *
          * @summary Get Sub-account\'s Status on Margin Or Futures (For Master Account) (USER_DATA)
          * @param {string} [email] Managed sub-account email
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getSubAccountsStatusOnMarginOrFutures: async (
             email?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -281,18 +281,18 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
          * @summary Query Sub-account List (For Master Account) (USER_DATA)
          * @param {string} [email] Managed sub-account email
          * @param {string} [isFreeze] true or false
-         * @param {number} [page] Default value: 1
-         * @param {number} [limit] Default value: 1, Max value: 200
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [page] Default value: 1
+         * @param {number | bigint} [limit] Default value: 1, Max value: 200
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         querySubAccountList: async (
             email?: string,
             isFreeze?: string,
-            page?: number,
-            limit?: number,
-            recvWindow?: number
+            page?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -333,13 +333,13 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
          *
          * @summary Query Sub-account Transaction Statistics (For Master Account) (USER_DATA)
          * @param {string} [email] Managed sub-account email
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         querySubAccountTransactionStatistics: async (
             email?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -502,10 +502,10 @@ export interface CreateAVirtualSubAccountRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountManagementApiCreateAVirtualSubAccount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -522,10 +522,10 @@ export interface EnableFuturesForSubAccountRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountManagementApiEnableFuturesForSubAccount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -542,10 +542,10 @@ export interface EnableOptionsForSubAccountRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountManagementApiEnableOptionsForSubAccount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -562,10 +562,10 @@ export interface GetFuturesPositionRiskOfSubAccountRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountManagementApiGetFuturesPositionRiskOfSubAccount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -582,17 +582,17 @@ export interface GetFuturesPositionRiskOfSubAccountV2Request {
 
     /**
      * 1:USDT-margined Futures，2: Coin-margined Futures
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountManagementApiGetFuturesPositionRiskOfSubAccountV2
      */
-    readonly futuresType: number;
+    readonly futuresType: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountManagementApiGetFuturesPositionRiskOfSubAccountV2
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -609,10 +609,10 @@ export interface GetSubAccountsStatusOnMarginOrFuturesRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountManagementApiGetSubAccountsStatusOnMarginOrFutures
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -636,24 +636,24 @@ export interface QuerySubAccountListRequest {
 
     /**
      * Default value: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountManagementApiQuerySubAccountList
      */
-    readonly page?: number;
+    readonly page?: number | bigint;
 
     /**
      * Default value: 1, Max value: 200
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountManagementApiQuerySubAccountList
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountManagementApiQuerySubAccountList
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -670,10 +670,10 @@ export interface QuerySubAccountTransactionStatisticsRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof AccountManagementApiQuerySubAccountTransactionStatistics
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

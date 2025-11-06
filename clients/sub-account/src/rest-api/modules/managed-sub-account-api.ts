@@ -49,7 +49,7 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          * @param {string} toEmail
          * @param {string} asset
          * @param {number} amount
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -57,7 +57,7 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             toEmail: string,
             asset: string,
             amount: number,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'toEmail' is not null or undefined
             assertParamExists('depositAssetsIntoTheManagedSubAccount', 'toEmail', toEmail);
@@ -107,7 +107,7 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          * @param {string} coin
          * @param {string} [network] networks can be found in `GET /sapi/v1/capital/deposit/address`
          * @param {number} [amount]
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -116,7 +116,7 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             coin: string,
             network?: string,
             amount?: number,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
             assertParamExists('getManagedSubAccountDepositAddress', 'email', email);
@@ -162,13 +162,13 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          *
          * @summary Query Managed Sub-account Asset Details (For Investor Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryManagedSubAccountAssetDetails: async (
             email: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
             assertParamExists('queryManagedSubAccountAssetDetails', 'email', email);
@@ -238,17 +238,17 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          *
          * @summary Query Managed Sub-account List (For Investor) (USER_DATA)
          * @param {string} [email] Managed sub-account email
-         * @param {number} [page] Default value: 1
-         * @param {number} [limit] Default value: 1, Max value: 200
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [page] Default value: 1
+         * @param {number | bigint} [limit] Default value: 1, Max value: 200
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryManagedSubAccountList: async (
             email?: string,
-            page?: number,
-            limit?: number,
-            recvWindow?: number
+            page?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -328,20 +328,20 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          * @summary Query Managed Sub-account Snapshot (For Investor Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {string} type "SPOT", "MARGIN"（cross）, "FUTURES"（UM）
-         * @param {number} [startTime]
-         * @param {number} [endTime]
-         * @param {number} [limit] Default value: 1, Max value: 200
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [limit] Default value: 1, Max value: 200
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryManagedSubAccountSnapshot: async (
             email: string,
             type: string,
-            startTime?: number,
-            endTime?: number,
-            limit?: number,
-            recvWindow?: number
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
             assertParamExists('queryManagedSubAccountSnapshot', 'email', email);
@@ -392,10 +392,10 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          *
          * @summary Query Managed Sub Account Transfer Log (For Investor Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
-         * @param {number} startTime Start Time
-         * @param {number} endTime End Time (The start time and end time interval cannot exceed half a year)
-         * @param {number} page Page
-         * @param {number} limit Limit (Max: 500)
+         * @param {number | bigint} startTime Start Time
+         * @param {number | bigint} endTime End Time (The start time and end time interval cannot exceed half a year)
+         * @param {number | bigint} page Page
+         * @param {number | bigint} limit Limit (Max: 500)
          * @param {string} [transfers] Transfer Direction (FROM/TO)
          * @param {string} [transferFunctionAccountType] Transfer function account type (SPOT/MARGIN/ISOLATED_MARGIN/USDT_FUTURE/COIN_FUTURE)
          *
@@ -403,10 +403,10 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          */
         queryManagedSubAccountTransferLogMasterAccountInvestor: async (
             email: string,
-            startTime: number,
-            endTime: number,
-            page: number,
-            limit: number,
+            startTime: number | bigint,
+            endTime: number | bigint,
+            page: number | bigint,
+            limit: number | bigint,
             transfers?: string,
             transferFunctionAccountType?: string
         ): Promise<RequestArgs> => {
@@ -489,10 +489,10 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          *
          * @summary Query Managed Sub Account Transfer Log (For Trading Team Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
-         * @param {number} startTime Start Time
-         * @param {number} endTime End Time (The start time and end time interval cannot exceed half a year)
-         * @param {number} page Page
-         * @param {number} limit Limit (Max: 500)
+         * @param {number | bigint} startTime Start Time
+         * @param {number | bigint} endTime End Time (The start time and end time interval cannot exceed half a year)
+         * @param {number | bigint} page Page
+         * @param {number | bigint} limit Limit (Max: 500)
          * @param {string} [transfers] Transfer Direction (FROM/TO)
          * @param {string} [transferFunctionAccountType] Transfer function account type (SPOT/MARGIN/ISOLATED_MARGIN/USDT_FUTURE/COIN_FUTURE)
          *
@@ -500,10 +500,10 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          */
         queryManagedSubAccountTransferLogMasterAccountTrading: async (
             email: string,
-            startTime: number,
-            endTime: number,
-            page: number,
-            limit: number,
+            startTime: number | bigint,
+            endTime: number | bigint,
+            page: number | bigint,
+            limit: number | bigint,
             transfers?: string,
             transferFunctionAccountType?: string
         ): Promise<RequestArgs> => {
@@ -584,24 +584,24 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          * Weight: 60
          *
          * @summary Query Managed Sub Account Transfer Log (For Trading Team Sub Account) (USER_DATA)
-         * @param {number} startTime Start Time
-         * @param {number} endTime End Time (The start time and end time interval cannot exceed half a year)
-         * @param {number} page Page
-         * @param {number} limit Limit (Max: 500)
+         * @param {number | bigint} startTime Start Time
+         * @param {number | bigint} endTime End Time (The start time and end time interval cannot exceed half a year)
+         * @param {number | bigint} page Page
+         * @param {number | bigint} limit Limit (Max: 500)
          * @param {string} [transfers] Transfer Direction (FROM/TO)
          * @param {string} [transferFunctionAccountType] Transfer function account type (SPOT/MARGIN/ISOLATED_MARGIN/USDT_FUTURE/COIN_FUTURE)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         queryManagedSubAccountTransferLogSubAccountTrading: async (
-            startTime: number,
-            endTime: number,
-            page: number,
-            limit: number,
+            startTime: number | bigint,
+            endTime: number | bigint,
+            page: number | bigint,
+            limit: number | bigint,
             transfers?: string,
             transferFunctionAccountType?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'startTime' is not null or undefined
             assertParamExists(
@@ -671,8 +671,8 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          * @param {string} fromEmail
          * @param {string} asset
          * @param {number} amount
-         * @param {number} [transferDate] Withdrawals is automatically occur on the transfer date(UTC0). If a date is not selected, the withdrawal occurs right now
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [transferDate] Withdrawals is automatically occur on the transfer date(UTC0). If a date is not selected, the withdrawal occurs right now
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -680,8 +680,8 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             fromEmail: string,
             asset: string,
             amount: number,
-            transferDate?: number,
-            recvWindow?: number
+            transferDate?: number | bigint,
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'fromEmail' is not null or undefined
             assertParamExists('withdrawlAssetsFromTheManagedSubAccount', 'fromEmail', fromEmail);
@@ -927,10 +927,10 @@ export interface DepositAssetsIntoTheManagedSubAccountRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ManagedSubAccountApiDepositAssetsIntoTheManagedSubAccount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -968,10 +968,10 @@ export interface GetManagedSubAccountDepositAddressRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ManagedSubAccountApiGetManagedSubAccountDepositAddress
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -988,10 +988,10 @@ export interface QueryManagedSubAccountAssetDetailsRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountAssetDetails
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1028,24 +1028,24 @@ export interface QueryManagedSubAccountListRequest {
 
     /**
      * Default value: 1
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountList
      */
-    readonly page?: number;
+    readonly page?: number | bigint;
 
     /**
      * Default value: 1, Max value: 200
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountList
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountList
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1089,31 +1089,31 @@ export interface QueryManagedSubAccountSnapshotRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountSnapshot
      */
-    readonly startTime?: number;
+    readonly startTime?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountSnapshot
      */
-    readonly endTime?: number;
+    readonly endTime?: number | bigint;
 
     /**
      * Default value: 1, Max value: 200
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountSnapshot
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountSnapshot
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1130,31 +1130,31 @@ export interface QueryManagedSubAccountTransferLogMasterAccountInvestorRequest {
 
     /**
      * Start Time
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogMasterAccountInvestor
      */
-    readonly startTime: number;
+    readonly startTime: number | bigint;
 
     /**
      * End Time (The start time and end time interval cannot exceed half a year)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogMasterAccountInvestor
      */
-    readonly endTime: number;
+    readonly endTime: number | bigint;
 
     /**
      * Page
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogMasterAccountInvestor
      */
-    readonly page: number;
+    readonly page: number | bigint;
 
     /**
      * Limit (Max: 500)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogMasterAccountInvestor
      */
-    readonly limit: number;
+    readonly limit: number | bigint;
 
     /**
      * Transfer Direction (FROM/TO)
@@ -1185,31 +1185,31 @@ export interface QueryManagedSubAccountTransferLogMasterAccountTradingRequest {
 
     /**
      * Start Time
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogMasterAccountTrading
      */
-    readonly startTime: number;
+    readonly startTime: number | bigint;
 
     /**
      * End Time (The start time and end time interval cannot exceed half a year)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogMasterAccountTrading
      */
-    readonly endTime: number;
+    readonly endTime: number | bigint;
 
     /**
      * Page
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogMasterAccountTrading
      */
-    readonly page: number;
+    readonly page: number | bigint;
 
     /**
      * Limit (Max: 500)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogMasterAccountTrading
      */
-    readonly limit: number;
+    readonly limit: number | bigint;
 
     /**
      * Transfer Direction (FROM/TO)
@@ -1233,31 +1233,31 @@ export interface QueryManagedSubAccountTransferLogMasterAccountTradingRequest {
 export interface QueryManagedSubAccountTransferLogSubAccountTradingRequest {
     /**
      * Start Time
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogSubAccountTrading
      */
-    readonly startTime: number;
+    readonly startTime: number | bigint;
 
     /**
      * End Time (The start time and end time interval cannot exceed half a year)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogSubAccountTrading
      */
-    readonly endTime: number;
+    readonly endTime: number | bigint;
 
     /**
      * Page
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogSubAccountTrading
      */
-    readonly page: number;
+    readonly page: number | bigint;
 
     /**
      * Limit (Max: 500)
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogSubAccountTrading
      */
-    readonly limit: number;
+    readonly limit: number | bigint;
 
     /**
      * Transfer Direction (FROM/TO)
@@ -1275,10 +1275,10 @@ export interface QueryManagedSubAccountTransferLogSubAccountTradingRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogSubAccountTrading
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -1309,17 +1309,17 @@ export interface WithdrawlAssetsFromTheManagedSubAccountRequest {
 
     /**
      * Withdrawals is automatically occur on the transfer date(UTC0). If a date is not selected, the withdrawal occurs right now
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ManagedSubAccountApiWithdrawlAssetsFromTheManagedSubAccount
      */
-    readonly transferDate?: number;
+    readonly transferDate?: number | bigint;
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ManagedSubAccountApiWithdrawlAssetsFromTheManagedSubAccount
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**

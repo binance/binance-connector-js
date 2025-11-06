@@ -42,7 +42,7 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
          * @param {string} subAccountApiKey
          * @param {string} status IP Restriction status. 1 = IP Unrestricted. 2 = Restrict access to trusted IPs only.
          * @param {string} [ipAddress] Insert static IP in batch, separated by commas.
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -51,7 +51,7 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
             subAccountApiKey: string,
             status: string,
             ipAddress?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
             assertParamExists('addIpRestrictionForSubAccountApiKey', 'email', email);
@@ -107,7 +107,7 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
          * @param {string} email [Sub-account email](#email-address)
          * @param {string} subAccountApiKey
          * @param {string} ipAddress IPs to be deleted. Can be added in batches, separated by commas
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -115,7 +115,7 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
             email: string,
             subAccountApiKey: string,
             ipAddress: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
             assertParamExists('deleteIpListForASubAccountApiKey', 'email', email);
@@ -164,14 +164,14 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
          * @summary Get IP Restriction for a Sub-account API Key (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
          * @param {string} subAccountApiKey
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getIpRestrictionForASubAccountApiKey: async (
             email: string,
             subAccountApiKey: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'email' is not null or undefined
             assertParamExists('getIpRestrictionForASubAccountApiKey', 'email', email);
@@ -297,10 +297,10 @@ export interface AddIpRestrictionForSubAccountApiKeyRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ApiManagementApiAddIpRestrictionForSubAccountApiKey
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -331,10 +331,10 @@ export interface DeleteIpListForASubAccountApiKeyRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ApiManagementApiDeleteIpListForASubAccountApiKey
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -358,10 +358,10 @@ export interface GetIpRestrictionForASubAccountApiKeyRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof ApiManagementApiGetIpRestrictionForASubAccountApiKey
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
