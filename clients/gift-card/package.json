@@ -1,7 +1,7 @@
 {
     "name": "@binance/gift-card",
     "description": "Official Binance Gift Card Connector - A lightweight library that provides a convenient interface to Binance's Gift Card REST API.",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",

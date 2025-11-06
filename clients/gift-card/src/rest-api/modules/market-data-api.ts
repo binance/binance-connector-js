@@ -50,7 +50,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @param {string} baseToken The token you want to pay, example: BUSD
          * @param {string} faceToken The token you want to buy, example: BNB. If faceToken = baseToken, it's the same as createCode endpoint.
          * @param {number} baseTokenAmount The base token asset quantity, example : 1.002
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -58,7 +58,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             baseToken: string,
             faceToken: string,
             baseTokenAmount: number,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'baseToken' is not null or undefined
             assertParamExists('createADualTokenGiftCard', 'baseToken', baseToken);
@@ -110,14 +110,14 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @summary Create a single-token gift card (USER_DATA)
          * @param {string} token The token type contained in the Binance Gift Card
          * @param {number} amount The amount of the token contained in the Binance Gift Card
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         createASingleTokenGiftCard: async (
             token: string,
             amount: number,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'token' is not null or undefined
             assertParamExists('createASingleTokenGiftCard', 'token', token);
@@ -157,11 +157,11 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 1
          *
          * @summary Fetch RSA Public Key(USER_DATA)
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        fetchRsaPublicKey: async (recvWindow?: number): Promise<RequestArgs> => {
+        fetchRsaPublicKey: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -185,11 +185,14 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * @summary Fetch Token Limit(USER_DATA)
          * @param {string} baseToken The token you want to pay, example: BUSD
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        fetchTokenLimit: async (baseToken: string, recvWindow?: number): Promise<RequestArgs> => {
+        fetchTokenLimit: async (
+            baseToken: string,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             // verify required parameter 'baseToken' is not null or undefined
             assertParamExists('fetchTokenLimit', 'baseToken', baseToken);
 
@@ -231,14 +234,14 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @summary Redeem a Binance Gift Card(USER_DATA)
          * @param {string} code Redemption code of Binance Gift Card to be redeemed, supports both Plaintext & Encrypted code.
          * @param {string} [externalUid] Each external unique ID represents a unique user on the partner platform. The function helps you to identify the redemption behavior of different users, such as redemption frequency and amount. It also helps risk and limit control of a single account, such as daily limit on redemption volume, frequency, and incorrect number of entries. This will also prevent a single user account reach the partner's daily redemption limits. We strongly recommend you to use this feature and transfer us the User ID of your users if you have different users redeeming Binance Gift Cards on your platform. To protect user data privacy, you may choose to transfer the user id in any desired format (max. 400 characters).
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         redeemABinanceGiftCard: async (
             code: string,
             externalUid?: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'code' is not null or undefined
             assertParamExists('redeemABinanceGiftCard', 'code', code);
@@ -276,13 +279,13 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * @summary Verify Binance Gift Card by Gift Card Number(USER_DATA)
          * @param {string} referenceNo Enter the Gift Card Number
-         * @param {number} [recvWindow]
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         verifyBinanceGiftCardByGiftCardNumber: async (
             referenceNo: string,
-            recvWindow?: number
+            recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'referenceNo' is not null or undefined
             assertParamExists('verifyBinanceGiftCardByGiftCardNumber', 'referenceNo', referenceNo);
@@ -459,10 +462,10 @@ export interface CreateADualTokenGiftCardRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiCreateADualTokenGiftCard
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -486,10 +489,10 @@ export interface CreateASingleTokenGiftCardRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiCreateASingleTokenGiftCard
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -499,10 +502,10 @@ export interface CreateASingleTokenGiftCardRequest {
 export interface FetchRsaPublicKeyRequest {
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiFetchRsaPublicKey
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -519,10 +522,10 @@ export interface FetchTokenLimitRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiFetchTokenLimit
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -546,10 +549,10 @@ export interface RedeemABinanceGiftCardRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiRedeemABinanceGiftCard
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -566,10 +569,10 @@ export interface VerifyBinanceGiftCardByGiftCardNumberRequest {
 
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketDataApiVerifyBinanceGiftCardByGiftCardNumber
      */
-    readonly recvWindow?: number;
+    readonly recvWindow?: number | bigint;
 }
 
 /**
