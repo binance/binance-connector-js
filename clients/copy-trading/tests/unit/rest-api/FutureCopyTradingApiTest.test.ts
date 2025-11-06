@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { FutureCopyTradingApi } from '../../../src/rest-api';
@@ -40,12 +41,14 @@ describe('FutureCopyTradingApi', () => {
 
     describe('getFuturesLeadTraderStatus()', () => {
         it('should execute getFuturesLeadTraderStatus() successfully with required parameters only', async () => {
-            mockResponse = {
-                code: '000000',
-                message: 'success',
-                data: { isLeadTrader: true, time: 1717382310843 },
-                success: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: { isLeadTrader: true, time: 1717382310843 },
+                    success: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFuturesLeadTraderStatus').mockReturnValue(
                 Promise.resolve({
@@ -66,12 +69,14 @@ describe('FutureCopyTradingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                code: '000000',
-                message: 'success',
-                data: { isLeadTrader: true, time: 1717382310843 },
-                success: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: { isLeadTrader: true, time: 1717382310843 },
+                    success: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFuturesLeadTraderStatus').mockReturnValue(
                 Promise.resolve({
@@ -107,14 +112,16 @@ describe('FutureCopyTradingApi', () => {
 
     describe('getFuturesLeadTradingSymbolWhitelist()', () => {
         it('should execute getFuturesLeadTradingSymbolWhitelist() successfully with required parameters only', async () => {
-            mockResponse = {
-                code: '000000',
-                message: 'success',
-                data: [
-                    { symbol: 'BTCUSDT', baseAsset: 'BTC', quoteAsset: 'USDT' },
-                    { symbol: 'ETHUSDT', baseAsset: 'ETH', quoteAsset: 'USDT' },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: [
+                        { symbol: 'BTCUSDT', baseAsset: 'BTC', quoteAsset: 'USDT' },
+                        { symbol: 'ETHUSDT', baseAsset: 'ETH', quoteAsset: 'USDT' },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFuturesLeadTradingSymbolWhitelist').mockReturnValue(
                 Promise.resolve({
@@ -135,14 +142,16 @@ describe('FutureCopyTradingApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                code: '000000',
-                message: 'success',
-                data: [
-                    { symbol: 'BTCUSDT', baseAsset: 'BTC', quoteAsset: 'USDT' },
-                    { symbol: 'ETHUSDT', baseAsset: 'ETH', quoteAsset: 'USDT' },
-                ],
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: [
+                        { symbol: 'BTCUSDT', baseAsset: 'BTC', quoteAsset: 'USDT' },
+                        { symbol: 'ETHUSDT', baseAsset: 'ETH', quoteAsset: 'USDT' },
+                    ],
+                })
+            );
 
             const spy = jest.spyOn(client, 'getFuturesLeadTradingSymbolWhitelist').mockReturnValue(
                 Promise.resolve({

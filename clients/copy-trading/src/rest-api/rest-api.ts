@@ -74,6 +74,7 @@ export class RestAPI {
      *
      * @summary Get Futures Lead Trader Status(TRADE)
      * @param {GetFuturesLeadTraderStatusRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetFuturesLeadTraderStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/copy_trading/future-copy-trading/Get-Futures-Lead-Trader-Status Binance API Documentation}
@@ -91,6 +92,7 @@ export class RestAPI {
      *
      * @summary Get Futures Lead Trading Symbol Whitelist(USER_DATA)
      * @param {GetFuturesLeadTradingSymbolWhitelistRequest} requestParameters Request parameters.
+     *
      * @returns {Promise<RestApiResponse<GetFuturesLeadTradingSymbolWhitelistResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/copy_trading/future-copy-trading/Get-Futures-Lead-Trading-Symbol-Whitelist Binance API Documentation}

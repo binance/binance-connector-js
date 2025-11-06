@@ -27,8 +27,8 @@ export interface GetFuturesLeadTraderStatusResponseData {
     isLeadTrader?: boolean;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetFuturesLeadTraderStatusResponseData
      */
-    time?: number;
+    time?: number | bigint;
 }
