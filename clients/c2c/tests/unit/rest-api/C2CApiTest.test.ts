@@ -12,6 +12,7 @@
  */
 
 import { jest, expect, beforeEach, describe, it } from '@jest/globals';
+import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { C2CApi } from '../../../src/rest-api';
@@ -34,30 +35,32 @@ describe('C2CApi', () => {
 
     describe('getC2CTradeHistory()', () => {
         it('should execute getC2CTradeHistory() successfully with required parameters only', async () => {
-            mockResponse = {
-                code: '000000',
-                message: 'success',
-                data: [
-                    {
-                        orderNumber: '20219644646554779648',
-                        advNo: '11218246497340923904',
-                        tradeType: 'SELL',
-                        asset: 'BUSD',
-                        fiat: 'CNY',
-                        fiatSymbol: '￥',
-                        amount: '5000.00000000',
-                        totalPrice: '33400.00000000',
-                        unitPrice: '6.68',
-                        orderStatus: 'COMPLETED',
-                        createTime: 1619361369000,
-                        commission: '0',
-                        counterPartNickName: 'ab***',
-                        advertisementRole: 'TAKER',
-                    },
-                ],
-                total: 1,
-                success: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: [
+                        {
+                            orderNumber: '20219644646554779648',
+                            advNo: '11218246497340923904',
+                            tradeType: 'SELL',
+                            asset: 'BUSD',
+                            fiat: 'CNY',
+                            fiatSymbol: '￥',
+                            amount: '5000.00000000',
+                            totalPrice: '33400.00000000',
+                            unitPrice: '6.68',
+                            orderStatus: 'COMPLETED',
+                            createTime: 1619361369000,
+                            commission: '0',
+                            counterPartNickName: 'ab***',
+                            advertisementRole: 'TAKER',
+                        },
+                    ],
+                    total: 1,
+                    success: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getC2CTradeHistory').mockReturnValue(
                 Promise.resolve({
@@ -75,36 +78,40 @@ describe('C2CApi', () => {
 
         it('should execute getC2CTradeHistory() successfully with optional parameters', async () => {
             const params: GetC2CTradeHistoryRequest = {
+                tradeType: 'tradeType_example',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 page: 1,
+                rows: 100,
                 recvWindow: 5000,
             };
 
-            mockResponse = {
-                code: '000000',
-                message: 'success',
-                data: [
-                    {
-                        orderNumber: '20219644646554779648',
-                        advNo: '11218246497340923904',
-                        tradeType: 'SELL',
-                        asset: 'BUSD',
-                        fiat: 'CNY',
-                        fiatSymbol: '￥',
-                        amount: '5000.00000000',
-                        totalPrice: '33400.00000000',
-                        unitPrice: '6.68',
-                        orderStatus: 'COMPLETED',
-                        createTime: 1619361369000,
-                        commission: '0',
-                        counterPartNickName: 'ab***',
-                        advertisementRole: 'TAKER',
-                    },
-                ],
-                total: 1,
-                success: true,
-            };
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: [
+                        {
+                            orderNumber: '20219644646554779648',
+                            advNo: '11218246497340923904',
+                            tradeType: 'SELL',
+                            asset: 'BUSD',
+                            fiat: 'CNY',
+                            fiatSymbol: '￥',
+                            amount: '5000.00000000',
+                            totalPrice: '33400.00000000',
+                            unitPrice: '6.68',
+                            orderStatus: 'COMPLETED',
+                            createTime: 1619361369000,
+                            commission: '0',
+                            counterPartNickName: 'ab***',
+                            advertisementRole: 'TAKER',
+                        },
+                    ],
+                    total: 1,
+                    success: true,
+                })
+            );
 
             const spy = jest.spyOn(client, 'getC2CTradeHistory').mockReturnValue(
                 Promise.resolve({

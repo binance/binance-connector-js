@@ -29,27 +29,34 @@ const C2CApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
          * Get C2C Trade History
          *
          * The max interval between startTime and endTime is 30 days.
-         * If startTime and endTime are not sent, the recent 7 days' data will be returned.
-         * The earliest startTime is supported on June 10, 2020
-         * Return up to 200 records per request.
+         * If startTime and endTime are not sent, the recent 30 days' data will be returned.
+         * You can only view data from the past 6 months. To see all C2C orders, please check https://c2c.binance.com/en/fiatOrder
          *
          * Weight: 1
          *
          * @summary Get C2C Trade History (USER_DATA)
+         * @param {string} [tradeType] BUY, SELL
          * @param {number} [startTime]
          * @param {number} [endTime]
          * @param {number} [page] Default 1
+         * @param {number} [rows] default 100, max 100
          * @param {number} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getC2CTradeHistory: async (
+            tradeType?: string,
             startTime?: number,
             endTime?: number,
             page?: number,
+            rows?: number,
             recvWindow?: number
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (tradeType !== undefined && tradeType !== null) {
+                localVarQueryParameter['tradeType'] = tradeType;
+            }
 
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
@@ -61,6 +68,10 @@ const C2CApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
 
             if (page !== undefined && page !== null) {
                 localVarQueryParameter['page'] = page;
+            }
+
+            if (rows !== undefined && rows !== null) {
+                localVarQueryParameter['rows'] = rows;
             }
 
             if (recvWindow !== undefined && recvWindow !== null) {
@@ -89,9 +100,8 @@ export interface C2CApiInterface {
      * Get C2C Trade History
      *
      * The max interval between startTime and endTime is 30 days.
-     * If startTime and endTime are not sent, the recent 7 days' data will be returned.
-     * The earliest startTime is supported on June 10, 2020
-     * Return up to 200 records per request.
+     * If startTime and endTime are not sent, the recent 30 days' data will be returned.
+     * You can only view data from the past 6 months. To see all C2C orders, please check https://c2c.binance.com/en/fiatOrder
      *
      * Weight: 1
      *
@@ -112,6 +122,13 @@ export interface C2CApiInterface {
  */
 export interface GetC2CTradeHistoryRequest {
     /**
+     * BUY, SELL
+     * @type {string}
+     * @memberof C2CApiGetC2CTradeHistory
+     */
+    readonly tradeType?: string;
+
+    /**
      *
      * @type {number}
      * @memberof C2CApiGetC2CTradeHistory
@@ -131,6 +148,13 @@ export interface GetC2CTradeHistoryRequest {
      * @memberof C2CApiGetC2CTradeHistory
      */
     readonly page?: number;
+
+    /**
+     * default 100, max 100
+     * @type {number}
+     * @memberof C2CApiGetC2CTradeHistory
+     */
+    readonly rows?: number;
 
     /**
      *
@@ -157,9 +181,8 @@ export class C2CApi implements C2CApiInterface {
      * Get C2C Trade History
      *
      * The max interval between startTime and endTime is 30 days.
-     * If startTime and endTime are not sent, the recent 7 days' data will be returned.
-     * The earliest startTime is supported on June 10, 2020
-     * Return up to 200 records per request.
+     * If startTime and endTime are not sent, the recent 30 days' data will be returned.
+     * You can only view data from the past 6 months. To see all C2C orders, please check https://c2c.binance.com/en/fiatOrder
      *
      * Weight: 1
      *
@@ -174,9 +197,11 @@ export class C2CApi implements C2CApiInterface {
         requestParameters: GetC2CTradeHistoryRequest = {}
     ): Promise<RestApiResponse<GetC2CTradeHistoryResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.getC2CTradeHistory(
+            requestParameters?.tradeType,
             requestParameters?.startTime,
             requestParameters?.endTime,
             requestParameters?.page,
+            requestParameters?.rows,
             requestParameters?.recvWindow
         );
         return sendRequest<GetC2CTradeHistoryResponse>(

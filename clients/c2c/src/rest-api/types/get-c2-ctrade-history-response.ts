@@ -44,10 +44,10 @@ export interface GetC2CTradeHistoryResponse {
     data?: Array<GetC2CTradeHistoryResponseDataInner>;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetC2CTradeHistoryResponse
      */
-    total?: number;
+    total?: number | bigint;
     /**
      *
      * @type {boolean}

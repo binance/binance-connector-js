@@ -81,10 +81,10 @@ export interface GetC2CTradeHistoryResponseDataInner {
     orderStatus?: string;
     /**
      *
-     * @type {number}
+     * @type {number | bigint}
      * @memberof GetC2CTradeHistoryResponseDataInner
      */
-    createTime?: number;
+    createTime?: number | bigint;
     /**
      *
      * @type {string}
