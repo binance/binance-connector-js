@@ -13,6 +13,7 @@ export default [
             },
         },
         rules: {
+            'no-irregular-whitespace': ['error', { skipComments: true }],
             '@typescript-eslint/no-unused-expressions': [
                 'error',
                 {
