@@ -19,10 +19,16 @@ import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { jest, expect, beforeEach, afterEach, describe, it } from '@jest/globals';
 import { ConfigurationWebsocketAPI, WebsocketAPIBase, randomString } from '@binance/common';
 
-import { TradeApi, ModifyOrderSideEnum, NewOrderSideEnum } from '../../../src/websocket-api';
+import {
+    TradeApi,
+    ModifyOrderSideEnum,
+    NewAlgoOrderSideEnum,
+    NewOrderSideEnum,
+} from '../../../src/websocket-api';
 import {
     CancelOrderRequest,
     ModifyOrderRequest,
+    NewAlgoOrderRequest,
     NewOrderRequest,
     QueryOrderRequest,
 } from '../../../src/websocket-api';
@@ -48,6 +54,190 @@ describe('TradeApi', () => {
         response: {},
         rateLimits: [],
     };
+
+    describe('cancelAlgoOrder()', () => {
+        beforeEach(async () => {
+            mockWs = Object.assign(new EventEmitter(), {
+                close: jest.fn(),
+                ping: jest.fn(),
+                pong: jest.fn(),
+                send: jest.fn(),
+                readyState: WebSocketClient.OPEN,
+                OPEN: WebSocket.OPEN,
+                CLOSED: WebSocket.CLOSED,
+            }) as unknown as jest.Mocked<WebSocketClient> & EventEmitter;
+
+            (WebSocketClient as jest.MockedClass<typeof WebSocketClient>).mockImplementation(
+                () => mockWs
+            );
+
+            const config = new ConfigurationWebsocketAPI({
+                apiKey: 'test-api-key',
+                apiSecret: 'test-api-secret',
+                wsURL: 'ws://localhost:3000',
+                timeout: 1000,
+            });
+
+            websocketBase = new WebsocketAPIBase(config);
+            websocketBase.connect();
+        });
+
+        afterEach(async () => {
+            if (websocketBase) {
+                await websocketBase.disconnect();
+            }
+            jest.clearAllMocks();
+            jest.clearAllTimers();
+        });
+
+        it('should execute cancelAlgoOrder() successfully', async () => {
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '06c9dbd8-ccbf-4ecf-a29c-fe31495ac73f',
+                    status: 200,
+                    result: {
+                        algoId: 3000000000003505,
+                        clientAlgoId: '0Xkl1p621E4EryvufmYre1',
+                        algoType: 'CONDITIONAL',
+                        orderType: 'TAKE_PROFIT',
+                        symbol: 'BTCUSDT',
+                        side: 'SELL',
+                        positionSide: 'SHORT',
+                        timeInForce: 'GTC',
+                        quantity: '1.000',
+                        algoStatus: 'CANCELED',
+                        triggerPrice: '120000.00',
+                        price: '160000.00',
+                        icebergQuantity: null,
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
+                        workingType: 'CONTRACT_PRICE',
+                        priceMatch: 'NONE',
+                        closePosition: false,
+                        priceProtect: false,
+                        reduceOnly: false,
+                        createTime: 1762507264142,
+                        updateTime: 1762507264143,
+                        triggerTime: 0,
+                        goodTillDate: 0,
+                    },
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 2400,
+                            count: 1,
+                        },
+                    ],
+                })
+            );
+            mockResponse.id = randomString();
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new TradeApi(conn);
+                    const sendMsgSpy = jest.spyOn(conn, 'sendMessage');
+                    const responsePromise = websocketAPIClient.cancelAlgoOrder({
+                        id: mockResponse?.id,
+                    });
+                    mockWs.emit('message', JSONStringify(mockResponse));
+                    const response = await responsePromise;
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
+                    expect(response.rateLimits).toEqual(mockResponse.rateLimits);
+                    expect(sendMsgSpy).toHaveBeenCalledWith(
+                        '/algoOrder.cancel'.slice(1),
+                        expect.any(Object),
+                        { isSigned: true, withApiKey: false }
+                    );
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        });
+
+        it('should handle server error responses gracefully', async () => {
+            mockResponse = {
+                id: randomString(),
+                status: 400,
+                error: {
+                    code: -2010,
+                    msg: 'Account has insufficient balance for requested action.',
+                },
+                rateLimits: [
+                    {
+                        rateLimitType: 'ORDERS',
+                        interval: 'SECOND',
+                        intervalNum: 10,
+                        limit: 50,
+                        count: 13,
+                    },
+                ],
+            };
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new TradeApi(conn);
+                    const responsePromise = websocketAPIClient.cancelAlgoOrder({
+                        id: mockResponse?.id,
+                    });
+                    mockWs.emit('message', JSONStringify(mockResponse));
+                    await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        });
+
+        it('should handle request timeout gracefully', async () => {
+            jest.useRealTimers();
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new TradeApi(websocketBase);
+                    const responsePromise = websocketAPIClient.cancelAlgoOrder();
+                    await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        }, 10000);
+    });
 
     describe('cancelOrder()', () => {
         beforeEach(async () => {
@@ -454,6 +644,212 @@ describe('TradeApi', () => {
                 try {
                     websocketAPIClient = new TradeApi(websocketBase);
                     const responsePromise = websocketAPIClient.modifyOrder(params);
+                    await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        }, 10000);
+    });
+
+    describe('newAlgoOrder()', () => {
+        beforeEach(async () => {
+            mockWs = Object.assign(new EventEmitter(), {
+                close: jest.fn(),
+                ping: jest.fn(),
+                pong: jest.fn(),
+                send: jest.fn(),
+                readyState: WebSocketClient.OPEN,
+                OPEN: WebSocket.OPEN,
+                CLOSED: WebSocket.CLOSED,
+            }) as unknown as jest.Mocked<WebSocketClient> & EventEmitter;
+
+            (WebSocketClient as jest.MockedClass<typeof WebSocketClient>).mockImplementation(
+                () => mockWs
+            );
+
+            const config = new ConfigurationWebsocketAPI({
+                apiKey: 'test-api-key',
+                apiSecret: 'test-api-secret',
+                wsURL: 'ws://localhost:3000',
+                timeout: 1000,
+            });
+
+            websocketBase = new WebsocketAPIBase(config);
+            websocketBase.connect();
+        });
+
+        afterEach(async () => {
+            if (websocketBase) {
+                await websocketBase.disconnect();
+            }
+            jest.clearAllMocks();
+            jest.clearAllTimers();
+        });
+
+        it('should execute newAlgoOrder() successfully', async () => {
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '06c9dbd8-ccbf-4ecf-a29c-fe31495ac73f',
+                    status: 200,
+                    result: {
+                        algoId: 3000000000003505,
+                        clientAlgoId: '0Xkl1p621E4EryvufmYre1',
+                        algoType: 'CONDITIONAL',
+                        orderType: 'TAKE_PROFIT',
+                        symbol: 'BTCUSDT',
+                        side: 'SELL',
+                        positionSide: 'SHORT',
+                        timeInForce: 'GTC',
+                        quantity: '1.000',
+                        algoStatus: 'NEW',
+                        triggerPrice: '120000.00',
+                        price: '160000.00',
+                        icebergQuantity: null,
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
+                        workingType: 'CONTRACT_PRICE',
+                        priceMatch: 'NONE',
+                        closePosition: false,
+                        priceProtect: false,
+                        reduceOnly: false,
+                        createTime: 1762507264142,
+                        updateTime: 1762507264143,
+                        triggerTime: 0,
+                        goodTillDate: 0,
+                    },
+                    rateLimits: [
+                        {
+                            rateLimitType: 'REQUEST_WEIGHT',
+                            interval: 'MINUTE',
+                            intervalNum: 1,
+                            limit: 2400,
+                            count: 1,
+                        },
+                    ],
+                })
+            );
+            mockResponse.id = randomString();
+
+            const params: NewAlgoOrderRequest = {
+                algoType: 'algoType_example',
+                symbol: 'symbol_example',
+                side: NewAlgoOrderSideEnum.BUY,
+                type: 'type_example',
+            };
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new TradeApi(conn);
+                    const sendMsgSpy = jest.spyOn(conn, 'sendMessage');
+                    const responsePromise = websocketAPIClient.newAlgoOrder({
+                        id: mockResponse?.id,
+                        ...params,
+                    });
+                    mockWs.emit('message', JSONStringify(mockResponse));
+                    const response = await responsePromise;
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
+                    expect(response.rateLimits).toEqual(mockResponse.rateLimits);
+                    expect(sendMsgSpy).toHaveBeenCalledWith('/algoOrder.place'.slice(1), params, {
+                        isSigned: true,
+                        withApiKey: false,
+                    });
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        });
+
+        it('should handle server error responses gracefully', async () => {
+            mockResponse = {
+                id: randomString(),
+                status: 400,
+                error: {
+                    code: -2010,
+                    msg: 'Account has insufficient balance for requested action.',
+                },
+                rateLimits: [
+                    {
+                        rateLimitType: 'ORDERS',
+                        interval: 'SECOND',
+                        intervalNum: 10,
+                        limit: 50,
+                        count: 13,
+                    },
+                ],
+            };
+
+            const params: NewAlgoOrderRequest = {
+                algoType: 'algoType_example',
+                symbol: 'symbol_example',
+                side: NewAlgoOrderSideEnum.BUY,
+                type: 'type_example',
+            };
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new TradeApi(conn);
+                    const responsePromise = websocketAPIClient.newAlgoOrder({
+                        id: mockResponse?.id,
+                        ...params,
+                    });
+                    mockWs.emit('message', JSONStringify(mockResponse));
+                    await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        });
+
+        it('should handle request timeout gracefully', async () => {
+            jest.useRealTimers();
+
+            const params: NewAlgoOrderRequest = {
+                algoType: 'algoType_example',
+                symbol: 'symbol_example',
+                side: NewAlgoOrderSideEnum.BUY,
+                type: 'type_example',
+            };
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new TradeApi(websocketBase);
+                    const responsePromise = websocketAPIClient.newAlgoOrder(params);
                     await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
                     resolveTest(true);
                 } catch (error) {

@@ -82,6 +82,8 @@ import type {
     AccountTradeListRequest,
     AllOrdersRequest,
     AutoCancelAllOpenOrdersRequest,
+    CancelAlgoOrderRequest,
+    CancelAllAlgoOpenOrdersRequest,
     CancelAllOpenOrdersRequest,
     CancelMultipleOrdersRequest,
     CancelOrderRequest,
@@ -89,17 +91,21 @@ import type {
     ChangeMarginTypeRequest,
     ChangeMultiAssetsModeRequest,
     ChangePositionModeRequest,
+    CurrentAllAlgoOpenOrdersRequest,
     CurrentAllOpenOrdersRequest,
     GetOrderModifyHistoryRequest,
     GetPositionMarginChangeHistoryRequest,
     ModifyIsolatedPositionMarginRequest,
     ModifyMultipleOrdersRequest,
     ModifyOrderRequest,
+    NewAlgoOrderRequest,
     NewOrderRequest,
     PlaceMultipleOrdersRequest,
     PositionAdlQuantileEstimationRequest,
     PositionInformationV2Request,
     PositionInformationV3Request,
+    QueryAlgoOrderRequest,
+    QueryAllAlgoOrdersRequest,
     QueryCurrentOpenOrderRequest,
     QueryOrderRequest,
     TestOrderRequest,
@@ -173,6 +179,8 @@ import type {
     AccountTradeListResponse,
     AllOrdersResponse,
     AutoCancelAllOpenOrdersResponse,
+    CancelAlgoOrderResponse,
+    CancelAllAlgoOpenOrdersResponse,
     CancelAllOpenOrdersResponse,
     CancelMultipleOrdersResponse,
     CancelOrderResponse,
@@ -180,17 +188,21 @@ import type {
     ChangeMarginTypeResponse,
     ChangeMultiAssetsModeResponse,
     ChangePositionModeResponse,
+    CurrentAllAlgoOpenOrdersResponse,
     CurrentAllOpenOrdersResponse,
     GetOrderModifyHistoryResponse,
     GetPositionMarginChangeHistoryResponse,
     ModifyIsolatedPositionMarginResponse,
     ModifyMultipleOrdersResponse,
     ModifyOrderResponse,
+    NewAlgoOrderResponse,
     NewOrderResponse,
     PlaceMultipleOrdersResponse,
     PositionAdlQuantileEstimationResponse,
     PositionInformationV2Response,
     PositionInformationV3Response,
+    QueryAlgoOrderResponse,
+    QueryAllAlgoOrdersResponse,
     QueryCurrentOpenOrderResponse,
     QueryOrderResponse,
     TestOrderResponse,
@@ -973,7 +985,7 @@ export class RestAPI {
     /**
      * Mark Price and Funding Rate
      *
-     * Weight: 1
+     * Weight: 1 with symbol, 10 without symbol
      *
      * @summary Mark Price
      * @param {MarkPriceRequest} requestParameters Request parameters.
@@ -1487,6 +1499,44 @@ export class RestAPI {
     }
 
     /**
+     * Cancel an active algo order.
+     *
+     * Either `algoid` or `clientalgoid` must be sent.
+     *
+     * Weight: 1
+     *
+     * @summary Cancel Algo Order (TRADE)
+     * @param {CancelAlgoOrderRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<CancelAlgoOrderResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Algo-Order Binance API Documentation}
+     */
+    cancelAlgoOrder(
+        requestParameters: CancelAlgoOrderRequest = {}
+    ): Promise<RestApiResponse<CancelAlgoOrderResponse>> {
+        return this.tradeApi.cancelAlgoOrder(requestParameters);
+    }
+
+    /**
+     * Cancel All Algo Open Orders
+     *
+     * Weight: 1
+     *
+     * @summary Cancel All Algo Open Orders (TRADE)
+     * @param {CancelAllAlgoOpenOrdersRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<CancelAllAlgoOpenOrdersResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-All-Algo-Open-Orders Binance API Documentation}
+     */
+    cancelAllAlgoOpenOrders(
+        requestParameters: CancelAllAlgoOpenOrdersRequest
+    ): Promise<RestApiResponse<CancelAllAlgoOpenOrdersResponse>> {
+        return this.tradeApi.cancelAllAlgoOpenOrders(requestParameters);
+    }
+
+    /**
      * Cancel All Open Orders
      *
      * Weight: 1
@@ -1614,6 +1664,27 @@ export class RestAPI {
         requestParameters: ChangePositionModeRequest
     ): Promise<RestApiResponse<ChangePositionModeResponse>> {
         return this.tradeApi.changePositionMode(requestParameters);
+    }
+
+    /**
+     * Get all algo open orders on a symbol.
+     *
+     * If the symbol is not sent, orders for all symbols will be returned in an array.
+     *
+     * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
+     * Careful when accessing this with no symbol.
+     *
+     * @summary Current All Algo Open Orders (USER_DATA)
+     * @param {CurrentAllAlgoOpenOrdersRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<CurrentAllAlgoOpenOrdersResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Current-All-Algo-Open-Orders Binance API Documentation}
+     */
+    currentAllAlgoOpenOrders(
+        requestParameters: CurrentAllAlgoOpenOrdersRequest = {}
+    ): Promise<RestApiResponse<CurrentAllAlgoOpenOrdersResponse>> {
+        return this.tradeApi.currentAllAlgoOpenOrders(requestParameters);
     }
 
     /**
@@ -1752,6 +1823,54 @@ export class RestAPI {
         requestParameters: ModifyOrderRequest
     ): Promise<RestApiResponse<ModifyOrderResponse>> {
         return this.tradeApi.modifyOrder(requestParameters);
+    }
+
+    /**
+     * Send in a new Algo order.
+     *
+     * Condition orders will be triggered when:
+     *
+     * If parameter`priceProtect`is sent as true:
+     * when price reaches the `triggerPrice` ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
+     * "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
+     *
+     * `STOP`, `STOP_MARKET`:
+     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
+     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
+     * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
+     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
+     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
+     * `TRAILING_STOP_MARKET`:
+     * BUY: the lowest price after order placed <= `activationPrice`, and the latest price >= the lowest price * (1 + `callbackRate`)
+     * SELL: the highest price after order placed >= `activationPrice`, and the latest price <= the highest price * (1 - `callbackRate`)
+     *
+     * For `TRAILING_STOP_MARKET`, if you got such error code.
+     * ``{"code": -2021, "msg": "Order would immediately trigger."}``
+     * means that the parameters you send do not meet the following requirements:
+     * BUY: `activationPrice` should be smaller than latest price.
+     * SELL: `activationPrice` should be larger than latest price.
+     *
+     * `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`:
+     * Follow the same rules for condition orders.
+     * If triggered，**close all** current long position( if `SELL`) or current short position( if `BUY`).
+     * Cannot be used with `quantity` paremeter
+     * Cannot be used with `reduceOnly` parameter
+     * In Hedge Mode,cannot be used with `BUY` orders in `LONG` position side. and cannot be used with `SELL` orders in `SHORT` position side
+     * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
+     *
+     * Weight: 0 on IP rate limit(x-mbx-used-weight-1m)
+     *
+     * @summary New Algo Order(TRADE)
+     * @param {NewAlgoOrderRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<NewAlgoOrderResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/New-Algo-Order Binance API Documentation}
+     */
+    newAlgoOrder(
+        requestParameters: NewAlgoOrderRequest
+    ): Promise<RestApiResponse<NewAlgoOrderResponse>> {
+        return this.tradeApi.newAlgoOrder(requestParameters);
     }
 
     /**
@@ -1896,6 +2015,56 @@ export class RestAPI {
         requestParameters: PositionInformationV3Request = {}
     ): Promise<RestApiResponse<PositionInformationV3Response>> {
         return this.tradeApi.positionInformationV3(requestParameters);
+    }
+
+    /**
+     * Check an algo order's status.
+     *
+     * These orders will not be found:
+     * order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
+     * order create time + 90 days < current time
+     *
+     * Either `algoId` or `clientAlgoId` must be sent.
+     * `algoId` is self-increment for each specific `symbol`
+     *
+     * Weight: 1
+     *
+     * @summary Query Algo Order (USER_DATA)
+     * @param {QueryAlgoOrderRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<QueryAlgoOrderResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Algo-Order Binance API Documentation}
+     */
+    queryAlgoOrder(
+        requestParameters: QueryAlgoOrderRequest = {}
+    ): Promise<RestApiResponse<QueryAlgoOrderResponse>> {
+        return this.tradeApi.queryAlgoOrder(requestParameters);
+    }
+
+    /**
+     * Get all algo orders; active, CANCELED, TRIGGERED or FINISHED .
+     *
+     * These orders will not be found:
+     * order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
+     * order create time + 90 days < current time
+     *
+     * If `algoId` is set, it will get orders >= that `algoId`. Otherwise most recent orders are returned.
+     * The query time period must be less then 7 days( default as the recent 7 days).
+     *
+     * Weight: 5
+     *
+     * @summary Query All Algo Orders (USER_DATA)
+     * @param {QueryAllAlgoOrdersRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<QueryAllAlgoOrdersResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Query-All-Algo-Orders Binance API Documentation}
+     */
+    queryAllAlgoOrders(
+        requestParameters: QueryAllAlgoOrdersRequest
+    ): Promise<RestApiResponse<QueryAllAlgoOrdersResponse>> {
+        return this.tradeApi.queryAllAlgoOrders(requestParameters);
     }
 
     /**

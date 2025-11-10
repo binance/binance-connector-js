@@ -32,6 +32,9 @@ import type { AccountUpdate } from './account-update';
 import type { AccountUpdateA } from './account-update-a';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { AlgoUpdate } from './algo-update';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { ConditionalOrderTriggerReject } from './conditional-order-trigger-reject';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -71,6 +74,7 @@ import type { TradeLite } from './trade-lite';
 export type UserDataStreamEventsResponse =
     | ({ e: 'ACCOUNT_CONFIG_UPDATE' } & AccountConfigUpdate)
     | ({ e: 'ACCOUNT_UPDATE' } & AccountUpdate)
+    | ({ e: 'ALGO_UPDATE' } & AlgoUpdate)
     | ({ e: 'CONDITIONAL_ORDER_TRIGGER_REJECT' } & ConditionalOrderTriggerReject)
     | ({ e: 'GRID_UPDATE' } & GridUpdate)
     | ({ e: 'MARGIN_CALL' } & MarginCall)

@@ -16,37 +16,37 @@
 /**
  *
  * @export
- * @interface CancelOrderResponseRateLimitsInner
+ * @interface CancelAlgoOrderResponseRateLimitsInner
  */
-export interface CancelOrderResponseRateLimitsInner {
+export interface CancelAlgoOrderResponseRateLimitsInner {
     /**
      *
      * @type {string}
-     * @memberof CancelOrderResponseRateLimitsInner
+     * @memberof CancelAlgoOrderResponseRateLimitsInner
      */
     rateLimitType?: string;
     /**
      *
      * @type {string}
-     * @memberof CancelOrderResponseRateLimitsInner
+     * @memberof CancelAlgoOrderResponseRateLimitsInner
      */
     interval?: string;
     /**
      *
      * @type {number | bigint}
-     * @memberof CancelOrderResponseRateLimitsInner
+     * @memberof CancelAlgoOrderResponseRateLimitsInner
      */
     intervalNum?: number | bigint;
     /**
      *
      * @type {number | bigint}
-     * @memberof CancelOrderResponseRateLimitsInner
+     * @memberof CancelAlgoOrderResponseRateLimitsInner
      */
     limit?: number | bigint;
     /**
      *
      * @type {number | bigint}
-     * @memberof CancelOrderResponseRateLimitsInner
+     * @memberof CancelAlgoOrderResponseRateLimitsInner
      */
     count?: number | bigint;
 }

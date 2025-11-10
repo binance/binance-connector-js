@@ -29,8 +29,10 @@ import type {
     SymbolPriceTickerRequest,
 } from './modules/market-data-api';
 import type {
+    CancelAlgoOrderRequest,
     CancelOrderRequest,
     ModifyOrderRequest,
+    NewAlgoOrderRequest,
     NewOrderRequest,
     PositionInformationRequest,
     PositionInformationV2Request,
@@ -54,8 +56,10 @@ import type {
     SymbolPriceTickerResponse,
 } from './types';
 import type {
+    CancelAlgoOrderResponse,
     CancelOrderResponse,
     ModifyOrderResponse,
+    NewAlgoOrderResponse,
     NewOrderResponse,
     PositionInformationResponse,
     PositionInformationV2Response,
@@ -288,6 +292,25 @@ export class WebsocketAPIConnection {
     }
 
     /**
+     * Cancel an active algo order.
+     *
+     * Either `algoid` or `clientalgoid` must be sent.
+     *
+     * Weight: 1
+     *
+     * @summary Cancel Algo Order (TRADE)
+     * @param {CancelAlgoOrderRequest} requestParameters Request parameters.
+     *
+     * @returns Promise<WebsocketApiResponse<CancelAlgoOrderResponse>>
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Cancel-Algo-Order Binance API Documentation}
+     */
+    cancelAlgoOrder(
+        requestParameters: CancelAlgoOrderRequest = {}
+    ): Promise<WebsocketApiResponse<CancelAlgoOrderResponse>> {
+        return this.tradeApi.cancelAlgoOrder(requestParameters);
+    }
+
+    /**
      * Cancel an active order.
      *
      * Either `orderId` or `origClientOrderId` must be sent.
@@ -331,6 +354,53 @@ export class WebsocketAPIConnection {
         requestParameters: ModifyOrderRequest
     ): Promise<WebsocketApiResponse<ModifyOrderResponse>> {
         return this.tradeApi.modifyOrder(requestParameters);
+    }
+
+    /**
+     * Send in a new algo order.
+     *
+     * Condition orders will be triggered when:
+     *
+     * If parameter`priceProtect`is sent as true:
+     * when price reaches the `triggerPrice` ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
+     * "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
+     *
+     * `STOP`, `STOP_MARKET`:
+     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
+     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
+     * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
+     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
+     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
+     * `TRAILING_STOP_MARKET`:
+     * BUY: the lowest price after order placed <= `activationPrice`, and the latest price >= the lowest price * (1 + `callbackRate`)
+     * SELL: the highest price after order placed >= `activationPrice`, and the latest price <= the highest price * (1 - `callbackRate`)
+     *
+     * For `TRAILING_STOP_MARKET`, if you got such error code.
+     * ``{"code": -2021, "msg": "Order would immediately trigger."}``
+     * means that the parameters you send do not meet the following requirements:
+     * BUY: `activationPrice` should be smaller than latest price.
+     * SELL: `activationPrice` should be larger than latest price.
+     *
+     * `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`:
+     * Follow the same rules for condition orders.
+     * If triggered，**close all** current long position( if `SELL`) or current short position( if `BUY`).
+     * Cannot be used with `quantity` paremeter
+     * Cannot be used with `reduceOnly` parameter
+     * In Hedge Mode,cannot be used with `BUY` orders in `LONG` position side. and cannot be used with `SELL` orders in `SHORT` position side
+     * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
+     *
+     * Weight: 0
+     *
+     * @summary New Algo Order(TRADE)
+     * @param {NewAlgoOrderRequest} requestParameters Request parameters.
+     *
+     * @returns Promise<WebsocketApiResponse<NewAlgoOrderResponse>>
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/New-Algo-Order Binance API Documentation}
+     */
+    newAlgoOrder(
+        requestParameters: NewAlgoOrderRequest
+    ): Promise<WebsocketApiResponse<NewAlgoOrderResponse>> {
+        return this.tradeApi.newAlgoOrder(requestParameters);
     }
 
     /**

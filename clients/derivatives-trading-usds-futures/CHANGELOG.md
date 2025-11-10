@@ -1,5 +1,14 @@
 # Changelog
 
+## 16.0.0 - 2025-11-10
+
+### Added (2)
+
+#### WebSocket API
+
+- `cancelAlgoOrder()` (`algoOrder.cancel` method)
+- `newAlgoOrder()` (`algoOrder.place` method)
+
 ## 15.0.1 - 2025-11-06
 
 ### Changed (1)

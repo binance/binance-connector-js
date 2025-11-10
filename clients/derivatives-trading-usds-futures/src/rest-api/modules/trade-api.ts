@@ -23,6 +23,8 @@ import type {
     AccountTradeListResponse,
     AllOrdersResponse,
     AutoCancelAllOpenOrdersResponse,
+    CancelAlgoOrderResponse,
+    CancelAllAlgoOpenOrdersResponse,
     CancelAllOpenOrdersResponse,
     CancelMultipleOrdersResponse,
     CancelOrderResponse,
@@ -30,6 +32,7 @@ import type {
     ChangeMarginTypeResponse,
     ChangeMultiAssetsModeResponse,
     ChangePositionModeResponse,
+    CurrentAllAlgoOpenOrdersResponse,
     CurrentAllOpenOrdersResponse,
     GetOrderModifyHistoryResponse,
     GetPositionMarginChangeHistoryResponse,
@@ -37,12 +40,15 @@ import type {
     ModifyMultipleOrdersBatchOrdersParameterInner,
     ModifyMultipleOrdersResponse,
     ModifyOrderResponse,
+    NewAlgoOrderResponse,
     NewOrderResponse,
     PlaceMultipleOrdersBatchOrdersParameterInner,
     PlaceMultipleOrdersResponse,
     PositionAdlQuantileEstimationResponse,
     PositionInformationV2Response,
     PositionInformationV3Response,
+    QueryAlgoOrderResponse,
+    QueryAllAlgoOrdersResponse,
     QueryCurrentOpenOrderResponse,
     QueryOrderResponse,
     TestOrderResponse,
@@ -246,6 +252,87 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/countdownCancelAll',
                 method: 'POST',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Cancel an active algo order.
+         *
+         * Either `algoid` or `clientalgoid` must be sent.
+         *
+         * Weight: 1
+         *
+         * @summary Cancel Algo Order (TRADE)
+         * @param {number | bigint} [algoid]
+         * @param {string} [clientalgoid]
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        cancelAlgoOrder: async (
+            algoid?: number | bigint,
+            clientalgoid?: string,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (algoid !== undefined && algoid !== null) {
+                localVarQueryParameter['algoid'] = algoid;
+            }
+
+            if (clientalgoid !== undefined && clientalgoid !== null) {
+                localVarQueryParameter['clientalgoid'] = clientalgoid;
+            }
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/fapi/v1/algoOrder',
+                method: 'DELETE',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Cancel All Algo Open Orders
+         *
+         * Weight: 1
+         *
+         * @summary Cancel All Algo Open Orders (TRADE)
+         * @param {string} symbol
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        cancelAllAlgoOpenOrders: async (
+            symbol: string,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'symbol' is not null or undefined
+            assertParamExists('cancelAllAlgoOpenOrders', 'symbol', symbol);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (symbol !== undefined && symbol !== null) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/fapi/v1/algoOpenOrders',
+                method: 'DELETE',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
             };
@@ -556,6 +643,56 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/positionSide/dual',
                 method: 'POST',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Get all algo open orders on a symbol.
+         *
+         * If the symbol is not sent, orders for all symbols will be returned in an array.
+         *
+         * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
+         * Careful when accessing this with no symbol.
+         *
+         * @summary Current All Algo Open Orders (USER_DATA)
+         * @param {string} [algoType]
+         * @param {string} [symbol]
+         * @param {number | bigint} [algoId]
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        currentAllAlgoOpenOrders: async (
+            algoType?: string,
+            symbol?: string,
+            algoId?: number | bigint,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (algoType !== undefined && algoType !== null) {
+                localVarQueryParameter['algoType'] = algoType;
+            }
+
+            if (symbol !== undefined && symbol !== null) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+
+            if (algoId !== undefined && algoId !== null) {
+                localVarQueryParameter['algoId'] = algoId;
+            }
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/fapi/v1/openAlgoOrders',
+                method: 'GET',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
             };
@@ -934,6 +1071,188 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
+         * Send in a new Algo order.
+         *
+         * Condition orders will be triggered when:
+         *
+         * If parameter`priceProtect`is sent as true:
+         * when price reaches the `triggerPrice` ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
+         * "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
+         *
+         * `STOP`, `STOP_MARKET`:
+         * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
+         * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
+         * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
+         * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
+         * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
+         * `TRAILING_STOP_MARKET`:
+         * BUY: the lowest price after order placed <= `activationPrice`, and the latest price >= the lowest price * (1 + `callbackRate`)
+         * SELL: the highest price after order placed >= `activationPrice`, and the latest price <= the highest price * (1 - `callbackRate`)
+         *
+         * For `TRAILING_STOP_MARKET`, if you got such error code.
+         * ``{"code": -2021, "msg": "Order would immediately trigger."}``
+         * means that the parameters you send do not meet the following requirements:
+         * BUY: `activationPrice` should be smaller than latest price.
+         * SELL: `activationPrice` should be larger than latest price.
+         *
+         * `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`:
+         * Follow the same rules for condition orders.
+         * If triggered，**close all** current long position( if `SELL`) or current short position( if `BUY`).
+         * Cannot be used with `quantity` paremeter
+         * Cannot be used with `reduceOnly` parameter
+         * In Hedge Mode,cannot be used with `BUY` orders in `LONG` position side. and cannot be used with `SELL` orders in `SHORT` position side
+         * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
+         *
+         * Weight: 0 on IP rate limit(x-mbx-used-weight-1m)
+         *
+         * @summary New Algo Order(TRADE)
+         * @param {string} algoType Only support `CONDITIONAL`
+         * @param {string} symbol
+         * @param {NewAlgoOrderSideEnum} side `SELL`, `BUY`
+         * @param {string} type
+         * @param {NewAlgoOrderPositionSideEnum} [positionSide] Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent with Hedge Mode.
+         * @param {NewAlgoOrderTimeInForceEnum} [timeInForce]
+         * @param {number} [quantity] Cannot be sent with `closePosition`=`true`(Close-All)
+         * @param {number} [price]
+         * @param {number} [triggerPrice]
+         * @param {NewAlgoOrderWorkingTypeEnum} [workingType] stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE". Default "CONTRACT_PRICE"
+         * @param {NewAlgoOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
+         * @param {string} [closePosition] `true`, `false`；Close-All，used with `STOP_MARKET` or `TAKE_PROFIT_MARKET`.
+         * @param {string} [priceProtect] "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
+         * @param {string} [reduceOnly] "true" or "false". default "false". Cannot be sent in Hedge Mode; cannot be sent with `closePosition`=`true`
+         * @param {number} [activationPrice] Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`)
+         * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 10 where 1 for 1%
+         * @param {string} [clientAlgoId] A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$`
+         * @param {NewAlgoOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE`
+         * @param {number | bigint} [goodTillDate] order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        newAlgoOrder: async (
+            algoType: string,
+            symbol: string,
+            side: NewAlgoOrderSideEnum,
+            type: string,
+            positionSide?: NewAlgoOrderPositionSideEnum,
+            timeInForce?: NewAlgoOrderTimeInForceEnum,
+            quantity?: number,
+            price?: number,
+            triggerPrice?: number,
+            workingType?: NewAlgoOrderWorkingTypeEnum,
+            priceMatch?: NewAlgoOrderPriceMatchEnum,
+            closePosition?: string,
+            priceProtect?: string,
+            reduceOnly?: string,
+            activationPrice?: number,
+            callbackRate?: number,
+            clientAlgoId?: string,
+            selfTradePreventionMode?: NewAlgoOrderSelfTradePreventionModeEnum,
+            goodTillDate?: number | bigint,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'algoType' is not null or undefined
+            assertParamExists('newAlgoOrder', 'algoType', algoType);
+            // verify required parameter 'symbol' is not null or undefined
+            assertParamExists('newAlgoOrder', 'symbol', symbol);
+            // verify required parameter 'side' is not null or undefined
+            assertParamExists('newAlgoOrder', 'side', side);
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('newAlgoOrder', 'type', type);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (algoType !== undefined && algoType !== null) {
+                localVarQueryParameter['algoType'] = algoType;
+            }
+
+            if (symbol !== undefined && symbol !== null) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+
+            if (side !== undefined && side !== null) {
+                localVarQueryParameter['side'] = side;
+            }
+
+            if (positionSide !== undefined && positionSide !== null) {
+                localVarQueryParameter['positionSide'] = positionSide;
+            }
+
+            if (type !== undefined && type !== null) {
+                localVarQueryParameter['type'] = type;
+            }
+
+            if (timeInForce !== undefined && timeInForce !== null) {
+                localVarQueryParameter['timeInForce'] = timeInForce;
+            }
+
+            if (quantity !== undefined && quantity !== null) {
+                localVarQueryParameter['quantity'] = quantity;
+            }
+
+            if (price !== undefined && price !== null) {
+                localVarQueryParameter['price'] = price;
+            }
+
+            if (triggerPrice !== undefined && triggerPrice !== null) {
+                localVarQueryParameter['triggerPrice'] = triggerPrice;
+            }
+
+            if (workingType !== undefined && workingType !== null) {
+                localVarQueryParameter['workingType'] = workingType;
+            }
+
+            if (priceMatch !== undefined && priceMatch !== null) {
+                localVarQueryParameter['priceMatch'] = priceMatch;
+            }
+
+            if (closePosition !== undefined && closePosition !== null) {
+                localVarQueryParameter['closePosition'] = closePosition;
+            }
+
+            if (priceProtect !== undefined && priceProtect !== null) {
+                localVarQueryParameter['priceProtect'] = priceProtect;
+            }
+
+            if (reduceOnly !== undefined && reduceOnly !== null) {
+                localVarQueryParameter['reduceOnly'] = reduceOnly;
+            }
+
+            if (activationPrice !== undefined && activationPrice !== null) {
+                localVarQueryParameter['activationPrice'] = activationPrice;
+            }
+
+            if (callbackRate !== undefined && callbackRate !== null) {
+                localVarQueryParameter['callbackRate'] = callbackRate;
+            }
+
+            if (clientAlgoId !== undefined && clientAlgoId !== null) {
+                localVarQueryParameter['clientAlgoId'] = clientAlgoId;
+            }
+
+            if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
+                localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
+            }
+
+            if (goodTillDate !== undefined && goodTillDate !== null) {
+                localVarQueryParameter['goodTillDate'] = goodTillDate;
+            }
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/fapi/v1/algoOrder',
+                method: 'POST',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Send in a new order.
          *
          * Order with type `STOP`,  parameter `timeInForce` can be sent ( default `GTC`).
@@ -995,7 +1314,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} [priceProtect] "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
          * @param {NewOrderNewOrderRespTypeEnum} [newOrderRespType] "ACK", "RESULT", default "ACK"
          * @param {NewOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
-         * @param {NewOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `NONE`:No STP / `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE`
+         * @param {NewOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE`
          * @param {number | bigint} [goodTillDate] order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000
          * @param {number | bigint} [recvWindow]
          *
@@ -1283,6 +1602,129 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
+         * Check an algo order's status.
+         *
+         * These orders will not be found:
+         * order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
+         * order create time + 90 days < current time
+         *
+         * Either `algoId` or `clientAlgoId` must be sent.
+         * `algoId` is self-increment for each specific `symbol`
+         *
+         * Weight: 1
+         *
+         * @summary Query Algo Order (USER_DATA)
+         * @param {number | bigint} [algoId]
+         * @param {string} [clientAlgoId] A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$`
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        queryAlgoOrder: async (
+            algoId?: number | bigint,
+            clientAlgoId?: string,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (algoId !== undefined && algoId !== null) {
+                localVarQueryParameter['algoId'] = algoId;
+            }
+
+            if (clientAlgoId !== undefined && clientAlgoId !== null) {
+                localVarQueryParameter['clientAlgoId'] = clientAlgoId;
+            }
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/fapi/v1/algoOrder',
+                method: 'GET',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Get all algo orders; active, CANCELED, TRIGGERED or FINISHED .
+         *
+         * These orders will not be found:
+         * order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
+         * order create time + 90 days < current time
+         *
+         * If `algoId` is set, it will get orders >= that `algoId`. Otherwise most recent orders are returned.
+         * The query time period must be less then 7 days( default as the recent 7 days).
+         *
+         * Weight: 5
+         *
+         * @summary Query All Algo Orders (USER_DATA)
+         * @param {string} symbol
+         * @param {number | bigint} [algoId]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [page]
+         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        queryAllAlgoOrders: async (
+            symbol: string,
+            algoId?: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            page?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'symbol' is not null or undefined
+            assertParamExists('queryAllAlgoOrders', 'symbol', symbol);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (symbol !== undefined && symbol !== null) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+
+            if (algoId !== undefined && algoId !== null) {
+                localVarQueryParameter['algoId'] = algoId;
+            }
+
+            if (startTime !== undefined && startTime !== null) {
+                localVarQueryParameter['startTime'] = startTime;
+            }
+
+            if (endTime !== undefined && endTime !== null) {
+                localVarQueryParameter['endTime'] = endTime;
+            }
+
+            if (page !== undefined && page !== null) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (limit !== undefined && limit !== null) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/fapi/v1/allAlgoOrders',
+                method: 'GET',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Query open order
          *
          *
@@ -1453,7 +1895,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} [priceProtect] "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
          * @param {TestOrderNewOrderRespTypeEnum} [newOrderRespType] "ACK", "RESULT", default "ACK"
          * @param {TestOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
-         * @param {TestOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `NONE`:No STP / `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE`
+         * @param {TestOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE`
          * @param {number | bigint} [goodTillDate] order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000
          * @param {number | bigint} [recvWindow]
          *
@@ -1711,6 +2153,36 @@ export interface TradeApiInterface {
         requestParameters: AutoCancelAllOpenOrdersRequest
     ): Promise<RestApiResponse<AutoCancelAllOpenOrdersResponse>>;
     /**
+     * Cancel an active algo order.
+     *
+     * Either `algoid` or `clientalgoid` must be sent.
+     *
+     * Weight: 1
+     *
+     * @summary Cancel Algo Order (TRADE)
+     * @param {CancelAlgoOrderRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApiInterface
+     */
+    cancelAlgoOrder(
+        requestParameters?: CancelAlgoOrderRequest
+    ): Promise<RestApiResponse<CancelAlgoOrderResponse>>;
+    /**
+     * Cancel All Algo Open Orders
+     *
+     * Weight: 1
+     *
+     * @summary Cancel All Algo Open Orders (TRADE)
+     * @param {CancelAllAlgoOpenOrdersRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApiInterface
+     */
+    cancelAllAlgoOpenOrders(
+        requestParameters: CancelAllAlgoOpenOrdersRequest
+    ): Promise<RestApiResponse<CancelAllAlgoOpenOrdersResponse>>;
+    /**
      * Cancel All Open Orders
      *
      * Weight: 1
@@ -1812,6 +2284,23 @@ export interface TradeApiInterface {
     changePositionMode(
         requestParameters: ChangePositionModeRequest
     ): Promise<RestApiResponse<ChangePositionModeResponse>>;
+    /**
+     * Get all algo open orders on a symbol.
+     *
+     * If the symbol is not sent, orders for all symbols will be returned in an array.
+     *
+     * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
+     * Careful when accessing this with no symbol.
+     *
+     * @summary Current All Algo Open Orders (USER_DATA)
+     * @param {CurrentAllAlgoOpenOrdersRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApiInterface
+     */
+    currentAllAlgoOpenOrders(
+        requestParameters?: CurrentAllAlgoOpenOrdersRequest
+    ): Promise<RestApiResponse<CurrentAllAlgoOpenOrdersResponse>>;
     /**
      * Get all open orders on a symbol.
      *
@@ -1926,6 +2415,50 @@ export interface TradeApiInterface {
     modifyOrder(
         requestParameters: ModifyOrderRequest
     ): Promise<RestApiResponse<ModifyOrderResponse>>;
+    /**
+     * Send in a new Algo order.
+     *
+     * Condition orders will be triggered when:
+     *
+     * If parameter`priceProtect`is sent as true:
+     * when price reaches the `triggerPrice` ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
+     * "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
+     *
+     * `STOP`, `STOP_MARKET`:
+     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
+     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
+     * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
+     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
+     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
+     * `TRAILING_STOP_MARKET`:
+     * BUY: the lowest price after order placed <= `activationPrice`, and the latest price >= the lowest price * (1 + `callbackRate`)
+     * SELL: the highest price after order placed >= `activationPrice`, and the latest price <= the highest price * (1 - `callbackRate`)
+     *
+     * For `TRAILING_STOP_MARKET`, if you got such error code.
+     * ``{"code": -2021, "msg": "Order would immediately trigger."}``
+     * means that the parameters you send do not meet the following requirements:
+     * BUY: `activationPrice` should be smaller than latest price.
+     * SELL: `activationPrice` should be larger than latest price.
+     *
+     * `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`:
+     * Follow the same rules for condition orders.
+     * If triggered，**close all** current long position( if `SELL`) or current short position( if `BUY`).
+     * Cannot be used with `quantity` paremeter
+     * Cannot be used with `reduceOnly` parameter
+     * In Hedge Mode,cannot be used with `BUY` orders in `LONG` position side. and cannot be used with `SELL` orders in `SHORT` position side
+     * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
+     *
+     * Weight: 0 on IP rate limit(x-mbx-used-weight-1m)
+     *
+     * @summary New Algo Order(TRADE)
+     * @param {NewAlgoOrderRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApiInterface
+     */
+    newAlgoOrder(
+        requestParameters: NewAlgoOrderRequest
+    ): Promise<RestApiResponse<NewAlgoOrderResponse>>;
     /**
      * Send in a new order.
      *
@@ -2050,6 +2583,48 @@ export interface TradeApiInterface {
     positionInformationV3(
         requestParameters?: PositionInformationV3Request
     ): Promise<RestApiResponse<PositionInformationV3Response>>;
+    /**
+     * Check an algo order's status.
+     *
+     * These orders will not be found:
+     * order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
+     * order create time + 90 days < current time
+     *
+     * Either `algoId` or `clientAlgoId` must be sent.
+     * `algoId` is self-increment for each specific `symbol`
+     *
+     * Weight: 1
+     *
+     * @summary Query Algo Order (USER_DATA)
+     * @param {QueryAlgoOrderRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApiInterface
+     */
+    queryAlgoOrder(
+        requestParameters?: QueryAlgoOrderRequest
+    ): Promise<RestApiResponse<QueryAlgoOrderResponse>>;
+    /**
+     * Get all algo orders; active, CANCELED, TRIGGERED or FINISHED .
+     *
+     * These orders will not be found:
+     * order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
+     * order create time + 90 days < current time
+     *
+     * If `algoId` is set, it will get orders >= that `algoId`. Otherwise most recent orders are returned.
+     * The query time period must be less then 7 days( default as the recent 7 days).
+     *
+     * Weight: 5
+     *
+     * @summary Query All Algo Orders (USER_DATA)
+     * @param {QueryAllAlgoOrdersRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApiInterface
+     */
+    queryAllAlgoOrders(
+        requestParameters: QueryAllAlgoOrdersRequest
+    ): Promise<RestApiResponse<QueryAllAlgoOrdersResponse>>;
     /**
      * Query open order
      *
@@ -2286,6 +2861,53 @@ export interface AutoCancelAllOpenOrdersRequest {
 }
 
 /**
+ * Request parameters for cancelAlgoOrder operation in TradeApi.
+ * @interface CancelAlgoOrderRequest
+ */
+export interface CancelAlgoOrderRequest {
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof TradeApiCancelAlgoOrder
+     */
+    readonly algoid?: number | bigint;
+
+    /**
+     *
+     * @type {string}
+     * @memberof TradeApiCancelAlgoOrder
+     */
+    readonly clientalgoid?: string;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof TradeApiCancelAlgoOrder
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
+ * Request parameters for cancelAllAlgoOpenOrders operation in TradeApi.
+ * @interface CancelAllAlgoOpenOrdersRequest
+ */
+export interface CancelAllAlgoOpenOrdersRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof TradeApiCancelAllAlgoOpenOrders
+     */
+    readonly symbol: string;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof TradeApiCancelAllAlgoOpenOrders
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
  * Request parameters for cancelAllOpenOrders operation in TradeApi.
  * @interface CancelAllOpenOrdersRequest
  */
@@ -2463,6 +3085,40 @@ export interface ChangePositionModeRequest {
      *
      * @type {number | bigint}
      * @memberof TradeApiChangePositionMode
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
+ * Request parameters for currentAllAlgoOpenOrders operation in TradeApi.
+ * @interface CurrentAllAlgoOpenOrdersRequest
+ */
+export interface CurrentAllAlgoOpenOrdersRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof TradeApiCurrentAllAlgoOpenOrders
+     */
+    readonly algoType?: string;
+
+    /**
+     *
+     * @type {string}
+     * @memberof TradeApiCurrentAllAlgoOpenOrders
+     */
+    readonly symbol?: string;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof TradeApiCurrentAllAlgoOpenOrders
+     */
+    readonly algoId?: number | bigint;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof TradeApiCurrentAllAlgoOpenOrders
      */
     readonly recvWindow?: number | bigint;
 }
@@ -2714,6 +3370,152 @@ export interface ModifyOrderRequest {
 }
 
 /**
+ * Request parameters for newAlgoOrder operation in TradeApi.
+ * @interface NewAlgoOrderRequest
+ */
+export interface NewAlgoOrderRequest {
+    /**
+     * Only support `CONDITIONAL`
+     * @type {string}
+     * @memberof TradeApiNewAlgoOrder
+     */
+    readonly algoType: string;
+
+    /**
+     *
+     * @type {string}
+     * @memberof TradeApiNewAlgoOrder
+     */
+    readonly symbol: string;
+
+    /**
+     * `SELL`, `BUY`
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiNewAlgoOrder
+     */
+    readonly side: NewAlgoOrderSideEnum;
+
+    /**
+     *
+     * @type {string}
+     * @memberof TradeApiNewAlgoOrder
+     */
+    readonly type: string;
+
+    /**
+     * Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent with Hedge Mode.
+     * @type {'BOTH' | 'LONG' | 'SHORT'}
+     * @memberof TradeApiNewAlgoOrder
+     */
+    readonly positionSide?: NewAlgoOrderPositionSideEnum;
+
+    /**
+     *
+     * @type {'GTC' | 'IOC' | 'FOK' | 'GTX' | 'GTD'}
+     * @memberof TradeApiNewAlgoOrder
+     */
+    readonly timeInForce?: NewAlgoOrderTimeInForceEnum;
+
+    /**
+     * Cannot be sent with `closePosition`=`true`(Close-All)
+     * @type {number}
+     * @memberof TradeApiNewAlgoOrder
+     */
+    readonly quantity?: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiNewAlgoOrder
+     */
+    readonly price?: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiNewAlgoOrder
+     */
+    readonly triggerPrice?: number;
+
+    /**
+     * stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE". Default "CONTRACT_PRICE"
+     * @type {'MARK_PRICE' | 'CONTRACT_PRICE'}
+     * @memberof TradeApiNewAlgoOrder
+     */
+    readonly workingType?: NewAlgoOrderWorkingTypeEnum;
+
+    /**
+     * only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
+     * @type {'NONE' | 'OPPONENT' | 'OPPONENT_5' | 'OPPONENT_10' | 'OPPONENT_20' | 'QUEUE' | 'QUEUE_5' | 'QUEUE_10' | 'QUEUE_20'}
+     * @memberof TradeApiNewAlgoOrder
+     */
+    readonly priceMatch?: NewAlgoOrderPriceMatchEnum;
+
+    /**
+     * `true`, `false`；Close-All，used with `STOP_MARKET` or `TAKE_PROFIT_MARKET`.
+     * @type {string}
+     * @memberof TradeApiNewAlgoOrder
+     */
+    readonly closePosition?: string;
+
+    /**
+     * "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
+     * @type {string}
+     * @memberof TradeApiNewAlgoOrder
+     */
+    readonly priceProtect?: string;
+
+    /**
+     * "true" or "false". default "false". Cannot be sent in Hedge Mode; cannot be sent with `closePosition`=`true`
+     * @type {string}
+     * @memberof TradeApiNewAlgoOrder
+     */
+    readonly reduceOnly?: string;
+
+    /**
+     * Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`)
+     * @type {number}
+     * @memberof TradeApiNewAlgoOrder
+     */
+    readonly activationPrice?: number;
+
+    /**
+     * Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 10 where 1 for 1%
+     * @type {number}
+     * @memberof TradeApiNewAlgoOrder
+     */
+    readonly callbackRate?: number;
+
+    /**
+     * A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$`
+     * @type {string}
+     * @memberof TradeApiNewAlgoOrder
+     */
+    readonly clientAlgoId?: string;
+
+    /**
+     * `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE`
+     * @type {'EXPIRE_TAKER' | 'EXPIRE_BOTH' | 'EXPIRE_MAKER'}
+     * @memberof TradeApiNewAlgoOrder
+     */
+    readonly selfTradePreventionMode?: NewAlgoOrderSelfTradePreventionModeEnum;
+
+    /**
+     * order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000
+     * @type {number | bigint}
+     * @memberof TradeApiNewAlgoOrder
+     */
+    readonly goodTillDate?: number | bigint;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof TradeApiNewAlgoOrder
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
  * Request parameters for newOrder operation in TradeApi.
  * @interface NewOrderRequest
  */
@@ -2838,7 +3640,7 @@ export interface NewOrderRequest {
     readonly priceMatch?: NewOrderPriceMatchEnum;
 
     /**
-     * `NONE`:No STP / `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE`
+     * `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE`
      * @type {'EXPIRE_TAKER' | 'EXPIRE_BOTH' | 'EXPIRE_MAKER'}
      * @memberof TradeApiNewOrder
      */
@@ -2935,6 +3737,88 @@ export interface PositionInformationV3Request {
      *
      * @type {number | bigint}
      * @memberof TradeApiPositionInformationV3
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
+ * Request parameters for queryAlgoOrder operation in TradeApi.
+ * @interface QueryAlgoOrderRequest
+ */
+export interface QueryAlgoOrderRequest {
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof TradeApiQueryAlgoOrder
+     */
+    readonly algoId?: number | bigint;
+
+    /**
+     * A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$`
+     * @type {string}
+     * @memberof TradeApiQueryAlgoOrder
+     */
+    readonly clientAlgoId?: string;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof TradeApiQueryAlgoOrder
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
+ * Request parameters for queryAllAlgoOrders operation in TradeApi.
+ * @interface QueryAllAlgoOrdersRequest
+ */
+export interface QueryAllAlgoOrdersRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof TradeApiQueryAllAlgoOrders
+     */
+    readonly symbol: string;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof TradeApiQueryAllAlgoOrders
+     */
+    readonly algoId?: number | bigint;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof TradeApiQueryAllAlgoOrders
+     */
+    readonly startTime?: number | bigint;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof TradeApiQueryAllAlgoOrders
+     */
+    readonly endTime?: number | bigint;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof TradeApiQueryAllAlgoOrders
+     */
+    readonly page?: number | bigint;
+
+    /**
+     * Default 100; max 1000
+     * @type {number | bigint}
+     * @memberof TradeApiQueryAllAlgoOrders
+     */
+    readonly limit?: number | bigint;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof TradeApiQueryAllAlgoOrders
      */
     readonly recvWindow?: number | bigint;
 }
@@ -3132,7 +4016,7 @@ export interface TestOrderRequest {
     readonly priceMatch?: TestOrderPriceMatchEnum;
 
     /**
-     * `NONE`:No STP / `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE`
+     * `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE`
      * @type {'EXPIRE_TAKER' | 'EXPIRE_BOTH' | 'EXPIRE_MAKER'}
      * @memberof TradeApiTestOrder
      */
@@ -3322,6 +4206,67 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.recvWindow
         );
         return sendRequest<AutoCancelAllOpenOrdersResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Cancel an active algo order.
+     *
+     * Either `algoid` or `clientalgoid` must be sent.
+     *
+     * Weight: 1
+     *
+     * @summary Cancel Algo Order (TRADE)
+     * @param {CancelAlgoOrderRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<CancelAlgoOrderResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApi
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Algo-Order Binance API Documentation}
+     */
+    public async cancelAlgoOrder(
+        requestParameters: CancelAlgoOrderRequest = {}
+    ): Promise<RestApiResponse<CancelAlgoOrderResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.cancelAlgoOrder(
+            requestParameters?.algoid,
+            requestParameters?.clientalgoid,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<CancelAlgoOrderResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Cancel All Algo Open Orders
+     *
+     * Weight: 1
+     *
+     * @summary Cancel All Algo Open Orders (TRADE)
+     * @param {CancelAllAlgoOpenOrdersRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<CancelAllAlgoOpenOrdersResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApi
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-All-Algo-Open-Orders Binance API Documentation}
+     */
+    public async cancelAllAlgoOpenOrders(
+        requestParameters: CancelAllAlgoOpenOrdersRequest
+    ): Promise<RestApiResponse<CancelAllAlgoOpenOrdersResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.cancelAllAlgoOpenOrders(
+            requestParameters?.symbol,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<CancelAllAlgoOpenOrdersResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
@@ -3535,6 +4480,40 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.recvWindow
         );
         return sendRequest<ChangePositionModeResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Get all algo open orders on a symbol.
+     *
+     * If the symbol is not sent, orders for all symbols will be returned in an array.
+     *
+     * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
+     * Careful when accessing this with no symbol.
+     *
+     * @summary Current All Algo Open Orders (USER_DATA)
+     * @param {CurrentAllAlgoOpenOrdersRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<CurrentAllAlgoOpenOrdersResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApi
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Current-All-Algo-Open-Orders Binance API Documentation}
+     */
+    public async currentAllAlgoOpenOrders(
+        requestParameters: CurrentAllAlgoOpenOrdersRequest = {}
+    ): Promise<RestApiResponse<CurrentAllAlgoOpenOrdersResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.currentAllAlgoOpenOrders(
+            requestParameters?.algoType,
+            requestParameters?.symbol,
+            requestParameters?.algoId,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<CurrentAllAlgoOpenOrdersResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
@@ -3768,6 +4747,83 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
+     * Send in a new Algo order.
+     *
+     * Condition orders will be triggered when:
+     *
+     * If parameter`priceProtect`is sent as true:
+     * when price reaches the `triggerPrice` ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
+     * "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
+     *
+     * `STOP`, `STOP_MARKET`:
+     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
+     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
+     * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
+     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
+     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
+     * `TRAILING_STOP_MARKET`:
+     * BUY: the lowest price after order placed <= `activationPrice`, and the latest price >= the lowest price * (1 + `callbackRate`)
+     * SELL: the highest price after order placed >= `activationPrice`, and the latest price <= the highest price * (1 - `callbackRate`)
+     *
+     * For `TRAILING_STOP_MARKET`, if you got such error code.
+     * ``{"code": -2021, "msg": "Order would immediately trigger."}``
+     * means that the parameters you send do not meet the following requirements:
+     * BUY: `activationPrice` should be smaller than latest price.
+     * SELL: `activationPrice` should be larger than latest price.
+     *
+     * `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`:
+     * Follow the same rules for condition orders.
+     * If triggered，**close all** current long position( if `SELL`) or current short position( if `BUY`).
+     * Cannot be used with `quantity` paremeter
+     * Cannot be used with `reduceOnly` parameter
+     * In Hedge Mode,cannot be used with `BUY` orders in `LONG` position side. and cannot be used with `SELL` orders in `SHORT` position side
+     * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
+     *
+     * Weight: 0 on IP rate limit(x-mbx-used-weight-1m)
+     *
+     * @summary New Algo Order(TRADE)
+     * @param {NewAlgoOrderRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<NewAlgoOrderResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApi
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/New-Algo-Order Binance API Documentation}
+     */
+    public async newAlgoOrder(
+        requestParameters: NewAlgoOrderRequest
+    ): Promise<RestApiResponse<NewAlgoOrderResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.newAlgoOrder(
+            requestParameters?.algoType,
+            requestParameters?.symbol,
+            requestParameters?.side,
+            requestParameters?.type,
+            requestParameters?.positionSide,
+            requestParameters?.timeInForce,
+            requestParameters?.quantity,
+            requestParameters?.price,
+            requestParameters?.triggerPrice,
+            requestParameters?.workingType,
+            requestParameters?.priceMatch,
+            requestParameters?.closePosition,
+            requestParameters?.priceProtect,
+            requestParameters?.reduceOnly,
+            requestParameters?.activationPrice,
+            requestParameters?.callbackRate,
+            requestParameters?.clientAlgoId,
+            requestParameters?.selfTradePreventionMode,
+            requestParameters?.goodTillDate,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<NewAlgoOrderResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
      * Send in a new order.
      *
      * Order with type `STOP`,  parameter `timeInForce` can be sent ( default `GTC`).
@@ -3978,6 +5034,84 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.recvWindow
         );
         return sendRequest<PositionInformationV3Response>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Check an algo order's status.
+     *
+     * These orders will not be found:
+     * order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
+     * order create time + 90 days < current time
+     *
+     * Either `algoId` or `clientAlgoId` must be sent.
+     * `algoId` is self-increment for each specific `symbol`
+     *
+     * Weight: 1
+     *
+     * @summary Query Algo Order (USER_DATA)
+     * @param {QueryAlgoOrderRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<QueryAlgoOrderResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApi
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Algo-Order Binance API Documentation}
+     */
+    public async queryAlgoOrder(
+        requestParameters: QueryAlgoOrderRequest = {}
+    ): Promise<RestApiResponse<QueryAlgoOrderResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.queryAlgoOrder(
+            requestParameters?.algoId,
+            requestParameters?.clientAlgoId,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<QueryAlgoOrderResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Get all algo orders; active, CANCELED, TRIGGERED or FINISHED .
+     *
+     * These orders will not be found:
+     * order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
+     * order create time + 90 days < current time
+     *
+     * If `algoId` is set, it will get orders >= that `algoId`. Otherwise most recent orders are returned.
+     * The query time period must be less then 7 days( default as the recent 7 days).
+     *
+     * Weight: 5
+     *
+     * @summary Query All Algo Orders (USER_DATA)
+     * @param {QueryAllAlgoOrdersRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<QueryAllAlgoOrdersResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApi
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Query-All-Algo-Orders Binance API Documentation}
+     */
+    public async queryAllAlgoOrders(
+        requestParameters: QueryAllAlgoOrdersRequest
+    ): Promise<RestApiResponse<QueryAllAlgoOrdersResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.queryAllAlgoOrders(
+            requestParameters?.symbol,
+            requestParameters?.algoId,
+            requestParameters?.startTime,
+            requestParameters?.endTime,
+            requestParameters?.page,
+            requestParameters?.limit,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<QueryAllAlgoOrdersResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
@@ -4207,6 +5341,48 @@ export enum ModifyOrderPriceMatchEnum {
     QUEUE_5 = 'QUEUE_5',
     QUEUE_10 = 'QUEUE_10',
     QUEUE_20 = 'QUEUE_20',
+}
+
+export enum NewAlgoOrderSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
+
+export enum NewAlgoOrderPositionSideEnum {
+    BOTH = 'BOTH',
+    LONG = 'LONG',
+    SHORT = 'SHORT',
+}
+
+export enum NewAlgoOrderTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+    GTX = 'GTX',
+    GTD = 'GTD',
+}
+
+export enum NewAlgoOrderWorkingTypeEnum {
+    MARK_PRICE = 'MARK_PRICE',
+    CONTRACT_PRICE = 'CONTRACT_PRICE',
+}
+
+export enum NewAlgoOrderPriceMatchEnum {
+    NONE = 'NONE',
+    OPPONENT = 'OPPONENT',
+    OPPONENT_5 = 'OPPONENT_5',
+    OPPONENT_10 = 'OPPONENT_10',
+    OPPONENT_20 = 'OPPONENT_20',
+    QUEUE = 'QUEUE',
+    QUEUE_5 = 'QUEUE_5',
+    QUEUE_10 = 'QUEUE_10',
+    QUEUE_20 = 'QUEUE_20',
+}
+
+export enum NewAlgoOrderSelfTradePreventionModeEnum {
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
 }
 
 export enum NewOrderSideEnum {

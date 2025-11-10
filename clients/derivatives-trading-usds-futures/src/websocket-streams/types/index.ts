@@ -6,6 +6,8 @@ export * from './account-update-a';
 export * from './account-update-abinner';
 export * from './account-update-apinner';
 export * from './aggregate-trade-streams-response';
+export * from './algo-update';
+export * from './algo-update-o';
 export * from './all-book-tickers-stream-response';
 export * from './all-market-liquidation-order-streams-response';
 export * from './all-market-liquidation-order-streams-response-o';

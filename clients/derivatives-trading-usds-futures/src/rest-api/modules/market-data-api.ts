@@ -622,7 +622,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Mark Price and Funding Rate
          *
-         * Weight: 1
+         * Weight: 1 with symbol, 10 without symbol
          *
          * @summary Mark Price
          * @param {string} [symbol]
@@ -1657,7 +1657,7 @@ export interface MarketDataApiInterface {
     /**
      * Mark Price and Funding Rate
      *
-     * Weight: 1
+     * Weight: 1 with symbol, 10 without symbol
      *
      * @summary Mark Price
      * @param {MarkPriceRequest} requestParameters Request parameters.
@@ -3140,7 +3140,7 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Mark Price and Funding Rate
      *
-     * Weight: 1
+     * Weight: 1 with symbol, 10 without symbol
      *
      * @summary Mark Price
      * @param {MarkPriceRequest} requestParameters Request parameters.

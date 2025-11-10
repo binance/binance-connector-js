@@ -19,36 +19,36 @@
 import type { CancelAlgoOrderResponseRateLimitsInner } from './cancel-algo-order-response-rate-limits-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { CancelOrderResponseResult } from './cancel-order-response-result';
+import type { NewAlgoOrderResponseResult } from './new-algo-order-response-result';
 
 /**
  *
  * @export
- * @interface CancelOrderResponse
+ * @interface NewAlgoOrderResponse
  */
-export interface CancelOrderResponse {
+export interface NewAlgoOrderResponse {
     /**
      *
      * @type {string}
-     * @memberof CancelOrderResponse
+     * @memberof NewAlgoOrderResponse
      */
     id?: string;
     /**
      *
      * @type {number | bigint}
-     * @memberof CancelOrderResponse
+     * @memberof NewAlgoOrderResponse
      */
     status?: number | bigint;
     /**
      *
-     * @type {CancelOrderResponseResult}
-     * @memberof CancelOrderResponse
+     * @type {NewAlgoOrderResponseResult}
+     * @memberof NewAlgoOrderResponse
      */
-    result?: CancelOrderResponseResult;
+    result?: NewAlgoOrderResponseResult;
     /**
      *
      * @type {Array<CancelAlgoOrderResponseRateLimitsInner>}
-     * @memberof CancelOrderResponse
+     * @memberof NewAlgoOrderResponse
      */
     rateLimits?: Array<CancelAlgoOrderResponseRateLimitsInner>;
 }
