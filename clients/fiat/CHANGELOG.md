@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.0.0 - 2025-11-10
+
+### Added (2)
+
+- `fiatWithdraw()` (`GET /sapi/v2/fiat/withdraw`)
+- `getOrderDetail()` (`GET /sapi/v1/fiat/get-order-detail`)
+
 ## 3.0.1 - 2025-11-06
 
 ### Changed (1)

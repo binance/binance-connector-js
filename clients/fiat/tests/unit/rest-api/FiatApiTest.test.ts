@@ -17,12 +17,16 @@ import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { FiatApi } from '../../../src/rest-api';
 import {
+    FiatWithdrawRequest,
     GetFiatDepositWithdrawHistoryRequest,
     GetFiatPaymentsHistoryRequest,
+    GetOrderDetailRequest,
 } from '../../../src/rest-api';
 import type {
+    FiatWithdrawResponse,
     GetFiatDepositWithdrawHistoryResponse,
     GetFiatPaymentsHistoryResponse,
+    GetOrderDetailResponse,
 } from '../../../src/rest-api/types';
 
 describe('FiatApi', () => {
@@ -37,6 +41,73 @@ describe('FiatApi', () => {
             basePath: '',
         });
         client = new FiatApi(config);
+    });
+
+    describe('fiatWithdraw()', () => {
+        it('should execute fiatWithdraw() successfully with required parameters only', async () => {
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: { orderId: '04595xxxxxxxxx37' },
+                })
+            );
+
+            const spy = jest.spyOn(client, 'fiatWithdraw').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<FiatWithdrawResponse>)
+            );
+            const response = await client.fiatWithdraw();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute fiatWithdraw() successfully with optional parameters', async () => {
+            const params: FiatWithdrawRequest = {
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: { orderId: '04595xxxxxxxxx37' },
+                })
+            );
+
+            const spy = jest.spyOn(client, 'fiatWithdraw').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<FiatWithdrawResponse>)
+            );
+            const response = await client.fiatWithdraw(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'fiatWithdraw').mockRejectedValueOnce(mockError);
+            await expect(client.fiatWithdraw()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
     });
 
     describe('getFiatDepositWithdrawHistory()', () => {
@@ -285,6 +356,112 @@ describe('FiatApi', () => {
                 .spyOn(client, 'getFiatPaymentsHistory')
                 .mockRejectedValueOnce(mockError);
             await expect(client.getFiatPaymentsHistory(params)).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('getOrderDetail()', () => {
+        it('should execute getOrderDetail() successfully with required parameters only', async () => {
+            const params: GetOrderDetailRequest = {
+                orderId: '1',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: {
+                        orderId: '036752*678',
+                        orderStatus: 'ORDER_INITIAL',
+                        amount: '4.33',
+                        fee: '0.43',
+                        fiatCurrency: '***',
+                        errorCode: '',
+                        errorMessage: '',
+                        ext: {},
+                    },
+                })
+            );
+
+            const spy = jest.spyOn(client, 'getOrderDetail').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetOrderDetailResponse>)
+            );
+            const response = await client.getOrderDetail(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute getOrderDetail() successfully with optional parameters', async () => {
+            const params: GetOrderDetailRequest = {
+                orderId: '1',
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    code: '000000',
+                    message: 'success',
+                    data: {
+                        orderId: '036752*678',
+                        orderStatus: 'ORDER_INITIAL',
+                        amount: '4.33',
+                        fee: '0.43',
+                        fiatCurrency: '***',
+                        errorCode: '',
+                        errorMessage: '',
+                        ext: {},
+                    },
+                })
+            );
+
+            const spy = jest.spyOn(client, 'getOrderDetail').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetOrderDetailResponse>)
+            );
+            const response = await client.getOrderDetail(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when orderId is missing', async () => {
+            const _params: GetOrderDetailRequest = {
+                orderId: '1',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.orderId;
+
+            await expect(client.getOrderDetail(params)).rejects.toThrow(
+                'Required parameter orderId was null or undefined when calling getOrderDetail.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: GetOrderDetailRequest = {
+                orderId: '1',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'getOrderDetail').mockRejectedValueOnce(mockError);
+            await expect(client.getOrderDetail(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
