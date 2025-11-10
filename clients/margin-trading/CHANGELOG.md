@@ -1,5 +1,18 @@
 # Changelog
 
+## 10.0.0 - 2025-11-10
+
+### Removed (6)
+
+#### REST API
+
+- `closeIsolatedMarginUserDataStream()` (`DELETE /sapi/v1/userDataStream/isolated`)
+- `closeMarginUserDataStream()` (`DELETE /sapi/v1/userDataStream`)
+- `keepaliveIsolatedMarginUserDataStream()` (`PUT /sapi/v1/userDataStream/isolated`)
+- `keepaliveMarginUserDataStream()` (`PUT /sapi/v1/userDataStream`)
+- `startIsolatedMarginUserDataStream()` (`POST /sapi/v1/userDataStream/isolated`)
+- `startMarginUserDataStream()` (`POST /sapi/v1/userDataStream`)
+
 ## 9.0.1 - 2025-11-06
 
 ### Changed (1)

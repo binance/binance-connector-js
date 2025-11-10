@@ -16,5 +16,4 @@ export * from './borrow-repay-api';
 export * from './market-data-api';
 export * from './risk-data-stream-api';
 export * from './trade-api';
-export * from './trade-data-stream-api';
 export * from './transfer-api';

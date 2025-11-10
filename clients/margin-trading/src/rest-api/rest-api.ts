@@ -17,7 +17,6 @@ import { BorrowRepayApi } from './modules/borrow-repay-api';
 import { MarketDataApi } from './modules/market-data-api';
 import { RiskDataStreamApi } from './modules/risk-data-stream-api';
 import { TradeApi } from './modules/trade-api';
-import { TradeDataStreamApi } from './modules/trade-data-stream-api';
 import { TransferApi } from './modules/transfer-api';
 
 import type {
@@ -79,13 +78,6 @@ import type {
     QuerySpecialKeyListRequest,
     SmallLiabilityExchangeRequest,
 } from './modules/trade-api';
-import type {
-    CloseIsolatedMarginUserDataStreamRequest,
-    CloseMarginUserDataStreamRequest,
-    KeepaliveIsolatedMarginUserDataStreamRequest,
-    KeepaliveMarginUserDataStreamRequest,
-    StartIsolatedMarginUserDataStreamRequest,
-} from './modules/trade-data-stream-api';
 import type {
     GetCrossMarginTransferHistoryRequest,
     QueryMaxTransferOutAmountRequest,
@@ -151,10 +143,6 @@ import type {
     QuerySpecialKeyListResponse,
 } from './types';
 import type {
-    StartIsolatedMarginUserDataStreamResponse,
-    StartMarginUserDataStreamResponse,
-} from './types';
-import type {
     GetCrossMarginTransferHistoryResponse,
     QueryMaxTransferOutAmountResponse,
 } from './types';
@@ -166,7 +154,6 @@ export class RestAPI {
     private marketDataApi: MarketDataApi;
     private riskDataStreamApi: RiskDataStreamApi;
     private tradeApi: TradeApi;
-    private tradeDataStreamApi: TradeDataStreamApi;
     private transferApi: TransferApi;
 
     constructor(configuration: ConfigurationRestAPI) {
@@ -176,7 +163,6 @@ export class RestAPI {
         this.marketDataApi = new MarketDataApi(configuration);
         this.riskDataStreamApi = new RiskDataStreamApi(configuration);
         this.tradeApi = new TradeApi(configuration);
-        this.tradeDataStreamApi = new TradeDataStreamApi(configuration);
         this.transferApi = new TransferApi(configuration);
     }
 
@@ -1319,111 +1305,6 @@ export class RestAPI {
         requestParameters: SmallLiabilityExchangeRequest
     ): Promise<RestApiResponse<void>> {
         return this.tradeApi.smallLiabilityExchange(requestParameters);
-    }
-
-    /**
-     * Close out a isolated margin user data stream.
-     *
-     * Weight: 3000
-     *
-     * @summary Close Isolated Margin User Data Stream (USER_STREAM)
-     * @param {CloseIsolatedMarginUserDataStreamRequest} requestParameters Request parameters.
-     * @deprecated
-     * @returns {Promise<RestApiResponse<void>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade-data-stream/Close-Isolated-Margin-User-Data-Stream Binance API Documentation}
-     */
-    closeIsolatedMarginUserDataStream(
-        requestParameters: CloseIsolatedMarginUserDataStreamRequest
-    ): Promise<RestApiResponse<void>> {
-        return this.tradeDataStreamApi.closeIsolatedMarginUserDataStream(requestParameters);
-    }
-
-    /**
-     * Close out a Margin user data stream.
-     *
-     * Weight: 3000
-     *
-     * @summary Close Margin User Data Stream (USER_STREAM)
-     * @param {CloseMarginUserDataStreamRequest} requestParameters Request parameters.
-     * @deprecated
-     * @returns {Promise<RestApiResponse<void>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade-data-stream/Close-Margin-User-Data-Stream Binance API Documentation}
-     */
-    closeMarginUserDataStream(
-        requestParameters: CloseMarginUserDataStreamRequest
-    ): Promise<RestApiResponse<void>> {
-        return this.tradeDataStreamApi.closeMarginUserDataStream(requestParameters);
-    }
-
-    /**
-     * Keepalive an isolated margin user data stream to prevent a time out.
-     *
-     * Weight: 1
-     *
-     * @summary Keepalive Isolated Margin User Data Stream (USER_STREAM)
-     * @param {KeepaliveIsolatedMarginUserDataStreamRequest} requestParameters Request parameters.
-     * @deprecated
-     * @returns {Promise<RestApiResponse<void>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade-data-stream/Keepalive-Isolated-Margin-User-Data-Stream Binance API Documentation}
-     */
-    keepaliveIsolatedMarginUserDataStream(
-        requestParameters: KeepaliveIsolatedMarginUserDataStreamRequest
-    ): Promise<RestApiResponse<void>> {
-        return this.tradeDataStreamApi.keepaliveIsolatedMarginUserDataStream(requestParameters);
-    }
-
-    /**
-     * Keepalive a margin user data stream to prevent a time out.
-     *
-     * Weight: 1
-     *
-     * @summary Keepalive Margin User Data Stream (USER_STREAM)
-     * @param {KeepaliveMarginUserDataStreamRequest} requestParameters Request parameters.
-     * @deprecated
-     * @returns {Promise<RestApiResponse<void>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade-data-stream/Keepalive-Margin-User-Data-Stream Binance API Documentation}
-     */
-    keepaliveMarginUserDataStream(
-        requestParameters: KeepaliveMarginUserDataStreamRequest
-    ): Promise<RestApiResponse<void>> {
-        return this.tradeDataStreamApi.keepaliveMarginUserDataStream(requestParameters);
-    }
-
-    /**
-     * Start a new isolated margin user data stream. The stream will close after 60 minutes unless a keepalive is sent. If the account has an active listenKey, that listenKey will be returned and its validity will be extended for 60 minutes.
-     *
-     * Weight: 1
-     *
-     * @summary Start Isolated Margin User Data Stream (USER_STREAM)
-     * @param {StartIsolatedMarginUserDataStreamRequest} requestParameters Request parameters.
-     * @deprecated
-     * @returns {Promise<RestApiResponse<StartIsolatedMarginUserDataStreamResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade-data-stream/Start-Isolated-Margin-User-Data-Stream Binance API Documentation}
-     */
-    startIsolatedMarginUserDataStream(
-        requestParameters: StartIsolatedMarginUserDataStreamRequest
-    ): Promise<RestApiResponse<StartIsolatedMarginUserDataStreamResponse>> {
-        return this.tradeDataStreamApi.startIsolatedMarginUserDataStream(requestParameters);
-    }
-
-    /**
-     * Start a new margin user data stream. The stream will close after 60 minutes unless a keepalive is sent. If the account has an active listenKey, that listenKey will be returned and its validity will be extended for 60 minutes.
-     *
-     * Weight: 1
-     *
-     * @summary Start Margin User Data Stream (USER_STREAM)
-     * @deprecated
-     * @returns {Promise<RestApiResponse<StartMarginUserDataStreamResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/margin_trading/trade-data-stream/Start-Margin-User-Data-Stream Binance API Documentation}
-     */
-    startMarginUserDataStream(): Promise<RestApiResponse<StartMarginUserDataStreamResponse>> {
-        return this.tradeDataStreamApi.startMarginUserDataStream();
     }
 
     /**

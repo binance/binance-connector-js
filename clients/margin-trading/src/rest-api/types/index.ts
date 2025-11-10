@@ -99,6 +99,4 @@ export * from './query-max-transfer-out-amount-response';
 export * from './query-special-key-list-response';
 export * from './query-special-key-list-response-inner';
 export * from './query-special-key-response';
-export * from './start-isolated-margin-user-data-stream-response';
-export * from './start-margin-user-data-stream-response';
 export * from './start-user-data-stream-response';
