@@ -29,12 +29,10 @@ import type {
     GetPortfolioMarginProAccountInfoResponse,
     GetPortfolioMarginProSpanAccountInfoResponse,
     GetTransferableEarnAssetBalanceForPortfolioMarginResponse,
-    MintBfusdForPortfolioMarginResponse,
     PortfolioMarginProBankruptcyLoanRepayResponse,
     QueryPortfolioMarginProBankruptcyLoanAmountResponse,
     QueryPortfolioMarginProBankruptcyLoanRepayHistoryResponse,
     QueryPortfolioMarginProNegativeBalanceInterestHistoryResponse,
-    RedeemBfusdForPortfolioMarginResponse,
     RepayFuturesNegativeBalanceResponse,
     TransferLdusdtForPortfolioMarginResponse,
 } from '../types';
@@ -372,60 +370,6 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             };
         },
         /**
-         * Mint BFUSD for all types of Portfolio Margin account
-         *
-         * Weight: 1500
-         *
-         * @summary Mint BFUSD for Portfolio Margin(TRADE)
-         * @param {string} fromAsset `BFUSD` only
-         * @param {string} targetAsset `USDT` `USDC`
-         * @param {number} amount
-         * @param {number | bigint} [recvWindow]
-         *
-         * @throws {RequiredError}
-         */
-        mintBfusdForPortfolioMargin: async (
-            fromAsset: string,
-            targetAsset: string,
-            amount: number,
-            recvWindow?: number | bigint
-        ): Promise<RequestArgs> => {
-            // verify required parameter 'fromAsset' is not null or undefined
-            assertParamExists('mintBfusdForPortfolioMargin', 'fromAsset', fromAsset);
-            // verify required parameter 'targetAsset' is not null or undefined
-            assertParamExists('mintBfusdForPortfolioMargin', 'targetAsset', targetAsset);
-            // verify required parameter 'amount' is not null or undefined
-            assertParamExists('mintBfusdForPortfolioMargin', 'amount', amount);
-
-            const localVarQueryParameter: Record<string, unknown> = {};
-
-            if (fromAsset !== undefined && fromAsset !== null) {
-                localVarQueryParameter['fromAsset'] = fromAsset;
-            }
-
-            if (targetAsset !== undefined && targetAsset !== null) {
-                localVarQueryParameter['targetAsset'] = targetAsset;
-            }
-
-            if (amount !== undefined && amount !== null) {
-                localVarQueryParameter['amount'] = amount;
-            }
-
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/sapi/v1/portfolio/mint',
-                method: 'POST',
-                params: localVarQueryParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
          * Repay Portfolio Margin Pro Bankruptcy Loan
          *
          * Weight: 3000
@@ -598,60 +542,6 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/sapi/v1/portfolio/interest-history',
                 method: 'GET',
-                params: localVarQueryParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
-         * Redeem BFUSD for all types of Portfolio Margin account
-         *
-         * Weight: 1500
-         *
-         * @summary Redeem BFUSD for Portfolio Margin(TRADE)
-         * @param {string} fromAsset `BFUSD` only
-         * @param {string} targetAsset `USDT` `USDC`
-         * @param {number} amount
-         * @param {number | bigint} [recvWindow]
-         *
-         * @throws {RequiredError}
-         */
-        redeemBfusdForPortfolioMargin: async (
-            fromAsset: string,
-            targetAsset: string,
-            amount: number,
-            recvWindow?: number | bigint
-        ): Promise<RequestArgs> => {
-            // verify required parameter 'fromAsset' is not null or undefined
-            assertParamExists('redeemBfusdForPortfolioMargin', 'fromAsset', fromAsset);
-            // verify required parameter 'targetAsset' is not null or undefined
-            assertParamExists('redeemBfusdForPortfolioMargin', 'targetAsset', targetAsset);
-            // verify required parameter 'amount' is not null or undefined
-            assertParamExists('redeemBfusdForPortfolioMargin', 'amount', amount);
-
-            const localVarQueryParameter: Record<string, unknown> = {};
-
-            if (fromAsset !== undefined && fromAsset !== null) {
-                localVarQueryParameter['fromAsset'] = fromAsset;
-            }
-
-            if (targetAsset !== undefined && targetAsset !== null) {
-                localVarQueryParameter['targetAsset'] = targetAsset;
-            }
-
-            if (amount !== undefined && amount !== null) {
-                localVarQueryParameter['amount'] = amount;
-            }
-
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/sapi/v1/portfolio/redeem',
-                method: 'POST',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
             };
@@ -888,20 +778,6 @@ export interface AccountApiInterface {
         requestParameters: GetTransferableEarnAssetBalanceForPortfolioMarginRequest
     ): Promise<RestApiResponse<GetTransferableEarnAssetBalanceForPortfolioMarginResponse>>;
     /**
-     * Mint BFUSD for all types of Portfolio Margin account
-     *
-     * Weight: 1500
-     *
-     * @summary Mint BFUSD for Portfolio Margin(TRADE)
-     * @param {MintBfusdForPortfolioMarginRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof AccountApiInterface
-     */
-    mintBfusdForPortfolioMargin(
-        requestParameters: MintBfusdForPortfolioMarginRequest
-    ): Promise<RestApiResponse<MintBfusdForPortfolioMarginResponse>>;
-    /**
      * Repay Portfolio Margin Pro Bankruptcy Loan
      *
      * Weight: 3000
@@ -964,20 +840,6 @@ export interface AccountApiInterface {
     queryPortfolioMarginProNegativeBalanceInterestHistory(
         requestParameters?: QueryPortfolioMarginProNegativeBalanceInterestHistoryRequest
     ): Promise<RestApiResponse<QueryPortfolioMarginProNegativeBalanceInterestHistoryResponse>>;
-    /**
-     * Redeem BFUSD for all types of Portfolio Margin account
-     *
-     * Weight: 1500
-     *
-     * @summary Redeem BFUSD for Portfolio Margin(TRADE)
-     * @param {RedeemBfusdForPortfolioMarginRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof AccountApiInterface
-     */
-    redeemBfusdForPortfolioMargin(
-        requestParameters: RedeemBfusdForPortfolioMarginRequest
-    ): Promise<RestApiResponse<RedeemBfusdForPortfolioMarginResponse>>;
     /**
      * Repay futures Negative Balance
      *
@@ -1175,40 +1037,6 @@ export interface GetTransferableEarnAssetBalanceForPortfolioMarginRequest {
 }
 
 /**
- * Request parameters for mintBfusdForPortfolioMargin operation in AccountApi.
- * @interface MintBfusdForPortfolioMarginRequest
- */
-export interface MintBfusdForPortfolioMarginRequest {
-    /**
-     * `BFUSD` only
-     * @type {string}
-     * @memberof AccountApiMintBfusdForPortfolioMargin
-     */
-    readonly fromAsset: string;
-
-    /**
-     * `USDT` `USDC`
-     * @type {string}
-     * @memberof AccountApiMintBfusdForPortfolioMargin
-     */
-    readonly targetAsset: string;
-
-    /**
-     *
-     * @type {number}
-     * @memberof AccountApiMintBfusdForPortfolioMargin
-     */
-    readonly amount: number;
-
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof AccountApiMintBfusdForPortfolioMargin
-     */
-    readonly recvWindow?: number | bigint;
-}
-
-/**
  * Request parameters for portfolioMarginProBankruptcyLoanRepay operation in AccountApi.
  * @interface PortfolioMarginProBankruptcyLoanRepayRequest
  */
@@ -1319,40 +1147,6 @@ export interface QueryPortfolioMarginProNegativeBalanceInterestHistoryRequest {
      *
      * @type {number | bigint}
      * @memberof AccountApiQueryPortfolioMarginProNegativeBalanceInterestHistory
-     */
-    readonly recvWindow?: number | bigint;
-}
-
-/**
- * Request parameters for redeemBfusdForPortfolioMargin operation in AccountApi.
- * @interface RedeemBfusdForPortfolioMarginRequest
- */
-export interface RedeemBfusdForPortfolioMarginRequest {
-    /**
-     * `BFUSD` only
-     * @type {string}
-     * @memberof AccountApiRedeemBfusdForPortfolioMargin
-     */
-    readonly fromAsset: string;
-
-    /**
-     * `USDT` `USDC`
-     * @type {string}
-     * @memberof AccountApiRedeemBfusdForPortfolioMargin
-     */
-    readonly targetAsset: string;
-
-    /**
-     *
-     * @type {number}
-     * @memberof AccountApiRedeemBfusdForPortfolioMargin
-     */
-    readonly amount: number;
-
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof AccountApiRedeemBfusdForPortfolioMargin
      */
     readonly recvWindow?: number | bigint;
 }
@@ -1696,37 +1490,6 @@ export class AccountApi implements AccountApiInterface {
     }
 
     /**
-     * Mint BFUSD for all types of Portfolio Margin account
-     *
-     * Weight: 1500
-     *
-     * @summary Mint BFUSD for Portfolio Margin(TRADE)
-     * @param {MintBfusdForPortfolioMarginRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<MintBfusdForPortfolioMarginResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Mint-BFUSD-Portfolio-Margin Binance API Documentation}
-     */
-    public async mintBfusdForPortfolioMargin(
-        requestParameters: MintBfusdForPortfolioMarginRequest
-    ): Promise<RestApiResponse<MintBfusdForPortfolioMarginResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.mintBfusdForPortfolioMargin(
-            requestParameters?.fromAsset,
-            requestParameters?.targetAsset,
-            requestParameters?.amount,
-            requestParameters?.recvWindow
-        );
-        return sendRequest<MintBfusdForPortfolioMarginResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
-        );
-    }
-
-    /**
      * Repay Portfolio Margin Pro Bankruptcy Loan
      *
      * Weight: 3000
@@ -1849,38 +1612,6 @@ export class AccountApi implements AccountApiInterface {
                 requestParameters?.recvWindow
             );
         return sendRequest<QueryPortfolioMarginProNegativeBalanceInterestHistoryResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
-        );
-    }
-
-    /**
-     * Redeem BFUSD for all types of Portfolio Margin account
-     *
-     * Weight: 1500
-     *
-     * @summary Redeem BFUSD for Portfolio Margin(TRADE)
-     * @param {RedeemBfusdForPortfolioMarginRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<RedeemBfusdForPortfolioMarginResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Redeem-BFUSD-Portfolio-Margin Binance API Documentation}
-     */
-    public async redeemBfusdForPortfolioMargin(
-        requestParameters: RedeemBfusdForPortfolioMarginRequest
-    ): Promise<RestApiResponse<RedeemBfusdForPortfolioMarginResponse>> {
-        const localVarAxiosArgs =
-            await this.localVarAxiosParamCreator.redeemBfusdForPortfolioMargin(
-                requestParameters?.fromAsset,
-                requestParameters?.targetAsset,
-                requestParameters?.amount,
-                requestParameters?.recvWindow
-            );
-        return sendRequest<RedeemBfusdForPortfolioMarginResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

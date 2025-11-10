@@ -11,7 +11,6 @@ export * from './get-portfolio-margin-pro-account-info-response';
 export * from './get-portfolio-margin-pro-span-account-info-response';
 export * from './get-portfolio-margin-pro-span-account-info-response-risk-unit-mmlist-inner';
 export * from './get-transferable-earn-asset-balance-for-portfolio-margin-response';
-export * from './mint-bfusd-for-portfolio-margin-response';
 export * from './portfolio-margin-collateral-rate-response';
 export * from './portfolio-margin-collateral-rate-response-inner';
 export * from './portfolio-margin-pro-bankruptcy-loan-repay-response';
@@ -25,6 +24,5 @@ export * from './query-portfolio-margin-pro-bankruptcy-loan-repay-history-respon
 export * from './query-portfolio-margin-pro-bankruptcy-loan-repay-history-response-rows-inner';
 export * from './query-portfolio-margin-pro-negative-balance-interest-history-response';
 export * from './query-portfolio-margin-pro-negative-balance-interest-history-response-inner';
-export * from './redeem-bfusd-for-portfolio-margin-response';
 export * from './repay-futures-negative-balance-response';
 export * from './transfer-ldusdt-for-portfolio-margin-response';

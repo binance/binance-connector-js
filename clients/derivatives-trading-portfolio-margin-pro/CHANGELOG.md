@@ -1,5 +1,14 @@
 # Changelog
 
+## 10.0.0 - 2025-11-10
+
+### Removed (2)
+
+#### REST API
+
+- `mintBfusdForPortfolioMargin()` (`POST /sapi/v1/portfolio/mint`)
+- `redeemBfusdForPortfolioMargin()` (`POST /sapi/v1/portfolio/redeem`)
+
 ## 9.0.1 - 2025-11-06
 
 ### Changed (1)

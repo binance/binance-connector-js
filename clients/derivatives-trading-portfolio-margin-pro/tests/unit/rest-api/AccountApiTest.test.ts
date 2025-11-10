@@ -26,12 +26,10 @@ import {
     GetPortfolioMarginProAccountInfoRequest,
     GetPortfolioMarginProSpanAccountInfoRequest,
     GetTransferableEarnAssetBalanceForPortfolioMarginRequest,
-    MintBfusdForPortfolioMarginRequest,
     PortfolioMarginProBankruptcyLoanRepayRequest,
     QueryPortfolioMarginProBankruptcyLoanAmountRequest,
     QueryPortfolioMarginProBankruptcyLoanRepayHistoryRequest,
     QueryPortfolioMarginProNegativeBalanceInterestHistoryRequest,
-    RedeemBfusdForPortfolioMarginRequest,
     RepayFuturesNegativeBalanceRequest,
     TransferLdusdtForPortfolioMarginRequest,
 } from '../../../src/rest-api';
@@ -45,12 +43,10 @@ import type {
     GetPortfolioMarginProAccountInfoResponse,
     GetPortfolioMarginProSpanAccountInfoResponse,
     GetTransferableEarnAssetBalanceForPortfolioMarginResponse,
-    MintBfusdForPortfolioMarginResponse,
     PortfolioMarginProBankruptcyLoanRepayResponse,
     QueryPortfolioMarginProBankruptcyLoanAmountResponse,
     QueryPortfolioMarginProBankruptcyLoanRepayHistoryResponse,
     QueryPortfolioMarginProNegativeBalanceInterestHistoryResponse,
-    RedeemBfusdForPortfolioMarginResponse,
     RepayFuturesNegativeBalanceResponse,
     TransferLdusdtForPortfolioMarginResponse,
 } from '../../../src/rest-api/types';
@@ -801,138 +797,6 @@ describe('AccountApi', () => {
         });
     });
 
-    describe('mintBfusdForPortfolioMargin()', () => {
-        it('should execute mintBfusdForPortfolioMargin() successfully with required parameters only', async () => {
-            const params: MintBfusdForPortfolioMarginRequest = {
-                fromAsset: 'fromAsset_example',
-                targetAsset: 'targetAsset_example',
-                amount: 1.0,
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify({
-                    fromAsset: 'USDT',
-                    targetAsset: 'BFUSD',
-                    fromAssetQty: 10,
-                    targetAssetQty: 9.998,
-                    mintRate: 0.9998,
-                })
-            );
-
-            const spy = jest.spyOn(client, 'mintBfusdForPortfolioMargin').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<MintBfusdForPortfolioMarginResponse>)
-            );
-            const response = await client.mintBfusdForPortfolioMargin(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute mintBfusdForPortfolioMargin() successfully with optional parameters', async () => {
-            const params: MintBfusdForPortfolioMarginRequest = {
-                fromAsset: 'fromAsset_example',
-                targetAsset: 'targetAsset_example',
-                amount: 1.0,
-                recvWindow: 5000,
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify({
-                    fromAsset: 'USDT',
-                    targetAsset: 'BFUSD',
-                    fromAssetQty: 10,
-                    targetAssetQty: 9.998,
-                    mintRate: 0.9998,
-                })
-            );
-
-            const spy = jest.spyOn(client, 'mintBfusdForPortfolioMargin').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<MintBfusdForPortfolioMarginResponse>)
-            );
-            const response = await client.mintBfusdForPortfolioMargin(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw RequiredError when fromAsset is missing', async () => {
-            const _params: MintBfusdForPortfolioMarginRequest = {
-                fromAsset: 'fromAsset_example',
-                targetAsset: 'targetAsset_example',
-                amount: 1.0,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.fromAsset;
-
-            await expect(client.mintBfusdForPortfolioMargin(params)).rejects.toThrow(
-                'Required parameter fromAsset was null or undefined when calling mintBfusdForPortfolioMargin.'
-            );
-        });
-
-        it('should throw RequiredError when targetAsset is missing', async () => {
-            const _params: MintBfusdForPortfolioMarginRequest = {
-                fromAsset: 'fromAsset_example',
-                targetAsset: 'targetAsset_example',
-                amount: 1.0,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.targetAsset;
-
-            await expect(client.mintBfusdForPortfolioMargin(params)).rejects.toThrow(
-                'Required parameter targetAsset was null or undefined when calling mintBfusdForPortfolioMargin.'
-            );
-        });
-
-        it('should throw RequiredError when amount is missing', async () => {
-            const _params: MintBfusdForPortfolioMarginRequest = {
-                fromAsset: 'fromAsset_example',
-                targetAsset: 'targetAsset_example',
-                amount: 1.0,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.amount;
-
-            await expect(client.mintBfusdForPortfolioMargin(params)).rejects.toThrow(
-                'Required parameter amount was null or undefined when calling mintBfusdForPortfolioMargin.'
-            );
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const params: MintBfusdForPortfolioMarginRequest = {
-                fromAsset: 'fromAsset_example',
-                targetAsset: 'targetAsset_example',
-                amount: 1.0,
-            };
-
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest
-                .spyOn(client, 'mintBfusdForPortfolioMargin')
-                .mockRejectedValueOnce(mockError);
-            await expect(client.mintBfusdForPortfolioMargin(params)).rejects.toThrow(
-                'ResponseError'
-            );
-            spy.mockRestore();
-        });
-    });
-
     describe('portfolioMarginProBankruptcyLoanRepay()', () => {
         it('should execute portfolioMarginProBankruptcyLoanRepay() successfully with required parameters only', async () => {
             mockResponse = JSONParse(JSONStringify({ tranId: 58203331886213500 }));
@@ -1223,138 +1087,6 @@ describe('AccountApi', () => {
             await expect(
                 client.queryPortfolioMarginProNegativeBalanceInterestHistory()
             ).rejects.toThrow('ResponseError');
-            spy.mockRestore();
-        });
-    });
-
-    describe('redeemBfusdForPortfolioMargin()', () => {
-        it('should execute redeemBfusdForPortfolioMargin() successfully with required parameters only', async () => {
-            const params: RedeemBfusdForPortfolioMarginRequest = {
-                fromAsset: 'fromAsset_example',
-                targetAsset: 'targetAsset_example',
-                amount: 1.0,
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify({
-                    fromAsset: 'BFUSD',
-                    targetAsset: 'USDT',
-                    fromAssetQty: 9.99800001,
-                    targetAssetQty: 9.996000409998,
-                    redeemRate: 0.9998,
-                })
-            );
-
-            const spy = jest.spyOn(client, 'redeemBfusdForPortfolioMargin').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<RedeemBfusdForPortfolioMarginResponse>)
-            );
-            const response = await client.redeemBfusdForPortfolioMargin(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute redeemBfusdForPortfolioMargin() successfully with optional parameters', async () => {
-            const params: RedeemBfusdForPortfolioMarginRequest = {
-                fromAsset: 'fromAsset_example',
-                targetAsset: 'targetAsset_example',
-                amount: 1.0,
-                recvWindow: 5000,
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify({
-                    fromAsset: 'BFUSD',
-                    targetAsset: 'USDT',
-                    fromAssetQty: 9.99800001,
-                    targetAssetQty: 9.996000409998,
-                    redeemRate: 0.9998,
-                })
-            );
-
-            const spy = jest.spyOn(client, 'redeemBfusdForPortfolioMargin').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<RedeemBfusdForPortfolioMarginResponse>)
-            );
-            const response = await client.redeemBfusdForPortfolioMargin(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw RequiredError when fromAsset is missing', async () => {
-            const _params: RedeemBfusdForPortfolioMarginRequest = {
-                fromAsset: 'fromAsset_example',
-                targetAsset: 'targetAsset_example',
-                amount: 1.0,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.fromAsset;
-
-            await expect(client.redeemBfusdForPortfolioMargin(params)).rejects.toThrow(
-                'Required parameter fromAsset was null or undefined when calling redeemBfusdForPortfolioMargin.'
-            );
-        });
-
-        it('should throw RequiredError when targetAsset is missing', async () => {
-            const _params: RedeemBfusdForPortfolioMarginRequest = {
-                fromAsset: 'fromAsset_example',
-                targetAsset: 'targetAsset_example',
-                amount: 1.0,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.targetAsset;
-
-            await expect(client.redeemBfusdForPortfolioMargin(params)).rejects.toThrow(
-                'Required parameter targetAsset was null or undefined when calling redeemBfusdForPortfolioMargin.'
-            );
-        });
-
-        it('should throw RequiredError when amount is missing', async () => {
-            const _params: RedeemBfusdForPortfolioMarginRequest = {
-                fromAsset: 'fromAsset_example',
-                targetAsset: 'targetAsset_example',
-                amount: 1.0,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.amount;
-
-            await expect(client.redeemBfusdForPortfolioMargin(params)).rejects.toThrow(
-                'Required parameter amount was null or undefined when calling redeemBfusdForPortfolioMargin.'
-            );
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const params: RedeemBfusdForPortfolioMarginRequest = {
-                fromAsset: 'fromAsset_example',
-                targetAsset: 'targetAsset_example',
-                amount: 1.0,
-            };
-
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest
-                .spyOn(client, 'redeemBfusdForPortfolioMargin')
-                .mockRejectedValueOnce(mockError);
-            await expect(client.redeemBfusdForPortfolioMargin(params)).rejects.toThrow(
-                'ResponseError'
-            );
             spy.mockRestore();
         });
     });

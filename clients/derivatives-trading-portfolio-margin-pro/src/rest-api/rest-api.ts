@@ -25,12 +25,10 @@ import type {
     GetPortfolioMarginProAccountInfoRequest,
     GetPortfolioMarginProSpanAccountInfoRequest,
     GetTransferableEarnAssetBalanceForPortfolioMarginRequest,
-    MintBfusdForPortfolioMarginRequest,
     PortfolioMarginProBankruptcyLoanRepayRequest,
     QueryPortfolioMarginProBankruptcyLoanAmountRequest,
     QueryPortfolioMarginProBankruptcyLoanRepayHistoryRequest,
     QueryPortfolioMarginProNegativeBalanceInterestHistoryRequest,
-    RedeemBfusdForPortfolioMarginRequest,
     RepayFuturesNegativeBalanceRequest,
     TransferLdusdtForPortfolioMarginRequest,
 } from './modules/account-api';
@@ -49,12 +47,10 @@ import type {
     GetPortfolioMarginProAccountInfoResponse,
     GetPortfolioMarginProSpanAccountInfoResponse,
     GetTransferableEarnAssetBalanceForPortfolioMarginResponse,
-    MintBfusdForPortfolioMarginResponse,
     PortfolioMarginProBankruptcyLoanRepayResponse,
     QueryPortfolioMarginProBankruptcyLoanAmountResponse,
     QueryPortfolioMarginProBankruptcyLoanRepayHistoryResponse,
     QueryPortfolioMarginProNegativeBalanceInterestHistoryResponse,
-    RedeemBfusdForPortfolioMarginResponse,
     RepayFuturesNegativeBalanceResponse,
     TransferLdusdtForPortfolioMarginResponse,
 } from './types';
@@ -281,24 +277,6 @@ export class RestAPI {
     }
 
     /**
-     * Mint BFUSD for all types of Portfolio Margin account
-     *
-     * Weight: 1500
-     *
-     * @summary Mint BFUSD for Portfolio Margin(TRADE)
-     * @param {MintBfusdForPortfolioMarginRequest} requestParameters Request parameters.
-     *
-     * @returns {Promise<RestApiResponse<MintBfusdForPortfolioMarginResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Mint-BFUSD-Portfolio-Margin Binance API Documentation}
-     */
-    mintBfusdForPortfolioMargin(
-        requestParameters: MintBfusdForPortfolioMarginRequest
-    ): Promise<RestApiResponse<MintBfusdForPortfolioMarginResponse>> {
-        return this.accountApi.mintBfusdForPortfolioMargin(requestParameters);
-    }
-
-    /**
      * Repay Portfolio Margin Pro Bankruptcy Loan
      *
      * Weight: 3000
@@ -377,24 +355,6 @@ export class RestAPI {
         return this.accountApi.queryPortfolioMarginProNegativeBalanceInterestHistory(
             requestParameters
         );
-    }
-
-    /**
-     * Redeem BFUSD for all types of Portfolio Margin account
-     *
-     * Weight: 1500
-     *
-     * @summary Redeem BFUSD for Portfolio Margin(TRADE)
-     * @param {RedeemBfusdForPortfolioMarginRequest} requestParameters Request parameters.
-     *
-     * @returns {Promise<RestApiResponse<RedeemBfusdForPortfolioMarginResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Redeem-BFUSD-Portfolio-Margin Binance API Documentation}
-     */
-    redeemBfusdForPortfolioMargin(
-        requestParameters: RedeemBfusdForPortfolioMarginRequest
-    ): Promise<RestApiResponse<RedeemBfusdForPortfolioMarginResponse>> {
-        return this.accountApi.redeemBfusdForPortfolioMargin(requestParameters);
     }
 
     /**
