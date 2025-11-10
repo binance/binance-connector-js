@@ -28,16 +28,16 @@ const C2CApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
         /**
          * Get C2C Trade History
          *
-         * The max interval between startTime and endTime is 30 days.
-         * If startTime and endTime are not sent, the recent 30 days' data will be returned.
+         * The max interval between startTimestamp and endTimestamp is 30 days.
+         * If startTimestamp and endTimestamp are not sent, the recent 30 days' data will be returned.
          * You can only view data from the past 6 months. To see all C2C orders, please check https://c2c.binance.com/en/fiatOrder
          *
          * Weight: 1
          *
          * @summary Get C2C Trade History (USER_DATA)
          * @param {string} [tradeType] BUY, SELL
-         * @param {number | bigint} [startTime]
-         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [startTimestamp]
+         * @param {number | bigint} [endTimestamp]
          * @param {number | bigint} [page] Default 1
          * @param {number | bigint} [rows] default 100, max 100
          * @param {number | bigint} [recvWindow]
@@ -46,8 +46,8 @@ const C2CApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
          */
         getC2CTradeHistory: async (
             tradeType?: string,
-            startTime?: number | bigint,
-            endTime?: number | bigint,
+            startTimestamp?: number | bigint,
+            endTimestamp?: number | bigint,
             page?: number | bigint,
             rows?: number | bigint,
             recvWindow?: number | bigint
@@ -58,12 +58,12 @@ const C2CApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
                 localVarQueryParameter['tradeType'] = tradeType;
             }
 
-            if (startTime !== undefined && startTime !== null) {
-                localVarQueryParameter['startTime'] = startTime;
+            if (startTimestamp !== undefined && startTimestamp !== null) {
+                localVarQueryParameter['startTimestamp'] = startTimestamp;
             }
 
-            if (endTime !== undefined && endTime !== null) {
-                localVarQueryParameter['endTime'] = endTime;
+            if (endTimestamp !== undefined && endTimestamp !== null) {
+                localVarQueryParameter['endTimestamp'] = endTimestamp;
             }
 
             if (page !== undefined && page !== null) {
@@ -99,8 +99,8 @@ export interface C2CApiInterface {
     /**
      * Get C2C Trade History
      *
-     * The max interval between startTime and endTime is 30 days.
-     * If startTime and endTime are not sent, the recent 30 days' data will be returned.
+     * The max interval between startTimestamp and endTimestamp is 30 days.
+     * If startTimestamp and endTimestamp are not sent, the recent 30 days' data will be returned.
      * You can only view data from the past 6 months. To see all C2C orders, please check https://c2c.binance.com/en/fiatOrder
      *
      * Weight: 1
@@ -133,14 +133,14 @@ export interface GetC2CTradeHistoryRequest {
      * @type {number | bigint}
      * @memberof C2CApiGetC2CTradeHistory
      */
-    readonly startTime?: number | bigint;
+    readonly startTimestamp?: number | bigint;
 
     /**
      *
      * @type {number | bigint}
      * @memberof C2CApiGetC2CTradeHistory
      */
-    readonly endTime?: number | bigint;
+    readonly endTimestamp?: number | bigint;
 
     /**
      * Default 1
@@ -180,8 +180,8 @@ export class C2CApi implements C2CApiInterface {
     /**
      * Get C2C Trade History
      *
-     * The max interval between startTime and endTime is 30 days.
-     * If startTime and endTime are not sent, the recent 30 days' data will be returned.
+     * The max interval between startTimestamp and endTimestamp is 30 days.
+     * If startTimestamp and endTimestamp are not sent, the recent 30 days' data will be returned.
      * You can only view data from the past 6 months. To see all C2C orders, please check https://c2c.binance.com/en/fiatOrder
      *
      * Weight: 1
@@ -198,8 +198,8 @@ export class C2CApi implements C2CApiInterface {
     ): Promise<RestApiResponse<GetC2CTradeHistoryResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.getC2CTradeHistory(
             requestParameters?.tradeType,
-            requestParameters?.startTime,
-            requestParameters?.endTime,
+            requestParameters?.startTimestamp,
+            requestParameters?.endTimestamp,
             requestParameters?.page,
             requestParameters?.rows,
             requestParameters?.recvWindow

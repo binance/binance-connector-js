@@ -79,8 +79,8 @@ describe('C2CApi', () => {
         it('should execute getC2CTradeHistory() successfully with optional parameters', async () => {
             const params: GetC2CTradeHistoryRequest = {
                 tradeType: 'tradeType_example',
-                startTime: 1623319461670,
-                endTime: 1641782889000,
+                startTimestamp: 789,
+                endTimestamp: 789,
                 page: 1,
                 rows: 100,
                 recvWindow: 5000,

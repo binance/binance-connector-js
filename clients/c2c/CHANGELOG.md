@@ -1,5 +1,22 @@
 # Changelog
 
+## 4.0.0 - 2025-11-10
+
+### Changed (4)
+
+- Added parameter `endTimestamp`
+  - affected methods:
+    - `getC2CTradeHistory()` (`GET /sapi/v1/c2c/orderMatch/listUserOrderHistory`)
+- Added parameter `startTimestamp`
+  - affected methods:
+    - `getC2CTradeHistory()` (`GET /sapi/v1/c2c/orderMatch/listUserOrderHistory`)
+- Deleted parameter `endTime`
+  - affected methods:
+    - `getC2CTradeHistory()` (`GET /sapi/v1/c2c/orderMatch/listUserOrderHistory`)
+- Deleted parameter `startTime`
+  - affected methods:
+    - `getC2CTradeHistory()` (`GET /sapi/v1/c2c/orderMatch/listUserOrderHistory`)
+
 ## 3.0.1 - 2025-11-06
 
 ### Changed (1)
