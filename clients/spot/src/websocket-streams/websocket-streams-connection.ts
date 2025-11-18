@@ -199,12 +199,12 @@ export class WebsocketStreamsConnection {
     /**
      * 24hr rolling window ticker statistics for all symbols that changed in an array. These are NOT the statistics of the UTC day, but a 24hr rolling window for the previous 24hrs. Note that only tickers that have changed will be present in the array.
      *
-     * @summary WebSocket All Market Tickers Stream
+     * @summary WebSocket All Market Tickers Stream (DEPRECATED)
      * @param {AllTickerRequest} requestParameters Request parameters.
-     *
+     * @deprecated
      * @returns {WebsocketStream<AllTickerResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#all-market-tickers-stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#all-market-tickers-stream-deprecated Binance API Documentation}
      */
     allTicker(requestParameters: AllTickerRequest = {}): WebsocketStream<AllTickerResponse> {
         return this.webSocketStreamsApi.allTicker(requestParameters);

@@ -1,5 +1,16 @@
 # Changelog
 
+## 24.0.0 - 2025-11-18
+
+### Changed (3)
+
+- Update `@binance/common` library to version `2.0.1`.
+- Replaced deprecated `tsup` with `tsdown` for bundling.
+
+#### WebSocket Streams
+
+- Marked `allTicker()` (`!ticker@arr` stream) as deprecated.
+
 ## 23.0.1 - 2025-11-06
 
 ### Changed (1)
