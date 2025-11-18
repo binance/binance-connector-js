@@ -44,6 +44,9 @@ const WebsocketMarketStreamsApiParamCreator = function () {
         /**
          * The Aggregate Trade Streams push market trade information that is aggregated for fills with same price and taking side every 100 milliseconds. Only market trades will be aggregated, which means the insurance fund trades and ADL trades won't be aggregated.
          *
+         *
+         * Retail Price Improvement(RPI) orders are aggregated and without special tags to be distinguished.
+         *
          * Update Speed: 100ms
          *
          * @summary Aggregate Trade Streams
@@ -63,6 +66,8 @@ const WebsocketMarketStreamsApiParamCreator = function () {
         },
         /**
          * Pushes any update to the best bid or ask's price or quantity in real-time for all symbols.
+         *
+         * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
          *
          * Update Speed: 5s
          *
@@ -184,6 +189,8 @@ const WebsocketMarketStreamsApiParamCreator = function () {
         /**
          * Bids and asks, pushed every 250 milliseconds, 500 milliseconds, 100 milliseconds (if existing)
          *
+         * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+         *
          * Update Speed: 250ms, 500ms, 100ms
          *
          * @summary Diff. Book Depth Streams
@@ -205,6 +212,8 @@ const WebsocketMarketStreamsApiParamCreator = function () {
         },
         /**
          * Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
+         *
+         * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
          *
          * Update Speed: Real-time
          *
@@ -359,6 +368,8 @@ const WebsocketMarketStreamsApiParamCreator = function () {
         /**
          * Top **<levels\>** bids and asks, Valid **<levels\>** are 5, 10, or 20.
          *
+         * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+         *
          * Update Speed: 250ms, 500ms or 100ms
          *
          * @summary Partial Book Depth Streams
@@ -396,6 +407,9 @@ export interface WebsocketMarketStreamsApiInterface {
     /**
      * The Aggregate Trade Streams push market trade information that is aggregated for fills with same price and taking side every 100 milliseconds. Only market trades will be aggregated, which means the insurance fund trades and ADL trades won't be aggregated.
      *
+     *
+     * Retail Price Improvement(RPI) orders are aggregated and without special tags to be distinguished.
+     *
      * Update Speed: 100ms
      *
      * @summary Aggregate Trade Streams
@@ -411,6 +425,8 @@ export interface WebsocketMarketStreamsApiInterface {
 
     /**
      * Pushes any update to the best bid or ask's price or quantity in real-time for all symbols.
+     *
+     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
      *
      * Update Speed: 5s
      *
@@ -524,6 +540,8 @@ export interface WebsocketMarketStreamsApiInterface {
     /**
      * Bids and asks, pushed every 250 milliseconds, 500 milliseconds, 100 milliseconds (if existing)
      *
+     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+     *
      * Update Speed: 250ms, 500ms, 100ms
      *
      * @summary Diff. Book Depth Streams
@@ -539,6 +557,8 @@ export interface WebsocketMarketStreamsApiInterface {
 
     /**
      * Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
+     *
+     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
      *
      * Update Speed: Real-time
      *
@@ -668,6 +688,8 @@ export interface WebsocketMarketStreamsApiInterface {
 
     /**
      * Top **<levels\>** bids and asks, Valid **<levels\>** are 5, 10, or 20.
+     *
+     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
      *
      * Update Speed: 250ms, 500ms or 100ms
      *
@@ -1067,6 +1089,9 @@ export class WebsocketMarketStreamsApi implements WebsocketMarketStreamsApiInter
     /**
      * The Aggregate Trade Streams push market trade information that is aggregated for fills with same price and taking side every 100 milliseconds. Only market trades will be aggregated, which means the insurance fund trades and ADL trades won't be aggregated.
      *
+     *
+     * Retail Price Improvement(RPI) orders are aggregated and without special tags to be distinguished.
+     *
      * Update Speed: 100ms
      *
      * @summary Aggregate Trade Streams
@@ -1093,6 +1118,8 @@ export class WebsocketMarketStreamsApi implements WebsocketMarketStreamsApiInter
 
     /**
      * Pushes any update to the best bid or ask's price or quantity in real-time for all symbols.
+     *
+     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
      *
      * Update Speed: 5s
      *
@@ -1272,6 +1299,8 @@ export class WebsocketMarketStreamsApi implements WebsocketMarketStreamsApiInter
     /**
      * Bids and asks, pushed every 250 milliseconds, 500 milliseconds, 100 milliseconds (if existing)
      *
+     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+     *
      * Update Speed: 250ms, 500ms, 100ms
      *
      * @summary Diff. Book Depth Streams
@@ -1299,6 +1328,8 @@ export class WebsocketMarketStreamsApi implements WebsocketMarketStreamsApiInter
 
     /**
      * Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
+     *
+     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
      *
      * Update Speed: Real-time
      *
@@ -1515,6 +1546,8 @@ export class WebsocketMarketStreamsApi implements WebsocketMarketStreamsApiInter
 
     /**
      * Top **<levels\>** bids and asks, Valid **<levels\>** are 5, 10, or 20.
+     *
+     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
      *
      * Update Speed: 250ms, 500ms or 100ms
      *

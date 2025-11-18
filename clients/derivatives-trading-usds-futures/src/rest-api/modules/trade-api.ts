@@ -3411,7 +3411,7 @@ export interface NewAlgoOrderRequest {
 
     /**
      *
-     * @type {'GTC' | 'IOC' | 'FOK' | 'GTX' | 'GTD'}
+     * @type {'GTC' | 'IOC' | 'FOK' | 'GTX' | 'GTD' | 'RPI'}
      * @memberof TradeApiNewAlgoOrder
      */
     readonly timeInForce?: NewAlgoOrderTimeInForceEnum;
@@ -3550,7 +3550,7 @@ export interface NewOrderRequest {
 
     /**
      *
-     * @type {'GTC' | 'IOC' | 'FOK' | 'GTX' | 'GTD'}
+     * @type {'GTC' | 'IOC' | 'FOK' | 'GTX' | 'GTD' | 'RPI'}
      * @memberof TradeApiNewOrder
      */
     readonly timeInForce?: NewOrderTimeInForceEnum;
@@ -3926,7 +3926,7 @@ export interface TestOrderRequest {
 
     /**
      *
-     * @type {'GTC' | 'IOC' | 'FOK' | 'GTX' | 'GTD'}
+     * @type {'GTC' | 'IOC' | 'FOK' | 'GTX' | 'GTD' | 'RPI'}
      * @memberof TradeApiTestOrder
      */
     readonly timeInForce?: TestOrderTimeInForceEnum;
@@ -5360,6 +5360,7 @@ export enum NewAlgoOrderTimeInForceEnum {
     FOK = 'FOK',
     GTX = 'GTX',
     GTD = 'GTD',
+    RPI = 'RPI',
 }
 
 export enum NewAlgoOrderWorkingTypeEnum {
@@ -5402,6 +5403,7 @@ export enum NewOrderTimeInForceEnum {
     FOK = 'FOK',
     GTX = 'GTX',
     GTD = 'GTD',
+    RPI = 'RPI',
 }
 
 export enum NewOrderWorkingTypeEnum {
@@ -5449,6 +5451,7 @@ export enum TestOrderTimeInForceEnum {
     FOK = 'FOK',
     GTX = 'GTX',
     GTD = 'GTD',
+    RPI = 'RPI',
 }
 
 export enum TestOrderWorkingTypeEnum {

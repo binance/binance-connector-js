@@ -150,6 +150,7 @@ export const PlaceMultipleOrdersBatchOrdersParameterInnerTimeInForceEnum = {
     FOK: 'FOK',
     GTX: 'GTX',
     GTD: 'GTD',
+    RPI: 'RPI',
 } as const;
 
 export type PlaceMultipleOrdersBatchOrdersParameterInnerTimeInForceEnum =

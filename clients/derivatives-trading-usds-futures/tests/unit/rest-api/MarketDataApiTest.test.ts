@@ -1623,6 +1623,7 @@ describe('MarketDataApi', () => {
                         quoteQty: '8000.00',
                         time: 1499865549590,
                         isBuyerMaker: true,
+                        isRPITrade: true,
                     },
                 ])
             );
@@ -1657,6 +1658,7 @@ describe('MarketDataApi', () => {
                         quoteQty: '8000.00',
                         time: 1499865549590,
                         isBuyerMaker: true,
+                        isRPITrade: true,
                     },
                 ])
             );
@@ -2546,6 +2548,7 @@ describe('MarketDataApi', () => {
                         quoteQty: '48.00',
                         time: 1499865549590,
                         isBuyerMaker: true,
+                        isRPITrade: true,
                     },
                 ])
             );
@@ -2579,6 +2582,7 @@ describe('MarketDataApi', () => {
                         quoteQty: '48.00',
                         time: 1499865549590,
                         isBuyerMaker: true,
+                        isRPITrade: true,
                     },
                 ])
             );

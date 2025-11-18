@@ -55,4 +55,10 @@ export interface OldTradesLookupResponseInner {
      * @memberof OldTradesLookupResponseInner
      */
     isBuyerMaker?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof OldTradesLookupResponseInner
+     */
+    isRPITrade?: boolean;
 }

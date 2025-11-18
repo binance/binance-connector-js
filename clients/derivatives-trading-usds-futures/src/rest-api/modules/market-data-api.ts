@@ -183,6 +183,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Get compressed, aggregate market trades. Market trades that fill in 100ms with the same price and the same taking side will have the quantity aggregated.
          *
          *
+         * Retail Price Improvement(RPI) orders are aggregated and without special tags to be distinguished.
          * support querying futures trade histories that are not older than one year
          * If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 1 hour.
          * If `fromId`, `startTime`, and `endTime` are not sent, the most recent aggregate trades will be returned.
@@ -882,6 +883,8 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Query symbol orderbook
          *
+         * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+         *
          * Weight: Adjusted based on the limit:
          * | Limit         | Weight |
          * | ------------- | ------ |
@@ -1114,6 +1117,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Best price/qty on the order book for a symbol or symbols.
          *
+         * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
          * If the symbol is not sent, bookTickers for all symbols will be returned in an array.
          * The field `X-MBX-USED-WEIGHT-1M` in response header is not accurate from this endpoint, please ignore.
          *
@@ -1503,6 +1507,7 @@ export interface MarketDataApiInterface {
      * Get compressed, aggregate market trades. Market trades that fill in 100ms with the same price and the same taking side will have the quantity aggregated.
      *
      *
+     * Retail Price Improvement(RPI) orders are aggregated and without special tags to be distinguished.
      * support querying futures trade histories that are not older than one year
      * If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 1 hour.
      * If `fromId`, `startTime`, and `endTime` are not sent, the most recent aggregate trades will be returned.
@@ -1755,6 +1760,8 @@ export interface MarketDataApiInterface {
     /**
      * Query symbol orderbook
      *
+     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+     *
      * Weight: Adjusted based on the limit:
      * | Limit         | Weight |
      * | ------------- | ------ |
@@ -1854,6 +1861,7 @@ export interface MarketDataApiInterface {
     /**
      * Best price/qty on the order book for a symbol or symbols.
      *
+     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
      * If the symbol is not sent, bookTickers for all symbols will be returned in an array.
      * The field `X-MBX-USED-WEIGHT-1M` in response header is not accurate from this endpoint, please ignore.
      *
@@ -2851,6 +2859,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * Get compressed, aggregate market trades. Market trades that fill in 100ms with the same price and the same taking side will have the quantity aggregated.
      *
      *
+     * Retail Price Improvement(RPI) orders are aggregated and without special tags to be distinguished.
      * support querying futures trade histories that are not older than one year
      * If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 1 hour.
      * If `fromId`, `startTime`, and `endTime` are not sent, the most recent aggregate trades will be returned.
@@ -3335,6 +3344,8 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Query symbol orderbook
      *
+     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+     *
      * Weight: Adjusted based on the limit:
      * | Limit         | Weight |
      * | ------------- | ------ |
@@ -3528,6 +3539,7 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Best price/qty on the order book for a symbol or symbols.
      *
+     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
      * If the symbol is not sent, bookTickers for all symbols will be returned in an array.
      * The field `X-MBX-USED-WEIGHT-1M` in response header is not accurate from this endpoint, please ignore.
      *

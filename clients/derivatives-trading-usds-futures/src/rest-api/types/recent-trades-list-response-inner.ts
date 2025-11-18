@@ -55,4 +55,10 @@ export interface RecentTradesListResponseInner {
      * @memberof RecentTradesListResponseInner
      */
     isBuyerMaker?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof RecentTradesListResponseInner
+     */
+    isRPITrade?: boolean;
 }
