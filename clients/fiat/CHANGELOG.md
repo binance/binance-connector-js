@@ -1,5 +1,17 @@
 # Changelog
 
+## 5.0.0 - 2025-11-18
+
+### Changed (2)
+
+- Update `@binance/common` library to version `2.0.1`.
+- Replaced deprecated `tsup` with `tsdown` for bundling.
+
+### Removed (2)
+
+- `fiatWithdraw()` (`GET /sapi/v2/fiat/withdraw`)
+- `getOrderDetail()` (`GET /sapi/v1/fiat/get-order-detail`)
+
 ## 4.0.0 - 2025-11-10
 
 ### Added (2)
