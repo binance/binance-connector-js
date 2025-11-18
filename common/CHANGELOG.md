@@ -1,6 +1,12 @@
 # Changelog
 
-## 2.0.0 - 2025-11-xx
+## 2.0.0 - 2025-11-18
+
+### Changed (1)
+
+- Replaced deprecated `tsup` with `tsdown` for bundling.
+
+## 2.0.0 - 2025-11-06
 
 ### Changed (1)
 
