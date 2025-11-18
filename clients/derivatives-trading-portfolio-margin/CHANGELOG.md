@@ -1,5 +1,17 @@
 # Changelog
 
+## 8.0.0 - 2025-11-18
+
+### Changed (3)
+
+- Update `@binance/common` library to version `2.0.1`.
+- Replaced deprecated `tsup` with `tsdown` for bundling.
+
+#### WebSocket Streams
+
+- Modified response for `userData()` method:
+  - removed `M` from `Executionreport`
+
 ## 7.0.1 - 2025-11-06
 
 ### Changed (1)

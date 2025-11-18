@@ -189,12 +189,6 @@ export interface Executionreport {
     m?: boolean;
     /**
      *
-     * @type {boolean}
-     * @memberof Executionreport
-     */
-    M?: boolean;
-    /**
-     *
      * @type {number | bigint}
      * @memberof Executionreport
      */
