@@ -1,7 +1,7 @@
 {
     "name": "@binance/copy-trading",
     "description": "Official Binance Copy Trading Connector - A lightweight library that provides a convenient interface to Binance's Copy Trading REST API.",
-    "version": "3.0.1",
+    "version": "3.0.2",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",
@@ -13,7 +13,7 @@
     },
     "scripts": {
         "prepublishOnly": "npm run build",
-        "build": "npm run clean && tsup",
+        "build": "npm run clean && tsdown",
         "typecheck": "tsc --noEmit",
         "clean": "rm -rf dist",
         "test": "npx jest --maxWorkers=4 --bail",
@@ -50,12 +50,12 @@
         "prettier": "^3.3.3",
         "ts-jest": "^29.1.1",
         "ts-node": "^10.9.1",
-        "tsup": "^8.4.0",
+        "tsdown": "^0.16.5",
         "typescript": "^5.7.2",
         "typescript-eslint": "^8.24.0"
     },
     "dependencies": {
-        "@binance/common": "2.0.0",
+        "@binance/common": "2.0.1",
         "axios": "^1.7.4"
     }
 }
