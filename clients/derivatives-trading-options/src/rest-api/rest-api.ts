@@ -28,6 +28,7 @@ import type {
 } from './modules/account-api';
 import type {
     HistoricalExerciseRecordsRequest,
+    IndexPriceTickerRequest,
     KlineCandlestickDataRequest,
     OldTradesLookupRequest,
     OpenInterestRequest,
@@ -35,7 +36,6 @@ import type {
     OrderBookRequest,
     RecentBlockTradesListRequest,
     RecentTradesListRequest,
-    SymbolPriceTickerRequest,
     Ticker24hrPriceChangeStatisticsRequest,
 } from './modules/market-data-api';
 import type {
@@ -82,6 +82,7 @@ import type {
     CheckServerTimeResponse,
     ExchangeInformationResponse,
     HistoricalExerciseRecordsResponse,
+    IndexPriceTickerResponse,
     KlineCandlestickDataResponse,
     OldTradesLookupResponse,
     OpenInterestResponse,
@@ -89,7 +90,6 @@ import type {
     OrderBookResponse,
     RecentBlockTradesListResponse,
     RecentTradesListResponse,
-    SymbolPriceTickerResponse,
     Ticker24hrPriceChangeStatisticsResponse,
 } from './types';
 import type {
@@ -323,6 +323,24 @@ export class RestAPI {
     }
 
     /**
+     * Get spot index price for option underlying.
+     *
+     * Weight: 1
+     *
+     * @summary Index Price Ticker
+     * @param {IndexPriceTickerRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<IndexPriceTickerResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/derivatives/option/market-data/Index-Price-Ticker Binance API Documentation}
+     */
+    indexPriceTicker(
+        requestParameters: IndexPriceTickerRequest
+    ): Promise<RestApiResponse<IndexPriceTickerResponse>> {
+        return this.marketDataApi.indexPriceTicker(requestParameters);
+    }
+
+    /**
      * Kline/candlestick bars for an option symbol.
      * Klines are uniquely identified by their open time.
      *
@@ -452,24 +470,6 @@ export class RestAPI {
         requestParameters: RecentTradesListRequest
     ): Promise<RestApiResponse<RecentTradesListResponse>> {
         return this.marketDataApi.recentTradesList(requestParameters);
-    }
-
-    /**
-     * Get spot index price for option underlying.
-     *
-     * Weight: 1
-     *
-     * @summary Symbol Price Ticker
-     * @param {SymbolPriceTickerRequest} requestParameters Request parameters.
-     *
-     * @returns {Promise<RestApiResponse<SymbolPriceTickerResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-data/Symbol-Price-Ticker Binance API Documentation}
-     */
-    symbolPriceTicker(
-        requestParameters: SymbolPriceTickerRequest
-    ): Promise<RestApiResponse<SymbolPriceTickerResponse>> {
-        return this.marketDataApi.symbolPriceTicker(requestParameters);
     }
 
     /**
@@ -808,6 +808,7 @@ export class RestAPI {
      * Cancel multiple orders.
      *
      * At least one instance of `orderId` and `clientOrderId` must be sent.
+     * Max 10 orders can be deleted in one request
      *
      * Weight: 1
      *

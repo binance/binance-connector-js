@@ -1,5 +1,21 @@
 # Changelog
 
+## 10.0.0 - 2025-11-18
+
+### Changed (4)
+
+- Update `@binance/common` library to version `2.0.1`.
+- Replaced deprecated `tsup` with `tsdown` for bundling.
+
+#### REST API
+
+- Renamed `symbolPriceTicker()` to `indexPriceTicker()`.
+
+#### WebSocket Streams
+
+- Modified response for `tradeStreams()` (`<symbol>@trade` method):
+  - `t`: number -> string
+
 ## 9.0.1 - 2025-11-06
 
 ### Changed (1)

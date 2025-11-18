@@ -16,19 +16,19 @@
 /**
  *
  * @export
- * @interface SymbolPriceTickerResponse
+ * @interface IndexPriceTickerResponse
  */
-export interface SymbolPriceTickerResponse {
+export interface IndexPriceTickerResponse {
     /**
      *
      * @type {number | bigint}
-     * @memberof SymbolPriceTickerResponse
+     * @memberof IndexPriceTickerResponse
      */
     time?: number | bigint;
     /**
      *
      * @type {string}
-     * @memberof SymbolPriceTickerResponse
+     * @memberof IndexPriceTickerResponse
      */
     indexPrice?: string;
 }

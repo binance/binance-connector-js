@@ -23,6 +23,7 @@ import type {
     CheckServerTimeResponse,
     ExchangeInformationResponse,
     HistoricalExerciseRecordsResponse,
+    IndexPriceTickerResponse,
     KlineCandlestickDataResponse,
     OldTradesLookupResponse,
     OpenInterestResponse,
@@ -30,7 +31,6 @@ import type {
     OrderBookResponse,
     RecentBlockTradesListResponse,
     RecentTradesListResponse,
-    SymbolPriceTickerResponse,
     Ticker24hrPriceChangeStatisticsResponse,
 } from '../types';
 
@@ -127,6 +127,36 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
 
             return {
                 endpoint: '/eapi/v1/exerciseHistory',
+                method: 'GET',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Get spot index price for option underlying.
+         *
+         * Weight: 1
+         *
+         * @summary Index Price Ticker
+         * @param {string} underlying Option underlying, e.g BTCUSDT
+         *
+         * @throws {RequiredError}
+         */
+        indexPriceTicker: async (underlying: string): Promise<RequestArgs> => {
+            // verify required parameter 'underlying' is not null or undefined
+            assertParamExists('indexPriceTicker', 'underlying', underlying);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (underlying !== undefined && underlying !== null) {
+                localVarQueryParameter['underlying'] = underlying;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/eapi/v1/index',
                 method: 'GET',
                 params: localVarQueryParameter,
                 timeUnit: _timeUnit,
@@ -412,36 +442,6 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
-         * Get spot index price for option underlying.
-         *
-         * Weight: 1
-         *
-         * @summary Symbol Price Ticker
-         * @param {string} underlying Option underlying, e.g BTCUSDT
-         *
-         * @throws {RequiredError}
-         */
-        symbolPriceTicker: async (underlying: string): Promise<RequestArgs> => {
-            // verify required parameter 'underlying' is not null or undefined
-            assertParamExists('symbolPriceTicker', 'underlying', underlying);
-
-            const localVarQueryParameter: Record<string, unknown> = {};
-
-            if (underlying !== undefined && underlying !== null) {
-                localVarQueryParameter['underlying'] = underlying;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/eapi/v1/index',
-                method: 'GET',
-                params: localVarQueryParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
          * Test connectivity to the Rest API.
          *
          * Weight: 1
@@ -536,6 +536,20 @@ export interface MarketDataApiInterface {
     historicalExerciseRecords(
         requestParameters?: HistoricalExerciseRecordsRequest
     ): Promise<RestApiResponse<HistoricalExerciseRecordsResponse>>;
+    /**
+     * Get spot index price for option underlying.
+     *
+     * Weight: 1
+     *
+     * @summary Index Price Ticker
+     * @param {IndexPriceTickerRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApiInterface
+     */
+    indexPriceTicker(
+        requestParameters: IndexPriceTickerRequest
+    ): Promise<RestApiResponse<IndexPriceTickerResponse>>;
     /**
      * Kline/candlestick bars for an option symbol.
      * Klines are uniquely identified by their open time.
@@ -641,20 +655,6 @@ export interface MarketDataApiInterface {
         requestParameters: RecentTradesListRequest
     ): Promise<RestApiResponse<RecentTradesListResponse>>;
     /**
-     * Get spot index price for option underlying.
-     *
-     * Weight: 1
-     *
-     * @summary Symbol Price Ticker
-     * @param {SymbolPriceTickerRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MarketDataApiInterface
-     */
-    symbolPriceTicker(
-        requestParameters: SymbolPriceTickerRequest
-    ): Promise<RestApiResponse<SymbolPriceTickerResponse>>;
-    /**
      * Test connectivity to the Rest API.
      *
      * Weight: 1
@@ -713,6 +713,19 @@ export interface HistoricalExerciseRecordsRequest {
      * @memberof MarketDataApiHistoricalExerciseRecords
      */
     readonly limit?: number | bigint;
+}
+
+/**
+ * Request parameters for indexPriceTicker operation in MarketDataApi.
+ * @interface IndexPriceTickerRequest
+ */
+export interface IndexPriceTickerRequest {
+    /**
+     * Option underlying, e.g BTCUSDT
+     * @type {string}
+     * @memberof MarketDataApiIndexPriceTicker
+     */
+    readonly underlying: string;
 }
 
 /**
@@ -877,19 +890,6 @@ export interface RecentTradesListRequest {
 }
 
 /**
- * Request parameters for symbolPriceTicker operation in MarketDataApi.
- * @interface SymbolPriceTickerRequest
- */
-export interface SymbolPriceTickerRequest {
-    /**
-     * Option underlying, e.g BTCUSDT
-     * @type {string}
-     * @memberof MarketDataApiSymbolPriceTicker
-     */
-    readonly underlying: string;
-}
-
-/**
  * Request parameters for ticker24hrPriceChangeStatistics operation in MarketDataApi.
  * @interface Ticker24hrPriceChangeStatisticsRequest
  */
@@ -985,6 +985,34 @@ export class MarketDataApi implements MarketDataApiInterface {
             requestParameters?.limit
         );
         return sendRequest<HistoricalExerciseRecordsResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: false }
+        );
+    }
+
+    /**
+     * Get spot index price for option underlying.
+     *
+     * Weight: 1
+     *
+     * @summary Index Price Ticker
+     * @param {IndexPriceTickerRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<IndexPriceTickerResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApi
+     * @see {@link https://developers.binance.com/docs/derivatives/option/market-data/Index-Price-Ticker Binance API Documentation}
+     */
+    public async indexPriceTicker(
+        requestParameters: IndexPriceTickerRequest
+    ): Promise<RestApiResponse<IndexPriceTickerResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.indexPriceTicker(
+            requestParameters?.underlying
+        );
+        return sendRequest<IndexPriceTickerResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
@@ -1199,34 +1227,6 @@ export class MarketDataApi implements MarketDataApiInterface {
             requestParameters?.limit
         );
         return sendRequest<RecentTradesListResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
-        );
-    }
-
-    /**
-     * Get spot index price for option underlying.
-     *
-     * Weight: 1
-     *
-     * @summary Symbol Price Ticker
-     * @param {SymbolPriceTickerRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<SymbolPriceTickerResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-data/Symbol-Price-Ticker Binance API Documentation}
-     */
-    public async symbolPriceTicker(
-        requestParameters: SymbolPriceTickerRequest
-    ): Promise<RestApiResponse<SymbolPriceTickerResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.symbolPriceTicker(
-            requestParameters?.underlying
-        );
-        return sendRequest<SymbolPriceTickerResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

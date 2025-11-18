@@ -10,20 +10,20 @@ const configurationRestAPI = {
 };
 const client = new DerivativesTradingOptions({ configurationRestAPI });
 
-async function symbolPriceTicker() {
+async function indexPriceTicker() {
     try {
-        const response = await client.restAPI.symbolPriceTicker({
+        const response = await client.restAPI.indexPriceTicker({
             underlying: 'underlying_example',
         });
 
         const rateLimits = response.rateLimits!;
-        console.log('symbolPriceTicker() rate limits:', rateLimits);
+        console.log('indexPriceTicker() rate limits:', rateLimits);
 
         const data = await response.data();
-        console.log('symbolPriceTicker() response:', data);
+        console.log('indexPriceTicker() response:', data);
     } catch (error) {
-        console.error('symbolPriceTicker() error:', error);
+        console.error('indexPriceTicker() error:', error);
     }
 }
 
-symbolPriceTicker();
+indexPriceTicker();

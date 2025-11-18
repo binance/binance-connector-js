@@ -39,10 +39,10 @@ export interface TradeStreamsResponse {
     s?: string;
     /**
      *
-     * @type {number | bigint}
+     * @type {string}
      * @memberof TradeStreamsResponse
      */
-    t?: number | bigint;
+    t?: string;
     /**
      *
      * @type {string}

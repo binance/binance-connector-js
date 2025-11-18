@@ -179,6 +179,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Cancel multiple orders.
          *
          * At least one instance of `orderId` and `clientOrderId` must be sent.
+         * Max 10 orders can be deleted in one request
          *
          * Weight: 1
          *
@@ -739,6 +740,7 @@ export interface TradeApiInterface {
      * Cancel multiple orders.
      *
      * At least one instance of `orderId` and `clientOrderId` must be sent.
+     * Max 10 orders can be deleted in one request
      *
      * Weight: 1
      *
@@ -1436,6 +1438,7 @@ export class TradeApi implements TradeApiInterface {
      * Cancel multiple orders.
      *
      * At least one instance of `orderId` and `clientOrderId` must be sent.
+     * Max 10 orders can be deleted in one request
      *
      * Weight: 1
      *

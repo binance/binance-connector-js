@@ -18,6 +18,7 @@ import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 import { MarketDataApi } from '../../../src/rest-api';
 import {
     HistoricalExerciseRecordsRequest,
+    IndexPriceTickerRequest,
     KlineCandlestickDataRequest,
     OldTradesLookupRequest,
     OpenInterestRequest,
@@ -25,13 +26,13 @@ import {
     OrderBookRequest,
     RecentBlockTradesListRequest,
     RecentTradesListRequest,
-    SymbolPriceTickerRequest,
     Ticker24hrPriceChangeStatisticsRequest,
 } from '../../../src/rest-api';
 import type {
     CheckServerTimeResponse,
     ExchangeInformationResponse,
     HistoricalExerciseRecordsResponse,
+    IndexPriceTickerResponse,
     KlineCandlestickDataResponse,
     OldTradesLookupResponse,
     OpenInterestResponse,
@@ -39,7 +40,6 @@ import type {
     OrderBookResponse,
     RecentBlockTradesListResponse,
     RecentTradesListResponse,
-    SymbolPriceTickerResponse,
     Ticker24hrPriceChangeStatisticsResponse,
 } from '../../../src/rest-api/types';
 
@@ -271,6 +271,81 @@ describe('MarketDataApi', () => {
                 .spyOn(client, 'historicalExerciseRecords')
                 .mockRejectedValueOnce(mockError);
             await expect(client.historicalExerciseRecords()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('indexPriceTicker()', () => {
+        it('should execute indexPriceTicker() successfully with required parameters only', async () => {
+            const params: IndexPriceTickerRequest = {
+                underlying: 'underlying_example',
+            };
+
+            mockResponse = JSONParse(JSONStringify({ time: 1656647305000, indexPrice: '9200' }));
+
+            const spy = jest.spyOn(client, 'indexPriceTicker').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<IndexPriceTickerResponse>)
+            );
+            const response = await client.indexPriceTicker(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute indexPriceTicker() successfully with optional parameters', async () => {
+            const params: IndexPriceTickerRequest = {
+                underlying: 'underlying_example',
+            };
+
+            mockResponse = JSONParse(JSONStringify({ time: 1656647305000, indexPrice: '9200' }));
+
+            const spy = jest.spyOn(client, 'indexPriceTicker').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<IndexPriceTickerResponse>)
+            );
+            const response = await client.indexPriceTicker(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when underlying is missing', async () => {
+            const _params: IndexPriceTickerRequest = {
+                underlying: 'underlying_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.underlying;
+
+            await expect(client.indexPriceTicker(params)).rejects.toThrow(
+                'Required parameter underlying was null or undefined when calling indexPriceTicker.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: IndexPriceTickerRequest = {
+                underlying: 'underlying_example',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'indexPriceTicker').mockRejectedValueOnce(mockError);
+            await expect(client.indexPriceTicker(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
@@ -994,81 +1069,6 @@ describe('MarketDataApi', () => {
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'recentTradesList').mockRejectedValueOnce(mockError);
             await expect(client.recentTradesList(params)).rejects.toThrow('ResponseError');
-            spy.mockRestore();
-        });
-    });
-
-    describe('symbolPriceTicker()', () => {
-        it('should execute symbolPriceTicker() successfully with required parameters only', async () => {
-            const params: SymbolPriceTickerRequest = {
-                underlying: 'underlying_example',
-            };
-
-            mockResponse = JSONParse(JSONStringify({ time: 1656647305000, indexPrice: '9200' }));
-
-            const spy = jest.spyOn(client, 'symbolPriceTicker').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<SymbolPriceTickerResponse>)
-            );
-            const response = await client.symbolPriceTicker(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute symbolPriceTicker() successfully with optional parameters', async () => {
-            const params: SymbolPriceTickerRequest = {
-                underlying: 'underlying_example',
-            };
-
-            mockResponse = JSONParse(JSONStringify({ time: 1656647305000, indexPrice: '9200' }));
-
-            const spy = jest.spyOn(client, 'symbolPriceTicker').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<SymbolPriceTickerResponse>)
-            );
-            const response = await client.symbolPriceTicker(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw RequiredError when underlying is missing', async () => {
-            const _params: SymbolPriceTickerRequest = {
-                underlying: 'underlying_example',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.underlying;
-
-            await expect(client.symbolPriceTicker(params)).rejects.toThrow(
-                'Required parameter underlying was null or undefined when calling symbolPriceTicker.'
-            );
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const params: SymbolPriceTickerRequest = {
-                underlying: 'underlying_example',
-            };
-
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest.spyOn(client, 'symbolPriceTicker').mockRejectedValueOnce(mockError);
-            await expect(client.symbolPriceTicker(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
