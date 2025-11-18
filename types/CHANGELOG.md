@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.7 - 2025-11-18
+
+### Changed (2)
+
+- Update `@binance/common` library to version `2.0.1`.
+- Replaced deprecated `tsup` with `tsdown` for bundling.
+
 ## 1.0.6 - 2025-11-06
 
 ### Changed (1)

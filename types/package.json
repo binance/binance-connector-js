@@ -1,7 +1,7 @@
 {
     "name": "@binance/types",
     "description": "Shared types for Binance connectors",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "types": "./dist/index.d.ts",
     "exports": {
         ".": {
@@ -11,7 +11,7 @@
     },
     "scripts": {
         "prepublishOnly": "npm run build",
-        "build": "npm run clean && tsup",
+        "build": "npm run clean && tsdown",
         "clean": "rm -rf dist"
     },
     "keywords": [
@@ -29,10 +29,10 @@
     "devDependencies": {
         "@types/node": "^20.17.24",
         "ts-node": "^10.9.1",
-        "tsup": "^8.4.0",
+        "tsdown": "^0.16.5",
         "typescript": "^5.7.2"
     },
     "dependencies": {
-        "@binance/common": "1.2.5"
+        "@binance/common": "2.0.1"
     }
 }
