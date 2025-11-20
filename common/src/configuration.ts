@@ -226,6 +226,13 @@ export class ConfigurationWebsocketAPI {
      */
     autoSessionReLogon?: boolean;
     /**
+     * ping interval in milliseconds to keep connection alive
+     * @default 15000 (15 seconds)
+     * @type {number}
+     * @memberof ConfigurationWebsocketAPI
+     */
+    pingInterval?: number;
+    /**
      * Optional user agent string for identifying the client
      * @type {string}
      * @memberof ConfigurationWebsocketStreams
@@ -247,6 +254,7 @@ export class ConfigurationWebsocketAPI {
         this.privateKeyPassphrase = param.privateKeyPassphrase;
         this.timeUnit = param.timeUnit;
         this.autoSessionReLogon = param.autoSessionReLogon ?? true;
+        this.pingInterval = param.pingInterval ?? 15000;
     }
 }
 

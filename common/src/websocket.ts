@@ -717,6 +717,7 @@ export interface WebsocketSendMsgConfig {
 
 export class WebsocketAPIBase extends WebsocketCommon {
     private isConnecting: boolean = false;
+    private pingTimers: Map<WebSocketClient, NodeJS.Timeout> = new Map();
     streamCallbackMap: Map<string, Set<(data: unknown) => void>> = new Map();
     configuration: ConfigurationWebsocketAPI;
     logger: Logger = Logger.getInstance();
@@ -727,6 +728,63 @@ export class WebsocketAPIBase extends WebsocketCommon {
     ) {
         super(configuration, connectionPool);
         this.configuration = configuration;
+    }
+
+    /**
+     * Starts periodic pinging for a WebSocket connection to keep it alive
+     * @param ws WebSocket client instance
+     */
+    private startPinging(ws: WebSocketClient): void {
+        if (this.pingTimers.has(ws)) return; // Already pinging
+
+        const pingTimer = setInterval(() => {
+            if (ws.readyState === WebSocketClient.OPEN) {
+                ws.ping();
+                this.logger.debug('Sent PING to keep connection alive');
+            }
+        }, this.configuration.pingInterval);
+
+        this.pingTimers.set(ws, pingTimer);
+    }
+
+    /**
+     * Stops pinging for a WebSocket connection
+     * @param ws WebSocket client instance
+     */
+    private stopPinging(ws: WebSocketClient): void {
+        const timer = this.pingTimers.get(ws);
+        if (timer) {
+            clearInterval(timer);
+            this.pingTimers.delete(ws);
+        }
+    }
+
+    /**
+     * Handles the opening of a WebSocket connection.
+     * @param url - The URL of the WebSocket server.
+     * @param targetConnection - The WebSocket connection being opened.
+     * @param oldWSConnection - The WebSocket client instance associated with the old connection.
+     */
+    protected onOpen(
+        url: string,
+        targetConnection: WebsocketConnection,
+        oldWSConnection: WebSocketClient
+    ): void {
+        super.onOpen(url, targetConnection, oldWSConnection);
+        if (targetConnection.ws) {
+            this.startPinging(targetConnection.ws);
+        }
+    }
+
+    /**
+     * Cleans up WebSocket connection resources.
+     * Removes all listeners and clears any associated timers for the provided WebSocket client.
+     * @param ws - The WebSocket client to clean up.
+     * @returns void
+     */
+    protected cleanup(ws: WebSocketClient): void {
+        this.stopPinging(ws);
+        super.cleanup(ws);
     }
 
     /**

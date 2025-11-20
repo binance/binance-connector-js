@@ -17,7 +17,7 @@
  */
 
 import { WebsocketAPIBase, WebsocketApiResponse, WebsocketSendMsgOptions } from '@binance/common';
-import type { SessionLogonResponse, SessionLogoutResponse, SessionStatusResponse } from '../types';
+import type { SessionLogonResponse, SessionLogoutResponse, SessionStatusResponse, SessionKeepAliveResponse } from '../types';
 
 /**
  * AuthApi - interface
@@ -64,6 +64,21 @@ export interface AuthApiInterface {
     ): Promise<WebsocketApiResponse<SessionLogoutResponse>[]>;
 
     /**
+     * Keep the WebSocket session alive.
+     * This should be called periodically (every 10-15 seconds) to prevent session timeout.
+     * Weight: 1
+     *
+     * @summary WebSocket Keep session alive
+     * @param {SessionKeepAliveRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<SessionKeepAliveResponse>}
+     * @memberof AuthApiInterface
+     */
+    sessionKeepAlive(
+        requestParameters?: SessionKeepAliveRequest
+    ): Promise<WebsocketApiResponse<SessionKeepAliveResponse>[]>;
+
+    /**
      * Query the status of the WebSocket connection,
      * inspecting which API key (if any) is used to authorize requests.
      * Weight: 2
@@ -108,6 +123,19 @@ export interface SessionLogoutRequest {
      * Unique WebSocket request ID.
      * @type {string}
      * @memberof AuthApiSessionLogout
+     */
+    readonly id?: string;
+}
+
+/**
+ * Request parameters for sessionKeepAlive operation in AuthApi.
+ * @interface SessionKeepAliveRequest
+ */
+export interface SessionKeepAliveRequest {
+    /**
+     * Unique WebSocket request ID.
+     * @type {string}
+     * @memberof AuthApiSessionKeepAlive
      */
     readonly id?: string;
 }
@@ -184,6 +212,27 @@ export class AuthApi implements AuthApiInterface {
             '/session.logout'.slice(1),
             requestParameters as unknown as WebsocketSendMsgOptions,
             { isSigned: false, withApiKey: false, isSessionLogout: true }
+        );
+    }
+
+    /**
+     * Keep the WebSocket session alive.
+     * This should be called periodically (every 10-15 seconds) to prevent session timeout.
+     * Weight: 1
+     *
+     * @summary WebSocket Keep session alive
+     * @param {SessionKeepAliveRequest} requestParameters Request parameters.
+     * @returns {Promise<SessionKeepAliveResponse>}
+     * @memberof AuthApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/authentication-requests#keep-session-alive Binance API Documentation}
+     */
+    public sessionKeepAlive(
+        requestParameters: SessionKeepAliveRequest = {}
+    ): Promise<WebsocketApiResponse<SessionKeepAliveResponse>[]> {
+        return this.websocketBase.sendMessage<SessionKeepAliveResponse>(
+            '/session.keepalive'.slice(1),
+            requestParameters as unknown as WebsocketSendMsgOptions,
+            { isSigned: false, withApiKey: false }
         );
     }
 

@@ -116,6 +116,7 @@ export * from './percent-price-filter';
 export * from './ping-response';
 export * from './price-filter';
 export * from './rate-limits';
+export * from './session-keep-alive-response';
 export * from './session-logon-response';
 export * from './session-logon-response-result';
 export * from './session-logout-response';

@@ -89,6 +89,9 @@ import type {
     UserDataStreamSubscribeSignatureRequest,
     UserDataStreamUnsubscribeRequest,
 } from './modules/user-data-stream-api';
+import type {
+    SessionKeepAliveRequest,
+} from './modules/auth-api';
 
 import type {
     AccountCommissionResponse,
@@ -142,6 +145,7 @@ import type {
     UserDataStreamSubscribeResponse,
     UserDataStreamSubscribeSignatureResponse,
     UserDataStreamUnsubscribeResponse,
+    SessionKeepAliveResponse,
 } from './types';
 
 export class WebsocketAPIConnection {
@@ -152,6 +156,7 @@ export class WebsocketAPIConnection {
     private marketApi: MarketApi;
     private tradeApi: TradeApi;
     private userDataStreamApi: UserDataStreamApi;
+    private sessionKeepAliveTimer?: NodeJS.Timeout;
 
     constructor(websocketBase: WebsocketAPIBase) {
         this.websocketBase = websocketBase;
@@ -161,6 +166,31 @@ export class WebsocketAPIConnection {
         this.marketApi = new MarketApi(websocketBase);
         this.tradeApi = new TradeApi(websocketBase);
         this.userDataStreamApi = new UserDataStreamApi(websocketBase);
+    }
+
+    /**
+     * Starts automatic session keep-alive calls every 12 seconds
+     * @private
+     */
+    private startSessionKeepAlive(): void {
+        if (this.sessionKeepAliveTimer) return; // Already running
+
+        this.sessionKeepAliveTimer = setInterval(() => {
+            this.sessionKeepAlive().catch((err) => {
+                console.warn('Session keep-alive failed:', err);
+            });
+        }, 12000); // 12 seconds
+    }
+
+    /**
+     * Stops the automatic session keep-alive calls
+     * @private
+     */
+    private stopSessionKeepAlive(): void {
+        if (this.sessionKeepAliveTimer) {
+            clearInterval(this.sessionKeepAliveTimer);
+            this.sessionKeepAliveTimer = undefined;
+        }
     }
 
     on(
@@ -188,6 +218,7 @@ export class WebsocketAPIConnection {
      * @throws Error if the WebSocket client is not set.
      */
     disconnect() {
+        this.stopSessionKeepAlive();
         return this.websocketBase.disconnect();
     }
 
@@ -524,6 +555,23 @@ export class WebsocketAPIConnection {
         requestParameters: SessionLogoutRequest = {}
     ): Promise<WebsocketApiResponse<SessionLogoutResponse>[]> {
         return this.authApi.sessionLogout(requestParameters);
+    }
+
+    /**
+     * Keep the WebSocket session alive.
+     * This should be called periodically (every 10-15 seconds) to prevent session timeout.
+     * Weight: 1
+     *
+     * @summary WebSocket Keep session alive
+     * @param {SessionKeepAliveRequest} requestParameters Request parameters.
+     *
+     * @returns Promise<WebsocketApiResponse<SessionKeepAliveResponse>[]>
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/authentication-requests#keep-session-alive Binance API Documentation}
+     */
+    sessionKeepAlive(
+        requestParameters: SessionKeepAliveRequest = {}
+    ): Promise<WebsocketApiResponse<SessionKeepAliveResponse>[]> {
+        return this.authApi.sessionKeepAlive(requestParameters);
     }
 
     /**
@@ -1171,6 +1219,8 @@ export class WebsocketAPIConnection {
                     this.websocketBase,
                     identifier
                 );
+                // Start automatic session keep-alive every 12 seconds
+                this.startSessionKeepAlive();
                 return { response, stream };
             })
             .catch((error) => {
@@ -1204,6 +1254,8 @@ export class WebsocketAPIConnection {
                     this.websocketBase,
                     identifier
                 );
+                // Start automatic session keep-alive every 12 seconds
+                this.startSessionKeepAlive();
                 return { response, stream };
             })
             .catch((error) => {
