@@ -1,5 +1,13 @@
 # Changelog
 
+## 11.0.0 - 2025-11-20
+
+### Changed (1)
+
+#### REST API
+
+- Renamed `transferLdusdtForPortfolioMargin()` to `transferLdusdtRwusdForPortfolioMargin()`.
+
 ## 10.0.1 - 2025-11-18
 
 ### Changed (2)

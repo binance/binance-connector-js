@@ -31,7 +31,7 @@ import {
     QueryPortfolioMarginProBankruptcyLoanRepayHistoryRequest,
     QueryPortfolioMarginProNegativeBalanceInterestHistoryRequest,
     RepayFuturesNegativeBalanceRequest,
-    TransferLdusdtForPortfolioMarginRequest,
+    TransferLdusdtRwusdForPortfolioMarginRequest,
 } from '../../../src/rest-api';
 import type {
     BnbTransferResponse,
@@ -48,7 +48,7 @@ import type {
     QueryPortfolioMarginProBankruptcyLoanRepayHistoryResponse,
     QueryPortfolioMarginProNegativeBalanceInterestHistoryResponse,
     RepayFuturesNegativeBalanceResponse,
-    TransferLdusdtForPortfolioMarginResponse,
+    TransferLdusdtRwusdForPortfolioMarginResponse,
 } from '../../../src/rest-api/types';
 
 describe('AccountApi', () => {
@@ -1149,9 +1149,9 @@ describe('AccountApi', () => {
         });
     });
 
-    describe('transferLdusdtForPortfolioMargin()', () => {
-        it('should execute transferLdusdtForPortfolioMargin() successfully with required parameters only', async () => {
-            const params: TransferLdusdtForPortfolioMarginRequest = {
+    describe('transferLdusdtRwusdForPortfolioMargin()', () => {
+        it('should execute transferLdusdtRwusdForPortfolioMargin() successfully with required parameters only', async () => {
+            const params: TransferLdusdtRwusdForPortfolioMarginRequest = {
                 asset: 'asset_example',
                 transferType: 'transferType_example',
                 amount: 1.0,
@@ -1159,22 +1159,22 @@ describe('AccountApi', () => {
 
             mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
 
-            const spy = jest.spyOn(client, 'transferLdusdtForPortfolioMargin').mockReturnValue(
+            const spy = jest.spyOn(client, 'transferLdusdtRwusdForPortfolioMargin').mockReturnValue(
                 Promise.resolve({
                     data: () => Promise.resolve(mockResponse),
                     status: 200,
                     headers: {},
                     rateLimits: [],
-                } as RestApiResponse<TransferLdusdtForPortfolioMarginResponse>)
+                } as RestApiResponse<TransferLdusdtRwusdForPortfolioMarginResponse>)
             );
-            const response = await client.transferLdusdtForPortfolioMargin(params);
+            const response = await client.transferLdusdtRwusdForPortfolioMargin(params);
             expect(response).toBeDefined();
             await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
         });
 
-        it('should execute transferLdusdtForPortfolioMargin() successfully with optional parameters', async () => {
-            const params: TransferLdusdtForPortfolioMarginRequest = {
+        it('should execute transferLdusdtRwusdForPortfolioMargin() successfully with optional parameters', async () => {
+            const params: TransferLdusdtRwusdForPortfolioMarginRequest = {
                 asset: 'asset_example',
                 transferType: 'transferType_example',
                 amount: 1.0,
@@ -1183,22 +1183,22 @@ describe('AccountApi', () => {
 
             mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
 
-            const spy = jest.spyOn(client, 'transferLdusdtForPortfolioMargin').mockReturnValue(
+            const spy = jest.spyOn(client, 'transferLdusdtRwusdForPortfolioMargin').mockReturnValue(
                 Promise.resolve({
                     data: () => Promise.resolve(mockResponse),
                     status: 200,
                     headers: {},
                     rateLimits: [],
-                } as RestApiResponse<TransferLdusdtForPortfolioMarginResponse>)
+                } as RestApiResponse<TransferLdusdtRwusdForPortfolioMarginResponse>)
             );
-            const response = await client.transferLdusdtForPortfolioMargin(params);
+            const response = await client.transferLdusdtRwusdForPortfolioMargin(params);
             expect(response).toBeDefined();
             await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
         });
 
         it('should throw RequiredError when asset is missing', async () => {
-            const _params: TransferLdusdtForPortfolioMarginRequest = {
+            const _params: TransferLdusdtRwusdForPortfolioMarginRequest = {
                 asset: 'asset_example',
                 transferType: 'transferType_example',
                 amount: 1.0,
@@ -1206,13 +1206,13 @@ describe('AccountApi', () => {
             const params = Object.assign({ ..._params });
             delete params?.asset;
 
-            await expect(client.transferLdusdtForPortfolioMargin(params)).rejects.toThrow(
-                'Required parameter asset was null or undefined when calling transferLdusdtForPortfolioMargin.'
+            await expect(client.transferLdusdtRwusdForPortfolioMargin(params)).rejects.toThrow(
+                'Required parameter asset was null or undefined when calling transferLdusdtRwusdForPortfolioMargin.'
             );
         });
 
         it('should throw RequiredError when transferType is missing', async () => {
-            const _params: TransferLdusdtForPortfolioMarginRequest = {
+            const _params: TransferLdusdtRwusdForPortfolioMarginRequest = {
                 asset: 'asset_example',
                 transferType: 'transferType_example',
                 amount: 1.0,
@@ -1220,13 +1220,13 @@ describe('AccountApi', () => {
             const params = Object.assign({ ..._params });
             delete params?.transferType;
 
-            await expect(client.transferLdusdtForPortfolioMargin(params)).rejects.toThrow(
-                'Required parameter transferType was null or undefined when calling transferLdusdtForPortfolioMargin.'
+            await expect(client.transferLdusdtRwusdForPortfolioMargin(params)).rejects.toThrow(
+                'Required parameter transferType was null or undefined when calling transferLdusdtRwusdForPortfolioMargin.'
             );
         });
 
         it('should throw RequiredError when amount is missing', async () => {
-            const _params: TransferLdusdtForPortfolioMarginRequest = {
+            const _params: TransferLdusdtRwusdForPortfolioMarginRequest = {
                 asset: 'asset_example',
                 transferType: 'transferType_example',
                 amount: 1.0,
@@ -1234,13 +1234,13 @@ describe('AccountApi', () => {
             const params = Object.assign({ ..._params });
             delete params?.amount;
 
-            await expect(client.transferLdusdtForPortfolioMargin(params)).rejects.toThrow(
-                'Required parameter amount was null or undefined when calling transferLdusdtForPortfolioMargin.'
+            await expect(client.transferLdusdtRwusdForPortfolioMargin(params)).rejects.toThrow(
+                'Required parameter amount was null or undefined when calling transferLdusdtRwusdForPortfolioMargin.'
             );
         });
 
         it('should throw an error when server is returning an error', async () => {
-            const params: TransferLdusdtForPortfolioMarginRequest = {
+            const params: TransferLdusdtRwusdForPortfolioMarginRequest = {
                 asset: 'asset_example',
                 transferType: 'transferType_example',
                 amount: 1.0,
@@ -1256,9 +1256,9 @@ describe('AccountApi', () => {
             };
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest
-                .spyOn(client, 'transferLdusdtForPortfolioMargin')
+                .spyOn(client, 'transferLdusdtRwusdForPortfolioMargin')
                 .mockRejectedValueOnce(mockError);
-            await expect(client.transferLdusdtForPortfolioMargin(params)).rejects.toThrow(
+            await expect(client.transferLdusdtRwusdForPortfolioMargin(params)).rejects.toThrow(
                 'ResponseError'
             );
             spy.mockRestore();

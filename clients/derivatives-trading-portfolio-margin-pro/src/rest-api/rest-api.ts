@@ -30,7 +30,7 @@ import type {
     QueryPortfolioMarginProBankruptcyLoanRepayHistoryRequest,
     QueryPortfolioMarginProNegativeBalanceInterestHistoryRequest,
     RepayFuturesNegativeBalanceRequest,
-    TransferLdusdtForPortfolioMarginRequest,
+    TransferLdusdtRwusdForPortfolioMarginRequest,
 } from './modules/account-api';
 import type {
     PortfolioMarginProTieredCollateralRateRequest,
@@ -52,7 +52,7 @@ import type {
     QueryPortfolioMarginProBankruptcyLoanRepayHistoryResponse,
     QueryPortfolioMarginProNegativeBalanceInterestHistoryResponse,
     RepayFuturesNegativeBalanceResponse,
-    TransferLdusdtForPortfolioMarginResponse,
+    TransferLdusdtRwusdForPortfolioMarginResponse,
 } from './types';
 import type {
     GetPortfolioMarginAssetLeverageResponse,
@@ -376,21 +376,21 @@ export class RestAPI {
     }
 
     /**
-     * Transfer LDUSDT as collateral for all types of Portfolio Margin account
+     * Transfer LDUSDT/RWUSD as collateral for all types of Portfolio Margin account
      *
      * Weight: 1500
      *
-     * @summary Transfer LDUSDT for Portfolio Margin(TRADE)
-     * @param {TransferLdusdtForPortfolioMarginRequest} requestParameters Request parameters.
+     * @summary Transfer LDUSDT/RWUSD for Portfolio Margin(TRADE)
+     * @param {TransferLdusdtRwusdForPortfolioMarginRequest} requestParameters Request parameters.
      *
-     * @returns {Promise<RestApiResponse<TransferLdusdtForPortfolioMarginResponse>>}
+     * @returns {Promise<RestApiResponse<TransferLdusdtRwusdForPortfolioMarginResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Transfer-LDUSDT-Portfolio-Margin Binance API Documentation}
      */
-    transferLdusdtForPortfolioMargin(
-        requestParameters: TransferLdusdtForPortfolioMarginRequest
-    ): Promise<RestApiResponse<TransferLdusdtForPortfolioMarginResponse>> {
-        return this.accountApi.transferLdusdtForPortfolioMargin(requestParameters);
+    transferLdusdtRwusdForPortfolioMargin(
+        requestParameters: TransferLdusdtRwusdForPortfolioMarginRequest
+    ): Promise<RestApiResponse<TransferLdusdtRwusdForPortfolioMarginResponse>> {
+        return this.accountApi.transferLdusdtRwusdForPortfolioMargin(requestParameters);
     }
 
     /**

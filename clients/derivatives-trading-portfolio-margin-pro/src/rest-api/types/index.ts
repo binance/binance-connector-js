@@ -25,4 +25,4 @@ export * from './query-portfolio-margin-pro-bankruptcy-loan-repay-history-respon
 export * from './query-portfolio-margin-pro-negative-balance-interest-history-response';
 export * from './query-portfolio-margin-pro-negative-balance-interest-history-response-inner';
 export * from './repay-futures-negative-balance-response';
-export * from './transfer-ldusdt-for-portfolio-margin-response';
+export * from './transfer-ldusdt-rwusd-for-portfolio-margin-response';

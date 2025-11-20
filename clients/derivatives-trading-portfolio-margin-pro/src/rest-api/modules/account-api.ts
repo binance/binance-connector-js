@@ -34,7 +34,7 @@ import type {
     QueryPortfolioMarginProBankruptcyLoanRepayHistoryResponse,
     QueryPortfolioMarginProNegativeBalanceInterestHistoryResponse,
     RepayFuturesNegativeBalanceResponse,
-    TransferLdusdtForPortfolioMarginResponse,
+    TransferLdusdtRwusdForPortfolioMarginResponse,
 } from '../types';
 
 /**
@@ -167,7 +167,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 60
          *
          * @summary Fund Collection by Asset(USER_DATA)
-         * @param {string} asset `LDUSDT` only
+         * @param {string} asset `LDUSDT` and `RWUSD`
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -325,7 +325,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          * Weight: 1500
          *
          * @summary Get Transferable Earn Asset Balance for Portfolio Margin (USER_DATA)
-         * @param {string} asset `LDUSDT` only
+         * @param {string} asset `LDUSDT` and `RWUSD`
          * @param {string} transferType `EARN_TO_FUTURE` /`FUTURE_TO_EARN`
          * @param {number | bigint} [recvWindow]
          *
@@ -582,30 +582,34 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             };
         },
         /**
-         * Transfer LDUSDT as collateral for all types of Portfolio Margin account
+         * Transfer LDUSDT/RWUSD as collateral for all types of Portfolio Margin account
          *
          * Weight: 1500
          *
-         * @summary Transfer LDUSDT for Portfolio Margin(TRADE)
-         * @param {string} asset `LDUSDT` only
+         * @summary Transfer LDUSDT/RWUSD for Portfolio Margin(TRADE)
+         * @param {string} asset `LDUSDT` and `RWUSD`
          * @param {string} transferType `EARN_TO_FUTURE` /`FUTURE_TO_EARN`
          * @param {number} amount
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        transferLdusdtForPortfolioMargin: async (
+        transferLdusdtRwusdForPortfolioMargin: async (
             asset: string,
             transferType: string,
             amount: number,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'asset' is not null or undefined
-            assertParamExists('transferLdusdtForPortfolioMargin', 'asset', asset);
+            assertParamExists('transferLdusdtRwusdForPortfolioMargin', 'asset', asset);
             // verify required parameter 'transferType' is not null or undefined
-            assertParamExists('transferLdusdtForPortfolioMargin', 'transferType', transferType);
+            assertParamExists(
+                'transferLdusdtRwusdForPortfolioMargin',
+                'transferType',
+                transferType
+            );
             // verify required parameter 'amount' is not null or undefined
-            assertParamExists('transferLdusdtForPortfolioMargin', 'amount', amount);
+            assertParamExists('transferLdusdtRwusdForPortfolioMargin', 'amount', amount);
 
             const localVarQueryParameter: Record<string, unknown> = {};
 
@@ -855,19 +859,19 @@ export interface AccountApiInterface {
         requestParameters?: RepayFuturesNegativeBalanceRequest
     ): Promise<RestApiResponse<RepayFuturesNegativeBalanceResponse>>;
     /**
-     * Transfer LDUSDT as collateral for all types of Portfolio Margin account
+     * Transfer LDUSDT/RWUSD as collateral for all types of Portfolio Margin account
      *
      * Weight: 1500
      *
-     * @summary Transfer LDUSDT for Portfolio Margin(TRADE)
-     * @param {TransferLdusdtForPortfolioMarginRequest} requestParameters Request parameters.
+     * @summary Transfer LDUSDT/RWUSD for Portfolio Margin(TRADE)
+     * @param {TransferLdusdtRwusdForPortfolioMarginRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApiInterface
      */
-    transferLdusdtForPortfolioMargin(
-        requestParameters: TransferLdusdtForPortfolioMarginRequest
-    ): Promise<RestApiResponse<TransferLdusdtForPortfolioMarginResponse>>;
+    transferLdusdtRwusdForPortfolioMargin(
+        requestParameters: TransferLdusdtRwusdForPortfolioMarginRequest
+    ): Promise<RestApiResponse<TransferLdusdtRwusdForPortfolioMarginResponse>>;
 }
 
 /**
@@ -936,7 +940,7 @@ export interface FundAutoCollectionRequest {
  */
 export interface FundCollectionByAssetRequest {
     /**
-     * `LDUSDT` only
+     * `LDUSDT` and `RWUSD`
      * @type {string}
      * @memberof AccountApiFundCollectionByAsset
      */
@@ -1015,7 +1019,7 @@ export interface GetPortfolioMarginProSpanAccountInfoRequest {
  */
 export interface GetTransferableEarnAssetBalanceForPortfolioMarginRequest {
     /**
-     * `LDUSDT` only
+     * `LDUSDT` and `RWUSD`
      * @type {string}
      * @memberof AccountApiGetTransferableEarnAssetBalanceForPortfolioMargin
      */
@@ -1172,35 +1176,35 @@ export interface RepayFuturesNegativeBalanceRequest {
 }
 
 /**
- * Request parameters for transferLdusdtForPortfolioMargin operation in AccountApi.
- * @interface TransferLdusdtForPortfolioMarginRequest
+ * Request parameters for transferLdusdtRwusdForPortfolioMargin operation in AccountApi.
+ * @interface TransferLdusdtRwusdForPortfolioMarginRequest
  */
-export interface TransferLdusdtForPortfolioMarginRequest {
+export interface TransferLdusdtRwusdForPortfolioMarginRequest {
     /**
-     * `LDUSDT` only
+     * `LDUSDT` and `RWUSD`
      * @type {string}
-     * @memberof AccountApiTransferLdusdtForPortfolioMargin
+     * @memberof AccountApiTransferLdusdtRwusdForPortfolioMargin
      */
     readonly asset: string;
 
     /**
      * `EARN_TO_FUTURE` /`FUTURE_TO_EARN`
      * @type {string}
-     * @memberof AccountApiTransferLdusdtForPortfolioMargin
+     * @memberof AccountApiTransferLdusdtRwusdForPortfolioMargin
      */
     readonly transferType: string;
 
     /**
      *
      * @type {number}
-     * @memberof AccountApiTransferLdusdtForPortfolioMargin
+     * @memberof AccountApiTransferLdusdtRwusdForPortfolioMargin
      */
     readonly amount: number;
 
     /**
      *
      * @type {number | bigint}
-     * @memberof AccountApiTransferLdusdtForPortfolioMargin
+     * @memberof AccountApiTransferLdusdtRwusdForPortfolioMargin
      */
     readonly recvWindow?: number | bigint;
 }
@@ -1651,28 +1655,28 @@ export class AccountApi implements AccountApiInterface {
     }
 
     /**
-     * Transfer LDUSDT as collateral for all types of Portfolio Margin account
+     * Transfer LDUSDT/RWUSD as collateral for all types of Portfolio Margin account
      *
      * Weight: 1500
      *
-     * @summary Transfer LDUSDT for Portfolio Margin(TRADE)
-     * @param {TransferLdusdtForPortfolioMarginRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<TransferLdusdtForPortfolioMarginResponse>>}
+     * @summary Transfer LDUSDT/RWUSD for Portfolio Margin(TRADE)
+     * @param {TransferLdusdtRwusdForPortfolioMarginRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<TransferLdusdtRwusdForPortfolioMarginResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
      * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Transfer-LDUSDT-Portfolio-Margin Binance API Documentation}
      */
-    public async transferLdusdtForPortfolioMargin(
-        requestParameters: TransferLdusdtForPortfolioMarginRequest
-    ): Promise<RestApiResponse<TransferLdusdtForPortfolioMarginResponse>> {
+    public async transferLdusdtRwusdForPortfolioMargin(
+        requestParameters: TransferLdusdtRwusdForPortfolioMarginRequest
+    ): Promise<RestApiResponse<TransferLdusdtRwusdForPortfolioMarginResponse>> {
         const localVarAxiosArgs =
-            await this.localVarAxiosParamCreator.transferLdusdtForPortfolioMargin(
+            await this.localVarAxiosParamCreator.transferLdusdtRwusdForPortfolioMargin(
                 requestParameters?.asset,
                 requestParameters?.transferType,
                 requestParameters?.amount,
                 requestParameters?.recvWindow
             );
-        return sendRequest<TransferLdusdtForPortfolioMarginResponse>(
+        return sendRequest<TransferLdusdtRwusdForPortfolioMarginResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

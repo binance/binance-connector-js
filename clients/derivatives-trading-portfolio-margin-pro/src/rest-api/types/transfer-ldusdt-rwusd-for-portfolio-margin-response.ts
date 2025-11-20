@@ -16,13 +16,13 @@
 /**
  *
  * @export
- * @interface TransferLdusdtForPortfolioMarginResponse
+ * @interface TransferLdusdtRwusdForPortfolioMarginResponse
  */
-export interface TransferLdusdtForPortfolioMarginResponse {
+export interface TransferLdusdtRwusdForPortfolioMarginResponse {
     /**
      *
      * @type {string}
-     * @memberof TransferLdusdtForPortfolioMarginResponse
+     * @memberof TransferLdusdtRwusdForPortfolioMarginResponse
      */
     msg?: string;
 }
