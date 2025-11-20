@@ -20,6 +20,7 @@ import {
     type RequestArgs,
 } from '@binance/common';
 import type {
+    AdlRiskResponse,
     BasisResponse,
     CheckServerTimeResponse,
     CompositeIndexSymbolInformationResponse,
@@ -57,6 +58,35 @@ import type {
  */
 const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
     return {
+        /**
+         * Query the symbol-level ADL risk rating.
+         * The ADL risk rating measures the likelihood of ADL during liquidation, and the rating takes into account the insurance fund balance, position concentration on the symbol, order book depth, price volatility, average leverage, unrealized PnL, and margin utilization at the symbol level.
+         * The rating can be high, medium and low, and is updated every 30 minutes.
+         *
+         * Weight: 1
+         *
+         * @summary ADL Risk
+         * @param {string} [symbol]
+         *
+         * @throws {RequiredError}
+         */
+        adlRisk: async (symbol?: string): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (symbol !== undefined && symbol !== null) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/fapi/v1/symbolAdlRisk',
+                method: 'GET',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
         /**
          * Query future basis
          *
@@ -1462,6 +1492,20 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
  */
 export interface MarketDataApiInterface {
     /**
+     * Query the symbol-level ADL risk rating.
+     * The ADL risk rating measures the likelihood of ADL during liquidation, and the rating takes into account the insurance fund balance, position concentration on the symbol, order book depth, price volatility, average leverage, unrealized PnL, and margin utilization at the symbol level.
+     * The rating can be high, medium and low, and is updated every 30 minutes.
+     *
+     * Weight: 1
+     *
+     * @summary ADL Risk
+     * @param {AdlRiskRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApiInterface
+     */
+    adlRisk(requestParameters?: AdlRiskRequest): Promise<RestApiResponse<AdlRiskResponse>>;
+    /**
      * Query future basis
      *
      * If startTime and endTime are not sent, the most recent data is returned.
@@ -2002,6 +2046,19 @@ export interface MarketDataApiInterface {
     topTraderLongShortRatioPositions(
         requestParameters: TopTraderLongShortRatioPositionsRequest
     ): Promise<RestApiResponse<TopTraderLongShortRatioPositionsResponse>>;
+}
+
+/**
+ * Request parameters for adlRisk operation in MarketDataApi.
+ * @interface AdlRiskRequest
+ */
+export interface AdlRiskRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof MarketDataApiAdlRisk
+     */
+    readonly symbol?: string;
 }
 
 /**
@@ -2765,6 +2822,36 @@ export class MarketDataApi implements MarketDataApiInterface {
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
         this.localVarAxiosParamCreator = MarketDataApiAxiosParamCreator(configuration);
+    }
+
+    /**
+     * Query the symbol-level ADL risk rating.
+     * The ADL risk rating measures the likelihood of ADL during liquidation, and the rating takes into account the insurance fund balance, position concentration on the symbol, order book depth, price volatility, average leverage, unrealized PnL, and margin utilization at the symbol level.
+     * The rating can be high, medium and low, and is updated every 30 minutes.
+     *
+     * Weight: 1
+     *
+     * @summary ADL Risk
+     * @param {AdlRiskRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<AdlRiskResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApi
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/ADL-Risk Binance API Documentation}
+     */
+    public async adlRisk(
+        requestParameters: AdlRiskRequest = {}
+    ): Promise<RestApiResponse<AdlRiskResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.adlRisk(
+            requestParameters?.symbol
+        );
+        return sendRequest<AdlRiskResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: false }
+        );
     }
 
     /**

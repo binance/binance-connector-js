@@ -32,6 +32,7 @@ import {
     TopTraderLongShortRatioPositionsPeriodEnum,
 } from '../../../src/rest-api';
 import {
+    AdlRiskRequest,
     BasisRequest,
     CompositeIndexSymbolInformationRequest,
     CompressedAggregateTradesListRequest,
@@ -61,6 +62,7 @@ import {
     TopTraderLongShortRatioPositionsRequest,
 } from '../../../src/rest-api';
 import type {
+    AdlRiskResponse,
     BasisResponse,
     CheckServerTimeResponse,
     CompositeIndexSymbolInformationResponse,
@@ -105,6 +107,65 @@ describe('MarketDataApi', () => {
             basePath: '',
         });
         client = new MarketDataApi(config);
+    });
+
+    describe('adlRisk()', () => {
+        it('should execute adlRisk() successfully with required parameters only', async () => {
+            mockResponse = JSONParse(
+                JSONStringify({ symbol: 'BTCUSDT', adlRisk: 'low', updateTime: 1597370495002 })
+            );
+
+            const spy = jest.spyOn(client, 'adlRisk').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<AdlRiskResponse>)
+            );
+            const response = await client.adlRisk();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute adlRisk() successfully with optional parameters', async () => {
+            const params: AdlRiskRequest = {
+                symbol: 'symbol_example',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({ symbol: 'BTCUSDT', adlRisk: 'low', updateTime: 1597370495002 })
+            );
+
+            const spy = jest.spyOn(client, 'adlRisk').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<AdlRiskResponse>)
+            );
+            const response = await client.adlRisk(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'adlRisk').mockRejectedValueOnce(mockError);
+            await expect(client.adlRisk()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
     });
 
     describe('basis()', () => {

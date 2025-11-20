@@ -49,6 +49,7 @@ import type {
     SendQuoteRequestRequest,
 } from './modules/convert-api';
 import type {
+    AdlRiskRequest,
     BasisRequest,
     CompositeIndexSymbolInformationRequest,
     CompressedAggregateTradesListRequest,
@@ -143,6 +144,7 @@ import type {
     SendQuoteRequestResponse,
 } from './types';
 import type {
+    AdlRiskResponse,
     BasisResponse,
     CheckServerTimeResponse,
     CompositeIndexSymbolInformationResponse,
@@ -739,6 +741,24 @@ export class RestAPI {
         requestParameters: SendQuoteRequestRequest
     ): Promise<RestApiResponse<SendQuoteRequestResponse>> {
         return this.convertApi.sendQuoteRequest(requestParameters);
+    }
+
+    /**
+     * Query the symbol-level ADL risk rating.
+     * The ADL risk rating measures the likelihood of ADL during liquidation, and the rating takes into account the insurance fund balance, position concentration on the symbol, order book depth, price volatility, average leverage, unrealized PnL, and margin utilization at the symbol level.
+     * The rating can be high, medium and low, and is updated every 30 minutes.
+     *
+     * Weight: 1
+     *
+     * @summary ADL Risk
+     * @param {AdlRiskRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<AdlRiskResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/ADL-Risk Binance API Documentation}
+     */
+    adlRisk(requestParameters: AdlRiskRequest = {}): Promise<RestApiResponse<AdlRiskResponse>> {
+        return this.marketDataApi.adlRisk(requestParameters);
     }
 
     /**

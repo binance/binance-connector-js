@@ -1,5 +1,13 @@
 # Changelog
 
+## 18.0.0 - 2025-11-20
+
+### Added (1)
+
+#### REST API
+
+- `adlRisk()` (`GET /fapi/v1/symbolAdlRisk`)
+
 ## 17.0.0 - 2025-11-18
 
 ### Changed (7)
