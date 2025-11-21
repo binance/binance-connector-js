@@ -43,7 +43,7 @@ nvm use 22.12.0
 - [@binance/derivatives-trading-usds-futures](./clients/derivatives-trading-usds-futures/) - Derivatives Trading (USDS-M Futures) connector
 - [@binance/dual-investment](./clients/dual-investment/) - Dual Investment connector
 - [@binance/fiat](./clients/fiat/) - Fiat connector
-- [@binance/gift-card](./clients/gift-card/) - Gift Card connector
+- [@binance/giftcard](./clients/gift-card/) - Gift Card connector
 - [@binance/margin-trading](./clients/margin-trading/) - Margin Trading connector
 - [@binance/mining](./clients/mining/) - Mining connector
 - [@binance/nft](./clients/nft/) - NFT connector
