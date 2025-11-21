@@ -1,6 +1,6 @@
 # Migration Guide: Binance Gift Card Connector Modularization
 
-With the transition to a modularized structure, the Binance Connector has been split into separate NPM libraries, each focusing on a distinct product (e.g., Gift Card, Futures, etc.). This guide explains how to migrate from the monolithic `@binance/connector` (or `@binance/connector-typescript`) package to the new `@binance/gift-card` library.
+With the transition to a modularized structure, the Binance Connector has been split into separate NPM libraries, each focusing on a distinct product (e.g., Gift Card, Futures, etc.). This guide explains how to migrate from the monolithic `@binance/connector` (or `@binance/connector-typescript`) package to the new `@binance/giftcard` library.
 
 ---
 
@@ -10,7 +10,7 @@ With the transition to a modularized structure, the Binance Connector has been s
    The modularised Gift Card Connector has been moved to a new package:
 
     **Old:** `@binance/connector`  
-     **New:** `@binance/gift-card`
+     **New:** `@binance/giftcard`
 
 2. **Installation**:  
    Uninstall the old package and install the new one:
@@ -32,7 +32,7 @@ With the transition to a modularized structure, the Binance Connector has been s
     **New:**
 
     ```typescript
-    import { GiftCard } from '@binance/gift-card';
+    import { GiftCard } from '@binance/giftcard';
     ```
 
 4. **Configuration and Client Initialization**:  
@@ -48,7 +48,7 @@ With the transition to a modularized structure, the Binance Connector has been s
     **New:**
 
     ```typescript
-    import { GiftCard, GiftCardRestAPI } from '@binance/gift-card';
+    import { GiftCard, GiftCardRestAPI } from '@binance/giftcard';
 
 
     const configurationRestAPI = {
@@ -81,7 +81,7 @@ npm uninstall @binance/connector
 Install the new Gift Card-specific package:
 
 ```bash
-npm install @binance/gift-card
+npm install @binance/giftcard
 ```
 
 ### 3. Update Import Paths
@@ -95,7 +95,7 @@ import { Spot } from '@binance/connector';
 With:
 
 ```typescript
-import { GiftCard } from '@binance/gift-card';
+import { GiftCard } from '@binance/giftcard';
 ```
 
 ### 4. Update Client Initialization
@@ -111,7 +111,7 @@ const client = new Spot({ apiKey: 'your-key', apiSecret: 'your-secret' });
 **New:**
 
 ```typescript
-import { GiftCard, GiftCardRestAPI } from '@binance/gift-card';
+import { GiftCard, GiftCardRestAPI } from '@binance/giftcard';
 
 const configurationRestAPI = {
     apiKey: 'your-key',

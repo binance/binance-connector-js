@@ -2,7 +2,7 @@
 
 ```typescript
 import https from 'https';
-import { GiftCard, GiftCardRestAPI } from '@binance/gift-card';
+import { GiftCard, GiftCardRestAPI } from '@binance/giftcard';
 
 const httpsAgent = new https.Agent({
     rejectUnauthorized: true,

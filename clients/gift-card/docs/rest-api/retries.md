@@ -1,7 +1,7 @@
 # Retries Configuration
 
 ```typescript
-import { GiftCard, GiftCardRestAPI } from '@binance/gift-card';
+import { GiftCard, GiftCardRestAPI } from '@binance/giftcard';
 
 const configurationRestAPI = {
     apiKey: 'your-api-key',

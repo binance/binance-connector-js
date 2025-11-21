@@ -14,7 +14,7 @@ import {
     NetworkError.
     NotFoundError,
     BadRequestError
-} from '@binance/gift-card';
+} from '@binance/giftcard';
 
 const configurationRestAPI = {
     apiKey: 'your-api-key',

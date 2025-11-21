@@ -3,7 +3,7 @@
 [![Open Issues](https://img.shields.io/github/issues/binance/binance-connector-js)](https://github.com/binance/binance-connector-js/issues)
 [![Code Style: Prettier](https://img.shields.io/badge/code%20style-prettier-ff69b4)](https://prettier.io/)
 [![npm version](https://badge.fury.io/js/@binance%2Fgift-card.svg)](https://badge.fury.io/js/@binance%2Fgift-card)
-[![npm Downloads](https://img.shields.io/npm/dm/@binance/gift-card.svg)](https://www.npmjs.com/package/@binance/gift-card)
+[![npm Downloads](https://img.shields.io/npm/dm/@binance/giftcard.svg)](https://www.npmjs.com/package/@binance/giftcard)
 ![Node.js Version](https://img.shields.io/badge/Node.js-%3E=22.12.0-brightgreen)
 [![Known Vulnerabilities](https://snyk.io/test/github/binance/binance-connector-js/badge.svg)](https://snyk.io/test/github/binance/binance-connector-js)
 [![Docs](https://img.shields.io/badge/docs-online-blue?style=flat-square)](https://binance.github.io/binance-connector-js/modules/_binance_gift-card.html)
@@ -42,7 +42,7 @@ nvm use 22.12.0
 Then install the library using `npm`:
 
 ```bash
-npm install @binance/gift-card
+npm install @binance/giftcard
 ```
 
 ## Documentation
@@ -54,7 +54,7 @@ For detailed information, refer to the [Binance API Documentation](https://devel
 All REST API endpoints are available through the [`rest-api`](./src/rest-api/rest-api.ts) module. Note that some endpoints require authentication using your Binance API credentials.
 
 ```typescript
-import { GiftCard, GiftCardRestAPI } from '@binance/gift-card';
+import { GiftCard, GiftCardRestAPI } from '@binance/giftcard';
 
 const configurationRestAPI = {
     apiKey: 'your-api-key',

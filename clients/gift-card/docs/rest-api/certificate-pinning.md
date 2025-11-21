@@ -4,7 +4,7 @@
 import fs from 'fs';
 import https from 'https';
 import crypto from 'crypto';
-import { GiftCard, GiftCardRestAPI } from '@binance/gift-card';
+import { GiftCard, GiftCardRestAPI } from '@binance/giftcard';
 
 // Expected pinned public key (SPKI SHA-256 hash)
 // You can extract it from the certificate using openssl:

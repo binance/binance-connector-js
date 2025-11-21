@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.0 - 2025-11-21
+
+### Changed (1)
+
+- Renamed npm package to `@binance/giftcard` to bypass gift flagged word.
+
 ## 3.0.2 - 2025-11-18
 
 ### Changed (2)
