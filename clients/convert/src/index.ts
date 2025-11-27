@@ -1,4 +1,4 @@
-export { Convert, ConfigurationConvert } from './convert';
+export { Convert, type ConfigurationConvert } from './convert';
 export * as ConvertRestAPI from './rest-api';
 
 export {
