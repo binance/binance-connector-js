@@ -1,4 +1,4 @@
-export { C2C, ConfigurationC2C } from './c2c';
+export { C2C, type ConfigurationC2C } from './c2c';
 export * as C2CRestAPI from './rest-api';
 
 export {
