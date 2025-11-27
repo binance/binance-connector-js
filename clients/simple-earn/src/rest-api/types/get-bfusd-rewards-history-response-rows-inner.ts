@@ -30,6 +30,12 @@ export interface GetBfusdRewardsHistoryResponseRowsInner {
      * @type {string}
      * @memberof GetBfusdRewardsHistoryResponseRowsInner
      */
+    rewardAsset?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetBfusdRewardsHistoryResponseRowsInner
+     */
     rewardsAmount?: string;
     /**
      *

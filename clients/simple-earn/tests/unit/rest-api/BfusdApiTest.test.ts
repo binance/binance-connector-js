@@ -53,7 +53,9 @@ describe('BfusdApi', () => {
 
     describe('getBfusdAccount()', () => {
         it('should execute getBfusdAccount() successfully with required parameters only', async () => {
-            mockResponse = JSONParse(JSONStringify({ bfusdAmount: '100', totalProfit: '12.81' }));
+            mockResponse = JSONParse(
+                JSONStringify({ bfusdAmount: '100', usdtProfit: '11.00', bfusdProfit: '1.81' })
+            );
 
             const spy = jest.spyOn(client, 'getBfusdAccount').mockReturnValue(
                 Promise.resolve({
@@ -74,7 +76,9 @@ describe('BfusdApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = JSONParse(JSONStringify({ bfusdAmount: '100', totalProfit: '12.81' }));
+            mockResponse = JSONParse(
+                JSONStringify({ bfusdAmount: '100', usdtProfit: '11.00', bfusdProfit: '1.81' })
+            );
 
             const spy = jest.spyOn(client, 'getBfusdAccount').mockReturnValue(
                 Promise.resolve({
@@ -364,6 +368,7 @@ describe('BfusdApi', () => {
                     rows: [
                         {
                             time: 1575018510000,
+                            rewardAsset: 'BFUSD',
                             rewardsAmount: '1',
                             BFUSDPosition: '100',
                             annualPercentageRate: '0.0418',
@@ -401,6 +406,7 @@ describe('BfusdApi', () => {
                     rows: [
                         {
                             time: 1575018510000,
+                            rewardAsset: 'BFUSD',
                             rewardsAmount: '1',
                             BFUSDPosition: '100',
                             annualPercentageRate: '0.0418',

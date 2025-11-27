@@ -1352,7 +1352,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          * @param {number} amount Amount
          * @param {boolean} [autoSubscribe] true or false, default true.
          * @param {string} [sourceAccount] `SPOT`,`FUND`,`ALL`, default `SPOT`
-         * @param {string} [redeemTo] `SPOT`,`FLEXIBLE`, default `FLEXIBLE`
+         * @param {string} [redeemTo] `SPOT`,`FLEXIBLE`, default `SPOT`
          * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
@@ -2751,7 +2751,7 @@ export interface SubscribeLockedProductRequest {
     readonly sourceAccount?: string;
 
     /**
-     * `SPOT`,`FLEXIBLE`, default `FLEXIBLE`
+     * `SPOT`,`FLEXIBLE`, default `SPOT`
      * @type {string}
      * @memberof FlexibleLockedApiSubscribeLockedProduct
      */

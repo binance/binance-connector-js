@@ -1,5 +1,17 @@
 # Changelog
 
+## 11.0.0 - 2025-11-27
+
+### Changed (2)
+
+- Modified response for `getBfusdAccount()` (`GET /sapi/v1/bfusd/account`):
+  - property `usdtProfit` added
+  - property `bfusdProfit` added
+  - property `totalProfit` removed
+
+- Modified response for `getBfusdRewardsHistory()` (`GET /sapi/v1/bfusd/history/rewardsHistory`):
+  - `rows`.items: property `rewardAsset` added
+
 ## 10.0.2 - 2025-11-18
 
 ### Changed (2)

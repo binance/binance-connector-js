@@ -30,5 +30,11 @@ export interface GetBfusdAccountResponse {
      * @type {string}
      * @memberof GetBfusdAccountResponse
      */
-    totalProfit?: string;
+    usdtProfit?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetBfusdAccountResponse
+     */
+    bfusdProfit?: string;
 }

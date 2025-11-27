@@ -2429,7 +2429,7 @@ describe('FlexibleLockedApi', () => {
                 amount: 1.0,
                 autoSubscribe: true,
                 sourceAccount: 'SPOT',
-                redeemTo: '',
+                redeemTo: 'SPOT',
                 recvWindow: 5000,
             };
 
