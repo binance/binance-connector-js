@@ -1,7 +1,7 @@
 {
     "name": "@binance/crypto-loan",
     "description": "Official Binance Crypto Loan Connector - A lightweight library that provides a convenient interface to Binance's Crypto Loan REST API.",
-    "version": "8.0.2",
+    "version": "8.0.3",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",

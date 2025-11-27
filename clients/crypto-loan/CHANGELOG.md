@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.0.3 - 2025-11-27
+
+### Changed (1)
+
+- Fixed bug with Configuration exported type.
+
 ## 8.0.2 - 2025-11-18
 
 ### Changed (2)

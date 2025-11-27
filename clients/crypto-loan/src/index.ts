@@ -1,4 +1,4 @@
-export { CryptoLoan, ConfigurationCryptoLoan } from './crypto-loan';
+export { CryptoLoan, type ConfigurationCryptoLoan } from './crypto-loan';
 export * as CryptoLoanRestAPI from './rest-api';
 
 export {
