@@ -1,4 +1,4 @@
-export { Fiat, ConfigurationFiat } from './fiat';
+export { Fiat, type ConfigurationFiat } from './fiat';
 export * as FiatRestAPI from './rest-api';
 
 export {
