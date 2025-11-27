@@ -1,7 +1,7 @@
 {
     "name": "@binance/vip-loan",
     "description": "Official Binance VIP Loan Connector - A lightweight library that provides a convenient interface to Binance's VIP Loan REST API.",
-    "version": "6.0.2",
+    "version": "6.0.3",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",

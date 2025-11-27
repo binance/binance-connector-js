@@ -1,4 +1,4 @@
-export { VIPLoan, ConfigurationVIPLoan } from './vip-loan';
+export { VIPLoan, type ConfigurationVIPLoan } from './vip-loan';
 export * as VIPLoanRestAPI from './rest-api';
 
 export {
