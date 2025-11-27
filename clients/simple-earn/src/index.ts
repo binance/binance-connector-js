@@ -1,4 +1,4 @@
-export { SimpleEarn, ConfigurationSimpleEarn } from './simple-earn';
+export { SimpleEarn, type ConfigurationSimpleEarn } from './simple-earn';
 export * as SimpleEarnRestAPI from './rest-api';
 
 export {
