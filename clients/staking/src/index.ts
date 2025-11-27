@@ -1,4 +1,4 @@
-export { Staking, ConfigurationStaking } from './staking';
+export { Staking, type ConfigurationStaking } from './staking';
 export * as StakingRestAPI from './rest-api';
 
 export {
