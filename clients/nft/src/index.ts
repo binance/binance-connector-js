@@ -1,4 +1,4 @@
-export { NFT, ConfigurationNFT } from './nft';
+export { NFT, type ConfigurationNFT } from './nft';
 export * as NFTRestAPI from './rest-api';
 
 export {

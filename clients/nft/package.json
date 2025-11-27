@@ -1,7 +1,7 @@
 {
     "name": "@binance/nft",
     "description": "Official Binance NFT Connector - A lightweight library that provides a convenient interface to Binance's NFT REST API.",
-    "version": "3.0.2",
+    "version": "3.0.3",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",
