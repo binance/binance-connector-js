@@ -53,6 +53,7 @@ import {
     QueryIndexPriceConstituentsRequest,
     QueryInsuranceFundBalanceSnapshotRequest,
     RecentTradesListRequest,
+    RpiOrderBookRequest,
     SymbolOrderBookTickerRequest,
     SymbolPriceTickerRequest,
     SymbolPriceTickerV2Request,
@@ -86,6 +87,7 @@ import type {
     QueryIndexPriceConstituentsResponse,
     QueryInsuranceFundBalanceSnapshotResponse,
     RecentTradesListResponse,
+    RpiOrderBookResponse,
     SymbolOrderBookTickerResponse,
     SymbolPriceTickerResponse,
     SymbolPriceTickerV2Response,
@@ -2690,6 +2692,98 @@ describe('MarketDataApi', () => {
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'recentTradesList').mockRejectedValueOnce(mockError);
             await expect(client.recentTradesList(params)).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('rpiOrderBook()', () => {
+        it('should execute rpiOrderBook() successfully with required parameters only', async () => {
+            const params: RpiOrderBookRequest = {
+                symbol: 'symbol_example',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    lastUpdateId: 1027024,
+                    E: 1589436922972,
+                    T: 1589436922959,
+                    bids: [['4.00000000', '431.00000000']],
+                    asks: [['4.00000200', '12.00000000']],
+                })
+            );
+
+            const spy = jest.spyOn(client, 'rpiOrderBook').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<RpiOrderBookResponse>)
+            );
+            const response = await client.rpiOrderBook(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute rpiOrderBook() successfully with optional parameters', async () => {
+            const params: RpiOrderBookRequest = {
+                symbol: 'symbol_example',
+                limit: 100,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    lastUpdateId: 1027024,
+                    E: 1589436922972,
+                    T: 1589436922959,
+                    bids: [['4.00000000', '431.00000000']],
+                    asks: [['4.00000200', '12.00000000']],
+                })
+            );
+
+            const spy = jest.spyOn(client, 'rpiOrderBook').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<RpiOrderBookResponse>)
+            );
+            const response = await client.rpiOrderBook(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when symbol is missing', async () => {
+            const _params: RpiOrderBookRequest = {
+                symbol: 'symbol_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.symbol;
+
+            await expect(client.rpiOrderBook(params)).rejects.toThrow(
+                'Required parameter symbol was null or undefined when calling rpiOrderBook.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: RpiOrderBookRequest = {
+                symbol: 'symbol_example',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'rpiOrderBook').mockRejectedValueOnce(mockError);
+            await expect(client.rpiOrderBook(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

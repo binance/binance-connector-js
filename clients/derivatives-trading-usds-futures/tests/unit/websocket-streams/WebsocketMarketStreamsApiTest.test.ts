@@ -37,6 +37,7 @@ import {
     MarkPriceStreamForAllMarketRequest,
     MultiAssetsModeAssetIndexRequest,
     PartialBookDepthStreamsRequest,
+    RpiDiffBookDepthStreamsRequest,
 } from '../../../src/websocket-streams';
 import { WebsocketMarketStreamsApi } from '../../../src/websocket-streams';
 import { mockSubscription } from './utils';
@@ -1755,6 +1756,92 @@ describe('WebsocketMarketStreamsApi', () => {
 
             expect(() => websocketStreamApi.partialBookDepthStreams(params)).toThrow(
                 'Required parameter levels was null or undefined when calling partialBookDepthStreams.'
+            );
+        });
+    });
+
+    describe('rpiDiffBookDepthStreams()', () => {
+        it('should execute rpiDiffBookDepthStreams() successfully', async () => {
+            const params: RpiDiffBookDepthStreamsRequest = {
+                symbol: 'btcusdt',
+                id: 'e9d6b4349871b40611412680b3445fac',
+            };
+
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'depthUpdate',
+                    E: 123456789,
+                    T: 123456788,
+                    s: 'BTCUSDT',
+                    U: 157,
+                    u: 160,
+                    pu: 149,
+                    b: [['0.0024', '10']],
+                    a: [['0.0026', '100']],
+                })
+            );
+
+            mockSubscription(
+                `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@rpiDepth@500ms'.slice(1), params as unknown as Record<string, RpiDiffBookDepthStreamsRequest>)}`,
+                mockResponse
+            );
+        });
+
+        it('should handle rpiDiffBookDepthStreams() WebSocket stream data', () => {
+            const configuration = new ConfigurationWebsocketStreams({});
+            const websocketStreamClient = new WebsocketStreamsBase(configuration);
+            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+
+            const params: RpiDiffBookDepthStreamsRequest = {
+                symbol: 'btcusdt',
+                id: 'e9d6b4349871b40611412680b3445fac',
+            };
+
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'depthUpdate',
+                    E: 123456789,
+                    T: 123456788,
+                    s: 'BTCUSDT',
+                    U: 157,
+                    u: 160,
+                    pu: 149,
+                    b: [['0.0024', '10']],
+                    a: [['0.0026', '100']],
+                })
+            );
+
+            const stream = websocketStreamApi.rpiDiffBookDepthStreams(params);
+            const mockCallback = jest.fn(() => {});
+            stream.on('message', mockCallback);
+
+            websocketStreamClient['onMessage'](
+                JSONStringify({
+                    stream: replaceWebsocketStreamsPlaceholders(
+                        '/<symbol>@rpiDepth@500ms'.slice(1),
+                        params as unknown as Record<string, RpiDiffBookDepthStreamsRequest>
+                    ),
+                    data: mockResponse,
+                }),
+                websocketStreamClient.connectionPool[0]
+            );
+
+            expect(mockCallback).toHaveBeenCalledWith(mockResponse);
+        });
+
+        it('should throw RequiredError when symbol is missing', () => {
+            const configuration = new ConfigurationWebsocketStreams({});
+            const websocketStreamClient = new WebsocketStreamsBase(configuration);
+            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+
+            const _params: RpiDiffBookDepthStreamsRequest = {
+                symbol: 'btcusdt',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.symbol;
+
+            expect(() => websocketStreamApi.rpiDiffBookDepthStreams(params)).toThrow(
+                'Required parameter symbol was null or undefined when calling rpiDiffBookDepthStreams.'
             );
         });
     });

@@ -2331,6 +2331,7 @@ describe('AccountApi', () => {
                     symbol: 'BTCUSDT',
                     makerCommissionRate: '0.0002',
                     takerCommissionRate: '0.0004',
+                    rpiCommissionRate: '0.00005',
                 })
             );
 
@@ -2359,6 +2360,7 @@ describe('AccountApi', () => {
                     symbol: 'BTCUSDT',
                     makerCommissionRate: '0.0002',
                     takerCommissionRate: '0.0004',
+                    rpiCommissionRate: '0.00005',
                 })
             );
 

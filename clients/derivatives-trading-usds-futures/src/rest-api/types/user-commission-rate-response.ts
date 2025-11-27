@@ -37,4 +37,10 @@ export interface UserCommissionRateResponse {
      * @memberof UserCommissionRateResponse
      */
     takerCommissionRate?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof UserCommissionRateResponse
+     */
+    rpiCommissionRate?: string;
 }

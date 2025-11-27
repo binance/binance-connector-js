@@ -70,6 +70,7 @@ import type {
     QueryIndexPriceConstituentsRequest,
     QueryInsuranceFundBalanceSnapshotRequest,
     RecentTradesListRequest,
+    RpiOrderBookRequest,
     SymbolOrderBookTickerRequest,
     SymbolPriceTickerRequest,
     SymbolPriceTickerV2Request,
@@ -168,6 +169,7 @@ import type {
     QueryIndexPriceConstituentsResponse,
     QueryInsuranceFundBalanceSnapshotResponse,
     RecentTradesListResponse,
+    RpiOrderBookResponse,
     SymbolOrderBookTickerResponse,
     SymbolPriceTickerResponse,
     SymbolPriceTickerV2Response,
@@ -1250,6 +1252,29 @@ export class RestAPI {
         requestParameters: RecentTradesListRequest
     ): Promise<RestApiResponse<RecentTradesListResponse>> {
         return this.marketDataApi.recentTradesList(requestParameters);
+    }
+
+    /**
+     * Query symbol orderbook with RPI orders
+     *
+     * RPI(Retail Price Improvement) orders are included and aggreated in the response message. Crossed price levels are hidden and invisible.
+     *
+     * Weight: Adjusted based on the limit:
+     * | Limit         | Weight |
+     * | ------------- | ------ |
+     * | 1000          | 20     |
+     *
+     * @summary RPI Order Book
+     * @param {RpiOrderBookRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<RpiOrderBookResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book-RPI Binance API Documentation}
+     */
+    rpiOrderBook(
+        requestParameters: RpiOrderBookRequest
+    ): Promise<RestApiResponse<RpiOrderBookResponse>> {
+        return this.marketDataApi.rpiOrderBook(requestParameters);
     }
 
     /**

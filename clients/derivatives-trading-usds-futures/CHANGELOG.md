@@ -1,5 +1,29 @@
 # Changelog
 
+## 19.0.0 - 2025-11-27
+
+### Added (2)
+
+#### REST API
+
+- `rpiOrderBook()` (`GET /fapi/v1/rpiDepth`)
+
+#### WebSocket Streams
+
+- `rpiDiffBookDepthStreams()` (`<symbol>@rpiDepth@500ms` stream)
+
+### Changed (2)
+
+#### REST API
+
+- Modified response for `userCommissionRate()` (`GET /dapi/v1/commissionRate`):
+  - property `rpiCommissionRate` added
+
+#### WebSocket Streams
+
+- Modified `UserDataStreamEventsResponse` for `AlgoUpdate`:
+  - `o`: property `rm` added
+
 ## 18.0.0 - 2025-11-20
 
 ### Added (1)

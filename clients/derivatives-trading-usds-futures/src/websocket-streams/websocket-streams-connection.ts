@@ -35,6 +35,7 @@ import type {
     MarkPriceStreamForAllMarketRequest,
     MultiAssetsModeAssetIndexRequest,
     PartialBookDepthStreamsRequest,
+    RpiDiffBookDepthStreamsRequest,
 } from './modules/websocket-market-streams-api';
 
 import type {
@@ -56,6 +57,7 @@ import type {
     MarkPriceStreamForAllMarketResponse,
     MultiAssetsModeAssetIndexResponse,
     PartialBookDepthStreamsResponse,
+    RpiDiffBookDepthStreamsResponse,
 } from './types';
 
 export class WebsocketStreamsConnection {
@@ -502,5 +504,25 @@ export class WebsocketStreamsConnection {
         requestParameters: PartialBookDepthStreamsRequest
     ): WebsocketStream<PartialBookDepthStreamsResponse> {
         return this.websocketMarketStreamsApi.partialBookDepthStreams(requestParameters);
+    }
+
+    /**
+     * Bids and asks including RPI orders, pushed every 500 milliseconds
+     *
+     * RPI(Retail Price Improvement) orders are included and aggreated in the response message. When the quantity of a price level to be updated is equal to 0, it means either all quotations for this price have been filled/canceled, or the quantity of crossed RPI orders for this price are hidden
+     *
+     * Update Speed: 500ms
+     *
+     * @summary RPI Diff. Book Depth Streams
+     * @param {RpiDiffBookDepthStreamsRequest} requestParameters Request parameters.
+     *
+     * @returns {WebsocketStream<RpiDiffBookDepthStreamsResponse>}
+     * @throws {RequiredError}
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams-RPI Binance API Documentation}
+     */
+    rpiDiffBookDepthStreams(
+        requestParameters: RpiDiffBookDepthStreamsRequest
+    ): WebsocketStream<RpiDiffBookDepthStreamsResponse> {
+        return this.websocketMarketStreamsApi.rpiDiffBookDepthStreams(requestParameters);
     }
 }

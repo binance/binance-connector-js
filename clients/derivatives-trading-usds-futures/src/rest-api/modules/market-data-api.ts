@@ -44,6 +44,7 @@ import type {
     QueryIndexPriceConstituentsResponse,
     QueryInsuranceFundBalanceSnapshotResponse,
     RecentTradesListResponse,
+    RpiOrderBookResponse,
     SymbolOrderBookTickerResponse,
     SymbolPriceTickerResponse,
     SymbolPriceTickerV2Response,
@@ -1145,6 +1146,46 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
+         * Query symbol orderbook with RPI orders
+         *
+         * RPI(Retail Price Improvement) orders are included and aggreated in the response message. Crossed price levels are hidden and invisible.
+         *
+         * Weight: Adjusted based on the limit:
+         * | Limit         | Weight |
+         * | ------------- | ------ |
+         * | 1000          | 20     |
+         *
+         * @summary RPI Order Book
+         * @param {string} symbol
+         * @param {number | bigint} [limit] Default 100; max 1000
+         *
+         * @throws {RequiredError}
+         */
+        rpiOrderBook: async (symbol: string, limit?: number | bigint): Promise<RequestArgs> => {
+            // verify required parameter 'symbol' is not null or undefined
+            assertParamExists('rpiOrderBook', 'symbol', symbol);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+
+            if (symbol !== undefined && symbol !== null) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+
+            if (limit !== undefined && limit !== null) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/fapi/v1/rpiDepth',
+                method: 'GET',
+                params: localVarQueryParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Best price/qty on the order book for a symbol or symbols.
          *
          * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
@@ -1903,6 +1944,25 @@ export interface MarketDataApiInterface {
         requestParameters: RecentTradesListRequest
     ): Promise<RestApiResponse<RecentTradesListResponse>>;
     /**
+     * Query symbol orderbook with RPI orders
+     *
+     * RPI(Retail Price Improvement) orders are included and aggreated in the response message. Crossed price levels are hidden and invisible.
+     *
+     * Weight: Adjusted based on the limit:
+     * | Limit         | Weight |
+     * | ------------- | ------ |
+     * | 1000          | 20     |
+     *
+     * @summary RPI Order Book
+     * @param {RpiOrderBookRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApiInterface
+     */
+    rpiOrderBook(
+        requestParameters: RpiOrderBookRequest
+    ): Promise<RestApiResponse<RpiOrderBookResponse>>;
+    /**
      * Best price/qty on the order book for a symbol or symbols.
      *
      * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
@@ -2632,6 +2692,26 @@ export interface RecentTradesListRequest {
      * Default 100; max 1000
      * @type {number | bigint}
      * @memberof MarketDataApiRecentTradesList
+     */
+    readonly limit?: number | bigint;
+}
+
+/**
+ * Request parameters for rpiOrderBook operation in MarketDataApi.
+ * @interface RpiOrderBookRequest
+ */
+export interface RpiOrderBookRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof MarketDataApiRpiOrderBook
+     */
+    readonly symbol: string;
+
+    /**
+     * Default 100; max 1000
+     * @type {number | bigint}
+     * @memberof MarketDataApiRpiOrderBook
      */
     readonly limit?: number | bigint;
 }
@@ -3614,6 +3694,40 @@ export class MarketDataApi implements MarketDataApiInterface {
             requestParameters?.limit
         );
         return sendRequest<RecentTradesListResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.params,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: false }
+        );
+    }
+
+    /**
+     * Query symbol orderbook with RPI orders
+     *
+     * RPI(Retail Price Improvement) orders are included and aggreated in the response message. Crossed price levels are hidden and invisible.
+     *
+     * Weight: Adjusted based on the limit:
+     * | Limit         | Weight |
+     * | ------------- | ------ |
+     * | 1000          | 20     |
+     *
+     * @summary RPI Order Book
+     * @param {RpiOrderBookRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<RpiOrderBookResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApi
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book-RPI Binance API Documentation}
+     */
+    public async rpiOrderBook(
+        requestParameters: RpiOrderBookRequest
+    ): Promise<RestApiResponse<RpiOrderBookResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.rpiOrderBook(
+            requestParameters?.symbol,
+            requestParameters?.limit
+        );
+        return sendRequest<RpiOrderBookResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

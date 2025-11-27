@@ -163,4 +163,10 @@ export interface AlgoUpdateO {
      * @memberof AlgoUpdateO
      */
     gtd?: number | bigint;
+    /**
+     *
+     * @type {string}
+     * @memberof AlgoUpdateO
+     */
+    rm?: string;
 }
