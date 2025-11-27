@@ -1,4 +1,4 @@
-export { Algo, ConfigurationAlgo } from './algo';
+export { Algo, type ConfigurationAlgo } from './algo';
 export * as AlgoRestAPI from './rest-api';
 
 export {
