@@ -1,4 +1,4 @@
-export { SubAccount, ConfigurationSubAccount } from './sub-account';
+export { SubAccount, type ConfigurationSubAccount } from './sub-account';
 export * as SubAccountRestAPI from './rest-api';
 
 export {
