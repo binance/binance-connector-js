@@ -1,6 +1,6 @@
 export {
     DerivativesTradingUsdsFutures,
-    ConfigurationDerivativesTradingUsdsFutures,
+    type ConfigurationDerivativesTradingUsdsFutures,
 } from './derivatives-trading-usds-futures';
 export * as DerivativesTradingUsdsFuturesRestAPI from './rest-api';
 export * as DerivativesTradingUsdsFuturesWebsocketAPI from './websocket-api';
