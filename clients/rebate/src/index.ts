@@ -1,4 +1,4 @@
-export { Rebate, ConfigurationRebate } from './rebate';
+export { Rebate, type ConfigurationRebate } from './rebate';
 export * as RebateRestAPI from './rest-api';
 
 export {
