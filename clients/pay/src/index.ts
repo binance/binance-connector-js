@@ -1,4 +1,4 @@
-export { Pay, ConfigurationPay } from './pay';
+export { Pay, type ConfigurationPay } from './pay';
 export * as PayRestAPI from './rest-api';
 
 export {
