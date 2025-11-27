@@ -1,4 +1,4 @@
-export { GiftCard, ConfigurationGiftCard } from './gift-card';
+export { GiftCard, type ConfigurationGiftCard } from './gift-card';
 export * as GiftCardRestAPI from './rest-api';
 
 export {
