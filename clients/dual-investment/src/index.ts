@@ -1,4 +1,4 @@
-export { DualInvestment, ConfigurationDualInvestment } from './dual-investment';
+export { DualInvestment, type ConfigurationDualInvestment } from './dual-investment';
 export * as DualInvestmentRestAPI from './rest-api';
 
 export {
