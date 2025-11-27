@@ -1,5 +1,11 @@
 # Changelog
 
+## 11.0.1 - 2025-11-27
+
+### Changed (1)
+
+- Fixed bug with Configuration exported type.
+
 ## 11.0.0 - 2025-11-20
 
 ### Changed (1)

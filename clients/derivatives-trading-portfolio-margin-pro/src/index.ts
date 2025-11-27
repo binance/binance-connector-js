@@ -1,6 +1,6 @@
 export {
     DerivativesTradingPortfolioMarginPro,
-    ConfigurationDerivativesTradingPortfolioMarginPro,
+    type ConfigurationDerivativesTradingPortfolioMarginPro,
 } from './derivatives-trading-portfolio-margin-pro';
 export * as DerivativesTradingPortfolioMarginProRestAPI from './rest-api';
 
