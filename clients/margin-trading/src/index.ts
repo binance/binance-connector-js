@@ -1,4 +1,4 @@
-export { MarginTrading, ConfigurationMarginTrading } from './margin-trading';
+export { MarginTrading, type ConfigurationMarginTrading } from './margin-trading';
 export * as MarginTradingRestAPI from './rest-api';
 
 export * as MarginTradingWebsocketStreams from './websocket-streams';
