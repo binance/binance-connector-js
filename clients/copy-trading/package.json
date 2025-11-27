@@ -1,7 +1,7 @@
 {
     "name": "@binance/copy-trading",
     "description": "Official Binance Copy Trading Connector - A lightweight library that provides a convenient interface to Binance's Copy Trading REST API.",
-    "version": "3.0.2",
+    "version": "3.0.3",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",

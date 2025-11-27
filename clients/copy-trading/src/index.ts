@@ -1,4 +1,4 @@
-export { CopyTrading, ConfigurationCopyTrading } from './copy-trading';
+export { CopyTrading, type ConfigurationCopyTrading } from './copy-trading';
 export * as CopyTradingRestAPI from './rest-api';
 
 export {
