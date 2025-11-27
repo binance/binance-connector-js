@@ -1,4 +1,4 @@
-export { Wallet, ConfigurationWallet } from './wallet';
+export { Wallet, type ConfigurationWallet } from './wallet';
 export * as WalletRestAPI from './rest-api';
 
 export {
