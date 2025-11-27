@@ -1,4 +1,4 @@
-export { Spot, ConfigurationSpot } from './spot';
+export { Spot, type ConfigurationSpot } from './spot';
 export * as SpotRestAPI from './rest-api';
 export * as SpotWebsocketAPI from './websocket-api';
 export * as SpotWebsocketStreams from './websocket-streams';
