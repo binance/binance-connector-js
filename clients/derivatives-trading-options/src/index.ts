@@ -1,6 +1,6 @@
 export {
     DerivativesTradingOptions,
-    ConfigurationDerivativesTradingOptions,
+    type ConfigurationDerivativesTradingOptions,
 } from './derivatives-trading-options';
 export * as DerivativesTradingOptionsRestAPI from './rest-api';
 
