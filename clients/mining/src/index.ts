@@ -1,4 +1,4 @@
-export { Mining, ConfigurationMining } from './mining';
+export { Mining, type ConfigurationMining } from './mining';
 export * as MiningRestAPI from './rest-api';
 
 export {
