@@ -1,6 +1,6 @@
 export {
     DerivativesTradingCoinFutures,
-    ConfigurationDerivativesTradingCoinFutures,
+    type ConfigurationDerivativesTradingCoinFutures,
 } from './derivatives-trading-coin-futures';
 export * as DerivativesTradingCoinFuturesRestAPI from './rest-api';
 export * as DerivativesTradingCoinFuturesWebsocketAPI from './websocket-api';
