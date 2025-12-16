@@ -1,5 +1,18 @@
 # Changelog
 
+## 6.0.0 - 2025-12-16
+
+### Added (3)
+
+- `deposit()` (`POST /sapi/v1/fiat/deposit`)
+- `fiatWithdraw()` (`POST /sapi/v2/fiat/withdraw`)
+- `getOrderDetail()` (`GET /sapi/v1/fiat/get-order-detail`)
+
+### Changed (2)
+
+- Update `@binance/common` library to version `2.1.0`.
+- Support request body params on `sendRequest` and `sendSignedRequest` functions.
+
 ## 5.0.2 - 2025-11-27
 
 ### Changed (1)

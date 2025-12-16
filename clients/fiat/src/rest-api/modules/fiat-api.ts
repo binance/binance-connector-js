@@ -20,8 +20,12 @@ import {
     type RequestArgs,
 } from '@binance/common';
 import type {
+    AccountInfo,
+    DepositResponse,
+    FiatWithdrawResponse,
     GetFiatDepositWithdrawHistoryResponse,
     GetFiatPaymentsHistoryResponse,
+    GetOrderDetailResponse,
 } from '../types';
 
 /**
@@ -29,6 +33,150 @@ import type {
  */
 const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
     return {
+        /**
+         * Submit deposit request, in this version, we only support BRL deposit via pix.
+         *
+         *
+         *
+         * For BRL deposit via pix, you need to place an order before making a transfer from your bank.
+         *
+         * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
+         *
+         * Weight: 45000
+         *
+         * @summary Deposit(TRADE)
+         * @param {string} currency
+         * @param {string} apiPaymentMethod
+         * @param {number | bigint} amount
+         * @param {number | bigint} [recvWindow]
+         * @param {object} [ext]
+         *
+         * @throws {RequiredError}
+         */
+        deposit: async (
+            currency: string,
+            apiPaymentMethod: string,
+            amount: number | bigint,
+            recvWindow?: number | bigint,
+            ext?: object
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'currency' is not null or undefined
+            assertParamExists('deposit', 'currency', currency);
+            // verify required parameter 'apiPaymentMethod' is not null or undefined
+            assertParamExists('deposit', 'apiPaymentMethod', apiPaymentMethod);
+            // verify required parameter 'amount' is not null or undefined
+            assertParamExists('deposit', 'amount', amount);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            if (currency !== undefined && currency !== null) {
+                localVarBodyParameter['currency'] = currency;
+            }
+
+            if (apiPaymentMethod !== undefined && apiPaymentMethod !== null) {
+                localVarBodyParameter['apiPaymentMethod'] = apiPaymentMethod;
+            }
+
+            if (amount !== undefined && amount !== null) {
+                localVarBodyParameter['amount'] = amount;
+            }
+
+            if (ext !== undefined && ext !== null) {
+                localVarBodyParameter['ext'] = ext;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/fiat/deposit',
+                method: 'POST',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Submit withdraw request, in this version, we only support BRL withdrawal via bank_transfer.
+         *
+         * You need to call this api first, and call query order detail api in a loop to get the status of the order until this order is successful.
+         *
+         * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
+         *
+         * you need to bind your bank account on web/app before using the corresponding account number
+         *
+         * Weight: 45000
+         *
+         * @summary Fiat Withdraw(WITHDRAW)
+         * @param {string} currency
+         * @param {string} apiPaymentMethod
+         * @param {number | bigint} amount
+         * @param {AccountInfo} accountInfo
+         * @param {number | bigint} [recvWindow]
+         * @param {object} [ext]
+         *
+         * @throws {RequiredError}
+         */
+        fiatWithdraw: async (
+            currency: string,
+            apiPaymentMethod: string,
+            amount: number | bigint,
+            accountInfo: AccountInfo,
+            recvWindow?: number | bigint,
+            ext?: object
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'currency' is not null or undefined
+            assertParamExists('fiatWithdraw', 'currency', currency);
+            // verify required parameter 'apiPaymentMethod' is not null or undefined
+            assertParamExists('fiatWithdraw', 'apiPaymentMethod', apiPaymentMethod);
+            // verify required parameter 'amount' is not null or undefined
+            assertParamExists('fiatWithdraw', 'amount', amount);
+            // verify required parameter 'accountInfo' is not null or undefined
+            assertParamExists('fiatWithdraw', 'accountInfo', accountInfo);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            if (currency !== undefined && currency !== null) {
+                localVarBodyParameter['currency'] = currency;
+            }
+
+            if (apiPaymentMethod !== undefined && apiPaymentMethod !== null) {
+                localVarBodyParameter['apiPaymentMethod'] = apiPaymentMethod;
+            }
+
+            if (amount !== undefined && amount !== null) {
+                localVarBodyParameter['amount'] = amount;
+            }
+
+            if (accountInfo !== undefined && accountInfo !== null) {
+                localVarBodyParameter['accountInfo'] = accountInfo;
+            }
+
+            if (ext !== undefined && ext !== null) {
+                localVarBodyParameter['ext'] = ext;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v2/fiat/withdraw',
+                method: 'POST',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                timeUnit: _timeUnit,
+            };
+        },
         /**
          * Get Fiat Deposit/Withdraw History
          *
@@ -58,27 +206,23 @@ const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) 
             assertParamExists('getFiatDepositWithdrawHistory', 'transactionType', transactionType);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (transactionType !== undefined && transactionType !== null) {
                 localVarQueryParameter['transactionType'] = transactionType;
             }
-
             if (beginTime !== undefined && beginTime !== null) {
                 localVarQueryParameter['beginTime'] = beginTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (page !== undefined && page !== null) {
                 localVarQueryParameter['page'] = page;
             }
-
             if (rows !== undefined && rows !== null) {
                 localVarQueryParameter['rows'] = rows;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -89,7 +233,8 @@ const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) 
             return {
                 endpoint: '/sapi/v1/fiat/orders',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -127,27 +272,23 @@ const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) 
             assertParamExists('getFiatPaymentsHistory', 'transactionType', transactionType);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (transactionType !== undefined && transactionType !== null) {
                 localVarQueryParameter['transactionType'] = transactionType;
             }
-
             if (beginTime !== undefined && beginTime !== null) {
                 localVarQueryParameter['beginTime'] = beginTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (page !== undefined && page !== null) {
                 localVarQueryParameter['page'] = page;
             }
-
             if (rows !== undefined && rows !== null) {
                 localVarQueryParameter['rows'] = rows;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -158,7 +299,49 @@ const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) 
             return {
                 endpoint: '/sapi/v1/fiat/payments',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Get Order Detail
+         *
+         * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
+         *
+         * Weight: 1
+         *
+         * @summary Get Order Detail(USER_DATA)
+         * @param {string} orderNo order id retrieved from the api call of withdrawal
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        getOrderDetail: async (
+            orderNo: string,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'orderNo' is not null or undefined
+            assertParamExists('getOrderDetail', 'orderNo', orderNo);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+
+            if (orderNo !== undefined && orderNo !== null) {
+                localVarQueryParameter['orderNo'] = orderNo;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/fiat/get-order-detail',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -170,6 +353,44 @@ const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) 
  * @interface FiatApi
  */
 export interface FiatApiInterface {
+    /**
+     * Submit deposit request, in this version, we only support BRL deposit via pix.
+     *
+     *
+     *
+     * For BRL deposit via pix, you need to place an order before making a transfer from your bank.
+     *
+     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
+     *
+     * Weight: 45000
+     *
+     * @summary Deposit(TRADE)
+     * @param {DepositRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof FiatApiInterface
+     */
+    deposit(requestParameters: DepositRequest): Promise<RestApiResponse<DepositResponse>>;
+    /**
+     * Submit withdraw request, in this version, we only support BRL withdrawal via bank_transfer.
+     *
+     * You need to call this api first, and call query order detail api in a loop to get the status of the order until this order is successful.
+     *
+     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
+     *
+     * you need to bind your bank account on web/app before using the corresponding account number
+     *
+     * Weight: 45000
+     *
+     * @summary Fiat Withdraw(WITHDRAW)
+     * @param {FiatWithdrawRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof FiatApiInterface
+     */
+    fiatWithdraw(
+        requestParameters: FiatWithdrawRequest
+    ): Promise<RestApiResponse<FiatWithdrawResponse>>;
     /**
      * Get Fiat Deposit/Withdraw History
      *
@@ -207,6 +428,111 @@ export interface FiatApiInterface {
     getFiatPaymentsHistory(
         requestParameters: GetFiatPaymentsHistoryRequest
     ): Promise<RestApiResponse<GetFiatPaymentsHistoryResponse>>;
+    /**
+     * Get Order Detail
+     *
+     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
+     *
+     * Weight: 1
+     *
+     * @summary Get Order Detail(USER_DATA)
+     * @param {GetOrderDetailRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof FiatApiInterface
+     */
+    getOrderDetail(
+        requestParameters: GetOrderDetailRequest
+    ): Promise<RestApiResponse<GetOrderDetailResponse>>;
+}
+
+/**
+ * Request parameters for deposit operation in FiatApi.
+ * @interface DepositRequest
+ */
+export interface DepositRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof FiatApiDeposit
+     */
+    readonly currency: string;
+
+    /**
+     *
+     * @type {string}
+     * @memberof FiatApiDeposit
+     */
+    readonly apiPaymentMethod: string;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof FiatApiDeposit
+     */
+    readonly amount: number | bigint;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof FiatApiDeposit
+     */
+    readonly recvWindow?: number | bigint;
+
+    /**
+     *
+     * @type {object}
+     * @memberof FiatApiDeposit
+     */
+    readonly ext?: object;
+}
+
+/**
+ * Request parameters for fiatWithdraw operation in FiatApi.
+ * @interface FiatWithdrawRequest
+ */
+export interface FiatWithdrawRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof FiatApiFiatWithdraw
+     */
+    readonly currency: string;
+
+    /**
+     *
+     * @type {string}
+     * @memberof FiatApiFiatWithdraw
+     */
+    readonly apiPaymentMethod: string;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof FiatApiFiatWithdraw
+     */
+    readonly amount: number | bigint;
+
+    /**
+     *
+     * @type {AccountInfo}
+     * @memberof FiatApiFiatWithdraw
+     */
+    readonly accountInfo: AccountInfo;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof FiatApiFiatWithdraw
+     */
+    readonly recvWindow?: number | bigint;
+
+    /**
+     *
+     * @type {object}
+     * @memberof FiatApiFiatWithdraw
+     */
+    readonly ext?: object;
 }
 
 /**
@@ -306,6 +632,26 @@ export interface GetFiatPaymentsHistoryRequest {
 }
 
 /**
+ * Request parameters for getOrderDetail operation in FiatApi.
+ * @interface GetOrderDetailRequest
+ */
+export interface GetOrderDetailRequest {
+    /**
+     * order id retrieved from the api call of withdrawal
+     * @type {string}
+     * @memberof FiatApiGetOrderDetail
+     */
+    readonly orderNo: string;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof FiatApiGetOrderDetail
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
  * FiatApi - object-oriented interface
  * @class FiatApi
  */
@@ -316,6 +662,85 @@ export class FiatApi implements FiatApiInterface {
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
         this.localVarAxiosParamCreator = FiatApiAxiosParamCreator(configuration);
+    }
+
+    /**
+     * Submit deposit request, in this version, we only support BRL deposit via pix.
+     *
+     *
+     *
+     * For BRL deposit via pix, you need to place an order before making a transfer from your bank.
+     *
+     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
+     *
+     * Weight: 45000
+     *
+     * @summary Deposit(TRADE)
+     * @param {DepositRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<DepositResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof FiatApi
+     * @see {@link https://developers.binance.com/docs/fiat/rest-api/Fiat-Deposit Binance API Documentation}
+     */
+    public async deposit(
+        requestParameters: DepositRequest
+    ): Promise<RestApiResponse<DepositResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.deposit(
+            requestParameters?.currency,
+            requestParameters?.apiPaymentMethod,
+            requestParameters?.amount,
+            requestParameters?.recvWindow,
+            requestParameters?.ext
+        );
+        return sendRequest<DepositResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Submit withdraw request, in this version, we only support BRL withdrawal via bank_transfer.
+     *
+     * You need to call this api first, and call query order detail api in a loop to get the status of the order until this order is successful.
+     *
+     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
+     *
+     * you need to bind your bank account on web/app before using the corresponding account number
+     *
+     * Weight: 45000
+     *
+     * @summary Fiat Withdraw(WITHDRAW)
+     * @param {FiatWithdrawRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<FiatWithdrawResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof FiatApi
+     * @see {@link https://developers.binance.com/docs/fiat/rest-api/Fiat-Withdraw Binance API Documentation}
+     */
+    public async fiatWithdraw(
+        requestParameters: FiatWithdrawRequest
+    ): Promise<RestApiResponse<FiatWithdrawResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.fiatWithdraw(
+            requestParameters?.currency,
+            requestParameters?.apiPaymentMethod,
+            requestParameters?.amount,
+            requestParameters?.accountInfo,
+            requestParameters?.recvWindow,
+            requestParameters?.ext
+        );
+        return sendRequest<FiatWithdrawResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
     }
 
     /**
@@ -348,7 +773,8 @@ export class FiatApi implements FiatApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -388,7 +814,40 @@ export class FiatApi implements FiatApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Get Order Detail
+     *
+     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
+     *
+     * Weight: 1
+     *
+     * @summary Get Order Detail(USER_DATA)
+     * @param {GetOrderDetailRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetOrderDetailResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof FiatApi
+     * @see {@link https://developers.binance.com/docs/fiat/rest-api/Get-Order-Detail Binance API Documentation}
+     */
+    public async getOrderDetail(
+        requestParameters: GetOrderDetailRequest
+    ): Promise<RestApiResponse<GetOrderDetailResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getOrderDetail(
+            requestParameters?.orderNo,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<GetOrderDetailResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );

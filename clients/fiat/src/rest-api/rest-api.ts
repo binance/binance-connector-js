@@ -15,13 +15,19 @@ import { ConfigurationRestAPI, RestApiResponse, sendRequest } from '@binance/com
 import { FiatApi } from './modules/fiat-api';
 
 import type {
+    DepositRequest,
+    FiatWithdrawRequest,
     GetFiatDepositWithdrawHistoryRequest,
     GetFiatPaymentsHistoryRequest,
+    GetOrderDetailRequest,
 } from './modules/fiat-api';
 
 import type {
+    DepositResponse,
+    FiatWithdrawResponse,
     GetFiatDepositWithdrawHistoryResponse,
     GetFiatPaymentsHistoryResponse,
+    GetOrderDetailResponse,
 } from './types';
 
 export class RestAPI {
@@ -37,34 +43,97 @@ export class RestAPI {
      * Generic function to send a request.
      * @param endpoint - The API endpoint to call.
      * @param method - HTTP method to use (GET, POST, DELETE, etc.).
-     * @param params - Query parameters for the request.
+     * @param queryParams - Query parameters for the request.
+     * @param bodyParams - Body parameters for the request.
      *
      * @returns A promise resolving to the response data object.
      */
     sendRequest<T>(
         endpoint: string,
         method: 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH',
-        params: Record<string, unknown> = {}
+        queryParams: Record<string, unknown> = {},
+        bodyParams: Record<string, unknown> = {}
     ): Promise<RestApiResponse<T>> {
-        return sendRequest<T>(this.configuration, endpoint, method, params, undefined);
+        return sendRequest<T>(
+            this.configuration,
+            endpoint,
+            method,
+            queryParams,
+            bodyParams,
+            undefined
+        );
     }
 
     /**
      * Generic function to send a signed request.
      * @param endpoint - The API endpoint to call.
      * @param method - HTTP method to use (GET, POST, DELETE, etc.).
-     * @param params - Query parameters for the request.
+     * @param queryParams - Query parameters for the request.
+     * @param bodyParams - Body parameters for the request.
      *
      * @returns A promise resolving to the response data object.
      */
     sendSignedRequest<T>(
         endpoint: string,
         method: 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH',
-        params: Record<string, unknown> = {}
+        queryParams: Record<string, unknown> = {},
+        bodyParams: Record<string, unknown> = {}
     ): Promise<RestApiResponse<T>> {
-        return sendRequest<T>(this.configuration, endpoint, method, params, undefined, {
-            isSigned: true,
-        });
+        return sendRequest<T>(
+            this.configuration,
+            endpoint,
+            method,
+            queryParams,
+            bodyParams,
+            undefined,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Submit deposit request, in this version, we only support BRL deposit via pix.
+     *
+     *
+     *
+     * For BRL deposit via pix, you need to place an order before making a transfer from your bank.
+     *
+     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
+     *
+     * Weight: 45000
+     *
+     * @summary Deposit(TRADE)
+     * @param {DepositRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<DepositResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/fiat/rest-api/Fiat-Deposit Binance API Documentation}
+     */
+    deposit(requestParameters: DepositRequest): Promise<RestApiResponse<DepositResponse>> {
+        return this.fiatApi.deposit(requestParameters);
+    }
+
+    /**
+     * Submit withdraw request, in this version, we only support BRL withdrawal via bank_transfer.
+     *
+     * You need to call this api first, and call query order detail api in a loop to get the status of the order until this order is successful.
+     *
+     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
+     *
+     * you need to bind your bank account on web/app before using the corresponding account number
+     *
+     * Weight: 45000
+     *
+     * @summary Fiat Withdraw(WITHDRAW)
+     * @param {FiatWithdrawRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<FiatWithdrawResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/fiat/rest-api/Fiat-Withdraw Binance API Documentation}
+     */
+    fiatWithdraw(
+        requestParameters: FiatWithdrawRequest
+    ): Promise<RestApiResponse<FiatWithdrawResponse>> {
+        return this.fiatApi.fiatWithdraw(requestParameters);
     }
 
     /**
@@ -110,5 +179,25 @@ export class RestAPI {
         requestParameters: GetFiatPaymentsHistoryRequest
     ): Promise<RestApiResponse<GetFiatPaymentsHistoryResponse>> {
         return this.fiatApi.getFiatPaymentsHistory(requestParameters);
+    }
+
+    /**
+     * Get Order Detail
+     *
+     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
+     *
+     * Weight: 1
+     *
+     * @summary Get Order Detail(USER_DATA)
+     * @param {GetOrderDetailRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<GetOrderDetailResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/fiat/rest-api/Get-Order-Detail Binance API Documentation}
+     */
+    getOrderDetail(
+        requestParameters: GetOrderDetailRequest
+    ): Promise<RestApiResponse<GetOrderDetailResponse>> {
+        return this.fiatApi.getOrderDetail(requestParameters);
     }
 }
