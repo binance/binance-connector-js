@@ -38,6 +38,7 @@ import type {
     MultiAssetsModeAssetIndexResponse,
     PartialBookDepthStreamsResponse,
     RpiDiffBookDepthStreamsResponse,
+    TradingSessionStreamResponse,
 } from '../types';
 
 const WebsocketMarketStreamsApiParamCreator = function () {
@@ -339,6 +340,10 @@ const WebsocketMarketStreamsApiParamCreator = function () {
         /**
          * Mark price and funding rate for all symbols pushed every 3 seconds or every second.
          *
+         **Note**:
+         *
+         * This stream does not cover TradFi Perps.
+         *
          * Update Speed: 3000ms or 1000ms
          *
          * @summary Mark Price Stream for All market
@@ -418,6 +423,19 @@ const WebsocketMarketStreamsApiParamCreator = function () {
                 symbol,
                 id,
             });
+        },
+        /**
+         * Trading session information for the underlying assets of TradFi Perpetual contracts—covering the U.S. equity market and the commodity market—is updated every second. Trading session information for different underlying markets is pushed in separate messages. Session types for the equity market include "PRE_MARKET", "REGULAR", "AFTER_MARKET", "OVERNIGHT", and "NO_TRADING". Session types for the commodity market include "REGULAR" and "NO_TRADING".
+         *
+         * Update Speed: 1s
+         *
+         * @summary Trading Session Stream
+         * @param {string} [id] Unique WebSocket request ID.
+         *
+         * @throws {RequiredError}
+         */
+        tradingSessionStream: (id?: string): string => {
+            return replaceWebsocketStreamsPlaceholders('/tradingSession'.slice(1), { id });
         },
     };
 };
@@ -680,6 +698,10 @@ export interface WebsocketMarketStreamsApiInterface {
     /**
      * Mark price and funding rate for all symbols pushed every 3 seconds or every second.
      *
+     **Note**:
+     *
+     * This stream does not cover TradFi Perps.
+     *
      * Update Speed: 3000ms or 1000ms
      *
      * @summary Mark Price Stream for All market
@@ -744,6 +766,22 @@ export interface WebsocketMarketStreamsApiInterface {
     rpiDiffBookDepthStreams(
         requestParameters: RpiDiffBookDepthStreamsRequest
     ): WebsocketStream<RpiDiffBookDepthStreamsResponse>;
+
+    /**
+     * Trading session information for the underlying assets of TradFi Perpetual contracts—covering the U.S. equity market and the commodity market—is updated every second. Trading session information for different underlying markets is pushed in separate messages. Session types for the equity market include "PRE_MARKET", "REGULAR", "AFTER_MARKET", "OVERNIGHT", and "NO_TRADING". Session types for the commodity market include "REGULAR" and "NO_TRADING".
+     *
+     * Update Speed: 1s
+     *
+     * @summary Trading Session Stream
+     * @param {TradingSessionStreamRequest} requestParameters Request parameters.
+     *
+     * @returns {WebsocketStream<TradingSessionStreamResponse>}
+     * @throws {RequiredError}
+     * @memberof WebsocketMarketStreamsApiInterface
+     */
+    tradingSessionStream(
+        requestParameters?: TradingSessionStreamRequest
+    ): WebsocketStream<TradingSessionStreamResponse>;
 }
 
 /**
@@ -1129,6 +1167,19 @@ export interface RpiDiffBookDepthStreamsRequest {
      * Unique WebSocket request ID.
      * @type {string}
      * @memberof WebsocketMarketStreamsApiRpiDiffBookDepthStreams
+     */
+    readonly id?: string;
+}
+
+/**
+ * Request parameters for tradingSessionStream operation in WebsocketMarketStreamsApi.
+ * @interface TradingSessionStreamRequest
+ */
+export interface TradingSessionStreamRequest {
+    /**
+     * Unique WebSocket request ID.
+     * @type {string}
+     * @memberof WebsocketMarketStreamsApiTradingSessionStream
      */
     readonly id?: string;
 }
@@ -1557,6 +1608,10 @@ export class WebsocketMarketStreamsApi implements WebsocketMarketStreamsApiInter
     /**
      * Mark price and funding rate for all symbols pushed every 3 seconds or every second.
      *
+     **Note**:
+     *
+     * This stream does not cover TradFi Perps.
+     *
      * Update Speed: 3000ms or 1000ms
      *
      * @summary Mark Price Stream for All market
@@ -1659,6 +1714,30 @@ export class WebsocketMarketStreamsApi implements WebsocketMarketStreamsApiInter
         );
 
         return createStreamHandler<RpiDiffBookDepthStreamsResponse>(
+            this.websocketBase,
+            stream,
+            requestParameters?.id
+        );
+    }
+
+    /**
+     * Trading session information for the underlying assets of TradFi Perpetual contracts—covering the U.S. equity market and the commodity market—is updated every second. Trading session information for different underlying markets is pushed in separate messages. Session types for the equity market include "PRE_MARKET", "REGULAR", "AFTER_MARKET", "OVERNIGHT", and "NO_TRADING". Session types for the commodity market include "REGULAR" and "NO_TRADING".
+     *
+     * Update Speed: 1s
+     *
+     * @summary Trading Session Stream
+     * @param {TradingSessionStreamRequest} requestParameters Request parameters.
+     * @returns {WebsocketStream<TradingSessionStreamResponse>}
+     * @throws {RequiredError}
+     * @memberof WebsocketMarketStreamsApi
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Trading-Session-Stream Binance API Documentation}
+     */
+    public tradingSessionStream(
+        requestParameters: TradingSessionStreamRequest = {}
+    ): WebsocketStream<TradingSessionStreamResponse> {
+        const stream = this.localVarParamCreator.tradingSessionStream(requestParameters?.id);
+
+        return createStreamHandler<TradingSessionStreamResponse>(
             this.websocketBase,
             stream,
             requestParameters?.id

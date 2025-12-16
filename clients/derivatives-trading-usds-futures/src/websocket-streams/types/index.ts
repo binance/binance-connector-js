@@ -53,4 +53,5 @@ export * from './rpi-diff-book-depth-streams-response-bitem';
 export * from './strategy-update';
 export * from './strategy-update-su';
 export * from './trade-lite';
+export * from './trading-session-stream-response';
 export * from './user-data-stream-events-response';

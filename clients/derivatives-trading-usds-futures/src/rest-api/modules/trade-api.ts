@@ -34,6 +34,7 @@ import type {
     ChangePositionModeResponse,
     CurrentAllAlgoOpenOrdersResponse,
     CurrentAllOpenOrdersResponse,
+    FuturesTradfiPerpsContractResponse,
     GetOrderModifyHistoryResponse,
     GetPositionMarginChangeHistoryResponse,
     ModifyIsolatedPositionMarginResponse,
@@ -94,31 +95,26 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('accountTradeList', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (orderId !== undefined && orderId !== null) {
                 localVarQueryParameter['orderId'] = orderId;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (fromId !== undefined && fromId !== null) {
                 localVarQueryParameter['fromId'] = fromId;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -129,7 +125,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/userTrades',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -167,27 +164,23 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('allOrders', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (orderId !== undefined && orderId !== null) {
                 localVarQueryParameter['orderId'] = orderId;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -198,7 +191,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/allOrders',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -233,15 +227,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('autoCancelAllOpenOrders', 'countdownTime', countdownTime);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (countdownTime !== undefined && countdownTime !== null) {
                 localVarQueryParameter['countdownTime'] = countdownTime;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -252,7 +245,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/countdownCancelAll',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -276,15 +270,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (algoid !== undefined && algoid !== null) {
                 localVarQueryParameter['algoid'] = algoid;
             }
-
             if (clientalgoid !== undefined && clientalgoid !== null) {
                 localVarQueryParameter['clientalgoid'] = clientalgoid;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -295,7 +288,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/algoOrder',
                 method: 'DELETE',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -318,11 +312,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('cancelAllAlgoOpenOrders', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -333,7 +327,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/algoOpenOrders',
                 method: 'DELETE',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -356,11 +351,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('cancelAllOpenOrders', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -371,7 +366,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/allOpenOrders',
                 method: 'DELETE',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -400,19 +396,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('cancelMultipleOrders', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (orderIdList) {
                 localVarQueryParameter['orderIdList'] = orderIdList;
             }
-
             if (origClientOrderIdList) {
                 localVarQueryParameter['origClientOrderIdList'] = origClientOrderIdList;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -423,7 +417,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/batchOrders',
                 method: 'DELETE',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -452,19 +447,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('cancelOrder', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (orderId !== undefined && orderId !== null) {
                 localVarQueryParameter['orderId'] = orderId;
             }
-
             if (origClientOrderId !== undefined && origClientOrderId !== null) {
                 localVarQueryParameter['origClientOrderId'] = origClientOrderId;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -475,7 +468,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/order',
                 method: 'DELETE',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -502,15 +496,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('changeInitialLeverage', 'leverage', leverage);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (leverage !== undefined && leverage !== null) {
                 localVarQueryParameter['leverage'] = leverage;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -521,7 +514,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/leverage',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -548,15 +542,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('changeMarginType', 'marginType', marginType);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (marginType !== undefined && marginType !== null) {
                 localVarQueryParameter['marginType'] = marginType;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -567,7 +560,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/marginType',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -590,11 +584,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('changeMultiAssetsMode', 'multiAssetsMargin', multiAssetsMargin);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (multiAssetsMargin !== undefined && multiAssetsMargin !== null) {
                 localVarQueryParameter['multiAssetsMargin'] = multiAssetsMargin;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -605,7 +599,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/multiAssetsMargin',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -628,11 +623,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('changePositionMode', 'dualSidePosition', dualSidePosition);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (dualSidePosition !== undefined && dualSidePosition !== null) {
                 localVarQueryParameter['dualSidePosition'] = dualSidePosition;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -643,7 +638,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/positionSide/dual',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -670,19 +666,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (algoType !== undefined && algoType !== null) {
                 localVarQueryParameter['algoType'] = algoType;
             }
-
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (algoId !== undefined && algoId !== null) {
                 localVarQueryParameter['algoId'] = algoId;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -693,7 +687,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/openAlgoOrders',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -716,11 +711,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -731,7 +726,37 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/openOrders',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Sign TradFi-Perps agreement contract
+         *
+         * Weight: 0
+         *
+         * @summary Futures TradFi Perps Contract(USER_DATA)
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        futuresTradfiPerpsContract: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/fapi/v1/stock/contract',
+                method: 'POST',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -767,31 +792,26 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('getOrderModifyHistory', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (orderId !== undefined && orderId !== null) {
                 localVarQueryParameter['orderId'] = orderId;
             }
-
             if (origClientOrderId !== undefined && origClientOrderId !== null) {
                 localVarQueryParameter['origClientOrderId'] = origClientOrderId;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -802,7 +822,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/orderAmendment',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -836,27 +857,23 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('getPositionMarginChangeHistory', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -867,7 +884,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/positionMargin/history',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -903,23 +921,20 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('modifyIsolatedPositionMargin', 'type', type);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (positionSide !== undefined && positionSide !== null) {
                 localVarQueryParameter['positionSide'] = positionSide;
             }
-
             if (amount !== undefined && amount !== null) {
                 localVarQueryParameter['amount'] = amount;
             }
-
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -930,7 +945,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/positionMargin',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -960,11 +976,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('modifyMultipleOrders', 'batchOrders', batchOrders);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (batchOrders) {
                 localVarQueryParameter['batchOrders'] = batchOrders;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -975,7 +991,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/batchOrders',
                 method: 'PUT',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1027,35 +1044,29 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('modifyOrder', 'price', price);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (orderId !== undefined && orderId !== null) {
                 localVarQueryParameter['orderId'] = orderId;
             }
-
             if (origClientOrderId !== undefined && origClientOrderId !== null) {
                 localVarQueryParameter['origClientOrderId'] = origClientOrderId;
             }
-
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (side !== undefined && side !== null) {
                 localVarQueryParameter['side'] = side;
             }
-
             if (quantity !== undefined && quantity !== null) {
                 localVarQueryParameter['quantity'] = quantity;
             }
-
             if (price !== undefined && price !== null) {
                 localVarQueryParameter['price'] = price;
             }
-
             if (priceMatch !== undefined && priceMatch !== null) {
                 localVarQueryParameter['priceMatch'] = priceMatch;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1066,7 +1077,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/order',
                 method: 'PUT',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1112,16 +1124,16 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} type
          * @param {NewAlgoOrderPositionSideEnum} [positionSide] Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent with Hedge Mode.
          * @param {NewAlgoOrderTimeInForceEnum} [timeInForce]
-         * @param {number} [quantity] Cannot be sent with `closePosition`=`true`(Close-All)
+         * @param {number} [quantity]
          * @param {number} [price]
          * @param {number} [triggerPrice]
          * @param {NewAlgoOrderWorkingTypeEnum} [workingType] stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE". Default "CONTRACT_PRICE"
          * @param {NewAlgoOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
          * @param {string} [closePosition] `true`, `false`；Close-All，used with `STOP_MARKET` or `TAKE_PROFIT_MARKET`.
          * @param {string} [priceProtect] "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
-         * @param {string} [reduceOnly] "true" or "false". default "false". Cannot be sent in Hedge Mode; cannot be sent with `closePosition`=`true`
+         * @param {string} [reduceOnly] "true" or "false". default "false". Cannot be sent in Hedge Mode
          * @param {number} [activationPrice] Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`)
-         * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 10 where 1 for 1%
+         * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1%
          * @param {string} [clientAlgoId] A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$`
          * @param {NewAlgoOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE`
          * @param {number | bigint} [goodTillDate] order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000
@@ -1161,83 +1173,65 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('newAlgoOrder', 'type', type);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (algoType !== undefined && algoType !== null) {
                 localVarQueryParameter['algoType'] = algoType;
             }
-
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (side !== undefined && side !== null) {
                 localVarQueryParameter['side'] = side;
             }
-
             if (positionSide !== undefined && positionSide !== null) {
                 localVarQueryParameter['positionSide'] = positionSide;
             }
-
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (timeInForce !== undefined && timeInForce !== null) {
                 localVarQueryParameter['timeInForce'] = timeInForce;
             }
-
             if (quantity !== undefined && quantity !== null) {
                 localVarQueryParameter['quantity'] = quantity;
             }
-
             if (price !== undefined && price !== null) {
                 localVarQueryParameter['price'] = price;
             }
-
             if (triggerPrice !== undefined && triggerPrice !== null) {
                 localVarQueryParameter['triggerPrice'] = triggerPrice;
             }
-
             if (workingType !== undefined && workingType !== null) {
                 localVarQueryParameter['workingType'] = workingType;
             }
-
             if (priceMatch !== undefined && priceMatch !== null) {
                 localVarQueryParameter['priceMatch'] = priceMatch;
             }
-
             if (closePosition !== undefined && closePosition !== null) {
                 localVarQueryParameter['closePosition'] = closePosition;
             }
-
             if (priceProtect !== undefined && priceProtect !== null) {
                 localVarQueryParameter['priceProtect'] = priceProtect;
             }
-
             if (reduceOnly !== undefined && reduceOnly !== null) {
                 localVarQueryParameter['reduceOnly'] = reduceOnly;
             }
-
             if (activationPrice !== undefined && activationPrice !== null) {
                 localVarQueryParameter['activationPrice'] = activationPrice;
             }
-
             if (callbackRate !== undefined && callbackRate !== null) {
                 localVarQueryParameter['callbackRate'] = callbackRate;
             }
-
             if (clientAlgoId !== undefined && clientAlgoId !== null) {
                 localVarQueryParameter['clientAlgoId'] = clientAlgoId;
             }
-
             if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
                 localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
             }
-
             if (goodTillDate !== undefined && goodTillDate !== null) {
                 localVarQueryParameter['goodTillDate'] = goodTillDate;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1248,47 +1242,18 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/algoOrder',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
         /**
          * Send in a new order.
          *
-         * Order with type `STOP`,  parameter `timeInForce` can be sent ( default `GTC`).
-         * Order with type `TAKE_PROFIT`,  parameter `timeInForce` can be sent ( default `GTC`).
-         * Condition orders will be triggered when:
-         *
-         * If parameter`priceProtect`is sent as true:
-         * when price reaches the `stopPrice` ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
-         * "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
-         *
-         * `STOP`, `STOP_MARKET`:
-         * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
-         * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-         * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
-         * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-         * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
-         * `TRAILING_STOP_MARKET`:
-         * BUY: the lowest price after order placed `<= `activationPrice`, and the latest price >`= the lowest price * (1 + `callbackRate`)
-         * SELL: the highest price after order placed >= `activationPrice`, and the latest price <= the highest price * (1 - `callbackRate`)
-         *
-         * For `TRAILING_STOP_MARKET`, if you got such error code.
-         * ``{"code": -2021, "msg": "Order would immediately trigger."}``
-         * means that the parameters you send do not meet the following requirements:
-         * BUY: `activationPrice` should be smaller than latest price.
-         * SELL: `activationPrice` should be larger than latest price.
-         *
          * If `newOrderRespType ` is sent as `RESULT` :
          * `MARKET` order: the final FILLED result of the order will be return directly.
          * `LIMIT` order with special `timeInForce`: the final status result of the order(FILLED or EXPIRED) will be returned directly.
          *
-         * `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`:
-         * Follow the same rules for condition orders.
-         * If triggered，**close all** current long position( if `SELL`) or current short position( if `BUY`).
-         * Cannot be used with `quantity` paremeter
-         * Cannot be used with `reduceOnly` parameter
-         * In Hedge Mode,cannot be used with `BUY` orders in `LONG` position side. and cannot be used with `SELL` orders in `SHORT` position side
          * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
          * In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
          *
@@ -1302,16 +1267,10 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} type
          * @param {NewOrderPositionSideEnum} [positionSide] Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent with Hedge Mode.
          * @param {NewOrderTimeInForceEnum} [timeInForce]
-         * @param {number} [quantity] Cannot be sent with `closePosition`=`true`(Close-All)
-         * @param {string} [reduceOnly] "true" or "false". default "false". Cannot be sent in Hedge Mode; cannot be sent with `closePosition`=`true`
+         * @param {number} [quantity]
+         * @param {string} [reduceOnly] "true" or "false". default "false". Cannot be sent in Hedge Mode
          * @param {number} [price]
          * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$`
-         * @param {number} [stopPrice] Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
-         * @param {string} [closePosition] `true`, `false`；Close-All，used with `STOP_MARKET` or `TAKE_PROFIT_MARKET`.
-         * @param {number} [activationPrice] Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`)
-         * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 10 where 1 for 1%
-         * @param {NewOrderWorkingTypeEnum} [workingType] stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE". Default "CONTRACT_PRICE"
-         * @param {string} [priceProtect] "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
          * @param {NewOrderNewOrderRespTypeEnum} [newOrderRespType] "ACK", "RESULT", default "ACK"
          * @param {NewOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
          * @param {NewOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE`
@@ -1330,12 +1289,6 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             reduceOnly?: string,
             price?: number,
             newClientOrderId?: string,
-            stopPrice?: number,
-            closePosition?: string,
-            activationPrice?: number,
-            callbackRate?: number,
-            workingType?: NewOrderWorkingTypeEnum,
-            priceProtect?: string,
             newOrderRespType?: NewOrderNewOrderRespTypeEnum,
             priceMatch?: NewOrderPriceMatchEnum,
             selfTradePreventionMode?: NewOrderSelfTradePreventionModeEnum,
@@ -1350,83 +1303,47 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('newOrder', 'type', type);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (side !== undefined && side !== null) {
                 localVarQueryParameter['side'] = side;
             }
-
             if (positionSide !== undefined && positionSide !== null) {
                 localVarQueryParameter['positionSide'] = positionSide;
             }
-
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (timeInForce !== undefined && timeInForce !== null) {
                 localVarQueryParameter['timeInForce'] = timeInForce;
             }
-
             if (quantity !== undefined && quantity !== null) {
                 localVarQueryParameter['quantity'] = quantity;
             }
-
             if (reduceOnly !== undefined && reduceOnly !== null) {
                 localVarQueryParameter['reduceOnly'] = reduceOnly;
             }
-
             if (price !== undefined && price !== null) {
                 localVarQueryParameter['price'] = price;
             }
-
             if (newClientOrderId !== undefined && newClientOrderId !== null) {
                 localVarQueryParameter['newClientOrderId'] = newClientOrderId;
             }
-
-            if (stopPrice !== undefined && stopPrice !== null) {
-                localVarQueryParameter['stopPrice'] = stopPrice;
-            }
-
-            if (closePosition !== undefined && closePosition !== null) {
-                localVarQueryParameter['closePosition'] = closePosition;
-            }
-
-            if (activationPrice !== undefined && activationPrice !== null) {
-                localVarQueryParameter['activationPrice'] = activationPrice;
-            }
-
-            if (callbackRate !== undefined && callbackRate !== null) {
-                localVarQueryParameter['callbackRate'] = callbackRate;
-            }
-
-            if (workingType !== undefined && workingType !== null) {
-                localVarQueryParameter['workingType'] = workingType;
-            }
-
-            if (priceProtect !== undefined && priceProtect !== null) {
-                localVarQueryParameter['priceProtect'] = priceProtect;
-            }
-
             if (newOrderRespType !== undefined && newOrderRespType !== null) {
                 localVarQueryParameter['newOrderRespType'] = newOrderRespType;
             }
-
             if (priceMatch !== undefined && priceMatch !== null) {
                 localVarQueryParameter['priceMatch'] = priceMatch;
             }
-
             if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
                 localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
             }
-
             if (goodTillDate !== undefined && goodTillDate !== null) {
                 localVarQueryParameter['goodTillDate'] = goodTillDate;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1437,7 +1354,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/order',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1466,11 +1384,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('placeMultipleOrders', 'batchOrders', batchOrders);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (batchOrders) {
                 localVarQueryParameter['batchOrders'] = batchOrders;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1481,7 +1399,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/batchOrders',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1508,11 +1427,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1523,7 +1442,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/adlQuantile',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1545,11 +1465,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1560,7 +1480,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v2/positionRisk',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1582,11 +1503,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1597,7 +1518,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v3/positionRisk',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1626,15 +1548,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (algoId !== undefined && algoId !== null) {
                 localVarQueryParameter['algoId'] = algoId;
             }
-
             if (clientAlgoId !== undefined && clientAlgoId !== null) {
                 localVarQueryParameter['clientAlgoId'] = clientAlgoId;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1645,7 +1566,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/algoOrder',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1685,31 +1607,26 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('queryAllAlgoOrders', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (algoId !== undefined && algoId !== null) {
                 localVarQueryParameter['algoId'] = algoId;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (page !== undefined && page !== null) {
                 localVarQueryParameter['page'] = page;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1720,7 +1637,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/allAlgoOrders',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1751,19 +1669,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('queryCurrentOpenOrder', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (orderId !== undefined && orderId !== null) {
                 localVarQueryParameter['orderId'] = orderId;
             }
-
             if (origClientOrderId !== undefined && origClientOrderId !== null) {
                 localVarQueryParameter['origClientOrderId'] = origClientOrderId;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1774,7 +1690,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/openOrder',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1808,19 +1725,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('queryOrder', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (orderId !== undefined && orderId !== null) {
                 localVarQueryParameter['orderId'] = orderId;
             }
-
             if (origClientOrderId !== undefined && origClientOrderId !== null) {
                 localVarQueryParameter['origClientOrderId'] = origClientOrderId;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1831,7 +1746,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/order',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1883,14 +1799,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} type
          * @param {TestOrderPositionSideEnum} [positionSide] Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent with Hedge Mode.
          * @param {TestOrderTimeInForceEnum} [timeInForce]
-         * @param {number} [quantity] Cannot be sent with `closePosition`=`true`(Close-All)
-         * @param {string} [reduceOnly] "true" or "false". default "false". Cannot be sent in Hedge Mode; cannot be sent with `closePosition`=`true`
+         * @param {number} [quantity]
+         * @param {string} [reduceOnly] "true" or "false". default "false". Cannot be sent in Hedge Mode
          * @param {number} [price]
          * @param {string} [newClientOrderId] A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$`
          * @param {number} [stopPrice] Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
          * @param {string} [closePosition] `true`, `false`；Close-All，used with `STOP_MARKET` or `TAKE_PROFIT_MARKET`.
          * @param {number} [activationPrice] Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`)
-         * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 10 where 1 for 1%
+         * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1%
          * @param {TestOrderWorkingTypeEnum} [workingType] stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE". Default "CONTRACT_PRICE"
          * @param {string} [priceProtect] "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
          * @param {TestOrderNewOrderRespTypeEnum} [newOrderRespType] "ACK", "RESULT", default "ACK"
@@ -1931,83 +1847,65 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('testOrder', 'type', type);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (side !== undefined && side !== null) {
                 localVarQueryParameter['side'] = side;
             }
-
             if (positionSide !== undefined && positionSide !== null) {
                 localVarQueryParameter['positionSide'] = positionSide;
             }
-
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (timeInForce !== undefined && timeInForce !== null) {
                 localVarQueryParameter['timeInForce'] = timeInForce;
             }
-
             if (quantity !== undefined && quantity !== null) {
                 localVarQueryParameter['quantity'] = quantity;
             }
-
             if (reduceOnly !== undefined && reduceOnly !== null) {
                 localVarQueryParameter['reduceOnly'] = reduceOnly;
             }
-
             if (price !== undefined && price !== null) {
                 localVarQueryParameter['price'] = price;
             }
-
             if (newClientOrderId !== undefined && newClientOrderId !== null) {
                 localVarQueryParameter['newClientOrderId'] = newClientOrderId;
             }
-
             if (stopPrice !== undefined && stopPrice !== null) {
                 localVarQueryParameter['stopPrice'] = stopPrice;
             }
-
             if (closePosition !== undefined && closePosition !== null) {
                 localVarQueryParameter['closePosition'] = closePosition;
             }
-
             if (activationPrice !== undefined && activationPrice !== null) {
                 localVarQueryParameter['activationPrice'] = activationPrice;
             }
-
             if (callbackRate !== undefined && callbackRate !== null) {
                 localVarQueryParameter['callbackRate'] = callbackRate;
             }
-
             if (workingType !== undefined && workingType !== null) {
                 localVarQueryParameter['workingType'] = workingType;
             }
-
             if (priceProtect !== undefined && priceProtect !== null) {
                 localVarQueryParameter['priceProtect'] = priceProtect;
             }
-
             if (newOrderRespType !== undefined && newOrderRespType !== null) {
                 localVarQueryParameter['newOrderRespType'] = newOrderRespType;
             }
-
             if (priceMatch !== undefined && priceMatch !== null) {
                 localVarQueryParameter['priceMatch'] = priceMatch;
             }
-
             if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
                 localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
             }
-
             if (goodTillDate !== undefined && goodTillDate !== null) {
                 localVarQueryParameter['goodTillDate'] = goodTillDate;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -2018,7 +1916,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/order/test',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -2049,27 +1948,23 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (autoCloseType !== undefined && autoCloseType !== null) {
                 localVarQueryParameter['autoCloseType'] = autoCloseType;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -2080,7 +1975,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/fapi/v1/forceOrders',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -2319,6 +2215,20 @@ export interface TradeApiInterface {
         requestParameters?: CurrentAllOpenOrdersRequest
     ): Promise<RestApiResponse<CurrentAllOpenOrdersResponse>>;
     /**
+     * Sign TradFi-Perps agreement contract
+     *
+     * Weight: 0
+     *
+     * @summary Futures TradFi Perps Contract(USER_DATA)
+     * @param {FuturesTradfiPerpsContractRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApiInterface
+     */
+    futuresTradfiPerpsContract(
+        requestParameters?: FuturesTradfiPerpsContractRequest
+    ): Promise<RestApiResponse<FuturesTradfiPerpsContractResponse>>;
+    /**
      * Get order modification history
      *
      * Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
@@ -2462,40 +2372,10 @@ export interface TradeApiInterface {
     /**
      * Send in a new order.
      *
-     * Order with type `STOP`,  parameter `timeInForce` can be sent ( default `GTC`).
-     * Order with type `TAKE_PROFIT`,  parameter `timeInForce` can be sent ( default `GTC`).
-     * Condition orders will be triggered when:
-     *
-     * If parameter`priceProtect`is sent as true:
-     * when price reaches the `stopPrice` ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
-     * "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
-     *
-     * `STOP`, `STOP_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-     * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
-     * `TRAILING_STOP_MARKET`:
-     * BUY: the lowest price after order placed `<= `activationPrice`, and the latest price >`= the lowest price * (1 + `callbackRate`)
-     * SELL: the highest price after order placed >= `activationPrice`, and the latest price <= the highest price * (1 - `callbackRate`)
-     *
-     * For `TRAILING_STOP_MARKET`, if you got such error code.
-     * ``{"code": -2021, "msg": "Order would immediately trigger."}``
-     * means that the parameters you send do not meet the following requirements:
-     * BUY: `activationPrice` should be smaller than latest price.
-     * SELL: `activationPrice` should be larger than latest price.
-     *
      * If `newOrderRespType ` is sent as `RESULT` :
      * `MARKET` order: the final FILLED result of the order will be return directly.
      * `LIMIT` order with special `timeInForce`: the final status result of the order(FILLED or EXPIRED) will be returned directly.
      *
-     * `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`:
-     * Follow the same rules for condition orders.
-     * If triggered，**close all** current long position( if `SELL`) or current short position( if `BUY`).
-     * Cannot be used with `quantity` paremeter
-     * Cannot be used with `reduceOnly` parameter
-     * In Hedge Mode,cannot be used with `BUY` orders in `LONG` position side. and cannot be used with `SELL` orders in `SHORT` position side
      * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
      * In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
      *
@@ -3144,6 +3024,19 @@ export interface CurrentAllOpenOrdersRequest {
 }
 
 /**
+ * Request parameters for futuresTradfiPerpsContract operation in TradeApi.
+ * @interface FuturesTradfiPerpsContractRequest
+ */
+export interface FuturesTradfiPerpsContractRequest {
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof TradeApiFuturesTradfiPerpsContract
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
  * Request parameters for getOrderModifyHistory operation in TradeApi.
  * @interface GetOrderModifyHistoryRequest
  */
@@ -3417,7 +3310,7 @@ export interface NewAlgoOrderRequest {
     readonly timeInForce?: NewAlgoOrderTimeInForceEnum;
 
     /**
-     * Cannot be sent with `closePosition`=`true`(Close-All)
+     *
      * @type {number}
      * @memberof TradeApiNewAlgoOrder
      */
@@ -3466,7 +3359,7 @@ export interface NewAlgoOrderRequest {
     readonly priceProtect?: string;
 
     /**
-     * "true" or "false". default "false". Cannot be sent in Hedge Mode; cannot be sent with `closePosition`=`true`
+     * "true" or "false". default "false". Cannot be sent in Hedge Mode
      * @type {string}
      * @memberof TradeApiNewAlgoOrder
      */
@@ -3480,7 +3373,7 @@ export interface NewAlgoOrderRequest {
     readonly activationPrice?: number;
 
     /**
-     * Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 10 where 1 for 1%
+     * Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1%
      * @type {number}
      * @memberof TradeApiNewAlgoOrder
      */
@@ -3556,14 +3449,14 @@ export interface NewOrderRequest {
     readonly timeInForce?: NewOrderTimeInForceEnum;
 
     /**
-     * Cannot be sent with `closePosition`=`true`(Close-All)
+     *
      * @type {number}
      * @memberof TradeApiNewOrder
      */
     readonly quantity?: number;
 
     /**
-     * "true" or "false". default "false". Cannot be sent in Hedge Mode; cannot be sent with `closePosition`=`true`
+     * "true" or "false". default "false". Cannot be sent in Hedge Mode
      * @type {string}
      * @memberof TradeApiNewOrder
      */
@@ -3582,48 +3475,6 @@ export interface NewOrderRequest {
      * @memberof TradeApiNewOrder
      */
     readonly newClientOrderId?: string;
-
-    /**
-     * Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
-     * @type {number}
-     * @memberof TradeApiNewOrder
-     */
-    readonly stopPrice?: number;
-
-    /**
-     * `true`, `false`；Close-All，used with `STOP_MARKET` or `TAKE_PROFIT_MARKET`.
-     * @type {string}
-     * @memberof TradeApiNewOrder
-     */
-    readonly closePosition?: string;
-
-    /**
-     * Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`)
-     * @type {number}
-     * @memberof TradeApiNewOrder
-     */
-    readonly activationPrice?: number;
-
-    /**
-     * Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 10 where 1 for 1%
-     * @type {number}
-     * @memberof TradeApiNewOrder
-     */
-    readonly callbackRate?: number;
-
-    /**
-     * stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE". Default "CONTRACT_PRICE"
-     * @type {'MARK_PRICE' | 'CONTRACT_PRICE'}
-     * @memberof TradeApiNewOrder
-     */
-    readonly workingType?: NewOrderWorkingTypeEnum;
-
-    /**
-     * "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
-     * @type {string}
-     * @memberof TradeApiNewOrder
-     */
-    readonly priceProtect?: string;
 
     /**
      * "ACK", "RESULT", default "ACK"
@@ -3932,14 +3783,14 @@ export interface TestOrderRequest {
     readonly timeInForce?: TestOrderTimeInForceEnum;
 
     /**
-     * Cannot be sent with `closePosition`=`true`(Close-All)
+     *
      * @type {number}
      * @memberof TradeApiTestOrder
      */
     readonly quantity?: number;
 
     /**
-     * "true" or "false". default "false". Cannot be sent in Hedge Mode; cannot be sent with `closePosition`=`true`
+     * "true" or "false". default "false". Cannot be sent in Hedge Mode
      * @type {string}
      * @memberof TradeApiTestOrder
      */
@@ -3981,7 +3832,7 @@ export interface TestOrderRequest {
     readonly activationPrice?: number;
 
     /**
-     * Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 10 where 1 for 1%
+     * Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1%
      * @type {number}
      * @memberof TradeApiTestOrder
      */
@@ -4131,7 +3982,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4171,7 +4023,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4209,7 +4062,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4241,7 +4095,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4270,7 +4125,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4299,7 +4155,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4332,7 +4189,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4365,7 +4223,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4395,7 +4254,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4425,7 +4285,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4454,7 +4315,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4483,7 +4345,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4517,7 +4380,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4549,7 +4413,37 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Sign TradFi-Perps agreement contract
+     *
+     * Weight: 0
+     *
+     * @summary Futures TradFi Perps Contract(USER_DATA)
+     * @param {FuturesTradfiPerpsContractRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<FuturesTradfiPerpsContractResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApi
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Futures-TradFi-Perps-Contract Binance API Documentation}
+     */
+    public async futuresTradfiPerpsContract(
+        requestParameters: FuturesTradfiPerpsContractRequest = {}
+    ): Promise<RestApiResponse<FuturesTradfiPerpsContractResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.futuresTradfiPerpsContract(
+            requestParameters?.recvWindow
+        );
+        return sendRequest<FuturesTradfiPerpsContractResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4586,7 +4480,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4623,7 +4518,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4658,7 +4554,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4694,7 +4591,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4740,7 +4638,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4817,7 +4716,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4826,40 +4726,10 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Send in a new order.
      *
-     * Order with type `STOP`,  parameter `timeInForce` can be sent ( default `GTC`).
-     * Order with type `TAKE_PROFIT`,  parameter `timeInForce` can be sent ( default `GTC`).
-     * Condition orders will be triggered when:
-     *
-     * If parameter`priceProtect`is sent as true:
-     * when price reaches the `stopPrice` ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
-     * "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
-     *
-     * `STOP`, `STOP_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-     * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
-     * `TRAILING_STOP_MARKET`:
-     * BUY: the lowest price after order placed `<= `activationPrice`, and the latest price >`= the lowest price * (1 + `callbackRate`)
-     * SELL: the highest price after order placed >= `activationPrice`, and the latest price <= the highest price * (1 - `callbackRate`)
-     *
-     * For `TRAILING_STOP_MARKET`, if you got such error code.
-     * ``{"code": -2021, "msg": "Order would immediately trigger."}``
-     * means that the parameters you send do not meet the following requirements:
-     * BUY: `activationPrice` should be smaller than latest price.
-     * SELL: `activationPrice` should be larger than latest price.
-     *
      * If `newOrderRespType ` is sent as `RESULT` :
      * `MARKET` order: the final FILLED result of the order will be return directly.
      * `LIMIT` order with special `timeInForce`: the final status result of the order(FILLED or EXPIRED) will be returned directly.
      *
-     * `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`:
-     * Follow the same rules for condition orders.
-     * If triggered，**close all** current long position( if `SELL`) or current short position( if `BUY`).
-     * Cannot be used with `quantity` paremeter
-     * Cannot be used with `reduceOnly` parameter
-     * In Hedge Mode,cannot be used with `BUY` orders in `LONG` position side. and cannot be used with `SELL` orders in `SHORT` position side
      * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
      * In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
      *
@@ -4887,12 +4757,6 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.reduceOnly,
             requestParameters?.price,
             requestParameters?.newClientOrderId,
-            requestParameters?.stopPrice,
-            requestParameters?.closePosition,
-            requestParameters?.activationPrice,
-            requestParameters?.callbackRate,
-            requestParameters?.workingType,
-            requestParameters?.priceProtect,
             requestParameters?.newOrderRespType,
             requestParameters?.priceMatch,
             requestParameters?.selfTradePreventionMode,
@@ -4903,7 +4767,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4938,7 +4803,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4975,7 +4841,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -5006,7 +4873,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -5037,7 +4905,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -5074,7 +4943,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -5115,7 +4985,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -5150,7 +5021,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -5188,7 +5060,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -5272,7 +5145,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -5308,7 +5182,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -5404,11 +5279,6 @@ export enum NewOrderTimeInForceEnum {
     GTX = 'GTX',
     GTD = 'GTD',
     RPI = 'RPI',
-}
-
-export enum NewOrderWorkingTypeEnum {
-    MARK_PRICE = 'MARK_PRICE',
-    CONTRACT_PRICE = 'CONTRACT_PRICE',
 }
 
 export enum NewOrderNewOrderRespTypeEnum {

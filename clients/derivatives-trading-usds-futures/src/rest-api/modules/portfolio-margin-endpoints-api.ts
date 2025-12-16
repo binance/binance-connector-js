@@ -50,11 +50,11 @@ const PortfolioMarginEndpointsApiAxiosParamCreator = function (
             assertParamExists('classicPortfolioMarginAccountInformation', 'asset', asset);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -65,7 +65,8 @@ const PortfolioMarginEndpointsApiAxiosParamCreator = function (
             return {
                 endpoint: '/fapi/v1/pmAccountInfo',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -157,7 +158,8 @@ export class PortfolioMarginEndpointsApi implements PortfolioMarginEndpointsApiI
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );

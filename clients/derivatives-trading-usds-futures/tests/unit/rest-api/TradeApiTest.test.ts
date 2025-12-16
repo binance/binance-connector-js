@@ -30,7 +30,6 @@ import {
     NewOrderSideEnum,
     NewOrderPositionSideEnum,
     NewOrderTimeInForceEnum,
-    NewOrderWorkingTypeEnum,
     NewOrderNewOrderRespTypeEnum,
     NewOrderPriceMatchEnum,
     NewOrderSelfTradePreventionModeEnum,
@@ -58,6 +57,7 @@ import {
     ChangePositionModeRequest,
     CurrentAllAlgoOpenOrdersRequest,
     CurrentAllOpenOrdersRequest,
+    FuturesTradfiPerpsContractRequest,
     GetOrderModifyHistoryRequest,
     GetPositionMarginChangeHistoryRequest,
     ModifyIsolatedPositionMarginRequest,
@@ -91,6 +91,7 @@ import type {
     ChangePositionModeResponse,
     CurrentAllAlgoOpenOrdersResponse,
     CurrentAllOpenOrdersResponse,
+    FuturesTradfiPerpsContractResponse,
     GetOrderModifyHistoryResponse,
     GetPositionMarginChangeHistoryResponse,
     ModifyIsolatedPositionMarginResponse,
@@ -1581,6 +1582,63 @@ describe('TradeApi', () => {
         });
     });
 
+    describe('futuresTradfiPerpsContract()', () => {
+        it('should execute futuresTradfiPerpsContract() successfully with required parameters only', async () => {
+            mockResponse = JSONParse(JSONStringify({ code: 200, msg: 'success' }));
+
+            const spy = jest.spyOn(client, 'futuresTradfiPerpsContract').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<FuturesTradfiPerpsContractResponse>)
+            );
+            const response = await client.futuresTradfiPerpsContract();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute futuresTradfiPerpsContract() successfully with optional parameters', async () => {
+            const params: FuturesTradfiPerpsContractRequest = {
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(JSONStringify({ code: 200, msg: 'success' }));
+
+            const spy = jest.spyOn(client, 'futuresTradfiPerpsContract').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<FuturesTradfiPerpsContractResponse>)
+            );
+            const response = await client.futuresTradfiPerpsContract(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'futuresTradfiPerpsContract')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.futuresTradfiPerpsContract()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
     describe('getOrderModifyHistory()', () => {
         it('should execute getOrderModifyHistory() successfully with required parameters only', async () => {
             const params: GetOrderModifyHistoryRequest = {
@@ -2567,8 +2625,6 @@ describe('TradeApi', () => {
                     timeInForce: 'GTD',
                     type: 'TRAILING_STOP_MARKET',
                     origType: 'TRAILING_STOP_MARKET',
-                    activatePrice: '9020',
-                    priceRate: '0.3',
                     updateTime: 1566818724722,
                     workingType: 'CONTRACT_PRICE',
                     priceProtect: false,
@@ -2603,12 +2659,6 @@ describe('TradeApi', () => {
                 reduceOnly: 'false',
                 price: 1.0,
                 newClientOrderId: '1',
-                stopPrice: 1.0,
-                closePosition: 'closePosition_example',
-                activationPrice: 1.0,
-                callbackRate: 1.0,
-                workingType: NewOrderWorkingTypeEnum.MARK_PRICE,
-                priceProtect: 'false',
                 newOrderRespType: NewOrderNewOrderRespTypeEnum.ACK,
                 priceMatch: NewOrderPriceMatchEnum.NONE,
                 selfTradePreventionMode: NewOrderSelfTradePreventionModeEnum.EXPIRE_TAKER,
@@ -2636,8 +2686,6 @@ describe('TradeApi', () => {
                     timeInForce: 'GTD',
                     type: 'TRAILING_STOP_MARKET',
                     origType: 'TRAILING_STOP_MARKET',
-                    activatePrice: '9020',
-                    priceRate: '0.3',
                     updateTime: 1566818724722,
                     workingType: 'CONTRACT_PRICE',
                     priceProtect: false,
@@ -2746,13 +2794,11 @@ describe('TradeApi', () => {
                         side: 'BUY',
                         positionSide: 'SHORT',
                         status: 'NEW',
-                        stopPrice: '9300',
+                        stopPrice: '0',
                         symbol: 'BTCUSDT',
                         timeInForce: 'GTC',
                         type: 'TRAILING_STOP_MARKET',
                         origType: 'TRAILING_STOP_MARKET',
-                        activatePrice: '9020',
-                        priceRate: '0.3',
                         updateTime: 1566818724722,
                         workingType: 'CONTRACT_PRICE',
                         priceProtect: false,
@@ -2799,13 +2845,11 @@ describe('TradeApi', () => {
                         side: 'BUY',
                         positionSide: 'SHORT',
                         status: 'NEW',
-                        stopPrice: '9300',
+                        stopPrice: '0',
                         symbol: 'BTCUSDT',
                         timeInForce: 'GTC',
                         type: 'TRAILING_STOP_MARKET',
                         origType: 'TRAILING_STOP_MARKET',
-                        activatePrice: '9020',
-                        priceRate: '0.3',
                         updateTime: 1566818724722,
                         workingType: 'CONTRACT_PRICE',
                         priceProtect: false,

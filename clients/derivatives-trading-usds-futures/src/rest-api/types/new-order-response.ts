@@ -129,18 +129,6 @@ export interface NewOrderResponse {
     origType?: string;
     /**
      *
-     * @type {string}
-     * @memberof NewOrderResponse
-     */
-    activatePrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof NewOrderResponse
-     */
-    priceRate?: string;
-    /**
-     *
      * @type {number | bigint}
      * @memberof NewOrderResponse
      */

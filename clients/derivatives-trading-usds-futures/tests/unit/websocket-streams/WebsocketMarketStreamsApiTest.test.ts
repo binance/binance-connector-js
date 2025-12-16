@@ -38,6 +38,7 @@ import {
     MultiAssetsModeAssetIndexRequest,
     PartialBookDepthStreamsRequest,
     RpiDiffBookDepthStreamsRequest,
+    TradingSessionStreamRequest,
 } from '../../../src/websocket-streams';
 import { WebsocketMarketStreamsApi } from '../../../src/websocket-streams';
 import { mockSubscription } from './utils';
@@ -1843,6 +1844,66 @@ describe('WebsocketMarketStreamsApi', () => {
             expect(() => websocketStreamApi.rpiDiffBookDepthStreams(params)).toThrow(
                 'Required parameter symbol was null or undefined when calling rpiDiffBookDepthStreams.'
             );
+        });
+    });
+
+    describe('tradingSessionStream()', () => {
+        it('should execute tradingSessionStream() successfully', async () => {
+            const params: TradingSessionStreamRequest = {
+                id: 'e9d6b4349871b40611412680b3445fac',
+            };
+
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'EquityUpdate',
+                    E: 1765244143062,
+                    t: 1765242000000,
+                    T: 1765270800000,
+                    S: 'OVERNIGHT',
+                })
+            );
+
+            mockSubscription(
+                `ws/${replaceWebsocketStreamsPlaceholders('/tradingSession'.slice(1), params as unknown as Record<string, TradingSessionStreamRequest>)}`,
+                mockResponse
+            );
+        });
+
+        it('should handle tradingSessionStream() WebSocket stream data', () => {
+            const configuration = new ConfigurationWebsocketStreams({});
+            const websocketStreamClient = new WebsocketStreamsBase(configuration);
+            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+
+            const params: TradingSessionStreamRequest = {
+                id: 'e9d6b4349871b40611412680b3445fac',
+            };
+
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'EquityUpdate',
+                    E: 1765244143062,
+                    t: 1765242000000,
+                    T: 1765270800000,
+                    S: 'OVERNIGHT',
+                })
+            );
+
+            const stream = websocketStreamApi.tradingSessionStream(params);
+            const mockCallback = jest.fn(() => {});
+            stream.on('message', mockCallback);
+
+            websocketStreamClient['onMessage'](
+                JSONStringify({
+                    stream: replaceWebsocketStreamsPlaceholders(
+                        '/tradingSession'.slice(1),
+                        params as unknown as Record<string, TradingSessionStreamRequest>
+                    ),
+                    data: mockResponse,
+                }),
+                websocketStreamClient.connectionPool[0]
+            );
+
+            expect(mockCallback).toHaveBeenCalledWith(mockResponse);
         });
     });
 });

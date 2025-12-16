@@ -36,6 +36,7 @@ const UserDataStreamsApiAxiosParamCreator = function (configuration: Configurati
          */
         closeUserDataStream: async (): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -43,7 +44,8 @@ const UserDataStreamsApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/fapi/v1/listenKey',
                 method: 'DELETE',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -58,6 +60,7 @@ const UserDataStreamsApiAxiosParamCreator = function (configuration: Configurati
          */
         keepaliveUserDataStream: async (): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -65,7 +68,8 @@ const UserDataStreamsApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/fapi/v1/listenKey',
                 method: 'PUT',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -80,6 +84,7 @@ const UserDataStreamsApiAxiosParamCreator = function (configuration: Configurati
          */
         startUserDataStream: async (): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -87,7 +92,8 @@ const UserDataStreamsApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/fapi/v1/listenKey',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -164,7 +170,8 @@ export class UserDataStreamsApi implements UserDataStreamsApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -189,7 +196,8 @@ export class UserDataStreamsApi implements UserDataStreamsApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -212,7 +220,8 @@ export class UserDataStreamsApi implements UserDataStreamsApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );

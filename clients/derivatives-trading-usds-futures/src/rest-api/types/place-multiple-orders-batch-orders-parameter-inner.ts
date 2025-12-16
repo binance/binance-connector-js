@@ -51,10 +51,10 @@ export interface PlaceMultipleOrdersBatchOrdersParameterInner {
     timeInForce?: PlaceMultipleOrdersBatchOrdersParameterInnerTimeInForceEnum;
     /**
      *
-     * @type {number}
+     * @type {string}
      * @memberof PlaceMultipleOrdersBatchOrdersParameterInner
      */
-    quantity?: number;
+    quantity?: string;
     /**
      *
      * @type {string}
@@ -63,46 +63,16 @@ export interface PlaceMultipleOrdersBatchOrdersParameterInner {
     reduceOnly?: string;
     /**
      *
-     * @type {number}
+     * @type {string}
      * @memberof PlaceMultipleOrdersBatchOrdersParameterInner
      */
-    price?: number;
+    price?: string;
     /**
      *
      * @type {string}
      * @memberof PlaceMultipleOrdersBatchOrdersParameterInner
      */
     newClientOrderId?: string;
-    /**
-     *
-     * @type {number}
-     * @memberof PlaceMultipleOrdersBatchOrdersParameterInner
-     */
-    stopPrice?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof PlaceMultipleOrdersBatchOrdersParameterInner
-     */
-    activationPrice?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof PlaceMultipleOrdersBatchOrdersParameterInner
-     */
-    callbackRate?: number;
-    /**
-     *
-     * @type {string}
-     * @memberof PlaceMultipleOrdersBatchOrdersParameterInner
-     */
-    workingType?: PlaceMultipleOrdersBatchOrdersParameterInnerWorkingTypeEnum;
-    /**
-     *
-     * @type {string}
-     * @memberof PlaceMultipleOrdersBatchOrdersParameterInner
-     */
-    priceProtect?: string;
     /**
      *
      * @type {string}
@@ -123,10 +93,10 @@ export interface PlaceMultipleOrdersBatchOrdersParameterInner {
     selfTradePreventionMode?: PlaceMultipleOrdersBatchOrdersParameterInnerSelfTradePreventionModeEnum;
     /**
      *
-     * @type {number | bigint}
+     * @type {string}
      * @memberof PlaceMultipleOrdersBatchOrdersParameterInner
      */
-    goodTillDate?: number | bigint;
+    goodTillDate?: string;
 }
 
 export const PlaceMultipleOrdersBatchOrdersParameterInnerSideEnum = {
@@ -155,13 +125,6 @@ export const PlaceMultipleOrdersBatchOrdersParameterInnerTimeInForceEnum = {
 
 export type PlaceMultipleOrdersBatchOrdersParameterInnerTimeInForceEnum =
     (typeof PlaceMultipleOrdersBatchOrdersParameterInnerTimeInForceEnum)[keyof typeof PlaceMultipleOrdersBatchOrdersParameterInnerTimeInForceEnum];
-export const PlaceMultipleOrdersBatchOrdersParameterInnerWorkingTypeEnum = {
-    MARK_PRICE: 'MARK_PRICE',
-    CONTRACT_PRICE: 'CONTRACT_PRICE',
-} as const;
-
-export type PlaceMultipleOrdersBatchOrdersParameterInnerWorkingTypeEnum =
-    (typeof PlaceMultipleOrdersBatchOrdersParameterInnerWorkingTypeEnum)[keyof typeof PlaceMultipleOrdersBatchOrdersParameterInnerWorkingTypeEnum];
 export const PlaceMultipleOrdersBatchOrdersParameterInnerNewOrderRespTypeEnum = {
     ACK: 'ACK',
     RESULT: 'RESULT',

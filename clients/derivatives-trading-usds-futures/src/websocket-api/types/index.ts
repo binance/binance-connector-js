@@ -11,6 +11,7 @@ export * from './cancel-algo-order-response';
 export * from './cancel-algo-order-response-rate-limits-inner';
 export * from './cancel-algo-order-response-result';
 export * from './cancel-order-response';
+export * from './cancel-order-response-rate-limits-inner';
 export * from './cancel-order-response-result';
 export * from './close-user-data-stream-response';
 export * from './futures-account-balance-response';

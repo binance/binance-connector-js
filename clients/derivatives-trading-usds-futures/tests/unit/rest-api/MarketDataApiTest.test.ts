@@ -95,6 +95,7 @@ import type {
     Ticker24hrPriceChangeStatisticsResponse,
     TopTraderLongShortRatioAccountsResponse,
     TopTraderLongShortRatioPositionsResponse,
+    TradingScheduleResponse,
 } from '../../../src/rest-api/types';
 
 describe('MarketDataApi', () => {
@@ -3495,6 +3496,74 @@ describe('MarketDataApi', () => {
             await expect(client.topTraderLongShortRatioPositions(params)).rejects.toThrow(
                 'ResponseError'
             );
+            spy.mockRestore();
+        });
+    });
+
+    describe('tradingSchedule()', () => {
+        it('should execute tradingSchedule() successfully with required parameters only', async () => {
+            mockResponse = JSONParse(
+                JSONStringify({
+                    updateTime: 1761286643918,
+                    marketSchedules: {
+                        EQUITY: {
+                            sessions: [
+                                {
+                                    startTime: 1761177600000,
+                                    endTime: 1761206400000,
+                                    type: 'OVERNIGHT',
+                                },
+                                {
+                                    startTime: 1761206400000,
+                                    endTime: 1761226200000,
+                                    type: 'PRE_MARKET',
+                                },
+                            ],
+                        },
+                        COMMODITY: {
+                            sessions: [
+                                {
+                                    startTime: 1761724800000,
+                                    endTime: 1761744600000,
+                                    type: 'NO_TRADING',
+                                },
+                                {
+                                    startTime: 1761744600000,
+                                    endTime: 1761768000000,
+                                    type: 'REGULAR',
+                                },
+                            ],
+                        },
+                    },
+                })
+            );
+
+            const spy = jest.spyOn(client, 'tradingSchedule').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<TradingScheduleResponse>)
+            );
+            const response = await client.tradingSchedule();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'tradingSchedule').mockRejectedValueOnce(mockError);
+            await expect(client.tradingSchedule()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

@@ -1,5 +1,114 @@
 # Changelog
 
+## 20.0.0 - 2025-12-16
+
+### Added (3)
+
+#### REST API
+
+- `futuresTradfiPerpsContract()` (`POST /fapi/v1/stock/contract`)
+- `tradingSchedule()` (`GET /fapi/v1/tradingSchedule`)
+
+#### WebSocket Streams
+
+- `tradingSessionStream()` (`tradingSession` stream)
+
+### Changed (13)
+
+- Update `@binance/common` library to version `2.1.0`.
+- Support request body params on `sendRequest` and `sendSignedRequest` functions.
+
+#### REST API
+
+- Deleted parameter `activationPrice`
+  - affected methods:
+    - `newOrder()` (`POST /fapi/v1/order`)
+
+- Deleted parameter `callbackRate`
+  - affected methods:
+    - `newOrder()` (`POST /fapi/v1/order`)
+
+- Deleted parameter `closePosition`
+  - affected methods:
+    - `newOrder()` (`POST /fapi/v1/order`)
+
+- Deleted parameter `priceProtect`
+  - affected methods:
+    - `newOrder()` (`POST /fapi/v1/order`)
+
+- Deleted parameter `stopPrice`
+  - affected methods:
+    - `newOrder()` (`POST /fapi/v1/order`)
+
+- Deleted parameter `workingType`
+  - affected methods:
+    - `newOrder()` (`POST /fapi/v1/order`)
+
+- Modified parameter `batchOrders`:
+  - items.`activationPrice`: type `number` → `string`
+  - items.`callbackRate`: type `number` → `string`
+  - items.`goodTillDate`: type `integer` → `string`
+  - items.`price`: type `number` → `string`
+  - items.`quantity`: type `number` → `string`
+  - items.`stopPrice`: type `number` → `string`
+  - items.`activationPrice`: type `number` → `string`
+  - items.`callbackRate`: type `number` → `string`
+  - items.`goodTillDate`: type `integer` → `string`
+  - items.`price`: type `number` → `string`
+  - items.`quantity`: type `number` → `string`
+  - items.`stopPrice`: type `number` → `string`
+  - affected methods:
+    - `placeMultipleOrders()` (`POST /fapi/v1/batchOrders`)
+
+- Modified parameter `batchOrders`:
+  - items.`orderId`: type `integer` → `string`
+  - items.`price`: type `number` → `string`
+  - items.`quantity`: type `number` → `string`
+  - items.`recvWindow`: type `integer` → `string`
+  - items.`orderId`: type `integer` → `string`
+  - items.`price`: type `number` → `string`
+  - items.`quantity`: type `number` → `string`
+  - items.`recvWindow`: type `integer` → `string`
+  - affected methods:
+    - `modifyMultipleOrders()` (`PUT /fapi/v1/batchOrders`)
+
+- Modified response for `placeMultipleOrders()` (`POST /fapi/v1/batchOrders`):
+  - items: property `activatePrice` deleted
+  - items: property `priceRate` deleted
+  - items: item property `activatePrice` deleted
+  - items: item property `priceRate` deleted
+
+- Modified response for `newOrder()` (`POST /fapi/v1/order`):
+  - property `priceRate` deleted
+  - property `activatePrice` deleted
+
+#### WebSocket API
+
+- Modified response for `cancelAlgoOrder()` (`algoOrder.cancel` method):
+  - `result`: property `code` added
+  - `result`: property `msg` added
+  - `result`: property `algoStatus` deleted
+  - `result`: property `symbol` deleted
+  - `result`: property `closePosition` deleted
+  - `result`: property `positionSide` deleted
+  - `result`: property `selfTradePreventionMode` deleted
+  - `result`: property `priceMatch` deleted
+  - `result`: property `goodTillDate` deleted
+  - `result`: property `quantity` deleted
+  - `result`: property `icebergQuantity` deleted
+  - `result`: property `side` deleted
+  - `result`: property `triggerPrice` deleted
+  - `result`: property `workingType` deleted
+  - `result`: property `reduceOnly` deleted
+  - `result`: property `orderType` deleted
+  - `result`: property `price` deleted
+  - `result`: property `createTime` deleted
+  - `result`: property `triggerTime` deleted
+  - `result`: property `algoType` deleted
+  - `result`: property `timeInForce` deleted
+  - `result`: property `priceProtect` deleted
+  - `result`: property `updateTime` deleted
+
 ## 19.0.1 - 2025-11-27
 
 ### Changed (1)

@@ -95,6 +95,7 @@ import type {
     ChangePositionModeRequest,
     CurrentAllAlgoOpenOrdersRequest,
     CurrentAllOpenOrdersRequest,
+    FuturesTradfiPerpsContractRequest,
     GetOrderModifyHistoryRequest,
     GetPositionMarginChangeHistoryRequest,
     ModifyIsolatedPositionMarginRequest,
@@ -177,6 +178,7 @@ import type {
     Ticker24hrPriceChangeStatisticsResponse,
     TopTraderLongShortRatioAccountsResponse,
     TopTraderLongShortRatioPositionsResponse,
+    TradingScheduleResponse,
 } from './types';
 import type { ClassicPortfolioMarginAccountInformationResponse } from './types';
 import type {
@@ -194,6 +196,7 @@ import type {
     ChangePositionModeResponse,
     CurrentAllAlgoOpenOrdersResponse,
     CurrentAllOpenOrdersResponse,
+    FuturesTradfiPerpsContractResponse,
     GetOrderModifyHistoryResponse,
     GetPositionMarginChangeHistoryResponse,
     ModifyIsolatedPositionMarginResponse,
@@ -237,34 +240,51 @@ export class RestAPI {
      * Generic function to send a request.
      * @param endpoint - The API endpoint to call.
      * @param method - HTTP method to use (GET, POST, DELETE, etc.).
-     * @param params - Query parameters for the request.
+     * @param queryParams - Query parameters for the request.
+     * @param bodyParams - Body parameters for the request.
      *
      * @returns A promise resolving to the response data object.
      */
     sendRequest<T>(
         endpoint: string,
         method: 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH',
-        params: Record<string, unknown> = {}
+        queryParams: Record<string, unknown> = {},
+        bodyParams: Record<string, unknown> = {}
     ): Promise<RestApiResponse<T>> {
-        return sendRequest<T>(this.configuration, endpoint, method, params, undefined);
+        return sendRequest<T>(
+            this.configuration,
+            endpoint,
+            method,
+            queryParams,
+            bodyParams,
+            undefined
+        );
     }
 
     /**
      * Generic function to send a signed request.
      * @param endpoint - The API endpoint to call.
      * @param method - HTTP method to use (GET, POST, DELETE, etc.).
-     * @param params - Query parameters for the request.
+     * @param queryParams - Query parameters for the request.
+     * @param bodyParams - Body parameters for the request.
      *
      * @returns A promise resolving to the response data object.
      */
     sendSignedRequest<T>(
         endpoint: string,
         method: 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH',
-        params: Record<string, unknown> = {}
+        queryParams: Record<string, unknown> = {},
+        bodyParams: Record<string, unknown> = {}
     ): Promise<RestApiResponse<T>> {
-        return sendRequest<T>(this.configuration, endpoint, method, params, undefined, {
-            isSigned: true,
-        });
+        return sendRequest<T>(
+            this.configuration,
+            endpoint,
+            method,
+            queryParams,
+            bodyParams,
+            undefined,
+            { isSigned: true }
+        );
     }
 
     /**
@@ -852,6 +872,7 @@ export class RestAPI {
      * PERPETUAL
      * CURRENT_QUARTER
      * NEXT_QUARTER
+     * TRADIFI_PERPETUAL
      *
      * Weight: based on parameter LIMIT
      * | LIMIT       | weight |
@@ -1201,6 +1222,11 @@ export class RestAPI {
     /**
      * Query index price constituents
      *
+     *
+     **Note**:
+     *
+     * Prices from constituents of TradFi perps will be hiden and displayed as -1.
+     *
      * Weight: 2
      *
      * @summary Query Index Price Constituents
@@ -1450,6 +1476,21 @@ export class RestAPI {
         requestParameters: TopTraderLongShortRatioPositionsRequest
     ): Promise<RestApiResponse<TopTraderLongShortRatioPositionsResponse>> {
         return this.marketDataApi.topTraderLongShortRatioPositions(requestParameters);
+    }
+
+    /**
+     * Trading session schedules for the underlying assets of TradFi Perps are provided for a one-week period starting from the day prior to the query time, covering both the U.S. equity and commodity markets. Equity market session types include "PRE_MARKET", "REGULAR", "AFTER_MARKET", "OVERNIGHT", and "NO_TRADING", while commodity market session types include "REGULAR" and "NO_TRADING".
+     *
+     * Weight: 5
+     *
+     * @summary Trading Schedule
+     *
+     * @returns {Promise<RestApiResponse<TradingScheduleResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Trading-Schedule Binance API Documentation}
+     */
+    tradingSchedule(): Promise<RestApiResponse<TradingScheduleResponse>> {
+        return this.marketDataApi.tradingSchedule();
     }
 
     /**
@@ -1758,6 +1799,24 @@ export class RestAPI {
     }
 
     /**
+     * Sign TradFi-Perps agreement contract
+     *
+     * Weight: 0
+     *
+     * @summary Futures TradFi Perps Contract(USER_DATA)
+     * @param {FuturesTradfiPerpsContractRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<FuturesTradfiPerpsContractResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Futures-TradFi-Perps-Contract Binance API Documentation}
+     */
+    futuresTradfiPerpsContract(
+        requestParameters: FuturesTradfiPerpsContractRequest = {}
+    ): Promise<RestApiResponse<FuturesTradfiPerpsContractResponse>> {
+        return this.tradeApi.futuresTradfiPerpsContract(requestParameters);
+    }
+
+    /**
      * Get order modification history
      *
      * Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
@@ -1925,40 +1984,10 @@ export class RestAPI {
     /**
      * Send in a new order.
      *
-     * Order with type `STOP`,  parameter `timeInForce` can be sent ( default `GTC`).
-     * Order with type `TAKE_PROFIT`,  parameter `timeInForce` can be sent ( default `GTC`).
-     * Condition orders will be triggered when:
-     *
-     * If parameter`priceProtect`is sent as true:
-     * when price reaches the `stopPrice` ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
-     * "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
-     *
-     * `STOP`, `STOP_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-     * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
-     * `TRAILING_STOP_MARKET`:
-     * BUY: the lowest price after order placed `<= `activationPrice`, and the latest price >`= the lowest price * (1 + `callbackRate`)
-     * SELL: the highest price after order placed >= `activationPrice`, and the latest price <= the highest price * (1 - `callbackRate`)
-     *
-     * For `TRAILING_STOP_MARKET`, if you got such error code.
-     * ``{"code": -2021, "msg": "Order would immediately trigger."}``
-     * means that the parameters you send do not meet the following requirements:
-     * BUY: `activationPrice` should be smaller than latest price.
-     * SELL: `activationPrice` should be larger than latest price.
-     *
      * If `newOrderRespType ` is sent as `RESULT` :
      * `MARKET` order: the final FILLED result of the order will be return directly.
      * `LIMIT` order with special `timeInForce`: the final status result of the order(FILLED or EXPIRED) will be returned directly.
      *
-     * `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`:
-     * Follow the same rules for condition orders.
-     * If triggered，**close all** current long position( if `SELL`) or current short position( if `BUY`).
-     * Cannot be used with `quantity` paremeter
-     * Cannot be used with `reduceOnly` parameter
-     * In Hedge Mode,cannot be used with `BUY` orders in `LONG` position side. and cannot be used with `SELL` orders in `SHORT` position side
      * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
      * In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
      *

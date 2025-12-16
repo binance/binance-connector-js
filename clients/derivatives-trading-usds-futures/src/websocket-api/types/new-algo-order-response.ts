@@ -16,7 +16,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { CancelAlgoOrderResponseRateLimitsInner } from './cancel-algo-order-response-rate-limits-inner';
+import type { CancelOrderResponseRateLimitsInner } from './cancel-order-response-rate-limits-inner';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { NewAlgoOrderResponseResult } from './new-algo-order-response-result';
@@ -47,8 +47,8 @@ export interface NewAlgoOrderResponse {
     result?: NewAlgoOrderResponseResult;
     /**
      *
-     * @type {Array<CancelAlgoOrderResponseRateLimitsInner>}
+     * @type {Array<CancelOrderResponseRateLimitsInner>}
      * @memberof NewAlgoOrderResponse
      */
-    rateLimits?: Array<CancelAlgoOrderResponseRateLimitsInner>;
+    rateLimits?: Array<CancelOrderResponseRateLimitsInner>;
 }

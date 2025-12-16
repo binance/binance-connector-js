@@ -36,6 +36,7 @@ import type {
     MultiAssetsModeAssetIndexRequest,
     PartialBookDepthStreamsRequest,
     RpiDiffBookDepthStreamsRequest,
+    TradingSessionStreamRequest,
 } from './modules/websocket-market-streams-api';
 
 import type {
@@ -58,6 +59,7 @@ import type {
     MultiAssetsModeAssetIndexResponse,
     PartialBookDepthStreamsResponse,
     RpiDiffBookDepthStreamsResponse,
+    TradingSessionStreamResponse,
 } from './types';
 
 export class WebsocketStreamsConnection {
@@ -453,6 +455,10 @@ export class WebsocketStreamsConnection {
     /**
      * Mark price and funding rate for all symbols pushed every 3 seconds or every second.
      *
+     **Note**:
+     *
+     * This stream does not cover TradFi Perps.
+     *
      * Update Speed: 3000ms or 1000ms
      *
      * @summary Mark Price Stream for All market
@@ -524,5 +530,23 @@ export class WebsocketStreamsConnection {
         requestParameters: RpiDiffBookDepthStreamsRequest
     ): WebsocketStream<RpiDiffBookDepthStreamsResponse> {
         return this.websocketMarketStreamsApi.rpiDiffBookDepthStreams(requestParameters);
+    }
+
+    /**
+     * Trading session information for the underlying assets of TradFi Perpetual contracts—covering the U.S. equity market and the commodity market—is updated every second. Trading session information for different underlying markets is pushed in separate messages. Session types for the equity market include "PRE_MARKET", "REGULAR", "AFTER_MARKET", "OVERNIGHT", and "NO_TRADING". Session types for the commodity market include "REGULAR" and "NO_TRADING".
+     *
+     * Update Speed: 1s
+     *
+     * @summary Trading Session Stream
+     * @param {TradingSessionStreamRequest} requestParameters Request parameters.
+     *
+     * @returns {WebsocketStream<TradingSessionStreamResponse>}
+     * @throws {RequiredError}
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Trading-Session-Stream Binance API Documentation}
+     */
+    tradingSessionStream(
+        requestParameters: TradingSessionStreamRequest = {}
+    ): WebsocketStream<TradingSessionStreamResponse> {
+        return this.websocketMarketStreamsApi.tradingSessionStream(requestParameters);
     }
 }

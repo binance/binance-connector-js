@@ -123,18 +123,6 @@ export interface PlaceMultipleOrdersResponseInner {
     origType?: string;
     /**
      *
-     * @type {string}
-     * @memberof PlaceMultipleOrdersResponseInner
-     */
-    activatePrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PlaceMultipleOrdersResponseInner
-     */
-    priceRate?: string;
-    /**
-     *
      * @type {number | bigint}
      * @memberof PlaceMultipleOrdersResponseInner
      */

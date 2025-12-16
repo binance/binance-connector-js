@@ -50,11 +50,11 @@ const ConvertApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             assertParamExists('acceptTheOfferedQuote', 'quoteId', quoteId);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (quoteId !== undefined && quoteId !== null) {
                 localVarQueryParameter['quoteId'] = quoteId;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -65,7 +65,8 @@ const ConvertApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/fapi/v1/convert/acceptQuote',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -86,11 +87,11 @@ const ConvertApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          */
         listAllConvertPairs: async (fromAsset?: string, toAsset?: string): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (fromAsset !== undefined && fromAsset !== null) {
                 localVarQueryParameter['fromAsset'] = fromAsset;
             }
-
             if (toAsset !== undefined && toAsset !== null) {
                 localVarQueryParameter['toAsset'] = toAsset;
             }
@@ -101,7 +102,8 @@ const ConvertApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/fapi/v1/convert/exchangeInfo',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -118,11 +120,11 @@ const ConvertApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          */
         orderStatus: async (orderId?: string, quoteId?: string): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (orderId !== undefined && orderId !== null) {
                 localVarQueryParameter['orderId'] = orderId;
             }
-
             if (quoteId !== undefined && quoteId !== null) {
                 localVarQueryParameter['quoteId'] = quoteId;
             }
@@ -133,7 +135,8 @@ const ConvertApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/fapi/v1/convert/orderStatus',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -169,27 +172,23 @@ const ConvertApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             assertParamExists('sendQuoteRequest', 'toAsset', toAsset);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (fromAsset !== undefined && fromAsset !== null) {
                 localVarQueryParameter['fromAsset'] = fromAsset;
             }
-
             if (toAsset !== undefined && toAsset !== null) {
                 localVarQueryParameter['toAsset'] = toAsset;
             }
-
             if (fromAmount !== undefined && fromAmount !== null) {
                 localVarQueryParameter['fromAmount'] = fromAmount;
             }
-
             if (toAmount !== undefined && toAmount !== null) {
                 localVarQueryParameter['toAmount'] = toAmount;
             }
-
             if (validTime !== undefined && validTime !== null) {
                 localVarQueryParameter['validTime'] = validTime;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -200,7 +199,8 @@ const ConvertApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/fapi/v1/convert/getQuote',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -421,7 +421,8 @@ export class ConvertApi implements ConvertApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -454,7 +455,8 @@ export class ConvertApi implements ConvertApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -483,7 +485,8 @@ export class ConvertApi implements ConvertApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -519,7 +522,8 @@ export class ConvertApi implements ConvertApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
