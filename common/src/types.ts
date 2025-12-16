@@ -100,12 +100,14 @@ export interface AxiosRequestArgs {
  * Represents the arguments for a request.
  * @property {string} endpoint - The endpoint for the request.
  * @property {'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH'} method - The HTTP method for the request.
- * @property {Record<string, unknown>} params - The parameters for the request.
+ * @property {Record<string, unknown>} queryParams - The query parameters for the request.
+ * @property {Record<string, unknown>} bodyParams - The body parameters for the request.
  * @property {TimeUnit} [timeUnit] - The optional time unit for the request.
  */
 export interface RequestArgs {
     endpoint: string;
     method: 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH';
-    params: Record<string, unknown>;
+    queryParams: Record<string, unknown>;
+    bodyParams: Record<string, unknown>;
     timeUnit?: TimeUnit;
 }

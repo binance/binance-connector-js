@@ -109,8 +109,10 @@ class RequestSigner {
         throw new Error('Either \'apiSecret\' or \'privateKey\' must be provided for signed requests.');
     }
 
-    sign(queryParams: Record<string, unknown>): string {
-        const params = buildQueryString(queryParams);
+    sign(queryParams: Record<string, unknown>, bodyParams?: Record<string, unknown>): string {
+        const queryParamsString = buildQueryString(queryParams);
+        const bodyParamsString = bodyParams ? buildQueryString(bodyParams) : '';
+        const params = queryParamsString + bodyParamsString;
 
         // HMAC-SHA256 signing
         if (this.apiSecret)
@@ -253,14 +255,15 @@ export const getSignature = function (
         privateKey?: string | Buffer;
         privateKeyPassphrase?: string;
     },
-    queryParams: Record<string, unknown>
+    queryParams: Record<string, unknown>,
+    bodyParams?: Record<string, unknown>
 ): string {
     let signer = signerCache.get(configuration);
     if (!signer) {
         signer = new RequestSigner(configuration);
         signerCache.set(configuration, signer);
     }
-    return signer.sign(queryParams);
+    return signer.sign(queryParams, bodyParams);
 };
 
 /**
@@ -614,7 +617,8 @@ export const sendRequest = function <T>(
     configuration: ConfigurationRestAPI,
     endpoint: string,
     method: 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH',
-    params: Record<string, unknown> = {},
+    queryParams: Record<string, unknown> = {},
+    bodyParams: Record<string, unknown> = {},
     timeUnit?: TimeUnit,
     options: { isSigned?: boolean } = {}
 ): Promise<RestApiResponse<T>> {
@@ -623,18 +627,38 @@ export const sendRequest = function <T>(
         method,
         ...configuration?.baseOptions,
     };
-    const localVarQueryParameter = { ...normalizeScientificNumbers(params) };
+    const localVarQueryParameter = { ...normalizeScientificNumbers(queryParams) };
+    const localVarBodyParameter = { ...normalizeScientificNumbers(bodyParams) };
 
     if (options.isSigned) {
         const timestamp = getTimestamp();
         localVarQueryParameter['timestamp'] = timestamp;
-        const signature = getSignature(configuration!, localVarQueryParameter);
+        const signature = getSignature(
+            configuration!,
+            localVarQueryParameter,
+            localVarBodyParameter
+        );
         if (signature) {
             localVarQueryParameter['signature'] = signature;
         }
     }
 
     setSearchParams(localVarUrlObj, localVarQueryParameter);
+
+    if (Object.keys(localVarBodyParameter).length > 0) {
+        const searchParams = new URLSearchParams();
+        for (const [key, value] of Object.entries(localVarBodyParameter)) {
+            if (value === null || value === undefined) continue;
+            const serializedValue = serializeValue(value);
+            searchParams.append(key, serializedValue);
+        }
+
+        localVarRequestOptions.data = searchParams.toString();
+        localVarRequestOptions.headers = {
+            ...(localVarRequestOptions.headers || {}),
+            'Content-Type': 'application/x-www-form-urlencoded',
+        };
+    }
 
     if (timeUnit && localVarRequestOptions.headers) {
         const _timeUnit = validateTimeUnit(timeUnit);

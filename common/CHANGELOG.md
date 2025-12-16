@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.0 - 2025-12-16
+
+### Changed (1)
+
+- Support request body params.
+
 ## 2.0.1 - 2025-11-18
 
 ### Changed (1)

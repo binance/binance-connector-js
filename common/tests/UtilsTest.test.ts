@@ -933,14 +933,22 @@ describe('Utility Functions', () => {
             utils.clearSignerCache();
             jest.spyOn(utils, 'getSignature').mockImplementation(() => 'mock-signature');
             jest.spyOn(utils, 'setSearchParams').mockImplementation((url, params) => {
-                Object.keys(params).forEach((key) =>
-                    url.searchParams.append(key, String(params[key]))
-                );
+                const searchParams = new URLSearchParams();
+                Object.entries(params).forEach(([key, value]) => {
+                    if (value === null || value === undefined) return;
+                    searchParams.append(key, String(value));
+                });
+                url.search = searchParams.toString();
             });
             jest.spyOn(utils, 'toPathString').mockImplementation((url) => url.toString());
             jest.spyOn(utils, 'httpRequestFunction').mockImplementation((args) =>
                 mockAxios.request(args)
             );
+        });
+
+        afterEach(() => {
+            jest.restoreAllMocks();
+            mockAxios.request.mockReset();
         });
 
         it('should send a basic GET request with the correct parameters', async () => {
@@ -950,6 +958,7 @@ describe('Utility Functions', () => {
                 restConfiguration,
                 '/api/v3/test',
                 'GET',
+                {},
                 {},
                 undefined,
                 {}
@@ -967,7 +976,7 @@ describe('Utility Functions', () => {
             expect(response.data).toEqual({ success: true });
         });
 
-        it('should send a signed request with the correct parameters', async () => {
+        it('should send a signed request with query params only', async () => {
             mockAxios.request.mockResolvedValue({ data: { success: true } });
 
             await sendRequest(
@@ -975,16 +984,78 @@ describe('Utility Functions', () => {
                 '/api/v3/test',
                 'POST',
                 { param1: 'value1' },
+                {},
                 undefined,
                 { isSigned: true }
             );
 
             expect(mockAxios.request).toHaveBeenCalledWith(
                 expect.objectContaining({
-                    url: expect.stringContaining('signature=mock-signature'),
+                    url: expect.stringContaining('/api/v3/test'),
                     options: expect.objectContaining({
                         method: 'POST',
                     }),
+                })
+            );
+
+            const calledUrl = new URL(mockAxios.request.mock.calls[0][0].url as string);
+
+            expect(calledUrl.searchParams.get('signature')).toBe('mock-signature');
+            expect(calledUrl.searchParams.get('param1')).toBe('value1');
+            expect(calledUrl.searchParams.get('timestamp')).not.toBeNull();
+
+            expect(utils.getSignature).toHaveBeenCalledWith(
+                restConfiguration,
+                expect.objectContaining({
+                    param1: 'value1',
+                    timestamp: expect.any(Number),
+                }),
+                {}
+            );
+        });
+
+        it('should send a signed request with body params as urlencoded and sign query + body', async () => {
+            mockAxios.request.mockResolvedValue({ data: { success: true } });
+
+            await sendRequest(
+                restConfiguration,
+                '/api/v3/test',
+                'POST',
+                { recvWindow: 5000 },
+                { param1: 'test1', param2: 1 },
+                undefined,
+                { isSigned: true }
+            );
+
+            expect(mockAxios.request).toHaveBeenCalledWith(
+                expect.objectContaining({
+                    url: expect.stringContaining('/api/v3/test'),
+                    options: expect.objectContaining({
+                        method: 'POST',
+                        headers: expect.objectContaining({
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        }),
+                        data: expect.stringContaining('param1=test1&param2=1'),
+                    }),
+                })
+            );
+
+            const callArgs = mockAxios.request.mock.calls[0][0];
+            const url = new URL(callArgs.url as string);
+
+            expect(url.searchParams.get('recvWindow')).toBe('5000');
+            expect(url.searchParams.get('timestamp')).not.toBeNull();
+            expect(url.searchParams.get('signature')).toBe('mock-signature');
+
+            expect(utils.getSignature).toHaveBeenCalledWith(
+                restConfiguration,
+                expect.objectContaining({
+                    recvWindow: '5000',
+                    timestamp: expect.any(Number),
+                }),
+                expect.objectContaining({
+                    param1: 'test1',
+                    param2: '1',
                 })
             );
         });
@@ -992,7 +1063,7 @@ describe('Utility Functions', () => {
         it('should handle the timeUnit header correctly', async () => {
             mockAxios.request.mockResolvedValue({ data: { success: true } });
 
-            await sendRequest(restConfiguration, '/api/v3/test', 'GET', {}, 'MILLISECOND', {});
+            await sendRequest(restConfiguration, '/api/v3/test', 'GET', {}, {}, 'MILLISECOND', {});
 
             expect(mockAxios.request).toHaveBeenCalledWith(
                 expect.objectContaining({
@@ -1013,6 +1084,7 @@ describe('Utility Functions', () => {
                     restConfiguration,
                     '/api/v3/test',
                     'GET',
+                    {},
                     {},
                     'INVALID_TIME_UNIT' as unknown as TimeUnit, // Invalid timeUnit
                     {}
