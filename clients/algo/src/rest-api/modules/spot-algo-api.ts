@@ -51,11 +51,11 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
             assertParamExists('cancelAlgoOrderSpotAlgo', 'algoId', algoId);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (algoId !== undefined && algoId !== null) {
                 localVarQueryParameter['algoId'] = algoId;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -66,7 +66,8 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
             return {
                 endpoint: '/sapi/v1/algo/spot/order',
                 method: 'DELETE',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -84,6 +85,7 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -95,7 +97,8 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
             return {
                 endpoint: '/sapi/v1/algo/spot/openOrders',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -125,31 +128,26 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (side !== undefined && side !== null) {
                 localVarQueryParameter['side'] = side;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (page !== undefined && page !== null) {
                 localVarQueryParameter['page'] = page;
             }
-
             if (pageSize !== undefined && pageSize !== null) {
                 localVarQueryParameter['pageSize'] = pageSize;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -160,7 +158,8 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
             return {
                 endpoint: '/sapi/v1/algo/spot/historicalOrders',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -187,19 +186,17 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
             assertParamExists('querySubOrdersSpotAlgo', 'algoId', algoId);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (algoId !== undefined && algoId !== null) {
                 localVarQueryParameter['algoId'] = algoId;
             }
-
             if (page !== undefined && page !== null) {
                 localVarQueryParameter['page'] = page;
             }
-
             if (pageSize !== undefined && pageSize !== null) {
                 localVarQueryParameter['pageSize'] = pageSize;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -210,7 +207,8 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
             return {
                 endpoint: '/sapi/v1/algo/spot/subOrders',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -249,27 +247,23 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
             assertParamExists('timeWeightedAveragePriceSpotAlgo', 'duration', duration);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (side !== undefined && side !== null) {
                 localVarQueryParameter['side'] = side;
             }
-
             if (quantity !== undefined && quantity !== null) {
                 localVarQueryParameter['quantity'] = quantity;
             }
-
             if (duration !== undefined && duration !== null) {
                 localVarQueryParameter['duration'] = duration;
             }
-
             if (clientAlgoId !== undefined && clientAlgoId !== null) {
                 localVarQueryParameter['clientAlgoId'] = clientAlgoId;
             }
-
             if (limitPrice !== undefined && limitPrice !== null) {
                 localVarQueryParameter['limitPrice'] = limitPrice;
             }
@@ -280,7 +274,8 @@ const SpotAlgoApiAxiosParamCreator = function (configuration: ConfigurationRestA
             return {
                 endpoint: '/sapi/v1/algo/spot/newOrderTwap',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -572,7 +567,8 @@ export class SpotAlgoApi implements SpotAlgoApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -601,7 +597,8 @@ export class SpotAlgoApi implements SpotAlgoApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -636,7 +633,8 @@ export class SpotAlgoApi implements SpotAlgoApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -667,7 +665,8 @@ export class SpotAlgoApi implements SpotAlgoApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -703,7 +702,8 @@ export class SpotAlgoApi implements SpotAlgoApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
