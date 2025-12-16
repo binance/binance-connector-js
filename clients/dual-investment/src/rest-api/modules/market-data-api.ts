@@ -57,27 +57,23 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             assertParamExists('getDualInvestmentProductList', 'investCoin', investCoin);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (optionType !== undefined && optionType !== null) {
                 localVarQueryParameter['optionType'] = optionType;
             }
-
             if (exercisedCoin !== undefined && exercisedCoin !== null) {
                 localVarQueryParameter['exercisedCoin'] = exercisedCoin;
             }
-
             if (investCoin !== undefined && investCoin !== null) {
                 localVarQueryParameter['investCoin'] = investCoin;
             }
-
             if (pageSize !== undefined && pageSize !== null) {
                 localVarQueryParameter['pageSize'] = pageSize;
             }
-
             if (pageIndex !== undefined && pageIndex !== null) {
                 localVarQueryParameter['pageIndex'] = pageIndex;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -88,7 +84,8 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v1/dci/product/list',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -204,7 +201,8 @@ export class MarketDataApi implements MarketDataApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );

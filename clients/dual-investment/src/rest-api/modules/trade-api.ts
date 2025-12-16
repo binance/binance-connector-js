@@ -52,15 +52,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('changeAutoCompoundStatus', 'positionId', positionId);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (positionId !== undefined && positionId !== null) {
                 localVarQueryParameter['positionId'] = positionId;
             }
-
             if (autoCompoundPlan !== undefined && autoCompoundPlan !== null) {
                 localVarQueryParameter['AutoCompoundPlan'] = autoCompoundPlan;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -71,7 +70,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/dci/product/auto_compound/edit-status',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -87,6 +87,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          */
         checkDualInvestmentAccounts: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -98,7 +99,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/dci/product/accounts',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -122,19 +124,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (status !== undefined && status !== null) {
                 localVarQueryParameter['status'] = status;
             }
-
             if (pageSize !== undefined && pageSize !== null) {
                 localVarQueryParameter['pageSize'] = pageSize;
             }
-
             if (pageIndex !== undefined && pageIndex !== null) {
                 localVarQueryParameter['pageIndex'] = pageIndex;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -145,7 +145,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/dci/product/positions',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -187,23 +188,20 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             );
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (id !== undefined && id !== null) {
                 localVarQueryParameter['id'] = id;
             }
-
             if (orderId !== undefined && orderId !== null) {
                 localVarQueryParameter['orderId'] = orderId;
             }
-
             if (depositAmount !== undefined && depositAmount !== null) {
                 localVarQueryParameter['depositAmount'] = depositAmount;
             }
-
             if (autoCompoundPlan !== undefined && autoCompoundPlan !== null) {
                 localVarQueryParameter['autoCompoundPlan'] = autoCompoundPlan;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -214,7 +212,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/dci/product/subscribe',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -439,7 +438,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -467,7 +467,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -498,7 +499,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -534,7 +536,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
