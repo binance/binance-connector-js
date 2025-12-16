@@ -33,6 +33,6 @@
         "typescript": "^5.7.2"
     },
     "dependencies": {
-        "@binance/common": "2.0.1"
+        "@binance/common": "2.1.0"
     }
 }
