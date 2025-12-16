@@ -53,27 +53,23 @@ const C2CApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (tradeType !== undefined && tradeType !== null) {
                 localVarQueryParameter['tradeType'] = tradeType;
             }
-
             if (startTimestamp !== undefined && startTimestamp !== null) {
                 localVarQueryParameter['startTimestamp'] = startTimestamp;
             }
-
             if (endTimestamp !== undefined && endTimestamp !== null) {
                 localVarQueryParameter['endTimestamp'] = endTimestamp;
             }
-
             if (page !== undefined && page !== null) {
                 localVarQueryParameter['page'] = page;
             }
-
             if (rows !== undefined && rows !== null) {
                 localVarQueryParameter['rows'] = rows;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -84,7 +80,8 @@ const C2CApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
             return {
                 endpoint: '/sapi/v1/c2c/orderMatch/listUserOrderHistory',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -208,7 +205,8 @@ export class C2CApi implements C2CApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
