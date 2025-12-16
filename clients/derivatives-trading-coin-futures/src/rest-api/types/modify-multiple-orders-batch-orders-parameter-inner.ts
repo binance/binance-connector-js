@@ -21,10 +21,10 @@
 export interface ModifyMultipleOrdersBatchOrdersParameterInner {
     /**
      *
-     * @type {number | bigint}
+     * @type {string}
      * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
      */
-    orderId?: number | bigint;
+    orderId?: string;
     /**
      *
      * @type {string}
@@ -45,22 +45,22 @@ export interface ModifyMultipleOrdersBatchOrdersParameterInner {
     side?: ModifyMultipleOrdersBatchOrdersParameterInnerSideEnum;
     /**
      *
-     * @type {number}
+     * @type {string}
      * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
      */
-    quantity?: number;
+    quantity?: string;
     /**
      *
-     * @type {number}
+     * @type {string}
      * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
      */
-    price?: number;
+    price?: string;
     /**
      *
-     * @type {number | bigint}
+     * @type {string}
      * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
      */
-    recvWindow?: number | bigint;
+    recvWindow?: string;
 }
 
 export const ModifyMultipleOrdersBatchOrdersParameterInnerSideEnum = {

@@ -223,4 +223,10 @@ export interface OrderTradeUpdateO {
      * @memberof OrderTradeUpdateO
      */
     pm?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof OrderTradeUpdateO
+     */
+    er?: string;
 }
