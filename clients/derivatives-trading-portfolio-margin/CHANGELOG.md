@@ -1,5 +1,17 @@
 # Changelog
 
+## 9.0.0 - 2025-12-16
+
+### Changed (3)
+
+- Update `@binance/common` library to version `2.1.0`.
+- Support request body params on `sendRequest` and `sendSignedRequest` functions.
+
+#### REST API
+
+- Modified response for `umPositionAdlQuantileEstimation()` (`GET /papi/v1/um/adlQuantile`):
+  - items.`adlQuantile`: property `HEDGE` deleted
+
 ## 8.0.1 - 2025-11-27
 
 ### Changed (1)

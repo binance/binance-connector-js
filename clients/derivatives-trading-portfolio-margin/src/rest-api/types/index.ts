@@ -159,3 +159,4 @@ export * from './um-notional-and-leverage-brackets-response-inner';
 export * from './um-notional-and-leverage-brackets-response-inner-brackets-inner';
 export * from './um-position-adl-quantile-estimation-response';
 export * from './um-position-adl-quantile-estimation-response-inner';
+export * from './um-position-adl-quantile-estimation-response-inner-adl-quantile';

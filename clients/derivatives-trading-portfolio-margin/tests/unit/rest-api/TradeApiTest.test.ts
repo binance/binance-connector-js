@@ -7158,8 +7158,8 @@ describe('TradeApi', () => {
         it('should execute umPositionAdlQuantileEstimation() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
                 JSONStringify([
-                    { symbol: 'ETHUSDT', adlQuantile: { LONG: 3, SHORT: 3, HEDGE: 0 } },
-                    { symbol: 'BTCUSDT', adlQuantile: { LONG: 1, SHORT: 2, BOTH: 0 } },
+                    { symbol: 'ETHUSDT', adlQuantile: { LONG: 3, SHORT: 3, BOTH: 0 } },
+                    { symbol: 'BTCUSDT', adlQuantile: { LONG: 0, SHORT: 0, BOTH: 2 } },
                 ])
             );
 
@@ -7185,8 +7185,8 @@ describe('TradeApi', () => {
 
             mockResponse = JSONParse(
                 JSONStringify([
-                    { symbol: 'ETHUSDT', adlQuantile: { LONG: 3, SHORT: 3, HEDGE: 0 } },
-                    { symbol: 'BTCUSDT', adlQuantile: { LONG: 1, SHORT: 2, BOTH: 0 } },
+                    { symbol: 'ETHUSDT', adlQuantile: { LONG: 3, SHORT: 3, BOTH: 0 } },
+                    { symbol: 'BTCUSDT', adlQuantile: { LONG: 0, SHORT: 0, BOTH: 2 } },
                 ])
             );
 

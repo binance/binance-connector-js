@@ -16,7 +16,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { CmPositionAdlQuantileEstimationResponseInnerAdlQuantile } from './cm-position-adl-quantile-estimation-response-inner-adl-quantile';
+import type { UmPositionAdlQuantileEstimationResponseInnerAdlQuantile } from './um-position-adl-quantile-estimation-response-inner-adl-quantile';
 
 /**
  *
@@ -32,8 +32,8 @@ export interface UmPositionAdlQuantileEstimationResponseInner {
     symbol?: string;
     /**
      *
-     * @type {CmPositionAdlQuantileEstimationResponseInnerAdlQuantile}
+     * @type {UmPositionAdlQuantileEstimationResponseInnerAdlQuantile}
      * @memberof UmPositionAdlQuantileEstimationResponseInner
      */
-    adlQuantile?: CmPositionAdlQuantileEstimationResponseInnerAdlQuantile;
+    adlQuantile?: UmPositionAdlQuantileEstimationResponseInnerAdlQuantile;
 }
