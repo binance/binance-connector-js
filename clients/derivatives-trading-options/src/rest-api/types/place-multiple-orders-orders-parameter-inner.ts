@@ -39,16 +39,16 @@ export interface PlaceMultipleOrdersOrdersParameterInner {
     type?: PlaceMultipleOrdersOrdersParameterInnerTypeEnum;
     /**
      *
-     * @type {number}
+     * @type {string}
      * @memberof PlaceMultipleOrdersOrdersParameterInner
      */
-    quantity?: number;
+    quantity?: string;
     /**
      *
-     * @type {number}
+     * @type {string}
      * @memberof PlaceMultipleOrdersOrdersParameterInner
      */
-    price?: number;
+    price?: string;
     /**
      *
      * @type {string}
@@ -57,16 +57,16 @@ export interface PlaceMultipleOrdersOrdersParameterInner {
     timeInForce?: PlaceMultipleOrdersOrdersParameterInnerTimeInForceEnum;
     /**
      *
-     * @type {boolean}
+     * @type {string}
      * @memberof PlaceMultipleOrdersOrdersParameterInner
      */
-    reduceOnly?: boolean;
+    reduceOnly?: string;
     /**
      *
-     * @type {boolean}
+     * @type {string}
      * @memberof PlaceMultipleOrdersOrdersParameterInner
      */
-    postOnly?: boolean;
+    postOnly?: string;
     /**
      *
      * @type {string}
@@ -81,10 +81,10 @@ export interface PlaceMultipleOrdersOrdersParameterInner {
     clientOrderId?: string;
     /**
      *
-     * @type {boolean}
+     * @type {string}
      * @memberof PlaceMultipleOrdersOrdersParameterInner
      */
-    isMmp?: boolean;
+    isMmp?: string;
 }
 
 export const PlaceMultipleOrdersOrdersParameterInnerSideEnum = {

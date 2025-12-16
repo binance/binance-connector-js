@@ -1,5 +1,28 @@
 # Changelog
 
+## 11.0.0 - 2025-12-16
+
+### Changed (3)
+
+- Update `@binance/common` library to version `2.1.0`.
+- Support request body params on `sendRequest` and `sendSignedRequest` functions.
+
+#### REST API
+
+- Modified parameter `orders`:
+  - items.`isMmp`: type `boolean` → `string`
+  - items.`postOnly`: type `boolean` → `string`
+  - items.`price`: type `number` → `string`
+  - items.`quantity`: type `number` → `string`
+  - items.`reduceOnly`: type `boolean` → `string`
+  - items.`isMmp`: type `boolean` → `string`
+  - items.`postOnly`: type `boolean` → `string`
+  - items.`price`: type `number` → `string`
+  - items.`quantity`: type `number` → `string`
+  - items.`reduceOnly`: type `boolean` → `string`
+  - affected methods:
+    - `placeMultipleOrders()` (`POST /eapi/v1/batchOrders`)
+
 ## 10.0.1 - 2025-11-27
 
 ### Changed (1)

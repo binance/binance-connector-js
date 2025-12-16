@@ -56,11 +56,11 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
             );
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (blockOrderMatchingKey !== undefined && blockOrderMatchingKey !== null) {
                 localVarQueryParameter['blockOrderMatchingKey'] = blockOrderMatchingKey;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -71,7 +71,8 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
             return {
                 endpoint: '/eapi/v1/block/order/execute',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -95,19 +96,17 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (underlying !== undefined && underlying !== null) {
                 localVarQueryParameter['underlying'] = underlying;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -118,7 +117,8 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
             return {
                 endpoint: '/eapi/v1/block/user-trades',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -145,11 +145,11 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
             );
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (blockOrderMatchingKey !== undefined && blockOrderMatchingKey !== null) {
                 localVarQueryParameter['blockOrderMatchingKey'] = blockOrderMatchingKey;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -160,7 +160,8 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
             return {
                 endpoint: '/eapi/v1/block/order/create',
                 method: 'DELETE',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -187,11 +188,11 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
             );
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (blockOrderMatchingKey !== undefined && blockOrderMatchingKey !== null) {
                 localVarQueryParameter['blockOrderMatchingKey'] = blockOrderMatchingKey;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -202,7 +203,8 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
             return {
                 endpoint: '/eapi/v1/block/order/create',
                 method: 'PUT',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -229,15 +231,14 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
             assertParamExists('newBlockTradeOrder', 'legs', legs);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (liquidity !== undefined && liquidity !== null) {
                 localVarQueryParameter['liquidity'] = liquidity;
             }
-
             if (legs) {
                 localVarQueryParameter['legs'] = legs;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -248,7 +249,8 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
             return {
                 endpoint: '/eapi/v1/block/order/create',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -275,11 +277,11 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
             );
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (blockOrderMatchingKey !== undefined && blockOrderMatchingKey !== null) {
                 localVarQueryParameter['blockOrderMatchingKey'] = blockOrderMatchingKey;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -290,7 +292,8 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
             return {
                 endpoint: '/eapi/v1/block/order/execute',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -316,23 +319,20 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (blockOrderMatchingKey !== undefined && blockOrderMatchingKey !== null) {
                 localVarQueryParameter['blockOrderMatchingKey'] = blockOrderMatchingKey;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (underlying !== undefined && underlying !== null) {
                 localVarQueryParameter['underlying'] = underlying;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -343,7 +343,8 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
             return {
                 endpoint: '/eapi/v1/block/order/orders',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -673,7 +674,8 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -704,7 +706,8 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -733,7 +736,8 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -762,7 +766,8 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -792,7 +797,8 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -821,7 +827,8 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -853,7 +860,8 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );

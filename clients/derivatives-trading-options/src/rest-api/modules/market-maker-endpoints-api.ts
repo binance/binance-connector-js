@@ -54,11 +54,11 @@ const MarketMakerEndpointsApiAxiosParamCreator = function (configuration: Config
             assertParamExists('autoCancelAllOpenOrders', 'underlyings', underlyings);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (underlyings !== undefined && underlyings !== null) {
                 localVarQueryParameter['underlyings'] = underlyings;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -69,7 +69,8 @@ const MarketMakerEndpointsApiAxiosParamCreator = function (configuration: Config
             return {
                 endpoint: '/eapi/v1/countdownCancelAllHeartBeat',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -91,11 +92,11 @@ const MarketMakerEndpointsApiAxiosParamCreator = function (configuration: Config
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (underlying !== undefined && underlying !== null) {
                 localVarQueryParameter['underlying'] = underlying;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -106,7 +107,8 @@ const MarketMakerEndpointsApiAxiosParamCreator = function (configuration: Config
             return {
                 endpoint: '/eapi/v1/countdownCancelAll',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -126,11 +128,11 @@ const MarketMakerEndpointsApiAxiosParamCreator = function (configuration: Config
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (underlying !== undefined && underlying !== null) {
                 localVarQueryParameter['underlying'] = underlying;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -141,7 +143,8 @@ const MarketMakerEndpointsApiAxiosParamCreator = function (configuration: Config
             return {
                 endpoint: '/eapi/v1/mmp',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -161,11 +164,11 @@ const MarketMakerEndpointsApiAxiosParamCreator = function (configuration: Config
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (underlying !== undefined && underlying !== null) {
                 localVarQueryParameter['underlying'] = underlying;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -176,7 +179,8 @@ const MarketMakerEndpointsApiAxiosParamCreator = function (configuration: Config
             return {
                 endpoint: '/eapi/v1/mmpReset',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -209,15 +213,14 @@ const MarketMakerEndpointsApiAxiosParamCreator = function (configuration: Config
             assertParamExists('setAutoCancelAllOpenOrders', 'countdownTime', countdownTime);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (underlying !== undefined && underlying !== null) {
                 localVarQueryParameter['underlying'] = underlying;
             }
-
             if (countdownTime !== undefined && countdownTime !== null) {
                 localVarQueryParameter['countdownTime'] = countdownTime;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -228,7 +231,8 @@ const MarketMakerEndpointsApiAxiosParamCreator = function (configuration: Config
             return {
                 endpoint: '/eapi/v1/countdownCancelAll',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -257,27 +261,23 @@ const MarketMakerEndpointsApiAxiosParamCreator = function (configuration: Config
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (underlying !== undefined && underlying !== null) {
                 localVarQueryParameter['underlying'] = underlying;
             }
-
             if (windowTimeInMilliseconds !== undefined && windowTimeInMilliseconds !== null) {
                 localVarQueryParameter['windowTimeInMilliseconds'] = windowTimeInMilliseconds;
             }
-
             if (frozenTimeInMilliseconds !== undefined && frozenTimeInMilliseconds !== null) {
                 localVarQueryParameter['frozenTimeInMilliseconds'] = frozenTimeInMilliseconds;
             }
-
             if (qtyLimit !== undefined && qtyLimit !== null) {
                 localVarQueryParameter['qtyLimit'] = qtyLimit;
             }
-
             if (deltaLimit !== undefined && deltaLimit !== null) {
                 localVarQueryParameter['deltaLimit'] = deltaLimit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -288,7 +288,8 @@ const MarketMakerEndpointsApiAxiosParamCreator = function (configuration: Config
             return {
                 endpoint: '/eapi/v1/mmpSet',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -590,7 +591,8 @@ export class MarketMakerEndpointsApi implements MarketMakerEndpointsApiInterface
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -621,7 +623,8 @@ export class MarketMakerEndpointsApi implements MarketMakerEndpointsApiInterface
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -651,7 +654,8 @@ export class MarketMakerEndpointsApi implements MarketMakerEndpointsApiInterface
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -681,7 +685,8 @@ export class MarketMakerEndpointsApi implements MarketMakerEndpointsApiInterface
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -717,7 +722,8 @@ export class MarketMakerEndpointsApi implements MarketMakerEndpointsApiInterface
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -752,7 +758,8 @@ export class MarketMakerEndpointsApi implements MarketMakerEndpointsApiInterface
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );

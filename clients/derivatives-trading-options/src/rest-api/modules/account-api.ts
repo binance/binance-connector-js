@@ -59,27 +59,23 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             assertParamExists('accountFundingFlow', 'currency', currency);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (currency !== undefined && currency !== null) {
                 localVarQueryParameter['currency'] = currency;
             }
-
             if (recordId !== undefined && recordId !== null) {
                 localVarQueryParameter['recordId'] = recordId;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -90,7 +86,8 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/eapi/v1/bill',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -120,15 +117,14 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             assertParamExists('getDownloadIdForOptionTransactionHistory', 'endTime', endTime);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -139,7 +135,8 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/eapi/v1/income/asyn',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -168,11 +165,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             );
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (downloadId !== undefined && downloadId !== null) {
                 localVarQueryParameter['downloadId'] = downloadId;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -183,7 +180,8 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/eapi/v1/income/asyn/id',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -199,6 +197,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          */
         optionAccountInformation: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -210,7 +209,8 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/eapi/v1/account',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -228,6 +228,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -239,7 +240,8 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/eapi/v1/marginAccount',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -489,7 +491,8 @@ export class AccountApi implements AccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -523,7 +526,8 @@ export class AccountApi implements AccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -555,7 +559,8 @@ export class AccountApi implements AccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -583,7 +588,8 @@ export class AccountApi implements AccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -612,7 +618,8 @@ export class AccountApi implements AccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
