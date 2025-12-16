@@ -60,15 +60,14 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             assertParamExists('checkCollateralRepayRate', 'collateralCoin', collateralCoin);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (loanCoin !== undefined && loanCoin !== null) {
                 localVarQueryParameter['loanCoin'] = loanCoin;
             }
-
             if (collateralCoin !== undefined && collateralCoin !== null) {
                 localVarQueryParameter['collateralCoin'] = collateralCoin;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -79,7 +78,8 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             return {
                 endpoint: '/sapi/v2/loan/flexible/repay/rate',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -116,23 +116,20 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             assertParamExists('flexibleLoanAdjustLtv', 'direction', direction);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (loanCoin !== undefined && loanCoin !== null) {
                 localVarQueryParameter['loanCoin'] = loanCoin;
             }
-
             if (collateralCoin !== undefined && collateralCoin !== null) {
                 localVarQueryParameter['collateralCoin'] = collateralCoin;
             }
-
             if (adjustmentAmount !== undefined && adjustmentAmount !== null) {
                 localVarQueryParameter['adjustmentAmount'] = adjustmentAmount;
             }
-
             if (direction !== undefined && direction !== null) {
                 localVarQueryParameter['direction'] = direction;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -143,7 +140,8 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             return {
                 endpoint: '/sapi/v2/loan/flexible/adjust/ltv',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -178,23 +176,20 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             assertParamExists('flexibleLoanBorrow', 'collateralCoin', collateralCoin);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (loanCoin !== undefined && loanCoin !== null) {
                 localVarQueryParameter['loanCoin'] = loanCoin;
             }
-
             if (loanAmount !== undefined && loanAmount !== null) {
                 localVarQueryParameter['loanAmount'] = loanAmount;
             }
-
             if (collateralCoin !== undefined && collateralCoin !== null) {
                 localVarQueryParameter['collateralCoin'] = collateralCoin;
             }
-
             if (collateralAmount !== undefined && collateralAmount !== null) {
                 localVarQueryParameter['collateralAmount'] = collateralAmount;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -205,7 +200,8 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             return {
                 endpoint: '/sapi/v2/loan/flexible/borrow',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -245,31 +241,26 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             assertParamExists('flexibleLoanRepay', 'repayAmount', repayAmount);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (loanCoin !== undefined && loanCoin !== null) {
                 localVarQueryParameter['loanCoin'] = loanCoin;
             }
-
             if (collateralCoin !== undefined && collateralCoin !== null) {
                 localVarQueryParameter['collateralCoin'] = collateralCoin;
             }
-
             if (repayAmount !== undefined && repayAmount !== null) {
                 localVarQueryParameter['repayAmount'] = repayAmount;
             }
-
             if (collateralReturn !== undefined && collateralReturn !== null) {
                 localVarQueryParameter['collateralReturn'] = collateralReturn;
             }
-
             if (fullRepayment !== undefined && fullRepayment !== null) {
                 localVarQueryParameter['fullRepayment'] = fullRepayment;
             }
-
             if (repaymentType !== undefined && repaymentType !== null) {
                 localVarQueryParameter['repaymentType'] = repaymentType;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -280,7 +271,8 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             return {
                 endpoint: '/sapi/v2/loan/flexible/repay',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -300,11 +292,11 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (loanCoin !== undefined && loanCoin !== null) {
                 localVarQueryParameter['loanCoin'] = loanCoin;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -315,7 +307,8 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             return {
                 endpoint: '/sapi/v2/loan/flexible/loanable/data',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -348,31 +341,26 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (loanCoin !== undefined && loanCoin !== null) {
                 localVarQueryParameter['loanCoin'] = loanCoin;
             }
-
             if (collateralCoin !== undefined && collateralCoin !== null) {
                 localVarQueryParameter['collateralCoin'] = collateralCoin;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -383,7 +371,8 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             return {
                 endpoint: '/sapi/v2/loan/flexible/borrow/history',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -403,11 +392,11 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (collateralCoin !== undefined && collateralCoin !== null) {
                 localVarQueryParameter['collateralCoin'] = collateralCoin;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -418,7 +407,8 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             return {
                 endpoint: '/sapi/v2/loan/flexible/collateral/data',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -447,31 +437,26 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (loanCoin !== undefined && loanCoin !== null) {
                 localVarQueryParameter['loanCoin'] = loanCoin;
             }
-
             if (collateralCoin !== undefined && collateralCoin !== null) {
                 localVarQueryParameter['collateralCoin'] = collateralCoin;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -482,7 +467,8 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             return {
                 endpoint: '/sapi/v2/loan/flexible/liquidation/history',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -515,31 +501,26 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (loanCoin !== undefined && loanCoin !== null) {
                 localVarQueryParameter['loanCoin'] = loanCoin;
             }
-
             if (collateralCoin !== undefined && collateralCoin !== null) {
                 localVarQueryParameter['collateralCoin'] = collateralCoin;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -550,7 +531,8 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             return {
                 endpoint: '/sapi/v2/loan/flexible/ltv/adjustment/history',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -576,23 +558,20 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (loanCoin !== undefined && loanCoin !== null) {
                 localVarQueryParameter['loanCoin'] = loanCoin;
             }
-
             if (collateralCoin !== undefined && collateralCoin !== null) {
                 localVarQueryParameter['collateralCoin'] = collateralCoin;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -603,7 +582,8 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             return {
                 endpoint: '/sapi/v2/loan/flexible/ongoing/orders',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -636,31 +616,26 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (loanCoin !== undefined && loanCoin !== null) {
                 localVarQueryParameter['loanCoin'] = loanCoin;
             }
-
             if (collateralCoin !== undefined && collateralCoin !== null) {
                 localVarQueryParameter['collateralCoin'] = collateralCoin;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -671,7 +646,8 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             return {
                 endpoint: '/sapi/v2/loan/flexible/repay/history',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1356,7 +1332,8 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1390,7 +1367,8 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1426,7 +1404,8 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1463,7 +1442,8 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1492,7 +1472,8 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1529,7 +1510,8 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1559,7 +1541,8 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1593,7 +1576,8 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1631,7 +1615,8 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1663,7 +1648,8 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1701,7 +1687,8 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
