@@ -63,15 +63,14 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             assertParamExists('accountList', 'userName', userName);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (algo !== undefined && algo !== null) {
                 localVarQueryParameter['algo'] = algo;
             }
-
             if (userName !== undefined && userName !== null) {
                 localVarQueryParameter['userName'] = userName;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -82,7 +81,8 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/sapi/v1/mining/statistics/user/list',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -97,6 +97,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          */
         acquiringAlgorithm: async (): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -104,7 +105,8 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/sapi/v1/mining/pub/algoList',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -119,6 +121,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          */
         acquiringCoinname: async (): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -126,7 +129,8 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/sapi/v1/mining/pub/coinList',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -152,15 +156,14 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             assertParamExists('cancelHashrateResaleConfiguration', 'userName', userName);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (configId !== undefined && configId !== null) {
                 localVarQueryParameter['configId'] = configId;
             }
-
             if (userName !== undefined && userName !== null) {
                 localVarQueryParameter['userName'] = userName;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -171,7 +174,8 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/sapi/v1/mining/hash-transfer/config/cancel',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -208,35 +212,29 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             assertParamExists('earningsList', 'userName', userName);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (algo !== undefined && algo !== null) {
                 localVarQueryParameter['algo'] = algo;
             }
-
             if (userName !== undefined && userName !== null) {
                 localVarQueryParameter['userName'] = userName;
             }
-
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
             }
-
             if (startDate !== undefined && startDate !== null) {
                 localVarQueryParameter['startDate'] = startDate;
             }
-
             if (endDate !== undefined && endDate !== null) {
                 localVarQueryParameter['endDate'] = endDate;
             }
-
             if (pageIndex !== undefined && pageIndex !== null) {
                 localVarQueryParameter['pageIndex'] = pageIndex;
             }
-
             if (pageSize !== undefined && pageSize !== null) {
                 localVarQueryParameter['pageSize'] = pageSize;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -247,7 +245,8 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/sapi/v1/mining/payment/list',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -284,35 +283,29 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             assertParamExists('extraBonusList', 'userName', userName);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (algo !== undefined && algo !== null) {
                 localVarQueryParameter['algo'] = algo;
             }
-
             if (userName !== undefined && userName !== null) {
                 localVarQueryParameter['userName'] = userName;
             }
-
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
             }
-
             if (startDate !== undefined && startDate !== null) {
                 localVarQueryParameter['startDate'] = startDate;
             }
-
             if (endDate !== undefined && endDate !== null) {
                 localVarQueryParameter['endDate'] = endDate;
             }
-
             if (pageIndex !== undefined && pageIndex !== null) {
                 localVarQueryParameter['pageIndex'] = pageIndex;
             }
-
             if (pageSize !== undefined && pageSize !== null) {
                 localVarQueryParameter['pageSize'] = pageSize;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -323,7 +316,8 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/sapi/v1/mining/payment/other',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -354,23 +348,20 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             assertParamExists('hashrateResaleDetail', 'userName', userName);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (configId !== undefined && configId !== null) {
                 localVarQueryParameter['configId'] = configId;
             }
-
             if (userName !== undefined && userName !== null) {
                 localVarQueryParameter['userName'] = userName;
             }
-
             if (pageIndex !== undefined && pageIndex !== null) {
                 localVarQueryParameter['pageIndex'] = pageIndex;
             }
-
             if (pageSize !== undefined && pageSize !== null) {
                 localVarQueryParameter['pageSize'] = pageSize;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -381,7 +372,8 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/sapi/v1/mining/hash-transfer/profit/details',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -403,15 +395,14 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (pageIndex !== undefined && pageIndex !== null) {
                 localVarQueryParameter['pageIndex'] = pageIndex;
             }
-
             if (pageSize !== undefined && pageSize !== null) {
                 localVarQueryParameter['pageSize'] = pageSize;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -422,7 +413,8 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/sapi/v1/mining/hash-transfer/config/details/list',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -465,31 +457,26 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             assertParamExists('hashrateResaleRequest', 'hashRate', hashRate);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (userName !== undefined && userName !== null) {
                 localVarQueryParameter['userName'] = userName;
             }
-
             if (algo !== undefined && algo !== null) {
                 localVarQueryParameter['algo'] = algo;
             }
-
             if (endDate !== undefined && endDate !== null) {
                 localVarQueryParameter['endDate'] = endDate;
             }
-
             if (startDate !== undefined && startDate !== null) {
                 localVarQueryParameter['startDate'] = startDate;
             }
-
             if (toPoolUser !== undefined && toPoolUser !== null) {
                 localVarQueryParameter['toPoolUser'] = toPoolUser;
             }
-
             if (hashRate !== undefined && hashRate !== null) {
                 localVarQueryParameter['hashRate'] = hashRate;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -500,7 +487,8 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/sapi/v1/mining/hash-transfer/config',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -531,27 +519,23 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             assertParamExists('miningAccountEarning', 'algo', algo);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (algo !== undefined && algo !== null) {
                 localVarQueryParameter['algo'] = algo;
             }
-
             if (startDate !== undefined && startDate !== null) {
                 localVarQueryParameter['startDate'] = startDate;
             }
-
             if (endDate !== undefined && endDate !== null) {
                 localVarQueryParameter['endDate'] = endDate;
             }
-
             if (pageIndex !== undefined && pageIndex !== null) {
                 localVarQueryParameter['pageIndex'] = pageIndex;
             }
-
             if (pageSize !== undefined && pageSize !== null) {
                 localVarQueryParameter['pageSize'] = pageSize;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -562,7 +546,8 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/sapi/v1/mining/payment/uid',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -593,19 +578,17 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             assertParamExists('requestForDetailMinerList', 'workerName', workerName);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (algo !== undefined && algo !== null) {
                 localVarQueryParameter['algo'] = algo;
             }
-
             if (userName !== undefined && userName !== null) {
                 localVarQueryParameter['userName'] = userName;
             }
-
             if (workerName !== undefined && workerName !== null) {
                 localVarQueryParameter['workerName'] = workerName;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -616,7 +599,8 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/sapi/v1/mining/worker/detail',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -651,31 +635,26 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             assertParamExists('requestForMinerList', 'userName', userName);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (algo !== undefined && algo !== null) {
                 localVarQueryParameter['algo'] = algo;
             }
-
             if (userName !== undefined && userName !== null) {
                 localVarQueryParameter['userName'] = userName;
             }
-
             if (pageIndex !== undefined && pageIndex !== null) {
                 localVarQueryParameter['pageIndex'] = pageIndex;
             }
-
             if (sort !== undefined && sort !== null) {
                 localVarQueryParameter['sort'] = sort;
             }
-
             if (sortColumn !== undefined && sortColumn !== null) {
                 localVarQueryParameter['sortColumn'] = sortColumn;
             }
-
             if (workerStatus !== undefined && workerStatus !== null) {
                 localVarQueryParameter['workerStatus'] = workerStatus;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -686,7 +665,8 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/sapi/v1/mining/worker/list',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -713,15 +693,14 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             assertParamExists('statisticList', 'userName', userName);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (algo !== undefined && algo !== null) {
                 localVarQueryParameter['algo'] = algo;
             }
-
             if (userName !== undefined && userName !== null) {
                 localVarQueryParameter['userName'] = userName;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -732,7 +711,8 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/sapi/v1/mining/statistics/user/status',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1423,7 +1403,8 @@ export class MiningApi implements MiningApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1446,7 +1427,8 @@ export class MiningApi implements MiningApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -1469,7 +1451,8 @@ export class MiningApi implements MiningApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -1499,7 +1482,8 @@ export class MiningApi implements MiningApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1534,7 +1518,8 @@ export class MiningApi implements MiningApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1569,7 +1554,8 @@ export class MiningApi implements MiningApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1601,7 +1587,8 @@ export class MiningApi implements MiningApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1631,7 +1618,8 @@ export class MiningApi implements MiningApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1665,7 +1653,8 @@ export class MiningApi implements MiningApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1698,7 +1687,8 @@ export class MiningApi implements MiningApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1729,7 +1719,8 @@ export class MiningApi implements MiningApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1763,7 +1754,8 @@ export class MiningApi implements MiningApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1793,7 +1785,8 @@ export class MiningApi implements MiningApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
