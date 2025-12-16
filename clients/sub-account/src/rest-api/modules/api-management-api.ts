@@ -65,23 +65,20 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
             assertParamExists('addIpRestrictionForSubAccountApiKey', 'status', status);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (subAccountApiKey !== undefined && subAccountApiKey !== null) {
                 localVarQueryParameter['subAccountApiKey'] = subAccountApiKey;
             }
-
             if (status !== undefined && status !== null) {
                 localVarQueryParameter['status'] = status;
             }
-
             if (ipAddress !== undefined && ipAddress !== null) {
                 localVarQueryParameter['ipAddress'] = ipAddress;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -92,7 +89,8 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
             return {
                 endpoint: '/sapi/v2/sub-account/subAccountApi/ipRestriction',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -129,19 +127,17 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
             assertParamExists('deleteIpListForASubAccountApiKey', 'ipAddress', ipAddress);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (subAccountApiKey !== undefined && subAccountApiKey !== null) {
                 localVarQueryParameter['subAccountApiKey'] = subAccountApiKey;
             }
-
             if (ipAddress !== undefined && ipAddress !== null) {
                 localVarQueryParameter['ipAddress'] = ipAddress;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -152,7 +148,8 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
             return {
                 endpoint: '/sapi/v1/sub-account/subAccountApi/ipRestriction/ipList',
                 method: 'DELETE',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -183,15 +180,14 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
             );
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (subAccountApiKey !== undefined && subAccountApiKey !== null) {
                 localVarQueryParameter['subAccountApiKey'] = subAccountApiKey;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -202,7 +198,8 @@ const ApiManagementApiAxiosParamCreator = function (configuration: Configuration
             return {
                 endpoint: '/sapi/v1/sub-account/subAccountApi/ipRestriction',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -406,7 +403,8 @@ export class ApiManagementApi implements ApiManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -440,7 +438,8 @@ export class ApiManagementApi implements ApiManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -471,7 +470,8 @@ export class ApiManagementApi implements ApiManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );

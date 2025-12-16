@@ -84,23 +84,20 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             assertParamExists('futuresTransferForSubAccount', 'type', type);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (amount !== undefined && amount !== null) {
                 localVarQueryParameter['amount'] = amount;
             }
-
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -111,7 +108,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/sapi/v1/sub-account/futures/transfer',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -134,11 +132,11 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             assertParamExists('getDetailOnSubAccountsFuturesAccount', 'email', email);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -149,7 +147,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/sapi/v1/sub-account/futures/account',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -176,15 +175,14 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             assertParamExists('getDetailOnSubAccountsFuturesAccountV2', 'futuresType', futuresType);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (futuresType !== undefined && futuresType !== null) {
                 localVarQueryParameter['futuresType'] = futuresType;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -195,7 +193,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/sapi/v2/sub-account/futures/account',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -218,11 +217,11 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             assertParamExists('getDetailOnSubAccountsMarginAccount', 'email', email);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -233,7 +232,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/sapi/v1/sub-account/margin/account',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -244,7 +244,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * If `startTime` is sent and `endTime` is not sent, return records of [max(startTime, now-90d), now].
          * If `startTime` is not sent and `endTime` is sent, return records of [max(now,endTime-90d), endTime].
          *
-         * Weight: 150
+         * Weight: 1
          *
          * @summary Get Move Position History for Sub-account (For Master Account) (USER_DATA)
          * @param {string} symbol
@@ -272,27 +272,23 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             assertParamExists('getMovePositionHistoryForSubAccount', 'row', row);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (page !== undefined && page !== null) {
                 localVarQueryParameter['page'] = page;
             }
-
             if (row !== undefined && row !== null) {
                 localVarQueryParameter['row'] = row;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -303,7 +299,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/sapi/v1/sub-account/futures/move-position',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -336,23 +333,20 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             assertParamExists('getSubAccountDepositAddress', 'coin', coin);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
             }
-
             if (network !== undefined && network !== null) {
                 localVarQueryParameter['network'] = network;
             }
-
             if (amount !== undefined && amount !== null) {
                 localVarQueryParameter['amount'] = amount;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -363,7 +357,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/sapi/v1/capital/deposit/subAddress',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -400,39 +395,32 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             assertParamExists('getSubAccountDepositHistory', 'email', email);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
             }
-
             if (status !== undefined && status !== null) {
                 localVarQueryParameter['status'] = status;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (offset !== undefined && offset !== null) {
                 localVarQueryParameter['offset'] = offset;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
-
             if (txId !== undefined && txId !== null) {
                 localVarQueryParameter['txId'] = txId;
             }
@@ -443,7 +431,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/sapi/v1/capital/deposit/subHisrec',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -461,6 +450,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -472,7 +462,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/sapi/v1/sub-account/futures/accountSummary',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -503,19 +494,17 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             );
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (futuresType !== undefined && futuresType !== null) {
                 localVarQueryParameter['futuresType'] = futuresType;
             }
-
             if (page !== undefined && page !== null) {
                 localVarQueryParameter['page'] = page;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -526,7 +515,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/sapi/v2/sub-account/futures/accountSummary',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -544,6 +534,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -555,7 +546,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/sapi/v1/sub-account/margin/accountSummary',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -592,23 +584,20 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             assertParamExists('marginTransferForSubAccount', 'type', type);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (amount !== undefined && amount !== null) {
                 localVarQueryParameter['amount'] = amount;
             }
-
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -619,7 +608,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/sapi/v1/sub-account/margin/transfer',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -638,7 +628,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * Not support for MSA.
          * Not support for the symbol under Reduce-Only.
          *
-         * Weight: 150
+         * Weight: 1
          *
          * @summary Move Position for Sub-account (For Master Account) (USER_DATA)
          * @param {string} fromUserEmail
@@ -666,23 +656,20 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             assertParamExists('movePositionForSubAccount', 'orderArgs', orderArgs);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (fromUserEmail !== undefined && fromUserEmail !== null) {
                 localVarQueryParameter['fromUserEmail'] = fromUserEmail;
             }
-
             if (toUserEmail !== undefined && toUserEmail !== null) {
                 localVarQueryParameter['toUserEmail'] = toUserEmail;
             }
-
             if (productType !== undefined && productType !== null) {
                 localVarQueryParameter['productType'] = productType;
             }
-
             if (orderArgs) {
                 localVarQueryParameter['orderArgs'] = orderArgs;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -693,7 +680,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/sapi/v1/sub-account/futures/move-position',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -716,11 +704,11 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             assertParamExists('querySubAccountAssets', 'email', email);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -731,7 +719,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/sapi/v3/sub-account/assets',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -754,11 +743,11 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             assertParamExists('querySubAccountAssetsAssetManagement', 'email', email);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -769,7 +758,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/sapi/v4/sub-account/assets',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -808,31 +798,26 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             );
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (futuresType !== undefined && futuresType !== null) {
                 localVarQueryParameter['futuresType'] = futuresType;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (page !== undefined && page !== null) {
                 localVarQueryParameter['page'] = page;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -843,7 +828,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/sapi/v1/sub-account/futures/internalTransfer',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -876,31 +862,26 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (fromEmail !== undefined && fromEmail !== null) {
                 localVarQueryParameter['fromEmail'] = fromEmail;
             }
-
             if (toEmail !== undefined && toEmail !== null) {
                 localVarQueryParameter['toEmail'] = toEmail;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (page !== undefined && page !== null) {
                 localVarQueryParameter['page'] = page;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -911,7 +892,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/sapi/v1/sub-account/sub/transfer/history',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -935,19 +917,17 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (page !== undefined && page !== null) {
                 localVarQueryParameter['page'] = page;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -958,7 +938,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/sapi/v1/sub-account/spotSummary',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -995,35 +976,29 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (fromEmail !== undefined && fromEmail !== null) {
                 localVarQueryParameter['fromEmail'] = fromEmail;
             }
-
             if (toEmail !== undefined && toEmail !== null) {
                 localVarQueryParameter['toEmail'] = toEmail;
             }
-
             if (clientTranId !== undefined && clientTranId !== null) {
                 localVarQueryParameter['clientTranId'] = clientTranId;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (page !== undefined && page !== null) {
                 localVarQueryParameter['page'] = page;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1034,7 +1009,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/sapi/v1/sub-account/universalTransfer',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1077,27 +1053,23 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             assertParamExists('subAccountFuturesAssetTransfer', 'amount', amount);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (fromEmail !== undefined && fromEmail !== null) {
                 localVarQueryParameter['fromEmail'] = fromEmail;
             }
-
             if (toEmail !== undefined && toEmail !== null) {
                 localVarQueryParameter['toEmail'] = toEmail;
             }
-
             if (futuresType !== undefined && futuresType !== null) {
                 localVarQueryParameter['futuresType'] = futuresType;
             }
-
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (amount !== undefined && amount !== null) {
                 localVarQueryParameter['amount'] = amount;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1108,7 +1080,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/sapi/v1/sub-account/futures/internalTransfer',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1141,31 +1114,26 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (returnFailHistory !== undefined && returnFailHistory !== null) {
                 localVarQueryParameter['returnFailHistory'] = returnFailHistory;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1176,7 +1144,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/sapi/v1/sub-account/transfer/subUserHistory',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1205,15 +1174,14 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             assertParamExists('transferToMaster', 'amount', amount);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (amount !== undefined && amount !== null) {
                 localVarQueryParameter['amount'] = amount;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1224,7 +1192,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/sapi/v1/sub-account/transfer/subToMaster',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1257,19 +1226,17 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             assertParamExists('transferToSubAccountOfSameMaster', 'amount', amount);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (toEmail !== undefined && toEmail !== null) {
                 localVarQueryParameter['toEmail'] = toEmail;
             }
-
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (amount !== undefined && amount !== null) {
                 localVarQueryParameter['amount'] = amount;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1280,7 +1247,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/sapi/v1/sub-account/transfer/subToSub',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1335,39 +1303,32 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             assertParamExists('universalTransfer', 'amount', amount);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (fromEmail !== undefined && fromEmail !== null) {
                 localVarQueryParameter['fromEmail'] = fromEmail;
             }
-
             if (toEmail !== undefined && toEmail !== null) {
                 localVarQueryParameter['toEmail'] = toEmail;
             }
-
             if (fromAccountType !== undefined && fromAccountType !== null) {
                 localVarQueryParameter['fromAccountType'] = fromAccountType;
             }
-
             if (toAccountType !== undefined && toAccountType !== null) {
                 localVarQueryParameter['toAccountType'] = toAccountType;
             }
-
             if (clientTranId !== undefined && clientTranId !== null) {
                 localVarQueryParameter['clientTranId'] = clientTranId;
             }
-
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (amount !== undefined && amount !== null) {
                 localVarQueryParameter['amount'] = amount;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1378,7 +1339,8 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
             return {
                 endpoint: '/sapi/v1/sub-account/universalTransfer',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1455,7 +1417,7 @@ export interface AssetManagementApiInterface {
      * If `startTime` is sent and `endTime` is not sent, return records of [max(startTime, now-90d), now].
      * If `startTime` is not sent and `endTime` is sent, return records of [max(now,endTime-90d), endTime].
      *
-     * Weight: 150
+     * Weight: 1
      *
      * @summary Get Move Position History for Sub-account (For Master Account) (USER_DATA)
      * @param {GetMovePositionHistoryForSubAccountRequest} requestParameters Request parameters.
@@ -1569,7 +1531,7 @@ export interface AssetManagementApiInterface {
      * Not support for MSA.
      * Not support for the symbol under Reduce-Only.
      *
-     * Weight: 150
+     * Weight: 1
      *
      * @summary Move Position for Sub-account (For Master Account) (USER_DATA)
      * @param {MovePositionForSubAccountRequest} requestParameters Request parameters.
@@ -2695,7 +2657,8 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2725,7 +2688,8 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2756,7 +2720,8 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2786,7 +2751,8 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2799,7 +2765,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      * If `startTime` is sent and `endTime` is not sent, return records of [max(startTime, now-90d), now].
      * If `startTime` is not sent and `endTime` is sent, return records of [max(now,endTime-90d), endTime].
      *
-     * Weight: 150
+     * Weight: 1
      *
      * @summary Get Move Position History for Sub-account (For Master Account) (USER_DATA)
      * @param {GetMovePositionHistoryForSubAccountRequest} requestParameters Request parameters.
@@ -2824,7 +2790,8 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2858,7 +2825,8 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2894,7 +2862,8 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2923,7 +2892,8 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2955,7 +2925,8 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2984,7 +2955,8 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3018,7 +2990,8 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3039,7 +3012,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      * Not support for MSA.
      * Not support for the symbol under Reduce-Only.
      *
-     * Weight: 150
+     * Weight: 1
      *
      * @summary Move Position for Sub-account (For Master Account) (USER_DATA)
      * @param {MovePositionForSubAccountRequest} requestParameters Request parameters.
@@ -3062,7 +3035,8 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3091,7 +3065,8 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3121,7 +3096,8 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3156,7 +3132,8 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3194,7 +3171,8 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3226,7 +3204,8 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3267,7 +3246,8 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3305,7 +3285,8 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3342,7 +3323,8 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3374,7 +3356,8 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3408,7 +3391,8 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3456,7 +3440,8 @@ export class AssetManagementApi implements AssetManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );

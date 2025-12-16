@@ -57,11 +57,11 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
             assertParamExists('createAVirtualSubAccount', 'subAccountString', subAccountString);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (subAccountString !== undefined && subAccountString !== null) {
                 localVarQueryParameter['subAccountString'] = subAccountString;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -72,7 +72,8 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
             return {
                 endpoint: '/sapi/v1/sub-account/virtualSubAccount',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -95,11 +96,11 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
             assertParamExists('enableFuturesForSubAccount', 'email', email);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -110,7 +111,8 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
             return {
                 endpoint: '/sapi/v1/sub-account/futures/enable',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -133,11 +135,11 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
             assertParamExists('enableOptionsForSubAccount', 'email', email);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -148,7 +150,8 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
             return {
                 endpoint: '/sapi/v1/sub-account/eoptions/enable',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -171,11 +174,11 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
             assertParamExists('getFuturesPositionRiskOfSubAccount', 'email', email);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -186,7 +189,8 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
             return {
                 endpoint: '/sapi/v1/sub-account/futures/positionRisk',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -213,15 +217,14 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
             assertParamExists('getFuturesPositionRiskOfSubAccountV2', 'futuresType', futuresType);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (futuresType !== undefined && futuresType !== null) {
                 localVarQueryParameter['futuresType'] = futuresType;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -232,7 +235,8 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
             return {
                 endpoint: '/sapi/v2/sub-account/futures/positionRisk',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -254,11 +258,11 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -269,7 +273,8 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
             return {
                 endpoint: '/sapi/v1/sub-account/status',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -295,23 +300,20 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (isFreeze !== undefined && isFreeze !== null) {
                 localVarQueryParameter['isFreeze'] = isFreeze;
             }
-
             if (page !== undefined && page !== null) {
                 localVarQueryParameter['page'] = page;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -322,7 +324,8 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
             return {
                 endpoint: '/sapi/v1/sub-account/list',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -342,11 +345,11 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -357,7 +360,8 @@ const AccountManagementApiAxiosParamCreator = function (configuration: Configura
             return {
                 endpoint: '/sapi/v1/sub-account/transaction-statistics',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -715,7 +719,8 @@ export class AccountManagementApi implements AccountManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -744,7 +749,8 @@ export class AccountManagementApi implements AccountManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -773,7 +779,8 @@ export class AccountManagementApi implements AccountManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -803,7 +810,8 @@ export class AccountManagementApi implements AccountManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -834,7 +842,8 @@ export class AccountManagementApi implements AccountManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -866,7 +875,8 @@ export class AccountManagementApi implements AccountManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -898,7 +908,8 @@ export class AccountManagementApi implements AccountManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -928,7 +939,8 @@ export class AccountManagementApi implements AccountManagementApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );

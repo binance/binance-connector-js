@@ -67,19 +67,17 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             assertParamExists('depositAssetsIntoTheManagedSubAccount', 'amount', amount);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (toEmail !== undefined && toEmail !== null) {
                 localVarQueryParameter['toEmail'] = toEmail;
             }
-
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (amount !== undefined && amount !== null) {
                 localVarQueryParameter['amount'] = amount;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -90,7 +88,8 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             return {
                 endpoint: '/sapi/v1/managed-subaccount/deposit',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -124,23 +123,20 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             assertParamExists('getManagedSubAccountDepositAddress', 'coin', coin);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
             }
-
             if (network !== undefined && network !== null) {
                 localVarQueryParameter['network'] = network;
             }
-
             if (amount !== undefined && amount !== null) {
                 localVarQueryParameter['amount'] = amount;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -151,7 +147,8 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             return {
                 endpoint: '/sapi/v1/managed-subaccount/deposit/address',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -174,11 +171,11 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             assertParamExists('queryManagedSubAccountAssetDetails', 'email', email);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -189,7 +186,8 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             return {
                 endpoint: '/sapi/v1/managed-subaccount/asset',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -212,11 +210,11 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             assertParamExists('queryManagedSubAccountFuturesAssetDetails', 'email', email);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (accountType !== undefined && accountType !== null) {
                 localVarQueryParameter['accountType'] = accountType;
             }
@@ -227,7 +225,8 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             return {
                 endpoint: '/sapi/v1/managed-subaccount/fetch-future-asset',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -251,19 +250,17 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (page !== undefined && page !== null) {
                 localVarQueryParameter['page'] = page;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -274,7 +271,8 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             return {
                 endpoint: '/sapi/v1/managed-subaccount/info',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -297,11 +295,11 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             assertParamExists('queryManagedSubAccountMarginAssetDetails', 'email', email);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (accountType !== undefined && accountType !== null) {
                 localVarQueryParameter['accountType'] = accountType;
             }
@@ -312,7 +310,8 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             return {
                 endpoint: '/sapi/v1/managed-subaccount/marginAsset',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -349,27 +348,23 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             assertParamExists('queryManagedSubAccountSnapshot', 'type', type);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -380,7 +375,8 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             return {
                 endpoint: '/sapi/v1/managed-subaccount/accountSnapshot',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -442,31 +438,26 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             );
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (page !== undefined && page !== null) {
                 localVarQueryParameter['page'] = page;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (transfers !== undefined && transfers !== null) {
                 localVarQueryParameter['transfers'] = transfers;
             }
-
             if (transferFunctionAccountType !== undefined && transferFunctionAccountType !== null) {
                 localVarQueryParameter['transferFunctionAccountType'] = transferFunctionAccountType;
             }
@@ -477,7 +468,8 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             return {
                 endpoint: '/sapi/v1/managed-subaccount/queryTransLogForInvestor',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -539,31 +531,26 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             );
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (page !== undefined && page !== null) {
                 localVarQueryParameter['page'] = page;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (transfers !== undefined && transfers !== null) {
                 localVarQueryParameter['transfers'] = transfers;
             }
-
             if (transferFunctionAccountType !== undefined && transferFunctionAccountType !== null) {
                 localVarQueryParameter['transferFunctionAccountType'] = transferFunctionAccountType;
             }
@@ -574,7 +561,8 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             return {
                 endpoint: '/sapi/v1/managed-subaccount/queryTransLogForTradeParent',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -621,31 +609,26 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             assertParamExists('queryManagedSubAccountTransferLogSubAccountTrading', 'limit', limit);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (page !== undefined && page !== null) {
                 localVarQueryParameter['page'] = page;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (transfers !== undefined && transfers !== null) {
                 localVarQueryParameter['transfers'] = transfers;
             }
-
             if (transferFunctionAccountType !== undefined && transferFunctionAccountType !== null) {
                 localVarQueryParameter['transferFunctionAccountType'] = transferFunctionAccountType;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -656,7 +639,8 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             return {
                 endpoint: '/sapi/v1/managed-subaccount/query-trans-log',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -691,23 +675,20 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             assertParamExists('withdrawlAssetsFromTheManagedSubAccount', 'amount', amount);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (fromEmail !== undefined && fromEmail !== null) {
                 localVarQueryParameter['fromEmail'] = fromEmail;
             }
-
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (amount !== undefined && amount !== null) {
                 localVarQueryParameter['amount'] = amount;
             }
-
             if (transferDate !== undefined && transferDate !== null) {
                 localVarQueryParameter['transferDate'] = transferDate;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -718,7 +699,8 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
             return {
                 endpoint: '/sapi/v1/managed-subaccount/withdraw',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1363,7 +1345,8 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1399,7 +1382,8 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1429,7 +1413,8 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1459,7 +1444,8 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1490,7 +1476,8 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1520,7 +1507,8 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1558,7 +1546,8 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1594,7 +1583,8 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1630,7 +1620,8 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1665,7 +1656,8 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1700,7 +1692,8 @@ export class ManagedSubAccountApi implements ManagedSubAccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
