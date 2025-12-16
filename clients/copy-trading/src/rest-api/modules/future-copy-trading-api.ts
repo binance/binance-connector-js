@@ -30,7 +30,6 @@ const FutureCopyTradingApiAxiosParamCreator = function (configuration: Configura
     return {
         /**
          * Get Futures Lead Trader Status
-         *
          * Weight: 20
          *
          * @summary Get Futures Lead Trader Status(TRADE)
@@ -40,6 +39,7 @@ const FutureCopyTradingApiAxiosParamCreator = function (configuration: Configura
          */
         getFuturesLeadTraderStatus: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -51,13 +51,13 @@ const FutureCopyTradingApiAxiosParamCreator = function (configuration: Configura
             return {
                 endpoint: '/sapi/v1/copyTrading/futures/userStatus',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
         /**
          * Get Futures Lead Trading Symbol Whitelist
-         *
          * Weight: 20
          *
          * @summary Get Futures Lead Trading Symbol Whitelist(USER_DATA)
@@ -69,6 +69,7 @@ const FutureCopyTradingApiAxiosParamCreator = function (configuration: Configura
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -80,7 +81,8 @@ const FutureCopyTradingApiAxiosParamCreator = function (configuration: Configura
             return {
                 endpoint: '/sapi/v1/copyTrading/futures/leadSymbol',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -94,7 +96,6 @@ const FutureCopyTradingApiAxiosParamCreator = function (configuration: Configura
 export interface FutureCopyTradingApiInterface {
     /**
      * Get Futures Lead Trader Status
-     *
      * Weight: 20
      *
      * @summary Get Futures Lead Trader Status(TRADE)
@@ -108,7 +109,6 @@ export interface FutureCopyTradingApiInterface {
     ): Promise<RestApiResponse<GetFuturesLeadTraderStatusResponse>>;
     /**
      * Get Futures Lead Trading Symbol Whitelist
-     *
      * Weight: 20
      *
      * @summary Get Futures Lead Trading Symbol Whitelist(USER_DATA)
@@ -163,7 +163,6 @@ export class FutureCopyTradingApi implements FutureCopyTradingApiInterface {
 
     /**
      * Get Futures Lead Trader Status
-     *
      * Weight: 20
      *
      * @summary Get Futures Lead Trader Status(TRADE)
@@ -183,7 +182,8 @@ export class FutureCopyTradingApi implements FutureCopyTradingApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -191,7 +191,6 @@ export class FutureCopyTradingApi implements FutureCopyTradingApiInterface {
 
     /**
      * Get Futures Lead Trading Symbol Whitelist
-     *
      * Weight: 20
      *
      * @summary Get Futures Lead Trading Symbol Whitelist(USER_DATA)
@@ -212,7 +211,8 @@ export class FutureCopyTradingApi implements FutureCopyTradingApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
