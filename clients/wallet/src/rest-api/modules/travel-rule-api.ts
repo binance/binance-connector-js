@@ -94,51 +94,41 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             assertParamExists('brokerWithdraw', 'signature', signature);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (address !== undefined && address !== null) {
                 localVarQueryParameter['address'] = address;
             }
-
             if (addressTag !== undefined && addressTag !== null) {
                 localVarQueryParameter['addressTag'] = addressTag;
             }
-
             if (network !== undefined && network !== null) {
                 localVarQueryParameter['network'] = network;
             }
-
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
             }
-
             if (addressName !== undefined && addressName !== null) {
                 localVarQueryParameter['addressName'] = addressName;
             }
-
             if (amount !== undefined && amount !== null) {
                 localVarQueryParameter['amount'] = amount;
             }
-
             if (withdrawOrderId !== undefined && withdrawOrderId !== null) {
                 localVarQueryParameter['withdrawOrderId'] = withdrawOrderId;
             }
-
             if (transactionFeeFlag !== undefined && transactionFeeFlag !== null) {
                 localVarQueryParameter['transactionFeeFlag'] = transactionFeeFlag;
             }
-
             if (walletType !== undefined && walletType !== null) {
                 localVarQueryParameter['walletType'] = walletType;
             }
-
             if (questionnaire !== undefined && questionnaire !== null) {
                 localVarQueryParameter['questionnaire'] = questionnaire;
             }
-
             if (originatorPii !== undefined && originatorPii !== null) {
                 localVarQueryParameter['originatorPii'] = originatorPii;
             }
-
             if (signature !== undefined && signature !== null) {
                 localVarQueryParameter['signature'] = signature;
             }
@@ -149,7 +139,8 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v1/localentity/broker/withdraw/apply',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -167,6 +158,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -178,7 +170,8 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v1/localentity/questionnaire-requirements',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -219,47 +212,38 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             limit?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (trId !== undefined && trId !== null) {
                 localVarQueryParameter['trId'] = trId;
             }
-
             if (txId !== undefined && txId !== null) {
                 localVarQueryParameter['txId'] = txId;
             }
-
             if (tranId !== undefined && tranId !== null) {
                 localVarQueryParameter['tranId'] = tranId;
             }
-
             if (network !== undefined && network !== null) {
                 localVarQueryParameter['network'] = network;
             }
-
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
             }
-
             if (travelRuleStatus !== undefined && travelRuleStatus !== null) {
                 localVarQueryParameter['travelRuleStatus'] = travelRuleStatus;
             }
-
             if (pendingQuestionnaire !== undefined && pendingQuestionnaire !== null) {
                 localVarQueryParameter['pendingQuestionnaire'] = pendingQuestionnaire;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (offset !== undefined && offset !== null) {
                 localVarQueryParameter['offset'] = offset;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
@@ -270,7 +254,8 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v1/localentity/deposit/history',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -307,39 +292,32 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             limit?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (depositId !== undefined && depositId !== null) {
                 localVarQueryParameter['depositId'] = depositId;
             }
-
             if (txId !== undefined && txId !== null) {
                 localVarQueryParameter['txId'] = txId;
             }
-
             if (network !== undefined && network !== null) {
                 localVarQueryParameter['network'] = network;
             }
-
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
             }
-
             if (retrieveQuestionnaire !== undefined && retrieveQuestionnaire !== null) {
                 localVarQueryParameter['retrieveQuestionnaire'] = retrieveQuestionnaire;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (offset !== undefined && offset !== null) {
                 localVarQueryParameter['offset'] = offset;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
@@ -350,7 +328,8 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v2/localentity/deposit/history',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -368,6 +347,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -379,7 +359,8 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v1/addressVerify/list',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -431,43 +412,35 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             assertParamExists('submitDepositQuestionnaire', 'signature', signature);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (subAccountId !== undefined && subAccountId !== null) {
                 localVarQueryParameter['subAccountId'] = subAccountId;
             }
-
             if (depositId !== undefined && depositId !== null) {
                 localVarQueryParameter['depositId'] = depositId;
             }
-
             if (questionnaire !== undefined && questionnaire !== null) {
                 localVarQueryParameter['questionnaire'] = questionnaire;
             }
-
             if (beneficiaryPii !== undefined && beneficiaryPii !== null) {
                 localVarQueryParameter['beneficiaryPii'] = beneficiaryPii;
             }
-
             if (network !== undefined && network !== null) {
                 localVarQueryParameter['network'] = network;
             }
-
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
             }
-
             if (amount !== undefined && amount !== null) {
                 localVarQueryParameter['amount'] = amount;
             }
-
             if (address !== undefined && address !== null) {
                 localVarQueryParameter['address'] = address;
             }
-
             if (addressTag !== undefined && addressTag !== null) {
                 localVarQueryParameter['addressTag'] = addressTag;
             }
-
             if (signature !== undefined && signature !== null) {
                 localVarQueryParameter['signature'] = signature;
             }
@@ -478,7 +451,8 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v1/localentity/broker/deposit/provide-info',
                 method: 'PUT',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -512,11 +486,11 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             );
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (tranId !== undefined && tranId !== null) {
                 localVarQueryParameter['tranId'] = tranId;
             }
-
             if (questionnaire !== undefined && questionnaire !== null) {
                 localVarQueryParameter['questionnaire'] = questionnaire;
             }
@@ -527,7 +501,8 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v1/localentity/deposit/provide-info',
                 method: 'PUT',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -543,6 +518,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          */
         vaspList: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -554,7 +530,8 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v1/localentity/vasp',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -596,47 +573,38 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (trId !== undefined && trId !== null) {
                 localVarQueryParameter['trId'] = trId;
             }
-
             if (txId !== undefined && txId !== null) {
                 localVarQueryParameter['txId'] = txId;
             }
-
             if (withdrawOrderId !== undefined && withdrawOrderId !== null) {
                 localVarQueryParameter['withdrawOrderId'] = withdrawOrderId;
             }
-
             if (network !== undefined && network !== null) {
                 localVarQueryParameter['network'] = network;
             }
-
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
             }
-
             if (travelRuleStatus !== undefined && travelRuleStatus !== null) {
                 localVarQueryParameter['travelRuleStatus'] = travelRuleStatus;
             }
-
             if (offset !== undefined && offset !== null) {
                 localVarQueryParameter['offset'] = offset;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -647,7 +615,8 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v1/localentity/withdraw/history',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -695,47 +664,38 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (trId !== undefined && trId !== null) {
                 localVarQueryParameter['trId'] = trId;
             }
-
             if (txId !== undefined && txId !== null) {
                 localVarQueryParameter['txId'] = txId;
             }
-
             if (withdrawOrderId !== undefined && withdrawOrderId !== null) {
                 localVarQueryParameter['withdrawOrderId'] = withdrawOrderId;
             }
-
             if (network !== undefined && network !== null) {
                 localVarQueryParameter['network'] = network;
             }
-
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
             }
-
             if (travelRuleStatus !== undefined && travelRuleStatus !== null) {
                 localVarQueryParameter['travelRuleStatus'] = travelRuleStatus;
             }
-
             if (offset !== undefined && offset !== null) {
                 localVarQueryParameter['offset'] = offset;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -746,7 +706,8 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v2/localentity/withdraw/history',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -798,47 +759,38 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             assertParamExists('withdrawTravelRule', 'questionnaire', questionnaire);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
             }
-
             if (withdrawOrderId !== undefined && withdrawOrderId !== null) {
                 localVarQueryParameter['withdrawOrderId'] = withdrawOrderId;
             }
-
             if (network !== undefined && network !== null) {
                 localVarQueryParameter['network'] = network;
             }
-
             if (address !== undefined && address !== null) {
                 localVarQueryParameter['address'] = address;
             }
-
             if (addressTag !== undefined && addressTag !== null) {
                 localVarQueryParameter['addressTag'] = addressTag;
             }
-
             if (amount !== undefined && amount !== null) {
                 localVarQueryParameter['amount'] = amount;
             }
-
             if (transactionFeeFlag !== undefined && transactionFeeFlag !== null) {
                 localVarQueryParameter['transactionFeeFlag'] = transactionFeeFlag;
             }
-
             if (name !== undefined && name !== null) {
                 localVarQueryParameter['name'] = name;
             }
-
             if (walletType !== undefined && walletType !== null) {
                 localVarQueryParameter['walletType'] = walletType;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
-
             if (questionnaire !== undefined && questionnaire !== null) {
                 localVarQueryParameter['questionnaire'] = questionnaire;
             }
@@ -849,7 +801,8 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v1/localentity/withdraw/apply',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1732,7 +1685,8 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1761,7 +1715,8 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1802,7 +1757,8 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1841,7 +1797,8 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1869,7 +1826,8 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1911,7 +1869,8 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1946,7 +1905,8 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1974,7 +1934,8 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2016,7 +1977,8 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2064,7 +2026,8 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2107,7 +2070,8 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );

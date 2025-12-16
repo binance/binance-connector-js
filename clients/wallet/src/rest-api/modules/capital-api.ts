@@ -48,6 +48,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          */
         allCoinsInformation: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -59,7 +60,8 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/sapi/v1/capital/config/getall',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -90,19 +92,17 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             assertParamExists('depositAddress', 'coin', coin);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
             }
-
             if (network !== undefined && network !== null) {
                 localVarQueryParameter['network'] = network;
             }
-
             if (amount !== undefined && amount !== null) {
                 localVarQueryParameter['amount'] = amount;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -113,7 +113,8 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/sapi/v1/capital/deposit/address',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -151,39 +152,32 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             txId?: string
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (includeSource !== undefined && includeSource !== null) {
                 localVarQueryParameter['includeSource'] = includeSource;
             }
-
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
             }
-
             if (status !== undefined && status !== null) {
                 localVarQueryParameter['status'] = status;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (offset !== undefined && offset !== null) {
                 localVarQueryParameter['offset'] = offset;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
-
             if (txId !== undefined && txId !== null) {
                 localVarQueryParameter['txId'] = txId;
             }
@@ -194,7 +188,8 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/sapi/v1/capital/deposit/hisrec',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -221,11 +216,11 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             assertParamExists('fetchDepositAddressListWithNetwork', 'coin', coin);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
             }
-
             if (network !== undefined && network !== null) {
                 localVarQueryParameter['network'] = network;
             }
@@ -236,7 +231,8 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/sapi/v1/capital/deposit/address/list',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -251,6 +247,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          */
         fetchWithdrawAddressList: async (): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -258,7 +255,8 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/sapi/v1/capital/withdraw/address/list',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -273,6 +271,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          */
         fetchWithdrawQuota: async (): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -280,7 +279,8 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/sapi/v1/capital/withdraw/quota',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -306,19 +306,17 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             subUserId?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (depositId !== undefined && depositId !== null) {
                 localVarQueryParameter['depositId'] = depositId;
             }
-
             if (txId !== undefined && txId !== null) {
                 localVarQueryParameter['txId'] = txId;
             }
-
             if (subAccountId !== undefined && subAccountId !== null) {
                 localVarQueryParameter['subAccountId'] = subAccountId;
             }
-
             if (subUserId !== undefined && subUserId !== null) {
                 localVarQueryParameter['subUserId'] = subUserId;
             }
@@ -329,7 +327,8 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/sapi/v1/capital/deposit/credit-apply',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -377,43 +376,35 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             assertParamExists('withdraw', 'amount', amount);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
             }
-
             if (withdrawOrderId !== undefined && withdrawOrderId !== null) {
                 localVarQueryParameter['withdrawOrderId'] = withdrawOrderId;
             }
-
             if (network !== undefined && network !== null) {
                 localVarQueryParameter['network'] = network;
             }
-
             if (address !== undefined && address !== null) {
                 localVarQueryParameter['address'] = address;
             }
-
             if (addressTag !== undefined && addressTag !== null) {
                 localVarQueryParameter['addressTag'] = addressTag;
             }
-
             if (amount !== undefined && amount !== null) {
                 localVarQueryParameter['amount'] = amount;
             }
-
             if (transactionFeeFlag !== undefined && transactionFeeFlag !== null) {
                 localVarQueryParameter['transactionFeeFlag'] = transactionFeeFlag;
             }
-
             if (name !== undefined && name !== null) {
                 localVarQueryParameter['name'] = name;
             }
-
             if (walletType !== undefined && walletType !== null) {
                 localVarQueryParameter['walletType'] = walletType;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -424,7 +415,8 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/sapi/v1/capital/withdraw/apply',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -466,39 +458,32 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
             }
-
             if (withdrawOrderId !== undefined && withdrawOrderId !== null) {
                 localVarQueryParameter['withdrawOrderId'] = withdrawOrderId;
             }
-
             if (status !== undefined && status !== null) {
                 localVarQueryParameter['status'] = status;
             }
-
             if (offset !== undefined && offset !== null) {
                 localVarQueryParameter['offset'] = offset;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (idList !== undefined && idList !== null) {
                 localVarQueryParameter['idList'] = idList;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -509,7 +494,8 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/sapi/v1/capital/withdraw/history',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1018,7 +1004,8 @@ export class CapitalApi implements CapitalApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1053,7 +1040,8 @@ export class CapitalApi implements CapitalApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1093,7 +1081,8 @@ export class CapitalApi implements CapitalApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1127,7 +1116,8 @@ export class CapitalApi implements CapitalApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1152,7 +1142,8 @@ export class CapitalApi implements CapitalApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1175,7 +1166,8 @@ export class CapitalApi implements CapitalApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1208,7 +1200,8 @@ export class CapitalApi implements CapitalApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1250,7 +1243,8 @@ export class CapitalApi implements CapitalApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1294,7 +1288,8 @@ export class CapitalApi implements CapitalApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );

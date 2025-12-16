@@ -57,6 +57,7 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          */
         assetDetail: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -68,7 +69,8 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/asset/assetDetail',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -97,23 +99,20 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -124,7 +123,8 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/asset/assetDividend',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -151,15 +151,14 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('dustTransfer', 'asset', asset);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (accountType !== undefined && accountType !== null) {
                 localVarQueryParameter['accountType'] = accountType;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -170,7 +169,8 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/asset/dust',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -195,15 +195,14 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -214,7 +213,8 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/asset/dribblet',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -239,15 +239,14 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (needBtcValuation !== undefined && needBtcValuation !== null) {
                 localVarQueryParameter['needBtcValuation'] = needBtcValuation;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -258,7 +257,8 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/asset/get-funding-asset',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -278,11 +278,11 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (accountType !== undefined && accountType !== null) {
                 localVarQueryParameter['accountType'] = accountType;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -293,7 +293,8 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/asset/dust-btc',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -331,31 +332,26 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('getCloudMiningPaymentAndRefundHistory', 'endTime', endTime);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (tranId !== undefined && tranId !== null) {
                 localVarQueryParameter['tranId'] = tranId;
             }
-
             if (clientTranId !== undefined && clientTranId !== null) {
                 localVarQueryParameter['clientTranId'] = clientTranId;
             }
-
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
@@ -366,7 +362,8 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/asset/ledger-transfer/cloud-mining/queryByPage',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -381,6 +378,7 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          */
         getOpenSymbolList: async (): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -388,7 +386,8 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/spot/open-symbol-list',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -429,35 +428,29 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('queryUserDelegationHistory', 'endTime', endTime);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -468,7 +461,8 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/asset/custody/transfer-history',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -509,35 +503,29 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('queryUserUniversalTransferHistory', 'type', type);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
-
             if (fromSymbol !== undefined && fromSymbol !== null) {
                 localVarQueryParameter['fromSymbol'] = fromSymbol;
             }
-
             if (toSymbol !== undefined && toSymbol !== null) {
                 localVarQueryParameter['toSymbol'] = toSymbol;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -548,7 +536,8 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/asset/transfer',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -568,11 +557,11 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (quoteAsset !== undefined && quoteAsset !== null) {
                 localVarQueryParameter['quoteAsset'] = quoteAsset;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -583,7 +572,8 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/asset/wallet/balance',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -607,15 +597,14 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (spotBNBBurn !== undefined && spotBNBBurn !== null) {
                 localVarQueryParameter['spotBNBBurn'] = spotBNBBurn;
             }
-
             if (interestBNBBurn !== undefined && interestBNBBurn !== null) {
                 localVarQueryParameter['interestBNBBurn'] = interestBNBBurn;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -626,7 +615,8 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/bnbBurn',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -643,11 +633,11 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          */
         tradeFee: async (symbol?: string, recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -658,7 +648,8 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/asset/tradeFee',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -683,15 +674,14 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (needBtcValuation !== undefined && needBtcValuation !== null) {
                 localVarQueryParameter['needBtcValuation'] = needBtcValuation;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -702,7 +692,8 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v3/asset/getUserAsset',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -772,27 +763,23 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('userUniversalTransfer', 'amount', amount);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (amount !== undefined && amount !== null) {
                 localVarQueryParameter['amount'] = amount;
             }
-
             if (fromSymbol !== undefined && fromSymbol !== null) {
                 localVarQueryParameter['fromSymbol'] = fromSymbol;
             }
-
             if (toSymbol !== undefined && toSymbol !== null) {
                 localVarQueryParameter['toSymbol'] = toSymbol;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -803,7 +790,8 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/asset/transfer',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1597,7 +1585,8 @@ export class AssetApi implements AssetApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1632,7 +1621,8 @@ export class AssetApi implements AssetApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1664,7 +1654,8 @@ export class AssetApi implements AssetApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1697,7 +1688,8 @@ export class AssetApi implements AssetApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1730,7 +1722,8 @@ export class AssetApi implements AssetApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1760,7 +1753,8 @@ export class AssetApi implements AssetApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1798,7 +1792,8 @@ export class AssetApi implements AssetApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1821,7 +1816,8 @@ export class AssetApi implements AssetApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -1858,7 +1854,8 @@ export class AssetApi implements AssetApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1900,7 +1897,8 @@ export class AssetApi implements AssetApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1929,7 +1927,8 @@ export class AssetApi implements AssetApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1962,7 +1961,8 @@ export class AssetApi implements AssetApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1991,7 +1991,8 @@ export class AssetApi implements AssetApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2024,7 +2025,8 @@ export class AssetApi implements AssetApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2092,7 +2094,8 @@ export class AssetApi implements AssetApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );

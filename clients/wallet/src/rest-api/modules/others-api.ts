@@ -39,6 +39,7 @@ const OthersApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -50,7 +51,8 @@ const OthersApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/sapi/v1/spot/delist-schedule',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -65,6 +67,7 @@ const OthersApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          */
         systemStatus: async (): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -72,7 +75,8 @@ const OthersApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/sapi/v1/system/status',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -160,7 +164,8 @@ export class OthersApi implements OthersApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -183,7 +188,8 @@ export class OthersApi implements OthersApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
