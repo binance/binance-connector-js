@@ -41,34 +41,51 @@ export class RestAPI {
      * Generic function to send a request.
      * @param endpoint - The API endpoint to call.
      * @param method - HTTP method to use (GET, POST, DELETE, etc.).
-     * @param params - Query parameters for the request.
+     * @param queryParams - Query parameters for the request.
+     * @param bodyParams - Body parameters for the request.
      *
      * @returns A promise resolving to the response data object.
      */
     sendRequest<T>(
         endpoint: string,
         method: 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH',
-        params: Record<string, unknown> = {}
+        queryParams: Record<string, unknown> = {},
+        bodyParams: Record<string, unknown> = {}
     ): Promise<RestApiResponse<T>> {
-        return sendRequest<T>(this.configuration, endpoint, method, params, undefined);
+        return sendRequest<T>(
+            this.configuration,
+            endpoint,
+            method,
+            queryParams,
+            bodyParams,
+            undefined
+        );
     }
 
     /**
      * Generic function to send a signed request.
      * @param endpoint - The API endpoint to call.
      * @param method - HTTP method to use (GET, POST, DELETE, etc.).
-     * @param params - Query parameters for the request.
+     * @param queryParams - Query parameters for the request.
+     * @param bodyParams - Body parameters for the request.
      *
      * @returns A promise resolving to the response data object.
      */
     sendSignedRequest<T>(
         endpoint: string,
         method: 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH',
-        params: Record<string, unknown> = {}
+        queryParams: Record<string, unknown> = {},
+        bodyParams: Record<string, unknown> = {}
     ): Promise<RestApiResponse<T>> {
-        return sendRequest<T>(this.configuration, endpoint, method, params, undefined, {
-            isSigned: true,
-        });
+        return sendRequest<T>(
+            this.configuration,
+            endpoint,
+            method,
+            queryParams,
+            bodyParams,
+            undefined,
+            { isSigned: true }
+        );
     }
 
     /**
