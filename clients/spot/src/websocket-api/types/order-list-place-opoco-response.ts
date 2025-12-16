@@ -21,39 +21,30 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderAmendKeepPriorityResponseResult } from './order-amend-keep-priority-response-result';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { RateLimits } from './rate-limits';
+import type { OrderListPlaceOpocoResponseResult } from './order-list-place-opoco-response-result';
 
 /**
  *
  * @export
- * @interface OrderAmendKeepPriorityResponse
+ * @interface OrderListPlaceOpocoResponse
  */
-export interface OrderAmendKeepPriorityResponse {
+export interface OrderListPlaceOpocoResponse {
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponse
+     * @memberof OrderListPlaceOpocoResponse
      */
     id?: string;
     /**
      *
      * @type {number | bigint}
-     * @memberof OrderAmendKeepPriorityResponse
+     * @memberof OrderListPlaceOpocoResponse
      */
     status?: number | bigint;
     /**
      *
-     * @type {OrderAmendKeepPriorityResponseResult}
-     * @memberof OrderAmendKeepPriorityResponse
+     * @type {OrderListPlaceOpocoResponseResult}
+     * @memberof OrderListPlaceOpocoResponse
      */
-    result?: OrderAmendKeepPriorityResponseResult;
-    /**
-     *
-     * @type {Array<RateLimits>}
-     * @memberof OrderAmendKeepPriorityResponse
-     */
-    rateLimits?: Array<RateLimits>;
+    result?: OrderListPlaceOpocoResponseResult;
 }

@@ -68,23 +68,20 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             assertParamExists('aggTrades', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (fromId !== undefined && fromId !== null) {
                 localVarQueryParameter['fromId'] = fromId;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
@@ -95,7 +92,8 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/api/v3/aggTrades',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -113,6 +111,7 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             assertParamExists('avgPrice', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
@@ -124,7 +123,8 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/api/v3/avgPrice',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -155,15 +155,14 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             assertParamExists('depth', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (symbolStatus !== undefined && symbolStatus !== null) {
                 localVarQueryParameter['symbolStatus'] = symbolStatus;
             }
@@ -174,7 +173,8 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/api/v3/depth',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -193,11 +193,11 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             assertParamExists('getTrades', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
@@ -208,7 +208,8 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/api/v3/trades',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -232,15 +233,14 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             assertParamExists('historicalTrades', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (fromId !== undefined && fromId !== null) {
                 localVarQueryParameter['fromId'] = fromId;
             }
@@ -251,7 +251,8 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/api/v3/historicalTrades',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -284,27 +285,23 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             assertParamExists('klines', 'interval', interval);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (interval !== undefined && interval !== null) {
                 localVarQueryParameter['interval'] = interval;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (timeZone !== undefined && timeZone !== null) {
                 localVarQueryParameter['timeZone'] = timeZone;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
@@ -315,7 +312,8 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/api/v3/klines',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -340,23 +338,20 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             symbolStatus?: TickerSymbolStatusEnum
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (symbols) {
                 localVarQueryParameter['symbols'] = symbols;
             }
-
             if (windowSize !== undefined && windowSize !== null) {
                 localVarQueryParameter['windowSize'] = windowSize;
             }
-
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (symbolStatus !== undefined && symbolStatus !== null) {
                 localVarQueryParameter['symbolStatus'] = symbolStatus;
             }
@@ -367,7 +362,8 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/api/v3/ticker',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -426,19 +422,17 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             symbolStatus?: Ticker24hrSymbolStatusEnum
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (symbols) {
                 localVarQueryParameter['symbols'] = symbols;
             }
-
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (symbolStatus !== undefined && symbolStatus !== null) {
                 localVarQueryParameter['symbolStatus'] = symbolStatus;
             }
@@ -449,7 +443,8 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/api/v3/ticker/24hr',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -494,15 +489,14 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             symbolStatus?: TickerBookTickerSymbolStatusEnum
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (symbols) {
                 localVarQueryParameter['symbols'] = symbols;
             }
-
             if (symbolStatus !== undefined && symbolStatus !== null) {
                 localVarQueryParameter['symbolStatus'] = symbolStatus;
             }
@@ -513,7 +507,8 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/api/v3/ticker/bookTicker',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -558,15 +553,14 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             symbolStatus?: TickerPriceSymbolStatusEnum
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (symbols) {
                 localVarQueryParameter['symbols'] = symbols;
             }
-
             if (symbolStatus !== undefined && symbolStatus !== null) {
                 localVarQueryParameter['symbolStatus'] = symbolStatus;
             }
@@ -577,7 +571,8 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/api/v3/ticker/price',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -602,23 +597,20 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             symbolStatus?: TickerTradingDaySymbolStatusEnum
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (symbols) {
                 localVarQueryParameter['symbols'] = symbols;
             }
-
             if (timeZone !== undefined && timeZone !== null) {
                 localVarQueryParameter['timeZone'] = timeZone;
             }
-
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (symbolStatus !== undefined && symbolStatus !== null) {
                 localVarQueryParameter['symbolStatus'] = symbolStatus;
             }
@@ -629,7 +621,8 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/api/v3/ticker/tradingDay',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -663,27 +656,23 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             assertParamExists('uiKlines', 'interval', interval);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (interval !== undefined && interval !== null) {
                 localVarQueryParameter['interval'] = interval;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (timeZone !== undefined && timeZone !== null) {
                 localVarQueryParameter['timeZone'] = timeZone;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
@@ -694,7 +683,8 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
             return {
                 endpoint: '/api/v3/uiKlines',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1374,7 +1364,8 @@ export class MarketApi implements MarketApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -1401,7 +1392,8 @@ export class MarketApi implements MarketApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -1435,7 +1427,8 @@ export class MarketApi implements MarketApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -1463,7 +1456,8 @@ export class MarketApi implements MarketApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -1492,7 +1486,8 @@ export class MarketApi implements MarketApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -1525,7 +1520,8 @@ export class MarketApi implements MarketApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -1556,7 +1552,8 @@ export class MarketApi implements MarketApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -1622,7 +1619,8 @@ export class MarketApi implements MarketApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -1675,7 +1673,8 @@ export class MarketApi implements MarketApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -1728,7 +1727,8 @@ export class MarketApi implements MarketApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -1759,7 +1759,8 @@ export class MarketApi implements MarketApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -1793,7 +1794,8 @@ export class MarketApi implements MarketApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );

@@ -112,6 +112,12 @@ export interface ExchangeInfoResponseResultSymbolsInner {
      * @type {boolean}
      * @memberof ExchangeInfoResponseResultSymbolsInner
      */
+    opoAllowed?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof ExchangeInfoResponseResultSymbolsInner
+     */
     quoteOrderQtyMarketAllowed?: boolean;
     /**
      *

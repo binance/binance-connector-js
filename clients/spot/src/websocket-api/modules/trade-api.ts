@@ -19,11 +19,12 @@
 import { WebsocketAPIBase, WebsocketApiResponse, WebsocketSendMsgOptions } from '@binance/common';
 import type {
     OpenOrdersCancelAllResponse,
-    OrderAmendKeepPriorityResponse,
     OrderCancelReplaceResponse,
     OrderCancelResponse,
     OrderListCancelResponse,
     OrderListPlaceOcoResponse,
+    OrderListPlaceOpoResponse,
+    OrderListPlaceOpocoResponse,
     OrderListPlaceOtoResponse,
     OrderListPlaceOtocoResponse,
     OrderListPlaceResponse,
@@ -53,24 +54,6 @@ export interface TradeApiInterface {
     openOrdersCancelAll(
         requestParameters: OpenOrdersCancelAllRequest
     ): Promise<WebsocketApiResponse<OpenOrdersCancelAllResponse>>;
-
-    /**
-     * Reduce the quantity of an existing open order.
-     *
-     * This adds 0 orders to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
-     *
-     * Read [Order Amend Keep Priority FAQ](faqs/order_amend_keep_priority.md) to learn more.
-     * Weight: 4
-     *
-     * @summary WebSocket Order Amend Keep Priority
-     * @param {OrderAmendKeepPriorityRequest} requestParameters Request parameters.
-     *
-     * @returns {Promise<OrderAmendKeepPriorityResponse>}
-     * @memberof TradeApiInterface
-     */
-    orderAmendKeepPriority(
-        requestParameters: OrderAmendKeepPriorityRequest
-    ): Promise<WebsocketApiResponse<OrderAmendKeepPriorityResponse>>;
 
     /**
      * Cancel an active order.
@@ -162,6 +145,40 @@ export interface TradeApiInterface {
     orderListPlaceOco(
         requestParameters: OrderListPlaceOcoRequest
     ): Promise<WebsocketApiResponse<OrderListPlaceOcoResponse>>;
+
+    /**
+     * Place an [OPO](./faqs/opo.md).
+     *
+     * OPOs add 2 orders to the EXCHANGE_MAX_NUM_ORDERS filter and MAX_NUM_ORDERS filter.
+     * Weight: 1
+     *
+     * Unfilled Order Count: 2
+     *
+     * @summary WebSocket OPO
+     * @param {OrderListPlaceOpoRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<OrderListPlaceOpoResponse>}
+     * @memberof TradeApiInterface
+     */
+    orderListPlaceOpo(
+        requestParameters: OrderListPlaceOpoRequest
+    ): Promise<WebsocketApiResponse<OrderListPlaceOpoResponse>>;
+
+    /**
+     * Place an [OPOCO](./faqs/opo.md).
+     * Weight: 1
+     *
+     * Unfilled Order Count: 3
+     *
+     * @summary WebSocket OPOCO
+     * @param {OrderListPlaceOpocoRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<OrderListPlaceOpocoResponse>}
+     * @memberof TradeApiInterface
+     */
+    orderListPlaceOpoco(
+        requestParameters: OrderListPlaceOpocoRequest
+    ): Promise<WebsocketApiResponse<OrderListPlaceOpocoResponse>>;
 
     /**
      * Places an OTO.
@@ -312,61 +329,6 @@ export interface OpenOrdersCancelAllRequest {
 }
 
 /**
- * Request parameters for orderAmendKeepPriority operation in TradeApi.
- * @interface OrderAmendKeepPriorityRequest
- */
-export interface OrderAmendKeepPriorityRequest {
-    /**
-     *
-     * @type {string}
-     * @memberof TradeApiOrderAmendKeepPriority
-     */
-    readonly symbol: string;
-
-    /**
-     * `newQty` must be greater than 0 and less than the order's quantity.
-     * @type {number}
-     * @memberof TradeApiOrderAmendKeepPriority
-     */
-    readonly newQty: number;
-
-    /**
-     * Unique WebSocket request ID.
-     * @type {string}
-     * @memberof TradeApiOrderAmendKeepPriority
-     */
-    readonly id?: string;
-
-    /**
-     * `orderId`or`origClientOrderId`mustbesent
-     * @type {number | bigint}
-     * @memberof TradeApiOrderAmendKeepPriority
-     */
-    readonly orderId?: number | bigint;
-
-    /**
-     * `orderId`or`origClientOrderId`mustbesent
-     * @type {string}
-     * @memberof TradeApiOrderAmendKeepPriority
-     */
-    readonly origClientOrderId?: string;
-
-    /**
-     * The new client order ID for the order after being amended. <br> If not sent, one will be randomly generated. <br> It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`.
-     * @type {string}
-     * @memberof TradeApiOrderAmendKeepPriority
-     */
-    readonly newClientOrderId?: string;
-
-    /**
-     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
-     * @type {number}
-     * @memberof TradeApiOrderAmendKeepPriority
-     */
-    readonly recvWindow?: number;
-}
-
-/**
  * Request parameters for orderCancel operation in TradeApi.
  * @interface OrderCancelRequest
  */
@@ -386,21 +348,21 @@ export interface OrderCancelRequest {
     readonly id?: string;
 
     /**
-     * `orderId`or`origClientOrderId`mustbesent
+     * Cancel order by orderId
      * @type {number | bigint}
      * @memberof TradeApiOrderCancel
      */
     readonly orderId?: number | bigint;
 
     /**
-     * `orderId`or`origClientOrderId`mustbesent
+     *
      * @type {string}
      * @memberof TradeApiOrderCancel
      */
     readonly origClientOrderId?: string;
 
     /**
-     * The new client order ID for the order after being amended. <br> If not sent, one will be randomly generated. <br> It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`.
+     * New ID for the canceled order. Automatically generated if not sent
      * @type {string}
      * @memberof TradeApiOrderCancel
      */
@@ -511,7 +473,7 @@ export interface OrderCancelReplaceRequest {
     readonly quoteOrderQty?: number;
 
     /**
-     * The new client order ID for the order after being amended. <br> If not sent, one will be randomly generated. <br> It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`.
+     * New ID for the canceled order. Automatically generated if not sent
      * @type {string}
      * @memberof TradeApiOrderCancelReplace
      */
@@ -645,7 +607,7 @@ export interface OrderListCancelRequest {
     readonly listClientOrderId?: string;
 
     /**
-     * The new client order ID for the order after being amended. <br> If not sent, one will be randomly generated. <br> It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`.
+     * New ID for the canceled order. Automatically generated if not sent
      * @type {string}
      * @memberof TradeApiOrderListCancel
      */
@@ -1043,6 +1005,536 @@ export interface OrderListPlaceOcoRequest {
 }
 
 /**
+ * Request parameters for orderListPlaceOpo operation in TradeApi.
+ * @interface OrderListPlaceOpoRequest
+ */
+export interface OrderListPlaceOpoRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly symbol: string;
+
+    /**
+     *
+     * @type {'LIMIT' | 'LIMIT_MAKER'}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly workingType: OrderListPlaceOpoWorkingTypeEnum;
+
+    /**
+     *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly workingSide: OrderListPlaceOpoWorkingSideEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly workingPrice: number;
+
+    /**
+     * Sets the quantity for the working order.
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly workingQuantity: number;
+
+    /**
+     *
+     * @type {'LIMIT' | 'MARKET' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER'}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly pendingType: OrderListPlaceOpoPendingTypeEnum;
+
+    /**
+     *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly pendingSide: OrderListPlaceOpoPendingSideEnum;
+
+    /**
+     * Unique WebSocket request ID.
+     * @type {string}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly id?: string;
+
+    /**
+     *
+     * @type {string}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly listClientOrderId?: string;
+
+    /**
+     *
+     * @type {'ACK' | 'RESULT' | 'FULL' | 'MARKET' | 'LIMIT'}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly newOrderRespType?: OrderListPlaceOpoNewOrderRespTypeEnum;
+
+    /**
+     *
+     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'DECREMENT' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly selfTradePreventionMode?: OrderListPlaceOpoSelfTradePreventionModeEnum;
+
+    /**
+     * Arbitrary unique ID among open orders for the working order. Automatically generated if not sent.
+     * @type {string}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly workingClientOrderId?: string;
+
+    /**
+     * This can only be used if `workingTimeInForce` is `GTC`, or if `workingType` is `LIMIT_MAKER`.
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly workingIcebergQty?: number;
+
+    /**
+     *
+     * @type {'GTC' | 'IOC' | 'FOK'}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly workingTimeInForce?: OrderListPlaceOpoWorkingTimeInForceEnum;
+
+    /**
+     * Arbitrary numeric value identifying the working order within an order strategy.
+     * @type {number | bigint}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly workingStrategyId?: number | bigint;
+
+    /**
+     * Arbitrary numeric value identifying the working order strategy. Values smaller than 1000000 are reserved and cannot be used.
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly workingStrategyType?: number;
+
+    /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly workingPegPriceType?: OrderListPlaceOpoWorkingPegPriceTypeEnum;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL'}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly workingPegOffsetType?: OrderListPlaceOpoWorkingPegOffsetTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly workingPegOffsetValue?: number;
+
+    /**
+     * Arbitrary unique ID among open orders for the pending order. Automatically generated if not sent.
+     * @type {string}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly pendingClientOrderId?: string;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly pendingPrice?: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly pendingStopPrice?: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly pendingTrailingDelta?: number;
+
+    /**
+     * This can only be used if `pendingTimeInForce` is `GTC` or if `pendingType` is `LIMIT_MAKER`.
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly pendingIcebergQty?: number;
+
+    /**
+     *
+     * @type {'GTC' | 'IOC' | 'FOK'}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly pendingTimeInForce?: OrderListPlaceOpoPendingTimeInForceEnum;
+
+    /**
+     * Arbitrary numeric value identifying the pending order within an order strategy.
+     * @type {number | bigint}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly pendingStrategyId?: number | bigint;
+
+    /**
+     * Arbitrary numeric value identifying the pending order strategy. Values smaller than 1000000 are reserved and cannot be used.
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly pendingStrategyType?: number;
+
+    /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly pendingPegPriceType?: OrderListPlaceOpoPendingPegPriceTypeEnum;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL'}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly pendingPegOffsetType?: OrderListPlaceOpoPendingPegOffsetTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly pendingPegOffsetValue?: number;
+
+    /**
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpo
+     */
+    readonly recvWindow?: number;
+}
+
+/**
+ * Request parameters for orderListPlaceOpoco operation in TradeApi.
+ * @interface OrderListPlaceOpocoRequest
+ */
+export interface OrderListPlaceOpocoRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly symbol: string;
+
+    /**
+     *
+     * @type {'LIMIT' | 'LIMIT_MAKER'}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly workingType: OrderListPlaceOpocoWorkingTypeEnum;
+
+    /**
+     *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly workingSide: OrderListPlaceOpocoWorkingSideEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly workingPrice: number;
+
+    /**
+     * Sets the quantity for the working order.
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly workingQuantity: number;
+
+    /**
+     *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly pendingSide: OrderListPlaceOpocoPendingSideEnum;
+
+    /**
+     *
+     * @type {'STOP_LOSS_LIMIT' | 'STOP_LOSS' | 'LIMIT_MAKER' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT'}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly pendingAboveType: OrderListPlaceOpocoPendingAboveTypeEnum;
+
+    /**
+     * Unique WebSocket request ID.
+     * @type {string}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly id?: string;
+
+    /**
+     *
+     * @type {string}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly listClientOrderId?: string;
+
+    /**
+     *
+     * @type {'ACK' | 'RESULT' | 'FULL' | 'MARKET' | 'LIMIT'}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly newOrderRespType?: OrderListPlaceOpocoNewOrderRespTypeEnum;
+
+    /**
+     *
+     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'DECREMENT' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly selfTradePreventionMode?: OrderListPlaceOpocoSelfTradePreventionModeEnum;
+
+    /**
+     * Arbitrary unique ID among open orders for the working order. Automatically generated if not sent.
+     * @type {string}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly workingClientOrderId?: string;
+
+    /**
+     * This can only be used if `workingTimeInForce` is `GTC`, or if `workingType` is `LIMIT_MAKER`.
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly workingIcebergQty?: number;
+
+    /**
+     *
+     * @type {'GTC' | 'IOC' | 'FOK'}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly workingTimeInForce?: OrderListPlaceOpocoWorkingTimeInForceEnum;
+
+    /**
+     * Arbitrary numeric value identifying the working order within an order strategy.
+     * @type {number | bigint}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly workingStrategyId?: number | bigint;
+
+    /**
+     * Arbitrary numeric value identifying the working order strategy. Values smaller than 1000000 are reserved and cannot be used.
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly workingStrategyType?: number;
+
+    /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly workingPegPriceType?: OrderListPlaceOpocoWorkingPegPriceTypeEnum;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL'}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly workingPegOffsetType?: OrderListPlaceOpocoWorkingPegOffsetTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly workingPegOffsetValue?: number;
+
+    /**
+     * Arbitrary unique ID among open orders for the pending above order. Automatically generated if not sent.
+     * @type {string}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly pendingAboveClientOrderId?: string;
+
+    /**
+     * Can be used if `pendingAboveType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly pendingAbovePrice?: number;
+
+    /**
+     * Can be used if `pendingAboveType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT`
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly pendingAboveStopPrice?: number;
+
+    /**
+     * See [Trailing Stop FAQ](./faqs/trailing-stop-faq.md)
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly pendingAboveTrailingDelta?: number;
+
+    /**
+     * This can only be used if `pendingAboveTimeInForce` is `GTC` or if `pendingAboveType` is `LIMIT_MAKER`.
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly pendingAboveIcebergQty?: number;
+
+    /**
+     *
+     * @type {'GTC' | 'IOC' | 'FOK'}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly pendingAboveTimeInForce?: OrderListPlaceOpocoPendingAboveTimeInForceEnum;
+
+    /**
+     * Arbitrary numeric value identifying the pending above order within an order strategy.
+     * @type {number | bigint}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly pendingAboveStrategyId?: number | bigint;
+
+    /**
+     * Arbitrary numeric value identifying the pending above order strategy. Values smaller than 1000000 are reserved and cannot be used.
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly pendingAboveStrategyType?: number;
+
+    /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly pendingAbovePegPriceType?: OrderListPlaceOpocoPendingAbovePegPriceTypeEnum;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL'}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly pendingAbovePegOffsetType?: OrderListPlaceOpocoPendingAbovePegOffsetTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly pendingAbovePegOffsetValue?: number;
+
+    /**
+     *
+     * @type {'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT'}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly pendingBelowType?: OrderListPlaceOpocoPendingBelowTypeEnum;
+
+    /**
+     * Arbitrary unique ID among open orders for the pending below order. Automatically generated if not sent.
+     * @type {string}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly pendingBelowClientOrderId?: string;
+
+    /**
+     * Can be used if `pendingBelowType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT` to specify limit price
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly pendingBelowPrice?: number;
+
+    /**
+     * Can be used if `pendingBelowType` is `STOP_LOSS`, `STOP_LOSS_LIMIT, TAKE_PROFIT or TAKE_PROFIT_LIMIT`. Either `pendingBelowStopPrice` or `pendingBelowTrailingDelta` or both, must be specified.
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly pendingBelowStopPrice?: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly pendingBelowTrailingDelta?: number;
+
+    /**
+     * This can only be used if `pendingBelowTimeInForce` is `GTC`, or if `pendingBelowType` is `LIMIT_MAKER`.
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly pendingBelowIcebergQty?: number;
+
+    /**
+     *
+     * @type {'GTC' | 'IOC' | 'FOK'}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly pendingBelowTimeInForce?: OrderListPlaceOpocoPendingBelowTimeInForceEnum;
+
+    /**
+     * Arbitrary numeric value identifying the pending below order within an order strategy.
+     * @type {number | bigint}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly pendingBelowStrategyId?: number | bigint;
+
+    /**
+     * Arbitrary numeric value identifying the pending below order strategy. Values smaller than 1000000 are reserved and cannot be used.
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly pendingBelowStrategyType?: number;
+
+    /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly pendingBelowPegPriceType?: OrderListPlaceOpocoPendingBelowPegPriceTypeEnum;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL'}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly pendingBelowPegOffsetType?: OrderListPlaceOpocoPendingBelowPegOffsetTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly pendingBelowPegOffsetValue?: number;
+
+    /**
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * @type {number}
+     * @memberof TradeApiOrderListPlaceOpoco
+     */
+    readonly recvWindow?: number;
+}
+
+/**
  * Request parameters for orderListPlaceOto operation in TradeApi.
  * @interface OrderListPlaceOtoRequest
  */
@@ -1132,7 +1624,7 @@ export interface OrderListPlaceOtoRequest {
     readonly selfTradePreventionMode?: OrderListPlaceOtoSelfTradePreventionModeEnum;
 
     /**
-     * Arbitrary unique ID among open orders for the working order.<br> Automatically generated if not sent.
+     * Arbitrary unique ID among open orders for the working order. Automatically generated if not sent.
      * @type {string}
      * @memberof TradeApiOrderListPlaceOto
      */
@@ -1160,7 +1652,7 @@ export interface OrderListPlaceOtoRequest {
     readonly workingStrategyId?: number | bigint;
 
     /**
-     * Arbitrary numeric value identifying the working order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
+     * Arbitrary numeric value identifying the working order strategy. Values smaller than 1000000 are reserved and cannot be used.
      * @type {number}
      * @memberof TradeApiOrderListPlaceOto
      */
@@ -1188,7 +1680,7 @@ export interface OrderListPlaceOtoRequest {
     readonly workingPegOffsetValue?: number;
 
     /**
-     * Arbitrary unique ID among open orders for the pending order.<br> Automatically generated if not sent.
+     * Arbitrary unique ID among open orders for the pending order. Automatically generated if not sent.
      * @type {string}
      * @memberof TradeApiOrderListPlaceOto
      */
@@ -1216,7 +1708,7 @@ export interface OrderListPlaceOtoRequest {
     readonly pendingTrailingDelta?: number;
 
     /**
-     * This can only be used if `pendingTimeInForce` is `GTC`, or if `pendingType` is `LIMIT_MAKER`.
+     * This can only be used if `pendingTimeInForce` is `GTC` or if `pendingType` is `LIMIT_MAKER`.
      * @type {number}
      * @memberof TradeApiOrderListPlaceOto
      */
@@ -1237,7 +1729,7 @@ export interface OrderListPlaceOtoRequest {
     readonly pendingStrategyId?: number | bigint;
 
     /**
-     * Arbitrary numeric value identifying the pending order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
+     * Arbitrary numeric value identifying the pending order strategy. Values smaller than 1000000 are reserved and cannot be used.
      * @type {number}
      * @memberof TradeApiOrderListPlaceOto
      */
@@ -1362,7 +1854,7 @@ export interface OrderListPlaceOtocoRequest {
     readonly selfTradePreventionMode?: OrderListPlaceOtocoSelfTradePreventionModeEnum;
 
     /**
-     * Arbitrary unique ID among open orders for the working order.<br> Automatically generated if not sent.
+     * Arbitrary unique ID among open orders for the working order. Automatically generated if not sent.
      * @type {string}
      * @memberof TradeApiOrderListPlaceOtoco
      */
@@ -1390,7 +1882,7 @@ export interface OrderListPlaceOtocoRequest {
     readonly workingStrategyId?: number | bigint;
 
     /**
-     * Arbitrary numeric value identifying the working order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
+     * Arbitrary numeric value identifying the working order strategy. Values smaller than 1000000 are reserved and cannot be used.
      * @type {number}
      * @memberof TradeApiOrderListPlaceOtoco
      */
@@ -1418,7 +1910,7 @@ export interface OrderListPlaceOtocoRequest {
     readonly workingPegOffsetValue?: number;
 
     /**
-     * Arbitrary unique ID among open orders for the pending above order.<br> Automatically generated if not sent.
+     * Arbitrary unique ID among open orders for the pending above order. Automatically generated if not sent.
      * @type {string}
      * @memberof TradeApiOrderListPlaceOtoco
      */
@@ -1439,7 +1931,7 @@ export interface OrderListPlaceOtocoRequest {
     readonly pendingAboveStopPrice?: number;
 
     /**
-     * See [Trailing Stop FAQ](faqs/trailing-stop-faq.md)
+     * See [Trailing Stop FAQ](./faqs/trailing-stop-faq.md)
      * @type {number}
      * @memberof TradeApiOrderListPlaceOtoco
      */
@@ -1467,7 +1959,7 @@ export interface OrderListPlaceOtocoRequest {
     readonly pendingAboveStrategyId?: number | bigint;
 
     /**
-     * Arbitrary numeric value identifying the pending above order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
+     * Arbitrary numeric value identifying the pending above order strategy. Values smaller than 1000000 are reserved and cannot be used.
      * @type {number}
      * @memberof TradeApiOrderListPlaceOtoco
      */
@@ -1502,21 +1994,21 @@ export interface OrderListPlaceOtocoRequest {
     readonly pendingBelowType?: OrderListPlaceOtocoPendingBelowTypeEnum;
 
     /**
-     * Arbitrary unique ID among open orders for the pending below order.<br> Automatically generated if not sent.
+     * Arbitrary unique ID among open orders for the pending below order. Automatically generated if not sent.
      * @type {string}
      * @memberof TradeApiOrderListPlaceOtoco
      */
     readonly pendingBelowClientOrderId?: string;
 
     /**
-     * Can be used if `pendingBelowType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT` to specify the limit price.
+     * Can be used if `pendingBelowType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT` to specify limit price
      * @type {number}
      * @memberof TradeApiOrderListPlaceOtoco
      */
     readonly pendingBelowPrice?: number;
 
     /**
-     * Can be used if `pendingBelowType` is `STOP_LOSS`, `STOP_LOSS_LIMIT, TAKE_PROFIT or TAKE_PROFIT_LIMIT`. <br>Either `pendingBelowStopPrice` or `pendingBelowTrailingDelta` or both, must be specified.
+     * Can be used if `pendingBelowType` is `STOP_LOSS`, `STOP_LOSS_LIMIT, TAKE_PROFIT or TAKE_PROFIT_LIMIT`. Either `pendingBelowStopPrice` or `pendingBelowTrailingDelta` or both, must be specified.
      * @type {number}
      * @memberof TradeApiOrderListPlaceOtoco
      */
@@ -1551,7 +2043,7 @@ export interface OrderListPlaceOtocoRequest {
     readonly pendingBelowStrategyId?: number | bigint;
 
     /**
-     * Arbitrary numeric value identifying the pending below order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
+     * Arbitrary numeric value identifying the pending below order strategy. Values smaller than 1000000 are reserved and cannot be used.
      * @type {number}
      * @memberof TradeApiOrderListPlaceOtoco
      */
@@ -1648,7 +2140,7 @@ export interface OrderPlaceRequest {
     readonly quoteOrderQty?: number;
 
     /**
-     * The new client order ID for the order after being amended. <br> If not sent, one will be randomly generated. <br> It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`.
+     * New ID for the canceled order. Automatically generated if not sent
      * @type {string}
      * @memberof TradeApiOrderPlace
      */
@@ -1803,7 +2295,7 @@ export interface OrderTestRequest {
     readonly quoteOrderQty?: number;
 
     /**
-     * The new client order ID for the order after being amended. <br> If not sent, one will be randomly generated. <br> It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`.
+     * New ID for the canceled order. Automatically generated if not sent
      * @type {string}
      * @memberof TradeApiOrderTest
      */
@@ -1944,7 +2436,7 @@ export interface SorOrderPlaceRequest {
     readonly price?: number;
 
     /**
-     * The new client order ID for the order after being amended. <br> If not sent, one will be randomly generated. <br> It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`.
+     * New ID for the canceled order. Automatically generated if not sent
      * @type {string}
      * @memberof TradeApiSorOrderPlace
      */
@@ -2056,7 +2548,7 @@ export interface SorOrderTestRequest {
     readonly price?: number;
 
     /**
-     * The new client order ID for the order after being amended. <br> If not sent, one will be randomly generated. <br> It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`.
+     * New ID for the canceled order. Automatically generated if not sent
      * @type {string}
      * @memberof TradeApiSorOrderTest
      */
@@ -2134,30 +2626,6 @@ export class TradeApi implements TradeApiInterface {
     ): Promise<WebsocketApiResponse<OpenOrdersCancelAllResponse>> {
         return this.websocketBase.sendMessage<OpenOrdersCancelAllResponse>(
             '/openOrders.cancelAll'.slice(1),
-            requestParameters as unknown as WebsocketSendMsgOptions,
-            { isSigned: true, withApiKey: false }
-        );
-    }
-
-    /**
-     * Reduce the quantity of an existing open order.
-     *
-     * This adds 0 orders to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
-     *
-     * Read [Order Amend Keep Priority FAQ](faqs/order_amend_keep_priority.md) to learn more.
-     * Weight: 4
-     *
-     * @summary WebSocket Order Amend Keep Priority
-     * @param {OrderAmendKeepPriorityRequest} requestParameters Request parameters.
-     * @returns {Promise<OrderAmendKeepPriorityResponse>}
-     * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#order-amend-keep-priority-trade Binance API Documentation}
-     */
-    public orderAmendKeepPriority(
-        requestParameters: OrderAmendKeepPriorityRequest
-    ): Promise<WebsocketApiResponse<OrderAmendKeepPriorityResponse>> {
-        return this.websocketBase.sendMessage<OrderAmendKeepPriorityResponse>(
-            '/order.amend.keepPriority'.slice(1),
             requestParameters as unknown as WebsocketSendMsgOptions,
             { isSigned: true, withApiKey: false }
         );
@@ -2279,6 +2747,52 @@ export class TradeApi implements TradeApiInterface {
     ): Promise<WebsocketApiResponse<OrderListPlaceOcoResponse>> {
         return this.websocketBase.sendMessage<OrderListPlaceOcoResponse>(
             '/orderList.place.oco'.slice(1),
+            requestParameters as unknown as WebsocketSendMsgOptions,
+            { isSigned: true, withApiKey: false }
+        );
+    }
+
+    /**
+     * Place an [OPO](./faqs/opo.md).
+     *
+     * OPOs add 2 orders to the EXCHANGE_MAX_NUM_ORDERS filter and MAX_NUM_ORDERS filter.
+     * Weight: 1
+     *
+     * Unfilled Order Count: 2
+     *
+     * @summary WebSocket OPO
+     * @param {OrderListPlaceOpoRequest} requestParameters Request parameters.
+     * @returns {Promise<OrderListPlaceOpoResponse>}
+     * @memberof TradeApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#opo-trade Binance API Documentation}
+     */
+    public orderListPlaceOpo(
+        requestParameters: OrderListPlaceOpoRequest
+    ): Promise<WebsocketApiResponse<OrderListPlaceOpoResponse>> {
+        return this.websocketBase.sendMessage<OrderListPlaceOpoResponse>(
+            '/orderList.place.opo'.slice(1),
+            requestParameters as unknown as WebsocketSendMsgOptions,
+            { isSigned: true, withApiKey: false }
+        );
+    }
+
+    /**
+     * Place an [OPOCO](./faqs/opo.md).
+     * Weight: 1
+     *
+     * Unfilled Order Count: 3
+     *
+     * @summary WebSocket OPOCO
+     * @param {OrderListPlaceOpocoRequest} requestParameters Request parameters.
+     * @returns {Promise<OrderListPlaceOpocoResponse>}
+     * @memberof TradeApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#opoco-trade Binance API Documentation}
+     */
+    public orderListPlaceOpoco(
+        requestParameters: OrderListPlaceOpocoRequest
+    ): Promise<WebsocketApiResponse<OrderListPlaceOpocoResponse>> {
+        return this.websocketBase.sendMessage<OrderListPlaceOpocoResponse>(
+            '/orderList.place.opoco'.slice(1),
             requestParameters as unknown as WebsocketSendMsgOptions,
             { isSigned: true, withApiKey: false }
         );
@@ -2609,6 +3123,170 @@ export enum OrderListPlaceOcoSelfTradePreventionModeEnum {
     EXPIRE_BOTH = 'EXPIRE_BOTH',
     DECREMENT = 'DECREMENT',
     NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum OrderListPlaceOpoWorkingTypeEnum {
+    LIMIT = 'LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+}
+
+export enum OrderListPlaceOpoWorkingSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
+
+export enum OrderListPlaceOpoPendingTypeEnum {
+    LIMIT = 'LIMIT',
+    MARKET = 'MARKET',
+    STOP_LOSS = 'STOP_LOSS',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+}
+
+export enum OrderListPlaceOpoPendingSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
+
+export enum OrderListPlaceOpoNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+}
+
+export enum OrderListPlaceOpoSelfTradePreventionModeEnum {
+    NONE = 'NONE',
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    DECREMENT = 'DECREMENT',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum OrderListPlaceOpoWorkingTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
+
+export enum OrderListPlaceOpoWorkingPegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+}
+
+export enum OrderListPlaceOpoWorkingPegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
+}
+
+export enum OrderListPlaceOpoPendingTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
+
+export enum OrderListPlaceOpoPendingPegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+}
+
+export enum OrderListPlaceOpoPendingPegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
+}
+
+export enum OrderListPlaceOpocoWorkingTypeEnum {
+    LIMIT = 'LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+}
+
+export enum OrderListPlaceOpocoWorkingSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
+
+export enum OrderListPlaceOpocoPendingSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
+
+export enum OrderListPlaceOpocoPendingAboveTypeEnum {
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    STOP_LOSS = 'STOP_LOSS',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+}
+
+export enum OrderListPlaceOpocoNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+}
+
+export enum OrderListPlaceOpocoSelfTradePreventionModeEnum {
+    NONE = 'NONE',
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    DECREMENT = 'DECREMENT',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum OrderListPlaceOpocoWorkingTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
+
+export enum OrderListPlaceOpocoWorkingPegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+}
+
+export enum OrderListPlaceOpocoWorkingPegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
+}
+
+export enum OrderListPlaceOpocoPendingAboveTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
+
+export enum OrderListPlaceOpocoPendingAbovePegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+}
+
+export enum OrderListPlaceOpocoPendingAbovePegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
+}
+
+export enum OrderListPlaceOpocoPendingBelowTypeEnum {
+    STOP_LOSS = 'STOP_LOSS',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+}
+
+export enum OrderListPlaceOpocoPendingBelowTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
+
+export enum OrderListPlaceOpocoPendingBelowPegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+}
+
+export enum OrderListPlaceOpocoPendingBelowPegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
 }
 
 export enum OrderListPlaceOtoWorkingTypeEnum {

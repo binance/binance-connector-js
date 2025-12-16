@@ -21,25 +21,25 @@
 /**
  *
  * @export
- * @interface OrderAmendKeepPriorityResponseResultListStatusOrdersInner
+ * @interface OrderListPlaceOpoResponseResultOrdersInner
  */
-export interface OrderAmendKeepPriorityResponseResultListStatusOrdersInner {
+export interface OrderListPlaceOpoResponseResultOrdersInner {
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponseResultListStatusOrdersInner
+     * @memberof OrderListPlaceOpoResponseResultOrdersInner
      */
     symbol?: string;
     /**
      *
      * @type {number | bigint}
-     * @memberof OrderAmendKeepPriorityResponseResultListStatusOrdersInner
+     * @memberof OrderListPlaceOpoResponseResultOrdersInner
      */
     orderId?: number | bigint;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponseResultListStatusOrdersInner
+     * @memberof OrderListPlaceOpoResponseResultOrdersInner
      */
     clientOrderId?: string;
 }

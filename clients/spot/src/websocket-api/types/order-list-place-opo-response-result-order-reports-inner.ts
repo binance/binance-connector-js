@@ -21,109 +21,103 @@
 /**
  *
  * @export
- * @interface OrderAmendKeepPriorityResponseResultAmendedOrder
+ * @interface OrderListPlaceOpoResponseResultOrderReportsInner
  */
-export interface OrderAmendKeepPriorityResponseResultAmendedOrder {
+export interface OrderListPlaceOpoResponseResultOrderReportsInner {
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
+     * @memberof OrderListPlaceOpoResponseResultOrderReportsInner
      */
     symbol?: string;
     /**
      *
      * @type {number | bigint}
-     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
+     * @memberof OrderListPlaceOpoResponseResultOrderReportsInner
      */
     orderId?: number | bigint;
     /**
      *
      * @type {number | bigint}
-     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
+     * @memberof OrderListPlaceOpoResponseResultOrderReportsInner
      */
     orderListId?: number | bigint;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
-     */
-    origClientOrderId?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
+     * @memberof OrderListPlaceOpoResponseResultOrderReportsInner
      */
     clientOrderId?: string;
     /**
      *
+     * @type {number | bigint}
+     * @memberof OrderListPlaceOpoResponseResultOrderReportsInner
+     */
+    transactTime?: number | bigint;
+    /**
+     *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
+     * @memberof OrderListPlaceOpoResponseResultOrderReportsInner
      */
     price?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
+     * @memberof OrderListPlaceOpoResponseResultOrderReportsInner
      */
-    qty?: string;
+    origQty?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
+     * @memberof OrderListPlaceOpoResponseResultOrderReportsInner
      */
     executedQty?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
+     * @memberof OrderListPlaceOpoResponseResultOrderReportsInner
      */
-    preventedQty?: string;
+    origQuoteOrderQty?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
+     * @memberof OrderListPlaceOpoResponseResultOrderReportsInner
      */
-    quoteOrderQty?: string;
+    cummulativeQuoteQty?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
-     */
-    cumulativeQuoteQty?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
+     * @memberof OrderListPlaceOpoResponseResultOrderReportsInner
      */
     status?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
+     * @memberof OrderListPlaceOpoResponseResultOrderReportsInner
      */
     timeInForce?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
+     * @memberof OrderListPlaceOpoResponseResultOrderReportsInner
      */
     type?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
+     * @memberof OrderListPlaceOpoResponseResultOrderReportsInner
      */
     side?: string;
     /**
      *
      * @type {number | bigint}
-     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
+     * @memberof OrderListPlaceOpoResponseResultOrderReportsInner
      */
     workingTime?: number | bigint;
     /**
      *
      * @type {string}
-     * @memberof OrderAmendKeepPriorityResponseResultAmendedOrder
+     * @memberof OrderListPlaceOpoResponseResultOrderReportsInner
      */
     selfTradePreventionMode?: string;
 }

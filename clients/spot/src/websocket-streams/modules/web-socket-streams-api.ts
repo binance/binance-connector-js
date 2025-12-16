@@ -27,7 +27,6 @@ import type {
     AggTradeResponse,
     AllMarketRollingWindowTickerResponse,
     AllMiniTickerResponse,
-    AllTickerResponse,
     AvgPriceResponse,
     BookTickerResponse,
     DiffBookDepthResponse,
@@ -92,18 +91,6 @@ const WebSocketStreamsApiParamCreator = function () {
          */
         allMiniTicker: (id?: string): string => {
             return replaceWebsocketStreamsPlaceholders('/!miniTicker@arr'.slice(1), { id });
-        },
-        /**
-         * 24hr rolling window ticker statistics for all symbols that changed in an array. These are NOT the statistics of the UTC day, but a 24hr rolling window for the previous 24hrs. Note that only tickers that have changed will be present in the array.
-         *
-         * @summary WebSocket All Market Tickers Stream (DEPRECATED)
-         * @param {string} [id] Unique WebSocket request ID.
-         *
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        allTicker: (id?: string): string => {
-            return replaceWebsocketStreamsPlaceholders('/!ticker@arr'.slice(1), { id });
         },
         /**
          * Average price streams push changes in the average price over a fixed time interval.
@@ -356,18 +343,6 @@ export interface WebSocketStreamsApiInterface {
     allMiniTicker(requestParameters?: AllMiniTickerRequest): WebsocketStream<AllMiniTickerResponse>;
 
     /**
-     * 24hr rolling window ticker statistics for all symbols that changed in an array. These are NOT the statistics of the UTC day, but a 24hr rolling window for the previous 24hrs. Note that only tickers that have changed will be present in the array.
-     *
-     * @summary WebSocket All Market Tickers Stream (DEPRECATED)
-     * @param {AllTickerRequest} requestParameters Request parameters.
-     * @deprecated
-     * @returns {WebsocketStream<AllTickerResponse>}
-     * @throws {RequiredError}
-     * @memberof WebSocketStreamsApiInterface
-     */
-    allTicker(requestParameters?: AllTickerRequest): WebsocketStream<AllTickerResponse>;
-
-    /**
      * Average price streams push changes in the average price over a fixed time interval.
      *
      * @summary WebSocket Average Price
@@ -544,19 +519,6 @@ export interface AllMiniTickerRequest {
      * Unique WebSocket request ID.
      * @type {string}
      * @memberof WebSocketStreamsApiAllMiniTicker
-     */
-    readonly id?: string;
-}
-
-/**
- * Request parameters for allTicker operation in WebSocketStreamsApi.
- * @interface AllTickerRequest
- */
-export interface AllTickerRequest {
-    /**
-     * Unique WebSocket request ID.
-     * @type {string}
-     * @memberof WebSocketStreamsApiAllTicker
      */
     readonly id?: string;
 }
@@ -882,26 +844,6 @@ export class WebSocketStreamsApi implements WebSocketStreamsApiInterface {
         const stream = this.localVarParamCreator.allMiniTicker(requestParameters?.id);
 
         return createStreamHandler<AllMiniTickerResponse>(
-            this.websocketBase,
-            stream,
-            requestParameters?.id
-        );
-    }
-
-    /**
-     * 24hr rolling window ticker statistics for all symbols that changed in an array. These are NOT the statistics of the UTC day, but a 24hr rolling window for the previous 24hrs. Note that only tickers that have changed will be present in the array.
-     *
-     * @summary WebSocket All Market Tickers Stream (DEPRECATED)
-     * @param {AllTickerRequest} requestParameters Request parameters.
-     * @returns {WebsocketStream<AllTickerResponse>}
-     * @throws {RequiredError}
-     * @memberof WebSocketStreamsApi
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#all-market-tickers-stream-deprecated Binance API Documentation}
-     */
-    public allTicker(requestParameters: AllTickerRequest = {}): WebsocketStream<AllTickerResponse> {
-        const stream = this.localVarParamCreator.allTicker(requestParameters?.id);
-
-        return createStreamHandler<AllTickerResponse>(
             this.websocketBase,
             stream,
             requestParameters?.id

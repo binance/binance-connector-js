@@ -70,12 +70,13 @@ import type {
 } from './modules/market-api';
 import type {
     OpenOrdersCancelAllRequest,
-    OrderAmendKeepPriorityRequest,
     OrderCancelRequest,
     OrderCancelReplaceRequest,
     OrderListCancelRequest,
     OrderListPlaceRequest,
     OrderListPlaceOcoRequest,
+    OrderListPlaceOpoRequest,
+    OrderListPlaceOpocoRequest,
     OrderListPlaceOtoRequest,
     OrderListPlaceOtocoRequest,
     OrderPlaceRequest,
@@ -124,12 +125,13 @@ import type {
 } from './types';
 import type {
     OpenOrdersCancelAllResponse,
-    OrderAmendKeepPriorityResponse,
     OrderCancelResponse,
     OrderCancelReplaceResponse,
     OrderListCancelResponse,
     OrderListPlaceResponse,
     OrderListPlaceOcoResponse,
+    OrderListPlaceOpoResponse,
+    OrderListPlaceOpocoResponse,
     OrderListPlaceOtoResponse,
     OrderListPlaceOtocoResponse,
     OrderPlaceResponse,
@@ -874,26 +876,6 @@ export class WebsocketAPIConnection {
     }
 
     /**
-     * Reduce the quantity of an existing open order.
-     *
-     * This adds 0 orders to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
-     *
-     * Read [Order Amend Keep Priority FAQ](faqs/order_amend_keep_priority.md) to learn more.
-     * Weight: 4
-     *
-     * @summary WebSocket Order Amend Keep Priority
-     * @param {OrderAmendKeepPriorityRequest} requestParameters Request parameters.
-     *
-     * @returns Promise<WebsocketApiResponse<OrderAmendKeepPriorityResponse>>
-     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#order-amend-keep-priority-trade Binance API Documentation}
-     */
-    orderAmendKeepPriority(
-        requestParameters: OrderAmendKeepPriorityRequest
-    ): Promise<WebsocketApiResponse<OrderAmendKeepPriorityResponse>> {
-        return this.tradeApi.orderAmendKeepPriority(requestParameters);
-    }
-
-    /**
      * Cancel an active order.
      * Weight: 1
      *
@@ -992,6 +974,44 @@ export class WebsocketAPIConnection {
         requestParameters: OrderListPlaceOcoRequest
     ): Promise<WebsocketApiResponse<OrderListPlaceOcoResponse>> {
         return this.tradeApi.orderListPlaceOco(requestParameters);
+    }
+
+    /**
+     * Place an [OPO](./faqs/opo.md).
+     *
+     * OPOs add 2 orders to the EXCHANGE_MAX_NUM_ORDERS filter and MAX_NUM_ORDERS filter.
+     * Weight: 1
+     *
+     * Unfilled Order Count: 2
+     *
+     * @summary WebSocket OPO
+     * @param {OrderListPlaceOpoRequest} requestParameters Request parameters.
+     *
+     * @returns Promise<WebsocketApiResponse<OrderListPlaceOpoResponse>>
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#opo-trade Binance API Documentation}
+     */
+    orderListPlaceOpo(
+        requestParameters: OrderListPlaceOpoRequest
+    ): Promise<WebsocketApiResponse<OrderListPlaceOpoResponse>> {
+        return this.tradeApi.orderListPlaceOpo(requestParameters);
+    }
+
+    /**
+     * Place an [OPOCO](./faqs/opo.md).
+     * Weight: 1
+     *
+     * Unfilled Order Count: 3
+     *
+     * @summary WebSocket OPOCO
+     * @param {OrderListPlaceOpocoRequest} requestParameters Request parameters.
+     *
+     * @returns Promise<WebsocketApiResponse<OrderListPlaceOpocoResponse>>
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#opoco-trade Binance API Documentation}
+     */
+    orderListPlaceOpoco(
+        requestParameters: OrderListPlaceOpocoRequest
+    ): Promise<WebsocketApiResponse<OrderListPlaceOpocoResponse>> {
+        return this.tradeApi.orderListPlaceOpoco(requestParameters);
     }
 
     /**

@@ -401,7 +401,7 @@ export interface AllOrdersRequest {
     readonly id?: string;
 
     /**
-     * `orderId`or`origClientOrderId`mustbesent
+     * Cancel order by orderId
      * @type {number | bigint}
      * @memberof AccountApiAllOrders
      */
@@ -484,7 +484,7 @@ export interface MyAllocationsRequest {
     readonly limit?: number;
 
     /**
-     * `orderId`or`origClientOrderId`mustbesent
+     * Cancel order by orderId
      * @type {number | bigint}
      * @memberof AccountApiMyAllocations
      */
@@ -552,7 +552,7 @@ export interface MyPreventedMatchesRequest {
     readonly preventedMatchId?: number | bigint;
 
     /**
-     * `orderId`or`origClientOrderId`mustbesent
+     * Cancel order by orderId
      * @type {number | bigint}
      * @memberof AccountApiMyPreventedMatches
      */
@@ -600,7 +600,7 @@ export interface MyTradesRequest {
     readonly id?: string;
 
     /**
-     * `orderId`or`origClientOrderId`mustbesent
+     * Cancel order by orderId
      * @type {number | bigint}
      * @memberof AccountApiMyTrades
      */
@@ -750,7 +750,7 @@ export interface OrderListStatusRequest {
     readonly id?: string;
 
     /**
-     * `orderId`or`origClientOrderId`mustbesent
+     *
      * @type {string}
      * @memberof AccountApiOrderListStatus
      */
@@ -791,14 +791,14 @@ export interface OrderStatusRequest {
     readonly id?: string;
 
     /**
-     * `orderId`or`origClientOrderId`mustbesent
+     * Cancel order by orderId
      * @type {number | bigint}
      * @memberof AccountApiOrderStatus
      */
     readonly orderId?: number | bigint;
 
     /**
-     * `orderId`or`origClientOrderId`mustbesent
+     *
      * @type {string}
      * @memberof AccountApiOrderStatus
      */

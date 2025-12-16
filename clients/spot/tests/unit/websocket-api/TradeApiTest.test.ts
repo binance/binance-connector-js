@@ -33,6 +33,14 @@ import {
     OrderListPlaceOcoSideEnum,
     OrderListPlaceOcoAboveTypeEnum,
     OrderListPlaceOcoBelowTypeEnum,
+    OrderListPlaceOpoWorkingTypeEnum,
+    OrderListPlaceOpoWorkingSideEnum,
+    OrderListPlaceOpoPendingTypeEnum,
+    OrderListPlaceOpoPendingSideEnum,
+    OrderListPlaceOpocoWorkingTypeEnum,
+    OrderListPlaceOpocoWorkingSideEnum,
+    OrderListPlaceOpocoPendingSideEnum,
+    OrderListPlaceOpocoPendingAboveTypeEnum,
     OrderListPlaceOtoWorkingTypeEnum,
     OrderListPlaceOtoWorkingSideEnum,
     OrderListPlaceOtoPendingTypeEnum,
@@ -52,12 +60,13 @@ import {
 } from '../../../src/websocket-api';
 import {
     OpenOrdersCancelAllRequest,
-    OrderAmendKeepPriorityRequest,
     OrderCancelRequest,
     OrderCancelReplaceRequest,
     OrderListCancelRequest,
     OrderListPlaceRequest,
     OrderListPlaceOcoRequest,
+    OrderListPlaceOpoRequest,
+    OrderListPlaceOpocoRequest,
     OrderListPlaceOtoRequest,
     OrderListPlaceOtocoRequest,
     OrderPlaceRequest,
@@ -332,234 +341,6 @@ describe('TradeApi', () => {
                 try {
                     websocketAPIClient = new TradeApi(websocketBase);
                     const responsePromise = websocketAPIClient.openOrdersCancelAll(params);
-                    await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
-                    resolveTest(true);
-                } catch (error) {
-                    resolveTest(error);
-                }
-            });
-            mockWs.emit('open');
-
-            const result = await testComplete;
-            if (result instanceof Error) {
-                throw result;
-            }
-        }, 10000);
-    });
-
-    describe('orderAmendKeepPriority()', () => {
-        beforeEach(async () => {
-            mockWs = Object.assign(new EventEmitter(), {
-                close: jest.fn(),
-                ping: jest.fn(),
-                pong: jest.fn(),
-                send: jest.fn(),
-                readyState: WebSocketClient.OPEN,
-                OPEN: WebSocket.OPEN,
-                CLOSED: WebSocket.CLOSED,
-            }) as unknown as jest.Mocked<WebSocketClient> & EventEmitter;
-
-            (WebSocketClient as jest.MockedClass<typeof WebSocketClient>).mockImplementation(
-                () => mockWs
-            );
-
-            const config = new ConfigurationWebsocketAPI({
-                apiKey: 'test-api-key',
-                apiSecret: 'test-api-secret',
-                wsURL: 'ws://localhost:3000',
-                timeout: 1000,
-            });
-
-            websocketBase = new WebsocketAPIBase(config);
-            websocketBase.connect();
-        });
-
-        afterEach(async () => {
-            if (websocketBase) {
-                await websocketBase.disconnect();
-            }
-            jest.clearAllMocks();
-            jest.clearAllTimers();
-        });
-
-        it('should execute orderAmendKeepPriority() successfully', async () => {
-            mockResponse = JSONParse(
-                JSONStringify({
-                    id: '56374b46-3061-486b-a311-89ee972eb648',
-                    status: 200,
-                    result: {
-                        transactTime: 1741924229819,
-                        executionId: 60,
-                        amendedOrder: {
-                            symbol: 'BTUCSDT',
-                            orderId: 23,
-                            orderListId: 4,
-                            origClientOrderId: 'my_pending_order',
-                            clientOrderId: 'xbxXh5SSwaHS7oUEOCI88B',
-                            price: '1.00000000',
-                            qty: '5.00000000',
-                            executedQty: '0.00000000',
-                            preventedQty: '0.00000000',
-                            quoteOrderQty: '0.00000000',
-                            cumulativeQuoteQty: '0.00000000',
-                            status: 'NEW',
-                            timeInForce: 'GTC',
-                            type: 'LIMIT',
-                            side: 'BUY',
-                            workingTime: 1741924204920,
-                            selfTradePreventionMode: 'NONE',
-                        },
-                        listStatus: {
-                            orderListId: 4,
-                            contingencyType: 'OTO',
-                            listOrderStatus: 'EXECUTING',
-                            listClientOrderId: '8nOGLLawudj1QoOiwbroRH',
-                            symbol: 'BTCUSDT',
-                            orders: [
-                                {
-                                    symbol: 'BTCUSDT',
-                                    orderId: 23,
-                                    clientOrderId: 'xbxXh5SSwaHS7oUEOCI88B',
-                                },
-                                {
-                                    symbol: 'BTCUSDT',
-                                    orderId: 22,
-                                    clientOrderId: 'g04EWsjaackzedjC9wRkWD',
-                                },
-                                {
-                                    symbol: 'BTCUSDT',
-                                    orderId: 23,
-                                    clientOrderId: 'xbxXh5SSwaHS7oUEOCI88B',
-                                },
-                                {
-                                    symbol: 'BTCUSDT',
-                                    orderId: 22,
-                                    clientOrderId: 'g04EWsjaackzedjC9wRkWD',
-                                },
-                            ],
-                        },
-                    },
-                    rateLimits: [
-                        {
-                            rateLimitType: 'REQUEST_WEIGHT',
-                            interval: 'MINUTE',
-                            intervalNum: 1,
-                            limit: 6000,
-                            count: 1,
-                        },
-                    ],
-                })
-            );
-            mockResponse.id = randomString();
-
-            const params: OrderAmendKeepPriorityRequest = {
-                symbol: 'BNBUSDT',
-                newQty: 1.0,
-            };
-
-            let resolveTest: (value: unknown) => void;
-            const testComplete = new Promise((resolve) => {
-                resolveTest = resolve;
-            });
-
-            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
-                try {
-                    websocketAPIClient = new TradeApi(conn);
-                    const sendMsgSpy = jest.spyOn(conn, 'sendMessage');
-                    const responsePromise = websocketAPIClient.orderAmendKeepPriority({
-                        id: mockResponse?.id,
-                        ...params,
-                    });
-                    mockWs.emit('message', JSONStringify(mockResponse));
-                    const response = await responsePromise;
-                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
-                    expect(response.rateLimits).toEqual(mockResponse.rateLimits);
-                    expect(sendMsgSpy).toHaveBeenCalledWith(
-                        '/order.amend.keepPriority'.slice(1),
-                        params,
-                        { isSigned: true, withApiKey: false }
-                    );
-                    resolveTest(true);
-                } catch (error) {
-                    resolveTest(error);
-                }
-            });
-            mockWs.emit('open');
-
-            const result = await testComplete;
-            if (result instanceof Error) {
-                throw result;
-            }
-        });
-
-        it('should handle server error responses gracefully', async () => {
-            mockResponse = {
-                id: randomString(),
-                status: 400,
-                error: {
-                    code: -2010,
-                    msg: 'Account has insufficient balance for requested action.',
-                },
-                rateLimits: [
-                    {
-                        rateLimitType: 'ORDERS',
-                        interval: 'SECOND',
-                        intervalNum: 10,
-                        limit: 50,
-                        count: 13,
-                    },
-                ],
-            };
-
-            const params: OrderAmendKeepPriorityRequest = {
-                symbol: 'BNBUSDT',
-                newQty: 1.0,
-            };
-
-            let resolveTest: (value: unknown) => void;
-            const testComplete = new Promise((resolve) => {
-                resolveTest = resolve;
-            });
-
-            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
-                try {
-                    websocketAPIClient = new TradeApi(conn);
-                    const responsePromise = websocketAPIClient.orderAmendKeepPriority({
-                        id: mockResponse?.id,
-                        ...params,
-                    });
-                    mockWs.emit('message', JSONStringify(mockResponse));
-                    await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
-                    resolveTest(true);
-                } catch (error) {
-                    resolveTest(error);
-                }
-            });
-            mockWs.emit('open');
-
-            const result = await testComplete;
-            if (result instanceof Error) {
-                throw result;
-            }
-        });
-
-        it('should handle request timeout gracefully', async () => {
-            jest.useRealTimers();
-
-            const params: OrderAmendKeepPriorityRequest = {
-                symbol: 'BNBUSDT',
-                newQty: 1.0,
-            };
-
-            let resolveTest: (value: unknown) => void;
-            const testComplete = new Promise((resolve) => {
-                resolveTest = resolve;
-            });
-
-            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
-                try {
-                    websocketAPIClient = new TradeApi(websocketBase);
-                    const responsePromise = websocketAPIClient.orderAmendKeepPriority(params);
                     await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
                     resolveTest(true);
                 } catch (error) {
@@ -1837,6 +1618,509 @@ describe('TradeApi', () => {
                 try {
                     websocketAPIClient = new TradeApi(websocketBase);
                     const responsePromise = websocketAPIClient.orderListPlaceOco(params);
+                    await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        }, 10000);
+    });
+
+    describe('orderListPlaceOpo()', () => {
+        beforeEach(async () => {
+            mockWs = Object.assign(new EventEmitter(), {
+                close: jest.fn(),
+                ping: jest.fn(),
+                pong: jest.fn(),
+                send: jest.fn(),
+                readyState: WebSocketClient.OPEN,
+                OPEN: WebSocket.OPEN,
+                CLOSED: WebSocket.CLOSED,
+            }) as unknown as jest.Mocked<WebSocketClient> & EventEmitter;
+
+            (WebSocketClient as jest.MockedClass<typeof WebSocketClient>).mockImplementation(
+                () => mockWs
+            );
+
+            const config = new ConfigurationWebsocketAPI({
+                apiKey: 'test-api-key',
+                apiSecret: 'test-api-secret',
+                wsURL: 'ws://localhost:3000',
+                timeout: 1000,
+            });
+
+            websocketBase = new WebsocketAPIBase(config);
+            websocketBase.connect();
+        });
+
+        afterEach(async () => {
+            if (websocketBase) {
+                await websocketBase.disconnect();
+            }
+            jest.clearAllMocks();
+            jest.clearAllTimers();
+        });
+
+        it('should execute orderListPlaceOpo() successfully', async () => {
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '1762941318128',
+                    status: 200,
+                    result: {
+                        orderListId: 2,
+                        contingencyType: 'OTO',
+                        listStatusType: 'EXEC_STARTED',
+                        listOrderStatus: 'EXECUTING',
+                        listClientOrderId: 'OiOgqvRagBefpzdM5gjYX3',
+                        transactionTime: 1762941318142,
+                        symbol: 'BTCUSDT',
+                        orders: [
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 3,
+                                clientOrderId: 'x7ISSjywZxFXOdzwsThNnd',
+                            },
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 2,
+                                clientOrderId: 'pUzhKBbc0ZVdMScIRAqitH',
+                            },
+                        ],
+                        orderReports: [
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 3,
+                                orderListId: 2,
+                                clientOrderId: 'x7ISSjywZxFXOdzwsThNnd',
+                                transactTime: 1762941318142,
+                                price: '0.00000000',
+                                executedQty: '0.00000000',
+                                origQuoteOrderQty: '0.00000000',
+                                cummulativeQuoteQty: '0.00000000',
+                                status: 'PENDING_NEW',
+                                timeInForce: 'GTC',
+                                type: 'MARKET',
+                                side: 'SELL',
+                                workingTime: -1,
+                                selfTradePreventionMode: 'NONE',
+                            },
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 2,
+                                orderListId: 2,
+                                clientOrderId: 'pUzhKBbc0ZVdMScIRAqitH',
+                                transactTime: 1762941318142,
+                                price: '101496.00000000',
+                                origQty: '0.00070000',
+                                executedQty: '0.00000000',
+                                origQuoteOrderQty: '0.00000000',
+                                cummulativeQuoteQty: '0.00000000',
+                                status: 'NEW',
+                                timeInForce: 'GTC',
+                                type: 'LIMIT',
+                                side: 'BUY',
+                                workingTime: 1762941318142,
+                                selfTradePreventionMode: 'NONE',
+                            },
+                        ],
+                    },
+                })
+            );
+            mockResponse.id = randomString();
+
+            const params: OrderListPlaceOpoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListPlaceOpoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListPlaceOpoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingType: OrderListPlaceOpoPendingTypeEnum.LIMIT,
+                pendingSide: OrderListPlaceOpoPendingSideEnum.BUY,
+            };
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new TradeApi(conn);
+                    const sendMsgSpy = jest.spyOn(conn, 'sendMessage');
+                    const responsePromise = websocketAPIClient.orderListPlaceOpo({
+                        id: mockResponse?.id,
+                        ...params,
+                    });
+                    mockWs.emit('message', JSONStringify(mockResponse));
+                    const response = await responsePromise;
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
+                    expect(response.rateLimits).toEqual(mockResponse.rateLimits);
+                    expect(sendMsgSpy).toHaveBeenCalledWith(
+                        '/orderList.place.opo'.slice(1),
+                        params,
+                        { isSigned: true, withApiKey: false }
+                    );
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        });
+
+        it('should handle server error responses gracefully', async () => {
+            mockResponse = {
+                id: randomString(),
+                status: 400,
+                error: {
+                    code: -2010,
+                    msg: 'Account has insufficient balance for requested action.',
+                },
+                rateLimits: [
+                    {
+                        rateLimitType: 'ORDERS',
+                        interval: 'SECOND',
+                        intervalNum: 10,
+                        limit: 50,
+                        count: 13,
+                    },
+                ],
+            };
+
+            const params: OrderListPlaceOpoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListPlaceOpoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListPlaceOpoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingType: OrderListPlaceOpoPendingTypeEnum.LIMIT,
+                pendingSide: OrderListPlaceOpoPendingSideEnum.BUY,
+            };
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new TradeApi(conn);
+                    const responsePromise = websocketAPIClient.orderListPlaceOpo({
+                        id: mockResponse?.id,
+                        ...params,
+                    });
+                    mockWs.emit('message', JSONStringify(mockResponse));
+                    await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        });
+
+        it('should handle request timeout gracefully', async () => {
+            jest.useRealTimers();
+
+            const params: OrderListPlaceOpoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListPlaceOpoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListPlaceOpoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingType: OrderListPlaceOpoPendingTypeEnum.LIMIT,
+                pendingSide: OrderListPlaceOpoPendingSideEnum.BUY,
+            };
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new TradeApi(websocketBase);
+                    const responsePromise = websocketAPIClient.orderListPlaceOpo(params);
+                    await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        }, 10000);
+    });
+
+    describe('orderListPlaceOpoco()', () => {
+        beforeEach(async () => {
+            mockWs = Object.assign(new EventEmitter(), {
+                close: jest.fn(),
+                ping: jest.fn(),
+                pong: jest.fn(),
+                send: jest.fn(),
+                readyState: WebSocketClient.OPEN,
+                OPEN: WebSocket.OPEN,
+                CLOSED: WebSocket.CLOSED,
+            }) as unknown as jest.Mocked<WebSocketClient> & EventEmitter;
+
+            (WebSocketClient as jest.MockedClass<typeof WebSocketClient>).mockImplementation(
+                () => mockWs
+            );
+
+            const config = new ConfigurationWebsocketAPI({
+                apiKey: 'test-api-key',
+                apiSecret: 'test-api-secret',
+                wsURL: 'ws://localhost:3000',
+                timeout: 1000,
+            });
+
+            websocketBase = new WebsocketAPIBase(config);
+            websocketBase.connect();
+        });
+
+        afterEach(async () => {
+            if (websocketBase) {
+                await websocketBase.disconnect();
+            }
+            jest.clearAllMocks();
+            jest.clearAllTimers();
+        });
+
+        it('should execute orderListPlaceOpoco() successfully', async () => {
+            mockResponse = JSONParse(
+                JSONStringify({
+                    id: '1763000139090',
+                    status: 200,
+                    result: {
+                        orderListId: 1,
+                        contingencyType: 'OTO',
+                        listStatusType: 'EXEC_STARTED',
+                        listOrderStatus: 'EXECUTING',
+                        listClientOrderId: 'TVbG6ymkYMXTj7tczbOsBf',
+                        transactionTime: 1763000139104,
+                        symbol: 'BTCUSDT',
+                        orders: [
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 8,
+                                clientOrderId: 'i76cGJWN9J1FpADS56TtQZ',
+                            },
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 7,
+                                clientOrderId: 'kyIKnMLKQclE5FmyYgaMSo',
+                            },
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 6,
+                                clientOrderId: '3czuJSeyjPwV9Xo28j1Dv3',
+                            },
+                        ],
+                        orderReports: [
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 8,
+                                orderListId: 1,
+                                clientOrderId: 'i76cGJWN9J1FpADS56TtQZ',
+                                transactTime: 1763000139104,
+                                price: '104261.00000000',
+                                executedQty: '0.00000000',
+                                origQuoteOrderQty: '0.00000000',
+                                cummulativeQuoteQty: '0.00000000',
+                                status: 'PENDING_NEW',
+                                timeInForce: 'GTC',
+                                type: 'LIMIT_MAKER',
+                                side: 'SELL',
+                                workingTime: -1,
+                                selfTradePreventionMode: 'NONE',
+                            },
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 7,
+                                orderListId: 1,
+                                clientOrderId: 'kyIKnMLKQclE5FmyYgaMSo',
+                                transactTime: 1763000139104,
+                                price: '101613.00000000',
+                                executedQty: '0.00000000',
+                                origQuoteOrderQty: '0.00000000',
+                                cummulativeQuoteQty: '0.00000000',
+                                status: 'PENDING_NEW',
+                                timeInForce: 'IOC',
+                                type: 'STOP_LOSS_LIMIT',
+                                side: 'SELL',
+                                stopPrice: '10100.00000000',
+                                workingTime: -1,
+                                selfTradePreventionMode: 'NONE',
+                            },
+                            {
+                                symbol: 'BTCUSDT',
+                                orderId: 6,
+                                orderListId: 1,
+                                clientOrderId: '3czuJSeyjPwV9Xo28j1Dv3',
+                                transactTime: 1763000139104,
+                                price: '102496.00000000',
+                                origQty: '0.00170000',
+                                executedQty: '0.00000000',
+                                origQuoteOrderQty: '0.00000000',
+                                cummulativeQuoteQty: '0.00000000',
+                                status: 'NEW',
+                                timeInForce: 'GTC',
+                                type: 'LIMIT',
+                                side: 'BUY',
+                                workingTime: 1763000139104,
+                                selfTradePreventionMode: 'NONE',
+                            },
+                        ],
+                    },
+                })
+            );
+            mockResponse.id = randomString();
+
+            const params: OrderListPlaceOpocoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListPlaceOpocoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListPlaceOpocoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingSide: OrderListPlaceOpocoPendingSideEnum.BUY,
+                pendingAboveType: OrderListPlaceOpocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,
+            };
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new TradeApi(conn);
+                    const sendMsgSpy = jest.spyOn(conn, 'sendMessage');
+                    const responsePromise = websocketAPIClient.orderListPlaceOpoco({
+                        id: mockResponse?.id,
+                        ...params,
+                    });
+                    mockWs.emit('message', JSONStringify(mockResponse));
+                    const response = await responsePromise;
+                    expect(response.data).toEqual(mockResponse.result ?? mockResponse.response);
+                    expect(response.rateLimits).toEqual(mockResponse.rateLimits);
+                    expect(sendMsgSpy).toHaveBeenCalledWith(
+                        '/orderList.place.opoco'.slice(1),
+                        params,
+                        { isSigned: true, withApiKey: false }
+                    );
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        });
+
+        it('should handle server error responses gracefully', async () => {
+            mockResponse = {
+                id: randomString(),
+                status: 400,
+                error: {
+                    code: -2010,
+                    msg: 'Account has insufficient balance for requested action.',
+                },
+                rateLimits: [
+                    {
+                        rateLimitType: 'ORDERS',
+                        interval: 'SECOND',
+                        intervalNum: 10,
+                        limit: 50,
+                        count: 13,
+                    },
+                ],
+            };
+
+            const params: OrderListPlaceOpocoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListPlaceOpocoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListPlaceOpocoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingSide: OrderListPlaceOpocoPendingSideEnum.BUY,
+                pendingAboveType: OrderListPlaceOpocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,
+            };
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new TradeApi(conn);
+                    const responsePromise = websocketAPIClient.orderListPlaceOpoco({
+                        id: mockResponse?.id,
+                        ...params,
+                    });
+                    mockWs.emit('message', JSONStringify(mockResponse));
+                    await expect(responsePromise).rejects.toMatchObject(mockResponse.error!);
+                    resolveTest(true);
+                } catch (error) {
+                    resolveTest(error);
+                }
+            });
+            mockWs.emit('open');
+
+            const result = await testComplete;
+            if (result instanceof Error) {
+                throw result;
+            }
+        });
+
+        it('should handle request timeout gracefully', async () => {
+            jest.useRealTimers();
+
+            const params: OrderListPlaceOpocoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListPlaceOpocoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListPlaceOpocoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingSide: OrderListPlaceOpocoPendingSideEnum.BUY,
+                pendingAboveType: OrderListPlaceOpocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,
+            };
+
+            let resolveTest: (value: unknown) => void;
+            const testComplete = new Promise((resolve) => {
+                resolveTest = resolve;
+            });
+
+            websocketBase.on('open', async (conn: WebsocketAPIBase) => {
+                try {
+                    websocketAPIClient = new TradeApi(websocketBase);
+                    const responsePromise = websocketAPIClient.orderListPlaceOpoco(params);
                     await expect(responsePromise).rejects.toThrow(/^Request timeout for id:/);
                     resolveTest(true);
                 } catch (error) {

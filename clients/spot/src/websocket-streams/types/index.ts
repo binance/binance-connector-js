@@ -3,8 +3,6 @@ export * from './all-market-rolling-window-ticker-response';
 export * from './all-market-rolling-window-ticker-response-inner';
 export * from './all-mini-ticker-response';
 export * from './all-mini-ticker-response-inner';
-export * from './all-ticker-response';
-export * from './all-ticker-response-inner';
 export * from './asset-filters';
 export * from './avg-price-response';
 export * from './book-ticker-response';

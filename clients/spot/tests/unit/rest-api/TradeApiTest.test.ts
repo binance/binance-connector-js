@@ -51,6 +51,34 @@ import {
     OrderListOcoBelowPegOffsetTypeEnum,
     OrderListOcoNewOrderRespTypeEnum,
     OrderListOcoSelfTradePreventionModeEnum,
+    OrderListOpoWorkingTypeEnum,
+    OrderListOpoWorkingSideEnum,
+    OrderListOpoPendingTypeEnum,
+    OrderListOpoPendingSideEnum,
+    OrderListOpoNewOrderRespTypeEnum,
+    OrderListOpoSelfTradePreventionModeEnum,
+    OrderListOpoWorkingTimeInForceEnum,
+    OrderListOpoWorkingPegPriceTypeEnum,
+    OrderListOpoWorkingPegOffsetTypeEnum,
+    OrderListOpoPendingTimeInForceEnum,
+    OrderListOpoPendingPegPriceTypeEnum,
+    OrderListOpoPendingPegOffsetTypeEnum,
+    OrderListOpocoWorkingTypeEnum,
+    OrderListOpocoWorkingSideEnum,
+    OrderListOpocoPendingSideEnum,
+    OrderListOpocoPendingAboveTypeEnum,
+    OrderListOpocoNewOrderRespTypeEnum,
+    OrderListOpocoSelfTradePreventionModeEnum,
+    OrderListOpocoWorkingTimeInForceEnum,
+    OrderListOpocoWorkingPegPriceTypeEnum,
+    OrderListOpocoWorkingPegOffsetTypeEnum,
+    OrderListOpocoPendingAboveTimeInForceEnum,
+    OrderListOpocoPendingAbovePegPriceTypeEnum,
+    OrderListOpocoPendingAbovePegOffsetTypeEnum,
+    OrderListOpocoPendingBelowTypeEnum,
+    OrderListOpocoPendingBelowTimeInForceEnum,
+    OrderListOpocoPendingBelowPegPriceTypeEnum,
+    OrderListOpocoPendingBelowPegOffsetTypeEnum,
     OrderListOtoWorkingTypeEnum,
     OrderListOtoWorkingSideEnum,
     OrderListOtoPendingTypeEnum,
@@ -109,6 +137,8 @@ import {
     OrderAmendKeepPriorityRequest,
     OrderCancelReplaceRequest,
     OrderListOcoRequest,
+    OrderListOpoRequest,
+    OrderListOpocoRequest,
     OrderListOtoRequest,
     OrderListOtocoRequest,
     OrderOcoRequest,
@@ -124,6 +154,8 @@ import type {
     OrderAmendKeepPriorityResponse,
     OrderCancelReplaceResponse,
     OrderListOcoResponse,
+    OrderListOpoResponse,
+    OrderListOpocoResponse,
     OrderListOtoResponse,
     OrderListOtocoResponse,
     OrderOcoResponse,
@@ -1833,6 +1865,720 @@ describe('TradeApi', () => {
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'orderListOco').mockRejectedValueOnce(mockError);
             await expect(client.orderListOco(params)).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('orderListOpo()', () => {
+        it('should execute orderListOpo() successfully with required parameters only', async () => {
+            const params: OrderListOpoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOpoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOpoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingType: OrderListOpoPendingTypeEnum.LIMIT,
+                pendingSide: OrderListOpoPendingSideEnum.BUY,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    orderListId: 0,
+                    contingencyType: 'OTO',
+                    listStatusType: 'EXEC_STARTED',
+                    listOrderStatus: 'EXECUTING',
+                    listClientOrderId: 'H94qCqO27P74OEiO4X8HOG',
+                    transactionTime: 1762998011671,
+                    symbol: 'BTCUSDT',
+                    orders: [
+                        { symbol: 'BTCUSDT', orderId: 3, clientOrderId: '2ZJCY0IjOhuYIMLGN8kU8S' },
+                        { symbol: 'BTCUSDT', orderId: 2, clientOrderId: 'JX6xfdjo0wysiGumfHNmPu' },
+                    ],
+                    orderReports: [
+                        {
+                            symbol: 'BTCUSDT',
+                            orderId: 3,
+                            orderListId: 0,
+                            clientOrderId: '2ZJCY0IjOhuYIMLGN8kU8S',
+                            transactTime: 1762998011671,
+                            price: '0.00000000',
+                            executedQty: '0.00000000',
+                            origQuoteOrderQty: '0.00000000',
+                            cummulativeQuoteQty: '0.00000000',
+                            status: 'PENDING_NEW',
+                            timeInForce: 'GTC',
+                            type: 'MARKET',
+                            side: 'SELL',
+                            workingTime: -1,
+                            selfTradePreventionMode: 'NONE',
+                        },
+                        {
+                            symbol: 'BTCUSDT',
+                            orderId: 2,
+                            orderListId: 0,
+                            clientOrderId: 'JX6xfdjo0wysiGumfHNmPu',
+                            transactTime: 1762998011671,
+                            price: '102264.00000000',
+                            origQty: '0.00060000',
+                            executedQty: '0.00000000',
+                            origQuoteOrderQty: '0.00000000',
+                            cummulativeQuoteQty: '0.00000000',
+                            status: 'NEW',
+                            timeInForce: 'GTC',
+                            type: 'LIMIT',
+                            side: 'BUY',
+                            workingTime: 1762998011671,
+                            selfTradePreventionMode: 'NONE',
+                        },
+                    ],
+                })
+            );
+
+            const spy = jest.spyOn(client, 'orderListOpo').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<OrderListOpoResponse>)
+            );
+            const response = await client.orderListOpo(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute orderListOpo() successfully with optional parameters', async () => {
+            const params: OrderListOpoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOpoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOpoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingType: OrderListOpoPendingTypeEnum.LIMIT,
+                pendingSide: OrderListOpoPendingSideEnum.BUY,
+                listClientOrderId: 'listClientOrderId_example',
+                newOrderRespType: OrderListOpoNewOrderRespTypeEnum.ACK,
+                selfTradePreventionMode: OrderListOpoSelfTradePreventionModeEnum.NONE,
+                workingClientOrderId: 'workingClientOrderId_example',
+                workingIcebergQty: 1.0,
+                workingTimeInForce: OrderListOpoWorkingTimeInForceEnum.GTC,
+                workingStrategyId: 1,
+                workingStrategyType: 1,
+                workingPegPriceType: OrderListOpoWorkingPegPriceTypeEnum.PRIMARY_PEG,
+                workingPegOffsetType: OrderListOpoWorkingPegOffsetTypeEnum.PRICE_LEVEL,
+                workingPegOffsetValue: 1,
+                pendingClientOrderId: 'pendingClientOrderId_example',
+                pendingPrice: 1.0,
+                pendingStopPrice: 1.0,
+                pendingTrailingDelta: 1.0,
+                pendingIcebergQty: 1.0,
+                pendingTimeInForce: OrderListOpoPendingTimeInForceEnum.GTC,
+                pendingStrategyId: 1,
+                pendingStrategyType: 1,
+                pendingPegPriceType: OrderListOpoPendingPegPriceTypeEnum.PRIMARY_PEG,
+                pendingPegOffsetType: OrderListOpoPendingPegOffsetTypeEnum.PRICE_LEVEL,
+                pendingPegOffsetValue: 1,
+                recvWindow: 5000.0,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    orderListId: 0,
+                    contingencyType: 'OTO',
+                    listStatusType: 'EXEC_STARTED',
+                    listOrderStatus: 'EXECUTING',
+                    listClientOrderId: 'H94qCqO27P74OEiO4X8HOG',
+                    transactionTime: 1762998011671,
+                    symbol: 'BTCUSDT',
+                    orders: [
+                        { symbol: 'BTCUSDT', orderId: 3, clientOrderId: '2ZJCY0IjOhuYIMLGN8kU8S' },
+                        { symbol: 'BTCUSDT', orderId: 2, clientOrderId: 'JX6xfdjo0wysiGumfHNmPu' },
+                    ],
+                    orderReports: [
+                        {
+                            symbol: 'BTCUSDT',
+                            orderId: 3,
+                            orderListId: 0,
+                            clientOrderId: '2ZJCY0IjOhuYIMLGN8kU8S',
+                            transactTime: 1762998011671,
+                            price: '0.00000000',
+                            executedQty: '0.00000000',
+                            origQuoteOrderQty: '0.00000000',
+                            cummulativeQuoteQty: '0.00000000',
+                            status: 'PENDING_NEW',
+                            timeInForce: 'GTC',
+                            type: 'MARKET',
+                            side: 'SELL',
+                            workingTime: -1,
+                            selfTradePreventionMode: 'NONE',
+                        },
+                        {
+                            symbol: 'BTCUSDT',
+                            orderId: 2,
+                            orderListId: 0,
+                            clientOrderId: 'JX6xfdjo0wysiGumfHNmPu',
+                            transactTime: 1762998011671,
+                            price: '102264.00000000',
+                            origQty: '0.00060000',
+                            executedQty: '0.00000000',
+                            origQuoteOrderQty: '0.00000000',
+                            cummulativeQuoteQty: '0.00000000',
+                            status: 'NEW',
+                            timeInForce: 'GTC',
+                            type: 'LIMIT',
+                            side: 'BUY',
+                            workingTime: 1762998011671,
+                            selfTradePreventionMode: 'NONE',
+                        },
+                    ],
+                })
+            );
+
+            const spy = jest.spyOn(client, 'orderListOpo').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<OrderListOpoResponse>)
+            );
+            const response = await client.orderListOpo(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when symbol is missing', async () => {
+            const _params: OrderListOpoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOpoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOpoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingType: OrderListOpoPendingTypeEnum.LIMIT,
+                pendingSide: OrderListOpoPendingSideEnum.BUY,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.symbol;
+
+            await expect(client.orderListOpo(params)).rejects.toThrow(
+                'Required parameter symbol was null or undefined when calling orderListOpo.'
+            );
+        });
+
+        it('should throw RequiredError when workingType is missing', async () => {
+            const _params: OrderListOpoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOpoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOpoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingType: OrderListOpoPendingTypeEnum.LIMIT,
+                pendingSide: OrderListOpoPendingSideEnum.BUY,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.workingType;
+
+            await expect(client.orderListOpo(params)).rejects.toThrow(
+                'Required parameter workingType was null or undefined when calling orderListOpo.'
+            );
+        });
+
+        it('should throw RequiredError when workingSide is missing', async () => {
+            const _params: OrderListOpoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOpoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOpoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingType: OrderListOpoPendingTypeEnum.LIMIT,
+                pendingSide: OrderListOpoPendingSideEnum.BUY,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.workingSide;
+
+            await expect(client.orderListOpo(params)).rejects.toThrow(
+                'Required parameter workingSide was null or undefined when calling orderListOpo.'
+            );
+        });
+
+        it('should throw RequiredError when workingPrice is missing', async () => {
+            const _params: OrderListOpoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOpoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOpoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingType: OrderListOpoPendingTypeEnum.LIMIT,
+                pendingSide: OrderListOpoPendingSideEnum.BUY,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.workingPrice;
+
+            await expect(client.orderListOpo(params)).rejects.toThrow(
+                'Required parameter workingPrice was null or undefined when calling orderListOpo.'
+            );
+        });
+
+        it('should throw RequiredError when workingQuantity is missing', async () => {
+            const _params: OrderListOpoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOpoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOpoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingType: OrderListOpoPendingTypeEnum.LIMIT,
+                pendingSide: OrderListOpoPendingSideEnum.BUY,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.workingQuantity;
+
+            await expect(client.orderListOpo(params)).rejects.toThrow(
+                'Required parameter workingQuantity was null or undefined when calling orderListOpo.'
+            );
+        });
+
+        it('should throw RequiredError when pendingType is missing', async () => {
+            const _params: OrderListOpoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOpoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOpoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingType: OrderListOpoPendingTypeEnum.LIMIT,
+                pendingSide: OrderListOpoPendingSideEnum.BUY,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.pendingType;
+
+            await expect(client.orderListOpo(params)).rejects.toThrow(
+                'Required parameter pendingType was null or undefined when calling orderListOpo.'
+            );
+        });
+
+        it('should throw RequiredError when pendingSide is missing', async () => {
+            const _params: OrderListOpoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOpoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOpoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingType: OrderListOpoPendingTypeEnum.LIMIT,
+                pendingSide: OrderListOpoPendingSideEnum.BUY,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.pendingSide;
+
+            await expect(client.orderListOpo(params)).rejects.toThrow(
+                'Required parameter pendingSide was null or undefined when calling orderListOpo.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: OrderListOpoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOpoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOpoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingType: OrderListOpoPendingTypeEnum.LIMIT,
+                pendingSide: OrderListOpoPendingSideEnum.BUY,
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'orderListOpo').mockRejectedValueOnce(mockError);
+            await expect(client.orderListOpo(params)).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('orderListOpoco()', () => {
+        it('should execute orderListOpoco() successfully with required parameters only', async () => {
+            const params: OrderListOpocoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOpocoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOpocoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingSide: OrderListOpocoPendingSideEnum.BUY,
+                pendingAboveType: OrderListOpocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    orderListId: 2,
+                    contingencyType: 'OTO',
+                    listStatusType: 'EXEC_STARTED',
+                    listOrderStatus: 'EXECUTING',
+                    listClientOrderId: 'bcedxMpQG6nFrZUPQyshoL',
+                    transactionTime: 1763000506354,
+                    symbol: 'BTCUSDT',
+                    orders: [
+                        { symbol: 'BTCUSDT', orderId: 11, clientOrderId: 'yINkaXSJeoi3bU5vWMY8Z8' },
+                        { symbol: 'BTCUSDT', orderId: 10, clientOrderId: 'mfif39yPTHsB3C0FIXznR2' },
+                        { symbol: 'BTCUSDT', orderId: 9, clientOrderId: 'OLSBhMWaIlLSzZ9Zm7fnKB' },
+                    ],
+                    orderReports: [
+                        {
+                            symbol: 'BTCUSDT',
+                            orderId: 11,
+                            orderListId: 2,
+                            clientOrderId: 'yINkaXSJeoi3bU5vWMY8Z8',
+                            transactTime: 1763000506354,
+                            price: '104261.00000000',
+                            executedQty: '0.00000000',
+                            origQuoteOrderQty: '0.00000000',
+                            cummulativeQuoteQty: '0.00000000',
+                            status: 'PENDING_NEW',
+                            timeInForce: 'GTC',
+                            type: 'LIMIT_MAKER',
+                            side: 'SELL',
+                            workingTime: -1,
+                            selfTradePreventionMode: 'NONE',
+                        },
+                        {
+                            symbol: 'BTCUSDT',
+                            orderId: 10,
+                            orderListId: 2,
+                            clientOrderId: 'mfif39yPTHsB3C0FIXznR2',
+                            transactTime: 1763000506354,
+                            price: '101613.00000000',
+                            executedQty: '0.00000000',
+                            origQuoteOrderQty: '0.00000000',
+                            cummulativeQuoteQty: '0.00000000',
+                            status: 'PENDING_NEW',
+                            timeInForce: 'GTC',
+                            type: 'STOP_LOSS_LIMIT',
+                            side: 'SELL',
+                            stopPrice: '10100.00000000',
+                            workingTime: -1,
+                            selfTradePreventionMode: 'NONE',
+                        },
+                        {
+                            symbol: 'BTCUSDT',
+                            orderId: 9,
+                            orderListId: 2,
+                            clientOrderId: 'OLSBhMWaIlLSzZ9Zm7fnKB',
+                            transactTime: 1763000506354,
+                            price: '102496.00000000',
+                            origQty: '0.00170000',
+                            executedQty: '0.00000000',
+                            origQuoteOrderQty: '0.00000000',
+                            cummulativeQuoteQty: '0.00000000',
+                            status: 'NEW',
+                            timeInForce: 'GTC',
+                            type: 'LIMIT',
+                            side: 'BUY',
+                            workingTime: 1763000506354,
+                            selfTradePreventionMode: 'NONE',
+                        },
+                    ],
+                })
+            );
+
+            const spy = jest.spyOn(client, 'orderListOpoco').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<OrderListOpocoResponse>)
+            );
+            const response = await client.orderListOpoco(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute orderListOpoco() successfully with optional parameters', async () => {
+            const params: OrderListOpocoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOpocoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOpocoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingSide: OrderListOpocoPendingSideEnum.BUY,
+                pendingAboveType: OrderListOpocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,
+                listClientOrderId: 'listClientOrderId_example',
+                newOrderRespType: OrderListOpocoNewOrderRespTypeEnum.ACK,
+                selfTradePreventionMode: OrderListOpocoSelfTradePreventionModeEnum.NONE,
+                workingClientOrderId: 'workingClientOrderId_example',
+                workingIcebergQty: 1.0,
+                workingTimeInForce: OrderListOpocoWorkingTimeInForceEnum.GTC,
+                workingStrategyId: 1,
+                workingStrategyType: 1,
+                workingPegPriceType: OrderListOpocoWorkingPegPriceTypeEnum.PRIMARY_PEG,
+                workingPegOffsetType: OrderListOpocoWorkingPegOffsetTypeEnum.PRICE_LEVEL,
+                workingPegOffsetValue: 1,
+                pendingAboveClientOrderId: 'pendingAboveClientOrderId_example',
+                pendingAbovePrice: 1.0,
+                pendingAboveStopPrice: 1.0,
+                pendingAboveTrailingDelta: 1.0,
+                pendingAboveIcebergQty: 1.0,
+                pendingAboveTimeInForce: OrderListOpocoPendingAboveTimeInForceEnum.GTC,
+                pendingAboveStrategyId: 1,
+                pendingAboveStrategyType: 1,
+                pendingAbovePegPriceType: OrderListOpocoPendingAbovePegPriceTypeEnum.PRIMARY_PEG,
+                pendingAbovePegOffsetType: OrderListOpocoPendingAbovePegOffsetTypeEnum.PRICE_LEVEL,
+                pendingAbovePegOffsetValue: 1,
+                pendingBelowType: OrderListOpocoPendingBelowTypeEnum.STOP_LOSS,
+                pendingBelowClientOrderId: 'pendingBelowClientOrderId_example',
+                pendingBelowPrice: 1.0,
+                pendingBelowStopPrice: 1.0,
+                pendingBelowTrailingDelta: 1.0,
+                pendingBelowIcebergQty: 1.0,
+                pendingBelowTimeInForce: OrderListOpocoPendingBelowTimeInForceEnum.GTC,
+                pendingBelowStrategyId: 1,
+                pendingBelowStrategyType: 1,
+                pendingBelowPegPriceType: OrderListOpocoPendingBelowPegPriceTypeEnum.PRIMARY_PEG,
+                pendingBelowPegOffsetType: OrderListOpocoPendingBelowPegOffsetTypeEnum.PRICE_LEVEL,
+                pendingBelowPegOffsetValue: 1,
+                recvWindow: 5000.0,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    orderListId: 2,
+                    contingencyType: 'OTO',
+                    listStatusType: 'EXEC_STARTED',
+                    listOrderStatus: 'EXECUTING',
+                    listClientOrderId: 'bcedxMpQG6nFrZUPQyshoL',
+                    transactionTime: 1763000506354,
+                    symbol: 'BTCUSDT',
+                    orders: [
+                        { symbol: 'BTCUSDT', orderId: 11, clientOrderId: 'yINkaXSJeoi3bU5vWMY8Z8' },
+                        { symbol: 'BTCUSDT', orderId: 10, clientOrderId: 'mfif39yPTHsB3C0FIXznR2' },
+                        { symbol: 'BTCUSDT', orderId: 9, clientOrderId: 'OLSBhMWaIlLSzZ9Zm7fnKB' },
+                    ],
+                    orderReports: [
+                        {
+                            symbol: 'BTCUSDT',
+                            orderId: 11,
+                            orderListId: 2,
+                            clientOrderId: 'yINkaXSJeoi3bU5vWMY8Z8',
+                            transactTime: 1763000506354,
+                            price: '104261.00000000',
+                            executedQty: '0.00000000',
+                            origQuoteOrderQty: '0.00000000',
+                            cummulativeQuoteQty: '0.00000000',
+                            status: 'PENDING_NEW',
+                            timeInForce: 'GTC',
+                            type: 'LIMIT_MAKER',
+                            side: 'SELL',
+                            workingTime: -1,
+                            selfTradePreventionMode: 'NONE',
+                        },
+                        {
+                            symbol: 'BTCUSDT',
+                            orderId: 10,
+                            orderListId: 2,
+                            clientOrderId: 'mfif39yPTHsB3C0FIXznR2',
+                            transactTime: 1763000506354,
+                            price: '101613.00000000',
+                            executedQty: '0.00000000',
+                            origQuoteOrderQty: '0.00000000',
+                            cummulativeQuoteQty: '0.00000000',
+                            status: 'PENDING_NEW',
+                            timeInForce: 'GTC',
+                            type: 'STOP_LOSS_LIMIT',
+                            side: 'SELL',
+                            stopPrice: '10100.00000000',
+                            workingTime: -1,
+                            selfTradePreventionMode: 'NONE',
+                        },
+                        {
+                            symbol: 'BTCUSDT',
+                            orderId: 9,
+                            orderListId: 2,
+                            clientOrderId: 'OLSBhMWaIlLSzZ9Zm7fnKB',
+                            transactTime: 1763000506354,
+                            price: '102496.00000000',
+                            origQty: '0.00170000',
+                            executedQty: '0.00000000',
+                            origQuoteOrderQty: '0.00000000',
+                            cummulativeQuoteQty: '0.00000000',
+                            status: 'NEW',
+                            timeInForce: 'GTC',
+                            type: 'LIMIT',
+                            side: 'BUY',
+                            workingTime: 1763000506354,
+                            selfTradePreventionMode: 'NONE',
+                        },
+                    ],
+                })
+            );
+
+            const spy = jest.spyOn(client, 'orderListOpoco').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<OrderListOpocoResponse>)
+            );
+            const response = await client.orderListOpoco(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when symbol is missing', async () => {
+            const _params: OrderListOpocoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOpocoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOpocoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingSide: OrderListOpocoPendingSideEnum.BUY,
+                pendingAboveType: OrderListOpocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.symbol;
+
+            await expect(client.orderListOpoco(params)).rejects.toThrow(
+                'Required parameter symbol was null or undefined when calling orderListOpoco.'
+            );
+        });
+
+        it('should throw RequiredError when workingType is missing', async () => {
+            const _params: OrderListOpocoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOpocoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOpocoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingSide: OrderListOpocoPendingSideEnum.BUY,
+                pendingAboveType: OrderListOpocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.workingType;
+
+            await expect(client.orderListOpoco(params)).rejects.toThrow(
+                'Required parameter workingType was null or undefined when calling orderListOpoco.'
+            );
+        });
+
+        it('should throw RequiredError when workingSide is missing', async () => {
+            const _params: OrderListOpocoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOpocoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOpocoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingSide: OrderListOpocoPendingSideEnum.BUY,
+                pendingAboveType: OrderListOpocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.workingSide;
+
+            await expect(client.orderListOpoco(params)).rejects.toThrow(
+                'Required parameter workingSide was null or undefined when calling orderListOpoco.'
+            );
+        });
+
+        it('should throw RequiredError when workingPrice is missing', async () => {
+            const _params: OrderListOpocoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOpocoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOpocoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingSide: OrderListOpocoPendingSideEnum.BUY,
+                pendingAboveType: OrderListOpocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.workingPrice;
+
+            await expect(client.orderListOpoco(params)).rejects.toThrow(
+                'Required parameter workingPrice was null or undefined when calling orderListOpoco.'
+            );
+        });
+
+        it('should throw RequiredError when workingQuantity is missing', async () => {
+            const _params: OrderListOpocoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOpocoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOpocoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingSide: OrderListOpocoPendingSideEnum.BUY,
+                pendingAboveType: OrderListOpocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.workingQuantity;
+
+            await expect(client.orderListOpoco(params)).rejects.toThrow(
+                'Required parameter workingQuantity was null or undefined when calling orderListOpoco.'
+            );
+        });
+
+        it('should throw RequiredError when pendingSide is missing', async () => {
+            const _params: OrderListOpocoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOpocoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOpocoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingSide: OrderListOpocoPendingSideEnum.BUY,
+                pendingAboveType: OrderListOpocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.pendingSide;
+
+            await expect(client.orderListOpoco(params)).rejects.toThrow(
+                'Required parameter pendingSide was null or undefined when calling orderListOpoco.'
+            );
+        });
+
+        it('should throw RequiredError when pendingAboveType is missing', async () => {
+            const _params: OrderListOpocoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOpocoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOpocoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingSide: OrderListOpocoPendingSideEnum.BUY,
+                pendingAboveType: OrderListOpocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.pendingAboveType;
+
+            await expect(client.orderListOpoco(params)).rejects.toThrow(
+                'Required parameter pendingAboveType was null or undefined when calling orderListOpoco.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: OrderListOpocoRequest = {
+                symbol: 'BNBUSDT',
+                workingType: OrderListOpocoWorkingTypeEnum.LIMIT,
+                workingSide: OrderListOpocoWorkingSideEnum.BUY,
+                workingPrice: 1.0,
+                workingQuantity: 1.0,
+                pendingSide: OrderListOpocoPendingSideEnum.BUY,
+                pendingAboveType: OrderListOpocoPendingAboveTypeEnum.STOP_LOSS_LIMIT,
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'orderListOpoco').mockRejectedValueOnce(mockError);
+            await expect(client.orderListOpoco(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

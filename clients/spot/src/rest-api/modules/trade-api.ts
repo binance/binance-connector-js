@@ -32,6 +32,8 @@ import type {
     OrderAmendKeepPriorityResponse,
     OrderCancelReplaceResponse,
     OrderListOcoResponse,
+    OrderListOpoResponse,
+    OrderListOpocoResponse,
     OrderListOtoResponse,
     OrderListOtocoResponse,
     OrderOcoResponse,
@@ -61,11 +63,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('deleteOpenOrders', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -76,7 +78,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/api/v3/openOrders',
                 method: 'DELETE',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -106,27 +109,23 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('deleteOrder', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (orderId !== undefined && orderId !== null) {
                 localVarQueryParameter['orderId'] = orderId;
             }
-
             if (origClientOrderId !== undefined && origClientOrderId !== null) {
                 localVarQueryParameter['origClientOrderId'] = origClientOrderId;
             }
-
             if (newClientOrderId !== undefined && newClientOrderId !== null) {
                 localVarQueryParameter['newClientOrderId'] = newClientOrderId;
             }
-
             if (cancelRestrictions !== undefined && cancelRestrictions !== null) {
                 localVarQueryParameter['cancelRestrictions'] = cancelRestrictions;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -137,7 +136,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/api/v3/order',
                 method: 'DELETE',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -165,23 +165,20 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('deleteOrderList', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (orderListId !== undefined && orderListId !== null) {
                 localVarQueryParameter['orderListId'] = orderListId;
             }
-
             if (listClientOrderId !== undefined && listClientOrderId !== null) {
                 localVarQueryParameter['listClientOrderId'] = listClientOrderId;
             }
-
             if (newClientOrderId !== undefined && newClientOrderId !== null) {
                 localVarQueryParameter['newClientOrderId'] = newClientOrderId;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -192,7 +189,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/api/v3/orderList',
                 method: 'DELETE',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -254,79 +252,62 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('newOrder', 'type', type);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (side !== undefined && side !== null) {
                 localVarQueryParameter['side'] = side;
             }
-
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (timeInForce !== undefined && timeInForce !== null) {
                 localVarQueryParameter['timeInForce'] = timeInForce;
             }
-
             if (quantity !== undefined && quantity !== null) {
                 localVarQueryParameter['quantity'] = quantity;
             }
-
             if (quoteOrderQty !== undefined && quoteOrderQty !== null) {
                 localVarQueryParameter['quoteOrderQty'] = quoteOrderQty;
             }
-
             if (price !== undefined && price !== null) {
                 localVarQueryParameter['price'] = price;
             }
-
             if (newClientOrderId !== undefined && newClientOrderId !== null) {
                 localVarQueryParameter['newClientOrderId'] = newClientOrderId;
             }
-
             if (strategyId !== undefined && strategyId !== null) {
                 localVarQueryParameter['strategyId'] = strategyId;
             }
-
             if (strategyType !== undefined && strategyType !== null) {
                 localVarQueryParameter['strategyType'] = strategyType;
             }
-
             if (stopPrice !== undefined && stopPrice !== null) {
                 localVarQueryParameter['stopPrice'] = stopPrice;
             }
-
             if (trailingDelta !== undefined && trailingDelta !== null) {
                 localVarQueryParameter['trailingDelta'] = trailingDelta;
             }
-
             if (icebergQty !== undefined && icebergQty !== null) {
                 localVarQueryParameter['icebergQty'] = icebergQty;
             }
-
             if (newOrderRespType !== undefined && newOrderRespType !== null) {
                 localVarQueryParameter['newOrderRespType'] = newOrderRespType;
             }
-
             if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
                 localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
             }
-
             if (pegPriceType !== undefined && pegPriceType !== null) {
                 localVarQueryParameter['pegPriceType'] = pegPriceType;
             }
-
             if (pegOffsetValue !== undefined && pegOffsetValue !== null) {
                 localVarQueryParameter['pegOffsetValue'] = pegOffsetValue;
             }
-
             if (pegOffsetType !== undefined && pegOffsetType !== null) {
                 localVarQueryParameter['pegOffsetType'] = pegOffsetType;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -337,7 +318,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/api/v3/order',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -373,27 +355,23 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('orderAmendKeepPriority', 'newQty', newQty);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (orderId !== undefined && orderId !== null) {
                 localVarQueryParameter['orderId'] = orderId;
             }
-
             if (origClientOrderId !== undefined && origClientOrderId !== null) {
                 localVarQueryParameter['origClientOrderId'] = origClientOrderId;
             }
-
             if (newClientOrderId !== undefined && newClientOrderId !== null) {
                 localVarQueryParameter['newClientOrderId'] = newClientOrderId;
             }
-
             if (newQty !== undefined && newQty !== null) {
                 localVarQueryParameter['newQty'] = newQty;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -404,7 +382,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/api/v3/order/amend/keepPriority',
                 method: 'PUT',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -482,103 +461,80 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('orderCancelReplace', 'cancelReplaceMode', cancelReplaceMode);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (side !== undefined && side !== null) {
                 localVarQueryParameter['side'] = side;
             }
-
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (cancelReplaceMode !== undefined && cancelReplaceMode !== null) {
                 localVarQueryParameter['cancelReplaceMode'] = cancelReplaceMode;
             }
-
             if (timeInForce !== undefined && timeInForce !== null) {
                 localVarQueryParameter['timeInForce'] = timeInForce;
             }
-
             if (quantity !== undefined && quantity !== null) {
                 localVarQueryParameter['quantity'] = quantity;
             }
-
             if (quoteOrderQty !== undefined && quoteOrderQty !== null) {
                 localVarQueryParameter['quoteOrderQty'] = quoteOrderQty;
             }
-
             if (price !== undefined && price !== null) {
                 localVarQueryParameter['price'] = price;
             }
-
             if (cancelNewClientOrderId !== undefined && cancelNewClientOrderId !== null) {
                 localVarQueryParameter['cancelNewClientOrderId'] = cancelNewClientOrderId;
             }
-
             if (cancelOrigClientOrderId !== undefined && cancelOrigClientOrderId !== null) {
                 localVarQueryParameter['cancelOrigClientOrderId'] = cancelOrigClientOrderId;
             }
-
             if (cancelOrderId !== undefined && cancelOrderId !== null) {
                 localVarQueryParameter['cancelOrderId'] = cancelOrderId;
             }
-
             if (newClientOrderId !== undefined && newClientOrderId !== null) {
                 localVarQueryParameter['newClientOrderId'] = newClientOrderId;
             }
-
             if (strategyId !== undefined && strategyId !== null) {
                 localVarQueryParameter['strategyId'] = strategyId;
             }
-
             if (strategyType !== undefined && strategyType !== null) {
                 localVarQueryParameter['strategyType'] = strategyType;
             }
-
             if (stopPrice !== undefined && stopPrice !== null) {
                 localVarQueryParameter['stopPrice'] = stopPrice;
             }
-
             if (trailingDelta !== undefined && trailingDelta !== null) {
                 localVarQueryParameter['trailingDelta'] = trailingDelta;
             }
-
             if (icebergQty !== undefined && icebergQty !== null) {
                 localVarQueryParameter['icebergQty'] = icebergQty;
             }
-
             if (newOrderRespType !== undefined && newOrderRespType !== null) {
                 localVarQueryParameter['newOrderRespType'] = newOrderRespType;
             }
-
             if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
                 localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
             }
-
             if (cancelRestrictions !== undefined && cancelRestrictions !== null) {
                 localVarQueryParameter['cancelRestrictions'] = cancelRestrictions;
             }
-
             if (orderRateLimitExceededMode !== undefined && orderRateLimitExceededMode !== null) {
                 localVarQueryParameter['orderRateLimitExceededMode'] = orderRateLimitExceededMode;
             }
-
             if (pegPriceType !== undefined && pegPriceType !== null) {
                 localVarQueryParameter['pegPriceType'] = pegPriceType;
             }
-
             if (pegOffsetValue !== undefined && pegOffsetValue !== null) {
                 localVarQueryParameter['pegOffsetValue'] = pegOffsetValue;
             }
-
             if (pegOffsetType !== undefined && pegOffsetType !== null) {
                 localVarQueryParameter['pegOffsetType'] = pegOffsetType;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -589,7 +545,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/api/v3/order/cancelReplace',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -690,127 +647,98 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('orderListOco', 'belowType', belowType);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (listClientOrderId !== undefined && listClientOrderId !== null) {
                 localVarQueryParameter['listClientOrderId'] = listClientOrderId;
             }
-
             if (side !== undefined && side !== null) {
                 localVarQueryParameter['side'] = side;
             }
-
             if (quantity !== undefined && quantity !== null) {
                 localVarQueryParameter['quantity'] = quantity;
             }
-
             if (aboveType !== undefined && aboveType !== null) {
                 localVarQueryParameter['aboveType'] = aboveType;
             }
-
             if (aboveClientOrderId !== undefined && aboveClientOrderId !== null) {
                 localVarQueryParameter['aboveClientOrderId'] = aboveClientOrderId;
             }
-
             if (aboveIcebergQty !== undefined && aboveIcebergQty !== null) {
                 localVarQueryParameter['aboveIcebergQty'] = aboveIcebergQty;
             }
-
             if (abovePrice !== undefined && abovePrice !== null) {
                 localVarQueryParameter['abovePrice'] = abovePrice;
             }
-
             if (aboveStopPrice !== undefined && aboveStopPrice !== null) {
                 localVarQueryParameter['aboveStopPrice'] = aboveStopPrice;
             }
-
             if (aboveTrailingDelta !== undefined && aboveTrailingDelta !== null) {
                 localVarQueryParameter['aboveTrailingDelta'] = aboveTrailingDelta;
             }
-
             if (aboveTimeInForce !== undefined && aboveTimeInForce !== null) {
                 localVarQueryParameter['aboveTimeInForce'] = aboveTimeInForce;
             }
-
             if (aboveStrategyId !== undefined && aboveStrategyId !== null) {
                 localVarQueryParameter['aboveStrategyId'] = aboveStrategyId;
             }
-
             if (aboveStrategyType !== undefined && aboveStrategyType !== null) {
                 localVarQueryParameter['aboveStrategyType'] = aboveStrategyType;
             }
-
             if (abovePegPriceType !== undefined && abovePegPriceType !== null) {
                 localVarQueryParameter['abovePegPriceType'] = abovePegPriceType;
             }
-
             if (abovePegOffsetType !== undefined && abovePegOffsetType !== null) {
                 localVarQueryParameter['abovePegOffsetType'] = abovePegOffsetType;
             }
-
             if (abovePegOffsetValue !== undefined && abovePegOffsetValue !== null) {
                 localVarQueryParameter['abovePegOffsetValue'] = abovePegOffsetValue;
             }
-
             if (belowType !== undefined && belowType !== null) {
                 localVarQueryParameter['belowType'] = belowType;
             }
-
             if (belowClientOrderId !== undefined && belowClientOrderId !== null) {
                 localVarQueryParameter['belowClientOrderId'] = belowClientOrderId;
             }
-
             if (belowIcebergQty !== undefined && belowIcebergQty !== null) {
                 localVarQueryParameter['belowIcebergQty'] = belowIcebergQty;
             }
-
             if (belowPrice !== undefined && belowPrice !== null) {
                 localVarQueryParameter['belowPrice'] = belowPrice;
             }
-
             if (belowStopPrice !== undefined && belowStopPrice !== null) {
                 localVarQueryParameter['belowStopPrice'] = belowStopPrice;
             }
-
             if (belowTrailingDelta !== undefined && belowTrailingDelta !== null) {
                 localVarQueryParameter['belowTrailingDelta'] = belowTrailingDelta;
             }
-
             if (belowTimeInForce !== undefined && belowTimeInForce !== null) {
                 localVarQueryParameter['belowTimeInForce'] = belowTimeInForce;
             }
-
             if (belowStrategyId !== undefined && belowStrategyId !== null) {
                 localVarQueryParameter['belowStrategyId'] = belowStrategyId;
             }
-
             if (belowStrategyType !== undefined && belowStrategyType !== null) {
                 localVarQueryParameter['belowStrategyType'] = belowStrategyType;
             }
-
             if (belowPegPriceType !== undefined && belowPegPriceType !== null) {
                 localVarQueryParameter['belowPegPriceType'] = belowPegPriceType;
             }
-
             if (belowPegOffsetType !== undefined && belowPegOffsetType !== null) {
                 localVarQueryParameter['belowPegOffsetType'] = belowPegOffsetType;
             }
-
             if (belowPegOffsetValue !== undefined && belowPegOffsetValue !== null) {
                 localVarQueryParameter['belowPegOffsetValue'] = belowPegOffsetValue;
             }
-
             if (newOrderRespType !== undefined && newOrderRespType !== null) {
                 localVarQueryParameter['newOrderRespType'] = newOrderRespType;
             }
-
             if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
                 localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -821,7 +749,454 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/api/v3/orderList/oco',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Place an [OPO](./faqs/opo.md).
+         *
+         * OPOs add 2 orders to the EXCHANGE_MAX_NUM_ORDERS filter and MAX_NUM_ORDERS filter.
+         * Weight: 1
+         *
+         * Unfilled Order Count: 2
+         *
+         * @summary New Order List - OPO
+         * @param {string} symbol
+         * @param {OrderListOpoWorkingTypeEnum} workingType
+         * @param {OrderListOpoWorkingSideEnum} workingSide
+         * @param {number} workingPrice
+         * @param {number} workingQuantity Sets the quantity for the working order.
+         * @param {OrderListOpoPendingTypeEnum} pendingType
+         * @param {OrderListOpoPendingSideEnum} pendingSide
+         * @param {string} [listClientOrderId] A unique Id for the entire orderList
+         * @param {OrderListOpoNewOrderRespTypeEnum} [newOrderRespType]
+         * @param {OrderListOpoSelfTradePreventionModeEnum} [selfTradePreventionMode]
+         * @param {string} [workingClientOrderId] Arbitrary unique ID among open orders for the working order. Automatically generated if not sent.
+         * @param {number} [workingIcebergQty] This can only be used if `workingTimeInForce` is `GTC`, or if `workingType` is `LIMIT_MAKER`.
+         * @param {OrderListOpoWorkingTimeInForceEnum} [workingTimeInForce]
+         * @param {number | bigint} [workingStrategyId] Arbitrary numeric value identifying the working order within an order strategy.
+         * @param {number} [workingStrategyType] Arbitrary numeric value identifying the working order strategy. Values smaller than 1000000 are reserved and cannot be used.
+         * @param {OrderListOpoWorkingPegPriceTypeEnum} [workingPegPriceType]
+         * @param {OrderListOpoWorkingPegOffsetTypeEnum} [workingPegOffsetType]
+         * @param {number} [workingPegOffsetValue]
+         * @param {string} [pendingClientOrderId] Arbitrary unique ID among open orders for the pending order. Automatically generated if not sent.
+         * @param {number} [pendingPrice]
+         * @param {number} [pendingStopPrice]
+         * @param {number} [pendingTrailingDelta]
+         * @param {number} [pendingIcebergQty] This can only be used if `pendingTimeInForce` is `GTC` or if `pendingType` is `LIMIT_MAKER`.
+         * @param {OrderListOpoPendingTimeInForceEnum} [pendingTimeInForce]
+         * @param {number | bigint} [pendingStrategyId] Arbitrary numeric value identifying the pending order within an order strategy.
+         * @param {number} [pendingStrategyType] Arbitrary numeric value identifying the pending order strategy. Values smaller than 1000000 are reserved and cannot be used.
+         * @param {OrderListOpoPendingPegPriceTypeEnum} [pendingPegPriceType]
+         * @param {OrderListOpoPendingPegOffsetTypeEnum} [pendingPegOffsetType]
+         * @param {number} [pendingPegOffsetValue]
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+         *
+         * @throws {RequiredError}
+         */
+        orderListOpo: async (
+            symbol: string,
+            workingType: OrderListOpoWorkingTypeEnum,
+            workingSide: OrderListOpoWorkingSideEnum,
+            workingPrice: number,
+            workingQuantity: number,
+            pendingType: OrderListOpoPendingTypeEnum,
+            pendingSide: OrderListOpoPendingSideEnum,
+            listClientOrderId?: string,
+            newOrderRespType?: OrderListOpoNewOrderRespTypeEnum,
+            selfTradePreventionMode?: OrderListOpoSelfTradePreventionModeEnum,
+            workingClientOrderId?: string,
+            workingIcebergQty?: number,
+            workingTimeInForce?: OrderListOpoWorkingTimeInForceEnum,
+            workingStrategyId?: number | bigint,
+            workingStrategyType?: number,
+            workingPegPriceType?: OrderListOpoWorkingPegPriceTypeEnum,
+            workingPegOffsetType?: OrderListOpoWorkingPegOffsetTypeEnum,
+            workingPegOffsetValue?: number,
+            pendingClientOrderId?: string,
+            pendingPrice?: number,
+            pendingStopPrice?: number,
+            pendingTrailingDelta?: number,
+            pendingIcebergQty?: number,
+            pendingTimeInForce?: OrderListOpoPendingTimeInForceEnum,
+            pendingStrategyId?: number | bigint,
+            pendingStrategyType?: number,
+            pendingPegPriceType?: OrderListOpoPendingPegPriceTypeEnum,
+            pendingPegOffsetType?: OrderListOpoPendingPegOffsetTypeEnum,
+            pendingPegOffsetValue?: number,
+            recvWindow?: number
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'symbol' is not null or undefined
+            assertParamExists('orderListOpo', 'symbol', symbol);
+            // verify required parameter 'workingType' is not null or undefined
+            assertParamExists('orderListOpo', 'workingType', workingType);
+            // verify required parameter 'workingSide' is not null or undefined
+            assertParamExists('orderListOpo', 'workingSide', workingSide);
+            // verify required parameter 'workingPrice' is not null or undefined
+            assertParamExists('orderListOpo', 'workingPrice', workingPrice);
+            // verify required parameter 'workingQuantity' is not null or undefined
+            assertParamExists('orderListOpo', 'workingQuantity', workingQuantity);
+            // verify required parameter 'pendingType' is not null or undefined
+            assertParamExists('orderListOpo', 'pendingType', pendingType);
+            // verify required parameter 'pendingSide' is not null or undefined
+            assertParamExists('orderListOpo', 'pendingSide', pendingSide);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+
+            if (symbol !== undefined && symbol !== null) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+            if (listClientOrderId !== undefined && listClientOrderId !== null) {
+                localVarQueryParameter['listClientOrderId'] = listClientOrderId;
+            }
+            if (newOrderRespType !== undefined && newOrderRespType !== null) {
+                localVarQueryParameter['newOrderRespType'] = newOrderRespType;
+            }
+            if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
+                localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
+            }
+            if (workingType !== undefined && workingType !== null) {
+                localVarQueryParameter['workingType'] = workingType;
+            }
+            if (workingSide !== undefined && workingSide !== null) {
+                localVarQueryParameter['workingSide'] = workingSide;
+            }
+            if (workingClientOrderId !== undefined && workingClientOrderId !== null) {
+                localVarQueryParameter['workingClientOrderId'] = workingClientOrderId;
+            }
+            if (workingPrice !== undefined && workingPrice !== null) {
+                localVarQueryParameter['workingPrice'] = workingPrice;
+            }
+            if (workingQuantity !== undefined && workingQuantity !== null) {
+                localVarQueryParameter['workingQuantity'] = workingQuantity;
+            }
+            if (workingIcebergQty !== undefined && workingIcebergQty !== null) {
+                localVarQueryParameter['workingIcebergQty'] = workingIcebergQty;
+            }
+            if (workingTimeInForce !== undefined && workingTimeInForce !== null) {
+                localVarQueryParameter['workingTimeInForce'] = workingTimeInForce;
+            }
+            if (workingStrategyId !== undefined && workingStrategyId !== null) {
+                localVarQueryParameter['workingStrategyId'] = workingStrategyId;
+            }
+            if (workingStrategyType !== undefined && workingStrategyType !== null) {
+                localVarQueryParameter['workingStrategyType'] = workingStrategyType;
+            }
+            if (workingPegPriceType !== undefined && workingPegPriceType !== null) {
+                localVarQueryParameter['workingPegPriceType'] = workingPegPriceType;
+            }
+            if (workingPegOffsetType !== undefined && workingPegOffsetType !== null) {
+                localVarQueryParameter['workingPegOffsetType'] = workingPegOffsetType;
+            }
+            if (workingPegOffsetValue !== undefined && workingPegOffsetValue !== null) {
+                localVarQueryParameter['workingPegOffsetValue'] = workingPegOffsetValue;
+            }
+            if (pendingType !== undefined && pendingType !== null) {
+                localVarQueryParameter['pendingType'] = pendingType;
+            }
+            if (pendingSide !== undefined && pendingSide !== null) {
+                localVarQueryParameter['pendingSide'] = pendingSide;
+            }
+            if (pendingClientOrderId !== undefined && pendingClientOrderId !== null) {
+                localVarQueryParameter['pendingClientOrderId'] = pendingClientOrderId;
+            }
+            if (pendingPrice !== undefined && pendingPrice !== null) {
+                localVarQueryParameter['pendingPrice'] = pendingPrice;
+            }
+            if (pendingStopPrice !== undefined && pendingStopPrice !== null) {
+                localVarQueryParameter['pendingStopPrice'] = pendingStopPrice;
+            }
+            if (pendingTrailingDelta !== undefined && pendingTrailingDelta !== null) {
+                localVarQueryParameter['pendingTrailingDelta'] = pendingTrailingDelta;
+            }
+            if (pendingIcebergQty !== undefined && pendingIcebergQty !== null) {
+                localVarQueryParameter['pendingIcebergQty'] = pendingIcebergQty;
+            }
+            if (pendingTimeInForce !== undefined && pendingTimeInForce !== null) {
+                localVarQueryParameter['pendingTimeInForce'] = pendingTimeInForce;
+            }
+            if (pendingStrategyId !== undefined && pendingStrategyId !== null) {
+                localVarQueryParameter['pendingStrategyId'] = pendingStrategyId;
+            }
+            if (pendingStrategyType !== undefined && pendingStrategyType !== null) {
+                localVarQueryParameter['pendingStrategyType'] = pendingStrategyType;
+            }
+            if (pendingPegPriceType !== undefined && pendingPegPriceType !== null) {
+                localVarQueryParameter['pendingPegPriceType'] = pendingPegPriceType;
+            }
+            if (pendingPegOffsetType !== undefined && pendingPegOffsetType !== null) {
+                localVarQueryParameter['pendingPegOffsetType'] = pendingPegOffsetType;
+            }
+            if (pendingPegOffsetValue !== undefined && pendingPegOffsetValue !== null) {
+                localVarQueryParameter['pendingPegOffsetValue'] = pendingPegOffsetValue;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/api/v3/orderList/opo',
+                method: 'POST',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Place an [OPOCO](./faqs/opo.md).
+         * Weight: 1
+         *
+         * Unfilled Order Count: 3
+         *
+         * @summary New Order List - OPOCO
+         * @param {string} symbol
+         * @param {OrderListOpocoWorkingTypeEnum} workingType
+         * @param {OrderListOpocoWorkingSideEnum} workingSide
+         * @param {number} workingPrice
+         * @param {number} workingQuantity Sets the quantity for the working order.
+         * @param {OrderListOpocoPendingSideEnum} pendingSide
+         * @param {OrderListOpocoPendingAboveTypeEnum} pendingAboveType
+         * @param {string} [listClientOrderId] A unique Id for the entire orderList
+         * @param {OrderListOpocoNewOrderRespTypeEnum} [newOrderRespType]
+         * @param {OrderListOpocoSelfTradePreventionModeEnum} [selfTradePreventionMode]
+         * @param {string} [workingClientOrderId] Arbitrary unique ID among open orders for the working order. Automatically generated if not sent.
+         * @param {number} [workingIcebergQty] This can only be used if `workingTimeInForce` is `GTC`, or if `workingType` is `LIMIT_MAKER`.
+         * @param {OrderListOpocoWorkingTimeInForceEnum} [workingTimeInForce]
+         * @param {number | bigint} [workingStrategyId] Arbitrary numeric value identifying the working order within an order strategy.
+         * @param {number} [workingStrategyType] Arbitrary numeric value identifying the working order strategy. Values smaller than 1000000 are reserved and cannot be used.
+         * @param {OrderListOpocoWorkingPegPriceTypeEnum} [workingPegPriceType]
+         * @param {OrderListOpocoWorkingPegOffsetTypeEnum} [workingPegOffsetType]
+         * @param {number} [workingPegOffsetValue]
+         * @param {string} [pendingAboveClientOrderId] Arbitrary unique ID among open orders for the pending above order. Automatically generated if not sent.
+         * @param {number} [pendingAbovePrice] Can be used if `pendingAboveType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.
+         * @param {number} [pendingAboveStopPrice] Can be used if `pendingAboveType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT`
+         * @param {number} [pendingAboveTrailingDelta] See [Trailing Stop FAQ](./faqs/trailing-stop-faq.md)
+         * @param {number} [pendingAboveIcebergQty] This can only be used if `pendingAboveTimeInForce` is `GTC` or if `pendingAboveType` is `LIMIT_MAKER`.
+         * @param {OrderListOpocoPendingAboveTimeInForceEnum} [pendingAboveTimeInForce]
+         * @param {number | bigint} [pendingAboveStrategyId] Arbitrary numeric value identifying the pending above order within an order strategy.
+         * @param {number} [pendingAboveStrategyType] Arbitrary numeric value identifying the pending above order strategy. Values smaller than 1000000 are reserved and cannot be used.
+         * @param {OrderListOpocoPendingAbovePegPriceTypeEnum} [pendingAbovePegPriceType]
+         * @param {OrderListOpocoPendingAbovePegOffsetTypeEnum} [pendingAbovePegOffsetType]
+         * @param {number} [pendingAbovePegOffsetValue]
+         * @param {OrderListOpocoPendingBelowTypeEnum} [pendingBelowType]
+         * @param {string} [pendingBelowClientOrderId] Arbitrary unique ID among open orders for the pending below order. Automatically generated if not sent.
+         * @param {number} [pendingBelowPrice] Can be used if `pendingBelowType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT` to specify limit price
+         * @param {number} [pendingBelowStopPrice] Can be used if `pendingBelowType` is `STOP_LOSS`, `STOP_LOSS_LIMIT, TAKE_PROFIT or TAKE_PROFIT_LIMIT`. Either `pendingBelowStopPrice` or `pendingBelowTrailingDelta` or both, must be specified.
+         * @param {number} [pendingBelowTrailingDelta]
+         * @param {number} [pendingBelowIcebergQty] This can only be used if `pendingBelowTimeInForce` is `GTC`, or if `pendingBelowType` is `LIMIT_MAKER`.
+         * @param {OrderListOpocoPendingBelowTimeInForceEnum} [pendingBelowTimeInForce]
+         * @param {number | bigint} [pendingBelowStrategyId] Arbitrary numeric value identifying the pending below order within an order strategy.
+         * @param {number} [pendingBelowStrategyType] Arbitrary numeric value identifying the pending below order strategy. Values smaller than 1000000 are reserved and cannot be used.
+         * @param {OrderListOpocoPendingBelowPegPriceTypeEnum} [pendingBelowPegPriceType]
+         * @param {OrderListOpocoPendingBelowPegOffsetTypeEnum} [pendingBelowPegOffsetType]
+         * @param {number} [pendingBelowPegOffsetValue]
+         * @param {number} [recvWindow] The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+         *
+         * @throws {RequiredError}
+         */
+        orderListOpoco: async (
+            symbol: string,
+            workingType: OrderListOpocoWorkingTypeEnum,
+            workingSide: OrderListOpocoWorkingSideEnum,
+            workingPrice: number,
+            workingQuantity: number,
+            pendingSide: OrderListOpocoPendingSideEnum,
+            pendingAboveType: OrderListOpocoPendingAboveTypeEnum,
+            listClientOrderId?: string,
+            newOrderRespType?: OrderListOpocoNewOrderRespTypeEnum,
+            selfTradePreventionMode?: OrderListOpocoSelfTradePreventionModeEnum,
+            workingClientOrderId?: string,
+            workingIcebergQty?: number,
+            workingTimeInForce?: OrderListOpocoWorkingTimeInForceEnum,
+            workingStrategyId?: number | bigint,
+            workingStrategyType?: number,
+            workingPegPriceType?: OrderListOpocoWorkingPegPriceTypeEnum,
+            workingPegOffsetType?: OrderListOpocoWorkingPegOffsetTypeEnum,
+            workingPegOffsetValue?: number,
+            pendingAboveClientOrderId?: string,
+            pendingAbovePrice?: number,
+            pendingAboveStopPrice?: number,
+            pendingAboveTrailingDelta?: number,
+            pendingAboveIcebergQty?: number,
+            pendingAboveTimeInForce?: OrderListOpocoPendingAboveTimeInForceEnum,
+            pendingAboveStrategyId?: number | bigint,
+            pendingAboveStrategyType?: number,
+            pendingAbovePegPriceType?: OrderListOpocoPendingAbovePegPriceTypeEnum,
+            pendingAbovePegOffsetType?: OrderListOpocoPendingAbovePegOffsetTypeEnum,
+            pendingAbovePegOffsetValue?: number,
+            pendingBelowType?: OrderListOpocoPendingBelowTypeEnum,
+            pendingBelowClientOrderId?: string,
+            pendingBelowPrice?: number,
+            pendingBelowStopPrice?: number,
+            pendingBelowTrailingDelta?: number,
+            pendingBelowIcebergQty?: number,
+            pendingBelowTimeInForce?: OrderListOpocoPendingBelowTimeInForceEnum,
+            pendingBelowStrategyId?: number | bigint,
+            pendingBelowStrategyType?: number,
+            pendingBelowPegPriceType?: OrderListOpocoPendingBelowPegPriceTypeEnum,
+            pendingBelowPegOffsetType?: OrderListOpocoPendingBelowPegOffsetTypeEnum,
+            pendingBelowPegOffsetValue?: number,
+            recvWindow?: number
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'symbol' is not null or undefined
+            assertParamExists('orderListOpoco', 'symbol', symbol);
+            // verify required parameter 'workingType' is not null or undefined
+            assertParamExists('orderListOpoco', 'workingType', workingType);
+            // verify required parameter 'workingSide' is not null or undefined
+            assertParamExists('orderListOpoco', 'workingSide', workingSide);
+            // verify required parameter 'workingPrice' is not null or undefined
+            assertParamExists('orderListOpoco', 'workingPrice', workingPrice);
+            // verify required parameter 'workingQuantity' is not null or undefined
+            assertParamExists('orderListOpoco', 'workingQuantity', workingQuantity);
+            // verify required parameter 'pendingSide' is not null or undefined
+            assertParamExists('orderListOpoco', 'pendingSide', pendingSide);
+            // verify required parameter 'pendingAboveType' is not null or undefined
+            assertParamExists('orderListOpoco', 'pendingAboveType', pendingAboveType);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+
+            if (symbol !== undefined && symbol !== null) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+            if (listClientOrderId !== undefined && listClientOrderId !== null) {
+                localVarQueryParameter['listClientOrderId'] = listClientOrderId;
+            }
+            if (newOrderRespType !== undefined && newOrderRespType !== null) {
+                localVarQueryParameter['newOrderRespType'] = newOrderRespType;
+            }
+            if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
+                localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
+            }
+            if (workingType !== undefined && workingType !== null) {
+                localVarQueryParameter['workingType'] = workingType;
+            }
+            if (workingSide !== undefined && workingSide !== null) {
+                localVarQueryParameter['workingSide'] = workingSide;
+            }
+            if (workingClientOrderId !== undefined && workingClientOrderId !== null) {
+                localVarQueryParameter['workingClientOrderId'] = workingClientOrderId;
+            }
+            if (workingPrice !== undefined && workingPrice !== null) {
+                localVarQueryParameter['workingPrice'] = workingPrice;
+            }
+            if (workingQuantity !== undefined && workingQuantity !== null) {
+                localVarQueryParameter['workingQuantity'] = workingQuantity;
+            }
+            if (workingIcebergQty !== undefined && workingIcebergQty !== null) {
+                localVarQueryParameter['workingIcebergQty'] = workingIcebergQty;
+            }
+            if (workingTimeInForce !== undefined && workingTimeInForce !== null) {
+                localVarQueryParameter['workingTimeInForce'] = workingTimeInForce;
+            }
+            if (workingStrategyId !== undefined && workingStrategyId !== null) {
+                localVarQueryParameter['workingStrategyId'] = workingStrategyId;
+            }
+            if (workingStrategyType !== undefined && workingStrategyType !== null) {
+                localVarQueryParameter['workingStrategyType'] = workingStrategyType;
+            }
+            if (workingPegPriceType !== undefined && workingPegPriceType !== null) {
+                localVarQueryParameter['workingPegPriceType'] = workingPegPriceType;
+            }
+            if (workingPegOffsetType !== undefined && workingPegOffsetType !== null) {
+                localVarQueryParameter['workingPegOffsetType'] = workingPegOffsetType;
+            }
+            if (workingPegOffsetValue !== undefined && workingPegOffsetValue !== null) {
+                localVarQueryParameter['workingPegOffsetValue'] = workingPegOffsetValue;
+            }
+            if (pendingSide !== undefined && pendingSide !== null) {
+                localVarQueryParameter['pendingSide'] = pendingSide;
+            }
+            if (pendingAboveType !== undefined && pendingAboveType !== null) {
+                localVarQueryParameter['pendingAboveType'] = pendingAboveType;
+            }
+            if (pendingAboveClientOrderId !== undefined && pendingAboveClientOrderId !== null) {
+                localVarQueryParameter['pendingAboveClientOrderId'] = pendingAboveClientOrderId;
+            }
+            if (pendingAbovePrice !== undefined && pendingAbovePrice !== null) {
+                localVarQueryParameter['pendingAbovePrice'] = pendingAbovePrice;
+            }
+            if (pendingAboveStopPrice !== undefined && pendingAboveStopPrice !== null) {
+                localVarQueryParameter['pendingAboveStopPrice'] = pendingAboveStopPrice;
+            }
+            if (pendingAboveTrailingDelta !== undefined && pendingAboveTrailingDelta !== null) {
+                localVarQueryParameter['pendingAboveTrailingDelta'] = pendingAboveTrailingDelta;
+            }
+            if (pendingAboveIcebergQty !== undefined && pendingAboveIcebergQty !== null) {
+                localVarQueryParameter['pendingAboveIcebergQty'] = pendingAboveIcebergQty;
+            }
+            if (pendingAboveTimeInForce !== undefined && pendingAboveTimeInForce !== null) {
+                localVarQueryParameter['pendingAboveTimeInForce'] = pendingAboveTimeInForce;
+            }
+            if (pendingAboveStrategyId !== undefined && pendingAboveStrategyId !== null) {
+                localVarQueryParameter['pendingAboveStrategyId'] = pendingAboveStrategyId;
+            }
+            if (pendingAboveStrategyType !== undefined && pendingAboveStrategyType !== null) {
+                localVarQueryParameter['pendingAboveStrategyType'] = pendingAboveStrategyType;
+            }
+            if (pendingAbovePegPriceType !== undefined && pendingAbovePegPriceType !== null) {
+                localVarQueryParameter['pendingAbovePegPriceType'] = pendingAbovePegPriceType;
+            }
+            if (pendingAbovePegOffsetType !== undefined && pendingAbovePegOffsetType !== null) {
+                localVarQueryParameter['pendingAbovePegOffsetType'] = pendingAbovePegOffsetType;
+            }
+            if (pendingAbovePegOffsetValue !== undefined && pendingAbovePegOffsetValue !== null) {
+                localVarQueryParameter['pendingAbovePegOffsetValue'] = pendingAbovePegOffsetValue;
+            }
+            if (pendingBelowType !== undefined && pendingBelowType !== null) {
+                localVarQueryParameter['pendingBelowType'] = pendingBelowType;
+            }
+            if (pendingBelowClientOrderId !== undefined && pendingBelowClientOrderId !== null) {
+                localVarQueryParameter['pendingBelowClientOrderId'] = pendingBelowClientOrderId;
+            }
+            if (pendingBelowPrice !== undefined && pendingBelowPrice !== null) {
+                localVarQueryParameter['pendingBelowPrice'] = pendingBelowPrice;
+            }
+            if (pendingBelowStopPrice !== undefined && pendingBelowStopPrice !== null) {
+                localVarQueryParameter['pendingBelowStopPrice'] = pendingBelowStopPrice;
+            }
+            if (pendingBelowTrailingDelta !== undefined && pendingBelowTrailingDelta !== null) {
+                localVarQueryParameter['pendingBelowTrailingDelta'] = pendingBelowTrailingDelta;
+            }
+            if (pendingBelowIcebergQty !== undefined && pendingBelowIcebergQty !== null) {
+                localVarQueryParameter['pendingBelowIcebergQty'] = pendingBelowIcebergQty;
+            }
+            if (pendingBelowTimeInForce !== undefined && pendingBelowTimeInForce !== null) {
+                localVarQueryParameter['pendingBelowTimeInForce'] = pendingBelowTimeInForce;
+            }
+            if (pendingBelowStrategyId !== undefined && pendingBelowStrategyId !== null) {
+                localVarQueryParameter['pendingBelowStrategyId'] = pendingBelowStrategyId;
+            }
+            if (pendingBelowStrategyType !== undefined && pendingBelowStrategyType !== null) {
+                localVarQueryParameter['pendingBelowStrategyType'] = pendingBelowStrategyType;
+            }
+            if (pendingBelowPegPriceType !== undefined && pendingBelowPegPriceType !== null) {
+                localVarQueryParameter['pendingBelowPegPriceType'] = pendingBelowPegPriceType;
+            }
+            if (pendingBelowPegOffsetType !== undefined && pendingBelowPegOffsetType !== null) {
+                localVarQueryParameter['pendingBelowPegOffsetType'] = pendingBelowPegOffsetType;
+            }
+            if (pendingBelowPegOffsetValue !== undefined && pendingBelowPegOffsetValue !== null) {
+                localVarQueryParameter['pendingBelowPegOffsetValue'] = pendingBelowPegOffsetValue;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/api/v3/orderList/opoco',
+                method: 'POST',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -850,22 +1225,22 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} [listClientOrderId] A unique Id for the entire orderList
          * @param {OrderListOtoNewOrderRespTypeEnum} [newOrderRespType]
          * @param {OrderListOtoSelfTradePreventionModeEnum} [selfTradePreventionMode]
-         * @param {string} [workingClientOrderId] Arbitrary unique ID among open orders for the working order.<br> Automatically generated if not sent.
+         * @param {string} [workingClientOrderId] Arbitrary unique ID among open orders for the working order. Automatically generated if not sent.
          * @param {number} [workingIcebergQty] This can only be used if `workingTimeInForce` is `GTC`, or if `workingType` is `LIMIT_MAKER`.
          * @param {OrderListOtoWorkingTimeInForceEnum} [workingTimeInForce]
          * @param {number | bigint} [workingStrategyId] Arbitrary numeric value identifying the working order within an order strategy.
-         * @param {number} [workingStrategyType] Arbitrary numeric value identifying the working order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
+         * @param {number} [workingStrategyType] Arbitrary numeric value identifying the working order strategy. Values smaller than 1000000 are reserved and cannot be used.
          * @param {OrderListOtoWorkingPegPriceTypeEnum} [workingPegPriceType]
          * @param {OrderListOtoWorkingPegOffsetTypeEnum} [workingPegOffsetType]
          * @param {number} [workingPegOffsetValue]
-         * @param {string} [pendingClientOrderId] Arbitrary unique ID among open orders for the pending order.<br> Automatically generated if not sent.
+         * @param {string} [pendingClientOrderId] Arbitrary unique ID among open orders for the pending order. Automatically generated if not sent.
          * @param {number} [pendingPrice]
          * @param {number} [pendingStopPrice]
          * @param {number} [pendingTrailingDelta]
          * @param {number} [pendingIcebergQty] This can only be used if `pendingTimeInForce` is `GTC` or if `pendingType` is `LIMIT_MAKER`.
          * @param {OrderListOtoPendingTimeInForceEnum} [pendingTimeInForce]
          * @param {number | bigint} [pendingStrategyId] Arbitrary numeric value identifying the pending order within an order strategy.
-         * @param {number} [pendingStrategyType] Arbitrary numeric value identifying the pending order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
+         * @param {number} [pendingStrategyType] Arbitrary numeric value identifying the pending order strategy. Values smaller than 1000000 are reserved and cannot be used.
          * @param {OrderListOtoPendingPegPriceTypeEnum} [pendingPegPriceType]
          * @param {OrderListOtoPendingPegOffsetTypeEnum} [pendingPegOffsetType]
          * @param {number} [pendingPegOffsetValue]
@@ -924,127 +1299,98 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('orderListOto', 'pendingQuantity', pendingQuantity);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (listClientOrderId !== undefined && listClientOrderId !== null) {
                 localVarQueryParameter['listClientOrderId'] = listClientOrderId;
             }
-
             if (newOrderRespType !== undefined && newOrderRespType !== null) {
                 localVarQueryParameter['newOrderRespType'] = newOrderRespType;
             }
-
             if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
                 localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
             }
-
             if (workingType !== undefined && workingType !== null) {
                 localVarQueryParameter['workingType'] = workingType;
             }
-
             if (workingSide !== undefined && workingSide !== null) {
                 localVarQueryParameter['workingSide'] = workingSide;
             }
-
             if (workingClientOrderId !== undefined && workingClientOrderId !== null) {
                 localVarQueryParameter['workingClientOrderId'] = workingClientOrderId;
             }
-
             if (workingPrice !== undefined && workingPrice !== null) {
                 localVarQueryParameter['workingPrice'] = workingPrice;
             }
-
             if (workingQuantity !== undefined && workingQuantity !== null) {
                 localVarQueryParameter['workingQuantity'] = workingQuantity;
             }
-
             if (workingIcebergQty !== undefined && workingIcebergQty !== null) {
                 localVarQueryParameter['workingIcebergQty'] = workingIcebergQty;
             }
-
             if (workingTimeInForce !== undefined && workingTimeInForce !== null) {
                 localVarQueryParameter['workingTimeInForce'] = workingTimeInForce;
             }
-
             if (workingStrategyId !== undefined && workingStrategyId !== null) {
                 localVarQueryParameter['workingStrategyId'] = workingStrategyId;
             }
-
             if (workingStrategyType !== undefined && workingStrategyType !== null) {
                 localVarQueryParameter['workingStrategyType'] = workingStrategyType;
             }
-
             if (workingPegPriceType !== undefined && workingPegPriceType !== null) {
                 localVarQueryParameter['workingPegPriceType'] = workingPegPriceType;
             }
-
             if (workingPegOffsetType !== undefined && workingPegOffsetType !== null) {
                 localVarQueryParameter['workingPegOffsetType'] = workingPegOffsetType;
             }
-
             if (workingPegOffsetValue !== undefined && workingPegOffsetValue !== null) {
                 localVarQueryParameter['workingPegOffsetValue'] = workingPegOffsetValue;
             }
-
             if (pendingType !== undefined && pendingType !== null) {
                 localVarQueryParameter['pendingType'] = pendingType;
             }
-
             if (pendingSide !== undefined && pendingSide !== null) {
                 localVarQueryParameter['pendingSide'] = pendingSide;
             }
-
             if (pendingClientOrderId !== undefined && pendingClientOrderId !== null) {
                 localVarQueryParameter['pendingClientOrderId'] = pendingClientOrderId;
             }
-
             if (pendingPrice !== undefined && pendingPrice !== null) {
                 localVarQueryParameter['pendingPrice'] = pendingPrice;
             }
-
             if (pendingStopPrice !== undefined && pendingStopPrice !== null) {
                 localVarQueryParameter['pendingStopPrice'] = pendingStopPrice;
             }
-
             if (pendingTrailingDelta !== undefined && pendingTrailingDelta !== null) {
                 localVarQueryParameter['pendingTrailingDelta'] = pendingTrailingDelta;
             }
-
             if (pendingQuantity !== undefined && pendingQuantity !== null) {
                 localVarQueryParameter['pendingQuantity'] = pendingQuantity;
             }
-
             if (pendingIcebergQty !== undefined && pendingIcebergQty !== null) {
                 localVarQueryParameter['pendingIcebergQty'] = pendingIcebergQty;
             }
-
             if (pendingTimeInForce !== undefined && pendingTimeInForce !== null) {
                 localVarQueryParameter['pendingTimeInForce'] = pendingTimeInForce;
             }
-
             if (pendingStrategyId !== undefined && pendingStrategyId !== null) {
                 localVarQueryParameter['pendingStrategyId'] = pendingStrategyId;
             }
-
             if (pendingStrategyType !== undefined && pendingStrategyType !== null) {
                 localVarQueryParameter['pendingStrategyType'] = pendingStrategyType;
             }
-
             if (pendingPegPriceType !== undefined && pendingPegPriceType !== null) {
                 localVarQueryParameter['pendingPegPriceType'] = pendingPegPriceType;
             }
-
             if (pendingPegOffsetType !== undefined && pendingPegOffsetType !== null) {
                 localVarQueryParameter['pendingPegOffsetType'] = pendingPegOffsetType;
             }
-
             if (pendingPegOffsetValue !== undefined && pendingPegOffsetValue !== null) {
                 localVarQueryParameter['pendingPegOffsetValue'] = pendingPegOffsetValue;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1055,7 +1401,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/api/v3/orderList/oto',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1084,34 +1431,34 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} [listClientOrderId] A unique Id for the entire orderList
          * @param {OrderListOtocoNewOrderRespTypeEnum} [newOrderRespType]
          * @param {OrderListOtocoSelfTradePreventionModeEnum} [selfTradePreventionMode]
-         * @param {string} [workingClientOrderId] Arbitrary unique ID among open orders for the working order.<br> Automatically generated if not sent.
+         * @param {string} [workingClientOrderId] Arbitrary unique ID among open orders for the working order. Automatically generated if not sent.
          * @param {number} [workingIcebergQty] This can only be used if `workingTimeInForce` is `GTC`, or if `workingType` is `LIMIT_MAKER`.
          * @param {OrderListOtocoWorkingTimeInForceEnum} [workingTimeInForce]
          * @param {number | bigint} [workingStrategyId] Arbitrary numeric value identifying the working order within an order strategy.
-         * @param {number} [workingStrategyType] Arbitrary numeric value identifying the working order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
+         * @param {number} [workingStrategyType] Arbitrary numeric value identifying the working order strategy. Values smaller than 1000000 are reserved and cannot be used.
          * @param {OrderListOtocoWorkingPegPriceTypeEnum} [workingPegPriceType]
          * @param {OrderListOtocoWorkingPegOffsetTypeEnum} [workingPegOffsetType]
          * @param {number} [workingPegOffsetValue]
-         * @param {string} [pendingAboveClientOrderId] Arbitrary unique ID among open orders for the pending above order.<br> Automatically generated if not sent.
+         * @param {string} [pendingAboveClientOrderId] Arbitrary unique ID among open orders for the pending above order. Automatically generated if not sent.
          * @param {number} [pendingAbovePrice] Can be used if `pendingAboveType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.
          * @param {number} [pendingAboveStopPrice] Can be used if `pendingAboveType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT`
-         * @param {number} [pendingAboveTrailingDelta] See [Trailing Stop FAQ](faqs/trailing-stop-faq.md)
+         * @param {number} [pendingAboveTrailingDelta] See [Trailing Stop FAQ](./faqs/trailing-stop-faq.md)
          * @param {number} [pendingAboveIcebergQty] This can only be used if `pendingAboveTimeInForce` is `GTC` or if `pendingAboveType` is `LIMIT_MAKER`.
          * @param {OrderListOtocoPendingAboveTimeInForceEnum} [pendingAboveTimeInForce]
          * @param {number | bigint} [pendingAboveStrategyId] Arbitrary numeric value identifying the pending above order within an order strategy.
-         * @param {number} [pendingAboveStrategyType] Arbitrary numeric value identifying the pending above order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
+         * @param {number} [pendingAboveStrategyType] Arbitrary numeric value identifying the pending above order strategy. Values smaller than 1000000 are reserved and cannot be used.
          * @param {OrderListOtocoPendingAbovePegPriceTypeEnum} [pendingAbovePegPriceType]
          * @param {OrderListOtocoPendingAbovePegOffsetTypeEnum} [pendingAbovePegOffsetType]
          * @param {number} [pendingAbovePegOffsetValue]
          * @param {OrderListOtocoPendingBelowTypeEnum} [pendingBelowType]
-         * @param {string} [pendingBelowClientOrderId] Arbitrary unique ID among open orders for the pending below order.<br> Automatically generated if not sent.
+         * @param {string} [pendingBelowClientOrderId] Arbitrary unique ID among open orders for the pending below order. Automatically generated if not sent.
          * @param {number} [pendingBelowPrice] Can be used if `pendingBelowType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT` to specify limit price
-         * @param {number} [pendingBelowStopPrice] Can be used if `pendingBelowType` is `STOP_LOSS`, `STOP_LOSS_LIMIT, TAKE_PROFIT or TAKE_PROFIT_LIMIT`. <br>Either `pendingBelowStopPrice` or `pendingBelowTrailingDelta` or both, must be specified.
+         * @param {number} [pendingBelowStopPrice] Can be used if `pendingBelowType` is `STOP_LOSS`, `STOP_LOSS_LIMIT, TAKE_PROFIT or TAKE_PROFIT_LIMIT`. Either `pendingBelowStopPrice` or `pendingBelowTrailingDelta` or both, must be specified.
          * @param {number} [pendingBelowTrailingDelta]
          * @param {number} [pendingBelowIcebergQty] This can only be used if `pendingBelowTimeInForce` is `GTC`, or if `pendingBelowType` is `LIMIT_MAKER`.
          * @param {OrderListOtocoPendingBelowTimeInForceEnum} [pendingBelowTimeInForce]
          * @param {number | bigint} [pendingBelowStrategyId] Arbitrary numeric value identifying the pending below order within an order strategy.
-         * @param {number} [pendingBelowStrategyType] Arbitrary numeric value identifying the pending below order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
+         * @param {number} [pendingBelowStrategyType] Arbitrary numeric value identifying the pending below order strategy. Values smaller than 1000000 are reserved and cannot be used.
          * @param {OrderListOtocoPendingBelowPegPriceTypeEnum} [pendingBelowPegPriceType]
          * @param {OrderListOtocoPendingBelowPegOffsetTypeEnum} [pendingBelowPegOffsetType]
          * @param {number} [pendingBelowPegOffsetValue]
@@ -1182,175 +1529,134 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('orderListOtoco', 'pendingAboveType', pendingAboveType);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (listClientOrderId !== undefined && listClientOrderId !== null) {
                 localVarQueryParameter['listClientOrderId'] = listClientOrderId;
             }
-
             if (newOrderRespType !== undefined && newOrderRespType !== null) {
                 localVarQueryParameter['newOrderRespType'] = newOrderRespType;
             }
-
             if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
                 localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
             }
-
             if (workingType !== undefined && workingType !== null) {
                 localVarQueryParameter['workingType'] = workingType;
             }
-
             if (workingSide !== undefined && workingSide !== null) {
                 localVarQueryParameter['workingSide'] = workingSide;
             }
-
             if (workingClientOrderId !== undefined && workingClientOrderId !== null) {
                 localVarQueryParameter['workingClientOrderId'] = workingClientOrderId;
             }
-
             if (workingPrice !== undefined && workingPrice !== null) {
                 localVarQueryParameter['workingPrice'] = workingPrice;
             }
-
             if (workingQuantity !== undefined && workingQuantity !== null) {
                 localVarQueryParameter['workingQuantity'] = workingQuantity;
             }
-
             if (workingIcebergQty !== undefined && workingIcebergQty !== null) {
                 localVarQueryParameter['workingIcebergQty'] = workingIcebergQty;
             }
-
             if (workingTimeInForce !== undefined && workingTimeInForce !== null) {
                 localVarQueryParameter['workingTimeInForce'] = workingTimeInForce;
             }
-
             if (workingStrategyId !== undefined && workingStrategyId !== null) {
                 localVarQueryParameter['workingStrategyId'] = workingStrategyId;
             }
-
             if (workingStrategyType !== undefined && workingStrategyType !== null) {
                 localVarQueryParameter['workingStrategyType'] = workingStrategyType;
             }
-
             if (workingPegPriceType !== undefined && workingPegPriceType !== null) {
                 localVarQueryParameter['workingPegPriceType'] = workingPegPriceType;
             }
-
             if (workingPegOffsetType !== undefined && workingPegOffsetType !== null) {
                 localVarQueryParameter['workingPegOffsetType'] = workingPegOffsetType;
             }
-
             if (workingPegOffsetValue !== undefined && workingPegOffsetValue !== null) {
                 localVarQueryParameter['workingPegOffsetValue'] = workingPegOffsetValue;
             }
-
             if (pendingSide !== undefined && pendingSide !== null) {
                 localVarQueryParameter['pendingSide'] = pendingSide;
             }
-
             if (pendingQuantity !== undefined && pendingQuantity !== null) {
                 localVarQueryParameter['pendingQuantity'] = pendingQuantity;
             }
-
             if (pendingAboveType !== undefined && pendingAboveType !== null) {
                 localVarQueryParameter['pendingAboveType'] = pendingAboveType;
             }
-
             if (pendingAboveClientOrderId !== undefined && pendingAboveClientOrderId !== null) {
                 localVarQueryParameter['pendingAboveClientOrderId'] = pendingAboveClientOrderId;
             }
-
             if (pendingAbovePrice !== undefined && pendingAbovePrice !== null) {
                 localVarQueryParameter['pendingAbovePrice'] = pendingAbovePrice;
             }
-
             if (pendingAboveStopPrice !== undefined && pendingAboveStopPrice !== null) {
                 localVarQueryParameter['pendingAboveStopPrice'] = pendingAboveStopPrice;
             }
-
             if (pendingAboveTrailingDelta !== undefined && pendingAboveTrailingDelta !== null) {
                 localVarQueryParameter['pendingAboveTrailingDelta'] = pendingAboveTrailingDelta;
             }
-
             if (pendingAboveIcebergQty !== undefined && pendingAboveIcebergQty !== null) {
                 localVarQueryParameter['pendingAboveIcebergQty'] = pendingAboveIcebergQty;
             }
-
             if (pendingAboveTimeInForce !== undefined && pendingAboveTimeInForce !== null) {
                 localVarQueryParameter['pendingAboveTimeInForce'] = pendingAboveTimeInForce;
             }
-
             if (pendingAboveStrategyId !== undefined && pendingAboveStrategyId !== null) {
                 localVarQueryParameter['pendingAboveStrategyId'] = pendingAboveStrategyId;
             }
-
             if (pendingAboveStrategyType !== undefined && pendingAboveStrategyType !== null) {
                 localVarQueryParameter['pendingAboveStrategyType'] = pendingAboveStrategyType;
             }
-
             if (pendingAbovePegPriceType !== undefined && pendingAbovePegPriceType !== null) {
                 localVarQueryParameter['pendingAbovePegPriceType'] = pendingAbovePegPriceType;
             }
-
             if (pendingAbovePegOffsetType !== undefined && pendingAbovePegOffsetType !== null) {
                 localVarQueryParameter['pendingAbovePegOffsetType'] = pendingAbovePegOffsetType;
             }
-
             if (pendingAbovePegOffsetValue !== undefined && pendingAbovePegOffsetValue !== null) {
                 localVarQueryParameter['pendingAbovePegOffsetValue'] = pendingAbovePegOffsetValue;
             }
-
             if (pendingBelowType !== undefined && pendingBelowType !== null) {
                 localVarQueryParameter['pendingBelowType'] = pendingBelowType;
             }
-
             if (pendingBelowClientOrderId !== undefined && pendingBelowClientOrderId !== null) {
                 localVarQueryParameter['pendingBelowClientOrderId'] = pendingBelowClientOrderId;
             }
-
             if (pendingBelowPrice !== undefined && pendingBelowPrice !== null) {
                 localVarQueryParameter['pendingBelowPrice'] = pendingBelowPrice;
             }
-
             if (pendingBelowStopPrice !== undefined && pendingBelowStopPrice !== null) {
                 localVarQueryParameter['pendingBelowStopPrice'] = pendingBelowStopPrice;
             }
-
             if (pendingBelowTrailingDelta !== undefined && pendingBelowTrailingDelta !== null) {
                 localVarQueryParameter['pendingBelowTrailingDelta'] = pendingBelowTrailingDelta;
             }
-
             if (pendingBelowIcebergQty !== undefined && pendingBelowIcebergQty !== null) {
                 localVarQueryParameter['pendingBelowIcebergQty'] = pendingBelowIcebergQty;
             }
-
             if (pendingBelowTimeInForce !== undefined && pendingBelowTimeInForce !== null) {
                 localVarQueryParameter['pendingBelowTimeInForce'] = pendingBelowTimeInForce;
             }
-
             if (pendingBelowStrategyId !== undefined && pendingBelowStrategyId !== null) {
                 localVarQueryParameter['pendingBelowStrategyId'] = pendingBelowStrategyId;
             }
-
             if (pendingBelowStrategyType !== undefined && pendingBelowStrategyType !== null) {
                 localVarQueryParameter['pendingBelowStrategyType'] = pendingBelowStrategyType;
             }
-
             if (pendingBelowPegPriceType !== undefined && pendingBelowPegPriceType !== null) {
                 localVarQueryParameter['pendingBelowPegPriceType'] = pendingBelowPegPriceType;
             }
-
             if (pendingBelowPegOffsetType !== undefined && pendingBelowPegOffsetType !== null) {
                 localVarQueryParameter['pendingBelowPegOffsetType'] = pendingBelowPegOffsetType;
             }
-
             if (pendingBelowPegOffsetValue !== undefined && pendingBelowPegOffsetValue !== null) {
                 localVarQueryParameter['pendingBelowPegOffsetValue'] = pendingBelowPegOffsetValue;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1361,7 +1667,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/api/v3/orderList/otoco',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1438,83 +1745,65 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('orderOco', 'stopPrice', stopPrice);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (listClientOrderId !== undefined && listClientOrderId !== null) {
                 localVarQueryParameter['listClientOrderId'] = listClientOrderId;
             }
-
             if (side !== undefined && side !== null) {
                 localVarQueryParameter['side'] = side;
             }
-
             if (quantity !== undefined && quantity !== null) {
                 localVarQueryParameter['quantity'] = quantity;
             }
-
             if (limitClientOrderId !== undefined && limitClientOrderId !== null) {
                 localVarQueryParameter['limitClientOrderId'] = limitClientOrderId;
             }
-
             if (price !== undefined && price !== null) {
                 localVarQueryParameter['price'] = price;
             }
-
             if (limitStrategyId !== undefined && limitStrategyId !== null) {
                 localVarQueryParameter['limitStrategyId'] = limitStrategyId;
             }
-
             if (limitStrategyType !== undefined && limitStrategyType !== null) {
                 localVarQueryParameter['limitStrategyType'] = limitStrategyType;
             }
-
             if (limitIcebergQty !== undefined && limitIcebergQty !== null) {
                 localVarQueryParameter['limitIcebergQty'] = limitIcebergQty;
             }
-
             if (trailingDelta !== undefined && trailingDelta !== null) {
                 localVarQueryParameter['trailingDelta'] = trailingDelta;
             }
-
             if (stopClientOrderId !== undefined && stopClientOrderId !== null) {
                 localVarQueryParameter['stopClientOrderId'] = stopClientOrderId;
             }
-
             if (stopPrice !== undefined && stopPrice !== null) {
                 localVarQueryParameter['stopPrice'] = stopPrice;
             }
-
             if (stopStrategyId !== undefined && stopStrategyId !== null) {
                 localVarQueryParameter['stopStrategyId'] = stopStrategyId;
             }
-
             if (stopStrategyType !== undefined && stopStrategyType !== null) {
                 localVarQueryParameter['stopStrategyType'] = stopStrategyType;
             }
-
             if (stopLimitPrice !== undefined && stopLimitPrice !== null) {
                 localVarQueryParameter['stopLimitPrice'] = stopLimitPrice;
             }
-
             if (stopIcebergQty !== undefined && stopIcebergQty !== null) {
                 localVarQueryParameter['stopIcebergQty'] = stopIcebergQty;
             }
-
             if (stopLimitTimeInForce !== undefined && stopLimitTimeInForce !== null) {
                 localVarQueryParameter['stopLimitTimeInForce'] = stopLimitTimeInForce;
             }
-
             if (newOrderRespType !== undefined && newOrderRespType !== null) {
                 localVarQueryParameter['newOrderRespType'] = newOrderRespType;
             }
-
             if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
                 localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1525,7 +1814,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/api/v3/order/oco',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1591,83 +1881,65 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('orderTest', 'type', type);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (computeCommissionRates !== undefined && computeCommissionRates !== null) {
                 localVarQueryParameter['computeCommissionRates'] = computeCommissionRates;
             }
-
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (side !== undefined && side !== null) {
                 localVarQueryParameter['side'] = side;
             }
-
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (timeInForce !== undefined && timeInForce !== null) {
                 localVarQueryParameter['timeInForce'] = timeInForce;
             }
-
             if (quantity !== undefined && quantity !== null) {
                 localVarQueryParameter['quantity'] = quantity;
             }
-
             if (quoteOrderQty !== undefined && quoteOrderQty !== null) {
                 localVarQueryParameter['quoteOrderQty'] = quoteOrderQty;
             }
-
             if (price !== undefined && price !== null) {
                 localVarQueryParameter['price'] = price;
             }
-
             if (newClientOrderId !== undefined && newClientOrderId !== null) {
                 localVarQueryParameter['newClientOrderId'] = newClientOrderId;
             }
-
             if (strategyId !== undefined && strategyId !== null) {
                 localVarQueryParameter['strategyId'] = strategyId;
             }
-
             if (strategyType !== undefined && strategyType !== null) {
                 localVarQueryParameter['strategyType'] = strategyType;
             }
-
             if (stopPrice !== undefined && stopPrice !== null) {
                 localVarQueryParameter['stopPrice'] = stopPrice;
             }
-
             if (trailingDelta !== undefined && trailingDelta !== null) {
                 localVarQueryParameter['trailingDelta'] = trailingDelta;
             }
-
             if (icebergQty !== undefined && icebergQty !== null) {
                 localVarQueryParameter['icebergQty'] = icebergQty;
             }
-
             if (newOrderRespType !== undefined && newOrderRespType !== null) {
                 localVarQueryParameter['newOrderRespType'] = newOrderRespType;
             }
-
             if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
                 localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
             }
-
             if (pegPriceType !== undefined && pegPriceType !== null) {
                 localVarQueryParameter['pegPriceType'] = pegPriceType;
             }
-
             if (pegOffsetValue !== undefined && pegOffsetValue !== null) {
                 localVarQueryParameter['pegOffsetValue'] = pegOffsetValue;
             }
-
             if (pegOffsetType !== undefined && pegOffsetType !== null) {
                 localVarQueryParameter['pegOffsetType'] = pegOffsetType;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1678,7 +1950,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/api/v3/order/test',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1734,55 +2007,44 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('sorOrder', 'quantity', quantity);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (side !== undefined && side !== null) {
                 localVarQueryParameter['side'] = side;
             }
-
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (timeInForce !== undefined && timeInForce !== null) {
                 localVarQueryParameter['timeInForce'] = timeInForce;
             }
-
             if (quantity !== undefined && quantity !== null) {
                 localVarQueryParameter['quantity'] = quantity;
             }
-
             if (price !== undefined && price !== null) {
                 localVarQueryParameter['price'] = price;
             }
-
             if (newClientOrderId !== undefined && newClientOrderId !== null) {
                 localVarQueryParameter['newClientOrderId'] = newClientOrderId;
             }
-
             if (strategyId !== undefined && strategyId !== null) {
                 localVarQueryParameter['strategyId'] = strategyId;
             }
-
             if (strategyType !== undefined && strategyType !== null) {
                 localVarQueryParameter['strategyType'] = strategyType;
             }
-
             if (icebergQty !== undefined && icebergQty !== null) {
                 localVarQueryParameter['icebergQty'] = icebergQty;
             }
-
             if (newOrderRespType !== undefined && newOrderRespType !== null) {
                 localVarQueryParameter['newOrderRespType'] = newOrderRespType;
             }
-
             if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
                 localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1793,7 +2055,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/api/v3/sor/order',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1849,59 +2112,47 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('sorOrderTest', 'quantity', quantity);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (computeCommissionRates !== undefined && computeCommissionRates !== null) {
                 localVarQueryParameter['computeCommissionRates'] = computeCommissionRates;
             }
-
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (side !== undefined && side !== null) {
                 localVarQueryParameter['side'] = side;
             }
-
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (timeInForce !== undefined && timeInForce !== null) {
                 localVarQueryParameter['timeInForce'] = timeInForce;
             }
-
             if (quantity !== undefined && quantity !== null) {
                 localVarQueryParameter['quantity'] = quantity;
             }
-
             if (price !== undefined && price !== null) {
                 localVarQueryParameter['price'] = price;
             }
-
             if (newClientOrderId !== undefined && newClientOrderId !== null) {
                 localVarQueryParameter['newClientOrderId'] = newClientOrderId;
             }
-
             if (strategyId !== undefined && strategyId !== null) {
                 localVarQueryParameter['strategyId'] = strategyId;
             }
-
             if (strategyType !== undefined && strategyType !== null) {
                 localVarQueryParameter['strategyType'] = strategyType;
             }
-
             if (icebergQty !== undefined && icebergQty !== null) {
                 localVarQueryParameter['icebergQty'] = icebergQty;
             }
-
             if (newOrderRespType !== undefined && newOrderRespType !== null) {
                 localVarQueryParameter['newOrderRespType'] = newOrderRespType;
             }
-
             if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
                 localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1912,7 +2163,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/api/v3/sor/order/test',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -2037,6 +2289,38 @@ export interface TradeApiInterface {
     orderListOco(
         requestParameters: OrderListOcoRequest
     ): Promise<RestApiResponse<OrderListOcoResponse>>;
+    /**
+     * Place an [OPO](./faqs/opo.md).
+     *
+     * OPOs add 2 orders to the EXCHANGE_MAX_NUM_ORDERS filter and MAX_NUM_ORDERS filter.
+     * Weight: 1
+     *
+     * Unfilled Order Count: 2
+     *
+     * @summary New Order List - OPO
+     * @param {OrderListOpoRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApiInterface
+     */
+    orderListOpo(
+        requestParameters: OrderListOpoRequest
+    ): Promise<RestApiResponse<OrderListOpoResponse>>;
+    /**
+     * Place an [OPOCO](./faqs/opo.md).
+     * Weight: 1
+     *
+     * Unfilled Order Count: 3
+     *
+     * @summary New Order List - OPOCO
+     * @param {OrderListOpocoRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApiInterface
+     */
+    orderListOpoco(
+        requestParameters: OrderListOpocoRequest
+    ): Promise<RestApiResponse<OrderListOpocoResponse>>;
     /**
      * Place an OTO.
      *
@@ -2855,6 +3139,522 @@ export interface OrderListOcoRequest {
 }
 
 /**
+ * Request parameters for orderListOpo operation in TradeApi.
+ * @interface OrderListOpoRequest
+ */
+export interface OrderListOpoRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly symbol: string;
+
+    /**
+     *
+     * @type {'LIMIT' | 'LIMIT_MAKER'}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly workingType: OrderListOpoWorkingTypeEnum;
+
+    /**
+     *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly workingSide: OrderListOpoWorkingSideEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly workingPrice: number;
+
+    /**
+     * Sets the quantity for the working order.
+     * @type {number}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly workingQuantity: number;
+
+    /**
+     *
+     * @type {'LIMIT' | 'MARKET' | 'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT' | 'LIMIT_MAKER'}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly pendingType: OrderListOpoPendingTypeEnum;
+
+    /**
+     *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly pendingSide: OrderListOpoPendingSideEnum;
+
+    /**
+     * A unique Id for the entire orderList
+     * @type {string}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly listClientOrderId?: string;
+
+    /**
+     *
+     * @type {'ACK' | 'RESULT' | 'FULL' | 'MARKET' | 'LIMIT'}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly newOrderRespType?: OrderListOpoNewOrderRespTypeEnum;
+
+    /**
+     *
+     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'DECREMENT' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly selfTradePreventionMode?: OrderListOpoSelfTradePreventionModeEnum;
+
+    /**
+     * Arbitrary unique ID among open orders for the working order. Automatically generated if not sent.
+     * @type {string}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly workingClientOrderId?: string;
+
+    /**
+     * This can only be used if `workingTimeInForce` is `GTC`, or if `workingType` is `LIMIT_MAKER`.
+     * @type {number}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly workingIcebergQty?: number;
+
+    /**
+     *
+     * @type {'GTC' | 'IOC' | 'FOK'}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly workingTimeInForce?: OrderListOpoWorkingTimeInForceEnum;
+
+    /**
+     * Arbitrary numeric value identifying the working order within an order strategy.
+     * @type {number | bigint}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly workingStrategyId?: number | bigint;
+
+    /**
+     * Arbitrary numeric value identifying the working order strategy. Values smaller than 1000000 are reserved and cannot be used.
+     * @type {number}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly workingStrategyType?: number;
+
+    /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly workingPegPriceType?: OrderListOpoWorkingPegPriceTypeEnum;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL'}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly workingPegOffsetType?: OrderListOpoWorkingPegOffsetTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly workingPegOffsetValue?: number;
+
+    /**
+     * Arbitrary unique ID among open orders for the pending order. Automatically generated if not sent.
+     * @type {string}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly pendingClientOrderId?: string;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly pendingPrice?: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly pendingStopPrice?: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly pendingTrailingDelta?: number;
+
+    /**
+     * This can only be used if `pendingTimeInForce` is `GTC` or if `pendingType` is `LIMIT_MAKER`.
+     * @type {number}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly pendingIcebergQty?: number;
+
+    /**
+     *
+     * @type {'GTC' | 'IOC' | 'FOK'}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly pendingTimeInForce?: OrderListOpoPendingTimeInForceEnum;
+
+    /**
+     * Arbitrary numeric value identifying the pending order within an order strategy.
+     * @type {number | bigint}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly pendingStrategyId?: number | bigint;
+
+    /**
+     * Arbitrary numeric value identifying the pending order strategy. Values smaller than 1000000 are reserved and cannot be used.
+     * @type {number}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly pendingStrategyType?: number;
+
+    /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly pendingPegPriceType?: OrderListOpoPendingPegPriceTypeEnum;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL'}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly pendingPegOffsetType?: OrderListOpoPendingPegOffsetTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly pendingPegOffsetValue?: number;
+
+    /**
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * @type {number}
+     * @memberof TradeApiOrderListOpo
+     */
+    readonly recvWindow?: number;
+}
+
+/**
+ * Request parameters for orderListOpoco operation in TradeApi.
+ * @interface OrderListOpocoRequest
+ */
+export interface OrderListOpocoRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly symbol: string;
+
+    /**
+     *
+     * @type {'LIMIT' | 'LIMIT_MAKER'}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly workingType: OrderListOpocoWorkingTypeEnum;
+
+    /**
+     *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly workingSide: OrderListOpocoWorkingSideEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly workingPrice: number;
+
+    /**
+     * Sets the quantity for the working order.
+     * @type {number}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly workingQuantity: number;
+
+    /**
+     *
+     * @type {'BUY' | 'SELL'}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly pendingSide: OrderListOpocoPendingSideEnum;
+
+    /**
+     *
+     * @type {'STOP_LOSS_LIMIT' | 'STOP_LOSS' | 'LIMIT_MAKER' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT'}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly pendingAboveType: OrderListOpocoPendingAboveTypeEnum;
+
+    /**
+     * A unique Id for the entire orderList
+     * @type {string}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly listClientOrderId?: string;
+
+    /**
+     *
+     * @type {'ACK' | 'RESULT' | 'FULL' | 'MARKET' | 'LIMIT'}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly newOrderRespType?: OrderListOpocoNewOrderRespTypeEnum;
+
+    /**
+     *
+     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_MAKER' | 'EXPIRE_BOTH' | 'DECREMENT' | 'NON_REPRESENTABLE'}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly selfTradePreventionMode?: OrderListOpocoSelfTradePreventionModeEnum;
+
+    /**
+     * Arbitrary unique ID among open orders for the working order. Automatically generated if not sent.
+     * @type {string}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly workingClientOrderId?: string;
+
+    /**
+     * This can only be used if `workingTimeInForce` is `GTC`, or if `workingType` is `LIMIT_MAKER`.
+     * @type {number}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly workingIcebergQty?: number;
+
+    /**
+     *
+     * @type {'GTC' | 'IOC' | 'FOK'}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly workingTimeInForce?: OrderListOpocoWorkingTimeInForceEnum;
+
+    /**
+     * Arbitrary numeric value identifying the working order within an order strategy.
+     * @type {number | bigint}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly workingStrategyId?: number | bigint;
+
+    /**
+     * Arbitrary numeric value identifying the working order strategy. Values smaller than 1000000 are reserved and cannot be used.
+     * @type {number}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly workingStrategyType?: number;
+
+    /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly workingPegPriceType?: OrderListOpocoWorkingPegPriceTypeEnum;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL'}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly workingPegOffsetType?: OrderListOpocoWorkingPegOffsetTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly workingPegOffsetValue?: number;
+
+    /**
+     * Arbitrary unique ID among open orders for the pending above order. Automatically generated if not sent.
+     * @type {string}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly pendingAboveClientOrderId?: string;
+
+    /**
+     * Can be used if `pendingAboveType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.
+     * @type {number}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly pendingAbovePrice?: number;
+
+    /**
+     * Can be used if `pendingAboveType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT`
+     * @type {number}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly pendingAboveStopPrice?: number;
+
+    /**
+     * See [Trailing Stop FAQ](./faqs/trailing-stop-faq.md)
+     * @type {number}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly pendingAboveTrailingDelta?: number;
+
+    /**
+     * This can only be used if `pendingAboveTimeInForce` is `GTC` or if `pendingAboveType` is `LIMIT_MAKER`.
+     * @type {number}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly pendingAboveIcebergQty?: number;
+
+    /**
+     *
+     * @type {'GTC' | 'IOC' | 'FOK'}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly pendingAboveTimeInForce?: OrderListOpocoPendingAboveTimeInForceEnum;
+
+    /**
+     * Arbitrary numeric value identifying the pending above order within an order strategy.
+     * @type {number | bigint}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly pendingAboveStrategyId?: number | bigint;
+
+    /**
+     * Arbitrary numeric value identifying the pending above order strategy. Values smaller than 1000000 are reserved and cannot be used.
+     * @type {number}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly pendingAboveStrategyType?: number;
+
+    /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly pendingAbovePegPriceType?: OrderListOpocoPendingAbovePegPriceTypeEnum;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL'}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly pendingAbovePegOffsetType?: OrderListOpocoPendingAbovePegOffsetTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly pendingAbovePegOffsetValue?: number;
+
+    /**
+     *
+     * @type {'STOP_LOSS' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT' | 'TAKE_PROFIT_LIMIT'}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly pendingBelowType?: OrderListOpocoPendingBelowTypeEnum;
+
+    /**
+     * Arbitrary unique ID among open orders for the pending below order. Automatically generated if not sent.
+     * @type {string}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly pendingBelowClientOrderId?: string;
+
+    /**
+     * Can be used if `pendingBelowType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT` to specify limit price
+     * @type {number}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly pendingBelowPrice?: number;
+
+    /**
+     * Can be used if `pendingBelowType` is `STOP_LOSS`, `STOP_LOSS_LIMIT, TAKE_PROFIT or TAKE_PROFIT_LIMIT`. Either `pendingBelowStopPrice` or `pendingBelowTrailingDelta` or both, must be specified.
+     * @type {number}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly pendingBelowStopPrice?: number;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly pendingBelowTrailingDelta?: number;
+
+    /**
+     * This can only be used if `pendingBelowTimeInForce` is `GTC`, or if `pendingBelowType` is `LIMIT_MAKER`.
+     * @type {number}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly pendingBelowIcebergQty?: number;
+
+    /**
+     *
+     * @type {'GTC' | 'IOC' | 'FOK'}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly pendingBelowTimeInForce?: OrderListOpocoPendingBelowTimeInForceEnum;
+
+    /**
+     * Arbitrary numeric value identifying the pending below order within an order strategy.
+     * @type {number | bigint}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly pendingBelowStrategyId?: number | bigint;
+
+    /**
+     * Arbitrary numeric value identifying the pending below order strategy. Values smaller than 1000000 are reserved and cannot be used.
+     * @type {number}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly pendingBelowStrategyType?: number;
+
+    /**
+     *
+     * @type {'PRIMARY_PEG' | 'MARKET_PEG'}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly pendingBelowPegPriceType?: OrderListOpocoPendingBelowPegPriceTypeEnum;
+
+    /**
+     *
+     * @type {'PRICE_LEVEL'}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly pendingBelowPegOffsetType?: OrderListOpocoPendingBelowPegOffsetTypeEnum;
+
+    /**
+     *
+     * @type {number}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly pendingBelowPegOffsetValue?: number;
+
+    /**
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * @type {number}
+     * @memberof TradeApiOrderListOpoco
+     */
+    readonly recvWindow?: number;
+}
+
+/**
  * Request parameters for orderListOto operation in TradeApi.
  * @interface OrderListOtoRequest
  */
@@ -2937,7 +3737,7 @@ export interface OrderListOtoRequest {
     readonly selfTradePreventionMode?: OrderListOtoSelfTradePreventionModeEnum;
 
     /**
-     * Arbitrary unique ID among open orders for the working order.<br> Automatically generated if not sent.
+     * Arbitrary unique ID among open orders for the working order. Automatically generated if not sent.
      * @type {string}
      * @memberof TradeApiOrderListOto
      */
@@ -2965,7 +3765,7 @@ export interface OrderListOtoRequest {
     readonly workingStrategyId?: number | bigint;
 
     /**
-     * Arbitrary numeric value identifying the working order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
+     * Arbitrary numeric value identifying the working order strategy. Values smaller than 1000000 are reserved and cannot be used.
      * @type {number}
      * @memberof TradeApiOrderListOto
      */
@@ -2993,7 +3793,7 @@ export interface OrderListOtoRequest {
     readonly workingPegOffsetValue?: number;
 
     /**
-     * Arbitrary unique ID among open orders for the pending order.<br> Automatically generated if not sent.
+     * Arbitrary unique ID among open orders for the pending order. Automatically generated if not sent.
      * @type {string}
      * @memberof TradeApiOrderListOto
      */
@@ -3042,7 +3842,7 @@ export interface OrderListOtoRequest {
     readonly pendingStrategyId?: number | bigint;
 
     /**
-     * Arbitrary numeric value identifying the pending order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
+     * Arbitrary numeric value identifying the pending order strategy. Values smaller than 1000000 are reserved and cannot be used.
      * @type {number}
      * @memberof TradeApiOrderListOto
      */
@@ -3160,7 +3960,7 @@ export interface OrderListOtocoRequest {
     readonly selfTradePreventionMode?: OrderListOtocoSelfTradePreventionModeEnum;
 
     /**
-     * Arbitrary unique ID among open orders for the working order.<br> Automatically generated if not sent.
+     * Arbitrary unique ID among open orders for the working order. Automatically generated if not sent.
      * @type {string}
      * @memberof TradeApiOrderListOtoco
      */
@@ -3188,7 +3988,7 @@ export interface OrderListOtocoRequest {
     readonly workingStrategyId?: number | bigint;
 
     /**
-     * Arbitrary numeric value identifying the working order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
+     * Arbitrary numeric value identifying the working order strategy. Values smaller than 1000000 are reserved and cannot be used.
      * @type {number}
      * @memberof TradeApiOrderListOtoco
      */
@@ -3216,7 +4016,7 @@ export interface OrderListOtocoRequest {
     readonly workingPegOffsetValue?: number;
 
     /**
-     * Arbitrary unique ID among open orders for the pending above order.<br> Automatically generated if not sent.
+     * Arbitrary unique ID among open orders for the pending above order. Automatically generated if not sent.
      * @type {string}
      * @memberof TradeApiOrderListOtoco
      */
@@ -3237,7 +4037,7 @@ export interface OrderListOtocoRequest {
     readonly pendingAboveStopPrice?: number;
 
     /**
-     * See [Trailing Stop FAQ](faqs/trailing-stop-faq.md)
+     * See [Trailing Stop FAQ](./faqs/trailing-stop-faq.md)
      * @type {number}
      * @memberof TradeApiOrderListOtoco
      */
@@ -3265,7 +4065,7 @@ export interface OrderListOtocoRequest {
     readonly pendingAboveStrategyId?: number | bigint;
 
     /**
-     * Arbitrary numeric value identifying the pending above order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
+     * Arbitrary numeric value identifying the pending above order strategy. Values smaller than 1000000 are reserved and cannot be used.
      * @type {number}
      * @memberof TradeApiOrderListOtoco
      */
@@ -3300,7 +4100,7 @@ export interface OrderListOtocoRequest {
     readonly pendingBelowType?: OrderListOtocoPendingBelowTypeEnum;
 
     /**
-     * Arbitrary unique ID among open orders for the pending below order.<br> Automatically generated if not sent.
+     * Arbitrary unique ID among open orders for the pending below order. Automatically generated if not sent.
      * @type {string}
      * @memberof TradeApiOrderListOtoco
      */
@@ -3314,7 +4114,7 @@ export interface OrderListOtocoRequest {
     readonly pendingBelowPrice?: number;
 
     /**
-     * Can be used if `pendingBelowType` is `STOP_LOSS`, `STOP_LOSS_LIMIT, TAKE_PROFIT or TAKE_PROFIT_LIMIT`. <br>Either `pendingBelowStopPrice` or `pendingBelowTrailingDelta` or both, must be specified.
+     * Can be used if `pendingBelowType` is `STOP_LOSS`, `STOP_LOSS_LIMIT, TAKE_PROFIT or TAKE_PROFIT_LIMIT`. Either `pendingBelowStopPrice` or `pendingBelowTrailingDelta` or both, must be specified.
      * @type {number}
      * @memberof TradeApiOrderListOtoco
      */
@@ -3349,7 +4149,7 @@ export interface OrderListOtocoRequest {
     readonly pendingBelowStrategyId?: number | bigint;
 
     /**
-     * Arbitrary numeric value identifying the pending below order strategy. <br> Values smaller than 1000000 are reserved and cannot be used.
+     * Arbitrary numeric value identifying the pending below order strategy. Values smaller than 1000000 are reserved and cannot be used.
      * @type {number}
      * @memberof TradeApiOrderListOtoco
      */
@@ -3913,7 +4713,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3945,7 +4746,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3976,7 +4778,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4023,7 +4826,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4059,7 +4863,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4114,7 +4919,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4184,7 +4990,140 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Place an [OPO](./faqs/opo.md).
+     *
+     * OPOs add 2 orders to the EXCHANGE_MAX_NUM_ORDERS filter and MAX_NUM_ORDERS filter.
+     * Weight: 1
+     *
+     * Unfilled Order Count: 2
+     *
+     * @summary New Order List - OPO
+     * @param {OrderListOpoRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<OrderListOpoResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-order-list---opo-trade Binance API Documentation}
+     */
+    public async orderListOpo(
+        requestParameters: OrderListOpoRequest
+    ): Promise<RestApiResponse<OrderListOpoResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.orderListOpo(
+            requestParameters?.symbol,
+            requestParameters?.workingType,
+            requestParameters?.workingSide,
+            requestParameters?.workingPrice,
+            requestParameters?.workingQuantity,
+            requestParameters?.pendingType,
+            requestParameters?.pendingSide,
+            requestParameters?.listClientOrderId,
+            requestParameters?.newOrderRespType,
+            requestParameters?.selfTradePreventionMode,
+            requestParameters?.workingClientOrderId,
+            requestParameters?.workingIcebergQty,
+            requestParameters?.workingTimeInForce,
+            requestParameters?.workingStrategyId,
+            requestParameters?.workingStrategyType,
+            requestParameters?.workingPegPriceType,
+            requestParameters?.workingPegOffsetType,
+            requestParameters?.workingPegOffsetValue,
+            requestParameters?.pendingClientOrderId,
+            requestParameters?.pendingPrice,
+            requestParameters?.pendingStopPrice,
+            requestParameters?.pendingTrailingDelta,
+            requestParameters?.pendingIcebergQty,
+            requestParameters?.pendingTimeInForce,
+            requestParameters?.pendingStrategyId,
+            requestParameters?.pendingStrategyType,
+            requestParameters?.pendingPegPriceType,
+            requestParameters?.pendingPegOffsetType,
+            requestParameters?.pendingPegOffsetValue,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<OrderListOpoResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Place an [OPOCO](./faqs/opo.md).
+     * Weight: 1
+     *
+     * Unfilled Order Count: 3
+     *
+     * @summary New Order List - OPOCO
+     * @param {OrderListOpocoRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<OrderListOpocoResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-order-list---opoco-trade Binance API Documentation}
+     */
+    public async orderListOpoco(
+        requestParameters: OrderListOpocoRequest
+    ): Promise<RestApiResponse<OrderListOpocoResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.orderListOpoco(
+            requestParameters?.symbol,
+            requestParameters?.workingType,
+            requestParameters?.workingSide,
+            requestParameters?.workingPrice,
+            requestParameters?.workingQuantity,
+            requestParameters?.pendingSide,
+            requestParameters?.pendingAboveType,
+            requestParameters?.listClientOrderId,
+            requestParameters?.newOrderRespType,
+            requestParameters?.selfTradePreventionMode,
+            requestParameters?.workingClientOrderId,
+            requestParameters?.workingIcebergQty,
+            requestParameters?.workingTimeInForce,
+            requestParameters?.workingStrategyId,
+            requestParameters?.workingStrategyType,
+            requestParameters?.workingPegPriceType,
+            requestParameters?.workingPegOffsetType,
+            requestParameters?.workingPegOffsetValue,
+            requestParameters?.pendingAboveClientOrderId,
+            requestParameters?.pendingAbovePrice,
+            requestParameters?.pendingAboveStopPrice,
+            requestParameters?.pendingAboveTrailingDelta,
+            requestParameters?.pendingAboveIcebergQty,
+            requestParameters?.pendingAboveTimeInForce,
+            requestParameters?.pendingAboveStrategyId,
+            requestParameters?.pendingAboveStrategyType,
+            requestParameters?.pendingAbovePegPriceType,
+            requestParameters?.pendingAbovePegOffsetType,
+            requestParameters?.pendingAbovePegOffsetValue,
+            requestParameters?.pendingBelowType,
+            requestParameters?.pendingBelowClientOrderId,
+            requestParameters?.pendingBelowPrice,
+            requestParameters?.pendingBelowStopPrice,
+            requestParameters?.pendingBelowTrailingDelta,
+            requestParameters?.pendingBelowIcebergQty,
+            requestParameters?.pendingBelowTimeInForce,
+            requestParameters?.pendingBelowStrategyId,
+            requestParameters?.pendingBelowStrategyType,
+            requestParameters?.pendingBelowPegPriceType,
+            requestParameters?.pendingBelowPegOffsetType,
+            requestParameters?.pendingBelowPegOffsetValue,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<OrderListOpocoResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4250,7 +5189,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4328,7 +5268,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4384,7 +5325,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4434,7 +5376,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4479,7 +5422,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4523,7 +5467,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4721,6 +5666,170 @@ export enum OrderListOcoSelfTradePreventionModeEnum {
     EXPIRE_BOTH = 'EXPIRE_BOTH',
     DECREMENT = 'DECREMENT',
     NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum OrderListOpoWorkingTypeEnum {
+    LIMIT = 'LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+}
+
+export enum OrderListOpoWorkingSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
+
+export enum OrderListOpoPendingTypeEnum {
+    LIMIT = 'LIMIT',
+    MARKET = 'MARKET',
+    STOP_LOSS = 'STOP_LOSS',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+}
+
+export enum OrderListOpoPendingSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
+
+export enum OrderListOpoNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+}
+
+export enum OrderListOpoSelfTradePreventionModeEnum {
+    NONE = 'NONE',
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    DECREMENT = 'DECREMENT',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum OrderListOpoWorkingTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
+
+export enum OrderListOpoWorkingPegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+}
+
+export enum OrderListOpoWorkingPegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
+}
+
+export enum OrderListOpoPendingTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
+
+export enum OrderListOpoPendingPegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+}
+
+export enum OrderListOpoPendingPegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
+}
+
+export enum OrderListOpocoWorkingTypeEnum {
+    LIMIT = 'LIMIT',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+}
+
+export enum OrderListOpocoWorkingSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
+
+export enum OrderListOpocoPendingSideEnum {
+    BUY = 'BUY',
+    SELL = 'SELL',
+}
+
+export enum OrderListOpocoPendingAboveTypeEnum {
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    STOP_LOSS = 'STOP_LOSS',
+    LIMIT_MAKER = 'LIMIT_MAKER',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+}
+
+export enum OrderListOpocoNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
+    FULL = 'FULL',
+    MARKET = 'MARKET',
+    LIMIT = 'LIMIT',
+}
+
+export enum OrderListOpocoSelfTradePreventionModeEnum {
+    NONE = 'NONE',
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    DECREMENT = 'DECREMENT',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum OrderListOpocoWorkingTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
+
+export enum OrderListOpocoWorkingPegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+}
+
+export enum OrderListOpocoWorkingPegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
+}
+
+export enum OrderListOpocoPendingAboveTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
+
+export enum OrderListOpocoPendingAbovePegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+}
+
+export enum OrderListOpocoPendingAbovePegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
+}
+
+export enum OrderListOpocoPendingBelowTypeEnum {
+    STOP_LOSS = 'STOP_LOSS',
+    STOP_LOSS_LIMIT = 'STOP_LOSS_LIMIT',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT',
+}
+
+export enum OrderListOpocoPendingBelowTimeInForceEnum {
+    GTC = 'GTC',
+    IOC = 'IOC',
+    FOK = 'FOK',
+}
+
+export enum OrderListOpocoPendingBelowPegPriceTypeEnum {
+    PRIMARY_PEG = 'PRIMARY_PEG',
+    MARKET_PEG = 'MARKET_PEG',
+}
+
+export enum OrderListOpocoPendingBelowPegOffsetTypeEnum {
+    PRICE_LEVEL = 'PRICE_LEVEL',
 }
 
 export enum OrderListOtoWorkingTypeEnum {

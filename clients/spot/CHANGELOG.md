@@ -1,5 +1,46 @@
 # Changelog
 
+## 25.0.0 - 2025-12-16
+
+### Added (4)
+
+#### REST API
+
+- `orderListOpo()` (`POST /api/v3/orderList/opo`)
+- `orderListOpoco()` (`POST /api/v3/orderList/opoco`)
+
+#### WebSocket API
+
+- `orderListPlaceOpo()` (`orderList.place.opo` method)
+- `orderListPlaceOpoco()` (`orderList.place.opoco` method)
+
+### Changed (4)
+
+- Update `@binance/common` library to version `2.1.0`.
+- Support request body params on `sendRequest` and `sendSignedRequest` functions.
+
+#### REST API
+
+- Modified response for `exchangeInfo()` (`GET /api/v3/exchangeInfo`):
+  - `symbols`.items: property `opoAllowed` added
+  - `symbols`.items: item property `opoAllowed` added
+
+#### WebSocket API
+
+- Modified response for `exchangeInfo()` (`exchangeInfo` method):
+  - `result`.`symbols`.items: property `opoAllowed` added
+  - `result`.`symbols`.items: item property `opoAllowed` added
+
+### Removed (2)
+
+#### WebSocket API
+
+- `/order.amend.keepPriority()` (`order.amend.keepPriority` method)
+
+#### WebSocket Streams
+
+- `/!ticker@arr()` (`!ticker@arr` stream)
+
 ## 24.0.1 - 2025-11-27
 
 ### Changed (1)

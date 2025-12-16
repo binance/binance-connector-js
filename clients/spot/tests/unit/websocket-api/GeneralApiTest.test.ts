@@ -135,6 +135,7 @@ describe('GeneralApi', () => {
                                 icebergAllowed: true,
                                 ocoAllowed: true,
                                 otoAllowed: true,
+                                opoAllowed: true,
                                 quoteOrderQtyMarketAllowed: true,
                                 allowTrailingStop: true,
                                 cancelReplaceAllowed: true,

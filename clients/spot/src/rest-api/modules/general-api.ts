@@ -51,23 +51,20 @@ const GeneralApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             symbolStatus?: ExchangeInfoSymbolStatusEnum
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (symbols) {
                 localVarQueryParameter['symbols'] = symbols;
             }
-
             if (permissions) {
                 localVarQueryParameter['permissions'] = permissions;
             }
-
             if (showPermissionSets !== undefined && showPermissionSets !== null) {
                 localVarQueryParameter['showPermissionSets'] = showPermissionSets;
             }
-
             if (symbolStatus !== undefined && symbolStatus !== null) {
                 localVarQueryParameter['symbolStatus'] = symbolStatus;
             }
@@ -78,7 +75,8 @@ const GeneralApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/api/v3/exchangeInfo',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -92,6 +90,7 @@ const GeneralApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          */
         ping: async (): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -99,7 +98,8 @@ const GeneralApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/api/v3/ping',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -113,6 +113,7 @@ const GeneralApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          */
         time: async (): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -120,7 +121,8 @@ const GeneralApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/api/v3/time',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -246,7 +248,8 @@ export class GeneralApi implements GeneralApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -268,7 +271,8 @@ export class GeneralApi implements GeneralApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -290,7 +294,8 @@ export class GeneralApi implements GeneralApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );

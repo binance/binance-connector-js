@@ -61,6 +61,8 @@ import type {
     OrderAmendKeepPriorityRequest,
     OrderCancelReplaceRequest,
     OrderListOcoRequest,
+    OrderListOpoRequest,
+    OrderListOpocoRequest,
     OrderListOtoRequest,
     OrderListOtocoRequest,
     OrderOcoRequest,
@@ -108,6 +110,8 @@ import type {
     OrderAmendKeepPriorityResponse,
     OrderCancelReplaceResponse,
     OrderListOcoResponse,
+    OrderListOpoResponse,
+    OrderListOpocoResponse,
     OrderListOtoResponse,
     OrderListOtocoResponse,
     OrderOcoResponse,
@@ -135,36 +139,53 @@ export class RestAPI {
      * Generic function to send a request.
      * @param endpoint - The API endpoint to call.
      * @param method - HTTP method to use (GET, POST, DELETE, etc.).
-     * @param params - Query parameters for the request.
+     * @param queryParams - Query parameters for the request.
+     * @param bodyParams - Body parameters for the request.
      * @param timeUnit - The time unit for the request.
      * @returns A promise resolving to the response data object.
      */
     sendRequest<T>(
         endpoint: string,
         method: 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH',
-        params: Record<string, unknown> = {},
+        queryParams: Record<string, unknown> = {},
+        bodyParams: Record<string, unknown> = {},
         timeUnit: TimeUnit = this.configuration?.timeUnit as TimeUnit
     ): Promise<RestApiResponse<T>> {
-        return sendRequest<T>(this.configuration, endpoint, method, params, timeUnit);
+        return sendRequest<T>(
+            this.configuration,
+            endpoint,
+            method,
+            queryParams,
+            bodyParams,
+            timeUnit
+        );
     }
 
     /**
      * Generic function to send a signed request.
      * @param endpoint - The API endpoint to call.
      * @param method - HTTP method to use (GET, POST, DELETE, etc.).
-     * @param params - Query parameters for the request.
+     * @param queryParams - Query parameters for the request.
+     * @param bodyParams - Body parameters for the request.
      * @param timeUnit - The time unit for the request.
      * @returns A promise resolving to the response data object.
      */
     sendSignedRequest<T>(
         endpoint: string,
         method: 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH',
-        params: Record<string, unknown> = {},
+        queryParams: Record<string, unknown> = {},
+        bodyParams: Record<string, unknown> = {},
         timeUnit: TimeUnit = this.configuration?.timeUnit as TimeUnit
     ): Promise<RestApiResponse<T>> {
-        return sendRequest<T>(this.configuration, endpoint, method, params, timeUnit, {
-            isSigned: true,
-        });
+        return sendRequest<T>(
+            this.configuration,
+            endpoint,
+            method,
+            queryParams,
+            bodyParams,
+            timeUnit,
+            { isSigned: true }
+        );
     }
 
     /**
@@ -881,6 +902,46 @@ export class RestAPI {
         requestParameters: OrderListOcoRequest
     ): Promise<RestApiResponse<OrderListOcoResponse>> {
         return this.tradeApi.orderListOco(requestParameters);
+    }
+
+    /**
+     * Place an [OPO](./faqs/opo.md).
+     *
+     * OPOs add 2 orders to the EXCHANGE_MAX_NUM_ORDERS filter and MAX_NUM_ORDERS filter.
+     * Weight: 1
+     *
+     * Unfilled Order Count: 2
+     *
+     * @summary New Order List - OPO
+     * @param {OrderListOpoRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<OrderListOpoResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-order-list---opo-trade Binance API Documentation}
+     */
+    orderListOpo(
+        requestParameters: OrderListOpoRequest
+    ): Promise<RestApiResponse<OrderListOpoResponse>> {
+        return this.tradeApi.orderListOpo(requestParameters);
+    }
+
+    /**
+     * Place an [OPOCO](./faqs/opo.md).
+     * Weight: 1
+     *
+     * Unfilled Order Count: 3
+     *
+     * @summary New Order List - OPOCO
+     * @param {OrderListOpocoRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<OrderListOpocoResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#new-order-list---opoco-trade Binance API Documentation}
+     */
+    orderListOpoco(
+        requestParameters: OrderListOpocoRequest
+    ): Promise<RestApiResponse<OrderListOpocoResponse>> {
+        return this.tradeApi.orderListOpoco(requestParameters);
     }
 
     /**
