@@ -80,27 +80,23 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (productId !== undefined && productId !== null) {
                 localVarQueryParameter['productId'] = productId;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -111,7 +107,8 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/simple-earn/flexible/history/collateralRecord',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -134,11 +131,11 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             assertParamExists('getFlexiblePersonalLeftQuota', 'productId', productId);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (productId !== undefined && productId !== null) {
                 localVarQueryParameter['productId'] = productId;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -149,7 +146,8 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/simple-earn/flexible/personalLeftQuota',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -175,23 +173,20 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (productId !== undefined && productId !== null) {
                 localVarQueryParameter['productId'] = productId;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -202,7 +197,8 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/simple-earn/flexible/position',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -239,35 +235,29 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (productId !== undefined && productId !== null) {
                 localVarQueryParameter['productId'] = productId;
             }
-
             if (redeemId !== undefined && redeemId !== null) {
                 localVarQueryParameter['redeemId'] = redeemId;
             }
-
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -278,7 +268,8 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/simple-earn/flexible/history/redemptionRecord',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -318,35 +309,29 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             assertParamExists('getFlexibleRewardsHistory', 'type', type);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (productId !== undefined && productId !== null) {
                 localVarQueryParameter['productId'] = productId;
             }
-
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -357,7 +342,8 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/simple-earn/flexible/history/rewardsRecord',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -384,15 +370,14 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             assertParamExists('getFlexibleSubscriptionPreview', 'amount', amount);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (productId !== undefined && productId !== null) {
                 localVarQueryParameter['productId'] = productId;
             }
-
             if (amount !== undefined && amount !== null) {
                 localVarQueryParameter['amount'] = amount;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -403,7 +388,8 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/simple-earn/flexible/subscriptionPreview',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -440,35 +426,29 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (productId !== undefined && productId !== null) {
                 localVarQueryParameter['productId'] = productId;
             }
-
             if (purchaseId !== undefined && purchaseId !== null) {
                 localVarQueryParameter['purchaseId'] = purchaseId;
             }
-
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -479,7 +459,8 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/simple-earn/flexible/history/subscriptionRecord',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -502,11 +483,11 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             assertParamExists('getLockedPersonalLeftQuota', 'projectId', projectId);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (projectId !== undefined && projectId !== null) {
                 localVarQueryParameter['projectId'] = projectId;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -517,7 +498,8 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/simple-earn/locked/personalLeftQuota',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -545,27 +527,23 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (positionId !== undefined && positionId !== null) {
                 localVarQueryParameter['positionId'] = positionId;
             }
-
             if (projectId !== undefined && projectId !== null) {
                 localVarQueryParameter['projectId'] = projectId;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -576,7 +554,8 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/simple-earn/locked/position',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -613,35 +592,29 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (positionId !== undefined && positionId !== null) {
                 localVarQueryParameter['positionId'] = positionId;
             }
-
             if (redeemId !== undefined && redeemId !== null) {
                 localVarQueryParameter['redeemId'] = redeemId;
             }
-
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -652,7 +625,8 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/simple-earn/locked/history/redemptionRecord',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -687,31 +661,26 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (positionId !== undefined && positionId !== null) {
                 localVarQueryParameter['positionId'] = positionId;
             }
-
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -722,7 +691,8 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/simple-earn/locked/history/rewardsRecord',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -751,19 +721,17 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             assertParamExists('getLockedSubscriptionPreview', 'amount', amount);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (projectId !== undefined && projectId !== null) {
                 localVarQueryParameter['projectId'] = projectId;
             }
-
             if (amount !== undefined && amount !== null) {
                 localVarQueryParameter['amount'] = amount;
             }
-
             if (autoSubscribe !== undefined && autoSubscribe !== null) {
                 localVarQueryParameter['autoSubscribe'] = autoSubscribe;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -774,7 +742,8 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/simple-earn/locked/subscriptionPreview',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -809,31 +778,26 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (purchaseId !== undefined && purchaseId !== null) {
                 localVarQueryParameter['purchaseId'] = purchaseId;
             }
-
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -844,7 +808,8 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/simple-earn/locked/history/subscriptionRecord',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -882,31 +847,26 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             assertParamExists('getRateHistory', 'productId', productId);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (productId !== undefined && productId !== null) {
                 localVarQueryParameter['productId'] = productId;
             }
-
             if (aprPeriod !== undefined && aprPeriod !== null) {
                 localVarQueryParameter['aprPeriod'] = aprPeriod;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -917,7 +877,8 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/simple-earn/flexible/history/rateHistory',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -941,19 +902,17 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -964,7 +923,8 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/simple-earn/flexible/list',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -990,19 +950,17 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1013,7 +971,8 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/simple-earn/locked/list',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1044,23 +1003,20 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             assertParamExists('redeemFlexibleProduct', 'productId', productId);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (productId !== undefined && productId !== null) {
                 localVarQueryParameter['productId'] = productId;
             }
-
             if (redeemAll !== undefined && redeemAll !== null) {
                 localVarQueryParameter['redeemAll'] = redeemAll;
             }
-
             if (amount !== undefined && amount !== null) {
                 localVarQueryParameter['amount'] = amount;
             }
-
             if (destAccount !== undefined && destAccount !== null) {
                 localVarQueryParameter['destAccount'] = destAccount;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1071,7 +1027,8 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/simple-earn/flexible/redeem',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1096,11 +1053,11 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             assertParamExists('redeemLockedProduct', 'positionId', positionId);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (positionId !== undefined && positionId !== null) {
                 localVarQueryParameter['positionId'] = positionId;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1111,7 +1068,8 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/simple-earn/locked/redeem',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1138,15 +1096,14 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             assertParamExists('setFlexibleAutoSubscribe', 'autoSubscribe', autoSubscribe);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (productId !== undefined && productId !== null) {
                 localVarQueryParameter['productId'] = productId;
             }
-
             if (autoSubscribe !== undefined && autoSubscribe !== null) {
                 localVarQueryParameter['autoSubscribe'] = autoSubscribe;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1157,7 +1114,8 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/simple-earn/flexible/setAutoSubscribe',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1184,15 +1142,14 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             assertParamExists('setLockedAutoSubscribe', 'autoSubscribe', autoSubscribe);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (positionId !== undefined && positionId !== null) {
                 localVarQueryParameter['positionId'] = positionId;
             }
-
             if (autoSubscribe !== undefined && autoSubscribe !== null) {
                 localVarQueryParameter['autoSubscribe'] = autoSubscribe;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1203,7 +1160,8 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/simple-earn/locked/setAutoSubscribe',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1230,15 +1188,14 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             assertParamExists('setLockedProductRedeemOption', 'redeemTo', redeemTo);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (positionId !== undefined && positionId !== null) {
                 localVarQueryParameter['positionId'] = positionId;
             }
-
             if (redeemTo !== undefined && redeemTo !== null) {
                 localVarQueryParameter['redeemTo'] = redeemTo;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1249,7 +1206,8 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/simple-earn/locked/setRedeemOption',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1265,6 +1223,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
          */
         simpleAccount: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -1276,7 +1235,8 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/simple-earn/account',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1309,23 +1269,20 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             assertParamExists('subscribeFlexibleProduct', 'amount', amount);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (productId !== undefined && productId !== null) {
                 localVarQueryParameter['productId'] = productId;
             }
-
             if (amount !== undefined && amount !== null) {
                 localVarQueryParameter['amount'] = amount;
             }
-
             if (autoSubscribe !== undefined && autoSubscribe !== null) {
                 localVarQueryParameter['autoSubscribe'] = autoSubscribe;
             }
-
             if (sourceAccount !== undefined && sourceAccount !== null) {
                 localVarQueryParameter['sourceAccount'] = sourceAccount;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1336,7 +1293,8 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/simple-earn/flexible/subscribe',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1371,27 +1329,23 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             assertParamExists('subscribeLockedProduct', 'amount', amount);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (projectId !== undefined && projectId !== null) {
                 localVarQueryParameter['projectId'] = projectId;
             }
-
             if (amount !== undefined && amount !== null) {
                 localVarQueryParameter['amount'] = amount;
             }
-
             if (autoSubscribe !== undefined && autoSubscribe !== null) {
                 localVarQueryParameter['autoSubscribe'] = autoSubscribe;
             }
-
             if (sourceAccount !== undefined && sourceAccount !== null) {
                 localVarQueryParameter['sourceAccount'] = sourceAccount;
             }
-
             if (redeemTo !== undefined && redeemTo !== null) {
                 localVarQueryParameter['redeemTo'] = redeemTo;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1402,7 +1356,8 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/simple-earn/locked/subscribe',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -2810,7 +2765,8 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2839,7 +2795,8 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2871,7 +2828,8 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2911,7 +2869,8 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2951,7 +2910,8 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2982,7 +2942,8 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3023,7 +2984,8 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3052,7 +3014,8 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3085,7 +3048,8 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3125,7 +3089,8 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3164,7 +3129,8 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3195,7 +3161,8 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3234,7 +3201,8 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3273,7 +3241,8 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3305,7 +3274,8 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3339,7 +3309,8 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3373,7 +3344,8 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3404,7 +3376,8 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3434,7 +3407,8 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3464,7 +3438,8 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3494,7 +3469,8 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3522,7 +3498,8 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3556,7 +3533,8 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3591,7 +3569,8 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
