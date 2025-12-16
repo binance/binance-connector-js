@@ -58,11 +58,11 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             assertParamExists('getOnChainYieldsLockedPersonalLeftQuota', 'projectId', projectId);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (projectId !== undefined && projectId !== null) {
                 localVarQueryParameter['projectId'] = projectId;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -73,7 +73,8 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             return {
                 endpoint: '/sapi/v1/onchain-yields/locked/personalLeftQuota',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -99,19 +100,17 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -122,7 +121,8 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             return {
                 endpoint: '/sapi/v1/onchain-yields/locked/list',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -150,27 +150,23 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (positionId !== undefined && positionId !== null) {
                 localVarQueryParameter['positionId'] = positionId;
             }
-
             if (projectId !== undefined && projectId !== null) {
                 localVarQueryParameter['projectId'] = projectId;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -181,7 +177,8 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             return {
                 endpoint: '/sapi/v1/onchain-yields/locked/position',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -218,35 +215,29 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (positionId !== undefined && positionId !== null) {
                 localVarQueryParameter['positionId'] = positionId;
             }
-
             if (redeemId !== undefined && redeemId !== null) {
                 localVarQueryParameter['redeemId'] = redeemId;
             }
-
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -257,7 +248,8 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             return {
                 endpoint: '/sapi/v1/onchain-yields/locked/history/redemptionRecord',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -292,31 +284,26 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (positionId !== undefined && positionId !== null) {
                 localVarQueryParameter['positionId'] = positionId;
             }
-
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -327,7 +314,8 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             return {
                 endpoint: '/sapi/v1/onchain-yields/locked/history/rewardsRecord',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -356,19 +344,17 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             assertParamExists('getOnChainYieldsLockedSubscriptionPreview', 'amount', amount);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (projectId !== undefined && projectId !== null) {
                 localVarQueryParameter['projectId'] = projectId;
             }
-
             if (amount !== undefined && amount !== null) {
                 localVarQueryParameter['amount'] = amount;
             }
-
             if (autoSubscribe !== undefined && autoSubscribe !== null) {
                 localVarQueryParameter['autoSubscribe'] = autoSubscribe;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -379,7 +365,8 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             return {
                 endpoint: '/sapi/v1/onchain-yields/locked/subscriptionPreview',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -416,35 +403,29 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (purchaseId !== undefined && purchaseId !== null) {
                 localVarQueryParameter['purchaseId'] = purchaseId;
             }
-
             if (clientId !== undefined && clientId !== null) {
                 localVarQueryParameter['clientId'] = clientId;
             }
-
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -455,7 +436,8 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             return {
                 endpoint: '/sapi/v1/onchain-yields/locked/history/subscriptionRecord',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -471,6 +453,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
          */
         onChainYieldsAccount: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -482,7 +465,8 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             return {
                 endpoint: '/sapi/v1/onchain-yields/account',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -509,15 +493,14 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             assertParamExists('redeemOnChainYieldsLockedProduct', 'positionId', positionId);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (positionId !== undefined && positionId !== null) {
                 localVarQueryParameter['positionId'] = positionId;
             }
-
             if (channelId !== undefined && channelId !== null) {
                 localVarQueryParameter['channelId'] = channelId;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -528,7 +511,8 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             return {
                 endpoint: '/sapi/v1/onchain-yields/locked/redeem',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -559,15 +543,14 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             );
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (positionId !== undefined && positionId !== null) {
                 localVarQueryParameter['positionId'] = positionId;
             }
-
             if (autoSubscribe !== undefined && autoSubscribe !== null) {
                 localVarQueryParameter['autoSubscribe'] = autoSubscribe;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -578,7 +561,8 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             return {
                 endpoint: '/sapi/v1/onchain-yields/locked/setAutoSubscribe',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -609,15 +593,14 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             assertParamExists('setOnChainYieldsLockedProductRedeemOption', 'redeemTo', redeemTo);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (positionId !== undefined && positionId !== null) {
                 localVarQueryParameter['positionId'] = positionId;
             }
-
             if (redeemTo !== undefined && redeemTo !== null) {
                 localVarQueryParameter['redeemTo'] = redeemTo;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -628,7 +611,8 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             return {
                 endpoint: '/sapi/v1/onchain-yields/locked/setRedeemOption',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -667,35 +651,29 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             assertParamExists('subscribeOnChainYieldsLockedProduct', 'amount', amount);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (projectId !== undefined && projectId !== null) {
                 localVarQueryParameter['projectId'] = projectId;
             }
-
             if (amount !== undefined && amount !== null) {
                 localVarQueryParameter['amount'] = amount;
             }
-
             if (autoSubscribe !== undefined && autoSubscribe !== null) {
                 localVarQueryParameter['autoSubscribe'] = autoSubscribe;
             }
-
             if (sourceAccount !== undefined && sourceAccount !== null) {
                 localVarQueryParameter['sourceAccount'] = sourceAccount;
             }
-
             if (redeemTo !== undefined && redeemTo !== null) {
                 localVarQueryParameter['redeemTo'] = redeemTo;
             }
-
             if (channelId !== undefined && channelId !== null) {
                 localVarQueryParameter['channelId'] = channelId;
             }
-
             if (clientId !== undefined && clientId !== null) {
                 localVarQueryParameter['clientId'] = clientId;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -706,7 +684,8 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             return {
                 endpoint: '/sapi/v1/onchain-yields/locked/subscribe',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1417,7 +1396,8 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1451,7 +1431,8 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1485,7 +1466,8 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1526,7 +1508,8 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1566,7 +1549,8 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1598,7 +1582,8 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1639,7 +1624,8 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1667,7 +1653,8 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1700,7 +1687,8 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1731,7 +1719,8 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1762,7 +1751,8 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1800,7 +1790,8 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
