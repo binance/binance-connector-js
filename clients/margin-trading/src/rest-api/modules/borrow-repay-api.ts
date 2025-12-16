@@ -54,11 +54,11 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
             assertParamExists('getFutureHourlyInterestRate', 'isIsolated', isIsolated);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (assets !== undefined && assets !== null) {
                 localVarQueryParameter['assets'] = assets;
             }
-
             if (isIsolated !== undefined && isIsolated !== null) {
                 localVarQueryParameter['isIsolated'] = isIsolated;
             }
@@ -69,7 +69,8 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
             return {
                 endpoint: '/sapi/v1/margin/next-hourly-interest-rate',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -112,31 +113,26 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (isolatedSymbol !== undefined && isolatedSymbol !== null) {
                 localVarQueryParameter['isolatedSymbol'] = isolatedSymbol;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -147,7 +143,8 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
             return {
                 endpoint: '/sapi/v1/margin/interestHistory',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -186,27 +183,23 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
             assertParamExists('marginAccountBorrowRepay', 'type', type);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (isIsolated !== undefined && isIsolated !== null) {
                 localVarQueryParameter['isIsolated'] = isIsolated;
             }
-
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (amount !== undefined && amount !== null) {
                 localVarQueryParameter['amount'] = amount;
             }
-
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -217,7 +210,8 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
             return {
                 endpoint: '/sapi/v1/margin/borrow-repay',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -259,39 +253,32 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
             assertParamExists('queryBorrowRepayRecordsInMarginAccount', 'type', type);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (isolatedSymbol !== undefined && isolatedSymbol !== null) {
                 localVarQueryParameter['isolatedSymbol'] = isolatedSymbol;
             }
-
             if (txId !== undefined && txId !== null) {
                 localVarQueryParameter['txId'] = txId;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
-
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -302,7 +289,8 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
             return {
                 endpoint: '/sapi/v1/margin/borrow-repay',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -331,23 +319,20 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
             assertParamExists('queryMarginInterestRateHistory', 'asset', asset);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (vipLevel !== undefined && vipLevel !== null) {
                 localVarQueryParameter['vipLevel'] = vipLevel;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -358,7 +343,8 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
             return {
                 endpoint: '/sapi/v1/margin/interestRateHistory',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -386,15 +372,14 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
             assertParamExists('queryMaxBorrow', 'asset', asset);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (isolatedSymbol !== undefined && isolatedSymbol !== null) {
                 localVarQueryParameter['isolatedSymbol'] = isolatedSymbol;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -405,7 +390,8 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
             return {
                 endpoint: '/sapi/v1/margin/maxBorrowable',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -820,7 +806,8 @@ export class BorrowRepayApi implements BorrowRepayApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -867,7 +854,8 @@ export class BorrowRepayApi implements BorrowRepayApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -900,7 +888,8 @@ export class BorrowRepayApi implements BorrowRepayApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -942,7 +931,8 @@ export class BorrowRepayApi implements BorrowRepayApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -975,7 +965,8 @@ export class BorrowRepayApi implements BorrowRepayApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1008,7 +999,8 @@ export class BorrowRepayApi implements BorrowRepayApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );

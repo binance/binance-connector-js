@@ -57,6 +57,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             assertParamExists('adjustCrossMarginMaxLeverage', 'maxLeverage', maxLeverage);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (maxLeverage !== undefined && maxLeverage !== null) {
                 localVarQueryParameter['maxLeverage'] = maxLeverage;
@@ -68,7 +69,8 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/sapi/v1/margin/max-leverage',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -92,11 +94,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             assertParamExists('disableIsolatedMarginAccount', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -107,7 +109,8 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/sapi/v1/margin/isolated/account',
                 method: 'DELETE',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -130,11 +133,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             assertParamExists('enableIsolatedMarginAccount', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -145,7 +148,8 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/sapi/v1/margin/isolated/account',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -161,6 +165,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          */
         getBnbBurnStatus: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -172,7 +177,8 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/sapi/v1/bnbBurn',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -188,6 +194,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
          */
         getSummaryOfMarginAccount: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -199,7 +206,8 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/sapi/v1/margin/tradeCoeff',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -231,35 +239,29 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (fromId !== undefined && fromId !== null) {
                 localVarQueryParameter['fromId'] = fromId;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -270,7 +272,8 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/sapi/v1/margin/capital-flow',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -288,6 +291,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -299,7 +303,8 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/sapi/v1/margin/account',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -321,15 +326,14 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (vipLevel !== undefined && vipLevel !== null) {
                 localVarQueryParameter['vipLevel'] = vipLevel;
             }
-
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -340,7 +344,8 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/sapi/v1/margin/crossMarginData',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -358,6 +363,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -369,7 +375,8 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/sapi/v1/margin/isolated/accountLimit',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -392,11 +399,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbols !== undefined && symbols !== null) {
                 localVarQueryParameter['symbols'] = symbols;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -407,7 +414,8 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/sapi/v1/margin/isolated/account',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -429,15 +437,14 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (vipLevel !== undefined && vipLevel !== null) {
                 localVarQueryParameter['vipLevel'] = vipLevel;
             }
-
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -448,7 +455,8 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             return {
                 endpoint: '/sapi/v1/margin/isolatedMarginData',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -900,7 +908,8 @@ export class AccountApi implements AccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -930,7 +939,8 @@ export class AccountApi implements AccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -959,7 +969,8 @@ export class AccountApi implements AccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -987,7 +998,8 @@ export class AccountApi implements AccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1015,7 +1027,8 @@ export class AccountApi implements AccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1051,7 +1064,8 @@ export class AccountApi implements AccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1080,7 +1094,8 @@ export class AccountApi implements AccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1110,7 +1125,8 @@ export class AccountApi implements AccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1139,7 +1155,8 @@ export class AccountApi implements AccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1172,7 +1189,8 @@ export class AccountApi implements AccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1202,7 +1220,8 @@ export class AccountApi implements AccountApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );

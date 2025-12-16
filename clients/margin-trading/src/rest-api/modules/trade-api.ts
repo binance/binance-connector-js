@@ -96,27 +96,23 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('createSpecialKey', 'apiName', apiName);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (apiName !== undefined && apiName !== null) {
                 localVarQueryParameter['apiName'] = apiName;
             }
-
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (ip !== undefined && ip !== null) {
                 localVarQueryParameter['ip'] = ip;
             }
-
             if (publicKey !== undefined && publicKey !== null) {
                 localVarQueryParameter['publicKey'] = publicKey;
             }
-
             if (permissionMode !== undefined && permissionMode !== null) {
                 localVarQueryParameter['permissionMode'] = permissionMode;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -127,7 +123,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/margin/apiKey',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -153,15 +150,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (apiName !== undefined && apiName !== null) {
                 localVarQueryParameter['apiName'] = apiName;
             }
-
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -172,7 +168,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/margin/apiKey',
                 method: 'DELETE',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -199,15 +196,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('editIpForSpecialKey', 'ip', ip);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (ip !== undefined && ip !== null) {
                 localVarQueryParameter['ip'] = ip;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -218,7 +214,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/margin/apiKey/ip',
                 method: 'PUT',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -248,27 +245,23 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (isolatedSymbol !== undefined && isolatedSymbol !== null) {
                 localVarQueryParameter['isolatedSymbol'] = isolatedSymbol;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -279,7 +272,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/margin/forceLiquidationRec',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -297,6 +291,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -308,7 +303,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/margin/exchange-small-liability',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -339,23 +335,20 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('getSmallLiabilityExchangeHistory', 'size', size);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -366,7 +359,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/margin/exchange-small-liability-history',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -392,15 +386,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('marginAccountCancelAllOpenOrdersOnASymbol', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (isIsolated !== undefined && isIsolated !== null) {
                 localVarQueryParameter['isIsolated'] = isIsolated;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -411,7 +404,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/margin/openOrders',
                 method: 'DELETE',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -444,27 +438,23 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('marginAccountCancelOco', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (isIsolated !== undefined && isIsolated !== null) {
                 localVarQueryParameter['isIsolated'] = isIsolated;
             }
-
             if (orderListId !== undefined && orderListId !== null) {
                 localVarQueryParameter['orderListId'] = orderListId;
             }
-
             if (listClientOrderId !== undefined && listClientOrderId !== null) {
                 localVarQueryParameter['listClientOrderId'] = listClientOrderId;
             }
-
             if (newClientOrderId !== undefined && newClientOrderId !== null) {
                 localVarQueryParameter['newClientOrderId'] = newClientOrderId;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -475,7 +465,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/margin/orderList',
                 method: 'DELETE',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -508,27 +499,23 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('marginAccountCancelOrder', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (isIsolated !== undefined && isIsolated !== null) {
                 localVarQueryParameter['isIsolated'] = isIsolated;
             }
-
             if (orderId !== undefined && orderId !== null) {
                 localVarQueryParameter['orderId'] = orderId;
             }
-
             if (origClientOrderId !== undefined && origClientOrderId !== null) {
                 localVarQueryParameter['origClientOrderId'] = origClientOrderId;
             }
-
             if (newClientOrderId !== undefined && newClientOrderId !== null) {
                 localVarQueryParameter['newClientOrderId'] = newClientOrderId;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -539,7 +526,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/margin/order',
                 method: 'DELETE',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -604,75 +592,59 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('marginAccountNewOco', 'stopPrice', stopPrice);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (isIsolated !== undefined && isIsolated !== null) {
                 localVarQueryParameter['isIsolated'] = isIsolated;
             }
-
             if (listClientOrderId !== undefined && listClientOrderId !== null) {
                 localVarQueryParameter['listClientOrderId'] = listClientOrderId;
             }
-
             if (side !== undefined && side !== null) {
                 localVarQueryParameter['side'] = side;
             }
-
             if (quantity !== undefined && quantity !== null) {
                 localVarQueryParameter['quantity'] = quantity;
             }
-
             if (limitClientOrderId !== undefined && limitClientOrderId !== null) {
                 localVarQueryParameter['limitClientOrderId'] = limitClientOrderId;
             }
-
             if (price !== undefined && price !== null) {
                 localVarQueryParameter['price'] = price;
             }
-
             if (limitIcebergQty !== undefined && limitIcebergQty !== null) {
                 localVarQueryParameter['limitIcebergQty'] = limitIcebergQty;
             }
-
             if (stopClientOrderId !== undefined && stopClientOrderId !== null) {
                 localVarQueryParameter['stopClientOrderId'] = stopClientOrderId;
             }
-
             if (stopPrice !== undefined && stopPrice !== null) {
                 localVarQueryParameter['stopPrice'] = stopPrice;
             }
-
             if (stopLimitPrice !== undefined && stopLimitPrice !== null) {
                 localVarQueryParameter['stopLimitPrice'] = stopLimitPrice;
             }
-
             if (stopIcebergQty !== undefined && stopIcebergQty !== null) {
                 localVarQueryParameter['stopIcebergQty'] = stopIcebergQty;
             }
-
             if (stopLimitTimeInForce !== undefined && stopLimitTimeInForce !== null) {
                 localVarQueryParameter['stopLimitTimeInForce'] = stopLimitTimeInForce;
             }
-
             if (newOrderRespType !== undefined && newOrderRespType !== null) {
                 localVarQueryParameter['newOrderRespType'] = newOrderRespType;
             }
-
             if (sideEffectType !== undefined && sideEffectType !== null) {
                 localVarQueryParameter['sideEffectType'] = sideEffectType;
             }
-
             if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
                 localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
             }
-
             if (autoRepayAtCancel !== undefined && autoRepayAtCancel !== null) {
                 localVarQueryParameter['autoRepayAtCancel'] = autoRepayAtCancel;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -683,7 +655,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/margin/order/oco',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -740,67 +713,53 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('marginAccountNewOrder', 'type', type);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (isIsolated !== undefined && isIsolated !== null) {
                 localVarQueryParameter['isIsolated'] = isIsolated;
             }
-
             if (side !== undefined && side !== null) {
                 localVarQueryParameter['side'] = side;
             }
-
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (quantity !== undefined && quantity !== null) {
                 localVarQueryParameter['quantity'] = quantity;
             }
-
             if (quoteOrderQty !== undefined && quoteOrderQty !== null) {
                 localVarQueryParameter['quoteOrderQty'] = quoteOrderQty;
             }
-
             if (price !== undefined && price !== null) {
                 localVarQueryParameter['price'] = price;
             }
-
             if (stopPrice !== undefined && stopPrice !== null) {
                 localVarQueryParameter['stopPrice'] = stopPrice;
             }
-
             if (newClientOrderId !== undefined && newClientOrderId !== null) {
                 localVarQueryParameter['newClientOrderId'] = newClientOrderId;
             }
-
             if (icebergQty !== undefined && icebergQty !== null) {
                 localVarQueryParameter['icebergQty'] = icebergQty;
             }
-
             if (newOrderRespType !== undefined && newOrderRespType !== null) {
                 localVarQueryParameter['newOrderRespType'] = newOrderRespType;
             }
-
             if (sideEffectType !== undefined && sideEffectType !== null) {
                 localVarQueryParameter['sideEffectType'] = sideEffectType;
             }
-
             if (timeInForce !== undefined && timeInForce !== null) {
                 localVarQueryParameter['timeInForce'] = timeInForce;
             }
-
             if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
                 localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
             }
-
             if (autoRepayAtCancel !== undefined && autoRepayAtCancel !== null) {
                 localVarQueryParameter['autoRepayAtCancel'] = autoRepayAtCancel;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -811,7 +770,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/margin/order',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -902,95 +862,74 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('marginAccountNewOto', 'pendingQuantity', pendingQuantity);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (isIsolated !== undefined && isIsolated !== null) {
                 localVarQueryParameter['isIsolated'] = isIsolated;
             }
-
             if (listClientOrderId !== undefined && listClientOrderId !== null) {
                 localVarQueryParameter['listClientOrderId'] = listClientOrderId;
             }
-
             if (newOrderRespType !== undefined && newOrderRespType !== null) {
                 localVarQueryParameter['newOrderRespType'] = newOrderRespType;
             }
-
             if (sideEffectType !== undefined && sideEffectType !== null) {
                 localVarQueryParameter['sideEffectType'] = sideEffectType;
             }
-
             if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
                 localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
             }
-
             if (autoRepayAtCancel !== undefined && autoRepayAtCancel !== null) {
                 localVarQueryParameter['autoRepayAtCancel'] = autoRepayAtCancel;
             }
-
             if (workingType !== undefined && workingType !== null) {
                 localVarQueryParameter['workingType'] = workingType;
             }
-
             if (workingSide !== undefined && workingSide !== null) {
                 localVarQueryParameter['workingSide'] = workingSide;
             }
-
             if (workingClientOrderId !== undefined && workingClientOrderId !== null) {
                 localVarQueryParameter['workingClientOrderId'] = workingClientOrderId;
             }
-
             if (workingPrice !== undefined && workingPrice !== null) {
                 localVarQueryParameter['workingPrice'] = workingPrice;
             }
-
             if (workingQuantity !== undefined && workingQuantity !== null) {
                 localVarQueryParameter['workingQuantity'] = workingQuantity;
             }
-
             if (workingIcebergQty !== undefined && workingIcebergQty !== null) {
                 localVarQueryParameter['workingIcebergQty'] = workingIcebergQty;
             }
-
             if (workingTimeInForce !== undefined && workingTimeInForce !== null) {
                 localVarQueryParameter['workingTimeInForce'] = workingTimeInForce;
             }
-
             if (pendingType !== undefined && pendingType !== null) {
                 localVarQueryParameter['pendingType'] = pendingType;
             }
-
             if (pendingSide !== undefined && pendingSide !== null) {
                 localVarQueryParameter['pendingSide'] = pendingSide;
             }
-
             if (pendingClientOrderId !== undefined && pendingClientOrderId !== null) {
                 localVarQueryParameter['pendingClientOrderId'] = pendingClientOrderId;
             }
-
             if (pendingPrice !== undefined && pendingPrice !== null) {
                 localVarQueryParameter['pendingPrice'] = pendingPrice;
             }
-
             if (pendingStopPrice !== undefined && pendingStopPrice !== null) {
                 localVarQueryParameter['pendingStopPrice'] = pendingStopPrice;
             }
-
             if (pendingTrailingDelta !== undefined && pendingTrailingDelta !== null) {
                 localVarQueryParameter['pendingTrailingDelta'] = pendingTrailingDelta;
             }
-
             if (pendingQuantity !== undefined && pendingQuantity !== null) {
                 localVarQueryParameter['pendingQuantity'] = pendingQuantity;
             }
-
             if (pendingIcebergQty !== undefined && pendingIcebergQty !== null) {
                 localVarQueryParameter['pendingIcebergQty'] = pendingIcebergQty;
             }
-
             if (pendingTimeInForce !== undefined && pendingTimeInForce !== null) {
                 localVarQueryParameter['pendingTimeInForce'] = pendingTimeInForce;
             }
@@ -1001,7 +940,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/margin/order/oto',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1104,123 +1044,95 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('marginAccountNewOtoco', 'pendingAboveType', pendingAboveType);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (isIsolated !== undefined && isIsolated !== null) {
                 localVarQueryParameter['isIsolated'] = isIsolated;
             }
-
             if (sideEffectType !== undefined && sideEffectType !== null) {
                 localVarQueryParameter['sideEffectType'] = sideEffectType;
             }
-
             if (autoRepayAtCancel !== undefined && autoRepayAtCancel !== null) {
                 localVarQueryParameter['autoRepayAtCancel'] = autoRepayAtCancel;
             }
-
             if (listClientOrderId !== undefined && listClientOrderId !== null) {
                 localVarQueryParameter['listClientOrderId'] = listClientOrderId;
             }
-
             if (newOrderRespType !== undefined && newOrderRespType !== null) {
                 localVarQueryParameter['newOrderRespType'] = newOrderRespType;
             }
-
             if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
                 localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
             }
-
             if (workingType !== undefined && workingType !== null) {
                 localVarQueryParameter['workingType'] = workingType;
             }
-
             if (workingSide !== undefined && workingSide !== null) {
                 localVarQueryParameter['workingSide'] = workingSide;
             }
-
             if (workingClientOrderId !== undefined && workingClientOrderId !== null) {
                 localVarQueryParameter['workingClientOrderId'] = workingClientOrderId;
             }
-
             if (workingPrice !== undefined && workingPrice !== null) {
                 localVarQueryParameter['workingPrice'] = workingPrice;
             }
-
             if (workingQuantity !== undefined && workingQuantity !== null) {
                 localVarQueryParameter['workingQuantity'] = workingQuantity;
             }
-
             if (workingIcebergQty !== undefined && workingIcebergQty !== null) {
                 localVarQueryParameter['workingIcebergQty'] = workingIcebergQty;
             }
-
             if (workingTimeInForce !== undefined && workingTimeInForce !== null) {
                 localVarQueryParameter['workingTimeInForce'] = workingTimeInForce;
             }
-
             if (pendingSide !== undefined && pendingSide !== null) {
                 localVarQueryParameter['pendingSide'] = pendingSide;
             }
-
             if (pendingQuantity !== undefined && pendingQuantity !== null) {
                 localVarQueryParameter['pendingQuantity'] = pendingQuantity;
             }
-
             if (pendingAboveType !== undefined && pendingAboveType !== null) {
                 localVarQueryParameter['pendingAboveType'] = pendingAboveType;
             }
-
             if (pendingAboveClientOrderId !== undefined && pendingAboveClientOrderId !== null) {
                 localVarQueryParameter['pendingAboveClientOrderId'] = pendingAboveClientOrderId;
             }
-
             if (pendingAbovePrice !== undefined && pendingAbovePrice !== null) {
                 localVarQueryParameter['pendingAbovePrice'] = pendingAbovePrice;
             }
-
             if (pendingAboveStopPrice !== undefined && pendingAboveStopPrice !== null) {
                 localVarQueryParameter['pendingAboveStopPrice'] = pendingAboveStopPrice;
             }
-
             if (pendingAboveTrailingDelta !== undefined && pendingAboveTrailingDelta !== null) {
                 localVarQueryParameter['pendingAboveTrailingDelta'] = pendingAboveTrailingDelta;
             }
-
             if (pendingAboveIcebergQty !== undefined && pendingAboveIcebergQty !== null) {
                 localVarQueryParameter['pendingAboveIcebergQty'] = pendingAboveIcebergQty;
             }
-
             if (pendingAboveTimeInForce !== undefined && pendingAboveTimeInForce !== null) {
                 localVarQueryParameter['pendingAboveTimeInForce'] = pendingAboveTimeInForce;
             }
-
             if (pendingBelowType !== undefined && pendingBelowType !== null) {
                 localVarQueryParameter['pendingBelowType'] = pendingBelowType;
             }
-
             if (pendingBelowClientOrderId !== undefined && pendingBelowClientOrderId !== null) {
                 localVarQueryParameter['pendingBelowClientOrderId'] = pendingBelowClientOrderId;
             }
-
             if (pendingBelowPrice !== undefined && pendingBelowPrice !== null) {
                 localVarQueryParameter['pendingBelowPrice'] = pendingBelowPrice;
             }
-
             if (pendingBelowStopPrice !== undefined && pendingBelowStopPrice !== null) {
                 localVarQueryParameter['pendingBelowStopPrice'] = pendingBelowStopPrice;
             }
-
             if (pendingBelowTrailingDelta !== undefined && pendingBelowTrailingDelta !== null) {
                 localVarQueryParameter['pendingBelowTrailingDelta'] = pendingBelowTrailingDelta;
             }
-
             if (pendingBelowIcebergQty !== undefined && pendingBelowIcebergQty !== null) {
                 localVarQueryParameter['pendingBelowIcebergQty'] = pendingBelowIcebergQty;
             }
-
             if (pendingBelowTimeInForce !== undefined && pendingBelowTimeInForce !== null) {
                 localVarQueryParameter['pendingBelowTimeInForce'] = pendingBelowTimeInForce;
             }
@@ -1231,7 +1143,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/margin/order/otoco',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1259,15 +1172,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('marginManualLiquidation', 'type', type);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1278,7 +1190,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/margin/manual-liquidation',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1300,15 +1213,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (isIsolated !== undefined && isIsolated !== null) {
                 localVarQueryParameter['isIsolated'] = isIsolated;
             }
-
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1319,7 +1231,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/margin/rateLimit/order',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1349,31 +1262,26 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (isIsolated !== undefined && isIsolated !== null) {
                 localVarQueryParameter['isIsolated'] = isIsolated;
             }
-
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (fromId !== undefined && fromId !== null) {
                 localVarQueryParameter['fromId'] = fromId;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1384,7 +1292,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/margin/allOrderList',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1421,31 +1330,26 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('queryMarginAccountsAllOrders', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (isIsolated !== undefined && isIsolated !== null) {
                 localVarQueryParameter['isIsolated'] = isIsolated;
             }
-
             if (orderId !== undefined && orderId !== null) {
                 localVarQueryParameter['orderId'] = orderId;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1456,7 +1360,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/margin/allOrders',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1482,23 +1387,20 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (isIsolated !== undefined && isIsolated !== null) {
                 localVarQueryParameter['isIsolated'] = isIsolated;
             }
-
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (orderListId !== undefined && orderListId !== null) {
                 localVarQueryParameter['orderListId'] = orderListId;
             }
-
             if (origClientOrderId !== undefined && origClientOrderId !== null) {
                 localVarQueryParameter['origClientOrderId'] = origClientOrderId;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1509,7 +1411,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/margin/orderList',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1531,15 +1434,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (isIsolated !== undefined && isIsolated !== null) {
                 localVarQueryParameter['isIsolated'] = isIsolated;
             }
-
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1550,7 +1452,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/margin/openOrderList',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1576,15 +1479,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (isIsolated !== undefined && isIsolated !== null) {
                 localVarQueryParameter['isIsolated'] = isIsolated;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1595,7 +1497,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/margin/openOrders',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1627,23 +1530,20 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('queryMarginAccountsOrder', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (isIsolated !== undefined && isIsolated !== null) {
                 localVarQueryParameter['isIsolated'] = isIsolated;
             }
-
             if (orderId !== undefined && orderId !== null) {
                 localVarQueryParameter['orderId'] = orderId;
             }
-
             if (origClientOrderId !== undefined && origClientOrderId !== null) {
                 localVarQueryParameter['origClientOrderId'] = origClientOrderId;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1654,7 +1554,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/margin/order',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1692,35 +1593,29 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('queryMarginAccountsTradeList', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (isIsolated !== undefined && isIsolated !== null) {
                 localVarQueryParameter['isIsolated'] = isIsolated;
             }
-
             if (orderId !== undefined && orderId !== null) {
                 localVarQueryParameter['orderId'] = orderId;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (fromId !== undefined && fromId !== null) {
                 localVarQueryParameter['fromId'] = fromId;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1731,7 +1626,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/margin/myTrades',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1753,11 +1649,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1768,7 +1664,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/margin/apiKey',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1788,11 +1685,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1803,7 +1700,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/margin/api-key-list',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1830,11 +1728,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('smallLiabilityExchange', 'assetNames', assetNames);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (assetNames) {
                 localVarQueryParameter['assetNames'] = assetNames;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1845,7 +1743,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/margin/exchange-small-liability',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -3729,7 +3628,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3763,7 +3663,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3795,7 +3696,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3830,7 +3732,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3859,7 +3762,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3892,7 +3796,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3924,7 +3829,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3959,7 +3865,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3994,7 +3901,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4041,7 +3949,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4086,7 +3995,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4146,7 +4056,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4213,7 +4124,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4246,7 +4158,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4277,7 +4190,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4311,7 +4225,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4349,7 +4264,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4381,7 +4297,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4411,7 +4328,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4446,7 +4364,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4481,7 +4400,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4519,7 +4439,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4550,7 +4471,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4579,7 +4501,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -4612,7 +4535,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );

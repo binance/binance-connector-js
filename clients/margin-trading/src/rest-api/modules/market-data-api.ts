@@ -49,6 +49,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          */
         crossMarginCollateralRatio: async (): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -56,7 +57,8 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v1/margin/crossMarginCollateralRatio',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -72,6 +74,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          */
         getAllCrossMarginPairs: async (symbol?: string): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
@@ -83,7 +86,8 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v1/margin/allPairs',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -103,11 +107,11 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -118,7 +122,8 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v1/margin/isolated/allPairs',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -134,6 +139,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          */
         getAllMarginAssets: async (asset?: string): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
@@ -145,7 +151,8 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v1/margin/allAssets',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -161,6 +168,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          */
         getDelistSchedule: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -172,7 +180,8 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v1/margin/delist-schedule',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -192,6 +201,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          */
         getLimitPricePairs: async (): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -199,7 +209,8 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v1/margin/limit-price-pairs',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -215,6 +226,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          */
         getListSchedule: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -226,7 +238,8 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v1/margin/list-schedule',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -251,15 +264,14 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             assertParamExists('queryIsolatedMarginTierData', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
             }
-
             if (tier !== undefined && tier !== null) {
                 localVarQueryParameter['tier'] = tier;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -270,7 +282,8 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v1/margin/isolatedMarginTier',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -285,6 +298,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          */
         queryLiabilityCoinLeverageBracketInCrossMarginProMode: async (): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -292,7 +306,8 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v1/margin/leverageBracket',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -311,6 +326,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             assertParamExists('queryMarginAvailableInventory', 'type', type);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
@@ -322,7 +338,8 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v1/margin/available-inventory',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -341,6 +358,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             assertParamExists('queryMarginPriceindex', 'symbol', symbol);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (symbol !== undefined && symbol !== null) {
                 localVarQueryParameter['symbol'] = symbol;
@@ -352,7 +370,8 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v1/margin/priceIndex',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -675,7 +694,8 @@ export class MarketDataApi implements MarketDataApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -703,7 +723,8 @@ export class MarketDataApi implements MarketDataApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -732,7 +753,8 @@ export class MarketDataApi implements MarketDataApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -760,7 +782,8 @@ export class MarketDataApi implements MarketDataApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -788,7 +811,8 @@ export class MarketDataApi implements MarketDataApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -816,7 +840,8 @@ export class MarketDataApi implements MarketDataApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -844,7 +869,8 @@ export class MarketDataApi implements MarketDataApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -874,7 +900,8 @@ export class MarketDataApi implements MarketDataApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -900,7 +927,8 @@ export class MarketDataApi implements MarketDataApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -929,7 +957,8 @@ export class MarketDataApi implements MarketDataApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -957,7 +986,8 @@ export class MarketDataApi implements MarketDataApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );

@@ -61,35 +61,29 @@ const TransferApiAxiosParamCreator = function (configuration: ConfigurationRestA
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (type !== undefined && type !== null) {
                 localVarQueryParameter['type'] = type;
             }
-
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (current !== undefined && current !== null) {
                 localVarQueryParameter['current'] = current;
             }
-
             if (size !== undefined && size !== null) {
                 localVarQueryParameter['size'] = size;
             }
-
             if (isolatedSymbol !== undefined && isolatedSymbol !== null) {
                 localVarQueryParameter['isolatedSymbol'] = isolatedSymbol;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -100,7 +94,8 @@ const TransferApiAxiosParamCreator = function (configuration: ConfigurationRestA
             return {
                 endpoint: '/sapi/v1/margin/transfer',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -127,15 +122,14 @@ const TransferApiAxiosParamCreator = function (configuration: ConfigurationRestA
             assertParamExists('queryMaxTransferOutAmount', 'asset', asset);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
             }
-
             if (isolatedSymbol !== undefined && isolatedSymbol !== null) {
                 localVarQueryParameter['isolatedSymbol'] = isolatedSymbol;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -146,7 +140,8 @@ const TransferApiAxiosParamCreator = function (configuration: ConfigurationRestA
             return {
                 endpoint: '/sapi/v1/margin/maxTransferable',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -330,7 +325,8 @@ export class TransferApi implements TransferApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -362,7 +358,8 @@ export class TransferApi implements TransferApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );

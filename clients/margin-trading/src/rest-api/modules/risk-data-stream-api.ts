@@ -37,6 +37,7 @@ const RiskDataStreamApiAxiosParamCreator = function (configuration: Configuratio
          */
         closeUserDataStream: async (): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -44,7 +45,8 @@ const RiskDataStreamApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/margin/listen-key',
                 method: 'DELETE',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -63,6 +65,7 @@ const RiskDataStreamApiAxiosParamCreator = function (configuration: Configuratio
             assertParamExists('keepaliveUserDataStream', 'listenKey', listenKey);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (listenKey !== undefined && listenKey !== null) {
                 localVarQueryParameter['listenKey'] = listenKey;
@@ -74,7 +77,8 @@ const RiskDataStreamApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/margin/listen-key',
                 method: 'PUT',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -89,6 +93,7 @@ const RiskDataStreamApiAxiosParamCreator = function (configuration: Configuratio
          */
         startUserDataStream: async (): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -96,7 +101,8 @@ const RiskDataStreamApiAxiosParamCreator = function (configuration: Configuratio
             return {
                 endpoint: '/sapi/v1/margin/listen-key',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -189,7 +195,8 @@ export class RiskDataStreamApi implements RiskDataStreamApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -217,7 +224,8 @@ export class RiskDataStreamApi implements RiskDataStreamApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -240,7 +248,8 @@ export class RiskDataStreamApi implements RiskDataStreamApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );

@@ -1,5 +1,12 @@
 # Changelog
 
+## 10.1.0 - 2025-12-16
+
+### Changed (2)
+
+- Update `@binance/common` library to version `2.1.0`.
+- Support request body params on `sendRequest` and `sendSignedRequest` functions.
+
 ## 10.0.2 - 2025-11-27
 
 ### Changed (1)
