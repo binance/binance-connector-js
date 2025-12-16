@@ -53,11 +53,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('acceptQuote', 'quoteId', quoteId);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (quoteId !== undefined && quoteId !== null) {
                 localVarQueryParameter['quoteId'] = quoteId;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -68,7 +68,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/convert/acceptQuote',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -91,11 +92,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('cancelLimitOrder', 'orderId', orderId);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (orderId !== undefined && orderId !== null) {
                 localVarQueryParameter['orderId'] = orderId;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -106,7 +107,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/convert/limit/cancelOrder',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -137,19 +139,17 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('getConvertTradeHistory', 'endTime', endTime);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
-
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
             }
-
             if (limit !== undefined && limit !== null) {
                 localVarQueryParameter['limit'] = limit;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -160,7 +160,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/convert/tradeFlow',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -177,11 +178,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          */
         orderStatus: async (orderId?: string, quoteId?: string): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (orderId !== undefined && orderId !== null) {
                 localVarQueryParameter['orderId'] = orderId;
             }
-
             if (quoteId !== undefined && quoteId !== null) {
                 localVarQueryParameter['quoteId'] = quoteId;
             }
@@ -192,7 +193,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/convert/orderStatus',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -241,39 +243,32 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('placeLimitOrder', 'expiredType', expiredType);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (baseAsset !== undefined && baseAsset !== null) {
                 localVarQueryParameter['baseAsset'] = baseAsset;
             }
-
             if (quoteAsset !== undefined && quoteAsset !== null) {
                 localVarQueryParameter['quoteAsset'] = quoteAsset;
             }
-
             if (limitPrice !== undefined && limitPrice !== null) {
                 localVarQueryParameter['limitPrice'] = limitPrice;
             }
-
             if (baseAmount !== undefined && baseAmount !== null) {
                 localVarQueryParameter['baseAmount'] = baseAmount;
             }
-
             if (quoteAmount !== undefined && quoteAmount !== null) {
                 localVarQueryParameter['quoteAmount'] = quoteAmount;
             }
-
             if (side !== undefined && side !== null) {
                 localVarQueryParameter['side'] = side;
             }
-
             if (walletType !== undefined && walletType !== null) {
                 localVarQueryParameter['walletType'] = walletType;
             }
-
             if (expiredType !== undefined && expiredType !== null) {
                 localVarQueryParameter['expiredType'] = expiredType;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -284,7 +279,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/convert/limit/placeOrder',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -300,6 +296,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          */
         queryLimitOpenOrders: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -311,7 +308,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/convert/limit/queryOpenOrders',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -349,31 +347,26 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             assertParamExists('sendQuoteRequest', 'toAsset', toAsset);
 
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (fromAsset !== undefined && fromAsset !== null) {
                 localVarQueryParameter['fromAsset'] = fromAsset;
             }
-
             if (toAsset !== undefined && toAsset !== null) {
                 localVarQueryParameter['toAsset'] = toAsset;
             }
-
             if (fromAmount !== undefined && fromAmount !== null) {
                 localVarQueryParameter['fromAmount'] = fromAmount;
             }
-
             if (toAmount !== undefined && toAmount !== null) {
                 localVarQueryParameter['toAmount'] = toAmount;
             }
-
             if (walletType !== undefined && walletType !== null) {
                 localVarQueryParameter['walletType'] = walletType;
             }
-
             if (validTime !== undefined && validTime !== null) {
                 localVarQueryParameter['validTime'] = validTime;
             }
-
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -384,7 +377,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/convert/getQuote',
                 method: 'POST',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -772,7 +766,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -801,7 +796,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -834,7 +830,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -863,7 +860,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -903,7 +901,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -931,7 +930,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -968,7 +968,8 @@ export class TradeApi implements TradeApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );

@@ -44,11 +44,11 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          */
         listAllConvertPairs: async (fromAsset?: string, toAsset?: string): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (fromAsset !== undefined && fromAsset !== null) {
                 localVarQueryParameter['fromAsset'] = fromAsset;
             }
-
             if (toAsset !== undefined && toAsset !== null) {
                 localVarQueryParameter['toAsset'] = toAsset;
             }
@@ -59,7 +59,8 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v1/convert/exchangeInfo',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -77,6 +78,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -88,7 +90,8 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             return {
                 endpoint: '/sapi/v1/convert/assetInfo',
                 method: 'GET',
-                params: localVarQueryParameter,
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -205,7 +208,8 @@ export class MarketDataApi implements MarketDataApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -234,7 +238,8 @@ export class MarketDataApi implements MarketDataApiInterface {
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
-            localVarAxiosArgs.params,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );

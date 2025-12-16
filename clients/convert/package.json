@@ -1,7 +1,7 @@
 {
     "name": "@binance/convert",
     "description": "Official Binance Convert Connector - A lightweight library that provides a convenient interface to Binance's Convert REST API.",
-    "version": "4.0.3",
+    "version": "4.1.0",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",
@@ -56,7 +56,7 @@
         "typescript-eslint": "^8.24.0"
     },
     "dependencies": {
-        "@binance/common": "2.0.1",
+        "@binance/common": "2.1.0",
         "axios": "^1.7.4"
     }
 }
