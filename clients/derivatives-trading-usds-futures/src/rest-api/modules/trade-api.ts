@@ -1085,6 +1085,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Send in a new Algo order.
          *
+         * Algo order with type `STOP`,  parameter `timeInForce` can be sent ( default `GTC`).
+         * Algo order with type `TAKE_PROFIT`,  parameter `timeInForce` can be sent ( default `GTC`).
          * Condition orders will be triggered when:
          *
          * If parameter`priceProtect`is sent as true:
@@ -1098,14 +1100,14 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
          * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
          * `TRAILING_STOP_MARKET`:
-         * BUY: the lowest price after order placed <= `activationPrice`, and the latest price >= the lowest price * (1 + `callbackRate`)
-         * SELL: the highest price after order placed >= `activationPrice`, and the latest price <= the highest price * (1 - `callbackRate`)
+         * BUY: the lowest price after order placed <= `activatePrice`, and the latest price >= the lowest price * (1 + `callbackRate`)
+         * SELL: the highest price after order placed >= `activatePrice`, and the latest price <= the highest price * (1 - `callbackRate`)
          *
          * For `TRAILING_STOP_MARKET`, if you got such error code.
          * ``{"code": -2021, "msg": "Order would immediately trigger."}``
          * means that the parameters you send do not meet the following requirements:
-         * BUY: `activationPrice` should be smaller than latest price.
-         * SELL: `activationPrice` should be larger than latest price.
+         * BUY: `activatePrice` should be smaller than latest price.
+         * SELL: `activatePrice` should be larger than latest price.
          *
          * `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`:
          * Follow the same rules for condition orders.
@@ -1132,7 +1134,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} [closePosition] `true`, `false`；Close-All，used with `STOP_MARKET` or `TAKE_PROFIT_MARKET`.
          * @param {string} [priceProtect] "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
          * @param {string} [reduceOnly] "true" or "false". default "false". Cannot be sent in Hedge Mode
-         * @param {number} [activationPrice] Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`)
+         * @param {number} [activatePrice] Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`)
          * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1%
          * @param {string} [clientAlgoId] A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$`
          * @param {NewAlgoOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE`
@@ -1156,7 +1158,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             closePosition?: string,
             priceProtect?: string,
             reduceOnly?: string,
-            activationPrice?: number,
+            activatePrice?: number,
             callbackRate?: number,
             clientAlgoId?: string,
             selfTradePreventionMode?: NewAlgoOrderSelfTradePreventionModeEnum,
@@ -1217,8 +1219,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             if (reduceOnly !== undefined && reduceOnly !== null) {
                 localVarQueryParameter['reduceOnly'] = reduceOnly;
             }
-            if (activationPrice !== undefined && activationPrice !== null) {
-                localVarQueryParameter['activationPrice'] = activationPrice;
+            if (activatePrice !== undefined && activatePrice !== null) {
+                localVarQueryParameter['activatePrice'] = activatePrice;
             }
             if (callbackRate !== undefined && callbackRate !== null) {
                 localVarQueryParameter['callbackRate'] = callbackRate;
@@ -2328,6 +2330,8 @@ export interface TradeApiInterface {
     /**
      * Send in a new Algo order.
      *
+     * Algo order with type `STOP`,  parameter `timeInForce` can be sent ( default `GTC`).
+     * Algo order with type `TAKE_PROFIT`,  parameter `timeInForce` can be sent ( default `GTC`).
      * Condition orders will be triggered when:
      *
      * If parameter`priceProtect`is sent as true:
@@ -2341,14 +2345,14 @@ export interface TradeApiInterface {
      * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
      * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
      * `TRAILING_STOP_MARKET`:
-     * BUY: the lowest price after order placed <= `activationPrice`, and the latest price >= the lowest price * (1 + `callbackRate`)
-     * SELL: the highest price after order placed >= `activationPrice`, and the latest price <= the highest price * (1 - `callbackRate`)
+     * BUY: the lowest price after order placed <= `activatePrice`, and the latest price >= the lowest price * (1 + `callbackRate`)
+     * SELL: the highest price after order placed >= `activatePrice`, and the latest price <= the highest price * (1 - `callbackRate`)
      *
      * For `TRAILING_STOP_MARKET`, if you got such error code.
      * ``{"code": -2021, "msg": "Order would immediately trigger."}``
      * means that the parameters you send do not meet the following requirements:
-     * BUY: `activationPrice` should be smaller than latest price.
-     * SELL: `activationPrice` should be larger than latest price.
+     * BUY: `activatePrice` should be smaller than latest price.
+     * SELL: `activatePrice` should be larger than latest price.
      *
      * `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`:
      * Follow the same rules for condition orders.
@@ -3370,7 +3374,7 @@ export interface NewAlgoOrderRequest {
      * @type {number}
      * @memberof TradeApiNewAlgoOrder
      */
-    readonly activationPrice?: number;
+    readonly activatePrice?: number;
 
     /**
      * Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1%
@@ -4648,6 +4652,8 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Send in a new Algo order.
      *
+     * Algo order with type `STOP`,  parameter `timeInForce` can be sent ( default `GTC`).
+     * Algo order with type `TAKE_PROFIT`,  parameter `timeInForce` can be sent ( default `GTC`).
      * Condition orders will be triggered when:
      *
      * If parameter`priceProtect`is sent as true:
@@ -4661,14 +4667,14 @@ export class TradeApi implements TradeApiInterface {
      * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
      * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
      * `TRAILING_STOP_MARKET`:
-     * BUY: the lowest price after order placed <= `activationPrice`, and the latest price >= the lowest price * (1 + `callbackRate`)
-     * SELL: the highest price after order placed >= `activationPrice`, and the latest price <= the highest price * (1 - `callbackRate`)
+     * BUY: the lowest price after order placed <= `activatePrice`, and the latest price >= the lowest price * (1 + `callbackRate`)
+     * SELL: the highest price after order placed >= `activatePrice`, and the latest price <= the highest price * (1 - `callbackRate`)
      *
      * For `TRAILING_STOP_MARKET`, if you got such error code.
      * ``{"code": -2021, "msg": "Order would immediately trigger."}``
      * means that the parameters you send do not meet the following requirements:
-     * BUY: `activationPrice` should be smaller than latest price.
-     * SELL: `activationPrice` should be larger than latest price.
+     * BUY: `activatePrice` should be smaller than latest price.
+     * SELL: `activatePrice` should be larger than latest price.
      *
      * `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`:
      * Follow the same rules for condition orders.
@@ -4705,7 +4711,7 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.closePosition,
             requestParameters?.priceProtect,
             requestParameters?.reduceOnly,
-            requestParameters?.activationPrice,
+            requestParameters?.activatePrice,
             requestParameters?.callbackRate,
             requestParameters?.clientAlgoId,
             requestParameters?.selfTradePreventionMode,

@@ -1936,6 +1936,8 @@ export class RestAPI {
     /**
      * Send in a new Algo order.
      *
+     * Algo order with type `STOP`,  parameter `timeInForce` can be sent ( default `GTC`).
+     * Algo order with type `TAKE_PROFIT`,  parameter `timeInForce` can be sent ( default `GTC`).
      * Condition orders will be triggered when:
      *
      * If parameter`priceProtect`is sent as true:
@@ -1949,14 +1951,14 @@ export class RestAPI {
      * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
      * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
      * `TRAILING_STOP_MARKET`:
-     * BUY: the lowest price after order placed <= `activationPrice`, and the latest price >= the lowest price * (1 + `callbackRate`)
-     * SELL: the highest price after order placed >= `activationPrice`, and the latest price <= the highest price * (1 - `callbackRate`)
+     * BUY: the lowest price after order placed <= `activatePrice`, and the latest price >= the lowest price * (1 + `callbackRate`)
+     * SELL: the highest price after order placed >= `activatePrice`, and the latest price <= the highest price * (1 - `callbackRate`)
      *
      * For `TRAILING_STOP_MARKET`, if you got such error code.
      * ``{"code": -2021, "msg": "Order would immediately trigger."}``
      * means that the parameters you send do not meet the following requirements:
-     * BUY: `activationPrice` should be smaller than latest price.
-     * SELL: `activationPrice` should be larger than latest price.
+     * BUY: `activatePrice` should be smaller than latest price.
+     * SELL: `activatePrice` should be larger than latest price.
      *
      * `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`:
      * Follow the same rules for condition orders.

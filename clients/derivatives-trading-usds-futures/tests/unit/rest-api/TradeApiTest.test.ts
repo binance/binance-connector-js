@@ -2462,7 +2462,7 @@ describe('TradeApi', () => {
                 closePosition: 'closePosition_example',
                 priceProtect: 'false',
                 reduceOnly: 'false',
-                activationPrice: 1.0,
+                activatePrice: 1.0,
                 callbackRate: 1.0,
                 clientAlgoId: '1',
                 selfTradePreventionMode: NewAlgoOrderSelfTradePreventionModeEnum.EXPIRE_TAKER,
