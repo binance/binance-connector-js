@@ -1,5 +1,17 @@
 # Changelog
 
+## 26.0.0 - 2025-12-19
+
+### Added (1)
+
+#### WebSocket API
+
+- `orderAmendKeepPriority()` (`order.amend.keepPriority` method)
+
+### Changed (1)
+
+- Update `@binance/common` library to version `2.1.1`.
+
 ## 25.0.0 - 2025-12-16
 
 ### Added (4)

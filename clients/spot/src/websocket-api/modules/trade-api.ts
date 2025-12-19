@@ -19,6 +19,7 @@
 import { WebsocketAPIBase, WebsocketApiResponse, WebsocketSendMsgOptions } from '@binance/common';
 import type {
     OpenOrdersCancelAllResponse,
+    OrderAmendKeepPriorityResponse,
     OrderCancelReplaceResponse,
     OrderCancelResponse,
     OrderListCancelResponse,
@@ -54,6 +55,24 @@ export interface TradeApiInterface {
     openOrdersCancelAll(
         requestParameters: OpenOrdersCancelAllRequest
     ): Promise<WebsocketApiResponse<OpenOrdersCancelAllResponse>>;
+
+    /**
+     * Reduce the quantity of an existing open order.
+     *
+     * This adds 0 orders to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
+     *
+     * Read [Order Amend Keep Priority FAQ](faqs/order_amend_keep_priority.md) to learn more.
+     * Weight: 4
+     *
+     * @summary WebSocket Order Amend Keep Priority
+     * @param {OrderAmendKeepPriorityRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<OrderAmendKeepPriorityResponse>}
+     * @memberof TradeApiInterface
+     */
+    orderAmendKeepPriority(
+        requestParameters: OrderAmendKeepPriorityRequest
+    ): Promise<WebsocketApiResponse<OrderAmendKeepPriorityResponse>>;
 
     /**
      * Cancel an active order.
@@ -329,6 +348,61 @@ export interface OpenOrdersCancelAllRequest {
 }
 
 /**
+ * Request parameters for orderAmendKeepPriority operation in TradeApi.
+ * @interface OrderAmendKeepPriorityRequest
+ */
+export interface OrderAmendKeepPriorityRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof TradeApiOrderAmendKeepPriority
+     */
+    readonly symbol: string;
+
+    /**
+     * `newQty` must be greater than 0 and less than the order's quantity.
+     * @type {number}
+     * @memberof TradeApiOrderAmendKeepPriority
+     */
+    readonly newQty: number;
+
+    /**
+     * Unique WebSocket request ID.
+     * @type {string}
+     * @memberof TradeApiOrderAmendKeepPriority
+     */
+    readonly id?: string;
+
+    /**
+     * `orderId`or`origClientOrderId`mustbesent
+     * @type {number | bigint}
+     * @memberof TradeApiOrderAmendKeepPriority
+     */
+    readonly orderId?: number | bigint;
+
+    /**
+     * `orderId`or`origClientOrderId`mustbesent
+     * @type {string}
+     * @memberof TradeApiOrderAmendKeepPriority
+     */
+    readonly origClientOrderId?: string;
+
+    /**
+     * The new client order ID for the order after being amended. <br> If not sent, one will be randomly generated. <br> It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`.
+     * @type {string}
+     * @memberof TradeApiOrderAmendKeepPriority
+     */
+    readonly newClientOrderId?: string;
+
+    /**
+     * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
+     * @type {number}
+     * @memberof TradeApiOrderAmendKeepPriority
+     */
+    readonly recvWindow?: number;
+}
+
+/**
  * Request parameters for orderCancel operation in TradeApi.
  * @interface OrderCancelRequest
  */
@@ -348,21 +422,21 @@ export interface OrderCancelRequest {
     readonly id?: string;
 
     /**
-     * Cancel order by orderId
+     * `orderId`or`origClientOrderId`mustbesent
      * @type {number | bigint}
      * @memberof TradeApiOrderCancel
      */
     readonly orderId?: number | bigint;
 
     /**
-     *
+     * `orderId`or`origClientOrderId`mustbesent
      * @type {string}
      * @memberof TradeApiOrderCancel
      */
     readonly origClientOrderId?: string;
 
     /**
-     * New ID for the canceled order. Automatically generated if not sent
+     * The new client order ID for the order after being amended. <br> If not sent, one will be randomly generated. <br> It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`.
      * @type {string}
      * @memberof TradeApiOrderCancel
      */
@@ -473,7 +547,7 @@ export interface OrderCancelReplaceRequest {
     readonly quoteOrderQty?: number;
 
     /**
-     * New ID for the canceled order. Automatically generated if not sent
+     * The new client order ID for the order after being amended. <br> If not sent, one will be randomly generated. <br> It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`.
      * @type {string}
      * @memberof TradeApiOrderCancelReplace
      */
@@ -607,7 +681,7 @@ export interface OrderListCancelRequest {
     readonly listClientOrderId?: string;
 
     /**
-     * New ID for the canceled order. Automatically generated if not sent
+     * The new client order ID for the order after being amended. <br> If not sent, one will be randomly generated. <br> It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`.
      * @type {string}
      * @memberof TradeApiOrderListCancel
      */
@@ -2140,7 +2214,7 @@ export interface OrderPlaceRequest {
     readonly quoteOrderQty?: number;
 
     /**
-     * New ID for the canceled order. Automatically generated if not sent
+     * The new client order ID for the order after being amended. <br> If not sent, one will be randomly generated. <br> It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`.
      * @type {string}
      * @memberof TradeApiOrderPlace
      */
@@ -2295,7 +2369,7 @@ export interface OrderTestRequest {
     readonly quoteOrderQty?: number;
 
     /**
-     * New ID for the canceled order. Automatically generated if not sent
+     * The new client order ID for the order after being amended. <br> If not sent, one will be randomly generated. <br> It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`.
      * @type {string}
      * @memberof TradeApiOrderTest
      */
@@ -2436,7 +2510,7 @@ export interface SorOrderPlaceRequest {
     readonly price?: number;
 
     /**
-     * New ID for the canceled order. Automatically generated if not sent
+     * The new client order ID for the order after being amended. <br> If not sent, one will be randomly generated. <br> It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`.
      * @type {string}
      * @memberof TradeApiSorOrderPlace
      */
@@ -2548,7 +2622,7 @@ export interface SorOrderTestRequest {
     readonly price?: number;
 
     /**
-     * New ID for the canceled order. Automatically generated if not sent
+     * The new client order ID for the order after being amended. <br> If not sent, one will be randomly generated. <br> It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`.
      * @type {string}
      * @memberof TradeApiSorOrderTest
      */
@@ -2626,6 +2700,30 @@ export class TradeApi implements TradeApiInterface {
     ): Promise<WebsocketApiResponse<OpenOrdersCancelAllResponse>> {
         return this.websocketBase.sendMessage<OpenOrdersCancelAllResponse>(
             '/openOrders.cancelAll'.slice(1),
+            requestParameters as unknown as WebsocketSendMsgOptions,
+            { isSigned: true, withApiKey: false }
+        );
+    }
+
+    /**
+     * Reduce the quantity of an existing open order.
+     *
+     * This adds 0 orders to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
+     *
+     * Read [Order Amend Keep Priority FAQ](faqs/order_amend_keep_priority.md) to learn more.
+     * Weight: 4
+     *
+     * @summary WebSocket Order Amend Keep Priority
+     * @param {OrderAmendKeepPriorityRequest} requestParameters Request parameters.
+     * @returns {Promise<OrderAmendKeepPriorityResponse>}
+     * @memberof TradeApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#order-amend-keep-priority-trade Binance API Documentation}
+     */
+    public orderAmendKeepPriority(
+        requestParameters: OrderAmendKeepPriorityRequest
+    ): Promise<WebsocketApiResponse<OrderAmendKeepPriorityResponse>> {
+        return this.websocketBase.sendMessage<OrderAmendKeepPriorityResponse>(
+            '/order.amend.keepPriority'.slice(1),
             requestParameters as unknown as WebsocketSendMsgOptions,
             { isSigned: true, withApiKey: false }
         );

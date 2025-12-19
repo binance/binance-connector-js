@@ -70,6 +70,7 @@ import type {
 } from './modules/market-api';
 import type {
     OpenOrdersCancelAllRequest,
+    OrderAmendKeepPriorityRequest,
     OrderCancelRequest,
     OrderCancelReplaceRequest,
     OrderListCancelRequest,
@@ -125,6 +126,7 @@ import type {
 } from './types';
 import type {
     OpenOrdersCancelAllResponse,
+    OrderAmendKeepPriorityResponse,
     OrderCancelResponse,
     OrderCancelReplaceResponse,
     OrderListCancelResponse,
@@ -330,7 +332,7 @@ export class WebsocketAPIConnection {
     }
 
     /**
-     * Retrieves the list of [filters](filters.md) relevant to an account on a given symbol. This is the only endpoint that shows if an account has `MAX_ASSET` filters applied to it.
+     * Retrieves the list of [filters](filters.md) relevant to an account on a given symbol. This is the only method that shows if an account has `MAX_ASSET` filters applied to it.
      * Weight: 40
      *
      * @summary WebSocket Query Relevant Filters
@@ -873,6 +875,26 @@ export class WebsocketAPIConnection {
         requestParameters: OpenOrdersCancelAllRequest
     ): Promise<WebsocketApiResponse<OpenOrdersCancelAllResponse>> {
         return this.tradeApi.openOrdersCancelAll(requestParameters);
+    }
+
+    /**
+     * Reduce the quantity of an existing open order.
+     *
+     * This adds 0 orders to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
+     *
+     * Read [Order Amend Keep Priority FAQ](faqs/order_amend_keep_priority.md) to learn more.
+     * Weight: 4
+     *
+     * @summary WebSocket Order Amend Keep Priority
+     * @param {OrderAmendKeepPriorityRequest} requestParameters Request parameters.
+     *
+     * @returns Promise<WebsocketApiResponse<OrderAmendKeepPriorityResponse>>
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#order-amend-keep-priority-trade Binance API Documentation}
+     */
+    orderAmendKeepPriority(
+        requestParameters: OrderAmendKeepPriorityRequest
+    ): Promise<WebsocketApiResponse<OrderAmendKeepPriorityResponse>> {
+        return this.tradeApi.orderAmendKeepPriority(requestParameters);
     }
 
     /**

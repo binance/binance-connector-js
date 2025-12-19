@@ -66,6 +66,11 @@ export * from './open-orders-cancel-all-response-result-inner-order-reports-inne
 export * from './open-orders-cancel-all-response-result-inner-orders-inner';
 export * from './open-orders-status-response';
 export * from './open-orders-status-response-result-inner';
+export * from './order-amend-keep-priority-response';
+export * from './order-amend-keep-priority-response-result';
+export * from './order-amend-keep-priority-response-result-amended-order';
+export * from './order-amend-keep-priority-response-result-list-status';
+export * from './order-amend-keep-priority-response-result-list-status-orders-inner';
 export * from './order-amendments-response';
 export * from './order-amendments-response-result-inner';
 export * from './order-cancel-replace-response';

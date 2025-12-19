@@ -125,7 +125,7 @@ export interface AccountApiInterface {
     ): Promise<WebsocketApiResponse<MyAllocationsResponse>>;
 
     /**
-     * Retrieves the list of [filters](filters.md) relevant to an account on a given symbol. This is the only endpoint that shows if an account has `MAX_ASSET` filters applied to it.
+     * Retrieves the list of [filters](filters.md) relevant to an account on a given symbol. This is the only method that shows if an account has `MAX_ASSET` filters applied to it.
      * Weight: 40
      *
      * @summary WebSocket Query Relevant Filters
@@ -401,7 +401,7 @@ export interface AllOrdersRequest {
     readonly id?: string;
 
     /**
-     * Cancel order by orderId
+     * `orderId`or`origClientOrderId`mustbesent
      * @type {number | bigint}
      * @memberof AccountApiAllOrders
      */
@@ -484,7 +484,7 @@ export interface MyAllocationsRequest {
     readonly limit?: number;
 
     /**
-     * Cancel order by orderId
+     * `orderId`or`origClientOrderId`mustbesent
      * @type {number | bigint}
      * @memberof AccountApiMyAllocations
      */
@@ -552,7 +552,7 @@ export interface MyPreventedMatchesRequest {
     readonly preventedMatchId?: number | bigint;
 
     /**
-     * Cancel order by orderId
+     * `orderId`or`origClientOrderId`mustbesent
      * @type {number | bigint}
      * @memberof AccountApiMyPreventedMatches
      */
@@ -600,7 +600,7 @@ export interface MyTradesRequest {
     readonly id?: string;
 
     /**
-     * Cancel order by orderId
+     * `orderId`or`origClientOrderId`mustbesent
      * @type {number | bigint}
      * @memberof AccountApiMyTrades
      */
@@ -750,7 +750,7 @@ export interface OrderListStatusRequest {
     readonly id?: string;
 
     /**
-     *
+     * `orderId`or`origClientOrderId`mustbesent
      * @type {string}
      * @memberof AccountApiOrderListStatus
      */
@@ -791,14 +791,14 @@ export interface OrderStatusRequest {
     readonly id?: string;
 
     /**
-     * Cancel order by orderId
+     * `orderId`or`origClientOrderId`mustbesent
      * @type {number | bigint}
      * @memberof AccountApiOrderStatus
      */
     readonly orderId?: number | bigint;
 
     /**
-     *
+     * `orderId`or`origClientOrderId`mustbesent
      * @type {string}
      * @memberof AccountApiOrderStatus
      */
@@ -945,7 +945,7 @@ export class AccountApi implements AccountApiInterface {
     }
 
     /**
-     * Retrieves the list of [filters](filters.md) relevant to an account on a given symbol. This is the only endpoint that shows if an account has `MAX_ASSET` filters applied to it.
+     * Retrieves the list of [filters](filters.md) relevant to an account on a given symbol. This is the only method that shows if an account has `MAX_ASSET` filters applied to it.
      * Weight: 40
      *
      * @summary WebSocket Query Relevant Filters
