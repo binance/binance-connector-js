@@ -8,6 +8,8 @@ import {
     TimeUnit,
     buildQueryString,
     randomString,
+    randomInteger,
+    normalizeStreamId,
     validateTimeUnit,
     delay,
     getTimestamp,
@@ -272,6 +274,123 @@ describe('Utility Functions', () => {
             const result1 = randomString();
             const result2 = randomString();
             expect(result1).not.toBe(result2);
+        });
+    });
+
+    describe('randomInteger()', () => {
+        it('should generate a random unsigned 32-bit integer', () => {
+            const result = randomInteger();
+
+            expect(typeof result).toBe('number');
+            expect(Number.isInteger(result)).toBe(true);
+            expect(result).toBeGreaterThanOrEqual(0);
+            expect(result).toBeLessThanOrEqual(0xffffffff);
+        });
+
+        it('should generate values within range on successive calls', () => {
+            const values = Array.from({ length: 10 }, () => randomInteger());
+
+            for (const v of values) {
+                expect(Number.isInteger(v)).toBe(true);
+                expect(v).toBeGreaterThanOrEqual(0);
+                expect(v).toBeLessThanOrEqual(0xffffffff);
+            }
+        });
+    });
+
+    describe('normalizeStreamId()', () => {
+        it('should return the same string if it is a valid 32-char hex id', () => {
+            const id = '0123456789abcdef0123456789abcdef';
+            const result = normalizeStreamId(id);
+
+            expect(result).toBe(id);
+            expect(typeof result).toBe('string');
+        });
+
+        it('should generate a random string if string id is invalid', () => {
+            const id = 'not-hex';
+            const result = normalizeStreamId(id);
+
+            expect(typeof result).toBe('string');
+            if (typeof result !== 'string') throw new Error('Expected string');
+
+            expect(result).toHaveLength(32);
+            expect(/^[0-9a-f]{32}$/i.test(result)).toBe(true);
+            expect(result).not.toBe(id);
+        });
+
+        it('should generate a random string if id is null/undefined', () => {
+            const r1 = normalizeStreamId(null);
+            const r2 = normalizeStreamId(undefined);
+
+            expect(typeof r1).toBe('string');
+            expect(typeof r2).toBe('string');
+
+            if (typeof r1 !== 'string' || typeof r2 !== 'string') {
+                throw new Error('Expected strings');
+            }
+
+            expect(r1).toHaveLength(32);
+            expect(r2).toHaveLength(32);
+            expect(/^[0-9a-f]{32}$/i.test(r1)).toBe(true);
+            expect(/^[0-9a-f]{32}$/i.test(r2)).toBe(true);
+        });
+
+        it('should return the same number if it is a valid safe unsigned integer', () => {
+            const id = 123456;
+            const result = normalizeStreamId(id);
+
+            expect(result).toBe(id);
+            expect(typeof result).toBe('number');
+        });
+
+        it('should generate a random integer if number id is invalid', () => {
+            const invalids = [
+                -1,
+                1.5,
+                Number.NaN,
+                Number.POSITIVE_INFINITY,
+                Number.MAX_SAFE_INTEGER + 1,
+            ];
+
+            for (const id of invalids) {
+                const result = normalizeStreamId(id);
+
+                expect(typeof result).toBe('number');
+                expect(Number.isInteger(result)).toBe(true);
+                expect(result).toBeGreaterThanOrEqual(0);
+                expect(result).toBeLessThanOrEqual(0xffffffff);
+            }
+        });
+
+        it('should force number output when streamIdIsStrictlyNumber is true (even if id is a valid hex string)', () => {
+            const hex = '0123456789abcdef0123456789abcdef';
+            const result = normalizeStreamId(hex, true);
+
+            expect(typeof result).toBe('number');
+            expect(Number.isInteger(result)).toBe(true);
+            expect(result).toBeGreaterThanOrEqual(0);
+            expect(result).toBeLessThanOrEqual(0xffffffff);
+        });
+
+        it('should use the number id when streamIdIsStrictlyNumber is true and id is valid number', () => {
+            const id = 42;
+            const result = normalizeStreamId(id, true);
+
+            expect(result).toBe(42);
+            expect(typeof result).toBe('number');
+        });
+
+        it('should generate a random integer when streamIdIsStrictlyNumber is true and id is null/undefined', () => {
+            const r1 = normalizeStreamId(null, true);
+            const r2 = normalizeStreamId(undefined, true);
+
+            expect(typeof r1).toBe('number');
+            expect(typeof r2).toBe('number');
+            expect(Number.isInteger(r1)).toBe(true);
+            expect(Number.isInteger(r2)).toBe(true);
+            expect(r1).toBeGreaterThanOrEqual(0);
+            expect(r2).toBeGreaterThanOrEqual(0);
         });
     });
 

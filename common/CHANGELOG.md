@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.1 - 2025-12-18
+
+### Changed (1)
+
+- Support integer randomisation on WS streams subscription/unsubscription.
+
 ## 2.1.0 - 2025-12-16
 
 ### Changed (1)

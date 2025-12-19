@@ -202,6 +202,56 @@ export function randomString() {
 }
 
 /**
+ * Generates a cryptographically secure random 32-bit unsigned integer.
+ *
+ * Uses the Web Crypto API to generate a random value between 0 and 4,294,967,295 (2^32 - 1).
+ *
+ * @returns A random 32-bit unsigned integer.
+ */
+export function randomInteger(): number {
+    const array = new Uint32Array(1);
+    crypto.getRandomValues(array);
+    return array[0];
+}
+
+/**
+ * Normalizes a stream ID to ensure it is valid, generating a random ID if needed.
+ *
+ * For string inputs:
+ * - Returns the input if it's a valid 32-character hexadecimal string (case-insensitive)
+ * - Otherwise, generates a new random hexadecimal string using `randomString()`
+ *
+ * For number inputs:
+ * - Returns the input if it's a finite, non-negative integer within the safe integer range
+ * - Otherwise, generates a new random integer using `randomInteger()`
+ *
+ * For null or undefined inputs:
+ * - Generates a new random hexadecimal string using `randomString()`
+ *
+ * @param id - The stream ID to normalize (string, number, null, or undefined).
+ * @param streamIdIsStrictlyNumber - Boolean forcing an id to be a number or not.
+ * @returns A valid stream ID as either a 32-character hexadecimal string or a safe integer.
+ */
+export function normalizeStreamId(
+    id: string | number | null | undefined,
+    streamIdIsStrictlyNumber?: boolean
+): string | number {
+    const isValidNumber =
+        typeof id === 'number' &&
+        Number.isFinite(id) &&
+        Number.isInteger(id) &&
+        id >= 0 &&
+        id <= Number.MAX_SAFE_INTEGER;
+
+    if (streamIdIsStrictlyNumber || typeof id === 'number')
+        return isValidNumber ? id : randomInteger();
+
+    if (typeof id === 'string') return id && /^[0-9a-f]{32}$/i.test(id) ? id : randomString();
+
+    return randomString();
+}
+
+/**
  * Validates the provided time unit string and returns it if it is either 'MILLISECOND' or 'MICROSECOND'.
  *
  * @param timeUnit - The time unit string to be validated.

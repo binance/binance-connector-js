@@ -11,6 +11,7 @@ import {
     randomString,
     validateTimeUnit,
     buildWebsocketAPIMessage,
+    normalizeStreamId,
 } from '.';
 
 export class WebsocketEventEmitter {
@@ -904,6 +905,7 @@ export class WebsocketStreamsBase extends WebsocketCommon {
     private streamConnectionMap: Map<string, WebsocketConnection> = new Map();
     protected configuration: ConfigurationWebsocketStreams;
     protected wsURL: string;
+    streamIdIsStrictlyNumber?: boolean = false;
     streamCallbackMap: Map<string, Set<(data: unknown) => void>> = new Map();
     logger: Logger = Logger.getInstance();
 
@@ -984,12 +986,12 @@ export class WebsocketStreamsBase extends WebsocketCommon {
     private sendSubscriptionPayload(
         connection: WebsocketConnection,
         streams: string[],
-        id?: string
+        id?: number | string
     ): void {
         const payload = {
             method: 'SUBSCRIBE',
             params: streams,
-            id: id && /^[0-9a-f]{32}$/.test(id) ? id : randomString(),
+            id: normalizeStreamId(id, this.streamIdIsStrictlyNumber),
         };
         this.logger.debug('SUBSCRIBE', payload);
         this.send(JSON.stringify(payload), undefined, false, 0, connection);
@@ -1087,7 +1089,7 @@ export class WebsocketStreamsBase extends WebsocketCommon {
      * @param id Optional subscription ID
      * @returns void
      */
-    subscribe(stream: string | string[], id?: string): void {
+    subscribe(stream: string | string[], id?: number | string): void {
         const streams = (Array.isArray(stream) ? stream : [stream]).filter(
             (stream) => !this.streamConnectionMap.has(stream)
         );
@@ -1114,7 +1116,7 @@ export class WebsocketStreamsBase extends WebsocketCommon {
      * @param id Optional unsubscription ID
      * @returns void
      */
-    unsubscribe(stream: string | string[], id?: string): void {
+    unsubscribe(stream: string | string[], id?: number | string): void {
         const streams = Array.isArray(stream) ? stream : [stream];
 
         streams.forEach((stream) => {
@@ -1131,7 +1133,7 @@ export class WebsocketStreamsBase extends WebsocketCommon {
                 const payload = {
                     method: 'UNSUBSCRIBE',
                     params: [stream],
-                    id: id && /^[0-9a-f]{32}$/.test(id) ? id : randomString(),
+                    id: normalizeStreamId(id, this.streamIdIsStrictlyNumber),
                 };
                 this.logger.debug('UNSUBSCRIBE', payload);
                 this.send(JSON.stringify(payload), undefined, false, 0, connection);
@@ -1178,7 +1180,7 @@ export interface WebsocketStream<T> {
 export function createStreamHandler<T>(
     websocketBase: WebsocketAPIBase | WebsocketStreamsBase,
     streamOrId: string,
-    id?: string
+    id?: number | string
 ): WebsocketStream<T> {
     if (websocketBase instanceof WebsocketStreamsBase) websocketBase.subscribe(streamOrId, id);
 
