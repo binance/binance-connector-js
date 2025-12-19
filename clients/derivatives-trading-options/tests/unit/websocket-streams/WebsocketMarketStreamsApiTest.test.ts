@@ -37,7 +37,7 @@ describe('WebsocketMarketStreamsApi', () => {
         it('should execute indexPriceStreams() successfully', async () => {
             const params: IndexPriceStreamsRequest = {
                 symbol: 'btcusdt',
-                id: 'e9d6b4349871b40611412680b3445fac',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -57,7 +57,7 @@ describe('WebsocketMarketStreamsApi', () => {
 
             const params: IndexPriceStreamsRequest = {
                 symbol: 'btcusdt',
-                id: 'e9d6b4349871b40611412680b3445fac',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -104,7 +104,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const params: KlineCandlestickStreamsRequest = {
                 symbol: 'btcusdt',
                 interval: '1m',
-                id: 'e9d6b4349871b40611412680b3445fac',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -147,7 +147,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const params: KlineCandlestickStreamsRequest = {
                 symbol: 'btcusdt',
                 interval: '1m',
-                id: 'e9d6b4349871b40611412680b3445fac',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -233,7 +233,7 @@ describe('WebsocketMarketStreamsApi', () => {
         it('should execute markPrice() successfully', async () => {
             const params: MarkPriceRequest = {
                 underlyingAsset: 'ETH',
-                id: 'e9d6b4349871b40611412680b3445fac',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -256,7 +256,7 @@ describe('WebsocketMarketStreamsApi', () => {
 
             const params: MarkPriceRequest = {
                 underlyingAsset: 'ETH',
-                id: 'e9d6b4349871b40611412680b3445fac',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -304,7 +304,7 @@ describe('WebsocketMarketStreamsApi', () => {
     describe('newSymbolInfo()', () => {
         it('should execute newSymbolInfo() successfully', async () => {
             const params: NewSymbolInfoRequest = {
-                id: 'e9d6b4349871b40611412680b3445fac',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -334,7 +334,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
 
             const params: NewSymbolInfoRequest = {
-                id: 'e9d6b4349871b40611412680b3445fac',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -376,7 +376,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const params: OpenInterestRequest = {
                 underlyingAsset: 'ETH',
                 expirationDate: '220930',
-                id: 'e9d6b4349871b40611412680b3445fac',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -405,7 +405,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const params: OpenInterestRequest = {
                 underlyingAsset: 'ETH',
                 expirationDate: '220930',
-                id: 'e9d6b4349871b40611412680b3445fac',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -478,7 +478,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const params: PartialBookDepthStreamsRequest = {
                 symbol: 'btcusdt',
                 levels: 10,
-                id: 'e9d6b4349871b40611412680b3445fac',
+                id: 532601580,
                 updateSpeed: 'updateSpeed_example',
             };
 
@@ -513,7 +513,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const params: PartialBookDepthStreamsRequest = {
                 symbol: 'btcusdt',
                 levels: 10,
-                id: 'e9d6b4349871b40611412680b3445fac',
+                id: 532601580,
                 updateSpeed: 'updateSpeed_example',
             };
 
@@ -591,7 +591,7 @@ describe('WebsocketMarketStreamsApi', () => {
         it('should execute ticker24Hour() successfully', async () => {
             const params: Ticker24HourRequest = {
                 symbol: 'btcusdt',
-                id: 'e9d6b4349871b40611412680b3445fac',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -643,7 +643,7 @@ describe('WebsocketMarketStreamsApi', () => {
 
             const params: Ticker24HourRequest = {
                 symbol: 'btcusdt',
-                id: 'e9d6b4349871b40611412680b3445fac',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -722,7 +722,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const params: Ticker24HourByUnderlyingAssetAndExpirationDataRequest = {
                 underlyingAsset: 'ETH',
                 expirationDate: '220930',
-                id: 'e9d6b4349871b40611412680b3445fac',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -809,7 +809,7 @@ describe('WebsocketMarketStreamsApi', () => {
             const params: Ticker24HourByUnderlyingAssetAndExpirationDataRequest = {
                 underlyingAsset: 'ETH',
                 expirationDate: '220930',
-                id: 'e9d6b4349871b40611412680b3445fac',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -947,7 +947,7 @@ describe('WebsocketMarketStreamsApi', () => {
         it('should execute tradeStreams() successfully', async () => {
             const params: TradeStreamsRequest = {
                 symbol: 'btcusdt',
-                id: 'e9d6b4349871b40611412680b3445fac',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(
@@ -979,7 +979,7 @@ describe('WebsocketMarketStreamsApi', () => {
 
             const params: TradeStreamsRequest = {
                 symbol: 'btcusdt',
-                id: 'e9d6b4349871b40611412680b3445fac',
+                id: 532601580,
             };
 
             const mockResponse = JSONParse(

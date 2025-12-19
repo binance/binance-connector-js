@@ -39,11 +39,11 @@ const WebsocketMarketStreamsApiParamCreator = function () {
          *
          * @summary Index Price Streams
          * @param {string} symbol The symbol parameter
-         * @param {string} [id] Unique WebSocket request ID.
+         * @param {number} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
          */
-        indexPriceStreams: (symbol: string, id?: string): string => {
+        indexPriceStreams: (symbol: string, id?: number): string => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('indexPriceStreams', 'symbol', symbol);
 
@@ -57,11 +57,11 @@ const WebsocketMarketStreamsApiParamCreator = function () {
          * @summary Kline/Candlestick Streams
          * @param {string} symbol The symbol parameter
          * @param {string} interval The interval parameter
-         * @param {string} [id] Unique WebSocket request ID.
+         * @param {number} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
          */
-        klineCandlestickStreams: (symbol: string, interval: string, id?: string): string => {
+        klineCandlestickStreams: (symbol: string, interval: string, id?: number): string => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('klineCandlestickStreams', 'symbol', symbol);
             // verify required parameter 'interval' is not null or undefined
@@ -80,11 +80,11 @@ const WebsocketMarketStreamsApiParamCreator = function () {
          *
          * @summary Mark Price
          * @param {string} underlyingAsset The underlyingAsset parameter
-         * @param {string} [id] Unique WebSocket request ID.
+         * @param {number} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
          */
-        markPrice: (underlyingAsset: string, id?: string): string => {
+        markPrice: (underlyingAsset: string, id?: number): string => {
             // verify required parameter 'underlyingAsset' is not null or undefined
             assertParamExists('markPrice', 'underlyingAsset', underlyingAsset);
 
@@ -99,11 +99,11 @@ const WebsocketMarketStreamsApiParamCreator = function () {
          * Update Speed: 50ms
          *
          * @summary New Symbol Info
-         * @param {string} [id] Unique WebSocket request ID.
+         * @param {number} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
          */
-        newSymbolInfo: (id?: string): string => {
+        newSymbolInfo: (id?: number): string => {
             return replaceWebsocketStreamsPlaceholders('/option_pair'.slice(1), { id });
         },
         /**
@@ -114,11 +114,11 @@ const WebsocketMarketStreamsApiParamCreator = function () {
          * @summary Open Interest
          * @param {string} underlyingAsset The underlyingAsset parameter
          * @param {string} expirationDate The expirationDate parameter
-         * @param {string} [id] Unique WebSocket request ID.
+         * @param {number} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
          */
-        openInterest: (underlyingAsset: string, expirationDate: string, id?: string): string => {
+        openInterest: (underlyingAsset: string, expirationDate: string, id?: number): string => {
             // verify required parameter 'underlyingAsset' is not null or undefined
             assertParamExists('openInterest', 'underlyingAsset', underlyingAsset);
             // verify required parameter 'expirationDate' is not null or undefined
@@ -137,7 +137,7 @@ const WebsocketMarketStreamsApiParamCreator = function () {
          * @summary Partial Book Depth Streams
          * @param {string} symbol The symbol parameter
          * @param {number | bigint} levels The levels parameter
-         * @param {string} [id] Unique WebSocket request ID.
+         * @param {number} [id] Unique WebSocket request ID.
          * @param {string} [updateSpeed] WebSocket stream update speed
          *
          * @throws {RequiredError}
@@ -145,7 +145,7 @@ const WebsocketMarketStreamsApiParamCreator = function () {
         partialBookDepthStreams: (
             symbol: string,
             levels: number | bigint,
-            id?: string,
+            id?: number,
             updateSpeed?: string
         ): string => {
             // verify required parameter 'symbol' is not null or undefined
@@ -165,11 +165,11 @@ const WebsocketMarketStreamsApiParamCreator = function () {
          *
          * @summary 24-hour TICKER
          * @param {string} symbol The symbol parameter
-         * @param {string} [id] Unique WebSocket request ID.
+         * @param {number} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
          */
-        ticker24Hour: (symbol: string, id?: string): string => {
+        ticker24Hour: (symbol: string, id?: number): string => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('ticker24Hour', 'symbol', symbol);
 
@@ -183,14 +183,14 @@ const WebsocketMarketStreamsApiParamCreator = function () {
          * @summary 24-hour TICKER by underlying asset and expiration data
          * @param {string} underlyingAsset The underlyingAsset parameter
          * @param {string} expirationDate The expirationDate parameter
-         * @param {string} [id] Unique WebSocket request ID.
+         * @param {number} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
          */
         ticker24HourByUnderlyingAssetAndExpirationData: (
             underlyingAsset: string,
             expirationDate: string,
-            id?: string
+            id?: number
         ): string => {
             // verify required parameter 'underlyingAsset' is not null or undefined
             assertParamExists(
@@ -217,11 +217,11 @@ const WebsocketMarketStreamsApiParamCreator = function () {
          *
          * @summary Trade Streams
          * @param {string} symbol The symbol parameter
-         * @param {string} [id] Unique WebSocket request ID.
+         * @param {number} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
          */
-        tradeStreams: (symbol: string, id?: string): string => {
+        tradeStreams: (symbol: string, id?: number): string => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('tradeStreams', 'symbol', symbol);
 
@@ -384,10 +384,10 @@ export interface IndexPriceStreamsRequest {
 
     /**
      * Unique WebSocket request ID.
-     * @type {string}
+     * @type {number}
      * @memberof WebsocketMarketStreamsApiIndexPriceStreams
      */
-    readonly id?: string;
+    readonly id?: number;
 }
 
 /**
@@ -411,10 +411,10 @@ export interface KlineCandlestickStreamsRequest {
 
     /**
      * Unique WebSocket request ID.
-     * @type {string}
+     * @type {number}
      * @memberof WebsocketMarketStreamsApiKlineCandlestickStreams
      */
-    readonly id?: string;
+    readonly id?: number;
 }
 
 /**
@@ -431,10 +431,10 @@ export interface MarkPriceRequest {
 
     /**
      * Unique WebSocket request ID.
-     * @type {string}
+     * @type {number}
      * @memberof WebsocketMarketStreamsApiMarkPrice
      */
-    readonly id?: string;
+    readonly id?: number;
 }
 
 /**
@@ -444,10 +444,10 @@ export interface MarkPriceRequest {
 export interface NewSymbolInfoRequest {
     /**
      * Unique WebSocket request ID.
-     * @type {string}
+     * @type {number}
      * @memberof WebsocketMarketStreamsApiNewSymbolInfo
      */
-    readonly id?: string;
+    readonly id?: number;
 }
 
 /**
@@ -471,10 +471,10 @@ export interface OpenInterestRequest {
 
     /**
      * Unique WebSocket request ID.
-     * @type {string}
+     * @type {number}
      * @memberof WebsocketMarketStreamsApiOpenInterest
      */
-    readonly id?: string;
+    readonly id?: number;
 }
 
 /**
@@ -498,10 +498,10 @@ export interface PartialBookDepthStreamsRequest {
 
     /**
      * Unique WebSocket request ID.
-     * @type {string}
+     * @type {number}
      * @memberof WebsocketMarketStreamsApiPartialBookDepthStreams
      */
-    readonly id?: string;
+    readonly id?: number;
 
     /**
      * WebSocket stream update speed
@@ -525,10 +525,10 @@ export interface Ticker24HourRequest {
 
     /**
      * Unique WebSocket request ID.
-     * @type {string}
+     * @type {number}
      * @memberof WebsocketMarketStreamsApiTicker24Hour
      */
-    readonly id?: string;
+    readonly id?: number;
 }
 
 /**
@@ -552,10 +552,10 @@ export interface Ticker24HourByUnderlyingAssetAndExpirationDataRequest {
 
     /**
      * Unique WebSocket request ID.
-     * @type {string}
+     * @type {number}
      * @memberof WebsocketMarketStreamsApiTicker24HourByUnderlyingAssetAndExpirationData
      */
-    readonly id?: string;
+    readonly id?: number;
 }
 
 /**
@@ -572,10 +572,10 @@ export interface TradeStreamsRequest {
 
     /**
      * Unique WebSocket request ID.
-     * @type {string}
+     * @type {number}
      * @memberof WebsocketMarketStreamsApiTradeStreams
      */
-    readonly id?: string;
+    readonly id?: number;
 }
 
 /**

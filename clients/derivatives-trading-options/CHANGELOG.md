@@ -1,5 +1,26 @@
 # Changelog
 
+## 12.0.0 - 2025-12-19
+
+### Changed (2)
+
+- Update `@binance/common` library to version `2.1.1`.
+
+#### WebSocket Streams
+
+- Modified parameter `id`:
+  - type `string` → `integer`
+  - affected methods:
+    - `partialBookDepthStreams()` (`<symbol>@depth<levels>@<updateSpeed>` stream)
+    - `indexPriceStreams()` (`<symbol>@index` stream)
+    - `klineCandlestickStreams()` (`<symbol>@kline_<interval>` stream)
+    - `ticker24Hour()` (`<symbol>@ticker` stream)
+    - `tradeStreams()` (`<symbol>@trade` stream)
+    - `markPrice()` (`<underlyingAsset>@markPrice` stream)
+    - `openInterest()` (`<underlyingAsset>@openInterest@<expirationDate>` stream)
+    - `ticker24HourByUnderlyingAssetAndExpirationData()` (`<underlyingAsset>@ticker@<expirationDate>` stream)
+    - `newSymbolInfo()` (`option_pair` stream)
+
 ## 11.0.0 - 2025-12-16
 
 ### Changed (3)
