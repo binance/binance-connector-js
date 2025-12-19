@@ -30,6 +30,8 @@ import type {
 import type {
     AssetDetailRequest,
     AssetDividendRecordRequest,
+    DustConvertRequest,
+    DustConvertibleAssetsRequest,
     DustTransferRequest,
     DustlogRequest,
     FundingWalletRequest,
@@ -77,6 +79,8 @@ import type {
 import type {
     AssetDetailResponse,
     AssetDividendRecordResponse,
+    DustConvertResponse,
+    DustConvertibleAssetsResponse,
     DustTransferResponse,
     DustlogResponse,
     FundingWalletResponse,
@@ -357,6 +361,42 @@ export class RestAPI {
         requestParameters: AssetDividendRecordRequest = {}
     ): Promise<RestApiResponse<AssetDividendRecordResponse>> {
         return this.assetApi.assetDividendRecord(requestParameters);
+    }
+
+    /**
+     * Convert dust assets
+     *
+     * Weight: 10
+     *
+     * @summary Dust Convert (USER_DATA)
+     * @param {DustConvertRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<DustConvertResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/wallet/asset/Dust-Convert Binance API Documentation}
+     */
+    dustConvert(
+        requestParameters: DustConvertRequest
+    ): Promise<RestApiResponse<DustConvertResponse>> {
+        return this.assetApi.dustConvert(requestParameters);
+    }
+
+    /**
+     * Query dust convertible assets
+     *
+     * Weight: 1
+     *
+     * @summary Dust Convertible Assets (USER_DATA)
+     * @param {DustConvertibleAssetsRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<DustConvertibleAssetsResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/wallet/asset/Dust-Convertible-Assets Binance API Documentation}
+     */
+    dustConvertibleAssets(
+        requestParameters: DustConvertibleAssetsRequest
+    ): Promise<RestApiResponse<DustConvertibleAssetsResponse>> {
+        return this.assetApi.dustConvertibleAssets(requestParameters);
     }
 
     /**

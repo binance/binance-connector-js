@@ -22,6 +22,8 @@ import {
 import type {
     AssetDetailResponse,
     AssetDividendRecordResponse,
+    DustConvertResponse,
+    DustConvertibleAssetsResponse,
     DustTransferResponse,
     DustlogResponse,
     FundingWalletResponse,
@@ -123,6 +125,107 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             return {
                 endpoint: '/sapi/v1/asset/assetDividend',
                 method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Convert dust assets
+         *
+         * Weight: 10
+         *
+         * @summary Dust Convert (USER_DATA)
+         * @param {string} asset
+         * @param {string} [clientId] A unique id for the request
+         * @param {string} [targetAsset]
+         * @param {string} [thirdPartyClientId]
+         * @param {number} [dustQuotaAssetToTargetAssetPrice]
+         *
+         * @throws {RequiredError}
+         */
+        dustConvert: async (
+            asset: string,
+            clientId?: string,
+            targetAsset?: string,
+            thirdPartyClientId?: string,
+            dustQuotaAssetToTargetAssetPrice?: number
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'asset' is not null or undefined
+            assertParamExists('dustConvert', 'asset', asset);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+
+            if (asset !== undefined && asset !== null) {
+                localVarQueryParameter['asset'] = asset;
+            }
+            if (clientId !== undefined && clientId !== null) {
+                localVarQueryParameter['clientId'] = clientId;
+            }
+            if (targetAsset !== undefined && targetAsset !== null) {
+                localVarQueryParameter['targetAsset'] = targetAsset;
+            }
+            if (thirdPartyClientId !== undefined && thirdPartyClientId !== null) {
+                localVarQueryParameter['thirdPartyClientId'] = thirdPartyClientId;
+            }
+            if (
+                dustQuotaAssetToTargetAssetPrice !== undefined &&
+                dustQuotaAssetToTargetAssetPrice !== null
+            ) {
+                localVarQueryParameter['dustQuotaAssetToTargetAssetPrice'] =
+                    dustQuotaAssetToTargetAssetPrice;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/asset/dust-convert/convert',
+                method: 'POST',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Query dust convertible assets
+         *
+         * Weight: 1
+         *
+         * @summary Dust Convertible Assets (USER_DATA)
+         * @param {string} targetAsset
+         * @param {number} [dustQuotaAssetToTargetAssetPrice]
+         *
+         * @throws {RequiredError}
+         */
+        dustConvertibleAssets: async (
+            targetAsset: string,
+            dustQuotaAssetToTargetAssetPrice?: number
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'targetAsset' is not null or undefined
+            assertParamExists('dustConvertibleAssets', 'targetAsset', targetAsset);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+
+            if (targetAsset !== undefined && targetAsset !== null) {
+                localVarQueryParameter['targetAsset'] = targetAsset;
+            }
+            if (
+                dustQuotaAssetToTargetAssetPrice !== undefined &&
+                dustQuotaAssetToTargetAssetPrice !== null
+            ) {
+                localVarQueryParameter['dustQuotaAssetToTargetAssetPrice'] =
+                    dustQuotaAssetToTargetAssetPrice;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/asset/dust-convert/query-convertible-assets',
+                method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
                 timeUnit: _timeUnit,
@@ -838,6 +941,34 @@ export interface AssetApiInterface {
         requestParameters?: AssetDividendRecordRequest
     ): Promise<RestApiResponse<AssetDividendRecordResponse>>;
     /**
+     * Convert dust assets
+     *
+     * Weight: 10
+     *
+     * @summary Dust Convert (USER_DATA)
+     * @param {DustConvertRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AssetApiInterface
+     */
+    dustConvert(
+        requestParameters: DustConvertRequest
+    ): Promise<RestApiResponse<DustConvertResponse>>;
+    /**
+     * Query dust convertible assets
+     *
+     * Weight: 1
+     *
+     * @summary Dust Convertible Assets (USER_DATA)
+     * @param {DustConvertibleAssetsRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AssetApiInterface
+     */
+    dustConvertibleAssets(
+        requestParameters: DustConvertibleAssetsRequest
+    ): Promise<RestApiResponse<DustConvertibleAssetsResponse>>;
+    /**
      * Convert dust assets to BNB.
      *
      * You need to open`Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
@@ -1123,6 +1254,67 @@ export interface AssetDividendRecordRequest {
      * @memberof AssetApiAssetDividendRecord
      */
     readonly recvWindow?: number | bigint;
+}
+
+/**
+ * Request parameters for dustConvert operation in AssetApi.
+ * @interface DustConvertRequest
+ */
+export interface DustConvertRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof AssetApiDustConvert
+     */
+    readonly asset: string;
+
+    /**
+     * A unique id for the request
+     * @type {string}
+     * @memberof AssetApiDustConvert
+     */
+    readonly clientId?: string;
+
+    /**
+     *
+     * @type {string}
+     * @memberof AssetApiDustConvert
+     */
+    readonly targetAsset?: string;
+
+    /**
+     *
+     * @type {string}
+     * @memberof AssetApiDustConvert
+     */
+    readonly thirdPartyClientId?: string;
+
+    /**
+     *
+     * @type {number}
+     * @memberof AssetApiDustConvert
+     */
+    readonly dustQuotaAssetToTargetAssetPrice?: number;
+}
+
+/**
+ * Request parameters for dustConvertibleAssets operation in AssetApi.
+ * @interface DustConvertibleAssetsRequest
+ */
+export interface DustConvertibleAssetsRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof AssetApiDustConvertibleAssets
+     */
+    readonly targetAsset: string;
+
+    /**
+     *
+     * @type {number}
+     * @memberof AssetApiDustConvertibleAssets
+     */
+    readonly dustQuotaAssetToTargetAssetPrice?: number;
 }
 
 /**
@@ -1618,6 +1810,69 @@ export class AssetApi implements AssetApiInterface {
             requestParameters?.recvWindow
         );
         return sendRequest<AssetDividendRecordResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Convert dust assets
+     *
+     * Weight: 10
+     *
+     * @summary Dust Convert (USER_DATA)
+     * @param {DustConvertRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<DustConvertResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AssetApi
+     * @see {@link https://developers.binance.com/docs/wallet/asset/Dust-Convert Binance API Documentation}
+     */
+    public async dustConvert(
+        requestParameters: DustConvertRequest
+    ): Promise<RestApiResponse<DustConvertResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.dustConvert(
+            requestParameters?.asset,
+            requestParameters?.clientId,
+            requestParameters?.targetAsset,
+            requestParameters?.thirdPartyClientId,
+            requestParameters?.dustQuotaAssetToTargetAssetPrice
+        );
+        return sendRequest<DustConvertResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Query dust convertible assets
+     *
+     * Weight: 1
+     *
+     * @summary Dust Convertible Assets (USER_DATA)
+     * @param {DustConvertibleAssetsRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<DustConvertibleAssetsResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AssetApi
+     * @see {@link https://developers.binance.com/docs/wallet/asset/Dust-Convertible-Assets Binance API Documentation}
+     */
+    public async dustConvertibleAssets(
+        requestParameters: DustConvertibleAssetsRequest
+    ): Promise<RestApiResponse<DustConvertibleAssetsResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.dustConvertibleAssets(
+            requestParameters?.targetAsset,
+            requestParameters?.dustQuotaAssetToTargetAssetPrice
+        );
+        return sendRequest<DustConvertibleAssetsResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

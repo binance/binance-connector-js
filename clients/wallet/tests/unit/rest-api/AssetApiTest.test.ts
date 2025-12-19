@@ -19,6 +19,8 @@ import { AssetApi } from '../../../src/rest-api';
 import {
     AssetDetailRequest,
     AssetDividendRecordRequest,
+    DustConvertRequest,
+    DustConvertibleAssetsRequest,
     DustTransferRequest,
     DustlogRequest,
     FundingWalletRequest,
@@ -35,6 +37,8 @@ import {
 import type {
     AssetDetailResponse,
     AssetDividendRecordResponse,
+    DustConvertResponse,
+    DustConvertibleAssetsResponse,
     DustTransferResponse,
     DustlogResponse,
     FundingWalletResponse,
@@ -250,6 +254,247 @@ describe('AssetApi', () => {
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'assetDividendRecord').mockRejectedValueOnce(mockError);
             await expect(client.assetDividendRecord()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('dustConvert()', () => {
+        it('should execute dustConvert() successfully with required parameters only', async () => {
+            const params: DustConvertRequest = {
+                asset: 'asset_example',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    totalTransfered: '3.5971223',
+                    totalServiceCharge: '0.0794964',
+                    transferResult: [
+                        {
+                            tranId: 2987331510,
+                            fromAsset: 'USDT',
+                            amount: '1',
+                            transferedAmount: '3.5971223',
+                            serviceChargeAmount: '0.0794964',
+                            operateTime: 1765212029749,
+                        },
+                    ],
+                })
+            );
+
+            const spy = jest.spyOn(client, 'dustConvert').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<DustConvertResponse>)
+            );
+            const response = await client.dustConvert(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute dustConvert() successfully with optional parameters', async () => {
+            const params: DustConvertRequest = {
+                asset: 'asset_example',
+                clientId: '1',
+                targetAsset: 'targetAsset_example',
+                thirdPartyClientId: '1',
+                dustQuotaAssetToTargetAssetPrice: 1.0,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    totalTransfered: '3.5971223',
+                    totalServiceCharge: '0.0794964',
+                    transferResult: [
+                        {
+                            tranId: 2987331510,
+                            fromAsset: 'USDT',
+                            amount: '1',
+                            transferedAmount: '3.5971223',
+                            serviceChargeAmount: '0.0794964',
+                            operateTime: 1765212029749,
+                        },
+                    ],
+                })
+            );
+
+            const spy = jest.spyOn(client, 'dustConvert').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<DustConvertResponse>)
+            );
+            const response = await client.dustConvert(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when asset is missing', async () => {
+            const _params: DustConvertRequest = {
+                asset: 'asset_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.asset;
+
+            await expect(client.dustConvert(params)).rejects.toThrow(
+                'Required parameter asset was null or undefined when calling dustConvert.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: DustConvertRequest = {
+                asset: 'asset_example',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'dustConvert').mockRejectedValueOnce(mockError);
+            await expect(client.dustConvert(params)).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('dustConvertibleAssets()', () => {
+        it('should execute dustConvertibleAssets() successfully with required parameters only', async () => {
+            const params: DustConvertibleAssetsRequest = {
+                targetAsset: 'targetAsset_example',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    dribbletPercentage: '0.02',
+                    totalTransferQuotaAssetAmount: '0.7899968',
+                    totalTransferTargetAssetAmount: '0.7899968',
+                    dribbletBase: '10',
+                    details: [
+                        {
+                            asset: 'AR',
+                            assetFullName: 'AR',
+                            amountFree: '0.00856',
+                            exchange: '0.00073616',
+                            toQuotaAssetAmount: '0.036808',
+                            toTargetAssetAmount: '0.036808',
+                            toTargetAssetOffExchange: '0.03607184',
+                        },
+                        {
+                            asset: 'BNB',
+                            assetFullName: 'BNB',
+                            amountFree: '0.00082768',
+                            exchange: '0.01506378',
+                            toQuotaAssetAmount: '0.7531888',
+                            toTargetAssetAmount: '0.7531888',
+                            toTargetAssetOffExchange: '0.73812502',
+                        },
+                    ],
+                })
+            );
+
+            const spy = jest.spyOn(client, 'dustConvertibleAssets').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<DustConvertibleAssetsResponse>)
+            );
+            const response = await client.dustConvertibleAssets(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute dustConvertibleAssets() successfully with optional parameters', async () => {
+            const params: DustConvertibleAssetsRequest = {
+                targetAsset: 'targetAsset_example',
+                dustQuotaAssetToTargetAssetPrice: 1.0,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    dribbletPercentage: '0.02',
+                    totalTransferQuotaAssetAmount: '0.7899968',
+                    totalTransferTargetAssetAmount: '0.7899968',
+                    dribbletBase: '10',
+                    details: [
+                        {
+                            asset: 'AR',
+                            assetFullName: 'AR',
+                            amountFree: '0.00856',
+                            exchange: '0.00073616',
+                            toQuotaAssetAmount: '0.036808',
+                            toTargetAssetAmount: '0.036808',
+                            toTargetAssetOffExchange: '0.03607184',
+                        },
+                        {
+                            asset: 'BNB',
+                            assetFullName: 'BNB',
+                            amountFree: '0.00082768',
+                            exchange: '0.01506378',
+                            toQuotaAssetAmount: '0.7531888',
+                            toTargetAssetAmount: '0.7531888',
+                            toTargetAssetOffExchange: '0.73812502',
+                        },
+                    ],
+                })
+            );
+
+            const spy = jest.spyOn(client, 'dustConvertibleAssets').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<DustConvertibleAssetsResponse>)
+            );
+            const response = await client.dustConvertibleAssets(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when targetAsset is missing', async () => {
+            const _params: DustConvertibleAssetsRequest = {
+                targetAsset: 'targetAsset_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.targetAsset;
+
+            await expect(client.dustConvertibleAssets(params)).rejects.toThrow(
+                'Required parameter targetAsset was null or undefined when calling dustConvertibleAssets.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: DustConvertibleAssetsRequest = {
+                targetAsset: 'targetAsset_example',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'dustConvertibleAssets')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.dustConvertibleAssets(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

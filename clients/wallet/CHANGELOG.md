@@ -1,5 +1,16 @@
 # Changelog
 
+## 13.0.0 - 2025-12-19
+
+### Added (2)
+
+- `dustConvert()` (`POST /sapi/v1/asset/dust-convert/convert`)
+- `dustConvertibleAssets()` (`POST /sapi/v1/asset/dust-convert/query-convertible-assets`)
+
+### Changed (1)
+
+- Update `@binance/common` library to version `2.1.1`.
+
 ## 12.1.0 - 2025-12-16
 
 ### Changed (2)
