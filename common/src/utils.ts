@@ -112,7 +112,7 @@ class RequestSigner {
     sign(queryParams: Record<string, unknown>, bodyParams?: Record<string, unknown>): string {
         const queryParamsString = buildQueryString(queryParams);
         const bodyParamsString = bodyParams ? buildQueryString(bodyParams) : '';
-        const params = queryParamsString + bodyParamsString;
+        const params = queryParamsString + (bodyParamsString && queryParamsString ? '&' : '') + bodyParamsString;
 
         // HMAC-SHA256 signing
         if (this.apiSecret)
