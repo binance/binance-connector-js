@@ -19,13 +19,7 @@ import {
     sendRequest,
     type RequestArgs,
 } from '@binance/common';
-import type {
-    AccountFundingFlowResponse,
-    GetDownloadIdForOptionTransactionHistoryResponse,
-    GetOptionTransactionHistoryDownloadLinkByIdResponse,
-    OptionAccountInformationResponse,
-    OptionMarginAccountInformationResponse,
-} from '../types';
+import type { AccountFundingFlowResponse, OptionMarginAccountInformationResponse } from '../types';
 
 /**
  * AccountApi - axios parameter creator
@@ -92,129 +86,6 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             };
         },
         /**
-         * Get download id for option transaction history
-         *
-         * Request Limitation is 5 times per month, shared by > front end download page and rest api
-         * The time between `startTime` and `endTime` can not be longer than 1 year
-         *
-         * Weight: 5
-         *
-         * @summary Get Download Id For Option Transaction History (USER_DATA)
-         * @param {number | bigint} startTime Timestamp in ms
-         * @param {number | bigint} endTime Timestamp in ms
-         * @param {number | bigint} [recvWindow]
-         *
-         * @throws {RequiredError}
-         */
-        getDownloadIdForOptionTransactionHistory: async (
-            startTime: number | bigint,
-            endTime: number | bigint,
-            recvWindow?: number | bigint
-        ): Promise<RequestArgs> => {
-            // verify required parameter 'startTime' is not null or undefined
-            assertParamExists('getDownloadIdForOptionTransactionHistory', 'startTime', startTime);
-            // verify required parameter 'endTime' is not null or undefined
-            assertParamExists('getDownloadIdForOptionTransactionHistory', 'endTime', endTime);
-
-            const localVarQueryParameter: Record<string, unknown> = {};
-            const localVarBodyParameter: Record<string, unknown> = {};
-
-            if (startTime !== undefined && startTime !== null) {
-                localVarQueryParameter['startTime'] = startTime;
-            }
-            if (endTime !== undefined && endTime !== null) {
-                localVarQueryParameter['endTime'] = endTime;
-            }
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/eapi/v1/income/asyn',
-                method: 'GET',
-                queryParams: localVarQueryParameter,
-                bodyParams: localVarBodyParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
-         * Get option transaction history download Link by Id
-         *
-         * Download link expiration: 24h
-         *
-         * Weight: 5
-         *
-         * @summary Get Option Transaction History Download Link by Id (USER_DATA)
-         * @param {string} downloadId get by download id api
-         * @param {number | bigint} [recvWindow]
-         *
-         * @throws {RequiredError}
-         */
-        getOptionTransactionHistoryDownloadLinkById: async (
-            downloadId: string,
-            recvWindow?: number | bigint
-        ): Promise<RequestArgs> => {
-            // verify required parameter 'downloadId' is not null or undefined
-            assertParamExists(
-                'getOptionTransactionHistoryDownloadLinkById',
-                'downloadId',
-                downloadId
-            );
-
-            const localVarQueryParameter: Record<string, unknown> = {};
-            const localVarBodyParameter: Record<string, unknown> = {};
-
-            if (downloadId !== undefined && downloadId !== null) {
-                localVarQueryParameter['downloadId'] = downloadId;
-            }
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/eapi/v1/income/asyn/id',
-                method: 'GET',
-                queryParams: localVarQueryParameter,
-                bodyParams: localVarBodyParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
-         * Get current account information.
-         *
-         * Weight: 3
-         *
-         * @summary Option Account Information(TRADE)
-         * @param {number | bigint} [recvWindow]
-         *
-         * @throws {RequiredError}
-         */
-        optionAccountInformation: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
-            const localVarQueryParameter: Record<string, unknown> = {};
-            const localVarBodyParameter: Record<string, unknown> = {};
-
-            if (recvWindow !== undefined && recvWindow !== null) {
-                localVarQueryParameter['recvWindow'] = recvWindow;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/eapi/v1/account',
-                method: 'GET',
-                queryParams: localVarQueryParameter,
-                bodyParams: localVarBodyParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
          * Get current account information.
          *
          * Weight: 3
@@ -267,53 +138,6 @@ export interface AccountApiInterface {
     accountFundingFlow(
         requestParameters: AccountFundingFlowRequest
     ): Promise<RestApiResponse<AccountFundingFlowResponse>>;
-    /**
-     * Get download id for option transaction history
-     *
-     * Request Limitation is 5 times per month, shared by > front end download page and rest api
-     * The time between `startTime` and `endTime` can not be longer than 1 year
-     *
-     * Weight: 5
-     *
-     * @summary Get Download Id For Option Transaction History (USER_DATA)
-     * @param {GetDownloadIdForOptionTransactionHistoryRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof AccountApiInterface
-     */
-    getDownloadIdForOptionTransactionHistory(
-        requestParameters: GetDownloadIdForOptionTransactionHistoryRequest
-    ): Promise<RestApiResponse<GetDownloadIdForOptionTransactionHistoryResponse>>;
-    /**
-     * Get option transaction history download Link by Id
-     *
-     * Download link expiration: 24h
-     *
-     * Weight: 5
-     *
-     * @summary Get Option Transaction History Download Link by Id (USER_DATA)
-     * @param {GetOptionTransactionHistoryDownloadLinkByIdRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof AccountApiInterface
-     */
-    getOptionTransactionHistoryDownloadLinkById(
-        requestParameters: GetOptionTransactionHistoryDownloadLinkByIdRequest
-    ): Promise<RestApiResponse<GetOptionTransactionHistoryDownloadLinkByIdResponse>>;
-    /**
-     * Get current account information.
-     *
-     * Weight: 3
-     *
-     * @summary Option Account Information(TRADE)
-     * @param {OptionAccountInformationRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof AccountApiInterface
-     */
-    optionAccountInformation(
-        requestParameters?: OptionAccountInformationRequest
-    ): Promise<RestApiResponse<OptionAccountInformationResponse>>;
     /**
      * Get current account information.
      *
@@ -379,66 +203,6 @@ export interface AccountFundingFlowRequest {
 }
 
 /**
- * Request parameters for getDownloadIdForOptionTransactionHistory operation in AccountApi.
- * @interface GetDownloadIdForOptionTransactionHistoryRequest
- */
-export interface GetDownloadIdForOptionTransactionHistoryRequest {
-    /**
-     * Timestamp in ms
-     * @type {number | bigint}
-     * @memberof AccountApiGetDownloadIdForOptionTransactionHistory
-     */
-    readonly startTime: number | bigint;
-
-    /**
-     * Timestamp in ms
-     * @type {number | bigint}
-     * @memberof AccountApiGetDownloadIdForOptionTransactionHistory
-     */
-    readonly endTime: number | bigint;
-
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof AccountApiGetDownloadIdForOptionTransactionHistory
-     */
-    readonly recvWindow?: number | bigint;
-}
-
-/**
- * Request parameters for getOptionTransactionHistoryDownloadLinkById operation in AccountApi.
- * @interface GetOptionTransactionHistoryDownloadLinkByIdRequest
- */
-export interface GetOptionTransactionHistoryDownloadLinkByIdRequest {
-    /**
-     * get by download id api
-     * @type {string}
-     * @memberof AccountApiGetOptionTransactionHistoryDownloadLinkById
-     */
-    readonly downloadId: string;
-
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof AccountApiGetOptionTransactionHistoryDownloadLinkById
-     */
-    readonly recvWindow?: number | bigint;
-}
-
-/**
- * Request parameters for optionAccountInformation operation in AccountApi.
- * @interface OptionAccountInformationRequest
- */
-export interface OptionAccountInformationRequest {
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof AccountApiOptionAccountInformation
-     */
-    readonly recvWindow?: number | bigint;
-}
-
-/**
  * Request parameters for optionMarginAccountInformation operation in AccountApi.
  * @interface OptionMarginAccountInformationRequest
  */
@@ -474,7 +238,7 @@ export class AccountApi implements AccountApiInterface {
      * @returns {Promise<RestApiResponse<AccountFundingFlowResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/account/Account-Funding-Flow Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/account/Account-Funding-Flow Binance API Documentation}
      */
     public async accountFundingFlow(
         requestParameters: AccountFundingFlowRequest
@@ -499,103 +263,6 @@ export class AccountApi implements AccountApiInterface {
     }
 
     /**
-     * Get download id for option transaction history
-     *
-     * Request Limitation is 5 times per month, shared by > front end download page and rest api
-     * The time between `startTime` and `endTime` can not be longer than 1 year
-     *
-     * Weight: 5
-     *
-     * @summary Get Download Id For Option Transaction History (USER_DATA)
-     * @param {GetDownloadIdForOptionTransactionHistoryRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetDownloadIdForOptionTransactionHistoryResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/account/Get-Download-Id-For-Option-Transaction-History Binance API Documentation}
-     */
-    public async getDownloadIdForOptionTransactionHistory(
-        requestParameters: GetDownloadIdForOptionTransactionHistoryRequest
-    ): Promise<RestApiResponse<GetDownloadIdForOptionTransactionHistoryResponse>> {
-        const localVarAxiosArgs =
-            await this.localVarAxiosParamCreator.getDownloadIdForOptionTransactionHistory(
-                requestParameters?.startTime,
-                requestParameters?.endTime,
-                requestParameters?.recvWindow
-            );
-        return sendRequest<GetDownloadIdForOptionTransactionHistoryResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.queryParams,
-            localVarAxiosArgs.bodyParams,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
-        );
-    }
-
-    /**
-     * Get option transaction history download Link by Id
-     *
-     * Download link expiration: 24h
-     *
-     * Weight: 5
-     *
-     * @summary Get Option Transaction History Download Link by Id (USER_DATA)
-     * @param {GetOptionTransactionHistoryDownloadLinkByIdRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<GetOptionTransactionHistoryDownloadLinkByIdResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/account/Get-Option-Transaction-History-Download-Link-by-Id Binance API Documentation}
-     */
-    public async getOptionTransactionHistoryDownloadLinkById(
-        requestParameters: GetOptionTransactionHistoryDownloadLinkByIdRequest
-    ): Promise<RestApiResponse<GetOptionTransactionHistoryDownloadLinkByIdResponse>> {
-        const localVarAxiosArgs =
-            await this.localVarAxiosParamCreator.getOptionTransactionHistoryDownloadLinkById(
-                requestParameters?.downloadId,
-                requestParameters?.recvWindow
-            );
-        return sendRequest<GetOptionTransactionHistoryDownloadLinkByIdResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.queryParams,
-            localVarAxiosArgs.bodyParams,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
-        );
-    }
-
-    /**
-     * Get current account information.
-     *
-     * Weight: 3
-     *
-     * @summary Option Account Information(TRADE)
-     * @param {OptionAccountInformationRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<OptionAccountInformationResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/account/Option-Account-Information Binance API Documentation}
-     */
-    public async optionAccountInformation(
-        requestParameters: OptionAccountInformationRequest = {}
-    ): Promise<RestApiResponse<OptionAccountInformationResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.optionAccountInformation(
-            requestParameters?.recvWindow
-        );
-        return sendRequest<OptionAccountInformationResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.queryParams,
-            localVarAxiosArgs.bodyParams,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: true }
-        );
-    }
-
-    /**
      * Get current account information.
      *
      * Weight: 3
@@ -605,7 +272,7 @@ export class AccountApi implements AccountApiInterface {
      * @returns {Promise<RestApiResponse<OptionMarginAccountInformationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/account/Option-Margin-Account-Information Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/account/Option-Margin-Account-Information Binance API Documentation}
      */
     public async optionMarginAccountInformation(
         requestParameters: OptionMarginAccountInformationRequest = {}

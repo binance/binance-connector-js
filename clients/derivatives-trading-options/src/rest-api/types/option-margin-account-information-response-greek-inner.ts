@@ -16,37 +16,37 @@
 /**
  *
  * @export
- * @interface OptionAccountInformationResponseGreekInner
+ * @interface OptionMarginAccountInformationResponseGreekInner
  */
-export interface OptionAccountInformationResponseGreekInner {
+export interface OptionMarginAccountInformationResponseGreekInner {
     /**
      *
      * @type {string}
-     * @memberof OptionAccountInformationResponseGreekInner
+     * @memberof OptionMarginAccountInformationResponseGreekInner
      */
     underlying?: string;
     /**
      *
      * @type {string}
-     * @memberof OptionAccountInformationResponseGreekInner
+     * @memberof OptionMarginAccountInformationResponseGreekInner
      */
     delta?: string;
     /**
      *
      * @type {string}
-     * @memberof OptionAccountInformationResponseGreekInner
-     */
-    gamma?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof OptionAccountInformationResponseGreekInner
+     * @memberof OptionMarginAccountInformationResponseGreekInner
      */
     theta?: string;
     /**
      *
      * @type {string}
-     * @memberof OptionAccountInformationResponseGreekInner
+     * @memberof OptionMarginAccountInformationResponseGreekInner
+     */
+    gamma?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof OptionMarginAccountInformationResponseGreekInner
      */
     vega?: string;
 }

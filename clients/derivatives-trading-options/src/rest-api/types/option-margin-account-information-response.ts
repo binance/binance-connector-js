@@ -16,10 +16,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OptionAccountInformationResponseGreekInner } from './option-account-information-response-greek-inner';
+import type { OptionMarginAccountInformationResponseAssetInner } from './option-margin-account-information-response-asset-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OptionMarginAccountInformationResponseAssetInner } from './option-margin-account-information-response-asset-inner';
+import type { OptionMarginAccountInformationResponseGreekInner } from './option-margin-account-information-response-greek-inner';
 
 /**
  *
@@ -35,14 +35,38 @@ export interface OptionMarginAccountInformationResponse {
     asset?: Array<OptionMarginAccountInformationResponseAssetInner>;
     /**
      *
-     * @type {Array<OptionAccountInformationResponseGreekInner>}
+     * @type {Array<OptionMarginAccountInformationResponseGreekInner>}
      * @memberof OptionMarginAccountInformationResponse
      */
-    greek?: Array<OptionAccountInformationResponseGreekInner>;
+    greek?: Array<OptionMarginAccountInformationResponseGreekInner>;
     /**
      *
      * @type {number | bigint}
      * @memberof OptionMarginAccountInformationResponse
      */
     time?: number | bigint;
+    /**
+     *
+     * @type {boolean}
+     * @memberof OptionMarginAccountInformationResponse
+     */
+    canTrade?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof OptionMarginAccountInformationResponse
+     */
+    canDeposit?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof OptionMarginAccountInformationResponse
+     */
+    canWithdraw?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof OptionMarginAccountInformationResponse
+     */
+    reduceOnly?: boolean;
 }

@@ -8,14 +8,14 @@ const configurationWebsocketStreams = {
 };
 const client = new DerivativesTradingOptions({ configurationWebsocketStreams });
 
-async function openInterest() {
+async function individualSymbolBookTickerStreams() {
     let connection;
 
     try {
         connection = await client.websocketStreams.connect();
 
-        const stream = connection.openInterest({
-            expirationDate: '220930',
+        const stream = connection.individualSymbolBookTickerStreams({
+            symbol: 'btcusdt',
         });
 
         stream.on('message', (data) => {
@@ -29,4 +29,4 @@ async function openInterest() {
     }
 }
 
-openInterest();
+individualSymbolBookTickerStreams();

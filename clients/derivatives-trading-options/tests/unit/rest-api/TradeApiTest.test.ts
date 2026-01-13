@@ -34,6 +34,7 @@ import {
     QueryCurrentOpenOptionOrdersRequest,
     QueryOptionOrderHistoryRequest,
     QuerySingleOrderRequest,
+    UserCommissionRequest,
     UserExerciseRecordRequest,
 } from '../../../src/rest-api';
 import type {
@@ -48,6 +49,7 @@ import type {
     QueryCurrentOpenOptionOrdersResponse,
     QueryOptionOrderHistoryResponse,
     QuerySingleOrderResponse,
+    UserCommissionResponse,
     UserExerciseRecordResponse,
 } from '../../../src/rest-api/types';
 
@@ -80,13 +82,12 @@ describe('TradeApi', () => {
                         realizedProfit: '0.00000000',
                         side: 'BUY',
                         type: 'LIMIT',
-                        volatility: '0.9',
                         liquidity: 'TAKER',
-                        quoteAsset: 'USDT',
                         time: 1592465880683,
                         priceScale: 2,
                         quantityScale: 2,
                         optionSide: 'CALL',
+                        quoteAsset: 'USDT',
                     },
                 ])
             );
@@ -128,13 +129,12 @@ describe('TradeApi', () => {
                         realizedProfit: '0.00000000',
                         side: 'BUY',
                         type: 'LIMIT',
-                        volatility: '0.9',
                         liquidity: 'TAKER',
-                        quoteAsset: 'USDT',
                         time: 1592465880683,
                         priceScale: 2,
                         quantityScale: 2,
                         optionSide: 'CALL',
+                        quoteAsset: 'USDT',
                     },
                 ])
             );
@@ -175,7 +175,7 @@ describe('TradeApi', () => {
                 underlying: 'underlying_example',
             };
 
-            mockResponse = JSONParse(JSONStringify({ code: 0, msg: 'success', data: 0 }));
+            mockResponse = JSONParse(JSONStringify({ code: 0, msg: 'success' }));
 
             const spy = jest.spyOn(client, 'cancelAllOptionOrdersByUnderlying').mockReturnValue(
                 Promise.resolve({
@@ -197,7 +197,7 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = JSONParse(JSONStringify({ code: 0, msg: 'success', data: 0 }));
+            mockResponse = JSONParse(JSONStringify({ code: 0, msg: 'success' }));
 
             const spy = jest.spyOn(client, 'cancelAllOptionOrdersByUnderlying').mockReturnValue(
                 Promise.resolve({
@@ -343,16 +343,21 @@ describe('TradeApi', () => {
                         price: '100',
                         quantity: '1',
                         executedQty: '0',
-                        fee: 0,
                         side: 'BUY',
                         type: 'LIMIT',
                         timeInForce: 'GTC',
-                        createTime: 1592465880683,
-                        status: 'ACCEPTED',
-                        avgPrice: '0',
                         reduceOnly: false,
-                        clientOrderId: '',
+                        createTime: 1592465880683,
                         updateTime: 1566818724722,
+                        status: 'NEW',
+                        avgPrice: '0',
+                        source: 'API',
+                        clientOrderId: '',
+                        priceScale: 3,
+                        quantityScale: 4,
+                        optionSide: 'CALL',
+                        quoteAsset: 'USDT',
+                        mmp: false,
                     },
                 ])
             );
@@ -387,16 +392,21 @@ describe('TradeApi', () => {
                         price: '100',
                         quantity: '1',
                         executedQty: '0',
-                        fee: 0,
                         side: 'BUY',
                         type: 'LIMIT',
                         timeInForce: 'GTC',
-                        createTime: 1592465880683,
-                        status: 'ACCEPTED',
-                        avgPrice: '0',
                         reduceOnly: false,
-                        clientOrderId: '',
+                        createTime: 1592465880683,
                         updateTime: 1566818724722,
+                        status: 'NEW',
+                        avgPrice: '0',
+                        source: 'API',
+                        clientOrderId: '',
+                        priceScale: 3,
+                        quantityScale: 4,
+                        optionSide: 'CALL',
+                        quoteAsset: 'USDT',
+                        mmp: false,
                     },
                 ])
             );
@@ -464,12 +474,10 @@ describe('TradeApi', () => {
                     price: '100',
                     quantity: '1',
                     executedQty: '0',
-                    fee: '0',
                     side: 'BUY',
                     type: 'LIMIT',
                     timeInForce: 'GTC',
                     reduceOnly: false,
-                    postOnly: false,
                     createDate: 1592465880683,
                     updateTime: 1566818724722,
                     status: 'ACCEPTED',
@@ -513,12 +521,10 @@ describe('TradeApi', () => {
                     price: '100',
                     quantity: '1',
                     executedQty: '0',
-                    fee: '0',
                     side: 'BUY',
                     type: 'LIMIT',
                     timeInForce: 'GTC',
                     reduceOnly: false,
-                    postOnly: false,
                     createDate: 1592465880683,
                     updateTime: 1566818724722,
                     status: 'ACCEPTED',
@@ -594,24 +600,22 @@ describe('TradeApi', () => {
                     symbol: 'BTC-200730-9000-C',
                     price: '100',
                     quantity: '1',
+                    executedQty: '0',
                     side: 'BUY',
                     type: 'LIMIT',
-                    createDate: 1592465880683,
-                    reduceOnly: false,
-                    postOnly: false,
-                    mmp: false,
-                    executedQty: '0',
-                    fee: '0',
                     timeInForce: 'GTC',
+                    reduceOnly: false,
                     createTime: 1592465880683,
                     updateTime: 1566818724722,
-                    status: 'ACCEPTED',
+                    status: 'NEW',
                     avgPrice: '0',
+                    source: 'API',
                     clientOrderId: '',
                     priceScale: 2,
                     quantityScale: 2,
                     optionSide: 'CALL',
                     quoteAsset: 'USDT',
+                    mmp: false,
                 })
             );
 
@@ -651,24 +655,22 @@ describe('TradeApi', () => {
                     symbol: 'BTC-200730-9000-C',
                     price: '100',
                     quantity: '1',
+                    executedQty: '0',
                     side: 'BUY',
                     type: 'LIMIT',
-                    createDate: 1592465880683,
-                    reduceOnly: false,
-                    postOnly: false,
-                    mmp: false,
-                    executedQty: '0',
-                    fee: '0',
                     timeInForce: 'GTC',
+                    reduceOnly: false,
                     createTime: 1592465880683,
                     updateTime: 1566818724722,
-                    status: 'ACCEPTED',
+                    status: 'NEW',
                     avgPrice: '0',
+                    source: 'API',
                     clientOrderId: '',
                     priceScale: 2,
                     quantityScale: 2,
                     optionSide: 'CALL',
                     quoteAsset: 'USDT',
+                    mmp: false,
                 })
             );
 
@@ -778,18 +780,18 @@ describe('TradeApi', () => {
                         symbol: 'BTC-200730-9000-C',
                         side: 'SHORT',
                         quantity: '-0.1',
-                        reducibleQty: '0',
                         markValue: '105.00138',
-                        ror: '-0.05',
                         unrealizedPNL: '-5.00138',
                         markPrice: '1050.0138',
                         strikePrice: '9000',
-                        positionCost: '1000.0000',
                         expiryDate: 1593511200000,
                         priceScale: 2,
                         quantityScale: 2,
                         optionSide: 'CALL',
                         quoteAsset: 'USDT',
+                        time: 1762872654561,
+                        bidQuantity: '0.0000',
+                        askQuantity: '0.0000',
                     },
                 ])
             );
@@ -821,18 +823,18 @@ describe('TradeApi', () => {
                         symbol: 'BTC-200730-9000-C',
                         side: 'SHORT',
                         quantity: '-0.1',
-                        reducibleQty: '0',
                         markValue: '105.00138',
-                        ror: '-0.05',
                         unrealizedPNL: '-5.00138',
                         markPrice: '1050.0138',
                         strikePrice: '9000',
-                        positionCost: '1000.0000',
                         expiryDate: 1593511200000,
                         priceScale: 2,
                         quantityScale: 2,
                         optionSide: 'CALL',
                         quoteAsset: 'USDT',
+                        time: 1762872654561,
+                        bidQuantity: '0.0000',
+                        askQuantity: '0.0000',
                     },
                 ])
             );
@@ -878,15 +880,25 @@ describe('TradeApi', () => {
             mockResponse = JSONParse(
                 JSONStringify([
                     {
-                        orderId: 4612288550799409000,
-                        symbol: 'ETH-220826-1800-C',
+                        orderId: 4611875134427365000,
+                        symbol: 'BTC-200730-9000-C',
                         price: '100',
-                        quantity: '0.01',
+                        quantity: '1',
+                        executedQty: '0',
                         side: 'BUY',
                         type: 'LIMIT',
+                        timeInForce: 'GTC',
                         reduceOnly: false,
-                        postOnly: false,
-                        clientOrderId: '1001',
+                        createTime: 1592465880683,
+                        updateTime: 1566818724722,
+                        status: 'NEW',
+                        avgPrice: '0',
+                        source: 'API',
+                        clientOrderId: '',
+                        priceScale: 2,
+                        quantityScale: 2,
+                        optionSide: 'CALL',
+                        quoteAsset: 'USDT',
                         mmp: false,
                     },
                 ])
@@ -915,15 +927,25 @@ describe('TradeApi', () => {
             mockResponse = JSONParse(
                 JSONStringify([
                     {
-                        orderId: 4612288550799409000,
-                        symbol: 'ETH-220826-1800-C',
+                        orderId: 4611875134427365000,
+                        symbol: 'BTC-200730-9000-C',
                         price: '100',
-                        quantity: '0.01',
+                        quantity: '1',
+                        executedQty: '0',
                         side: 'BUY',
                         type: 'LIMIT',
+                        timeInForce: 'GTC',
                         reduceOnly: false,
-                        postOnly: false,
-                        clientOrderId: '1001',
+                        createTime: 1592465880683,
+                        updateTime: 1566818724722,
+                        status: 'NEW',
+                        avgPrice: '0',
+                        source: 'API',
+                        clientOrderId: '',
+                        priceScale: 2,
+                        quantityScale: 2,
+                        optionSide: 'CALL',
+                        quoteAsset: 'USDT',
                         mmp: false,
                     },
                 ])
@@ -985,15 +1007,13 @@ describe('TradeApi', () => {
                         price: '100',
                         quantity: '1',
                         executedQty: '0',
-                        fee: '0',
                         side: 'BUY',
                         type: 'LIMIT',
                         timeInForce: 'GTC',
                         reduceOnly: false,
-                        postOnly: false,
                         createTime: 1592465880683,
                         updateTime: 1592465880683,
-                        status: 'ACCEPTED',
+                        status: 'NEW',
                         avgPrice: '0',
                         clientOrderId: '',
                         priceScale: 2,
@@ -1036,15 +1056,13 @@ describe('TradeApi', () => {
                         price: '100',
                         quantity: '1',
                         executedQty: '0',
-                        fee: '0',
                         side: 'BUY',
                         type: 'LIMIT',
                         timeInForce: 'GTC',
                         reduceOnly: false,
-                        postOnly: false,
                         createTime: 1592465880683,
                         updateTime: 1592465880683,
-                        status: 'ACCEPTED',
+                        status: 'NEW',
                         avgPrice: '0',
                         clientOrderId: '',
                         priceScale: 2,
@@ -1102,18 +1120,14 @@ describe('TradeApi', () => {
                         price: '18000.00000000',
                         quantity: '-0.50000000',
                         executedQty: '-0.50000000',
-                        fee: '3.00000000',
                         side: 'SELL',
                         type: 'LIMIT',
                         timeInForce: 'GTC',
                         reduceOnly: false,
-                        postOnly: false,
                         createTime: 1657867694244,
                         updateTime: 1657867888216,
                         status: 'FILLED',
-                        reason: '0',
                         avgPrice: '18000.00000000',
-                        source: 'API',
                         clientOrderId: '',
                         priceScale: 2,
                         quantityScale: 2,
@@ -1156,18 +1170,14 @@ describe('TradeApi', () => {
                         price: '18000.00000000',
                         quantity: '-0.50000000',
                         executedQty: '-0.50000000',
-                        fee: '3.00000000',
                         side: 'SELL',
                         type: 'LIMIT',
                         timeInForce: 'GTC',
                         reduceOnly: false,
-                        postOnly: false,
                         createTime: 1657867694244,
                         updateTime: 1657867888216,
                         status: 'FILLED',
-                        reason: '0',
                         avgPrice: '18000.00000000',
-                        source: 'API',
                         clientOrderId: '',
                         priceScale: 2,
                         quantityScale: 2,
@@ -1239,17 +1249,14 @@ describe('TradeApi', () => {
                     price: '100',
                     quantity: '1',
                     executedQty: '0',
-                    fee: '0',
                     side: 'BUY',
                     type: 'LIMIT',
                     timeInForce: 'GTC',
                     reduceOnly: false,
-                    postOnly: false,
                     createTime: 1592465880683,
                     updateTime: 1566818724722,
-                    status: 'ACCEPTED',
+                    status: 'NEW',
                     avgPrice: '0',
-                    source: 'API',
                     clientOrderId: '',
                     priceScale: 2,
                     quantityScale: 2,
@@ -1288,17 +1295,14 @@ describe('TradeApi', () => {
                     price: '100',
                     quantity: '1',
                     executedQty: '0',
-                    fee: '0',
                     side: 'BUY',
                     type: 'LIMIT',
                     timeInForce: 'GTC',
                     reduceOnly: false,
-                    postOnly: false,
                     createTime: 1592465880683,
                     updateTime: 1566818724722,
-                    status: 'ACCEPTED',
+                    status: 'NEW',
                     avgPrice: '0',
-                    source: 'API',
                     clientOrderId: '',
                     priceScale: 2,
                     quantityScale: 2,
@@ -1354,6 +1358,83 @@ describe('TradeApi', () => {
         });
     });
 
+    describe('userCommission()', () => {
+        it('should execute userCommission() successfully with required parameters only', async () => {
+            mockResponse = JSONParse(
+                JSONStringify({
+                    commissions: [
+                        { underlying: 'BTCUSDT', makerFee: '0.000240', takerFee: '0.000240' },
+                        { underlying: 'ETHUSDT', makerFee: '0.000240', takerFee: '0.000240' },
+                        { underlying: 'BNBUSDT', makerFee: '0.000240', takerFee: '0.000240' },
+                        { underlying: 'SOLUSDT', makerFee: '0.000240', takerFee: '0.000240' },
+                        { underlying: 'XRPUSDT', makerFee: '0.000240', takerFee: '0.000240' },
+                        { underlying: 'DOGEUSDT', makerFee: '0.000240', takerFee: '0.000240' },
+                    ],
+                })
+            );
+
+            const spy = jest.spyOn(client, 'userCommission').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<UserCommissionResponse>)
+            );
+            const response = await client.userCommission();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute userCommission() successfully with optional parameters', async () => {
+            const params: UserCommissionRequest = {
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    commissions: [
+                        { underlying: 'BTCUSDT', makerFee: '0.000240', takerFee: '0.000240' },
+                        { underlying: 'ETHUSDT', makerFee: '0.000240', takerFee: '0.000240' },
+                        { underlying: 'BNBUSDT', makerFee: '0.000240', takerFee: '0.000240' },
+                        { underlying: 'SOLUSDT', makerFee: '0.000240', takerFee: '0.000240' },
+                        { underlying: 'XRPUSDT', makerFee: '0.000240', takerFee: '0.000240' },
+                        { underlying: 'DOGEUSDT', makerFee: '0.000240', takerFee: '0.000240' },
+                    ],
+                })
+            );
+
+            const spy = jest.spyOn(client, 'userCommission').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<UserCommissionResponse>)
+            );
+            const response = await client.userCommission(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'userCommission').mockRejectedValueOnce(mockError);
+            await expect(client.userCommission()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
     describe('userExerciseRecord()', () => {
         it('should execute userExerciseRecord() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
@@ -1363,7 +1444,6 @@ describe('TradeApi', () => {
                         currency: 'USDT',
                         symbol: 'BTC-220721-25000-C',
                         exercisePrice: '25000.00000000',
-                        markPrice: '25000.00000000',
                         quantity: '1.00000000',
                         amount: '0.00000000',
                         fee: '0.00000000',
@@ -1407,7 +1487,6 @@ describe('TradeApi', () => {
                         currency: 'USDT',
                         symbol: 'BTC-220721-25000-C',
                         exercisePrice: '25000.00000000',
-                        markPrice: '25000.00000000',
                         quantity: '1.00000000',
                         amount: '0.00000000',
                         fee: '0.00000000',

@@ -16,69 +16,69 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { PartialBookDepthStreamsResponseAItem } from './partial-book-depth-streams-response-aitem';
+import type { DiffBookDepthStreamsResponseAItem } from './diff-book-depth-streams-response-aitem';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { PartialBookDepthStreamsResponseBItem } from './partial-book-depth-streams-response-bitem';
+import type { DiffBookDepthStreamsResponseBItem } from './diff-book-depth-streams-response-bitem';
 
 /**
  *
  * @export
- * @interface PartialBookDepthStreamsResponse
+ * @interface DiffBookDepthStreamsResponse
  */
-export interface PartialBookDepthStreamsResponse {
+export interface DiffBookDepthStreamsResponse {
     /**
      *
      * @type {string}
-     * @memberof PartialBookDepthStreamsResponse
+     * @memberof DiffBookDepthStreamsResponse
      */
     e?: string;
     /**
      *
      * @type {number | bigint}
-     * @memberof PartialBookDepthStreamsResponse
+     * @memberof DiffBookDepthStreamsResponse
      */
     E?: number | bigint;
     /**
      *
      * @type {number | bigint}
-     * @memberof PartialBookDepthStreamsResponse
+     * @memberof DiffBookDepthStreamsResponse
      */
     T?: number | bigint;
     /**
      *
      * @type {string}
-     * @memberof PartialBookDepthStreamsResponse
+     * @memberof DiffBookDepthStreamsResponse
      */
     s?: string;
     /**
      *
      * @type {number | bigint}
-     * @memberof PartialBookDepthStreamsResponse
+     * @memberof DiffBookDepthStreamsResponse
      */
     U?: number | bigint;
     /**
      *
      * @type {number | bigint}
-     * @memberof PartialBookDepthStreamsResponse
+     * @memberof DiffBookDepthStreamsResponse
      */
     u?: number | bigint;
     /**
      *
      * @type {number | bigint}
-     * @memberof PartialBookDepthStreamsResponse
+     * @memberof DiffBookDepthStreamsResponse
      */
     pu?: number | bigint;
     /**
      *
-     * @type {Array<PartialBookDepthStreamsResponseBItem>}
-     * @memberof PartialBookDepthStreamsResponse
+     * @type {Array<DiffBookDepthStreamsResponseBItem>}
+     * @memberof DiffBookDepthStreamsResponse
      */
-    b?: Array<PartialBookDepthStreamsResponseBItem>;
+    b?: Array<DiffBookDepthStreamsResponseBItem>;
     /**
      *
-     * @type {Array<PartialBookDepthStreamsResponseAItem>}
-     * @memberof PartialBookDepthStreamsResponse
+     * @type {Array<DiffBookDepthStreamsResponseAItem>}
+     * @memberof DiffBookDepthStreamsResponse
      */
-    a?: Array<PartialBookDepthStreamsResponseAItem>;
+    a?: Array<DiffBookDepthStreamsResponseAItem>;
 }

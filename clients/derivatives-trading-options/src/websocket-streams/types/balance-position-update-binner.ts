@@ -16,37 +16,25 @@
 /**
  *
  * @export
- * @interface AccountUpdatePInner
+ * @interface BalancePositionUpdateBInner
  */
-export interface AccountUpdatePInner {
+export interface BalancePositionUpdateBInner {
     /**
      *
      * @type {string}
-     * @memberof AccountUpdatePInner
-     */
-    s?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof AccountUpdatePInner
-     */
-    c?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof AccountUpdatePInner
-     */
-    r?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof AccountUpdatePInner
-     */
-    p?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof AccountUpdatePInner
+     * @memberof BalancePositionUpdateBInner
      */
     a?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof BalancePositionUpdateBInner
+     */
+    b?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof BalancePositionUpdateBInner
+     */
+    bc?: string;
 }

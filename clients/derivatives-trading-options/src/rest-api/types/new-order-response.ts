@@ -48,6 +48,12 @@ export interface NewOrderResponse {
      * @type {string}
      * @memberof NewOrderResponse
      */
+    executedQty?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
     side?: string;
     /**
      *
@@ -57,46 +63,16 @@ export interface NewOrderResponse {
     type?: string;
     /**
      *
-     * @type {number | bigint}
+     * @type {string}
      * @memberof NewOrderResponse
      */
-    createDate?: number | bigint;
+    timeInForce?: string;
     /**
      *
      * @type {boolean}
      * @memberof NewOrderResponse
      */
     reduceOnly?: boolean;
-    /**
-     *
-     * @type {boolean}
-     * @memberof NewOrderResponse
-     */
-    postOnly?: boolean;
-    /**
-     *
-     * @type {boolean}
-     * @memberof NewOrderResponse
-     */
-    mmp?: boolean;
-    /**
-     *
-     * @type {string}
-     * @memberof NewOrderResponse
-     */
-    executedQty?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof NewOrderResponse
-     */
-    fee?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof NewOrderResponse
-     */
-    timeInForce?: string;
     /**
      *
      * @type {number | bigint}
@@ -121,6 +97,12 @@ export interface NewOrderResponse {
      * @memberof NewOrderResponse
      */
     avgPrice?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    source?: string;
     /**
      *
      * @type {string}
@@ -151,4 +133,10 @@ export interface NewOrderResponse {
      * @memberof NewOrderResponse
      */
     quoteAsset?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof NewOrderResponse
+     */
+    mmp?: boolean;
 }

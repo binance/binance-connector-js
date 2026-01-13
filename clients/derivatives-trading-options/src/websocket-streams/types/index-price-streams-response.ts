@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 
 /**
  * Binance Derivatives Trading Options WebSocket Market Streams
@@ -13,34 +14,13 @@
  * Do not edit the class manually.
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { IndexPriceStreamsResponseInner } from './index-price-streams-response-inner';
+
 /**
  *
  * @export
  * @interface IndexPriceStreamsResponse
  */
-export interface IndexPriceStreamsResponse {
-    /**
-     *
-     * @type {string}
-     * @memberof IndexPriceStreamsResponse
-     */
-    e?: string;
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof IndexPriceStreamsResponse
-     */
-    E?: number | bigint;
-    /**
-     *
-     * @type {string}
-     * @memberof IndexPriceStreamsResponse
-     */
-    s?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof IndexPriceStreamsResponse
-     */
-    p?: string;
-}
+export interface IndexPriceStreamsResponse extends Array<IndexPriceStreamsResponseInner> {}

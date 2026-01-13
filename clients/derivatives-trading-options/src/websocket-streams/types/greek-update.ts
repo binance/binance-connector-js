@@ -16,12 +16,30 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Ticker24HourByUnderlyingAssetAndExpirationDataResponseInner } from './ticker24-hour-by-underlying-asset-and-expiration-data-response-inner';
+import type { GreekUpdateGInner } from './greek-update-ginner';
 
 /**
  *
  * @export
- * @interface Ticker24HourByUnderlyingAssetAndExpirationDataResponse
+ * @interface GreekUpdate
  */
-export interface Ticker24HourByUnderlyingAssetAndExpirationDataResponse
-    extends Array<Ticker24HourByUnderlyingAssetAndExpirationDataResponseInner> {}
+export interface GreekUpdate {
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof GreekUpdate
+     */
+    E?: number | bigint;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof GreekUpdate
+     */
+    T?: number | bigint;
+    /**
+     *
+     * @type {Array<GreekUpdateGInner>}
+     * @memberof GreekUpdate
+     */
+    G?: Array<GreekUpdateGInner>;
+}

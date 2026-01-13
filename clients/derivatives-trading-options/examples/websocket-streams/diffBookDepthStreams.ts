@@ -8,15 +8,14 @@ const configurationWebsocketStreams = {
 };
 const client = new DerivativesTradingOptions({ configurationWebsocketStreams });
 
-async function ticker24HourByUnderlyingAssetAndExpirationData() {
+async function diffBookDepthStreams() {
     let connection;
 
     try {
         connection = await client.websocketStreams.connect();
 
-        const stream = connection.ticker24HourByUnderlyingAssetAndExpirationData({
-            underlyingAsset: 'ETH',
-            expirationDate: '220930',
+        const stream = connection.diffBookDepthStreams({
+            symbol: 'btcusdt',
         });
 
         stream.on('message', (data) => {
@@ -30,4 +29,4 @@ async function ticker24HourByUnderlyingAssetAndExpirationData() {
     }
 }
 
-ticker24HourByUnderlyingAssetAndExpirationData();
+diffBookDepthStreams();

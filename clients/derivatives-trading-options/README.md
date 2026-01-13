@@ -143,6 +143,21 @@ The REST API provides detailed error types to help you handle issues effectively
 
 See the [Error Handling example](./docs/rest-api/error-handling.md) for detailed usage.
 
+#### Testnet
+
+For testing purposes, `/eapi/*` endpoints can be used in the [Futures Testnet](https://testnet.binancefuture.com/). Update the `basePath` in your configuration:
+
+```typescript
+import { DerivativesTradingOptions, DERIVATIVES_TRADING_OPTIONS_REST_API_TESTNET_URL } from '@binance/derivatives-trading-options';
+
+const configurationRestAPI = {
+    apiKey: 'your-api-key',
+    apiSecret: 'your-api-secret',
+    basePath: DERIVATIVES_TRADING_OPTIONS_REST_API_TESTNET_URL,
+};
+const client = new DerivativesTradingOptions({ configurationRestAPI });
+```
+
 If `basePath` is not provided, it defaults to `https://eapi.binance.com`.
 
 ### Websocket Streams
@@ -258,6 +273,19 @@ client.websocketStreams
         }, 10000);
     })
     .catch((err) => console.error(err));
+```
+
+#### Testnet
+
+Websocket Streams also support a testnet environment for development and testing. Update the `wsURL` in your configuration:
+
+```typescript
+import { DerivativesTradingOptions, DERIVATIVES_TRADING_OPTIONS_WS_STREAMS_TESTNET_URL } from '@binance/derivatives-trading-options';
+
+const configurationWebsocketStreams = {
+    wsURL: DERIVATIVES_TRADING_OPTIONS_WS_STREAMS_TESTNET_URL,
+};
+const client = new DerivativesTradingOptions({ configurationWebsocketStreams });
 ```
 
 If `wsURL` is not provided, it defaults to `wss://nbstream.binance.com/eoptions`.

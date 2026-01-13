@@ -15,7 +15,7 @@ async function markPrice() {
         connection = await client.websocketStreams.connect();
 
         const stream = connection.markPrice({
-            underlyingAsset: 'ETH',
+            underlying: 'btcusdt',
         });
 
         stream.on('message', (data) => {

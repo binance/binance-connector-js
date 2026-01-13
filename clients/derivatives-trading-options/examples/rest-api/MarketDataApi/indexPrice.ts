@@ -10,18 +10,20 @@ const configurationRestAPI = {
 };
 const client = new DerivativesTradingOptions({ configurationRestAPI });
 
-async function optionAccountInformation() {
+async function indexPrice() {
     try {
-        const response = await client.restAPI.optionAccountInformation();
+        const response = await client.restAPI.indexPrice({
+            underlying: 'underlying_example',
+        });
 
         const rateLimits = response.rateLimits!;
-        console.log('optionAccountInformation() rate limits:', rateLimits);
+        console.log('indexPrice() rate limits:', rateLimits);
 
         const data = await response.data();
-        console.log('optionAccountInformation() response:', data);
+        console.log('indexPrice() response:', data);
     } catch (error) {
-        console.error('optionAccountInformation() error:', error);
+        console.error('indexPrice() error:', error);
     }
 }
 
-optionAccountInformation();
+indexPrice();

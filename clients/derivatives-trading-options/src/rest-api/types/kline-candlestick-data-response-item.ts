@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 
 /**
  * Binance Derivatives Trading Options REST API
@@ -13,22 +14,14 @@
  * Do not edit the class manually.
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { KlineCandlestickDataResponseItemInner } from './kline-candlestick-data-response-item-inner';
+
 /**
  *
  * @export
- * @interface IndexPriceTickerResponse
+ * @interface KlineCandlestickDataResponseItem
  */
-export interface IndexPriceTickerResponse {
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof IndexPriceTickerResponse
-     */
-    time?: number | bigint;
-    /**
-     *
-     * @type {string}
-     * @memberof IndexPriceTickerResponse
-     */
-    indexPrice?: string;
-}
+export interface KlineCandlestickDataResponseItem
+    extends Array<KlineCandlestickDataResponseItemInner> {}

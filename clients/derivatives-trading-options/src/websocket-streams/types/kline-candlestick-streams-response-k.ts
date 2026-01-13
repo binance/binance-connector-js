@@ -48,7 +48,7 @@ export interface KlineCandlestickStreamsResponseK {
      * @type {number | bigint}
      * @memberof KlineCandlestickStreamsResponseK
      */
-    F?: number | bigint;
+    f?: number | bigint;
     /**
      *
      * @type {number | bigint}

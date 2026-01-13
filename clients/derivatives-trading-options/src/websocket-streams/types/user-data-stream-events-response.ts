@@ -17,22 +17,28 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountUpdate } from './account-update';
+import type { BalancePositionUpdate } from './balance-position-update';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountUpdateBInner } from './account-update-binner';
+import type { BalancePositionUpdateBInner } from './balance-position-update-binner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountUpdateGInner } from './account-update-ginner';
+import type { BalancePositionUpdatePInner } from './balance-position-update-pinner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountUpdatePInner } from './account-update-pinner';
+import type { GreekUpdate } from './greek-update';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { GreekUpdateGInner } from './greek-update-ginner';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { Listenkeyexpired } from './listenkeyexpired';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { OrderTradeUpdate } from './order-trade-update';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderTradeUpdateOInner } from './order-trade-update-oinner';
+import type { OrderTradeUpdateO } from './order-trade-update-o';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { RiskLevelChange } from './risk-level-change';
@@ -42,6 +48,8 @@ import type { RiskLevelChange } from './risk-level-change';
  * @export
  */
 export type UserDataStreamEventsResponse =
-    | ({ e: 'ACCOUNT_UPDATE' } & AccountUpdate)
+    | ({ e: 'BALANCE_POSITION_UPDATE' } & BalancePositionUpdate)
+    | ({ e: 'GREEK_UPDATE' } & GreekUpdate)
     | ({ e: 'ORDER_TRADE_UPDATE' } & OrderTradeUpdate)
-    | ({ e: 'RISK_LEVEL_CHANGE' } & RiskLevelChange);
+    | ({ e: 'RISK_LEVEL_CHANGE' } & RiskLevelChange)
+    | ({ e: 'listenKeyExpired' } & Listenkeyexpired);

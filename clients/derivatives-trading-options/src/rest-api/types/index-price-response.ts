@@ -1,5 +1,4 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
  * Binance Derivatives Trading Options REST API
@@ -14,13 +13,22 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { OldTradesLookupResponseInner } from './old-trades-lookup-response-inner';
-
 /**
  *
  * @export
- * @interface OldTradesLookupResponse
+ * @interface IndexPriceResponse
  */
-export interface OldTradesLookupResponse extends Array<OldTradesLookupResponseInner> {}
+export interface IndexPriceResponse {
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof IndexPriceResponse
+     */
+    time?: number | bigint;
+    /**
+     *
+     * @type {string}
+     * @memberof IndexPriceResponse
+     */
+    indexPrice?: string;
+}

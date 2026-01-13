@@ -10,20 +10,18 @@ const configurationRestAPI = {
 };
 const client = new DerivativesTradingOptions({ configurationRestAPI });
 
-async function indexPriceTicker() {
+async function userCommission() {
     try {
-        const response = await client.restAPI.indexPriceTicker({
-            underlying: 'underlying_example',
-        });
+        const response = await client.restAPI.userCommission();
 
         const rateLimits = response.rateLimits!;
-        console.log('indexPriceTicker() rate limits:', rateLimits);
+        console.log('userCommission() rate limits:', rateLimits);
 
         const data = await response.data();
-        console.log('indexPriceTicker() response:', data);
+        console.log('userCommission() response:', data);
     } catch (error) {
-        console.error('indexPriceTicker() error:', error);
+        console.error('userCommission() error:', error);
     }
 }
 
-indexPriceTicker();
+userCommission();

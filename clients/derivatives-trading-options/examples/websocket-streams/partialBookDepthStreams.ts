@@ -16,7 +16,7 @@ async function partialBookDepthStreams() {
 
         const stream = connection.partialBookDepthStreams({
             symbol: 'btcusdt',
-            levels: 10,
+            level: 'example_value',
         });
 
         stream.on('message', (data) => {

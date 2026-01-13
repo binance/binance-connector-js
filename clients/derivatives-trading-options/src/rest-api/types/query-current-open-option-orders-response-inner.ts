@@ -54,12 +54,6 @@ export interface QueryCurrentOpenOptionOrdersResponseInner {
      * @type {string}
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
-    fee?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryCurrentOpenOptionOrdersResponseInner
-     */
     side?: string;
     /**
      *
@@ -79,12 +73,6 @@ export interface QueryCurrentOpenOptionOrdersResponseInner {
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
     reduceOnly?: boolean;
-    /**
-     *
-     * @type {boolean}
-     * @memberof QueryCurrentOpenOptionOrdersResponseInner
-     */
-    postOnly?: boolean;
     /**
      *
      * @type {number | bigint}

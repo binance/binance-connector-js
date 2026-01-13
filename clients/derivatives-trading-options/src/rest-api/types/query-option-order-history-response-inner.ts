@@ -54,12 +54,6 @@ export interface QueryOptionOrderHistoryResponseInner {
      * @type {string}
      * @memberof QueryOptionOrderHistoryResponseInner
      */
-    fee?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryOptionOrderHistoryResponseInner
-     */
     side?: string;
     /**
      *
@@ -79,12 +73,6 @@ export interface QueryOptionOrderHistoryResponseInner {
      * @memberof QueryOptionOrderHistoryResponseInner
      */
     reduceOnly?: boolean;
-    /**
-     *
-     * @type {boolean}
-     * @memberof QueryOptionOrderHistoryResponseInner
-     */
-    postOnly?: boolean;
     /**
      *
      * @type {number | bigint}
@@ -108,19 +96,7 @@ export interface QueryOptionOrderHistoryResponseInner {
      * @type {string}
      * @memberof QueryOptionOrderHistoryResponseInner
      */
-    reason?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryOptionOrderHistoryResponseInner
-     */
     avgPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryOptionOrderHistoryResponseInner
-     */
-    source?: string;
     /**
      *
      * @type {string}

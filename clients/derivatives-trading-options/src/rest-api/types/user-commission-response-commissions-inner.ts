@@ -16,19 +16,25 @@
 /**
  *
  * @export
- * @interface GetDownloadIdForOptionTransactionHistoryResponse
+ * @interface UserCommissionResponseCommissionsInner
  */
-export interface GetDownloadIdForOptionTransactionHistoryResponse {
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof GetDownloadIdForOptionTransactionHistoryResponse
-     */
-    avgCostTimestampOfLast30d?: number | bigint;
+export interface UserCommissionResponseCommissionsInner {
     /**
      *
      * @type {string}
-     * @memberof GetDownloadIdForOptionTransactionHistoryResponse
+     * @memberof UserCommissionResponseCommissionsInner
      */
-    downloadId?: string;
+    underlying?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof UserCommissionResponseCommissionsInner
+     */
+    makerFee?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof UserCommissionResponseCommissionsInner
+     */
+    takerFee?: string;
 }

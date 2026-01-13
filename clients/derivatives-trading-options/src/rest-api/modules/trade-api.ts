@@ -32,6 +32,7 @@ import type {
     QueryCurrentOpenOptionOrdersResponse,
     QueryOptionOrderHistoryResponse,
     QuerySingleOrderResponse,
+    UserCommissionResponse,
     UserExerciseRecordResponse,
 } from '../types';
 
@@ -47,7 +48,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Account Trade List (USER_DATA)
          * @param {string} [symbol] Option trading pair, e.g BTC-200730-9000-C
-         * @param {number | bigint} [fromId] The UniqueId ID from which to return. The latest deal record is returned by default
+         * @param {number | bigint} [fromId] Trade id to fetch from. Default gets most recent trades, e.g 4611875134427365376
          * @param {number | bigint} [startTime] Start Time, e.g 1593511200000
          * @param {number | bigint} [endTime] End Time, e.g 1593512200000
          * @param {number | bigint} [limit] Number of result sets returned Default:100 Max:1000
@@ -178,7 +179,6 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Cancel multiple orders.
          *
          * At least one instance of `orderId` and `clientOrderId` must be sent.
-         * Max 10 orders can be deleted in one request
          *
          * Weight: 1
          *
@@ -618,6 +618,35 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
+         * Get account commission.
+         *
+         * Weight: 5
+         *
+         * @summary User Commission (USER_DATA)
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        userCommission: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/eapi/v1/commission',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Get account exercise records.
          *
          * Weight: 5
@@ -722,7 +751,6 @@ export interface TradeApiInterface {
      * Cancel multiple orders.
      *
      * At least one instance of `orderId` and `clientOrderId` must be sent.
-     * Max 10 orders can be deleted in one request
      *
      * Weight: 1
      *
@@ -845,6 +873,20 @@ export interface TradeApiInterface {
         requestParameters: QuerySingleOrderRequest
     ): Promise<RestApiResponse<QuerySingleOrderResponse>>;
     /**
+     * Get account commission.
+     *
+     * Weight: 5
+     *
+     * @summary User Commission (USER_DATA)
+     * @param {UserCommissionRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApiInterface
+     */
+    userCommission(
+        requestParameters?: UserCommissionRequest
+    ): Promise<RestApiResponse<UserCommissionResponse>>;
+    /**
      * Get account exercise records.
      *
      * Weight: 5
@@ -873,7 +915,7 @@ export interface AccountTradeListRequest {
     readonly symbol?: string;
 
     /**
-     * The UniqueId ID from which to return. The latest deal record is returned by default
+     * Trade id to fetch from. Default gets most recent trades, e.g 4611875134427365376
      * @type {number | bigint}
      * @memberof TradeApiAccountTradeList
      */
@@ -1058,7 +1100,7 @@ export interface NewOrderRequest {
 
     /**
      * Time in force method（Default GTC）
-     * @type {'GTC' | 'IOC' | 'FOK'}
+     * @type {'GTC' | 'IOC' | 'FOK' | 'GTX'}
      * @memberof TradeApiNewOrder
      */
     readonly timeInForce?: NewOrderTimeInForceEnum;
@@ -1270,6 +1312,19 @@ export interface QuerySingleOrderRequest {
 }
 
 /**
+ * Request parameters for userCommission operation in TradeApi.
+ * @interface UserCommissionRequest
+ */
+export interface UserCommissionRequest {
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof TradeApiUserCommission
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
  * Request parameters for userExerciseRecord operation in TradeApi.
  * @interface UserExerciseRecordRequest
  */
@@ -1333,7 +1388,7 @@ export class TradeApi implements TradeApiInterface {
      * @returns {Promise<RestApiResponse<AccountTradeListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/trade/Account-Trade-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Account-Trade-List Binance API Documentation}
      */
     public async accountTradeList(
         requestParameters: AccountTradeListRequest = {}
@@ -1367,7 +1422,7 @@ export class TradeApi implements TradeApiInterface {
      * @returns {Promise<RestApiResponse<CancelAllOptionOrdersByUnderlyingResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/trade/Cancel-All-Option-Orders-By-Underlying Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Cancel-All-Option-Orders-By-Underlying Binance API Documentation}
      */
     public async cancelAllOptionOrdersByUnderlying(
         requestParameters: CancelAllOptionOrdersByUnderlyingRequest
@@ -1398,7 +1453,7 @@ export class TradeApi implements TradeApiInterface {
      * @returns {Promise<RestApiResponse<CancelAllOptionOrdersOnSpecificSymbolResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/trade/Cancel-all-Option-orders-on-specific-symbol Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Cancel-all-Option-orders-on-specific-symbol Binance API Documentation}
      */
     public async cancelAllOptionOrdersOnSpecificSymbol(
         requestParameters: CancelAllOptionOrdersOnSpecificSymbolRequest
@@ -1423,7 +1478,6 @@ export class TradeApi implements TradeApiInterface {
      * Cancel multiple orders.
      *
      * At least one instance of `orderId` and `clientOrderId` must be sent.
-     * Max 10 orders can be deleted in one request
      *
      * Weight: 1
      *
@@ -1432,7 +1486,7 @@ export class TradeApi implements TradeApiInterface {
      * @returns {Promise<RestApiResponse<CancelMultipleOptionOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/trade/Cancel-Multiple-Option-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Cancel-Multiple-Option-Orders Binance API Documentation}
      */
     public async cancelMultipleOptionOrders(
         requestParameters: CancelMultipleOptionOrdersRequest
@@ -1466,7 +1520,7 @@ export class TradeApi implements TradeApiInterface {
      * @returns {Promise<RestApiResponse<CancelOptionOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/trade/Cancel-Option-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Cancel-Option-Order Binance API Documentation}
      */
     public async cancelOptionOrder(
         requestParameters: CancelOptionOrderRequest
@@ -1498,7 +1552,7 @@ export class TradeApi implements TradeApiInterface {
      * @returns {Promise<RestApiResponse<NewOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/trade/New-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/New-Order Binance API Documentation}
      */
     public async newOrder(
         requestParameters: NewOrderRequest
@@ -1538,7 +1592,7 @@ export class TradeApi implements TradeApiInterface {
      * @returns {Promise<RestApiResponse<OptionPositionInformationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/trade/Option-Position-Information Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Option-Position-Information Binance API Documentation}
      */
     public async optionPositionInformation(
         requestParameters: OptionPositionInformationRequest = {}
@@ -1571,7 +1625,7 @@ export class TradeApi implements TradeApiInterface {
      * @returns {Promise<RestApiResponse<PlaceMultipleOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/trade/Place-Multiple-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Place-Multiple-Orders Binance API Documentation}
      */
     public async placeMultipleOrders(
         requestParameters: PlaceMultipleOrdersRequest
@@ -1601,7 +1655,7 @@ export class TradeApi implements TradeApiInterface {
      * @returns {Promise<RestApiResponse<QueryCurrentOpenOptionOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/trade/Query-Current-Open-Option-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Query-Current-Open-Option-Orders Binance API Documentation}
      */
     public async queryCurrentOpenOptionOrders(
         requestParameters: QueryCurrentOpenOptionOrdersRequest = {}
@@ -1634,7 +1688,7 @@ export class TradeApi implements TradeApiInterface {
      * @returns {Promise<RestApiResponse<QueryOptionOrderHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/trade/Query-Option-Order-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Query-Option-Order-History Binance API Documentation}
      */
     public async queryOptionOrderHistory(
         requestParameters: QueryOptionOrderHistoryRequest
@@ -1676,7 +1730,7 @@ export class TradeApi implements TradeApiInterface {
      * @returns {Promise<RestApiResponse<QuerySingleOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/trade/Query-Single-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/Query-Single-Order Binance API Documentation}
      */
     public async querySingleOrder(
         requestParameters: QuerySingleOrderRequest
@@ -1699,6 +1753,35 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
+     * Get account commission.
+     *
+     * Weight: 5
+     *
+     * @summary User Commission (USER_DATA)
+     * @param {UserCommissionRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<UserCommissionResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApi
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/User-Commission Binance API Documentation}
+     */
+    public async userCommission(
+        requestParameters: UserCommissionRequest = {}
+    ): Promise<RestApiResponse<UserCommissionResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.userCommission(
+            requestParameters?.recvWindow
+        );
+        return sendRequest<UserCommissionResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
      * Get account exercise records.
      *
      * Weight: 5
@@ -1708,7 +1791,7 @@ export class TradeApi implements TradeApiInterface {
      * @returns {Promise<RestApiResponse<UserExerciseRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/trade/User-Exercise-Record Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/trade/User-Exercise-Record Binance API Documentation}
      */
     public async userExerciseRecord(
         requestParameters: UserExerciseRecordRequest = {}
@@ -1745,6 +1828,7 @@ export enum NewOrderTimeInForceEnum {
     GTC = 'GTC',
     IOC = 'IOC',
     FOK = 'FOK',
+    GTX = 'GTX',
 }
 
 export enum NewOrderNewOrderRespTypeEnum {

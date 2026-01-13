@@ -39,11 +39,15 @@ export class WebsocketStreams {
         mode?: 'single' | 'pool';
         poolSize?: number;
     } = {}): Promise<WebsocketStreamsConnection> {
-        const websocketBase = new WebsocketStreamsBase({
-            ...this.configuration,
-            ...(mode && { mode }),
-            ...(poolSize && { poolSize }),
-        });
+        const websocketBase = new WebsocketStreamsBase(
+            {
+                ...this.configuration,
+                ...(mode && { mode }),
+                ...(poolSize && { poolSize }),
+            },
+            [],
+            ['market', 'public', 'private']
+        );
         websocketBase.streamIdIsStrictlyNumber = true;
         const websocketStreamsConnection = new WebsocketStreamsConnection(websocketBase);
         await websocketBase.connect(stream);

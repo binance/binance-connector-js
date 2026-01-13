@@ -578,7 +578,7 @@ export class MarketMakerEndpointsApi implements MarketMakerEndpointsApiInterface
      * @returns {Promise<RestApiResponse<AutoCancelAllOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerEndpointsApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-maker-endpoints/Auto-Cancel-All-Open-Orders-Heartbeat Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-endpoints/Auto-Cancel-All-Open-Orders-Heartbeat Binance API Documentation}
      */
     public async autoCancelAllOpenOrders(
         requestParameters: AutoCancelAllOpenOrdersRequest
@@ -610,7 +610,7 @@ export class MarketMakerEndpointsApi implements MarketMakerEndpointsApiInterface
      * @returns {Promise<RestApiResponse<GetAutoCancelAllOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerEndpointsApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-maker-endpoints/Get-Auto-Cancel-All-Open-Orders-Config Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-endpoints/Get-Auto-Cancel-All-Open-Orders-Config Binance API Documentation}
      */
     public async getAutoCancelAllOpenOrders(
         requestParameters: GetAutoCancelAllOpenOrdersRequest = {}
@@ -640,7 +640,7 @@ export class MarketMakerEndpointsApi implements MarketMakerEndpointsApiInterface
      * @returns {Promise<RestApiResponse<GetMarketMakerProtectionConfigResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerEndpointsApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-maker-endpoints/Get-Market-Maker-Protection-Config Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-endpoints/Get-Market-Maker-Protection-Config Binance API Documentation}
      */
     public async getMarketMakerProtectionConfig(
         requestParameters: GetMarketMakerProtectionConfigRequest = {}
@@ -671,7 +671,7 @@ export class MarketMakerEndpointsApi implements MarketMakerEndpointsApiInterface
      * @returns {Promise<RestApiResponse<ResetMarketMakerProtectionConfigResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerEndpointsApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-maker-endpoints/Reset-Market-Maker-Protection-Config Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-endpoints/Reset-Market-Maker-Protection-Config Binance API Documentation}
      */
     public async resetMarketMakerProtectionConfig(
         requestParameters: ResetMarketMakerProtectionConfigRequest = {}
@@ -708,7 +708,7 @@ export class MarketMakerEndpointsApi implements MarketMakerEndpointsApiInterface
      * @returns {Promise<RestApiResponse<SetAutoCancelAllOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerEndpointsApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-maker-endpoints/Set-Auto-Cancel-All-Open-Orders-Config Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-endpoints/Set-Auto-Cancel-All-Open-Orders-Config Binance API Documentation}
      */
     public async setAutoCancelAllOpenOrders(
         requestParameters: SetAutoCancelAllOpenOrdersRequest
@@ -740,7 +740,7 @@ export class MarketMakerEndpointsApi implements MarketMakerEndpointsApiInterface
      * @returns {Promise<RestApiResponse<SetMarketMakerProtectionConfigResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerEndpointsApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-maker-endpoints/Set-Market-Maker-Protection-Config Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-endpoints/Set-Market-Maker-Protection-Config Binance API Documentation}
      */
     public async setMarketMakerProtectionConfig(
         requestParameters: SetMarketMakerProtectionConfigRequest = {}

@@ -16,37 +16,19 @@
 /**
  *
  * @export
- * @interface AccountUpdateGInner
+ * @interface Listenkeyexpired
  */
-export interface AccountUpdateGInner {
+export interface Listenkeyexpired {
     /**
      *
      * @type {string}
-     * @memberof AccountUpdateGInner
+     * @memberof Listenkeyexpired
      */
-    ui?: string;
+    E?: string;
     /**
      *
-     * @type {number}
-     * @memberof AccountUpdateGInner
+     * @type {string}
+     * @memberof Listenkeyexpired
      */
-    d?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof AccountUpdateGInner
-     */
-    t?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof AccountUpdateGInner
-     */
-    g?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof AccountUpdateGInner
-     */
-    v?: number;
+    listenKey?: string;
 }

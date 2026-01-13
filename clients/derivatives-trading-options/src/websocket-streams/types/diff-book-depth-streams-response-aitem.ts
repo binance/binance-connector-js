@@ -1,3 +1,6 @@
+/* tslint:disable */
+/* eslint-disable */
+
 /**
  * Binance Derivatives Trading Options WebSocket Market Streams
  *
@@ -11,5 +14,9 @@
  * Do not edit the class manually.
  */
 
-export * from './market-api';
-export * from './public-api';
+/**
+ *
+ * @export
+ * @interface DiffBookDepthStreamsResponseAItem
+ */
+export interface DiffBookDepthStreamsResponseAItem extends Array<string> {}

@@ -54,12 +54,6 @@ export interface QuerySingleOrderResponse {
      * @type {string}
      * @memberof QuerySingleOrderResponse
      */
-    fee?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QuerySingleOrderResponse
-     */
     side?: string;
     /**
      *
@@ -79,12 +73,6 @@ export interface QuerySingleOrderResponse {
      * @memberof QuerySingleOrderResponse
      */
     reduceOnly?: boolean;
-    /**
-     *
-     * @type {boolean}
-     * @memberof QuerySingleOrderResponse
-     */
-    postOnly?: boolean;
     /**
      *
      * @type {number | bigint}
@@ -109,12 +97,6 @@ export interface QuerySingleOrderResponse {
      * @memberof QuerySingleOrderResponse
      */
     avgPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QuerySingleOrderResponse
-     */
-    source?: string;
     /**
      *
      * @type {string}

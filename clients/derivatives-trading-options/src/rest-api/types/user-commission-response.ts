@@ -16,11 +16,18 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { KlineCandlestickDataResponseItem } from './kline-candlestick-data-response-item';
+import type { UserCommissionResponseCommissionsInner } from './user-commission-response-commissions-inner';
 
 /**
  *
  * @export
- * @interface KlineCandlestickDataResponse
+ * @interface UserCommissionResponse
  */
-export interface KlineCandlestickDataResponse extends Array<KlineCandlestickDataResponseItem> {}
+export interface UserCommissionResponse {
+    /**
+     *
+     * @type {Array<UserCommissionResponseCommissionsInner>}
+     * @memberof UserCommissionResponse
+     */
+    commissions?: Array<UserCommissionResponseCommissionsInner>;
+}

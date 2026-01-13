@@ -16,73 +16,61 @@
 /**
  *
  * @export
- * @interface NewSymbolInfoResponse
+ * @interface IndividualSymbolBookTickerStreamsResponse
  */
-export interface NewSymbolInfoResponse {
+export interface IndividualSymbolBookTickerStreamsResponse {
     /**
      *
      * @type {string}
-     * @memberof NewSymbolInfoResponse
+     * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     e?: string;
     /**
      *
      * @type {number | bigint}
-     * @memberof NewSymbolInfoResponse
+     * @memberof IndividualSymbolBookTickerStreamsResponse
      */
-    E?: number | bigint;
+    u?: number | bigint;
     /**
      *
      * @type {string}
-     * @memberof NewSymbolInfoResponse
+     * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     s?: string;
     /**
      *
      * @type {string}
-     * @memberof NewSymbolInfoResponse
+     * @memberof IndividualSymbolBookTickerStreamsResponse
      */
-    ps?: string;
+    b?: string;
     /**
      *
      * @type {string}
-     * @memberof NewSymbolInfoResponse
+     * @memberof IndividualSymbolBookTickerStreamsResponse
      */
-    qa?: string;
+    B?: string;
     /**
      *
      * @type {string}
-     * @memberof NewSymbolInfoResponse
+     * @memberof IndividualSymbolBookTickerStreamsResponse
      */
-    d?: string;
+    a?: string;
     /**
      *
      * @type {string}
-     * @memberof NewSymbolInfoResponse
+     * @memberof IndividualSymbolBookTickerStreamsResponse
      */
-    sp?: string;
+    A?: string;
     /**
      *
      * @type {number | bigint}
-     * @memberof NewSymbolInfoResponse
+     * @memberof IndividualSymbolBookTickerStreamsResponse
      */
-    dt?: number | bigint;
+    T?: number | bigint;
     /**
      *
      * @type {number | bigint}
-     * @memberof NewSymbolInfoResponse
+     * @memberof IndividualSymbolBookTickerStreamsResponse
      */
-    u?: number | bigint;
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof NewSymbolInfoResponse
-     */
-    ot?: number | bigint;
-    /**
-     *
-     * @type {string}
-     * @memberof NewSymbolInfoResponse
-     */
-    cs?: string;
+    E?: number | bigint;
 }

@@ -51,12 +51,6 @@ export interface CancelMultipleOptionOrdersResponseInner {
     executedQty?: string;
     /**
      *
-     * @type {number | bigint}
-     * @memberof CancelMultipleOptionOrdersResponseInner
-     */
-    fee?: number | bigint;
-    /**
-     *
      * @type {string}
      * @memberof CancelMultipleOptionOrdersResponseInner
      */
@@ -75,10 +69,22 @@ export interface CancelMultipleOptionOrdersResponseInner {
     timeInForce?: string;
     /**
      *
+     * @type {boolean}
+     * @memberof CancelMultipleOptionOrdersResponseInner
+     */
+    reduceOnly?: boolean;
+    /**
+     *
      * @type {number | bigint}
      * @memberof CancelMultipleOptionOrdersResponseInner
      */
     createTime?: number | bigint;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof CancelMultipleOptionOrdersResponseInner
+     */
+    updateTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -93,10 +99,10 @@ export interface CancelMultipleOptionOrdersResponseInner {
     avgPrice?: string;
     /**
      *
-     * @type {boolean}
+     * @type {string}
      * @memberof CancelMultipleOptionOrdersResponseInner
      */
-    reduceOnly?: boolean;
+    source?: string;
     /**
      *
      * @type {string}
@@ -108,5 +114,29 @@ export interface CancelMultipleOptionOrdersResponseInner {
      * @type {number | bigint}
      * @memberof CancelMultipleOptionOrdersResponseInner
      */
-    updateTime?: number | bigint;
+    priceScale?: number | bigint;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof CancelMultipleOptionOrdersResponseInner
+     */
+    quantityScale?: number | bigint;
+    /**
+     *
+     * @type {string}
+     * @memberof CancelMultipleOptionOrdersResponseInner
+     */
+    optionSide?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CancelMultipleOptionOrdersResponseInner
+     */
+    quoteAsset?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof CancelMultipleOptionOrdersResponseInner
+     */
+    mmp?: boolean;
 }

@@ -48,6 +48,12 @@ export interface PlaceMultipleOrdersResponseInner {
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
+    executedQty?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof PlaceMultipleOrdersResponseInner
+     */
     side?: string;
     /**
      *
@@ -57,22 +63,76 @@ export interface PlaceMultipleOrdersResponseInner {
     type?: string;
     /**
      *
+     * @type {string}
+     * @memberof PlaceMultipleOrdersResponseInner
+     */
+    timeInForce?: string;
+    /**
+     *
      * @type {boolean}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     reduceOnly?: boolean;
     /**
      *
-     * @type {boolean}
+     * @type {number | bigint}
      * @memberof PlaceMultipleOrdersResponseInner
      */
-    postOnly?: boolean;
+    createTime?: number | bigint;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof PlaceMultipleOrdersResponseInner
+     */
+    updateTime?: number | bigint;
+    /**
+     *
+     * @type {string}
+     * @memberof PlaceMultipleOrdersResponseInner
+     */
+    status?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof PlaceMultipleOrdersResponseInner
+     */
+    avgPrice?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof PlaceMultipleOrdersResponseInner
+     */
+    source?: string;
     /**
      *
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     clientOrderId?: string;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof PlaceMultipleOrdersResponseInner
+     */
+    priceScale?: number | bigint;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof PlaceMultipleOrdersResponseInner
+     */
+    quantityScale?: number | bigint;
+    /**
+     *
+     * @type {string}
+     * @memberof PlaceMultipleOrdersResponseInner
+     */
+    optionSide?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof PlaceMultipleOrdersResponseInner
+     */
+    quoteAsset?: string;
     /**
      *
      * @type {boolean}

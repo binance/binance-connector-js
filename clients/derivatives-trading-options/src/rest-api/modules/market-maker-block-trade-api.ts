@@ -661,7 +661,7 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
      * @returns {Promise<RestApiResponse<AcceptBlockTradeOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerBlockTradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-maker-block-trade/Accept-Block-Trade-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-block-trade/Accept-Block-Trade-Order Binance API Documentation}
      */
     public async acceptBlockTradeOrder(
         requestParameters: AcceptBlockTradeOrderRequest
@@ -691,7 +691,7 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
      * @returns {Promise<RestApiResponse<AccountBlockTradeListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerBlockTradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-maker-block-trade/Account-Block-Trade-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-block-trade/Account-Block-Trade-List Binance API Documentation}
      */
     public async accountBlockTradeList(
         requestParameters: AccountBlockTradeListRequest = {}
@@ -723,7 +723,7 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerBlockTradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-maker-block-trade/Cancel-Block-Trade-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-block-trade/Cancel-Block-Trade-Order Binance API Documentation}
      */
     public async cancelBlockTradeOrder(
         requestParameters: CancelBlockTradeOrderRequest
@@ -753,7 +753,7 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
      * @returns {Promise<RestApiResponse<ExtendBlockTradeOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerBlockTradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-maker-block-trade/Extend-Block-Trade-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-block-trade/Extend-Block-Trade-Order Binance API Documentation}
      */
     public async extendBlockTradeOrder(
         requestParameters: ExtendBlockTradeOrderRequest
@@ -783,7 +783,7 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
      * @returns {Promise<RestApiResponse<NewBlockTradeOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerBlockTradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-maker-block-trade/New-Block-Trade-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-block-trade/New-Block-Trade-Order Binance API Documentation}
      */
     public async newBlockTradeOrder(
         requestParameters: NewBlockTradeOrderRequest
@@ -814,7 +814,7 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
      * @returns {Promise<RestApiResponse<QueryBlockTradeDetailsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerBlockTradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-maker-block-trade/Query-Block-Trade-Detail Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-block-trade/Query-Block-Trade-Detail Binance API Documentation}
      */
     public async queryBlockTradeDetails(
         requestParameters: QueryBlockTradeDetailsRequest
@@ -844,7 +844,7 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
      * @returns {Promise<RestApiResponse<QueryBlockTradeOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketMakerBlockTradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-maker-block-trade/Query-Block-Trade-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-maker-block-trade/Query-Block-Trade-Order Binance API Documentation}
      */
     public async queryBlockTradeOrder(
         requestParameters: QueryBlockTradeOrderRequest = {}

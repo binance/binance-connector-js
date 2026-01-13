@@ -1,5 +1,4 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
  * Binance Derivatives Trading Options WebSocket Market Streams
@@ -14,32 +13,34 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { OrderTradeUpdateO } from './order-trade-update-o';
-
 /**
  *
  * @export
- * @interface OrderTradeUpdate
+ * @interface BalancePositionUpdatePInner
  */
-export interface OrderTradeUpdate {
+export interface BalancePositionUpdatePInner {
     /**
      *
-     * @type {number | bigint}
-     * @memberof OrderTradeUpdate
+     * @type {string}
+     * @memberof BalancePositionUpdatePInner
      */
-    E?: number | bigint;
+    s?: string;
     /**
      *
-     * @type {number | bigint}
-     * @memberof OrderTradeUpdate
+     * @type {string}
+     * @memberof BalancePositionUpdatePInner
      */
-    T?: number | bigint;
+    c?: string;
     /**
      *
-     * @type {OrderTradeUpdateO}
-     * @memberof OrderTradeUpdate
+     * @type {string}
+     * @memberof BalancePositionUpdatePInner
      */
-    o?: OrderTradeUpdateO;
+    p?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof BalancePositionUpdatePInner
+     */
+    a?: string;
 }

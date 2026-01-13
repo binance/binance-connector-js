@@ -84,19 +84,7 @@ export interface AccountTradeListResponseInner {
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
-    volatility?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof AccountTradeListResponseInner
-     */
     liquidity?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof AccountTradeListResponseInner
-     */
-    quoteAsset?: string;
     /**
      *
      * @type {number | bigint}
@@ -121,4 +109,10 @@ export interface AccountTradeListResponseInner {
      * @memberof AccountTradeListResponseInner
      */
     optionSide?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof AccountTradeListResponseInner
+     */
+    quoteAsset?: string;
 }

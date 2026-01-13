@@ -12,7 +12,8 @@
  */
 
 import { WebsocketStreamsBase, WebsocketStream, createStreamHandler } from '@binance/common';
-import { WebsocketMarketStreamsApi } from './modules/websocket-market-streams-api';
+import { MarketApi } from './modules/market-api';
+import { PublicApi } from './modules/public-api';
 
 import type { UserDataStreamEventsResponse } from './types';
 
@@ -22,11 +23,14 @@ import type {
     MarkPriceRequest,
     NewSymbolInfoRequest,
     OpenInterestRequest,
+} from './modules/market-api';
+import type {
+    DiffBookDepthStreamsRequest,
+    IndividualSymbolBookTickerStreamsRequest,
     PartialBookDepthStreamsRequest,
     Ticker24HourRequest,
-    Ticker24HourByUnderlyingAssetAndExpirationDataRequest,
     TradeStreamsRequest,
-} from './modules/websocket-market-streams-api';
+} from './modules/public-api';
 
 import type {
     IndexPriceStreamsResponse,
@@ -34,19 +38,24 @@ import type {
     MarkPriceResponse,
     NewSymbolInfoResponse,
     OpenInterestResponse,
+} from './types';
+import type {
+    DiffBookDepthStreamsResponse,
+    IndividualSymbolBookTickerStreamsResponse,
     PartialBookDepthStreamsResponse,
     Ticker24HourResponse,
-    Ticker24HourByUnderlyingAssetAndExpirationDataResponse,
     TradeStreamsResponse,
 } from './types';
 
 export class WebsocketStreamsConnection {
     private websocketBase: WebsocketStreamsBase;
-    private websocketMarketStreamsApi: WebsocketMarketStreamsApi;
+    private marketApi: MarketApi;
+    private publicApi: PublicApi;
 
     constructor(websocketBase: WebsocketStreamsBase) {
         this.websocketBase = websocketBase;
-        this.websocketMarketStreamsApi = new WebsocketMarketStreamsApi(websocketBase);
+        this.marketApi = new MarketApi(websocketBase);
+        this.publicApi = new PublicApi(websocketBase);
     }
 
     /**
@@ -143,7 +152,12 @@ export class WebsocketStreamsConnection {
      * @returns A WebSocket stream handler for the user data stream.
      */
     userData(listenKey: string, id?: string): WebsocketStream<UserDataStreamEventsResponse> {
-        return createStreamHandler<UserDataStreamEventsResponse>(this.websocketBase, listenKey, id);
+        return createStreamHandler<UserDataStreamEventsResponse>(
+            this.websocketBase,
+            listenKey,
+            id,
+            'private'
+        );
     }
 
     /**
@@ -156,12 +170,12 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<IndexPriceStreamsResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/option/websocket-market-streams/Index-Price-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/Index-Price-Streams Binance API Documentation}
      */
     indexPriceStreams(
-        requestParameters: IndexPriceStreamsRequest
+        requestParameters: IndexPriceStreamsRequest = {}
     ): WebsocketStream<IndexPriceStreamsResponse> {
-        return this.websocketMarketStreamsApi.indexPriceStreams(requestParameters);
+        return this.marketApi.indexPriceStreams(requestParameters);
     }
 
     /**
@@ -174,16 +188,16 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<KlineCandlestickStreamsResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/option/websocket-market-streams/Kline-Candlestick-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/Kline-Candlestick-Streams Binance API Documentation}
      */
     klineCandlestickStreams(
         requestParameters: KlineCandlestickStreamsRequest
     ): WebsocketStream<KlineCandlestickStreamsResponse> {
-        return this.websocketMarketStreamsApi.klineCandlestickStreams(requestParameters);
+        return this.marketApi.klineCandlestickStreams(requestParameters);
     }
 
     /**
-     * The mark price for all option symbols on specific underlying asset. E.g.[ETH@markPrice](wss://nbstream.binance.com/eoptions/stream?streams=ETH@markPrice)
+     * The mark price for all option symbols on specific underlying asset. E.g.[btcusdt@optionMarkPrice](wss://fstream.binance.com/market/stream?streams=btcusdt@optionMarkPrice)
      *
      * Update Speed: 1000ms
      *
@@ -192,10 +206,10 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<MarkPriceResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/option/websocket-market-streams/Mark-Price Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/Mark-Price Binance API Documentation}
      */
     markPrice(requestParameters: MarkPriceRequest): WebsocketStream<MarkPriceResponse> {
-        return this.websocketMarketStreamsApi.markPrice(requestParameters);
+        return this.marketApi.markPrice(requestParameters);
     }
 
     /**
@@ -208,16 +222,16 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<NewSymbolInfoResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/option/websocket-market-streams/New-Symbol-Info Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/New-Symbol-Info Binance API Documentation}
      */
     newSymbolInfo(
         requestParameters: NewSymbolInfoRequest = {}
     ): WebsocketStream<NewSymbolInfoResponse> {
-        return this.websocketMarketStreamsApi.newSymbolInfo(requestParameters);
+        return this.marketApi.newSymbolInfo(requestParameters);
     }
 
     /**
-     * Option open interest for specific underlying asset on specific expiration date. E.g.[ETH@openInterest@221125](wss://nbstream.binance.com/eoptions/stream?streams=ETH@openInterest@221125)
+     * Option open interest for specific underlying asset on specific expiration date. E.g.[ethusdt@openInterest@221125](wss://fstream.binance.com/market/stream?streams=ethusdt@openInterest@221125)
      *
      * Update Speed: 60s
      *
@@ -226,28 +240,64 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<OpenInterestResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/option/websocket-market-streams/Open-Interest Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/Open-Interest Binance API Documentation}
      */
     openInterest(requestParameters: OpenInterestRequest): WebsocketStream<OpenInterestResponse> {
-        return this.websocketMarketStreamsApi.openInterest(requestParameters);
+        return this.marketApi.openInterest(requestParameters);
     }
 
     /**
-     * Top **<levels\>** bids and asks, Valid levels are **<levels\>** are 10, 20, 50, 100.
+     * Bids and asks, pushed every 500 milliseconds, 100 milliseconds (if existing)
      *
-     * Update Speed: 100ms or 1000ms, 500ms(default when update speed isn't used)
+     * Update Speed: 100ms or 500ms
+     *
+     * @summary Diff Book Depth Streams
+     * @param {DiffBookDepthStreamsRequest} requestParameters Request parameters.
+     *
+     * @returns {WebsocketStream<DiffBookDepthStreamsResponse>}
+     * @throws {RequiredError}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/Diff-Book-Depth-Streams Binance API Documentation}
+     */
+    diffBookDepthStreams(
+        requestParameters: DiffBookDepthStreamsRequest
+    ): WebsocketStream<DiffBookDepthStreamsResponse> {
+        return this.publicApi.diffBookDepthStreams(requestParameters);
+    }
+
+    /**
+     * Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
+     *
+     * Update Speed: Real-Time
+     *
+     * @summary Individual Symbol Book Ticker Streams
+     * @param {IndividualSymbolBookTickerStreamsRequest} requestParameters Request parameters.
+     *
+     * @returns {WebsocketStream<IndividualSymbolBookTickerStreamsResponse>}
+     * @throws {RequiredError}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/Individual-Symbol-Book-Ticker-Streams Binance API Documentation}
+     */
+    individualSymbolBookTickerStreams(
+        requestParameters: IndividualSymbolBookTickerStreamsRequest
+    ): WebsocketStream<IndividualSymbolBookTickerStreamsResponse> {
+        return this.publicApi.individualSymbolBookTickerStreams(requestParameters);
+    }
+
+    /**
+     * Top **<levels\>** bids and asks, Valid levels are **<levels\>** are 5, 10, 20.
+     *
+     * Update Speed: 100ms or 500ms
      *
      * @summary Partial Book Depth Streams
      * @param {PartialBookDepthStreamsRequest} requestParameters Request parameters.
      *
      * @returns {WebsocketStream<PartialBookDepthStreamsResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/option/websocket-market-streams/Partial-Book-Depth-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/Partial-Book-Depth-Streams Binance API Documentation}
      */
     partialBookDepthStreams(
         requestParameters: PartialBookDepthStreamsRequest
     ): WebsocketStream<PartialBookDepthStreamsResponse> {
-        return this.websocketMarketStreamsApi.partialBookDepthStreams(requestParameters);
+        return this.publicApi.partialBookDepthStreams(requestParameters);
     }
 
     /**
@@ -260,34 +310,14 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<Ticker24HourResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/option/websocket-market-streams/24-hour-TICKER Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/24-hour-TICKER Binance API Documentation}
      */
     ticker24Hour(requestParameters: Ticker24HourRequest): WebsocketStream<Ticker24HourResponse> {
-        return this.websocketMarketStreamsApi.ticker24Hour(requestParameters);
+        return this.publicApi.ticker24Hour(requestParameters);
     }
 
     /**
-     * 24hr ticker info by underlying asset and expiration date. E.g.[ETH@ticker@220930](wss://nbstream.binance.com/eoptions/stream?streams=ETH@ticker@220930)
-     *
-     * Update Speed: 1000ms
-     *
-     * @summary 24-hour TICKER by underlying asset and expiration data
-     * @param {Ticker24HourByUnderlyingAssetAndExpirationDataRequest} requestParameters Request parameters.
-     *
-     * @returns {WebsocketStream<Ticker24HourByUnderlyingAssetAndExpirationDataResponse>}
-     * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/option/websocket-market-streams/24-hour-TICKER-by-underlying-asset-and-expiration-data Binance API Documentation}
-     */
-    ticker24HourByUnderlyingAssetAndExpirationData(
-        requestParameters: Ticker24HourByUnderlyingAssetAndExpirationDataRequest
-    ): WebsocketStream<Ticker24HourByUnderlyingAssetAndExpirationDataResponse> {
-        return this.websocketMarketStreamsApi.ticker24HourByUnderlyingAssetAndExpirationData(
-            requestParameters
-        );
-    }
-
-    /**
-     * The Trade Streams push raw trade information for specific symbol or underlying asset. E.g.[ETH@trade](wss://nbstream.binance.com/eoptions/stream?streams=ETH@trade)
+     * The Trade Streams push raw trade information for specific symbol or underlying asset. E.g.[btcusdt@optionTrade](wss://fstream.binance.com/public/stream?streams=btcusdt@optionTrade)
      *
      * Update Speed: 50ms
      *
@@ -296,9 +326,9 @@ export class WebsocketStreamsConnection {
      *
      * @returns {WebsocketStream<TradeStreamsResponse>}
      * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/option/websocket-market-streams/Trade-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/websocket-market-streams/Trade-Streams Binance API Documentation}
      */
     tradeStreams(requestParameters: TradeStreamsRequest): WebsocketStream<TradeStreamsResponse> {
-        return this.websocketMarketStreamsApi.tradeStreams(requestParameters);
+        return this.publicApi.tradeStreams(requestParameters);
     }
 }

@@ -54,12 +54,6 @@ export interface CancelOptionOrderResponse {
      * @type {string}
      * @memberof CancelOptionOrderResponse
      */
-    fee?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof CancelOptionOrderResponse
-     */
     side?: string;
     /**
      *
@@ -79,12 +73,6 @@ export interface CancelOptionOrderResponse {
      * @memberof CancelOptionOrderResponse
      */
     reduceOnly?: boolean;
-    /**
-     *
-     * @type {boolean}
-     * @memberof CancelOptionOrderResponse
-     */
-    postOnly?: boolean;
     /**
      *
      * @type {number | bigint}

@@ -24,7 +24,13 @@ export interface MarkPriceResponseInner {
      * @type {string}
      * @memberof MarkPriceResponseInner
      */
-    e?: string;
+    s?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MarkPriceResponseInner
+     */
+    mp?: string;
     /**
      *
      * @type {number | bigint}
@@ -36,11 +42,101 @@ export interface MarkPriceResponseInner {
      * @type {string}
      * @memberof MarkPriceResponseInner
      */
-    s?: string;
+    e?: string;
     /**
      *
      * @type {string}
      * @memberof MarkPriceResponseInner
      */
-    mp?: string;
+    i?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MarkPriceResponseInner
+     */
+    P?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MarkPriceResponseInner
+     */
+    bo?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MarkPriceResponseInner
+     */
+    ao?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MarkPriceResponseInner
+     */
+    bq?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MarkPriceResponseInner
+     */
+    aq?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MarkPriceResponseInner
+     */
+    b?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MarkPriceResponseInner
+     */
+    a?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MarkPriceResponseInner
+     */
+    hl?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MarkPriceResponseInner
+     */
+    ll?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MarkPriceResponseInner
+     */
+    vo?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MarkPriceResponseInner
+     */
+    rf?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MarkPriceResponseInner
+     */
+    d?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MarkPriceResponseInner
+     */
+    t?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MarkPriceResponseInner
+     */
+    g?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MarkPriceResponseInner
+     */
+    v?: string;
 }

@@ -21,10 +21,16 @@
 export interface RecentTradesListResponseInner {
     /**
      *
-     * @type {string}
+     * @type {number | bigint}
      * @memberof RecentTradesListResponseInner
      */
-    id?: string;
+    id?: number | bigint;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof RecentTradesListResponseInner
+     */
+    tradeId?: number | bigint;
     /**
      *
      * @type {string}

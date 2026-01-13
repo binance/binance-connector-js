@@ -48,12 +48,6 @@ export interface UserExerciseRecordResponseInner {
      * @type {string}
      * @memberof UserExerciseRecordResponseInner
      */
-    markPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof UserExerciseRecordResponseInner
-     */
     quantity?: string;
     /**
      *

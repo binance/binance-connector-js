@@ -33,16 +33,40 @@ export interface Ticker24HourResponse {
     E?: number | bigint;
     /**
      *
-     * @type {number | bigint}
+     * @type {string}
      * @memberof Ticker24HourResponse
      */
-    T?: number | bigint;
+    s?: string;
     /**
      *
      * @type {string}
      * @memberof Ticker24HourResponse
      */
-    s?: string;
+    p?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Ticker24HourResponse
+     */
+    P?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Ticker24HourResponse
+     */
+    w?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Ticker24HourResponse
+     */
+    c?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Ticker24HourResponse
+     */
+    Q?: string;
     /**
      *
      * @type {string}
@@ -66,143 +90,41 @@ export interface Ticker24HourResponse {
      * @type {string}
      * @memberof Ticker24HourResponse
      */
-    c?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof Ticker24HourResponse
-     */
-    V?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof Ticker24HourResponse
-     */
-    A?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof Ticker24HourResponse
-     */
-    P?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof Ticker24HourResponse
-     */
-    p?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof Ticker24HourResponse
-     */
-    Q?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof Ticker24HourResponse
-     */
-    F?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof Ticker24HourResponse
-     */
-    L?: string;
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof Ticker24HourResponse
-     */
-    n?: number | bigint;
-    /**
-     *
-     * @type {string}
-     * @memberof Ticker24HourResponse
-     */
-    bo?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof Ticker24HourResponse
-     */
-    ao?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof Ticker24HourResponse
-     */
-    bq?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof Ticker24HourResponse
-     */
-    aq?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof Ticker24HourResponse
-     */
-    b?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof Ticker24HourResponse
-     */
-    a?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof Ticker24HourResponse
-     */
-    d?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof Ticker24HourResponse
-     */
-    t?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof Ticker24HourResponse
-     */
-    g?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof Ticker24HourResponse
-     */
     v?: string;
     /**
      *
      * @type {string}
      * @memberof Ticker24HourResponse
      */
-    vo?: string;
+    q?: string;
     /**
      *
-     * @type {string}
+     * @type {number | bigint}
      * @memberof Ticker24HourResponse
      */
-    mp?: string;
+    O?: number | bigint;
     /**
      *
-     * @type {string}
+     * @type {number | bigint}
      * @memberof Ticker24HourResponse
      */
-    hl?: string;
+    C?: number | bigint;
     /**
      *
-     * @type {string}
+     * @type {number | bigint}
      * @memberof Ticker24HourResponse
      */
-    ll?: string;
+    F?: number | bigint;
     /**
      *
-     * @type {string}
+     * @type {number | bigint}
      * @memberof Ticker24HourResponse
      */
-    eep?: string;
+    L?: number | bigint;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof Ticker24HourResponse
+     */
+    n?: number | bigint;
 }

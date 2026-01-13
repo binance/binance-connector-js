@@ -25,4 +25,10 @@ export interface StartUserDataStreamResponse {
      * @memberof StartUserDataStreamResponse
      */
     listenKey?: string;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof StartUserDataStreamResponse
+     */
+    expiration?: number | bigint;
 }

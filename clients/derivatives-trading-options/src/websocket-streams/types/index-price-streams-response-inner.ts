@@ -16,49 +16,31 @@
 /**
  *
  * @export
- * @interface AccountUpdateBInner
+ * @interface IndexPriceStreamsResponseInner
  */
-export interface AccountUpdateBInner {
+export interface IndexPriceStreamsResponseInner {
     /**
      *
      * @type {string}
-     * @memberof AccountUpdateBInner
+     * @memberof IndexPriceStreamsResponseInner
      */
-    b?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof AccountUpdateBInner
-     */
-    m?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof AccountUpdateBInner
-     */
-    u?: string;
+    e?: string;
     /**
      *
      * @type {number | bigint}
-     * @memberof AccountUpdateBInner
+     * @memberof IndexPriceStreamsResponseInner
      */
-    U?: number | bigint;
+    E?: number | bigint;
     /**
      *
      * @type {string}
-     * @memberof AccountUpdateBInner
+     * @memberof IndexPriceStreamsResponseInner
      */
-    M?: string;
+    s?: string;
     /**
      *
      * @type {string}
-     * @memberof AccountUpdateBInner
+     * @memberof IndexPriceStreamsResponseInner
      */
-    i?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof AccountUpdateBInner
-     */
-    a?: string;
+    p?: string;
 }

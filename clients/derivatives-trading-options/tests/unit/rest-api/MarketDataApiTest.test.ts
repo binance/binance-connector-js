@@ -18,9 +18,8 @@ import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 import { MarketDataApi } from '../../../src/rest-api';
 import {
     HistoricalExerciseRecordsRequest,
-    IndexPriceTickerRequest,
+    IndexPriceRequest,
     KlineCandlestickDataRequest,
-    OldTradesLookupRequest,
     OpenInterestRequest,
     OptionMarkPriceRequest,
     OrderBookRequest,
@@ -32,9 +31,8 @@ import type {
     CheckServerTimeResponse,
     ExchangeInformationResponse,
     HistoricalExerciseRecordsResponse,
-    IndexPriceTickerResponse,
+    IndexPriceResponse,
     KlineCandlestickDataResponse,
-    OldTradesLookupResponse,
     OpenInterestResponse,
     OptionMarkPriceResponse,
     OrderBookResponse,
@@ -128,8 +126,6 @@ describe('MarketDataApi', () => {
                             strikePrice: '50000',
                             underlying: 'BTCUSDT',
                             unit: 1,
-                            makerFeeRate: '0.0002',
-                            takerFeeRate: '0.0002',
                             liquidationFeeRate: '0.0019000',
                             minQty: '0.01',
                             maxQty: '100',
@@ -140,6 +136,7 @@ describe('MarketDataApi', () => {
                             priceScale: 2,
                             quantityScale: 2,
                             quoteAsset: 'USDT',
+                            status: 'TRADING',
                         },
                     ],
                     rateLimits: [
@@ -275,63 +272,67 @@ describe('MarketDataApi', () => {
         });
     });
 
-    describe('indexPriceTicker()', () => {
-        it('should execute indexPriceTicker() successfully with required parameters only', async () => {
-            const params: IndexPriceTickerRequest = {
+    describe('indexPrice()', () => {
+        it('should execute indexPrice() successfully with required parameters only', async () => {
+            const params: IndexPriceRequest = {
                 underlying: 'underlying_example',
             };
 
-            mockResponse = JSONParse(JSONStringify({ time: 1656647305000, indexPrice: '9200' }));
+            mockResponse = JSONParse(
+                JSONStringify({ time: 1656647305000, indexPrice: '105917.75' })
+            );
 
-            const spy = jest.spyOn(client, 'indexPriceTicker').mockReturnValue(
+            const spy = jest.spyOn(client, 'indexPrice').mockReturnValue(
                 Promise.resolve({
                     data: () => Promise.resolve(mockResponse),
                     status: 200,
                     headers: {},
                     rateLimits: [],
-                } as RestApiResponse<IndexPriceTickerResponse>)
+                } as RestApiResponse<IndexPriceResponse>)
             );
-            const response = await client.indexPriceTicker(params);
+            const response = await client.indexPrice(params);
             expect(response).toBeDefined();
             await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
         });
 
-        it('should execute indexPriceTicker() successfully with optional parameters', async () => {
-            const params: IndexPriceTickerRequest = {
+        it('should execute indexPrice() successfully with optional parameters', async () => {
+            const params: IndexPriceRequest = {
                 underlying: 'underlying_example',
             };
 
-            mockResponse = JSONParse(JSONStringify({ time: 1656647305000, indexPrice: '9200' }));
+            mockResponse = JSONParse(
+                JSONStringify({ time: 1656647305000, indexPrice: '105917.75' })
+            );
 
-            const spy = jest.spyOn(client, 'indexPriceTicker').mockReturnValue(
+            const spy = jest.spyOn(client, 'indexPrice').mockReturnValue(
                 Promise.resolve({
                     data: () => Promise.resolve(mockResponse),
                     status: 200,
                     headers: {},
                     rateLimits: [],
-                } as RestApiResponse<IndexPriceTickerResponse>)
+                } as RestApiResponse<IndexPriceResponse>)
             );
-            const response = await client.indexPriceTicker(params);
+            const response = await client.indexPrice(params);
             expect(response).toBeDefined();
             await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
         });
 
         it('should throw RequiredError when underlying is missing', async () => {
-            const _params: IndexPriceTickerRequest = {
+            const _params: IndexPriceRequest = {
                 underlying: 'underlying_example',
             };
             const params = Object.assign({ ..._params });
             delete params?.underlying;
 
-            await expect(client.indexPriceTicker(params)).rejects.toThrow(
-                'Required parameter underlying was null or undefined when calling indexPriceTicker.'
+            await expect(client.indexPrice(params)).rejects.toThrow(
+                'Required parameter underlying was null or undefined when calling indexPrice.'
             );
         });
 
         it('should throw an error when server is returning an error', async () => {
-            const params: IndexPriceTickerRequest = {
+            const params: IndexPriceRequest = {
                 underlying: 'underlying_example',
             };
 
@@ -344,8 +345,8 @@ describe('MarketDataApi', () => {
                 response?: { status: number; data: unknown };
             };
             mockError.response = { status: 400, data: errorResponse };
-            const spy = jest.spyOn(client, 'indexPriceTicker').mockRejectedValueOnce(mockError);
-            await expect(client.indexPriceTicker(params)).rejects.toThrow('ResponseError');
+            const spy = jest.spyOn(client, 'indexPrice').mockRejectedValueOnce(mockError);
+            await expect(client.indexPrice(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
@@ -359,20 +360,20 @@ describe('MarketDataApi', () => {
 
             mockResponse = JSONParse(
                 JSONStringify([
-                    {
-                        open: '950',
-                        high: '1100',
-                        low: '900',
-                        close: '1000',
-                        volume: '100',
-                        amount: '2',
-                        interval: '5m',
-                        tradeCount: 10,
-                        takerVolume: '100',
-                        takerAmount: '10000',
-                        openTime: 1499040000000,
-                        closeTime: 1499644799999,
-                    },
+                    [
+                        1762779600000,
+                        '1300.000',
+                        '1300.000',
+                        '1300.000',
+                        '1300.000',
+                        '0.1000',
+                        1762780499999,
+                        '130.0000000',
+                        1,
+                        '0.1000',
+                        '130.0000000',
+                        '0',
+                    ],
                 ])
             );
 
@@ -401,20 +402,20 @@ describe('MarketDataApi', () => {
 
             mockResponse = JSONParse(
                 JSONStringify([
-                    {
-                        open: '950',
-                        high: '1100',
-                        low: '900',
-                        close: '1000',
-                        volume: '100',
-                        amount: '2',
-                        interval: '5m',
-                        tradeCount: 10,
-                        takerVolume: '100',
-                        takerAmount: '10000',
-                        openTime: 1499040000000,
-                        closeTime: 1499644799999,
-                    },
+                    [
+                        1762779600000,
+                        '1300.000',
+                        '1300.000',
+                        '1300.000',
+                        '1300.000',
+                        '0.1000',
+                        1762780499999,
+                        '130.0000000',
+                        1,
+                        '0.1000',
+                        '130.0000000',
+                        '0',
+                    ],
                 ])
             );
 
@@ -475,107 +476,6 @@ describe('MarketDataApi', () => {
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'klineCandlestickData').mockRejectedValueOnce(mockError);
             await expect(client.klineCandlestickData(params)).rejects.toThrow('ResponseError');
-            spy.mockRestore();
-        });
-    });
-
-    describe('oldTradesLookup()', () => {
-        it('should execute oldTradesLookup() successfully with required parameters only', async () => {
-            const params: OldTradesLookupRequest = {
-                symbol: 'symbol_example',
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify([
-                    {
-                        id: '1',
-                        tradeId: '159244329455993',
-                        price: '1000',
-                        qty: '-0.1',
-                        quoteQty: '-100',
-                        side: -1,
-                        time: 1592449455993,
-                    },
-                ])
-            );
-
-            const spy = jest.spyOn(client, 'oldTradesLookup').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<OldTradesLookupResponse>)
-            );
-            const response = await client.oldTradesLookup(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute oldTradesLookup() successfully with optional parameters', async () => {
-            const params: OldTradesLookupRequest = {
-                symbol: 'symbol_example',
-                fromId: 1,
-                limit: 100,
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify([
-                    {
-                        id: '1',
-                        tradeId: '159244329455993',
-                        price: '1000',
-                        qty: '-0.1',
-                        quoteQty: '-100',
-                        side: -1,
-                        time: 1592449455993,
-                    },
-                ])
-            );
-
-            const spy = jest.spyOn(client, 'oldTradesLookup').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<OldTradesLookupResponse>)
-            );
-            const response = await client.oldTradesLookup(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw RequiredError when symbol is missing', async () => {
-            const _params: OldTradesLookupRequest = {
-                symbol: 'symbol_example',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.symbol;
-
-            await expect(client.oldTradesLookup(params)).rejects.toThrow(
-                'Required parameter symbol was null or undefined when calling oldTradesLookup.'
-            );
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const params: OldTradesLookupRequest = {
-                symbol: 'symbol_example',
-            };
-
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest.spyOn(client, 'oldTradesLookup').mockRejectedValueOnce(mockError);
-            await expect(client.oldTradesLookup(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
@@ -787,10 +687,10 @@ describe('MarketDataApi', () => {
 
             mockResponse = JSONParse(
                 JSONStringify({
-                    T: 1589436922972,
-                    u: 37461,
-                    bids: [['1000', '0.9']],
-                    asks: [['1100', '0.1']],
+                    bids: [['1000.000', '0.1000']],
+                    asks: [['1900.000', '0.1000']],
+                    T: 1762780909676,
+                    lastUpdateId: 361,
                 })
             );
 
@@ -816,10 +716,10 @@ describe('MarketDataApi', () => {
 
             mockResponse = JSONParse(
                 JSONStringify({
-                    T: 1589436922972,
-                    u: 37461,
-                    bids: [['1000', '0.9']],
-                    asks: [['1100', '0.1']],
+                    bids: [['1000.000', '0.1000']],
+                    asks: [['1900.000', '0.1000']],
+                    T: 1762780909676,
+                    lastUpdateId: 361,
                 })
             );
 
@@ -982,13 +882,14 @@ describe('MarketDataApi', () => {
             mockResponse = JSONParse(
                 JSONStringify([
                     {
-                        id: '1',
-                        symbol: 'BTC-220722-19000-C',
-                        price: '1000',
-                        qty: '-0.1',
-                        quoteQty: '-100',
+                        id: 2323857420768529000,
+                        tradeId: 1,
+                        symbol: 'BTC-251123-126000-C',
+                        price: '1300',
+                        qty: '0.1',
+                        quoteQty: '130',
                         side: -1,
-                        time: 1592449455993,
+                        time: 1762780453623,
                     },
                 ])
             );
@@ -1016,13 +917,14 @@ describe('MarketDataApi', () => {
             mockResponse = JSONParse(
                 JSONStringify([
                     {
-                        id: '1',
-                        symbol: 'BTC-220722-19000-C',
-                        price: '1000',
-                        qty: '-0.1',
-                        quoteQty: '-100',
+                        id: 2323857420768529000,
+                        tradeId: 1,
+                        symbol: 'BTC-251123-126000-C',
+                        price: '1300',
+                        qty: '0.1',
+                        quoteQty: '130',
                         side: -1,
-                        time: 1592449455993,
+                        time: 1762780453623,
                     },
                 ])
             );

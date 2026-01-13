@@ -14,9 +14,7 @@ async function indexPriceStreams() {
     try {
         connection = await client.websocketStreams.connect();
 
-        const stream = connection.indexPriceStreams({
-            symbol: 'btcusdt',
-        });
+        const stream = connection.indexPriceStreams();
 
         stream.on('message', (data) => {
             console.info(data);

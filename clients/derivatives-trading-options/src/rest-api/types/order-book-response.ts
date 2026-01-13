@@ -29,18 +29,6 @@ import type { OrderBookResponseBidsItem } from './order-book-response-bids-item'
 export interface OrderBookResponse {
     /**
      *
-     * @type {number | bigint}
-     * @memberof OrderBookResponse
-     */
-    T?: number | bigint;
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof OrderBookResponse
-     */
-    u?: number | bigint;
-    /**
-     *
      * @type {Array<OrderBookResponseBidsItem>}
      * @memberof OrderBookResponse
      */
@@ -51,4 +39,16 @@ export interface OrderBookResponse {
      * @memberof OrderBookResponse
      */
     asks?: Array<OrderBookResponseAsksItem>;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof OrderBookResponse
+     */
+    T?: number | bigint;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof OrderBookResponse
+     */
+    lastUpdateId?: number | bigint;
 }

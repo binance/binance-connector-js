@@ -71,18 +71,6 @@ export interface ExchangeInformationResponseOptionSymbolsInner {
      * @type {string}
      * @memberof ExchangeInformationResponseOptionSymbolsInner
      */
-    makerFeeRate?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof ExchangeInformationResponseOptionSymbolsInner
-     */
-    takerFeeRate?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof ExchangeInformationResponseOptionSymbolsInner
-     */
     liquidationFeeRate?: string;
     /**
      *
@@ -138,4 +126,10 @@ export interface ExchangeInformationResponseOptionSymbolsInner {
      * @memberof ExchangeInformationResponseOptionSymbolsInner
      */
     quoteAsset?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ExchangeInformationResponseOptionSymbolsInner
+     */
+    status?: string;
 }

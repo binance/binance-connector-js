@@ -33,16 +33,22 @@ export interface TradeStreamsResponse {
     E?: number | bigint;
     /**
      *
+     * @type {number | bigint}
+     * @memberof TradeStreamsResponse
+     */
+    T?: number | bigint;
+    /**
+     *
      * @type {string}
      * @memberof TradeStreamsResponse
      */
     s?: string;
     /**
      *
-     * @type {string}
+     * @type {number | bigint}
      * @memberof TradeStreamsResponse
      */
-    t?: string;
+    t?: number | bigint;
     /**
      *
      * @type {string}
@@ -57,22 +63,10 @@ export interface TradeStreamsResponse {
     q?: string;
     /**
      *
-     * @type {number | bigint}
+     * @type {string}
      * @memberof TradeStreamsResponse
      */
-    b?: number | bigint;
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof TradeStreamsResponse
-     */
-    a?: number | bigint;
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof TradeStreamsResponse
-     */
-    T?: number | bigint;
+    X?: string;
     /**
      *
      * @type {string}
@@ -81,8 +75,8 @@ export interface TradeStreamsResponse {
     S?: string;
     /**
      *
-     * @type {string}
+     * @type {boolean}
      * @memberof TradeStreamsResponse
      */
-    X?: string;
+    m?: boolean;
 }

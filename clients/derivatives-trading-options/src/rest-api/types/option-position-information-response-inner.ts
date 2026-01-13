@@ -48,19 +48,7 @@ export interface OptionPositionInformationResponseInner {
      * @type {string}
      * @memberof OptionPositionInformationResponseInner
      */
-    reducibleQty?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof OptionPositionInformationResponseInner
-     */
     markValue?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof OptionPositionInformationResponseInner
-     */
-    ror?: string;
     /**
      *
      * @type {string}
@@ -79,12 +67,6 @@ export interface OptionPositionInformationResponseInner {
      * @memberof OptionPositionInformationResponseInner
      */
     strikePrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof OptionPositionInformationResponseInner
-     */
-    positionCost?: string;
     /**
      *
      * @type {number | bigint}
@@ -115,4 +97,22 @@ export interface OptionPositionInformationResponseInner {
      * @memberof OptionPositionInformationResponseInner
      */
     quoteAsset?: string;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof OptionPositionInformationResponseInner
+     */
+    time?: number | bigint;
+    /**
+     *
+     * @type {string}
+     * @memberof OptionPositionInformationResponseInner
+     */
+    bidQuantity?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof OptionPositionInformationResponseInner
+     */
+    askQuantity?: string;
 }

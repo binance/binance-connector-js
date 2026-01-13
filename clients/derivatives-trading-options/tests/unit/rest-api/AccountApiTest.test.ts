@@ -18,16 +18,10 @@ import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 import { AccountApi } from '../../../src/rest-api';
 import {
     AccountFundingFlowRequest,
-    GetDownloadIdForOptionTransactionHistoryRequest,
-    GetOptionTransactionHistoryDownloadLinkByIdRequest,
-    OptionAccountInformationRequest,
     OptionMarginAccountInformationRequest,
 } from '../../../src/rest-api';
 import type {
     AccountFundingFlowResponse,
-    GetDownloadIdForOptionTransactionHistoryResponse,
-    GetOptionTransactionHistoryDownloadLinkByIdResponse,
-    OptionAccountInformationResponse,
     OptionMarginAccountInformationResponse,
 } from '../../../src/rest-api/types';
 
@@ -173,326 +167,6 @@ describe('AccountApi', () => {
         });
     });
 
-    describe('getDownloadIdForOptionTransactionHistory()', () => {
-        it('should execute getDownloadIdForOptionTransactionHistory() successfully with required parameters only', async () => {
-            const params: GetDownloadIdForOptionTransactionHistoryRequest = {
-                startTime: 1623319461670,
-                endTime: 1641782889000,
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify({
-                    avgCostTimestampOfLast30d: 7241837,
-                    downloadId: '546975389218332672',
-                })
-            );
-
-            const spy = jest
-                .spyOn(client, 'getDownloadIdForOptionTransactionHistory')
-                .mockReturnValue(
-                    Promise.resolve({
-                        data: () => Promise.resolve(mockResponse),
-                        status: 200,
-                        headers: {},
-                        rateLimits: [],
-                    } as RestApiResponse<GetDownloadIdForOptionTransactionHistoryResponse>)
-                );
-            const response = await client.getDownloadIdForOptionTransactionHistory(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute getDownloadIdForOptionTransactionHistory() successfully with optional parameters', async () => {
-            const params: GetDownloadIdForOptionTransactionHistoryRequest = {
-                startTime: 1623319461670,
-                endTime: 1641782889000,
-                recvWindow: 5000,
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify({
-                    avgCostTimestampOfLast30d: 7241837,
-                    downloadId: '546975389218332672',
-                })
-            );
-
-            const spy = jest
-                .spyOn(client, 'getDownloadIdForOptionTransactionHistory')
-                .mockReturnValue(
-                    Promise.resolve({
-                        data: () => Promise.resolve(mockResponse),
-                        status: 200,
-                        headers: {},
-                        rateLimits: [],
-                    } as RestApiResponse<GetDownloadIdForOptionTransactionHistoryResponse>)
-                );
-            const response = await client.getDownloadIdForOptionTransactionHistory(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw RequiredError when startTime is missing', async () => {
-            const _params: GetDownloadIdForOptionTransactionHistoryRequest = {
-                startTime: 1623319461670,
-                endTime: 1641782889000,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.startTime;
-
-            await expect(client.getDownloadIdForOptionTransactionHistory(params)).rejects.toThrow(
-                'Required parameter startTime was null or undefined when calling getDownloadIdForOptionTransactionHistory.'
-            );
-        });
-
-        it('should throw RequiredError when endTime is missing', async () => {
-            const _params: GetDownloadIdForOptionTransactionHistoryRequest = {
-                startTime: 1623319461670,
-                endTime: 1641782889000,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.endTime;
-
-            await expect(client.getDownloadIdForOptionTransactionHistory(params)).rejects.toThrow(
-                'Required parameter endTime was null or undefined when calling getDownloadIdForOptionTransactionHistory.'
-            );
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const params: GetDownloadIdForOptionTransactionHistoryRequest = {
-                startTime: 1623319461670,
-                endTime: 1641782889000,
-            };
-
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest
-                .spyOn(client, 'getDownloadIdForOptionTransactionHistory')
-                .mockRejectedValueOnce(mockError);
-            await expect(client.getDownloadIdForOptionTransactionHistory(params)).rejects.toThrow(
-                'ResponseError'
-            );
-            spy.mockRestore();
-        });
-    });
-
-    describe('getOptionTransactionHistoryDownloadLinkById()', () => {
-        it('should execute getOptionTransactionHistoryDownloadLinkById() successfully with required parameters only', async () => {
-            const params: GetOptionTransactionHistoryDownloadLinkByIdRequest = {
-                downloadId: '1',
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify({
-                    downloadId: '545923594199212032',
-                    status: 'processing',
-                    url: '',
-                    notified: false,
-                    expirationTimestamp: -1,
-                    isExpired: null,
-                })
-            );
-
-            const spy = jest
-                .spyOn(client, 'getOptionTransactionHistoryDownloadLinkById')
-                .mockReturnValue(
-                    Promise.resolve({
-                        data: () => Promise.resolve(mockResponse),
-                        status: 200,
-                        headers: {},
-                        rateLimits: [],
-                    } as RestApiResponse<GetOptionTransactionHistoryDownloadLinkByIdResponse>)
-                );
-            const response = await client.getOptionTransactionHistoryDownloadLinkById(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute getOptionTransactionHistoryDownloadLinkById() successfully with optional parameters', async () => {
-            const params: GetOptionTransactionHistoryDownloadLinkByIdRequest = {
-                downloadId: '1',
-                recvWindow: 5000,
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify({
-                    downloadId: '545923594199212032',
-                    status: 'processing',
-                    url: '',
-                    notified: false,
-                    expirationTimestamp: -1,
-                    isExpired: null,
-                })
-            );
-
-            const spy = jest
-                .spyOn(client, 'getOptionTransactionHistoryDownloadLinkById')
-                .mockReturnValue(
-                    Promise.resolve({
-                        data: () => Promise.resolve(mockResponse),
-                        status: 200,
-                        headers: {},
-                        rateLimits: [],
-                    } as RestApiResponse<GetOptionTransactionHistoryDownloadLinkByIdResponse>)
-                );
-            const response = await client.getOptionTransactionHistoryDownloadLinkById(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw RequiredError when downloadId is missing', async () => {
-            const _params: GetOptionTransactionHistoryDownloadLinkByIdRequest = {
-                downloadId: '1',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.downloadId;
-
-            await expect(
-                client.getOptionTransactionHistoryDownloadLinkById(params)
-            ).rejects.toThrow(
-                'Required parameter downloadId was null or undefined when calling getOptionTransactionHistoryDownloadLinkById.'
-            );
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const params: GetOptionTransactionHistoryDownloadLinkByIdRequest = {
-                downloadId: '1',
-            };
-
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest
-                .spyOn(client, 'getOptionTransactionHistoryDownloadLinkById')
-                .mockRejectedValueOnce(mockError);
-            await expect(
-                client.getOptionTransactionHistoryDownloadLinkById(params)
-            ).rejects.toThrow('ResponseError');
-            spy.mockRestore();
-        });
-    });
-
-    describe('optionAccountInformation()', () => {
-        it('should execute optionAccountInformation() successfully with required parameters only', async () => {
-            mockResponse = JSONParse(
-                JSONStringify({
-                    asset: [
-                        {
-                            asset: 'USDT',
-                            marginBalance: '1877.52214415',
-                            equity: '617.77711415',
-                            available: '0',
-                            locked: '2898.92389933',
-                            unrealizedPNL: '222.23697000',
-                        },
-                    ],
-                    greek: [
-                        {
-                            underlying: 'BTCUSDT',
-                            delta: '-0.05',
-                            gamma: '-0.002',
-                            theta: '-0.05',
-                            vega: '-0.002',
-                        },
-                    ],
-                    time: 1592449455993,
-                    riskLevel: 'NORMAL',
-                })
-            );
-
-            const spy = jest.spyOn(client, 'optionAccountInformation').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<OptionAccountInformationResponse>)
-            );
-            const response = await client.optionAccountInformation();
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute optionAccountInformation() successfully with optional parameters', async () => {
-            const params: OptionAccountInformationRequest = {
-                recvWindow: 5000,
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify({
-                    asset: [
-                        {
-                            asset: 'USDT',
-                            marginBalance: '1877.52214415',
-                            equity: '617.77711415',
-                            available: '0',
-                            locked: '2898.92389933',
-                            unrealizedPNL: '222.23697000',
-                        },
-                    ],
-                    greek: [
-                        {
-                            underlying: 'BTCUSDT',
-                            delta: '-0.05',
-                            gamma: '-0.002',
-                            theta: '-0.05',
-                            vega: '-0.002',
-                        },
-                    ],
-                    time: 1592449455993,
-                    riskLevel: 'NORMAL',
-                })
-            );
-
-            const spy = jest.spyOn(client, 'optionAccountInformation').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<OptionAccountInformationResponse>)
-            );
-            const response = await client.optionAccountInformation(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest
-                .spyOn(client, 'optionAccountInformation')
-                .mockRejectedValueOnce(mockError);
-            await expect(client.optionAccountInformation()).rejects.toThrow('ResponseError');
-            spy.mockRestore();
-        });
-    });
-
     describe('optionMarginAccountInformation()', () => {
         it('should execute optionMarginAccountInformation() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
@@ -500,25 +174,23 @@ describe('AccountApi', () => {
                     asset: [
                         {
                             asset: 'USDT',
-                            marginBalance: '10099.448',
-                            equity: '10094.44662',
-                            available: '8725.92524',
-                            initialMargin: '1084.52138',
-                            maintMargin: '151.00138',
-                            unrealizedPNL: '-5.00138',
-                            adjustedEquity: '34.13282285',
+                            marginBalance: '99998.87365244',
+                            equity: '99998.87365244',
+                            available: '96883.72734374',
+                            initialMargin: '3115.14630870',
+                            maintMargin: '0.00000000',
+                            unrealizedPNL: '0.00000000',
+                            adjustedEquity: '99998.87365244',
                         },
                     ],
                     greek: [
-                        {
-                            underlying: 'BTCUSDT',
-                            delta: '-0.05',
-                            gamma: '-0.002',
-                            theta: '-0.05',
-                            vega: '-0.002',
-                        },
+                        { underlying: 'BTCUSDT', delta: '0', theta: '0', gamma: '0', vega: '0' },
                     ],
-                    time: 1592449455993,
+                    time: 1762843368098,
+                    canTrade: true,
+                    canDeposit: true,
+                    canWithdraw: true,
+                    reduceOnly: false,
                 })
             );
 
@@ -546,25 +218,23 @@ describe('AccountApi', () => {
                     asset: [
                         {
                             asset: 'USDT',
-                            marginBalance: '10099.448',
-                            equity: '10094.44662',
-                            available: '8725.92524',
-                            initialMargin: '1084.52138',
-                            maintMargin: '151.00138',
-                            unrealizedPNL: '-5.00138',
-                            adjustedEquity: '34.13282285',
+                            marginBalance: '99998.87365244',
+                            equity: '99998.87365244',
+                            available: '96883.72734374',
+                            initialMargin: '3115.14630870',
+                            maintMargin: '0.00000000',
+                            unrealizedPNL: '0.00000000',
+                            adjustedEquity: '99998.87365244',
                         },
                     ],
                     greek: [
-                        {
-                            underlying: 'BTCUSDT',
-                            delta: '-0.05',
-                            gamma: '-0.002',
-                            theta: '-0.05',
-                            vega: '-0.002',
-                        },
+                        { underlying: 'BTCUSDT', delta: '0', theta: '0', gamma: '0', vega: '0' },
                     ],
-                    time: 1592449455993,
+                    time: 1762843368098,
+                    canTrade: true,
+                    canDeposit: true,
+                    canWithdraw: true,
+                    reduceOnly: false,
                 })
             );
 

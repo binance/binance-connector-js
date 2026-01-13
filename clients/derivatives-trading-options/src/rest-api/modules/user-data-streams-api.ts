@@ -162,7 +162,7 @@ export class UserDataStreamsApi implements UserDataStreamsApiInterface {
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof UserDataStreamsApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/user-data-streams/Close-User-Data-Stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/user-data-streams/Close-User-Data-Stream Binance API Documentation}
      */
     public async closeUserDataStream(): Promise<RestApiResponse<void>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.closeUserDataStream();
@@ -186,7 +186,7 @@ export class UserDataStreamsApi implements UserDataStreamsApiInterface {
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof UserDataStreamsApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/user-data-streams/Keepalive-User-Data-Stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/user-data-streams/Keepalive-User-Data-Stream Binance API Documentation}
      */
     public async keepaliveUserDataStream(): Promise<RestApiResponse<void>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.keepaliveUserDataStream();
@@ -210,7 +210,7 @@ export class UserDataStreamsApi implements UserDataStreamsApiInterface {
      * @returns {Promise<RestApiResponse<StartUserDataStreamResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof UserDataStreamsApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/user-data-streams/Start-User-Data-Stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/user-data-streams/Start-User-Data-Stream Binance API Documentation}
      */
     public async startUserDataStream(): Promise<RestApiResponse<StartUserDataStreamResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.startUserDataStream();

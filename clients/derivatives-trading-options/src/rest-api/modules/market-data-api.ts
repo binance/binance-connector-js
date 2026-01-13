@@ -23,9 +23,8 @@ import type {
     CheckServerTimeResponse,
     ExchangeInformationResponse,
     HistoricalExerciseRecordsResponse,
-    IndexPriceTickerResponse,
+    IndexPriceResponse,
     KlineCandlestickDataResponse,
-    OldTradesLookupResponse,
     OpenInterestResponse,
     OptionMarkPriceResponse,
     OrderBookResponse,
@@ -140,14 +139,14 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * Weight: 1
          *
-         * @summary Index Price Ticker
+         * @summary Index Price
          * @param {string} underlying Option underlying, e.g BTCUSDT
          *
          * @throws {RequiredError}
          */
-        indexPriceTicker: async (underlying: string): Promise<RequestArgs> => {
+        indexPrice: async (underlying: string): Promise<RequestArgs> => {
             // verify required parameter 'underlying' is not null or undefined
-            assertParamExists('indexPriceTicker', 'underlying', underlying);
+            assertParamExists('indexPrice', 'underlying', underlying);
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
@@ -227,50 +226,6 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
-         * Get older market historical trades.
-         *
-         * Weight: 20
-         *
-         * @summary Old Trades Lookup (MARKET_DATA)
-         * @param {string} symbol Option trading pair, e.g BTC-200730-9000-C
-         * @param {number | bigint} [fromId] The UniqueId ID from which to return. The latest deal record is returned by default
-         * @param {number | bigint} [limit] Number of result sets returned Default:100 Max:1000
-         *
-         * @throws {RequiredError}
-         */
-        oldTradesLookup: async (
-            symbol: string,
-            fromId?: number | bigint,
-            limit?: number | bigint
-        ): Promise<RequestArgs> => {
-            // verify required parameter 'symbol' is not null or undefined
-            assertParamExists('oldTradesLookup', 'symbol', symbol);
-
-            const localVarQueryParameter: Record<string, unknown> = {};
-            const localVarBodyParameter: Record<string, unknown> = {};
-
-            if (symbol !== undefined && symbol !== null) {
-                localVarQueryParameter['symbol'] = symbol;
-            }
-            if (fromId !== undefined && fromId !== null) {
-                localVarQueryParameter['fromId'] = fromId;
-            }
-            if (limit !== undefined && limit !== null) {
-                localVarQueryParameter['limit'] = limit;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/eapi/v1/historicalTrades',
-                method: 'GET',
-                queryParams: localVarQueryParameter,
-                bodyParams: localVarBodyParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
          * Get open interest for specific underlying asset on specific expiration date.
          *
          * Weight: 0
@@ -342,7 +297,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * Weight: limit         | weight
          * ------------  | ------------
-         * 5, 10, 20, 50 | 2
+         * 5, 10, 20, 50 | 1
          * 100           | 5
          * 500           | 10
          * 1000          | 20
@@ -554,15 +509,13 @@ export interface MarketDataApiInterface {
      *
      * Weight: 1
      *
-     * @summary Index Price Ticker
-     * @param {IndexPriceTickerRequest} requestParameters Request parameters.
+     * @summary Index Price
+     * @param {IndexPriceRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApiInterface
      */
-    indexPriceTicker(
-        requestParameters: IndexPriceTickerRequest
-    ): Promise<RestApiResponse<IndexPriceTickerResponse>>;
+    indexPrice(requestParameters: IndexPriceRequest): Promise<RestApiResponse<IndexPriceResponse>>;
     /**
      * Kline/candlestick bars for an option symbol.
      * Klines are uniquely identified by their open time.
@@ -580,20 +533,6 @@ export interface MarketDataApiInterface {
     klineCandlestickData(
         requestParameters: KlineCandlestickDataRequest
     ): Promise<RestApiResponse<KlineCandlestickDataResponse>>;
-    /**
-     * Get older market historical trades.
-     *
-     * Weight: 20
-     *
-     * @summary Old Trades Lookup (MARKET_DATA)
-     * @param {OldTradesLookupRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MarketDataApiInterface
-     */
-    oldTradesLookup(
-        requestParameters: OldTradesLookupRequest
-    ): Promise<RestApiResponse<OldTradesLookupResponse>>;
     /**
      * Get open interest for specific underlying asset on specific expiration date.
      *
@@ -627,7 +566,7 @@ export interface MarketDataApiInterface {
      *
      * Weight: limit         | weight
      * ------------  | ------------
-     * 5, 10, 20, 50 | 2
+     * 5, 10, 20, 50 | 1
      * 100           | 5
      * 500           | 10
      * 1000          | 20
@@ -729,14 +668,14 @@ export interface HistoricalExerciseRecordsRequest {
 }
 
 /**
- * Request parameters for indexPriceTicker operation in MarketDataApi.
- * @interface IndexPriceTickerRequest
+ * Request parameters for indexPrice operation in MarketDataApi.
+ * @interface IndexPriceRequest
  */
-export interface IndexPriceTickerRequest {
+export interface IndexPriceRequest {
     /**
      * Option underlying, e.g BTCUSDT
      * @type {string}
-     * @memberof MarketDataApiIndexPriceTicker
+     * @memberof MarketDataApiIndexPrice
      */
     readonly underlying: string;
 }
@@ -778,33 +717,6 @@ export interface KlineCandlestickDataRequest {
      * Number of result sets returned Default:100 Max:1000
      * @type {number | bigint}
      * @memberof MarketDataApiKlineCandlestickData
-     */
-    readonly limit?: number | bigint;
-}
-
-/**
- * Request parameters for oldTradesLookup operation in MarketDataApi.
- * @interface OldTradesLookupRequest
- */
-export interface OldTradesLookupRequest {
-    /**
-     * Option trading pair, e.g BTC-200730-9000-C
-     * @type {string}
-     * @memberof MarketDataApiOldTradesLookup
-     */
-    readonly symbol: string;
-
-    /**
-     * The UniqueId ID from which to return. The latest deal record is returned by default
-     * @type {number | bigint}
-     * @memberof MarketDataApiOldTradesLookup
-     */
-    readonly fromId?: number | bigint;
-
-    /**
-     * Number of result sets returned Default:100 Max:1000
-     * @type {number | bigint}
-     * @memberof MarketDataApiOldTradesLookup
      */
     readonly limit?: number | bigint;
 }
@@ -937,7 +849,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * @returns {Promise<RestApiResponse<CheckServerTimeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-data/Check-Server-Time Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-data/Check-Server-Time Binance API Documentation}
      */
     public async checkServerTime(): Promise<RestApiResponse<CheckServerTimeResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.checkServerTime();
@@ -961,7 +873,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * @returns {Promise<RestApiResponse<ExchangeInformationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-data/Exchange-Information Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-data/Exchange-Information Binance API Documentation}
      */
     public async exchangeInformation(): Promise<RestApiResponse<ExchangeInformationResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.exchangeInformation();
@@ -988,7 +900,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * @returns {Promise<RestApiResponse<HistoricalExerciseRecordsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-data/Historical-Exercise-Records Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-data/Historical-Exercise-Records Binance API Documentation}
      */
     public async historicalExerciseRecords(
         requestParameters: HistoricalExerciseRecordsRequest = {}
@@ -1015,20 +927,20 @@ export class MarketDataApi implements MarketDataApiInterface {
      *
      * Weight: 1
      *
-     * @summary Index Price Ticker
-     * @param {IndexPriceTickerRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<IndexPriceTickerResponse>>}
+     * @summary Index Price
+     * @param {IndexPriceRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<IndexPriceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-data/Index-Price-Ticker Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-data/Symbol-Price-Ticker Binance API Documentation}
      */
-    public async indexPriceTicker(
-        requestParameters: IndexPriceTickerRequest
-    ): Promise<RestApiResponse<IndexPriceTickerResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.indexPriceTicker(
+    public async indexPrice(
+        requestParameters: IndexPriceRequest
+    ): Promise<RestApiResponse<IndexPriceResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.indexPrice(
             requestParameters?.underlying
         );
-        return sendRequest<IndexPriceTickerResponse>(
+        return sendRequest<IndexPriceResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
@@ -1052,7 +964,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * @returns {Promise<RestApiResponse<KlineCandlestickDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-data/Kline-Candlestick-Data Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-data/Kline-Candlestick-Data Binance API Documentation}
      */
     public async klineCandlestickData(
         requestParameters: KlineCandlestickDataRequest
@@ -1076,37 +988,6 @@ export class MarketDataApi implements MarketDataApiInterface {
     }
 
     /**
-     * Get older market historical trades.
-     *
-     * Weight: 20
-     *
-     * @summary Old Trades Lookup (MARKET_DATA)
-     * @param {OldTradesLookupRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<OldTradesLookupResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-data/Old-Trades-Lookup Binance API Documentation}
-     */
-    public async oldTradesLookup(
-        requestParameters: OldTradesLookupRequest
-    ): Promise<RestApiResponse<OldTradesLookupResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.oldTradesLookup(
-            requestParameters?.symbol,
-            requestParameters?.fromId,
-            requestParameters?.limit
-        );
-        return sendRequest<OldTradesLookupResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.queryParams,
-            localVarAxiosArgs.bodyParams,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
-        );
-    }
-
-    /**
      * Get open interest for specific underlying asset on specific expiration date.
      *
      * Weight: 0
@@ -1116,7 +997,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * @returns {Promise<RestApiResponse<OpenInterestResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-data/Open-Interest Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-data/Open-Interest Binance API Documentation}
      */
     public async openInterest(
         requestParameters: OpenInterestRequest
@@ -1146,7 +1027,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * @returns {Promise<RestApiResponse<OptionMarkPriceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-data/Option-Mark-Price Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-data/Option-Mark-Price Binance API Documentation}
      */
     public async optionMarkPrice(
         requestParameters: OptionMarkPriceRequest = {}
@@ -1170,7 +1051,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      *
      * Weight: limit         | weight
      * ------------  | ------------
-     * 5, 10, 20, 50 | 2
+     * 5, 10, 20, 50 | 1
      * 100           | 5
      * 500           | 10
      * 1000          | 20
@@ -1180,7 +1061,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * @returns {Promise<RestApiResponse<OrderBookResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-data/Order-Book Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-data/Order-Book Binance API Documentation}
      */
     public async orderBook(
         requestParameters: OrderBookRequest
@@ -1210,7 +1091,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * @returns {Promise<RestApiResponse<RecentBlockTradesListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-data/Recent-Block-Trade-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-data/Recent-Block-Trade-List Binance API Documentation}
      */
     public async recentBlockTradesList(
         requestParameters: RecentBlockTradesListRequest = {}
@@ -1240,7 +1121,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * @returns {Promise<RestApiResponse<RecentTradesListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-data/Recent-Trades-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-data/Recent-Trades-List Binance API Documentation}
      */
     public async recentTradesList(
         requestParameters: RecentTradesListRequest
@@ -1269,7 +1150,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-data/Test-Connectivity Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-data/Test-Connectivity Binance API Documentation}
      */
     public async testConnectivity(): Promise<RestApiResponse<void>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.testConnectivity();
@@ -1294,7 +1175,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * @returns {Promise<RestApiResponse<Ticker24hrPriceChangeStatisticsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/option/market-data/24hr-Ticker-Price-Change-Statistics Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/derivatives/options-trading/market-data/24hr-Ticker-Price-Change-Statistics Binance API Documentation}
      */
     public async ticker24hrPriceChangeStatistics(
         requestParameters: Ticker24hrPriceChangeStatisticsRequest = {}

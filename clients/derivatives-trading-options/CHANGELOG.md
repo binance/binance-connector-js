@@ -1,5 +1,12 @@
 # Changelog
 
+## 13.0.0 - 2026-01-13
+
+### Changed (2)
+
+- Update `@binance/common` library to version `2.2.0`.
+- Update REST API and Websocket Streams to match latest API changes.
+
 ## 12.0.0 - 2025-12-19
 
 ### Changed (2)

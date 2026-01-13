@@ -104,6 +104,7 @@ export const PlaceMultipleOrdersOrdersParameterInnerTimeInForceEnum = {
     GTC: 'GTC',
     IOC: 'IOC',
     FOK: 'FOK',
+    GTX: 'GTX',
 } as const;
 
 export type PlaceMultipleOrdersOrdersParameterInnerTimeInForceEnum =

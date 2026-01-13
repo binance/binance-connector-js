@@ -16,43 +16,37 @@
 /**
  *
  * @export
- * @interface OrderTradeUpdateOInnerFiInner
+ * @interface GreekUpdateGInner
  */
-export interface OrderTradeUpdateOInnerFiInner {
+export interface GreekUpdateGInner {
     /**
      *
      * @type {string}
-     * @memberof OrderTradeUpdateOInnerFiInner
+     * @memberof GreekUpdateGInner
+     */
+    u?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GreekUpdateGInner
+     */
+    d?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GreekUpdateGInner
+     */
+    g?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GreekUpdateGInner
      */
     t?: string;
     /**
      *
      * @type {string}
-     * @memberof OrderTradeUpdateOInnerFiInner
+     * @memberof GreekUpdateGInner
      */
-    p?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof OrderTradeUpdateOInnerFiInner
-     */
-    q?: string;
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof OrderTradeUpdateOInnerFiInner
-     */
-    T?: number | bigint;
-    /**
-     *
-     * @type {string}
-     * @memberof OrderTradeUpdateOInnerFiInner
-     */
-    m?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof OrderTradeUpdateOInnerFiInner
-     */
-    f?: string;
+    v?: string;
 }

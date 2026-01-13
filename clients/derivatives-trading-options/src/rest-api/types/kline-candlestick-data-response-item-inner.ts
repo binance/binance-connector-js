@@ -14,21 +14,7 @@
  */
 
 /**
- *
+ * @type KlineCandlestickDataResponseItemInner
  * @export
- * @interface CancelAllOptionOrdersByUnderlyingResponse
  */
-export interface CancelAllOptionOrdersByUnderlyingResponse {
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof CancelAllOptionOrdersByUnderlyingResponse
-     */
-    code?: number | bigint;
-    /**
-     *
-     * @type {string}
-     * @memberof CancelAllOptionOrdersByUnderlyingResponse
-     */
-    msg?: string;
-}
+export type KlineCandlestickDataResponseItemInner = number | string;
