@@ -3,6 +3,7 @@ export * from './change-auto-repay-futures-status-response';
 export * from './fund-auto-collection-response';
 export * from './fund-collection-by-asset-response';
 export * from './get-auto-repay-futures-status-response';
+export * from './get-delta-mode-status-response';
 export * from './get-portfolio-margin-asset-leverage-response';
 export * from './get-portfolio-margin-asset-leverage-response-inner';
 export * from './get-portfolio-margin-pro-account-balance-response';
@@ -25,4 +26,5 @@ export * from './query-portfolio-margin-pro-bankruptcy-loan-repay-history-respon
 export * from './query-portfolio-margin-pro-negative-balance-interest-history-response';
 export * from './query-portfolio-margin-pro-negative-balance-interest-history-response-inner';
 export * from './repay-futures-negative-balance-response';
+export * from './switch-delta-mode-response';
 export * from './transfer-ldusdt-rwusd-for-portfolio-margin-response';

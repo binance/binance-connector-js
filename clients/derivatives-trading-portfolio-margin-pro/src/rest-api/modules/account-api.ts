@@ -25,6 +25,7 @@ import type {
     FundAutoCollectionResponse,
     FundCollectionByAssetResponse,
     GetAutoRepayFuturesStatusResponse,
+    GetDeltaModeStatusResponse,
     GetPortfolioMarginProAccountBalanceResponse,
     GetPortfolioMarginProAccountInfoResponse,
     GetPortfolioMarginProSpanAccountInfoResponse,
@@ -34,6 +35,7 @@ import type {
     QueryPortfolioMarginProBankruptcyLoanRepayHistoryResponse,
     QueryPortfolioMarginProNegativeBalanceInterestHistoryResponse,
     RepayFuturesNegativeBalanceResponse,
+    SwitchDeltaModeResponse,
     TransferLdusdtRwusdForPortfolioMarginResponse,
 } from '../types';
 
@@ -233,6 +235,35 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             };
         },
         /**
+         * Query the Delta mode status of current account.
+         *
+         * Weight: 1500
+         *
+         * @summary Get Delta Mode Status(USER_DATA)
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        getDeltaModeStatus: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/portfolio/delta-mode',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Query Portfolio Margin Pro account balance
          *
          * Weight: 20
@@ -382,6 +413,8 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         },
         /**
          * Repay Portfolio Margin Pro Bankruptcy Loan
+         *
+         * Please note that the API Key has enabled Spot & Margin Trading permissions to access this endpoint.
          *
          * Weight: 3000
          *
@@ -593,6 +626,45 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             };
         },
         /**
+         * Switch the Delta mode for existing PM PRO / PM RETAIL accounts.
+         *
+         * Weight: 1500
+         *
+         * @summary Switch Delta Mode(TRADE)
+         * @param {string} deltaEnabled `true` to enable Delta mode; `false` to disable Delta mode
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        switchDeltaMode: async (
+            deltaEnabled: string,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'deltaEnabled' is not null or undefined
+            assertParamExists('switchDeltaMode', 'deltaEnabled', deltaEnabled);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+
+            if (deltaEnabled !== undefined && deltaEnabled !== null) {
+                localVarQueryParameter['deltaEnabled'] = deltaEnabled;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/portfolio/delta-mode',
+                method: 'POST',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Transfer LDUSDT/RWUSD as collateral for all types of Portfolio Margin account
          *
          * Weight: 1500
@@ -736,6 +808,20 @@ export interface AccountApiInterface {
         requestParameters?: GetAutoRepayFuturesStatusRequest
     ): Promise<RestApiResponse<GetAutoRepayFuturesStatusResponse>>;
     /**
+     * Query the Delta mode status of current account.
+     *
+     * Weight: 1500
+     *
+     * @summary Get Delta Mode Status(USER_DATA)
+     * @param {GetDeltaModeStatusRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApiInterface
+     */
+    getDeltaModeStatus(
+        requestParameters?: GetDeltaModeStatusRequest
+    ): Promise<RestApiResponse<GetDeltaModeStatusResponse>>;
+    /**
      * Query Portfolio Margin Pro account balance
      *
      * Weight: 20
@@ -793,6 +879,8 @@ export interface AccountApiInterface {
     ): Promise<RestApiResponse<GetTransferableEarnAssetBalanceForPortfolioMarginResponse>>;
     /**
      * Repay Portfolio Margin Pro Bankruptcy Loan
+     *
+     * Please note that the API Key has enabled Spot & Margin Trading permissions to access this endpoint.
      *
      * Weight: 3000
      *
@@ -868,6 +956,20 @@ export interface AccountApiInterface {
     repayFuturesNegativeBalance(
         requestParameters?: RepayFuturesNegativeBalanceRequest
     ): Promise<RestApiResponse<RepayFuturesNegativeBalanceResponse>>;
+    /**
+     * Switch the Delta mode for existing PM PRO / PM RETAIL accounts.
+     *
+     * Weight: 1500
+     *
+     * @summary Switch Delta Mode(TRADE)
+     * @param {SwitchDeltaModeRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApiInterface
+     */
+    switchDeltaMode(
+        requestParameters: SwitchDeltaModeRequest
+    ): Promise<RestApiResponse<SwitchDeltaModeResponse>>;
     /**
      * Transfer LDUSDT/RWUSD as collateral for all types of Portfolio Margin account
      *
@@ -973,6 +1075,19 @@ export interface GetAutoRepayFuturesStatusRequest {
      *
      * @type {number | bigint}
      * @memberof AccountApiGetAutoRepayFuturesStatus
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
+ * Request parameters for getDeltaModeStatus operation in AccountApi.
+ * @interface GetDeltaModeStatusRequest
+ */
+export interface GetDeltaModeStatusRequest {
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof AccountApiGetDeltaModeStatus
      */
     readonly recvWindow?: number | bigint;
 }
@@ -1186,6 +1301,26 @@ export interface RepayFuturesNegativeBalanceRequest {
 }
 
 /**
+ * Request parameters for switchDeltaMode operation in AccountApi.
+ * @interface SwitchDeltaModeRequest
+ */
+export interface SwitchDeltaModeRequest {
+    /**
+     * `true` to enable Delta mode; `false` to disable Delta mode
+     * @type {string}
+     * @memberof AccountApiSwitchDeltaMode
+     */
+    readonly deltaEnabled: string;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof AccountApiSwitchDeltaMode
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
  * Request parameters for transferLdusdtRwusdForPortfolioMargin operation in AccountApi.
  * @interface TransferLdusdtRwusdForPortfolioMarginRequest
  */
@@ -1390,6 +1525,35 @@ export class AccountApi implements AccountApiInterface {
     }
 
     /**
+     * Query the Delta mode status of current account.
+     *
+     * Weight: 1500
+     *
+     * @summary Get Delta Mode Status(USER_DATA)
+     * @param {GetDeltaModeStatusRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetDeltaModeStatusResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApi
+     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Get-Delta-Mode-Status Binance API Documentation}
+     */
+    public async getDeltaModeStatus(
+        requestParameters: GetDeltaModeStatusRequest = {}
+    ): Promise<RestApiResponse<GetDeltaModeStatusResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getDeltaModeStatus(
+            requestParameters?.recvWindow
+        );
+        return sendRequest<GetDeltaModeStatusResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
      * Query Portfolio Margin Pro account balance
      *
      * Weight: 20
@@ -1514,6 +1678,8 @@ export class AccountApi implements AccountApiInterface {
 
     /**
      * Repay Portfolio Margin Pro Bankruptcy Loan
+     *
+     * Please note that the API Key has enabled Spot & Margin Trading permissions to access this endpoint.
      *
      * Weight: 3000
      *
@@ -1668,6 +1834,36 @@ export class AccountApi implements AccountApiInterface {
             requestParameters?.recvWindow
         );
         return sendRequest<RepayFuturesNegativeBalanceResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Switch the Delta mode for existing PM PRO / PM RETAIL accounts.
+     *
+     * Weight: 1500
+     *
+     * @summary Switch Delta Mode(TRADE)
+     * @param {SwitchDeltaModeRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<SwitchDeltaModeResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof AccountApi
+     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Switch-Delta-Mode Binance API Documentation}
+     */
+    public async switchDeltaMode(
+        requestParameters: SwitchDeltaModeRequest
+    ): Promise<RestApiResponse<SwitchDeltaModeResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.switchDeltaMode(
+            requestParameters?.deltaEnabled,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<SwitchDeltaModeResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

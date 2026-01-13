@@ -1,5 +1,18 @@
 # Changelog
 
+## 12.0.0 - 2026-01-13
+
+### Added (2)
+
+#### REST API
+
+- `getDeltaModeStatus()` (`GET /sapi/v1/portfolio/delta-mode`)
+- `switchDeltaMode()` (`POST /sapi/v1/portfolio/delta-mode`)
+
+### Changed (1)
+
+- Update `@binance/common` library to version `2.2.0`.
+
 ## 11.1.1 - 2025-12-19
 
 ### Changed (1)

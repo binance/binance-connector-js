@@ -22,6 +22,7 @@ import {
     FundAutoCollectionRequest,
     FundCollectionByAssetRequest,
     GetAutoRepayFuturesStatusRequest,
+    GetDeltaModeStatusRequest,
     GetPortfolioMarginProAccountBalanceRequest,
     GetPortfolioMarginProAccountInfoRequest,
     GetPortfolioMarginProSpanAccountInfoRequest,
@@ -31,6 +32,7 @@ import {
     QueryPortfolioMarginProBankruptcyLoanRepayHistoryRequest,
     QueryPortfolioMarginProNegativeBalanceInterestHistoryRequest,
     RepayFuturesNegativeBalanceRequest,
+    SwitchDeltaModeRequest,
     TransferLdusdtRwusdForPortfolioMarginRequest,
 } from '../../../src/rest-api';
 import type {
@@ -39,6 +41,7 @@ import type {
     FundAutoCollectionResponse,
     FundCollectionByAssetResponse,
     GetAutoRepayFuturesStatusResponse,
+    GetDeltaModeStatusResponse,
     GetPortfolioMarginProAccountBalanceResponse,
     GetPortfolioMarginProAccountInfoResponse,
     GetPortfolioMarginProSpanAccountInfoResponse,
@@ -48,6 +51,7 @@ import type {
     QueryPortfolioMarginProBankruptcyLoanRepayHistoryResponse,
     QueryPortfolioMarginProNegativeBalanceInterestHistoryResponse,
     RepayFuturesNegativeBalanceResponse,
+    SwitchDeltaModeResponse,
     TransferLdusdtRwusdForPortfolioMarginResponse,
 } from '../../../src/rest-api/types';
 
@@ -424,6 +428,61 @@ describe('AccountApi', () => {
                 .spyOn(client, 'getAutoRepayFuturesStatus')
                 .mockRejectedValueOnce(mockError);
             await expect(client.getAutoRepayFuturesStatus()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('getDeltaModeStatus()', () => {
+        it('should execute getDeltaModeStatus() successfully with required parameters only', async () => {
+            mockResponse = JSONParse(JSONStringify({ deltaEnabled: false }));
+
+            const spy = jest.spyOn(client, 'getDeltaModeStatus').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetDeltaModeStatusResponse>)
+            );
+            const response = await client.getDeltaModeStatus();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute getDeltaModeStatus() successfully with optional parameters', async () => {
+            const params: GetDeltaModeStatusRequest = {
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(JSONStringify({ deltaEnabled: false }));
+
+            const spy = jest.spyOn(client, 'getDeltaModeStatus').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetDeltaModeStatusResponse>)
+            );
+            const response = await client.getDeltaModeStatus(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'getDeltaModeStatus').mockRejectedValueOnce(mockError);
+            await expect(client.getDeltaModeStatus()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
@@ -1145,6 +1204,82 @@ describe('AccountApi', () => {
                 .spyOn(client, 'repayFuturesNegativeBalance')
                 .mockRejectedValueOnce(mockError);
             await expect(client.repayFuturesNegativeBalance()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('switchDeltaMode()', () => {
+        it('should execute switchDeltaMode() successfully with required parameters only', async () => {
+            const params: SwitchDeltaModeRequest = {
+                deltaEnabled: 'deltaEnabled_example',
+            };
+
+            mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
+
+            const spy = jest.spyOn(client, 'switchDeltaMode').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<SwitchDeltaModeResponse>)
+            );
+            const response = await client.switchDeltaMode(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute switchDeltaMode() successfully with optional parameters', async () => {
+            const params: SwitchDeltaModeRequest = {
+                deltaEnabled: 'deltaEnabled_example',
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(JSONStringify({ msg: 'success' }));
+
+            const spy = jest.spyOn(client, 'switchDeltaMode').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<SwitchDeltaModeResponse>)
+            );
+            const response = await client.switchDeltaMode(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when deltaEnabled is missing', async () => {
+            const _params: SwitchDeltaModeRequest = {
+                deltaEnabled: 'deltaEnabled_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.deltaEnabled;
+
+            await expect(client.switchDeltaMode(params)).rejects.toThrow(
+                'Required parameter deltaEnabled was null or undefined when calling switchDeltaMode.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: SwitchDeltaModeRequest = {
+                deltaEnabled: 'deltaEnabled_example',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'switchDeltaMode').mockRejectedValueOnce(mockError);
+            await expect(client.switchDeltaMode(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

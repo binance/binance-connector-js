@@ -21,6 +21,7 @@ import type {
     FundAutoCollectionRequest,
     FundCollectionByAssetRequest,
     GetAutoRepayFuturesStatusRequest,
+    GetDeltaModeStatusRequest,
     GetPortfolioMarginProAccountBalanceRequest,
     GetPortfolioMarginProAccountInfoRequest,
     GetPortfolioMarginProSpanAccountInfoRequest,
@@ -30,6 +31,7 @@ import type {
     QueryPortfolioMarginProBankruptcyLoanRepayHistoryRequest,
     QueryPortfolioMarginProNegativeBalanceInterestHistoryRequest,
     RepayFuturesNegativeBalanceRequest,
+    SwitchDeltaModeRequest,
     TransferLdusdtRwusdForPortfolioMarginRequest,
 } from './modules/account-api';
 import type {
@@ -43,6 +45,7 @@ import type {
     FundAutoCollectionResponse,
     FundCollectionByAssetResponse,
     GetAutoRepayFuturesStatusResponse,
+    GetDeltaModeStatusResponse,
     GetPortfolioMarginProAccountBalanceResponse,
     GetPortfolioMarginProAccountInfoResponse,
     GetPortfolioMarginProSpanAccountInfoResponse,
@@ -52,6 +55,7 @@ import type {
     QueryPortfolioMarginProBankruptcyLoanRepayHistoryResponse,
     QueryPortfolioMarginProNegativeBalanceInterestHistoryResponse,
     RepayFuturesNegativeBalanceResponse,
+    SwitchDeltaModeResponse,
     TransferLdusdtRwusdForPortfolioMarginResponse,
 } from './types';
 import type {
@@ -222,6 +226,24 @@ export class RestAPI {
     }
 
     /**
+     * Query the Delta mode status of current account.
+     *
+     * Weight: 1500
+     *
+     * @summary Get Delta Mode Status(USER_DATA)
+     * @param {GetDeltaModeStatusRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<GetDeltaModeStatusResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Get-Delta-Mode-Status Binance API Documentation}
+     */
+    getDeltaModeStatus(
+        requestParameters: GetDeltaModeStatusRequest = {}
+    ): Promise<RestApiResponse<GetDeltaModeStatusResponse>> {
+        return this.accountApi.getDeltaModeStatus(requestParameters);
+    }
+
+    /**
      * Query Portfolio Margin Pro account balance
      *
      * Weight: 20
@@ -295,6 +317,8 @@ export class RestAPI {
 
     /**
      * Repay Portfolio Margin Pro Bankruptcy Loan
+     *
+     * Please note that the API Key has enabled Spot & Margin Trading permissions to access this endpoint.
      *
      * Weight: 3000
      *
@@ -390,6 +414,24 @@ export class RestAPI {
         requestParameters: RepayFuturesNegativeBalanceRequest = {}
     ): Promise<RestApiResponse<RepayFuturesNegativeBalanceResponse>> {
         return this.accountApi.repayFuturesNegativeBalance(requestParameters);
+    }
+
+    /**
+     * Switch the Delta mode for existing PM PRO / PM RETAIL accounts.
+     *
+     * Weight: 1500
+     *
+     * @summary Switch Delta Mode(TRADE)
+     * @param {SwitchDeltaModeRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<SwitchDeltaModeResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/derivatives/portfolio-margin-pro/account/Switch-Delta-Mode Binance API Documentation}
+     */
+    switchDeltaMode(
+        requestParameters: SwitchDeltaModeRequest
+    ): Promise<RestApiResponse<SwitchDeltaModeResponse>> {
+        return this.accountApi.switchDeltaMode(requestParameters);
     }
 
     /**
