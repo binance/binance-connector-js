@@ -75,6 +75,7 @@ import type {
     ModifyMultipleOrdersRequest,
     ModifyOrderRequest,
     NewOrderRequest,
+    PlaceMultipleOrdersRequest,
     PositionAdlQuantileEstimationRequest,
     PositionInformationRequest,
     QueryCurrentOpenOrderRequest,
@@ -129,6 +130,7 @@ import type { ClassicPortfolioMarginAccountInformationResponse } from './types';
 import type {
     AccountTradeListResponse,
     AllOrdersResponse,
+    AutoCancelAllOpenOrdersResponse,
     CancelAllOpenOrdersResponse,
     CancelMultipleOrdersResponse,
     CancelOrderResponse,
@@ -142,13 +144,14 @@ import type {
     ModifyMultipleOrdersResponse,
     ModifyOrderResponse,
     NewOrderResponse,
+    PlaceMultipleOrdersResponse,
     PositionAdlQuantileEstimationResponse,
     PositionInformationResponse,
     QueryCurrentOpenOrderResponse,
     QueryOrderResponse,
     UsersForceOrdersResponse,
 } from './types';
-import type { StartUserDataStreamResponse } from './types';
+import type { KeepaliveUserDataStreamResponse, StartUserDataStreamResponse } from './types';
 
 export class RestAPI {
     private configuration: ConfigurationRestAPI;
@@ -1149,13 +1152,13 @@ export class RestAPI {
      * @summary Auto-Cancel All Open Orders (TRADE)
      * @param {AutoCancelAllOpenOrdersRequest} requestParameters Request parameters.
      *
-     * @returns {Promise<RestApiResponse<void>>}
+     * @returns {Promise<RestApiResponse<AutoCancelAllOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Auto-Cancel-All-Open-Orders Binance API Documentation}
      */
     autoCancelAllOpenOrders(
         requestParameters: AutoCancelAllOpenOrdersRequest
-    ): Promise<RestApiResponse<void>> {
+    ): Promise<RestApiResponse<AutoCancelAllOpenOrdersResponse>> {
         return this.tradeApi.autoCancelAllOpenOrders(requestParameters);
     }
 
@@ -1456,6 +1459,28 @@ export class RestAPI {
     }
 
     /**
+     * Place multiple orders
+     *
+     * Parameter rules are same with `New Order`
+     * Batch orders are processed concurrently, and the order of matching is not guaranteed.
+     * The order of returned contents for batch orders is the same as the order of the order list.
+     *
+     * Weight: 5
+     *
+     * @summary Place Multiple Orders(TRADE)
+     * @param {PlaceMultipleOrdersRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<PlaceMultipleOrdersResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Place-Multiple-Orders Binance API Documentation}
+     */
+    placeMultipleOrders(
+        requestParameters: PlaceMultipleOrdersRequest
+    ): Promise<RestApiResponse<PlaceMultipleOrdersResponse>> {
+        return this.tradeApi.placeMultipleOrders(requestParameters);
+    }
+
+    /**
      * Query position ADL quantile estimation
      *
      * Values update every 30s.
@@ -1590,11 +1615,11 @@ export class RestAPI {
      *
      * @summary Keepalive User Data Stream (USER_STREAM)
      *
-     * @returns {Promise<RestApiResponse<void>>}
+     * @returns {Promise<RestApiResponse<KeepaliveUserDataStreamResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream Binance API Documentation}
      */
-    keepaliveUserDataStream(): Promise<RestApiResponse<void>> {
+    keepaliveUserDataStream(): Promise<RestApiResponse<KeepaliveUserDataStreamResponse>> {
         return this.userDataStreamsApi.keepaliveUserDataStream();
     }
 

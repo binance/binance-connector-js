@@ -49,6 +49,7 @@ import {
     ModifyMultipleOrdersRequest,
     ModifyOrderRequest,
     NewOrderRequest,
+    PlaceMultipleOrdersRequest,
     PositionAdlQuantileEstimationRequest,
     PositionInformationRequest,
     QueryCurrentOpenOrderRequest,
@@ -58,6 +59,7 @@ import {
 import type {
     AccountTradeListResponse,
     AllOrdersResponse,
+    AutoCancelAllOpenOrdersResponse,
     CancelAllOpenOrdersResponse,
     CancelMultipleOrdersResponse,
     CancelOrderResponse,
@@ -71,6 +73,7 @@ import type {
     ModifyMultipleOrdersResponse,
     ModifyOrderResponse,
     NewOrderResponse,
+    PlaceMultipleOrdersResponse,
     PositionAdlQuantileEstimationResponse,
     PositionInformationResponse,
     QueryCurrentOpenOrderResponse,
@@ -326,17 +329,21 @@ describe('TradeApi', () => {
                 countdownTime: 789,
             };
 
+            mockResponse = JSONParse(
+                JSONStringify({ symbol: 'BTCUSD_200925', countdownTime: '100000' })
+            );
+
             const spy = jest.spyOn(client, 'autoCancelAllOpenOrders').mockReturnValue(
                 Promise.resolve({
-                    data: () => Promise.resolve(),
+                    data: () => Promise.resolve(mockResponse),
                     status: 200,
                     headers: {},
                     rateLimits: [],
-                } as RestApiResponse<void>)
+                } as RestApiResponse<AutoCancelAllOpenOrdersResponse>)
             );
             const response = await client.autoCancelAllOpenOrders(params);
-
-            await expect(response.data()).resolves.toBeUndefined();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
         });
 
@@ -347,17 +354,21 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
+            mockResponse = JSONParse(
+                JSONStringify({ symbol: 'BTCUSD_200925', countdownTime: '100000' })
+            );
+
             const spy = jest.spyOn(client, 'autoCancelAllOpenOrders').mockReturnValue(
                 Promise.resolve({
-                    data: () => Promise.resolve(),
+                    data: () => Promise.resolve(mockResponse),
                     status: 200,
                     headers: {},
                     rateLimits: [],
-                } as RestApiResponse<void>)
+                } as RestApiResponse<AutoCancelAllOpenOrdersResponse>)
             );
             const response = await client.autoCancelAllOpenOrders(params);
-
-            await expect(response.data()).resolves.toBeUndefined();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
         });
 
@@ -2040,6 +2051,144 @@ describe('TradeApi', () => {
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'newOrder').mockRejectedValueOnce(mockError);
             await expect(client.newOrder(params)).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('placeMultipleOrders()', () => {
+        it('should execute placeMultipleOrders() successfully with required parameters only', async () => {
+            const params: PlaceMultipleOrdersRequest = {
+                batchOrders: [],
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        clientOrderId: 'testOrder',
+                        cumQty: '0',
+                        cumBase: '0',
+                        executedQty: '0',
+                        orderId: 22542179,
+                        avgPrice: '0.0',
+                        origQty: '10',
+                        price: '0',
+                        reduceOnly: false,
+                        side: 'BUY',
+                        positionSide: 'SHORT',
+                        status: 'NEW',
+                        stopPrice: '9300',
+                        symbol: 'BTCUSD_200925',
+                        pair: 'BTCUSD',
+                        timeInForce: 'GTC',
+                        type: 'TRAILING_STOP_MARKET',
+                        origType: 'TRAILING_STOP_MARKET',
+                        activatePrice: '9020',
+                        priceRate: '0.3',
+                        updateTime: 1566818724722,
+                        workingType: 'CONTRACT_PRICE',
+                        priceProtect: false,
+                        priceMatch: 'NONE',
+                        selfTradePreventionMode: 'NONE',
+                    },
+                    { code: -2022, msg: 'ReduceOnly Order is rejected.' },
+                ])
+            );
+
+            const spy = jest.spyOn(client, 'placeMultipleOrders').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<PlaceMultipleOrdersResponse>)
+            );
+            const response = await client.placeMultipleOrders(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute placeMultipleOrders() successfully with optional parameters', async () => {
+            const params: PlaceMultipleOrdersRequest = {
+                batchOrders: [],
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        clientOrderId: 'testOrder',
+                        cumQty: '0',
+                        cumBase: '0',
+                        executedQty: '0',
+                        orderId: 22542179,
+                        avgPrice: '0.0',
+                        origQty: '10',
+                        price: '0',
+                        reduceOnly: false,
+                        side: 'BUY',
+                        positionSide: 'SHORT',
+                        status: 'NEW',
+                        stopPrice: '9300',
+                        symbol: 'BTCUSD_200925',
+                        pair: 'BTCUSD',
+                        timeInForce: 'GTC',
+                        type: 'TRAILING_STOP_MARKET',
+                        origType: 'TRAILING_STOP_MARKET',
+                        activatePrice: '9020',
+                        priceRate: '0.3',
+                        updateTime: 1566818724722,
+                        workingType: 'CONTRACT_PRICE',
+                        priceProtect: false,
+                        priceMatch: 'NONE',
+                        selfTradePreventionMode: 'NONE',
+                    },
+                    { code: -2022, msg: 'ReduceOnly Order is rejected.' },
+                ])
+            );
+
+            const spy = jest.spyOn(client, 'placeMultipleOrders').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<PlaceMultipleOrdersResponse>)
+            );
+            const response = await client.placeMultipleOrders(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when batchOrders is missing', async () => {
+            const _params: PlaceMultipleOrdersRequest = {
+                batchOrders: [],
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.batchOrders;
+
+            await expect(client.placeMultipleOrders(params)).rejects.toThrow(
+                'Required parameter batchOrders was null or undefined when calling placeMultipleOrders.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: PlaceMultipleOrdersRequest = {
+                batchOrders: [],
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'placeMultipleOrders').mockRejectedValueOnce(mockError);
+            await expect(client.placeMultipleOrders(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

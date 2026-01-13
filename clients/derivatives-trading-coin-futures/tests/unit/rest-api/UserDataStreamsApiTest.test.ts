@@ -17,7 +17,10 @@ import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
 import { UserDataStreamsApi } from '../../../src/rest-api';
 import {} from '../../../src/rest-api';
-import type { StartUserDataStreamResponse } from '../../../src/rest-api/types';
+import type {
+    KeepaliveUserDataStreamResponse,
+    StartUserDataStreamResponse,
+} from '../../../src/rest-api/types';
 
 describe('UserDataStreamsApi', () => {
     let client: UserDataStreamsApi;
@@ -67,17 +70,23 @@ describe('UserDataStreamsApi', () => {
 
     describe('keepaliveUserDataStream()', () => {
         it('should execute keepaliveUserDataStream() successfully with required parameters only', async () => {
+            mockResponse = JSONParse(
+                JSONStringify({
+                    listenKey: 'vmNt6gl1so8bXVsaAY153FG5tf63QaODxUarKUM8V8rY4ElSwEe431DNIYNKOkQp',
+                })
+            );
+
             const spy = jest.spyOn(client, 'keepaliveUserDataStream').mockReturnValue(
                 Promise.resolve({
-                    data: () => Promise.resolve(),
+                    data: () => Promise.resolve(mockResponse),
                     status: 200,
                     headers: {},
                     rateLimits: [],
-                } as RestApiResponse<void>)
+                } as RestApiResponse<KeepaliveUserDataStreamResponse>)
             );
             const response = await client.keepaliveUserDataStream();
-
-            await expect(response.data()).resolves.toBeUndefined();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
         });
 

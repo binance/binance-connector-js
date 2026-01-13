@@ -22,6 +22,7 @@ import {
 import type {
     AccountTradeListResponse,
     AllOrdersResponse,
+    AutoCancelAllOpenOrdersResponse,
     CancelAllOpenOrdersResponse,
     CancelMultipleOrdersResponse,
     CancelOrderResponse,
@@ -36,6 +37,8 @@ import type {
     ModifyMultipleOrdersResponse,
     ModifyOrderResponse,
     NewOrderResponse,
+    PlaceMultipleOrdersBatchOrdersParameterInner,
+    PlaceMultipleOrdersResponse,
     PositionAdlQuantileEstimationResponse,
     PositionInformationResponse,
     QueryCurrentOpenOrderResponse,
@@ -1040,6 +1043,49 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
+         * Place multiple orders
+         *
+         * Parameter rules are same with `New Order`
+         * Batch orders are processed concurrently, and the order of matching is not guaranteed.
+         * The order of returned contents for batch orders is the same as the order of the order list.
+         *
+         * Weight: 5
+         *
+         * @summary Place Multiple Orders(TRADE)
+         * @param {Array<PlaceMultipleOrdersBatchOrdersParameterInner>} batchOrders order list. Max 5 orders
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        placeMultipleOrders: async (
+            batchOrders: Array<PlaceMultipleOrdersBatchOrdersParameterInner>,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'batchOrders' is not null or undefined
+            assertParamExists('placeMultipleOrders', 'batchOrders', batchOrders);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+
+            if (batchOrders) {
+                localVarQueryParameter['batchOrders'] = batchOrders;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/dapi/v1/batchOrders',
+                method: 'POST',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Query position ADL quantile estimation
          *
          * Values update every 30s.
@@ -1368,7 +1414,7 @@ export interface TradeApiInterface {
      */
     autoCancelAllOpenOrders(
         requestParameters: AutoCancelAllOpenOrdersRequest
-    ): Promise<RestApiResponse<void>>;
+    ): Promise<RestApiResponse<AutoCancelAllOpenOrdersResponse>>;
     /**
      * Cancel All Open Orders
      *
@@ -1613,6 +1659,24 @@ export interface TradeApiInterface {
      * @memberof TradeApiInterface
      */
     newOrder(requestParameters: NewOrderRequest): Promise<RestApiResponse<NewOrderResponse>>;
+    /**
+     * Place multiple orders
+     *
+     * Parameter rules are same with `New Order`
+     * Batch orders are processed concurrently, and the order of matching is not guaranteed.
+     * The order of returned contents for batch orders is the same as the order of the order list.
+     *
+     * Weight: 5
+     *
+     * @summary Place Multiple Orders(TRADE)
+     * @param {PlaceMultipleOrdersRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApiInterface
+     */
+    placeMultipleOrders(
+        requestParameters: PlaceMultipleOrdersRequest
+    ): Promise<RestApiResponse<PlaceMultipleOrdersResponse>>;
     /**
      * Query position ADL quantile estimation
      *
@@ -2407,6 +2471,26 @@ export interface NewOrderRequest {
 }
 
 /**
+ * Request parameters for placeMultipleOrders operation in TradeApi.
+ * @interface PlaceMultipleOrdersRequest
+ */
+export interface PlaceMultipleOrdersRequest {
+    /**
+     * order list. Max 5 orders
+     * @type {Array<PlaceMultipleOrdersBatchOrdersParameterInner>}
+     * @memberof TradeApiPlaceMultipleOrders
+     */
+    readonly batchOrders: Array<PlaceMultipleOrdersBatchOrdersParameterInner>;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof TradeApiPlaceMultipleOrders
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
  * Request parameters for positionAdlQuantileEstimation operation in TradeApi.
  * @interface PositionAdlQuantileEstimationRequest
  */
@@ -2686,20 +2770,20 @@ export class TradeApi implements TradeApiInterface {
      *
      * @summary Auto-Cancel All Open Orders (TRADE)
      * @param {AutoCancelAllOpenOrdersRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<void>>}
+     * @returns {Promise<RestApiResponse<AutoCancelAllOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Auto-Cancel-All-Open-Orders Binance API Documentation}
      */
     public async autoCancelAllOpenOrders(
         requestParameters: AutoCancelAllOpenOrdersRequest
-    ): Promise<RestApiResponse<void>> {
+    ): Promise<RestApiResponse<AutoCancelAllOpenOrdersResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.autoCancelAllOpenOrders(
             requestParameters?.symbol,
             requestParameters?.countdownTime,
             requestParameters?.recvWindow
         );
-        return sendRequest<void>(
+        return sendRequest<AutoCancelAllOpenOrdersResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
@@ -3197,6 +3281,40 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.recvWindow
         );
         return sendRequest<NewOrderResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Place multiple orders
+     *
+     * Parameter rules are same with `New Order`
+     * Batch orders are processed concurrently, and the order of matching is not guaranteed.
+     * The order of returned contents for batch orders is the same as the order of the order list.
+     *
+     * Weight: 5
+     *
+     * @summary Place Multiple Orders(TRADE)
+     * @param {PlaceMultipleOrdersRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<PlaceMultipleOrdersResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApi
+     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Place-Multiple-Orders Binance API Documentation}
+     */
+    public async placeMultipleOrders(
+        requestParameters: PlaceMultipleOrdersRequest
+    ): Promise<RestApiResponse<PlaceMultipleOrdersResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.placeMultipleOrders(
+            requestParameters?.batchOrders,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<PlaceMultipleOrdersResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

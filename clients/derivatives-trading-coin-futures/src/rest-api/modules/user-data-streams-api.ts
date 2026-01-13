@@ -18,7 +18,7 @@ import {
     sendRequest,
     type RequestArgs,
 } from '@binance/common';
-import type { StartUserDataStreamResponse } from '../types';
+import type { KeepaliveUserDataStreamResponse, StartUserDataStreamResponse } from '../types';
 
 /**
  * UserDataStreamsApi - axios parameter creator
@@ -126,7 +126,7 @@ export interface UserDataStreamsApiInterface {
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof UserDataStreamsApiInterface
      */
-    keepaliveUserDataStream(): Promise<RestApiResponse<void>>;
+    keepaliveUserDataStream(): Promise<RestApiResponse<KeepaliveUserDataStreamResponse>>;
     /**
      * Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent. If the account has an active `listenKey`, that `listenKey` will be returned and its validity will be extended for 60 minutes.
      *
@@ -183,14 +183,16 @@ export class UserDataStreamsApi implements UserDataStreamsApiInterface {
      * Weight: 1
      *
      * @summary Keepalive User Data Stream (USER_STREAM)
-     * @returns {Promise<RestApiResponse<void>>}
+     * @returns {Promise<RestApiResponse<KeepaliveUserDataStreamResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof UserDataStreamsApi
      * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream Binance API Documentation}
      */
-    public async keepaliveUserDataStream(): Promise<RestApiResponse<void>> {
+    public async keepaliveUserDataStream(): Promise<
+        RestApiResponse<KeepaliveUserDataStreamResponse>
+        > {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.keepaliveUserDataStream();
-        return sendRequest<void>(
+        return sendRequest<KeepaliveUserDataStreamResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
