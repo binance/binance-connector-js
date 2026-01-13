@@ -13,6 +13,7 @@ import {
     WebsocketApiResponse,
     Logger,
     delay,
+    normalizeStreamId,
 } from '../src';
 
 jest.mock('ws');
@@ -28,13 +29,17 @@ class TestWebsocketCommon extends WebsocketCommon {
     }
 
     public testGetAvailableConnections(
-        allowNonEstablishedWebsockets: boolean = false
+        allowNonEstablishedWebsockets: boolean = false,
+        urlPath?: string
     ): WebsocketConnection[] {
-        return super.getAvailableConnections(allowNonEstablishedWebsockets);
+        return super.getAvailableConnections(allowNonEstablishedWebsockets, urlPath);
     }
 
-    public testGetConnection(allowNonEstablishedWebsockets: boolean = false): WebsocketConnection {
-        return super.getConnection(allowNonEstablishedWebsockets);
+    public testGetConnection(
+        allowNonEstablishedWebsockets: boolean = false,
+        urlPath?: string
+    ): WebsocketConnection {
+        return super.getConnection(allowNonEstablishedWebsockets, urlPath);
     }
 
     public exposeScheduleTimer(
@@ -54,8 +59,8 @@ class TestWebsocketCommon extends WebsocketCommon {
         super.clearTimers(connection);
     }
 
-    public async testConnectPool(url: string): Promise<void> {
-        return await super.connectPool(url);
+    public async testConnectPool(url: string, connections?: WebsocketConnection[]): Promise<void> {
+        return await super.connectPool(url, connections);
     }
 
     public testSend<T = unknown>(
@@ -462,7 +467,7 @@ describe('WebsocketCommon', () => {
             wsCommon = new TestWebsocketCommon(configuration, connectionPool);
         });
 
-        it('should returns first connection in single mode', () => {
+        it('should return first connection in single mode', () => {
             wsCommon = new TestWebsocketCommon({ wsURL: 'wss://x', mode: 'single' });
             const avail = wsCommon.testGetAvailableConnections();
             expect(avail).toEqual([wsCommon.connectionPool[0]]);
@@ -521,6 +526,27 @@ describe('WebsocketCommon', () => {
             );
             const avail = wsCommon.testGetAvailableConnections(true);
             expect(avail.map((c: WebsocketConnection) => c.id)).toEqual(['test-id2']);
+        });
+
+        it('should not force first connection in single mode when urlPath is provided', () => {
+            wsCommon = new TestWebsocketCommon(
+                { wsURL: 'wss://x', mode: 'single' },
+                connectionPool
+            );
+
+            const avail = wsCommon.testGetAvailableConnections(false, 'urlPath');
+            expect(avail.map((c: WebsocketConnection) => c.id)).toEqual(['test-id1', 'test-id2']);
+        });
+
+        it('should not filter by urlPath in getAvailableConnections', () => {
+            wsCommon = new TestWebsocketCommon({ wsURL: 'wss://x', mode: 'pool' }, connectionPool);
+
+            connectionPool[0].urlPath = 'a';
+            connectionPool[1].urlPath = 'b';
+            connectionPool[2].urlPath = 'a';
+
+            const avail = wsCommon.testGetAvailableConnections(false, 'a');
+            expect(avail.map((c) => c.id)).toEqual(['test-id1', 'test-id2']);
         });
     });
 
@@ -609,6 +635,141 @@ describe('WebsocketCommon', () => {
             expect(firstConnection).toBe(connectionPool[0]);
             expect(secondConnection).toBe(connectionPool[1]);
             expect(thirdConnection).toBe(connectionPool[2]);
+        });
+
+        it('should filter by urlPath when provided (pool mode)', () => {
+            Object.defineProperty(connectionPool[0].ws!, 'readyState', {
+                value: WebSocketClient.OPEN,
+            });
+            Object.defineProperty(connectionPool[1].ws!, 'readyState', {
+                value: WebSocketClient.OPEN,
+            });
+            Object.defineProperty(connectionPool[2].ws!, 'readyState', {
+                value: WebSocketClient.OPEN,
+            });
+
+            connectionPool[0].closeInitiated = false;
+            connectionPool[1].closeInitiated = false;
+            connectionPool[2].closeInitiated = false;
+            connectionPool[0].reconnectionPending = false;
+            connectionPool[1].reconnectionPending = false;
+            connectionPool[2].reconnectionPending = false;
+
+            connectionPool[0].urlPath = 'a';
+            connectionPool[1].urlPath = 'b';
+            connectionPool[2].urlPath = 'a';
+
+            const connection = wsCommon.testGetConnection(false, 'b');
+            expect(connection).toBe(connectionPool[1]);
+        });
+
+        it('should round-robin only within the urlPath subset (pool mode)', () => {
+            Object.defineProperty(connectionPool[0].ws!, 'readyState', {
+                value: WebSocketClient.OPEN,
+            });
+            Object.defineProperty(connectionPool[1].ws!, 'readyState', {
+                value: WebSocketClient.OPEN,
+            });
+            Object.defineProperty(connectionPool[2].ws!, 'readyState', {
+                value: WebSocketClient.OPEN,
+            });
+
+            connectionPool.forEach((c) => {
+                c.closeInitiated = false;
+                c.reconnectionPending = false;
+            });
+
+            connectionPool[0].urlPath = 'a';
+            connectionPool[1].urlPath = 'b';
+            connectionPool[2].urlPath = 'a';
+
+            const first = wsCommon.testGetConnection(false, 'a');
+            const second = wsCommon.testGetConnection(false, 'a');
+            const third = wsCommon.testGetConnection(false, 'a');
+
+            expect(first).toBe(connectionPool[0]);
+            expect(second).toBe(connectionPool[2]);
+            expect(third).toBe(connectionPool[0]);
+        });
+
+        it('should throw if no ready connections match urlPath (pool mode)', () => {
+            Object.defineProperty(connectionPool[0].ws!, 'readyState', {
+                value: WebSocketClient.OPEN,
+            });
+            Object.defineProperty(connectionPool[1].ws!, 'readyState', {
+                value: WebSocketClient.OPEN,
+            });
+            Object.defineProperty(connectionPool[2].ws!, 'readyState', {
+                value: WebSocketClient.OPEN,
+            });
+
+            connectionPool.forEach((c) => {
+                c.closeInitiated = false;
+                c.reconnectionPending = false;
+                c.urlPath = 'a';
+            });
+
+            expect(() => wsCommon.testGetConnection(false, 'b')).toThrowError(
+                'No available Websocket connections are ready.'
+            );
+        });
+
+        it('should NOT force the first connection in single mode when urlPath is provided', () => {
+            wsCommon = new TestWebsocketCommon(
+                { wsURL: 'wss://test.com', mode: 'single' },
+                connectionPool
+            );
+
+            Object.defineProperty(connectionPool[0].ws!, 'readyState', {
+                value: WebSocketClient.CLOSED,
+            });
+            Object.defineProperty(connectionPool[1].ws!, 'readyState', {
+                value: WebSocketClient.OPEN,
+            });
+            Object.defineProperty(connectionPool[2].ws!, 'readyState', {
+                value: WebSocketClient.OPEN,
+            });
+
+            connectionPool.forEach((c) => {
+                c.closeInitiated = false;
+                c.reconnectionPending = false;
+            });
+
+            connectionPool[0].urlPath = 'a';
+            connectionPool[1].urlPath = 'b';
+            connectionPool[2].urlPath = 'a';
+
+            const connection = wsCommon.testGetConnection(false, 'a');
+            expect(connection).toBe(connectionPool[2]);
+        });
+
+        it('should ignore urlPath filtering when urlPath is undefined (backwards compatible)', () => {
+            Object.defineProperty(connectionPool[0].ws!, 'readyState', {
+                value: WebSocketClient.OPEN,
+            });
+            Object.defineProperty(connectionPool[1].ws!, 'readyState', {
+                value: WebSocketClient.OPEN,
+            });
+            Object.defineProperty(connectionPool[2].ws!, 'readyState', {
+                value: WebSocketClient.OPEN,
+            });
+
+            connectionPool.forEach((c) => {
+                c.closeInitiated = false;
+                c.reconnectionPending = false;
+            });
+
+            connectionPool[0].urlPath = 'a';
+            connectionPool[1].urlPath = 'b';
+            connectionPool[2].urlPath = 'c';
+
+            const first = wsCommon.testGetConnection(false);
+            const second = wsCommon.testGetConnection(false);
+            const third = wsCommon.testGetConnection(false);
+
+            expect(first).toBe(connectionPool[0]);
+            expect(second).toBe(connectionPool[1]);
+            expect(third).toBe(connectionPool[2]);
         });
     });
 
@@ -782,6 +943,71 @@ describe('WebsocketCommon', () => {
             connectionPool.forEach((connection) => {
                 expect(initConnectSpy).toHaveBeenCalledWith(url, false, connection);
             });
+        });
+
+        it('should connect only the provided subset (does not connect the full pool)', async () => {
+            const initConnectSpy = jest.spyOn(wsCommon as never, 'initConnect');
+
+            const subset = [connectionPool[0], connectionPool[2]];
+
+            const connectPromise = wsCommon.testConnectPool(url, subset);
+
+            subset.forEach((c) => c.ws?.emit('open'));
+
+            await connectPromise;
+
+            expect(initConnectSpy).toHaveBeenCalledTimes(subset.length);
+            subset.forEach((c) => {
+                expect(initConnectSpy).toHaveBeenCalledWith(url, false, c);
+            });
+
+            expect(initConnectSpy).not.toHaveBeenCalledWith(url, false, connectionPool[1]);
+        });
+
+        it('should not reject if a non-subset connection closes unexpectedly', async () => {
+            const subset = [connectionPool[0], connectionPool[2]];
+
+            const connectPromise = wsCommon.testConnectPool(url, subset);
+
+            connectionPool[1].ws?.emit('close');
+
+            subset.forEach((c) => c.ws?.emit('open'));
+
+            await expect(connectPromise).resolves.toBeUndefined();
+        });
+
+        it('should reject if any subset connection emits an error (subset mode)', async () => {
+            const subset = [connectionPool[0], connectionPool[2]];
+
+            const connectPromise = wsCommon.testConnectPool(url, subset);
+
+            const error = new Error('subset error');
+            connectionPool[2].ws?.emit('error', error);
+
+            await expect(connectPromise).rejects.toThrowError('subset error');
+        });
+
+        it('should reject if any subset connection closes unexpectedly (subset mode)', async () => {
+            const subset = [connectionPool[0], connectionPool[2]];
+
+            const connectPromise = wsCommon.testConnectPool(url, subset);
+
+            connectionPool[0].ws?.emit('close');
+
+            await expect(connectPromise).rejects.toThrowError('Connection closed unexpectedly.');
+        });
+
+        it('should use once() listeners: multiple open emits should not cause issues', async () => {
+            const subset = [connectionPool[0], connectionPool[2]];
+
+            const connectPromise = wsCommon.testConnectPool(url, subset);
+
+            connectionPool[0].ws?.emit('open');
+            connectionPool[0].ws?.emit('open');
+
+            connectionPool[2].ws?.emit('open');
+
+            await expect(connectPromise).resolves.toBeUndefined();
         });
     });
 
@@ -2136,10 +2362,172 @@ describe('WebsocketStreamsBase', () => {
         jest.clearAllTimers();
     });
 
+    describe('ensurePoolSizeForUrlPaths()', () => {
+        it('should not modify pool when urlPaths is empty', () => {
+            const cfg: ConfigurationWebsocketStreams = {
+                wsURL: 'wss://test.com',
+                mode: 'pool',
+                poolSize: 2,
+            };
+            const initialPool: WebsocketConnection[] = [
+                {
+                    id: 'c1',
+                    ws: createMockWebSocket(WebSocketClient.CLOSED),
+                    closeInitiated: false,
+                    reconnectionPending: false,
+                    renewalPending: false,
+                    pendingRequests: new Map(),
+                    pendingSubscriptions: [],
+                },
+            ];
+
+            const ws = new WebsocketStreamsBase(cfg, initialPool, []);
+            expect(ws.connectionPool).toHaveLength(1);
+            expect(ws.connectionPool[0].id).toBe('c1');
+        });
+
+        it('should expand pool to basePoolSize * urlPaths.length in pool mode', () => {
+            const cfg: ConfigurationWebsocketStreams = {
+                wsURL: 'wss://test.com',
+                mode: 'pool',
+                poolSize: 2,
+            };
+            const initialPool: WebsocketConnection[] = [
+                {
+                    id: 'c1',
+                    ws: createMockWebSocket(WebSocketClient.CLOSED),
+                    closeInitiated: false,
+                    reconnectionPending: false,
+                    renewalPending: false,
+                    pendingRequests: new Map(),
+                    pendingSubscriptions: [],
+                },
+                {
+                    id: 'c2',
+                    ws: createMockWebSocket(WebSocketClient.CLOSED),
+                    closeInitiated: false,
+                    reconnectionPending: false,
+                    renewalPending: false,
+                    pendingRequests: new Map(),
+                    pendingSubscriptions: [],
+                },
+            ];
+
+            const urlPaths = ['p1', 'p2', 'p3'];
+            const ws = new WebsocketStreamsBase(cfg, initialPool, urlPaths);
+
+            expect(ws.connectionPool).toHaveLength(6);
+            expect(ws.connectionPool[0].id).toBe('c1');
+            expect(ws.connectionPool[1].id).toBe('c2');
+
+            ws.connectionPool.slice(2).forEach((c) => {
+                expect(typeof c.id).toBe('string');
+                expect(c.id.length).toBeGreaterThan(0);
+                expect(c.closeInitiated).toBe(false);
+                expect(c.reconnectionPending).toBe(false);
+                expect(c.renewalPending).toBe(false);
+                expect(c.pendingRequests).toBeInstanceOf(Map);
+                expect(c.pendingSubscriptions).toEqual([]);
+            });
+        });
+
+        it('should expand pool to 1 * urlPaths.length in single mode', () => {
+            const cfg: ConfigurationWebsocketStreams = { wsURL: 'wss://test.com', mode: 'single' };
+            const initialPool: WebsocketConnection[] = [
+                {
+                    id: 'c1',
+                    ws: createMockWebSocket(WebSocketClient.CLOSED),
+                    closeInitiated: false,
+                    reconnectionPending: false,
+                    renewalPending: false,
+                    pendingRequests: new Map(),
+                    pendingSubscriptions: [],
+                },
+            ];
+
+            const urlPaths = ['p1', 'p2', 'p3'];
+            const ws = new WebsocketStreamsBase(cfg, initialPool, urlPaths);
+
+            expect(ws.connectionPool).toHaveLength(3);
+        });
+
+        it('should not shrink the pool if it is already larger than expected', () => {
+            const cfg: ConfigurationWebsocketStreams = {
+                wsURL: 'wss://test.com',
+                mode: 'pool',
+                poolSize: 2,
+            };
+            const urlPaths = ['p1', 'p2'];
+
+            const oversizedPool: WebsocketConnection[] = Array.from({ length: 7 }, (_, i) => ({
+                id: `c${i}`,
+                ws: createMockWebSocket(WebSocketClient.CLOSED),
+                closeInitiated: false,
+                reconnectionPending: false,
+                renewalPending: false,
+                pendingRequests: new Map(),
+                pendingSubscriptions: [],
+            }));
+
+            const ws = new WebsocketStreamsBase(cfg, oversizedPool, urlPaths);
+
+            expect(ws.connectionPool).toHaveLength(7);
+        });
+
+        it('should treat missing poolSize in pool mode as 1', () => {
+            const cfg: ConfigurationWebsocketStreams = { wsURL: 'wss://test.com', mode: 'pool' };
+            const initialPool: WebsocketConnection[] = [
+                {
+                    id: 'c1',
+                    ws: createMockWebSocket(WebSocketClient.CLOSED),
+                    closeInitiated: false,
+                    reconnectionPending: false,
+                    renewalPending: false,
+                    pendingRequests: new Map(),
+                    pendingSubscriptions: [],
+                },
+            ];
+
+            const urlPaths = ['p1', 'p2', 'p3', 'p4'];
+            const ws = new WebsocketStreamsBase(cfg, initialPool, urlPaths);
+
+            expect(ws.connectionPool).toHaveLength(4);
+        });
+
+        it('should preserve existing pool object references when expanding', () => {
+            const cfg: ConfigurationWebsocketStreams = {
+                wsURL: 'wss://test.com',
+                mode: 'pool',
+                poolSize: 2,
+            };
+            const existing: WebsocketConnection[] = [
+                {
+                    id: 'c1',
+                    ws: createMockWebSocket(WebSocketClient.CLOSED),
+                    closeInitiated: false,
+                    reconnectionPending: false,
+                    renewalPending: false,
+                    pendingRequests: new Map(),
+                    pendingSubscriptions: [],
+                },
+            ];
+
+            const firstRef = existing[0];
+            const urlPaths = ['p1', 'p2'];
+            const ws = new WebsocketStreamsBase(cfg, existing, urlPaths);
+
+            expect(ws.connectionPool[0]).toBe(firstRef);
+            expect(ws.connectionPool).toHaveLength(4);
+        });
+    });
+
     describe('subscribe()', () => {
         beforeEach(() => {
             wsStreams.connectionPool.forEach((connection) => {
                 connection.ws = createMockWebSocket(WebSocketClient.OPEN);
+                connection.closeInitiated = false;
+                connection.reconnectionPending = false;
+                connection.pendingSubscriptions = [];
             });
         });
 
@@ -2229,9 +2617,132 @@ describe('WebsocketStreamsBase', () => {
             expect(wsStreams['streamConnectionMap'].get('stream1')).toBeDefined();
             expect(mockLogger.debug).toHaveBeenCalledTimes(1);
         });
+
+        describe('with urlPath', () => {
+            beforeEach(() => {
+                configuration = { wsURL: 'wss://test.com', mode: 'pool', poolSize: 2 };
+
+                const pool = Array.from({ length: 4 }, (_, i) => ({
+                    id: `c${i + 1}`,
+                    ws: createMockWebSocket(WebSocketClient.OPEN),
+                    closeInitiated: false,
+                    reconnectionPending: false,
+                    renewalPending: false,
+                    pendingRequests: new Map(),
+                    pendingSubscriptions: [],
+                }));
+
+                wsStreams = new WebsocketStreamsBase(configuration, pool, ['path1', 'path2']);
+                wsStreams.connectionPool.slice(0, 2).forEach((c) => (c.urlPath = 'path1'));
+                wsStreams.connectionPool.slice(2, 4).forEach((c) => (c.urlPath = 'path2'));
+                wsStreams.connectionPool.forEach(
+                    (c) => (c.ws = createMockWebSocket(WebSocketClient.OPEN))
+                );
+
+                jest.clearAllMocks();
+            });
+
+            it('should store mapping under urlPath-scoped key (urlPath::stream)', () => {
+                wsStreams.subscribe('stream1', undefined, 'path1');
+
+                expect(wsStreams['streamConnectionMap'].has('path1::stream1')).toBe(true);
+                expect(wsStreams['streamConnectionMap'].has('stream1')).toBe(false);
+            });
+
+            it('should keep urlPath isolation for same stream name under different urlPaths', () => {
+                wsStreams.subscribe('stream1', undefined, 'path1');
+                wsStreams.subscribe('stream1', undefined, 'path2');
+
+                const c1 = wsStreams['streamConnectionMap'].get('path1::stream1');
+                const c2 = wsStreams['streamConnectionMap'].get('path2::stream1');
+
+                expect(c1).toBeDefined();
+                expect(c2).toBeDefined();
+                expect(c1).not.toBe(c2);
+
+                expect(c1?.urlPath).toBe('path1');
+                expect(c2?.urlPath).toBe('path2');
+            });
+
+            it('should not send duplicate subscription for the same urlPath::stream', () => {
+                wsStreams.subscribe('stream1', undefined, 'path1');
+                wsStreams.subscribe('stream1', undefined, 'path1');
+
+                const subscribeCalls = (mockLogger.debug as jest.Mock).mock.calls.filter(
+                    (c) => c[0] === 'SUBSCRIBE'
+                );
+                expect(subscribeCalls.length).toBe(1);
+
+                expect(wsStreams['streamConnectionMap'].has('path1::stream1')).toBe(true);
+            });
+
+            it('should allow same stream name in different urlPaths (two SUBSCRIBE calls)', () => {
+                wsStreams.subscribe('stream1', undefined, 'path1');
+                wsStreams.subscribe('stream1', undefined, 'path2');
+
+                const subscribeCalls = (mockLogger.debug as jest.Mock).mock.calls.filter(
+                    (c) => c[0] === 'SUBSCRIBE'
+                );
+                expect(subscribeCalls.length).toBe(2);
+
+                expect(wsStreams['streamConnectionMap'].has('path1::stream1')).toBe(true);
+                expect(wsStreams['streamConnectionMap'].has('path2::stream1')).toBe(true);
+            });
+
+            it('should queue subscriptions when urlPath subset connections are not ready', () => {
+                wsStreams.connectionPool.slice(0, 2).forEach((c) => {
+                    c.ws = createMockWebSocket(WebSocketClient.CONNECTING);
+                });
+
+                wsStreams.subscribe('stream1', undefined, 'path1');
+
+                const conn = wsStreams['streamConnectionMap'].get('path1::stream1');
+                expect(conn).toBeDefined();
+                expect(conn?.urlPath).toBe('path1');
+
+                expect(conn?.pendingSubscriptions).toEqual(['stream1']);
+                expect(mockLogger.info).toHaveBeenCalledWith(
+                    `Connection ${conn!.id} is not ready. Queuing subscription for streams: stream1`
+                );
+
+                expect(mockLogger.debug).not.toHaveBeenCalledWith('SUBSCRIBE', expect.any(Object));
+            });
+
+            it('should not affect other urlPath subset when one subset is not ready', () => {
+                wsStreams.connectionPool.slice(0, 2).forEach((c) => {
+                    c.ws = createMockWebSocket(WebSocketClient.CONNECTING);
+                });
+
+                wsStreams.subscribe('stream1', undefined, 'path1');
+                wsStreams.subscribe('stream1', undefined, 'path2');
+
+                const subscribeCalls = (mockLogger.debug as jest.Mock).mock.calls.filter(
+                    (c) => c[0] === 'SUBSCRIBE'
+                );
+                expect(subscribeCalls.length).toBe(1);
+                expect(wsStreams['streamConnectionMap'].has('path1::stream1')).toBe(true);
+                expect(wsStreams['streamConnectionMap'].has('path2::stream1')).toBe(true);
+
+                const c1 = wsStreams['streamConnectionMap'].get('path1::stream1');
+                const c2 = wsStreams['streamConnectionMap'].get('path2::stream1');
+                expect(c1?.pendingSubscriptions).toEqual(['stream1']);
+                expect(c2?.pendingSubscriptions).toEqual([]);
+            });
+        });
     });
 
     describe('unsubscribe()', () => {
+        beforeEach(() => {
+            wsStreams.connectionPool.forEach((connection) => {
+                connection.ws = createMockWebSocket(WebSocketClient.OPEN);
+                connection.closeInitiated = false;
+                connection.reconnectionPending = false;
+                connection.pendingSubscriptions = [];
+            });
+
+            jest.clearAllMocks();
+        });
+
         it('should send an unsubscribe payload for active connections', () => {
             wsStreams['streamConnectionMap'].set('stream1', connectionPool[0]);
             Object.defineProperty(connectionPool[0].ws, 'readyState', {
@@ -2276,7 +2787,7 @@ describe('WebsocketStreamsBase', () => {
             expect(wsStreams['streamConnectionMap'].has('stream1')).toBe(false);
         });
 
-        it('should not send an unsubscribe payload if stream in subscribed twice and callbacks exist', () => {
+        it('should not send an unsubscribe payload if stream is subscribed twice and callbacks exist', () => {
             wsStreams['streamConnectionMap'].set('stream1', connectionPool[0]);
             wsStreams['streamCallbackMap'].set('stream1', new Set());
             wsStreams['streamCallbackMap'].get('stream1')?.add(jest.fn());
@@ -2288,7 +2799,7 @@ describe('WebsocketStreamsBase', () => {
 
             wsStreams.unsubscribe('stream1');
 
-            expect(mockLogger.info).not.toHaveBeenCalledWith('UNSUBSCRIBE', expect.any(Object));
+            expect(mockLogger.debug).not.toHaveBeenCalledWith('UNSUBSCRIBE', expect.any(Object));
             expect(wsStreams['streamConnectionMap'].has('stream1')).toBe(true);
             expect(wsStreams['streamCallbackMap'].has('stream1')).toBe(true);
         });
@@ -2300,22 +2811,171 @@ describe('WebsocketStreamsBase', () => {
                 'Stream stream1 not associated with an active connection.'
             );
         });
+
+        describe('with urlPath', () => {
+            beforeEach(() => {
+                configuration = { wsURL: 'wss://test.com', mode: 'pool', poolSize: 2 };
+
+                const pool = Array.from({ length: 4 }, (_, i) => ({
+                    id: `c${i + 1}`,
+                    ws: createMockWebSocket(WebSocketClient.OPEN),
+                    closeInitiated: false,
+                    reconnectionPending: false,
+                    renewalPending: false,
+                    pendingRequests: new Map(),
+                    pendingSubscriptions: [],
+                    urlPath: i < 2 ? 'path1' : 'path2',
+                }));
+
+                wsStreams = new WebsocketStreamsBase(configuration, pool, ['path1', 'path2']);
+
+                jest.clearAllMocks();
+            });
+
+            it('should send UNSUBSCRIBE and remove scoped entries when no callbacks exist', () => {
+                const c = wsStreams.connectionPool[0];
+                Object.defineProperty(c.ws!, 'readyState', { value: WebSocketClient.OPEN });
+
+                wsStreams['streamConnectionMap'].set('path1::stream1', c);
+                wsStreams['streamCallbackMap'].set('path1::stream1', new Set());
+
+                wsStreams.unsubscribe('stream1', undefined, 'path1');
+
+                expect(mockLogger.debug).toHaveBeenCalledWith('UNSUBSCRIBE', expect.any(Object));
+                expect(wsStreams['streamConnectionMap'].has('path1::stream1')).toBe(false);
+                expect(wsStreams['streamCallbackMap'].has('path1::stream1')).toBe(false);
+            });
+
+            it('should NOT send UNSUBSCRIBE if callbacks exist for scoped key', () => {
+                const c = wsStreams.connectionPool[0];
+                Object.defineProperty(c.ws!, 'readyState', { value: WebSocketClient.OPEN });
+
+                wsStreams['streamConnectionMap'].set('path1::stream1', c);
+                wsStreams['streamCallbackMap'].set(
+                    'path1::stream1',
+                    new Set([jest.fn(), jest.fn()])
+                );
+
+                wsStreams.unsubscribe('stream1', undefined, 'path1');
+
+                expect(mockLogger.debug).not.toHaveBeenCalledWith(
+                    'UNSUBSCRIBE',
+                    expect.any(Object)
+                );
+                expect(wsStreams['streamConnectionMap'].has('path1::stream1')).toBe(true);
+                expect(wsStreams['streamCallbackMap'].has('path1::stream1')).toBe(true);
+            });
+
+            it('should keep urlPath isolation: unsub path1 does not remove path2 mapping', () => {
+                const c1 = wsStreams.connectionPool[0];
+                const c2 = wsStreams.connectionPool[2];
+                Object.defineProperty(c1.ws!, 'readyState', { value: WebSocketClient.OPEN });
+                Object.defineProperty(c2.ws!, 'readyState', { value: WebSocketClient.OPEN });
+
+                wsStreams['streamConnectionMap'].set('path1::stream1', c1);
+                wsStreams['streamConnectionMap'].set('path2::stream1', c2);
+                wsStreams['streamCallbackMap'].set('path1::stream1', new Set());
+                wsStreams['streamCallbackMap'].set('path2::stream1', new Set([jest.fn()]));
+
+                wsStreams.unsubscribe('stream1', undefined, 'path1');
+
+                expect(wsStreams['streamConnectionMap'].has('path1::stream1')).toBe(false);
+                expect(wsStreams['streamCallbackMap'].has('path1::stream1')).toBe(false);
+                expect(wsStreams['streamConnectionMap'].has('path2::stream1')).toBe(true);
+                expect(wsStreams['streamCallbackMap'].has('path2::stream1')).toBe(true);
+            });
+
+            it('should log warning when scoped key not associated with active connection', () => {
+                wsStreams.unsubscribe('stream1', undefined, 'path1');
+
+                expect(mockLogger.warn).toHaveBeenCalledWith(
+                    'Stream stream1 not associated with an active connection.'
+                );
+            });
+
+            it('should send UNSUBSCRIBE with a custom string id (scoped)', () => {
+                const c = wsStreams.connectionPool[0];
+                Object.defineProperty(c.ws!, 'readyState', { value: WebSocketClient.OPEN });
+
+                wsStreams['streamConnectionMap'].set('path1::stream1', c);
+                wsStreams['streamCallbackMap'].set('path1::stream1', new Set());
+
+                wsStreams.unsubscribe('stream1', 'abc123', 'path1');
+
+                expect(mockLogger.debug).toHaveBeenCalledWith('UNSUBSCRIBE', {
+                    id: normalizeStreamId('abc123', wsStreams.streamIdIsStrictlyNumber),
+                    method: 'UNSUBSCRIBE',
+                    params: ['stream1'],
+                });
+            });
+
+            it('should send UNSUBSCRIBE with a custom integer id (scoped)', () => {
+                const c = wsStreams.connectionPool[0];
+                Object.defineProperty(c.ws!, 'readyState', { value: WebSocketClient.OPEN });
+
+                wsStreams['streamConnectionMap'].set('path1::stream1', c);
+                wsStreams['streamCallbackMap'].set('path1::stream1', new Set());
+
+                wsStreams.unsubscribe('stream1', 123456789, 'path1');
+
+                expect(mockLogger.debug).toHaveBeenCalledWith('UNSUBSCRIBE', {
+                    id: 123456789,
+                    method: 'UNSUBSCRIBE',
+                    params: ['stream1'],
+                });
+            });
+        });
     });
 
     describe('prepareURL()', () => {
-        it('should construct a valid WebSocket URL with streams', () => {
+        it('should construct a valid WebSocket URL with streams (no urlPath)', () => {
             const streams = ['stream1', 'stream2'];
             const url = wsStreams['prepareURL'](streams);
 
-            expect(url).toContain('stream?streams=stream1/stream2');
+            expect(url).toBe('wss://test.com/stream?streams=stream1/stream2');
         });
 
-        it('should append timeUnit if provided in configuration', () => {
+        it('should construct a valid WebSocket URL with streams and urlPath', () => {
+            const streams = ['stream1', 'stream2'];
+            const url = wsStreams['prepareURL'](streams, 'ws-api');
+
+            expect(url).toBe('wss://test.com/ws-api/stream?streams=stream1/stream2');
+        });
+
+        it('should include streams param even if streams array is empty', () => {
+            const url = wsStreams['prepareURL']([]);
+
+            expect(url).toBe('wss://test.com/stream?streams=');
+        });
+
+        it('should append timeUnit when provided (no urlPath)', () => {
             wsStreams['configuration'].timeUnit = 'MILLISECOND';
+
             const streams = ['stream1', 'stream2'];
             const url = wsStreams['prepareURL'](streams);
 
-            expect(url).toContain('timeUnit=MILLISECOND');
+            expect(url).toBe('wss://test.com/stream?streams=stream1/stream2&timeUnit=MILLISECOND');
+        });
+
+        it('should append timeUnit when provided (with urlPath)', () => {
+            wsStreams['configuration'].timeUnit = 'MILLISECOND';
+
+            const streams = ['stream1', 'stream2'];
+            const url = wsStreams['prepareURL'](streams, 'ws-api');
+
+            expect(url).toBe(
+                'wss://test.com/ws-api/stream?streams=stream1/stream2&timeUnit=MILLISECOND'
+            );
+        });
+
+        it('should not append timeUnit if validateTimeUnit throws', () => {
+            wsStreams['configuration'].timeUnit = 'NOT_A_VALID_UNIT' as never;
+
+            const streams = ['stream1'];
+            const url = wsStreams['prepareURL'](streams);
+
+            expect(url).toBe('wss://test.com/stream?streams=stream1');
+            expect(mockLogger.error).toHaveBeenCalled();
         });
     });
 
@@ -2323,20 +2983,49 @@ describe('WebsocketStreamsBase', () => {
         beforeEach(() => {
             wsStreams = new WebsocketStreamsBase(configuration, connectionPool);
 
-            Object.defineProperty(connectionPool[0].ws, 'readyState', {
+            Object.defineProperty(connectionPool[0].ws!, 'readyState', {
+                value: WebSocketClient.OPEN,
+            });
+            Object.defineProperty(connectionPool[1].ws!, 'readyState', {
                 value: WebSocketClient.OPEN,
             });
 
-            Object.defineProperty(connectionPool[1].ws, 'readyState', {
-                value: WebSocketClient.OPEN,
-            });
+            connectionPool[0].closeInitiated = false;
+            connectionPool[0].reconnectionPending = false;
+            connectionPool[1].closeInitiated = false;
+            connectionPool[1].reconnectionPending = false;
+
+            wsStreams.streamCallbackMap.clear();
+            wsStreams['streamConnectionMap'].clear();
         });
 
-        it('should assign streams to new connections if no existing assignment exists', () => {
+        it('should initialize streamCallbackMap entries for each stream key', () => {
+            wsStreams['handleStreamAssignment'](['stream1', 'stream2']);
+
+            expect(wsStreams.streamCallbackMap.has('stream1')).toBe(true);
+            expect(wsStreams.streamCallbackMap.has('stream2')).toBe(true);
+            expect(wsStreams.streamCallbackMap.get('stream1')).toBeInstanceOf(Set);
+            expect(wsStreams.streamCallbackMap.get('stream2')).toBeInstanceOf(Set);
+        });
+
+        it('should use urlPath-scoped keys (urlPath::stream)', () => {
+            wsStreams.connectionPool[0].urlPath = 'ws-api';
+
+            wsStreams['handleStreamAssignment'](['stream1'], 'ws-api');
+
+            expect(wsStreams.streamCallbackMap.has('ws-api::stream1')).toBe(true);
+            expect(wsStreams['streamConnectionMap'].has('ws-api::stream1')).toBe(true);
+            expect(wsStreams['streamConnectionMap'].has('stream1')).toBe(false);
+        });
+
+        it('should assign streams to new connections if no existing assignment exists (round-robin)', () => {
             const connectionStreamMap = wsStreams['handleStreamAssignment'](['stream1', 'stream2']);
 
             expect(connectionStreamMap.get(connectionPool[0])).toEqual(['stream1']);
             expect(connectionStreamMap.get(connectionPool[1])).toEqual(['stream2']);
+
+            expect(wsStreams['streamConnectionMap'].get('stream1')).toBe(connectionPool[0]);
+            expect(wsStreams['streamConnectionMap'].get('stream2')).toBe(connectionPool[1]);
         });
 
         it('should reuse existing connections for previously assigned streams', () => {
@@ -2346,6 +3035,53 @@ describe('WebsocketStreamsBase', () => {
 
             expect(connectionStreamMap.get(connectionPool[0])).toEqual(['stream1', 'stream2']);
             expect(connectionStreamMap.get(connectionPool[1])).toBeUndefined();
+
+            expect(wsStreams['streamConnectionMap'].get('stream1')).toBe(connectionPool[0]);
+            expect(wsStreams['streamConnectionMap'].get('stream2')).toBe(connectionPool[0]);
+        });
+
+        it('should re-assign stream if the previously mapped connection is closeInitiated', () => {
+            wsStreams['streamConnectionMap'].set('stream1', connectionPool[0]);
+            connectionPool[0].closeInitiated = true;
+
+            const connectionStreamMap = wsStreams['handleStreamAssignment'](['stream1']);
+
+            expect(wsStreams['streamConnectionMap'].get('stream1')).toBe(connectionPool[1]);
+            expect(connectionStreamMap.get(connectionPool[1])).toEqual(['stream1']);
+        });
+
+        it('should re-assign stream if the previously mapped connection is reconnectionPending', () => {
+            wsStreams['streamConnectionMap'].set('stream1', connectionPool[0]);
+            connectionPool[0].reconnectionPending = true;
+
+            const connectionStreamMap = wsStreams['handleStreamAssignment'](['stream1']);
+
+            expect(wsStreams['streamConnectionMap'].get('stream1')).toBe(connectionPool[1]);
+            expect(connectionStreamMap.get(connectionPool[1])).toEqual(['stream1']);
+        });
+
+        it('should keep urlPath isolation when same stream exists under different urlPaths', () => {
+            wsStreams.connectionPool[0].urlPath = 'ws-api';
+            wsStreams.connectionPool[1].urlPath = 'sapi';
+
+            const map1 = wsStreams['handleStreamAssignment'](['stream1'], 'ws-api');
+            const map2 = wsStreams['handleStreamAssignment'](['stream1'], 'sapi');
+
+            expect(wsStreams['streamConnectionMap'].has('ws-api::stream1')).toBe(true);
+            expect(wsStreams['streamConnectionMap'].has('sapi::stream1')).toBe(true);
+
+            expect(map1.size).toBe(1);
+            expect(map2.size).toBe(1);
+        });
+
+        it('should group multiple streams assigned to the same connection in the returned map', () => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            jest.spyOn(wsStreams as any, 'getConnection').mockReturnValue(connectionPool[0]);
+
+            const connectionStreamMap = wsStreams['handleStreamAssignment'](['stream1', 'stream2']);
+
+            expect(connectionStreamMap.get(connectionPool[0])).toEqual(['stream1', 'stream2']);
+            expect(connectionStreamMap.size).toBe(1);
         });
     });
 
@@ -2456,75 +3192,186 @@ describe('WebsocketStreamsBase', () => {
 
     describe('getReconnectURL()', () => {
         beforeEach(() => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            jest.spyOn(wsStreams as any, 'prepareURL');
+        });
+
+        it('should return URL with streams assigned to the given connection (no urlPath)', () => {
+            const url = 'wss://test-url.com';
+
             wsStreams['streamConnectionMap'] = new Map([
                 ['stream1', connectionPool[0]],
                 ['stream2', connectionPool[0]],
                 ['stream3', connectionPool[1]],
             ]);
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            jest.spyOn(wsStreams as any, 'prepareURL');
-        });
-
-        it('should return the URL with streams assigned to the given connection', () => {
-            const url = 'wss://test-url.com';
 
             const reconnectURL = wsStreams['getReconnectURL'](url, connectionPool[0]);
 
-            expect(wsStreams['prepareURL']).toHaveBeenCalledWith(['stream1', 'stream2']);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            expect((wsStreams as any).prepareURL).toHaveBeenCalledWith(
+                ['stream1', 'stream2'],
+                undefined
+            );
             expect(reconnectURL).toContain('stream1');
             expect(reconnectURL).toContain('stream2');
             expect(reconnectURL).not.toContain('stream3');
         });
 
-        it('should return the base URL if no streams are assigned to the given connection', () => {
+        it('should include only streams for the same connection and same urlPath; strip urlPath prefix', () => {
             const url = 'wss://test-url.com';
 
-            const reconnectURL = wsStreams['getReconnectURL'](url, connectionPool[2]);
+            connectionPool[0].urlPath = 'ws-api';
+            connectionPool[1].urlPath = 'ws-api';
 
-            expect(wsStreams['prepareURL']).toHaveBeenCalledWith([]);
-            expect(reconnectURL).toBe(wsStreams['prepareURL']([]));
+            wsStreams['streamConnectionMap'] = new Map([
+                ['ws-api::stream1', connectionPool[0]],
+                ['ws-api::stream2', connectionPool[0]],
+                ['ws-api::stream3', connectionPool[1]],
+            ]);
+
+            const reconnectURL = wsStreams['getReconnectURL'](url, connectionPool[0]);
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            expect((wsStreams as any).prepareURL).toHaveBeenCalledWith(
+                ['stream1', 'stream2'],
+                'ws-api'
+            );
+            expect(reconnectURL).toContain('stream1');
+            expect(reconnectURL).toContain('stream2');
+            expect(reconnectURL).not.toContain('ws-api::stream1');
+            expect(reconnectURL).not.toContain('ws-api::stream2');
+            expect(reconnectURL).not.toContain('stream3');
+        });
+
+        it('should not mix streams across different urlPaths even if stream names match', () => {
+            const url = 'wss://test-url.com';
+
+            connectionPool[0].urlPath = 'ws-api';
+            connectionPool[1].urlPath = 'ws-api';
+            const otherConn: WebsocketConnection = {
+                id: 'other',
+                ws: createMockWebSocket(WebSocketClient.OPEN),
+                closeInitiated: false,
+                reconnectionPending: false,
+                renewalPending: false,
+                pendingRequests: new Map(),
+                pendingSubscriptions: [],
+                urlPath: 'sapi',
+            };
+
+            wsStreams['streamConnectionMap'] = new Map([
+                ['ws-api::bookTicker', connectionPool[0]],
+                ['sapi::bookTicker', otherConn],
+                ['ws-api::trade', connectionPool[0]],
+            ]);
+
+            const reconnectURL = wsStreams['getReconnectURL'](url, connectionPool[0]);
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            expect((wsStreams as any).prepareURL).toHaveBeenCalledWith(
+                ['bookTicker', 'trade'],
+                'ws-api'
+            );
+            expect(reconnectURL).toContain('bookTicker');
+            expect(reconnectURL).toContain('trade');
+            expect(reconnectURL).not.toContain('sapi::bookTicker');
+        });
+
+        it('should return URL with empty streams when no streams are assigned to the connection', () => {
+            const url = 'wss://test-url.com';
+
+            connectionPool[0].urlPath = 'ws-api';
+
+            wsStreams['streamConnectionMap'] = new Map([['ws-api::stream1', connectionPool[1]]]);
+
+            const reconnectURL = wsStreams['getReconnectURL'](url, connectionPool[0]);
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            expect((wsStreams as any).prepareURL).toHaveBeenCalledWith([], 'ws-api');
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            expect(reconnectURL).toBe((wsStreams as any).prepareURL([], 'ws-api'));
         });
     });
 
     describe('onMessage()', () => {
-        it('should invoke the correct callback for a valid stream', () => {
-            const mockCallback = jest.fn();
-            const mockData = JSON.stringify({ stream: 'stream1', data: { key: 'value' } });
+        it('should invoke callbacks with parsedData.data for a registered stream (no urlPath)', () => {
+            const cb1 = jest.fn();
+            const cb2 = jest.fn();
 
-            wsStreams.streamCallbackMap.set('stream1', new Set([mockCallback]));
-            wsStreams['onMessage'](mockData, connectionPool[0]);
+            wsStreams.streamCallbackMap.set('stream1', new Set([cb1, cb2]));
 
-            expect(mockCallback).toHaveBeenCalledWith({ key: 'value' });
+            const msg = JSON.stringify({ stream: 'stream1', data: { key: 'value' } });
+
+            wsStreams['onMessage'](msg, connectionPool[0]);
+
+            expect(cb1).toHaveBeenCalledWith({ key: 'value' });
+            expect(cb2).toHaveBeenCalledWith({ key: 'value' });
         });
 
-        it('should log an error if the message is invalid JSON', () => {
-            const invalidData = 'invalid-json';
+        it('should use urlPath-scoped key (urlPath::stream) when connection.urlPath is set', () => {
+            const cb = jest.fn();
 
-            wsStreams['onMessage'](invalidData, connectionPool[0]);
+            connectionPool[0].urlPath = 'ws-api';
 
-            expect(mockLogger.error).toHaveBeenCalledWith(
-                'Failed to parse WebSocket message:',
-                invalidData,
-                expect.any(SyntaxError)
-            );
+            wsStreams.streamCallbackMap.set('ws-api::stream1', new Set([cb]));
+            const nonScoped = jest.fn();
+            wsStreams.streamCallbackMap.set('stream1', new Set([nonScoped]));
+
+            const msg = JSON.stringify({ stream: 'stream1', data: { a: 1 } });
+
+            wsStreams['onMessage'](msg, connectionPool[0]);
+
+            expect(cb).toHaveBeenCalledWith({ a: 1 });
+            expect(nonScoped).not.toHaveBeenCalled();
         });
 
-        it('should log an error if the message does not contain a stream name', () => {
-            const missingStreamData = JSON.stringify({ data: { key: 'value' } });
+        it('should not invoke callbacks if stream is not registered', () => {
+            const msg = JSON.stringify({ stream: 'unknownStream', data: { key: 'value' } });
 
-            wsStreams['onMessage'](missingStreamData, connectionPool[0]);
+            wsStreams['onMessage'](msg, connectionPool[0]);
 
             expect(mockLogger.error).not.toHaveBeenCalled();
         });
 
-        it('should not invoke any callback if the stream is not registered', () => {
-            const mockData = JSON.stringify({
-                stream: 'unregisteredStream',
-                data: { key: 'value' },
-            });
+        it('should not throw and should not call callbacks if message has stream but missing data', () => {
+            const cb = jest.fn();
+            wsStreams.streamCallbackMap.set('stream1', new Set([cb]));
 
-            wsStreams['onMessage'](mockData, connectionPool[0]);
+            const msg = JSON.stringify({ stream: 'stream1' });
 
+            expect(() => wsStreams['onMessage'](msg, connectionPool[0])).not.toThrow();
+            expect(cb).toHaveBeenCalledWith(undefined);
+        });
+
+        it('should not log error if message does not contain a stream name', () => {
+            const msg = JSON.stringify({ data: { key: 'value' } });
+
+            wsStreams['onMessage'](msg, connectionPool[0]);
+
+            expect(mockLogger.error).not.toHaveBeenCalled();
+        });
+
+        it('should log an error if the message is invalid JSON', () => {
+            const invalid = 'invalid-json';
+
+            wsStreams['onMessage'](invalid, connectionPool[0]);
+
+            expect(mockLogger.error).toHaveBeenCalledWith(
+                'Failed to parse WebSocket message:',
+                invalid,
+                expect.any(SyntaxError)
+            );
+        });
+
+        it('should ignore messages that do not have "stream" at the top level (e.g. combined stream payload)', () => {
+            const cb = jest.fn();
+            wsStreams.streamCallbackMap.set('stream1', new Set([cb]));
+
+            const msg = JSON.stringify({ somethingElse: 'stream1', data: { x: 1 } });
+
+            wsStreams['onMessage'](msg, connectionPool[0]);
+
+            expect(cb).not.toHaveBeenCalled();
             expect(mockLogger.error).not.toHaveBeenCalled();
         });
     });
@@ -2566,32 +3413,188 @@ describe('WebsocketStreamsBase', () => {
         });
     });
 
-    describe('connect()', () => {
-        it('should resolve when the connection pool establishes successfully', async () => {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            jest.spyOn(wsStreams as any, 'connectPool').mockResolvedValue({});
-
-            await expect(wsStreams.connect('stream1')).resolves.toBeUndefined();
+    describe('streamKey()', () => {
+        it('should return the stream name when urlPath is not provided', () => {
+            expect(wsStreams.streamKey('btcusdt@trade')).toBe('btcusdt@trade');
         });
 
-        it('should reject if the connection fails', async () => {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            jest.spyOn(wsStreams as any, 'connectPool').mockRejectedValue(
-                new Error('Connection failed')
+        it('should prefix stream with urlPath when urlPath is provided', () => {
+            expect(wsStreams.streamKey('btcusdt@trade', 'ws-api')).toBe('ws-api::btcusdt@trade');
+        });
+
+        it('should treat empty string urlPath as not provided', () => {
+            expect(wsStreams.streamKey('btcusdt@trade', '')).toBe('btcusdt@trade');
+        });
+
+        it('should treat undefined urlPath as not provided', () => {
+            expect(wsStreams.streamKey('btcusdt@trade', undefined)).toBe('btcusdt@trade');
+        });
+
+        it('should not sanitize or trim inputs (exact concatenation)', () => {
+            expect(wsStreams.streamKey(' stream1 ', ' path ')).toBe(' path :: stream1 ');
+        });
+    });
+
+    describe('connect()', () => {
+        beforeEach(() => {
+            jest.useFakeTimers();
+        });
+
+        it('should call connectPool once when urlPaths is empty', async () => {
+            wsStreams = new WebsocketStreamsBase(
+                { wsURL: 'wss://test.com', mode: 'pool', poolSize: 2 },
+                connectionPool,
+                []
             );
 
-            await expect(wsStreams.connect('stream1')).rejects.toThrow('Connection failed');
-        });
-
-        it('should call `prepareURL` with the provided streams', async () => {
+            const connectPoolSpy = jest
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                .spyOn(wsStreams as any, 'connectPool')
+                .mockResolvedValue({});
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const prepareURLSpy = jest.spyOn(wsStreams as any, 'prepareURL');
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            jest.spyOn(wsStreams as any, 'connectPool').mockResolvedValue({});
 
-            await wsStreams.connect(['stream1', 'stream2']);
+            const p = wsStreams.connect(['stream1', 'stream2']);
+
+            await Promise.resolve();
+            await expect(p).resolves.toBeUndefined();
 
             expect(prepareURLSpy).toHaveBeenCalledWith(['stream1', 'stream2']);
+            expect(connectPoolSpy).toHaveBeenCalledTimes(1);
+            expect(connectPoolSpy).toHaveBeenCalledWith(
+                expect.stringContaining('stream?streams=stream1/stream2')
+            );
+        });
+
+        it('should connect once per urlPath in single mode (1 connection per path)', async () => {
+            const pool: WebsocketConnection[] = [
+                {
+                    id: 'c1',
+                    ws: createMockWebSocket(WebSocketClient.CLOSED),
+                    closeInitiated: false,
+                    reconnectionPending: false,
+                    renewalPending: false,
+                    pendingRequests: new Map(),
+                    pendingSubscriptions: [],
+                },
+                {
+                    id: 'c2',
+                    ws: createMockWebSocket(WebSocketClient.CLOSED),
+                    closeInitiated: false,
+                    reconnectionPending: false,
+                    renewalPending: false,
+                    pendingRequests: new Map(),
+                    pendingSubscriptions: [],
+                },
+            ];
+
+            wsStreams = new WebsocketStreamsBase(
+                { wsURL: 'wss://test.com', mode: 'single' },
+                pool,
+                ['path1', 'path2']
+            );
+
+            const connectPoolSpy = jest
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                .spyOn(wsStreams as any, 'connectPool')
+                .mockResolvedValue({});
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const prepareURLSpy = jest.spyOn(wsStreams as any, 'prepareURL');
+
+            const p = wsStreams.connect('stream1');
+            await Promise.resolve();
+            await expect(p).resolves.toBeUndefined();
+
+            expect(prepareURLSpy).toHaveBeenCalledWith(['stream1'], 'path1');
+            expect(prepareURLSpy).toHaveBeenCalledWith(['stream1'], 'path2');
+            expect(connectPoolSpy).toHaveBeenCalledTimes(2);
+            expect(wsStreams.connectionPool[0].urlPath).toBe('path1');
+            expect(wsStreams.connectionPool[1].urlPath).toBe('path2');
+        });
+
+        it('should connect poolSize connections per urlPath in pool mode', async () => {
+            const basePoolSize = 2;
+            const urlPaths = ['path1', 'path2'];
+
+            const pool: WebsocketConnection[] = Array.from(
+                { length: basePoolSize * urlPaths.length },
+                (_, i) => ({
+                    id: `c${i + 1}`,
+                    ws: createMockWebSocket(WebSocketClient.CLOSED),
+                    closeInitiated: false,
+                    reconnectionPending: false,
+                    renewalPending: false,
+                    pendingRequests: new Map(),
+                    pendingSubscriptions: [],
+                })
+            );
+
+            wsStreams = new WebsocketStreamsBase(
+                { wsURL: 'wss://test.com', mode: 'pool', poolSize: basePoolSize },
+                pool,
+                urlPaths
+            );
+
+            const connectPoolSpy = jest
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                .spyOn(wsStreams as any, 'connectPool')
+                .mockResolvedValue({});
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const prepareURLSpy = jest.spyOn(wsStreams as any, 'prepareURL');
+
+            const p = wsStreams.connect(['stream1', 'stream2']);
+            await Promise.resolve();
+            await expect(p).resolves.toBeUndefined();
+
+            expect(connectPoolSpy).toHaveBeenCalledTimes(urlPaths.length);
+
+            const spotSubset = wsStreams.connectionPool.slice(0, 2);
+            const futuresSubset = wsStreams.connectionPool.slice(2, 4);
+
+            spotSubset.forEach((c) => expect(c.urlPath).toBe('path1'));
+            futuresSubset.forEach((c) => expect(c.urlPath).toBe('path2'));
+
+            expect(prepareURLSpy).toHaveBeenCalledWith(['stream1', 'stream2'], 'path1');
+            expect(prepareURLSpy).toHaveBeenCalledWith(['stream1', 'stream2'], 'path2');
+            expect(connectPoolSpy).toHaveBeenCalledWith(expect.any(String), spotSubset);
+            expect(connectPoolSpy).toHaveBeenCalledWith(expect.any(String), futuresSubset);
+        });
+
+        it('should reject if any connectPool task fails', async () => {
+            wsStreams = new WebsocketStreamsBase(
+                { wsURL: 'wss://test.com', mode: 'pool', poolSize: 1 },
+                connectionPool,
+                ['path1', 'path2']
+            );
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            jest.spyOn(wsStreams as any, 'connectPool')
+                .mockResolvedValueOnce({})
+                .mockRejectedValueOnce(new Error('Connection failed'));
+
+            const p = wsStreams.connect('stream1');
+            await Promise.resolve();
+
+            await expect(p).rejects.toThrow('Connection failed');
+        });
+
+        it('should reject on timeout if connectPool never resolves', async () => {
+            wsStreams = new WebsocketStreamsBase(
+                { wsURL: 'wss://test.com', mode: 'pool', poolSize: 1 },
+                connectionPool,
+                []
+            );
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            jest.spyOn(wsStreams as any, 'connectPool').mockImplementation(
+                () => new Promise(() => {}) // never resolves
+            );
+
+            const p = wsStreams.connect('stream1');
+
+            jest.advanceTimersByTime(10_000);
+            await expect(p).rejects.toThrow('Websocket connection timed out');
         });
     });
 
@@ -2640,17 +3643,26 @@ describe('WebsocketStreamsBase', () => {
     });
 
     describe('isSubscribed()', () => {
-        it('should return true if the stream is subscribed', () => {
+        it('should return true if the stream is subscribed without urlPath', () => {
             wsStreams['streamConnectionMap'].set('stream1', connectionPool[0]);
 
             expect(wsStreams.isSubscribed('stream1')).toBe(true);
         });
 
-        it('should return false if the stream is not subscribed', () => {
-            expect(wsStreams.isSubscribed('nonexistentStream')).toBe(false);
+        it('should return true if the stream is subscribed with a urlPath-scoped key', () => {
+            wsStreams['streamConnectionMap'].set('path1::stream1', connectionPool[0]);
+
+            expect(wsStreams.isSubscribed('stream1')).toBe(true);
         });
 
-        it('should handle edge cases with empty or invalid stream names', () => {
+        it('should return false if the stream is not subscribed (even if other scoped streams exist)', () => {
+            wsStreams['streamConnectionMap'].set('path1::stream1', connectionPool[0]);
+            wsStreams['streamConnectionMap'].set('path2::stream2', connectionPool[1]);
+
+            expect(wsStreams.isSubscribed('streamX')).toBe(false);
+        });
+
+        it('should return false for empty or invalid stream names', () => {
             expect(wsStreams.isSubscribed('')).toBe(false);
             expect(wsStreams.isSubscribed(null as never)).toBe(false);
             expect(wsStreams.isSubscribed(undefined as never)).toBe(false);

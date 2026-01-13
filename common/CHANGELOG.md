@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.2.0 - 2026-01-13
+
+### Added (1)
+
+- Support Dertivatives Trading Options different WS Streams URL paths.
+
 ## 2.1.1 - 2025-12-18
 
 ### Changed (1)

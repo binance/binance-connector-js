@@ -47,8 +47,9 @@ export const DERIVATIVES_TRADING_USDS_FUTURES_WS_STREAMS_TESTNET_URL =
 
 // Derivatives Trading (Options) constants
 export const DERIVATIVES_TRADING_OPTIONS_REST_API_PROD_URL = 'https://eapi.binance.com';
-export const DERIVATIVES_TRADING_OPTIONS_WS_STREAMS_PROD_URL =
-    'wss://nbstream.binance.com/eoptions';
+export const DERIVATIVES_TRADING_OPTIONS_REST_API_TESTNET_URL = 'https://testnet.binancefuture.com';
+export const DERIVATIVES_TRADING_OPTIONS_WS_STREAMS_PROD_URL = 'wss://fstream.binance.com';
+export const DERIVATIVES_TRADING_OPTIONS_WS_STREAMS_TESTNET_URL = 'wss://fstream.binancefuture.com';
 
 // Derivatives Trading (Portfolio Margin) constants
 export const DERIVATIVES_TRADING_PORTFOLIO_MARGIN_REST_API_PROD_URL = 'https://papi.binance.com';

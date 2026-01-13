@@ -62,6 +62,7 @@ export interface WebsocketConnection {
     >;
     pendingSubscriptions?: string[];
     ws?: WebSocketClient;
+    urlPath?: string;
     isSessionLoggedOn?: boolean;
     sessionLogonReq?: {
         method: string;
@@ -124,12 +125,14 @@ export class WebsocketCommon extends WebsocketEventEmitter {
      * In 'single' mode, returns the first connection in the pool.
      * In 'pool' mode, filters and returns connections that are ready for use.
      * @param allowNonEstablishedWebsockets - Optional flag to include non-established WebSocket connections.
+     * @param urlPath - Optional URL path to filter connections.
      * @returns An array of available WebSocket connections.
      */
     protected getAvailableConnections(
-        allowNonEstablishedWebsockets: boolean = false
+        allowNonEstablishedWebsockets: boolean = false,
+        urlPath?: string
     ): WebsocketConnection[] {
-        if (this.mode === 'single') return [this.connectionPool[0]];
+        if (this.mode === 'single' && !urlPath) return [this.connectionPool[0]];
 
         // Filter connections based on readiness and pending reconnection status
         const availableConnections = this.connectionPool.filter((connection) =>
@@ -145,10 +148,20 @@ export class WebsocketCommon extends WebsocketEventEmitter {
      * If the connection mode is 'pool', it returns an available connection from the pool,
      * using a round-robin selection strategy. If no available connections are found, it throws an error.
      * @param allowNonEstablishedWebsockets - A boolean indicating whether to allow connections that are not established.
+     * @param urlPath - An optional URL path to filter connections.
      * @returns {WebsocketConnection} The selected WebSocket connection.
      */
-    protected getConnection(allowNonEstablishedWebsockets: boolean = false): WebsocketConnection {
-        const availableConnections = this.getAvailableConnections(allowNonEstablishedWebsockets);
+    protected getConnection(
+        allowNonEstablishedWebsockets: boolean = false,
+        urlPath?: string
+    ): WebsocketConnection {
+        const availableConnections = this.getAvailableConnections(
+            allowNonEstablishedWebsockets,
+            urlPath
+        ).filter((connection) => {
+            if (urlPath) return connection.urlPath === urlPath;
+            return true;
+        });
 
         if (availableConnections.length === 0) {
             throw new Error('No available Websocket connections are ready.');
@@ -430,17 +443,20 @@ export class WebsocketCommon extends WebsocketEventEmitter {
     /**
      * Connects all WebSocket connections in the pool
      * @param url - The Websocket server URL.
+     * @param connections - An optional array of WebSocket connections to connect. If not provided, all connections in the pool are connected.
      * @returns A promise that resolves when all connections are established.
      */
-    protected async connectPool(url: string): Promise<void> {
-        const connectPromises = this.connectionPool.map(
+    protected async connectPool(url: string, connections?: WebsocketConnection[]): Promise<void> {
+        const pool = connections ?? this.connectionPool;
+
+        const connectPromises = pool.map(
             (connection) =>
                 new Promise<void>((resolve, reject) => {
                     this.initConnect(url, false, connection);
 
-                    connection.ws?.on('open', () => resolve());
-                    connection.ws?.on('error', (err) => reject(err));
-                    connection.ws?.on('close', () =>
+                    connection.ws?.once('open', () => resolve());
+                    connection.ws?.once('error', (err) => reject(err));
+                    connection.ws?.once('close', () =>
                         reject(new Error('Connection closed unexpectedly.'))
                     );
                 })
@@ -903,6 +919,7 @@ export class WebsocketAPIBase extends WebsocketCommon {
 
 export class WebsocketStreamsBase extends WebsocketCommon {
     private streamConnectionMap: Map<string, WebsocketConnection> = new Map();
+    protected urlPaths: string[];
     protected configuration: ConfigurationWebsocketStreams;
     protected wsURL: string;
     streamIdIsStrictlyNumber?: boolean = false;
@@ -911,20 +928,57 @@ export class WebsocketStreamsBase extends WebsocketCommon {
 
     constructor(
         configuration: ConfigurationWebsocketStreams,
-        connectionPool: WebsocketConnection[] = []
+        connectionPool: WebsocketConnection[] = [],
+        urlPaths: string[] = []
     ) {
         super(configuration, connectionPool);
         this.configuration = configuration;
         this.wsURL = configuration.wsURL as string;
+        this.urlPaths = urlPaths;
+        this.ensurePoolSizeForUrlPaths();
+    }
+
+    /**
+     * Ensures the connection pool has the required size based on the configured mode and number of URL paths.
+     *
+     * If no URL paths are configured, the method returns early without modifications.
+     * In 'pool' mode, the pool size is multiplied by the number of URL paths.
+     * In 'single' mode, only one connection per URL path is maintained.
+     *
+     * New connections are initialized with unique IDs and default state flags when the pool
+     * size is less than the expected size.
+     *
+     * @private
+     * @returns {void}
+     */
+    private ensurePoolSizeForUrlPaths(): void {
+        if (this.urlPaths.length === 0) return;
+
+        const mode = this.configuration?.mode ?? 'single';
+        const basePoolSize =
+            mode === 'pool' && this.configuration?.poolSize ? this.configuration.poolSize : 1;
+        const expected = basePoolSize * this.urlPaths.length;
+
+        while (this.connectionPool.length < expected) {
+            this.connectionPool.push({
+                id: randomString(),
+                closeInitiated: false,
+                reconnectionPending: false,
+                renewalPending: false,
+                pendingRequests: new Map(),
+                pendingSubscriptions: [],
+            });
+        }
     }
 
     /**
      * Formats the WebSocket URL for a given stream or streams.
      * @param streams - Array of stream names to include in the URL.
+     * @param urlPath - Optional URL path to include in the WebSocket URL.
      * @returns The formatted WebSocket URL with the provided streams.
      */
-    private prepareURL(streams: string[] = []): string {
-        let url = `${this.wsURL}/stream?streams=${streams.join('/')}`;
+    private prepareURL(streams: string[] = [], urlPath?: string): string {
+        let url = `${urlPath ? `${this.wsURL}/${urlPath}` : this.wsURL}/stream?streams=${streams.join('/')}`;
 
         if (this.configuration?.timeUnit) {
             try {
@@ -945,28 +999,35 @@ export class WebsocketStreamsBase extends WebsocketCommon {
      * @returns The formatted WebSocket URL with streams and optional parameters.
      */
     protected getReconnectURL(url: string, targetConnection: WebsocketConnection): string {
-        const streams = Array.from(this.streamConnectionMap.keys()).filter(
-            (stream) => this.streamConnectionMap.get(stream) === targetConnection
-        );
-        return this.prepareURL(streams);
+        const streams = Array.from(this.streamConnectionMap.keys())
+            .filter((stream) => this.streamConnectionMap.get(stream) === targetConnection)
+            .map((key) => (key.includes('::') ? key.split('::').slice(1).join('::') : key));
+
+        return this.prepareURL(streams, targetConnection?.urlPath);
     }
 
     /**
      * Handles subscription to streams and assigns them to specific connections
      * @param streams Array of stream names to subscribe to
+     * @param urlPath Optional URL path for the streams
      * @returns Map of connections to streams
      */
-    private handleStreamAssignment(streams: string[]): Map<WebsocketConnection, string[]> {
+    private handleStreamAssignment(
+        streams: string[],
+        urlPath?: string
+    ): Map<WebsocketConnection, string[]> {
         const connectionStreamMap = new Map<WebsocketConnection, string[]>();
 
         streams.forEach((stream) => {
-            if (!this.streamCallbackMap.has(stream)) this.streamCallbackMap.set(stream, new Set());
+            const key = this.streamKey(stream, urlPath);
 
-            let connection = this.streamConnectionMap.get(stream);
+            if (!this.streamCallbackMap.has(key)) this.streamCallbackMap.set(key, new Set());
+
+            let connection = this.streamConnectionMap.get(key);
 
             if (!connection || connection.closeInitiated || connection.reconnectionPending) {
-                connection = this.getConnection(true);
-                this.streamConnectionMap.set(stream, connection);
+                connection = this.getConnection(true, urlPath);
+                this.streamConnectionMap.set(key, connection);
             }
 
             if (!connectionStreamMap.has(connection)) connectionStreamMap.set(connection, []);
@@ -1023,10 +1084,15 @@ export class WebsocketStreamsBase extends WebsocketCommon {
             const parsedData = JSONParse(data);
             const streamName = parsedData?.stream;
 
-            if (streamName && this.streamCallbackMap.has(streamName))
-                this.streamCallbackMap
-                    .get(streamName)
-                    ?.forEach((callback) => callback(parsedData.data));
+            if (streamName) {
+                const key = this.streamKey(streamName, connection?.urlPath);
+
+                if (this.streamCallbackMap.has(key)) {
+                    this.streamCallbackMap
+                        .get(key)
+                        ?.forEach((callback) => callback(parsedData.data));
+                }
+            }
         } catch (error) {
             this.logger.error('Failed to parse WebSocket message:', data, error);
         }
@@ -1051,6 +1117,16 @@ export class WebsocketStreamsBase extends WebsocketCommon {
     }
 
     /**
+     * Generates a stream key by combining a stream name with an optional URL path.
+     * @param stream - The stream name to use as the key or suffix.
+     * @param urlPath - Optional URL path to prepend to the stream name.
+     * @returns A stream key in the format `urlPath::stream` if urlPath is provided, otherwise just the stream name.
+     */
+    streamKey(stream: string, urlPath?: string): string {
+        return urlPath ? `${urlPath}::${stream}` : stream;
+    }
+
+    /**
      * Connects to the WebSocket server and subscribes to the specified streams.
      * This method returns a Promise that resolves when the connection is established,
      * or rejects with an error if the connection fails to be established within 10 seconds.
@@ -1065,7 +1141,23 @@ export class WebsocketStreamsBase extends WebsocketCommon {
                 reject(new Error('Websocket connection timed out'));
             }, 10000);
 
-            this.connectPool(this.prepareURL(streams))
+            const mode = this.configuration?.mode ?? 'single';
+            const basePoolSize =
+                mode === 'pool' && this.configuration?.poolSize ? this.configuration.poolSize : 1;
+
+            // Determine connections based on URL paths and pool size
+            const connections =
+                this.urlPaths.length > 0
+                    ? this.urlPaths.map((path, i) => {
+                        const start = i * basePoolSize;
+                        const end = start + basePoolSize;
+                        const subset = this.connectionPool.slice(start, end);
+                        subset.forEach((c) => (c.urlPath = path));
+                        return this.connectPool(this.prepareURL(streams, path), subset);
+                    })
+                    : [this.connectPool(this.prepareURL(streams))];
+
+            Promise.all(connections)
                 .then(() => resolve())
                 .catch((error) => reject(error))
                 .finally(() => clearTimeout(timeout));
@@ -1087,25 +1179,27 @@ export class WebsocketStreamsBase extends WebsocketCommon {
      * Handles both single and pool modes
      * @param stream Single stream name or array of stream names to subscribe to
      * @param id Optional subscription ID
+     * @param urlPath Optional URL path for the streams
      * @returns void
      */
-    subscribe(stream: string | string[], id?: number | string): void {
-        const streams = (Array.isArray(stream) ? stream : [stream]).filter(
-            (stream) => !this.streamConnectionMap.has(stream)
-        );
-        const connectionStreamMap = this.handleStreamAssignment(streams);
+    subscribe(stream: string | string[], id?: number | string, urlPath?: string): void {
+        const streams = (Array.isArray(stream) ? stream : [stream]).filter((stream) => {
+            const key = this.streamKey(stream, urlPath);
+            return !this.streamConnectionMap.has(key);
+        });
+        const connectionStreamMap = this.handleStreamAssignment(streams, urlPath);
 
-        connectionStreamMap.forEach((streams, connection) => {
+        connectionStreamMap.forEach((assignedStreams, connection) => {
             if (!this.isConnected(connection)) {
                 this.logger.info(
-                    `Connection ${connection.id} is not ready. Queuing subscription for streams: ${streams}`
+                    `Connection ${connection.id} is not ready. Queuing subscription for streams: ${assignedStreams}`
                 );
-                connection.pendingSubscriptions?.push(...streams);
+                connection.pendingSubscriptions?.push(...assignedStreams);
 
                 return;
             }
 
-            this.sendSubscriptionPayload(connection, streams, id);
+            this.sendSubscriptionPayload(connection, assignedStreams, id);
         });
     }
 
@@ -1114,22 +1208,21 @@ export class WebsocketStreamsBase extends WebsocketCommon {
      * Handles both single and pool modes
      * @param stream Single stream name or array of stream names to unsubscribe from
      * @param id Optional unsubscription ID
+     * @param urlPath Optional URL path for the streams
      * @returns void
      */
-    unsubscribe(stream: string | string[], id?: number | string): void {
+    unsubscribe(stream: string | string[], id?: number | string, urlPath?: string): void {
         const streams = Array.isArray(stream) ? stream : [stream];
 
         streams.forEach((stream) => {
-            const connection = this.streamConnectionMap.get(stream);
+            const key = this.streamKey(stream, urlPath);
+            const connection = this.streamConnectionMap.get(key);
             if (!connection || !connection.ws || !this.isConnected(connection)) {
                 this.logger.warn(`Stream ${stream} not associated with an active connection.`);
                 return;
             }
 
-            if (
-                !this.streamCallbackMap.has(stream) ||
-                this.streamCallbackMap.get(stream)?.size === 0
-            ) {
+            if (!this.streamCallbackMap.has(key) || this.streamCallbackMap.get(key)?.size === 0) {
                 const payload = {
                     method: 'UNSUBSCRIBE',
                     params: [stream],
@@ -1138,8 +1231,8 @@ export class WebsocketStreamsBase extends WebsocketCommon {
                 this.logger.debug('UNSUBSCRIBE', payload);
                 this.send(JSON.stringify(payload), undefined, false, 0, connection);
 
-                this.streamConnectionMap.delete(stream);
-                this.streamCallbackMap.delete(stream);
+                this.streamConnectionMap.delete(key);
+                this.streamCallbackMap.delete(key);
             }
         });
     }
@@ -1150,7 +1243,12 @@ export class WebsocketStreamsBase extends WebsocketCommon {
      * @returns `true` if the stream is currently subscribed, `false` otherwise.
      */
     isSubscribed(stream: string): boolean {
-        return this.streamConnectionMap.has(stream);
+        if (this.streamConnectionMap.has(stream)) return true;
+
+        for (const key of this.streamConnectionMap.keys()) {
+            if (key.endsWith(`::${stream}`)) return true;
+        }
+        return false;
     }
 }
 
@@ -1175,14 +1273,22 @@ export interface WebsocketStream<T> {
  * @param {WebsocketAPIBase | WebsocketStreamsBase} websocketBase The WebSocket base instance
  * @param {string} streamOrId The stream identifier
  * @param {string} [id] Optional additional identifier
+ * @param {string} [urlPath] Optional URL path for the stream
  * @returns {WebsocketStream<T>} A stream handler with methods to register callbacks and unsubscribe
  */
 export function createStreamHandler<T>(
     websocketBase: WebsocketAPIBase | WebsocketStreamsBase,
     streamOrId: string,
-    id?: number | string
+    id?: number | string,
+    urlPath?: string
 ): WebsocketStream<T> {
-    if (websocketBase instanceof WebsocketStreamsBase) websocketBase.subscribe(streamOrId, id);
+    const key =
+        websocketBase instanceof WebsocketStreamsBase
+            ? websocketBase.streamKey(streamOrId, urlPath)
+            : streamOrId;
+
+    if (websocketBase instanceof WebsocketStreamsBase)
+        websocketBase.subscribe(streamOrId, id, urlPath);
 
     let registeredCallback: (data: unknown) => void;
     return {
@@ -1193,16 +1299,16 @@ export function createStreamHandler<T>(
                         websocketBase.logger.error(`Error in stream callback: ${err}`);
                     });
                 };
-                const callbackSet = websocketBase.streamCallbackMap.get(streamOrId) ?? new Set();
+                const callbackSet = websocketBase.streamCallbackMap.get(key) ?? new Set();
                 callbackSet.add(registeredCallback);
-                websocketBase.streamCallbackMap.set(streamOrId, callbackSet);
+                websocketBase.streamCallbackMap.set(key, callbackSet);
             }
         },
         unsubscribe: () => {
             if (registeredCallback)
-                websocketBase.streamCallbackMap.get(streamOrId)?.delete(registeredCallback);
+                websocketBase.streamCallbackMap.get(key)?.delete(registeredCallback);
             if (websocketBase instanceof WebsocketStreamsBase)
-                websocketBase.unsubscribe(streamOrId, id);
+                websocketBase.unsubscribe(streamOrId, id, urlPath);
         },
     };
 }
