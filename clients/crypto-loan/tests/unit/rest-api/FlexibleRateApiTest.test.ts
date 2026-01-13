@@ -24,6 +24,7 @@ import {
     GetFlexibleLoanAssetsDataRequest,
     GetFlexibleLoanBorrowHistoryRequest,
     GetFlexibleLoanCollateralAssetsDataRequest,
+    GetFlexibleLoanInterestRateHistoryRequest,
     GetFlexibleLoanLiquidationHistoryRequest,
     GetFlexibleLoanLtvAdjustmentHistoryRequest,
     GetFlexibleLoanOngoingOrdersRequest,
@@ -37,6 +38,7 @@ import type {
     GetFlexibleLoanAssetsDataResponse,
     GetFlexibleLoanBorrowHistoryResponse,
     GetFlexibleLoanCollateralAssetsDataResponse,
+    GetFlexibleLoanInterestRateHistoryResponse,
     GetFlexibleLoanLiquidationHistoryResponse,
     GetFlexibleLoanLtvAdjustmentHistoryResponse,
     GetFlexibleLoanOngoingOrdersResponse,
@@ -808,6 +810,122 @@ describe('FlexibleRateApi', () => {
                 .spyOn(client, 'getFlexibleLoanCollateralAssetsData')
                 .mockRejectedValueOnce(mockError);
             await expect(client.getFlexibleLoanCollateralAssetsData()).rejects.toThrow(
+                'ResponseError'
+            );
+            spy.mockRestore();
+        });
+    });
+
+    describe('getFlexibleLoanInterestRateHistory()', () => {
+        it('should execute getFlexibleLoanInterestRateHistory() successfully with required parameters only', async () => {
+            const params: GetFlexibleLoanInterestRateHistoryRequest = {
+                coin: 'coin_example',
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        { coin: 'USDT', annualizedInterestRate: '0.0647', time: 1575018510000 },
+                        { coin: 'USDT', annualizedInterestRate: '0.0647', time: 1575018510000 },
+                    ],
+                    total: 2,
+                })
+            );
+
+            const spy = jest.spyOn(client, 'getFlexibleLoanInterestRateHistory').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetFlexibleLoanInterestRateHistoryResponse>)
+            );
+            const response = await client.getFlexibleLoanInterestRateHistory(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute getFlexibleLoanInterestRateHistory() successfully with optional parameters', async () => {
+            const params: GetFlexibleLoanInterestRateHistoryRequest = {
+                coin: 'coin_example',
+                recvWindow: 5000,
+                startTime: 1623319461670,
+                endTime: 1641782889000,
+                current: 1,
+                limit: 10,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        { coin: 'USDT', annualizedInterestRate: '0.0647', time: 1575018510000 },
+                        { coin: 'USDT', annualizedInterestRate: '0.0647', time: 1575018510000 },
+                    ],
+                    total: 2,
+                })
+            );
+
+            const spy = jest.spyOn(client, 'getFlexibleLoanInterestRateHistory').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetFlexibleLoanInterestRateHistoryResponse>)
+            );
+            const response = await client.getFlexibleLoanInterestRateHistory(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when coin is missing', async () => {
+            const _params: GetFlexibleLoanInterestRateHistoryRequest = {
+                coin: 'coin_example',
+                recvWindow: 5000,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.coin;
+
+            await expect(client.getFlexibleLoanInterestRateHistory(params)).rejects.toThrow(
+                'Required parameter coin was null or undefined when calling getFlexibleLoanInterestRateHistory.'
+            );
+        });
+
+        it('should throw RequiredError when recvWindow is missing', async () => {
+            const _params: GetFlexibleLoanInterestRateHistoryRequest = {
+                coin: 'coin_example',
+                recvWindow: 5000,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.recvWindow;
+
+            await expect(client.getFlexibleLoanInterestRateHistory(params)).rejects.toThrow(
+                'Required parameter recvWindow was null or undefined when calling getFlexibleLoanInterestRateHistory.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: GetFlexibleLoanInterestRateHistoryRequest = {
+                coin: 'coin_example',
+                recvWindow: 5000,
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'getFlexibleLoanInterestRateHistory')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.getFlexibleLoanInterestRateHistory(params)).rejects.toThrow(
                 'ResponseError'
             );
             spy.mockRestore();

@@ -11,6 +11,8 @@ export * from './get-flexible-loan-borrow-history-response';
 export * from './get-flexible-loan-borrow-history-response-rows-inner';
 export * from './get-flexible-loan-collateral-assets-data-response';
 export * from './get-flexible-loan-collateral-assets-data-response-rows-inner';
+export * from './get-flexible-loan-interest-rate-history-response';
+export * from './get-flexible-loan-interest-rate-history-response-rows-inner';
 export * from './get-flexible-loan-liquidation-history-response';
 export * from './get-flexible-loan-liquidation-history-response-rows-inner';
 export * from './get-flexible-loan-ltv-adjustment-history-response';

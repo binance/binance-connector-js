@@ -23,6 +23,7 @@ import type {
     GetFlexibleLoanAssetsDataRequest,
     GetFlexibleLoanBorrowHistoryRequest,
     GetFlexibleLoanCollateralAssetsDataRequest,
+    GetFlexibleLoanInterestRateHistoryRequest,
     GetFlexibleLoanLiquidationHistoryRequest,
     GetFlexibleLoanLtvAdjustmentHistoryRequest,
     GetFlexibleLoanOngoingOrdersRequest,
@@ -44,6 +45,7 @@ import type {
     GetFlexibleLoanAssetsDataResponse,
     GetFlexibleLoanBorrowHistoryResponse,
     GetFlexibleLoanCollateralAssetsDataResponse,
+    GetFlexibleLoanInterestRateHistoryResponse,
     GetFlexibleLoanLiquidationHistoryResponse,
     GetFlexibleLoanLtvAdjustmentHistoryResponse,
     GetFlexibleLoanOngoingOrdersResponse,
@@ -254,6 +256,28 @@ export class RestAPI {
         requestParameters: GetFlexibleLoanCollateralAssetsDataRequest = {}
     ): Promise<RestApiResponse<GetFlexibleLoanCollateralAssetsDataResponse>> {
         return this.flexibleRateApi.getFlexibleLoanCollateralAssetsData(requestParameters);
+    }
+
+    /**
+     * Check Flexible Loan interest rate history
+     *
+     * If startTime and endTime are not sent, the recent 90-day data will be returned
+     * The max interval between startTime and endTime is 90 days.
+     * Time based on UTC+0.
+     *
+     * Weight: 400
+     *
+     * @summary Get Flexible Loan Interest Rate History (USER_DATA)
+     * @param {GetFlexibleLoanInterestRateHistoryRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<GetFlexibleLoanInterestRateHistoryResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/market-data/Get-Flexible-Loan-Interest-Rate-History Binance API Documentation}
+     */
+    getFlexibleLoanInterestRateHistory(
+        requestParameters: GetFlexibleLoanInterestRateHistoryRequest
+    ): Promise<RestApiResponse<GetFlexibleLoanInterestRateHistoryResponse>> {
+        return this.flexibleRateApi.getFlexibleLoanInterestRateHistory(requestParameters);
     }
 
     /**

@@ -27,6 +27,7 @@ import type {
     GetFlexibleLoanAssetsDataResponse,
     GetFlexibleLoanBorrowHistoryResponse,
     GetFlexibleLoanCollateralAssetsDataResponse,
+    GetFlexibleLoanInterestRateHistoryResponse,
     GetFlexibleLoanLiquidationHistoryResponse,
     GetFlexibleLoanLtvAdjustmentHistoryResponse,
     GetFlexibleLoanOngoingOrdersResponse,
@@ -413,6 +414,71 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
             };
         },
         /**
+         * Check Flexible Loan interest rate history
+         *
+         * If startTime and endTime are not sent, the recent 90-day data will be returned
+         * The max interval between startTime and endTime is 90 days.
+         * Time based on UTC+0.
+         *
+         * Weight: 400
+         *
+         * @summary Get Flexible Loan Interest Rate History (USER_DATA)
+         * @param {string} coin
+         * @param {number | bigint} recvWindow
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
+         * @param {number | bigint} [limit] Default: 10; max: 100
+         *
+         * @throws {RequiredError}
+         */
+        getFlexibleLoanInterestRateHistory: async (
+            coin: string,
+            recvWindow: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            limit?: number | bigint
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'coin' is not null or undefined
+            assertParamExists('getFlexibleLoanInterestRateHistory', 'coin', coin);
+            // verify required parameter 'recvWindow' is not null or undefined
+            assertParamExists('getFlexibleLoanInterestRateHistory', 'recvWindow', recvWindow);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+
+            if (coin !== undefined && coin !== null) {
+                localVarQueryParameter['coin'] = coin;
+            }
+            if (startTime !== undefined && startTime !== null) {
+                localVarQueryParameter['startTime'] = startTime;
+            }
+            if (endTime !== undefined && endTime !== null) {
+                localVarQueryParameter['endTime'] = endTime;
+            }
+            if (current !== undefined && current !== null) {
+                localVarQueryParameter['current'] = current;
+            }
+            if (limit !== undefined && limit !== null) {
+                localVarQueryParameter['limit'] = limit;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v2/loan/interestRateHistory',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          *
          * Weight: 400
          *
@@ -769,6 +835,24 @@ export interface FlexibleRateApiInterface {
         requestParameters?: GetFlexibleLoanCollateralAssetsDataRequest
     ): Promise<RestApiResponse<GetFlexibleLoanCollateralAssetsDataResponse>>;
     /**
+     * Check Flexible Loan interest rate history
+     *
+     * If startTime and endTime are not sent, the recent 90-day data will be returned
+     * The max interval between startTime and endTime is 90 days.
+     * Time based on UTC+0.
+     *
+     * Weight: 400
+     *
+     * @summary Get Flexible Loan Interest Rate History (USER_DATA)
+     * @param {GetFlexibleLoanInterestRateHistoryRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof FlexibleRateApiInterface
+     */
+    getFlexibleLoanInterestRateHistory(
+        requestParameters: GetFlexibleLoanInterestRateHistoryRequest
+    ): Promise<RestApiResponse<GetFlexibleLoanInterestRateHistoryResponse>>;
+    /**
      *
      * Weight: 400
      *
@@ -1088,6 +1172,54 @@ export interface GetFlexibleLoanCollateralAssetsDataRequest {
      * @memberof FlexibleRateApiGetFlexibleLoanCollateralAssetsData
      */
     readonly recvWindow?: number | bigint;
+}
+
+/**
+ * Request parameters for getFlexibleLoanInterestRateHistory operation in FlexibleRateApi.
+ * @interface GetFlexibleLoanInterestRateHistoryRequest
+ */
+export interface GetFlexibleLoanInterestRateHistoryRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof FlexibleRateApiGetFlexibleLoanInterestRateHistory
+     */
+    readonly coin: string;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof FlexibleRateApiGetFlexibleLoanInterestRateHistory
+     */
+    readonly recvWindow: number | bigint;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof FlexibleRateApiGetFlexibleLoanInterestRateHistory
+     */
+    readonly startTime?: number | bigint;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof FlexibleRateApiGetFlexibleLoanInterestRateHistory
+     */
+    readonly endTime?: number | bigint;
+
+    /**
+     * Current querying page. Start from 1; default: 1; max: 1000
+     * @type {number | bigint}
+     * @memberof FlexibleRateApiGetFlexibleLoanInterestRateHistory
+     */
+    readonly current?: number | bigint;
+
+    /**
+     * Default: 10; max: 100
+     * @type {number | bigint}
+     * @memberof FlexibleRateApiGetFlexibleLoanInterestRateHistory
+     */
+    readonly limit?: number | bigint;
 }
 
 /**
@@ -1538,6 +1670,45 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
                 requestParameters?.recvWindow
             );
         return sendRequest<GetFlexibleLoanCollateralAssetsDataResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Check Flexible Loan interest rate history
+     *
+     * If startTime and endTime are not sent, the recent 90-day data will be returned
+     * The max interval between startTime and endTime is 90 days.
+     * Time based on UTC+0.
+     *
+     * Weight: 400
+     *
+     * @summary Get Flexible Loan Interest Rate History (USER_DATA)
+     * @param {GetFlexibleLoanInterestRateHistoryRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetFlexibleLoanInterestRateHistoryResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof FlexibleRateApi
+     * @see {@link https://developers.binance.com/docs/crypto_loan/flexible-rate/market-data/Get-Flexible-Loan-Interest-Rate-History Binance API Documentation}
+     */
+    public async getFlexibleLoanInterestRateHistory(
+        requestParameters: GetFlexibleLoanInterestRateHistoryRequest
+    ): Promise<RestApiResponse<GetFlexibleLoanInterestRateHistoryResponse>> {
+        const localVarAxiosArgs =
+            await this.localVarAxiosParamCreator.getFlexibleLoanInterestRateHistory(
+                requestParameters?.coin,
+                requestParameters?.recvWindow,
+                requestParameters?.startTime,
+                requestParameters?.endTime,
+                requestParameters?.current,
+                requestParameters?.limit
+            );
+        return sendRequest<GetFlexibleLoanInterestRateHistoryResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
