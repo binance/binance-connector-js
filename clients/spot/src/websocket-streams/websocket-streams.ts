@@ -49,6 +49,7 @@ export class WebsocketStreams {
             ...(mode && { mode }),
             ...(poolSize && { poolSize }),
         });
+
         const websocketStreamsConnection = new WebsocketStreamsConnection(websocketBase);
         await websocketBase.connect(stream);
         return websocketStreamsConnection;
