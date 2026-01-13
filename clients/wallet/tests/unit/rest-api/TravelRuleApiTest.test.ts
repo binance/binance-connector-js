@@ -24,6 +24,7 @@ import {
     FetchAddressVerificationListRequest,
     SubmitDepositQuestionnaireRequest,
     SubmitDepositQuestionnaireTravelRuleRequest,
+    SubmitDepositQuestionnaireV2Request,
     VaspListRequest,
     WithdrawHistoryV1Request,
     WithdrawHistoryV2Request,
@@ -37,6 +38,7 @@ import type {
     FetchAddressVerificationListResponse,
     SubmitDepositQuestionnaireResponse,
     SubmitDepositQuestionnaireTravelRuleResponse,
+    SubmitDepositQuestionnaireV2Response,
     VaspListResponse,
     WithdrawHistoryV1Response,
     WithdrawHistoryV2Response,
@@ -673,7 +675,7 @@ describe('TravelRuleApi', () => {
         it('should execute submitDepositQuestionnaire() successfully with required parameters only', async () => {
             const params: SubmitDepositQuestionnaireRequest = {
                 subAccountId: '1',
-                depositId: '1',
+                depositId: 1,
                 questionnaire: 'questionnaire_example',
                 beneficiaryPii: 'beneficiaryPii_example',
                 signature: 'signature_example',
@@ -704,7 +706,7 @@ describe('TravelRuleApi', () => {
         it('should execute submitDepositQuestionnaire() successfully with optional parameters', async () => {
             const params: SubmitDepositQuestionnaireRequest = {
                 subAccountId: '1',
-                depositId: '1',
+                depositId: 1,
                 questionnaire: 'questionnaire_example',
                 beneficiaryPii: 'beneficiaryPii_example',
                 signature: 'signature_example',
@@ -740,7 +742,7 @@ describe('TravelRuleApi', () => {
         it('should throw RequiredError when subAccountId is missing', async () => {
             const _params: SubmitDepositQuestionnaireRequest = {
                 subAccountId: '1',
-                depositId: '1',
+                depositId: 1,
                 questionnaire: 'questionnaire_example',
                 beneficiaryPii: 'beneficiaryPii_example',
                 signature: 'signature_example',
@@ -756,7 +758,7 @@ describe('TravelRuleApi', () => {
         it('should throw RequiredError when depositId is missing', async () => {
             const _params: SubmitDepositQuestionnaireRequest = {
                 subAccountId: '1',
-                depositId: '1',
+                depositId: 1,
                 questionnaire: 'questionnaire_example',
                 beneficiaryPii: 'beneficiaryPii_example',
                 signature: 'signature_example',
@@ -772,7 +774,7 @@ describe('TravelRuleApi', () => {
         it('should throw RequiredError when questionnaire is missing', async () => {
             const _params: SubmitDepositQuestionnaireRequest = {
                 subAccountId: '1',
-                depositId: '1',
+                depositId: 1,
                 questionnaire: 'questionnaire_example',
                 beneficiaryPii: 'beneficiaryPii_example',
                 signature: 'signature_example',
@@ -788,7 +790,7 @@ describe('TravelRuleApi', () => {
         it('should throw RequiredError when beneficiaryPii is missing', async () => {
             const _params: SubmitDepositQuestionnaireRequest = {
                 subAccountId: '1',
-                depositId: '1',
+                depositId: 1,
                 questionnaire: 'questionnaire_example',
                 beneficiaryPii: 'beneficiaryPii_example',
                 signature: 'signature_example',
@@ -804,7 +806,7 @@ describe('TravelRuleApi', () => {
         it('should throw RequiredError when signature is missing', async () => {
             const _params: SubmitDepositQuestionnaireRequest = {
                 subAccountId: '1',
-                depositId: '1',
+                depositId: 1,
                 questionnaire: 'questionnaire_example',
                 beneficiaryPii: 'beneficiaryPii_example',
                 signature: 'signature_example',
@@ -820,7 +822,7 @@ describe('TravelRuleApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: SubmitDepositQuestionnaireRequest = {
                 subAccountId: '1',
-                depositId: '1',
+                depositId: 1,
                 questionnaire: 'questionnaire_example',
                 beneficiaryPii: 'beneficiaryPii_example',
                 signature: 'signature_example',
@@ -947,6 +949,114 @@ describe('TravelRuleApi', () => {
                 .spyOn(client, 'submitDepositQuestionnaireTravelRule')
                 .mockRejectedValueOnce(mockError);
             await expect(client.submitDepositQuestionnaireTravelRule(params)).rejects.toThrow(
+                'ResponseError'
+            );
+            spy.mockRestore();
+        });
+    });
+
+    describe('submitDepositQuestionnaireV2()', () => {
+        it('should execute submitDepositQuestionnaireV2() successfully with required parameters only', async () => {
+            const params: SubmitDepositQuestionnaireV2Request = {
+                depositId: 1,
+                questionnaire: 'questionnaire_example',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    trId: 765127651,
+                    accepted: true,
+                    info: 'Deposit questionnaire accepted.',
+                })
+            );
+
+            const spy = jest.spyOn(client, 'submitDepositQuestionnaireV2').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<SubmitDepositQuestionnaireV2Response>)
+            );
+            const response = await client.submitDepositQuestionnaireV2(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute submitDepositQuestionnaireV2() successfully with optional parameters', async () => {
+            const params: SubmitDepositQuestionnaireV2Request = {
+                depositId: 1,
+                questionnaire: 'questionnaire_example',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    trId: 765127651,
+                    accepted: true,
+                    info: 'Deposit questionnaire accepted.',
+                })
+            );
+
+            const spy = jest.spyOn(client, 'submitDepositQuestionnaireV2').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<SubmitDepositQuestionnaireV2Response>)
+            );
+            const response = await client.submitDepositQuestionnaireV2(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when depositId is missing', async () => {
+            const _params: SubmitDepositQuestionnaireV2Request = {
+                depositId: 1,
+                questionnaire: 'questionnaire_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.depositId;
+
+            await expect(client.submitDepositQuestionnaireV2(params)).rejects.toThrow(
+                'Required parameter depositId was null or undefined when calling submitDepositQuestionnaireV2.'
+            );
+        });
+
+        it('should throw RequiredError when questionnaire is missing', async () => {
+            const _params: SubmitDepositQuestionnaireV2Request = {
+                depositId: 1,
+                questionnaire: 'questionnaire_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.questionnaire;
+
+            await expect(client.submitDepositQuestionnaireV2(params)).rejects.toThrow(
+                'Required parameter questionnaire was null or undefined when calling submitDepositQuestionnaireV2.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: SubmitDepositQuestionnaireV2Request = {
+                depositId: 1,
+                questionnaire: 'questionnaire_example',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'submitDepositQuestionnaireV2')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.submitDepositQuestionnaireV2(params)).rejects.toThrow(
                 'ResponseError'
             );
             spy.mockRestore();

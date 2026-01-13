@@ -67,6 +67,7 @@ export * from './query-user-wallet-balance-response';
 export * from './query-user-wallet-balance-response-inner';
 export * from './submit-deposit-questionnaire-response';
 export * from './submit-deposit-questionnaire-travel-rule-response';
+export * from './submit-deposit-questionnaire-v2-response';
 export * from './system-status-response';
 export * from './toggle-bnb-burn-on-spot-trade-and-margin-interest-response';
 export * from './trade-fee-response';

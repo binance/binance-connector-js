@@ -497,8 +497,6 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Query User Delegation History
          *
-         * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint
-         *
          * Weight: 60
          *
          * @summary Query User Delegation History(For Master Account)(USER_DATA)
@@ -1060,8 +1058,6 @@ export interface AssetApiInterface {
     getOpenSymbolList(): Promise<RestApiResponse<GetOpenSymbolListResponse>>;
     /**
      * Query User Delegation History
-     *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint
      *
      * Weight: 60
      *
@@ -2080,8 +2076,6 @@ export class AssetApi implements AssetApiInterface {
 
     /**
      * Query User Delegation History
-     *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint
      *
      * Weight: 60
      *

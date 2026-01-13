@@ -27,6 +27,7 @@ import type {
     FetchAddressVerificationListResponse,
     SubmitDepositQuestionnaireResponse,
     SubmitDepositQuestionnaireTravelRuleResponse,
+    SubmitDepositQuestionnaireV2Response,
     VaspListResponse,
     WithdrawHistoryV1Response,
     WithdrawHistoryV2Response,
@@ -376,7 +377,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          *
          * @summary Submit Deposit Questionnaire (For local entities that require travel rule) (supporting network) (USER_DATA)
          * @param {string} subAccountId External user ID.
-         * @param {string} depositId Wallet deposit ID.
+         * @param {number | bigint} depositId Wallet deposit ID
          * @param {string} questionnaire JSON format questionnaire answers.
          * @param {string} beneficiaryPii JSON format beneficiary Pii.
          * @param {string} signature Must be the last parameter.
@@ -390,7 +391,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
          */
         submitDepositQuestionnaire: async (
             subAccountId: string,
-            depositId: string,
+            depositId: number | bigint,
             questionnaire: string,
             beneficiaryPii: string,
             signature: string,
@@ -500,6 +501,52 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
 
             return {
                 endpoint: '/sapi/v1/localentity/deposit/provide-info',
+                method: 'PUT',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Submit questionnaire for local entities that require travel rule.
+         * The questionnaire is only applies to transactions from unhosted wallets or VASPs that are not
+         * yet onboarded with GTR.
+         *
+         * Questionnaire is different for each local entity, please refer
+         * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+         *
+         * Weight: 600
+         *
+         * @summary Submit Deposit Questionnaire V2 (For local entities that require travel rule) (supporting network) (USER_DATA)
+         * @param {number | bigint} depositId Wallet deposit ID
+         * @param {string} questionnaire JSON format questionnaire answers.
+         *
+         * @throws {RequiredError}
+         */
+        submitDepositQuestionnaireV2: async (
+            depositId: number | bigint,
+            questionnaire: string
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'depositId' is not null or undefined
+            assertParamExists('submitDepositQuestionnaireV2', 'depositId', depositId);
+            // verify required parameter 'questionnaire' is not null or undefined
+            assertParamExists('submitDepositQuestionnaireV2', 'questionnaire', questionnaire);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+
+            if (depositId !== undefined && depositId !== null) {
+                localVarQueryParameter['depositId'] = depositId;
+            }
+            if (questionnaire !== undefined && questionnaire !== null) {
+                localVarQueryParameter['questionnaire'] = questionnaire;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v2/localentity/deposit/provide-info',
                 method: 'PUT',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
@@ -934,6 +981,25 @@ export interface TravelRuleApiInterface {
         requestParameters: SubmitDepositQuestionnaireTravelRuleRequest
     ): Promise<RestApiResponse<SubmitDepositQuestionnaireTravelRuleResponse>>;
     /**
+     * Submit questionnaire for local entities that require travel rule.
+     * The questionnaire is only applies to transactions from unhosted wallets or VASPs that are not
+     * yet onboarded with GTR.
+     *
+     * Questionnaire is different for each local entity, please refer
+     * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+     *
+     * Weight: 600
+     *
+     * @summary Submit Deposit Questionnaire V2 (For local entities that require travel rule) (supporting network) (USER_DATA)
+     * @param {SubmitDepositQuestionnaireV2Request} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TravelRuleApiInterface
+     */
+    submitDepositQuestionnaireV2(
+        requestParameters: SubmitDepositQuestionnaireV2Request
+    ): Promise<RestApiResponse<SubmitDepositQuestionnaireV2Response>>;
+    /**
      * Fetch the VASP list for local entities.
      *
      * Weight: 1
@@ -1289,11 +1355,11 @@ export interface SubmitDepositQuestionnaireRequest {
     readonly subAccountId: string;
 
     /**
-     * Wallet deposit ID.
-     * @type {string}
+     * Wallet deposit ID
+     * @type {number | bigint}
      * @memberof TravelRuleApiSubmitDepositQuestionnaire
      */
-    readonly depositId: string;
+    readonly depositId: number | bigint;
 
     /**
      * JSON format questionnaire answers.
@@ -1368,6 +1434,26 @@ export interface SubmitDepositQuestionnaireTravelRuleRequest {
      * JSON format questionnaire answers.
      * @type {string}
      * @memberof TravelRuleApiSubmitDepositQuestionnaireTravelRule
+     */
+    readonly questionnaire: string;
+}
+
+/**
+ * Request parameters for submitDepositQuestionnaireV2 operation in TravelRuleApi.
+ * @interface SubmitDepositQuestionnaireV2Request
+ */
+export interface SubmitDepositQuestionnaireV2Request {
+    /**
+     * Wallet deposit ID
+     * @type {number | bigint}
+     * @memberof TravelRuleApiSubmitDepositQuestionnaireV2
+     */
+    readonly depositId: number | bigint;
+
+    /**
+     * JSON format questionnaire answers.
+     * @type {string}
+     * @memberof TravelRuleApiSubmitDepositQuestionnaireV2
      */
     readonly questionnaire: string;
 }
@@ -1902,6 +1988,41 @@ export class TravelRuleApi implements TravelRuleApiInterface {
                 requestParameters?.questionnaire
             );
         return sendRequest<SubmitDepositQuestionnaireTravelRuleResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Submit questionnaire for local entities that require travel rule.
+     * The questionnaire is only applies to transactions from unhosted wallets or VASPs that are not
+     * yet onboarded with GTR.
+     *
+     * Questionnaire is different for each local entity, please refer
+     * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+     *
+     * Weight: 600
+     *
+     * @summary Submit Deposit Questionnaire V2 (For local entities that require travel rule) (supporting network) (USER_DATA)
+     * @param {SubmitDepositQuestionnaireV2Request} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<SubmitDepositQuestionnaireV2Response>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TravelRuleApi
+     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/deposit-provide-info-v2 Binance API Documentation}
+     */
+    public async submitDepositQuestionnaireV2(
+        requestParameters: SubmitDepositQuestionnaireV2Request
+    ): Promise<RestApiResponse<SubmitDepositQuestionnaireV2Response>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.submitDepositQuestionnaireV2(
+            requestParameters?.depositId,
+            requestParameters?.questionnaire
+        );
+        return sendRequest<SubmitDepositQuestionnaireV2Response>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

@@ -1,5 +1,20 @@
 # Changelog
 
+## 14.0.0 - 2026-01-13
+
+### Added (1)
+
+- `submitDepositQuestionnaireV2()` (`PUT /sapi/v2/localentity/deposit/provide-info`)
+
+### Changed (2)
+
+- Update `@binance/common` library to version `2.2.0`.
+
+- Modified parameter `depositId`:
+  - type `string` → `integer`
+  - affected methods:
+    - `submitDepositQuestionnaire()` (`PUT /sapi/v1/localentity/broker/deposit/provide-info`)
+
 ## 13.0.0 - 2025-12-19
 
 ### Added (2)

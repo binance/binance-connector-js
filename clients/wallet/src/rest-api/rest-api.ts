@@ -63,6 +63,7 @@ import type {
     FetchAddressVerificationListRequest,
     SubmitDepositQuestionnaireRequest,
     SubmitDepositQuestionnaireTravelRuleRequest,
+    SubmitDepositQuestionnaireV2Request,
     VaspListRequest,
     WithdrawHistoryV1Request,
     WithdrawHistoryV2Request,
@@ -115,6 +116,7 @@ import type {
     FetchAddressVerificationListResponse,
     SubmitDepositQuestionnaireResponse,
     SubmitDepositQuestionnaireTravelRuleResponse,
+    SubmitDepositQuestionnaireV2Response,
     VaspListResponse,
     WithdrawHistoryV1Response,
     WithdrawHistoryV2Response,
@@ -515,8 +517,6 @@ export class RestAPI {
 
     /**
      * Query User Delegation History
-     *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint
      *
      * Weight: 60
      *
@@ -1044,6 +1044,29 @@ export class RestAPI {
         requestParameters: SubmitDepositQuestionnaireTravelRuleRequest
     ): Promise<RestApiResponse<SubmitDepositQuestionnaireTravelRuleResponse>> {
         return this.travelRuleApi.submitDepositQuestionnaireTravelRule(requestParameters);
+    }
+
+    /**
+     * Submit questionnaire for local entities that require travel rule.
+     * The questionnaire is only applies to transactions from unhosted wallets or VASPs that are not
+     * yet onboarded with GTR.
+     *
+     * Questionnaire is different for each local entity, please refer
+     * If getting error like `Questionnaire format not valid.` or `Questionnaire must not be blank`,
+     *
+     * Weight: 600
+     *
+     * @summary Submit Deposit Questionnaire V2 (For local entities that require travel rule) (supporting network) (USER_DATA)
+     * @param {SubmitDepositQuestionnaireV2Request} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<SubmitDepositQuestionnaireV2Response>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/deposit-provide-info-v2 Binance API Documentation}
+     */
+    submitDepositQuestionnaireV2(
+        requestParameters: SubmitDepositQuestionnaireV2Request
+    ): Promise<RestApiResponse<SubmitDepositQuestionnaireV2Response>> {
+        return this.travelRuleApi.submitDepositQuestionnaireV2(requestParameters);
     }
 
     /**

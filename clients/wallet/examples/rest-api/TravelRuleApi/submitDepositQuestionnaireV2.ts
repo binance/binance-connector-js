@@ -7,24 +7,21 @@ const configurationRestAPI = {
 };
 const client = new Wallet({ configurationRestAPI });
 
-async function submitDepositQuestionnaire() {
+async function submitDepositQuestionnaireV2() {
     try {
-        const response = await client.restAPI.submitDepositQuestionnaire({
-            subAccountId: '1',
+        const response = await client.restAPI.submitDepositQuestionnaireV2({
             depositId: 1,
             questionnaire: 'questionnaire_example',
-            beneficiaryPii: 'beneficiaryPii_example',
-            signature: 'signature_example',
         });
 
         const rateLimits = response.rateLimits!;
-        console.log('submitDepositQuestionnaire() rate limits:', rateLimits);
+        console.log('submitDepositQuestionnaireV2() rate limits:', rateLimits);
 
         const data = await response.data();
-        console.log('submitDepositQuestionnaire() response:', data);
+        console.log('submitDepositQuestionnaireV2() response:', data);
     } catch (error) {
-        console.error('submitDepositQuestionnaire() error:', error);
+        console.error('submitDepositQuestionnaireV2() error:', error);
     }
 }
 
-submitDepositQuestionnaire();
+submitDepositQuestionnaireV2();
