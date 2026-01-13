@@ -424,7 +424,7 @@ export class TradeApi implements TradeApiInterface {
      * @returns {Promise<RestApiResponse<ChangeAutoCompoundStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/dual_investment/trade/Change-Auto-Compound-status Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/advanced_earn/dual-investment/trade/Change-Auto-Compound-status Binance API Documentation}
      */
     public async changeAutoCompoundStatus(
         requestParameters: ChangeAutoCompoundStatusRequest
@@ -455,7 +455,7 @@ export class TradeApi implements TradeApiInterface {
      * @returns {Promise<RestApiResponse<CheckDualInvestmentAccountsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/dual_investment/trade/Check-Dual-Investment-accounts Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/advanced_earn/dual-investment/trade/Check-Dual-Investment-accounts Binance API Documentation}
      */
     public async checkDualInvestmentAccounts(
         requestParameters: CheckDualInvestmentAccountsRequest = {}
@@ -484,7 +484,7 @@ export class TradeApi implements TradeApiInterface {
      * @returns {Promise<RestApiResponse<GetDualInvestmentPositionsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/dual_investment/trade/Get-Dual-Investment-positions Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/advanced_earn/dual-investment/trade/Get-Dual-Investment-positions Binance API Documentation}
      */
     public async getDualInvestmentPositions(
         requestParameters: GetDualInvestmentPositionsRequest = {}
@@ -519,7 +519,7 @@ export class TradeApi implements TradeApiInterface {
      * @returns {Promise<RestApiResponse<SubscribeDualInvestmentProductsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/dual_investment/trade/Subscribe-Dual-Investment-products Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/advanced_earn/dual-investment/trade/Subscribe-Dual-Investment-products Binance API Documentation}
      */
     public async subscribeDualInvestmentProducts(
         requestParameters: SubscribeDualInvestmentProductsRequest

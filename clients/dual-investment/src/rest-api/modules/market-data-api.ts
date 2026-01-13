@@ -184,7 +184,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * @returns {Promise<RestApiResponse<GetDualInvestmentProductListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/dual_investment/market-data/Get-Dual-Investment-product-list Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/advanced_earn/dual-investment/market-data/Get-Dual-Investment-product-list Binance API Documentation}
      */
     public async getDualInvestmentProductList(
         requestParameters: GetDualInvestmentProductListRequest

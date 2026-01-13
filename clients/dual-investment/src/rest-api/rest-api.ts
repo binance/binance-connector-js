@@ -103,7 +103,7 @@ export class RestAPI {
      *
      * @returns {Promise<RestApiResponse<GetDualInvestmentProductListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/dual_investment/market-data/Get-Dual-Investment-product-list Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/advanced_earn/dual-investment/market-data/Get-Dual-Investment-product-list Binance API Documentation}
      */
     getDualInvestmentProductList(
         requestParameters: GetDualInvestmentProductListRequest
@@ -121,7 +121,7 @@ export class RestAPI {
      *
      * @returns {Promise<RestApiResponse<ChangeAutoCompoundStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/dual_investment/trade/Change-Auto-Compound-status Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/advanced_earn/dual-investment/trade/Change-Auto-Compound-status Binance API Documentation}
      */
     changeAutoCompoundStatus(
         requestParameters: ChangeAutoCompoundStatusRequest
@@ -139,7 +139,7 @@ export class RestAPI {
      *
      * @returns {Promise<RestApiResponse<CheckDualInvestmentAccountsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/dual_investment/trade/Check-Dual-Investment-accounts Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/advanced_earn/dual-investment/trade/Check-Dual-Investment-accounts Binance API Documentation}
      */
     checkDualInvestmentAccounts(
         requestParameters: CheckDualInvestmentAccountsRequest = {}
@@ -157,7 +157,7 @@ export class RestAPI {
      *
      * @returns {Promise<RestApiResponse<GetDualInvestmentPositionsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/dual_investment/trade/Get-Dual-Investment-positions Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/advanced_earn/dual-investment/trade/Get-Dual-Investment-positions Binance API Documentation}
      */
     getDualInvestmentPositions(
         requestParameters: GetDualInvestmentPositionsRequest = {}
@@ -178,7 +178,7 @@ export class RestAPI {
      *
      * @returns {Promise<RestApiResponse<SubscribeDualInvestmentProductsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/dual_investment/trade/Subscribe-Dual-Investment-products Binance API Documentation}
+     * @see {@link https://developers.binance.com/docs/advanced_earn/dual-investment/trade/Subscribe-Dual-Investment-products Binance API Documentation}
      */
     subscribeDualInvestmentProducts(
         requestParameters: SubscribeDualInvestmentProductsRequest
