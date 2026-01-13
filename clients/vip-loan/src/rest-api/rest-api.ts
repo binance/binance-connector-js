@@ -20,6 +20,7 @@ import type {
     GetBorrowInterestRateRequest,
     GetCollateralAssetDataRequest,
     GetLoanableAssetsDataRequest,
+    GetVIPLoanInterestRateHistoryRequest,
 } from './modules/market-data-api';
 import type {
     VipLoanBorrowRequest,
@@ -28,6 +29,7 @@ import type {
 } from './modules/trade-api';
 import type {
     CheckVIPLoanCollateralAccountRequest,
+    GetVIPLoanAccruedInterestRequest,
     GetVIPLoanOngoingOrdersRequest,
     QueryApplicationStatusRequest,
 } from './modules/user-information-api';
@@ -36,10 +38,12 @@ import type {
     GetBorrowInterestRateResponse,
     GetCollateralAssetDataResponse,
     GetLoanableAssetsDataResponse,
+    GetVIPLoanInterestRateHistoryResponse,
 } from './types';
 import type { VipLoanBorrowResponse, VipLoanRenewResponse, VipLoanRepayResponse } from './types';
 import type {
     CheckVIPLoanCollateralAccountResponse,
+    GetVIPLoanAccruedInterestResponse,
     GetVIPLoanOngoingOrdersResponse,
     QueryApplicationStatusResponse,
 } from './types';
@@ -163,6 +167,28 @@ export class RestAPI {
     }
 
     /**
+     * Check VIP Loan flexible interest rate history
+     *
+     * If startTime and endTime are not sent, the recent 90-day data will be returned
+     * The max interval between startTime and end Time is 180 days.
+     * Time based on UTC+0.
+     *
+     * Weight: 400
+     *
+     * @summary Get VIP Loan Interest Rate History (USER_DATA)
+     * @param {GetVIPLoanInterestRateHistoryRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<GetVIPLoanInterestRateHistoryResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/vip_loan/market-data/Get-VIP-Loan-Interest-Rate-History Binance API Documentation}
+     */
+    getVIPLoanInterestRateHistory(
+        requestParameters: GetVIPLoanInterestRateHistoryRequest
+    ): Promise<RestApiResponse<GetVIPLoanInterestRateHistoryResponse>> {
+        return this.marketDataApi.getVIPLoanInterestRateHistory(requestParameters);
+    }
+
+    /**
      * VIP loan is available for VIP users only.
      *
      * loanAccountId refer to loan receiving account
@@ -240,6 +266,27 @@ export class RestAPI {
         requestParameters: CheckVIPLoanCollateralAccountRequest = {}
     ): Promise<RestApiResponse<CheckVIPLoanCollateralAccountResponse>> {
         return this.userInformationApi.checkVIPLoanCollateralAccount(requestParameters);
+    }
+
+    /**
+     * Check VIP Loan interest record
+     *
+     * If startTime and endTime are not sent, the recent 90-day data will be returned.
+     * The max interval between startTime and endTime is 90 days.
+     *
+     * Weight: 400
+     *
+     * @summary Get VIP Loan Accrued Interest (USER_DATA)
+     * @param {GetVIPLoanAccruedInterestRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<GetVIPLoanAccruedInterestResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/vip_loan/user-information/Get-VIP-Loan-Accrued-Interest Binance API Documentation}
+     */
+    getVIPLoanAccruedInterest(
+        requestParameters: GetVIPLoanAccruedInterestRequest = {}
+    ): Promise<RestApiResponse<GetVIPLoanAccruedInterestResponse>> {
+        return this.userInformationApi.getVIPLoanAccruedInterest(requestParameters);
     }
 
     /**

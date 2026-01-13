@@ -20,11 +20,13 @@ import {
     GetBorrowInterestRateRequest,
     GetCollateralAssetDataRequest,
     GetLoanableAssetsDataRequest,
+    GetVIPLoanInterestRateHistoryRequest,
 } from '../../../src/rest-api';
 import type {
     GetBorrowInterestRateResponse,
     GetCollateralAssetDataResponse,
     GetLoanableAssetsDataResponse,
+    GetVIPLoanInterestRateHistoryResponse,
 } from '../../../src/rest-api/types';
 
 describe('MarketDataApi', () => {
@@ -332,6 +334,116 @@ describe('MarketDataApi', () => {
                 .spyOn(client, 'getLoanableAssetsData')
                 .mockRejectedValueOnce(mockError);
             await expect(client.getLoanableAssetsData()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('getVIPLoanInterestRateHistory()', () => {
+        it('should execute getVIPLoanInterestRateHistory() successfully with required parameters only', async () => {
+            const params: GetVIPLoanInterestRateHistoryRequest = {
+                coin: 'coin_example',
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [{ coin: 'USDT', annualizedInterestRate: '0.0647', time: 1575018510000 }],
+                    total: 1,
+                })
+            );
+
+            const spy = jest.spyOn(client, 'getVIPLoanInterestRateHistory').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetVIPLoanInterestRateHistoryResponse>)
+            );
+            const response = await client.getVIPLoanInterestRateHistory(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute getVIPLoanInterestRateHistory() successfully with optional parameters', async () => {
+            const params: GetVIPLoanInterestRateHistoryRequest = {
+                coin: 'coin_example',
+                recvWindow: 5000,
+                startTime: 1623319461670,
+                endTime: 1641782889000,
+                current: 1,
+                limit: 10,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [{ coin: 'USDT', annualizedInterestRate: '0.0647', time: 1575018510000 }],
+                    total: 1,
+                })
+            );
+
+            const spy = jest.spyOn(client, 'getVIPLoanInterestRateHistory').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetVIPLoanInterestRateHistoryResponse>)
+            );
+            const response = await client.getVIPLoanInterestRateHistory(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when coin is missing', async () => {
+            const _params: GetVIPLoanInterestRateHistoryRequest = {
+                coin: 'coin_example',
+                recvWindow: 5000,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.coin;
+
+            await expect(client.getVIPLoanInterestRateHistory(params)).rejects.toThrow(
+                'Required parameter coin was null or undefined when calling getVIPLoanInterestRateHistory.'
+            );
+        });
+
+        it('should throw RequiredError when recvWindow is missing', async () => {
+            const _params: GetVIPLoanInterestRateHistoryRequest = {
+                coin: 'coin_example',
+                recvWindow: 5000,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.recvWindow;
+
+            await expect(client.getVIPLoanInterestRateHistory(params)).rejects.toThrow(
+                'Required parameter recvWindow was null or undefined when calling getVIPLoanInterestRateHistory.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: GetVIPLoanInterestRateHistoryRequest = {
+                coin: 'coin_example',
+                recvWindow: 5000,
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'getVIPLoanInterestRateHistory')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.getVIPLoanInterestRateHistory(params)).rejects.toThrow(
+                'ResponseError'
+            );
             spy.mockRestore();
         });
     });

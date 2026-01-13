@@ -20,6 +20,7 @@ import {
 } from '@binance/common';
 import type {
     CheckVIPLoanCollateralAccountResponse,
+    GetVIPLoanAccruedInterestResponse,
     GetVIPLoanOngoingOrdersResponse,
     QueryApplicationStatusResponse,
 } from '../types';
@@ -74,6 +75,70 @@ const UserInformationApiAxiosParamCreator = function (configuration: Configurati
             };
         },
         /**
+         * Check VIP Loan interest record
+         *
+         * If startTime and endTime are not sent, the recent 90-day data will be returned.
+         * The max interval between startTime and endTime is 90 days.
+         *
+         * Weight: 400
+         *
+         * @summary Get VIP Loan Accrued Interest (USER_DATA)
+         * @param {number | bigint} [orderId]
+         * @param {string} [loanCoin]
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
+         * @param {number | bigint} [limit] Default: 10; max: 100
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        getVIPLoanAccruedInterest: async (
+            orderId?: number | bigint,
+            loanCoin?: string,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            limit?: number | bigint,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+
+            if (orderId !== undefined && orderId !== null) {
+                localVarQueryParameter['orderId'] = orderId;
+            }
+            if (loanCoin !== undefined && loanCoin !== null) {
+                localVarQueryParameter['loanCoin'] = loanCoin;
+            }
+            if (startTime !== undefined && startTime !== null) {
+                localVarQueryParameter['startTime'] = startTime;
+            }
+            if (endTime !== undefined && endTime !== null) {
+                localVarQueryParameter['endTime'] = endTime;
+            }
+            if (current !== undefined && current !== null) {
+                localVarQueryParameter['current'] = current;
+            }
+            if (limit !== undefined && limit !== null) {
+                localVarQueryParameter['limit'] = limit;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/loan/vip/accruedInterest',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * VIP loan is available for VIP users only.
          *
          * Weight: 400
@@ -83,8 +148,8 @@ const UserInformationApiAxiosParamCreator = function (configuration: Configurati
          * @param {number | bigint} [collateralAccountId]
          * @param {string} [loanCoin]
          * @param {string} [collateralCoin]
-         * @param {number | bigint} [current] Currently querying page. Start from 1, Default:1, Max: 1000.
-         * @param {number | bigint} [limit] Default: 10, Max: 100
+         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
+         * @param {number | bigint} [limit] Default: 10; max: 100
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -140,8 +205,8 @@ const UserInformationApiAxiosParamCreator = function (configuration: Configurati
          * Weight: 400
          *
          * @summary Query Application Status(USER_DATA)
-         * @param {number | bigint} [current] Currently querying page. Start from 1, Default:1, Max: 1000.
-         * @param {number | bigint} [limit] Default: 10, Max: 100
+         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
+         * @param {number | bigint} [limit] Default: 10; max: 100
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -201,6 +266,23 @@ export interface UserInformationApiInterface {
         requestParameters?: CheckVIPLoanCollateralAccountRequest
     ): Promise<RestApiResponse<CheckVIPLoanCollateralAccountResponse>>;
     /**
+     * Check VIP Loan interest record
+     *
+     * If startTime and endTime are not sent, the recent 90-day data will be returned.
+     * The max interval between startTime and endTime is 90 days.
+     *
+     * Weight: 400
+     *
+     * @summary Get VIP Loan Accrued Interest (USER_DATA)
+     * @param {GetVIPLoanAccruedInterestRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof UserInformationApiInterface
+     */
+    getVIPLoanAccruedInterest(
+        requestParameters?: GetVIPLoanAccruedInterestRequest
+    ): Promise<RestApiResponse<GetVIPLoanAccruedInterestResponse>>;
+    /**
      * VIP loan is available for VIP users only.
      *
      * Weight: 400
@@ -258,6 +340,61 @@ export interface CheckVIPLoanCollateralAccountRequest {
 }
 
 /**
+ * Request parameters for getVIPLoanAccruedInterest operation in UserInformationApi.
+ * @interface GetVIPLoanAccruedInterestRequest
+ */
+export interface GetVIPLoanAccruedInterestRequest {
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof UserInformationApiGetVIPLoanAccruedInterest
+     */
+    readonly orderId?: number | bigint;
+
+    /**
+     *
+     * @type {string}
+     * @memberof UserInformationApiGetVIPLoanAccruedInterest
+     */
+    readonly loanCoin?: string;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof UserInformationApiGetVIPLoanAccruedInterest
+     */
+    readonly startTime?: number | bigint;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof UserInformationApiGetVIPLoanAccruedInterest
+     */
+    readonly endTime?: number | bigint;
+
+    /**
+     * Current querying page. Start from 1; default: 1; max: 1000
+     * @type {number | bigint}
+     * @memberof UserInformationApiGetVIPLoanAccruedInterest
+     */
+    readonly current?: number | bigint;
+
+    /**
+     * Default: 10; max: 100
+     * @type {number | bigint}
+     * @memberof UserInformationApiGetVIPLoanAccruedInterest
+     */
+    readonly limit?: number | bigint;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof UserInformationApiGetVIPLoanAccruedInterest
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
  * Request parameters for getVIPLoanOngoingOrders operation in UserInformationApi.
  * @interface GetVIPLoanOngoingOrdersRequest
  */
@@ -291,14 +428,14 @@ export interface GetVIPLoanOngoingOrdersRequest {
     readonly collateralCoin?: string;
 
     /**
-     * Currently querying page. Start from 1, Default:1, Max: 1000.
+     * Current querying page. Start from 1; default: 1; max: 1000
      * @type {number | bigint}
      * @memberof UserInformationApiGetVIPLoanOngoingOrders
      */
     readonly current?: number | bigint;
 
     /**
-     * Default: 10, Max: 100
+     * Default: 10; max: 100
      * @type {number | bigint}
      * @memberof UserInformationApiGetVIPLoanOngoingOrders
      */
@@ -318,14 +455,14 @@ export interface GetVIPLoanOngoingOrdersRequest {
  */
 export interface QueryApplicationStatusRequest {
     /**
-     * Currently querying page. Start from 1, Default:1, Max: 1000.
+     * Current querying page. Start from 1; default: 1; max: 1000
      * @type {number | bigint}
      * @memberof UserInformationApiQueryApplicationStatus
      */
     readonly current?: number | bigint;
 
     /**
-     * Default: 10, Max: 100
+     * Default: 10; max: 100
      * @type {number | bigint}
      * @memberof UserInformationApiQueryApplicationStatus
      */
@@ -377,6 +514,44 @@ export class UserInformationApi implements UserInformationApiInterface {
                 requestParameters?.recvWindow
             );
         return sendRequest<CheckVIPLoanCollateralAccountResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Check VIP Loan interest record
+     *
+     * If startTime and endTime are not sent, the recent 90-day data will be returned.
+     * The max interval between startTime and endTime is 90 days.
+     *
+     * Weight: 400
+     *
+     * @summary Get VIP Loan Accrued Interest (USER_DATA)
+     * @param {GetVIPLoanAccruedInterestRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetVIPLoanAccruedInterestResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof UserInformationApi
+     * @see {@link https://developers.binance.com/docs/vip_loan/user-information/Get-VIP-Loan-Accrued-Interest Binance API Documentation}
+     */
+    public async getVIPLoanAccruedInterest(
+        requestParameters: GetVIPLoanAccruedInterestRequest = {}
+    ): Promise<RestApiResponse<GetVIPLoanAccruedInterestResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getVIPLoanAccruedInterest(
+            requestParameters?.orderId,
+            requestParameters?.loanCoin,
+            requestParameters?.startTime,
+            requestParameters?.endTime,
+            requestParameters?.current,
+            requestParameters?.limit,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<GetVIPLoanAccruedInterestResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

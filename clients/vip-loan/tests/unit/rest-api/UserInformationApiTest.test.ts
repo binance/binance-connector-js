@@ -18,11 +18,13 @@ import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 import { UserInformationApi } from '../../../src/rest-api';
 import {
     CheckVIPLoanCollateralAccountRequest,
+    GetVIPLoanAccruedInterestRequest,
     GetVIPLoanOngoingOrdersRequest,
     QueryApplicationStatusRequest,
 } from '../../../src/rest-api';
 import type {
     CheckVIPLoanCollateralAccountResponse,
+    GetVIPLoanAccruedInterestResponse,
     GetVIPLoanOngoingOrdersResponse,
     QueryApplicationStatusResponse,
 } from '../../../src/rest-api/types';
@@ -112,6 +114,97 @@ describe('UserInformationApi', () => {
                 .spyOn(client, 'checkVIPLoanCollateralAccount')
                 .mockRejectedValueOnce(mockError);
             await expect(client.checkVIPLoanCollateralAccount()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('getVIPLoanAccruedInterest()', () => {
+        it('should execute getVIPLoanAccruedInterest() successfully with required parameters only', async () => {
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            loanCoin: 'USDT',
+                            principalAmount: '10000',
+                            interestAmount: '1.2',
+                            annualInterestRate: '0.001273',
+                            accrualTime: 1575018510000,
+                            orderId: 756783308056935400,
+                        },
+                    ],
+                    total: 1,
+                })
+            );
+
+            const spy = jest.spyOn(client, 'getVIPLoanAccruedInterest').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetVIPLoanAccruedInterestResponse>)
+            );
+            const response = await client.getVIPLoanAccruedInterest();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute getVIPLoanAccruedInterest() successfully with optional parameters', async () => {
+            const params: GetVIPLoanAccruedInterestRequest = {
+                orderId: 1,
+                loanCoin: 'loanCoin_example',
+                startTime: 1623319461670,
+                endTime: 1641782889000,
+                current: 1,
+                limit: 10,
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    rows: [
+                        {
+                            loanCoin: 'USDT',
+                            principalAmount: '10000',
+                            interestAmount: '1.2',
+                            annualInterestRate: '0.001273',
+                            accrualTime: 1575018510000,
+                            orderId: 756783308056935400,
+                        },
+                    ],
+                    total: 1,
+                })
+            );
+
+            const spy = jest.spyOn(client, 'getVIPLoanAccruedInterest').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetVIPLoanAccruedInterestResponse>)
+            );
+            const response = await client.getVIPLoanAccruedInterest(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'getVIPLoanAccruedInterest')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.getVIPLoanAccruedInterest()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

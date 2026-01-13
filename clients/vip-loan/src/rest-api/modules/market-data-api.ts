@@ -23,6 +23,7 @@ import type {
     GetBorrowInterestRateResponse,
     GetCollateralAssetDataResponse,
     GetLoanableAssetsDataResponse,
+    GetVIPLoanInterestRateHistoryResponse,
 } from '../types';
 
 /**
@@ -146,6 +147,71 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
                 timeUnit: _timeUnit,
             };
         },
+        /**
+         * Check VIP Loan flexible interest rate history
+         *
+         * If startTime and endTime are not sent, the recent 90-day data will be returned
+         * The max interval between startTime and end Time is 180 days.
+         * Time based on UTC+0.
+         *
+         * Weight: 400
+         *
+         * @summary Get VIP Loan Interest Rate History (USER_DATA)
+         * @param {string} coin
+         * @param {number | bigint} recvWindow
+         * @param {number | bigint} [startTime]
+         * @param {number | bigint} [endTime]
+         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
+         * @param {number | bigint} [limit] Default: 10; max: 100
+         *
+         * @throws {RequiredError}
+         */
+        getVIPLoanInterestRateHistory: async (
+            coin: string,
+            recvWindow: number | bigint,
+            startTime?: number | bigint,
+            endTime?: number | bigint,
+            current?: number | bigint,
+            limit?: number | bigint
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'coin' is not null or undefined
+            assertParamExists('getVIPLoanInterestRateHistory', 'coin', coin);
+            // verify required parameter 'recvWindow' is not null or undefined
+            assertParamExists('getVIPLoanInterestRateHistory', 'recvWindow', recvWindow);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+
+            if (coin !== undefined && coin !== null) {
+                localVarQueryParameter['coin'] = coin;
+            }
+            if (startTime !== undefined && startTime !== null) {
+                localVarQueryParameter['startTime'] = startTime;
+            }
+            if (endTime !== undefined && endTime !== null) {
+                localVarQueryParameter['endTime'] = endTime;
+            }
+            if (current !== undefined && current !== null) {
+                localVarQueryParameter['current'] = current;
+            }
+            if (limit !== undefined && limit !== null) {
+                localVarQueryParameter['limit'] = limit;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/loan/vip/interestRateHistory',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                timeUnit: _timeUnit,
+            };
+        },
     };
 };
 
@@ -196,6 +262,24 @@ export interface MarketDataApiInterface {
     getLoanableAssetsData(
         requestParameters?: GetLoanableAssetsDataRequest
     ): Promise<RestApiResponse<GetLoanableAssetsDataResponse>>;
+    /**
+     * Check VIP Loan flexible interest rate history
+     *
+     * If startTime and endTime are not sent, the recent 90-day data will be returned
+     * The max interval between startTime and end Time is 180 days.
+     * Time based on UTC+0.
+     *
+     * Weight: 400
+     *
+     * @summary Get VIP Loan Interest Rate History (USER_DATA)
+     * @param {GetVIPLoanInterestRateHistoryRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApiInterface
+     */
+    getVIPLoanInterestRateHistory(
+        requestParameters: GetVIPLoanInterestRateHistoryRequest
+    ): Promise<RestApiResponse<GetVIPLoanInterestRateHistoryResponse>>;
 }
 
 /**
@@ -263,6 +347,54 @@ export interface GetLoanableAssetsDataRequest {
      * @memberof MarketDataApiGetLoanableAssetsData
      */
     readonly recvWindow?: number | bigint;
+}
+
+/**
+ * Request parameters for getVIPLoanInterestRateHistory operation in MarketDataApi.
+ * @interface GetVIPLoanInterestRateHistoryRequest
+ */
+export interface GetVIPLoanInterestRateHistoryRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof MarketDataApiGetVIPLoanInterestRateHistory
+     */
+    readonly coin: string;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof MarketDataApiGetVIPLoanInterestRateHistory
+     */
+    readonly recvWindow: number | bigint;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof MarketDataApiGetVIPLoanInterestRateHistory
+     */
+    readonly startTime?: number | bigint;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof MarketDataApiGetVIPLoanInterestRateHistory
+     */
+    readonly endTime?: number | bigint;
+
+    /**
+     * Current querying page. Start from 1; default: 1; max: 1000
+     * @type {number | bigint}
+     * @memberof MarketDataApiGetVIPLoanInterestRateHistory
+     */
+    readonly current?: number | bigint;
+
+    /**
+     * Default: 10; max: 100
+     * @type {number | bigint}
+     * @memberof MarketDataApiGetVIPLoanInterestRateHistory
+     */
+    readonly limit?: number | bigint;
 }
 
 /**
@@ -359,6 +491,45 @@ export class MarketDataApi implements MarketDataApiInterface {
             requestParameters?.recvWindow
         );
         return sendRequest<GetLoanableAssetsDataResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Check VIP Loan flexible interest rate history
+     *
+     * If startTime and endTime are not sent, the recent 90-day data will be returned
+     * The max interval between startTime and end Time is 180 days.
+     * Time based on UTC+0.
+     *
+     * Weight: 400
+     *
+     * @summary Get VIP Loan Interest Rate History (USER_DATA)
+     * @param {GetVIPLoanInterestRateHistoryRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetVIPLoanInterestRateHistoryResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApi
+     * @see {@link https://developers.binance.com/docs/vip_loan/market-data/Get-VIP-Loan-Interest-Rate-History Binance API Documentation}
+     */
+    public async getVIPLoanInterestRateHistory(
+        requestParameters: GetVIPLoanInterestRateHistoryRequest
+    ): Promise<RestApiResponse<GetVIPLoanInterestRateHistoryResponse>> {
+        const localVarAxiosArgs =
+            await this.localVarAxiosParamCreator.getVIPLoanInterestRateHistory(
+                requestParameters?.coin,
+                requestParameters?.recvWindow,
+                requestParameters?.startTime,
+                requestParameters?.endTime,
+                requestParameters?.current,
+                requestParameters?.limit
+            );
+        return sendRequest<GetVIPLoanInterestRateHistoryResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

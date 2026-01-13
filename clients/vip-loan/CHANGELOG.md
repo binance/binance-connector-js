@@ -1,5 +1,16 @@
 # Changelog
 
+## 7.0.0 - 2026-01-13
+
+### Added (2)
+
+- `getVIPLoanAccruedInterest()` (`GET /sapi/v1/loan/vip/accruedInterest`)
+- `getVIPLoanInterestRateHistory()` (`GET /sapi/v1/loan/vip/interestRateHistory`)
+
+### Changed (1)
+
+- Update `@binance/common` library to version `2.2.0`.
+
 ## 6.1.1 - 2025-12-19
 
 ### Changed (1)
