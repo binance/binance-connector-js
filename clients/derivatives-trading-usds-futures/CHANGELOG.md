@@ -1,5 +1,55 @@
 # Changelog
 
+## 22.0.0 - 2026-01-13
+
+### Changed (13)
+
+- Update `@binance/common` library to version `2.2.0`.
+
+#### REST API
+
+- Added parameter `algoId`
+  - affected methods:
+    - `cancelAlgoOrder()` (`DELETE /fapi/v1/algoOrder`)
+- Added parameter `clientAlgoId`
+  - affected methods:
+    - `cancelAlgoOrder()` (`DELETE /fapi/v1/algoOrder`)
+- Deleted parameter `algoid`
+  - affected methods:
+    - `cancelAlgoOrder()` (`DELETE /fapi/v1/algoOrder`)
+- Deleted parameter `clientalgoid`
+  - affected methods:
+    - `cancelAlgoOrder()` (`DELETE /fapi/v1/algoOrder`)
+- Modified response for `symbolConfiguration()` (`GET /fapi/v1/symbolConfig`):
+  - items.`isAutoAddMargin`: type `string` → `boolean`
+  - items.`isAutoAddMargin`: type `string` → `boolean`
+
+#### WebSocket API
+
+- Added parameter `algoId`
+  - affected methods:
+    - `cancelAlgoOrder()` (`algoOrder.cancel` method)
+- Added parameter `clientAlgoId`
+  - affected methods:
+    - `cancelAlgoOrder()` (`algoOrder.cancel` method)
+- Deleted parameter `algoid`
+  - affected methods:
+    - `cancelAlgoOrder()` (`algoOrder.cancel` method)
+- Deleted parameter `clientalgoid`
+  - affected methods:
+    - `cancelAlgoOrder()` (`algoOrder.cancel` method)
+- Added parameter `activatePrice`
+  - affected methods:
+    - `newAlgoOrder()` (`algoOrder.place` method)
+- Deleted parameter `activationPrice`
+  - affected methods:
+    - `newAlgoOrder()` (`algoOrder.place` method)
+
+#### WebSocket Streams
+
+- Modified response for `aggregateTradeStreams()` (`<symbol>@aggTrade` stream):
+  - property `nq` added
+
 ## 21.0.0 - 2025-12-19
 
 ### Changed (3)

@@ -2171,7 +2171,7 @@ describe('AccountApi', () => {
                     {
                         symbol: 'BTCUSDT',
                         marginType: 'CROSSED',
-                        isAutoAddMargin: 'false',
+                        isAutoAddMargin: false,
                         leverage: 21,
                         maxNotionalValue: '1000000',
                     },
@@ -2203,7 +2203,7 @@ describe('AccountApi', () => {
                     {
                         symbol: 'BTCUSDT',
                         marginType: 'CROSSED',
-                        isAutoAddMargin: 'false',
+                        isAutoAddMargin: false,
                         leverage: 21,
                         maxNotionalValue: '1000000',
                     },

@@ -33,10 +33,10 @@ export interface SymbolConfigurationResponseInner {
     marginType?: string;
     /**
      *
-     * @type {string}
+     * @type {boolean}
      * @memberof SymbolConfigurationResponseInner
      */
-    isAutoAddMargin?: string;
+    isAutoAddMargin?: boolean;
     /**
      *
      * @type {number | bigint}

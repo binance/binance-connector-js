@@ -1591,7 +1591,7 @@ export class RestAPI {
     /**
      * Cancel an active algo order.
      *
-     * Either `algoid` or `clientalgoid` must be sent.
+     * Either `algoId` or `clientAlgoId` must be sent.
      *
      * Weight: 1
      *

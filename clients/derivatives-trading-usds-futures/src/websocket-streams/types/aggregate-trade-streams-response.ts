@@ -57,6 +57,12 @@ export interface AggregateTradeStreamsResponse {
     q?: string;
     /**
      *
+     * @type {string}
+     * @memberof AggregateTradeStreamsResponse
+     */
+    nq?: string;
+    /**
+     *
      * @type {number | bigint}
      * @memberof AggregateTradeStreamsResponse
      */

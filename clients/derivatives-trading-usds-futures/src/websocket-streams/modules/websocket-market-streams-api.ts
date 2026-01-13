@@ -47,7 +47,7 @@ const WebsocketMarketStreamsApiParamCreator = function () {
          * The Aggregate Trade Streams push market trade information that is aggregated for fills with same price and taking side every 100 milliseconds. Only market trades will be aggregated, which means the insurance fund trades and ADL trades won't be aggregated.
          *
          *
-         * Retail Price Improvement(RPI) orders are aggregated and without special tags to be distinguished.
+         * Retail Price Improvement(RPI) orders are aggregated into field `q` and without special tags to be distinguished.
          *
          * Update Speed: 100ms
          *
@@ -342,7 +342,7 @@ const WebsocketMarketStreamsApiParamCreator = function () {
          *
          **Note**:
          *
-         * This stream does not cover TradFi Perps.
+         * TradFi symbols will be pushed through a seperate message.
          *
          * Update Speed: 3000ms or 1000ms
          *
@@ -449,7 +449,7 @@ export interface WebsocketMarketStreamsApiInterface {
      * The Aggregate Trade Streams push market trade information that is aggregated for fills with same price and taking side every 100 milliseconds. Only market trades will be aggregated, which means the insurance fund trades and ADL trades won't be aggregated.
      *
      *
-     * Retail Price Improvement(RPI) orders are aggregated and without special tags to be distinguished.
+     * Retail Price Improvement(RPI) orders are aggregated into field `q` and without special tags to be distinguished.
      *
      * Update Speed: 100ms
      *
@@ -700,7 +700,7 @@ export interface WebsocketMarketStreamsApiInterface {
      *
      **Note**:
      *
-     * This stream does not cover TradFi Perps.
+     * TradFi symbols will be pushed through a seperate message.
      *
      * Update Speed: 3000ms or 1000ms
      *
@@ -1202,7 +1202,7 @@ export class WebsocketMarketStreamsApi implements WebsocketMarketStreamsApiInter
      * The Aggregate Trade Streams push market trade information that is aggregated for fills with same price and taking side every 100 milliseconds. Only market trades will be aggregated, which means the insurance fund trades and ADL trades won't be aggregated.
      *
      *
-     * Retail Price Improvement(RPI) orders are aggregated and without special tags to be distinguished.
+     * Retail Price Improvement(RPI) orders are aggregated into field `q` and without special tags to be distinguished.
      *
      * Update Speed: 100ms
      *
@@ -1610,7 +1610,7 @@ export class WebsocketMarketStreamsApi implements WebsocketMarketStreamsApiInter
      *
      **Note**:
      *
-     * This stream does not cover TradFi Perps.
+     * TradFi symbols will be pushed through a seperate message.
      *
      * Update Speed: 3000ms or 1000ms
      *

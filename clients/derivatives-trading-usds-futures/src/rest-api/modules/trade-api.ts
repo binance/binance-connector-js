@@ -253,30 +253,30 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Cancel an active algo order.
          *
-         * Either `algoid` or `clientalgoid` must be sent.
+         * Either `algoId` or `clientAlgoId` must be sent.
          *
          * Weight: 1
          *
          * @summary Cancel Algo Order (TRADE)
-         * @param {number | bigint} [algoid]
-         * @param {string} [clientalgoid]
+         * @param {number | bigint} [algoId]
+         * @param {string} [clientAlgoId]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         cancelAlgoOrder: async (
-            algoid?: number | bigint,
-            clientalgoid?: string,
+            algoId?: number | bigint,
+            clientAlgoId?: string,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
 
-            if (algoid !== undefined && algoid !== null) {
-                localVarQueryParameter['algoid'] = algoid;
+            if (algoId !== undefined && algoId !== null) {
+                localVarQueryParameter['algoId'] = algoId;
             }
-            if (clientalgoid !== undefined && clientalgoid !== null) {
-                localVarQueryParameter['clientalgoid'] = clientalgoid;
+            if (clientAlgoId !== undefined && clientAlgoId !== null) {
+                localVarQueryParameter['clientAlgoId'] = clientAlgoId;
             }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -1136,7 +1136,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} [reduceOnly] "true" or "false". default "false". Cannot be sent in Hedge Mode
          * @param {number} [activatePrice] Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`)
          * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1%
-         * @param {string} [clientAlgoId] A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$`
+         * @param {string} [clientAlgoId]
          * @param {NewAlgoOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE`
          * @param {number | bigint} [goodTillDate] order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000
          * @param {number | bigint} [recvWindow]
@@ -1539,7 +1539,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Query Algo Order (USER_DATA)
          * @param {number | bigint} [algoId]
-         * @param {string} [clientAlgoId] A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$`
+         * @param {string} [clientAlgoId]
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -2053,7 +2053,7 @@ export interface TradeApiInterface {
     /**
      * Cancel an active algo order.
      *
-     * Either `algoid` or `clientalgoid` must be sent.
+     * Either `algoId` or `clientAlgoId` must be sent.
      *
      * Weight: 1
      *
@@ -2754,14 +2754,14 @@ export interface CancelAlgoOrderRequest {
      * @type {number | bigint}
      * @memberof TradeApiCancelAlgoOrder
      */
-    readonly algoid?: number | bigint;
+    readonly algoId?: number | bigint;
 
     /**
      *
      * @type {string}
      * @memberof TradeApiCancelAlgoOrder
      */
-    readonly clientalgoid?: string;
+    readonly clientAlgoId?: string;
 
     /**
      *
@@ -3384,7 +3384,7 @@ export interface NewAlgoOrderRequest {
     readonly callbackRate?: number;
 
     /**
-     * A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$`
+     *
      * @type {string}
      * @memberof TradeApiNewAlgoOrder
      */
@@ -3609,7 +3609,7 @@ export interface QueryAlgoOrderRequest {
     readonly algoId?: number | bigint;
 
     /**
-     * A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$`
+     *
      * @type {string}
      * @memberof TradeApiQueryAlgoOrder
      */
@@ -4076,7 +4076,7 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel an active algo order.
      *
-     * Either `algoid` or `clientalgoid` must be sent.
+     * Either `algoId` or `clientAlgoId` must be sent.
      *
      * Weight: 1
      *
@@ -4091,8 +4091,8 @@ export class TradeApi implements TradeApiInterface {
         requestParameters: CancelAlgoOrderRequest = {}
     ): Promise<RestApiResponse<CancelAlgoOrderResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.cancelAlgoOrder(
-            requestParameters?.algoid,
-            requestParameters?.clientalgoid,
+            requestParameters?.algoId,
+            requestParameters?.clientAlgoId,
             requestParameters?.recvWindow
         );
         return sendRequest<CancelAlgoOrderResponse>(

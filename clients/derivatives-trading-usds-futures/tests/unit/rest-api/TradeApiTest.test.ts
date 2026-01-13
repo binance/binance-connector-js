@@ -508,8 +508,8 @@ describe('TradeApi', () => {
 
         it('should execute cancelAlgoOrder() successfully with optional parameters', async () => {
             const params: CancelAlgoOrderRequest = {
-                algoid: 789,
-                clientalgoid: 'clientalgoid_example',
+                algoId: 1,
+                clientAlgoId: '1',
                 recvWindow: 5000,
             };
 

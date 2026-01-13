@@ -32,7 +32,7 @@ export interface TradeApiInterface {
     /**
      * Cancel an active algo order.
      *
-     * Either `algoid` or `clientalgoid` must be sent.
+     * Either `algoId` or `clientAlgoId` must be sent.
      *
      * Weight: 1
      *
@@ -104,14 +104,14 @@ export interface TradeApiInterface {
      * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
      * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
      * `TRAILING_STOP_MARKET`:
-     * BUY: the lowest price after order placed <= `activationPrice`, and the latest price >= the lowest price * (1 + `callbackRate`)
-     * SELL: the highest price after order placed >= `activationPrice`, and the latest price <= the highest price * (1 - `callbackRate`)
+     * BUY: the lowest price after order placed <= `activatePrice`, and the latest price >= the lowest price * (1 + `callbackRate`)
+     * SELL: the highest price after order placed >= `activatePrice`, and the latest price <= the highest price * (1 - `callbackRate`)
      *
      * For `TRAILING_STOP_MARKET`, if you got such error code.
      * ``{"code": -2021, "msg": "Order would immediately trigger."}``
      * means that the parameters you send do not meet the following requirements:
-     * BUY: `activationPrice` should be smaller than latest price.
-     * SELL: `activationPrice` should be larger than latest price.
+     * BUY: `activatePrice` should be smaller than latest price.
+     * SELL: `activatePrice` should be larger than latest price.
      *
      * `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`:
      * Follow the same rules for condition orders.
@@ -255,14 +255,14 @@ export interface CancelAlgoOrderRequest {
      * @type {number | bigint}
      * @memberof TradeApiCancelAlgoOrder
      */
-    readonly algoid?: number | bigint;
+    readonly algoId?: number | bigint;
 
     /**
      *
      * @type {string}
      * @memberof TradeApiCancelAlgoOrder
      */
-    readonly clientalgoid?: string;
+    readonly clientAlgoId?: string;
 
     /**
      *
@@ -497,7 +497,7 @@ export interface NewAlgoOrderRequest {
      * @type {number}
      * @memberof TradeApiNewAlgoOrder
      */
-    readonly activationPrice?: number;
+    readonly activatePrice?: number;
 
     /**
      * Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 10 where 1 for 1%
@@ -507,7 +507,7 @@ export interface NewAlgoOrderRequest {
     readonly callbackRate?: number;
 
     /**
-     * A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$`
+     *
      * @type {string}
      * @memberof TradeApiNewAlgoOrder
      */
@@ -798,7 +798,7 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel an active algo order.
      *
-     * Either `algoid` or `clientalgoid` must be sent.
+     * Either `algoId` or `clientAlgoId` must be sent.
      *
      * Weight: 1
      *
@@ -888,14 +888,14 @@ export class TradeApi implements TradeApiInterface {
      * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
      * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
      * `TRAILING_STOP_MARKET`:
-     * BUY: the lowest price after order placed <= `activationPrice`, and the latest price >= the lowest price * (1 + `callbackRate`)
-     * SELL: the highest price after order placed >= `activationPrice`, and the latest price <= the highest price * (1 - `callbackRate`)
+     * BUY: the lowest price after order placed <= `activatePrice`, and the latest price >= the lowest price * (1 + `callbackRate`)
+     * SELL: the highest price after order placed >= `activatePrice`, and the latest price <= the highest price * (1 - `callbackRate`)
      *
      * For `TRAILING_STOP_MARKET`, if you got such error code.
      * ``{"code": -2021, "msg": "Order would immediately trigger."}``
      * means that the parameters you send do not meet the following requirements:
-     * BUY: `activationPrice` should be smaller than latest price.
-     * SELL: `activationPrice` should be larger than latest price.
+     * BUY: `activatePrice` should be smaller than latest price.
+     * SELL: `activatePrice` should be larger than latest price.
      *
      * `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`:
      * Follow the same rules for condition orders.
