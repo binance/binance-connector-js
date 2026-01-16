@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.3.0 - 2026-01-16
+
+### Added (1)
+
+- Exposed error code on REST API response errors.
+
 ## 2.2.0 - 2026-01-13
 
 ### Added (1)

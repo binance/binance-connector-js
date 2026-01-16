@@ -543,24 +543,28 @@ export const httpRequestFunction = async function <T>(
                     }
 
                     const errorMsg = (data as { msg?: string }).msg;
+                    const errorCode =
+                        typeof (data as { code?: unknown }).code === 'number'
+                            ? (data as { code: number }).code
+                            : undefined;
 
                     switch (status) {
                     case 400:
-                        throw new BadRequestError(errorMsg);
+                        throw new BadRequestError(errorMsg, errorCode);
                     case 401:
-                        throw new UnauthorizedError(errorMsg);
+                        throw new UnauthorizedError(errorMsg, errorCode);
                     case 403:
-                        throw new ForbiddenError(errorMsg);
+                        throw new ForbiddenError(errorMsg, errorCode);
                     case 404:
-                        throw new NotFoundError(errorMsg);
+                        throw new NotFoundError(errorMsg, errorCode);
                     case 418:
-                        throw new RateLimitBanError(errorMsg);
+                        throw new RateLimitBanError(errorMsg, errorCode);
                     case 429:
-                        throw new TooManyRequestsError(errorMsg);
+                        throw new TooManyRequestsError(errorMsg, errorCode);
                     default:
                         if (status >= 500 && status < 600)
                             throw new ServerError(`Server error: ${status}`, status);
-                        throw new ConnectorClientError(errorMsg);
+                        throw new ConnectorClientError(errorMsg, errorCode);
                     }
                 } else {
                     if (retries > 0 && attempt >= retries)
