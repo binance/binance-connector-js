@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.3.1 - 2026-01-20
+
+### Added (1)
+
+- Added `ALPHA_REST_API_PROD_URL` constant.
+
 ## 2.3.0 - 2026-01-16
 
 ### Added (1)

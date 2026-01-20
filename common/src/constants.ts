@@ -9,6 +9,9 @@ export type TimeUnit = (typeof TimeUnit)[keyof typeof TimeUnit];
 // Algo constants
 export const ALGO_REST_API_PROD_URL = 'https://api.binance.com';
 
+// Alpha constants
+export const ALPHA_REST_API_PROD_URL = 'https://www.binance.com';
+
 // C2C constants
 export const C2C_REST_API_PROD_URL = 'https://api.binance.com';
 
