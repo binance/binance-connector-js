@@ -126,8 +126,6 @@ describe('BfusdApi', () => {
                         fee: '0.0005',
                         redeemPeriod: 3,
                     },
-                    subscribeEnable: true,
-                    redeemEnable: true,
                 })
             );
 
@@ -164,8 +162,6 @@ describe('BfusdApi', () => {
                         fee: '0.0005',
                         redeemPeriod: 3,
                     },
-                    subscribeEnable: true,
-                    redeemEnable: true,
                 })
             );
 

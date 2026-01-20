@@ -39,16 +39,4 @@ export interface GetBfusdQuotaDetailsResponse {
      * @memberof GetBfusdQuotaDetailsResponse
      */
     standardRedemptionQuota?: GetBfusdQuotaDetailsResponseStandardRedemptionQuota;
-    /**
-     *
-     * @type {boolean}
-     * @memberof GetBfusdQuotaDetailsResponse
-     */
-    subscribeEnable?: boolean;
-    /**
-     *
-     * @type {boolean}
-     * @memberof GetBfusdQuotaDetailsResponse
-     */
-    redeemEnable?: boolean;
 }
