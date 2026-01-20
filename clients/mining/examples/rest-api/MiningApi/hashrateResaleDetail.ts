@@ -11,7 +11,6 @@ async function hashrateResaleDetail() {
     try {
         const response = await client.restAPI.hashrateResaleDetail({
             configId: 1,
-            userName: 'userName_example',
         });
 
         const rateLimits = response.rateLimits!;

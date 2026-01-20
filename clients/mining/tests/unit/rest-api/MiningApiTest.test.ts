@@ -727,7 +727,6 @@ describe('MiningApi', () => {
         it('should execute hashrateResaleDetail() successfully with required parameters only', async () => {
             const params: HashrateResaleDetailRequest = {
                 configId: 1,
-                userName: 'userName_example',
             };
 
             mockResponse = JSONParse(
@@ -778,7 +777,6 @@ describe('MiningApi', () => {
         it('should execute hashrateResaleDetail() successfully with optional parameters', async () => {
             const params: HashrateResaleDetailRequest = {
                 configId: 1,
-                userName: 'userName_example',
                 pageIndex: 1,
                 pageSize: 789,
                 recvWindow: 5000,
@@ -832,7 +830,6 @@ describe('MiningApi', () => {
         it('should throw RequiredError when configId is missing', async () => {
             const _params: HashrateResaleDetailRequest = {
                 configId: 1,
-                userName: 'userName_example',
             };
             const params = Object.assign({ ..._params });
             delete params?.configId;
@@ -842,23 +839,9 @@ describe('MiningApi', () => {
             );
         });
 
-        it('should throw RequiredError when userName is missing', async () => {
-            const _params: HashrateResaleDetailRequest = {
-                configId: 1,
-                userName: 'userName_example',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.userName;
-
-            await expect(client.hashrateResaleDetail(params)).rejects.toThrow(
-                'Required parameter userName was null or undefined when calling hashrateResaleDetail.'
-            );
-        });
-
         it('should throw an error when server is returning an error', async () => {
             const params: HashrateResaleDetailRequest = {
                 configId: 1,
-                userName: 'userName_example',
             };
 
             const errorResponse = {
@@ -893,6 +876,7 @@ describe('MiningApi', () => {
                                 startDay: 20201210,
                                 endDay: 20210405,
                                 status: 1,
+                                type: 0,
                             },
                             {
                                 configId: 166,
@@ -903,6 +887,7 @@ describe('MiningApi', () => {
                                 startDay: 20201226,
                                 endDay: 20201227,
                                 status: 0,
+                                type: 0,
                             },
                         ],
                         totalNum: 21,
@@ -947,6 +932,7 @@ describe('MiningApi', () => {
                                 startDay: 20201210,
                                 endDay: 20210405,
                                 status: 1,
+                                type: 0,
                             },
                             {
                                 configId: 166,
@@ -957,6 +943,7 @@ describe('MiningApi', () => {
                                 startDay: 20201226,
                                 endDay: 20201227,
                                 status: 0,
+                                type: 0,
                             },
                         ],
                         totalNum: 21,

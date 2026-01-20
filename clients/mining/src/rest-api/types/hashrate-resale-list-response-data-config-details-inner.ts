@@ -67,4 +67,10 @@ export interface HashrateResaleListResponseDataConfigDetailsInner {
      * @memberof HashrateResaleListResponseDataConfigDetailsInner
      */
     status?: number | bigint;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof HashrateResaleListResponseDataConfigDetailsInner
+     */
+    type?: number | bigint;
 }

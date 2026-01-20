@@ -328,7 +328,6 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          *
          * @summary Hashrate Resale Detail(USER_DATA)
          * @param {number | bigint} configId Mining ID 168
-         * @param {string} userName Mining account test
          * @param {number | bigint} [pageIndex] Page number, empty default first page, starting from 1
          * @param {number | bigint} [pageSize] Min 10,Max 200
          * @param {number | bigint} [recvWindow]
@@ -337,24 +336,18 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          */
         hashrateResaleDetail: async (
             configId: number | bigint,
-            userName: string,
             pageIndex?: number | bigint,
             pageSize?: number | bigint,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'configId' is not null or undefined
             assertParamExists('hashrateResaleDetail', 'configId', configId);
-            // verify required parameter 'userName' is not null or undefined
-            assertParamExists('hashrateResaleDetail', 'userName', userName);
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
 
             if (configId !== undefined && configId !== null) {
                 localVarQueryParameter['configId'] = configId;
-            }
-            if (userName !== undefined && userName !== null) {
-                localVarQueryParameter['userName'] = userName;
             }
             if (pageIndex !== undefined && pageIndex !== null) {
                 localVarQueryParameter['pageIndex'] = pageIndex;
@@ -1092,13 +1085,6 @@ export interface HashrateResaleDetailRequest {
     readonly configId: number | bigint;
 
     /**
-     * Mining account test
-     * @type {string}
-     * @memberof MiningApiHashrateResaleDetail
-     */
-    readonly userName: string;
-
-    /**
      * Page number, empty default first page, starting from 1
      * @type {number | bigint}
      * @memberof MiningApiHashrateResaleDetail
@@ -1578,7 +1564,6 @@ export class MiningApi implements MiningApiInterface {
     ): Promise<RestApiResponse<HashrateResaleDetailResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.hashrateResaleDetail(
             requestParameters?.configId,
-            requestParameters?.userName,
             requestParameters?.pageIndex,
             requestParameters?.pageSize,
             requestParameters?.recvWindow
