@@ -53,14 +53,18 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 1
          *
          * @summary Asset Detail (USER_DATA)
+         * @param {string} [asset] If asset is blank, then query all positive assets user have.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        assetDetail: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
+        assetDetail: async (asset?: string, recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
 
+            if (asset !== undefined && asset !== null) {
+                localVarQueryParameter['asset'] = asset;
+            }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -286,6 +290,7 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 1
          *
          * @summary DustLog(USER_DATA)
+         * @param {string} [accountType] `SPOT` or `MARGIN`,default `SPOT`
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
          * @param {number | bigint} [recvWindow]
@@ -293,6 +298,7 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @throws {RequiredError}
          */
         dustlog: async (
+            accountType?: string,
             startTime?: number | bigint,
             endTime?: number | bigint,
             recvWindow?: number | bigint
@@ -300,6 +306,9 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
 
+            if (accountType !== undefined && accountType !== null) {
+                localVarQueryParameter['accountType'] = accountType;
+            }
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
@@ -1204,6 +1213,13 @@ export interface AssetApiInterface {
  */
 export interface AssetDetailRequest {
     /**
+     * If asset is blank, then query all positive assets user have.
+     * @type {string}
+     * @memberof AssetApiAssetDetail
+     */
+    readonly asset?: string;
+
+    /**
      *
      * @type {number | bigint}
      * @memberof AssetApiAssetDetail
@@ -1345,6 +1361,13 @@ export interface DustTransferRequest {
  * @interface DustlogRequest
  */
 export interface DustlogRequest {
+    /**
+     * `SPOT` or `MARGIN`,default `SPOT`
+     * @type {string}
+     * @memberof AssetApiDustlog
+     */
+    readonly accountType?: string;
+
     /**
      *
      * @type {number | bigint}
@@ -1767,6 +1790,7 @@ export class AssetApi implements AssetApiInterface {
         requestParameters: AssetDetailRequest = {}
     ): Promise<RestApiResponse<AssetDetailResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.assetDetail(
+            requestParameters?.asset,
             requestParameters?.recvWindow
         );
         return sendRequest<AssetDetailResponse>(
@@ -1931,6 +1955,7 @@ export class AssetApi implements AssetApiInterface {
         requestParameters: DustlogRequest = {}
     ): Promise<RestApiResponse<DustlogResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.dustlog(
+            requestParameters?.accountType,
             requestParameters?.startTime,
             requestParameters?.endTime,
             requestParameters?.recvWindow

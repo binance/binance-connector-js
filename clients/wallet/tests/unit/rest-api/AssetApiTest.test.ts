@@ -104,6 +104,7 @@ describe('AssetApi', () => {
 
         it('should execute assetDetail() successfully with optional parameters', async () => {
             const params: AssetDetailRequest = {
+                asset: 'asset_example',
                 recvWindow: 5000,
             };
 
@@ -712,6 +713,7 @@ describe('AssetApi', () => {
 
         it('should execute dustlog() successfully with optional parameters', async () => {
             const params: DustlogRequest = {
+                accountType: 'SPOT',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 recvWindow: 5000,

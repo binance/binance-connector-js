@@ -72,12 +72,6 @@ export interface WithdrawHistoryV2ResponseInner {
      * @type {string}
      * @memberof WithdrawHistoryV2ResponseInner
      */
-    addressTag?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof WithdrawHistoryV2ResponseInner
-     */
     txId?: string;
     /**
      *
