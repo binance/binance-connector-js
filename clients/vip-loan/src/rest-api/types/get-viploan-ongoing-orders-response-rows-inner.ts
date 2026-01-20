@@ -42,6 +42,12 @@ export interface GetVIPLoanOngoingOrdersResponseRowsInner {
      * @type {string}
      * @memberof GetVIPLoanOngoingOrdersResponseRowsInner
      */
+    loanRate?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GetVIPLoanOngoingOrdersResponseRowsInner
+     */
     residualInterest?: string;
     /**
      *

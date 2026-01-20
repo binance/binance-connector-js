@@ -1,5 +1,15 @@
 # Changelog
 
+## 8.0.0 - 2026-01-20
+
+### Changed (2)
+
+- Update `@binance/common` library to version `2.3.1`.
+
+- Modified response for `getVIPLoanOngoingOrders()` (`GET /sapi/v1/loan/vip/ongoing/orders`):
+  - `rows`.items: property `loanRate` added
+  - `rows`.items: item property `loanRate` added
+
 ## 7.0.0 - 2026-01-13
 
 ### Added (2)
