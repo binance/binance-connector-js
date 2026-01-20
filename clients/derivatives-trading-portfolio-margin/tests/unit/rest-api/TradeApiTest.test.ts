@@ -5248,26 +5248,28 @@ describe('TradeApi', () => {
             };
 
             mockResponse = JSONParse(
-                JSONStringify({
-                    avgPrice: '0.0',
-                    clientOrderId: 'abc',
-                    cumBase: '0',
-                    executedQty: '0',
-                    orderId: 1917641,
-                    origQty: '0.40',
-                    origType: 'LIMIT',
-                    price: '0',
-                    reduceOnly: false,
-                    side: 'BUY',
-                    positionSide: 'SHORT',
-                    status: 'NEW',
-                    symbol: 'BTCUSD_200925',
-                    pair: 'BTCUSD',
-                    time: 1579276756075,
-                    timeInForce: 'GTC',
-                    type: 'LIMIT',
-                    updateTime: 1579276756075,
-                })
+                JSONStringify([
+                    {
+                        avgPrice: '0.0',
+                        clientOrderId: 'abc',
+                        cumBase: '0',
+                        executedQty: '0',
+                        orderId: 1917641,
+                        origQty: '0.40',
+                        origType: 'LIMIT',
+                        price: '0',
+                        reduceOnly: false,
+                        side: 'BUY',
+                        positionSide: 'SHORT',
+                        status: 'NEW',
+                        symbol: 'BTCUSD_200925',
+                        pair: 'BTCUSD',
+                        time: 1579276756075,
+                        timeInForce: 'GTC',
+                        type: 'LIMIT',
+                        updateTime: 1579276756075,
+                    },
+                ])
             );
 
             const spy = jest.spyOn(client, 'queryCurrentCmOpenOrder').mockReturnValue(
@@ -5293,26 +5295,28 @@ describe('TradeApi', () => {
             };
 
             mockResponse = JSONParse(
-                JSONStringify({
-                    avgPrice: '0.0',
-                    clientOrderId: 'abc',
-                    cumBase: '0',
-                    executedQty: '0',
-                    orderId: 1917641,
-                    origQty: '0.40',
-                    origType: 'LIMIT',
-                    price: '0',
-                    reduceOnly: false,
-                    side: 'BUY',
-                    positionSide: 'SHORT',
-                    status: 'NEW',
-                    symbol: 'BTCUSD_200925',
-                    pair: 'BTCUSD',
-                    time: 1579276756075,
-                    timeInForce: 'GTC',
-                    type: 'LIMIT',
-                    updateTime: 1579276756075,
-                })
+                JSONStringify([
+                    {
+                        avgPrice: '0.0',
+                        clientOrderId: 'abc',
+                        cumBase: '0',
+                        executedQty: '0',
+                        orderId: 1917641,
+                        origQty: '0.40',
+                        origType: 'LIMIT',
+                        price: '0',
+                        reduceOnly: false,
+                        side: 'BUY',
+                        positionSide: 'SHORT',
+                        status: 'NEW',
+                        symbol: 'BTCUSD_200925',
+                        pair: 'BTCUSD',
+                        time: 1579276756075,
+                        timeInForce: 'GTC',
+                        type: 'LIMIT',
+                        updateTime: 1579276756075,
+                    },
+                ])
             );
 
             const spy = jest.spyOn(client, 'queryCurrentCmOpenOrder').mockReturnValue(

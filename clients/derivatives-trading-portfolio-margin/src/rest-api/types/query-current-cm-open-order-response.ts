@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 
 /**
  * Binance Derivatives Trading Portfolio Margin REST API
@@ -13,118 +14,13 @@
  * Do not edit the class manually.
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { QueryAllCmOrdersResponseInner } from './query-all-cm-orders-response-inner';
+
 /**
  *
  * @export
  * @interface QueryCurrentCmOpenOrderResponse
  */
-export interface QueryCurrentCmOpenOrderResponse {
-    /**
-     *
-     * @type {string}
-     * @memberof QueryCurrentCmOpenOrderResponse
-     */
-    avgPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryCurrentCmOpenOrderResponse
-     */
-    clientOrderId?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryCurrentCmOpenOrderResponse
-     */
-    cumBase?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryCurrentCmOpenOrderResponse
-     */
-    executedQty?: string;
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof QueryCurrentCmOpenOrderResponse
-     */
-    orderId?: number | bigint;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryCurrentCmOpenOrderResponse
-     */
-    origQty?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryCurrentCmOpenOrderResponse
-     */
-    origType?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryCurrentCmOpenOrderResponse
-     */
-    price?: string;
-    /**
-     *
-     * @type {boolean}
-     * @memberof QueryCurrentCmOpenOrderResponse
-     */
-    reduceOnly?: boolean;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryCurrentCmOpenOrderResponse
-     */
-    side?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryCurrentCmOpenOrderResponse
-     */
-    positionSide?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryCurrentCmOpenOrderResponse
-     */
-    status?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryCurrentCmOpenOrderResponse
-     */
-    symbol?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryCurrentCmOpenOrderResponse
-     */
-    pair?: string;
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof QueryCurrentCmOpenOrderResponse
-     */
-    time?: number | bigint;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryCurrentCmOpenOrderResponse
-     */
-    timeInForce?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryCurrentCmOpenOrderResponse
-     */
-    type?: string;
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof QueryCurrentCmOpenOrderResponse
-     */
-    updateTime?: number | bigint;
-}
+export interface QueryCurrentCmOpenOrderResponse extends Array<QueryAllCmOrdersResponseInner> {}
