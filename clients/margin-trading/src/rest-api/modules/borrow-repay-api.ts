@@ -95,7 +95,7 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
          * @summary Get Interest History (USER_DATA)
          * @param {string} [asset]
          * @param {string} [isolatedSymbol] isolated symbol
-         * @param {number | bigint} [startTime] 只支持查询最近90天的数据
+         * @param {number | bigint} [startTime] Only supports querying data from the past 90 days.
          * @param {number | bigint} [endTime]
          * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
          * @param {number | bigint} [size] Default:10 Max:100
@@ -230,7 +230,7 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
          * @param {string} [asset]
          * @param {string} [isolatedSymbol] isolated symbol
          * @param {number | bigint} [txId] `tranId` in `POST /sapi/v1/margin/loan`
-         * @param {number | bigint} [startTime] 只支持查询最近90天的数据
+         * @param {number | bigint} [startTime] Only supports querying data from the past 90 days.
          * @param {number | bigint} [endTime]
          * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
          * @param {number | bigint} [size] Default:10 Max:100
@@ -302,7 +302,7 @@ const BorrowRepayApiAxiosParamCreator = function (configuration: ConfigurationRe
          * @summary Query Margin Interest Rate History (USER_DATA)
          * @param {string} asset
          * @param {number | bigint} [vipLevel] User's current specific margin data will be returned if vipLevel is omitted
-         * @param {number | bigint} [startTime] 只支持查询最近90天的数据
+         * @param {number | bigint} [startTime] Only supports querying data from the past 90 days.
          * @param {number | bigint} [endTime]
          * @param {number | bigint} [recvWindow] No more than 60000
          *
@@ -550,7 +550,7 @@ export interface GetInterestHistoryRequest {
     readonly isolatedSymbol?: string;
 
     /**
-     * 只支持查询最近90天的数据
+     * Only supports querying data from the past 90 days.
      * @type {number | bigint}
      * @memberof BorrowRepayApiGetInterestHistory
      */
@@ -667,7 +667,7 @@ export interface QueryBorrowRepayRecordsInMarginAccountRequest {
     readonly txId?: number | bigint;
 
     /**
-     * 只支持查询最近90天的数据
+     * Only supports querying data from the past 90 days.
      * @type {number | bigint}
      * @memberof BorrowRepayApiQueryBorrowRepayRecordsInMarginAccount
      */
@@ -722,7 +722,7 @@ export interface QueryMarginInterestRateHistoryRequest {
     readonly vipLevel?: number | bigint;
 
     /**
-     * 只支持查询最近90天的数据
+     * Only supports querying data from the past 90 days.
      * @type {number | bigint}
      * @memberof BorrowRepayApiQueryMarginInterestRateHistory
      */

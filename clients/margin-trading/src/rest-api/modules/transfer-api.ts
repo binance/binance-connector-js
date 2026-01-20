@@ -41,7 +41,7 @@ const TransferApiAxiosParamCreator = function (configuration: ConfigurationRestA
          * @summary Get Cross Margin Transfer History (USER_DATA)
          * @param {string} [asset]
          * @param {string} [type] Transfer Type: ROLL_IN, ROLL_OUT
-         * @param {number | bigint} [startTime] 只支持查询最近90天的数据
+         * @param {number | bigint} [startTime] Only supports querying data from the past 90 days.
          * @param {number | bigint} [endTime]
          * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
          * @param {number | bigint} [size] Default:10 Max:100
@@ -209,7 +209,7 @@ export interface GetCrossMarginTransferHistoryRequest {
     readonly type?: string;
 
     /**
-     * 只支持查询最近90天的数据
+     * Only supports querying data from the past 90 days.
      * @type {number | bigint}
      * @memberof TransferApiGetCrossMarginTransferHistory
      */

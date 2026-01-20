@@ -227,7 +227,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Weight: 1(IP)
          *
          * @summary Get Force Liquidation Record (USER_DATA)
-         * @param {number | bigint} [startTime] 只支持查询最近90天的数据
+         * @param {number | bigint} [startTime] Only supports querying data from the past 90 days.
          * @param {number | bigint} [endTime]
          * @param {string} [isolatedSymbol] isolated symbol
          * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
@@ -316,7 +316,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Get Small Liability Exchange History (USER_DATA)
          * @param {number | bigint} current Currently querying page. Start from 1. Default:1
          * @param {number | bigint} size Default:10, Max:100
-         * @param {number | bigint} [startTime] 只支持查询最近90天的数据
+         * @param {number | bigint} [startTime] Only supports querying data from the past 90 days.
          * @param {number | bigint} [endTime]
          * @param {number | bigint} [recvWindow] No more than 60000
          *
@@ -1244,10 +1244,10 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Query Margin Account\'s all OCO (USER_DATA)
          * @param {string} [isIsolated] for isolated margin or not, "TRUE", "FALSE"，default "FALSE"
          * @param {string} [symbol] isolated margin pair
-         * @param {number | bigint} [fromId] 如设置fromId, 将返回id > fromId的数据。否则将返回最新数据
-         * @param {number | bigint} [startTime] 只支持查询最近90天的数据
+         * @param {number | bigint} [fromId] If `fromId` is set, data with `id` greater than `fromId` will be returned. Otherwise, the latest data will be returned.
+         * @param {number | bigint} [startTime] Only supports querying data from the past 90 days.
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [limit] Default Value: 500; Max Value: 1000
+         * @param {number | bigint} [limit] Limit on the number of data records returned per request. Default: 500; Maximum: 1000.
          * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
@@ -1310,9 +1310,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} symbol
          * @param {string} [isIsolated] for isolated margin or not, "TRUE", "FALSE"，default "FALSE"
          * @param {number | bigint} [orderId]
-         * @param {number | bigint} [startTime] 只支持查询最近90天的数据
+         * @param {number | bigint} [startTime] Only supports querying data from the past 90 days.
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [limit] Default Value: 500; Max Value: 1000
+         * @param {number | bigint} [limit] Limit on the number of data records returned per request. Default: 500; Maximum: 1000.
          * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
@@ -1571,10 +1571,10 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} symbol
          * @param {string} [isIsolated] for isolated margin or not, "TRUE", "FALSE"，default "FALSE"
          * @param {number | bigint} [orderId]
-         * @param {number | bigint} [startTime] 只支持查询最近90天的数据
+         * @param {number | bigint} [startTime] Only supports querying data from the past 90 days.
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [fromId] 如设置fromId, 将返回id > fromId的数据。否则将返回最新数据
-         * @param {number | bigint} [limit] Default Value: 500; Max Value: 1000
+         * @param {number | bigint} [fromId] If `fromId` is set, data with `id` greater than `fromId` will be returned. Otherwise, the latest data will be returned.
+         * @param {number | bigint} [limit] Limit on the number of data records returned per request. Default: 500; Maximum: 1000.
          * @param {number | bigint} [recvWindow] No more than 60000
          *
          * @throws {RequiredError}
@@ -2294,7 +2294,7 @@ export interface EditIpForSpecialKeyRequest {
  */
 export interface GetForceLiquidationRecordRequest {
     /**
-     * 只支持查询最近90天的数据
+     * Only supports querying data from the past 90 days.
      * @type {number | bigint}
      * @memberof TradeApiGetForceLiquidationRecord
      */
@@ -2369,7 +2369,7 @@ export interface GetSmallLiabilityExchangeHistoryRequest {
     readonly size: number | bigint;
 
     /**
-     * 只支持查询最近90天的数据
+     * Only supports querying data from the past 90 days.
      * @type {number | bigint}
      * @memberof TradeApiGetSmallLiabilityExchangeHistory
      */
@@ -3220,14 +3220,14 @@ export interface QueryMarginAccountsAllOcoRequest {
     readonly symbol?: string;
 
     /**
-     * 如设置fromId, 将返回id > fromId的数据。否则将返回最新数据
+     * If `fromId` is set, data with `id` greater than `fromId` will be returned. Otherwise, the latest data will be returned.
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOco
      */
     readonly fromId?: number | bigint;
 
     /**
-     * 只支持查询最近90天的数据
+     * Only supports querying data from the past 90 days.
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOco
      */
@@ -3241,7 +3241,7 @@ export interface QueryMarginAccountsAllOcoRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Default Value: 500; Max Value: 1000
+     * Limit on the number of data records returned per request. Default: 500; Maximum: 1000.
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOco
      */
@@ -3282,7 +3282,7 @@ export interface QueryMarginAccountsAllOrdersRequest {
     readonly orderId?: number | bigint;
 
     /**
-     * 只支持查询最近90天的数据
+     * Only supports querying data from the past 90 days.
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOrders
      */
@@ -3296,7 +3296,7 @@ export interface QueryMarginAccountsAllOrdersRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Default Value: 500; Max Value: 1000
+     * Limit on the number of data records returned per request. Default: 500; Maximum: 1000.
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsAllOrders
      */
@@ -3473,7 +3473,7 @@ export interface QueryMarginAccountsTradeListRequest {
     readonly orderId?: number | bigint;
 
     /**
-     * 只支持查询最近90天的数据
+     * Only supports querying data from the past 90 days.
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsTradeList
      */
@@ -3487,14 +3487,14 @@ export interface QueryMarginAccountsTradeListRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * 如设置fromId, 将返回id > fromId的数据。否则将返回最新数据
+     * If `fromId` is set, data with `id` greater than `fromId` will be returned. Otherwise, the latest data will be returned.
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsTradeList
      */
     readonly fromId?: number | bigint;
 
     /**
-     * Default Value: 500; Max Value: 1000
+     * Limit on the number of data records returned per request. Default: 500; Maximum: 1000.
      * @type {number | bigint}
      * @memberof TradeApiQueryMarginAccountsTradeList
      */
