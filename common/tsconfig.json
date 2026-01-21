@@ -1,22 +1,38 @@
 {
-    "compilerOptions": {
-        "target": "es2021",
-        "module": "nodenext",
-        "moduleResolution": "nodenext",
-        "outDir": "dist",
-        "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": true,
-        "noImplicitAny": true,
-        "noImplicitThis": true,
-        "noImplicitReturns": true,
-        "sourceMap": true,
-        "strict": true,
-        "strictNullChecks": true,
-        "skipLibCheck": true,
-        "types": ["jest", "node"],
-        "resolveJsonModule": true,
-        "stripInternal": true
-    },
-    "include": ["src/**/*.ts", "tests/**/*.ts"],
-    "exclude": ["node_modules"]
+  "compilerOptions": {
+    /* Base Options */
+    "target": "es2021",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "lib": ["es2021", "dom"], // Performans ve kapsam için kütüphane tanımları
+    "outDir": "dist",
+    "rootDir": "src", // Derleme kaynaklarını netleştirir, dist yapısını temiz tutar
+
+    /* Strictness & Security */
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noImplicitReturns": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,     // Kullanılmayan değişkenleri engeller (Hacker-proof: Ölü kod bırakmaz)
+    "noUnusedParameters": true, // Kullanılmayan parametreleri engeller
+    "noFallthroughCasesInSwitch": true, // Switch bloklarında güvenlik sağlar
+
+    /* Interop & Modern Standards */
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "declaration": true, // Kütüphane geliştiriyorsanız d.ts dosyaları üretir
+    "stripInternal": true,
+
+    /* Optimization */
+    "incremental": true, // Sadece değişen dosyaları derleyerek hızı %50+ artırır
+    "tsBuildInfoFile": ".tsbuildinfo",
+    "removeComments": true, // Production kodunda yorumları siler (Boyut ve güvenlik)
+    "types": ["jest", "node"]
+  },
+  "include": ["src/**/*.ts", "tests/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }
