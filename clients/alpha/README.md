@@ -139,7 +139,7 @@ The REST API provides detailed error types to help you handle issues effectively
 
 See the [Error Handling example](./docs/rest-api/error-handling.md) for detailed usage.
 
-If `basePath` is not provided, it defaults to `https://api.binance.com`.
+If `basePath` is not provided, it defaults to `https://www.binance.com`.
 
 ## Testing
 
