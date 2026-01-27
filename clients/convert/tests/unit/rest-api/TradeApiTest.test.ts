@@ -446,14 +446,7 @@ describe('TradeApi', () => {
             };
 
             mockResponse = JSONParse(
-                JSONStringify({
-                    quoteId: '12415572564',
-                    ratio: '38163.7',
-                    inverseRatio: '0.0000262',
-                    validTimestamp: 1623319461670,
-                    toAmount: '3816.37',
-                    fromAmount: '0.1',
-                })
+                JSONStringify({ orderId: 1603680255057330400, status: 'PROCESS' })
             );
 
             const spy = jest.spyOn(client, 'placeLimitOrder').mockReturnValue(
@@ -484,14 +477,7 @@ describe('TradeApi', () => {
             };
 
             mockResponse = JSONParse(
-                JSONStringify({
-                    quoteId: '12415572564',
-                    ratio: '38163.7',
-                    inverseRatio: '0.0000262',
-                    validTimestamp: 1623319461670,
-                    toAmount: '3816.37',
-                    fromAmount: '0.1',
-                })
+                JSONStringify({ orderId: 1603680255057330400, status: 'PROCESS' })
             );
 
             const spy = jest.spyOn(client, 'placeLimitOrder').mockReturnValue(

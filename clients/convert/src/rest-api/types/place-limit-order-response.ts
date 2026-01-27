@@ -21,38 +21,14 @@
 export interface PlaceLimitOrderResponse {
     /**
      *
-     * @type {string}
-     * @memberof PlaceLimitOrderResponse
-     */
-    quoteId?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PlaceLimitOrderResponse
-     */
-    ratio?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PlaceLimitOrderResponse
-     */
-    inverseRatio?: string;
-    /**
-     *
      * @type {number | bigint}
      * @memberof PlaceLimitOrderResponse
      */
-    validTimestamp?: number | bigint;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
      * @memberof PlaceLimitOrderResponse
      */
-    toAmount?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PlaceLimitOrderResponse
-     */
-    fromAmount?: string;
+    status?: string;
 }
