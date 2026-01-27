@@ -1,5 +1,64 @@
 # Changelog
 
+## 23.0.0 - 2026-01-27
+
+### Changed (6)
+
+#### REST API
+
+- Added parameter `newOrderRespType`
+  - affected methods:
+    - `newAlgoOrder()` (`POST /fapi/v1/algoOrder`)
+- Modified parameter `batchOrders`:
+  - items: property `stopPrice` added
+  - items: item property `stopPrice` added
+  - affected methods:
+    - `modifyMultipleOrders()` (`PUT /fapi/v1/batchOrders`)
+- Modified response for `placeMultipleOrders()` (`POST /fapi/v1/batchOrders`):
+  - items: property `closePosition` added
+  - items: item property `closePosition` added
+
+- Modified response for `queryOrder()` (`GET /fapi/v1/order`):
+  - property `id` added
+  - property `result` added
+  - property `cumQuote` deleted
+  - property `origQty` deleted
+  - property `orderId` deleted
+  - property `priceRate` deleted
+  - property `type` deleted
+  - property `workingType` deleted
+  - property `clientOrderId` deleted
+  - property `timeInForce` deleted
+  - property `symbol` deleted
+  - property `updateTime` deleted
+  - property `activatePrice` deleted
+  - property `closePosition` deleted
+  - property `reduceOnly` deleted
+  - property `selfTradePreventionMode` deleted
+  - property `executedQty` deleted
+  - property `origType` deleted
+  - property `goodTillDate` deleted
+  - property `positionSide` deleted
+  - property `stopPrice` deleted
+  - property `price` deleted
+  - property `avgPrice` deleted
+  - property `priceProtect` deleted
+  - property `priceMatch` deleted
+  - property `time` deleted
+  - property `side` deleted
+  - `status`: type `string` → `integer`
+
+#### WebSocket API
+
+- Added parameter `newOrderRespType`
+  - affected methods:
+    - `newAlgoOrder()` (`algoOrder.place` method)
+- Modified response for `positionInformationV2()` (`v2/account.position` method):
+  - `result`.items: property `unRealizedProfit` added
+  - `result`.items: property `unrealizedProfit` deleted
+  - `result`.items: item property `unRealizedProfit` added
+  - `result`.items: item property `unrealizedProfit` deleted
+
 ## 22.0.1 - 2026-01-20
 
 ### Changed (1)

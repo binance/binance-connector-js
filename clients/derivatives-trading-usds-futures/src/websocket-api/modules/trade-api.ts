@@ -514,6 +514,13 @@ export interface NewAlgoOrderRequest {
     readonly clientAlgoId?: string;
 
     /**
+     * "ACK", "RESULT", default "ACK"
+     * @type {'ACK' | 'RESULT'}
+     * @memberof TradeApiNewAlgoOrder
+     */
+    readonly newOrderRespType?: NewAlgoOrderNewOrderRespTypeEnum;
+
+    /**
      * `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE`
      * @type {'EXPIRE_TAKER' | 'EXPIRE_BOTH' | 'EXPIRE_MAKER'}
      * @memberof TradeApiNewAlgoOrder
@@ -1106,6 +1113,11 @@ export enum NewAlgoOrderPriceMatchEnum {
     QUEUE_5 = 'QUEUE_5',
     QUEUE_10 = 'QUEUE_10',
     QUEUE_20 = 'QUEUE_20',
+}
+
+export enum NewAlgoOrderNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
 }
 
 export enum NewAlgoOrderSelfTradePreventionModeEnum {

@@ -99,6 +99,12 @@ export interface PlaceMultipleOrdersResponseInner {
     stopPrice?: string;
     /**
      *
+     * @type {boolean}
+     * @memberof PlaceMultipleOrdersResponseInner
+     */
+    closePosition?: boolean;
+    /**
+     *
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */

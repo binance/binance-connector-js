@@ -66,6 +66,12 @@ export interface ModifyMultipleOrdersBatchOrdersParameterInner {
      * @type {string}
      * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
      */
+    stopPrice?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
+     */
     recvWindow?: string;
 }
 

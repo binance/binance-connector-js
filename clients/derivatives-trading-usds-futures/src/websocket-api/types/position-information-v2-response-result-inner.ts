@@ -60,7 +60,7 @@ export interface PositionInformationV2ResponseResultInner {
      * @type {string}
      * @memberof PositionInformationV2ResponseResultInner
      */
-    unrealizedProfit?: string;
+    unRealizedProfit?: string;
     /**
      *
      * @type {string}

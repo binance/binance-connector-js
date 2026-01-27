@@ -147,6 +147,7 @@ export * from './query-insurance-fund-balance-snapshot-response2';
 export * from './query-insurance-fund-balance-snapshot-response2-inner';
 export * from './query-insurance-fund-balance-snapshot-response2-inner-assets-inner';
 export * from './query-order-response';
+export * from './query-order-response-result';
 export * from './query-user-rate-limit-response';
 export * from './query-user-rate-limit-response-inner';
 export * from './recent-trades-list-response';

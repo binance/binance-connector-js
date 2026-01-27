@@ -1137,6 +1137,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [activatePrice] Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`)
          * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1%
          * @param {string} [clientAlgoId]
+         * @param {NewAlgoOrderNewOrderRespTypeEnum} [newOrderRespType] "ACK", "RESULT", default "ACK"
          * @param {NewAlgoOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE`
          * @param {number | bigint} [goodTillDate] order cancel time for timeInForce `GTD`, mandatory when `timeInforce` set to `GTD`; order the timestamp only retains second-level precision, ms part will be ignored; The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000
          * @param {number | bigint} [recvWindow]
@@ -1161,6 +1162,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             activatePrice?: number,
             callbackRate?: number,
             clientAlgoId?: string,
+            newOrderRespType?: NewAlgoOrderNewOrderRespTypeEnum,
             selfTradePreventionMode?: NewAlgoOrderSelfTradePreventionModeEnum,
             goodTillDate?: number | bigint,
             recvWindow?: number | bigint
@@ -1227,6 +1229,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             }
             if (clientAlgoId !== undefined && clientAlgoId !== null) {
                 localVarQueryParameter['clientAlgoId'] = clientAlgoId;
+            }
+            if (newOrderRespType !== undefined && newOrderRespType !== null) {
+                localVarQueryParameter['newOrderRespType'] = newOrderRespType;
             }
             if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
                 localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
@@ -3391,6 +3396,13 @@ export interface NewAlgoOrderRequest {
     readonly clientAlgoId?: string;
 
     /**
+     * "ACK", "RESULT", default "ACK"
+     * @type {'ACK' | 'RESULT'}
+     * @memberof TradeApiNewAlgoOrder
+     */
+    readonly newOrderRespType?: NewAlgoOrderNewOrderRespTypeEnum;
+
+    /**
      * `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE`
      * @type {'EXPIRE_TAKER' | 'EXPIRE_BOTH' | 'EXPIRE_MAKER'}
      * @memberof TradeApiNewAlgoOrder
@@ -4714,6 +4726,7 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.activatePrice,
             requestParameters?.callbackRate,
             requestParameters?.clientAlgoId,
+            requestParameters?.newOrderRespType,
             requestParameters?.selfTradePreventionMode,
             requestParameters?.goodTillDate,
             requestParameters?.recvWindow
@@ -5259,6 +5272,11 @@ export enum NewAlgoOrderPriceMatchEnum {
     QUEUE_5 = 'QUEUE_5',
     QUEUE_10 = 'QUEUE_10',
     QUEUE_20 = 'QUEUE_20',
+}
+
+export enum NewAlgoOrderNewOrderRespTypeEnum {
+    ACK = 'ACK',
+    RESULT = 'RESULT',
 }
 
 export enum NewAlgoOrderSelfTradePreventionModeEnum {

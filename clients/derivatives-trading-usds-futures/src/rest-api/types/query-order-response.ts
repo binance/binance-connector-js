@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 
 /**
  * Binance Derivatives Trading USDS Futures REST API
@@ -13,6 +14,10 @@
  * Do not edit the class manually.
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { QueryOrderResponseResult } from './query-order-response-result';
+
 /**
  *
  * @export
@@ -24,155 +29,17 @@ export interface QueryOrderResponse {
      * @type {string}
      * @memberof QueryOrderResponse
      */
-    avgPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryOrderResponse
-     */
-    clientOrderId?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryOrderResponse
-     */
-    cumQuote?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryOrderResponse
-     */
-    executedQty?: string;
+    id?: string;
     /**
      *
      * @type {number | bigint}
      * @memberof QueryOrderResponse
      */
-    orderId?: number | bigint;
+    status?: number | bigint;
     /**
      *
-     * @type {string}
+     * @type {QueryOrderResponseResult}
      * @memberof QueryOrderResponse
      */
-    origQty?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryOrderResponse
-     */
-    origType?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryOrderResponse
-     */
-    price?: string;
-    /**
-     *
-     * @type {boolean}
-     * @memberof QueryOrderResponse
-     */
-    reduceOnly?: boolean;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryOrderResponse
-     */
-    side?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryOrderResponse
-     */
-    positionSide?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryOrderResponse
-     */
-    status?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryOrderResponse
-     */
-    stopPrice?: string;
-    /**
-     *
-     * @type {boolean}
-     * @memberof QueryOrderResponse
-     */
-    closePosition?: boolean;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryOrderResponse
-     */
-    symbol?: string;
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof QueryOrderResponse
-     */
-    time?: number | bigint;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryOrderResponse
-     */
-    timeInForce?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryOrderResponse
-     */
-    type?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryOrderResponse
-     */
-    activatePrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryOrderResponse
-     */
-    priceRate?: string;
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof QueryOrderResponse
-     */
-    updateTime?: number | bigint;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryOrderResponse
-     */
-    workingType?: string;
-    /**
-     *
-     * @type {boolean}
-     * @memberof QueryOrderResponse
-     */
-    priceProtect?: boolean;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryOrderResponse
-     */
-    priceMatch?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryOrderResponse
-     */
-    selfTradePreventionMode?: string;
-    /**
-     *
-     * @type {number | bigint}
-     * @memberof QueryOrderResponse
-     */
-    goodTillDate?: number | bigint;
+    result?: QueryOrderResponseResult;
 }
