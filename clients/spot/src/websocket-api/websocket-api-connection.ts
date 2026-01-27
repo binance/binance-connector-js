@@ -1256,7 +1256,7 @@ export class WebsocketAPIConnection {
     /**
      * Stop listening to the User Data Stream in the current WebSocket connection.
      *
-     * Note that `session.logout` will only close the subscription created with `userdataStream.subscribe` but not subscriptions opened with `userDataStream.subscribe.signature`.
+     * Note that `session.logout` will only close the subscription created with `userDataStream.subscribe` but not subscriptions opened with `userDataStream.subscribe.signature`.
      * Weight: 2
      *
      * @summary WebSocket Unsubscribe from User Data Stream

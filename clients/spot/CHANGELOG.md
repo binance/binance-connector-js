@@ -1,5 +1,15 @@
 # Changelog
 
+## 27.0.0 - 2026-01-27
+
+### Changed (1)
+
+#### WebSocket API
+
+- Added parameter `recvWindow`
+  - affected methods:
+    - `userDataStreamSubscribeSignature()` (`userDataStream.subscribe.signature` method)
+
 ## 26.0.2 - 2026-01-20
 
 ### Changed (1)

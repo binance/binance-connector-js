@@ -619,10 +619,10 @@ export interface TradesAggregateRequest {
 
     /**
      * Aggregate trade ID to begin at
-     * @type {number}
+     * @type {number | bigint}
      * @memberof MarketApiTradesAggregate
      */
-    readonly fromId?: number;
+    readonly fromId?: number | bigint;
 
     /**
      *
@@ -639,11 +639,11 @@ export interface TradesAggregateRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Default: 100; Maximum: 5000
-     * @type {number}
+     * Default: 500; Maximum: 1000
+     * @type {number | bigint}
      * @memberof MarketApiTradesAggregate
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 }
 
 /**
@@ -666,7 +666,7 @@ export interface TradesHistoricalRequest {
     readonly id?: string;
 
     /**
-     * Aggregate trade ID to begin at
+     * Trade ID to begin at
      * @type {number}
      * @memberof MarketApiTradesHistorical
      */

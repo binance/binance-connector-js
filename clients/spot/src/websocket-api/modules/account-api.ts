@@ -346,7 +346,7 @@ export interface AllOrderListsRequest {
     readonly id?: string;
 
     /**
-     * Aggregate trade ID to begin at
+     * Trade ID to begin at
      * @type {number}
      * @memberof AccountApiAllOrderLists
      */
@@ -621,7 +621,7 @@ export interface MyTradesRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Aggregate trade ID to begin at
+     * Trade ID to begin at
      * @type {number}
      * @memberof AccountApiMyTrades
      */
@@ -723,11 +723,11 @@ export interface OrderAmendmentsRequest {
     readonly fromExecutionId?: number | bigint;
 
     /**
-     * Default: 100; Maximum: 5000
-     * @type {number}
+     * Default: 500; Maximum: 1000
+     * @type {number | bigint}
      * @memberof AccountApiOrderAmendments
      */
-    readonly limit?: number;
+    readonly limit?: number | bigint;
 
     /**
      * The value cannot be greater than `60000`. <br> Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.
