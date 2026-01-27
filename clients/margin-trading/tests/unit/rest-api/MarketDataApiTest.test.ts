@@ -34,6 +34,7 @@ import type {
     GetDelistScheduleResponse,
     GetLimitPricePairsResponse,
     GetListScheduleResponse,
+    GetMarginAssetRiskBasedLiquidationRatioResponse,
     QueryIsolatedMarginTierDataResponse,
     QueryLiabilityCoinLeverageBracketInCrossMarginProModeResponse,
     QueryMarginAvailableInventoryResponse,
@@ -625,6 +626,51 @@ describe('MarketDataApi', () => {
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'getListSchedule').mockRejectedValueOnce(mockError);
             await expect(client.getListSchedule()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('getMarginAssetRiskBasedLiquidationRatio()', () => {
+        it('should execute getMarginAssetRiskBasedLiquidationRatio() successfully with required parameters only', async () => {
+            mockResponse = JSONParse(
+                JSONStringify([
+                    { asset: 'USDC', riskBasedLiquidationRatio: '0.01' },
+                    { asset: 'BUSD', riskBasedLiquidationRatio: '0.01' },
+                ])
+            );
+
+            const spy = jest
+                .spyOn(client, 'getMarginAssetRiskBasedLiquidationRatio')
+                .mockReturnValue(
+                    Promise.resolve({
+                        data: () => Promise.resolve(mockResponse),
+                        status: 200,
+                        headers: {},
+                        rateLimits: [],
+                    } as RestApiResponse<GetMarginAssetRiskBasedLiquidationRatioResponse>)
+                );
+            const response = await client.getMarginAssetRiskBasedLiquidationRatio();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'getMarginAssetRiskBasedLiquidationRatio')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.getMarginAssetRiskBasedLiquidationRatio()).rejects.toThrow(
+                'ResponseError'
+            );
             spy.mockRestore();
         });
     });

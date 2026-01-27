@@ -25,6 +25,8 @@ export * from './get-interest-history-response-rows-inner';
 export * from './get-limit-price-pairs-response';
 export * from './get-list-schedule-response';
 export * from './get-list-schedule-response-inner';
+export * from './get-margin-asset-risk-based-liquidation-ratio-response';
+export * from './get-margin-asset-risk-based-liquidation-ratio-response-inner';
 export * from './get-small-liability-exchange-coin-list-response';
 export * from './get-small-liability-exchange-coin-list-response-inner';
 export * from './get-small-liability-exchange-history-response';

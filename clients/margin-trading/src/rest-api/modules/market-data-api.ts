@@ -27,6 +27,7 @@ import type {
     GetDelistScheduleResponse,
     GetLimitPricePairsResponse,
     GetListScheduleResponse,
+    GetMarginAssetRiskBasedLiquidationRatioResponse,
     QueryIsolatedMarginTierDataResponse,
     QueryLiabilityCoinLeverageBracketInCrossMarginProModeResponse,
     QueryMarginAvailableInventoryResponse,
@@ -237,6 +238,30 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
 
             return {
                 endpoint: '/sapi/v1/margin/list-schedule',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Get Margin Asset Risk-Based Liquidation Ratio
+         *
+         * Weight: 1
+         *
+         * @summary Get Margin Asset Risk-Based Liquidation Ratio (MARKET_DATA)
+         *
+         * @throws {RequiredError}
+         */
+        getMarginAssetRiskBasedLiquidationRatio: async (): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/margin/risk-based-liquidation-ratio',
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
@@ -480,6 +505,19 @@ export interface MarketDataApiInterface {
     getListSchedule(
         requestParameters?: GetListScheduleRequest
     ): Promise<RestApiResponse<GetListScheduleResponse>>;
+    /**
+     * Get Margin Asset Risk-Based Liquidation Ratio
+     *
+     * Weight: 1
+     *
+     * @summary Get Margin Asset Risk-Based Liquidation Ratio (MARKET_DATA)
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApiInterface
+     */
+    getMarginAssetRiskBasedLiquidationRatio(): Promise<
+        RestApiResponse<GetMarginAssetRiskBasedLiquidationRatioResponse>
+    >;
     /**
      * Get isolated margin tier data collection with any tier as https://www.binance.com/en/margin-data
      *
@@ -866,6 +904,33 @@ export class MarketDataApi implements MarketDataApiInterface {
             requestParameters?.recvWindow
         );
         return sendRequest<GetListScheduleResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: false }
+        );
+    }
+
+    /**
+     * Get Margin Asset Risk-Based Liquidation Ratio
+     *
+     * Weight: 1
+     *
+     * @summary Get Margin Asset Risk-Based Liquidation Ratio (MARKET_DATA)
+     * @returns {Promise<RestApiResponse<GetMarginAssetRiskBasedLiquidationRatioResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApi
+     * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Get-Margin-Asset-Risk-Based-Liquidation-Ratio Binance API Documentation}
+     */
+    public async getMarginAssetRiskBasedLiquidationRatio(): Promise<
+        RestApiResponse<GetMarginAssetRiskBasedLiquidationRatioResponse>
+        > {
+        const localVarAxiosArgs =
+            await this.localVarAxiosParamCreator.getMarginAssetRiskBasedLiquidationRatio();
+        return sendRequest<GetMarginAssetRiskBasedLiquidationRatioResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

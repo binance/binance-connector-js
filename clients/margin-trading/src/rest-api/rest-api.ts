@@ -112,6 +112,7 @@ import type {
     GetDelistScheduleResponse,
     GetLimitPricePairsResponse,
     GetListScheduleResponse,
+    GetMarginAssetRiskBasedLiquidationRatioResponse,
     QueryIsolatedMarginTierDataResponse,
     QueryLiabilityCoinLeverageBracketInCrossMarginProModeResponse,
     QueryMarginAvailableInventoryResponse,
@@ -673,6 +674,23 @@ export class RestAPI {
         requestParameters: GetListScheduleRequest = {}
     ): Promise<RestApiResponse<GetListScheduleResponse>> {
         return this.marketDataApi.getListSchedule(requestParameters);
+    }
+
+    /**
+     * Get Margin Asset Risk-Based Liquidation Ratio
+     *
+     * Weight: 1
+     *
+     * @summary Get Margin Asset Risk-Based Liquidation Ratio (MARKET_DATA)
+     *
+     * @returns {Promise<RestApiResponse<GetMarginAssetRiskBasedLiquidationRatioResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Get-Margin-Asset-Risk-Based-Liquidation-Ratio Binance API Documentation}
+     */
+    getMarginAssetRiskBasedLiquidationRatio(): Promise<
+        RestApiResponse<GetMarginAssetRiskBasedLiquidationRatioResponse>
+        > {
+        return this.marketDataApi.getMarginAssetRiskBasedLiquidationRatio();
     }
 
     /**
