@@ -168,6 +168,7 @@ describe('AssetApi', () => {
                             divTime: 1563189166000,
                             enInfo: 'BHFT distribution',
                             tranId: 2968885920,
+                            direction: 1,
                         },
                         {
                             id: 1631750237,
@@ -176,6 +177,7 @@ describe('AssetApi', () => {
                             divTime: 1563189165000,
                             enInfo: 'BHFT distribution',
                             tranId: 2968885920,
+                            direction: 1,
                         },
                     ],
                     total: 2,
@@ -215,6 +217,7 @@ describe('AssetApi', () => {
                             divTime: 1563189166000,
                             enInfo: 'BHFT distribution',
                             tranId: 2968885920,
+                            direction: 1,
                         },
                         {
                             id: 1631750237,
@@ -223,6 +226,7 @@ describe('AssetApi', () => {
                             divTime: 1563189165000,
                             enInfo: 'BHFT distribution',
                             tranId: 2968885920,
+                            direction: 1,
                         },
                     ],
                     total: 2,

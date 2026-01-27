@@ -55,4 +55,10 @@ export interface AssetDividendRecordResponseRowsInner {
      * @memberof AssetDividendRecordResponseRowsInner
      */
     tranId?: number | bigint;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof AssetDividendRecordResponseRowsInner
+     */
+    direction?: number | bigint;
 }
