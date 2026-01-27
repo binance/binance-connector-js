@@ -1,5 +1,19 @@
 # Changelog
 
+## 12.0.0 - 2026-01-27
+
+### Changed (2)
+
+#### REST API
+
+- Modified response for `cancelMultipleOrders()` (`DELETE /dapi/v1/batchOrders`):
+  - items: property `pair` added
+  - items: item property `pair` added
+
+- Modified response for `currentAllOpenOrders()` (`GET /dapi/v1/openOrders`):
+  - items: property `pair` added
+  - items: item property `pair` added
+
 ## 11.0.1 - 2026-01-20
 
 ### Changed (1)

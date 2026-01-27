@@ -120,6 +120,12 @@ export interface CancelMultipleOrdersResponseInner {
      * @type {string}
      * @memberof CancelMultipleOrdersResponseInner
      */
+    pair?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CancelMultipleOrdersResponseInner
+     */
     timeInForce?: string;
     /**
      *
