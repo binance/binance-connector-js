@@ -545,7 +545,7 @@ export class RestAPI {
      * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Get-Summary-of-Sub-accounts-Futures-Account Binance API Documentation}
      */
     getSummaryOfSubAccountsFuturesAccount(
-        requestParameters: GetSummaryOfSubAccountsFuturesAccountRequest = {}
+        requestParameters: GetSummaryOfSubAccountsFuturesAccountRequest
     ): Promise<RestApiResponse<GetSummaryOfSubAccountsFuturesAccountResponse>> {
         return this.assetManagementApi.getSummaryOfSubAccountsFuturesAccount(requestParameters);
     }

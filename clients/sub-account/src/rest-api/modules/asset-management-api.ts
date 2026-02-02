@@ -442,16 +442,31 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          * Weight: 1
          *
          * @summary Get Summary of Sub-account\'s Futures Account (For Master Account) (USER_DATA)
+         * @param {number | bigint} page Page
+         * @param {number | bigint} limit Limit (Max: 500)
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getSummaryOfSubAccountsFuturesAccount: async (
+            page: number | bigint,
+            limit: number | bigint,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
+            // verify required parameter 'page' is not null or undefined
+            assertParamExists('getSummaryOfSubAccountsFuturesAccount', 'page', page);
+            // verify required parameter 'limit' is not null or undefined
+            assertParamExists('getSummaryOfSubAccountsFuturesAccount', 'limit', limit);
+
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
 
+            if (page !== undefined && page !== null) {
+                localVarQueryParameter['page'] = page;
+            }
+            if (limit !== undefined && limit !== null) {
+                localVarQueryParameter['limit'] = limit;
+            }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
             }
@@ -1470,7 +1485,7 @@ export interface AssetManagementApiInterface {
      * @memberof AssetManagementApiInterface
      */
     getSummaryOfSubAccountsFuturesAccount(
-        requestParameters?: GetSummaryOfSubAccountsFuturesAccountRequest
+        requestParameters: GetSummaryOfSubAccountsFuturesAccountRequest
     ): Promise<RestApiResponse<GetSummaryOfSubAccountsFuturesAccountResponse>>;
     /**
      * Get Summary of Sub-account's Futures Account
@@ -2000,6 +2015,20 @@ export interface GetSubAccountDepositHistoryRequest {
  * @interface GetSummaryOfSubAccountsFuturesAccountRequest
  */
 export interface GetSummaryOfSubAccountsFuturesAccountRequest {
+    /**
+     * Page
+     * @type {number | bigint}
+     * @memberof AssetManagementApiGetSummaryOfSubAccountsFuturesAccount
+     */
+    readonly page: number | bigint;
+
+    /**
+     * Limit (Max: 500)
+     * @type {number | bigint}
+     * @memberof AssetManagementApiGetSummaryOfSubAccountsFuturesAccount
+     */
+    readonly limit: number | bigint;
+
     /**
      *
      * @type {number | bigint}
@@ -2882,10 +2911,12 @@ export class AssetManagementApi implements AssetManagementApiInterface {
      * @see {@link https://developers.binance.com/docs/sub_account/asset-management/Get-Summary-of-Sub-accounts-Futures-Account Binance API Documentation}
      */
     public async getSummaryOfSubAccountsFuturesAccount(
-        requestParameters: GetSummaryOfSubAccountsFuturesAccountRequest = {}
+        requestParameters: GetSummaryOfSubAccountsFuturesAccountRequest
     ): Promise<RestApiResponse<GetSummaryOfSubAccountsFuturesAccountResponse>> {
         const localVarAxiosArgs =
             await this.localVarAxiosParamCreator.getSummaryOfSubAccountsFuturesAccount(
+                requestParameters?.page,
+                requestParameters?.limit,
                 requestParameters?.recvWindow
             );
         return sendRequest<GetSummaryOfSubAccountsFuturesAccountResponse>(

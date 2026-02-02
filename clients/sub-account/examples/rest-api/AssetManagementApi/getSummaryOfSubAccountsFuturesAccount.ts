@@ -9,7 +9,10 @@ const client = new SubAccount({ configurationRestAPI });
 
 async function getSummaryOfSubAccountsFuturesAccount() {
     try {
-        const response = await client.restAPI.getSummaryOfSubAccountsFuturesAccount();
+        const response = await client.restAPI.getSummaryOfSubAccountsFuturesAccount({
+            page: 789,
+            limit: 789,
+        });
 
         const rateLimits = response.rateLimits!;
         console.log('getSummaryOfSubAccountsFuturesAccount() rate limits:', rateLimits);

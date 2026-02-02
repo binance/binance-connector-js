@@ -1207,6 +1207,11 @@ describe('AssetManagementApi', () => {
 
     describe('getSummaryOfSubAccountsFuturesAccount()', () => {
         it('should execute getSummaryOfSubAccountsFuturesAccount() successfully with required parameters only', async () => {
+            const params: GetSummaryOfSubAccountsFuturesAccountRequest = {
+                page: 789,
+                limit: 789,
+            };
+
             mockResponse = JSONParse(
                 JSONStringify({
                     totalInitialMargin: '9.83137400',
@@ -1252,7 +1257,7 @@ describe('AssetManagementApi', () => {
                     rateLimits: [],
                 } as RestApiResponse<GetSummaryOfSubAccountsFuturesAccountResponse>)
             );
-            const response = await client.getSummaryOfSubAccountsFuturesAccount();
+            const response = await client.getSummaryOfSubAccountsFuturesAccount(params);
             expect(response).toBeDefined();
             await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
@@ -1260,6 +1265,8 @@ describe('AssetManagementApi', () => {
 
         it('should execute getSummaryOfSubAccountsFuturesAccount() successfully with optional parameters', async () => {
             const params: GetSummaryOfSubAccountsFuturesAccountRequest = {
+                page: 789,
+                limit: 789,
                 recvWindow: 5000,
             };
 
@@ -1314,7 +1321,38 @@ describe('AssetManagementApi', () => {
             spy.mockRestore();
         });
 
+        it('should throw RequiredError when page is missing', async () => {
+            const _params: GetSummaryOfSubAccountsFuturesAccountRequest = {
+                page: 789,
+                limit: 789,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.page;
+
+            await expect(client.getSummaryOfSubAccountsFuturesAccount(params)).rejects.toThrow(
+                'Required parameter page was null or undefined when calling getSummaryOfSubAccountsFuturesAccount.'
+            );
+        });
+
+        it('should throw RequiredError when limit is missing', async () => {
+            const _params: GetSummaryOfSubAccountsFuturesAccountRequest = {
+                page: 789,
+                limit: 789,
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.limit;
+
+            await expect(client.getSummaryOfSubAccountsFuturesAccount(params)).rejects.toThrow(
+                'Required parameter limit was null or undefined when calling getSummaryOfSubAccountsFuturesAccount.'
+            );
+        });
+
         it('should throw an error when server is returning an error', async () => {
+            const params: GetSummaryOfSubAccountsFuturesAccountRequest = {
+                page: 789,
+                limit: 789,
+            };
+
             const errorResponse = {
                 code: -1111,
                 msg: 'Server Error',
@@ -1327,7 +1365,7 @@ describe('AssetManagementApi', () => {
             const spy = jest
                 .spyOn(client, 'getSummaryOfSubAccountsFuturesAccount')
                 .mockRejectedValueOnce(mockError);
-            await expect(client.getSummaryOfSubAccountsFuturesAccount()).rejects.toThrow(
+            await expect(client.getSummaryOfSubAccountsFuturesAccount(params)).rejects.toThrow(
                 'ResponseError'
             );
             spy.mockRestore();
