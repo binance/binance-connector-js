@@ -2632,7 +2632,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Query Current UM Open Conditional Order
          *
          * Either `strategyId` or `newClientStrategyId` must be sent.
-         * If the queried order has been `CANCELED`, `TRIGGERED`或`EXPIRED`, the error message "Order does not exist" will be returned.
+         * If the queried order has been `CANCELED`, `TRIGGERED` or `EXPIRED`, the error message "Order does not exist" will be returned.
          *
          * Weight: 1
          *
@@ -4156,7 +4156,7 @@ export interface TradeApiInterface {
      * Query Current UM Open Conditional Order
      *
      * Either `strategyId` or `newClientStrategyId` must be sent.
-     * If the queried order has been `CANCELED`, `TRIGGERED`或`EXPIRED`, the error message "Order does not exist" will be returned.
+     * If the queried order has been `CANCELED`, `TRIGGERED` or `EXPIRED`, the error message "Order does not exist" will be returned.
      *
      * Weight: 1
      *
@@ -5212,7 +5212,7 @@ export interface NewCmConditionalOrderRequest {
 
     /**
      * "STOP", "STOP_MARKET", "TAKE_PROFIT", "TAKE_PROFIT_MARKET", and "TRAILING_STOP_MARKET"
-     * @type {'STOP' | 'STOP_MARKET' | 'TAKE_PROFIT' | 'TAKE_PROFIT_MARKET' | 'TRAILING_STOP_MARKET'}
+     * @type {'STOP' | 'STOP_MARKET' | 'LIMIT_MAKER' | 'TAKE_PROFIT' | 'TAKE_PROFIT_MARKET' | 'TRAILING_STOP_MARKET'}
      * @memberof TradeApiNewCmConditionalOrder
      */
     readonly strategyType: NewCmConditionalOrderStrategyTypeEnum;
@@ -5524,7 +5524,7 @@ export interface NewUmConditionalOrderRequest {
 
     /**
      * "STOP", "STOP_MARKET", "TAKE_PROFIT", "TAKE_PROFIT_MARKET", and "TRAILING_STOP_MARKET"
-     * @type {'STOP' | 'STOP_MARKET' | 'TAKE_PROFIT' | 'TAKE_PROFIT_MARKET' | 'TRAILING_STOP_MARKET'}
+     * @type {'STOP' | 'STOP_MARKET' | 'LIMIT_MAKER' | 'TAKE_PROFIT' | 'TAKE_PROFIT_MARKET' | 'TRAILING_STOP_MARKET'}
      * @memberof TradeApiNewUmConditionalOrder
      */
     readonly strategyType: NewUmConditionalOrderStrategyTypeEnum;
@@ -8397,7 +8397,7 @@ export class TradeApi implements TradeApiInterface {
      * Query Current UM Open Conditional Order
      *
      * Either `strategyId` or `newClientStrategyId` must be sent.
-     * If the queried order has been `CANCELED`, `TRIGGERED`或`EXPIRED`, the error message "Order does not exist" will be returned.
+     * If the queried order has been `CANCELED`, `TRIGGERED` or `EXPIRED`, the error message "Order does not exist" will be returned.
      *
      * Weight: 1
      *
@@ -8988,6 +8988,7 @@ export enum NewCmConditionalOrderSideEnum {
 export enum NewCmConditionalOrderStrategyTypeEnum {
     STOP = 'STOP',
     STOP_MARKET = 'STOP_MARKET',
+    LIMIT_MAKER = 'LIMIT_MAKER',
     TAKE_PROFIT = 'TAKE_PROFIT',
     TAKE_PROFIT_MARKET = 'TAKE_PROFIT_MARKET',
     TRAILING_STOP_MARKET = 'TRAILING_STOP_MARKET',
@@ -9093,6 +9094,7 @@ export enum NewUmConditionalOrderSideEnum {
 export enum NewUmConditionalOrderStrategyTypeEnum {
     STOP = 'STOP',
     STOP_MARKET = 'STOP_MARKET',
+    LIMIT_MAKER = 'LIMIT_MAKER',
     TAKE_PROFIT = 'TAKE_PROFIT',
     TAKE_PROFIT_MARKET = 'TAKE_PROFIT_MARKET',
     TRAILING_STOP_MARKET = 'TRAILING_STOP_MARKET',
