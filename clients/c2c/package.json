@@ -1,7 +1,7 @@
 {
     "name": "@binance/c2c",
     "description": "Official Binance C2C Connector - A lightweight library that provides a convenient interface to Binance's C2C REST API.",
-    "version": "4.1.3",
+    "version": "4.1.6",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",
@@ -56,7 +56,7 @@
         "typescript-eslint": "^8.24.0"
     },
     "dependencies": {
-        "@binance/common": "2.3.1",
+        "@binance/common": "2.3.2",
         "axios": "^1.7.4"
     }
 }
