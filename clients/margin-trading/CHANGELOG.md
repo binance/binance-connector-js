@@ -1,5 +1,18 @@
 # Changelog
 
+## 12.0.0 - 2026-02-12
+
+### Added (2)
+
+#### REST API
+
+- `getMarginRestrictedAssets()` (`GET /sapi/v1/margin/restricted-asset`)
+- `queryPreventedMatches()` (`GET /sapi/v1/margin/myPreventedMatches`)
+
+### Changed (1)
+
+- Update `@binance/common` library to version `2.3.2`.
+
 ## 11.0.0 - 2026-01-27
 
 ### Added (1)

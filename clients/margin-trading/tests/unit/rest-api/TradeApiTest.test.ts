@@ -48,6 +48,7 @@ import {
     QueryMarginAccountsOpenOrdersRequest,
     QueryMarginAccountsOrderRequest,
     QueryMarginAccountsTradeListRequest,
+    QueryPreventedMatchesRequest,
     QuerySpecialKeyRequest,
     QuerySpecialKeyListRequest,
     SmallLiabilityExchangeRequest,
@@ -73,6 +74,7 @@ import type {
     QueryMarginAccountsOpenOrdersResponse,
     QueryMarginAccountsOrderResponse,
     QueryMarginAccountsTradeListResponse,
+    QueryPreventedMatchesResponse,
     QuerySpecialKeyListResponse,
     QuerySpecialKeyResponse,
 } from '../../../src/rest-api/types';
@@ -3509,6 +3511,118 @@ describe('TradeApi', () => {
             await expect(client.queryMarginAccountsTradeList(params)).rejects.toThrow(
                 'ResponseError'
             );
+            spy.mockRestore();
+        });
+    });
+
+    describe('queryPreventedMatches()', () => {
+        it('should execute queryPreventedMatches() successfully with required parameters only', async () => {
+            const params: QueryPreventedMatchesRequest = {
+                symbol: 'symbol_example',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BTCUSDT',
+                        preventedMatchId: 1,
+                        takerOrderId: 5,
+                        makerSymbol: 'BTCUSDT',
+                        makerOrderId: 3,
+                        tradeGroupId: 1,
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
+                        price: '1.100000',
+                        makerPreventedQuantity: '1.300000',
+                        transactTime: 1669101687094,
+                    },
+                ])
+            );
+
+            const spy = jest.spyOn(client, 'queryPreventedMatches').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<QueryPreventedMatchesResponse>)
+            );
+            const response = await client.queryPreventedMatches(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute queryPreventedMatches() successfully with optional parameters', async () => {
+            const params: QueryPreventedMatchesRequest = {
+                symbol: 'symbol_example',
+                preventedMatchId: 1,
+                orderId: 1,
+                fromPreventedMatchId: 1,
+                recvWindow: 5000,
+                isIsolated: 'false',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        symbol: 'BTCUSDT',
+                        preventedMatchId: 1,
+                        takerOrderId: 5,
+                        makerSymbol: 'BTCUSDT',
+                        makerOrderId: 3,
+                        tradeGroupId: 1,
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
+                        price: '1.100000',
+                        makerPreventedQuantity: '1.300000',
+                        transactTime: 1669101687094,
+                    },
+                ])
+            );
+
+            const spy = jest.spyOn(client, 'queryPreventedMatches').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<QueryPreventedMatchesResponse>)
+            );
+            const response = await client.queryPreventedMatches(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when symbol is missing', async () => {
+            const _params: QueryPreventedMatchesRequest = {
+                symbol: 'symbol_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.symbol;
+
+            await expect(client.queryPreventedMatches(params)).rejects.toThrow(
+                'Required parameter symbol was null or undefined when calling queryPreventedMatches.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: QueryPreventedMatchesRequest = {
+                symbol: 'symbol_example',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'queryPreventedMatches')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.queryPreventedMatches(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

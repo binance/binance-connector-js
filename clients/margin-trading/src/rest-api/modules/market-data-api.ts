@@ -28,6 +28,7 @@ import type {
     GetLimitPricePairsResponse,
     GetListScheduleResponse,
     GetMarginAssetRiskBasedLiquidationRatioResponse,
+    GetMarginRestrictedAssetsResponse,
     QueryIsolatedMarginTierDataResponse,
     QueryLiabilityCoinLeverageBracketInCrossMarginProModeResponse,
     QueryMarginAvailableInventoryResponse,
@@ -262,6 +263,30 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
 
             return {
                 endpoint: '/sapi/v1/margin/risk-based-liquidation-ratio',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Get Margin Restricted Assets
+         *
+         * Weight: 1
+         *
+         * @summary Get Margin Restricted Assets (MARKET_DATA)
+         *
+         * @throws {RequiredError}
+         */
+        getMarginRestrictedAssets: async (): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/margin/restricted-asset',
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
@@ -518,6 +543,17 @@ export interface MarketDataApiInterface {
     getMarginAssetRiskBasedLiquidationRatio(): Promise<
         RestApiResponse<GetMarginAssetRiskBasedLiquidationRatioResponse>
     >;
+    /**
+     * Get Margin Restricted Assets
+     *
+     * Weight: 1
+     *
+     * @summary Get Margin Restricted Assets (MARKET_DATA)
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApiInterface
+     */
+    getMarginRestrictedAssets(): Promise<RestApiResponse<GetMarginRestrictedAssetsResponse>>;
     /**
      * Get isolated margin tier data collection with any tier as https://www.binance.com/en/margin-data
      *
@@ -931,6 +967,32 @@ export class MarketDataApi implements MarketDataApiInterface {
         const localVarAxiosArgs =
             await this.localVarAxiosParamCreator.getMarginAssetRiskBasedLiquidationRatio();
         return sendRequest<GetMarginAssetRiskBasedLiquidationRatioResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: false }
+        );
+    }
+
+    /**
+     * Get Margin Restricted Assets
+     *
+     * Weight: 1
+     *
+     * @summary Get Margin Restricted Assets (MARKET_DATA)
+     * @returns {Promise<RestApiResponse<GetMarginRestrictedAssetsResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApi
+     * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Get-Margin-Restricted-Assets Binance API Documentation}
+     */
+    public async getMarginRestrictedAssets(): Promise<
+        RestApiResponse<GetMarginRestrictedAssetsResponse>
+        > {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getMarginRestrictedAssets();
+        return sendRequest<GetMarginRestrictedAssetsResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

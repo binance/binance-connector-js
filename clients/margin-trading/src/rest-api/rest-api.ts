@@ -74,6 +74,7 @@ import type {
     QueryMarginAccountsOpenOrdersRequest,
     QueryMarginAccountsOrderRequest,
     QueryMarginAccountsTradeListRequest,
+    QueryPreventedMatchesRequest,
     QuerySpecialKeyRequest,
     QuerySpecialKeyListRequest,
     SmallLiabilityExchangeRequest,
@@ -113,6 +114,7 @@ import type {
     GetLimitPricePairsResponse,
     GetListScheduleResponse,
     GetMarginAssetRiskBasedLiquidationRatioResponse,
+    GetMarginRestrictedAssetsResponse,
     QueryIsolatedMarginTierDataResponse,
     QueryLiabilityCoinLeverageBracketInCrossMarginProModeResponse,
     QueryMarginAvailableInventoryResponse,
@@ -140,6 +142,7 @@ import type {
     QueryMarginAccountsOpenOrdersResponse,
     QueryMarginAccountsOrderResponse,
     QueryMarginAccountsTradeListResponse,
+    QueryPreventedMatchesResponse,
     QuerySpecialKeyResponse,
     QuerySpecialKeyListResponse,
 } from './types';
@@ -691,6 +694,21 @@ export class RestAPI {
         RestApiResponse<GetMarginAssetRiskBasedLiquidationRatioResponse>
         > {
         return this.marketDataApi.getMarginAssetRiskBasedLiquidationRatio();
+    }
+
+    /**
+     * Get Margin Restricted Assets
+     *
+     * Weight: 1
+     *
+     * @summary Get Margin Restricted Assets (MARKET_DATA)
+     *
+     * @returns {Promise<RestApiResponse<GetMarginRestrictedAssetsResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/margin_trading/market-data/Get-Margin-Restricted-Assets Binance API Documentation}
+     */
+    getMarginRestrictedAssets(): Promise<RestApiResponse<GetMarginRestrictedAssetsResponse>> {
+        return this.marketDataApi.getMarginRestrictedAssets();
     }
 
     /**
@@ -1280,6 +1298,23 @@ export class RestAPI {
         requestParameters: QueryMarginAccountsTradeListRequest
     ): Promise<RestApiResponse<QueryMarginAccountsTradeListResponse>> {
         return this.tradeApi.queryMarginAccountsTradeList(requestParameters);
+    }
+
+    /**
+     *
+     * Weight: 10(IP)
+     *
+     * @summary Query Prevented Matches(USER_DATA)
+     * @param {QueryPreventedMatchesRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<QueryPreventedMatchesResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Prevented-Matches Binance API Documentation}
+     */
+    queryPreventedMatches(
+        requestParameters: QueryPreventedMatchesRequest
+    ): Promise<RestApiResponse<QueryPreventedMatchesResponse>> {
+        return this.tradeApi.queryPreventedMatches(requestParameters);
     }
 
     /**

@@ -35,6 +35,7 @@ import type {
     GetLimitPricePairsResponse,
     GetListScheduleResponse,
     GetMarginAssetRiskBasedLiquidationRatioResponse,
+    GetMarginRestrictedAssetsResponse,
     QueryIsolatedMarginTierDataResponse,
     QueryLiabilityCoinLeverageBracketInCrossMarginProModeResponse,
     QueryMarginAvailableInventoryResponse,
@@ -671,6 +672,47 @@ describe('MarketDataApi', () => {
             await expect(client.getMarginAssetRiskBasedLiquidationRatio()).rejects.toThrow(
                 'ResponseError'
             );
+            spy.mockRestore();
+        });
+    });
+
+    describe('getMarginRestrictedAssets()', () => {
+        it('should execute getMarginRestrictedAssets() successfully with required parameters only', async () => {
+            mockResponse = JSONParse(
+                JSONStringify({
+                    openLongRestrictedAsset: ['ADA', 'CHZ', 'ETH', 'LTC', 'XRP', '币安人生'],
+                    maxCollateralExceededAsset: ['ACH', 'BNB', 'BTC', 'USDT'],
+                })
+            );
+
+            const spy = jest.spyOn(client, 'getMarginRestrictedAssets').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetMarginRestrictedAssetsResponse>)
+            );
+            const response = await client.getMarginRestrictedAssets();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'getMarginRestrictedAssets')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.getMarginRestrictedAssets()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

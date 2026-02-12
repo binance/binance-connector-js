@@ -1,7 +1,7 @@
 {
     "name": "@binance/margin-trading",
     "description": "Official Binance Margin Trading Connector - A lightweight library that provides a convenient interface to Binance's Margin Trading REST API.",
-    "version": "11.0.0",
+    "version": "12.0.0",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",
@@ -55,7 +55,7 @@
         "typescript-eslint": "^8.24.0"
     },
     "dependencies": {
-        "@binance/common": "2.3.1",
+        "@binance/common": "2.3.2",
         "axios": "^1.7.4"
     }
 }
