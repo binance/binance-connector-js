@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.12 - 2026-02-24
+
+### Changed (1)
+
+- Bump axios from 1.12.0 to 1.13.5.
+
 ## 1.0.11 - 2026-02-12
 
 ### Changed (1)
