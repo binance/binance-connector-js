@@ -1,5 +1,12 @@
 # Changelog
 
+## 27.0.2 - 2026-02-24
+
+### Changed (2)
+
+- Update `@binance/common` library to version `2.3.3`.
+- Resolve security vulnerabilities on `axios`.
+
 ## 27.0.1 - 2026-02-12
 
 ### Changed (1)
