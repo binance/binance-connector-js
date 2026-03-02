@@ -1,5 +1,12 @@
 # Changelog
 
+## 12.0.2 - 2026-03-02
+
+### Changed (2)
+
+- Update `@binance/common` library to version `2.3.4`.
+- Resolve security vulnerabilities on `minimatch`.
+
 ## 12.0.1 - 2026-02-24
 
 ### Changed (2)
