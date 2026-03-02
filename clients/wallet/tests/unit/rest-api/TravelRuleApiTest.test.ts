@@ -1067,8 +1067,12 @@ describe('TravelRuleApi', () => {
         it('should execute vaspList() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
                 JSONStringify([
-                    { vaspName: 'Binance', vaspCode: 'BINANCE' },
-                    { vaspName: 'HashKeyGlobal', vaspCode: 'NVBH3Z_nNEHjvqbUfkaL' },
+                    { vaspCode: 'BINANCE', vaspName: 'Binance', identifier: 'I1QNLP' },
+                    {
+                        vaspCode: 'NVBH3Z_nNEHjvqbUfkaL',
+                        vaspName: 'HashKeyGlobal',
+                        identifier: 'ABC123',
+                    },
                 ])
             );
 
@@ -1093,8 +1097,12 @@ describe('TravelRuleApi', () => {
 
             mockResponse = JSONParse(
                 JSONStringify([
-                    { vaspName: 'Binance', vaspCode: 'BINANCE' },
-                    { vaspName: 'HashKeyGlobal', vaspCode: 'NVBH3Z_nNEHjvqbUfkaL' },
+                    { vaspCode: 'BINANCE', vaspName: 'Binance', identifier: 'I1QNLP' },
+                    {
+                        vaspCode: 'NVBH3Z_nNEHjvqbUfkaL',
+                        vaspName: 'HashKeyGlobal',
+                        identifier: 'ABC123',
+                    },
                 ])
             );
 

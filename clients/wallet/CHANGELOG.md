@@ -1,5 +1,15 @@
 # Changelog
 
+## 17.0.0 - 2026-03-02
+
+### Changed (3)
+
+- Update `@binance/common` library to version `2.3.4`.
+- Resolve security vulnerabilities on `minimatch`.
+- Modified response for `vaspList()` (`GET /sapi/v1/localentity/vasp`):
+  - items: property `identifier` added
+  - items: item property `identifier` added
+
 ## 16.0.2 - 2026-02-24
 
 ### Changed (2)

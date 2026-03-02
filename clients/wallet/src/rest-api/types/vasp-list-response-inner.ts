@@ -24,11 +24,17 @@ export interface VaspListResponseInner {
      * @type {string}
      * @memberof VaspListResponseInner
      */
+    vaspCode?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof VaspListResponseInner
+     */
     vaspName?: string;
     /**
      *
      * @type {string}
      * @memberof VaspListResponseInner
      */
-    vaspCode?: string;
+    identifier?: string;
 }
