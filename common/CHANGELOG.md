@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.3.4 - 2026-03-02
+
+### Changed (1)
+
+- Resolve security vulnerabilities on `minimatch`.
+
 ## 2.3.3 - 2026-02-24
 
 ### Changed (1)
