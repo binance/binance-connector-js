@@ -69,6 +69,12 @@ export interface CancelOrderResponse {
     price?: string;
     /**
      *
+     * @type {string}
+     * @memberof CancelOrderResponse
+     */
+    avgPrice?: string;
+    /**
+     *
      * @type {boolean}
      * @memberof CancelOrderResponse
      */

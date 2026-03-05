@@ -436,7 +436,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Query funding rate info for symbols that had FundingRateCap/ FundingRateFloor / fundingIntervalHours adjustment
          *
          * Weight: 0
-         * share 500/5min/IP rate limit with GET /fapi/v1/fundingInfo
+         * share 500/5min/IP rate limit with GET /fapi/v1/fundingRate
          *
          * @summary Get Funding Rate Info
          *
@@ -1711,7 +1711,7 @@ export interface MarketDataApiInterface {
      * Query funding rate info for symbols that had FundingRateCap/ FundingRateFloor / fundingIntervalHours adjustment
      *
      * Weight: 0
-     * share 500/5min/IP rate limit with GET /fapi/v1/fundingInfo
+     * share 500/5min/IP rate limit with GET /fapi/v1/fundingRate
      *
      * @summary Get Funding Rate Info
      *
@@ -3238,7 +3238,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * Query funding rate info for symbols that had FundingRateCap/ FundingRateFloor / fundingIntervalHours adjustment
      *
      * Weight: 0
-     * share 500/5min/IP rate limit with GET /fapi/v1/fundingInfo
+     * share 500/5min/IP rate limit with GET /fapi/v1/fundingRate
      *
      * @summary Get Funding Rate Info
      * @returns {Promise<RestApiResponse<GetFundingRateInfoResponse>>}
