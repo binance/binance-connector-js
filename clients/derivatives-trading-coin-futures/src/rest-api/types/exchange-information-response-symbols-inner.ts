@@ -35,7 +35,7 @@ export interface ExchangeInformationResponseSymbolsInner {
      * @type {Array<string>}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
-    OrderType?: Array<string>;
+    orderTypes?: Array<string>;
     /**
      *
      * @type {Array<string>}

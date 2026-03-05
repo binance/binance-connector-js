@@ -1,5 +1,17 @@
 # Changelog
 
+## 13.0.0 - 2026-03-05
+
+### Changed (1)
+
+#### REST API
+
+- Modified response for `exchangeInformation()` (`GET /dapi/v1/exchangeInfo`):
+  - `symbols`.items: property `orderTypes` added
+  - `symbols`.items: property `OrderType` deleted
+  - `symbols`.items: item property `orderTypes` added
+  - `symbols`.items: item property `OrderType` deleted
+
 ## 12.0.3 - 2026-03-02
 
 ### Changed (2)
