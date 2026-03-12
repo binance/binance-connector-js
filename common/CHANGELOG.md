@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.3.5 - 2026-03-12
+
+### Added (1)
+
+- Handle `serverShutdown` event.
+
+### Changed (1)
+
+- Fixed bug with PING/PONG mechanism on Bun.
+
 ## 2.3.4 - 2026-03-02
 
 ### Changed (1)

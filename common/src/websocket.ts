@@ -175,6 +175,20 @@ export class WebsocketCommon extends WebsocketEventEmitter {
     }
 
     /**
+     * Checks if the message is `serverShutdown`.
+     * This is used to identify server shutdown events in incoming WebSocket messages.
+     *
+     * @param message - The message to check for a server shutdown event.
+     * @returns `true` if the message indicates a server shutdown event, `false` otherwise.
+     */
+    protected isServerShutdownEvent(message: any): boolean {
+        if (!message || typeof message !== 'object') return false;
+        return (
+            'event' in message && 'e' in message['event'] && message?.event?.e === 'serverShutdown'
+        );
+    }
+
+    /**
      * Checks if the provided WebSocket connection is ready for use.
      * A connection is considered ready if it is open, has no pending reconnection, and has not been closed.
      * @param connection - The WebSocket connection to check.
@@ -280,7 +294,7 @@ export class WebsocketCommon extends WebsocketEventEmitter {
      * @param url - The URL to use for the reconnection or renewal.
      * @param isRenewal - A flag indicating whether this is a renewal (true) or a reconnection (false).
      */
-    private enqueueReconnection(
+    protected enqueueReconnection(
         connection: WebsocketConnection,
         url: string,
         isRenewal: boolean
@@ -545,11 +559,11 @@ export class WebsocketCommon extends WebsocketEventEmitter {
             this.onMessage(data.toString(), targetConnection);
         });
 
-        ws.on('ping', () => {
+        ws.on('ping', (data: Buffer) => {
             this.logger.debug('Received PING from server');
-            this.emit('ping');
-            ws.pong();
-            this.logger.debug('Responded PONG to server\'s PING message');
+            this.emit('ping', data);
+            ws.pong(data);
+            this.logger.debug(`Responded PONG to server's PING message with: ${data}`);
         });
 
         ws.on('pong', () => {
@@ -651,7 +665,7 @@ export class WebsocketCommon extends WebsocketEventEmitter {
 
         connectedConnections.forEach((connection) => {
             if (connection.ws) {
-                connection.ws.ping();
+                connection.ws.ping(Buffer.alloc(0));
                 this.logger.debug(`PING sent to connection with id ${connection.id}`);
             } else {
                 this.logger.error('WebSocket Client not set for a connection.');
@@ -771,13 +785,21 @@ export class WebsocketAPIBase extends WebsocketCommon {
     protected onMessage<T>(data: string, connection: WebsocketConnection): void {
         try {
             const message = JSONParse(data);
-            const { id, status } = message;
+            if (this.isServerShutdownEvent(message)) {
+                this.logger.warn(`Received serverShutdown event on connection ${connection.id}.`);
 
-            if (id && connection.pendingRequests.has(id)) {
-                const request = connection.pendingRequests.get(id);
-                connection.pendingRequests.delete(id);
+                if (!connection.renewalPending && !connection.closeInitiated) {
+                    this.enqueueReconnection(
+                        connection,
+                        this.prepareURL(this.configuration.wsURL as string),
+                        true
+                    );
+                }
+            } else if (message.id && connection.pendingRequests.has(message.id)) {
+                const request = connection.pendingRequests.get(message.id);
+                connection.pendingRequests.delete(message.id);
 
-                if (status && status >= 400) {
+                if (message.status && message.status >= 400) {
                     request?.reject(message.error);
                 } else {
                     const response: WebsocketApiResponse<T> = {

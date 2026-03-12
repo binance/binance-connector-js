@@ -226,9 +226,10 @@ describe('WebsocketCommon', () => {
             const pingListener = jest.fn();
             wsCommon.on('ping', pingListener);
 
-            wsCommon.connectionPool[0].ws?.emit('ping');
-            expect(pingListener).toHaveBeenCalled();
-            expect(wsCommon.connectionPool[0].ws?.pong).toHaveBeenCalled();
+            const data = Buffer.alloc(0);
+            wsCommon.connectionPool[0].ws?.emit('ping', data);
+            expect(pingListener).toHaveBeenCalledWith(data);
+            expect(wsCommon.connectionPool[0].ws?.pong).toHaveBeenCalledWith(data);
         });
 
         it('should emit error event correctly', () => {
@@ -2263,6 +2264,102 @@ describe('WebsocketAPIBase', () => {
                 'invalid-json',
                 expect.any(SyntaxError)
             );
+        });
+
+        it('should initiate renewal when receiving a serverShutdown event', () => {
+            const connection = connectionPool[0];
+            const initConnectSpy = jest.spyOn(wsAPI as never, 'initConnect');
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (wsAPI as any).onMessage(
+                JSON.stringify({
+                    event: { e: 'serverShutdown' },
+                }),
+                connection
+            );
+
+            expect(mockLogger.warn).toHaveBeenCalledWith(
+                `Received serverShutdown event on connection ${connection.id}.`
+            );
+            expect(initConnectSpy).toHaveBeenCalledWith(
+                expect.stringContaining('wss://ws-api.binance.com:443/ws-api/v3'),
+                true,
+                connection
+            );
+        });
+
+        it('should still emit message event on API serverShutdown message', () => {
+            const connection = connectionPool[0];
+            const messageListener = jest.fn();
+
+            wsAPI.on('message', messageListener);
+
+            const payload = JSON.stringify({ event: { e: 'serverShutdown' } });
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (wsAPI as any).onMessage(payload, connection);
+
+            expect(messageListener).toHaveBeenCalledWith(payload, connection);
+        });
+
+        it('should not initiate renewal on serverShutdown when renewal is already pending', () => {
+            const connection = connectionPool[0];
+            connection.renewalPending = true;
+
+            const initConnectSpy = jest.spyOn(wsAPI as never, 'initConnect');
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (wsAPI as any).onMessage(
+                JSON.stringify({
+                    event: { e: 'serverShutdown' },
+                }),
+                connection
+            );
+
+            expect(initConnectSpy).not.toHaveBeenCalled();
+        });
+
+        it('should not initiate renewal on serverShutdown when close was initiated', () => {
+            const connection = connectionPool[0];
+            connection.closeInitiated = true;
+
+            const initConnectSpy = jest.spyOn(wsAPI as never, 'initConnect');
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (wsAPI as any).onMessage(
+                JSON.stringify({
+                    event: { e: 'serverShutdown' },
+                }),
+                connection
+            );
+
+            expect(initConnectSpy).not.toHaveBeenCalled();
+        });
+
+        it('should not initiate renewal for non-serverShutdown API events', () => {
+            const connection = connectionPool[0];
+            const initConnectSpy = jest.spyOn(wsAPI as never, 'initConnect');
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (wsAPI as any).onMessage(
+                JSON.stringify({
+                    event: { e: 'executionReport' },
+                }),
+                connection
+            );
+
+            expect(initConnectSpy).not.toHaveBeenCalled();
+        });
+
+        it('should not initiate renewal for malformed API payload', () => {
+            const connection = connectionPool[0];
+            const initConnectSpy = jest.spyOn(wsAPI as never, 'initConnect');
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (wsAPI as any).onMessage('{invalid-json', connection);
+
+            expect(initConnectSpy).not.toHaveBeenCalled();
+            expect(mockLogger.error).toHaveBeenCalled();
         });
     });
 
