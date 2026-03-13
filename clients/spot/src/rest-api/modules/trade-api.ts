@@ -388,11 +388,10 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
-         * Cancels an existing order and places a new order on the same symbol.
-         *
+         * * Cancels an existing order and places a new order on the same symbol.
          * Filters and Order Count are evaluated before the processing of the cancellation and order placement occurs.
-         *
          * A new order that was not attempted (i.e. when `newOrderResult: NOT_ATTEMPTED`), will still increase the unfilled order count by 1.
+         * You can only cancel an individual order from an orderList using this endpoint, but the result is the same as canceling the entire orderList.
          * Weight: 1
          *
          * @summary Cancel an Existing Order and Send a New Order
@@ -2247,11 +2246,10 @@ export interface TradeApiInterface {
         requestParameters: OrderAmendKeepPriorityRequest
     ): Promise<RestApiResponse<OrderAmendKeepPriorityResponse>>;
     /**
-     * Cancels an existing order and places a new order on the same symbol.
-     *
+     * * Cancels an existing order and places a new order on the same symbol.
      * Filters and Order Count are evaluated before the processing of the cancellation and order placement occurs.
-     *
      * A new order that was not attempted (i.e. when `newOrderResult: NOT_ATTEMPTED`), will still increase the unfilled order count by 1.
+     * You can only cancel an individual order from an orderList using this endpoint, but the result is the same as canceling the entire orderList.
      * Weight: 1
      *
      * @summary Cancel an Existing Order and Send a New Order
@@ -4871,11 +4869,10 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Cancels an existing order and places a new order on the same symbol.
-     *
+     * * Cancels an existing order and places a new order on the same symbol.
      * Filters and Order Count are evaluated before the processing of the cancellation and order placement occurs.
-     *
      * A new order that was not attempted (i.e. when `newOrderResult: NOT_ATTEMPTED`), will still increase the unfilled order count by 1.
+     * You can only cancel an individual order from an orderList using this endpoint, but the result is the same as canceling the entire orderList.
      * Weight: 1
      *
      * @summary Cancel an Existing Order and Send a New Order

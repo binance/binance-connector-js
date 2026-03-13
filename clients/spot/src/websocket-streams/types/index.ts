@@ -33,6 +33,7 @@ export * from './percent-price-by-side-filter';
 export * from './percent-price-filter';
 export * from './price-filter';
 export * from './rate-limits';
+export * from './reference-price-response';
 export * from './rolling-window-ticker-response';
 export * from './symbol-filters';
 export * from './tplus-sell-filter';

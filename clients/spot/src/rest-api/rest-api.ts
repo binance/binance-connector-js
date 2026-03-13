@@ -38,7 +38,7 @@ import type {
     OrderAmendmentsRequest,
     RateLimitOrderRequest,
 } from './modules/account-api';
-import type { ExchangeInfoRequest } from './modules/general-api';
+import type { ExchangeInfoRequest, ExecutionRulesRequest } from './modules/general-api';
 import type {
     AggTradesRequest,
     AvgPriceRequest,
@@ -46,6 +46,8 @@ import type {
     GetTradesRequest,
     HistoricalTradesRequest,
     KlinesRequest,
+    ReferencePriceRequest,
+    ReferencePriceCalculationRequest,
     TickerRequest,
     Ticker24hrRequest,
     TickerBookTickerRequest,
@@ -87,7 +89,7 @@ import type {
     OrderAmendmentsResponse,
     RateLimitOrderResponse,
 } from './types';
-import type { ExchangeInfoResponse, TimeResponse } from './types';
+import type { ExchangeInfoResponse, ExecutionRulesResponse, TimeResponse } from './types';
 import type {
     AggTradesResponse,
     AvgPriceResponse,
@@ -95,6 +97,8 @@ import type {
     GetTradesResponse,
     HistoricalTradesResponse,
     KlinesResponse,
+    ReferencePriceResponse,
+    ReferencePriceCalculationResponse,
     TickerResponse,
     Ticker24hrResponse,
     TickerBookTickerResponse,
@@ -452,6 +456,28 @@ export class RestAPI {
     }
 
     /**
+     *
+     * Weight: Parameter | Weight|
+     * ---        | ---
+     * `symbol`  | 2
+     * `symbols` | 2 for each `symbol`, capped at a max of 40|
+     * `symbolStatus` |40|
+     * None            |40|
+     *
+     * @summary Query Execution Rules
+     * @param {ExecutionRulesRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<ExecutionRulesResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#query-execution-rules Binance API Documentation}
+     */
+    executionRules(
+        requestParameters: ExecutionRulesRequest = {}
+    ): Promise<RestApiResponse<ExecutionRulesResponse>> {
+        return this.generalApi.executionRules(requestParameters);
+    }
+
+    /**
      * Test connectivity to the Rest API.
      * Weight: 1
      *
@@ -577,6 +603,40 @@ export class RestAPI {
      */
     klines(requestParameters: KlinesRequest): Promise<RestApiResponse<KlinesResponse>> {
         return this.marketApi.klines(requestParameters);
+    }
+
+    /**
+     *
+     * Weight: 2
+     *
+     * @summary Query Reference Price
+     * @param {ReferencePriceRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<ReferencePriceResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#query-reference-price Binance API Documentation}
+     */
+    referencePrice(
+        requestParameters: ReferencePriceRequest
+    ): Promise<RestApiResponse<ReferencePriceResponse>> {
+        return this.marketApi.referencePrice(requestParameters);
+    }
+
+    /**
+     * Describes how reference price is calculated for a given symbol.
+     * Weight: 2
+     *
+     * @summary Query Reference Price Calculation
+     * @param {ReferencePriceCalculationRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<ReferencePriceCalculationResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#query-reference-price-calculation Binance API Documentation}
+     */
+    referencePriceCalculation(
+        requestParameters: ReferencePriceCalculationRequest
+    ): Promise<RestApiResponse<ReferencePriceCalculationResponse>> {
+        return this.marketApi.referencePriceCalculation(requestParameters);
     }
 
     /**
@@ -854,11 +914,10 @@ export class RestAPI {
     }
 
     /**
-     * Cancels an existing order and places a new order on the same symbol.
-     *
+     * * Cancels an existing order and places a new order on the same symbol.
      * Filters and Order Count are evaluated before the processing of the cancellation and order placement occurs.
-     *
      * A new order that was not attempted (i.e. when `newOrderResult: NOT_ATTEMPTED`), will still increase the unfilled order count by 1.
+     * You can only cancel an individual order from an orderList using this endpoint, but the result is the same as canceling the entire orderList.
      * Weight: 1
      *
      * @summary Cancel an Existing Order and Send a New Order

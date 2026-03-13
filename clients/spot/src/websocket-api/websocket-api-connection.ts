@@ -53,11 +53,18 @@ import type {
     SessionLogoutRequest,
     SessionStatusRequest,
 } from './modules/auth-api';
-import type { ExchangeInfoRequest, PingRequest, TimeRequest } from './modules/general-api';
+import type {
+    ExchangeInfoRequest,
+    ExecutionRulesRequest,
+    PingRequest,
+    TimeRequest,
+} from './modules/general-api';
 import type {
     AvgPriceRequest,
     DepthRequest,
     KlinesRequest,
+    ReferencePriceRequest,
+    ReferencePriceCalculationRequest,
     TickerRequest,
     Ticker24hrRequest,
     TickerBookRequest,
@@ -109,11 +116,18 @@ import type {
     OrderStatusResponse,
 } from './types';
 import type { SessionLogonResponse, SessionLogoutResponse, SessionStatusResponse } from './types';
-import type { ExchangeInfoResponse, PingResponse, TimeResponse } from './types';
+import type {
+    ExchangeInfoResponse,
+    ExecutionRulesResponse,
+    PingResponse,
+    TimeResponse,
+} from './types';
 import type {
     AvgPriceResponse,
     DepthResponse,
     KlinesResponse,
+    ReferencePriceResponse,
+    ReferencePriceCalculationResponse,
     TickerResponse,
     Ticker24hrResponse,
     TickerBookResponse,
@@ -564,6 +578,27 @@ export class WebsocketAPIConnection {
     }
 
     /**
+     *
+     * Weight: Parameter | Weight|
+     * ---        | ---
+     * `symbol`  | 2
+     * `symbols` | 2 for each `symbol`, capped at a max of 40|
+     * `symbolStatus` |40|
+     * None            |40|
+     *
+     * @summary WebSocket Query Execution Rules
+     * @param {ExecutionRulesRequest} requestParameters Request parameters.
+     *
+     * @returns Promise<WebsocketApiResponse<ExecutionRulesResponse>>
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-requests#query-execution-rules Binance API Documentation}
+     */
+    executionRules(
+        requestParameters: ExecutionRulesRequest = {}
+    ): Promise<WebsocketApiResponse<ExecutionRulesResponse>> {
+        return this.generalApi.executionRules(requestParameters);
+    }
+
+    /**
      * Test connectivity to the WebSocket API.
      * Weight: 1
      *
@@ -656,6 +691,38 @@ export class WebsocketAPIConnection {
      */
     klines(requestParameters: KlinesRequest): Promise<WebsocketApiResponse<KlinesResponse>> {
         return this.marketApi.klines(requestParameters);
+    }
+
+    /**
+     *
+     * Weight: 2
+     *
+     * @summary WebSocket Query Reference Price
+     * @param {ReferencePriceRequest} requestParameters Request parameters.
+     *
+     * @returns Promise<WebsocketApiResponse<ReferencePriceResponse>>
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#query-reference-price Binance API Documentation}
+     */
+    referencePrice(
+        requestParameters: ReferencePriceRequest
+    ): Promise<WebsocketApiResponse<ReferencePriceResponse>> {
+        return this.marketApi.referencePrice(requestParameters);
+    }
+
+    /**
+     * Describes how reference price is calculated for a given symbol.
+     * Weight: 2
+     *
+     * @summary WebSocket Query Reference Price Calculation
+     * @param {ReferencePriceCalculationRequest} requestParameters Request parameters.
+     *
+     * @returns Promise<WebsocketApiResponse<ReferencePriceCalculationResponse>>
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#query-reference-price-calculation Binance API Documentation}
+     */
+    referencePriceCalculation(
+        requestParameters: ReferencePriceCalculationRequest
+    ): Promise<WebsocketApiResponse<ReferencePriceCalculationResponse>> {
+        return this.marketApi.referencePriceCalculation(requestParameters);
     }
 
     /**
@@ -914,9 +981,9 @@ export class WebsocketAPIConnection {
     }
 
     /**
-     * Cancel an existing order and immediately place a new order instead of the canceled one.
-     *
+     * * Cancel an existing order and immediately place a new order instead of the canceled one.
      * A new order that was not attempted (i.e. when `newOrderResult: NOT_ATTEMPTED`), will still increase the unfilled order count by 1.
+     * You can only cancel an individual order from an orderList using this method, but the result is the same as canceling the entire orderList.
      * Weight: 1
      *
      * @summary WebSocket Cancel and replace order

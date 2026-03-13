@@ -34,6 +34,7 @@ import type {
     KlineResponse,
     MiniTickerResponse,
     PartialBookDepthResponse,
+    ReferencePriceResponse,
     RollingWindowTickerResponse,
     TickerResponse,
     TradeResponse,
@@ -240,6 +241,24 @@ const WebSocketStreamsApiParamCreator = function () {
             );
         },
         /**
+         *
+         *
+         * @summary WebSocket Reference Price Streams
+         * @param {string} symbol Symbol to query
+         * @param {string} [id] Unique WebSocket request ID.
+         *
+         * @throws {RequiredError}
+         */
+        referencePrice: (symbol: string, id?: string): string => {
+            // verify required parameter 'symbol' is not null or undefined
+            assertParamExists('referencePrice', 'symbol', symbol);
+
+            return replaceWebsocketStreamsPlaceholders('/<symbol>@referencePrice'.slice(1), {
+                symbol,
+                id,
+            });
+        },
+        /**
          * Rolling window ticker statistics for a single symbol, computed over multiple windows.
          *
          * @summary WebSocket Individual Symbol Rolling Window Statistics Streams
@@ -430,6 +449,20 @@ export interface WebSocketStreamsApiInterface {
     partialBookDepth(
         requestParameters: PartialBookDepthRequest
     ): WebsocketStream<PartialBookDepthResponse>;
+
+    /**
+     *
+     *
+     * @summary WebSocket Reference Price Streams
+     * @param {ReferencePriceRequest} requestParameters Request parameters.
+     *
+     * @returns {WebsocketStream<ReferencePriceResponse>}
+     * @throws {RequiredError}
+     * @memberof WebSocketStreamsApiInterface
+     */
+    referencePrice(
+        requestParameters: ReferencePriceRequest
+    ): WebsocketStream<ReferencePriceResponse>;
 
     /**
      * Rolling window ticker statistics for a single symbol, computed over multiple windows.
@@ -696,6 +729,26 @@ export interface PartialBookDepthRequest {
      * @memberof WebSocketStreamsApiPartialBookDepth
      */
     readonly updateSpeed?: string;
+}
+
+/**
+ * Request parameters for referencePrice operation in WebSocketStreamsApi.
+ * @interface ReferencePriceRequest
+ */
+export interface ReferencePriceRequest {
+    /**
+     * Symbol to query
+     * @type {string}
+     * @memberof WebSocketStreamsApiReferencePrice
+     */
+    readonly symbol: string;
+
+    /**
+     * Unique WebSocket request ID.
+     * @type {string}
+     * @memberof WebSocketStreamsApiReferencePrice
+     */
+    readonly id?: string;
 }
 
 /**
@@ -1019,6 +1072,31 @@ export class WebSocketStreamsApi implements WebSocketStreamsApiInterface {
         );
 
         return createStreamHandler<PartialBookDepthResponse>(
+            this.websocketBase,
+            stream,
+            requestParameters?.id
+        );
+    }
+
+    /**
+     *
+     *
+     * @summary WebSocket Reference Price Streams
+     * @param {ReferencePriceRequest} requestParameters Request parameters.
+     * @returns {WebsocketStream<ReferencePriceResponse>}
+     * @throws {RequiredError}
+     * @memberof WebSocketStreamsApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#reference-price-streams Binance API Documentation}
+     */
+    public referencePrice(
+        requestParameters: ReferencePriceRequest
+    ): WebsocketStream<ReferencePriceResponse> {
+        const stream = this.localVarParamCreator.referencePrice(
+            requestParameters?.symbol,
+            requestParameters?.id
+        );
+
+        return createStreamHandler<ReferencePriceResponse>(
             this.websocketBase,
             stream,
             requestParameters?.id

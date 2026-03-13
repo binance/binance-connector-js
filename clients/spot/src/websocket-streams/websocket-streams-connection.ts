@@ -30,6 +30,7 @@ import type {
     KlineOffsetRequest,
     MiniTickerRequest,
     PartialBookDepthRequest,
+    ReferencePriceRequest,
     RollingWindowTickerRequest,
     TickerRequest,
     TradeRequest,
@@ -46,6 +47,7 @@ import type {
     KlineOffsetResponse,
     MiniTickerResponse,
     PartialBookDepthResponse,
+    ReferencePriceResponse,
     RollingWindowTickerResponse,
     TickerResponse,
     TradeResponse,
@@ -295,6 +297,22 @@ export class WebsocketStreamsConnection {
         requestParameters: PartialBookDepthRequest
     ): WebsocketStream<PartialBookDepthResponse> {
         return this.webSocketStreamsApi.partialBookDepth(requestParameters);
+    }
+
+    /**
+     *
+     *
+     * @summary WebSocket Reference Price Streams
+     * @param {ReferencePriceRequest} requestParameters Request parameters.
+     *
+     * @returns {WebsocketStream<ReferencePriceResponse>}
+     * @throws {RequiredError}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#reference-price-streams Binance API Documentation}
+     */
+    referencePrice(
+        requestParameters: ReferencePriceRequest
+    ): WebsocketStream<ReferencePriceResponse> {
+        return this.webSocketStreamsApi.referencePrice(requestParameters);
     }
 
     /**

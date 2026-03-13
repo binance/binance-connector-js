@@ -348,4 +348,10 @@ export interface ExecutionReport {
      * @memberof ExecutionReport
      */
     gp?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ExecutionReport
+     */
+    eR?: string;
 }

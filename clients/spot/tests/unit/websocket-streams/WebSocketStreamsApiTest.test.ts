@@ -34,6 +34,7 @@ import {
     KlineOffsetRequest,
     MiniTickerRequest,
     PartialBookDepthRequest,
+    ReferencePriceRequest,
     RollingWindowTickerRequest,
     TickerRequest,
     TradeRequest,
@@ -1003,6 +1004,72 @@ describe('WebSocketStreamsApi', () => {
 
             expect(() => websocketStreamApi.partialBookDepth(params)).toThrow(
                 'Required parameter levels was null or undefined when calling partialBookDepth.'
+            );
+        });
+    });
+
+    describe('referencePrice()', () => {
+        it('should execute referencePrice() successfully', async () => {
+            const params: ReferencePriceRequest = {
+                symbol: 'bnbusdt',
+                id: 'e9d6b4349871b40611412680b3445fac',
+            };
+
+            const mockResponse = JSONParse(
+                JSONStringify({ e: 'referencePrice', s: 'BAZUSD', r: '1.00', t: 1770313263917 })
+            );
+
+            mockSubscription(
+                `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@referencePrice'.slice(1), params as unknown as Record<string, ReferencePriceRequest>)}`,
+                mockResponse
+            );
+        });
+
+        it('should handle referencePrice() WebSocket stream data', () => {
+            const configuration = new ConfigurationWebsocketStreams({});
+            const websocketStreamClient = new WebsocketStreamsBase(configuration);
+            const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
+
+            const params: ReferencePriceRequest = {
+                symbol: 'bnbusdt',
+                id: 'e9d6b4349871b40611412680b3445fac',
+            };
+
+            const mockResponse = JSONParse(
+                JSONStringify({ e: 'referencePrice', s: 'BAZUSD', r: '1.00', t: 1770313263917 })
+            );
+
+            const stream = websocketStreamApi.referencePrice(params);
+            const mockCallback = jest.fn(() => {});
+            stream.on('message', mockCallback);
+
+            websocketStreamClient['onMessage'](
+                JSONStringify({
+                    stream: replaceWebsocketStreamsPlaceholders(
+                        '/<symbol>@referencePrice'.slice(1),
+                        params as unknown as Record<string, ReferencePriceRequest>
+                    ),
+                    data: mockResponse,
+                }),
+                websocketStreamClient.connectionPool[0]
+            );
+
+            expect(mockCallback).toHaveBeenCalledWith(mockResponse);
+        });
+
+        it('should throw RequiredError when symbol is missing', () => {
+            const configuration = new ConfigurationWebsocketStreams({});
+            const websocketStreamClient = new WebsocketStreamsBase(configuration);
+            const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
+
+            const _params: ReferencePriceRequest = {
+                symbol: 'bnbusdt',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.symbol;
+
+            expect(() => websocketStreamApi.referencePrice(params)).toThrow(
+                'Required parameter symbol was null or undefined when calling referencePrice.'
             );
         });
     });

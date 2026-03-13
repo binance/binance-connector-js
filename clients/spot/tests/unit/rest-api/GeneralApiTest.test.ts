@@ -20,9 +20,17 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { GeneralApi, ExchangeInfoSymbolStatusEnum } from '../../../src/rest-api';
-import { ExchangeInfoRequest } from '../../../src/rest-api';
-import type { ExchangeInfoResponse, TimeResponse } from '../../../src/rest-api/types';
+import {
+    GeneralApi,
+    ExchangeInfoSymbolStatusEnum,
+    ExecutionRulesSymbolStatusEnum,
+} from '../../../src/rest-api';
+import { ExchangeInfoRequest, ExecutionRulesRequest } from '../../../src/rest-api';
+import type {
+    ExchangeInfoResponse,
+    ExecutionRulesResponse,
+    TimeResponse,
+} from '../../../src/rest-api/types';
 
 describe('GeneralApi', () => {
     let client: GeneralApi;
@@ -199,6 +207,97 @@ describe('GeneralApi', () => {
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'exchangeInfo').mockRejectedValueOnce(mockError);
             await expect(client.exchangeInfo()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('executionRules()', () => {
+        it('should execute executionRules() successfully with required parameters only', async () => {
+            mockResponse = JSONParse(
+                JSONStringify({
+                    symbolRules: [
+                        {
+                            symbol: 'BAZUSD',
+                            rules: [
+                                {
+                                    ruleType: 'PRICE_RANGE',
+                                    bidLimitMultUp: '1.0001',
+                                    bidLimitMultDown: '0.9999',
+                                    askLimitMultUp: '1.0001',
+                                    askLimitMultDown: '0.9999',
+                                },
+                            ],
+                        },
+                    ],
+                })
+            );
+
+            const spy = jest.spyOn(client, 'executionRules').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<ExecutionRulesResponse>)
+            );
+            const response = await client.executionRules();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute executionRules() successfully with optional parameters', async () => {
+            const params: ExecutionRulesRequest = {
+                symbol: 'BNBUSDT',
+                symbols: ['null'],
+                symbolStatus: ExecutionRulesSymbolStatusEnum.TRADING,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    symbolRules: [
+                        {
+                            symbol: 'BAZUSD',
+                            rules: [
+                                {
+                                    ruleType: 'PRICE_RANGE',
+                                    bidLimitMultUp: '1.0001',
+                                    bidLimitMultDown: '0.9999',
+                                    askLimitMultUp: '1.0001',
+                                    askLimitMultDown: '0.9999',
+                                },
+                            ],
+                        },
+                    ],
+                })
+            );
+
+            const spy = jest.spyOn(client, 'executionRules').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<ExecutionRulesResponse>)
+            );
+            const response = await client.executionRules(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'executionRules').mockRejectedValueOnce(mockError);
+            await expect(client.executionRules()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

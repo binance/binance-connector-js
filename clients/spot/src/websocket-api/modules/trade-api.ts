@@ -89,9 +89,9 @@ export interface TradeApiInterface {
     ): Promise<WebsocketApiResponse<OrderCancelResponse>>;
 
     /**
-     * Cancel an existing order and immediately place a new order instead of the canceled one.
-     *
+     * * Cancel an existing order and immediately place a new order instead of the canceled one.
      * A new order that was not attempted (i.e. when `newOrderResult: NOT_ATTEMPTED`), will still increase the unfilled order count by 1.
+     * You can only cancel an individual order from an orderList using this method, but the result is the same as canceling the entire orderList.
      * Weight: 1
      *
      * @summary WebSocket Cancel and replace order
@@ -2750,9 +2750,9 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Cancel an existing order and immediately place a new order instead of the canceled one.
-     *
+     * * Cancel an existing order and immediately place a new order instead of the canceled one.
      * A new order that was not attempted (i.e. when `newOrderResult: NOT_ATTEMPTED`), will still increase the unfilled order count by 1.
+     * You can only cancel an individual order from an orderList using this method, but the result is the same as canceling the entire orderList.
      * Weight: 1
      *
      * @summary WebSocket Cancel and replace order

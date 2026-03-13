@@ -1,5 +1,29 @@
 # Changelog
 
+## 28.0.0 - 2026-03-13
+
+### Added (7)
+
+#### REST API
+
+- `executionRules()` (`GET /api/v3/executionRules`)
+- `referencePrice()` (`GET /api/v3/referencePrice`)
+- `referencePriceCalculation()` (`GET /api/v3/referencePrice/calculation`)
+
+#### WebSocket API
+
+- `executionRules()` (`executionRules` method)
+- `referencePrice()` (`referencePrice` method)
+- `referencePriceCalculation()` (`referencePrice.calculation` method)
+
+#### WebSocket Streams
+
+- `referencePrice()` (`<symbol>@referencePrice` stream)
+
+### Changed (1)
+
+- Update `@binance/common` library to version `2.3.5`.
+
 ## 27.0.3 - 2026-03-02
 
 ### Changed (2)

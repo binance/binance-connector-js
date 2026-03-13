@@ -21,6 +21,8 @@ import type {
     AvgPriceResponse,
     DepthResponse,
     KlinesResponse,
+    ReferencePriceCalculationResponse,
+    ReferencePriceResponse,
     Ticker24hrResponse,
     TickerBookResponse,
     TickerPriceResponse,
@@ -98,6 +100,34 @@ export interface MarketApiInterface {
      * @memberof MarketApiInterface
      */
     klines(requestParameters: KlinesRequest): Promise<WebsocketApiResponse<KlinesResponse>>;
+
+    /**
+     *
+     * Weight: 2
+     *
+     * @summary WebSocket Query Reference Price
+     * @param {ReferencePriceRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<ReferencePriceResponse>}
+     * @memberof MarketApiInterface
+     */
+    referencePrice(
+        requestParameters: ReferencePriceRequest
+    ): Promise<WebsocketApiResponse<ReferencePriceResponse>>;
+
+    /**
+     * Describes how reference price is calculated for a given symbol.
+     * Weight: 2
+     *
+     * @summary WebSocket Query Reference Price Calculation
+     * @param {ReferencePriceCalculationRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<ReferencePriceCalculationResponse>}
+     * @memberof MarketApiInterface
+     */
+    referencePriceCalculation(
+        requestParameters: ReferencePriceCalculationRequest
+    ): Promise<WebsocketApiResponse<ReferencePriceCalculationResponse>>;
 
     /**
      * Get rolling window price change statistics with a custom window.
@@ -391,6 +421,53 @@ export interface KlinesRequest {
      * @memberof MarketApiKlines
      */
     readonly limit?: number;
+}
+
+/**
+ * Request parameters for referencePrice operation in MarketApi.
+ * @interface ReferencePriceRequest
+ */
+export interface ReferencePriceRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof MarketApiReferencePrice
+     */
+    readonly symbol: string;
+
+    /**
+     * Unique WebSocket request ID.
+     * @type {string}
+     * @memberof MarketApiReferencePrice
+     */
+    readonly id?: string;
+}
+
+/**
+ * Request parameters for referencePriceCalculation operation in MarketApi.
+ * @interface ReferencePriceCalculationRequest
+ */
+export interface ReferencePriceCalculationRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof MarketApiReferencePriceCalculation
+     */
+    readonly symbol: string;
+
+    /**
+     * Unique WebSocket request ID.
+     * @type {string}
+     * @memberof MarketApiReferencePriceCalculation
+     */
+    readonly id?: string;
+
+    /**
+     *
+     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * @memberof MarketApiReferencePriceCalculation
+     */
+    readonly symbolStatus?: ReferencePriceCalculationSymbolStatusEnum;
 }
 
 /**
@@ -856,6 +933,46 @@ export class MarketApi implements MarketApiInterface {
     }
 
     /**
+     *
+     * Weight: 2
+     *
+     * @summary WebSocket Query Reference Price
+     * @param {ReferencePriceRequest} requestParameters Request parameters.
+     * @returns {Promise<ReferencePriceResponse>}
+     * @memberof MarketApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#query-reference-price Binance API Documentation}
+     */
+    public referencePrice(
+        requestParameters: ReferencePriceRequest
+    ): Promise<WebsocketApiResponse<ReferencePriceResponse>> {
+        return this.websocketBase.sendMessage<ReferencePriceResponse>(
+            '/referencePrice'.slice(1),
+            requestParameters as unknown as WebsocketSendMsgOptions,
+            { isSigned: false, withApiKey: false }
+        );
+    }
+
+    /**
+     * Describes how reference price is calculated for a given symbol.
+     * Weight: 2
+     *
+     * @summary WebSocket Query Reference Price Calculation
+     * @param {ReferencePriceCalculationRequest} requestParameters Request parameters.
+     * @returns {Promise<ReferencePriceCalculationResponse>}
+     * @memberof MarketApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#query-reference-price-calculation Binance API Documentation}
+     */
+    public referencePriceCalculation(
+        requestParameters: ReferencePriceCalculationRequest
+    ): Promise<WebsocketApiResponse<ReferencePriceCalculationResponse>> {
+        return this.websocketBase.sendMessage<ReferencePriceCalculationResponse>(
+            '/referencePrice.calculation'.slice(1),
+            requestParameters as unknown as WebsocketSendMsgOptions,
+            { isSigned: false, withApiKey: false }
+        );
+    }
+
+    /**
      * Get rolling window price change statistics with a custom window.
      *
      * This request is similar to `ticker.24hr`,
@@ -1123,6 +1240,14 @@ export enum KlinesIntervalEnum {
     INTERVAL_3d = '3d',
     INTERVAL_1w = '1w',
     INTERVAL_1M = '1M',
+}
+
+export enum ReferencePriceCalculationSymbolStatusEnum {
+    TRADING = 'TRADING',
+    END_OF_DAY = 'END_OF_DAY',
+    HALT = 'HALT',
+    BREAK = 'BREAK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 
 export enum TickerTypeEnum {

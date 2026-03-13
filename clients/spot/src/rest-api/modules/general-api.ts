@@ -23,7 +23,7 @@ import {
     sendRequest,
     type RequestArgs,
 } from '@binance/common';
-import type { ExchangeInfoResponse, TimeResponse } from '../types';
+import type { ExchangeInfoResponse, ExecutionRulesResponse, TimeResponse } from '../types';
 
 /**
  * GeneralApi - axios parameter creator
@@ -74,6 +74,51 @@ const GeneralApiAxiosParamCreator = function (configuration: ConfigurationRestAP
 
             return {
                 endpoint: '/api/v3/exchangeInfo',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         *
+         * Weight: Parameter | Weight|
+         * ---        | ---
+         * `symbol`  | 2
+         * `symbols` | 2 for each `symbol`, capped at a max of 40|
+         * `symbolStatus` |40|
+         * None            |40|
+         *
+         * @summary Query Execution Rules
+         * @param {string} [symbol] Symbol to query
+         * @param {Array<string>} [symbols] List of symbols to query
+         * @param {ExecutionRulesSymbolStatusEnum} [symbolStatus]
+         *
+         * @throws {RequiredError}
+         */
+        executionRules: async (
+            symbol?: string,
+            symbols?: Array<string>,
+            symbolStatus?: ExecutionRulesSymbolStatusEnum
+        ): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+
+            if (symbol !== undefined && symbol !== null) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+            if (symbols) {
+                localVarQueryParameter['symbols'] = symbols;
+            }
+            if (symbolStatus !== undefined && symbolStatus !== null) {
+                localVarQueryParameter['symbolStatus'] = symbolStatus;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/api/v3/executionRules',
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
@@ -148,6 +193,24 @@ export interface GeneralApiInterface {
         requestParameters?: ExchangeInfoRequest
     ): Promise<RestApiResponse<ExchangeInfoResponse>>;
     /**
+     *
+     * Weight: Parameter | Weight|
+     * ---        | ---
+     * `symbol`  | 2
+     * `symbols` | 2 for each `symbol`, capped at a max of 40|
+     * `symbolStatus` |40|
+     * None            |40|
+     *
+     * @summary Query Execution Rules
+     * @param {ExecutionRulesRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof GeneralApiInterface
+     */
+    executionRules(
+        requestParameters?: ExecutionRulesRequest
+    ): Promise<RestApiResponse<ExecutionRulesResponse>>;
+    /**
      * Test connectivity to the Rest API.
      * Weight: 1
      *
@@ -211,6 +274,33 @@ export interface ExchangeInfoRequest {
 }
 
 /**
+ * Request parameters for executionRules operation in GeneralApi.
+ * @interface ExecutionRulesRequest
+ */
+export interface ExecutionRulesRequest {
+    /**
+     * Symbol to query
+     * @type {string}
+     * @memberof GeneralApiExecutionRules
+     */
+    readonly symbol?: string;
+
+    /**
+     * List of symbols to query
+     * @type {Array<string>}
+     * @memberof GeneralApiExecutionRules
+     */
+    readonly symbols?: Array<string>;
+
+    /**
+     *
+     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * @memberof GeneralApiExecutionRules
+     */
+    readonly symbolStatus?: ExecutionRulesSymbolStatusEnum;
+}
+
+/**
  * GeneralApi - object-oriented interface
  * @class GeneralApi
  */
@@ -245,6 +335,41 @@ export class GeneralApi implements GeneralApiInterface {
             requestParameters?.symbolStatus
         );
         return sendRequest<ExchangeInfoResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: false }
+        );
+    }
+
+    /**
+     *
+     * Weight: Parameter | Weight|
+     * ---        | ---
+     * `symbol`  | 2
+     * `symbols` | 2 for each `symbol`, capped at a max of 40|
+     * `symbolStatus` |40|
+     * None            |40|
+     *
+     * @summary Query Execution Rules
+     * @param {ExecutionRulesRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<ExecutionRulesResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof GeneralApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#query-execution-rules Binance API Documentation}
+     */
+    public async executionRules(
+        requestParameters: ExecutionRulesRequest = {}
+    ): Promise<RestApiResponse<ExecutionRulesResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.executionRules(
+            requestParameters?.symbol,
+            requestParameters?.symbols,
+            requestParameters?.symbolStatus
+        );
+        return sendRequest<ExecutionRulesResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,
@@ -303,6 +428,14 @@ export class GeneralApi implements GeneralApiInterface {
 }
 
 export enum ExchangeInfoSymbolStatusEnum {
+    TRADING = 'TRADING',
+    END_OF_DAY = 'END_OF_DAY',
+    HALT = 'HALT',
+    BREAK = 'BREAK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum ExecutionRulesSymbolStatusEnum {
     TRADING = 'TRADING',
     END_OF_DAY = 'END_OF_DAY',
     HALT = 'HALT',

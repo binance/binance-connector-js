@@ -17,7 +17,12 @@
  */
 
 import { WebsocketAPIBase, WebsocketApiResponse, WebsocketSendMsgOptions } from '@binance/common';
-import type { ExchangeInfoResponse, PingResponse, TimeResponse } from '../types';
+import type {
+    ExchangeInfoResponse,
+    ExecutionRulesResponse,
+    PingResponse,
+    TimeResponse,
+} from '../types';
 
 /**
  * GeneralApi - interface
@@ -38,6 +43,25 @@ export interface GeneralApiInterface {
     exchangeInfo(
         requestParameters?: ExchangeInfoRequest
     ): Promise<WebsocketApiResponse<ExchangeInfoResponse>>;
+
+    /**
+     *
+     * Weight: Parameter | Weight|
+     * ---        | ---
+     * `symbol`  | 2
+     * `symbols` | 2 for each `symbol`, capped at a max of 40|
+     * `symbolStatus` |40|
+     * None            |40|
+     *
+     * @summary WebSocket Query Execution Rules
+     * @param {ExecutionRulesRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<ExecutionRulesResponse>}
+     * @memberof GeneralApiInterface
+     */
+    executionRules(
+        requestParameters?: ExecutionRulesRequest
+    ): Promise<WebsocketApiResponse<ExecutionRulesResponse>>;
 
     /**
      * Test connectivity to the WebSocket API.
@@ -113,6 +137,40 @@ export interface ExchangeInfoRequest {
 }
 
 /**
+ * Request parameters for executionRules operation in GeneralApi.
+ * @interface ExecutionRulesRequest
+ */
+export interface ExecutionRulesRequest {
+    /**
+     * Unique WebSocket request ID.
+     * @type {string}
+     * @memberof GeneralApiExecutionRules
+     */
+    readonly id?: string;
+
+    /**
+     * Describe a single symbol
+     * @type {string}
+     * @memberof GeneralApiExecutionRules
+     */
+    readonly symbol?: string;
+
+    /**
+     * List of symbols to query
+     * @type {Array<string>}
+     * @memberof GeneralApiExecutionRules
+     */
+    readonly symbols?: Array<string>;
+
+    /**
+     *
+     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * @memberof GeneralApiExecutionRules
+     */
+    readonly symbolStatus?: ExecutionRulesSymbolStatusEnum;
+}
+
+/**
  * Request parameters for ping operation in GeneralApi.
  * @interface PingRequest
  */
@@ -171,6 +229,31 @@ export class GeneralApi implements GeneralApiInterface {
     }
 
     /**
+     *
+     * Weight: Parameter | Weight|
+     * ---        | ---
+     * `symbol`  | 2
+     * `symbols` | 2 for each `symbol`, capped at a max of 40|
+     * `symbolStatus` |40|
+     * None            |40|
+     *
+     * @summary WebSocket Query Execution Rules
+     * @param {ExecutionRulesRequest} requestParameters Request parameters.
+     * @returns {Promise<ExecutionRulesResponse>}
+     * @memberof GeneralApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-requests#query-execution-rules Binance API Documentation}
+     */
+    public executionRules(
+        requestParameters: ExecutionRulesRequest = {}
+    ): Promise<WebsocketApiResponse<ExecutionRulesResponse>> {
+        return this.websocketBase.sendMessage<ExecutionRulesResponse>(
+            '/executionRules'.slice(1),
+            requestParameters as unknown as WebsocketSendMsgOptions,
+            { isSigned: false, withApiKey: false }
+        );
+    }
+
+    /**
      * Test connectivity to the WebSocket API.
      * Weight: 1
      *
@@ -208,6 +291,14 @@ export class GeneralApi implements GeneralApiInterface {
 }
 
 export enum ExchangeInfoSymbolStatusEnum {
+    TRADING = 'TRADING',
+    END_OF_DAY = 'END_OF_DAY',
+    HALT = 'HALT',
+    BREAK = 'BREAK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
+}
+
+export enum ExecutionRulesSymbolStatusEnum {
     TRADING = 'TRADING',
     END_OF_DAY = 'END_OF_DAY',
     HALT = 'HALT',

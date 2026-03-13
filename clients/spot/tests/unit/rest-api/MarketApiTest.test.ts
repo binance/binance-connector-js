@@ -24,6 +24,7 @@ import {
     MarketApi,
     DepthSymbolStatusEnum,
     KlinesIntervalEnum,
+    ReferencePriceCalculationSymbolStatusEnum,
     TickerWindowSizeEnum,
     TickerTypeEnum,
     TickerSymbolStatusEnum,
@@ -42,6 +43,8 @@ import {
     GetTradesRequest,
     HistoricalTradesRequest,
     KlinesRequest,
+    ReferencePriceRequest,
+    ReferencePriceCalculationRequest,
     TickerRequest,
     Ticker24hrRequest,
     TickerBookTickerRequest,
@@ -56,6 +59,8 @@ import type {
     GetTradesResponse,
     HistoricalTradesResponse,
     KlinesResponse,
+    ReferencePriceCalculationResponse,
+    ReferencePriceResponse,
     Ticker24hrResponse,
     TickerBookTickerResponse,
     TickerPriceResponse,
@@ -678,6 +683,187 @@ describe('MarketApi', () => {
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'klines').mockRejectedValueOnce(mockError);
             await expect(client.klines(params)).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('referencePrice()', () => {
+        it('should execute referencePrice() successfully with required parameters only', async () => {
+            const params: ReferencePriceRequest = {
+                symbol: 'BNBUSDT',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    symbol: 'BAZUSD',
+                    referencePrice: '10.00',
+                    timestamp: 1770736694138,
+                })
+            );
+
+            const spy = jest.spyOn(client, 'referencePrice').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<ReferencePriceResponse>)
+            );
+            const response = await client.referencePrice(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute referencePrice() successfully with optional parameters', async () => {
+            const params: ReferencePriceRequest = {
+                symbol: 'BNBUSDT',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    symbol: 'BAZUSD',
+                    referencePrice: '10.00',
+                    timestamp: 1770736694138,
+                })
+            );
+
+            const spy = jest.spyOn(client, 'referencePrice').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<ReferencePriceResponse>)
+            );
+            const response = await client.referencePrice(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when symbol is missing', async () => {
+            const _params: ReferencePriceRequest = {
+                symbol: 'BNBUSDT',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.symbol;
+
+            await expect(client.referencePrice(params)).rejects.toThrow(
+                'Required parameter symbol was null or undefined when calling referencePrice.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: ReferencePriceRequest = {
+                symbol: 'BNBUSDT',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'referencePrice').mockRejectedValueOnce(mockError);
+            await expect(client.referencePrice(params)).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('referencePriceCalculation()', () => {
+        it('should execute referencePriceCalculation() successfully with required parameters only', async () => {
+            const params: ReferencePriceCalculationRequest = {
+                symbol: 'BNBUSDT',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    symbol: 'BAZUSD',
+                    calculationType: 'EXTERNAL',
+                    bucketCount: 10,
+                    bucketWidthMs: 1000,
+                    externalCalculationId: 42,
+                })
+            );
+
+            const spy = jest.spyOn(client, 'referencePriceCalculation').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<ReferencePriceCalculationResponse>)
+            );
+            const response = await client.referencePriceCalculation(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute referencePriceCalculation() successfully with optional parameters', async () => {
+            const params: ReferencePriceCalculationRequest = {
+                symbol: 'BNBUSDT',
+                symbolStatus: ReferencePriceCalculationSymbolStatusEnum.TRADING,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    symbol: 'BAZUSD',
+                    calculationType: 'EXTERNAL',
+                    bucketCount: 10,
+                    bucketWidthMs: 1000,
+                    externalCalculationId: 42,
+                })
+            );
+
+            const spy = jest.spyOn(client, 'referencePriceCalculation').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<ReferencePriceCalculationResponse>)
+            );
+            const response = await client.referencePriceCalculation(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when symbol is missing', async () => {
+            const _params: ReferencePriceCalculationRequest = {
+                symbol: 'BNBUSDT',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.symbol;
+
+            await expect(client.referencePriceCalculation(params)).rejects.toThrow(
+                'Required parameter symbol was null or undefined when calling referencePriceCalculation.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: ReferencePriceCalculationRequest = {
+                symbol: 'BNBUSDT',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'referencePriceCalculation')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.referencePriceCalculation(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

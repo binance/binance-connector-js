@@ -31,6 +31,8 @@ import type {
     GetTradesResponse,
     HistoricalTradesResponse,
     KlinesResponse,
+    ReferencePriceCalculationResponse,
+    ReferencePriceResponse,
     Ticker24hrResponse,
     TickerBookTickerResponse,
     TickerPriceResponse,
@@ -311,6 +313,75 @@ const MarketApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
 
             return {
                 endpoint: '/api/v3/klines',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         *
+         * Weight: 2
+         *
+         * @summary Query Reference Price
+         * @param {string} symbol
+         *
+         * @throws {RequiredError}
+         */
+        referencePrice: async (symbol: string): Promise<RequestArgs> => {
+            // verify required parameter 'symbol' is not null or undefined
+            assertParamExists('referencePrice', 'symbol', symbol);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+
+            if (symbol !== undefined && symbol !== null) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/api/v3/referencePrice',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Describes how reference price is calculated for a given symbol.
+         * Weight: 2
+         *
+         * @summary Query Reference Price Calculation
+         * @param {string} symbol
+         * @param {ReferencePriceCalculationSymbolStatusEnum} [symbolStatus]
+         *
+         * @throws {RequiredError}
+         */
+        referencePriceCalculation: async (
+            symbol: string,
+            symbolStatus?: ReferencePriceCalculationSymbolStatusEnum
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'symbol' is not null or undefined
+            assertParamExists('referencePriceCalculation', 'symbol', symbol);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+
+            if (symbol !== undefined && symbol !== null) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+            if (symbolStatus !== undefined && symbolStatus !== null) {
+                localVarQueryParameter['symbolStatus'] = symbolStatus;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/api/v3/referencePrice/calculation',
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
@@ -774,6 +845,32 @@ export interface MarketApiInterface {
     klines(requestParameters: KlinesRequest): Promise<RestApiResponse<KlinesResponse>>;
     /**
      *
+     * Weight: 2
+     *
+     * @summary Query Reference Price
+     * @param {ReferencePriceRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketApiInterface
+     */
+    referencePrice(
+        requestParameters: ReferencePriceRequest
+    ): Promise<RestApiResponse<ReferencePriceResponse>>;
+    /**
+     * Describes how reference price is calculated for a given symbol.
+     * Weight: 2
+     *
+     * @summary Query Reference Price Calculation
+     * @param {ReferencePriceCalculationRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketApiInterface
+     */
+    referencePriceCalculation(
+        requestParameters: ReferencePriceCalculationRequest
+    ): Promise<RestApiResponse<ReferencePriceCalculationResponse>>;
+    /**
+     *
      * Weight: 4 for each requested <tt>symbol</tt> regardless of <tt>windowSize</tt>. <br/><br/> The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
      *
      * @summary Rolling window price change statistics
@@ -1106,6 +1203,39 @@ export interface KlinesRequest {
      * @memberof MarketApiKlines
      */
     readonly limit?: number;
+}
+
+/**
+ * Request parameters for referencePrice operation in MarketApi.
+ * @interface ReferencePriceRequest
+ */
+export interface ReferencePriceRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof MarketApiReferencePrice
+     */
+    readonly symbol: string;
+}
+
+/**
+ * Request parameters for referencePriceCalculation operation in MarketApi.
+ * @interface ReferencePriceCalculationRequest
+ */
+export interface ReferencePriceCalculationRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof MarketApiReferencePriceCalculation
+     */
+    readonly symbol: string;
+
+    /**
+     *
+     * @type {'TRADING' | 'END_OF_DAY' | 'HALT' | 'BREAK' | 'NON_REPRESENTABLE'}
+     * @memberof MarketApiReferencePriceCalculation
+     */
+    readonly symbolStatus?: ReferencePriceCalculationSymbolStatusEnum;
 }
 
 /**
@@ -1529,6 +1659,63 @@ export class MarketApi implements MarketApiInterface {
 
     /**
      *
+     * Weight: 2
+     *
+     * @summary Query Reference Price
+     * @param {ReferencePriceRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<ReferencePriceResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#query-reference-price Binance API Documentation}
+     */
+    public async referencePrice(
+        requestParameters: ReferencePriceRequest
+    ): Promise<RestApiResponse<ReferencePriceResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.referencePrice(
+            requestParameters?.symbol
+        );
+        return sendRequest<ReferencePriceResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: false }
+        );
+    }
+
+    /**
+     * Describes how reference price is calculated for a given symbol.
+     * Weight: 2
+     *
+     * @summary Query Reference Price Calculation
+     * @param {ReferencePriceCalculationRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<ReferencePriceCalculationResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#query-reference-price-calculation Binance API Documentation}
+     */
+    public async referencePriceCalculation(
+        requestParameters: ReferencePriceCalculationRequest
+    ): Promise<RestApiResponse<ReferencePriceCalculationResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.referencePriceCalculation(
+            requestParameters?.symbol,
+            requestParameters?.symbolStatus
+        );
+        return sendRequest<ReferencePriceCalculationResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: false }
+        );
+    }
+
+    /**
+     *
      * Weight: 4 for each requested <tt>symbol</tt> regardless of <tt>windowSize</tt>. <br/><br/> The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
      *
      * @summary Rolling window price change statistics
@@ -1827,6 +2014,14 @@ export enum KlinesIntervalEnum {
     INTERVAL_3d = '3d',
     INTERVAL_1w = '1w',
     INTERVAL_1M = '1M',
+}
+
+export enum ReferencePriceCalculationSymbolStatusEnum {
+    TRADING = 'TRADING',
+    END_OF_DAY = 'END_OF_DAY',
+    HALT = 'HALT',
+    BREAK = 'BREAK',
+    NON_REPRESENTABLE = 'NON_REPRESENTABLE',
 }
 
 export enum TickerWindowSizeEnum {
