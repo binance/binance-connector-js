@@ -21,10 +21,10 @@
 export interface CancelAllOptionOrdersOnSpecificSymbolResponse {
     /**
      *
-     * @type {number | bigint}
+     * @type {string}
      * @memberof CancelAllOptionOrdersOnSpecificSymbolResponse
      */
-    code?: number | bigint;
+    code?: string;
     /**
      *
      * @type {string}

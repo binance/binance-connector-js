@@ -255,7 +255,7 @@ describe('TradeApi', () => {
                 symbol: 'symbol_example',
             };
 
-            mockResponse = JSONParse(JSONStringify({ code: 0, msg: 'success' }));
+            mockResponse = JSONParse(JSONStringify({ code: '0', msg: 'success' }));
 
             const spy = jest.spyOn(client, 'cancelAllOptionOrdersOnSpecificSymbol').mockReturnValue(
                 Promise.resolve({
@@ -277,7 +277,7 @@ describe('TradeApi', () => {
                 recvWindow: 5000,
             };
 
-            mockResponse = JSONParse(JSONStringify({ code: 0, msg: 'success' }));
+            mockResponse = JSONParse(JSONStringify({ code: '0', msg: 'success' }));
 
             const spy = jest.spyOn(client, 'cancelAllOptionOrdersOnSpecificSymbol').mockReturnValue(
                 Promise.resolve({

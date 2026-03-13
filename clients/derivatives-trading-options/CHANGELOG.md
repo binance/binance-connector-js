@@ -1,5 +1,16 @@
 # Changelog
 
+## 14.0.0 - 2026-03-13
+
+### Changed (2)
+
+- Update `@binance/common` library to version `2.3.5`.
+
+#### REST API
+
+- Modified response for `cancelAllOptionOrdersOnSpecificSymbol()` (`DELETE /eapi/v1/allOpenOrders`):
+  - `code`: type `integer` → `string`
+
 ## 13.0.4 - 2026-03-02
 
 ### Changed (2)
