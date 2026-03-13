@@ -65,7 +65,7 @@ const BfusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
-         * Get BFUSD quota details including fast redemption quota and standard redemption quota.
+         * Get BFUSD quota details including subscription quota, fast redemption quota and standard redemption quota.
          *
          * Weight: 150
          *
@@ -441,7 +441,7 @@ export interface BfusdApiInterface {
         requestParameters?: GetBfusdAccountRequest
     ): Promise<RestApiResponse<GetBfusdAccountResponse>>;
     /**
-     * Get BFUSD quota details including fast redemption quota and standard redemption quota.
+     * Get BFUSD quota details including subscription quota, fast redemption quota and standard redemption quota.
      *
      * Weight: 150
      *
@@ -858,7 +858,7 @@ export class BfusdApi implements BfusdApiInterface {
     }
 
     /**
-     * Get BFUSD quota details including fast redemption quota and standard redemption quota.
+     * Get BFUSD quota details including subscription quota, fast redemption quota and standard redemption quota.
      *
      * Weight: 150
      *

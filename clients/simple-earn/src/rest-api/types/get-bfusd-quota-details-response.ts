@@ -20,6 +20,9 @@ import type { GetBfusdQuotaDetailsResponseFastRedemptionQuota } from './get-bfus
 // May contain unused imports in some cases
 // @ts-ignore
 import type { GetBfusdQuotaDetailsResponseStandardRedemptionQuota } from './get-bfusd-quota-details-response-standard-redemption-quota';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { GetBfusdQuotaDetailsResponseSubscriptionQuota } from './get-bfusd-quota-details-response-subscription-quota';
 
 /**
  *
@@ -27,6 +30,12 @@ import type { GetBfusdQuotaDetailsResponseStandardRedemptionQuota } from './get-
  * @interface GetBfusdQuotaDetailsResponse
  */
 export interface GetBfusdQuotaDetailsResponse {
+    /**
+     *
+     * @type {GetBfusdQuotaDetailsResponseSubscriptionQuota}
+     * @memberof GetBfusdQuotaDetailsResponse
+     */
+    subscriptionQuota?: GetBfusdQuotaDetailsResponseSubscriptionQuota;
     /**
      *
      * @type {GetBfusdQuotaDetailsResponseFastRedemptionQuota}

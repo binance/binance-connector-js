@@ -2,6 +2,7 @@ export * from './get-bfusd-account-response';
 export * from './get-bfusd-quota-details-response';
 export * from './get-bfusd-quota-details-response-fast-redemption-quota';
 export * from './get-bfusd-quota-details-response-standard-redemption-quota';
+export * from './get-bfusd-quota-details-response-subscription-quota';
 export * from './get-bfusd-rate-history-response';
 export * from './get-bfusd-rate-history-response-rows-inner';
 export * from './get-bfusd-redemption-history-response';

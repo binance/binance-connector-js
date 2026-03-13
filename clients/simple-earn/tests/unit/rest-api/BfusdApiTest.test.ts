@@ -114,6 +114,7 @@ describe('BfusdApi', () => {
         it('should execute getBfusdQuotaDetails() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
                 JSONStringify({
+                    subscriptionQuota: { leftQuota: '1000' },
                     fastRedemptionQuota: {
                         leftQuota: '2',
                         minimum: '0.1',
@@ -150,6 +151,7 @@ describe('BfusdApi', () => {
 
             mockResponse = JSONParse(
                 JSONStringify({
+                    subscriptionQuota: { leftQuota: '1000' },
                     fastRedemptionQuota: {
                         leftQuota: '2',
                         minimum: '0.1',

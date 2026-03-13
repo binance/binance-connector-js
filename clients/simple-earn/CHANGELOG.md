@@ -1,5 +1,13 @@
 # Changelog
 
+## 13.0.0 - 2026-03-13
+
+### Changed (2)
+
+- Update `@binance/common` library to version `2.3.5`.
+- Modified response for `getBfusdQuotaDetails()` (`GET /sapi/v1/bfusd/quota`):
+  - property `subscriptionQuota` added
+
 ## 12.0.3 - 2026-03-02
 
 ### Changed (2)

@@ -205,7 +205,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Get Flexible Redemption Record
          *
-         *	The time between `startTime` and `endTime` cannot be longer than 3 months.
+         *	The time between `startTime` and `endTime` cannot be longer than 30 days.
          *	If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
          *	If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
          *	If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
@@ -276,7 +276,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Get Flexible Rewards History
          *
-         *	The time between `startTime` and `endTime` cannot be longer than 3 months.
+         *	The time between `startTime` and `endTime` cannot be longer than 30 days.
          *	If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
          *	If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
          *	If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
@@ -396,7 +396,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Get Flexible Subscription Record
          *
-         * The time between `startTime` and `endTime` cannot be longer than 3 months.
+         * The time between `startTime` and `endTime` cannot be longer than 30 days.
          * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
          * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
          * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
@@ -562,7 +562,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Get Locked Redemption Record
          *
-         * The time between `startTime` and `endTime` cannot be longer than 3 months.
+         * The time between `startTime` and `endTime` cannot be longer than 30 days.
          * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
          * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
          * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
@@ -633,7 +633,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Get Locked Rewards History
          *
-         * The time between `startTime` and `endTime` cannot be longer than 3 months.
+         * The time between `startTime` and `endTime` cannot be longer than 30 days.
          * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
          * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
          * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
@@ -750,7 +750,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Get Locked Subscription Record
          *
-         * The time between `startTime` and `endTime` cannot be longer than 3 months.
+         * The time between `startTime` and `endTime` cannot be longer than 30 days.
          * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
          * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
          * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
@@ -1419,7 +1419,7 @@ export interface FlexibleLockedApiInterface {
     /**
      * Get Flexible Redemption Record
      *
-     *	The time between `startTime` and `endTime` cannot be longer than 3 months.
+     *	The time between `startTime` and `endTime` cannot be longer than 30 days.
      *	If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
      *	If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
      *	If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
@@ -1438,7 +1438,7 @@ export interface FlexibleLockedApiInterface {
     /**
      * Get Flexible Rewards History
      *
-     *	The time between `startTime` and `endTime` cannot be longer than 3 months.
+     *	The time between `startTime` and `endTime` cannot be longer than 30 days.
      *	If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
      *	If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
      *	If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
@@ -1471,7 +1471,7 @@ export interface FlexibleLockedApiInterface {
     /**
      * Get Flexible Subscription Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * The time between `startTime` and `endTime` cannot be longer than 30 days.
      * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
      * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
      * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
@@ -1518,7 +1518,7 @@ export interface FlexibleLockedApiInterface {
     /**
      * Get Locked Redemption Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * The time between `startTime` and `endTime` cannot be longer than 30 days.
      * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
      * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
      * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
@@ -1537,7 +1537,7 @@ export interface FlexibleLockedApiInterface {
     /**
      * Get Locked Rewards History
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * The time between `startTime` and `endTime` cannot be longer than 30 days.
      * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
      * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
      * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
@@ -1570,7 +1570,7 @@ export interface FlexibleLockedApiInterface {
     /**
      * Get Locked Subscription Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * The time between `startTime` and `endTime` cannot be longer than 30 days.
      * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
      * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
      * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
@@ -2838,7 +2838,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Get Flexible Redemption Record
      *
-     *	The time between `startTime` and `endTime` cannot be longer than 3 months.
+     *	The time between `startTime` and `endTime` cannot be longer than 30 days.
      *	If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
      *	If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
      *	If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
@@ -2879,7 +2879,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Get Flexible Rewards History
      *
-     *	The time between `startTime` and `endTime` cannot be longer than 3 months.
+     *	The time between `startTime` and `endTime` cannot be longer than 30 days.
      *	If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
      *	If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
      *	If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
@@ -2952,7 +2952,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Get Flexible Subscription Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * The time between `startTime` and `endTime` cannot be longer than 30 days.
      * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
      * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
      * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
@@ -3058,7 +3058,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Get Locked Redemption Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * The time between `startTime` and `endTime` cannot be longer than 30 days.
      * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
      * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
      * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
@@ -3099,7 +3099,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Get Locked Rewards History
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * The time between `startTime` and `endTime` cannot be longer than 30 days.
      * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
      * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
      * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
@@ -3171,7 +3171,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Get Locked Subscription Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * The time between `startTime` and `endTime` cannot be longer than 30 days.
      * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
      * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
      * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.

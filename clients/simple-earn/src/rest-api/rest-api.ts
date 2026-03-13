@@ -193,7 +193,7 @@ export class RestAPI {
     }
 
     /**
-     * Get BFUSD quota details including fast redemption quota and standard redemption quota.
+     * Get BFUSD quota details including subscription quota, fast redemption quota and standard redemption quota.
      *
      * Weight: 150
      *
@@ -404,7 +404,7 @@ export class RestAPI {
     /**
      * Get Flexible Redemption Record
      *
-     *	The time between `startTime` and `endTime` cannot be longer than 3 months.
+     *	The time between `startTime` and `endTime` cannot be longer than 30 days.
      *	If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
      *	If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
      *	If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
@@ -427,7 +427,7 @@ export class RestAPI {
     /**
      * Get Flexible Rewards History
      *
-     *	The time between `startTime` and `endTime` cannot be longer than 3 months.
+     *	The time between `startTime` and `endTime` cannot be longer than 30 days.
      *	If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
      *	If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
      *	If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
@@ -468,7 +468,7 @@ export class RestAPI {
     /**
      * Get Flexible Subscription Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * The time between `startTime` and `endTime` cannot be longer than 30 days.
      * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
      * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
      * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
@@ -527,7 +527,7 @@ export class RestAPI {
     /**
      * Get Locked Redemption Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * The time between `startTime` and `endTime` cannot be longer than 30 days.
      * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
      * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
      * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
@@ -550,7 +550,7 @@ export class RestAPI {
     /**
      * Get Locked Rewards History
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * The time between `startTime` and `endTime` cannot be longer than 30 days.
      * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
      * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
      * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
@@ -591,7 +591,7 @@ export class RestAPI {
     /**
      * Get Locked Subscription Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * The time between `startTime` and `endTime` cannot be longer than 30 days.
      * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
      * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
      * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
