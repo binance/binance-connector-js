@@ -102,11 +102,11 @@ const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) 
             };
         },
         /**
-         * Submit withdraw request, in this version, we only support BRL withdrawal via bank_transfer.
+         * Submit withdraw request, in this version, we support BRL,ARS,MXN withdrawal via bank_transfer.
          *
          * You need to call this api first, and call query order detail api in a loop to get the status of the order until this order is successful.
          *
-         * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
+         * Before calling this API, please ensure you have completed your KYC or KYB, activated your fiat service, and verified your destination bank account on our website.
          *
          * you need to bind your bank account on web/app before using the corresponding account number
          *
@@ -372,11 +372,11 @@ export interface FiatApiInterface {
      */
     deposit(requestParameters: DepositRequest): Promise<RestApiResponse<DepositResponse>>;
     /**
-     * Submit withdraw request, in this version, we only support BRL withdrawal via bank_transfer.
+     * Submit withdraw request, in this version, we support BRL,ARS,MXN withdrawal via bank_transfer.
      *
      * You need to call this api first, and call query order detail api in a loop to get the status of the order until this order is successful.
      *
-     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
+     * Before calling this API, please ensure you have completed your KYC or KYB, activated your fiat service, and verified your destination bank account on our website.
      *
      * you need to bind your bank account on web/app before using the corresponding account number
      *
@@ -704,11 +704,11 @@ export class FiatApi implements FiatApiInterface {
     }
 
     /**
-     * Submit withdraw request, in this version, we only support BRL withdrawal via bank_transfer.
+     * Submit withdraw request, in this version, we support BRL,ARS,MXN withdrawal via bank_transfer.
      *
      * You need to call this api first, and call query order detail api in a loop to get the status of the order until this order is successful.
      *
-     * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
+     * Before calling this API, please ensure you have completed your KYC or KYB, activated your fiat service, and verified your destination bank account on our website.
      *
      * you need to bind your bank account on web/app before using the corresponding account number
      *
