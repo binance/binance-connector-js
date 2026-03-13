@@ -49,7 +49,7 @@ describe('MarketDataApi', () => {
                         fromAssetMinAmount: '0.0004',
                         fromAssetMaxAmount: '50',
                         toAssetMinAmount: '20',
-                        toAssetMaxAmount: '2500000',
+                        toAssetMaxAmount: '9E+24',
                     },
                 ])
             );
@@ -82,7 +82,7 @@ describe('MarketDataApi', () => {
                         fromAssetMinAmount: '0.0004',
                         fromAssetMaxAmount: '50',
                         toAssetMinAmount: '20',
-                        toAssetMaxAmount: '2500000',
+                        toAssetMaxAmount: '9E+24',
                     },
                 ])
             );
