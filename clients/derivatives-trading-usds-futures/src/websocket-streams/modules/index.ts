@@ -11,4 +11,5 @@
  * Do not edit the class manually.
  */
 
-export * from './websocket-market-streams-api';
+export * from './market-api';
+export * from './public-api';

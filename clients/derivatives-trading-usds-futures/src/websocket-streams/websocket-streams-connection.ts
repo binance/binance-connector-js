@@ -12,21 +12,19 @@
  */
 
 import { WebsocketStreamsBase, WebsocketStream, createStreamHandler } from '@binance/common';
-import { WebsocketMarketStreamsApi } from './modules/websocket-market-streams-api';
+import { MarketApi } from './modules/market-api';
+import { PublicApi } from './modules/public-api';
 
 import type { UserDataStreamEventsResponse } from './types';
 
 import type {
     AggregateTradeStreamsRequest,
-    AllBookTickersStreamRequest,
     AllMarketLiquidationOrderStreamsRequest,
     AllMarketMiniTickersStreamRequest,
     AllMarketTickersStreamsRequest,
     CompositeIndexSymbolInformationStreamsRequest,
     ContinuousContractKlineCandlestickStreamsRequest,
     ContractInfoStreamRequest,
-    DiffBookDepthStreamsRequest,
-    IndividualSymbolBookTickerStreamsRequest,
     IndividualSymbolMiniTickerStreamRequest,
     IndividualSymbolTickerStreamsRequest,
     KlineCandlestickStreamsRequest,
@@ -34,22 +32,24 @@ import type {
     MarkPriceStreamRequest,
     MarkPriceStreamForAllMarketRequest,
     MultiAssetsModeAssetIndexRequest,
+    TradingSessionStreamRequest,
+} from './modules/market-api';
+import type {
+    AllBookTickersStreamRequest,
+    DiffBookDepthStreamsRequest,
+    IndividualSymbolBookTickerStreamsRequest,
     PartialBookDepthStreamsRequest,
     RpiDiffBookDepthStreamsRequest,
-    TradingSessionStreamRequest,
-} from './modules/websocket-market-streams-api';
+} from './modules/public-api';
 
 import type {
     AggregateTradeStreamsResponse,
-    AllBookTickersStreamResponse,
     AllMarketLiquidationOrderStreamsResponse,
     AllMarketMiniTickersStreamResponse,
     AllMarketTickersStreamsResponse,
     CompositeIndexSymbolInformationStreamsResponse,
     ContinuousContractKlineCandlestickStreamsResponse,
     ContractInfoStreamResponse,
-    DiffBookDepthStreamsResponse,
-    IndividualSymbolBookTickerStreamsResponse,
     IndividualSymbolMiniTickerStreamResponse,
     IndividualSymbolTickerStreamsResponse,
     KlineCandlestickStreamsResponse,
@@ -57,18 +57,25 @@ import type {
     MarkPriceStreamResponse,
     MarkPriceStreamForAllMarketResponse,
     MultiAssetsModeAssetIndexResponse,
+    TradingSessionStreamResponse,
+} from './types';
+import type {
+    AllBookTickersStreamResponse,
+    DiffBookDepthStreamsResponse,
+    IndividualSymbolBookTickerStreamsResponse,
     PartialBookDepthStreamsResponse,
     RpiDiffBookDepthStreamsResponse,
-    TradingSessionStreamResponse,
 } from './types';
 
 export class WebsocketStreamsConnection {
     private websocketBase: WebsocketStreamsBase;
-    private websocketMarketStreamsApi: WebsocketMarketStreamsApi;
+    private marketApi: MarketApi;
+    private publicApi: PublicApi;
 
     constructor(websocketBase: WebsocketStreamsBase) {
         this.websocketBase = websocketBase;
-        this.websocketMarketStreamsApi = new WebsocketMarketStreamsApi(websocketBase);
+        this.marketApi = new MarketApi(websocketBase);
+        this.publicApi = new PublicApi(websocketBase);
     }
 
     /**
@@ -165,12 +172,16 @@ export class WebsocketStreamsConnection {
      * @returns A WebSocket stream handler for the user data stream.
      */
     userData(listenKey: string, id?: string): WebsocketStream<UserDataStreamEventsResponse> {
-        return createStreamHandler<UserDataStreamEventsResponse>(this.websocketBase, listenKey, id);
+        return createStreamHandler<UserDataStreamEventsResponse>(
+            this.websocketBase,
+            listenKey,
+            id,
+            'private'
+        );
     }
 
     /**
      * The Aggregate Trade Streams push market trade information that is aggregated for fills with same price and taking side every 100 milliseconds. Only market trades will be aggregated, which means the insurance fund trades and ADL trades won't be aggregated.
-     *
      *
      * Retail Price Improvement(RPI) orders are aggregated into field `q` and without special tags to be distinguished.
      *
@@ -186,27 +197,7 @@ export class WebsocketStreamsConnection {
     aggregateTradeStreams(
         requestParameters: AggregateTradeStreamsRequest
     ): WebsocketStream<AggregateTradeStreamsResponse> {
-        return this.websocketMarketStreamsApi.aggregateTradeStreams(requestParameters);
-    }
-
-    /**
-     * Pushes any update to the best bid or ask's price or quantity in real-time for all symbols.
-     *
-     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
-     *
-     * Update Speed: 5s
-     *
-     * @summary All Book Tickers Stream
-     * @param {AllBookTickersStreamRequest} requestParameters Request parameters.
-     *
-     * @returns {WebsocketStream<AllBookTickersStreamResponse>}
-     * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Book-Tickers-Stream Binance API Documentation}
-     */
-    allBookTickersStream(
-        requestParameters: AllBookTickersStreamRequest = {}
-    ): WebsocketStream<AllBookTickersStreamResponse> {
-        return this.websocketMarketStreamsApi.allBookTickersStream(requestParameters);
+        return this.marketApi.aggregateTradeStreams(requestParameters);
     }
 
     /**
@@ -225,7 +216,7 @@ export class WebsocketStreamsConnection {
     allMarketLiquidationOrderStreams(
         requestParameters: AllMarketLiquidationOrderStreamsRequest = {}
     ): WebsocketStream<AllMarketLiquidationOrderStreamsResponse> {
-        return this.websocketMarketStreamsApi.allMarketLiquidationOrderStreams(requestParameters);
+        return this.marketApi.allMarketLiquidationOrderStreams(requestParameters);
     }
 
     /**
@@ -243,7 +234,7 @@ export class WebsocketStreamsConnection {
     allMarketMiniTickersStream(
         requestParameters: AllMarketMiniTickersStreamRequest = {}
     ): WebsocketStream<AllMarketMiniTickersStreamResponse> {
-        return this.websocketMarketStreamsApi.allMarketMiniTickersStream(requestParameters);
+        return this.marketApi.allMarketMiniTickersStream(requestParameters);
     }
 
     /**
@@ -261,7 +252,7 @@ export class WebsocketStreamsConnection {
     allMarketTickersStreams(
         requestParameters: AllMarketTickersStreamsRequest = {}
     ): WebsocketStream<AllMarketTickersStreamsResponse> {
-        return this.websocketMarketStreamsApi.allMarketTickersStreams(requestParameters);
+        return this.marketApi.allMarketTickersStreams(requestParameters);
     }
 
     /**
@@ -279,9 +270,7 @@ export class WebsocketStreamsConnection {
     compositeIndexSymbolInformationStreams(
         requestParameters: CompositeIndexSymbolInformationStreamsRequest
     ): WebsocketStream<CompositeIndexSymbolInformationStreamsResponse> {
-        return this.websocketMarketStreamsApi.compositeIndexSymbolInformationStreams(
-            requestParameters
-        );
+        return this.marketApi.compositeIndexSymbolInformationStreams(requestParameters);
     }
 
     /**
@@ -298,9 +287,7 @@ export class WebsocketStreamsConnection {
     continuousContractKlineCandlestickStreams(
         requestParameters: ContinuousContractKlineCandlestickStreamsRequest
     ): WebsocketStream<ContinuousContractKlineCandlestickStreamsResponse> {
-        return this.websocketMarketStreamsApi.continuousContractKlineCandlestickStreams(
-            requestParameters
-        );
+        return this.marketApi.continuousContractKlineCandlestickStreams(requestParameters);
     }
 
     /**
@@ -318,47 +305,7 @@ export class WebsocketStreamsConnection {
     contractInfoStream(
         requestParameters: ContractInfoStreamRequest = {}
     ): WebsocketStream<ContractInfoStreamResponse> {
-        return this.websocketMarketStreamsApi.contractInfoStream(requestParameters);
-    }
-
-    /**
-     * Bids and asks, pushed every 250 milliseconds, 500 milliseconds, 100 milliseconds (if existing)
-     *
-     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
-     *
-     * Update Speed: 250ms, 500ms, 100ms
-     *
-     * @summary Diff. Book Depth Streams
-     * @param {DiffBookDepthStreamsRequest} requestParameters Request parameters.
-     *
-     * @returns {WebsocketStream<DiffBookDepthStreamsResponse>}
-     * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams Binance API Documentation}
-     */
-    diffBookDepthStreams(
-        requestParameters: DiffBookDepthStreamsRequest
-    ): WebsocketStream<DiffBookDepthStreamsResponse> {
-        return this.websocketMarketStreamsApi.diffBookDepthStreams(requestParameters);
-    }
-
-    /**
-     * Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
-     *
-     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
-     *
-     * Update Speed: Real-time
-     *
-     * @summary Individual Symbol Book Ticker Streams
-     * @param {IndividualSymbolBookTickerStreamsRequest} requestParameters Request parameters.
-     *
-     * @returns {WebsocketStream<IndividualSymbolBookTickerStreamsResponse>}
-     * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Book-Ticker-Streams Binance API Documentation}
-     */
-    individualSymbolBookTickerStreams(
-        requestParameters: IndividualSymbolBookTickerStreamsRequest
-    ): WebsocketStream<IndividualSymbolBookTickerStreamsResponse> {
-        return this.websocketMarketStreamsApi.individualSymbolBookTickerStreams(requestParameters);
+        return this.marketApi.contractInfoStream(requestParameters);
     }
 
     /**
@@ -376,7 +323,7 @@ export class WebsocketStreamsConnection {
     individualSymbolMiniTickerStream(
         requestParameters: IndividualSymbolMiniTickerStreamRequest
     ): WebsocketStream<IndividualSymbolMiniTickerStreamResponse> {
-        return this.websocketMarketStreamsApi.individualSymbolMiniTickerStream(requestParameters);
+        return this.marketApi.individualSymbolMiniTickerStream(requestParameters);
     }
 
     /**
@@ -394,7 +341,7 @@ export class WebsocketStreamsConnection {
     individualSymbolTickerStreams(
         requestParameters: IndividualSymbolTickerStreamsRequest
     ): WebsocketStream<IndividualSymbolTickerStreamsResponse> {
-        return this.websocketMarketStreamsApi.individualSymbolTickerStreams(requestParameters);
+        return this.marketApi.individualSymbolTickerStreams(requestParameters);
     }
 
     /**
@@ -412,7 +359,7 @@ export class WebsocketStreamsConnection {
     klineCandlestickStreams(
         requestParameters: KlineCandlestickStreamsRequest
     ): WebsocketStream<KlineCandlestickStreamsResponse> {
-        return this.websocketMarketStreamsApi.klineCandlestickStreams(requestParameters);
+        return this.marketApi.klineCandlestickStreams(requestParameters);
     }
 
     /**
@@ -431,7 +378,7 @@ export class WebsocketStreamsConnection {
     liquidationOrderStreams(
         requestParameters: LiquidationOrderStreamsRequest
     ): WebsocketStream<LiquidationOrderStreamsResponse> {
-        return this.websocketMarketStreamsApi.liquidationOrderStreams(requestParameters);
+        return this.marketApi.liquidationOrderStreams(requestParameters);
     }
 
     /**
@@ -449,7 +396,7 @@ export class WebsocketStreamsConnection {
     markPriceStream(
         requestParameters: MarkPriceStreamRequest
     ): WebsocketStream<MarkPriceStreamResponse> {
-        return this.websocketMarketStreamsApi.markPriceStream(requestParameters);
+        return this.marketApi.markPriceStream(requestParameters);
     }
 
     /**
@@ -471,7 +418,7 @@ export class WebsocketStreamsConnection {
     markPriceStreamForAllMarket(
         requestParameters: MarkPriceStreamForAllMarketRequest = {}
     ): WebsocketStream<MarkPriceStreamForAllMarketResponse> {
-        return this.websocketMarketStreamsApi.markPriceStreamForAllMarket(requestParameters);
+        return this.marketApi.markPriceStreamForAllMarket(requestParameters);
     }
 
     /**
@@ -489,7 +436,85 @@ export class WebsocketStreamsConnection {
     multiAssetsModeAssetIndex(
         requestParameters: MultiAssetsModeAssetIndexRequest = {}
     ): WebsocketStream<MultiAssetsModeAssetIndexResponse> {
-        return this.websocketMarketStreamsApi.multiAssetsModeAssetIndex(requestParameters);
+        return this.marketApi.multiAssetsModeAssetIndex(requestParameters);
+    }
+
+    /**
+     * Trading session information for the underlying assets of TradFi Perpetual contracts—covering the U.S. equity market and the commodity market—is updated every second. Trading session information for different underlying markets is pushed in separate messages. Session types for the equity market include "PRE_MARKET", "REGULAR", "AFTER_MARKET", "OVERNIGHT", and "NO_TRADING". Session types for the commodity market include "REGULAR" and "NO_TRADING".
+     *
+     * Update Speed: 1s
+     *
+     * @summary Trading Session Stream
+     * @param {TradingSessionStreamRequest} requestParameters Request parameters.
+     *
+     * @returns {WebsocketStream<TradingSessionStreamResponse>}
+     * @throws {RequiredError}
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Trading-Session-Stream Binance API Documentation}
+     */
+    tradingSessionStream(
+        requestParameters: TradingSessionStreamRequest = {}
+    ): WebsocketStream<TradingSessionStreamResponse> {
+        return this.marketApi.tradingSessionStream(requestParameters);
+    }
+
+    /**
+     * Pushes any update to the best bid or ask's price or quantity in real-time for all symbols.
+     *
+     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+     *
+     * Update Speed: 5s
+     *
+     * @summary All Book Tickers Stream
+     * @param {AllBookTickersStreamRequest} requestParameters Request parameters.
+     *
+     * @returns {WebsocketStream<AllBookTickersStreamResponse>}
+     * @throws {RequiredError}
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Book-Tickers-Stream Binance API Documentation}
+     */
+    allBookTickersStream(
+        requestParameters: AllBookTickersStreamRequest = {}
+    ): WebsocketStream<AllBookTickersStreamResponse> {
+        return this.publicApi.allBookTickersStream(requestParameters);
+    }
+
+    /**
+     * Bids and asks, pushed every 250 milliseconds, 500 milliseconds, 100 milliseconds (if existing)
+     *
+     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+     *
+     * Update Speed: 250ms, 500ms, 100ms
+     *
+     * @summary Diff. Book Depth Streams
+     * @param {DiffBookDepthStreamsRequest} requestParameters Request parameters.
+     *
+     * @returns {WebsocketStream<DiffBookDepthStreamsResponse>}
+     * @throws {RequiredError}
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams Binance API Documentation}
+     */
+    diffBookDepthStreams(
+        requestParameters: DiffBookDepthStreamsRequest
+    ): WebsocketStream<DiffBookDepthStreamsResponse> {
+        return this.publicApi.diffBookDepthStreams(requestParameters);
+    }
+
+    /**
+     * Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
+     *
+     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+     *
+     * Update Speed: Real-time
+     *
+     * @summary Individual Symbol Book Ticker Streams
+     * @param {IndividualSymbolBookTickerStreamsRequest} requestParameters Request parameters.
+     *
+     * @returns {WebsocketStream<IndividualSymbolBookTickerStreamsResponse>}
+     * @throws {RequiredError}
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Book-Ticker-Streams Binance API Documentation}
+     */
+    individualSymbolBookTickerStreams(
+        requestParameters: IndividualSymbolBookTickerStreamsRequest
+    ): WebsocketStream<IndividualSymbolBookTickerStreamsResponse> {
+        return this.publicApi.individualSymbolBookTickerStreams(requestParameters);
     }
 
     /**
@@ -509,7 +534,7 @@ export class WebsocketStreamsConnection {
     partialBookDepthStreams(
         requestParameters: PartialBookDepthStreamsRequest
     ): WebsocketStream<PartialBookDepthStreamsResponse> {
-        return this.websocketMarketStreamsApi.partialBookDepthStreams(requestParameters);
+        return this.publicApi.partialBookDepthStreams(requestParameters);
     }
 
     /**
@@ -529,24 +554,6 @@ export class WebsocketStreamsConnection {
     rpiDiffBookDepthStreams(
         requestParameters: RpiDiffBookDepthStreamsRequest
     ): WebsocketStream<RpiDiffBookDepthStreamsResponse> {
-        return this.websocketMarketStreamsApi.rpiDiffBookDepthStreams(requestParameters);
-    }
-
-    /**
-     * Trading session information for the underlying assets of TradFi Perpetual contracts—covering the U.S. equity market and the commodity market—is updated every second. Trading session information for different underlying markets is pushed in separate messages. Session types for the equity market include "PRE_MARKET", "REGULAR", "AFTER_MARKET", "OVERNIGHT", and "NO_TRADING". Session types for the commodity market include "REGULAR" and "NO_TRADING".
-     *
-     * Update Speed: 1s
-     *
-     * @summary Trading Session Stream
-     * @param {TradingSessionStreamRequest} requestParameters Request parameters.
-     *
-     * @returns {WebsocketStream<TradingSessionStreamResponse>}
-     * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Trading-Session-Stream Binance API Documentation}
-     */
-    tradingSessionStream(
-        requestParameters: TradingSessionStreamRequest = {}
-    ): WebsocketStream<TradingSessionStreamResponse> {
-        return this.websocketMarketStreamsApi.tradingSessionStream(requestParameters);
+        return this.publicApi.rpiDiffBookDepthStreams(requestParameters);
     }
 }

@@ -20,15 +20,12 @@ import {
 } from '@binance/common';
 import {
     AggregateTradeStreamsRequest,
-    AllBookTickersStreamRequest,
     AllMarketLiquidationOrderStreamsRequest,
     AllMarketMiniTickersStreamRequest,
     AllMarketTickersStreamsRequest,
     CompositeIndexSymbolInformationStreamsRequest,
     ContinuousContractKlineCandlestickStreamsRequest,
     ContractInfoStreamRequest,
-    DiffBookDepthStreamsRequest,
-    IndividualSymbolBookTickerStreamsRequest,
     IndividualSymbolMiniTickerStreamRequest,
     IndividualSymbolTickerStreamsRequest,
     KlineCandlestickStreamsRequest,
@@ -36,14 +33,12 @@ import {
     MarkPriceStreamRequest,
     MarkPriceStreamForAllMarketRequest,
     MultiAssetsModeAssetIndexRequest,
-    PartialBookDepthStreamsRequest,
-    RpiDiffBookDepthStreamsRequest,
     TradingSessionStreamRequest,
 } from '../../../src/websocket-streams';
-import { WebsocketMarketStreamsApi } from '../../../src/websocket-streams';
+import { MarketApi } from '../../../src/websocket-streams';
 import { mockSubscription } from './utils';
 
-describe('WebsocketMarketStreamsApi', () => {
+describe('MarketApi', () => {
     describe('aggregateTradeStreams()', () => {
         it('should execute aggregateTradeStreams() successfully', async () => {
             const params: AggregateTradeStreamsRequest = {
@@ -75,8 +70,9 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should handle aggregateTradeStreams() WebSocket stream data', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
+            websocketStreamClient.connectionPool[0].urlPath = 'market';
 
             const params: AggregateTradeStreamsRequest = {
                 symbol: 'btcusdt',
@@ -119,8 +115,8 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should throw RequiredError when symbol is missing', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
 
             const _params: AggregateTradeStreamsRequest = {
                 symbol: 'btcusdt',
@@ -131,74 +127,6 @@ describe('WebsocketMarketStreamsApi', () => {
             expect(() => websocketStreamApi.aggregateTradeStreams(params)).toThrow(
                 'Required parameter symbol was null or undefined when calling aggregateTradeStreams.'
             );
-        });
-    });
-
-    describe('allBookTickersStream()', () => {
-        it('should execute allBookTickersStream() successfully', async () => {
-            const params: AllBookTickersStreamRequest = {
-                id: 'e9d6b4349871b40611412680b3445fac',
-            };
-
-            const mockResponse = JSONParse(
-                JSONStringify({
-                    e: 'bookTicker',
-                    u: 400900217,
-                    E: 1568014460893,
-                    T: 1568014460891,
-                    s: 'BNBUSDT',
-                    b: '25.35190000',
-                    B: '31.21000000',
-                    a: '25.36520000',
-                    A: '40.66000000',
-                })
-            );
-
-            mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/!bookTicker'.slice(1), params as unknown as Record<string, AllBookTickersStreamRequest>)}`,
-                mockResponse
-            );
-        });
-
-        it('should handle allBookTickersStream() WebSocket stream data', () => {
-            const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
-
-            const params: AllBookTickersStreamRequest = {
-                id: 'e9d6b4349871b40611412680b3445fac',
-            };
-
-            const mockResponse = JSONParse(
-                JSONStringify({
-                    e: 'bookTicker',
-                    u: 400900217,
-                    E: 1568014460893,
-                    T: 1568014460891,
-                    s: 'BNBUSDT',
-                    b: '25.35190000',
-                    B: '31.21000000',
-                    a: '25.36520000',
-                    A: '40.66000000',
-                })
-            );
-
-            const stream = websocketStreamApi.allBookTickersStream(params);
-            const mockCallback = jest.fn(() => {});
-            stream.on('message', mockCallback);
-
-            websocketStreamClient['onMessage'](
-                JSONStringify({
-                    stream: replaceWebsocketStreamsPlaceholders(
-                        '/!bookTicker'.slice(1),
-                        params as unknown as Record<string, AllBookTickersStreamRequest>
-                    ),
-                    data: mockResponse,
-                }),
-                websocketStreamClient.connectionPool[0]
-            );
-
-            expect(mockCallback).toHaveBeenCalledWith(mockResponse);
         });
     });
 
@@ -236,8 +164,9 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should handle allMarketLiquidationOrderStreams() WebSocket stream data', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
+            websocketStreamClient.connectionPool[0].urlPath = 'market';
 
             const params: AllMarketLiquidationOrderStreamsRequest = {
                 id: 'e9d6b4349871b40611412680b3445fac',
@@ -312,8 +241,9 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should handle allMarketMiniTickersStream() WebSocket stream data', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
+            websocketStreamClient.connectionPool[0].urlPath = 'market';
 
             const params: AllMarketMiniTickersStreamRequest = {
                 id: 'e9d6b4349871b40611412680b3445fac',
@@ -393,8 +323,9 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should handle allMarketTickersStreams() WebSocket stream data', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
+            websocketStreamClient.connectionPool[0].urlPath = 'market';
 
             const params: AllMarketTickersStreamsRequest = {
                 id: 'e9d6b4349871b40611412680b3445fac',
@@ -473,8 +404,9 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should handle compositeIndexSymbolInformationStreams() WebSocket stream data', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
+            websocketStreamClient.connectionPool[0].urlPath = 'market';
 
             const params: CompositeIndexSymbolInformationStreamsRequest = {
                 symbol: 'btcusdt',
@@ -518,8 +450,8 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should throw RequiredError when symbol is missing', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
 
             const _params: CompositeIndexSymbolInformationStreamsRequest = {
                 symbol: 'btcusdt',
@@ -577,8 +509,9 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should handle continuousContractKlineCandlestickStreams() WebSocket stream data', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
+            websocketStreamClient.connectionPool[0].urlPath = 'market';
 
             const params: ContinuousContractKlineCandlestickStreamsRequest = {
                 pair: 'btcusdt',
@@ -637,8 +570,8 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should throw RequiredError when pair is missing', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
 
             const _params: ContinuousContractKlineCandlestickStreamsRequest = {
                 pair: 'btcusdt',
@@ -657,8 +590,8 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should throw RequiredError when contractType is missing', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
 
             const _params: ContinuousContractKlineCandlestickStreamsRequest = {
                 pair: 'btcusdt',
@@ -677,8 +610,8 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should throw RequiredError when interval is missing', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
 
             const _params: ContinuousContractKlineCandlestickStreamsRequest = {
                 pair: 'btcusdt',
@@ -727,8 +660,9 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should handle contractInfoStream() WebSocket stream data', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
+            websocketStreamClient.connectionPool[0].urlPath = 'market';
 
             const params: ContractInfoStreamRequest = {
                 id: 'e9d6b4349871b40611412680b3445fac',
@@ -770,183 +704,6 @@ describe('WebsocketMarketStreamsApi', () => {
         });
     });
 
-    describe('diffBookDepthStreams()', () => {
-        it('should execute diffBookDepthStreams() successfully', async () => {
-            const params: DiffBookDepthStreamsRequest = {
-                symbol: 'btcusdt',
-                id: 'e9d6b4349871b40611412680b3445fac',
-                updateSpeed: 'updateSpeed_example',
-            };
-
-            const mockResponse = JSONParse(
-                JSONStringify({
-                    e: 'depthUpdate',
-                    E: 123456789,
-                    T: 123456788,
-                    s: 'BTCUSDT',
-                    U: 157,
-                    u: 160,
-                    pu: 149,
-                    b: [['0.0024', '10']],
-                    a: [['0.0026', '100']],
-                })
-            );
-
-            mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@depth@<updateSpeed>'.slice(1), params as unknown as Record<string, DiffBookDepthStreamsRequest>)}`,
-                mockResponse
-            );
-        });
-
-        it('should handle diffBookDepthStreams() WebSocket stream data', () => {
-            const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
-
-            const params: DiffBookDepthStreamsRequest = {
-                symbol: 'btcusdt',
-                id: 'e9d6b4349871b40611412680b3445fac',
-                updateSpeed: 'updateSpeed_example',
-            };
-
-            const mockResponse = JSONParse(
-                JSONStringify({
-                    e: 'depthUpdate',
-                    E: 123456789,
-                    T: 123456788,
-                    s: 'BTCUSDT',
-                    U: 157,
-                    u: 160,
-                    pu: 149,
-                    b: [['0.0024', '10']],
-                    a: [['0.0026', '100']],
-                })
-            );
-
-            const stream = websocketStreamApi.diffBookDepthStreams(params);
-            const mockCallback = jest.fn(() => {});
-            stream.on('message', mockCallback);
-
-            websocketStreamClient['onMessage'](
-                JSONStringify({
-                    stream: replaceWebsocketStreamsPlaceholders(
-                        '/<symbol>@depth@<updateSpeed>'.slice(1),
-                        params as unknown as Record<string, DiffBookDepthStreamsRequest>
-                    ),
-                    data: mockResponse,
-                }),
-                websocketStreamClient.connectionPool[0]
-            );
-
-            expect(mockCallback).toHaveBeenCalledWith(mockResponse);
-        });
-
-        it('should throw RequiredError when symbol is missing', () => {
-            const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
-
-            const _params: DiffBookDepthStreamsRequest = {
-                symbol: 'btcusdt',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.symbol;
-
-            expect(() => websocketStreamApi.diffBookDepthStreams(params)).toThrow(
-                'Required parameter symbol was null or undefined when calling diffBookDepthStreams.'
-            );
-        });
-    });
-
-    describe('individualSymbolBookTickerStreams()', () => {
-        it('should execute individualSymbolBookTickerStreams() successfully', async () => {
-            const params: IndividualSymbolBookTickerStreamsRequest = {
-                symbol: 'btcusdt',
-                id: 'e9d6b4349871b40611412680b3445fac',
-            };
-
-            const mockResponse = JSONParse(
-                JSONStringify({
-                    e: 'bookTicker',
-                    u: 400900217,
-                    E: 1568014460893,
-                    T: 1568014460891,
-                    s: 'BNBUSDT',
-                    b: '25.35190000',
-                    B: '31.21000000',
-                    a: '25.36520000',
-                    A: '40.66000000',
-                })
-            );
-
-            mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@bookTicker'.slice(1), params as unknown as Record<string, IndividualSymbolBookTickerStreamsRequest>)}`,
-                mockResponse
-            );
-        });
-
-        it('should handle individualSymbolBookTickerStreams() WebSocket stream data', () => {
-            const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
-
-            const params: IndividualSymbolBookTickerStreamsRequest = {
-                symbol: 'btcusdt',
-                id: 'e9d6b4349871b40611412680b3445fac',
-            };
-
-            const mockResponse = JSONParse(
-                JSONStringify({
-                    e: 'bookTicker',
-                    u: 400900217,
-                    E: 1568014460893,
-                    T: 1568014460891,
-                    s: 'BNBUSDT',
-                    b: '25.35190000',
-                    B: '31.21000000',
-                    a: '25.36520000',
-                    A: '40.66000000',
-                })
-            );
-
-            const stream = websocketStreamApi.individualSymbolBookTickerStreams(params);
-            const mockCallback = jest.fn(() => {});
-            stream.on('message', mockCallback);
-
-            websocketStreamClient['onMessage'](
-                JSONStringify({
-                    stream: replaceWebsocketStreamsPlaceholders(
-                        '/<symbol>@bookTicker'.slice(1),
-                        params as unknown as Record<
-                            string,
-                            IndividualSymbolBookTickerStreamsRequest
-                        >
-                    ),
-                    data: mockResponse,
-                }),
-                websocketStreamClient.connectionPool[0]
-            );
-
-            expect(mockCallback).toHaveBeenCalledWith(mockResponse);
-        });
-
-        it('should throw RequiredError when symbol is missing', () => {
-            const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
-
-            const _params: IndividualSymbolBookTickerStreamsRequest = {
-                symbol: 'btcusdt',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.symbol;
-
-            expect(() => websocketStreamApi.individualSymbolBookTickerStreams(params)).toThrow(
-                'Required parameter symbol was null or undefined when calling individualSymbolBookTickerStreams.'
-            );
-        });
-    });
-
     describe('individualSymbolMiniTickerStream()', () => {
         it('should execute individualSymbolMiniTickerStream() successfully', async () => {
             const params: IndividualSymbolMiniTickerStreamRequest = {
@@ -976,8 +733,9 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should handle individualSymbolMiniTickerStream() WebSocket stream data', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
+            websocketStreamClient.connectionPool[0].urlPath = 'market';
 
             const params: IndividualSymbolMiniTickerStreamRequest = {
                 symbol: 'btcusdt',
@@ -1018,8 +776,8 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should throw RequiredError when symbol is missing', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
 
             const _params: IndividualSymbolMiniTickerStreamRequest = {
                 symbol: 'btcusdt',
@@ -1071,8 +829,9 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should handle individualSymbolTickerStreams() WebSocket stream data', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
+            websocketStreamClient.connectionPool[0].urlPath = 'market';
 
             const params: IndividualSymbolTickerStreamsRequest = {
                 symbol: 'btcusdt',
@@ -1122,8 +881,8 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should throw RequiredError when symbol is missing', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
 
             const _params: IndividualSymbolTickerStreamsRequest = {
                 symbol: 'btcusdt',
@@ -1180,8 +939,9 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should handle klineCandlestickStreams() WebSocket stream data', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
+            websocketStreamClient.connectionPool[0].urlPath = 'market';
 
             const params: KlineCandlestickStreamsRequest = {
                 symbol: 'btcusdt',
@@ -1236,8 +996,8 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should throw RequiredError when symbol is missing', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
 
             const _params: KlineCandlestickStreamsRequest = {
                 symbol: 'btcusdt',
@@ -1253,8 +1013,8 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should throw RequiredError when interval is missing', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
 
             const _params: KlineCandlestickStreamsRequest = {
                 symbol: 'btcusdt',
@@ -1304,8 +1064,9 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should handle liquidationOrderStreams() WebSocket stream data', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
+            websocketStreamClient.connectionPool[0].urlPath = 'market';
 
             const params: LiquidationOrderStreamsRequest = {
                 symbol: 'btcusdt',
@@ -1352,8 +1113,8 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should throw RequiredError when symbol is missing', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
 
             const _params: LiquidationOrderStreamsRequest = {
                 symbol: 'btcusdt',
@@ -1396,8 +1157,9 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should handle markPriceStream() WebSocket stream data', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
+            websocketStreamClient.connectionPool[0].urlPath = 'market';
 
             const params: MarkPriceStreamRequest = {
                 symbol: 'btcusdt',
@@ -1438,8 +1200,8 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should throw RequiredError when symbol is missing', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
 
             const _params: MarkPriceStreamRequest = {
                 symbol: 'btcusdt',
@@ -1483,8 +1245,9 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should handle markPriceStreamForAllMarket() WebSocket stream data', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
+            websocketStreamClient.connectionPool[0].urlPath = 'market';
 
             const params: MarkPriceStreamForAllMarketRequest = {
                 id: 'e9d6b4349871b40611412680b3445fac',
@@ -1572,8 +1335,9 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should handle multiAssetsModeAssetIndex() WebSocket stream data', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
+            websocketStreamClient.connectionPool[0].urlPath = 'market';
 
             const params: MultiAssetsModeAssetIndexRequest = {
                 id: 'e9d6b4349871b40611412680b3445fac',
@@ -1631,224 +1395,6 @@ describe('WebsocketMarketStreamsApi', () => {
         });
     });
 
-    describe('partialBookDepthStreams()', () => {
-        it('should execute partialBookDepthStreams() successfully', async () => {
-            const params: PartialBookDepthStreamsRequest = {
-                symbol: 'btcusdt',
-                levels: 10,
-                id: 'e9d6b4349871b40611412680b3445fac',
-                updateSpeed: 'updateSpeed_example',
-            };
-
-            const mockResponse = JSONParse(
-                JSONStringify({
-                    e: 'depthUpdate',
-                    E: 1571889248277,
-                    T: 1571889248276,
-                    s: 'BTCUSDT',
-                    U: 390497796,
-                    u: 390497878,
-                    pu: 390497794,
-                    b: [
-                        ['7403.89', '0.002'],
-                        ['7403.90', '3.906'],
-                        ['7404.00', '1.428'],
-                        ['7404.85', '5.239'],
-                        ['7405.43', '2.562'],
-                    ],
-                    a: [
-                        ['7405.96', '3.340'],
-                        ['7406.63', '4.525'],
-                        ['7407.08', '2.475'],
-                        ['7407.15', '4.800'],
-                        ['7407.20', '0.175'],
-                    ],
-                })
-            );
-
-            mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@depth<levels>@<updateSpeed>'.slice(1), params as unknown as Record<string, PartialBookDepthStreamsRequest>)}`,
-                mockResponse
-            );
-        });
-
-        it('should handle partialBookDepthStreams() WebSocket stream data', () => {
-            const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
-
-            const params: PartialBookDepthStreamsRequest = {
-                symbol: 'btcusdt',
-                levels: 10,
-                id: 'e9d6b4349871b40611412680b3445fac',
-                updateSpeed: 'updateSpeed_example',
-            };
-
-            const mockResponse = JSONParse(
-                JSONStringify({
-                    e: 'depthUpdate',
-                    E: 1571889248277,
-                    T: 1571889248276,
-                    s: 'BTCUSDT',
-                    U: 390497796,
-                    u: 390497878,
-                    pu: 390497794,
-                    b: [
-                        ['7403.89', '0.002'],
-                        ['7403.90', '3.906'],
-                        ['7404.00', '1.428'],
-                        ['7404.85', '5.239'],
-                        ['7405.43', '2.562'],
-                    ],
-                    a: [
-                        ['7405.96', '3.340'],
-                        ['7406.63', '4.525'],
-                        ['7407.08', '2.475'],
-                        ['7407.15', '4.800'],
-                        ['7407.20', '0.175'],
-                    ],
-                })
-            );
-
-            const stream = websocketStreamApi.partialBookDepthStreams(params);
-            const mockCallback = jest.fn(() => {});
-            stream.on('message', mockCallback);
-
-            websocketStreamClient['onMessage'](
-                JSONStringify({
-                    stream: replaceWebsocketStreamsPlaceholders(
-                        '/<symbol>@depth<levels>@<updateSpeed>'.slice(1),
-                        params as unknown as Record<string, PartialBookDepthStreamsRequest>
-                    ),
-                    data: mockResponse,
-                }),
-                websocketStreamClient.connectionPool[0]
-            );
-
-            expect(mockCallback).toHaveBeenCalledWith(mockResponse);
-        });
-
-        it('should throw RequiredError when symbol is missing', () => {
-            const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
-
-            const _params: PartialBookDepthStreamsRequest = {
-                symbol: 'btcusdt',
-                levels: 10,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.symbol;
-
-            expect(() => websocketStreamApi.partialBookDepthStreams(params)).toThrow(
-                'Required parameter symbol was null or undefined when calling partialBookDepthStreams.'
-            );
-        });
-
-        it('should throw RequiredError when levels is missing', () => {
-            const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
-
-            const _params: PartialBookDepthStreamsRequest = {
-                symbol: 'btcusdt',
-                levels: 10,
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.levels;
-
-            expect(() => websocketStreamApi.partialBookDepthStreams(params)).toThrow(
-                'Required parameter levels was null or undefined when calling partialBookDepthStreams.'
-            );
-        });
-    });
-
-    describe('rpiDiffBookDepthStreams()', () => {
-        it('should execute rpiDiffBookDepthStreams() successfully', async () => {
-            const params: RpiDiffBookDepthStreamsRequest = {
-                symbol: 'btcusdt',
-                id: 'e9d6b4349871b40611412680b3445fac',
-            };
-
-            const mockResponse = JSONParse(
-                JSONStringify({
-                    e: 'depthUpdate',
-                    E: 123456789,
-                    T: 123456788,
-                    s: 'BTCUSDT',
-                    U: 157,
-                    u: 160,
-                    pu: 149,
-                    b: [['0.0024', '10']],
-                    a: [['0.0026', '100']],
-                })
-            );
-
-            mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@rpiDepth@500ms'.slice(1), params as unknown as Record<string, RpiDiffBookDepthStreamsRequest>)}`,
-                mockResponse
-            );
-        });
-
-        it('should handle rpiDiffBookDepthStreams() WebSocket stream data', () => {
-            const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
-
-            const params: RpiDiffBookDepthStreamsRequest = {
-                symbol: 'btcusdt',
-                id: 'e9d6b4349871b40611412680b3445fac',
-            };
-
-            const mockResponse = JSONParse(
-                JSONStringify({
-                    e: 'depthUpdate',
-                    E: 123456789,
-                    T: 123456788,
-                    s: 'BTCUSDT',
-                    U: 157,
-                    u: 160,
-                    pu: 149,
-                    b: [['0.0024', '10']],
-                    a: [['0.0026', '100']],
-                })
-            );
-
-            const stream = websocketStreamApi.rpiDiffBookDepthStreams(params);
-            const mockCallback = jest.fn(() => {});
-            stream.on('message', mockCallback);
-
-            websocketStreamClient['onMessage'](
-                JSONStringify({
-                    stream: replaceWebsocketStreamsPlaceholders(
-                        '/<symbol>@rpiDepth@500ms'.slice(1),
-                        params as unknown as Record<string, RpiDiffBookDepthStreamsRequest>
-                    ),
-                    data: mockResponse,
-                }),
-                websocketStreamClient.connectionPool[0]
-            );
-
-            expect(mockCallback).toHaveBeenCalledWith(mockResponse);
-        });
-
-        it('should throw RequiredError when symbol is missing', () => {
-            const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
-
-            const _params: RpiDiffBookDepthStreamsRequest = {
-                symbol: 'btcusdt',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.symbol;
-
-            expect(() => websocketStreamApi.rpiDiffBookDepthStreams(params)).toThrow(
-                'Required parameter symbol was null or undefined when calling rpiDiffBookDepthStreams.'
-            );
-        });
-    });
-
     describe('tradingSessionStream()', () => {
         it('should execute tradingSessionStream() successfully', async () => {
             const params: TradingSessionStreamRequest = {
@@ -1873,8 +1419,9 @@ describe('WebsocketMarketStreamsApi', () => {
 
         it('should handle tradingSessionStream() WebSocket stream data', () => {
             const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration);
-            const websocketStreamApi = new WebsocketMarketStreamsApi(websocketStreamClient);
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
+            websocketStreamClient.connectionPool[0].urlPath = 'market';
 
             const params: TradingSessionStreamRequest = {
                 id: 'e9d6b4349871b40611412680b3445fac',
