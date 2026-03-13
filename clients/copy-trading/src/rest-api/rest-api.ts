@@ -86,6 +86,7 @@ export class RestAPI {
 
     /**
      * Get Futures Lead Trader Status
+     *
      * Weight: 20
      *
      * @summary Get Futures Lead Trader Status(TRADE)
@@ -103,6 +104,7 @@ export class RestAPI {
 
     /**
      * Get Futures Lead Trading Symbol Whitelist
+     *
      * Weight: 20
      *
      * @summary Get Futures Lead Trading Symbol Whitelist(USER_DATA)

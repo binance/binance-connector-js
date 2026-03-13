@@ -30,6 +30,7 @@ const FutureCopyTradingApiAxiosParamCreator = function (configuration: Configura
     return {
         /**
          * Get Futures Lead Trader Status
+         *
          * Weight: 20
          *
          * @summary Get Futures Lead Trader Status(TRADE)
@@ -58,6 +59,7 @@ const FutureCopyTradingApiAxiosParamCreator = function (configuration: Configura
         },
         /**
          * Get Futures Lead Trading Symbol Whitelist
+         *
          * Weight: 20
          *
          * @summary Get Futures Lead Trading Symbol Whitelist(USER_DATA)
@@ -96,6 +98,7 @@ const FutureCopyTradingApiAxiosParamCreator = function (configuration: Configura
 export interface FutureCopyTradingApiInterface {
     /**
      * Get Futures Lead Trader Status
+     *
      * Weight: 20
      *
      * @summary Get Futures Lead Trader Status(TRADE)
@@ -109,6 +112,7 @@ export interface FutureCopyTradingApiInterface {
     ): Promise<RestApiResponse<GetFuturesLeadTraderStatusResponse>>;
     /**
      * Get Futures Lead Trading Symbol Whitelist
+     *
      * Weight: 20
      *
      * @summary Get Futures Lead Trading Symbol Whitelist(USER_DATA)
@@ -163,6 +167,7 @@ export class FutureCopyTradingApi implements FutureCopyTradingApiInterface {
 
     /**
      * Get Futures Lead Trader Status
+     *
      * Weight: 20
      *
      * @summary Get Futures Lead Trader Status(TRADE)
@@ -191,6 +196,7 @@ export class FutureCopyTradingApi implements FutureCopyTradingApiInterface {
 
     /**
      * Get Futures Lead Trading Symbol Whitelist
+     *
      * Weight: 20
      *
      * @summary Get Futures Lead Trading Symbol Whitelist(USER_DATA)
