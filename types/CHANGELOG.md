@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.16 - 2026-03-19
+
+### Changed (2)
+
+- Update `@binance/common` library to version `2.3.6`.
+- Resolve security vulnerabilities on `flatted`.
+
 ## 1.0.15 - 2026-03-13
 
 ### Changed (1)
