@@ -1,5 +1,21 @@
 # Changelog
 
+## 26.0.0 - 2026-03-19
+
+### Changed (4)
+
+- Update `@binance/common` library to version `2.3.6`.
+- Resolve security vulnerabilities on `flatted`.
+
+#### WebSocket Streams
+
+- Modified response for `markPriceStreamForAllMarket()` (`!markPrice@arr@<updateSpeed>` stream):
+  - items: property `ap` added
+  - items: item property `ap` added
+
+- Modified response for `markPriceStream()` (`<symbol>@markPrice@<updateSpeed>` stream):
+  - property `ap` added
+
 ## 25.0.0 - 2026-03-13
 
 ### Changed (2)

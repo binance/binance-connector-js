@@ -48,6 +48,12 @@ export interface MarkPriceStreamForAllMarketResponseInner {
      * @type {string}
      * @memberof MarkPriceStreamForAllMarketResponseInner
      */
+    ap?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MarkPriceStreamForAllMarketResponseInner
+     */
     i?: string;
     /**
      *
