@@ -163,4 +163,10 @@ export interface OrderTradeUpdateO {
      * @memberof OrderTradeUpdateO
      */
     rp?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof OrderTradeUpdateO
+     */
+    V?: string;
 }

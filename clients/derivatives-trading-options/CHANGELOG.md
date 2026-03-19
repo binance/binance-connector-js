@@ -1,5 +1,46 @@
 # Changelog
 
+## 15.0.0 - 2026-03-19
+
+### Changed (11)
+
+- Update `@binance/common` library to version `2.3.6`.
+- Resolve security vulnerabilities on `flatted`.
+
+#### REST API
+
+- Added parameter `selfTradePreventionMode`
+  - affected methods:
+    - `newOrder()` (`POST /eapi/v1/order`)
+- Modified parameter `orders`:
+  - items: property `selfTradePreventionMode` added
+  - items: item property `selfTradePreventionMode` added
+  - affected methods:
+    - `placeMultipleOrders()` (`POST /eapi/v1/batchOrders`)
+- Modified response for `cancelMultipleOptionOrders()` (`DELETE /eapi/v1/batchOrders`):
+  - items: property `selfTradePreventionMode` added
+  - items: item property `selfTradePreventionMode` added
+
+- Modified response for `placeMultipleOrders()` (`POST /eapi/v1/batchOrders`):
+  - items: property `selfTradePreventionMode` added
+  - items: item property `selfTradePreventionMode` added
+
+- Modified response for `optionMarginAccountInformation()` (`GET /eapi/v1/marginAccount`):
+  - property `tradeGroupId` added
+
+- Modified response for `queryCurrentOpenOptionOrders()` (`GET /eapi/v1/openOrders`):
+  - items: property `selfTradePreventionMode` added
+  - items: item property `selfTradePreventionMode` added
+
+- Modified response for `cancelOptionOrder()` (`DELETE /eapi/v1/order`):
+  - property `selfTradePreventionMode` added
+
+- Modified response for `querySingleOrder()` (`GET /eapi/v1/order`):
+  - property `selfTradePreventionMode` added
+
+- Modified response for `newOrder()` (`POST /eapi/v1/order`):
+  - property `selfTradePreventionMode` added
+
 ## 14.0.0 - 2026-03-13
 
 ### Changed (2)

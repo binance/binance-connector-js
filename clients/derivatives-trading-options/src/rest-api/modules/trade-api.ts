@@ -44,6 +44,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get trades for a specific account and symbol.
          *
+         * Only support querying trades in the past 3 months
+         *
          * Weight: 5
          *
          * @summary Account Trade List (USER_DATA)
@@ -294,6 +296,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {NewOrderNewOrderRespTypeEnum} [newOrderRespType] "ACK", "RESULT", Default "ACK"
          * @param {string} [clientOrderId] User-defined order ID, e.g 10000
          * @param {boolean} [isMmp] is market maker protection order, true/false
+         * @param {NewOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire maker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; Default `EXPIRE_MAKER`
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -310,6 +313,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             newOrderRespType?: NewOrderNewOrderRespTypeEnum,
             clientOrderId?: string,
             isMmp?: boolean,
+            selfTradePreventionMode?: NewOrderSelfTradePreventionModeEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'symbol' is not null or undefined
@@ -356,6 +360,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             }
             if (isMmp !== undefined && isMmp !== null) {
                 localVarQueryParameter['isMmp'] = isMmp;
+            }
+            if (selfTradePreventionMode !== undefined && selfTradePreventionMode !== null) {
+                localVarQueryParameter['selfTradePreventionMode'] = selfTradePreventionMode;
             }
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -707,6 +714,8 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
 export interface TradeApiInterface {
     /**
      * Get trades for a specific account and symbol.
+     *
+     * Only support querying trades in the past 3 months
      *
      * Weight: 5
      *
@@ -1141,6 +1150,13 @@ export interface NewOrderRequest {
     readonly isMmp?: boolean;
 
     /**
+     * `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire maker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; Default `EXPIRE_MAKER`
+     * @type {'EXPIRE_TAKER' | 'EXPIRE_BOTH' | 'EXPIRE_MAKER'}
+     * @memberof TradeApiNewOrder
+     */
+    readonly selfTradePreventionMode?: NewOrderSelfTradePreventionModeEnum;
+
+    /**
      *
      * @type {number | bigint}
      * @memberof TradeApiNewOrder
@@ -1381,6 +1397,8 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Get trades for a specific account and symbol.
      *
+     * Only support querying trades in the past 3 months
+     *
      * Weight: 5
      *
      * @summary Account Trade List (USER_DATA)
@@ -1569,6 +1587,7 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.newOrderRespType,
             requestParameters?.clientOrderId,
             requestParameters?.isMmp,
+            requestParameters?.selfTradePreventionMode,
             requestParameters?.recvWindow
         );
         return sendRequest<NewOrderResponse>(
@@ -1834,4 +1853,10 @@ export enum NewOrderTimeInForceEnum {
 export enum NewOrderNewOrderRespTypeEnum {
     ACK = 'ACK',
     RESULT = 'RESULT',
+}
+
+export enum NewOrderSelfTradePreventionModeEnum {
+    EXPIRE_TAKER = 'EXPIRE_TAKER',
+    EXPIRE_BOTH = 'EXPIRE_BOTH',
+    EXPIRE_MAKER = 'EXPIRE_MAKER',
 }

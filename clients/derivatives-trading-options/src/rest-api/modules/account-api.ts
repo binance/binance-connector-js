@@ -29,6 +29,9 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query account funding flows.
          *
+         *
+         * Only support querying data in the past 3 months
+         *
          * Weight: 1
          *
          * @summary Account Funding Flow (USER_DATA)
@@ -126,6 +129,9 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
 export interface AccountApiInterface {
     /**
      * Query account funding flows.
+     *
+     *
+     * Only support querying data in the past 3 months
      *
      * Weight: 1
      *
@@ -230,6 +236,9 @@ export class AccountApi implements AccountApiInterface {
 
     /**
      * Query account funding flows.
+     *
+     *
+     * Only support querying data in the past 3 months
      *
      * Weight: 1
      *

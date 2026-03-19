@@ -139,4 +139,10 @@ export interface PlaceMultipleOrdersResponseInner {
      * @memberof PlaceMultipleOrdersResponseInner
      */
     mmp?: boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof PlaceMultipleOrdersResponseInner
+     */
+    selfTradePreventionMode?: string;
 }

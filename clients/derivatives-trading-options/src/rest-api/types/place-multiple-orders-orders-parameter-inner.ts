@@ -85,6 +85,12 @@ export interface PlaceMultipleOrdersOrdersParameterInner {
      * @memberof PlaceMultipleOrdersOrdersParameterInner
      */
     isMmp?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof PlaceMultipleOrdersOrdersParameterInner
+     */
+    selfTradePreventionMode?: PlaceMultipleOrdersOrdersParameterInnerSelfTradePreventionModeEnum;
 }
 
 export const PlaceMultipleOrdersOrdersParameterInnerSideEnum = {
@@ -116,3 +122,11 @@ export const PlaceMultipleOrdersOrdersParameterInnerNewOrderRespTypeEnum = {
 
 export type PlaceMultipleOrdersOrdersParameterInnerNewOrderRespTypeEnum =
     (typeof PlaceMultipleOrdersOrdersParameterInnerNewOrderRespTypeEnum)[keyof typeof PlaceMultipleOrdersOrdersParameterInnerNewOrderRespTypeEnum];
+export const PlaceMultipleOrdersOrdersParameterInnerSelfTradePreventionModeEnum = {
+    EXPIRE_TAKER: 'EXPIRE_TAKER',
+    EXPIRE_BOTH: 'EXPIRE_BOTH',
+    EXPIRE_MAKER: 'EXPIRE_MAKER',
+} as const;
+
+export type PlaceMultipleOrdersOrdersParameterInnerSelfTradePreventionModeEnum =
+    (typeof PlaceMultipleOrdersOrdersParameterInnerSelfTradePreventionModeEnum)[keyof typeof PlaceMultipleOrdersOrdersParameterInnerSelfTradePreventionModeEnum];

@@ -133,4 +133,10 @@ export interface QuerySingleOrderResponse {
      * @memberof QuerySingleOrderResponse
      */
     mmp?: boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof QuerySingleOrderResponse
+     */
+    selfTradePreventionMode?: string;
 }

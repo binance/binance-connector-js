@@ -69,4 +69,10 @@ export interface OptionMarginAccountInformationResponse {
      * @memberof OptionMarginAccountInformationResponse
      */
     reduceOnly?: boolean;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof OptionMarginAccountInformationResponse
+     */
+    tradeGroupId?: number | bigint;
 }

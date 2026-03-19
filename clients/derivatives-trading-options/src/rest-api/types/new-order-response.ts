@@ -139,4 +139,10 @@ export interface NewOrderResponse {
      * @memberof NewOrderResponse
      */
     mmp?: boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof NewOrderResponse
+     */
+    selfTradePreventionMode?: string;
 }

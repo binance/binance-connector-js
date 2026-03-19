@@ -133,4 +133,10 @@ export interface QueryCurrentOpenOptionOrdersResponseInner {
      * @memberof QueryCurrentOpenOptionOrdersResponseInner
      */
     mmp?: boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof QueryCurrentOpenOptionOrdersResponseInner
+     */
+    selfTradePreventionMode?: string;
 }

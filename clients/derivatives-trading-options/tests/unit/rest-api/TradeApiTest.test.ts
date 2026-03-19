@@ -21,6 +21,7 @@ import {
     NewOrderTypeEnum,
     NewOrderTimeInForceEnum,
     NewOrderNewOrderRespTypeEnum,
+    NewOrderSelfTradePreventionModeEnum,
 } from '../../../src/rest-api';
 import {
     AccountTradeListRequest,
@@ -358,6 +359,7 @@ describe('TradeApi', () => {
                         optionSide: 'CALL',
                         quoteAsset: 'USDT',
                         mmp: false,
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                     },
                 ])
             );
@@ -407,6 +409,7 @@ describe('TradeApi', () => {
                         optionSide: 'CALL',
                         quoteAsset: 'USDT',
                         mmp: false,
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                     },
                 ])
             );
@@ -489,6 +492,7 @@ describe('TradeApi', () => {
                     optionSide: 'CALL',
                     quoteAsset: 'USDT',
                     mmp: false,
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                 })
             );
 
@@ -536,6 +540,7 @@ describe('TradeApi', () => {
                     optionSide: 'CALL',
                     quoteAsset: 'USDT',
                     mmp: false,
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                 })
             );
 
@@ -616,6 +621,7 @@ describe('TradeApi', () => {
                     optionSide: 'CALL',
                     quoteAsset: 'USDT',
                     mmp: false,
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                 })
             );
 
@@ -646,6 +652,7 @@ describe('TradeApi', () => {
                 newOrderRespType: NewOrderNewOrderRespTypeEnum.ACK,
                 clientOrderId: '1',
                 isMmp: true,
+                selfTradePreventionMode: NewOrderSelfTradePreventionModeEnum.EXPIRE_TAKER,
                 recvWindow: 5000,
             };
 
@@ -671,6 +678,7 @@ describe('TradeApi', () => {
                     optionSide: 'CALL',
                     quoteAsset: 'USDT',
                     mmp: false,
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                 })
             );
 
@@ -900,6 +908,7 @@ describe('TradeApi', () => {
                         optionSide: 'CALL',
                         quoteAsset: 'USDT',
                         mmp: false,
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                     },
                 ])
             );
@@ -947,6 +956,7 @@ describe('TradeApi', () => {
                         optionSide: 'CALL',
                         quoteAsset: 'USDT',
                         mmp: false,
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                     },
                 ])
             );
@@ -1021,6 +1031,7 @@ describe('TradeApi', () => {
                         optionSide: 'CALL',
                         quoteAsset: 'USDT',
                         mmp: false,
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                     },
                 ])
             );
@@ -1070,6 +1081,7 @@ describe('TradeApi', () => {
                         optionSide: 'CALL',
                         quoteAsset: 'USDT',
                         mmp: false,
+                        selfTradePreventionMode: 'EXPIRE_MAKER',
                     },
                 ])
             );
@@ -1263,6 +1275,7 @@ describe('TradeApi', () => {
                     optionSide: 'CALL',
                     quoteAsset: 'USDT',
                     mmp: false,
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                 })
             );
 
@@ -1309,6 +1322,7 @@ describe('TradeApi', () => {
                     optionSide: 'CALL',
                     quoteAsset: 'USDT',
                     mmp: false,
+                    selfTradePreventionMode: 'EXPIRE_MAKER',
                 })
             );
 

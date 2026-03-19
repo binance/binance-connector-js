@@ -139,4 +139,10 @@ export interface CancelMultipleOptionOrdersResponseInner {
      * @memberof CancelMultipleOptionOrdersResponseInner
      */
     mmp?: boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof CancelMultipleOptionOrdersResponseInner
+     */
+    selfTradePreventionMode?: string;
 }

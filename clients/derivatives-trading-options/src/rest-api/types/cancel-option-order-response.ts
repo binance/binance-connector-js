@@ -139,4 +139,10 @@ export interface CancelOptionOrderResponse {
      * @memberof CancelOptionOrderResponse
      */
     mmp?: boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof CancelOptionOrderResponse
+     */
+    selfTradePreventionMode?: string;
 }

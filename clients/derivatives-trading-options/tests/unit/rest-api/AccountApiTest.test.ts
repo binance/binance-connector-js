@@ -191,6 +191,7 @@ describe('AccountApi', () => {
                     canDeposit: true,
                     canWithdraw: true,
                     reduceOnly: false,
+                    tradeGroupId: -1,
                 })
             );
 
@@ -235,6 +236,7 @@ describe('AccountApi', () => {
                     canDeposit: true,
                     canWithdraw: true,
                     reduceOnly: false,
+                    tradeGroupId: -1,
                 })
             );
 
