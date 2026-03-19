@@ -37,4 +37,10 @@ export interface SubscribeEthStakingResponse {
      * @memberof SubscribeEthStakingResponse
      */
     conversionRatio?: string;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof SubscribeEthStakingResponse
+     */
+    purchaseId?: number | bigint;
 }

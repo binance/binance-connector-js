@@ -107,6 +107,7 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 150
          *
          * @summary Get ETH redemption history(USER_DATA)
+         * @param {number | bigint} [redeemId]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
          * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
@@ -116,6 +117,7 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @throws {RequiredError}
          */
         getEthRedemptionHistory: async (
+            redeemId?: number | bigint,
             startTime?: number | bigint,
             endTime?: number | bigint,
             current?: number | bigint,
@@ -125,6 +127,9 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
 
+            if (redeemId !== undefined && redeemId !== null) {
+                localVarQueryParameter['redeemId'] = redeemId;
+            }
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
@@ -163,6 +168,7 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 150
          *
          * @summary Get ETH staking history(USER_DATA)
+         * @param {number | bigint} [purchaseId]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
          * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
@@ -172,6 +178,7 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @throws {RequiredError}
          */
         getEthStakingHistory: async (
+            purchaseId?: number | bigint,
             startTime?: number | bigint,
             endTime?: number | bigint,
             current?: number | bigint,
@@ -181,6 +188,9 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
 
+            if (purchaseId !== undefined && purchaseId !== null) {
+                localVarQueryParameter['purchaseId'] = purchaseId;
+            }
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
             }
@@ -789,6 +799,13 @@ export interface GetEthRedemptionHistoryRequest {
      * @type {number | bigint}
      * @memberof EthStakingApiGetEthRedemptionHistory
      */
+    readonly redeemId?: number | bigint;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof EthStakingApiGetEthRedemptionHistory
+     */
     readonly startTime?: number | bigint;
 
     /**
@@ -825,6 +842,13 @@ export interface GetEthRedemptionHistoryRequest {
  * @interface GetEthStakingHistoryRequest
  */
 export interface GetEthStakingHistoryRequest {
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof EthStakingApiGetEthStakingHistory
+     */
+    readonly purchaseId?: number | bigint;
+
     /**
      *
      * @type {number | bigint}
@@ -1184,6 +1208,7 @@ export class EthStakingApi implements EthStakingApiInterface {
         requestParameters: GetEthRedemptionHistoryRequest = {}
     ): Promise<RestApiResponse<GetEthRedemptionHistoryResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.getEthRedemptionHistory(
+            requestParameters?.redeemId,
             requestParameters?.startTime,
             requestParameters?.endTime,
             requestParameters?.current,
@@ -1222,6 +1247,7 @@ export class EthStakingApi implements EthStakingApiInterface {
         requestParameters: GetEthStakingHistoryRequest = {}
     ): Promise<RestApiResponse<GetEthStakingHistoryResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.getEthStakingHistory(
+            requestParameters?.purchaseId,
             requestParameters?.startTime,
             requestParameters?.endTime,
             requestParameters?.current,

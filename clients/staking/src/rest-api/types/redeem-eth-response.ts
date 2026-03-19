@@ -43,4 +43,10 @@ export interface RedeemEthResponse {
      * @memberof RedeemEthResponse
      */
     arrivalTime?: number | bigint;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof RedeemEthResponse
+     */
+    redeemId?: number | bigint;
 }

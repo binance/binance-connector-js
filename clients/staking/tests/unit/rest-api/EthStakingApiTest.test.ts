@@ -243,6 +243,7 @@ describe('EthStakingApi', () => {
 
         it('should execute getEthRedemptionHistory() successfully with optional parameters', async () => {
             const params: GetEthRedemptionHistoryRequest = {
+                redeemId: 1,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -335,6 +336,7 @@ describe('EthStakingApi', () => {
 
         it('should execute getEthStakingHistory() successfully with optional parameters', async () => {
             const params: GetEthStakingHistoryRequest = {
+                purchaseId: 1,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -751,6 +753,7 @@ describe('EthStakingApi', () => {
                     ethAmount: '0.23092091',
                     conversionRatio: '1.00121234',
                     arrivalTime: 1575018510000,
+                    redeemId: 1234567,
                 })
             );
 
@@ -781,6 +784,7 @@ describe('EthStakingApi', () => {
                     ethAmount: '0.23092091',
                     conversionRatio: '1.00121234',
                     arrivalTime: 1575018510000,
+                    redeemId: 1234567,
                 })
             );
 
@@ -841,6 +845,7 @@ describe('EthStakingApi', () => {
                     success: true,
                     wbethAmount: '0.23092091',
                     conversionRatio: '1.001212342342',
+                    purchaseId: 1234567,
                 })
             );
 
@@ -869,6 +874,7 @@ describe('EthStakingApi', () => {
                     success: true,
                     wbethAmount: '0.23092091',
                     conversionRatio: '1.001212342342',
+                    purchaseId: 1234567,
                 })
             );
 

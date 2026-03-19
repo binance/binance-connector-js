@@ -37,4 +37,10 @@ export interface SubscribeSolStakingResponse {
      * @memberof SubscribeSolStakingResponse
      */
     exchangeRate?: string;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof SubscribeSolStakingResponse
+     */
+    purchaseId?: number | bigint;
 }

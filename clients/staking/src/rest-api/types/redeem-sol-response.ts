@@ -43,4 +43,10 @@ export interface RedeemSolResponse {
      * @memberof RedeemSolResponse
      */
     arrivalTime?: number | bigint;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof RedeemSolResponse
+     */
+    redeemId?: number | bigint;
 }

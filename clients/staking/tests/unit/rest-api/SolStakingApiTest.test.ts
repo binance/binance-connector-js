@@ -434,6 +434,7 @@ describe('SolStakingApi', () => {
 
         it('should execute getSolRedemptionHistory() successfully with optional parameters', async () => {
             const params: GetSolRedemptionHistoryRequest = {
+                redeemId: 1,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -526,6 +527,7 @@ describe('SolStakingApi', () => {
 
         it('should execute getSolStakingHistory() successfully with optional parameters', async () => {
             const params: GetSolStakingHistoryRequest = {
+                purchaseId: 1,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -742,6 +744,7 @@ describe('SolStakingApi', () => {
                     solAmount: '0.23092091',
                     exchangeRate: '1.00121234',
                     arrivalTime: 1575018510000,
+                    redeemId: 1234567,
                 })
             );
 
@@ -771,6 +774,7 @@ describe('SolStakingApi', () => {
                     solAmount: '0.23092091',
                     exchangeRate: '1.00121234',
                     arrivalTime: 1575018510000,
+                    redeemId: 1234567,
                 })
             );
 
@@ -898,6 +902,7 @@ describe('SolStakingApi', () => {
                     success: true,
                     bnsolAmount: '0.23092091',
                     exchangeRate: '1.001212342342',
+                    purchaseId: 1234567,
                 })
             );
 
@@ -926,6 +931,7 @@ describe('SolStakingApi', () => {
                     success: true,
                     bnsolAmount: '0.23092091',
                     exchangeRate: '1.001212342342',
+                    purchaseId: 1234567,
                 })
             );
 
