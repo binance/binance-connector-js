@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.3.6 - 2026-03-19
+
+### Changed (1)
+
+- Resolve security vulnerabilities on `flatted`.
+
 ## 2.3.5 - 2026-03-12
 
 ### Added (1)
