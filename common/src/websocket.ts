@@ -12,6 +12,7 @@ import {
     validateTimeUnit,
     buildWebsocketAPIMessage,
     normalizeStreamId,
+    redactMessage,
 } from '.';
 
 export class WebsocketEventEmitter {
@@ -374,7 +375,10 @@ export class WebsocketCommon extends WebsocketEventEmitter {
                 req.options
             );
 
-            this.logger.debug(`Session re-logon on connection ${connection.id}`, data);
+            this.logger.debug(
+                `Session re-logon on connection ${connection.id}`,
+                redactMessage(data)
+            );
 
             try {
                 await this.send(
@@ -908,7 +912,7 @@ export class WebsocketAPIBase extends WebsocketCommon {
             skipAuth
         );
 
-        this.logger.debug('Send message to Binance WebSocket API Server:', data);
+        this.logger.debug('Send message to Binance WebSocket API Server:', redactMessage(data));
 
         const responses = await Promise.all(
             connections.map(

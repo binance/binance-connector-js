@@ -1576,3 +1576,157 @@ describe('Utility Functions', () => {
         });
     });
 });
+
+describe('redactMessage()', () => {
+    it('redacts apiKey and signature when both are present', () => {
+        const data = {
+            id: 'abc123',
+            method: 'order.place',
+            params: {
+                apiKey: 'realApiKey123',
+                signature: 'realSignatureABC',
+                symbol: 'BTCUSDT',
+                side: 'BUY',
+            },
+        };
+
+        const result = utils.redactMessage(data);
+
+        expect(result.params.apiKey).toBe('[REDACTED]');
+        expect(result.params.signature).toBe('[REDACTED]');
+    });
+
+    it('preserves non-sensitive fields unchanged', () => {
+        const data = {
+            id: 'abc123',
+            method: 'order.place',
+            params: {
+                apiKey: 'realApiKey123',
+                signature: 'realSignatureABC',
+                symbol: 'BTCUSDT',
+                side: 'BUY',
+                quantity: '1.5',
+                timestamp: 1234567890,
+            },
+        };
+
+        const result = utils.redactMessage(data);
+
+        expect(result.params.symbol).toBe('BTCUSDT');
+        expect(result.params.side).toBe('BUY');
+        expect(result.params.quantity).toBe('1.5');
+        expect(result.params.timestamp).toBe(1234567890);
+    });
+
+    it('preserves id and method at the top level', () => {
+        const data = {
+            id: 'msg-id-456',
+            method: 'account.status',
+            params: {
+                apiKey: 'secret',
+                signature: 'sig',
+            },
+        };
+
+        const result = utils.redactMessage(data);
+
+        expect(result.id).toBe('msg-id-456');
+        expect(result.method).toBe('account.status');
+    });
+
+    it('handles message with no sensitive fields', () => {
+        const data = {
+            id: 'abc123',
+            method: 'ping',
+            params: {
+                foo: 'bar',
+                count: 42,
+            },
+        };
+
+        const result = utils.redactMessage(data);
+
+        expect(result.params).toEqual({ foo: 'bar', count: 42 });
+        expect(result.params.apiKey).toBeUndefined();
+        expect(result.params.signature).toBeUndefined();
+    });
+
+    it('handles empty params', () => {
+        const data = {
+            id: 'abc123',
+            method: 'ping',
+            params: {},
+        };
+
+        const result = utils.redactMessage(data);
+
+        expect(result.params).toEqual({});
+    });
+
+    it('handles params with only apiKey (no signature)', () => {
+        const data = {
+            id: 'abc123',
+            method: 'userDataStream',
+            params: {
+                apiKey: 'myKey',
+                listenKey: 'abc',
+            },
+        };
+
+        const result = utils.redactMessage(data);
+
+        expect(result.params.apiKey).toBe('[REDACTED]');
+        expect(result.params.signature).toBeUndefined();
+        expect(result.params.listenKey).toBe('abc');
+    });
+
+    it('handles params with only signature (no apiKey)', () => {
+        const data = {
+            id: 'abc123',
+            method: 'someMethod',
+            params: {
+                signature: 'mySig',
+                symbol: 'ETHUSDT',
+            },
+        };
+
+        const result = utils.redactMessage(data);
+
+        expect(result.params.signature).toBe('[REDACTED]');
+        expect(result.params.apiKey).toBeUndefined();
+        expect(result.params.symbol).toBe('ETHUSDT');
+    });
+
+    it('does not mutate the original data object', () => {
+        const data = {
+            id: 'abc123',
+            method: 'order.place',
+            params: {
+                apiKey: 'realApiKey',
+                signature: 'realSig',
+                symbol: 'BTCUSDT',
+            },
+        };
+
+        const originalApiKey = data.params.apiKey;
+        const originalSig = data.params.signature;
+
+        utils.redactMessage(data);
+
+        expect(data.params.apiKey).toBe(originalApiKey);
+        expect(data.params.signature).toBe(originalSig);
+    });
+
+    it('returns a new object reference', () => {
+        const data = {
+            id: 'abc123',
+            method: 'test',
+            params: { apiKey: 'key' },
+        };
+
+        const result = utils.redactMessage(data);
+
+        expect(result).not.toBe(data);
+        expect(result.params).not.toBe(data.params);
+    });
+});

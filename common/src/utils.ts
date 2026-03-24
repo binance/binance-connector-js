@@ -896,3 +896,68 @@ export function parseCustomHeaders(
 
     return parsedHeaders;
 }
+
+/**
+ * Redacts sensitive fields from a message for safe logging.
+ * Replaces apiKey and signature values with '[REDACTED]' while preserving
+ * the rest of the message structure.
+ *
+ * @param data - The message object to redact.
+ * @returns A new object with sensitive fields redacted.
+ */
+export function redactMessage(data: {
+    id: string;
+    method: string;
+    params: Record<string, unknown>;
+}): { id: string; method: string; params: Record<string, unknown> } {
+    const SENSITIVE_FIELDS = ['apiKey', 'apiSecret', 'signature'];
+
+    const redactedParams = { ...data.params };
+    for (const field of SENSITIVE_FIELDS) {
+        if (field in redactedParams) redactedParams[field] = '[REDACTED]';
+    }
+
+    return {
+        ...data,
+        params: redactedParams,
+    };
+}
+
+/**
+ * Validates that a URL uses a secure (TLS) scheme.
+ *
+ * - For REST API URLs: must use `https://`
+ * - For WebSocket URLs: must use `wss://`
+ *
+ * Logs a warning via the Logger if a non-TLS scheme is detected.
+ *
+ * @param url - The URL string to validate.
+ * @param type - The type of URL being validated: 'rest' or 'websocket'.
+ * @throws {Error} If the URL uses an insecure scheme (http:// or ws://).
+ */
+export function validateTLSUrl(url: string, type: 'rest' | 'websocket'): void {
+    if (!url) return;
+
+    let parsed: URL;
+    try {
+        parsed = new URL(url);
+    } catch {
+        return;
+    }
+
+    const scheme = parsed.protocol.toLowerCase();
+
+    if (type === 'rest') {
+        if (scheme === 'http:')
+            throw new Error(
+                'Insecure URL scheme: REST API basePath must use https://. ' +
+                    'Using http:// would transmit credentials in cleartext.'
+            );
+    } else if (type === 'websocket') {
+        if (scheme === 'ws:')
+            throw new Error(
+                'Insecure URL scheme: WebSocket wsURL must use wss://. ' +
+                    'Using ws:// would transmit credentials in cleartext.'
+            );
+    }
+}

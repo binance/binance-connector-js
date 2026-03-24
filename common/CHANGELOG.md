@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.3.7 - 2026-03-24
+
+### Changed (1)
+
+- Fix bug with exposing secrets on messages logging.
+
 ## 2.3.6 - 2026-03-19
 
 ### Changed (1)
