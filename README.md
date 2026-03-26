@@ -47,7 +47,7 @@ nvm use 22.12.0
 - [@binance/giftcard](./clients/gift-card/) - Gift Card connector
 - [@binance/margin-trading](./clients/margin-trading/) - Margin Trading connector
 - [@binance/mining](./clients/mining/) - Mining connector
-- [@binance/nft](./clients/nft/) - NFT connector
+- **Deprecated**: ~~[@binance/nft](./clients/nft/) - NFT connector~~
 - [@binance/pay](./clients/pay/) - Pay connector
 - [@binance/rebate](./clients/rebate/) - Rebate connector
 - [@binance/simple-earn](./clients/simple-earn/) - Simple Earn connector
