@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.3.8 - 2026-03-26
+
+### Changed (1)
+
+- Resolve security vulnerabilities on `picomatch` (bump version from `2.3.1` to `2.3.2`).
+
 ## 2.3.7 - 2026-03-24
 
 ### Changed (1)
