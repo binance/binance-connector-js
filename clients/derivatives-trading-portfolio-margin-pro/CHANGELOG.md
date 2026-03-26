@@ -1,5 +1,12 @@
 # Changelog
 
+## 12.0.8 - 2026-03-26
+
+### Changed (2)
+
+- Update `@binance/common` library to version `2.3.8`.
+- Resolve security vulnerabilities on `picomatch` (bump version from `2.3.1` to `2.3.2`).
+
 ## 12.0.7 - 2026-03-24
 
 ### Changed (1)
