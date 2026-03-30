@@ -1,5 +1,12 @@
 # Changelog
 
+## 26.0.3 - 2026-03-30
+
+### Changed (2)
+
+- Update `@binance/common` library to version `2.3.10`.
+- Resolve security vulnerabilities on `handlebars` (bump version from `4.7.8` to `4.7.9`) and `brace-expansion` (bump version from `1.1.12` to `1.1.13`).
+
 ## 26.0.2 - 2026-03-26
 
 ### Changed (2)
