@@ -1730,3 +1730,91 @@ describe('redactMessage()', () => {
         expect(result.params).not.toBe(data.params);
     });
 });
+
+describe('buildUserAgent()', () => {
+    const ORIGINAL_ENV = process.env;
+    const USER_AGENT_OVERRIDE_ENV = 'BINANCE_CONNECTOR_JS_USER_AGENT';
+
+    beforeEach(() => {
+        jest.resetModules();
+        process.env = { ...ORIGINAL_ENV };
+        delete process.env[USER_AGENT_OVERRIDE_ENV];
+    });
+
+    afterEach(() => {
+        process.env = ORIGINAL_ENV;
+    });
+
+    it('should return the default JS connector user agent when no override is set', () => {
+        const result = utils.buildUserAgent('binance-connector-js', '1.2.3');
+
+        expect(result).toBe(
+            `binance-connector-js/1.2.3 (Node.js/${process.version}; ${process.platform}; ${process.arch})`
+        );
+    });
+
+    it('should return the overridden user agent when env var matches valid binance-cli format', () => {
+        process.env[USER_AGENT_OVERRIDE_ENV] = 'binance-cli/1.0.0 (Node.js/v22.14.0; linux; x64)';
+
+        const result = utils.buildUserAgent('binance-connector-js', '1.2.3');
+
+        expect(result).toBe('binance-cli/1.0.0 (Node.js/v22.14.0; linux; x64)');
+    });
+
+    it('should allow a valid binance-cli override without Node.js in the first segment', () => {
+        process.env[USER_AGENT_OVERRIDE_ENV] = 'binance-cli/1.0.0 (cli; linux; x64)';
+
+        const result = utils.buildUserAgent('binance-connector-js', '1.2.3');
+
+        expect(result).toBe('binance-cli/1.0.0 (cli; linux; x64)');
+    });
+
+    it('should trim the override before validating and returning it', () => {
+        process.env[USER_AGENT_OVERRIDE_ENV] = '   binance-cli/1.0.0 (bun/1.1.0; darwin; arm64)   ';
+
+        const result = utils.buildUserAgent('binance-connector-js', '1.2.3');
+
+        expect(result).toBe('binance-cli/1.0.0 (bun/1.1.0; darwin; arm64)');
+    });
+
+    it('should ignore the override when the prefix is not binance-cli', () => {
+        process.env[USER_AGENT_OVERRIDE_ENV] =
+            'binance-connector-js/1.0.0 (Node.js/v22.14.0; linux; x64)';
+
+        const result = utils.buildUserAgent('binance-connector-js', '1.2.3');
+
+        expect(result).toBe(
+            `binance-connector-js/1.2.3 (Node.js/${process.version}; ${process.platform}; ${process.arch})`
+        );
+    });
+
+    it('should ignore the override when the format is invalid', () => {
+        process.env[USER_AGENT_OVERRIDE_ENV] = 'binance-cli/1.0.0';
+
+        const result = utils.buildUserAgent('binance-connector-js', '1.2.3');
+
+        expect(result).toBe(
+            `binance-connector-js/1.2.3 (Node.js/${process.version}; ${process.platform}; ${process.arch})`
+        );
+    });
+
+    it('should ignore the override when it does not have exactly three semicolon-separated segments', () => {
+        process.env[USER_AGENT_OVERRIDE_ENV] = 'binance-cli/1.0.0 (Node.js/v22.14.0; linux)';
+
+        const result = utils.buildUserAgent('binance-connector-js', '1.2.3');
+
+        expect(result).toBe(
+            `binance-connector-js/1.2.3 (Node.js/${process.version}; ${process.platform}; ${process.arch})`
+        );
+    });
+
+    it('should ignore the override when env var is empty', () => {
+        process.env[USER_AGENT_OVERRIDE_ENV] = '   ';
+
+        const result = utils.buildUserAgent('binance-connector-js', '1.2.3');
+
+        expect(result).toBe(
+            `binance-connector-js/1.2.3 (Node.js/${process.version}; ${process.platform}; ${process.arch})`
+        );
+    });
+});

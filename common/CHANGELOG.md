@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.3.10 - 2026-03-30
+
+### Changed (1)
+
+- Override user agent when `BINANCE_CONNECTOR_JS_USER_AGENT` environment variable is set for `binance-cli`.
+
+## 2.3.9 - 2026-03-30
+
+### Changed (1)
+
+- Resolve security vulnerabilities on `handlebars` (bump version from `4.7.8` to `4.7.9`) and `brace-expansion` (bump version from `1.1.12` to `1.1.13`).
+
 ## 2.3.8 - 2026-03-26
 
 ### Changed (1)

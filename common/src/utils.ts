@@ -813,6 +813,12 @@ export function replaceWebsocketStreamsPlaceholders(
  * @returns {string} A formatted user agent string including package details, Node.js version, platform, and architecture.
  */
 export function buildUserAgent(packageName: string, packageVersion: string): string {
+    const BINANCE_ENV_VAR_USER_AGENT_REGEX =
+        /^binance-cli\/[A-Za-z0-9._-]+ \([^;()]+; [^;()]+; [^;()]+\)$/;
+    const overriddenUserAgent = process.env['BINANCE_CONNECTOR_JS_USER_AGENT']?.trim();
+
+    if (overriddenUserAgent && BINANCE_ENV_VAR_USER_AGENT_REGEX.test(overriddenUserAgent))
+        return overriddenUserAgent;
     return `${packageName}/${packageVersion} (Node.js/${process.version}; ${platform()}; ${arch()})`;
 }
 
