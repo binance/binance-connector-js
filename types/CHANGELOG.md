@@ -1,11 +1,16 @@
 # Changelog
 
+## 1.0.19 - 2026-03-30
+
+### Changed (1)
+
+- Update `@binance/common` library to version `2.3.10`.
+
 ## 1.0.18 - 2026-03-26
 
-### Changed (2)
+### Changed (1)
 
 - Update `@binance/common` library to version `2.3.8`.
-- Resolve security vulnerabilities on `picomatch` (bump version from `2.3.1` to `2.3.2`).
 
 ## 1.0.17 - 2026-03-24
 
@@ -15,10 +20,9 @@
 
 ## 1.0.16 - 2026-03-19
 
-### Changed (2)
+### Changed (1)
 
 - Update `@binance/common` library to version `2.3.6`.
-- Resolve security vulnerabilities on `flatted`.
 
 ## 1.0.15 - 2026-03-13
 
@@ -28,10 +32,9 @@
 
 ## 1.0.14 - 2026-03-02
 
-### Changed (2)
+### Changed (1)
 
 - Update `@binance/common` library to version `2.3.4`.
-- Resolve security vulnerabilities on `minimatch`.
 
 ## 1.0.13 - 2026-02-24
 
