@@ -1096,6 +1096,7 @@ export enum NewAlgoOrderTimeInForceEnum {
     GTX = 'GTX',
     GTD = 'GTD',
     RPI = 'RPI',
+    GTE_GTC = 'GTE_GTC',
 }
 
 export enum NewAlgoOrderWorkingTypeEnum {
