@@ -1,5 +1,11 @@
 # Changelog
 
+## 12.0.1 - 2026-05-07
+
+### Changed (1)
+
+- Resolve security vulnerabilities on `axios`.
+
 ## 12.0.0 - 2026-05-06
 
 ### Changed (4)
