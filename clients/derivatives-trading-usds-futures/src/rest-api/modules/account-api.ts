@@ -467,7 +467,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get futures order history download link by Id
          *
-         * Download link expiration: 24h
+         * Download link expiration: 7 days
          *
          * Weight: 10
          *
@@ -508,7 +508,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get futures trade download link by Id
          *
-         * Download link expiration: 24h
+         * Download link expiration: 7 days
          *
          * Weight: 10
          *
@@ -549,7 +549,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get futures transaction history download link by Id
          *
-         * Download link expiration: 24h
+         * Download link expiration: 7 days
          *
          * Weight: 10
          *
@@ -1025,7 +1025,7 @@ export interface AccountApiInterface {
     /**
      * Get futures order history download link by Id
      *
-     * Download link expiration: 24h
+     * Download link expiration: 7 days
      *
      * Weight: 10
      *
@@ -1041,7 +1041,7 @@ export interface AccountApiInterface {
     /**
      * Get futures trade download link by Id
      *
-     * Download link expiration: 24h
+     * Download link expiration: 7 days
      *
      * Weight: 10
      *
@@ -1057,7 +1057,7 @@ export interface AccountApiInterface {
     /**
      * Get futures transaction history download link by Id
      *
-     * Download link expiration: 24h
+     * Download link expiration: 7 days
      *
      * Weight: 10
      *
@@ -1959,7 +1959,7 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get futures order history download link by Id
      *
-     * Download link expiration: 24h
+     * Download link expiration: 7 days
      *
      * Weight: 10
      *
@@ -1992,7 +1992,7 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get futures trade download link by Id
      *
-     * Download link expiration: 24h
+     * Download link expiration: 7 days
      *
      * Weight: 10
      *
@@ -2025,7 +2025,7 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get futures transaction history download link by Id
      *
-     * Download link expiration: 24h
+     * Download link expiration: 7 days
      *
      * Weight: 10
      *

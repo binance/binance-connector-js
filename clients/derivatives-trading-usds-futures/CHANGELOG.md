@@ -1,5 +1,14 @@
 # Changelog
 
+## 29.0.0 - 2026-05-12
+
+### Changed (1)
+
+#### WebSocket Streams
+
+- Modified response for `Listenkeyexpired`:
+  - `E`: type `string` → `integer`
+
 ## 28.0.1 - 2026-05-06
 
 ### Changed (2)

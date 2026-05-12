@@ -479,7 +479,7 @@ export interface NewAlgoOrderRequest {
     readonly closePosition?: string;
 
     /**
-     * "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
+     * "true" or "false", default "false". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
      * @type {string}
      * @memberof TradeApiNewAlgoOrder
      */
@@ -653,7 +653,7 @@ export interface NewOrderRequest {
     readonly workingType?: NewOrderWorkingTypeEnum;
 
     /**
-     * "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
+     * "true" or "false", default "false". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
      * @type {string}
      * @memberof TradeApiNewOrder
      */

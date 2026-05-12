@@ -21,10 +21,10 @@
 export interface Listenkeyexpired {
     /**
      *
-     * @type {string}
+     * @type {number | bigint}
      * @memberof Listenkeyexpired
      */
-    E?: string;
+    E?: number | bigint;
     /**
      *
      * @type {string}

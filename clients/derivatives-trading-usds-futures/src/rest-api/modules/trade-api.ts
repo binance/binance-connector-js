@@ -250,7 +250,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
-         * Cancel an active algo order.
+         * Cancel an active algo (conditional) order, including TP/SL (Take Profit / Stop Loss) and trailing stop orders on USD-M Futures.
          *
          * Either `algoId` or `clientAlgoId` must be sent.
          *
@@ -293,7 +293,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
-         * Cancel All Algo Open Orders
+         * Cancel all open algo (conditional) orders on a symbol, including TP/SL (Take Profit / Stop Loss) and trailing stop orders on USD-M Futures.
          *
          * Weight: 1
          *
@@ -643,7 +643,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
-         * Get all algo open orders on a symbol.
+         * Get all open algo (conditional) orders on a symbol, including TP/SL (Take Profit / Stop Loss) and trailing stop orders on USD-M Futures.
          *
          * If the symbol is not sent, orders for all symbols will be returned in an array.
          *
@@ -1082,7 +1082,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
-         * Send in a new Algo order.
+         * Send in a new algo (conditional) order. Use this endpoint to place **TP/SL (Take Profit / Stop Loss)** and trailing stop orders on USD-M Futures. Supported order types under `algoType=CONDITIONAL` are `STOP_MARKET`, `TAKE_PROFIT_MARKET`, `STOP`, `TAKE_PROFIT`, and `TRAILING_STOP_MARKET`.
          *
          * Algo order with type `STOP`,  parameter `timeInForce` can be sent ( default `GTC`).
          * Algo order with type `TAKE_PROFIT`,  parameter `timeInForce` can be sent ( default `GTC`).
@@ -1131,7 +1131,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {NewAlgoOrderWorkingTypeEnum} [workingType] stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE". Default "CONTRACT_PRICE"
          * @param {NewAlgoOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
          * @param {string} [closePosition] `true`, `false`；Close-All，used with `STOP_MARKET` or `TAKE_PROFIT_MARKET`.
-         * @param {string} [priceProtect] "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
+         * @param {string} [priceProtect] "true" or "false", default "false". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
          * @param {string} [reduceOnly] "true" or "false". default "false". Cannot be sent in Hedge Mode
          * @param {number} [activatePrice] Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`)
          * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1%
@@ -1530,7 +1530,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
-         * Check an algo order's status.
+         * Check the status of an algo (conditional) order, such as TP/SL (Take Profit / Stop Loss) or trailing stop orders on USD-M Futures.
          *
          * These orders will not be found:
          * order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
@@ -1578,7 +1578,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
-         * Get all algo orders; active, CANCELED, TRIGGERED or FINISHED .
+         * Get all algo (conditional) orders — active, CANCELED, TRIGGERED, or FINISHED — including TP/SL (Take Profit / Stop Loss) and trailing stop orders on USD-M Futures.
          *
          * These orders will not be found:
          * order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
@@ -1809,7 +1809,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [activationPrice] Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`)
          * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 5 where 1 for 1%
          * @param {TestOrderWorkingTypeEnum} [workingType] stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE". Default "CONTRACT_PRICE"
-         * @param {string} [priceProtect] "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
+         * @param {string} [priceProtect] "true" or "false", default "false". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
          * @param {TestOrderNewOrderRespTypeEnum} [newOrderRespType] "ACK", "RESULT", default "ACK"
          * @param {TestOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
          * @param {TestOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE`
@@ -2051,7 +2051,7 @@ export interface TradeApiInterface {
         requestParameters: AutoCancelAllOpenOrdersRequest
     ): Promise<RestApiResponse<AutoCancelAllOpenOrdersResponse>>;
     /**
-     * Cancel an active algo order.
+     * Cancel an active algo (conditional) order, including TP/SL (Take Profit / Stop Loss) and trailing stop orders on USD-M Futures.
      *
      * Either `algoId` or `clientAlgoId` must be sent.
      *
@@ -2067,7 +2067,7 @@ export interface TradeApiInterface {
         requestParameters?: CancelAlgoOrderRequest
     ): Promise<RestApiResponse<CancelAlgoOrderResponse>>;
     /**
-     * Cancel All Algo Open Orders
+     * Cancel all open algo (conditional) orders on a symbol, including TP/SL (Take Profit / Stop Loss) and trailing stop orders on USD-M Futures.
      *
      * Weight: 1
      *
@@ -2183,7 +2183,7 @@ export interface TradeApiInterface {
         requestParameters: ChangePositionModeRequest
     ): Promise<RestApiResponse<ChangePositionModeResponse>>;
     /**
-     * Get all algo open orders on a symbol.
+     * Get all open algo (conditional) orders on a symbol, including TP/SL (Take Profit / Stop Loss) and trailing stop orders on USD-M Futures.
      *
      * If the symbol is not sent, orders for all symbols will be returned in an array.
      *
@@ -2328,7 +2328,7 @@ export interface TradeApiInterface {
         requestParameters: ModifyOrderRequest
     ): Promise<RestApiResponse<ModifyOrderResponse>>;
     /**
-     * Send in a new Algo order.
+     * Send in a new algo (conditional) order. Use this endpoint to place **TP/SL (Take Profit / Stop Loss)** and trailing stop orders on USD-M Futures. Supported order types under `algoType=CONDITIONAL` are `STOP_MARKET`, `TAKE_PROFIT_MARKET`, `STOP`, `TAKE_PROFIT`, and `TRAILING_STOP_MARKET`.
      *
      * Algo order with type `STOP`,  parameter `timeInForce` can be sent ( default `GTC`).
      * Algo order with type `TAKE_PROFIT`,  parameter `timeInForce` can be sent ( default `GTC`).
@@ -2468,7 +2468,7 @@ export interface TradeApiInterface {
         requestParameters?: PositionInformationV3Request
     ): Promise<RestApiResponse<PositionInformationV3Response>>;
     /**
-     * Check an algo order's status.
+     * Check the status of an algo (conditional) order, such as TP/SL (Take Profit / Stop Loss) or trailing stop orders on USD-M Futures.
      *
      * These orders will not be found:
      * order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
@@ -2489,7 +2489,7 @@ export interface TradeApiInterface {
         requestParameters?: QueryAlgoOrderRequest
     ): Promise<RestApiResponse<QueryAlgoOrderResponse>>;
     /**
-     * Get all algo orders; active, CANCELED, TRIGGERED or FINISHED .
+     * Get all algo (conditional) orders — active, CANCELED, TRIGGERED, or FINISHED — including TP/SL (Take Profit / Stop Loss) and trailing stop orders on USD-M Futures.
      *
      * These orders will not be found:
      * order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
@@ -3357,7 +3357,7 @@ export interface NewAlgoOrderRequest {
     readonly closePosition?: string;
 
     /**
-     * "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
+     * "true" or "false", default "false". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
      * @type {string}
      * @memberof TradeApiNewAlgoOrder
      */
@@ -3851,7 +3851,7 @@ export interface TestOrderRequest {
     readonly workingType?: TestOrderWorkingTypeEnum;
 
     /**
-     * "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
+     * "true" or "false", default "false". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
      * @type {string}
      * @memberof TradeApiTestOrder
      */
@@ -4075,7 +4075,7 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Cancel an active algo order.
+     * Cancel an active algo (conditional) order, including TP/SL (Take Profit / Stop Loss) and trailing stop orders on USD-M Futures.
      *
      * Either `algoId` or `clientAlgoId` must be sent.
      *
@@ -4108,7 +4108,7 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Cancel All Algo Open Orders
+     * Cancel all open algo (conditional) orders on a symbol, including TP/SL (Take Profit / Stop Loss) and trailing stop orders on USD-M Futures.
      *
      * Weight: 1
      *
@@ -4358,7 +4358,7 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Get all algo open orders on a symbol.
+     * Get all open algo (conditional) orders on a symbol, including TP/SL (Take Profit / Stop Loss) and trailing stop orders on USD-M Futures.
      *
      * If the symbol is not sent, orders for all symbols will be returned in an array.
      *
@@ -4651,7 +4651,7 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Send in a new Algo order.
+     * Send in a new algo (conditional) order. Use this endpoint to place **TP/SL (Take Profit / Stop Loss)** and trailing stop orders on USD-M Futures. Supported order types under `algoType=CONDITIONAL` are `STOP_MARKET`, `TAKE_PROFIT_MARKET`, `STOP`, `TAKE_PROFIT`, and `TRAILING_STOP_MARKET`.
      *
      * Algo order with type `STOP`,  parameter `timeInForce` can be sent ( default `GTC`).
      * Algo order with type `TAKE_PROFIT`,  parameter `timeInForce` can be sent ( default `GTC`).
@@ -4921,7 +4921,7 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Check an algo order's status.
+     * Check the status of an algo (conditional) order, such as TP/SL (Take Profit / Stop Loss) or trailing stop orders on USD-M Futures.
      *
      * These orders will not be found:
      * order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
@@ -4959,7 +4959,7 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Get all algo orders; active, CANCELED, TRIGGERED or FINISHED .
+     * Get all algo (conditional) orders — active, CANCELED, TRIGGERED, or FINISHED — including TP/SL (Take Profit / Stop Loss) and trailing stop orders on USD-M Futures.
      *
      * These orders will not be found:
      * order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
