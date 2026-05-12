@@ -24,6 +24,7 @@ import type {
     AllMarketRollingWindowTickerRequest,
     AllMiniTickerRequest,
     AvgPriceRequest,
+    BlockTradeRequest,
     BookTickerRequest,
     DiffBookDepthRequest,
     KlineRequest,
@@ -41,6 +42,7 @@ import type {
     AllMarketRollingWindowTickerResponse,
     AllMiniTickerResponse,
     AvgPriceResponse,
+    BlockTradeResponse,
     BookTickerResponse,
     DiffBookDepthResponse,
     KlineResponse,
@@ -208,6 +210,20 @@ export class WebsocketStreamsConnection {
      */
     avgPrice(requestParameters: AvgPriceRequest): WebsocketStream<AvgPriceResponse> {
         return this.webSocketStreamsApi.avgPrice(requestParameters);
+    }
+
+    /**
+     *
+     *
+     * @summary WebSocket Block Trade Streams
+     * @param {BlockTradeRequest} requestParameters Request parameters.
+     *
+     * @returns {WebsocketStream<BlockTradeResponse>}
+     * @throws {RequiredError}
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#block-trade-streams Binance API Documentation}
+     */
+    blockTrade(requestParameters: BlockTradeRequest): WebsocketStream<BlockTradeResponse> {
+        return this.webSocketStreamsApi.blockTrade(requestParameters);
     }
 
     /**

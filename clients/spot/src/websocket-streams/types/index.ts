@@ -5,6 +5,7 @@ export * from './all-mini-ticker-response';
 export * from './all-mini-ticker-response-inner';
 export * from './asset-filters';
 export * from './avg-price-response';
+export * from './block-trade-response';
 export * from './book-ticker-response';
 export * from './diff-book-depth-response';
 export * from './exchange-filters';

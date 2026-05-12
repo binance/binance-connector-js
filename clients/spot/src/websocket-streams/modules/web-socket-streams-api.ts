@@ -28,6 +28,7 @@ import type {
     AllMarketRollingWindowTickerResponse,
     AllMiniTickerResponse,
     AvgPriceResponse,
+    BlockTradeResponse,
     BookTickerResponse,
     DiffBookDepthResponse,
     KlineOffsetResponse,
@@ -107,6 +108,24 @@ const WebSocketStreamsApiParamCreator = function () {
             assertParamExists('avgPrice', 'symbol', symbol);
 
             return replaceWebsocketStreamsPlaceholders('/<symbol>@avgPrice'.slice(1), {
+                symbol,
+                id,
+            });
+        },
+        /**
+         *
+         *
+         * @summary WebSocket Block Trade Streams
+         * @param {string} symbol Symbol to query
+         * @param {string} [id] Unique WebSocket request ID.
+         *
+         * @throws {RequiredError}
+         */
+        blockTrade: (symbol: string, id?: string): string => {
+            // verify required parameter 'symbol' is not null or undefined
+            assertParamExists('blockTrade', 'symbol', symbol);
+
+            return replaceWebsocketStreamsPlaceholders('/<symbol>@blockTrade'.slice(1), {
                 symbol,
                 id,
             });
@@ -374,6 +393,18 @@ export interface WebSocketStreamsApiInterface {
     avgPrice(requestParameters: AvgPriceRequest): WebsocketStream<AvgPriceResponse>;
 
     /**
+     *
+     *
+     * @summary WebSocket Block Trade Streams
+     * @param {BlockTradeRequest} requestParameters Request parameters.
+     *
+     * @returns {WebsocketStream<BlockTradeResponse>}
+     * @throws {RequiredError}
+     * @memberof WebSocketStreamsApiInterface
+     */
+    blockTrade(requestParameters: BlockTradeRequest): WebsocketStream<BlockTradeResponse>;
+
+    /**
      * Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
      * Multiple `<symbol>@bookTicker` streams can be subscribed to over one connection.
      *
@@ -572,6 +603,26 @@ export interface AvgPriceRequest {
      * Unique WebSocket request ID.
      * @type {string}
      * @memberof WebSocketStreamsApiAvgPrice
+     */
+    readonly id?: string;
+}
+
+/**
+ * Request parameters for blockTrade operation in WebSocketStreamsApi.
+ * @interface BlockTradeRequest
+ */
+export interface BlockTradeRequest {
+    /**
+     * Symbol to query
+     * @type {string}
+     * @memberof WebSocketStreamsApiBlockTrade
+     */
+    readonly symbol: string;
+
+    /**
+     * Unique WebSocket request ID.
+     * @type {string}
+     * @memberof WebSocketStreamsApiBlockTrade
      */
     readonly id?: string;
 }
@@ -920,6 +971,29 @@ export class WebSocketStreamsApi implements WebSocketStreamsApiInterface {
         );
 
         return createStreamHandler<AvgPriceResponse>(
+            this.websocketBase,
+            stream,
+            requestParameters?.id
+        );
+    }
+
+    /**
+     *
+     *
+     * @summary WebSocket Block Trade Streams
+     * @param {BlockTradeRequest} requestParameters Request parameters.
+     * @returns {WebsocketStream<BlockTradeResponse>}
+     * @throws {RequiredError}
+     * @memberof WebSocketStreamsApi
+     * @see {@link https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#block-trade-streams Binance API Documentation}
+     */
+    public blockTrade(requestParameters: BlockTradeRequest): WebsocketStream<BlockTradeResponse> {
+        const stream = this.localVarParamCreator.blockTrade(
+            requestParameters?.symbol,
+            requestParameters?.id
+        );
+
+        return createStreamHandler<BlockTradeResponse>(
             this.websocketBase,
             stream,
             requestParameters?.id

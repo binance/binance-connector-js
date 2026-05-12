@@ -28,6 +28,7 @@ import {
     AllMarketRollingWindowTickerRequest,
     AllMiniTickerRequest,
     AvgPriceRequest,
+    BlockTradeRequest,
     BookTickerRequest,
     DiffBookDepthRequest,
     KlineRequest,
@@ -394,6 +395,90 @@ describe('WebSocketStreamsApi', () => {
 
             expect(() => websocketStreamApi.avgPrice(params)).toThrow(
                 'Required parameter symbol was null or undefined when calling avgPrice.'
+            );
+        });
+    });
+
+    describe('blockTrade()', () => {
+        it('should execute blockTrade() successfully', async () => {
+            const params: BlockTradeRequest = {
+                symbol: 'bnbusdt',
+                id: 'e9d6b4349871b40611412680b3445fac',
+            };
+
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'blockTrade',
+                    E: 1772506983582,
+                    s: 'BNBBTC',
+                    t: 582,
+                    p: '0.052',
+                    q: '5838',
+                    T: 1772506983321,
+                    m: true,
+                })
+            );
+
+            mockSubscription(
+                `ws/${replaceWebsocketStreamsPlaceholders('/<symbol>@blockTrade'.slice(1), params as unknown as Record<string, BlockTradeRequest>)}`,
+                mockResponse
+            );
+        });
+
+        it('should handle blockTrade() WebSocket stream data', () => {
+            const configuration = new ConfigurationWebsocketStreams({});
+            const websocketStreamClient = new WebsocketStreamsBase(configuration);
+            const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
+
+            const params: BlockTradeRequest = {
+                symbol: 'bnbusdt',
+                id: 'e9d6b4349871b40611412680b3445fac',
+            };
+
+            const mockResponse = JSONParse(
+                JSONStringify({
+                    e: 'blockTrade',
+                    E: 1772506983582,
+                    s: 'BNBBTC',
+                    t: 582,
+                    p: '0.052',
+                    q: '5838',
+                    T: 1772506983321,
+                    m: true,
+                })
+            );
+
+            const stream = websocketStreamApi.blockTrade(params);
+            const mockCallback = jest.fn(() => {});
+            stream.on('message', mockCallback);
+
+            websocketStreamClient['onMessage'](
+                JSONStringify({
+                    stream: replaceWebsocketStreamsPlaceholders(
+                        '/<symbol>@blockTrade'.slice(1),
+                        params as unknown as Record<string, BlockTradeRequest>
+                    ),
+                    data: mockResponse,
+                }),
+                websocketStreamClient.connectionPool[0]
+            );
+
+            expect(mockCallback).toHaveBeenCalledWith(mockResponse);
+        });
+
+        it('should throw RequiredError when symbol is missing', () => {
+            const configuration = new ConfigurationWebsocketStreams({});
+            const websocketStreamClient = new WebsocketStreamsBase(configuration);
+            const websocketStreamApi = new WebSocketStreamsApi(websocketStreamClient);
+
+            const _params: BlockTradeRequest = {
+                symbol: 'bnbusdt',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.symbol;
+
+            expect(() => websocketStreamApi.blockTrade(params)).toThrow(
+                'Required parameter symbol was null or undefined when calling blockTrade.'
             );
         });
     });
