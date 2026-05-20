@@ -69,10 +69,10 @@ export interface GetLockedRedemptionRecordResponseRowsInner {
     type?: string;
     /**
      *
-     * @type {string}
+     * @type {number | bigint}
      * @memberof GetLockedRedemptionRecordResponseRowsInner
      */
-    deliverDate?: string;
+    deliverDate?: number | bigint;
     /**
      *
      * @type {string}

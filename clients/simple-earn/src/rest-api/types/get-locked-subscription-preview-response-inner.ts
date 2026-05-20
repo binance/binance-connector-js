@@ -63,32 +63,32 @@ export interface GetLockedSubscriptionPreviewResponseInner {
     nextPay?: string;
     /**
      *
-     * @type {string}
+     * @type {number | bigint}
      * @memberof GetLockedSubscriptionPreviewResponseInner
      */
-    nextPayDate?: string;
+    nextPayDate?: number | bigint;
     /**
      *
-     * @type {string}
+     * @type {number | bigint}
      * @memberof GetLockedSubscriptionPreviewResponseInner
      */
-    valueDate?: string;
+    valueDate?: number | bigint;
     /**
      *
-     * @type {string}
+     * @type {number | bigint}
      * @memberof GetLockedSubscriptionPreviewResponseInner
      */
-    rewardsEndDate?: string;
+    rewardsEndDate?: number | bigint;
     /**
      *
-     * @type {string}
+     * @type {number | bigint}
      * @memberof GetLockedSubscriptionPreviewResponseInner
      */
-    deliverDate?: string;
+    deliverDate?: number | bigint;
     /**
      *
-     * @type {string}
+     * @type {number | bigint}
      * @memberof GetLockedSubscriptionPreviewResponseInner
      */
-    nextSubscriptionDate?: string;
+    nextSubscriptionDate?: number | bigint;
 }

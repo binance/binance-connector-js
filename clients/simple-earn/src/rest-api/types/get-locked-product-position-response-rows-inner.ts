@@ -51,10 +51,10 @@ export interface GetLockedProductPositionResponseRowsInner {
     amount?: string;
     /**
      *
-     * @type {string}
+     * @type {number | bigint}
      * @memberof GetLockedProductPositionResponseRowsInner
      */
-    purchaseTime?: string;
+    purchaseTime?: number | bigint;
     /**
      *
      * @type {string}
@@ -129,10 +129,10 @@ export interface GetLockedProductPositionResponseRowsInner {
     nextPay?: string;
     /**
      *
-     * @type {string}
+     * @type {number | bigint}
      * @memberof GetLockedProductPositionResponseRowsInner
      */
-    nextPayDate?: string;
+    nextPayDate?: number | bigint;
     /**
      *
      * @type {string}
@@ -147,16 +147,16 @@ export interface GetLockedProductPositionResponseRowsInner {
     redeemAmountEarly?: string;
     /**
      *
-     * @type {string}
+     * @type {number | bigint}
      * @memberof GetLockedProductPositionResponseRowsInner
      */
-    rewardsEndDate?: string;
+    rewardsEndDate?: number | bigint;
     /**
      *
-     * @type {string}
+     * @type {number | bigint}
      * @memberof GetLockedProductPositionResponseRowsInner
      */
-    deliverDate?: string;
+    deliverDate?: number | bigint;
     /**
      *
      * @type {string}
@@ -177,10 +177,10 @@ export interface GetLockedProductPositionResponseRowsInner {
     redeemTo?: string;
     /**
      *
-     * @type {string}
+     * @type {number | bigint}
      * @memberof GetLockedProductPositionResponseRowsInner
      */
-    partialAmtDeliverDate?: string;
+    partialAmtDeliverDate?: number | bigint;
     /**
      *
      * @type {boolean}

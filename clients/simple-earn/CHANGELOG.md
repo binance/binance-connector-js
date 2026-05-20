@@ -1,5 +1,37 @@
 # Changelog
 
+## 14.0.0 - 2026-05-20
+
+### Changed (3)
+
+- Modified response for `getLockedRedemptionRecord()` (`GET /sapi/v1/simple-earn/locked/history/redemptionRecord`):
+  - `rows`.items.`deliverDate`: type `string` → `integer`
+  - `rows`.items.`deliverDate`: type `string` → `integer`
+
+- Modified response for `getLockedProductPosition()` (`GET /sapi/v1/simple-earn/locked/position`):
+  - `rows`.items.`deliverDate`: type `string` → `integer`
+  - `rows`.items.`nextPayDate`: type `string` → `integer`
+  - `rows`.items.`partialAmtDeliverDate`: type `string` → `integer`
+  - `rows`.items.`purchaseTime`: type `string` → `integer`
+  - `rows`.items.`rewardsEndDate`: type `string` → `integer`
+  - `rows`.items.`deliverDate`: type `string` → `integer`
+  - `rows`.items.`nextPayDate`: type `string` → `integer`
+  - `rows`.items.`partialAmtDeliverDate`: type `string` → `integer`
+  - `rows`.items.`purchaseTime`: type `string` → `integer`
+  - `rows`.items.`rewardsEndDate`: type `string` → `integer`
+
+- Modified response for `getLockedSubscriptionPreview()` (`GET /sapi/v1/simple-earn/locked/subscriptionPreview`):
+  - items.`deliverDate`: type `string` → `integer`
+  - items.`nextPayDate`: type `string` → `integer`
+  - items.`nextSubscriptionDate`: type `string` → `integer`
+  - items.`rewardsEndDate`: type `string` → `integer`
+  - items.`valueDate`: type `string` → `integer`
+  - items.`deliverDate`: type `string` → `integer`
+  - items.`nextPayDate`: type `string` → `integer`
+  - items.`nextSubscriptionDate`: type `string` → `integer`
+  - items.`rewardsEndDate`: type `string` → `integer`
+  - items.`valueDate`: type `string` → `integer`
+
 ## 13.0.7 - 2026-05-06
 
 ### Changed (2)
