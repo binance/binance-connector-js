@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.3.14 - 2026-05-21
+
+### Changed (1)
+
+- Resolve security vulnerabilities on `ws`.
+
 ## 2.3.13 - 2026-05-06
 
 ### Changed (1)
