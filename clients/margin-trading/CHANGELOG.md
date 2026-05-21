@@ -1,5 +1,12 @@
 # Changelog
 
+## 12.0.11 - 2026-05-21
+
+### Changed (2)
+
+- Update `@binance/common` library to version `2.3.14`.
+- Resolve security vulnerabilities on `ws`.
+
 ## 12.0.10 - 2026-05-06
 
 ### Changed (2)
