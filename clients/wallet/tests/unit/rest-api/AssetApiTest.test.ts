@@ -303,6 +303,7 @@ describe('AssetApi', () => {
         it('should execute dustConvert() successfully with optional parameters', async () => {
             const params: DustConvertRequest = {
                 asset: 'asset_example',
+                accountType: 'SPOT',
                 clientId: '1',
                 targetAsset: 'targetAsset_example',
                 thirdPartyClientId: '1',
@@ -424,6 +425,7 @@ describe('AssetApi', () => {
         it('should execute dustConvertibleAssets() successfully with optional parameters', async () => {
             const params: DustConvertibleAssetsRequest = {
                 targetAsset: 'targetAsset_example',
+                accountType: 'SPOT',
                 dustQuotaAssetToTargetAssetPrice: 1.0,
             };
 

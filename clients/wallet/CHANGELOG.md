@@ -1,5 +1,14 @@
 # Changelog
 
+## 18.0.0 - 2026-05-25
+
+### Changed (1)
+
+- Added parameter `accountType`
+  - affected methods:
+    - `dustConvert()` (`POST /sapi/v1/asset/dust-convert/convert`)
+    - `dustConvertibleAssets()` (`POST /sapi/v1/asset/dust-convert/query-convertible-assets`)
+
 ## 17.0.9 - 2026-05-21
 
 ### Changed (1)

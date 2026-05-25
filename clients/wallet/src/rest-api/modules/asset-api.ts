@@ -141,6 +141,7 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Dust Convert (USER_DATA)
          * @param {string} asset
+         * @param {string} [accountType] `SPOT` or `MARGIN`,default `SPOT`
          * @param {string} [clientId] A unique id for the request
          * @param {string} [targetAsset]
          * @param {string} [thirdPartyClientId]
@@ -150,6 +151,7 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          */
         dustConvert: async (
             asset: string,
+            accountType?: string,
             clientId?: string,
             targetAsset?: string,
             thirdPartyClientId?: string,
@@ -163,6 +165,9 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
+            }
+            if (accountType !== undefined && accountType !== null) {
+                localVarQueryParameter['accountType'] = accountType;
             }
             if (clientId !== undefined && clientId !== null) {
                 localVarQueryParameter['clientId'] = clientId;
@@ -199,12 +204,14 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * @summary Dust Convertible Assets (USER_DATA)
          * @param {string} targetAsset
+         * @param {string} [accountType] `SPOT` or `MARGIN`,default `SPOT`
          * @param {number} [dustQuotaAssetToTargetAssetPrice]
          *
          * @throws {RequiredError}
          */
         dustConvertibleAssets: async (
             targetAsset: string,
+            accountType?: string,
             dustQuotaAssetToTargetAssetPrice?: number
         ): Promise<RequestArgs> => {
             // verify required parameter 'targetAsset' is not null or undefined
@@ -213,6 +220,9 @@ const AssetApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
 
+            if (accountType !== undefined && accountType !== null) {
+                localVarQueryParameter['accountType'] = accountType;
+            }
             if (targetAsset !== undefined && targetAsset !== null) {
                 localVarQueryParameter['targetAsset'] = targetAsset;
             }
@@ -1281,6 +1291,13 @@ export interface DustConvertRequest {
     readonly asset: string;
 
     /**
+     * `SPOT` or `MARGIN`,default `SPOT`
+     * @type {string}
+     * @memberof AssetApiDustConvert
+     */
+    readonly accountType?: string;
+
+    /**
      * A unique id for the request
      * @type {string}
      * @memberof AssetApiDustConvert
@@ -1320,6 +1337,13 @@ export interface DustConvertibleAssetsRequest {
      * @memberof AssetApiDustConvertibleAssets
      */
     readonly targetAsset: string;
+
+    /**
+     * `SPOT` or `MARGIN`,default `SPOT`
+     * @type {string}
+     * @memberof AssetApiDustConvertibleAssets
+     */
+    readonly accountType?: string;
 
     /**
      *
@@ -1857,6 +1881,7 @@ export class AssetApi implements AssetApiInterface {
     ): Promise<RestApiResponse<DustConvertResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.dustConvert(
             requestParameters?.asset,
+            requestParameters?.accountType,
             requestParameters?.clientId,
             requestParameters?.targetAsset,
             requestParameters?.thirdPartyClientId,
@@ -1890,6 +1915,7 @@ export class AssetApi implements AssetApiInterface {
     ): Promise<RestApiResponse<DustConvertibleAssetsResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.dustConvertibleAssets(
             requestParameters?.targetAsset,
+            requestParameters?.accountType,
             requestParameters?.dustQuotaAssetToTargetAssetPrice
         );
         return sendRequest<DustConvertibleAssetsResponse>(
