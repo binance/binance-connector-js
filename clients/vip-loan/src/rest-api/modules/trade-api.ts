@@ -73,6 +73,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (loanAccountId !== undefined && loanAccountId !== null) {
                 localVarQueryParameter['loanAccountId'] = loanAccountId;
@@ -107,6 +108,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -134,6 +136,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (orderId !== undefined && orderId !== null) {
                 localVarQueryParameter['orderId'] = orderId;
@@ -153,6 +156,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -180,6 +184,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (orderId !== undefined && orderId !== null) {
                 localVarQueryParameter['orderId'] = orderId;
@@ -199,6 +204,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -424,6 +430,7 @@ export class TradeApi implements TradeApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -455,6 +462,7 @@ export class TradeApi implements TradeApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -486,6 +494,7 @@ export class TradeApi implements TradeApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );

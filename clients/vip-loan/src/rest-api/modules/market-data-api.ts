@@ -51,6 +51,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (loanCoin !== undefined && loanCoin !== null) {
                 localVarQueryParameter['loanCoin'] = loanCoin;
@@ -67,6 +68,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -87,6 +89,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (collateralCoin !== undefined && collateralCoin !== null) {
                 localVarQueryParameter['collateralCoin'] = collateralCoin;
@@ -103,6 +106,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -125,6 +129,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (loanCoin !== undefined && loanCoin !== null) {
                 localVarQueryParameter['loanCoin'] = loanCoin;
@@ -144,6 +149,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -181,6 +187,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
@@ -209,6 +216,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -435,6 +443,7 @@ export class MarketDataApi implements MarketDataApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -465,6 +474,7 @@ export class MarketDataApi implements MarketDataApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -496,6 +506,7 @@ export class MarketDataApi implements MarketDataApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -535,6 +546,7 @@ export class MarketDataApi implements MarketDataApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
