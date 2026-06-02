@@ -59,6 +59,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (projectId !== undefined && projectId !== null) {
                 localVarQueryParameter['projectId'] = projectId;
@@ -75,6 +76,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -101,6 +103,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
@@ -123,6 +126,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -151,6 +155,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
@@ -179,6 +184,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -216,6 +222,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (positionId !== undefined && positionId !== null) {
                 localVarQueryParameter['positionId'] = positionId;
@@ -250,6 +257,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -285,6 +293,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (positionId !== undefined && positionId !== null) {
                 localVarQueryParameter['positionId'] = positionId;
@@ -316,6 +325,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -345,6 +355,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (projectId !== undefined && projectId !== null) {
                 localVarQueryParameter['projectId'] = projectId;
@@ -367,6 +378,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -404,6 +416,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (purchaseId !== undefined && purchaseId !== null) {
                 localVarQueryParameter['purchaseId'] = purchaseId;
@@ -438,6 +451,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -454,6 +468,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
         onChainYieldsAccount: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -467,6 +482,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -494,6 +510,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (positionId !== undefined && positionId !== null) {
                 localVarQueryParameter['positionId'] = positionId;
@@ -513,6 +530,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -544,6 +562,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (positionId !== undefined && positionId !== null) {
                 localVarQueryParameter['positionId'] = positionId;
@@ -563,6 +582,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -594,6 +614,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (positionId !== undefined && positionId !== null) {
                 localVarQueryParameter['positionId'] = positionId;
@@ -613,6 +634,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -652,6 +674,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (projectId !== undefined && projectId !== null) {
                 localVarQueryParameter['projectId'] = projectId;
@@ -686,6 +709,7 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1398,6 +1422,7 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1433,6 +1458,7 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1468,6 +1494,7 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1510,6 +1537,7 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1551,6 +1579,7 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1584,6 +1613,7 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1626,6 +1656,7 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1655,6 +1686,7 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1689,6 +1721,7 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1721,6 +1754,7 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1753,6 +1787,7 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1792,6 +1827,7 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
