@@ -64,6 +64,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (algo !== undefined && algo !== null) {
                 localVarQueryParameter['algo'] = algo;
@@ -83,6 +84,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -98,6 +100,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         acquiringAlgorithm: async (): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -107,6 +110,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -122,6 +126,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         acquiringCoinname: async (): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -131,6 +136,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -157,6 +163,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (configId !== undefined && configId !== null) {
                 localVarQueryParameter['configId'] = configId;
@@ -176,6 +183,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -213,6 +221,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (algo !== undefined && algo !== null) {
                 localVarQueryParameter['algo'] = algo;
@@ -247,6 +256,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -284,6 +294,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (algo !== undefined && algo !== null) {
                 localVarQueryParameter['algo'] = algo;
@@ -318,6 +329,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -345,6 +357,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (configId !== undefined && configId !== null) {
                 localVarQueryParameter['configId'] = configId;
@@ -367,6 +380,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -389,6 +403,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (pageIndex !== undefined && pageIndex !== null) {
                 localVarQueryParameter['pageIndex'] = pageIndex;
@@ -408,6 +423,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -451,6 +467,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (userName !== undefined && userName !== null) {
                 localVarQueryParameter['userName'] = userName;
@@ -482,6 +499,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -513,6 +531,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (algo !== undefined && algo !== null) {
                 localVarQueryParameter['algo'] = algo;
@@ -541,6 +560,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -572,6 +592,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (algo !== undefined && algo !== null) {
                 localVarQueryParameter['algo'] = algo;
@@ -594,6 +615,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -629,6 +651,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (algo !== undefined && algo !== null) {
                 localVarQueryParameter['algo'] = algo;
@@ -660,6 +683,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -687,6 +711,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (algo !== undefined && algo !== null) {
                 localVarQueryParameter['algo'] = algo;
@@ -706,6 +731,7 @@ const MiningApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1391,6 +1417,7 @@ export class MiningApi implements MiningApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1415,6 +1442,7 @@ export class MiningApi implements MiningApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -1439,6 +1467,7 @@ export class MiningApi implements MiningApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -1470,6 +1499,7 @@ export class MiningApi implements MiningApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1506,6 +1536,7 @@ export class MiningApi implements MiningApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1542,6 +1573,7 @@ export class MiningApi implements MiningApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1574,6 +1606,7 @@ export class MiningApi implements MiningApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1605,6 +1638,7 @@ export class MiningApi implements MiningApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1640,6 +1674,7 @@ export class MiningApi implements MiningApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1674,6 +1709,7 @@ export class MiningApi implements MiningApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1706,6 +1742,7 @@ export class MiningApi implements MiningApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1741,6 +1778,7 @@ export class MiningApi implements MiningApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1772,6 +1810,7 @@ export class MiningApi implements MiningApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
