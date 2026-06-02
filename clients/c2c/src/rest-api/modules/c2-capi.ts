@@ -54,6 +54,7 @@ const C2CApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (tradeType !== undefined && tradeType !== null) {
                 localVarQueryParameter['tradeType'] = tradeType;
@@ -82,6 +83,7 @@ const C2CApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -207,6 +209,7 @@ export class C2CApi implements C2CApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
