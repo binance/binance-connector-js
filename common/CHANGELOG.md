@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.4.0 - 2026-06-02
+
+### Added (1)
+
+- Added `headerParams` argument to `sendRequest` for passing per-request headers.
+
+### Changed (1)
+
+- Removed Derivatives Trading Portfolio Margin REST API and WS Streams Testnet URL constants.
+
 ## 2.3.14 - 2026-05-21
 
 ### Changed (1)

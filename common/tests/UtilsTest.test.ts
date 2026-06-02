@@ -1079,6 +1079,7 @@ describe('Utility Functions', () => {
                 'GET',
                 {},
                 {},
+                {},
                 undefined,
                 {}
             );
@@ -1103,6 +1104,7 @@ describe('Utility Functions', () => {
                 '/api/v3/test',
                 'POST',
                 { param1: 'value1' },
+                {},
                 {},
                 undefined,
                 { isSigned: true }
@@ -1142,6 +1144,7 @@ describe('Utility Functions', () => {
                 'POST',
                 { recvWindow: 5000 },
                 { param1: 'test1', param2: 1 },
+                {},
                 undefined,
                 { isSigned: true }
             );
@@ -1182,7 +1185,16 @@ describe('Utility Functions', () => {
         it('should handle the timeUnit header correctly', async () => {
             mockAxios.request.mockResolvedValue({ data: { success: true } });
 
-            await sendRequest(restConfiguration, '/api/v3/test', 'GET', {}, {}, 'MILLISECOND', {});
+            await sendRequest(
+                restConfiguration,
+                '/api/v3/test',
+                'GET',
+                {},
+                {},
+                {},
+                'MILLISECOND',
+                {}
+            );
 
             expect(mockAxios.request).toHaveBeenCalledWith(
                 expect.objectContaining({
@@ -1197,12 +1209,55 @@ describe('Utility Functions', () => {
             );
         });
 
+        it('should merge headerParams onto the outgoing request', async () => {
+            mockAxios.request.mockResolvedValue({ data: { success: true } });
+
+            await sendRequest(
+                restConfiguration,
+                '/api/v3/test',
+                'GET',
+                {},
+                {},
+                { 'X-Trace-Id': 'req-1', 'X-Custom': 'value' },
+                undefined,
+                {}
+            );
+
+            const callArgs = mockAxios.request.mock.calls[0][0] as unknown as {
+                options: { headers: Record<string, unknown> };
+            };
+            expect(callArgs.options.headers['X-Trace-Id']).toBe('req-1');
+            expect(callArgs.options.headers['X-Custom']).toBe('value');
+            expect(callArgs.options.headers['X-MBX-APIKEY']).toBe('test-api-key');
+        });
+
+        it('should let headerParams override matching keys baked into baseOptions.headers', async () => {
+            mockAxios.request.mockResolvedValue({ data: { success: true } });
+
+            await sendRequest(
+                restConfiguration,
+                '/api/v3/test',
+                'GET',
+                {},
+                {},
+                { 'X-MBX-APIKEY': 'override-key' },
+                undefined,
+                {}
+            );
+
+            const callArgs = mockAxios.request.mock.calls[0][0] as unknown as {
+                options: { headers: Record<string, unknown> };
+            };
+            expect(callArgs.options.headers['X-MBX-APIKEY']).toBe('override-key');
+        });
+
         it('should throw an error if provided timeUnit is not valid', async () => {
             try {
                 await sendRequest(
                     restConfiguration,
                     '/api/v3/test',
                     'GET',
+                    {},
                     {},
                     {},
                     'INVALID_TIME_UNIT' as unknown as TimeUnit, // Invalid timeUnit

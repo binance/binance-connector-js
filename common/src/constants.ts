@@ -57,12 +57,8 @@ export const DERIVATIVES_TRADING_OPTIONS_WS_STREAMS_TESTNET_URL = 'wss://fstream
 
 // Derivatives Trading (Portfolio Margin) constants
 export const DERIVATIVES_TRADING_PORTFOLIO_MARGIN_REST_API_PROD_URL = 'https://papi.binance.com';
-export const DERIVATIVES_TRADING_PORTFOLIO_MARGIN_REST_API_TESTNET_URL =
-    'https://testnet.binancefuture.com';
 export const DERIVATIVES_TRADING_PORTFOLIO_MARGIN_WS_STREAMS_PROD_URL =
     'wss://fstream.binance.com/pm';
-export const DERIVATIVES_TRADING_PORTFOLIO_MARGIN_WS_STREAMS_TESTNET_URL =
-    'wss://fstream.binancefuture.com/pm';
 
 // Derivatives Trading (Portfolio Margin Pro) constants
 export const DERIVATIVES_TRADING_PORTFOLIO_MARGIN_PRO_REST_API_PROD_URL = 'https://api.binance.com';

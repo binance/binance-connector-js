@@ -36,20 +36,27 @@ import {
 } from '.';
 
 /**
+ * Defines the configuration options for the RequestSigner class, which can include either an API secret
+ * for HMAC signing or a private key for asymmetric signing.
+ * @remarks
+ * - `apiSecret`: A string used for HMAC-SHA256 signing of requests.
+ * - `privateKey`: A string or Buffer containing the RSA or ED25519 private key for asymmetric signing.
+ * - `privateKeyPassphrase`: An optional string passphrase for encrypted private keys.
+ */
+export type SignerConfig = {
+    apiSecret?: string;
+    privateKey?: string | Buffer;
+    privateKeyPassphrase?: string;
+};
+
+/**
  * A weak cache for storing RequestSigner instances based on configuration parameters.
  *
  * @remarks
  * Uses a WeakMap to cache and reuse RequestSigner instances for configurations with
  * apiSecret, privateKey, and privateKeyPassphrase, allowing efficient memory management.
  */
-let signerCache = new WeakMap<
-    {
-        apiSecret?: string;
-        privateKey?: string | Buffer;
-        privateKeyPassphrase?: string;
-    },
-    RequestSigner
->();
+let signerCache = new WeakMap<SignerConfig, RequestSigner>();
 
 /**
  * Represents a request signer for generating signatures using HMAC-SHA256 or asymmetric key signing.
@@ -60,16 +67,12 @@ let signerCache = new WeakMap<
  *
  * @throws {Error} If neither API secret nor private key is provided, or if the private key is invalid
  */
-class RequestSigner {
-    private apiSecret?: string;
-    private keyObject?: crypto.KeyObject;
-    private keyType?: string;
+export class RequestSigner {
+    protected apiSecret?: string;
+    protected keyObject?: crypto.KeyObject;
+    protected keyType?: string;
 
-    constructor(configuration: {
-        apiSecret?: string;
-        privateKey?: string | Buffer;
-        privateKeyPassphrase?: string;
-    }) {
+    constructor(configuration: SignerConfig) {
         // HMAC-SHA256 path
         if (configuration.apiSecret && !configuration.privateKey) {
             this.apiSecret = configuration.apiSecret;
@@ -141,14 +144,7 @@ class RequestSigner {
  * to store RequestSigner instances associated with configuration objects.
  */
 export const clearSignerCache = function (): void {
-    signerCache = new WeakMap<
-        {
-            apiSecret?: string;
-            privateKey?: string | Buffer;
-            privateKeyPassphrase?: string;
-        },
-        RequestSigner
-    >();
+    signerCache = new WeakMap<SignerConfig, RequestSigner>();
 };
 
 /**
@@ -300,11 +296,7 @@ export function getTimestamp(): number {
  * @returns A string representing the generated signature.
  */
 export const getSignature = function (
-    configuration: {
-        apiSecret?: string;
-        privateKey?: string | Buffer;
-        privateKeyPassphrase?: string;
-    },
+    configuration: SignerConfig,
     queryParams: Record<string, unknown>,
     bodyParams?: Record<string, unknown>
 ): string {
@@ -662,7 +654,9 @@ export const parseRateLimitHeaders = function (
  * Generic function to send a request with optional API key and signature.
  * @param endpoint - The API endpoint to call.
  * @param method - HTTP method to use (GET, POST, DELETE, etc.).
- * @param params - Query parameters for the request.
+ * @param queryParams - Query parameters for the request.
+ * @param bodyParams - Body parameters for the request.
+ * @param headerParams - Per-request headers.
  * @param timeUnit - The time unit for the request.
  * @param options - Additional request options (isSigned).
  * @returns A promise resolving to the response data object.
@@ -673,6 +667,7 @@ export const sendRequest = function <T>(
     method: 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH',
     queryParams: Record<string, unknown> = {},
     bodyParams: Record<string, unknown> = {},
+    headerParams: Record<string, unknown> = {},
     timeUnit?: TimeUnit,
     options: { isSigned?: boolean } = {}
 ): Promise<RestApiResponse<T>> {
@@ -681,6 +676,11 @@ export const sendRequest = function <T>(
         method,
         ...configuration?.baseOptions,
     };
+    const localVarHeaders: Record<string, unknown> = {
+        ...((localVarRequestOptions.headers as Record<string, unknown> | undefined) || {}),
+        ...headerParams,
+    };
+    localVarRequestOptions.headers = localVarHeaders as RawAxiosRequestConfig['headers'];
     const localVarQueryParameter = { ...normalizeScientificNumbers(queryParams) };
     const localVarBodyParameter = { ...normalizeScientificNumbers(bodyParams) };
 
@@ -708,18 +708,11 @@ export const sendRequest = function <T>(
         }
 
         localVarRequestOptions.data = searchParams.toString();
-        localVarRequestOptions.headers = {
-            ...(localVarRequestOptions.headers || {}),
-            'Content-Type': 'application/x-www-form-urlencoded',
-        };
+        localVarHeaders['Content-Type'] = 'application/x-www-form-urlencoded';
     }
 
-    if (timeUnit && localVarRequestOptions.headers) {
-        const _timeUnit = validateTimeUnit(timeUnit);
-        localVarRequestOptions.headers = {
-            ...localVarRequestOptions.headers,
-            'X-MBX-TIME-UNIT': _timeUnit,
-        };
+    if (timeUnit) {
+        localVarHeaders['X-MBX-TIME-UNIT'] = validateTimeUnit(timeUnit);
     }
 
     return httpRequestFunction<T>(

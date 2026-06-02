@@ -109,5 +109,6 @@ export interface RequestArgs {
     method: 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH';
     queryParams: Record<string, unknown>;
     bodyParams: Record<string, unknown>;
+    headerParams: Record<string, unknown>;
     timeUnit?: TimeUnit;
 }
