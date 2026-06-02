@@ -62,6 +62,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (loanCoin !== undefined && loanCoin !== null) {
                 localVarQueryParameter['loanCoin'] = loanCoin;
@@ -81,6 +82,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -118,6 +120,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (loanCoin !== undefined && loanCoin !== null) {
                 localVarQueryParameter['loanCoin'] = loanCoin;
@@ -143,6 +146,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -178,6 +182,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (loanCoin !== undefined && loanCoin !== null) {
                 localVarQueryParameter['loanCoin'] = loanCoin;
@@ -203,6 +208,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -243,6 +249,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (loanCoin !== undefined && loanCoin !== null) {
                 localVarQueryParameter['loanCoin'] = loanCoin;
@@ -274,6 +281,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -294,6 +302,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (loanCoin !== undefined && loanCoin !== null) {
                 localVarQueryParameter['loanCoin'] = loanCoin;
@@ -310,6 +319,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -343,6 +353,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (loanCoin !== undefined && loanCoin !== null) {
                 localVarQueryParameter['loanCoin'] = loanCoin;
@@ -374,6 +385,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -394,6 +406,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (collateralCoin !== undefined && collateralCoin !== null) {
                 localVarQueryParameter['collateralCoin'] = collateralCoin;
@@ -410,6 +423,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -447,6 +461,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
@@ -475,6 +490,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -504,6 +520,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (loanCoin !== undefined && loanCoin !== null) {
                 localVarQueryParameter['loanCoin'] = loanCoin;
@@ -535,6 +552,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -568,6 +586,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (loanCoin !== undefined && loanCoin !== null) {
                 localVarQueryParameter['loanCoin'] = loanCoin;
@@ -599,6 +618,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -625,6 +645,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (loanCoin !== undefined && loanCoin !== null) {
                 localVarQueryParameter['loanCoin'] = loanCoin;
@@ -650,6 +671,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -683,6 +705,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (loanCoin !== undefined && loanCoin !== null) {
                 localVarQueryParameter['loanCoin'] = loanCoin;
@@ -714,6 +737,7 @@ const FlexibleRateApiAxiosParamCreator = function (configuration: ConfigurationR
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1466,6 +1490,7 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1501,6 +1526,7 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1538,6 +1564,7 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1576,6 +1603,7 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1606,6 +1634,7 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1644,6 +1673,7 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1675,6 +1705,7 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1714,6 +1745,7 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1749,6 +1781,7 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1788,6 +1821,7 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1821,6 +1855,7 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1860,6 +1895,7 @@ export class FlexibleRateApi implements FlexibleRateApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );

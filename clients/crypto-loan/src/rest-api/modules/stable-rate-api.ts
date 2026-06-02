@@ -64,6 +64,7 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (loanCoin !== undefined && loanCoin !== null) {
                 localVarQueryParameter['loanCoin'] = loanCoin;
@@ -86,6 +87,7 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -117,6 +119,7 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
@@ -145,6 +148,7 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -180,6 +184,7 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (orderId !== undefined && orderId !== null) {
                 localVarQueryParameter['orderId'] = orderId;
@@ -214,6 +219,7 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -249,6 +255,7 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (orderId !== undefined && orderId !== null) {
                 localVarQueryParameter['orderId'] = orderId;
@@ -283,6 +290,7 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -318,6 +326,7 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (orderId !== undefined && orderId !== null) {
                 localVarQueryParameter['orderId'] = orderId;
@@ -352,6 +361,7 @@ const StableRateApiAxiosParamCreator = function (configuration: ConfigurationRes
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -756,6 +766,7 @@ export class StableRateApi implements StableRateApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -793,6 +804,7 @@ export class StableRateApi implements StableRateApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -832,6 +844,7 @@ export class StableRateApi implements StableRateApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -871,6 +884,7 @@ export class StableRateApi implements StableRateApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -910,6 +924,7 @@ export class StableRateApi implements StableRateApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
