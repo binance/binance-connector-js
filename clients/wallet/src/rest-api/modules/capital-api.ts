@@ -49,6 +49,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         allCoinsInformation: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -62,6 +63,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -93,6 +95,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
@@ -115,6 +118,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -153,6 +157,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (includeSource !== undefined && includeSource !== null) {
                 localVarQueryParameter['includeSource'] = includeSource;
@@ -190,6 +195,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -217,6 +223,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
@@ -233,6 +240,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -248,6 +256,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         fetchWithdrawAddressList: async (): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -257,6 +266,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -272,6 +282,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         fetchWithdrawQuota: async (): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -281,6 +292,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -307,6 +319,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (depositId !== undefined && depositId !== null) {
                 localVarQueryParameter['depositId'] = depositId;
@@ -329,6 +342,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -380,6 +394,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
@@ -420,6 +435,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -462,6 +478,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
@@ -499,6 +516,7 @@ const CapitalApiAxiosParamCreator = function (configuration: ConfigurationRestAP
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1012,6 +1030,7 @@ export class CapitalApi implements CapitalApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1048,6 +1067,7 @@ export class CapitalApi implements CapitalApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1089,6 +1109,7 @@ export class CapitalApi implements CapitalApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1124,6 +1145,7 @@ export class CapitalApi implements CapitalApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1150,6 +1172,7 @@ export class CapitalApi implements CapitalApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1174,6 +1197,7 @@ export class CapitalApi implements CapitalApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1208,6 +1232,7 @@ export class CapitalApi implements CapitalApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1254,6 +1279,7 @@ export class CapitalApi implements CapitalApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1299,6 +1325,7 @@ export class CapitalApi implements CapitalApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );

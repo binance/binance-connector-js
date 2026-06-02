@@ -25,6 +25,8 @@ import type {
     DepositHistoryTravelRuleResponse,
     DepositHistoryV2Response,
     FetchAddressVerificationListResponse,
+    GetCountryListResponse,
+    GetRegionListResponse,
     SubmitDepositQuestionnaireResponse,
     SubmitDepositQuestionnaireTravelRuleResponse,
     SubmitDepositQuestionnaireV2Response,
@@ -96,6 +98,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (address !== undefined && address !== null) {
                 localVarQueryParameter['address'] = address;
@@ -142,6 +145,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -160,6 +164,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -173,6 +178,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -215,6 +221,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (trId !== undefined && trId !== null) {
                 localVarQueryParameter['trId'] = trId;
@@ -258,6 +265,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -296,6 +304,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (depositId !== undefined && depositId !== null) {
                 localVarQueryParameter['depositId'] = depositId;
@@ -333,6 +342,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -351,6 +361,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -364,6 +375,67 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Query the active country list for travel rule questionnaires.
+         *
+         * Weight: 1
+         *
+         * @summary Get Country List (USER_DATA)
+         *
+         * @throws {RequiredError}
+         */
+        getCountryList: async (): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/localentity/country/list',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Query the active region/city list for a given country.
+         *
+         * Weight: 1
+         *
+         * @summary Get Region List (USER_DATA)
+         * @param {string} countryCode ISO 2-digit country code (from `Country List` API).
+         *
+         * @throws {RequiredError}
+         */
+        getRegionList: async (countryCode: string): Promise<RequestArgs> => {
+            // verify required parameter 'countryCode' is not null or undefined
+            assertParamExists('getRegionList', 'countryCode', countryCode);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (countryCode !== undefined && countryCode !== null) {
+                localVarQueryParameter['countryCode'] = countryCode;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/localentity/region/list',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -416,6 +488,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (subAccountId !== undefined && subAccountId !== null) {
                 localVarQueryParameter['subAccountId'] = subAccountId;
@@ -456,6 +529,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
                 method: 'PUT',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -490,6 +564,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (tranId !== undefined && tranId !== null) {
                 localVarQueryParameter['tranId'] = tranId;
@@ -506,6 +581,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
                 method: 'PUT',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -536,6 +612,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (depositId !== undefined && depositId !== null) {
                 localVarQueryParameter['depositId'] = depositId;
@@ -552,6 +629,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
                 method: 'PUT',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -568,6 +646,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
         vaspList: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -581,6 +660,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -623,6 +703,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (trId !== undefined && trId !== null) {
                 localVarQueryParameter['trId'] = trId;
@@ -666,6 +747,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -714,6 +796,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (trId !== undefined && trId !== null) {
                 localVarQueryParameter['trId'] = trId;
@@ -757,6 +840,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -809,6 +893,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
@@ -852,6 +937,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -946,6 +1032,31 @@ export interface TravelRuleApiInterface {
     fetchAddressVerificationList(
         requestParameters?: FetchAddressVerificationListRequest
     ): Promise<RestApiResponse<FetchAddressVerificationListResponse>>;
+    /**
+     * Query the active country list for travel rule questionnaires.
+     *
+     * Weight: 1
+     *
+     * @summary Get Country List (USER_DATA)
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TravelRuleApiInterface
+     */
+    getCountryList(): Promise<RestApiResponse<GetCountryListResponse>>;
+    /**
+     * Query the active region/city list for a given country.
+     *
+     * Weight: 1
+     *
+     * @summary Get Region List (USER_DATA)
+     * @param {GetRegionListRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TravelRuleApiInterface
+     */
+    getRegionList(
+        requestParameters: GetRegionListRequest
+    ): Promise<RestApiResponse<GetRegionListResponse>>;
     /**
      * Submit questionnaire for brokers of local entities that require travel rule.
      * The questionnaire is only applies to transactions from un-hosted wallets or VASPs that are not
@@ -1344,6 +1455,19 @@ export interface FetchAddressVerificationListRequest {
      * @memberof TravelRuleApiFetchAddressVerificationList
      */
     readonly recvWindow?: number | bigint;
+}
+
+/**
+ * Request parameters for getRegionList operation in TravelRuleApi.
+ * @interface GetRegionListRequest
+ */
+export interface GetRegionListRequest {
+    /**
+     * ISO 2-digit country code (from `Country List` API).
+     * @type {string}
+     * @memberof TravelRuleApiGetRegionList
+     */
+    readonly countryCode: string;
 }
 
 /**
@@ -1777,6 +1901,7 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1807,6 +1932,7 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1850,6 +1976,7 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1891,6 +2018,7 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1920,6 +2048,62 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Query the active country list for travel rule questionnaires.
+     *
+     * Weight: 1
+     *
+     * @summary Get Country List (USER_DATA)
+     * @returns {Promise<RestApiResponse<GetCountryListResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TravelRuleApi
+     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/country-list Binance API Documentation}
+     */
+    public async getCountryList(): Promise<RestApiResponse<GetCountryListResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getCountryList();
+        return sendRequest<GetCountryListResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Query the active region/city list for a given country.
+     *
+     * Weight: 1
+     *
+     * @summary Get Region List (USER_DATA)
+     * @param {GetRegionListRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<GetRegionListResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TravelRuleApi
+     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/region-list Binance API Documentation}
+     */
+    public async getRegionList(
+        requestParameters: GetRegionListRequest
+    ): Promise<RestApiResponse<GetRegionListResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.getRegionList(
+            requestParameters?.countryCode
+        );
+        return sendRequest<GetRegionListResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1963,6 +2147,7 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -1999,6 +2184,7 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2034,6 +2220,7 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2063,6 +2250,7 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2106,6 +2294,7 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2155,6 +2344,7 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2199,6 +2389,7 @@ export class TravelRuleApi implements TravelRuleApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );

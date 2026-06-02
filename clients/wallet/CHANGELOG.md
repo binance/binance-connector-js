@@ -1,5 +1,16 @@
 # Changelog
 
+## 19.0.0 - 2026-06-02
+
+### Added (2)
+
+- `getCountryList()` (`GET /sapi/v1/localentity/country/list`)
+- `getRegionList()` (`GET /sapi/v1/localentity/region/list`)
+
+### Changed (1)
+
+- Update `@binance/common` library to version `2.4.0`.
+
 ## 18.0.0 - 2026-05-25
 
 ### Changed (1)

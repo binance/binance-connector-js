@@ -61,6 +61,7 @@ import type {
     DepositHistoryTravelRuleRequest,
     DepositHistoryV2Request,
     FetchAddressVerificationListRequest,
+    GetRegionListRequest,
     SubmitDepositQuestionnaireRequest,
     SubmitDepositQuestionnaireTravelRuleRequest,
     SubmitDepositQuestionnaireV2Request,
@@ -114,6 +115,8 @@ import type {
     DepositHistoryTravelRuleResponse,
     DepositHistoryV2Response,
     FetchAddressVerificationListResponse,
+    GetCountryListResponse,
+    GetRegionListResponse,
     SubmitDepositQuestionnaireResponse,
     SubmitDepositQuestionnaireTravelRuleResponse,
     SubmitDepositQuestionnaireV2Response,
@@ -161,6 +164,7 @@ export class RestAPI {
             method,
             queryParams,
             bodyParams,
+            undefined,
             undefined
         );
     }
@@ -186,6 +190,7 @@ export class RestAPI {
             method,
             queryParams,
             bodyParams,
+            undefined,
             undefined,
             { isSigned: true }
         );
@@ -1003,6 +1008,39 @@ export class RestAPI {
         requestParameters: FetchAddressVerificationListRequest = {}
     ): Promise<RestApiResponse<FetchAddressVerificationListResponse>> {
         return this.travelRuleApi.fetchAddressVerificationList(requestParameters);
+    }
+
+    /**
+     * Query the active country list for travel rule questionnaires.
+     *
+     * Weight: 1
+     *
+     * @summary Get Country List (USER_DATA)
+     *
+     * @returns {Promise<RestApiResponse<GetCountryListResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/country-list Binance API Documentation}
+     */
+    getCountryList(): Promise<RestApiResponse<GetCountryListResponse>> {
+        return this.travelRuleApi.getCountryList();
+    }
+
+    /**
+     * Query the active region/city list for a given country.
+     *
+     * Weight: 1
+     *
+     * @summary Get Region List (USER_DATA)
+     * @param {GetRegionListRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<GetRegionListResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/wallet/travel-rule/region-list Binance API Documentation}
+     */
+    getRegionList(
+        requestParameters: GetRegionListRequest
+    ): Promise<RestApiResponse<GetRegionListResponse>> {
+        return this.travelRuleApi.getRegionList(requestParameters);
     }
 
     /**

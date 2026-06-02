@@ -22,6 +22,7 @@ import {
     DepositHistoryTravelRuleRequest,
     DepositHistoryV2Request,
     FetchAddressVerificationListRequest,
+    GetRegionListRequest,
     SubmitDepositQuestionnaireRequest,
     SubmitDepositQuestionnaireTravelRuleRequest,
     SubmitDepositQuestionnaireV2Request,
@@ -36,6 +37,8 @@ import type {
     DepositHistoryTravelRuleResponse,
     DepositHistoryV2Response,
     FetchAddressVerificationListResponse,
+    GetCountryListResponse,
+    GetRegionListResponse,
     SubmitDepositQuestionnaireResponse,
     SubmitDepositQuestionnaireTravelRuleResponse,
     SubmitDepositQuestionnaireV2Response,
@@ -667,6 +670,155 @@ describe('TravelRuleApi', () => {
                 .spyOn(client, 'fetchAddressVerificationList')
                 .mockRejectedValueOnce(mockError);
             await expect(client.fetchAddressVerificationList()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('getCountryList()', () => {
+        it('should execute getCountryList() successfully with required parameters only', async () => {
+            mockResponse = JSONParse(
+                JSONStringify({
+                    countries: [
+                        {
+                            countryCode: 'au',
+                            countryName: 'Australia',
+                            blockType: 'supported',
+                            depositAllowed: true,
+                            withdrawalAllowed: true,
+                            hasRegionRestrictions: true,
+                        },
+                    ],
+                    lastUpdated: 1716300000000,
+                })
+            );
+
+            const spy = jest.spyOn(client, 'getCountryList').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetCountryListResponse>)
+            );
+            const response = await client.getCountryList();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'getCountryList').mockRejectedValueOnce(mockError);
+            await expect(client.getCountryList()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('getRegionList()', () => {
+        it('should execute getRegionList() successfully with required parameters only', async () => {
+            const params: GetRegionListRequest = {
+                countryCode: 'countryCode_example',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    countryCode: 'au',
+                    regions: [
+                        {
+                            regionName: 'New South Wales',
+                            blockType: 'supported',
+                            depositAllowed: true,
+                            withdrawalAllowed: true,
+                        },
+                    ],
+                    lastUpdated: 1716300000000,
+                })
+            );
+
+            const spy = jest.spyOn(client, 'getRegionList').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetRegionListResponse>)
+            );
+            const response = await client.getRegionList(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute getRegionList() successfully with optional parameters', async () => {
+            const params: GetRegionListRequest = {
+                countryCode: 'countryCode_example',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    countryCode: 'au',
+                    regions: [
+                        {
+                            regionName: 'New South Wales',
+                            blockType: 'supported',
+                            depositAllowed: true,
+                            withdrawalAllowed: true,
+                        },
+                    ],
+                    lastUpdated: 1716300000000,
+                })
+            );
+
+            const spy = jest.spyOn(client, 'getRegionList').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<GetRegionListResponse>)
+            );
+            const response = await client.getRegionList(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when countryCode is missing', async () => {
+            const _params: GetRegionListRequest = {
+                countryCode: 'countryCode_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.countryCode;
+
+            await expect(client.getRegionList(params)).rejects.toThrow(
+                'Required parameter countryCode was null or undefined when calling getRegionList.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: GetRegionListRequest = {
+                countryCode: 'countryCode_example',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'getRegionList').mockRejectedValueOnce(mockError);
+            await expect(client.getRegionList(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
