@@ -53,6 +53,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (positionId !== undefined && positionId !== null) {
                 localVarQueryParameter['positionId'] = positionId;
@@ -72,6 +73,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -88,6 +90,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         checkDualInvestmentAccounts: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -101,6 +104,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -125,6 +129,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (status !== undefined && status !== null) {
                 localVarQueryParameter['status'] = status;
@@ -147,6 +152,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -189,6 +195,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (id !== undefined && id !== null) {
                 localVarQueryParameter['id'] = id;
@@ -214,6 +221,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -440,6 +448,7 @@ export class TradeApi implements TradeApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -469,6 +478,7 @@ export class TradeApi implements TradeApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -501,6 +511,7 @@ export class TradeApi implements TradeApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -538,6 +549,7 @@ export class TradeApi implements TradeApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
