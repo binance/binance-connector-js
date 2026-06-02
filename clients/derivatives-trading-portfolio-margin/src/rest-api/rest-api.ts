@@ -277,6 +277,7 @@ export class RestAPI {
             method,
             queryParams,
             bodyParams,
+            undefined,
             undefined
         );
     }
@@ -302,6 +303,7 @@ export class RestAPI {
             method,
             queryParams,
             bodyParams,
+            undefined,
             undefined,
             { isSigned: true }
         );
