@@ -14,3 +14,4 @@
 export * from './bfusd-api';
 export * from './flexible-locked-api';
 export * from './rwusd-api';
+export * from './yield-arena-api';

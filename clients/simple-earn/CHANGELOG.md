@@ -1,5 +1,15 @@
 # Changelog
 
+## 15.0.0 - 2026-06-02
+
+### Added (1)
+
+- `getYieldArenaActivities()` (`GET /sapi/v1/earn/arena/activities`)
+
+### Changed (1)
+
+- Update `@binance/common` library to version `2.4.0`.
+
 ## 14.0.1 - 2026-05-21
 
 ### Changed (1)

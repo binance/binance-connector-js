@@ -15,6 +15,7 @@ import { ConfigurationRestAPI, RestApiResponse, sendRequest } from '@binance/com
 import { BfusdApi } from './modules/bfusd-api';
 import { FlexibleLockedApi } from './modules/flexible-locked-api';
 import { RwusdApi } from './modules/rwusd-api';
+import { YieldArenaApi } from './modules/yield-arena-api';
 
 import type {
     GetBfusdAccountRequest,
@@ -62,6 +63,7 @@ import type {
     RedeemRwusdRequest,
     SubscribeRwusdRequest,
 } from './modules/rwusd-api';
+import type { GetYieldArenaActivitiesRequest } from './modules/yield-arena-api';
 
 import type {
     GetBfusdAccountResponse,
@@ -109,18 +111,21 @@ import type {
     RedeemRwusdResponse,
     SubscribeRwusdResponse,
 } from './types';
+import type { GetYieldArenaActivitiesResponse } from './types';
 
 export class RestAPI {
     private configuration: ConfigurationRestAPI;
     private bfusdApi: BfusdApi;
     private flexibleLockedApi: FlexibleLockedApi;
     private rwusdApi: RwusdApi;
+    private yieldArenaApi: YieldArenaApi;
 
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
         this.bfusdApi = new BfusdApi(configuration);
         this.flexibleLockedApi = new FlexibleLockedApi(configuration);
         this.rwusdApi = new RwusdApi(configuration);
+        this.yieldArenaApi = new YieldArenaApi(configuration);
     }
 
     /**
@@ -144,6 +149,7 @@ export class RestAPI {
             method,
             queryParams,
             bodyParams,
+            undefined,
             undefined
         );
     }
@@ -169,6 +175,7 @@ export class RestAPI {
             method,
             queryParams,
             bodyParams,
+            undefined,
             undefined,
             { isSigned: true }
         );
@@ -990,5 +997,25 @@ export class RestAPI {
         requestParameters: SubscribeRwusdRequest
     ): Promise<RestApiResponse<SubscribeRwusdResponse>> {
         return this.rwusdApi.subscribeRwusd(requestParameters);
+    }
+
+    /**
+     * Get the list of Earn Yield Arena giveaway activities currently available to the user.
+     *
+     * Supported locales: `en`, `en-GB`, `en-AU`, `cn`, `zh`, `zh-CN`, `tw`, `zh-TW`, `zh-HK`, `ja`, `ja-JP`, `ru`, `ru-RU`, `es`, `es-ES`, `es-LA`, `pt`, `pt-BR`, `pt-PT`, `fr`, `fr-FR`, `de`, `de-DE`, `it`, `it-IT`, `id`, `id-ID`, `vi`, `vi-VN`, `ar`, `ar-SA`, `pl`, `pl-PL`, `uk`, `uk-UA`, `cs`, `cs-CZ`, `ro`, `ro-RO`, `sv`, `sv-SE`, `bg`, `bg-BG`, `da`, `da-DK`, `el`, `el-GR`, `hu`, `hu-HU`, `lv`, `lv-LV`, `sk`, `sk-SK`, `sl`, `sl-SI`.
+     *
+     * Weight: 150
+     *
+     * @summary Get Yield Arena Activities (USER_DATA)
+     * @param {GetYieldArenaActivitiesRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<GetYieldArenaActivitiesResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/simple_earn/yield-arena/earn/Get-Yield-Arena-Activities Binance API Documentation}
+     */
+    getYieldArenaActivities(
+        requestParameters: GetYieldArenaActivitiesRequest = {}
+    ): Promise<RestApiResponse<GetYieldArenaActivitiesResponse>> {
+        return this.yieldArenaApi.getYieldArenaActivities(requestParameters);
     }
 }

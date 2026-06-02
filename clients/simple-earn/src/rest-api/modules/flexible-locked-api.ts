@@ -81,6 +81,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (productId !== undefined && productId !== null) {
                 localVarQueryParameter['productId'] = productId;
@@ -109,6 +110,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -132,6 +134,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (productId !== undefined && productId !== null) {
                 localVarQueryParameter['productId'] = productId;
@@ -148,6 +151,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -174,6 +178,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
@@ -199,6 +204,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -236,6 +242,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (productId !== undefined && productId !== null) {
                 localVarQueryParameter['productId'] = productId;
@@ -270,6 +277,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -310,6 +318,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (productId !== undefined && productId !== null) {
                 localVarQueryParameter['productId'] = productId;
@@ -344,6 +353,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -371,6 +381,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (productId !== undefined && productId !== null) {
                 localVarQueryParameter['productId'] = productId;
@@ -390,6 +401,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -427,6 +439,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (productId !== undefined && productId !== null) {
                 localVarQueryParameter['productId'] = productId;
@@ -461,6 +474,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -484,6 +498,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (projectId !== undefined && projectId !== null) {
                 localVarQueryParameter['projectId'] = projectId;
@@ -500,6 +515,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -528,6 +544,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
@@ -556,6 +573,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -593,6 +611,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (positionId !== undefined && positionId !== null) {
                 localVarQueryParameter['positionId'] = positionId;
@@ -627,6 +646,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -662,6 +682,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (positionId !== undefined && positionId !== null) {
                 localVarQueryParameter['positionId'] = positionId;
@@ -693,6 +714,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -722,6 +744,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (projectId !== undefined && projectId !== null) {
                 localVarQueryParameter['projectId'] = projectId;
@@ -744,6 +767,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -779,6 +803,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (purchaseId !== undefined && purchaseId !== null) {
                 localVarQueryParameter['purchaseId'] = purchaseId;
@@ -810,6 +835,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -848,6 +874,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (productId !== undefined && productId !== null) {
                 localVarQueryParameter['productId'] = productId;
@@ -879,6 +906,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -903,6 +931,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
@@ -925,6 +954,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -951,6 +981,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
@@ -973,6 +1004,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1004,6 +1036,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (productId !== undefined && productId !== null) {
                 localVarQueryParameter['productId'] = productId;
@@ -1029,6 +1062,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1054,6 +1088,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (positionId !== undefined && positionId !== null) {
                 localVarQueryParameter['positionId'] = positionId;
@@ -1070,6 +1105,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1097,6 +1133,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (productId !== undefined && productId !== null) {
                 localVarQueryParameter['productId'] = productId;
@@ -1116,6 +1153,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1143,6 +1181,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (positionId !== undefined && positionId !== null) {
                 localVarQueryParameter['positionId'] = positionId;
@@ -1162,6 +1201,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1189,6 +1229,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (positionId !== undefined && positionId !== null) {
                 localVarQueryParameter['positionId'] = positionId;
@@ -1208,6 +1249,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1224,6 +1266,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         simpleAccount: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -1237,6 +1280,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1270,6 +1314,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (productId !== undefined && productId !== null) {
                 localVarQueryParameter['productId'] = productId;
@@ -1295,6 +1340,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -1330,6 +1376,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (projectId !== undefined && projectId !== null) {
                 localVarQueryParameter['projectId'] = projectId;
@@ -1358,6 +1405,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -2767,6 +2815,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2797,6 +2846,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2830,6 +2880,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2871,6 +2922,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2912,6 +2964,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2944,6 +2997,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -2986,6 +3040,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3016,6 +3071,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3050,6 +3106,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3091,6 +3148,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3131,6 +3189,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3163,6 +3222,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3203,6 +3263,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3243,6 +3304,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3276,6 +3338,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3311,6 +3374,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3346,6 +3410,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3378,6 +3443,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3409,6 +3475,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3440,6 +3507,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3471,6 +3539,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3500,6 +3569,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3535,6 +3605,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -3571,6 +3642,7 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );

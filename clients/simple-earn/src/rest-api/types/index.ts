@@ -55,6 +55,8 @@ export * from './get-simple-earn-locked-product-list-response';
 export * from './get-simple-earn-locked-product-list-response-rows-inner';
 export * from './get-simple-earn-locked-product-list-response-rows-inner-detail';
 export * from './get-simple-earn-locked-product-list-response-rows-inner-quota';
+export * from './get-yield-arena-activities-response';
+export * from './get-yield-arena-activities-response-activities-inner';
 export * from './redeem-bfusd-response';
 export * from './redeem-flexible-product-response';
 export * from './redeem-locked-product-response';
