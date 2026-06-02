@@ -87,6 +87,7 @@ const PayApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (startTime !== undefined && startTime !== null) {
                 localVarQueryParameter['startTime'] = startTime;
@@ -109,6 +110,7 @@ const PayApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -292,6 +294,7 @@ export class PayApi implements PayApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
