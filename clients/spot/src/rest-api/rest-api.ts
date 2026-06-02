@@ -163,6 +163,7 @@ export class RestAPI {
             method,
             queryParams,
             bodyParams,
+            undefined,
             timeUnit
         );
     }
@@ -189,6 +190,7 @@ export class RestAPI {
             method,
             queryParams,
             bodyParams,
+            undefined,
             timeUnit,
             { isSigned: true }
         );
