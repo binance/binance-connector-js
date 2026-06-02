@@ -57,6 +57,7 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (blockOrderMatchingKey !== undefined && blockOrderMatchingKey !== null) {
                 localVarQueryParameter['blockOrderMatchingKey'] = blockOrderMatchingKey;
@@ -73,6 +74,7 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -97,6 +99,7 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (endTime !== undefined && endTime !== null) {
                 localVarQueryParameter['endTime'] = endTime;
@@ -119,6 +122,7 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -146,6 +150,7 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (blockOrderMatchingKey !== undefined && blockOrderMatchingKey !== null) {
                 localVarQueryParameter['blockOrderMatchingKey'] = blockOrderMatchingKey;
@@ -162,6 +167,7 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
                 method: 'DELETE',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -189,6 +195,7 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (blockOrderMatchingKey !== undefined && blockOrderMatchingKey !== null) {
                 localVarQueryParameter['blockOrderMatchingKey'] = blockOrderMatchingKey;
@@ -205,6 +212,7 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
                 method: 'PUT',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -232,6 +240,7 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (liquidity !== undefined && liquidity !== null) {
                 localVarQueryParameter['liquidity'] = liquidity;
@@ -251,6 +260,7 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -278,6 +288,7 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (blockOrderMatchingKey !== undefined && blockOrderMatchingKey !== null) {
                 localVarQueryParameter['blockOrderMatchingKey'] = blockOrderMatchingKey;
@@ -294,6 +305,7 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -320,6 +332,7 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
         ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (blockOrderMatchingKey !== undefined && blockOrderMatchingKey !== null) {
                 localVarQueryParameter['blockOrderMatchingKey'] = blockOrderMatchingKey;
@@ -345,6 +358,7 @@ const MarketMakerBlockTradeApiAxiosParamCreator = function (configuration: Confi
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -676,6 +690,7 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -708,6 +723,7 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -738,6 +754,7 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -768,6 +785,7 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -799,6 +817,7 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -829,6 +848,7 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -862,6 +882,7 @@ export class MarketMakerBlockTradeApi implements MarketMakerBlockTradeApiInterfa
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
