@@ -69,6 +69,7 @@ const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) 
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -98,6 +99,7 @@ const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) 
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -141,6 +143,7 @@ const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) 
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
@@ -174,6 +177,7 @@ const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) 
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -207,6 +211,7 @@ const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) 
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (transactionType !== undefined && transactionType !== null) {
                 localVarQueryParameter['transactionType'] = transactionType;
@@ -235,6 +240,7 @@ const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) 
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -273,6 +279,7 @@ const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) 
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (transactionType !== undefined && transactionType !== null) {
                 localVarQueryParameter['transactionType'] = transactionType;
@@ -301,6 +308,7 @@ const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) 
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -326,6 +334,7 @@ const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) 
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (orderNo !== undefined && orderNo !== null) {
                 localVarQueryParameter['orderNo'] = orderNo;
@@ -342,6 +351,7 @@ const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) 
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -698,6 +708,7 @@ export class FiatApi implements FiatApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -738,6 +749,7 @@ export class FiatApi implements FiatApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -775,6 +787,7 @@ export class FiatApi implements FiatApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -816,6 +829,7 @@ export class FiatApi implements FiatApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -848,6 +862,7 @@ export class FiatApi implements FiatApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
