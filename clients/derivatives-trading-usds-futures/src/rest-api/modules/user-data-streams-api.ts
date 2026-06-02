@@ -37,6 +37,7 @@ const UserDataStreamsApiAxiosParamCreator = function (configuration: Configurati
         closeUserDataStream: async (): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -46,6 +47,7 @@ const UserDataStreamsApiAxiosParamCreator = function (configuration: Configurati
                 method: 'DELETE',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -61,6 +63,7 @@ const UserDataStreamsApiAxiosParamCreator = function (configuration: Configurati
         keepaliveUserDataStream: async (): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -70,6 +73,7 @@ const UserDataStreamsApiAxiosParamCreator = function (configuration: Configurati
                 method: 'PUT',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -85,6 +89,7 @@ const UserDataStreamsApiAxiosParamCreator = function (configuration: Configurati
         startUserDataStream: async (): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             let _timeUnit: TimeUnit | undefined;
             if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
@@ -94,6 +99,7 @@ const UserDataStreamsApiAxiosParamCreator = function (configuration: Configurati
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -172,6 +178,7 @@ export class UserDataStreamsApi implements UserDataStreamsApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -198,6 +205,7 @@ export class UserDataStreamsApi implements UserDataStreamsApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -222,6 +230,7 @@ export class UserDataStreamsApi implements UserDataStreamsApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );

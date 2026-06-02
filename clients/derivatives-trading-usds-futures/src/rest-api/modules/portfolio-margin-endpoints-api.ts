@@ -51,6 +51,7 @@ const PortfolioMarginEndpointsApiAxiosParamCreator = function (
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (asset !== undefined && asset !== null) {
                 localVarQueryParameter['asset'] = asset;
@@ -67,6 +68,7 @@ const PortfolioMarginEndpointsApiAxiosParamCreator = function (
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -160,6 +162,7 @@ export class PortfolioMarginEndpointsApi implements PortfolioMarginEndpointsApiI
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );

@@ -51,6 +51,7 @@ const ConvertApiAxiosParamCreator = function (configuration: ConfigurationRestAP
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (quoteId !== undefined && quoteId !== null) {
                 localVarQueryParameter['quoteId'] = quoteId;
@@ -67,6 +68,7 @@ const ConvertApiAxiosParamCreator = function (configuration: ConfigurationRestAP
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -88,6 +90,7 @@ const ConvertApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         listAllConvertPairs: async (fromAsset?: string, toAsset?: string): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (fromAsset !== undefined && fromAsset !== null) {
                 localVarQueryParameter['fromAsset'] = fromAsset;
@@ -104,6 +107,7 @@ const ConvertApiAxiosParamCreator = function (configuration: ConfigurationRestAP
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -121,6 +125,7 @@ const ConvertApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         orderStatus: async (orderId?: string, quoteId?: string): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (orderId !== undefined && orderId !== null) {
                 localVarQueryParameter['orderId'] = orderId;
@@ -137,6 +142,7 @@ const ConvertApiAxiosParamCreator = function (configuration: ConfigurationRestAP
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -173,6 +179,7 @@ const ConvertApiAxiosParamCreator = function (configuration: ConfigurationRestAP
 
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (fromAsset !== undefined && fromAsset !== null) {
                 localVarQueryParameter['fromAsset'] = fromAsset;
@@ -201,6 +208,7 @@ const ConvertApiAxiosParamCreator = function (configuration: ConfigurationRestAP
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
                 timeUnit: _timeUnit,
             };
         },
@@ -423,6 +431,7 @@ export class ConvertApi implements ConvertApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -457,6 +466,7 @@ export class ConvertApi implements ConvertApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: false }
         );
@@ -487,6 +497,7 @@ export class ConvertApi implements ConvertApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
@@ -524,6 +535,7 @@ export class ConvertApi implements ConvertApiInterface {
             localVarAxiosArgs.method,
             localVarAxiosArgs.queryParams,
             localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
             localVarAxiosArgs?.timeUnit,
             { isSigned: true }
         );
