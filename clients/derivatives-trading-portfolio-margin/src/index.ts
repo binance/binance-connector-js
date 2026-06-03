@@ -8,9 +8,7 @@ export * as DerivativesTradingPortfolioMarginWebsocketStreams from './websocket-
 
 export {
     DERIVATIVES_TRADING_PORTFOLIO_MARGIN_REST_API_PROD_URL,
-    DERIVATIVES_TRADING_PORTFOLIO_MARGIN_REST_API_TESTNET_URL,
     DERIVATIVES_TRADING_PORTFOLIO_MARGIN_WS_STREAMS_PROD_URL,
-    DERIVATIVES_TRADING_PORTFOLIO_MARGIN_WS_STREAMS_TESTNET_URL,
     ConnectorClientError,
     RequiredError,
     UnauthorizedError,

@@ -1,5 +1,11 @@
 # Changelog
 
+## 14.0.4 - 2026-06-03
+
+### Changed (1)
+
+- Remove `DERIVATIVES_TRADING_PORTFOLIO_MARGIN_REST_API_TESTNET_URL` and `DERIVATIVES_TRADING_PORTFOLIO_MARGIN_WS_STREAMS_TESTNET_URL` variables since testnet endpoints are not available.
+
 ## 14.0.3 - 2026-06-02
 
 ### Changed (1)
