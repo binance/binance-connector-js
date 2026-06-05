@@ -136,40 +136,12 @@ export interface TradeApiInterface {
     /**
      * Send in a new order.
      *
-     * Order with type `STOP`,  parameter `timeInForce` can be sent ( default `GTC`).
-     * Order with type `TAKE_PROFIT`,  parameter `timeInForce` can be sent ( default `GTC`).
-     * Condition orders will be triggered when:
-     *
-     * If parameter`priceProtect`is sent as true:
-     * when price reaches the `stopPrice` ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
-     * "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
-     *
-     * `STOP`, `STOP_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-     * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
-     * `TRAILING_STOP_MARKET`:
-     * BUY: the lowest price after order placed `<= `activationPrice`, and the latest price >`= the lowest price * (1 + `callbackRate`)
-     * SELL: the highest price after order placed >= `activationPrice`, and the latest price <= the highest price * (1 - `callbackRate`)
-     *
-     * For `TRAILING_STOP_MARKET`, if you got such error code.
-     * ``{"code": -2021, "msg": "Order would immediately trigger."}``
-     * means that the parameters you send do not meet the following requirements:
-     * BUY: `activationPrice` should be smaller than latest price.
-     * SELL: `activationPrice` should be larger than latest price.
-     *
      * If `newOrderRespType ` is sent as `RESULT` :
      * `MARKET` order: the final FILLED result of the order will be return directly.
      * `LIMIT` order with special `timeInForce`: the final status result of the order(FILLED or EXPIRED) will be returned directly.
      *
-     * `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`:
-     * Follow the same rules for condition orders.
-     * If triggered，**close all** current long position( if `SELL`) or current short position( if `BUY`).
-     * Cannot be used with `quantity` paremeter
-     * Cannot be used with `reduceOnly` parameter
-     * In Hedge Mode,cannot be used with `BUY` orders in `LONG` position side. and cannot be used with `SELL` orders in `SHORT` position side
+     * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
+     * In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
      *
      * Weight: 0
      *
@@ -368,7 +340,7 @@ export interface ModifyOrderRequest {
     readonly origClientOrderId?: string;
 
     /**
-     * only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
+     * only available for `LIMIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`/ `QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
      * @type {'NONE' | 'OPPONENT' | 'OPPONENT_5' | 'OPPONENT_10' | 'OPPONENT_20' | 'QUEUE' | 'QUEUE_5' | 'QUEUE_10' | 'QUEUE_20'}
      * @memberof TradeApiModifyOrder
      */
@@ -437,7 +409,7 @@ export interface NewAlgoOrderRequest {
     readonly timeInForce?: NewAlgoOrderTimeInForceEnum;
 
     /**
-     * Cannot be sent with `closePosition`=`true`(Close-All)
+     *
      * @type {number}
      * @memberof TradeApiNewAlgoOrder
      */
@@ -458,35 +430,35 @@ export interface NewAlgoOrderRequest {
     readonly triggerPrice?: number;
 
     /**
-     * stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE". Default "CONTRACT_PRICE"
+     * triggerPrice triggered by: `MARK_PRICE`, `CONTRACT_PRICE`. Default `CONTRACT_PRICE`
      * @type {'MARK_PRICE' | 'CONTRACT_PRICE'}
      * @memberof TradeApiNewAlgoOrder
      */
     readonly workingType?: NewAlgoOrderWorkingTypeEnum;
 
     /**
-     * only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
+     * only available for `LIMIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`/ `QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
      * @type {'NONE' | 'OPPONENT' | 'OPPONENT_5' | 'OPPONENT_10' | 'OPPONENT_20' | 'QUEUE' | 'QUEUE_5' | 'QUEUE_10' | 'QUEUE_20'}
      * @memberof TradeApiNewAlgoOrder
      */
     readonly priceMatch?: NewAlgoOrderPriceMatchEnum;
 
     /**
-     * `true`, `false`；Close-All，used with `STOP_MARKET` or `TAKE_PROFIT_MARKET`.
+     * true, false；Close-All，used with `STOP_MARKET` or `TAKE_PROFIT_MARKET`.
      * @type {string}
      * @memberof TradeApiNewAlgoOrder
      */
     readonly closePosition?: string;
 
     /**
-     * "true" or "false", default "false". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
+     * "true" or "false", default "false". Used with `STOP_MARKET` or `TAKE_PROFIT_MARKET` order. when price reaches the triggerPrice ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the Price Protection Threshold of the symbol.
      * @type {string}
      * @memberof TradeApiNewAlgoOrder
      */
     readonly priceProtect?: string;
 
     /**
-     * "true" or "false". default "false". Cannot be sent in Hedge Mode; cannot be sent with `closePosition`=`true`
+     * "true" or "false". default "false". Cannot be sent in Hedge Mode
      * @type {string}
      * @memberof TradeApiNewAlgoOrder
      */
@@ -590,14 +562,14 @@ export interface NewOrderRequest {
     readonly timeInForce?: NewOrderTimeInForceEnum;
 
     /**
-     * Cannot be sent with `closePosition`=`true`(Close-All)
+     *
      * @type {number}
      * @memberof TradeApiNewOrder
      */
     readonly quantity?: number;
 
     /**
-     * "true" or "false". default "false". Cannot be sent in Hedge Mode; cannot be sent with `closePosition`=`true`
+     * "true" or "false". default "false". Cannot be sent in Hedge Mode
      * @type {string}
      * @memberof TradeApiNewOrder
      */
@@ -618,48 +590,6 @@ export interface NewOrderRequest {
     readonly newClientOrderId?: string;
 
     /**
-     * Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
-     * @type {number}
-     * @memberof TradeApiNewOrder
-     */
-    readonly stopPrice?: number;
-
-    /**
-     * `true`, `false`；Close-All，used with `STOP_MARKET` or `TAKE_PROFIT_MARKET`.
-     * @type {string}
-     * @memberof TradeApiNewOrder
-     */
-    readonly closePosition?: string;
-
-    /**
-     * Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`)
-     * @type {number}
-     * @memberof TradeApiNewOrder
-     */
-    readonly activationPrice?: number;
-
-    /**
-     * Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 10 where 1 for 1%
-     * @type {number}
-     * @memberof TradeApiNewOrder
-     */
-    readonly callbackRate?: number;
-
-    /**
-     * stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE". Default "CONTRACT_PRICE"
-     * @type {'MARK_PRICE' | 'CONTRACT_PRICE'}
-     * @memberof TradeApiNewOrder
-     */
-    readonly workingType?: NewOrderWorkingTypeEnum;
-
-    /**
-     * "true" or "false", default "false". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
-     * @type {string}
-     * @memberof TradeApiNewOrder
-     */
-    readonly priceProtect?: string;
-
-    /**
      * "ACK", "RESULT", default "ACK"
      * @type {'ACK' | 'RESULT'}
      * @memberof TradeApiNewOrder
@@ -667,7 +597,7 @@ export interface NewOrderRequest {
     readonly newOrderRespType?: NewOrderNewOrderRespTypeEnum;
 
     /**
-     * only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
+     * only available for `LIMIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`/ `QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
      * @type {'NONE' | 'OPPONENT' | 'OPPONENT_5' | 'OPPONENT_10' | 'OPPONENT_20' | 'QUEUE' | 'QUEUE_5' | 'QUEUE_10' | 'QUEUE_20'}
      * @memberof TradeApiNewOrder
      */
@@ -933,40 +863,12 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Send in a new order.
      *
-     * Order with type `STOP`,  parameter `timeInForce` can be sent ( default `GTC`).
-     * Order with type `TAKE_PROFIT`,  parameter `timeInForce` can be sent ( default `GTC`).
-     * Condition orders will be triggered when:
-     *
-     * If parameter`priceProtect`is sent as true:
-     * when price reaches the `stopPrice` ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
-     * "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
-     *
-     * `STOP`, `STOP_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-     * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
-     * `TRAILING_STOP_MARKET`:
-     * BUY: the lowest price after order placed `<= `activationPrice`, and the latest price >`= the lowest price * (1 + `callbackRate`)
-     * SELL: the highest price after order placed >= `activationPrice`, and the latest price <= the highest price * (1 - `callbackRate`)
-     *
-     * For `TRAILING_STOP_MARKET`, if you got such error code.
-     * ``{"code": -2021, "msg": "Order would immediately trigger."}``
-     * means that the parameters you send do not meet the following requirements:
-     * BUY: `activationPrice` should be smaller than latest price.
-     * SELL: `activationPrice` should be larger than latest price.
-     *
      * If `newOrderRespType ` is sent as `RESULT` :
      * `MARKET` order: the final FILLED result of the order will be return directly.
      * `LIMIT` order with special `timeInForce`: the final status result of the order(FILLED or EXPIRED) will be returned directly.
      *
-     * `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`:
-     * Follow the same rules for condition orders.
-     * If triggered，**close all** current long position( if `SELL`) or current short position( if `BUY`).
-     * Cannot be used with `quantity` paremeter
-     * Cannot be used with `reduceOnly` parameter
-     * In Hedge Mode,cannot be used with `BUY` orders in `LONG` position side. and cannot be used with `SELL` orders in `SHORT` position side
+     * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
+     * In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
      *
      * Weight: 0
      *
@@ -1144,11 +1046,6 @@ export enum NewOrderTimeInForceEnum {
     GTX = 'GTX',
     GTD = 'GTD',
     RPI = 'RPI',
-}
-
-export enum NewOrderWorkingTypeEnum {
-    MARK_PRICE = 'MARK_PRICE',
-    CONTRACT_PRICE = 'CONTRACT_PRICE',
 }
 
 export enum NewOrderNewOrderRespTypeEnum {

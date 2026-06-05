@@ -1480,7 +1480,12 @@ export class RestAPI {
     }
 
     /**
-     * Trading session schedules for the underlying assets of TradFi Perps are provided for a one-week period starting from the day prior to the query time, covering both the U.S. equity and commodity markets. Equity market session types include "PRE_MARKET", "REGULAR", "AFTER_MARKET", "OVERNIGHT", and "NO_TRADING", while commodity market session types include "REGULAR" and "NO_TRADING".
+     * Trading session schedules for the underlying assets of TradFi Perps are provided for a one-week period forward and one-week period backward starting from the day prior to the query time, covering the U.S. equity market, Korean equity market and the commodity market.
+     *
+     * Session types per market:
+     * - U.S. equity market: "PRE_MARKET", "REGULAR", "AFTER_MARKET", "OVERNIGHT", "NO_TRADING".
+     * - Commodity market: "REGULAR", "NO_TRADING".
+     * - Korean equity market: "REGULAR", "NO_TRADING".
      *
      * Weight: 5
      *

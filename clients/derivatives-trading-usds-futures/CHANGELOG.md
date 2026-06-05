@@ -1,5 +1,47 @@
 # Changelog
 
+## 30.0.0 - 2026-06-05
+
+### Changed (9)
+
+#### REST API
+
+- Modified response for `compressedAggregateTradesList()` (`GET /fapi/v1/aggTrades`):
+  - items: property `nq` added
+  - items: item property `nq` added
+ 
+- Modified response for `queryAlgoOrder()` (`GET /fapi/v1/algoOrder`):
+  - property `actualQty` added
+  - property `actualType` added
+  - property `tpTriggerPrice` deleted
+  - property `slTriggerPrice` deleted
+  - property `tpPrice` deleted
+  - property `slPrice` deleted
+
+- Modified response for `tradingSchedule()` (`GET /fapi/v1/tradingSchedule`):
+  - `marketSchedules`: property `KR_EQUITY` added
+
+#### WebSocket API
+
+- Deleted parameter `activationPrice`
+  - affected methods:
+    - `newOrder()` (`order.place` method)
+- Deleted parameter `callbackRate`
+  - affected methods:
+    - `newOrder()` (`order.place` method)
+- Deleted parameter `closePosition`
+  - affected methods:
+    - `newOrder()` (`order.place` method)
+- Deleted parameter `priceProtect`
+  - affected methods:
+    - `newOrder()` (`order.place` method)
+- Deleted parameter `stopPrice`
+  - affected methods:
+    - `newOrder()` (`order.place` method)
+- Deleted parameter `workingType`
+  - affected methods:
+    - `newOrder()` (`order.place` method)
+
 ## 29.0.2 - 2026-06-02
 
 ### Changed (1)

@@ -96,6 +96,18 @@ export interface QueryAlgoOrderResponse {
      * @type {string}
      * @memberof QueryAlgoOrderResponse
      */
+    actualType?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof QueryAlgoOrderResponse
+     */
+    actualQty?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof QueryAlgoOrderResponse
+     */
     triggerPrice?: string;
     /**
      *
@@ -109,30 +121,6 @@ export interface QueryAlgoOrderResponse {
      * @memberof QueryAlgoOrderResponse
      */
     icebergQuantity?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryAlgoOrderResponse
-     */
-    tpTriggerPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryAlgoOrderResponse
-     */
-    tpPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryAlgoOrderResponse
-     */
-    slTriggerPrice?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof QueryAlgoOrderResponse
-     */
-    slPrice?: string;
     /**
      *
      * @type {string}

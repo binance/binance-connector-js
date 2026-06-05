@@ -39,6 +39,12 @@ export interface CompressedAggregateTradesListResponseInner {
     q?: string;
     /**
      *
+     * @type {string}
+     * @memberof CompressedAggregateTradesListResponseInner
+     */
+    nq?: string;
+    /**
+     *
      * @type {number | bigint}
      * @memberof CompressedAggregateTradesListResponseInner
      */

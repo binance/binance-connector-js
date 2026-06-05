@@ -20,6 +20,9 @@ import type { TradingScheduleResponseMarketSchedulesCOMMODITY } from './trading-
 // May contain unused imports in some cases
 // @ts-ignore
 import type { TradingScheduleResponseMarketSchedulesEQUITY } from './trading-schedule-response-market-schedules-equity';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { TradingScheduleResponseMarketSchedulesKREQUITY } from './trading-schedule-response-market-schedules-krequity';
 
 /**
  *
@@ -39,4 +42,10 @@ export interface TradingScheduleResponseMarketSchedules {
      * @memberof TradingScheduleResponseMarketSchedules
      */
     COMMODITY?: TradingScheduleResponseMarketSchedulesCOMMODITY;
+    /**
+     *
+     * @type {TradingScheduleResponseMarketSchedulesKREQUITY}
+     * @memberof TradingScheduleResponseMarketSchedules
+     */
+    KR_EQUITY?: TradingScheduleResponseMarketSchedulesKREQUITY;
 }
