@@ -381,6 +381,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          *
          * @summary Get Sub-account Deposit History (For Master Account) (USER_DATA)
          * @param {string} email [Sub-account email](#email-address)
+         * @param {boolean} [includeSource] Default: `false`, return `sourceAddress`field when set to `true`
          * @param {string} [coin]
          * @param {number | bigint} [status] 0(0:pending,6: credited but cannot withdraw,7:Wrong Deposit,8:Waiting User confirm,1:success)
          * @param {number | bigint} [startTime]
@@ -394,6 +395,7 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
          */
         getSubAccountDepositHistory: async (
             email: string,
+            includeSource?: boolean,
             coin?: string,
             status?: number | bigint,
             startTime?: number | bigint,
@@ -412,6 +414,9 @@ const AssetManagementApiAxiosParamCreator = function (configuration: Configurati
 
             if (email !== undefined && email !== null) {
                 localVarQueryParameter['email'] = email;
+            }
+            if (includeSource !== undefined && includeSource !== null) {
+                localVarQueryParameter['includeSource'] = includeSource;
             }
             if (coin !== undefined && coin !== null) {
                 localVarQueryParameter['coin'] = coin;
@@ -2000,6 +2005,13 @@ export interface GetSubAccountDepositHistoryRequest {
     readonly email: string;
 
     /**
+     * Default: `false`, return `sourceAddress`field when set to `true`
+     * @type {boolean}
+     * @memberof AssetManagementApiGetSubAccountDepositHistory
+     */
+    readonly includeSource?: boolean;
+
+    /**
      *
      * @type {string}
      * @memberof AssetManagementApiGetSubAccountDepositHistory
@@ -2930,6 +2942,7 @@ export class AssetManagementApi implements AssetManagementApiInterface {
     ): Promise<RestApiResponse<GetSubAccountDepositHistoryResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.getSubAccountDepositHistory(
             requestParameters?.email,
+            requestParameters?.includeSource,
             requestParameters?.coin,
             requestParameters?.status,
             requestParameters?.startTime,

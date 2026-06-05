@@ -1109,6 +1109,7 @@ describe('AssetManagementApi', () => {
         it('should execute getSubAccountDepositHistory() successfully with optional parameters', async () => {
             const params: GetSubAccountDepositHistoryRequest = {
                 email: 'sub-account-email@email.com',
+                includeSource: false,
                 coin: 'coin_example',
                 status: 789,
                 startTime: 1623319461670,

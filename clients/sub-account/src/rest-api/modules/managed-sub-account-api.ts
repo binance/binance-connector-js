@@ -406,7 +406,7 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          * @param {number | bigint} endTime End Time (The start time and end time interval cannot exceed half a year)
          * @param {number | bigint} page Page
          * @param {number | bigint} limit Limit (Max: 500)
-         * @param {string} [transfers] Transfer Direction (FROM/TO)
+         * @param {string} [transfers] Transfer Direction (from/to)
          * @param {string} [transferFunctionAccountType] Transfer function account type (SPOT/MARGIN/ISOLATED_MARGIN/USDT_FUTURE/COIN_FUTURE)
          *
          * @throws {RequiredError}
@@ -501,7 +501,7 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          * @param {number | bigint} endTime End Time (The start time and end time interval cannot exceed half a year)
          * @param {number | bigint} page Page
          * @param {number | bigint} limit Limit (Max: 500)
-         * @param {string} [transfers] Transfer Direction (FROM/TO)
+         * @param {string} [transfers] Transfer Direction (from/to)
          * @param {string} [transferFunctionAccountType] Transfer function account type (SPOT/MARGIN/ISOLATED_MARGIN/USDT_FUTURE/COIN_FUTURE)
          *
          * @throws {RequiredError}
@@ -594,7 +594,7 @@ const ManagedSubAccountApiAxiosParamCreator = function (configuration: Configura
          * @param {number | bigint} endTime End Time (The start time and end time interval cannot exceed half a year)
          * @param {number | bigint} page Page
          * @param {number | bigint} limit Limit (Max: 500)
-         * @param {string} [transfers] Transfer Direction (FROM/TO)
+         * @param {string} [transfers] Transfer Direction (from/to)
          * @param {string} [transferFunctionAccountType] Transfer function account type (SPOT/MARGIN/ISOLATED_MARGIN/USDT_FUTURE/COIN_FUTURE)
          * @param {number | bigint} [recvWindow]
          *
@@ -1161,7 +1161,7 @@ export interface QueryManagedSubAccountTransferLogMasterAccountInvestorRequest {
     readonly limit: number | bigint;
 
     /**
-     * Transfer Direction (FROM/TO)
+     * Transfer Direction (from/to)
      * @type {string}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogMasterAccountInvestor
      */
@@ -1216,7 +1216,7 @@ export interface QueryManagedSubAccountTransferLogMasterAccountTradingRequest {
     readonly limit: number | bigint;
 
     /**
-     * Transfer Direction (FROM/TO)
+     * Transfer Direction (from/to)
      * @type {string}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogMasterAccountTrading
      */
@@ -1264,7 +1264,7 @@ export interface QueryManagedSubAccountTransferLogSubAccountTradingRequest {
     readonly limit: number | bigint;
 
     /**
-     * Transfer Direction (FROM/TO)
+     * Transfer Direction (from/to)
      * @type {string}
      * @memberof ManagedSubAccountApiQueryManagedSubAccountTransferLogSubAccountTrading
      */
