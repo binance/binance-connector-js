@@ -1,7 +1,7 @@
 {
     "name": "@binance/fiat",
     "description": "Official Binance Fiat Connector - A lightweight library that provides a convenient interface to Binance's Fiat REST API.",
-    "version": "6.0.16",
+    "version": "7.0.0",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",

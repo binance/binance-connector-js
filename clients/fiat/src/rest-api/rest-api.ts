@@ -101,6 +101,8 @@ export class RestAPI {
      *
      * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
      *
+     * `timestamp`, `signature` and `recvWindow` are sent as query-string parameters, while the business fields (`currency`, `apiPaymentMethod`, `amount`, `ext`) are sent in the JSON request body with `Content-Type: application/json`.
+     *
      * Weight: 45000
      *
      * @summary Deposit(TRADE)

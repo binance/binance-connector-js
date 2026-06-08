@@ -42,6 +42,8 @@ const FiatApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) 
          *
          * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
          *
+         * `timestamp`, `signature` and `recvWindow` are sent as query-string parameters, while the business fields (`currency`, `apiPaymentMethod`, `amount`, `ext`) are sent in the JSON request body with `Content-Type: application/json`.
+         *
          * Weight: 45000
          *
          * @summary Deposit(TRADE)
@@ -372,6 +374,8 @@ export interface FiatApiInterface {
      *
      * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
      *
+     * `timestamp`, `signature` and `recvWindow` are sent as query-string parameters, while the business fields (`currency`, `apiPaymentMethod`, `amount`, `ext`) are sent in the JSON request body with `Content-Type: application/json`.
+     *
      * Weight: 45000
      *
      * @summary Deposit(TRADE)
@@ -682,6 +686,8 @@ export class FiatApi implements FiatApiInterface {
      * For BRL deposit via pix, you need to place an order before making a transfer from your bank.
      *
      * Before calling this api, please make sure you have already completed your KYC or KYB, and already activated your fiat service on our website.
+     *
+     * `timestamp`, `signature` and `recvWindow` are sent as query-string parameters, while the business fields (`currency`, `apiPaymentMethod`, `amount`, `ext`) are sent in the JSON request body with `Content-Type: application/json`.
      *
      * Weight: 45000
      *

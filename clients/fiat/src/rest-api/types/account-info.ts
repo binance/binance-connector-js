@@ -25,4 +25,22 @@ export interface AccountInfo {
      * @memberof AccountInfo
      */
     accountNumber?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof AccountInfo
+     */
+    agency?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof AccountInfo
+     */
+    bankCodeForPix?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof AccountInfo
+     */
+    accountType?: string;
 }
