@@ -16,79 +16,79 @@
 /**
  *
  * @export
- * @interface MultiAssetsModeAssetIndexResponseInner
+ * @interface AssetIndexResponseInner
  */
-export interface MultiAssetsModeAssetIndexResponseInner {
+export interface AssetIndexResponseInner {
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponseInner
+     * @memberof AssetIndexResponseInner
      */
     e?: string;
     /**
      *
      * @type {number | bigint}
-     * @memberof MultiAssetsModeAssetIndexResponseInner
+     * @memberof AssetIndexResponseInner
      */
     E?: number | bigint;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponseInner
+     * @memberof AssetIndexResponseInner
      */
     s?: string;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponseInner
+     * @memberof AssetIndexResponseInner
      */
     i?: string;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponseInner
+     * @memberof AssetIndexResponseInner
      */
     b?: string;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponseInner
+     * @memberof AssetIndexResponseInner
      */
     a?: string;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponseInner
+     * @memberof AssetIndexResponseInner
      */
     B?: string;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponseInner
+     * @memberof AssetIndexResponseInner
      */
     A?: string;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponseInner
+     * @memberof AssetIndexResponseInner
      */
     q?: string;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponseInner
+     * @memberof AssetIndexResponseInner
      */
     g?: string;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponseInner
+     * @memberof AssetIndexResponseInner
      */
     Q?: string;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponseInner
+     * @memberof AssetIndexResponseInner
      */
     G?: string;
 }

@@ -10,18 +10,18 @@ const configurationRestAPI = {
 };
 const client = new DerivativesTradingUsdsFutures({ configurationRestAPI });
 
-async function multiAssetsModeAssetIndex() {
+async function assetIndex() {
     try {
-        const response = await client.restAPI.multiAssetsModeAssetIndex();
+        const response = await client.restAPI.assetIndex();
 
         const rateLimits = response.rateLimits!;
-        console.log('multiAssetsModeAssetIndex() rate limits:', rateLimits);
+        console.log('assetIndex() rate limits:', rateLimits);
 
         const data = await response.data();
-        console.log('multiAssetsModeAssetIndex() response:', data);
+        console.log('assetIndex() response:', data);
     } catch (error) {
-        console.error('multiAssetsModeAssetIndex() error:', error);
+        console.error('assetIndex() error:', error);
     }
 }
 
-multiAssetsModeAssetIndex();
+assetIndex();

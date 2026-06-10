@@ -16,73 +16,73 @@
 /**
  *
  * @export
- * @interface MultiAssetsModeAssetIndexResponse2Inner
+ * @interface AssetIndexResponse2Inner
  */
-export interface MultiAssetsModeAssetIndexResponse2Inner {
+export interface AssetIndexResponse2Inner {
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponse2Inner
+     * @memberof AssetIndexResponse2Inner
      */
     symbol?: string;
     /**
      *
      * @type {number | bigint}
-     * @memberof MultiAssetsModeAssetIndexResponse2Inner
+     * @memberof AssetIndexResponse2Inner
      */
     time?: number | bigint;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponse2Inner
+     * @memberof AssetIndexResponse2Inner
      */
     index?: string;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponse2Inner
+     * @memberof AssetIndexResponse2Inner
      */
     bidBuffer?: string;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponse2Inner
+     * @memberof AssetIndexResponse2Inner
      */
     askBuffer?: string;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponse2Inner
+     * @memberof AssetIndexResponse2Inner
      */
     bidRate?: string;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponse2Inner
+     * @memberof AssetIndexResponse2Inner
      */
     askRate?: string;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponse2Inner
+     * @memberof AssetIndexResponse2Inner
      */
     autoExchangeBidBuffer?: string;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponse2Inner
+     * @memberof AssetIndexResponse2Inner
      */
     autoExchangeAskBuffer?: string;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponse2Inner
+     * @memberof AssetIndexResponse2Inner
      */
     autoExchangeBidRate?: string;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponse2Inner
+     * @memberof AssetIndexResponse2Inner
      */
     autoExchangeAskRate?: string;
 }

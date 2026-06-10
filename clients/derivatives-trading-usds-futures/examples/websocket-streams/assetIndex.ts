@@ -8,13 +8,13 @@ const configurationWebsocketStreams = {
 };
 const client = new DerivativesTradingUsdsFutures({ configurationWebsocketStreams });
 
-async function multiAssetsModeAssetIndex() {
+async function assetIndex() {
     let connection;
 
     try {
         connection = await client.websocketStreams.connect();
 
-        const stream = connection.multiAssetsModeAssetIndex();
+        const stream = connection.assetIndex();
 
         stream.on('message', (data) => {
             console.info(data);
@@ -27,4 +27,4 @@ async function multiAssetsModeAssetIndex() {
     }
 }
 
-multiAssetsModeAssetIndex();
+assetIndex();

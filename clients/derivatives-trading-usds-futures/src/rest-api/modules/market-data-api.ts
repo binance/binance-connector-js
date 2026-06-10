@@ -21,6 +21,7 @@ import {
 } from '@binance/common';
 import type {
     AdlRiskResponse,
+    AssetIndexResponse,
     BasisResponse,
     CheckServerTimeResponse,
     CompositeIndexSymbolInformationResponse,
@@ -34,7 +35,6 @@ import type {
     LongShortRatioResponse,
     MarkPriceKlineCandlestickDataResponse,
     MarkPriceResponse,
-    MultiAssetsModeAssetIndexResponse,
     OldTradesLookupResponse,
     OpenInterestResponse,
     OpenInterestStatisticsResponse,
@@ -94,6 +94,37 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
+         * Asset index price.
+         *
+         * Weight: 1 for a single symbol; 10 when the symbol parameter is omitted
+         *
+         * @summary Asset Index
+         * @param {string} [symbol]
+         *
+         * @throws {RequiredError}
+         */
+        assetIndex: async (symbol?: string): Promise<RequestArgs> => {
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (symbol !== undefined && symbol !== null) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/fapi/v1/assetIndex',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
          * Query future basis
          *
          * If startTime and endTime are not sent, the most recent data is returned.
@@ -102,7 +133,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 0
          *
          * @summary Basis
-         * @param {string} pair
+         * @param {string} pair After CM migration, accepts both UM and CM pair values.
          * @param {BasisContractTypeEnum} contractType
          * @param {BasisPeriodEnum} period "5m","15m","30m","1h","2h","4h","6h","12h","1d"
          * @param {number | bigint} [limit] Default 100; max 1000
@@ -304,7 +335,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * | > 1000      | 10     |
          *
          * @summary Continuous Contract Kline/Candlestick Data
-         * @param {string} pair
+         * @param {string} pair After CM migration, accepts both UM and CM pair values.
          * @param {ContinuousContractKlineCandlestickDataContractTypeEnum} contractType
          * @param {ContinuousContractKlineCandlestickDataIntervalEnum} interval
          * @param {number | bigint} [startTime]
@@ -477,7 +508,6 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Kline/candlestick bars for the index price of a pair.
          * Klines are uniquely identified by their open time.
          *
-         *
          * If startTime and endTime are not sent, the most recent klines are returned.
          *
          * Weight: based on parameter LIMIT
@@ -489,7 +519,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * | > 1000      | 10     |
          *
          * @summary Index Price Kline/Candlestick Data
-         * @param {string} pair
+         * @param {string} pair After CM migration, accepts both UM and CM pair values.
          * @param {IndexPriceKlineCandlestickDataIntervalEnum} interval
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
@@ -769,37 +799,6 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
-         * asset index for Multi-Assets mode
-         *
-         * Weight: 1 for a single symbol; 10 when the symbol parameter is omitted
-         *
-         * @summary Multi-Assets Mode Asset Index
-         * @param {string} [symbol]
-         *
-         * @throws {RequiredError}
-         */
-        multiAssetsModeAssetIndex: async (symbol?: string): Promise<RequestArgs> => {
-            const localVarQueryParameter: Record<string, unknown> = {};
-            const localVarBodyParameter: Record<string, unknown> = {};
-            const localVarHeaderParameter: Record<string, unknown> = {};
-
-            if (symbol !== undefined && symbol !== null) {
-                localVarQueryParameter['symbol'] = symbol;
-            }
-
-            let _timeUnit: TimeUnit | undefined;
-            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
-
-            return {
-                endpoint: '/fapi/v1/assetIndex',
-                method: 'GET',
-                queryParams: localVarQueryParameter,
-                bodyParams: localVarBodyParameter,
-                headerParams: localVarHeaderParameter,
-                timeUnit: _timeUnit,
-            };
-        },
-        /**
          * Get older market historical trades.
          *
          * Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
@@ -1063,7 +1062,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Weight: 0
          *
          * @summary Quarterly Contract Settlement Price
-         * @param {string} pair
+         * @param {string} pair After CM migration, accepts both UM and CM pair values.
          *
          * @throws {RequiredError}
          */
@@ -1657,6 +1656,18 @@ export interface MarketDataApiInterface {
      */
     adlRisk(requestParameters?: AdlRiskRequest): Promise<RestApiResponse<AdlRiskResponse>>;
     /**
+     * Asset index price.
+     *
+     * Weight: 1 for a single symbol; 10 when the symbol parameter is omitted
+     *
+     * @summary Asset Index
+     * @param {AssetIndexRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApiInterface
+     */
+    assetIndex(requestParameters?: AssetIndexRequest): Promise<RestApiResponse<AssetIndexResponse>>;
+    /**
      * Query future basis
      *
      * If startTime and endTime are not sent, the most recent data is returned.
@@ -1794,7 +1805,6 @@ export interface MarketDataApiInterface {
      * Kline/candlestick bars for the index price of a pair.
      * Klines are uniquely identified by their open time.
      *
-     *
      * If startTime and endTime are not sent, the most recent klines are returned.
      *
      * Weight: based on parameter LIMIT
@@ -1890,20 +1900,6 @@ export interface MarketDataApiInterface {
     markPriceKlineCandlestickData(
         requestParameters: MarkPriceKlineCandlestickDataRequest
     ): Promise<RestApiResponse<MarkPriceKlineCandlestickDataResponse>>;
-    /**
-     * asset index for Multi-Assets mode
-     *
-     * Weight: 1 for a single symbol; 10 when the symbol parameter is omitted
-     *
-     * @summary Multi-Assets Mode Asset Index
-     * @param {MultiAssetsModeAssetIndexRequest} requestParameters Request parameters.
-     *
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MarketDataApiInterface
-     */
-    multiAssetsModeAssetIndex(
-        requestParameters?: MultiAssetsModeAssetIndexRequest
-    ): Promise<RestApiResponse<MultiAssetsModeAssetIndexResponse>>;
     /**
      * Get older market historical trades.
      *
@@ -2254,12 +2250,25 @@ export interface AdlRiskRequest {
 }
 
 /**
+ * Request parameters for assetIndex operation in MarketDataApi.
+ * @interface AssetIndexRequest
+ */
+export interface AssetIndexRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof MarketDataApiAssetIndex
+     */
+    readonly symbol?: string;
+}
+
+/**
  * Request parameters for basis operation in MarketDataApi.
  * @interface BasisRequest
  */
 export interface BasisRequest {
     /**
-     *
+     * After CM migration, accepts both UM and CM pair values.
      * @type {string}
      * @memberof MarketDataApiBasis
      */
@@ -2361,7 +2370,7 @@ export interface CompressedAggregateTradesListRequest {
  */
 export interface ContinuousContractKlineCandlestickDataRequest {
     /**
-     *
+     * After CM migration, accepts both UM and CM pair values.
      * @type {string}
      * @memberof MarketDataApiContinuousContractKlineCandlestickData
      */
@@ -2443,7 +2452,7 @@ export interface GetFundingRateHistoryRequest {
  */
 export interface IndexPriceKlineCandlestickDataRequest {
     /**
-     *
+     * After CM migration, accepts both UM and CM pair values.
      * @type {string}
      * @memberof MarketDataApiIndexPriceKlineCandlestickData
      */
@@ -2615,19 +2624,6 @@ export interface MarkPriceKlineCandlestickDataRequest {
 }
 
 /**
- * Request parameters for multiAssetsModeAssetIndex operation in MarketDataApi.
- * @interface MultiAssetsModeAssetIndexRequest
- */
-export interface MultiAssetsModeAssetIndexRequest {
-    /**
-     *
-     * @type {string}
-     * @memberof MarketDataApiMultiAssetsModeAssetIndex
-     */
-    readonly symbol?: string;
-}
-
-/**
  * Request parameters for oldTradesLookup operation in MarketDataApi.
  * @interface OldTradesLookupRequest
  */
@@ -2775,7 +2771,7 @@ export interface PremiumIndexKlineDataRequest {
  */
 export interface QuarterlyContractSettlementPriceRequest {
     /**
-     *
+     * After CM migration, accepts both UM and CM pair values.
      * @type {string}
      * @memberof MarketDataApiQuarterlyContractSettlementPrice
      */
@@ -3069,6 +3065,36 @@ export class MarketDataApi implements MarketDataApiInterface {
     }
 
     /**
+     * Asset index price.
+     *
+     * Weight: 1 for a single symbol; 10 when the symbol parameter is omitted
+     *
+     * @summary Asset Index
+     * @param {AssetIndexRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<AssetIndexResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApi
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Asset-Index Binance API Documentation}
+     */
+    public async assetIndex(
+        requestParameters: AssetIndexRequest = {}
+    ): Promise<RestApiResponse<AssetIndexResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.assetIndex(
+            requestParameters?.symbol
+        );
+        return sendRequest<AssetIndexResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: false }
+        );
+    }
+
+    /**
      * Query future basis
      *
      * If startTime and endTime are not sent, the most recent data is returned.
@@ -3348,7 +3374,6 @@ export class MarketDataApi implements MarketDataApiInterface {
      * Kline/candlestick bars for the index price of a pair.
      * Klines are uniquely identified by their open time.
      *
-     *
      * If startTime and endTime are not sent, the most recent klines are returned.
      *
      * Weight: based on parameter LIMIT
@@ -3533,36 +3558,6 @@ export class MarketDataApi implements MarketDataApiInterface {
                 requestParameters?.limit
             );
         return sendRequest<MarkPriceKlineCandlestickDataResponse>(
-            this.configuration,
-            localVarAxiosArgs.endpoint,
-            localVarAxiosArgs.method,
-            localVarAxiosArgs.queryParams,
-            localVarAxiosArgs.bodyParams,
-            localVarAxiosArgs.headerParams,
-            localVarAxiosArgs?.timeUnit,
-            { isSigned: false }
-        );
-    }
-
-    /**
-     * asset index for Multi-Assets mode
-     *
-     * Weight: 1 for a single symbol; 10 when the symbol parameter is omitted
-     *
-     * @summary Multi-Assets Mode Asset Index
-     * @param {MultiAssetsModeAssetIndexRequest} requestParameters Request parameters.
-     * @returns {Promise<RestApiResponse<MultiAssetsModeAssetIndexResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index Binance API Documentation}
-     */
-    public async multiAssetsModeAssetIndex(
-        requestParameters: MultiAssetsModeAssetIndexRequest = {}
-    ): Promise<RestApiResponse<MultiAssetsModeAssetIndexResponse>> {
-        const localVarAxiosArgs = await this.localVarAxiosParamCreator.multiAssetsModeAssetIndex(
-            requestParameters?.symbol
-        );
-        return sendRequest<MultiAssetsModeAssetIndexResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

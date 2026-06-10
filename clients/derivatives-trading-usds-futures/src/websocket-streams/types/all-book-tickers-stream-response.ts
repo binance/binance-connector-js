@@ -73,4 +73,16 @@ export interface AllBookTickersStreamResponse {
      * @memberof AllBookTickersStreamResponse
      */
     A?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof AllBookTickersStreamResponse
+     */
+    ps?: string;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof AllBookTickersStreamResponse
+     */
+    st?: number | bigint;
 }

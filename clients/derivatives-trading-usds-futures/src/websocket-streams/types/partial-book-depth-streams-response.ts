@@ -81,4 +81,16 @@ export interface PartialBookDepthStreamsResponse {
      * @memberof PartialBookDepthStreamsResponse
      */
     a?: Array<PartialBookDepthStreamsResponseAItem>;
+    /**
+     *
+     * @type {string}
+     * @memberof PartialBookDepthStreamsResponse
+     */
+    ps?: string;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof PartialBookDepthStreamsResponse
+     */
+    st?: number | bigint;
 }

@@ -127,4 +127,16 @@ export interface IndividualSymbolTickerStreamsResponse {
      * @memberof IndividualSymbolTickerStreamsResponse
      */
     n?: number | bigint;
+    /**
+     *
+     * @type {string}
+     * @memberof IndividualSymbolTickerStreamsResponse
+     */
+    ps?: string;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof IndividualSymbolTickerStreamsResponse
+     */
+    st?: number | bigint;
 }

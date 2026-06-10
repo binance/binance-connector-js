@@ -16,15 +16,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { MultiAssetsModeAssetIndexResponse1 } from './multi-assets-mode-asset-index-response1';
+import type { AssetIndexResponse1 } from './asset-index-response1';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { MultiAssetsModeAssetIndexResponse2 } from './multi-assets-mode-asset-index-response2';
+import type { AssetIndexResponse2 } from './asset-index-response2';
 
 /**
- * @type MultiAssetsModeAssetIndexResponse
+ * @type AssetIndexResponse
  * @export
  */
-export type MultiAssetsModeAssetIndexResponse =
-    | MultiAssetsModeAssetIndexResponse1
-    | MultiAssetsModeAssetIndexResponse2;
+export type AssetIndexResponse = AssetIndexResponse1 | AssetIndexResponse2;

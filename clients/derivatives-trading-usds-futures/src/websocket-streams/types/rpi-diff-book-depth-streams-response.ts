@@ -81,4 +81,16 @@ export interface RpiDiffBookDepthStreamsResponse {
      * @memberof RpiDiffBookDepthStreamsResponse
      */
     a?: Array<RpiDiffBookDepthStreamsResponseAItem>;
+    /**
+     *
+     * @type {string}
+     * @memberof RpiDiffBookDepthStreamsResponse
+     */
+    ps?: string;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof RpiDiffBookDepthStreamsResponse
+     */
+    st?: number | bigint;
 }

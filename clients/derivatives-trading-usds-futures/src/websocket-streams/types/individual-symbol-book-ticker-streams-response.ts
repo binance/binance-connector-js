@@ -73,4 +73,10 @@ export interface IndividualSymbolBookTickerStreamsResponse {
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     A?: string;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof IndividualSymbolBookTickerStreamsResponse
+     */
+    st?: number | bigint;
 }

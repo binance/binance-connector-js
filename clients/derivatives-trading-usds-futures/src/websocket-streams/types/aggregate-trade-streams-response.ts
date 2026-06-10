@@ -85,4 +85,10 @@ export interface AggregateTradeStreamsResponse {
      * @memberof AggregateTradeStreamsResponse
      */
     m?: boolean;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof AggregateTradeStreamsResponse
+     */
+    st?: number | bigint;
 }

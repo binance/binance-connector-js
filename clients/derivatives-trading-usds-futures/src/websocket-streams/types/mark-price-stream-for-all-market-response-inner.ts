@@ -73,4 +73,10 @@ export interface MarkPriceStreamForAllMarketResponseInner {
      * @memberof MarkPriceStreamForAllMarketResponseInner
      */
     T?: number | bigint;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof MarkPriceStreamForAllMarketResponseInner
+     */
+    st?: number | bigint;
 }

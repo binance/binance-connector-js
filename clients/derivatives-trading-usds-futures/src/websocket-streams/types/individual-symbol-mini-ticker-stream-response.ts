@@ -73,4 +73,16 @@ export interface IndividualSymbolMiniTickerStreamResponse {
      * @memberof IndividualSymbolMiniTickerStreamResponse
      */
     q?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof IndividualSymbolMiniTickerStreamResponse
+     */
+    ps?: string;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof IndividualSymbolMiniTickerStreamResponse
+     */
+    st?: number | bigint;
 }

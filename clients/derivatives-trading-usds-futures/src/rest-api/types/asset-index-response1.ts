@@ -16,73 +16,73 @@
 /**
  *
  * @export
- * @interface MultiAssetsModeAssetIndexResponse1
+ * @interface AssetIndexResponse1
  */
-export interface MultiAssetsModeAssetIndexResponse1 {
+export interface AssetIndexResponse1 {
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponse1
+     * @memberof AssetIndexResponse1
      */
     symbol?: string;
     /**
      *
      * @type {number | bigint}
-     * @memberof MultiAssetsModeAssetIndexResponse1
+     * @memberof AssetIndexResponse1
      */
     time?: number | bigint;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponse1
+     * @memberof AssetIndexResponse1
      */
     index?: string;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponse1
+     * @memberof AssetIndexResponse1
      */
     bidBuffer?: string;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponse1
+     * @memberof AssetIndexResponse1
      */
     askBuffer?: string;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponse1
+     * @memberof AssetIndexResponse1
      */
     bidRate?: string;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponse1
+     * @memberof AssetIndexResponse1
      */
     askRate?: string;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponse1
+     * @memberof AssetIndexResponse1
      */
     autoExchangeBidBuffer?: string;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponse1
+     * @memberof AssetIndexResponse1
      */
     autoExchangeAskBuffer?: string;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponse1
+     * @memberof AssetIndexResponse1
      */
     autoExchangeBidRate?: string;
     /**
      *
      * @type {string}
-     * @memberof MultiAssetsModeAssetIndexResponse1
+     * @memberof AssetIndexResponse1
      */
     autoExchangeAskRate?: string;
 }

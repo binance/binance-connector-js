@@ -23,6 +23,7 @@ import type {
     AllMarketLiquidationOrderStreamsResponse,
     AllMarketMiniTickersStreamResponse,
     AllMarketTickersStreamsResponse,
+    AssetIndexResponse,
     CompositeIndexSymbolInformationStreamsResponse,
     ContinuousContractKlineCandlestickStreamsResponse,
     ContractInfoStreamResponse,
@@ -32,7 +33,6 @@ import type {
     LiquidationOrderStreamsResponse,
     MarkPriceStreamForAllMarketResponse,
     MarkPriceStreamResponse,
-    MultiAssetsModeAssetIndexResponse,
     TradingSessionStreamResponse,
 } from '../types';
 
@@ -99,6 +99,19 @@ const MarketApiParamCreator = function () {
          */
         allMarketTickersStreams: (id?: string): string => {
             return replaceWebsocketStreamsPlaceholders('/!ticker@arr'.slice(1), { id });
+        },
+        /**
+         * Asset index price.
+         *
+         * Update Speed: 1s
+         *
+         * @summary Asset Index
+         * @param {string} [id] Unique WebSocket request ID.
+         *
+         * @throws {RequiredError}
+         */
+        assetIndex: (id?: string): string => {
+            return replaceWebsocketStreamsPlaceholders('/!assetIndex@arr'.slice(1), { id });
         },
         /**
          * Composite index information for index symbols pushed every second.
@@ -292,19 +305,6 @@ const MarketApiParamCreator = function () {
             });
         },
         /**
-         * Asset index for multi-assets mode user
-         *
-         * Update Speed: 1s
-         *
-         * @summary Multi-Assets Mode Asset Index
-         * @param {string} [id] Unique WebSocket request ID.
-         *
-         * @throws {RequiredError}
-         */
-        multiAssetsModeAssetIndex: (id?: string): string => {
-            return replaceWebsocketStreamsPlaceholders('/!assetIndex@arr'.slice(1), { id });
-        },
-        /**
          * Trading session information for the underlying assets of TradFi Perpetual contracts, covering the U.S. equity market, Korean equity market, and the commodity market, is updated every second. Trading session information for different underlying markets is pushed in separate messages.
          *
          **Event type:**
@@ -397,6 +397,20 @@ export interface MarketApiInterface {
     allMarketTickersStreams(
         requestParameters?: AllMarketTickersStreamsRequest
     ): WebsocketStream<AllMarketTickersStreamsResponse>;
+
+    /**
+     * Asset index price.
+     *
+     * Update Speed: 1s
+     *
+     * @summary Asset Index
+     * @param {AssetIndexRequest} requestParameters Request parameters.
+     *
+     * @returns {WebsocketStream<AssetIndexResponse>}
+     * @throws {RequiredError}
+     * @memberof MarketApiInterface
+     */
+    assetIndex(requestParameters?: AssetIndexRequest): WebsocketStream<AssetIndexResponse>;
 
     /**
      * Composite index information for index symbols pushed every second.
@@ -547,22 +561,6 @@ export interface MarketApiInterface {
     ): WebsocketStream<MarkPriceStreamForAllMarketResponse>;
 
     /**
-     * Asset index for multi-assets mode user
-     *
-     * Update Speed: 1s
-     *
-     * @summary Multi-Assets Mode Asset Index
-     * @param {MultiAssetsModeAssetIndexRequest} requestParameters Request parameters.
-     *
-     * @returns {WebsocketStream<MultiAssetsModeAssetIndexResponse>}
-     * @throws {RequiredError}
-     * @memberof MarketApiInterface
-     */
-    multiAssetsModeAssetIndex(
-        requestParameters?: MultiAssetsModeAssetIndexRequest
-    ): WebsocketStream<MultiAssetsModeAssetIndexResponse>;
-
-    /**
      * Trading session information for the underlying assets of TradFi Perpetual contracts, covering the U.S. equity market, Korean equity market, and the commodity market, is updated every second. Trading session information for different underlying markets is pushed in separate messages.
      *
      **Event type:**
@@ -640,6 +638,19 @@ export interface AllMarketTickersStreamsRequest {
      * Unique WebSocket request ID.
      * @type {string}
      * @memberof MarketApiAllMarketTickersStreams
+     */
+    readonly id?: string;
+}
+
+/**
+ * Request parameters for assetIndex operation in MarketApi.
+ * @interface AssetIndexRequest
+ */
+export interface AssetIndexRequest {
+    /**
+     * Unique WebSocket request ID.
+     * @type {string}
+     * @memberof MarketApiAssetIndex
      */
     readonly id?: string;
 }
@@ -846,19 +857,6 @@ export interface MarkPriceStreamForAllMarketRequest {
 }
 
 /**
- * Request parameters for multiAssetsModeAssetIndex operation in MarketApi.
- * @interface MultiAssetsModeAssetIndexRequest
- */
-export interface MultiAssetsModeAssetIndexRequest {
-    /**
-     * Unique WebSocket request ID.
-     * @type {string}
-     * @memberof MarketApiMultiAssetsModeAssetIndex
-     */
-    readonly id?: string;
-}
-
-/**
  * Request parameters for tradingSessionStream operation in MarketApi.
  * @interface TradingSessionStreamRequest
  */
@@ -986,6 +984,31 @@ export class MarketApi implements MarketApiInterface {
         const stream = this.localVarParamCreator.allMarketTickersStreams(requestParameters?.id);
 
         return createStreamHandler<AllMarketTickersStreamsResponse>(
+            this.websocketBase,
+            stream,
+            requestParameters?.id,
+            'market'
+        );
+    }
+
+    /**
+     * Asset index price.
+     *
+     * Update Speed: 1s
+     *
+     * @summary Asset Index
+     * @param {AssetIndexRequest} requestParameters Request parameters.
+     * @returns {WebsocketStream<AssetIndexResponse>}
+     * @throws {RequiredError}
+     * @memberof MarketApi
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Asset-Index Binance API Documentation}
+     */
+    public assetIndex(
+        requestParameters: AssetIndexRequest = {}
+    ): WebsocketStream<AssetIndexResponse> {
+        const stream = this.localVarParamCreator.assetIndex(requestParameters?.id);
+
+        return createStreamHandler<AssetIndexResponse>(
             this.websocketBase,
             stream,
             requestParameters?.id,
@@ -1243,31 +1266,6 @@ export class MarketApi implements MarketApiInterface {
         );
 
         return createStreamHandler<MarkPriceStreamForAllMarketResponse>(
-            this.websocketBase,
-            stream,
-            requestParameters?.id,
-            'market'
-        );
-    }
-
-    /**
-     * Asset index for multi-assets mode user
-     *
-     * Update Speed: 1s
-     *
-     * @summary Multi-Assets Mode Asset Index
-     * @param {MultiAssetsModeAssetIndexRequest} requestParameters Request parameters.
-     * @returns {WebsocketStream<MultiAssetsModeAssetIndexResponse>}
-     * @throws {RequiredError}
-     * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Multi-Assets-Mode-Asset-Index Binance API Documentation}
-     */
-    public multiAssetsModeAssetIndex(
-        requestParameters: MultiAssetsModeAssetIndexRequest = {}
-    ): WebsocketStream<MultiAssetsModeAssetIndexResponse> {
-        const stream = this.localVarParamCreator.multiAssetsModeAssetIndex(requestParameters?.id);
-
-        return createStreamHandler<MultiAssetsModeAssetIndexResponse>(
             this.websocketBase,
             stream,
             requestParameters?.id,

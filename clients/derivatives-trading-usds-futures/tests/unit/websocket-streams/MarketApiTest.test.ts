@@ -23,6 +23,7 @@ import {
     AllMarketLiquidationOrderStreamsRequest,
     AllMarketMiniTickersStreamRequest,
     AllMarketTickersStreamsRequest,
+    AssetIndexRequest,
     CompositeIndexSymbolInformationStreamsRequest,
     ContinuousContractKlineCandlestickStreamsRequest,
     ContractInfoStreamRequest,
@@ -32,7 +33,6 @@ import {
     LiquidationOrderStreamsRequest,
     MarkPriceStreamRequest,
     MarkPriceStreamForAllMarketRequest,
-    MultiAssetsModeAssetIndexRequest,
     TradingSessionStreamRequest,
 } from '../../../src/websocket-streams';
 import { MarketApi } from '../../../src/websocket-streams';
@@ -59,6 +59,7 @@ describe('MarketApi', () => {
                     l: 105,
                     T: 123456785,
                     m: true,
+                    st: 1,
                 })
             );
 
@@ -92,6 +93,7 @@ describe('MarketApi', () => {
                     l: 105,
                     T: 123456785,
                     m: true,
+                    st: 1,
                 })
             );
 
@@ -153,6 +155,8 @@ describe('MarketApi', () => {
                         z: '0.014',
                         T: 1568014460893,
                     },
+                    ps: 'BTCUSDT',
+                    st: 1,
                 })
             );
 
@@ -189,6 +193,8 @@ describe('MarketApi', () => {
                         z: '0.014',
                         T: 1568014460893,
                     },
+                    ps: 'BTCUSDT',
+                    st: 1,
                 })
             );
 
@@ -229,6 +235,8 @@ describe('MarketApi', () => {
                         l: '0.0010',
                         v: '10000',
                         q: '18',
+                        ps: 'BTCUSDT',
+                        st: 1,
                     },
                 ])
             );
@@ -261,6 +269,8 @@ describe('MarketApi', () => {
                         l: '0.0010',
                         v: '10000',
                         q: '18',
+                        ps: 'BTCUSDT',
+                        st: 1,
                     },
                 ])
             );
@@ -311,6 +321,8 @@ describe('MarketApi', () => {
                         F: 0,
                         L: 18150,
                         n: 18151,
+                        ps: 'BTCUSDT',
+                        st: 1,
                     },
                 ])
             );
@@ -352,6 +364,8 @@ describe('MarketApi', () => {
                         F: 0,
                         L: 18150,
                         n: 18151,
+                        ps: 'BTCUSDT',
+                        st: 1,
                     },
                 ])
             );
@@ -365,6 +379,113 @@ describe('MarketApi', () => {
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/!ticker@arr'.slice(1),
                         params as unknown as Record<string, AllMarketTickersStreamsRequest>
+                    ),
+                    data: mockResponse,
+                }),
+                websocketStreamClient.connectionPool[0]
+            );
+
+            expect(mockCallback).toHaveBeenCalledWith(mockResponse);
+        });
+    });
+
+    describe('assetIndex()', () => {
+        it('should execute assetIndex() successfully', async () => {
+            const params: AssetIndexRequest = {
+                id: 'e9d6b4349871b40611412680b3445fac',
+            };
+
+            const mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        e: 'assetIndexUpdate',
+                        E: 1686749230000,
+                        s: 'ADAUSD',
+                        i: '0.27462452',
+                        b: '0.10000000',
+                        a: '0.10000000',
+                        B: '0.24716207',
+                        A: '0.30208698',
+                        q: '0.05000000',
+                        g: '0.05000000',
+                        Q: '0.26089330',
+                        G: '0.28835575',
+                    },
+                    {
+                        e: 'assetIndexUpdate',
+                        E: 1686749230000,
+                        s: 'USDTUSD',
+                        i: '0.99987691',
+                        b: '0.00010000',
+                        a: '0.00010000',
+                        B: '0.99977692',
+                        A: '0.99997689',
+                        q: '0.00010000',
+                        g: '0.00010000',
+                        Q: '0.99977692',
+                        G: '0.99997689',
+                    },
+                ])
+            );
+
+            mockSubscription(
+                `ws/${replaceWebsocketStreamsPlaceholders('/!assetIndex@arr'.slice(1), params as unknown as Record<string, AssetIndexRequest>)}`,
+                mockResponse
+            );
+        });
+
+        it('should handle assetIndex() WebSocket stream data', () => {
+            const configuration = new ConfigurationWebsocketStreams({});
+            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
+            const websocketStreamApi = new MarketApi(websocketStreamClient);
+            websocketStreamClient.connectionPool[0].urlPath = 'market';
+
+            const params: AssetIndexRequest = {
+                id: 'e9d6b4349871b40611412680b3445fac',
+            };
+
+            const mockResponse = JSONParse(
+                JSONStringify([
+                    {
+                        e: 'assetIndexUpdate',
+                        E: 1686749230000,
+                        s: 'ADAUSD',
+                        i: '0.27462452',
+                        b: '0.10000000',
+                        a: '0.10000000',
+                        B: '0.24716207',
+                        A: '0.30208698',
+                        q: '0.05000000',
+                        g: '0.05000000',
+                        Q: '0.26089330',
+                        G: '0.28835575',
+                    },
+                    {
+                        e: 'assetIndexUpdate',
+                        E: 1686749230000,
+                        s: 'USDTUSD',
+                        i: '0.99987691',
+                        b: '0.00010000',
+                        a: '0.00010000',
+                        B: '0.99977692',
+                        A: '0.99997689',
+                        q: '0.00010000',
+                        g: '0.00010000',
+                        Q: '0.99977692',
+                        G: '0.99997689',
+                    },
+                ])
+            );
+
+            const stream = websocketStreamApi.assetIndex(params);
+            const mockCallback = jest.fn(() => {});
+            stream.on('message', mockCallback);
+
+            websocketStreamClient['onMessage'](
+                JSONStringify({
+                    stream: replaceWebsocketStreamsPlaceholders(
+                        '/!assetIndex@arr'.slice(1),
+                        params as unknown as Record<string, AssetIndexRequest>
                     ),
                     data: mockResponse,
                 }),
@@ -640,7 +761,6 @@ describe('MarketApi', () => {
                     e: 'contractInfo',
                     E: 1669356423908,
                     s: 'IOTAUSDT',
-                    ps: 'IOTAUSDT',
                     ct: 'PERPETUAL',
                     dt: 4133404800000,
                     ot: 1569398400000,
@@ -649,6 +769,7 @@ describe('MarketApi', () => {
                         { bs: 1, bnf: 0, bnc: 5000, mmr: 0.01, cf: 0, mi: 21, ma: 50 },
                         { bs: 2, bnf: 5000, bnc: 25000, mmr: 0.025, cf: 75, mi: 11, ma: 20 },
                     ],
+                    st: 1,
                 })
             );
 
@@ -673,7 +794,6 @@ describe('MarketApi', () => {
                     e: 'contractInfo',
                     E: 1669356423908,
                     s: 'IOTAUSDT',
-                    ps: 'IOTAUSDT',
                     ct: 'PERPETUAL',
                     dt: 4133404800000,
                     ot: 1569398400000,
@@ -682,6 +802,7 @@ describe('MarketApi', () => {
                         { bs: 1, bnf: 0, bnc: 5000, mmr: 0.01, cf: 0, mi: 21, ma: 50 },
                         { bs: 2, bnf: 5000, bnc: 25000, mmr: 0.025, cf: 75, mi: 11, ma: 20 },
                     ],
+                    st: 1,
                 })
             );
 
@@ -722,6 +843,8 @@ describe('MarketApi', () => {
                     l: '0.0010',
                     v: '10000',
                     q: '18',
+                    ps: 'BTCUSDT',
+                    st: 1,
                 })
             );
 
@@ -753,6 +876,8 @@ describe('MarketApi', () => {
                     l: '0.0010',
                     v: '10000',
                     q: '18',
+                    ps: 'BTCUSDT',
+                    st: 1,
                 })
             );
 
@@ -818,6 +943,8 @@ describe('MarketApi', () => {
                     F: 0,
                     L: 18150,
                     n: 18151,
+                    ps: 'BTCUSDT',
+                    st: 1,
                 })
             );
 
@@ -858,6 +985,8 @@ describe('MarketApi', () => {
                     F: 0,
                     L: 18150,
                     n: 18151,
+                    ps: 'BTCUSDT',
+                    st: 1,
                 })
             );
 
@@ -1147,6 +1276,7 @@ describe('MarketApi', () => {
                     P: '11784.25641265',
                     r: '0.00038167',
                     T: 1562306400000,
+                    st: 1,
                 })
             );
 
@@ -1179,6 +1309,7 @@ describe('MarketApi', () => {
                     P: '11784.25641265',
                     r: '0.00038167',
                     T: 1562306400000,
+                    st: 1,
                 })
             );
 
@@ -1236,6 +1367,7 @@ describe('MarketApi', () => {
                         P: '11784.25641265',
                         r: '0.00030000',
                         T: 1562306400000,
+                        st: 1,
                     },
                 ])
             );
@@ -1269,6 +1401,7 @@ describe('MarketApi', () => {
                         P: '11784.25641265',
                         r: '0.00030000',
                         T: 1562306400000,
+                        st: 1,
                     },
                 ])
             );
@@ -1282,113 +1415,6 @@ describe('MarketApi', () => {
                     stream: replaceWebsocketStreamsPlaceholders(
                         '/!markPrice@arr@<updateSpeed>'.slice(1),
                         params as unknown as Record<string, MarkPriceStreamForAllMarketRequest>
-                    ),
-                    data: mockResponse,
-                }),
-                websocketStreamClient.connectionPool[0]
-            );
-
-            expect(mockCallback).toHaveBeenCalledWith(mockResponse);
-        });
-    });
-
-    describe('multiAssetsModeAssetIndex()', () => {
-        it('should execute multiAssetsModeAssetIndex() successfully', async () => {
-            const params: MultiAssetsModeAssetIndexRequest = {
-                id: 'e9d6b4349871b40611412680b3445fac',
-            };
-
-            const mockResponse = JSONParse(
-                JSONStringify([
-                    {
-                        e: 'assetIndexUpdate',
-                        E: 1686749230000,
-                        s: 'ADAUSD',
-                        i: '0.27462452',
-                        b: '0.10000000',
-                        a: '0.10000000',
-                        B: '0.24716207',
-                        A: '0.30208698',
-                        q: '0.05000000',
-                        g: '0.05000000',
-                        Q: '0.26089330',
-                        G: '0.28835575',
-                    },
-                    {
-                        e: 'assetIndexUpdate',
-                        E: 1686749230000,
-                        s: 'USDTUSD',
-                        i: '0.99987691',
-                        b: '0.00010000',
-                        a: '0.00010000',
-                        B: '0.99977692',
-                        A: '0.99997689',
-                        q: '0.00010000',
-                        g: '0.00010000',
-                        Q: '0.99977692',
-                        G: '0.99997689',
-                    },
-                ])
-            );
-
-            mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/!assetIndex@arr'.slice(1), params as unknown as Record<string, MultiAssetsModeAssetIndexRequest>)}`,
-                mockResponse
-            );
-        });
-
-        it('should handle multiAssetsModeAssetIndex() WebSocket stream data', () => {
-            const configuration = new ConfigurationWebsocketStreams({});
-            const websocketStreamClient = new WebsocketStreamsBase(configuration, [], ['market']);
-            const websocketStreamApi = new MarketApi(websocketStreamClient);
-            websocketStreamClient.connectionPool[0].urlPath = 'market';
-
-            const params: MultiAssetsModeAssetIndexRequest = {
-                id: 'e9d6b4349871b40611412680b3445fac',
-            };
-
-            const mockResponse = JSONParse(
-                JSONStringify([
-                    {
-                        e: 'assetIndexUpdate',
-                        E: 1686749230000,
-                        s: 'ADAUSD',
-                        i: '0.27462452',
-                        b: '0.10000000',
-                        a: '0.10000000',
-                        B: '0.24716207',
-                        A: '0.30208698',
-                        q: '0.05000000',
-                        g: '0.05000000',
-                        Q: '0.26089330',
-                        G: '0.28835575',
-                    },
-                    {
-                        e: 'assetIndexUpdate',
-                        E: 1686749230000,
-                        s: 'USDTUSD',
-                        i: '0.99987691',
-                        b: '0.00010000',
-                        a: '0.00010000',
-                        B: '0.99977692',
-                        A: '0.99997689',
-                        q: '0.00010000',
-                        g: '0.00010000',
-                        Q: '0.99977692',
-                        G: '0.99997689',
-                    },
-                ])
-            );
-
-            const stream = websocketStreamApi.multiAssetsModeAssetIndex(params);
-            const mockCallback = jest.fn(() => {});
-            stream.on('message', mockCallback);
-
-            websocketStreamClient['onMessage'](
-                JSONStringify({
-                    stream: replaceWebsocketStreamsPlaceholders(
-                        '/!assetIndex@arr'.slice(1),
-                        params as unknown as Record<string, MultiAssetsModeAssetIndexRequest>
                     ),
                     data: mockResponse,
                 }),

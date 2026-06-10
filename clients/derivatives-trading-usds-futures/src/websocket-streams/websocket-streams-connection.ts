@@ -22,6 +22,7 @@ import type {
     AllMarketLiquidationOrderStreamsRequest,
     AllMarketMiniTickersStreamRequest,
     AllMarketTickersStreamsRequest,
+    AssetIndexRequest,
     CompositeIndexSymbolInformationStreamsRequest,
     ContinuousContractKlineCandlestickStreamsRequest,
     ContractInfoStreamRequest,
@@ -31,7 +32,6 @@ import type {
     LiquidationOrderStreamsRequest,
     MarkPriceStreamRequest,
     MarkPriceStreamForAllMarketRequest,
-    MultiAssetsModeAssetIndexRequest,
     TradingSessionStreamRequest,
 } from './modules/market-api';
 import type {
@@ -47,6 +47,7 @@ import type {
     AllMarketLiquidationOrderStreamsResponse,
     AllMarketMiniTickersStreamResponse,
     AllMarketTickersStreamsResponse,
+    AssetIndexResponse,
     CompositeIndexSymbolInformationStreamsResponse,
     ContinuousContractKlineCandlestickStreamsResponse,
     ContractInfoStreamResponse,
@@ -56,7 +57,6 @@ import type {
     LiquidationOrderStreamsResponse,
     MarkPriceStreamResponse,
     MarkPriceStreamForAllMarketResponse,
-    MultiAssetsModeAssetIndexResponse,
     TradingSessionStreamResponse,
 } from './types';
 import type {
@@ -256,6 +256,22 @@ export class WebsocketStreamsConnection {
     }
 
     /**
+     * Asset index price.
+     *
+     * Update Speed: 1s
+     *
+     * @summary Asset Index
+     * @param {AssetIndexRequest} requestParameters Request parameters.
+     *
+     * @returns {WebsocketStream<AssetIndexResponse>}
+     * @throws {RequiredError}
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Asset-Index Binance API Documentation}
+     */
+    assetIndex(requestParameters: AssetIndexRequest = {}): WebsocketStream<AssetIndexResponse> {
+        return this.marketApi.assetIndex(requestParameters);
+    }
+
+    /**
      * Composite index information for index symbols pushed every second.
      *
      * Update Speed: 1000ms
@@ -419,24 +435,6 @@ export class WebsocketStreamsConnection {
         requestParameters: MarkPriceStreamForAllMarketRequest = {}
     ): WebsocketStream<MarkPriceStreamForAllMarketResponse> {
         return this.marketApi.markPriceStreamForAllMarket(requestParameters);
-    }
-
-    /**
-     * Asset index for multi-assets mode user
-     *
-     * Update Speed: 1s
-     *
-     * @summary Multi-Assets Mode Asset Index
-     * @param {MultiAssetsModeAssetIndexRequest} requestParameters Request parameters.
-     *
-     * @returns {WebsocketStream<MultiAssetsModeAssetIndexResponse>}
-     * @throws {RequiredError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Multi-Assets-Mode-Asset-Index Binance API Documentation}
-     */
-    multiAssetsModeAssetIndex(
-        requestParameters: MultiAssetsModeAssetIndexRequest = {}
-    ): WebsocketStream<MultiAssetsModeAssetIndexResponse> {
-        return this.marketApi.multiAssetsModeAssetIndex(requestParameters);
     }
 
     /**

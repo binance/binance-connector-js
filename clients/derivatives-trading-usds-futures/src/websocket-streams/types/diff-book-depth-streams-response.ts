@@ -81,4 +81,16 @@ export interface DiffBookDepthStreamsResponse {
      * @memberof DiffBookDepthStreamsResponse
      */
     a?: Array<DiffBookDepthStreamsResponseAItem>;
+    /**
+     *
+     * @type {string}
+     * @memberof DiffBookDepthStreamsResponse
+     */
+    ps?: string;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof DiffBookDepthStreamsResponse
+     */
+    st?: number | bigint;
 }

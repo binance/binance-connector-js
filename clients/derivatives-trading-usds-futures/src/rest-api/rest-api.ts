@@ -50,6 +50,7 @@ import type {
 } from './modules/convert-api';
 import type {
     AdlRiskRequest,
+    AssetIndexRequest,
     BasisRequest,
     CompositeIndexSymbolInformationRequest,
     CompressedAggregateTradesListRequest,
@@ -60,7 +61,6 @@ import type {
     LongShortRatioRequest,
     MarkPriceRequest,
     MarkPriceKlineCandlestickDataRequest,
-    MultiAssetsModeAssetIndexRequest,
     OldTradesLookupRequest,
     OpenInterestRequest,
     OpenInterestStatisticsRequest,
@@ -147,6 +147,7 @@ import type {
 } from './types';
 import type {
     AdlRiskResponse,
+    AssetIndexResponse,
     BasisResponse,
     CheckServerTimeResponse,
     CompositeIndexSymbolInformationResponse,
@@ -160,7 +161,6 @@ import type {
     LongShortRatioResponse,
     MarkPriceResponse,
     MarkPriceKlineCandlestickDataResponse,
-    MultiAssetsModeAssetIndexResponse,
     OldTradesLookupResponse,
     OpenInterestResponse,
     OpenInterestStatisticsResponse,
@@ -785,6 +785,24 @@ export class RestAPI {
     }
 
     /**
+     * Asset index price.
+     *
+     * Weight: 1 for a single symbol; 10 when the symbol parameter is omitted
+     *
+     * @summary Asset Index
+     * @param {AssetIndexRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<AssetIndexResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Asset-Index Binance API Documentation}
+     */
+    assetIndex(
+        requestParameters: AssetIndexRequest = {}
+    ): Promise<RestApiResponse<AssetIndexResponse>> {
+        return this.marketDataApi.assetIndex(requestParameters);
+    }
+
+    /**
      * Query future basis
      *
      * If startTime and endTime are not sent, the most recent data is returned.
@@ -954,7 +972,6 @@ export class RestAPI {
      * Kline/candlestick bars for the index price of a pair.
      * Klines are uniquely identified by their open time.
      *
-     *
      * If startTime and endTime are not sent, the most recent klines are returned.
      *
      * Weight: based on parameter LIMIT
@@ -1070,24 +1087,6 @@ export class RestAPI {
         requestParameters: MarkPriceKlineCandlestickDataRequest
     ): Promise<RestApiResponse<MarkPriceKlineCandlestickDataResponse>> {
         return this.marketDataApi.markPriceKlineCandlestickData(requestParameters);
-    }
-
-    /**
-     * asset index for Multi-Assets mode
-     *
-     * Weight: 1 for a single symbol; 10 when the symbol parameter is omitted
-     *
-     * @summary Multi-Assets Mode Asset Index
-     * @param {MultiAssetsModeAssetIndexRequest} requestParameters Request parameters.
-     *
-     * @returns {Promise<RestApiResponse<MultiAssetsModeAssetIndexResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index Binance API Documentation}
-     */
-    multiAssetsModeAssetIndex(
-        requestParameters: MultiAssetsModeAssetIndexRequest = {}
-    ): Promise<RestApiResponse<MultiAssetsModeAssetIndexResponse>> {
-        return this.marketDataApi.multiAssetsModeAssetIndex(requestParameters);
     }
 
     /**
@@ -1745,7 +1744,11 @@ export class RestAPI {
     }
 
     /**
-     * Change user's position mode (Hedge Mode or One-way Mode ) on ***EVERY symbol***
+     * Change user's position mode (Hedge Mode or One-way Mode ) on ***EVERY symbol***.
+     *
+     **After CM migration**, UM and CM share the **same** `dualSidePosition` setting. Calling this endpoint flips both UM and CM at once. If either side has any open order or open position, the change is rejected:
+     * - `-4067` (open orders exist)
+     * - `-4068` (open position exists)
      *
      * Weight: 1
      *
@@ -1912,7 +1915,6 @@ export class RestAPI {
 
     /**
      * Order modify function, currently only LIMIT order modification is supported, modified orders will be reordered in the match queue
-     *
      *
      * Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
      * Both `quantity` and `price` must be sent, which is different from dapi modify order endpoint.

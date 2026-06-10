@@ -33,6 +33,7 @@ import {
 } from '../../../src/rest-api';
 import {
     AdlRiskRequest,
+    AssetIndexRequest,
     BasisRequest,
     CompositeIndexSymbolInformationRequest,
     CompressedAggregateTradesListRequest,
@@ -43,7 +44,6 @@ import {
     LongShortRatioRequest,
     MarkPriceRequest,
     MarkPriceKlineCandlestickDataRequest,
-    MultiAssetsModeAssetIndexRequest,
     OldTradesLookupRequest,
     OpenInterestRequest,
     OpenInterestStatisticsRequest,
@@ -64,6 +64,7 @@ import {
 } from '../../../src/rest-api';
 import type {
     AdlRiskResponse,
+    AssetIndexResponse,
     BasisResponse,
     CheckServerTimeResponse,
     CompositeIndexSymbolInformationResponse,
@@ -77,7 +78,6 @@ import type {
     LongShortRatioResponse,
     MarkPriceKlineCandlestickDataResponse,
     MarkPriceResponse,
-    MultiAssetsModeAssetIndexResponse,
     OldTradesLookupResponse,
     OpenInterestResponse,
     OpenInterestStatisticsResponse,
@@ -167,6 +167,89 @@ describe('MarketDataApi', () => {
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'adlRisk').mockRejectedValueOnce(mockError);
             await expect(client.adlRisk()).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('assetIndex()', () => {
+        it('should execute assetIndex() successfully with required parameters only', async () => {
+            mockResponse = JSONParse(
+                JSONStringify({
+                    symbol: 'ADAUSD',
+                    time: 1635740268004,
+                    index: '1.92957370',
+                    bidBuffer: '0.10000000',
+                    askBuffer: '0.10000000',
+                    bidRate: '1.73661633',
+                    askRate: '2.12253107',
+                    autoExchangeBidBuffer: '0.05000000',
+                    autoExchangeAskBuffer: '0.05000000',
+                    autoExchangeBidRate: '1.83309501',
+                    autoExchangeAskRate: '2.02605238',
+                })
+            );
+
+            const spy = jest.spyOn(client, 'assetIndex').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<AssetIndexResponse>)
+            );
+            const response = await client.assetIndex();
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute assetIndex() successfully with optional parameters', async () => {
+            const params: AssetIndexRequest = {
+                symbol: 'symbol_example',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    symbol: 'ADAUSD',
+                    time: 1635740268004,
+                    index: '1.92957370',
+                    bidBuffer: '0.10000000',
+                    askBuffer: '0.10000000',
+                    bidRate: '1.73661633',
+                    askRate: '2.12253107',
+                    autoExchangeBidBuffer: '0.05000000',
+                    autoExchangeAskBuffer: '0.05000000',
+                    autoExchangeBidRate: '1.83309501',
+                    autoExchangeAskRate: '2.02605238',
+                })
+            );
+
+            const spy = jest.spyOn(client, 'assetIndex').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<AssetIndexResponse>)
+            );
+            const response = await client.assetIndex(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest.spyOn(client, 'assetIndex').mockRejectedValueOnce(mockError);
+            await expect(client.assetIndex()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
@@ -1564,91 +1647,6 @@ describe('MarketDataApi', () => {
             await expect(client.markPriceKlineCandlestickData(params)).rejects.toThrow(
                 'ResponseError'
             );
-            spy.mockRestore();
-        });
-    });
-
-    describe('multiAssetsModeAssetIndex()', () => {
-        it('should execute multiAssetsModeAssetIndex() successfully with required parameters only', async () => {
-            mockResponse = JSONParse(
-                JSONStringify({
-                    symbol: 'ADAUSD',
-                    time: 1635740268004,
-                    index: '1.92957370',
-                    bidBuffer: '0.10000000',
-                    askBuffer: '0.10000000',
-                    bidRate: '1.73661633',
-                    askRate: '2.12253107',
-                    autoExchangeBidBuffer: '0.05000000',
-                    autoExchangeAskBuffer: '0.05000000',
-                    autoExchangeBidRate: '1.83309501',
-                    autoExchangeAskRate: '2.02605238',
-                })
-            );
-
-            const spy = jest.spyOn(client, 'multiAssetsModeAssetIndex').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<MultiAssetsModeAssetIndexResponse>)
-            );
-            const response = await client.multiAssetsModeAssetIndex();
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should execute multiAssetsModeAssetIndex() successfully with optional parameters', async () => {
-            const params: MultiAssetsModeAssetIndexRequest = {
-                symbol: 'symbol_example',
-            };
-
-            mockResponse = JSONParse(
-                JSONStringify({
-                    symbol: 'ADAUSD',
-                    time: 1635740268004,
-                    index: '1.92957370',
-                    bidBuffer: '0.10000000',
-                    askBuffer: '0.10000000',
-                    bidRate: '1.73661633',
-                    askRate: '2.12253107',
-                    autoExchangeBidBuffer: '0.05000000',
-                    autoExchangeAskBuffer: '0.05000000',
-                    autoExchangeBidRate: '1.83309501',
-                    autoExchangeAskRate: '2.02605238',
-                })
-            );
-
-            const spy = jest.spyOn(client, 'multiAssetsModeAssetIndex').mockReturnValue(
-                Promise.resolve({
-                    data: () => Promise.resolve(mockResponse),
-                    status: 200,
-                    headers: {},
-                    rateLimits: [],
-                } as RestApiResponse<MultiAssetsModeAssetIndexResponse>)
-            );
-            const response = await client.multiAssetsModeAssetIndex(params);
-            expect(response).toBeDefined();
-            await expect(response.data()).resolves.toBe(mockResponse);
-            spy.mockRestore();
-        });
-
-        it('should throw an error when server is returning an error', async () => {
-            const errorResponse = {
-                code: -1111,
-                msg: 'Server Error',
-            };
-
-            const mockError = new Error('ResponseError') as Error & {
-                response?: { status: number; data: unknown };
-            };
-            mockError.response = { status: 400, data: errorResponse };
-            const spy = jest
-                .spyOn(client, 'multiAssetsModeAssetIndex')
-                .mockRejectedValueOnce(mockError);
-            await expect(client.multiAssetsModeAssetIndex()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

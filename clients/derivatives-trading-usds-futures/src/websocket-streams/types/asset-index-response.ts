@@ -16,12 +16,11 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { MultiAssetsModeAssetIndexResponseInner } from './multi-assets-mode-asset-index-response-inner';
+import type { AssetIndexResponseInner } from './asset-index-response-inner';
 
 /**
  *
  * @export
- * @interface MultiAssetsModeAssetIndexResponse
+ * @interface AssetIndexResponse
  */
-export interface MultiAssetsModeAssetIndexResponse
-    extends Array<MultiAssetsModeAssetIndexResponseInner> {}
+export interface AssetIndexResponse extends Array<AssetIndexResponseInner> {}
