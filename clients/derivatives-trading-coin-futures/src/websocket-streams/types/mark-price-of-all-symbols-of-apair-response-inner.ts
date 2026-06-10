@@ -67,4 +67,10 @@ export interface MarkPriceOfAllSymbolsOfAPairResponseInner {
      * @memberof MarkPriceOfAllSymbolsOfAPairResponseInner
      */
     T?: number | bigint;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof MarkPriceOfAllSymbolsOfAPairResponseInner
+     */
+    st?: number | bigint;
 }

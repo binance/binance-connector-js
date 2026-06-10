@@ -42,12 +42,6 @@ export interface AllMarketTickersStreamsResponseInner {
      * @type {string}
      * @memberof AllMarketTickersStreamsResponseInner
      */
-    ps?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof AllMarketTickersStreamsResponseInner
-     */
     p?: string;
     /**
      *
@@ -133,4 +127,16 @@ export interface AllMarketTickersStreamsResponseInner {
      * @memberof AllMarketTickersStreamsResponseInner
      */
     n?: number | bigint;
+    /**
+     *
+     * @type {string}
+     * @memberof AllMarketTickersStreamsResponseInner
+     */
+    ps?: string;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof AllMarketTickersStreamsResponseInner
+     */
+    st?: number | bigint;
 }

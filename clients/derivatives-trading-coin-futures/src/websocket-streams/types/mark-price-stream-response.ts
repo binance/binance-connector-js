@@ -67,4 +67,10 @@ export interface MarkPriceStreamResponse {
      * @memberof MarkPriceStreamResponse
      */
     T?: number | bigint;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof MarkPriceStreamResponse
+     */
+    st?: number | bigint;
 }

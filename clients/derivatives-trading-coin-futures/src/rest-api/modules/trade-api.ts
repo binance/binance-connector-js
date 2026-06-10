@@ -64,7 +64,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * If startTime and endTime are both not sent, then the last 7 days' data will be returned.
          * The time between startTime and endTime cannot be longer than 7 days.
          *
-         * Weight: 20 with symbol，40 with pair
+         * Weight: 20 with symbol，40 with pair (after CM migration: 5 flat)
          *
          * @summary Account Trade List (USER_DATA)
          * @param {string} [symbol]
@@ -143,7 +143,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * If orderId is set, it will get orders >= that orderId. Otherwise most recent orders are returned.
          * The query time period must be less then 7 days( default as the recent 7 days).
          *
-         * Weight: 20 with symbol, 40 with pair
+         * Weight: 20 with symbol, 40 with pair (after CM migration: 5 flat)
          *
          * @summary All Orders (USER_DATA)
          * @param {string} [symbol]
@@ -353,7 +353,6 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Cancel an active order.
          *
-         *
          * Either `orderId` or `origClientOrderId` must be sent.
          *
          * Weight: 1
@@ -503,7 +502,11 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
-         * Change user's position mode (Hedge Mode or One-way Mode ) on ***EVERY symbol***
+         * Change user's position mode (Hedge Mode or One-way Mode ) on ***EVERY symbol***.
+         *
+         **After CM migration**, UM and CM share the **same** `dualSidePosition` setting. Calling this endpoint flips both UM and CM at once. If either side has any open order or open position, the change is rejected:
+         * - `-4067` (open orders exist)
+         * - `-4068` (open position exists)
          *
          * Weight: 1
          *
@@ -727,7 +730,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary Modify Isolated Position Margin(TRADE)
          * @param {string} symbol
          * @param {number} amount
-         * @param {ModifyIsolatedPositionMarginTypeEnum} type
+         * @param {ModifyIsolatedPositionMarginTypeEnum} type **After CM migration, stop-type values (`STOP`, `STOP_MARKET`, `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`, `TRAILING_STOP_MARKET`) are no longer accepted by this endpoint and will return `-4120`. Use the new `/dapi/v1/algoOrder` endpoint instead.**
          * @param {ModifyIsolatedPositionMarginPositionSideEnum} [positionSide] Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent with Hedge Mode.
          * @param {number | bigint} [recvWindow]
          *
@@ -829,7 +832,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * Order modify function, currently only LIMIT order modification is supported, modified orders will be reordered in the match queue
          *
          * Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
-         * Either `quantity` or `price` must be sent.
+         * Either `quantity` or `price` must be sent. *(After CM migration, both `quantity` and `price` are required.)*
          * When the new `quantity` or `price` doesn't satisfy PRICE_FILTER / PERCENT_FILTER / LOT_SIZE, amendment will be rejected and the order will stay as it is.
          * However the order will be cancelled by the amendment in the following situations:
          * when the order is in partially filled status and the new `quantity` <= `executedQty`
@@ -909,7 +912,6 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Send in a new order.
          *
-         *
          * Order with type `STOP`,  parameter `timeInForce` can be sent ( default `GTC`).
          * Order with type `TAKE_PROFIT`,  parameter `timeInForce` can be sent ( default `GTC`).
          * Condition orders will be triggered when:
@@ -952,7 +954,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @summary New Order (TRADE)
          * @param {string} symbol
          * @param {NewOrderSideEnum} side `SELL`, `BUY`
-         * @param {NewOrderTypeEnum} type
+         * @param {NewOrderTypeEnum} type **After CM migration, stop-type values (`STOP`, `STOP_MARKET`, `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`, `TRAILING_STOP_MARKET`) are no longer accepted by this endpoint and will return `-4120`. Use the new `/dapi/v1/algoOrder` endpoint instead.**
          * @param {NewOrderPositionSideEnum} [positionSide] Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent with Hedge Mode.
          * @param {NewOrderTimeInForceEnum} [timeInForce]
          * @param {number} [quantity] quantity measured by contract number, Cannot be sent with `closePosition`=`true`
@@ -964,7 +966,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {number} [activationPrice] Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`)
          * @param {number} [callbackRate] Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 10 where 1 for 1%
          * @param {NewOrderWorkingTypeEnum} [workingType] stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE". Default "CONTRACT_PRICE"
-         * @param {string} [priceProtect] "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
+         * @param {string} [priceProtect] "true" or "false", default "false". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
          * @param {NewOrderNewOrderRespTypeEnum} [newOrderRespType] "ACK", "RESULT", default "ACK"
          * @param {NewOrderPriceMatchEnum} [priceMatch] only avaliable for `LIMIT`/`STOP`/`TAKE_PROFIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`: /`QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
          * @param {NewOrderSelfTradePreventionModeEnum} [selfTradePreventionMode] `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `EXPIRE_MAKER`
@@ -1328,9 +1330,9 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * User's Force Orders
          *
          * If "autoCloseType" is not sent, orders with both of the types will be returned
-         * If "startTime" is not sent, data within 200 days before "endTime" can be queried
+         * Only support querying data in the past 90 days
          *
-         * Weight: 20 with symbol, 50 without symbol
+         * Weight: 20 (after CM migration: 20 with symbol / 50 without symbol)
          *
          * @summary User\'s Force Orders(USER_DATA)
          * @param {string} [symbol]
@@ -1406,7 +1408,7 @@ export interface TradeApiInterface {
      * If startTime and endTime are both not sent, then the last 7 days' data will be returned.
      * The time between startTime and endTime cannot be longer than 7 days.
      *
-     * Weight: 20 with symbol，40 with pair
+     * Weight: 20 with symbol，40 with pair (after CM migration: 5 flat)
      *
      * @summary Account Trade List (USER_DATA)
      * @param {AccountTradeListRequest} requestParameters Request parameters.
@@ -1431,7 +1433,7 @@ export interface TradeApiInterface {
      * If orderId is set, it will get orders >= that orderId. Otherwise most recent orders are returned.
      * The query time period must be less then 7 days( default as the recent 7 days).
      *
-     * Weight: 20 with symbol, 40 with pair
+     * Weight: 20 with symbol, 40 with pair (after CM migration: 5 flat)
      *
      * @summary All Orders (USER_DATA)
      * @param {AllOrdersRequest} requestParameters Request parameters.
@@ -1492,7 +1494,6 @@ export interface TradeApiInterface {
     /**
      * Cancel an active order.
      *
-     *
      * Either `orderId` or `origClientOrderId` must be sent.
      *
      * Weight: 1
@@ -1537,7 +1538,11 @@ export interface TradeApiInterface {
         requestParameters: ChangeMarginTypeRequest
     ): Promise<RestApiResponse<ChangeMarginTypeResponse>>;
     /**
-     * Change user's position mode (Hedge Mode or One-way Mode ) on ***EVERY symbol***
+     * Change user's position mode (Hedge Mode or One-way Mode ) on ***EVERY symbol***.
+     *
+     **After CM migration**, UM and CM share the **same** `dualSidePosition` setting. Calling this endpoint flips both UM and CM at once. If either side has any open order or open position, the change is rejected:
+     * - `-4067` (open orders exist)
+     * - `-4068` (open position exists)
      *
      * Weight: 1
      *
@@ -1635,7 +1640,7 @@ export interface TradeApiInterface {
      * Order modify function, currently only LIMIT order modification is supported, modified orders will be reordered in the match queue
      *
      * Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
-     * Either `quantity` or `price` must be sent.
+     * Either `quantity` or `price` must be sent. *(After CM migration, both `quantity` and `price` are required.)*
      * When the new `quantity` or `price` doesn't satisfy PRICE_FILTER / PERCENT_FILTER / LOT_SIZE, amendment will be rejected and the order will stay as it is.
      * However the order will be cancelled by the amendment in the following situations:
      * when the order is in partially filled status and the new `quantity` <= `executedQty`
@@ -1655,7 +1660,6 @@ export interface TradeApiInterface {
     ): Promise<RestApiResponse<ModifyOrderResponse>>;
     /**
      * Send in a new order.
-     *
      *
      * Order with type `STOP`,  parameter `timeInForce` can be sent ( default `GTC`).
      * Order with type `TAKE_PROFIT`,  parameter `timeInForce` can be sent ( default `GTC`).
@@ -1801,9 +1805,9 @@ export interface TradeApiInterface {
      * User's Force Orders
      *
      * If "autoCloseType" is not sent, orders with both of the types will be returned
-     * If "startTime" is not sent, data within 200 days before "endTime" can be queried
+     * Only support querying data in the past 90 days
      *
-     * Weight: 20 with symbol, 50 without symbol
+     * Weight: 20 (after CM migration: 20 with symbol / 50 without symbol)
      *
      * @summary User\'s Force Orders(USER_DATA)
      * @param {UsersForceOrdersRequest} requestParameters Request parameters.
@@ -2272,7 +2276,7 @@ export interface ModifyIsolatedPositionMarginRequest {
     readonly amount: number;
 
     /**
-     *
+     * **After CM migration, stop-type values (`STOP`, `STOP_MARKET`, `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`, `TRAILING_STOP_MARKET`) are no longer accepted by this endpoint and will return `-4120`. Use the new `/dapi/v1/algoOrder` endpoint instead.**
      * @type {'LIMIT' | 'MARKET' | 'STOP' | 'STOP_MARKET' | 'TAKE_PROFIT' | 'TAKE_PROFIT_MARKET' | 'TRAILING_STOP_MARKET'}
      * @memberof TradeApiModifyIsolatedPositionMargin
      */
@@ -2395,7 +2399,7 @@ export interface NewOrderRequest {
     readonly side: NewOrderSideEnum;
 
     /**
-     *
+     * **After CM migration, stop-type values (`STOP`, `STOP_MARKET`, `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`, `TRAILING_STOP_MARKET`) are no longer accepted by this endpoint and will return `-4120`. Use the new `/dapi/v1/algoOrder` endpoint instead.**
      * @type {'LIMIT' | 'MARKET' | 'STOP' | 'STOP_MARKET' | 'TAKE_PROFIT' | 'TAKE_PROFIT_MARKET' | 'TRAILING_STOP_MARKET'}
      * @memberof TradeApiNewOrder
      */
@@ -2479,7 +2483,7 @@ export interface NewOrderRequest {
     readonly workingType?: NewOrderWorkingTypeEnum;
 
     /**
-     * "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
+     * "true" or "false", default "false". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
      * @type {string}
      * @memberof TradeApiNewOrder
      */
@@ -2723,7 +2727,7 @@ export class TradeApi implements TradeApiInterface {
      * If startTime and endTime are both not sent, then the last 7 days' data will be returned.
      * The time between startTime and endTime cannot be longer than 7 days.
      *
-     * Weight: 20 with symbol，40 with pair
+     * Weight: 20 with symbol，40 with pair (after CM migration: 5 flat)
      *
      * @summary Account Trade List (USER_DATA)
      * @param {AccountTradeListRequest} requestParameters Request parameters.
@@ -2771,7 +2775,7 @@ export class TradeApi implements TradeApiInterface {
      * If orderId is set, it will get orders >= that orderId. Otherwise most recent orders are returned.
      * The query time period must be less then 7 days( default as the recent 7 days).
      *
-     * Weight: 20 with symbol, 40 with pair
+     * Weight: 20 with symbol, 40 with pair (after CM migration: 5 flat)
      *
      * @summary All Orders (USER_DATA)
      * @param {AllOrdersRequest} requestParameters Request parameters.
@@ -2910,7 +2914,6 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel an active order.
      *
-     *
      * Either `orderId` or `origClientOrderId` must be sent.
      *
      * Weight: 1
@@ -3010,7 +3013,11 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Change user's position mode (Hedge Mode or One-way Mode ) on ***EVERY symbol***
+     * Change user's position mode (Hedge Mode or One-way Mode ) on ***EVERY symbol***.
+     *
+     **After CM migration**, UM and CM share the **same** `dualSidePosition` setting. Calling this endpoint flips both UM and CM at once. If either side has any open order or open position, the change is rejected:
+     * - `-4067` (open orders exist)
+     * - `-4068` (open position exists)
      *
      * Weight: 1
      *
@@ -3224,7 +3231,7 @@ export class TradeApi implements TradeApiInterface {
      * Order modify function, currently only LIMIT order modification is supported, modified orders will be reordered in the match queue
      *
      * Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
-     * Either `quantity` or `price` must be sent.
+     * Either `quantity` or `price` must be sent. *(After CM migration, both `quantity` and `price` are required.)*
      * When the new `quantity` or `price` doesn't satisfy PRICE_FILTER / PERCENT_FILTER / LOT_SIZE, amendment will be rejected and the order will stay as it is.
      * However the order will be cancelled by the amendment in the following situations:
      * when the order is in partially filled status and the new `quantity` <= `executedQty`
@@ -3267,7 +3274,6 @@ export class TradeApi implements TradeApiInterface {
 
     /**
      * Send in a new order.
-     *
      *
      * Order with type `STOP`,  parameter `timeInForce` can be sent ( default `GTC`).
      * Order with type `TAKE_PROFIT`,  parameter `timeInForce` can be sent ( default `GTC`).
@@ -3542,9 +3548,9 @@ export class TradeApi implements TradeApiInterface {
      * User's Force Orders
      *
      * If "autoCloseType" is not sent, orders with both of the types will be returned
-     * If "startTime" is not sent, data within 200 days before "endTime" can be queried
+     * Only support querying data in the past 90 days
      *
-     * Weight: 20 with symbol, 50 without symbol
+     * Weight: 20 (after CM migration: 20 with symbol / 50 without symbol)
      *
      * @summary User\'s Force Orders(USER_DATA)
      * @param {UsersForceOrdersRequest} requestParameters Request parameters.

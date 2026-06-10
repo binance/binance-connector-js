@@ -139,10 +139,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get Download Id For Futures Order History
          *
-         * Request Limitation is 10 times per month, shared by front end download page and rest api
+         * Request Limitation is 8 times per month, shared by front end download page and rest api
+         * This endpoint uses the IP rate limit bucket and costs 1000 weight per call. The maximum is 2 calls per minute; the 3rd call within the same minute will trigger a ban.
          * The time between `startTime` and `endTime` can not be longer than 1 year
          *
-         * Weight: 5
+         * Weight: 1000
          *
          * @summary Get Download Id For Futures Order History (USER_DATA)
          * @param {number | bigint} startTime Timestamp in ms
@@ -190,10 +191,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get download id for futures trade history
          *
-         * Request Limitation is 5 times per month, shared by front end download page and rest api
+         * Request Limitation is 8 times per month, shared by front end download page and rest api
+         * This endpoint uses the IP rate limit bucket and costs 1000 weight per call. The maximum is 2 calls per minute; the 3rd call within the same minute will trigger a ban.
          * The time between `startTime` and `endTime` can not be longer than 1 year
          *
-         * Weight: 5
+         * Weight: 1000
          *
          * @summary Get Download Id For Futures Trade History (USER_DATA)
          * @param {number | bigint} startTime Timestamp in ms
@@ -241,10 +243,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get download id for futures transaction history
          *
-         * Request Limitation is 5 times per month, shared by front end download page and rest api
+         * Request Limitation is 8 times per month, shared by front end download page and rest api
+         * This endpoint uses the IP rate limit bucket and costs 1000 weight per call. The maximum is 2 calls per minute; the 3rd call within the same minute will trigger a ban.
          * The time between `startTime` and `endTime` can not be longer than 1 year
          *
-         * Weight: 5
+         * Weight: 1000
          *
          * @summary Get Download Id For Futures Transaction History(USER_DATA)
          * @param {number | bigint} startTime Timestamp in ms
@@ -292,7 +295,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get futures order history download link by Id
          *
-         * Download link expiration: 24h
+         * Download link expiration: 7 days
          *
          * Weight: 5
          *
@@ -335,7 +338,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get futures trade download link by Id
          *
-         * Download link expiration: 24h
+         * Download link expiration: 7 days
          *
          * Weight: 5
          *
@@ -378,7 +381,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get futures transaction history download link by Id
          *
-         * Download link expiration: 24h
+         * Download link expiration: 7 days
          *
          * Weight: 5
          *
@@ -532,7 +535,7 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get the symbol's notional bracket list.
          *
-         * Weight: 1
+         * Weight: 1 (after CM migration: 1 with symbol / 2 without symbol)
          *
          * @summary Notional Bracket for Symbol(USER_DATA)
          * @param {string} [symbol]
@@ -664,10 +667,11 @@ export interface AccountApiInterface {
     /**
      * Get Download Id For Futures Order History
      *
-     * Request Limitation is 10 times per month, shared by front end download page and rest api
+     * Request Limitation is 8 times per month, shared by front end download page and rest api
+     * This endpoint uses the IP rate limit bucket and costs 1000 weight per call. The maximum is 2 calls per minute; the 3rd call within the same minute will trigger a ban.
      * The time between `startTime` and `endTime` can not be longer than 1 year
      *
-     * Weight: 5
+     * Weight: 1000
      *
      * @summary Get Download Id For Futures Order History (USER_DATA)
      * @param {GetDownloadIdForFuturesOrderHistoryRequest} requestParameters Request parameters.
@@ -681,10 +685,11 @@ export interface AccountApiInterface {
     /**
      * Get download id for futures trade history
      *
-     * Request Limitation is 5 times per month, shared by front end download page and rest api
+     * Request Limitation is 8 times per month, shared by front end download page and rest api
+     * This endpoint uses the IP rate limit bucket and costs 1000 weight per call. The maximum is 2 calls per minute; the 3rd call within the same minute will trigger a ban.
      * The time between `startTime` and `endTime` can not be longer than 1 year
      *
-     * Weight: 5
+     * Weight: 1000
      *
      * @summary Get Download Id For Futures Trade History (USER_DATA)
      * @param {GetDownloadIdForFuturesTradeHistoryRequest} requestParameters Request parameters.
@@ -698,10 +703,11 @@ export interface AccountApiInterface {
     /**
      * Get download id for futures transaction history
      *
-     * Request Limitation is 5 times per month, shared by front end download page and rest api
+     * Request Limitation is 8 times per month, shared by front end download page and rest api
+     * This endpoint uses the IP rate limit bucket and costs 1000 weight per call. The maximum is 2 calls per minute; the 3rd call within the same minute will trigger a ban.
      * The time between `startTime` and `endTime` can not be longer than 1 year
      *
-     * Weight: 5
+     * Weight: 1000
      *
      * @summary Get Download Id For Futures Transaction History(USER_DATA)
      * @param {GetDownloadIdForFuturesTransactionHistoryRequest} requestParameters Request parameters.
@@ -715,7 +721,7 @@ export interface AccountApiInterface {
     /**
      * Get futures order history download link by Id
      *
-     * Download link expiration: 24h
+     * Download link expiration: 7 days
      *
      * Weight: 5
      *
@@ -731,7 +737,7 @@ export interface AccountApiInterface {
     /**
      * Get futures trade download link by Id
      *
-     * Download link expiration: 24h
+     * Download link expiration: 7 days
      *
      * Weight: 5
      *
@@ -747,7 +753,7 @@ export interface AccountApiInterface {
     /**
      * Get futures transaction history download link by Id
      *
-     * Download link expiration: 24h
+     * Download link expiration: 7 days
      *
      * Weight: 5
      *
@@ -797,7 +803,7 @@ export interface AccountApiInterface {
     /**
      * Get the symbol's notional bracket list.
      *
-     * Weight: 1
+     * Weight: 1 (after CM migration: 1 with symbol / 2 without symbol)
      *
      * @summary Notional Bracket for Symbol(USER_DATA)
      * @param {NotionalBracketForSymbolRequest} requestParameters Request parameters.
@@ -1228,10 +1234,11 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get Download Id For Futures Order History
      *
-     * Request Limitation is 10 times per month, shared by front end download page and rest api
+     * Request Limitation is 8 times per month, shared by front end download page and rest api
+     * This endpoint uses the IP rate limit bucket and costs 1000 weight per call. The maximum is 2 calls per minute; the 3rd call within the same minute will trigger a ban.
      * The time between `startTime` and `endTime` can not be longer than 1 year
      *
-     * Weight: 5
+     * Weight: 1000
      *
      * @summary Get Download Id For Futures Order History (USER_DATA)
      * @param {GetDownloadIdForFuturesOrderHistoryRequest} requestParameters Request parameters.
@@ -1264,10 +1271,11 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get download id for futures trade history
      *
-     * Request Limitation is 5 times per month, shared by front end download page and rest api
+     * Request Limitation is 8 times per month, shared by front end download page and rest api
+     * This endpoint uses the IP rate limit bucket and costs 1000 weight per call. The maximum is 2 calls per minute; the 3rd call within the same minute will trigger a ban.
      * The time between `startTime` and `endTime` can not be longer than 1 year
      *
-     * Weight: 5
+     * Weight: 1000
      *
      * @summary Get Download Id For Futures Trade History (USER_DATA)
      * @param {GetDownloadIdForFuturesTradeHistoryRequest} requestParameters Request parameters.
@@ -1300,10 +1308,11 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get download id for futures transaction history
      *
-     * Request Limitation is 5 times per month, shared by front end download page and rest api
+     * Request Limitation is 8 times per month, shared by front end download page and rest api
+     * This endpoint uses the IP rate limit bucket and costs 1000 weight per call. The maximum is 2 calls per minute; the 3rd call within the same minute will trigger a ban.
      * The time between `startTime` and `endTime` can not be longer than 1 year
      *
-     * Weight: 5
+     * Weight: 1000
      *
      * @summary Get Download Id For Futures Transaction History(USER_DATA)
      * @param {GetDownloadIdForFuturesTransactionHistoryRequest} requestParameters Request parameters.
@@ -1336,7 +1345,7 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get futures order history download link by Id
      *
-     * Download link expiration: 24h
+     * Download link expiration: 7 days
      *
      * Weight: 5
      *
@@ -1370,7 +1379,7 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get futures trade download link by Id
      *
-     * Download link expiration: 24h
+     * Download link expiration: 7 days
      *
      * Weight: 5
      *
@@ -1404,7 +1413,7 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get futures transaction history download link by Id
      *
-     * Download link expiration: 24h
+     * Download link expiration: 7 days
      *
      * Weight: 5
      *
@@ -1511,7 +1520,7 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get the symbol's notional bracket list.
      *
-     * Weight: 1
+     * Weight: 1 (after CM migration: 1 with symbol / 2 without symbol)
      *
      * @summary Notional Bracket for Symbol(USER_DATA)
      * @param {NotionalBracketForSymbolRequest} requestParameters Request parameters.

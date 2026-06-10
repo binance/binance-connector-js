@@ -149,7 +149,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get compressed, aggregate trades. Market trades that fill in 100ms with the same price and the same taking side will have the quantity aggregated.
          *
-         * support querying futures trade histories that are not older than one year
+         * support querying futures trade histories that are not older than 24 hours
          * If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 1 hour.
          * If `fromId`, `startTime`, and `endTime` are not sent, the most recent aggregate trades will be returned.
          * Only market trades will be aggregated and returned, which means the insurance fund trades and ADL trades won't be aggregated.
@@ -216,7 +216,6 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * PERPETUAL
          * CURRENT_QUARTER
          * NEXT_QUARTER
-         *
          *
          * 1000 | 10
          * The difference between `startTime` and `endTime` can only be up to 200 days
@@ -440,7 +439,6 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Kline/candlestick bars for the index price of a pair. Klines are uniquely identified by their open time.
          *
-         *
          * 1000 | 10
          * The difference between `startTime` and `endTime` can only be up to 200 days
          * Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
@@ -646,7 +644,6 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Kline/candlestick bars for the mark price of a symbol.
          * Klines are uniquely identified by their open time.
          *
-         *
          * 1000 | 10
          * The difference between `startTime` and `endTime` can only be up to 200 days
          * Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
@@ -719,6 +716,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * Get older market historical trades.
          *
          * Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
+         * Only supports data from within the last one month
          *
          * Weight: 20
          *
@@ -1432,7 +1430,7 @@ export interface MarketDataApiInterface {
     /**
      * Get compressed, aggregate trades. Market trades that fill in 100ms with the same price and the same taking side will have the quantity aggregated.
      *
-     * support querying futures trade histories that are not older than one year
+     * support querying futures trade histories that are not older than 24 hours
      * If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 1 hour.
      * If `fromId`, `startTime`, and `endTime` are not sent, the most recent aggregate trades will be returned.
      * Only market trades will be aggregated and returned, which means the insurance fund trades and ADL trades won't be aggregated.
@@ -1457,7 +1455,6 @@ export interface MarketDataApiInterface {
      * PERPETUAL
      * CURRENT_QUARTER
      * NEXT_QUARTER
-     *
      *
      * 1000 | 10
      * The difference between `startTime` and `endTime` can only be up to 200 days
@@ -1538,7 +1535,6 @@ export interface MarketDataApiInterface {
     /**
      * Kline/candlestick bars for the index price of a pair. Klines are uniquely identified by their open time.
      *
-     *
      * 1000 | 10
      * The difference between `startTime` and `endTime` can only be up to 200 days
      * Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
@@ -1612,7 +1608,6 @@ export interface MarketDataApiInterface {
      * Kline/candlestick bars for the mark price of a symbol.
      * Klines are uniquely identified by their open time.
      *
-     *
      * 1000 | 10
      * The difference between `startTime` and `endTime` can only be up to 200 days
      * Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
@@ -1641,6 +1636,7 @@ export interface MarketDataApiInterface {
      * Get older market historical trades.
      *
      * Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
+     * Only supports data from within the last one month
      *
      * Weight: 20
      *
@@ -2686,7 +2682,7 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Get compressed, aggregate trades. Market trades that fill in 100ms with the same price and the same taking side will have the quantity aggregated.
      *
-     * support querying futures trade histories that are not older than one year
+     * support querying futures trade histories that are not older than 24 hours
      * If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 1 hour.
      * If `fromId`, `startTime`, and `endTime` are not sent, the most recent aggregate trades will be returned.
      * Only market trades will be aggregated and returned, which means the insurance fund trades and ADL trades won't be aggregated.
@@ -2732,7 +2728,6 @@ export class MarketDataApi implements MarketDataApiInterface {
      * PERPETUAL
      * CURRENT_QUARTER
      * NEXT_QUARTER
-     *
      *
      * 1000 | 10
      * The difference between `startTime` and `endTime` can only be up to 200 days
@@ -2900,7 +2895,6 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Kline/candlestick bars for the index price of a pair. Klines are uniquely identified by their open time.
      *
-     *
      * 1000 | 10
      * The difference between `startTime` and `endTime` can only be up to 200 days
      * Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
@@ -3035,7 +3029,6 @@ export class MarketDataApi implements MarketDataApiInterface {
      * Kline/candlestick bars for the mark price of a symbol.
      * Klines are uniquely identified by their open time.
      *
-     *
      * 1000 | 10
      * The difference between `startTime` and `endTime` can only be up to 200 days
      * Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
@@ -3085,6 +3078,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * Get older market historical trades.
      *
      * Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
+     * Only supports data from within the last one month
      *
      * Weight: 20
      *

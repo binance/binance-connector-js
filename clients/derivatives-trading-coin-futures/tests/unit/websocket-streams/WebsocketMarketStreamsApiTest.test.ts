@@ -62,6 +62,7 @@ describe('WebsocketMarketStreamsApi', () => {
                     l: 606073,
                     T: 1591261134199,
                     m: false,
+                    st: 1,
                 })
             );
 
@@ -93,6 +94,7 @@ describe('WebsocketMarketStreamsApi', () => {
                     l: 606073,
                     T: 1591261134199,
                     m: false,
+                    st: 1,
                 })
             );
 
@@ -142,13 +144,14 @@ describe('WebsocketMarketStreamsApi', () => {
                     e: 'bookTicker',
                     u: 17242169,
                     s: 'BTCUSD_200626',
-                    ps: 'BTCUSD',
                     b: '9548.1',
                     B: '52',
                     a: '9548.5',
                     A: '11',
                     T: 1591268628155,
                     E: 1591268628166,
+                    ps: 'BTCUSD',
+                    st: 1,
                 })
             );
 
@@ -172,13 +175,14 @@ describe('WebsocketMarketStreamsApi', () => {
                     e: 'bookTicker',
                     u: 17242169,
                     s: 'BTCUSD_200626',
-                    ps: 'BTCUSD',
                     b: '9548.1',
                     B: '52',
                     a: '9548.5',
                     A: '11',
                     T: 1591268628155,
                     E: 1591268628166,
+                    ps: 'BTCUSD',
+                    st: 1,
                 })
             );
 
@@ -225,6 +229,7 @@ describe('WebsocketMarketStreamsApi', () => {
                         z: '1',
                         T: 1591154240949,
                     },
+                    st: 1,
                 })
             );
 
@@ -261,6 +266,7 @@ describe('WebsocketMarketStreamsApi', () => {
                         z: '1',
                         T: 1591154240949,
                     },
+                    st: 1,
                 })
             );
 
@@ -302,6 +308,7 @@ describe('WebsocketMarketStreamsApi', () => {
                         l: '7000.0',
                         v: '487476',
                         q: '33264343847.22378500',
+                        st: 1,
                     },
                 ])
             );
@@ -334,6 +341,7 @@ describe('WebsocketMarketStreamsApi', () => {
                         l: '7000.0',
                         v: '487476',
                         q: '33264343847.22378500',
+                        st: 1,
                     },
                 ])
             );
@@ -369,7 +377,6 @@ describe('WebsocketMarketStreamsApi', () => {
                         e: '24hrTicker',
                         E: 1591268262453,
                         s: 'BTCUSD_200626',
-                        ps: 'BTCUSD',
                         p: '-43.4',
                         P: '-0.452',
                         w: '0.00147974',
@@ -385,6 +392,8 @@ describe('WebsocketMarketStreamsApi', () => {
                         F: 512014,
                         L: 615289,
                         n: 103272,
+                        ps: 'BTCUSD',
+                        st: 1,
                     },
                 ])
             );
@@ -410,7 +419,6 @@ describe('WebsocketMarketStreamsApi', () => {
                         e: '24hrTicker',
                         E: 1591268262453,
                         s: 'BTCUSD_200626',
-                        ps: 'BTCUSD',
                         p: '-43.4',
                         P: '-0.452',
                         w: '0.00147974',
@@ -426,6 +434,8 @@ describe('WebsocketMarketStreamsApi', () => {
                         F: 512014,
                         L: 615289,
                         n: 103272,
+                        ps: 'BTCUSD',
+                        st: 1,
                     },
                 ])
             );
@@ -632,6 +642,7 @@ describe('WebsocketMarketStreamsApi', () => {
                         { bs: 1, bnf: 0, bnc: 5000, mmr: 0.01, cf: 0, mi: 21, ma: 50 },
                         { bs: 2, bnf: 5000, bnc: 25000, mmr: 0.025, cf: 75, mi: 11, ma: 20 },
                     ],
+                    st: 1,
                 })
             );
 
@@ -664,6 +675,7 @@ describe('WebsocketMarketStreamsApi', () => {
                         { bs: 1, bnf: 0, bnc: 5000, mmr: 0.01, cf: 0, mi: 21, ma: 50 },
                         { bs: 2, bnf: 5000, bnc: 25000, mmr: 0.025, cf: 75, mi: 11, ma: 20 },
                     ],
+                    st: 1,
                 })
             );
 
@@ -706,6 +718,7 @@ describe('WebsocketMarketStreamsApi', () => {
                     pu: 17285675,
                     b: [['9517.6', '10']],
                     a: [['9518.5', '45']],
+                    st: 1,
                 })
             );
 
@@ -738,6 +751,7 @@ describe('WebsocketMarketStreamsApi', () => {
                     pu: 17285675,
                     b: [['9517.6', '10']],
                     a: [['9518.5', '45']],
+                    st: 1,
                 })
             );
 
@@ -998,13 +1012,14 @@ describe('WebsocketMarketStreamsApi', () => {
                     e: 'bookTicker',
                     u: 17242169,
                     s: 'BTCUSD_200626',
-                    ps: 'BTCUSD',
                     b: '9548.1',
                     B: '52',
                     a: '9548.5',
                     A: '11',
                     T: 1591268628155,
                     E: 1591268628166,
+                    ps: 'BTCUSD',
+                    st: 1,
                 })
             );
 
@@ -1029,13 +1044,14 @@ describe('WebsocketMarketStreamsApi', () => {
                     e: 'bookTicker',
                     u: 17242169,
                     s: 'BTCUSD_200626',
-                    ps: 'BTCUSD',
                     b: '9548.1',
                     B: '52',
                     a: '9548.5',
                     A: '11',
                     T: 1591268628155,
                     E: 1591268628166,
+                    ps: 'BTCUSD',
+                    st: 1,
                 })
             );
 
@@ -1096,6 +1112,7 @@ describe('WebsocketMarketStreamsApi', () => {
                     l: '7000.0',
                     v: '487476',
                     q: '33264343847.22378500',
+                    st: 1,
                 })
             );
 
@@ -1127,6 +1144,7 @@ describe('WebsocketMarketStreamsApi', () => {
                     l: '7000.0',
                     v: '487476',
                     q: '33264343847.22378500',
+                    st: 1,
                 })
             );
 
@@ -1177,7 +1195,6 @@ describe('WebsocketMarketStreamsApi', () => {
                     e: '24hrTicker',
                     E: 1591268262453,
                     s: 'BTCUSD_200626',
-                    ps: 'BTCUSD',
                     p: '-43.4',
                     P: '-0.452',
                     w: '0.00147974',
@@ -1193,6 +1210,8 @@ describe('WebsocketMarketStreamsApi', () => {
                     F: 512014,
                     L: 615289,
                     n: 103272,
+                    ps: 'BTCUSD',
+                    st: 1,
                 })
             );
 
@@ -1217,7 +1236,6 @@ describe('WebsocketMarketStreamsApi', () => {
                     e: '24hrTicker',
                     E: 1591268262453,
                     s: 'BTCUSD_200626',
-                    ps: 'BTCUSD',
                     p: '-43.4',
                     P: '-0.452',
                     w: '0.00147974',
@@ -1233,6 +1251,8 @@ describe('WebsocketMarketStreamsApi', () => {
                     F: 512014,
                     L: 615289,
                     n: 103272,
+                    ps: 'BTCUSD',
+                    st: 1,
                 })
             );
 
@@ -1654,6 +1674,7 @@ describe('WebsocketMarketStreamsApi', () => {
                         i: '10933.62615417',
                         r: '',
                         T: 0,
+                        st: 1,
                     },
                     {
                         e: 'markPriceUpdate',
@@ -1664,6 +1685,7 @@ describe('WebsocketMarketStreamsApi', () => {
                         i: '10933.62615417',
                         r: '0.00000000',
                         T: 1596096000000,
+                        st: 1,
                     },
                 ])
             );
@@ -1696,6 +1718,7 @@ describe('WebsocketMarketStreamsApi', () => {
                         i: '10933.62615417',
                         r: '',
                         T: 0,
+                        st: 1,
                     },
                     {
                         e: 'markPriceUpdate',
@@ -1706,6 +1729,7 @@ describe('WebsocketMarketStreamsApi', () => {
                         i: '10933.62615417',
                         r: '0.00000000',
                         T: 1596096000000,
+                        st: 1,
                     },
                 ])
             );
@@ -1763,6 +1787,7 @@ describe('WebsocketMarketStreamsApi', () => {
                     i: '10933.62615417',
                     r: '',
                     T: 0,
+                    st: 1,
                 })
             );
 
@@ -1793,6 +1818,7 @@ describe('WebsocketMarketStreamsApi', () => {
                     i: '10933.62615417',
                     r: '',
                     T: 0,
+                    st: 1,
                 })
             );
 
@@ -1864,6 +1890,7 @@ describe('WebsocketMarketStreamsApi', () => {
                         ['9525.1', '10'],
                         ['9525.3', '6'],
                     ],
+                    st: 1,
                 })
             );
 
@@ -1909,6 +1936,7 @@ describe('WebsocketMarketStreamsApi', () => {
                         ['9525.1', '10'],
                         ['9525.3', '6'],
                     ],
+                    st: 1,
                 })
             );
 

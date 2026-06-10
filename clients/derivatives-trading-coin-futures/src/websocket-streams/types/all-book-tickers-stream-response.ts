@@ -42,12 +42,6 @@ export interface AllBookTickersStreamResponse {
      * @type {string}
      * @memberof AllBookTickersStreamResponse
      */
-    ps?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof AllBookTickersStreamResponse
-     */
     b?: string;
     /**
      *
@@ -79,4 +73,16 @@ export interface AllBookTickersStreamResponse {
      * @memberof AllBookTickersStreamResponse
      */
     E?: number | bigint;
+    /**
+     *
+     * @type {string}
+     * @memberof AllBookTickersStreamResponse
+     */
+    ps?: string;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof AllBookTickersStreamResponse
+     */
+    st?: number | bigint;
 }

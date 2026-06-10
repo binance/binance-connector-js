@@ -42,4 +42,10 @@ export interface AllMarketLiquidationOrderStreamsResponse {
      * @memberof AllMarketLiquidationOrderStreamsResponse
      */
     o?: AllMarketLiquidationOrderStreamsResponseO;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof AllMarketLiquidationOrderStreamsResponse
+     */
+    st?: number | bigint;
 }

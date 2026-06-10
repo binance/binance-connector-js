@@ -78,4 +78,10 @@ export interface ContractInfoStreamResponse {
      * @memberof ContractInfoStreamResponse
      */
     bks?: Array<ContractInfoStreamResponseBksInner>;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof ContractInfoStreamResponse
+     */
+    st?: number | bigint;
 }

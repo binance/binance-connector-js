@@ -47,7 +47,7 @@ export interface TradeApiInterface {
      * Order modify function, currently only LIMIT order modification is supported, modified orders will be reordered in the match queue
      *
      * Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
-     * Both `quantity` and `price` must be sent, which is different from dapi modify order endpoint.
+     * Both `quantity` and `price` must be sent.
      * When the new `quantity` or `price` doesn't satisfy PRICE_FILTER / PERCENT_FILTER / LOT_SIZE, amendment will be rejected and the order will stay as it is.
      * However the order will be cancelled by the amendment in the following situations:
      * when the order is in partially filled status and the new `quantity` <= `executedQty`
@@ -279,7 +279,7 @@ export interface NewOrderRequest {
     readonly side: NewOrderSideEnum;
 
     /**
-     * `LIMIT`, `MARKET`, `STOP`, `STOP_MARKET`, `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`, `TRAILING_STOP_MARKET`
+     * `LIMIT`, `MARKET`, `STOP`, `STOP_MARKET`, `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`, `TRAILING_STOP_MARKET`. **After CM migration, stop-type values (`STOP`, `STOP_MARKET`, `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`, `TRAILING_STOP_MARKET`) are no longer accepted and will return `-4120`. Use the REST `/dapi/v1/algoOrder` endpoint instead.**
      * @type {'LIMIT' | 'MARKET' | 'STOP' | 'STOP_MARKET' | 'TAKE_PROFIT' | 'TAKE_PROFIT_MARKET' | 'TRAILING_STOP_MARKET'}
      * @memberof TradeApiNewOrder
      */
@@ -370,7 +370,7 @@ export interface NewOrderRequest {
     readonly workingType?: NewOrderWorkingTypeEnum;
 
     /**
-     * "TRUE" or "FALSE", default "FALSE". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
+     * "true" or "false", default "false". Used with `STOP/STOP_MARKET` or `TAKE_PROFIT/TAKE_PROFIT_MARKET` orders.
      * @type {string}
      * @memberof TradeApiNewOrder
      */
@@ -519,7 +519,7 @@ export class TradeApi implements TradeApiInterface {
      * Order modify function, currently only LIMIT order modification is supported, modified orders will be reordered in the match queue
      *
      * Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
-     * Both `quantity` and `price` must be sent, which is different from dapi modify order endpoint.
+     * Both `quantity` and `price` must be sent.
      * When the new `quantity` or `price` doesn't satisfy PRICE_FILTER / PERCENT_FILTER / LOT_SIZE, amendment will be rejected and the order will stay as it is.
      * However the order will be cancelled by the amendment in the following situations:
      * when the order is in partially filled status and the new `quantity` <= `executedQty`

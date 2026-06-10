@@ -79,4 +79,10 @@ export interface AllMarketMiniTickersStreamResponseInner {
      * @memberof AllMarketMiniTickersStreamResponseInner
      */
     q?: string;
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof AllMarketMiniTickersStreamResponseInner
+     */
+    st?: number | bigint;
 }
