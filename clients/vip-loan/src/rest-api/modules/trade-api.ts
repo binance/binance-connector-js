@@ -19,7 +19,12 @@ import {
     sendRequest,
     type RequestArgs,
 } from '@binance/common';
-import type { VipLoanBorrowResponse, VipLoanRenewResponse, VipLoanRepayResponse } from '../types';
+import type {
+    VipLoanBorrowResponse,
+    VipLoanFixedRateBorrowResponse,
+    VipLoanRenewResponse,
+    VipLoanRepayResponse,
+} from '../types';
 
 /**
  * TradeApi - axios parameter creator
@@ -41,7 +46,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * @param {string} loanCoin
          * @param {number} loanAmount
          * @param {string} collateralAccountId Multiple split by `,`
-         * @param {string} collateralCoin Multiple split by `,`
+         * @param {string} collateralCoin Collateral coin(s), multiple separated by `,`. Only coin names, no amount (VIP loan collateral amount = entire spot account balance)
          * @param {boolean} isFlexibleRate Default: TRUE. TRUE : flexible rate; FALSE: fixed rate
          * @param {number | bigint} [loanTerm] Mandatory for fixed rate. Optional for fixed interest rate. Eg: 30/60 days
          * @param {number | bigint} [recvWindow]
@@ -105,6 +110,90 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
 
             return {
                 endpoint: '/sapi/v1/loan/vip/borrow',
+                method: 'POST',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Submit a fixed rate borrow request by matching market supply orders.
+         *
+         * **Rate limit:** 2 requests per second per account.
+         * When multiple `supplyRequest` entries are provided, all `requestId` values must correspond to the same `borrowCoin` and `loanTerm` (validated by collateral facade).
+         *
+         * Weight: 6000
+         *
+         * @summary VIP Loan Fixed Rate Borrow(TRADE)
+         * @param {string} supplyRequest Supply request string, positional encoding (no key). Multiple entries separated by `;`, fields separated by `:`, order: `<requestId>:<interestRate>:<amount>`. Example: `1212:0.12:100;3434:0.13:50`
+         * @param {string} borrowCoin Borrow coin
+         * @param {number | bigint} loanTerm 30/60 days
+         * @param {number | bigint} borrowUid Borrow receiving account UID
+         * @param {string} collateralCoin Collateral coin(s), multiple separated by `,`. Only coin names, no amount (VIP loan collateral amount = entire spot account balance)
+         * @param {string} collateralAccountId Multiple split by `,`
+         * @param {boolean} [autoRepay] Default: `true`. `true`: auto repay at expiration; `false`: auto-convert to flexible (floating rate) at expiration
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        vipLoanFixedRateBorrow: async (
+            supplyRequest: string,
+            borrowCoin: string,
+            loanTerm: number | bigint,
+            borrowUid: number | bigint,
+            collateralCoin: string,
+            collateralAccountId: string,
+            autoRepay?: boolean,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'supplyRequest' is not null or undefined
+            assertParamExists('vipLoanFixedRateBorrow', 'supplyRequest', supplyRequest);
+            // verify required parameter 'borrowCoin' is not null or undefined
+            assertParamExists('vipLoanFixedRateBorrow', 'borrowCoin', borrowCoin);
+            // verify required parameter 'loanTerm' is not null or undefined
+            assertParamExists('vipLoanFixedRateBorrow', 'loanTerm', loanTerm);
+            // verify required parameter 'borrowUid' is not null or undefined
+            assertParamExists('vipLoanFixedRateBorrow', 'borrowUid', borrowUid);
+            // verify required parameter 'collateralCoin' is not null or undefined
+            assertParamExists('vipLoanFixedRateBorrow', 'collateralCoin', collateralCoin);
+            // verify required parameter 'collateralAccountId' is not null or undefined
+            assertParamExists('vipLoanFixedRateBorrow', 'collateralAccountId', collateralAccountId);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (supplyRequest !== undefined && supplyRequest !== null) {
+                localVarQueryParameter['supplyRequest'] = supplyRequest;
+            }
+            if (borrowCoin !== undefined && borrowCoin !== null) {
+                localVarQueryParameter['borrowCoin'] = borrowCoin;
+            }
+            if (loanTerm !== undefined && loanTerm !== null) {
+                localVarQueryParameter['loanTerm'] = loanTerm;
+            }
+            if (borrowUid !== undefined && borrowUid !== null) {
+                localVarQueryParameter['borrowUid'] = borrowUid;
+            }
+            if (collateralCoin !== undefined && collateralCoin !== null) {
+                localVarQueryParameter['collateralCoin'] = collateralCoin;
+            }
+            if (collateralAccountId !== undefined && collateralAccountId !== null) {
+                localVarQueryParameter['collateralAccountId'] = collateralAccountId;
+            }
+            if (autoRepay !== undefined && autoRepay !== null) {
+                localVarQueryParameter['autoRepay'] = autoRepay;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/loan/vip/fixed/borrow',
                 method: 'POST',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
@@ -236,6 +325,23 @@ export interface TradeApiInterface {
         requestParameters: VipLoanBorrowRequest
     ): Promise<RestApiResponse<VipLoanBorrowResponse>>;
     /**
+     * Submit a fixed rate borrow request by matching market supply orders.
+     *
+     * **Rate limit:** 2 requests per second per account.
+     * When multiple `supplyRequest` entries are provided, all `requestId` values must correspond to the same `borrowCoin` and `loanTerm` (validated by collateral facade).
+     *
+     * Weight: 6000
+     *
+     * @summary VIP Loan Fixed Rate Borrow(TRADE)
+     * @param {VipLoanFixedRateBorrowRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApiInterface
+     */
+    vipLoanFixedRateBorrow(
+        requestParameters: VipLoanFixedRateBorrowRequest
+    ): Promise<RestApiResponse<VipLoanFixedRateBorrowResponse>>;
+    /**
      * VIP loan is available for VIP users only.
      *
      * Weight: 6000
@@ -299,7 +405,7 @@ export interface VipLoanBorrowRequest {
     readonly collateralAccountId: string;
 
     /**
-     * Multiple split by `,`
+     * Collateral coin(s), multiple separated by `,`. Only coin names, no amount (VIP loan collateral amount = entire spot account balance)
      * @type {string}
      * @memberof TradeApiVipLoanBorrow
      */
@@ -323,6 +429,68 @@ export interface VipLoanBorrowRequest {
      *
      * @type {number | bigint}
      * @memberof TradeApiVipLoanBorrow
+     */
+    readonly recvWindow?: number | bigint;
+}
+
+/**
+ * Request parameters for vipLoanFixedRateBorrow operation in TradeApi.
+ * @interface VipLoanFixedRateBorrowRequest
+ */
+export interface VipLoanFixedRateBorrowRequest {
+    /**
+     * Supply request string, positional encoding (no key). Multiple entries separated by `;`, fields separated by `:`, order: `<requestId>:<interestRate>:<amount>`. Example: `1212:0.12:100;3434:0.13:50`
+     * @type {string}
+     * @memberof TradeApiVipLoanFixedRateBorrow
+     */
+    readonly supplyRequest: string;
+
+    /**
+     * Borrow coin
+     * @type {string}
+     * @memberof TradeApiVipLoanFixedRateBorrow
+     */
+    readonly borrowCoin: string;
+
+    /**
+     * 30/60 days
+     * @type {number | bigint}
+     * @memberof TradeApiVipLoanFixedRateBorrow
+     */
+    readonly loanTerm: number | bigint;
+
+    /**
+     * Borrow receiving account UID
+     * @type {number | bigint}
+     * @memberof TradeApiVipLoanFixedRateBorrow
+     */
+    readonly borrowUid: number | bigint;
+
+    /**
+     * Collateral coin(s), multiple separated by `,`. Only coin names, no amount (VIP loan collateral amount = entire spot account balance)
+     * @type {string}
+     * @memberof TradeApiVipLoanFixedRateBorrow
+     */
+    readonly collateralCoin: string;
+
+    /**
+     * Multiple split by `,`
+     * @type {string}
+     * @memberof TradeApiVipLoanFixedRateBorrow
+     */
+    readonly collateralAccountId: string;
+
+    /**
+     * Default: `true`. `true`: auto repay at expiration; `false`: auto-convert to flexible (floating rate) at expiration
+     * @type {boolean}
+     * @memberof TradeApiVipLoanFixedRateBorrow
+     */
+    readonly autoRepay?: boolean;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof TradeApiVipLoanFixedRateBorrow
      */
     readonly recvWindow?: number | bigint;
 }
@@ -425,6 +593,46 @@ export class TradeApi implements TradeApiInterface {
             requestParameters?.recvWindow
         );
         return sendRequest<VipLoanBorrowResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Submit a fixed rate borrow request by matching market supply orders.
+     *
+     * **Rate limit:** 2 requests per second per account.
+     * When multiple `supplyRequest` entries are provided, all `requestId` values must correspond to the same `borrowCoin` and `loanTerm` (validated by collateral facade).
+     *
+     * Weight: 6000
+     *
+     * @summary VIP Loan Fixed Rate Borrow(TRADE)
+     * @param {VipLoanFixedRateBorrowRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<VipLoanFixedRateBorrowResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof TradeApi
+     * @see {@link https://developers.binance.com/docs/vip_loan/trade/VIP-Loan-Fixed-Rate-Borrow Binance API Documentation}
+     */
+    public async vipLoanFixedRateBorrow(
+        requestParameters: VipLoanFixedRateBorrowRequest
+    ): Promise<RestApiResponse<VipLoanFixedRateBorrowResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.vipLoanFixedRateBorrow(
+            requestParameters?.supplyRequest,
+            requestParameters?.borrowCoin,
+            requestParameters?.loanTerm,
+            requestParameters?.borrowUid,
+            requestParameters?.collateralCoin,
+            requestParameters?.collateralAccountId,
+            requestParameters?.autoRepay,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<VipLoanFixedRateBorrowResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

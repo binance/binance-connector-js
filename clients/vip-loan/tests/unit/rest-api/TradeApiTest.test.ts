@@ -18,11 +18,13 @@ import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 import { TradeApi } from '../../../src/rest-api';
 import {
     VipLoanBorrowRequest,
+    VipLoanFixedRateBorrowRequest,
     VipLoanRenewRequest,
     VipLoanRepayRequest,
 } from '../../../src/rest-api';
 import type {
     VipLoanBorrowResponse,
+    VipLoanFixedRateBorrowResponse,
     VipLoanRenewResponse,
     VipLoanRepayResponse,
 } from '../../../src/rest-api/types';
@@ -241,6 +243,216 @@ describe('TradeApi', () => {
             mockError.response = { status: 400, data: errorResponse };
             const spy = jest.spyOn(client, 'vipLoanBorrow').mockRejectedValueOnce(mockError);
             await expect(client.vipLoanBorrow(params)).rejects.toThrow('ResponseError');
+            spy.mockRestore();
+        });
+    });
+
+    describe('vipLoanFixedRateBorrow()', () => {
+        it('should execute vipLoanFixedRateBorrow() successfully with required parameters only', async () => {
+            const params: VipLoanFixedRateBorrowRequest = {
+                supplyRequest: 'supplyRequest_example',
+                borrowCoin: 'borrowCoin_example',
+                loanTerm: 789,
+                borrowUid: 789,
+                collateralCoin: 'collateralCoin_example',
+                collateralAccountId: '1',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    borrowCoin: 'BUSD',
+                    borrowAmount: '100.5',
+                    actualReceivedAmount: '98.75',
+                    collateralCoin: 'BNB,ETH,BTC',
+                    collateralAccountId: '12345,67890,13579',
+                    borrowInterestRate: '0.01501231',
+                    duration: '30Days',
+                    autoRepay: true,
+                    orderId: 123456789,
+                    status: 'Succeeds',
+                })
+            );
+
+            const spy = jest.spyOn(client, 'vipLoanFixedRateBorrow').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<VipLoanFixedRateBorrowResponse>)
+            );
+            const response = await client.vipLoanFixedRateBorrow(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute vipLoanFixedRateBorrow() successfully with optional parameters', async () => {
+            const params: VipLoanFixedRateBorrowRequest = {
+                supplyRequest: 'supplyRequest_example',
+                borrowCoin: 'borrowCoin_example',
+                loanTerm: 789,
+                borrowUid: 789,
+                collateralCoin: 'collateralCoin_example',
+                collateralAccountId: '1',
+                autoRepay: false,
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    borrowCoin: 'BUSD',
+                    borrowAmount: '100.5',
+                    actualReceivedAmount: '98.75',
+                    collateralCoin: 'BNB,ETH,BTC',
+                    collateralAccountId: '12345,67890,13579',
+                    borrowInterestRate: '0.01501231',
+                    duration: '30Days',
+                    autoRepay: true,
+                    orderId: 123456789,
+                    status: 'Succeeds',
+                })
+            );
+
+            const spy = jest.spyOn(client, 'vipLoanFixedRateBorrow').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<VipLoanFixedRateBorrowResponse>)
+            );
+            const response = await client.vipLoanFixedRateBorrow(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when supplyRequest is missing', async () => {
+            const _params: VipLoanFixedRateBorrowRequest = {
+                supplyRequest: 'supplyRequest_example',
+                borrowCoin: 'borrowCoin_example',
+                loanTerm: 789,
+                borrowUid: 789,
+                collateralCoin: 'collateralCoin_example',
+                collateralAccountId: '1',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.supplyRequest;
+
+            await expect(client.vipLoanFixedRateBorrow(params)).rejects.toThrow(
+                'Required parameter supplyRequest was null or undefined when calling vipLoanFixedRateBorrow.'
+            );
+        });
+
+        it('should throw RequiredError when borrowCoin is missing', async () => {
+            const _params: VipLoanFixedRateBorrowRequest = {
+                supplyRequest: 'supplyRequest_example',
+                borrowCoin: 'borrowCoin_example',
+                loanTerm: 789,
+                borrowUid: 789,
+                collateralCoin: 'collateralCoin_example',
+                collateralAccountId: '1',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.borrowCoin;
+
+            await expect(client.vipLoanFixedRateBorrow(params)).rejects.toThrow(
+                'Required parameter borrowCoin was null or undefined when calling vipLoanFixedRateBorrow.'
+            );
+        });
+
+        it('should throw RequiredError when loanTerm is missing', async () => {
+            const _params: VipLoanFixedRateBorrowRequest = {
+                supplyRequest: 'supplyRequest_example',
+                borrowCoin: 'borrowCoin_example',
+                loanTerm: 789,
+                borrowUid: 789,
+                collateralCoin: 'collateralCoin_example',
+                collateralAccountId: '1',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.loanTerm;
+
+            await expect(client.vipLoanFixedRateBorrow(params)).rejects.toThrow(
+                'Required parameter loanTerm was null or undefined when calling vipLoanFixedRateBorrow.'
+            );
+        });
+
+        it('should throw RequiredError when borrowUid is missing', async () => {
+            const _params: VipLoanFixedRateBorrowRequest = {
+                supplyRequest: 'supplyRequest_example',
+                borrowCoin: 'borrowCoin_example',
+                loanTerm: 789,
+                borrowUid: 789,
+                collateralCoin: 'collateralCoin_example',
+                collateralAccountId: '1',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.borrowUid;
+
+            await expect(client.vipLoanFixedRateBorrow(params)).rejects.toThrow(
+                'Required parameter borrowUid was null or undefined when calling vipLoanFixedRateBorrow.'
+            );
+        });
+
+        it('should throw RequiredError when collateralCoin is missing', async () => {
+            const _params: VipLoanFixedRateBorrowRequest = {
+                supplyRequest: 'supplyRequest_example',
+                borrowCoin: 'borrowCoin_example',
+                loanTerm: 789,
+                borrowUid: 789,
+                collateralCoin: 'collateralCoin_example',
+                collateralAccountId: '1',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.collateralCoin;
+
+            await expect(client.vipLoanFixedRateBorrow(params)).rejects.toThrow(
+                'Required parameter collateralCoin was null or undefined when calling vipLoanFixedRateBorrow.'
+            );
+        });
+
+        it('should throw RequiredError when collateralAccountId is missing', async () => {
+            const _params: VipLoanFixedRateBorrowRequest = {
+                supplyRequest: 'supplyRequest_example',
+                borrowCoin: 'borrowCoin_example',
+                loanTerm: 789,
+                borrowUid: 789,
+                collateralCoin: 'collateralCoin_example',
+                collateralAccountId: '1',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.collateralAccountId;
+
+            await expect(client.vipLoanFixedRateBorrow(params)).rejects.toThrow(
+                'Required parameter collateralAccountId was null or undefined when calling vipLoanFixedRateBorrow.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: VipLoanFixedRateBorrowRequest = {
+                supplyRequest: 'supplyRequest_example',
+                borrowCoin: 'borrowCoin_example',
+                loanTerm: 789,
+                borrowUid: 789,
+                collateralCoin: 'collateralCoin_example',
+                collateralAccountId: '1',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'vipLoanFixedRateBorrow')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.vipLoanFixedRateBorrow(params)).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });

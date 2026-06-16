@@ -89,7 +89,7 @@ const UserInformationApiAxiosParamCreator = function (configuration: Configurati
          * @param {string} [loanCoin]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
+         * @param {number | bigint} [current] Page number, default 1, minimum 1
          * @param {number | bigint} [limit] Default: 10; max: 100
          * @param {number | bigint} [recvWindow]
          *
@@ -152,7 +152,7 @@ const UserInformationApiAxiosParamCreator = function (configuration: Configurati
          * @param {number | bigint} [collateralAccountId]
          * @param {string} [loanCoin]
          * @param {string} [collateralCoin]
-         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
+         * @param {number | bigint} [current] Page number, default 1, minimum 1
          * @param {number | bigint} [limit] Default: 10; max: 100
          * @param {number | bigint} [recvWindow]
          *
@@ -211,7 +211,7 @@ const UserInformationApiAxiosParamCreator = function (configuration: Configurati
          * Weight: 400
          *
          * @summary Query Application Status(USER_DATA)
-         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
+         * @param {number | bigint} [current] Page number, default 1, minimum 1
          * @param {number | bigint} [limit] Default: 10; max: 100
          * @param {number | bigint} [recvWindow]
          *
@@ -381,7 +381,7 @@ export interface GetVIPLoanAccruedInterestRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Current querying page. Start from 1; default: 1; max: 1000
+     * Page number, default 1, minimum 1
      * @type {number | bigint}
      * @memberof UserInformationApiGetVIPLoanAccruedInterest
      */
@@ -436,7 +436,7 @@ export interface GetVIPLoanOngoingOrdersRequest {
     readonly collateralCoin?: string;
 
     /**
-     * Current querying page. Start from 1; default: 1; max: 1000
+     * Page number, default 1, minimum 1
      * @type {number | bigint}
      * @memberof UserInformationApiGetVIPLoanOngoingOrders
      */
@@ -463,7 +463,7 @@ export interface GetVIPLoanOngoingOrdersRequest {
  */
 export interface QueryApplicationStatusRequest {
     /**
-     * Current querying page. Start from 1; default: 1; max: 1000
+     * Page number, default 1, minimum 1
      * @type {number | bigint}
      * @memberof UserInformationApiQueryApplicationStatus
      */

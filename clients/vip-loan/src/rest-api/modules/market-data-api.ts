@@ -24,6 +24,7 @@ import type {
     GetCollateralAssetDataResponse,
     GetLoanableAssetsDataResponse,
     GetVIPLoanInterestRateHistoryResponse,
+    QueryVIPLoanFixedRateMarketResponse,
 } from '../types';
 
 /**
@@ -167,7 +168,7 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
          * @param {number | bigint} recvWindow
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Current querying page. Start from 1; default: 1; max: 1000
+         * @param {number | bigint} [current] Page number, default 1, minimum 1
          * @param {number | bigint} [limit] Default: 10; max: 100
          *
          * @throws {RequiredError}
@@ -213,6 +214,62 @@ const MarketDataApiAxiosParamCreator = function (configuration: ConfigurationRes
 
             return {
                 endpoint: '/sapi/v1/loan/vip/interestRateHistory',
+                method: 'GET',
+                queryParams: localVarQueryParameter,
+                bodyParams: localVarBodyParameter,
+                headerParams: localVarHeaderParameter,
+                timeUnit: _timeUnit,
+            };
+        },
+        /**
+         * Query the VIP Loan fixed rate market. Returns a paginated list of fixed-rate supply orders.
+         *
+         * Weight: 6000
+         *
+         * @summary Query VIP Loan Fixed Rate Market(USER_DATA)
+         * @param {string} loanCoin
+         * @param {number | bigint} [duration] Duration in days, minimum 1
+         * @param {number | bigint} [current] Page number, default 1, minimum 1
+         * @param {number | bigint} [size] Page size, default 10, range [1, 100]
+         * @param {number | bigint} [recvWindow]
+         *
+         * @throws {RequiredError}
+         */
+        queryVIPLoanFixedRateMarket: async (
+            loanCoin: string,
+            duration?: number | bigint,
+            current?: number | bigint,
+            size?: number | bigint,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
+            // verify required parameter 'loanCoin' is not null or undefined
+            assertParamExists('queryVIPLoanFixedRateMarket', 'loanCoin', loanCoin);
+
+            const localVarQueryParameter: Record<string, unknown> = {};
+            const localVarBodyParameter: Record<string, unknown> = {};
+            const localVarHeaderParameter: Record<string, unknown> = {};
+
+            if (loanCoin !== undefined && loanCoin !== null) {
+                localVarQueryParameter['loanCoin'] = loanCoin;
+            }
+            if (duration !== undefined && duration !== null) {
+                localVarQueryParameter['duration'] = duration;
+            }
+            if (current !== undefined && current !== null) {
+                localVarQueryParameter['current'] = current;
+            }
+            if (size !== undefined && size !== null) {
+                localVarQueryParameter['size'] = size;
+            }
+            if (recvWindow !== undefined && recvWindow !== null) {
+                localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            let _timeUnit: TimeUnit | undefined;
+            if ('timeUnit' in configuration) _timeUnit = configuration.timeUnit as TimeUnit;
+
+            return {
+                endpoint: '/sapi/v1/loan/vip/fixed/market',
                 method: 'GET',
                 queryParams: localVarQueryParameter,
                 bodyParams: localVarBodyParameter,
@@ -288,6 +345,20 @@ export interface MarketDataApiInterface {
     getVIPLoanInterestRateHistory(
         requestParameters: GetVIPLoanInterestRateHistoryRequest
     ): Promise<RestApiResponse<GetVIPLoanInterestRateHistoryResponse>>;
+    /**
+     * Query the VIP Loan fixed rate market. Returns a paginated list of fixed-rate supply orders.
+     *
+     * Weight: 6000
+     *
+     * @summary Query VIP Loan Fixed Rate Market(USER_DATA)
+     * @param {QueryVIPLoanFixedRateMarketRequest} requestParameters Request parameters.
+     *
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApiInterface
+     */
+    queryVIPLoanFixedRateMarket(
+        requestParameters: QueryVIPLoanFixedRateMarketRequest
+    ): Promise<RestApiResponse<QueryVIPLoanFixedRateMarketResponse>>;
 }
 
 /**
@@ -391,7 +462,7 @@ export interface GetVIPLoanInterestRateHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Current querying page. Start from 1; default: 1; max: 1000
+     * Page number, default 1, minimum 1
      * @type {number | bigint}
      * @memberof MarketDataApiGetVIPLoanInterestRateHistory
      */
@@ -403,6 +474,47 @@ export interface GetVIPLoanInterestRateHistoryRequest {
      * @memberof MarketDataApiGetVIPLoanInterestRateHistory
      */
     readonly limit?: number | bigint;
+}
+
+/**
+ * Request parameters for queryVIPLoanFixedRateMarket operation in MarketDataApi.
+ * @interface QueryVIPLoanFixedRateMarketRequest
+ */
+export interface QueryVIPLoanFixedRateMarketRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof MarketDataApiQueryVIPLoanFixedRateMarket
+     */
+    readonly loanCoin: string;
+
+    /**
+     * Duration in days, minimum 1
+     * @type {number | bigint}
+     * @memberof MarketDataApiQueryVIPLoanFixedRateMarket
+     */
+    readonly duration?: number | bigint;
+
+    /**
+     * Page number, default 1, minimum 1
+     * @type {number | bigint}
+     * @memberof MarketDataApiQueryVIPLoanFixedRateMarket
+     */
+    readonly current?: number | bigint;
+
+    /**
+     * Page size, default 10, range [1, 100]
+     * @type {number | bigint}
+     * @memberof MarketDataApiQueryVIPLoanFixedRateMarket
+     */
+    readonly size?: number | bigint;
+
+    /**
+     *
+     * @type {number | bigint}
+     * @memberof MarketDataApiQueryVIPLoanFixedRateMarket
+     */
+    readonly recvWindow?: number | bigint;
 }
 
 /**
@@ -541,6 +653,40 @@ export class MarketDataApi implements MarketDataApiInterface {
                 requestParameters?.limit
             );
         return sendRequest<GetVIPLoanInterestRateHistoryResponse>(
+            this.configuration,
+            localVarAxiosArgs.endpoint,
+            localVarAxiosArgs.method,
+            localVarAxiosArgs.queryParams,
+            localVarAxiosArgs.bodyParams,
+            localVarAxiosArgs.headerParams,
+            localVarAxiosArgs?.timeUnit,
+            { isSigned: true }
+        );
+    }
+
+    /**
+     * Query the VIP Loan fixed rate market. Returns a paginated list of fixed-rate supply orders.
+     *
+     * Weight: 6000
+     *
+     * @summary Query VIP Loan Fixed Rate Market(USER_DATA)
+     * @param {QueryVIPLoanFixedRateMarketRequest} requestParameters Request parameters.
+     * @returns {Promise<RestApiResponse<QueryVIPLoanFixedRateMarketResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @memberof MarketDataApi
+     * @see {@link https://developers.binance.com/docs/vip_loan/market-data/Query-VIP-Loan-Fixed-Rate-Market Binance API Documentation}
+     */
+    public async queryVIPLoanFixedRateMarket(
+        requestParameters: QueryVIPLoanFixedRateMarketRequest
+    ): Promise<RestApiResponse<QueryVIPLoanFixedRateMarketResponse>> {
+        const localVarAxiosArgs = await this.localVarAxiosParamCreator.queryVIPLoanFixedRateMarket(
+            requestParameters?.loanCoin,
+            requestParameters?.duration,
+            requestParameters?.current,
+            requestParameters?.size,
+            requestParameters?.recvWindow
+        );
+        return sendRequest<QueryVIPLoanFixedRateMarketResponse>(
             this.configuration,
             localVarAxiosArgs.endpoint,
             localVarAxiosArgs.method,

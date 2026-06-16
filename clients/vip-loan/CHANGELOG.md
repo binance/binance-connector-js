@@ -1,5 +1,12 @@
 # Changelog
 
+## 9.0.0 - 2026-06-16
+
+### Added (2)
+
+- `queryVIPLoanFixedRateMarket()` (`GET /sapi/v1/loan/vip/fixed/market`)
+- `vipLoanFixedRateBorrow()` (`POST /sapi/v1/loan/vip/fixed/borrow`)
+
 ## 8.0.13 - 2026-06-02
 
 ### Changed (1)

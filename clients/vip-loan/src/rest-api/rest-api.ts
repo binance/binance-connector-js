@@ -21,9 +21,11 @@ import type {
     GetCollateralAssetDataRequest,
     GetLoanableAssetsDataRequest,
     GetVIPLoanInterestRateHistoryRequest,
+    QueryVIPLoanFixedRateMarketRequest,
 } from './modules/market-data-api';
 import type {
     VipLoanBorrowRequest,
+    VipLoanFixedRateBorrowRequest,
     VipLoanRenewRequest,
     VipLoanRepayRequest,
 } from './modules/trade-api';
@@ -39,8 +41,14 @@ import type {
     GetCollateralAssetDataResponse,
     GetLoanableAssetsDataResponse,
     GetVIPLoanInterestRateHistoryResponse,
+    QueryVIPLoanFixedRateMarketResponse,
 } from './types';
-import type { VipLoanBorrowResponse, VipLoanRenewResponse, VipLoanRepayResponse } from './types';
+import type {
+    VipLoanBorrowResponse,
+    VipLoanFixedRateBorrowResponse,
+    VipLoanRenewResponse,
+    VipLoanRepayResponse,
+} from './types';
 import type {
     CheckVIPLoanCollateralAccountResponse,
     GetVIPLoanAccruedInterestResponse,
@@ -191,6 +199,24 @@ export class RestAPI {
     }
 
     /**
+     * Query the VIP Loan fixed rate market. Returns a paginated list of fixed-rate supply orders.
+     *
+     * Weight: 6000
+     *
+     * @summary Query VIP Loan Fixed Rate Market(USER_DATA)
+     * @param {QueryVIPLoanFixedRateMarketRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<QueryVIPLoanFixedRateMarketResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/vip_loan/market-data/Query-VIP-Loan-Fixed-Rate-Market Binance API Documentation}
+     */
+    queryVIPLoanFixedRateMarket(
+        requestParameters: QueryVIPLoanFixedRateMarketRequest
+    ): Promise<RestApiResponse<QueryVIPLoanFixedRateMarketResponse>> {
+        return this.marketDataApi.queryVIPLoanFixedRateMarket(requestParameters);
+    }
+
+    /**
      * VIP loan is available for VIP users only.
      *
      * loanAccountId refer to loan receiving account
@@ -211,6 +237,27 @@ export class RestAPI {
         requestParameters: VipLoanBorrowRequest
     ): Promise<RestApiResponse<VipLoanBorrowResponse>> {
         return this.tradeApi.vipLoanBorrow(requestParameters);
+    }
+
+    /**
+     * Submit a fixed rate borrow request by matching market supply orders.
+     *
+     * **Rate limit:** 2 requests per second per account.
+     * When multiple `supplyRequest` entries are provided, all `requestId` values must correspond to the same `borrowCoin` and `loanTerm` (validated by collateral facade).
+     *
+     * Weight: 6000
+     *
+     * @summary VIP Loan Fixed Rate Borrow(TRADE)
+     * @param {VipLoanFixedRateBorrowRequest} requestParameters Request parameters.
+     *
+     * @returns {Promise<RestApiResponse<VipLoanFixedRateBorrowResponse>>}
+     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
+     * @see {@link https://developers.binance.com/docs/vip_loan/trade/VIP-Loan-Fixed-Rate-Borrow Binance API Documentation}
+     */
+    vipLoanFixedRateBorrow(
+        requestParameters: VipLoanFixedRateBorrowRequest
+    ): Promise<RestApiResponse<VipLoanFixedRateBorrowResponse>> {
+        return this.tradeApi.vipLoanFixedRateBorrow(requestParameters);
     }
 
     /**

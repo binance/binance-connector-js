@@ -21,12 +21,14 @@ import {
     GetCollateralAssetDataRequest,
     GetLoanableAssetsDataRequest,
     GetVIPLoanInterestRateHistoryRequest,
+    QueryVIPLoanFixedRateMarketRequest,
 } from '../../../src/rest-api';
 import type {
     GetBorrowInterestRateResponse,
     GetCollateralAssetDataResponse,
     GetLoanableAssetsDataResponse,
     GetVIPLoanInterestRateHistoryResponse,
+    QueryVIPLoanFixedRateMarketResponse,
 } from '../../../src/rest-api/types';
 
 describe('MarketDataApi', () => {
@@ -442,6 +444,121 @@ describe('MarketDataApi', () => {
                 .spyOn(client, 'getVIPLoanInterestRateHistory')
                 .mockRejectedValueOnce(mockError);
             await expect(client.getVIPLoanInterestRateHistory(params)).rejects.toThrow(
+                'ResponseError'
+            );
+            spy.mockRestore();
+        });
+    });
+
+    describe('queryVIPLoanFixedRateMarket()', () => {
+        it('should execute queryVIPLoanFixedRateMarket() successfully with required parameters only', async () => {
+            const params: QueryVIPLoanFixedRateMarketRequest = {
+                loanCoin: 'loanCoin_example',
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 25,
+                    rows: [
+                        {
+                            requestId: 1234567890,
+                            requestNo: 100001,
+                            coin: 'USDT',
+                            interestRate: '0.05',
+                            duration: 30,
+                            minimumAmount: '100',
+                            availableAmount: '1000000',
+                            estimatedInterest: '4109.59',
+                        },
+                    ],
+                })
+            );
+
+            const spy = jest.spyOn(client, 'queryVIPLoanFixedRateMarket').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<QueryVIPLoanFixedRateMarketResponse>)
+            );
+            const response = await client.queryVIPLoanFixedRateMarket(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should execute queryVIPLoanFixedRateMarket() successfully with optional parameters', async () => {
+            const params: QueryVIPLoanFixedRateMarketRequest = {
+                loanCoin: 'loanCoin_example',
+                duration: 789,
+                current: 1,
+                size: 5000,
+                recvWindow: 5000,
+            };
+
+            mockResponse = JSONParse(
+                JSONStringify({
+                    total: 25,
+                    rows: [
+                        {
+                            requestId: 1234567890,
+                            requestNo: 100001,
+                            coin: 'USDT',
+                            interestRate: '0.05',
+                            duration: 30,
+                            minimumAmount: '100',
+                            availableAmount: '1000000',
+                            estimatedInterest: '4109.59',
+                        },
+                    ],
+                })
+            );
+
+            const spy = jest.spyOn(client, 'queryVIPLoanFixedRateMarket').mockReturnValue(
+                Promise.resolve({
+                    data: () => Promise.resolve(mockResponse),
+                    status: 200,
+                    headers: {},
+                    rateLimits: [],
+                } as RestApiResponse<QueryVIPLoanFixedRateMarketResponse>)
+            );
+            const response = await client.queryVIPLoanFixedRateMarket(params);
+            expect(response).toBeDefined();
+            await expect(response.data()).resolves.toBe(mockResponse);
+            spy.mockRestore();
+        });
+
+        it('should throw RequiredError when loanCoin is missing', async () => {
+            const _params: QueryVIPLoanFixedRateMarketRequest = {
+                loanCoin: 'loanCoin_example',
+            };
+            const params = Object.assign({ ..._params });
+            delete params?.loanCoin;
+
+            await expect(client.queryVIPLoanFixedRateMarket(params)).rejects.toThrow(
+                'Required parameter loanCoin was null or undefined when calling queryVIPLoanFixedRateMarket.'
+            );
+        });
+
+        it('should throw an error when server is returning an error', async () => {
+            const params: QueryVIPLoanFixedRateMarketRequest = {
+                loanCoin: 'loanCoin_example',
+            };
+
+            const errorResponse = {
+                code: -1111,
+                msg: 'Server Error',
+            };
+
+            const mockError = new Error('ResponseError') as Error & {
+                response?: { status: number; data: unknown };
+            };
+            mockError.response = { status: 400, data: errorResponse };
+            const spy = jest
+                .spyOn(client, 'queryVIPLoanFixedRateMarket')
+                .mockRejectedValueOnce(mockError);
+            await expect(client.queryVIPLoanFixedRateMarket(params)).rejects.toThrow(
                 'ResponseError'
             );
             spy.mockRestore();
