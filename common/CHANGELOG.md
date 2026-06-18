@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.4.1 - 2026-06-18
+
+### Changed (1)
+
+- Resolve security vulnerabilities.
+
 ## 2.4.0 - 2026-06-02
 
 ### Added (1)
