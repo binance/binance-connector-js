@@ -1,5 +1,14 @@
 # Changelog
 
+## 32.0.0 - 2026-06-22
+
+### Changed (1)
+
+#### WebSocket Streams
+
+- Modified response for `individualSymbolBookTickerStreams()` (`<symbol>@bookTicker` stream):
+  - property `ps` added
+
 ## 31.0.1 - 2026-06-18
 
 ### Changed (2)
