@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.4.2 - 2026-06-xx
+
+### Added (1)
+
+- Added `W3W_PREDICTION_REST_API_PROD_URL` constant for W3W Prediction REST API production URL.
+
 ## 2.4.1 - 2026-06-18
 
 ### Changed (1)
