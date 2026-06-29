@@ -54,6 +54,7 @@ nvm use 22.12.0
 - [@binance/staking](./clients/staking/) - Staking connector
 - [@binance/sub-account](./clients/sub-account/) - Sub Account connector
 - [@binance/vip-loan](./clients/vip-loan/) - VIP Loan connector
+- [@binance/w3w-prediction](./clients/w3w-prediction/) - W3W Prediction connector
 - [@binance/wallet](./clients/wallet/) - Wallet connector
 
 ## Documentation
