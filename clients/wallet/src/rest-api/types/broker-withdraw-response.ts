@@ -30,7 +30,7 @@ export interface BrokerWithdrawResponse {
      * @type {boolean}
      * @memberof BrokerWithdrawResponse
      */
-    accpted?: boolean;
+    accepted?: boolean;
     /**
      *
      * @type {string}
