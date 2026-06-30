@@ -30,7 +30,7 @@ export interface WithdrawTravelRuleResponse {
      * @type {boolean}
      * @memberof WithdrawTravelRuleResponse
      */
-    accpted?: boolean;
+    accepted?: boolean;
     /**
      *
      * @type {string}

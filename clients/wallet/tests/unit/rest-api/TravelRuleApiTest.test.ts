@@ -75,7 +75,7 @@ describe('TravelRuleApi', () => {
             };
 
             mockResponse = JSONParse(
-                JSONStringify({ trId: 123456, accpted: true, info: 'Withdraw request accepted' })
+                JSONStringify({ trId: 123456, accepted: true, info: 'Withdraw request accepted' })
             );
 
             const spy = jest.spyOn(client, 'brokerWithdraw').mockReturnValue(
@@ -109,7 +109,7 @@ describe('TravelRuleApi', () => {
             };
 
             mockResponse = JSONParse(
-                JSONStringify({ trId: 123456, accpted: true, info: 'Withdraw request accepted' })
+                JSONStringify({ trId: 123456, accepted: true, info: 'Withdraw request accepted' })
             );
 
             const spy = jest.spyOn(client, 'brokerWithdraw').mockReturnValue(
@@ -685,7 +685,7 @@ describe('TravelRuleApi', () => {
                             blockType: 'supported',
                             depositAllowed: true,
                             withdrawalAllowed: true,
-                            hasRegionRestrictions: true,
+                            hasRegionRestrictions: false,
                         },
                     ],
                     lastUpdated: 1716300000000,
@@ -1604,7 +1604,7 @@ describe('TravelRuleApi', () => {
             };
 
             mockResponse = JSONParse(
-                JSONStringify({ trId: 123456, accpted: true, info: 'Withdraw request accepted' })
+                JSONStringify({ trId: 123456, accepted: true, info: 'Withdraw request accepted' })
             );
 
             const spy = jest.spyOn(client, 'withdrawTravelRule').mockReturnValue(
@@ -1637,7 +1637,7 @@ describe('TravelRuleApi', () => {
             };
 
             mockResponse = JSONParse(
-                JSONStringify({ trId: 123456, accpted: true, info: 'Withdraw request accepted' })
+                JSONStringify({ trId: 123456, accepted: true, info: 'Withdraw request accepted' })
             );
 
             const spy = jest.spyOn(client, 'withdrawTravelRule').mockReturnValue(

@@ -1,5 +1,24 @@
 # Changelog
 
+## 20.0.0 - 2026-06-30
+
+### Changed (2)
+
+- Modified response for `brokerWithdraw()` (`POST /sapi/v1/localentity/broker/withdraw/apply`):
+  - property `accepted` added
+  - property `accpted` deleted
+
+- Modified response for `withdrawTravelRule()` (`POST /sapi/v1/localentity/withdraw/apply`):
+  - property `accepted` added
+  - property `accpted` deleted
+
+## 19.0.1 - 2026-06-18
+
+### Changed (2)
+
+- Update `@binance/common` library to version `2.4.1`.
+- Resolve security vulnerabilities.
+
 ## 19.0.0 - 2026-06-02
 
 ### Added (2)

@@ -116,5 +116,8 @@ export const SUB_ACCOUNT_REST_API_PROD_URL = 'https://api.binance.com';
 // VIP Loan constants
 export const VIP_LOAN_REST_API_PROD_URL = 'https://api.binance.com';
 
+// W3W Prediction constants
+export const W3W_PREDICTION_REST_API_PROD_URL = 'https://api.binance.com';
+
 // Wallet constants
 export const WALLET_REST_API_PROD_URL = 'https://api.binance.com';

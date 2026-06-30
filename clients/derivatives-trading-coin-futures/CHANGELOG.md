@@ -1,5 +1,24 @@
 # Changelog
 
+## 15.0.0 - 2026-06-30
+
+### Changed (1)
+
+#### REST API
+
+- Modified response for `queryIndexPriceConstituents()` (`GET /dapi/v1/constituents`):
+  - `constituents`.items: property `weight` added
+  - `constituents`.items: property `price` added
+  - `constituents`.items: item property `weight` added
+  - `constituents`.items: item property `price` added
+
+## 14.0.1 - 2026-06-18
+
+### Changed (2)
+
+- Update `@binance/common` library to version `2.4.1`.
+- Resolve security vulnerabilities.
+
 ## 14.0.0 - 2026-06-10
 
 ### Changed (13)

@@ -206,9 +206,10 @@ describe('PublicApi', () => {
                 JSONStringify({
                     e: 'bookTicker',
                     u: 400900217,
+                    s: 'BNBUSDT',
+                    ps: 'BNBUSDT',
                     E: 1568014460893,
                     T: 1568014460891,
-                    s: 'BNBUSDT',
                     b: '25.35190000',
                     B: '31.21000000',
                     a: '25.36520000',
@@ -238,9 +239,10 @@ describe('PublicApi', () => {
                 JSONStringify({
                     e: 'bookTicker',
                     u: 400900217,
+                    s: 'BNBUSDT',
+                    ps: 'BNBUSDT',
                     E: 1568014460893,
                     T: 1568014460891,
-                    s: 'BNBUSDT',
                     b: '25.35190000',
                     B: '31.21000000',
                     a: '25.36520000',

@@ -33,6 +33,18 @@ export interface IndividualSymbolBookTickerStreamsResponse {
     u?: number | bigint;
     /**
      *
+     * @type {string}
+     * @memberof IndividualSymbolBookTickerStreamsResponse
+     */
+    s?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof IndividualSymbolBookTickerStreamsResponse
+     */
+    ps?: string;
+    /**
+     *
      * @type {number | bigint}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
@@ -43,12 +55,6 @@ export interface IndividualSymbolBookTickerStreamsResponse {
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     T?: number | bigint;
-    /**
-     *
-     * @type {string}
-     * @memberof IndividualSymbolBookTickerStreamsResponse
-     */
-    s?: string;
     /**
      *
      * @type {string}
