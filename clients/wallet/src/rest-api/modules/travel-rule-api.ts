@@ -380,7 +380,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
-         * Query the active country list for travel rule questionnaires.
+         * Query the active country list for travel rule questionnaires. Currently, only supports AU entity.
          *
          * Weight: 1
          *
@@ -406,7 +406,7 @@ const TravelRuleApiAxiosParamCreator = function (configuration: ConfigurationRes
             };
         },
         /**
-         * Query the active region/city list for a given country.
+         * Query the active region/city list for a given country. Currently, only supports AU entity.
          *
          * Weight: 1
          *
@@ -1033,7 +1033,7 @@ export interface TravelRuleApiInterface {
         requestParameters?: FetchAddressVerificationListRequest
     ): Promise<RestApiResponse<FetchAddressVerificationListResponse>>;
     /**
-     * Query the active country list for travel rule questionnaires.
+     * Query the active country list for travel rule questionnaires. Currently, only supports AU entity.
      *
      * Weight: 1
      *
@@ -1044,7 +1044,7 @@ export interface TravelRuleApiInterface {
      */
     getCountryList(): Promise<RestApiResponse<GetCountryListResponse>>;
     /**
-     * Query the active region/city list for a given country.
+     * Query the active region/city list for a given country. Currently, only supports AU entity.
      *
      * Weight: 1
      *
@@ -2055,7 +2055,7 @@ export class TravelRuleApi implements TravelRuleApiInterface {
     }
 
     /**
-     * Query the active country list for travel rule questionnaires.
+     * Query the active country list for travel rule questionnaires. Currently, only supports AU entity.
      *
      * Weight: 1
      *
@@ -2080,7 +2080,7 @@ export class TravelRuleApi implements TravelRuleApiInterface {
     }
 
     /**
-     * Query the active region/city list for a given country.
+     * Query the active region/city list for a given country. Currently, only supports AU entity.
      *
      * Weight: 1
      *
