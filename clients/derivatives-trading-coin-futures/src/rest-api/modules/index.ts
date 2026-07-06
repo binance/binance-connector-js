@@ -13,6 +13,5 @@
 
 export * from './account-api';
 export * from './market-data-api';
-export * from './portfolio-margin-endpoints-api';
 export * from './trade-api';
 export * from './user-data-streams-api';

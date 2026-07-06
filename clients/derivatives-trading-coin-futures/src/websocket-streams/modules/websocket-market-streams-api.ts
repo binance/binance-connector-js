@@ -211,23 +211,19 @@ const WebsocketMarketStreamsApiParamCreator = function () {
         /**
          * Index Price Stream
          *
-         * Update Speed: 3000ms OR 1000ms
+         * Update Speed: 1000ms
          *
          * @summary Index Price Stream
          * @param {string} pair The pair parameter
          * @param {string} [id] Unique WebSocket request ID.
-         * @param {string} [updateSpeed] WebSocket stream update speed
          *
          * @throws {RequiredError}
          */
-        indexPriceStream: (pair: string, id?: string, updateSpeed?: string): string => {
+        indexPriceStream: (pair: string, id?: string): string => {
             // verify required parameter 'pair' is not null or undefined
             assertParamExists('indexPriceStream', 'pair', pair);
 
-            return replaceWebsocketStreamsPlaceholders(
-                '/<pair>@indexPrice@<updateSpeed>'.slice(1),
-                { pair, id, updateSpeed }
-            );
+            return replaceWebsocketStreamsPlaceholders('/<pair>@indexPrice'.slice(1), { pair, id });
         },
         /**
          * Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
@@ -587,7 +583,7 @@ export interface WebsocketMarketStreamsApiInterface {
     /**
      * Index Price Stream
      *
-     * Update Speed: 3000ms OR 1000ms
+     * Update Speed: 1000ms
      *
      * @summary Index Price Stream
      * @param {IndexPriceStreamRequest} requestParameters Request parameters.
@@ -938,13 +934,6 @@ export interface IndexPriceStreamRequest {
      * @memberof WebsocketMarketStreamsApiIndexPriceStream
      */
     readonly id?: string;
-
-    /**
-     * WebSocket stream update speed
-     * @type {string}
-     * @memberof WebsocketMarketStreamsApiIndexPriceStream
-     */
-    readonly updateSpeed?: string;
 }
 
 /**
@@ -1421,7 +1410,7 @@ export class WebsocketMarketStreamsApi implements WebsocketMarketStreamsApiInter
     /**
      * Index Price Stream
      *
-     * Update Speed: 3000ms OR 1000ms
+     * Update Speed: 1000ms
      *
      * @summary Index Price Stream
      * @param {IndexPriceStreamRequest} requestParameters Request parameters.
@@ -1435,8 +1424,7 @@ export class WebsocketMarketStreamsApi implements WebsocketMarketStreamsApiInter
     ): WebsocketStream<IndexPriceStreamResponse> {
         const stream = this.localVarParamCreator.indexPriceStream(
             requestParameters?.pair,
-            requestParameters?.id,
-            requestParameters?.updateSpeed
+            requestParameters?.id
         );
 
         return createStreamHandler<IndexPriceStreamResponse>(

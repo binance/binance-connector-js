@@ -927,20 +927,19 @@ describe('WebsocketMarketStreamsApi', () => {
             const params: IndexPriceStreamRequest = {
                 pair: 'btcusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
-                updateSpeed: 'updateSpeed_example',
             };
 
             const mockResponse = JSONParse(
                 JSONStringify({
                     e: 'indexPriceUpdate',
                     E: 1591261236000,
-                    i: 'BTCUSD',
+                    s: 'BTCUSD',
                     p: '9636.57860000',
                 })
             );
 
             mockSubscription(
-                `ws/${replaceWebsocketStreamsPlaceholders('/<pair>@indexPrice@<updateSpeed>'.slice(1), params as unknown as Record<string, IndexPriceStreamRequest>)}`,
+                `ws/${replaceWebsocketStreamsPlaceholders('/<pair>@indexPrice'.slice(1), params as unknown as Record<string, IndexPriceStreamRequest>)}`,
                 mockResponse
             );
         });
@@ -953,14 +952,13 @@ describe('WebsocketMarketStreamsApi', () => {
             const params: IndexPriceStreamRequest = {
                 pair: 'btcusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
-                updateSpeed: 'updateSpeed_example',
             };
 
             const mockResponse = JSONParse(
                 JSONStringify({
                     e: 'indexPriceUpdate',
                     E: 1591261236000,
-                    i: 'BTCUSD',
+                    s: 'BTCUSD',
                     p: '9636.57860000',
                 })
             );
@@ -972,7 +970,7 @@ describe('WebsocketMarketStreamsApi', () => {
             websocketStreamClient['onMessage'](
                 JSONStringify({
                     stream: replaceWebsocketStreamsPlaceholders(
-                        '/<pair>@indexPrice@<updateSpeed>'.slice(1),
+                        '/<pair>@indexPrice'.slice(1),
                         params as unknown as Record<string, IndexPriceStreamRequest>
                     ),
                     data: mockResponse,

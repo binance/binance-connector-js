@@ -1,5 +1,15 @@
 # Changelog
 
+## 21.0.0 - 2026-07-06
+
+### Changed (1)
+
+- Modified response for `dustlog()` (`GET /sapi/v1/asset/dribblet`):
+  - `userAssetDribblets`.items.`userAssetDribbletDetails`.items: property `targetAsset` added
+  - `userAssetDribblets`.items.`userAssetDribbletDetails`.items: item property `targetAsset` added
+  - `userAssetDribblets`.items.`userAssetDribbletDetails`.items: property `targetAsset` added
+  - `userAssetDribblets`.items.`userAssetDribbletDetails`.items: item property `targetAsset` added
+
 ## 20.0.0 - 2026-06-30
 
 ### Changed (2)

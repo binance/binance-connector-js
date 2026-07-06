@@ -14,7 +14,6 @@
 import { ConfigurationRestAPI, RestApiResponse, sendRequest } from '@binance/common';
 import { AccountApi } from './modules/account-api';
 import { MarketDataApi } from './modules/market-data-api';
-import { PortfolioMarginEndpointsApi } from './modules/portfolio-margin-endpoints-api';
 import { TradeApi } from './modules/trade-api';
 import { UserDataStreamsApi } from './modules/user-data-streams-api';
 
@@ -57,7 +56,6 @@ import type {
     TopTraderLongShortRatioAccountsRequest,
     TopTraderLongShortRatioPositionsRequest,
 } from './modules/market-data-api';
-import type { ClassicPortfolioMarginAccountInformationRequest } from './modules/portfolio-margin-endpoints-api';
 import type {
     AccountTradeListRequest,
     AllOrdersRequest,
@@ -126,7 +124,6 @@ import type {
     TopTraderLongShortRatioAccountsResponse,
     TopTraderLongShortRatioPositionsResponse,
 } from './types';
-import type { ClassicPortfolioMarginAccountInformationResponse } from './types';
 import type {
     AccountTradeListResponse,
     AllOrdersResponse,
@@ -157,7 +154,6 @@ export class RestAPI {
     private configuration: ConfigurationRestAPI;
     private accountApi: AccountApi;
     private marketDataApi: MarketDataApi;
-    private portfolioMarginEndpointsApi: PortfolioMarginEndpointsApi;
     private tradeApi: TradeApi;
     private userDataStreamsApi: UserDataStreamsApi;
 
@@ -165,7 +161,6 @@ export class RestAPI {
         this.configuration = configuration;
         this.accountApi = new AccountApi(configuration);
         this.marketDataApi = new MarketDataApi(configuration);
-        this.portfolioMarginEndpointsApi = new PortfolioMarginEndpointsApi(configuration);
         this.tradeApi = new TradeApi(configuration);
         this.userDataStreamsApi = new UserDataStreamsApi(configuration);
     }
@@ -1061,28 +1056,6 @@ export class RestAPI {
         requestParameters: TopTraderLongShortRatioPositionsRequest
     ): Promise<RestApiResponse<TopTraderLongShortRatioPositionsResponse>> {
         return this.marketDataApi.topTraderLongShortRatioPositions(requestParameters);
-    }
-
-    /**
-     * Get Classic Portfolio Margin current account information.
-     *
-     * maxWithdrawAmount is for asset transfer out to the spot wallet.
-     *
-     * Weight: 5
-     *
-     * @summary Classic Portfolio Margin Account Information (USER_DATA)
-     * @param {ClassicPortfolioMarginAccountInformationRequest} requestParameters Request parameters.
-     *
-     * @returns {Promise<RestApiResponse<ClassicPortfolioMarginAccountInformationResponse>>}
-     * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/coin-margined-futures/portfolio-margin-endpoints/Classic-Portfolio-Margin-Account-Information Binance API Documentation}
-     */
-    classicPortfolioMarginAccountInformation(
-        requestParameters: ClassicPortfolioMarginAccountInformationRequest
-    ): Promise<RestApiResponse<ClassicPortfolioMarginAccountInformationResponse>> {
-        return this.portfolioMarginEndpointsApi.classicPortfolioMarginAccountInformation(
-            requestParameters
-        );
     }
 
     /**
