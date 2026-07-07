@@ -36,7 +36,7 @@ export interface IndexPriceStreamResponse {
      * @type {string}
      * @memberof IndexPriceStreamResponse
      */
-    i?: string;
+    s?: string;
     /**
      *
      * @type {string}

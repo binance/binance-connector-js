@@ -1,5 +1,23 @@
 # Changelog
 
+## 16.0.0 - 2026-07-06
+
+### Added (1)
+
+#### WebSocket Streams
+
+- `indexPriceStream()` (`<pair>@indexPrice` stream)
+
+### Removed (2)
+
+#### REST API
+
+- `classicPortfolioMarginAccountInformation()` (`GET /dapi/v1/pmAccountInfo`)
+
+#### WebSocket Streams
+
+- `/<pair>@indexPrice@<updateSpeed>()` (`<pair>@indexPrice@<updateSpeed>` stream)
+
 ## 15.0.0 - 2026-06-30
 
 ### Changed (1)

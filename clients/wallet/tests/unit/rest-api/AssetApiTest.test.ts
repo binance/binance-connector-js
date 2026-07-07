@@ -664,6 +664,7 @@ describe('AssetApi', () => {
                                     operateTime: 1615985535000,
                                     transferedAmount: '0.000441',
                                     fromAsset: 'USDT',
+                                    targetAsset: 'BNB',
                                 },
                                 {
                                     transId: 4359321,
@@ -672,6 +673,7 @@ describe('AssetApi', () => {
                                     operateTime: 1615985535000,
                                     transferedAmount: '0.00088156',
                                     fromAsset: 'ETH',
+                                    targetAsset: 'BNB',
                                 },
                             ],
                         },
@@ -688,6 +690,7 @@ describe('AssetApi', () => {
                                     operateTime: 1616203180000,
                                     transferedAmount: '0.00049',
                                     fromAsset: 'USDT',
+                                    targetAsset: 'BNB',
                                 },
                                 {
                                     transId: 4357015,
@@ -696,6 +699,7 @@ describe('AssetApi', () => {
                                     operateTime: 1616203180000,
                                     transferedAmount: '0.00009795',
                                     fromAsset: 'ETH',
+                                    targetAsset: 'BNB',
                                 },
                             ],
                         },
@@ -742,6 +746,7 @@ describe('AssetApi', () => {
                                     operateTime: 1615985535000,
                                     transferedAmount: '0.000441',
                                     fromAsset: 'USDT',
+                                    targetAsset: 'BNB',
                                 },
                                 {
                                     transId: 4359321,
@@ -750,6 +755,7 @@ describe('AssetApi', () => {
                                     operateTime: 1615985535000,
                                     transferedAmount: '0.00088156',
                                     fromAsset: 'ETH',
+                                    targetAsset: 'BNB',
                                 },
                             ],
                         },
@@ -766,6 +772,7 @@ describe('AssetApi', () => {
                                     operateTime: 1616203180000,
                                     transferedAmount: '0.00049',
                                     fromAsset: 'USDT',
+                                    targetAsset: 'BNB',
                                 },
                                 {
                                     transId: 4357015,
@@ -774,6 +781,7 @@ describe('AssetApi', () => {
                                     operateTime: 1616203180000,
                                     transferedAmount: '0.00009795',
                                     fromAsset: 'ETH',
+                                    targetAsset: 'BNB',
                                 },
                             ],
                         },

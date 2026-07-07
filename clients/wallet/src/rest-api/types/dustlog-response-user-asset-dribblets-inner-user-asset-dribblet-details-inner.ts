@@ -55,4 +55,10 @@ export interface DustlogResponseUserAssetDribbletsInnerUserAssetDribbletDetailsI
      * @memberof DustlogResponseUserAssetDribbletsInnerUserAssetDribbletDetailsInner
      */
     fromAsset?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof DustlogResponseUserAssetDribbletsInnerUserAssetDribbletDetailsInner
+     */
+    targetAsset?: string;
 }

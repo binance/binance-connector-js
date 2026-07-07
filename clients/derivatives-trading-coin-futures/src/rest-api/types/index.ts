@@ -16,7 +16,6 @@ export * from './change-initial-leverage-response';
 export * from './change-margin-type-response';
 export * from './change-position-mode-response';
 export * from './check-server-time-response';
-export * from './classic-portfolio-margin-account-information-response';
 export * from './compressed-aggregate-trades-list-response';
 export * from './compressed-aggregate-trades-list-response-inner';
 export * from './continuous-contract-kline-candlestick-data-response';
