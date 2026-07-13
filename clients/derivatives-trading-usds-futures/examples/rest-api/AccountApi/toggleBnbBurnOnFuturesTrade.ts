@@ -13,7 +13,7 @@ const client = new DerivativesTradingUsdsFutures({ configurationRestAPI });
 async function toggleBnbBurnOnFuturesTrade() {
     try {
         const response = await client.restAPI.toggleBnbBurnOnFuturesTrade({
-            feeBurn: 'feeBurn_example',
+            feeBurn: 'true',
         });
 
         const rateLimits = response.rateLimits!;

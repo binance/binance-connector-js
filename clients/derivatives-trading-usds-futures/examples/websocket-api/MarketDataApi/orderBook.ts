@@ -17,7 +17,7 @@ async function orderBook() {
         connection = await client.websocketAPI.connect();
 
         const response = await connection.orderBook({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSDT',
         });
 
         const rateLimits = response.rateLimits!;

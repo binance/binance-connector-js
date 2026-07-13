@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,31 +20,31 @@
  */
 export interface GetFuturesTransactionHistoryDownloadLinkByIdResponse {
     /**
-     *
+     * Download Id.
      * @type {string}
      * @memberof GetFuturesTransactionHistoryDownloadLinkByIdResponse
      */
     downloadId?: string;
     /**
-     *
+     * Enum：completed，processing
      * @type {string}
      * @memberof GetFuturesTransactionHistoryDownloadLinkByIdResponse
      */
     status?: string;
     /**
-     *
+     * The link is mapped to download id
      * @type {string}
      * @memberof GetFuturesTransactionHistoryDownloadLinkByIdResponse
      */
     url?: string;
     /**
-     *
+     * ignore
      * @type {boolean}
      * @memberof GetFuturesTransactionHistoryDownloadLinkByIdResponse
      */
     notified?: boolean;
     /**
-     *
+     * The link would expire after this timestamp
      * @type {number | bigint}
      * @memberof GetFuturesTransactionHistoryDownloadLinkByIdResponse
      */

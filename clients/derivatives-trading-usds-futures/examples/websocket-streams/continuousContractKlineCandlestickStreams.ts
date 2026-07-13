@@ -1,5 +1,6 @@
 import {
     DerivativesTradingUsdsFutures,
+    DerivativesTradingUsdsFuturesWebsocketStreams,
     DERIVATIVES_TRADING_USDS_FUTURES_WS_STREAMS_PROD_URL,
 } from '../../src';
 
@@ -16,8 +17,12 @@ async function continuousContractKlineCandlestickStreams() {
 
         const stream = connection.continuousContractKlineCandlestickStreams({
             pair: 'btcusdt',
-            contractType: 'next_quarter',
-            interval: '1m',
+            contractType:
+                DerivativesTradingUsdsFuturesWebsocketStreams
+                    .ContinuousContractKlineCandlestickStreamsContractTypeEnum.next_quarter,
+            interval:
+                DerivativesTradingUsdsFuturesWebsocketStreams
+                    .ContinuousContractKlineCandlestickStreamsIntervalEnum.INTERVAL_1s,
         });
 
         stream.on('message', (data) => {

@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,31 +20,31 @@
  */
 export interface TradingSessionStreamResponse {
     /**
-     *
+     * Event type, can also be CommodityUpdate or KR_EquityUpdate
      * @type {string}
      * @memberof TradingSessionStreamResponse
      */
     e?: string;
     /**
-     *
+     * Event time
      * @type {number | bigint}
      * @memberof TradingSessionStreamResponse
      */
     E?: number | bigint;
     /**
-     *
+     * Session start time
      * @type {number | bigint}
      * @memberof TradingSessionStreamResponse
      */
     t?: number | bigint;
     /**
-     *
+     * Session end time
      * @type {number | bigint}
      * @memberof TradingSessionStreamResponse
      */
     T?: number | bigint;
     /**
-     *
+     * Session type
      * @type {string}
      * @memberof TradingSessionStreamResponse
      */

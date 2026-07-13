@@ -1,10 +1,9 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -13,13 +12,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
-// May contain unused imports in some cases
-// @ts-ignore
-import type { RpiOrderBookResponseAsksItem } from './rpi-order-book-response-asks-item';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { RpiOrderBookResponseBidsItem } from './rpi-order-book-response-bids-item';
 
 /**
  *
@@ -34,27 +26,27 @@ export interface RpiOrderBookResponse {
      */
     lastUpdateId?: number | bigint;
     /**
-     *
+     * Message output time
      * @type {number | bigint}
      * @memberof RpiOrderBookResponse
      */
     E?: number | bigint;
     /**
-     *
+     * Transaction time
      * @type {number | bigint}
      * @memberof RpiOrderBookResponse
      */
     T?: number | bigint;
     /**
-     *
-     * @type {Array<RpiOrderBookResponseBidsItem>}
+     * Bid orders. Each entry is [price, quantity].
+     * @type {Array<Array<string>>}
      * @memberof RpiOrderBookResponse
      */
-    bids?: Array<RpiOrderBookResponseBidsItem>;
+    bids?: Array<Array<string>>;
     /**
-     *
-     * @type {Array<RpiOrderBookResponseAsksItem>}
+     * Ask orders. Each entry is [price, quantity].
+     * @type {Array<Array<string>>}
      * @memberof RpiOrderBookResponse
      */
-    asks?: Array<RpiOrderBookResponseAsksItem>;
+    asks?: Array<Array<string>>;
 }

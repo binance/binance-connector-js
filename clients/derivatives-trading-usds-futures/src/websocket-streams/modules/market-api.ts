@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -41,9 +41,12 @@ const MarketApiParamCreator = function () {
         /**
          * The Aggregate Trade Streams push market trade information that is aggregated for fills with same price and taking side every 100 milliseconds. Only market trades will be aggregated, which means the insurance fund trades and ADL trades won't be aggregated.
          *
-         * Retail Price Improvement(RPI) orders are aggregated into field `q` and without special tags to be distinguished.
+         * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM).
          *
          * Update Speed: 100ms
+         *
+         * Response Notes:
+         * - Retail Price Improvement(RPI) orders are aggregated into field q and without special tags to be distinguished.
          *
          * @summary Aggregate Trade Streams
          * @param {string} symbol The symbol parameter
@@ -61,8 +64,9 @@ const MarketApiParamCreator = function () {
             });
         },
         /**
-         * The All Liquidation Order Snapshot Streams push force liquidation order information for all symbols in the market.
-         * For each symbol，only the largest one liquidation order within 1000ms will be pushed as the snapshot. If no liquidation happens in the interval of 1000ms, no stream will be pushed.
+         * The All Liquidation Order Snapshot Streams push force liquidation order information for all symbols in the market. For each symbol，only the latest one liquidation order within 1000ms will be pushed as the snapshot. If no liquidation happens in the interval of 1000ms, no stream will be pushed.
+         *
+         * > **After CM migration**, this stream pushes the merged UM + CM universe (subscribable on both `fstream` and `dstream`); each payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
          *
          * Update Speed: 1000ms
          *
@@ -77,6 +81,8 @@ const MarketApiParamCreator = function () {
         /**
          * 24hr rolling window mini-ticker statistics for all symbols. These are NOT the statistics of the UTC day, but a 24hr rolling window from requestTime to 24hrs before. Note that only tickers that have changed will be present in the array.
          *
+         * > **After CM migration**, this stream pushes the merged UM + CM universe (subscribable on both `fstream` and `dstream`); each payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
+         *
          * Update Speed: 1000ms
          *
          * @summary All Market Mini Tickers Stream
@@ -90,6 +96,8 @@ const MarketApiParamCreator = function () {
         /**
          * 24hr rolling window ticker statistics for all symbols. These are NOT the statistics of the UTC day, but a 24hr rolling window from requestTime to 24hrs before. Note that only tickers that have changed will be present in the array.
          *
+         * > **After CM migration**, this stream pushes the merged UM + CM universe (subscribable on both `fstream` and `dstream`); each payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
+         *
          * Update Speed: 1000ms
          *
          * @summary All Market Tickers Streams
@@ -101,11 +109,13 @@ const MarketApiParamCreator = function () {
             return replaceWebsocketStreamsPlaceholders('/!ticker@arr'.slice(1), { id });
         },
         /**
-         * Asset index price.
+         * Asset index price. Subscribe with `!assetIndex@arr` for all assets, or `<assetSymbol>@assetIndex` for a specific asset.
+         *
+         * > **CM-UM Integration (Effective 2026-06-30):** Renamed from *Multi-Assets Mode Asset Index*. The stream `!assetIndex@arr` now additionally pushes COIN-M settlement-asset price index entries (e.g., `BTCUSD`, `ETHUSD`, `BNBUSD`). The on-the-wire stream key is unchanged; existing subscriptions continue to work.
          *
          * Update Speed: 1s
          *
-         * @summary Asset Index
+         * @summary Multi-Assets Mode Asset Index
          * @param {string} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
@@ -134,21 +144,24 @@ const MarketApiParamCreator = function () {
             });
         },
         /**
+         * Continuous Contract Kline/Candlestick Streams
+         *
+         * > **After CM migration**, both `fstream` and `dstream` may subscribe to either UM or CM symbols on this stream.
          *
          * Update Speed: 250ms
          *
          * @summary Continuous Contract Kline/Candlestick Streams
-         * @param {string} pair The pair parameter
-         * @param {string} contractType The contractType parameter
-         * @param {string} interval The interval parameter
+         * @param {string} pair
+         * @param {ContinuousContractKlineCandlestickStreamsContractTypeEnum} contractType
+         * @param {ContinuousContractKlineCandlestickStreamsIntervalEnum} interval
          * @param {string} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
          */
         continuousContractKlineCandlestickStreams: (
             pair: string,
-            contractType: string,
-            interval: string,
+            contractType: ContinuousContractKlineCandlestickStreamsContractTypeEnum,
+            interval: ContinuousContractKlineCandlestickStreamsIntervalEnum,
             id?: string
         ): string => {
             // verify required parameter 'pair' is not null or undefined
@@ -168,7 +181,9 @@ const MarketApiParamCreator = function () {
             );
         },
         /**
-         * ContractInfo stream pushes when contract info updates(listing/settlement/contract bracket update). `bks` field only shows up when bracket gets updated.
+         * ContractInfo stream pushes when contract info updates(listing/settlement/contract bracket update). bks field only shows up when bracket gets updated.
+         *
+         * > **After CM migration**, this stream pushes the merged UM + CM universe (subscribable on both `fstream` and `dstream`); each payload is appended with a new `st` field (`1` = UM, `2` = CM).
          *
          * Update Speed: Real-time
          *
@@ -182,6 +197,8 @@ const MarketApiParamCreator = function () {
         },
         /**
          * 24hr rolling window mini-ticker statistics for a single symbol. These are NOT the statistics of the UTC day, but a 24hr rolling window from requestTime to 24hrs before.
+         *
+         * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
          *
          * Update Speed: 2s
          *
@@ -203,6 +220,8 @@ const MarketApiParamCreator = function () {
         /**
          * 24hr rolling window ticker statistics for a single symbol. These are NOT the statistics of the UTC day, but a 24hr rolling window from requestTime to 24hrs before.
          *
+         * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
+         *
          * Update Speed: 2000ms
          *
          * @summary Individual Symbol Ticker Streams
@@ -220,16 +239,22 @@ const MarketApiParamCreator = function () {
         /**
          * The Kline/Candlestick Stream push updates to the current klines/candlestick every 250 milliseconds (if existing).
          *
+         * > **After CM migration**, both `fstream` and `dstream` may subscribe to either UM or CM symbols on this stream.
+         *
          * Update Speed: 250ms
          *
          * @summary Kline/Candlestick Streams
          * @param {string} symbol The symbol parameter
-         * @param {string} interval The interval parameter
+         * @param {KlineCandlestickStreamsIntervalEnum} interval The interval parameter
          * @param {string} [id] Unique WebSocket request ID.
          *
          * @throws {RequiredError}
          */
-        klineCandlestickStreams: (symbol: string, interval: string, id?: string): string => {
+        klineCandlestickStreams: (
+            symbol: string,
+            interval: KlineCandlestickStreamsIntervalEnum,
+            id?: string
+        ): string => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('klineCandlestickStreams', 'symbol', symbol);
             // verify required parameter 'interval' is not null or undefined
@@ -242,8 +267,7 @@ const MarketApiParamCreator = function () {
             });
         },
         /**
-         * The Liquidation Order Snapshot Streams push force liquidation order information for specific symbol.
-         * For each symbol，only the largest one liquidation order within 1000ms will be pushed as the snapshot. If no liquidation happens in the interval of 1000ms, no stream will be pushed.
+         * The Liquidation Order Snapshot Streams push force liquidation order information for specific symbol. For each symbol，only the latest one liquidation order within 1000ms will be pushed as the snapshot. If no liquidation happens in the interval of 1000ms, no stream will be pushed.
          *
          * Update Speed: 1000ms
          *
@@ -265,16 +289,20 @@ const MarketApiParamCreator = function () {
         /**
          * Mark price and funding rate for a single symbol pushed every 3 seconds or every second.
          *
-         * Update Speed: 3000ms or 1000ms
+         * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM); both `fstream` and `dstream` may subscribe to either UM or CM symbols on this stream.
          *
          * @summary Mark Price Stream
          * @param {string} symbol The symbol parameter
          * @param {string} [id] Unique WebSocket request ID.
-         * @param {string} [updateSpeed] WebSocket stream update speed
+         * @param {MarkPriceStreamUpdateSpeedEnum} [updateSpeed] WebSocket stream update speed
          *
          * @throws {RequiredError}
          */
-        markPriceStream: (symbol: string, id?: string, updateSpeed?: string): string => {
+        markPriceStream: (
+            symbol: string,
+            id?: string,
+            updateSpeed?: MarkPriceStreamUpdateSpeedEnum
+        ): string => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('markPriceStream', 'symbol', symbol);
 
@@ -286,19 +314,23 @@ const MarketApiParamCreator = function () {
         /**
          * Mark price and funding rate for all symbols pushed every 3 seconds or every second.
          *
-         **Note**:
+         **Note:**
+         * - TradFi symbols will be pushed through a seperate message.
          *
-         * TradFi symbols will be pushed through a seperate message.
+         * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM); both `fstream` and `dstream` may subscribe to either UM or CM symbols on this stream.
          *
          * Update Speed: 3000ms or 1000ms
          *
          * @summary Mark Price Stream for All market
          * @param {string} [id] Unique WebSocket request ID.
-         * @param {string} [updateSpeed] WebSocket stream update speed
+         * @param {MarkPriceStreamForAllMarketUpdateSpeedEnum} [updateSpeed] WebSocket stream update speed
          *
          * @throws {RequiredError}
          */
-        markPriceStreamForAllMarket: (id?: string, updateSpeed?: string): string => {
+        markPriceStreamForAllMarket: (
+            id?: string,
+            updateSpeed?: MarkPriceStreamForAllMarketUpdateSpeedEnum
+        ): string => {
             return replaceWebsocketStreamsPlaceholders('/!markPrice@arr@<updateSpeed>'.slice(1), {
                 id,
                 updateSpeed,
@@ -334,9 +366,12 @@ export interface MarketApiInterface {
     /**
      * The Aggregate Trade Streams push market trade information that is aggregated for fills with same price and taking side every 100 milliseconds. Only market trades will be aggregated, which means the insurance fund trades and ADL trades won't be aggregated.
      *
-     * Retail Price Improvement(RPI) orders are aggregated into field `q` and without special tags to be distinguished.
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM).
      *
      * Update Speed: 100ms
+     *
+     * Response Notes:
+     * - Retail Price Improvement(RPI) orders are aggregated into field q and without special tags to be distinguished.
      *
      * @summary Aggregate Trade Streams
      * @param {AggregateTradeStreamsRequest} requestParameters Request parameters.
@@ -350,8 +385,9 @@ export interface MarketApiInterface {
     ): WebsocketStream<AggregateTradeStreamsResponse>;
 
     /**
-     * The All Liquidation Order Snapshot Streams push force liquidation order information for all symbols in the market.
-     * For each symbol，only the largest one liquidation order within 1000ms will be pushed as the snapshot. If no liquidation happens in the interval of 1000ms, no stream will be pushed.
+     * The All Liquidation Order Snapshot Streams push force liquidation order information for all symbols in the market. For each symbol，only the latest one liquidation order within 1000ms will be pushed as the snapshot. If no liquidation happens in the interval of 1000ms, no stream will be pushed.
+     *
+     * > **After CM migration**, this stream pushes the merged UM + CM universe (subscribable on both `fstream` and `dstream`); each payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
      *
      * Update Speed: 1000ms
      *
@@ -369,6 +405,8 @@ export interface MarketApiInterface {
     /**
      * 24hr rolling window mini-ticker statistics for all symbols. These are NOT the statistics of the UTC day, but a 24hr rolling window from requestTime to 24hrs before. Note that only tickers that have changed will be present in the array.
      *
+     * > **After CM migration**, this stream pushes the merged UM + CM universe (subscribable on both `fstream` and `dstream`); each payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
+     *
      * Update Speed: 1000ms
      *
      * @summary All Market Mini Tickers Stream
@@ -385,6 +423,8 @@ export interface MarketApiInterface {
     /**
      * 24hr rolling window ticker statistics for all symbols. These are NOT the statistics of the UTC day, but a 24hr rolling window from requestTime to 24hrs before. Note that only tickers that have changed will be present in the array.
      *
+     * > **After CM migration**, this stream pushes the merged UM + CM universe (subscribable on both `fstream` and `dstream`); each payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
+     *
      * Update Speed: 1000ms
      *
      * @summary All Market Tickers Streams
@@ -399,11 +439,13 @@ export interface MarketApiInterface {
     ): WebsocketStream<AllMarketTickersStreamsResponse>;
 
     /**
-     * Asset index price.
+     * Asset index price. Subscribe with `!assetIndex@arr` for all assets, or `<assetSymbol>@assetIndex` for a specific asset.
+     *
+     * > **CM-UM Integration (Effective 2026-06-30):** Renamed from *Multi-Assets Mode Asset Index*. The stream `!assetIndex@arr` now additionally pushes COIN-M settlement-asset price index entries (e.g., `BTCUSD`, `ETHUSD`, `BNBUSD`). The on-the-wire stream key is unchanged; existing subscriptions continue to work.
      *
      * Update Speed: 1s
      *
-     * @summary Asset Index
+     * @summary Multi-Assets Mode Asset Index
      * @param {AssetIndexRequest} requestParameters Request parameters.
      *
      * @returns {WebsocketStream<AssetIndexResponse>}
@@ -429,6 +471,9 @@ export interface MarketApiInterface {
     ): WebsocketStream<CompositeIndexSymbolInformationStreamsResponse>;
 
     /**
+     * Continuous Contract Kline/Candlestick Streams
+     *
+     * > **After CM migration**, both `fstream` and `dstream` may subscribe to either UM or CM symbols on this stream.
      *
      * Update Speed: 250ms
      *
@@ -444,7 +489,9 @@ export interface MarketApiInterface {
     ): WebsocketStream<ContinuousContractKlineCandlestickStreamsResponse>;
 
     /**
-     * ContractInfo stream pushes when contract info updates(listing/settlement/contract bracket update). `bks` field only shows up when bracket gets updated.
+     * ContractInfo stream pushes when contract info updates(listing/settlement/contract bracket update). bks field only shows up when bracket gets updated.
+     *
+     * > **After CM migration**, this stream pushes the merged UM + CM universe (subscribable on both `fstream` and `dstream`); each payload is appended with a new `st` field (`1` = UM, `2` = CM).
      *
      * Update Speed: Real-time
      *
@@ -462,6 +509,8 @@ export interface MarketApiInterface {
     /**
      * 24hr rolling window mini-ticker statistics for a single symbol. These are NOT the statistics of the UTC day, but a 24hr rolling window from requestTime to 24hrs before.
      *
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
+     *
      * Update Speed: 2s
      *
      * @summary Individual Symbol Mini Ticker Stream
@@ -477,6 +526,8 @@ export interface MarketApiInterface {
 
     /**
      * 24hr rolling window ticker statistics for a single symbol. These are NOT the statistics of the UTC day, but a 24hr rolling window from requestTime to 24hrs before.
+     *
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
      *
      * Update Speed: 2000ms
      *
@@ -494,6 +545,8 @@ export interface MarketApiInterface {
     /**
      * The Kline/Candlestick Stream push updates to the current klines/candlestick every 250 milliseconds (if existing).
      *
+     * > **After CM migration**, both `fstream` and `dstream` may subscribe to either UM or CM symbols on this stream.
+     *
      * Update Speed: 250ms
      *
      * @summary Kline/Candlestick Streams
@@ -508,8 +561,7 @@ export interface MarketApiInterface {
     ): WebsocketStream<KlineCandlestickStreamsResponse>;
 
     /**
-     * The Liquidation Order Snapshot Streams push force liquidation order information for specific symbol.
-     * For each symbol，only the largest one liquidation order within 1000ms will be pushed as the snapshot. If no liquidation happens in the interval of 1000ms, no stream will be pushed.
+     * The Liquidation Order Snapshot Streams push force liquidation order information for specific symbol. For each symbol，only the latest one liquidation order within 1000ms will be pushed as the snapshot. If no liquidation happens in the interval of 1000ms, no stream will be pushed.
      *
      * Update Speed: 1000ms
      *
@@ -527,7 +579,7 @@ export interface MarketApiInterface {
     /**
      * Mark price and funding rate for a single symbol pushed every 3 seconds or every second.
      *
-     * Update Speed: 3000ms or 1000ms
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM); both `fstream` and `dstream` may subscribe to either UM or CM symbols on this stream.
      *
      * @summary Mark Price Stream
      * @param {MarkPriceStreamRequest} requestParameters Request parameters.
@@ -543,9 +595,10 @@ export interface MarketApiInterface {
     /**
      * Mark price and funding rate for all symbols pushed every 3 seconds or every second.
      *
-     **Note**:
+     **Note:**
+     * - TradFi symbols will be pushed through a seperate message.
      *
-     * TradFi symbols will be pushed through a seperate message.
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM); both `fstream` and `dstream` may subscribe to either UM or CM symbols on this stream.
      *
      * Update Speed: 3000ms or 1000ms
      *
@@ -681,25 +734,25 @@ export interface CompositeIndexSymbolInformationStreamsRequest {
  */
 export interface ContinuousContractKlineCandlestickStreamsRequest {
     /**
-     * The pair parameter
+     *
      * @type {string}
      * @memberof MarketApiContinuousContractKlineCandlestickStreams
      */
     readonly pair: string;
 
     /**
-     * The contractType parameter
-     * @type {string}
+     *
+     * @type {'perpetual' | 'current_quarter' | 'next_quarter' | 'tradifi_perpetual'}
      * @memberof MarketApiContinuousContractKlineCandlestickStreams
      */
-    readonly contractType: string;
+    readonly contractType: ContinuousContractKlineCandlestickStreamsContractTypeEnum;
 
     /**
-     * The interval parameter
-     * @type {string}
+     *
+     * @type {'1s' | '1m' | '3m' | '5m' | '15m' | '30m' | '1h' | '2h' | '4h' | '6h' | '8h' | '12h' | '1d' | '3d' | '1w' | '1M'}
      * @memberof MarketApiContinuousContractKlineCandlestickStreams
      */
-    readonly interval: string;
+    readonly interval: ContinuousContractKlineCandlestickStreamsIntervalEnum;
 
     /**
      * Unique WebSocket request ID.
@@ -776,10 +829,10 @@ export interface KlineCandlestickStreamsRequest {
 
     /**
      * The interval parameter
-     * @type {string}
+     * @type {'1m' | '3m' | '5m' | '15m' | '30m' | '1h' | '2h' | '4h' | '6h' | '8h' | '12h' | '1d' | '3d' | '1w' | '1M'}
      * @memberof MarketApiKlineCandlestickStreams
      */
-    readonly interval: string;
+    readonly interval: KlineCandlestickStreamsIntervalEnum;
 
     /**
      * Unique WebSocket request ID.
@@ -830,10 +883,10 @@ export interface MarkPriceStreamRequest {
 
     /**
      * WebSocket stream update speed
-     * @type {string}
+     * @type {'1s'}
      * @memberof MarketApiMarkPriceStream
      */
-    readonly updateSpeed?: string;
+    readonly updateSpeed?: MarkPriceStreamUpdateSpeedEnum;
 }
 
 /**
@@ -850,10 +903,10 @@ export interface MarkPriceStreamForAllMarketRequest {
 
     /**
      * WebSocket stream update speed
-     * @type {string}
+     * @type {'1s'}
      * @memberof MarketApiMarkPriceStreamForAllMarket
      */
-    readonly updateSpeed?: string;
+    readonly updateSpeed?: MarkPriceStreamForAllMarketUpdateSpeedEnum;
 }
 
 /**
@@ -886,16 +939,19 @@ export class MarketApi implements MarketApiInterface {
     /**
      * The Aggregate Trade Streams push market trade information that is aggregated for fills with same price and taking side every 100 milliseconds. Only market trades will be aggregated, which means the insurance fund trades and ADL trades won't be aggregated.
      *
-     * Retail Price Improvement(RPI) orders are aggregated into field `q` and without special tags to be distinguished.
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM).
      *
      * Update Speed: 100ms
+     *
+     * Response Notes:
+     * - Retail Price Improvement(RPI) orders are aggregated into field q and without special tags to be distinguished.
      *
      * @summary Aggregate Trade Streams
      * @param {AggregateTradeStreamsRequest} requestParameters Request parameters.
      * @returns {WebsocketStream<AggregateTradeStreamsResponse>}
      * @throws {RequiredError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Aggregate-Trade-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-streams/market#aggregate-trade-streams Binance API Documentation}
      */
     public aggregateTradeStreams(
         requestParameters: AggregateTradeStreamsRequest
@@ -914,8 +970,9 @@ export class MarketApi implements MarketApiInterface {
     }
 
     /**
-     * The All Liquidation Order Snapshot Streams push force liquidation order information for all symbols in the market.
-     * For each symbol，only the largest one liquidation order within 1000ms will be pushed as the snapshot. If no liquidation happens in the interval of 1000ms, no stream will be pushed.
+     * The All Liquidation Order Snapshot Streams push force liquidation order information for all symbols in the market. For each symbol，only the latest one liquidation order within 1000ms will be pushed as the snapshot. If no liquidation happens in the interval of 1000ms, no stream will be pushed.
+     *
+     * > **After CM migration**, this stream pushes the merged UM + CM universe (subscribable on both `fstream` and `dstream`); each payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
      *
      * Update Speed: 1000ms
      *
@@ -924,7 +981,7 @@ export class MarketApi implements MarketApiInterface {
      * @returns {WebsocketStream<AllMarketLiquidationOrderStreamsResponse>}
      * @throws {RequiredError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Liquidation-Order-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-streams/market#all-market-liquidation-order-streams Binance API Documentation}
      */
     public allMarketLiquidationOrderStreams(
         requestParameters: AllMarketLiquidationOrderStreamsRequest = {}
@@ -944,6 +1001,8 @@ export class MarketApi implements MarketApiInterface {
     /**
      * 24hr rolling window mini-ticker statistics for all symbols. These are NOT the statistics of the UTC day, but a 24hr rolling window from requestTime to 24hrs before. Note that only tickers that have changed will be present in the array.
      *
+     * > **After CM migration**, this stream pushes the merged UM + CM universe (subscribable on both `fstream` and `dstream`); each payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
+     *
      * Update Speed: 1000ms
      *
      * @summary All Market Mini Tickers Stream
@@ -951,7 +1010,7 @@ export class MarketApi implements MarketApiInterface {
      * @returns {WebsocketStream<AllMarketMiniTickersStreamResponse>}
      * @throws {RequiredError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Mini-Tickers-Stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-streams/market#all-market-mini-tickers-stream Binance API Documentation}
      */
     public allMarketMiniTickersStream(
         requestParameters: AllMarketMiniTickersStreamRequest = {}
@@ -969,6 +1028,8 @@ export class MarketApi implements MarketApiInterface {
     /**
      * 24hr rolling window ticker statistics for all symbols. These are NOT the statistics of the UTC day, but a 24hr rolling window from requestTime to 24hrs before. Note that only tickers that have changed will be present in the array.
      *
+     * > **After CM migration**, this stream pushes the merged UM + CM universe (subscribable on both `fstream` and `dstream`); each payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
+     *
      * Update Speed: 1000ms
      *
      * @summary All Market Tickers Streams
@@ -976,7 +1037,7 @@ export class MarketApi implements MarketApiInterface {
      * @returns {WebsocketStream<AllMarketTickersStreamsResponse>}
      * @throws {RequiredError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Market-Tickers-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-streams/market#all-market-tickers-streams Binance API Documentation}
      */
     public allMarketTickersStreams(
         requestParameters: AllMarketTickersStreamsRequest = {}
@@ -992,16 +1053,18 @@ export class MarketApi implements MarketApiInterface {
     }
 
     /**
-     * Asset index price.
+     * Asset index price. Subscribe with `!assetIndex@arr` for all assets, or `<assetSymbol>@assetIndex` for a specific asset.
+     *
+     * > **CM-UM Integration (Effective 2026-06-30):** Renamed from *Multi-Assets Mode Asset Index*. The stream `!assetIndex@arr` now additionally pushes COIN-M settlement-asset price index entries (e.g., `BTCUSD`, `ETHUSD`, `BNBUSD`). The on-the-wire stream key is unchanged; existing subscriptions continue to work.
      *
      * Update Speed: 1s
      *
-     * @summary Asset Index
+     * @summary Multi-Assets Mode Asset Index
      * @param {AssetIndexRequest} requestParameters Request parameters.
      * @returns {WebsocketStream<AssetIndexResponse>}
      * @throws {RequiredError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Asset-Index Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-streams/market#asset-index Binance API Documentation}
      */
     public assetIndex(
         requestParameters: AssetIndexRequest = {}
@@ -1026,7 +1089,7 @@ export class MarketApi implements MarketApiInterface {
      * @returns {WebsocketStream<CompositeIndexSymbolInformationStreamsResponse>}
      * @throws {RequiredError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Composite-Index-Symbol-Information-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-streams/market#composite-index-symbol-information-streams Binance API Documentation}
      */
     public compositeIndexSymbolInformationStreams(
         requestParameters: CompositeIndexSymbolInformationStreamsRequest
@@ -1045,6 +1108,9 @@ export class MarketApi implements MarketApiInterface {
     }
 
     /**
+     * Continuous Contract Kline/Candlestick Streams
+     *
+     * > **After CM migration**, both `fstream` and `dstream` may subscribe to either UM or CM symbols on this stream.
      *
      * Update Speed: 250ms
      *
@@ -1053,7 +1119,7 @@ export class MarketApi implements MarketApiInterface {
      * @returns {WebsocketStream<ContinuousContractKlineCandlestickStreamsResponse>}
      * @throws {RequiredError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Continuous-Contract-Kline-Candlestick-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-streams/market#continuous-contract-kline-candlestick-streams Binance API Documentation}
      */
     public continuousContractKlineCandlestickStreams(
         requestParameters: ContinuousContractKlineCandlestickStreamsRequest
@@ -1074,7 +1140,9 @@ export class MarketApi implements MarketApiInterface {
     }
 
     /**
-     * ContractInfo stream pushes when contract info updates(listing/settlement/contract bracket update). `bks` field only shows up when bracket gets updated.
+     * ContractInfo stream pushes when contract info updates(listing/settlement/contract bracket update). bks field only shows up when bracket gets updated.
+     *
+     * > **After CM migration**, this stream pushes the merged UM + CM universe (subscribable on both `fstream` and `dstream`); each payload is appended with a new `st` field (`1` = UM, `2` = CM).
      *
      * Update Speed: Real-time
      *
@@ -1083,7 +1151,7 @@ export class MarketApi implements MarketApiInterface {
      * @returns {WebsocketStream<ContractInfoStreamResponse>}
      * @throws {RequiredError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Contract-Info-Stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-streams/market#contract-info-stream Binance API Documentation}
      */
     public contractInfoStream(
         requestParameters: ContractInfoStreamRequest = {}
@@ -1101,6 +1169,8 @@ export class MarketApi implements MarketApiInterface {
     /**
      * 24hr rolling window mini-ticker statistics for a single symbol. These are NOT the statistics of the UTC day, but a 24hr rolling window from requestTime to 24hrs before.
      *
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
+     *
      * Update Speed: 2s
      *
      * @summary Individual Symbol Mini Ticker Stream
@@ -1108,7 +1178,7 @@ export class MarketApi implements MarketApiInterface {
      * @returns {WebsocketStream<IndividualSymbolMiniTickerStreamResponse>}
      * @throws {RequiredError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Mini-Ticker-Stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-streams/market#individual-symbol-mini-ticker-stream Binance API Documentation}
      */
     public individualSymbolMiniTickerStream(
         requestParameters: IndividualSymbolMiniTickerStreamRequest
@@ -1129,6 +1199,8 @@ export class MarketApi implements MarketApiInterface {
     /**
      * 24hr rolling window ticker statistics for a single symbol. These are NOT the statistics of the UTC day, but a 24hr rolling window from requestTime to 24hrs before.
      *
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
+     *
      * Update Speed: 2000ms
      *
      * @summary Individual Symbol Ticker Streams
@@ -1136,7 +1208,7 @@ export class MarketApi implements MarketApiInterface {
      * @returns {WebsocketStream<IndividualSymbolTickerStreamsResponse>}
      * @throws {RequiredError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Ticker-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-streams/market#individual-symbol-ticker-streams Binance API Documentation}
      */
     public individualSymbolTickerStreams(
         requestParameters: IndividualSymbolTickerStreamsRequest
@@ -1157,6 +1229,8 @@ export class MarketApi implements MarketApiInterface {
     /**
      * The Kline/Candlestick Stream push updates to the current klines/candlestick every 250 milliseconds (if existing).
      *
+     * > **After CM migration**, both `fstream` and `dstream` may subscribe to either UM or CM symbols on this stream.
+     *
      * Update Speed: 250ms
      *
      * @summary Kline/Candlestick Streams
@@ -1164,7 +1238,7 @@ export class MarketApi implements MarketApiInterface {
      * @returns {WebsocketStream<KlineCandlestickStreamsResponse>}
      * @throws {RequiredError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Kline-Candlestick-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-streams/market#kline-candlestick-streams Binance API Documentation}
      */
     public klineCandlestickStreams(
         requestParameters: KlineCandlestickStreamsRequest
@@ -1184,8 +1258,7 @@ export class MarketApi implements MarketApiInterface {
     }
 
     /**
-     * The Liquidation Order Snapshot Streams push force liquidation order information for specific symbol.
-     * For each symbol，only the largest one liquidation order within 1000ms will be pushed as the snapshot. If no liquidation happens in the interval of 1000ms, no stream will be pushed.
+     * The Liquidation Order Snapshot Streams push force liquidation order information for specific symbol. For each symbol，only the latest one liquidation order within 1000ms will be pushed as the snapshot. If no liquidation happens in the interval of 1000ms, no stream will be pushed.
      *
      * Update Speed: 1000ms
      *
@@ -1194,7 +1267,7 @@ export class MarketApi implements MarketApiInterface {
      * @returns {WebsocketStream<LiquidationOrderStreamsResponse>}
      * @throws {RequiredError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Liquidation-Order-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-streams/market#liquidation-order-streams Binance API Documentation}
      */
     public liquidationOrderStreams(
         requestParameters: LiquidationOrderStreamsRequest
@@ -1215,14 +1288,14 @@ export class MarketApi implements MarketApiInterface {
     /**
      * Mark price and funding rate for a single symbol pushed every 3 seconds or every second.
      *
-     * Update Speed: 3000ms or 1000ms
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM); both `fstream` and `dstream` may subscribe to either UM or CM symbols on this stream.
      *
      * @summary Mark Price Stream
      * @param {MarkPriceStreamRequest} requestParameters Request parameters.
      * @returns {WebsocketStream<MarkPriceStreamResponse>}
      * @throws {RequiredError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Mark-Price-Stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-streams/market#mark-price-stream Binance API Documentation}
      */
     public markPriceStream(
         requestParameters: MarkPriceStreamRequest
@@ -1244,9 +1317,10 @@ export class MarketApi implements MarketApiInterface {
     /**
      * Mark price and funding rate for all symbols pushed every 3 seconds or every second.
      *
-     **Note**:
+     **Note:**
+     * - TradFi symbols will be pushed through a seperate message.
      *
-     * TradFi symbols will be pushed through a seperate message.
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM); both `fstream` and `dstream` may subscribe to either UM or CM symbols on this stream.
      *
      * Update Speed: 3000ms or 1000ms
      *
@@ -1255,7 +1329,7 @@ export class MarketApi implements MarketApiInterface {
      * @returns {WebsocketStream<MarkPriceStreamForAllMarketResponse>}
      * @throws {RequiredError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Mark-Price-Stream-for-All-market Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-streams/market#mark-price-stream-for-all-market Binance API Documentation}
      */
     public markPriceStreamForAllMarket(
         requestParameters: MarkPriceStreamForAllMarketRequest = {}
@@ -1289,7 +1363,7 @@ export class MarketApi implements MarketApiInterface {
      * @returns {WebsocketStream<TradingSessionStreamResponse>}
      * @throws {RequiredError}
      * @memberof MarketApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Trading-Session-Stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-streams/market#trading-session-stream Binance API Documentation}
      */
     public tradingSessionStream(
         requestParameters: TradingSessionStreamRequest = {}
@@ -1303,4 +1377,56 @@ export class MarketApi implements MarketApiInterface {
             'market'
         );
     }
+}
+
+export enum ContinuousContractKlineCandlestickStreamsContractTypeEnum {
+    perpetual = 'perpetual',
+    current_quarter = 'current_quarter',
+    next_quarter = 'next_quarter',
+    tradifi_perpetual = 'tradifi_perpetual',
+}
+
+export enum ContinuousContractKlineCandlestickStreamsIntervalEnum {
+    INTERVAL_1s = '1s',
+    INTERVAL_1m = '1m',
+    INTERVAL_3m = '3m',
+    INTERVAL_5m = '5m',
+    INTERVAL_15m = '15m',
+    INTERVAL_30m = '30m',
+    INTERVAL_1h = '1h',
+    INTERVAL_2h = '2h',
+    INTERVAL_4h = '4h',
+    INTERVAL_6h = '6h',
+    INTERVAL_8h = '8h',
+    INTERVAL_12h = '12h',
+    INTERVAL_1d = '1d',
+    INTERVAL_3d = '3d',
+    INTERVAL_1w = '1w',
+    INTERVAL_1M = '1M',
+}
+
+export enum KlineCandlestickStreamsIntervalEnum {
+    INTERVAL_1m = '1m',
+    INTERVAL_3m = '3m',
+    INTERVAL_5m = '5m',
+    INTERVAL_15m = '15m',
+    INTERVAL_30m = '30m',
+    INTERVAL_1h = '1h',
+    INTERVAL_2h = '2h',
+    INTERVAL_4h = '4h',
+    INTERVAL_6h = '6h',
+    INTERVAL_8h = '8h',
+    INTERVAL_12h = '12h',
+    INTERVAL_1d = '1d',
+    INTERVAL_3d = '3d',
+    INTERVAL_1w = '1w',
+    INTERVAL_1M = '1M',
+}
+
+export enum MarkPriceStreamUpdateSpeedEnum {
+    UPDATE_SPEED_1s = '1s',
+}
+
+export enum MarkPriceStreamForAllMarketUpdateSpeedEnum {
+    UPDATE_SPEED_1s = '1s',
 }

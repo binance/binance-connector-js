@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -22,7 +22,7 @@ import type { FuturesTradingQuantitativeRulesIndicatorsResponseIndicatorsACCOUNT
 import type { FuturesTradingQuantitativeRulesIndicatorsResponseIndicatorsBTCUSDTInner } from './futures-trading-quantitative-rules-indicators-response-indicators-btcusdtinner';
 
 /**
- *
+ * indicator: quantitative rules indicators, value: user\'s indicators value, triggerValue: trigger indicator value threshold of quantitative rules.
  * @export
  * @interface FuturesTradingQuantitativeRulesIndicatorsResponseIndicators
  */

@@ -14,7 +14,7 @@ const client = new DerivativesTradingUsdsFutures({ configurationRestAPI });
 async function basis() {
     try {
         const response = await client.restAPI.basis({
-            pair: 'pair_example',
+            pair: 'BTCUSDT',
             contractType: DerivativesTradingUsdsFuturesRestAPI.BasisContractTypeEnum.PERPETUAL,
             period: DerivativesTradingUsdsFuturesRestAPI.BasisPeriodEnum.PERIOD_5m,
         });

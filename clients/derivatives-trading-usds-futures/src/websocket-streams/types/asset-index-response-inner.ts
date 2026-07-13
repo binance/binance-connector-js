@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,73 +20,73 @@
  */
 export interface AssetIndexResponseInner {
     /**
-     *
+     * Event type.
      * @type {string}
      * @memberof AssetIndexResponseInner
      */
     e?: string;
     /**
-     *
+     * Event time.
      * @type {number | bigint}
      * @memberof AssetIndexResponseInner
      */
     E?: number | bigint;
     /**
-     *
+     * Asset index symbol.
      * @type {string}
      * @memberof AssetIndexResponseInner
      */
     s?: string;
     /**
-     *
+     * Index price.
      * @type {string}
      * @memberof AssetIndexResponseInner
      */
     i?: string;
     /**
-     *
+     * Bid buffer.
      * @type {string}
      * @memberof AssetIndexResponseInner
      */
     b?: string;
     /**
-     *
+     * Ask buffer.
      * @type {string}
      * @memberof AssetIndexResponseInner
      */
     a?: string;
     /**
-     *
+     * Bid rate.
      * @type {string}
      * @memberof AssetIndexResponseInner
      */
     B?: string;
     /**
-     *
+     * Ask rate.
      * @type {string}
      * @memberof AssetIndexResponseInner
      */
     A?: string;
     /**
-     *
+     * Auto exchange bid buffer.
      * @type {string}
      * @memberof AssetIndexResponseInner
      */
     q?: string;
     /**
-     *
+     * Auto exchange ask buffer.
      * @type {string}
      * @memberof AssetIndexResponseInner
      */
     g?: string;
     /**
-     *
+     * Auto exchange bid rate.
      * @type {string}
      * @memberof AssetIndexResponseInner
      */
     Q?: string;
     /**
-     *
+     * Auto exchange ask rate.
      * @type {string}
      * @memberof AssetIndexResponseInner
      */

@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -31,9 +31,12 @@ const PublicApiParamCreator = function () {
         /**
          * Pushes any update to the best bid or ask's price or quantity in real-time for all symbols.
          *
-         * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+         * > **After CM migration**, this stream pushes the merged UM + CM universe (subscribable on both `fstream` and `dstream`); each payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
          *
          * Update Speed: 5s
+         *
+         * Response Notes:
+         * - Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
          *
          * @summary All Book Tickers Stream
          * @param {string} [id] Unique WebSocket request ID.
@@ -44,20 +47,27 @@ const PublicApiParamCreator = function () {
             return replaceWebsocketStreamsPlaceholders('/!bookTicker'.slice(1), { id });
         },
         /**
-         * Bids and asks, pushed every 250 milliseconds, 500 milliseconds, 100 milliseconds (if existing)
+         * Bids and asks, pushed every 250 milliseconds, 500 milliseconds, 100 milliseconds (if existing).
          *
-         * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+         * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
          *
          * Update Speed: 250ms, 500ms, 100ms
          *
+         * Response Notes:
+         * - Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+         *
          * @summary Diff. Book Depth Streams
-         * @param {string} symbol The symbol parameter
+         * @param {string} symbol Trading pair symbol.
          * @param {string} [id] Unique WebSocket request ID.
-         * @param {string} [updateSpeed] WebSocket stream update speed
+         * @param {DiffBookDepthStreamsUpdateSpeedEnum} [updateSpeed] WebSocket stream update speed
          *
          * @throws {RequiredError}
          */
-        diffBookDepthStreams: (symbol: string, id?: string, updateSpeed?: string): string => {
+        diffBookDepthStreams: (
+            symbol: string,
+            id?: string,
+            updateSpeed?: DiffBookDepthStreamsUpdateSpeedEnum
+        ): string => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('diffBookDepthStreams', 'symbol', symbol);
 
@@ -70,9 +80,12 @@ const PublicApiParamCreator = function () {
         /**
          * Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
          *
-         * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+         * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM).
          *
          * Update Speed: Real-time
+         *
+         * Response Notes:
+         * Retail Price Improvement (RPI) orders are not visible and excluded in the response message.
          *
          * @summary Individual Symbol Book Ticker Streams
          * @param {string} symbol The symbol parameter
@@ -90,25 +103,28 @@ const PublicApiParamCreator = function () {
             });
         },
         /**
-         * Top **<levels\>** bids and asks, Valid **<levels\>** are 5, 10, or 20.
+         * Top <levels> bids and asks
          *
-         * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+         * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
          *
-         * Update Speed: 250ms, 500ms or 100ms
+         * Update Speed: 250ms or 500ms or 100ms
+         *
+         * Response Notes:
+         * Retail Price Improvement (RPI) orders are not visible and excluded in the response message.
          *
          * @summary Partial Book Depth Streams
          * @param {string} symbol The symbol parameter
-         * @param {number | bigint} levels The levels parameter
+         * @param {PartialBookDepthStreamsLevelsEnum} levels The levels parameter
          * @param {string} [id] Unique WebSocket request ID.
-         * @param {string} [updateSpeed] WebSocket stream update speed
+         * @param {PartialBookDepthStreamsUpdateSpeedEnum} [updateSpeed] WebSocket stream update speed
          *
          * @throws {RequiredError}
          */
         partialBookDepthStreams: (
             symbol: string,
-            levels: number | bigint,
+            levels: PartialBookDepthStreamsLevelsEnum,
             id?: string,
-            updateSpeed?: string
+            updateSpeed?: PartialBookDepthStreamsUpdateSpeedEnum
         ): string => {
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('partialBookDepthStreams', 'symbol', symbol);
@@ -123,9 +139,12 @@ const PublicApiParamCreator = function () {
         /**
          * Bids and asks including RPI orders, pushed every 500 milliseconds
          *
-         * RPI(Retail Price Improvement) orders are included and aggreated in the response message. When the quantity of a price level to be updated is equal to 0, it means either all quotations for this price have been filled/canceled, or the quantity of crossed RPI orders for this price are hidden
+         * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
          *
          * Update Speed: 500ms
+         *
+         * Response Notes:
+         * - RPI(Retail Price Improvement) orders are included and aggreated in the response message. When the quantity of a price level to be updated is equal to 0, it means either all quotations for this price have been filled/canceled, or the quantity of crossed RPI orders for this price are hidden
          *
          * @summary RPI Diff. Book Depth Streams
          * @param {string} symbol The symbol parameter
@@ -153,9 +172,12 @@ export interface PublicApiInterface {
     /**
      * Pushes any update to the best bid or ask's price or quantity in real-time for all symbols.
      *
-     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+     * > **After CM migration**, this stream pushes the merged UM + CM universe (subscribable on both `fstream` and `dstream`); each payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
      *
      * Update Speed: 5s
+     *
+     * Response Notes:
+     * - Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
      *
      * @summary All Book Tickers Stream
      * @param {AllBookTickersStreamRequest} requestParameters Request parameters.
@@ -169,11 +191,14 @@ export interface PublicApiInterface {
     ): WebsocketStream<AllBookTickersStreamResponse>;
 
     /**
-     * Bids and asks, pushed every 250 milliseconds, 500 milliseconds, 100 milliseconds (if existing)
+     * Bids and asks, pushed every 250 milliseconds, 500 milliseconds, 100 milliseconds (if existing).
      *
-     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
      *
      * Update Speed: 250ms, 500ms, 100ms
+     *
+     * Response Notes:
+     * - Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
      *
      * @summary Diff. Book Depth Streams
      * @param {DiffBookDepthStreamsRequest} requestParameters Request parameters.
@@ -189,9 +214,12 @@ export interface PublicApiInterface {
     /**
      * Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
      *
-     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM).
      *
      * Update Speed: Real-time
+     *
+     * Response Notes:
+     * Retail Price Improvement (RPI) orders are not visible and excluded in the response message.
      *
      * @summary Individual Symbol Book Ticker Streams
      * @param {IndividualSymbolBookTickerStreamsRequest} requestParameters Request parameters.
@@ -205,11 +233,14 @@ export interface PublicApiInterface {
     ): WebsocketStream<IndividualSymbolBookTickerStreamsResponse>;
 
     /**
-     * Top **<levels\>** bids and asks, Valid **<levels\>** are 5, 10, or 20.
+     * Top <levels> bids and asks
      *
-     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
      *
-     * Update Speed: 250ms, 500ms or 100ms
+     * Update Speed: 250ms or 500ms or 100ms
+     *
+     * Response Notes:
+     * Retail Price Improvement (RPI) orders are not visible and excluded in the response message.
      *
      * @summary Partial Book Depth Streams
      * @param {PartialBookDepthStreamsRequest} requestParameters Request parameters.
@@ -225,9 +256,12 @@ export interface PublicApiInterface {
     /**
      * Bids and asks including RPI orders, pushed every 500 milliseconds
      *
-     * RPI(Retail Price Improvement) orders are included and aggreated in the response message. When the quantity of a price level to be updated is equal to 0, it means either all quotations for this price have been filled/canceled, or the quantity of crossed RPI orders for this price are hidden
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
      *
      * Update Speed: 500ms
+     *
+     * Response Notes:
+     * - RPI(Retail Price Improvement) orders are included and aggreated in the response message. When the quantity of a price level to be updated is equal to 0, it means either all quotations for this price have been filled/canceled, or the quantity of crossed RPI orders for this price are hidden
      *
      * @summary RPI Diff. Book Depth Streams
      * @param {RpiDiffBookDepthStreamsRequest} requestParameters Request parameters.
@@ -260,7 +294,7 @@ export interface AllBookTickersStreamRequest {
  */
 export interface DiffBookDepthStreamsRequest {
     /**
-     * The symbol parameter
+     * Trading pair symbol.
      * @type {string}
      * @memberof PublicApiDiffBookDepthStreams
      */
@@ -275,10 +309,10 @@ export interface DiffBookDepthStreamsRequest {
 
     /**
      * WebSocket stream update speed
-     * @type {string}
+     * @type {'100ms' | '500ms'}
      * @memberof PublicApiDiffBookDepthStreams
      */
-    readonly updateSpeed?: string;
+    readonly updateSpeed?: DiffBookDepthStreamsUpdateSpeedEnum;
 }
 
 /**
@@ -315,10 +349,10 @@ export interface PartialBookDepthStreamsRequest {
 
     /**
      * The levels parameter
-     * @type {number | bigint}
+     * @type {'5' | '10' | '20'}
      * @memberof PublicApiPartialBookDepthStreams
      */
-    readonly levels: number | bigint;
+    readonly levels: PartialBookDepthStreamsLevelsEnum;
 
     /**
      * Unique WebSocket request ID.
@@ -329,10 +363,10 @@ export interface PartialBookDepthStreamsRequest {
 
     /**
      * WebSocket stream update speed
-     * @type {string}
+     * @type {'100ms' | '500ms'}
      * @memberof PublicApiPartialBookDepthStreams
      */
-    readonly updateSpeed?: string;
+    readonly updateSpeed?: PartialBookDepthStreamsUpdateSpeedEnum;
 }
 
 /**
@@ -372,16 +406,19 @@ export class PublicApi implements PublicApiInterface {
     /**
      * Pushes any update to the best bid or ask's price or quantity in real-time for all symbols.
      *
-     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+     * > **After CM migration**, this stream pushes the merged UM + CM universe (subscribable on both `fstream` and `dstream`); each payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
      *
      * Update Speed: 5s
+     *
+     * Response Notes:
+     * - Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
      *
      * @summary All Book Tickers Stream
      * @param {AllBookTickersStreamRequest} requestParameters Request parameters.
      * @returns {WebsocketStream<AllBookTickersStreamResponse>}
      * @throws {RequiredError}
      * @memberof PublicApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/All-Book-Tickers-Stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-streams/public#all-book-tickers-stream Binance API Documentation}
      */
     public allBookTickersStream(
         requestParameters: AllBookTickersStreamRequest = {}
@@ -397,18 +434,21 @@ export class PublicApi implements PublicApiInterface {
     }
 
     /**
-     * Bids and asks, pushed every 250 milliseconds, 500 milliseconds, 100 milliseconds (if existing)
+     * Bids and asks, pushed every 250 milliseconds, 500 milliseconds, 100 milliseconds (if existing).
      *
-     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
      *
      * Update Speed: 250ms, 500ms, 100ms
+     *
+     * Response Notes:
+     * - Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
      *
      * @summary Diff. Book Depth Streams
      * @param {DiffBookDepthStreamsRequest} requestParameters Request parameters.
      * @returns {WebsocketStream<DiffBookDepthStreamsResponse>}
      * @throws {RequiredError}
      * @memberof PublicApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-streams/public#diff-book-depth-streams Binance API Documentation}
      */
     public diffBookDepthStreams(
         requestParameters: DiffBookDepthStreamsRequest
@@ -430,16 +470,19 @@ export class PublicApi implements PublicApiInterface {
     /**
      * Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
      *
-     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM).
      *
      * Update Speed: Real-time
+     *
+     * Response Notes:
+     * Retail Price Improvement (RPI) orders are not visible and excluded in the response message.
      *
      * @summary Individual Symbol Book Ticker Streams
      * @param {IndividualSymbolBookTickerStreamsRequest} requestParameters Request parameters.
      * @returns {WebsocketStream<IndividualSymbolBookTickerStreamsResponse>}
      * @throws {RequiredError}
      * @memberof PublicApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Book-Ticker-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-streams/public#individual-symbol-book-ticker-streams Binance API Documentation}
      */
     public individualSymbolBookTickerStreams(
         requestParameters: IndividualSymbolBookTickerStreamsRequest
@@ -458,18 +501,21 @@ export class PublicApi implements PublicApiInterface {
     }
 
     /**
-     * Top **<levels\>** bids and asks, Valid **<levels\>** are 5, 10, or 20.
+     * Top <levels> bids and asks
      *
-     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
      *
-     * Update Speed: 250ms, 500ms or 100ms
+     * Update Speed: 250ms or 500ms or 100ms
+     *
+     * Response Notes:
+     * Retail Price Improvement (RPI) orders are not visible and excluded in the response message.
      *
      * @summary Partial Book Depth Streams
      * @param {PartialBookDepthStreamsRequest} requestParameters Request parameters.
      * @returns {WebsocketStream<PartialBookDepthStreamsResponse>}
      * @throws {RequiredError}
      * @memberof PublicApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Partial-Book-Depth-Streams Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-streams/public#partial-book-depth-streams Binance API Documentation}
      */
     public partialBookDepthStreams(
         requestParameters: PartialBookDepthStreamsRequest
@@ -492,16 +538,19 @@ export class PublicApi implements PublicApiInterface {
     /**
      * Bids and asks including RPI orders, pushed every 500 milliseconds
      *
-     * RPI(Retail Price Improvement) orders are included and aggreated in the response message. When the quantity of a price level to be updated is equal to 0, it means either all quotations for this price have been filled/canceled, or the quantity of crossed RPI orders for this price are hidden
+     * > **After CM migration**, the payload is appended with a new `st` field (`1` = UM, `2` = CM) and a new `ps` field (pair symbol).
      *
      * Update Speed: 500ms
+     *
+     * Response Notes:
+     * - RPI(Retail Price Improvement) orders are included and aggreated in the response message. When the quantity of a price level to be updated is equal to 0, it means either all quotations for this price have been filled/canceled, or the quantity of crossed RPI orders for this price are hidden
      *
      * @summary RPI Diff. Book Depth Streams
      * @param {RpiDiffBookDepthStreamsRequest} requestParameters Request parameters.
      * @returns {WebsocketStream<RpiDiffBookDepthStreamsResponse>}
      * @throws {RequiredError}
      * @memberof PublicApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams-RPI Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-streams/public#rpi-diff-book-depth-streams Binance API Documentation}
      */
     public rpiDiffBookDepthStreams(
         requestParameters: RpiDiffBookDepthStreamsRequest
@@ -518,4 +567,20 @@ export class PublicApi implements PublicApiInterface {
             'public'
         );
     }
+}
+
+export enum DiffBookDepthStreamsUpdateSpeedEnum {
+    UPDATE_SPEED_100ms = '100ms',
+    UPDATE_SPEED_500ms = '500ms',
+}
+
+export enum PartialBookDepthStreamsLevelsEnum {
+    LEVELS_5 = '5',
+    LEVELS_10 = '10',
+    LEVELS_20 = '20',
+}
+
+export enum PartialBookDepthStreamsUpdateSpeedEnum {
+    UPDATE_SPEED_100ms = '100ms',
+    UPDATE_SPEED_500ms = '500ms',
 }

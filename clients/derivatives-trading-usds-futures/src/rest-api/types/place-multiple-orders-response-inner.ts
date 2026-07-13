@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,7 +20,7 @@
  */
 export interface PlaceMultipleOrdersResponseInner {
     /**
-     *
+     * Client Order Id.
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
@@ -32,61 +32,61 @@ export interface PlaceMultipleOrdersResponseInner {
      */
     cumQty?: string;
     /**
-     *
+     * Cum Quote. Will be removed after CM migration.
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     cumQuote?: string;
     /**
-     *
+     * Executed Qty.
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     executedQty?: string;
     /**
-     *
+     * Order Id.
      * @type {number | bigint}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Avg Price. Will be removed after CM migration.
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     avgPrice?: string;
     /**
-     *
+     * Orig Qty.
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     origQty?: string;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     price?: string;
     /**
-     *
+     * Reduce Only.
      * @type {boolean}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Side.
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     side?: string;
     /**
-     *
+     * Position Side.
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     positionSide?: string;
     /**
-     *
+     * Status.
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
@@ -98,67 +98,67 @@ export interface PlaceMultipleOrdersResponseInner {
      */
     stopPrice?: string;
     /**
-     *
+     * Close Position.
      * @type {boolean}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     closePosition?: boolean;
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Time In Force.
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     timeInForce?: string;
     /**
-     *
+     * Type.
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     type?: string;
     /**
-     *
+     * Orig Type.
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     origType?: string;
     /**
-     *
+     * Update Time.
      * @type {number | bigint}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Working Type.
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     workingType?: string;
     /**
-     *
+     * if conditional order trigger is protected
      * @type {boolean}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     priceProtect?: boolean;
     /**
-     *
+     * price match mode
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     priceMatch?: string;
     /**
-     *
+     * self trading preventation mode
      * @type {string}
      * @memberof PlaceMultipleOrdersResponseInner
      */
     selfTradePreventionMode?: string;
     /**
-     *
+     * order pre-set auto cancel time for TIF GTD order
      * @type {number | bigint}
      * @memberof PlaceMultipleOrdersResponseInner
      */

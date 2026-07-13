@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket API
+ * Futures (USDⓈ-M) WebSocket API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -16,10 +16,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountInformationV2ResponseRateLimitsInner } from './account-information-v2-response-rate-limits-inner';
+import type { AccountInformationResponseRateLimitsInner } from './account-information-response-rate-limits-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FuturesAccountBalanceV2ResponseResultInner } from './futures-account-balance-v2-response-result-inner';
+import type { FuturesAccountBalanceResponseResultInner } from './futures-account-balance-response-result-inner';
 
 /**
  *
@@ -41,14 +41,14 @@ export interface FuturesAccountBalanceResponse {
     status?: number | bigint;
     /**
      *
-     * @type {Array<FuturesAccountBalanceV2ResponseResultInner>}
+     * @type {Array<FuturesAccountBalanceResponseResultInner>}
      * @memberof FuturesAccountBalanceResponse
      */
-    result?: Array<FuturesAccountBalanceV2ResponseResultInner>;
+    result?: Array<FuturesAccountBalanceResponseResultInner>;
     /**
      *
-     * @type {Array<AccountInformationV2ResponseRateLimitsInner>}
+     * @type {Array<AccountInformationResponseRateLimitsInner>}
      * @memberof FuturesAccountBalanceResponse
      */
-    rateLimits?: Array<AccountInformationV2ResponseRateLimitsInner>;
+    rateLimits?: Array<AccountInformationResponseRateLimitsInner>;
 }

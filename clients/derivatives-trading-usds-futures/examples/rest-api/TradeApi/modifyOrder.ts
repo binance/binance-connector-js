@@ -14,10 +14,10 @@ const client = new DerivativesTradingUsdsFutures({ configurationRestAPI });
 async function modifyOrder() {
     try {
         const response = await client.restAPI.modifyOrder({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSDT',
             side: DerivativesTradingUsdsFuturesRestAPI.ModifyOrderSideEnum.BUY,
             quantity: 1.0,
-            price: 1.0,
+            price: 30005,
         });
 
         const rateLimits = response.rateLimits!;

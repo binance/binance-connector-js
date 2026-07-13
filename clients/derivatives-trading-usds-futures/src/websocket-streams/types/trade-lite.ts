@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,73 +20,73 @@
  */
 export interface TradeLite {
     /**
-     *
+     * Event Time
      * @type {number | bigint}
      * @memberof TradeLite
      */
     E?: number | bigint;
     /**
-     *
+     * Transaction Time
      * @type {number | bigint}
      * @memberof TradeLite
      */
     T?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof TradeLite
      */
     s?: string;
     /**
-     *
+     * Original Quantity
      * @type {string}
      * @memberof TradeLite
      */
     q?: string;
     /**
-     *
+     * Original Price
      * @type {string}
      * @memberof TradeLite
      */
     p?: string;
     /**
-     *
+     * Is this trade the maker side?
      * @type {boolean}
      * @memberof TradeLite
      */
     m?: boolean;
     /**
-     *
+     * Client Order Id
      * @type {string}
      * @memberof TradeLite
      */
     c?: string;
     /**
-     *
+     * Side
      * @type {string}
      * @memberof TradeLite
      */
     S?: string;
     /**
-     *
+     * Last Filled Price
      * @type {string}
      * @memberof TradeLite
      */
     L?: string;
     /**
-     *
+     * Order Last Filled Quantity
      * @type {string}
      * @memberof TradeLite
      */
     l?: string;
     /**
-     *
+     * Trade Id
      * @type {number | bigint}
      * @memberof TradeLite
      */
     t?: number | bigint;
     /**
-     *
+     * Order Id
      * @type {number | bigint}
      * @memberof TradeLite
      */

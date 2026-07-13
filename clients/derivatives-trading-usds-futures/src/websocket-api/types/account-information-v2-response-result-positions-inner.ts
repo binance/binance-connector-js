@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket API
+ * Futures (USDⓈ-M) WebSocket API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -26,7 +26,7 @@ export interface AccountInformationV2ResponseResultPositionsInner {
      */
     symbol?: string;
     /**
-     *
+     * position side
      * @type {string}
      * @memberof AccountInformationV2ResponseResultPositionsInner
      */
@@ -38,7 +38,7 @@ export interface AccountInformationV2ResponseResultPositionsInner {
      */
     positionAmt?: string;
     /**
-     *
+     * unrealized profit
      * @type {string}
      * @memberof AccountInformationV2ResponseResultPositionsInner
      */
@@ -62,19 +62,19 @@ export interface AccountInformationV2ResponseResultPositionsInner {
      */
     isolatedWallet?: string;
     /**
-     *
+     * total initial margin required with current mark price
      * @type {string}
      * @memberof AccountInformationV2ResponseResultPositionsInner
      */
     initialMargin?: string;
     /**
-     *
+     * maintenance margin required
      * @type {string}
      * @memberof AccountInformationV2ResponseResultPositionsInner
      */
     maintMargin?: string;
     /**
-     *
+     * last update time
      * @type {number | bigint}
      * @memberof AccountInformationV2ResponseResultPositionsInner
      */

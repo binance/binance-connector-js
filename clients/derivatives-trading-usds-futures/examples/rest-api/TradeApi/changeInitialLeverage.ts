@@ -13,8 +13,8 @@ const client = new DerivativesTradingUsdsFutures({ configurationRestAPI });
 async function changeInitialLeverage() {
     try {
         const response = await client.restAPI.changeInitialLeverage({
-            symbol: 'symbol_example',
-            leverage: 789,
+            symbol: 'BTCUSDT',
+            leverage: 1,
         });
 
         const rateLimits = response.rateLimits!;

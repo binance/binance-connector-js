@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,19 +25,19 @@ import type { MarginCallPInner } from './margin-call-pinner';
  */
 export interface MarginCall {
     /**
-     *
+     * Event Time
      * @type {number | bigint}
      * @memberof MarginCall
      */
     E?: number | bigint;
     /**
-     *
+     * Cross Wallet Balance. Only pushed with crossed position margin call
      * @type {string}
      * @memberof MarginCall
      */
     cw?: string;
     /**
-     *
+     * Position(s) of Margin Call
      * @type {Array<MarginCallPInner>}
      * @memberof MarginCall
      */

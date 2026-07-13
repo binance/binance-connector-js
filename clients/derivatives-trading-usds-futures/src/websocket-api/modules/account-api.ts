@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading USDS Futures WebSocket API
+ * Futures (USDⓈ-M) WebSocket API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -28,9 +28,11 @@ export interface AccountApiInterface {
     /**
      * Get current account information. User in single-asset/ multi-assets mode will see different value, see comments in response section for detail.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Account Information(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Account Information (USER_DATA)
      * @param {AccountInformationRequest} requestParameters Request parameters.
      *
      * @returns {Promise<AccountInformationResponse>}
@@ -43,9 +45,11 @@ export interface AccountApiInterface {
     /**
      * Get current account information. User in single-asset/ multi-assets mode will see different value, see comments in response section for detail.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Account Information V2(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Account Information V2 (USER_DATA)
      * @param {AccountInformationV2Request} requestParameters Request parameters.
      *
      * @returns {Promise<AccountInformationV2Response>}
@@ -56,11 +60,13 @@ export interface AccountApiInterface {
     ): Promise<WebsocketApiResponse<AccountInformationV2Response>>;
 
     /**
-     * Query account balance info
+     * Futures Account Balance
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Futures Account Balance(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Futures Account Balance (USER_DATA)
      * @param {FuturesAccountBalanceRequest} requestParameters Request parameters.
      *
      * @returns {Promise<FuturesAccountBalanceResponse>}
@@ -71,11 +77,13 @@ export interface AccountApiInterface {
     ): Promise<WebsocketApiResponse<FuturesAccountBalanceResponse>>;
 
     /**
-     * Query account balance info
+     * Futures Account Balance V2
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Futures Account Balance V2(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Futures Account Balance V2 (USER_DATA)
      * @param {FuturesAccountBalanceV2Request} requestParameters Request parameters.
      *
      * @returns {Promise<FuturesAccountBalanceV2Response>}
@@ -92,14 +100,14 @@ export interface AccountApiInterface {
  */
 export interface AccountInformationRequest {
     /**
-     * Unique WebSocket request ID.
+     * Id.
      * @type {string}
      * @memberof AccountApiAccountInformation
      */
     readonly id?: string;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof AccountApiAccountInformation
      */
@@ -112,14 +120,14 @@ export interface AccountInformationRequest {
  */
 export interface AccountInformationV2Request {
     /**
-     * Unique WebSocket request ID.
+     * Id.
      * @type {string}
      * @memberof AccountApiAccountInformationV2
      */
     readonly id?: string;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof AccountApiAccountInformationV2
      */
@@ -132,14 +140,14 @@ export interface AccountInformationV2Request {
  */
 export interface FuturesAccountBalanceRequest {
     /**
-     * Unique WebSocket request ID.
+     * Id.
      * @type {string}
      * @memberof AccountApiFuturesAccountBalance
      */
     readonly id?: string;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof AccountApiFuturesAccountBalance
      */
@@ -152,14 +160,14 @@ export interface FuturesAccountBalanceRequest {
  */
 export interface FuturesAccountBalanceV2Request {
     /**
-     * Unique WebSocket request ID.
+     * Id.
      * @type {string}
      * @memberof AccountApiFuturesAccountBalanceV2
      */
     readonly id?: string;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof AccountApiFuturesAccountBalanceV2
      */
@@ -181,13 +189,15 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get current account information. User in single-asset/ multi-assets mode will see different value, see comments in response section for detail.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Account Information(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Account Information (USER_DATA)
      * @param {AccountInformationRequest} requestParameters Request parameters.
      * @returns {Promise<AccountInformationResponse>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-api/account#account-information Binance API Documentation}
      */
     public accountInformation(
         requestParameters: AccountInformationRequest = {}
@@ -202,13 +212,15 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get current account information. User in single-asset/ multi-assets mode will see different value, see comments in response section for detail.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Account Information V2(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Account Information V2 (USER_DATA)
      * @param {AccountInformationV2Request} requestParameters Request parameters.
      * @returns {Promise<AccountInformationV2Response>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information-V2 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-api/account#account-information-v2 Binance API Documentation}
      */
     public accountInformationV2(
         requestParameters: AccountInformationV2Request = {}
@@ -221,15 +233,17 @@ export class AccountApi implements AccountApiInterface {
     }
 
     /**
-     * Query account balance info
+     * Futures Account Balance
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Futures Account Balance(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Futures Account Balance (USER_DATA)
      * @param {FuturesAccountBalanceRequest} requestParameters Request parameters.
      * @returns {Promise<FuturesAccountBalanceResponse>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/websocket-api/Futures-Account-Balance Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-api/account#futures-account-balance Binance API Documentation}
      */
     public futuresAccountBalance(
         requestParameters: FuturesAccountBalanceRequest = {}
@@ -242,15 +256,17 @@ export class AccountApi implements AccountApiInterface {
     }
 
     /**
-     * Query account balance info
+     * Futures Account Balance V2
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Futures Account Balance V2(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Futures Account Balance V2 (USER_DATA)
      * @param {FuturesAccountBalanceV2Request} requestParameters Request parameters.
      * @returns {Promise<FuturesAccountBalanceV2Response>}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/websocket-api/Futures-Account-Balance-V2 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-api/account#futures-account-balance-v2 Binance API Documentation}
      */
     public futuresAccountBalanceV2(
         requestParameters: FuturesAccountBalanceV2Request = {}

@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -19,97 +19,97 @@
 import type { ExchangeInformationResponseSymbolsInnerFiltersInner } from './exchange-information-response-symbols-inner-filters-inner';
 
 /**
- *
+ * symbols.
  * @export
  * @interface ExchangeInformationResponseSymbolsInner
  */
 export interface ExchangeInformationResponseSymbolsInner {
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     symbol?: string;
     /**
-     *
+     * Pair.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     pair?: string;
     /**
-     *
+     * Contract Type.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     contractType?: string;
     /**
-     *
+     * Delivery Date.
      * @type {number | bigint}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     deliveryDate?: number | bigint;
     /**
-     *
+     * Onboard Date.
      * @type {number | bigint}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     onboardDate?: number | bigint;
     /**
-     *
+     * Status.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     status?: string;
     /**
-     *
+     * ignore
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     maintMarginPercent?: string;
     /**
-     *
+     * ignore
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     requiredMarginPercent?: string;
     /**
-     *
+     * Base Asset.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     baseAsset?: string;
     /**
-     *
+     * Quote Asset.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     quoteAsset?: string;
     /**
-     *
+     * Margin Asset.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     marginAsset?: string;
     /**
-     *
+     * please do not use it as tickSize
      * @type {number | bigint}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     pricePrecision?: number | bigint;
     /**
-     *
+     * please do not use it as stepSize
      * @type {number | bigint}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     quantityPrecision?: number | bigint;
     /**
-     *
+     * Base Asset Precision.
      * @type {number | bigint}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     baseAssetPrecision?: number | bigint;
     /**
-     *
+     * Quote Precision.
      * @type {number | bigint}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
@@ -133,7 +133,7 @@ export interface ExchangeInformationResponseSymbolsInner {
      */
     settlePlan?: number | bigint;
     /**
-     *
+     * threshold for algo order with \"priceProtect\"
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
@@ -151,19 +151,19 @@ export interface ExchangeInformationResponseSymbolsInner {
      */
     orderTypes?: Array<string>;
     /**
-     *
+     * Time In Force.
      * @type {Array<string>}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     timeInForce?: Array<string>;
     /**
-     *
+     * liquidation fee rate
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInner
      */
     liquidationFee?: string;
     /**
-     *
+     * the max price difference rate( from mark price) a market order can make
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInner
      */

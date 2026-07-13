@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,157 +20,157 @@
  */
 export interface QueryCurrentOpenOrderResponse {
     /**
-     *
+     * Avg Price.
      * @type {string}
      * @memberof QueryCurrentOpenOrderResponse
      */
     avgPrice?: string;
     /**
-     *
+     * Client Order Id.
      * @type {string}
      * @memberof QueryCurrentOpenOrderResponse
      */
     clientOrderId?: string;
     /**
-     *
+     * Cum Quote.
      * @type {string}
      * @memberof QueryCurrentOpenOrderResponse
      */
     cumQuote?: string;
     /**
-     *
+     * Executed Qty.
      * @type {string}
      * @memberof QueryCurrentOpenOrderResponse
      */
     executedQty?: string;
     /**
-     *
+     * Order Id.
      * @type {number | bigint}
      * @memberof QueryCurrentOpenOrderResponse
      */
     orderId?: number | bigint;
     /**
-     *
+     * Orig Qty.
      * @type {string}
      * @memberof QueryCurrentOpenOrderResponse
      */
     origQty?: string;
     /**
-     *
+     * Orig Type.
      * @type {string}
      * @memberof QueryCurrentOpenOrderResponse
      */
     origType?: string;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof QueryCurrentOpenOrderResponse
      */
     price?: string;
     /**
-     *
+     * Reduce Only.
      * @type {boolean}
      * @memberof QueryCurrentOpenOrderResponse
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Side.
      * @type {string}
      * @memberof QueryCurrentOpenOrderResponse
      */
     side?: string;
     /**
-     *
-     * @type {string}
-     * @memberof QueryCurrentOpenOrderResponse
-     */
-    positionSide?: string;
-    /**
-     *
+     * Status.
      * @type {string}
      * @memberof QueryCurrentOpenOrderResponse
      */
     status?: string;
     /**
-     *
+     * Position Side.
+     * @type {string}
+     * @memberof QueryCurrentOpenOrderResponse
+     */
+    positionSide?: string;
+    /**
+     * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
      * @memberof QueryCurrentOpenOrderResponse
      */
     stopPrice?: string;
     /**
-     *
+     * if Close-All
      * @type {boolean}
      * @memberof QueryCurrentOpenOrderResponse
      */
     closePosition?: boolean;
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof QueryCurrentOpenOrderResponse
      */
     symbol?: string;
     /**
-     *
+     * order time
      * @type {number | bigint}
      * @memberof QueryCurrentOpenOrderResponse
      */
     time?: number | bigint;
     /**
-     *
+     * Time In Force.
      * @type {string}
      * @memberof QueryCurrentOpenOrderResponse
      */
     timeInForce?: string;
     /**
-     *
+     * Type.
      * @type {string}
      * @memberof QueryCurrentOpenOrderResponse
      */
     type?: string;
     /**
-     *
+     * activation price, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof QueryCurrentOpenOrderResponse
      */
     activatePrice?: string;
     /**
-     *
+     * callback rate, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof QueryCurrentOpenOrderResponse
      */
     priceRate?: string;
     /**
-     *
+     * Update Time.
      * @type {number | bigint}
      * @memberof QueryCurrentOpenOrderResponse
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Working Type.
      * @type {string}
      * @memberof QueryCurrentOpenOrderResponse
      */
     workingType?: string;
     /**
-     *
+     * if conditional order trigger is protected
      * @type {boolean}
      * @memberof QueryCurrentOpenOrderResponse
      */
     priceProtect?: boolean;
     /**
-     *
+     * price match mode
      * @type {string}
      * @memberof QueryCurrentOpenOrderResponse
      */
     priceMatch?: string;
     /**
-     *
+     * self trading preventation mode
      * @type {string}
      * @memberof QueryCurrentOpenOrderResponse
      */
     selfTradePreventionMode?: string;
     /**
-     *
+     * order pre-set auot cancel time for TIF GTD order
      * @type {number | bigint}
      * @memberof QueryCurrentOpenOrderResponse
      */

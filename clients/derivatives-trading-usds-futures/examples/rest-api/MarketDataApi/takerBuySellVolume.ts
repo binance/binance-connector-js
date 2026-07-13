@@ -14,7 +14,7 @@ const client = new DerivativesTradingUsdsFutures({ configurationRestAPI });
 async function takerBuySellVolume() {
     try {
         const response = await client.restAPI.takerBuySellVolume({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSDT',
             period: DerivativesTradingUsdsFuturesRestAPI.TakerBuySellVolumePeriodEnum.PERIOD_5m,
         });
 

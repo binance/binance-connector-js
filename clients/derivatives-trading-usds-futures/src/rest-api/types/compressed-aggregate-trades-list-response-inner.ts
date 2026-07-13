@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,49 +20,49 @@
  */
 export interface CompressedAggregateTradesListResponseInner {
     /**
-     *
+     * Aggregate tradeId
      * @type {number | bigint}
      * @memberof CompressedAggregateTradesListResponseInner
      */
     a?: number | bigint;
     /**
-     *
+     * Price
      * @type {string}
      * @memberof CompressedAggregateTradesListResponseInner
      */
     p?: string;
     /**
-     *
+     * Quantity
      * @type {string}
      * @memberof CompressedAggregateTradesListResponseInner
      */
     q?: string;
     /**
-     *
+     * Normal quantity without the trades involving RPI orders
      * @type {string}
      * @memberof CompressedAggregateTradesListResponseInner
      */
     nq?: string;
     /**
-     *
+     * First tradeId
      * @type {number | bigint}
      * @memberof CompressedAggregateTradesListResponseInner
      */
     f?: number | bigint;
     /**
-     *
+     * Last tradeId
      * @type {number | bigint}
      * @memberof CompressedAggregateTradesListResponseInner
      */
     l?: number | bigint;
     /**
-     *
+     * Timestamp
      * @type {number | bigint}
      * @memberof CompressedAggregateTradesListResponseInner
      */
     T?: number | bigint;
     /**
-     *
+     * Was the buyer the maker?
      * @type {boolean}
      * @memberof CompressedAggregateTradesListResponseInner
      */

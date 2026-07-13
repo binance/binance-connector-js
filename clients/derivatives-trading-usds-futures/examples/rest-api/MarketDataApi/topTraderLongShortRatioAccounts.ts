@@ -14,7 +14,7 @@ const client = new DerivativesTradingUsdsFutures({ configurationRestAPI });
 async function topTraderLongShortRatioAccounts() {
     try {
         const response = await client.restAPI.topTraderLongShortRatioAccounts({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSDT',
             period: DerivativesTradingUsdsFuturesRestAPI.TopTraderLongShortRatioAccountsPeriodEnum
                 .PERIOD_5m,
         });

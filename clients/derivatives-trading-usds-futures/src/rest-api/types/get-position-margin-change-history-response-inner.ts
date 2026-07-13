@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,43 +20,43 @@
  */
 export interface GetPositionMarginChangeHistoryResponseInner {
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof GetPositionMarginChangeHistoryResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Type.
      * @type {number | bigint}
      * @memberof GetPositionMarginChangeHistoryResponseInner
      */
     type?: number | bigint;
     /**
-     *
+     * Delta Type.
      * @type {string}
      * @memberof GetPositionMarginChangeHistoryResponseInner
      */
     deltaType?: string;
     /**
-     *
+     * Amount.
      * @type {string}
      * @memberof GetPositionMarginChangeHistoryResponseInner
      */
     amount?: string;
     /**
-     *
+     * Asset.
      * @type {string}
      * @memberof GetPositionMarginChangeHistoryResponseInner
      */
     asset?: string;
     /**
-     *
+     * Time.
      * @type {number | bigint}
      * @memberof GetPositionMarginChangeHistoryResponseInner
      */
     time?: number | bigint;
     /**
-     *
+     * Position Side.
      * @type {string}
      * @memberof GetPositionMarginChangeHistoryResponseInner
      */

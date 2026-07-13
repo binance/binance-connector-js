@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,57 +25,57 @@ import type { ContractInfoStreamResponseBksInner } from './contract-info-stream-
  */
 export interface ContractInfoStreamResponse {
     /**
-     *
+     * Event type.
      * @type {string}
      * @memberof ContractInfoStreamResponse
      */
     e?: string;
     /**
-     *
+     * Event time.
      * @type {number | bigint}
      * @memberof ContractInfoStreamResponse
      */
     E?: number | bigint;
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof ContractInfoStreamResponse
      */
     s?: string;
     /**
-     *
+     * Contract type.
      * @type {string}
      * @memberof ContractInfoStreamResponse
      */
     ct?: string;
     /**
-     *
+     * Delivery date time.
      * @type {number | bigint}
      * @memberof ContractInfoStreamResponse
      */
     dt?: number | bigint;
     /**
-     *
+     * Onboard date time.
      * @type {number | bigint}
      * @memberof ContractInfoStreamResponse
      */
     ot?: number | bigint;
     /**
-     *
+     * Contract status.
      * @type {string}
      * @memberof ContractInfoStreamResponse
      */
     cs?: string;
     /**
-     *
+     * Notional bracket updates.
      * @type {Array<ContractInfoStreamResponseBksInner>}
      * @memberof ContractInfoStreamResponse
      */
     bks?: Array<ContractInfoStreamResponseBksInner>;
     /**
-     *
-     * @type {number | bigint}
+     * (After CM migration) Symbol type: 1 = UM, 2 = CM
+     * @type {number}
      * @memberof ContractInfoStreamResponse
      */
-    st?: number | bigint;
+    st?: number;
 }

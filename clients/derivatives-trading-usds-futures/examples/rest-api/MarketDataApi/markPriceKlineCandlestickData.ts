@@ -14,10 +14,10 @@ const client = new DerivativesTradingUsdsFutures({ configurationRestAPI });
 async function markPriceKlineCandlestickData() {
     try {
         const response = await client.restAPI.markPriceKlineCandlestickData({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSDT',
             interval:
                 DerivativesTradingUsdsFuturesRestAPI.MarkPriceKlineCandlestickDataIntervalEnum
-                    .INTERVAL_1s,
+                    .INTERVAL_1m,
         });
 
         const rateLimits = response.rateLimits!;

@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,7 +20,7 @@
  */
 export interface TestOrderResponse {
     /**
-     *
+     * Client Order Id.
      * @type {string}
      * @memberof TestOrderResponse
      */
@@ -32,145 +32,145 @@ export interface TestOrderResponse {
      */
     cumQty?: string;
     /**
-     *
+     * Cum Quote.
      * @type {string}
      * @memberof TestOrderResponse
      */
     cumQuote?: string;
     /**
-     *
+     * Executed Qty.
      * @type {string}
      * @memberof TestOrderResponse
      */
     executedQty?: string;
     /**
-     *
+     * Order Id.
      * @type {number | bigint}
      * @memberof TestOrderResponse
      */
     orderId?: number | bigint;
     /**
-     *
+     * Avg Price.
      * @type {string}
      * @memberof TestOrderResponse
      */
     avgPrice?: string;
     /**
-     *
+     * Orig Qty.
      * @type {string}
      * @memberof TestOrderResponse
      */
     origQty?: string;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof TestOrderResponse
      */
     price?: string;
     /**
-     *
+     * Reduce Only.
      * @type {boolean}
      * @memberof TestOrderResponse
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Side.
      * @type {string}
      * @memberof TestOrderResponse
      */
     side?: string;
     /**
-     *
+     * Position Side.
      * @type {string}
      * @memberof TestOrderResponse
      */
     positionSide?: string;
     /**
-     *
+     * Status.
      * @type {string}
      * @memberof TestOrderResponse
      */
     status?: string;
     /**
-     *
+     * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
      * @memberof TestOrderResponse
      */
     stopPrice?: string;
     /**
-     *
+     * if Close-All
      * @type {boolean}
      * @memberof TestOrderResponse
      */
     closePosition?: boolean;
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof TestOrderResponse
      */
     symbol?: string;
     /**
-     *
+     * Time In Force.
      * @type {string}
      * @memberof TestOrderResponse
      */
     timeInForce?: string;
     /**
-     *
+     * Type.
      * @type {string}
      * @memberof TestOrderResponse
      */
     type?: string;
     /**
-     *
+     * Orig Type.
      * @type {string}
      * @memberof TestOrderResponse
      */
     origType?: string;
     /**
-     *
+     * activation price, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof TestOrderResponse
      */
     activatePrice?: string;
     /**
-     *
+     * callback rate, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof TestOrderResponse
      */
     priceRate?: string;
     /**
-     *
+     * Update Time.
      * @type {number | bigint}
      * @memberof TestOrderResponse
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Working Type.
      * @type {string}
      * @memberof TestOrderResponse
      */
     workingType?: string;
     /**
-     *
+     * if conditional order trigger is protected
      * @type {boolean}
      * @memberof TestOrderResponse
      */
     priceProtect?: boolean;
     /**
-     *
+     * price match mode
      * @type {string}
      * @memberof TestOrderResponse
      */
     priceMatch?: string;
     /**
-     *
+     * self trading preventation mode
      * @type {string}
      * @memberof TestOrderResponse
      */
     selfTradePreventionMode?: string;
     /**
-     *
+     * order pre-set auot cancel time for TIF GTD order
      * @type {number | bigint}
      * @memberof TestOrderResponse
      */

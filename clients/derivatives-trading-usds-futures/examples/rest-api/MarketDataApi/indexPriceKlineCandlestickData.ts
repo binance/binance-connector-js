@@ -14,10 +14,10 @@ const client = new DerivativesTradingUsdsFutures({ configurationRestAPI });
 async function indexPriceKlineCandlestickData() {
     try {
         const response = await client.restAPI.indexPriceKlineCandlestickData({
-            pair: 'pair_example',
+            pair: 'BTCUSDT',
             interval:
                 DerivativesTradingUsdsFuturesRestAPI.IndexPriceKlineCandlestickDataIntervalEnum
-                    .INTERVAL_1s,
+                    .INTERVAL_1m,
         });
 
         const rateLimits = response.rateLimits!;

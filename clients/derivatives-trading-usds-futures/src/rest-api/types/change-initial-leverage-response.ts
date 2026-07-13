@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,19 +20,19 @@
  */
 export interface ChangeInitialLeverageResponse {
     /**
-     *
+     * Leverage.
      * @type {number | bigint}
      * @memberof ChangeInitialLeverageResponse
      */
     leverage?: number | bigint;
     /**
-     *
+     * Max Notional Value.
      * @type {string}
      * @memberof ChangeInitialLeverageResponse
      */
     maxNotionalValue?: string;
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof ChangeInitialLeverageResponse
      */

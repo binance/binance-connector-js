@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -28,79 +28,79 @@ import type { AccountInformationV3ResponsePositionsInner } from './account-infor
  */
 export interface AccountInformationV3Response {
     /**
-     *
+     * Total initial margin requirement.
      * @type {string}
      * @memberof AccountInformationV3Response
      */
     totalInitialMargin?: string;
     /**
-     *
+     * Total maintenance margin requirement.
      * @type {string}
      * @memberof AccountInformationV3Response
      */
     totalMaintMargin?: string;
     /**
-     *
+     * Total wallet balance.
      * @type {string}
      * @memberof AccountInformationV3Response
      */
     totalWalletBalance?: string;
     /**
-     *
+     * Total unrealized profit.
      * @type {string}
      * @memberof AccountInformationV3Response
      */
     totalUnrealizedProfit?: string;
     /**
-     *
+     * Total margin balance.
      * @type {string}
      * @memberof AccountInformationV3Response
      */
     totalMarginBalance?: string;
     /**
-     *
+     * Initial margin required for positions.
      * @type {string}
      * @memberof AccountInformationV3Response
      */
     totalPositionInitialMargin?: string;
     /**
-     *
+     * Initial margin required for open orders.
      * @type {string}
      * @memberof AccountInformationV3Response
      */
     totalOpenOrderInitialMargin?: string;
     /**
-     *
+     * Cross wallet balance.
      * @type {string}
      * @memberof AccountInformationV3Response
      */
     totalCrossWalletBalance?: string;
     /**
-     *
+     * Unrealized PnL for cross positions.
      * @type {string}
      * @memberof AccountInformationV3Response
      */
     totalCrossUnPnl?: string;
     /**
-     *
+     * Available balance.
      * @type {string}
      * @memberof AccountInformationV3Response
      */
     availableBalance?: string;
     /**
-     *
+     * Maximum transferable/withdrawable amount.
      * @type {string}
      * @memberof AccountInformationV3Response
      */
     maxWithdrawAmount?: string;
     /**
-     *
+     * Asset-level account details.
      * @type {Array<AccountInformationV3ResponseAssetsInner>}
      * @memberof AccountInformationV3Response
      */
     assets?: Array<AccountInformationV3ResponseAssetsInner>;
     /**
-     *
+     * Position details for symbols.
      * @type {Array<AccountInformationV3ResponsePositionsInner>}
      * @memberof AccountInformationV3Response
      */

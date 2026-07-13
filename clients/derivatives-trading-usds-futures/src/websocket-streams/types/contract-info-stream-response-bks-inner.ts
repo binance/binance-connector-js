@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,43 +20,43 @@
  */
 export interface ContractInfoStreamResponseBksInner {
     /**
-     *
+     * Notional bracket
      * @type {number | bigint}
      * @memberof ContractInfoStreamResponseBksInner
      */
     bs?: number | bigint;
     /**
-     *
+     * Floor notional of this bracket
      * @type {number | bigint}
      * @memberof ContractInfoStreamResponseBksInner
      */
     bnf?: number | bigint;
     /**
-     *
+     * Cap notional of this bracket
      * @type {number | bigint}
      * @memberof ContractInfoStreamResponseBksInner
      */
     bnc?: number | bigint;
     /**
-     *
+     * Maintenance ratio for this bracket
      * @type {number}
      * @memberof ContractInfoStreamResponseBksInner
      */
     mmr?: number;
     /**
-     *
+     * Auxiliary number for quick calculation
      * @type {number | bigint}
      * @memberof ContractInfoStreamResponseBksInner
      */
     cf?: number | bigint;
     /**
-     *
+     * Min leverage for this bracket
      * @type {number | bigint}
      * @memberof ContractInfoStreamResponseBksInner
      */
     mi?: number | bigint;
     /**
-     *
+     * Max leverage for this bracket
      * @type {number | bigint}
      * @memberof ContractInfoStreamResponseBksInner
      */

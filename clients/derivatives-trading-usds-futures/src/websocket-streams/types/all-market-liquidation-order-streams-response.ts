@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,13 +25,13 @@ import type { AllMarketLiquidationOrderStreamsResponseO } from './all-market-liq
  */
 export interface AllMarketLiquidationOrderStreamsResponse {
     /**
-     *
+     * Event Type
      * @type {string}
      * @memberof AllMarketLiquidationOrderStreamsResponse
      */
     e?: string;
     /**
-     *
+     * Event Time
      * @type {number | bigint}
      * @memberof AllMarketLiquidationOrderStreamsResponse
      */
@@ -43,15 +43,15 @@ export interface AllMarketLiquidationOrderStreamsResponse {
      */
     o?: AllMarketLiquidationOrderStreamsResponseO;
     /**
-     *
+     * (After CM migration) Pair symbol
      * @type {string}
      * @memberof AllMarketLiquidationOrderStreamsResponse
      */
     ps?: string;
     /**
-     *
-     * @type {number | bigint}
+     * (After CM migration) Symbol type: 1 = UM, 2 = CM
+     * @type {number}
      * @memberof AllMarketLiquidationOrderStreamsResponse
      */
-    st?: number | bigint;
+    st?: number;
 }

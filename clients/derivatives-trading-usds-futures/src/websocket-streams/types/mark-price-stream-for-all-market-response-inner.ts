@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,63 +20,63 @@
  */
 export interface MarkPriceStreamForAllMarketResponseInner {
     /**
-     *
+     * Event type
      * @type {string}
      * @memberof MarkPriceStreamForAllMarketResponseInner
      */
     e?: string;
     /**
-     *
+     * Event time
      * @type {number | bigint}
      * @memberof MarkPriceStreamForAllMarketResponseInner
      */
     E?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof MarkPriceStreamForAllMarketResponseInner
      */
     s?: string;
     /**
-     *
+     * Mark price
      * @type {string}
      * @memberof MarkPriceStreamForAllMarketResponseInner
      */
     p?: string;
     /**
-     *
-     * @type {string}
-     * @memberof MarkPriceStreamForAllMarketResponseInner
-     */
-    ap?: string;
-    /**
-     *
+     * Index price
      * @type {string}
      * @memberof MarkPriceStreamForAllMarketResponseInner
      */
     i?: string;
     /**
-     *
+     * Estimated Settle Price, only useful in the last hour before the settlement starts
      * @type {string}
      * @memberof MarkPriceStreamForAllMarketResponseInner
      */
     P?: string;
     /**
-     *
+     * Funding rate
      * @type {string}
      * @memberof MarkPriceStreamForAllMarketResponseInner
      */
     r?: string;
     /**
-     *
+     * Mark price moving average
+     * @type {string}
+     * @memberof MarkPriceStreamForAllMarketResponseInner
+     */
+    ap?: string;
+    /**
+     * Next funding time
      * @type {number | bigint}
      * @memberof MarkPriceStreamForAllMarketResponseInner
      */
     T?: number | bigint;
     /**
-     *
-     * @type {number | bigint}
+     * (After CM migration) Symbol type: 1 = UM, 2 = CM
+     * @type {number}
      * @memberof MarkPriceStreamForAllMarketResponseInner
      */
-    st?: number | bigint;
+    st?: number;
 }

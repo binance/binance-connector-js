@@ -1,10 +1,9 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,13 +13,6 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { DiffBookDepthStreamsResponseAItem } from './diff-book-depth-streams-response-aitem';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { DiffBookDepthStreamsResponseBItem } from './diff-book-depth-streams-response-bitem';
-
 /**
  *
  * @export
@@ -28,69 +20,69 @@ import type { DiffBookDepthStreamsResponseBItem } from './diff-book-depth-stream
  */
 export interface DiffBookDepthStreamsResponse {
     /**
-     *
+     * Event type.
      * @type {string}
      * @memberof DiffBookDepthStreamsResponse
      */
     e?: string;
     /**
-     *
+     * Event time.
      * @type {number | bigint}
      * @memberof DiffBookDepthStreamsResponse
      */
     E?: number | bigint;
     /**
-     *
+     * Transaction time.
      * @type {number | bigint}
      * @memberof DiffBookDepthStreamsResponse
      */
     T?: number | bigint;
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof DiffBookDepthStreamsResponse
      */
     s?: string;
     /**
-     *
+     * First update ID in the event.
      * @type {number | bigint}
      * @memberof DiffBookDepthStreamsResponse
      */
     U?: number | bigint;
     /**
-     *
+     * Final update ID in the event.
      * @type {number | bigint}
      * @memberof DiffBookDepthStreamsResponse
      */
     u?: number | bigint;
     /**
-     *
+     * Final update ID in the previous stream event.
      * @type {number | bigint}
      * @memberof DiffBookDepthStreamsResponse
      */
     pu?: number | bigint;
     /**
-     *
-     * @type {Array<DiffBookDepthStreamsResponseBItem>}
+     * Bid updates.
+     * @type {Array<Array<string>>}
      * @memberof DiffBookDepthStreamsResponse
      */
-    b?: Array<DiffBookDepthStreamsResponseBItem>;
+    b?: Array<Array<string>>;
     /**
-     *
-     * @type {Array<DiffBookDepthStreamsResponseAItem>}
+     * Ask updates.
+     * @type {Array<Array<string>>}
      * @memberof DiffBookDepthStreamsResponse
      */
-    a?: Array<DiffBookDepthStreamsResponseAItem>;
+    a?: Array<Array<string>>;
     /**
-     *
+     * (After CM migration) Pair symbol
      * @type {string}
      * @memberof DiffBookDepthStreamsResponse
      */
     ps?: string;
     /**
-     *
-     * @type {number | bigint}
+     * (After CM migration) Symbol type: 1 = UM, 2 = CM
+     * @type {number}
      * @memberof DiffBookDepthStreamsResponse
      */
-    st?: number | bigint;
+    st?: number;
 }

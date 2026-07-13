@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket API
+ * Futures (USDⓈ-M) WebSocket API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -22,8 +22,11 @@ import { ConfigurationWebsocketAPI, WebsocketAPIBase, randomString } from '@bina
 import {
     TradeApi,
     ModifyOrderSideEnum,
+    NewAlgoOrderAlgoTypeEnum,
     NewAlgoOrderSideEnum,
+    NewAlgoOrderTypeEnum,
     NewOrderSideEnum,
+    NewOrderTypeEnum,
 } from '../../../src/websocket-api';
 import {
     CancelOrderRequest,
@@ -301,7 +304,7 @@ describe('TradeApi', () => {
             mockResponse.id = randomString();
 
             const params: CancelOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             let resolveTest: (value: unknown) => void;
@@ -358,7 +361,7 @@ describe('TradeApi', () => {
             };
 
             const params: CancelOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             let resolveTest: (value: unknown) => void;
@@ -392,7 +395,7 @@ describe('TradeApi', () => {
             jest.useRealTimers();
 
             const params: CancelOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             let resolveTest: (value: unknown) => void;
@@ -493,27 +496,13 @@ describe('TradeApi', () => {
                             limit: 300,
                             count: 1,
                         },
-                        {
-                            rateLimitType: 'ORDERS',
-                            interval: 'MINUTE',
-                            intervalNum: 1,
-                            limit: 1200,
-                            count: 1,
-                        },
-                        {
-                            rateLimitType: 'REQUEST_WEIGHT',
-                            interval: 'MINUTE',
-                            intervalNum: 1,
-                            limit: 2400,
-                            count: 1,
-                        },
                     ],
                 })
             );
             mockResponse.id = randomString();
 
             const params: ModifyOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: ModifyOrderSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -573,7 +562,7 @@ describe('TradeApi', () => {
             };
 
             const params: ModifyOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: ModifyOrderSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -610,7 +599,7 @@ describe('TradeApi', () => {
             jest.useRealTimers();
 
             const params: ModifyOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: ModifyOrderSideEnum.BUY,
                 quantity: 1.0,
                 price: 1.0,
@@ -693,7 +682,7 @@ describe('TradeApi', () => {
                         algoStatus: 'NEW',
                         triggerPrice: '120000.00',
                         price: '160000.00',
-                        icebergQuantity: null,
+                        icebergQuantity: 'null',
                         selfTradePreventionMode: 'EXPIRE_MAKER',
                         workingType: 'CONTRACT_PRICE',
                         priceMatch: 'NONE',
@@ -719,10 +708,10 @@ describe('TradeApi', () => {
             mockResponse.id = randomString();
 
             const params: NewAlgoOrderRequest = {
-                algoType: 'algoType_example',
-                symbol: 'symbol_example',
+                algoType: NewAlgoOrderAlgoTypeEnum.CONDITIONAL,
+                symbol: 'BTCUSDT',
                 side: NewAlgoOrderSideEnum.BUY,
-                type: 'type_example',
+                type: NewAlgoOrderTypeEnum.STOP_MARKET,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -779,10 +768,10 @@ describe('TradeApi', () => {
             };
 
             const params: NewAlgoOrderRequest = {
-                algoType: 'algoType_example',
-                symbol: 'symbol_example',
+                algoType: NewAlgoOrderAlgoTypeEnum.CONDITIONAL,
+                symbol: 'BTCUSDT',
                 side: NewAlgoOrderSideEnum.BUY,
-                type: 'type_example',
+                type: NewAlgoOrderTypeEnum.STOP_MARKET,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -816,10 +805,10 @@ describe('TradeApi', () => {
             jest.useRealTimers();
 
             const params: NewAlgoOrderRequest = {
-                algoType: 'algoType_example',
-                symbol: 'symbol_example',
+                algoType: NewAlgoOrderAlgoTypeEnum.CONDITIONAL,
+                symbol: 'BTCUSDT',
                 side: NewAlgoOrderSideEnum.BUY,
-                type: 'type_example',
+                type: NewAlgoOrderTypeEnum.STOP_MARKET,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -920,29 +909,15 @@ describe('TradeApi', () => {
                             limit: 300,
                             count: 1,
                         },
-                        {
-                            rateLimitType: 'ORDERS',
-                            interval: 'MINUTE',
-                            intervalNum: 1,
-                            limit: 1200,
-                            count: 1,
-                        },
-                        {
-                            rateLimitType: 'REQUEST_WEIGHT',
-                            interval: 'MINUTE',
-                            intervalNum: 1,
-                            limit: 2400,
-                            count: 1,
-                        },
                     ],
                 })
             );
             mockResponse.id = randomString();
 
             const params: NewOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewOrderSideEnum.BUY,
-                type: 'type_example',
+                type: NewOrderTypeEnum.LIMIT,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -999,9 +974,9 @@ describe('TradeApi', () => {
             };
 
             const params: NewOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewOrderSideEnum.BUY,
-                type: 'type_example',
+                type: NewOrderTypeEnum.LIMIT,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -1035,9 +1010,9 @@ describe('TradeApi', () => {
             jest.useRealTimers();
 
             const params: NewOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 side: NewOrderSideEnum.BUY,
-                type: 'type_example',
+                type: NewOrderTypeEnum.LIMIT,
             };
 
             let resolveTest: (value: unknown) => void;
@@ -1121,43 +1096,7 @@ describe('TradeApi', () => {
                             symbol: 'BTCUSDT',
                             unRealizedProfit: '0.00000000',
                             positionSide: 'BOTH',
-                            updateTime: 0,
-                        },
-                        {
-                            symbol: 'BTCUSDT',
-                            positionAmt: '0.001',
-                            entryPrice: '22185.2',
-                            breakEvenPrice: '0.0',
-                            markPrice: '21123.05052574',
-                            unRealizedProfit: '-1.06214947',
-                            liquidationPrice: '19731.45529116',
-                            leverage: '4',
-                            maxNotionalValue: '100000000',
-                            marginType: 'cross',
-                            isolatedMargin: '0.00000000',
-                            isAutoAddMargin: 'false',
-                            positionSide: 'LONG',
-                            notional: '21.12305052',
-                            isolatedWallet: '0',
-                            updateTime: 1655217461579,
-                        },
-                        {
-                            symbol: 'BTCUSDT',
-                            positionAmt: '0.000',
-                            entryPrice: '0.0',
-                            breakEvenPrice: '0.0',
-                            markPrice: '21123.05052574',
-                            unRealizedProfit: '0.00000000',
-                            liquidationPrice: '0',
-                            leverage: '4',
-                            maxNotionalValue: '100000000',
-                            marginType: 'cross',
-                            isolatedMargin: '0.00000000',
-                            isAutoAddMargin: 'false',
-                            positionSide: 'SHORT',
-                            notional: '0',
-                            isolatedWallet: '0',
-                            updateTime: 0,
+                            updateTime: 1625474304765,
                         },
                     ],
                     rateLimits: [
@@ -1321,70 +1260,26 @@ describe('TradeApi', () => {
                     status: 200,
                     result: [
                         {
-                            symbol: 'BTCUSDT',
+                            symbol: 'ADAUSDT',
                             positionSide: 'BOTH',
-                            positionAmt: '1.000',
-                            entryPrice: '0.00000',
-                            breakEvenPrice: '0.0',
-                            markPrice: '6679.50671178',
-                            unRealizedProfit: '0.00000000',
+                            positionAmt: '30',
+                            entryPrice: '0.385',
+                            breakEvenPrice: '0.385077',
+                            markPrice: '0.41047590',
+                            unRealizedProfit: '0.76427700',
                             liquidationPrice: '0',
-                            isolatedMargin: '0.00000000',
-                            notional: '0',
+                            isolatedMargin: '0',
+                            notional: '12.31427700',
                             marginAsset: 'USDT',
                             isolatedWallet: '0',
-                            initialMargin: '0',
-                            maintMargin: '0',
-                            positionInitialMargin: '0',
+                            initialMargin: '0.61571385',
+                            maintMargin: '0.08004280',
+                            positionInitialMargin: '0.61571385',
                             openOrderInitialMargin: '0',
-                            adl: 0,
+                            adl: 2,
                             bidNotional: '0',
                             askNotional: '0',
-                            updateTime: 0,
-                        },
-                        {
-                            symbol: 'BTCUSDT',
-                            positionSide: 'LONG',
-                            positionAmt: '1.000',
-                            entryPrice: '0.00000',
-                            breakEvenPrice: '0.0',
-                            markPrice: '6679.50671178',
-                            unRealizedProfit: '0.00000000',
-                            liquidationPrice: '0',
-                            isolatedMargin: '0.00000000',
-                            notional: '0',
-                            marginAsset: 'USDT',
-                            isolatedWallet: '0',
-                            initialMargin: '0',
-                            maintMargin: '0',
-                            positionInitialMargin: '0',
-                            openOrderInitialMargin: '0',
-                            adl: 0,
-                            bidNotional: '0',
-                            askNotional: '0',
-                            updateTime: 0,
-                        },
-                        {
-                            symbol: 'BTCUSDT',
-                            positionSide: 'SHORT',
-                            positionAmt: '1.000',
-                            entryPrice: '0.00000',
-                            breakEvenPrice: '0.0',
-                            markPrice: '6679.50671178',
-                            unRealizedProfit: '0.00000000',
-                            liquidationPrice: '0',
-                            isolatedMargin: '0.00000000',
-                            notional: '0',
-                            marginAsset: 'USDT',
-                            isolatedWallet: '0',
-                            initialMargin: '0',
-                            maintMargin: '0',
-                            positionInitialMargin: '0',
-                            openOrderInitialMargin: '0',
-                            adl: 0,
-                            bidNotional: '0',
-                            askNotional: '0',
-                            updateTime: 0,
+                            updateTime: 1720736417660,
                         },
                     ],
                     rateLimits: [
@@ -1551,7 +1446,7 @@ describe('TradeApi', () => {
                         clientOrderId: 'abc',
                         cumQuote: '0',
                         executedQty: '0',
-                        orderId: 1917641,
+                        orderId: 1573346959,
                         origQty: '0.40',
                         origType: 'TRAILING_STOP_MARKET',
                         price: '0',
@@ -1570,13 +1465,16 @@ describe('TradeApi', () => {
                         updateTime: 1579276756075,
                         workingType: 'CONTRACT_PRICE',
                         priceProtect: false,
+                        priceMatch: 'NONE',
+                        selfTradePreventionMode: 'NONE',
+                        goodTillDate: 0,
                     },
                 })
             );
             mockResponse.id = randomString();
 
             const params: QueryOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             let resolveTest: (value: unknown) => void;
@@ -1633,7 +1531,7 @@ describe('TradeApi', () => {
             };
 
             const params: QueryOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             let resolveTest: (value: unknown) => void;
@@ -1667,7 +1565,7 @@ describe('TradeApi', () => {
             jest.useRealTimers();
 
             const params: QueryOrderRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             let resolveTest: (value: unknown) => void;

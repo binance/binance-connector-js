@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket API
+ * Futures (USDⓈ-M) WebSocket API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,85 +20,85 @@
  */
 export interface AccountInformationResponseResultAssetsInner {
     /**
-     *
+     * asset name
      * @type {string}
      * @memberof AccountInformationResponseResultAssetsInner
      */
     asset?: string;
     /**
-     *
+     * wallet balance
      * @type {string}
      * @memberof AccountInformationResponseResultAssetsInner
      */
     walletBalance?: string;
     /**
-     *
+     * unrealized profit
      * @type {string}
      * @memberof AccountInformationResponseResultAssetsInner
      */
     unrealizedProfit?: string;
     /**
-     *
+     * margin balance
      * @type {string}
      * @memberof AccountInformationResponseResultAssetsInner
      */
     marginBalance?: string;
     /**
-     *
+     * maintenance margin required
      * @type {string}
      * @memberof AccountInformationResponseResultAssetsInner
      */
     maintMargin?: string;
     /**
-     *
+     * total initial margin required with current mark price
      * @type {string}
      * @memberof AccountInformationResponseResultAssetsInner
      */
     initialMargin?: string;
     /**
-     *
+     * initial margin required for positions with current mark price
      * @type {string}
      * @memberof AccountInformationResponseResultAssetsInner
      */
     positionInitialMargin?: string;
     /**
-     *
+     * initial margin required for open orders with current mark price
      * @type {string}
      * @memberof AccountInformationResponseResultAssetsInner
      */
     openOrderInitialMargin?: string;
     /**
-     *
+     * crossed wallet balance
      * @type {string}
      * @memberof AccountInformationResponseResultAssetsInner
      */
     crossWalletBalance?: string;
     /**
-     *
+     * unrealized profit of crossed positions
      * @type {string}
      * @memberof AccountInformationResponseResultAssetsInner
      */
     crossUnPnl?: string;
     /**
-     *
+     * available balance, only for USDT asset
      * @type {string}
      * @memberof AccountInformationResponseResultAssetsInner
      */
     availableBalance?: string;
     /**
-     *
+     * maximum amount for transfer out, only for USDT asset
      * @type {string}
      * @memberof AccountInformationResponseResultAssetsInner
      */
     maxWithdrawAmount?: string;
     /**
-     *
+     * whether the asset can be used as margin in Multi-Assets mode
      * @type {boolean}
      * @memberof AccountInformationResponseResultAssetsInner
      */
     marginAvailable?: boolean;
     /**
-     *
+     * reserved property, please ignore
      * @type {number | bigint}
      * @memberof AccountInformationResponseResultAssetsInner
      */

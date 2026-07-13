@@ -1,10 +1,9 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket API
+ * Futures (USDⓈ-M) WebSocket API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -13,13 +12,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
-// May contain unused imports in some cases
-// @ts-ignore
-import type { OrderBookResponseResultAsksItem } from './order-book-response-result-asks-item';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { OrderBookResponseResultBidsItem } from './order-book-response-result-bids-item';
 
 /**
  *
@@ -34,27 +26,15 @@ export interface OrderBookResponseResult {
      */
     lastUpdateId?: number | bigint;
     /**
-     *
+     * Message output time
      * @type {number | bigint}
      * @memberof OrderBookResponseResult
      */
     E?: number | bigint;
     /**
-     *
+     * Transaction time
      * @type {number | bigint}
      * @memberof OrderBookResponseResult
      */
     T?: number | bigint;
-    /**
-     *
-     * @type {Array<OrderBookResponseResultBidsItem>}
-     * @memberof OrderBookResponseResult
-     */
-    bids?: Array<OrderBookResponseResultBidsItem>;
-    /**
-     *
-     * @type {Array<OrderBookResponseResultAsksItem>}
-     * @memberof OrderBookResponseResult
-     */
-    asks?: Array<OrderBookResponseResultAsksItem>;
 }

@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,151 +20,151 @@
  */
 export interface AlgoUpdateO {
     /**
-     *
+     * Client Algo Id
      * @type {string}
      * @memberof AlgoUpdateO
      */
     caid?: string;
     /**
-     *
+     * Algo Id
      * @type {number | bigint}
      * @memberof AlgoUpdateO
      */
     aid?: number | bigint;
     /**
-     *
+     * Algo Type
      * @type {string}
      * @memberof AlgoUpdateO
      */
     at?: string;
     /**
-     *
+     * Order Type
      * @type {string}
      * @memberof AlgoUpdateO
      */
     o?: string;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof AlgoUpdateO
      */
     s?: string;
     /**
-     *
+     * Side
      * @type {string}
      * @memberof AlgoUpdateO
      */
     S?: string;
     /**
-     *
+     * Position Side
      * @type {string}
      * @memberof AlgoUpdateO
      */
     ps?: string;
     /**
-     *
+     * Time in force
      * @type {string}
      * @memberof AlgoUpdateO
      */
     f?: string;
     /**
-     *
+     * Quantity
      * @type {string}
      * @memberof AlgoUpdateO
      */
     q?: string;
     /**
-     *
+     * Algo Status
      * @type {string}
      * @memberof AlgoUpdateO
      */
     X?: string;
     /**
-     *
+     * Order Id
      * @type {string}
      * @memberof AlgoUpdateO
      */
     ai?: string;
     /**
-     *
+     * Avg fill price in matching engine, only display when order is triggered and placed in matching engine
      * @type {string}
      * @memberof AlgoUpdateO
      */
     ap?: string;
     /**
-     *
+     * Executed quantity in matching engine, only display when order is triggered and placed in matching engine
      * @type {string}
      * @memberof AlgoUpdateO
      */
     aq?: string;
     /**
-     *
+     * Actual order type in matching engine, only display when order is triggered and placed in matching engine
      * @type {string}
      * @memberof AlgoUpdateO
      */
     act?: string;
     /**
-     *
+     * Trigger Price
      * @type {string}
      * @memberof AlgoUpdateO
      */
     tp?: string;
     /**
-     *
+     * Order Price
      * @type {string}
      * @memberof AlgoUpdateO
      */
     p?: string;
     /**
-     *
+     * STP mode
      * @type {string}
      * @memberof AlgoUpdateO
      */
     V?: string;
     /**
-     *
+     * Working type
      * @type {string}
      * @memberof AlgoUpdateO
      */
     wt?: string;
     /**
-     *
+     * Price match mode
      * @type {string}
      * @memberof AlgoUpdateO
      */
     pm?: string;
     /**
-     *
+     * If Close-All
      * @type {boolean}
      * @memberof AlgoUpdateO
      */
     cp?: boolean;
     /**
-     *
+     * If price protection is turned on
      * @type {boolean}
      * @memberof AlgoUpdateO
      */
     pP?: boolean;
     /**
-     *
+     * Is this reduce only
      * @type {boolean}
      * @memberof AlgoUpdateO
      */
     R?: boolean;
     /**
-     *
+     * Trigger time
      * @type {number | bigint}
      * @memberof AlgoUpdateO
      */
     tt?: number | bigint;
     /**
-     *
+     * Good till time for GTD time in force
      * @type {number | bigint}
      * @memberof AlgoUpdateO
      */
     gtd?: number | bigint;
     /**
-     *
+     * Algo order failed reason
      * @type {string}
      * @memberof AlgoUpdateO
      */

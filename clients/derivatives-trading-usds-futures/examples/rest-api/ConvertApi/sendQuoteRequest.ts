@@ -13,8 +13,8 @@ const client = new DerivativesTradingUsdsFutures({ configurationRestAPI });
 async function sendQuoteRequest() {
     try {
         const response = await client.restAPI.sendQuoteRequest({
-            fromAsset: 'fromAsset_example',
-            toAsset: 'toAsset_example',
+            fromAsset: 'BTC',
+            toAsset: 'USDT',
         });
 
         const rateLimits = response.rateLimits!;

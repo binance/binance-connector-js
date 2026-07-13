@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,43 +20,43 @@
  */
 export interface RecentTradesListResponseInner {
     /**
-     *
+     * Id.
      * @type {number | bigint}
      * @memberof RecentTradesListResponseInner
      */
     id?: number | bigint;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof RecentTradesListResponseInner
      */
     price?: string;
     /**
-     *
+     * Qty.
      * @type {string}
      * @memberof RecentTradesListResponseInner
      */
     qty?: string;
     /**
-     *
+     * Quote Qty.
      * @type {string}
      * @memberof RecentTradesListResponseInner
      */
     quoteQty?: string;
     /**
-     *
+     * Time.
      * @type {number | bigint}
      * @memberof RecentTradesListResponseInner
      */
     time?: number | bigint;
     /**
-     *
+     * Is Buyer Maker.
      * @type {boolean}
      * @memberof RecentTradesListResponseInner
      */
     isBuyerMaker?: boolean;
     /**
-     *
+     * Is RPITrade.
      * @type {boolean}
      * @memberof RecentTradesListResponseInner
      */

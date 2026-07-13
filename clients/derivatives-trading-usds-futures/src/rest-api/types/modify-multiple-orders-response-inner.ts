@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -56,7 +56,7 @@ export interface ModifyMultipleOrdersResponseInner {
      */
     price?: string;
     /**
-     *
+     * Average execution price. Will be removed after CM migration.
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner
      */
@@ -146,19 +146,19 @@ export interface ModifyMultipleOrdersResponseInner {
      */
     origType?: string;
     /**
-     *
+     * price match mode
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     priceMatch?: string;
     /**
-     *
+     * self trading preventation mode
      * @type {string}
      * @memberof ModifyMultipleOrdersResponseInner
      */
     selfTradePreventionMode?: string;
     /**
-     *
+     * order pre-set auot cancel time for TIF GTD order
      * @type {number | bigint}
      * @memberof ModifyMultipleOrdersResponseInner
      */

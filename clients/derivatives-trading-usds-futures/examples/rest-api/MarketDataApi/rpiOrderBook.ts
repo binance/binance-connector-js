@@ -13,7 +13,7 @@ const client = new DerivativesTradingUsdsFutures({ configurationRestAPI });
 async function rpiOrderBook() {
     try {
         const response = await client.restAPI.rpiOrderBook({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSDT',
         });
 
         const rateLimits = response.rateLimits!;

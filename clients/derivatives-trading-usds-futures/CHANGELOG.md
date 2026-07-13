@@ -1,5 +1,284 @@
 # Changelog
 
+## 33.0.0 - 2026-07-13
+
+### Changed (56)
+
+#### REST API
+
+- Modified parameter `algoType`:
+  - enum added: `CONDITIONAL`
+  - affected methods:
+    - `newAlgoOrder()` (`POST /fapi/v1/algoOrder`)
+- Modified parameter `batchOrders`:
+  - items.`goodTillDate`: type `string` → `integer`
+  - items.`price`: type `string` → `number`
+  - items.`priceMatch`: enum removed: `NONE`
+  - items.`quantity`: type `string` → `number`
+  - items.`reduceOnly`: enum added: `true`, `false`
+  - items.`selfTradePreventionMode`: enum added: `NONE`
+  - items.`type`: enum added: `LIMIT`, `MARKET`, `STOP`, `STOP_MARKET`, `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`, `TRAILING_STOP_MARKET`
+  - items.`goodTillDate`: type `string` → `integer`
+  - items.`price`: type `string` → `number`
+  - items.`priceMatch`: enum removed: `NONE`
+  - items.`quantity`: type `string` → `number`
+  - items.`reduceOnly`: enum added: `true`, `false`
+  - items.`selfTradePreventionMode`: enum added: `NONE`
+  - items.`type`: enum added: `LIMIT`, `MARKET`, `STOP`, `STOP_MARKET`, `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`, `TRAILING_STOP_MARKET`
+  - affected methods:
+    - `placeMultipleOrders()` (`POST /fapi/v1/batchOrders`)
+- Modified parameter `batchOrders`:
+  - items: property `timestamp` added
+  - items.`orderId`: type `string` → `integer`
+  - items.`price`: type `string` → `number`
+  - items.`priceMatch`: enum removed: `NONE`
+  - items.`quantity`: type `string` → `number`
+  - items.`recvWindow`: type `string` → `integer`
+  - items.`stopPrice`: type `string` → `number`
+  - items: item property `timestamp` added
+  - items.`orderId`: type `string` → `integer`
+  - items.`price`: type `string` → `number`
+  - items.`priceMatch`: enum removed: `NONE`
+  - items.`quantity`: type `string` → `number`
+  - items.`recvWindow`: type `string` → `integer`
+  - items.`stopPrice`: type `string` → `number`
+  - affected methods:
+    - `modifyMultipleOrders()` (`PUT /fapi/v1/batchOrders`)
+- Modified parameter `closePosition`:
+  - enum added: `true`, `false`
+  - affected methods:
+    - `newAlgoOrder()` (`POST /fapi/v1/algoOrder`)
+    - `testOrder()` (`POST /fapi/v1/order/test`)
+- Modified parameter `contractType`:
+  - enum removed: `CURRENT_MONTH`, `NEXT_MONTH`, `PERPETUAL_DELIVERING`
+  - enum added: `TRADIFI_PERPETUAL`
+  - affected methods:
+    - `continuousContractKlineCandlestickData()` (`GET /fapi/v1/continuousKlines`)
+- Modified parameter `contractType`:
+  - enum removed: `CURRENT_MONTH`, `NEXT_MONTH`, `PERPETUAL_DELIVERING`
+  - affected methods:
+    - `basis()` (`GET /futures/data/basis`)
+- Modified parameter `incomeType`:
+  - enum added: `TRANSFER`, `WELCOME_BONUS`, `REALIZED_PNL`, `FUNDING_FEE`, `COMMISSION`, `INSURANCE_CLEAR`, `REFERRAL_KICKBACK`, `COMMISSION_REBATE`, `API_REBATE`, `CONTEST_REWARD`, `CROSS_COLLATERAL_TRANSFER`, `OPTIONS_PREMIUM_FEE`, `OPTIONS_SETTLE_PROFIT`, `INTERNAL_TRANSFER`, `AUTO_EXCHANGE`, `DELIVERED_SETTELMENT`, `COIN_SWAP_DEPOSIT`, `COIN_SWAP_WITHDRAW`, `POSITION_LIMIT_INCREASE_FEE`, `STRATEGY_UMFUTURES_TRANSFER`, `FEE_RETURN`, `BFUSD_REWARD`
+  - affected methods:
+    - `getIncomeHistory()` (`GET /fapi/v1/income`)
+- Modified parameter `interval`:
+  - enum removed: `1s`
+  - affected methods:
+    - `continuousContractKlineCandlestickData()` (`GET /fapi/v1/continuousKlines`)
+    - `indexPriceKlineCandlestickData()` (`GET /fapi/v1/indexPriceKlines`)
+    - `klineCandlestickData()` (`GET /fapi/v1/klines`)
+    - `markPriceKlineCandlestickData()` (`GET /fapi/v1/markPriceKlines`)
+    - `premiumIndexKlineData()` (`GET /fapi/v1/premiumIndexKlines`)
+- Modified parameter `orderIdList`:
+  - maxLength `null` → `10`
+  - affected methods:
+    - `cancelMultipleOrders()` (`DELETE /fapi/v1/batchOrders`)
+- Modified parameter `origClientOrderIdList`:
+  - maxLength `null` → `10`
+  - affected methods:
+    - `cancelMultipleOrders()` (`DELETE /fapi/v1/batchOrders`)
+- Modified parameter `positionSide`:
+  - enum removed: `BOTH`, `LONG`, `SHORT`
+  - affected methods:
+    - `newAlgoOrder()` (`POST /fapi/v1/algoOrder`)
+    - `newOrder()` (`POST /fapi/v1/order`)
+    - `modifyIsolatedPositionMargin()` (`POST /fapi/v1/positionMargin`)
+- Modified parameter `priceMatch`:
+  - enum removed: `NONE`
+  - affected methods:
+    - `newAlgoOrder()` (`POST /fapi/v1/algoOrder`)
+    - `newOrder()` (`POST /fapi/v1/order`)
+    - `modifyOrder()` (`PUT /fapi/v1/order`)
+    - `testOrder()` (`POST /fapi/v1/order/test`)
+- Modified parameter `priceProtect`:
+  - enum added: `true`, `false`
+  - affected methods:
+    - `newAlgoOrder()` (`POST /fapi/v1/algoOrder`)
+    - `testOrder()` (`POST /fapi/v1/order/test`)
+- Modified parameter `reduceOnly`:
+  - enum added: `true`, `false`
+  - affected methods:
+    - `newAlgoOrder()` (`POST /fapi/v1/algoOrder`)
+    - `newOrder()` (`POST /fapi/v1/order`)
+    - `testOrder()` (`POST /fapi/v1/order/test`)
+- Modified parameter `selfTradePreventionMode`:
+  - enum added: `NONE`
+  - affected methods:
+    - `newAlgoOrder()` (`POST /fapi/v1/algoOrder`)
+    - `testOrder()` (`POST /fapi/v1/order/test`)
+- Modified parameter `type`:
+  - enum added: `LIMIT`, `MARKET`, `STOP`, `STOP_MARKET`, `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`, `TRAILING_STOP_MARKET`
+  - affected methods:
+    - `newAlgoOrder()` (`POST /fapi/v1/algoOrder`)
+- Modified parameter `type`:
+  - enum added: `LIMIT`, `MARKET`, `STOP`, `STOP_MARKET`, `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`, `TRAILING_STOP_MARKET`
+  - affected methods:
+    - `newOrder()` (`POST /fapi/v1/order`)
+    - `testOrder()` (`POST /fapi/v1/order/test`)
+- Modified parameter `type`:
+  - type `string` → `integer`
+  - affected methods:
+    - `modifyIsolatedPositionMargin()` (`POST /fapi/v1/positionMargin`)
+- Modified parameter `type`:
+  - type `integer` → `string`
+  - affected methods:
+    - `getPositionMarginChangeHistory()` (`GET /fapi/v1/positionMargin/history`)
+- Modified response for `orderBook()` (`GET /fapi/v1/depth`):
+  - `asks`.items: minItems `0` → `2`
+  - `asks`.items: maxItems `null` → `2`
+  - `bids`.items: minItems `0` → `2`
+  - `bids`.items: maxItems `null` → `2`
+
+- Modified response for `queryInsuranceFundBalanceSnapshot()` (`GET /fapi/v1/insuranceBalance`):
+  - oneOf modified
+
+- Modified response for `notionalAndLeverageBrackets()` (`GET /fapi/v1/leverageBracket`):
+  - oneOf modified
+
+- Modified response for `queryOrder()` (`GET /fapi/v1/order`):
+  - property `goodTillDate` added
+  - property `selfTradePreventionMode` added
+  - property `priceMatch` added
+
+- Modified response for `markPrice()` (`GET /fapi/v1/premiumIndex`):
+  - oneOf modified
+
+- Modified response for `rpiOrderBook()` (`GET /fapi/v1/rpiDepth`):
+  - `asks`.items: minItems `0` → `2`
+  - `asks`.items: maxItems `null` → `2`
+  - `bids`.items: minItems `0` → `2`
+  - `bids`.items: maxItems `null` → `2`
+
+- Modified response for `adlRisk()` (`GET /fapi/v1/symbolAdlRisk`):
+  - oneOf modified
+
+- Modified response for `ticker24hrPriceChangeStatistics()` (`GET /fapi/v1/ticker/24hr`):
+  - oneOf modified
+
+- Modified response for `symbolOrderBookTicker()` (`GET /fapi/v1/ticker/bookTicker`):
+  - oneOf modified
+
+- Modified response for `symbolPriceTicker()` (`GET /fapi/v1/ticker/price`):
+  - oneOf modified
+
+- Modified response for `symbolPriceTickerV2()` (`GET /fapi/v2/ticker/price`):
+  - oneOf modified
+
+- Modified response for `longShortRatio()` (`GET /futures/data/globalLongShortAccountRatio`):
+  - items.`timestamp`: type `string` → `integer`
+  - items.`timestamp`: type `string` → `integer`
+
+- Modified response for `openInterestStatistics()` (`GET /futures/data/openInterestHist`):
+  - items.`timestamp`: type `string` → `integer`
+  - items.`timestamp`: type `string` → `integer`
+
+- Modified response for `takerBuySellVolume()` (`GET /futures/data/takerlongshortRatio`):
+  - items.`timestamp`: type `string` → `integer`
+  - items.`timestamp`: type `string` → `integer`
+
+- Modified response for `topTraderLongShortRatioAccounts()` (`GET /futures/data/topLongShortAccountRatio`):
+  - items.`timestamp`: type `string` → `integer`
+  - items.`timestamp`: type `string` → `integer`
+
+- Modified response for `topTraderLongShortRatioPositions()` (`GET /futures/data/topLongShortPositionRatio`):
+  - items.`timestamp`: type `string` → `integer`
+  - items.`timestamp`: type `string` → `integer`
+
+- Marked `symbolPriceTicker()` (`GET /fapi/v1/ticker/price`) as deprecated.
+
+#### WebSocket API
+
+- Modified parameter `algoType`:
+  - enum added: `CONDITIONAL`
+  - affected methods:
+    - `newAlgoOrder()` (`algoOrder.place` method)
+- Modified parameter `closePosition`:
+  - enum added: `true`, `false`
+  - affected methods:
+    - `newAlgoOrder()` (`algoOrder.place` method)
+- Modified parameter `priceMatch`:
+  - enum removed: `NONE`
+  - affected methods:
+    - `newAlgoOrder()` (`algoOrder.place` method)
+    - `modifyOrder()` (`order.modify` method)
+    - `newOrder()` (`order.place` method)
+- Modified parameter `priceProtect`:
+  - enum added: `true`, `false`
+  - affected methods:
+    - `newAlgoOrder()` (`algoOrder.place` method)
+- Modified parameter `reduceOnly`:
+  - enum added: `true`, `false`
+  - affected methods:
+    - `newAlgoOrder()` (`algoOrder.place` method)
+    - `newOrder()` (`order.place` method)
+- Modified parameter `selfTradePreventionMode`:
+  - enum added: `NONE`
+  - affected methods:
+    - `newAlgoOrder()` (`algoOrder.place` method)
+- Modified parameter `selfTradePreventionMode`:
+  - enum added: `NONE`
+  - affected methods:
+    - `newOrder()` (`order.place` method)
+- Modified parameter `timeInForce`:
+  - enum removed: `GTX`, `GTD`, `RPI`
+  - affected methods:
+    - `newAlgoOrder()` (`algoOrder.place` method)
+- Modified parameter `type`:
+  - enum added: `STOP_MARKET`, `TAKE_PROFIT_MARKET`, `STOP`, `TAKE_PROFIT`, `TRAILING_STOP_MARKET`
+  - affected methods:
+    - `newAlgoOrder()` (`algoOrder.place` method)
+- Modified parameter `type`:
+  - enum added: `LIMIT`, `MARKET`
+  - affected methods:
+    - `newOrder()` (`order.place` method)
+- Modified response for `orderBook()` (`depth` method):
+  - property `asks` added
+  - property `bids` added
+  - `result`: property `bids` deleted
+  - `result`: property `asks` deleted
+
+- Modified response for `queryOrder()` (`order.status` method):
+  - `result`: property `selfTradePreventionMode` added
+  - `result`: property `goodTillDate` added
+  - `result`: property `priceMatch` added
+
+- Modified response for `symbolOrderBookTicker()` (`ticker.book` method):
+  - oneOf modified
+
+- Modified response for `symbolPriceTicker()` (`ticker.price` method):
+  - oneOf modified
+
+#### WebSocket Streams
+
+- Modified parameter `contractType`:
+  - enum added: `perpetual`, `current_quarter`, `next_quarter`, `tradifi_perpetual`
+  - affected methods:
+    - `continuousContractKlineCandlestickStreams()` (`<pair>_<contractType>@continuousKline_<interval>` stream)
+- Modified parameter `interval`:
+  - enum added: `1s`, `1m`, `3m`, `5m`, `15m`, `30m`, `1h`, `2h`, `4h`, `6h`, `8h`, `12h`, `1d`, `3d`, `1w`, `1M`
+  - affected methods:
+    - `continuousContractKlineCandlestickStreams()` (`<pair>_<contractType>@continuousKline_<interval>` stream)
+- Modified parameter `interval`:
+  - enum added: `1m`, `3m`, `5m`, `15m`, `30m`, `1h`, `2h`, `4h`, `6h`, `8h`, `12h`, `1d`, `3d`, `1w`, `1M`
+  - affected methods:
+    - `klineCandlestickStreams()` (`<symbol>@kline_<interval>` stream)
+- Modified parameter `levels`:
+  - type `integer` → `string`
+  - enum added: `5`, `10`, `20`
+  - affected methods:
+    - `partialBookDepthStreams()` (`<symbol>@depth<levels>@<updateSpeed>` stream)
+- Modified parameter `updateSpeed`:
+  - enum added: `1s`
+  - affected methods:
+    - `markPriceStreamForAllMarket()` (`!markPrice@arr@<updateSpeed>` stream)
+    - `markPriceStream()` (`<symbol>@markPrice@<updateSpeed>` stream)
+- Modified parameter `updateSpeed`:
+  - enum added: `100ms`, `500ms`
+  - affected methods:
+    - `partialBookDepthStreams()` (`<symbol>@depth<levels>@<updateSpeed>` stream)
+    - `diffBookDepthStreams()` (`<symbol>@depth@<updateSpeed>` stream)
+
 ## 32.0.0 - 2026-06-22
 
 ### Changed (1)

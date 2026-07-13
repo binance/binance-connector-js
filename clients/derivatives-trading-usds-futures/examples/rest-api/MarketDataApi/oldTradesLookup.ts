@@ -13,7 +13,7 @@ const client = new DerivativesTradingUsdsFutures({ configurationRestAPI });
 async function oldTradesLookup() {
     try {
         const response = await client.restAPI.oldTradesLookup({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSDT',
         });
 
         const rateLimits = response.rateLimits!;

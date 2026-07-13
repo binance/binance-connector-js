@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -36,7 +36,7 @@ describe('PortfolioMarginEndpointsApi', () => {
     describe('classicPortfolioMarginAccountInformation()', () => {
         it('should execute classicPortfolioMarginAccountInformation() successfully with required parameters only', async () => {
             const params: ClassicPortfolioMarginAccountInformationRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
             };
 
             mockResponse = JSONParse(
@@ -65,7 +65,7 @@ describe('PortfolioMarginEndpointsApi', () => {
 
         it('should execute classicPortfolioMarginAccountInformation() successfully with optional parameters', async () => {
             const params: ClassicPortfolioMarginAccountInformationRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
                 recvWindow: 5000,
             };
 
@@ -95,7 +95,7 @@ describe('PortfolioMarginEndpointsApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: ClassicPortfolioMarginAccountInformationRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
             };
             const params = Object.assign({ ..._params });
             delete params?.asset;
@@ -107,7 +107,7 @@ describe('PortfolioMarginEndpointsApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: ClassicPortfolioMarginAccountInformationRequest = {
-                asset: 'asset_example',
+                asset: 'BTC',
             };
 
             const errorResponse = {

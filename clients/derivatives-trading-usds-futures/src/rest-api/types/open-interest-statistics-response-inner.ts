@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -26,27 +26,27 @@ export interface OpenInterestStatisticsResponseInner {
      */
     symbol?: string;
     /**
-     *
+     * total open interest
      * @type {string}
      * @memberof OpenInterestStatisticsResponseInner
      */
     sumOpenInterest?: string;
     /**
-     *
+     * total open interest value
      * @type {string}
      * @memberof OpenInterestStatisticsResponseInner
      */
     sumOpenInterestValue?: string;
     /**
-     *
+     * circulating supply provided by CMC
      * @type {string}
      * @memberof OpenInterestStatisticsResponseInner
      */
     CMCCirculatingSupply?: string;
     /**
-     *
-     * @type {string}
+     * Timestamp in milliseconds.
+     * @type {number | bigint}
      * @memberof OpenInterestStatisticsResponseInner
      */
-    timestamp?: string;
+    timestamp?: number | bigint;
 }

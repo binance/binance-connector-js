@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,19 +20,19 @@
  */
 export interface ConditionalOrderTriggerRejectOr {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof ConditionalOrderTriggerRejectOr
      */
     s?: string;
     /**
-     *
+     * Order Id
      * @type {number | bigint}
      * @memberof ConditionalOrderTriggerRejectOr
      */
     i?: number | bigint;
     /**
-     *
+     * Reject Reason
      * @type {string}
      * @memberof ConditionalOrderTriggerRejectOr
      */

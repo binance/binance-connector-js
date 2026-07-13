@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -134,7 +134,7 @@ describe('MarketDataApi', () => {
 
         it('should execute adlRisk() successfully with optional parameters', async () => {
             const params: AdlRiskRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -205,7 +205,7 @@ describe('MarketDataApi', () => {
 
         it('should execute assetIndex() successfully with optional parameters', async () => {
             const params: AssetIndexRequest = {
-                symbol: 'symbol_example',
+                symbol: 'ADAUSD',
             };
 
             mockResponse = JSONParse(
@@ -257,7 +257,7 @@ describe('MarketDataApi', () => {
     describe('basis()', () => {
         it('should execute basis() successfully with required parameters only', async () => {
             const params: BasisRequest = {
-                pair: 'pair_example',
+                pair: 'BTCUSDT',
                 contractType: BasisContractTypeEnum.PERPETUAL,
                 period: BasisPeriodEnum.PERIOD_5m,
             };
@@ -293,10 +293,10 @@ describe('MarketDataApi', () => {
 
         it('should execute basis() successfully with optional parameters', async () => {
             const params: BasisRequest = {
-                pair: 'pair_example',
+                pair: 'BTCUSDT',
                 contractType: BasisContractTypeEnum.PERPETUAL,
                 period: BasisPeriodEnum.PERIOD_5m,
-                limit: 100,
+                limit: 30,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
             };
@@ -332,7 +332,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when pair is missing', async () => {
             const _params: BasisRequest = {
-                pair: 'pair_example',
+                pair: 'BTCUSDT',
                 contractType: BasisContractTypeEnum.PERPETUAL,
                 period: BasisPeriodEnum.PERIOD_5m,
             };
@@ -346,7 +346,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when contractType is missing', async () => {
             const _params: BasisRequest = {
-                pair: 'pair_example',
+                pair: 'BTCUSDT',
                 contractType: BasisContractTypeEnum.PERPETUAL,
                 period: BasisPeriodEnum.PERIOD_5m,
             };
@@ -360,7 +360,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when period is missing', async () => {
             const _params: BasisRequest = {
-                pair: 'pair_example',
+                pair: 'BTCUSDT',
                 contractType: BasisContractTypeEnum.PERPETUAL,
                 period: BasisPeriodEnum.PERIOD_5m,
             };
@@ -374,7 +374,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: BasisRequest = {
-                pair: 'pair_example',
+                pair: 'BTCUSDT',
                 contractType: BasisContractTypeEnum.PERPETUAL,
                 period: BasisPeriodEnum.PERIOD_5m,
             };
@@ -436,20 +436,7 @@ describe('MarketDataApi', () => {
                         symbol: 'DEFIUSDT',
                         time: 1589437530011,
                         component: 'baseAsset',
-                        baseAssetList: [
-                            {
-                                baseAsset: 'BAL',
-                                quoteAsset: 'USDT',
-                                weightInQuantity: '1.04406228',
-                                weightInPercentage: '0.02783900',
-                            },
-                            {
-                                baseAsset: 'BAND',
-                                quoteAsset: 'USDT',
-                                weightInQuantity: '3.53782729',
-                                weightInPercentage: '0.03935200',
-                            },
-                        ],
+                        baseAssetList: [],
                     },
                 ])
             );
@@ -470,7 +457,7 @@ describe('MarketDataApi', () => {
 
         it('should execute compositeIndexSymbolInformation() successfully with optional parameters', async () => {
             const params: CompositeIndexSymbolInformationRequest = {
-                symbol: 'symbol_example',
+                symbol: 'DEFIUSDT',
             };
 
             mockResponse = JSONParse(
@@ -479,20 +466,7 @@ describe('MarketDataApi', () => {
                         symbol: 'DEFIUSDT',
                         time: 1589437530011,
                         component: 'baseAsset',
-                        baseAssetList: [
-                            {
-                                baseAsset: 'BAL',
-                                quoteAsset: 'USDT',
-                                weightInQuantity: '1.04406228',
-                                weightInPercentage: '0.02783900',
-                            },
-                            {
-                                baseAsset: 'BAND',
-                                quoteAsset: 'USDT',
-                                weightInQuantity: '3.53782729',
-                                weightInPercentage: '0.03935200',
-                            },
-                        ],
+                        baseAssetList: [],
                     },
                 ])
             );
@@ -532,7 +506,7 @@ describe('MarketDataApi', () => {
     describe('compressedAggregateTradesList()', () => {
         it('should execute compressedAggregateTradesList() successfully with required parameters only', async () => {
             const params: CompressedAggregateTradesListRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -566,11 +540,11 @@ describe('MarketDataApi', () => {
 
         it('should execute compressedAggregateTradesList() successfully with optional parameters', async () => {
             const params: CompressedAggregateTradesListRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 fromId: 1,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 50,
             };
 
             mockResponse = JSONParse(
@@ -604,7 +578,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: CompressedAggregateTradesListRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -616,7 +590,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: CompressedAggregateTradesListRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -641,29 +615,12 @@ describe('MarketDataApi', () => {
     describe('continuousContractKlineCandlestickData()', () => {
         it('should execute continuousContractKlineCandlestickData() successfully with required parameters only', async () => {
             const params: ContinuousContractKlineCandlestickDataRequest = {
-                pair: 'pair_example',
+                pair: 'BTCUSDT',
                 contractType: ContinuousContractKlineCandlestickDataContractTypeEnum.PERPETUAL,
-                interval: ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1s,
+                interval: ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1m,
             };
 
-            mockResponse = JSONParse(
-                JSONStringify([
-                    [
-                        1607444700000,
-                        '18879.99',
-                        '18900.00',
-                        '18878.98',
-                        '18896.13',
-                        '492.363',
-                        1607444759999,
-                        '9302145.66080',
-                        1874,
-                        '385.983',
-                        '7292402.33267',
-                        '0',
-                    ],
-                ])
-            );
+            mockResponse = JSONParse(JSONStringify([[1607444700000]]));
 
             const spy = jest
                 .spyOn(client, 'continuousContractKlineCandlestickData')
@@ -683,32 +640,15 @@ describe('MarketDataApi', () => {
 
         it('should execute continuousContractKlineCandlestickData() successfully with optional parameters', async () => {
             const params: ContinuousContractKlineCandlestickDataRequest = {
-                pair: 'pair_example',
+                pair: 'BTCUSDT',
                 contractType: ContinuousContractKlineCandlestickDataContractTypeEnum.PERPETUAL,
-                interval: ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1s,
+                interval: ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1m,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 50,
             };
 
-            mockResponse = JSONParse(
-                JSONStringify([
-                    [
-                        1607444700000,
-                        '18879.99',
-                        '18900.00',
-                        '18878.98',
-                        '18896.13',
-                        '492.363',
-                        1607444759999,
-                        '9302145.66080',
-                        1874,
-                        '385.983',
-                        '7292402.33267',
-                        '0',
-                    ],
-                ])
-            );
+            mockResponse = JSONParse(JSONStringify([[1607444700000]]));
 
             const spy = jest
                 .spyOn(client, 'continuousContractKlineCandlestickData')
@@ -728,9 +668,9 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when pair is missing', async () => {
             const _params: ContinuousContractKlineCandlestickDataRequest = {
-                pair: 'pair_example',
+                pair: 'BTCUSDT',
                 contractType: ContinuousContractKlineCandlestickDataContractTypeEnum.PERPETUAL,
-                interval: ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1s,
+                interval: ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1m,
             };
             const params = Object.assign({ ..._params });
             delete params?.pair;
@@ -742,9 +682,9 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when contractType is missing', async () => {
             const _params: ContinuousContractKlineCandlestickDataRequest = {
-                pair: 'pair_example',
+                pair: 'BTCUSDT',
                 contractType: ContinuousContractKlineCandlestickDataContractTypeEnum.PERPETUAL,
-                interval: ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1s,
+                interval: ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1m,
             };
             const params = Object.assign({ ..._params });
             delete params?.contractType;
@@ -756,9 +696,9 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when interval is missing', async () => {
             const _params: ContinuousContractKlineCandlestickDataRequest = {
-                pair: 'pair_example',
+                pair: 'BTCUSDT',
                 contractType: ContinuousContractKlineCandlestickDataContractTypeEnum.PERPETUAL,
-                interval: ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1s,
+                interval: ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1m,
             };
             const params = Object.assign({ ..._params });
             delete params?.interval;
@@ -770,9 +710,9 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: ContinuousContractKlineCandlestickDataRequest = {
-                pair: 'pair_example',
+                pair: 'BTCUSDT',
                 contractType: ContinuousContractKlineCandlestickDataContractTypeEnum.PERPETUAL,
-                interval: ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1s,
+                interval: ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1m,
             };
 
             const errorResponse = {
@@ -798,7 +738,7 @@ describe('MarketDataApi', () => {
         it('should execute exchangeInformation() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
                 JSONStringify({
-                    exchangeFilters: [],
+                    exchangeFilters: [''],
                     rateLimits: [
                         {
                             interval: 'MINUTE',
@@ -806,19 +746,9 @@ describe('MarketDataApi', () => {
                             limit: 2400,
                             rateLimitType: 'REQUEST_WEIGHT',
                         },
-                        {
-                            interval: 'MINUTE',
-                            intervalNum: 1,
-                            limit: 1200,
-                            rateLimitType: 'ORDERS',
-                        },
                     ],
                     serverTime: 1565613908500,
-                    assets: [
-                        { asset: 'BTC', marginAvailable: true, autoAssetExchange: '-0.10' },
-                        { asset: 'USDT', marginAvailable: true, autoAssetExchange: '0' },
-                        { asset: 'BNB', marginAvailable: false, autoAssetExchange: null },
-                    ],
+                    assets: [{ asset: 'BTC', marginAvailable: true, autoAssetExchange: '-0.10' }],
                     symbols: [
                         {
                             symbol: 'BLZUSDT',
@@ -846,38 +776,18 @@ describe('MarketDataApi', () => {
                                     maxPrice: '300',
                                     minPrice: '0.0001',
                                     tickSize: '0.0001',
-                                },
-                                {
-                                    filterType: 'LOT_SIZE',
                                     maxQty: '10000000',
                                     minQty: '1',
                                     stepSize: '1',
-                                },
-                                {
-                                    filterType: 'MARKET_LOT_SIZE',
-                                    maxQty: '590119',
-                                    minQty: '1',
-                                    stepSize: '1',
-                                },
-                                { filterType: 'MAX_NUM_ORDERS', limit: 200 },
-                                { filterType: 'MIN_NOTIONAL', notional: '5.0' },
-                                {
-                                    filterType: 'PERCENT_PRICE',
+                                    limit: 200,
+                                    notional: '5.0',
                                     multiplierUp: '1.1500',
                                     multiplierDown: '0.8500',
                                     multiplierDecimal: '4',
                                 },
                             ],
-                            orderTypes: [
-                                'LIMIT',
-                                'MARKET',
-                                'STOP',
-                                'STOP_MARKET',
-                                'TAKE_PROFIT',
-                                'TAKE_PROFIT_MARKET',
-                                'TRAILING_STOP_MARKET',
-                            ],
-                            timeInForce: ['GTC', 'IOC', 'FOK', 'GTX'],
+                            orderTypes: ['LIMIT'],
+                            timeInForce: ['GTC'],
                             liquidationFee: '0.010000',
                             marketTakeBound: '0.30',
                         },
@@ -926,12 +836,6 @@ describe('MarketDataApi', () => {
                         fundingTime: 1570608000000,
                         markPrice: '34287.54619963',
                     },
-                    {
-                        symbol: 'BTCUSDT',
-                        fundingRate: '0.00010000',
-                        fundingTime: 1570636800000,
-                        markPrice: '34287.54619963',
-                    },
                 ])
             );
 
@@ -951,10 +855,10 @@ describe('MarketDataApi', () => {
 
         it('should execute getFundingRateHistory() successfully with optional parameters', async () => {
             const params: GetFundingRateHistoryRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 50,
             };
 
             mockResponse = JSONParse(
@@ -963,12 +867,6 @@ describe('MarketDataApi', () => {
                         symbol: 'BTCUSDT',
                         fundingRate: '-0.03750000',
                         fundingTime: 1570608000000,
-                        markPrice: '34287.54619963',
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        fundingRate: '0.00010000',
-                        fundingTime: 1570636800000,
                         markPrice: '34287.54619963',
                     },
                 ])
@@ -1053,28 +951,11 @@ describe('MarketDataApi', () => {
     describe('indexPriceKlineCandlestickData()', () => {
         it('should execute indexPriceKlineCandlestickData() successfully with required parameters only', async () => {
             const params: IndexPriceKlineCandlestickDataRequest = {
-                pair: 'pair_example',
-                interval: IndexPriceKlineCandlestickDataIntervalEnum.INTERVAL_1s,
+                pair: 'BTCUSDT',
+                interval: IndexPriceKlineCandlestickDataIntervalEnum.INTERVAL_1m,
             };
 
-            mockResponse = JSONParse(
-                JSONStringify([
-                    [
-                        1591256400000,
-                        '9653.69440000',
-                        '9653.69640000',
-                        '9651.38600000',
-                        '9651.55200000',
-                        '0',
-                        1591256459999,
-                        '0',
-                        60,
-                        '0',
-                        '0',
-                        '0',
-                    ],
-                ])
-            );
+            mockResponse = JSONParse(JSONStringify([[1591256400000]]));
 
             const spy = jest.spyOn(client, 'indexPriceKlineCandlestickData').mockReturnValue(
                 Promise.resolve({
@@ -1092,31 +973,14 @@ describe('MarketDataApi', () => {
 
         it('should execute indexPriceKlineCandlestickData() successfully with optional parameters', async () => {
             const params: IndexPriceKlineCandlestickDataRequest = {
-                pair: 'pair_example',
-                interval: IndexPriceKlineCandlestickDataIntervalEnum.INTERVAL_1s,
+                pair: 'BTCUSDT',
+                interval: IndexPriceKlineCandlestickDataIntervalEnum.INTERVAL_1m,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 50,
             };
 
-            mockResponse = JSONParse(
-                JSONStringify([
-                    [
-                        1591256400000,
-                        '9653.69440000',
-                        '9653.69640000',
-                        '9651.38600000',
-                        '9651.55200000',
-                        '0',
-                        1591256459999,
-                        '0',
-                        60,
-                        '0',
-                        '0',
-                        '0',
-                    ],
-                ])
-            );
+            mockResponse = JSONParse(JSONStringify([[1591256400000]]));
 
             const spy = jest.spyOn(client, 'indexPriceKlineCandlestickData').mockReturnValue(
                 Promise.resolve({
@@ -1134,8 +998,8 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when pair is missing', async () => {
             const _params: IndexPriceKlineCandlestickDataRequest = {
-                pair: 'pair_example',
-                interval: IndexPriceKlineCandlestickDataIntervalEnum.INTERVAL_1s,
+                pair: 'BTCUSDT',
+                interval: IndexPriceKlineCandlestickDataIntervalEnum.INTERVAL_1m,
             };
             const params = Object.assign({ ..._params });
             delete params?.pair;
@@ -1147,8 +1011,8 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when interval is missing', async () => {
             const _params: IndexPriceKlineCandlestickDataRequest = {
-                pair: 'pair_example',
-                interval: IndexPriceKlineCandlestickDataIntervalEnum.INTERVAL_1s,
+                pair: 'BTCUSDT',
+                interval: IndexPriceKlineCandlestickDataIntervalEnum.INTERVAL_1m,
             };
             const params = Object.assign({ ..._params });
             delete params?.interval;
@@ -1160,8 +1024,8 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: IndexPriceKlineCandlestickDataRequest = {
-                pair: 'pair_example',
-                interval: IndexPriceKlineCandlestickDataIntervalEnum.INTERVAL_1s,
+                pair: 'BTCUSDT',
+                interval: IndexPriceKlineCandlestickDataIntervalEnum.INTERVAL_1m,
             };
 
             const errorResponse = {
@@ -1186,28 +1050,11 @@ describe('MarketDataApi', () => {
     describe('klineCandlestickData()', () => {
         it('should execute klineCandlestickData() successfully with required parameters only', async () => {
             const params: KlineCandlestickDataRequest = {
-                symbol: 'symbol_example',
-                interval: KlineCandlestickDataIntervalEnum.INTERVAL_1s,
+                symbol: 'BTCUSDT',
+                interval: KlineCandlestickDataIntervalEnum.INTERVAL_1m,
             };
 
-            mockResponse = JSONParse(
-                JSONStringify([
-                    [
-                        1499040000000,
-                        '0.01634790',
-                        '0.80000000',
-                        '0.01575800',
-                        '0.01577100',
-                        '148976.11427815',
-                        1499644799999,
-                        '2434.19055334',
-                        308,
-                        '1756.87402397',
-                        '28.46694368',
-                        '17928899.62484339',
-                    ],
-                ])
-            );
+            mockResponse = JSONParse(JSONStringify([[1499040000000]]));
 
             const spy = jest.spyOn(client, 'klineCandlestickData').mockReturnValue(
                 Promise.resolve({
@@ -1225,31 +1072,14 @@ describe('MarketDataApi', () => {
 
         it('should execute klineCandlestickData() successfully with optional parameters', async () => {
             const params: KlineCandlestickDataRequest = {
-                symbol: 'symbol_example',
-                interval: KlineCandlestickDataIntervalEnum.INTERVAL_1s,
+                symbol: 'BTCUSDT',
+                interval: KlineCandlestickDataIntervalEnum.INTERVAL_1m,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 50,
             };
 
-            mockResponse = JSONParse(
-                JSONStringify([
-                    [
-                        1499040000000,
-                        '0.01634790',
-                        '0.80000000',
-                        '0.01575800',
-                        '0.01577100',
-                        '148976.11427815',
-                        1499644799999,
-                        '2434.19055334',
-                        308,
-                        '1756.87402397',
-                        '28.46694368',
-                        '17928899.62484339',
-                    ],
-                ])
-            );
+            mockResponse = JSONParse(JSONStringify([[1499040000000]]));
 
             const spy = jest.spyOn(client, 'klineCandlestickData').mockReturnValue(
                 Promise.resolve({
@@ -1267,8 +1097,8 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: KlineCandlestickDataRequest = {
-                symbol: 'symbol_example',
-                interval: KlineCandlestickDataIntervalEnum.INTERVAL_1s,
+                symbol: 'BTCUSDT',
+                interval: KlineCandlestickDataIntervalEnum.INTERVAL_1m,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1280,8 +1110,8 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when interval is missing', async () => {
             const _params: KlineCandlestickDataRequest = {
-                symbol: 'symbol_example',
-                interval: KlineCandlestickDataIntervalEnum.INTERVAL_1s,
+                symbol: 'BTCUSDT',
+                interval: KlineCandlestickDataIntervalEnum.INTERVAL_1m,
             };
             const params = Object.assign({ ..._params });
             delete params?.interval;
@@ -1293,8 +1123,8 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: KlineCandlestickDataRequest = {
-                symbol: 'symbol_example',
-                interval: KlineCandlestickDataIntervalEnum.INTERVAL_1s,
+                symbol: 'BTCUSDT',
+                interval: KlineCandlestickDataIntervalEnum.INTERVAL_1m,
             };
 
             const errorResponse = {
@@ -1315,7 +1145,7 @@ describe('MarketDataApi', () => {
     describe('longShortRatio()', () => {
         it('should execute longShortRatio() successfully with required parameters only', async () => {
             const params: LongShortRatioRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 period: LongShortRatioPeriodEnum.PERIOD_5m,
             };
 
@@ -1326,14 +1156,7 @@ describe('MarketDataApi', () => {
                         longShortRatio: '0.1960',
                         longAccount: '0.6622',
                         shortAccount: '0.3378',
-                        timestamp: '1583139600000',
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        longShortRatio: '1.9559',
-                        longAccount: '0.6617',
-                        shortAccount: '0.3382',
-                        timestamp: '1583139900000',
+                        timestamp: 1591261042378,
                     },
                 ])
             );
@@ -1354,9 +1177,9 @@ describe('MarketDataApi', () => {
 
         it('should execute longShortRatio() successfully with optional parameters', async () => {
             const params: LongShortRatioRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 period: LongShortRatioPeriodEnum.PERIOD_5m,
-                limit: 100,
+                limit: 50,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
             };
@@ -1368,14 +1191,7 @@ describe('MarketDataApi', () => {
                         longShortRatio: '0.1960',
                         longAccount: '0.6622',
                         shortAccount: '0.3378',
-                        timestamp: '1583139600000',
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        longShortRatio: '1.9559',
-                        longAccount: '0.6617',
-                        shortAccount: '0.3382',
-                        timestamp: '1583139900000',
+                        timestamp: 1591261042378,
                     },
                 ])
             );
@@ -1396,7 +1212,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: LongShortRatioRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 period: LongShortRatioPeriodEnum.PERIOD_5m,
             };
             const params = Object.assign({ ..._params });
@@ -1409,7 +1225,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when period is missing', async () => {
             const _params: LongShortRatioRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 period: LongShortRatioPeriodEnum.PERIOD_5m,
             };
             const params = Object.assign({ ..._params });
@@ -1422,7 +1238,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: LongShortRatioRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 period: LongShortRatioPeriodEnum.PERIOD_5m,
             };
 
@@ -1472,7 +1288,7 @@ describe('MarketDataApi', () => {
 
         it('should execute markPrice() successfully with optional parameters', async () => {
             const params: MarkPriceRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -1521,28 +1337,11 @@ describe('MarketDataApi', () => {
     describe('markPriceKlineCandlestickData()', () => {
         it('should execute markPriceKlineCandlestickData() successfully with required parameters only', async () => {
             const params: MarkPriceKlineCandlestickDataRequest = {
-                symbol: 'symbol_example',
-                interval: MarkPriceKlineCandlestickDataIntervalEnum.INTERVAL_1s,
+                symbol: 'BTCUSDT',
+                interval: MarkPriceKlineCandlestickDataIntervalEnum.INTERVAL_1m,
             };
 
-            mockResponse = JSONParse(
-                JSONStringify([
-                    [
-                        1591256460000,
-                        '9653.29201333',
-                        '9654.56401333',
-                        '9653.07367333',
-                        '9653.07367333',
-                        '0',
-                        1591256519999,
-                        '0',
-                        60,
-                        '0',
-                        '0',
-                        '0',
-                    ],
-                ])
-            );
+            mockResponse = JSONParse(JSONStringify([[1591256460000]]));
 
             const spy = jest.spyOn(client, 'markPriceKlineCandlestickData').mockReturnValue(
                 Promise.resolve({
@@ -1560,31 +1359,14 @@ describe('MarketDataApi', () => {
 
         it('should execute markPriceKlineCandlestickData() successfully with optional parameters', async () => {
             const params: MarkPriceKlineCandlestickDataRequest = {
-                symbol: 'symbol_example',
-                interval: MarkPriceKlineCandlestickDataIntervalEnum.INTERVAL_1s,
+                symbol: 'BTCUSDT',
+                interval: MarkPriceKlineCandlestickDataIntervalEnum.INTERVAL_1m,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 50,
             };
 
-            mockResponse = JSONParse(
-                JSONStringify([
-                    [
-                        1591256460000,
-                        '9653.29201333',
-                        '9654.56401333',
-                        '9653.07367333',
-                        '9653.07367333',
-                        '0',
-                        1591256519999,
-                        '0',
-                        60,
-                        '0',
-                        '0',
-                        '0',
-                    ],
-                ])
-            );
+            mockResponse = JSONParse(JSONStringify([[1591256460000]]));
 
             const spy = jest.spyOn(client, 'markPriceKlineCandlestickData').mockReturnValue(
                 Promise.resolve({
@@ -1602,8 +1384,8 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: MarkPriceKlineCandlestickDataRequest = {
-                symbol: 'symbol_example',
-                interval: MarkPriceKlineCandlestickDataIntervalEnum.INTERVAL_1s,
+                symbol: 'BTCUSDT',
+                interval: MarkPriceKlineCandlestickDataIntervalEnum.INTERVAL_1m,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1615,8 +1397,8 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when interval is missing', async () => {
             const _params: MarkPriceKlineCandlestickDataRequest = {
-                symbol: 'symbol_example',
-                interval: MarkPriceKlineCandlestickDataIntervalEnum.INTERVAL_1s,
+                symbol: 'BTCUSDT',
+                interval: MarkPriceKlineCandlestickDataIntervalEnum.INTERVAL_1m,
             };
             const params = Object.assign({ ..._params });
             delete params?.interval;
@@ -1628,8 +1410,8 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: MarkPriceKlineCandlestickDataRequest = {
-                symbol: 'symbol_example',
-                interval: MarkPriceKlineCandlestickDataIntervalEnum.INTERVAL_1s,
+                symbol: 'BTCUSDT',
+                interval: MarkPriceKlineCandlestickDataIntervalEnum.INTERVAL_1m,
             };
 
             const errorResponse = {
@@ -1654,7 +1436,7 @@ describe('MarketDataApi', () => {
     describe('oldTradesLookup()', () => {
         it('should execute oldTradesLookup() successfully with required parameters only', async () => {
             const params: OldTradesLookupRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -1687,8 +1469,8 @@ describe('MarketDataApi', () => {
 
         it('should execute oldTradesLookup() successfully with optional parameters', async () => {
             const params: OldTradesLookupRequest = {
-                symbol: 'symbol_example',
-                limit: 100,
+                symbol: 'BTCUSDT',
+                limit: 50,
                 fromId: 1,
             };
 
@@ -1722,7 +1504,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: OldTradesLookupRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1734,7 +1516,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: OldTradesLookupRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -1755,7 +1537,7 @@ describe('MarketDataApi', () => {
     describe('openInterest()', () => {
         it('should execute openInterest() successfully with required parameters only', async () => {
             const params: OpenInterestRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -1778,7 +1560,7 @@ describe('MarketDataApi', () => {
 
         it('should execute openInterest() successfully with optional parameters', async () => {
             const params: OpenInterestRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -1801,7 +1583,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: OpenInterestRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1813,7 +1595,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: OpenInterestRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -1834,7 +1616,7 @@ describe('MarketDataApi', () => {
     describe('openInterestStatistics()', () => {
         it('should execute openInterestStatistics() successfully with required parameters only', async () => {
             const params: OpenInterestStatisticsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 period: OpenInterestStatisticsPeriodEnum.PERIOD_5m,
             };
 
@@ -1842,17 +1624,10 @@ describe('MarketDataApi', () => {
                 JSONStringify([
                     {
                         symbol: 'BTCUSDT',
-                        sumOpenInterest: '20403.63700000',
-                        sumOpenInterestValue: '150570784.07809979',
+                        sumOpenInterest: '20403.12345678',
+                        sumOpenInterestValue: '176196512.12345678',
                         CMCCirculatingSupply: '165880.538',
-                        timestamp: '1583127900000',
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        sumOpenInterest: '20401.36700000',
-                        sumOpenInterestValue: '149940752.14464448',
-                        CMCCirculatingSupply: '165900.14853',
-                        timestamp: '1583128200000',
+                        timestamp: 1591261042378,
                     },
                 ])
             );
@@ -1873,9 +1648,9 @@ describe('MarketDataApi', () => {
 
         it('should execute openInterestStatistics() successfully with optional parameters', async () => {
             const params: OpenInterestStatisticsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 period: OpenInterestStatisticsPeriodEnum.PERIOD_5m,
-                limit: 100,
+                limit: 50,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
             };
@@ -1884,17 +1659,10 @@ describe('MarketDataApi', () => {
                 JSONStringify([
                     {
                         symbol: 'BTCUSDT',
-                        sumOpenInterest: '20403.63700000',
-                        sumOpenInterestValue: '150570784.07809979',
+                        sumOpenInterest: '20403.12345678',
+                        sumOpenInterestValue: '176196512.12345678',
                         CMCCirculatingSupply: '165880.538',
-                        timestamp: '1583127900000',
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        sumOpenInterest: '20401.36700000',
-                        sumOpenInterestValue: '149940752.14464448',
-                        CMCCirculatingSupply: '165900.14853',
-                        timestamp: '1583128200000',
+                        timestamp: 1591261042378,
                     },
                 ])
             );
@@ -1915,7 +1683,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: OpenInterestStatisticsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 period: OpenInterestStatisticsPeriodEnum.PERIOD_5m,
             };
             const params = Object.assign({ ..._params });
@@ -1928,7 +1696,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when period is missing', async () => {
             const _params: OpenInterestStatisticsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 period: OpenInterestStatisticsPeriodEnum.PERIOD_5m,
             };
             const params = Object.assign({ ..._params });
@@ -1941,7 +1709,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: OpenInterestStatisticsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 period: OpenInterestStatisticsPeriodEnum.PERIOD_5m,
             };
 
@@ -1965,7 +1733,7 @@ describe('MarketDataApi', () => {
     describe('orderBook()', () => {
         it('should execute orderBook() successfully with required parameters only', async () => {
             const params: OrderBookRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -1994,8 +1762,8 @@ describe('MarketDataApi', () => {
 
         it('should execute orderBook() successfully with optional parameters', async () => {
             const params: OrderBookRequest = {
-                symbol: 'symbol_example',
-                limit: 100,
+                symbol: 'BTCUSDT',
+                limit: 50,
             };
 
             mockResponse = JSONParse(
@@ -2024,7 +1792,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: OrderBookRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -2036,7 +1804,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: OrderBookRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -2057,28 +1825,11 @@ describe('MarketDataApi', () => {
     describe('premiumIndexKlineData()', () => {
         it('should execute premiumIndexKlineData() successfully with required parameters only', async () => {
             const params: PremiumIndexKlineDataRequest = {
-                symbol: 'symbol_example',
-                interval: PremiumIndexKlineDataIntervalEnum.INTERVAL_1s,
+                symbol: 'BTCUSDT',
+                interval: PremiumIndexKlineDataIntervalEnum.INTERVAL_1m,
             };
 
-            mockResponse = JSONParse(
-                JSONStringify([
-                    [
-                        1691603820000,
-                        '-0.00042931',
-                        '-0.00023641',
-                        '-0.00059406',
-                        '-0.00043659',
-                        '0',
-                        1691603879999,
-                        '0',
-                        12,
-                        '0',
-                        '0',
-                        '0',
-                    ],
-                ])
-            );
+            mockResponse = JSONParse(JSONStringify([[1691603820000]]));
 
             const spy = jest.spyOn(client, 'premiumIndexKlineData').mockReturnValue(
                 Promise.resolve({
@@ -2096,31 +1847,14 @@ describe('MarketDataApi', () => {
 
         it('should execute premiumIndexKlineData() successfully with optional parameters', async () => {
             const params: PremiumIndexKlineDataRequest = {
-                symbol: 'symbol_example',
-                interval: PremiumIndexKlineDataIntervalEnum.INTERVAL_1s,
+                symbol: 'BTCUSDT',
+                interval: PremiumIndexKlineDataIntervalEnum.INTERVAL_1m,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                limit: 100,
+                limit: 50,
             };
 
-            mockResponse = JSONParse(
-                JSONStringify([
-                    [
-                        1691603820000,
-                        '-0.00042931',
-                        '-0.00023641',
-                        '-0.00059406',
-                        '-0.00043659',
-                        '0',
-                        1691603879999,
-                        '0',
-                        12,
-                        '0',
-                        '0',
-                        '0',
-                    ],
-                ])
-            );
+            mockResponse = JSONParse(JSONStringify([[1691603820000]]));
 
             const spy = jest.spyOn(client, 'premiumIndexKlineData').mockReturnValue(
                 Promise.resolve({
@@ -2138,8 +1872,8 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: PremiumIndexKlineDataRequest = {
-                symbol: 'symbol_example',
-                interval: PremiumIndexKlineDataIntervalEnum.INTERVAL_1s,
+                symbol: 'BTCUSDT',
+                interval: PremiumIndexKlineDataIntervalEnum.INTERVAL_1m,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -2151,8 +1885,8 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when interval is missing', async () => {
             const _params: PremiumIndexKlineDataRequest = {
-                symbol: 'symbol_example',
-                interval: PremiumIndexKlineDataIntervalEnum.INTERVAL_1s,
+                symbol: 'BTCUSDT',
+                interval: PremiumIndexKlineDataIntervalEnum.INTERVAL_1m,
             };
             const params = Object.assign({ ..._params });
             delete params?.interval;
@@ -2164,8 +1898,8 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: PremiumIndexKlineDataRequest = {
-                symbol: 'symbol_example',
-                interval: PremiumIndexKlineDataIntervalEnum.INTERVAL_1s,
+                symbol: 'BTCUSDT',
+                interval: PremiumIndexKlineDataIntervalEnum.INTERVAL_1m,
             };
 
             const errorResponse = {
@@ -2188,16 +1922,11 @@ describe('MarketDataApi', () => {
     describe('quarterlyContractSettlementPrice()', () => {
         it('should execute quarterlyContractSettlementPrice() successfully with required parameters only', async () => {
             const params: QuarterlyContractSettlementPriceRequest = {
-                pair: 'pair_example',
+                pair: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
-                JSONStringify([
-                    { deliveryTime: 1695945600000, deliveryPrice: 27103 },
-                    { deliveryTime: 1688083200000, deliveryPrice: 30733.6 },
-                    { deliveryTime: 1680220800000, deliveryPrice: 27814.2 },
-                    { deliveryTime: 1648166400000, deliveryPrice: 44066.3 },
-                ])
+                JSONStringify([{ deliveryTime: 1695945600000, deliveryPrice: 27103 }])
             );
 
             const spy = jest.spyOn(client, 'quarterlyContractSettlementPrice').mockReturnValue(
@@ -2216,16 +1945,11 @@ describe('MarketDataApi', () => {
 
         it('should execute quarterlyContractSettlementPrice() successfully with optional parameters', async () => {
             const params: QuarterlyContractSettlementPriceRequest = {
-                pair: 'pair_example',
+                pair: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
-                JSONStringify([
-                    { deliveryTime: 1695945600000, deliveryPrice: 27103 },
-                    { deliveryTime: 1688083200000, deliveryPrice: 30733.6 },
-                    { deliveryTime: 1680220800000, deliveryPrice: 27814.2 },
-                    { deliveryTime: 1648166400000, deliveryPrice: 44066.3 },
-                ])
+                JSONStringify([{ deliveryTime: 1695945600000, deliveryPrice: 27103 }])
             );
 
             const spy = jest.spyOn(client, 'quarterlyContractSettlementPrice').mockReturnValue(
@@ -2244,7 +1968,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when pair is missing', async () => {
             const _params: QuarterlyContractSettlementPriceRequest = {
-                pair: 'pair_example',
+                pair: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.pair;
@@ -2256,7 +1980,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QuarterlyContractSettlementPriceRequest = {
-                pair: 'pair_example',
+                pair: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -2281,58 +2005,11 @@ describe('MarketDataApi', () => {
     describe('queryIndexPriceConstituents()', () => {
         it('should execute queryIndexPriceConstituents() successfully with required parameters only', async () => {
             const params: QueryIndexPriceConstituentsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
-                JSONStringify({
-                    symbol: 'BTCUSDT',
-                    time: 1745401553408,
-                    constituents: [
-                        {
-                            exchange: 'binance',
-                            symbol: 'BTCUSDT',
-                            price: '94057.03000000',
-                            weight: '0.51282051',
-                        },
-                        {
-                            exchange: 'coinbase',
-                            symbol: 'BTC-USDT',
-                            price: '94140.58000000',
-                            weight: '0.15384615',
-                        },
-                        {
-                            exchange: 'gateio',
-                            symbol: 'BTC_USDT',
-                            price: '94060.10000000',
-                            weight: '0.02564103',
-                        },
-                        {
-                            exchange: 'kucoin',
-                            symbol: 'BTC-USDT',
-                            price: '94096.70000000',
-                            weight: '0.07692308',
-                        },
-                        {
-                            exchange: 'mxc',
-                            symbol: 'BTCUSDT',
-                            price: '94057.02000000',
-                            weight: '0.07692308',
-                        },
-                        {
-                            exchange: 'bitget',
-                            symbol: 'BTCUSDT',
-                            price: '94064.03000000',
-                            weight: '0.07692308',
-                        },
-                        {
-                            exchange: 'bybit',
-                            symbol: 'BTCUSDT',
-                            price: '94067.90000000',
-                            weight: '0.07692308',
-                        },
-                    ],
-                })
+                JSONStringify({ symbol: 'BTCUSDT', time: 1745401553408, constituents: [] })
             );
 
             const spy = jest.spyOn(client, 'queryIndexPriceConstituents').mockReturnValue(
@@ -2351,58 +2028,11 @@ describe('MarketDataApi', () => {
 
         it('should execute queryIndexPriceConstituents() successfully with optional parameters', async () => {
             const params: QueryIndexPriceConstituentsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
-                JSONStringify({
-                    symbol: 'BTCUSDT',
-                    time: 1745401553408,
-                    constituents: [
-                        {
-                            exchange: 'binance',
-                            symbol: 'BTCUSDT',
-                            price: '94057.03000000',
-                            weight: '0.51282051',
-                        },
-                        {
-                            exchange: 'coinbase',
-                            symbol: 'BTC-USDT',
-                            price: '94140.58000000',
-                            weight: '0.15384615',
-                        },
-                        {
-                            exchange: 'gateio',
-                            symbol: 'BTC_USDT',
-                            price: '94060.10000000',
-                            weight: '0.02564103',
-                        },
-                        {
-                            exchange: 'kucoin',
-                            symbol: 'BTC-USDT',
-                            price: '94096.70000000',
-                            weight: '0.07692308',
-                        },
-                        {
-                            exchange: 'mxc',
-                            symbol: 'BTCUSDT',
-                            price: '94057.02000000',
-                            weight: '0.07692308',
-                        },
-                        {
-                            exchange: 'bitget',
-                            symbol: 'BTCUSDT',
-                            price: '94064.03000000',
-                            weight: '0.07692308',
-                        },
-                        {
-                            exchange: 'bybit',
-                            symbol: 'BTCUSDT',
-                            price: '94067.90000000',
-                            weight: '0.07692308',
-                        },
-                    ],
-                })
+                JSONStringify({ symbol: 'BTCUSDT', time: 1745401553408, constituents: [] })
             );
 
             const spy = jest.spyOn(client, 'queryIndexPriceConstituents').mockReturnValue(
@@ -2421,7 +2051,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: QueryIndexPriceConstituentsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -2433,7 +2063,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: QueryIndexPriceConstituentsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -2457,38 +2087,7 @@ describe('MarketDataApi', () => {
 
     describe('queryInsuranceFundBalanceSnapshot()', () => {
         it('should execute queryInsuranceFundBalanceSnapshot() successfully with required parameters only', async () => {
-            mockResponse = JSONParse(
-                JSONStringify({
-                    symbols: [
-                        'BNBUSDT',
-                        'BTCUSDT',
-                        'BTCUSDT_250627',
-                        'BTCUSDT_250926',
-                        'ETHBTC',
-                        'ETHUSDT',
-                        'ETHUSDT_250627',
-                        'ETHUSDT_250926',
-                    ],
-                    assets: [
-                        {
-                            asset: 'USDC',
-                            marginBalance: '299999998.6497832',
-                            updateTime: 1745366402000,
-                        },
-                        {
-                            asset: 'USDT',
-                            marginBalance: '793930579.315848',
-                            updateTime: 1745366402000,
-                        },
-                        { asset: 'BTC', marginBalance: '61.73143554', updateTime: 1745366402000 },
-                        {
-                            asset: 'BNFCR',
-                            marginBalance: '633223.99396922',
-                            updateTime: 1745366402000,
-                        },
-                    ],
-                })
-            );
+            mockResponse = JSONParse(JSONStringify({ symbols: [], assets: [] }));
 
             const spy = jest.spyOn(client, 'queryInsuranceFundBalanceSnapshot').mockReturnValue(
                 Promise.resolve({
@@ -2506,41 +2105,10 @@ describe('MarketDataApi', () => {
 
         it('should execute queryInsuranceFundBalanceSnapshot() successfully with optional parameters', async () => {
             const params: QueryInsuranceFundBalanceSnapshotRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BNBUSDT',
             };
 
-            mockResponse = JSONParse(
-                JSONStringify({
-                    symbols: [
-                        'BNBUSDT',
-                        'BTCUSDT',
-                        'BTCUSDT_250627',
-                        'BTCUSDT_250926',
-                        'ETHBTC',
-                        'ETHUSDT',
-                        'ETHUSDT_250627',
-                        'ETHUSDT_250926',
-                    ],
-                    assets: [
-                        {
-                            asset: 'USDC',
-                            marginBalance: '299999998.6497832',
-                            updateTime: 1745366402000,
-                        },
-                        {
-                            asset: 'USDT',
-                            marginBalance: '793930579.315848',
-                            updateTime: 1745366402000,
-                        },
-                        { asset: 'BTC', marginBalance: '61.73143554', updateTime: 1745366402000 },
-                        {
-                            asset: 'BNFCR',
-                            marginBalance: '633223.99396922',
-                            updateTime: 1745366402000,
-                        },
-                    ],
-                })
-            );
+            mockResponse = JSONParse(JSONStringify({ symbols: [], assets: [] }));
 
             const spy = jest.spyOn(client, 'queryInsuranceFundBalanceSnapshot').mockReturnValue(
                 Promise.resolve({
@@ -2579,7 +2147,7 @@ describe('MarketDataApi', () => {
     describe('recentTradesList()', () => {
         it('should execute recentTradesList() successfully with required parameters only', async () => {
             const params: RecentTradesListRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -2612,8 +2180,8 @@ describe('MarketDataApi', () => {
 
         it('should execute recentTradesList() successfully with optional parameters', async () => {
             const params: RecentTradesListRequest = {
-                symbol: 'symbol_example',
-                limit: 100,
+                symbol: 'BTCUSDT',
+                limit: 50,
             };
 
             mockResponse = JSONParse(
@@ -2646,7 +2214,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: RecentTradesListRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -2658,7 +2226,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: RecentTradesListRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -2679,7 +2247,7 @@ describe('MarketDataApi', () => {
     describe('rpiOrderBook()', () => {
         it('should execute rpiOrderBook() successfully with required parameters only', async () => {
             const params: RpiOrderBookRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -2708,8 +2276,8 @@ describe('MarketDataApi', () => {
 
         it('should execute rpiOrderBook() successfully with optional parameters', async () => {
             const params: RpiOrderBookRequest = {
-                symbol: 'symbol_example',
-                limit: 100,
+                symbol: 'BTCUSDT',
+                limit: 1000,
             };
 
             mockResponse = JSONParse(
@@ -2738,7 +2306,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: RpiOrderBookRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -2750,7 +2318,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: RpiOrderBookRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {
@@ -2797,7 +2365,7 @@ describe('MarketDataApi', () => {
 
         it('should execute symbolOrderBookTicker() successfully with optional parameters', async () => {
             const params: SymbolOrderBookTickerRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -2865,7 +2433,7 @@ describe('MarketDataApi', () => {
 
         it('should execute symbolPriceTicker() successfully with optional parameters', async () => {
             const params: SymbolPriceTickerRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -2924,7 +2492,7 @@ describe('MarketDataApi', () => {
 
         it('should execute symbolPriceTickerV2() successfully with optional parameters', async () => {
             const params: SymbolPriceTickerV2Request = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -2964,7 +2532,7 @@ describe('MarketDataApi', () => {
     describe('takerBuySellVolume()', () => {
         it('should execute takerBuySellVolume() successfully with required parameters only', async () => {
             const params: TakerBuySellVolumeRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 period: TakerBuySellVolumePeriodEnum.PERIOD_5m,
             };
 
@@ -2974,13 +2542,7 @@ describe('MarketDataApi', () => {
                         buySellRatio: '1.5586',
                         buyVol: '387.3300',
                         sellVol: '248.5030',
-                        timestamp: '1585614900000',
-                    },
-                    {
-                        buySellRatio: '1.3104',
-                        buyVol: '343.9290',
-                        sellVol: '248.5030',
-                        timestamp: '1583139900000',
+                        timestamp: 1591261042378,
                     },
                 ])
             );
@@ -3001,9 +2563,9 @@ describe('MarketDataApi', () => {
 
         it('should execute takerBuySellVolume() successfully with optional parameters', async () => {
             const params: TakerBuySellVolumeRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 period: TakerBuySellVolumePeriodEnum.PERIOD_5m,
-                limit: 100,
+                limit: 50,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
             };
@@ -3014,13 +2576,7 @@ describe('MarketDataApi', () => {
                         buySellRatio: '1.5586',
                         buyVol: '387.3300',
                         sellVol: '248.5030',
-                        timestamp: '1585614900000',
-                    },
-                    {
-                        buySellRatio: '1.3104',
-                        buyVol: '343.9290',
-                        sellVol: '248.5030',
-                        timestamp: '1583139900000',
+                        timestamp: 1591261042378,
                     },
                 ])
             );
@@ -3041,7 +2597,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: TakerBuySellVolumeRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 period: TakerBuySellVolumePeriodEnum.PERIOD_5m,
             };
             const params = Object.assign({ ..._params });
@@ -3054,7 +2610,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when period is missing', async () => {
             const _params: TakerBuySellVolumeRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 period: TakerBuySellVolumePeriodEnum.PERIOD_5m,
             };
             const params = Object.assign({ ..._params });
@@ -3067,7 +2623,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: TakerBuySellVolumeRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 period: TakerBuySellVolumePeriodEnum.PERIOD_5m,
             };
 
@@ -3157,7 +2713,7 @@ describe('MarketDataApi', () => {
 
         it('should execute ticker24hrPriceChangeStatistics() successfully with optional parameters', async () => {
             const params: Ticker24hrPriceChangeStatisticsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -3216,7 +2772,7 @@ describe('MarketDataApi', () => {
     describe('topTraderLongShortRatioAccounts()', () => {
         it('should execute topTraderLongShortRatioAccounts() successfully with required parameters only', async () => {
             const params: TopTraderLongShortRatioAccountsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 period: TopTraderLongShortRatioAccountsPeriodEnum.PERIOD_5m,
             };
 
@@ -3227,14 +2783,7 @@ describe('MarketDataApi', () => {
                         longShortRatio: '1.8105',
                         longAccount: '0.6442',
                         shortAccount: '0.3558',
-                        timestamp: '1583139600000',
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        longShortRatio: '0.5576',
-                        longAccount: '0.3580',
-                        shortAccount: '0.6420',
-                        timestamp: '1583139900000',
+                        timestamp: 1591261042378,
                     },
                 ])
             );
@@ -3255,9 +2804,9 @@ describe('MarketDataApi', () => {
 
         it('should execute topTraderLongShortRatioAccounts() successfully with optional parameters', async () => {
             const params: TopTraderLongShortRatioAccountsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 period: TopTraderLongShortRatioAccountsPeriodEnum.PERIOD_5m,
-                limit: 100,
+                limit: 50,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
             };
@@ -3269,14 +2818,7 @@ describe('MarketDataApi', () => {
                         longShortRatio: '1.8105',
                         longAccount: '0.6442',
                         shortAccount: '0.3558',
-                        timestamp: '1583139600000',
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        longShortRatio: '0.5576',
-                        longAccount: '0.3580',
-                        shortAccount: '0.6420',
-                        timestamp: '1583139900000',
+                        timestamp: 1591261042378,
                     },
                 ])
             );
@@ -3297,7 +2839,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: TopTraderLongShortRatioAccountsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 period: TopTraderLongShortRatioAccountsPeriodEnum.PERIOD_5m,
             };
             const params = Object.assign({ ..._params });
@@ -3310,7 +2852,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when period is missing', async () => {
             const _params: TopTraderLongShortRatioAccountsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 period: TopTraderLongShortRatioAccountsPeriodEnum.PERIOD_5m,
             };
             const params = Object.assign({ ..._params });
@@ -3323,7 +2865,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: TopTraderLongShortRatioAccountsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 period: TopTraderLongShortRatioAccountsPeriodEnum.PERIOD_5m,
             };
 
@@ -3349,7 +2891,7 @@ describe('MarketDataApi', () => {
     describe('topTraderLongShortRatioPositions()', () => {
         it('should execute topTraderLongShortRatioPositions() successfully with required parameters only', async () => {
             const params: TopTraderLongShortRatioPositionsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 period: TopTraderLongShortRatioPositionsPeriodEnum.PERIOD_5m,
             };
 
@@ -3358,16 +2900,9 @@ describe('MarketDataApi', () => {
                     {
                         symbol: 'BTCUSDT',
                         longShortRatio: '1.4342',
-                        longAccount: '0.5891',
-                        shortAccount: '0.4108',
-                        timestamp: '1583139600000',
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        longShortRatio: '1.4337',
-                        longAccount: '0.3583',
-                        shortAccount: '0.6417',
-                        timestamp: '1583139900000',
+                        longAccount: '0.5344',
+                        shortAccount: '0.4238',
+                        timestamp: 1591261042378,
                     },
                 ])
             );
@@ -3388,9 +2923,9 @@ describe('MarketDataApi', () => {
 
         it('should execute topTraderLongShortRatioPositions() successfully with optional parameters', async () => {
             const params: TopTraderLongShortRatioPositionsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 period: TopTraderLongShortRatioPositionsPeriodEnum.PERIOD_5m,
-                limit: 100,
+                limit: 50,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
             };
@@ -3400,16 +2935,9 @@ describe('MarketDataApi', () => {
                     {
                         symbol: 'BTCUSDT',
                         longShortRatio: '1.4342',
-                        longAccount: '0.5891',
-                        shortAccount: '0.4108',
-                        timestamp: '1583139600000',
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        longShortRatio: '1.4337',
-                        longAccount: '0.3583',
-                        shortAccount: '0.6417',
-                        timestamp: '1583139900000',
+                        longAccount: '0.5344',
+                        shortAccount: '0.4238',
+                        timestamp: 1591261042378,
                     },
                 ])
             );
@@ -3430,7 +2958,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: TopTraderLongShortRatioPositionsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 period: TopTraderLongShortRatioPositionsPeriodEnum.PERIOD_5m,
             };
             const params = Object.assign({ ..._params });
@@ -3443,7 +2971,7 @@ describe('MarketDataApi', () => {
 
         it('should throw RequiredError when period is missing', async () => {
             const _params: TopTraderLongShortRatioPositionsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 period: TopTraderLongShortRatioPositionsPeriodEnum.PERIOD_5m,
             };
             const params = Object.assign({ ..._params });
@@ -3456,7 +2984,7 @@ describe('MarketDataApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: TopTraderLongShortRatioPositionsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 period: TopTraderLongShortRatioPositionsPeriodEnum.PERIOD_5m,
             };
 
@@ -3482,53 +3010,7 @@ describe('MarketDataApi', () => {
     describe('tradingSchedule()', () => {
         it('should execute tradingSchedule() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
-                JSONStringify({
-                    updateTime: 1761286643918,
-                    marketSchedules: {
-                        EQUITY: {
-                            sessions: [
-                                {
-                                    startTime: 1761177600000,
-                                    endTime: 1761206400000,
-                                    type: 'OVERNIGHT',
-                                },
-                                {
-                                    startTime: 1761206400000,
-                                    endTime: 1761226200000,
-                                    type: 'PRE_MARKET',
-                                },
-                            ],
-                        },
-                        COMMODITY: {
-                            sessions: [
-                                {
-                                    startTime: 1761724800000,
-                                    endTime: 1761744600000,
-                                    type: 'NO_TRADING',
-                                },
-                                {
-                                    startTime: 1761744600000,
-                                    endTime: 1761768000000,
-                                    type: 'REGULAR',
-                                },
-                            ],
-                        },
-                        KR_EQUITY: {
-                            sessions: [
-                                {
-                                    startTime: 1779958800000,
-                                    endTime: 1780009200000,
-                                    type: 'NO_TRADING',
-                                },
-                                {
-                                    startTime: 1780009200000,
-                                    endTime: 1780030800000,
-                                    type: 'REGULAR',
-                                },
-                            ],
-                        },
-                    },
-                })
+                JSONStringify({ updateTime: 1761286643918, marketSchedules: {} })
             );
 
             const spy = jest.spyOn(client, 'tradingSchedule').mockReturnValue(

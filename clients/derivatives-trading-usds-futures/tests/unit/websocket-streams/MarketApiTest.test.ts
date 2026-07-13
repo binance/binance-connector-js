@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -35,7 +35,14 @@ import {
     MarkPriceStreamForAllMarketRequest,
     TradingSessionStreamRequest,
 } from '../../../src/websocket-streams';
-import { MarketApi } from '../../../src/websocket-streams';
+import {
+    MarketApi,
+    ContinuousContractKlineCandlestickStreamsContractTypeEnum,
+    ContinuousContractKlineCandlestickStreamsIntervalEnum,
+    KlineCandlestickStreamsIntervalEnum,
+    MarkPriceStreamUpdateSpeedEnum,
+    MarkPriceStreamForAllMarketUpdateSpeedEnum,
+} from '../../../src/websocket-streams';
 import { mockSubscription } from './utils';
 
 describe('MarketApi', () => {
@@ -50,7 +57,7 @@ describe('MarketApi', () => {
                 JSONStringify({
                     e: 'aggTrade',
                     E: 123456789,
-                    s: 'BTCUSDT',
+                    s: 'BNBUSDT',
                     a: 5933014,
                     p: '0.001',
                     q: '100',
@@ -84,7 +91,7 @@ describe('MarketApi', () => {
                 JSONStringify({
                     e: 'aggTrade',
                     E: 123456789,
-                    s: 'BTCUSDT',
+                    s: 'BNBUSDT',
                     a: 5933014,
                     p: '0.001',
                     q: '100',
@@ -228,7 +235,7 @@ describe('MarketApi', () => {
                     {
                         e: '24hrMiniTicker',
                         E: 123456789,
-                        s: 'BTCUSDT',
+                        s: 'BNBUSDT',
                         c: '0.0025',
                         o: '0.0010',
                         h: '0.0025',
@@ -262,7 +269,7 @@ describe('MarketApi', () => {
                     {
                         e: '24hrMiniTicker',
                         E: 123456789,
-                        s: 'BTCUSDT',
+                        s: 'BNBUSDT',
                         c: '0.0025',
                         o: '0.0010',
                         h: '0.0025',
@@ -305,7 +312,7 @@ describe('MarketApi', () => {
                     {
                         e: '24hrTicker',
                         E: 123456789,
-                        s: 'BTCUSDT',
+                        s: 'BNBUSDT',
                         p: '0.0015',
                         P: '250.00',
                         w: '0.0018',
@@ -348,7 +355,7 @@ describe('MarketApi', () => {
                     {
                         e: '24hrTicker',
                         E: 123456789,
-                        s: 'BTCUSDT',
+                        s: 'BNBUSDT',
                         p: '0.0015',
                         P: '250.00',
                         w: '0.0018',
@@ -411,20 +418,6 @@ describe('MarketApi', () => {
                         Q: '0.26089330',
                         G: '0.28835575',
                     },
-                    {
-                        e: 'assetIndexUpdate',
-                        E: 1686749230000,
-                        s: 'USDTUSD',
-                        i: '0.99987691',
-                        b: '0.00010000',
-                        a: '0.00010000',
-                        B: '0.99977692',
-                        A: '0.99997689',
-                        q: '0.00010000',
-                        g: '0.00010000',
-                        Q: '0.99977692',
-                        G: '0.99997689',
-                    },
                 ])
             );
 
@@ -459,20 +452,6 @@ describe('MarketApi', () => {
                         g: '0.05000000',
                         Q: '0.26089330',
                         G: '0.28835575',
-                    },
-                    {
-                        e: 'assetIndexUpdate',
-                        E: 1686749230000,
-                        s: 'USDTUSD',
-                        i: '0.99987691',
-                        b: '0.00010000',
-                        a: '0.00010000',
-                        B: '0.99977692',
-                        A: '0.99997689',
-                        q: '0.00010000',
-                        g: '0.00010000',
-                        Q: '0.99977692',
-                        G: '0.99997689',
                     },
                 ])
             );
@@ -512,7 +491,6 @@ describe('MarketApi', () => {
                     C: 'baseAsset',
                     c: [
                         { b: 'BAL', q: 'USDT', w: '1.04884844', W: '0.01457800', i: '24.33521021' },
-                        { b: 'BAND', q: 'USDT', w: '3.53782729', W: '0.03935200', i: '7.26420084' },
                     ],
                 })
             );
@@ -543,7 +521,6 @@ describe('MarketApi', () => {
                     C: 'baseAsset',
                     c: [
                         { b: 'BAL', q: 'USDT', w: '1.04884844', W: '0.01457800', i: '24.33521021' },
-                        { b: 'BAND', q: 'USDT', w: '3.53782729', W: '0.03935200', i: '7.26420084' },
                     ],
                 })
             );
@@ -590,8 +567,8 @@ describe('MarketApi', () => {
         it('should execute continuousContractKlineCandlestickStreams() successfully', async () => {
             const params: ContinuousContractKlineCandlestickStreamsRequest = {
                 pair: 'btcusdt',
-                contractType: 'next_quarter',
-                interval: '1m',
+                contractType: ContinuousContractKlineCandlestickStreamsContractTypeEnum.perpetual,
+                interval: ContinuousContractKlineCandlestickStreamsIntervalEnum.INTERVAL_1s,
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -636,8 +613,8 @@ describe('MarketApi', () => {
 
             const params: ContinuousContractKlineCandlestickStreamsRequest = {
                 pair: 'btcusdt',
-                contractType: 'next_quarter',
-                interval: '1m',
+                contractType: ContinuousContractKlineCandlestickStreamsContractTypeEnum.perpetual,
+                interval: ContinuousContractKlineCandlestickStreamsIntervalEnum.INTERVAL_1s,
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -696,8 +673,8 @@ describe('MarketApi', () => {
 
             const _params: ContinuousContractKlineCandlestickStreamsRequest = {
                 pair: 'btcusdt',
-                contractType: 'next_quarter',
-                interval: '1m',
+                contractType: ContinuousContractKlineCandlestickStreamsContractTypeEnum.perpetual,
+                interval: ContinuousContractKlineCandlestickStreamsIntervalEnum.INTERVAL_1s,
             };
             const params = Object.assign({ ..._params });
             delete params?.pair;
@@ -716,8 +693,8 @@ describe('MarketApi', () => {
 
             const _params: ContinuousContractKlineCandlestickStreamsRequest = {
                 pair: 'btcusdt',
-                contractType: 'next_quarter',
-                interval: '1m',
+                contractType: ContinuousContractKlineCandlestickStreamsContractTypeEnum.perpetual,
+                interval: ContinuousContractKlineCandlestickStreamsIntervalEnum.INTERVAL_1s,
             };
             const params = Object.assign({ ..._params });
             delete params?.contractType;
@@ -736,8 +713,8 @@ describe('MarketApi', () => {
 
             const _params: ContinuousContractKlineCandlestickStreamsRequest = {
                 pair: 'btcusdt',
-                contractType: 'next_quarter',
-                interval: '1m',
+                contractType: ContinuousContractKlineCandlestickStreamsContractTypeEnum.perpetual,
+                interval: ContinuousContractKlineCandlestickStreamsIntervalEnum.INTERVAL_1s,
             };
             const params = Object.assign({ ..._params });
             delete params?.interval;
@@ -765,10 +742,7 @@ describe('MarketApi', () => {
                     dt: 4133404800000,
                     ot: 1569398400000,
                     cs: 'TRADING',
-                    bks: [
-                        { bs: 1, bnf: 0, bnc: 5000, mmr: 0.01, cf: 0, mi: 21, ma: 50 },
-                        { bs: 2, bnf: 5000, bnc: 25000, mmr: 0.025, cf: 75, mi: 11, ma: 20 },
-                    ],
+                    bks: [{ bs: 1, bnf: 0, bnc: 5000, mmr: 0.01, cf: 0, mi: 21, ma: 50 }],
                     st: 1,
                 })
             );
@@ -798,10 +772,7 @@ describe('MarketApi', () => {
                     dt: 4133404800000,
                     ot: 1569398400000,
                     cs: 'TRADING',
-                    bks: [
-                        { bs: 1, bnf: 0, bnc: 5000, mmr: 0.01, cf: 0, mi: 21, ma: 50 },
-                        { bs: 2, bnf: 5000, bnc: 25000, mmr: 0.025, cf: 75, mi: 11, ma: 20 },
-                    ],
+                    bks: [{ bs: 1, bnf: 0, bnc: 5000, mmr: 0.01, cf: 0, mi: 21, ma: 50 }],
                     st: 1,
                 })
             );
@@ -836,7 +807,7 @@ describe('MarketApi', () => {
                 JSONStringify({
                     e: '24hrMiniTicker',
                     E: 123456789,
-                    s: 'BTCUSDT',
+                    s: 'BNBUSDT',
                     c: '0.0025',
                     o: '0.0010',
                     h: '0.0025',
@@ -869,7 +840,7 @@ describe('MarketApi', () => {
                 JSONStringify({
                     e: '24hrMiniTicker',
                     E: 123456789,
-                    s: 'BTCUSDT',
+                    s: 'BNBUSDT',
                     c: '0.0025',
                     o: '0.0010',
                     h: '0.0025',
@@ -927,7 +898,7 @@ describe('MarketApi', () => {
                 JSONStringify({
                     e: '24hrTicker',
                     E: 123456789,
-                    s: 'BTCUSDT',
+                    s: 'BNBUSDT',
                     p: '0.0015',
                     P: '250.00',
                     w: '0.0018',
@@ -969,7 +940,7 @@ describe('MarketApi', () => {
                 JSONStringify({
                     e: '24hrTicker',
                     E: 123456789,
-                    s: 'BTCUSDT',
+                    s: 'BNBUSDT',
                     p: '0.0015',
                     P: '250.00',
                     w: '0.0018',
@@ -1029,7 +1000,7 @@ describe('MarketApi', () => {
         it('should execute klineCandlestickStreams() successfully', async () => {
             const params: KlineCandlestickStreamsRequest = {
                 symbol: 'btcusdt',
-                interval: '1m',
+                interval: KlineCandlestickStreamsIntervalEnum.INTERVAL_1m,
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -1074,7 +1045,7 @@ describe('MarketApi', () => {
 
             const params: KlineCandlestickStreamsRequest = {
                 symbol: 'btcusdt',
-                interval: '1m',
+                interval: KlineCandlestickStreamsIntervalEnum.INTERVAL_1m,
                 id: 'e9d6b4349871b40611412680b3445fac',
             };
 
@@ -1130,7 +1101,7 @@ describe('MarketApi', () => {
 
             const _params: KlineCandlestickStreamsRequest = {
                 symbol: 'btcusdt',
-                interval: '1m',
+                interval: KlineCandlestickStreamsIntervalEnum.INTERVAL_1m,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -1147,7 +1118,7 @@ describe('MarketApi', () => {
 
             const _params: KlineCandlestickStreamsRequest = {
                 symbol: 'btcusdt',
-                interval: '1m',
+                interval: KlineCandlestickStreamsIntervalEnum.INTERVAL_1m,
             };
             const params = Object.assign({ ..._params });
             delete params?.interval;
@@ -1262,7 +1233,7 @@ describe('MarketApi', () => {
             const params: MarkPriceStreamRequest = {
                 symbol: 'btcusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
-                updateSpeed: 'updateSpeed_example',
+                updateSpeed: MarkPriceStreamUpdateSpeedEnum.UPDATE_SPEED_1s,
             };
 
             const mockResponse = JSONParse(
@@ -1271,10 +1242,10 @@ describe('MarketApi', () => {
                     E: 1562305380000,
                     s: 'BTCUSDT',
                     p: '11794.15000000',
-                    ap: '11794.15000000',
                     i: '11784.62659091',
                     P: '11784.25641265',
                     r: '0.00038167',
+                    ap: '11794.15000000',
                     T: 1562306400000,
                     st: 1,
                 })
@@ -1295,7 +1266,7 @@ describe('MarketApi', () => {
             const params: MarkPriceStreamRequest = {
                 symbol: 'btcusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
-                updateSpeed: 'updateSpeed_example',
+                updateSpeed: MarkPriceStreamUpdateSpeedEnum.UPDATE_SPEED_1s,
             };
 
             const mockResponse = JSONParse(
@@ -1304,10 +1275,10 @@ describe('MarketApi', () => {
                     E: 1562305380000,
                     s: 'BTCUSDT',
                     p: '11794.15000000',
-                    ap: '11794.15000000',
                     i: '11784.62659091',
                     P: '11784.25641265',
                     r: '0.00038167',
+                    ap: '11794.15000000',
                     T: 1562306400000,
                     st: 1,
                 })
@@ -1352,7 +1323,7 @@ describe('MarketApi', () => {
         it('should execute markPriceStreamForAllMarket() successfully', async () => {
             const params: MarkPriceStreamForAllMarketRequest = {
                 id: 'e9d6b4349871b40611412680b3445fac',
-                updateSpeed: 'updateSpeed_example',
+                updateSpeed: MarkPriceStreamForAllMarketUpdateSpeedEnum.UPDATE_SPEED_1s,
             };
 
             const mockResponse = JSONParse(
@@ -1362,10 +1333,10 @@ describe('MarketApi', () => {
                         E: 1562305380000,
                         s: 'BTCUSDT',
                         p: '11185.87786614',
-                        ap: '11185.87786614',
                         i: '11784.62659091',
                         P: '11784.25641265',
                         r: '0.00030000',
+                        ap: '11185.87786614',
                         T: 1562306400000,
                         st: 1,
                     },
@@ -1386,7 +1357,7 @@ describe('MarketApi', () => {
 
             const params: MarkPriceStreamForAllMarketRequest = {
                 id: 'e9d6b4349871b40611412680b3445fac',
-                updateSpeed: 'updateSpeed_example',
+                updateSpeed: MarkPriceStreamForAllMarketUpdateSpeedEnum.UPDATE_SPEED_1s,
             };
 
             const mockResponse = JSONParse(
@@ -1396,10 +1367,10 @@ describe('MarketApi', () => {
                         E: 1562305380000,
                         s: 'BTCUSDT',
                         p: '11185.87786614',
-                        ap: '11185.87786614',
                         i: '11784.62659091',
                         P: '11784.25641265',
                         r: '0.00030000',
+                        ap: '11185.87786614',
                         T: 1562306400000,
                         st: 1,
                     },

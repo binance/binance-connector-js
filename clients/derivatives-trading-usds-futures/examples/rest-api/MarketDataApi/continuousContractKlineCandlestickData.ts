@@ -14,13 +14,13 @@ const client = new DerivativesTradingUsdsFutures({ configurationRestAPI });
 async function continuousContractKlineCandlestickData() {
     try {
         const response = await client.restAPI.continuousContractKlineCandlestickData({
-            pair: 'pair_example',
+            pair: 'BTCUSDT',
             contractType:
                 DerivativesTradingUsdsFuturesRestAPI
                     .ContinuousContractKlineCandlestickDataContractTypeEnum.PERPETUAL,
             interval:
                 DerivativesTradingUsdsFuturesRestAPI
-                    .ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1s,
+                    .ContinuousContractKlineCandlestickDataIntervalEnum.INTERVAL_1m,
         });
 
         const rateLimits = response.rateLimits!;

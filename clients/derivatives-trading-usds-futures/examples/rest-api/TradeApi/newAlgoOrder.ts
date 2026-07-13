@@ -14,10 +14,10 @@ const client = new DerivativesTradingUsdsFutures({ configurationRestAPI });
 async function newAlgoOrder() {
     try {
         const response = await client.restAPI.newAlgoOrder({
-            algoType: 'algoType_example',
-            symbol: 'symbol_example',
+            algoType: DerivativesTradingUsdsFuturesRestAPI.NewAlgoOrderAlgoTypeEnum.CONDITIONAL,
+            symbol: 'BNBUSDT',
             side: DerivativesTradingUsdsFuturesRestAPI.NewAlgoOrderSideEnum.BUY,
-            type: 'type_example',
+            type: DerivativesTradingUsdsFuturesRestAPI.NewAlgoOrderTypeEnum.STOP_MARKET,
         });
 
         const rateLimits = response.rateLimits!;

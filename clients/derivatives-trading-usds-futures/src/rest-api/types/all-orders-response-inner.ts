@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,157 +20,157 @@
  */
 export interface AllOrdersResponseInner {
     /**
-     *
+     * Avg Price.
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     avgPrice?: string;
     /**
-     *
+     * Client Order Id.
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     clientOrderId?: string;
     /**
-     *
+     * Cum Quote.
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     cumQuote?: string;
     /**
-     *
+     * Executed Qty.
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     executedQty?: string;
     /**
-     *
+     * Order Id.
      * @type {number | bigint}
      * @memberof AllOrdersResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Orig Qty.
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     origQty?: string;
     /**
-     *
+     * Orig Type.
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     origType?: string;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     price?: string;
     /**
-     *
+     * Reduce Only.
      * @type {boolean}
      * @memberof AllOrdersResponseInner
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Side.
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     side?: string;
     /**
-     *
+     * Position Side.
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     positionSide?: string;
     /**
-     *
+     * Status.
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     status?: string;
     /**
-     *
+     * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     stopPrice?: string;
     /**
-     *
+     * if Close-All
      * @type {boolean}
      * @memberof AllOrdersResponseInner
      */
     closePosition?: boolean;
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     symbol?: string;
     /**
-     *
+     * order time
      * @type {number | bigint}
      * @memberof AllOrdersResponseInner
      */
     time?: number | bigint;
     /**
-     *
+     * Time In Force.
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     timeInForce?: string;
     /**
-     *
+     * Type.
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     type?: string;
     /**
-     *
+     * activation price, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     activatePrice?: string;
     /**
-     *
+     * callback rate, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     priceRate?: string;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof AllOrdersResponseInner
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Working Type.
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     workingType?: string;
     /**
-     *
+     * if conditional order trigger is protected
      * @type {boolean}
      * @memberof AllOrdersResponseInner
      */
     priceProtect?: boolean;
     /**
-     *
+     * price match mode
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     priceMatch?: string;
     /**
-     *
+     * self trading preventation mode
      * @type {string}
      * @memberof AllOrdersResponseInner
      */
     selfTradePreventionMode?: string;
     /**
-     *
+     * order pre-set auot cancel time for TIF GTD order
      * @type {number | bigint}
      * @memberof AllOrdersResponseInner
      */

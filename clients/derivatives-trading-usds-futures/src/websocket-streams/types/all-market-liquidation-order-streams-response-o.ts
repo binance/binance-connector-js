@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,73 +14,73 @@
  */
 
 /**
- *
+ * Order Type
  * @export
  * @interface AllMarketLiquidationOrderStreamsResponseO
  */
 export interface AllMarketLiquidationOrderStreamsResponseO {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof AllMarketLiquidationOrderStreamsResponseO
      */
     s?: string;
     /**
-     *
+     * Side
      * @type {string}
      * @memberof AllMarketLiquidationOrderStreamsResponseO
      */
     S?: string;
     /**
-     *
+     * Order Type
      * @type {string}
      * @memberof AllMarketLiquidationOrderStreamsResponseO
      */
     o?: string;
     /**
-     *
+     * Time in Force
      * @type {string}
      * @memberof AllMarketLiquidationOrderStreamsResponseO
      */
     f?: string;
     /**
-     *
+     * Original Quantity
      * @type {string}
      * @memberof AllMarketLiquidationOrderStreamsResponseO
      */
     q?: string;
     /**
-     *
+     * Price
      * @type {string}
      * @memberof AllMarketLiquidationOrderStreamsResponseO
      */
     p?: string;
     /**
-     *
+     * Average Price
      * @type {string}
      * @memberof AllMarketLiquidationOrderStreamsResponseO
      */
     ap?: string;
     /**
-     *
+     * Order Status
      * @type {string}
      * @memberof AllMarketLiquidationOrderStreamsResponseO
      */
     X?: string;
     /**
-     *
+     * Order Last Filled Quantity
      * @type {string}
      * @memberof AllMarketLiquidationOrderStreamsResponseO
      */
     l?: string;
     /**
-     *
+     * Order Filled Accumulated Quantity
      * @type {string}
      * @memberof AllMarketLiquidationOrderStreamsResponseO
      */
     z?: string;
     /**
-     *
+     * Order Trade Time
      * @type {number | bigint}
      * @memberof AllMarketLiquidationOrderStreamsResponseO
      */

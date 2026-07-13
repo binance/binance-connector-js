@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,37 +20,37 @@
  */
 export interface StrategyUpdateSu {
     /**
-     *
+     * Strategy ID
      * @type {number | bigint}
      * @memberof StrategyUpdateSu
      */
     si?: number | bigint;
     /**
-     *
+     * Strategy Type
      * @type {string}
      * @memberof StrategyUpdateSu
      */
     st?: string;
     /**
-     *
+     * Strategy Status
      * @type {string}
      * @memberof StrategyUpdateSu
      */
     ss?: string;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof StrategyUpdateSu
      */
     s?: string;
     /**
-     *
+     * Update Time
      * @type {number | bigint}
      * @memberof StrategyUpdateSu
      */
     ut?: number | bigint;
     /**
-     *
+     * opCode
      * @type {number | bigint}
      * @memberof StrategyUpdateSu
      */

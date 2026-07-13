@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,103 +14,103 @@
  */
 
 /**
- *
+ * Kline payload.
  * @export
  * @interface ContinuousContractKlineCandlestickStreamsResponseK
  */
 export interface ContinuousContractKlineCandlestickStreamsResponseK {
     /**
-     *
+     * Kline start time
      * @type {number | bigint}
      * @memberof ContinuousContractKlineCandlestickStreamsResponseK
      */
     t?: number | bigint;
     /**
-     *
+     * Kline close time
      * @type {number | bigint}
      * @memberof ContinuousContractKlineCandlestickStreamsResponseK
      */
     T?: number | bigint;
     /**
-     *
+     * Interval
      * @type {string}
      * @memberof ContinuousContractKlineCandlestickStreamsResponseK
      */
     i?: string;
     /**
-     *
+     * First updateId
      * @type {number | bigint}
      * @memberof ContinuousContractKlineCandlestickStreamsResponseK
      */
     f?: number | bigint;
     /**
-     *
+     * Last updateId
      * @type {number | bigint}
      * @memberof ContinuousContractKlineCandlestickStreamsResponseK
      */
     L?: number | bigint;
     /**
-     *
+     * Open price
      * @type {string}
      * @memberof ContinuousContractKlineCandlestickStreamsResponseK
      */
     o?: string;
     /**
-     *
+     * Close price
      * @type {string}
      * @memberof ContinuousContractKlineCandlestickStreamsResponseK
      */
     c?: string;
     /**
-     *
+     * High price
      * @type {string}
      * @memberof ContinuousContractKlineCandlestickStreamsResponseK
      */
     h?: string;
     /**
-     *
+     * Low price
      * @type {string}
      * @memberof ContinuousContractKlineCandlestickStreamsResponseK
      */
     l?: string;
     /**
-     *
+     * volume
      * @type {string}
      * @memberof ContinuousContractKlineCandlestickStreamsResponseK
      */
     v?: string;
     /**
-     *
+     * Number of trades
      * @type {number | bigint}
      * @memberof ContinuousContractKlineCandlestickStreamsResponseK
      */
     n?: number | bigint;
     /**
-     *
+     * Is this kline closed?
      * @type {boolean}
      * @memberof ContinuousContractKlineCandlestickStreamsResponseK
      */
     x?: boolean;
     /**
-     *
+     * Quote asset volume
      * @type {string}
      * @memberof ContinuousContractKlineCandlestickStreamsResponseK
      */
     q?: string;
     /**
-     *
+     * Taker buy volume
      * @type {string}
      * @memberof ContinuousContractKlineCandlestickStreamsResponseK
      */
     V?: string;
     /**
-     *
+     * Taker buy quote asset volume
      * @type {string}
      * @memberof ContinuousContractKlineCandlestickStreamsResponseK
      */
     Q?: string;
     /**
-     *
+     * Ignore
      * @type {string}
      * @memberof ContinuousContractKlineCandlestickStreamsResponseK
      */

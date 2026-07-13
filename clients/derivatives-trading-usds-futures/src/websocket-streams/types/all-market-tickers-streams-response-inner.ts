@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,123 +20,123 @@
  */
 export interface AllMarketTickersStreamsResponseInner {
     /**
-     *
+     * Event type
      * @type {string}
      * @memberof AllMarketTickersStreamsResponseInner
      */
     e?: string;
     /**
-     *
+     * Event time
      * @type {number | bigint}
      * @memberof AllMarketTickersStreamsResponseInner
      */
     E?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof AllMarketTickersStreamsResponseInner
      */
     s?: string;
     /**
-     *
+     * Price change
      * @type {string}
      * @memberof AllMarketTickersStreamsResponseInner
      */
     p?: string;
     /**
-     *
+     * Price change percent
      * @type {string}
      * @memberof AllMarketTickersStreamsResponseInner
      */
     P?: string;
     /**
-     *
+     * Weighted average price
      * @type {string}
      * @memberof AllMarketTickersStreamsResponseInner
      */
     w?: string;
     /**
-     *
+     * Last price
      * @type {string}
      * @memberof AllMarketTickersStreamsResponseInner
      */
     c?: string;
     /**
-     *
+     * Last quantity
      * @type {string}
      * @memberof AllMarketTickersStreamsResponseInner
      */
     Q?: string;
     /**
-     *
+     * Open price
      * @type {string}
      * @memberof AllMarketTickersStreamsResponseInner
      */
     o?: string;
     /**
-     *
+     * High price
      * @type {string}
      * @memberof AllMarketTickersStreamsResponseInner
      */
     h?: string;
     /**
-     *
+     * Low price
      * @type {string}
      * @memberof AllMarketTickersStreamsResponseInner
      */
     l?: string;
     /**
-     *
+     * Total traded base asset volume
      * @type {string}
      * @memberof AllMarketTickersStreamsResponseInner
      */
     v?: string;
     /**
-     *
+     * Total traded quote asset volume
      * @type {string}
      * @memberof AllMarketTickersStreamsResponseInner
      */
     q?: string;
     /**
-     *
+     * Statistics open time
      * @type {number | bigint}
      * @memberof AllMarketTickersStreamsResponseInner
      */
     O?: number | bigint;
     /**
-     *
+     * Statistics close time
      * @type {number | bigint}
      * @memberof AllMarketTickersStreamsResponseInner
      */
     C?: number | bigint;
     /**
-     *
+     * First trade ID
      * @type {number | bigint}
      * @memberof AllMarketTickersStreamsResponseInner
      */
     F?: number | bigint;
     /**
-     *
+     * Last trade Id
      * @type {number | bigint}
      * @memberof AllMarketTickersStreamsResponseInner
      */
     L?: number | bigint;
     /**
-     *
+     * Total number of trades
      * @type {number | bigint}
      * @memberof AllMarketTickersStreamsResponseInner
      */
     n?: number | bigint;
     /**
-     *
+     * (After CM migration) Pair symbol
      * @type {string}
      * @memberof AllMarketTickersStreamsResponseInner
      */
     ps?: string;
     /**
-     *
-     * @type {number | bigint}
+     * (After CM migration) Symbol type: 1 = UM, 2 = CM
+     * @type {number}
      * @memberof AllMarketTickersStreamsResponseInner
      */
-    st?: number | bigint;
+    st?: number;
 }

@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -37,31 +37,31 @@ export interface ExchangeInformationResponse {
      */
     exchangeFilters?: Array<string>;
     /**
-     *
+     * Rate Limits.
      * @type {Array<ExchangeInformationResponseRateLimitsInner>}
      * @memberof ExchangeInformationResponse
      */
     rateLimits?: Array<ExchangeInformationResponseRateLimitsInner>;
     /**
-     *
+     * Ignore please. If you want to check current server time, please check via \"GET /fapi/v1/time\"
      * @type {number | bigint}
      * @memberof ExchangeInformationResponse
      */
     serverTime?: number | bigint;
     /**
-     *
+     * assets information
      * @type {Array<ExchangeInformationResponseAssetsInner>}
      * @memberof ExchangeInformationResponse
      */
     assets?: Array<ExchangeInformationResponseAssetsInner>;
     /**
-     *
+     * Symbols.
      * @type {Array<ExchangeInformationResponseSymbolsInner>}
      * @memberof ExchangeInformationResponse
      */
     symbols?: Array<ExchangeInformationResponseSymbolsInner>;
     /**
-     *
+     * Timezone.
      * @type {string}
      * @memberof ExchangeInformationResponse
      */

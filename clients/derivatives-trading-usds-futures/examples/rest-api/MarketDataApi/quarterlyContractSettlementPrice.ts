@@ -13,7 +13,7 @@ const client = new DerivativesTradingUsdsFutures({ configurationRestAPI });
 async function quarterlyContractSettlementPrice() {
     try {
         const response = await client.restAPI.quarterlyContractSettlementPrice({
-            pair: 'pair_example',
+            pair: 'BTCUSDT',
         });
 
         const rateLimits = response.rateLimits!;

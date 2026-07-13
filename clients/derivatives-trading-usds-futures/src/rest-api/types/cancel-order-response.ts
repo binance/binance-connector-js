@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,7 +20,7 @@
  */
 export interface CancelOrderResponse {
     /**
-     *
+     * Client Order Id.
      * @type {string}
      * @memberof CancelOrderResponse
      */
@@ -32,145 +32,145 @@ export interface CancelOrderResponse {
      */
     cumQty?: string;
     /**
-     *
+     * Cum Quote. Will be removed after CM migration.
      * @type {string}
      * @memberof CancelOrderResponse
      */
     cumQuote?: string;
     /**
-     *
+     * Executed Qty.
      * @type {string}
      * @memberof CancelOrderResponse
      */
     executedQty?: string;
     /**
-     *
+     * Order Id.
      * @type {number | bigint}
      * @memberof CancelOrderResponse
      */
     orderId?: number | bigint;
     /**
-     *
+     * Orig Qty.
      * @type {string}
      * @memberof CancelOrderResponse
      */
     origQty?: string;
     /**
-     *
-     * @type {string}
-     * @memberof CancelOrderResponse
-     */
-    origType?: string;
-    /**
-     *
+     * Price.
      * @type {string}
      * @memberof CancelOrderResponse
      */
     price?: string;
     /**
-     *
+     * Average execution price. Will be removed after CM migration.
      * @type {string}
      * @memberof CancelOrderResponse
      */
     avgPrice?: string;
     /**
-     *
+     * Reduce Only.
      * @type {boolean}
      * @memberof CancelOrderResponse
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Side.
      * @type {string}
      * @memberof CancelOrderResponse
      */
     side?: string;
     /**
-     *
+     * Position Side.
      * @type {string}
      * @memberof CancelOrderResponse
      */
     positionSide?: string;
     /**
-     *
+     * Status.
      * @type {string}
      * @memberof CancelOrderResponse
      */
     status?: string;
     /**
-     *
+     * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
      * @memberof CancelOrderResponse
      */
     stopPrice?: string;
     /**
-     *
+     * if Close-All
      * @type {boolean}
      * @memberof CancelOrderResponse
      */
     closePosition?: boolean;
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof CancelOrderResponse
      */
     symbol?: string;
     /**
-     *
+     * Time In Force.
      * @type {string}
      * @memberof CancelOrderResponse
      */
     timeInForce?: string;
     /**
-     *
+     * Orig Type.
+     * @type {string}
+     * @memberof CancelOrderResponse
+     */
+    origType?: string;
+    /**
+     * Type.
      * @type {string}
      * @memberof CancelOrderResponse
      */
     type?: string;
     /**
-     *
+     * activation price, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof CancelOrderResponse
      */
     activatePrice?: string;
     /**
-     *
+     * callback rate, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof CancelOrderResponse
      */
     priceRate?: string;
     /**
-     *
+     * Update Time.
      * @type {number | bigint}
      * @memberof CancelOrderResponse
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Working Type.
      * @type {string}
      * @memberof CancelOrderResponse
      */
     workingType?: string;
     /**
-     *
+     * if conditional order trigger is protected
      * @type {boolean}
      * @memberof CancelOrderResponse
      */
     priceProtect?: boolean;
     /**
-     *
+     * price match mode
      * @type {string}
      * @memberof CancelOrderResponse
      */
     priceMatch?: string;
     /**
-     *
+     * self trading preventation mode
      * @type {string}
      * @memberof CancelOrderResponse
      */
     selfTradePreventionMode?: string;
     /**
-     *
+     * order pre-set auot cancel time for TIF GTD order
      * @type {number | bigint}
      * @memberof CancelOrderResponse
      */

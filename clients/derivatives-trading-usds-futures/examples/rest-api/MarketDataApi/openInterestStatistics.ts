@@ -14,7 +14,7 @@ const client = new DerivativesTradingUsdsFutures({ configurationRestAPI });
 async function openInterestStatistics() {
     try {
         const response = await client.restAPI.openInterestStatistics({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSDT',
             period: DerivativesTradingUsdsFuturesRestAPI.OpenInterestStatisticsPeriodEnum.PERIOD_5m,
         });
 

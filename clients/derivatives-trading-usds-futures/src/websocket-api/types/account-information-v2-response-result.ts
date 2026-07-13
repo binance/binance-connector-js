@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket API
+ * Futures (USDⓈ-M) WebSocket API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -28,79 +28,79 @@ import type { AccountInformationV2ResponseResultPositionsInner } from './account
  */
 export interface AccountInformationV2ResponseResult {
     /**
-     *
+     * total initial margin required with current mark price (useless with isolated positions), only for USDT asset
      * @type {string}
      * @memberof AccountInformationV2ResponseResult
      */
     totalInitialMargin?: string;
     /**
-     *
+     * the sum of USD value of all cross positions maintenance margin
      * @type {string}
      * @memberof AccountInformationV2ResponseResult
      */
     totalMaintMargin?: string;
     /**
-     *
+     * total wallet balance, only for USDT asset
      * @type {string}
      * @memberof AccountInformationV2ResponseResult
      */
     totalWalletBalance?: string;
     /**
-     *
+     * total unrealized profit, only for USDT asset
      * @type {string}
      * @memberof AccountInformationV2ResponseResult
      */
     totalUnrealizedProfit?: string;
     /**
-     *
+     * total margin balance, only for USDT asset
      * @type {string}
      * @memberof AccountInformationV2ResponseResult
      */
     totalMarginBalance?: string;
     /**
-     *
+     * initial margin required for positions with current mark price, only for USDT asset
      * @type {string}
      * @memberof AccountInformationV2ResponseResult
      */
     totalPositionInitialMargin?: string;
     /**
-     *
+     * initial margin required for open orders with current mark price, only for USDT asset
      * @type {string}
      * @memberof AccountInformationV2ResponseResult
      */
     totalOpenOrderInitialMargin?: string;
     /**
-     *
+     * crossed wallet balance, only for USDT asset
      * @type {string}
      * @memberof AccountInformationV2ResponseResult
      */
     totalCrossWalletBalance?: string;
     /**
-     *
+     * unrealized profit of crossed positions, only for USDT asset
      * @type {string}
      * @memberof AccountInformationV2ResponseResult
      */
     totalCrossUnPnl?: string;
     /**
-     *
+     * available balance, only for USDT asset
      * @type {string}
      * @memberof AccountInformationV2ResponseResult
      */
     availableBalance?: string;
     /**
-     *
+     * maximum amount for transfer out, only for USDT asset
      * @type {string}
      * @memberof AccountInformationV2ResponseResult
      */
     maxWithdrawAmount?: string;
     /**
-     *
+     * For assets that are quote assets, USDT/USDC/BTC
      * @type {Array<AccountInformationV2ResponseResultAssetsInner>}
      * @memberof AccountInformationV2ResponseResult
      */
     assets?: Array<AccountInformationV2ResponseResultAssetsInner>;
     /**
-     *
+     * positions of all symbols user had position/ open orders are returned
      * @type {Array<AccountInformationV2ResponseResultPositionsInner>}
      * @memberof AccountInformationV2ResponseResult
      */

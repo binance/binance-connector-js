@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -28,129 +28,129 @@ import type { AccountInformationV2ResponsePositionsInner } from './account-infor
  */
 export interface AccountInformationV2Response {
     /**
-     *
+     * Account commission tier.
      * @type {number | bigint}
      * @memberof AccountInformationV2Response
      */
     feeTier?: number | bigint;
     /**
-     *
+     * Whether fee discount is enabled.
      * @type {boolean}
      * @memberof AccountInformationV2Response
      */
     feeBurn?: boolean;
     /**
-     *
+     * Whether trading is enabled.
+     * @type {boolean}
+     * @memberof AccountInformationV2Response
+     */
+    canTrade?: boolean;
+    /**
+     * Whether transfer-in is enabled.
      * @type {boolean}
      * @memberof AccountInformationV2Response
      */
     canDeposit?: boolean;
     /**
-     *
+     * Whether transfer-out is enabled.
      * @type {boolean}
      * @memberof AccountInformationV2Response
      */
     canWithdraw?: boolean;
     /**
-     *
+     * Reserved field, ignore.
      * @type {number | bigint}
      * @memberof AccountInformationV2Response
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Whether multi-assets mode is enabled.
      * @type {boolean}
      * @memberof AccountInformationV2Response
      */
     multiAssetsMargin?: boolean;
     /**
-     *
+     * Trade group identifier.
      * @type {number | bigint}
      * @memberof AccountInformationV2Response
      */
     tradeGroupId?: number | bigint;
     /**
-     *
+     * Total initial margin requirement.
      * @type {string}
      * @memberof AccountInformationV2Response
      */
     totalInitialMargin?: string;
     /**
-     *
+     * Total maintenance margin requirement.
      * @type {string}
      * @memberof AccountInformationV2Response
      */
     totalMaintMargin?: string;
     /**
-     *
+     * Total wallet balance.
      * @type {string}
      * @memberof AccountInformationV2Response
      */
     totalWalletBalance?: string;
     /**
-     *
+     * Total unrealized profit.
      * @type {string}
      * @memberof AccountInformationV2Response
      */
     totalUnrealizedProfit?: string;
     /**
-     *
+     * Total margin balance.
      * @type {string}
      * @memberof AccountInformationV2Response
      */
     totalMarginBalance?: string;
     /**
-     *
+     * Initial margin required for positions.
      * @type {string}
      * @memberof AccountInformationV2Response
      */
     totalPositionInitialMargin?: string;
     /**
-     *
+     * Initial margin required for open orders.
      * @type {string}
      * @memberof AccountInformationV2Response
      */
     totalOpenOrderInitialMargin?: string;
     /**
-     *
+     * Cross wallet balance.
      * @type {string}
      * @memberof AccountInformationV2Response
      */
     totalCrossWalletBalance?: string;
     /**
-     *
+     * Unrealized PnL for cross positions.
      * @type {string}
      * @memberof AccountInformationV2Response
      */
     totalCrossUnPnl?: string;
     /**
-     *
+     * Available balance.
      * @type {string}
      * @memberof AccountInformationV2Response
      */
     availableBalance?: string;
     /**
-     *
+     * Maximum transferable/withdrawable amount.
      * @type {string}
      * @memberof AccountInformationV2Response
      */
     maxWithdrawAmount?: string;
     /**
-     *
+     * Asset-level account details.
      * @type {Array<AccountInformationV2ResponseAssetsInner>}
      * @memberof AccountInformationV2Response
      */
     assets?: Array<AccountInformationV2ResponseAssetsInner>;
     /**
-     *
+     * Position details for symbols. One-way mode returns BOTH; hedge mode returns LONG/SHORT.
      * @type {Array<AccountInformationV2ResponsePositionsInner>}
      * @memberof AccountInformationV2Response
      */
     positions?: Array<AccountInformationV2ResponsePositionsInner>;
-    /**
-     *
-     * @type {boolean}
-     * @memberof AccountInformationV2Response
-     */
-    canTrade?: boolean;
 }

@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,85 +20,85 @@
  */
 export interface AccountInformationV2ResponseAssetsInner {
     /**
-     *
+     * Asset name.
      * @type {string}
      * @memberof AccountInformationV2ResponseAssetsInner
      */
     asset?: string;
     /**
-     *
+     * Wallet balance.
      * @type {string}
      * @memberof AccountInformationV2ResponseAssetsInner
      */
     walletBalance?: string;
     /**
-     *
+     * Unrealized profit.
      * @type {string}
      * @memberof AccountInformationV2ResponseAssetsInner
      */
     unrealizedProfit?: string;
     /**
-     *
+     * Margin balance.
      * @type {string}
      * @memberof AccountInformationV2ResponseAssetsInner
      */
     marginBalance?: string;
     /**
-     *
+     * Maintenance margin requirement.
      * @type {string}
      * @memberof AccountInformationV2ResponseAssetsInner
      */
     maintMargin?: string;
     /**
-     *
+     * Total initial margin requirement.
      * @type {string}
      * @memberof AccountInformationV2ResponseAssetsInner
      */
     initialMargin?: string;
     /**
-     *
+     * Initial margin required for positions.
      * @type {string}
      * @memberof AccountInformationV2ResponseAssetsInner
      */
     positionInitialMargin?: string;
     /**
-     *
+     * Initial margin required for open orders.
      * @type {string}
      * @memberof AccountInformationV2ResponseAssetsInner
      */
     openOrderInitialMargin?: string;
     /**
-     *
+     * Cross wallet balance.
      * @type {string}
      * @memberof AccountInformationV2ResponseAssetsInner
      */
     crossWalletBalance?: string;
     /**
-     *
+     * Unrealized PnL for cross positions.
      * @type {string}
      * @memberof AccountInformationV2ResponseAssetsInner
      */
     crossUnPnl?: string;
     /**
-     *
+     * Available balance.
      * @type {string}
      * @memberof AccountInformationV2ResponseAssetsInner
      */
     availableBalance?: string;
     /**
-     *
+     * Maximum transferable/withdrawable amount.
      * @type {string}
      * @memberof AccountInformationV2ResponseAssetsInner
      */
     maxWithdrawAmount?: string;
     /**
-     *
+     * Whether the asset can be used as margin in multi-assets mode.
      * @type {boolean}
      * @memberof AccountInformationV2ResponseAssetsInner
      */
     marginAvailable?: boolean;
     /**
-     *
+     * Last update time in milliseconds.
      * @type {number | bigint}
      * @memberof AccountInformationV2ResponseAssetsInner
      */

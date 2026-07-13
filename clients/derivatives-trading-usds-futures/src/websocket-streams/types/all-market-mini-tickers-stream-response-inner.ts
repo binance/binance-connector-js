@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,69 +20,69 @@
  */
 export interface AllMarketMiniTickersStreamResponseInner {
     /**
-     *
+     * Event type
      * @type {string}
      * @memberof AllMarketMiniTickersStreamResponseInner
      */
     e?: string;
     /**
-     *
+     * Event time
      * @type {number | bigint}
      * @memberof AllMarketMiniTickersStreamResponseInner
      */
     E?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof AllMarketMiniTickersStreamResponseInner
      */
     s?: string;
     /**
-     *
+     * Close price
      * @type {string}
      * @memberof AllMarketMiniTickersStreamResponseInner
      */
     c?: string;
     /**
-     *
+     * Open price
      * @type {string}
      * @memberof AllMarketMiniTickersStreamResponseInner
      */
     o?: string;
     /**
-     *
+     * High price
      * @type {string}
      * @memberof AllMarketMiniTickersStreamResponseInner
      */
     h?: string;
     /**
-     *
+     * Low price
      * @type {string}
      * @memberof AllMarketMiniTickersStreamResponseInner
      */
     l?: string;
     /**
-     *
+     * Total traded base asset volume
      * @type {string}
      * @memberof AllMarketMiniTickersStreamResponseInner
      */
     v?: string;
     /**
-     *
+     * Total traded quote asset volume
      * @type {string}
      * @memberof AllMarketMiniTickersStreamResponseInner
      */
     q?: string;
     /**
-     *
+     * (After CM migration) Pair symbol
      * @type {string}
      * @memberof AllMarketMiniTickersStreamResponseInner
      */
     ps?: string;
     /**
-     *
-     * @type {number | bigint}
+     * (After CM migration) Symbol type: 1 = UM, 2 = CM
+     * @type {number}
      * @memberof AllMarketMiniTickersStreamResponseInner
      */
-    st?: number | bigint;
+    st?: number;
 }

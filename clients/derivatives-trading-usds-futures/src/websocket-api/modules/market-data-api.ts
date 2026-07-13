@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading USDS Futures WebSocket API
+ * Futures (USDⓈ-M) WebSocket API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,16 +25,24 @@ import type {
  */
 export interface MarketDataApiInterface {
     /**
-     * Get current order book. Note that this request returns limited market depth.
-     * If you need to continuously monitor order book updates, please consider using Websocket Market Streams:
+     * Get current order book. Note that this request returns limited market
+     * depth.
+     *
+     * If you need to continuously monitor order book updates, please consider
+     * using Websocket Market Streams:
      * `<symbol>@depth<levels>`
      * `<symbol>@depth`
      *
-     * You can use `depth` request together with `<symbol>@depth` streams to maintain a local order book.
+     * You can use `depth` request together with `<symbol>@depth` streams to
+     * maintain a local order book.
      *
-     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+     **Note:**
+     *
+     * - Retail Price Improvement(RPI) orders are not visible and excluded in
+     * the response message.
      *
      * Weight: Adjusted based on the limit:
+     *
      * | Limit         | Weight |
      * | ------------- | ------ |
      * | 5, 10, 20, 50 | 2      |
@@ -55,12 +63,20 @@ export interface MarketDataApiInterface {
     /**
      * Best price/qty on the order book for a symbol or symbols.
      *
-     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
-     * If the symbol is not sent, bookTickers for all symbols will be returned in an array.
-     * The field `X-MBX-USED-WEIGHT-1M` in response header is not accurate from this endpoint, please ignore.
+     **Note:**
      *
-     * Weight: 2 for a single symbol;
-     * 5 when the symbol parameter is omitted
+     * - Retail Price Improvement(RPI) orders are not visible and excluded in
+     * the response message.
+     *
+     * Weight: **2** for a single symbol;
+     **5** when the symbol parameter is omitted
+     *
+     * Notes:
+     * - If the symbol is not sent, bookTickers for all symbols will be
+     * returned in an array.
+     *
+     * - The field `X-MBX-USED-WEIGHT-1M` in response header is not accurate
+     * from this endpoint, please ignore.
      *
      * @summary Symbol Order Book Ticker
      * @param {SymbolOrderBookTickerRequest} requestParameters Request parameters.
@@ -75,10 +91,11 @@ export interface MarketDataApiInterface {
     /**
      * Latest price for a symbol or symbols.
      *
-     * If the symbol is not sent, prices for all symbols will be returned in an array.
+     * Weight: **1** for a single symbol;
+     **2** when the symbol parameter is omitted
      *
-     * Weight: 1 for a single symbol;
-     * 2 when the symbol parameter is omitted
+     * Notes:
+     * - If the symbol is not sent, prices for all symbols will be returned in an array.
      *
      * @summary Symbol Price Ticker
      * @param {SymbolPriceTickerRequest} requestParameters Request parameters.
@@ -97,21 +114,21 @@ export interface MarketDataApiInterface {
  */
 export interface OrderBookRequest {
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof MarketDataApiOrderBook
      */
     readonly symbol: string;
 
     /**
-     * Unique WebSocket request ID.
+     * Id.
      * @type {string}
      * @memberof MarketDataApiOrderBook
      */
     readonly id?: string;
 
     /**
-     * Default 500; Valid limits:[5, 10, 20, 50, 100, 500, 1000]
+     * Valid limits:[5, 10, 20, 50, 100, 500, 1000]
      * @type {number | bigint}
      * @memberof MarketDataApiOrderBook
      */
@@ -124,14 +141,14 @@ export interface OrderBookRequest {
  */
 export interface SymbolOrderBookTickerRequest {
     /**
-     * Unique WebSocket request ID.
+     * Id.
      * @type {string}
      * @memberof MarketDataApiSymbolOrderBookTicker
      */
     readonly id?: string;
 
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof MarketDataApiSymbolOrderBookTicker
      */
@@ -144,14 +161,14 @@ export interface SymbolOrderBookTickerRequest {
  */
 export interface SymbolPriceTickerRequest {
     /**
-     * Unique WebSocket request ID.
+     * Id.
      * @type {string}
      * @memberof MarketDataApiSymbolPriceTicker
      */
     readonly id?: string;
 
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof MarketDataApiSymbolPriceTicker
      */
@@ -171,16 +188,24 @@ export class MarketDataApi implements MarketDataApiInterface {
     }
 
     /**
-     * Get current order book. Note that this request returns limited market depth.
-     * If you need to continuously monitor order book updates, please consider using Websocket Market Streams:
+     * Get current order book. Note that this request returns limited market
+     * depth.
+     *
+     * If you need to continuously monitor order book updates, please consider
+     * using Websocket Market Streams:
      * `<symbol>@depth<levels>`
      * `<symbol>@depth`
      *
-     * You can use `depth` request together with `<symbol>@depth` streams to maintain a local order book.
+     * You can use `depth` request together with `<symbol>@depth` streams to
+     * maintain a local order book.
      *
-     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+     **Note:**
+     *
+     * - Retail Price Improvement(RPI) orders are not visible and excluded in
+     * the response message.
      *
      * Weight: Adjusted based on the limit:
+     *
      * | Limit         | Weight |
      * | ------------- | ------ |
      * | 5, 10, 20, 50 | 2      |
@@ -192,7 +217,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * @param {OrderBookRequest} requestParameters Request parameters.
      * @returns {Promise<OrderBookResponse>}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/websocket-api/Order-Book Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-api/market-data#order-book Binance API Documentation}
      */
     public orderBook(
         requestParameters: OrderBookRequest
@@ -207,18 +232,26 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Best price/qty on the order book for a symbol or symbols.
      *
-     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
-     * If the symbol is not sent, bookTickers for all symbols will be returned in an array.
-     * The field `X-MBX-USED-WEIGHT-1M` in response header is not accurate from this endpoint, please ignore.
+     **Note:**
      *
-     * Weight: 2 for a single symbol;
-     * 5 when the symbol parameter is omitted
+     * - Retail Price Improvement(RPI) orders are not visible and excluded in
+     * the response message.
+     *
+     * Weight: **2** for a single symbol;
+     **5** when the symbol parameter is omitted
+     *
+     * Notes:
+     * - If the symbol is not sent, bookTickers for all symbols will be
+     * returned in an array.
+     *
+     * - The field `X-MBX-USED-WEIGHT-1M` in response header is not accurate
+     * from this endpoint, please ignore.
      *
      * @summary Symbol Order Book Ticker
      * @param {SymbolOrderBookTickerRequest} requestParameters Request parameters.
      * @returns {Promise<SymbolOrderBookTickerResponse>}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Order-Book-Ticker Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-api/market-data#symbol-order-book-ticker Binance API Documentation}
      */
     public symbolOrderBookTicker(
         requestParameters: SymbolOrderBookTickerRequest = {}
@@ -233,16 +266,17 @@ export class MarketDataApi implements MarketDataApiInterface {
     /**
      * Latest price for a symbol or symbols.
      *
-     * If the symbol is not sent, prices for all symbols will be returned in an array.
+     * Weight: **1** for a single symbol;
+     **2** when the symbol parameter is omitted
      *
-     * Weight: 1 for a single symbol;
-     * 2 when the symbol parameter is omitted
+     * Notes:
+     * - If the symbol is not sent, prices for all symbols will be returned in an array.
      *
      * @summary Symbol Price Ticker
      * @param {SymbolPriceTickerRequest} requestParameters Request parameters.
      * @returns {Promise<SymbolPriceTickerResponse>}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Price-Ticker Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-api/market-data#symbol-price-ticker Binance API Documentation}
      */
     public symbolPriceTicker(
         requestParameters: SymbolPriceTickerRequest = {}

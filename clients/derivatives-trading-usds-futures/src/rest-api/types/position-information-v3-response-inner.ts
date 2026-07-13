@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,121 +20,121 @@
  */
 export interface PositionInformationV3ResponseInner {
     /**
-     *
+     * symbol
      * @type {string}
      * @memberof PositionInformationV3ResponseInner
      */
     symbol?: string;
     /**
-     *
+     * position side
      * @type {string}
      * @memberof PositionInformationV3ResponseInner
      */
     positionSide?: string;
     /**
-     *
+     * position amount, positive for long, negative for short
      * @type {string}
      * @memberof PositionInformationV3ResponseInner
      */
     positionAmt?: string;
     /**
-     *
+     * entry price
      * @type {string}
      * @memberof PositionInformationV3ResponseInner
      */
     entryPrice?: string;
     /**
-     *
+     * break-even price
      * @type {string}
      * @memberof PositionInformationV3ResponseInner
      */
     breakEvenPrice?: string;
     /**
-     *
+     * current mark price
      * @type {string}
      * @memberof PositionInformationV3ResponseInner
      */
     markPrice?: string;
     /**
-     *
+     * unrealized profit
      * @type {string}
      * @memberof PositionInformationV3ResponseInner
      */
     unRealizedProfit?: string;
     /**
-     *
+     * liquidation price
      * @type {string}
      * @memberof PositionInformationV3ResponseInner
      */
     liquidationPrice?: string;
     /**
-     *
+     * isolated margin
      * @type {string}
      * @memberof PositionInformationV3ResponseInner
      */
     isolatedMargin?: string;
     /**
-     *
+     * notional value of position
      * @type {string}
      * @memberof PositionInformationV3ResponseInner
      */
     notional?: string;
     /**
-     *
+     * margin asset
      * @type {string}
      * @memberof PositionInformationV3ResponseInner
      */
     marginAsset?: string;
     /**
-     *
+     * isolated wallet (if isolated position)
      * @type {string}
      * @memberof PositionInformationV3ResponseInner
      */
     isolatedWallet?: string;
     /**
-     *
+     * initial margin required with current mark price
      * @type {string}
      * @memberof PositionInformationV3ResponseInner
      */
     initialMargin?: string;
     /**
-     *
+     * maintenance margin required
      * @type {string}
      * @memberof PositionInformationV3ResponseInner
      */
     maintMargin?: string;
     /**
-     *
+     * initial margin required for positions with current mark price
      * @type {string}
      * @memberof PositionInformationV3ResponseInner
      */
     positionInitialMargin?: string;
     /**
-     *
+     * initial margin required for open orders with current mark price
      * @type {string}
      * @memberof PositionInformationV3ResponseInner
      */
     openOrderInitialMargin?: string;
     /**
-     *
+     * auto-deleverage ranking
      * @type {number | bigint}
      * @memberof PositionInformationV3ResponseInner
      */
     adl?: number | bigint;
     /**
-     *
+     * ignore
      * @type {string}
      * @memberof PositionInformationV3ResponseInner
      */
     bidNotional?: string;
     /**
-     *
+     * ignore
      * @type {string}
      * @memberof PositionInformationV3ResponseInner
      */
     askNotional?: string;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof PositionInformationV3ResponseInner
      */

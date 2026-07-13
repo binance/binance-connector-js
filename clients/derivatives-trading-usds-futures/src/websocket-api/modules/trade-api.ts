@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading USDS Futures WebSocket API
+ * Futures (USDⓈ-M) WebSocket API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -32,9 +32,12 @@ export interface TradeApiInterface {
     /**
      * Cancel an active algo order.
      *
-     * Either `algoId` or `clientAlgoId` must be sent.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - Either `algoId` or `clientAlgoId` must be sent.
      *
      * @summary Cancel Algo Order (TRADE)
      * @param {CancelAlgoOrderRequest} requestParameters Request parameters.
@@ -49,9 +52,12 @@ export interface TradeApiInterface {
     /**
      * Cancel an active order.
      *
-     * Either `orderId` or `origClientOrderId` must be sent.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent.
      *
      * @summary Cancel Order (TRADE)
      * @param {CancelOrderRequest} requestParameters Request parameters.
@@ -66,17 +72,32 @@ export interface TradeApiInterface {
     /**
      * Order modify function, currently only LIMIT order modification is supported, modified orders will be reordered in the match queue
      *
-     * Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
-     * Both `quantity` and `price` must be sent. *(After CM migration, the dapi modify order endpoint follows the same rule.)*
-     * When the new `quantity` or `price` doesn't satisfy PRICE_FILTER / PERCENT_FILTER / LOT_SIZE, amendment will be rejected and the order will stay as it is.
-     * However the order will be cancelled by the amendment in the following situations:
-     * when the order is in partially filled status and the new `quantity` <= `executedQty`
-     * When the order is `GTX` and the new price will cause it to be executed immediately
-     * One order can only be modfied for less than 10000 times
-     *
      * Weight: 1 on 10s order rate limit(X-MBX-ORDER-COUNT-10S);
      * 1 on 1min order rate limit(X-MBX-ORDER-COUNT-1M);
      * 0 on IP rate limit(x-mbx-used-weight-1m)
+     *
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent, and the
+     * `orderId` will prevail if both are sent.
+     *
+     * - Both `quantity` and `price` must be sent. *(After CM migration, the dapi modify order endpoint follows the same rule.)*
+     *
+     * - When the new `quantity` or `price` doesn't satisfy PRICE_FILTER /
+     * PERCENT_FILTER / LOT_SIZE, amendment will be rejected and the order will
+     * stay as it is.
+     *
+     * - However the order will be cancelled by the amendment in the following
+     * situations:
+     *
+     * - when the order is in partially filled status and the new `quantity` <=
+     * `executedQty`
+     *
+     * - When the order is `GTX` and the new price will cause it to be executed
+     * immediately
+     *
+     * - One order can only be modfied for less than 10000 times
      *
      * @summary Modify Order (TRADE)
      * @param {ModifyOrderRequest} requestParameters Request parameters.
@@ -91,39 +112,81 @@ export interface TradeApiInterface {
     /**
      * Send in a new algo order.
      *
-     * Condition orders will be triggered when:
+     * Weight(IP): 0
      *
-     * If parameter`priceProtect`is sent as true:
-     * when price reaches the `triggerPrice` ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
-     * "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
+     * Security Type: TRADE
      *
-     * `STOP`, `STOP_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
-     * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
-     * `TRAILING_STOP_MARKET`:
-     * BUY: the lowest price after order placed <= `activatePrice`, and the latest price >= the lowest price * (1 + `callbackRate`)
-     * SELL: the highest price after order placed >= `activatePrice`, and the latest price <= the highest price * (1 - `callbackRate`)
+     * Notes:
+     * - Condition orders will be triggered when:
      *
-     * For `TRAILING_STOP_MARKET`, if you got such error code.
-     * ``{"code": -2021, "msg": "Order would immediately trigger."}``
-     * means that the parameters you send do not meet the following requirements:
-     * BUY: `activatePrice` should be smaller than latest price.
-     * SELL: `activatePrice` should be larger than latest price.
+     * >
      *
-     * `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`:
-     * Follow the same rules for condition orders.
-     * If triggered，**close all** current long position( if `SELL`) or current short position( if `BUY`).
-     * Cannot be used with `quantity` paremeter
-     * Cannot be used with `reduceOnly` parameter
-     * In Hedge Mode,cannot be used with `BUY` orders in `LONG` position side. and cannot be used with `SELL` orders in `SHORT` position side
-     * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
+     * - If parameter`priceProtect`is sent as true:
      *
-     * Weight: 0
+     * - when price reaches the `triggerPrice` ，the difference rate between
+     * "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the
+     * "triggerProtect" of the symbol
      *
-     * @summary New Algo Order(TRADE)
+     * - "triggerProtect" of a symbol can be got from `GET
+     * /fapi/v1/exchangeInfo`
+     *
+     * >
+     *
+     * - `STOP`, `STOP_MARKET`:
+     *
+     * - BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
+     *
+     * - SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <=
+     * `triggerPrice`
+     *
+     * - `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
+     *
+     * - BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
+     *
+     * - SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >=
+     * `triggerPrice`
+     *
+     * - `TRAILING_STOP_MARKET`:
+     *
+     * - BUY: the lowest price after order placed <= `activatePrice`, and the
+     * latest price >= the lowest price * (1 + `callbackRate`)
+     *
+     * - SELL: the highest price after order placed >= `activatePrice`, and the
+     * latest price <= the highest price * (1 - `callbackRate`)
+     *
+     * >
+     *
+     * - For `TRAILING_STOP_MARKET`, if you got such error code.
+     *
+     * >   ``{"code": -2021, "msg": "Order would immediately trigger."}``
+     *
+     * >   means that the parameters you send do not meet the following
+     * requirements:
+     *
+     * - BUY: `activatePrice` should be smaller than latest price.
+     *
+     * - SELL: `activatePrice` should be larger than latest price.
+     *
+     * >
+     *
+     * - `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`:
+     *
+     * - Follow the same rules for condition orders.
+     *
+     * - If triggered，**close all** current long position( if `SELL`) or
+     * current short position( if `BUY`).
+     *
+     * - Cannot be used with `quantity` paremeter
+     *
+     * - Cannot be used with `reduceOnly` parameter
+     *
+     * - In Hedge Mode,cannot be used with `BUY` orders in `LONG` position
+     * side. and cannot be used with `SELL` orders in `SHORT` position side
+     *
+     * - `selfTradePreventionMode` is only effective when `timeInForce` set to
+     * `IOC` or `GTC` or `GTD`.
+     *
+     * @summary New Algo Order (TRADE)
      * @param {NewAlgoOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<NewAlgoOrderResponse>}
@@ -136,16 +199,24 @@ export interface TradeApiInterface {
     /**
      * Send in a new order.
      *
-     * If `newOrderRespType ` is sent as `RESULT` :
-     * `MARKET` order: the final FILLED result of the order will be return directly.
-     * `LIMIT` order with special `timeInForce`: the final status result of the order(FILLED or EXPIRED) will be returned directly.
+     * Weight(IP): 0
      *
-     * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
-     * In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
+     * Security Type: TRADE
      *
-     * Weight: 0
+     * Notes:
+     * Additional mandatory parameters based on `type`:
      *
-     * @summary New Order(TRADE)
+     * - `LIMIT`: `timeInForce`, `quantity`, `price`
+     * - `MARKET`: `quantity`
+     *
+     * > * If `newOrderRespType` is sent as `RESULT`:
+     * >   * `MARKET` order: the final FILLED result of the order will be return directly.
+     * >   * `LIMIT` order with special `timeInForce`: the final status result of the order(FILLED or EXPIRED) will be returned directly.
+     * >
+     * > * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
+     * > * In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
+     *
+     * @summary New Order (TRADE)
      * @param {NewOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<NewOrderResponse>}
@@ -156,9 +227,13 @@ export interface TradeApiInterface {
     /**
      * Get current position information.
      *
-     * Please use with user data stream `ACCOUNT_UPDATE` to meet your timeliness and accuracy needs.
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Please use with user data stream `ACCOUNT_UPDATE` to meet your
+     * timeliness and accuracy needs.
      *
      * @summary Position Information (USER_DATA)
      * @param {PositionInformationRequest} requestParameters Request parameters.
@@ -171,11 +246,16 @@ export interface TradeApiInterface {
     ): Promise<WebsocketApiResponse<PositionInformationResponse>>;
 
     /**
-     * Get current position information(only symbol that has position or open orders will be returned).
+     * Get current position information(only symbol that has position or open
+     * orders will be returned).
      *
-     * Please use with user data stream `ACCOUNT_UPDATE` to meet your timeliness and accuracy needs.
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Please use with user data stream `ACCOUNT_UPDATE` to meet your
+     * timeliness and accuracy needs.
      *
      * @summary Position Information V2 (USER_DATA)
      * @param {PositionInformationV2Request} requestParameters Request parameters.
@@ -194,10 +274,14 @@ export interface TradeApiInterface {
      * order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
      * order create time + 90 days < current time
      *
-     * Either `orderId` or `origClientOrderId` must be sent.
-     * `orderId` is self-increment for each specific `symbol`
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent.
+     * - `orderId` is self-increment for each specific `symbol`
      *
      * @summary Query Order (USER_DATA)
      * @param {QueryOrderRequest} requestParameters Request parameters.
@@ -216,28 +300,28 @@ export interface TradeApiInterface {
  */
 export interface CancelAlgoOrderRequest {
     /**
-     * Unique WebSocket request ID.
+     * Id.
      * @type {string}
      * @memberof TradeApiCancelAlgoOrder
      */
     readonly id?: string;
 
     /**
-     *
+     * Algo Id.
      * @type {number | bigint}
      * @memberof TradeApiCancelAlgoOrder
      */
     readonly algoId?: number | bigint;
 
     /**
-     *
+     * Client Algo Id.
      * @type {string}
      * @memberof TradeApiCancelAlgoOrder
      */
     readonly clientAlgoId?: string;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof TradeApiCancelAlgoOrder
      */
@@ -250,35 +334,35 @@ export interface CancelAlgoOrderRequest {
  */
 export interface CancelOrderRequest {
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof TradeApiCancelOrder
      */
     readonly symbol: string;
 
     /**
-     * Unique WebSocket request ID.
+     * Id.
      * @type {string}
      * @memberof TradeApiCancelOrder
      */
     readonly id?: string;
 
     /**
-     *
+     * Order Id.
      * @type {number | bigint}
      * @memberof TradeApiCancelOrder
      */
     readonly orderId?: number | bigint;
 
     /**
-     *
+     * Orig Client Order Id.
      * @type {string}
      * @memberof TradeApiCancelOrder
      */
     readonly origClientOrderId?: string;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof TradeApiCancelOrder
      */
@@ -291,7 +375,7 @@ export interface CancelOrderRequest {
  */
 export interface ModifyOrderRequest {
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof TradeApiModifyOrder
      */
@@ -312,42 +396,42 @@ export interface ModifyOrderRequest {
     readonly quantity: number;
 
     /**
-     *
+     * Price.
      * @type {number}
      * @memberof TradeApiModifyOrder
      */
     readonly price: number;
 
     /**
-     * Unique WebSocket request ID.
+     * Id.
      * @type {string}
      * @memberof TradeApiModifyOrder
      */
     readonly id?: string;
 
     /**
-     *
+     * Order Id.
      * @type {number | bigint}
      * @memberof TradeApiModifyOrder
      */
     readonly orderId?: number | bigint;
 
     /**
-     *
+     * Orig Client Order Id.
      * @type {string}
      * @memberof TradeApiModifyOrder
      */
     readonly origClientOrderId?: string;
 
     /**
-     * only available for `LIMIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`/ `QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
-     * @type {'NONE' | 'OPPONENT' | 'OPPONENT_5' | 'OPPONENT_10' | 'OPPONENT_20' | 'QUEUE' | 'QUEUE_5' | 'QUEUE_10' | 'QUEUE_20'}
+     * only avaliable for LIMIT/STOP/TAKE_PROFIT order; Can't be passed together with price
+     * @type {'OPPONENT' | 'OPPONENT_5' | 'OPPONENT_10' | 'OPPONENT_20' | 'QUEUE' | 'QUEUE_5' | 'QUEUE_10' | 'QUEUE_20'}
      * @memberof TradeApiModifyOrder
      */
     readonly priceMatch?: ModifyOrderPriceMatchEnum;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof TradeApiModifyOrder
      */
@@ -361,69 +445,69 @@ export interface ModifyOrderRequest {
 export interface NewAlgoOrderRequest {
     /**
      * Only support `CONDITIONAL`
-     * @type {string}
+     * @type {'CONDITIONAL'}
      * @memberof TradeApiNewAlgoOrder
      */
-    readonly algoType: string;
+    readonly algoType: NewAlgoOrderAlgoTypeEnum;
 
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof TradeApiNewAlgoOrder
      */
     readonly symbol: string;
 
     /**
-     * `SELL`, `BUY`
+     * Side.
      * @type {'BUY' | 'SELL'}
      * @memberof TradeApiNewAlgoOrder
      */
     readonly side: NewAlgoOrderSideEnum;
 
     /**
-     *
-     * @type {string}
+     * For `CONDITIONAL` algoType, `STOP_MARKET`/`TAKE_PROFIT_MARKET`/`STOP`/`TAKE_PROFIT`/`TRAILING_STOP_MARKET` as order type
+     * @type {'STOP_MARKET' | 'TAKE_PROFIT_MARKET' | 'STOP' | 'TAKE_PROFIT' | 'TRAILING_STOP_MARKET'}
      * @memberof TradeApiNewAlgoOrder
      */
-    readonly type: string;
+    readonly type: NewAlgoOrderTypeEnum;
 
     /**
-     * Unique WebSocket request ID.
+     * Id.
      * @type {string}
      * @memberof TradeApiNewAlgoOrder
      */
     readonly id?: string;
 
     /**
-     * Default `BOTH` for One-way Mode ; `LONG` or `SHORT` for Hedge Mode. It must be sent in Hedge Mode.
+     * Default BOTH for One-way Mode ; LONG or SHORT for Hedge Mode. It must be sent in Hedge Mode.
      * @type {'BOTH' | 'LONG' | 'SHORT'}
      * @memberof TradeApiNewAlgoOrder
      */
     readonly positionSide?: NewAlgoOrderPositionSideEnum;
 
     /**
-     *
-     * @type {'GTC' | 'IOC' | 'FOK' | 'GTX' | 'GTD' | 'RPI'}
+     * `IOC` or `GTC` or `FOK`, default `GTC`
+     * @type {'IOC' | 'GTC' | 'FOK'}
      * @memberof TradeApiNewAlgoOrder
      */
     readonly timeInForce?: NewAlgoOrderTimeInForceEnum;
 
     /**
-     *
+     * Cannot be sent with `closePosition`=`true`(Close-All)
      * @type {number}
      * @memberof TradeApiNewAlgoOrder
      */
     readonly quantity?: number;
 
     /**
-     *
+     * Price.
      * @type {number}
      * @memberof TradeApiNewAlgoOrder
      */
     readonly price?: number;
 
     /**
-     *
+     * Trigger Price.
      * @type {number}
      * @memberof TradeApiNewAlgoOrder
      */
@@ -437,49 +521,49 @@ export interface NewAlgoOrderRequest {
     readonly workingType?: NewAlgoOrderWorkingTypeEnum;
 
     /**
-     * only available for `LIMIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`/ `QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
-     * @type {'NONE' | 'OPPONENT' | 'OPPONENT_5' | 'OPPONENT_10' | 'OPPONENT_20' | 'QUEUE' | 'QUEUE_5' | 'QUEUE_10' | 'QUEUE_20'}
+     * only avaliable for LIMIT/STOP/TAKE_PROFIT order; Can't be passed together with price
+     * @type {'OPPONENT' | 'OPPONENT_5' | 'OPPONENT_10' | 'OPPONENT_20' | 'QUEUE' | 'QUEUE_5' | 'QUEUE_10' | 'QUEUE_20'}
      * @memberof TradeApiNewAlgoOrder
      */
     readonly priceMatch?: NewAlgoOrderPriceMatchEnum;
 
     /**
-     * true, false；Close-All，used with `STOP_MARKET` or `TAKE_PROFIT_MARKET`.
-     * @type {string}
+     * Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.
+     * @type {'true' | 'false'}
      * @memberof TradeApiNewAlgoOrder
      */
-    readonly closePosition?: string;
+    readonly closePosition?: NewAlgoOrderClosePositionEnum;
 
     /**
-     * "true" or "false", default "false". Used with `STOP_MARKET` or `TAKE_PROFIT_MARKET` order. when price reaches the triggerPrice ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the Price Protection Threshold of the symbol.
-     * @type {string}
+     * Used with STOP_MARKET or TAKE_PROFIT_MARKET order. when price reaches the triggerPrice ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the Price Protection Threshold of the symbol.
+     * @type {'true' | 'false'}
      * @memberof TradeApiNewAlgoOrder
      */
-    readonly priceProtect?: string;
+    readonly priceProtect?: NewAlgoOrderPriceProtectEnum;
 
     /**
-     * "true" or "false". default "false". Cannot be sent in Hedge Mode
-     * @type {string}
+     * Cannot be sent in Hedge Mode; cannot be sent with closePosition=true
+     * @type {'true' | 'false'}
      * @memberof TradeApiNewAlgoOrder
      */
-    readonly reduceOnly?: string;
+    readonly reduceOnly?: NewAlgoOrderReduceOnlyEnum;
 
     /**
-     * Used with `TRAILING_STOP_MARKET` orders, default as the latest price(supporting different `workingType`)
+     * Used with TRAILING_STOP_MARKET orders, default as the latest price(supporting different workingType)
      * @type {number}
      * @memberof TradeApiNewAlgoOrder
      */
     readonly activatePrice?: number;
 
     /**
-     * Used with `TRAILING_STOP_MARKET` orders, min 0.1, max 10 where 1 for 1%
+     * Used with TRAILING_STOP_MARKET orders
      * @type {number}
      * @memberof TradeApiNewAlgoOrder
      */
     readonly callbackRate?: number;
 
     /**
-     *
+     * A unique id among open orders. Automatically generated if not sent. Can only be string following the rule: `^[\.A-Z\:/a-z0-9_-]{1,36}$`
      * @type {string}
      * @memberof TradeApiNewAlgoOrder
      */
@@ -494,7 +578,7 @@ export interface NewAlgoOrderRequest {
 
     /**
      * `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE`
-     * @type {'EXPIRE_TAKER' | 'EXPIRE_BOTH' | 'EXPIRE_MAKER'}
+     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_BOTH' | 'EXPIRE_MAKER'}
      * @memberof TradeApiNewAlgoOrder
      */
     readonly selfTradePreventionMode?: NewAlgoOrderSelfTradePreventionModeEnum;
@@ -507,7 +591,7 @@ export interface NewAlgoOrderRequest {
     readonly goodTillDate?: number | bigint;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof TradeApiNewAlgoOrder
      */
@@ -520,14 +604,14 @@ export interface NewAlgoOrderRequest {
  */
 export interface NewOrderRequest {
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof TradeApiNewOrder
      */
     readonly symbol: string;
 
     /**
-     * `SELL`, `BUY`
+     * Side.
      * @type {'BUY' | 'SELL'}
      * @memberof TradeApiNewOrder
      */
@@ -535,13 +619,13 @@ export interface NewOrderRequest {
 
     /**
      *
-     * @type {string}
+     * @type {'LIMIT' | 'MARKET'}
      * @memberof TradeApiNewOrder
      */
-    readonly type: string;
+    readonly type: NewOrderTypeEnum;
 
     /**
-     * Unique WebSocket request ID.
+     * Id.
      * @type {string}
      * @memberof TradeApiNewOrder
      */
@@ -555,11 +639,18 @@ export interface NewOrderRequest {
     readonly positionSide?: NewOrderPositionSideEnum;
 
     /**
-     *
+     * Time In Force.
      * @type {'GTC' | 'IOC' | 'FOK' | 'GTX' | 'GTD' | 'RPI'}
      * @memberof TradeApiNewOrder
      */
     readonly timeInForce?: NewOrderTimeInForceEnum;
+
+    /**
+     * Cannot be sent in Hedge Mode
+     * @type {'true' | 'false'}
+     * @memberof TradeApiNewOrder
+     */
+    readonly reduceOnly?: NewOrderReduceOnlyEnum;
 
     /**
      *
@@ -569,14 +660,7 @@ export interface NewOrderRequest {
     readonly quantity?: number;
 
     /**
-     * "true" or "false". default "false". Cannot be sent in Hedge Mode
-     * @type {string}
-     * @memberof TradeApiNewOrder
-     */
-    readonly reduceOnly?: string;
-
-    /**
-     *
+     * Price.
      * @type {number}
      * @memberof TradeApiNewOrder
      */
@@ -590,22 +674,22 @@ export interface NewOrderRequest {
     readonly newClientOrderId?: string;
 
     /**
-     * "ACK", "RESULT", default "ACK"
+     *
      * @type {'ACK' | 'RESULT'}
      * @memberof TradeApiNewOrder
      */
     readonly newOrderRespType?: NewOrderNewOrderRespTypeEnum;
 
     /**
-     * only available for `LIMIT` order; can be set to `OPPONENT`/ `OPPONENT_5`/ `OPPONENT_10`/ `OPPONENT_20`/ `QUEUE`/ `QUEUE_5`/ `QUEUE_10`/ `QUEUE_20`; Can't be passed together with `price`
-     * @type {'NONE' | 'OPPONENT' | 'OPPONENT_5' | 'OPPONENT_10' | 'OPPONENT_20' | 'QUEUE' | 'QUEUE_5' | 'QUEUE_10' | 'QUEUE_20'}
+     * only available for `LIMIT` order; Can't be passed together with `price`
+     * @type {'OPPONENT' | 'OPPONENT_5' | 'OPPONENT_10' | 'OPPONENT_20' | 'QUEUE' | 'QUEUE_5' | 'QUEUE_10' | 'QUEUE_20'}
      * @memberof TradeApiNewOrder
      */
     readonly priceMatch?: NewOrderPriceMatchEnum;
 
     /**
-     * `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE`
-     * @type {'EXPIRE_TAKER' | 'EXPIRE_BOTH' | 'EXPIRE_MAKER'}
+     * `NONE`:No STP / `EXPIRE_TAKER`:expire taker order when STP triggers/ `EXPIRE_MAKER`:expire taker order when STP triggers/ `EXPIRE_BOTH`:expire both orders when STP triggers; default `NONE`
+     * @type {'NONE' | 'EXPIRE_TAKER' | 'EXPIRE_BOTH' | 'EXPIRE_MAKER'}
      * @memberof TradeApiNewOrder
      */
     readonly selfTradePreventionMode?: NewOrderSelfTradePreventionModeEnum;
@@ -618,7 +702,7 @@ export interface NewOrderRequest {
     readonly goodTillDate?: number | bigint;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof TradeApiNewOrder
      */
@@ -631,21 +715,21 @@ export interface NewOrderRequest {
  */
 export interface PositionInformationRequest {
     /**
-     * Unique WebSocket request ID.
+     * Id.
      * @type {string}
      * @memberof TradeApiPositionInformation
      */
     readonly id?: string;
 
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof TradeApiPositionInformation
      */
     readonly symbol?: string;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof TradeApiPositionInformation
      */
@@ -658,21 +742,21 @@ export interface PositionInformationRequest {
  */
 export interface PositionInformationV2Request {
     /**
-     * Unique WebSocket request ID.
+     * Id.
      * @type {string}
      * @memberof TradeApiPositionInformationV2
      */
     readonly id?: string;
 
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof TradeApiPositionInformationV2
      */
     readonly symbol?: string;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof TradeApiPositionInformationV2
      */
@@ -685,35 +769,35 @@ export interface PositionInformationV2Request {
  */
 export interface QueryOrderRequest {
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof TradeApiQueryOrder
      */
     readonly symbol: string;
 
     /**
-     * Unique WebSocket request ID.
+     * Id.
      * @type {string}
      * @memberof TradeApiQueryOrder
      */
     readonly id?: string;
 
     /**
-     *
+     * Order Id.
      * @type {number | bigint}
      * @memberof TradeApiQueryOrder
      */
     readonly orderId?: number | bigint;
 
     /**
-     *
+     * Orig Client Order Id.
      * @type {string}
      * @memberof TradeApiQueryOrder
      */
     readonly origClientOrderId?: string;
 
     /**
-     *
+     * Recv Window.
      * @type {number | bigint}
      * @memberof TradeApiQueryOrder
      */
@@ -735,15 +819,18 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel an active algo order.
      *
-     * Either `algoId` or `clientAlgoId` must be sent.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - Either `algoId` or `clientAlgoId` must be sent.
      *
      * @summary Cancel Algo Order (TRADE)
      * @param {CancelAlgoOrderRequest} requestParameters Request parameters.
      * @returns {Promise<CancelAlgoOrderResponse>}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Cancel-Algo-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-api/trade#cancel-algo-order Binance API Documentation}
      */
     public cancelAlgoOrder(
         requestParameters: CancelAlgoOrderRequest = {}
@@ -758,15 +845,18 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Cancel an active order.
      *
-     * Either `orderId` or `origClientOrderId` must be sent.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent.
      *
      * @summary Cancel Order (TRADE)
      * @param {CancelOrderRequest} requestParameters Request parameters.
      * @returns {Promise<CancelOrderResponse>}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Cancel-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-api/trade#cancel-order Binance API Documentation}
      */
     public cancelOrder(
         requestParameters: CancelOrderRequest
@@ -781,23 +871,38 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Order modify function, currently only LIMIT order modification is supported, modified orders will be reordered in the match queue
      *
-     * Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
-     * Both `quantity` and `price` must be sent. *(After CM migration, the dapi modify order endpoint follows the same rule.)*
-     * When the new `quantity` or `price` doesn't satisfy PRICE_FILTER / PERCENT_FILTER / LOT_SIZE, amendment will be rejected and the order will stay as it is.
-     * However the order will be cancelled by the amendment in the following situations:
-     * when the order is in partially filled status and the new `quantity` <= `executedQty`
-     * When the order is `GTX` and the new price will cause it to be executed immediately
-     * One order can only be modfied for less than 10000 times
-     *
      * Weight: 1 on 10s order rate limit(X-MBX-ORDER-COUNT-10S);
      * 1 on 1min order rate limit(X-MBX-ORDER-COUNT-1M);
      * 0 on IP rate limit(x-mbx-used-weight-1m)
+     *
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent, and the
+     * `orderId` will prevail if both are sent.
+     *
+     * - Both `quantity` and `price` must be sent. *(After CM migration, the dapi modify order endpoint follows the same rule.)*
+     *
+     * - When the new `quantity` or `price` doesn't satisfy PRICE_FILTER /
+     * PERCENT_FILTER / LOT_SIZE, amendment will be rejected and the order will
+     * stay as it is.
+     *
+     * - However the order will be cancelled by the amendment in the following
+     * situations:
+     *
+     * - when the order is in partially filled status and the new `quantity` <=
+     * `executedQty`
+     *
+     * - When the order is `GTX` and the new price will cause it to be executed
+     * immediately
+     *
+     * - One order can only be modfied for less than 10000 times
      *
      * @summary Modify Order (TRADE)
      * @param {ModifyOrderRequest} requestParameters Request parameters.
      * @returns {Promise<ModifyOrderResponse>}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Modify-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-api/trade#modify-order Binance API Documentation}
      */
     public modifyOrder(
         requestParameters: ModifyOrderRequest
@@ -812,43 +917,85 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Send in a new algo order.
      *
-     * Condition orders will be triggered when:
+     * Weight(IP): 0
      *
-     * If parameter`priceProtect`is sent as true:
-     * when price reaches the `triggerPrice` ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
-     * "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
+     * Security Type: TRADE
      *
-     * `STOP`, `STOP_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
-     * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
-     * `TRAILING_STOP_MARKET`:
-     * BUY: the lowest price after order placed <= `activatePrice`, and the latest price >= the lowest price * (1 + `callbackRate`)
-     * SELL: the highest price after order placed >= `activatePrice`, and the latest price <= the highest price * (1 - `callbackRate`)
+     * Notes:
+     * - Condition orders will be triggered when:
      *
-     * For `TRAILING_STOP_MARKET`, if you got such error code.
-     * ``{"code": -2021, "msg": "Order would immediately trigger."}``
-     * means that the parameters you send do not meet the following requirements:
-     * BUY: `activatePrice` should be smaller than latest price.
-     * SELL: `activatePrice` should be larger than latest price.
+     * >
      *
-     * `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`:
-     * Follow the same rules for condition orders.
-     * If triggered，**close all** current long position( if `SELL`) or current short position( if `BUY`).
-     * Cannot be used with `quantity` paremeter
-     * Cannot be used with `reduceOnly` parameter
-     * In Hedge Mode,cannot be used with `BUY` orders in `LONG` position side. and cannot be used with `SELL` orders in `SHORT` position side
-     * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
+     * - If parameter`priceProtect`is sent as true:
      *
-     * Weight: 0
+     * - when price reaches the `triggerPrice` ，the difference rate between
+     * "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the
+     * "triggerProtect" of the symbol
      *
-     * @summary New Algo Order(TRADE)
+     * - "triggerProtect" of a symbol can be got from `GET
+     * /fapi/v1/exchangeInfo`
+     *
+     * >
+     *
+     * - `STOP`, `STOP_MARKET`:
+     *
+     * - BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
+     *
+     * - SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <=
+     * `triggerPrice`
+     *
+     * - `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
+     *
+     * - BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
+     *
+     * - SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >=
+     * `triggerPrice`
+     *
+     * - `TRAILING_STOP_MARKET`:
+     *
+     * - BUY: the lowest price after order placed <= `activatePrice`, and the
+     * latest price >= the lowest price * (1 + `callbackRate`)
+     *
+     * - SELL: the highest price after order placed >= `activatePrice`, and the
+     * latest price <= the highest price * (1 - `callbackRate`)
+     *
+     * >
+     *
+     * - For `TRAILING_STOP_MARKET`, if you got such error code.
+     *
+     * >   ``{"code": -2021, "msg": "Order would immediately trigger."}``
+     *
+     * >   means that the parameters you send do not meet the following
+     * requirements:
+     *
+     * - BUY: `activatePrice` should be smaller than latest price.
+     *
+     * - SELL: `activatePrice` should be larger than latest price.
+     *
+     * >
+     *
+     * - `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`:
+     *
+     * - Follow the same rules for condition orders.
+     *
+     * - If triggered，**close all** current long position( if `SELL`) or
+     * current short position( if `BUY`).
+     *
+     * - Cannot be used with `quantity` paremeter
+     *
+     * - Cannot be used with `reduceOnly` parameter
+     *
+     * - In Hedge Mode,cannot be used with `BUY` orders in `LONG` position
+     * side. and cannot be used with `SELL` orders in `SHORT` position side
+     *
+     * - `selfTradePreventionMode` is only effective when `timeInForce` set to
+     * `IOC` or `GTC` or `GTD`.
+     *
+     * @summary New Algo Order (TRADE)
      * @param {NewAlgoOrderRequest} requestParameters Request parameters.
      * @returns {Promise<NewAlgoOrderResponse>}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/New-Algo-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-api/trade#new-algo-order Binance API Documentation}
      */
     public newAlgoOrder(
         requestParameters: NewAlgoOrderRequest
@@ -863,20 +1010,28 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Send in a new order.
      *
-     * If `newOrderRespType ` is sent as `RESULT` :
-     * `MARKET` order: the final FILLED result of the order will be return directly.
-     * `LIMIT` order with special `timeInForce`: the final status result of the order(FILLED or EXPIRED) will be returned directly.
+     * Weight(IP): 0
      *
-     * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
-     * In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
+     * Security Type: TRADE
      *
-     * Weight: 0
+     * Notes:
+     * Additional mandatory parameters based on `type`:
      *
-     * @summary New Order(TRADE)
+     * - `LIMIT`: `timeInForce`, `quantity`, `price`
+     * - `MARKET`: `quantity`
+     *
+     * > * If `newOrderRespType` is sent as `RESULT`:
+     * >   * `MARKET` order: the final FILLED result of the order will be return directly.
+     * >   * `LIMIT` order with special `timeInForce`: the final status result of the order(FILLED or EXPIRED) will be returned directly.
+     * >
+     * > * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
+     * > * In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
+     *
+     * @summary New Order (TRADE)
      * @param {NewOrderRequest} requestParameters Request parameters.
      * @returns {Promise<NewOrderResponse>}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/New-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-api/trade#new-order Binance API Documentation}
      */
     public newOrder(
         requestParameters: NewOrderRequest
@@ -891,15 +1046,19 @@ export class TradeApi implements TradeApiInterface {
     /**
      * Get current position information.
      *
-     * Please use with user data stream `ACCOUNT_UPDATE` to meet your timeliness and accuracy needs.
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Please use with user data stream `ACCOUNT_UPDATE` to meet your
+     * timeliness and accuracy needs.
      *
      * @summary Position Information (USER_DATA)
      * @param {PositionInformationRequest} requestParameters Request parameters.
      * @returns {Promise<PositionInformationResponse>}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Position-Information Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-api/trade#position-information Binance API Documentation}
      */
     public positionInformation(
         requestParameters: PositionInformationRequest = {}
@@ -912,17 +1071,22 @@ export class TradeApi implements TradeApiInterface {
     }
 
     /**
-     * Get current position information(only symbol that has position or open orders will be returned).
+     * Get current position information(only symbol that has position or open
+     * orders will be returned).
      *
-     * Please use with user data stream `ACCOUNT_UPDATE` to meet your timeliness and accuracy needs.
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Please use with user data stream `ACCOUNT_UPDATE` to meet your
+     * timeliness and accuracy needs.
      *
      * @summary Position Information V2 (USER_DATA)
      * @param {PositionInformationV2Request} requestParameters Request parameters.
      * @returns {Promise<PositionInformationV2Response>}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Position-Info-V2 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-api/trade#position-information-v2 Binance API Documentation}
      */
     public positionInformationV2(
         requestParameters: PositionInformationV2Request = {}
@@ -941,16 +1105,20 @@ export class TradeApi implements TradeApiInterface {
      * order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
      * order create time + 90 days < current time
      *
-     * Either `orderId` or `origClientOrderId` must be sent.
-     * `orderId` is self-increment for each specific `symbol`
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent.
+     * - `orderId` is self-increment for each specific `symbol`
      *
      * @summary Query Order (USER_DATA)
      * @param {QueryOrderRequest} requestParameters Request parameters.
      * @returns {Promise<QueryOrderResponse>}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Query-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-api/trade#query-order Binance API Documentation}
      */
     public queryOrder(
         requestParameters: QueryOrderRequest
@@ -969,7 +1137,6 @@ export enum ModifyOrderSideEnum {
 }
 
 export enum ModifyOrderPriceMatchEnum {
-    NONE = 'NONE',
     OPPONENT = 'OPPONENT',
     OPPONENT_5 = 'OPPONENT_5',
     OPPONENT_10 = 'OPPONENT_10',
@@ -980,9 +1147,21 @@ export enum ModifyOrderPriceMatchEnum {
     QUEUE_20 = 'QUEUE_20',
 }
 
+export enum NewAlgoOrderAlgoTypeEnum {
+    CONDITIONAL = 'CONDITIONAL',
+}
+
 export enum NewAlgoOrderSideEnum {
     BUY = 'BUY',
     SELL = 'SELL',
+}
+
+export enum NewAlgoOrderTypeEnum {
+    STOP_MARKET = 'STOP_MARKET',
+    TAKE_PROFIT_MARKET = 'TAKE_PROFIT_MARKET',
+    STOP = 'STOP',
+    TAKE_PROFIT = 'TAKE_PROFIT',
+    TRAILING_STOP_MARKET = 'TRAILING_STOP_MARKET',
 }
 
 export enum NewAlgoOrderPositionSideEnum {
@@ -992,12 +1171,9 @@ export enum NewAlgoOrderPositionSideEnum {
 }
 
 export enum NewAlgoOrderTimeInForceEnum {
-    GTC = 'GTC',
     IOC = 'IOC',
+    GTC = 'GTC',
     FOK = 'FOK',
-    GTX = 'GTX',
-    GTD = 'GTD',
-    RPI = 'RPI',
 }
 
 export enum NewAlgoOrderWorkingTypeEnum {
@@ -1006,7 +1182,6 @@ export enum NewAlgoOrderWorkingTypeEnum {
 }
 
 export enum NewAlgoOrderPriceMatchEnum {
-    NONE = 'NONE',
     OPPONENT = 'OPPONENT',
     OPPONENT_5 = 'OPPONENT_5',
     OPPONENT_10 = 'OPPONENT_10',
@@ -1017,12 +1192,28 @@ export enum NewAlgoOrderPriceMatchEnum {
     QUEUE_20 = 'QUEUE_20',
 }
 
+export enum NewAlgoOrderClosePositionEnum {
+    TRUE = 'true',
+    FALSE = 'false',
+}
+
+export enum NewAlgoOrderPriceProtectEnum {
+    TRUE = 'true',
+    FALSE = 'false',
+}
+
+export enum NewAlgoOrderReduceOnlyEnum {
+    TRUE = 'true',
+    FALSE = 'false',
+}
+
 export enum NewAlgoOrderNewOrderRespTypeEnum {
     ACK = 'ACK',
     RESULT = 'RESULT',
 }
 
 export enum NewAlgoOrderSelfTradePreventionModeEnum {
+    NONE = 'NONE',
     EXPIRE_TAKER = 'EXPIRE_TAKER',
     EXPIRE_BOTH = 'EXPIRE_BOTH',
     EXPIRE_MAKER = 'EXPIRE_MAKER',
@@ -1031,6 +1222,11 @@ export enum NewAlgoOrderSelfTradePreventionModeEnum {
 export enum NewOrderSideEnum {
     BUY = 'BUY',
     SELL = 'SELL',
+}
+
+export enum NewOrderTypeEnum {
+    LIMIT = 'LIMIT',
+    MARKET = 'MARKET',
 }
 
 export enum NewOrderPositionSideEnum {
@@ -1048,13 +1244,17 @@ export enum NewOrderTimeInForceEnum {
     RPI = 'RPI',
 }
 
+export enum NewOrderReduceOnlyEnum {
+    TRUE = 'true',
+    FALSE = 'false',
+}
+
 export enum NewOrderNewOrderRespTypeEnum {
     ACK = 'ACK',
     RESULT = 'RESULT',
 }
 
 export enum NewOrderPriceMatchEnum {
-    NONE = 'NONE',
     OPPONENT = 'OPPONENT',
     OPPONENT_5 = 'OPPONENT_5',
     OPPONENT_10 = 'OPPONENT_10',
@@ -1066,6 +1266,7 @@ export enum NewOrderPriceMatchEnum {
 }
 
 export enum NewOrderSelfTradePreventionModeEnum {
+    NONE = 'NONE',
     EXPIRE_TAKER = 'EXPIRE_TAKER',
     EXPIRE_BOTH = 'EXPIRE_BOTH',
     EXPIRE_MAKER = 'EXPIRE_MAKER',

@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,61 +20,61 @@
  */
 export interface GridUpdateGu {
     /**
-     *
+     * Strategy ID
      * @type {number | bigint}
      * @memberof GridUpdateGu
      */
     si?: number | bigint;
     /**
-     *
+     * Strategy Type
      * @type {string}
      * @memberof GridUpdateGu
      */
     st?: string;
     /**
-     *
+     * Strategy Status
      * @type {string}
      * @memberof GridUpdateGu
      */
     ss?: string;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof GridUpdateGu
      */
     s?: string;
     /**
-     *
+     * Realized PNL
      * @type {string}
      * @memberof GridUpdateGu
      */
     r?: string;
     /**
-     *
+     * Unmatched Average Price
      * @type {string}
      * @memberof GridUpdateGu
      */
     up?: string;
     /**
-     *
+     * Unmatched Qty
      * @type {string}
      * @memberof GridUpdateGu
      */
     uq?: string;
     /**
-     *
+     * Unmatched Fee
      * @type {string}
      * @memberof GridUpdateGu
      */
     uf?: string;
     /**
-     *
+     * Matched PNL
      * @type {string}
      * @memberof GridUpdateGu
      */
     mp?: string;
     /**
-     *
+     * Update Time
      * @type {number | bigint}
      * @memberof GridUpdateGu
      */

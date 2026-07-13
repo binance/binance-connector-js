@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,49 +20,49 @@
  */
 export interface ExchangeInformationResponseSymbolsInnerFiltersInner {
     /**
-     *
+     * Filter Type.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInnerFiltersInner
      */
     filterType?: string;
     /**
-     *
+     * Max Price.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInnerFiltersInner
      */
     maxPrice?: string;
     /**
-     *
+     * Min Price.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInnerFiltersInner
      */
     minPrice?: string;
     /**
-     *
+     * Tick Size.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInnerFiltersInner
      */
     tickSize?: string;
     /**
-     *
+     * Max Qty.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInnerFiltersInner
      */
     maxQty?: string;
     /**
-     *
+     * Min Qty.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInnerFiltersInner
      */
     minQty?: string;
     /**
-     *
+     * Step Size.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInnerFiltersInner
      */
     stepSize?: string;
     /**
-     *
+     * Limit.
      * @type {number | bigint}
      * @memberof ExchangeInformationResponseSymbolsInnerFiltersInner
      */
@@ -74,13 +74,13 @@ export interface ExchangeInformationResponseSymbolsInnerFiltersInner {
      */
     notional?: string;
     /**
-     *
+     * Multiplier Up.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInnerFiltersInner
      */
     multiplierUp?: string;
     /**
-     *
+     * Multiplier Down.
      * @type {string}
      * @memberof ExchangeInformationResponseSymbolsInnerFiltersInner
      */

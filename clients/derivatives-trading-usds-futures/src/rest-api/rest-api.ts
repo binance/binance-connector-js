@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -196,6 +196,7 @@ import type {
     ChangePositionModeResponse,
     CurrentAllAlgoOpenOrdersResponse,
     CurrentAllOpenOrdersResponse,
+    FuturesTradfiPerpsContractResponse,
     GetOrderModifyHistoryResponse,
     GetPositionMarginChangeHistoryResponse,
     ModifyIsolatedPositionMarginResponse,
@@ -291,14 +292,16 @@ export class RestAPI {
     /**
      * Get current account information. User in single-asset/ multi-assets mode will see different value, see comments in response section for detail.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Account Information V2(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Account Information V2 (USER_DATA)
      * @param {AccountInformationV2Request} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AccountInformationV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V2 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#account-information-v2 Binance API Documentation}
      */
     accountInformationV2(
         requestParameters: AccountInformationV2Request = {}
@@ -309,14 +312,16 @@ export class RestAPI {
     /**
      * Get current account information. User in single-asset/ multi-assets mode will see different value, see comments in response section for detail.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Account Information V3(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Account Information V3 (USER_DATA)
      * @param {AccountInformationV3Request} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AccountInformationV3Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V3 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#account-information-v3 Binance API Documentation}
      */
     accountInformationV3(
         requestParameters: AccountInformationV3Request = {}
@@ -325,16 +330,18 @@ export class RestAPI {
     }
 
     /**
-     * Query account balance info
+     * Query account balance information.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
      *
      * @summary Futures Account Balance V2 (USER_DATA)
      * @param {FuturesAccountBalanceV2Request} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<FuturesAccountBalanceV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V2 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#futures-account-balance-v2 Binance API Documentation}
      */
     futuresAccountBalanceV2(
         requestParameters: FuturesAccountBalanceV2Request = {}
@@ -343,16 +350,18 @@ export class RestAPI {
     }
 
     /**
-     * Query account balance info
+     * Query account balance information.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
      *
      * @summary Futures Account Balance V3 (USER_DATA)
      * @param {FuturesAccountBalanceV3Request} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<FuturesAccountBalanceV3Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V3 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#futures-account-balance-v3 Binance API Documentation}
      */
     futuresAccountBalanceV3(
         requestParameters: FuturesAccountBalanceV3Request = {}
@@ -363,14 +372,16 @@ export class RestAPI {
     /**
      * Query account configuration
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Futures Account Configuration(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Futures Account Configuration (USER_DATA)
      * @param {FuturesAccountConfigurationRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<FuturesAccountConfigurationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Config Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#futures-account-configuration Binance API Documentation}
      */
     futuresAccountConfiguration(
         requestParameters: FuturesAccountConfigurationRequest = {}
@@ -381,15 +392,17 @@ export class RestAPI {
     /**
      * Futures trading quantitative rules indicators, for more information on this, please refer to the [Futures Trading Quantitative Rules](https://www.binance.com/en/support/faq/4f462ebe6ff445d4a170be7d9e897272)
      *
-     * Weight: - 1 for a single symbol
-     * - 10 when the symbol parameter is omitted
+     * Weight: - **1** for a single symbol
+     * - **10** when the symbol parameter is omitted
+     *
+     * Security Type: USER_DATA
      *
      * @summary Futures Trading Quantitative Rules Indicators (USER_DATA)
      * @param {FuturesTradingQuantitativeRulesIndicatorsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<FuturesTradingQuantitativeRulesIndicatorsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Trading-Quantitative-Rules-Indicators Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#futures-trading-quantitative-rules-indicators Binance API Documentation}
      */
     futuresTradingQuantitativeRulesIndicators(
         requestParameters: FuturesTradingQuantitativeRulesIndicatorsRequest = {}
@@ -400,14 +413,16 @@ export class RestAPI {
     /**
      * Get user's BNB Fee Discount (Fee Discount On or Fee Discount Off )
      *
-     * Weight: 30
+     * Weight(IP): 30
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get BNB Burn Status (USER_DATA)
      * @param {GetBnbBurnStatusRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetBnbBurnStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-BNB-Burn-Status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#get-bnb-burn-status Binance API Documentation}
      */
     getBnbBurnStatus(
         requestParameters: GetBnbBurnStatusRequest = {}
@@ -418,14 +433,16 @@ export class RestAPI {
     /**
      * Get user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on ***Every symbol***
      *
-     * Weight: 30
+     * Weight(IP): 30
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Current Multi-Assets Mode (USER_DATA)
      * @param {GetCurrentMultiAssetsModeRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetCurrentMultiAssetsModeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Multi-Assets-Mode Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#get-current-multi-assets-mode Binance API Documentation}
      */
     getCurrentMultiAssetsMode(
         requestParameters: GetCurrentMultiAssetsModeRequest = {}
@@ -436,14 +453,16 @@ export class RestAPI {
     /**
      * Get user's position mode (Hedge Mode or One-way Mode ) on ***EVERY symbol***
      *
-     * Weight: 30
+     * Weight(IP): 30
      *
-     * @summary Get Current Position Mode(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Current Position Mode (USER_DATA)
      * @param {GetCurrentPositionModeRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetCurrentPositionModeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Position-Mode Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#get-current-position-mode Binance API Documentation}
      */
     getCurrentPositionMode(
         requestParameters: GetCurrentPositionModeRequest = {}
@@ -454,17 +473,20 @@ export class RestAPI {
     /**
      * Get Download Id For Futures Order History
      *
-     * Request Limitation is 10 times per month, shared by front end download page and rest api
-     * The time between `startTime` and `endTime` can not be longer than 1 year
+     * Weight(IP): 1000
      *
-     * Weight: 1000
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Request Limitation is 10 times per month, shared by front end download page and rest api
+     * - The time between `startTime` and `endTime` can not be longer than 1 year
      *
      * @summary Get Download Id For Futures Order History (USER_DATA)
      * @param {GetDownloadIdForFuturesOrderHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetDownloadIdForFuturesOrderHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Order-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#get-download-id-for-futures-order-history Binance API Documentation}
      */
     getDownloadIdForFuturesOrderHistory(
         requestParameters: GetDownloadIdForFuturesOrderHistoryRequest
@@ -475,17 +497,20 @@ export class RestAPI {
     /**
      * Get download id for futures trade history
      *
-     * Request Limitation is 5 times per month, shared by front end download page and rest api
-     * The time between `startTime` and `endTime` can not be longer than 1 year
+     * Weight(IP): 1000
      *
-     * Weight: 1000
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Request Limitation is 5 times per month, shared by front end download page and rest api
+     * - The time between `startTime` and `endTime` can not be longer than 1 year
      *
      * @summary Get Download Id For Futures Trade History (USER_DATA)
      * @param {GetDownloadIdForFuturesTradeHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetDownloadIdForFuturesTradeHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#get-download-id-for-futures-trade-history Binance API Documentation}
      */
     getDownloadIdForFuturesTradeHistory(
         requestParameters: GetDownloadIdForFuturesTradeHistoryRequest
@@ -496,17 +521,20 @@ export class RestAPI {
     /**
      * Get download id for futures transaction history
      *
-     * Request Limitation is 5 times per month, shared by front end download page and rest api
-     * The time between `startTime` and `endTime` can not be longer than 1 year
+     * Weight(IP): 1000
      *
-     * Weight: 1000
+     * Security Type: USER_DATA
      *
-     * @summary Get Download Id For Futures Transaction History(USER_DATA)
+     * Notes:
+     * - Request Limitation is 5 times per month, shared by front end download page and rest api
+     * - The time between `startTime` and `endTime` can not be longer than 1 year
+     *
+     * @summary Get Download Id For Futures Transaction History (USER_DATA)
      * @param {GetDownloadIdForFuturesTransactionHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetDownloadIdForFuturesTransactionHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#get-download-id-for-futures-transaction-history Binance API Documentation}
      */
     getDownloadIdForFuturesTransactionHistory(
         requestParameters: GetDownloadIdForFuturesTransactionHistoryRequest
@@ -517,16 +545,19 @@ export class RestAPI {
     /**
      * Get futures order history download link by Id
      *
-     * Download link expiration: 7 days
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Download link expiration: 7 days
      *
      * @summary Get Futures Order History Download Link by Id (USER_DATA)
      * @param {GetFuturesOrderHistoryDownloadLinkByIdRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetFuturesOrderHistoryDownloadLinkByIdResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#get-futures-order-history-download-link-by-id Binance API Documentation}
      */
     getFuturesOrderHistoryDownloadLinkById(
         requestParameters: GetFuturesOrderHistoryDownloadLinkByIdRequest
@@ -537,16 +568,19 @@ export class RestAPI {
     /**
      * Get futures trade download link by Id
      *
-     * Download link expiration: 7 days
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
      *
-     * @summary Get Futures Trade Download Link by Id(USER_DATA)
+     * Notes:
+     * - Download link expiration: 7 days
+     *
+     * @summary Get Futures Trade Download Link by Id (USER_DATA)
      * @param {GetFuturesTradeDownloadLinkByIdRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetFuturesTradeDownloadLinkByIdResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#get-futures-trade-download-link-by-id Binance API Documentation}
      */
     getFuturesTradeDownloadLinkById(
         requestParameters: GetFuturesTradeDownloadLinkByIdRequest
@@ -557,16 +591,19 @@ export class RestAPI {
     /**
      * Get futures transaction history download link by Id
      *
-     * Download link expiration: 7 days
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Download link expiration: 7 days
      *
      * @summary Get Futures Transaction History Download Link by Id (USER_DATA)
      * @param {GetFuturesTransactionHistoryDownloadLinkByIdRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetFuturesTransactionHistoryDownloadLinkByIdResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#get-futures-transaction-history-download-link-by-id Binance API Documentation}
      */
     getFuturesTransactionHistoryDownloadLinkById(
         requestParameters: GetFuturesTransactionHistoryDownloadLinkByIdRequest
@@ -577,19 +614,22 @@ export class RestAPI {
     /**
      * Query income history
      *
-     * If neither `startTime` nor `endTime` is sent, the recent 7-day data will be returned.
-     * If `incomeType ` is not sent, all kinds of flow will be returned
-     * "trandId" is unique in the same incomeType for a user
-     * Income history only contains data for the last three months
+     * Weight(IP): 30
      *
-     * Weight: 30
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `incomeType ` is not sent, all kinds of flow will be returned
+     * - If `startTime` and `endTime` are not sent, the recent 7-day data will be returned.
+     * - `trandId` is unique in the same `incomeType` for a user.
+     * - Income history only contains data for the last three months.
      *
      * @summary Get Income History (USER_DATA)
      * @param {GetIncomeHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetIncomeHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Income-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#get-income-history Binance API Documentation}
      */
     getIncomeHistory(
         requestParameters: GetIncomeHistoryRequest = {}
@@ -600,14 +640,16 @@ export class RestAPI {
     /**
      * Query user notional and leverage bracket on speicfic symbol
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Notional and Leverage Brackets (USER_DATA)
      * @param {NotionalAndLeverageBracketsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<NotionalAndLeverageBracketsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Notional-and-Leverage-Brackets Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#notional-and-leverage-brackets Binance API Documentation}
      */
     notionalAndLeverageBrackets(
         requestParameters: NotionalAndLeverageBracketsRequest = {}
@@ -618,14 +660,16 @@ export class RestAPI {
     /**
      * Query User Rate Limit
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query User Rate Limit (USER_DATA)
      * @param {QueryUserRateLimitRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryUserRateLimitResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Query-Rate-Limit Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#query-user-rate-limit Binance API Documentation}
      */
     queryUserRateLimit(
         requestParameters: QueryUserRateLimitRequest = {}
@@ -636,14 +680,16 @@ export class RestAPI {
     /**
      * Get current account symbol configuration.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Symbol Configuration(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Symbol Configuration (USER_DATA)
      * @param {SymbolConfigurationRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SymbolConfigurationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Symbol-Config Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#symbol-configuration Binance API Documentation}
      */
     symbolConfiguration(
         requestParameters: SymbolConfigurationRequest = {}
@@ -654,14 +700,16 @@ export class RestAPI {
     /**
      * Change user's BNB Fee Discount (Fee Discount On or Fee Discount Off ) on ***EVERY symbol***
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
      *
      * @summary Toggle BNB Burn On Futures Trade (TRADE)
      * @param {ToggleBnbBurnOnFuturesTradeRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<ToggleBnbBurnOnFuturesTradeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Toggle-BNB-Burn-On-Futures-Trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#toggle-bnb-burn-on-futures-trade Binance API Documentation}
      */
     toggleBnbBurnOnFuturesTrade(
         requestParameters: ToggleBnbBurnOnFuturesTradeRequest
@@ -672,14 +720,16 @@ export class RestAPI {
     /**
      * Get User Commission Rate
      *
-     * Weight: 20
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
      *
      * @summary User Commission Rate (USER_DATA)
      * @param {UserCommissionRateRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<UserCommissionRateResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/User-Commission-Rate Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#user-commission-rate Binance API Documentation}
      */
     userCommissionRate(
         requestParameters: UserCommissionRateRequest
@@ -690,14 +740,16 @@ export class RestAPI {
     /**
      * Accept the offered quote by quote ID.
      *
-     * Weight: 200(IP)
+     * Weight(IP): 200
+     *
+     * Security Type: USER_DATA
      *
      * @summary Accept the offered quote (USER_DATA)
      * @param {AcceptTheOfferedQuoteRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AcceptTheOfferedQuoteResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/convert/Accept-Quote Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/convert#accept-the-offered-quote Binance API Documentation}
      */
     acceptTheOfferedQuote(
         requestParameters: AcceptTheOfferedQuoteRequest
@@ -708,18 +760,19 @@ export class RestAPI {
     /**
      * Query for all convertible token pairs and the tokens’ respective upper/lower limits
      *
-     * User needs to supply either or both of the input parameter
-     * If not defined for both fromAsset and toAsset, only partial token pairs will be returned
-     * Asset BNFCR is only available to convert for MICA region users.
+     * Weight(IP): 20
      *
-     * Weight: 20(IP)
+     * Notes:
+     * - User needs to supply either or both of the input parameter
+     * - If not defined for both fromAsset and toAsset, only partial token pairs will be returned
+     * - Asset BNFCR is only available to convert for MICA region users.
      *
      * @summary List All Convert Pairs
      * @param {ListAllConvertPairsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<ListAllConvertPairsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/convert/ Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/convert#list-all-convert-pairs Binance API Documentation}
      */
     listAllConvertPairs(
         requestParameters: ListAllConvertPairsRequest = {}
@@ -730,14 +783,16 @@ export class RestAPI {
     /**
      * Query order status by order ID.
      *
-     * Weight: 50(IP)
+     * Weight(IP): 50
      *
-     * @summary Order status(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Order status (USER_DATA)
      * @param {OrderStatusRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<OrderStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/convert/Order-Status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/convert#order-status Binance API Documentation}
      */
     orderStatus(
         requestParameters: OrderStatusRequest = {}
@@ -748,17 +803,21 @@ export class RestAPI {
     /**
      * Request a quote for the requested token pairs
      *
-     * Either fromAmount or toAmount should be sent
-     * `quoteId` will be returned only if you have enough funds to convert
-     *
      * Weight: 50(IP)
+     * 360/hour, 500/day
      *
-     * @summary Send Quote Request(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Either fromAmount or toAmount should be sent
+     * - `quoteId` will be returned only if you have enough funds to convert
+     *
+     * @summary Send Quote Request (USER_DATA)
      * @param {SendQuoteRequestRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SendQuoteRequestResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/convert/Send-quote-request Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/convert#send-quote-request Binance API Documentation}
      */
     sendQuoteRequest(
         requestParameters: SendQuoteRequestRequest
@@ -768,17 +827,22 @@ export class RestAPI {
 
     /**
      * Query the symbol-level ADL risk rating.
-     * The ADL risk rating measures the likelihood of ADL during liquidation, and the rating takes into account the insurance fund balance, position concentration on the symbol, order book depth, price volatility, average leverage, unrealized PnL, and margin utilization at the symbol level.
+     *
+     * The ADL risk rating measures the likelihood of ADL during liquidation,
+     * and the rating takes into account the insurance fund balance, position
+     * concentration on the symbol, order book depth, price volatility, average
+     * leverage, unrealized PnL, and margin utilization at the symbol level.
+     *
      * The rating can be high, medium and low, and is updated every 30 minutes.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
      * @summary ADL Risk
      * @param {AdlRiskRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AdlRiskResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/ADL-Risk Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#adl-risk Binance API Documentation}
      */
     adlRisk(requestParameters: AdlRiskRequest = {}): Promise<RestApiResponse<AdlRiskResponse>> {
         return this.marketDataApi.adlRisk(requestParameters);
@@ -787,14 +851,16 @@ export class RestAPI {
     /**
      * Asset index price.
      *
-     * Weight: 1 for a single symbol; 10 when the symbol parameter is omitted
+     * > **CM-UM Integration (Effective 2026-06-30):** Renamed from *Multi-Assets Mode Asset Index*. The response now additionally pushes COIN-M settlement-asset price index entries (e.g., `BTCUSD`, `ETHUSD`, `BNBUSD`). The endpoint path `/fapi/v1/assetIndex` is unchanged.
      *
-     * @summary Asset Index
+     * Weight: **1** for a single symbol; **10** when the symbol parameter is omitted
+     *
+     * @summary Multi-Assets Mode Asset Index
      * @param {AssetIndexRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AssetIndexResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Asset-Index Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#asset-index Binance API Documentation}
      */
     assetIndex(
         requestParameters: AssetIndexRequest = {}
@@ -805,17 +871,18 @@ export class RestAPI {
     /**
      * Query future basis
      *
-     * If startTime and endTime are not sent, the most recent data is returned.
-     * Only the data of the latest 30 days is available.
+     * Weight(IP): 0
      *
-     * Weight: 0
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent data is returned.
+     * - Only the data of the latest 30 days is available.
      *
      * @summary Basis
      * @param {BasisRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<BasisResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Basis Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#basis Binance API Documentation}
      */
     basis(requestParameters: BasisRequest): Promise<RestApiResponse<BasisResponse>> {
         return this.marketDataApi.basis(requestParameters);
@@ -824,13 +891,13 @@ export class RestAPI {
     /**
      * Test connectivity to the Rest API and get the current server time.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
      * @summary Check Server Time
      *
      * @returns {Promise<RestApiResponse<CheckServerTimeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Check-Server-Time Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#check-server-time Binance API Documentation}
      */
     checkServerTime(): Promise<RestApiResponse<CheckServerTimeResponse>> {
         return this.marketDataApi.checkServerTime();
@@ -839,16 +906,17 @@ export class RestAPI {
     /**
      * Query composite index symbol information
      *
-     * Only for composite index symbols
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Notes:
+     * - Only for composite index symbols
      *
      * @summary Composite Index Symbol Information
      * @param {CompositeIndexSymbolInformationRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<CompositeIndexSymbolInformationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Composite-Index-Symbol-Information Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#composite-index-symbol-information Binance API Documentation}
      */
     compositeIndexSymbolInformation(
         requestParameters: CompositeIndexSymbolInformationRequest = {}
@@ -857,24 +925,28 @@ export class RestAPI {
     }
 
     /**
-     * Get compressed, aggregate market trades. Market trades that fill in 100ms with the same price and the same taking side will have the quantity aggregated.
+     * Get compressed, aggregate market trades. Market trades that fill in
+     * 100ms with the same price and the same taking side will have the
+     * quantity aggregated.
      *
+     * Retail Price Improvement(RPI) orders are aggregated and without special
+     * tags to be distinguished.
      *
-     * Retail Price Improvement(RPI) orders are aggregated and without special tags to be distinguished.
-     * support querying futures trade histories that are not older than 24 hours
-     * If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 1 hour.
-     * If `fromId`, `startTime`, and `endTime` are not sent, the most recent aggregate trades will be returned.
-     * Only market trades will be aggregated and returned, which means the insurance fund trades and ADL trades won't be aggregated.
-     * Sending both `startTime`/`endTime` and `fromId` might cause response timeout, please send either `fromId` or `startTime`/`endTime`
+     * Weight(IP): 20
      *
-     * Weight: 20
+     * Notes:
+     * - support querying futures trade histories that are not older than 24 hours
+     * - If both `startTime` and `endTime` are sent, time between `startTime` and `endTime` must be less than 1 hour.
+     * - If `fromId`, `startTime`, and `endTime` are not sent, the most recent aggregate trades will be returned.
+     * - Only market trades will be aggregated and returned, which means the insurance fund trades and ADL trades won't be aggregated.
+     * - Sending both `startTime`/`endTime` and `fromId` might cause response timeout, please send either `fromId` or `startTime`/`endTime`
      *
      * @summary Compressed/Aggregate Trades List
      * @param {CompressedAggregateTradesListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<CompressedAggregateTradesListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Compressed-Aggregate-Trades-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#compressed-aggregate-trades-list Binance API Documentation}
      */
     compressedAggregateTradesList(
         requestParameters: CompressedAggregateTradesListRequest
@@ -886,14 +958,8 @@ export class RestAPI {
      * Kline/candlestick bars for a specific contract type.
      * Klines are uniquely identified by their open time.
      *
-     * If startTime and endTime are not sent, the most recent klines are returned.
-     * Contract type:
-     * PERPETUAL
-     * CURRENT_QUARTER
-     * NEXT_QUARTER
-     * TRADIFI_PERPETUAL
+     * Weight: based on parameter `LIMIT`
      *
-     * Weight: based on parameter LIMIT
      * | LIMIT       | weight |
      * | ----------- | ------ |
      * | [1,100)     | 1      |
@@ -901,12 +967,15 @@ export class RestAPI {
      * | [500, 1000] | 5      |
      * | > 1000      | 10     |
      *
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent klines are returned.
+     *
      * @summary Continuous Contract Kline/Candlestick Data
      * @param {ContinuousContractKlineCandlestickDataRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<ContinuousContractKlineCandlestickDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#continuous-contract-kline-candlestick-data Binance API Documentation}
      */
     continuousContractKlineCandlestickData(
         requestParameters: ContinuousContractKlineCandlestickDataRequest
@@ -917,13 +986,13 @@ export class RestAPI {
     /**
      * Current exchange trading rules and symbol information
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
      * @summary Exchange Information
      *
      * @returns {Promise<RestApiResponse<ExchangeInformationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Exchange-Information Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#exchange-information Binance API Documentation}
      */
     exchangeInformation(): Promise<RestApiResponse<ExchangeInformationResponse>> {
         return this.marketDataApi.exchangeInformation();
@@ -932,19 +1001,19 @@ export class RestAPI {
     /**
      * Get Funding Rate History
      *
-     *
-     * If `startTime` and `endTime` are not sent, the most recent 200 records are returned.
-     * If the number of data between `startTime` and `endTime` is larger than `limit`, return as `startTime` + `limit`.
-     * In ascending order.
-     *
      * Weight: share 500/5min/IP rate limit with GET /fapi/v1/fundingInfo
+     *
+     * Notes:
+     * - If `startTime` and `endTime` are not sent, the most recent 200 records are returned.
+     * - If the number of data between `startTime` and `endTime` is larger than `limit`, return as `startTime` + `limit`.
+     * - In ascending order.
      *
      * @summary Get Funding Rate History
      * @param {GetFundingRateHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetFundingRateHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#get-funding-rate-history Binance API Documentation}
      */
     getFundingRateHistory(
         requestParameters: GetFundingRateHistoryRequest = {}
@@ -953,16 +1022,17 @@ export class RestAPI {
     }
 
     /**
-     * Query funding rate info for symbols that had FundingRateCap/ FundingRateFloor / fundingIntervalHours adjustment
+     * Query funding rate info for symbols that had FundingRateCap/FundingRateFloor / fundingIntervalHours adjustment
      *
-     * Weight: 0
-     * share 500/5min/IP rate limit with GET /fapi/v1/fundingRate
+     * Weight: **0**
+     *
+     * share 500/5min/IP rate limit with `GET /fapi/v1/fundingRate`
      *
      * @summary Get Funding Rate Info
      *
      * @returns {Promise<RestApiResponse<GetFundingRateInfoResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-Info Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#get-funding-rate-info Binance API Documentation}
      */
     getFundingRateInfo(): Promise<RestApiResponse<GetFundingRateInfoResponse>> {
         return this.marketDataApi.getFundingRateInfo();
@@ -972,9 +1042,8 @@ export class RestAPI {
      * Kline/candlestick bars for the index price of a pair.
      * Klines are uniquely identified by their open time.
      *
-     * If startTime and endTime are not sent, the most recent klines are returned.
+     * Weight: based on parameter `LIMIT`
      *
-     * Weight: based on parameter LIMIT
      * | LIMIT       | weight |
      * | ----------- | ------ |
      * | [1,100)     | 1      |
@@ -982,12 +1051,15 @@ export class RestAPI {
      * | [500, 1000] | 5      |
      * | > 1000      | 10     |
      *
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent klines are returned.
+     *
      * @summary Index Price Kline/Candlestick Data
      * @param {IndexPriceKlineCandlestickDataRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<IndexPriceKlineCandlestickDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Price-Kline-Candlestick-Data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#index-price-kline-candlestick-data Binance API Documentation}
      */
     indexPriceKlineCandlestickData(
         requestParameters: IndexPriceKlineCandlestickDataRequest
@@ -999,9 +1071,8 @@ export class RestAPI {
      * Kline/candlestick bars for a symbol.
      * Klines are uniquely identified by their open time.
      *
-     * If startTime and endTime are not sent, the most recent klines are returned.
+     * Weight: based on parameter `LIMIT`
      *
-     * Weight: based on parameter LIMIT
      * | LIMIT       | weight |
      * | ----------- | ------ |
      * | [1,100)     | 1      |
@@ -1009,12 +1080,15 @@ export class RestAPI {
      * | [500, 1000] | 5      |
      * | > 1000      | 10     |
      *
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent klines are returned.
+     *
      * @summary Kline/Candlestick Data
      * @param {KlineCandlestickDataRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<KlineCandlestickDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Kline-Candlestick-Data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#kline-candlestick-data Binance API Documentation}
      */
     klineCandlestickData(
         requestParameters: KlineCandlestickDataRequest
@@ -1025,18 +1099,19 @@ export class RestAPI {
     /**
      * Query symbol Long/Short Ratio
      *
-     * If startTime and endTime are not sent, the most recent data is returned.
-     * Only the data of the latest 30 days is available.
-     * IP rate limit 1000 requests/5min
+     * Weight(IP): 0
      *
-     * Weight: 0
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent data is returned.
+     * - Only the data of the latest 30 days is available.
+     * - IP rate limit 1000 requests/5min
      *
      * @summary Long/Short Ratio
      * @param {LongShortRatioRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<LongShortRatioResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Long-Short-Ratio Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#long-short-ratio Binance API Documentation}
      */
     longShortRatio(
         requestParameters: LongShortRatioRequest
@@ -1047,14 +1122,14 @@ export class RestAPI {
     /**
      * Mark Price and Funding Rate
      *
-     * Weight: 1 with symbol, 10 without symbol
+     * Weight: **1** with symbol, **10** without symbol
      *
      * @summary Mark Price
      * @param {MarkPriceRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<MarkPriceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#mark-price Binance API Documentation}
      */
     markPrice(
         requestParameters: MarkPriceRequest = {}
@@ -1066,9 +1141,8 @@ export class RestAPI {
      * Kline/candlestick bars for the mark price of a symbol.
      * Klines are uniquely identified by their open time.
      *
-     * If startTime and endTime are not sent, the most recent klines are returned.
+     * Weight: based on parameter `LIMIT`
      *
-     * Weight: based on parameter LIMIT
      * | LIMIT       | weight |
      * | ----------- | ------ |
      * | [1,100)     | 1      |
@@ -1076,12 +1150,15 @@ export class RestAPI {
      * | [500, 1000] | 5      |
      * | > 1000      | 10     |
      *
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent klines are returned.
+     *
      * @summary Mark Price Kline/Candlestick Data
      * @param {MarkPriceKlineCandlestickDataRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<MarkPriceKlineCandlestickDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price-Kline-Candlestick-Data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#mark-price-kline-candlestick-data Binance API Documentation}
      */
     markPriceKlineCandlestickData(
         requestParameters: MarkPriceKlineCandlestickDataRequest
@@ -1092,17 +1169,20 @@ export class RestAPI {
     /**
      * Get older market historical trades.
      *
-     * Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
-     * Only supports data from within the last one month
+     * Weight(IP): 20
      *
-     * Weight: 20
+     * Security Type: MARKET_DATA
+     *
+     * Notes:
+     * - Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
+     * - Only supports data from within the last one month
      *
      * @summary Old Trades Lookup (MARKET_DATA)
      * @param {OldTradesLookupRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<OldTradesLookupResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Old-Trades-Lookup Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#old-trades-lookup Binance API Documentation}
      */
     oldTradesLookup(
         requestParameters: OldTradesLookupRequest
@@ -1113,14 +1193,14 @@ export class RestAPI {
     /**
      * Get present open interest of a specific symbol.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
      * @summary Open Interest
      * @param {OpenInterestRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<OpenInterestResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#open-interest Binance API Documentation}
      */
     openInterest(
         requestParameters: OpenInterestRequest
@@ -1131,18 +1211,19 @@ export class RestAPI {
     /**
      * Open Interest Statistics
      *
-     * If startTime and endTime are not sent, the most recent data is returned.
-     * Only the data of the latest 1 month is available.
-     * IP rate limit 1000 requests/5min
+     * Weight(IP): 0
      *
-     * Weight: 0
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent data is returned.
+     * - Only the data of the latest 1 month is available.
+     * - IP rate limit 1000 requests/5min
      *
      * @summary Open Interest Statistics
      * @param {OpenInterestStatisticsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<OpenInterestStatisticsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest-Statistics Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#open-interest-statistics Binance API Documentation}
      */
     openInterestStatistics(
         requestParameters: OpenInterestStatisticsRequest
@@ -1153,9 +1234,11 @@ export class RestAPI {
     /**
      * Query symbol orderbook
      *
-     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+     * Retail Price Improvement(RPI) orders are not visible and excluded in the
+     * response message.
      *
      * Weight: Adjusted based on the limit:
+     *
      * | Limit         | Weight |
      * | ------------- | ------ |
      * | 5, 10, 20, 50 | 2      |
@@ -1168,7 +1251,7 @@ export class RestAPI {
      *
      * @returns {Promise<RestApiResponse<OrderBookResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#order-book Binance API Documentation}
      */
     orderBook(requestParameters: OrderBookRequest): Promise<RestApiResponse<OrderBookResponse>> {
         return this.marketDataApi.orderBook(requestParameters);
@@ -1177,10 +1260,8 @@ export class RestAPI {
     /**
      * Premium index kline bars of a symbol. Klines are uniquely identified by their open time.
      *
+     * Weight: based on parameter `LIMIT`
      *
-     * If startTime and endTime are not sent, the most recent klines are returned.
-     *
-     * Weight: based on parameter LIMIT
      * | LIMIT       | weight |
      * | ----------- | ------ |
      * | [1,100)     | 1      |
@@ -1188,12 +1269,15 @@ export class RestAPI {
      * | [500, 1000] | 5      |
      * | > 1000      | 10     |
      *
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent klines are returned.
+     *
      * @summary Premium index Kline Data
      * @param {PremiumIndexKlineDataRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<PremiumIndexKlineDataResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Premium-index-Kline-Data Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#premium-index-kline-data Binance API Documentation}
      */
     premiumIndexKlineData(
         requestParameters: PremiumIndexKlineDataRequest
@@ -1204,14 +1288,14 @@ export class RestAPI {
     /**
      * Latest price for a symbol or symbols.
      *
-     * Weight: 0
+     * Weight(IP): 0
      *
      * @summary Quarterly Contract Settlement Price
      * @param {QuarterlyContractSettlementPriceRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QuarterlyContractSettlementPriceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Delivery-Price Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#quarterly-contract-settlement-price Binance API Documentation}
      */
     quarterlyContractSettlementPrice(
         requestParameters: QuarterlyContractSettlementPriceRequest
@@ -1222,19 +1306,17 @@ export class RestAPI {
     /**
      * Query index price constituents
      *
-     *
      **Note**:
-     *
      * Prices from constituents of TradFi perps will be hiden and displayed as -1.
      *
-     * Weight: 2
+     * Weight(IP): 2
      *
      * @summary Query Index Price Constituents
      * @param {QueryIndexPriceConstituentsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryIndexPriceConstituentsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#query-index-price-constituents Binance API Documentation}
      */
     queryIndexPriceConstituents(
         requestParameters: QueryIndexPriceConstituentsRequest
@@ -1245,14 +1327,14 @@ export class RestAPI {
     /**
      * Query Insurance Fund Balance Snapshot
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
      * @summary Query Insurance Fund Balance Snapshot
      * @param {QueryInsuranceFundBalanceSnapshotRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryInsuranceFundBalanceSnapshotResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Query-Insurance-Fund-Balance-Snapshot Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#query-insurance-fund-balance-snapshot Binance API Documentation}
      */
     queryInsuranceFundBalanceSnapshot(
         requestParameters: QueryInsuranceFundBalanceSnapshotRequest = {}
@@ -1263,16 +1345,17 @@ export class RestAPI {
     /**
      * Get recent market trades
      *
-     * Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Notes:
+     * - Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
      *
      * @summary Recent Trades List
      * @param {RecentTradesListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<RecentTradesListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Recent-Trades-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#recent-trades-list Binance API Documentation}
      */
     recentTradesList(
         requestParameters: RecentTradesListRequest
@@ -1283,9 +1366,11 @@ export class RestAPI {
     /**
      * Query symbol orderbook with RPI orders
      *
-     * RPI(Retail Price Improvement) orders are included and aggreated in the response message. Crossed price levels are hidden and invisible.
+     * RPI(Retail Price Improvement) orders are included and aggreated in the
+     * response message. Crossed price levels are hidden and invisible.
      *
      * Weight: Adjusted based on the limit:
+     *
      * | Limit         | Weight |
      * | ------------- | ------ |
      * | 1000          | 20     |
@@ -1295,7 +1380,7 @@ export class RestAPI {
      *
      * @returns {Promise<RestApiResponse<RpiOrderBookResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book-RPI Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#rpi-order-book Binance API Documentation}
      */
     rpiOrderBook(
         requestParameters: RpiOrderBookRequest
@@ -1306,19 +1391,22 @@ export class RestAPI {
     /**
      * Best price/qty on the order book for a symbol or symbols.
      *
-     * Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
-     * If the symbol is not sent, bookTickers for all symbols will be returned in an array.
-     * The field `X-MBX-USED-WEIGHT-1M` in response header is not accurate from this endpoint, please ignore.
+     * Retail Price Improvement(RPI) orders are not visible and excluded in the
+     * response message.
      *
-     * Weight: 2 for a single symbol;
-     * 5 when the symbol parameter is omitted
+     * Weight: **2** for a single symbol;
+     **5** when the symbol parameter is omitted
+     *
+     * Notes:
+     * - If the symbol is not sent, bookTickers for all symbols will be returned in an array.
+     * - The field `X-MBX-USED-WEIGHT-1M` in response header is not accurate from this endpoint, please ignore.
      *
      * @summary Symbol Order Book Ticker
      * @param {SymbolOrderBookTickerRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SymbolOrderBookTickerResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#symbol-order-book-ticker Binance API Documentation}
      */
     symbolOrderBookTicker(
         requestParameters: SymbolOrderBookTickerRequest = {}
@@ -1329,17 +1417,18 @@ export class RestAPI {
     /**
      * Latest price for a symbol or symbols.
      *
-     * If the symbol is not sent, prices for all symbols will be returned in an array.
-     *
      * Weight: 1 for a single symbol;
      * 2 when the symbol parameter is omitted
+     *
+     * Notes:
+     * - If the symbol is not sent, prices for all symbols will be returned in an array.
      *
      * @summary Symbol Price Ticker
      * @param {SymbolPriceTickerRequest} requestParameters Request parameters.
      * @deprecated
      * @returns {Promise<RestApiResponse<SymbolPriceTickerResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#symbol-price-ticker Binance API Documentation}
      */
     symbolPriceTicker(
         requestParameters: SymbolPriceTickerRequest = {}
@@ -1350,18 +1439,19 @@ export class RestAPI {
     /**
      * Latest price for a symbol or symbols.
      *
-     * If the symbol is not sent, prices for all symbols will be returned in an array.
-     * The field `X-MBX-USED-WEIGHT-1M` in response header is not accurate from this endpoint, please ignore.
-     *
      * Weight: 1 for a single symbol;
      * 2 when the symbol parameter is omitted
+     *
+     * Notes:
+     * - If the symbol is not sent, prices for all symbols will be returned in an array.
+     * - The field `X-MBX-USED-WEIGHT-1M` in response header is not accurate from this endpoint, please ignore.
      *
      * @summary Symbol Price Ticker V2
      * @param {SymbolPriceTickerV2Request} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SymbolPriceTickerV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker-V2 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#symbol-price-ticker-v2 Binance API Documentation}
      */
     symbolPriceTickerV2(
         requestParameters: SymbolPriceTickerV2Request = {}
@@ -1372,18 +1462,19 @@ export class RestAPI {
     /**
      * Taker Buy/Sell Volume
      *
-     * If startTime and endTime are not sent, the most recent data is returned.
-     * Only the data of the latest 30 days is available.
-     * IP rate limit 1000 requests/5min
+     * Weight(IP): 0
      *
-     * Weight: 0
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent data is returned.
+     * - Only the data of the latest 30 days is available.
+     * - IP rate limit 1000 requests/5min
      *
      * @summary Taker Buy/Sell Volume
      * @param {TakerBuySellVolumeRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<TakerBuySellVolumeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Taker-BuySell-Volume Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#taker-buy-sell-volume Binance API Documentation}
      */
     takerBuySellVolume(
         requestParameters: TakerBuySellVolumeRequest
@@ -1394,13 +1485,13 @@ export class RestAPI {
     /**
      * Test connectivity to the Rest API.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
      * @summary Test Connectivity
      *
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Test-Connectivity Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#test-connectivity Binance API Documentation}
      */
     testConnectivity(): Promise<RestApiResponse<void>> {
         return this.marketDataApi.testConnectivity();
@@ -1410,17 +1501,18 @@ export class RestAPI {
      * 24 hour rolling window price change statistics.
      **Careful** when accessing this with no symbol.
      *
-     * If the symbol is not sent, tickers for all symbols will be returned in an array.
+     * Weight: **1** for a single symbol;
+     **40** when the symbol parameter is omitted
      *
-     * Weight: 1 for a single symbol;
-     * 40 when the symbol parameter is omitted
+     * Notes:
+     * - If the symbol is not sent, tickers for all symbols will be returned in an array.
      *
      * @summary 24hr Ticker Price Change Statistics
      * @param {Ticker24hrPriceChangeStatisticsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<Ticker24hrPriceChangeStatisticsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#ticker24hr-price-change-statistics Binance API Documentation}
      */
     ticker24hrPriceChangeStatistics(
         requestParameters: Ticker24hrPriceChangeStatisticsRequest = {}
@@ -1429,23 +1521,31 @@ export class RestAPI {
     }
 
     /**
-     * The proportion of net long and net short accounts to total accounts of the top 20% users with the highest margin balance. Each account is counted once only.
-     * Long Account % = Accounts of top traders with net long positions / Total accounts of top traders with open positions
-     * Short Account % = Accounts of top traders with net short positions / Total accounts of top traders with open positions
+     * The proportion of net long and net short accounts to total accounts of
+     * the top 20% users with the highest margin balance. Each account is
+     * counted once only.
+     *
+     * Long Account % = Accounts of top traders with net long positions / Total
+     * accounts of top traders with open positions
+     *
+     * Short Account % = Accounts of top traders with net short positions /
+     * Total accounts of top traders with open positions
+     *
      * Long/Short Ratio (Accounts) = Long Account % / Short Account %
      *
-     * If startTime and endTime are not sent, the most recent data is returned.
-     * Only the data of the latest 30 days is available.
-     * IP rate limit 1000 requests/5min
+     * Security Type: MARKET_DATA
      *
-     * Weight: 0
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent data is returned.
+     * - Only the data of the latest 30 days is available.
+     * - IP rate limit 1000 requests/5min
      *
-     * @summary Top Trader Long/Short Ratio (Accounts)
+     * @summary Top Trader Long/Short Account Ratio (MARKET_DATA)
      * @param {TopTraderLongShortRatioAccountsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<TopTraderLongShortRatioAccountsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Long-Short-Account-Ratio Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#top-trader-long-short-ratio-accounts Binance API Documentation}
      */
     topTraderLongShortRatioAccounts(
         requestParameters: TopTraderLongShortRatioAccountsRequest
@@ -1454,23 +1554,32 @@ export class RestAPI {
     }
 
     /**
-     * The proportion of net long and net short positions to total open positions of the top 20% users with the highest margin balance.
-     * Long Position % = Long positions of top traders / Total open positions of top traders
-     * Short Position % = Short positions of top traders / Total open positions of top traders
+     * The proportion of net long and net short positions to total open
+     * positions of the top 20% users with the highest margin balance.
+     *
+     * Long Position % = Long positions of top traders / Total open positions
+     * of top traders
+     *
+     * Short Position % = Short positions of top traders / Total open positions
+     * of top traders
+     *
      * Long/Short Ratio (Positions) = Long Position % / Short Position %
      *
-     * If startTime and endTime are not sent, the most recent data is returned.
-     * Only the data of the latest 30 days is available.
-     * IP rate limit 1000 requests/5min
+     * Weight(IP): 0
      *
-     * Weight: 0
+     * Security Type: MARKET_DATA
      *
-     * @summary Top Trader Long/Short Ratio (Positions)
+     * Notes:
+     * - If startTime and endTime are not sent, the most recent data is returned.
+     * - Only the data of the latest 30 days is available.
+     * - IP rate limit 1000 requests/5min
+     *
+     * @summary Top Trader Long/Short Position Ratio (MARKET_DATA)
      * @param {TopTraderLongShortRatioPositionsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<TopTraderLongShortRatioPositionsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Trader-Long-Short-Ratio Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#top-trader-long-short-ratio-positions Binance API Documentation}
      */
     topTraderLongShortRatioPositions(
         requestParameters: TopTraderLongShortRatioPositionsRequest
@@ -1486,13 +1595,13 @@ export class RestAPI {
      * - Commodity market: "REGULAR", "NO_TRADING".
      * - Korean equity market: "REGULAR", "NO_TRADING".
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
      * @summary Trading Schedule
      *
      * @returns {Promise<RestApiResponse<TradingScheduleResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Trading-Schedule Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#trading-schedule Binance API Documentation}
      */
     tradingSchedule(): Promise<RestApiResponse<TradingScheduleResponse>> {
         return this.marketDataApi.tradingSchedule();
@@ -1501,17 +1610,19 @@ export class RestAPI {
     /**
      * Get Classic Portfolio Margin current account information.
      *
+     * Weight(IP): 5
      *
-     * maxWithdrawAmount is for asset transfer out to the spot wallet.
+     * Security Type: USER_DATA
      *
-     * Weight: 5
+     * Notes:
+     * - maxWithdrawAmount is for asset transfer out to the spot wallet.
      *
      * @summary Classic Portfolio Margin Account Information (USER_DATA)
      * @param {ClassicPortfolioMarginAccountInformationRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<ClassicPortfolioMarginAccountInformationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/portfolio-margin-endpoints/Classic-Portfolio-Margin-Account-Information Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/portfolio-margin-endpoints#classic-portfolio-margin-account-information Binance API Documentation}
      */
     classicPortfolioMarginAccountInformation(
         requestParameters: ClassicPortfolioMarginAccountInformationRequest
@@ -1524,19 +1635,22 @@ export class RestAPI {
     /**
      * Get trades for a specific account and symbol.
      *
-     * If `startTime` and `endTime` are both not sent, then the last 7 days' data will be returned.
-     * The time between `startTime` and `endTime` cannot be longer than 7 days.
-     * The parameter `fromId` cannot be sent with `startTime` or `endTime`.
-     * Only support querying trade in the past 6 months
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `startTime` and `endTime` are both not sent, then the last 7 days' data will be returned.
+     * - The time between `startTime` and `endTime` cannot be longer than 7 days.
+     * - The parameter `fromId` cannot be sent with `startTime` or `endTime`.
+     * - Only support querying trade in the past 6 months
      *
      * @summary Account Trade List (USER_DATA)
      * @param {AccountTradeListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AccountTradeListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Account-Trade-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#account-trade-list Binance API Documentation}
      */
     accountTradeList(
         requestParameters: AccountTradeListRequest
@@ -1547,21 +1661,24 @@ export class RestAPI {
     /**
      * Get all account orders; active, canceled, or filled.
      *
-     * These orders will not be found:
-     * order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
-     * order create time + 90 days < current time
+     * - These orders will not be found:
+     * - order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
+     * - order create time + 90 days < current time
      *
-     * If `orderId` is set, it will get orders >= that `orderId`. Otherwise most recent orders are returned.
-     * The query time period must be less then 7 days( default as the recent 7 days).
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `orderId` is set, it will get orders >= that `orderId`. Otherwise most recent orders are returned.
+     * - The query time period must be less then 7 days( default as the recent 7 days).
      *
      * @summary All Orders (USER_DATA)
      * @param {AllOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AllOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/All-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#all-orders Binance API Documentation}
      */
     allOrders(requestParameters: AllOrdersRequest): Promise<RestApiResponse<AllOrdersResponse>> {
         return this.tradeApi.allOrders(requestParameters);
@@ -1569,23 +1686,31 @@ export class RestAPI {
 
     /**
      * Cancel all open orders of the specified symbol at the end of the specified countdown.
-     * The endpoint should be called repeatedly as heartbeats so that the existing countdown time can be canceled and replaced by a new one.
+     *
+     * The endpoint should be called repeatedly as heartbeats so that the existing countdown time can be canceled and
+     * replaced by a new one.
      *
      * Example usage:
+     *
      * Call this endpoint at 30s intervals with an countdownTime of 120000 (120s).
-     * If this endpoint is not called within 120 seconds, all your orders of the specified symbol will be automatically canceled.
+     * If this endpoint is not called within 120 seconds, all your orders of the specified symbol will be automatically
+     * canceled.
      * If this endpoint is called with an countdownTime of 0, the countdown timer will be stopped.
      *
-     * The system will check all countdowns **approximately every 10 milliseconds**, so please note that sufficient redundancy should be considered when using this function. We do not recommend setting the countdown time to be too precise or too small.
+     * The system will check all countdowns **approximately every 10 milliseconds**, so please note that sufficient
+     * redundancy should be considered when using this function. We do not recommend setting the countdown time to be
+     * too precise or too small.
      *
-     * Weight: 10
+     * Weight(IP): 10
+     *
+     * Security Type: TRADE
      *
      * @summary Auto-Cancel All Open Orders (TRADE)
      * @param {AutoCancelAllOpenOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<AutoCancelAllOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Auto-Cancel-All-Open-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#auto-cancel-all-open-orders Binance API Documentation}
      */
     autoCancelAllOpenOrders(
         requestParameters: AutoCancelAllOpenOrdersRequest
@@ -1596,16 +1721,19 @@ export class RestAPI {
     /**
      * Cancel an active algo (conditional) order, including TP/SL (Take Profit / Stop Loss) and trailing stop orders on USD-M Futures.
      *
-     * Either `algoId` or `clientAlgoId` must be sent.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - Either `algoId` or `clientAlgoId` must be sent.
      *
      * @summary Cancel Algo Order (TRADE)
      * @param {CancelAlgoOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<CancelAlgoOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Algo-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#cancel-algo-order Binance API Documentation}
      */
     cancelAlgoOrder(
         requestParameters: CancelAlgoOrderRequest = {}
@@ -1616,14 +1744,16 @@ export class RestAPI {
     /**
      * Cancel all open algo (conditional) orders on a symbol, including TP/SL (Take Profit / Stop Loss) and trailing stop orders on USD-M Futures.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
      *
      * @summary Cancel All Algo Open Orders (TRADE)
      * @param {CancelAllAlgoOpenOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<CancelAllAlgoOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-All-Algo-Open-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#cancel-all-algo-open-orders Binance API Documentation}
      */
     cancelAllAlgoOpenOrders(
         requestParameters: CancelAllAlgoOpenOrdersRequest
@@ -1634,14 +1764,16 @@ export class RestAPI {
     /**
      * Cancel All Open Orders
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
      *
      * @summary Cancel All Open Orders (TRADE)
      * @param {CancelAllOpenOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<CancelAllOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-All-Open-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#cancel-all-open-orders Binance API Documentation}
      */
     cancelAllOpenOrders(
         requestParameters: CancelAllOpenOrdersRequest
@@ -1652,16 +1784,19 @@ export class RestAPI {
     /**
      * Cancel Multiple Orders
      *
-     * Either `orderIdList` or `origClientOrderIdList ` must be sent.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - Either `orderIdList` or `origClientOrderIdList ` must be sent.
      *
      * @summary Cancel Multiple Orders (TRADE)
      * @param {CancelMultipleOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<CancelMultipleOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Multiple-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#cancel-multiple-orders Binance API Documentation}
      */
     cancelMultipleOrders(
         requestParameters: CancelMultipleOrdersRequest
@@ -1672,16 +1807,19 @@ export class RestAPI {
     /**
      * Cancel an active order.
      *
-     * Either `orderId` or `origClientOrderId` must be sent.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent.
      *
      * @summary Cancel Order (TRADE)
      * @param {CancelOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<CancelOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#cancel-order Binance API Documentation}
      */
     cancelOrder(
         requestParameters: CancelOrderRequest
@@ -1692,14 +1830,16 @@ export class RestAPI {
     /**
      * Change user's initial leverage of specific symbol market.
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Change Initial Leverage(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Change Initial Leverage (TRADE)
      * @param {ChangeInitialLeverageRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<ChangeInitialLeverageResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Initial-Leverage Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#change-initial-leverage Binance API Documentation}
      */
     changeInitialLeverage(
         requestParameters: ChangeInitialLeverageRequest
@@ -1710,14 +1850,16 @@ export class RestAPI {
     /**
      * Change symbol level margin type
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Change Margin Type(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Change Margin Type (TRADE)
      * @param {ChangeMarginTypeRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<ChangeMarginTypeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Margin-Type Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#change-margin-type Binance API Documentation}
      */
     changeMarginType(
         requestParameters: ChangeMarginTypeRequest
@@ -1728,14 +1870,16 @@ export class RestAPI {
     /**
      * Change user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on ***Every symbol***
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
      *
      * @summary Change Multi-Assets Mode (TRADE)
      * @param {ChangeMultiAssetsModeRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<ChangeMultiAssetsModeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Multi-Assets-Mode Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#change-multi-assets-mode Binance API Documentation}
      */
     changeMultiAssetsMode(
         requestParameters: ChangeMultiAssetsModeRequest
@@ -1750,14 +1894,16 @@ export class RestAPI {
      * - `-4067` (open orders exist)
      * - `-4068` (open position exists)
      *
-     * Weight: 1
+     * Weight(IP): 1
      *
-     * @summary Change Position Mode(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Change Position Mode (TRADE)
      * @param {ChangePositionModeRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<ChangePositionModeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Position-Mode Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#change-position-mode Binance API Documentation}
      */
     changePositionMode(
         requestParameters: ChangePositionModeRequest
@@ -1768,17 +1914,21 @@ export class RestAPI {
     /**
      * Get all open algo (conditional) orders on a symbol, including TP/SL (Take Profit / Stop Loss) and trailing stop orders on USD-M Futures.
      *
-     * If the symbol is not sent, orders for all symbols will be returned in an array.
+     * Weight: **1** for a single symbol; **40** when the symbol parameter is omitted
      *
-     * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
-     * Careful when accessing this with no symbol.
+     **Careful** when accessing this with no symbol.
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If the symbol is not sent, orders for all symbols will be returned in an array.
      *
      * @summary Current All Algo Open Orders (USER_DATA)
      * @param {CurrentAllAlgoOpenOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<CurrentAllAlgoOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Current-All-Algo-Open-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#current-all-algo-open-orders Binance API Documentation}
      */
     currentAllAlgoOpenOrders(
         requestParameters: CurrentAllAlgoOpenOrdersRequest = {}
@@ -1789,17 +1939,21 @@ export class RestAPI {
     /**
      * Get all open orders on a symbol.
      *
-     * If the symbol is not sent, orders for all symbols will be returned in an array.
+     * Weight: **1** for a single symbol; **40** when the symbol parameter is omitted
      *
-     * Weight: 1 for a single symbol; 40 when the symbol parameter is omitted
-     * Careful when accessing this with no symbol.
+     **Careful** when accessing this with no symbol.
+     *
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If the symbol is not sent, orders for all symbols will be returned in an array.
      *
      * @summary Current All Open Orders (USER_DATA)
      * @param {CurrentAllOpenOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<CurrentAllOpenOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Current-All-Open-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#current-all-open-orders Binance API Documentation}
      */
     currentAllOpenOrders(
         requestParameters: CurrentAllOpenOrdersRequest = {}
@@ -1810,35 +1964,42 @@ export class RestAPI {
     /**
      * Sign TradFi-Perps agreement contract
      *
-     * Weight: 0
+     * Weight(IP): 50
      *
-     * @summary Futures TradFi Perps Contract(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Futures TradFi Perps Contract (USER_DATA)
      * @param {FuturesTradfiPerpsContractRequest} requestParameters Request parameters.
      *
-     * @returns {Promise<RestApiResponse<void>>}
+     * @returns {Promise<RestApiResponse<FuturesTradfiPerpsContractResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Futures-TradFi-Perps-Contract Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#futures-tradfi-perps-contract Binance API Documentation}
      */
     futuresTradfiPerpsContract(
         requestParameters: FuturesTradfiPerpsContractRequest = {}
-    ): Promise<RestApiResponse<void>> {
+    ): Promise<RestApiResponse<FuturesTradfiPerpsContractResponse>> {
         return this.tradeApi.futuresTradfiPerpsContract(requestParameters);
     }
 
     /**
      * Get order modification history
      *
-     * Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
-     * Order modify history longer than 3 month is not avaliable
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent, and the
+     * `orderId` will prevail if both are sent.
+     *
+     * - Order modify history longer than 3 month is not avaliable
      *
      * @summary Get Order Modify History (USER_DATA)
      * @param {GetOrderModifyHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetOrderModifyHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Order-Modify-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#get-order-modify-history Binance API Documentation}
      */
     getOrderModifyHistory(
         requestParameters: GetOrderModifyHistoryRequest
@@ -1849,17 +2010,20 @@ export class RestAPI {
     /**
      * Get Position Margin Change History
      *
-     * Support querying future histories that are not older than 30 days
-     * The time between `startTime` and `endTime`can't be more than 30 days
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - Support querying future histories that are not older than 30 days
+     * - The time between `startTime` and `endTime`can't be more than 30 days
      *
      * @summary Get Position Margin Change History (TRADE)
      * @param {GetPositionMarginChangeHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetPositionMarginChangeHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Position-Margin-Change-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#get-position-margin-change-history Binance API Documentation}
      */
     getPositionMarginChangeHistory(
         requestParameters: GetPositionMarginChangeHistoryRequest
@@ -1870,17 +2034,19 @@ export class RestAPI {
     /**
      * Modify Isolated Position Margin
      *
+     * Weight(IP): 1
      *
-     * Only for isolated symbol
+     * Security Type: TRADE
      *
-     * Weight: 1
+     * Notes:
+     * - Only for isolated symbol
      *
-     * @summary Modify Isolated Position Margin(TRADE)
+     * @summary Modify Isolated Position Margin (TRADE)
      * @param {ModifyIsolatedPositionMarginRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<ModifyIsolatedPositionMarginResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#modify-isolated-position-margin Binance API Documentation}
      */
     modifyIsolatedPositionMargin(
         requestParameters: ModifyIsolatedPositionMarginRequest
@@ -1891,21 +2057,24 @@ export class RestAPI {
     /**
      * Modify Multiple Orders (TRADE)
      *
-     * Parameter rules are same with `Modify Order`
-     * Batch modify orders are processed concurrently, and the order of matching is not guaranteed.
-     * The order of returned contents for batch modify orders is the same as the order of the order list.
-     * One order can only be modfied for less than 10000 times
-     *
      * Weight: 5 on 10s order rate limit(X-MBX-ORDER-COUNT-10S);
      * 1 on 1min order rate limit(X-MBX-ORDER-COUNT-1M);
      * 5 on IP rate limit(x-mbx-used-weight-1m);
      *
-     * @summary Modify Multiple Orders(TRADE)
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - Parameter rules are same with `Modify Order`
+     * - Batch modify orders are processed concurrently, and the order of matching is not guaranteed.
+     * - The order of returned contents for batch modify orders is the same as the order of the order list.
+     * - One order can only be modfied for less than 10000 times
+     *
+     * @summary Modify Multiple Orders (TRADE)
      * @param {ModifyMultipleOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<ModifyMultipleOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Multiple-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#modify-multiple-orders Binance API Documentation}
      */
     modifyMultipleOrders(
         requestParameters: ModifyMultipleOrdersRequest
@@ -1916,24 +2085,27 @@ export class RestAPI {
     /**
      * Order modify function, currently only LIMIT order modification is supported, modified orders will be reordered in the match queue
      *
-     * Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
-     * Both `quantity` and `price` must be sent, which is different from dapi modify order endpoint.
-     * When the new `quantity` or `price` doesn't satisfy PRICE_FILTER / PERCENT_FILTER / LOT_SIZE, amendment will be rejected and the order will stay as it is.
-     * However the order will be cancelled by the amendment in the following situations:
-     * when the order is in partially filled status and the new `quantity` <= `executedQty`
-     * When the order is `GTX` and the new price will cause it to be executed immediately
-     * One order can only be modfied for less than 10000 times
-     *
      * Weight: 1 on 10s order rate limit(X-MBX-ORDER-COUNT-10S);
      * 1 on 1min order rate limit(X-MBX-ORDER-COUNT-1M);
      * 0 on IP rate limit(x-mbx-used-weight-1m)
+     *
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent, and the `orderId` will prevail if both are sent.
+     * - Both `quantity` and `price` must be sent, which is different from dapi modify order endpoint.
+     * - When the new `quantity` or `price` doesn't satisfy PRICE_FILTER / PERCENT_FILTER / LOT_SIZE, amendment will be rejected and the order will stay as it is.
+     * - However the order will be cancelled by the amendment in the following situations:
+     * - when the order is in partially filled status and the new `quantity` <= `executedQty`
+     * - When the order is `GTX` and the new price will cause it to be executed immediately
+     * - One order can only be modfied for less than 10000 times
      *
      * @summary Modify Order (TRADE)
      * @param {ModifyOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<ModifyOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#modify-order Binance API Documentation}
      */
     modifyOrder(
         requestParameters: ModifyOrderRequest
@@ -1944,46 +2116,45 @@ export class RestAPI {
     /**
      * Send in a new algo (conditional) order. Use this endpoint to place **TP/SL (Take Profit / Stop Loss)** and trailing stop orders on USD-M Futures. Supported order types under `algoType=CONDITIONAL` are `STOP_MARKET`, `TAKE_PROFIT_MARKET`, `STOP`, `TAKE_PROFIT`, and `TRAILING_STOP_MARKET`.
      *
-     * Algo order with type `STOP`,  parameter `timeInForce` can be sent ( default `GTC`).
-     * Algo order with type `TAKE_PROFIT`,  parameter `timeInForce` can be sent ( default `GTC`).
-     * Condition orders will be triggered when:
+     * Weight: 1 on 10s order rate limit(X-MBX-ORDER-COUNT-10S);
+     * 1 on 1min order rate limit(X-MBX-ORDER-COUNT-1M);
+     * 0 on IP rate limit(x-mbx-used-weight-1m)
      *
-     * If parameter`priceProtect`is sent as true:
-     * when price reaches the `triggerPrice` ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
-     * "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
+     * Security Type: TRADE
      *
-     * `STOP`, `STOP_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
-     * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `triggerPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
-     * `TRAILING_STOP_MARKET`:
-     * BUY: the lowest price after order placed <= `activatePrice`, and the latest price >= the lowest price * (1 + `callbackRate`)
-     * SELL: the highest price after order placed >= `activatePrice`, and the latest price <= the highest price * (1 - `callbackRate`)
+     * Notes:
+     * - Algo order with type `STOP`, parameter `timeInForce` can be sent (default `GTC`).
+     * - Algo order with type `TAKE_PROFIT`, parameter `timeInForce` can be sent ( default `GTC`).
+     * - Condition orders will be triggered when:
+     * - If parameter`priceProtect`is sent as true:
+     * - when price reaches the `triggerPrice` ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
+     * - "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
+     * - `STOP`, `STOP_MARKET`:
+     * - BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
+     * - SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE")
+     * - `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
+     * - BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE")
+     * - SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `triggerPrice`
+     * - `TRAILING_STOP_MARKET`:
+     * - BUY: the lowest price after order placed = the lowest price * (1 + `callbackRate`)
+     * - SELL: the highest price after order placed >= `activatePrice`, and the latest price
+     * - For `TRAILING_STOP_MARKET`, if you got such error code. > `{"code": -2021, "msg": "Order would immediately trigger."}` > means that the parameters you send do not meet the following requirements:
+     * - BUY: `activatePrice` should be smaller than latest price.
+     * - SELL: `activatePrice` should be larger than latest price.
+     * - `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`:
+     * - Follow the same rules for condition orders.
+     * - If triggered，**close all** current long position( if `SELL`) or current short position( if `BUY`).
+     * - Cannot be used with `quantity` paremeter
+     * - Cannot be used with `reduceOnly` parameter
+     * - In Hedge Mode,cannot be used with `BUY` orders in `LONG` position side. and cannot be used with `SELL` orders in `SHORT` position side
+     * - `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
      *
-     * For `TRAILING_STOP_MARKET`, if you got such error code.
-     * ``{"code": -2021, "msg": "Order would immediately trigger."}``
-     * means that the parameters you send do not meet the following requirements:
-     * BUY: `activatePrice` should be smaller than latest price.
-     * SELL: `activatePrice` should be larger than latest price.
-     *
-     * `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`:
-     * Follow the same rules for condition orders.
-     * If triggered，**close all** current long position( if `SELL`) or current short position( if `BUY`).
-     * Cannot be used with `quantity` paremeter
-     * Cannot be used with `reduceOnly` parameter
-     * In Hedge Mode,cannot be used with `BUY` orders in `LONG` position side. and cannot be used with `SELL` orders in `SHORT` position side
-     * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
-     *
-     * Weight: 0 on IP rate limit(x-mbx-used-weight-1m)
-     *
-     * @summary New Algo Order(TRADE)
+     * @summary New Algo Order (TRADE)
      * @param {NewAlgoOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<NewAlgoOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/New-Algo-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#new-algo-order Binance API Documentation}
      */
     newAlgoOrder(
         requestParameters: NewAlgoOrderRequest
@@ -1994,23 +2165,32 @@ export class RestAPI {
     /**
      * Send in a new order.
      *
-     * If `newOrderRespType ` is sent as `RESULT` :
-     * `MARKET` order: the final FILLED result of the order will be return directly.
-     * `LIMIT` order with special `timeInForce`: the final status result of the order(FILLED or EXPIRED) will be returned directly.
-     *
-     * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
-     * In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
-     *
      * Weight: 1 on 10s order rate limit(X-MBX-ORDER-COUNT-10S);
      * 1 on 1min order rate limit(X-MBX-ORDER-COUNT-1M);
      * 0 on IP rate limit(x-mbx-used-weight-1m)
      *
-     * @summary New Order(TRADE)
+     * Security Type: TRADE
+     *
+     * Notes:
+     * Additional mandatory parameters based on `type`:
+     *
+     * | Type | Additional mandatory parameters |
+     * |------|----------------------------------|
+     * | `LIMIT` | `timeInForce`, `quantity`, `price` |
+     * | `MARKET` | `quantity` |
+     *
+     * - If `newOrderRespType` is sent as `RESULT`:
+     * - `MARKET` order: the final FILLED result of the order will be returned directly.
+     * - `LIMIT` order with special `timeInForce`: the final status result of the order (FILLED or EXPIRED) will be returned directly.
+     * - `selfTradePreventionMode` is only effective when `timeInForce` is set to `IOC`, `GTC`, or `GTD`.
+     * - In extreme market conditions, `timeInForce` `GTD` order auto-cancel time might be delayed compared to `goodTillDate`.
+     *
+     * @summary New Order (TRADE)
      * @param {NewOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<NewOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/New-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#new-order Binance API Documentation}
      */
     newOrder(requestParameters: NewOrderRequest): Promise<RestApiResponse<NewOrderResponse>> {
         return this.tradeApi.newOrder(requestParameters);
@@ -2019,20 +2199,23 @@ export class RestAPI {
     /**
      * Place Multiple Orders
      *
-     * Paremeter rules are same with `New Order`
-     * Batch orders are processed concurrently, and the order of matching is not guaranteed.
-     * The order of returned contents for batch orders is the same as the order of the order list.
-     *
      * Weight: 5 on 10s order rate limit(X-MBX-ORDER-COUNT-10S);
      * 1 on 1min order rate limit(X-MBX-ORDER-COUNT-1M);
      * 5 on IP rate limit(x-mbx-used-weight-1m);
      *
-     * @summary Place Multiple Orders(TRADE)
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - Paremeter rules are same with `New Order`
+     * - Batch orders are processed concurrently, and the order of matching is not guaranteed.
+     * - The order of returned contents for batch orders is the same as the order of the order list.
+     *
+     * @summary Place Multiple Orders (TRADE)
      * @param {PlaceMultipleOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<PlaceMultipleOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Place-Multiple-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#place-multiple-orders Binance API Documentation}
      */
     placeMultipleOrders(
         requestParameters: PlaceMultipleOrdersRequest
@@ -2050,14 +2233,16 @@ export class RestAPI {
      * "HEDGE" as a sign will be returned instead of "BOTH";
      * A same value caculated on unrealized pnls on long and short sides' positions will be shown for "LONG" and "SHORT" when there are positions in both of long and short sides.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Position ADL Quantile Estimation(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Position ADL Quantile Estimation (USER_DATA)
      * @param {PositionAdlQuantileEstimationRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<PositionAdlQuantileEstimationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#position-adl-quantile-estimation Binance API Documentation}
      */
     positionAdlQuantileEstimation(
         requestParameters: PositionAdlQuantileEstimationRequest = {}
@@ -2068,16 +2253,19 @@ export class RestAPI {
     /**
      * Get current position information.
      *
-     * Please use with user data stream `ACCOUNT_UPDATE` to meet your timeliness and accuracy needs.
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Please use with user data stream `ACCOUNT_UPDATE` to meet your timeliness and accuracy needs.
      *
      * @summary Position Information V2 (USER_DATA)
      * @param {PositionInformationV2Request} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<PositionInformationV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V2 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#position-information-v2 Binance API Documentation}
      */
     positionInformationV2(
         requestParameters: PositionInformationV2Request = {}
@@ -2086,18 +2274,22 @@ export class RestAPI {
     }
 
     /**
-     * Get current position information(only symbol that has position or open orders will be returned).
+     * Get current position information(only symbol that has position or open
+     * orders will be returned).
      *
-     * Please use with user data stream `ACCOUNT_UPDATE` to meet your timeliness and accuracy needs.
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Please use with user data stream `ACCOUNT_UPDATE` to meet your timeliness and accuracy needs.
      *
      * @summary Position Information V3 (USER_DATA)
      * @param {PositionInformationV3Request} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<PositionInformationV3Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V3 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#position-information-v3 Binance API Documentation}
      */
     positionInformationV3(
         requestParameters: PositionInformationV3Request = {}
@@ -2112,17 +2304,20 @@ export class RestAPI {
      * order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
      * order create time + 90 days < current time
      *
-     * Either `algoId` or `clientAlgoId` must be sent.
-     * `algoId` is self-increment for each specific `symbol`
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Either `algoId` or `clientAlgoId` must be sent.
+     * - `algoId` is self-increment for each specific `symbol`
      *
      * @summary Query Algo Order (USER_DATA)
      * @param {QueryAlgoOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryAlgoOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Algo-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#query-algo-order Binance API Documentation}
      */
     queryAlgoOrder(
         requestParameters: QueryAlgoOrderRequest = {}
@@ -2137,17 +2332,20 @@ export class RestAPI {
      * order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
      * order create time + 90 days < current time
      *
-     * If `algoId` is set, it will get orders >= that `algoId`. Otherwise most recent orders are returned.
-     * The query time period must be less then 7 days( default as the recent 7 days).
+     * Weight(IP): 5
      *
-     * Weight: 5
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `algoId` is set, it will get orders >= that `algoId`. Otherwise most recent orders are returned.
+     * - The query time period must be less then 7 days( default as the recent 7 days).
      *
      * @summary Query All Algo Orders (USER_DATA)
      * @param {QueryAllAlgoOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryAllAlgoOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Query-All-Algo-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#query-all-algo-orders Binance API Documentation}
      */
     queryAllAlgoOrders(
         requestParameters: QueryAllAlgoOrdersRequest
@@ -2158,18 +2356,20 @@ export class RestAPI {
     /**
      * Query open order
      *
+     * Weight(IP): 1
      *
-     * Either`orderId` or `origClientOrderId` must be sent
-     * If the queried order has been filled or cancelled, the error message "Order does not exist" will be returned.
+     * Security Type: USER_DATA
      *
-     * Weight: 1
+     * Notes:
+     * - Either`orderId` or `origClientOrderId` must be sent
+     * - If the queried order has been filled or cancelled, the error message "Order does not exist" will be returned.
      *
      * @summary Query Current Open Order (USER_DATA)
      * @param {QueryCurrentOpenOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryCurrentOpenOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Current-Open-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#query-current-open-order Binance API Documentation}
      */
     queryCurrentOpenOrder(
         requestParameters: QueryCurrentOpenOrderRequest
@@ -2184,17 +2384,20 @@ export class RestAPI {
      * order status is `CANCELED` or `EXPIRED` **AND** order has NO filled trade **AND** created time + 3 days < current time
      * order create time + 90 days < current time
      *
-     * Either `orderId` or `origClientOrderId` must be sent.
-     * `orderId` is self-increment for each specific `symbol`
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Either `orderId` or `origClientOrderId` must be sent.
+     * - `orderId` is self-increment for each specific `symbol`
      *
      * @summary Query Order (USER_DATA)
      * @param {QueryOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#query-order Binance API Documentation}
      */
     queryOrder(requestParameters: QueryOrderRequest): Promise<RestApiResponse<QueryOrderResponse>> {
         return this.tradeApi.queryOrder(requestParameters);
@@ -2203,51 +2406,55 @@ export class RestAPI {
     /**
      * Testing order request, this order will not be submitted to matching engine
      *
-     * Order with type `STOP`,  parameter `timeInForce` can be sent ( default `GTC`).
-     * Order with type `TAKE_PROFIT`,  parameter `timeInForce` can be sent ( default `GTC`).
-     * Condition orders will be triggered when:
+     * Security Type: TRADE
      *
-     * If parameter`priceProtect`is sent as true:
-     * when price reaches the `stopPrice` ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
-     * "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
+     * Notes:
+     * Additional mandatory parameters based on `type`:
      *
-     * `STOP`, `STOP_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-     * `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
-     * BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") <= `stopPrice`
-     * SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
-     * `TRAILING_STOP_MARKET`:
-     * BUY: the lowest price after order placed `<= `activationPrice`, and the latest price >`= the lowest price * (1 + `callbackRate`)
-     * SELL: the highest price after order placed >= `activationPrice`, and the latest price <= the highest price * (1 - `callbackRate`)
+     * | Type                             | Additional mandatory parameters    |
+     * | -------------------------------- | ---------------------------------- |
+     * | `LIMIT`                          | `timeInForce`, `quantity`, `price` |
+     * | `MARKET`                         | `quantity`                         |
+     * | `STOP/TAKE_PROFIT`               | `quantity`,  `price`, `stopPrice`  |
+     * | `STOP_MARKET/TAKE_PROFIT_MARKET` | `stopPrice`                        |
+     * | `TRAILING_STOP_MARKET`           | `callbackRate`                     |
      *
-     * For `TRAILING_STOP_MARKET`, if you got such error code.
-     * ``{"code": -2021, "msg": "Order would immediately trigger."}``
-     * means that the parameters you send do not meet the following requirements:
-     * BUY: `activationPrice` should be smaller than latest price.
-     * SELL: `activationPrice` should be larger than latest price.
+     * - Order with type `STOP`, parameter `timeInForce` can be sent ( default `GTC`).
+     * - Order with type `TAKE_PROFIT`, parameter `timeInForce` can be sent (default `GTC`).
+     * - Condition orders will be triggered when:
+     * - If parameter`priceProtect`is sent as true:
+     * - when price reaches the `stopPrice` ，the difference rate between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the "triggerProtect" of the symbol
+     * - "triggerProtect" of a symbol can be got from `GET /fapi/v1/exchangeInfo`
+     * - `STOP`, `STOP_MARKET`:
+     * - BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
+     * - SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE")
+     * - `TAKE_PROFIT`, `TAKE_PROFIT_MARKET`:
+     * - BUY: latest price ("MARK_PRICE" or "CONTRACT_PRICE")
+     * - SELL: latest price ("MARK_PRICE" or "CONTRACT_PRICE") >= `stopPrice`
+     * - `TRAILING_STOP_MARKET`:
+     * - BUY: the lowest price after order placed ``= the lowest price * (1 + `callbackRate`)
+     * - SELL: the highest price after order placed >= `activationPrice`, and the latest price
+     * - For `TRAILING_STOP_MARKET`, if you got such error code. > `{"code": -2021, "msg": "Order would immediately trigger."}` > means that the parameters you send do not meet the following requirements:
+     * - BUY: `activationPrice` should be smaller than latest price.
+     * - SELL: `activationPrice` should be larger than latest price.
+     * - If `newOrderRespType ` is sent as `RESULT` :
+     * - `MARKET` order: the final FILLED result of the order will be return directly.
+     * - `LIMIT` order with special `timeInForce`: the final status result of the order(FILLED or EXPIRED) will be returned directly.
+     * - `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`:
+     * - Follow the same rules for condition orders.
+     * - If triggered，**close all** current long position( if `SELL`) or current short position( if `BUY`).
+     * - Cannot be used with `quantity` paremeter
+     * - Cannot be used with `reduceOnly` parameter
+     * - In Hedge Mode,cannot be used with `BUY` orders in `LONG` position side. and cannot be used with `SELL` orders in `SHORT` position side
+     * - `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
+     * - In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
      *
-     * If `newOrderRespType ` is sent as `RESULT` :
-     * `MARKET` order: the final FILLED result of the order will be return directly.
-     * `LIMIT` order with special `timeInForce`: the final status result of the order(FILLED or EXPIRED) will be returned directly.
-     *
-     * `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`=`true`:
-     * Follow the same rules for condition orders.
-     * If triggered，**close all** current long position( if `SELL`) or current short position( if `BUY`).
-     * Cannot be used with `quantity` paremeter
-     * Cannot be used with `reduceOnly` parameter
-     * In Hedge Mode,cannot be used with `BUY` orders in `LONG` position side. and cannot be used with `SELL` orders in `SHORT` position side
-     * `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC` or `GTC` or `GTD`.
-     * In extreme market conditions, timeInForce `GTD` order auto cancel time might be delayed comparing to `goodTillDate`
-     *
-     * Weight: 0
-     *
-     * @summary Test Order(TRADE)
+     * @summary Test Order (TRADE)
      * @param {TestOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<TestOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/New-Order-Test Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#test-order Binance API Documentation}
      */
     testOrder(requestParameters: TestOrderRequest): Promise<RestApiResponse<TestOrderResponse>> {
         return this.tradeApi.testOrder(requestParameters);
@@ -2256,18 +2463,20 @@ export class RestAPI {
     /**
      * Query user's Force Orders
      *
-     * If "autoCloseType" is not sent, orders with both of the types will be returned
-     * If "startTime" is not sent, data within 7 days before "endTime" can be queried
-     * Only support querying data in the past 90 days
+     * Weight: **20** with symbol, **50** without symbol
      *
-     * Weight: 20 with symbol, 50 without symbol
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If "autoCloseType" is not sent, orders with both of the types will be returned
+     * - If "startTime" is not sent, data within 7 days before "endTime" can be queried
      *
      * @summary User\'s Force Orders (USER_DATA)
      * @param {UsersForceOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<UsersForceOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Users-Force-Orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/trade#users-force-orders Binance API Documentation}
      */
     usersForceOrders(
         requestParameters: UsersForceOrdersRequest = {}
@@ -2278,43 +2487,54 @@ export class RestAPI {
     /**
      * Close out a user data stream.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_STREAM
      *
      * @summary Close User Data Stream (USER_STREAM)
      *
      * @returns {Promise<RestApiResponse<void>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/user-data-streams#close-user-data-stream Binance API Documentation}
      */
     closeUserDataStream(): Promise<RestApiResponse<void>> {
         return this.userDataStreamsApi.closeUserDataStream();
     }
 
     /**
-     * Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes. It's recommended to send a ping about every 60 minutes.
+     * Keepalive a user data stream to prevent a time out. User data streams
+     * will close after 60 minutes. It's recommended to send a ping about every
+     * 60 minutes.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_STREAM
      *
      * @summary Keepalive User Data Stream (USER_STREAM)
      *
      * @returns {Promise<RestApiResponse<KeepaliveUserDataStreamResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/user-data-streams#keepalive-user-data-stream Binance API Documentation}
      */
     keepaliveUserDataStream(): Promise<RestApiResponse<KeepaliveUserDataStreamResponse>> {
         return this.userDataStreamsApi.keepaliveUserDataStream();
     }
 
     /**
-     * Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent. If the account has an active `listenKey`, that `listenKey` will be returned and its validity will be extended for 60 minutes.
+     * Start a new user data stream. The stream will close after 60 minutes
+     * unless a keepalive is sent. If the account has an active `listenKey`,
+     * that `listenKey` will be returned and its validity will be extended for
+     * 60 minutes.
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_STREAM
      *
      * @summary Start User Data Stream (USER_STREAM)
      *
      * @returns {Promise<RestApiResponse<StartUserDataStreamResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/user-data-streams#start-user-data-stream Binance API Documentation}
      */
     startUserDataStream(): Promise<RestApiResponse<StartUserDataStreamResponse>> {
         return this.userDataStreamsApi.startUserDataStream();

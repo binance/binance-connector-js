@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket API
+ * Futures (USDⓈ-M) WebSocket API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -84,13 +84,9 @@ describe('MarketDataApi', () => {
                 JSONStringify({
                     id: '51e2affb-0aba-4821-ba75-f2625006eb43',
                     status: 200,
-                    result: {
-                        lastUpdateId: 1027024,
-                        E: 1589436922972,
-                        T: 1589436922959,
-                        bids: [['4.00000000', '431.00000000']],
-                        asks: [['4.00000200', '12.00000000']],
-                    },
+                    result: { lastUpdateId: 1027024, E: 1589436922972, T: 1589436922959 },
+                    bids: [['4.00000000', '431.00000000']],
+                    asks: [['4.00000200', '12.00000000']],
                     rateLimits: [
                         {
                             rateLimitType: 'REQUEST_WEIGHT',
@@ -105,7 +101,7 @@ describe('MarketDataApi', () => {
             mockResponse.id = randomString();
 
             const params: OrderBookRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             let resolveTest: (value: unknown) => void;
@@ -162,7 +158,7 @@ describe('MarketDataApi', () => {
             };
 
             const params: OrderBookRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             let resolveTest: (value: unknown) => void;
@@ -196,7 +192,7 @@ describe('MarketDataApi', () => {
             jest.useRealTimers();
 
             const params: OrderBookRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             let resolveTest: (value: unknown) => void;

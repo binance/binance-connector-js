@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket API
+ * Futures (USDⓈ-M) WebSocket API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -92,13 +92,13 @@ export interface QueryOrderResponseResult {
      */
     status?: string;
     /**
-     *
+     * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
      * @memberof QueryOrderResponseResult
      */
     stopPrice?: string;
     /**
-     *
+     * if Close-All
      * @type {boolean}
      * @memberof QueryOrderResponseResult
      */
@@ -110,7 +110,7 @@ export interface QueryOrderResponseResult {
      */
     symbol?: string;
     /**
-     *
+     * order time
      * @type {number | bigint}
      * @memberof QueryOrderResponseResult
      */
@@ -128,19 +128,19 @@ export interface QueryOrderResponseResult {
      */
     type?: string;
     /**
-     *
+     * activation price, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof QueryOrderResponseResult
      */
     activatePrice?: string;
     /**
-     *
+     * callback rate, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof QueryOrderResponseResult
      */
     priceRate?: string;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof QueryOrderResponseResult
      */
@@ -152,9 +152,27 @@ export interface QueryOrderResponseResult {
      */
     workingType?: string;
     /**
-     *
+     * if conditional order trigger is protected
      * @type {boolean}
      * @memberof QueryOrderResponseResult
      */
     priceProtect?: boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof QueryOrderResponseResult
+     */
+    priceMatch?: string;
+    /**
+     * Self-trade prevention mode
+     * @type {string}
+     * @memberof QueryOrderResponseResult
+     */
+    selfTradePreventionMode?: string;
+    /**
+     * Order good till date timestamp
+     * @type {number | bigint}
+     * @memberof QueryOrderResponseResult
+     */
+    goodTillDate?: number | bigint;
 }

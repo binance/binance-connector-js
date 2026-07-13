@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -51,9 +50,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get current account information. User in single-asset/ multi-assets mode will see different value, see comments in response section for detail.
          *
-         * Weight: 5
+         * Weight(IP): 5
          *
-         * @summary Account Information V2(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Account Information V2 (USER_DATA)
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -82,9 +83,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get current account information. User in single-asset/ multi-assets mode will see different value, see comments in response section for detail.
          *
-         * Weight: 5
+         * Weight(IP): 5
          *
-         * @summary Account Information V3(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Account Information V3 (USER_DATA)
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -111,9 +114,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             };
         },
         /**
-         * Query account balance info
+         * Query account balance information.
          *
-         * Weight: 5
+         * Weight(IP): 5
+         *
+         * Security Type: USER_DATA
          *
          * @summary Futures Account Balance V2 (USER_DATA)
          * @param {number | bigint} [recvWindow]
@@ -142,9 +147,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
             };
         },
         /**
-         * Query account balance info
+         * Query account balance information.
          *
-         * Weight: 5
+         * Weight(IP): 5
+         *
+         * Security Type: USER_DATA
          *
          * @summary Futures Account Balance V3 (USER_DATA)
          * @param {number | bigint} [recvWindow]
@@ -175,9 +182,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query account configuration
          *
-         * Weight: 5
+         * Weight(IP): 5
          *
-         * @summary Futures Account Configuration(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Futures Account Configuration (USER_DATA)
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -206,8 +215,10 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Futures trading quantitative rules indicators, for more information on this, please refer to the [Futures Trading Quantitative Rules](https://www.binance.com/en/support/faq/4f462ebe6ff445d4a170be7d9e897272)
          *
-         * Weight: - 1 for a single symbol
-         * - 10 when the symbol parameter is omitted
+         * Weight: - **1** for a single symbol
+         * - **10** when the symbol parameter is omitted
+         *
+         * Security Type: USER_DATA
          *
          * @summary Futures Trading Quantitative Rules Indicators (USER_DATA)
          * @param {string} [symbol]
@@ -245,7 +256,9 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get user's BNB Fee Discount (Fee Discount On or Fee Discount Off )
          *
-         * Weight: 30
+         * Weight(IP): 30
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get BNB Burn Status (USER_DATA)
          * @param {number | bigint} [recvWindow]
@@ -276,7 +289,9 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on ***Every symbol***
          *
-         * Weight: 30
+         * Weight(IP): 30
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get Current Multi-Assets Mode (USER_DATA)
          * @param {number | bigint} [recvWindow]
@@ -307,9 +322,11 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get user's position mode (Hedge Mode or One-way Mode ) on ***EVERY symbol***
          *
-         * Weight: 30
+         * Weight(IP): 30
          *
-         * @summary Get Current Position Mode(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Get Current Position Mode (USER_DATA)
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -338,10 +355,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get Download Id For Futures Order History
          *
-         * Request Limitation is 10 times per month, shared by front end download page and rest api
-         * The time between `startTime` and `endTime` can not be longer than 1 year
+         * Weight(IP): 1000
          *
-         * Weight: 1000
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Request Limitation is 10 times per month, shared by front end download page and rest api
+         * - The time between `startTime` and `endTime` can not be longer than 1 year
          *
          * @summary Get Download Id For Futures Order History (USER_DATA)
          * @param {number | bigint} startTime Timestamp in ms
@@ -389,10 +409,13 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get download id for futures trade history
          *
-         * Request Limitation is 5 times per month, shared by front end download page and rest api
-         * The time between `startTime` and `endTime` can not be longer than 1 year
+         * Weight(IP): 1000
          *
-         * Weight: 1000
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Request Limitation is 5 times per month, shared by front end download page and rest api
+         * - The time between `startTime` and `endTime` can not be longer than 1 year
          *
          * @summary Get Download Id For Futures Trade History (USER_DATA)
          * @param {number | bigint} startTime Timestamp in ms
@@ -440,12 +463,15 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get download id for futures transaction history
          *
-         * Request Limitation is 5 times per month, shared by front end download page and rest api
-         * The time between `startTime` and `endTime` can not be longer than 1 year
+         * Weight(IP): 1000
          *
-         * Weight: 1000
+         * Security Type: USER_DATA
          *
-         * @summary Get Download Id For Futures Transaction History(USER_DATA)
+         * Notes:
+         * - Request Limitation is 5 times per month, shared by front end download page and rest api
+         * - The time between `startTime` and `endTime` can not be longer than 1 year
+         *
+         * @summary Get Download Id For Futures Transaction History (USER_DATA)
          * @param {number | bigint} startTime Timestamp in ms
          * @param {number | bigint} endTime Timestamp in ms
          * @param {number | bigint} [recvWindow]
@@ -491,9 +517,12 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get futures order history download link by Id
          *
-         * Download link expiration: 7 days
+         * Weight(IP): 10
          *
-         * Weight: 10
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Download link expiration: 7 days
          *
          * @summary Get Futures Order History Download Link by Id (USER_DATA)
          * @param {string} downloadId get by download id api
@@ -534,11 +563,14 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get futures trade download link by Id
          *
-         * Download link expiration: 7 days
+         * Weight(IP): 10
          *
-         * Weight: 10
+         * Security Type: USER_DATA
          *
-         * @summary Get Futures Trade Download Link by Id(USER_DATA)
+         * Notes:
+         * - Download link expiration: 7 days
+         *
+         * @summary Get Futures Trade Download Link by Id (USER_DATA)
          * @param {string} downloadId get by download id api
          * @param {number | bigint} [recvWindow]
          *
@@ -577,9 +609,12 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get futures transaction history download link by Id
          *
-         * Download link expiration: 7 days
+         * Weight(IP): 10
          *
-         * Weight: 10
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Download link expiration: 7 days
          *
          * @summary Get Futures Transaction History Download Link by Id (USER_DATA)
          * @param {string} downloadId get by download id api
@@ -624,27 +659,30 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query income history
          *
-         * If neither `startTime` nor `endTime` is sent, the recent 7-day data will be returned.
-         * If `incomeType ` is not sent, all kinds of flow will be returned
-         * "trandId" is unique in the same incomeType for a user
-         * Income history only contains data for the last three months
+         * Weight(IP): 30
          *
-         * Weight: 30
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - If `incomeType ` is not sent, all kinds of flow will be returned
+         * - If `startTime` and `endTime` are not sent, the recent 7-day data will be returned.
+         * - `trandId` is unique in the same `incomeType` for a user.
+         * - Income history only contains data for the last three months.
          *
          * @summary Get Income History (USER_DATA)
-         * @param {string} [symbol]
-         * @param {string} [incomeType] TRANSFER, WELCOME_BONUS, REALIZED_PNL, FUNDING_FEE, COMMISSION, INSURANCE_CLEAR, REFERRAL_KICKBACK, COMMISSION_REBATE, API_REBATE, CONTEST_REWARD, CROSS_COLLATERAL_TRANSFER, OPTIONS_PREMIUM_FEE, OPTIONS_SETTLE_PROFIT, INTERNAL_TRANSFER, AUTO_EXCHANGE, DELIVERED_SETTELMENT, COIN_SWAP_DEPOSIT, COIN_SWAP_WITHDRAW, POSITION_LIMIT_INCREASE_FEE, STRATEGY_UMFUTURES_TRANSFER，FEE_RETURN，BFUSD_REWARD
-         * @param {number | bigint} [startTime]
-         * @param {number | bigint} [endTime]
-         * @param {number | bigint} [page]
-         * @param {number | bigint} [limit] Default 100; max 1000
+         * @param {string} [symbol] Trading symbol.
+         * @param {GetIncomeHistoryIncomeTypeEnum} [incomeType] Income type.
+         * @param {number | bigint} [startTime] Timestamp in milliseconds (inclusive start).
+         * @param {number | bigint} [endTime] Timestamp in milliseconds (inclusive end).
+         * @param {number | bigint} [page] Pagination page number.
+         * @param {number | bigint} [limit] Maximum number of records to return.
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getIncomeHistory: async (
             symbol?: string,
-            incomeType?: string,
+            incomeType?: GetIncomeHistoryIncomeTypeEnum,
             startTime?: number | bigint,
             endTime?: number | bigint,
             page?: number | bigint,
@@ -692,7 +730,9 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query user notional and leverage bracket on speicfic symbol
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Notional and Leverage Brackets (USER_DATA)
          * @param {string} [symbol]
@@ -730,7 +770,9 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query User Rate Limit
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: USER_DATA
          *
          * @summary Query User Rate Limit (USER_DATA)
          * @param {number | bigint} [recvWindow]
@@ -761,10 +803,12 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get current account symbol configuration.
          *
-         * Weight: 5
+         * Weight(IP): 5
          *
-         * @summary Symbol Configuration(USER_DATA)
-         * @param {string} [symbol]
+         * Security Type: USER_DATA
+         *
+         * @summary Symbol Configuration (USER_DATA)
+         * @param {string} [symbol] Symbol
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -799,7 +843,9 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Change user's BNB Fee Discount (Fee Discount On or Fee Discount Off ) on ***EVERY symbol***
          *
-         * Weight: 1
+         * Weight(IP): 1
+         *
+         * Security Type: TRADE
          *
          * @summary Toggle BNB Burn On Futures Trade (TRADE)
          * @param {string} feeBurn "true": Fee Discount On; "false": Fee Discount Off
@@ -840,10 +886,12 @@ const AccountApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Get User Commission Rate
          *
-         * Weight: 20
+         * Weight(IP): 20
+         *
+         * Security Type: USER_DATA
          *
          * @summary User Commission Rate (USER_DATA)
-         * @param {string} symbol
+         * @param {string} symbol Symbol
          * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
@@ -889,9 +937,11 @@ export interface AccountApiInterface {
     /**
      * Get current account information. User in single-asset/ multi-assets mode will see different value, see comments in response section for detail.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Account Information V2(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Account Information V2 (USER_DATA)
      * @param {AccountInformationV2Request} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -903,9 +953,11 @@ export interface AccountApiInterface {
     /**
      * Get current account information. User in single-asset/ multi-assets mode will see different value, see comments in response section for detail.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Account Information V3(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Account Information V3 (USER_DATA)
      * @param {AccountInformationV3Request} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -915,9 +967,11 @@ export interface AccountApiInterface {
         requestParameters?: AccountInformationV3Request
     ): Promise<RestApiResponse<AccountInformationV3Response>>;
     /**
-     * Query account balance info
+     * Query account balance information.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
      *
      * @summary Futures Account Balance V2 (USER_DATA)
      * @param {FuturesAccountBalanceV2Request} requestParameters Request parameters.
@@ -929,9 +983,11 @@ export interface AccountApiInterface {
         requestParameters?: FuturesAccountBalanceV2Request
     ): Promise<RestApiResponse<FuturesAccountBalanceV2Response>>;
     /**
-     * Query account balance info
+     * Query account balance information.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
      *
      * @summary Futures Account Balance V3 (USER_DATA)
      * @param {FuturesAccountBalanceV3Request} requestParameters Request parameters.
@@ -945,9 +1001,11 @@ export interface AccountApiInterface {
     /**
      * Query account configuration
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Futures Account Configuration(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Futures Account Configuration (USER_DATA)
      * @param {FuturesAccountConfigurationRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -959,8 +1017,10 @@ export interface AccountApiInterface {
     /**
      * Futures trading quantitative rules indicators, for more information on this, please refer to the [Futures Trading Quantitative Rules](https://www.binance.com/en/support/faq/4f462ebe6ff445d4a170be7d9e897272)
      *
-     * Weight: - 1 for a single symbol
-     * - 10 when the symbol parameter is omitted
+     * Weight: - **1** for a single symbol
+     * - **10** when the symbol parameter is omitted
+     *
+     * Security Type: USER_DATA
      *
      * @summary Futures Trading Quantitative Rules Indicators (USER_DATA)
      * @param {FuturesTradingQuantitativeRulesIndicatorsRequest} requestParameters Request parameters.
@@ -974,7 +1034,9 @@ export interface AccountApiInterface {
     /**
      * Get user's BNB Fee Discount (Fee Discount On or Fee Discount Off )
      *
-     * Weight: 30
+     * Weight(IP): 30
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get BNB Burn Status (USER_DATA)
      * @param {GetBnbBurnStatusRequest} requestParameters Request parameters.
@@ -988,7 +1050,9 @@ export interface AccountApiInterface {
     /**
      * Get user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on ***Every symbol***
      *
-     * Weight: 30
+     * Weight(IP): 30
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Current Multi-Assets Mode (USER_DATA)
      * @param {GetCurrentMultiAssetsModeRequest} requestParameters Request parameters.
@@ -1002,9 +1066,11 @@ export interface AccountApiInterface {
     /**
      * Get user's position mode (Hedge Mode or One-way Mode ) on ***EVERY symbol***
      *
-     * Weight: 30
+     * Weight(IP): 30
      *
-     * @summary Get Current Position Mode(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Current Position Mode (USER_DATA)
      * @param {GetCurrentPositionModeRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1016,10 +1082,13 @@ export interface AccountApiInterface {
     /**
      * Get Download Id For Futures Order History
      *
-     * Request Limitation is 10 times per month, shared by front end download page and rest api
-     * The time between `startTime` and `endTime` can not be longer than 1 year
+     * Weight(IP): 1000
      *
-     * Weight: 1000
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Request Limitation is 10 times per month, shared by front end download page and rest api
+     * - The time between `startTime` and `endTime` can not be longer than 1 year
      *
      * @summary Get Download Id For Futures Order History (USER_DATA)
      * @param {GetDownloadIdForFuturesOrderHistoryRequest} requestParameters Request parameters.
@@ -1033,10 +1102,13 @@ export interface AccountApiInterface {
     /**
      * Get download id for futures trade history
      *
-     * Request Limitation is 5 times per month, shared by front end download page and rest api
-     * The time between `startTime` and `endTime` can not be longer than 1 year
+     * Weight(IP): 1000
      *
-     * Weight: 1000
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Request Limitation is 5 times per month, shared by front end download page and rest api
+     * - The time between `startTime` and `endTime` can not be longer than 1 year
      *
      * @summary Get Download Id For Futures Trade History (USER_DATA)
      * @param {GetDownloadIdForFuturesTradeHistoryRequest} requestParameters Request parameters.
@@ -1050,12 +1122,15 @@ export interface AccountApiInterface {
     /**
      * Get download id for futures transaction history
      *
-     * Request Limitation is 5 times per month, shared by front end download page and rest api
-     * The time between `startTime` and `endTime` can not be longer than 1 year
+     * Weight(IP): 1000
      *
-     * Weight: 1000
+     * Security Type: USER_DATA
      *
-     * @summary Get Download Id For Futures Transaction History(USER_DATA)
+     * Notes:
+     * - Request Limitation is 5 times per month, shared by front end download page and rest api
+     * - The time between `startTime` and `endTime` can not be longer than 1 year
+     *
+     * @summary Get Download Id For Futures Transaction History (USER_DATA)
      * @param {GetDownloadIdForFuturesTransactionHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1067,9 +1142,12 @@ export interface AccountApiInterface {
     /**
      * Get futures order history download link by Id
      *
-     * Download link expiration: 7 days
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Download link expiration: 7 days
      *
      * @summary Get Futures Order History Download Link by Id (USER_DATA)
      * @param {GetFuturesOrderHistoryDownloadLinkByIdRequest} requestParameters Request parameters.
@@ -1083,11 +1161,14 @@ export interface AccountApiInterface {
     /**
      * Get futures trade download link by Id
      *
-     * Download link expiration: 7 days
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
      *
-     * @summary Get Futures Trade Download Link by Id(USER_DATA)
+     * Notes:
+     * - Download link expiration: 7 days
+     *
+     * @summary Get Futures Trade Download Link by Id (USER_DATA)
      * @param {GetFuturesTradeDownloadLinkByIdRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1099,9 +1180,12 @@ export interface AccountApiInterface {
     /**
      * Get futures transaction history download link by Id
      *
-     * Download link expiration: 7 days
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Download link expiration: 7 days
      *
      * @summary Get Futures Transaction History Download Link by Id (USER_DATA)
      * @param {GetFuturesTransactionHistoryDownloadLinkByIdRequest} requestParameters Request parameters.
@@ -1115,12 +1199,15 @@ export interface AccountApiInterface {
     /**
      * Query income history
      *
-     * If neither `startTime` nor `endTime` is sent, the recent 7-day data will be returned.
-     * If `incomeType ` is not sent, all kinds of flow will be returned
-     * "trandId" is unique in the same incomeType for a user
-     * Income history only contains data for the last three months
+     * Weight(IP): 30
      *
-     * Weight: 30
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `incomeType ` is not sent, all kinds of flow will be returned
+     * - If `startTime` and `endTime` are not sent, the recent 7-day data will be returned.
+     * - `trandId` is unique in the same `incomeType` for a user.
+     * - Income history only contains data for the last three months.
      *
      * @summary Get Income History (USER_DATA)
      * @param {GetIncomeHistoryRequest} requestParameters Request parameters.
@@ -1134,7 +1221,9 @@ export interface AccountApiInterface {
     /**
      * Query user notional and leverage bracket on speicfic symbol
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Notional and Leverage Brackets (USER_DATA)
      * @param {NotionalAndLeverageBracketsRequest} requestParameters Request parameters.
@@ -1148,7 +1237,9 @@ export interface AccountApiInterface {
     /**
      * Query User Rate Limit
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query User Rate Limit (USER_DATA)
      * @param {QueryUserRateLimitRequest} requestParameters Request parameters.
@@ -1162,9 +1253,11 @@ export interface AccountApiInterface {
     /**
      * Get current account symbol configuration.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Symbol Configuration(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Symbol Configuration (USER_DATA)
      * @param {SymbolConfigurationRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1176,7 +1269,9 @@ export interface AccountApiInterface {
     /**
      * Change user's BNB Fee Discount (Fee Discount On or Fee Discount Off ) on ***EVERY symbol***
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
      *
      * @summary Toggle BNB Burn On Futures Trade (TRADE)
      * @param {ToggleBnbBurnOnFuturesTradeRequest} requestParameters Request parameters.
@@ -1190,7 +1285,9 @@ export interface AccountApiInterface {
     /**
      * Get User Commission Rate
      *
-     * Weight: 20
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
      *
      * @summary User Commission Rate (USER_DATA)
      * @param {UserCommissionRateRequest} requestParameters Request parameters.
@@ -1474,42 +1571,42 @@ export interface GetFuturesTransactionHistoryDownloadLinkByIdRequest {
  */
 export interface GetIncomeHistoryRequest {
     /**
-     *
+     * Trading symbol.
      * @type {string}
      * @memberof AccountApiGetIncomeHistory
      */
     readonly symbol?: string;
 
     /**
-     * TRANSFER, WELCOME_BONUS, REALIZED_PNL, FUNDING_FEE, COMMISSION, INSURANCE_CLEAR, REFERRAL_KICKBACK, COMMISSION_REBATE, API_REBATE, CONTEST_REWARD, CROSS_COLLATERAL_TRANSFER, OPTIONS_PREMIUM_FEE, OPTIONS_SETTLE_PROFIT, INTERNAL_TRANSFER, AUTO_EXCHANGE, DELIVERED_SETTELMENT, COIN_SWAP_DEPOSIT, COIN_SWAP_WITHDRAW, POSITION_LIMIT_INCREASE_FEE, STRATEGY_UMFUTURES_TRANSFER，FEE_RETURN，BFUSD_REWARD
-     * @type {string}
+     * Income type.
+     * @type {'TRANSFER' | 'WELCOME_BONUS' | 'REALIZED_PNL' | 'FUNDING_FEE' | 'COMMISSION' | 'INSURANCE_CLEAR' | 'REFERRAL_KICKBACK' | 'COMMISSION_REBATE' | 'API_REBATE' | 'CONTEST_REWARD' | 'CROSS_COLLATERAL_TRANSFER' | 'OPTIONS_PREMIUM_FEE' | 'OPTIONS_SETTLE_PROFIT' | 'INTERNAL_TRANSFER' | 'AUTO_EXCHANGE' | 'DELIVERED_SETTELMENT' | 'COIN_SWAP_DEPOSIT' | 'COIN_SWAP_WITHDRAW' | 'POSITION_LIMIT_INCREASE_FEE' | 'STRATEGY_UMFUTURES_TRANSFER' | 'FEE_RETURN' | 'BFUSD_REWARD'}
      * @memberof AccountApiGetIncomeHistory
      */
-    readonly incomeType?: string;
+    readonly incomeType?: GetIncomeHistoryIncomeTypeEnum;
 
     /**
-     *
+     * Timestamp in milliseconds (inclusive start).
      * @type {number | bigint}
      * @memberof AccountApiGetIncomeHistory
      */
     readonly startTime?: number | bigint;
 
     /**
-     *
+     * Timestamp in milliseconds (inclusive end).
      * @type {number | bigint}
      * @memberof AccountApiGetIncomeHistory
      */
     readonly endTime?: number | bigint;
 
     /**
-     *
+     * Pagination page number.
      * @type {number | bigint}
      * @memberof AccountApiGetIncomeHistory
      */
     readonly page?: number | bigint;
 
     /**
-     * Default 100; max 1000
+     * Maximum number of records to return.
      * @type {number | bigint}
      * @memberof AccountApiGetIncomeHistory
      */
@@ -1562,7 +1659,7 @@ export interface QueryUserRateLimitRequest {
  */
 export interface SymbolConfigurationRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof AccountApiSymbolConfiguration
      */
@@ -1602,7 +1699,7 @@ export interface ToggleBnbBurnOnFuturesTradeRequest {
  */
 export interface UserCommissionRateRequest {
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof AccountApiUserCommissionRate
      */
@@ -1632,14 +1729,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get current account information. User in single-asset/ multi-assets mode will see different value, see comments in response section for detail.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Account Information V2(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Account Information V2 (USER_DATA)
      * @param {AccountInformationV2Request} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AccountInformationV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V2 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#account-information-v2 Binance API Documentation}
      */
     public async accountInformationV2(
         requestParameters: AccountInformationV2Request = {}
@@ -1662,14 +1761,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get current account information. User in single-asset/ multi-assets mode will see different value, see comments in response section for detail.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Account Information V3(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Account Information V3 (USER_DATA)
      * @param {AccountInformationV3Request} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AccountInformationV3Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V3 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#account-information-v3 Binance API Documentation}
      */
     public async accountInformationV3(
         requestParameters: AccountInformationV3Request = {}
@@ -1690,16 +1791,18 @@ export class AccountApi implements AccountApiInterface {
     }
 
     /**
-     * Query account balance info
+     * Query account balance information.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
      *
      * @summary Futures Account Balance V2 (USER_DATA)
      * @param {FuturesAccountBalanceV2Request} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<FuturesAccountBalanceV2Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V2 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#futures-account-balance-v2 Binance API Documentation}
      */
     public async futuresAccountBalanceV2(
         requestParameters: FuturesAccountBalanceV2Request = {}
@@ -1720,16 +1823,18 @@ export class AccountApi implements AccountApiInterface {
     }
 
     /**
-     * Query account balance info
+     * Query account balance information.
      *
-     * Weight: 5
+     * Weight(IP): 5
+     *
+     * Security Type: USER_DATA
      *
      * @summary Futures Account Balance V3 (USER_DATA)
      * @param {FuturesAccountBalanceV3Request} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<FuturesAccountBalanceV3Response>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V3 Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#futures-account-balance-v3 Binance API Documentation}
      */
     public async futuresAccountBalanceV3(
         requestParameters: FuturesAccountBalanceV3Request = {}
@@ -1752,14 +1857,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query account configuration
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Futures Account Configuration(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Futures Account Configuration (USER_DATA)
      * @param {FuturesAccountConfigurationRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<FuturesAccountConfigurationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Config Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#futures-account-configuration Binance API Documentation}
      */
     public async futuresAccountConfiguration(
         requestParameters: FuturesAccountConfigurationRequest = {}
@@ -1782,15 +1889,17 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Futures trading quantitative rules indicators, for more information on this, please refer to the [Futures Trading Quantitative Rules](https://www.binance.com/en/support/faq/4f462ebe6ff445d4a170be7d9e897272)
      *
-     * Weight: - 1 for a single symbol
-     * - 10 when the symbol parameter is omitted
+     * Weight: - **1** for a single symbol
+     * - **10** when the symbol parameter is omitted
+     *
+     * Security Type: USER_DATA
      *
      * @summary Futures Trading Quantitative Rules Indicators (USER_DATA)
      * @param {FuturesTradingQuantitativeRulesIndicatorsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<FuturesTradingQuantitativeRulesIndicatorsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Trading-Quantitative-Rules-Indicators Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#futures-trading-quantitative-rules-indicators Binance API Documentation}
      */
     public async futuresTradingQuantitativeRulesIndicators(
         requestParameters: FuturesTradingQuantitativeRulesIndicatorsRequest = {}
@@ -1815,14 +1924,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get user's BNB Fee Discount (Fee Discount On or Fee Discount Off )
      *
-     * Weight: 30
+     * Weight(IP): 30
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get BNB Burn Status (USER_DATA)
      * @param {GetBnbBurnStatusRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetBnbBurnStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-BNB-Burn-Status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#get-bnb-burn-status Binance API Documentation}
      */
     public async getBnbBurnStatus(
         requestParameters: GetBnbBurnStatusRequest = {}
@@ -1845,14 +1956,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on ***Every symbol***
      *
-     * Weight: 30
+     * Weight(IP): 30
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Current Multi-Assets Mode (USER_DATA)
      * @param {GetCurrentMultiAssetsModeRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetCurrentMultiAssetsModeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Multi-Assets-Mode Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#get-current-multi-assets-mode Binance API Documentation}
      */
     public async getCurrentMultiAssetsMode(
         requestParameters: GetCurrentMultiAssetsModeRequest = {}
@@ -1875,14 +1988,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get user's position mode (Hedge Mode or One-way Mode ) on ***EVERY symbol***
      *
-     * Weight: 30
+     * Weight(IP): 30
      *
-     * @summary Get Current Position Mode(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Current Position Mode (USER_DATA)
      * @param {GetCurrentPositionModeRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetCurrentPositionModeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Position-Mode Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#get-current-position-mode Binance API Documentation}
      */
     public async getCurrentPositionMode(
         requestParameters: GetCurrentPositionModeRequest = {}
@@ -1905,17 +2020,20 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get Download Id For Futures Order History
      *
-     * Request Limitation is 10 times per month, shared by front end download page and rest api
-     * The time between `startTime` and `endTime` can not be longer than 1 year
+     * Weight(IP): 1000
      *
-     * Weight: 1000
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Request Limitation is 10 times per month, shared by front end download page and rest api
+     * - The time between `startTime` and `endTime` can not be longer than 1 year
      *
      * @summary Get Download Id For Futures Order History (USER_DATA)
      * @param {GetDownloadIdForFuturesOrderHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetDownloadIdForFuturesOrderHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Order-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#get-download-id-for-futures-order-history Binance API Documentation}
      */
     public async getDownloadIdForFuturesOrderHistory(
         requestParameters: GetDownloadIdForFuturesOrderHistoryRequest
@@ -1941,17 +2059,20 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get download id for futures trade history
      *
-     * Request Limitation is 5 times per month, shared by front end download page and rest api
-     * The time between `startTime` and `endTime` can not be longer than 1 year
+     * Weight(IP): 1000
      *
-     * Weight: 1000
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Request Limitation is 5 times per month, shared by front end download page and rest api
+     * - The time between `startTime` and `endTime` can not be longer than 1 year
      *
      * @summary Get Download Id For Futures Trade History (USER_DATA)
      * @param {GetDownloadIdForFuturesTradeHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetDownloadIdForFuturesTradeHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#get-download-id-for-futures-trade-history Binance API Documentation}
      */
     public async getDownloadIdForFuturesTradeHistory(
         requestParameters: GetDownloadIdForFuturesTradeHistoryRequest
@@ -1977,17 +2098,20 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get download id for futures transaction history
      *
-     * Request Limitation is 5 times per month, shared by front end download page and rest api
-     * The time between `startTime` and `endTime` can not be longer than 1 year
+     * Weight(IP): 1000
      *
-     * Weight: 1000
+     * Security Type: USER_DATA
      *
-     * @summary Get Download Id For Futures Transaction History(USER_DATA)
+     * Notes:
+     * - Request Limitation is 5 times per month, shared by front end download page and rest api
+     * - The time between `startTime` and `endTime` can not be longer than 1 year
+     *
+     * @summary Get Download Id For Futures Transaction History (USER_DATA)
      * @param {GetDownloadIdForFuturesTransactionHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetDownloadIdForFuturesTransactionHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#get-download-id-for-futures-transaction-history Binance API Documentation}
      */
     public async getDownloadIdForFuturesTransactionHistory(
         requestParameters: GetDownloadIdForFuturesTransactionHistoryRequest
@@ -2013,16 +2137,19 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get futures order history download link by Id
      *
-     * Download link expiration: 7 days
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Download link expiration: 7 days
      *
      * @summary Get Futures Order History Download Link by Id (USER_DATA)
      * @param {GetFuturesOrderHistoryDownloadLinkByIdRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFuturesOrderHistoryDownloadLinkByIdResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#get-futures-order-history-download-link-by-id Binance API Documentation}
      */
     public async getFuturesOrderHistoryDownloadLinkById(
         requestParameters: GetFuturesOrderHistoryDownloadLinkByIdRequest
@@ -2047,16 +2174,19 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get futures trade download link by Id
      *
-     * Download link expiration: 7 days
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
      *
-     * @summary Get Futures Trade Download Link by Id(USER_DATA)
+     * Notes:
+     * - Download link expiration: 7 days
+     *
+     * @summary Get Futures Trade Download Link by Id (USER_DATA)
      * @param {GetFuturesTradeDownloadLinkByIdRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFuturesTradeDownloadLinkByIdResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#get-futures-trade-download-link-by-id Binance API Documentation}
      */
     public async getFuturesTradeDownloadLinkById(
         requestParameters: GetFuturesTradeDownloadLinkByIdRequest
@@ -2081,16 +2211,19 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get futures transaction history download link by Id
      *
-     * Download link expiration: 7 days
+     * Weight(IP): 10
      *
-     * Weight: 10
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Download link expiration: 7 days
      *
      * @summary Get Futures Transaction History Download Link by Id (USER_DATA)
      * @param {GetFuturesTransactionHistoryDownloadLinkByIdRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFuturesTransactionHistoryDownloadLinkByIdResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#get-futures-transaction-history-download-link-by-id Binance API Documentation}
      */
     public async getFuturesTransactionHistoryDownloadLinkById(
         requestParameters: GetFuturesTransactionHistoryDownloadLinkByIdRequest
@@ -2115,19 +2248,22 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query income history
      *
-     * If neither `startTime` nor `endTime` is sent, the recent 7-day data will be returned.
-     * If `incomeType ` is not sent, all kinds of flow will be returned
-     * "trandId" is unique in the same incomeType for a user
-     * Income history only contains data for the last three months
+     * Weight(IP): 30
      *
-     * Weight: 30
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - If `incomeType ` is not sent, all kinds of flow will be returned
+     * - If `startTime` and `endTime` are not sent, the recent 7-day data will be returned.
+     * - `trandId` is unique in the same `incomeType` for a user.
+     * - Income history only contains data for the last three months.
      *
      * @summary Get Income History (USER_DATA)
      * @param {GetIncomeHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetIncomeHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Income-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#get-income-history Binance API Documentation}
      */
     public async getIncomeHistory(
         requestParameters: GetIncomeHistoryRequest = {}
@@ -2156,14 +2292,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query user notional and leverage bracket on speicfic symbol
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Notional and Leverage Brackets (USER_DATA)
      * @param {NotionalAndLeverageBracketsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<NotionalAndLeverageBracketsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Notional-and-Leverage-Brackets Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#notional-and-leverage-brackets Binance API Documentation}
      */
     public async notionalAndLeverageBrackets(
         requestParameters: NotionalAndLeverageBracketsRequest = {}
@@ -2187,14 +2325,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Query User Rate Limit
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: USER_DATA
      *
      * @summary Query User Rate Limit (USER_DATA)
      * @param {QueryUserRateLimitRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryUserRateLimitResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Query-Rate-Limit Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#query-user-rate-limit Binance API Documentation}
      */
     public async queryUserRateLimit(
         requestParameters: QueryUserRateLimitRequest = {}
@@ -2217,14 +2357,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get current account symbol configuration.
      *
-     * Weight: 5
+     * Weight(IP): 5
      *
-     * @summary Symbol Configuration(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Symbol Configuration (USER_DATA)
      * @param {SymbolConfigurationRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SymbolConfigurationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Symbol-Config Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#symbol-configuration Binance API Documentation}
      */
     public async symbolConfiguration(
         requestParameters: SymbolConfigurationRequest = {}
@@ -2248,14 +2390,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Change user's BNB Fee Discount (Fee Discount On or Fee Discount Off ) on ***EVERY symbol***
      *
-     * Weight: 1
+     * Weight(IP): 1
+     *
+     * Security Type: TRADE
      *
      * @summary Toggle BNB Burn On Futures Trade (TRADE)
      * @param {ToggleBnbBurnOnFuturesTradeRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ToggleBnbBurnOnFuturesTradeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Toggle-BNB-Burn-On-Futures-Trade Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#toggle-bnb-burn-on-futures-trade Binance API Documentation}
      */
     public async toggleBnbBurnOnFuturesTrade(
         requestParameters: ToggleBnbBurnOnFuturesTradeRequest
@@ -2279,14 +2423,16 @@ export class AccountApi implements AccountApiInterface {
     /**
      * Get User Commission Rate
      *
-     * Weight: 20
+     * Weight(IP): 20
+     *
+     * Security Type: USER_DATA
      *
      * @summary User Commission Rate (USER_DATA)
      * @param {UserCommissionRateRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<UserCommissionRateResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof AccountApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/User-Commission-Rate Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/account#user-commission-rate Binance API Documentation}
      */
     public async userCommissionRate(
         requestParameters: UserCommissionRateRequest
@@ -2306,4 +2452,29 @@ export class AccountApi implements AccountApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum GetIncomeHistoryIncomeTypeEnum {
+    TRANSFER = 'TRANSFER',
+    WELCOME_BONUS = 'WELCOME_BONUS',
+    REALIZED_PNL = 'REALIZED_PNL',
+    FUNDING_FEE = 'FUNDING_FEE',
+    COMMISSION = 'COMMISSION',
+    INSURANCE_CLEAR = 'INSURANCE_CLEAR',
+    REFERRAL_KICKBACK = 'REFERRAL_KICKBACK',
+    COMMISSION_REBATE = 'COMMISSION_REBATE',
+    API_REBATE = 'API_REBATE',
+    CONTEST_REWARD = 'CONTEST_REWARD',
+    CROSS_COLLATERAL_TRANSFER = 'CROSS_COLLATERAL_TRANSFER',
+    OPTIONS_PREMIUM_FEE = 'OPTIONS_PREMIUM_FEE',
+    OPTIONS_SETTLE_PROFIT = 'OPTIONS_SETTLE_PROFIT',
+    INTERNAL_TRANSFER = 'INTERNAL_TRANSFER',
+    AUTO_EXCHANGE = 'AUTO_EXCHANGE',
+    DELIVERED_SETTELMENT = 'DELIVERED_SETTELMENT',
+    COIN_SWAP_DEPOSIT = 'COIN_SWAP_DEPOSIT',
+    COIN_SWAP_WITHDRAW = 'COIN_SWAP_WITHDRAW',
+    POSITION_LIMIT_INCREASE_FEE = 'POSITION_LIMIT_INCREASE_FEE',
+    STRATEGY_UMFUTURES_TRANSFER = 'STRATEGY_UMFUTURES_TRANSFER',
+    FEE_RETURN = 'FEE_RETURN',
+    BFUSD_REWARD = 'BFUSD_REWARD',
 }

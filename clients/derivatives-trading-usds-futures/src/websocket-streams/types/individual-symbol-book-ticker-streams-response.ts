@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,69 +20,69 @@
  */
 export interface IndividualSymbolBookTickerStreamsResponse {
     /**
-     *
+     * event type
      * @type {string}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     e?: string;
     /**
-     *
+     * order book updateId
      * @type {number | bigint}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     u?: number | bigint;
     /**
-     *
-     * @type {string}
-     * @memberof IndividualSymbolBookTickerStreamsResponse
-     */
-    s?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof IndividualSymbolBookTickerStreamsResponse
-     */
-    ps?: string;
-    /**
-     *
+     * event time
      * @type {number | bigint}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     E?: number | bigint;
     /**
-     *
+     * transaction time
      * @type {number | bigint}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     T?: number | bigint;
     /**
-     *
+     * symbol
+     * @type {string}
+     * @memberof IndividualSymbolBookTickerStreamsResponse
+     */
+    s?: string;
+    /**
+     * pair (After CM migration)
+     * @type {string}
+     * @memberof IndividualSymbolBookTickerStreamsResponse
+     */
+    ps?: string;
+    /**
+     * best bid price
      * @type {string}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     b?: string;
     /**
-     *
+     * best bid qty
      * @type {string}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     B?: string;
     /**
-     *
+     * best ask price
      * @type {string}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     a?: string;
     /**
-     *
+     * best ask qty
      * @type {string}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
     A?: string;
     /**
-     *
-     * @type {number | bigint}
+     * (After CM migration) Symbol type: 1 = UM, 2 = CM
+     * @type {number}
      * @memberof IndividualSymbolBookTickerStreamsResponse
      */
-    st?: number | bigint;
+    st?: number;
 }

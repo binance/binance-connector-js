@@ -3,9 +3,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -47,7 +47,7 @@ import type { GridUpdate } from './grid-update';
 import type { GridUpdateGu } from './grid-update-gu';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Listenkeyexpired } from './listenkeyexpired';
+import type { ListenKeyExpired } from './listen-key-expired';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { MarginCall } from './margin-call';
@@ -69,7 +69,6 @@ import type { TradeLite } from './trade-lite';
 
 /**
  * @type UserDataStreamEventsResponse
- * @export
  */
 export type UserDataStreamEventsResponse =
     | ({ e: 'ACCOUNT_CONFIG_UPDATE' } & AccountConfigUpdate)
@@ -81,4 +80,4 @@ export type UserDataStreamEventsResponse =
     | ({ e: 'ORDER_TRADE_UPDATE' } & OrderTradeUpdate)
     | ({ e: 'STRATEGY_UPDATE' } & StrategyUpdate)
     | ({ e: 'TRADE_LITE' } & TradeLite)
-    | ({ e: 'listenKeyExpired' } & Listenkeyexpired);
+    | ({ e: 'listenKeyExpired' } & ListenKeyExpired);

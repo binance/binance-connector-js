@@ -1,10 +1,9 @@
 /* tslint:disable */
-/* eslint-disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,13 +13,6 @@
  * Do not edit the class manually.
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { RpiDiffBookDepthStreamsResponseAItem } from './rpi-diff-book-depth-streams-response-aitem';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { RpiDiffBookDepthStreamsResponseBItem } from './rpi-diff-book-depth-streams-response-bitem';
-
 /**
  *
  * @export
@@ -28,69 +20,69 @@ import type { RpiDiffBookDepthStreamsResponseBItem } from './rpi-diff-book-depth
  */
 export interface RpiDiffBookDepthStreamsResponse {
     /**
-     *
+     * Event type
      * @type {string}
      * @memberof RpiDiffBookDepthStreamsResponse
      */
     e?: string;
     /**
-     *
+     * Event time
      * @type {number | bigint}
      * @memberof RpiDiffBookDepthStreamsResponse
      */
     E?: number | bigint;
     /**
-     *
+     * Transaction time
      * @type {number | bigint}
      * @memberof RpiDiffBookDepthStreamsResponse
      */
     T?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof RpiDiffBookDepthStreamsResponse
      */
     s?: string;
     /**
-     *
+     * First update ID in event
      * @type {number | bigint}
      * @memberof RpiDiffBookDepthStreamsResponse
      */
     U?: number | bigint;
     /**
-     *
+     * Final update ID in event
      * @type {number | bigint}
      * @memberof RpiDiffBookDepthStreamsResponse
      */
     u?: number | bigint;
     /**
-     *
+     * Final update Id in last stream(ie `u` in last stream)
      * @type {number | bigint}
      * @memberof RpiDiffBookDepthStreamsResponse
      */
     pu?: number | bigint;
     /**
-     *
-     * @type {Array<RpiDiffBookDepthStreamsResponseBItem>}
+     * Bids to be updated
+     * @type {Array<Array<string>>}
      * @memberof RpiDiffBookDepthStreamsResponse
      */
-    b?: Array<RpiDiffBookDepthStreamsResponseBItem>;
+    b?: Array<Array<string>>;
     /**
-     *
-     * @type {Array<RpiDiffBookDepthStreamsResponseAItem>}
+     * Asks to be updated
+     * @type {Array<Array<string>>}
      * @memberof RpiDiffBookDepthStreamsResponse
      */
-    a?: Array<RpiDiffBookDepthStreamsResponseAItem>;
+    a?: Array<Array<string>>;
     /**
-     *
+     * (After CM migration) Pair symbol
      * @type {string}
      * @memberof RpiDiffBookDepthStreamsResponse
      */
     ps?: string;
     /**
-     *
-     * @type {number | bigint}
+     * (After CM migration) Symbol type: 1 = UM, 2 = CM
+     * @type {number}
      * @memberof RpiDiffBookDepthStreamsResponse
      */
-    st?: number | bigint;
+    st?: number;
 }

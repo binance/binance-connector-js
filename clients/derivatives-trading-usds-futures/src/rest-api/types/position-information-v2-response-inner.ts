@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,19 +20,19 @@
  */
 export interface PositionInformationV2ResponseInner {
     /**
-     *
+     * Entry Price.
      * @type {string}
      * @memberof PositionInformationV2ResponseInner
      */
     entryPrice?: string;
     /**
-     *
+     * Break Even Price.
      * @type {string}
      * @memberof PositionInformationV2ResponseInner
      */
     breakEvenPrice?: string;
     /**
-     *
+     * Margin Type.
      * @type {string}
      * @memberof PositionInformationV2ResponseInner
      */
@@ -44,37 +44,37 @@ export interface PositionInformationV2ResponseInner {
      */
     isAutoAddMargin?: string;
     /**
-     *
+     * Isolated Margin.
      * @type {string}
      * @memberof PositionInformationV2ResponseInner
      */
     isolatedMargin?: string;
     /**
-     *
+     * Leverage.
      * @type {string}
      * @memberof PositionInformationV2ResponseInner
      */
     leverage?: string;
     /**
-     *
+     * Liquidation Price.
      * @type {string}
      * @memberof PositionInformationV2ResponseInner
      */
     liquidationPrice?: string;
     /**
-     *
+     * Mark Price.
      * @type {string}
      * @memberof PositionInformationV2ResponseInner
      */
     markPrice?: string;
     /**
-     *
+     * Max Notional Value.
      * @type {string}
      * @memberof PositionInformationV2ResponseInner
      */
     maxNotionalValue?: string;
     /**
-     *
+     * Position Amt.
      * @type {string}
      * @memberof PositionInformationV2ResponseInner
      */
@@ -92,25 +92,25 @@ export interface PositionInformationV2ResponseInner {
      */
     isolatedWallet?: string;
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof PositionInformationV2ResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Un Realized Profit.
      * @type {string}
      * @memberof PositionInformationV2ResponseInner
      */
     unRealizedProfit?: string;
     /**
-     *
+     * Position Side.
      * @type {string}
      * @memberof PositionInformationV2ResponseInner
      */
     positionSide?: string;
     /**
-     *
+     * Update Time.
      * @type {number | bigint}
      * @memberof PositionInformationV2ResponseInner
      */

@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -26,91 +26,91 @@ export interface Ticker24hrPriceChangeStatisticsResponse1 {
      */
     symbol?: string;
     /**
-     *
+     * Price Change.
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponse1
      */
     priceChange?: string;
     /**
-     *
+     * Price Change Percent.
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponse1
      */
     priceChangePercent?: string;
     /**
-     *
+     * Weighted Avg Price.
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponse1
      */
     weightedAvgPrice?: string;
     /**
-     *
+     * Last Price.
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponse1
      */
     lastPrice?: string;
     /**
-     *
+     * Last Qty.
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponse1
      */
     lastQty?: string;
     /**
-     *
+     * Open Price.
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponse1
      */
     openPrice?: string;
     /**
-     *
+     * High Price.
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponse1
      */
     highPrice?: string;
     /**
-     *
+     * Low Price.
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponse1
      */
     lowPrice?: string;
     /**
-     *
+     * Volume.
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponse1
      */
     volume?: string;
     /**
-     *
+     * Quote Volume.
      * @type {string}
      * @memberof Ticker24hrPriceChangeStatisticsResponse1
      */
     quoteVolume?: string;
     /**
-     *
+     * Open Time.
      * @type {number | bigint}
      * @memberof Ticker24hrPriceChangeStatisticsResponse1
      */
     openTime?: number | bigint;
     /**
-     *
+     * Close Time.
      * @type {number | bigint}
      * @memberof Ticker24hrPriceChangeStatisticsResponse1
      */
     closeTime?: number | bigint;
     /**
-     *
+     * First tradeId
      * @type {number | bigint}
      * @memberof Ticker24hrPriceChangeStatisticsResponse1
      */
     firstId?: number | bigint;
     /**
-     *
+     * Last tradeId
      * @type {number | bigint}
      * @memberof Ticker24hrPriceChangeStatisticsResponse1
      */
     lastId?: number | bigint;
     /**
-     *
+     * Trade count
      * @type {number | bigint}
      * @memberof Ticker24hrPriceChangeStatisticsResponse1
      */

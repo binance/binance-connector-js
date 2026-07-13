@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,97 +14,97 @@
  */
 
 /**
- *
+ * positions of all symbols in the market are returned
  * @export
  * @interface AccountInformationV2ResponsePositionsInner
  */
 export interface AccountInformationV2ResponsePositionsInner {
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof AccountInformationV2ResponsePositionsInner
      */
     symbol?: string;
     /**
-     *
+     * Initial margin requirement.
      * @type {string}
      * @memberof AccountInformationV2ResponsePositionsInner
      */
     initialMargin?: string;
     /**
-     *
+     * Maintenance margin requirement.
      * @type {string}
      * @memberof AccountInformationV2ResponsePositionsInner
      */
     maintMargin?: string;
     /**
-     *
+     * Unrealized profit.
      * @type {string}
      * @memberof AccountInformationV2ResponsePositionsInner
      */
     unrealizedProfit?: string;
     /**
-     *
+     * Initial margin required for positions.
      * @type {string}
      * @memberof AccountInformationV2ResponsePositionsInner
      */
     positionInitialMargin?: string;
     /**
-     *
+     * Initial margin required for open orders.
      * @type {string}
      * @memberof AccountInformationV2ResponsePositionsInner
      */
     openOrderInitialMargin?: string;
     /**
-     *
+     * Current initial leverage.
      * @type {string}
      * @memberof AccountInformationV2ResponsePositionsInner
      */
     leverage?: string;
     /**
-     *
+     * Whether the position uses isolated margin mode.
      * @type {boolean}
      * @memberof AccountInformationV2ResponsePositionsInner
      */
     isolated?: boolean;
     /**
-     *
+     * Average entry price.
      * @type {string}
      * @memberof AccountInformationV2ResponsePositionsInner
      */
     entryPrice?: string;
     /**
-     *
+     * Maximum available notional under current leverage.
      * @type {string}
      * @memberof AccountInformationV2ResponsePositionsInner
      */
     maxNotional?: string;
     /**
-     *
+     * Bid notional (ignore).
      * @type {string}
      * @memberof AccountInformationV2ResponsePositionsInner
      */
     bidNotional?: string;
     /**
-     *
+     * Ask notional (ignore).
      * @type {string}
      * @memberof AccountInformationV2ResponsePositionsInner
      */
     askNotional?: string;
     /**
-     *
+     * Position side.
      * @type {string}
      * @memberof AccountInformationV2ResponsePositionsInner
      */
     positionSide?: string;
     /**
-     *
+     * Position quantity.
      * @type {string}
      * @memberof AccountInformationV2ResponsePositionsInner
      */
     positionAmt?: string;
     /**
-     *
+     * Last update time in milliseconds.
      * @type {number | bigint}
      * @memberof AccountInformationV2ResponsePositionsInner
      */

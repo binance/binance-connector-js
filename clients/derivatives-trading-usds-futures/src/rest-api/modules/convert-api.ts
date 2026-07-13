@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -34,7 +33,9 @@ const ConvertApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Accept the offered quote by quote ID.
          *
-         * Weight: 200(IP)
+         * Weight(IP): 200
+         *
+         * Security Type: USER_DATA
          *
          * @summary Accept the offered quote (USER_DATA)
          * @param {string} quoteId
@@ -75,11 +76,12 @@ const ConvertApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query for all convertible token pairs and the tokens’ respective upper/lower limits
          *
-         * User needs to supply either or both of the input parameter
-         * If not defined for both fromAsset and toAsset, only partial token pairs will be returned
-         * Asset BNFCR is only available to convert for MICA region users.
+         * Weight(IP): 20
          *
-         * Weight: 20(IP)
+         * Notes:
+         * - User needs to supply either or both of the input parameter
+         * - If not defined for both fromAsset and toAsset, only partial token pairs will be returned
+         * - Asset BNFCR is only available to convert for MICA region users.
          *
          * @summary List All Convert Pairs
          * @param {string} [fromAsset] User spends coin
@@ -114,9 +116,11 @@ const ConvertApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Query order status by order ID.
          *
-         * Weight: 50(IP)
+         * Weight(IP): 50
          *
-         * @summary Order status(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Order status (USER_DATA)
          * @param {string} [orderId] Either orderId or quoteId is required
          * @param {string} [quoteId] Either orderId or quoteId is required
          *
@@ -149,12 +153,16 @@ const ConvertApiAxiosParamCreator = function (configuration: ConfigurationRestAP
         /**
          * Request a quote for the requested token pairs
          *
-         * Either fromAmount or toAmount should be sent
-         * `quoteId` will be returned only if you have enough funds to convert
-         *
          * Weight: 50(IP)
+         * 360/hour, 500/day
          *
-         * @summary Send Quote Request(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Either fromAmount or toAmount should be sent
+         * - `quoteId` will be returned only if you have enough funds to convert
+         *
+         * @summary Send Quote Request (USER_DATA)
          * @param {string} fromAsset
          * @param {string} toAsset
          * @param {number} [fromAmount] When specified, it is the amount you will be debited after the conversion
@@ -223,7 +231,9 @@ export interface ConvertApiInterface {
     /**
      * Accept the offered quote by quote ID.
      *
-     * Weight: 200(IP)
+     * Weight(IP): 200
+     *
+     * Security Type: USER_DATA
      *
      * @summary Accept the offered quote (USER_DATA)
      * @param {AcceptTheOfferedQuoteRequest} requestParameters Request parameters.
@@ -237,11 +247,12 @@ export interface ConvertApiInterface {
     /**
      * Query for all convertible token pairs and the tokens’ respective upper/lower limits
      *
-     * User needs to supply either or both of the input parameter
-     * If not defined for both fromAsset and toAsset, only partial token pairs will be returned
-     * Asset BNFCR is only available to convert for MICA region users.
+     * Weight(IP): 20
      *
-     * Weight: 20(IP)
+     * Notes:
+     * - User needs to supply either or both of the input parameter
+     * - If not defined for both fromAsset and toAsset, only partial token pairs will be returned
+     * - Asset BNFCR is only available to convert for MICA region users.
      *
      * @summary List All Convert Pairs
      * @param {ListAllConvertPairsRequest} requestParameters Request parameters.
@@ -255,9 +266,11 @@ export interface ConvertApiInterface {
     /**
      * Query order status by order ID.
      *
-     * Weight: 50(IP)
+     * Weight(IP): 50
      *
-     * @summary Order status(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Order status (USER_DATA)
      * @param {OrderStatusRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -269,12 +282,16 @@ export interface ConvertApiInterface {
     /**
      * Request a quote for the requested token pairs
      *
-     * Either fromAmount or toAmount should be sent
-     * `quoteId` will be returned only if you have enough funds to convert
-     *
      * Weight: 50(IP)
+     * 360/hour, 500/day
      *
-     * @summary Send Quote Request(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Either fromAmount or toAmount should be sent
+     * - `quoteId` will be returned only if you have enough funds to convert
+     *
+     * @summary Send Quote Request (USER_DATA)
      * @param {SendQuoteRequestRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -409,14 +426,16 @@ export class ConvertApi implements ConvertApiInterface {
     /**
      * Accept the offered quote by quote ID.
      *
-     * Weight: 200(IP)
+     * Weight(IP): 200
+     *
+     * Security Type: USER_DATA
      *
      * @summary Accept the offered quote (USER_DATA)
      * @param {AcceptTheOfferedQuoteRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<AcceptTheOfferedQuoteResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof ConvertApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/convert/Accept-Quote Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/convert#accept-the-offered-quote Binance API Documentation}
      */
     public async acceptTheOfferedQuote(
         requestParameters: AcceptTheOfferedQuoteRequest
@@ -440,18 +459,19 @@ export class ConvertApi implements ConvertApiInterface {
     /**
      * Query for all convertible token pairs and the tokens’ respective upper/lower limits
      *
-     * User needs to supply either or both of the input parameter
-     * If not defined for both fromAsset and toAsset, only partial token pairs will be returned
-     * Asset BNFCR is only available to convert for MICA region users.
+     * Weight(IP): 20
      *
-     * Weight: 20(IP)
+     * Notes:
+     * - User needs to supply either or both of the input parameter
+     * - If not defined for both fromAsset and toAsset, only partial token pairs will be returned
+     * - Asset BNFCR is only available to convert for MICA region users.
      *
      * @summary List All Convert Pairs
      * @param {ListAllConvertPairsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ListAllConvertPairsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof ConvertApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/convert/ Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/convert#list-all-convert-pairs Binance API Documentation}
      */
     public async listAllConvertPairs(
         requestParameters: ListAllConvertPairsRequest = {}
@@ -475,14 +495,16 @@ export class ConvertApi implements ConvertApiInterface {
     /**
      * Query order status by order ID.
      *
-     * Weight: 50(IP)
+     * Weight(IP): 50
      *
-     * @summary Order status(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Order status (USER_DATA)
      * @param {OrderStatusRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<OrderStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof ConvertApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/convert/Order-Status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/convert#order-status Binance API Documentation}
      */
     public async orderStatus(
         requestParameters: OrderStatusRequest = {}
@@ -506,17 +528,21 @@ export class ConvertApi implements ConvertApiInterface {
     /**
      * Request a quote for the requested token pairs
      *
-     * Either fromAmount or toAmount should be sent
-     * `quoteId` will be returned only if you have enough funds to convert
-     *
      * Weight: 50(IP)
+     * 360/hour, 500/day
      *
-     * @summary Send Quote Request(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Either fromAmount or toAmount should be sent
+     * - `quoteId` will be returned only if you have enough funds to convert
+     *
+     * @summary Send Quote Request (USER_DATA)
      * @param {SendQuoteRequestRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SendQuoteRequestResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof ConvertApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/convert/Send-quote-request Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/convert#send-quote-request Binance API Documentation}
      */
     public async sendQuoteRequest(
         requestParameters: SendQuoteRequestRequest

@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -80,25 +80,25 @@ export interface QueryAlgoOrderResponse {
      */
     algoStatus?: string;
     /**
-     *
+     * Empty string if not triggered; orderId if triggered.
      * @type {string}
      * @memberof QueryAlgoOrderResponse
      */
     actualOrderId?: string;
     /**
-     *
+     * 0 if not triggered; average price if filled/partially filled.
      * @type {string}
      * @memberof QueryAlgoOrderResponse
      */
     actualPrice?: string;
     /**
-     *
+     * Optional field, only present when triggered.
      * @type {string}
      * @memberof QueryAlgoOrderResponse
      */
     actualType?: string;
     /**
-     *
+     * Optional field, only present when filled/partially filled.
      * @type {string}
      * @memberof QueryAlgoOrderResponse
      */

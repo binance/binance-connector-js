@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,25 +20,25 @@
  */
 export interface GetFundingRateHistoryResponseInner {
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof GetFundingRateHistoryResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Funding Rate.
      * @type {string}
      * @memberof GetFundingRateHistoryResponseInner
      */
     fundingRate?: string;
     /**
-     *
+     * Funding Time.
      * @type {number | bigint}
      * @memberof GetFundingRateHistoryResponseInner
      */
     fundingTime?: number | bigint;
     /**
-     *
+     * mark price associated with a particular funding fee charge
      * @type {string}
      * @memberof GetFundingRateHistoryResponseInner
      */

@@ -3,9 +3,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket API
+ * Futures (USDⓈ-M) WebSocket API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -23,13 +23,12 @@ import type { SymbolOrderBookTickerResponse1RateLimitsInner } from './symbol-ord
 import type { SymbolPriceTickerResponse1 } from './symbol-price-ticker-response1';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { SymbolPriceTickerResponse1Result } from './symbol-price-ticker-response1-result';
+import type { SymbolPriceTickerResponse2 } from './symbol-price-ticker-response2';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { SymbolPriceTickerResponse2 } from './symbol-price-ticker-response2';
+import type { SymbolPriceTickerResponse2ResultInner } from './symbol-price-ticker-response2-result-inner';
 
 /**
  * @type SymbolPriceTickerResponse
- * @export
  */
 export type SymbolPriceTickerResponse = SymbolPriceTickerResponse1 | SymbolPriceTickerResponse2;

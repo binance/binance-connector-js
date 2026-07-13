@@ -14,9 +14,9 @@ const client = new DerivativesTradingUsdsFutures({ configurationRestAPI });
 async function premiumIndexKlineData() {
     try {
         const response = await client.restAPI.premiumIndexKlineData({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSDT',
             interval:
-                DerivativesTradingUsdsFuturesRestAPI.PremiumIndexKlineDataIntervalEnum.INTERVAL_1s,
+                DerivativesTradingUsdsFuturesRestAPI.PremiumIndexKlineDataIntervalEnum.INTERVAL_1m,
         });
 
         const rateLimits = response.rateLimits!;

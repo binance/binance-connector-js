@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -164,8 +164,8 @@ describe('ConvertApi', () => {
 
         it('should execute listAllConvertPairs() successfully with optional parameters', async () => {
             const params: ListAllConvertPairsRequest = {
-                fromAsset: 'fromAsset_example',
-                toAsset: 'toAsset_example',
+                fromAsset: 'BTC',
+                toAsset: 'USDT',
             };
 
             mockResponse = JSONParse(
@@ -243,7 +243,7 @@ describe('ConvertApi', () => {
 
         it('should execute orderStatus() successfully with optional parameters', async () => {
             const params: OrderStatusRequest = {
-                orderId: '1',
+                orderId: '933256278426274400',
                 quoteId: '1',
             };
 
@@ -294,8 +294,8 @@ describe('ConvertApi', () => {
     describe('sendQuoteRequest()', () => {
         it('should execute sendQuoteRequest() successfully with required parameters only', async () => {
             const params: SendQuoteRequestRequest = {
-                fromAsset: 'fromAsset_example',
-                toAsset: 'toAsset_example',
+                fromAsset: 'BTC',
+                toAsset: 'USDT',
             };
 
             mockResponse = JSONParse(
@@ -325,8 +325,8 @@ describe('ConvertApi', () => {
 
         it('should execute sendQuoteRequest() successfully with optional parameters', async () => {
             const params: SendQuoteRequestRequest = {
-                fromAsset: 'fromAsset_example',
-                toAsset: 'toAsset_example',
+                fromAsset: 'BTC',
+                toAsset: 'USDT',
                 fromAmount: 1.0,
                 toAmount: 1.0,
                 validTime: '10s',
@@ -360,8 +360,8 @@ describe('ConvertApi', () => {
 
         it('should throw RequiredError when fromAsset is missing', async () => {
             const _params: SendQuoteRequestRequest = {
-                fromAsset: 'fromAsset_example',
-                toAsset: 'toAsset_example',
+                fromAsset: 'BTC',
+                toAsset: 'USDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.fromAsset;
@@ -373,8 +373,8 @@ describe('ConvertApi', () => {
 
         it('should throw RequiredError when toAsset is missing', async () => {
             const _params: SendQuoteRequestRequest = {
-                fromAsset: 'fromAsset_example',
-                toAsset: 'toAsset_example',
+                fromAsset: 'BTC',
+                toAsset: 'USDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.toAsset;
@@ -386,8 +386,8 @@ describe('ConvertApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: SendQuoteRequestRequest = {
-                fromAsset: 'fromAsset_example',
-                toAsset: 'toAsset_example',
+                fromAsset: 'BTC',
+                toAsset: 'USDT',
             };
 
             const errorResponse = {

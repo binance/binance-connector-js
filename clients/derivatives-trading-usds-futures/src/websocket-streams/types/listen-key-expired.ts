@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -16,19 +16,19 @@
 /**
  *
  * @export
- * @interface Listenkeyexpired
+ * @interface ListenKeyExpired
  */
-export interface Listenkeyexpired {
+export interface ListenKeyExpired {
     /**
-     *
+     * Event Time
      * @type {number | bigint}
-     * @memberof Listenkeyexpired
+     * @memberof ListenKeyExpired
      */
     E?: number | bigint;
     /**
      *
      * @type {string}
-     * @memberof Listenkeyexpired
+     * @memberof ListenKeyExpired
      */
     listenKey?: string;
 }

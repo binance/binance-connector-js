@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,7 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { AccountApi } from '../../../src/rest-api';
+import { AccountApi, GetIncomeHistoryIncomeTypeEnum } from '../../../src/rest-api';
 import {
     AccountInformationV2Request,
     AccountInformationV3Request,
@@ -83,6 +83,7 @@ describe('AccountApi', () => {
                 JSONStringify({
                     feeTier: 0,
                     feeBurn: true,
+                    canTrade: true,
                     canDeposit: true,
                     canWithdraw: true,
                     updateTime: 0,
@@ -111,56 +112,8 @@ describe('AccountApi', () => {
                             openOrderInitialMargin: '0.00000000',
                             crossWalletBalance: '23.72469206',
                             crossUnPnl: '0.00000000',
-                            availableBalance: '23.72469206',
-                            maxWithdrawAmount: '23.72469206',
-                            marginAvailable: true,
-                            updateTime: 1625474304765,
-                        },
-                        {
-                            asset: 'BUSD',
-                            walletBalance: '103.12345678',
-                            unrealizedProfit: '0.00000000',
-                            marginBalance: '103.12345678',
-                            maintMargin: '0.00000000',
-                            initialMargin: '0.00000000',
-                            positionInitialMargin: '0.00000000',
-                            openOrderInitialMargin: '0.00000000',
-                            crossWalletBalance: '103.12345678',
-                            crossUnPnl: '0.00000000',
-                            availableBalance: '103.12345678',
-                            maxWithdrawAmount: '103.12345678',
-                            marginAvailable: true,
-                            updateTime: 1625474304765,
-                        },
-                        {
-                            asset: 'USDT',
-                            walletBalance: '23.72469206',
-                            unrealizedProfit: '0.00000000',
-                            marginBalance: '23.72469206',
-                            maintMargin: '0.00000000',
-                            initialMargin: '0.00000000',
-                            positionInitialMargin: '0.00000000',
-                            openOrderInitialMargin: '0.00000000',
-                            crossWalletBalance: '23.72469206',
-                            crossUnPnl: '0.00000000',
                             availableBalance: '126.72469206',
                             maxWithdrawAmount: '23.72469206',
-                            marginAvailable: true,
-                            updateTime: 1625474304765,
-                        },
-                        {
-                            asset: 'BUSD',
-                            walletBalance: '103.12345678',
-                            unrealizedProfit: '0.00000000',
-                            marginBalance: '103.12345678',
-                            maintMargin: '0.00000000',
-                            initialMargin: '0.00000000',
-                            positionInitialMargin: '0.00000000',
-                            openOrderInitialMargin: '0.00000000',
-                            crossWalletBalance: '103.12345678',
-                            crossUnPnl: '0.00000000',
-                            availableBalance: '126.72469206',
-                            maxWithdrawAmount: '103.12345678',
                             marginAvailable: true,
                             updateTime: 1625474304765,
                         },
@@ -183,25 +136,7 @@ describe('AccountApi', () => {
                             positionAmt: '0',
                             updateTime: 0,
                         },
-                        {
-                            symbol: 'BTCUSDT',
-                            initialMargin: '0',
-                            maintMargin: '0',
-                            unrealizedProfit: '0.00000000',
-                            positionInitialMargin: '0',
-                            openOrderInitialMargin: '0',
-                            leverage: '100',
-                            isolated: true,
-                            entryPrice: '0.00000',
-                            maxNotional: '250000',
-                            bidNotional: '0',
-                            askNotional: '0',
-                            positionSide: 'BOTH',
-                            positionAmt: '0',
-                            updateTime: 0,
-                        },
                     ],
-                    canTrade: true,
                 })
             );
 
@@ -228,6 +163,7 @@ describe('AccountApi', () => {
                 JSONStringify({
                     feeTier: 0,
                     feeBurn: true,
+                    canTrade: true,
                     canDeposit: true,
                     canWithdraw: true,
                     updateTime: 0,
@@ -256,56 +192,8 @@ describe('AccountApi', () => {
                             openOrderInitialMargin: '0.00000000',
                             crossWalletBalance: '23.72469206',
                             crossUnPnl: '0.00000000',
-                            availableBalance: '23.72469206',
-                            maxWithdrawAmount: '23.72469206',
-                            marginAvailable: true,
-                            updateTime: 1625474304765,
-                        },
-                        {
-                            asset: 'BUSD',
-                            walletBalance: '103.12345678',
-                            unrealizedProfit: '0.00000000',
-                            marginBalance: '103.12345678',
-                            maintMargin: '0.00000000',
-                            initialMargin: '0.00000000',
-                            positionInitialMargin: '0.00000000',
-                            openOrderInitialMargin: '0.00000000',
-                            crossWalletBalance: '103.12345678',
-                            crossUnPnl: '0.00000000',
-                            availableBalance: '103.12345678',
-                            maxWithdrawAmount: '103.12345678',
-                            marginAvailable: true,
-                            updateTime: 1625474304765,
-                        },
-                        {
-                            asset: 'USDT',
-                            walletBalance: '23.72469206',
-                            unrealizedProfit: '0.00000000',
-                            marginBalance: '23.72469206',
-                            maintMargin: '0.00000000',
-                            initialMargin: '0.00000000',
-                            positionInitialMargin: '0.00000000',
-                            openOrderInitialMargin: '0.00000000',
-                            crossWalletBalance: '23.72469206',
-                            crossUnPnl: '0.00000000',
                             availableBalance: '126.72469206',
                             maxWithdrawAmount: '23.72469206',
-                            marginAvailable: true,
-                            updateTime: 1625474304765,
-                        },
-                        {
-                            asset: 'BUSD',
-                            walletBalance: '103.12345678',
-                            unrealizedProfit: '0.00000000',
-                            marginBalance: '103.12345678',
-                            maintMargin: '0.00000000',
-                            initialMargin: '0.00000000',
-                            positionInitialMargin: '0.00000000',
-                            openOrderInitialMargin: '0.00000000',
-                            crossWalletBalance: '103.12345678',
-                            crossUnPnl: '0.00000000',
-                            availableBalance: '126.72469206',
-                            maxWithdrawAmount: '103.12345678',
                             marginAvailable: true,
                             updateTime: 1625474304765,
                         },
@@ -328,25 +216,7 @@ describe('AccountApi', () => {
                             positionAmt: '0',
                             updateTime: 0,
                         },
-                        {
-                            symbol: 'BTCUSDT',
-                            initialMargin: '0',
-                            maintMargin: '0',
-                            unrealizedProfit: '0.00000000',
-                            positionInitialMargin: '0',
-                            openOrderInitialMargin: '0',
-                            leverage: '100',
-                            isolated: true,
-                            entryPrice: '0.00000',
-                            maxNotional: '250000',
-                            bidNotional: '0',
-                            askNotional: '0',
-                            positionSide: 'BOTH',
-                            positionAmt: '0',
-                            updateTime: 0,
-                        },
                     ],
-                    canTrade: true,
                 })
             );
 
@@ -411,65 +281,8 @@ describe('AccountApi', () => {
                             maxWithdrawAmount: '23.72469206',
                             updateTime: 1625474304765,
                         },
-                        {
-                            asset: 'USDC',
-                            walletBalance: '103.12345678',
-                            unrealizedProfit: '0.00000000',
-                            marginBalance: '103.12345678',
-                            maintMargin: '0.00000000',
-                            initialMargin: '0.00000000',
-                            positionInitialMargin: '0.00000000',
-                            openOrderInitialMargin: '0.00000000',
-                            crossWalletBalance: '103.12345678',
-                            crossUnPnl: '0.00000000',
-                            availableBalance: '126.72469206',
-                            maxWithdrawAmount: '103.12345678',
-                            updateTime: 1625474304765,
-                        },
-                        {
-                            asset: 'USDT',
-                            walletBalance: '23.72469206',
-                            unrealizedProfit: '0.00000000',
-                            marginBalance: '23.72469206',
-                            maintMargin: '0.00000000',
-                            initialMargin: '0.00000000',
-                            positionInitialMargin: '0.00000000',
-                            openOrderInitialMargin: '0.00000000',
-                            crossWalletBalance: '23.72469206',
-                            crossUnPnl: '0.00000000',
-                            availableBalance: '126.72469206',
-                            maxWithdrawAmount: '23.72469206',
-                            updateTime: 1625474304765,
-                        },
-                        {
-                            asset: 'BUSD',
-                            walletBalance: '103.12345678',
-                            unrealizedProfit: '0.00000000',
-                            marginBalance: '103.12345678',
-                            maintMargin: '0.00000000',
-                            initialMargin: '0.00000000',
-                            positionInitialMargin: '0.00000000',
-                            openOrderInitialMargin: '0.00000000',
-                            crossWalletBalance: '103.12345678',
-                            crossUnPnl: '0.00000000',
-                            availableBalance: '126.72469206',
-                            maxWithdrawAmount: '103.12345678',
-                            updateTime: 1625474304765,
-                        },
                     ],
                     positions: [
-                        {
-                            symbol: 'BTCUSDT',
-                            positionSide: 'BOTH',
-                            positionAmt: '1.000',
-                            unrealizedProfit: '0.00000000',
-                            isolatedMargin: '0.00000000',
-                            notional: '0',
-                            isolatedWallet: '0',
-                            initialMargin: '0',
-                            maintMargin: '0',
-                            updateTime: 0,
-                        },
                         {
                             symbol: 'BTCUSDT',
                             positionSide: 'BOTH',
@@ -534,65 +347,8 @@ describe('AccountApi', () => {
                             maxWithdrawAmount: '23.72469206',
                             updateTime: 1625474304765,
                         },
-                        {
-                            asset: 'USDC',
-                            walletBalance: '103.12345678',
-                            unrealizedProfit: '0.00000000',
-                            marginBalance: '103.12345678',
-                            maintMargin: '0.00000000',
-                            initialMargin: '0.00000000',
-                            positionInitialMargin: '0.00000000',
-                            openOrderInitialMargin: '0.00000000',
-                            crossWalletBalance: '103.12345678',
-                            crossUnPnl: '0.00000000',
-                            availableBalance: '126.72469206',
-                            maxWithdrawAmount: '103.12345678',
-                            updateTime: 1625474304765,
-                        },
-                        {
-                            asset: 'USDT',
-                            walletBalance: '23.72469206',
-                            unrealizedProfit: '0.00000000',
-                            marginBalance: '23.72469206',
-                            maintMargin: '0.00000000',
-                            initialMargin: '0.00000000',
-                            positionInitialMargin: '0.00000000',
-                            openOrderInitialMargin: '0.00000000',
-                            crossWalletBalance: '23.72469206',
-                            crossUnPnl: '0.00000000',
-                            availableBalance: '126.72469206',
-                            maxWithdrawAmount: '23.72469206',
-                            updateTime: 1625474304765,
-                        },
-                        {
-                            asset: 'BUSD',
-                            walletBalance: '103.12345678',
-                            unrealizedProfit: '0.00000000',
-                            marginBalance: '103.12345678',
-                            maintMargin: '0.00000000',
-                            initialMargin: '0.00000000',
-                            positionInitialMargin: '0.00000000',
-                            openOrderInitialMargin: '0.00000000',
-                            crossWalletBalance: '103.12345678',
-                            crossUnPnl: '0.00000000',
-                            availableBalance: '126.72469206',
-                            maxWithdrawAmount: '103.12345678',
-                            updateTime: 1625474304765,
-                        },
                     ],
                     positions: [
-                        {
-                            symbol: 'BTCUSDT',
-                            positionSide: 'BOTH',
-                            positionAmt: '1.000',
-                            unrealizedProfit: '0.00000000',
-                            isolatedMargin: '0.00000000',
-                            notional: '0',
-                            isolatedWallet: '0',
-                            initialMargin: '0',
-                            maintMargin: '0',
-                            updateTime: 0,
-                        },
                         {
                             symbol: 'BTCUSDT',
                             positionSide: 'BOTH',
@@ -901,27 +657,6 @@ describe('AccountApi', () => {
                                 value: 0.05,
                                 triggerValue: 0.995,
                             },
-                            {
-                                isLocked: true,
-                                plannedRecoverTime: 1545741270000,
-                                indicator: 'IFER',
-                                value: 0.99,
-                                triggerValue: 0.99,
-                            },
-                            {
-                                isLocked: true,
-                                plannedRecoverTime: 1545741270000,
-                                indicator: 'GCR',
-                                value: 0.99,
-                                triggerValue: 0.99,
-                            },
-                            {
-                                isLocked: true,
-                                plannedRecoverTime: 1545741270000,
-                                indicator: 'DR',
-                                value: 0.99,
-                                triggerValue: 0.99,
-                            },
                         ],
                         ETHUSDT: [
                             {
@@ -930,27 +665,6 @@ describe('AccountApi', () => {
                                 indicator: 'UFR',
                                 value: 0.05,
                                 triggerValue: 0.995,
-                            },
-                            {
-                                isLocked: true,
-                                plannedRecoverTime: 1545741270000,
-                                indicator: 'IFER',
-                                value: 0.99,
-                                triggerValue: 0.99,
-                            },
-                            {
-                                isLocked: true,
-                                plannedRecoverTime: 1545741270000,
-                                indicator: 'GCR',
-                                value: 0.99,
-                                triggerValue: 0.99,
-                            },
-                            {
-                                isLocked: true,
-                                plannedRecoverTime: 1545741270000,
-                                indicator: 'DR',
-                                value: 0.99,
-                                triggerValue: 0.99,
                             },
                         ],
                         ACCOUNT: [
@@ -985,7 +699,7 @@ describe('AccountApi', () => {
 
         it('should execute futuresTradingQuantitativeRulesIndicators() successfully with optional parameters', async () => {
             const params: FuturesTradingQuantitativeRulesIndicatorsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -1000,27 +714,6 @@ describe('AccountApi', () => {
                                 value: 0.05,
                                 triggerValue: 0.995,
                             },
-                            {
-                                isLocked: true,
-                                plannedRecoverTime: 1545741270000,
-                                indicator: 'IFER',
-                                value: 0.99,
-                                triggerValue: 0.99,
-                            },
-                            {
-                                isLocked: true,
-                                plannedRecoverTime: 1545741270000,
-                                indicator: 'GCR',
-                                value: 0.99,
-                                triggerValue: 0.99,
-                            },
-                            {
-                                isLocked: true,
-                                plannedRecoverTime: 1545741270000,
-                                indicator: 'DR',
-                                value: 0.99,
-                                triggerValue: 0.99,
-                            },
                         ],
                         ETHUSDT: [
                             {
@@ -1029,27 +722,6 @@ describe('AccountApi', () => {
                                 indicator: 'UFR',
                                 value: 0.05,
                                 triggerValue: 0.995,
-                            },
-                            {
-                                isLocked: true,
-                                plannedRecoverTime: 1545741270000,
-                                indicator: 'IFER',
-                                value: 0.99,
-                                triggerValue: 0.99,
-                            },
-                            {
-                                isLocked: true,
-                                plannedRecoverTime: 1545741270000,
-                                indicator: 'GCR',
-                                value: 0.99,
-                                triggerValue: 0.99,
-                            },
-                            {
-                                isLocked: true,
-                                plannedRecoverTime: 1545741270000,
-                                indicator: 'DR',
-                                value: 0.99,
-                                triggerValue: 0.99,
                             },
                         ],
                         ACCOUNT: [
@@ -1599,7 +1271,7 @@ describe('AccountApi', () => {
     describe('getFuturesOrderHistoryDownloadLinkById()', () => {
         it('should execute getFuturesOrderHistoryDownloadLinkById() successfully with required parameters only', async () => {
             const params: GetFuturesOrderHistoryDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
             };
 
             mockResponse = JSONParse(
@@ -1609,7 +1281,7 @@ describe('AccountApi', () => {
                     url: '',
                     notified: false,
                     expirationTimestamp: -1,
-                    isExpired: null,
+                    isExpired: 'null',
                 })
             );
 
@@ -1631,7 +1303,7 @@ describe('AccountApi', () => {
 
         it('should execute getFuturesOrderHistoryDownloadLinkById() successfully with optional parameters', async () => {
             const params: GetFuturesOrderHistoryDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
                 recvWindow: 5000,
             };
 
@@ -1642,7 +1314,7 @@ describe('AccountApi', () => {
                     url: '',
                     notified: false,
                     expirationTimestamp: -1,
-                    isExpired: null,
+                    isExpired: 'null',
                 })
             );
 
@@ -1664,7 +1336,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when downloadId is missing', async () => {
             const _params: GetFuturesOrderHistoryDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
             };
             const params = Object.assign({ ..._params });
             delete params?.downloadId;
@@ -1676,7 +1348,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetFuturesOrderHistoryDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
             };
 
             const errorResponse = {
@@ -1701,17 +1373,17 @@ describe('AccountApi', () => {
     describe('getFuturesTradeDownloadLinkById()', () => {
         it('should execute getFuturesTradeDownloadLinkById() successfully with required parameters only', async () => {
             const params: GetFuturesTradeDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
             };
 
             mockResponse = JSONParse(
                 JSONStringify({
                     downloadId: '545923594199212032',
                     status: 'processing',
-                    url: '',
+                    url: 'www.binance.com',
                     notified: false,
-                    expirationTimestamp: -1,
-                    isExpired: null,
+                    expirationTimestamp: 1645009771000,
+                    isExpired: 'null',
                 })
             );
 
@@ -1731,7 +1403,7 @@ describe('AccountApi', () => {
 
         it('should execute getFuturesTradeDownloadLinkById() successfully with optional parameters', async () => {
             const params: GetFuturesTradeDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
                 recvWindow: 5000,
             };
 
@@ -1739,10 +1411,10 @@ describe('AccountApi', () => {
                 JSONStringify({
                     downloadId: '545923594199212032',
                     status: 'processing',
-                    url: '',
+                    url: 'www.binance.com',
                     notified: false,
-                    expirationTimestamp: -1,
-                    isExpired: null,
+                    expirationTimestamp: 1645009771000,
+                    isExpired: 'null',
                 })
             );
 
@@ -1762,7 +1434,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when downloadId is missing', async () => {
             const _params: GetFuturesTradeDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
             };
             const params = Object.assign({ ..._params });
             delete params?.downloadId;
@@ -1774,7 +1446,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetFuturesTradeDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
             };
 
             const errorResponse = {
@@ -1799,17 +1471,17 @@ describe('AccountApi', () => {
     describe('getFuturesTransactionHistoryDownloadLinkById()', () => {
         it('should execute getFuturesTransactionHistoryDownloadLinkById() successfully with required parameters only', async () => {
             const params: GetFuturesTransactionHistoryDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
             };
 
             mockResponse = JSONParse(
                 JSONStringify({
                     downloadId: '545923594199212032',
                     status: 'processing',
-                    url: '',
+                    url: 'www.binance.com',
                     notified: false,
-                    expirationTimestamp: -1,
-                    isExpired: null,
+                    expirationTimestamp: 1645009771000,
+                    isExpired: 'null',
                 })
             );
 
@@ -1831,7 +1503,7 @@ describe('AccountApi', () => {
 
         it('should execute getFuturesTransactionHistoryDownloadLinkById() successfully with optional parameters', async () => {
             const params: GetFuturesTransactionHistoryDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
                 recvWindow: 5000,
             };
 
@@ -1839,10 +1511,10 @@ describe('AccountApi', () => {
                 JSONStringify({
                     downloadId: '545923594199212032',
                     status: 'processing',
-                    url: '',
+                    url: 'www.binance.com',
                     notified: false,
-                    expirationTimestamp: -1,
-                    isExpired: null,
+                    expirationTimestamp: 1645009771000,
+                    isExpired: 'null',
                 })
             );
 
@@ -1864,7 +1536,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when downloadId is missing', async () => {
             const _params: GetFuturesTransactionHistoryDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
             };
             const params = Object.assign({ ..._params });
             delete params?.downloadId;
@@ -1878,7 +1550,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetFuturesTransactionHistoryDownloadLinkByIdRequest = {
-                downloadId: '1',
+                downloadId: '545923594199212032',
             };
 
             const errorResponse = {
@@ -1914,16 +1586,6 @@ describe('AccountApi', () => {
                         tranId: 9689322392,
                         tradeId: '',
                     },
-                    {
-                        symbol: 'BTCUSDT',
-                        incomeType: 'COMMISSION',
-                        income: '-0.01000000',
-                        asset: 'USDT',
-                        info: 'COMMISSION',
-                        time: 1570636800000,
-                        tranId: 9689322392,
-                        tradeId: '2059192',
-                    },
                 ])
             );
 
@@ -1943,12 +1605,12 @@ describe('AccountApi', () => {
 
         it('should execute getIncomeHistory() successfully with optional parameters', async () => {
             const params: GetIncomeHistoryRequest = {
-                symbol: 'symbol_example',
-                incomeType: 'incomeType_example',
+                symbol: 'BTCUSDT',
+                incomeType: GetIncomeHistoryIncomeTypeEnum.TRANSFER,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
-                page: 789,
-                limit: 100,
+                page: 1,
+                limit: 30,
                 recvWindow: 5000,
             };
 
@@ -1963,16 +1625,6 @@ describe('AccountApi', () => {
                         time: 1570608000000,
                         tranId: 9689322392,
                         tradeId: '',
-                    },
-                    {
-                        symbol: 'BTCUSDT',
-                        incomeType: 'COMMISSION',
-                        income: '-0.01000000',
-                        asset: 'USDT',
-                        info: 'COMMISSION',
-                        time: 1570636800000,
-                        tranId: 9689322392,
-                        tradeId: '2059192',
                     },
                 ])
             );
@@ -2010,22 +1662,7 @@ describe('AccountApi', () => {
     describe('notionalAndLeverageBrackets()', () => {
         it('should execute notionalAndLeverageBrackets() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
-                JSONStringify([
-                    {
-                        symbol: 'ETHUSDT',
-                        notionalCoef: 1.5,
-                        brackets: [
-                            {
-                                bracket: 1,
-                                initialLeverage: 75,
-                                notionalCap: 10000,
-                                notionalFloor: 0,
-                                maintMarginRatio: 0.0065,
-                                cum: 0,
-                            },
-                        ],
-                    },
-                ])
+                JSONStringify([{ symbol: 'ETHUSDT', notionalCoef: 1.5, brackets: [] }])
             );
 
             const spy = jest.spyOn(client, 'notionalAndLeverageBrackets').mockReturnValue(
@@ -2044,27 +1681,12 @@ describe('AccountApi', () => {
 
         it('should execute notionalAndLeverageBrackets() successfully with optional parameters', async () => {
             const params: NotionalAndLeverageBracketsRequest = {
-                symbol: 'symbol_example',
+                symbol: 'ETHUSDT',
                 recvWindow: 5000,
             };
 
             mockResponse = JSONParse(
-                JSONStringify([
-                    {
-                        symbol: 'ETHUSDT',
-                        notionalCoef: 1.5,
-                        brackets: [
-                            {
-                                bracket: 1,
-                                initialLeverage: 75,
-                                notionalCap: 10000,
-                                notionalFloor: 0,
-                                maintMarginRatio: 0.0065,
-                                cum: 0,
-                            },
-                        ],
-                    },
-                ])
+                JSONStringify([{ symbol: 'ETHUSDT', notionalCoef: 1.5, brackets: [] }])
             );
 
             const spy = jest.spyOn(client, 'notionalAndLeverageBrackets').mockReturnValue(
@@ -2104,7 +1726,6 @@ describe('AccountApi', () => {
             mockResponse = JSONParse(
                 JSONStringify([
                     { rateLimitType: 'ORDERS', interval: 'SECOND', intervalNum: 10, limit: 10000 },
-                    { rateLimitType: 'ORDERS', interval: 'MINUTE', intervalNum: 1, limit: 20000 },
                 ])
             );
 
@@ -2130,7 +1751,6 @@ describe('AccountApi', () => {
             mockResponse = JSONParse(
                 JSONStringify([
                     { rateLimitType: 'ORDERS', interval: 'SECOND', intervalNum: 10, limit: 10000 },
-                    { rateLimitType: 'ORDERS', interval: 'MINUTE', intervalNum: 1, limit: 20000 },
                 ])
             );
 
@@ -2194,7 +1814,7 @@ describe('AccountApi', () => {
 
         it('should execute symbolConfiguration() successfully with optional parameters', async () => {
             const params: SymbolConfigurationRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -2243,7 +1863,7 @@ describe('AccountApi', () => {
     describe('toggleBnbBurnOnFuturesTrade()', () => {
         it('should execute toggleBnbBurnOnFuturesTrade() successfully with required parameters only', async () => {
             const params: ToggleBnbBurnOnFuturesTradeRequest = {
-                feeBurn: 'feeBurn_example',
+                feeBurn: 'true',
             };
 
             mockResponse = JSONParse(JSONStringify({ code: 200, msg: 'success' }));
@@ -2264,7 +1884,7 @@ describe('AccountApi', () => {
 
         it('should execute toggleBnbBurnOnFuturesTrade() successfully with optional parameters', async () => {
             const params: ToggleBnbBurnOnFuturesTradeRequest = {
-                feeBurn: 'feeBurn_example',
+                feeBurn: 'true',
                 recvWindow: 5000,
             };
 
@@ -2286,7 +1906,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when feeBurn is missing', async () => {
             const _params: ToggleBnbBurnOnFuturesTradeRequest = {
-                feeBurn: 'feeBurn_example',
+                feeBurn: 'true',
             };
             const params = Object.assign({ ..._params });
             delete params?.feeBurn;
@@ -2298,7 +1918,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: ToggleBnbBurnOnFuturesTradeRequest = {
-                feeBurn: 'feeBurn_example',
+                feeBurn: 'true',
             };
 
             const errorResponse = {
@@ -2323,7 +1943,7 @@ describe('AccountApi', () => {
     describe('userCommissionRate()', () => {
         it('should execute userCommissionRate() successfully with required parameters only', async () => {
             const params: UserCommissionRateRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             mockResponse = JSONParse(
@@ -2351,7 +1971,7 @@ describe('AccountApi', () => {
 
         it('should execute userCommissionRate() successfully with optional parameters', async () => {
             const params: UserCommissionRateRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
                 recvWindow: 5000,
             };
 
@@ -2380,7 +2000,7 @@ describe('AccountApi', () => {
 
         it('should throw RequiredError when symbol is missing', async () => {
             const _params: UserCommissionRateRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -2392,7 +2012,7 @@ describe('AccountApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: UserCommissionRateRequest = {
-                symbol: 'symbol_example',
+                symbol: 'BTCUSDT',
             };
 
             const errorResponse = {

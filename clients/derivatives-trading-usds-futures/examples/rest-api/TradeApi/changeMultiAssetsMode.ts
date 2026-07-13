@@ -13,7 +13,7 @@ const client = new DerivativesTradingUsdsFutures({ configurationRestAPI });
 async function changeMultiAssetsMode() {
     try {
         const response = await client.restAPI.changeMultiAssetsMode({
-            multiAssetsMargin: 'multiAssetsMargin_example',
+            multiAssetsMargin: 'true',
         });
 
         const rateLimits = response.rateLimits!;

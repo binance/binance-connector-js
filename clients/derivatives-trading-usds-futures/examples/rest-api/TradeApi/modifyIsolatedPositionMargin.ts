@@ -13,9 +13,9 @@ const client = new DerivativesTradingUsdsFutures({ configurationRestAPI });
 async function modifyIsolatedPositionMargin() {
     try {
         const response = await client.restAPI.modifyIsolatedPositionMargin({
-            symbol: 'symbol_example',
+            symbol: 'BTCUSDT',
             amount: 1.0,
-            type: 'type_example',
+            type: 1,
         });
 
         const rateLimits = response.rateLimits!;

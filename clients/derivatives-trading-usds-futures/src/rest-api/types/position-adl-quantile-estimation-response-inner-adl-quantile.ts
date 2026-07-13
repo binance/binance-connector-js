@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,25 +20,25 @@
  */
 export interface PositionAdlQuantileEstimationResponseInnerAdlQuantile {
     /**
-     *
+     * adl quantile for \"LONG\" position in hedge mode
      * @type {number | bigint}
      * @memberof PositionAdlQuantileEstimationResponseInnerAdlQuantile
      */
     LONG?: number | bigint;
     /**
-     *
+     * adl qauntile for \"SHORT\" position in hedge mode
      * @type {number | bigint}
      * @memberof PositionAdlQuantileEstimationResponseInnerAdlQuantile
      */
     SHORT?: number | bigint;
     /**
-     *
+     * only a sign, ignore the value
      * @type {number | bigint}
      * @memberof PositionAdlQuantileEstimationResponseInnerAdlQuantile
      */
     HEDGE?: number | bigint;
     /**
-     *
+     * adl qunatile for position in one-way mode
      * @type {number | bigint}
      * @memberof PositionAdlQuantileEstimationResponseInnerAdlQuantile
      */

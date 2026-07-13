@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,7 +25,12 @@ import {
     PartialBookDepthStreamsRequest,
     RpiDiffBookDepthStreamsRequest,
 } from '../../../src/websocket-streams';
-import { PublicApi } from '../../../src/websocket-streams';
+import {
+    PublicApi,
+    DiffBookDepthStreamsUpdateSpeedEnum,
+    PartialBookDepthStreamsLevelsEnum,
+    PartialBookDepthStreamsUpdateSpeedEnum,
+} from '../../../src/websocket-streams';
 import { mockSubscription } from './utils';
 
 describe('PublicApi', () => {
@@ -107,7 +112,7 @@ describe('PublicApi', () => {
             const params: DiffBookDepthStreamsRequest = {
                 symbol: 'btcusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
-                updateSpeed: 'updateSpeed_example',
+                updateSpeed: DiffBookDepthStreamsUpdateSpeedEnum.UPDATE_SPEED_100ms,
             };
 
             const mockResponse = JSONParse(
@@ -115,12 +120,12 @@ describe('PublicApi', () => {
                     e: 'depthUpdate',
                     E: 123456789,
                     T: 123456788,
-                    s: 'BTCUSDT',
+                    s: 'BNBUSDT',
                     U: 157,
                     u: 160,
                     pu: 149,
-                    b: [['0.0024', '10']],
-                    a: [['0.0026', '100']],
+                    b: [['0.0024']],
+                    a: [['0.0026']],
                     ps: 'BTCUSDT',
                     st: 1,
                 })
@@ -141,7 +146,7 @@ describe('PublicApi', () => {
             const params: DiffBookDepthStreamsRequest = {
                 symbol: 'btcusdt',
                 id: 'e9d6b4349871b40611412680b3445fac',
-                updateSpeed: 'updateSpeed_example',
+                updateSpeed: DiffBookDepthStreamsUpdateSpeedEnum.UPDATE_SPEED_100ms,
             };
 
             const mockResponse = JSONParse(
@@ -149,12 +154,12 @@ describe('PublicApi', () => {
                     e: 'depthUpdate',
                     E: 123456789,
                     T: 123456788,
-                    s: 'BTCUSDT',
+                    s: 'BNBUSDT',
                     U: 157,
                     u: 160,
                     pu: 149,
-                    b: [['0.0024', '10']],
-                    a: [['0.0026', '100']],
+                    b: [['0.0024']],
+                    a: [['0.0026']],
                     ps: 'BTCUSDT',
                     st: 1,
                 })
@@ -206,10 +211,10 @@ describe('PublicApi', () => {
                 JSONStringify({
                     e: 'bookTicker',
                     u: 400900217,
-                    s: 'BNBUSDT',
-                    ps: 'BNBUSDT',
                     E: 1568014460893,
                     T: 1568014460891,
+                    s: 'BNBUSDT',
+                    ps: 'BNBUSDT',
                     b: '25.35190000',
                     B: '31.21000000',
                     a: '25.36520000',
@@ -239,10 +244,10 @@ describe('PublicApi', () => {
                 JSONStringify({
                     e: 'bookTicker',
                     u: 400900217,
-                    s: 'BNBUSDT',
-                    ps: 'BNBUSDT',
                     E: 1568014460893,
                     T: 1568014460891,
+                    s: 'BNBUSDT',
+                    ps: 'BNBUSDT',
                     b: '25.35190000',
                     B: '31.21000000',
                     a: '25.36520000',
@@ -293,9 +298,9 @@ describe('PublicApi', () => {
         it('should execute partialBookDepthStreams() successfully', async () => {
             const params: PartialBookDepthStreamsRequest = {
                 symbol: 'btcusdt',
-                levels: 10,
+                levels: PartialBookDepthStreamsLevelsEnum.LEVELS_5,
                 id: 'e9d6b4349871b40611412680b3445fac',
-                updateSpeed: 'updateSpeed_example',
+                updateSpeed: PartialBookDepthStreamsUpdateSpeedEnum.UPDATE_SPEED_100ms,
             };
 
             const mockResponse = JSONParse(
@@ -307,20 +312,8 @@ describe('PublicApi', () => {
                     U: 390497796,
                     u: 390497878,
                     pu: 390497794,
-                    b: [
-                        ['7403.89', '0.002'],
-                        ['7403.90', '3.906'],
-                        ['7404.00', '1.428'],
-                        ['7404.85', '5.239'],
-                        ['7405.43', '2.562'],
-                    ],
-                    a: [
-                        ['7405.96', '3.340'],
-                        ['7406.63', '4.525'],
-                        ['7407.08', '2.475'],
-                        ['7407.15', '4.800'],
-                        ['7407.20', '0.175'],
-                    ],
+                    b: [['7403.89']],
+                    a: [['7405.96']],
                     ps: 'BTCUSDT',
                     st: 1,
                 })
@@ -340,9 +333,9 @@ describe('PublicApi', () => {
 
             const params: PartialBookDepthStreamsRequest = {
                 symbol: 'btcusdt',
-                levels: 10,
+                levels: PartialBookDepthStreamsLevelsEnum.LEVELS_5,
                 id: 'e9d6b4349871b40611412680b3445fac',
-                updateSpeed: 'updateSpeed_example',
+                updateSpeed: PartialBookDepthStreamsUpdateSpeedEnum.UPDATE_SPEED_100ms,
             };
 
             const mockResponse = JSONParse(
@@ -354,20 +347,8 @@ describe('PublicApi', () => {
                     U: 390497796,
                     u: 390497878,
                     pu: 390497794,
-                    b: [
-                        ['7403.89', '0.002'],
-                        ['7403.90', '3.906'],
-                        ['7404.00', '1.428'],
-                        ['7404.85', '5.239'],
-                        ['7405.43', '2.562'],
-                    ],
-                    a: [
-                        ['7405.96', '3.340'],
-                        ['7406.63', '4.525'],
-                        ['7407.08', '2.475'],
-                        ['7407.15', '4.800'],
-                        ['7407.20', '0.175'],
-                    ],
+                    b: [['7403.89']],
+                    a: [['7405.96']],
                     ps: 'BTCUSDT',
                     st: 1,
                 })
@@ -398,7 +379,7 @@ describe('PublicApi', () => {
 
             const _params: PartialBookDepthStreamsRequest = {
                 symbol: 'btcusdt',
-                levels: 10,
+                levels: PartialBookDepthStreamsLevelsEnum.LEVELS_5,
             };
             const params = Object.assign({ ..._params });
             delete params?.symbol;
@@ -415,7 +396,7 @@ describe('PublicApi', () => {
 
             const _params: PartialBookDepthStreamsRequest = {
                 symbol: 'btcusdt',
-                levels: 10,
+                levels: PartialBookDepthStreamsLevelsEnum.LEVELS_5,
             };
             const params = Object.assign({ ..._params });
             delete params?.levels;
@@ -438,12 +419,12 @@ describe('PublicApi', () => {
                     e: 'depthUpdate',
                     E: 123456789,
                     T: 123456788,
-                    s: 'BTCUSDT',
+                    s: 'BNBUSDT',
                     U: 157,
                     u: 160,
                     pu: 149,
-                    b: [['0.0024', '10']],
-                    a: [['0.0026', '100']],
+                    b: [['0.0024']],
+                    a: [['0.0026']],
                     ps: 'BTCUSDT',
                     st: 1,
                 })
@@ -471,12 +452,12 @@ describe('PublicApi', () => {
                     e: 'depthUpdate',
                     E: 123456789,
                     T: 123456788,
-                    s: 'BTCUSDT',
+                    s: 'BNBUSDT',
                     U: 157,
                     u: 160,
                     pu: 149,
-                    b: [['0.0024', '10']],
-                    a: [['0.0026', '100']],
+                    b: [['0.0024']],
+                    a: [['0.0026']],
                     ps: 'BTCUSDT',
                     st: 1,
                 })

@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -14,67 +14,67 @@
  */
 
 /**
- *
+ * positions of all symbols user had position/ open orders are returned
  * @export
  * @interface AccountInformationV3ResponsePositionsInner
  */
 export interface AccountInformationV3ResponsePositionsInner {
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof AccountInformationV3ResponsePositionsInner
      */
     symbol?: string;
     /**
-     *
+     * Position side.
      * @type {string}
      * @memberof AccountInformationV3ResponsePositionsInner
      */
     positionSide?: string;
     /**
-     *
+     * Position quantity.
      * @type {string}
      * @memberof AccountInformationV3ResponsePositionsInner
      */
     positionAmt?: string;
     /**
-     *
+     * Unrealized profit.
      * @type {string}
      * @memberof AccountInformationV3ResponsePositionsInner
      */
     unrealizedProfit?: string;
     /**
-     *
+     * Isolated margin.
      * @type {string}
      * @memberof AccountInformationV3ResponsePositionsInner
      */
     isolatedMargin?: string;
     /**
-     *
+     * Position notional value.
      * @type {string}
      * @memberof AccountInformationV3ResponsePositionsInner
      */
     notional?: string;
     /**
-     *
+     * Isolated wallet balance.
      * @type {string}
      * @memberof AccountInformationV3ResponsePositionsInner
      */
     isolatedWallet?: string;
     /**
-     *
+     * Initial margin requirement.
      * @type {string}
      * @memberof AccountInformationV3ResponsePositionsInner
      */
     initialMargin?: string;
     /**
-     *
+     * Maintenance margin requirement.
      * @type {string}
      * @memberof AccountInformationV3ResponsePositionsInner
      */
     maintMargin?: string;
     /**
-     *
+     * Last update time in milliseconds.
      * @type {number | bigint}
      * @memberof AccountInformationV3ResponsePositionsInner
      */

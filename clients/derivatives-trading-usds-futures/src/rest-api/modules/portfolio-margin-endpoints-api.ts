@@ -1,7 +1,7 @@
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -31,10 +30,12 @@ const PortfolioMarginEndpointsApiAxiosParamCreator = function (
         /**
          * Get Classic Portfolio Margin current account information.
          *
+         * Weight(IP): 5
          *
-         * maxWithdrawAmount is for asset transfer out to the spot wallet.
+         * Security Type: USER_DATA
          *
-         * Weight: 5
+         * Notes:
+         * - maxWithdrawAmount is for asset transfer out to the spot wallet.
          *
          * @summary Classic Portfolio Margin Account Information (USER_DATA)
          * @param {string} asset
@@ -83,10 +84,12 @@ export interface PortfolioMarginEndpointsApiInterface {
     /**
      * Get Classic Portfolio Margin current account information.
      *
+     * Weight(IP): 5
      *
-     * maxWithdrawAmount is for asset transfer out to the spot wallet.
+     * Security Type: USER_DATA
      *
-     * Weight: 5
+     * Notes:
+     * - maxWithdrawAmount is for asset transfer out to the spot wallet.
      *
      * @summary Classic Portfolio Margin Account Information (USER_DATA)
      * @param {ClassicPortfolioMarginAccountInformationRequest} requestParameters Request parameters.
@@ -136,17 +139,19 @@ export class PortfolioMarginEndpointsApi implements PortfolioMarginEndpointsApiI
     /**
      * Get Classic Portfolio Margin current account information.
      *
+     * Weight(IP): 5
      *
-     * maxWithdrawAmount is for asset transfer out to the spot wallet.
+     * Security Type: USER_DATA
      *
-     * Weight: 5
+     * Notes:
+     * - maxWithdrawAmount is for asset transfer out to the spot wallet.
      *
      * @summary Classic Portfolio Margin Account Information (USER_DATA)
      * @param {ClassicPortfolioMarginAccountInformationRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ClassicPortfolioMarginAccountInformationResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof PortfolioMarginEndpointsApi
-     * @see {@link https://developers.binance.com/docs/derivatives/usds-margined-futures/portfolio-margin-endpoints/Classic-Portfolio-Margin-Account-Information Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/portfolio-margin-endpoints#classic-portfolio-margin-account-information Binance API Documentation}
      */
     public async classicPortfolioMarginAccountInformation(
         requestParameters: ClassicPortfolioMarginAccountInformationRequest

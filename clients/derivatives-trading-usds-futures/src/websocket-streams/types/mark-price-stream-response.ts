@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,63 +20,63 @@
  */
 export interface MarkPriceStreamResponse {
     /**
-     *
+     * Event type
      * @type {string}
      * @memberof MarkPriceStreamResponse
      */
     e?: string;
     /**
-     *
+     * Event time
      * @type {number | bigint}
      * @memberof MarkPriceStreamResponse
      */
     E?: number | bigint;
     /**
-     *
+     * Symbol
      * @type {string}
      * @memberof MarkPriceStreamResponse
      */
     s?: string;
     /**
-     *
+     * Mark price
      * @type {string}
      * @memberof MarkPriceStreamResponse
      */
     p?: string;
     /**
-     *
-     * @type {string}
-     * @memberof MarkPriceStreamResponse
-     */
-    ap?: string;
-    /**
-     *
+     * Index price
      * @type {string}
      * @memberof MarkPriceStreamResponse
      */
     i?: string;
     /**
-     *
+     * Estimated Settle Price, only useful in the last hour before the settlement starts
      * @type {string}
      * @memberof MarkPriceStreamResponse
      */
     P?: string;
     /**
-     *
+     * Funding rate
      * @type {string}
      * @memberof MarkPriceStreamResponse
      */
     r?: string;
     /**
-     *
+     * Mark price moving average
+     * @type {string}
+     * @memberof MarkPriceStreamResponse
+     */
+    ap?: string;
+    /**
+     * Next funding time
      * @type {number | bigint}
      * @memberof MarkPriceStreamResponse
      */
     T?: number | bigint;
     /**
-     *
-     * @type {number | bigint}
+     * (After CM migration) Symbol type: 1 = UM, 2 = CM
+     * @type {number}
      * @memberof MarkPriceStreamResponse
      */
-    st?: number | bigint;
+    st?: number;
 }

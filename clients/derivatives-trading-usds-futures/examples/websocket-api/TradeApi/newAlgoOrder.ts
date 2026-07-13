@@ -18,10 +18,11 @@ async function newAlgoOrder() {
         connection = await client.websocketAPI.connect();
 
         const response = await connection.newAlgoOrder({
-            algoType: 'algoType_example',
-            symbol: 'symbol_example',
+            algoType:
+                DerivativesTradingUsdsFuturesWebsocketAPI.NewAlgoOrderAlgoTypeEnum.CONDITIONAL,
+            symbol: 'BTCUSDT',
             side: DerivativesTradingUsdsFuturesWebsocketAPI.NewAlgoOrderSideEnum.BUY,
-            type: 'type_example',
+            type: DerivativesTradingUsdsFuturesWebsocketAPI.NewAlgoOrderTypeEnum.STOP_MARKET,
         });
 
         const rateLimits = response.rateLimits!;

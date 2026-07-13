@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,55 +20,55 @@
  */
 export interface FuturesAccountBalanceV2ResponseInner {
     /**
-     *
+     * Unique account alias.
      * @type {string}
      * @memberof FuturesAccountBalanceV2ResponseInner
      */
     accountAlias?: string;
     /**
-     *
+     * Asset name.
      * @type {string}
      * @memberof FuturesAccountBalanceV2ResponseInner
      */
     asset?: string;
     /**
-     *
+     * Wallet balance.
      * @type {string}
      * @memberof FuturesAccountBalanceV2ResponseInner
      */
     balance?: string;
     /**
-     *
+     * Cross wallet balance.
      * @type {string}
      * @memberof FuturesAccountBalanceV2ResponseInner
      */
     crossWalletBalance?: string;
     /**
-     *
+     * Unrealized PnL of cross positions.
      * @type {string}
      * @memberof FuturesAccountBalanceV2ResponseInner
      */
     crossUnPnl?: string;
     /**
-     *
+     * Available balance.
      * @type {string}
      * @memberof FuturesAccountBalanceV2ResponseInner
      */
     availableBalance?: string;
     /**
-     *
+     * Maximum transferable/withdrawable amount.
      * @type {string}
      * @memberof FuturesAccountBalanceV2ResponseInner
      */
     maxWithdrawAmount?: string;
     /**
-     *
+     * Whether the asset can be used as margin in multi-assets mode.
      * @type {boolean}
      * @memberof FuturesAccountBalanceV2ResponseInner
      */
     marginAvailable?: boolean;
     /**
-     *
+     * Last update time in milliseconds.
      * @type {number | bigint}
      * @memberof FuturesAccountBalanceV2ResponseInner
      */

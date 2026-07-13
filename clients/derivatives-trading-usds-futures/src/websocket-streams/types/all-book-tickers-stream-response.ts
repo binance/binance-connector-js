@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,69 +20,69 @@
  */
 export interface AllBookTickersStreamResponse {
     /**
-     *
+     * event type
      * @type {string}
      * @memberof AllBookTickersStreamResponse
      */
     e?: string;
     /**
-     *
+     * order book updateId
      * @type {number | bigint}
      * @memberof AllBookTickersStreamResponse
      */
     u?: number | bigint;
     /**
-     *
+     * event time
      * @type {number | bigint}
      * @memberof AllBookTickersStreamResponse
      */
     E?: number | bigint;
     /**
-     *
+     * transaction time
      * @type {number | bigint}
      * @memberof AllBookTickersStreamResponse
      */
     T?: number | bigint;
     /**
-     *
+     * symbol
      * @type {string}
      * @memberof AllBookTickersStreamResponse
      */
     s?: string;
     /**
-     *
+     * best bid price
      * @type {string}
      * @memberof AllBookTickersStreamResponse
      */
     b?: string;
     /**
-     *
+     * best bid qty
      * @type {string}
      * @memberof AllBookTickersStreamResponse
      */
     B?: string;
     /**
-     *
+     * best ask price
      * @type {string}
      * @memberof AllBookTickersStreamResponse
      */
     a?: string;
     /**
-     *
+     * best ask qty
      * @type {string}
      * @memberof AllBookTickersStreamResponse
      */
     A?: string;
     /**
-     *
+     * (After CM migration) Pair symbol
      * @type {string}
      * @memberof AllBookTickersStreamResponse
      */
     ps?: string;
     /**
-     *
-     * @type {number | bigint}
+     * (After CM migration) Symbol type: 1 = UM, 2 = CM
+     * @type {number}
      * @memberof AllBookTickersStreamResponse
      */
-    st?: number | bigint;
+    st?: number;
 }

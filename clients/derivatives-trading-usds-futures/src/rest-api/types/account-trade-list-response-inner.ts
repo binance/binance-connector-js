@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,85 +20,85 @@
  */
 export interface AccountTradeListResponseInner {
     /**
-     *
+     * Buyer.
      * @type {boolean}
      * @memberof AccountTradeListResponseInner
      */
     buyer?: boolean;
     /**
-     *
+     * Commission.
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     commission?: string;
     /**
-     *
+     * Commission Asset.
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     commissionAsset?: string;
     /**
-     *
+     * Id.
      * @type {number | bigint}
      * @memberof AccountTradeListResponseInner
      */
     id?: number | bigint;
     /**
-     *
+     * Maker.
      * @type {boolean}
      * @memberof AccountTradeListResponseInner
      */
     maker?: boolean;
     /**
-     *
+     * Order Id.
      * @type {number | bigint}
      * @memberof AccountTradeListResponseInner
      */
     orderId?: number | bigint;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     price?: string;
     /**
-     *
+     * Qty.
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     qty?: string;
     /**
-     *
+     * Quote Qty.
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     quoteQty?: string;
     /**
-     *
+     * Realized Pnl.
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     realizedPnl?: string;
     /**
-     *
+     * Side.
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     side?: string;
     /**
-     *
+     * Position Side.
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     positionSide?: string;
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof AccountTradeListResponseInner
      */
     symbol?: string;
     /**
-     *
+     * Time.
      * @type {number | bigint}
      * @memberof AccountTradeListResponseInner
      */

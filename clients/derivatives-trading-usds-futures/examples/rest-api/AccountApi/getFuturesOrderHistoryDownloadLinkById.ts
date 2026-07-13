@@ -13,7 +13,7 @@ const client = new DerivativesTradingUsdsFutures({ configurationRestAPI });
 async function getFuturesOrderHistoryDownloadLinkById() {
     try {
         const response = await client.restAPI.getFuturesOrderHistoryDownloadLinkById({
-            downloadId: '1',
+            downloadId: '545923594199212032',
         });
 
         const rateLimits = response.rateLimits!;

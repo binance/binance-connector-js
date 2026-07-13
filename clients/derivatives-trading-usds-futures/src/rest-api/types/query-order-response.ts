@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,141 +20,159 @@
  */
 export interface QueryOrderResponse {
     /**
-     *
+     * Avg Price.
      * @type {string}
      * @memberof QueryOrderResponse
      */
     avgPrice?: string;
     /**
-     *
+     * Client Order Id.
      * @type {string}
      * @memberof QueryOrderResponse
      */
     clientOrderId?: string;
     /**
-     *
+     * Cum Quote.
      * @type {string}
      * @memberof QueryOrderResponse
      */
     cumQuote?: string;
     /**
-     *
+     * Executed Qty.
      * @type {string}
      * @memberof QueryOrderResponse
      */
     executedQty?: string;
     /**
-     *
+     * Order Id.
      * @type {number | bigint}
      * @memberof QueryOrderResponse
      */
     orderId?: number | bigint;
     /**
-     *
+     * Orig Qty.
      * @type {string}
      * @memberof QueryOrderResponse
      */
     origQty?: string;
     /**
-     *
+     * Orig Type.
      * @type {string}
      * @memberof QueryOrderResponse
      */
     origType?: string;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof QueryOrderResponse
      */
     price?: string;
     /**
-     *
+     * Reduce Only.
      * @type {boolean}
      * @memberof QueryOrderResponse
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Side.
      * @type {string}
      * @memberof QueryOrderResponse
      */
     side?: string;
     /**
-     *
+     * Position Side.
      * @type {string}
      * @memberof QueryOrderResponse
      */
     positionSide?: string;
     /**
-     *
+     * Status.
      * @type {string}
      * @memberof QueryOrderResponse
      */
     status?: string;
     /**
-     *
+     * please ignore when order type is TRAILING_STOP_MARKET
      * @type {string}
      * @memberof QueryOrderResponse
      */
     stopPrice?: string;
     /**
-     *
+     * if Close-All
      * @type {boolean}
      * @memberof QueryOrderResponse
      */
     closePosition?: boolean;
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof QueryOrderResponse
      */
     symbol?: string;
     /**
-     *
+     * order time
      * @type {number | bigint}
      * @memberof QueryOrderResponse
      */
     time?: number | bigint;
     /**
-     *
+     * Time In Force.
      * @type {string}
      * @memberof QueryOrderResponse
      */
     timeInForce?: string;
     /**
-     *
+     * Type.
      * @type {string}
      * @memberof QueryOrderResponse
      */
     type?: string;
     /**
-     *
+     * activation price, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof QueryOrderResponse
      */
     activatePrice?: string;
     /**
-     *
+     * callback rate, only return with TRAILING_STOP_MARKET order
      * @type {string}
      * @memberof QueryOrderResponse
      */
     priceRate?: string;
     /**
-     *
+     * update time
      * @type {number | bigint}
      * @memberof QueryOrderResponse
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Working Type.
      * @type {string}
      * @memberof QueryOrderResponse
      */
     workingType?: string;
     /**
-     *
+     * if conditional order trigger is protected
      * @type {boolean}
      * @memberof QueryOrderResponse
      */
     priceProtect?: boolean;
+    /**
+     * Price Match.
+     * @type {string}
+     * @memberof QueryOrderResponse
+     */
+    priceMatch?: string;
+    /**
+     * Self Trade Prevention Mode.
+     * @type {string}
+     * @memberof QueryOrderResponse
+     */
+    selfTradePreventionMode?: string;
+    /**
+     * Good Till Date.
+     * @type {number | bigint}
+     * @memberof QueryOrderResponse
+     */
+    goodTillDate?: number | bigint;
 }

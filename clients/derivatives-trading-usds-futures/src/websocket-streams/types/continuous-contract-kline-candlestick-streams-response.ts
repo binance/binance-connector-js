@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Futures (USDⓈ-M) WebSocket Market Streams
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures WebSocket Market Streams
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,25 +25,25 @@ import type { ContinuousContractKlineCandlestickStreamsResponseK } from './conti
  */
 export interface ContinuousContractKlineCandlestickStreamsResponse {
     /**
-     *
+     * Event type
      * @type {string}
      * @memberof ContinuousContractKlineCandlestickStreamsResponse
      */
     e?: string;
     /**
-     *
+     * Event time
      * @type {number | bigint}
      * @memberof ContinuousContractKlineCandlestickStreamsResponse
      */
     E?: number | bigint;
     /**
-     *
+     * Pair
      * @type {string}
      * @memberof ContinuousContractKlineCandlestickStreamsResponse
      */
     ps?: string;
     /**
-     *
+     * Contract type
      * @type {string}
      * @memberof ContinuousContractKlineCandlestickStreamsResponse
      */

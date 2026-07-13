@@ -13,7 +13,7 @@ const client = new DerivativesTradingUsdsFutures({ configurationRestAPI });
 async function classicPortfolioMarginAccountInformation() {
     try {
         const response = await client.restAPI.classicPortfolioMarginAccountInformation({
-            asset: 'asset_example',
+            asset: 'BTC',
         });
 
         const rateLimits = response.rateLimits!;

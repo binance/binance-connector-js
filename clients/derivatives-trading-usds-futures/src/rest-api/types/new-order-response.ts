@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,7 +20,7 @@
  */
 export interface NewOrderResponse {
     /**
-     *
+     * Client Order Id.
      * @type {string}
      * @memberof NewOrderResponse
      */
@@ -32,133 +32,133 @@ export interface NewOrderResponse {
      */
     cumQty?: string;
     /**
-     *
+     * Cum Quote. Will be removed after CM migration.
      * @type {string}
      * @memberof NewOrderResponse
      */
     cumQuote?: string;
     /**
-     *
+     * Executed Qty.
      * @type {string}
      * @memberof NewOrderResponse
      */
     executedQty?: string;
     /**
-     *
+     * Order Id.
      * @type {number | bigint}
      * @memberof NewOrderResponse
      */
     orderId?: number | bigint;
     /**
-     *
+     * Avg Price. Will be removed after CM migration.
      * @type {string}
      * @memberof NewOrderResponse
      */
     avgPrice?: string;
     /**
-     *
+     * Orig Qty.
      * @type {string}
      * @memberof NewOrderResponse
      */
     origQty?: string;
     /**
-     *
+     * Price.
      * @type {string}
      * @memberof NewOrderResponse
      */
     price?: string;
     /**
-     *
+     * Reduce Only.
      * @type {boolean}
      * @memberof NewOrderResponse
      */
     reduceOnly?: boolean;
     /**
-     *
+     * Side.
      * @type {string}
      * @memberof NewOrderResponse
      */
     side?: string;
     /**
-     *
+     * Position Side.
      * @type {string}
      * @memberof NewOrderResponse
      */
     positionSide?: string;
     /**
-     *
+     * Status.
      * @type {string}
      * @memberof NewOrderResponse
      */
     status?: string;
     /**
-     *
+     * ignored for LIMIT / MARKET orders
      * @type {string}
      * @memberof NewOrderResponse
      */
     stopPrice?: string;
     /**
-     *
+     * if Close-All
      * @type {boolean}
      * @memberof NewOrderResponse
      */
     closePosition?: boolean;
     /**
-     *
+     * Symbol.
      * @type {string}
      * @memberof NewOrderResponse
      */
     symbol?: string;
     /**
-     *
+     * Time In Force.
      * @type {string}
      * @memberof NewOrderResponse
      */
     timeInForce?: string;
     /**
-     *
+     * Type.
      * @type {string}
      * @memberof NewOrderResponse
      */
     type?: string;
     /**
-     *
+     * Orig Type.
      * @type {string}
      * @memberof NewOrderResponse
      */
     origType?: string;
     /**
-     *
+     * Update Time.
      * @type {number | bigint}
      * @memberof NewOrderResponse
      */
     updateTime?: number | bigint;
     /**
-     *
+     * Working Type.
      * @type {string}
      * @memberof NewOrderResponse
      */
     workingType?: string;
     /**
-     *
+     * if conditional order trigger is protected
      * @type {boolean}
      * @memberof NewOrderResponse
      */
     priceProtect?: boolean;
     /**
-     *
+     * price match mode
      * @type {string}
      * @memberof NewOrderResponse
      */
     priceMatch?: string;
     /**
-     *
+     * self trading preventation mode
      * @type {string}
      * @memberof NewOrderResponse
      */
     selfTradePreventionMode?: string;
     /**
-     *
+     * order pre-set auot cancel time for TIF GTD order
      * @type {number | bigint}
      * @memberof NewOrderResponse
      */

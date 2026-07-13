@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -32,7 +32,7 @@ export interface PlaceMultipleOrdersBatchOrdersParameterInner {
      */
     side?: PlaceMultipleOrdersBatchOrdersParameterInnerSideEnum;
     /**
-     *
+     * Default `BOTH` for One-way Mode; `LONG` or `SHORT` for Hedge Mode.
      * @type {string}
      * @memberof PlaceMultipleOrdersBatchOrdersParameterInner
      */
@@ -42,7 +42,7 @@ export interface PlaceMultipleOrdersBatchOrdersParameterInner {
      * @type {string}
      * @memberof PlaceMultipleOrdersBatchOrdersParameterInner
      */
-    type?: string;
+    type?: PlaceMultipleOrdersBatchOrdersParameterInnerTypeEnum;
     /**
      *
      * @type {string}
@@ -51,22 +51,22 @@ export interface PlaceMultipleOrdersBatchOrdersParameterInner {
     timeInForce?: PlaceMultipleOrdersBatchOrdersParameterInnerTimeInForceEnum;
     /**
      *
-     * @type {string}
+     * @type {number}
      * @memberof PlaceMultipleOrdersBatchOrdersParameterInner
      */
-    quantity?: string;
+    quantity?: number;
     /**
      *
      * @type {string}
      * @memberof PlaceMultipleOrdersBatchOrdersParameterInner
      */
-    reduceOnly?: string;
+    reduceOnly?: PlaceMultipleOrdersBatchOrdersParameterInnerReduceOnlyEnum;
     /**
      *
-     * @type {string}
+     * @type {number}
      * @memberof PlaceMultipleOrdersBatchOrdersParameterInner
      */
-    price?: string;
+    price?: number;
     /**
      *
      * @type {string}
@@ -80,23 +80,23 @@ export interface PlaceMultipleOrdersBatchOrdersParameterInner {
      */
     newOrderRespType?: PlaceMultipleOrdersBatchOrdersParameterInnerNewOrderRespTypeEnum;
     /**
-     *
+     * only avaliable for LIMIT/STOP/TAKE_PROFIT order; Can\'t be passed together with price
      * @type {string}
      * @memberof PlaceMultipleOrdersBatchOrdersParameterInner
      */
     priceMatch?: PlaceMultipleOrdersBatchOrdersParameterInnerPriceMatchEnum;
     /**
-     *
+     * EXPIRE_TAKER:expire taker order when STP triggers/ EXPIRE_MAKER:expire taker order when STP triggers/ EXPIRE_BOTH:expire both orders when STP triggers; default NONE
      * @type {string}
      * @memberof PlaceMultipleOrdersBatchOrdersParameterInner
      */
     selfTradePreventionMode?: PlaceMultipleOrdersBatchOrdersParameterInnerSelfTradePreventionModeEnum;
     /**
-     *
-     * @type {string}
+     * Auto-cancel time for `GTD` orders.
+     * @type {number | bigint}
      * @memberof PlaceMultipleOrdersBatchOrdersParameterInner
      */
-    goodTillDate?: string;
+    goodTillDate?: number | bigint;
 }
 
 export const PlaceMultipleOrdersBatchOrdersParameterInnerSideEnum = {
@@ -114,6 +114,18 @@ export const PlaceMultipleOrdersBatchOrdersParameterInnerPositionSideEnum = {
 
 export type PlaceMultipleOrdersBatchOrdersParameterInnerPositionSideEnum =
     (typeof PlaceMultipleOrdersBatchOrdersParameterInnerPositionSideEnum)[keyof typeof PlaceMultipleOrdersBatchOrdersParameterInnerPositionSideEnum];
+export const PlaceMultipleOrdersBatchOrdersParameterInnerTypeEnum = {
+    LIMIT: 'LIMIT',
+    MARKET: 'MARKET',
+    STOP: 'STOP',
+    STOP_MARKET: 'STOP_MARKET',
+    TAKE_PROFIT: 'TAKE_PROFIT',
+    TAKE_PROFIT_MARKET: 'TAKE_PROFIT_MARKET',
+    TRAILING_STOP_MARKET: 'TRAILING_STOP_MARKET',
+} as const;
+
+export type PlaceMultipleOrdersBatchOrdersParameterInnerTypeEnum =
+    (typeof PlaceMultipleOrdersBatchOrdersParameterInnerTypeEnum)[keyof typeof PlaceMultipleOrdersBatchOrdersParameterInnerTypeEnum];
 export const PlaceMultipleOrdersBatchOrdersParameterInnerTimeInForceEnum = {
     GTC: 'GTC',
     IOC: 'IOC',
@@ -125,6 +137,13 @@ export const PlaceMultipleOrdersBatchOrdersParameterInnerTimeInForceEnum = {
 
 export type PlaceMultipleOrdersBatchOrdersParameterInnerTimeInForceEnum =
     (typeof PlaceMultipleOrdersBatchOrdersParameterInnerTimeInForceEnum)[keyof typeof PlaceMultipleOrdersBatchOrdersParameterInnerTimeInForceEnum];
+export const PlaceMultipleOrdersBatchOrdersParameterInnerReduceOnlyEnum = {
+    TRUE: 'true',
+    FALSE: 'false',
+} as const;
+
+export type PlaceMultipleOrdersBatchOrdersParameterInnerReduceOnlyEnum =
+    (typeof PlaceMultipleOrdersBatchOrdersParameterInnerReduceOnlyEnum)[keyof typeof PlaceMultipleOrdersBatchOrdersParameterInnerReduceOnlyEnum];
 export const PlaceMultipleOrdersBatchOrdersParameterInnerNewOrderRespTypeEnum = {
     ACK: 'ACK',
     RESULT: 'RESULT',
@@ -133,7 +152,6 @@ export const PlaceMultipleOrdersBatchOrdersParameterInnerNewOrderRespTypeEnum = 
 export type PlaceMultipleOrdersBatchOrdersParameterInnerNewOrderRespTypeEnum =
     (typeof PlaceMultipleOrdersBatchOrdersParameterInnerNewOrderRespTypeEnum)[keyof typeof PlaceMultipleOrdersBatchOrdersParameterInnerNewOrderRespTypeEnum];
 export const PlaceMultipleOrdersBatchOrdersParameterInnerPriceMatchEnum = {
-    NONE: 'NONE',
     OPPONENT: 'OPPONENT',
     OPPONENT_5: 'OPPONENT_5',
     OPPONENT_10: 'OPPONENT_10',
@@ -147,6 +165,7 @@ export const PlaceMultipleOrdersBatchOrdersParameterInnerPriceMatchEnum = {
 export type PlaceMultipleOrdersBatchOrdersParameterInnerPriceMatchEnum =
     (typeof PlaceMultipleOrdersBatchOrdersParameterInnerPriceMatchEnum)[keyof typeof PlaceMultipleOrdersBatchOrdersParameterInnerPriceMatchEnum];
 export const PlaceMultipleOrdersBatchOrdersParameterInnerSelfTradePreventionModeEnum = {
+    NONE: 'NONE',
     EXPIRE_TAKER: 'EXPIRE_TAKER',
     EXPIRE_BOTH: 'EXPIRE_BOTH',
     EXPIRE_MAKER: 'EXPIRE_MAKER',

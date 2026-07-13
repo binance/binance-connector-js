@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -21,10 +21,10 @@
 export interface ModifyMultipleOrdersBatchOrdersParameterInner {
     /**
      *
-     * @type {string}
+     * @type {number | bigint}
      * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
      */
-    orderId?: string;
+    orderId?: number | bigint;
     /**
      *
      * @type {string}
@@ -44,35 +44,41 @@ export interface ModifyMultipleOrdersBatchOrdersParameterInner {
      */
     side?: ModifyMultipleOrdersBatchOrdersParameterInnerSideEnum;
     /**
-     *
-     * @type {string}
+     * Order quantity, cannot be sent with closePosition=true
+     * @type {number}
      * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
      */
-    quantity?: string;
+    quantity?: number;
     /**
      *
-     * @type {string}
+     * @type {number}
      * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
      */
-    price?: string;
+    price?: number;
     /**
-     *
+     * Only avaliable for LIMIT/STOP/TAKE_PROFIT order; Cannot be sent together with `price`.
      * @type {string}
      * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
      */
     priceMatch?: ModifyMultipleOrdersBatchOrdersParameterInnerPriceMatchEnum;
     /**
-     *
-     * @type {string}
+     * stop price, only STOP, STOP_MARKET, TAKE_PROFIT, TAKE_PROFIT_MARKET need
+     * @type {number}
      * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
      */
-    stopPrice?: string;
+    stopPrice?: number;
     /**
-     *
-     * @type {string}
+     * Validity window in milliseconds.
+     * @type {number | bigint}
      * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
      */
-    recvWindow?: string;
+    recvWindow?: number | bigint;
+    /**
+     * Unix timestamp in milliseconds.
+     * @type {number | bigint}
+     * @memberof ModifyMultipleOrdersBatchOrdersParameterInner
+     */
+    timestamp?: number | bigint;
 }
 
 export const ModifyMultipleOrdersBatchOrdersParameterInnerSideEnum = {
@@ -83,7 +89,6 @@ export const ModifyMultipleOrdersBatchOrdersParameterInnerSideEnum = {
 export type ModifyMultipleOrdersBatchOrdersParameterInnerSideEnum =
     (typeof ModifyMultipleOrdersBatchOrdersParameterInnerSideEnum)[keyof typeof ModifyMultipleOrdersBatchOrdersParameterInnerSideEnum];
 export const ModifyMultipleOrdersBatchOrdersParameterInnerPriceMatchEnum = {
-    NONE: 'NONE',
     OPPONENT: 'OPPONENT',
     OPPONENT_5: 'OPPONENT_5',
     OPPONENT_10: 'OPPONENT_10',

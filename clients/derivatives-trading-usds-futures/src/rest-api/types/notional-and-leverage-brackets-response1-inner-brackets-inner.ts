@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Derivatives Trading USDS Futures REST API
+ * Futures (USDⓈ-M) REST API
  *
- * OpenAPI Specification for the Binance Derivatives Trading USDS Futures REST API
+ * Access market data, manage accounts, and trade USDⓈ-M perpetual futures.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,37 +20,37 @@
  */
 export interface NotionalAndLeverageBracketsResponse1InnerBracketsInner {
     /**
-     *
+     * Notional bracket
      * @type {number | bigint}
      * @memberof NotionalAndLeverageBracketsResponse1InnerBracketsInner
      */
     bracket?: number | bigint;
     /**
-     *
+     * Max initial leverage for this bracket
      * @type {number | bigint}
      * @memberof NotionalAndLeverageBracketsResponse1InnerBracketsInner
      */
     initialLeverage?: number | bigint;
     /**
-     *
+     * Cap notional of this bracket
      * @type {number | bigint}
      * @memberof NotionalAndLeverageBracketsResponse1InnerBracketsInner
      */
     notionalCap?: number | bigint;
     /**
-     *
+     * Notional threshold of this bracket
      * @type {number | bigint}
      * @memberof NotionalAndLeverageBracketsResponse1InnerBracketsInner
      */
     notionalFloor?: number | bigint;
     /**
-     *
+     * Maintenance ratio for this bracket
      * @type {number}
      * @memberof NotionalAndLeverageBracketsResponse1InnerBracketsInner
      */
     maintMarginRatio?: number;
     /**
-     *
+     * Auxiliary number for quick calculation
      * @type {number}
      * @memberof NotionalAndLeverageBracketsResponse1InnerBracketsInner
      */
