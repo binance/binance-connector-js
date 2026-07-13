@@ -507,7 +507,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * @returns {Promise<RestApiResponse<GetMarketDetailResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/market-data#get-market-detail Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/market-data#get-market-detail Binance API Documentation}
      */
     public async getMarketDetail(
         requestParameters: GetMarketDetailRequest
@@ -536,7 +536,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * @returns {Promise<RestApiResponse<ListPredictionCategoriesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/market-data#list-prediction-categories Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/market-data#list-prediction-categories Binance API Documentation}
      */
     public async listPredictionCategories(): Promise<
         RestApiResponse<ListPredictionCategoriesResponse>
@@ -564,7 +564,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * @returns {Promise<RestApiResponse<ListPredictionMarketsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/market-data#list-prediction-markets Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/market-data#list-prediction-markets Binance API Documentation}
      */
     public async listPredictionMarkets(
         requestParameters: ListPredictionMarketsRequest = {}
@@ -599,7 +599,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * @returns {Promise<RestApiResponse<MarketSearchResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/market-data#market-search Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/market-data#market-search Binance API Documentation}
      */
     public async marketSearch(
         requestParameters: MarketSearchRequest
@@ -630,7 +630,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * @returns {Promise<RestApiResponse<QueryLastTradePriceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/market-data#query-last-trade-price Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/market-data#query-last-trade-price Binance API Documentation}
      */
     public async queryLastTradePrice(
         requestParameters: QueryLastTradePriceRequest
@@ -660,7 +660,7 @@ export class MarketDataApi implements MarketDataApiInterface {
      * @returns {Promise<RestApiResponse<QueryOrderBookResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof MarketDataApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/market-data#query-order-book Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/market-data#query-order-book Binance API Documentation}
      */
     public async queryOrderBook(
         requestParameters: QueryOrderBookRequest

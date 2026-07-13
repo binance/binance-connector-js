@@ -38,7 +38,7 @@ const PositionApiAxiosParamCreator = function (configuration: ConfigurationRestA
          *
          * Security Type: USER_DATA
          *
-         * @summary Get Position by Token
+         * @summary Get Position by Token (USER_DATA)
          * @param {string} walletAddress User's prediction wallet address
          * @param {string} tokenId Prediction outcome token ID
          * @param {number | bigint} [recvWindow] Request validity window in milliseconds
@@ -88,7 +88,7 @@ const PositionApiAxiosParamCreator = function (configuration: ConfigurationRestA
          *
          * Security Type: USER_DATA
          *
-         * @summary Query PnL
+         * @summary Query PnL (USER_DATA)
          * @param {string} walletAddress User's prediction wallet address
          * @param {string} [tokenId] Filter by prediction token ID
          * @param {number | bigint} [marketId] Filter by market ID. Must be > 0
@@ -151,7 +151,7 @@ const PositionApiAxiosParamCreator = function (configuration: ConfigurationRestA
          *
          * Security Type: USER_DATA
          *
-         * @summary Query Positions
+         * @summary Query Positions (USER_DATA)
          * @param {string} walletAddress User's prediction wallet address
          * @param {string} [tab] Position status tab. Values from `PositionQueryType`. Default `ONGOING`
          * @param {number} [offset] Pagination offset. Default `0`
@@ -209,7 +209,7 @@ const PositionApiAxiosParamCreator = function (configuration: ConfigurationRestA
          *
          * Security Type: USER_DATA
          *
-         * @summary Query Positions by Filter
+         * @summary Query Positions by Filter (USER_DATA)
          * @param {string} [walletAddress] User's prediction wallet address
          * @param {number | bigint} [marketTopicId] Filter by market topic ID
          * @param {number | bigint} [recvWindow] Request validity window in milliseconds
@@ -254,7 +254,7 @@ const PositionApiAxiosParamCreator = function (configuration: ConfigurationRestA
          *
          * Security Type: USER_DATA
          *
-         * @summary Query Settled Position History
+         * @summary Query Settled Position History (USER_DATA)
          * @param {string} walletAddress User's prediction wallet address
          * @param {string} [l1Category] Filter by level-1 category
          * @param {number} [result] Settlement result filter
@@ -335,7 +335,7 @@ export interface PositionApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary Get Position by Token
+     * @summary Get Position by Token (USER_DATA)
      * @param {GetPositionByTokenRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -351,7 +351,7 @@ export interface PositionApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query PnL
+     * @summary Query PnL (USER_DATA)
      * @param {QueryPnLRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -365,7 +365,7 @@ export interface PositionApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query Positions
+     * @summary Query Positions (USER_DATA)
      * @param {QueryPositionsRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -381,7 +381,7 @@ export interface PositionApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query Positions by Filter
+     * @summary Query Positions by Filter (USER_DATA)
      * @param {QueryPositionsByFilterRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -397,7 +397,7 @@ export interface PositionApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query Settled Position History
+     * @summary Query Settled Position History (USER_DATA)
      * @param {QuerySettledPositionHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -633,12 +633,12 @@ export class PositionApi implements PositionApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary Get Position by Token
+     * @summary Get Position by Token (USER_DATA)
      * @param {GetPositionByTokenRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetPositionByTokenResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof PositionApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/position#get-position-by-token Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/position#get-position-by-token Binance API Documentation}
      */
     public async getPositionByToken(
         requestParameters: GetPositionByTokenRequest
@@ -667,12 +667,12 @@ export class PositionApi implements PositionApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query PnL
+     * @summary Query PnL (USER_DATA)
      * @param {QueryPnLRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryPnLResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof PositionApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/position#query-pn-l Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/position#query-pn-l Binance API Documentation}
      */
     public async queryPnL(
         requestParameters: QueryPnLRequest
@@ -704,12 +704,12 @@ export class PositionApi implements PositionApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query Positions
+     * @summary Query Positions (USER_DATA)
      * @param {QueryPositionsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryPositionsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof PositionApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/position#query-positions Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/position#query-positions Binance API Documentation}
      */
     public async queryPositions(
         requestParameters: QueryPositionsRequest
@@ -740,12 +740,12 @@ export class PositionApi implements PositionApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query Positions by Filter
+     * @summary Query Positions by Filter (USER_DATA)
      * @param {QueryPositionsByFilterRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryPositionsByFilterResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof PositionApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/position#query-positions-by-filter Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/position#query-positions-by-filter Binance API Documentation}
      */
     public async queryPositionsByFilter(
         requestParameters: QueryPositionsByFilterRequest = {}
@@ -774,12 +774,12 @@ export class PositionApi implements PositionApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query Settled Position History
+     * @summary Query Settled Position History (USER_DATA)
      * @param {QuerySettledPositionHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QuerySettledPositionHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof PositionApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/position#query-settled-position-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/position#query-settled-position-history Binance API Documentation}
      */
     public async querySettledPositionHistory(
         requestParameters: QuerySettledPositionHistoryRequest

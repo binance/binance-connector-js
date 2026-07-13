@@ -206,7 +206,7 @@ describe('PositionApi', () => {
                 JSONStringify({
                     chainId: '56',
                     walletAddress: '0x12e32db8817e292508c34111cbc4b23340df542c',
-                    pnl: 'pnl',
+                    pnl: {},
                     pnlList: [
                         {
                             id: 10001,
@@ -260,7 +260,7 @@ describe('PositionApi', () => {
                 JSONStringify({
                     chainId: '56',
                     walletAddress: '0x12e32db8817e292508c34111cbc4b23340df542c',
-                    pnl: 'pnl',
+                    pnl: {},
                     pnlList: [
                         {
                             id: 10001,

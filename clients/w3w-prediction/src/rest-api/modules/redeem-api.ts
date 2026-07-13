@@ -32,7 +32,7 @@ const RedeemApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          *
          * Security Type: TRADE
          *
-         * @summary Batch Redeem
+         * @summary Batch Redeem (TRADE)
          * @param {string} walletAddress User's prediction wallet address
          * @param {string} walletId Wallet ID
          * @param {Array<string>} tokenIds List of prediction token IDs to redeem. Not empty. Example: `tokenIds=112233&tokenIds=112234`
@@ -99,7 +99,7 @@ const RedeemApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          * | `FAILED`    | Transaction failed                           |
          * | `NOT_FOUND` | Transaction hash not found                   |
          *
-         * @summary Get Redeem Status
+         * @summary Get Redeem Status (USER_DATA)
          * @param {string} walletAddress User's prediction wallet address
          * @param {string} txHash Redeem transaction hash
          * @param {number | bigint} [recvWindow] Request validity window in milliseconds
@@ -157,7 +157,7 @@ export interface RedeemApiInterface {
      *
      * Security Type: TRADE
      *
-     * @summary Batch Redeem
+     * @summary Batch Redeem (TRADE)
      * @param {BatchRedeemRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -183,7 +183,7 @@ export interface RedeemApiInterface {
      * | `FAILED`    | Transaction failed                           |
      * | `NOT_FOUND` | Transaction hash not found                   |
      *
-     * @summary Get Redeem Status
+     * @summary Get Redeem Status (USER_DATA)
      * @param {GetRedeemStatusRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -275,12 +275,12 @@ export class RedeemApi implements RedeemApiInterface {
      *
      * Security Type: TRADE
      *
-     * @summary Batch Redeem
+     * @summary Batch Redeem (TRADE)
      * @param {BatchRedeemRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<BatchRedeemResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof RedeemApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/redeem#batch-redeem Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/redeem#batch-redeem Binance API Documentation}
      */
     public async batchRedeem(
         requestParameters: BatchRedeemRequest
@@ -320,12 +320,12 @@ export class RedeemApi implements RedeemApiInterface {
      * | `FAILED`    | Transaction failed                           |
      * | `NOT_FOUND` | Transaction hash not found                   |
      *
-     * @summary Get Redeem Status
+     * @summary Get Redeem Status (USER_DATA)
      * @param {GetRedeemStatusRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetRedeemStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof RedeemApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/redeem#get-redeem-status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/redeem#get-redeem-status Binance API Documentation}
      */
     public async getRedeemStatus(
         requestParameters: GetRedeemStatusRequest

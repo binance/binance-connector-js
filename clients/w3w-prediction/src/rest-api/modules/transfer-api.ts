@@ -39,7 +39,7 @@ const TransferApiAxiosParamCreator = function (configuration: ConfigurationRestA
          *
          * Security Type: TRADE
          *
-         * @summary Create Inbound Transfer
+         * @summary Create Inbound Transfer (TRADE)
          * @param {string} walletId Wallet ID
          * @param {string} walletAddress User's prediction wallet address
          * @param {string} fromTokenAmount Transfer amount in wei (18 decimals). Must be > 0. Example: `1000000000000000000` = 1 USDT
@@ -113,7 +113,7 @@ const TransferApiAxiosParamCreator = function (configuration: ConfigurationRestA
          *
          * Security Type: TRADE
          *
-         * @summary Create Outbound Transfer
+         * @summary Create Outbound Transfer (TRADE)
          * @param {string} walletId Wallet ID
          * @param {string} walletAddress User's prediction wallet address
          * @param {string} fromTokenAmount Transfer amount in wei (18 decimals). Must be > 0. Example: `1000000000000000000` = 1 USDT
@@ -194,7 +194,7 @@ const TransferApiAxiosParamCreator = function (configuration: ConfigurationRestA
          *
          * Security Type: USER_DATA
          *
-         * @summary Query Transfer List
+         * @summary Query Transfer List (USER_DATA)
          * @param {string} walletAddress User's prediction wallet address
          * @param {string} startDate Start date. Format: `yyyy-MM-dd`. Must be ≤ `endDate`
          * @param {string} endDate End date. Format: `yyyy-MM-dd`. Must be ≥ `startDate`
@@ -273,7 +273,7 @@ const TransferApiAxiosParamCreator = function (configuration: ConfigurationRestA
          *
          * Security Type: USER_DATA
          *
-         * @summary Query Transfer Status
+         * @summary Query Transfer Status (USER_DATA)
          * @param {string} transferId Transfer ID returned from outbound/inbound transfer
          * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
@@ -326,7 +326,7 @@ export interface TransferApiInterface {
      *
      * Security Type: TRADE
      *
-     * @summary Create Inbound Transfer
+     * @summary Create Inbound Transfer (TRADE)
      * @param {CreateInboundTransferRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -342,7 +342,7 @@ export interface TransferApiInterface {
      *
      * Security Type: TRADE
      *
-     * @summary Create Outbound Transfer
+     * @summary Create Outbound Transfer (TRADE)
      * @param {CreateOutboundTransferRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -358,7 +358,7 @@ export interface TransferApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query Transfer List
+     * @summary Query Transfer List (USER_DATA)
      * @param {QueryTransferListRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -376,7 +376,7 @@ export interface TransferApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query Transfer Status
+     * @summary Query Transfer Status (USER_DATA)
      * @param {QueryTransferStatusRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -608,12 +608,12 @@ export class TransferApi implements TransferApiInterface {
      *
      * Security Type: TRADE
      *
-     * @summary Create Inbound Transfer
+     * @summary Create Inbound Transfer (TRADE)
      * @param {CreateInboundTransferRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CreateInboundTransferResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TransferApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/transfer#create-inbound-transfer Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/transfer#create-inbound-transfer Binance API Documentation}
      */
     public async createInboundTransfer(
         requestParameters: CreateInboundTransferRequest
@@ -646,12 +646,12 @@ export class TransferApi implements TransferApiInterface {
      *
      * Security Type: TRADE
      *
-     * @summary Create Outbound Transfer
+     * @summary Create Outbound Transfer (TRADE)
      * @param {CreateOutboundTransferRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<CreateOutboundTransferResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TransferApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/transfer#create-outbound-transfer Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/transfer#create-outbound-transfer Binance API Documentation}
      */
     public async createOutboundTransfer(
         requestParameters: CreateOutboundTransferRequest
@@ -685,12 +685,12 @@ export class TransferApi implements TransferApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query Transfer List
+     * @summary Query Transfer List (USER_DATA)
      * @param {QueryTransferListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryTransferListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TransferApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/transfer#query-transfer-list Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/transfer#query-transfer-list Binance API Documentation}
      */
     public async queryTransferList(
         requestParameters: QueryTransferListRequest
@@ -726,12 +726,12 @@ export class TransferApi implements TransferApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query Transfer Status
+     * @summary Query Transfer Status (USER_DATA)
      * @param {QueryTransferStatusRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryTransferStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TransferApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/transfer#query-transfer-status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/transfer#query-transfer-status Binance API Documentation}
      */
     public async queryTransferStatus(
         requestParameters: QueryTransferStatusRequest

@@ -51,7 +51,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * - Use dot notation for nested list fields: `cancelInfoList[0].orderId`, `cancelInfoList[1].orderId`, etc.
          * - `vendor` does not need to be supplied. The server automatically sets the correct vendor (`predict_fun`) for every item in the batch.
          *
-         * @summary Batch Cancel Orders
+         * @summary Batch Cancel Orders (TRADE)
          * @param {string} walletAddress User's prediction wallet address
          * @param {string} walletId Wallet ID
          * @param {Array<BatchCancelOrdersCancelInfoListParameterInner>} [cancelInfoList] List of orders to cancel (index `i` starts from 0)
@@ -105,7 +105,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * - `feeAmount` is a string because it is denominated in wei (18 decimals) and may exceed JavaScript's safe integer range. `feeDiscountBps` is also a string to allow fractional basis-point values in the future. `feeRateBps` and `slippageBps` are integers and will never exceed safe integer bounds.
          * - **MARKET order minimum amount:** For `MARKET` orders, `amountIn` must be at least approximately **1.5 USDT** (in wei: `1500000000000000000`). The exact minimum varies by market liquidity. If the amount is too small, the server returns `-9000 Your order amount is too small`. This limit does **not** apply to `LIMIT` orders.
          *
-         * @summary Get Quote
+         * @summary Get Quote (TRADE)
          * @param {string} walletAddress User's prediction wallet address
          * @param {string} tokenId Prediction outcome token ID
          * @param {GetQuoteSideEnum} side Trade direction. Enum: `BUY`, `SELL`
@@ -211,7 +211,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          * | `MARKET`  | Must be `FOK` | Not required          |
          * | `LIMIT`   | Must be `GTC` | Required, must be > 0 |
          *
-         * @summary Place Order
+         * @summary Place Order (TRADE)
          * @param {string} walletAddress User's prediction wallet address
          * @param {string} walletId Wallet ID
          * @param {string} quoteId Quote ID obtained from `Get Quote`
@@ -306,7 +306,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * Security Type: USER_DATA
          *
-         * @summary Query Active Orders
+         * @summary Query Active Orders (USER_DATA)
          * @param {string} walletAddress User's prediction wallet address
          * @param {QueryActiveOrdersTradeSideEnum} [tradeSide] Filter by trade side. Enum: `BUY`, `SELL`
          * @param {string} [l1Category] Filter by level-1 category
@@ -374,7 +374,7 @@ const TradeApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
          *
          * Security Type: USER_DATA
          *
-         * @summary Query Order History
+         * @summary Query Order History (USER_DATA)
          * @param {string} walletAddress User's prediction wallet address
          * @param {string} [l1Category] Filter by level-1 category
          * @param {QueryOrderHistoryOrderTypeEnum} [orderType] Filter by order type. Enum: `MARKET`, `LIMIT`
@@ -472,7 +472,7 @@ export interface TradeApiInterface {
      * - Use dot notation for nested list fields: `cancelInfoList[0].orderId`, `cancelInfoList[1].orderId`, etc.
      * - `vendor` does not need to be supplied. The server automatically sets the correct vendor (`predict_fun`) for every item in the batch.
      *
-     * @summary Batch Cancel Orders
+     * @summary Batch Cancel Orders (TRADE)
      * @param {BatchCancelOrdersRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -492,7 +492,7 @@ export interface TradeApiInterface {
      * - `feeAmount` is a string because it is denominated in wei (18 decimals) and may exceed JavaScript's safe integer range. `feeDiscountBps` is also a string to allow fractional basis-point values in the future. `feeRateBps` and `slippageBps` are integers and will never exceed safe integer bounds.
      * - **MARKET order minimum amount:** For `MARKET` orders, `amountIn` must be at least approximately **1.5 USDT** (in wei: `1500000000000000000`). The exact minimum varies by market liquidity. If the amount is too small, the server returns `-9000 Your order amount is too small`. This limit does **not** apply to `LIMIT` orders.
      *
-     * @summary Get Quote
+     * @summary Get Quote (TRADE)
      * @param {GetQuoteRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -514,7 +514,7 @@ export interface TradeApiInterface {
      * | `MARKET`  | Must be `FOK` | Not required          |
      * | `LIMIT`   | Must be `GTC` | Required, must be > 0 |
      *
-     * @summary Place Order
+     * @summary Place Order (TRADE)
      * @param {PlaceOrderRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -528,7 +528,7 @@ export interface TradeApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query Active Orders
+     * @summary Query Active Orders (USER_DATA)
      * @param {QueryActiveOrdersRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -544,7 +544,7 @@ export interface TradeApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query Order History
+     * @summary Query Order History (USER_DATA)
      * @param {QueryOrderHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -897,12 +897,12 @@ export class TradeApi implements TradeApiInterface {
      * - Use dot notation for nested list fields: `cancelInfoList[0].orderId`, `cancelInfoList[1].orderId`, etc.
      * - `vendor` does not need to be supplied. The server automatically sets the correct vendor (`predict_fun`) for every item in the batch.
      *
-     * @summary Batch Cancel Orders
+     * @summary Batch Cancel Orders (TRADE)
      * @param {BatchCancelOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<BatchCancelOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/trade#batch-cancel-orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/trade#batch-cancel-orders Binance API Documentation}
      */
     public async batchCancelOrders(
         requestParameters: BatchCancelOrdersRequest
@@ -935,12 +935,12 @@ export class TradeApi implements TradeApiInterface {
      * - `feeAmount` is a string because it is denominated in wei (18 decimals) and may exceed JavaScript's safe integer range. `feeDiscountBps` is also a string to allow fractional basis-point values in the future. `feeRateBps` and `slippageBps` are integers and will never exceed safe integer bounds.
      * - **MARKET order minimum amount:** For `MARKET` orders, `amountIn` must be at least approximately **1.5 USDT** (in wei: `1500000000000000000`). The exact minimum varies by market liquidity. If the amount is too small, the server returns `-9000 Your order amount is too small`. This limit does **not** apply to `LIMIT` orders.
      *
-     * @summary Get Quote
+     * @summary Get Quote (TRADE)
      * @param {GetQuoteRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetQuoteResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/trade#get-quote Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/trade#get-quote Binance API Documentation}
      */
     public async getQuote(
         requestParameters: GetQuoteRequest
@@ -985,12 +985,12 @@ export class TradeApi implements TradeApiInterface {
      * | `MARKET`  | Must be `FOK` | Not required          |
      * | `LIMIT`   | Must be `GTC` | Required, must be > 0 |
      *
-     * @summary Place Order
+     * @summary Place Order (TRADE)
      * @param {PlaceOrderRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<PlaceOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/trade#place-order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/trade#place-order Binance API Documentation}
      */
     public async placeOrder(
         requestParameters: PlaceOrderRequest
@@ -1026,12 +1026,12 @@ export class TradeApi implements TradeApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query Active Orders
+     * @summary Query Active Orders (USER_DATA)
      * @param {QueryActiveOrdersRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryActiveOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/trade#query-active-orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/trade#query-active-orders Binance API Documentation}
      */
     public async queryActiveOrders(
         requestParameters: QueryActiveOrdersRequest
@@ -1064,12 +1064,12 @@ export class TradeApi implements TradeApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query Order History
+     * @summary Query Order History (USER_DATA)
      * @param {QueryOrderHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryOrderHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof TradeApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/trade#query-order-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/trade#query-order-history Binance API Documentation}
      */
     public async queryOrderHistory(
         requestParameters: QueryOrderHistoryRequest

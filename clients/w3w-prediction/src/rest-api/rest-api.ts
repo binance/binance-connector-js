@@ -172,7 +172,7 @@ export class RestAPI {
      *
      * @returns {Promise<RestApiResponse<GetMarketDetailResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/market-data#get-market-detail Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/market-data#get-market-detail Binance API Documentation}
      */
     getMarketDetail(
         requestParameters: GetMarketDetailRequest
@@ -189,7 +189,7 @@ export class RestAPI {
      *
      * @returns {Promise<RestApiResponse<ListPredictionCategoriesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/market-data#list-prediction-categories Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/market-data#list-prediction-categories Binance API Documentation}
      */
     listPredictionCategories(): Promise<RestApiResponse<ListPredictionCategoriesResponse>> {
         return this.marketDataApi.listPredictionCategories();
@@ -205,7 +205,7 @@ export class RestAPI {
      *
      * @returns {Promise<RestApiResponse<ListPredictionMarketsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/market-data#list-prediction-markets Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/market-data#list-prediction-markets Binance API Documentation}
      */
     listPredictionMarkets(
         requestParameters: ListPredictionMarketsRequest = {}
@@ -223,7 +223,7 @@ export class RestAPI {
      *
      * @returns {Promise<RestApiResponse<MarketSearchResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/market-data#market-search Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/market-data#market-search Binance API Documentation}
      */
     marketSearch(
         requestParameters: MarketSearchRequest
@@ -241,7 +241,7 @@ export class RestAPI {
      *
      * @returns {Promise<RestApiResponse<QueryLastTradePriceResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/market-data#query-last-trade-price Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/market-data#query-last-trade-price Binance API Documentation}
      */
     queryLastTradePrice(
         requestParameters: QueryLastTradePriceRequest
@@ -259,7 +259,7 @@ export class RestAPI {
      *
      * @returns {Promise<RestApiResponse<QueryOrderBookResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/market-data#query-order-book Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/market-data#query-order-book Binance API Documentation}
      */
     queryOrderBook(
         requestParameters: QueryOrderBookRequest
@@ -274,12 +274,12 @@ export class RestAPI {
      *
      * Security Type: USER_DATA
      *
-     * @summary Get Position by Token
+     * @summary Get Position by Token (USER_DATA)
      * @param {GetPositionByTokenRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetPositionByTokenResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/position#get-position-by-token Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/position#get-position-by-token Binance API Documentation}
      */
     getPositionByToken(
         requestParameters: GetPositionByTokenRequest
@@ -294,12 +294,12 @@ export class RestAPI {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query PnL
+     * @summary Query PnL (USER_DATA)
      * @param {QueryPnLRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryPnLResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/position#query-pn-l Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/position#query-pn-l Binance API Documentation}
      */
     queryPnL(requestParameters: QueryPnLRequest): Promise<RestApiResponse<QueryPnLResponse>> {
         return this.positionApi.queryPnL(requestParameters);
@@ -312,12 +312,12 @@ export class RestAPI {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query Positions
+     * @summary Query Positions (USER_DATA)
      * @param {QueryPositionsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryPositionsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/position#query-positions Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/position#query-positions Binance API Documentation}
      */
     queryPositions(
         requestParameters: QueryPositionsRequest
@@ -332,12 +332,12 @@ export class RestAPI {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query Positions by Filter
+     * @summary Query Positions by Filter (USER_DATA)
      * @param {QueryPositionsByFilterRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryPositionsByFilterResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/position#query-positions-by-filter Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/position#query-positions-by-filter Binance API Documentation}
      */
     queryPositionsByFilter(
         requestParameters: QueryPositionsByFilterRequest = {}
@@ -352,12 +352,12 @@ export class RestAPI {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query Settled Position History
+     * @summary Query Settled Position History (USER_DATA)
      * @param {QuerySettledPositionHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QuerySettledPositionHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/position#query-settled-position-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/position#query-settled-position-history Binance API Documentation}
      */
     querySettledPositionHistory(
         requestParameters: QuerySettledPositionHistoryRequest
@@ -372,12 +372,12 @@ export class RestAPI {
      *
      * Security Type: TRADE
      *
-     * @summary Batch Redeem
+     * @summary Batch Redeem (TRADE)
      * @param {BatchRedeemRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<BatchRedeemResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/redeem#batch-redeem Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/redeem#batch-redeem Binance API Documentation}
      */
     batchRedeem(
         requestParameters: BatchRedeemRequest
@@ -402,12 +402,12 @@ export class RestAPI {
      * | `FAILED`    | Transaction failed                           |
      * | `NOT_FOUND` | Transaction hash not found                   |
      *
-     * @summary Get Redeem Status
+     * @summary Get Redeem Status (USER_DATA)
      * @param {GetRedeemStatusRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetRedeemStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/redeem#get-redeem-status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/redeem#get-redeem-status Binance API Documentation}
      */
     getRedeemStatus(
         requestParameters: GetRedeemStatusRequest
@@ -434,12 +434,12 @@ export class RestAPI {
      * - Use dot notation for nested list fields: `cancelInfoList[0].orderId`, `cancelInfoList[1].orderId`, etc.
      * - `vendor` does not need to be supplied. The server automatically sets the correct vendor (`predict_fun`) for every item in the batch.
      *
-     * @summary Batch Cancel Orders
+     * @summary Batch Cancel Orders (TRADE)
      * @param {BatchCancelOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<BatchCancelOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/trade#batch-cancel-orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/trade#batch-cancel-orders Binance API Documentation}
      */
     batchCancelOrders(
         requestParameters: BatchCancelOrdersRequest
@@ -458,12 +458,12 @@ export class RestAPI {
      * - `feeAmount` is a string because it is denominated in wei (18 decimals) and may exceed JavaScript's safe integer range. `feeDiscountBps` is also a string to allow fractional basis-point values in the future. `feeRateBps` and `slippageBps` are integers and will never exceed safe integer bounds.
      * - **MARKET order minimum amount:** For `MARKET` orders, `amountIn` must be at least approximately **1.5 USDT** (in wei: `1500000000000000000`). The exact minimum varies by market liquidity. If the amount is too small, the server returns `-9000 Your order amount is too small`. This limit does **not** apply to `LIMIT` orders.
      *
-     * @summary Get Quote
+     * @summary Get Quote (TRADE)
      * @param {GetQuoteRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetQuoteResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/trade#get-quote Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/trade#get-quote Binance API Documentation}
      */
     getQuote(requestParameters: GetQuoteRequest): Promise<RestApiResponse<GetQuoteResponse>> {
         return this.tradeApi.getQuote(requestParameters);
@@ -484,12 +484,12 @@ export class RestAPI {
      * | `MARKET`  | Must be `FOK` | Not required          |
      * | `LIMIT`   | Must be `GTC` | Required, must be > 0 |
      *
-     * @summary Place Order
+     * @summary Place Order (TRADE)
      * @param {PlaceOrderRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<PlaceOrderResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/trade#place-order Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/trade#place-order Binance API Documentation}
      */
     placeOrder(requestParameters: PlaceOrderRequest): Promise<RestApiResponse<PlaceOrderResponse>> {
         return this.tradeApi.placeOrder(requestParameters);
@@ -502,12 +502,12 @@ export class RestAPI {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query Active Orders
+     * @summary Query Active Orders (USER_DATA)
      * @param {QueryActiveOrdersRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryActiveOrdersResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/trade#query-active-orders Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/trade#query-active-orders Binance API Documentation}
      */
     queryActiveOrders(
         requestParameters: QueryActiveOrdersRequest
@@ -522,12 +522,12 @@ export class RestAPI {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query Order History
+     * @summary Query Order History (USER_DATA)
      * @param {QueryOrderHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryOrderHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/trade#query-order-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/trade#query-order-history Binance API Documentation}
      */
     queryOrderHistory(
         requestParameters: QueryOrderHistoryRequest
@@ -544,12 +544,12 @@ export class RestAPI {
      *
      * Security Type: TRADE
      *
-     * @summary Create Inbound Transfer
+     * @summary Create Inbound Transfer (TRADE)
      * @param {CreateInboundTransferRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<CreateInboundTransferResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/transfer#create-inbound-transfer Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/transfer#create-inbound-transfer Binance API Documentation}
      */
     createInboundTransfer(
         requestParameters: CreateInboundTransferRequest
@@ -564,12 +564,12 @@ export class RestAPI {
      *
      * Security Type: TRADE
      *
-     * @summary Create Outbound Transfer
+     * @summary Create Outbound Transfer (TRADE)
      * @param {CreateOutboundTransferRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<CreateOutboundTransferResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/transfer#create-outbound-transfer Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/transfer#create-outbound-transfer Binance API Documentation}
      */
     createOutboundTransfer(
         requestParameters: CreateOutboundTransferRequest
@@ -584,12 +584,12 @@ export class RestAPI {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query Transfer List
+     * @summary Query Transfer List (USER_DATA)
      * @param {QueryTransferListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryTransferListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/transfer#query-transfer-list Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/transfer#query-transfer-list Binance API Documentation}
      */
     queryTransferList(
         requestParameters: QueryTransferListRequest
@@ -606,12 +606,12 @@ export class RestAPI {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query Transfer Status
+     * @summary Query Transfer Status (USER_DATA)
      * @param {QueryTransferStatusRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryTransferStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/transfer#query-transfer-status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/transfer#query-transfer-status Binance API Documentation}
      */
     queryTransferStatus(
         requestParameters: QueryTransferStatusRequest
@@ -626,12 +626,12 @@ export class RestAPI {
      *
      * Security Type: USER_DATA
      *
-     * @summary Get Portfolio
+     * @summary Get Portfolio (USER_DATA)
      * @param {GetPortfolioRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetPortfolioResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/wallet#get-portfolio Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/wallet#get-portfolio Binance API Documentation}
      */
     getPortfolio(
         requestParameters: GetPortfolioRequest
@@ -646,12 +646,12 @@ export class RestAPI {
      *
      * Security Type: USER_DATA
      *
-     * @summary Get Quota Status
+     * @summary Get Quota Status (USER_DATA)
      * @param {GetQuotaStatusRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetQuotaStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/wallet#get-quota-status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/wallet#get-quota-status Binance API Documentation}
      */
     getQuotaStatus(
         requestParameters: GetQuotaStatusRequest = {}
@@ -666,12 +666,12 @@ export class RestAPI {
      *
      * Security Type: USER_DATA
      *
-     * @summary List Prediction Wallets
+     * @summary List Prediction Wallets (USER_DATA)
      * @param {ListPredictionWalletsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<ListPredictionWalletsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/wallet#list-prediction-wallets Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/wallet#list-prediction-wallets Binance API Documentation}
      */
     listPredictionWallets(
         requestParameters: ListPredictionWalletsRequest = {}
@@ -686,12 +686,12 @@ export class RestAPI {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query Payment Option Balances
+     * @summary Query Payment Option Balances (USER_DATA)
      * @param {QueryPaymentOptionBalancesRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<QueryPaymentOptionBalancesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/wallet#query-payment-option-balances Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/wallet#query-payment-option-balances Binance API Documentation}
      */
     queryPaymentOptionBalances(
         requestParameters: QueryPaymentOptionBalancesRequest = {}

@@ -37,7 +37,7 @@ const WalletApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          *
          * Security Type: USER_DATA
          *
-         * @summary Get Portfolio
+         * @summary Get Portfolio (USER_DATA)
          * @param {string} walletAddress User's prediction wallet address
          * @param {string} [tokenId] Filter by prediction token ID
          * @param {number | bigint} [marketId] Filter by market ID. Must be > 0
@@ -100,7 +100,7 @@ const WalletApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          *
          * Security Type: USER_DATA
          *
-         * @summary Get Quota Status
+         * @summary Get Quota Status (USER_DATA)
          * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
@@ -133,7 +133,7 @@ const WalletApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          *
          * Security Type: USER_DATA
          *
-         * @summary List Prediction Wallets
+         * @summary List Prediction Wallets (USER_DATA)
          * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
@@ -166,7 +166,7 @@ const WalletApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
          *
          * Security Type: USER_DATA
          *
-         * @summary Query Payment Option Balances
+         * @summary Query Payment Option Balances (USER_DATA)
          * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
@@ -207,7 +207,7 @@ export interface WalletApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary Get Portfolio
+     * @summary Get Portfolio (USER_DATA)
      * @param {GetPortfolioRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -223,7 +223,7 @@ export interface WalletApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary Get Quota Status
+     * @summary Get Quota Status (USER_DATA)
      * @param {GetQuotaStatusRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -239,7 +239,7 @@ export interface WalletApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary List Prediction Wallets
+     * @summary List Prediction Wallets (USER_DATA)
      * @param {ListPredictionWalletsRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -255,7 +255,7 @@ export interface WalletApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query Payment Option Balances
+     * @summary Query Payment Option Balances (USER_DATA)
      * @param {QueryPaymentOptionBalancesRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -373,12 +373,12 @@ export class WalletApi implements WalletApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary Get Portfolio
+     * @summary Get Portfolio (USER_DATA)
      * @param {GetPortfolioRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetPortfolioResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof WalletApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/wallet#get-portfolio Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/wallet#get-portfolio Binance API Documentation}
      */
     public async getPortfolio(
         requestParameters: GetPortfolioRequest
@@ -410,12 +410,12 @@ export class WalletApi implements WalletApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary Get Quota Status
+     * @summary Get Quota Status (USER_DATA)
      * @param {GetQuotaStatusRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetQuotaStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof WalletApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/wallet#get-quota-status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/wallet#get-quota-status Binance API Documentation}
      */
     public async getQuotaStatus(
         requestParameters: GetQuotaStatusRequest = {}
@@ -442,12 +442,12 @@ export class WalletApi implements WalletApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary List Prediction Wallets
+     * @summary List Prediction Wallets (USER_DATA)
      * @param {ListPredictionWalletsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ListPredictionWalletsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof WalletApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/wallet#list-prediction-wallets Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/wallet#list-prediction-wallets Binance API Documentation}
      */
     public async listPredictionWallets(
         requestParameters: ListPredictionWalletsRequest = {}
@@ -474,12 +474,12 @@ export class WalletApi implements WalletApiInterface {
      *
      * Security Type: USER_DATA
      *
-     * @summary Query Payment Option Balances
+     * @summary Query Payment Option Balances (USER_DATA)
      * @param {QueryPaymentOptionBalancesRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<QueryPaymentOptionBalancesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof WalletApi
-     * @see {@link https://developers.binance.com/en/dev-docs/catalog/web3-wallet-prediction-trading/api/rest-api/wallet#query-payment-option-balances Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/web3-wallet-prediction-trading/api/rest-api/wallet#query-payment-option-balances Binance API Documentation}
      */
     public async queryPaymentOptionBalances(
         requestParameters: QueryPaymentOptionBalancesRequest = {}
