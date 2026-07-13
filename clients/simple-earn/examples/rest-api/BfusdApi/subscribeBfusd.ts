@@ -10,7 +10,7 @@ const client = new SimpleEarn({ configurationRestAPI });
 async function subscribeBfusd() {
     try {
         const response = await client.restAPI.subscribeBfusd({
-            asset: 'asset_example',
+            asset: 'USDT',
             amount: 1.0,
         });
 

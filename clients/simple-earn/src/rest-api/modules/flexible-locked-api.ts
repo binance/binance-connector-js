@@ -1,7 +1,7 @@
 /**
- * Binance Simple Earn REST API
+ * Simple Earn REST API
  *
- * OpenAPI Specification for the Binance Simple Earn REST API
+ * Earn rewards by subscribing to flexible or locked Simple Earn products.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -54,19 +53,25 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Get Collateral Record
          *
-         * The time between `startTime` and `endTime` cannot be longer than 30 days.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-         * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: USER_DATA
          *
-         * @summary Get Collateral Record(USER_DATA)
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, the next 30 days' data beginning from `startTime` will be returned.
+         * - If `endTime` is sent but
+         * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         *
+         * @summary Get Collateral Record (USER_DATA)
          * @param {string} [productId]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [current] Currently querying page.
+         * @param {number | bigint} [size] Number of results per page.
          * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
@@ -117,9 +122,11 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Get Flexible Personal Left Quota
          *
-         * Weight: 150
+         * Weight(IP): 150
          *
-         * @summary Get Flexible Personal Left Quota(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Get Flexible Personal Left Quota (USER_DATA)
          * @param {string} productId
          * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
@@ -158,13 +165,15 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Get Flexible Product Position
          *
-         * Weight: 150
+         * Weight(IP): 150
          *
-         * @summary Get Flexible Product Position(USER_DATA)
-         * @param {string} [asset] USDC or USDT
+         * Security Type: USER_DATA
+         *
+         * @summary Get Flexible Product Position (USER_DATA)
+         * @param {string} [asset]
          * @param {string} [productId]
-         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [current] Currently querying page. Starts from 1.
+         * @param {number | bigint} [size] Number of results per page.
          * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
@@ -211,21 +220,27 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Get Flexible Redemption Record
          *
-         *	The time between `startTime` and `endTime` cannot be longer than 30 days.
-         *	If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         *	If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-         *	If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
          *
-         * @summary Get Flexible Redemption Record(USER_DATA)
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, the next 30 days' data beginning from `startTime` will be returned.
+         * - If `endTime` is sent but
+         * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         *
+         * @summary Get Flexible Redemption Record (USER_DATA)
          * @param {string} [productId]
          * @param {string} [redeemId]
-         * @param {string} [asset] USDC or USDT
+         * @param {string} [asset]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [current] Currently querying page. Starts from 1.
+         * @param {number | bigint} [size] Number of results per page.
          * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
@@ -284,38 +299,41 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Get Flexible Rewards History
          *
-         *	The time between `startTime` and `endTime` cannot be longer than 30 days.
-         *	If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         *	If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-         *	If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
          *
-         * @summary Get Flexible Rewards History(USER_DATA)
-         * @param {string} type FAST or STANDARD, defaults to STANDARD
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, the next 30 days' data beginning from `startTime` will be returned.
+         * - If `endTime` is sent but
+         * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         *
+         * @summary Get Flexible Rewards History (USER_DATA)
          * @param {string} [productId]
-         * @param {string} [asset] USDC or USDT
+         * @param {string} [asset]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {GetFlexibleRewardsHistoryTypeEnum} [type] `BONUS` - Bonus tiered APR, `REALTIME` - Real-time APR, `REWARDS` - Historical rewards, `ALL` - All types. Default: `ALL`
+         * @param {number | bigint} [current] Currently querying page. Starts from 1.
+         * @param {number | bigint} [size] Number of results per page.
          * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getFlexibleRewardsHistory: async (
-            type: string,
             productId?: string,
             asset?: string,
             startTime?: number | bigint,
             endTime?: number | bigint,
+            type?: GetFlexibleRewardsHistoryTypeEnum,
             current?: number | bigint,
             size?: number | bigint,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
-            // verify required parameter 'type' is not null or undefined
-            assertParamExists('getFlexibleRewardsHistory', 'type', type);
-
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
             const localVarHeaderParameter: Record<string, unknown> = {};
@@ -360,11 +378,13 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Get Flexible Subscription Preview
          *
-         * Weight: 150
+         * Weight(IP): 150
          *
-         * @summary Get Flexible Subscription Preview(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Get Flexible Subscription Preview (USER_DATA)
          * @param {string} productId
-         * @param {number} amount Amount
+         * @param {number} amount
          * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
@@ -408,21 +428,27 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Get Flexible Subscription Record
          *
-         * The time between `startTime` and `endTime` cannot be longer than 30 days.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-         * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
          *
-         * @summary Get Flexible Subscription Record(USER_DATA)
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, the next 30 days' data beginning from `startTime` will be returned.
+         * - If `endTime` is sent but
+         * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         *
+         * @summary Get Flexible Subscription Record (USER_DATA)
          * @param {string} [productId]
          * @param {string} [purchaseId]
-         * @param {string} [asset] USDC or USDT
+         * @param {string} [asset]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [current] Currently querying page. Starts from 1.
+         * @param {number | bigint} [size] Number of results per page.
          * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
@@ -481,9 +507,11 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Get Locked Personal Left Quota
          *
-         * Weight: 150
+         * Weight(IP): 150
          *
-         * @summary Get Locked Personal Left Quota(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Get Locked Personal Left Quota (USER_DATA)
          * @param {string} projectId
          * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
@@ -522,21 +550,23 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Get Locked Product Position
          *
-         * Weight: 150
+         * Weight(IP): 150
          *
-         * @summary Get Locked Product Position
-         * @param {string} [asset] USDC or USDT
-         * @param {number | bigint} [positionId]
+         * Security Type: USER_DATA
+         *
+         * @summary Get Locked Product Position (USER_DATA)
+         * @param {string} [asset]
+         * @param {string} [positionId]
          * @param {string} [projectId]
-         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [current] Currently querying page. Starts from 1.
+         * @param {number | bigint} [size] Number of results per page.
          * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getLockedProductPosition: async (
             asset?: string,
-            positionId?: number | bigint,
+            positionId?: string,
             projectId?: string,
             current?: number | bigint,
             size?: number | bigint,
@@ -580,27 +610,33 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Get Locked Redemption Record
          *
-         * The time between `startTime` and `endTime` cannot be longer than 30 days.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-         * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
          *
-         * @summary Get Locked Redemption Record(USER_DATA)
-         * @param {number | bigint} [positionId]
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, the next 30 days' data beginning from `startTime` will be returned.
+         * - If `endTime` is sent but
+         * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         *
+         * @summary Get Locked Redemption Record (USER_DATA)
+         * @param {string} [positionId]
          * @param {string} [redeemId]
-         * @param {string} [asset] USDC or USDT
+         * @param {string} [asset]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [current] Currently querying page. Starts from 1.
+         * @param {number | bigint} [size] Number of results per page.
          * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getLockedRedemptionRecord: async (
-            positionId?: number | bigint,
+            positionId?: string,
             redeemId?: string,
             asset?: string,
             startTime?: number | bigint,
@@ -653,26 +689,32 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Get Locked Rewards History
          *
-         * The time between `startTime` and `endTime` cannot be longer than 30 days.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-         * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
          *
-         * @summary Get Locked Rewards History(USER_DATA)
-         * @param {number | bigint} [positionId]
-         * @param {string} [asset] USDC or USDT
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, the next 30 days' data beginning from `startTime` will be returned.
+         * - If `endTime` is sent but
+         * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         *
+         * @summary Get Locked Rewards History (USER_DATA)
+         * @param {string} [positionId]
+         * @param {string} [asset]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [current] Currently querying page. Starts from 1.
+         * @param {number | bigint} [size] Number of results per page.
          * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getLockedRewardsHistory: async (
-            positionId?: number | bigint,
+            positionId?: string,
             asset?: string,
             startTime?: number | bigint,
             endTime?: number | bigint,
@@ -721,12 +763,14 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Get Locked Subscription Preview
          *
-         * Weight: 150
+         * Weight(IP): 150
          *
-         * @summary Get Locked Subscription Preview(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Get Locked Subscription Preview (USER_DATA)
          * @param {string} projectId
-         * @param {number} amount Amount
-         * @param {boolean} [autoSubscribe] true or false, default true.
+         * @param {number} amount
+         * @param {boolean} [autoSubscribe] default true.
          * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
@@ -774,20 +818,26 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Get Locked Subscription Record
          *
-         * The time between `startTime` and `endTime` cannot be longer than 30 days.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-         * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
          *
-         * @summary Get Locked Subscription Record(USER_DATA)
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, the next 30 days' data beginning from `startTime` will be returned.
+         * - If `endTime` is sent but
+         * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         *
+         * @summary Get Locked Subscription Record (USER_DATA)
          * @param {string} [purchaseId]
-         * @param {string} [asset] USDC or USDT
+         * @param {string} [asset]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [current] Currently querying page. Starts from 1.
+         * @param {number | bigint} [size] Number of results per page.
          * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
@@ -842,27 +892,33 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Get Rate History
          *
-         * The time between startTime and endTime cannot be longer than 1 year.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-         * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
          *
-         * @summary Get Rate History(USER_DATA)
+         * Notes:
+         * - The time between startTime and endTime cannot be longer than 1 year.
+         * - If `startTime` and `endTime` are
+         * both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, the next 30 days' data beginning from `startTime` will be returned.
+         * - If `endTime` is sent but
+         * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         *
+         * @summary Get Rate History (USER_DATA)
          * @param {string} productId
-         * @param {string} [aprPeriod] "DAY","YEAR",default"DAY"
+         * @param {GetRateHistoryAprPeriodEnum} [aprPeriod]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [current] Currently querying page
+         * @param {number | bigint} [size] Number of results per page
          * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getRateHistory: async (
             productId: string,
-            aprPeriod?: string,
+            aprPeriod?: GetRateHistoryAprPeriodEnum,
             startTime?: number | bigint,
             endTime?: number | bigint,
             current?: number | bigint,
@@ -913,12 +969,14 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Get available Simple Earn flexible product list
          *
-         * Weight: 150
+         * Weight(IP): 150
          *
-         * @summary Get Simple Earn Flexible Product List(USER_DATA)
-         * @param {string} [asset] USDC or USDT
-         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * Security Type: USER_DATA
+         *
+         * @summary Get Simple Earn Flexible Product List (USER_DATA)
+         * @param {string} [asset]
+         * @param {number | bigint} [current] Currently querying page. Starts from 1.
+         * @param {number | bigint} [size] Number of results per page.
          * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
@@ -961,14 +1019,17 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Get Simple Earn Locked Product List
          *
-         * Get available Simple Earn locked product list
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
          *
-         * @summary Get Simple Earn Locked Product List(USER_DATA)
-         * @param {string} [asset] USDC or USDT
-         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * Notes:
+         * - Get available Simple Earn locked product list
+         *
+         * @summary Get Simple Earn Locked Product List (USER_DATA)
+         * @param {string} [asset]
+         * @param {number | bigint} [current] Currently querying page. Starts from 1.
+         * @param {number | bigint} [size] Number of results per page.
          * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
@@ -1011,16 +1072,19 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Redeem Flexible Product
          *
-         * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: TRADE
          *
-         * @summary Redeem Flexible Product(TRADE)
+         * Notes:
+         * - You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+         *
+         * @summary Redeem Flexible Product (TRADE)
          * @param {string} productId
-         * @param {boolean} [redeemAll] true or false, default to false
+         * @param {boolean} [redeemAll]
          * @param {number} [amount] if redeemAll is false, amount is mandatory
-         * @param {string} [destAccount] `SPOT`,`FUND`, default `SPOT`
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {RedeemFlexibleProductDestAccountEnum} [destAccount]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -1028,7 +1092,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             productId: string,
             redeemAll?: boolean,
             amount?: number,
-            destAccount?: string,
+            destAccount?: RedeemFlexibleProductDestAccountEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'productId' is not null or undefined
@@ -1069,13 +1133,16 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Redeem Locked Product
          *
-         * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+         * Weight(IP): 1
          *
-         * Weight: 1/3s per account
+         * Security Type: TRADE
          *
-         * @summary Redeem Locked Product(TRADE)
-         * @param {string} positionId
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
+         * Notes:
+         * - You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+         *
+         * @summary Redeem Locked Product (TRADE)
+         * @param {string} positionId Locked product position ID
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -1112,12 +1179,14 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Set Flexible Auto Subscribe
          *
-         * Weight: 150
+         * Weight(IP): 150
          *
-         * @summary Set Flexible Auto Subscribe(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Set Flexible Auto Subscribe (USER_DATA)
          * @param {string} productId
-         * @param {boolean} autoSubscribe true or false
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {boolean} autoSubscribe
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -1160,12 +1229,14 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Set locked auto subscribe
          *
-         * Weight: 150
+         * Weight(IP): 150
          *
-         * @summary Set Locked Auto Subscribe(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Set Locked Auto Subscribe (USER_DATA)
          * @param {string} positionId
-         * @param {boolean} autoSubscribe true or false
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {boolean} autoSubscribe
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -1208,18 +1279,20 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Set redeem option for Locked product
          *
-         * Weight: 50
+         * Weight(IP): 50
          *
-         * @summary Set Locked Product Redeem Option(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Set Locked Product Redeem Option (USER_DATA)
          * @param {string} positionId
-         * @param {string} redeemTo `SPOT`,'FLEXIBLE'
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {SetLockedProductRedeemOptionRedeemToEnum} redeemTo
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
         setLockedProductRedeemOption: async (
             positionId: string,
-            redeemTo: string,
+            redeemTo: SetLockedProductRedeemOptionRedeemToEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'positionId' is not null or undefined
@@ -1256,9 +1329,11 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Simple Account query
          *
-         * Weight: 150
+         * Weight(IP): 150
          *
-         * @summary Simple Account(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Simple Account (USER_DATA)
          * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
@@ -1287,16 +1362,19 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Subscribe Flexible Product
          *
-         * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: TRADE
          *
-         * @summary Subscribe Flexible Product(TRADE)
+         * Notes:
+         * - You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+         *
+         * @summary Subscribe Flexible Product (TRADE)
          * @param {string} productId
-         * @param {number} amount Amount
-         * @param {boolean} [autoSubscribe] true or false, default true.
-         * @param {string} [sourceAccount] `SPOT`,`FUND`,`ALL`, default `SPOT`
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number} amount
+         * @param {boolean} [autoSubscribe]
+         * @param {SubscribeFlexibleProductSourceAccountEnum} [sourceAccount]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -1304,7 +1382,7 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             productId: string,
             amount: number,
             autoSubscribe?: boolean,
-            sourceAccount?: string,
+            sourceAccount?: SubscribeFlexibleProductSourceAccountEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'productId' is not null or undefined
@@ -1347,17 +1425,20 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
         /**
          * Subscribe Locked Product
          *
-         * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+         * Weight(IP): 1
          *
-         * Weight: 1
+         * Security Type: TRADE
          *
-         * @summary Subscribe Locked Product(TRADE)
+         * Notes:
+         * - You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+         *
+         * @summary Subscribe Locked Product (TRADE)
          * @param {string} projectId
-         * @param {number} amount Amount
-         * @param {boolean} [autoSubscribe] true or false, default true.
-         * @param {string} [sourceAccount] `SPOT`,`FUND`,`ALL`, default `SPOT`
-         * @param {string} [redeemTo] `SPOT`,`FLEXIBLE`, default `SPOT`
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number} amount
+         * @param {boolean} [autoSubscribe]
+         * @param {SubscribeLockedProductSourceAccountEnum} [sourceAccount]
+         * @param {SubscribeLockedProductRedeemToEnum} [redeemTo]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -1365,8 +1446,8 @@ const FlexibleLockedApiAxiosParamCreator = function (configuration: Configuratio
             projectId: string,
             amount: number,
             autoSubscribe?: boolean,
-            sourceAccount?: string,
-            redeemTo?: string,
+            sourceAccount?: SubscribeLockedProductSourceAccountEnum,
+            redeemTo?: SubscribeLockedProductRedeemToEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'projectId' is not null or undefined
@@ -1420,14 +1501,20 @@ export interface FlexibleLockedApiInterface {
     /**
      * Get Collateral Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 30 days.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Get Collateral Record(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Collateral Record (USER_DATA)
      * @param {GetCollateralRecordRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1439,9 +1526,11 @@ export interface FlexibleLockedApiInterface {
     /**
      * Get Flexible Personal Left Quota
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get Flexible Personal Left Quota(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Flexible Personal Left Quota (USER_DATA)
      * @param {GetFlexiblePersonalLeftQuotaRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1453,9 +1542,11 @@ export interface FlexibleLockedApiInterface {
     /**
      * Get Flexible Product Position
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get Flexible Product Position(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Flexible Product Position (USER_DATA)
      * @param {GetFlexibleProductPositionRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1467,14 +1558,20 @@ export interface FlexibleLockedApiInterface {
     /**
      * Get Flexible Redemption Record
      *
-     *	The time between `startTime` and `endTime` cannot be longer than 30 days.
-     *	If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     *	If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     *	If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Flexible Redemption Record(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Flexible Redemption Record (USER_DATA)
      * @param {GetFlexibleRedemptionRecordRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1486,28 +1583,36 @@ export interface FlexibleLockedApiInterface {
     /**
      * Get Flexible Rewards History
      *
-     *	The time between `startTime` and `endTime` cannot be longer than 30 days.
-     *	If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     *	If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     *	If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Flexible Rewards History(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Flexible Rewards History (USER_DATA)
      * @param {GetFlexibleRewardsHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleLockedApiInterface
      */
     getFlexibleRewardsHistory(
-        requestParameters: GetFlexibleRewardsHistoryRequest
+        requestParameters?: GetFlexibleRewardsHistoryRequest
     ): Promise<RestApiResponse<GetFlexibleRewardsHistoryResponse>>;
     /**
      * Get Flexible Subscription Preview
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get Flexible Subscription Preview(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Flexible Subscription Preview (USER_DATA)
      * @param {GetFlexibleSubscriptionPreviewRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1519,14 +1624,20 @@ export interface FlexibleLockedApiInterface {
     /**
      * Get Flexible Subscription Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 30 days.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Flexible Subscription Record(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Flexible Subscription Record (USER_DATA)
      * @param {GetFlexibleSubscriptionRecordRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1538,9 +1649,11 @@ export interface FlexibleLockedApiInterface {
     /**
      * Get Locked Personal Left Quota
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get Locked Personal Left Quota(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Locked Personal Left Quota (USER_DATA)
      * @param {GetLockedPersonalLeftQuotaRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1552,9 +1665,11 @@ export interface FlexibleLockedApiInterface {
     /**
      * Get Locked Product Position
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get Locked Product Position
+     * Security Type: USER_DATA
+     *
+     * @summary Get Locked Product Position (USER_DATA)
      * @param {GetLockedProductPositionRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1566,14 +1681,20 @@ export interface FlexibleLockedApiInterface {
     /**
      * Get Locked Redemption Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 30 days.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Locked Redemption Record(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Locked Redemption Record (USER_DATA)
      * @param {GetLockedRedemptionRecordRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1585,14 +1706,20 @@ export interface FlexibleLockedApiInterface {
     /**
      * Get Locked Rewards History
      *
-     * The time between `startTime` and `endTime` cannot be longer than 30 days.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Locked Rewards History(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Locked Rewards History (USER_DATA)
      * @param {GetLockedRewardsHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1604,9 +1731,11 @@ export interface FlexibleLockedApiInterface {
     /**
      * Get Locked Subscription Preview
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get Locked Subscription Preview(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Locked Subscription Preview (USER_DATA)
      * @param {GetLockedSubscriptionPreviewRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1618,14 +1747,20 @@ export interface FlexibleLockedApiInterface {
     /**
      * Get Locked Subscription Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 30 days.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Locked Subscription Record(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Locked Subscription Record (USER_DATA)
      * @param {GetLockedSubscriptionRecordRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1637,14 +1772,20 @@ export interface FlexibleLockedApiInterface {
     /**
      * Get Rate History
      *
-     * The time between startTime and endTime cannot be longer than 1 year.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Rate History(USER_DATA)
+     * Notes:
+     * - The time between startTime and endTime cannot be longer than 1 year.
+     * - If `startTime` and `endTime` are
+     * both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Rate History (USER_DATA)
      * @param {GetRateHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1656,9 +1797,11 @@ export interface FlexibleLockedApiInterface {
     /**
      * Get available Simple Earn flexible product list
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get Simple Earn Flexible Product List(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Simple Earn Flexible Product List (USER_DATA)
      * @param {GetSimpleEarnFlexibleProductListRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1670,11 +1813,14 @@ export interface FlexibleLockedApiInterface {
     /**
      * Get Simple Earn Locked Product List
      *
-     * Get available Simple Earn locked product list
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Simple Earn Locked Product List(USER_DATA)
+     * Notes:
+     * - Get available Simple Earn locked product list
+     *
+     * @summary Get Simple Earn Locked Product List (USER_DATA)
      * @param {GetSimpleEarnLockedProductListRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1686,11 +1832,14 @@ export interface FlexibleLockedApiInterface {
     /**
      * Redeem Flexible Product
      *
-     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Redeem Flexible Product(TRADE)
+     * Notes:
+     * - You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     *
+     * @summary Redeem Flexible Product (TRADE)
      * @param {RedeemFlexibleProductRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1702,11 +1851,14 @@ export interface FlexibleLockedApiInterface {
     /**
      * Redeem Locked Product
      *
-     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1/3s per account
+     * Security Type: TRADE
      *
-     * @summary Redeem Locked Product(TRADE)
+     * Notes:
+     * - You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     *
+     * @summary Redeem Locked Product (TRADE)
      * @param {RedeemLockedProductRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1718,9 +1870,11 @@ export interface FlexibleLockedApiInterface {
     /**
      * Set Flexible Auto Subscribe
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Set Flexible Auto Subscribe(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Set Flexible Auto Subscribe (USER_DATA)
      * @param {SetFlexibleAutoSubscribeRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1732,9 +1886,11 @@ export interface FlexibleLockedApiInterface {
     /**
      * Set locked auto subscribe
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Set Locked Auto Subscribe(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Set Locked Auto Subscribe (USER_DATA)
      * @param {SetLockedAutoSubscribeRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1746,9 +1902,11 @@ export interface FlexibleLockedApiInterface {
     /**
      * Set redeem option for Locked product
      *
-     * Weight: 50
+     * Weight(IP): 50
      *
-     * @summary Set Locked Product Redeem Option(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Set Locked Product Redeem Option (USER_DATA)
      * @param {SetLockedProductRedeemOptionRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1760,9 +1918,11 @@ export interface FlexibleLockedApiInterface {
     /**
      * Simple Account query
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Simple Account(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Simple Account (USER_DATA)
      * @param {SimpleAccountRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1774,11 +1934,14 @@ export interface FlexibleLockedApiInterface {
     /**
      * Subscribe Flexible Product
      *
-     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Subscribe Flexible Product(TRADE)
+     * Notes:
+     * - You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     *
+     * @summary Subscribe Flexible Product (TRADE)
      * @param {SubscribeFlexibleProductRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1790,11 +1953,14 @@ export interface FlexibleLockedApiInterface {
     /**
      * Subscribe Locked Product
      *
-     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Subscribe Locked Product(TRADE)
+     * Notes:
+     * - You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     *
+     * @summary Subscribe Locked Product (TRADE)
      * @param {SubscribeLockedProductRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -1832,14 +1998,14 @@ export interface GetCollateralRecordRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Starts from 1. Default: 1
+     * Currently querying page.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiGetCollateralRecord
      */
     readonly current?: number | bigint;
 
     /**
-     * Number of results per page. Default: 10, Max: 100
+     * Number of results per page.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiGetCollateralRecord
      */
@@ -1879,7 +2045,7 @@ export interface GetFlexiblePersonalLeftQuotaRequest {
  */
 export interface GetFlexibleProductPositionRequest {
     /**
-     * USDC or USDT
+     *
      * @type {string}
      * @memberof FlexibleLockedApiGetFlexibleProductPosition
      */
@@ -1893,14 +2059,14 @@ export interface GetFlexibleProductPositionRequest {
     readonly productId?: string;
 
     /**
-     * Currently querying page. Starts from 1. Default: 1
+     * Currently querying page. Starts from 1.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleProductPosition
      */
     readonly current?: number | bigint;
 
     /**
-     * Number of results per page. Default: 10, Max: 100
+     * Number of results per page.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleProductPosition
      */
@@ -1934,7 +2100,7 @@ export interface GetFlexibleRedemptionRecordRequest {
     readonly redeemId?: string;
 
     /**
-     * USDC or USDT
+     *
      * @type {string}
      * @memberof FlexibleLockedApiGetFlexibleRedemptionRecord
      */
@@ -1955,14 +2121,14 @@ export interface GetFlexibleRedemptionRecordRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Starts from 1. Default: 1
+     * Currently querying page. Starts from 1.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleRedemptionRecord
      */
     readonly current?: number | bigint;
 
     /**
-     * Number of results per page. Default: 10, Max: 100
+     * Number of results per page.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleRedemptionRecord
      */
@@ -1982,13 +2148,6 @@ export interface GetFlexibleRedemptionRecordRequest {
  */
 export interface GetFlexibleRewardsHistoryRequest {
     /**
-     * FAST or STANDARD, defaults to STANDARD
-     * @type {string}
-     * @memberof FlexibleLockedApiGetFlexibleRewardsHistory
-     */
-    readonly type: string;
-
-    /**
      *
      * @type {string}
      * @memberof FlexibleLockedApiGetFlexibleRewardsHistory
@@ -1996,7 +2155,7 @@ export interface GetFlexibleRewardsHistoryRequest {
     readonly productId?: string;
 
     /**
-     * USDC or USDT
+     *
      * @type {string}
      * @memberof FlexibleLockedApiGetFlexibleRewardsHistory
      */
@@ -2017,14 +2176,21 @@ export interface GetFlexibleRewardsHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Starts from 1. Default: 1
+     * `BONUS` - Bonus tiered APR, `REALTIME` - Real-time APR, `REWARDS` - Historical rewards, `ALL` - All types. Default: `ALL`
+     * @type {'BONUS' | 'REALTIME' | 'REWARDS' | 'ALL'}
+     * @memberof FlexibleLockedApiGetFlexibleRewardsHistory
+     */
+    readonly type?: GetFlexibleRewardsHistoryTypeEnum;
+
+    /**
+     * Currently querying page. Starts from 1.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleRewardsHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Number of results per page. Default: 10, Max: 100
+     * Number of results per page.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleRewardsHistory
      */
@@ -2051,7 +2217,7 @@ export interface GetFlexibleSubscriptionPreviewRequest {
     readonly productId: string;
 
     /**
-     * Amount
+     *
      * @type {number}
      * @memberof FlexibleLockedApiGetFlexibleSubscriptionPreview
      */
@@ -2085,7 +2251,7 @@ export interface GetFlexibleSubscriptionRecordRequest {
     readonly purchaseId?: string;
 
     /**
-     * USDC or USDT
+     *
      * @type {string}
      * @memberof FlexibleLockedApiGetFlexibleSubscriptionRecord
      */
@@ -2106,14 +2272,14 @@ export interface GetFlexibleSubscriptionRecordRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Starts from 1. Default: 1
+     * Currently querying page. Starts from 1.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleSubscriptionRecord
      */
     readonly current?: number | bigint;
 
     /**
-     * Number of results per page. Default: 10, Max: 100
+     * Number of results per page.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiGetFlexibleSubscriptionRecord
      */
@@ -2153,7 +2319,7 @@ export interface GetLockedPersonalLeftQuotaRequest {
  */
 export interface GetLockedProductPositionRequest {
     /**
-     * USDC or USDT
+     *
      * @type {string}
      * @memberof FlexibleLockedApiGetLockedProductPosition
      */
@@ -2161,10 +2327,10 @@ export interface GetLockedProductPositionRequest {
 
     /**
      *
-     * @type {number | bigint}
+     * @type {string}
      * @memberof FlexibleLockedApiGetLockedProductPosition
      */
-    readonly positionId?: number | bigint;
+    readonly positionId?: string;
 
     /**
      *
@@ -2174,14 +2340,14 @@ export interface GetLockedProductPositionRequest {
     readonly projectId?: string;
 
     /**
-     * Currently querying page. Starts from 1. Default: 1
+     * Currently querying page. Starts from 1.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedProductPosition
      */
     readonly current?: number | bigint;
 
     /**
-     * Number of results per page. Default: 10, Max: 100
+     * Number of results per page.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedProductPosition
      */
@@ -2202,10 +2368,10 @@ export interface GetLockedProductPositionRequest {
 export interface GetLockedRedemptionRecordRequest {
     /**
      *
-     * @type {number | bigint}
+     * @type {string}
      * @memberof FlexibleLockedApiGetLockedRedemptionRecord
      */
-    readonly positionId?: number | bigint;
+    readonly positionId?: string;
 
     /**
      *
@@ -2215,7 +2381,7 @@ export interface GetLockedRedemptionRecordRequest {
     readonly redeemId?: string;
 
     /**
-     * USDC or USDT
+     *
      * @type {string}
      * @memberof FlexibleLockedApiGetLockedRedemptionRecord
      */
@@ -2236,14 +2402,14 @@ export interface GetLockedRedemptionRecordRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Starts from 1. Default: 1
+     * Currently querying page. Starts from 1.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedRedemptionRecord
      */
     readonly current?: number | bigint;
 
     /**
-     * Number of results per page. Default: 10, Max: 100
+     * Number of results per page.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedRedemptionRecord
      */
@@ -2264,13 +2430,13 @@ export interface GetLockedRedemptionRecordRequest {
 export interface GetLockedRewardsHistoryRequest {
     /**
      *
-     * @type {number | bigint}
+     * @type {string}
      * @memberof FlexibleLockedApiGetLockedRewardsHistory
      */
-    readonly positionId?: number | bigint;
+    readonly positionId?: string;
 
     /**
-     * USDC or USDT
+     *
      * @type {string}
      * @memberof FlexibleLockedApiGetLockedRewardsHistory
      */
@@ -2291,14 +2457,14 @@ export interface GetLockedRewardsHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Starts from 1. Default: 1
+     * Currently querying page. Starts from 1.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedRewardsHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Number of results per page. Default: 10, Max: 100
+     * Number of results per page.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedRewardsHistory
      */
@@ -2325,14 +2491,14 @@ export interface GetLockedSubscriptionPreviewRequest {
     readonly projectId: string;
 
     /**
-     * Amount
+     *
      * @type {number}
      * @memberof FlexibleLockedApiGetLockedSubscriptionPreview
      */
     readonly amount: number;
 
     /**
-     * true or false, default true.
+     * default true.
      * @type {boolean}
      * @memberof FlexibleLockedApiGetLockedSubscriptionPreview
      */
@@ -2359,7 +2525,7 @@ export interface GetLockedSubscriptionRecordRequest {
     readonly purchaseId?: string;
 
     /**
-     * USDC or USDT
+     *
      * @type {string}
      * @memberof FlexibleLockedApiGetLockedSubscriptionRecord
      */
@@ -2380,14 +2546,14 @@ export interface GetLockedSubscriptionRecordRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Starts from 1. Default: 1
+     * Currently querying page. Starts from 1.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedSubscriptionRecord
      */
     readonly current?: number | bigint;
 
     /**
-     * Number of results per page. Default: 10, Max: 100
+     * Number of results per page.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiGetLockedSubscriptionRecord
      */
@@ -2414,11 +2580,11 @@ export interface GetRateHistoryRequest {
     readonly productId: string;
 
     /**
-     * "DAY","YEAR",default"DAY"
-     * @type {string}
+     *
+     * @type {'DAY' | 'YEAR'}
      * @memberof FlexibleLockedApiGetRateHistory
      */
-    readonly aprPeriod?: string;
+    readonly aprPeriod?: GetRateHistoryAprPeriodEnum;
 
     /**
      *
@@ -2435,14 +2601,14 @@ export interface GetRateHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Starts from 1. Default: 1
+     * Currently querying page
      * @type {number | bigint}
      * @memberof FlexibleLockedApiGetRateHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Number of results per page. Default: 10, Max: 100
+     * Number of results per page
      * @type {number | bigint}
      * @memberof FlexibleLockedApiGetRateHistory
      */
@@ -2462,21 +2628,21 @@ export interface GetRateHistoryRequest {
  */
 export interface GetSimpleEarnFlexibleProductListRequest {
     /**
-     * USDC or USDT
+     *
      * @type {string}
      * @memberof FlexibleLockedApiGetSimpleEarnFlexibleProductList
      */
     readonly asset?: string;
 
     /**
-     * Currently querying page. Starts from 1. Default: 1
+     * Currently querying page. Starts from 1.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiGetSimpleEarnFlexibleProductList
      */
     readonly current?: number | bigint;
 
     /**
-     * Number of results per page. Default: 10, Max: 100
+     * Number of results per page.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiGetSimpleEarnFlexibleProductList
      */
@@ -2496,21 +2662,21 @@ export interface GetSimpleEarnFlexibleProductListRequest {
  */
 export interface GetSimpleEarnLockedProductListRequest {
     /**
-     * USDC or USDT
+     *
      * @type {string}
      * @memberof FlexibleLockedApiGetSimpleEarnLockedProductList
      */
     readonly asset?: string;
 
     /**
-     * Currently querying page. Starts from 1. Default: 1
+     * Currently querying page. Starts from 1.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiGetSimpleEarnLockedProductList
      */
     readonly current?: number | bigint;
 
     /**
-     * Number of results per page. Default: 10, Max: 100
+     * Number of results per page.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiGetSimpleEarnLockedProductList
      */
@@ -2537,7 +2703,7 @@ export interface RedeemFlexibleProductRequest {
     readonly productId: string;
 
     /**
-     * true or false, default to false
+     *
      * @type {boolean}
      * @memberof FlexibleLockedApiRedeemFlexibleProduct
      */
@@ -2551,14 +2717,14 @@ export interface RedeemFlexibleProductRequest {
     readonly amount?: number;
 
     /**
-     * `SPOT`,`FUND`, default `SPOT`
-     * @type {string}
+     *
+     * @type {'SPOT' | 'FUND'}
      * @memberof FlexibleLockedApiRedeemFlexibleProduct
      */
-    readonly destAccount?: string;
+    readonly destAccount?: RedeemFlexibleProductDestAccountEnum;
 
     /**
-     * The value cannot be greater than 60000 (ms)
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiRedeemFlexibleProduct
      */
@@ -2571,14 +2737,14 @@ export interface RedeemFlexibleProductRequest {
  */
 export interface RedeemLockedProductRequest {
     /**
-     *
+     * Locked product position ID
      * @type {string}
      * @memberof FlexibleLockedApiRedeemLockedProduct
      */
     readonly positionId: string;
 
     /**
-     * The value cannot be greater than 60000 (ms)
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiRedeemLockedProduct
      */
@@ -2598,14 +2764,14 @@ export interface SetFlexibleAutoSubscribeRequest {
     readonly productId: string;
 
     /**
-     * true or false
+     *
      * @type {boolean}
      * @memberof FlexibleLockedApiSetFlexibleAutoSubscribe
      */
     readonly autoSubscribe: boolean;
 
     /**
-     * The value cannot be greater than 60000 (ms)
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiSetFlexibleAutoSubscribe
      */
@@ -2625,14 +2791,14 @@ export interface SetLockedAutoSubscribeRequest {
     readonly positionId: string;
 
     /**
-     * true or false
+     *
      * @type {boolean}
      * @memberof FlexibleLockedApiSetLockedAutoSubscribe
      */
     readonly autoSubscribe: boolean;
 
     /**
-     * The value cannot be greater than 60000 (ms)
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiSetLockedAutoSubscribe
      */
@@ -2652,14 +2818,14 @@ export interface SetLockedProductRedeemOptionRequest {
     readonly positionId: string;
 
     /**
-     * `SPOT`,'FLEXIBLE'
-     * @type {string}
+     *
+     * @type {'SPOT' | 'FLEXIBLE'}
      * @memberof FlexibleLockedApiSetLockedProductRedeemOption
      */
-    readonly redeemTo: string;
+    readonly redeemTo: SetLockedProductRedeemOptionRedeemToEnum;
 
     /**
-     * The value cannot be greater than 60000 (ms)
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiSetLockedProductRedeemOption
      */
@@ -2692,28 +2858,28 @@ export interface SubscribeFlexibleProductRequest {
     readonly productId: string;
 
     /**
-     * Amount
+     *
      * @type {number}
      * @memberof FlexibleLockedApiSubscribeFlexibleProduct
      */
     readonly amount: number;
 
     /**
-     * true or false, default true.
+     *
      * @type {boolean}
      * @memberof FlexibleLockedApiSubscribeFlexibleProduct
      */
     readonly autoSubscribe?: boolean;
 
     /**
-     * `SPOT`,`FUND`,`ALL`, default `SPOT`
-     * @type {string}
+     *
+     * @type {'SPOT' | 'FUND' | 'ALL'}
      * @memberof FlexibleLockedApiSubscribeFlexibleProduct
      */
-    readonly sourceAccount?: string;
+    readonly sourceAccount?: SubscribeFlexibleProductSourceAccountEnum;
 
     /**
-     * The value cannot be greater than 60000 (ms)
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiSubscribeFlexibleProduct
      */
@@ -2733,35 +2899,35 @@ export interface SubscribeLockedProductRequest {
     readonly projectId: string;
 
     /**
-     * Amount
+     *
      * @type {number}
      * @memberof FlexibleLockedApiSubscribeLockedProduct
      */
     readonly amount: number;
 
     /**
-     * true or false, default true.
+     *
      * @type {boolean}
      * @memberof FlexibleLockedApiSubscribeLockedProduct
      */
     readonly autoSubscribe?: boolean;
 
     /**
-     * `SPOT`,`FUND`,`ALL`, default `SPOT`
-     * @type {string}
+     *
+     * @type {'SPOT' | 'FUND' | 'ALL'}
      * @memberof FlexibleLockedApiSubscribeLockedProduct
      */
-    readonly sourceAccount?: string;
+    readonly sourceAccount?: SubscribeLockedProductSourceAccountEnum;
 
     /**
-     * `SPOT`,`FLEXIBLE`, default `SPOT`
-     * @type {string}
+     *
+     * @type {'SPOT' | 'FLEXIBLE'}
      * @memberof FlexibleLockedApiSubscribeLockedProduct
      */
-    readonly redeemTo?: string;
+    readonly redeemTo?: SubscribeLockedProductRedeemToEnum;
 
     /**
-     * The value cannot be greater than 60000 (ms)
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof FlexibleLockedApiSubscribeLockedProduct
      */
@@ -2784,19 +2950,25 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Get Collateral Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 30 days.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Get Collateral Record(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Collateral Record (USER_DATA)
      * @param {GetCollateralRecordRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetCollateralRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleLockedApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/history/Get-Collateral-Record Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-collateral-record Binance API Documentation}
      */
     public async getCollateralRecord(
         requestParameters: GetCollateralRecordRequest = {}
@@ -2824,14 +2996,16 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Get Flexible Personal Left Quota
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get Flexible Personal Left Quota(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Flexible Personal Left Quota (USER_DATA)
      * @param {GetFlexiblePersonalLeftQuotaRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFlexiblePersonalLeftQuotaResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleLockedApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/account/Get-Flexible-Personal-Left-Quota Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-flexible-personal-left-quota Binance API Documentation}
      */
     public async getFlexiblePersonalLeftQuota(
         requestParameters: GetFlexiblePersonalLeftQuotaRequest
@@ -2855,14 +3029,16 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Get Flexible Product Position
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get Flexible Product Position(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Flexible Product Position (USER_DATA)
      * @param {GetFlexibleProductPositionRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFlexibleProductPositionResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleLockedApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/account/Get-Flexible-Product-Position Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-flexible-product-position Binance API Documentation}
      */
     public async getFlexibleProductPosition(
         requestParameters: GetFlexibleProductPositionRequest = {}
@@ -2889,19 +3065,25 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Get Flexible Redemption Record
      *
-     *	The time between `startTime` and `endTime` cannot be longer than 30 days.
-     *	If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     *	If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     *	If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Flexible Redemption Record(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Flexible Redemption Record (USER_DATA)
      * @param {GetFlexibleRedemptionRecordRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFlexibleRedemptionRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleLockedApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/history/Get-Flexible-Redemption-Record Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-flexible-redemption-record Binance API Documentation}
      */
     public async getFlexibleRedemptionRecord(
         requestParameters: GetFlexibleRedemptionRecordRequest = {}
@@ -2931,29 +3113,35 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Get Flexible Rewards History
      *
-     *	The time between `startTime` and `endTime` cannot be longer than 30 days.
-     *	If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     *	If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     *	If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Flexible Rewards History(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Flexible Rewards History (USER_DATA)
      * @param {GetFlexibleRewardsHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFlexibleRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleLockedApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/history/Get-Flexible-Rewards-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-flexible-rewards-history Binance API Documentation}
      */
     public async getFlexibleRewardsHistory(
-        requestParameters: GetFlexibleRewardsHistoryRequest
+        requestParameters: GetFlexibleRewardsHistoryRequest = {}
     ): Promise<RestApiResponse<GetFlexibleRewardsHistoryResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.getFlexibleRewardsHistory(
-            requestParameters?.type,
             requestParameters?.productId,
             requestParameters?.asset,
             requestParameters?.startTime,
             requestParameters?.endTime,
+            requestParameters?.type,
             requestParameters?.current,
             requestParameters?.size,
             requestParameters?.recvWindow
@@ -2973,14 +3161,16 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Get Flexible Subscription Preview
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get Flexible Subscription Preview(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Flexible Subscription Preview (USER_DATA)
      * @param {GetFlexibleSubscriptionPreviewRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFlexibleSubscriptionPreviewResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleLockedApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Get-Flexible-Subscription-Preview Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-flexible-subscription-preview Binance API Documentation}
      */
     public async getFlexibleSubscriptionPreview(
         requestParameters: GetFlexibleSubscriptionPreviewRequest
@@ -3006,19 +3196,25 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Get Flexible Subscription Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 30 days.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Flexible Subscription Record(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Flexible Subscription Record (USER_DATA)
      * @param {GetFlexibleSubscriptionRecordRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFlexibleSubscriptionRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleLockedApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/history/Get-Flexible-Subscription-Record Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-flexible-subscription-record Binance API Documentation}
      */
     public async getFlexibleSubscriptionRecord(
         requestParameters: GetFlexibleSubscriptionRecordRequest = {}
@@ -3049,14 +3245,16 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Get Locked Personal Left Quota
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get Locked Personal Left Quota(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Locked Personal Left Quota (USER_DATA)
      * @param {GetLockedPersonalLeftQuotaRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetLockedPersonalLeftQuotaResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleLockedApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/account/Get-Locked-Personal-Left-Quota Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-locked-personal-left-quota Binance API Documentation}
      */
     public async getLockedPersonalLeftQuota(
         requestParameters: GetLockedPersonalLeftQuotaRequest
@@ -3080,14 +3278,16 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Get Locked Product Position
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get Locked Product Position
+     * Security Type: USER_DATA
+     *
+     * @summary Get Locked Product Position (USER_DATA)
      * @param {GetLockedProductPositionRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetLockedProductPositionResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleLockedApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/account/Get-Locked-Product-Position Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-locked-product-position Binance API Documentation}
      */
     public async getLockedProductPosition(
         requestParameters: GetLockedProductPositionRequest = {}
@@ -3115,19 +3315,25 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Get Locked Redemption Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 30 days.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Locked Redemption Record(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Locked Redemption Record (USER_DATA)
      * @param {GetLockedRedemptionRecordRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetLockedRedemptionRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleLockedApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/history/Get-Locked-Redemption-Record Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-locked-redemption-record Binance API Documentation}
      */
     public async getLockedRedemptionRecord(
         requestParameters: GetLockedRedemptionRecordRequest = {}
@@ -3157,19 +3363,25 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Get Locked Rewards History
      *
-     * The time between `startTime` and `endTime` cannot be longer than 30 days.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Locked Rewards History(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Locked Rewards History (USER_DATA)
      * @param {GetLockedRewardsHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetLockedRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleLockedApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/history/Get-Locked-Rewards-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-locked-rewards-history Binance API Documentation}
      */
     public async getLockedRewardsHistory(
         requestParameters: GetLockedRewardsHistoryRequest = {}
@@ -3198,14 +3410,16 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Get Locked Subscription Preview
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get Locked Subscription Preview(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Locked Subscription Preview (USER_DATA)
      * @param {GetLockedSubscriptionPreviewRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetLockedSubscriptionPreviewResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleLockedApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Get-Locked-Subscription-Preview Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-locked-subscription-preview Binance API Documentation}
      */
     public async getLockedSubscriptionPreview(
         requestParameters: GetLockedSubscriptionPreviewRequest
@@ -3231,19 +3445,25 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Get Locked Subscription Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 30 days.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Locked Subscription Record(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Locked Subscription Record (USER_DATA)
      * @param {GetLockedSubscriptionRecordRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetLockedSubscriptionRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleLockedApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/history/Get-Locked-Subscription-Record Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-locked-subscription-record Binance API Documentation}
      */
     public async getLockedSubscriptionRecord(
         requestParameters: GetLockedSubscriptionRecordRequest = {}
@@ -3272,19 +3492,25 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Get Rate History
      *
-     * The time between startTime and endTime cannot be longer than 1 year.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Rate History(USER_DATA)
+     * Notes:
+     * - The time between startTime and endTime cannot be longer than 1 year.
+     * - If `startTime` and `endTime` are
+     * both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Rate History (USER_DATA)
      * @param {GetRateHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetRateHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleLockedApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/history/Get-Rate-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-rate-history Binance API Documentation}
      */
     public async getRateHistory(
         requestParameters: GetRateHistoryRequest
@@ -3313,14 +3539,16 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Get available Simple Earn flexible product list
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get Simple Earn Flexible Product List(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Simple Earn Flexible Product List (USER_DATA)
      * @param {GetSimpleEarnFlexibleProductListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSimpleEarnFlexibleProductListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleLockedApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/account/Get-Simple-Earn-Flexible-Product-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-simple-earn-flexible-product-list Binance API Documentation}
      */
     public async getSimpleEarnFlexibleProductList(
         requestParameters: GetSimpleEarnFlexibleProductListRequest = {}
@@ -3347,16 +3575,19 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Get Simple Earn Locked Product List
      *
-     * Get available Simple Earn locked product list
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Simple Earn Locked Product List(USER_DATA)
+     * Notes:
+     * - Get available Simple Earn locked product list
+     *
+     * @summary Get Simple Earn Locked Product List (USER_DATA)
      * @param {GetSimpleEarnLockedProductListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSimpleEarnLockedProductListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleLockedApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/account/Get-Simple-Earn-Locked-Product-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-simple-earn-locked-product-list Binance API Documentation}
      */
     public async getSimpleEarnLockedProductList(
         requestParameters: GetSimpleEarnLockedProductListRequest = {}
@@ -3383,16 +3614,19 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Redeem Flexible Product
      *
-     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Redeem Flexible Product(TRADE)
+     * Notes:
+     * - You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     *
+     * @summary Redeem Flexible Product (TRADE)
      * @param {RedeemFlexibleProductRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<RedeemFlexibleProductResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleLockedApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Redeem-Flexible-Product Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#redeem-flexible-product Binance API Documentation}
      */
     public async redeemFlexibleProduct(
         requestParameters: RedeemFlexibleProductRequest
@@ -3419,16 +3653,19 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Redeem Locked Product
      *
-     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1/3s per account
+     * Security Type: TRADE
      *
-     * @summary Redeem Locked Product(TRADE)
+     * Notes:
+     * - You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     *
+     * @summary Redeem Locked Product (TRADE)
      * @param {RedeemLockedProductRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<RedeemLockedProductResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleLockedApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Redeem-Locked-Product Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#redeem-locked-product Binance API Documentation}
      */
     public async redeemLockedProduct(
         requestParameters: RedeemLockedProductRequest
@@ -3452,14 +3689,16 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Set Flexible Auto Subscribe
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Set Flexible Auto Subscribe(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Set Flexible Auto Subscribe (USER_DATA)
      * @param {SetFlexibleAutoSubscribeRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SetFlexibleAutoSubscribeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleLockedApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Set-Flexible-Auto-Subscribe Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#set-flexible-auto-subscribe Binance API Documentation}
      */
     public async setFlexibleAutoSubscribe(
         requestParameters: SetFlexibleAutoSubscribeRequest
@@ -3484,14 +3723,16 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Set locked auto subscribe
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Set Locked Auto Subscribe(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Set Locked Auto Subscribe (USER_DATA)
      * @param {SetLockedAutoSubscribeRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SetLockedAutoSubscribeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleLockedApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Set-Locked-Auto-Subscribe Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#set-locked-auto-subscribe Binance API Documentation}
      */
     public async setLockedAutoSubscribe(
         requestParameters: SetLockedAutoSubscribeRequest
@@ -3516,14 +3757,16 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Set redeem option for Locked product
      *
-     * Weight: 50
+     * Weight(IP): 50
      *
-     * @summary Set Locked Product Redeem Option(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Set Locked Product Redeem Option (USER_DATA)
      * @param {SetLockedProductRedeemOptionRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SetLockedProductRedeemOptionResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleLockedApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Set-Locked-Redeem-Option Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#set-locked-product-redeem-option Binance API Documentation}
      */
     public async setLockedProductRedeemOption(
         requestParameters: SetLockedProductRedeemOptionRequest
@@ -3548,14 +3791,16 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Simple Account query
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Simple Account(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Simple Account (USER_DATA)
      * @param {SimpleAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SimpleAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleLockedApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/account/Simple-Account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#simple-account Binance API Documentation}
      */
     public async simpleAccount(
         requestParameters: SimpleAccountRequest = {}
@@ -3578,16 +3823,19 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Subscribe Flexible Product
      *
-     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Subscribe Flexible Product(TRADE)
+     * Notes:
+     * - You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     *
+     * @summary Subscribe Flexible Product (TRADE)
      * @param {SubscribeFlexibleProductRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SubscribeFlexibleProductResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleLockedApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Subscribe-Flexible-Product Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#subscribe-flexible-product Binance API Documentation}
      */
     public async subscribeFlexibleProduct(
         requestParameters: SubscribeFlexibleProductRequest
@@ -3614,16 +3862,19 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
     /**
      * Subscribe Locked Product
      *
-     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Subscribe Locked Product(TRADE)
+     * Notes:
+     * - You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     *
+     * @summary Subscribe Locked Product (TRADE)
      * @param {SubscribeLockedProductRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SubscribeLockedProductResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FlexibleLockedApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Subscribe-Locked-Product Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#subscribe-locked-product Binance API Documentation}
      */
     public async subscribeLockedProduct(
         requestParameters: SubscribeLockedProductRequest
@@ -3647,4 +3898,43 @@ export class FlexibleLockedApi implements FlexibleLockedApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum GetFlexibleRewardsHistoryTypeEnum {
+    BONUS = 'BONUS',
+    REALTIME = 'REALTIME',
+    REWARDS = 'REWARDS',
+    ALL = 'ALL',
+}
+
+export enum GetRateHistoryAprPeriodEnum {
+    DAY = 'DAY',
+    YEAR = 'YEAR',
+}
+
+export enum RedeemFlexibleProductDestAccountEnum {
+    SPOT = 'SPOT',
+    FUND = 'FUND',
+}
+
+export enum SetLockedProductRedeemOptionRedeemToEnum {
+    SPOT = 'SPOT',
+    FLEXIBLE = 'FLEXIBLE',
+}
+
+export enum SubscribeFlexibleProductSourceAccountEnum {
+    SPOT = 'SPOT',
+    FUND = 'FUND',
+    ALL = 'ALL',
+}
+
+export enum SubscribeLockedProductSourceAccountEnum {
+    SPOT = 'SPOT',
+    FUND = 'FUND',
+    ALL = 'ALL',
+}
+
+export enum SubscribeLockedProductRedeemToEnum {
+    SPOT = 'SPOT',
+    FLEXIBLE = 'FLEXIBLE',
 }

@@ -1,7 +1,7 @@
 /**
- * Binance Simple Earn REST API
+ * Simple Earn REST API
  *
- * OpenAPI Specification for the Binance Simple Earn REST API
+ * Earn rewards by subscribing to flexible or locked Simple Earn products.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -38,7 +37,9 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get RWUSD account information.
          *
-         * Weight: 150
+         * Weight(IP): 150
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get RWUSD Account (USER_DATA)
          * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
@@ -69,7 +70,9 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get RWUSD quota details including subscription quota, fast redemption quota, and standard redemption quota.
          *
-         * Weight: 150
+         * Weight(IP): 150
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get RWUSD Quota Details (USER_DATA)
          * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
@@ -100,18 +103,25 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get RWUSD rate history sorted by descending order.
          *
-         * The time between `startTime` and `endTime` cannot be longer than 6 months.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-         * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+         * - If
+         * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and
+         * data between `startTime` and `endTime` will be returned.
          *
          * @summary Get RWUSD Rate History (USER_DATA)
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [current] Currently querying page
+         * @param {number | bigint} [size] Number of results per page
          * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
@@ -158,18 +168,25 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get RWUSD redemption history.
          *
-         * The time between `startTime` and `endTime` cannot be longer than 6 months.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-         * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+         * - If
+         * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and
+         * data between `startTime` and `endTime` will be returned.
          *
          * @summary Get RWUSD Redemption History (USER_DATA)
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [current] Currently querying page
+         * @param {number | bigint} [size] Number of results per page
          * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
@@ -216,18 +233,25 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get RWUSD rewards history.
          *
-         * The time between `startTime` and `endTime` cannot be longer than 6 months.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-         * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+         * - If
+         * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and
+         * data between `startTime` and `endTime` will be returned.
          *
          * @summary Get RWUSD Rewards History (USER_DATA)
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [current] Currently querying page
+         * @param {number | bigint} [size] Number of results per page
          * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
@@ -274,25 +298,32 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get RWUSD subscription history
          *
-         * The time between `startTime` and `endTime` cannot be longer than 6 months.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-         * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time advanced by one month, and data between `startTime` and `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
          *
-         * @summary Get RWUSD subscription history(USER_DATA)
-         * @param {string} [asset] USDC or USDT
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+         * - If
+         * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time advanced by one month,
+         * and data between `startTime` and `endTime` will be returned.
+         *
+         * @summary Get RWUSD subscription history (USER_DATA)
+         * @param {GetRwusdSubscriptionHistoryAssetEnum} [asset]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
+         * @param {number | bigint} [current] Currently querying page
+         * @param {number | bigint} [size] Number of results per page
          * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
          *
          * @throws {RequiredError}
          */
         getRwusdSubscriptionHistory: async (
-            asset?: string,
+            asset?: GetRwusdSubscriptionHistoryAssetEnum,
             startTime?: number | bigint,
             endTime?: number | bigint,
             current?: number | bigint,
@@ -337,20 +368,24 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Redeem RWUSD to USDC
          *
-         * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: TRADE
          *
-         * @summary Redeem RWUSD(TRADE)
-         * @param {number} amount Amount
-         * @param {string} type FAST or STANDARD, defaults to STANDARD
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
+         * Notes:
+         * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+         * - This API only supports RWUSD redemption to the Spot Account. Redemptions to the Funding Account or any other account type are not supported.
+         *
+         * @summary Redeem RWUSD (TRADE)
+         * @param {number} amount Amount in RWUSD
+         * @param {RedeemRwusdTypeEnum} type
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
         redeemRwusd: async (
             amount: number,
-            type: string,
+            type: RedeemRwusdTypeEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'amount' is not null or undefined
@@ -387,19 +422,23 @@ const RwusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Subscribe RWUSD
          *
-         * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: TRADE
          *
-         * @summary Subscribe RWUSD(TRADE)
-         * @param {string} asset USDT or USDC (whichever is eligible)
+         * Notes:
+         * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+         * - This API only supports RWUSD subscription using assets held in the Spot Account. Subscriptions initiated from the Funding Account or any other account type are not supported.
+         *
+         * @summary Subscribe RWUSD (TRADE)
+         * @param {SubscribeRwusdAssetEnum} asset
          * @param {number} amount Amount
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
         subscribeRwusd: async (
-            asset: string,
+            asset: SubscribeRwusdAssetEnum,
             amount: number,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
@@ -445,7 +484,9 @@ export interface RwusdApiInterface {
     /**
      * Get RWUSD account information.
      *
-     * Weight: 150
+     * Weight(IP): 150
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get RWUSD Account (USER_DATA)
      * @param {GetRwusdAccountRequest} requestParameters Request parameters.
@@ -459,7 +500,9 @@ export interface RwusdApiInterface {
     /**
      * Get RWUSD quota details including subscription quota, fast redemption quota, and standard redemption quota.
      *
-     * Weight: 150
+     * Weight(IP): 150
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get RWUSD Quota Details (USER_DATA)
      * @param {GetRwusdQuotaDetailsRequest} requestParameters Request parameters.
@@ -473,12 +516,19 @@ export interface RwusdApiInterface {
     /**
      * Get RWUSD rate history sorted by descending order.
      *
-     * The time between `startTime` and `endTime` cannot be longer than 6 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * - If
+     * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and
+     * data between `startTime` and `endTime` will be returned.
      *
      * @summary Get RWUSD Rate History (USER_DATA)
      * @param {GetRwusdRateHistoryRequest} requestParameters Request parameters.
@@ -492,12 +542,19 @@ export interface RwusdApiInterface {
     /**
      * Get RWUSD redemption history.
      *
-     * The time between `startTime` and `endTime` cannot be longer than 6 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * - If
+     * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and
+     * data between `startTime` and `endTime` will be returned.
      *
      * @summary Get RWUSD Redemption History (USER_DATA)
      * @param {GetRwusdRedemptionHistoryRequest} requestParameters Request parameters.
@@ -511,12 +568,19 @@ export interface RwusdApiInterface {
     /**
      * Get RWUSD rewards history.
      *
-     * The time between `startTime` and `endTime` cannot be longer than 6 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * - If
+     * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and
+     * data between `startTime` and `endTime` will be returned.
      *
      * @summary Get RWUSD Rewards History (USER_DATA)
      * @param {GetRwusdRewardsHistoryRequest} requestParameters Request parameters.
@@ -530,14 +594,21 @@ export interface RwusdApiInterface {
     /**
      * Get RWUSD subscription history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 6 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time advanced by one month, and data between `startTime` and `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get RWUSD subscription history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * - If
+     * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time advanced by one month,
+     * and data between `startTime` and `endTime` will be returned.
+     *
+     * @summary Get RWUSD subscription history (USER_DATA)
      * @param {GetRwusdSubscriptionHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -549,11 +620,15 @@ export interface RwusdApiInterface {
     /**
      * Redeem RWUSD to USDC
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Redeem RWUSD(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * - This API only supports RWUSD redemption to the Spot Account. Redemptions to the Funding Account or any other account type are not supported.
+     *
+     * @summary Redeem RWUSD (TRADE)
      * @param {RedeemRwusdRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -565,11 +640,15 @@ export interface RwusdApiInterface {
     /**
      * Subscribe RWUSD
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Subscribe RWUSD(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * - This API only supports RWUSD subscription using assets held in the Spot Account. Subscriptions initiated from the Funding Account or any other account type are not supported.
+     *
+     * @summary Subscribe RWUSD (TRADE)
      * @param {SubscribeRwusdRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -626,14 +705,14 @@ export interface GetRwusdRateHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Starts from 1. Default: 1
+     * Currently querying page
      * @type {number | bigint}
      * @memberof RwusdApiGetRwusdRateHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Number of results per page. Default: 10, Max: 100
+     * Number of results per page
      * @type {number | bigint}
      * @memberof RwusdApiGetRwusdRateHistory
      */
@@ -667,14 +746,14 @@ export interface GetRwusdRedemptionHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Starts from 1. Default: 1
+     * Currently querying page
      * @type {number | bigint}
      * @memberof RwusdApiGetRwusdRedemptionHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Number of results per page. Default: 10, Max: 100
+     * Number of results per page
      * @type {number | bigint}
      * @memberof RwusdApiGetRwusdRedemptionHistory
      */
@@ -708,14 +787,14 @@ export interface GetRwusdRewardsHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Starts from 1. Default: 1
+     * Currently querying page
      * @type {number | bigint}
      * @memberof RwusdApiGetRwusdRewardsHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Number of results per page. Default: 10, Max: 100
+     * Number of results per page
      * @type {number | bigint}
      * @memberof RwusdApiGetRwusdRewardsHistory
      */
@@ -735,11 +814,11 @@ export interface GetRwusdRewardsHistoryRequest {
  */
 export interface GetRwusdSubscriptionHistoryRequest {
     /**
-     * USDC or USDT
-     * @type {string}
+     *
+     * @type {'USDC' | 'USDT'}
      * @memberof RwusdApiGetRwusdSubscriptionHistory
      */
-    readonly asset?: string;
+    readonly asset?: GetRwusdSubscriptionHistoryAssetEnum;
 
     /**
      *
@@ -756,14 +835,14 @@ export interface GetRwusdSubscriptionHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Starts from 1. Default: 1
+     * Currently querying page
      * @type {number | bigint}
      * @memberof RwusdApiGetRwusdSubscriptionHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Number of results per page. Default: 10, Max: 100
+     * Number of results per page
      * @type {number | bigint}
      * @memberof RwusdApiGetRwusdSubscriptionHistory
      */
@@ -783,21 +862,21 @@ export interface GetRwusdSubscriptionHistoryRequest {
  */
 export interface RedeemRwusdRequest {
     /**
-     * Amount
+     * Amount in RWUSD
      * @type {number}
      * @memberof RwusdApiRedeemRwusd
      */
     readonly amount: number;
 
     /**
-     * FAST or STANDARD, defaults to STANDARD
-     * @type {string}
+     *
+     * @type {'FAST' | 'STANDARD'}
      * @memberof RwusdApiRedeemRwusd
      */
-    readonly type: string;
+    readonly type: RedeemRwusdTypeEnum;
 
     /**
-     * The value cannot be greater than 60000 (ms)
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof RwusdApiRedeemRwusd
      */
@@ -810,11 +889,11 @@ export interface RedeemRwusdRequest {
  */
 export interface SubscribeRwusdRequest {
     /**
-     * USDT or USDC (whichever is eligible)
-     * @type {string}
+     *
+     * @type {'USDT' | 'USDC'}
      * @memberof RwusdApiSubscribeRwusd
      */
-    readonly asset: string;
+    readonly asset: SubscribeRwusdAssetEnum;
 
     /**
      * Amount
@@ -824,7 +903,7 @@ export interface SubscribeRwusdRequest {
     readonly amount: number;
 
     /**
-     * The value cannot be greater than 60000 (ms)
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof RwusdApiSubscribeRwusd
      */
@@ -847,14 +926,16 @@ export class RwusdApi implements RwusdApiInterface {
     /**
      * Get RWUSD account information.
      *
-     * Weight: 150
+     * Weight(IP): 150
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get RWUSD Account (USER_DATA)
      * @param {GetRwusdAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetRwusdAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof RwusdApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/account/ Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/rwusd#get-rwusd-account Binance API Documentation}
      */
     public async getRwusdAccount(
         requestParameters: GetRwusdAccountRequest = {}
@@ -877,14 +958,16 @@ export class RwusdApi implements RwusdApiInterface {
     /**
      * Get RWUSD quota details including subscription quota, fast redemption quota, and standard redemption quota.
      *
-     * Weight: 150
+     * Weight(IP): 150
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get RWUSD Quota Details (USER_DATA)
      * @param {GetRwusdQuotaDetailsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetRwusdQuotaDetailsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof RwusdApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/account/Get-RWUSD-Quota-Details Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/rwusd#get-rwusd-quota-details Binance API Documentation}
      */
     public async getRwusdQuotaDetails(
         requestParameters: GetRwusdQuotaDetailsRequest = {}
@@ -907,19 +990,26 @@ export class RwusdApi implements RwusdApiInterface {
     /**
      * Get RWUSD rate history sorted by descending order.
      *
-     * The time between `startTime` and `endTime` cannot be longer than 6 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * - If
+     * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and
+     * data between `startTime` and `endTime` will be returned.
      *
      * @summary Get RWUSD Rate History (USER_DATA)
      * @param {GetRwusdRateHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetRwusdRateHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof RwusdApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/history/Get-RWUSD-Rate-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/rwusd#get-rwusd-rate-history Binance API Documentation}
      */
     public async getRwusdRateHistory(
         requestParameters: GetRwusdRateHistoryRequest = {}
@@ -946,19 +1036,26 @@ export class RwusdApi implements RwusdApiInterface {
     /**
      * Get RWUSD redemption history.
      *
-     * The time between `startTime` and `endTime` cannot be longer than 6 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * - If
+     * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and
+     * data between `startTime` and `endTime` will be returned.
      *
      * @summary Get RWUSD Redemption History (USER_DATA)
      * @param {GetRwusdRedemptionHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetRwusdRedemptionHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof RwusdApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/history/Get-RWUSD-Redemption-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/rwusd#get-rwusd-redemption-history Binance API Documentation}
      */
     public async getRwusdRedemptionHistory(
         requestParameters: GetRwusdRedemptionHistoryRequest = {}
@@ -985,19 +1082,26 @@ export class RwusdApi implements RwusdApiInterface {
     /**
      * Get RWUSD rewards history.
      *
-     * The time between `startTime` and `endTime` cannot be longer than 6 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * - If
+     * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and
+     * data between `startTime` and `endTime` will be returned.
      *
      * @summary Get RWUSD Rewards History (USER_DATA)
      * @param {GetRwusdRewardsHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetRwusdRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof RwusdApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/history/Get-RWUSD-Rewards-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/rwusd#get-rwusd-rewards-history Binance API Documentation}
      */
     public async getRwusdRewardsHistory(
         requestParameters: GetRwusdRewardsHistoryRequest = {}
@@ -1024,19 +1128,26 @@ export class RwusdApi implements RwusdApiInterface {
     /**
      * Get RWUSD subscription history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 6 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time advanced by one month, and data between `startTime` and `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get RWUSD subscription history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * - If
+     * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time advanced by one month,
+     * and data between `startTime` and `endTime` will be returned.
+     *
+     * @summary Get RWUSD subscription history (USER_DATA)
      * @param {GetRwusdSubscriptionHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetRwusdSubscriptionHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof RwusdApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/history/Get-RWUSD-subscription-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/rwusd#get-rwusd-subscription-history Binance API Documentation}
      */
     public async getRwusdSubscriptionHistory(
         requestParameters: GetRwusdSubscriptionHistoryRequest = {}
@@ -1064,16 +1175,20 @@ export class RwusdApi implements RwusdApiInterface {
     /**
      * Redeem RWUSD to USDC
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Redeem RWUSD(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * - This API only supports RWUSD redemption to the Spot Account. Redemptions to the Funding Account or any other account type are not supported.
+     *
+     * @summary Redeem RWUSD (TRADE)
      * @param {RedeemRwusdRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<RedeemRwusdResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof RwusdApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/earn/Redeem-RWUSD Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/rwusd#redeem-rwusd Binance API Documentation}
      */
     public async redeemRwusd(
         requestParameters: RedeemRwusdRequest
@@ -1098,16 +1213,20 @@ export class RwusdApi implements RwusdApiInterface {
     /**
      * Subscribe RWUSD
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Subscribe RWUSD(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * - This API only supports RWUSD subscription using assets held in the Spot Account. Subscriptions initiated from the Funding Account or any other account type are not supported.
+     *
+     * @summary Subscribe RWUSD (TRADE)
      * @param {SubscribeRwusdRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SubscribeRwusdResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof RwusdApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/earn/Subscribe-RWUSD Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/rwusd#subscribe-rwusd Binance API Documentation}
      */
     public async subscribeRwusd(
         requestParameters: SubscribeRwusdRequest
@@ -1128,4 +1247,19 @@ export class RwusdApi implements RwusdApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum GetRwusdSubscriptionHistoryAssetEnum {
+    USDC = 'USDC',
+    USDT = 'USDT',
+}
+
+export enum RedeemRwusdTypeEnum {
+    FAST = 'FAST',
+    STANDARD = 'STANDARD',
+}
+
+export enum SubscribeRwusdAssetEnum {
+    USDT = 'USDT',
+    USDC = 'USDC',
 }

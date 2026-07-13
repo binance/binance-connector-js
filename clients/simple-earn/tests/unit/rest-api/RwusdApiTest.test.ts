@@ -1,7 +1,7 @@
 /**
- * Binance Simple Earn REST API
+ * Simple Earn REST API
  *
- * OpenAPI Specification for the Binance Simple Earn REST API
+ * Earn rewards by subscribing to flexible or locked Simple Earn products.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,12 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { RwusdApi } from '../../../src/rest-api';
+import {
+    RwusdApi,
+    GetRwusdSubscriptionHistoryAssetEnum,
+    RedeemRwusdTypeEnum,
+    SubscribeRwusdAssetEnum,
+} from '../../../src/rest-api';
 import {
     GetRwusdAccountRequest,
     GetRwusdQuotaDetailsRequest,
@@ -111,7 +116,7 @@ describe('RwusdApi', () => {
             mockResponse = JSONParse(
                 JSONStringify({
                     subscriptionQuota: {
-                        assets: ['USDT', 'USDC'],
+                        assets: ['USDT'],
                         leftQuota: '1000',
                         minimum: '0.10000000',
                     },
@@ -154,7 +159,7 @@ describe('RwusdApi', () => {
             mockResponse = JSONParse(
                 JSONStringify({
                     subscriptionQuota: {
-                        assets: ['USDT', 'USDC'],
+                        assets: ['USDT'],
                         leftQuota: '1000',
                         minimum: '0.10000000',
                     },
@@ -486,7 +491,7 @@ describe('RwusdApi', () => {
 
         it('should execute getRwusdSubscriptionHistory() successfully with optional parameters', async () => {
             const params: GetRwusdSubscriptionHistoryRequest = {
-                asset: 'asset_example',
+                asset: GetRwusdSubscriptionHistoryAssetEnum.USDC,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -546,7 +551,7 @@ describe('RwusdApi', () => {
         it('should execute redeemRwusd() successfully with required parameters only', async () => {
             const params: RedeemRwusdRequest = {
                 amount: 1.0,
-                type: 's',
+                type: RedeemRwusdTypeEnum.FAST,
             };
 
             mockResponse = JSONParse(
@@ -575,7 +580,7 @@ describe('RwusdApi', () => {
         it('should execute redeemRwusd() successfully with optional parameters', async () => {
             const params: RedeemRwusdRequest = {
                 amount: 1.0,
-                type: 's',
+                type: RedeemRwusdTypeEnum.FAST,
                 recvWindow: 5000,
             };
 
@@ -605,7 +610,7 @@ describe('RwusdApi', () => {
         it('should throw RequiredError when amount is missing', async () => {
             const _params: RedeemRwusdRequest = {
                 amount: 1.0,
-                type: 's',
+                type: RedeemRwusdTypeEnum.FAST,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -618,7 +623,7 @@ describe('RwusdApi', () => {
         it('should throw RequiredError when type is missing', async () => {
             const _params: RedeemRwusdRequest = {
                 amount: 1.0,
-                type: 's',
+                type: RedeemRwusdTypeEnum.FAST,
             };
             const params = Object.assign({ ..._params });
             delete params?.type;
@@ -631,7 +636,7 @@ describe('RwusdApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: RedeemRwusdRequest = {
                 amount: 1.0,
-                type: 's',
+                type: RedeemRwusdTypeEnum.FAST,
             };
 
             const errorResponse = {
@@ -652,7 +657,7 @@ describe('RwusdApi', () => {
     describe('subscribeRwusd()', () => {
         it('should execute subscribeRwusd() successfully with required parameters only', async () => {
             const params: SubscribeRwusdRequest = {
-                asset: 'asset_example',
+                asset: SubscribeRwusdAssetEnum.USDT,
                 amount: 1.0,
             };
 
@@ -674,7 +679,7 @@ describe('RwusdApi', () => {
 
         it('should execute subscribeRwusd() successfully with optional parameters', async () => {
             const params: SubscribeRwusdRequest = {
-                asset: 'asset_example',
+                asset: SubscribeRwusdAssetEnum.USDT,
                 amount: 1.0,
                 recvWindow: 5000,
             };
@@ -697,7 +702,7 @@ describe('RwusdApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: SubscribeRwusdRequest = {
-                asset: 'asset_example',
+                asset: SubscribeRwusdAssetEnum.USDT,
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -710,7 +715,7 @@ describe('RwusdApi', () => {
 
         it('should throw RequiredError when amount is missing', async () => {
             const _params: SubscribeRwusdRequest = {
-                asset: 'asset_example',
+                asset: SubscribeRwusdAssetEnum.USDT,
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -723,7 +728,7 @@ describe('RwusdApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: SubscribeRwusdRequest = {
-                asset: 'asset_example',
+                asset: SubscribeRwusdAssetEnum.USDT,
                 amount: 1.0,
             };
 

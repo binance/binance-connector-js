@@ -1,5 +1,59 @@
 # Changelog
 
+## 16.0.0 - 2026-07-13
+
+### Changed (11)
+
+- Added parameter `lang`
+  - affected methods:
+    - `getYieldArenaActivities()` (`GET /sapi/v1/earn/arena/activities`)
+- Modified parameter `aprPeriod`:
+  - enum added: `DAY`, `YEAR`
+  - affected methods:
+    - `getRateHistory()` (`GET /sapi/v1/simple-earn/flexible/history/rateHistory`)
+- Modified parameter `asset`:
+  - enum added: `USDC`, `USDT`
+  - affected methods:
+    - `getBfusdSubscriptionHistory()` (`GET /sapi/v1/bfusd/history/subscriptionHistory`)
+    - `getRwusdSubscriptionHistory()` (`GET /sapi/v1/rwusd/history/subscriptionHistory`)
+- Modified parameter `asset`:
+  - enum added: `USDT`, `USDC`
+  - affected methods:
+    - `subscribeRwusd()` (`POST /sapi/v1/rwusd/subscribe`)
+- Modified parameter `destAccount`:
+  - enum added: `SPOT`, `FUND`
+  - affected methods:
+    - `redeemFlexibleProduct()` (`POST /sapi/v1/simple-earn/flexible/redeem`)
+- Modified parameter `positionId`:
+  - type `integer` → `string`
+  - affected methods:
+    - `getLockedRedemptionRecord()` (`GET /sapi/v1/simple-earn/locked/history/redemptionRecord`)
+    - `getLockedRewardsHistory()` (`GET /sapi/v1/simple-earn/locked/history/rewardsRecord`)
+    - `getLockedProductPosition()` (`GET /sapi/v1/simple-earn/locked/position`)
+- Modified parameter `redeemTo`:
+  - enum added: `SPOT`, `FLEXIBLE`
+  - affected methods:
+    - `setLockedProductRedeemOption()` (`POST /sapi/v1/simple-earn/locked/setRedeemOption`)
+- Modified parameter `redeemTo`:
+  - enum added: `SPOT`, `FLEXIBLE`
+  - affected methods:
+    - `subscribeLockedProduct()` (`POST /sapi/v1/simple-earn/locked/subscribe`)
+- Modified parameter `sourceAccount`:
+  - enum added: `SPOT`, `FUND`, `ALL`
+  - affected methods:
+    - `subscribeFlexibleProduct()` (`POST /sapi/v1/simple-earn/flexible/subscribe`)
+    - `subscribeLockedProduct()` (`POST /sapi/v1/simple-earn/locked/subscribe`)
+- Modified parameter `type`:
+  - enum added: `FAST`, `STANDARD`
+  - affected methods:
+    - `redeemBfusd()` (`POST /sapi/v1/bfusd/redeem`)
+    - `redeemRwusd()` (`POST /sapi/v1/rwusd/redeem`)
+- Modified parameter `type`:
+  - required: `true` → `false`
+  - enum added: `BONUS`, `REALTIME`, `REWARDS`, `ALL`
+  - affected methods:
+    - `getFlexibleRewardsHistory()` (`GET /sapi/v1/simple-earn/flexible/history/rewardsRecord`)
+
 ## 15.0.1 - 2026-06-18
 
 ### Changed (2)

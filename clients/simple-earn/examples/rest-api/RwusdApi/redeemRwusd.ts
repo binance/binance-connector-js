@@ -1,4 +1,4 @@
-import { SimpleEarn, SIMPLE_EARN_REST_API_PROD_URL } from '../../../src';
+import { SimpleEarn, SimpleEarnRestAPI, SIMPLE_EARN_REST_API_PROD_URL } from '../../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -11,7 +11,7 @@ async function redeemRwusd() {
     try {
         const response = await client.restAPI.redeemRwusd({
             amount: 1.0,
-            type: 's',
+            type: SimpleEarnRestAPI.RedeemRwusdTypeEnum.STANDARD,
         });
 
         const rateLimits = response.rateLimits!;

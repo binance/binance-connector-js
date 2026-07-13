@@ -1,4 +1,4 @@
-import { SimpleEarn, SIMPLE_EARN_REST_API_PROD_URL } from '../../../src';
+import { SimpleEarn, SimpleEarnRestAPI, SIMPLE_EARN_REST_API_PROD_URL } from '../../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -10,7 +10,7 @@ const client = new SimpleEarn({ configurationRestAPI });
 async function subscribeRwusd() {
     try {
         const response = await client.restAPI.subscribeRwusd({
-            asset: 'asset_example',
+            asset: SimpleEarnRestAPI.SubscribeRwusdAssetEnum.USDC,
             amount: 1.0,
         });
 

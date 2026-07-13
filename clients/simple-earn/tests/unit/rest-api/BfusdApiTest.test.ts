@@ -1,7 +1,7 @@
 /**
- * Binance Simple Earn REST API
+ * Simple Earn REST API
  *
- * OpenAPI Specification for the Binance Simple Earn REST API
+ * Earn rewards by subscribing to flexible or locked Simple Earn products.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,11 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { BfusdApi } from '../../../src/rest-api';
+import {
+    BfusdApi,
+    GetBfusdSubscriptionHistoryAssetEnum,
+    RedeemBfusdTypeEnum,
+} from '../../../src/rest-api';
 import {
     GetBfusdAccountRequest,
     GetBfusdQuotaDetailsRequest,
@@ -480,7 +484,7 @@ describe('BfusdApi', () => {
 
         it('should execute getBfusdSubscriptionHistory() successfully with optional parameters', async () => {
             const params: GetBfusdSubscriptionHistoryRequest = {
-                asset: 'asset_example',
+                asset: GetBfusdSubscriptionHistoryAssetEnum.USDC,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -540,7 +544,7 @@ describe('BfusdApi', () => {
         it('should execute redeemBfusd() successfully with required parameters only', async () => {
             const params: RedeemBfusdRequest = {
                 amount: 1.0,
-                type: 's',
+                type: RedeemBfusdTypeEnum.FAST,
             };
 
             mockResponse = JSONParse(
@@ -569,7 +573,7 @@ describe('BfusdApi', () => {
         it('should execute redeemBfusd() successfully with optional parameters', async () => {
             const params: RedeemBfusdRequest = {
                 amount: 1.0,
-                type: 's',
+                type: RedeemBfusdTypeEnum.FAST,
                 recvWindow: 5000,
             };
 
@@ -599,7 +603,7 @@ describe('BfusdApi', () => {
         it('should throw RequiredError when amount is missing', async () => {
             const _params: RedeemBfusdRequest = {
                 amount: 1.0,
-                type: 's',
+                type: RedeemBfusdTypeEnum.FAST,
             };
             const params = Object.assign({ ..._params });
             delete params?.amount;
@@ -612,7 +616,7 @@ describe('BfusdApi', () => {
         it('should throw RequiredError when type is missing', async () => {
             const _params: RedeemBfusdRequest = {
                 amount: 1.0,
-                type: 's',
+                type: RedeemBfusdTypeEnum.FAST,
             };
             const params = Object.assign({ ..._params });
             delete params?.type;
@@ -625,7 +629,7 @@ describe('BfusdApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: RedeemBfusdRequest = {
                 amount: 1.0,
-                type: 's',
+                type: RedeemBfusdTypeEnum.FAST,
             };
 
             const errorResponse = {
@@ -646,7 +650,7 @@ describe('BfusdApi', () => {
     describe('subscribeBfusd()', () => {
         it('should execute subscribeBfusd() successfully with required parameters only', async () => {
             const params: SubscribeBfusdRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
                 amount: 1.0,
             };
 
@@ -668,7 +672,7 @@ describe('BfusdApi', () => {
 
         it('should execute subscribeBfusd() successfully with optional parameters', async () => {
             const params: SubscribeBfusdRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
                 amount: 1.0,
                 recvWindow: 5000,
             };
@@ -691,7 +695,7 @@ describe('BfusdApi', () => {
 
         it('should throw RequiredError when asset is missing', async () => {
             const _params: SubscribeBfusdRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -704,7 +708,7 @@ describe('BfusdApi', () => {
 
         it('should throw RequiredError when amount is missing', async () => {
             const _params: SubscribeBfusdRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
                 amount: 1.0,
             };
             const params = Object.assign({ ..._params });
@@ -717,7 +721,7 @@ describe('BfusdApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: SubscribeBfusdRequest = {
-                asset: 'asset_example',
+                asset: 'USDT',
                 amount: 1.0,
             };
 

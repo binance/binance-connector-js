@@ -1,7 +1,7 @@
 /**
- * Binance Simple Earn REST API
+ * Simple Earn REST API
  *
- * OpenAPI Specification for the Binance Simple Earn REST API
+ * Earn rewards by subscribing to flexible or locked Simple Earn products.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -28,22 +27,31 @@ const YieldArenaApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get the list of Earn Yield Arena giveaway activities currently available to the user.
          *
-         * Supported locales: `en`, `en-GB`, `en-AU`, `cn`, `zh`, `zh-CN`, `tw`, `zh-TW`, `zh-HK`, `ja`, `ja-JP`, `ru`, `ru-RU`, `es`, `es-ES`, `es-LA`, `pt`, `pt-BR`, `pt-PT`, `fr`, `fr-FR`, `de`, `de-DE`, `it`, `it-IT`, `id`, `id-ID`, `vi`, `vi-VN`, `ar`, `ar-SA`, `pl`, `pl-PL`, `uk`, `uk-UA`, `cs`, `cs-CZ`, `ro`, `ro-RO`, `sv`, `sv-SE`, `bg`, `bg-BG`, `da`, `da-DK`, `el`, `el-GR`, `hu`, `hu-HU`, `lv`, `lv-LV`, `sk`, `sk-SK`, `sl`, `sl-SI`.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
          *
          * @summary Get Yield Arena Activities (USER_DATA)
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {string} [lang] Locale tag for `title` and `description` (e.g. `en`, `zh-CN`, `pt-BR`). Default: `en`.
+         * If the value is missing, malformed, or has no translation configured, content is returned in `en`.
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
-        getYieldArenaActivities: async (recvWindow?: number | bigint): Promise<RequestArgs> => {
+        getYieldArenaActivities: async (
+            lang?: string,
+            recvWindow?: number | bigint
+        ): Promise<RequestArgs> => {
             const localVarQueryParameter: Record<string, unknown> = {};
             const localVarBodyParameter: Record<string, unknown> = {};
             const localVarHeaderParameter: Record<string, unknown> = {};
 
             if (recvWindow !== undefined && recvWindow !== null) {
                 localVarQueryParameter['recvWindow'] = recvWindow;
+            }
+
+            if (lang !== undefined && lang !== null) {
+                localVarHeaderParameter['lang'] = lang;
             }
 
             let _timeUnit: TimeUnit | undefined;
@@ -69,9 +77,9 @@ export interface YieldArenaApiInterface {
     /**
      * Get the list of Earn Yield Arena giveaway activities currently available to the user.
      *
-     * Supported locales: `en`, `en-GB`, `en-AU`, `cn`, `zh`, `zh-CN`, `tw`, `zh-TW`, `zh-HK`, `ja`, `ja-JP`, `ru`, `ru-RU`, `es`, `es-ES`, `es-LA`, `pt`, `pt-BR`, `pt-PT`, `fr`, `fr-FR`, `de`, `de-DE`, `it`, `it-IT`, `id`, `id-ID`, `vi`, `vi-VN`, `ar`, `ar-SA`, `pl`, `pl-PL`, `uk`, `uk-UA`, `cs`, `cs-CZ`, `ro`, `ro-RO`, `sv`, `sv-SE`, `bg`, `bg-BG`, `da`, `da-DK`, `el`, `el-GR`, `hu`, `hu-HU`, `lv`, `lv-LV`, `sk`, `sk-SK`, `sl`, `sl-SI`.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
      * @summary Get Yield Arena Activities (USER_DATA)
      * @param {GetYieldArenaActivitiesRequest} requestParameters Request parameters.
@@ -90,7 +98,15 @@ export interface YieldArenaApiInterface {
  */
 export interface GetYieldArenaActivitiesRequest {
     /**
-     * The value cannot be greater than 60000 (ms)
+     * Locale tag for `title` and `description` (e.g. `en`, `zh-CN`, `pt-BR`). Default: `en`.
+     * If the value is missing, malformed, or has no translation configured, content is returned in `en`.
+     * @type {string}
+     * @memberof YieldArenaApiGetYieldArenaActivities
+     */
+    readonly lang?: string;
+
+    /**
+     *
      * @type {number | bigint}
      * @memberof YieldArenaApiGetYieldArenaActivities
      */
@@ -113,21 +129,22 @@ export class YieldArenaApi implements YieldArenaApiInterface {
     /**
      * Get the list of Earn Yield Arena giveaway activities currently available to the user.
      *
-     * Supported locales: `en`, `en-GB`, `en-AU`, `cn`, `zh`, `zh-CN`, `tw`, `zh-TW`, `zh-HK`, `ja`, `ja-JP`, `ru`, `ru-RU`, `es`, `es-ES`, `es-LA`, `pt`, `pt-BR`, `pt-PT`, `fr`, `fr-FR`, `de`, `de-DE`, `it`, `it-IT`, `id`, `id-ID`, `vi`, `vi-VN`, `ar`, `ar-SA`, `pl`, `pl-PL`, `uk`, `uk-UA`, `cs`, `cs-CZ`, `ro`, `ro-RO`, `sv`, `sv-SE`, `bg`, `bg-BG`, `da`, `da-DK`, `el`, `el-GR`, `hu`, `hu-HU`, `lv`, `lv-LV`, `sk`, `sk-SK`, `sl`, `sl-SI`.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
      * @summary Get Yield Arena Activities (USER_DATA)
      * @param {GetYieldArenaActivitiesRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetYieldArenaActivitiesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof YieldArenaApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/yield-arena/earn/Get-Yield-Arena-Activities Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/yield-arena#get-yield-arena-activities Binance API Documentation}
      */
     public async getYieldArenaActivities(
         requestParameters: GetYieldArenaActivitiesRequest = {}
     ): Promise<RestApiResponse<GetYieldArenaActivitiesResponse>> {
         const localVarAxiosArgs = await this.localVarAxiosParamCreator.getYieldArenaActivities(
+            requestParameters?.lang,
             requestParameters?.recvWindow
         );
         return sendRequest<GetYieldArenaActivitiesResponse>(

@@ -1,7 +1,7 @@
 /**
- * Binance Simple Earn REST API
+ * Simple Earn REST API
  *
- * OpenAPI Specification for the Binance Simple Earn REST API
+ * Earn rewards by subscribing to flexible or locked Simple Earn products.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,16 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { FlexibleLockedApi } from '../../../src/rest-api';
+import {
+    FlexibleLockedApi,
+    GetFlexibleRewardsHistoryTypeEnum,
+    GetRateHistoryAprPeriodEnum,
+    RedeemFlexibleProductDestAccountEnum,
+    SetLockedProductRedeemOptionRedeemToEnum,
+    SubscribeFlexibleProductSourceAccountEnum,
+    SubscribeLockedProductSourceAccountEnum,
+    SubscribeLockedProductRedeemToEnum,
+} from '../../../src/rest-api';
 import {
     GetCollateralRecordRequest,
     GetFlexiblePersonalLeftQuotaRequest,
@@ -295,7 +304,7 @@ describe('FlexibleLockedApi', () => {
 
         it('should execute getFlexibleProductPosition() successfully with optional parameters', async () => {
             const params: GetFlexibleProductPositionRequest = {
-                asset: 'asset_example',
+                asset: 'USDC',
                 productId: '1',
                 current: 1,
                 size: 10,
@@ -395,7 +404,7 @@ describe('FlexibleLockedApi', () => {
             const params: GetFlexibleRedemptionRecordRequest = {
                 productId: '1',
                 redeemId: '1',
-                asset: 'asset_example',
+                asset: 'USDC',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -454,10 +463,6 @@ describe('FlexibleLockedApi', () => {
 
     describe('getFlexibleRewardsHistory()', () => {
         it('should execute getFlexibleRewardsHistory() successfully with required parameters only', async () => {
-            const params: GetFlexibleRewardsHistoryRequest = {
-                type: 's',
-            };
-
             mockResponse = JSONParse(
                 JSONStringify({
                     rows: [
@@ -467,13 +472,6 @@ describe('FlexibleLockedApi', () => {
                             projectId: 'USDT001',
                             type: 'BONUS',
                             time: 1577233578000,
-                        },
-                        {
-                            asset: 'USDT',
-                            rewards: '0.00687654',
-                            projectId: 'USDT001',
-                            type: 'REALTIME',
-                            time: 1577233562000,
                         },
                     ],
                     total: 2,
@@ -488,7 +486,7 @@ describe('FlexibleLockedApi', () => {
                     rateLimits: [],
                 } as RestApiResponse<GetFlexibleRewardsHistoryResponse>)
             );
-            const response = await client.getFlexibleRewardsHistory(params);
+            const response = await client.getFlexibleRewardsHistory();
             expect(response).toBeDefined();
             await expect(response.data()).resolves.toBe(mockResponse);
             spy.mockRestore();
@@ -496,11 +494,11 @@ describe('FlexibleLockedApi', () => {
 
         it('should execute getFlexibleRewardsHistory() successfully with optional parameters', async () => {
             const params: GetFlexibleRewardsHistoryRequest = {
-                type: 's',
                 productId: '1',
-                asset: 'asset_example',
+                asset: 'USDC',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
+                type: GetFlexibleRewardsHistoryTypeEnum.BONUS,
                 current: 1,
                 size: 10,
                 recvWindow: 5000,
@@ -516,13 +514,6 @@ describe('FlexibleLockedApi', () => {
                             type: 'BONUS',
                             time: 1577233578000,
                         },
-                        {
-                            asset: 'USDT',
-                            rewards: '0.00687654',
-                            projectId: 'USDT001',
-                            type: 'REALTIME',
-                            time: 1577233562000,
-                        },
                     ],
                     total: 2,
                 })
@@ -542,23 +533,7 @@ describe('FlexibleLockedApi', () => {
             spy.mockRestore();
         });
 
-        it('should throw RequiredError when type is missing', async () => {
-            const _params: GetFlexibleRewardsHistoryRequest = {
-                type: 's',
-            };
-            const params = Object.assign({ ..._params });
-            delete params?.type;
-
-            await expect(client.getFlexibleRewardsHistory(params)).rejects.toThrow(
-                'Required parameter type was null or undefined when calling getFlexibleRewardsHistory.'
-            );
-        });
-
         it('should throw an error when server is returning an error', async () => {
-            const params: GetFlexibleRewardsHistoryRequest = {
-                type: 's',
-            };
-
             const errorResponse = {
                 code: -1111,
                 msg: 'Server Error',
@@ -571,7 +546,7 @@ describe('FlexibleLockedApi', () => {
             const spy = jest
                 .spyOn(client, 'getFlexibleRewardsHistory')
                 .mockRejectedValueOnce(mockError);
-            await expect(client.getFlexibleRewardsHistory(params)).rejects.toThrow('ResponseError');
+            await expect(client.getFlexibleRewardsHistory()).rejects.toThrow('ResponseError');
             spy.mockRestore();
         });
     });
@@ -731,7 +706,7 @@ describe('FlexibleLockedApi', () => {
             const params: GetFlexibleSubscriptionRecordRequest = {
                 productId: '1',
                 purchaseId: '1',
-                asset: 'asset_example',
+                asset: 'USDC',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -932,8 +907,8 @@ describe('FlexibleLockedApi', () => {
 
         it('should execute getLockedProductPosition() successfully with optional parameters', async () => {
             const params: GetLockedProductPositionRequest = {
-                asset: 'asset_example',
-                positionId: 1,
+                asset: 'USDC',
+                positionId: '1',
                 projectId: '1',
                 current: 1,
                 size: 10,
@@ -1059,9 +1034,9 @@ describe('FlexibleLockedApi', () => {
 
         it('should execute getLockedRedemptionRecord() successfully with optional parameters', async () => {
             const params: GetLockedRedemptionRecordRequest = {
-                positionId: 1,
+                positionId: '1',
                 redeemId: '1',
-                asset: 'asset_example',
+                asset: 'USDC',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -1140,13 +1115,6 @@ describe('FlexibleLockedApi', () => {
                             amount: '21312.23223',
                             type: 'Locked Rewards',
                         },
-                        {
-                            positionId: 123123,
-                            time: 1575018510000,
-                            asset: 'BNB',
-                            amount: '1.23223',
-                            type: 'Boost Rewards',
-                        },
                     ],
                     total: 1,
                 })
@@ -1168,8 +1136,8 @@ describe('FlexibleLockedApi', () => {
 
         it('should execute getLockedRewardsHistory() successfully with optional parameters', async () => {
             const params: GetLockedRewardsHistoryRequest = {
-                positionId: 1,
-                asset: 'asset_example',
+                positionId: '1',
+                asset: 'USDC',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -1187,13 +1155,6 @@ describe('FlexibleLockedApi', () => {
                             lockPeriod: '30',
                             amount: '21312.23223',
                             type: 'Locked Rewards',
-                        },
-                        {
-                            positionId: 123123,
-                            time: 1575018510000,
-                            asset: 'BNB',
-                            amount: '1.23223',
-                            type: 'Boost Rewards',
                         },
                     ],
                     total: 1,
@@ -1405,7 +1366,7 @@ describe('FlexibleLockedApi', () => {
         it('should execute getLockedSubscriptionRecord() successfully with optional parameters', async () => {
             const params: GetLockedSubscriptionRecordRequest = {
                 purchaseId: '1',
-                asset: 'asset_example',
+                asset: 'USDC',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -1504,7 +1465,7 @@ describe('FlexibleLockedApi', () => {
         it('should execute getRateHistory() successfully with optional parameters', async () => {
             const params: GetRateHistoryRequest = {
                 productId: '1',
-                aprPeriod: 'DAY',
+                aprPeriod: GetRateHistoryAprPeriodEnum.DAY,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -1612,7 +1573,7 @@ describe('FlexibleLockedApi', () => {
 
         it('should execute getSimpleEarnFlexibleProductList() successfully with optional parameters', async () => {
             const params: GetSimpleEarnFlexibleProductListRequest = {
-                asset: 'asset_example',
+                asset: 'USDC',
                 current: 1,
                 size: 10,
                 recvWindow: 5000,
@@ -1719,7 +1680,7 @@ describe('FlexibleLockedApi', () => {
 
         it('should execute getSimpleEarnLockedProductList() successfully with optional parameters', async () => {
             const params: GetSimpleEarnLockedProductListRequest = {
-                asset: 'asset_example',
+                asset: 'USDC',
                 current: 1,
                 size: 10,
                 recvWindow: 5000,
@@ -1811,7 +1772,7 @@ describe('FlexibleLockedApi', () => {
                 productId: '1',
                 redeemAll: false,
                 amount: 1.0,
-                destAccount: 'SPOT',
+                destAccount: RedeemFlexibleProductDestAccountEnum.SPOT,
                 recvWindow: 5000,
             };
 
@@ -2135,7 +2096,7 @@ describe('FlexibleLockedApi', () => {
         it('should execute setLockedProductRedeemOption() successfully with required parameters only', async () => {
             const params: SetLockedProductRedeemOptionRequest = {
                 positionId: '1',
-                redeemTo: 'redeemTo_example',
+                redeemTo: SetLockedProductRedeemOptionRedeemToEnum.SPOT,
             };
 
             mockResponse = JSONParse(JSONStringify({ success: true }));
@@ -2157,7 +2118,7 @@ describe('FlexibleLockedApi', () => {
         it('should execute setLockedProductRedeemOption() successfully with optional parameters', async () => {
             const params: SetLockedProductRedeemOptionRequest = {
                 positionId: '1',
-                redeemTo: 'redeemTo_example',
+                redeemTo: SetLockedProductRedeemOptionRedeemToEnum.SPOT,
                 recvWindow: 5000,
             };
 
@@ -2180,7 +2141,7 @@ describe('FlexibleLockedApi', () => {
         it('should throw RequiredError when positionId is missing', async () => {
             const _params: SetLockedProductRedeemOptionRequest = {
                 positionId: '1',
-                redeemTo: 'redeemTo_example',
+                redeemTo: SetLockedProductRedeemOptionRedeemToEnum.SPOT,
             };
             const params = Object.assign({ ..._params });
             delete params?.positionId;
@@ -2193,7 +2154,7 @@ describe('FlexibleLockedApi', () => {
         it('should throw RequiredError when redeemTo is missing', async () => {
             const _params: SetLockedProductRedeemOptionRequest = {
                 positionId: '1',
-                redeemTo: 'redeemTo_example',
+                redeemTo: SetLockedProductRedeemOptionRedeemToEnum.SPOT,
             };
             const params = Object.assign({ ..._params });
             delete params?.redeemTo;
@@ -2206,7 +2167,7 @@ describe('FlexibleLockedApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: SetLockedProductRedeemOptionRequest = {
                 positionId: '1',
-                redeemTo: 'redeemTo_example',
+                redeemTo: SetLockedProductRedeemOptionRedeemToEnum.SPOT,
             };
 
             const errorResponse = {
@@ -2329,7 +2290,7 @@ describe('FlexibleLockedApi', () => {
                 productId: '1',
                 amount: 1.0,
                 autoSubscribe: true,
-                sourceAccount: 'SPOT',
+                sourceAccount: SubscribeFlexibleProductSourceAccountEnum.SPOT,
                 recvWindow: 5000,
             };
 
@@ -2427,9 +2388,9 @@ describe('FlexibleLockedApi', () => {
             const params: SubscribeLockedProductRequest = {
                 projectId: '1',
                 amount: 1.0,
-                autoSubscribe: true,
-                sourceAccount: 'SPOT',
-                redeemTo: 'SPOT',
+                autoSubscribe: false,
+                sourceAccount: SubscribeLockedProductSourceAccountEnum.SPOT,
+                redeemTo: SubscribeLockedProductRedeemToEnum.SPOT,
                 recvWindow: 5000,
             };
 

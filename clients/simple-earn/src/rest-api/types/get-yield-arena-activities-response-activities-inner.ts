@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Simple Earn REST API
+ * Simple Earn REST API
  *
- * OpenAPI Specification for the Binance Simple Earn REST API
+ * Earn rewards by subscribing to flexible or locked Simple Earn products.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,55 +20,55 @@
  */
 export interface GetYieldArenaActivitiesResponseActivitiesInner {
     /**
-     *
+     * Activity ID.
      * @type {number | bigint}
      * @memberof GetYieldArenaActivitiesResponseActivitiesInner
      */
     activityId?: number | bigint;
     /**
-     *
+     * Activity category: `AIRDROP`, `LEADERBOARD`, or `EVENT`.
      * @type {string}
      * @memberof GetYieldArenaActivitiesResponseActivitiesInner
      */
     activityType?: string;
     /**
-     *
+     * Activity title, localized via the `lang` header.
      * @type {string}
      * @memberof GetYieldArenaActivitiesResponseActivitiesInner
      */
     title?: string;
     /**
-     *
+     * Activity description, localized via the `lang` header.
      * @type {string}
      * @memberof GetYieldArenaActivitiesResponseActivitiesInner
      */
     description?: string;
     /**
-     *
+     * USD value of the reward pool.
      * @type {string}
      * @memberof GetYieldArenaActivitiesResponseActivitiesInner
      */
     rewardPoolInUsd?: string;
     /**
-     *
+     * Reward token symbols (e.g. `[\"BNB\"]`); may be empty.
      * @type {Array<string>}
      * @memberof GetYieldArenaActivitiesResponseActivitiesInner
      */
     rewardToken?: Array<string>;
     /**
-     *
+     * Web URL to the activity landing page.
      * @type {string}
      * @memberof GetYieldArenaActivitiesResponseActivitiesInner
      */
     redirectUrl?: string;
     /**
-     *
+     * Activity start time in milliseconds; may be null for activities that are immediately effective.
      * @type {number | bigint}
      * @memberof GetYieldArenaActivitiesResponseActivitiesInner
      */
     startTime?: number | bigint;
     /**
-     *
+     * Activity end time in milliseconds; may be null for activities with no fixed end.
      * @type {number | bigint}
      * @memberof GetYieldArenaActivitiesResponseActivitiesInner
      */

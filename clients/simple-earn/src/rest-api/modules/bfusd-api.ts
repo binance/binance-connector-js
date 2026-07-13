@@ -1,7 +1,7 @@
 /**
- * Binance Simple Earn REST API
+ * Simple Earn REST API
  *
- * OpenAPI Specification for the Binance Simple Earn REST API
+ * Earn rewards by subscribing to flexible or locked Simple Earn products.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -38,10 +37,12 @@ const BfusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get BFUSD account information.
          *
-         * Weight: 150
+         * Weight(IP): 150
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get BFUSD Account (USER_DATA)
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -67,12 +68,14 @@ const BfusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
-         * Get BFUSD quota details including subscription quota, fast redemption quota and standard redemption quota.
+         * Get BFUSD quota details including subscription quota, fast redemption quota, and standard redemption quota.
          *
-         * Weight: 150
+         * Weight(IP): 150
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get BFUSD Quota Details (USER_DATA)
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -100,19 +103,26 @@ const BfusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get BFUSD rate history sorted by descending order.
          *
-         * The time between `startTime` and `endTime` cannot be longer than 6 months.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-         * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+         * - If
+         * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and
+         * data between `startTime` and `endTime` will be returned.
          *
          * @summary Get BFUSD Rate History (USER_DATA)
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [current] Currently querying page. Starts from 1.
+         * @param {number | bigint} [size] Number of results per page.
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -156,21 +166,28 @@ const BfusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
-         * Get BFUSD redemption history.
+         * Get BFUSD redemption history
          *
-         * The time between `startTime` and `endTime` cannot be longer than 6 months.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-         * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+         * - If
+         * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and
+         * data between `startTime` and `endTime` will be returned.
          *
          * @summary Get BFUSD Redemption History (USER_DATA)
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [current] Currently querying page.
+         * @param {number | bigint} [size] Number of results per page.
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -214,21 +231,28 @@ const BfusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
             };
         },
         /**
-         * Get BFUSD rewards history.
+         * Get BFUSD rewards history
          *
-         * The time between `startTime` and `endTime` cannot be longer than 6 months.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-         * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+         * - If
+         * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and
+         * data between `startTime` and `endTime` will be returned.
          *
          * @summary Get BFUSD Rewards History (USER_DATA)
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [current] Currently querying page.
+         * @param {number | bigint} [size] Number of results per page.
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
@@ -274,25 +298,32 @@ const BfusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Get BFUSD subscription history
          *
-         * The time between `startTime` and `endTime` cannot be longer than 6 months.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-         * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time advanced by one month, and data between `startTime` and `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
          *
-         * @summary Get BFUSD subscription history(USER_DATA)
-         * @param {string} [asset] USDC or USDT
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+         * - If
+         * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time advanced by one month,
+         * and data between `startTime` and `endTime` will be returned.
+         *
+         * @summary Get BFUSD subscription history (USER_DATA)
+         * @param {GetBfusdSubscriptionHistoryAssetEnum} [asset]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Starts from 1. Default: 1
-         * @param {number | bigint} [size] Number of results per page. Default: 10, Max: 100
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [current] Currently querying page.
+         * @param {number | bigint} [size] Number of results per page.
+         * @param {number | bigint} [recvWindow]
          *
          * @throws {RequiredError}
          */
         getBfusdSubscriptionHistory: async (
-            asset?: string,
+            asset?: GetBfusdSubscriptionHistoryAssetEnum,
             startTime?: number | bigint,
             endTime?: number | bigint,
             current?: number | bigint,
@@ -337,20 +368,24 @@ const BfusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Redeem BFUSD to USDT
          *
-         * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: TRADE
          *
-         * @summary Redeem BFUSD(TRADE)
-         * @param {number} amount Amount
-         * @param {string} type FAST or STANDARD, defaults to STANDARD
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
+         * Notes:
+         * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+         * - This API only supports BFUSD redemption to the Spot Account. Redemptions to the Funding Account or any other account type are not supported.
+         *
+         * @summary Redeem BFUSD (TRADE)
+         * @param {number} amount Amount in BFUSD
+         * @param {RedeemBfusdTypeEnum} type defaults to STANDARD
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
         redeemBfusd: async (
             amount: number,
-            type: string,
+            type: RedeemBfusdTypeEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'amount' is not null or undefined
@@ -387,14 +422,18 @@ const BfusdApiAxiosParamCreator = function (configuration: ConfigurationRestAPI)
         /**
          * Subscribe BFUSD
          *
-         * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: TRADE
          *
-         * @summary Subscribe BFUSD(TRADE)
-         * @param {string} asset USDT or USDC (whichever is eligible)
+         * Notes:
+         * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+         * - This API only supports BFUSD subscription using assets held in the Spot Account. Subscriptions initiated from the Funding Account or any other account type are not supported.
+         *
+         * @summary Subscribe BFUSD (TRADE)
+         * @param {string} asset
          * @param {number} amount Amount
-         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000 (ms)
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -445,7 +484,9 @@ export interface BfusdApiInterface {
     /**
      * Get BFUSD account information.
      *
-     * Weight: 150
+     * Weight(IP): 150
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get BFUSD Account (USER_DATA)
      * @param {GetBfusdAccountRequest} requestParameters Request parameters.
@@ -457,9 +498,11 @@ export interface BfusdApiInterface {
         requestParameters?: GetBfusdAccountRequest
     ): Promise<RestApiResponse<GetBfusdAccountResponse>>;
     /**
-     * Get BFUSD quota details including subscription quota, fast redemption quota and standard redemption quota.
+     * Get BFUSD quota details including subscription quota, fast redemption quota, and standard redemption quota.
      *
-     * Weight: 150
+     * Weight(IP): 150
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get BFUSD Quota Details (USER_DATA)
      * @param {GetBfusdQuotaDetailsRequest} requestParameters Request parameters.
@@ -473,12 +516,19 @@ export interface BfusdApiInterface {
     /**
      * Get BFUSD rate history sorted by descending order.
      *
-     * The time between `startTime` and `endTime` cannot be longer than 6 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * - If
+     * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and
+     * data between `startTime` and `endTime` will be returned.
      *
      * @summary Get BFUSD Rate History (USER_DATA)
      * @param {GetBfusdRateHistoryRequest} requestParameters Request parameters.
@@ -490,14 +540,21 @@ export interface BfusdApiInterface {
         requestParameters?: GetBfusdRateHistoryRequest
     ): Promise<RestApiResponse<GetBfusdRateHistoryResponse>>;
     /**
-     * Get BFUSD redemption history.
+     * Get BFUSD redemption history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 6 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * - If
+     * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and
+     * data between `startTime` and `endTime` will be returned.
      *
      * @summary Get BFUSD Redemption History (USER_DATA)
      * @param {GetBfusdRedemptionHistoryRequest} requestParameters Request parameters.
@@ -509,14 +566,21 @@ export interface BfusdApiInterface {
         requestParameters?: GetBfusdRedemptionHistoryRequest
     ): Promise<RestApiResponse<GetBfusdRedemptionHistoryResponse>>;
     /**
-     * Get BFUSD rewards history.
+     * Get BFUSD rewards history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 6 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * - If
+     * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and
+     * data between `startTime` and `endTime` will be returned.
      *
      * @summary Get BFUSD Rewards History (USER_DATA)
      * @param {GetBfusdRewardsHistoryRequest} requestParameters Request parameters.
@@ -530,14 +594,21 @@ export interface BfusdApiInterface {
     /**
      * Get BFUSD subscription history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 6 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time advanced by one month, and data between `startTime` and `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get BFUSD subscription history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * - If
+     * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time advanced by one month,
+     * and data between `startTime` and `endTime` will be returned.
+     *
+     * @summary Get BFUSD subscription history (USER_DATA)
      * @param {GetBfusdSubscriptionHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -549,11 +620,15 @@ export interface BfusdApiInterface {
     /**
      * Redeem BFUSD to USDT
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Redeem BFUSD(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * - This API only supports BFUSD redemption to the Spot Account. Redemptions to the Funding Account or any other account type are not supported.
+     *
+     * @summary Redeem BFUSD (TRADE)
      * @param {RedeemBfusdRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -565,11 +640,15 @@ export interface BfusdApiInterface {
     /**
      * Subscribe BFUSD
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Subscribe BFUSD(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * - This API only supports BFUSD subscription using assets held in the Spot Account. Subscriptions initiated from the Funding Account or any other account type are not supported.
+     *
+     * @summary Subscribe BFUSD (TRADE)
      * @param {SubscribeBfusdRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -586,7 +665,7 @@ export interface BfusdApiInterface {
  */
 export interface GetBfusdAccountRequest {
     /**
-     * The value cannot be greater than 60000 (ms)
+     *
      * @type {number | bigint}
      * @memberof BfusdApiGetBfusdAccount
      */
@@ -599,7 +678,7 @@ export interface GetBfusdAccountRequest {
  */
 export interface GetBfusdQuotaDetailsRequest {
     /**
-     * The value cannot be greater than 60000 (ms)
+     *
      * @type {number | bigint}
      * @memberof BfusdApiGetBfusdQuotaDetails
      */
@@ -626,21 +705,21 @@ export interface GetBfusdRateHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Starts from 1. Default: 1
+     * Currently querying page. Starts from 1.
      * @type {number | bigint}
      * @memberof BfusdApiGetBfusdRateHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Number of results per page. Default: 10, Max: 100
+     * Number of results per page.
      * @type {number | bigint}
      * @memberof BfusdApiGetBfusdRateHistory
      */
     readonly size?: number | bigint;
 
     /**
-     * The value cannot be greater than 60000 (ms)
+     *
      * @type {number | bigint}
      * @memberof BfusdApiGetBfusdRateHistory
      */
@@ -667,21 +746,21 @@ export interface GetBfusdRedemptionHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Starts from 1. Default: 1
+     * Currently querying page.
      * @type {number | bigint}
      * @memberof BfusdApiGetBfusdRedemptionHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Number of results per page. Default: 10, Max: 100
+     * Number of results per page.
      * @type {number | bigint}
      * @memberof BfusdApiGetBfusdRedemptionHistory
      */
     readonly size?: number | bigint;
 
     /**
-     * The value cannot be greater than 60000 (ms)
+     *
      * @type {number | bigint}
      * @memberof BfusdApiGetBfusdRedemptionHistory
      */
@@ -708,21 +787,21 @@ export interface GetBfusdRewardsHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Starts from 1. Default: 1
+     * Currently querying page.
      * @type {number | bigint}
      * @memberof BfusdApiGetBfusdRewardsHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Number of results per page. Default: 10, Max: 100
+     * Number of results per page.
      * @type {number | bigint}
      * @memberof BfusdApiGetBfusdRewardsHistory
      */
     readonly size?: number | bigint;
 
     /**
-     * The value cannot be greater than 60000 (ms)
+     *
      * @type {number | bigint}
      * @memberof BfusdApiGetBfusdRewardsHistory
      */
@@ -735,11 +814,11 @@ export interface GetBfusdRewardsHistoryRequest {
  */
 export interface GetBfusdSubscriptionHistoryRequest {
     /**
-     * USDC or USDT
-     * @type {string}
+     *
+     * @type {'USDC' | 'USDT'}
      * @memberof BfusdApiGetBfusdSubscriptionHistory
      */
-    readonly asset?: string;
+    readonly asset?: GetBfusdSubscriptionHistoryAssetEnum;
 
     /**
      *
@@ -756,21 +835,21 @@ export interface GetBfusdSubscriptionHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Starts from 1. Default: 1
+     * Currently querying page.
      * @type {number | bigint}
      * @memberof BfusdApiGetBfusdSubscriptionHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Number of results per page. Default: 10, Max: 100
+     * Number of results per page.
      * @type {number | bigint}
      * @memberof BfusdApiGetBfusdSubscriptionHistory
      */
     readonly size?: number | bigint;
 
     /**
-     * The value cannot be greater than 60000 (ms)
+     *
      * @type {number | bigint}
      * @memberof BfusdApiGetBfusdSubscriptionHistory
      */
@@ -783,21 +862,21 @@ export interface GetBfusdSubscriptionHistoryRequest {
  */
 export interface RedeemBfusdRequest {
     /**
-     * Amount
+     * Amount in BFUSD
      * @type {number}
      * @memberof BfusdApiRedeemBfusd
      */
     readonly amount: number;
 
     /**
-     * FAST or STANDARD, defaults to STANDARD
-     * @type {string}
+     * defaults to STANDARD
+     * @type {'FAST' | 'STANDARD'}
      * @memberof BfusdApiRedeemBfusd
      */
-    readonly type: string;
+    readonly type: RedeemBfusdTypeEnum;
 
     /**
-     * The value cannot be greater than 60000 (ms)
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof BfusdApiRedeemBfusd
      */
@@ -810,7 +889,7 @@ export interface RedeemBfusdRequest {
  */
 export interface SubscribeBfusdRequest {
     /**
-     * USDT or USDC (whichever is eligible)
+     *
      * @type {string}
      * @memberof BfusdApiSubscribeBfusd
      */
@@ -824,7 +903,7 @@ export interface SubscribeBfusdRequest {
     readonly amount: number;
 
     /**
-     * The value cannot be greater than 60000 (ms)
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof BfusdApiSubscribeBfusd
      */
@@ -847,14 +926,16 @@ export class BfusdApi implements BfusdApiInterface {
     /**
      * Get BFUSD account information.
      *
-     * Weight: 150
+     * Weight(IP): 150
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get BFUSD Account (USER_DATA)
      * @param {GetBfusdAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetBfusdAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof BfusdApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/bfusd/account/ Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/bfusd#get-bfusd-account Binance API Documentation}
      */
     public async getBfusdAccount(
         requestParameters: GetBfusdAccountRequest = {}
@@ -875,16 +956,18 @@ export class BfusdApi implements BfusdApiInterface {
     }
 
     /**
-     * Get BFUSD quota details including subscription quota, fast redemption quota and standard redemption quota.
+     * Get BFUSD quota details including subscription quota, fast redemption quota, and standard redemption quota.
      *
-     * Weight: 150
+     * Weight(IP): 150
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get BFUSD Quota Details (USER_DATA)
      * @param {GetBfusdQuotaDetailsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetBfusdQuotaDetailsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof BfusdApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/bfusd/account/Get-BFUSD-Quota-Details Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/bfusd#get-bfusd-quota-details Binance API Documentation}
      */
     public async getBfusdQuotaDetails(
         requestParameters: GetBfusdQuotaDetailsRequest = {}
@@ -907,19 +990,26 @@ export class BfusdApi implements BfusdApiInterface {
     /**
      * Get BFUSD rate history sorted by descending order.
      *
-     * The time between `startTime` and `endTime` cannot be longer than 6 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * - If
+     * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and
+     * data between `startTime` and `endTime` will be returned.
      *
      * @summary Get BFUSD Rate History (USER_DATA)
      * @param {GetBfusdRateHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetBfusdRateHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof BfusdApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/bfusd/history/Get-BFUSD-Rate-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/bfusd#get-bfusd-rate-history Binance API Documentation}
      */
     public async getBfusdRateHistory(
         requestParameters: GetBfusdRateHistoryRequest = {}
@@ -944,21 +1034,28 @@ export class BfusdApi implements BfusdApiInterface {
     }
 
     /**
-     * Get BFUSD redemption history.
+     * Get BFUSD redemption history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 6 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * - If
+     * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and
+     * data between `startTime` and `endTime` will be returned.
      *
      * @summary Get BFUSD Redemption History (USER_DATA)
      * @param {GetBfusdRedemptionHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetBfusdRedemptionHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof BfusdApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/bfusd/history/Get-BFUSD-Redemption-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/bfusd#get-bfusd-redemption-history Binance API Documentation}
      */
     public async getBfusdRedemptionHistory(
         requestParameters: GetBfusdRedemptionHistoryRequest = {}
@@ -983,21 +1080,28 @@ export class BfusdApi implements BfusdApiInterface {
     }
 
     /**
-     * Get BFUSD rewards history.
+     * Get BFUSD rewards history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 6 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * - If
+     * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and
+     * data between `startTime` and `endTime` will be returned.
      *
      * @summary Get BFUSD Rewards History (USER_DATA)
      * @param {GetBfusdRewardsHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetBfusdRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof BfusdApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/bfusd/history/Get-BFUSD-Rewards-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/bfusd#get-bfusd-rewards-history Binance API Documentation}
      */
     public async getBfusdRewardsHistory(
         requestParameters: GetBfusdRewardsHistoryRequest = {}
@@ -1024,19 +1128,26 @@ export class BfusdApi implements BfusdApiInterface {
     /**
      * Get BFUSD subscription history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 6 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time advanced by one month, and data between `startTime` and `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get BFUSD subscription history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * - If
+     * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time advanced by one month,
+     * and data between `startTime` and `endTime` will be returned.
+     *
+     * @summary Get BFUSD subscription history (USER_DATA)
      * @param {GetBfusdSubscriptionHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetBfusdSubscriptionHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof BfusdApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/bfusd/history/Get-BFUSD-subscription-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/bfusd#get-bfusd-subscription-history Binance API Documentation}
      */
     public async getBfusdSubscriptionHistory(
         requestParameters: GetBfusdSubscriptionHistoryRequest = {}
@@ -1064,16 +1175,20 @@ export class BfusdApi implements BfusdApiInterface {
     /**
      * Redeem BFUSD to USDT
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Redeem BFUSD(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * - This API only supports BFUSD redemption to the Spot Account. Redemptions to the Funding Account or any other account type are not supported.
+     *
+     * @summary Redeem BFUSD (TRADE)
      * @param {RedeemBfusdRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<RedeemBfusdResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof BfusdApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/bfusd/earn/Redeem-BFUSD Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/bfusd#redeem-bfusd Binance API Documentation}
      */
     public async redeemBfusd(
         requestParameters: RedeemBfusdRequest
@@ -1098,16 +1213,20 @@ export class BfusdApi implements BfusdApiInterface {
     /**
      * Subscribe BFUSD
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Subscribe BFUSD(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * - This API only supports BFUSD subscription using assets held in the Spot Account. Subscriptions initiated from the Funding Account or any other account type are not supported.
+     *
+     * @summary Subscribe BFUSD (TRADE)
      * @param {SubscribeBfusdRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SubscribeBfusdResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof BfusdApi
-     * @see {@link https://developers.binance.com/docs/simple_earn/bfusd/earn/Subscribe-BFUSD Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/bfusd#subscribe-bfusd Binance API Documentation}
      */
     public async subscribeBfusd(
         requestParameters: SubscribeBfusdRequest
@@ -1128,4 +1247,14 @@ export class BfusdApi implements BfusdApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum GetBfusdSubscriptionHistoryAssetEnum {
+    USDC = 'USDC',
+    USDT = 'USDT',
+}
+
+export enum RedeemBfusdTypeEnum {
+    FAST = 'FAST',
+    STANDARD = 'STANDARD',
 }

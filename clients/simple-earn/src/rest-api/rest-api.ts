@@ -1,7 +1,7 @@
 /**
- * Binance Simple Earn REST API
+ * Simple Earn REST API
  *
- * OpenAPI Specification for the Binance Simple Earn REST API
+ * Earn rewards by subscribing to flexible or locked Simple Earn products.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -184,14 +184,16 @@ export class RestAPI {
     /**
      * Get BFUSD account information.
      *
-     * Weight: 150
+     * Weight(IP): 150
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get BFUSD Account (USER_DATA)
      * @param {GetBfusdAccountRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetBfusdAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/bfusd/account/ Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/bfusd#get-bfusd-account Binance API Documentation}
      */
     getBfusdAccount(
         requestParameters: GetBfusdAccountRequest = {}
@@ -200,16 +202,18 @@ export class RestAPI {
     }
 
     /**
-     * Get BFUSD quota details including subscription quota, fast redemption quota and standard redemption quota.
+     * Get BFUSD quota details including subscription quota, fast redemption quota, and standard redemption quota.
      *
-     * Weight: 150
+     * Weight(IP): 150
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get BFUSD Quota Details (USER_DATA)
      * @param {GetBfusdQuotaDetailsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetBfusdQuotaDetailsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/bfusd/account/Get-BFUSD-Quota-Details Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/bfusd#get-bfusd-quota-details Binance API Documentation}
      */
     getBfusdQuotaDetails(
         requestParameters: GetBfusdQuotaDetailsRequest = {}
@@ -220,19 +224,26 @@ export class RestAPI {
     /**
      * Get BFUSD rate history sorted by descending order.
      *
-     * The time between `startTime` and `endTime` cannot be longer than 6 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * - If
+     * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and
+     * data between `startTime` and `endTime` will be returned.
      *
      * @summary Get BFUSD Rate History (USER_DATA)
      * @param {GetBfusdRateHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetBfusdRateHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/bfusd/history/Get-BFUSD-Rate-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/bfusd#get-bfusd-rate-history Binance API Documentation}
      */
     getBfusdRateHistory(
         requestParameters: GetBfusdRateHistoryRequest = {}
@@ -241,21 +252,28 @@ export class RestAPI {
     }
 
     /**
-     * Get BFUSD redemption history.
+     * Get BFUSD redemption history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 6 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * - If
+     * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and
+     * data between `startTime` and `endTime` will be returned.
      *
      * @summary Get BFUSD Redemption History (USER_DATA)
      * @param {GetBfusdRedemptionHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetBfusdRedemptionHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/bfusd/history/Get-BFUSD-Redemption-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/bfusd#get-bfusd-redemption-history Binance API Documentation}
      */
     getBfusdRedemptionHistory(
         requestParameters: GetBfusdRedemptionHistoryRequest = {}
@@ -264,21 +282,28 @@ export class RestAPI {
     }
 
     /**
-     * Get BFUSD rewards history.
+     * Get BFUSD rewards history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 6 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * - If
+     * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and
+     * data between `startTime` and `endTime` will be returned.
      *
      * @summary Get BFUSD Rewards History (USER_DATA)
      * @param {GetBfusdRewardsHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetBfusdRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/bfusd/history/Get-BFUSD-Rewards-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/bfusd#get-bfusd-rewards-history Binance API Documentation}
      */
     getBfusdRewardsHistory(
         requestParameters: GetBfusdRewardsHistoryRequest = {}
@@ -289,19 +314,26 @@ export class RestAPI {
     /**
      * Get BFUSD subscription history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 6 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time advanced by one month, and data between `startTime` and `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get BFUSD subscription history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * - If
+     * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time advanced by one month,
+     * and data between `startTime` and `endTime` will be returned.
+     *
+     * @summary Get BFUSD subscription history (USER_DATA)
      * @param {GetBfusdSubscriptionHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetBfusdSubscriptionHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/bfusd/history/Get-BFUSD-subscription-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/bfusd#get-bfusd-subscription-history Binance API Documentation}
      */
     getBfusdSubscriptionHistory(
         requestParameters: GetBfusdSubscriptionHistoryRequest = {}
@@ -312,16 +344,20 @@ export class RestAPI {
     /**
      * Redeem BFUSD to USDT
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Redeem BFUSD(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * - This API only supports BFUSD redemption to the Spot Account. Redemptions to the Funding Account or any other account type are not supported.
+     *
+     * @summary Redeem BFUSD (TRADE)
      * @param {RedeemBfusdRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<RedeemBfusdResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/bfusd/earn/Redeem-BFUSD Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/bfusd#redeem-bfusd Binance API Documentation}
      */
     redeemBfusd(
         requestParameters: RedeemBfusdRequest
@@ -332,16 +368,20 @@ export class RestAPI {
     /**
      * Subscribe BFUSD
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Subscribe BFUSD(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * - This API only supports BFUSD subscription using assets held in the Spot Account. Subscriptions initiated from the Funding Account or any other account type are not supported.
+     *
+     * @summary Subscribe BFUSD (TRADE)
      * @param {SubscribeBfusdRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SubscribeBfusdResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/bfusd/earn/Subscribe-BFUSD Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/bfusd#subscribe-bfusd Binance API Documentation}
      */
     subscribeBfusd(
         requestParameters: SubscribeBfusdRequest
@@ -352,19 +392,25 @@ export class RestAPI {
     /**
      * Get Collateral Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 30 days.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: USER_DATA
      *
-     * @summary Get Collateral Record(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Collateral Record (USER_DATA)
      * @param {GetCollateralRecordRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetCollateralRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/history/Get-Collateral-Record Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-collateral-record Binance API Documentation}
      */
     getCollateralRecord(
         requestParameters: GetCollateralRecordRequest = {}
@@ -375,14 +421,16 @@ export class RestAPI {
     /**
      * Get Flexible Personal Left Quota
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get Flexible Personal Left Quota(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Flexible Personal Left Quota (USER_DATA)
      * @param {GetFlexiblePersonalLeftQuotaRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetFlexiblePersonalLeftQuotaResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/account/Get-Flexible-Personal-Left-Quota Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-flexible-personal-left-quota Binance API Documentation}
      */
     getFlexiblePersonalLeftQuota(
         requestParameters: GetFlexiblePersonalLeftQuotaRequest
@@ -393,14 +441,16 @@ export class RestAPI {
     /**
      * Get Flexible Product Position
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get Flexible Product Position(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Flexible Product Position (USER_DATA)
      * @param {GetFlexibleProductPositionRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetFlexibleProductPositionResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/account/Get-Flexible-Product-Position Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-flexible-product-position Binance API Documentation}
      */
     getFlexibleProductPosition(
         requestParameters: GetFlexibleProductPositionRequest = {}
@@ -411,19 +461,25 @@ export class RestAPI {
     /**
      * Get Flexible Redemption Record
      *
-     *	The time between `startTime` and `endTime` cannot be longer than 30 days.
-     *	If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     *	If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     *	If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Flexible Redemption Record(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Flexible Redemption Record (USER_DATA)
      * @param {GetFlexibleRedemptionRecordRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetFlexibleRedemptionRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/history/Get-Flexible-Redemption-Record Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-flexible-redemption-record Binance API Documentation}
      */
     getFlexibleRedemptionRecord(
         requestParameters: GetFlexibleRedemptionRecordRequest = {}
@@ -434,22 +490,28 @@ export class RestAPI {
     /**
      * Get Flexible Rewards History
      *
-     *	The time between `startTime` and `endTime` cannot be longer than 30 days.
-     *	If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     *	If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     *	If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Flexible Rewards History(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Flexible Rewards History (USER_DATA)
      * @param {GetFlexibleRewardsHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetFlexibleRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/history/Get-Flexible-Rewards-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-flexible-rewards-history Binance API Documentation}
      */
     getFlexibleRewardsHistory(
-        requestParameters: GetFlexibleRewardsHistoryRequest
+        requestParameters: GetFlexibleRewardsHistoryRequest = {}
     ): Promise<RestApiResponse<GetFlexibleRewardsHistoryResponse>> {
         return this.flexibleLockedApi.getFlexibleRewardsHistory(requestParameters);
     }
@@ -457,14 +519,16 @@ export class RestAPI {
     /**
      * Get Flexible Subscription Preview
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get Flexible Subscription Preview(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Flexible Subscription Preview (USER_DATA)
      * @param {GetFlexibleSubscriptionPreviewRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetFlexibleSubscriptionPreviewResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Get-Flexible-Subscription-Preview Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-flexible-subscription-preview Binance API Documentation}
      */
     getFlexibleSubscriptionPreview(
         requestParameters: GetFlexibleSubscriptionPreviewRequest
@@ -475,19 +539,25 @@ export class RestAPI {
     /**
      * Get Flexible Subscription Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 30 days.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Flexible Subscription Record(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Flexible Subscription Record (USER_DATA)
      * @param {GetFlexibleSubscriptionRecordRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetFlexibleSubscriptionRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/history/Get-Flexible-Subscription-Record Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-flexible-subscription-record Binance API Documentation}
      */
     getFlexibleSubscriptionRecord(
         requestParameters: GetFlexibleSubscriptionRecordRequest = {}
@@ -498,14 +568,16 @@ export class RestAPI {
     /**
      * Get Locked Personal Left Quota
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get Locked Personal Left Quota(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Locked Personal Left Quota (USER_DATA)
      * @param {GetLockedPersonalLeftQuotaRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetLockedPersonalLeftQuotaResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/account/Get-Locked-Personal-Left-Quota Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-locked-personal-left-quota Binance API Documentation}
      */
     getLockedPersonalLeftQuota(
         requestParameters: GetLockedPersonalLeftQuotaRequest
@@ -516,14 +588,16 @@ export class RestAPI {
     /**
      * Get Locked Product Position
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get Locked Product Position
+     * Security Type: USER_DATA
+     *
+     * @summary Get Locked Product Position (USER_DATA)
      * @param {GetLockedProductPositionRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetLockedProductPositionResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/account/Get-Locked-Product-Position Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-locked-product-position Binance API Documentation}
      */
     getLockedProductPosition(
         requestParameters: GetLockedProductPositionRequest = {}
@@ -534,19 +608,25 @@ export class RestAPI {
     /**
      * Get Locked Redemption Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 30 days.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Locked Redemption Record(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Locked Redemption Record (USER_DATA)
      * @param {GetLockedRedemptionRecordRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetLockedRedemptionRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/history/Get-Locked-Redemption-Record Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-locked-redemption-record Binance API Documentation}
      */
     getLockedRedemptionRecord(
         requestParameters: GetLockedRedemptionRecordRequest = {}
@@ -557,19 +637,25 @@ export class RestAPI {
     /**
      * Get Locked Rewards History
      *
-     * The time between `startTime` and `endTime` cannot be longer than 30 days.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Locked Rewards History(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Locked Rewards History (USER_DATA)
      * @param {GetLockedRewardsHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetLockedRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/history/Get-Locked-Rewards-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-locked-rewards-history Binance API Documentation}
      */
     getLockedRewardsHistory(
         requestParameters: GetLockedRewardsHistoryRequest = {}
@@ -580,14 +666,16 @@ export class RestAPI {
     /**
      * Get Locked Subscription Preview
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get Locked Subscription Preview(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Locked Subscription Preview (USER_DATA)
      * @param {GetLockedSubscriptionPreviewRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetLockedSubscriptionPreviewResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Get-Locked-Subscription-Preview Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-locked-subscription-preview Binance API Documentation}
      */
     getLockedSubscriptionPreview(
         requestParameters: GetLockedSubscriptionPreviewRequest
@@ -598,19 +686,25 @@ export class RestAPI {
     /**
      * Get Locked Subscription Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 30 days.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Locked Subscription Record(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 30 days.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Locked Subscription Record (USER_DATA)
      * @param {GetLockedSubscriptionRecordRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetLockedSubscriptionRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/history/Get-Locked-Subscription-Record Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-locked-subscription-record Binance API Documentation}
      */
     getLockedSubscriptionRecord(
         requestParameters: GetLockedSubscriptionRecordRequest = {}
@@ -621,19 +715,25 @@ export class RestAPI {
     /**
      * Get Rate History
      *
-     * The time between startTime and endTime cannot be longer than 1 year.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Rate History(USER_DATA)
+     * Notes:
+     * - The time between startTime and endTime cannot be longer than 1 year.
+     * - If `startTime` and `endTime` are
+     * both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Rate History (USER_DATA)
      * @param {GetRateHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetRateHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/history/Get-Rate-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-rate-history Binance API Documentation}
      */
     getRateHistory(
         requestParameters: GetRateHistoryRequest
@@ -644,14 +744,16 @@ export class RestAPI {
     /**
      * Get available Simple Earn flexible product list
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get Simple Earn Flexible Product List(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Simple Earn Flexible Product List (USER_DATA)
      * @param {GetSimpleEarnFlexibleProductListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetSimpleEarnFlexibleProductListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/account/Get-Simple-Earn-Flexible-Product-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-simple-earn-flexible-product-list Binance API Documentation}
      */
     getSimpleEarnFlexibleProductList(
         requestParameters: GetSimpleEarnFlexibleProductListRequest = {}
@@ -662,16 +764,19 @@ export class RestAPI {
     /**
      * Get Simple Earn Locked Product List
      *
-     * Get available Simple Earn locked product list
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Simple Earn Locked Product List(USER_DATA)
+     * Notes:
+     * - Get available Simple Earn locked product list
+     *
+     * @summary Get Simple Earn Locked Product List (USER_DATA)
      * @param {GetSimpleEarnLockedProductListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetSimpleEarnLockedProductListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/account/Get-Simple-Earn-Locked-Product-List Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#get-simple-earn-locked-product-list Binance API Documentation}
      */
     getSimpleEarnLockedProductList(
         requestParameters: GetSimpleEarnLockedProductListRequest = {}
@@ -682,16 +787,19 @@ export class RestAPI {
     /**
      * Redeem Flexible Product
      *
-     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Redeem Flexible Product(TRADE)
+     * Notes:
+     * - You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     *
+     * @summary Redeem Flexible Product (TRADE)
      * @param {RedeemFlexibleProductRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<RedeemFlexibleProductResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Redeem-Flexible-Product Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#redeem-flexible-product Binance API Documentation}
      */
     redeemFlexibleProduct(
         requestParameters: RedeemFlexibleProductRequest
@@ -702,16 +810,19 @@ export class RestAPI {
     /**
      * Redeem Locked Product
      *
-     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1/3s per account
+     * Security Type: TRADE
      *
-     * @summary Redeem Locked Product(TRADE)
+     * Notes:
+     * - You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     *
+     * @summary Redeem Locked Product (TRADE)
      * @param {RedeemLockedProductRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<RedeemLockedProductResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Redeem-Locked-Product Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#redeem-locked-product Binance API Documentation}
      */
     redeemLockedProduct(
         requestParameters: RedeemLockedProductRequest
@@ -722,14 +833,16 @@ export class RestAPI {
     /**
      * Set Flexible Auto Subscribe
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Set Flexible Auto Subscribe(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Set Flexible Auto Subscribe (USER_DATA)
      * @param {SetFlexibleAutoSubscribeRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SetFlexibleAutoSubscribeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Set-Flexible-Auto-Subscribe Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#set-flexible-auto-subscribe Binance API Documentation}
      */
     setFlexibleAutoSubscribe(
         requestParameters: SetFlexibleAutoSubscribeRequest
@@ -740,14 +853,16 @@ export class RestAPI {
     /**
      * Set locked auto subscribe
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Set Locked Auto Subscribe(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Set Locked Auto Subscribe (USER_DATA)
      * @param {SetLockedAutoSubscribeRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SetLockedAutoSubscribeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Set-Locked-Auto-Subscribe Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#set-locked-auto-subscribe Binance API Documentation}
      */
     setLockedAutoSubscribe(
         requestParameters: SetLockedAutoSubscribeRequest
@@ -758,14 +873,16 @@ export class RestAPI {
     /**
      * Set redeem option for Locked product
      *
-     * Weight: 50
+     * Weight(IP): 50
      *
-     * @summary Set Locked Product Redeem Option(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Set Locked Product Redeem Option (USER_DATA)
      * @param {SetLockedProductRedeemOptionRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SetLockedProductRedeemOptionResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Set-Locked-Redeem-Option Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#set-locked-product-redeem-option Binance API Documentation}
      */
     setLockedProductRedeemOption(
         requestParameters: SetLockedProductRedeemOptionRequest
@@ -776,14 +893,16 @@ export class RestAPI {
     /**
      * Simple Account query
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Simple Account(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Simple Account (USER_DATA)
      * @param {SimpleAccountRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SimpleAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/account/Simple-Account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#simple-account Binance API Documentation}
      */
     simpleAccount(
         requestParameters: SimpleAccountRequest = {}
@@ -794,16 +913,19 @@ export class RestAPI {
     /**
      * Subscribe Flexible Product
      *
-     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Subscribe Flexible Product(TRADE)
+     * Notes:
+     * - You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     *
+     * @summary Subscribe Flexible Product (TRADE)
      * @param {SubscribeFlexibleProductRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SubscribeFlexibleProductResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Subscribe-Flexible-Product Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#subscribe-flexible-product Binance API Documentation}
      */
     subscribeFlexibleProduct(
         requestParameters: SubscribeFlexibleProductRequest
@@ -814,16 +936,19 @@ export class RestAPI {
     /**
      * Subscribe Locked Product
      *
-     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     * Weight(IP): 1
      *
-     * Weight: 1
+     * Security Type: TRADE
      *
-     * @summary Subscribe Locked Product(TRADE)
+     * Notes:
+     * - You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     *
+     * @summary Subscribe Locked Product (TRADE)
      * @param {SubscribeLockedProductRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SubscribeLockedProductResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/flexible-locked/earn/Subscribe-Locked-Product Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/flexible-locked#subscribe-locked-product Binance API Documentation}
      */
     subscribeLockedProduct(
         requestParameters: SubscribeLockedProductRequest
@@ -834,14 +959,16 @@ export class RestAPI {
     /**
      * Get RWUSD account information.
      *
-     * Weight: 150
+     * Weight(IP): 150
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get RWUSD Account (USER_DATA)
      * @param {GetRwusdAccountRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetRwusdAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/account/ Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/rwusd#get-rwusd-account Binance API Documentation}
      */
     getRwusdAccount(
         requestParameters: GetRwusdAccountRequest = {}
@@ -852,14 +979,16 @@ export class RestAPI {
     /**
      * Get RWUSD quota details including subscription quota, fast redemption quota, and standard redemption quota.
      *
-     * Weight: 150
+     * Weight(IP): 150
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get RWUSD Quota Details (USER_DATA)
      * @param {GetRwusdQuotaDetailsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetRwusdQuotaDetailsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/account/Get-RWUSD-Quota-Details Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/rwusd#get-rwusd-quota-details Binance API Documentation}
      */
     getRwusdQuotaDetails(
         requestParameters: GetRwusdQuotaDetailsRequest = {}
@@ -870,19 +999,26 @@ export class RestAPI {
     /**
      * Get RWUSD rate history sorted by descending order.
      *
-     * The time between `startTime` and `endTime` cannot be longer than 6 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * - If
+     * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and
+     * data between `startTime` and `endTime` will be returned.
      *
      * @summary Get RWUSD Rate History (USER_DATA)
      * @param {GetRwusdRateHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetRwusdRateHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/history/Get-RWUSD-Rate-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/rwusd#get-rwusd-rate-history Binance API Documentation}
      */
     getRwusdRateHistory(
         requestParameters: GetRwusdRateHistoryRequest = {}
@@ -893,19 +1029,26 @@ export class RestAPI {
     /**
      * Get RWUSD redemption history.
      *
-     * The time between `startTime` and `endTime` cannot be longer than 6 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * - If
+     * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and
+     * data between `startTime` and `endTime` will be returned.
      *
      * @summary Get RWUSD Redemption History (USER_DATA)
      * @param {GetRwusdRedemptionHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetRwusdRedemptionHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/history/Get-RWUSD-Redemption-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/rwusd#get-rwusd-redemption-history Binance API Documentation}
      */
     getRwusdRedemptionHistory(
         requestParameters: GetRwusdRedemptionHistoryRequest = {}
@@ -916,19 +1059,26 @@ export class RestAPI {
     /**
      * Get RWUSD rewards history.
      *
-     * The time between `startTime` and `endTime` cannot be longer than 6 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and data between `startTime` and `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * - If
+     * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time minus one month, and
+     * data between `startTime` and `endTime` will be returned.
      *
      * @summary Get RWUSD Rewards History (USER_DATA)
      * @param {GetRwusdRewardsHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetRwusdRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/history/Get-RWUSD-Rewards-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/rwusd#get-rwusd-rewards-history Binance API Documentation}
      */
     getRwusdRewardsHistory(
         requestParameters: GetRwusdRewardsHistoryRequest = {}
@@ -939,19 +1089,26 @@ export class RestAPI {
     /**
      * Get RWUSD subscription history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 6 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
-     * If `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time advanced by one month, and data between `startTime` and `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get RWUSD subscription history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 6 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, `endTime` will default to current time, and results from `startTime` onward will be returned.
+     * - If
+     * `endTime` is sent but `startTime` is not sent, `startTime` defaults to the current time advanced by one month,
+     * and data between `startTime` and `endTime` will be returned.
+     *
+     * @summary Get RWUSD subscription history (USER_DATA)
      * @param {GetRwusdSubscriptionHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetRwusdSubscriptionHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/history/Get-RWUSD-subscription-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/rwusd#get-rwusd-subscription-history Binance API Documentation}
      */
     getRwusdSubscriptionHistory(
         requestParameters: GetRwusdSubscriptionHistoryRequest = {}
@@ -962,16 +1119,20 @@ export class RestAPI {
     /**
      * Redeem RWUSD to USDC
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Redeem RWUSD(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * - This API only supports RWUSD redemption to the Spot Account. Redemptions to the Funding Account or any other account type are not supported.
+     *
+     * @summary Redeem RWUSD (TRADE)
      * @param {RedeemRwusdRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<RedeemRwusdResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/earn/Redeem-RWUSD Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/rwusd#redeem-rwusd Binance API Documentation}
      */
     redeemRwusd(
         requestParameters: RedeemRwusdRequest
@@ -982,16 +1143,20 @@ export class RestAPI {
     /**
      * Subscribe RWUSD
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Subscribe RWUSD(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * - This API only supports RWUSD subscription using assets held in the Spot Account. Subscriptions initiated from the Funding Account or any other account type are not supported.
+     *
+     * @summary Subscribe RWUSD (TRADE)
      * @param {SubscribeRwusdRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SubscribeRwusdResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/rwusd/earn/Subscribe-RWUSD Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/rwusd#subscribe-rwusd Binance API Documentation}
      */
     subscribeRwusd(
         requestParameters: SubscribeRwusdRequest
@@ -1002,16 +1167,16 @@ export class RestAPI {
     /**
      * Get the list of Earn Yield Arena giveaway activities currently available to the user.
      *
-     * Supported locales: `en`, `en-GB`, `en-AU`, `cn`, `zh`, `zh-CN`, `tw`, `zh-TW`, `zh-HK`, `ja`, `ja-JP`, `ru`, `ru-RU`, `es`, `es-ES`, `es-LA`, `pt`, `pt-BR`, `pt-PT`, `fr`, `fr-FR`, `de`, `de-DE`, `it`, `it-IT`, `id`, `id-ID`, `vi`, `vi-VN`, `ar`, `ar-SA`, `pl`, `pl-PL`, `uk`, `uk-UA`, `cs`, `cs-CZ`, `ro`, `ro-RO`, `sv`, `sv-SE`, `bg`, `bg-BG`, `da`, `da-DK`, `el`, `el-GR`, `hu`, `hu-HU`, `lv`, `lv-LV`, `sk`, `sk-SK`, `sl`, `sl-SI`.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
      * @summary Get Yield Arena Activities (USER_DATA)
      * @param {GetYieldArenaActivitiesRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetYieldArenaActivitiesResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/simple_earn/yield-arena/earn/Get-Yield-Arena-Activities Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-simple-earn/api/rest-api/yield-arena#get-yield-arena-activities Binance API Documentation}
      */
     getYieldArenaActivities(
         requestParameters: GetYieldArenaActivitiesRequest = {}
