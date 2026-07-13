@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Rebate REST API
+ * Rebate REST API
  *
- * OpenAPI Specification for the Binance Rebate REST API
+ * Query spot trading rebate history records.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,25 +25,25 @@ import type { GetSpotRebateHistoryRecordsResponseDataDataInner } from './get-spo
  */
 export interface GetSpotRebateHistoryRecordsResponseData {
     /**
-     *
+     * Current page number.
      * @type {number | bigint}
      * @memberof GetSpotRebateHistoryRecordsResponseData
      */
     page?: number | bigint;
     /**
-     *
+     * Total number of records.
      * @type {number | bigint}
      * @memberof GetSpotRebateHistoryRecordsResponseData
      */
     totalRecords?: number | bigint;
     /**
-     *
+     * Total number of pages.
      * @type {number | bigint}
      * @memberof GetSpotRebateHistoryRecordsResponseData
      */
     totalPageNum?: number | bigint;
     /**
-     *
+     * Rebate records.
      * @type {Array<GetSpotRebateHistoryRecordsResponseDataDataInner>}
      * @memberof GetSpotRebateHistoryRecordsResponseData
      */

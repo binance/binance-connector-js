@@ -1,4 +1,4 @@
-import { Rebate, REBATE_REST_API_PROD_URL } from '../../../src';
+import { Rebate, REBATE_REST_API_PROD_URL } from '../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',

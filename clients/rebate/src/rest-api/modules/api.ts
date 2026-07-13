@@ -1,7 +1,7 @@
 /**
- * Binance Rebate REST API
+ * Rebate REST API
  *
- * OpenAPI Specification for the Binance Rebate REST API
+ * Query spot trading rebate history records.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -21,25 +20,28 @@ import {
 import type { GetSpotRebateHistoryRecordsResponse } from '../types';
 
 /**
- * RebateApi - axios parameter creator
+ * Api - axios parameter creator
  */
-const RebateApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
+const ApiAxiosParamCreator = function (configuration: ConfigurationRestAPI) {
     return {
         /**
          * Get Spot Rebate History Records
          *
-         * The max interval between startTime and endTime is 30 days.
-         * If startTime and endTime are not sent, the recent 7 days' data will be returned.
-         * The earliest startTime is supported on June 10, 2020
-         * Return up to 200 records per request.
+         * Weight(UID): 12000
          *
-         * Weight: 12000
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - The max interval between `startTime` and `endTime` is 30 days.
+         * - If `startTime` and `endTime` are not sent, the recent 7 days' data will be returned.
+         * - The earliest supported `startTime` is June 10, 2020.
+         * - Return up to 200 records per request.
          *
          * @summary Get Spot Rebate History Records (USER_DATA)
-         * @param {number | bigint} [startTime]
-         * @param {number | bigint} [endTime]
-         * @param {number | bigint} [page] Default 1
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [startTime] Start time in milliseconds.
+         * @param {number | bigint} [endTime] End time in milliseconds.
+         * @param {number | bigint} [page] Page number.
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -82,25 +84,28 @@ const RebateApiAxiosParamCreator = function (configuration: ConfigurationRestAPI
 };
 
 /**
- * RebateApi - interface
- * @interface RebateApi
+ * Api - interface
+ * @interface Api
  */
-export interface RebateApiInterface {
+export interface ApiInterface {
     /**
      * Get Spot Rebate History Records
      *
-     * The max interval between startTime and endTime is 30 days.
-     * If startTime and endTime are not sent, the recent 7 days' data will be returned.
-     * The earliest startTime is supported on June 10, 2020
-     * Return up to 200 records per request.
+     * Weight(UID): 12000
      *
-     * Weight: 12000
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The max interval between `startTime` and `endTime` is 30 days.
+     * - If `startTime` and `endTime` are not sent, the recent 7 days' data will be returned.
+     * - The earliest supported `startTime` is June 10, 2020.
+     * - Return up to 200 records per request.
      *
      * @summary Get Spot Rebate History Records (USER_DATA)
      * @param {GetSpotRebateHistoryRecordsRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof RebateApiInterface
+     * @memberof ApiInterface
      */
     getSpotRebateHistoryRecords(
         requestParameters?: GetSpotRebateHistoryRecordsRequest
@@ -108,68 +113,71 @@ export interface RebateApiInterface {
 }
 
 /**
- * Request parameters for getSpotRebateHistoryRecords operation in RebateApi.
+ * Request parameters for getSpotRebateHistoryRecords operation in Api.
  * @interface GetSpotRebateHistoryRecordsRequest
  */
 export interface GetSpotRebateHistoryRecordsRequest {
     /**
-     *
+     * Start time in milliseconds.
      * @type {number | bigint}
-     * @memberof RebateApiGetSpotRebateHistoryRecords
+     * @memberof ApiGetSpotRebateHistoryRecords
      */
     readonly startTime?: number | bigint;
 
     /**
-     *
+     * End time in milliseconds.
      * @type {number | bigint}
-     * @memberof RebateApiGetSpotRebateHistoryRecords
+     * @memberof ApiGetSpotRebateHistoryRecords
      */
     readonly endTime?: number | bigint;
 
     /**
-     * Default 1
+     * Page number.
      * @type {number | bigint}
-     * @memberof RebateApiGetSpotRebateHistoryRecords
+     * @memberof ApiGetSpotRebateHistoryRecords
      */
     readonly page?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
-     * @memberof RebateApiGetSpotRebateHistoryRecords
+     * @memberof ApiGetSpotRebateHistoryRecords
      */
     readonly recvWindow?: number | bigint;
 }
 
 /**
- * RebateApi - object-oriented interface
- * @class RebateApi
+ * Api - object-oriented interface
+ * @class Api
  */
-export class RebateApi implements RebateApiInterface {
+export class Api implements ApiInterface {
     private readonly configuration: ConfigurationRestAPI;
     private localVarAxiosParamCreator;
 
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
-        this.localVarAxiosParamCreator = RebateApiAxiosParamCreator(configuration);
+        this.localVarAxiosParamCreator = ApiAxiosParamCreator(configuration);
     }
 
     /**
      * Get Spot Rebate History Records
      *
-     * The max interval between startTime and endTime is 30 days.
-     * If startTime and endTime are not sent, the recent 7 days' data will be returned.
-     * The earliest startTime is supported on June 10, 2020
-     * Return up to 200 records per request.
+     * Weight(UID): 12000
      *
-     * Weight: 12000
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The max interval between `startTime` and `endTime` is 30 days.
+     * - If `startTime` and `endTime` are not sent, the recent 7 days' data will be returned.
+     * - The earliest supported `startTime` is June 10, 2020.
+     * - Return up to 200 records per request.
      *
      * @summary Get Spot Rebate History Records (USER_DATA)
      * @param {GetSpotRebateHistoryRecordsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSpotRebateHistoryRecordsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @memberof RebateApi
-     * @see {@link https://developers.binance.com/docs/rebate/rest-api/Get-Spot-Rebate-History-Records Binance API Documentation}
+     * @memberof Api
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-rebate/api/rest-api/~#get-spot-rebate-history-records Binance API Documentation}
      */
     public async getSpotRebateHistoryRecords(
         requestParameters: GetSpotRebateHistoryRecordsRequest = {}

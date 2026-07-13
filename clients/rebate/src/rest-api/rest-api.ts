@@ -1,7 +1,7 @@
 /**
- * Binance Rebate REST API
+ * Rebate REST API
  *
- * OpenAPI Specification for the Binance Rebate REST API
+ * Query spot trading rebate history records.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -12,19 +12,19 @@
  */
 
 import { ConfigurationRestAPI, RestApiResponse, sendRequest } from '@binance/common';
-import { RebateApi } from './modules/rebate-api';
+import { Api } from './modules/api';
 
-import type { GetSpotRebateHistoryRecordsRequest } from './modules/rebate-api';
+import type { GetSpotRebateHistoryRecordsRequest } from './modules/api';
 
 import type { GetSpotRebateHistoryRecordsResponse } from './types';
 
 export class RestAPI {
     private configuration: ConfigurationRestAPI;
-    private rebateApi: RebateApi;
+    private api: Api;
 
     constructor(configuration: ConfigurationRestAPI) {
         this.configuration = configuration;
-        this.rebateApi = new RebateApi(configuration);
+        this.api = new Api(configuration);
     }
 
     /**
@@ -83,23 +83,26 @@ export class RestAPI {
     /**
      * Get Spot Rebate History Records
      *
-     * The max interval between startTime and endTime is 30 days.
-     * If startTime and endTime are not sent, the recent 7 days' data will be returned.
-     * The earliest startTime is supported on June 10, 2020
-     * Return up to 200 records per request.
+     * Weight(UID): 12000
      *
-     * Weight: 12000
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The max interval between `startTime` and `endTime` is 30 days.
+     * - If `startTime` and `endTime` are not sent, the recent 7 days' data will be returned.
+     * - The earliest supported `startTime` is June 10, 2020.
+     * - Return up to 200 records per request.
      *
      * @summary Get Spot Rebate History Records (USER_DATA)
      * @param {GetSpotRebateHistoryRecordsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetSpotRebateHistoryRecordsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/rebate/rest-api/Get-Spot-Rebate-History-Records Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-rebate/api/rest-api/~#get-spot-rebate-history-records Binance API Documentation}
      */
     getSpotRebateHistoryRecords(
         requestParameters: GetSpotRebateHistoryRecordsRequest = {}
     ): Promise<RestApiResponse<GetSpotRebateHistoryRecordsResponse>> {
-        return this.rebateApi.getSpotRebateHistoryRecords(requestParameters);
+        return this.api.getSpotRebateHistoryRecords(requestParameters);
     }
 }

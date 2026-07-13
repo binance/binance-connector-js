@@ -1,7 +1,7 @@
 /**
- * Binance Rebate REST API
+ * Rebate REST API
  *
- * OpenAPI Specification for the Binance Rebate REST API
+ * Query spot trading rebate history records.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,12 +15,12 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { RebateApi } from '../../../src/rest-api';
+import { Api } from '../../../src/rest-api';
 import { GetSpotRebateHistoryRecordsRequest } from '../../../src/rest-api';
 import type { GetSpotRebateHistoryRecordsResponse } from '../../../src/rest-api/types';
 
-describe('RebateApi', () => {
-    let client: RebateApi;
+describe('Api', () => {
+    let client: Api;
     let config: ConfigurationRestAPI;
     let mockResponse: object = {};
 
@@ -30,7 +30,7 @@ describe('RebateApi', () => {
             apiSecret: 'test-api-secret',
             basePath: '',
         });
-        client = new RebateApi(config);
+        client = new Api(config);
     });
 
     describe('getSpotRebateHistoryRecords()', () => {
@@ -50,12 +50,6 @@ describe('RebateApi', () => {
                                 type: 1,
                                 amount: '0.0001126',
                                 updateTime: 1637651320000,
-                            },
-                            {
-                                asset: 'ETH',
-                                type: 1,
-                                amount: '0.00000056',
-                                updateTime: 1637928379000,
                             },
                         ],
                     },
@@ -99,12 +93,6 @@ describe('RebateApi', () => {
                                 type: 1,
                                 amount: '0.0001126',
                                 updateTime: 1637651320000,
-                            },
-                            {
-                                asset: 'ETH',
-                                type: 1,
-                                amount: '0.00000056',
-                                updateTime: 1637928379000,
                             },
                         ],
                     },

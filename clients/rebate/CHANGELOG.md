@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.0.0 - 2026-07-13
+
+- Update descriptions and examples.
+
 ## 3.1.17 - 2026-06-18
 
 ### Changed (2)
