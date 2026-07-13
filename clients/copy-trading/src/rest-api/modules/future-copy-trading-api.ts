@@ -1,7 +1,7 @@
 /**
- * Binance Copy Trading REST API
+ * Copy Trading REST API
  *
- * OpenAPI Specification for the Binance Copy Trading REST API
+ * Automate lead trading via the Copy Trading API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -31,10 +30,12 @@ const FutureCopyTradingApiAxiosParamCreator = function (configuration: Configura
         /**
          * Get Futures Lead Trader Status
          *
-         * Weight: 20
+         * Weight(IP): 1
          *
-         * @summary Get Futures Lead Trader Status(TRADE)
-         * @param {number | bigint} [recvWindow]
+         * Security Type: TRADE
+         *
+         * @summary Get Futures Lead Trader Status (TRADE)
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -62,10 +63,12 @@ const FutureCopyTradingApiAxiosParamCreator = function (configuration: Configura
         /**
          * Get Futures Lead Trading Symbol Whitelist
          *
-         * Weight: 20
+         * Weight(IP): 1
          *
-         * @summary Get Futures Lead Trading Symbol Whitelist(USER_DATA)
-         * @param {number | bigint} [recvWindow]
+         * Security Type: USER_DATA
+         *
+         * @summary Get Futures Lead Trading Symbol Whitelist (USER_DATA)
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds
          *
          * @throws {RequiredError}
          */
@@ -103,9 +106,11 @@ export interface FutureCopyTradingApiInterface {
     /**
      * Get Futures Lead Trader Status
      *
-     * Weight: 20
+     * Weight(IP): 1
      *
-     * @summary Get Futures Lead Trader Status(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Get Futures Lead Trader Status (TRADE)
      * @param {GetFuturesLeadTraderStatusRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -117,9 +122,11 @@ export interface FutureCopyTradingApiInterface {
     /**
      * Get Futures Lead Trading Symbol Whitelist
      *
-     * Weight: 20
+     * Weight(IP): 1
      *
-     * @summary Get Futures Lead Trading Symbol Whitelist(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Futures Lead Trading Symbol Whitelist (USER_DATA)
      * @param {GetFuturesLeadTradingSymbolWhitelistRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -136,7 +143,7 @@ export interface FutureCopyTradingApiInterface {
  */
 export interface GetFuturesLeadTraderStatusRequest {
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof FutureCopyTradingApiGetFuturesLeadTraderStatus
      */
@@ -149,7 +156,7 @@ export interface GetFuturesLeadTraderStatusRequest {
  */
 export interface GetFuturesLeadTradingSymbolWhitelistRequest {
     /**
-     *
+     * Request validity window in milliseconds
      * @type {number | bigint}
      * @memberof FutureCopyTradingApiGetFuturesLeadTradingSymbolWhitelist
      */
@@ -172,14 +179,16 @@ export class FutureCopyTradingApi implements FutureCopyTradingApiInterface {
     /**
      * Get Futures Lead Trader Status
      *
-     * Weight: 20
+     * Weight(IP): 1
      *
-     * @summary Get Futures Lead Trader Status(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Get Futures Lead Trader Status (TRADE)
      * @param {GetFuturesLeadTraderStatusRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFuturesLeadTraderStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FutureCopyTradingApi
-     * @see {@link https://developers.binance.com/docs/copy_trading/future-copy-trading/Get-Futures-Lead-Trader-Status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-copy-trading/api/rest-api/future-copy-trading#get-futures-lead-trader-status Binance API Documentation}
      */
     public async getFuturesLeadTraderStatus(
         requestParameters: GetFuturesLeadTraderStatusRequest = {}
@@ -202,14 +211,16 @@ export class FutureCopyTradingApi implements FutureCopyTradingApiInterface {
     /**
      * Get Futures Lead Trading Symbol Whitelist
      *
-     * Weight: 20
+     * Weight(IP): 1
      *
-     * @summary Get Futures Lead Trading Symbol Whitelist(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Futures Lead Trading Symbol Whitelist (USER_DATA)
      * @param {GetFuturesLeadTradingSymbolWhitelistRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetFuturesLeadTradingSymbolWhitelistResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof FutureCopyTradingApi
-     * @see {@link https://developers.binance.com/docs/copy_trading/future-copy-trading/Get-Futures-Lead-Trading-Symbol-Whitelist Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-copy-trading/api/rest-api/future-copy-trading#get-futures-lead-trading-symbol-whitelist Binance API Documentation}
      */
     public async getFuturesLeadTradingSymbolWhitelist(
         requestParameters: GetFuturesLeadTradingSymbolWhitelistRequest = {}

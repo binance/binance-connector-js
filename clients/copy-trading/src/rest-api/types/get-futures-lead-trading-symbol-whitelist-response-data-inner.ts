@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Copy Trading REST API
+ * Copy Trading REST API
  *
- * OpenAPI Specification for the Binance Copy Trading REST API
+ * Automate lead trading via the Copy Trading API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,19 +20,19 @@
  */
 export interface GetFuturesLeadTradingSymbolWhitelistResponseDataInner {
     /**
-     *
+     * Trading symbol
      * @type {string}
      * @memberof GetFuturesLeadTradingSymbolWhitelistResponseDataInner
      */
     symbol?: string;
     /**
-     *
+     * Base asset
      * @type {string}
      * @memberof GetFuturesLeadTradingSymbolWhitelistResponseDataInner
      */
     baseAsset?: string;
     /**
-     *
+     * Quote asset
      * @type {string}
      * @memberof GetFuturesLeadTradingSymbolWhitelistResponseDataInner
      */

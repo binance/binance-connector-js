@@ -55,7 +55,7 @@
         "typescript-eslint": "^8.24.0"
     },
     "dependencies": {
-        "@binance/common": "2.4.1",
+        "@binance/common": "2.4.3",
         "axios": "^1.7.4"
     }
 }

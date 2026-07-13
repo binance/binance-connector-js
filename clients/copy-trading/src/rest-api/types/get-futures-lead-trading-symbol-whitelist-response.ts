@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 /**
- * Binance Copy Trading REST API
+ * Copy Trading REST API
  *
- * OpenAPI Specification for the Binance Copy Trading REST API
+ * Automate lead trading via the Copy Trading API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -25,19 +25,19 @@ import type { GetFuturesLeadTradingSymbolWhitelistResponseDataInner } from './ge
  */
 export interface GetFuturesLeadTradingSymbolWhitelistResponse {
     /**
-     *
+     * API response code. \"000000\" indicates success.
      * @type {string}
      * @memberof GetFuturesLeadTradingSymbolWhitelistResponse
      */
     code?: string;
     /**
-     *
+     * Response message.
      * @type {string}
      * @memberof GetFuturesLeadTradingSymbolWhitelistResponse
      */
     message?: string;
     /**
-     *
+     * Whitelisted symbols for futures lead trading
      * @type {Array<GetFuturesLeadTradingSymbolWhitelistResponseDataInner>}
      * @memberof GetFuturesLeadTradingSymbolWhitelistResponse
      */

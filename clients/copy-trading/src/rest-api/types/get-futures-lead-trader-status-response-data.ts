@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Copy Trading REST API
+ * Copy Trading REST API
  *
- * OpenAPI Specification for the Binance Copy Trading REST API
+ * Automate lead trading via the Copy Trading API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -20,13 +20,13 @@
  */
 export interface GetFuturesLeadTraderStatusResponseData {
     /**
-     *
+     * Whether the user is a futures lead trader
      * @type {boolean}
      * @memberof GetFuturesLeadTraderStatusResponseData
      */
     isLeadTrader?: boolean;
     /**
-     *
+     * Server timestamp in milliseconds
      * @type {number | bigint}
      * @memberof GetFuturesLeadTraderStatusResponseData
      */

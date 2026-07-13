@@ -1,7 +1,7 @@
 /**
- * Binance Copy Trading REST API
+ * Copy Trading REST API
  *
- * OpenAPI Specification for the Binance Copy Trading REST API
+ * Automate lead trading via the Copy Trading API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -89,14 +89,16 @@ export class RestAPI {
     /**
      * Get Futures Lead Trader Status
      *
-     * Weight: 20
+     * Weight(IP): 1
      *
-     * @summary Get Futures Lead Trader Status(TRADE)
+     * Security Type: TRADE
+     *
+     * @summary Get Futures Lead Trader Status (TRADE)
      * @param {GetFuturesLeadTraderStatusRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetFuturesLeadTraderStatusResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/copy_trading/future-copy-trading/Get-Futures-Lead-Trader-Status Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-copy-trading/api/rest-api/future-copy-trading#get-futures-lead-trader-status Binance API Documentation}
      */
     getFuturesLeadTraderStatus(
         requestParameters: GetFuturesLeadTraderStatusRequest = {}
@@ -107,14 +109,16 @@ export class RestAPI {
     /**
      * Get Futures Lead Trading Symbol Whitelist
      *
-     * Weight: 20
+     * Weight(IP): 1
      *
-     * @summary Get Futures Lead Trading Symbol Whitelist(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get Futures Lead Trading Symbol Whitelist (USER_DATA)
      * @param {GetFuturesLeadTradingSymbolWhitelistRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetFuturesLeadTradingSymbolWhitelistResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/copy_trading/future-copy-trading/Get-Futures-Lead-Trading-Symbol-Whitelist Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/advanced-trading-copy-trading/api/rest-api/future-copy-trading#get-futures-lead-trading-symbol-whitelist Binance API Documentation}
      */
     getFuturesLeadTradingSymbolWhitelist(
         requestParameters: GetFuturesLeadTradingSymbolWhitelistRequest = {}
