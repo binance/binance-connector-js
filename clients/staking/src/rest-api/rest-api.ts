@@ -1,7 +1,7 @@
 /**
- * Binance Staking REST API
+ * Staking REST API
  *
- * OpenAPI Specification for the Binance Staking REST API
+ * Subscribe to staking products, track positions, and query rewards via the Binance Staking API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -180,14 +180,16 @@ export class RestAPI {
     /**
      * ETH Staking account
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary ETH Staking account(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary ETH Staking account (USER_DATA)
      * @param {EthStakingAccountRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<EthStakingAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/eth-staking/account/ETH-Staking-account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/eth-staking#eth-staking-account Binance API Documentation}
      */
     ethStakingAccount(
         requestParameters: EthStakingAccountRequest = {}
@@ -198,14 +200,16 @@ export class RestAPI {
     /**
      * Get current ETH staking quota
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get current ETH staking quota(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get current ETH staking quota (USER_DATA)
      * @param {GetCurrentEthStakingQuotaRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetCurrentEthStakingQuotaResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/eth-staking/account/Get-current-ETH-staking-quota Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/eth-staking#get-current-eth-staking-quota Binance API Documentation}
      */
     getCurrentEthStakingQuota(
         requestParameters: GetCurrentEthStakingQuotaRequest = {}
@@ -216,19 +220,25 @@ export class RestAPI {
     /**
      * Get ETH redemption history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get ETH redemption history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get ETH redemption history (USER_DATA)
      * @param {GetEthRedemptionHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetEthRedemptionHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/eth-staking/history/Get-ETH-redemption-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/eth-staking#get-eth-redemption-history Binance API Documentation}
      */
     getEthRedemptionHistory(
         requestParameters: GetEthRedemptionHistoryRequest = {}
@@ -239,19 +249,25 @@ export class RestAPI {
     /**
      * Get ETH staking history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get ETH staking history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get ETH staking history (USER_DATA)
      * @param {GetEthStakingHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetEthStakingHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/eth-staking/history/Get-ETH-staking-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/eth-staking#get-eth-staking-history Binance API Documentation}
      */
     getEthStakingHistory(
         requestParameters: GetEthStakingHistoryRequest = {}
@@ -262,19 +278,25 @@ export class RestAPI {
     /**
      * Get WBETH Rate History
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get WBETH Rate History(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get WBETH Rate History (USER_DATA)
      * @param {GetWbethRateHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetWbethRateHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/eth-staking/history/Get-BETH-Rate-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/eth-staking#get-wbeth-rate-history Binance API Documentation}
      */
     getWbethRateHistory(
         requestParameters: GetWbethRateHistoryRequest = {}
@@ -285,19 +307,25 @@ export class RestAPI {
     /**
      * Get WBETH rewards history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get WBETH rewards history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get WBETH rewards history (USER_DATA)
      * @param {GetWbethRewardsHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetWbethRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/eth-staking/history/Get-WBETH-rewards-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/eth-staking#get-wbeth-rewards-history Binance API Documentation}
      */
     getWbethRewardsHistory(
         requestParameters: GetWbethRewardsHistoryRequest = {}
@@ -308,19 +336,25 @@ export class RestAPI {
     /**
      * Get WBETH unwrap history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get WBETH unwrap history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get WBETH unwrap history (USER_DATA)
      * @param {GetWbethUnwrapHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetWbethUnwrapHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/eth-staking/history/Get-WBETH-unwrap-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/eth-staking#get-wbeth-unwrap-history Binance API Documentation}
      */
     getWbethUnwrapHistory(
         requestParameters: GetWbethUnwrapHistoryRequest = {}
@@ -331,19 +365,25 @@ export class RestAPI {
     /**
      * Get WBETH wrap history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get WBETH wrap history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get WBETH wrap history (USER_DATA)
      * @param {GetWbethWrapHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetWbethWrapHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/eth-staking/history/Get-WBETH-wrap-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/eth-staking#get-wbeth-wrap-history Binance API Documentation}
      */
     getWbethWrapHistory(
         requestParameters: GetWbethWrapHistoryRequest = {}
@@ -354,16 +394,19 @@ export class RestAPI {
     /**
      * Redeem WBETH or BETH and get ETH
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Redeem ETH(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     *
+     * @summary Redeem ETH (TRADE)
      * @param {RedeemEthRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<RedeemEthResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/eth-staking/staking/Redeem-ETH Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/eth-staking#redeem-eth Binance API Documentation}
      */
     redeemEth(requestParameters: RedeemEthRequest): Promise<RestApiResponse<RedeemEthResponse>> {
         return this.ethStakingApi.redeemEth(requestParameters);
@@ -372,16 +415,19 @@ export class RestAPI {
     /**
      * Subscribe ETH Staking
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Subscribe ETH Staking(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     *
+     * @summary Subscribe ETH Staking (TRADE)
      * @param {SubscribeEthStakingRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SubscribeEthStakingResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/eth-staking/staking/Subscribe-ETH-Staking Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/eth-staking#subscribe-eth-staking Binance API Documentation}
      */
     subscribeEthStaking(
         requestParameters: SubscribeEthStakingRequest
@@ -392,16 +438,19 @@ export class RestAPI {
     /**
      * Wrap BETH
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Wrap BETH(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     *
+     * @summary Wrap BETH (TRADE)
      * @param {WrapBethRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<WrapBethResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/eth-staking/staking/Wrap-BETH Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/eth-staking#wrap-beth Binance API Documentation}
      */
     wrapBeth(requestParameters: WrapBethRequest): Promise<RestApiResponse<WrapBethResponse>> {
         return this.ethStakingApi.wrapBeth(requestParameters);
@@ -410,14 +459,16 @@ export class RestAPI {
     /**
      * Get On-chain Yields Locked Personal Left Quota
      *
-     * Weight: 50
+     * Weight(IP): 50
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get On-chain Yields Locked Personal Left Quota (USER_DATA)
      * @param {GetOnChainYieldsLockedPersonalLeftQuotaRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedPersonalLeftQuotaResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/account/Get-Onchain-Locked-Personal-Left-Quota Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/on-chain-yields#get-on-chain-yields-locked-personal-left-quota Binance API Documentation}
      */
     getOnChainYieldsLockedPersonalLeftQuota(
         requestParameters: GetOnChainYieldsLockedPersonalLeftQuotaRequest
@@ -428,16 +479,19 @@ export class RestAPI {
     /**
      * Get available On-chain Yields Locked product list
      *
-     * Get available On-chain Yields Locked product list
+     * Weight(IP): 50
      *
-     * Weight: 50
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Get available On-chain Yields Locked product list
      *
      * @summary Get On-chain Yields Locked Product List (USER_DATA)
      * @param {GetOnChainYieldsLockedProductListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedProductListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/account/ Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/on-chain-yields#get-on-chain-yields-locked-product-list Binance API Documentation}
      */
     getOnChainYieldsLockedProductList(
         requestParameters: GetOnChainYieldsLockedProductListRequest = {}
@@ -448,14 +502,16 @@ export class RestAPI {
     /**
      * Get On-chain Yields Locked Product Position
      *
-     * Weight: 50
+     * Weight(IP): 50
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get On-chain Yields Locked Product Position (USER_DATA)
      * @param {GetOnChainYieldsLockedProductPositionRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedProductPositionResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/account/Get-Onchain-Locked-Product-Position Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/on-chain-yields#get-on-chain-yields-locked-product-position Binance API Documentation}
      */
     getOnChainYieldsLockedProductPosition(
         requestParameters: GetOnChainYieldsLockedProductPositionRequest = {}
@@ -466,19 +522,25 @@ export class RestAPI {
     /**
      * Get On-chain Yields Locked Redemption Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 50
      *
-     * Weight: 50
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
      *
      * @summary Get On-chain Yields Locked Redemption Record (USER_DATA)
      * @param {GetOnChainYieldsLockedRedemptionRecordRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedRedemptionRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/history/Get-Onchain-Locked-Redemption-Record Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/on-chain-yields#get-on-chain-yields-locked-redemption-record Binance API Documentation}
      */
     getOnChainYieldsLockedRedemptionRecord(
         requestParameters: GetOnChainYieldsLockedRedemptionRecordRequest = {}
@@ -489,19 +551,25 @@ export class RestAPI {
     /**
      * Get On-chain Yields Locked Rewards History
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 50
      *
-     * Weight: 50
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
      *
      * @summary Get On-chain Yields Locked Rewards History (USER_DATA)
      * @param {GetOnChainYieldsLockedRewardsHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/history/Get-Onchain-Locked-Rewards-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/on-chain-yields#get-on-chain-yields-locked-rewards-history Binance API Documentation}
      */
     getOnChainYieldsLockedRewardsHistory(
         requestParameters: GetOnChainYieldsLockedRewardsHistoryRequest = {}
@@ -512,14 +580,16 @@ export class RestAPI {
     /**
      * Get On-chain Yields Locked Subscription Preview
      *
-     * Weight: 50
+     * Weight(IP): 50
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get On-chain Yields Locked Subscription Preview (USER_DATA)
      * @param {GetOnChainYieldsLockedSubscriptionPreviewRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedSubscriptionPreviewResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/earn/ Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/on-chain-yields#get-on-chain-yields-locked-subscription-preview Binance API Documentation}
      */
     getOnChainYieldsLockedSubscriptionPreview(
         requestParameters: GetOnChainYieldsLockedSubscriptionPreviewRequest
@@ -530,19 +600,25 @@ export class RestAPI {
     /**
      * Get On-chain Yields Locked Subscription Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 50
      *
-     * Weight: 50
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
      *
      * @summary Get On-chain Yields Locked Subscription Record (USER_DATA)
      * @param {GetOnChainYieldsLockedSubscriptionRecordRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedSubscriptionRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/history/ Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/on-chain-yields#get-on-chain-yields-locked-subscription-record Binance API Documentation}
      */
     getOnChainYieldsLockedSubscriptionRecord(
         requestParameters: GetOnChainYieldsLockedSubscriptionRecordRequest = {}
@@ -553,14 +629,16 @@ export class RestAPI {
     /**
      * On-chain Yields Account query
      *
-     * Weight: 50
+     * Weight(IP): 50
+     *
+     * Security Type: USER_DATA
      *
      * @summary On-chain Yields Account (USER_DATA)
      * @param {OnChainYieldsAccountRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<OnChainYieldsAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/account/Onchain-Account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/on-chain-yields#on-chain-yields-account Binance API Documentation}
      */
     onChainYieldsAccount(
         requestParameters: OnChainYieldsAccountRequest = {}
@@ -571,16 +649,19 @@ export class RestAPI {
     /**
      * Redeem On-chain Yields Locked Product
      *
-     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     * Weight(IP): 200
      *
-     * Weight: 1/3s per account
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
      *
      * @summary Redeem On-chain Yields Locked Product (TRADE)
      * @param {RedeemOnChainYieldsLockedProductRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<RedeemOnChainYieldsLockedProductResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/earn/Redeem-Onchain-Locked-Product Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/on-chain-yields#redeem-on-chain-yields-locked-product Binance API Documentation}
      */
     redeemOnChainYieldsLockedProduct(
         requestParameters: RedeemOnChainYieldsLockedProductRequest
@@ -591,14 +672,16 @@ export class RestAPI {
     /**
      * Set On-chain Yield locked auto subscribe
      *
-     * Weight: 50
+     * Weight(IP): 50
      *
-     * @summary Set On-chain Yields Locked Auto Subscribe(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Set On-chain Yields Locked Auto Subscribe (USER_DATA)
      * @param {SetOnChainYieldsLockedAutoSubscribeRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SetOnChainYieldsLockedAutoSubscribeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/earn/Set-Onchain-Locked-Auto-Subscribe Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/on-chain-yields#set-on-chain-yields-locked-auto-subscribe Binance API Documentation}
      */
     setOnChainYieldsLockedAutoSubscribe(
         requestParameters: SetOnChainYieldsLockedAutoSubscribeRequest
@@ -609,14 +692,16 @@ export class RestAPI {
     /**
      * Set On-chain Yields redeem option for Locked product
      *
-     * Weight: 50
+     * Weight(IP): 50
      *
-     * @summary Set On-chain Yields Locked Product Redeem Option(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Set On-chain Yields Locked Product Redeem Option (USER_DATA)
      * @param {SetOnChainYieldsLockedProductRedeemOptionRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SetOnChainYieldsLockedProductRedeemOptionResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/earn/Set-Onchain-Locked-Redeem-Option Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/on-chain-yields#set-on-chain-yields-locked-product-redeem-option Binance API Documentation}
      */
     setOnChainYieldsLockedProductRedeemOption(
         requestParameters: SetOnChainYieldsLockedProductRedeemOptionRequest
@@ -627,16 +712,19 @@ export class RestAPI {
     /**
      * Subscribe On-chain Yields Locked Product
      *
-     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     * Weight(IP): 200
      *
-     * Weight: 200
+     * Security Type: TRADE
      *
-     * @summary Subscribe On-chain Yields Locked Product(TRADE)
+     * Notes:
+     * - You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     *
+     * @summary Subscribe On-chain Yields Locked Product (TRADE)
      * @param {SubscribeOnChainYieldsLockedProductRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SubscribeOnChainYieldsLockedProductResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/earn/Subscribe-Onchain-Locked-Product Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/on-chain-yields#subscribe-on-chain-yields-locked-product Binance API Documentation}
      */
     subscribeOnChainYieldsLockedProduct(
         requestParameters: SubscribeOnChainYieldsLockedProductRequest
@@ -647,14 +735,16 @@ export class RestAPI {
     /**
      * Get the available Soft Staking product list.
      *
-     * Weight: 50
+     * Weight(IP): 50
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Soft Staking Product List (USER_DATA)
      * @param {GetSoftStakingProductListRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetSoftStakingProductListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/soft-staking/ Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/soft-staking#get-soft-staking-product-list Binance API Documentation}
      */
     getSoftStakingProductList(
         requestParameters: GetSoftStakingProductListRequest = {}
@@ -663,19 +753,27 @@ export class RestAPI {
     }
 
     /**
-     * * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Get Soft Staking Rewards History
      *
-     * Weight: 50
+     * Weight(IP): 50
      *
-     * @summary Get Soft Staking Rewards History(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Soft Staking Rewards History (USER_DATA)
      * @param {GetSoftStakingRewardsHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetSoftStakingRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/soft-staking/Get-Soft-Staking-Rewards-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/soft-staking#get-soft-staking-rewards-history Binance API Documentation}
      */
     getSoftStakingRewardsHistory(
         requestParameters: GetSoftStakingRewardsHistoryRequest = {}
@@ -686,14 +784,16 @@ export class RestAPI {
     /**
      * Enable or disable Soft Staking.
      *
-     * Weight: 50
+     * Weight(IP): 50
+     *
+     * Security Type: USER_DATA
      *
      * @summary Set Soft Staking (USER_DATA)
      * @param {SetSoftStakingRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SetSoftStakingResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/soft-staking/Set-Soft-Staking Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/soft-staking#set-soft-staking Binance API Documentation}
      */
     setSoftStaking(
         requestParameters: SetSoftStakingRequest
@@ -704,16 +804,19 @@ export class RestAPI {
     /**
      * Claim Boost APR Airdrop Rewards
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Claim Boost Rewards(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     *
+     * @summary Claim Boost Rewards (TRADE)
      * @param {ClaimBoostRewardsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<ClaimBoostRewardsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/sol-staking/staking/Claim-Boost-Rewards Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/sol-staking#claim-boost-rewards Binance API Documentation}
      */
     claimBoostRewards(
         requestParameters: ClaimBoostRewardsRequest = {}
@@ -724,19 +827,25 @@ export class RestAPI {
     /**
      * Get BNSOL Rate History
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get BNSOL Rate History(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get BNSOL Rate History (USER_DATA)
      * @param {GetBnsolRateHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetBnsolRateHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/sol-staking/history/Get-BNSOL-Rate-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/sol-staking#get-bnsol-rate-history Binance API Documentation}
      */
     getBnsolRateHistory(
         requestParameters: GetBnsolRateHistoryRequest = {}
@@ -747,19 +856,25 @@ export class RestAPI {
     /**
      * Get BNSOL rewards history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get BNSOL rewards history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get BNSOL rewards history (USER_DATA)
      * @param {GetBnsolRewardsHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetBnsolRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/sol-staking/history/Get-BNSOL-rewards-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/sol-staking#get-bnsol-rewards-history Binance API Documentation}
      */
     getBnsolRewardsHistory(
         requestParameters: GetBnsolRewardsHistoryRequest = {}
@@ -770,19 +885,25 @@ export class RestAPI {
     /**
      * Get Boost rewards history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Boost Rewards History(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Boost Rewards History (USER_DATA)
      * @param {GetBoostRewardsHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetBoostRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/sol-staking/history/Get-Boost-Rewards-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/sol-staking#get-boost-rewards-history Binance API Documentation}
      */
     getBoostRewardsHistory(
         requestParameters: GetBoostRewardsHistoryRequest
@@ -793,19 +914,25 @@ export class RestAPI {
     /**
      * Get SOL redemption history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get SOL redemption history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get SOL redemption history (USER_DATA)
      * @param {GetSolRedemptionHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetSolRedemptionHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/sol-staking/history/Get-SOL-redemption-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/sol-staking#get-sol-redemption-history Binance API Documentation}
      */
     getSolRedemptionHistory(
         requestParameters: GetSolRedemptionHistoryRequest = {}
@@ -816,19 +943,25 @@ export class RestAPI {
     /**
      * Get SOL staking history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get SOL staking history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get SOL staking history (USER_DATA)
      * @param {GetSolStakingHistoryRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetSolStakingHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/sol-staking/history/Get-SOL-staking-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/sol-staking#get-sol-staking-history Binance API Documentation}
      */
     getSolStakingHistory(
         requestParameters: GetSolStakingHistoryRequest = {}
@@ -839,14 +972,16 @@ export class RestAPI {
     /**
      * Get SOL staking quota
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get SOL staking quota details(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get SOL staking quota details (USER_DATA)
      * @param {GetSolStakingQuotaDetailsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetSolStakingQuotaDetailsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/sol-staking/account/Get-SOL-staking-quota-details Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/sol-staking#get-sol-staking-quota-details Binance API Documentation}
      */
     getSolStakingQuotaDetails(
         requestParameters: GetSolStakingQuotaDetailsRequest = {}
@@ -857,19 +992,25 @@ export class RestAPI {
     /**
      * Get Unclaimed rewards
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Unclaimed Rewards(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Unclaimed Rewards (USER_DATA)
      * @param {GetUnclaimedRewardsRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<GetUnclaimedRewardsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/sol-staking/history/Get-Unclaimed-Rewards Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/sol-staking#get-unclaimed-rewards Binance API Documentation}
      */
     getUnclaimedRewards(
         requestParameters: GetUnclaimedRewardsRequest = {}
@@ -880,16 +1021,19 @@ export class RestAPI {
     /**
      * Redeem BNSOL get SOL
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Redeem SOL(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     *
+     * @summary Redeem SOL (TRADE)
      * @param {RedeemSolRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<RedeemSolResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/sol-staking/staking/Redeem-SOL Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/sol-staking#redeem-sol Binance API Documentation}
      */
     redeemSol(requestParameters: RedeemSolRequest): Promise<RestApiResponse<RedeemSolResponse>> {
         return this.solStakingApi.redeemSol(requestParameters);
@@ -898,14 +1042,16 @@ export class RestAPI {
     /**
      * SOL Staking account
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary SOL Staking account(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary SOL Staking account (USER_DATA)
      * @param {SolStakingAccountRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SolStakingAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/sol-staking/account/SOL-Staking-account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/sol-staking#sol-staking-account Binance API Documentation}
      */
     solStakingAccount(
         requestParameters: SolStakingAccountRequest = {}
@@ -916,16 +1062,19 @@ export class RestAPI {
     /**
      * Subscribe SOL Staking
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Subscribe SOL Staking(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     *
+     * @summary Subscribe SOL Staking (TRADE)
      * @param {SubscribeSolStakingRequest} requestParameters Request parameters.
      *
      * @returns {Promise<RestApiResponse<SubscribeSolStakingResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
-     * @see {@link https://developers.binance.com/docs/staking/sol-staking/staking/Subscribe-SOL-Staking Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/sol-staking#subscribe-sol-staking Binance API Documentation}
      */
     subscribeSolStaking(
         requestParameters: SubscribeSolStakingRequest

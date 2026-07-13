@@ -1,9 +1,9 @@
 /* tslint:disable */
 
 /**
- * Binance Staking REST API
+ * Staking REST API
  *
- * OpenAPI Specification for the Binance Staking REST API
+ * Subscribe to staking products, track positions, and query rewards via the Binance Staking API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -33,14 +33,14 @@ export interface SubscribeSolStakingResponse {
     bnsolAmount?: string;
     /**
      *
-     * @type {string}
-     * @memberof SubscribeSolStakingResponse
-     */
-    exchangeRate?: string;
-    /**
-     *
      * @type {number | bigint}
      * @memberof SubscribeSolStakingResponse
      */
     purchaseId?: number | bigint;
+    /**
+     *
+     * @type {string}
+     * @memberof SubscribeSolStakingResponse
+     */
+    exchangeRate?: string;
 }

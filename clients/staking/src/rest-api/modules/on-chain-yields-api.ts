@@ -1,7 +1,7 @@
 /**
- * Binance Staking REST API
+ * Staking REST API
  *
- * OpenAPI Specification for the Binance Staking REST API
+ * Subscribe to staking products, track positions, and query rewards via the Binance Staking API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -42,11 +41,13 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
         /**
          * Get On-chain Yields Locked Personal Left Quota
          *
-         * Weight: 50
+         * Weight(IP): 50
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get On-chain Yields Locked Personal Left Quota (USER_DATA)
          * @param {string} projectId
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -83,15 +84,18 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
         /**
          * Get available On-chain Yields Locked product list
          *
-         * Get available On-chain Yields Locked product list
+         * Weight(IP): 50
          *
-         * Weight: 50
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - Get available On-chain Yields Locked product list
          *
          * @summary Get On-chain Yields Locked Product List (USER_DATA)
-         * @param {string} [asset] WBETH or BETH, default to BETH
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10, Max:100
-         * @param {number | bigint} [recvWindow]
+         * @param {string} [asset]
+         * @param {number | bigint} [current] Currently querying page
+         * @param {number | bigint} [size] Number of results per page.
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -133,21 +137,23 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
         /**
          * Get On-chain Yields Locked Product Position
          *
-         * Weight: 50
+         * Weight(IP): 50
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get On-chain Yields Locked Product Position (USER_DATA)
-         * @param {string} [asset] WBETH or BETH, default to BETH
-         * @param {number | bigint} [positionId]
+         * @param {string} [asset]
+         * @param {string} [positionId]
          * @param {string} [projectId]
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10, Max:100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Currently querying page
+         * @param {number | bigint} [size] Number of results per page.
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
         getOnChainYieldsLockedProductPosition: async (
             asset?: string,
-            positionId?: number | bigint,
+            positionId?: string,
             projectId?: string,
             current?: number | bigint,
             size?: number | bigint,
@@ -191,27 +197,33 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
         /**
          * Get On-chain Yields Locked Redemption Record
          *
-         * The time between `startTime` and `endTime` cannot be longer than 3 months.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-         * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         * Weight(IP): 50
          *
-         * Weight: 50
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, the next 30 days' data beginning from `startTime` will be returned.
+         * - If `endTime` is sent but
+         * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
          *
          * @summary Get On-chain Yields Locked Redemption Record (USER_DATA)
-         * @param {number | bigint} [positionId]
+         * @param {string} [positionId]
          * @param {string} [redeemId]
-         * @param {string} [asset] WBETH or BETH, default to BETH
+         * @param {string} [asset]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10, Max:100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Currently querying page
+         * @param {number | bigint} [size]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
         getOnChainYieldsLockedRedemptionRecord: async (
-            positionId?: number | bigint,
+            positionId?: string,
             redeemId?: string,
             asset?: string,
             startTime?: number | bigint,
@@ -264,21 +276,27 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
         /**
          * Get On-chain Yields Locked Rewards History
          *
-         * The time between `startTime` and `endTime` cannot be longer than 3 months.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-         * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         * Weight(IP): 50
          *
-         * Weight: 50
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, the next 30 days' data beginning from `startTime` will be returned.
+         * - If `endTime` is sent but
+         * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
          *
          * @summary Get On-chain Yields Locked Rewards History (USER_DATA)
          * @param {string} [positionId]
-         * @param {string} [asset] WBETH or BETH, default to BETH
+         * @param {string} [asset]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10, Max:100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Currently querying page
+         * @param {number | bigint} [size]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -332,13 +350,15 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
         /**
          * Get On-chain Yields Locked Subscription Preview
          *
-         * Weight: 50
+         * Weight(IP): 50
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get On-chain Yields Locked Subscription Preview (USER_DATA)
          * @param {string} projectId
-         * @param {number} amount Amount in SOL.
-         * @param {boolean} [autoSubscribe] true or false, default true.
-         * @param {number | bigint} [recvWindow]
+         * @param {number} amount
+         * @param {boolean} [autoSubscribe]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -385,22 +405,28 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
         /**
          * Get On-chain Yields Locked Subscription Record
          *
-         * The time between `startTime` and `endTime` cannot be longer than 3 months.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-         * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         * Weight(IP): 50
          *
-         * Weight: 50
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, the next 30 days' data beginning from `startTime` will be returned.
+         * - If `endTime` is sent but
+         * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
          *
          * @summary Get On-chain Yields Locked Subscription Record (USER_DATA)
          * @param {string} [purchaseId]
          * @param {string} [clientId]
-         * @param {string} [asset] WBETH or BETH, default to BETH
+         * @param {string} [asset]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10, Max:100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Currently querying page
+         * @param {number | bigint} [size]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -458,10 +484,12 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
         /**
          * On-chain Yields Account query
          *
-         * Weight: 50
+         * Weight(IP): 50
+         *
+         * Security Type: USER_DATA
          *
          * @summary On-chain Yields Account (USER_DATA)
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [recvWindow] The value cannot be greater than `60000`
          *
          * @throws {RequiredError}
          */
@@ -489,14 +517,17 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
         /**
          * Redeem On-chain Yields Locked Product
          *
-         * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+         * Weight(IP): 200
          *
-         * Weight: 1/3s per account
+         * Security Type: TRADE
+         *
+         * Notes:
+         * - You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
          *
          * @summary Redeem On-chain Yields Locked Product (TRADE)
-         * @param {string} positionId
+         * @param {string} positionId Locked product position ID
          * @param {string} [channelId]
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -537,12 +568,14 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
         /**
          * Set On-chain Yield locked auto subscribe
          *
-         * Weight: 50
+         * Weight(IP): 50
          *
-         * @summary Set On-chain Yields Locked Auto Subscribe(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Set On-chain Yields Locked Auto Subscribe (USER_DATA)
          * @param {string} positionId
-         * @param {boolean} autoSubscribe true or false
-         * @param {number | bigint} [recvWindow]
+         * @param {boolean} autoSubscribe
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -589,18 +622,20 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
         /**
          * Set On-chain Yields redeem option for Locked product
          *
-         * Weight: 50
+         * Weight(IP): 50
          *
-         * @summary Set On-chain Yields Locked Product Redeem Option(USER_DATA)
+         * Security Type: USER_DATA
+         *
+         * @summary Set On-chain Yields Locked Product Redeem Option (USER_DATA)
          * @param {string} positionId
-         * @param {string} redeemTo 'SPOT','FLEXIBLE'
-         * @param {number | bigint} [recvWindow]
+         * @param {SetOnChainYieldsLockedProductRedeemOptionRedeemToEnum} redeemTo
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
         setOnChainYieldsLockedProductRedeemOption: async (
             positionId: string,
-            redeemTo: string,
+            redeemTo: SetOnChainYieldsLockedProductRedeemOptionRedeemToEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'positionId' is not null or undefined
@@ -641,19 +676,22 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
         /**
          * Subscribe On-chain Yields Locked Product
          *
-         * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+         * Weight(IP): 200
          *
-         * Weight: 200
+         * Security Type: TRADE
          *
-         * @summary Subscribe On-chain Yields Locked Product(TRADE)
+         * Notes:
+         * - You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+         *
+         * @summary Subscribe On-chain Yields Locked Product (TRADE)
          * @param {string} projectId
-         * @param {number} amount Amount in SOL.
-         * @param {boolean} [autoSubscribe] true or false, default true.
-         * @param {string} [sourceAccount] `SPOT`,`FUND`,`ALL`, default `SPOT`
-         * @param {string} [redeemTo] `SPOT`,`FLEXIBLE`, default `FLEXIBLE` Takes effect when Auto Subscribe is false
+         * @param {number} amount
+         * @param {boolean} [autoSubscribe]
+         * @param {SubscribeOnChainYieldsLockedProductSourceAccountEnum} [sourceAccount]
+         * @param {SubscribeOnChainYieldsLockedProductRedeemToEnum} [redeemTo] Takes effect when Auto Subscribe is false
          * @param {string} [channelId]
          * @param {string} [clientId]
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -661,8 +699,8 @@ const OnChainYieldsApiAxiosParamCreator = function (configuration: Configuration
             projectId: string,
             amount: number,
             autoSubscribe?: boolean,
-            sourceAccount?: string,
-            redeemTo?: string,
+            sourceAccount?: SubscribeOnChainYieldsLockedProductSourceAccountEnum,
+            redeemTo?: SubscribeOnChainYieldsLockedProductRedeemToEnum,
             channelId?: string,
             clientId?: string,
             recvWindow?: number | bigint
@@ -724,7 +762,9 @@ export interface OnChainYieldsApiInterface {
     /**
      * Get On-chain Yields Locked Personal Left Quota
      *
-     * Weight: 50
+     * Weight(IP): 50
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get On-chain Yields Locked Personal Left Quota (USER_DATA)
      * @param {GetOnChainYieldsLockedPersonalLeftQuotaRequest} requestParameters Request parameters.
@@ -738,9 +778,12 @@ export interface OnChainYieldsApiInterface {
     /**
      * Get available On-chain Yields Locked product list
      *
-     * Get available On-chain Yields Locked product list
+     * Weight(IP): 50
      *
-     * Weight: 50
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Get available On-chain Yields Locked product list
      *
      * @summary Get On-chain Yields Locked Product List (USER_DATA)
      * @param {GetOnChainYieldsLockedProductListRequest} requestParameters Request parameters.
@@ -754,7 +797,9 @@ export interface OnChainYieldsApiInterface {
     /**
      * Get On-chain Yields Locked Product Position
      *
-     * Weight: 50
+     * Weight(IP): 50
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get On-chain Yields Locked Product Position (USER_DATA)
      * @param {GetOnChainYieldsLockedProductPositionRequest} requestParameters Request parameters.
@@ -768,12 +813,18 @@ export interface OnChainYieldsApiInterface {
     /**
      * Get On-chain Yields Locked Redemption Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 50
      *
-     * Weight: 50
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
      *
      * @summary Get On-chain Yields Locked Redemption Record (USER_DATA)
      * @param {GetOnChainYieldsLockedRedemptionRecordRequest} requestParameters Request parameters.
@@ -787,12 +838,18 @@ export interface OnChainYieldsApiInterface {
     /**
      * Get On-chain Yields Locked Rewards History
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 50
      *
-     * Weight: 50
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
      *
      * @summary Get On-chain Yields Locked Rewards History (USER_DATA)
      * @param {GetOnChainYieldsLockedRewardsHistoryRequest} requestParameters Request parameters.
@@ -806,7 +863,9 @@ export interface OnChainYieldsApiInterface {
     /**
      * Get On-chain Yields Locked Subscription Preview
      *
-     * Weight: 50
+     * Weight(IP): 50
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get On-chain Yields Locked Subscription Preview (USER_DATA)
      * @param {GetOnChainYieldsLockedSubscriptionPreviewRequest} requestParameters Request parameters.
@@ -820,12 +879,18 @@ export interface OnChainYieldsApiInterface {
     /**
      * Get On-chain Yields Locked Subscription Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 50
      *
-     * Weight: 50
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
      *
      * @summary Get On-chain Yields Locked Subscription Record (USER_DATA)
      * @param {GetOnChainYieldsLockedSubscriptionRecordRequest} requestParameters Request parameters.
@@ -839,7 +904,9 @@ export interface OnChainYieldsApiInterface {
     /**
      * On-chain Yields Account query
      *
-     * Weight: 50
+     * Weight(IP): 50
+     *
+     * Security Type: USER_DATA
      *
      * @summary On-chain Yields Account (USER_DATA)
      * @param {OnChainYieldsAccountRequest} requestParameters Request parameters.
@@ -853,9 +920,12 @@ export interface OnChainYieldsApiInterface {
     /**
      * Redeem On-chain Yields Locked Product
      *
-     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     * Weight(IP): 200
      *
-     * Weight: 1/3s per account
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
      *
      * @summary Redeem On-chain Yields Locked Product (TRADE)
      * @param {RedeemOnChainYieldsLockedProductRequest} requestParameters Request parameters.
@@ -869,9 +939,11 @@ export interface OnChainYieldsApiInterface {
     /**
      * Set On-chain Yield locked auto subscribe
      *
-     * Weight: 50
+     * Weight(IP): 50
      *
-     * @summary Set On-chain Yields Locked Auto Subscribe(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Set On-chain Yields Locked Auto Subscribe (USER_DATA)
      * @param {SetOnChainYieldsLockedAutoSubscribeRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -883,9 +955,11 @@ export interface OnChainYieldsApiInterface {
     /**
      * Set On-chain Yields redeem option for Locked product
      *
-     * Weight: 50
+     * Weight(IP): 50
      *
-     * @summary Set On-chain Yields Locked Product Redeem Option(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Set On-chain Yields Locked Product Redeem Option (USER_DATA)
      * @param {SetOnChainYieldsLockedProductRedeemOptionRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -897,11 +971,14 @@ export interface OnChainYieldsApiInterface {
     /**
      * Subscribe On-chain Yields Locked Product
      *
-     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     * Weight(IP): 200
      *
-     * Weight: 200
+     * Security Type: TRADE
      *
-     * @summary Subscribe On-chain Yields Locked Product(TRADE)
+     * Notes:
+     * - You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     *
+     * @summary Subscribe On-chain Yields Locked Product (TRADE)
      * @param {SubscribeOnChainYieldsLockedProductRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -925,7 +1002,7 @@ export interface GetOnChainYieldsLockedPersonalLeftQuotaRequest {
     readonly projectId: string;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedPersonalLeftQuota
      */
@@ -938,28 +1015,28 @@ export interface GetOnChainYieldsLockedPersonalLeftQuotaRequest {
  */
 export interface GetOnChainYieldsLockedProductListRequest {
     /**
-     * WBETH or BETH, default to BETH
+     *
      * @type {string}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedProductList
      */
     readonly asset?: string;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     * Currently querying page
      * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedProductList
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10, Max:100
+     * Number of results per page.
      * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedProductList
      */
     readonly size?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedProductList
      */
@@ -972,7 +1049,7 @@ export interface GetOnChainYieldsLockedProductListRequest {
  */
 export interface GetOnChainYieldsLockedProductPositionRequest {
     /**
-     * WBETH or BETH, default to BETH
+     *
      * @type {string}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedProductPosition
      */
@@ -980,10 +1057,10 @@ export interface GetOnChainYieldsLockedProductPositionRequest {
 
     /**
      *
-     * @type {number | bigint}
+     * @type {string}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedProductPosition
      */
-    readonly positionId?: number | bigint;
+    readonly positionId?: string;
 
     /**
      *
@@ -993,21 +1070,21 @@ export interface GetOnChainYieldsLockedProductPositionRequest {
     readonly projectId?: string;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     * Currently querying page
      * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedProductPosition
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10, Max:100
+     * Number of results per page.
      * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedProductPosition
      */
     readonly size?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedProductPosition
      */
@@ -1021,10 +1098,10 @@ export interface GetOnChainYieldsLockedProductPositionRequest {
 export interface GetOnChainYieldsLockedRedemptionRecordRequest {
     /**
      *
-     * @type {number | bigint}
+     * @type {string}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedRedemptionRecord
      */
-    readonly positionId?: number | bigint;
+    readonly positionId?: string;
 
     /**
      *
@@ -1034,7 +1111,7 @@ export interface GetOnChainYieldsLockedRedemptionRecordRequest {
     readonly redeemId?: string;
 
     /**
-     * WBETH or BETH, default to BETH
+     *
      * @type {string}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedRedemptionRecord
      */
@@ -1055,21 +1132,21 @@ export interface GetOnChainYieldsLockedRedemptionRecordRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     * Currently querying page
      * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedRedemptionRecord
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10, Max:100
+     *
      * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedRedemptionRecord
      */
     readonly size?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedRedemptionRecord
      */
@@ -1089,7 +1166,7 @@ export interface GetOnChainYieldsLockedRewardsHistoryRequest {
     readonly positionId?: string;
 
     /**
-     * WBETH or BETH, default to BETH
+     *
      * @type {string}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedRewardsHistory
      */
@@ -1110,21 +1187,21 @@ export interface GetOnChainYieldsLockedRewardsHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     * Currently querying page
      * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedRewardsHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10, Max:100
+     *
      * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedRewardsHistory
      */
     readonly size?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedRewardsHistory
      */
@@ -1144,21 +1221,21 @@ export interface GetOnChainYieldsLockedSubscriptionPreviewRequest {
     readonly projectId: string;
 
     /**
-     * Amount in SOL.
+     *
      * @type {number}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedSubscriptionPreview
      */
     readonly amount: number;
 
     /**
-     * true or false, default true.
+     *
      * @type {boolean}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedSubscriptionPreview
      */
     readonly autoSubscribe?: boolean;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedSubscriptionPreview
      */
@@ -1185,7 +1262,7 @@ export interface GetOnChainYieldsLockedSubscriptionRecordRequest {
     readonly clientId?: string;
 
     /**
-     * WBETH or BETH, default to BETH
+     *
      * @type {string}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedSubscriptionRecord
      */
@@ -1206,21 +1283,21 @@ export interface GetOnChainYieldsLockedSubscriptionRecordRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     * Currently querying page
      * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedSubscriptionRecord
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10, Max:100
+     *
      * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedSubscriptionRecord
      */
     readonly size?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof OnChainYieldsApiGetOnChainYieldsLockedSubscriptionRecord
      */
@@ -1233,7 +1310,7 @@ export interface GetOnChainYieldsLockedSubscriptionRecordRequest {
  */
 export interface OnChainYieldsAccountRequest {
     /**
-     *
+     * The value cannot be greater than `60000`
      * @type {number | bigint}
      * @memberof OnChainYieldsApiOnChainYieldsAccount
      */
@@ -1246,7 +1323,7 @@ export interface OnChainYieldsAccountRequest {
  */
 export interface RedeemOnChainYieldsLockedProductRequest {
     /**
-     *
+     * Locked product position ID
      * @type {string}
      * @memberof OnChainYieldsApiRedeemOnChainYieldsLockedProduct
      */
@@ -1260,7 +1337,7 @@ export interface RedeemOnChainYieldsLockedProductRequest {
     readonly channelId?: string;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof OnChainYieldsApiRedeemOnChainYieldsLockedProduct
      */
@@ -1280,14 +1357,14 @@ export interface SetOnChainYieldsLockedAutoSubscribeRequest {
     readonly positionId: string;
 
     /**
-     * true or false
+     *
      * @type {boolean}
      * @memberof OnChainYieldsApiSetOnChainYieldsLockedAutoSubscribe
      */
     readonly autoSubscribe: boolean;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof OnChainYieldsApiSetOnChainYieldsLockedAutoSubscribe
      */
@@ -1307,14 +1384,14 @@ export interface SetOnChainYieldsLockedProductRedeemOptionRequest {
     readonly positionId: string;
 
     /**
-     * 'SPOT','FLEXIBLE'
-     * @type {string}
+     *
+     * @type {'SPOT' | 'FLEXIBLE'}
      * @memberof OnChainYieldsApiSetOnChainYieldsLockedProductRedeemOption
      */
-    readonly redeemTo: string;
+    readonly redeemTo: SetOnChainYieldsLockedProductRedeemOptionRedeemToEnum;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof OnChainYieldsApiSetOnChainYieldsLockedProductRedeemOption
      */
@@ -1334,32 +1411,32 @@ export interface SubscribeOnChainYieldsLockedProductRequest {
     readonly projectId: string;
 
     /**
-     * Amount in SOL.
+     *
      * @type {number}
      * @memberof OnChainYieldsApiSubscribeOnChainYieldsLockedProduct
      */
     readonly amount: number;
 
     /**
-     * true or false, default true.
+     *
      * @type {boolean}
      * @memberof OnChainYieldsApiSubscribeOnChainYieldsLockedProduct
      */
     readonly autoSubscribe?: boolean;
 
     /**
-     * `SPOT`,`FUND`,`ALL`, default `SPOT`
-     * @type {string}
+     *
+     * @type {'SPOT' | 'FUND' | 'ALL'}
      * @memberof OnChainYieldsApiSubscribeOnChainYieldsLockedProduct
      */
-    readonly sourceAccount?: string;
+    readonly sourceAccount?: SubscribeOnChainYieldsLockedProductSourceAccountEnum;
 
     /**
-     * `SPOT`,`FLEXIBLE`, default `FLEXIBLE` Takes effect when Auto Subscribe is false
-     * @type {string}
+     * Takes effect when Auto Subscribe is false
+     * @type {'SPOT' | 'FLEXIBLE'}
      * @memberof OnChainYieldsApiSubscribeOnChainYieldsLockedProduct
      */
-    readonly redeemTo?: string;
+    readonly redeemTo?: SubscribeOnChainYieldsLockedProductRedeemToEnum;
 
     /**
      *
@@ -1376,7 +1453,7 @@ export interface SubscribeOnChainYieldsLockedProductRequest {
     readonly clientId?: string;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof OnChainYieldsApiSubscribeOnChainYieldsLockedProduct
      */
@@ -1399,14 +1476,16 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
     /**
      * Get On-chain Yields Locked Personal Left Quota
      *
-     * Weight: 50
+     * Weight(IP): 50
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get On-chain Yields Locked Personal Left Quota (USER_DATA)
      * @param {GetOnChainYieldsLockedPersonalLeftQuotaRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedPersonalLeftQuotaResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof OnChainYieldsApi
-     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/account/Get-Onchain-Locked-Personal-Left-Quota Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/on-chain-yields#get-on-chain-yields-locked-personal-left-quota Binance API Documentation}
      */
     public async getOnChainYieldsLockedPersonalLeftQuota(
         requestParameters: GetOnChainYieldsLockedPersonalLeftQuotaRequest
@@ -1431,16 +1510,19 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
     /**
      * Get available On-chain Yields Locked product list
      *
-     * Get available On-chain Yields Locked product list
+     * Weight(IP): 50
      *
-     * Weight: 50
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - Get available On-chain Yields Locked product list
      *
      * @summary Get On-chain Yields Locked Product List (USER_DATA)
      * @param {GetOnChainYieldsLockedProductListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedProductListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof OnChainYieldsApi
-     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/account/ Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/on-chain-yields#get-on-chain-yields-locked-product-list Binance API Documentation}
      */
     public async getOnChainYieldsLockedProductList(
         requestParameters: GetOnChainYieldsLockedProductListRequest = {}
@@ -1467,14 +1549,16 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
     /**
      * Get On-chain Yields Locked Product Position
      *
-     * Weight: 50
+     * Weight(IP): 50
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get On-chain Yields Locked Product Position (USER_DATA)
      * @param {GetOnChainYieldsLockedProductPositionRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedProductPositionResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof OnChainYieldsApi
-     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/account/Get-Onchain-Locked-Product-Position Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/on-chain-yields#get-on-chain-yields-locked-product-position Binance API Documentation}
      */
     public async getOnChainYieldsLockedProductPosition(
         requestParameters: GetOnChainYieldsLockedProductPositionRequest = {}
@@ -1503,19 +1587,25 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
     /**
      * Get On-chain Yields Locked Redemption Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 50
      *
-     * Weight: 50
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
      *
      * @summary Get On-chain Yields Locked Redemption Record (USER_DATA)
      * @param {GetOnChainYieldsLockedRedemptionRecordRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedRedemptionRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof OnChainYieldsApi
-     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/history/Get-Onchain-Locked-Redemption-Record Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/on-chain-yields#get-on-chain-yields-locked-redemption-record Binance API Documentation}
      */
     public async getOnChainYieldsLockedRedemptionRecord(
         requestParameters: GetOnChainYieldsLockedRedemptionRecordRequest = {}
@@ -1546,19 +1636,25 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
     /**
      * Get On-chain Yields Locked Rewards History
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 50
      *
-     * Weight: 50
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
      *
      * @summary Get On-chain Yields Locked Rewards History (USER_DATA)
      * @param {GetOnChainYieldsLockedRewardsHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof OnChainYieldsApi
-     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/history/Get-Onchain-Locked-Rewards-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/on-chain-yields#get-on-chain-yields-locked-rewards-history Binance API Documentation}
      */
     public async getOnChainYieldsLockedRewardsHistory(
         requestParameters: GetOnChainYieldsLockedRewardsHistoryRequest = {}
@@ -1588,14 +1684,16 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
     /**
      * Get On-chain Yields Locked Subscription Preview
      *
-     * Weight: 50
+     * Weight(IP): 50
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get On-chain Yields Locked Subscription Preview (USER_DATA)
      * @param {GetOnChainYieldsLockedSubscriptionPreviewRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedSubscriptionPreviewResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof OnChainYieldsApi
-     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/earn/ Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/on-chain-yields#get-on-chain-yields-locked-subscription-preview Binance API Documentation}
      */
     public async getOnChainYieldsLockedSubscriptionPreview(
         requestParameters: GetOnChainYieldsLockedSubscriptionPreviewRequest
@@ -1622,19 +1720,25 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
     /**
      * Get On-chain Yields Locked Subscription Record
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 50
      *
-     * Weight: 50
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
      *
      * @summary Get On-chain Yields Locked Subscription Record (USER_DATA)
      * @param {GetOnChainYieldsLockedSubscriptionRecordRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetOnChainYieldsLockedSubscriptionRecordResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof OnChainYieldsApi
-     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/history/ Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/on-chain-yields#get-on-chain-yields-locked-subscription-record Binance API Documentation}
      */
     public async getOnChainYieldsLockedSubscriptionRecord(
         requestParameters: GetOnChainYieldsLockedSubscriptionRecordRequest = {}
@@ -1665,14 +1769,16 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
     /**
      * On-chain Yields Account query
      *
-     * Weight: 50
+     * Weight(IP): 50
+     *
+     * Security Type: USER_DATA
      *
      * @summary On-chain Yields Account (USER_DATA)
      * @param {OnChainYieldsAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<OnChainYieldsAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof OnChainYieldsApi
-     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/account/Onchain-Account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/on-chain-yields#on-chain-yields-account Binance API Documentation}
      */
     public async onChainYieldsAccount(
         requestParameters: OnChainYieldsAccountRequest = {}
@@ -1695,16 +1801,19 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
     /**
      * Redeem On-chain Yields Locked Product
      *
-     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     * Weight(IP): 200
      *
-     * Weight: 1/3s per account
+     * Security Type: TRADE
+     *
+     * Notes:
+     * - You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
      *
      * @summary Redeem On-chain Yields Locked Product (TRADE)
      * @param {RedeemOnChainYieldsLockedProductRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<RedeemOnChainYieldsLockedProductResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof OnChainYieldsApi
-     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/earn/Redeem-Onchain-Locked-Product Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/on-chain-yields#redeem-on-chain-yields-locked-product Binance API Documentation}
      */
     public async redeemOnChainYieldsLockedProduct(
         requestParameters: RedeemOnChainYieldsLockedProductRequest
@@ -1730,14 +1839,16 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
     /**
      * Set On-chain Yield locked auto subscribe
      *
-     * Weight: 50
+     * Weight(IP): 50
      *
-     * @summary Set On-chain Yields Locked Auto Subscribe(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Set On-chain Yields Locked Auto Subscribe (USER_DATA)
      * @param {SetOnChainYieldsLockedAutoSubscribeRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SetOnChainYieldsLockedAutoSubscribeResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof OnChainYieldsApi
-     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/earn/Set-Onchain-Locked-Auto-Subscribe Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/on-chain-yields#set-on-chain-yields-locked-auto-subscribe Binance API Documentation}
      */
     public async setOnChainYieldsLockedAutoSubscribe(
         requestParameters: SetOnChainYieldsLockedAutoSubscribeRequest
@@ -1763,14 +1874,16 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
     /**
      * Set On-chain Yields redeem option for Locked product
      *
-     * Weight: 50
+     * Weight(IP): 50
      *
-     * @summary Set On-chain Yields Locked Product Redeem Option(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Set On-chain Yields Locked Product Redeem Option (USER_DATA)
      * @param {SetOnChainYieldsLockedProductRedeemOptionRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SetOnChainYieldsLockedProductRedeemOptionResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof OnChainYieldsApi
-     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/earn/Set-Onchain-Locked-Redeem-Option Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/on-chain-yields#set-on-chain-yields-locked-product-redeem-option Binance API Documentation}
      */
     public async setOnChainYieldsLockedProductRedeemOption(
         requestParameters: SetOnChainYieldsLockedProductRedeemOptionRequest
@@ -1796,16 +1909,19 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
     /**
      * Subscribe On-chain Yields Locked Product
      *
-     * You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     * Weight(IP): 200
      *
-     * Weight: 200
+     * Security Type: TRADE
      *
-     * @summary Subscribe On-chain Yields Locked Product(TRADE)
+     * Notes:
+     * - You need to open `Enable Spot & Margin Trading` permission for the API Key which requests this endpoint.
+     *
+     * @summary Subscribe On-chain Yields Locked Product (TRADE)
      * @param {SubscribeOnChainYieldsLockedProductRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SubscribeOnChainYieldsLockedProductResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof OnChainYieldsApi
-     * @see {@link https://developers.binance.com/docs/staking/on-chain-yields/earn/Subscribe-Onchain-Locked-Product Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/on-chain-yields#subscribe-on-chain-yields-locked-product Binance API Documentation}
      */
     public async subscribeOnChainYieldsLockedProduct(
         requestParameters: SubscribeOnChainYieldsLockedProductRequest
@@ -1832,4 +1948,20 @@ export class OnChainYieldsApi implements OnChainYieldsApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum SetOnChainYieldsLockedProductRedeemOptionRedeemToEnum {
+    SPOT = 'SPOT',
+    FLEXIBLE = 'FLEXIBLE',
+}
+
+export enum SubscribeOnChainYieldsLockedProductSourceAccountEnum {
+    SPOT = 'SPOT',
+    FUND = 'FUND',
+    ALL = 'ALL',
+}
+
+export enum SubscribeOnChainYieldsLockedProductRedeemToEnum {
+    SPOT = 'SPOT',
+    FLEXIBLE = 'FLEXIBLE',
 }

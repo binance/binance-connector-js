@@ -1,7 +1,7 @@
 /**
- * Binance Staking REST API
+ * Staking REST API
  *
- * OpenAPI Specification for the Binance Staking REST API
+ * Subscribe to staking products, track positions, and query rewards via the Binance Staking API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,7 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { EthStakingApi } from '../../../src/rest-api';
+import { EthStakingApi, RedeemEthAssetEnum } from '../../../src/rest-api';
 import {
     EthStakingAccountRequest,
     GetCurrentEthStakingQuotaRequest,
@@ -243,7 +243,7 @@ describe('EthStakingApi', () => {
 
         it('should execute getEthRedemptionHistory() successfully with optional parameters', async () => {
             const params: GetEthRedemptionHistoryRequest = {
-                redeemId: 1,
+                redeemId: 1234567,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -336,7 +336,7 @@ describe('EthStakingApi', () => {
 
         it('should execute getEthStakingHistory() successfully with optional parameters', async () => {
             const params: GetEthStakingHistoryRequest = {
-                purchaseId: 1,
+                purchaseId: 1234567,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -751,9 +751,9 @@ describe('EthStakingApi', () => {
                 JSONStringify({
                     success: true,
                     ethAmount: '0.23092091',
+                    redeemId: 1234567,
                     conversionRatio: '1.00121234',
                     arrivalTime: 1575018510000,
-                    redeemId: 1234567,
                 })
             );
 
@@ -774,7 +774,7 @@ describe('EthStakingApi', () => {
         it('should execute redeemEth() successfully with optional parameters', async () => {
             const params: RedeemEthRequest = {
                 amount: 1.0,
-                asset: 'BETH',
+                asset: RedeemEthAssetEnum.WBETH,
                 recvWindow: 5000,
             };
 
@@ -782,9 +782,9 @@ describe('EthStakingApi', () => {
                 JSONStringify({
                     success: true,
                     ethAmount: '0.23092091',
+                    redeemId: 1234567,
                     conversionRatio: '1.00121234',
                     arrivalTime: 1575018510000,
-                    redeemId: 1234567,
                 })
             );
 
@@ -844,8 +844,8 @@ describe('EthStakingApi', () => {
                 JSONStringify({
                     success: true,
                     wbethAmount: '0.23092091',
-                    conversionRatio: '1.001212342342',
                     purchaseId: 1234567,
+                    conversionRatio: '1.001212342342',
                 })
             );
 
@@ -873,8 +873,8 @@ describe('EthStakingApi', () => {
                 JSONStringify({
                     success: true,
                     wbethAmount: '0.23092091',
-                    conversionRatio: '1.001212342342',
                     purchaseId: 1234567,
+                    conversionRatio: '1.001212342342',
                 })
             );
 

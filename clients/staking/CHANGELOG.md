@@ -1,5 +1,35 @@
 # Changelog
 
+## 9.0.0 - 2026-07-13
+
+### Changed (6)
+
+- Modified parameter `asset`:
+  - enum added: `WBETH`, `BETH`
+  - affected methods:
+    - `redeemEth()` (`POST /sapi/v1/eth-staking/eth/redeem`)
+- Modified parameter `positionId`:
+  - type `integer` → `string`
+  - affected methods:
+    - `getOnChainYieldsLockedRedemptionRecord()` (`GET /sapi/v1/onchain-yields/locked/history/redemptionRecord`)
+    - `getOnChainYieldsLockedProductPosition()` (`GET /sapi/v1/onchain-yields/locked/position`)
+- Modified parameter `redeemTo`:
+  - enum added: `SPOT`, `FLEXIBLE`
+  - affected methods:
+    - `setOnChainYieldsLockedProductRedeemOption()` (`POST /sapi/v1/onchain-yields/locked/setRedeemOption`)
+- Modified parameter `redeemTo`:
+  - enum added: `SPOT`, `FLEXIBLE`
+  - affected methods:
+    - `subscribeOnChainYieldsLockedProduct()` (`POST /sapi/v1/onchain-yields/locked/subscribe`)
+- Modified parameter `sourceAccount`:
+  - enum added: `SPOT`, `FUND`, `ALL`
+  - affected methods:
+    - `subscribeOnChainYieldsLockedProduct()` (`POST /sapi/v1/onchain-yields/locked/subscribe`)
+- Modified parameter `type`:
+  - enum added: `CLAIM`, `DISTRIBUTE`
+  - affected methods:
+    - `getBoostRewardsHistory()` (`GET /sapi/v1/sol-staking/sol/history/boostRewardsHistory`)
+
 ## 8.0.9 - 2026-06-18
 
 ### Changed (2)

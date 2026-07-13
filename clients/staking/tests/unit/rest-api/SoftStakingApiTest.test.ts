@@ -1,7 +1,7 @@
 /**
- * Binance Staking REST API
+ * Staking REST API
  *
- * OpenAPI Specification for the Binance Staking REST API
+ * Subscribe to staking products, track positions, and query rewards via the Binance Staking API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -56,14 +56,6 @@ describe('SoftStakingApi', () => {
                             stakedAmount: '2.14',
                             totalProfit: '0.00171234',
                         },
-                        {
-                            asset: 'SUI',
-                            minAmount: '100',
-                            maxCap: '50000',
-                            apr: '0.01',
-                            stakedAmount: '100',
-                            totalProfit: '0.1',
-                        },
                     ],
                     total: 2,
                 })
@@ -85,7 +77,7 @@ describe('SoftStakingApi', () => {
 
         it('should execute getSoftStakingProductList() successfully with optional parameters', async () => {
             const params: GetSoftStakingProductListRequest = {
-                asset: 'BETH',
+                asset: 'BTC',
                 current: 1,
                 size: 10,
                 recvWindow: 5000,
@@ -103,14 +95,6 @@ describe('SoftStakingApi', () => {
                             apr: '0.0015',
                             stakedAmount: '2.14',
                             totalProfit: '0.00171234',
-                        },
-                        {
-                            asset: 'SUI',
-                            minAmount: '100',
-                            maxCap: '50000',
-                            apr: '0.01',
-                            stakedAmount: '100',
-                            totalProfit: '0.1',
                         },
                     ],
                     total: 2,
@@ -161,13 +145,6 @@ describe('SoftStakingApi', () => {
                             avgAmount: '2.14',
                             time: 1754007978000,
                         },
-                        {
-                            asset: 'SUI',
-                            rewards: '0.00274257',
-                            rewardAsset: 'SUI',
-                            avgAmount: '100',
-                            time: 1754007978000,
-                        },
                     ],
                     total: 2,
                 })
@@ -189,7 +166,7 @@ describe('SoftStakingApi', () => {
 
         it('should execute getSoftStakingRewardsHistory() successfully with optional parameters', async () => {
             const params: GetSoftStakingRewardsHistoryRequest = {
-                asset: 'BETH',
+                asset: 'BTC',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -205,13 +182,6 @@ describe('SoftStakingApi', () => {
                             rewards: '0.00000557',
                             rewardAsset: 'BNB',
                             avgAmount: '2.14',
-                            time: 1754007978000,
-                        },
-                        {
-                            asset: 'SUI',
-                            rewards: '0.00274257',
-                            rewardAsset: 'SUI',
-                            avgAmount: '100',
                             time: 1754007978000,
                         },
                     ],

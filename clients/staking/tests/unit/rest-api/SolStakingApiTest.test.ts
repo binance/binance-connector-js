@@ -1,7 +1,7 @@
 /**
- * Binance Staking REST API
+ * Staking REST API
  *
- * OpenAPI Specification for the Binance Staking REST API
+ * Subscribe to staking products, track positions, and query rewards via the Binance Staking API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,7 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { SolStakingApi } from '../../../src/rest-api';
+import { SolStakingApi, GetBoostRewardsHistoryTypeEnum } from '../../../src/rest-api';
 import {
     ClaimBoostRewardsRequest,
     GetBnsolRateHistoryRequest,
@@ -120,10 +120,7 @@ describe('SolStakingApi', () => {
                         {
                             annualPercentageRate: '0.00006408',
                             exchangeRate: '1.001212343432',
-                            boostRewards: [
-                                { boostAPR: '0.12000000', rewardsAsset: 'SOL' },
-                                { boostAPR: '0.00200000', rewardsAsset: 'BNB' },
-                            ],
+                            boostRewards: [{ boostAPR: '0.12000000', rewardsAsset: 'SOL' }],
                             time: 1577233578000,
                         },
                     ],
@@ -160,10 +157,7 @@ describe('SolStakingApi', () => {
                         {
                             annualPercentageRate: '0.00006408',
                             exchangeRate: '1.001212343432',
-                            boostRewards: [
-                                { boostAPR: '0.12000000', rewardsAsset: 'SOL' },
-                                { boostAPR: '0.00200000', rewardsAsset: 'BNB' },
-                            ],
+                            boostRewards: [{ boostAPR: '0.12000000', rewardsAsset: 'SOL' }],
                             time: 1577233578000,
                         },
                     ],
@@ -293,7 +287,7 @@ describe('SolStakingApi', () => {
     describe('getBoostRewardsHistory()', () => {
         it('should execute getBoostRewardsHistory() successfully with required parameters only', async () => {
             const params: GetBoostRewardsHistoryRequest = {
-                type: 'CLAIM',
+                type: GetBoostRewardsHistoryTypeEnum.CLAIM,
             };
 
             mockResponse = JSONParse(
@@ -327,7 +321,7 @@ describe('SolStakingApi', () => {
 
         it('should execute getBoostRewardsHistory() successfully with optional parameters', async () => {
             const params: GetBoostRewardsHistoryRequest = {
-                type: 'CLAIM',
+                type: GetBoostRewardsHistoryTypeEnum.CLAIM,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -366,7 +360,7 @@ describe('SolStakingApi', () => {
 
         it('should throw RequiredError when type is missing', async () => {
             const _params: GetBoostRewardsHistoryRequest = {
-                type: 'CLAIM',
+                type: GetBoostRewardsHistoryTypeEnum.CLAIM,
             };
             const params = Object.assign({ ..._params });
             delete params?.type;
@@ -378,7 +372,7 @@ describe('SolStakingApi', () => {
 
         it('should throw an error when server is returning an error', async () => {
             const params: GetBoostRewardsHistoryRequest = {
-                type: 'CLAIM',
+                type: GetBoostRewardsHistoryTypeEnum.CLAIM,
             };
 
             const errorResponse = {
@@ -434,7 +428,7 @@ describe('SolStakingApi', () => {
 
         it('should execute getSolRedemptionHistory() successfully with optional parameters', async () => {
             const params: GetSolRedemptionHistoryRequest = {
-                redeemId: 1,
+                redeemId: 1234567,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -527,7 +521,7 @@ describe('SolStakingApi', () => {
 
         it('should execute getSolStakingHistory() successfully with optional parameters', async () => {
             const params: GetSolStakingHistoryRequest = {
-                purchaseId: 1,
+                purchaseId: 1234567,
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -670,10 +664,7 @@ describe('SolStakingApi', () => {
     describe('getUnclaimedRewards()', () => {
         it('should execute getUnclaimedRewards() successfully with required parameters only', async () => {
             mockResponse = JSONParse(
-                JSONStringify([
-                    { amount: '1.00000011', rewardsAsset: 'SOL' },
-                    { amount: '2.00202321', rewardsAsset: 'BNB' },
-                ])
+                JSONStringify([{ amount: '1.00000011', rewardsAsset: 'SOL' }])
             );
 
             const spy = jest.spyOn(client, 'getUnclaimedRewards').mockReturnValue(
@@ -696,10 +687,7 @@ describe('SolStakingApi', () => {
             };
 
             mockResponse = JSONParse(
-                JSONStringify([
-                    { amount: '1.00000011', rewardsAsset: 'SOL' },
-                    { amount: '2.00202321', rewardsAsset: 'BNB' },
-                ])
+                JSONStringify([{ amount: '1.00000011', rewardsAsset: 'SOL' }])
             );
 
             const spy = jest.spyOn(client, 'getUnclaimedRewards').mockReturnValue(
@@ -742,9 +730,9 @@ describe('SolStakingApi', () => {
                 JSONStringify({
                     success: true,
                     solAmount: '0.23092091',
+                    redeemId: 1234567,
                     exchangeRate: '1.00121234',
                     arrivalTime: 1575018510000,
-                    redeemId: 1234567,
                 })
             );
 
@@ -772,9 +760,9 @@ describe('SolStakingApi', () => {
                 JSONStringify({
                     success: true,
                     solAmount: '0.23092091',
+                    redeemId: 1234567,
                     exchangeRate: '1.00121234',
                     arrivalTime: 1575018510000,
-                    redeemId: 1234567,
                 })
             );
 
@@ -901,8 +889,8 @@ describe('SolStakingApi', () => {
                 JSONStringify({
                     success: true,
                     bnsolAmount: '0.23092091',
-                    exchangeRate: '1.001212342342',
                     purchaseId: 1234567,
+                    exchangeRate: '1.001212342342',
                 })
             );
 
@@ -930,8 +918,8 @@ describe('SolStakingApi', () => {
                 JSONStringify({
                     success: true,
                     bnsolAmount: '0.23092091',
-                    exchangeRate: '1.001212342342',
                     purchaseId: 1234567,
+                    exchangeRate: '1.001212342342',
                 })
             );
 

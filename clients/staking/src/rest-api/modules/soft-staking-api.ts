@@ -1,7 +1,7 @@
 /**
- * Binance Staking REST API
+ * Staking REST API
  *
- * OpenAPI Specification for the Binance Staking REST API
+ * Subscribe to staking products, track positions, and query rewards via the Binance Staking API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -33,13 +32,15 @@ const SoftStakingApiAxiosParamCreator = function (configuration: ConfigurationRe
         /**
          * Get the available Soft Staking product list.
          *
-         * Weight: 50
+         * Weight(IP): 50
+         *
+         * Security Type: USER_DATA
          *
          * @summary Get Soft Staking Product List (USER_DATA)
-         * @param {string} [asset] WBETH or BETH, default to BETH
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10, Max:100
-         * @param {number | bigint} [recvWindow]
+         * @param {string} [asset]
+         * @param {number | bigint} [current] Currently querying page
+         * @param {number | bigint} [size]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -79,20 +80,28 @@ const SoftStakingApiAxiosParamCreator = function (configuration: ConfigurationRe
             };
         },
         /**
-         * * The time between `startTime` and `endTime` cannot be longer than 3 months.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-         * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         * Get Soft Staking Rewards History
          *
-         * Weight: 50
+         * Weight(IP): 50
          *
-         * @summary Get Soft Staking Rewards History(USER_DATA)
-         * @param {string} [asset] WBETH or BETH, default to BETH
+         * Security Type: USER_DATA
+         *
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, the next 30 days' data beginning from `startTime` will be returned.
+         * - If `endTime` is sent but
+         * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         *
+         * @summary Get Soft Staking Rewards History (USER_DATA)
+         * @param {string} [asset]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10, Max:100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Currently querying page
+         * @param {number | bigint} [size]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -142,11 +151,13 @@ const SoftStakingApiAxiosParamCreator = function (configuration: ConfigurationRe
         /**
          * Enable or disable Soft Staking.
          *
-         * Weight: 50
+         * Weight(IP): 50
+         *
+         * Security Type: USER_DATA
          *
          * @summary Set Soft Staking (USER_DATA)
-         * @param {boolean} softStaking true or false
-         * @param {number | bigint} [recvWindow]
+         * @param {boolean} softStaking
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -191,7 +202,9 @@ export interface SoftStakingApiInterface {
     /**
      * Get the available Soft Staking product list.
      *
-     * Weight: 50
+     * Weight(IP): 50
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Soft Staking Product List (USER_DATA)
      * @param {GetSoftStakingProductListRequest} requestParameters Request parameters.
@@ -203,14 +216,22 @@ export interface SoftStakingApiInterface {
         requestParameters?: GetSoftStakingProductListRequest
     ): Promise<RestApiResponse<GetSoftStakingProductListResponse>>;
     /**
-     * * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Get Soft Staking Rewards History
      *
-     * Weight: 50
+     * Weight(IP): 50
      *
-     * @summary Get Soft Staking Rewards History(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Soft Staking Rewards History (USER_DATA)
      * @param {GetSoftStakingRewardsHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -222,7 +243,9 @@ export interface SoftStakingApiInterface {
     /**
      * Enable or disable Soft Staking.
      *
-     * Weight: 50
+     * Weight(IP): 50
+     *
+     * Security Type: USER_DATA
      *
      * @summary Set Soft Staking (USER_DATA)
      * @param {SetSoftStakingRequest} requestParameters Request parameters.
@@ -241,28 +264,28 @@ export interface SoftStakingApiInterface {
  */
 export interface GetSoftStakingProductListRequest {
     /**
-     * WBETH or BETH, default to BETH
+     *
      * @type {string}
      * @memberof SoftStakingApiGetSoftStakingProductList
      */
     readonly asset?: string;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     * Currently querying page
      * @type {number | bigint}
      * @memberof SoftStakingApiGetSoftStakingProductList
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10, Max:100
+     *
      * @type {number | bigint}
      * @memberof SoftStakingApiGetSoftStakingProductList
      */
     readonly size?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof SoftStakingApiGetSoftStakingProductList
      */
@@ -275,7 +298,7 @@ export interface GetSoftStakingProductListRequest {
  */
 export interface GetSoftStakingRewardsHistoryRequest {
     /**
-     * WBETH or BETH, default to BETH
+     *
      * @type {string}
      * @memberof SoftStakingApiGetSoftStakingRewardsHistory
      */
@@ -296,21 +319,21 @@ export interface GetSoftStakingRewardsHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     * Currently querying page
      * @type {number | bigint}
      * @memberof SoftStakingApiGetSoftStakingRewardsHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10, Max:100
+     *
      * @type {number | bigint}
      * @memberof SoftStakingApiGetSoftStakingRewardsHistory
      */
     readonly size?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof SoftStakingApiGetSoftStakingRewardsHistory
      */
@@ -323,14 +346,14 @@ export interface GetSoftStakingRewardsHistoryRequest {
  */
 export interface SetSoftStakingRequest {
     /**
-     * true or false
+     *
      * @type {boolean}
      * @memberof SoftStakingApiSetSoftStaking
      */
     readonly softStaking: boolean;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof SoftStakingApiSetSoftStaking
      */
@@ -353,14 +376,16 @@ export class SoftStakingApi implements SoftStakingApiInterface {
     /**
      * Get the available Soft Staking product list.
      *
-     * Weight: 50
+     * Weight(IP): 50
+     *
+     * Security Type: USER_DATA
      *
      * @summary Get Soft Staking Product List (USER_DATA)
      * @param {GetSoftStakingProductListRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSoftStakingProductListResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof SoftStakingApi
-     * @see {@link https://developers.binance.com/docs/staking/soft-staking/ Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/soft-staking#get-soft-staking-product-list Binance API Documentation}
      */
     public async getSoftStakingProductList(
         requestParameters: GetSoftStakingProductListRequest = {}
@@ -384,19 +409,27 @@ export class SoftStakingApi implements SoftStakingApiInterface {
     }
 
     /**
-     * * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Get Soft Staking Rewards History
      *
-     * Weight: 50
+     * Weight(IP): 50
      *
-     * @summary Get Soft Staking Rewards History(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Soft Staking Rewards History (USER_DATA)
      * @param {GetSoftStakingRewardsHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSoftStakingRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof SoftStakingApi
-     * @see {@link https://developers.binance.com/docs/staking/soft-staking/Get-Soft-Staking-Rewards-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/soft-staking#get-soft-staking-rewards-history Binance API Documentation}
      */
     public async getSoftStakingRewardsHistory(
         requestParameters: GetSoftStakingRewardsHistoryRequest = {}
@@ -424,14 +457,16 @@ export class SoftStakingApi implements SoftStakingApiInterface {
     /**
      * Enable or disable Soft Staking.
      *
-     * Weight: 50
+     * Weight(IP): 50
+     *
+     * Security Type: USER_DATA
      *
      * @summary Set Soft Staking (USER_DATA)
      * @param {SetSoftStakingRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SetSoftStakingResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof SoftStakingApi
-     * @see {@link https://developers.binance.com/docs/staking/soft-staking/Set-Soft-Staking Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/soft-staking#set-soft-staking Binance API Documentation}
      */
     public async setSoftStaking(
         requestParameters: SetSoftStakingRequest

@@ -1,4 +1,4 @@
-import { Staking, STAKING_REST_API_PROD_URL } from '../../../src';
+import { Staking, StakingRestAPI, STAKING_REST_API_PROD_URL } from '../../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -10,7 +10,7 @@ const client = new Staking({ configurationRestAPI });
 async function getBoostRewardsHistory() {
     try {
         const response = await client.restAPI.getBoostRewardsHistory({
-            type: 'CLAIM',
+            type: StakingRestAPI.GetBoostRewardsHistoryTypeEnum.CLAIM,
         });
 
         const rateLimits = response.rateLimits!;

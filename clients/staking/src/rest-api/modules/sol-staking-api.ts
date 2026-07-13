@@ -1,7 +1,7 @@
 /**
- * Binance Staking REST API
+ * Staking REST API
  *
- * OpenAPI Specification for the Binance Staking REST API
+ * Subscribe to staking products, track positions, and query rewards via the Binance Staking API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -41,12 +40,15 @@ const SolStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Claim Boost APR Airdrop Rewards
          *
-         * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: TRADE
          *
-         * @summary Claim Boost Rewards(TRADE)
-         * @param {number | bigint} [recvWindow]
+         * Notes:
+         * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+         *
+         * @summary Claim Boost Rewards (TRADE)
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -74,19 +76,25 @@ const SolStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get BNSOL Rate History
          *
-         * The time between `startTime` and `endTime` cannot be longer than 3 months.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-         * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
          *
-         * @summary Get BNSOL Rate History(USER_DATA)
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, the next 30 days' data beginning from `startTime` will be returned.
+         * - If `endTime` is sent but
+         * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         *
+         * @summary Get BNSOL Rate History (USER_DATA)
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10, Max:100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Currently querying page
+         * @param {number | bigint} [size]
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
@@ -132,19 +140,25 @@ const SolStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get BNSOL rewards history
          *
-         * The time between `startTime` and `endTime` cannot be longer than 3 months.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-         * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
          *
-         * @summary Get BNSOL rewards history(USER_DATA)
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, the next 30 days' data beginning from `startTime` will be returned.
+         * - If `endTime` is sent but
+         * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         *
+         * @summary Get BNSOL rewards history (USER_DATA)
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10, Max:100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Currently querying page
+         * @param {number | bigint} [size]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -190,25 +204,31 @@ const SolStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get Boost rewards history
          *
-         * The time between `startTime` and `endTime` cannot be longer than 3 months.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-         * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
          *
-         * @summary Get Boost Rewards History(USER_DATA)
-         * @param {string} type "CLAIM", "DISTRIBUTE", default "CLAIM"
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, the next 30 days' data beginning from `startTime` will be returned.
+         * - If `endTime` is sent but
+         * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         *
+         * @summary Get Boost Rewards History (USER_DATA)
+         * @param {GetBoostRewardsHistoryTypeEnum} type
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10, Max:100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Currently querying page
+         * @param {number | bigint} [size]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
         getBoostRewardsHistory: async (
-            type: string,
+            type: GetBoostRewardsHistoryTypeEnum,
             startTime?: number | bigint,
             endTime?: number | bigint,
             current?: number | bigint,
@@ -256,20 +276,26 @@ const SolStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get SOL redemption history
          *
-         * The time between `startTime` and `endTime` cannot be longer than 3 months.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-         * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
          *
-         * @summary Get SOL redemption history(USER_DATA)
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, the next 30 days' data beginning from `startTime` will be returned.
+         * - If `endTime` is sent but
+         * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         *
+         * @summary Get SOL redemption history (USER_DATA)
          * @param {number | bigint} [redeemId]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10, Max:100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Currently querying page
+         * @param {number | bigint} [size]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -319,20 +345,26 @@ const SolStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get SOL staking history
          *
-         * The time between `startTime` and `endTime` cannot be longer than 3 months.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-         * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
          *
-         * @summary Get SOL staking history(USER_DATA)
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, the next 30 days' data beginning from `startTime` will be returned.
+         * - If `endTime` is sent but
+         * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         *
+         * @summary Get SOL staking history (USER_DATA)
          * @param {number | bigint} [purchaseId]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10, Max:100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Currently querying page
+         * @param {number | bigint} [size]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -382,10 +414,12 @@ const SolStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get SOL staking quota
          *
-         * Weight: 150
+         * Weight(IP): 150
          *
-         * @summary Get SOL staking quota details(USER_DATA)
-         * @param {number | bigint} [recvWindow]
+         * Security Type: USER_DATA
+         *
+         * @summary Get SOL staking quota details (USER_DATA)
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
@@ -413,15 +447,21 @@ const SolStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get Unclaimed rewards
          *
-         * The time between `startTime` and `endTime` cannot be longer than 3 months.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-         * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
          *
-         * @summary Get Unclaimed Rewards(USER_DATA)
-         * @param {number | bigint} [recvWindow]
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, the next 30 days' data beginning from `startTime` will be returned.
+         * - If `endTime` is sent but
+         * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         *
+         * @summary Get Unclaimed Rewards (USER_DATA)
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -449,13 +489,16 @@ const SolStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Redeem BNSOL get SOL
          *
-         * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: TRADE
          *
-         * @summary Redeem SOL(TRADE)
-         * @param {number} amount Amount in SOL.
-         * @param {number | bigint} [recvWindow]
+         * Notes:
+         * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+         *
+         * @summary Redeem SOL (TRADE)
+         * @param {number} amount Amount in BNSOL, limit 8 decimals
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -489,10 +532,12 @@ const SolStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * SOL Staking account
          *
-         * Weight: 150
+         * Weight(IP): 150
          *
-         * @summary SOL Staking account(USER_DATA)
-         * @param {number | bigint} [recvWindow]
+         * Security Type: USER_DATA
+         *
+         * @summary SOL Staking account (USER_DATA)
+         * @param {number | bigint} [recvWindow] The value cannot be greater than 60000
          *
          * @throws {RequiredError}
          */
@@ -520,13 +565,16 @@ const SolStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Subscribe SOL Staking
          *
-         * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: TRADE
          *
-         * @summary Subscribe SOL Staking(TRADE)
+         * Notes:
+         * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+         *
+         * @summary Subscribe SOL Staking (TRADE)
          * @param {number} amount Amount in SOL.
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -571,11 +619,14 @@ export interface SolStakingApiInterface {
     /**
      * Claim Boost APR Airdrop Rewards
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Claim Boost Rewards(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     *
+     * @summary Claim Boost Rewards (TRADE)
      * @param {ClaimBoostRewardsRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -587,14 +638,20 @@ export interface SolStakingApiInterface {
     /**
      * Get BNSOL Rate History
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get BNSOL Rate History(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get BNSOL Rate History (USER_DATA)
      * @param {GetBnsolRateHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -606,14 +663,20 @@ export interface SolStakingApiInterface {
     /**
      * Get BNSOL rewards history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get BNSOL rewards history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get BNSOL rewards history (USER_DATA)
      * @param {GetBnsolRewardsHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -625,14 +688,20 @@ export interface SolStakingApiInterface {
     /**
      * Get Boost rewards history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Boost Rewards History(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Boost Rewards History (USER_DATA)
      * @param {GetBoostRewardsHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -644,14 +713,20 @@ export interface SolStakingApiInterface {
     /**
      * Get SOL redemption history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get SOL redemption history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get SOL redemption history (USER_DATA)
      * @param {GetSolRedemptionHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -663,14 +738,20 @@ export interface SolStakingApiInterface {
     /**
      * Get SOL staking history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get SOL staking history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get SOL staking history (USER_DATA)
      * @param {GetSolStakingHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -682,9 +763,11 @@ export interface SolStakingApiInterface {
     /**
      * Get SOL staking quota
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get SOL staking quota details(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get SOL staking quota details (USER_DATA)
      * @param {GetSolStakingQuotaDetailsRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -696,14 +779,20 @@ export interface SolStakingApiInterface {
     /**
      * Get Unclaimed rewards
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Unclaimed Rewards(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Unclaimed Rewards (USER_DATA)
      * @param {GetUnclaimedRewardsRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -715,11 +804,14 @@ export interface SolStakingApiInterface {
     /**
      * Redeem BNSOL get SOL
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Redeem SOL(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     *
+     * @summary Redeem SOL (TRADE)
      * @param {RedeemSolRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -729,9 +821,11 @@ export interface SolStakingApiInterface {
     /**
      * SOL Staking account
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary SOL Staking account(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary SOL Staking account (USER_DATA)
      * @param {SolStakingAccountRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -743,11 +837,14 @@ export interface SolStakingApiInterface {
     /**
      * Subscribe SOL Staking
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Subscribe SOL Staking(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     *
+     * @summary Subscribe SOL Staking (TRADE)
      * @param {SubscribeSolStakingRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -764,7 +861,7 @@ export interface SolStakingApiInterface {
  */
 export interface ClaimBoostRewardsRequest {
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof SolStakingApiClaimBoostRewards
      */
@@ -791,21 +888,21 @@ export interface GetBnsolRateHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     * Currently querying page
      * @type {number | bigint}
      * @memberof SolStakingApiGetBnsolRateHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10, Max:100
+     *
      * @type {number | bigint}
      * @memberof SolStakingApiGetBnsolRateHistory
      */
     readonly size?: number | bigint;
 
     /**
-     *
+     * The value cannot be greater than 60000
      * @type {number | bigint}
      * @memberof SolStakingApiGetBnsolRateHistory
      */
@@ -832,21 +929,21 @@ export interface GetBnsolRewardsHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     * Currently querying page
      * @type {number | bigint}
      * @memberof SolStakingApiGetBnsolRewardsHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10, Max:100
+     *
      * @type {number | bigint}
      * @memberof SolStakingApiGetBnsolRewardsHistory
      */
     readonly size?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof SolStakingApiGetBnsolRewardsHistory
      */
@@ -859,11 +956,11 @@ export interface GetBnsolRewardsHistoryRequest {
  */
 export interface GetBoostRewardsHistoryRequest {
     /**
-     * "CLAIM", "DISTRIBUTE", default "CLAIM"
-     * @type {string}
+     *
+     * @type {'CLAIM' | 'DISTRIBUTE'}
      * @memberof SolStakingApiGetBoostRewardsHistory
      */
-    readonly type: string;
+    readonly type: GetBoostRewardsHistoryTypeEnum;
 
     /**
      *
@@ -880,21 +977,21 @@ export interface GetBoostRewardsHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     * Currently querying page
      * @type {number | bigint}
      * @memberof SolStakingApiGetBoostRewardsHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10, Max:100
+     *
      * @type {number | bigint}
      * @memberof SolStakingApiGetBoostRewardsHistory
      */
     readonly size?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof SolStakingApiGetBoostRewardsHistory
      */
@@ -928,21 +1025,21 @@ export interface GetSolRedemptionHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     * Currently querying page
      * @type {number | bigint}
      * @memberof SolStakingApiGetSolRedemptionHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10, Max:100
+     *
      * @type {number | bigint}
      * @memberof SolStakingApiGetSolRedemptionHistory
      */
     readonly size?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof SolStakingApiGetSolRedemptionHistory
      */
@@ -976,21 +1073,21 @@ export interface GetSolStakingHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     * Currently querying page
      * @type {number | bigint}
      * @memberof SolStakingApiGetSolStakingHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10, Max:100
+     *
      * @type {number | bigint}
      * @memberof SolStakingApiGetSolStakingHistory
      */
     readonly size?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof SolStakingApiGetSolStakingHistory
      */
@@ -1003,7 +1100,7 @@ export interface GetSolStakingHistoryRequest {
  */
 export interface GetSolStakingQuotaDetailsRequest {
     /**
-     *
+     * The value cannot be greater than 60000
      * @type {number | bigint}
      * @memberof SolStakingApiGetSolStakingQuotaDetails
      */
@@ -1016,7 +1113,7 @@ export interface GetSolStakingQuotaDetailsRequest {
  */
 export interface GetUnclaimedRewardsRequest {
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof SolStakingApiGetUnclaimedRewards
      */
@@ -1029,14 +1126,14 @@ export interface GetUnclaimedRewardsRequest {
  */
 export interface RedeemSolRequest {
     /**
-     * Amount in SOL.
+     * Amount in BNSOL, limit 8 decimals
      * @type {number}
      * @memberof SolStakingApiRedeemSol
      */
     readonly amount: number;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof SolStakingApiRedeemSol
      */
@@ -1049,7 +1146,7 @@ export interface RedeemSolRequest {
  */
 export interface SolStakingAccountRequest {
     /**
-     *
+     * The value cannot be greater than 60000
      * @type {number | bigint}
      * @memberof SolStakingApiSolStakingAccount
      */
@@ -1069,7 +1166,7 @@ export interface SubscribeSolStakingRequest {
     readonly amount: number;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof SolStakingApiSubscribeSolStaking
      */
@@ -1092,16 +1189,19 @@ export class SolStakingApi implements SolStakingApiInterface {
     /**
      * Claim Boost APR Airdrop Rewards
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Claim Boost Rewards(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     *
+     * @summary Claim Boost Rewards (TRADE)
      * @param {ClaimBoostRewardsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<ClaimBoostRewardsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof SolStakingApi
-     * @see {@link https://developers.binance.com/docs/staking/sol-staking/staking/Claim-Boost-Rewards Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/sol-staking#claim-boost-rewards Binance API Documentation}
      */
     public async claimBoostRewards(
         requestParameters: ClaimBoostRewardsRequest = {}
@@ -1124,19 +1224,25 @@ export class SolStakingApi implements SolStakingApiInterface {
     /**
      * Get BNSOL Rate History
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get BNSOL Rate History(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get BNSOL Rate History (USER_DATA)
      * @param {GetBnsolRateHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetBnsolRateHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof SolStakingApi
-     * @see {@link https://developers.binance.com/docs/staking/sol-staking/history/Get-BNSOL-Rate-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/sol-staking#get-bnsol-rate-history Binance API Documentation}
      */
     public async getBnsolRateHistory(
         requestParameters: GetBnsolRateHistoryRequest = {}
@@ -1163,19 +1269,25 @@ export class SolStakingApi implements SolStakingApiInterface {
     /**
      * Get BNSOL rewards history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get BNSOL rewards history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get BNSOL rewards history (USER_DATA)
      * @param {GetBnsolRewardsHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetBnsolRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof SolStakingApi
-     * @see {@link https://developers.binance.com/docs/staking/sol-staking/history/Get-BNSOL-rewards-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/sol-staking#get-bnsol-rewards-history Binance API Documentation}
      */
     public async getBnsolRewardsHistory(
         requestParameters: GetBnsolRewardsHistoryRequest = {}
@@ -1202,19 +1314,25 @@ export class SolStakingApi implements SolStakingApiInterface {
     /**
      * Get Boost rewards history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Boost Rewards History(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Boost Rewards History (USER_DATA)
      * @param {GetBoostRewardsHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetBoostRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof SolStakingApi
-     * @see {@link https://developers.binance.com/docs/staking/sol-staking/history/Get-Boost-Rewards-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/sol-staking#get-boost-rewards-history Binance API Documentation}
      */
     public async getBoostRewardsHistory(
         requestParameters: GetBoostRewardsHistoryRequest
@@ -1242,19 +1360,25 @@ export class SolStakingApi implements SolStakingApiInterface {
     /**
      * Get SOL redemption history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get SOL redemption history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get SOL redemption history (USER_DATA)
      * @param {GetSolRedemptionHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSolRedemptionHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof SolStakingApi
-     * @see {@link https://developers.binance.com/docs/staking/sol-staking/history/Get-SOL-redemption-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/sol-staking#get-sol-redemption-history Binance API Documentation}
      */
     public async getSolRedemptionHistory(
         requestParameters: GetSolRedemptionHistoryRequest = {}
@@ -1282,19 +1406,25 @@ export class SolStakingApi implements SolStakingApiInterface {
     /**
      * Get SOL staking history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get SOL staking history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get SOL staking history (USER_DATA)
      * @param {GetSolStakingHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSolStakingHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof SolStakingApi
-     * @see {@link https://developers.binance.com/docs/staking/sol-staking/history/Get-SOL-staking-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/sol-staking#get-sol-staking-history Binance API Documentation}
      */
     public async getSolStakingHistory(
         requestParameters: GetSolStakingHistoryRequest = {}
@@ -1322,14 +1452,16 @@ export class SolStakingApi implements SolStakingApiInterface {
     /**
      * Get SOL staking quota
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get SOL staking quota details(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get SOL staking quota details (USER_DATA)
      * @param {GetSolStakingQuotaDetailsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetSolStakingQuotaDetailsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof SolStakingApi
-     * @see {@link https://developers.binance.com/docs/staking/sol-staking/account/Get-SOL-staking-quota-details Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/sol-staking#get-sol-staking-quota-details Binance API Documentation}
      */
     public async getSolStakingQuotaDetails(
         requestParameters: GetSolStakingQuotaDetailsRequest = {}
@@ -1352,19 +1484,25 @@ export class SolStakingApi implements SolStakingApiInterface {
     /**
      * Get Unclaimed rewards
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get Unclaimed Rewards(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get Unclaimed Rewards (USER_DATA)
      * @param {GetUnclaimedRewardsRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetUnclaimedRewardsResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof SolStakingApi
-     * @see {@link https://developers.binance.com/docs/staking/sol-staking/history/Get-Unclaimed-Rewards Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/sol-staking#get-unclaimed-rewards Binance API Documentation}
      */
     public async getUnclaimedRewards(
         requestParameters: GetUnclaimedRewardsRequest = {}
@@ -1387,16 +1525,19 @@ export class SolStakingApi implements SolStakingApiInterface {
     /**
      * Redeem BNSOL get SOL
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Redeem SOL(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     *
+     * @summary Redeem SOL (TRADE)
      * @param {RedeemSolRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<RedeemSolResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof SolStakingApi
-     * @see {@link https://developers.binance.com/docs/staking/sol-staking/staking/Redeem-SOL Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/sol-staking#redeem-sol Binance API Documentation}
      */
     public async redeemSol(
         requestParameters: RedeemSolRequest
@@ -1420,14 +1561,16 @@ export class SolStakingApi implements SolStakingApiInterface {
     /**
      * SOL Staking account
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary SOL Staking account(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary SOL Staking account (USER_DATA)
      * @param {SolStakingAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SolStakingAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof SolStakingApi
-     * @see {@link https://developers.binance.com/docs/staking/sol-staking/account/SOL-Staking-account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/sol-staking#sol-staking-account Binance API Documentation}
      */
     public async solStakingAccount(
         requestParameters: SolStakingAccountRequest = {}
@@ -1450,16 +1593,19 @@ export class SolStakingApi implements SolStakingApiInterface {
     /**
      * Subscribe SOL Staking
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Subscribe SOL Staking(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     *
+     * @summary Subscribe SOL Staking (TRADE)
      * @param {SubscribeSolStakingRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SubscribeSolStakingResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof SolStakingApi
-     * @see {@link https://developers.binance.com/docs/staking/sol-staking/staking/Subscribe-SOL-Staking Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/sol-staking#subscribe-sol-staking Binance API Documentation}
      */
     public async subscribeSolStaking(
         requestParameters: SubscribeSolStakingRequest
@@ -1479,4 +1625,9 @@ export class SolStakingApi implements SolStakingApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum GetBoostRewardsHistoryTypeEnum {
+    CLAIM = 'CLAIM',
+    DISTRIBUTE = 'DISTRIBUTE',
 }

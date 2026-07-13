@@ -1,4 +1,4 @@
-import { Staking, STAKING_REST_API_PROD_URL } from '../../../src';
+import { Staking, StakingRestAPI, STAKING_REST_API_PROD_URL } from '../../../src';
 
 const configurationRestAPI = {
     apiKey: process.env.API_KEY ?? '',
@@ -11,7 +11,7 @@ async function setOnChainYieldsLockedProductRedeemOption() {
     try {
         const response = await client.restAPI.setOnChainYieldsLockedProductRedeemOption({
             positionId: '1',
-            redeemTo: 'redeemTo_example',
+            redeemTo: StakingRestAPI.SetOnChainYieldsLockedProductRedeemOptionRedeemToEnum.SPOT,
         });
 
         const rateLimits = response.rateLimits!;

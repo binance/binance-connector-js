@@ -1,7 +1,7 @@
 /**
- * Binance Staking REST API
+ * Staking REST API
  *
- * OpenAPI Specification for the Binance Staking REST API
+ * Subscribe to staking products, track positions, and query rewards via the Binance Staking API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -15,7 +15,12 @@ import { jest, expect, beforeEach, describe, it } from '@jest/globals';
 import { JSONParse, JSONStringify } from 'json-with-bigint';
 import { ConfigurationRestAPI, type RestApiResponse } from '@binance/common';
 
-import { OnChainYieldsApi } from '../../../src/rest-api';
+import {
+    OnChainYieldsApi,
+    SetOnChainYieldsLockedProductRedeemOptionRedeemToEnum,
+    SubscribeOnChainYieldsLockedProductSourceAccountEnum,
+    SubscribeOnChainYieldsLockedProductRedeemToEnum,
+} from '../../../src/rest-api';
 import {
     GetOnChainYieldsLockedPersonalLeftQuotaRequest,
     GetOnChainYieldsLockedProductListRequest,
@@ -184,7 +189,7 @@ describe('OnChainYieldsApi', () => {
 
         it('should execute getOnChainYieldsLockedProductList() successfully with optional parameters', async () => {
             const params: GetOnChainYieldsLockedProductListRequest = {
-                asset: 'BETH',
+                asset: 'SOL',
                 current: 1,
                 size: 10,
                 recvWindow: 5000,
@@ -298,8 +303,8 @@ describe('OnChainYieldsApi', () => {
 
         it('should execute getOnChainYieldsLockedProductPosition() successfully with optional parameters', async () => {
             const params: GetOnChainYieldsLockedProductPositionRequest = {
-                asset: 'BETH',
-                positionId: 1,
+                asset: 'BTC',
+                positionId: '1',
                 projectId: '1',
                 current: 1,
                 size: 10,
@@ -417,9 +422,9 @@ describe('OnChainYieldsApi', () => {
 
         it('should execute getOnChainYieldsLockedRedemptionRecord() successfully with optional parameters', async () => {
             const params: GetOnChainYieldsLockedRedemptionRecordRequest = {
-                positionId: 1,
+                positionId: '1',
                 redeemId: '1',
-                asset: 'BETH',
+                asset: 'BTC',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -521,7 +526,7 @@ describe('OnChainYieldsApi', () => {
         it('should execute getOnChainYieldsLockedRewardsHistory() successfully with optional parameters', async () => {
             const params: GetOnChainYieldsLockedRewardsHistoryRequest = {
                 positionId: '1',
-                asset: 'BETH',
+                asset: 'BTC',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -749,7 +754,7 @@ describe('OnChainYieldsApi', () => {
             const params: GetOnChainYieldsLockedSubscriptionRecordRequest = {
                 purchaseId: '1',
                 clientId: '1',
-                asset: 'BETH',
+                asset: 'BTC',
                 startTime: 1623319461670,
                 endTime: 1641782889000,
                 current: 1,
@@ -1071,7 +1076,7 @@ describe('OnChainYieldsApi', () => {
         it('should execute setOnChainYieldsLockedProductRedeemOption() successfully with required parameters only', async () => {
             const params: SetOnChainYieldsLockedProductRedeemOptionRequest = {
                 positionId: '1',
-                redeemTo: 'redeemTo_example',
+                redeemTo: SetOnChainYieldsLockedProductRedeemOptionRedeemToEnum.SPOT,
             };
 
             mockResponse = JSONParse(JSONStringify({ success: true }));
@@ -1095,7 +1100,7 @@ describe('OnChainYieldsApi', () => {
         it('should execute setOnChainYieldsLockedProductRedeemOption() successfully with optional parameters', async () => {
             const params: SetOnChainYieldsLockedProductRedeemOptionRequest = {
                 positionId: '1',
-                redeemTo: 'redeemTo_example',
+                redeemTo: SetOnChainYieldsLockedProductRedeemOptionRedeemToEnum.SPOT,
                 recvWindow: 5000,
             };
 
@@ -1120,7 +1125,7 @@ describe('OnChainYieldsApi', () => {
         it('should throw RequiredError when positionId is missing', async () => {
             const _params: SetOnChainYieldsLockedProductRedeemOptionRequest = {
                 positionId: '1',
-                redeemTo: 'redeemTo_example',
+                redeemTo: SetOnChainYieldsLockedProductRedeemOptionRedeemToEnum.SPOT,
             };
             const params = Object.assign({ ..._params });
             delete params?.positionId;
@@ -1133,7 +1138,7 @@ describe('OnChainYieldsApi', () => {
         it('should throw RequiredError when redeemTo is missing', async () => {
             const _params: SetOnChainYieldsLockedProductRedeemOptionRequest = {
                 positionId: '1',
-                redeemTo: 'redeemTo_example',
+                redeemTo: SetOnChainYieldsLockedProductRedeemOptionRedeemToEnum.SPOT,
             };
             const params = Object.assign({ ..._params });
             delete params?.redeemTo;
@@ -1146,7 +1151,7 @@ describe('OnChainYieldsApi', () => {
         it('should throw an error when server is returning an error', async () => {
             const params: SetOnChainYieldsLockedProductRedeemOptionRequest = {
                 positionId: '1',
-                redeemTo: 'redeemTo_example',
+                redeemTo: SetOnChainYieldsLockedProductRedeemOptionRedeemToEnum.SPOT,
             };
 
             const errorResponse = {
@@ -1202,9 +1207,9 @@ describe('OnChainYieldsApi', () => {
             const params: SubscribeOnChainYieldsLockedProductRequest = {
                 projectId: '1',
                 amount: 1.0,
-                autoSubscribe: true,
-                sourceAccount: 'SPOT',
-                redeemTo: '',
+                autoSubscribe: false,
+                sourceAccount: SubscribeOnChainYieldsLockedProductSourceAccountEnum.SPOT,
+                redeemTo: SubscribeOnChainYieldsLockedProductRedeemToEnum.SPOT,
                 channelId: '1',
                 clientId: '1',
                 recvWindow: 5000,

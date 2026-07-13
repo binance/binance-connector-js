@@ -1,7 +1,7 @@
 /**
- * Binance Staking REST API
+ * Staking REST API
  *
- * OpenAPI Specification for the Binance Staking REST API
+ * Subscribe to staking products, track positions, and query rewards via the Binance Staking API.
  *
  * The version of the OpenAPI document: 1.0.0
  *
@@ -10,7 +10,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-
 import {
     ConfigurationRestAPI,
     TimeUnit,
@@ -41,10 +40,12 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * ETH Staking account
          *
-         * Weight: 150
+         * Weight(IP): 150
          *
-         * @summary ETH Staking account(USER_DATA)
-         * @param {number | bigint} [recvWindow]
+         * Security Type: USER_DATA
+         *
+         * @summary ETH Staking account (USER_DATA)
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -72,10 +73,12 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get current ETH staking quota
          *
-         * Weight: 150
+         * Weight(IP): 150
          *
-         * @summary Get current ETH staking quota(USER_DATA)
-         * @param {number | bigint} [recvWindow]
+         * Security Type: USER_DATA
+         *
+         * @summary Get current ETH staking quota (USER_DATA)
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -103,20 +106,26 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get ETH redemption history
          *
-         * The time between `startTime` and `endTime` cannot be longer than 3 months.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-         * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
          *
-         * @summary Get ETH redemption history(USER_DATA)
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, the next 30 days' data beginning from `startTime` will be returned.
+         * - If `endTime` is sent but
+         * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         *
+         * @summary Get ETH redemption history (USER_DATA)
          * @param {number | bigint} [redeemId]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10, Max:100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Currently querying page
+         * @param {number | bigint} [size]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -166,20 +175,26 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get ETH staking history
          *
-         * The time between `startTime` and `endTime` cannot be longer than 3 months.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-         * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
          *
-         * @summary Get ETH staking history(USER_DATA)
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, the next 30 days' data beginning from `startTime` will be returned.
+         * - If `endTime` is sent but
+         * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         *
+         * @summary Get ETH staking history (USER_DATA)
          * @param {number | bigint} [purchaseId]
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10, Max:100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Currently querying page
+         * @param {number | bigint} [size]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -229,19 +244,25 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get WBETH Rate History
          *
-         * The time between `startTime` and `endTime` cannot be longer than 3 months.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-         * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
          *
-         * @summary Get WBETH Rate History(USER_DATA)
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, the next 30 days' data beginning from `startTime` will be returned.
+         * - If `endTime` is sent but
+         * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         *
+         * @summary Get WBETH Rate History (USER_DATA)
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10, Max:100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Currently querying page
+         * @param {number | bigint} [size]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -287,19 +308,25 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get WBETH rewards history
          *
-         * The time between `startTime` and `endTime` cannot be longer than 3 months.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-         * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
          *
-         * @summary Get WBETH rewards history(USER_DATA)
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, the next 30 days' data beginning from `startTime` will be returned.
+         * - If `endTime` is sent but
+         * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         *
+         * @summary Get WBETH rewards history (USER_DATA)
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10, Max:100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Currently querying page
+         * @param {number | bigint} [size]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -345,19 +372,25 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get WBETH unwrap history
          *
-         * The time between `startTime` and `endTime` cannot be longer than 3 months.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-         * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
          *
-         * @summary Get WBETH unwrap history(USER_DATA)
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, the next 30 days' data beginning from `startTime` will be returned.
+         * - If `endTime` is sent but
+         * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         *
+         * @summary Get WBETH unwrap history (USER_DATA)
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10, Max:100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Currently querying page
+         * @param {number | bigint} [size]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -403,19 +436,25 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Get WBETH wrap history
          *
-         * The time between `startTime` and `endTime` cannot be longer than 3 months.
-         * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-         * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-         * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: USER_DATA
          *
-         * @summary Get WBETH wrap history(USER_DATA)
+         * Notes:
+         * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+         * - If `startTime` and `endTime`
+         * are both not sent, then the last 30 days' data will be returned.
+         * - If `startTime` is sent but `endTime` is not
+         * sent, the next 30 days' data beginning from `startTime` will be returned.
+         * - If `endTime` is sent but
+         * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+         *
+         * @summary Get WBETH wrap history (USER_DATA)
          * @param {number | bigint} [startTime]
          * @param {number | bigint} [endTime]
-         * @param {number | bigint} [current] Currently querying page. Start from 1. Default:1
-         * @param {number | bigint} [size] Default:10, Max:100
-         * @param {number | bigint} [recvWindow]
+         * @param {number | bigint} [current] Currently querying page
+         * @param {number | bigint} [size]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -461,20 +500,23 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Redeem WBETH or BETH and get ETH
          *
-         * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: TRADE
          *
-         * @summary Redeem ETH(TRADE)
-         * @param {number} amount Amount in SOL.
-         * @param {string} [asset] WBETH or BETH, default to BETH
-         * @param {number | bigint} [recvWindow]
+         * Notes:
+         * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+         *
+         * @summary Redeem ETH (TRADE)
+         * @param {number} amount Amount in BETH, limit 8 decimals
+         * @param {RedeemEthAssetEnum} [asset]
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
         redeemEth: async (
             amount: number,
-            asset?: string,
+            asset?: RedeemEthAssetEnum,
             recvWindow?: number | bigint
         ): Promise<RequestArgs> => {
             // verify required parameter 'amount' is not null or undefined
@@ -509,13 +551,16 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Subscribe ETH Staking
          *
-         * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: TRADE
          *
-         * @summary Subscribe ETH Staking(TRADE)
-         * @param {number} amount Amount in SOL.
-         * @param {number | bigint} [recvWindow]
+         * Notes:
+         * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+         *
+         * @summary Subscribe ETH Staking (TRADE)
+         * @param {number} amount Amount in ETH, limit 4 decimals
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -552,13 +597,16 @@ const EthStakingApiAxiosParamCreator = function (configuration: ConfigurationRes
         /**
          * Wrap BETH
          *
-         * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+         * Weight(IP): 150
          *
-         * Weight: 150
+         * Security Type: TRADE
          *
-         * @summary Wrap BETH(TRADE)
-         * @param {number} amount Amount in SOL.
-         * @param {number | bigint} [recvWindow]
+         * Notes:
+         * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+         *
+         * @summary Wrap BETH (TRADE)
+         * @param {number} amount Amount in BETH, limit 4 decimals
+         * @param {number | bigint} [recvWindow] Request validity window in milliseconds.
          *
          * @throws {RequiredError}
          */
@@ -600,9 +648,11 @@ export interface EthStakingApiInterface {
     /**
      * ETH Staking account
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary ETH Staking account(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary ETH Staking account (USER_DATA)
      * @param {EthStakingAccountRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -614,9 +664,11 @@ export interface EthStakingApiInterface {
     /**
      * Get current ETH staking quota
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get current ETH staking quota(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get current ETH staking quota (USER_DATA)
      * @param {GetCurrentEthStakingQuotaRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -628,14 +680,20 @@ export interface EthStakingApiInterface {
     /**
      * Get ETH redemption history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get ETH redemption history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get ETH redemption history (USER_DATA)
      * @param {GetEthRedemptionHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -647,14 +705,20 @@ export interface EthStakingApiInterface {
     /**
      * Get ETH staking history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get ETH staking history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get ETH staking history (USER_DATA)
      * @param {GetEthStakingHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -666,14 +730,20 @@ export interface EthStakingApiInterface {
     /**
      * Get WBETH Rate History
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get WBETH Rate History(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get WBETH Rate History (USER_DATA)
      * @param {GetWbethRateHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -685,14 +755,20 @@ export interface EthStakingApiInterface {
     /**
      * Get WBETH rewards history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get WBETH rewards history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get WBETH rewards history (USER_DATA)
      * @param {GetWbethRewardsHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -704,14 +780,20 @@ export interface EthStakingApiInterface {
     /**
      * Get WBETH unwrap history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get WBETH unwrap history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get WBETH unwrap history (USER_DATA)
      * @param {GetWbethUnwrapHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -723,14 +805,20 @@ export interface EthStakingApiInterface {
     /**
      * Get WBETH wrap history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get WBETH wrap history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get WBETH wrap history (USER_DATA)
      * @param {GetWbethWrapHistoryRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -742,11 +830,14 @@ export interface EthStakingApiInterface {
     /**
      * Redeem WBETH or BETH and get ETH
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Redeem ETH(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     *
+     * @summary Redeem ETH (TRADE)
      * @param {RedeemEthRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -756,11 +847,14 @@ export interface EthStakingApiInterface {
     /**
      * Subscribe ETH Staking
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Subscribe ETH Staking(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     *
+     * @summary Subscribe ETH Staking (TRADE)
      * @param {SubscribeEthStakingRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -772,11 +866,14 @@ export interface EthStakingApiInterface {
     /**
      * Wrap BETH
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Wrap BETH(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     *
+     * @summary Wrap BETH (TRADE)
      * @param {WrapBethRequest} requestParameters Request parameters.
      *
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
@@ -791,7 +888,7 @@ export interface EthStakingApiInterface {
  */
 export interface EthStakingAccountRequest {
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof EthStakingApiEthStakingAccount
      */
@@ -804,7 +901,7 @@ export interface EthStakingAccountRequest {
  */
 export interface GetCurrentEthStakingQuotaRequest {
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof EthStakingApiGetCurrentEthStakingQuota
      */
@@ -838,21 +935,21 @@ export interface GetEthRedemptionHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     * Currently querying page
      * @type {number | bigint}
      * @memberof EthStakingApiGetEthRedemptionHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10, Max:100
+     *
      * @type {number | bigint}
      * @memberof EthStakingApiGetEthRedemptionHistory
      */
     readonly size?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof EthStakingApiGetEthRedemptionHistory
      */
@@ -886,21 +983,21 @@ export interface GetEthStakingHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     * Currently querying page
      * @type {number | bigint}
      * @memberof EthStakingApiGetEthStakingHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10, Max:100
+     *
      * @type {number | bigint}
      * @memberof EthStakingApiGetEthStakingHistory
      */
     readonly size?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof EthStakingApiGetEthStakingHistory
      */
@@ -927,21 +1024,21 @@ export interface GetWbethRateHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     * Currently querying page
      * @type {number | bigint}
      * @memberof EthStakingApiGetWbethRateHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10, Max:100
+     *
      * @type {number | bigint}
      * @memberof EthStakingApiGetWbethRateHistory
      */
     readonly size?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof EthStakingApiGetWbethRateHistory
      */
@@ -968,21 +1065,21 @@ export interface GetWbethRewardsHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     * Currently querying page
      * @type {number | bigint}
      * @memberof EthStakingApiGetWbethRewardsHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10, Max:100
+     *
      * @type {number | bigint}
      * @memberof EthStakingApiGetWbethRewardsHistory
      */
     readonly size?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof EthStakingApiGetWbethRewardsHistory
      */
@@ -1009,21 +1106,21 @@ export interface GetWbethUnwrapHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     * Currently querying page
      * @type {number | bigint}
      * @memberof EthStakingApiGetWbethUnwrapHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10, Max:100
+     *
      * @type {number | bigint}
      * @memberof EthStakingApiGetWbethUnwrapHistory
      */
     readonly size?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof EthStakingApiGetWbethUnwrapHistory
      */
@@ -1050,21 +1147,21 @@ export interface GetWbethWrapHistoryRequest {
     readonly endTime?: number | bigint;
 
     /**
-     * Currently querying page. Start from 1. Default:1
+     * Currently querying page
      * @type {number | bigint}
      * @memberof EthStakingApiGetWbethWrapHistory
      */
     readonly current?: number | bigint;
 
     /**
-     * Default:10, Max:100
+     *
      * @type {number | bigint}
      * @memberof EthStakingApiGetWbethWrapHistory
      */
     readonly size?: number | bigint;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof EthStakingApiGetWbethWrapHistory
      */
@@ -1077,21 +1174,21 @@ export interface GetWbethWrapHistoryRequest {
  */
 export interface RedeemEthRequest {
     /**
-     * Amount in SOL.
+     * Amount in BETH, limit 8 decimals
      * @type {number}
      * @memberof EthStakingApiRedeemEth
      */
     readonly amount: number;
 
     /**
-     * WBETH or BETH, default to BETH
-     * @type {string}
+     *
+     * @type {'WBETH' | 'BETH'}
      * @memberof EthStakingApiRedeemEth
      */
-    readonly asset?: string;
+    readonly asset?: RedeemEthAssetEnum;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof EthStakingApiRedeemEth
      */
@@ -1104,14 +1201,14 @@ export interface RedeemEthRequest {
  */
 export interface SubscribeEthStakingRequest {
     /**
-     * Amount in SOL.
+     * Amount in ETH, limit 4 decimals
      * @type {number}
      * @memberof EthStakingApiSubscribeEthStaking
      */
     readonly amount: number;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof EthStakingApiSubscribeEthStaking
      */
@@ -1124,14 +1221,14 @@ export interface SubscribeEthStakingRequest {
  */
 export interface WrapBethRequest {
     /**
-     * Amount in SOL.
+     * Amount in BETH, limit 4 decimals
      * @type {number}
      * @memberof EthStakingApiWrapBeth
      */
     readonly amount: number;
 
     /**
-     *
+     * Request validity window in milliseconds.
      * @type {number | bigint}
      * @memberof EthStakingApiWrapBeth
      */
@@ -1154,14 +1251,16 @@ export class EthStakingApi implements EthStakingApiInterface {
     /**
      * ETH Staking account
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary ETH Staking account(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary ETH Staking account (USER_DATA)
      * @param {EthStakingAccountRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<EthStakingAccountResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof EthStakingApi
-     * @see {@link https://developers.binance.com/docs/staking/eth-staking/account/ETH-Staking-account Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/eth-staking#eth-staking-account Binance API Documentation}
      */
     public async ethStakingAccount(
         requestParameters: EthStakingAccountRequest = {}
@@ -1184,14 +1283,16 @@ export class EthStakingApi implements EthStakingApiInterface {
     /**
      * Get current ETH staking quota
      *
-     * Weight: 150
+     * Weight(IP): 150
      *
-     * @summary Get current ETH staking quota(USER_DATA)
+     * Security Type: USER_DATA
+     *
+     * @summary Get current ETH staking quota (USER_DATA)
      * @param {GetCurrentEthStakingQuotaRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetCurrentEthStakingQuotaResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof EthStakingApi
-     * @see {@link https://developers.binance.com/docs/staking/eth-staking/account/Get-current-ETH-staking-quota Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/eth-staking#get-current-eth-staking-quota Binance API Documentation}
      */
     public async getCurrentEthStakingQuota(
         requestParameters: GetCurrentEthStakingQuotaRequest = {}
@@ -1214,19 +1315,25 @@ export class EthStakingApi implements EthStakingApiInterface {
     /**
      * Get ETH redemption history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get ETH redemption history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get ETH redemption history (USER_DATA)
      * @param {GetEthRedemptionHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetEthRedemptionHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof EthStakingApi
-     * @see {@link https://developers.binance.com/docs/staking/eth-staking/history/Get-ETH-redemption-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/eth-staking#get-eth-redemption-history Binance API Documentation}
      */
     public async getEthRedemptionHistory(
         requestParameters: GetEthRedemptionHistoryRequest = {}
@@ -1254,19 +1361,25 @@ export class EthStakingApi implements EthStakingApiInterface {
     /**
      * Get ETH staking history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get ETH staking history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get ETH staking history (USER_DATA)
      * @param {GetEthStakingHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetEthStakingHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof EthStakingApi
-     * @see {@link https://developers.binance.com/docs/staking/eth-staking/history/Get-ETH-staking-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/eth-staking#get-eth-staking-history Binance API Documentation}
      */
     public async getEthStakingHistory(
         requestParameters: GetEthStakingHistoryRequest = {}
@@ -1294,19 +1407,25 @@ export class EthStakingApi implements EthStakingApiInterface {
     /**
      * Get WBETH Rate History
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get WBETH Rate History(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get WBETH Rate History (USER_DATA)
      * @param {GetWbethRateHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetWbethRateHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof EthStakingApi
-     * @see {@link https://developers.binance.com/docs/staking/eth-staking/history/Get-BETH-Rate-History Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/eth-staking#get-wbeth-rate-history Binance API Documentation}
      */
     public async getWbethRateHistory(
         requestParameters: GetWbethRateHistoryRequest = {}
@@ -1333,19 +1452,25 @@ export class EthStakingApi implements EthStakingApiInterface {
     /**
      * Get WBETH rewards history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get WBETH rewards history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get WBETH rewards history (USER_DATA)
      * @param {GetWbethRewardsHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetWbethRewardsHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof EthStakingApi
-     * @see {@link https://developers.binance.com/docs/staking/eth-staking/history/Get-WBETH-rewards-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/eth-staking#get-wbeth-rewards-history Binance API Documentation}
      */
     public async getWbethRewardsHistory(
         requestParameters: GetWbethRewardsHistoryRequest = {}
@@ -1372,19 +1497,25 @@ export class EthStakingApi implements EthStakingApiInterface {
     /**
      * Get WBETH unwrap history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get WBETH unwrap history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get WBETH unwrap history (USER_DATA)
      * @param {GetWbethUnwrapHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetWbethUnwrapHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof EthStakingApi
-     * @see {@link https://developers.binance.com/docs/staking/eth-staking/history/Get-WBETH-unwrap-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/eth-staking#get-wbeth-unwrap-history Binance API Documentation}
      */
     public async getWbethUnwrapHistory(
         requestParameters: GetWbethUnwrapHistoryRequest = {}
@@ -1411,19 +1542,25 @@ export class EthStakingApi implements EthStakingApiInterface {
     /**
      * Get WBETH wrap history
      *
-     * The time between `startTime` and `endTime` cannot be longer than 3 months.
-     * If `startTime` and `endTime` are both not sent, then the last 30 days' data will be returned.
-     * If `startTime` is sent but `endTime` is not sent, the next 30 days' data beginning from `startTime` will be returned.
-     * If `endTime` is sent but `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: USER_DATA
      *
-     * @summary Get WBETH wrap history(USER_DATA)
+     * Notes:
+     * - The time between `startTime` and `endTime` cannot be longer than 3 months.
+     * - If `startTime` and `endTime`
+     * are both not sent, then the last 30 days' data will be returned.
+     * - If `startTime` is sent but `endTime` is not
+     * sent, the next 30 days' data beginning from `startTime` will be returned.
+     * - If `endTime` is sent but
+     * `startTime` is not sent, the 30 days' data before `endTime` will be returned.
+     *
+     * @summary Get WBETH wrap history (USER_DATA)
      * @param {GetWbethWrapHistoryRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<GetWbethWrapHistoryResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof EthStakingApi
-     * @see {@link https://developers.binance.com/docs/staking/eth-staking/history/Get-WBETH-wrap-history Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/eth-staking#get-wbeth-wrap-history Binance API Documentation}
      */
     public async getWbethWrapHistory(
         requestParameters: GetWbethWrapHistoryRequest = {}
@@ -1450,16 +1587,19 @@ export class EthStakingApi implements EthStakingApiInterface {
     /**
      * Redeem WBETH or BETH and get ETH
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Redeem ETH(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     *
+     * @summary Redeem ETH (TRADE)
      * @param {RedeemEthRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<RedeemEthResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof EthStakingApi
-     * @see {@link https://developers.binance.com/docs/staking/eth-staking/staking/Redeem-ETH Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/eth-staking#redeem-eth Binance API Documentation}
      */
     public async redeemEth(
         requestParameters: RedeemEthRequest
@@ -1484,16 +1624,19 @@ export class EthStakingApi implements EthStakingApiInterface {
     /**
      * Subscribe ETH Staking
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Subscribe ETH Staking(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     *
+     * @summary Subscribe ETH Staking (TRADE)
      * @param {SubscribeEthStakingRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<SubscribeEthStakingResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof EthStakingApi
-     * @see {@link https://developers.binance.com/docs/staking/eth-staking/staking/Subscribe-ETH-Staking Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/eth-staking#subscribe-eth-staking Binance API Documentation}
      */
     public async subscribeEthStaking(
         requestParameters: SubscribeEthStakingRequest
@@ -1517,16 +1660,19 @@ export class EthStakingApi implements EthStakingApiInterface {
     /**
      * Wrap BETH
      *
-     * You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     * Weight(IP): 150
      *
-     * Weight: 150
+     * Security Type: TRADE
      *
-     * @summary Wrap BETH(TRADE)
+     * Notes:
+     * - You need to open Enable Spot & Margin Trading permission for the API Key which requests this endpoint.
+     *
+     * @summary Wrap BETH (TRADE)
      * @param {WrapBethRequest} requestParameters Request parameters.
      * @returns {Promise<RestApiResponse<WrapBethResponse>>}
      * @throws {RequiredError | ConnectorClientError | UnauthorizedError | ForbiddenError | TooManyRequestsError | RateLimitBanError | ServerError | NotFoundError | NetworkError | BadRequestError}
      * @memberof EthStakingApi
-     * @see {@link https://developers.binance.com/docs/staking/eth-staking/staking/Wrap-BETH Binance API Documentation}
+     * @see {@link https://developers.binance.com/en/docs/catalog/investment-and-services-staking/api/rest-api/eth-staking#wrap-beth Binance API Documentation}
      */
     public async wrapBeth(
         requestParameters: WrapBethRequest
@@ -1546,4 +1692,9 @@ export class EthStakingApi implements EthStakingApiInterface {
             { isSigned: true }
         );
     }
+}
+
+export enum RedeemEthAssetEnum {
+    WBETH = 'WBETH',
+    BETH = 'BETH',
 }
